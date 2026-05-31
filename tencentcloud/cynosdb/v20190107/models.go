@@ -20,6 +20,17 @@ import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
+type AIOptimizerStatus struct {
+	// <p>Status. closing-Closing, closed-Closed, opening-Opening, training-Training, trained-Trained, train_failed-Training failed.</p>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Start time.</p>
+	OpenTime *string `json:"OpenTime,omitnil,omitempty" name:"OpenTime"`
+
+	// <p>Training progress</p>
+	TrainingProgress *int64 `json:"TrainingProgress,omitnil,omitempty" name:"TrainingProgress"`
+}
+
 type Ability struct {
 	// Whether secondary AZ is supported
 	IsSupportSlaveZone *string `json:"IsSupportSlaveZone,omitnil,omitempty" name:"IsSupportSlaveZone"`
@@ -274,6 +285,12 @@ type AddClusterSlaveZoneRequestParams struct {
 
 	// Replica AZ
 	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
+
+
+	BinlogSyncWay *string `json:"BinlogSyncWay,omitnil,omitempty" name:"BinlogSyncWay"`
+
+	// Semi-sync timeout period in milliseconds. To ensure business stability, semi-sync replication has a degradation logic. When the primary availability zone cluster waits for the secondary availability zone cluster to confirm a transaction and exceeds the timeout period, the replication method will degrade to asynchronous replication. The minimum value is set to 1000 ms, support up to 4294967295 ms, and defaults to 10000 ms.
+	SemiSyncTimeout *int64 `json:"SemiSyncTimeout,omitnil,omitempty" name:"SemiSyncTimeout"`
 }
 
 type AddClusterSlaveZoneRequest struct {
@@ -284,6 +301,11 @@ type AddClusterSlaveZoneRequest struct {
 
 	// Replica AZ
 	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
+
+	BinlogSyncWay *string `json:"BinlogSyncWay,omitnil,omitempty" name:"BinlogSyncWay"`
+
+	// Semi-sync timeout period in milliseconds. To ensure business stability, semi-sync replication has a degradation logic. When the primary availability zone cluster waits for the secondary availability zone cluster to confirm a transaction and exceeds the timeout period, the replication method will degrade to asynchronous replication. The minimum value is set to 1000 ms, support up to 4294967295 ms, and defaults to 10000 ms.
+	SemiSyncTimeout *int64 `json:"SemiSyncTimeout,omitnil,omitempty" name:"SemiSyncTimeout"`
 }
 
 func (r *AddClusterSlaveZoneRequest) ToJsonString() string {
@@ -300,6 +322,8 @@ func (r *AddClusterSlaveZoneRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ClusterId")
 	delete(f, "SlaveZone")
+	delete(f, "BinlogSyncWay")
+	delete(f, "SemiSyncTimeout")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddClusterSlaveZoneRequest has unknown keys!", "")
 	}
@@ -333,10 +357,10 @@ func (r *AddClusterSlaveZoneResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AddInstancesRequestParams struct {
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Number of CPU cores
+	// <p>Cpu cores</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
 	// Memory in GB
@@ -345,15 +369,18 @@ type AddInstancesRequestParams struct {
 	// Number of added read-only instances. Value range: (0,16].
 	ReadOnlyCount *int64 `json:"ReadOnlyCount,omitnil,omitempty" name:"ReadOnlyCount"`
 
-	// Instance group ID, which will be used when you add an instance in an existing RO group. If this parameter is left empty, an RO group will be created. But it is not recommended to pass in this parameter for the current version, as this version has been disused.
+	// <p>Instance Machine Type. Supported values are as follows:</p><ul><li>common: indicates universal type</li><li>exclusive: indicates exclusive</li></ul>
+	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
+
+	// <p>Instance group ID, used when adding new instances to an existing RO group. If not passed, a new RO group will be created. The current version does not recommend transmitting this value.</p>
 	//
 	// Deprecated: InstanceGrpId is deprecated.
 	InstanceGrpId *string `json:"InstanceGrpId,omitnil,omitempty" name:"InstanceGrpId"`
 
-	// VPC ID
+	// <p>ID of the associated VPC network.</p>
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID. If `VpcId` is set, `SubnetId` is required.
+	// <p>Subnet ID. If VpcId is set up, SubnetId is required.</p>
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// The port used when adding an RO group. Value range: [0,65535).
@@ -362,36 +389,38 @@ type AddInstancesRequestParams struct {
 	// Instance name. String length range: [0,64).
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
+	// <p>Whether to automatically select a voucher. 1: Yes; 0: No. Default is 0.</p>
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Database type. Valid values: 
-	// <li> MYSQL </li>
+	// <p>Database type, value ranges from...to...: </p><li> MYSQL </li>
 	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
 
-	// Order source. String length range: [0,64).
+	// <p>Order source, string length range [0,64)</p>
 	OrderSource *string `json:"OrderSource,omitnil,omitempty" name:"OrderSource"`
 
-	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
+	// <p>Transaction mode. 0: place order and pay; 1: place order</p>
 	DealMode *int64 `json:"DealMode,omitnil,omitempty" name:"DealMode"`
 
-	// Parameter template ID
+	// <p>Parameter template ID</p>
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
 
-	// Parameter list, which is valid only if `InstanceParams` is passed in to `ParamTemplateId`.
+	// <p>Parameter list. InstanceParams is valid only when ParamTemplateId is passed in.</p>
 	InstanceParams []*ModifyParamItem `json:"InstanceParams,omitnil,omitempty" name:"InstanceParams"`
 
-	// Security group ID. You can specify an security group when creating a read-only instance.
+	// <p>Security group ID. You can specify security groups when creating a read-only instance.</p>
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// <p>proxy sync upgrade</p>
+	UpgradeProxy *UpgradeProxy `json:"UpgradeProxy,omitnil,omitempty" name:"UpgradeProxy"`
 }
 
 type AddInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Number of CPU cores
+	// <p>Cpu cores</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
 	// Memory in GB
@@ -400,13 +429,16 @@ type AddInstancesRequest struct {
 	// Number of added read-only instances. Value range: (0,16].
 	ReadOnlyCount *int64 `json:"ReadOnlyCount,omitnil,omitempty" name:"ReadOnlyCount"`
 
-	// Instance group ID, which will be used when you add an instance in an existing RO group. If this parameter is left empty, an RO group will be created. But it is not recommended to pass in this parameter for the current version, as this version has been disused.
+	// <p>Instance Machine Type. Supported values are as follows:</p><ul><li>common: indicates universal type</li><li>exclusive: indicates exclusive</li></ul>
+	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
+
+	// <p>Instance group ID, used when adding new instances to an existing RO group. If not passed, a new RO group will be created. The current version does not recommend transmitting this value.</p>
 	InstanceGrpId *string `json:"InstanceGrpId,omitnil,omitempty" name:"InstanceGrpId"`
 
-	// VPC ID
+	// <p>ID of the associated VPC network.</p>
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID. If `VpcId` is set, `SubnetId` is required.
+	// <p>Subnet ID. If VpcId is set up, SubnetId is required.</p>
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// The port used when adding an RO group. Value range: [0,65535).
@@ -415,27 +447,29 @@ type AddInstancesRequest struct {
 	// Instance name. String length range: [0,64).
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Whether to automatically select a voucher. 1: yes; 0: no. Default value: 0
+	// <p>Whether to automatically select a voucher. 1: Yes; 0: No. Default is 0.</p>
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Database type. Valid values: 
-	// <li> MYSQL </li>
+	// <p>Database type, value ranges from...to...: </p><li> MYSQL </li>
 	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
 
-	// Order source. String length range: [0,64).
+	// <p>Order source, string length range [0,64)</p>
 	OrderSource *string `json:"OrderSource,omitnil,omitempty" name:"OrderSource"`
 
-	// Transaction mode. Valid values: `0` (place and pay for an order), `1` (place an order)
+	// <p>Transaction mode. 0: place order and pay; 1: place order</p>
 	DealMode *int64 `json:"DealMode,omitnil,omitempty" name:"DealMode"`
 
-	// Parameter template ID
+	// <p>Parameter template ID</p>
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
 
-	// Parameter list, which is valid only if `InstanceParams` is passed in to `ParamTemplateId`.
+	// <p>Parameter list. InstanceParams is valid only when ParamTemplateId is passed in.</p>
 	InstanceParams []*ModifyParamItem `json:"InstanceParams,omitnil,omitempty" name:"InstanceParams"`
 
-	// Security group ID. You can specify an security group when creating a read-only instance.
+	// <p>Security group ID. You can specify security groups when creating a read-only instance.</p>
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// <p>proxy sync upgrade</p>
+	UpgradeProxy *UpgradeProxy `json:"UpgradeProxy,omitnil,omitempty" name:"UpgradeProxy"`
 }
 
 func (r *AddInstancesRequest) ToJsonString() string {
@@ -454,6 +488,7 @@ func (r *AddInstancesRequest) FromJsonString(s string) error {
 	delete(f, "Cpu")
 	delete(f, "Memory")
 	delete(f, "ReadOnlyCount")
+	delete(f, "DeviceType")
 	delete(f, "InstanceGrpId")
 	delete(f, "VpcId")
 	delete(f, "SubnetId")
@@ -466,6 +501,7 @@ func (r *AddInstancesRequest) FromJsonString(s string) error {
 	delete(f, "ParamTemplateId")
 	delete(f, "InstanceParams")
 	delete(f, "SecurityGroupIds")
+	delete(f, "UpgradeProxy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddInstancesRequest has unknown keys!", "")
 	}
@@ -474,16 +510,18 @@ func (r *AddInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AddInstancesResponseParams struct {
-	// Freeze transaction. one frozen transaction is activated at a time.
+	// <p>Freeze transaction. One frozen flow is activated at a time.</p>
 	TranId *string `json:"TranId,omitnil,omitempty" name:"TranId"`
 
-	// Specifies the post-paid order number.
+	// <p>Order ID for payment. Description: Recommend you use the <a href="https://www.tencentcloud.com/document/product/1003/52131?from_cn_redirect=1">DescribeResourcesByDealName</a> api to query order associated instance.</p>
 	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
 
-	// Delivery resource id list.
+	// <p>Delivery resource id list.</p>
+	//
+	// Deprecated: ResourceIds is deprecated.
 	ResourceIds []*string `json:"ResourceIds,omitnil,omitempty" name:"ResourceIds"`
 
-	// Large order number.
+	// <p>Large order number</p>
 	BigDealIds []*string `json:"BigDealIds,omitnil,omitempty" name:"BigDealIds"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -730,6 +768,160 @@ func (r *AddLibraDBInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddServerlessRoInstancesRequestParams struct {
+	// <p>Cluster Id</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Minimum specification of the ro instance</p>
+	MinCpu *float64 `json:"MinCpu,omitnil,omitempty" name:"MinCpu"`
+
+	// <p>Maximum specification of ro instance</p>
+	MaxCpu *float64 `json:"MaxCpu,omitnil,omitempty" name:"MaxCpu"`
+
+	// <p>ro instance name</p>
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// <p>VPC network ID</p>
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Subnet ID. If VpcId is set up, SubnetId is required.</p>
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Port used when adding new RO groups, value range [0,65535)</p>
+	Port *uint64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// <p>Security group ID. You can specify security groups when creating a read-only instance.</p>
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// <p>Whether to automatically pause</p><p>Enumeration value:</p><ul><li>yes: Yes</li><li>no: No</li></ul>
+	AutoPause *string `json:"AutoPause,omitnil,omitempty" name:"AutoPause"`
+
+	// <p>Auto-pause time</p><p>Unit: s</p>
+	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitnil,omitempty" name:"AutoPauseDelay"`
+
+	// <p>Instance parameter</p>
+	InstanceParams []*ModifyParamItem `json:"InstanceParams,omitnil,omitempty" name:"InstanceParams"`
+
+	// <p>Parameter template</p>
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
+
+	// <p>Number of newly-added read-only instances</p>
+	RoCount *int64 `json:"RoCount,omitnil,omitempty" name:"RoCount"`
+}
+
+type AddServerlessRoInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Cluster Id</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Minimum specification of the ro instance</p>
+	MinCpu *float64 `json:"MinCpu,omitnil,omitempty" name:"MinCpu"`
+
+	// <p>Maximum specification of ro instance</p>
+	MaxCpu *float64 `json:"MaxCpu,omitnil,omitempty" name:"MaxCpu"`
+
+	// <p>ro instance name</p>
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// <p>VPC network ID</p>
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Subnet ID. If VpcId is set up, SubnetId is required.</p>
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Port used when adding new RO groups, value range [0,65535)</p>
+	Port *uint64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// <p>Security group ID. You can specify security groups when creating a read-only instance.</p>
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// <p>Whether to automatically pause</p><p>Enumeration value:</p><ul><li>yes: Yes</li><li>no: No</li></ul>
+	AutoPause *string `json:"AutoPause,omitnil,omitempty" name:"AutoPause"`
+
+	// <p>Auto-pause time</p><p>Unit: s</p>
+	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitnil,omitempty" name:"AutoPauseDelay"`
+
+	// <p>Instance parameter</p>
+	InstanceParams []*ModifyParamItem `json:"InstanceParams,omitnil,omitempty" name:"InstanceParams"`
+
+	// <p>Parameter template</p>
+	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
+
+	// <p>Number of newly-added read-only instances</p>
+	RoCount *int64 `json:"RoCount,omitnil,omitempty" name:"RoCount"`
+}
+
+func (r *AddServerlessRoInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddServerlessRoInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "MinCpu")
+	delete(f, "MaxCpu")
+	delete(f, "InstanceName")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "Port")
+	delete(f, "SecurityGroupIds")
+	delete(f, "AutoPause")
+	delete(f, "AutoPauseDelay")
+	delete(f, "InstanceParams")
+	delete(f, "ParamTemplateId")
+	delete(f, "RoCount")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddServerlessRoInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AddServerlessRoInstancesResponseParams struct {
+	// <p>Freeze transaction. One frozen flow is activated at a time.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TranId *string `json:"TranId,omitnil,omitempty" name:"TranId"`
+
+	// <p>Post-paid order number</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
+
+	// <p>Delivery resource id list.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ResourceIds []*string `json:"ResourceIds,omitnil,omitempty" name:"ResourceIds"`
+
+	// <p>Large order number</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BigDealIds []*string `json:"BigDealIds,omitnil,omitempty" name:"BigDealIds"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type AddServerlessRoInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *AddServerlessRoInstancesResponseParams `json:"Response"`
+}
+
+func (r *AddServerlessRoInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddServerlessRoInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Addr struct {
 	// IP address
 	IP *string `json:"IP,omitnil,omitempty" name:"IP"`
@@ -738,14 +930,84 @@ type Addr struct {
 	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 }
 
+// Predefined struct for user
+type AssociateSecurityGroupsRequestParams struct {
+	// Array of instance group IDs, starting with the prefix cynosdbmysql-grp- or a cluster ID.
+	// Description: To get the instance group ID of a cluster, perform [query cluster instance group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+
+	// Security group ID list to be modified. An array of one or more security group IDs.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// Availability zone
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+}
+
+type AssociateSecurityGroupsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Array of instance group IDs, starting with the prefix cynosdbmysql-grp- or a cluster ID.
+	// Description: To get the instance group ID of a cluster, perform [query cluster instance group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+
+	// Security group ID list to be modified. An array of one or more security group IDs.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// Availability zone
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+}
+
+func (r *AssociateSecurityGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssociateSecurityGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	delete(f, "SecurityGroupIds")
+	delete(f, "Zone")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssociateSecurityGroupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AssociateSecurityGroupsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type AssociateSecurityGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *AssociateSecurityGroupsResponseParams `json:"Response"`
+}
+
+func (r *AssociateSecurityGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssociateSecurityGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type AuditInstanceFilters struct {
-	// Filter condition values. Supports InstanceId-Instance ID, InstanceName-Instance Name, ProjectId-Project ID, TagKey-Tag Key, Tag-Tag (separated by a vertical bar, e.g.: Tagkey|Tagvalue).
+
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// true indicates exact match; false indicates fuzzy match.
+
 	ExactMatch *bool `json:"ExactMatch,omitnil,omitempty" name:"ExactMatch"`
 
-	// Filter value
+
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
@@ -794,42 +1056,124 @@ type AuditRuleTemplateInfo struct {
 	AffectedInstances []*string `json:"AffectedInstances,omitnil,omitempty" name:"AffectedInstances"`
 }
 
+type AutoCopyConfig struct {
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Safe ID
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Safe region
+	VaultRegion *string `json:"VaultRegion,omitnil,omitempty" name:"VaultRegion"`
+
+	// Delivery Type: binlog, redolog, snapshot, logic
+	CopyType *string `json:"CopyType,omitnil,omitempty" name:"CopyType"`
+}
+
+type AutoMapRule struct {
+	// Source instance Id
+	SrcInstanceId *string `json:"SrcInstanceId,omitnil,omitempty" name:"SrcInstanceId"`
+
+	// Source database regular
+	SrcDatabaseRegex *string `json:"SrcDatabaseRegex,omitnil,omitempty" name:"SrcDatabaseRegex"`
+
+	// Source table regular
+	SrcTableRegex *string `json:"SrcTableRegex,omitnil,omitempty" name:"SrcTableRegex"`
+
+	// Target database regular
+	DstDatabaseRegex *string `json:"DstDatabaseRegex,omitnil,omitempty" name:"DstDatabaseRegex"`
+
+	// Target table regular
+	DstTableRegex *string `json:"DstTableRegex,omitnil,omitempty" name:"DstTableRegex"`
+}
+
+type BackupConfigInfo struct {
+	// System automation time.
+	BackupCustomAutoTime *bool `json:"BackupCustomAutoTime,omitnil,omitempty" name:"BackupCustomAutoTime"`
+
+	// Indicates the full backup start time. value range: [0-24*3600]. for example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.
+	BackupTimeBeg *uint64 `json:"BackupTimeBeg,omitnil,omitempty" name:"BackupTimeBeg"`
+
+	// Indicates the full backup end time. value range: [0-24*3600]. for example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.
+	BackupTimeEnd *uint64 `json:"BackupTimeEnd,omitnil,omitempty" name:"BackupTimeEnd"`
+
+	// Currently this parameter cannot be modified. no need to specify. backup frequency is an array of length 7, corresponding to the backup method from sunday to saturday, full for full backup and increment for incremental backup.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackupWeekDays []*string `json:"BackupWeekDays,omitnil,omitempty" name:"BackupWeekDays"`
+
+	// Interval.
+	BackupIntervalTime *int64 `json:"BackupIntervalTime,omitnil,omitempty" name:"BackupIntervalTime"`
+
+	// Indicates the backup retention period in seconds. data will be cleaned up longer than this time. 7 days means 3600247=604800. the maximum is 158112000.
+	ReserveDuration *uint64 `json:"ReserveDuration,omitnil,omitempty" name:"ReserveDuration"`
+
+	// Enable cross-region backup.
+	// Enable.
+	// 0: disabled.
+	CrossRegionsEnable *string `json:"CrossRegionsEnable,omitnil,omitempty" name:"CrossRegionsEnable"`
+
+	// Cross-Regional backup region.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CrossRegions []*string `json:"CrossRegions,omitnil,omitempty" name:"CrossRegions"`
+
+	// Automatic data backup trigger policy, periodically: automatic periodic backup, frequent: high-frequency backup
+	BackupTriggerStrategy *string `json:"BackupTriggerStrategy,omitnil,omitempty" name:"BackupTriggerStrategy"`
+
+	// Backup delivery relationship
+	AutoCopyVaults []*CreateBackupVaultItem `json:"AutoCopyVaults,omitnil,omitempty" name:"AutoCopyVaults"`
+}
+
 type BackupFileInfo struct {
-	// Snapshot file ID, which is deprecated. You need to use `BackupId`.
+	// <p>Snapshot file ID, abandoned, please use BackupId</p>
 	SnapshotId *uint64 `json:"SnapshotId,omitnil,omitempty" name:"SnapshotId"`
 
-	// Backup file name
+	// <p>Backup file name</p>
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
-	// Backup file size
+	// <p>Backup file size</p>
 	FileSize *uint64 `json:"FileSize,omitnil,omitempty" name:"FileSize"`
 
-	// Backup start time
+	// <p>Backup start time.</p>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Backup end time
+	// <p>Backup completion time.</p>
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 
-	// Backup type. Valid values: `snapshot` (snapshot backup), `logic` (logic backup).
+	// <p>Backup type: snapshot, snapshot backup; logic, logical backup</p>
 	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
 
-	// Back mode. auto: auto backup; manual: manual backup
+	// <p>Backup method: auto, automatic backup; manual, manual backup</p>
 	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
 
-	// Backup file status. success: backup succeeded; fail: backup failed; creating: creating backup file; deleting: deleting backup file
+	// <p>Backup file status: success: backup successful; fail: backup failed; creating: backup file being created; deleting: backup file deleting</p>
 	BackupStatus *string `json:"BackupStatus,omitnil,omitempty" name:"BackupStatus"`
 
-	// Backup file time
+	// <p>Backup file time</p>
 	SnapshotTime *string `json:"SnapshotTime,omitnil,omitempty" name:"SnapshotTime"`
 
-	// Backup ID.
+	// <p>Backup ID</p>
 	BackupId *int64 `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 
-	// Specifies the snapshot type. valid values: full (full snapshot); increment (incremental snapshot).
+	// <p>Snapshot type. Value range: full, full; increment, incremental</p>
 	SnapShotType *string `json:"SnapShotType,omitnil,omitempty" name:"SnapShotType"`
 
-	// Specifies the remark of the backup file.
+	// <p>Backup file remark</p>
 	BackupName *string `json:"BackupName,omitnil,omitempty" name:"BackupName"`
+
+	// <p>Delivery status</p>
+	CopyStatus *string `json:"CopyStatus,omitnil,omitempty" name:"CopyStatus"`
+
+	// <p>Key id</p>
+	EncryptKeyId *string `json:"EncryptKeyId,omitnil,omitempty" name:"EncryptKeyId"`
+
+	// <p>Key region</p>
+	EncryptRegion *string `json:"EncryptRegion,omitnil,omitempty" name:"EncryptRegion"`
+
+	// <p>Safe info</p>
+	VaultInfos []*VaultInfo `json:"VaultInfos,omitnil,omitempty" name:"VaultInfos"`
+
+	// <p>Backup cycle policy</p>
+	BackupPeriodStrategy *string `json:"BackupPeriodStrategy,omitnil,omitempty" name:"BackupPeriodStrategy"`
 }
 
 type BackupLimitClusterRestriction struct {
@@ -865,6 +1209,14 @@ type BackupLimitVpcItem struct {
 
 	// Limit the vpc list for downloads.
 	VpcList []*string `json:"VpcList,omitnil,omitempty" name:"VpcList"`
+}
+
+type BackupRegionAndIds struct {
+	// Backup region.
+	BackupRegion *string `json:"BackupRegion,omitnil,omitempty" name:"BackupRegion"`
+
+	// Backup ID.
+	BackupId *int64 `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 }
 
 type BillingResourceInfo struct {
@@ -963,6 +1315,9 @@ type BinlogConfigInfo struct {
 	// binlog in a different region.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	BinlogCrossRegions []*string `json:"BinlogCrossRegions,omitnil,omitempty" name:"BinlogCrossRegions"`
+
+	// Safe info
+	AutoCopyVaults []*CreateBackupVaultItem `json:"AutoCopyVaults,omitnil,omitempty" name:"AutoCopyVaults"`
 }
 
 type BinlogItem struct {
@@ -980,22 +1335,37 @@ type BinlogItem struct {
 
 	// Binlog file ID
 	BinlogId *int64 `json:"BinlogId,omitnil,omitempty" name:"BinlogId"`
+
+	// binlog cross-region coverage
+	CrossRegions []*string `json:"CrossRegions,omitnil,omitempty" name:"CrossRegions"`
+
+	// Backup delivery status
+	CopyStatus *string `json:"CopyStatus,omitnil,omitempty" name:"CopyStatus"`
+
+	// Safe info
+	VaultInfos []*VaultInfo `json:"VaultInfos,omitnil,omitempty" name:"VaultInfos"`
+
+	// Encryption key
+	EncryptKeyId *string `json:"EncryptKeyId,omitnil,omitempty" name:"EncryptKeyId"`
+
+	// Encrypt key region
+	EncryptRegion *string `json:"EncryptRegion,omitnil,omitempty" name:"EncryptRegion"`
 }
 
 type BizTaskInfo struct {
-	// Task id
+
 	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
-	// User appid
+
 	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
-	// cluster id
+
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// Region
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Task Creation Time
+
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Specifies the delayed execution time.
@@ -1004,63 +1374,63 @@ type BizTaskInfo struct {
 	// Task failure information.
 	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
 
-	// asynchronous task flow id
+
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
-	// task input information
+
 	Input *string `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// instance group id
+
 	//
 	// Deprecated: InstanceGrpId is deprecated.
 	InstanceGrpId *string `json:"InstanceGrpId,omitnil,omitempty" name:"InstanceGrpId"`
 
-	// instance group id
+
 	InstanceGroupId *string `json:"InstanceGroupId,omitnil,omitempty" name:"InstanceGroupId"`
 
-	// Instance id
+
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Task Operation Target id
+
 	ObjectId *string `json:"ObjectId,omitnil,omitempty" name:"ObjectId"`
 
-	// Task Operation Target Type
+
 	ObjectType *string `json:"ObjectType,omitnil,omitempty" name:"ObjectType"`
 
-	// Operator uin
+
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
-	// task output information
+
 	Output *string `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// Task Status
+
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// task type
+
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// Parent Task ID that Triggered This Task
+
 	TriggerTaskId *int64 `json:"TriggerTaskId,omitnil,omitempty" name:"TriggerTaskId"`
 
-	// Update Time
+
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Task Start Time
+
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Task End Time
+
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Cluster Name
+
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Instance Name
+
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Task Progress
+
 	Process *int64 `json:"Process,omitnil,omitempty" name:"Process"`
 
-	// Parameter Modification Task Information
+
 	//
 	// Deprecated: ModifyParamsData is deprecated.
 	ModifyParamsData []*ModifyParamsData `json:"ModifyParamsData,omitnil,omitempty" name:"ModifyParamsData"`
@@ -1074,7 +1444,7 @@ type BizTaskInfo struct {
 	// Instance configuration change task information.
 	ModifyInstanceData *ModifyInstanceData `json:"ModifyInstanceData,omitnil,omitempty" name:"ModifyInstanceData"`
 
-	// Manual Backup Task Information
+
 	ManualBackupData *ManualBackupData `json:"ManualBackupData,omitnil,omitempty" name:"ManualBackupData"`
 
 	// Modify kernel version task information.
@@ -1083,10 +1453,10 @@ type BizTaskInfo struct {
 	// Cluster availability zone information.
 	ClusterSlaveData *ClusterSlaveData `json:"ClusterSlaveData,omitnil,omitempty" name:"ClusterSlaveData"`
 
-	// Cluster Log Conversion
+
 	SwitchClusterLogBin *SwitchClusterLogBin `json:"SwitchClusterLogBin,omitnil,omitempty" name:"SwitchClusterLogBin"`
 
-	// Instance Parameter Modification
+
 	ModifyInstanceParamsData *BizTaskModifyParamsData `json:"ModifyInstanceParamsData,omitnil,omitempty" name:"ModifyInstanceParamsData"`
 
 	// Maintenance time.
@@ -1097,10 +1467,19 @@ type BizTaskInfo struct {
 
 	// Task progress information.
 	TaskProgressInfo *TaskProgressInfo `json:"TaskProgressInfo,omitnil,omitempty" name:"TaskProgressInfo"`
+
+	// Global Database Network Task
+	GdnTaskInfo *GdnTaskInfo `json:"GdnTaskInfo,omitnil,omitempty" name:"GdnTaskInfo"`
+
+	// Safe id
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Safe name
+	VaultName *string `json:"VaultName,omitnil,omitempty" name:"VaultName"`
 }
 
 type BizTaskModifyInstanceParam struct {
-	// Instance ID
+
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Details of instance parameter modification task.
@@ -1108,7 +1487,7 @@ type BizTaskModifyInstanceParam struct {
 }
 
 type BizTaskModifyParamsData struct {
-	// Cluster ID
+
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// Cluster parameter modification data.
@@ -1119,32 +1498,133 @@ type BizTaskModifyParamsData struct {
 }
 
 type CLSInfo struct {
-	// Log topic operation: optional create, reuse.
-	// create: create a new log topic using TopicName.
-	// reuse: use an existing log topic by specifying TopicId.
-	// Combining the use of an existing log topic and creating a new log set is not allowed.
+
 	TopicOperation *string `json:"TopicOperation,omitnil,omitempty" name:"TopicOperation"`
 
-	// Log set operation: optional create, reuse.
-	// create: create a new log set using GroupName.
-	// reuse: use an existing log set by specifying GroupId.
-	// Combining the use of an existing log topic and creating a new log set is not allowed.
+
 	GroupOperation *string `json:"GroupOperation,omitnil,omitempty" name:"GroupOperation"`
 
-	// Log Delivery Region
+
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// log topic id
+
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// log topic name
+
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// log set id
+
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
-	// log set name
+
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
+}
+
+// Predefined struct for user
+type CalculateBackupSaveSecExpiresRequestParams struct {
+	// Backup safe ID
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Backup retention period (seconds). Must be greater than 0.
+	BackupSaveSeconds *int64 `json:"BackupSaveSeconds,omitnil,omitempty" name:"BackupSaveSeconds"`
+
+	// Number of items per page, range (0,100], default 10
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Range: [0,INF). Default is 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field. Available values: VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime. Default: endTime.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sorting method, available values: desc, asc, DESC, ASC, default desc
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+}
+
+type CalculateBackupSaveSecExpiresRequest struct {
+	*tchttp.BaseRequest
+	
+	// Backup safe ID
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Backup retention period (seconds). Must be greater than 0.
+	BackupSaveSeconds *int64 `json:"BackupSaveSeconds,omitnil,omitempty" name:"BackupSaveSeconds"`
+
+	// Number of items per page, range (0,100], default 10
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Range: [0,INF). Default is 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field. Available values: VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime. Default: endTime.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sorting method, available values: desc, asc, DESC, ASC, default desc
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+}
+
+func (r *CalculateBackupSaveSecExpiresRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CalculateBackupSaveSecExpiresRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VaultId")
+	delete(f, "BackupSaveSeconds")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CalculateBackupSaveSecExpiresRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CalculateBackupSaveSecExpiresResponseParams struct {
+	// Total number of backup files that will be deleted
+	WillDeleteBackupFileCount *int64 `json:"WillDeleteBackupFileCount,omitnil,omitempty" name:"WillDeleteBackupFileCount"`
+
+	// Backup file list to be deleted
+	WillDeleteBackupFiles []*WillDeleteItem `json:"WillDeleteBackupFiles,omitnil,omitempty" name:"WillDeleteBackupFiles"`
+
+	// Total files of binlogs that will be deleted
+	WillDeleteBinlogFileCount *int64 `json:"WillDeleteBinlogFileCount,omitnil,omitempty" name:"WillDeleteBinlogFileCount"`
+
+	// Binlog file list to be deleted
+	WillDeleteBinlogFiles []*WillDeleteItem `json:"WillDeleteBinlogFiles,omitnil,omitempty" name:"WillDeleteBinlogFiles"`
+
+	// Total Redolog files to be deleted
+	WillDeleteRedoLogFileCount *int64 `json:"WillDeleteRedoLogFileCount,omitnil,omitempty" name:"WillDeleteRedoLogFileCount"`
+
+	// List of Redolog files that will be deleted
+	WillDeleteRedoLogFiles []*WillDeleteItem `json:"WillDeleteRedoLogFiles,omitnil,omitempty" name:"WillDeleteRedoLogFiles"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CalculateBackupSaveSecExpiresResponse struct {
+	*tchttp.BaseResponse
+	Response *CalculateBackupSaveSecExpiresResponseParams `json:"Response"`
+}
+
+func (r *CalculateBackupSaveSecExpiresResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CalculateBackupSaveSecExpiresResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -1232,6 +1712,80 @@ type CheckItem struct {
 	// Details of validation failure and modification suggestions
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExpectedValue *string `json:"ExpectedValue,omitnil,omitempty" name:"ExpectedValue"`
+}
+
+// Predefined struct for user
+type CheckTransferClusterZoneRequestParams struct {
+	// Source Cluster Id
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Target availability zone
+	DstZone *string `json:"DstZone,omitnil,omitempty" name:"DstZone"`
+
+	// Target zone info for proxy migration
+	ProxyZones []*ProxyZone `json:"ProxyZones,omitnil,omitempty" name:"ProxyZones"`
+}
+
+type CheckTransferClusterZoneRequest struct {
+	*tchttp.BaseRequest
+	
+	// Source Cluster Id
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Target availability zone
+	DstZone *string `json:"DstZone,omitnil,omitempty" name:"DstZone"`
+
+	// Target zone info for proxy migration
+	ProxyZones []*ProxyZone `json:"ProxyZones,omitnil,omitempty" name:"ProxyZones"`
+}
+
+func (r *CheckTransferClusterZoneRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CheckTransferClusterZoneRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "DstZone")
+	delete(f, "ProxyZones")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckTransferClusterZoneRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CheckTransferClusterZoneResponseParams struct {
+	// Whether the check is successful
+	CheckStatus *bool `json:"CheckStatus,omitnil,omitempty" name:"CheckStatus"`
+
+	// Reason for check failure
+	CheckMsg *string `json:"CheckMsg,omitnil,omitempty" name:"CheckMsg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CheckTransferClusterZoneResponse struct {
+	*tchttp.BaseResponse
+	Response *CheckTransferClusterZoneResponseParams `json:"Response"`
+}
+
+func (r *CheckTransferClusterZoneResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CheckTransferClusterZoneResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -1528,13 +2082,9 @@ func (r *CloseSSLRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CloseSSLResponseParams struct {
 	// Process ID
-	// 
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// Task ID.
-	// 
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1617,63 +2167,62 @@ func (r *CloseWanResponse) FromJsonString(s string) error {
 }
 
 type ClusterInstanceDetail struct {
-	// Instance ID
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name
+	// <p>Instance name</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Engine type
+	// <p>Engine type</p>
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Instance status
+	// <p>Instance status</p>
 	InstanceStatus *string `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
 
-	// Instance status description
+	// <p>Instance status description</p>
 	InstanceStatusDesc *string `json:"InstanceStatusDesc,omitnil,omitempty" name:"InstanceStatusDesc"`
 
-	// Number of CPU cores
+	// <p>cpu cores</p>
 	InstanceCpu *int64 `json:"InstanceCpu,omitnil,omitempty" name:"InstanceCpu"`
 
-	// Memory
+	// <p>Memory</p>
 	InstanceMemory *int64 `json:"InstanceMemory,omitnil,omitempty" name:"InstanceMemory"`
 
-	// Disk
+	// <p>hard disk</p>
 	InstanceStorage *int64 `json:"InstanceStorage,omitnil,omitempty" name:"InstanceStorage"`
 
-	// Instance role
+	// <p>Instance role</p>
 	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 
-	// Execution start time (seconds from 0 o'clock).	
+	// <p>Execution start time (seconds from 00:00).</p>
 	MaintainStartTime *int64 `json:"MaintainStartTime,omitnil,omitempty" name:"MaintainStartTime"`
 
-	// Specifies the continuous time. the unit is second.	
+	// <p>Duration (unit: s)</p>
 	MaintainDuration *int64 `json:"MaintainDuration,omitnil,omitempty" name:"MaintainDuration"`
 
-	// Specifies the time when it can be executed. valid values: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].
+	// <p>The time when it can be executed, enumeration value: ["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"]</p>
 	MaintainWeekDays []*string `json:"MaintainWeekDays,omitnil,omitempty" name:"MaintainWeekDays"`
 
-	// serverless instance substatus.
+	// <p>serverless instance substatus</p>
 	ServerlessStatus *string `json:"ServerlessStatus,omitnil,omitempty" name:"ServerlessStatus"`
 
-	// Instance task information.
+	// <p>Instance task information</p>
 	InstanceTasks []*ObjectTask `json:"InstanceTasks,omitnil,omitempty" name:"InstanceTasks"`
 
-	// Instance machine type.
-	// 1. common: general.
-	// 2. exclusive, dedicated.
+	// <p>Instance Machine Type</p><ol><li>common, universal type.</li><li>exclusive, dedicated.</li></ol>
 	InstanceDeviceType *string `json:"InstanceDeviceType,omitnil,omitempty" name:"InstanceDeviceType"`
 
-	// Instance storage type.
-	// Description: this parameter returns a value only when querying resources belonging to LibraDB.
+	// <p>Instance storage type<br>Description: This parameter returns a value only when the resource belonging to the query is LibraDB.</p>
 	InstanceStorageType *string `json:"InstanceStorageType,omitnil,omitempty" name:"InstanceStorageType"`
 
-	// Database type.
+	// <p>Database type</p>
 	DbMode *string `json:"DbMode,omitnil,omitempty" name:"DbMode"`
 
-	// Node list
-	// Description: this parameter returns a value only when querying LibraDB resources.
+	// <p>Node list<br>Description: This parameter returns a value only when querying resources belonging to LibraDB.</p>
 	NodeList []*string `json:"NodeList,omitnil,omitempty" name:"NodeList"`
+
+	// <p>AI optimizer status</p>
+	AIOptimizerStatus *AIOptimizerStatus `json:"AIOptimizerStatus,omitnil,omitempty" name:"AIOptimizerStatus"`
 }
 
 type ClusterReadOnlyValue struct {
@@ -1688,13 +2237,13 @@ type ClusterSlaveData struct {
 	// Old primary availability zone.
 	OldMasterZone *string `json:"OldMasterZone,omitnil,omitempty" name:"OldMasterZone"`
 
-	// Standby AZ
+
 	OldSlaveZone []*string `json:"OldSlaveZone,omitnil,omitempty" name:"OldSlaveZone"`
 
 	// New primary availability zone.
 	NewMasterZone *string `json:"NewMasterZone,omitnil,omitempty" name:"NewMasterZone"`
 
-	// New Standby AZ
+
 	NewSlaveZone []*string `json:"NewSlaveZone,omitnil,omitempty" name:"NewSlaveZone"`
 
 	// New from availability zone attribute.
@@ -1710,6 +2259,70 @@ type ClusterTaskId struct {
 
 	// Task ID
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+// Predefined struct for user
+type CopyBackupToVaultRequestParams struct {
+	// <p>Target safe ID. The backup file will be copied to this safe.</p>
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// <p>List of backup file IDs. Supports batch operations to copy multiple backup files.</p>
+	BackupIds []*int64 `json:"BackupIds,omitnil,omitempty" name:"BackupIds"`
+}
+
+type CopyBackupToVaultRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Target safe ID. The backup file will be copied to this safe.</p>
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// <p>List of backup file IDs. Supports batch operations to copy multiple backup files.</p>
+	BackupIds []*int64 `json:"BackupIds,omitnil,omitempty" name:"BackupIds"`
+}
+
+func (r *CopyBackupToVaultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CopyBackupToVaultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VaultId")
+	delete(f, "BackupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CopyBackupToVaultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CopyBackupToVaultResponseParams struct {
+	// <p>Task ID.</p>
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CopyBackupToVaultResponse struct {
+	*tchttp.BaseResponse
+	Response *CopyBackupToVaultResponseParams `json:"Response"`
+}
+
+func (r *CopyBackupToVaultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CopyBackupToVaultResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -1924,6 +2537,9 @@ type CreateBackupRequestParams struct {
 
 	// Backup name
 	BackupName *string `json:"BackupName,omitnil,omitempty" name:"BackupName"`
+
+	// 	Message sent to safe
+	Vaults []*CreateBackupVaultItem `json:"Vaults,omitnil,omitempty" name:"Vaults"`
 }
 
 type CreateBackupRequest struct {
@@ -1943,6 +2559,9 @@ type CreateBackupRequest struct {
 
 	// Backup name
 	BackupName *string `json:"BackupName,omitnil,omitempty" name:"BackupName"`
+
+	// 	Message sent to safe
+	Vaults []*CreateBackupVaultItem `json:"Vaults,omitnil,omitempty" name:"Vaults"`
 }
 
 func (r *CreateBackupRequest) ToJsonString() string {
@@ -1962,6 +2581,7 @@ func (r *CreateBackupRequest) FromJsonString(s string) error {
 	delete(f, "BackupDatabases")
 	delete(f, "BackupTables")
 	delete(f, "BackupName")
+	delete(f, "Vaults")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBackupRequest has unknown keys!", "")
 	}
@@ -1991,6 +2611,16 @@ func (r *CreateBackupResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CreateBackupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateBackupVaultItem struct {
+	// Safe id
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Safe region
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VaultRegion *string `json:"VaultRegion,omitnil,omitempty" name:"VaultRegion"`
 }
 
 // Predefined struct for user
@@ -2161,13 +2791,13 @@ func (r *CreateClusterDatabaseResponse) FromJsonString(s string) error {
 }
 
 type CreateClustersData struct {
-	// Instance CPU
+
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Instance Memory
+
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Cluster storage limit
+
 	StorageLimit *int64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
 }
 
@@ -3218,124 +3848,154 @@ func (r *CreateParamTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateProxyEndPointRequestParams struct {
-	// Cluster ID
+	// Cluster ID.
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// VPC ID, which is the same as that of the cluster by default.
+	// VPC ID. By default, it remains consistent with the VPC ID of the cluster.
 	UniqueVpcId *string `json:"UniqueVpcId,omitnil,omitempty" name:"UniqueVpcId"`
 
-	// VPCe subnet ID, which is the same as that of the cluster by default.
+	// Subnet ID of the VPC. By default, it remains consistent with the subnet ID of the cluster.
 	UniqueSubnetId *string `json:"UniqueSubnetId,omitnil,omitempty" name:"UniqueSubnetId"`
 
-	// Connection pool type. Valid value: `SessionConnectionPool` (session-level connection pool)
+	// Type of connection pool: SessionConnectionPool (session-level connection pool).
 	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil,omitempty" name:"ConnectionPoolType"`
 
-	// Whether to enable connection pool. Valid value: `yes` (enable), `no` (disable).
+	// Whether to enable the connection pool.
+	// yes: indicates enabled.
+	// no: indicates not enabled.
 	OpenConnectionPool *string `json:"OpenConnectionPool,omitnil,omitempty" name:"OpenConnectionPool"`
 
-	// Connection pool threshold in seconds
+	// Threshold of the connection pool: unit (seconds). Valid values: 0 - 300 seconds.
 	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitnil,omitempty" name:"ConnectionPoolTimeOut"`
 
-	// Array of security group IDs
+	// Array of bound security group IDs.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// Description
+	// Description.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// VIP information
+	// The vip information to be bound must correspond to the UniqueVpcId.
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-	// Weight mode. 
-	// Valid values: `system` (system-assigned), `custom` (custom).
+	// Weight mode:
+	// system: system-assigned.
+	// custom: custom.
 	WeightMode *string `json:"WeightMode,omitnil,omitempty" name:"WeightMode"`
 
-	// Whether to automatically add read-only instance. Valid value: `yes`, `no`.
+	// Whether to automatically add a read-only instance.
+	// yes: indicates automatically adding a read-only instance.
+	// no: indicates not to automatically add a read-only instance.
 	AutoAddRo *string `json:"AutoAddRo,omitnil,omitempty" name:"AutoAddRo"`
 
-	// Whether to enable failover
+	// Whether to enable failover.
+	// yes: indicates enabled. After it is enabled, when the database proxy encounters faults, the connection address will be routed to the primary instance.
+	// no: indicates not enabled.
+	// Description:
+	// Only when the value of the RwType parameter is READWRITE can this option be configured.
 	FailOver *string `json:"FailOver,omitnil,omitempty" name:"FailOver"`
 
-	// Consistency type. Valid values: 
-	// `eventual`, `global`, `session`.
+	// Consistency Type:
+	// eventual: eventual consistency.
+	// global: global consistency.
+	// session: session consistency.
+	// Description:
+	// Only when the RwType parameter value is READWRITE can this option be configured.
 	ConsistencyType *string `json:"ConsistencyType,omitnil,omitempty" name:"ConsistencyType"`
 
-	// Read-write attribute. Valid values: 
-	// `READWRITE`, `READONLY`.
+	// Read-Write Attribute:
+	// READWRITE: indicates read/write splitting. Only when this parameter value is READWRITE can the FailOver and ConsistencyType parameters be configured.
+	// READONLY: indicates read-only.
 	RwType *string `json:"RwType,omitnil,omitempty" name:"RwType"`
 
-	// Consistency timeout period
+	// The consistency timeout period. Value range: 0 - 1000000 (microseconds). When set to 0, if a read-only instance experiences latency causing the consistency policy to be unsatisfied, the request will wait indefinitely.
 	ConsistencyTimeOut *int64 `json:"ConsistencyTimeOut,omitnil,omitempty" name:"ConsistencyTimeOut"`
 
-	// Transaction split
+	// Whether to enable transaction split. After it is enabled, read and write operations in a transaction are split to different instances for execution.
 	TransSplit *bool `json:"TransSplit,omitnil,omitempty" name:"TransSplit"`
 
-	// Connection mode. Valid values:
-	// `nearby`, `balance`.
+	// Access mode:
+	// nearby: nearby access.
+	// balance: balanced allocation.
 	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
 
-	// Instance weight
+	// Instance weight.
 	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitnil,omitempty" name:"InstanceWeights"`
 }
 
 type CreateProxyEndPointRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cluster ID
+	// Cluster ID.
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// VPC ID, which is the same as that of the cluster by default.
+	// VPC ID. By default, it remains consistent with the VPC ID of the cluster.
 	UniqueVpcId *string `json:"UniqueVpcId,omitnil,omitempty" name:"UniqueVpcId"`
 
-	// VPCe subnet ID, which is the same as that of the cluster by default.
+	// Subnet ID of the VPC. By default, it remains consistent with the subnet ID of the cluster.
 	UniqueSubnetId *string `json:"UniqueSubnetId,omitnil,omitempty" name:"UniqueSubnetId"`
 
-	// Connection pool type. Valid value: `SessionConnectionPool` (session-level connection pool)
+	// Type of connection pool: SessionConnectionPool (session-level connection pool).
 	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil,omitempty" name:"ConnectionPoolType"`
 
-	// Whether to enable connection pool. Valid value: `yes` (enable), `no` (disable).
+	// Whether to enable the connection pool.
+	// yes: indicates enabled.
+	// no: indicates not enabled.
 	OpenConnectionPool *string `json:"OpenConnectionPool,omitnil,omitempty" name:"OpenConnectionPool"`
 
-	// Connection pool threshold in seconds
+	// Threshold of the connection pool: unit (seconds). Valid values: 0 - 300 seconds.
 	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitnil,omitempty" name:"ConnectionPoolTimeOut"`
 
-	// Array of security group IDs
+	// Array of bound security group IDs.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// Description
+	// Description.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// VIP information
+	// The vip information to be bound must correspond to the UniqueVpcId.
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-	// Weight mode. 
-	// Valid values: `system` (system-assigned), `custom` (custom).
+	// Weight mode:
+	// system: system-assigned.
+	// custom: custom.
 	WeightMode *string `json:"WeightMode,omitnil,omitempty" name:"WeightMode"`
 
-	// Whether to automatically add read-only instance. Valid value: `yes`, `no`.
+	// Whether to automatically add a read-only instance.
+	// yes: indicates automatically adding a read-only instance.
+	// no: indicates not to automatically add a read-only instance.
 	AutoAddRo *string `json:"AutoAddRo,omitnil,omitempty" name:"AutoAddRo"`
 
-	// Whether to enable failover
+	// Whether to enable failover.
+	// yes: indicates enabled. After it is enabled, when the database proxy encounters faults, the connection address will be routed to the primary instance.
+	// no: indicates not enabled.
+	// Description:
+	// Only when the value of the RwType parameter is READWRITE can this option be configured.
 	FailOver *string `json:"FailOver,omitnil,omitempty" name:"FailOver"`
 
-	// Consistency type. Valid values: 
-	// `eventual`, `global`, `session`.
+	// Consistency Type:
+	// eventual: eventual consistency.
+	// global: global consistency.
+	// session: session consistency.
+	// Description:
+	// Only when the RwType parameter value is READWRITE can this option be configured.
 	ConsistencyType *string `json:"ConsistencyType,omitnil,omitempty" name:"ConsistencyType"`
 
-	// Read-write attribute. Valid values: 
-	// `READWRITE`, `READONLY`.
+	// Read-Write Attribute:
+	// READWRITE: indicates read/write splitting. Only when this parameter value is READWRITE can the FailOver and ConsistencyType parameters be configured.
+	// READONLY: indicates read-only.
 	RwType *string `json:"RwType,omitnil,omitempty" name:"RwType"`
 
-	// Consistency timeout period
+	// The consistency timeout period. Value range: 0 - 1000000 (microseconds). When set to 0, if a read-only instance experiences latency causing the consistency policy to be unsatisfied, the request will wait indefinitely.
 	ConsistencyTimeOut *int64 `json:"ConsistencyTimeOut,omitnil,omitempty" name:"ConsistencyTimeOut"`
 
-	// Transaction split
+	// Whether to enable transaction split. After it is enabled, read and write operations in a transaction are split to different instances for execution.
 	TransSplit *bool `json:"TransSplit,omitnil,omitempty" name:"TransSplit"`
 
-	// Connection mode. Valid values:
-	// `nearby`, `balance`.
+	// Access mode:
+	// nearby: nearby access.
+	// balance: balanced allocation.
 	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
 
-	// Instance weight
+	// Instance weight.
 	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitnil,omitempty" name:"InstanceWeights"`
 }
 
@@ -3377,13 +4037,13 @@ func (r *CreateProxyEndPointRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateProxyEndPointResponseParams struct {
-	// Async flow ID
+	// asynchronous process ID.
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
-	// Async task ID
+	// Asynchronous task ID.
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Database proxy group ID
+	// ID of the Database proxy group.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3560,7 +4220,7 @@ type CreateResourcePackageRequestParams struct {
 	// Resource pack edition. Valid values: `base` (basic edition), `common` (general edition), `enterprise` (enterprise edition).
 	PackageVersion *string `json:"PackageVersion,omitnil,omitempty" name:"PackageVersion"`
 
-	// Resource pack size. Unit of the compute resource pack: Ten thousand.  Unit of the storage resource pack:  GB
+	// Resource package size. Compute resource unit: unit; storage resource: GB.
 	PackageSpec *float64 `json:"PackageSpec,omitnil,omitempty" name:"PackageSpec"`
 
 	// Validity period of a resource pack in days
@@ -3588,7 +4248,7 @@ type CreateResourcePackageRequest struct {
 	// Resource pack edition. Valid values: `base` (basic edition), `common` (general edition), `enterprise` (enterprise edition).
 	PackageVersion *string `json:"PackageVersion,omitnil,omitempty" name:"PackageVersion"`
 
-	// Resource pack size. Unit of the compute resource pack: Ten thousand.  Unit of the storage resource pack:  GB
+	// Resource package size. Compute resource unit: unit; storage resource: GB.
 	PackageSpec *float64 `json:"PackageSpec,omitnil,omitempty" name:"PackageSpec"`
 
 	// Validity period of a resource pack in days
@@ -3655,6 +4315,105 @@ func (r *CreateResourcePackageResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateVaultRequestParams struct {
+	// Safe name, length must be greater than 0
+	VaultName *string `json:"VaultName,omitnil,omitempty" name:"VaultName"`
+
+	// Backup retention period (seconds). Must be greater than 0.
+	BackupSaveSeconds *int64 `json:"BackupSaveSeconds,omitnil,omitempty" name:"BackupSaveSeconds"`
+
+	// Safe description
+	VaultDescribe *string `json:"VaultDescribe,omitnil,omitempty" name:"VaultDescribe"`
+
+	// KMS key ID, length 0-36 characters
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Key type, available values: cloud (KMS managed keys), custom (custom key)
+	KeyType *string `json:"KeyType,omitnil,omitempty" name:"KeyType"`
+
+	// Key region, length 0-32 characters
+	KeyRegion *string `json:"KeyRegion,omitnil,omitempty" name:"KeyRegion"`
+
+	// Lock time, format: YYYY-MM-DD HH:mm:ss
+	LockedTime *string `json:"LockedTime,omitnil,omitempty" name:"LockedTime"`
+}
+
+type CreateVaultRequest struct {
+	*tchttp.BaseRequest
+	
+	// Safe name, length must be greater than 0
+	VaultName *string `json:"VaultName,omitnil,omitempty" name:"VaultName"`
+
+	// Backup retention period (seconds). Must be greater than 0.
+	BackupSaveSeconds *int64 `json:"BackupSaveSeconds,omitnil,omitempty" name:"BackupSaveSeconds"`
+
+	// Safe description
+	VaultDescribe *string `json:"VaultDescribe,omitnil,omitempty" name:"VaultDescribe"`
+
+	// KMS key ID, length 0-36 characters
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Key type, available values: cloud (KMS managed keys), custom (custom key)
+	KeyType *string `json:"KeyType,omitnil,omitempty" name:"KeyType"`
+
+	// Key region, length 0-32 characters
+	KeyRegion *string `json:"KeyRegion,omitnil,omitempty" name:"KeyRegion"`
+
+	// Lock time, format: YYYY-MM-DD HH:mm:ss
+	LockedTime *string `json:"LockedTime,omitnil,omitempty" name:"LockedTime"`
+}
+
+func (r *CreateVaultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVaultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VaultName")
+	delete(f, "BackupSaveSeconds")
+	delete(f, "VaultDescribe")
+	delete(f, "KeyId")
+	delete(f, "KeyType")
+	delete(f, "KeyRegion")
+	delete(f, "LockedTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVaultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateVaultResponseParams struct {
+	// Task ID, used for query task execution status
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateVaultResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateVaultResponseParams `json:"Response"`
+}
+
+func (r *CreateVaultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVaultResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CrossRegionBackupItem struct {
 	// Target region for backup.
 	CrossRegion *string `json:"CrossRegion,omitnil,omitempty" name:"CrossRegion"`
@@ -3667,153 +4426,142 @@ type CrossRegionBackupItem struct {
 }
 
 type CynosdbCluster struct {
-	// Cluster status. Valid values are as follows:
-	// creating
-	// running
-	// isolating
-	// isolated
-	// activating (removing isolation)
-	// offlining (deactivating)
-	// offlined (deactivated)
-	// deleting
-	// deleted
+	// <p>Cluster status. Valid values include:<br>creating: Creating<br>running: Running<br>isolating: Isolation<br>isolated: Isolated<br>activating: De-isolating<br>offlining: Offline<br>offlined: Offline<br>deleting: Deleting<br>deleted: Deleted</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Update time
+	// <p>Update time.</p>
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// AZ
+	// <p>AZ.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Cluster name
+	// <p>Cluster name.</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Region
+	// <p>Region</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Database version
+	// <p>Database version</p>
 	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
 
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Number of instances
+	// <p>Number of instances</p>
 	InstanceNum *int64 `json:"InstanceNum,omitnil,omitempty" name:"InstanceNum"`
 
-	// User UIN
+	// <p>User uin</p>
 	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
 
-	// Engine type.
+	// <p>Engine type</p>
 	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
 
-	// User appid.
+	// <p>User appid</p>
 	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
-	// Cluster status description
+	// <p>Cluster status description</p>
 	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
 
-	// Cluster Creation Time
+	// <p>Cluster creation time</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Payment mode. 0: pay-as-you-go; 1: yearly/monthly subscription.
+	// <p>Payment mode. 0: pay-as-you-go; 1: monthly subscription</p>
 	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Expiration time.
+	// <p>End time</p>
 	PeriodEndTime *string `json:"PeriodEndTime,omitnil,omitempty" name:"PeriodEndTime"`
 
-	// Cluster read/write vip.
+	// <p>Cluster read/write vip</p>
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-	// Cluster read/write vport.
+	// <p>Cluster read/write vport</p>
 	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 
-	// Project ID
+	// <p>Project ID.</p>
 	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
 
-	// Specifies the virtual private cloud ID.
+	// <p>VPC ID</p>
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Specifies the subnet ID.
+	// <p>Subnet ID.</p>
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Specifies the cynos kernel version.
+	// <p>cynos kernel version</p>
 	CynosVersion *string `json:"CynosVersion,omitnil,omitempty" name:"CynosVersion"`
 
-	// cynos version tag.
+	// <p>cynos version tag</p>
 	CynosVersionTag *string `json:"CynosVersionTag,omitnil,omitempty" name:"CynosVersionTag"`
 
-	// Specifies the storage capacity.
+	// <p>Storage capacity</p>
 	StorageLimit *int64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
 
-	// Renewal Flag
+	// <p>Renewal flag</p>
 	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
-	// Task being processed.
+	// <p>Currently processing task</p>
 	ProcessingTask *string `json:"ProcessingTask,omitnil,omitempty" name:"ProcessingTask"`
 
-	// Task array of the cluster.
+	// <p>Task array of the cluster</p>
 	Tasks []*ObjectTask `json:"Tasks,omitnil,omitempty" name:"Tasks"`
 
-	// Array of tags bound to the cluster.
+	// <p>tag Array of cluster binding</p>
 	ResourceTags []*Tag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-	// Db type (NORMAL, SERVERLESS).
+	// <p>Db type (NORMAL, SERVERLESS)</p>
 	DbMode *string `json:"DbMode,omitnil,omitempty" name:"DbMode"`
 
-	// Specifies the status of the SERVERLESS cluster when the Db type is SERVERLESS. valid values:.
-	// resume
-	// pause
+	// <p>When the Db type is SERVERLESS, the SERVERLESS cluster status. Available values:<br>resume<br>pause</p>
 	ServerlessStatus *string `json:"ServerlessStatus,omitnil,omitempty" name:"ServerlessStatus"`
 
-	// Cluster prepaid storage size.
+	// <p>Cluster Prepaid storage size</p>
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
-	// Cluster storage ID for prepaid storage, specifies the storage ID used for prepaid storage modification.
+	// <p>Storage ID of cluster storage in prepayment, used for prepaid storage configuration change</p>
 	StorageId *string `json:"StorageId,omitnil,omitempty" name:"StorageId"`
 
-	// Cluster storage payment mode. 0: pay-as-you-go; 1: yearly/monthly subscription.
+	// <p>Cluster storage payment mode. 0: pay-as-you-go; 1: monthly subscription</p>
 	StoragePayMode *int64 `json:"StoragePayMode,omitnil,omitempty" name:"StoragePayMode"`
 
-	// Minimum storage value corresponding to cluster computing specifications.
+	// <p>Minimum storage of the cluster compute specification</p>
 	MinStorageSize *int64 `json:"MinStorageSize,omitnil,omitempty" name:"MinStorageSize"`
 
-	// The maximum storage value corresponding to the cluster computing specification.
+	// <p>Maximum storage value of the cluster compute specification</p>
 	MaxStorageSize *int64 `json:"MaxStorageSize,omitnil,omitempty" name:"MaxStorageSize"`
 
-	// Specifies the cluster network information.
+	// <p>Cluster network information</p>
 	NetAddrs []*NetAddr `json:"NetAddrs,omitnil,omitempty" name:"NetAddrs"`
 
-	// Physical availability zone.
+	// <p>Physical AZ</p>
 	PhysicalZone *string `json:"PhysicalZone,omitnil,omitempty" name:"PhysicalZone"`
 
-	// Primary AZ.
+	// <p>Primary AZ</p>
 	MasterZone *string `json:"MasterZone,omitnil,omitempty" name:"MasterZone"`
 
-	// Whether there is an availability zone.
+	// <p>Whether there is a secondary AZ</p>
 	HasSlaveZone *string `json:"HasSlaveZone,omitnil,omitempty" name:"HasSlaveZone"`
 
-	// Secondary AZ.
+	// <p>Secondary AZ</p>
 	SlaveZones []*string `json:"SlaveZones,omitnil,omitempty" name:"SlaveZones"`
 
-	// Business type.
+	// <p>Business type</p>
 	BusinessType *string `json:"BusinessType,omitnil,omitempty" name:"BusinessType"`
 
-	// Whether to freeze.
+	// <p>Freeze or not</p>
 	IsFreeze *string `json:"IsFreeze,omitnil,omitempty" name:"IsFreeze"`
 
-	// Order Source
+	// <p>Order source</p>
 	OrderSource *string `json:"OrderSource,omitnil,omitempty" name:"OrderSource"`
 
-	// Capacity.
+	// <p>Capacity</p>
 	Ability *Ability `json:"Ability,omitnil,omitempty" name:"Ability"`
 
-	// Specifies the information of the resource package bound to the instance (only the storage resource package is returned here, that is, packageType=DISK).	
+	// <p>Instance bind resource package info (here only return storage resource package, for example packageType=DISK)</p>
 	ResourcePackages []*ResourcePackage `json:"ResourcePackages,omitnil,omitempty" name:"ResourcePackages"`
 
-	// Global database unique Id.
+	// <p>Global database unique ID</p>
 	GdnId *string `json:"GdnId,omitnil,omitempty" name:"GdnId"`
 
-	// Cluster role. primary cluster - primary, slave cluster - standby. if GdnId is empty, the field is invalid.
+	// <p>Cluster role. Primary cluster - primary, slave cluster - standby. If GdnId is empty, the field is invalid.</p>
 	GdnRole *string `json:"GdnRole,omitnil,omitempty" name:"GdnRole"`
 }
 
@@ -4018,292 +4766,295 @@ type CynosdbErrorLogItem struct {
 }
 
 type CynosdbInstance struct {
-	// User `Uin`
+	// <p>User Uin</p>
 	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
 
-	// User `AppId`
+	// <p>User AppId</p>
 	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Cluster name
+	// <p>Cluster name.</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Instance ID
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name
+	// <p>Instance name</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Project ID
+	// <p>Project ID</p>
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Region
+	// <p>Region</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// AZ
+	// <p>AZ.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Instance status
+	// <p>Instance status</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Instance status description
+	// <p>Instance status description in Chinese</p>
 	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
 
-	// Instance type, which is used to indicate whether it is a serverless instance.
+	// <p>Instance form, whether it is a serverless instance</p>
 	DbMode *string `json:"DbMode,omitnil,omitempty" name:"DbMode"`
 
-	// Database type
+	// <p>Database type</p>
 	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
 
-	// Database version
+	// <p>Database version.</p>
 	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
 
-	// Number of CPU cores
+	// <p>Cpu, unit: core</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Memory in GB
+	// <p>Memory, unit: GB</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Storage capacity in GB
+	// <p>Stored amount, unit: GB</p>
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
-	// Instance type
+	// <p>Instance type</p><p>Enumeration value:</p><ul><li>rw: Read-write instance</li><li>ro: Read-only instance</li></ul>
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Current instance role
+	// <p>Current instance role</p>
 	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 
-	// Update time
+	// <p>Update time.</p>
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Creation time
+	// <p>Creation time.</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// VPC ID
+	// <p>VPC network ID</p>
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID
+	// <p>Subnet ID.</p>
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Private IP of instance
+	// <p>Instance private IP address</p>
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-	// Private port of instance
+	// <p>Instance Intranet Port</p>
 	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 
-	// Billing mode
+	// <p>Payment mode</p>
 	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Instance expiration time
+	// <p>Instance expiration time</p>
 	PeriodEndTime *string `json:"PeriodEndTime,omitnil,omitempty" name:"PeriodEndTime"`
 
-	// Termination deadline
+	// <p>Termination phase</p>
 	DestroyDeadlineText *string `json:"DestroyDeadlineText,omitnil,omitempty" name:"DestroyDeadlineText"`
 
-	// Isolation time
+	// <p>Isolation time</p>
 	IsolateTime *string `json:"IsolateTime,omitnil,omitempty" name:"IsolateTime"`
 
-	// Network type
+	// <p>Network type</p>
 	NetType *int64 `json:"NetType,omitnil,omitempty" name:"NetType"`
 
-	// Public domain name
+	// <p>Public network domain name</p>
 	WanDomain *string `json:"WanDomain,omitnil,omitempty" name:"WanDomain"`
 
-	// Public IP
+	// <p>Public network IP</p>
 	WanIP *string `json:"WanIP,omitnil,omitempty" name:"WanIP"`
 
-	// Public port
+	// <p>Public network port</p>
 	WanPort *int64 `json:"WanPort,omitnil,omitempty" name:"WanPort"`
 
-	// Public network status
+	// <p>Public network status</p>
 	WanStatus *string `json:"WanStatus,omitnil,omitempty" name:"WanStatus"`
 
-	// Instance termination time
+	// <p>Instance destruction time</p>
 	DestroyTime *string `json:"DestroyTime,omitnil,omitempty" name:"DestroyTime"`
 
-	// TDSQL-C kernel version
+	// <p>Cynos kernel version</p>
 	CynosVersion *string `json:"CynosVersion,omitnil,omitempty" name:"CynosVersion"`
 
-	// Task in progress
+	// <p>Currently processing task</p>
 	ProcessingTask *string `json:"ProcessingTask,omitnil,omitempty" name:"ProcessingTask"`
 
-	// Renewal flag
+	// <p>Renewal flag</p>
 	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
-	// Minimum number of CPU cores for serverless instance
+	// <p>serverless instance cpu minimum</p>
 	MinCpu *float64 `json:"MinCpu,omitnil,omitempty" name:"MinCpu"`
 
-	// Maximum number of CPU cores for serverless instance
+	// <p>cpu cap of the serverless instance</p>
 	MaxCpu *float64 `json:"MaxCpu,omitnil,omitempty" name:"MaxCpu"`
 
-	// Serverless instance status. Valid values:
-	// resume
-	// pause
+	// <p>serverless instance status, available values:<br>resume<br>pause</p>
 	ServerlessStatus *string `json:"ServerlessStatus,omitnil,omitempty" name:"ServerlessStatus"`
 
-	// Prepayment storage Id.
+	// <p>Prepayment storage Id</p>
 	StorageId *string `json:"StorageId,omitnil,omitempty" name:"StorageId"`
 
-	// Storage billing mode
+	// <p>Storage billing type</p>
 	StoragePayMode *int64 `json:"StoragePayMode,omitnil,omitempty" name:"StoragePayMode"`
 
-	// Physical zone
+	// <p>Physical zone</p>
 	PhysicalZone *string `json:"PhysicalZone,omitnil,omitempty" name:"PhysicalZone"`
 
-	// Business type.
+	// <p>Business type</p>
 	BusinessType *string `json:"BusinessType,omitnil,omitempty" name:"BusinessType"`
 
-	// Task
+	// <p>Task</p>
 	Tasks []*ObjectTask `json:"Tasks,omitnil,omitempty" name:"Tasks"`
 
-	// Whether to freeze.
+	// <p>Whether to freeze</p>
 	IsFreeze *string `json:"IsFreeze,omitnil,omitempty" name:"IsFreeze"`
 
-	// The resource tag
+	// <p>Resource tag</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ResourceTags []*Tag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-	// Primary AZ.
+	// <p>Primary AZ</p>
 	MasterZone *string `json:"MasterZone,omitnil,omitempty" name:"MasterZone"`
 
-	// Replica AZ
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Standby availability zone</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SlaveZones []*string `json:"SlaveZones,omitnil,omitempty" name:"SlaveZones"`
 
-	// Network information of the instance.
+	// <p>Instance network info</p>
 	InstanceNetInfo []*InstanceNetInfo `json:"InstanceNetInfo,omitnil,omitempty" name:"InstanceNetInfo"`
 
-	// Information of the resource pack bound to an instance when `packageType` is `CCU`. Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Instance bind resource package info (only return compute resource package, packageType=CCU)</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ResourcePackages []*ResourcePackage `json:"ResourcePackages,omitnil,omitempty" name:"ResourcePackages"`
 
-	// Specifies the instance index form. valid values include mixedRowColumn (row and column hybrid storage) and onlyRowIndex (row-only storage).
+	// <p>Instance index form, available values [mixedRowColumn (hybrid row-column storage), onlyRowIndex (row storage only)]</p>
 	InstanceIndexMode *string `json:"InstanceIndexMode,omitnil,omitempty" name:"InstanceIndexMode"`
 
-	// Supported capabilities of the existing instance.
+	// <p>Supported capabilities of the current instance</p>
 	InstanceAbility *InstanceAbility `json:"InstanceAbility,omitnil,omitempty" name:"InstanceAbility"`
 
-	// Instance machine type.
+	// <p>Instance Machine Type</p><ol><li>common, universal type.</li><li>exclusive, dedicated.</li></ol>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// Specifies the instance storage type.
+	// <p>Instance storage type</p>
 	InstanceStorageType *string `json:"InstanceStorageType,omitnil,omitempty" name:"InstanceStorageType"`
 
-	// Unknown field.
+	// <p>Unknown field</p>
 	CynosVersionTag *string `json:"CynosVersionTag,omitnil,omitempty" name:"CynosVersionTag"`
 
-	// Specifies the node information of libradb.
+	// <p>libradb node information</p>
 	NodeList []*string `json:"NodeList,omitnil,omitempty" name:"NodeList"`
+
+	// <p>Unique ID of the global database</p>
+	GdnId *string `json:"GdnId,omitnil,omitempty" name:"GdnId"`
 }
 
 type CynosdbInstanceDetail struct {
-	// User `Uin`
+	// <p>User Uin</p>
 	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
 
-	// User `AppId`
+	// <p>User AppId</p>
 	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Cluster name
+	// <p>Cluster name.</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Instance ID
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name
+	// <p>Instance name</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Project ID
+	// <p>Project ID</p>
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Region
+	// <p>Region</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// AZ
+	// <p>AZ.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Instance status
+	// <p>Instance status<br>creating: Creating<br>running: Running<br>isolating: Isolation<br>isolated: Isolated<br>activating: Recovering<br>offlining: Offline<br>offlined: Offline</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Instance status description
+	// <p>Status description in Chinese of the instance</p>
 	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
 
-	// Serverless instance status. Valid values:
-	// resume
-	// pause
+	// <p>Status of the serverless instance. Possible value:<br>resume<br>pause</p>
 	ServerlessStatus *string `json:"ServerlessStatus,omitnil,omitempty" name:"ServerlessStatus"`
 
-	// Database type
+	// <p>Database type.</p>
 	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
 
-	// Database version
+	// <p>Database version</p>
 	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
 
-	// Number of CPU cores
+	// <p>Cpu, unit: cores</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Memory in GB
+	// <p>Memory, unit: GB</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Storage capacity in GB
+	// <p>Stored amount, unit: GB</p>
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
-	// Instance type
+	// <p>Instance type</p>
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Current instance role
+	// <p>Current instance role</p>
 	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 
-	// Update time
+	// <p>Update time.</p>
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Creation time
+	// <p>Creation time.</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Billing mode
+	// <p>Payment mode</p>
 	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Instance expiration time
+	// <p>Instance expiration time</p>
 	PeriodEndTime *string `json:"PeriodEndTime,omitnil,omitempty" name:"PeriodEndTime"`
 
-	// Network type
+	// <p>Network type.</p>
 	NetType *int64 `json:"NetType,omitnil,omitempty" name:"NetType"`
 
-	// VPC ID
+	// <p>VPC network ID</p>
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID
+	// <p>Subnet ID.</p>
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Private IP of instance
+	// <p>Instance private IP address</p>
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-	// Private port of instance
+	// <p>Instance Intranet Port</p>
 	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 
-	// Public domain name of instance
+	// <p>Instance public network domain name</p>
 	WanDomain *string `json:"WanDomain,omitnil,omitempty" name:"WanDomain"`
 
-	// Character set
+	// <p>Character set</p>
 	Charset *string `json:"Charset,omitnil,omitempty" name:"Charset"`
 
-	// TDSQL-C kernel version
+	// <p>Cynos kernel version</p>
 	CynosVersion *string `json:"CynosVersion,omitnil,omitempty" name:"CynosVersion"`
 
-	// Renewal flag
+	// <p>Renewal flag</p>
 	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
-	// The minimum number of CPU cores for a serverless instance
+	// <p>serverless instance cpu minimum</p>
 	MinCpu *float64 `json:"MinCpu,omitnil,omitempty" name:"MinCpu"`
 
-	// The maximum number of CPU cores for a serverless instance
+	// <p>cpu cap of the serverless instance</p>
 	MaxCpu *float64 `json:"MaxCpu,omitnil,omitempty" name:"MaxCpu"`
 
-	// Db type: <li>NORMAL</li> <li>SERVERLESS</li>.
+	// <p>Db type:<li>NORMAL</li><li>SERVERLESS</li></p>
 	DbMode *string `json:"DbMode,omitnil,omitempty" name:"DbMode"`
+
+	// <p>Cluster read/write instance Availability Zone</p>
+	MasterZone *string `json:"MasterZone,omitnil,omitempty" name:"MasterZone"`
 }
 
 type CynosdbInstanceGrp struct {
@@ -4374,6 +5125,38 @@ type CynosdbInstanceGrp struct {
 	NetServiceId *int64 `json:"NetServiceId,omitnil,omitempty" name:"NetServiceId"`
 }
 
+type DataSourceItem struct {
+	// Source instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Source cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Source database type
+	DBType *string `json:"DBType,omitnil,omitempty" name:"DBType"`
+
+	// Source database IP
+	IP *string `json:"IP,omitnil,omitempty" name:"IP"`
+
+	// Source database port
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Source instance region
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Source instance availability zone
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Source main account uin
+	SrcUin *string `json:"SrcUin,omitnil,omitempty" name:"SrcUin"`
+
+	// Account type
+	AccountMode *string `json:"AccountMode,omitnil,omitempty" name:"AccountMode"`
+
+	// sync task status
+	ReplicationJobStatus *string `json:"ReplicationJobStatus,omitnil,omitempty" name:"ReplicationJobStatus"`
+}
+
 type DatabasePrivileges struct {
 	// Database.
 	Db *string `json:"Db,omitnil,omitempty" name:"Db"`
@@ -4426,6 +5209,14 @@ type DbInfo struct {
 
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+}
+
+type DbTable struct {
+	// Database name.
+	Db *string `json:"Db,omitnil,omitempty" name:"Db"`
+
+	// Database table name
+	TableName *string `json:"TableName,omitnil,omitempty" name:"TableName"`
 }
 
 // Predefined struct for user
@@ -4612,6 +5403,70 @@ func (r *DeleteBackupResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteBackupVaultRequestParams struct {
+	// Backup safe ID. The length must be greater than 0.
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Backup file ID list to be deleted, cannot be empty
+	BackupIds []*int64 `json:"BackupIds,omitnil,omitempty" name:"BackupIds"`
+}
+
+type DeleteBackupVaultRequest struct {
+	*tchttp.BaseRequest
+	
+	// Backup safe ID. The length must be greater than 0.
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Backup file ID list to be deleted, cannot be empty
+	BackupIds []*int64 `json:"BackupIds,omitnil,omitempty" name:"BackupIds"`
+}
+
+func (r *DeleteBackupVaultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBackupVaultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VaultId")
+	delete(f, "BackupIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteBackupVaultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteBackupVaultResponseParams struct {
+	// task ID, for querying task execution status
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteBackupVaultResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteBackupVaultResponseParams `json:"Response"`
+}
+
+func (r *DeleteBackupVaultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBackupVaultResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteCLSDeliveryRequestParams struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -4694,7 +5549,7 @@ type DeleteClusterDatabaseRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Database Name
+
 	DbNames []*string `json:"DbNames,omitnil,omitempty" name:"DbNames"`
 }
 
@@ -4704,7 +5559,6 @@ type DeleteClusterDatabaseRequest struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Database Name
 	DbNames []*string `json:"DbNames,omitnil,omitempty" name:"DbNames"`
 }
 
@@ -4747,6 +5601,70 @@ func (r *DeleteClusterDatabaseResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteClusterDatabaseResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteClusterSaveBackupRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Reserved backup file ID. recommended.
+	SaveBackupId *int64 `json:"SaveBackupId,omitnil,omitempty" name:"SaveBackupId"`
+}
+
+type DeleteClusterSaveBackupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Reserved backup file ID. recommended.
+	SaveBackupId *int64 `json:"SaveBackupId,omitnil,omitempty" name:"SaveBackupId"`
+}
+
+func (r *DeleteClusterSaveBackupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteClusterSaveBackupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "SaveBackupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteClusterSaveBackupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteClusterSaveBackupResponseParams struct {
+	// Task ID.
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteClusterSaveBackupResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteClusterSaveBackupResponseParams `json:"Response"`
+}
+
+func (r *DeleteClusterSaveBackupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteClusterSaveBackupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4922,6 +5840,71 @@ func (r *DeleteParamTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DeleteVaultTask struct {
+	// Safe ID
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Task ID.
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+// Predefined struct for user
+type DeleteVaultsRequestParams struct {
+	// List of backup safe IDs to be deleted, cannot be empty. The safe must have all files cleared.
+	VaultIds []*string `json:"VaultIds,omitnil,omitempty" name:"VaultIds"`
+}
+
+type DeleteVaultsRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of backup safe IDs to be deleted, cannot be empty. The safe must have all files cleared.
+	VaultIds []*string `json:"VaultIds,omitnil,omitempty" name:"VaultIds"`
+}
+
+func (r *DeleteVaultsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVaultsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VaultIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteVaultsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteVaultsResponseParams struct {
+	// Delete task list. Each safe corresponds to a task.
+	VaultTask []*DeleteVaultTask `json:"VaultTask,omitnil,omitempty" name:"VaultTask"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteVaultsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteVaultsResponseParams `json:"Response"`
+}
+
+func (r *DeleteVaultsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVaultsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DeliverSummary struct {
 	// Select the delivery type, storage class, message channel.
 	DeliverType *string `json:"DeliverType,omitnil,omitempty" name:"DeliverType"`
@@ -4934,6 +5917,9 @@ type DeliverSummary struct {
 
 	// Specifies the name of the sender.
 	DeliverConsumerName *string `json:"DeliverConsumerName,omitnil,omitempty" name:"DeliverConsumerName"`
+
+	// Exception error in delivery
+	DeliverError *string `json:"DeliverError,omitnil,omitempty" name:"DeliverError"`
 }
 
 // Predefined struct for user
@@ -5366,14 +6352,14 @@ func (r *DescribeAuditRuleWithInstanceIdsResponse) FromJsonString(s string) erro
 
 // Predefined struct for user
 type DescribeBackupConfigRequestParams struct {
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 type DescribeBackupConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
@@ -5398,26 +6384,33 @@ func (r *DescribeBackupConfigRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBackupConfigResponseParams struct {
-	// Full backup start time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively
+	// <p>Indicates the full backup start time, [0-24*3600]. For example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.</p>
 	BackupTimeBeg *uint64 `json:"BackupTimeBeg,omitnil,omitempty" name:"BackupTimeBeg"`
 
-	// Full backup end time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively
+	// <p>Indicates the full backup start time, [0-24*3600]. For example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.</p>
 	BackupTimeEnd *uint64 `json:"BackupTimeEnd,omitnil,omitempty" name:"BackupTimeEnd"`
 
-	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800
+	// <p>Indicates the backup retention period in seconds. Backups longer than this time will be cleaned up. 7 days is represented as 3600<em>24</em>7=604800.</p>
 	ReserveDuration *uint64 `json:"ReserveDuration,omitnil,omitempty" name:"ReserveDuration"`
 
-	// Backup frequency. an array with a length of 7, indicating the backup methods corresponding to monday to sunday respectively. full represents full backup, and increment represents incremental backup.
+	// <p>Backup frequency, an array of length 7, corresponding to Monday to Sunday backup method, full-full backup, increment-incremental backup</p>
 	BackupFreq []*string `json:"BackupFreq,omitnil,omitempty" name:"BackupFreq"`
 
-	// Backup method. specifies the method of backup. valid values: logic (indicates logical backup), snapshot (indicates snapshot backup).
+	// <p>Backup method, logic-logical backup, snapshot-snapshot backup</p>
 	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
 
-	// Cross-Regional logical backup configuration modification time.
+	// <p>Cross-regional logical backup configuration modification time</p>
 	LogicCrossRegionsConfigUpdateTime *string `json:"LogicCrossRegionsConfigUpdateTime,omitnil,omitempty" name:"LogicCrossRegionsConfigUpdateTime"`
 
-	// Automatic logical backup configuration.
+	// <p>Automatic logical backup configuration</p>
 	LogicBackupConfig *LogicBackupConfigInfo `json:"LogicBackupConfig,omitnil,omitempty" name:"LogicBackupConfig"`
+
+	// <p>Second-level snapshot backup configuration information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SnapshotSecondaryBackupConfig *BackupConfigInfo `json:"SnapshotSecondaryBackupConfig,omitnil,omitempty" name:"SnapshotSecondaryBackupConfig"`
+
+	// <p>Sparse backup configuration</p>
+	SparseBackupConfig *SparseBackupConfigRsp `json:"SparseBackupConfig,omitnil,omitempty" name:"SparseBackupConfig"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -5643,6 +6636,140 @@ func (r *DescribeBackupDownloadUserRestrictionResponse) FromJsonString(s string)
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeBackupListByVaultItem struct {
+	// <p>Cluster ID.</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Cluster name</p>
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// <p>Backup information</p>
+	BackupFileInfo *BackupFileInfo `json:"BackupFileInfo,omitnil,omitempty" name:"BackupFileInfo"`
+}
+
+// Predefined struct for user
+type DescribeBackupListByVaultRequestParams struct {
+	// Safe ID, length must be greater than 0
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Backup file ID list for filtering specific backups
+	BackupIds []*int64 `json:"BackupIds,omitnil,omitempty" name:"BackupIds"`
+
+	// Cluster ID for filtering backups of a specific cluster
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Backup name list for exact matching filter criteria
+	BackupNames []*string `json:"BackupNames,omitnil,omitempty" name:"BackupNames"`
+
+	// Filename list for exact matching filter
+	FileNames []*string `json:"FileNames,omitnil,omitempty" name:"FileNames"`
+
+	// Number of pages, range (0,100], default 100
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset. Range: [0, INF). Default is 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field. Available values: VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime. Default: createTime.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sorting method, available values: desc, asc, DESC, ASC, default desc
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+
+	// Status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+type DescribeBackupListByVaultRequest struct {
+	*tchttp.BaseRequest
+	
+	// Safe ID, length must be greater than 0
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Backup file ID list for filtering specific backups
+	BackupIds []*int64 `json:"BackupIds,omitnil,omitempty" name:"BackupIds"`
+
+	// Cluster ID for filtering backups of a specific cluster
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Backup name list for exact matching filter criteria
+	BackupNames []*string `json:"BackupNames,omitnil,omitempty" name:"BackupNames"`
+
+	// Filename list for exact matching filter
+	FileNames []*string `json:"FileNames,omitnil,omitempty" name:"FileNames"`
+
+	// Number of pages, range (0,100], default 100
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset. Range: [0, INF). Default is 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field. Available values: VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime. Default: createTime.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sorting method, available values: desc, asc, DESC, ASC, default desc
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+
+	// Status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+func (r *DescribeBackupListByVaultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupListByVaultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VaultId")
+	delete(f, "BackupIds")
+	delete(f, "ClusterId")
+	delete(f, "BackupNames")
+	delete(f, "FileNames")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	delete(f, "Status")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupListByVaultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBackupListByVaultResponseParams struct {
+	// Total files of backup that meets the conditions
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Backup file list
+	BackupList []*DescribeBackupListByVaultItem `json:"BackupList,omitnil,omitempty" name:"BackupList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeBackupListByVaultResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBackupListByVaultResponseParams `json:"Response"`
+}
+
+func (r *DescribeBackupListByVaultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupListByVaultResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 // Predefined struct for user
 type DescribeBackupListRequestParams struct {
 	// Cluster ID
@@ -5667,7 +6794,7 @@ type DescribeBackupListRequestParams struct {
 	// Back mode. Valid values: `auto` (automatic backup), `manual` (manual backup)
 	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
 
-	// Snapshot type. Optional values: full, full backup; increment, incremental backup
+
 	SnapShotType *string `json:"SnapShotType,omitnil,omitempty" name:"SnapShotType"`
 
 	// Backup start time
@@ -5676,7 +6803,7 @@ type DescribeBackupListRequestParams struct {
 	// Backup end time
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Backup file name, fuzzy search
+
 	FileNames []*string `json:"FileNames,omitnil,omitempty" name:"FileNames"`
 
 	// Backup alias, which supports fuzzy query.
@@ -5684,6 +6811,15 @@ type DescribeBackupListRequestParams struct {
 
 	// ID list of the snapshot backup
 	SnapshotIdList []*int64 `json:"SnapshotIdList,omitnil,omitempty" name:"SnapshotIdList"`
+
+
+	BackupRegion *string `json:"BackupRegion,omitnil,omitempty" name:"BackupRegion"`
+
+
+	IsCrossRegionsBackup *string `json:"IsCrossRegionsBackup,omitnil,omitempty" name:"IsCrossRegionsBackup"`
+
+	// Status you want to query
+	BackupStatus []*string `json:"BackupStatus,omitnil,omitempty" name:"BackupStatus"`
 }
 
 type DescribeBackupListRequest struct {
@@ -5711,7 +6847,6 @@ type DescribeBackupListRequest struct {
 	// Back mode. Valid values: `auto` (automatic backup), `manual` (manual backup)
 	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
 
-	// Snapshot type. Optional values: full, full backup; increment, incremental backup
 	SnapShotType *string `json:"SnapShotType,omitnil,omitempty" name:"SnapShotType"`
 
 	// Backup start time
@@ -5720,7 +6855,6 @@ type DescribeBackupListRequest struct {
 	// Backup end time
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Backup file name, fuzzy search
 	FileNames []*string `json:"FileNames,omitnil,omitempty" name:"FileNames"`
 
 	// Backup alias, which supports fuzzy query.
@@ -5728,6 +6862,13 @@ type DescribeBackupListRequest struct {
 
 	// ID list of the snapshot backup
 	SnapshotIdList []*int64 `json:"SnapshotIdList,omitnil,omitempty" name:"SnapshotIdList"`
+
+	BackupRegion *string `json:"BackupRegion,omitnil,omitempty" name:"BackupRegion"`
+
+	IsCrossRegionsBackup *string `json:"IsCrossRegionsBackup,omitnil,omitempty" name:"IsCrossRegionsBackup"`
+
+	// Status you want to query
+	BackupStatus []*string `json:"BackupStatus,omitnil,omitempty" name:"BackupStatus"`
 }
 
 func (r *DescribeBackupListRequest) ToJsonString() string {
@@ -5755,6 +6896,9 @@ func (r *DescribeBackupListRequest) FromJsonString(s string) error {
 	delete(f, "FileNames")
 	delete(f, "BackupNames")
 	delete(f, "SnapshotIdList")
+	delete(f, "BackupRegion")
+	delete(f, "IsCrossRegionsBackup")
+	delete(f, "BackupStatus")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupListRequest has unknown keys!", "")
 	}
@@ -5920,6 +7064,140 @@ func (r *DescribeBinlogDownloadUrlResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeBinlogListByVaultItem struct {
+	// <p>Cluster ID.</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Cluster name.</p>
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// <p>Binlog file information</p>
+	BinlogFileInfo *BinlogItem `json:"BinlogFileInfo,omitnil,omitempty" name:"BinlogFileInfo"`
+}
+
+// Predefined struct for user
+type DescribeBinlogListByVaultRequestParams struct {
+	// Safe ID
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// List of the backup IDs.
+	BackupIds []*int64 `json:"BackupIds,omitnil,omitempty" name:"BackupIds"`
+
+	// Backup name list
+	BackupNames []*string `json:"BackupNames,omitnil,omitempty" name:"BackupNames"`
+
+	// Filename list
+	FileNames []*string `json:"FileNames,omitnil,omitempty" name:"FileNames"`
+
+	// Number of returned results, range (0,100], default 100
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Range: [0, INF). Default is 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field. Available values: VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime. Default: createTime.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sorting method, available values: desc, asc, DESC, ASC, default desc
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+
+	// Status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+type DescribeBinlogListByVaultRequest struct {
+	*tchttp.BaseRequest
+	
+	// Safe ID
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// List of the backup IDs.
+	BackupIds []*int64 `json:"BackupIds,omitnil,omitempty" name:"BackupIds"`
+
+	// Backup name list
+	BackupNames []*string `json:"BackupNames,omitnil,omitempty" name:"BackupNames"`
+
+	// Filename list
+	FileNames []*string `json:"FileNames,omitnil,omitempty" name:"FileNames"`
+
+	// Number of returned results, range (0,100], default 100
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Range: [0, INF). Default is 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field. Available values: VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime. Default: createTime.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sorting method, available values: desc, asc, DESC, ASC, default desc
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+
+	// Status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+func (r *DescribeBinlogListByVaultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBinlogListByVaultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VaultId")
+	delete(f, "ClusterId")
+	delete(f, "BackupIds")
+	delete(f, "BackupNames")
+	delete(f, "FileNames")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	delete(f, "Status")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBinlogListByVaultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBinlogListByVaultResponseParams struct {
+	// Total number.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Binlog file list
+	BinlogList []*DescribeBinlogListByVaultItem `json:"BinlogList,omitnil,omitempty" name:"BinlogList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeBinlogListByVaultResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBinlogListByVaultResponseParams `json:"Response"`
+}
+
+func (r *DescribeBinlogListByVaultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBinlogListByVaultResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 // Predefined struct for user
 type DescribeBinlogSaveDaysRequestParams struct {
 	// Cluster ID
@@ -5991,7 +7269,7 @@ type DescribeBinlogsRequestParams struct {
 	// Offset
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Maximum number
+	// Limit on the number of records. The default value is 20.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -6010,7 +7288,7 @@ type DescribeBinlogsRequest struct {
 	// Offset
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Maximum number
+	// Limit on the number of records. The default value is 20.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -6751,6 +8029,12 @@ type DescribeClusterTransparentEncryptInfoResponseParams struct {
 	// Encryption key region.
 	KeyRegion *string `json:"KeyRegion,omitnil,omitempty" name:"KeyRegion"`
 
+	// Key type
+	KeyType *string `json:"KeyType,omitnil,omitempty" name:"KeyType"`
+
+	// To be enabled global encryption
+	IsOpenGlobalEncryption *bool `json:"IsOpenGlobalEncryption,omitnil,omitempty" name:"IsOpenGlobalEncryption"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -6881,7 +8165,7 @@ type DescribeDBSecurityGroupsRequestParams struct {
 	// Deprecated: InstanceId is deprecated.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Specifies that the instance group ID must be provided by selecting either InstanceId or InstanceGroupId.
+	// Instance group ID, which can be obtained through the [DescribeClusterInstanceGroups](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1) API.
 	InstanceGroupId *string `json:"InstanceGroupId,omitnil,omitempty" name:"InstanceGroupId"`
 }
 
@@ -6891,7 +8175,7 @@ type DescribeDBSecurityGroupsRequest struct {
 	// Specifies that the instance ID must be provided by selecting either InstanceId or InstanceGroupId.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Specifies that the instance group ID must be provided by selecting either InstanceId or InstanceGroupId.
+	// Instance group ID, which can be obtained through the [DescribeClusterInstanceGroups](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1) API.
 	InstanceGroupId *string `json:"InstanceGroupId,omitnil,omitempty" name:"InstanceGroupId"`
 }
 
@@ -7147,7 +8431,7 @@ type DescribeInstanceErrorLogsRequestParams struct {
 	// Log level, which supports combo search by multiple levels. Valid values: `error`, `warning`, `note`.
 	LogLevels []*string `json:"LogLevels,omitnil,omitempty" name:"LogLevels"`
 
-	// Keywords, supports fuzzy search
+
 	KeyWords []*string `json:"KeyWords,omitnil,omitempty" name:"KeyWords"`
 }
 
@@ -7178,7 +8462,6 @@ type DescribeInstanceErrorLogsRequest struct {
 	// Log level, which supports combo search by multiple levels. Valid values: `error`, `warning`, `note`.
 	LogLevels []*string `json:"LogLevels,omitnil,omitempty" name:"LogLevels"`
 
-	// Keywords, supports fuzzy search
 	KeyWords []*string `json:"KeyWords,omitnil,omitempty" name:"KeyWords"`
 }
 
@@ -7310,74 +8593,74 @@ func (r *DescribeInstanceParamsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceSlowQueriesRequestParams struct {
-	// Instance ID
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Transaction start time
+	// <p>Earliest transaction start time.</p>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Transaction end time
+	// <p>Latest transaction start time.</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Maximum number
+	// <p>Limit.</p><p>It is recommended to control the limit size. Large limits may cause truncation due to the platform's size limit for return results.</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset
+	// <p>Offset.</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Username
+	// <p>Username.</p>
 	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
-	// Client host
+	// <p>Client host.</p>
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
-	// Database name
+	// <p>Database name.</p>
 	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
 
-	// Sorting field. Valid values: QueryTime, LockTime, RowsExamined, RowsSent.
+	// <p>Sorting field.</p><p>Enumeration values:</p><ul><li>QueryTime: sorts by the total execution time of the SQL statements.</li><li>LockTime: sorts by the time consumed by the SQL statements waiting for locks (such as table locks or row locks).</li><li>RowsExamined: sorts by the number of rows scanned during SQL statement execution.</li><li>RowsSent: sorts by the number of result rows returned to the client for the SQL statements.</li><li>Timestamp: sorts by the timestamp when the slow query statement occurs.</li></ul>
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Sorting order. Valid values: asc, desc.
+	// <p>Sorting type. Valid values: asc and desc.</p>
 	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 
-	// sql statement.
+	// <p>SQL statement.</p>
 	SqlText *string `json:"SqlText,omitnil,omitempty" name:"SqlText"`
 }
 
 type DescribeInstanceSlowQueriesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Transaction start time
+	// <p>Earliest transaction start time.</p>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Transaction end time
+	// <p>Latest transaction start time.</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Maximum number
+	// <p>Limit.</p><p>It is recommended to control the limit size. Large limits may cause truncation due to the platform's size limit for return results.</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset
+	// <p>Offset.</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Username
+	// <p>Username.</p>
 	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
-	// Client host
+	// <p>Client host.</p>
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
-	// Database name
+	// <p>Database name.</p>
 	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
 
-	// Sorting field. Valid values: QueryTime, LockTime, RowsExamined, RowsSent.
+	// <p>Sorting field.</p><p>Enumeration values:</p><ul><li>QueryTime: sorts by the total execution time of the SQL statements.</li><li>LockTime: sorts by the time consumed by the SQL statements waiting for locks (such as table locks or row locks).</li><li>RowsExamined: sorts by the number of rows scanned during SQL statement execution.</li><li>RowsSent: sorts by the number of result rows returned to the client for the SQL statements.</li><li>Timestamp: sorts by the timestamp when the slow query statement occurs.</li></ul>
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Sorting order. Valid values: asc, desc.
+	// <p>Sorting type. Valid values: asc and desc.</p>
 	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 
-	// sql statement.
+	// <p>SQL statement.</p>
 	SqlText *string `json:"SqlText,omitnil,omitempty" name:"SqlText"`
 }
 
@@ -7412,10 +8695,10 @@ func (r *DescribeInstanceSlowQueriesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstanceSlowQueriesResponseParams struct {
-	// Total number
+	// <p>Total quantity.</p>
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Slow query record
+	// <p>Slow query records.</p>
 	SlowQueries []*SlowQueriesItem `json:"SlowQueries,omitnil,omitempty" name:"SlowQueries"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -7435,6 +8718,88 @@ func (r *DescribeInstanceSlowQueriesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeInstanceSlowQueriesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeInstanceSpecsByOperationTypeRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Operation type.
+	// Add new RO instance
+	// modifyInstance: Modify configuration
+	OperationType *string `json:"OperationType,omitnil,omitempty" name:"OperationType"`
+
+	// Instance ID, required when querying configuration modification specifications
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Instance Machine Type
+	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
+}
+
+type DescribeInstanceSpecsByOperationTypeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Operation type.
+	// Add new RO instance
+	// modifyInstance: Modify configuration
+	OperationType *string `json:"OperationType,omitnil,omitempty" name:"OperationType"`
+
+	// Instance ID, required when querying configuration modification specifications
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Instance Machine Type
+	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
+}
+
+func (r *DescribeInstanceSpecsByOperationTypeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceSpecsByOperationTypeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "OperationType")
+	delete(f, "InstanceId")
+	delete(f, "DeviceType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceSpecsByOperationTypeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeInstanceSpecsByOperationTypeResponseParams struct {
+	// instance specifications
+	InstanceSpecSet []*InstanceSpec `json:"InstanceSpecSet,omitnil,omitempty" name:"InstanceSpecSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeInstanceSpecsByOperationTypeResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeInstanceSpecsByOperationTypeResponseParams `json:"Response"`
+}
+
+func (r *DescribeInstanceSpecsByOperationTypeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceSpecsByOperationTypeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7540,6 +8905,9 @@ type DescribeInstancesRequestParams struct {
 
 	// Instance ID list
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+
+	// Cluster type, value ranges from <li>CYNOSDB: transactional cluster</li><li>LIBRADB: analysis cluster</li><li>ALL: all</li>, default to ALL.
+	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
 }
 
 type DescribeInstancesRequest struct {
@@ -7579,6 +8947,9 @@ type DescribeInstancesRequest struct {
 
 	// Instance ID list
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+
+	// Cluster type, value ranges from <li>CYNOSDB: transactional cluster</li><li>LIBRADB: analysis cluster</li><li>ALL: all</li>, default to ALL.
+	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
 }
 
 func (r *DescribeInstancesRequest) ToJsonString() string {
@@ -7601,6 +8972,7 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 	delete(f, "DbType")
 	delete(f, "Status")
 	delete(f, "InstanceIds")
+	delete(f, "ClusterType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesRequest has unknown keys!", "")
 	}
@@ -8141,6 +9513,892 @@ func (r *DescribeLibraDBClusterAccountsResponse) FromJsonString(s string) error 
 }
 
 // Predefined struct for user
+type DescribeLibraDBClusterAutoMapRuleRequestParams struct {
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Analyze instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DescribeLibraDBClusterAutoMapRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Analyze instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeLibraDBClusterAutoMapRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBClusterAutoMapRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLibraDBClusterAutoMapRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBClusterAutoMapRuleResponseParams struct {
+	// Advanced mapping rule
+	AutoMapRules []*AutoMapRule `json:"AutoMapRules,omitnil,omitempty" name:"AutoMapRules"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeLibraDBClusterAutoMapRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLibraDBClusterAutoMapRuleResponseParams `json:"Response"`
+}
+
+func (r *DescribeLibraDBClusterAutoMapRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBClusterAutoMapRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBClusterDetailRequestParams struct {
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Whether to get more server information, available values yes no
+	GetServerInfo *string `json:"GetServerInfo,omitnil,omitempty" name:"GetServerInfo"`
+}
+
+type DescribeLibraDBClusterDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Whether to get more server information, available values yes no
+	GetServerInfo *string `json:"GetServerInfo,omitnil,omitempty" name:"GetServerInfo"`
+}
+
+func (r *DescribeLibraDBClusterDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBClusterDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "GetServerInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLibraDBClusterDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBClusterDetailResponseParams struct {
+	// Cluster information.
+	Detail *LibraDBClusterDetail `json:"Detail,omitnil,omitempty" name:"Detail"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeLibraDBClusterDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLibraDBClusterDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeLibraDBClusterDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBClusterDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBClusterTableMappingRequestParams struct {
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Analysis engine instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Node ID
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+
+	// Offset.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Page history limit
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Source schema list
+	SrcSchemas []*string `json:"SrcSchemas,omitnil,omitempty" name:"SrcSchemas"`
+
+	// Source table list
+	SrcTableName []*string `json:"SrcTableName,omitnil,omitempty" name:"SrcTableName"`
+
+	// Status list
+	StatusList []*string `json:"StatusList,omitnil,omitempty" name:"StatusList"`
+
+	// Map database name
+	MapSchemas []*string `json:"MapSchemas,omitnil,omitempty" name:"MapSchemas"`
+
+	// Mapping table name
+	MapTableName []*string `json:"MapTableName,omitnil,omitempty" name:"MapTableName"`
+
+	// Query records where the database name is not null
+	MapSchemaNotEmpty *bool `json:"MapSchemaNotEmpty,omitnil,omitempty" name:"MapSchemaNotEmpty"`
+
+	// Query records where the mapping table name is not null
+	MapTableNameNotEmpty *bool `json:"MapTableNameNotEmpty,omitnil,omitempty" name:"MapTableNameNotEmpty"`
+}
+
+type DescribeLibraDBClusterTableMappingRequest struct {
+	*tchttp.BaseRequest
+	
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Analysis engine instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Node ID
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+
+	// Offset.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Page history limit
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Source schema list
+	SrcSchemas []*string `json:"SrcSchemas,omitnil,omitempty" name:"SrcSchemas"`
+
+	// Source table list
+	SrcTableName []*string `json:"SrcTableName,omitnil,omitempty" name:"SrcTableName"`
+
+	// Status list
+	StatusList []*string `json:"StatusList,omitnil,omitempty" name:"StatusList"`
+
+	// Map database name
+	MapSchemas []*string `json:"MapSchemas,omitnil,omitempty" name:"MapSchemas"`
+
+	// Mapping table name
+	MapTableName []*string `json:"MapTableName,omitnil,omitempty" name:"MapTableName"`
+
+	// Query records where the database name is not null
+	MapSchemaNotEmpty *bool `json:"MapSchemaNotEmpty,omitnil,omitempty" name:"MapSchemaNotEmpty"`
+
+	// Query records where the mapping table name is not null
+	MapTableNameNotEmpty *bool `json:"MapTableNameNotEmpty,omitnil,omitempty" name:"MapTableNameNotEmpty"`
+}
+
+func (r *DescribeLibraDBClusterTableMappingRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBClusterTableMappingRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "InstanceId")
+	delete(f, "NodeId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "SrcSchemas")
+	delete(f, "SrcTableName")
+	delete(f, "StatusList")
+	delete(f, "MapSchemas")
+	delete(f, "MapTableName")
+	delete(f, "MapSchemaNotEmpty")
+	delete(f, "MapTableNameNotEmpty")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLibraDBClusterTableMappingRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBClusterTableMappingResponseParams struct {
+	// Total number of records
+	TotalCnt *int64 `json:"TotalCnt,omitnil,omitempty" name:"TotalCnt"`
+
+	// Database mapping info
+	TableMappings []*TableMappingObject `json:"TableMappings,omitnil,omitempty" name:"TableMappings"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeLibraDBClusterTableMappingResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLibraDBClusterTableMappingResponseParams `json:"Response"`
+}
+
+func (r *DescribeLibraDBClusterTableMappingResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBClusterTableMappingResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBClustersRequestParams struct {
+	// Limit
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sort method
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+
+	// Filter criteria.
+	Filters []*QueryFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeLibraDBClustersRequest struct {
+	*tchttp.BaseRequest
+	
+	// Limit
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sort method
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+
+	// Filter criteria.
+	Filters []*QueryFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeLibraDBClustersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBClustersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLibraDBClustersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBClustersResponseParams struct {
+	// Cluster information.
+	ClusterSet []*LibraDBClusterSet `json:"ClusterSet,omitnil,omitempty" name:"ClusterSet"`
+
+	// Number of clusters
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeLibraDBClustersResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLibraDBClustersResponseParams `json:"Response"`
+}
+
+func (r *DescribeLibraDBClustersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBClustersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBDataSourceRequestParams struct {
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Read-only analysis engine instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DescribeLibraDBDataSourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Read-only analysis engine instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeLibraDBDataSourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBDataSourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLibraDBDataSourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBDataSourceResponseParams struct {
+	// Source information list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DataSourceList []*DataSourceItem `json:"DataSourceList,omitnil,omitempty" name:"DataSourceList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeLibraDBDataSourceResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLibraDBDataSourceResponseParams `json:"Response"`
+}
+
+func (r *DescribeLibraDBDataSourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBDataSourceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBForwardConfigRequestParams struct {
+	// Read-only analysis engine instance id
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DescribeLibraDBForwardConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Read-only analysis engine instance id
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeLibraDBForwardConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBForwardConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLibraDBForwardConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBForwardConfigResponseParams struct {
+	// Whether to enable forwarding
+	ForwardMode *string `json:"ForwardMode,omitnil,omitempty" name:"ForwardMode"`
+
+	// Forwarding list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ForwardList []*ForwardInstanceInfo `json:"ForwardList,omitnil,omitempty" name:"ForwardList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeLibraDBForwardConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLibraDBForwardConfigResponseParams `json:"Response"`
+}
+
+func (r *DescribeLibraDBForwardConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBForwardConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBInstanceDetailRequestParams struct {
+	// <p>Cluster ID.</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Read-only analysis engine instance ID</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DescribeLibraDBInstanceDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Cluster ID.</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Read-only analysis engine instance ID</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeLibraDBInstanceDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBInstanceDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLibraDBInstanceDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBInstanceDetailResponseParams struct {
+	// <p>root account</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// <p>Account unique ID</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <p>Cluster ID.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Cluster name.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// <p>Instance ID.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Instance name.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// <p>Project ID.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// <p>Region</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// <p>AZ.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// <p>Instance status.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Status description</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
+
+	// <p>Libra analysis engine version</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LibraDBVersion *string `json:"LibraDBVersion,omitnil,omitempty" name:"LibraDBVersion"`
+
+	// <p>cpu cores</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
+
+	// <p>Memory size</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
+
+	// <p>Storage size</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
+
+	// <p>Storage type</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>Instance type</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// <p>Instance role</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
+
+	// <p>Update time.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// <p>Creation time.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Selling mode</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// <p>Start time</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PeriodStartTime *string `json:"PeriodStartTime,omitnil,omitempty" name:"PeriodStartTime"`
+
+	// <p>End time of sale</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PeriodEndTime *string `json:"PeriodEndTime,omitnil,omitempty" name:"PeriodEndTime"`
+
+	// <p>Renewal flag</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
+
+	// <p>Network type</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NetType *int64 `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// <p>VPC ID</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Subnet ID.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Virtual IP</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// <p>Port</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// <p>Instance network information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceNetInfo *InstanceNetInfo `json:"InstanceNetInfo,omitnil,omitempty" name:"InstanceNetInfo"`
+
+	// <p>Instance tag information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ResourceTags []*Tag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
+
+	// <p>Instance node information</p>
+	NodeInfo []*LibraDBNodeInfo `json:"NodeInfo,omitnil,omitempty" name:"NodeInfo"`
+
+	// <p>Number of instance nodes</p>
+	NodeCount *uint64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
+
+	// <p>Analyze the information after instance upgrade version</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AnalysisUpgradeVersionInfo *UpgradeAnalysisInstanceVersionInfo `json:"AnalysisUpgradeVersionInfo,omitnil,omitempty" name:"AnalysisUpgradeVersionInfo"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeLibraDBInstanceDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLibraDBInstanceDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeLibraDBInstanceDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBInstanceDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBInstanceSpecsRequestParams struct {
+
+}
+
+type DescribeLibraDBInstanceSpecsRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeLibraDBInstanceSpecsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBInstanceSpecsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLibraDBInstanceSpecsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBInstanceSpecsResponseParams struct {
+	// Instance specifications list in this region
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceSpecSet []*RegionInstanceSpecInfo `json:"InstanceSpecSet,omitnil,omitempty" name:"InstanceSpecSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeLibraDBInstanceSpecsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLibraDBInstanceSpecsResponseParams `json:"Response"`
+}
+
+func (r *DescribeLibraDBInstanceSpecsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBInstanceSpecsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBSlowLogsRequestParams struct {
+	// Read-only analysis engine instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Start time, 1753171200.
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time, 1753171200.
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Log items per page limit: 0-200.
+	Limit *string `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Log paginate, more than 0.
+	Offset *string `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Log sorting method, DESC - descending order, ASC - ascending order.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Log sorting condition.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Filter criteria
+	LogFilter []*LogFilter `json:"LogFilter,omitnil,omitempty" name:"LogFilter"`
+}
+
+type DescribeLibraDBSlowLogsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Read-only analysis engine instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Start time, 1753171200.
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time, 1753171200.
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Log items per page limit: 0-200.
+	Limit *string `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Log paginate, more than 0.
+	Offset *string `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Log sorting method, DESC - descending order, ASC - ascending order.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Log sorting condition.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Filter criteria
+	LogFilter []*LogFilter `json:"LogFilter,omitnil,omitempty" name:"LogFilter"`
+}
+
+func (r *DescribeLibraDBSlowLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBSlowLogsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Order")
+	delete(f, "OrderBy")
+	delete(f, "LogFilter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLibraDBSlowLogsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBSlowLogsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeLibraDBSlowLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLibraDBSlowLogsResponseParams `json:"Response"`
+}
+
+func (r *DescribeLibraDBSlowLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBSlowLogsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBVersionRequestParams struct {
+
+}
+
+type DescribeLibraDBVersionRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeLibraDBVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBVersionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLibraDBVersionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLibraDBVersionResponseParams struct {
+	// Version list
+	VersionList []*LibraDBVersion `json:"VersionList,omitnil,omitempty" name:"VersionList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeLibraDBVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLibraDBVersionResponseParams `json:"Response"`
+}
+
+func (r *DescribeLibraDBVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLibraDBVersionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeMaintainPeriodRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -8491,52 +10749,44 @@ func (r *DescribeProjectSecurityGroupsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProxiesRequestParams struct {
-	// Cluster ID (this parameter is required. for example, cynosdbmysql-2u2mh111).
+	// <p>Cluster ID (this parameter is required, such as cynosdbmysql-2u2mh111).</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Number of returned results. Default value: `20`. Maximum value: `100`,
+	// <p>Number of returned results, defaults to 20 with a maximum value of 100</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Record offset. Default value: `0`.
+	// <p>Record offset. Default value is 0</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Sorting field. Valid values:
-	// <li> CREATETIME: Creation time</li>
-	// <li> PERIODENDTIME: Expiration time</li>
+	// <p>Sorting field. Value ranges from...to...:</p><li>CREATETIME: Creation time</li><li>PERIODENDTIME: Expiration time</li>
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Sorting order. Valid values:
-	// <li> `ASC`: Ascending.</li>
-	// <li> `DESC`: Descending</li>
+	// <p>Sorting type. Value ranges from:</p><li> ASC: ascending order </li><li> DESC: sort in descending order </li>
 	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 
-	// Filter. If there are more than one filter, the logical relationship between these filters is `AND`.
+	// <p>Search criteria. If there are multiple Filters, the relationship between Filters is logical AND. <br>Description: This parameter currently only supports two filter conditions: Status and ProxyGroupId.</p>
 	Filters []*QueryParamFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeProxiesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cluster ID (this parameter is required. for example, cynosdbmysql-2u2mh111).
+	// <p>Cluster ID (this parameter is required, such as cynosdbmysql-2u2mh111).</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Number of returned results. Default value: `20`. Maximum value: `100`,
+	// <p>Number of returned results, defaults to 20 with a maximum value of 100</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Record offset. Default value: `0`.
+	// <p>Record offset. Default value is 0</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Sorting field. Valid values:
-	// <li> CREATETIME: Creation time</li>
-	// <li> PERIODENDTIME: Expiration time</li>
+	// <p>Sorting field. Value ranges from...to...:</p><li>CREATETIME: Creation time</li><li>PERIODENDTIME: Expiration time</li>
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Sorting order. Valid values:
-	// <li> `ASC`: Ascending.</li>
-	// <li> `DESC`: Descending</li>
+	// <p>Sorting type. Value ranges from:</p><li> ASC: ascending order </li><li> DESC: sort in descending order </li>
 	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 
-	// Filter. If there are more than one filter, the logical relationship between these filters is `AND`.
+	// <p>Search criteria. If there are multiple Filters, the relationship between Filters is logical AND. <br>Description: This parameter currently only supports two filter conditions: Status and ProxyGroupId.</p>
 	Filters []*QueryParamFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -8566,15 +10816,18 @@ func (r *DescribeProxiesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProxiesResponseParams struct {
-	// Number of database proxy groups
+	// <p>Number of Database Proxy Groups</p>
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// List of database proxy groups.
+	// <p>Database Proxy Group list</p>
 	ProxyGroupInfos []*ProxyGroupInfo `json:"ProxyGroupInfos,omitnil,omitempty" name:"ProxyGroupInfos"`
 
-	// Database proxy node
+	// <p>database proxy node</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProxyNodeInfos []*ProxyNodeInfo `json:"ProxyNodeInfos,omitnil,omitempty" name:"ProxyNodeInfos"`
+
+	// <p>sql automatic forwarding</p>
+	ColumnStoreProxyForward *string `json:"ColumnStoreProxyForward,omitnil,omitempty" name:"ColumnStoreProxyForward"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -8614,7 +10867,7 @@ type DescribeProxyNodesRequestParams struct {
 	// <li> `DESC`: Descending</li>
 	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 
-	// Filter. If there are more than one filter, the logical relationship between these filters is `AND`.
+	// Search criteria. When multiple filters exist, the relationship between filters is logical AND. Currently supported search fields: Status, ProxyNodeId, ClusterId, OssProxyNodeName.
 	Filters []*QueryFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -8637,7 +10890,7 @@ type DescribeProxyNodesRequest struct {
 	// <li> `DESC`: Descending</li>
 	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 
-	// Filter. If there are more than one filter, the logical relationship between these filters is `AND`.
+	// Search criteria. When multiple filters exist, the relationship between filters is logical AND. Currently supported search fields: Status, ProxyNodeId, ClusterId, OssProxyNodeName.
 	Filters []*QueryFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -8746,6 +10999,235 @@ func (r *DescribeProxySpecsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeProxySpecsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeRedoLogListByVaultItem struct {
+	// <p>Cluster ID.</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Cluster name.</p>
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// <p>RedoLog file information</p>
+	RedoFileInfo *RedoLogItem `json:"RedoFileInfo,omitnil,omitempty" name:"RedoFileInfo"`
+}
+
+// Predefined struct for user
+type DescribeRedoLogListByVaultRequestParams struct {
+	// Safe ID
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// List of the backup IDs.
+	BackupIds []*int64 `json:"BackupIds,omitnil,omitempty" name:"BackupIds"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Backup name list
+	BackupNames []*string `json:"BackupNames,omitnil,omitempty" name:"BackupNames"`
+
+	// Filename list
+	FileNames []*string `json:"FileNames,omitnil,omitempty" name:"FileNames"`
+
+	// Number of items per page, range (0,100], default 100
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Range: [0,INF). Default is 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field. Available values: VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime. Default: createTime.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sorting method, available values: desc, asc, DESC, ASC, default desc
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+
+	// Status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+type DescribeRedoLogListByVaultRequest struct {
+	*tchttp.BaseRequest
+	
+	// Safe ID
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// List of the backup IDs.
+	BackupIds []*int64 `json:"BackupIds,omitnil,omitempty" name:"BackupIds"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Backup name list
+	BackupNames []*string `json:"BackupNames,omitnil,omitempty" name:"BackupNames"`
+
+	// Filename list
+	FileNames []*string `json:"FileNames,omitnil,omitempty" name:"FileNames"`
+
+	// Number of items per page, range (0,100], default 100
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Range: [0,INF). Default is 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field. Available values: VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime. Default: createTime.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sorting method, available values: desc, asc, DESC, ASC, default desc
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+
+	// Status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+func (r *DescribeRedoLogListByVaultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRedoLogListByVaultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VaultId")
+	delete(f, "BackupIds")
+	delete(f, "ClusterId")
+	delete(f, "BackupNames")
+	delete(f, "FileNames")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	delete(f, "Status")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRedoLogListByVaultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRedoLogListByVaultResponseParams struct {
+	// Total eligible redo log files
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Redo log file list
+	RedoLogList []*DescribeRedoLogListByVaultItem `json:"RedoLogList,omitnil,omitempty" name:"RedoLogList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeRedoLogListByVaultResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRedoLogListByVaultResponseParams `json:"Response"`
+}
+
+func (r *DescribeRedoLogListByVaultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRedoLogListByVaultResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRedoLogsRequestParams struct {
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Entries Per Page
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Log file name.
+	FileNames []*string `json:"FileNames,omitnil,omitempty" name:"FileNames"`
+}
+
+type DescribeRedoLogsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Entries Per Page
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Log file name.
+	FileNames []*string `json:"FileNames,omitnil,omitempty" name:"FileNames"`
+}
+
+func (r *DescribeRedoLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRedoLogsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "FileNames")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRedoLogsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRedoLogsResponseParams struct {
+	// Total number of entries
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// redo log information.
+	RedoLogs []*RedoLogItem `json:"RedoLogs,omitnil,omitempty" name:"RedoLogs"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeRedoLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRedoLogsResponseParams `json:"Response"`
+}
+
+func (r *DescribeRedoLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRedoLogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9125,6 +11607,12 @@ func (r *DescribeResourcesByDealNameResponse) FromJsonString(s string) error {
 type DescribeRollbackTimeRangeRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Safe id
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Safe region
+	VaultRegion *string `json:"VaultRegion,omitnil,omitempty" name:"VaultRegion"`
 }
 
 type DescribeRollbackTimeRangeRequest struct {
@@ -9132,6 +11620,12 @@ type DescribeRollbackTimeRangeRequest struct {
 	
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Safe id
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Safe region
+	VaultRegion *string `json:"VaultRegion,omitnil,omitempty" name:"VaultRegion"`
 }
 
 func (r *DescribeRollbackTimeRangeRequest) ToJsonString() string {
@@ -9147,6 +11641,8 @@ func (r *DescribeRollbackTimeRangeRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ClusterId")
+	delete(f, "VaultId")
+	delete(f, "VaultRegion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRollbackTimeRangeRequest has unknown keys!", "")
 	}
@@ -9181,6 +11677,159 @@ func (r *DescribeRollbackTimeRangeResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeRollbackTimeRangeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSQLExecutionPlanRequestParams struct {
+	// <p>Cluster ID.</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>SQL Template ID</p>
+	TemplateID *string `json:"TemplateID,omitnil,omitempty" name:"TemplateID"`
+
+	// <p>Plan details serial number</p>
+	PlanDetailId *int64 `json:"PlanDetailId,omitnil,omitempty" name:"PlanDetailId"`
+}
+
+type DescribeSQLExecutionPlanRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Cluster ID.</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>SQL Template ID</p>
+	TemplateID *string `json:"TemplateID,omitnil,omitempty" name:"TemplateID"`
+
+	// <p>Plan details serial number</p>
+	PlanDetailId *int64 `json:"PlanDetailId,omitnil,omitempty" name:"PlanDetailId"`
+}
+
+func (r *DescribeSQLExecutionPlanRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSQLExecutionPlanRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "InstanceId")
+	delete(f, "TemplateID")
+	delete(f, "PlanDetailId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSQLExecutionPlanRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSQLExecutionPlanResponseParams struct {
+	// <p>Execution plan details</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PlanDetail *ExecutionPlanDetail `json:"PlanDetail,omitnil,omitempty" name:"PlanDetail"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSQLExecutionPlanResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSQLExecutionPlanResponseParams `json:"Response"`
+}
+
+func (r *DescribeSQLExecutionPlanResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSQLExecutionPlanResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSaveBackupClustersRequestParams struct {
+	// Entries Per Page
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Retrieval criteria.
+	Filters []*QuerySimpleFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeSaveBackupClustersRequest struct {
+	*tchttp.BaseRequest
+	
+	// Entries Per Page
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Retrieval criteria.
+	Filters []*QuerySimpleFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeSaveBackupClustersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSaveBackupClustersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSaveBackupClustersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSaveBackupClustersResponseParams struct {
+	// Total number of entries
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Legacy backup information.
+	SaveBackupClusterInfos []*SaveBackupClusterInfo `json:"SaveBackupClusterInfos,omitnil,omitempty" name:"SaveBackupClusterInfos"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSaveBackupClustersResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSaveBackupClustersResponseParams `json:"Response"`
+}
+
+func (r *DescribeSaveBackupClustersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSaveBackupClustersResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9295,6 +11944,9 @@ type DescribeServerlessStrategyResponseParams struct {
 	// Whether the cluster is allowed to scale down. valid values: <li>yes</li><li>no</li>.
 	AutoScaleDown *string `json:"AutoScaleDown,omitnil,omitempty" name:"AutoScaleDown"`
 
+	// Whether archiving is enabled. Optional range</p><li>yes</li><li>no</li>Default value: yes</p>
+	AutoArchive *string `json:"AutoArchive,omitnil,omitempty" name:"AutoArchive"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -9322,6 +11974,9 @@ type DescribeSlaveZonesRequestParams struct {
 
 	// Cloud frame cluster ID.
 	OssClusterId *int64 `json:"OssClusterId,omitnil,omitempty" name:"OssClusterId"`
+
+	// Storage architecture type. Enumeration value: 1.0/2.0. Default value: 1.0.
+	StorageVersion *string `json:"StorageVersion,omitnil,omitempty" name:"StorageVersion"`
 }
 
 type DescribeSlaveZonesRequest struct {
@@ -9332,6 +11987,9 @@ type DescribeSlaveZonesRequest struct {
 
 	// Cloud frame cluster ID.
 	OssClusterId *int64 `json:"OssClusterId,omitnil,omitempty" name:"OssClusterId"`
+
+	// Storage architecture type. Enumeration value: 1.0/2.0. Default value: 1.0.
+	StorageVersion *string `json:"StorageVersion,omitnil,omitempty" name:"StorageVersion"`
 }
 
 func (r *DescribeSlaveZonesRequest) ToJsonString() string {
@@ -9348,6 +12006,7 @@ func (r *DescribeSlaveZonesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Zone")
 	delete(f, "OssClusterId")
+	delete(f, "StorageVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSlaveZonesRequest has unknown keys!", "")
 	}
@@ -9457,7 +12116,7 @@ type DescribeTasksRequestParams struct {
 	// End value of the task start time.
 	StartTimeEnd *string `json:"StartTimeEnd,omitnil,omitempty" name:"StartTimeEnd"`
 
-	// Filtering conditions. Supported fields for searching: "ClusterId", "ClusterName", "InstanceId", "InstanceName", "Status", "TaskId", and "TaskType".
+	// Filtering Conditions. Supported search fields: "ClusterId", "ClusterName", "InstanceId", "InstanceName", "Status", "TaskId", "TaskType".
 	Filters []*QueryFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Length of the list to be queried.
@@ -9476,7 +12135,7 @@ type DescribeTasksRequest struct {
 	// End value of the task start time.
 	StartTimeEnd *string `json:"StartTimeEnd,omitnil,omitempty" name:"StartTimeEnd"`
 
-	// Filtering conditions. Supported fields for searching: "ClusterId", "ClusterName", "InstanceId", "InstanceName", "Status", "TaskId", and "TaskType".
+	// Filtering Conditions. Supported search fields: "ClusterId", "ClusterName", "InstanceId", "InstanceName", "Status", "TaskId", "TaskType".
 	Filters []*QueryFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Length of the list to be queried.
@@ -9534,6 +12193,238 @@ func (r *DescribeTasksResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTasksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeVaultBackupClusterInfo struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Cluster name.
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// Cluster status
+	ClusterStatus *string `json:"ClusterStatus,omitnil,omitempty" name:"ClusterStatus"`
+
+	// cluster region
+	ClusterRegion *string `json:"ClusterRegion,omitnil,omitempty" name:"ClusterRegion"`
+
+	// AZ of the cluster
+	ClusterZone *string `json:"ClusterZone,omitnil,omitempty" name:"ClusterZone"`
+}
+
+// Predefined struct for user
+type DescribeVaultBackupClusterInfoRequestParams struct {
+	// Backup safe ID
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+}
+
+type DescribeVaultBackupClusterInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// Backup safe ID
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+}
+
+func (r *DescribeVaultBackupClusterInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVaultBackupClusterInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VaultId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVaultBackupClusterInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVaultBackupClusterInfoResponseParams struct {
+	// Safe info
+	ClusterInfos []*DescribeVaultBackupClusterInfo `json:"ClusterInfos,omitnil,omitempty" name:"ClusterInfos"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeVaultBackupClusterInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeVaultBackupClusterInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeVaultBackupClusterInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVaultBackupClusterInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeVaultsItem struct {
+	// Safe ID
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Safe name
+	VaultName *string `json:"VaultName,omitnil,omitempty" name:"VaultName"`
+
+	// Safe description
+	VaultDescribe *string `json:"VaultDescribe,omitnil,omitempty" name:"VaultDescribe"`
+
+	// Encryption key ID.
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Key region
+	KeyRegion *string `json:"KeyRegion,omitnil,omitempty" name:"KeyRegion"`
+
+	// Key type
+	KeyType *string `json:"KeyType,omitnil,omitempty" name:"KeyType"`
+
+	// Number of backup files
+	BackupFileCount *int64 `json:"BackupFileCount,omitnil,omitempty" name:"BackupFileCount"`
+
+	// Total size of backup files (byte)
+	BackupFileSize *int64 `json:"BackupFileSize,omitnil,omitempty" name:"BackupFileSize"`
+
+	// Binlog file count
+	BinlogFileCount *int64 `json:"BinlogFileCount,omitnil,omitempty" name:"BinlogFileCount"`
+
+	// Total size of the Binlog file (byte)
+	BinlogFileSize *int64 `json:"BinlogFileSize,omitnil,omitempty" name:"BinlogFileSize"`
+
+	// Number of RedoLog files
+	RedoLogFileCount *int64 `json:"RedoLogFileCount,omitnil,omitempty" name:"RedoLogFileCount"`
+
+	// Total size of RedoLog files (byte)
+	RedoLogFileSize *int64 `json:"RedoLogFileSize,omitnil,omitempty" name:"RedoLogFileSize"`
+
+	// Safe status
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Backup retention period (seconds)
+	BackupSaveSeconds *int64 `json:"BackupSaveSeconds,omitnil,omitempty" name:"BackupSaveSeconds"`
+
+	// lock time
+	LockedTime *string `json:"LockedTime,omitnil,omitempty" name:"LockedTime"`
+
+	// Associated task list
+	Tasks []*ObjectTask `json:"Tasks,omitnil,omitempty" name:"Tasks"`
+
+	// Safe region
+	VaultRegion *string `json:"VaultRegion,omitnil,omitempty" name:"VaultRegion"`
+
+	// Automatically deliver relationship
+	AutoCopyConfigs []*AutoCopyConfig `json:"AutoCopyConfigs,omitnil,omitempty" name:"AutoCopyConfigs"`
+}
+
+// Predefined struct for user
+type DescribeVaultsRequestParams struct {
+	// Safe ID list for precise filtering
+	VaultIds []*string `json:"VaultIds,omitnil,omitempty" name:"VaultIds"`
+
+	// Safe name, used for fuzzy filtering
+	VaultName *string `json:"VaultName,omitnil,omitempty" name:"VaultName"`
+
+	// Status list of safe for filtering
+	Status []*string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Number of items per page, range (0,100], default 100
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Range: [0,+∞). Default is 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field. Available values: VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sorting method, available values: desc, asc, DESC, ASC
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+}
+
+type DescribeVaultsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Safe ID list for precise filtering
+	VaultIds []*string `json:"VaultIds,omitnil,omitempty" name:"VaultIds"`
+
+	// Safe name, used for fuzzy filtering
+	VaultName *string `json:"VaultName,omitnil,omitempty" name:"VaultName"`
+
+	// Status list of safe for filtering
+	Status []*string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Number of items per page, range (0,100], default 100
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Range: [0,+∞). Default is 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field. Available values: VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sorting method, available values: desc, asc, DESC, ASC
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+}
+
+func (r *DescribeVaultsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVaultsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VaultIds")
+	delete(f, "VaultName")
+	delete(f, "Status")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVaultsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVaultsResponseParams struct {
+	// Safe list
+	Vaults []*DescribeVaultsItem `json:"Vaults,omitnil,omitempty" name:"Vaults"`
+
+	// Total number.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeVaultsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeVaultsResponseParams `json:"Response"`
+}
+
+func (r *DescribeVaultsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVaultsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9601,6 +12492,166 @@ func (r *DescribeZonesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisassociateSecurityGroupsRequestParams struct {
+	// Array of instance group IDs, starting with the prefix cynosdbmysql-grp- or cluster ID.
+	// Description: To get the instance group ID of a cluster, perform [query cluster instance group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+
+	// Security group ID list to modify. An array of one or more security group IDs.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// Availability zone.
+	// Description: Please enter the primary AZ of the cluster location correctly. If you enter a non-primary AZ of the cluster location, the call may display success but the actual execution will fail.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+}
+
+type DisassociateSecurityGroupsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Array of instance group IDs, starting with the prefix cynosdbmysql-grp- or cluster ID.
+	// Description: To get the instance group ID of a cluster, perform [query cluster instance group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+
+	// Security group ID list to modify. An array of one or more security group IDs.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// Availability zone.
+	// Description: Please enter the primary AZ of the cluster location correctly. If you enter a non-primary AZ of the cluster location, the call may display success but the actual execution will fail.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+}
+
+func (r *DisassociateSecurityGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisassociateSecurityGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	delete(f, "SecurityGroupIds")
+	delete(f, "Zone")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisassociateSecurityGroupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DisassociateSecurityGroupsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DisassociateSecurityGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *DisassociateSecurityGroupsResponseParams `json:"Response"`
+}
+
+func (r *DisassociateSecurityGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisassociateSecurityGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DownloadLibraDBClusterListRequestParams struct {
+	// Limit Quantity
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sorting method, desc, asc, DESC, ASC
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+
+	// Filter criteria.
+	Filters []*QueryFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DownloadLibraDBClusterListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Limit Quantity
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Sorting method, desc, asc, DESC, ASC
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
+
+	// Filter criteria.
+	Filters []*QueryFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DownloadLibraDBClusterListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DownloadLibraDBClusterListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "OrderBy")
+	delete(f, "OrderByType")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DownloadLibraDBClusterListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DownloadLibraDBClusterListResponseParams struct {
+	// Analyze cluster information
+	ClusterSet []*LibraClusterSet `json:"ClusterSet,omitnil,omitempty" name:"ClusterSet"`
+
+	// Total number.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DownloadLibraDBClusterListResponse struct {
+	*tchttp.BaseResponse
+	Response *DownloadLibraDBClusterListResponseParams `json:"Response"`
+}
+
+func (r *DownloadLibraDBClusterListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DownloadLibraDBClusterListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ErrorLogItemExport struct {
 	// Time
 	Timestamp *string `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
@@ -9628,6 +12679,82 @@ type ExchangeRoGroupInfo struct {
 	DstRoGroupInfo *RollbackRoGroupInfo `json:"DstRoGroupInfo,omitnil,omitempty" name:"DstRoGroupInfo"`
 }
 
+type ExecutionPlanDetail struct {
+	// <p>Template ID</p>
+	TemplateID *string `json:"TemplateID,omitnil,omitempty" name:"TemplateID"`
+
+	// <p>Database name.</p>
+	Db *string `json:"Db,omitnil,omitempty" name:"Db"`
+
+	// <p>Original SQL sample</p>
+	SQLSample *string `json:"SQLSample,omitnil,omitempty" name:"SQLSample"`
+
+	// <p>Sample SQL after rewrite</p>
+	SQLSampleRewritten *string `json:"SQLSampleRewritten,omitnil,omitempty" name:"SQLSampleRewritten"`
+
+	// <p>Execution plan before optimization - List</p>
+	TablePlanBefore []*ExplainRow `json:"TablePlanBefore,omitnil,omitempty" name:"TablePlanBefore"`
+
+	// <p>Execution plan after optimization - List</p>
+	TablePlanAfter []*ExplainRow `json:"TablePlanAfter,omitnil,omitempty" name:"TablePlanAfter"`
+
+	// <p>Tree execution plan before optimization</p>
+	TreePlanBefore *string `json:"TreePlanBefore,omitnil,omitempty" name:"TreePlanBefore"`
+
+	// <p>Tree execution plan after optimization</p>
+	TreePlanAfter *string `json:"TreePlanAfter,omitnil,omitempty" name:"TreePlanAfter"`
+
+	// <p>Query time before optimization</p>
+	QueryTimeBefore *float64 `json:"QueryTimeBefore,omitnil,omitempty" name:"QueryTimeBefore"`
+
+	// <p>Query time after optimization</p>
+	QueryTimeAfter *float64 `json:"QueryTimeAfter,omitnil,omitempty" name:"QueryTimeAfter"`
+
+	// <p>Number of scanned rows before optimization</p>
+	SQLScanRowsBefore *int64 `json:"SQLScanRowsBefore,omitnil,omitempty" name:"SQLScanRowsBefore"`
+
+	// <p>Number of scanned rows after optimization</p>
+	SQLScanRowsAfter *int64 `json:"SQLScanRowsAfter,omitnil,omitempty" name:"SQLScanRowsAfter"`
+}
+
+type ExplainRow struct {
+	// <p>Serial number of the query</p>
+	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// <p>Query type. Common values: SIMPLE (simple query, excluding subqueries or UNION), PRIMARY (outermost query), SUBQUERY (first SELECT in a subquery), DERIVED (derivative table/subquery in FROM clause), UNION (second and subsequent SELECTs in UNION), UNION RESULT (result set of UNION).</p>
+	SelectType *string `json:"SelectType,omitnil,omitempty" name:"SelectType"`
+
+	// <p>Data table name</p>
+	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
+
+	// <p>Query matching partition</p>
+	Partitions *string `json:"Partitions,omitnil,omitempty" name:"Partitions"`
+
+	// <p>Access type (very important, a key metric for measuring query efficiency), ranked from best to worst: system &gt; const &gt; eq_ref &gt; ref &gt; fulltext &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt; index_subquery &gt; range &gt; index &gt; ALL. Common value descriptions: • system: The table has only one row (system table). • const: Matches one row through primary key or unique index, commonly seen in WHERE pk = 1. • eq_ref: Uses primary key or unique index when connecting, each index value matches only one row. • ref: Uses non-unique index to search, may match multiple rows. • range: Index range scan, such as BETWEEN, &gt;, &lt;, IN. • index: Full index scan (traversal of the entire index tree). • ALL: Full-table scan (worst, requires optimization).</p>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// <p>Indexes that may be used in querying. NULL means no available index.</p>
+	PossibleKeys *string `json:"PossibleKeys,omitnil,omitempty" name:"PossibleKeys"`
+
+	// <p>Indexes actually used. NULL means no index is used.</p>
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// <p>The length of the actual used index (number of bytes). It can be used to determine which columns are actually used in the composite index. A shorter value indicates fewer index columns are used.</p>
+	KeyLen *string `json:"KeyLen,omitnil,omitempty" name:"KeyLen"`
+
+	// <p>Display which columns or constants are compared with indexes in the key column. Common values: const (constant), certain column name, func (function result).</p>
+	Ref *string `json:"Ref,omitnil,omitempty" name:"Ref"`
+
+	// <p>Estimate the number of rows to scan</p>
+	Rows *int64 `json:"Rows,omitnil,omitempty" name:"Rows"`
+
+	// <p>Indicates the estimation of the percentage of rows remaining after table conditional filtering. 100% means no additional filtering. The higher the value, the better.</p>
+	Filtered *float64 `json:"Filtered,omitnil,omitempty" name:"Filtered"`
+
+	// <p>Additional information (very important), common values: • Using index: covering index, no need to return to the table (good) • Using where: filter with WHERE after the storage engine returns rows • Using temporary: used a temporary table (commonly used in GROUP BY/ORDER BY, needs optimization) • Using filesort: used file sort instead of index sorting (needs optimization) • Using index condition: used pushdown of index (ICP)</p>
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+}
+
 // Predefined struct for user
 type ExportInstanceErrorLogsRequestParams struct {
 	// Instance ID
@@ -9648,7 +12775,7 @@ type ExportInstanceErrorLogsRequestParams struct {
 	// Log level
 	LogLevels []*string `json:"LogLevels,omitnil,omitempty" name:"LogLevels"`
 
-	// Keywords
+
 	KeyWords []*string `json:"KeyWords,omitnil,omitempty" name:"KeyWords"`
 
 	// The template type. Valid values: `csv`, `original`.
@@ -9682,7 +12809,6 @@ type ExportInstanceErrorLogsRequest struct {
 	// Log level
 	LogLevels []*string `json:"LogLevels,omitnil,omitempty" name:"LogLevels"`
 
-	// Keywords
 	KeyWords []*string `json:"KeyWords,omitnil,omitempty" name:"KeyWords"`
 
 	// The template type. Valid values: `csv`, `original`.
@@ -9991,6 +13117,51 @@ func (r *ExportResourcePackageDeductDetailsResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ForwardInstanceInfo struct {
+	// Forward the instance id
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Forward instance region
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+}
+
+type GdnTaskInfo struct {
+	// Unique ID of the global database
+	GdnId *string `json:"GdnId,omitnil,omitempty" name:"GdnId"`
+
+	// unique alias of the global database
+	GdnName *string `json:"GdnName,omitnil,omitempty" name:"GdnName"`
+
+	// Primary Cluster ID
+	PrimaryClusterId *string `json:"PrimaryClusterId,omitnil,omitempty" name:"PrimaryClusterId"`
+
+	// Master cluster region
+	PrimaryClusterRegion *string `json:"PrimaryClusterRegion,omitnil,omitempty" name:"PrimaryClusterRegion"`
+
+	// from the cluster region
+	StandbyClusterRegion *string `json:"StandbyClusterRegion,omitnil,omitempty" name:"StandbyClusterRegion"`
+
+	// Slave cluster ID
+	StandbyClusterId *string `json:"StandbyClusterId,omitnil,omitempty" name:"StandbyClusterId"`
+
+	// From the cluster name
+	StandbyClusterName *string `json:"StandbyClusterName,omitnil,omitempty" name:"StandbyClusterName"`
+
+	// Whether forced switchover is performed
+	ForceSwitchGdn *string `json:"ForceSwitchGdn,omitnil,omitempty" name:"ForceSwitchGdn"`
+
+	// Return code
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// prompt message
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Whether forced switchover is supported
+	IsSupportForce *string `json:"IsSupportForce,omitnil,omitempty" name:"IsSupportForce"`
+}
+
 type GoodsPrice struct {
 	// Specifies the instance price.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -10034,8 +13205,85 @@ type GoodsSpec struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
 
-	// Machine type.
+	// Instance machine type
+	// 1. common, universal type.
+	// 2. exclusive, dedicated.
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
+}
+
+// Predefined struct for user
+type GrantAccountPrivilegesRequestParams struct {
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Account information
+	Account *InputAccount `json:"Account,omitnil,omitempty" name:"Account"`
+
+	// Array of table permission codes
+	DbTablePrivileges []*string `json:"DbTablePrivileges,omitnil,omitempty" name:"DbTablePrivileges"`
+
+	// Database table information
+	DbTables []*DbTable `json:"DbTables,omitnil,omitempty" name:"DbTables"`
+}
+
+type GrantAccountPrivilegesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Account information
+	Account *InputAccount `json:"Account,omitnil,omitempty" name:"Account"`
+
+	// Array of table permission codes
+	DbTablePrivileges []*string `json:"DbTablePrivileges,omitnil,omitempty" name:"DbTablePrivileges"`
+
+	// Database table information
+	DbTables []*DbTable `json:"DbTables,omitnil,omitempty" name:"DbTables"`
+}
+
+func (r *GrantAccountPrivilegesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GrantAccountPrivilegesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "Account")
+	delete(f, "DbTablePrivileges")
+	delete(f, "DbTables")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GrantAccountPrivilegesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GrantAccountPrivilegesResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type GrantAccountPrivilegesResponse struct {
+	*tchttp.BaseResponse
+	Response *GrantAccountPrivilegesResponseParams `json:"Response"`
+}
+
+func (r *GrantAccountPrivilegesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GrantAccountPrivilegesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type InputAccount struct {
@@ -10469,10 +13717,10 @@ type InstanceAuditRule struct {
 }
 
 type InstanceAuditStatus struct {
-	// Instance ID.
+
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Audit status. ON- Audit is enabled; OFF- Audit is disabled.
+
 	AuditStatus *string `json:"AuditStatus,omitnil,omitempty" name:"AuditStatus"`
 
 	// Specifies the log retention period.
@@ -10626,6 +13874,59 @@ type InstanceParamItem struct {
 	ParamsItems []*ParamItemDetail `json:"ParamsItems,omitnil,omitempty" name:"ParamsItems"`
 }
 
+type InstanceSet struct {
+	// Database schema
+	DbMode *string `json:"DbMode,omitnil,omitempty" name:"DbMode"`
+
+	// Number of CPU cores
+	InstanceCpu *int64 `json:"InstanceCpu,omitnil,omitempty" name:"InstanceCpu"`
+
+	// Instance type
+	InstanceDeviceType *string `json:"InstanceDeviceType,omitnil,omitempty" name:"InstanceDeviceType"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// memory
+	InstanceMemory *int64 `json:"InstanceMemory,omitnil,omitempty" name:"InstanceMemory"`
+
+	// Instance name.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Instance role
+	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
+
+	// Instance status
+	InstanceStatus *string `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
+
+	// Status description.
+	InstanceStatusDesc *string `json:"InstanceStatusDesc,omitnil,omitempty" name:"InstanceStatusDesc"`
+
+	// hard disk
+	InstanceStorage *int64 `json:"InstanceStorage,omitnil,omitempty" name:"InstanceStorage"`
+
+	// Hard disk type.
+	InstanceStorageType *string `json:"InstanceStorageType,omitnil,omitempty" name:"InstanceStorageType"`
+
+	// Engine type.
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Duration.
+	MaintainDuration *int64 `json:"MaintainDuration,omitnil,omitempty" name:"MaintainDuration"`
+
+	// Execution start time (seconds from 00:00)
+	MaintainStartTime *int64 `json:"MaintainStartTime,omitnil,omitempty" name:"MaintainStartTime"`
+
+	// The time when it can be executed. Enumeration value: ["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"].
+	MaintainWeekDays []*string `json:"MaintainWeekDays,omitnil,omitempty" name:"MaintainWeekDays"`
+
+	// Node list
+	NodeList []*string `json:"NodeList,omitnil,omitempty" name:"NodeList"`
+
+	// Instance task
+	InstanceTasks []*ObjectTask `json:"InstanceTasks,omitnil,omitempty" name:"InstanceTasks"`
+}
+
 type InstanceSpec struct {
 	// Number of instance CPU cores
 	Cpu *uint64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
@@ -10656,6 +13957,12 @@ type InstanceSpec struct {
 
 	// Inventory quantity.
 	StockCount *int64 `json:"StockCount,omitnil,omitempty" name:"StockCount"`
+
+	// Maximum cpu
+	MaxCpu *float64 `json:"MaxCpu,omitnil,omitempty" name:"MaxCpu"`
+
+	// Minimum cpu
+	MinCpu *float64 `json:"MinCpu,omitnil,omitempty" name:"MinCpu"`
 }
 
 type IntegrateCreateClusterConfig struct {
@@ -10696,6 +14003,15 @@ type IsolateClusterRequestParams struct {
 
 	// This parameter has been disused.
 	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
+
+
+	IsolateReasonTypes []*int64 `json:"IsolateReasonTypes,omitnil,omitempty" name:"IsolateReasonTypes"`
+
+
+	IsolateReason *string `json:"IsolateReason,omitnil,omitempty" name:"IsolateReason"`
+
+	// Retain backup, true - Retained (incur fees)
+	SaveBackup *bool `json:"SaveBackup,omitnil,omitempty" name:"SaveBackup"`
 }
 
 type IsolateClusterRequest struct {
@@ -10706,6 +14022,13 @@ type IsolateClusterRequest struct {
 
 	// This parameter has been disused.
 	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
+
+	IsolateReasonTypes []*int64 `json:"IsolateReasonTypes,omitnil,omitempty" name:"IsolateReasonTypes"`
+
+	IsolateReason *string `json:"IsolateReason,omitnil,omitempty" name:"IsolateReason"`
+
+	// Retain backup, true - Retained (incur fees)
+	SaveBackup *bool `json:"SaveBackup,omitnil,omitempty" name:"SaveBackup"`
 }
 
 func (r *IsolateClusterRequest) ToJsonString() string {
@@ -10722,6 +14045,9 @@ func (r *IsolateClusterRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ClusterId")
 	delete(f, "DbType")
+	delete(f, "IsolateReasonTypes")
+	delete(f, "IsolateReason")
+	delete(f, "SaveBackup")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IsolateClusterRequest has unknown keys!", "")
 	}
@@ -10767,6 +14093,15 @@ type IsolateInstanceRequestParams struct {
 
 	// This parameter has been disused.
 	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
+
+	// Instance Refund Reason Types
+	IsolateReasonTypes []*int64 `json:"IsolateReasonTypes,omitnil,omitempty" name:"IsolateReasonTypes"`
+
+	// Instance Refund Reason Supplement
+	IsolateReason *string `json:"IsolateReason,omitnil,omitempty" name:"IsolateReason"`
+
+	// Backup retention
+	SaveBackup *bool `json:"SaveBackup,omitnil,omitempty" name:"SaveBackup"`
 }
 
 type IsolateInstanceRequest struct {
@@ -10780,6 +14115,15 @@ type IsolateInstanceRequest struct {
 
 	// This parameter has been disused.
 	DbType *string `json:"DbType,omitnil,omitempty" name:"DbType"`
+
+	// Instance Refund Reason Types
+	IsolateReasonTypes []*int64 `json:"IsolateReasonTypes,omitnil,omitempty" name:"IsolateReasonTypes"`
+
+	// Instance Refund Reason Supplement
+	IsolateReason *string `json:"IsolateReason,omitnil,omitempty" name:"IsolateReason"`
+
+	// Backup retention
+	SaveBackup *bool `json:"SaveBackup,omitnil,omitempty" name:"SaveBackup"`
 }
 
 func (r *IsolateInstanceRequest) ToJsonString() string {
@@ -10797,6 +14141,9 @@ func (r *IsolateInstanceRequest) FromJsonString(s string) error {
 	delete(f, "ClusterId")
 	delete(f, "InstanceIdList")
 	delete(f, "DbType")
+	delete(f, "IsolateReasonTypes")
+	delete(f, "IsolateReason")
+	delete(f, "SaveBackup")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IsolateInstanceRequest has unknown keys!", "")
 	}
@@ -10830,6 +14177,449 @@ func (r *IsolateInstanceResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *IsolateInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IsolateLibraDBClusterRequestParams struct {
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Isolation reason type
+	IsolateReasonTypes []*int64 `json:"IsolateReasonTypes,omitnil,omitempty" name:"IsolateReasonTypes"`
+
+	// Cause of isolation
+	IsolateReason *string `json:"IsolateReason,omitnil,omitempty" name:"IsolateReason"`
+}
+
+type IsolateLibraDBClusterRequest struct {
+	*tchttp.BaseRequest
+	
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Isolation reason type
+	IsolateReasonTypes []*int64 `json:"IsolateReasonTypes,omitnil,omitempty" name:"IsolateReasonTypes"`
+
+	// Cause of isolation
+	IsolateReason *string `json:"IsolateReason,omitnil,omitempty" name:"IsolateReason"`
+}
+
+func (r *IsolateLibraDBClusterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateLibraDBClusterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "IsolateReasonTypes")
+	delete(f, "IsolateReason")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IsolateLibraDBClusterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IsolateLibraDBClusterResponseParams struct {
+	// flow id
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// Return order ID
+	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type IsolateLibraDBClusterResponse struct {
+	*tchttp.BaseResponse
+	Response *IsolateLibraDBClusterResponseParams `json:"Response"`
+}
+
+func (r *IsolateLibraDBClusterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateLibraDBClusterResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IsolateLibraDBInstanceRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Read-only analysis engine instance ID list
+	InstanceIdList []*string `json:"InstanceIdList,omitnil,omitempty" name:"InstanceIdList"`
+
+	// Whether to force isolation
+	ForceIsolate *bool `json:"ForceIsolate,omitnil,omitempty" name:"ForceIsolate"`
+
+	// Isolation reason type
+	IsolateReasonTypes []*int64 `json:"IsolateReasonTypes,omitnil,omitempty" name:"IsolateReasonTypes"`
+
+	// Cause of isolation
+	IsolateReason *string `json:"IsolateReason,omitnil,omitempty" name:"IsolateReason"`
+}
+
+type IsolateLibraDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Read-only analysis engine instance ID list
+	InstanceIdList []*string `json:"InstanceIdList,omitnil,omitempty" name:"InstanceIdList"`
+
+	// Whether to force isolation
+	ForceIsolate *bool `json:"ForceIsolate,omitnil,omitempty" name:"ForceIsolate"`
+
+	// Isolation reason type
+	IsolateReasonTypes []*int64 `json:"IsolateReasonTypes,omitnil,omitempty" name:"IsolateReasonTypes"`
+
+	// Cause of isolation
+	IsolateReason *string `json:"IsolateReason,omitnil,omitempty" name:"IsolateReason"`
+}
+
+func (r *IsolateLibraDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateLibraDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "InstanceIdList")
+	delete(f, "ForceIsolate")
+	delete(f, "IsolateReasonTypes")
+	delete(f, "IsolateReason")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IsolateLibraDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IsolateLibraDBInstanceResponseParams struct {
+	// task flow id
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// Order ID list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type IsolateLibraDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *IsolateLibraDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *IsolateLibraDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateLibraDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type LibraClusterSet struct {
+	// User ID
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Cluster name.
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// Creation time.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Database version.
+	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
+
+	// instance information
+	InstanceSet []*LibraInstanceSet `json:"InstanceSet,omitnil,omitempty" name:"InstanceSet"`
+
+	// Payment mode
+	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Expiration time.
+	PeriodEndTime *string `json:"PeriodEndTime,omitnil,omitempty" name:"PeriodEndTime"`
+
+	// Project ID
+	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
+
+	// Region.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Auto-renewal flag. 1: Automatic renewal. 0: Non-renewal upon expiration.
+	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
+
+	// Status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Status description.
+	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
+
+	// Storage size
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
+
+	// Used Capacity
+	UsedStorage *int64 `json:"UsedStorage,omitnil,omitempty" name:"UsedStorage"`
+
+	// VIP address
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// vport port
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
+}
+
+type LibraDBClusterDetail struct {
+	// <p>Cluster ID.</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Cluster name.</p>
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// <p>Region</p>
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// <p>Status</p>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Status description</p>
+	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
+
+	// <p>Storage size</p>
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
+
+	// <p>VPC name</p>
+	VpcName *string `json:"VpcName,omitnil,omitempty" name:"VpcName"`
+
+	// <p>vpc Unique id</p>
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Subnet name.</p>
+	SubnetName *string `json:"SubnetName,omitnil,omitempty" name:"SubnetName"`
+
+	// <p>Subnet ID.</p>
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Creation time.</p>
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Database version</p>
+	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
+
+	// <p>Used capacity</p>
+	UsedStorage *int64 `json:"UsedStorage,omitnil,omitempty" name:"UsedStorage"`
+
+	// <p>vip address</p>
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// <p>vport</p>
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// <p>vip address and vport of the cluster read-only instance</p>
+	RoAddr []*RoAddr `json:"RoAddr,omitnil,omitempty" name:"RoAddr"`
+
+	// <p>cynos version</p>
+	CynosVersion *string `json:"CynosVersion,omitnil,omitempty" name:"CynosVersion"`
+
+	// <p>Freeze or not</p>
+	IsFreeze *string `json:"IsFreeze,omitnil,omitempty" name:"IsFreeze"`
+
+	// <p>Task List</p>
+	Tasks []*ObjectTask `json:"Tasks,omitnil,omitempty" name:"Tasks"`
+
+	// <p>Primary AZ</p>
+	MasterZone *string `json:"MasterZone,omitnil,omitempty" name:"MasterZone"`
+
+	// <p>Instance collection</p>
+	InstanceSet []*InstanceSet `json:"InstanceSet,omitnil,omitempty" name:"InstanceSet"`
+
+	// <p>Payment mode</p>
+	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// <p>Expiry time</p>
+	PeriodEndTime *string `json:"PeriodEndTime,omitnil,omitempty" name:"PeriodEndTime"`
+
+	// <p>Project ID.</p>
+	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
+
+	// <p>Auto-renewal flag</p>
+	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
+
+	// <p>Version tag</p>
+	CynosVersionTag *string `json:"CynosVersionTag,omitnil,omitempty" name:"CynosVersionTag"`
+
+	// <p>Additions are not supported when ro is yes. Additions are supported when ro is no/null/&quot;&quot;.</p>
+	NoSupportAddRo *string `json:"NoSupportAddRo,omitnil,omitempty" name:"NoSupportAddRo"`
+
+	// <p>AZ.</p>
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// <p>Physical AZ</p>
+	PhysicalZone *string `json:"PhysicalZone,omitnil,omitempty" name:"PhysicalZone"`
+
+	// <p>Grayscale information for version upgrade</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AnalysisUpgradeVersionInfo *UpgradeAnalysisInstanceVersionInfo `json:"AnalysisUpgradeVersionInfo,omitnil,omitempty" name:"AnalysisUpgradeVersionInfo"`
+}
+
+type LibraDBClusterSet struct {
+	// User ID
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Cluster name.
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// Creation time.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// cynos version
+	CynosVersion *string `json:"CynosVersion,omitnil,omitempty" name:"CynosVersion"`
+
+	// Version tag
+	CynosVersionTag *string `json:"CynosVersionTag,omitnil,omitempty" name:"CynosVersionTag"`
+
+	// Database version.
+	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
+
+	// Instance count
+	InstanceNum *int64 `json:"InstanceNum,omitnil,omitempty" name:"InstanceNum"`
+
+	// Whether to freeze
+	IsFreeze *string `json:"IsFreeze,omitnil,omitempty" name:"IsFreeze"`
+
+	// Network address.
+	NetAddrs []*NetAddr `json:"NetAddrs,omitnil,omitempty" name:"NetAddrs"`
+
+	// Payment mode
+	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Expiration time.
+	PeriodEndTime *string `json:"PeriodEndTime,omitnil,omitempty" name:"PeriodEndTime"`
+
+	// Project ID
+	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
+
+	// Region.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Auto-renewal flag. 1: Automatic renewal. 0: Non-renewal upon expiration.
+	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
+
+	// Status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Status description.
+	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
+
+	// Storage size in GB
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
+
+	// Subnet ID.
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// Task list
+	Tasks []*ObjectTask `json:"Tasks,omitnil,omitempty" name:"Tasks"`
+
+	// Account ID.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// VIP address
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// Unique ID of VPC
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// vport port
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// Update time
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Primary AZ.
+	MasterZone *string `json:"MasterZone,omitnil,omitempty" name:"MasterZone"`
+
+	// physical AZ
+	PhysicalZone *string `json:"PhysicalZone,omitnil,omitempty" name:"PhysicalZone"`
+
+	// Availability zone
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+}
+
+type LibraDBClusterSrcInfo struct {
+	// Source endpoint type
+	SrcInstanceType *string `json:"SrcInstanceType,omitnil,omitempty" name:"SrcInstanceType"`
+
+	// Network type.
+	AccessType *string `json:"AccessType,omitnil,omitempty" name:"AccessType"`
+
+	// Source instance ID
+	SrcInstanceId *string `json:"SrcInstanceId,omitnil,omitempty" name:"SrcInstanceId"`
+
+	// Source cluster ID
+	SrcClusterId *string `json:"SrcClusterId,omitnil,omitempty" name:"SrcClusterId"`
+
+	// Address.
+	IP *string `json:"IP,omitnil,omitempty" name:"IP"`
+
+	// Port.
+	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Username.
+	User *string `json:"User,omitnil,omitempty" name:"User"`
+
+	// Password.
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// Source sql mode
+	SqlMode *string `json:"SqlMode,omitnil,omitempty" name:"SqlMode"`
+
+	// Source application id
+	SrcAppId *int64 `json:"SrcAppId,omitnil,omitempty" name:"SrcAppId"`
+
+	// source account
+	SrcUin *string `json:"SrcUin,omitnil,omitempty" name:"SrcUin"`
+
+	// sub-account
+	SrcSubAccountUin *string `json:"SrcSubAccountUin,omitnil,omitempty" name:"SrcSubAccountUin"`
+
+	// Account
+	AccountMode *string `json:"AccountMode,omitnil,omitempty" name:"AccountMode"`
+
+	// Source instance region
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Operation of the source instance
+	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 }
 
 type LibraDBInstanceInitInfo struct {
@@ -10867,6 +14657,122 @@ type LibraDBInstanceInitInfo struct {
 	ReplicasNum *int64 `json:"ReplicasNum,omitnil,omitempty" name:"ReplicasNum"`
 }
 
+type LibraDBNodeInfo struct {
+	// LibraDB Node ID
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+
+	// Node status
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// syncing data
+	DataStatus *string `json:"DataStatus,omitnil,omitempty" name:"DataStatus"`
+
+	// Number of CPU cores.
+	Cpu *uint64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
+
+	// Memory size. Unit: GB.
+	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
+
+	// Disk size, in GB
+	Storage *uint64 `json:"Storage,omitnil,omitempty" name:"Storage"`
+
+	// Error message
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+}
+
+type LibraDBVersion struct {
+	// Version
+	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
+
+	// Version tag
+	Tag *string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Can be used this version
+	HasPermission *bool `json:"HasPermission,omitnil,omitempty" name:"HasPermission"`
+}
+
+type LibraInstanceSet struct {
+	// Database schema
+	DbMode *string `json:"DbMode,omitnil,omitempty" name:"DbMode"`
+
+	// Number of CPU cores
+	InstanceCpu *int64 `json:"InstanceCpu,omitnil,omitempty" name:"InstanceCpu"`
+
+	// Instance type
+	InstanceDeviceType *string `json:"InstanceDeviceType,omitnil,omitempty" name:"InstanceDeviceType"`
+
+	// Group ID
+	InstanceGroupId *string `json:"InstanceGroupId,omitnil,omitempty" name:"InstanceGroupId"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// memory
+	InstanceMemory *int64 `json:"InstanceMemory,omitnil,omitempty" name:"InstanceMemory"`
+
+	// Instance name.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Payment mode
+	InstancePayMode *int64 `json:"InstancePayMode,omitnil,omitempty" name:"InstancePayMode"`
+
+	// Payment end time
+	InstancePeriodEndTime *string `json:"InstancePeriodEndTime,omitnil,omitempty" name:"InstancePeriodEndTime"`
+
+	// Instance role
+	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
+
+	// Instance status
+	InstanceStatus *string `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
+
+	// Instance status description
+	InstanceStatusDesc *string `json:"InstanceStatusDesc,omitnil,omitempty" name:"InstanceStatusDesc"`
+
+	// Network type.
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Subnet ID
+	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
+
+	// vpcid
+	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
+
+	// Virtual IP
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// Virtual port
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// Public network region
+	WanDomain *string `json:"WanDomain,omitnil,omitempty" name:"WanDomain"`
+
+	// Public IP address
+	WanIP *string `json:"WanIP,omitnil,omitempty" name:"WanIP"`
+
+	// Public network port
+	WanPort *int64 `json:"WanPort,omitnil,omitempty" name:"WanPort"`
+
+	// Public network status
+	WanStatus *string `json:"WanStatus,omitnil,omitempty" name:"WanStatus"`
+
+	// hard disk
+	InstanceStorage *int64 `json:"InstanceStorage,omitnil,omitempty" name:"InstanceStorage"`
+
+	// Hard disk type.
+	InstanceStorageType *string `json:"InstanceStorageType,omitnil,omitempty" name:"InstanceStorageType"`
+}
+
+type LogFilter struct {
+	// Filter items.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter criteria. Support the following conditions: WINC-include (segment dimension), WEXC-exclude (segment dimension), INC-include, EXC-exclude, EQS-equal, NEQ-not equal to, RA-range.
+	Compare *string `json:"Compare,omitnil,omitempty" name:"Compare"`
+
+	// Filtered value. For reverse query, multiple values have an AND relationship. For forward query, multiple values have an OR relationship.
+	Value []*string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
 type LogicBackupConfigInfo struct {
 	// Whether automatic logical backup is enabled.
 	LogicBackupEnable *string `json:"LogicBackupEnable,omitnil,omitempty" name:"LogicBackupEnable"`
@@ -10877,24 +14783,29 @@ type LogicBackupConfigInfo struct {
 	// Specifies the termination time of automatic logical backup.
 	LogicBackupTimeEnd *uint64 `json:"LogicBackupTimeEnd,omitnil,omitempty" name:"LogicBackupTimeEnd"`
 
-	// Specifies the retention time for automatic logical backup.
+	// Automatic logical backup retention time.
+	// Unit: seconds.
 	LogicReserveDuration *uint64 `json:"LogicReserveDuration,omitnil,omitempty" name:"LogicReserveDuration"`
 
-	// Whether cross-regional logical backup is enabled.
+	// Is cross-regional logical backup enabled?.
+	// Valid values: ON/OFF.
 	LogicCrossRegionsEnable *string `json:"LogicCrossRegionsEnable,omitnil,omitempty" name:"LogicCrossRegionsEnable"`
 
-	// Logical Backup Cross-Region
+
 	LogicCrossRegions []*string `json:"LogicCrossRegions,omitnil,omitempty" name:"LogicCrossRegions"`
+
+	// Backup delivery relationship
+	AutoCopyVaults []*CreateBackupVaultItem `json:"AutoCopyVaults,omitnil,omitempty" name:"AutoCopyVaults"`
 }
 
 type ManualBackupData struct {
-	// Backup type. snapshot-snapshot backup
+
 	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
 
-	// Backup method. auto-automatic backup, manual-manual
+
 	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
 
-	// Backup Time
+
 	SnapshotTime *string `json:"SnapshotTime,omitnil,omitempty" name:"SnapshotTime"`
 
 	// Detailed information of cross-region backup items.
@@ -10926,6 +14837,11 @@ type MigrateObject struct {
 	Databases []*MigrateDBItem `json:"Databases,omitnil,omitempty" name:"Databases"`
 }
 
+type MigrateOpt struct {
+	// Database table information
+	DatabaseTables *MigrateObject `json:"DatabaseTables,omitnil,omitempty" name:"DatabaseTables"`
+}
+
 type MigrateTableItem struct {
 	// Data table name
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -10933,7 +14849,7 @@ type MigrateTableItem struct {
 }
 
 type ModifiableInfo struct {
-	// Whether the parameter is modifiable. 1: Yes 0: No
+
 	IsModifiable *int64 `json:"IsModifiable,omitnil,omitempty" name:"IsModifiable"`
 }
 
@@ -11175,6 +15091,12 @@ type ModifyAuditRuleTemplatesRequestParams struct {
 
 	// New description of the rule template
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Alert Levels. 1 - Low Risk, 2 - Medium Risk, 3 - High Risk.
+	AlarmLevel *uint64 `json:"AlarmLevel,omitnil,omitempty" name:"AlarmLevel"`
+
+	// Alert policy. 0 - No alert, 1 - Alert.
+	AlarmPolicy *uint64 `json:"AlarmPolicy,omitnil,omitempty" name:"AlarmPolicy"`
 }
 
 type ModifyAuditRuleTemplatesRequest struct {
@@ -11191,6 +15113,12 @@ type ModifyAuditRuleTemplatesRequest struct {
 
 	// New description of the rule template
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Alert Levels. 1 - Low Risk, 2 - Medium Risk, 3 - High Risk.
+	AlarmLevel *uint64 `json:"AlarmLevel,omitnil,omitempty" name:"AlarmLevel"`
+
+	// Alert policy. 0 - No alert, 1 - Alert.
+	AlarmPolicy *uint64 `json:"AlarmPolicy,omitnil,omitempty" name:"AlarmPolicy"`
 }
 
 func (r *ModifyAuditRuleTemplatesRequest) ToJsonString() string {
@@ -11209,6 +15137,8 @@ func (r *ModifyAuditRuleTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "RuleFilters")
 	delete(f, "RuleTemplateName")
 	delete(f, "Description")
+	delete(f, "AlarmLevel")
+	delete(f, "AlarmPolicy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAuditRuleTemplatesRequest has unknown keys!", "")
 	}
@@ -11328,57 +15258,69 @@ func (r *ModifyAuditServiceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyBackupConfigRequestParams struct {
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Full backup start time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively
+	// <p>Indicates the full backup start time, [0-24*3600]. For example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.</p>
 	BackupTimeBeg *uint64 `json:"BackupTimeBeg,omitnil,omitempty" name:"BackupTimeBeg"`
 
-	// Full backup end time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively.
+	// <p>Indicates the full backup end time, [0-24*3600]. For example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.</p>
 	BackupTimeEnd *uint64 `json:"BackupTimeEnd,omitnil,omitempty" name:"BackupTimeEnd"`
 
-	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
+	// <p>Indicates the backup retention period in seconds. Backups will be cleaned up longer than this time. Seven days is represented as 3600<em>24</em>7=604800. The maximum value is 158112000.</p>
 	ReserveDuration *uint64 `json:"ReserveDuration,omitnil,omitempty" name:"ReserveDuration"`
 
-	// Backup frequency. It is an array of 7 elements corresponding to Monday through Sunday. full: full backup; increment: incremental backup. This parameter cannot be modified currently and doesn't need to be entered.
+	// <p>This parameter currently does not support modification and is not required. Backup frequency is an array of length 7, corresponding to Monday to Sunday backup method, full-full backup, increment-incremental backup.</p>
 	BackupFreq []*string `json:"BackupFreq,omitnil,omitempty" name:"BackupFreq"`
 
-	// Currently, this parameter does not support modification and is not required.
+	// <p>This parameter currently does not support modification. No need to specify.</p>
 	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
 
-	// Logical Backup Configuration
+	// <p>Logical backup configuration</p>
 	LogicBackupConfig *LogicBackupConfigInfo `json:"LogicBackupConfig,omitnil,omitempty" name:"LogicBackupConfig"`
 
-	// Whether to delete the automatic logical backup
+	// <p>Whether to delete automatic logical backup</p>
 	DeleteAutoLogicBackup *bool `json:"DeleteAutoLogicBackup,omitnil,omitempty" name:"DeleteAutoLogicBackup"`
+
+	// <p>Second-level snapshot backup parameter</p>
+	SnapshotSecondaryBackupConfig *SnapshotBackupConfig `json:"SnapshotSecondaryBackupConfig,omitnil,omitempty" name:"SnapshotSecondaryBackupConfig"`
+
+	// <p>Sparse backup configuration</p>
+	SparseBackupConfig *SparseBackupConfig `json:"SparseBackupConfig,omitnil,omitempty" name:"SparseBackupConfig"`
 }
 
 type ModifyBackupConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Full backup start time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively
+	// <p>Indicates the full backup start time, [0-24*3600]. For example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.</p>
 	BackupTimeBeg *uint64 `json:"BackupTimeBeg,omitnil,omitempty" name:"BackupTimeBeg"`
 
-	// Full backup end time. Value range: [0-24*3600]. For example, 0:00 AM, 1:00 AM, and 2:00 AM are represented by 0, 3600, and 7200, respectively.
+	// <p>Indicates the full backup end time, [0-24*3600]. For example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.</p>
 	BackupTimeEnd *uint64 `json:"BackupTimeEnd,omitnil,omitempty" name:"BackupTimeEnd"`
 
-	// Backup retention period in seconds. Backups will be cleared after this period elapses. 7 days is represented by 3600*24*7 = 604800. Maximum value: 158112000.
+	// <p>Indicates the backup retention period in seconds. Backups will be cleaned up longer than this time. Seven days is represented as 3600<em>24</em>7=604800. The maximum value is 158112000.</p>
 	ReserveDuration *uint64 `json:"ReserveDuration,omitnil,omitempty" name:"ReserveDuration"`
 
-	// Backup frequency. It is an array of 7 elements corresponding to Monday through Sunday. full: full backup; increment: incremental backup. This parameter cannot be modified currently and doesn't need to be entered.
+	// <p>This parameter currently does not support modification and is not required. Backup frequency is an array of length 7, corresponding to Monday to Sunday backup method, full-full backup, increment-incremental backup.</p>
 	BackupFreq []*string `json:"BackupFreq,omitnil,omitempty" name:"BackupFreq"`
 
-	// Currently, this parameter does not support modification and is not required.
+	// <p>This parameter currently does not support modification. No need to specify.</p>
 	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
 
-	// Logical Backup Configuration
+	// <p>Logical backup configuration</p>
 	LogicBackupConfig *LogicBackupConfigInfo `json:"LogicBackupConfig,omitnil,omitempty" name:"LogicBackupConfig"`
 
-	// Whether to delete the automatic logical backup
+	// <p>Whether to delete automatic logical backup</p>
 	DeleteAutoLogicBackup *bool `json:"DeleteAutoLogicBackup,omitnil,omitempty" name:"DeleteAutoLogicBackup"`
+
+	// <p>Second-level snapshot backup parameter</p>
+	SnapshotSecondaryBackupConfig *SnapshotBackupConfig `json:"SnapshotSecondaryBackupConfig,omitnil,omitempty" name:"SnapshotSecondaryBackupConfig"`
+
+	// <p>Sparse backup configuration</p>
+	SparseBackupConfig *SparseBackupConfig `json:"SparseBackupConfig,omitnil,omitempty" name:"SparseBackupConfig"`
 }
 
 func (r *ModifyBackupConfigRequest) ToJsonString() string {
@@ -11401,6 +15343,8 @@ func (r *ModifyBackupConfigRequest) FromJsonString(s string) error {
 	delete(f, "BackupType")
 	delete(f, "LogicBackupConfig")
 	delete(f, "DeleteAutoLogicBackup")
+	delete(f, "SnapshotSecondaryBackupConfig")
+	delete(f, "SparseBackupConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBackupConfigRequest has unknown keys!", "")
 	}
@@ -11791,6 +15735,70 @@ func (r *ModifyBinlogSaveDaysResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyClusterBinlogRedoLogAutoCopyVaultRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Automatically copy the safe configuration list
+	AutoCopyVaults []*CreateBackupVaultItem `json:"AutoCopyVaults,omitnil,omitempty" name:"AutoCopyVaults"`
+}
+
+type ModifyClusterBinlogRedoLogAutoCopyVaultRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Automatically copy the safe configuration list
+	AutoCopyVaults []*CreateBackupVaultItem `json:"AutoCopyVaults,omitnil,omitempty" name:"AutoCopyVaults"`
+}
+
+func (r *ModifyClusterBinlogRedoLogAutoCopyVaultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyClusterBinlogRedoLogAutoCopyVaultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "AutoCopyVaults")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterBinlogRedoLogAutoCopyVaultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyClusterBinlogRedoLogAutoCopyVaultResponseParams struct {
+	// Task ID.
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyClusterBinlogRedoLogAutoCopyVaultResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyClusterBinlogRedoLogAutoCopyVaultResponseParams `json:"Response"`
+}
+
+func (r *ModifyClusterBinlogRedoLogAutoCopyVaultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyClusterBinlogRedoLogAutoCopyVaultResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyClusterDatabaseRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
@@ -11869,6 +15877,70 @@ func (r *ModifyClusterDatabaseResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyClusterDatabaseResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyClusterGlobalEncryptionRequestParams struct {
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Turn on or off global encryption
+	IsOpenGlobalEncryption *bool `json:"IsOpenGlobalEncryption,omitnil,omitempty" name:"IsOpenGlobalEncryption"`
+}
+
+type ModifyClusterGlobalEncryptionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Turn on or off global encryption
+	IsOpenGlobalEncryption *bool `json:"IsOpenGlobalEncryption,omitnil,omitempty" name:"IsOpenGlobalEncryption"`
+}
+
+func (r *ModifyClusterGlobalEncryptionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyClusterGlobalEncryptionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "IsOpenGlobalEncryption")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterGlobalEncryptionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyClusterGlobalEncryptionResponseParams struct {
+	// Asynchronous task ID.
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyClusterGlobalEncryptionResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyClusterGlobalEncryptionResponseParams `json:"Response"`
+}
+
+func (r *ModifyClusterGlobalEncryptionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyClusterGlobalEncryptionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -12188,7 +16260,7 @@ type ModifyClusterSlaveZoneRequestParams struct {
 	// Specifies the binlog synchronization mode. the default value is async. valid values are sync, semisync, and async.
 	BinlogSyncWay *string `json:"BinlogSyncWay,omitnil,omitempty" name:"BinlogSyncWay"`
 
-	// Semi-sync timeout period in ms. To ensure business stability, the semi-synchronous replication includes a degradation mechanism. If the primary AZ cluster exceeds this timeout while waiting for transaction confirmation from the secondary AZ cluster, the replication mode will fall back to asynchronous replication. Minimum setting: 1000 ms; maximum support: 4294967295 ms; default: 10000 ms.
+	// Semi-sync timeout in ms. To ensure business stability, semi-synchronous replication has a degradation logic. When the primary availability zone cluster waits for the secondary availability zone cluster to confirm a transaction, if the timeout period is exceeded, the replication method will degrade to asynchronous replication. The minimum is set to 1000 ms, supporting up to 4294967295 ms, with a default of 10000 ms.
 	SemiSyncTimeout *int64 `json:"SemiSyncTimeout,omitnil,omitempty" name:"SemiSyncTimeout"`
 }
 
@@ -12207,7 +16279,7 @@ type ModifyClusterSlaveZoneRequest struct {
 	// Specifies the binlog synchronization mode. the default value is async. valid values are sync, semisync, and async.
 	BinlogSyncWay *string `json:"BinlogSyncWay,omitnil,omitempty" name:"BinlogSyncWay"`
 
-	// Semi-sync timeout period in ms. To ensure business stability, the semi-synchronous replication includes a degradation mechanism. If the primary AZ cluster exceeds this timeout while waiting for transaction confirmation from the secondary AZ cluster, the replication mode will fall back to asynchronous replication. Minimum setting: 1000 ms; maximum support: 4294967295 ms; default: 10000 ms.
+	// Semi-sync timeout in ms. To ensure business stability, semi-synchronous replication has a degradation logic. When the primary availability zone cluster waits for the secondary availability zone cluster to confirm a transaction, if the timeout period is exceeded, the replication method will degrade to asynchronous replication. The minimum is set to 1000 ms, supporting up to 4294967295 ms, with a default of 10000 ms.
 	SemiSyncTimeout *int64 `json:"SemiSyncTimeout,omitnil,omitempty" name:"SemiSyncTimeout"`
 }
 
@@ -12261,27 +16333,45 @@ func (r *ModifyClusterSlaveZoneResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDBInstanceSecurityGroupsRequestParams struct {
-	// Network group id (starting with the cynosdbmysql-grp- prefix) or cluster id.
+	// <p>Network Group id (cynosdbmysql-grp- prefix at the beginning) or Cluster id (such as cynosdbmysql-xxxxxxxx prefix). When configuring security group with instance IP address triplet (UniqVpcId, Vip, Vport), this field must be set to Cluster id (such as cynosdbmysql-xxxxxxxx prefix).</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// List of IDs of security groups to be modified, which is an array of one or more security group IDs.
+	// <p>List of security group IDs to modify, an array of one or more security group IDs.<br>Note: This input will perform a full replacement of the existing collection, not an incremental update. The modification requires the expected full collection.</p>
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// AZ
+	// <p>AZ.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// <p>ID of the VPC network for instance ownership. (UniqVpcId, Vip, and Vport must be specified simultaneously to uniquely identify the network instance)</p>
+	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
+
+	// <p>Instance IP address, instance IP address triplet (UniqVpcId, Vip, and Vport). These three parameters must be specified simultaneously for unique identification of network instances.</p>
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// <p>Instance port, instance IP address triplet (UniqVpcId, Vip, and Vport). These three parameters must be specified simultaneously for unique identification of network instances.</p>
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 }
 
 type ModifyDBInstanceSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Network group id (starting with the cynosdbmysql-grp- prefix) or cluster id.
+	// <p>Network Group id (cynosdbmysql-grp- prefix at the beginning) or Cluster id (such as cynosdbmysql-xxxxxxxx prefix). When configuring security group with instance IP address triplet (UniqVpcId, Vip, Vport), this field must be set to Cluster id (such as cynosdbmysql-xxxxxxxx prefix).</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// List of IDs of security groups to be modified, which is an array of one or more security group IDs.
+	// <p>List of security group IDs to modify, an array of one or more security group IDs.<br>Note: This input will perform a full replacement of the existing collection, not an incremental update. The modification requires the expected full collection.</p>
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// AZ
+	// <p>AZ.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// <p>ID of the VPC network for instance ownership. (UniqVpcId, Vip, and Vport must be specified simultaneously to uniquely identify the network instance)</p>
+	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
+
+	// <p>Instance IP address, instance IP address triplet (UniqVpcId, Vip, and Vport). These three parameters must be specified simultaneously for unique identification of network instances.</p>
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// <p>Instance port, instance IP address triplet (UniqVpcId, Vip, and Vport). These three parameters must be specified simultaneously for unique identification of network instances.</p>
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 }
 
 func (r *ModifyDBInstanceSecurityGroupsRequest) ToJsonString() string {
@@ -12299,6 +16389,9 @@ func (r *ModifyDBInstanceSecurityGroupsRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "SecurityGroupIds")
 	delete(f, "Zone")
+	delete(f, "UniqVpcId")
+	delete(f, "Vip")
+	delete(f, "Vport")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceSecurityGroupsRequest has unknown keys!", "")
 	}
@@ -12328,42 +16421,46 @@ func (r *ModifyDBInstanceSecurityGroupsResponse) FromJsonString(s string) error 
 }
 
 type ModifyDbVersionData struct {
-	// pre-modification version
+
 	OldVersion *string `json:"OldVersion,omitnil,omitempty" name:"OldVersion"`
 
-	// Post-modification Version
+
 	NewVersion *string `json:"NewVersion,omitnil,omitempty" name:"NewVersion"`
 
-	// Upgrade Method
+
 	UpgradeType *string `json:"UpgradeType,omitnil,omitempty" name:"UpgradeType"`
 }
 
 type ModifyInstanceData struct {
-	// CPU After Resizing
+
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Memory After Resizing
+
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Storage Limit After Resizing
+
 	StorageLimit *int64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
 
-	// CPU Before Resizing
+
 	OldCpu *int64 `json:"OldCpu,omitnil,omitempty" name:"OldCpu"`
 
-	// Memory Before Resizing
+
 	OldMemory *int64 `json:"OldMemory,omitnil,omitempty" name:"OldMemory"`
 
-	// Storage Limit Before Resizing
+
 	OldStorageLimit *int64 `json:"OldStorageLimit,omitnil,omitempty" name:"OldStorageLimit"`
 
-	// Instance machine type before scaling.
+	// Instance Machine Type Before Scaling
+	// 1. common, universal type.
+	// 2. exclusive, dedicated.
 	OldDeviceType *string `json:"OldDeviceType,omitnil,omitempty" name:"OldDeviceType"`
 
-	// Instance machine type after scaling.
+	// Instance Machine Type After Scaling
+	// 1. common, universal type.
+	// 2. exclusive, dedicated.
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// Upgrade Method. Switchover is performed after upgrade completion or during maintenance windows
+
 	UpgradeType *string `json:"UpgradeType,omitnil,omitempty" name:"UpgradeType"`
 
 	// Specifies the quantity of libra nodes.
@@ -12588,6 +16685,587 @@ func (r *ModifyInstanceUpgradeLimitDaysResponse) FromJsonString(s string) error 
 }
 
 // Predefined struct for user
+type ModifyLibraDBClusterAccountDescriptionRequestParams struct {
+	// Analysis Cluster id
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Account name.
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
+
+	// Description
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// host name
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+}
+
+type ModifyLibraDBClusterAccountDescriptionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Analysis Cluster id
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Account name.
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
+
+	// Description
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// host name
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+}
+
+func (r *ModifyLibraDBClusterAccountDescriptionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBClusterAccountDescriptionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "AccountName")
+	delete(f, "Description")
+	delete(f, "Host")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLibraDBClusterAccountDescriptionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLibraDBClusterAccountDescriptionResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyLibraDBClusterAccountDescriptionResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyLibraDBClusterAccountDescriptionResponseParams `json:"Response"`
+}
+
+func (r *ModifyLibraDBClusterAccountDescriptionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBClusterAccountDescriptionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLibraDBClusterAccountHostRequestParams struct {
+	// Analysis Cluster id
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Account information
+	Account *InputAccount `json:"Account,omitnil,omitempty" name:"Account"`
+
+	// host name
+	NewHost *string `json:"NewHost,omitnil,omitempty" name:"NewHost"`
+}
+
+type ModifyLibraDBClusterAccountHostRequest struct {
+	*tchttp.BaseRequest
+	
+	// Analysis Cluster id
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Account information
+	Account *InputAccount `json:"Account,omitnil,omitempty" name:"Account"`
+
+	// host name
+	NewHost *string `json:"NewHost,omitnil,omitempty" name:"NewHost"`
+}
+
+func (r *ModifyLibraDBClusterAccountHostRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBClusterAccountHostRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "Account")
+	delete(f, "NewHost")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLibraDBClusterAccountHostRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLibraDBClusterAccountHostResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyLibraDBClusterAccountHostResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyLibraDBClusterAccountHostResponseParams `json:"Response"`
+}
+
+func (r *ModifyLibraDBClusterAccountHostResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBClusterAccountHostResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLibraDBClusterAccountPrivilegeRequestParams struct {
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Account
+	Account *InputAccount `json:"Account,omitnil,omitempty" name:"Account"`
+
+	// Global permission
+	GlobalPrivileges []*string `json:"GlobalPrivileges,omitnil,omitempty" name:"GlobalPrivileges"`
+
+	// Database permission
+	DatabasePrivileges []*DatabasePrivileges `json:"DatabasePrivileges,omitnil,omitempty" name:"DatabasePrivileges"`
+
+	// Table permission
+	TablePrivileges []*TablePrivileges `json:"TablePrivileges,omitnil,omitempty" name:"TablePrivileges"`
+}
+
+type ModifyLibraDBClusterAccountPrivilegeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Account
+	Account *InputAccount `json:"Account,omitnil,omitempty" name:"Account"`
+
+	// Global permission
+	GlobalPrivileges []*string `json:"GlobalPrivileges,omitnil,omitempty" name:"GlobalPrivileges"`
+
+	// Database permission
+	DatabasePrivileges []*DatabasePrivileges `json:"DatabasePrivileges,omitnil,omitempty" name:"DatabasePrivileges"`
+
+	// Table permission
+	TablePrivileges []*TablePrivileges `json:"TablePrivileges,omitnil,omitempty" name:"TablePrivileges"`
+}
+
+func (r *ModifyLibraDBClusterAccountPrivilegeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBClusterAccountPrivilegeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "Account")
+	delete(f, "GlobalPrivileges")
+	delete(f, "DatabasePrivileges")
+	delete(f, "TablePrivileges")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLibraDBClusterAccountPrivilegeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLibraDBClusterAccountPrivilegeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyLibraDBClusterAccountPrivilegeResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyLibraDBClusterAccountPrivilegeResponseParams `json:"Response"`
+}
+
+func (r *ModifyLibraDBClusterAccountPrivilegeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBClusterAccountPrivilegeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLibraDBClusterDataSourceRequestParams struct {
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Read-only analysis engine instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Source information
+	SrcInfo []*LibraDBClusterSrcInfo `json:"SrcInfo,omitnil,omitempty" name:"SrcInfo"`
+}
+
+type ModifyLibraDBClusterDataSourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Read-only analysis engine instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Source information
+	SrcInfo []*LibraDBClusterSrcInfo `json:"SrcInfo,omitnil,omitempty" name:"SrcInfo"`
+}
+
+func (r *ModifyLibraDBClusterDataSourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBClusterDataSourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "InstanceId")
+	delete(f, "SrcInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLibraDBClusterDataSourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLibraDBClusterDataSourceResponseParams struct {
+	// Asynchronous Task ID
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyLibraDBClusterDataSourceResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyLibraDBClusterDataSourceResponseParams `json:"Response"`
+}
+
+func (r *ModifyLibraDBClusterDataSourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBClusterDataSourceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLibraDBClusterNameRequestParams struct {
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Cluster name.
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+}
+
+type ModifyLibraDBClusterNameRequest struct {
+	*tchttp.BaseRequest
+	
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Cluster name.
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+}
+
+func (r *ModifyLibraDBClusterNameRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBClusterNameRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "ClusterName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLibraDBClusterNameRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLibraDBClusterNameResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyLibraDBClusterNameResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyLibraDBClusterNameResponseParams `json:"Response"`
+}
+
+func (r *ModifyLibraDBClusterNameResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBClusterNameResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLibraDBClusterProjectRequestParams struct {
+	// Analysis Cluster ID List
+	ClusterIdSet []*string `json:"ClusterIdSet,omitnil,omitempty" name:"ClusterIdSet"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+}
+
+type ModifyLibraDBClusterProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// Analysis Cluster ID List
+	ClusterIdSet []*string `json:"ClusterIdSet,omitnil,omitempty" name:"ClusterIdSet"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+}
+
+func (r *ModifyLibraDBClusterProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBClusterProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterIdSet")
+	delete(f, "ProjectId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLibraDBClusterProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLibraDBClusterProjectResponseParams struct {
+	// This example shows you how to obtain the cluster list.
+	AffectedClusterIdSet []*string `json:"AffectedClusterIdSet,omitnil,omitempty" name:"AffectedClusterIdSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyLibraDBClusterProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyLibraDBClusterProjectResponseParams `json:"Response"`
+}
+
+func (r *ModifyLibraDBClusterProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBClusterProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLibraDBClusterReplicationObjectRequestParams struct {
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Read-only analysis engine instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Map mode
+	ForceDefaultMapRule *string `json:"ForceDefaultMapRule,omitnil,omitempty" name:"ForceDefaultMapRule"`
+
+	// sync object
+	Objects []*ReplicationObject `json:"Objects,omitnil,omitempty" name:"Objects"`
+
+	// Automated mapping rule
+	AutoMapRules []*AutoMapRule `json:"AutoMapRules,omitnil,omitempty" name:"AutoMapRules"`
+
+	// Whether to refresh existing mapping relationships according to the latest mapping rule
+	RefreshMapping *bool `json:"RefreshMapping,omitnil,omitempty" name:"RefreshMapping"`
+}
+
+type ModifyLibraDBClusterReplicationObjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Read-only analysis engine instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Map mode
+	ForceDefaultMapRule *string `json:"ForceDefaultMapRule,omitnil,omitempty" name:"ForceDefaultMapRule"`
+
+	// sync object
+	Objects []*ReplicationObject `json:"Objects,omitnil,omitempty" name:"Objects"`
+
+	// Automated mapping rule
+	AutoMapRules []*AutoMapRule `json:"AutoMapRules,omitnil,omitempty" name:"AutoMapRules"`
+
+	// Whether to refresh existing mapping relationships according to the latest mapping rule
+	RefreshMapping *bool `json:"RefreshMapping,omitnil,omitempty" name:"RefreshMapping"`
+}
+
+func (r *ModifyLibraDBClusterReplicationObjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBClusterReplicationObjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "InstanceId")
+	delete(f, "ForceDefaultMapRule")
+	delete(f, "Objects")
+	delete(f, "AutoMapRules")
+	delete(f, "RefreshMapping")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLibraDBClusterReplicationObjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLibraDBClusterReplicationObjectResponseParams struct {
+	// Asynchronous Task ID
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyLibraDBClusterReplicationObjectResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyLibraDBClusterReplicationObjectResponseParams `json:"Response"`
+}
+
+func (r *ModifyLibraDBClusterReplicationObjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBClusterReplicationObjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLibraDBForwardConfigRequestParams struct {
+	// Read-only analysis engine instance Id
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Forwarding Mode
+	ForwardMode *string `json:"ForwardMode,omitnil,omitempty" name:"ForwardMode"`
+
+	// Forward instance list
+	ForwardList []*ForwardInstanceInfo `json:"ForwardList,omitnil,omitempty" name:"ForwardList"`
+}
+
+type ModifyLibraDBForwardConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Read-only analysis engine instance Id
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Forwarding Mode
+	ForwardMode *string `json:"ForwardMode,omitnil,omitempty" name:"ForwardMode"`
+
+	// Forward instance list
+	ForwardList []*ForwardInstanceInfo `json:"ForwardList,omitnil,omitempty" name:"ForwardList"`
+}
+
+func (r *ModifyLibraDBForwardConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBForwardConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "ForwardMode")
+	delete(f, "ForwardList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLibraDBForwardConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLibraDBForwardConfigResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyLibraDBForwardConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyLibraDBForwardConfigResponseParams `json:"Response"`
+}
+
+func (r *ModifyLibraDBForwardConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLibraDBForwardConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyMaintainPeriodConfigRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -12752,13 +17430,13 @@ func (r *ModifyParamTemplateResponse) FromJsonString(s string) error {
 }
 
 type ModifyParamsData struct {
-	// Parameter Name
+
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Parameter Value Before Modification
+
 	OldValue *string `json:"OldValue,omitnil,omitempty" name:"OldValue"`
 
-	// Parameter Value After Modification
+
 	CurValue *string `json:"CurValue,omitnil,omitempty" name:"CurValue"`
 }
 
@@ -12847,7 +17525,7 @@ type ModifyProxyRwSplitRequestParams struct {
 	// Assignment mode of read/write weights. Valid values: `system` (auto-assigned), `custom`
 	WeightMode *string `json:"WeightMode,omitnil,omitempty" name:"WeightMode"`
 
-	// Read-Only weight of an instance
+	// Instance Read-Only Weight.
 	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitnil,omitempty" name:"InstanceWeights"`
 
 	// Whether to enable failover. If it is enabled, the connection address will route requests to the source instance in case of proxy failure. Valid values: `true`, `false`.
@@ -12880,6 +17558,12 @@ type ModifyProxyRwSplitRequestParams struct {
 
 	// Connection persistence timeout
 	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitnil,omitempty" name:"ConnectionPoolTimeOut"`
+
+	// Whether to treat the libra node as an ordinary RO node
+	ApNodeAsRoNode *bool `json:"ApNodeAsRoNode,omitnil,omitempty" name:"ApNodeAsRoNode"`
+
+	// libra node fault, whether to forward to other nodes
+	ApQueryToOtherNode *bool `json:"ApQueryToOtherNode,omitnil,omitempty" name:"ApQueryToOtherNode"`
 }
 
 type ModifyProxyRwSplitRequest struct {
@@ -12900,7 +17584,7 @@ type ModifyProxyRwSplitRequest struct {
 	// Assignment mode of read/write weights. Valid values: `system` (auto-assigned), `custom`
 	WeightMode *string `json:"WeightMode,omitnil,omitempty" name:"WeightMode"`
 
-	// Read-Only weight of an instance
+	// Instance Read-Only Weight.
 	InstanceWeights []*ProxyInstanceWeight `json:"InstanceWeights,omitnil,omitempty" name:"InstanceWeights"`
 
 	// Whether to enable failover. If it is enabled, the connection address will route requests to the source instance in case of proxy failure. Valid values: `true`, `false`.
@@ -12933,6 +17617,12 @@ type ModifyProxyRwSplitRequest struct {
 
 	// Connection persistence timeout
 	ConnectionPoolTimeOut *int64 `json:"ConnectionPoolTimeOut,omitnil,omitempty" name:"ConnectionPoolTimeOut"`
+
+	// Whether to treat the libra node as an ordinary RO node
+	ApNodeAsRoNode *bool `json:"ApNodeAsRoNode,omitnil,omitempty" name:"ApNodeAsRoNode"`
+
+	// libra node fault, whether to forward to other nodes
+	ApQueryToOtherNode *bool `json:"ApQueryToOtherNode,omitnil,omitempty" name:"ApQueryToOtherNode"`
 }
 
 func (r *ModifyProxyRwSplitRequest) ToJsonString() string {
@@ -12962,6 +17652,8 @@ func (r *ModifyProxyRwSplitRequest) FromJsonString(s string) error {
 	delete(f, "OpenConnectionPool")
 	delete(f, "ConnectionPoolType")
 	delete(f, "ConnectionPoolTimeOut")
+	delete(f, "ApNodeAsRoNode")
+	delete(f, "ApQueryToOtherNode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyProxyRwSplitRequest has unknown keys!", "")
 	}
@@ -13195,79 +17887,93 @@ func (r *ModifyResourcePackagesDeductionPriorityResponse) FromJsonString(s strin
 
 // Predefined struct for user
 type ModifyServerlessStrategyRequestParams struct {
-	// Specifies the serverless cluster id.
+	// <p>serverless cluster id</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Specifies whether the cluster automatically pauses. valid values for the optional range.
-	// <li>yes</li>
-	// <li>no</li>
+	// <p>Whether the cluster auto-pause feature is enabled. Optional range</p><li>yes</li><li>no</li>
 	AutoPause *string `json:"AutoPause,omitnil,omitempty" name:"AutoPause"`
 
-	// Specifies the delay for cluster auto-pause in seconds. the value range is [600,691200]. the default value is 600.
+	// <p>Delay of Cluster Auto-Pause in seconds, optional range [600,691200], default 600</p>
 	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitnil,omitempty" name:"AutoPauseDelay"`
 
-	// The parameter is temporarily unavailable.
+	// <p>This parameter is temporarily unavailable</p>
 	AutoScaleUpDelay *int64 `json:"AutoScaleUpDelay,omitnil,omitempty" name:"AutoScaleUpDelay"`
 
-	// The parameter is temporarily unavailable.
+	// <p>This parameter is temporarily invalid</p>
 	AutoScaleDownDelay *int64 `json:"AutoScaleDownDelay,omitnil,omitempty" name:"AutoScaleDownDelay"`
 
-	// Minimum value of cpu. for the optional range, refer to the API response of DescribeServerlessInstanceSpecs.
+	// <p>cpu minimum value. For optional range, see API response of DescribeServerlessInstanceSpecs.</p>
 	MinCpu *float64 `json:"MinCpu,omitnil,omitempty" name:"MinCpu"`
 
-	// Maximum value of cpu, optional range refers to the API response of DescribeServerlessInstanceSpecs.
+	// <p>Maximum value of cpu. For optional range, see API response of DescribeServerlessInstanceSpecs.</p>
 	MaxCpu *float64 `json:"MaxCpu,omitnil,omitempty" name:"MaxCpu"`
 
-	// Minimum cpu value of a read-only instance. for valid values, refer to the API response of DescribeServerlessInstanceSpecs.
+	// <p>Minimum value of read-only instance cpu. For the optional range, refer to the API response of DescribeServerlessInstanceSpecs.</p>
 	MinRoCpu *float64 `json:"MinRoCpu,omitnil,omitempty" name:"MinRoCpu"`
 
-	// Maximum value of read-only cpu, optional range refer to the API response of DescribeServerlessInstanceSpecs.
+	// <p>Read-only cpu maximum value of the optional range. For reference, see API response of DescribeServerlessInstanceSpecs.</p>
 	MaxRoCpu *float64 `json:"MaxRoCpu,omitnil,omitempty" name:"MaxRoCpu"`
 
-	// Specifies the minimum count of read-only nodes.
+	// <p>Minimum count of read-only nodes</p>
 	MinRoCount *int64 `json:"MinRoCount,omitnil,omitempty" name:"MinRoCount"`
 
-	// Maximum number of read-only nodes.
+	// <p>Maximum number of read-only nodes</p>
 	MaxRoCount *int64 `json:"MaxRoCount,omitnil,omitempty" name:"MaxRoCount"`
+
+	// <p>Whether archiving is enabled. Optional range</p><li>yes</li><li>no</li>Default value: yes</p>
+	AutoArchive *string `json:"AutoArchive,omitnil,omitempty" name:"AutoArchive"`
+
+	// <p>Upgrade type. Default value: upgradeImmediate. Available values: upgradeImmediate - immediately complete the modification; upgradeInMaintain - complete the modification during maintenance window.</p>
+	UpgradeType *string `json:"UpgradeType,omitnil,omitempty" name:"UpgradeType"`
+
+	// <p>List of security groups to which newly-added read-only instances need to be bound. This only applies to binding security groups to read-only instances generated during the process of this adjustment of policies. Existing instances are not bound.</p>
+	SecurityGroupIdsForNewRo []*string `json:"SecurityGroupIdsForNewRo,omitnil,omitempty" name:"SecurityGroupIdsForNewRo"`
 }
 
 type ModifyServerlessStrategyRequest struct {
 	*tchttp.BaseRequest
 	
-	// Specifies the serverless cluster id.
+	// <p>serverless cluster id</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Specifies whether the cluster automatically pauses. valid values for the optional range.
-	// <li>yes</li>
-	// <li>no</li>
+	// <p>Whether the cluster auto-pause feature is enabled. Optional range</p><li>yes</li><li>no</li>
 	AutoPause *string `json:"AutoPause,omitnil,omitempty" name:"AutoPause"`
 
-	// Specifies the delay for cluster auto-pause in seconds. the value range is [600,691200]. the default value is 600.
+	// <p>Delay of Cluster Auto-Pause in seconds, optional range [600,691200], default 600</p>
 	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitnil,omitempty" name:"AutoPauseDelay"`
 
-	// The parameter is temporarily unavailable.
+	// <p>This parameter is temporarily unavailable</p>
 	AutoScaleUpDelay *int64 `json:"AutoScaleUpDelay,omitnil,omitempty" name:"AutoScaleUpDelay"`
 
-	// The parameter is temporarily unavailable.
+	// <p>This parameter is temporarily invalid</p>
 	AutoScaleDownDelay *int64 `json:"AutoScaleDownDelay,omitnil,omitempty" name:"AutoScaleDownDelay"`
 
-	// Minimum value of cpu. for the optional range, refer to the API response of DescribeServerlessInstanceSpecs.
+	// <p>cpu minimum value. For optional range, see API response of DescribeServerlessInstanceSpecs.</p>
 	MinCpu *float64 `json:"MinCpu,omitnil,omitempty" name:"MinCpu"`
 
-	// Maximum value of cpu, optional range refers to the API response of DescribeServerlessInstanceSpecs.
+	// <p>Maximum value of cpu. For optional range, see API response of DescribeServerlessInstanceSpecs.</p>
 	MaxCpu *float64 `json:"MaxCpu,omitnil,omitempty" name:"MaxCpu"`
 
-	// Minimum cpu value of a read-only instance. for valid values, refer to the API response of DescribeServerlessInstanceSpecs.
+	// <p>Minimum value of read-only instance cpu. For the optional range, refer to the API response of DescribeServerlessInstanceSpecs.</p>
 	MinRoCpu *float64 `json:"MinRoCpu,omitnil,omitempty" name:"MinRoCpu"`
 
-	// Maximum value of read-only cpu, optional range refer to the API response of DescribeServerlessInstanceSpecs.
+	// <p>Read-only cpu maximum value of the optional range. For reference, see API response of DescribeServerlessInstanceSpecs.</p>
 	MaxRoCpu *float64 `json:"MaxRoCpu,omitnil,omitempty" name:"MaxRoCpu"`
 
-	// Specifies the minimum count of read-only nodes.
+	// <p>Minimum count of read-only nodes</p>
 	MinRoCount *int64 `json:"MinRoCount,omitnil,omitempty" name:"MinRoCount"`
 
-	// Maximum number of read-only nodes.
+	// <p>Maximum number of read-only nodes</p>
 	MaxRoCount *int64 `json:"MaxRoCount,omitnil,omitempty" name:"MaxRoCount"`
+
+	// <p>Whether archiving is enabled. Optional range</p><li>yes</li><li>no</li>Default value: yes</p>
+	AutoArchive *string `json:"AutoArchive,omitnil,omitempty" name:"AutoArchive"`
+
+	// <p>Upgrade type. Default value: upgradeImmediate. Available values: upgradeImmediate - immediately complete the modification; upgradeInMaintain - complete the modification during maintenance window.</p>
+	UpgradeType *string `json:"UpgradeType,omitnil,omitempty" name:"UpgradeType"`
+
+	// <p>List of security groups to which newly-added read-only instances need to be bound. This only applies to binding security groups to read-only instances generated during the process of this adjustment of policies. Existing instances are not bound.</p>
+	SecurityGroupIdsForNewRo []*string `json:"SecurityGroupIdsForNewRo,omitnil,omitempty" name:"SecurityGroupIdsForNewRo"`
 }
 
 func (r *ModifyServerlessStrategyRequest) ToJsonString() string {
@@ -13293,6 +17999,9 @@ func (r *ModifyServerlessStrategyRequest) FromJsonString(s string) error {
 	delete(f, "MaxRoCpu")
 	delete(f, "MinRoCount")
 	delete(f, "MaxRoCount")
+	delete(f, "AutoArchive")
+	delete(f, "UpgradeType")
+	delete(f, "SecurityGroupIdsForNewRo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyServerlessStrategyRequest has unknown keys!", "")
 	}
@@ -13301,8 +18010,13 @@ func (r *ModifyServerlessStrategyRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyServerlessStrategyResponseParams struct {
-	// Async process id.
+	// <p>Async process id</p>
+	//
+	// Deprecated: FlowId is deprecated.
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// <p>Task ID.</p>
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -13321,6 +18035,197 @@ func (r *ModifyServerlessStrategyResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyServerlessStrategyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySnapBackupCrossRegionConfigRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Whether cross-region snapshot backup is enabled.
+	CrossRegionsEnable *string `json:"CrossRegionsEnable,omitnil,omitempty" name:"CrossRegionsEnable"`
+
+	// Cross-Regional snapshot backup.
+	CrossRegions []*string `json:"CrossRegions,omitnil,omitempty" name:"CrossRegions"`
+}
+
+type ModifySnapBackupCrossRegionConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Whether cross-region snapshot backup is enabled.
+	CrossRegionsEnable *string `json:"CrossRegionsEnable,omitnil,omitempty" name:"CrossRegionsEnable"`
+
+	// Cross-Regional snapshot backup.
+	CrossRegions []*string `json:"CrossRegions,omitnil,omitempty" name:"CrossRegions"`
+}
+
+func (r *ModifySnapBackupCrossRegionConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySnapBackupCrossRegionConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "CrossRegionsEnable")
+	delete(f, "CrossRegions")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySnapBackupCrossRegionConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySnapBackupCrossRegionConfigResponseParams struct {
+	// Task ID.
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySnapBackupCrossRegionConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySnapBackupCrossRegionConfigResponseParams `json:"Response"`
+}
+
+func (r *ModifySnapBackupCrossRegionConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySnapBackupCrossRegionConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyVaultRequestParams struct {
+	// Safe ID
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Safe name, maximum 255 characters
+	VaultName *string `json:"VaultName,omitnil,omitempty" name:"VaultName"`
+
+	// Safe description, maximum 1024 characters
+	VaultDescribe *string `json:"VaultDescribe,omitnil,omitempty" name:"VaultDescribe"`
+
+	// Backup retention period (seconds). Range: (0, 632448000].
+	BackupSaveSeconds *int64 `json:"BackupSaveSeconds,omitnil,omitempty" name:"BackupSaveSeconds"`
+
+	// Encryption key ID, maximum 36 characters
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Key type, available values: cloud, custom
+	KeyType *string `json:"KeyType,omitnil,omitempty" name:"KeyType"`
+
+	// Key region, maximum 32 characters
+	KeyRegion *string `json:"KeyRegion,omitnil,omitempty" name:"KeyRegion"`
+
+	// Is the safe locked
+	IsLock *bool `json:"IsLock,omitnil,omitempty" name:"IsLock"`
+
+	// Lock expiry time, format: 2006-01-02 15:04:05, lock time current maximum 15 days
+	LockedTime *string `json:"LockedTime,omitnil,omitempty" name:"LockedTime"`
+
+	// Whether it is encrypted
+	IsEncryption *bool `json:"IsEncryption,omitnil,omitempty" name:"IsEncryption"`
+}
+
+type ModifyVaultRequest struct {
+	*tchttp.BaseRequest
+	
+	// Safe ID
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Safe name, maximum 255 characters
+	VaultName *string `json:"VaultName,omitnil,omitempty" name:"VaultName"`
+
+	// Safe description, maximum 1024 characters
+	VaultDescribe *string `json:"VaultDescribe,omitnil,omitempty" name:"VaultDescribe"`
+
+	// Backup retention period (seconds). Range: (0, 632448000].
+	BackupSaveSeconds *int64 `json:"BackupSaveSeconds,omitnil,omitempty" name:"BackupSaveSeconds"`
+
+	// Encryption key ID, maximum 36 characters
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// Key type, available values: cloud, custom
+	KeyType *string `json:"KeyType,omitnil,omitempty" name:"KeyType"`
+
+	// Key region, maximum 32 characters
+	KeyRegion *string `json:"KeyRegion,omitnil,omitempty" name:"KeyRegion"`
+
+	// Is the safe locked
+	IsLock *bool `json:"IsLock,omitnil,omitempty" name:"IsLock"`
+
+	// Lock expiry time, format: 2006-01-02 15:04:05, lock time current maximum 15 days
+	LockedTime *string `json:"LockedTime,omitnil,omitempty" name:"LockedTime"`
+
+	// Whether it is encrypted
+	IsEncryption *bool `json:"IsEncryption,omitnil,omitempty" name:"IsEncryption"`
+}
+
+func (r *ModifyVaultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVaultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VaultId")
+	delete(f, "VaultName")
+	delete(f, "VaultDescribe")
+	delete(f, "BackupSaveSeconds")
+	delete(f, "KeyId")
+	delete(f, "KeyType")
+	delete(f, "KeyRegion")
+	delete(f, "IsLock")
+	delete(f, "LockedTime")
+	delete(f, "IsEncryption")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVaultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyVaultResponseParams struct {
+	// Task ID.
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyVaultResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyVaultResponseParams `json:"Response"`
+}
+
+func (r *ModifyVaultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVaultResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -13426,6 +18331,14 @@ type Module struct {
 
 	// Module name
 	ModuleName *string `json:"ModuleName,omitnil,omitempty" name:"ModuleName"`
+}
+
+type MonthDay struct {
+	// Month info
+	Month *int64 `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// date info
+	Day *int64 `json:"Day,omitnil,omitempty" name:"Day"`
 }
 
 type NetAddr struct {
@@ -13627,6 +18540,128 @@ func (r *OfflineInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type OfflineLibraDBClusterRequestParams struct {
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+}
+
+type OfflineLibraDBClusterRequest struct {
+	*tchttp.BaseRequest
+	
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+}
+
+func (r *OfflineLibraDBClusterRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OfflineLibraDBClusterRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OfflineLibraDBClusterRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OfflineLibraDBClusterResponseParams struct {
+	// flow id
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type OfflineLibraDBClusterResponse struct {
+	*tchttp.BaseResponse
+	Response *OfflineLibraDBClusterResponseParams `json:"Response"`
+}
+
+func (r *OfflineLibraDBClusterResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OfflineLibraDBClusterResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OfflineLibraDBInstanceRequestParams struct {
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Read-only analysis engine instance ID list
+	InstanceIdList []*string `json:"InstanceIdList,omitnil,omitempty" name:"InstanceIdList"`
+}
+
+type OfflineLibraDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Read-only analysis engine instance ID list
+	InstanceIdList []*string `json:"InstanceIdList,omitnil,omitempty" name:"InstanceIdList"`
+}
+
+func (r *OfflineLibraDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OfflineLibraDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "InstanceIdList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OfflineLibraDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OfflineLibraDBInstanceResponseParams struct {
+	// task flow id
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type OfflineLibraDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *OfflineLibraDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *OfflineLibraDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OfflineLibraDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type OldAddrInfo struct {
 	// IP
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
@@ -13649,13 +18684,16 @@ type OpenAuditServiceRequestParams struct {
 	// Frequent log retention period
 	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitnil,omitempty" name:"HighLogExpireDay"`
 
-	// Audit rule. If both this parameter and `RuleTemplateIds` are left empty, full audit will be applied.
+	// Audit rule (deprecated).
 	//
 	// Deprecated: AuditRuleFilters is deprecated.
 	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitnil,omitempty" name:"AuditRuleFilters"`
 
 	// Rule template ID. If both this parameter and `AuditRuleFilters` are left empty, full audit will be applied.
 	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil,omitempty" name:"RuleTemplateIds"`
+
+
+	AuditAll *bool `json:"AuditAll,omitnil,omitempty" name:"AuditAll"`
 }
 
 type OpenAuditServiceRequest struct {
@@ -13670,11 +18708,13 @@ type OpenAuditServiceRequest struct {
 	// Frequent log retention period
 	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitnil,omitempty" name:"HighLogExpireDay"`
 
-	// Audit rule. If both this parameter and `RuleTemplateIds` are left empty, full audit will be applied.
+	// Audit rule (deprecated).
 	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitnil,omitempty" name:"AuditRuleFilters"`
 
 	// Rule template ID. If both this parameter and `AuditRuleFilters` are left empty, full audit will be applied.
 	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil,omitempty" name:"RuleTemplateIds"`
+
+	AuditAll *bool `json:"AuditAll,omitnil,omitempty" name:"AuditAll"`
 }
 
 func (r *OpenAuditServiceRequest) ToJsonString() string {
@@ -13694,6 +18734,7 @@ func (r *OpenAuditServiceRequest) FromJsonString(s string) error {
 	delete(f, "HighLogExpireDay")
 	delete(f, "AuditRuleFilters")
 	delete(f, "RuleTemplateIds")
+	delete(f, "AuditAll")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenAuditServiceRequest has unknown keys!", "")
 	}
@@ -13905,6 +18946,9 @@ type OpenClusterTransparentEncryptRequestParams struct {
 
 	// Key region.
 	KeyRegion *string `json:"KeyRegion,omitnil,omitempty" name:"KeyRegion"`
+
+	// Whether global encryption is enabled
+	IsOpenGlobalEncryption *bool `json:"IsOpenGlobalEncryption,omitnil,omitempty" name:"IsOpenGlobalEncryption"`
 }
 
 type OpenClusterTransparentEncryptRequest struct {
@@ -13921,6 +18965,9 @@ type OpenClusterTransparentEncryptRequest struct {
 
 	// Key region.
 	KeyRegion *string `json:"KeyRegion,omitnil,omitempty" name:"KeyRegion"`
+
+	// Whether global encryption is enabled
+	IsOpenGlobalEncryption *bool `json:"IsOpenGlobalEncryption,omitnil,omitempty" name:"IsOpenGlobalEncryption"`
 }
 
 func (r *OpenClusterTransparentEncryptRequest) ToJsonString() string {
@@ -13939,6 +18986,7 @@ func (r *OpenClusterTransparentEncryptRequest) FromJsonString(s string) error {
 	delete(f, "KeyType")
 	delete(f, "KeyId")
 	delete(f, "KeyRegion")
+	delete(f, "IsOpenGlobalEncryption")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenClusterTransparentEncryptRequest has unknown keys!", "")
 	}
@@ -14320,43 +19368,46 @@ type ParamItem struct {
 }
 
 type ParamItemDetail struct {
-	// Current value
+	// <p>Current value</p>
 	CurrentValue *string `json:"CurrentValue,omitnil,omitempty" name:"CurrentValue"`
 
-	// Default value
+	// <p>Default value</p>
 	Default *string `json:"Default,omitnil,omitempty" name:"Default"`
 
-	// Enumerated values of the parameter It is null if the parameter is non-enumerated.
+	// <p>Optional enumerated value of the parameter. If it is a non-enumerated value, it is empty.</p>
 	EnumValue []*string `json:"EnumValue,omitnil,omitempty" name:"EnumValue"`
 
-	// Valid values: `1` (global parameter),  `0`  (non-global parameter).
+	// <p>1: Global parameter, 0: Non-global parameter</p>
 	IsGlobal *int64 `json:"IsGlobal,omitnil,omitempty" name:"IsGlobal"`
 
-	// Maximum value
+	// <p>Maximum value</p>
 	Max *string `json:"Max,omitnil,omitempty" name:"Max"`
 
-	// Minimum value
+	// <p>Minimum value</p>
 	Min *string `json:"Min,omitnil,omitempty" name:"Min"`
 
-	// Whether to restart the database for the modified parameters to take effect. Valid values:  `0` (no), `1` (yes)
+	// <p>After modifying parameters, whether database restart is required to take effect. 0-no restart required, 1-restart required.</p>
 	NeedReboot *int64 `json:"NeedReboot,omitnil,omitempty" name:"NeedReboot"`
 
-	// Parameter name
+	// <p>Parameter name</p>
 	ParamName *string `json:"ParamName,omitnil,omitempty" name:"ParamName"`
 
-	// Parameter type. Valid values:  `integer`, `enum`, `float`, `string`, `func`.
+	// <p>Parameter type: integer, enum, float, string, func</p>
 	ParamType *string `json:"ParamType,omitnil,omitempty" name:"ParamType"`
 
-	// Parameter description
+	// <p>Whether the parameter is modifiable</p>
+	ModifiableInfo *ModifiableInfo `json:"ModifiableInfo,omitnil,omitempty" name:"ModifiableInfo"`
+
+	// <p>Parameter description</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Whether the type is a formula.
+	// <p>Whether the type is formula</p>
 	IsFunc *bool `json:"IsFunc,omitnil,omitempty" name:"IsFunc"`
 
-	// Parameter configuration formula.
+	// <p>Parameter configuration formula</p>
 	Func *string `json:"Func,omitnil,omitempty" name:"Func"`
 
-	// The default formula style of parameters that support formulas.
+	// <p>Default formula style for parameters that support formulas</p>
 	FuncPattern *string `json:"FuncPattern,omitnil,omitempty" name:"FuncPattern"`
 }
 
@@ -14645,6 +19696,12 @@ type ProxyGroupRwInfo struct {
 
 	// Connection mode. Valid values: `balance`, `nearby`.
 	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
+
+	// Whether to treat the libra node as an ordinary RO node
+	ApNodeAsRoNode *bool `json:"ApNodeAsRoNode,omitnil,omitempty" name:"ApNodeAsRoNode"`
+
+	// libra node fault, whether to forward to other nodes
+	ApQueryToOtherNode *bool `json:"ApQueryToOtherNode,omitnil,omitempty" name:"ApQueryToOtherNode"`
 }
 
 type ProxyInstanceWeight struct {
@@ -14686,7 +19743,7 @@ type ProxyNodeInfo struct {
 	// AZ
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Database Proxy Node Name
+
 	OssProxyNodeName *string `json:"OssProxyNodeName,omitnil,omitempty" name:"OssProxyNodeName"`
 }
 
@@ -14734,7 +19791,7 @@ type QueryFilter struct {
 }
 
 type QueryParamFilter struct {
-	// Search field. Valid values: "InstanceId", "ProjectId", "InstanceName", "Vip"
+	// Search field. Currently supports: ProxyGroupId
 	Names []*string `json:"Names,omitnil,omitempty" name:"Names"`
 
 	// Search string
@@ -14742,6 +19799,55 @@ type QueryParamFilter struct {
 
 	// Whether to use exact match
 	ExactMatch *bool `json:"ExactMatch,omitnil,omitempty" name:"ExactMatch"`
+}
+
+type QuerySimpleFilter struct {
+	// Field name
+	Names []*string `json:"Names,omitnil,omitempty" name:"Names"`
+
+	// Field value.
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+
+	// Fuzzy matching. valid values: true (yes), false (no).
+	ExactMatch *bool `json:"ExactMatch,omitnil,omitempty" name:"ExactMatch"`
+}
+
+type RedoLogItem struct {
+	// Filename.
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+
+	// File size
+	FileSize *int64 `json:"FileSize,omitnil,omitempty" name:"FileSize"`
+
+	// Backup time
+	BackupTime *string `json:"BackupTime,omitnil,omitempty" name:"BackupTime"`
+
+	// redoLogId
+	RedoLogId *int64 `json:"RedoLogId,omitnil,omitempty" name:"RedoLogId"`
+
+	// Cross-Region information.
+	RedoCrossRegions []*BackupRegionAndIds `json:"RedoCrossRegions,omitnil,omitempty" name:"RedoCrossRegions"`
+
+	// Status.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Completion time.
+	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
+
+	// Safe info
+	VaultInfos []*VaultInfo `json:"VaultInfos,omitnil,omitempty" name:"VaultInfos"`
+
+	// Backup delivery status
+	CopyStatus *string `json:"CopyStatus,omitnil,omitempty" name:"CopyStatus"`
+
+	// Encryption key
+	EncryptKeyId *string `json:"EncryptKeyId,omitnil,omitempty" name:"EncryptKeyId"`
+
+	// Key region for encryption
+	EncryptRegion *string `json:"EncryptRegion,omitnil,omitempty" name:"EncryptRegion"`
 }
 
 // Predefined struct for user
@@ -14799,6 +19905,48 @@ func (r *RefundResourcePackageResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *RefundResourcePackageResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type RegionInstanceSpecInfo struct {
+	// Number of CPU cores
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
+
+	// Memory size.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
+
+	// Minimum storage size
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MinStorageSize *int64 `json:"MinStorageSize,omitnil,omitempty" name:"MinStorageSize"`
+
+	// Maximum storage size
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MaxStorageSize *int64 `json:"MaxStorageSize,omitnil,omitempty" name:"MaxStorageSize"`
+
+	// Whether there is inventory
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HasStock *bool `json:"HasStock,omitnil,omitempty" name:"HasStock"`
+
+	// Instance type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Storage type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// minimum replica count
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MinReplicaNum *uint64 `json:"MinReplicaNum,omitnil,omitempty" name:"MinReplicaNum"`
+
+	// Maximum number of replicas
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MaxReplicaNum *uint64 `json:"MaxReplicaNum,omitnil,omitempty" name:"MaxReplicaNum"`
+
+	// Availability zone inventory information list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneStockInfos []*ZoneStockInfo4Libra `json:"ZoneStockInfos,omitnil,omitempty" name:"ZoneStockInfos"`
 }
 
 // Predefined struct for user
@@ -15023,6 +20171,96 @@ func (r *RenewClustersResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type RenewLibraDBClustersRequestParams struct {
+	// Time interval
+	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
+	// Time unit
+	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
+
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Order mode
+	DealMode *int64 `json:"DealMode,omitnil,omitempty" name:"DealMode"`
+}
+
+type RenewLibraDBClustersRequest struct {
+	*tchttp.BaseRequest
+	
+	// Time interval
+	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
+	// Time unit
+	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
+
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Order mode
+	DealMode *int64 `json:"DealMode,omitnil,omitempty" name:"DealMode"`
+}
+
+func (r *RenewLibraDBClustersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RenewLibraDBClustersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TimeSpan")
+	delete(f, "TimeUnit")
+	delete(f, "ClusterId")
+	delete(f, "DealMode")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RenewLibraDBClustersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RenewLibraDBClustersResponseParams struct {
+	// Prepaid Total Order Number
+	BigDealIds []*string `json:"BigDealIds,omitnil,omitempty" name:"BigDealIds"`
+
+	// Freeze transaction
+	TranId *string `json:"TranId,omitnil,omitempty" name:"TranId"`
+
+	// Order name
+	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
+
+	// Resource ID
+	ResourceIds []*string `json:"ResourceIds,omitnil,omitempty" name:"ResourceIds"`
+
+	// Cluster ID.
+	ClusterIds []*string `json:"ClusterIds,omitnil,omitempty" name:"ClusterIds"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RenewLibraDBClustersResponse struct {
+	*tchttp.BaseResponse
+	Response *RenewLibraDBClustersResponseParams `json:"Response"`
+}
+
+func (r *RenewLibraDBClustersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RenewLibraDBClustersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ReplayInstanceAuditLogRequestParams struct {
 	// Source cluster id.
 	SourceClusterId *string `json:"SourceClusterId,omitnil,omitempty" name:"SourceClusterId"`
@@ -15130,6 +20368,28 @@ func (r *ReplayInstanceAuditLogResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ReplicationObject struct {
+	// Source instance type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SrcInstanceType *string `json:"SrcInstanceType,omitnil,omitempty" name:"SrcInstanceType"`
+
+	// Source Cluster Id
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SrcClusterId *string `json:"SrcClusterId,omitnil,omitempty" name:"SrcClusterId"`
+
+	// Source instance ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SrcInstanceId *string `json:"SrcInstanceId,omitnil,omitempty" name:"SrcInstanceId"`
+
+	// Copy task ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReplicationJobId *string `json:"ReplicationJobId,omitnil,omitempty" name:"ReplicationJobId"`
+
+	// sync object details
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MigrateObjects *MigrateOpt `json:"MigrateObjects,omitnil,omitempty" name:"MigrateObjects"`
+}
+
 // Predefined struct for user
 type ResetAccountPasswordRequestParams struct {
 	// Database account name
@@ -15205,6 +20465,88 @@ func (r *ResetAccountPasswordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ResetLibraDBClusterAccountPasswordRequestParams struct {
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Password.
+	AccountPassword *string `json:"AccountPassword,omitnil,omitempty" name:"AccountPassword"`
+
+	// Account
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
+
+	// Encryption method
+	EncryptMethod *string `json:"EncryptMethod,omitnil,omitempty" name:"EncryptMethod"`
+
+	// host
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+}
+
+type ResetLibraDBClusterAccountPasswordRequest struct {
+	*tchttp.BaseRequest
+	
+	// Analysis Cluster ID
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Password.
+	AccountPassword *string `json:"AccountPassword,omitnil,omitempty" name:"AccountPassword"`
+
+	// Account
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
+
+	// Encryption method
+	EncryptMethod *string `json:"EncryptMethod,omitnil,omitempty" name:"EncryptMethod"`
+
+	// host
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+}
+
+func (r *ResetLibraDBClusterAccountPasswordRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetLibraDBClusterAccountPasswordRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "AccountPassword")
+	delete(f, "AccountName")
+	delete(f, "EncryptMethod")
+	delete(f, "Host")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetLibraDBClusterAccountPasswordRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResetLibraDBClusterAccountPasswordResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ResetLibraDBClusterAccountPasswordResponse struct {
+	*tchttp.BaseResponse
+	Response *ResetLibraDBClusterAccountPasswordResponseParams `json:"Response"`
+}
+
+func (r *ResetLibraDBClusterAccountPasswordResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetLibraDBClusterAccountPasswordResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ResourcePackage struct {
 	// The unique ID of the resource package.
 	PackageId *string `json:"PackageId,omitnil,omitempty" name:"PackageId"`
@@ -15275,6 +20617,64 @@ func (r *RestartInstanceResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type RestartLibraDBInstanceRequestParams struct {
+	// Read-only analysis engine instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type RestartLibraDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Read-only analysis engine instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *RestartLibraDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RestartLibraDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RestartLibraDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RestartLibraDBInstanceResponseParams struct {
+	// Asynchronous task ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RestartLibraDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *RestartLibraDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *RestartLibraDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RestartLibraDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ResumeServerlessRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
@@ -15331,6 +20731,14 @@ func (r *ResumeServerlessResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type RoAddr struct {
+	// IP address
+	IP *string `json:"IP,omitnil,omitempty" name:"IP"`
+
+	// Port.
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
+}
+
 // Predefined struct for user
 type RollBackClusterRequestParams struct {
 	// Cluster ID.
@@ -15356,6 +20764,9 @@ type RollBackClusterRequestParams struct {
 
 	// Mode of rolling back by time point. full: normal; db: fast; table: ultra-fast (the default value is normal).
 	RollbackMode *string `json:"RollbackMode,omitnil,omitempty" name:"RollbackMode"`
+
+	// Safe id
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
 }
 
 type RollBackClusterRequest struct {
@@ -15384,6 +20795,9 @@ type RollBackClusterRequest struct {
 
 	// Mode of rolling back by time point. full: normal; db: fast; table: ultra-fast (the default value is normal).
 	RollbackMode *string `json:"RollbackMode,omitnil,omitempty" name:"RollbackMode"`
+
+	// Safe id
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
 }
 
 func (r *RollBackClusterRequest) ToJsonString() string {
@@ -15406,6 +20820,7 @@ func (r *RollBackClusterRequest) FromJsonString(s string) error {
 	delete(f, "RollbackDatabases")
 	delete(f, "RollbackTables")
 	delete(f, "RollbackMode")
+	delete(f, "VaultId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RollBackClusterRequest has unknown keys!", "")
 	}
@@ -15438,40 +20853,40 @@ func (r *RollBackClusterResponse) FromJsonString(s string) error {
 }
 
 type RollbackData struct {
-	// Instance CPU
+
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Instance Memory
+
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Cluster storage limit
+
 	StorageLimit *int64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
 
-	// Original Cluster id
+
 	OriginalClusterId *string `json:"OriginalClusterId,omitnil,omitempty" name:"OriginalClusterId"`
 
-	// Original Cluster Name
+
 	OriginalClusterName *string `json:"OriginalClusterName,omitnil,omitempty" name:"OriginalClusterName"`
 
-	// Rollback Method
+
 	RollbackStrategy *string `json:"RollbackStrategy,omitnil,omitempty" name:"RollbackStrategy"`
 
-	// Snapshot Time
+
 	SnapshotTime *string `json:"SnapshotTime,omitnil,omitempty" name:"SnapshotTime"`
 
-	// Minimum CPU when rolling back to a serverlessls cluster.
+	// Roll back to the Serverless cluster with minimum CPU
 	MinCpu *int64 `json:"MinCpu,omitnil,omitempty" name:"MinCpu"`
 
-	// Maximum CPU when rolling back to a serverlessls cluster.
+	// Roll back to the Serverless cluster with maximum CPU
 	MaxCpu *int64 `json:"MaxCpu,omitnil,omitempty" name:"MaxCpu"`
 
 	// Snapshot ID.
 	SnapShotId *uint64 `json:"SnapShotId,omitnil,omitempty" name:"SnapShotId"`
 
-	// Rollback Database
+
 	RollbackDatabases []*RollbackDatabase `json:"RollbackDatabases,omitnil,omitempty" name:"RollbackDatabases"`
 
-	// Rollback Data Table
+
 	RollbackTables []*RollbackTable `json:"RollbackTables,omitnil,omitempty" name:"RollbackTables"`
 
 	// Specifies the backup file name.
@@ -15482,10 +20897,10 @@ type RollbackData struct {
 }
 
 type RollbackDatabase struct {
-	// Old Database Name
+
 	OldDatabase *string `json:"OldDatabase,omitnil,omitempty" name:"OldDatabase"`
 
-	// New Database Name
+
 	NewDatabase *string `json:"NewDatabase,omitnil,omitempty" name:"NewDatabase"`
 }
 
@@ -15534,10 +20949,10 @@ type RollbackProcessInfo struct {
 	// The exchangeable time of vip.
 	VipSwitchableTime *string `json:"VipSwitchableTime,omitnil,omitempty" name:"VipSwitchableTime"`
 
-	// Exchange Instance List
+
 	ExchangeInstanceInfoList []*ExchangeInstanceInfo `json:"ExchangeInstanceInfoList,omitnil,omitempty" name:"ExchangeInstanceInfoList"`
 
-	// Swap RO Group List
+
 	ExchangeRoGroupInfoList []*ExchangeRoGroupInfo `json:"ExchangeRoGroupInfoList,omitnil,omitempty" name:"ExchangeRoGroupInfoList"`
 
 	// Current step.
@@ -15568,10 +20983,10 @@ type RollbackRoGroupInfo struct {
 }
 
 type RollbackTable struct {
-	// Database Name
+
 	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
 
-	// Database Table
+
 	Tables []*RollbackTableInfo `json:"Tables,omitnil,omitempty" name:"Tables"`
 }
 
@@ -15593,177 +21008,183 @@ type RollbackTimeRange struct {
 
 // Predefined struct for user
 type RollbackToNewClusterRequestParams struct {
-	// AZ.
+	// <p>AZ.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// During rollback, pass in the source cluster ID to find the source pool ID.
+	// <p>During rollback, input the source cluster ID to search for the source poolId</p>
 	OriginalClusterId *string `json:"OriginalClusterId,omitnil,omitempty" name:"OriginalClusterId"`
 
-	// VPC ID.
+	// <p>VPC network ID</p>
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// Subnet ID.
+	// <p>Subnet ID</p>
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// The cluster name should contain fewer than 64 characters. Valid values for each character: uppercase/lowercase letters, digits, and special characters ('-', '_', and '.').
+	// <p>Cluster name, length less than 64 characters. Each character value ranges from uppercase/lowercase letters, digits, to special symbols ('-', '_', '.').</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Rolls back by snapshot, which indicates snapshotId; rolls back by time point, which indicates queryId. When the value of queryId is 0, it indicates that the validity of the time point needs to be verified.
+	// <p>Snapshot rollback means snapshotId; point-in-time rollback means queryId. A value of 0 indicates requirement to judge whether the time point is valid.</p>
 	RollbackId *uint64 `json:"RollbackId,omitnil,omitempty" name:"RollbackId"`
 
-	// Rolls back by time point, which indicates the specified time; rolls back by snapshot, which indicates the snapshot time.
+	// <p>Point-in-time rollback, specified time; snapshot rollback, snapshot time</p>
 	ExpectTime *string `json:"ExpectTime,omitnil,omitempty" name:"ExpectTime"`
 
-	// Whether to select promo vouchers automatically. 1: yes; 0: no. The default value is 0.
+	// <p>Whether to automatically select a voucher. 1: Yes; 0: No. Default is 0.</p>
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Information about the tag array to be bound during cluster creation.
+	// <p>tag Array information that should be bound for cluster creation</p>
 	ResourceTags []*Tag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-	// Database type. When the value of DbType is MYSQL, the valid values are NORMAL and SERVERLESS (the default value is NORMAL).
+	// <p>DB type<br>Selectable when DbType is MYSQL (default NORMAL):</p><li>NORMAL</li><li>SERVERLESS</li>
 	DbMode *string `json:"DbMode,omitnil,omitempty" name:"DbMode"`
 
-	// This parameter is required when the value of DbMode is SEVERLESS. For the settings of the minimum CPU value, refer to the value returned by the DescribeServerlessInstanceSpecs API for the valid value.
+	// <p>Required when DbMode is SEVERLESS<br>Minimum value of cpu. For optional range, see API response of DescribeServerlessInstanceSpecs</p>
 	MinCpu *float64 `json:"MinCpu,omitnil,omitempty" name:"MinCpu"`
 
-	// This parameter is required when the value of DbMode is SEVERLESS. For the settings of the maximum CPU value, refer to the value returned by the DescribeServerlessInstanceSpecs API for the valid value.
+	// <p>Required when DbMode is SEVERLESS:<br>Maximum value of cpu. For the optional range, see the API response of DescribeServerlessInstanceSpecs.</p>
 	MaxCpu *float64 `json:"MaxCpu,omitnil,omitempty" name:"MaxCpu"`
 
-	// Specifies whether the cluster is automatically paused when the value of DbMode is SEVERLESS. Valid values: yes; no. The default value is yes.
+	// <p>When DbMode is SEVERLESS, whether to automatically pause within specified clusters. Optional range</p><li>yes</li><li>no</li>Default value: yes
 	AutoPause *string `json:"AutoPause,omitnil,omitempty" name:"AutoPause"`
 
-	// Specifies the delay for automatic cluster pause (in seconds) when the value of DbMode is SEVERLESS. Value range: [600, 691200]. The default value is 600.
+	// <p>When DbMode is SEVERLESS, specify the delay for Cluster Auto-Pause in seconds, optional range [600,691200]<br>Default value: 600</p>
 	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitnil,omitempty" name:"AutoPauseDelay"`
 
-	// Security group ID array.
+	// <p>Security group id array</p>
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// Alarm policy ID array.
+	// <p>Alarm policy Id array</p>
 	AlarmPolicyIds []*string `json:"AlarmPolicyIds,omitnil,omitempty" name:"AlarmPolicyIds"`
 
-	// Parameter array. The character_set_server (utf8 | latin1 | gbk | utf8mb4) is currently supported. lower_case_table_names: 1 - case-insensitive; 0 - case-sensitive.
+	// <p>Parameter array, temporarily supports character_set_server (utf8|latin1|gbk|utf8mb4), lower_case_table_names, 1-case-insensitive, 0-case-sensitive.</p>
 	ClusterParams []*ParamItem `json:"ClusterParams,omitnil,omitempty" name:"ClusterParams"`
 
-	// Parameter template ID, which can be obtained through the DescribeParamTemplates API.
+	// <p>Parameter template ID. The parameter template ID can be obtained through querying parameter template information DescribeParamTemplates.</p>
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
 
-	// Instance initialization configuration information, which is mainly used for selecting different instance specifications during cluster purchase.
+	// <p>Instance initialization configuration information is mainly used to select different specification instances during cluster purchase.</p>
 	InstanceInitInfos []*InstanceInitInfo `json:"InstanceInitInfos,omitnil,omitempty" name:"InstanceInitInfos"`
 
-	// 0 - place an order and pay; 1 - place an order.
+	// <p>0-Place order and pay 1-Placing order</p>
 	DealMode *int64 `json:"DealMode,omitnil,omitempty" name:"DealMode"`
 
-	// Compute node billing mode: 0 - pay-as-you-go; 1 - prepaid.
+	// <p>Pay-per-compute-node model: 0-Pay-As-You-Go, 1-Prepayment</p>
 	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Time.
+	// <p>Time</p>
 	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
-	// Unit.
+	// <p>Unit</p>
 	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
 
-	// Rollback database information.
+	// <p>Rollback database info</p>
 	RollbackDatabases []*RollbackDatabase `json:"RollbackDatabases,omitnil,omitempty" name:"RollbackDatabases"`
 
-	// Rollback table information.
+	// <p>Roll back table information</p>
 	RollbackTables []*RollbackTable `json:"RollbackTables,omitnil,omitempty" name:"RollbackTables"`
 
-	// Source read-only instance information.
+	// <p>Original ro instance information</p>
 	OriginalROInstanceList []*string `json:"OriginalROInstanceList,omitnil,omitempty" name:"OriginalROInstanceList"`
 
-	// Project ID
+	// <p>Project ID.</p>
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Whether to enable archiving. Valid values: yes; no. The default value is yes.
+	// <p>Whether to enable archive. Optional range <li>yes</li><li>no</li> Default value: yes</p>
 	AutoArchive *string `json:"AutoArchive,omitnil,omitempty" name:"AutoArchive"`
+
+	// <p>Whether to restore from the saved backup</p>
+	FromSaveBackup *bool `json:"FromSaveBackup,omitnil,omitempty" name:"FromSaveBackup"`
 }
 
 type RollbackToNewClusterRequest struct {
 	*tchttp.BaseRequest
 	
-	// AZ.
+	// <p>AZ.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// During rollback, pass in the source cluster ID to find the source pool ID.
+	// <p>During rollback, input the source cluster ID to search for the source poolId</p>
 	OriginalClusterId *string `json:"OriginalClusterId,omitnil,omitempty" name:"OriginalClusterId"`
 
-	// VPC ID.
+	// <p>VPC network ID</p>
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// Subnet ID.
+	// <p>Subnet ID</p>
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// The cluster name should contain fewer than 64 characters. Valid values for each character: uppercase/lowercase letters, digits, and special characters ('-', '_', and '.').
+	// <p>Cluster name, length less than 64 characters. Each character value ranges from uppercase/lowercase letters, digits, to special symbols ('-', '_', '.').</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Rolls back by snapshot, which indicates snapshotId; rolls back by time point, which indicates queryId. When the value of queryId is 0, it indicates that the validity of the time point needs to be verified.
+	// <p>Snapshot rollback means snapshotId; point-in-time rollback means queryId. A value of 0 indicates requirement to judge whether the time point is valid.</p>
 	RollbackId *uint64 `json:"RollbackId,omitnil,omitempty" name:"RollbackId"`
 
-	// Rolls back by time point, which indicates the specified time; rolls back by snapshot, which indicates the snapshot time.
+	// <p>Point-in-time rollback, specified time; snapshot rollback, snapshot time</p>
 	ExpectTime *string `json:"ExpectTime,omitnil,omitempty" name:"ExpectTime"`
 
-	// Whether to select promo vouchers automatically. 1: yes; 0: no. The default value is 0.
+	// <p>Whether to automatically select a voucher. 1: Yes; 0: No. Default is 0.</p>
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Information about the tag array to be bound during cluster creation.
+	// <p>tag Array information that should be bound for cluster creation</p>
 	ResourceTags []*Tag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-	// Database type. When the value of DbType is MYSQL, the valid values are NORMAL and SERVERLESS (the default value is NORMAL).
+	// <p>DB type<br>Selectable when DbType is MYSQL (default NORMAL):</p><li>NORMAL</li><li>SERVERLESS</li>
 	DbMode *string `json:"DbMode,omitnil,omitempty" name:"DbMode"`
 
-	// This parameter is required when the value of DbMode is SEVERLESS. For the settings of the minimum CPU value, refer to the value returned by the DescribeServerlessInstanceSpecs API for the valid value.
+	// <p>Required when DbMode is SEVERLESS<br>Minimum value of cpu. For optional range, see API response of DescribeServerlessInstanceSpecs</p>
 	MinCpu *float64 `json:"MinCpu,omitnil,omitempty" name:"MinCpu"`
 
-	// This parameter is required when the value of DbMode is SEVERLESS. For the settings of the maximum CPU value, refer to the value returned by the DescribeServerlessInstanceSpecs API for the valid value.
+	// <p>Required when DbMode is SEVERLESS:<br>Maximum value of cpu. For the optional range, see the API response of DescribeServerlessInstanceSpecs.</p>
 	MaxCpu *float64 `json:"MaxCpu,omitnil,omitempty" name:"MaxCpu"`
 
-	// Specifies whether the cluster is automatically paused when the value of DbMode is SEVERLESS. Valid values: yes; no. The default value is yes.
+	// <p>When DbMode is SEVERLESS, whether to automatically pause within specified clusters. Optional range</p><li>yes</li><li>no</li>Default value: yes
 	AutoPause *string `json:"AutoPause,omitnil,omitempty" name:"AutoPause"`
 
-	// Specifies the delay for automatic cluster pause (in seconds) when the value of DbMode is SEVERLESS. Value range: [600, 691200]. The default value is 600.
+	// <p>When DbMode is SEVERLESS, specify the delay for Cluster Auto-Pause in seconds, optional range [600,691200]<br>Default value: 600</p>
 	AutoPauseDelay *int64 `json:"AutoPauseDelay,omitnil,omitempty" name:"AutoPauseDelay"`
 
-	// Security group ID array.
+	// <p>Security group id array</p>
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// Alarm policy ID array.
+	// <p>Alarm policy Id array</p>
 	AlarmPolicyIds []*string `json:"AlarmPolicyIds,omitnil,omitempty" name:"AlarmPolicyIds"`
 
-	// Parameter array. The character_set_server (utf8 | latin1 | gbk | utf8mb4) is currently supported. lower_case_table_names: 1 - case-insensitive; 0 - case-sensitive.
+	// <p>Parameter array, temporarily supports character_set_server (utf8|latin1|gbk|utf8mb4), lower_case_table_names, 1-case-insensitive, 0-case-sensitive.</p>
 	ClusterParams []*ParamItem `json:"ClusterParams,omitnil,omitempty" name:"ClusterParams"`
 
-	// Parameter template ID, which can be obtained through the DescribeParamTemplates API.
+	// <p>Parameter template ID. The parameter template ID can be obtained through querying parameter template information DescribeParamTemplates.</p>
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
 
-	// Instance initialization configuration information, which is mainly used for selecting different instance specifications during cluster purchase.
+	// <p>Instance initialization configuration information is mainly used to select different specification instances during cluster purchase.</p>
 	InstanceInitInfos []*InstanceInitInfo `json:"InstanceInitInfos,omitnil,omitempty" name:"InstanceInitInfos"`
 
-	// 0 - place an order and pay; 1 - place an order.
+	// <p>0-Place order and pay 1-Placing order</p>
 	DealMode *int64 `json:"DealMode,omitnil,omitempty" name:"DealMode"`
 
-	// Compute node billing mode: 0 - pay-as-you-go; 1 - prepaid.
+	// <p>Pay-per-compute-node model: 0-Pay-As-You-Go, 1-Prepayment</p>
 	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Time.
+	// <p>Time</p>
 	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
-	// Unit.
+	// <p>Unit</p>
 	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
 
-	// Rollback database information.
+	// <p>Rollback database info</p>
 	RollbackDatabases []*RollbackDatabase `json:"RollbackDatabases,omitnil,omitempty" name:"RollbackDatabases"`
 
-	// Rollback table information.
+	// <p>Roll back table information</p>
 	RollbackTables []*RollbackTable `json:"RollbackTables,omitnil,omitempty" name:"RollbackTables"`
 
-	// Source read-only instance information.
+	// <p>Original ro instance information</p>
 	OriginalROInstanceList []*string `json:"OriginalROInstanceList,omitnil,omitempty" name:"OriginalROInstanceList"`
 
-	// Project ID
+	// <p>Project ID.</p>
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Whether to enable archiving. Valid values: yes; no. The default value is yes.
+	// <p>Whether to enable archive. Optional range <li>yes</li><li>no</li> Default value: yes</p>
 	AutoArchive *string `json:"AutoArchive,omitnil,omitempty" name:"AutoArchive"`
+
+	// <p>Whether to restore from the saved backup</p>
+	FromSaveBackup *bool `json:"FromSaveBackup,omitnil,omitempty" name:"FromSaveBackup"`
 }
 
 func (r *RollbackToNewClusterRequest) ToJsonString() string {
@@ -15806,6 +21227,7 @@ func (r *RollbackToNewClusterRequest) FromJsonString(s string) error {
 	delete(f, "OriginalROInstanceList")
 	delete(f, "ProjectId")
 	delete(f, "AutoArchive")
+	delete(f, "FromSaveBackup")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RollbackToNewClusterRequest has unknown keys!", "")
 	}
@@ -15814,19 +21236,20 @@ func (r *RollbackToNewClusterRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type RollbackToNewClusterResponseParams struct {
-	// Frozen transaction ID.
+	// <p>Frozen transaction ID</p>
 	TranId *string `json:"TranId,omitnil,omitempty" name:"TranId"`
 
-	// Order ID
+	// <p>Order ID</p>
 	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
 
-	// Resource ID list (this field is no longer maintained. please use the dealNames field and the DescribeResourcesByDealName query API to obtain resource ids.).
+	// <p>Resource ID list (This field is no longer maintained. Please use the dealNames field to query the API DescribeResourcesByDealName to obtain resource IDs.)</p>
 	ResourceIds []*string `json:"ResourceIds,omitnil,omitempty" name:"ResourceIds"`
 
-	// Cluster ID list. this field is no longer maintained. please use the dealNames field and the DescribeResourcesByDealName query API to get the cluster ID.
+	// <p>Cluster ID list (This field is no longer maintained. Please use the dealNames field to query the API DescribeResourcesByDealName to obtain cluster IDs.)</p>
 	ClusterIds []*string `json:"ClusterIds,omitnil,omitempty" name:"ClusterIds"`
 
-	// Large order number.
+	// <p>Large order number</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	BigDealIds []*string `json:"BigDealIds,omitnil,omitempty" name:"BigDealIds"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -15954,6 +21377,38 @@ type SaleZone struct {
 
 	// Specifies whether a newly purchased cluster is allowed in the current availability zone. valid values: 1 (allowed), 0 (not allowed).
 	IsSupportCreateCluster *int64 `json:"IsSupportCreateCluster,omitnil,omitempty" name:"IsSupportCreateCluster"`
+}
+
+type SaveBackupClusterInfo struct {
+	// Backup id of the deceased.
+	BackupId *int64 `json:"BackupId,omitnil,omitempty" name:"BackupId"`
+
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Cluster name.
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// Region.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Availability zone
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Backup time
+	BackupTime *string `json:"BackupTime,omitnil,omitempty" name:"BackupTime"`
+
+	// Database version.
+	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
+
+	// Db type (NORMAL, SERVERLESS).
+	DbMode *string `json:"DbMode,omitnil,omitempty" name:"DbMode"`
+
+	// Cluster status.
+	ClusterStatus *string `json:"ClusterStatus,omitnil,omitempty" name:"ClusterStatus"`
+
+	// Task list.
+	Tasks []*ObjectTask `json:"Tasks,omitnil,omitempty" name:"Tasks"`
 }
 
 // Predefined struct for user
@@ -16140,25 +21595,25 @@ type SecurityGroup struct {
 }
 
 type ServerlessSpec struct {
-	// Specifies the minimum value of the cpu.
+	// <p>cpu minimum value</p>
 	MinCpu *float64 `json:"MinCpu,omitnil,omitempty" name:"MinCpu"`
 
-	// Maximum value of cpu.
+	// <p>Maximum value of cpu</p>
 	MaxCpu *float64 `json:"MaxCpu,omitnil,omitempty" name:"MaxCpu"`
 
-	// Maximum storage space.
+	// <p>Maximum storage space</p>
 	MaxStorageSize *int64 `json:"MaxStorageSize,omitnil,omitempty" name:"MaxStorageSize"`
 
-	// Specifies whether it is the default specification.
+	// <p>Is the default specification</p>
 	IsDefault *int64 `json:"IsDefault,omitnil,omitempty" name:"IsDefault"`
 
-	// Whether there is inventory.
+	// <p>Whether there is inventory</p>
 	HasStock *bool `json:"HasStock,omitnil,omitempty" name:"HasStock"`
 
-	// Inventory quantity.
+	// <p>Inventory quantity</p>
 	StockCount *int64 `json:"StockCount,omitnil,omitempty" name:"StockCount"`
 
-	// Availability zone inventory information.
+	// <p>Availability zone inventory information</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ZoneStockInfos []*ServerlessZoneStockInfo `json:"ZoneStockInfos,omitnil,omitempty" name:"ZoneStockInfos"`
 }
@@ -16175,6 +21630,70 @@ type ServerlessZoneStockInfo struct {
 
 	// Inventory information from availability zone.
 	SlaveZoneStockInfos []*SlaveZoneStockInfo `json:"SlaveZoneStockInfos,omitnil,omitempty" name:"SlaveZoneStockInfos"`
+}
+
+// Predefined struct for user
+type SetLibraDBClusterRenewFlagRequestParams struct {
+	// Analysis Cluster ID List
+	ResourceIds []*string `json:"ResourceIds,omitnil,omitempty" name:"ResourceIds"`
+
+	// Auto-renewal flag 0: Normal renewal 1: Automatic renewal 2: Non-renewal upon expiration
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
+}
+
+type SetLibraDBClusterRenewFlagRequest struct {
+	*tchttp.BaseRequest
+	
+	// Analysis Cluster ID List
+	ResourceIds []*string `json:"ResourceIds,omitnil,omitempty" name:"ResourceIds"`
+
+	// Auto-renewal flag 0: Normal renewal 1: Automatic renewal 2: Non-renewal upon expiration
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
+}
+
+func (r *SetLibraDBClusterRenewFlagRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetLibraDBClusterRenewFlagRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ResourceIds")
+	delete(f, "AutoRenewFlag")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetLibraDBClusterRenewFlagRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SetLibraDBClusterRenewFlagResponseParams struct {
+	// Quantity.
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type SetLibraDBClusterRenewFlagResponse struct {
+	*tchttp.BaseResponse
+	Response *SetLibraDBClusterRenewFlagResponseParams `json:"Response"`
+}
+
+func (r *SetLibraDBClusterRenewFlagResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetLibraDBClusterRenewFlagResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -16324,6 +21843,78 @@ type SlowQueriesItem struct {
 	// Transaction submission delay (µs).
 	// Specifies that the database kernel version is larger than 3.1.12.
 	TrxCommitDelay *int64 `json:"TrxCommitDelay,omitnil,omitempty" name:"TrxCommitDelay"`
+}
+
+type SnapshotBackupConfig struct {
+	// System automation time.
+	BackupCustomAutoTime *bool `json:"BackupCustomAutoTime,omitnil,omitempty" name:"BackupCustomAutoTime"`
+
+	// Indicates the full backup start time. value range: [0-24*3600]. for example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.
+	BackupTimeBeg *uint64 `json:"BackupTimeBeg,omitnil,omitempty" name:"BackupTimeBeg"`
+
+	// Indicates the full backup end time. value range: [0-24*3600]. for example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.
+	BackupTimeEnd *uint64 `json:"BackupTimeEnd,omitnil,omitempty" name:"BackupTimeEnd"`
+
+	// This parameter currently does not support modification and no need to specify. backup frequency is an array of length 7, corresponding to the backup method from sunday to saturday, full for full backup and increment for incremental backup.
+	BackupWeekDays []*string `json:"BackupWeekDays,omitnil,omitempty" name:"BackupWeekDays"`
+
+	// Interval.
+	BackupIntervalTime *int64 `json:"BackupIntervalTime,omitnil,omitempty" name:"BackupIntervalTime"`
+
+	// Indicates the backup retention period in seconds. data will be cleaned up longer than this time. 7 days means 3600247=604800. the maximum is 158112000.
+	ReserveDuration *uint64 `json:"ReserveDuration,omitnil,omitempty" name:"ReserveDuration"`
+
+	// Automatic data backup trigger policy, periodically: automatic periodic backup, frequent: high-frequency backup
+	BackupTriggerStrategy *string `json:"BackupTriggerStrategy,omitnil,omitempty" name:"BackupTriggerStrategy"`
+
+	// Safe info
+	AutoCopyVaults []*CreateBackupVaultItem `json:"AutoCopyVaults,omitnil,omitempty" name:"AutoCopyVaults"`
+}
+
+type SparseBackupConfig struct {
+	// Sparse backup switch: ON/OFF
+	SparseBackupSwitch *string `json:"SparseBackupSwitch,omitnil,omitempty" name:"SparseBackupSwitch"`
+
+	// Sparse backup policy list (1-3)
+	SparseBackupConfigInfos []*SparseBackupConfigInfo `json:"SparseBackupConfigInfos,omitnil,omitempty" name:"SparseBackupConfigInfos"`
+}
+
+type SparseBackupConfigInfo struct {
+	// <p>Operation type: add, modify, remove</p>
+	OpType *string `json:"OpType,omitnil,omitempty" name:"OpType"`
+
+	// <p>Configuration ID</p>
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+
+	// <p>Policy type: weekly/monthly/yearly</p>
+	SparsePeriodConfig *string `json:"SparsePeriodConfig,omitnil,omitempty" name:"SparsePeriodConfig"`
+
+	// <p>Cycle time configuration</p>
+	SparsePeriodTime *SparsePeriodTime `json:"SparsePeriodTime,omitnil,omitempty" name:"SparsePeriodTime"`
+
+	// <p>Retention days (7-7320 days, longest 20 years)</p>
+	SparseBackupSaveDays *int64 `json:"SparseBackupSaveDays,omitnil,omitempty" name:"SparseBackupSaveDays"`
+}
+
+type SparseBackupConfigRsp struct {
+	// <p>Sparse backup switch: ON/OFF</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SparseBackupSwitch *string `json:"SparseBackupSwitch,omitnil,omitempty" name:"SparseBackupSwitch"`
+
+	// <p>Sparse backup policy list (1-3)</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SparseBackupConfigInfos []*SparseBackupConfigInfo `json:"SparseBackupConfigInfos,omitnil,omitempty" name:"SparseBackupConfigInfos"`
+}
+
+type SparsePeriodTime struct {
+	// Weekly: List of days of the week, 1-7, 1=Monday, 7=Sunday (Only used for weekly cycle, up to 7).
+	WeekDays []*int64 `json:"WeekDays,omitnil,omitempty" name:"WeekDays"`
+
+	// By month: Date list, 1-31 (for monthly cycle only, up to 7)
+	Days []*int64 `json:"Days,omitnil,omitempty" name:"Days"`
+
+	// Yearly: Month-day composite column (Only for yearly cycle, up to 7)
+	MonthDays []*MonthDay `json:"MonthDays,omitnil,omitempty" name:"MonthDays"`
 }
 
 // Predefined struct for user
@@ -16728,6 +22319,41 @@ func (r *SwitchProxyVpcResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type TableMappingObject struct {
+	// Source instance Id
+	SrcInstanceId *string `json:"SrcInstanceId,omitnil,omitempty" name:"SrcInstanceId"`
+
+	// Database name.
+	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
+
+	// Table name
+	TableName *string `json:"TableName,omitnil,omitempty" name:"TableName"`
+
+	// Map database name
+	MapDatabaseName *string `json:"MapDatabaseName,omitnil,omitempty" name:"MapDatabaseName"`
+
+	// Mapping table name
+	MapTableName *string `json:"MapTableName,omitnil,omitempty" name:"MapTableName"`
+
+	// Synchronization status
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Sync progress
+	Process *float64 `json:"Process,omitnil,omitempty" name:"Process"`
+
+	// Delay
+	Lag *int64 `json:"Lag,omitnil,omitempty" name:"Lag"`
+
+	// Message
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Whether it is the main table
+	IsPrimary *bool `json:"IsPrimary,omitnil,omitempty" name:"IsPrimary"`
+
+	// Virtual column padding value
+	VirtualColValue *string `json:"VirtualColValue,omitnil,omitempty" name:"VirtualColValue"`
+}
+
 type TablePrivileges struct {
 	// Database name
 	Db *string `json:"Db,omitnil,omitempty" name:"Db"`
@@ -16828,6 +22454,98 @@ type TradePrice struct {
 }
 
 // Predefined struct for user
+type TransferClusterZoneRequestParams struct {
+	// Source Cluster Id
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Target availability zone
+	DstZone *string `json:"DstZone,omitnil,omitempty" name:"DstZone"`
+
+	// Cross-AZ migration master-slave data delay verification threshold, milliseconds (ms)
+	MaxLag *int64 `json:"MaxLag,omitnil,omitempty" name:"MaxLag"`
+
+	// Immediate: Immediate execution, InMaintain: Time window execution
+	TransferType *string `json:"TransferType,omitnil,omitempty" name:"TransferType"`
+
+	// Multi-availability zone backup zone
+	DstSlaveZone *string `json:"DstSlaveZone,omitnil,omitempty" name:"DstSlaveZone"`
+
+	// Target zone info for proxy migration
+	ProxyZones []*ProxyZone `json:"ProxyZones,omitnil,omitempty" name:"ProxyZones"`
+}
+
+type TransferClusterZoneRequest struct {
+	*tchttp.BaseRequest
+	
+	// Source Cluster Id
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// Target availability zone
+	DstZone *string `json:"DstZone,omitnil,omitempty" name:"DstZone"`
+
+	// Cross-AZ migration master-slave data delay verification threshold, milliseconds (ms)
+	MaxLag *int64 `json:"MaxLag,omitnil,omitempty" name:"MaxLag"`
+
+	// Immediate: Immediate execution, InMaintain: Time window execution
+	TransferType *string `json:"TransferType,omitnil,omitempty" name:"TransferType"`
+
+	// Multi-availability zone backup zone
+	DstSlaveZone *string `json:"DstSlaveZone,omitnil,omitempty" name:"DstSlaveZone"`
+
+	// Target zone info for proxy migration
+	ProxyZones []*ProxyZone `json:"ProxyZones,omitnil,omitempty" name:"ProxyZones"`
+}
+
+func (r *TransferClusterZoneRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TransferClusterZoneRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "DstZone")
+	delete(f, "MaxLag")
+	delete(f, "TransferType")
+	delete(f, "DstSlaveZone")
+	delete(f, "ProxyZones")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TransferClusterZoneRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type TransferClusterZoneResponseParams struct {
+	// Asynchronous task ID.
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type TransferClusterZoneResponse struct {
+	*tchttp.BaseResponse
+	Response *TransferClusterZoneResponseParams `json:"Response"`
+}
+
+func (r *TransferClusterZoneResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TransferClusterZoneResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type UnbindClusterResourcePackagesRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
@@ -16886,6 +22604,20 @@ func (r *UnbindClusterResourcePackagesResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *UnbindClusterResourcePackagesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpgradeAnalysisInstanceVersionInfo struct {
+	// <p>ip</p>
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// <p>Port</p>
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// <p>Version</p>
+	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
+
+	// <p>Expiry time</p>
+	ExpiredTime *int64 `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 }
 
 // Predefined struct for user
@@ -16973,6 +22705,11 @@ type UpgradeInstanceRequestParams struct {
 	// Upgrade type. Valid values: upgradeImmediate, upgradeInMaintain
 	UpgradeType *string `json:"UpgradeType,omitnil,omitempty" name:"UpgradeType"`
 
+	// Instance Machine Type
+	// 1. common: general.
+	// 2. exclusive, dedicated.
+	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
+
 	// This parameter has been disused.
 	StorageLimit *uint64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
 
@@ -16987,6 +22724,9 @@ type UpgradeInstanceRequestParams struct {
 
 	// Valid values: `NormalUpgrade` (Normal mode), `FastUpgrade` (QuickChange). If the system detects that the configuration modification process will cause a momentary disconnection, the process will be terminated.
 	UpgradeMode *string `json:"UpgradeMode,omitnil,omitempty" name:"UpgradeMode"`
+
+
+	UpgradeProxy *UpgradeProxy `json:"UpgradeProxy,omitnil,omitempty" name:"UpgradeProxy"`
 }
 
 type UpgradeInstanceRequest struct {
@@ -17004,6 +22744,11 @@ type UpgradeInstanceRequest struct {
 	// Upgrade type. Valid values: upgradeImmediate, upgradeInMaintain
 	UpgradeType *string `json:"UpgradeType,omitnil,omitempty" name:"UpgradeType"`
 
+	// Instance Machine Type
+	// 1. common: general.
+	// 2. exclusive, dedicated.
+	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
+
 	// This parameter has been disused.
 	StorageLimit *uint64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
 
@@ -17018,6 +22763,8 @@ type UpgradeInstanceRequest struct {
 
 	// Valid values: `NormalUpgrade` (Normal mode), `FastUpgrade` (QuickChange). If the system detects that the configuration modification process will cause a momentary disconnection, the process will be terminated.
 	UpgradeMode *string `json:"UpgradeMode,omitnil,omitempty" name:"UpgradeMode"`
+
+	UpgradeProxy *UpgradeProxy `json:"UpgradeProxy,omitnil,omitempty" name:"UpgradeProxy"`
 }
 
 func (r *UpgradeInstanceRequest) ToJsonString() string {
@@ -17036,11 +22783,13 @@ func (r *UpgradeInstanceRequest) FromJsonString(s string) error {
 	delete(f, "Cpu")
 	delete(f, "Memory")
 	delete(f, "UpgradeType")
+	delete(f, "DeviceType")
 	delete(f, "StorageLimit")
 	delete(f, "AutoVoucher")
 	delete(f, "DbType")
 	delete(f, "DealMode")
 	delete(f, "UpgradeMode")
+	delete(f, "UpgradeProxy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeInstanceRequest has unknown keys!", "")
 	}
@@ -17078,6 +22827,20 @@ func (r *UpgradeInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type UpgradeProxy struct {
+	// cpu
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
+
+	// memory
+	Mem *int64 `json:"Mem,omitnil,omitempty" name:"Mem"`
+
+
+	ProxyZones []*ProxyZone `json:"ProxyZones,omitnil,omitempty" name:"ProxyZones"`
+
+
+	ReloadBalance *string `json:"ReloadBalance,omitnil,omitempty" name:"ReloadBalance"`
+}
+
 // Predefined struct for user
 type UpgradeProxyRequestParams struct {
 	// Cluster ID
@@ -17103,6 +22866,12 @@ type UpgradeProxyRequestParams struct {
 
 	// Node information of the atabase proxy
 	ProxyZones []*ProxyZone `json:"ProxyZones,omitnil,omitempty" name:"ProxyZones"`
+
+	// whether rolling upgrade
+	IsRollUpgrade *string `json:"IsRollUpgrade,omitnil,omitempty" name:"IsRollUpgrade"`
+
+	// Rolling upgrade waiting time, unit: second
+	RollUpgradeWaitingTime *int64 `json:"RollUpgradeWaitingTime,omitnil,omitempty" name:"RollUpgradeWaitingTime"`
 }
 
 type UpgradeProxyRequest struct {
@@ -17131,6 +22900,12 @@ type UpgradeProxyRequest struct {
 
 	// Node information of the atabase proxy
 	ProxyZones []*ProxyZone `json:"ProxyZones,omitnil,omitempty" name:"ProxyZones"`
+
+	// whether rolling upgrade
+	IsRollUpgrade *string `json:"IsRollUpgrade,omitnil,omitempty" name:"IsRollUpgrade"`
+
+	// Rolling upgrade waiting time, unit: second
+	RollUpgradeWaitingTime *int64 `json:"RollUpgradeWaitingTime,omitnil,omitempty" name:"RollUpgradeWaitingTime"`
 }
 
 func (r *UpgradeProxyRequest) ToJsonString() string {
@@ -17153,6 +22928,8 @@ func (r *UpgradeProxyRequest) FromJsonString(s string) error {
 	delete(f, "ReloadBalance")
 	delete(f, "IsInMaintainPeriod")
 	delete(f, "ProxyZones")
+	delete(f, "IsRollUpgrade")
+	delete(f, "RollUpgradeWaitingTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeProxyRequest has unknown keys!", "")
 	}
@@ -17286,6 +23063,31 @@ type UserHostPrivilege struct {
 	DbPrivilege *string `json:"DbPrivilege,omitnil,omitempty" name:"DbPrivilege"`
 }
 
+type VaultInfo struct {
+	// Safe id
+	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
+
+	// Safe name
+	VaultName *string `json:"VaultName,omitnil,omitempty" name:"VaultName"`
+
+	// Safe region
+	VaultRegion *string `json:"VaultRegion,omitnil,omitempty" name:"VaultRegion"`
+
+	// Safe status
+	VaultStatus *string `json:"VaultStatus,omitnil,omitempty" name:"VaultStatus"`
+
+	// Backup retention period
+	BackupSaveSeconds *int64 `json:"BackupSaveSeconds,omitnil,omitempty" name:"BackupSaveSeconds"`
+}
+
+type WillDeleteItem struct {
+	// Backup file ID
+	BackupId *int64 `json:"BackupId,omitnil,omitempty" name:"BackupId"`
+
+	// Backup file name
+	BackupName *string `json:"BackupName,omitnil,omitempty" name:"BackupName"`
+}
+
 type ZoneStockInfo struct {
 	// AZ
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
@@ -17298,4 +23100,14 @@ type ZoneStockInfo struct {
 
 	// Available zone inventory information.
 	SlaveZoneStockInfos []*SlaveZoneStockInfo `json:"SlaveZoneStockInfos,omitnil,omitempty" name:"SlaveZoneStockInfos"`
+}
+
+type ZoneStockInfo4Libra struct {
+	// Availability zone
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// whether there is inventory
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HasStock *bool `json:"HasStock,omitnil,omitempty" name:"HasStock"`
 }

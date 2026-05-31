@@ -136,6 +136,20 @@ type AirTransport struct {
 	FlightItems []*FlightItem `json:"FlightItems,omitnil,omitempty" name:"FlightItems"`
 }
 
+type AnalyzedLog struct {
+	// <p>Indexes of the procedure.</p><p>Enumeration value:</p><ul><li>L1_IMAGE_QUALITY: Image quality detection</li><li>L2_RULE_ENGINE: Rule verification</li><li>L3_LLM_JUDGE: Large model judgment</li></ul>
+	StepKey *string `json:"StepKey,omitnil,omitempty" name:"StepKey"`
+
+	// <p>Compliant and non-compliant are final states; to be determined is an intermediate state. Judgment status of each layer: Compliant Non-Compliant Pending.</p>
+	Decision *string `json:"Decision,omitnil,omitempty" name:"Decision"`
+
+	// <p>Reason for the current layer judgment</p>
+	DecisionMessage *string `json:"DecisionMessage,omitnil,omitempty" name:"DecisionMessage"`
+
+	// <p>Time taken by the current layer</p><p>Unit: ms</p>
+	CostTime *int64 `json:"CostTime,omitnil,omitempty" name:"CostTime"`
+}
+
 // Predefined struct for user
 type ApplyCardVerificationExternalRequestParams struct {
 	// Specifies the country of the document.
@@ -2905,6 +2919,93 @@ type OtherInvoiceItem struct {
 type OtherInvoiceList struct {
 	// List
 	OtherInvoiceItemList []*OtherInvoiceItem `json:"OtherInvoiceItemList,omitnil,omitempty" name:"OtherInvoiceItemList"`
+}
+
+// Predefined struct for user
+type PODAuditAIRequestParams struct {
+	// <p>The Base64 value of the image/PDF. The Base64 must be no more than 10M, resolution is recommended to be 600*800 or higher, and supports PNG, JPG, JPEG, BMP, PDF formats. Either ImageUrl or ImageBase64 of the image must be provided. If both are provided, only use ImageUrl. Example value: /9j/4AAQSkZJRg.....s97n//2Q==</p>
+	ImageBase64List []*string `json:"ImageBase64List,omitnil,omitempty" name:"ImageBase64List"`
+
+	// <p>The Url address of the image/PDF. The image after Base64 encoding should be no more than 10M, with a resolution of 600*800 or higher, and supports PNG, JPG, JPEG, BMP, and PDF formats. The image download time should not exceed 3 seconds. Images stored in Tencent Cloud's Url can guarantee higher download speed and stability. It is recommended to store images in Tencent Cloud. The speed and stability of non-Tencent Cloud storage URLs may be impacted to a certain extent. Example value: https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/general/GeneralAccurateOCR/GeneralAccurateOCR1.JPG</p>
+	ImageUrlList []*string `json:"ImageUrlList,omitnil,omitempty" name:"ImageUrlList"`
+
+	// <p>Waybill number is used for pod rule review assistance</p>
+	WaybillNumber *string `json:"WaybillNumber,omitnil,omitempty" name:"WaybillNumber"`
+
+	// <p>No      The acknowledge type, 0 is selected by default</p><p>Enumeration value:</p><ul><li>0: Doorstep/yard</li><li>1: Parcel reception room</li><li>2: Myself/others acknowledge</li><li>3: Front desk/reception</li><li>4: Express delivery collection point</li><li>5: Express cabinet</li></ul>
+	SignType *int64 `json:"SignType,omitnil,omitempty" name:"SignType"`
+}
+
+type PODAuditAIRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>The Base64 value of the image/PDF. The Base64 must be no more than 10M, resolution is recommended to be 600*800 or higher, and supports PNG, JPG, JPEG, BMP, PDF formats. Either ImageUrl or ImageBase64 of the image must be provided. If both are provided, only use ImageUrl. Example value: /9j/4AAQSkZJRg.....s97n//2Q==</p>
+	ImageBase64List []*string `json:"ImageBase64List,omitnil,omitempty" name:"ImageBase64List"`
+
+	// <p>The Url address of the image/PDF. The image after Base64 encoding should be no more than 10M, with a resolution of 600*800 or higher, and supports PNG, JPG, JPEG, BMP, and PDF formats. The image download time should not exceed 3 seconds. Images stored in Tencent Cloud's Url can guarantee higher download speed and stability. It is recommended to store images in Tencent Cloud. The speed and stability of non-Tencent Cloud storage URLs may be impacted to a certain extent. Example value: https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/general/GeneralAccurateOCR/GeneralAccurateOCR1.JPG</p>
+	ImageUrlList []*string `json:"ImageUrlList,omitnil,omitempty" name:"ImageUrlList"`
+
+	// <p>Waybill number is used for pod rule review assistance</p>
+	WaybillNumber *string `json:"WaybillNumber,omitnil,omitempty" name:"WaybillNumber"`
+
+	// <p>No      The acknowledge type, 0 is selected by default</p><p>Enumeration value:</p><ul><li>0: Doorstep/yard</li><li>1: Parcel reception room</li><li>2: Myself/others acknowledge</li><li>3: Front desk/reception</li><li>4: Express delivery collection point</li><li>5: Express cabinet</li></ul>
+	SignType *int64 `json:"SignType,omitnil,omitempty" name:"SignType"`
+}
+
+func (r *PODAuditAIRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PODAuditAIRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64List")
+	delete(f, "ImageUrlList")
+	delete(f, "WaybillNumber")
+	delete(f, "SignType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PODAuditAIRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type PODAuditAIResponseParams struct {
+	// <p>0 means non-compliance 1 means compliance</p>
+	AuditorDecision *int64 `json:"AuditorDecision,omitnil,omitempty" name:"AuditorDecision"`
+
+	// <p>Reason code for non-compliance. If there are multiple, return a list of multiple codes.</p><p>Enumeration value:</p><ul><li>100: Wrong delivery address</li><li>101: No house number</li><li>104: Single question</li><li>200: No package</li><li>202: Privacy leakage</li></ul>
+	FailCode []*string `json:"FailCode,omitnil,omitempty" name:"FailCode"`
+
+	// <p>Entire approval result analysis content</p>
+	ResultAnalysis *string `json:"ResultAnalysis,omitnil,omitempty" name:"ResultAnalysis"`
+
+	// <p>Analysis result logs of each layer, including time taken, judgment reason, and judgment conclusion</p>
+	AnalyzedLogs []*AnalyzedLog `json:"AnalyzedLogs,omitnil,omitempty" name:"AnalyzedLogs"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type PODAuditAIResponse struct {
+	*tchttp.BaseResponse
+	Response *PODAuditAIResponseParams `json:"Response"`
+}
+
+func (r *PODAuditAIResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *PODAuditAIResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type PassportRecognizeInfos struct {

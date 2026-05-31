@@ -735,6 +735,7 @@ func NewCreateRabbitMQUserResponse() (response *CreateRabbitMQUserResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) CreateRabbitMQUser(request *CreateRabbitMQUserRequest) (response *CreateRabbitMQUserResponse, err error) {
     return c.CreateRabbitMQUserWithContext(context.Background(), request)
 }
@@ -746,6 +747,7 @@ func (c *Client) CreateRabbitMQUser(request *CreateRabbitMQUserRequest) (respons
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) CreateRabbitMQUserWithContext(ctx context.Context, request *CreateRabbitMQUserRequest) (response *CreateRabbitMQUserResponse, err error) {
     if request == nil {
         request = NewCreateRabbitMQUserRequest()
@@ -1151,6 +1153,56 @@ func (c *Client) CreateRocketMQGroupV2WithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewCreateRocketMQGroupV2Response()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateRocketMQMigrationTaskRequest() (request *CreateRocketMQMigrationTaskRequest) {
+    request = &CreateRocketMQMigrationTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmq", APIVersion, "CreateRocketMQMigrationTask")
+    
+    
+    return
+}
+
+func NewCreateRocketMQMigrationTaskResponse() (response *CreateRocketMQMigrationTaskResponse) {
+    response = &CreateRocketMQMigrationTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateRocketMQMigrationTask
+// Create a RocketMQ metadata migration task to batch create topics and consumer group data.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateRocketMQMigrationTask(request *CreateRocketMQMigrationTaskRequest) (response *CreateRocketMQMigrationTaskResponse, err error) {
+    return c.CreateRocketMQMigrationTaskWithContext(context.Background(), request)
+}
+
+// CreateRocketMQMigrationTask
+// Create a RocketMQ metadata migration task to batch create topics and consumer group data.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateRocketMQMigrationTaskWithContext(ctx context.Context, request *CreateRocketMQMigrationTaskRequest) (response *CreateRocketMQMigrationTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateRocketMQMigrationTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmq", APIVersion, "CreateRocketMQMigrationTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRocketMQMigrationTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRocketMQMigrationTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -4666,11 +4718,7 @@ func NewDescribeRabbitMQVipInstancesResponse() (response *DescribeRabbitMQVipIns
 // This API is used to query the RabbitMQ managed instance list of user purchases.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  FAILEDOPERATION_GETTAGS = "FailedOperation.GetTags"
 func (c *Client) DescribeRabbitMQVipInstances(request *DescribeRabbitMQVipInstancesRequest) (response *DescribeRabbitMQVipInstancesResponse, err error) {
     return c.DescribeRabbitMQVipInstancesWithContext(context.Background(), request)
 }
@@ -4679,11 +4727,7 @@ func (c *Client) DescribeRabbitMQVipInstances(request *DescribeRabbitMQVipInstan
 // This API is used to query the RabbitMQ managed instance list of user purchases.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR_ILLEGALMESSAGE = "InternalError.IllegalMessage"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCENOTFOUND_CLUSTER = "ResourceNotFound.Cluster"
+//  FAILEDOPERATION_GETTAGS = "FailedOperation.GetTags"
 func (c *Client) DescribeRabbitMQVipInstancesWithContext(ctx context.Context, request *DescribeRabbitMQVipInstancesRequest) (response *DescribeRabbitMQVipInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeRabbitMQVipInstancesRequest()

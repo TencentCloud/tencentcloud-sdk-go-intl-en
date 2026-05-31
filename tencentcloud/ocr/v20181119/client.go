@@ -2693,6 +2693,80 @@ func (c *Client) MainlandPermitOCRWithContext(ctx context.Context, request *Main
     return
 }
 
+func NewPODAuditAIRequest() (request *PODAuditAIRequest) {
+    request = &PODAuditAIRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "PODAuditAI")
+    
+    
+    return
+}
+
+func NewPODAuditAIResponse() (response *PODAuditAIResponse) {
+    response = &PODAuditAIResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// PODAuditAI
+// The POD intelligent review deeply integrates multimodal large model image understanding technology, targeting the logistics last-mile delivery scenario to provide high-precision POD compliance audit service. The system auto-recognizes ticket imperfections and risks of non-compliance, helping businesses achieve standardized control in the delivery process and effectively avoid customer complaints and disputes caused by non-compliant credentials.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
+//  FAILEDOPERATION_LLMSERVICEFAILED = "FailedOperation.LLMServiceFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWFILETYPEERROR = "FailedOperation.UnKnowFileTypeError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) PODAuditAI(request *PODAuditAIRequest) (response *PODAuditAIResponse, err error) {
+    return c.PODAuditAIWithContext(context.Background(), request)
+}
+
+// PODAuditAI
+// The POD intelligent review deeply integrates multimodal large model image understanding technology, targeting the logistics last-mile delivery scenario to provide high-precision POD compliance audit service. The system auto-recognizes ticket imperfections and risks of non-compliance, helping businesses achieve standardized control in the delivery process and effectively avoid customer complaints and disputes caused by non-compliant credentials.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
+//  FAILEDOPERATION_LLMSERVICEFAILED = "FailedOperation.LLMServiceFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWFILETYPEERROR = "FailedOperation.UnKnowFileTypeError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) PODAuditAIWithContext(ctx context.Context, request *PODAuditAIRequest) (response *PODAuditAIResponse, err error) {
+    if request == nil {
+        request = NewPODAuditAIRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "PODAuditAI")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PODAuditAI require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewPODAuditAIResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewPermitOCRRequest() (request *PermitOCRRequest) {
     request = &PermitOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},

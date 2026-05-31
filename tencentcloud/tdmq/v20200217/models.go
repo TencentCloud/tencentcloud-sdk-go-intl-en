@@ -1275,75 +1275,69 @@ func (r *CreateEnvironmentRoleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateProClusterRequestParams struct {
-	// Specifies multi-az deployment with three azs, for example [200002,200003,200004].
-	// 
-	// Single-AZ deployment selects an availability zone. example: [200002].
+	// <p>Multi-AZ deployment selects three AZs, example [200002,200003,200004]<br>Single-AZ deployment selects one availability zone, example [200002]</p><p>When PULSAR.P2.MINI1 is selected, it only supports two AZs. Other models support three AZs.</p>
 	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// Cluster specification code.
-	// Refers to professional cluster specifications (https://www.tencentcloud.com/document/product/1179/83705?from_cn_redirect=1).
+	// <p>Cluster specification code<br>See <a href="https://www.tencentcloud.com/document/product/1179/83705?from_cn_redirect=1">professional cluster specifications</a></p>
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
-	// `1`: true. enables automatic monthly renewal.
-	// 
-	// false. disables automatic monthly renewal.
+	// <p>1: true, enable automatic monthly renewal</p><p>0: false, disable automatic monthly renewal</p>
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
-	// Purchase duration. value range: 1–50.
+	// <p>Purchase period, value ranges from 1 to 50</p>
 	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
-	// Specifies the cluster name, which does not support chinese characters and special characters other than hyphens and underscores, with a length of no more than 64 characters.
+	// <p>Cluster name cannot be empty. It supports numbers, letters, Chinese, and symbols "-_=:.", with length not exceeding 64 characters.</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Whether to automatically select voucher. valid values: 1 (yes), 0 (no). default is 0.
+	// <p>Whether to automatically select voucher 1 Yes 0 No Default is 0</p>
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Specifies the storage specification.
-	// Refers to professional cluster specifications (https://www.tencentcloud.com/document/product/1179/83705?from_cn_redirect=1).
+	// <p>Storage specification<br>See <a href="https://www.tencentcloud.com/document/product/1179/83705?from_cn_redirect=1">professional cluster specifications</a></p>
 	StorageSize *int64 `json:"StorageSize,omitnil,omitempty" name:"StorageSize"`
 
-	// Specifies the vpc network tag.
+	// <p>vpc network tag</p>
 	Vpc *VpcInfo `json:"Vpc,omitnil,omitempty" name:"Vpc"`
 
-	// Tag list of the cluster (abandoned).
+	// <p>Tag list of the cluster (abandoned)</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// <p>Cluster version information</p>
+	InstanceVersion *string `json:"InstanceVersion,omitnil,omitempty" name:"InstanceVersion"`
 }
 
 type CreateProClusterRequest struct {
 	*tchttp.BaseRequest
 	
-	// Specifies multi-az deployment with three azs, for example [200002,200003,200004].
-	// 
-	// Single-AZ deployment selects an availability zone. example: [200002].
+	// <p>Multi-AZ deployment selects three AZs, example [200002,200003,200004]<br>Single-AZ deployment selects one availability zone, example [200002]</p><p>When PULSAR.P2.MINI1 is selected, it only supports two AZs. Other models support three AZs.</p>
 	ZoneIds []*int64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// Cluster specification code.
-	// Refers to professional cluster specifications (https://www.tencentcloud.com/document/product/1179/83705?from_cn_redirect=1).
+	// <p>Cluster specification code<br>See <a href="https://www.tencentcloud.com/document/product/1179/83705?from_cn_redirect=1">professional cluster specifications</a></p>
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
-	// `1`: true. enables automatic monthly renewal.
-	// 
-	// false. disables automatic monthly renewal.
+	// <p>1: true, enable automatic monthly renewal</p><p>0: false, disable automatic monthly renewal</p>
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
-	// Purchase duration. value range: 1–50.
+	// <p>Purchase period, value ranges from 1 to 50</p>
 	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
-	// Specifies the cluster name, which does not support chinese characters and special characters other than hyphens and underscores, with a length of no more than 64 characters.
+	// <p>Cluster name cannot be empty. It supports numbers, letters, Chinese, and symbols "-_=:.", with length not exceeding 64 characters.</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Whether to automatically select voucher. valid values: 1 (yes), 0 (no). default is 0.
+	// <p>Whether to automatically select voucher 1 Yes 0 No Default is 0</p>
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Specifies the storage specification.
-	// Refers to professional cluster specifications (https://www.tencentcloud.com/document/product/1179/83705?from_cn_redirect=1).
+	// <p>Storage specification<br>See <a href="https://www.tencentcloud.com/document/product/1179/83705?from_cn_redirect=1">professional cluster specifications</a></p>
 	StorageSize *int64 `json:"StorageSize,omitnil,omitempty" name:"StorageSize"`
 
-	// Specifies the vpc network tag.
+	// <p>vpc network tag</p>
 	Vpc *VpcInfo `json:"Vpc,omitnil,omitempty" name:"Vpc"`
 
-	// Tag list of the cluster (abandoned).
+	// <p>Tag list of the cluster (abandoned)</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// <p>Cluster version information</p>
+	InstanceVersion *string `json:"InstanceVersion,omitnil,omitempty" name:"InstanceVersion"`
 }
 
 func (r *CreateProClusterRequest) ToJsonString() string {
@@ -1367,6 +1361,7 @@ func (r *CreateProClusterRequest) FromJsonString(s string) error {
 	delete(f, "StorageSize")
 	delete(f, "Vpc")
 	delete(f, "Tags")
+	delete(f, "InstanceVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateProClusterRequest has unknown keys!", "")
 	}
@@ -1375,16 +1370,16 @@ func (r *CreateProClusterRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateProClusterResponseParams struct {
-	// Specifies the sub-order number.
+	// <p>Sub-order number</p>
 	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
 
-	// Order ID
+	// <p>Order ID</p>
 	BigDealId *string `json:"BigDealId,omitnil,omitempty" name:"BigDealId"`
 
-	// Cluster ID
+	// <p>Cluster Id</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Cluster name.
+	// <p>Cluster name.</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1507,53 +1502,57 @@ func (r *CreateRabbitMQBindingResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateRabbitMQUserRequestParams struct {
-	// Instance ID, such as amqp-xxxxxxxx. valid InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+	// <p>Instance ID, such as amqp-xxxxxxxx. Effective InstanceId can be obtained by logging in to the <a href="https://console.cloud.tencent.com/trabbitmq/cluster?rid=1">TDMQ RabbitMQ Console</a> for querying.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Username, which is used for login.
+	// <p>Username, used when logging in</p>
 	User *string `json:"User,omitnil,omitempty" name:"User"`
 
-	// Password, used when logging in. requirement: cannot be empty, 8-64 characters, must contain at least two items from lowercase letters, uppercase letters, digits, and special characters [`()~!@#$%^&*_=|{}[]:;',.?/].
+	// <p>Password, used when logging in. Requirements: Cannot be empty, 8-64 characters, must contain at least two of the following: lowercase letter, uppercase letter, digit, special character [()`~!@#$%^&*_=|{}[]:;',.?/].</p>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// Description
+	// <p>Description.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// User tag, which defines a user's permission scope for accessing RabbitMQ Managementu.
-	// Valid values: `management` (Common console user), monitoring` (Console admin user), other values: Non-console user.
+	// <p>User tag, used to determine the access permission of the user to RabbitMQ Management<br>management: ordinary console user, monitoring: console user with management privileges, other value: non-console user</p>
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// The maximum number of connections for the user. If this parameter is left empty, there's no limit for the number.
+	// <p>Maximum number of connections for this user. Leave it blank to set as unlimited.</p>
 	MaxConnections *int64 `json:"MaxConnections,omitnil,omitempty" name:"MaxConnections"`
 
-	// The maximum number of channels for the user. If this parameter is left empty, there's no limit for the number.
+	// <p>Maximum number of channels for the user. Not specified means no limit.</p>
 	MaxChannels *int64 `json:"MaxChannels,omitnil,omitempty" name:"MaxChannels"`
+
+	// <p>Whether cam authentication is enabled</p>
+	EnableCamAuth *bool `json:"EnableCamAuth,omitnil,omitempty" name:"EnableCamAuth"`
 }
 
 type CreateRabbitMQUserRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID, such as amqp-xxxxxxxx. valid InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+	// <p>Instance ID, such as amqp-xxxxxxxx. Effective InstanceId can be obtained by logging in to the <a href="https://console.cloud.tencent.com/trabbitmq/cluster?rid=1">TDMQ RabbitMQ Console</a> for querying.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Username, which is used for login.
+	// <p>Username, used when logging in</p>
 	User *string `json:"User,omitnil,omitempty" name:"User"`
 
-	// Password, used when logging in. requirement: cannot be empty, 8-64 characters, must contain at least two items from lowercase letters, uppercase letters, digits, and special characters [`()~!@#$%^&*_=|{}[]:;',.?/].
+	// <p>Password, used when logging in. Requirements: Cannot be empty, 8-64 characters, must contain at least two of the following: lowercase letter, uppercase letter, digit, special character [()`~!@#$%^&*_=|{}[]:;',.?/].</p>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// Description
+	// <p>Description.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// User tag, which defines a user's permission scope for accessing RabbitMQ Managementu.
-	// Valid values: `management` (Common console user), monitoring` (Console admin user), other values: Non-console user.
+	// <p>User tag, used to determine the access permission of the user to RabbitMQ Management<br>management: ordinary console user, monitoring: console user with management privileges, other value: non-console user</p>
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// The maximum number of connections for the user. If this parameter is left empty, there's no limit for the number.
+	// <p>Maximum number of connections for this user. Leave it blank to set as unlimited.</p>
 	MaxConnections *int64 `json:"MaxConnections,omitnil,omitempty" name:"MaxConnections"`
 
-	// The maximum number of channels for the user. If this parameter is left empty, there's no limit for the number.
+	// <p>Maximum number of channels for the user. Not specified means no limit.</p>
 	MaxChannels *int64 `json:"MaxChannels,omitnil,omitempty" name:"MaxChannels"`
+
+	// <p>Whether cam authentication is enabled</p>
+	EnableCamAuth *bool `json:"EnableCamAuth,omitnil,omitempty" name:"EnableCamAuth"`
 }
 
 func (r *CreateRabbitMQUserRequest) ToJsonString() string {
@@ -1575,6 +1574,7 @@ func (r *CreateRabbitMQUserRequest) FromJsonString(s string) error {
 	delete(f, "Tags")
 	delete(f, "MaxConnections")
 	delete(f, "MaxChannels")
+	delete(f, "EnableCamAuth")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRabbitMQUserRequest has unknown keys!", "")
 	}
@@ -1583,7 +1583,7 @@ func (r *CreateRabbitMQUserRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateRabbitMQUserResponseParams struct {
-	// Username, which is used for login.
+	// <p>Username, used when logging in</p>
 	User *string `json:"User,omitnil,omitempty" name:"User"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2248,6 +2248,95 @@ func (r *CreateRocketMQGroupV2Response) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateRocketMQMigrationTaskRequestParams struct {
+	// <p>Cluster ID.</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Task type:<br>0, Cluster migration<br>1, Import To specified namespace</p>
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// <p>List of Topics to Import</p>
+	Topics []*RocketMQTopicConfig `json:"Topics,omitnil,omitempty" name:"Topics"`
+
+	// <p>List of consumer groups to be imported</p>
+	Groups []*RocketMQGroupConfig `json:"Groups,omitnil,omitempty" name:"Groups"`
+
+	// <p>List of roles to be imported</p>
+	Roles []*RocketMQRoleConfig `json:"Roles,omitnil,omitempty" name:"Roles"`
+
+	// <p>Specify the imported namespace</p>
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+}
+
+type CreateRocketMQMigrationTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Cluster ID.</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Task type:<br>0, Cluster migration<br>1, Import To specified namespace</p>
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// <p>List of Topics to Import</p>
+	Topics []*RocketMQTopicConfig `json:"Topics,omitnil,omitempty" name:"Topics"`
+
+	// <p>List of consumer groups to be imported</p>
+	Groups []*RocketMQGroupConfig `json:"Groups,omitnil,omitempty" name:"Groups"`
+
+	// <p>List of roles to be imported</p>
+	Roles []*RocketMQRoleConfig `json:"Roles,omitnil,omitempty" name:"Roles"`
+
+	// <p>Specify the imported namespace</p>
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+}
+
+func (r *CreateRocketMQMigrationTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRocketMQMigrationTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "Type")
+	delete(f, "Topics")
+	delete(f, "Groups")
+	delete(f, "Roles")
+	delete(f, "Namespace")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRocketMQMigrationTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRocketMQMigrationTaskResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateRocketMQMigrationTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateRocketMQMigrationTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateRocketMQMigrationTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRocketMQMigrationTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateRocketMQNamespaceRequestParams struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
@@ -2331,33 +2420,51 @@ func (r *CreateRocketMQNamespaceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateRocketMQRoleRequestParams struct {
-	// Role name. Does not support Chinese characters and special characters other than hyphens (-) and underscores (_), and must be greater than 0 and less than or equal to 32 in length.
+	// <p>Role name. Does not support Chinese characters and special characters other than hyphens and underscores. Length must be greater than 0 and less than or equal to 32.</p>
 	RoleName *string `json:"RoleName,omitnil,omitempty" name:"RoleName"`
 
-	// Required field, cluster ID
+	// <p>Required field, cluster Id</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Remark description. Length must be greater than or equal to 0 and less than or equal to 128.
+	// <p>Remarks. The length must be greater than or equal to 0 and less than or equal to 128.</p>
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-	// Role authorization type (cluster: Cluster; topic or consumer group: TopicAndGroup).
+	// <p>Role authorization type (Cluster: cluster; TopicAndGroup: topic/consumer group)</p>
 	PermType *string `json:"PermType,omitnil,omitempty" name:"PermType"`
+
+	// <p>AK and SK generation method: AUTO: automatically generated by the backend, MANUAL: manually input by the user</p>
+	RoleGenerateMode *string `json:"RoleGenerateMode,omitnil,omitempty" name:"RoleGenerateMode"`
+
+	// <p>Select MANUAL in mode and manually input the AK value</p>
+	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
+
+	// <p>In MANUAL mode, you must manually enter the SK value</p>
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
 }
 
 type CreateRocketMQRoleRequest struct {
 	*tchttp.BaseRequest
 	
-	// Role name. Does not support Chinese characters and special characters other than hyphens (-) and underscores (_), and must be greater than 0 and less than or equal to 32 in length.
+	// <p>Role name. Does not support Chinese characters and special characters other than hyphens and underscores. Length must be greater than 0 and less than or equal to 32.</p>
 	RoleName *string `json:"RoleName,omitnil,omitempty" name:"RoleName"`
 
-	// Required field, cluster ID
+	// <p>Required field, cluster Id</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Remark description. Length must be greater than or equal to 0 and less than or equal to 128.
+	// <p>Remarks. The length must be greater than or equal to 0 and less than or equal to 128.</p>
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-	// Role authorization type (cluster: Cluster; topic or consumer group: TopicAndGroup).
+	// <p>Role authorization type (Cluster: cluster; TopicAndGroup: topic/consumer group)</p>
 	PermType *string `json:"PermType,omitnil,omitempty" name:"PermType"`
+
+	// <p>AK and SK generation method: AUTO: automatically generated by the backend, MANUAL: manually input by the user</p>
+	RoleGenerateMode *string `json:"RoleGenerateMode,omitnil,omitempty" name:"RoleGenerateMode"`
+
+	// <p>Select MANUAL in mode and manually input the AK value</p>
+	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
+
+	// <p>In MANUAL mode, you must manually enter the SK value</p>
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
 }
 
 func (r *CreateRocketMQRoleRequest) ToJsonString() string {
@@ -2376,6 +2483,9 @@ func (r *CreateRocketMQRoleRequest) FromJsonString(s string) error {
 	delete(f, "ClusterId")
 	delete(f, "Remark")
 	delete(f, "PermType")
+	delete(f, "RoleGenerateMode")
+	delete(f, "AccessKey")
+	delete(f, "SecretKey")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRocketMQRoleRequest has unknown keys!", "")
 	}
@@ -2384,13 +2494,13 @@ func (r *CreateRocketMQRoleRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateRocketMQRoleResponseParams struct {
-	// Role name.
+	// <p>Role name</p>
 	RoleName *string `json:"RoleName,omitnil,omitempty" name:"RoleName"`
 
-	// Role token.
+	// <p>Role token</p>
 	Token *string `json:"Token,omitnil,omitempty" name:"Token"`
 
-	// Specifies the remark description.
+	// <p>Remarks</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
@@ -10672,53 +10782,57 @@ func (r *ModifyRabbitMQPermissionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyRabbitMQUserRequestParams struct {
-	// Instance ID, such as amqp-xxxxxxxx. effective InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+	// <p>Instance ID, such as amqp-xxxxxxxx. Effective InstanceId can be obtained by logging in to the <a href="https://console.cloud.tencent.com/trabbitmq/cluster?rid=1">TDMQ RabbitMQ Console</a> for querying.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Username, such as rabbitmq. To find an effective username, log in to the [TDMQ RabbitMQ Console](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), click a cluster in the list, enter cluster details, and find the list of users in the user and permission management tab, so as to locate the username. Modifying the admin password is not supported currently.
+	// <p>Username, such as rabbitmq. To find an effective userName, log in to the <a href="https://console.cloud.tencent.com/trabbitmq/cluster?rid=1">TDMQ RabbitMQ Console</a>, click a cluster in the list, enter cluster details, and locate the list of users under the user and permission management tab so as to find the username. Modification of the admin password is not supported currently.</p>
 	User *string `json:"User,omitnil,omitempty" name:"User"`
 
-	// Password, used when logging in. requirement: cannot be empty, 8-64 characters, must contain at least two items from lowercase letters, uppercase letters, digits, and special characters [`()~!@#$%^&*_=|{}[]:;',.?/].
+	// <p>Password, used when logging in. Requirements: Cannot be empty, 8-64 characters, must contain at least two of the following: lowercase letter, uppercase letter, digit, special character [()`~!@#$%^&*_=|{}[]:;',.?/].</p>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// Description. If this parameter is not passed in, it won't be modified.
+	// <p>Description. Leave it empty to keep it unchanged.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// User tag, used to determine the access permission of the user for RabbitMQ Management.
-	// management: ordinary console user. monitoring: administrative console user. other value: non-console user.
+	// <p>User tag, used to determine the access permission of the user to RabbitMQ Management<br>management: ordinary console user, monitoring: console user with management privileges, other value: non-console user</p>
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// The maximum number of connections for the user. If this parameter is not passed in, it won't be modified.
+	// <p>Maximum number of connections for this user. Leave it blank to keep unchanged.</p>
 	MaxConnections *int64 `json:"MaxConnections,omitnil,omitempty" name:"MaxConnections"`
 
-	// The maximum number of channels for the user. If this parameter is not passed in, it won't be modified.
+	// <p>Maximum number of channels for the user's. Leave blank to keep unchanged.</p>
 	MaxChannels *int64 `json:"MaxChannels,omitnil,omitempty" name:"MaxChannels"`
+
+	// <p>Whether cam authentication is enabled</p>
+	EnableCamAuth *bool `json:"EnableCamAuth,omitnil,omitempty" name:"EnableCamAuth"`
 }
 
 type ModifyRabbitMQUserRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID, such as amqp-xxxxxxxx. effective InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+	// <p>Instance ID, such as amqp-xxxxxxxx. Effective InstanceId can be obtained by logging in to the <a href="https://console.cloud.tencent.com/trabbitmq/cluster?rid=1">TDMQ RabbitMQ Console</a> for querying.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Username, such as rabbitmq. To find an effective username, log in to the [TDMQ RabbitMQ Console](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1), click a cluster in the list, enter cluster details, and find the list of users in the user and permission management tab, so as to locate the username. Modifying the admin password is not supported currently.
+	// <p>Username, such as rabbitmq. To find an effective userName, log in to the <a href="https://console.cloud.tencent.com/trabbitmq/cluster?rid=1">TDMQ RabbitMQ Console</a>, click a cluster in the list, enter cluster details, and locate the list of users under the user and permission management tab so as to find the username. Modification of the admin password is not supported currently.</p>
 	User *string `json:"User,omitnil,omitempty" name:"User"`
 
-	// Password, used when logging in. requirement: cannot be empty, 8-64 characters, must contain at least two items from lowercase letters, uppercase letters, digits, and special characters [`()~!@#$%^&*_=|{}[]:;',.?/].
+	// <p>Password, used when logging in. Requirements: Cannot be empty, 8-64 characters, must contain at least two of the following: lowercase letter, uppercase letter, digit, special character [()`~!@#$%^&*_=|{}[]:;',.?/].</p>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// Description. If this parameter is not passed in, it won't be modified.
+	// <p>Description. Leave it empty to keep it unchanged.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// User tag, used to determine the access permission of the user for RabbitMQ Management.
-	// management: ordinary console user. monitoring: administrative console user. other value: non-console user.
+	// <p>User tag, used to determine the access permission of the user to RabbitMQ Management<br>management: ordinary console user, monitoring: console user with management privileges, other value: non-console user</p>
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// The maximum number of connections for the user. If this parameter is not passed in, it won't be modified.
+	// <p>Maximum number of connections for this user. Leave it blank to keep unchanged.</p>
 	MaxConnections *int64 `json:"MaxConnections,omitnil,omitempty" name:"MaxConnections"`
 
-	// The maximum number of channels for the user. If this parameter is not passed in, it won't be modified.
+	// <p>Maximum number of channels for the user's. Leave blank to keep unchanged.</p>
 	MaxChannels *int64 `json:"MaxChannels,omitnil,omitempty" name:"MaxChannels"`
+
+	// <p>Whether cam authentication is enabled</p>
+	EnableCamAuth *bool `json:"EnableCamAuth,omitnil,omitempty" name:"EnableCamAuth"`
 }
 
 func (r *ModifyRabbitMQUserRequest) ToJsonString() string {
@@ -10740,6 +10854,7 @@ func (r *ModifyRabbitMQUserRequest) FromJsonString(s string) error {
 	delete(f, "Tags")
 	delete(f, "MaxConnections")
 	delete(f, "MaxChannels")
+	delete(f, "EnableCamAuth")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRabbitMQUserRequest has unknown keys!", "")
 	}
@@ -11187,41 +11302,39 @@ func (r *ModifyRocketMQInstanceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyRocketMQInstanceSpecRequestParams struct {
-	// ID of the exclusive instance
+	// <p>Dedicated Instance ID</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance specification.
-	// Valid values: `rocket-vip-basic-1` (Basic),
-	// `rocket-vip-basic-2` (Standard),
-	// `rocket-vip-basic-3` (Advanced I),
-	// `rocket-vip-basic-4` (Advanced II).
+	// <p>Instance specification,<br>rocket-vip-basic-1 basic<br>rocket-vip-basic-2 standard type<br>rocket-vip-basic-3 higher-order type I<br>rocket-vip-basic-4 higher-order type II</p>
 	Specification *string `json:"Specification,omitnil,omitempty" name:"Specification"`
 
-	// Node count
+	// <p>Node count</p>
 	NodeCount *uint64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
 
-	// Storage space in GB
+	// <p>Storage space in GB</p>
 	StorageSize *uint64 `json:"StorageSize,omitnil,omitempty" name:"StorageSize"`
+
+	// <p>Deploy availability zone list</p>
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 }
 
 type ModifyRocketMQInstanceSpecRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the exclusive instance
+	// <p>Dedicated Instance ID</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance specification.
-	// Valid values: `rocket-vip-basic-1` (Basic),
-	// `rocket-vip-basic-2` (Standard),
-	// `rocket-vip-basic-3` (Advanced I),
-	// `rocket-vip-basic-4` (Advanced II).
+	// <p>Instance specification,<br>rocket-vip-basic-1 basic<br>rocket-vip-basic-2 standard type<br>rocket-vip-basic-3 higher-order type I<br>rocket-vip-basic-4 higher-order type II</p>
 	Specification *string `json:"Specification,omitnil,omitempty" name:"Specification"`
 
-	// Node count
+	// <p>Node count</p>
 	NodeCount *uint64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
 
-	// Storage space in GB
+	// <p>Storage space in GB</p>
 	StorageSize *uint64 `json:"StorageSize,omitnil,omitempty" name:"StorageSize"`
+
+	// <p>Deploy availability zone list</p>
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 }
 
 func (r *ModifyRocketMQInstanceSpecRequest) ToJsonString() string {
@@ -11240,6 +11353,7 @@ func (r *ModifyRocketMQInstanceSpecRequest) FromJsonString(s string) error {
 	delete(f, "Specification")
 	delete(f, "NodeCount")
 	delete(f, "StorageSize")
+	delete(f, "ZoneIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRocketMQInstanceSpecRequest has unknown keys!", "")
 	}
@@ -11248,7 +11362,7 @@ func (r *ModifyRocketMQInstanceSpecRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyRocketMQInstanceSpecResponseParams struct {
-	// Order ID
+	// <p>Order ID</p>
 	OrderId *string `json:"OrderId,omitnil,omitempty" name:"OrderId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -12281,63 +12395,66 @@ type RabbitMQBindingListInfo struct {
 }
 
 type RabbitMQClusterAccessInfo struct {
-
+	// <p>Cluster public network access address</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	PublicAccessEndpoint *string `json:"PublicAccessEndpoint,omitnil,omitempty" name:"PublicAccessEndpoint"`
 
-
+	// <p>Public network access URL of the cluster Web console</p>
 	WebConsoleEndpoint *string `json:"WebConsoleEndpoint,omitnil,omitempty" name:"WebConsoleEndpoint"`
 
-
+	// <p>Cluster Web console login username</p>
 	WebConsoleUsername *string `json:"WebConsoleUsername,omitnil,omitempty" name:"WebConsoleUsername"`
 
-
+	// <p>Cluster Web console login password</p>
 	WebConsolePassword *string `json:"WebConsolePassword,omitnil,omitempty" name:"WebConsolePassword"`
 
-
+	// <p>Abandoned</p>
 	PublicAccessEndpointStatus *bool `json:"PublicAccessEndpointStatus,omitnil,omitempty" name:"PublicAccessEndpointStatus"`
 
-
+	// <p>Deprecated</p>
 	PublicControlConsoleSwitchStatus *bool `json:"PublicControlConsoleSwitchStatus,omitnil,omitempty" name:"PublicControlConsoleSwitchStatus"`
 
-
+	// <p>Abandoned</p>
 	VpcControlConsoleSwitchStatus *bool `json:"VpcControlConsoleSwitchStatus,omitnil,omitempty" name:"VpcControlConsoleSwitchStatus"`
 
-
+	// <p>VPC access URL of the Web console</p>
 	VpcWebConsoleEndpoint *string `json:"VpcWebConsoleEndpoint,omitnil,omitempty" name:"VpcWebConsoleEndpoint"`
 
-	// Status of the public network access point in the console. Valid values: OFF, ON, CREATING, and DELETING.
+	// <p>Status of the public network access switch in the Web console</p><p>Enumeration value:</p><ul><li>OFF: Closed</li><li>ON: ON</li><li>CREATING: CREATING</li><li>DELETING: DELETING</li><li>CREATE_FAILURE: Creation failed</li><li>DELETE_FAILURE: Deletion failed</li></ul>
 	PublicWebConsoleSwitchStatus *string `json:"PublicWebConsoleSwitchStatus,omitnil,omitempty" name:"PublicWebConsoleSwitchStatus"`
 
-	// Vpc console switch state. example value.
-	// OFF/ON/CREATING/DELETING
+	// <p>Web console VPC access switch status</p><p>Enumeration values:</p><ul><li>OFF: Closed</li><li>ON: Enabled</li><li>CREATING: Creating</li><li>DELETING: Deleting</li><li>CREATE_FAILURE: Creation failed</li><li>DELETE_FAILURE: Deletion failed</li></ul>
 	VpcWebConsoleSwitchStatus *string `json:"VpcWebConsoleSwitchStatus,omitnil,omitempty" name:"VpcWebConsoleSwitchStatus"`
 
-	// Status of the public network access point in the console. Valid values: OFF, ON, CREATING, and DELETING.
+	// <p>Public network access point switch state</p><p>Enumeration value:</p><ul><li>OFF: Closed</li><li>ON: Enabled</li><li>CREATING: Creating</li><li>DELETING: Deleting</li><li>CREATE_FAILURE: Creation failure</li><li>DELETE_FAILURE: Deletion failure</li></ul>
 	PublicDataStreamStatus *string `json:"PublicDataStreamStatus,omitnil,omitempty" name:"PublicDataStreamStatus"`
 
-	// Prometheus information.
+	// <p>Prometheus info</p>
 	PrometheusEndpointInfo *PrometheusEndpointInfo `json:"PrometheusEndpointInfo,omitnil,omitempty" name:"PrometheusEndpointInfo"`
 
-	// Public domain name access point.
+	// <p>public domain name access point</p>
 	WebConsoleDomainEndpoint *string `json:"WebConsoleDomainEndpoint,omitnil,omitempty" name:"WebConsoleDomainEndpoint"`
 
-	// VPC information used by the control plane.
+	// <p>VPC information used by the control plane</p>
 	ControlPlaneEndpointInfo *VpcEndpointInfo `json:"ControlPlaneEndpointInfo,omitnil,omitempty" name:"ControlPlaneEndpointInfo"`
 
-	// Encrypted TLS data stream public network access point.
+	// <p>TLS encrypted data stream public network access point</p>
 	PublicTlsAccessEndpoint *string `json:"PublicTlsAccessEndpoint,omitnil,omitempty" name:"PublicTlsAccessEndpoint"`
 
-	// Specifies whether to reuse the public IP address.
+	// <p>Whether to reuse the public IP address</p>
 	PublicIpReused *bool `json:"PublicIpReused,omitnil,omitempty" name:"PublicIpReused"`
 
-	// Error message for public network console access point operations.
+	// <p>Error information of public network access operations for the Web console</p>
 	PublicWebConsoleErrorMessage *string `json:"PublicWebConsoleErrorMessage,omitnil,omitempty" name:"PublicWebConsoleErrorMessage"`
 
-	// Error message for private network console access point operations.
+	// <p>Error information of VPC access operations in the Web console</p>
 	VpcWebConsoleErrorMessage *string `json:"VpcWebConsoleErrorMessage,omitnil,omitempty" name:"VpcWebConsoleErrorMessage"`
 
-	// Error message for public network access point operation failure.
+	// <p>Error information of public network access point operations</p>
 	PublicDataStreamErrorMessage *string `json:"PublicDataStreamErrorMessage,omitnil,omitempty" name:"PublicDataStreamErrorMessage"`
+
+	// <p>Public network Stream access point</p>
+	PublicStreamAccessEndpoint *string `json:"PublicStreamAccessEndpoint,omitnil,omitempty" name:"PublicStreamAccessEndpoint"`
 }
 
 type RabbitMQClusterInfo struct {
@@ -12669,43 +12786,50 @@ type RabbitMQQueueListInfo struct {
 }
 
 type RabbitMQUser struct {
-	// Instance ID, such as amqp-xxxxxxxx. effective InstanceId can be queried by logging in to the TDMQ RabbitMQ console (https://console.cloud.tencent.com/trabbitmq/cluster?rid=1).
+	// <p>Instance ID, such as amqp-xxxxxxxx. Effective InstanceId can be obtained by logging in to the <a href="https://console.cloud.tencent.com/trabbitmq/cluster?rid=1">TDMQ RabbitMQ Console</a> for querying.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Username, which is used for login.
+	// <p>Username, used when logging in</p>
 	User *string `json:"User,omitnil,omitempty" name:"User"`
 
-	// Password, which is used for login.
+	// <p>Password, used when logging in</p>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// User description
+	// <p>user description</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// User tags, which determine the scope of permissions of this user to access RabbitMQ Management.
+	// <p>User tag, used to determine the access permission of the user to RabbitMQ Management</p>
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// User creation time
+	// <p>User creation time</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Last user modification time
+	// <p>User last modification time</p>
 	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
 
-	// User type. Valid values: `System` (Created by system), `User` (Created by user).
+	// <p>Type of user, System: system creation, User: user creation</p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Maximum number of available connections per user.
+	// <p>Maximum available connections per user</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MaxConnections *int64 `json:"MaxConnections,omitnil,omitempty" name:"MaxConnections"`
 
-	// Maximum number of available channels per user.
+	// <p>Maximum available channels per user</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MaxChannels *int64 `json:"MaxChannels,omitnil,omitempty" name:"MaxChannels"`
 
-	// Creation timestamp.
+	// <p>Creation time timestamp</p>
 	CreateTs *uint64 `json:"CreateTs,omitnil,omitempty" name:"CreateTs"`
 
-	// Modification timestamp.
+	// <p>Modification time timestamp</p>
 	ModifyTs *uint64 `json:"ModifyTs,omitnil,omitempty" name:"ModifyTs"`
+
+	// <p>Whether cam authentication is enabled</p><p>Default value: false</p>
+	CamAuthEnabled *bool `json:"CamAuthEnabled,omitnil,omitempty" name:"CamAuthEnabled"`
+
+	// <p>cam credential name</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CamCredentialName *string `json:"CamCredentialName,omitnil,omitempty" name:"CamCredentialName"`
 }
 
 type RabbitMQUserQuota struct {
@@ -12716,87 +12840,91 @@ type RabbitMQUserQuota struct {
 	UsedUser *int64 `json:"UsedUser,omitnil,omitempty" name:"UsedUser"`
 }
 
+type RabbitMQVHostBaseQuota struct {
+	// Maximum number of connections allowed in each vhost.
+	MaxConnectionPerVhost *int64 `json:"MaxConnectionPerVhost,omitnil,omitempty" name:"MaxConnectionPerVhost"`
+
+	// Maximum number of exchanges allowed in each vhost.
+	MaxExchangePerVhost *int64 `json:"MaxExchangePerVhost,omitnil,omitempty" name:"MaxExchangePerVhost"`
+
+	// Maximum number of queues allowed in a single vhost.
+	MaxQueuePerVhost *int64 `json:"MaxQueuePerVhost,omitnil,omitempty" name:"MaxQueuePerVhost"`
+}
+
 type RabbitMQVipInstance struct {
-	// Instance ID
+	// <p>Instance ID</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name
+	// <p>Instance name</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Instance version.
+	// <p>Instance version</p>
 	InstanceVersion *string `json:"InstanceVersion,omitnil,omitempty" name:"InstanceVersion"`
 
-	// Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal), `5` (Delivery failed).
+	// <p>Instance status. 0 indicates creating in progress, 1 indicates normal, 2 indicates isolated, 3 indicates terminated, 4 - abnormal, 5 - delivery failed</p>
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Number of nodes
+	// <p>Node count</p>
 	NodeCount *uint64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
 
-	// Instance specification name
+	// <p>Instance configuration specification name</p>
 	ConfigDisplay *string `json:"ConfigDisplay,omitnil,omitempty" name:"ConfigDisplay"`
 
-	// Peak TPS
+	// <p>Peak TPS</p>
 	MaxTps *uint64 `json:"MaxTps,omitnil,omitempty" name:"MaxTps"`
 
-	// Peak bandwidth in Mbps
+	// <p>Peak bandwidth in Mbps</p>
 	MaxBandWidth *uint64 `json:"MaxBandWidth,omitnil,omitempty" name:"MaxBandWidth"`
 
-	// Storage capacity in GB
+	// <p>Storage capacity in GB</p>
 	MaxStorage *uint64 `json:"MaxStorage,omitnil,omitempty" name:"MaxStorage"`
 
-	// Specifies the instance expiration time in milliseconds as a unix timestamp. the value is 0 for pay-as-you-go resources.
+	// <p>Instance expiration time. The value is 0 for pay-as-you-go instances, in milliseconds. unix timestamp.</p>
 	ExpireTime *uint64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Renewal mode. Valid values: `0` (Manual renewal, which is the default mode), `1` (Auto-renewal), `2` (Manual renewal, which is specified by users).
+	// <p>Auto-renewal flag. 0 means default state (not set by the user, i.e., initial state is manual renewal), 1 means auto-renew, 2 means explicitly no auto-renew (set by the user)</p>
 	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
-	// 1 indicates prepaid mode, 0 indicates postpaid.
+	// <p>1 indicates prepaid mode, 0 indicates postpaid</p>
 	PayMode *uint64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Remarks
+	// <p>Remark information</p>
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-	// Node specification of the cluster. specifies the corresponding flag.
-	// 2C8G:rabbit-vip-profession-2c8g
-	// 4C16G:rabbit-vip-profession-4c16g
-	// 8C32G:rabbit-vip-profession-8c32g
-	// 16C32G:rabbit-vip-basic-4
-	// 16C64G:rabbit-vip-profession-16c64g
-	// 2C4G:rabbit-vip-basic-5
-	// 4C8G:rabbit-vip-basic-1
-	// 8C16G (sold out): rabbit-vip-basic-2.
-	// Specifies the default value as 4C8G: rabbit-vip-basic-1.
+	// <p>Node specification of the cluster with corresponding flag:<br>2C8G: rabbit-vip-profession-2c8g<br>4C16G: rabbit-vip-profession-4c16g<br>8C32G: rabbit-vip-profession-8c32g<br>16C32G: rabbit-vip-basic-4<br>16C64G: rabbit-vip-profession-16c64g<br>2C4G: rabbit-vip-basic-5<br>4C8G: rabbit-vip-basic-1<br>8C16G (sold out): rabbit-vip-basic-2<br>Defaults to 4C8G: rabbit-vip-basic-1 if not specified</p>
 	SpecName *string `json:"SpecName,omitnil,omitempty" name:"SpecName"`
 
-	// Cluster exception information.
+	// <p>Cluster exception information</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExceptionInformation *string `json:"ExceptionInformation,omitnil,omitempty" name:"ExceptionInformation"`
 
-	// Instance status. Valid values: `0` (Creating), `1` (Normal), `2` (Isolated), `3` (Terminated), `4` (Abnormal), `5` (Delivery failed).
-	// This parameter is used to display the instance status additionally and distinguish from the `Status` parameter.
+	// <p>Instance status. 0 indicates creating in progress, 1 indicates normal, 2 indicates isolated, 3 indicates terminated, 4 - abnormal, 5 - delivery failed<br>To separate from the billing area, enable an additional status bit for display.</p>
 	ClusterStatus *int64 `json:"ClusterStatus,omitnil,omitempty" name:"ClusterStatus"`
 
-	// Public network access point.
+	// <p>public network access point</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PublicAccessEndpoint *string `json:"PublicAccessEndpoint,omitnil,omitempty" name:"PublicAccessEndpoint"`
 
-	// VPC access point list.
+	// <p>VPC access point list</p>
 	Vpcs []*VpcEndpointInfo `json:"Vpcs,omitnil,omitempty" name:"Vpcs"`
 
-	// Creation time in milliseconds. unix timestamp.
+	// <p>Creation time in milliseconds. unix timestamp</p>
 	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Instance type. valid values: 0 (managed), 1 (Serverless).
+	// <p>Instance type</p><p>Enumeration value:</p><ul><li>0: Managed version instance</li></ul>
 	InstanceType *uint64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Isolation time, in milliseconds. unix timestamp.
+	// <p>Isolation time in milliseconds. unix timestamp</p>
 	IsolatedTime *uint64 `json:"IsolatedTime,omitnil,omitempty" name:"IsolatedTime"`
 
-	// Whether deletion protection is enabled.
+	// <p>Whether deletion protection is enabled</p>
 	EnableDeletionProtection *bool `json:"EnableDeletionProtection,omitnil,omitempty" name:"EnableDeletionProtection"`
 
-	// Tag list
+	// <p>Tag list</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// <p>public data stream Stream access point</p>
+	PublicStreamAccessEndpoint *string `json:"PublicStreamAccessEndpoint,omitnil,omitempty" name:"PublicStreamAccessEndpoint"`
 }
 
 type RabbitMQVirtualHostInfo struct {
@@ -12844,6 +12972,9 @@ type RabbitMQVirtualHostInfo struct {
 
 	// Modification timestamp.
 	ModifyTs *uint64 `json:"ModifyTs,omitnil,omitempty" name:"ModifyTs"`
+
+	// Basic quota information.
+	Quota *RabbitMQVHostBaseQuota `json:"Quota,omitnil,omitempty" name:"Quota"`
 }
 
 type RabbitMQVirtualHostStatistics struct {
@@ -13581,6 +13712,28 @@ type RocketMQGroup struct {
 	TagList []*Tag `json:"TagList,omitnil,omitempty" name:"TagList"`
 }
 
+type RocketMQGroupConfig struct {
+	// Namespace
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// consumer group name
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
+
+	// Broadcast enabled
+	ConsumeBroadcastEnable *bool `json:"ConsumeBroadcastEnable,omitnil,omitempty" name:"ConsumeBroadcastEnable"`
+
+	// Whether to enable consumption
+	ConsumeEnable *bool `json:"ConsumeEnable,omitnil,omitempty" name:"ConsumeEnable"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Protocol type, support the following enumeration value
+	// TCP;
+	// HTTP;
+	ConsumerGroupType *string `json:"ConsumerGroupType,omitnil,omitempty" name:"ConsumerGroupType"`
+}
+
 type RocketMQInstanceConfig struct {
 	// Maximum TPS per namespace
 	MaxTpsPerNamespace *uint64 `json:"MaxTpsPerNamespace,omitnil,omitempty" name:"MaxTpsPerNamespace"`
@@ -13733,6 +13886,29 @@ type RocketMQNamespace struct {
 	InternalEndpoint *string `json:"InternalEndpoint,omitnil,omitempty" name:"InternalEndpoint"`
 }
 
+type RocketMQRoleConfig struct {
+	// Role name, corresponding to the secret key.
+	RoleName *string `json:"RoleName,omitnil,omitempty" name:"RoleName"`
+
+	// accessKey
+	RoleToken *string `json:"RoleToken,omitnil,omitempty" name:"RoleToken"`
+
+	// Namespace
+	EnvironmentId *string `json:"EnvironmentId,omitnil,omitempty" name:"EnvironmentId"`
+
+	// Role permission
+	Permissions []*string `json:"Permissions,omitnil,omitempty" name:"Permissions"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Permission type. Permissions are granted by cluster by default. Cluster: cluster level; TopicAndGroup: topic/consumer group level.
+	PermType *string `json:"PermType,omitnil,omitempty" name:"PermType"`
+
+	// Permission configuration in the topic and group dimensions.
+	DetailedRolePerms []*DetailedRolePerm `json:"DetailedRolePerms,omitnil,omitempty" name:"DetailedRolePerms"`
+}
+
 type RocketMQSubscription struct {
 	// Topic name
 	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
@@ -13857,6 +14033,27 @@ type RocketMQTopic struct {
 	TagList []*Tag `json:"TagList,omitnil,omitempty" name:"TagList"`
 }
 
+type RocketMQTopicConfig struct {
+	// Namespace
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Topic name
+	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+
+	// Topic type:
+	// Normal, ordinary
+	// PartitionedOrder, partition order
+	// Transactional message
+	// DelayScheduled, delay/scheduled message
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Number of partitions
+	Partitions *int64 `json:"Partitions,omitnil,omitempty" name:"Partitions"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+}
+
 type RocketMQTopicDistribution struct {
 	// Topic type
 	TopicType *string `json:"TopicType,omitnil,omitempty" name:"TopicType"`
@@ -13925,23 +14122,32 @@ type RocketMQVipInstance struct {
 }
 
 type Role struct {
-	// Role name.
+	// <p>Role name.</p>
 	RoleName *string `json:"RoleName,omitnil,omitempty" name:"RoleName"`
 
-	// Value of the role token.
+	// <p>Role token value.</p>
 	Token *string `json:"Token,omitnil,omitempty" name:"Token"`
 
-	// Remarks.
+	// <p>Remarks.</p>
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-	// Creation time.
+	// <p>Creation time.</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Update time.
+	// <p>Update time.</p>
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Authorization type (Cluster: cluster; TopicAndGroup: topic or consumer group).
+	// <p>Authorization type (Cluster: cluster; TopicAndGroup: topic/consumer group)</p>
 	PermType *string `json:"PermType,omitnil,omitempty" name:"PermType"`
+
+	// <p>Role type</p><p>Enumeration value:</p><ul><li>Temporary: Rotation key</li><li>Permanent: Permanent key</li></ul>
+	TokenType *string `json:"TokenType,omitnil,omitempty" name:"TokenType"`
+
+	// <p>SSM unique ID</p>
+	SecretName *string `json:"SecretName,omitnil,omitempty" name:"SecretName"`
+
+	// <p>Rotation cycle</p><p>Unit: day</p>
+	RotateFreq *uint64 `json:"RotateFreq,omitnil,omitempty" name:"RotateFreq"`
 }
 
 type SecurityPolicy struct {
@@ -14901,23 +15107,29 @@ type VpcConfig struct {
 }
 
 type VpcEndpointInfo struct {
-
+	// <p>vpc id</p>
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-
+	// <p>Subnet id</p>
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-
+	// <p>vpc access point information</p>
 	VpcEndpoint *string `json:"VpcEndpoint,omitnil,omitempty" name:"VpcEndpoint"`
 
-	// Access point status. valid values: OFF, ON, CREATING, DELETING.
+	// <p>vpc access point status OFF/ON/CREATING/DELETING</p>
 	VpcDataStreamEndpointStatus *string `json:"VpcDataStreamEndpointStatus,omitnil,omitempty" name:"VpcDataStreamEndpointStatus"`
 
-	// Encrypted TLS data stream access point.
+	// <p>TLS encrypted data stream access point</p>
 	VpcTlsEndpoint *string `json:"VpcTlsEndpoint,omitnil,omitempty" name:"VpcTlsEndpoint"`
 
-	// Error message for VPC access point operations.
+	// <p>Error information of VPC access point operation failure</p>
 	VpcErrorMessage *string `json:"VpcErrorMessage,omitnil,omitempty" name:"VpcErrorMessage"`
+
+	// <p>Access point ID</p>
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// <p>vpc Stream access point</p>
+	VpcStreamEndpoint *string `json:"VpcStreamEndpoint,omitnil,omitempty" name:"VpcStreamEndpoint"`
 }
 
 type VpcInfo struct {
