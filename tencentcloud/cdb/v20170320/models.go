@@ -21,10 +21,13 @@ import (
 )
 
 type Account struct {
-	// New account name
+	// Account name, enter 1-32 characters.
 	User *string `json:"User,omitnil,omitempty" name:"User"`
 
-	// New account domain name
+	// Account's host.
+	// Note:
+	// 1. IP format. You can specify a percent sign (%).
+	// 2. Multiple hosts are separated by a separator, which supports ;, |, line break, and space.
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 }
 
@@ -45,15 +48,20 @@ type AccountInfo struct {
 	ModifyPasswordTime *string `json:"ModifyPasswordTime,omitnil,omitempty" name:"ModifyPasswordTime"`
 
 	// This parameter is deprecated.
+	//
+	// Deprecated: CreateTime is deprecated.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The maximum number of instance connections supported by an account
 	MaxUserConnections *int64 `json:"MaxUserConnections,omitnil,omitempty" name:"MaxUserConnections"`
+
+	// Is password rotation enabled for the user account?
+	OpenCam *bool `json:"OpenCam,omitnil,omitempty" name:"OpenCam"`
 }
 
 // Predefined struct for user
 type AddTimeWindowRequestParams struct {
-	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Maintenance window on Monday. The format should be 10:00-12:00. You can set multiple time windows on a day. Each time window lasts from half an hour to three hours, and must start and end on the hour or half hour. At least one time window is required in a week. The same rule applies to the following parameters.
@@ -77,14 +85,14 @@ type AddTimeWindowRequestParams struct {
 	// Maintenance window on Sunday. At least one time window is required in a week.
 	Sunday []*string `json:"Sunday,omitnil,omitempty" name:"Sunday"`
 
-	// Maximum delay threshold, which takes effect only for source instances and disaster recovery instances.
+	// Maximum delay threshold (seconds), only applicable to primary instance and disaster recovery instance. Default value: 10. Value ranges from 1 to 10 integers.
 	MaxDelayTime *uint64 `json:"MaxDelayTime,omitnil,omitempty" name:"MaxDelayTime"`
 }
 
 type AddTimeWindowRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Maintenance window on Monday. The format should be 10:00-12:00. You can set multiple time windows on a day. Each time window lasts from half an hour to three hours, and must start and end on the hour or half hour. At least one time window is required in a week. The same rule applies to the following parameters.
@@ -108,7 +116,7 @@ type AddTimeWindowRequest struct {
 	// Maintenance window on Sunday. At least one time window is required in a week.
 	Sunday []*string `json:"Sunday,omitnil,omitempty" name:"Sunday"`
 
-	// Maximum delay threshold, which takes effect only for source instances and disaster recovery instances.
+	// Maximum delay threshold (seconds), only applicable to primary instance and disaster recovery instance. Default value: 10. Value ranges from 1 to 10 integers.
 	MaxDelayTime *uint64 `json:"MaxDelayTime,omitnil,omitempty" name:"MaxDelayTime"`
 }
 
@@ -163,93 +171,105 @@ func (r *AddTimeWindowResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AdjustCdbProxyAddressRequestParams struct {
-	// Proxy group ID
+	// <p>Proxy group ID, which can be obtained through the <a href="https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1">DescribeCdbProxyInfo</a> API.</p>
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// Assignment mode of weights. Valid values: `system` (auto-assigned), `custom`.
+	// <p>Weight allocation mode,<br>system Auto-Assignment: "system", custom: "custom"</p>
 	WeightMode *string `json:"WeightMode,omitnil,omitempty" name:"WeightMode"`
 
-	// Whether to remove delayed read-only instances from the proxy group Valid values: `true`, `false`.
+	// <p>Whether delay removal is enabled. Value: "true" | "false"</p>
 	IsKickOut *bool `json:"IsKickOut,omitnil,omitempty" name:"IsKickOut"`
 
-	// Least read-only instances. Minimum value:  `0`
+	// <p>Minimum retention quantity, minimum value: 0.<br>Description: Valid only when IsKickOut is true.</p>
 	MinCount *uint64 `json:"MinCount,omitnil,omitempty" name:"MinCount"`
 
-	// The delay threshold. Minimum value:  `0`
+	// <p>Delay removal threshold, minimum value: 1, value ranges from 1 to 10000, integer.</p>
 	MaxDelay *uint64 `json:"MaxDelay,omitnil,omitempty" name:"MaxDelay"`
 
-	// Whether to enable failover. Valid values: `true`, `false`.
+	// <p>Whether fault migration is enabled, value: "true" | "false"</p>
 	FailOver *bool `json:"FailOver,omitnil,omitempty" name:"FailOver"`
 
-	// Whether to automatically add newly created read-only instances. Valid values: `true`, `false`.
+	// <p>Automatically add RO. Parameter: "true" | "false"</p>
 	AutoAddRo *bool `json:"AutoAddRo,omitnil,omitempty" name:"AutoAddRo"`
 
-	// Whether it is read-only. Valid values: `true`, `false`.
+	// <p>Whether it is read-only. Value: "true" | "false".</p>
 	ReadOnly *bool `json:"ReadOnly,omitnil,omitempty" name:"ReadOnly"`
 
-	// Address ID of the proxy group
+	// <p>Proxy group address ID. Obtain through the <a href="https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1">DescribeCdbProxyInfo</a> API.</p>
 	ProxyAddressId *string `json:"ProxyAddressId,omitnil,omitempty" name:"ProxyAddressId"`
 
-	// Whether to enable transaction splitting. Valid values: `true`, `false`.
+	// <p>Whether transaction splitting is enabled. Value: "true" | "false". Default value: false.</p>
 	TransSplit *bool `json:"TransSplit,omitnil,omitempty" name:"TransSplit"`
 
-	// Whether to enable the connection pool
+	// <p>Whether the connection pool is enabled. Off by default.<br>Note: If you need to use the database proxy connection pool capability, the kernel minor version of the MySQL 8.0 primary instance must be at least MySQL 8.0 20230630.</p>
 	ConnectionPool *bool `json:"ConnectionPool,omitnil,omitempty" name:"ConnectionPool"`
 
-	// Assignment of read/write weights If `system` is passed in for `WeightMode`, only the default weight assigned by the system will take effect.
+	// <p>Read-write weight allocation. If WeightMode is passed in as system, the passed-in weight does not take effect and the default weight is assigned by the system.</p>
 	ProxyAllocation []*ProxyAllocation `json:"ProxyAllocation,omitnil,omitempty" name:"ProxyAllocation"`
 
-	// Whether to enable adaptive load balancing. Disabled by default.
+	// <p>Whether self-adaptive load balancing is enabled. Off by default.</p>
 	AutoLoadBalance *bool `json:"AutoLoadBalance,omitnil,omitempty" name:"AutoLoadBalance"`
 
-	// Access Mode: nearby - nearby access, balance - balanced allocation. Default is nearby access.
+	// <p>Access mode: nearby - proximity access, balance - balanced allocation. Default is proximity access.</p>
 	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
+
+	// <p>Whether to treat the libra node as an ordinary RO node</p>
+	ApNodeAsRoNode *bool `json:"ApNodeAsRoNode,omitnil,omitempty" name:"ApNodeAsRoNode"`
+
+	// <p>Whether to forward to other nodes in case of a libra node fault</p>
+	ApQueryToOtherNode *bool `json:"ApQueryToOtherNode,omitnil,omitempty" name:"ApQueryToOtherNode"`
 }
 
 type AdjustCdbProxyAddressRequest struct {
 	*tchttp.BaseRequest
 	
-	// Proxy group ID
+	// <p>Proxy group ID, which can be obtained through the <a href="https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1">DescribeCdbProxyInfo</a> API.</p>
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// Assignment mode of weights. Valid values: `system` (auto-assigned), `custom`.
+	// <p>Weight allocation mode,<br>system Auto-Assignment: "system", custom: "custom"</p>
 	WeightMode *string `json:"WeightMode,omitnil,omitempty" name:"WeightMode"`
 
-	// Whether to remove delayed read-only instances from the proxy group Valid values: `true`, `false`.
+	// <p>Whether delay removal is enabled. Value: "true" | "false"</p>
 	IsKickOut *bool `json:"IsKickOut,omitnil,omitempty" name:"IsKickOut"`
 
-	// Least read-only instances. Minimum value:  `0`
+	// <p>Minimum retention quantity, minimum value: 0.<br>Description: Valid only when IsKickOut is true.</p>
 	MinCount *uint64 `json:"MinCount,omitnil,omitempty" name:"MinCount"`
 
-	// The delay threshold. Minimum value:  `0`
+	// <p>Delay removal threshold, minimum value: 1, value ranges from 1 to 10000, integer.</p>
 	MaxDelay *uint64 `json:"MaxDelay,omitnil,omitempty" name:"MaxDelay"`
 
-	// Whether to enable failover. Valid values: `true`, `false`.
+	// <p>Whether fault migration is enabled, value: "true" | "false"</p>
 	FailOver *bool `json:"FailOver,omitnil,omitempty" name:"FailOver"`
 
-	// Whether to automatically add newly created read-only instances. Valid values: `true`, `false`.
+	// <p>Automatically add RO. Parameter: "true" | "false"</p>
 	AutoAddRo *bool `json:"AutoAddRo,omitnil,omitempty" name:"AutoAddRo"`
 
-	// Whether it is read-only. Valid values: `true`, `false`.
+	// <p>Whether it is read-only. Value: "true" | "false".</p>
 	ReadOnly *bool `json:"ReadOnly,omitnil,omitempty" name:"ReadOnly"`
 
-	// Address ID of the proxy group
+	// <p>Proxy group address ID. Obtain through the <a href="https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1">DescribeCdbProxyInfo</a> API.</p>
 	ProxyAddressId *string `json:"ProxyAddressId,omitnil,omitempty" name:"ProxyAddressId"`
 
-	// Whether to enable transaction splitting. Valid values: `true`, `false`.
+	// <p>Whether transaction splitting is enabled. Value: "true" | "false". Default value: false.</p>
 	TransSplit *bool `json:"TransSplit,omitnil,omitempty" name:"TransSplit"`
 
-	// Whether to enable the connection pool
+	// <p>Whether the connection pool is enabled. Off by default.<br>Note: If you need to use the database proxy connection pool capability, the kernel minor version of the MySQL 8.0 primary instance must be at least MySQL 8.0 20230630.</p>
 	ConnectionPool *bool `json:"ConnectionPool,omitnil,omitempty" name:"ConnectionPool"`
 
-	// Assignment of read/write weights If `system` is passed in for `WeightMode`, only the default weight assigned by the system will take effect.
+	// <p>Read-write weight allocation. If WeightMode is passed in as system, the passed-in weight does not take effect and the default weight is assigned by the system.</p>
 	ProxyAllocation []*ProxyAllocation `json:"ProxyAllocation,omitnil,omitempty" name:"ProxyAllocation"`
 
-	// Whether to enable adaptive load balancing. Disabled by default.
+	// <p>Whether self-adaptive load balancing is enabled. Off by default.</p>
 	AutoLoadBalance *bool `json:"AutoLoadBalance,omitnil,omitempty" name:"AutoLoadBalance"`
 
-	// Access Mode: nearby - nearby access, balance - balanced allocation. Default is nearby access.
+	// <p>Access mode: nearby - proximity access, balance - balanced allocation. Default is proximity access.</p>
 	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
+
+	// <p>Whether to treat the libra node as an ordinary RO node</p>
+	ApNodeAsRoNode *bool `json:"ApNodeAsRoNode,omitnil,omitempty" name:"ApNodeAsRoNode"`
+
+	// <p>Whether to forward to other nodes in case of a libra node fault</p>
+	ApQueryToOtherNode *bool `json:"ApQueryToOtherNode,omitnil,omitempty" name:"ApQueryToOtherNode"`
 }
 
 func (r *AdjustCdbProxyAddressRequest) ToJsonString() string {
@@ -278,6 +298,8 @@ func (r *AdjustCdbProxyAddressRequest) FromJsonString(s string) error {
 	delete(f, "ProxyAllocation")
 	delete(f, "AutoLoadBalance")
 	delete(f, "AccessMode")
+	delete(f, "ApNodeAsRoNode")
+	delete(f, "ApQueryToOtherNode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AdjustCdbProxyAddressRequest has unknown keys!", "")
 	}
@@ -286,7 +308,7 @@ func (r *AdjustCdbProxyAddressRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AdjustCdbProxyAddressResponseParams struct {
-	// Async task ID Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Asynchronous Task ID</p>
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -311,13 +333,20 @@ func (r *AdjustCdbProxyAddressResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AdjustCdbProxyRequestParams struct {
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Proxy group ID
+	// Proxy group ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// The specification configuration of a node
+	// Node specification configuration
+	// Remark: Database proxy supported node specifications are 2C4000MB, 4C8000MB, 8C16000MB.
+	// Parameter description in the example.
+	// NodeCount: Number of nodes
+	// Region: Node region
+	// Zone: Node availability zone
+	// Cpu: Number of node cores for one agent (Unit: core)
+	// Mem: Memory size of each proxy node (unit: MB)
 	ProxyNodeCustom []*ProxyNodeCustom `json:"ProxyNodeCustom,omitnil,omitempty" name:"ProxyNodeCustom"`
 
 	// Rebalance. Valid values:  `auto` (automatic), `manual` (manual).
@@ -330,13 +359,20 @@ type AdjustCdbProxyRequestParams struct {
 type AdjustCdbProxyRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Proxy group ID
+	// Proxy group ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// The specification configuration of a node
+	// Node specification configuration
+	// Remark: Database proxy supported node specifications are 2C4000MB, 4C8000MB, 8C16000MB.
+	// Parameter description in the example.
+	// NodeCount: Number of nodes
+	// Region: Node region
+	// Zone: Node availability zone
+	// Cpu: Number of node cores for one agent (Unit: core)
+	// Mem: Memory size of each proxy node (unit: MB)
 	ProxyNodeCustom []*ProxyNodeCustom `json:"ProxyNodeCustom,omitnil,omitempty" name:"ProxyNodeCustom"`
 
 	// Rebalance. Valid values:  `auto` (automatic), `manual` (manual).
@@ -371,7 +407,7 @@ func (r *AdjustCdbProxyRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AdjustCdbProxyResponseParams struct {
-	// Async task ID Note: This field may return null, indicating that no valid values can be obtained.
+	// Asynchronous Task ID
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -433,7 +469,7 @@ type AnalysisNodeInfo struct {
 
 // Predefined struct for user
 type AnalyzeAuditLogsRequestParams struct {
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Start time of the log to be analyzed in the format of `2023-02-16 00:00:20`.
@@ -445,7 +481,9 @@ type AnalyzeAuditLogsRequestParams struct {
 	// Sorting conditions for aggregation dimension
 	AggregationConditions []*AggregationCondition `json:"AggregationConditions,omitnil,omitempty" name:"AggregationConditions"`
 
-	// This parameter is disused. The result set of the audit log filtered by this condition is set as the analysis log.
+	// Deprecated.
+	//
+	// Deprecated: AuditLogFilter is deprecated.
 	AuditLogFilter *AuditLogFilter `json:"AuditLogFilter,omitnil,omitempty" name:"AuditLogFilter"`
 
 	// The result set of the audit log filtered by this condition is set as the analysis Log.
@@ -455,7 +493,7 @@ type AnalyzeAuditLogsRequestParams struct {
 type AnalyzeAuditLogsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Start time of the log to be analyzed in the format of `2023-02-16 00:00:20`.
@@ -467,7 +505,7 @@ type AnalyzeAuditLogsRequest struct {
 	// Sorting conditions for aggregation dimension
 	AggregationConditions []*AggregationCondition `json:"AggregationConditions,omitnil,omitempty" name:"AggregationConditions"`
 
-	// This parameter is disused. The result set of the audit log filtered by this condition is set as the analysis log.
+	// Deprecated.
 	AuditLogFilter *AuditLogFilter `json:"AuditLogFilter,omitnil,omitempty" name:"AuditLogFilter"`
 
 	// The result set of the audit log filtered by this condition is set as the analysis Log.
@@ -500,12 +538,10 @@ func (r *AnalyzeAuditLogsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AnalyzeAuditLogsResponseParams struct {
-	// Information set of the aggregation bucket returned
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Returned aggregation bucket information set
 	Items []*AuditLogAggregationResult `json:"Items,omitnil,omitempty" name:"Items"`
 
-	// Number of scanned logs
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of logs scanned
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -530,10 +566,10 @@ func (r *AnalyzeAuditLogsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AssociateSecurityGroupsRequestParams struct {
-	// Security group ID.
+	// Security group ID, which can be obtained through the [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/236/15854?from_cn_redirect=1) API.
 	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
-	// List of instance IDs, which is an array of one or more instance IDs.
+	// Instance ID list, an array consisting of one or more instance IDs. You can obtain it through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// This parameter takes effect only when the IDs of read-only replicas are passed in. If this parameter is set to `False` or left empty, the security group will be bound to the RO groups of these read-only replicas. If this parameter is set to `True`, the security group will be bound to the read-only replicas themselves.
@@ -543,10 +579,10 @@ type AssociateSecurityGroupsRequestParams struct {
 type AssociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Security group ID.
+	// Security group ID, which can be obtained through the [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/236/15854?from_cn_redirect=1) API.
 	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
-	// List of instance IDs, which is an array of one or more instance IDs.
+	// Instance ID list, an array consisting of one or more instance IDs. You can obtain it through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// This parameter takes effect only when the IDs of read-only replicas are passed in. If this parameter is set to `False` or left empty, the security group will be bound to the RO groups of these read-only replicas. If this parameter is set to `True`, the security group will be bound to the read-only replicas themselves.
@@ -646,16 +682,16 @@ type AuditLog struct {
 	// The error code
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// SQL Type.
+
 	SqlType *string `json:"SqlType,omitnil,omitempty" name:"SqlType"`
 
 	// Audit policy name, which will be unavailable soon.
 	PolicyName *string `json:"PolicyName,omitnil,omitempty" name:"PolicyName"`
 
-	// Database Name.
+
 	DBName *string `json:"DBName,omitnil,omitempty" name:"DBName"`
 
-	// SQL Statement.
+
 	Sql *string `json:"Sql,omitnil,omitempty" name:"Sql"`
 
 	// Client address
@@ -676,42 +712,40 @@ type AuditLog struct {
 	// Thread ID
 	ThreadId *int64 `json:"ThreadId,omitnil,omitempty" name:"ThreadId"`
 
-	// Number of scanned rows
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of scanned rows.
 	CheckRows *int64 `json:"CheckRows,omitnil,omitempty" name:"CheckRows"`
 
-	// CPU execution time (μs)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// cpu execution time, µs.
 	CpuTime *float64 `json:"CpuTime,omitnil,omitempty" name:"CpuTime"`
 
-	// IO wait time (μs)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// IO wait time, µs.
 	IoWaitTime *uint64 `json:"IoWaitTime,omitnil,omitempty" name:"IoWaitTime"`
 
-	// Lock wait time (μs)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Lock waiting time (unit: microsecond).
 	LockWaitTime *uint64 `json:"LockWaitTime,omitnil,omitempty" name:"LockWaitTime"`
 
-	// Start time, which forms a time accurate to nanoseconds with·`timestamp`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Start time, which combines with timestamp to form a time accurate to nanoseconds.
 	NsTime *uint64 `json:"NsTime,omitnil,omitempty" name:"NsTime"`
 
-	// Transaction duration (μs)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Transaction duration, µs.
 	TrxLivingTime *uint64 `json:"TrxLivingTime,omitnil,omitempty" name:"TrxLivingTime"`
 
-	// Basic information on the rule template hit by the log.
-	// Note: The return value may be null, indicating that no valid data can be obtained.
+	// Basic info of the log hit rule template
 	TemplateInfo []*LogRuleTemplateInfo `json:"TemplateInfo,omitnil,omitempty" name:"TemplateInfo"`
+
+	// Transaction ID
+	TrxId *int64 `json:"TrxId,omitnil,omitempty" name:"TrxId"`
+
+	// Port.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ClientPort *int64 `json:"ClientPort,omitnil,omitempty" name:"ClientPort"`
 }
 
 type AuditLogAggregationResult struct {
 	// Aggregation dimension
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	AggregationField *string `json:"AggregationField,omitnil,omitempty" name:"AggregationField"`
 
-	// Result set of an aggregation bucket
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Aggregate bucket result set
 	Buckets []*Bucket `json:"Buckets,omitnil,omitempty" name:"Buckets"`
 }
 
@@ -742,7 +776,7 @@ type AuditLogFilter struct {
 	// Username
 	User []*string `json:"User,omitnil,omitempty" name:"User"`
 
-	// Database Name.
+
 	DBName []*string `json:"DBName,omitnil,omitempty" name:"DBName"`
 
 	// Table name
@@ -751,10 +785,10 @@ type AuditLogFilter struct {
 	// Audit policy name
 	PolicyName []*string `json:"PolicyName,omitnil,omitempty" name:"PolicyName"`
 
-	// SQL statement. Supports fuzzy matching.
+
 	Sql *string `json:"Sql,omitnil,omitempty" name:"Sql"`
 
-	// SQL Type. Currently supports: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "ALTER", "SET", "REPLACE", "EXECUTE".
+
 	SqlType *string `json:"SqlType,omitnil,omitempty" name:"SqlType"`
 
 	// Execution time in ms, which is used to filter the audit log with execution time greater than this value.
@@ -823,12 +857,10 @@ type AuditPolicy struct {
 	// Audit rule ID
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
-	// Audit rule name
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Audit rule name.
 	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
 	// Database instance name
-	// Note: This field may return `null`, indicating that no valid value was found.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 }
 
@@ -896,24 +928,36 @@ type AuditRuleTemplateInfo struct {
 }
 
 type AutoStrategy struct {
-	// CPU utilization threshold (percent value). Valid values: 70, 80, and 90. Automatic scale-out will be triggered when CPU utilization reaches the set threshold.
+	// Auto scaling threshold. Available values: 40, 50, 60, 70, 80, 90. Represents the CPU utilization reaches 40%, 50%, 60%, 70%, 80%, or 90% to trigger auto scaling in the background.
 	ExpandThreshold *int64 `json:"ExpandThreshold,omitnil,omitempty" name:"ExpandThreshold"`
-
-	// Interval, in seconds. Valid values: 1, 3, 5, 10, 15, and 30. The system backend determines whether automatic scale-out is required at the set interval.
-	ExpandPeriod *int64 `json:"ExpandPeriod,omitnil,omitempty" name:"ExpandPeriod"`
 
 	// CPU utilization threshold (percent value). Valid values: 10, 20, and 30. Automatic scale-in will be triggered when CPU utilization reaches the set threshold.
 	ShrinkThreshold *int64 `json:"ShrinkThreshold,omitnil,omitempty" name:"ShrinkThreshold"`
 
-	// Interval, in seconds. Valid values: 5, 10, 15, and 30. The system backend determines whether automatic scale-in is required at the set interval.
+	// Auto-scaling observation period, in minutes, available values 1, 3, 5, 10, 15, 30. The backend will judge scaling out according to the configured period.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: ExpandPeriod is deprecated.
+	ExpandPeriod *int64 `json:"ExpandPeriod,omitnil,omitempty" name:"ExpandPeriod"`
+
+	// Automatic scaling down observation period, in minutes, available values 5, 10, 15, 30. The backend performs scale-in judgment according to the configured period.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: ShrinkPeriod is deprecated.
 	ShrinkPeriod *int64 `json:"ShrinkPeriod,omitnil,omitempty" name:"ShrinkPeriod"`
+
+	// Elastic scaling observation period (in seconds). Value is 15, 30, 45, 60, 180, 300, 600, 900, or 1800.
+	ExpandSecondPeriod *int64 `json:"ExpandSecondPeriod,omitnil,omitempty" name:"ExpandSecondPeriod"`
+
+	// Scale-down observation period (in seconds). Valid values: 300, 600, 900, 1800.
+	ShrinkSecondPeriod *int64 `json:"ShrinkSecondPeriod,omitnil,omitempty" name:"ShrinkSecondPeriod"`
 }
 
 type BackupConfig struct {
 	// Replication mode of secondary database 2. Value range: async, semi-sync
 	ReplicationMode *string `json:"ReplicationMode,omitnil,omitempty" name:"ReplicationMode"`
 
-	// Name of the AZ of secondary database 2, such as ap-shanghai-2
+	// The canonical name of the second secondary availability zone, for example ap-shanghai-2
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Private IP address of secondary database 2
@@ -924,66 +968,74 @@ type BackupConfig struct {
 }
 
 type BackupInfo struct {
-	// Backup filename
+	// <p>Backup file name</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Backup file size in bytes
+	// <p>Backup file size, unit: Byte</p>
 	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
-	// Backup snapshot time in the format of yyyy-MM-dd HH:mm:ss, such as 2016-03-17 02:10:37
+	// <p>Backup snapshot time. Time format: 2016-03-17 02:10:37</p>
 	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 
-	// Download address
+	// <p>Download link</p>
 	IntranetUrl *string `json:"IntranetUrl,omitnil,omitempty" name:"IntranetUrl"`
 
-	// Download address
+	// <p>Download link</p>
 	InternetUrl *string `json:"InternetUrl,omitnil,omitempty" name:"InternetUrl"`
 
-	// Log type. Valid values: `logical` (logical cold backup), `physical` (physical cold backup).
+	// <p>Specific type of logs. Possible values: "logical": logical cold backup, "physical": physical cold backup.</p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Backup subtask ID, which is used when backup files are deleted
+	// <p>ID of the backup subtask, used when deleting backup files</p>
 	BackupId *int64 `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 
-	// Backup task status. Valid values: `SUCCESS` (backup succeeded), `FAILED` (backup failed), `RUNNING` (backup is in progress).
+	// <p>Backup task status. Possible values: "SUCCESS": backup successful, "FAILED": backup FAILED, "RUNNING": backup in progress.</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Backup task completion time
+	// <p>Backup task completion time</p>
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 
-	// (This field will be disused and is thus not recommended) backup creator. Valid values: `SYSTEM` (created by system), `Uin` (initiator's `Uin` value).
+	// <p>(This value will be deprecated and is not recommended for use) Creator of the backup. Valid values: SYSTEM - generated by the system, Uin - Uin value of the initiator.</p>
 	Creator *string `json:"Creator,omitnil,omitempty" name:"Creator"`
 
-	// Backup task start time
+	// <p>Start time of the backup task</p>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Backup method. Valid values: `full` (full backup), `partial` (partial backup).
+	// <p>Backup method. Possible values are "full": full backup, "partial": partial backup.</p>
 	Method *string `json:"Method,omitnil,omitempty" name:"Method"`
 
-	// Backup mode. Valid values: `manual` (manual backup), `automatic` (automatic backup).
+	// <p>Backup method. Possible values are "manual": manual backup, "automatic": automatic backup.</p>
 	Way *string `json:"Way,omitnil,omitempty" name:"Way"`
 
-	// Manual backup alias
+	// <p>Manual backup alias</p>
 	ManualBackupName *string `json:"ManualBackupName,omitnil,omitempty" name:"ManualBackupName"`
 
-	// Backup retention type. Valid values: `save_mode_regular` (non-archive backup), save_mode_period`(archive backup).
+	// <p>Backup retention type, save_mode_regular - Regular backup saving, save_mode_period - Periodic backup</p>
 	SaveMode *string `json:"SaveMode,omitnil,omitempty" name:"SaveMode"`
 
-	// The region where local backup resides
+	// <p>Local backup region</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Detailed information of remote backups
+	// <p>Detailed information of offsite backup</p>
 	RemoteInfo []*RemoteBackupInfo `json:"RemoteInfo,omitnil,omitempty" name:"RemoteInfo"`
 
-	// Storage method. Valid values: `0` (regular storage), `1`(archive storage). Default value: `0`.
+	// <p>Storage method: 0 - regular storage, 1 - archive storage, 2 - standard storage, defaults to 0.</p>
 	CosStorageType *int64 `json:"CosStorageType,omitnil,omitempty" name:"CosStorageType"`
 
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	// <p>Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Whether the backup file is encrypted. Valid values: `on` (encrypted), `off` (unencrypted).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Backup completion progress</p>
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// <p>Whether the backup file is encrypted, on-encrypted, off-unencrypted</p>
 	EncryptionFlag *string `json:"EncryptionFlag,omitnil,omitempty" name:"EncryptionFlag"`
+
+	// <p>Backup GTID position</p>
+	ExecutedGTIDSet *string `json:"ExecutedGTIDSet,omitnil,omitempty" name:"ExecutedGTIDSet"`
+
+	// <p>MD5 value of the backup file</p>
+	MD5 *string `json:"MD5,omitnil,omitempty" name:"MD5"`
 }
 
 type BackupItem struct {
@@ -1036,14 +1088,14 @@ type BackupSummaryItem struct {
 
 // Predefined struct for user
 type BalanceRoGroupLoadRequestParams struct {
-	// RO group ID in the format of `cdbrg-c1nl9rpv`.
+	// ID of the RO group, in the format of cdbrg-c1nl9rpv. You can obtain it via [DescribeRoGroups](https://www.tencentcloud.com/document/api/236/40939?from_cn_redirect=1).
 	RoGroupId *string `json:"RoGroupId,omitnil,omitempty" name:"RoGroupId"`
 }
 
 type BalanceRoGroupLoadRequest struct {
 	*tchttp.BaseRequest
 	
-	// RO group ID in the format of `cdbrg-c1nl9rpv`.
+	// ID of the RO group, in the format of cdbrg-c1nl9rpv. You can obtain it via [DescribeRoGroups](https://www.tencentcloud.com/document/api/236/40939?from_cn_redirect=1).
 	RoGroupId *string `json:"RoGroupId,omitnil,omitempty" name:"RoGroupId"`
 }
 
@@ -1089,49 +1141,53 @@ func (r *BalanceRoGroupLoadResponse) FromJsonString(s string) error {
 }
 
 type BinlogInfo struct {
-	// Binlog backup filename
+	// <p>binlog backup file name</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Backup file size in bytes
+	// <p>Backup file size, unit: Byte</p>
 	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
-	// File stored time in the format of 2016-03-17 02:10:37
+	// <p>File storage time. Time format: 2016-03-17 02:10:37</p>
 	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 
-	// Download address
+	// <p>Download link<br>Description: This download link is the same as the download address of the parameter InternetUrl.</p>
 	IntranetUrl *string `json:"IntranetUrl,omitnil,omitempty" name:"IntranetUrl"`
 
-	// Download address
+	// <p>Download address<br>Description: This download address is the same as the IntranetUrl download address.</p>
 	InternetUrl *string `json:"InternetUrl,omitnil,omitempty" name:"InternetUrl"`
 
-	// Log type. Value range: binlog
+	// <p>Log specific type. Possible values: binlog - binary log</p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Binlog file start file
+	// <p>binlog file start time</p>
 	BinlogStartTime *string `json:"BinlogStartTime,omitnil,omitempty" name:"BinlogStartTime"`
 
-	// Binlog file end time
+	// <p>binlog file expiration time</p>
 	BinlogFinishTime *string `json:"BinlogFinishTime,omitnil,omitempty" name:"BinlogFinishTime"`
 
-	// The region where the binlog file resides
+	// <p>Region where local binlog files are located</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Backup task status. Valid values: `SUCCESS` (backup succeeded), `FAILED` (backup failed), `RUNNING` (backup is in progress).
+	// <p>Backup task status. Possible values: "SUCCESS": backup successful, "FAILED": backup FAILED, "RUNNING": backup in progress.</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// The detailed information of remote binlog backups
+	// <p>Detailed information of binlog offsite backup</p>
 	RemoteInfo []*RemoteBackupInfo `json:"RemoteInfo,omitnil,omitempty" name:"RemoteInfo"`
 
-	// Storage method. Valid values: `0` (regular storage), `1`(archive storage). Default value: `0`.
+	// <p>Storage method: 0 - regular storage, 1 - archive storage, 2 - standard storage, defaults to 0.</p>
 	CosStorageType *int64 `json:"CosStorageType,omitnil,omitempty" name:"CosStorageType"`
 
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	// <p>Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.</p>
+	//
+	// Deprecated: InstanceId is deprecated.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Backup completion progress</p>
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 }
 
 type Bucket struct {
 	// None
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Number of occurrences of the key value
@@ -1377,10 +1433,10 @@ func (r *CloseAuditServiceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CloseCDBProxyRequestParams struct {
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Proxy group ID
+	// Proxy group ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
 	// Whether only to disable read/write separation. Valid values: `true`, `false`. Default value: `false`.
@@ -1390,10 +1446,10 @@ type CloseCDBProxyRequestParams struct {
 type CloseCDBProxyRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Proxy group ID
+	// Proxy group ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
 	// Whether only to disable read/write separation. Valid values: `true`, `false`. Default value: `false`.
@@ -1445,20 +1501,20 @@ func (r *CloseCDBProxyResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CloseCdbProxyAddressRequestParams struct {
-	// Proxy group ID
+	// Proxy group ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// Address ID of the proxy group
+	// Proxy group address ID. You can obtain it through the API [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1).
 	ProxyAddressId *string `json:"ProxyAddressId,omitnil,omitempty" name:"ProxyAddressId"`
 }
 
 type CloseCdbProxyAddressRequest struct {
 	*tchttp.BaseRequest
 	
-	// Proxy group ID
+	// Proxy group ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// Address ID of the proxy group
+	// Proxy group address ID. You can obtain it through the API [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1).
 	ProxyAddressId *string `json:"ProxyAddressId,omitnil,omitempty" name:"ProxyAddressId"`
 }
 
@@ -1505,16 +1561,86 @@ func (r *CloseCdbProxyAddressResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type CloseWanServiceRequestParams struct {
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+type CloseSSLRequestParams struct {
+	// Instance ID. Required when the read-only group ID is empty. Can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Read-only group ID. Required when the instance ID is empty. Can be obtained through the [DescribeRoGroups](https://www.tencentcloud.com/document/api/236/40939?from_cn_redirect=1) API.
+	RoGroupId *string `json:"RoGroupId,omitnil,omitempty" name:"RoGroupId"`
+}
+
+type CloseSSLRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. Required when the read-only group ID is empty. Can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Read-only group ID. Required when the instance ID is empty. Can be obtained through the [DescribeRoGroups](https://www.tencentcloud.com/document/api/236/40939?from_cn_redirect=1) API.
+	RoGroupId *string `json:"RoGroupId,omitnil,omitempty" name:"RoGroupId"`
+}
+
+func (r *CloseSSLRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseSSLRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "RoGroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloseSSLRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CloseSSLResponseParams struct {
+	// Asynchronous request ID.
+	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CloseSSLResponse struct {
+	*tchttp.BaseResponse
+	Response *CloseSSLResponseParams `json:"Response"`
+}
+
+func (r *CloseSSLResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseSSLResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CloseWanServiceRequestParams struct {
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console. Use the query instance list API (https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1) to obtain it, with its value being the InstanceId field in the output parameter. Input the read-only group ID to disable public network access for the read-only group.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// When updating the read-only group of a cloud disk edition instance, specify the instance ID in InstanceId and this parameter to indicate the operation is for the read-only group. If you perform the operation on the read-write node, this parameter is not required.
+	OpResourceId *string `json:"OpResourceId,omitnil,omitempty" name:"OpResourceId"`
 }
 
 type CloseWanServiceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console. Use the query instance list API (https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1) to obtain it, with its value being the InstanceId field in the output parameter. Input the read-only group ID to disable public network access for the read-only group.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// When updating the read-only group of a cloud disk edition instance, specify the instance ID in InstanceId and this parameter to indicate the operation is for the read-only group. If you perform the operation on the read-write node, this parameter is not required.
+	OpResourceId *string `json:"OpResourceId,omitnil,omitempty" name:"OpResourceId"`
 }
 
 func (r *CloseWanServiceRequest) ToJsonString() string {
@@ -1530,6 +1656,7 @@ func (r *CloseWanServiceRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "InstanceId")
+	delete(f, "OpResourceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloseWanServiceRequest has unknown keys!", "")
 	}
@@ -1636,10 +1763,14 @@ type CreateAccountsRequestParams struct {
 	// List of TencentDB accounts
 	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 
-	// Password of the new account
+	// Password of the new account.
+	// Note:
+	// 1. Within 8–64 characters (recommend not exceeding 12).
+	// 2. At least two of the following items: lowercase letter a – z or uppercase letter A – Z, digit 0 – 9, _+-,&=!@#$%^*().|.
+	// 3. Cannot contain invalid characters.
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// Remarks
+	// Remark information. Input limit: 255 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Maximum connections of the new account. Default value: `10240`. Maximum value: `10240`.
@@ -1655,10 +1786,14 @@ type CreateAccountsRequest struct {
 	// List of TencentDB accounts
 	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 
-	// Password of the new account
+	// Password of the new account.
+	// Note:
+	// 1. Within 8–64 characters (recommend not exceeding 12).
+	// 2. At least two of the following items: lowercase letter a – z or uppercase letter A – Z, digit 0 – 9, _+-,&=!@#$%^*().|.
+	// 3. Cannot contain invalid characters.
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// Remarks
+	// Remark information. Input limit: 255 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Maximum connections of the new account. Default value: `10240`. Maximum value: `10240`.
@@ -2006,12 +2141,15 @@ type CreateBackupRequestParams struct {
 	// Target backup method. Valid values: `logical` (logical cold backup), `physical` (physical cold backup), `snapshot` (snapshot backup). Basic Edition instances only support snapshot backups.
 	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
 
-	// Information of the table to be backed up. If this parameter is not set, the entire instance will be backed up by default. It can be set only in logical backup (i.e., BackupMethod = logical). The specified table must exist; otherwise, backup may fail.
-	// For example, if you want to backup tb1 and tb2 in db1 and the entire db2, you should set the parameter as [{"Db": "db1", "Table": "tb1"}, {"Db": "db1", "Table": "tb2"}, {"Db": "db2"} ].
+	// Database table information to be backed up. If this parameter is not set, the whole instance is backed up by default. This parameter can only be set when BackupMethod=logical. The specified database and tables must exist. Otherwise, backup may fail.
+	// If necessary to back up tables tb1 and tb2 in database db1 and database db2, configure the parameter as [{"Db": "db1", "Table": "tb1"}, {"Db": "db1", "Table": "tb2"}, {"Db": "db2"}].
 	BackupDBTableList []*BackupItem `json:"BackupDBTableList,omitnil,omitempty" name:"BackupDBTableList"`
 
-	// Manual backup alias
+	// Manually back up the alias. Keep the input length within 60 characters.
 	ManualBackupName *string `json:"ManualBackupName,omitnil,omitempty" name:"ManualBackupName"`
+
+	// Whether the physical backup needs encryption, optional values: on - yes, off - no. This value is meaningful only when BackupMethod is physical. If not specified, use the default encryption policy of instance backup. Here, the default encryption policy refers to the current instance encryption policy queried via the api for the query [DescribeBackupEncryptionStatus](https://www.tencentcloud.com/document/product/236/86508?from_cn_redirect=1).
+	EncryptionFlag *string `json:"EncryptionFlag,omitnil,omitempty" name:"EncryptionFlag"`
 }
 
 type CreateBackupRequest struct {
@@ -2023,12 +2161,15 @@ type CreateBackupRequest struct {
 	// Target backup method. Valid values: `logical` (logical cold backup), `physical` (physical cold backup), `snapshot` (snapshot backup). Basic Edition instances only support snapshot backups.
 	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
 
-	// Information of the table to be backed up. If this parameter is not set, the entire instance will be backed up by default. It can be set only in logical backup (i.e., BackupMethod = logical). The specified table must exist; otherwise, backup may fail.
-	// For example, if you want to backup tb1 and tb2 in db1 and the entire db2, you should set the parameter as [{"Db": "db1", "Table": "tb1"}, {"Db": "db1", "Table": "tb2"}, {"Db": "db2"} ].
+	// Database table information to be backed up. If this parameter is not set, the whole instance is backed up by default. This parameter can only be set when BackupMethod=logical. The specified database and tables must exist. Otherwise, backup may fail.
+	// If necessary to back up tables tb1 and tb2 in database db1 and database db2, configure the parameter as [{"Db": "db1", "Table": "tb1"}, {"Db": "db1", "Table": "tb2"}, {"Db": "db2"}].
 	BackupDBTableList []*BackupItem `json:"BackupDBTableList,omitnil,omitempty" name:"BackupDBTableList"`
 
-	// Manual backup alias
+	// Manually back up the alias. Keep the input length within 60 characters.
 	ManualBackupName *string `json:"ManualBackupName,omitnil,omitempty" name:"ManualBackupName"`
+
+	// Whether the physical backup needs encryption, optional values: on - yes, off - no. This value is meaningful only when BackupMethod is physical. If not specified, use the default encryption policy of instance backup. Here, the default encryption policy refers to the current instance encryption policy queried via the api for the query [DescribeBackupEncryptionStatus](https://www.tencentcloud.com/document/product/236/86508?from_cn_redirect=1).
+	EncryptionFlag *string `json:"EncryptionFlag,omitnil,omitempty" name:"EncryptionFlag"`
 }
 
 func (r *CreateBackupRequest) ToJsonString() string {
@@ -2047,6 +2188,7 @@ func (r *CreateBackupRequest) FromJsonString(s string) error {
 	delete(f, "BackupMethod")
 	delete(f, "BackupDBTableList")
 	delete(f, "ManualBackupName")
+	delete(f, "EncryptionFlag")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBackupRequest has unknown keys!", "")
 	}
@@ -2080,7 +2222,7 @@ func (r *CreateBackupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCdbProxyAddressRequestParams struct {
-	// Proxy group ID
+	// Proxy group ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
 	// Assignment mode of weights. Valid values: `system` (auto-assigned), `custom`.
@@ -2092,7 +2234,7 @@ type CreateCdbProxyAddressRequestParams struct {
 	// Least read-only instances. Minimum value:  `0`
 	MinCount *uint64 `json:"MinCount,omitnil,omitempty" name:"MinCount"`
 
-	// The delay threshold. Minimum value:  `0`
+	// Delay removal threshold, minimum value: 1, range: 1–10000. The value is an integer.
 	MaxDelay *uint64 `json:"MaxDelay,omitnil,omitempty" name:"MaxDelay"`
 
 	// Whether to enable failover. Valid values: `true`, `false`.
@@ -2110,41 +2252,42 @@ type CreateCdbProxyAddressRequestParams struct {
 	// Assignment of read/write weights
 	ProxyAllocation []*ProxyAllocation `json:"ProxyAllocation,omitnil,omitempty" name:"ProxyAllocation"`
 
-	// VPC ID
+	// VPC ID. Obtain through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// VPC subnet ID
+	// Private subnet ID. Obtain through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// Whether to enable the connection pool. Valid values: 
+	// Whether to enable connection pool. Off by default.
+	// Note: If you need to use the database proxy connection pool capability, the kernel minor version of the MySQL 8.0 primary instance must be equal to or greater than MySQL 8.0 20230630.
 	ConnectionPool *bool `json:"ConnectionPool,omitnil,omitempty" name:"ConnectionPool"`
 
 	// Description
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
-	// IP address
+	// IP. Leave it blank to default to a random supported IP in the selected VPC.
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-	// Port
+	// Port. Default value 3306.
 	VPort *uint64 `json:"VPort,omitnil,omitempty" name:"VPort"`
 
 	// Security group
 	SecurityGroup []*string `json:"SecurityGroup,omitnil,omitempty" name:"SecurityGroup"`
 
-	// Connection pool type, which will take effect only when `ConnectionPool` is `true`. Valid values:  `transaction` (transaction-level), `connection` (session-level).
+	// Connection pool type. Available values: transaction (transaction-level connection pool), connection (session-level connection pool). This parameter is valid only when ConnectionPool is true. Default value: connection.
 	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil,omitempty" name:"ConnectionPoolType"`
 
-	// Whether to enable adaptive load balancing. Disabled by default.
+	// Whether adaptive load balancing is enabled. Off by default.
 	AutoLoadBalance *bool `json:"AutoLoadBalance,omitnil,omitempty" name:"AutoLoadBalance"`
 
-	// Access Mode. nearBy - nearby access, balance - balanced allocation. Default value: nearBy.
+	// Access mode. nearBy - proximity access, balance - balanced allocation. Default value: nearBy.
 	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
 }
 
 type CreateCdbProxyAddressRequest struct {
 	*tchttp.BaseRequest
 	
-	// Proxy group ID
+	// Proxy group ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
 	// Assignment mode of weights. Valid values: `system` (auto-assigned), `custom`.
@@ -2156,7 +2299,7 @@ type CreateCdbProxyAddressRequest struct {
 	// Least read-only instances. Minimum value:  `0`
 	MinCount *uint64 `json:"MinCount,omitnil,omitempty" name:"MinCount"`
 
-	// The delay threshold. Minimum value:  `0`
+	// Delay removal threshold, minimum value: 1, range: 1–10000. The value is an integer.
 	MaxDelay *uint64 `json:"MaxDelay,omitnil,omitempty" name:"MaxDelay"`
 
 	// Whether to enable failover. Valid values: `true`, `false`.
@@ -2174,34 +2317,35 @@ type CreateCdbProxyAddressRequest struct {
 	// Assignment of read/write weights
 	ProxyAllocation []*ProxyAllocation `json:"ProxyAllocation,omitnil,omitempty" name:"ProxyAllocation"`
 
-	// VPC ID
+	// VPC ID. Obtain through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// VPC subnet ID
+	// Private subnet ID. Obtain through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// Whether to enable the connection pool. Valid values: 
+	// Whether to enable connection pool. Off by default.
+	// Note: If you need to use the database proxy connection pool capability, the kernel minor version of the MySQL 8.0 primary instance must be equal to or greater than MySQL 8.0 20230630.
 	ConnectionPool *bool `json:"ConnectionPool,omitnil,omitempty" name:"ConnectionPool"`
 
 	// Description
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
-	// IP address
+	// IP. Leave it blank to default to a random supported IP in the selected VPC.
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-	// Port
+	// Port. Default value 3306.
 	VPort *uint64 `json:"VPort,omitnil,omitempty" name:"VPort"`
 
 	// Security group
 	SecurityGroup []*string `json:"SecurityGroup,omitnil,omitempty" name:"SecurityGroup"`
 
-	// Connection pool type, which will take effect only when `ConnectionPool` is `true`. Valid values:  `transaction` (transaction-level), `connection` (session-level).
+	// Connection pool type. Available values: transaction (transaction-level connection pool), connection (session-level connection pool). This parameter is valid only when ConnectionPool is true. Default value: connection.
 	ConnectionPoolType *string `json:"ConnectionPoolType,omitnil,omitempty" name:"ConnectionPoolType"`
 
-	// Whether to enable adaptive load balancing. Disabled by default.
+	// Whether adaptive load balancing is enabled. Off by default.
 	AutoLoadBalance *bool `json:"AutoLoadBalance,omitnil,omitempty" name:"AutoLoadBalance"`
 
-	// Access Mode. nearBy - nearby access, balance - balanced allocation. Default value: nearBy.
+	// Access mode. nearBy - proximity access, balance - balanced allocation. Default value: nearBy.
 	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
 }
 
@@ -2245,7 +2389,7 @@ func (r *CreateCdbProxyAddressRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCdbProxyAddressResponseParams struct {
-	// Async task ID Note: This field may return null, indicating that no valid values can be obtained.
+	// Asynchronous Task ID
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2270,16 +2414,25 @@ func (r *CreateCdbProxyAddressResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCdbProxyRequestParams struct {
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// VPC ID
+	// VPC ID. Obtain through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// VPC subnet ID
+	// Private subnet ID. Obtain through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// The specification configuration of a node
+	// Node specification configuration.
+	// Parameter description in the example.
+	// NodeCount: Number of nodes.
+	// Region: Node region.
+	// Zone: Node availability zone.
+	// Cpu: Number of cores per proxy node (unit: core).
+	// Mem: Memory size of each proxy node (unit: MB).
+	// Remarks:
+	// 1. Database proxy supported node specifications are: 2C4000MB, 4C8000MB, 8C16000MB.
+	// 2. The above parameters (such as number of nodes, availability zone) are required. When calling the API, if incomplete, creation may fail.
 	ProxyNodeCustom []*ProxyNodeCustom `json:"ProxyNodeCustom,omitnil,omitempty" name:"ProxyNodeCustom"`
 
 	// Security group
@@ -2289,22 +2442,35 @@ type CreateCdbProxyRequestParams struct {
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
 	// Connection pool threshold
+	// Note: If you need to use the database proxy connection pool capability, the kernel minor version of the MySQL 8.0 primary instance must be equal to or greater than MySQL 8.0 20230630.
 	ConnectionPoolLimit *uint64 `json:"ConnectionPoolLimit,omitnil,omitempty" name:"ConnectionPoolLimit"`
+
+	// Specify the Linux kernel version of the purchased proxy. Leave it blank to ship the latest version by default.
+	ProxyVersion *string `json:"ProxyVersion,omitnil,omitempty" name:"ProxyVersion"`
 }
 
 type CreateCdbProxyRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// VPC ID
+	// VPC ID. Obtain through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// VPC subnet ID
+	// Private subnet ID. Obtain through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// The specification configuration of a node
+	// Node specification configuration.
+	// Parameter description in the example.
+	// NodeCount: Number of nodes.
+	// Region: Node region.
+	// Zone: Node availability zone.
+	// Cpu: Number of cores per proxy node (unit: core).
+	// Mem: Memory size of each proxy node (unit: MB).
+	// Remarks:
+	// 1. Database proxy supported node specifications are: 2C4000MB, 4C8000MB, 8C16000MB.
+	// 2. The above parameters (such as number of nodes, availability zone) are required. When calling the API, if incomplete, creation may fail.
 	ProxyNodeCustom []*ProxyNodeCustom `json:"ProxyNodeCustom,omitnil,omitempty" name:"ProxyNodeCustom"`
 
 	// Security group
@@ -2314,7 +2480,11 @@ type CreateCdbProxyRequest struct {
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
 	// Connection pool threshold
+	// Note: If you need to use the database proxy connection pool capability, the kernel minor version of the MySQL 8.0 primary instance must be equal to or greater than MySQL 8.0 20230630.
 	ConnectionPoolLimit *uint64 `json:"ConnectionPoolLimit,omitnil,omitempty" name:"ConnectionPoolLimit"`
+
+	// Specify the Linux kernel version of the purchased proxy. Leave it blank to ship the latest version by default.
+	ProxyVersion *string `json:"ProxyVersion,omitnil,omitempty" name:"ProxyVersion"`
 }
 
 func (r *CreateCdbProxyRequest) ToJsonString() string {
@@ -2336,6 +2506,7 @@ func (r *CreateCdbProxyRequest) FromJsonString(s string) error {
 	delete(f, "SecurityGroup")
 	delete(f, "Desc")
 	delete(f, "ConnectionPoolLimit")
+	delete(f, "ProxyVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCdbProxyRequest has unknown keys!", "")
 	}
@@ -2344,7 +2515,7 @@ func (r *CreateCdbProxyRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCdbProxyResponseParams struct {
-	// Async task ID Note: This field may return null, indicating that no valid values can be obtained.
+	// Asynchronous Task ID
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2369,137 +2540,185 @@ func (r *CreateCdbProxyResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCloneInstanceRequestParams struct {
-	// ID of the instance to be cloned from
+	// <p>Clone source instance ID, which can be obtained through the <a href="https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1">DescribeDBInstances</a> API.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// To roll back the cloned instance to a specific point in time, set this parameter to a value in the format of "yyyy-mm-dd hh:mm:ss".
+	// <p>If necessary, specify this value when cloning an instance and rolling back to a specified time. The time format is yyyy-mm-dd hh:mm:ss.<br>Note: This parameter and the SpecifiedBackupId parameter require a choice between the two for configuration.</p>
 	SpecifiedRollbackTime *string `json:"SpecifiedRollbackTime,omitnil,omitempty" name:"SpecifiedRollbackTime"`
 
-	// To roll back the cloned instance to a specific physical backup file, set this parameter to the ID of the physical backup file. The ID can be obtained by the [DescribeBackups](https://intl.cloud.tencent.com/document/api/236/15842?from_cn_redirect=1) API.
+	// <p>If necessary to clone an instance and roll back to a designated backup set, specify this value as the Id of the backup file. Please use <a href="/document/api/236/15842">query data backup file list</a>.</p><p>If it is a clone of a two-node, three-node, or four-node instance, the backup file is a physical backup. If it is a clone of a single-node or cloud disk edition instance, the backup file is a snapshot backup.</p>
 	SpecifiedBackupId *int64 `json:"SpecifiedBackupId,omitnil,omitempty" name:"SpecifiedBackupId"`
 
-	// VPC ID, which can be obtained by the [DescribeVpcs](https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) API. If this parameter is left empty, the classic network will be used by default.
+	// <p>VPC ID. Please use <a href="/document/api/215/15778">Querying VPC List</a>.</p>
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// VPC subnet ID, which can be obtained by the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API. If `UniqVpcId` is set, `UniqSubnetId` will be required.
+	// <p>Subnet ID in the private network. If UniqVpcId is set up, UniqSubnetId is required. Please use <a href="/document/api/215/15784">query subnet list</a>.</p>
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// Memory of the cloned instance in MB, which should be equal to (by default) or larger than that of the original instance
+	// <p>Instance memory size, unit: MB, must not be less than the clone source instance. Default is same as the source instance.</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Disk capacity of the cloned instance in GB, which should be equal to (by default) or larger than that of the original instance
+	// <p>Instance disk size, unit: GB, must not be less than the clone source instance. Default is same as the source instance.</p>
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// Name of the cloned instance
+	// <p>Name of the newly generated clone instance. Support input of up to 60 characters.</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Security group parameter, which can be obtained by the [DescribeProjectSecurityGroups](https://intl.cloud.tencent.com/document/api/236/15850?from_cn_redirect=1) API
+	// <p>Security group parameters. Use the API <a href="https://www.tencentcloud.com/document/api/236/15850?from_cn_redirect=1">Query Project Security Group Information</a> to query security group details of a certain project.</p>
 	SecurityGroup []*string `json:"SecurityGroup,omitnil,omitempty" name:"SecurityGroup"`
 
-	// Information of the cloned instance tag
+	// <p>Tag information of the instance.</p>
 	ResourceTags []*TagInfo `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-	// The number of CPU cores of the cloned instance. It should be equal to (by default) or larger than that of the original instance.
+	// <p>Instance Cpu cores, must not be less than the clone source instance. Default is same as the source instance.</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0.
+	// <p>Data replication method, defaults to 0. Supported values include: 0 - means async replication, 1 - means semi-sync replication, 2 - means strong sync replication.</p>
 	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
 
-	// Multi-AZ or single-AZ. Valid values: 0 (single-AZ), 1 (multi-AZ). Default value: 0.
+	// <p>Multiple Availability Zones, defaults to 0. Supported values include: 0 - means single availability zone, 1 - means multi-availability zone.</p>
 	DeployMode *int64 `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 
-	// Availability zone information of replica 1 of the cloned instance, which is the same as the value of `Zone` of the original instance by default
+	// <p>The AZ information of the newly generated clone instance standby 1 is the same as the source instance Zone by default.</p>
 	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
 
-	// Availability zone information of replica 2 of the cloned instance, 
-	// which is left empty by default. Specify this parameter when cloning a strong sync source instance.
+	// <p>AZ information of standby 2, empty by default. Specify this parameter when you clone a strong sync primary instance.</p>
 	BackupZone *string `json:"BackupZone,omitnil,omitempty" name:"BackupZone"`
 
-	// Resource isolation type of the clone. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance). Default value: `UNIVERSAL`.
+	// <p>Clone instance type. Supported values include: "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "CLOUD_NATIVE_CLUSTER" - standard type for CLOUD disk, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - enhanced type for CLOUD disk. If not specified, it defaults to general-purpose instance.</p>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// The number of nodes of the clone. If this parameter is set to `3` or the `BackupZone` parameter is specified, the clone will have three nodes. If this parameter is set to `2` or left empty, the clone will have two nodes.
+	// <p>Number of nodes in the new clone instance.</p><p>To clone a three-node instance, set this value to 3 or specify the BackupZone parameter. To clone a dual-node instance, set this value to 2. By default, a dual-node instance is cloned. To clone a four-node instance, set this value to 4 or specify the FourthZone parameter.</p>
 	InstanceNodes *int64 `json:"InstanceNodes,omitnil,omitempty" name:"InstanceNodes"`
 
-	// Placement group ID.
+	// <p>Placement group ID.</p>
 	DeployGroupId *string `json:"DeployGroupId,omitnil,omitempty" name:"DeployGroupId"`
 
-	// Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
+	// <p>Whether to only pre-check this request. true: Send a check request without creating an instance. Check items include required parameters, request format, and service limits. If the check fails, return the corresponding error code; if the check passes, return RequestId. Default false: Send a normal request and create the instance directly after passing the check.</p>
 	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 
-	// Financial cage ID.
+	// <p>Financial Enclosure ID.</p>
 	CageId *string `json:"CageId,omitnil,omitempty" name:"CageId"`
 
-	// Project ID. Default value: 0.
+	// <p>Project ID. Default project ID 0.</p>
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// <p>Payment type. Valid values: PRE_PAID (prepaid, also known as yearly/monthly subscription) and USED_PAID (pay-as-you-go). Default billing mode is pay-as-you-go.</p>
+	PayType *string `json:"PayType,omitnil,omitempty" name:"PayType"`
+
+	// <p>Instance duration, required when PayType is PRE_PAID, measurement unit: month, optional values include [1,2,3,4,5,6,7,8,9,10,11,12,24,36].</p>
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
+
+	// <p>Topology configuration for cloud disk edition nodes.</p>
+	ClusterTopology *ClusterTopology `json:"ClusterTopology,omitnil,omitempty" name:"ClusterTopology"`
+
+	// <p>Original instance region. Required when importing a remote backup, for example: ap-guangzhou</p>
+	SrcRegion *string `json:"SrcRegion,omitnil,omitempty" name:"SrcRegion"`
+
+	// <p>Offsite data backup id</p>
+	SpecifiedSubBackupId *int64 `json:"SpecifiedSubBackupId,omitnil,omitempty" name:"SpecifiedSubBackupId"`
+
+	// <p>The AZ information of the newly generated clone instance primary database is the same as the source instance Zone by default.</p>
+	//
+	// Deprecated: MasterZone is deprecated.
+	MasterZone *string `json:"MasterZone,omitnil,omitempty" name:"MasterZone"`
+
+	// <p>The AZ information of the newly generated clone instance's primary database defaults to the same as the source instance's Zone.</p>
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// <p>AZ information of standby 3, empty by default. Specify this parameter when you proceed to purchase a four-node primary instance.</p>
+	FourthZone *string `json:"FourthZone,omitnil,omitempty" name:"FourthZone"`
 }
 
 type CreateCloneInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the instance to be cloned from
+	// <p>Clone source instance ID, which can be obtained through the <a href="https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1">DescribeDBInstances</a> API.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// To roll back the cloned instance to a specific point in time, set this parameter to a value in the format of "yyyy-mm-dd hh:mm:ss".
+	// <p>If necessary, specify this value when cloning an instance and rolling back to a specified time. The time format is yyyy-mm-dd hh:mm:ss.<br>Note: This parameter and the SpecifiedBackupId parameter require a choice between the two for configuration.</p>
 	SpecifiedRollbackTime *string `json:"SpecifiedRollbackTime,omitnil,omitempty" name:"SpecifiedRollbackTime"`
 
-	// To roll back the cloned instance to a specific physical backup file, set this parameter to the ID of the physical backup file. The ID can be obtained by the [DescribeBackups](https://intl.cloud.tencent.com/document/api/236/15842?from_cn_redirect=1) API.
+	// <p>If necessary to clone an instance and roll back to a designated backup set, specify this value as the Id of the backup file. Please use <a href="/document/api/236/15842">query data backup file list</a>.</p><p>If it is a clone of a two-node, three-node, or four-node instance, the backup file is a physical backup. If it is a clone of a single-node or cloud disk edition instance, the backup file is a snapshot backup.</p>
 	SpecifiedBackupId *int64 `json:"SpecifiedBackupId,omitnil,omitempty" name:"SpecifiedBackupId"`
 
-	// VPC ID, which can be obtained by the [DescribeVpcs](https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) API. If this parameter is left empty, the classic network will be used by default.
+	// <p>VPC ID. Please use <a href="/document/api/215/15778">Querying VPC List</a>.</p>
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// VPC subnet ID, which can be obtained by the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API. If `UniqVpcId` is set, `UniqSubnetId` will be required.
+	// <p>Subnet ID in the private network. If UniqVpcId is set up, UniqSubnetId is required. Please use <a href="/document/api/215/15784">query subnet list</a>.</p>
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// Memory of the cloned instance in MB, which should be equal to (by default) or larger than that of the original instance
+	// <p>Instance memory size, unit: MB, must not be less than the clone source instance. Default is same as the source instance.</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Disk capacity of the cloned instance in GB, which should be equal to (by default) or larger than that of the original instance
+	// <p>Instance disk size, unit: GB, must not be less than the clone source instance. Default is same as the source instance.</p>
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// Name of the cloned instance
+	// <p>Name of the newly generated clone instance. Support input of up to 60 characters.</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Security group parameter, which can be obtained by the [DescribeProjectSecurityGroups](https://intl.cloud.tencent.com/document/api/236/15850?from_cn_redirect=1) API
+	// <p>Security group parameters. Use the API <a href="https://www.tencentcloud.com/document/api/236/15850?from_cn_redirect=1">Query Project Security Group Information</a> to query security group details of a certain project.</p>
 	SecurityGroup []*string `json:"SecurityGroup,omitnil,omitempty" name:"SecurityGroup"`
 
-	// Information of the cloned instance tag
+	// <p>Tag information of the instance.</p>
 	ResourceTags []*TagInfo `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-	// The number of CPU cores of the cloned instance. It should be equal to (by default) or larger than that of the original instance.
+	// <p>Instance Cpu cores, must not be less than the clone source instance. Default is same as the source instance.</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0.
+	// <p>Data replication method, defaults to 0. Supported values include: 0 - means async replication, 1 - means semi-sync replication, 2 - means strong sync replication.</p>
 	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
 
-	// Multi-AZ or single-AZ. Valid values: 0 (single-AZ), 1 (multi-AZ). Default value: 0.
+	// <p>Multiple Availability Zones, defaults to 0. Supported values include: 0 - means single availability zone, 1 - means multi-availability zone.</p>
 	DeployMode *int64 `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 
-	// Availability zone information of replica 1 of the cloned instance, which is the same as the value of `Zone` of the original instance by default
+	// <p>The AZ information of the newly generated clone instance standby 1 is the same as the source instance Zone by default.</p>
 	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
 
-	// Availability zone information of replica 2 of the cloned instance, 
-	// which is left empty by default. Specify this parameter when cloning a strong sync source instance.
+	// <p>AZ information of standby 2, empty by default. Specify this parameter when you clone a strong sync primary instance.</p>
 	BackupZone *string `json:"BackupZone,omitnil,omitempty" name:"BackupZone"`
 
-	// Resource isolation type of the clone. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance). Default value: `UNIVERSAL`.
+	// <p>Clone instance type. Supported values include: "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "CLOUD_NATIVE_CLUSTER" - standard type for CLOUD disk, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - enhanced type for CLOUD disk. If not specified, it defaults to general-purpose instance.</p>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// The number of nodes of the clone. If this parameter is set to `3` or the `BackupZone` parameter is specified, the clone will have three nodes. If this parameter is set to `2` or left empty, the clone will have two nodes.
+	// <p>Number of nodes in the new clone instance.</p><p>To clone a three-node instance, set this value to 3 or specify the BackupZone parameter. To clone a dual-node instance, set this value to 2. By default, a dual-node instance is cloned. To clone a four-node instance, set this value to 4 or specify the FourthZone parameter.</p>
 	InstanceNodes *int64 `json:"InstanceNodes,omitnil,omitempty" name:"InstanceNodes"`
 
-	// Placement group ID.
+	// <p>Placement group ID.</p>
 	DeployGroupId *string `json:"DeployGroupId,omitnil,omitempty" name:"DeployGroupId"`
 
-	// Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
+	// <p>Whether to only pre-check this request. true: Send a check request without creating an instance. Check items include required parameters, request format, and service limits. If the check fails, return the corresponding error code; if the check passes, return RequestId. Default false: Send a normal request and create the instance directly after passing the check.</p>
 	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 
-	// Financial cage ID.
+	// <p>Financial Enclosure ID.</p>
 	CageId *string `json:"CageId,omitnil,omitempty" name:"CageId"`
 
-	// Project ID. Default value: 0.
+	// <p>Project ID. Default project ID 0.</p>
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// <p>Payment type. Valid values: PRE_PAID (prepaid, also known as yearly/monthly subscription) and USED_PAID (pay-as-you-go). Default billing mode is pay-as-you-go.</p>
+	PayType *string `json:"PayType,omitnil,omitempty" name:"PayType"`
+
+	// <p>Instance duration, required when PayType is PRE_PAID, measurement unit: month, optional values include [1,2,3,4,5,6,7,8,9,10,11,12,24,36].</p>
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
+
+	// <p>Topology configuration for cloud disk edition nodes.</p>
+	ClusterTopology *ClusterTopology `json:"ClusterTopology,omitnil,omitempty" name:"ClusterTopology"`
+
+	// <p>Original instance region. Required when importing a remote backup, for example: ap-guangzhou</p>
+	SrcRegion *string `json:"SrcRegion,omitnil,omitempty" name:"SrcRegion"`
+
+	// <p>Offsite data backup id</p>
+	SpecifiedSubBackupId *int64 `json:"SpecifiedSubBackupId,omitnil,omitempty" name:"SpecifiedSubBackupId"`
+
+	// <p>The AZ information of the newly generated clone instance primary database is the same as the source instance Zone by default.</p>
+	MasterZone *string `json:"MasterZone,omitnil,omitempty" name:"MasterZone"`
+
+	// <p>The AZ information of the newly generated clone instance's primary database defaults to the same as the source instance's Zone.</p>
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// <p>AZ information of standby 3, empty by default. Specify this parameter when you proceed to purchase a four-node primary instance.</p>
+	FourthZone *string `json:"FourthZone,omitnil,omitempty" name:"FourthZone"`
 }
 
 func (r *CreateCloneInstanceRequest) ToJsonString() string {
@@ -2535,6 +2754,14 @@ func (r *CreateCloneInstanceRequest) FromJsonString(s string) error {
 	delete(f, "DryRun")
 	delete(f, "CageId")
 	delete(f, "ProjectId")
+	delete(f, "PayType")
+	delete(f, "Period")
+	delete(f, "ClusterTopology")
+	delete(f, "SrcRegion")
+	delete(f, "SpecifiedSubBackupId")
+	delete(f, "MasterZone")
+	delete(f, "Zone")
+	delete(f, "FourthZone")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloneInstanceRequest has unknown keys!", "")
 	}
@@ -2543,7 +2770,7 @@ func (r *CreateCloneInstanceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCloneInstanceResponseParams struct {
-	// LimitAsync task request ID, which can be used to query the execution result of an async task
+	// <p>Request ID of the asynchronous task. Use this ID to query the outcome of the async task.</p>
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2660,231 +2887,267 @@ func (r *CreateDBImportJobResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDBInstanceHourRequestParams struct {
-	// Number of instances. Value range: 1-100. Default value: 1.
+	// <p>Instance count. Default value is 1, minimum value 1, maximum value 100.</p>
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// Instance memory size in MB. Please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported memory specifications.
+	// <p>Instance memory size. Unit: MB. Please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to obtain creatable memory specifications.</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size in GB. Please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported disk specifications.
+	// <p>Instance disk size, unit: GB. Please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the creatable disk range.</p>
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// MySQL version. Valid values: `5.5`, `5.6`, `5.7`, `8.0`. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported versions.
+	// <p>MySQL version, including 5.5, 5.6, 5.7, and 8.0. Please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the instance version created.<br>Note: When creating a non-cloud disk edition instance, specify the instance version as needed (recommend 5.7 or 8.0). If this parameter is left blank, the default value is 8.0. If creating a cloud disk edition instance, this parameter can only be set to 5.7 or 8.0.</p>
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
-	// VPC ID. If this parameter is not passed in, the basic network will be selected by default. Please use the [DescribeVpcs](https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) API to query the VPCs.
+	// <p>VPC ID. Please use <a href="/document/api/215/15778">Querying VPC List</a>.<br>Description: If you create a cloud disk edition instance, this item is required and must be VPC type. If this item is left blank, the system will select the default VPC by default.</p>
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. Please use the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API to query the subnet lists.
+	// <p>Subnet ID in the private network. If UniqVpcId is set up, UniqSubnetId is required. Please use <a href="/document/api/215/15784">query subnet list</a>.<br>Description: If this item is not filled, the system will select the default subnet in the Default VPC.</p>
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
 	// Project ID. If this is left empty, the default project will be used.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// AZ information. By default, the system will automatically select an AZ. Please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported AZs.
+	// <p>For availability zone information, please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the availability zones where instances can be created.</p><p>If you create a single-node, two-node, three-node, or four-node instance, this parameter is required. Please specify an availability zone. If you do not specify one, the system will automatically select an availability zone (which may not be the one you want to deploy in). If you create a cloud disk edition instance, leave this parameter blank and configure the availability zones for read-write nodes and read-only nodes with parameter ClusterTopology.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Instance ID, which is required and the same as the primary instance ID when purchasing read-only or disaster recovery instances. Please use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the instance IDs.
+	// <p>Instance ID, required when you purchase a read-only instance or disaster recovery instance. This field represents the primary instance ID of the read-only instance or disaster recovery instance. Please use the <a href="https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1">Query Instance List</a> API to query the cloud database instance ID.</p>
 	MasterInstanceId *string `json:"MasterInstanceId,omitnil,omitempty" name:"MasterInstanceId"`
 
-	// Instance type. Valid values: master (primary instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+	// <p>Instance type. Supported values include: master - primary instance, dr - disaster recovery instance, ro - read-only instance.<br>Description: Select instance type. master is selected by default if left blank.</p>
 	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 
-	// Region information of the source instance, which is required when purchasing a read-only or disaster recovery instance.
+	// <p>Region of the primary instance. This field is required when you purchase a disaster recovery or RO instance.</p>
 	MasterRegion *string `json:"MasterRegion,omitnil,omitempty" name:"MasterRegion"`
 
-	// Custom port. Value range: [1024-65535].
+	// <p>Custom port. Supported range: [1024-65535].<br>Description: If left blank, it defaults to 3306.</p>
 	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
-	// Sets the root account password. Rule: the password can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and special symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
+	// <p>Set the root account password. The password must contain 8 to 64 characters and at least two of the following: letters, digits, or characters (supported characters: _+-&amp;=!@#$%^*()). You can specify this parameter when purchasing a primary instance. This parameter is invalid when purchasing a read-only instance or disaster recovery instance.</p>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// List of parameters in the format of `ParamList.0.Name=auto_increment&ParamList.0.Value=1`. You can use the [DescribeDefaultParams](https://intl.cloud.tencent.com/document/api/236/32662?from_cn_redirect=1) API to query the configurable parameters.
+	// <p>Parameter list. The parameter format is ParamList.0.Name=auto_increment&amp;ParamList.0.Value=1.</p><p>Query the configurable parameters by referring to <a href="https://www.tencentcloud.com/document/api/236/32662?from_cn_redirect=1">querying the default configurable parameter list</a>.<br>Note: table Name case sensitivity can be enabled or disabled with the parameter lower_case_table_names. a parameter Value of 0 means enabling, and a Value of 1 means disabling. If not set, the default Value is 0. If you create a MySQL 8.0 edition instance, you need to set the lower_case_table_names parameter when creating the instance to enable or disable table Name case sensitivity. After the instance is created, the parameter cannot be modified, meaning table Name case sensitivity cannot be changed once created. Instances of other database versions support modifying the lower_case_table_names parameter after creation. For the function invocation method to set table Name case sensitivity when creating an instance, please see examples in this document.</p>
 	ParamList []*ParamInfo `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 
-	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0. This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
+	// <p>Data replication method, defaults to 0. Supported values include: 0 - means async replication, 1 - means semi-sync replication, 2 - means strong sync replication. You can specify this parameter when purchasing a primary instance. This parameter is invalid when purchasing a read-only instance or disaster recovery instance.</p>
 	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
 
-	// Multi-AZ. Valid value: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
+	// <p>Multiple Availability Zones, defaults to 0. Supported values include: 0 - means single availability zone, 1 - means multi-availability zone. Specify this parameter when purchasing the primary instance. This parameter is invalid when purchasing a read-only instance or disaster recovery instance.</p>
 	DeployMode *int64 `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 
-	// AZ information of secondary database 1, which is the `Zone` value by default. This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
+	// <p>AZ information of standby database 1.</p><p>For two-node, three-node, or four-node instances, specify this parameter. If not specified, it defaults to the Zone value. For cloud disk edition instances, this parameter is optional. Configure the AZ for read-write and read-only nodes with parameter ClusterTopology. Single-node instances are in a single availability zone, so no need to specify this parameter.</p>
 	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
 
-	// The availability zone information of Replica 2, which is left empty by default. Specify this parameter when purchasing a source instance in the one-source-two-replica architecture.
+	// <p>AZ information of standby 2, empty by default.</p><p>Specify this parameter when you proceed to purchase a three-node primary instance or a four-node primary instance.</p>
 	BackupZone *string `json:"BackupZone,omitnil,omitempty" name:"BackupZone"`
 
-	// Security group parameter. You can use the [DescribeProjectSecurityGroups](https://intl.cloud.tencent.com/document/api/236/15850?from_cn_redirect=1) API to query the security group details of a project.
+	// <p>Security group parameters. Use the API <a href="https://www.tencentcloud.com/document/api/236/15850?from_cn_redirect=1">Query Project Security Group Information</a> to query security group details of a certain project.</p>
 	SecurityGroup []*string `json:"SecurityGroup,omitnil,omitempty" name:"SecurityGroup"`
 
-	// Read-only instance information. This parameter must be passed in when purchasing read-only instances.
+	// <p>Read-only instance information. This parameter is required when you purchase a read-only instance.</p>
 	RoGroup *RoGroup `json:"RoGroup,omitnil,omitempty" name:"RoGroup"`
 
-	// This field is meaningless when purchasing pay-as-you-go instances.
+	// <p>This field is meaningless for pay-as-you-go instances.</p>
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
-	// Instance name For multiple instances purchased at one time, they will be distinguished by the name suffix number, such as instnaceName=db and goodsNum=3, and their instance names are db1, db2, and db3, respectively.
+	// <p>Instance name. When you purchase multiple instances only once, suffix numbers are used for case-sensitive instance naming. For example, instanceName=db and goodsNum=3, the instance names are db1, db2, and db3 respectively.</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Instance tag information.
+	// <p>Tag information of the instance.</p>
 	ResourceTags []*TagInfo `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-	// Placement group ID.
+	// <p>Placement group ID.</p>
 	DeployGroupId *string `json:"DeployGroupId,omitnil,omitempty" name:"DeployGroupId"`
 
-	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	// <p>String used to ensure request idempotency. This string is generated by the customer and must be unique between different requests within 48 hours, with a maximum value of 64 ASCII characters. If not specified, request idempotency cannot be guaranteed.</p>
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
-	// Instance resource isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.
+	// <p>Instance isolation type. Supported values include: "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC_V2" - ONTKE single-node instance, "CLOUD_NATIVE_CLUSTER" - CLOUD disk edition standard type, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - CLOUD disk edition enhanced. If not specified, it defaults to general-purpose instance.<br>Description: If a CLOUD disk edition instance is created, this parameter is required.</p>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// Parameter template ID.
+	// <p>Parameter template ID.<br>Remark: If you use a custom parameter template ID, you can input the custom parameter template ID. If you plan to use the default parameter template, the input ID is invalid and you need to set ParamTemplateType.</p>
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
 
-	// Array of alarm policy IDs,  which is `OriginId` obtained through the `DescribeAlarmPolicy` API.
+	// <p>Array of alarm policy IDs. OriginId returned by the Tencent Cloud observability platform DescribeAlarmPolicy API.</p>
 	AlarmPolicyList []*int64 `json:"AlarmPolicyList,omitnil,omitempty" name:"AlarmPolicyList"`
 
-	// The number of nodes of the instance. To purchase a read-only replica or a basic instance, set this parameter to `1` or leave it empty. To purchase a three-node instance, set this parameter to `3` or specify the `BackupZone` parameter. If the instance to be purchased is a source instance and both `BackupZone` and this parameter are left empty, the value `2` will be used, which indicates the source instance will have two nodes.
+	// <p>Number of instance nodes.</p><p>For RO and basic edition instances, the value defaults to 1. To purchase a three-node instance, set this value to 3 or specify the BackupZone parameter. When purchasing a primary instance without specifying this parameter or the BackupZone parameter, the default value is 2, which means purchasing a dual-node instance. To purchase a four-node instance, set this value to 4 or specify the FourthZone parameter.</p>
 	InstanceNodes *int64 `json:"InstanceNodes,omitnil,omitempty" name:"InstanceNodes"`
 
-	// The number of CPU cores of the instance. If this parameter is left empty, the number of CPU cores depends on the `Memory` value.
+	// <p>Number of Cpu cores of the instance.</p><p>When multiple Cpu configurations exist for the Memory specification (for example, 64000MB Memory corresponds to 8-core/16-core/32-core), the Cpu parameter must be provided.</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Whether to automatically start disaster recovery synchronization. This parameter takes effect only for disaster recovery instances. Valid values: `0` (no), `1` (yes). Default value: `0`.
+	// <p>Whether to automatically initiate disaster recovery sync. This parameter only takes effect when purchasing a disaster recovery instance. Available values are: 0 - Do not automatically initiate disaster recovery sync; 1 - Automatically initiate disaster recovery sync. The default is 0.</p>
 	AutoSyncFlag *int64 `json:"AutoSyncFlag,omitnil,omitempty" name:"AutoSyncFlag"`
 
-	// Financial cage ID.
+	// <p>Financial Enclosure ID.</p>
 	CageId *string `json:"CageId,omitnil,omitempty" name:"CageId"`
 
-	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template). Default value: `HIGH_STABILITY`.
+	// <p>Default parameter template type. Supported values include "HIGH_STABILITY" - HIGH-STABILITY template, "HIGH_PERFORMANCE" - HIGH-PERFORMANCE template. Default value is "HIGH_STABILITY".<br>Remark: If you need to use the cloud database MySQL default parameter template, set up ParamTemplateType.</p>
 	ParamTemplateType *string `json:"ParamTemplateType,omitnil,omitempty" name:"ParamTemplateType"`
 
-	// The array of alarm policy names, such as ["policy-uyoee9wg"]. If the `AlarmPolicyList` parameter is specified, this parameter is invalid.
+	// <p>Alarm policy name array, such as ["policy-uyoee9wg"]. This parameter is invalid when AlarmPolicyList is not empty.</p>
 	AlarmPolicyIdList []*string `json:"AlarmPolicyIdList,omitnil,omitempty" name:"AlarmPolicyIdList"`
 
-	// Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
+	// <p>Whether to only pre-check this request. true: Send a check request without creating an instance. Check items include required parameters, request format, and service limits. If the check fails, return the corresponding error code; if the check passes, return RequestId. Default false: Send a normal request and create the instance directly after passing the check.</p>
 	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 
-	// Instance engine type. Valid values: `InnoDB` (default); `RocksDB`.
+	// <p>Instance engine type, defaults to "InnoDB". Supported values include "InnoDB" and "RocksDB".</p>
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 
-	// The list of IPs for sources instances. Only one IP address can be assigned to a single source instance. If all IPs are used up, the system will automatically assign IPs to the remaining source instances that do not have one.
+	// <p>Specify the IP list of the instance. Only the primary instance is supported. Process by instance sequence. Handle as unspecified if insufficient.</p>
 	Vips []*string `json:"Vips,omitnil,omitempty" name:"Vips"`
+
+	// <p>The data protection space size of the cloud disk edition instance, in GB, has a setting range of 1 - 10.</p>
+	DataProtectVolume *int64 `json:"DataProtectVolume,omitnil,omitempty" name:"DataProtectVolume"`
+
+	// <p>Topology configuration for cloud disk edition nodes.<br>Description: If a cloud disk edition instance is purchased, this parameter is required. Set the topology for RW and RO nodes of the cloud disk edition instance. The node scope for RO nodes is 1-5. Set at least 1 RO node.</p>
+	ClusterTopology *ClusterTopology `json:"ClusterTopology,omitnil,omitempty" name:"ClusterTopology"`
+
+	// <p>Disk type. This parameter can be specified for single-node (cloud disk) or cloud disk edition instances. CLOUD_SSD means SSD Cloud Block Storage, CLOUD_HSSD means enhanced SSD cloud disk, and CLOUD_PREMIUM means high-performance cloud block storage.<br>Note: The supported regions for disk types of single-node (cloud disk) and cloud disk edition instances vary slightly. For specific support situation, refer to <a href="https://www.tencentcloud.com/document/product/236/8458?from_cn_redirect=1">Regions and Availability Zones</a>.</p>
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
+
+	// <p>ClusterType: cage—Financial Enclosure, cdc—CDB ON CDC; dedicate—dedicated cluster</p>
+	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
+
+	// <p>Turn on or off instance destruction protection. on - turn on, off - turn off.</p>
+	DestroyProtect *string `json:"DestroyProtect,omitnil,omitempty" name:"DestroyProtect"`
+
+	// <p>AZ information of standby 3, empty by default. Specify this parameter when you proceed to purchase a four-node primary instance.</p>
+	FourthZone *string `json:"FourthZone,omitnil,omitempty" name:"FourthZone"`
 }
 
 type CreateDBInstanceHourRequest struct {
 	*tchttp.BaseRequest
 	
-	// Number of instances. Value range: 1-100. Default value: 1.
+	// <p>Instance count. Default value is 1, minimum value 1, maximum value 100.</p>
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// Instance memory size in MB. Please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported memory specifications.
+	// <p>Instance memory size. Unit: MB. Please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to obtain creatable memory specifications.</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size in GB. Please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported disk specifications.
+	// <p>Instance disk size, unit: GB. Please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the creatable disk range.</p>
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// MySQL version. Valid values: `5.5`, `5.6`, `5.7`, `8.0`. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported versions.
+	// <p>MySQL version, including 5.5, 5.6, 5.7, and 8.0. Please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the instance version created.<br>Note: When creating a non-cloud disk edition instance, specify the instance version as needed (recommend 5.7 or 8.0). If this parameter is left blank, the default value is 8.0. If creating a cloud disk edition instance, this parameter can only be set to 5.7 or 8.0.</p>
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
-	// VPC ID. If this parameter is not passed in, the basic network will be selected by default. Please use the [DescribeVpcs](https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) API to query the VPCs.
+	// <p>VPC ID. Please use <a href="/document/api/215/15778">Querying VPC List</a>.<br>Description: If you create a cloud disk edition instance, this item is required and must be VPC type. If this item is left blank, the system will select the default VPC by default.</p>
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// VPC subnet ID. If `UniqVpcId` is set, then `UniqSubnetId` will be required. Please use the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API to query the subnet lists.
+	// <p>Subnet ID in the private network. If UniqVpcId is set up, UniqSubnetId is required. Please use <a href="/document/api/215/15784">query subnet list</a>.<br>Description: If this item is not filled, the system will select the default subnet in the Default VPC.</p>
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
 	// Project ID. If this is left empty, the default project will be used.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// AZ information. By default, the system will automatically select an AZ. Please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported AZs.
+	// <p>For availability zone information, please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the availability zones where instances can be created.</p><p>If you create a single-node, two-node, three-node, or four-node instance, this parameter is required. Please specify an availability zone. If you do not specify one, the system will automatically select an availability zone (which may not be the one you want to deploy in). If you create a cloud disk edition instance, leave this parameter blank and configure the availability zones for read-write nodes and read-only nodes with parameter ClusterTopology.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Instance ID, which is required and the same as the primary instance ID when purchasing read-only or disaster recovery instances. Please use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the instance IDs.
+	// <p>Instance ID, required when you purchase a read-only instance or disaster recovery instance. This field represents the primary instance ID of the read-only instance or disaster recovery instance. Please use the <a href="https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1">Query Instance List</a> API to query the cloud database instance ID.</p>
 	MasterInstanceId *string `json:"MasterInstanceId,omitnil,omitempty" name:"MasterInstanceId"`
 
-	// Instance type. Valid values: master (primary instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+	// <p>Instance type. Supported values include: master - primary instance, dr - disaster recovery instance, ro - read-only instance.<br>Description: Select instance type. master is selected by default if left blank.</p>
 	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 
-	// Region information of the source instance, which is required when purchasing a read-only or disaster recovery instance.
+	// <p>Region of the primary instance. This field is required when you purchase a disaster recovery or RO instance.</p>
 	MasterRegion *string `json:"MasterRegion,omitnil,omitempty" name:"MasterRegion"`
 
-	// Custom port. Value range: [1024-65535].
+	// <p>Custom port. Supported range: [1024-65535].<br>Description: If left blank, it defaults to 3306.</p>
 	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
-	// Sets the root account password. Rule: the password can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and special symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
+	// <p>Set the root account password. The password must contain 8 to 64 characters and at least two of the following: letters, digits, or characters (supported characters: _+-&amp;=!@#$%^*()). You can specify this parameter when purchasing a primary instance. This parameter is invalid when purchasing a read-only instance or disaster recovery instance.</p>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// List of parameters in the format of `ParamList.0.Name=auto_increment&ParamList.0.Value=1`. You can use the [DescribeDefaultParams](https://intl.cloud.tencent.com/document/api/236/32662?from_cn_redirect=1) API to query the configurable parameters.
+	// <p>Parameter list. The parameter format is ParamList.0.Name=auto_increment&amp;ParamList.0.Value=1.</p><p>Query the configurable parameters by referring to <a href="https://www.tencentcloud.com/document/api/236/32662?from_cn_redirect=1">querying the default configurable parameter list</a>.<br>Note: table Name case sensitivity can be enabled or disabled with the parameter lower_case_table_names. a parameter Value of 0 means enabling, and a Value of 1 means disabling. If not set, the default Value is 0. If you create a MySQL 8.0 edition instance, you need to set the lower_case_table_names parameter when creating the instance to enable or disable table Name case sensitivity. After the instance is created, the parameter cannot be modified, meaning table Name case sensitivity cannot be changed once created. Instances of other database versions support modifying the lower_case_table_names parameter after creation. For the function invocation method to set table Name case sensitivity when creating an instance, please see examples in this document.</p>
 	ParamList []*ParamInfo `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 
-	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). Default value: 0. This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
+	// <p>Data replication method, defaults to 0. Supported values include: 0 - means async replication, 1 - means semi-sync replication, 2 - means strong sync replication. You can specify this parameter when purchasing a primary instance. This parameter is invalid when purchasing a read-only instance or disaster recovery instance.</p>
 	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
 
-	// Multi-AZ. Valid value: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
+	// <p>Multiple Availability Zones, defaults to 0. Supported values include: 0 - means single availability zone, 1 - means multi-availability zone. Specify this parameter when purchasing the primary instance. This parameter is invalid when purchasing a read-only instance or disaster recovery instance.</p>
 	DeployMode *int64 `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 
-	// AZ information of secondary database 1, which is the `Zone` value by default. This parameter can be specified when purchasing primary instances and is meaningless for read-only or disaster recovery instances.
+	// <p>AZ information of standby database 1.</p><p>For two-node, three-node, or four-node instances, specify this parameter. If not specified, it defaults to the Zone value. For cloud disk edition instances, this parameter is optional. Configure the AZ for read-write and read-only nodes with parameter ClusterTopology. Single-node instances are in a single availability zone, so no need to specify this parameter.</p>
 	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
 
-	// The availability zone information of Replica 2, which is left empty by default. Specify this parameter when purchasing a source instance in the one-source-two-replica architecture.
+	// <p>AZ information of standby 2, empty by default.</p><p>Specify this parameter when you proceed to purchase a three-node primary instance or a four-node primary instance.</p>
 	BackupZone *string `json:"BackupZone,omitnil,omitempty" name:"BackupZone"`
 
-	// Security group parameter. You can use the [DescribeProjectSecurityGroups](https://intl.cloud.tencent.com/document/api/236/15850?from_cn_redirect=1) API to query the security group details of a project.
+	// <p>Security group parameters. Use the API <a href="https://www.tencentcloud.com/document/api/236/15850?from_cn_redirect=1">Query Project Security Group Information</a> to query security group details of a certain project.</p>
 	SecurityGroup []*string `json:"SecurityGroup,omitnil,omitempty" name:"SecurityGroup"`
 
-	// Read-only instance information. This parameter must be passed in when purchasing read-only instances.
+	// <p>Read-only instance information. This parameter is required when you purchase a read-only instance.</p>
 	RoGroup *RoGroup `json:"RoGroup,omitnil,omitempty" name:"RoGroup"`
 
-	// This field is meaningless when purchasing pay-as-you-go instances.
+	// <p>This field is meaningless for pay-as-you-go instances.</p>
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
-	// Instance name For multiple instances purchased at one time, they will be distinguished by the name suffix number, such as instnaceName=db and goodsNum=3, and their instance names are db1, db2, and db3, respectively.
+	// <p>Instance name. When you purchase multiple instances only once, suffix numbers are used for case-sensitive instance naming. For example, instanceName=db and goodsNum=3, the instance names are db1, db2, and db3 respectively.</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Instance tag information.
+	// <p>Tag information of the instance.</p>
 	ResourceTags []*TagInfo `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-	// Placement group ID.
+	// <p>Placement group ID.</p>
 	DeployGroupId *string `json:"DeployGroupId,omitnil,omitempty" name:"DeployGroupId"`
 
-	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	// <p>String used to ensure request idempotency. This string is generated by the customer and must be unique between different requests within 48 hours, with a maximum value of 64 ASCII characters. If not specified, request idempotency cannot be guaranteed.</p>
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
-	// Instance resource isolation type. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). Default value: `UNIVERSAL`.
+	// <p>Instance isolation type. Supported values include: "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC_V2" - ONTKE single-node instance, "CLOUD_NATIVE_CLUSTER" - CLOUD disk edition standard type, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - CLOUD disk edition enhanced. If not specified, it defaults to general-purpose instance.<br>Description: If a CLOUD disk edition instance is created, this parameter is required.</p>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// Parameter template ID.
+	// <p>Parameter template ID.<br>Remark: If you use a custom parameter template ID, you can input the custom parameter template ID. If you plan to use the default parameter template, the input ID is invalid and you need to set ParamTemplateType.</p>
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
 
-	// Array of alarm policy IDs,  which is `OriginId` obtained through the `DescribeAlarmPolicy` API.
+	// <p>Array of alarm policy IDs. OriginId returned by the Tencent Cloud observability platform DescribeAlarmPolicy API.</p>
 	AlarmPolicyList []*int64 `json:"AlarmPolicyList,omitnil,omitempty" name:"AlarmPolicyList"`
 
-	// The number of nodes of the instance. To purchase a read-only replica or a basic instance, set this parameter to `1` or leave it empty. To purchase a three-node instance, set this parameter to `3` or specify the `BackupZone` parameter. If the instance to be purchased is a source instance and both `BackupZone` and this parameter are left empty, the value `2` will be used, which indicates the source instance will have two nodes.
+	// <p>Number of instance nodes.</p><p>For RO and basic edition instances, the value defaults to 1. To purchase a three-node instance, set this value to 3 or specify the BackupZone parameter. When purchasing a primary instance without specifying this parameter or the BackupZone parameter, the default value is 2, which means purchasing a dual-node instance. To purchase a four-node instance, set this value to 4 or specify the FourthZone parameter.</p>
 	InstanceNodes *int64 `json:"InstanceNodes,omitnil,omitempty" name:"InstanceNodes"`
 
-	// The number of CPU cores of the instance. If this parameter is left empty, the number of CPU cores depends on the `Memory` value.
+	// <p>Number of Cpu cores of the instance.</p><p>When multiple Cpu configurations exist for the Memory specification (for example, 64000MB Memory corresponds to 8-core/16-core/32-core), the Cpu parameter must be provided.</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Whether to automatically start disaster recovery synchronization. This parameter takes effect only for disaster recovery instances. Valid values: `0` (no), `1` (yes). Default value: `0`.
+	// <p>Whether to automatically initiate disaster recovery sync. This parameter only takes effect when purchasing a disaster recovery instance. Available values are: 0 - Do not automatically initiate disaster recovery sync; 1 - Automatically initiate disaster recovery sync. The default is 0.</p>
 	AutoSyncFlag *int64 `json:"AutoSyncFlag,omitnil,omitempty" name:"AutoSyncFlag"`
 
-	// Financial cage ID.
+	// <p>Financial Enclosure ID.</p>
 	CageId *string `json:"CageId,omitnil,omitempty" name:"CageId"`
 
-	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template). Default value: `HIGH_STABILITY`.
+	// <p>Default parameter template type. Supported values include "HIGH_STABILITY" - HIGH-STABILITY template, "HIGH_PERFORMANCE" - HIGH-PERFORMANCE template. Default value is "HIGH_STABILITY".<br>Remark: If you need to use the cloud database MySQL default parameter template, set up ParamTemplateType.</p>
 	ParamTemplateType *string `json:"ParamTemplateType,omitnil,omitempty" name:"ParamTemplateType"`
 
-	// The array of alarm policy names, such as ["policy-uyoee9wg"]. If the `AlarmPolicyList` parameter is specified, this parameter is invalid.
+	// <p>Alarm policy name array, such as ["policy-uyoee9wg"]. This parameter is invalid when AlarmPolicyList is not empty.</p>
 	AlarmPolicyIdList []*string `json:"AlarmPolicyIdList,omitnil,omitempty" name:"AlarmPolicyIdList"`
 
-	// Whether to check the request without creating any instance. Valid values: `true`, `false` (default). After being submitted, the request will be checked to see if it is in correct format and has all required parameters with valid values. An error code is returned if the check failed, and `RequestId` is returned if the check succeeded. After a successful check, no instance will be created if this parameter is set to `true`, whereas an instance will be created and if it is set to `false`.
+	// <p>Whether to only pre-check this request. true: Send a check request without creating an instance. Check items include required parameters, request format, and service limits. If the check fails, return the corresponding error code; if the check passes, return RequestId. Default false: Send a normal request and create the instance directly after passing the check.</p>
 	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 
-	// Instance engine type. Valid values: `InnoDB` (default); `RocksDB`.
+	// <p>Instance engine type, defaults to "InnoDB". Supported values include "InnoDB" and "RocksDB".</p>
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 
-	// The list of IPs for sources instances. Only one IP address can be assigned to a single source instance. If all IPs are used up, the system will automatically assign IPs to the remaining source instances that do not have one.
+	// <p>Specify the IP list of the instance. Only the primary instance is supported. Process by instance sequence. Handle as unspecified if insufficient.</p>
 	Vips []*string `json:"Vips,omitnil,omitempty" name:"Vips"`
+
+	// <p>The data protection space size of the cloud disk edition instance, in GB, has a setting range of 1 - 10.</p>
+	DataProtectVolume *int64 `json:"DataProtectVolume,omitnil,omitempty" name:"DataProtectVolume"`
+
+	// <p>Topology configuration for cloud disk edition nodes.<br>Description: If a cloud disk edition instance is purchased, this parameter is required. Set the topology for RW and RO nodes of the cloud disk edition instance. The node scope for RO nodes is 1-5. Set at least 1 RO node.</p>
+	ClusterTopology *ClusterTopology `json:"ClusterTopology,omitnil,omitempty" name:"ClusterTopology"`
+
+	// <p>Disk type. This parameter can be specified for single-node (cloud disk) or cloud disk edition instances. CLOUD_SSD means SSD Cloud Block Storage, CLOUD_HSSD means enhanced SSD cloud disk, and CLOUD_PREMIUM means high-performance cloud block storage.<br>Note: The supported regions for disk types of single-node (cloud disk) and cloud disk edition instances vary slightly. For specific support situation, refer to <a href="https://www.tencentcloud.com/document/product/236/8458?from_cn_redirect=1">Regions and Availability Zones</a>.</p>
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
+
+	// <p>ClusterType: cage—Financial Enclosure, cdc—CDB ON CDC; dedicate—dedicated cluster</p>
+	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
+
+	// <p>Turn on or off instance destruction protection. on - turn on, off - turn off.</p>
+	DestroyProtect *string `json:"DestroyProtect,omitnil,omitempty" name:"DestroyProtect"`
+
+	// <p>AZ information of standby 3, empty by default. Specify this parameter when you proceed to purchase a four-node primary instance.</p>
+	FourthZone *string `json:"FourthZone,omitnil,omitempty" name:"FourthZone"`
 }
 
 func (r *CreateDBInstanceHourRequest) ToJsonString() string {
@@ -2936,6 +3199,12 @@ func (r *CreateDBInstanceHourRequest) FromJsonString(s string) error {
 	delete(f, "DryRun")
 	delete(f, "EngineType")
 	delete(f, "Vips")
+	delete(f, "DataProtectVolume")
+	delete(f, "ClusterTopology")
+	delete(f, "DiskType")
+	delete(f, "ClusterType")
+	delete(f, "DestroyProtect")
+	delete(f, "FourthZone")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstanceHourRequest has unknown keys!", "")
 	}
@@ -2944,10 +3213,10 @@ func (r *CreateDBInstanceHourRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDBInstanceHourResponseParams struct {
-	// Short order ID.
+	// <p>Short order ID.</p>
 	DealIds []*string `json:"DealIds,omitnil,omitempty" name:"DealIds"`
 
-	// Instance ID list
+	// <p>Instance ID list.</p>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2972,289 +3241,267 @@ func (r *CreateDBInstanceHourResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDBInstanceRequestParams struct {
-	// Instance memory size in MB. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported memory specifications.
+	// <p>Instance memory size. Unit: MB. Please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to obtain creatable memory specifications.</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size in GB. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported disk specifications.
+	// <p>Instance disk size, unit: GB. Please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the creatable disk range.</p>
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// Instance validity period in months. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// <p>Instance duration, measurement unit: month, optional values include [1,2,3,4,5,6,7,8,9,10,11,12,24,36].</p>
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Number of instances. Value range: 1-100. Default value: `1`.
+	// <p>Instance count. Default value is 1, minimum value 1, maximum value 100.</p>
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// For AZ information, please use the [Obtain the Purchasable Specifications of Cloud Databases](https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1) API to obtain the availability zones that can be created.
-	// Description: If you create a single-node, two-node, or three-node instance, this parameter is required. Specify an availability zone. If you do not specify an availability zone, the system will automatically select one (possibly not the availability zone you want to deploy in). If you create a cloud disk edition instance, leave this parameter empty. Configure the availability zone for the read-write node and read-only node with parameter ClusterTopology.
+	// <p>For availability zone information, please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the availability zones where instances can be created.</p><p>If you create a single-node, two-node, three-node, or four-node instance, this parameter is required. Please specify an availability zone. If you do not specify one, the system will automatically select an availability zone (which may not be the one you want to deploy in). If you create a cloud disk edition instance, leave this parameter blank and configure the availability zones for read-write nodes and read-only nodes with parameter ClusterTopology.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// VPC ID. Please use [Querying VPC list](https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1).
-	// Description: If a cloud disk edition instance is created, this item is required and must be a VPC type. If this item is left blank, the system will select the default VPC.
+	// <p>VPC ID. Please use <a href="/document/api/215/15778">Querying VPC List</a>.<br>Description: If you create a cloud disk edition instance, this item is required and must be VPC type. If this item is left blank, the system will select the default VPC by default.</p>
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// Subnet ID in the private network. If UniqVpcId is set up, UniqSubnetId is required. Please use [query subnet list](https://www.tencentcloud.com/document/api/215/15784?from_cn_redirect=1).
-	// Description: If this item is left empty, the system will select the default subnet in the Default VPC.
+	// <p>Subnet ID in the private network. If UniqVpcId is set up, UniqSubnetId is required. Please use <a href="/document/api/215/15784">query subnet list</a>.<br>Description: If this item is not filled, the system will select the default subnet in the Default VPC.</p>
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// Project ID. If this parameter is left empty, the default project will be used. When you purchase read-only instances and disaster recovery instances, the project ID is the same as that of the source instance by default.
+	// <p>Project ID. The default project is used if left empty. When you purchase a read-only instance or disaster recovery instance, the project ID is consistent with the primary instance by default.</p>
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Custom port. Port range: 1024-65535.
-	// Description: If this item is left blank, it defaults to 3306.
+	// <p>Custom port. Supported range: [1024-65535].<br>Description: If this item is left blank, it defaults to 3306.</p>
 	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
-	// Instance type. Supported values include: master - indicates the primary instance, dr - indicates the disaster recovery instance, ro - indicates the read-only instance.
-	// Description: Select instance type. The master type is selected by default if left empty.
+	// <p>Instance type. Supported values include: master - primary instance, dr - disaster recovery instance, ro - read-only instance.<br>Description: Select instance type. master is selected by default if left blank.</p>
 	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 
-	// Instance ID, required when purchasing a read-only instance or disaster recovery instance. This field represents the primary instance ID of the read-only instance or disaster recovery instance. Please use the [Query Instance List](https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1) API to query the cloud database instance ID.
+	// <p>Instance ID, required when purchasing a read-only instance or disaster recovery instance. This field represents the primary instance ID of the read-only instance or disaster recovery instance. Please use the <a href="https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1">Query Instance List</a> API to query the cloud database instance ID.</p>
 	MasterInstanceId *string `json:"MasterInstanceId,omitnil,omitempty" name:"MasterInstanceId"`
 
-	// MySQL version, including 5.5, 5.6, 5.7, and 8.0. Please use the [obtain the purchasable specifications of cloud databases](https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1) API to get the version of the instance created.
-	// Description: When creating a non-cloud disk edition instance, specify the instance version as needed (recommend 5.7 or 8.0). If this parameter is left empty, the default value is 8.0. If creating a cloud disk edition instance, this parameter can only be set to 5.7 or 8.0.
+	// <p>MySQL version, including 5.5, 5.6, 5.7, and 8.0. Please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the instance version created.<br>Note: When creating a non-cloud disk edition instance, specify the instance version as needed (recommend 5.7 or 8.0). If this parameter is left blank, the default value is 8.0. If creating a cloud disk edition instance, this parameter can only be set to 5.7 or 8.0.</p>
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
-	// The root account password, which can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and symbols `_+-&=!@#$%^*()`. This parameter applies to source instances but not to read-only or disaster recovery instances.
+	// <p>Set the root account password. The password must contain 8 to 64 characters and at least two of the following: letters, digits, or characters (supported characters: _+-&amp;=!@#$%^*()). You can specify this parameter when purchasing a primary instance. This parameter is invalid when purchasing a read-only instance or disaster recovery instance.</p>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// Data replication mode. Valid values: `0` (async replication), `1` (semi-sync replication), `2` (strong sync replication). Default value: `0`.
+	// <p>Data replication method, defaults to 0. Supported values include: 0 - means async replication, 1 - means semi-sync replication, 2 - means strong sync replication.</p>
 	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
 
-	// Multi-AZ or single-AZ. Valid values: `0` (single-AZ), `1` (multi-AZ). Default value: `0`.
+	// <p>Multiple Availability Zones, defaults to 0. Supported values include: 0 - means single availability zone, 1 - means multi-availability zone.</p>
 	DeployMode *int64 `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 
-	// AZ information of standby database 1.
-	// Description: For two-node and three-node instances, specify this parameter. If not specified, it defaults to the value of Zone. For cloud disk edition instances, this parameter is optional. Configure the availability zone for read-write nodes and read-only nodes with parameter ClusterTopology. Single-node instances are single availability zone and no need to specify this parameter.
+	// <p>AZ information of standby database 1.</p><p>For two-node, three-node, or four-node instances, specify this parameter. If not specified, it defaults to the Zone value. For cloud disk edition instances, this parameter is optional. Configure the AZ for read-write and read-only nodes with parameter ClusterTopology. Single-node instances are in a single availability zone, so no need to specify this parameter.</p>
 	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
 
-	// Parameter list. The parameter format is ParamList.0.Name=auto_increment&ParamList.0.Value=1. You can query the configurable parameters by default by referring to [Querying the Default Configurable Parameter List](https://www.tencentcloud.com/document/api/236/32662?from_cn_redirect=1).
-	// Description: table name case sensitivity can be enabled or disabled with parameter lower_case_table_names. A parameter value of 0 means enabling, and 1 means disabling. If not set, the default value is 0. For MySQL 8.0 edition instances, you need to set the lower_case_table_names parameter when creating an instance to turn on or off table name case sensitivity. Once created, the parameter cannot be modified, meaning table name case sensitivity cannot be changed after creation. Other database versions support modifying the lower_case_table_names parameter after the instance is created. For the function invocation method to set table name case sensitivity when creating an instance, please see example 3 in this document.
+	// <p>Parameter list. The parameter format is ParamList.0.Name=auto_increment&amp;ParamList.0.Value=1. You can query the configurable parameters by referring to <a href="https://www.tencentcloud.com/document/api/236/32662?from_cn_redirect=1">querying the default configurable parameter list</a>.<br>Description: table Name case sensitivity can be turned on or off by setting the parameter lower_case_table_names. a parameter Value of 0 means enabling, and a Value of 1 means disabling. If not set, the default Value is 0. If you create a MySQL 8.0 edition instance, you need to set the lower_case_table_names parameter when creating the instance to turn on or off table Name case sensitivity. After the instance is created, the parameter cannot be modified, meaning table Name case sensitivity cannot be changed once created. Instances of other database versions support modifying the lower_case_table_names parameter after creation. For the function invocation method to set table Name case sensitivity when creating an instance, please see example 3 in this document.</p>
 	ParamList []*ParamInfo `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 
-	// Information of replica AZ 2, which is left empty by default. Specify this parameter when purchasing a source instance in the one-source-two-replica architecture.
+	// <p>AZ information of standby 2, empty by default.</p><p>Specify this parameter when you proceed to purchase a three-node primary instance or a four-node primary instance.</p>
 	BackupZone *string `json:"BackupZone,omitnil,omitempty" name:"BackupZone"`
 
-	// Auto-renewal flag. Available values are: 0 - no auto-renewal; 1 - auto-renewal. Default is 0.
+	// <p>Auto-renewal flag. Available values are: 0 - no auto-renewal; 1 - auto-renewal. Default is 0.</p>
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
-	// Region information of the source instance, which is required when purchasing a read-only or disaster recovery instance.
+	// <p>Region of the primary instance. This field is required when you purchase a disaster recovery or RO instance.</p>
 	MasterRegion *string `json:"MasterRegion,omitnil,omitempty" name:"MasterRegion"`
 
-	// Security group parameter. You can use the [DescribeProjectSecurityGroups](https://intl.cloud.tencent.com/document/api/236/15850?from_cn_redirect=1) API to query the security group details of a project.
+	// <p>Security group parameters. Use the API <a href="https://www.tencentcloud.com/document/api/236/15850?from_cn_redirect=1">Query Project Security Group Information</a> to query security group details of a certain project.</p>
 	SecurityGroup []*string `json:"SecurityGroup,omitnil,omitempty" name:"SecurityGroup"`
 
-	// Read-only instance parameter. This parameter must be passed in when purchasing read-only instances.
+	// <p>Read-only instance parameter. This parameter is required when you purchase a read-only instance.</p>
 	RoGroup *RoGroup `json:"RoGroup,omitnil,omitempty" name:"RoGroup"`
 
-	// Instance name. For multiple instances purchased at one time, they will be distinguished by the name suffix number, such as instnaceName=db and goodsNum=3, and their instance names are db1, db2, and db3, respectively.
+	// <p>Instance name. When you purchase multiple instances only once, suffix numbers are used for case-sensitive instance naming. For example, instnaceName=db and goodsNum=3, the instance names are db1, db2, and db3 respectively.</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Instance tag information
+	// <p>Tag information of the instance.</p>
 	ResourceTags []*TagInfo `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-	// Placement group ID
+	// <p>Placement group ID.</p>
 	DeployGroupId *string `json:"DeployGroupId,omitnil,omitempty" name:"DeployGroupId"`
 
-	// A string unique in 48 hours, which is supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	// <p>String used to ensure request idempotency. This string is generated by the customer and must be unique between different requests within 48 hours, with a maximum value of 64 ASCII characters. If not specified, request idempotency cannot be guaranteed.</p>
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
-	// Instance isolation type. Supported values include "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC_V2" - ONTKE single-node instance, "CLOUD_NATIVE_CLUSTER" - standard type for cloud disk edition, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - enhanced for cloud disk edition. Default to general-purpose instance if not specified.
-	// Description: If a cloud disk edition instance is created, this parameter is required.
+	// <p>Instance isolation type. Supported values include: "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC_V2" - ONTKE single-node instance, "CLOUD_NATIVE_CLUSTER" - CLOUD disk edition standard type, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - CLOUD disk edition enhanced. If not specified, it defaults to general-purpose instance.<br>Description: If a CLOUD disk edition instance is created, this parameter is required.</p>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// Parameter template id.
-	// Remark: If you use a custom parameter template ID, you can input the custom parameter template ID. If you plan to use the default parameter template, inputting the parameter template ID is invalid, and you need to set ParamTemplateType.
+	// <p>Parameter template ID.<br>Remark: If you use a custom parameter template ID, you can input the custom parameter template ID. If you plan to use the default parameter template, the input ID is invalid and you need to set ParamTemplateType.</p>
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
 
-	// Array of alarm policy IDs, which can be obtained through the `OriginId` field in the return value of the `DescribeAlarmPolicy` API of TCOP.
+	// <p>Array of alarm policy IDs. OriginId returned by the Tencent Cloud observability platform DescribeAlarmPolicy API.</p>
 	AlarmPolicyList []*int64 `json:"AlarmPolicyList,omitnil,omitempty" name:"AlarmPolicyList"`
 
-	// The number of nodes of the instance. To purchase a read-only instance or a basic instance, set this parameter to `1` or leave it empty. To purchase a three-node instance, set this parameter to `3` or specify the `BackupZone` parameter. If the instance to be purchased is a source instance and both `BackupZone` and this parameter are left empty, the value `2` will be used, which indicates the source instance will have two nodes.
+	// <p>Number of instance nodes.</p><p>For RO and basic edition instances, the default value is 1. To purchase a three-node instance, set this value to 3 or specify the BackupZone parameter. When purchasing a primary instance without specifying this parameter or the BackupZone parameter, the default is 2, meaning a dual-node instance will be purchased. To purchase a four-node instance, set this value to 4 or specify the FourthZone parameter.</p>
 	InstanceNodes *int64 `json:"InstanceNodes,omitnil,omitempty" name:"InstanceNodes"`
 
-	// The number of the instance CPU cores. If this parameter is left empty, it will be subject to the `Memory` value.
+	// <p>Number of Cpu cores of the instance.</p><p>When multiple Cpu configurations exist for the Memory specification (for example, 64000MB Memory corresponds to 8-core/16-core/32-core), the Cpu parameter must be provided.</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Whether to automatically start disaster recovery synchronization. This parameter takes effect only for disaster recovery instances. Valid values: `0` (no), `1` (yes). Default value: `0`.
+	// <p>Whether to automatically initiate disaster recovery sync. This parameter only takes effect when purchasing a disaster recovery instance. Available values are: 0 - Do not automatically initiate disaster recovery sync; 1 - Automatically initiate disaster recovery sync. The default is 0.</p>
 	AutoSyncFlag *int64 `json:"AutoSyncFlag,omitnil,omitempty" name:"AutoSyncFlag"`
 
-	// Financial cage ID.
+	// <p>Financial Enclosure ID.</p>
 	CageId *string `json:"CageId,omitnil,omitempty" name:"CageId"`
 
-	// Default parameter template type. Supported values include: "HIGH_STABILITY" - high-stability template, "HIGH_PERFORMANCE" - high-performance template.
-	// Remark: If you need to use the TencentDB for MySQL default parameter template, set up ParamTemplateType.
+	// <p>Default parameter template type. Supported values include "HIGH_STABILITY" - HIGH-STABILITY template, "HIGH_PERFORMANCE" - HIGH-PERFORMANCE template.<br>Remark: If you need to use TencentDB for MySQL default parameter template, set up ParamTemplateType.</p>
 	ParamTemplateType *string `json:"ParamTemplateType,omitnil,omitempty" name:"ParamTemplateType"`
 
-	// The array of alarm policy names, such as ["policy-uyoee9wg"]. If the `AlarmPolicyList` parameter is specified, this parameter is invalid.
+	// <p>Alarm policy name array, such as ["policy-uyoee9wg"]. This parameter is invalid when AlarmPolicyList is not empty.</p>
 	AlarmPolicyIdList []*string `json:"AlarmPolicyIdList,omitnil,omitempty" name:"AlarmPolicyIdList"`
 
-	// Whether to only pre-check this request. true: Send a check request without creating an instance. Check items include whether required parameters are filled, request format, and service limit. If the check failed, return the corresponding error code; if the check passed, return RequestId. false: Send a normal request and create the instance directly after passing the check.
-	// Defaults to false.
+	// <p>Whether to perform a pre-check only for this request. true: Send a check request without creating an instance. Check items include whether required parameters are filled, request format, and service limit. If the check fails, return the corresponding error code; if the check passes, return RequestId. false: Send a normal request and create an instance directly after the check passes.<br>Default to false.</p>
 	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 
-	// Instance engine type. Valid values: `InnoDB` (default), `RocksDB`.
+	// <p>Instance engine type, defaults to "InnoDB". Supported values include "InnoDB" and "RocksDB".</p>
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 
-	// The list of IPs for sources instances. Only one IP address can be assigned to a single source instance. If all IPs are used up, the system will automatically assign IPs to the remaining source instances that do not have one.
+	// <p>Specify the IP list of the instance. Only the primary instance is supported. Process by instance sequence. Handle as unspecified if insufficient.</p>
 	Vips []*string `json:"Vips,omitnil,omitempty" name:"Vips"`
 
-	// Data protection space size of the cloud disk edition instance in GB. Setting range is 1 - 10.
+	// <p>The data protection space size of the cloud disk edition instance, in GB, has a setting range of 1 - 10.</p>
 	DataProtectVolume *int64 `json:"DataProtectVolume,omitnil,omitempty" name:"DataProtectVolume"`
 
-	// Cloud disk edition node topology configuration.
-	// Description: If a cloud disk edition instance is purchased, this parameter is required. Set the RW and RO node topology for the cloud disk edition instance. The RO node scope is 1-5. Set at least 1 RO node.
+	// <p>Topology configuration for cloud disk edition nodes.<br>Description: If a cloud disk edition instance is purchased, this parameter is required. Set the topology for RW and RO nodes of the cloud disk edition instance. The node scope for RO nodes is 1-5. Set at least 1 RO node.</p>
 	ClusterTopology *ClusterTopology `json:"ClusterTopology,omitnil,omitempty" name:"ClusterTopology"`
 
-	// Disk Type. This parameter can be specified for single-node (cloud disk edition) or cloud disk edition instance. CLOUD_SSD means SSD Cloud Block Storage, CLOUD_HSSD refers to enhanced SSD cloud disk, and CLOUD_PREMIUM indicates high-performance cloud block storage.
-	// Description: The supported regions for the hard disk type of single-node (cloud disk edition) and cloud disk edition instances vary slightly. For the specific support situation, refer to [Regions and Availability Zones](https://www.tencentcloud.com/document/product/236/8458?from_cn_redirect=1).
+	// <p>Disk type. This parameter can be specified for single-node (cloud disk edition) or cloud disk edition instances. CLOUD_SSD means SSD Cloud Block Storage, CLOUD_HSSD means enhanced SSD cloud disk, and CLOUD_PREMIUM means high-performance cloud block storage.<br>Note: The supported regions for hard disk types of single-node (cloud disk edition) and cloud disk edition instances vary slightly. For specific support situation, refer to <a href="https://www.tencentcloud.com/document/product/236/8458?from_cn_redirect=1">Regions and Availability Zones</a>.</p>
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Turn on or off instance destruction protection. on - enabled, off - disabled.
+	// <p>Turn on or off instance destruction protection. on - turn on, off - turn off.</p>
 	DestroyProtect *string `json:"DestroyProtect,omitnil,omitempty" name:"DestroyProtect"`
+
+	// <p>AZ information of standby 3, empty by default. Specify this parameter when you proceed to purchase a four-node primary instance.</p>
+	FourthZone *string `json:"FourthZone,omitnil,omitempty" name:"FourthZone"`
 }
 
 type CreateDBInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance memory size in MB. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported memory specifications.
+	// <p>Instance memory size. Unit: MB. Please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to obtain creatable memory specifications.</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size in GB. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported disk specifications.
+	// <p>Instance disk size, unit: GB. Please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the creatable disk range.</p>
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// Instance validity period in months. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// <p>Instance duration, measurement unit: month, optional values include [1,2,3,4,5,6,7,8,9,10,11,12,24,36].</p>
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Number of instances. Value range: 1-100. Default value: `1`.
+	// <p>Instance count. Default value is 1, minimum value 1, maximum value 100.</p>
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// For AZ information, please use the [Obtain the Purchasable Specifications of Cloud Databases](https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1) API to obtain the availability zones that can be created.
-	// Description: If you create a single-node, two-node, or three-node instance, this parameter is required. Specify an availability zone. If you do not specify an availability zone, the system will automatically select one (possibly not the availability zone you want to deploy in). If you create a cloud disk edition instance, leave this parameter empty. Configure the availability zone for the read-write node and read-only node with parameter ClusterTopology.
+	// <p>For availability zone information, please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the availability zones where instances can be created.</p><p>If you create a single-node, two-node, three-node, or four-node instance, this parameter is required. Please specify an availability zone. If you do not specify one, the system will automatically select an availability zone (which may not be the one you want to deploy in). If you create a cloud disk edition instance, leave this parameter blank and configure the availability zones for read-write nodes and read-only nodes with parameter ClusterTopology.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// VPC ID. Please use [Querying VPC list](https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1).
-	// Description: If a cloud disk edition instance is created, this item is required and must be a VPC type. If this item is left blank, the system will select the default VPC.
+	// <p>VPC ID. Please use <a href="/document/api/215/15778">Querying VPC List</a>.<br>Description: If you create a cloud disk edition instance, this item is required and must be VPC type. If this item is left blank, the system will select the default VPC by default.</p>
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// Subnet ID in the private network. If UniqVpcId is set up, UniqSubnetId is required. Please use [query subnet list](https://www.tencentcloud.com/document/api/215/15784?from_cn_redirect=1).
-	// Description: If this item is left empty, the system will select the default subnet in the Default VPC.
+	// <p>Subnet ID in the private network. If UniqVpcId is set up, UniqSubnetId is required. Please use <a href="/document/api/215/15784">query subnet list</a>.<br>Description: If this item is not filled, the system will select the default subnet in the Default VPC.</p>
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// Project ID. If this parameter is left empty, the default project will be used. When you purchase read-only instances and disaster recovery instances, the project ID is the same as that of the source instance by default.
+	// <p>Project ID. The default project is used if left empty. When you purchase a read-only instance or disaster recovery instance, the project ID is consistent with the primary instance by default.</p>
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Custom port. Port range: 1024-65535.
-	// Description: If this item is left blank, it defaults to 3306.
+	// <p>Custom port. Supported range: [1024-65535].<br>Description: If this item is left blank, it defaults to 3306.</p>
 	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
-	// Instance type. Supported values include: master - indicates the primary instance, dr - indicates the disaster recovery instance, ro - indicates the read-only instance.
-	// Description: Select instance type. The master type is selected by default if left empty.
+	// <p>Instance type. Supported values include: master - primary instance, dr - disaster recovery instance, ro - read-only instance.<br>Description: Select instance type. master is selected by default if left blank.</p>
 	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 
-	// Instance ID, required when purchasing a read-only instance or disaster recovery instance. This field represents the primary instance ID of the read-only instance or disaster recovery instance. Please use the [Query Instance List](https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1) API to query the cloud database instance ID.
+	// <p>Instance ID, required when purchasing a read-only instance or disaster recovery instance. This field represents the primary instance ID of the read-only instance or disaster recovery instance. Please use the <a href="https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1">Query Instance List</a> API to query the cloud database instance ID.</p>
 	MasterInstanceId *string `json:"MasterInstanceId,omitnil,omitempty" name:"MasterInstanceId"`
 
-	// MySQL version, including 5.5, 5.6, 5.7, and 8.0. Please use the [obtain the purchasable specifications of cloud databases](https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1) API to get the version of the instance created.
-	// Description: When creating a non-cloud disk edition instance, specify the instance version as needed (recommend 5.7 or 8.0). If this parameter is left empty, the default value is 8.0. If creating a cloud disk edition instance, this parameter can only be set to 5.7 or 8.0.
+	// <p>MySQL version, including 5.5, 5.6, 5.7, and 8.0. Please use the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the instance version created.<br>Note: When creating a non-cloud disk edition instance, specify the instance version as needed (recommend 5.7 or 8.0). If this parameter is left blank, the default value is 8.0. If creating a cloud disk edition instance, this parameter can only be set to 5.7 or 8.0.</p>
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
-	// The root account password, which can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and symbols `_+-&=!@#$%^*()`. This parameter applies to source instances but not to read-only or disaster recovery instances.
+	// <p>Set the root account password. The password must contain 8 to 64 characters and at least two of the following: letters, digits, or characters (supported characters: _+-&amp;=!@#$%^*()). You can specify this parameter when purchasing a primary instance. This parameter is invalid when purchasing a read-only instance or disaster recovery instance.</p>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// Data replication mode. Valid values: `0` (async replication), `1` (semi-sync replication), `2` (strong sync replication). Default value: `0`.
+	// <p>Data replication method, defaults to 0. Supported values include: 0 - means async replication, 1 - means semi-sync replication, 2 - means strong sync replication.</p>
 	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
 
-	// Multi-AZ or single-AZ. Valid values: `0` (single-AZ), `1` (multi-AZ). Default value: `0`.
+	// <p>Multiple Availability Zones, defaults to 0. Supported values include: 0 - means single availability zone, 1 - means multi-availability zone.</p>
 	DeployMode *int64 `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 
-	// AZ information of standby database 1.
-	// Description: For two-node and three-node instances, specify this parameter. If not specified, it defaults to the value of Zone. For cloud disk edition instances, this parameter is optional. Configure the availability zone for read-write nodes and read-only nodes with parameter ClusterTopology. Single-node instances are single availability zone and no need to specify this parameter.
+	// <p>AZ information of standby database 1.</p><p>For two-node, three-node, or four-node instances, specify this parameter. If not specified, it defaults to the Zone value. For cloud disk edition instances, this parameter is optional. Configure the AZ for read-write and read-only nodes with parameter ClusterTopology. Single-node instances are in a single availability zone, so no need to specify this parameter.</p>
 	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
 
-	// Parameter list. The parameter format is ParamList.0.Name=auto_increment&ParamList.0.Value=1. You can query the configurable parameters by default by referring to [Querying the Default Configurable Parameter List](https://www.tencentcloud.com/document/api/236/32662?from_cn_redirect=1).
-	// Description: table name case sensitivity can be enabled or disabled with parameter lower_case_table_names. A parameter value of 0 means enabling, and 1 means disabling. If not set, the default value is 0. For MySQL 8.0 edition instances, you need to set the lower_case_table_names parameter when creating an instance to turn on or off table name case sensitivity. Once created, the parameter cannot be modified, meaning table name case sensitivity cannot be changed after creation. Other database versions support modifying the lower_case_table_names parameter after the instance is created. For the function invocation method to set table name case sensitivity when creating an instance, please see example 3 in this document.
+	// <p>Parameter list. The parameter format is ParamList.0.Name=auto_increment&amp;ParamList.0.Value=1. You can query the configurable parameters by referring to <a href="https://www.tencentcloud.com/document/api/236/32662?from_cn_redirect=1">querying the default configurable parameter list</a>.<br>Description: table Name case sensitivity can be turned on or off by setting the parameter lower_case_table_names. a parameter Value of 0 means enabling, and a Value of 1 means disabling. If not set, the default Value is 0. If you create a MySQL 8.0 edition instance, you need to set the lower_case_table_names parameter when creating the instance to turn on or off table Name case sensitivity. After the instance is created, the parameter cannot be modified, meaning table Name case sensitivity cannot be changed once created. Instances of other database versions support modifying the lower_case_table_names parameter after creation. For the function invocation method to set table Name case sensitivity when creating an instance, please see example 3 in this document.</p>
 	ParamList []*ParamInfo `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 
-	// Information of replica AZ 2, which is left empty by default. Specify this parameter when purchasing a source instance in the one-source-two-replica architecture.
+	// <p>AZ information of standby 2, empty by default.</p><p>Specify this parameter when you proceed to purchase a three-node primary instance or a four-node primary instance.</p>
 	BackupZone *string `json:"BackupZone,omitnil,omitempty" name:"BackupZone"`
 
-	// Auto-renewal flag. Available values are: 0 - no auto-renewal; 1 - auto-renewal. Default is 0.
+	// <p>Auto-renewal flag. Available values are: 0 - no auto-renewal; 1 - auto-renewal. Default is 0.</p>
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
-	// Region information of the source instance, which is required when purchasing a read-only or disaster recovery instance.
+	// <p>Region of the primary instance. This field is required when you purchase a disaster recovery or RO instance.</p>
 	MasterRegion *string `json:"MasterRegion,omitnil,omitempty" name:"MasterRegion"`
 
-	// Security group parameter. You can use the [DescribeProjectSecurityGroups](https://intl.cloud.tencent.com/document/api/236/15850?from_cn_redirect=1) API to query the security group details of a project.
+	// <p>Security group parameters. Use the API <a href="https://www.tencentcloud.com/document/api/236/15850?from_cn_redirect=1">Query Project Security Group Information</a> to query security group details of a certain project.</p>
 	SecurityGroup []*string `json:"SecurityGroup,omitnil,omitempty" name:"SecurityGroup"`
 
-	// Read-only instance parameter. This parameter must be passed in when purchasing read-only instances.
+	// <p>Read-only instance parameter. This parameter is required when you purchase a read-only instance.</p>
 	RoGroup *RoGroup `json:"RoGroup,omitnil,omitempty" name:"RoGroup"`
 
-	// Instance name. For multiple instances purchased at one time, they will be distinguished by the name suffix number, such as instnaceName=db and goodsNum=3, and their instance names are db1, db2, and db3, respectively.
+	// <p>Instance name. When you purchase multiple instances only once, suffix numbers are used for case-sensitive instance naming. For example, instnaceName=db and goodsNum=3, the instance names are db1, db2, and db3 respectively.</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Instance tag information
+	// <p>Tag information of the instance.</p>
 	ResourceTags []*TagInfo `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-	// Placement group ID
+	// <p>Placement group ID.</p>
 	DeployGroupId *string `json:"DeployGroupId,omitnil,omitempty" name:"DeployGroupId"`
 
-	// A string unique in 48 hours, which is supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
+	// <p>String used to ensure request idempotency. This string is generated by the customer and must be unique between different requests within 48 hours, with a maximum value of 64 ASCII characters. If not specified, request idempotency cannot be guaranteed.</p>
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
-	// Instance isolation type. Supported values include "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC_V2" - ONTKE single-node instance, "CLOUD_NATIVE_CLUSTER" - standard type for cloud disk edition, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - enhanced for cloud disk edition. Default to general-purpose instance if not specified.
-	// Description: If a cloud disk edition instance is created, this parameter is required.
+	// <p>Instance isolation type. Supported values include: "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC_V2" - ONTKE single-node instance, "CLOUD_NATIVE_CLUSTER" - CLOUD disk edition standard type, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - CLOUD disk edition enhanced. If not specified, it defaults to general-purpose instance.<br>Description: If a CLOUD disk edition instance is created, this parameter is required.</p>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// Parameter template id.
-	// Remark: If you use a custom parameter template ID, you can input the custom parameter template ID. If you plan to use the default parameter template, inputting the parameter template ID is invalid, and you need to set ParamTemplateType.
+	// <p>Parameter template ID.<br>Remark: If you use a custom parameter template ID, you can input the custom parameter template ID. If you plan to use the default parameter template, the input ID is invalid and you need to set ParamTemplateType.</p>
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
 
-	// Array of alarm policy IDs, which can be obtained through the `OriginId` field in the return value of the `DescribeAlarmPolicy` API of TCOP.
+	// <p>Array of alarm policy IDs. OriginId returned by the Tencent Cloud observability platform DescribeAlarmPolicy API.</p>
 	AlarmPolicyList []*int64 `json:"AlarmPolicyList,omitnil,omitempty" name:"AlarmPolicyList"`
 
-	// The number of nodes of the instance. To purchase a read-only instance or a basic instance, set this parameter to `1` or leave it empty. To purchase a three-node instance, set this parameter to `3` or specify the `BackupZone` parameter. If the instance to be purchased is a source instance and both `BackupZone` and this parameter are left empty, the value `2` will be used, which indicates the source instance will have two nodes.
+	// <p>Number of instance nodes.</p><p>For RO and basic edition instances, the default value is 1. To purchase a three-node instance, set this value to 3 or specify the BackupZone parameter. When purchasing a primary instance without specifying this parameter or the BackupZone parameter, the default is 2, meaning a dual-node instance will be purchased. To purchase a four-node instance, set this value to 4 or specify the FourthZone parameter.</p>
 	InstanceNodes *int64 `json:"InstanceNodes,omitnil,omitempty" name:"InstanceNodes"`
 
-	// The number of the instance CPU cores. If this parameter is left empty, it will be subject to the `Memory` value.
+	// <p>Number of Cpu cores of the instance.</p><p>When multiple Cpu configurations exist for the Memory specification (for example, 64000MB Memory corresponds to 8-core/16-core/32-core), the Cpu parameter must be provided.</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Whether to automatically start disaster recovery synchronization. This parameter takes effect only for disaster recovery instances. Valid values: `0` (no), `1` (yes). Default value: `0`.
+	// <p>Whether to automatically initiate disaster recovery sync. This parameter only takes effect when purchasing a disaster recovery instance. Available values are: 0 - Do not automatically initiate disaster recovery sync; 1 - Automatically initiate disaster recovery sync. The default is 0.</p>
 	AutoSyncFlag *int64 `json:"AutoSyncFlag,omitnil,omitempty" name:"AutoSyncFlag"`
 
-	// Financial cage ID.
+	// <p>Financial Enclosure ID.</p>
 	CageId *string `json:"CageId,omitnil,omitempty" name:"CageId"`
 
-	// Default parameter template type. Supported values include: "HIGH_STABILITY" - high-stability template, "HIGH_PERFORMANCE" - high-performance template.
-	// Remark: If you need to use the TencentDB for MySQL default parameter template, set up ParamTemplateType.
+	// <p>Default parameter template type. Supported values include "HIGH_STABILITY" - HIGH-STABILITY template, "HIGH_PERFORMANCE" - HIGH-PERFORMANCE template.<br>Remark: If you need to use TencentDB for MySQL default parameter template, set up ParamTemplateType.</p>
 	ParamTemplateType *string `json:"ParamTemplateType,omitnil,omitempty" name:"ParamTemplateType"`
 
-	// The array of alarm policy names, such as ["policy-uyoee9wg"]. If the `AlarmPolicyList` parameter is specified, this parameter is invalid.
+	// <p>Alarm policy name array, such as ["policy-uyoee9wg"]. This parameter is invalid when AlarmPolicyList is not empty.</p>
 	AlarmPolicyIdList []*string `json:"AlarmPolicyIdList,omitnil,omitempty" name:"AlarmPolicyIdList"`
 
-	// Whether to only pre-check this request. true: Send a check request without creating an instance. Check items include whether required parameters are filled, request format, and service limit. If the check failed, return the corresponding error code; if the check passed, return RequestId. false: Send a normal request and create the instance directly after passing the check.
-	// Defaults to false.
+	// <p>Whether to perform a pre-check only for this request. true: Send a check request without creating an instance. Check items include whether required parameters are filled, request format, and service limit. If the check fails, return the corresponding error code; if the check passes, return RequestId. false: Send a normal request and create an instance directly after the check passes.<br>Default to false.</p>
 	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 
-	// Instance engine type. Valid values: `InnoDB` (default), `RocksDB`.
+	// <p>Instance engine type, defaults to "InnoDB". Supported values include "InnoDB" and "RocksDB".</p>
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 
-	// The list of IPs for sources instances. Only one IP address can be assigned to a single source instance. If all IPs are used up, the system will automatically assign IPs to the remaining source instances that do not have one.
+	// <p>Specify the IP list of the instance. Only the primary instance is supported. Process by instance sequence. Handle as unspecified if insufficient.</p>
 	Vips []*string `json:"Vips,omitnil,omitempty" name:"Vips"`
 
-	// Data protection space size of the cloud disk edition instance in GB. Setting range is 1 - 10.
+	// <p>The data protection space size of the cloud disk edition instance, in GB, has a setting range of 1 - 10.</p>
 	DataProtectVolume *int64 `json:"DataProtectVolume,omitnil,omitempty" name:"DataProtectVolume"`
 
-	// Cloud disk edition node topology configuration.
-	// Description: If a cloud disk edition instance is purchased, this parameter is required. Set the RW and RO node topology for the cloud disk edition instance. The RO node scope is 1-5. Set at least 1 RO node.
+	// <p>Topology configuration for cloud disk edition nodes.<br>Description: If a cloud disk edition instance is purchased, this parameter is required. Set the topology for RW and RO nodes of the cloud disk edition instance. The node scope for RO nodes is 1-5. Set at least 1 RO node.</p>
 	ClusterTopology *ClusterTopology `json:"ClusterTopology,omitnil,omitempty" name:"ClusterTopology"`
 
-	// Disk Type. This parameter can be specified for single-node (cloud disk edition) or cloud disk edition instance. CLOUD_SSD means SSD Cloud Block Storage, CLOUD_HSSD refers to enhanced SSD cloud disk, and CLOUD_PREMIUM indicates high-performance cloud block storage.
-	// Description: The supported regions for the hard disk type of single-node (cloud disk edition) and cloud disk edition instances vary slightly. For the specific support situation, refer to [Regions and Availability Zones](https://www.tencentcloud.com/document/product/236/8458?from_cn_redirect=1).
+	// <p>Disk type. This parameter can be specified for single-node (cloud disk edition) or cloud disk edition instances. CLOUD_SSD means SSD Cloud Block Storage, CLOUD_HSSD means enhanced SSD cloud disk, and CLOUD_PREMIUM means high-performance cloud block storage.<br>Note: The supported regions for hard disk types of single-node (cloud disk edition) and cloud disk edition instances vary slightly. For specific support situation, refer to <a href="https://www.tencentcloud.com/document/product/236/8458?from_cn_redirect=1">Regions and Availability Zones</a>.</p>
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Turn on or off instance destruction protection. on - enabled, off - disabled.
+	// <p>Turn on or off instance destruction protection. on - turn on, off - turn off.</p>
 	DestroyProtect *string `json:"DestroyProtect,omitnil,omitempty" name:"DestroyProtect"`
+
+	// <p>AZ information of standby 3, empty by default. Specify this parameter when you proceed to purchase a four-node primary instance.</p>
+	FourthZone *string `json:"FourthZone,omitnil,omitempty" name:"FourthZone"`
 }
 
 func (r *CreateDBInstanceRequest) ToJsonString() string {
@@ -3311,6 +3558,7 @@ func (r *CreateDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "ClusterTopology")
 	delete(f, "DiskType")
 	delete(f, "DestroyProtect")
+	delete(f, "FourthZone")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstanceRequest has unknown keys!", "")
 	}
@@ -3319,10 +3567,10 @@ func (r *CreateDBInstanceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDBInstanceResponseParams struct {
-	// Billing sub-order ID
+	// <p>Billing sub-order ID.</p>
 	DealIds []*string `json:"DealIds,omitnil,omitempty" name:"DealIds"`
 
-	// List of instance IDs
+	// <p>Instance ID list.</p>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3350,7 +3598,7 @@ type CreateDatabaseRequestParams struct {
 	// Instance ID in the format of `cdb-c1nl9rpv`,  which is the same as the one displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Database Name, up to 64 characters in length.
+	// Database name, length not exceeding 64.
 	DBName *string `json:"DBName,omitnil,omitempty" name:"DBName"`
 
 	// Character set. Valid values:  `utf8`, `gbk`, `latin1`, `utf8mb4`.
@@ -3363,7 +3611,7 @@ type CreateDatabaseRequest struct {
 	// Instance ID in the format of `cdb-c1nl9rpv`,  which is the same as the one displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Database Name, up to 64 characters in length.
+	// Database name, length not exceeding 64.
 	DBName *string `json:"DBName,omitnil,omitempty" name:"DBName"`
 
 	// Character set. Valid values:  `utf8`, `gbk`, `latin1`, `utf8mb4`.
@@ -3415,16 +3663,16 @@ func (r *CreateDatabaseResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateParamTemplateRequestParams struct {
-	// Parameter template name.
+	// Parameter template name. Up to 60 characters are allowed.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Parameter template description.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// MySQL version number.
+	// MySQL version number. Available values: 5.6, 5.7, and 8.0.
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
-	// Source parameter template ID.
+	// Source parameter template ID, which can be obtained through the [DescribeParamTemplates](https://www.tencentcloud.com/document/api/236/32659?from_cn_redirect=1) API.
 	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// List of parameters.
@@ -3433,23 +3681,24 @@ type CreateParamTemplateRequestParams struct {
 	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
 	TemplateType *string `json:"TemplateType,omitnil,omitempty" name:"TemplateType"`
 
-	// Instance engine type. Valid values: `InnoDB` (default), `RocksDB`.
+	// Instance engine type, defaults to "InnoDB". Supported values include "InnoDB" and "RocksDB".
+	// Description: RocksDB is only supported in database versions MySQL 5.7 and MySQL 8.0.
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 }
 
 type CreateParamTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Parameter template name.
+	// Parameter template name. Up to 60 characters are allowed.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Parameter template description.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// MySQL version number.
+	// MySQL version number. Available values: 5.6, 5.7, and 8.0.
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
-	// Source parameter template ID.
+	// Source parameter template ID, which can be obtained through the [DescribeParamTemplates](https://www.tencentcloud.com/document/api/236/32659?from_cn_redirect=1) API.
 	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// List of parameters.
@@ -3458,7 +3707,8 @@ type CreateParamTemplateRequest struct {
 	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
 	TemplateType *string `json:"TemplateType,omitnil,omitempty" name:"TemplateType"`
 
-	// Instance engine type. Valid values: `InnoDB` (default), `RocksDB`.
+	// Instance engine type, defaults to "InnoDB". Supported values include "InnoDB" and "RocksDB".
+	// Description: RocksDB is only supported in database versions MySQL 5.7 and MySQL 8.0.
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 }
 
@@ -3594,20 +3844,20 @@ func (r *CreateRoInstanceIpResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateRotationPasswordRequestParams struct {
-	// Instance ID, in the format of cdb-c1nl9rpv, which is the same as the instance ID displayed on the TencentDB for MySQL console page.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Information about the account for which password rotation needs to be enabled. The account and host names are included.
+	// Currently, enable password rotation for account information, including account name and host name.
 	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 }
 
 type CreateRotationPasswordRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID, in the format of cdb-c1nl9rpv, which is the same as the instance ID displayed on the TencentDB for MySQL console page.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Information about the account for which password rotation needs to be enabled. The account and host names are included.
+	// Currently, enable password rotation for account information, including account name and host name.
 	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 }
 
@@ -3654,24 +3904,19 @@ func (r *CreateRotationPasswordResponse) FromJsonString(s string) error {
 }
 
 type CustomConfig struct {
-	// Device
-	// Note: this field may return `null`, indicating that no valid value can be found.
+	// device
 	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
-	// Type
-	// Note: this field may return `null`, indicating that no valid value can be found.
+	// Type.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Device type
-	// Note: this field may return `null`, indicating that no valid value can be found.
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// Memory
-	// Note: this field may return `null`, indicating that no valid value can be found.
+	// Memory, measured in MB
 	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Number of CPU cores
-	// Note: this field may return `null`, indicating that no valid value can be found.
+	// Number of cores
 	Cpu *uint64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 }
 
@@ -3944,7 +4189,7 @@ type DeleteBackupRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Backup task ID, which is the task ID returned by the [TencentDB instance backup creating API](https://intl.cloud.tencent.com/document/api/236/15844?from_cn_redirect=1).
+	// Backup task ID. Confirm it by querying the data backup file list (https://www.tencentcloud.com/document/api/236/15842?from_cn_redirect=1) to get the target backup task ID.
 	BackupId *int64 `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 }
 
@@ -3954,7 +4199,7 @@ type DeleteBackupRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Backup task ID, which is the task ID returned by the [TencentDB instance backup creating API](https://intl.cloud.tencent.com/document/api/236/15844?from_cn_redirect=1).
+	// Backup task ID. Confirm it by querying the data backup file list (https://www.tencentcloud.com/document/api/236/15842?from_cn_redirect=1) to get the target backup task ID.
 	BackupId *int64 `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 }
 
@@ -4001,15 +4246,76 @@ func (r *DeleteBackupResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteDatabaseRequestParams struct {
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Database name, length not exceeding 64.
+	DBName *string `json:"DBName,omitnil,omitempty" name:"DBName"`
+}
+
+type DeleteDatabaseRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Database name, length not exceeding 64.
+	DBName *string `json:"DBName,omitnil,omitempty" name:"DBName"`
+}
+
+func (r *DeleteDatabaseRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDatabaseRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "DBName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDatabaseRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteDatabaseResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteDatabaseResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteDatabaseResponseParams `json:"Response"`
+}
+
+func (r *DeleteDatabaseResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDatabaseResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteParamTemplateRequestParams struct {
-	// Parameter template ID.
+	// Parameter template ID, which can be obtained through the API [DescribeParamTemplates](https://www.tencentcloud.com/document/api/236/32659?from_cn_redirect=1).
 	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type DeleteParamTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Parameter template ID.
+	// Parameter template ID, which can be obtained through the API [DescribeParamTemplates](https://www.tencentcloud.com/document/api/236/32659?from_cn_redirect=1).
 	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
@@ -4051,6 +4357,88 @@ func (r *DeleteParamTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteParamTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRotationPasswordRequestParams struct {
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Instance account name with password rotation disabled, such as root
+	User *string `json:"User,omitnil,omitempty" name:"User"`
+
+	// Disable the domain name of the instance account with password rotation, such as%
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// The latest password of the instance account after disabling password rotation
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// If the input is not null, the password is encrypted.
+	EncryptMethod *string `json:"EncryptMethod,omitnil,omitempty" name:"EncryptMethod"`
+}
+
+type DeleteRotationPasswordRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Instance account name with password rotation disabled, such as root
+	User *string `json:"User,omitnil,omitempty" name:"User"`
+
+	// Disable the domain name of the instance account with password rotation, such as%
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// The latest password of the instance account after disabling password rotation
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// If the input is not null, the password is encrypted.
+	EncryptMethod *string `json:"EncryptMethod,omitnil,omitempty" name:"EncryptMethod"`
+}
+
+func (r *DeleteRotationPasswordRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRotationPasswordRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "User")
+	delete(f, "Host")
+	delete(f, "Password")
+	delete(f, "EncryptMethod")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRotationPasswordRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRotationPasswordResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteRotationPasswordResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteRotationPasswordResponseParams `json:"Response"`
+}
+
+func (r *DeleteRotationPasswordResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRotationPasswordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4113,10 +4501,10 @@ type DescribeAccountPrivilegesRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Database user account.
+	// Account name of the database. Obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499?from_cn_redirect=1) API.
 	User *string `json:"User,omitnil,omitempty" name:"User"`
 
-	// Database account domain name.
+	// Domain name of the database account. Obtain through the API [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499?from_cn_redirect=1).
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 }
 
@@ -4126,10 +4514,10 @@ type DescribeAccountPrivilegesRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Database user account.
+	// Account name of the database. Obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499?from_cn_redirect=1) API.
 	User *string `json:"User,omitnil,omitempty" name:"User"`
 
-	// Database account domain name.
+	// Domain name of the database account. Obtain through the API [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499?from_cn_redirect=1).
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 }
 
@@ -4201,6 +4589,15 @@ type DescribeAccountsRequestParams struct {
 
 	// Regex for matching account names, which complies with the rules at MySQL's official website
 	AccountRegexp *string `json:"AccountRegexp,omitnil,omitempty" name:"AccountRegexp"`
+
+	// Default none, support: ASC, DESC, asc, desc
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// Time field for sorting. Options: CreateTime (account creation time), ModifyTime (update time), ModifyPasswordTime (password modification time).
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Regular expression to match the account host address (Host). The rule is the same as that on the MySQL official website.
+	HostRegexp *string `json:"HostRegexp,omitnil,omitempty" name:"HostRegexp"`
 }
 
 type DescribeAccountsRequest struct {
@@ -4217,6 +4614,15 @@ type DescribeAccountsRequest struct {
 
 	// Regex for matching account names, which complies with the rules at MySQL's official website
 	AccountRegexp *string `json:"AccountRegexp,omitnil,omitempty" name:"AccountRegexp"`
+
+	// Default none, support: ASC, DESC, asc, desc
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// Time field for sorting. Options: CreateTime (account creation time), ModifyTime (update time), ModifyPasswordTime (password modification time).
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Regular expression to match the account host address (Host). The rule is the same as that on the MySQL official website.
+	HostRegexp *string `json:"HostRegexp,omitnil,omitempty" name:"HostRegexp"`
 }
 
 func (r *DescribeAccountsRequest) ToJsonString() string {
@@ -4235,6 +4641,9 @@ func (r *DescribeAccountsRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "AccountRegexp")
+	delete(f, "SortBy")
+	delete(f, "OrderBy")
+	delete(f, "HostRegexp")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccountsRequest has unknown keys!", "")
 	}
@@ -4306,12 +4715,10 @@ func (r *DescribeAsyncRequestInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAsyncRequestInfoResponseParams struct {
-	// Task execution result. Valid values: INITIAL, RUNNING, SUCCESS, FAILED, KILLED, REMOVED, PAUSED.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task execution result. Possible values: INITIAL - Initialization, RUNNING - Running, SUCCESS - Execution successful, FAILED - Execution failed, KILLED - Terminated, REMOVED - Deleted, PAUSED - Terminating.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Task execution information.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task execution information description.
 	Info *string `json:"Info,omitnil,omitempty" name:"Info"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4574,28 +4981,28 @@ func (r *DescribeAuditLogFilesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAuditLogsRequestParams struct {
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Start time
+	// Start time. We recommend that the interval between start and end time does not exceed 7 days.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time
+	// End time. We recommend that the interval between start and end time does not exceed 7 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The pagination parameter, which specifies the number of entries per page. Maximum value: 100 (default).
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Pagination offset
+	// Log offset, supports up to 65535 log entries for offset querying. Fill in the range: 0 - 65535.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Sorting order Valid values: `ASC (ascending), `DESC` (descending).
+	// Sort order. Valid values: "ASC" - Ascending order, "DESC" - Descending order. Default value: "DESC".
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// Sorting field Valid values: 
-	// `timestamp`: Timestamp,
-	// `affectRows`: Number of affected rows,
-	// `execTime`: Execution time.
+	// Field to sort by. Valid values:
+	// "timestamp" - timestamp;
+	// "affectRows" - Number of affected rows.
+	// "execTime" - Execution time.
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Filter. Multiple values are in `AND` relationship.
@@ -4605,28 +5012,28 @@ type DescribeAuditLogsRequestParams struct {
 type DescribeAuditLogsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Start time
+	// Start time. We recommend that the interval between start and end time does not exceed 7 days.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time
+	// End time. We recommend that the interval between start and end time does not exceed 7 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The pagination parameter, which specifies the number of entries per page. Maximum value: 100 (default).
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Pagination offset
+	// Log offset, supports up to 65535 log entries for offset querying. Fill in the range: 0 - 65535.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Sorting order Valid values: `ASC (ascending), `DESC` (descending).
+	// Sort order. Valid values: "ASC" - Ascending order, "DESC" - Descending order. Default value: "DESC".
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// Sorting field Valid values: 
-	// `timestamp`: Timestamp,
-	// `affectRows`: Number of affected rows,
-	// `execTime`: Execution time.
+	// Field to sort by. Valid values:
+	// "timestamp" - timestamp;
+	// "affectRows" - Number of affected rows.
+	// "execTime" - Execution time.
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Filter. Multiple values are in `AND` relationship.
@@ -4769,8 +5176,7 @@ type DescribeAuditPoliciesResponseParams struct {
 	// Number of eligible audit policies
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Audit policy details
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Audit policy details.
 	Items []*AuditPolicy `json:"Items,omitnil,omitempty" name:"Items"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5100,9 +5506,13 @@ func (r *DescribeBackupConfigRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBackupConfigResponseParams struct {
 	// Earliest start time point of automatic backup, such as 2 (for 2:00 AM). (This field has been disused. You are recommended to use the `BackupTimeWindow` field)
+	//
+	// Deprecated: StartTimeMin is deprecated.
 	StartTimeMin *int64 `json:"StartTimeMin,omitnil,omitempty" name:"StartTimeMin"`
 
 	// Latest start time point of automatic backup, such as 6 (for 6:00 AM). (This field has been disused. You are recommended to use the `BackupTimeWindow` field)
+	//
+	// Deprecated: StartTimeMax is deprecated.
 	StartTimeMax *int64 `json:"StartTimeMax,omitnil,omitempty" name:"StartTimeMax"`
 
 	// Backup file retention period in days.
@@ -5178,21 +5588,27 @@ func (r *DescribeBackupConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBackupDecryptionKeyRequestParams struct {
-	// Instance ID in the format of  cdb-XXXX,  which is the same as the instance ID displayed in the TencentDB console.
+	// Instance ID, in the format such as cdb-fybaegd8. This matches the instance ID displayed on the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance backup ID, which can be obtained by the `DescribeBackups` API.
+	// Backup ID of the instance, which can be obtained through the [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842?from_cn_redirect=1) API.
 	BackupId *int64 `json:"BackupId,omitnil,omitempty" name:"BackupId"`
+
+	// Backup type. data - data backup, binlog - log backup. The default value is data.
+	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
 }
 
 type DescribeBackupDecryptionKeyRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of  cdb-XXXX,  which is the same as the instance ID displayed in the TencentDB console.
+	// Instance ID, in the format such as cdb-fybaegd8. This matches the instance ID displayed on the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance backup ID, which can be obtained by the `DescribeBackups` API.
+	// Backup ID of the instance, which can be obtained through the [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842?from_cn_redirect=1) API.
 	BackupId *int64 `json:"BackupId,omitnil,omitempty" name:"BackupId"`
+
+	// Backup type. data - data backup, binlog - log backup. The default value is data.
+	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
 }
 
 func (r *DescribeBackupDecryptionKeyRequest) ToJsonString() string {
@@ -5209,6 +5625,7 @@ func (r *DescribeBackupDecryptionKeyRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	delete(f, "BackupId")
+	delete(f, "BackupType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupDecryptionKeyRequest has unknown keys!", "")
 	}
@@ -5365,14 +5782,14 @@ func (r *DescribeBackupEncryptionStatusResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeBackupOverviewRequestParams struct {
-	// TencentDB product type to be queried. Currently, only `mysql` is supported.
+	// The cloud database product type for which a backup overview needs to be queried. The value can be mysql (two-node/three-node high-availability instances), mysql-basic (single-node cloud disk edition instance), or mysql-cluster (cloud disk edition instance).
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 }
 
 type DescribeBackupOverviewRequest struct {
 	*tchttp.BaseRequest
 	
-	// TencentDB product type to be queried. Currently, only `mysql` is supported.
+	// The cloud database product type for which a backup overview needs to be queried. The value can be mysql (two-node/three-node high-availability instances), mysql-basic (single-node cloud disk edition instance), or mysql-cluster (cloud disk edition instance).
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 }
 
@@ -5409,16 +5826,13 @@ type DescribeBackupOverviewResponseParams struct {
 	// Backup capacity in the free tier of a user in the current region.
 	FreeVolume *int64 `json:"FreeVolume,omitnil,omitempty" name:"FreeVolume"`
 
-	// Total capacity of backups of a user in the current region
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Total offsite backup capacity of the user in current region.
 	RemoteBackupVolume *int64 `json:"RemoteBackupVolume,omitnil,omitempty" name:"RemoteBackupVolume"`
 
-	// Archive backup capacity, which includes data backups and log backups.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Archive backup capacity, including data backup and log backup.
 	BackupArchiveVolume *int64 `json:"BackupArchiveVolume,omitnil,omitempty" name:"BackupArchiveVolume"`
 
-	// Backup capacity of standard storage, which includes data backups and log backups.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Standard storage backup capacity includes data backup and log backup.
 	BackupStandbyVolume *int64 `json:"BackupStandbyVolume,omitnil,omitempty" name:"BackupStandbyVolume"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5443,7 +5857,7 @@ func (r *DescribeBackupOverviewResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBackupSummariesRequestParams struct {
-	// TencentDB product type to be queried. Currently, only `mysql` is supported.
+	// The cloud database product type for which real-time backup statistics need to be queried. The value can be mysql (two-node/three-node high-availability instances), mysql-basic (single-node cloud disk edition instance), or mysql-cluster (cloud disk edition instance).
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// Paginated query offset. Default value: `0`.
@@ -5462,7 +5876,7 @@ type DescribeBackupSummariesRequestParams struct {
 type DescribeBackupSummariesRequest struct {
 	*tchttp.BaseRequest
 	
-	// TencentDB product type to be queried. Currently, only `mysql` is supported.
+	// The cloud database product type for which real-time backup statistics need to be queried. The value can be mysql (two-node/three-node high-availability instances), mysql-basic (single-node cloud disk edition instance), or mysql-cluster (cloud disk edition instance).
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// Paginated query offset. Default value: `0`.
@@ -5531,26 +5945,26 @@ func (r *DescribeBackupSummariesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBackupsRequestParams struct {
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Offset. Minimum value: 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of entries per page. Value range: 1-100. Default value: 20.
+	// Page size. Default value: 20. Minimum value: 1. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeBackupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Offset. Minimum value: 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of entries per page. Value range: 1-100. Default value: 20.
+	// Page size. Default value: 20. Minimum value: 1. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -5605,14 +6019,14 @@ func (r *DescribeBackupsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBinlogBackupOverviewRequestParams struct {
-	// TencentDB product type to be queried. Currently, only `mysql` is supported.
+	// The cloud database product type for which a log backup overview needs to be queried. The value can be mysql (two-node/three-node high-availability instances), mysql-basic (single-node cloud disk edition instance), or mysql-cluster (cloud disk edition instance).
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 }
 
 type DescribeBinlogBackupOverviewRequest struct {
 	*tchttp.BaseRequest
 	
-	// TencentDB product type to be queried. Currently, only `mysql` is supported.
+	// The cloud database product type for which a log backup overview needs to be queried. The value can be mysql (two-node/three-node high-availability instances), mysql-basic (single-node cloud disk edition instance), or mysql-cluster (cloud disk edition instance).
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 }
 
@@ -5689,7 +6103,7 @@ type DescribeBinlogsRequestParams struct {
 	// Offset. Minimum value: 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of entries per page. Value range: 1-100. Default value: 20.
+	// Page size. Default value: 20. Minimum value: 1. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// The earliest start time of binlog  in the format of 2016-03-17 02:10:37.
@@ -5697,6 +6111,9 @@ type DescribeBinlogsRequestParams struct {
 
 	// The latest start time of binlog  in the format of 2016-03-17 02:10:37.
 	MaxStartTime *string `json:"MaxStartTime,omitnil,omitempty" name:"MaxStartTime"`
+
+	// Whether the binlog list contains the starting node MinStartTime, no by default
+	ContainsMinStartTime *bool `json:"ContainsMinStartTime,omitnil,omitempty" name:"ContainsMinStartTime"`
 }
 
 type DescribeBinlogsRequest struct {
@@ -5708,7 +6125,7 @@ type DescribeBinlogsRequest struct {
 	// Offset. Minimum value: 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of entries per page. Value range: 1-100. Default value: 20.
+	// Page size. Default value: 20. Minimum value: 1. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// The earliest start time of binlog  in the format of 2016-03-17 02:10:37.
@@ -5716,6 +6133,9 @@ type DescribeBinlogsRequest struct {
 
 	// The latest start time of binlog  in the format of 2016-03-17 02:10:37.
 	MaxStartTime *string `json:"MaxStartTime,omitnil,omitempty" name:"MaxStartTime"`
+
+	// Whether the binlog list contains the starting node MinStartTime, no by default
+	ContainsMinStartTime *bool `json:"ContainsMinStartTime,omitnil,omitempty" name:"ContainsMinStartTime"`
 }
 
 func (r *DescribeBinlogsRequest) ToJsonString() string {
@@ -5735,6 +6155,7 @@ func (r *DescribeBinlogsRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "MinStartTime")
 	delete(f, "MaxStartTime")
+	delete(f, "ContainsMinStartTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBinlogsRequest has unknown keys!", "")
 	}
@@ -5770,21 +6191,94 @@ func (r *DescribeBinlogsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeCPUExpandStrategyInfoRequestParams struct {
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DescribeCPUExpandStrategyInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeCPUExpandStrategyInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCPUExpandStrategyInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCPUExpandStrategyInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCPUExpandStrategyInfoResponseParams struct {
+	// Policy type. Output value: auto, manual, timeInterval, period.
+	// Description: 1. auto means auto-scaling. 2. manual means custom scaling with immediate effect. 3. timeInterval means custom scaling by time. 4. period means custom scaling by cycle. 5. If the return is NULL, the elastic expansion strategy is not yet opened.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Custom expansion with CPU that takes effect immediately. Valid when Type is manual.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpandCpu *int64 `json:"ExpandCpu,omitnil,omitempty" name:"ExpandCpu"`
+
+	// Auto scale-out policy. Valid when Type is auto.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AutoStrategy *AutoStrategy `json:"AutoStrategy,omitnil,omitempty" name:"AutoStrategy"`
+
+	// Scaling policy by cycle. Valid when Type is period.
+	PeriodStrategy *PeriodStrategy `json:"PeriodStrategy,omitnil,omitempty" name:"PeriodStrategy"`
+
+	// Scaling policy by time period. Valid when Type is timeInterval.
+	TimeIntervalStrategy *TimeIntervalStrategy `json:"TimeIntervalStrategy,omitnil,omitempty" name:"TimeIntervalStrategy"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCPUExpandStrategyInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCPUExpandStrategyInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeCPUExpandStrategyInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCPUExpandStrategyInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeCdbProxyInfoRequestParams struct {
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Proxy group ID
+	// Proxy group ID.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 }
 
 type DescribeCdbProxyInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Proxy group ID
+	// Proxy group ID.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 }
 
@@ -5810,10 +6304,10 @@ func (r *DescribeCdbProxyInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCdbProxyInfoResponseParams struct {
-	// Number of proxy groups Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of proxy groups
 	Count *uint64 `json:"Count,omitnil,omitempty" name:"Count"`
 
-	// Proxy group information Note: This field may return null, indicating that no valid values can be obtained.
+	// Proxy group information
 	ProxyInfos []*ProxyGroupInfo `json:"ProxyInfos,omitnil,omitempty" name:"ProxyInfos"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5892,26 +6386,26 @@ func (r *DescribeCdbZoneConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCloneListRequestParams struct {
-	// ID of the original instance. This parameter is used to query the clone task list of a specific original instance.
+	// Query the cloning task list of the specified source instance. Obtain the instance ID through the [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Paginated query offset. Default value: `0`.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results per page. Default value: `20`.
+	// Number of entries per page for paging query. Default value: 20. Maximum value: 100 recommended.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeCloneListRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the original instance. This parameter is used to query the clone task list of a specific original instance.
+	// Query the cloning task list of the specified source instance. Obtain the instance ID through the [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Paginated query offset. Default value: `0`.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results per page. Default value: `20`.
+	// Number of entries per page for paging query. Default value: 20. Maximum value: 100 recommended.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -5965,72 +6459,6 @@ func (r *DescribeCloneListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type DescribeCpuExpandStrategyRequestParams struct {
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
-}
-
-type DescribeCpuExpandStrategyRequest struct {
-	*tchttp.BaseRequest
-	
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
-}
-
-func (r *DescribeCpuExpandStrategyRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCpuExpandStrategyRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCpuExpandStrategyRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeCpuExpandStrategyResponseParams struct {
-	// Policy type. Valid values: `auto`, `manual`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
-
-	// Manually expanded CPU, which is valid when `Type` is `manual`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	ExpandCpu *string `json:"ExpandCpu,omitnil,omitempty" name:"ExpandCpu"`
-
-	// Automatic expansion policy, which is valid when `Type` is `auto`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	AutoStrategy *string `json:"AutoStrategy,omitnil,omitempty" name:"AutoStrategy"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DescribeCpuExpandStrategyResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeCpuExpandStrategyResponseParams `json:"Response"`
-}
-
-func (r *DescribeCpuExpandStrategyResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCpuExpandStrategyResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type DescribeDBFeaturesRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -6079,7 +6507,8 @@ type DescribeDBFeaturesResponseParams struct {
 	// Whether the instance is a remote read-only instance
 	IsRemoteRo *bool `json:"IsRemoteRo,omitnil,omitempty" name:"IsRemoteRo"`
 
-	// Region of the source instance
+	// Primary instance region.
+	// Description: This parameter may return null. You can ignore this return value. If needed, you can call the [Query Instance List](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API to obtain the instance region details.
 	MasterRegion *string `json:"MasterRegion,omitnil,omitempty" name:"MasterRegion"`
 
 	// Whether minor version upgrade is supported
@@ -6258,14 +6687,14 @@ func (r *DescribeDBInstanceCharsetResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBInstanceConfigRequestParams struct {
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// <p>Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeDBInstanceConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// <p>Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -6290,25 +6719,28 @@ func (r *DescribeDBInstanceConfigRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBInstanceConfigResponseParams struct {
-	// Data protection mode of the primary instance. Value range: 0 (async replication), 1 (semi-sync replication), 2 (strong sync replication).
+	// <p>Data protection method of the primary instance, possible returned values: 0 - asynchronous replication mode, 1 - semi-sync replication mode, 2 - strong sync replication mode.</p>
 	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
 
-	// Master instance deployment mode. Value range: 0 (single-AZ), 1 (multi-AZ)
+	// <p>Primary instance deployment mode. Possible returned values: 0 - single AZ deployment, 1 - multi-AZ deployment.</p>
 	DeployMode *int64 `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 
-	// Instance AZ information in the format of "ap-shanghai-2".
+	// <p>Primary AZ information of the instance, in the format of "ap-shanghai-2".</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Configurations of the replica node
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// <p>Configuration message of the first standby for two-node, three-node, and four-node instances.</p><p>When querying a two-node instance, this parameter returns the standby information of the two-node instance. When querying a three-node or four-node instance, this parameter returns the first standby information of the instance.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SlaveConfig *SlaveConfig `json:"SlaveConfig,omitnil,omitempty" name:"SlaveConfig"`
 
-	// Configurations of the second replica node of a strong-sync instance
-	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+	// <p>Configuration message of the second standby database for three-node and 4-node instances.</p><p>When querying three-node and 4-node instances, this parameter returns the information of the second standby database.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	BackupConfig *BackupConfig `json:"BackupConfig,omitnil,omitempty" name:"BackupConfig"`
 
-	// This parameter is only available for multi-AZ instances. It indicates whether the source AZ is the same as the one specified upon purchase. `true`: not the same, `false`: the same.
+	// <p>Whether to switch over to the standby database.</p>
 	Switched *bool `json:"Switched,omitnil,omitempty" name:"Switched"`
+
+	// <p>Configuration message of the third standby database in a 4-node instance.</p><p>When querying a 4-node instance, this parameter returns the info of the third standby database.</p>
+	FourthConfig *BackupConfig `json:"FourthConfig,omitnil,omitempty" name:"FourthConfig"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -6389,14 +6821,16 @@ func (r *DescribeDBInstanceGTIDResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBInstanceInfoRequestParams struct {
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+	// Description: Only the primary instance supports querying. This item only supports input of the primary instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeDBInstanceInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+	// Description: Only the primary instance supports querying. This item only supports input of the primary instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -6430,16 +6864,13 @@ type DescribeDBInstanceInfoResponseParams struct {
 	// Whether encryption is enabled. YES: enabled, NO: not enabled.
 	Encryption *string `json:"Encryption,omitnil,omitempty" name:"Encryption"`
 
-	// Encryption key ID.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Key ID used for encryption.
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
 	// Key region.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	KeyRegion *string `json:"KeyRegion,omitnil,omitempty" name:"KeyRegion"`
 
-	// The default region of the KMS service currently used by the TencentDB backend service.
-	// Note: this field may return `null`, indicating that no valid value can be found.
+	// The default region of the KMS service used by the current CDB backend service.
 	DefaultKmsRegion *string `json:"DefaultKmsRegion,omitnil,omitempty" name:"DefaultKmsRegion"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6464,15 +6895,21 @@ func (r *DescribeDBInstanceInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBInstanceLogToCLSRequestParams struct {
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Region of the CLS service
+	ClsRegion *string `json:"ClsRegion,omitnil,omitempty" name:"ClsRegion"`
 }
 
 type DescribeDBInstanceLogToCLSRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Region of the CLS service
+	ClsRegion *string `json:"ClsRegion,omitnil,omitempty" name:"ClsRegion"`
 }
 
 func (r *DescribeDBInstanceLogToCLSRequest) ToJsonString() string {
@@ -6488,6 +6925,7 @@ func (r *DescribeDBInstanceLogToCLSRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "InstanceId")
+	delete(f, "ClsRegion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstanceLogToCLSRequest has unknown keys!", "")
 	}
@@ -6496,12 +6934,10 @@ func (r *DescribeDBInstanceLogToCLSRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBInstanceLogToCLSResponseParams struct {
-	// Configurations of sending error logs to CLS.
-	// Note: The return value may be null, indicating that no valid data can be obtained.
+	// Error log delivery CLS configuration
 	ErrorLog *LogToCLSConfig `json:"ErrorLog,omitnil,omitempty" name:"ErrorLog"`
 
-	// Configurations of sending slow logs to CLS.
-	// Note: The return value may be null, indicating that no valid data can be obtained.
+	// Slow log delivery CLS configuration
 	SlowLog *LogToCLSConfig `json:"SlowLog,omitnil,omitempty" name:"SlowLog"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6526,14 +6962,24 @@ func (r *DescribeDBInstanceLogToCLSResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBInstanceRebootTimeRequestParams struct {
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
+	// Description: Multiple instance IDs allowed for query. json format as follows.
+	// [
+	//     "cdb-30z11v8s",
+	//     "cdb-93h11efg"
+	//   ]
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type DescribeDBInstanceRebootTimeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
+	// Description: Multiple instance IDs allowed for query. json format as follows.
+	// [
+	//     "cdb-30z11v8s",
+	//     "cdb-93h11efg"
+	//   ]
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -6589,111 +7035,109 @@ type DescribeDBInstancesRequestParams struct {
 	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Instance type. Value range: 1 (primary), 2 (disaster recovery), 3 (read-only).
+	// <p>Instance type. Valid values: 1 - Primary instance, 2 - Disaster recovery instance, 3 - Read-only instance.</p>
 	InstanceTypes []*uint64 `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
 
-	// Private IP address of the instance.
+	// <p>Private IP address of the instance.</p>
 	Vips []*string `json:"Vips,omitnil,omitempty" name:"Vips"`
 
-	// Instance status. Valid values: <br>`0` (creating) <br>`1` (running) <br>`4` (isolating) <br>`5` (isolated; the instance can be restored and started in the recycle bin)
+	// <p>Instance status. Valid values:<br>0 - Creating<br>1 - Running<br>4 - Isolation operation in progress<br>5 - Isolated (can be restored from the Recycle Bin)</p>
 	Status []*uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Offset. Default value: 0.
+	// <p>Offset. Default value is 0.</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results to be returned for a single request. Default value: 20. Maximum value: 2,000.
+	// <p>Number of items returned per request. Default value: 20. Maximum value: 2000.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Security group ID. When it is used as a filter, the `WithSecurityGroup` parameter should be set to 1.
+	// <p>Security group ID. When using security group ID as the filter condition, the WithSecurityGroup parameter needs to be specified as 1.</p>
 	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
-	// Payment type. Valid values: 0 - yearly/monthly subscription; 1 - bill by hour.
+	// <p>Payment type. Valid values: 0 - yearly/monthly subscription; 1 - bill by hour.</p>
 	PayTypes []*uint64 `json:"PayTypes,omitnil,omitempty" name:"PayTypes"`
 
-	// Instance name.
+	// <p>Instance name.</p>
 	InstanceNames []*string `json:"InstanceNames,omitnil,omitempty" name:"InstanceNames"`
 
-	// Instance task status. Valid values:<br>0 - no task;<br>1 - upgrading;<br>2 - importing data;<br>3 - enabling secondary nodes;<br>4 - enabling public network access;<br>5 - executing batch operations;<br>6 - rolling back;<br>7 - disabling public network access;<br>8 - changing the password;<br>9 - renaming the instance;<br>10 - restarting;<br>12 - migrating self-built databases;<br>13 - deleting databases and tables;<br>14 - synchronizing the creation of disaster recovery instances;<br>15 - pending upgrade switch;<br>16 - under upgrade switch;<br>17 - upgrade switch completed;<br>19 - parameter settings pending execution;<br>34 - in-place upgrade pending execution.
+	// <p>Instance task status, possible values:<br>0 - No tasks<br>1 - Upgrading<br>2 - Data import in progress<br>3 - Enabling Slave<br>4 - Enabling public network access<br>5 - Batch operation in progress<br>6 - Rolling back<br>7 - Disabling public network access<br>8 - Password change in progress<br>9 - Renaming instance<br>10 - Restarting<br>12 - Self-built migration in progress<br>13 - Deleting database table<br>14 - Disaster recovery instance creation sync in progress<br>15 - Upgrade pending switch<br>16 - Upgrade and switch in progress<br>17 - Switch completed<br>19 - Parameter setting pending execution<br>34 - Node in-place upgrade to be executed</p>
 	TaskStatus []*uint64 `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
-	// Version of the instance database engine. Value range: 5.1, 5.5, 5.6, 5.7.
+	// <p>Database engine version of the instance. Possible values: 5.1, 5.5, 5.6, and 5.7.</p>
 	EngineVersions []*string `json:"EngineVersions,omitnil,omitempty" name:"EngineVersions"`
 
-	// VPC ID.
+	// <p>VPC ID.</p>
 	VpcIds []*uint64 `json:"VpcIds,omitnil,omitempty" name:"VpcIds"`
 
-	// AZ ID.
+	// <p>Availability zone ID.</p>
 	ZoneIds []*uint64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// Subnet ID.
+	// <p>Subnet ID.</p>
 	SubnetIds []*uint64 `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
-	// Whether to lock disk write. Valid values: `0`(unlock), `1`(lock). Default value: 0.
+	// <p>Whether to set the lock flag. Available values: 0 - not lock, 1 - lock. Default is 0.</p>
 	CdbErrors []*int64 `json:"CdbErrors,omitnil,omitempty" name:"CdbErrors"`
 
-	// Sorting field of the query results. Valid values: "instanceId", "instanceName", "createTime", and "deadlineTime".
+	// <p>Sorting field of the returned result set. Currently supports: "instanceId", "instanceName", "createTime", and "deadlineTime".</p>
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Sorting method of the returned result set. Valid values: "ASC" - ascending order; "DESC" - descending order. The default value is "DESC".
+	// <p>Sorting method of the returned result set. Valid values: "ASC" - ascending order; "DESC" - descending order. The default is "DESC".</p>
 	OrderDirection *string `json:"OrderDirection,omitnil,omitempty" name:"OrderDirection"`
 
-	// Whether to use the security group ID as the filter condition.
-	// Note: 0 indicates no; 1 indicates yes.
+	// <p>Whether to use security group ID as the filter condition.<br>Description: 0 indicates no, 1 indicates yes.</p>
 	WithSecurityGroup *int64 `json:"WithSecurityGroup,omitnil,omitempty" name:"WithSecurityGroup"`
 
-	// Whether dedicated cluster details are included. Value range: 0 (not included), 1 (included)
+	// <p>Whether the exclusive cluster detail is included. Value range: 0 - not contained, 1 - contained.</p>
 	WithExCluster *int64 `json:"WithExCluster,omitnil,omitempty" name:"WithExCluster"`
 
-	// Exclusive cluster ID.
+	// <p>Dedicated cluster ID.</p>
 	ExClusterId *string `json:"ExClusterId,omitnil,omitempty" name:"ExClusterId"`
 
-	// Instance ID.
+	// <p>Instance ID.</p>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Initialization flag. Value range: 0 (not initialized), 1 (initialized).
+	// <p>Initialization flag. Valid values: 0 - uninitialized, 1 - initialized.</p>
 	InitFlag *int64 `json:"InitFlag,omitnil,omitempty" name:"InitFlag"`
 
-	// Whether instances corresponding to the disaster recovery relationship are included. Valid values: 0 (not included), 1 (included). Default value: 1. If a primary instance is pulled, the data of the disaster recovery relationship will be in the `DrInfo` field. If a disaster recovery instance is pulled, the data of the disaster recovery relationship will be in the `MasterInfo` field. The disaster recovery relationship contains only partial basic data. To get the detailed data, you need to call an API to pull it.
+	// <p>Whether the corresponding instance in the disaster recovery relationship is included. Valid values: 0 - excluding, 1 - included. Default value: 1. If pulling the primary instance, the data of the disaster recovery relationship is in the DrInfo field. If pulling the disaster recovery instance, the data of the disaster recovery relationship is in the MasterInfo field. The disaster recovery relationship only contains partial basic data. Detailed data must be pulled manually via the interface.</p>
 	WithDr *int64 `json:"WithDr,omitnil,omitempty" name:"WithDr"`
 
-	// Whether read-only instances are included. Valid values: 0 (not included), 1 (included). Default value: 1.
+	// <p>Whether it contains read-only instances. Valid values: 0 - does not include, 1 - includes. Default value is 1.</p>
 	WithRo *int64 `json:"WithRo,omitnil,omitempty" name:"WithRo"`
 
-	// Whether primary instances are included. Valid values: 0 (not included), 1 (included). Default value: 1.
+	// <p>Whether the primary instance is included. Valid values: 0 - does not include, 1 - includes. Default value is 1.</p>
 	WithMaster *int64 `json:"WithMaster,omitnil,omitempty" name:"WithMaster"`
 
-	// Placement group ID list.
+	// <p>Placement group ID list.</p>
 	DeployGroupIds []*string `json:"DeployGroupIds,omitnil,omitempty" name:"DeployGroupIds"`
 
-	// Whether to use the tag key as a filter condition
+	// <p>Filter by tag key.</p>
 	TagKeysForSearch []*string `json:"TagKeysForSearch,omitnil,omitempty" name:"TagKeysForSearch"`
 
-	// Financial cage IDs.
+	// <p>Financial Enclosure ID.</p>
 	CageIds []*string `json:"CageIds,omitnil,omitempty" name:"CageIds"`
 
-	// Tag value
+	// <p>Tag value</p>
 	TagValues []*string `json:"TagValues,omitnil,omitempty" name:"TagValues"`
 
-	// VPC character vpcId
+	// <p>Character type VPC ID</p>
 	UniqueVpcIds []*string `json:"UniqueVpcIds,omitnil,omitempty" name:"UniqueVpcIds"`
 
-	// VPC character subnetId
+	// <p>VPC character type subnetId</p>
 	UniqSubnetIds []*string `json:"UniqSubnetIds,omitnil,omitempty" name:"UniqSubnetIds"`
 
-	// Tag key value.
-	// Note that tags cannot be queried for instances being created.
+	// <p>Tag key value<br>Please note, tags of the instance being created are unable to query.</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Database proxy IP
+	// <p>Database proxy IP.</p>
 	ProxyVips []*string `json:"ProxyVips,omitnil,omitempty" name:"ProxyVips"`
 
-	// Database proxy ID
+	// <p>Database proxy ID.</p>
 	ProxyIds []*string `json:"ProxyIds,omitnil,omitempty" name:"ProxyIds"`
 
-	// Database engine type. Valid values: InnoDB; RocksDB.
+	// <p>Database engine type. Valid values: InnoDB, RocksDB.</p>
 	EngineTypes []*string `json:"EngineTypes,omitnil,omitempty" name:"EngineTypes"`
 
-	// Whether to obtain the Cluster Edition instance node information. Valid values: true or false. The default value is false.
+	// <p>Whether to obtain the Cluster Edition instance node information. Valid values: true or false. The default value is false.</p>
 	QueryClusterInfo *bool `json:"QueryClusterInfo,omitnil,omitempty" name:"QueryClusterInfo"`
 }
 
@@ -6703,111 +7147,109 @@ type DescribeDBInstancesRequest struct {
 	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Instance type. Value range: 1 (primary), 2 (disaster recovery), 3 (read-only).
+	// <p>Instance type. Valid values: 1 - Primary instance, 2 - Disaster recovery instance, 3 - Read-only instance.</p>
 	InstanceTypes []*uint64 `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
 
-	// Private IP address of the instance.
+	// <p>Private IP address of the instance.</p>
 	Vips []*string `json:"Vips,omitnil,omitempty" name:"Vips"`
 
-	// Instance status. Valid values: <br>`0` (creating) <br>`1` (running) <br>`4` (isolating) <br>`5` (isolated; the instance can be restored and started in the recycle bin)
+	// <p>Instance status. Valid values:<br>0 - Creating<br>1 - Running<br>4 - Isolation operation in progress<br>5 - Isolated (can be restored from the Recycle Bin)</p>
 	Status []*uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Offset. Default value: 0.
+	// <p>Offset. Default value is 0.</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results to be returned for a single request. Default value: 20. Maximum value: 2,000.
+	// <p>Number of items returned per request. Default value: 20. Maximum value: 2000.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Security group ID. When it is used as a filter, the `WithSecurityGroup` parameter should be set to 1.
+	// <p>Security group ID. When using security group ID as the filter condition, the WithSecurityGroup parameter needs to be specified as 1.</p>
 	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
-	// Payment type. Valid values: 0 - yearly/monthly subscription; 1 - bill by hour.
+	// <p>Payment type. Valid values: 0 - yearly/monthly subscription; 1 - bill by hour.</p>
 	PayTypes []*uint64 `json:"PayTypes,omitnil,omitempty" name:"PayTypes"`
 
-	// Instance name.
+	// <p>Instance name.</p>
 	InstanceNames []*string `json:"InstanceNames,omitnil,omitempty" name:"InstanceNames"`
 
-	// Instance task status. Valid values:<br>0 - no task;<br>1 - upgrading;<br>2 - importing data;<br>3 - enabling secondary nodes;<br>4 - enabling public network access;<br>5 - executing batch operations;<br>6 - rolling back;<br>7 - disabling public network access;<br>8 - changing the password;<br>9 - renaming the instance;<br>10 - restarting;<br>12 - migrating self-built databases;<br>13 - deleting databases and tables;<br>14 - synchronizing the creation of disaster recovery instances;<br>15 - pending upgrade switch;<br>16 - under upgrade switch;<br>17 - upgrade switch completed;<br>19 - parameter settings pending execution;<br>34 - in-place upgrade pending execution.
+	// <p>Instance task status, possible values:<br>0 - No tasks<br>1 - Upgrading<br>2 - Data import in progress<br>3 - Enabling Slave<br>4 - Enabling public network access<br>5 - Batch operation in progress<br>6 - Rolling back<br>7 - Disabling public network access<br>8 - Password change in progress<br>9 - Renaming instance<br>10 - Restarting<br>12 - Self-built migration in progress<br>13 - Deleting database table<br>14 - Disaster recovery instance creation sync in progress<br>15 - Upgrade pending switch<br>16 - Upgrade and switch in progress<br>17 - Switch completed<br>19 - Parameter setting pending execution<br>34 - Node in-place upgrade to be executed</p>
 	TaskStatus []*uint64 `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
-	// Version of the instance database engine. Value range: 5.1, 5.5, 5.6, 5.7.
+	// <p>Database engine version of the instance. Possible values: 5.1, 5.5, 5.6, and 5.7.</p>
 	EngineVersions []*string `json:"EngineVersions,omitnil,omitempty" name:"EngineVersions"`
 
-	// VPC ID.
+	// <p>VPC ID.</p>
 	VpcIds []*uint64 `json:"VpcIds,omitnil,omitempty" name:"VpcIds"`
 
-	// AZ ID.
+	// <p>Availability zone ID.</p>
 	ZoneIds []*uint64 `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// Subnet ID.
+	// <p>Subnet ID.</p>
 	SubnetIds []*uint64 `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
-	// Whether to lock disk write. Valid values: `0`(unlock), `1`(lock). Default value: 0.
+	// <p>Whether to set the lock flag. Available values: 0 - not lock, 1 - lock. Default is 0.</p>
 	CdbErrors []*int64 `json:"CdbErrors,omitnil,omitempty" name:"CdbErrors"`
 
-	// Sorting field of the query results. Valid values: "instanceId", "instanceName", "createTime", and "deadlineTime".
+	// <p>Sorting field of the returned result set. Currently supports: "instanceId", "instanceName", "createTime", and "deadlineTime".</p>
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Sorting method of the returned result set. Valid values: "ASC" - ascending order; "DESC" - descending order. The default value is "DESC".
+	// <p>Sorting method of the returned result set. Valid values: "ASC" - ascending order; "DESC" - descending order. The default is "DESC".</p>
 	OrderDirection *string `json:"OrderDirection,omitnil,omitempty" name:"OrderDirection"`
 
-	// Whether to use the security group ID as the filter condition.
-	// Note: 0 indicates no; 1 indicates yes.
+	// <p>Whether to use security group ID as the filter condition.<br>Description: 0 indicates no, 1 indicates yes.</p>
 	WithSecurityGroup *int64 `json:"WithSecurityGroup,omitnil,omitempty" name:"WithSecurityGroup"`
 
-	// Whether dedicated cluster details are included. Value range: 0 (not included), 1 (included)
+	// <p>Whether the exclusive cluster detail is included. Value range: 0 - not contained, 1 - contained.</p>
 	WithExCluster *int64 `json:"WithExCluster,omitnil,omitempty" name:"WithExCluster"`
 
-	// Exclusive cluster ID.
+	// <p>Dedicated cluster ID.</p>
 	ExClusterId *string `json:"ExClusterId,omitnil,omitempty" name:"ExClusterId"`
 
-	// Instance ID.
+	// <p>Instance ID.</p>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Initialization flag. Value range: 0 (not initialized), 1 (initialized).
+	// <p>Initialization flag. Valid values: 0 - uninitialized, 1 - initialized.</p>
 	InitFlag *int64 `json:"InitFlag,omitnil,omitempty" name:"InitFlag"`
 
-	// Whether instances corresponding to the disaster recovery relationship are included. Valid values: 0 (not included), 1 (included). Default value: 1. If a primary instance is pulled, the data of the disaster recovery relationship will be in the `DrInfo` field. If a disaster recovery instance is pulled, the data of the disaster recovery relationship will be in the `MasterInfo` field. The disaster recovery relationship contains only partial basic data. To get the detailed data, you need to call an API to pull it.
+	// <p>Whether the corresponding instance in the disaster recovery relationship is included. Valid values: 0 - excluding, 1 - included. Default value: 1. If pulling the primary instance, the data of the disaster recovery relationship is in the DrInfo field. If pulling the disaster recovery instance, the data of the disaster recovery relationship is in the MasterInfo field. The disaster recovery relationship only contains partial basic data. Detailed data must be pulled manually via the interface.</p>
 	WithDr *int64 `json:"WithDr,omitnil,omitempty" name:"WithDr"`
 
-	// Whether read-only instances are included. Valid values: 0 (not included), 1 (included). Default value: 1.
+	// <p>Whether it contains read-only instances. Valid values: 0 - does not include, 1 - includes. Default value is 1.</p>
 	WithRo *int64 `json:"WithRo,omitnil,omitempty" name:"WithRo"`
 
-	// Whether primary instances are included. Valid values: 0 (not included), 1 (included). Default value: 1.
+	// <p>Whether the primary instance is included. Valid values: 0 - does not include, 1 - includes. Default value is 1.</p>
 	WithMaster *int64 `json:"WithMaster,omitnil,omitempty" name:"WithMaster"`
 
-	// Placement group ID list.
+	// <p>Placement group ID list.</p>
 	DeployGroupIds []*string `json:"DeployGroupIds,omitnil,omitempty" name:"DeployGroupIds"`
 
-	// Whether to use the tag key as a filter condition
+	// <p>Filter by tag key.</p>
 	TagKeysForSearch []*string `json:"TagKeysForSearch,omitnil,omitempty" name:"TagKeysForSearch"`
 
-	// Financial cage IDs.
+	// <p>Financial Enclosure ID.</p>
 	CageIds []*string `json:"CageIds,omitnil,omitempty" name:"CageIds"`
 
-	// Tag value
+	// <p>Tag value</p>
 	TagValues []*string `json:"TagValues,omitnil,omitempty" name:"TagValues"`
 
-	// VPC character vpcId
+	// <p>Character type VPC ID</p>
 	UniqueVpcIds []*string `json:"UniqueVpcIds,omitnil,omitempty" name:"UniqueVpcIds"`
 
-	// VPC character subnetId
+	// <p>VPC character type subnetId</p>
 	UniqSubnetIds []*string `json:"UniqSubnetIds,omitnil,omitempty" name:"UniqSubnetIds"`
 
-	// Tag key value.
-	// Note that tags cannot be queried for instances being created.
+	// <p>Tag key value<br>Please note, tags of the instance being created are unable to query.</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Database proxy IP
+	// <p>Database proxy IP.</p>
 	ProxyVips []*string `json:"ProxyVips,omitnil,omitempty" name:"ProxyVips"`
 
-	// Database proxy ID
+	// <p>Database proxy ID.</p>
 	ProxyIds []*string `json:"ProxyIds,omitnil,omitempty" name:"ProxyIds"`
 
-	// Database engine type. Valid values: InnoDB; RocksDB.
+	// <p>Database engine type. Valid values: InnoDB, RocksDB.</p>
 	EngineTypes []*string `json:"EngineTypes,omitnil,omitempty" name:"EngineTypes"`
 
-	// Whether to obtain the Cluster Edition instance node information. Valid values: true or false. The default value is false.
+	// <p>Whether to obtain the Cluster Edition instance node information. Valid values: true or false. The default value is false.</p>
 	QueryClusterInfo *bool `json:"QueryClusterInfo,omitnil,omitempty" name:"QueryClusterInfo"`
 }
 
@@ -6867,10 +7309,10 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBInstancesResponseParams struct {
-	// Number of eligible instances.
+	// <p>Total number of eligible instances.</p>
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// List of instance details
+	// <p>Instance detail list.</p>
 	Items []*InstanceInfo `json:"Items,omitnil,omitempty" name:"Items"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6895,92 +7337,92 @@ func (r *DescribeDBInstancesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBPriceRequestParams struct {
-	// Instance validity period in months. Value range: 1-36. This field is invalid when querying the prices of pay-as-you-go instances.
+	// <p>Instance duration, in months, minimum value 1, maximum value 36. This field is invalid when querying the pay-as-you-go rate.</p>
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// AZ information in the format of "ap-guangzhou-3". You can use the <a href="https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1">DescribeDBZoneConfig</a> API to query the configurable values. This parameter is required when `InstanceId` is empty.
+	// <p>AZ information, in the format of "ap-guangzhou-2". For available values, query the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">DescribeDBZoneConfig</a> api. This parameter is required when InstanceId is empty.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Number of instances. Value range: 1-100. Default value: 1. This parameter is required when `InstanceId` is empty.
+	// <p>Instance count. Default value is 1, minimum value 1, maximum value 100. This parameter is required when InstanceId is empty.</p>
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// Instance memory size, unit: MB. This parameter is required when InstanceId is empty. To ensure the input value is valid, please use the [obtain the purchasable specifications of cloud databases](https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1) API to get the saleable instance memory size range.
+	// <p>Instance memory size, measurement unit: MB. Required when InstanceId is empty. To ensure the input value is valid, please use the <a href="https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to obtain the saleable instance memory size range.</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size, unit: GB. This parameter is required when InstanceId is empty. To ensure the input value is valid, please use the [obtain the purchasable specifications of cloud databases](https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1) API to get the saleable disk size range.
+	// <p>Instance disk size, unit: GB. This parameter is required when InstanceId is empty. To ensure the input value is valid, please use the <a href="https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the saleable disk size range.</p>
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// Instance type. Valid values: `master` (source instance), `dr` (disaster recovery instance), `ro` (read-only instance). Default value: `master`. This parameter is required when `InstanceId` is empty.
+	// <p>Instance type, defaults to master. Supported values include: master - primary instance, ro - read-only instance, dr - disaster recovery instance. Required when InstanceId is empty.</p>
 	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 
-	// Billing mode. Valid values: `PRE_PAID` (yearly/monthly subscribed), `HOUR_PAID` (pay-as-you-go). This parameter is required when `InstanceId` is empty.
+	// <p>Payment type. Supported values: PRE_PAID (yearly/monthly subscription) and HOUR_PAID (pay-as-you-go). This parameter is required when InstanceId is empty.</p>
 	PayType *string `json:"PayType,omitnil,omitempty" name:"PayType"`
 
-	// Data replication mode. Valid values: `0` (async), 1 (semi-sync), `2` (strong sync). Default value: `0`.
+	// <p>Data replication method, defaults to 0. Supported values include: 0 - means async replication, 1 - means semi-sync replication, 2 - means strong sync replication.</p>
 	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
 
-	// Instance isolation type. Supported values include: "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC_V2" - single-node instance of cloud disk edition, "CLOUD_NATIVE_CLUSTER" - cluster version standard type, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - cluster version enhanced. Default to general-purpose instance if not specified.
+	// <p>Instance isolation type.</p><p>Enumeration value:</p><ul><li>UNIVERSAL: General-purpose instance</li><li>EXCLUSIVE: Dedicated instance</li><li>CLOUD_NATIVE_CLUSTER: Standard type of cloud disk edition</li><li>CLOUD_NATIVE_CLUSTER_EXCLUSIVE: Enhanced type of cloud disk edition</li><li>CLOUD_NATIVE_CLUSTER_ULTRA: Flagship type of cloud disk edition</li></ul><p>Default value: UNIVERSAL</p><p>If needed to query the price of a single-node instance of cloud disk edition, set up this parameter as CLOUD_NATIVE_CLUSTER and specify parameter InstanceNodes as 1.</p>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// The number of the instance. Valid values: `1` (for read-only and basic instances), `2` (for other source instances). To query the price of a three-node instance, set this value to `3`.
+	// <p>Number of instance nodes.<br>1. When querying the price of a read-only instance or a single-node instance, the value of this field is 1.<br>2. When querying the price of a dual-node instance, the value of this field is 2.<br>3. When querying the price of a three-node instance, the value of this field is 3.<br>4. When querying the price of a cloud disk edition instance, the value range of this field can be 2 - 6. A value of 2 means the cloud disk edition instance has 1 read-write node + 1 read-only node. A value of 6 means the cloud disk edition instance has 1 read-write node + 5 read-only nodes. For other values (3 - 5), the rule is 1 read-write node + (value - 1) read-only nodes.</p>
 	InstanceNodes *int64 `json:"InstanceNodes,omitnil,omitempty" name:"InstanceNodes"`
 
-	// CPU core count of the price-queried instance. To ensure that the CPU value to be passed in is valid, use the [DescribeDBZoneConfig](https://www.tencentcloud.com/document/product/236/17229) API to query the number of purchasable cores. If this value is not specified, a default value based on memory size will be set.
+	// <p>The number of CPU cores of the price-query instance, measurement unit: core. To ensure the validity of the input CPU value, please use the <a href="https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API acquisition to get the saleable number of cores. When this value is not specified, a default value will be padded based on the Memory size.</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Instance ID for querying renewal price. To query the renewal price of the instance, pass in the values of `InstanceId` and `Period`.
+	// <p>Query the ID of the instance to be renewed. If needed, fill in InstanceId and Period to query instance renewal price.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Tiered pay-as-you-go pricing, which is valid only when `PayType` is set to `HOUR_PAID`. Valid values: `1`, `2`, `3`. For more information on tiered duration, visit https://intl.cloud.tencent.com/document/product/236/18335.?from_cn_redirect=1
+	// <p>Usage-based billing tier. Valid only when PayType=HOUR_PAID. Supported values include: 1, 2, 3. For step duration, see https://www.tencentcloud.com/document/product/236/18335.?from_cn_redirect=1</p>
 	Ladder *uint64 `json:"Ladder,omitnil,omitempty" name:"Ladder"`
 
-	// Disk Type. Specify this parameter when querying the price of a cluster edition or single-node instance of cloud disk edition. Supported values include "CLOUD_SSD" - SSD cloud disk, "CLOUD_HSSD" - enhanced SSD cloud disk. Default is SSD cloud disk.
+	// <p>Disk Type. Specify this parameter when querying the price of CLOUD disk edition or single-node instance of CLOUD disk edition. Default value: SSD CLOUD Block Storage.<br>Supported values include:<br>"CLOUD_SSD" - SSD CLOUD Block Storage.<br>"CLOUD_HSSD" - Enhanced SSD CLOUD Disk.<br>"CLOUD_PREMIUM" - High-performance CLOUD Block Storage.</p>
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 }
 
 type DescribeDBPriceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance validity period in months. Value range: 1-36. This field is invalid when querying the prices of pay-as-you-go instances.
+	// <p>Instance duration, in months, minimum value 1, maximum value 36. This field is invalid when querying the pay-as-you-go rate.</p>
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// AZ information in the format of "ap-guangzhou-3". You can use the <a href="https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1">DescribeDBZoneConfig</a> API to query the configurable values. This parameter is required when `InstanceId` is empty.
+	// <p>AZ information, in the format of "ap-guangzhou-2". For available values, query the <a href="https://www.tencentcloud.com/document/api/236/17229?from_cn_redirect=1">DescribeDBZoneConfig</a> api. This parameter is required when InstanceId is empty.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Number of instances. Value range: 1-100. Default value: 1. This parameter is required when `InstanceId` is empty.
+	// <p>Instance count. Default value is 1, minimum value 1, maximum value 100. This parameter is required when InstanceId is empty.</p>
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// Instance memory size, unit: MB. This parameter is required when InstanceId is empty. To ensure the input value is valid, please use the [obtain the purchasable specifications of cloud databases](https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1) API to get the saleable instance memory size range.
+	// <p>Instance memory size, measurement unit: MB. Required when InstanceId is empty. To ensure the input value is valid, please use the <a href="https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to obtain the saleable instance memory size range.</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance disk size, unit: GB. This parameter is required when InstanceId is empty. To ensure the input value is valid, please use the [obtain the purchasable specifications of cloud databases](https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1) API to get the saleable disk size range.
+	// <p>Instance disk size, unit: GB. This parameter is required when InstanceId is empty. To ensure the input value is valid, please use the <a href="https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the saleable disk size range.</p>
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// Instance type. Valid values: `master` (source instance), `dr` (disaster recovery instance), `ro` (read-only instance). Default value: `master`. This parameter is required when `InstanceId` is empty.
+	// <p>Instance type, defaults to master. Supported values include: master - primary instance, ro - read-only instance, dr - disaster recovery instance. Required when InstanceId is empty.</p>
 	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 
-	// Billing mode. Valid values: `PRE_PAID` (yearly/monthly subscribed), `HOUR_PAID` (pay-as-you-go). This parameter is required when `InstanceId` is empty.
+	// <p>Payment type. Supported values: PRE_PAID (yearly/monthly subscription) and HOUR_PAID (pay-as-you-go). This parameter is required when InstanceId is empty.</p>
 	PayType *string `json:"PayType,omitnil,omitempty" name:"PayType"`
 
-	// Data replication mode. Valid values: `0` (async), 1 (semi-sync), `2` (strong sync). Default value: `0`.
+	// <p>Data replication method, defaults to 0. Supported values include: 0 - means async replication, 1 - means semi-sync replication, 2 - means strong sync replication.</p>
 	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
 
-	// Instance isolation type. Supported values include: "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC_V2" - single-node instance of cloud disk edition, "CLOUD_NATIVE_CLUSTER" - cluster version standard type, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - cluster version enhanced. Default to general-purpose instance if not specified.
+	// <p>Instance isolation type.</p><p>Enumeration value:</p><ul><li>UNIVERSAL: General-purpose instance</li><li>EXCLUSIVE: Dedicated instance</li><li>CLOUD_NATIVE_CLUSTER: Standard type of cloud disk edition</li><li>CLOUD_NATIVE_CLUSTER_EXCLUSIVE: Enhanced type of cloud disk edition</li><li>CLOUD_NATIVE_CLUSTER_ULTRA: Flagship type of cloud disk edition</li></ul><p>Default value: UNIVERSAL</p><p>If needed to query the price of a single-node instance of cloud disk edition, set up this parameter as CLOUD_NATIVE_CLUSTER and specify parameter InstanceNodes as 1.</p>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// The number of the instance. Valid values: `1` (for read-only and basic instances), `2` (for other source instances). To query the price of a three-node instance, set this value to `3`.
+	// <p>Number of instance nodes.<br>1. When querying the price of a read-only instance or a single-node instance, the value of this field is 1.<br>2. When querying the price of a dual-node instance, the value of this field is 2.<br>3. When querying the price of a three-node instance, the value of this field is 3.<br>4. When querying the price of a cloud disk edition instance, the value range of this field can be 2 - 6. A value of 2 means the cloud disk edition instance has 1 read-write node + 1 read-only node. A value of 6 means the cloud disk edition instance has 1 read-write node + 5 read-only nodes. For other values (3 - 5), the rule is 1 read-write node + (value - 1) read-only nodes.</p>
 	InstanceNodes *int64 `json:"InstanceNodes,omitnil,omitempty" name:"InstanceNodes"`
 
-	// CPU core count of the price-queried instance. To ensure that the CPU value to be passed in is valid, use the [DescribeDBZoneConfig](https://www.tencentcloud.com/document/product/236/17229) API to query the number of purchasable cores. If this value is not specified, a default value based on memory size will be set.
+	// <p>The number of CPU cores of the price-query instance, measurement unit: core. To ensure the validity of the input CPU value, please use the <a href="https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API acquisition to get the saleable number of cores. When this value is not specified, a default value will be padded based on the Memory size.</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Instance ID for querying renewal price. To query the renewal price of the instance, pass in the values of `InstanceId` and `Period`.
+	// <p>Query the ID of the instance to be renewed. If needed, fill in InstanceId and Period to query instance renewal price.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Tiered pay-as-you-go pricing, which is valid only when `PayType` is set to `HOUR_PAID`. Valid values: `1`, `2`, `3`. For more information on tiered duration, visit https://intl.cloud.tencent.com/document/product/236/18335.?from_cn_redirect=1
+	// <p>Usage-based billing tier. Valid only when PayType=HOUR_PAID. Supported values include: 1, 2, 3. For step duration, see https://www.tencentcloud.com/document/product/236/18335.?from_cn_redirect=1</p>
 	Ladder *uint64 `json:"Ladder,omitnil,omitempty" name:"Ladder"`
 
-	// Disk Type. Specify this parameter when querying the price of a cluster edition or single-node instance of cloud disk edition. Supported values include "CLOUD_SSD" - SSD cloud disk, "CLOUD_HSSD" - enhanced SSD cloud disk. Default is SSD cloud disk.
+	// <p>Disk Type. Specify this parameter when querying the price of CLOUD disk edition or single-node instance of CLOUD disk edition. Default value: SSD CLOUD Block Storage.<br>Supported values include:<br>"CLOUD_SSD" - SSD CLOUD Block Storage.<br>"CLOUD_HSSD" - Enhanced SSD CLOUD Disk.<br>"CLOUD_PREMIUM" - High-performance CLOUD Block Storage.</p>
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 }
 
@@ -7018,13 +7460,13 @@ func (r *DescribeDBPriceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBPriceResponseParams struct {
-	// Instance price. If `Currency` is set to `CNY`, the unit will be 0.01 CNY. If `Currency` is set to `USD`, the unit will be US Cent.
+	// <p>Instance price, unit: cent.</p>
 	Price *int64 `json:"Price,omitnil,omitempty" name:"Price"`
 
-	// Original price of the instance. If `Currency` is set to `CNY`, the unit will be 0.01 CNY. If `Currency` is set to `USD`, the unit will be US Cent.
+	// <p>Original price of instance. Measurement unit: cent.</p>
 	OriginalPrice *int64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
-	// Currency: `CNY`, `USD`.
+	// <p>Currency unit. CNY - RMB, USD - USD.</p>
 	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -7054,6 +7496,9 @@ type DescribeDBSecurityGroupsRequestParams struct {
 
 	// This parameter takes effect only when the ID of a read-only instance is passed in. If the parameter is set to `False` or left empty, the security groups bound with the RO groups of the read-only instance can only be queried. If it is set to `True`, the security groups can be modified.
 	ForReadonlyInstance *bool `json:"ForReadonlyInstance,omitnil,omitempty" name:"ForReadonlyInstance"`
+
+	// When updating the read-only group of a cluster edition instance, specify the instance id in InstanceId and this parameter to indicate the operation is for the read-only group. If you perform the operation on the read-write node, this parameter is not required.
+	OpResourceId *string `json:"OpResourceId,omitnil,omitempty" name:"OpResourceId"`
 }
 
 type DescribeDBSecurityGroupsRequest struct {
@@ -7064,6 +7509,9 @@ type DescribeDBSecurityGroupsRequest struct {
 
 	// This parameter takes effect only when the ID of a read-only instance is passed in. If the parameter is set to `False` or left empty, the security groups bound with the RO groups of the read-only instance can only be queried. If it is set to `True`, the security groups can be modified.
 	ForReadonlyInstance *bool `json:"ForReadonlyInstance,omitnil,omitempty" name:"ForReadonlyInstance"`
+
+	// When updating the read-only group of a cluster edition instance, specify the instance id in InstanceId and this parameter to indicate the operation is for the read-only group. If you perform the operation on the read-write node, this parameter is not required.
+	OpResourceId *string `json:"OpResourceId,omitnil,omitempty" name:"OpResourceId"`
 }
 
 func (r *DescribeDBSecurityGroupsRequest) ToJsonString() string {
@@ -7080,6 +7528,7 @@ func (r *DescribeDBSecurityGroupsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	delete(f, "ForReadonlyInstance")
+	delete(f, "OpResourceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBSecurityGroupsRequest has unknown keys!", "")
 	}
@@ -7119,7 +7568,7 @@ type DescribeDBSwitchRecordsRequestParams struct {
 	// Pagination offset.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of entries per page. Value range: 1-2,000. Default value: 50.
+	// Page size. Default value: 50. Minimum value: 1. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -7132,7 +7581,7 @@ type DescribeDBSwitchRecordsRequest struct {
 	// Pagination offset.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of entries per page. Value range: 1-2,000. Default value: 50.
+	// Page size. Default value: 50. Minimum value: 1. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -7187,14 +7636,14 @@ func (r *DescribeDBSwitchRecordsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDataBackupOverviewRequestParams struct {
-	// TencentDB product type to be queried. Currently, only `mysql` is supported.
+	// The cloud database product type for which you need to query the data backup overview. Value is: mysql refers to two-node/three-node high-availability instances, mysql-basic refers to single-node (cloud disk) instances, mysql-cluster refers to cloud disk edition instances.
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 }
 
 type DescribeDataBackupOverviewRequest struct {
 	*tchttp.BaseRequest
 	
-	// TencentDB product type to be queried. Currently, only `mysql` is supported.
+	// The cloud database product type for which you need to query the data backup overview. Value is: mysql refers to two-node/three-node high-availability instances, mysql-basic refers to single-node (cloud disk) instances, mysql-cluster refers to cloud disk edition instances.
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 }
 
@@ -7283,7 +7732,7 @@ type DescribeDatabasesRequestParams struct {
 	// Offset. Minimum value: 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results to be returned for a single request. Value range: 1-100. Maximum value: 20.
+	// Number of entries per request. Default value: 20. Minimum value: 1. Maximum value: 5000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Regular expression for matching database names.
@@ -7299,7 +7748,7 @@ type DescribeDatabasesRequest struct {
 	// Offset. Minimum value: 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results to be returned for a single request. Value range: 1-100. Maximum value: 20.
+	// Number of entries per request. Default value: 20. Minimum value: 1. Maximum value: 5000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Regular expression for matching database names.
@@ -7361,26 +7810,28 @@ func (r *DescribeDatabasesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDefaultParamsRequestParams struct {
-	// Engine version. Currently, the supported versions are `5.1`, `5.5`, `5.6`, `5.7`, and `8.0`.
+	// Engine version. Currently supports ["5.1", "5.5", "5.6", "5.7", "8.0"].
+	// Description: Engine version is required.
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
-	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+	// Default parameter template type. Supported values include "HIGH_STABILITY" - high-stability template, "HIGH_PERFORMANCE" - high-performance template. Default value: HIGH_STABILITY.
 	TemplateType *string `json:"TemplateType,omitnil,omitempty" name:"TemplateType"`
 
-	// Parameter template engine. Default value: `InnoDB`.
+	// Parameter template engine, default value: InnoDB, valid values: InnoDB, RocksDB.
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 }
 
 type DescribeDefaultParamsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Engine version. Currently, the supported versions are `5.1`, `5.5`, `5.6`, `5.7`, and `8.0`.
+	// Engine version. Currently supports ["5.1", "5.5", "5.6", "5.7", "8.0"].
+	// Description: Engine version is required.
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
-	// Type of the default parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
+	// Default parameter template type. Supported values include "HIGH_STABILITY" - high-stability template, "HIGH_PERFORMANCE" - high-performance template. Default value: HIGH_STABILITY.
 	TemplateType *string `json:"TemplateType,omitnil,omitempty" name:"TemplateType"`
 
-	// Parameter template engine. Default value: `InnoDB`.
+	// Parameter template engine, default value: InnoDB, valid values: InnoDB, RocksDB.
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 }
 
@@ -7508,16 +7959,16 @@ func (r *DescribeDeviceMonitorInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeErrorLogDataRequestParams struct {
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Start timestamp, such as 1585142640.
+	// Start timestamp. For example, 1585142640, in seconds.
 	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End timestamp, such as 1585142640.
+	// End timestamp. For example, 1585142640, in seconds.
 	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// List of keywords to match. Up to 15 keywords are supported.
+	// Keyword list to match, supports up to 15 keywords with fuzzy matching support.
 	KeyWords []*string `json:"KeyWords,omitnil,omitempty" name:"KeyWords"`
 
 	// The number of results per page in paginated queries. Default value: 100. Maximum value: 400.
@@ -7533,16 +7984,16 @@ type DescribeErrorLogDataRequestParams struct {
 type DescribeErrorLogDataRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Start timestamp, such as 1585142640.
+	// Start timestamp. For example, 1585142640, in seconds.
 	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End timestamp, such as 1585142640.
+	// End timestamp. For example, 1585142640, in seconds.
 	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// List of keywords to match. Up to 15 keywords are supported.
+	// Keyword list to match, supports up to 15 keywords with fuzzy matching support.
 	KeyWords []*string `json:"KeyWords,omitnil,omitempty" name:"KeyWords"`
 
 	// The number of results per page in paginated queries. Default value: 100. Maximum value: 400.
@@ -7585,8 +8036,7 @@ type DescribeErrorLogDataResponseParams struct {
 	// Number of eligible entries.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Returned result.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Returned records.
 	Items []*ErrlogItem `json:"Items,omitnil,omitempty" name:"Items"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -7610,6 +8060,122 @@ func (r *DescribeErrorLogDataResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeInstanceAlarmEventsRequestParams struct {
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Event query range start time, closed interval.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time of the event query range, closed interval.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Event name. Outofmemory - Memory OOM (status event); Switch - primary-secondary switch (status event); Roremove - read-only instance removal (status event); MemoryUsedHigh - high memory utilization (status event); CPUExpansion - CPU performance scale-out (stateless event); CPUExpansionFailed - CPU performance scale-out failed (stateless event); CPUContraction - CPU performance scale-in (stateless event); Restart - instance restart (status event); ServerFailureNodeMigration - ServerFailureNodeMigration (status event); PlannedSwitch - planned active/standby switch (stateless event); OverusedReadonlySet - instance will be locked (stateless event); OverusedReadWriteSet - instance unlock (stateless event).
+	EventName []*string `json:"EventName,omitnil,omitempty" name:"EventName"`
+
+	// Event status. "1" - Event; "0" - Recovery event; "-" - Stateless event.
+	EventStatus *string `json:"EventStatus,omitnil,omitempty" name:"EventStatus"`
+
+	// Sorting method. Sort by event occurrence. "DESC" - inverted; "ASC" - in order. Default is inverted.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Number of displayed events. Default is 100, maximum is 200.
+	Limit *string `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *string `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Node ID.
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+}
+
+type DescribeInstanceAlarmEventsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Event query range start time, closed interval.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time of the event query range, closed interval.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Event name. Outofmemory - Memory OOM (status event); Switch - primary-secondary switch (status event); Roremove - read-only instance removal (status event); MemoryUsedHigh - high memory utilization (status event); CPUExpansion - CPU performance scale-out (stateless event); CPUExpansionFailed - CPU performance scale-out failed (stateless event); CPUContraction - CPU performance scale-in (stateless event); Restart - instance restart (status event); ServerFailureNodeMigration - ServerFailureNodeMigration (status event); PlannedSwitch - planned active/standby switch (stateless event); OverusedReadonlySet - instance will be locked (stateless event); OverusedReadWriteSet - instance unlock (stateless event).
+	EventName []*string `json:"EventName,omitnil,omitempty" name:"EventName"`
+
+	// Event status. "1" - Event; "0" - Recovery event; "-" - Stateless event.
+	EventStatus *string `json:"EventStatus,omitnil,omitempty" name:"EventStatus"`
+
+	// Sorting method. Sort by event occurrence. "DESC" - inverted; "ASC" - in order. Default is inverted.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Number of displayed events. Default is 100, maximum is 200.
+	Limit *string `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset.
+	Offset *string `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Node ID.
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+}
+
+func (r *DescribeInstanceAlarmEventsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceAlarmEventsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "EventName")
+	delete(f, "EventStatus")
+	delete(f, "Order")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "NodeId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceAlarmEventsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeInstanceAlarmEventsResponseParams struct {
+	// Number of events.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Event information. Items is null when info is not found.
+	Items []*InstEventInfo `json:"Items,omitnil,omitempty" name:"Items"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeInstanceAlarmEventsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeInstanceAlarmEventsResponseParams `json:"Response"`
+}
+
+func (r *DescribeInstanceAlarmEventsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceAlarmEventsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeInstanceParamRecordsRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -7617,7 +8183,7 @@ type DescribeInstanceParamRecordsRequestParams struct {
 	// Pagination offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of entries per page. Default value: 20.
+	// Page size. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -7630,7 +8196,7 @@ type DescribeInstanceParamRecordsRequest struct {
 	// Pagination offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of entries per page. Default value: 20.
+	// Page size. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -7744,6 +8310,286 @@ func (r *DescribeInstanceParamsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeInstancePasswordComplexityRequestParams struct {
+	// Instance ID. 
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type DescribeInstancePasswordComplexityRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. 
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *DescribeInstancePasswordComplexityRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstancePasswordComplexityRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancePasswordComplexityRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeInstancePasswordComplexityResponseParams struct {
+	// Total number of password complexity related parameters
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Password complexity parameter details. The policy value ranges from "" to "LOW" or "MEDIUM". Empty or LOW means password complexity is off. MEDIUM means password complexity is on. When the policy parameter value is MEDIUM, the following parameters take effect. length: value ranges from 8 to 64, means the minimum number of characters. mixed_case_count: value ranges from 1 to 16, means the minimum count of uppercase and lowercase letters. number_count: value ranges from 1 to 16, means the minimum count of numeric characters. special_char_count: value ranges from 1 to 16, means the minimum count of special characters.
+	Items []*ParameterDetail `json:"Items,omitnil,omitempty" name:"Items"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeInstancePasswordComplexityResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeInstancePasswordComplexityResponseParams `json:"Response"`
+}
+
+func (r *DescribeInstancePasswordComplexityResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstancePasswordComplexityResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeInstanceUpgradeCheckJobRequestParams struct {
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Target database version.
+	// Description: Available values 5.6, 5.7, 8.0. Cross-version upgrade is not supported. Downgrade is not supported after upgrade.
+	DstMysqlVersion *string `json:"DstMysqlVersion,omitnil,omitempty" name:"DstMysqlVersion"`
+}
+
+type DescribeInstanceUpgradeCheckJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Target database version.
+	// Description: Available values 5.6, 5.7, 8.0. Cross-version upgrade is not supported. Downgrade is not supported after upgrade.
+	DstMysqlVersion *string `json:"DstMysqlVersion,omitnil,omitempty" name:"DstMysqlVersion"`
+}
+
+func (r *DescribeInstanceUpgradeCheckJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceUpgradeCheckJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "DstMysqlVersion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceUpgradeCheckJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeInstanceUpgradeCheckJobResponseParams struct {
+	// Existence of historic upgrade validation task within 24 hours
+	ExistUpgradeCheckJob *bool `json:"ExistUpgradeCheckJob,omitnil,omitempty" name:"ExistUpgradeCheckJob"`
+
+	// Task ID.
+	JobId *int64 `json:"JobId,omitnil,omitempty" name:"JobId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeInstanceUpgradeCheckJobResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeInstanceUpgradeCheckJobResponseParams `json:"Response"`
+}
+
+func (r *DescribeInstanceUpgradeCheckJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceUpgradeCheckJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeInstanceUpgradeTypeRequestParams struct {
+	// <p>Instance ID, which can be obtained through the <a href="https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1">DescribeDBInstances</a> API.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>The number of CPU cores of the target instance. To ensure the input value is valid, please use <a href="https://www.tencentcloud.com/document/product/236/80281?from_cn_redirect=1">DescribeCdbZoneConfig</a> to get the saleable CPU range of the instance.</p>
+	DstCpu *float64 `json:"DstCpu,omitnil,omitempty" name:"DstCpu"`
+
+	// <p>Target instance memory size, measurement unit: MB. To ensure the input value is valid, please use <a href="https://www.tencentcloud.com/document/product/236/80281?from_cn_redirect=1">DescribeCdbZoneConfig</a> to get the saleable memory size range of the instance.</p>
+	DstMemory *uint64 `json:"DstMemory,omitnil,omitempty" name:"DstMemory"`
+
+	// <p>Target instance disk size, unit: GB. To ensure the input value is valid, please use <a href="https://www.tencentcloud.com/document/product/236/80281?from_cn_redirect=1">DescribeCdbZoneConfig</a> to get the saleable disk size range of the instance.</p>
+	DstDisk *uint64 `json:"DstDisk,omitnil,omitempty" name:"DstDisk"`
+
+	// <p>Target instance database version. Available values: 5.6, 5.7, 8.0.</p>
+	DstVersion *string `json:"DstVersion,omitnil,omitempty" name:"DstVersion"`
+
+	// <p>Deployment model of the target instance. Defaults to 0. Supported values include: 0 - means single availability zone, 1 - means multi-availability zone.</p>
+	DstDeployMode *int64 `json:"DstDeployMode,omitnil,omitempty" name:"DstDeployMode"`
+
+	// <p>Replication type of the target instance. Supported values include: 0 - means async replication, 1 - means semi-sync replication, 2 - means strong sync replication.</p>
+	DstProtectMode *int64 `json:"DstProtectMode,omitnil,omitempty" name:"DstProtectMode"`
+
+	// <p>AZ ID of the standby instance 1 of the target instance. You can use the <a href="https://www.tencentcloud.com/document/product/236/80281?from_cn_redirect=1">DescribeCdbZoneConfig</a> API to obtain the availability zone ID.</p>
+	DstSlaveZone *int64 `json:"DstSlaveZone,omitnil,omitempty" name:"DstSlaveZone"`
+
+	// <p>AZ ID of the standby instance 2. You can use the <a href="https://www.tencentcloud.com/document/product/236/80281?from_cn_redirect=1">DescribeCdbZoneConfig</a> API to obtain the AZ ID.</p>
+	DstBackupZone *int64 `json:"DstBackupZone,omitnil,omitempty" name:"DstBackupZone"`
+
+	// <p>Target instance type. Supported values include: "CUSTOM" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "ONTKE" - ONTKE single-node instance, "CLOUD_NATIVE_CLUSTER" - standard type for CLOUD disk, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - enhanced type for CLOUD disk.</p>
+	DstCdbType *string `json:"DstCdbType,omitnil,omitempty" name:"DstCdbType"`
+
+	// <p>Primary availability zone ID of the target instance. You can use the <a href="https://www.tencentcloud.com/document/product/236/80281?from_cn_redirect=1">DescribeCdbZoneConfig</a> API to obtain the AZ ID.</p>
+	DstZoneId *int64 `json:"DstZoneId,omitnil,omitempty" name:"DstZoneId"`
+
+	// <p>Node distribution of CDB instances in the dedicated cluster.</p>
+	NodeDistribution *NodeDistribution `json:"NodeDistribution,omitnil,omitempty" name:"NodeDistribution"`
+
+	// <p>Topology configuration for cloud disk edition nodes. Nodeld information can be obtained through the <a href="https://www.tencentcloud.com/document/api/236/105116?from_cn_redirect=1">DescribeClusterInfo</a> API.</p>
+	ClusterTopology *ClusterTopology `json:"ClusterTopology,omitnil,omitempty" name:"ClusterTopology"`
+
+	// <p>AZ ID of the standby instance 3 in the target instance. Use the <a href="https://www.tencentcloud.com/document/product/236/80281?from_cn_redirect=1">DescribeCdbZoneConfig</a> API to obtain the availability zone ID.</p>
+	DstFourthZone *int64 `json:"DstFourthZone,omitnil,omitempty" name:"DstFourthZone"`
+}
+
+type DescribeInstanceUpgradeTypeRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID, which can be obtained through the <a href="https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1">DescribeDBInstances</a> API.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>The number of CPU cores of the target instance. To ensure the input value is valid, please use <a href="https://www.tencentcloud.com/document/product/236/80281?from_cn_redirect=1">DescribeCdbZoneConfig</a> to get the saleable CPU range of the instance.</p>
+	DstCpu *float64 `json:"DstCpu,omitnil,omitempty" name:"DstCpu"`
+
+	// <p>Target instance memory size, measurement unit: MB. To ensure the input value is valid, please use <a href="https://www.tencentcloud.com/document/product/236/80281?from_cn_redirect=1">DescribeCdbZoneConfig</a> to get the saleable memory size range of the instance.</p>
+	DstMemory *uint64 `json:"DstMemory,omitnil,omitempty" name:"DstMemory"`
+
+	// <p>Target instance disk size, unit: GB. To ensure the input value is valid, please use <a href="https://www.tencentcloud.com/document/product/236/80281?from_cn_redirect=1">DescribeCdbZoneConfig</a> to get the saleable disk size range of the instance.</p>
+	DstDisk *uint64 `json:"DstDisk,omitnil,omitempty" name:"DstDisk"`
+
+	// <p>Target instance database version. Available values: 5.6, 5.7, 8.0.</p>
+	DstVersion *string `json:"DstVersion,omitnil,omitempty" name:"DstVersion"`
+
+	// <p>Deployment model of the target instance. Defaults to 0. Supported values include: 0 - means single availability zone, 1 - means multi-availability zone.</p>
+	DstDeployMode *int64 `json:"DstDeployMode,omitnil,omitempty" name:"DstDeployMode"`
+
+	// <p>Replication type of the target instance. Supported values include: 0 - means async replication, 1 - means semi-sync replication, 2 - means strong sync replication.</p>
+	DstProtectMode *int64 `json:"DstProtectMode,omitnil,omitempty" name:"DstProtectMode"`
+
+	// <p>AZ ID of the standby instance 1 of the target instance. You can use the <a href="https://www.tencentcloud.com/document/product/236/80281?from_cn_redirect=1">DescribeCdbZoneConfig</a> API to obtain the availability zone ID.</p>
+	DstSlaveZone *int64 `json:"DstSlaveZone,omitnil,omitempty" name:"DstSlaveZone"`
+
+	// <p>AZ ID of the standby instance 2. You can use the <a href="https://www.tencentcloud.com/document/product/236/80281?from_cn_redirect=1">DescribeCdbZoneConfig</a> API to obtain the AZ ID.</p>
+	DstBackupZone *int64 `json:"DstBackupZone,omitnil,omitempty" name:"DstBackupZone"`
+
+	// <p>Target instance type. Supported values include: "CUSTOM" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "ONTKE" - ONTKE single-node instance, "CLOUD_NATIVE_CLUSTER" - standard type for CLOUD disk, "CLOUD_NATIVE_CLUSTER_EXCLUSIVE" - enhanced type for CLOUD disk.</p>
+	DstCdbType *string `json:"DstCdbType,omitnil,omitempty" name:"DstCdbType"`
+
+	// <p>Primary availability zone ID of the target instance. You can use the <a href="https://www.tencentcloud.com/document/product/236/80281?from_cn_redirect=1">DescribeCdbZoneConfig</a> API to obtain the AZ ID.</p>
+	DstZoneId *int64 `json:"DstZoneId,omitnil,omitempty" name:"DstZoneId"`
+
+	// <p>Node distribution of CDB instances in the dedicated cluster.</p>
+	NodeDistribution *NodeDistribution `json:"NodeDistribution,omitnil,omitempty" name:"NodeDistribution"`
+
+	// <p>Topology configuration for cloud disk edition nodes. Nodeld information can be obtained through the <a href="https://www.tencentcloud.com/document/api/236/105116?from_cn_redirect=1">DescribeClusterInfo</a> API.</p>
+	ClusterTopology *ClusterTopology `json:"ClusterTopology,omitnil,omitempty" name:"ClusterTopology"`
+
+	// <p>AZ ID of the standby instance 3 in the target instance. Use the <a href="https://www.tencentcloud.com/document/product/236/80281?from_cn_redirect=1">DescribeCdbZoneConfig</a> API to obtain the availability zone ID.</p>
+	DstFourthZone *int64 `json:"DstFourthZone,omitnil,omitempty" name:"DstFourthZone"`
+}
+
+func (r *DescribeInstanceUpgradeTypeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceUpgradeTypeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "DstCpu")
+	delete(f, "DstMemory")
+	delete(f, "DstDisk")
+	delete(f, "DstVersion")
+	delete(f, "DstDeployMode")
+	delete(f, "DstProtectMode")
+	delete(f, "DstSlaveZone")
+	delete(f, "DstBackupZone")
+	delete(f, "DstCdbType")
+	delete(f, "DstZoneId")
+	delete(f, "NodeDistribution")
+	delete(f, "ClusterTopology")
+	delete(f, "DstFourthZone")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceUpgradeTypeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeInstanceUpgradeTypeResponseParams struct {
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Instance upgrade type. Trsf - Migration upgrade, InPlace - In-place upgrade, Topology - Architecture upgrade.</p>
+	UpgradeType *string `json:"UpgradeType,omitnil,omitempty" name:"UpgradeType"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeInstanceUpgradeTypeResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeInstanceUpgradeTypeResponseParams `json:"Response"`
+}
+
+func (r *DescribeInstanceUpgradeTypeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeInstanceUpgradeTypeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeLocalBinlogConfigRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -7805,14 +8651,14 @@ func (r *DescribeLocalBinlogConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeParamTemplateInfoRequestParams struct {
-	// Parameter template ID.
+	// Parameter template ID, which can be obtained through the [DescribeParamTemplates](https://www.tencentcloud.com/document/api/236/32659?from_cn_redirect=1) API.
 	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type DescribeParamTemplateInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// Parameter template ID.
+	// Parameter template ID, which can be obtained through the [DescribeParamTemplates](https://www.tencentcloud.com/document/api/236/32659?from_cn_redirect=1) API.
 	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
@@ -7843,7 +8689,7 @@ type DescribeParamTemplateInfoResponseParams struct {
 	// Parameter template name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Database engine version specified in the parameter template
+	// The parameter template corresponds to the instance version. Valid values: 5.5, 5.6, 5.7, 8.0.
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
 	// Number of parameters in the parameter template
@@ -7858,8 +8704,7 @@ type DescribeParamTemplateInfoResponseParams struct {
 	// Type of the parameter template. Valid values: `HIGH_STABILITY` (high-stability template), `HIGH_PERFORMANCE` (high-performance template).
 	TemplateType *string `json:"TemplateType,omitnil,omitempty" name:"TemplateType"`
 
-	// Parameter template engine.  Valid values: `InnoDB`, `RocksDB`. 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// Parameter template engine. Supported values include "InnoDB", "RocksDB".
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -7884,32 +8729,32 @@ func (r *DescribeParamTemplateInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeParamTemplatesRequestParams struct {
-	// Engine version. If it is left empty, all parameter templates will be queried.
+	// Engine version. Query all if default. Valid values: 5.5, 5.6, 5.7, 8.0.
 	EngineVersions []*string `json:"EngineVersions,omitnil,omitempty" name:"EngineVersions"`
 
-	// Engine type. If it is left empty, all engine types will be queried.
+	// Engine type. Query all if default. Valid values: InnoDB, RocksDB. Case-insensitive.
 	EngineTypes []*string `json:"EngineTypes,omitnil,omitempty" name:"EngineTypes"`
 
-	// Template name. If it is left empty, all template names will be queried.
+	// Template name. Query all if default. Support fuzzy matching.
 	TemplateNames []*string `json:"TemplateNames,omitnil,omitempty" name:"TemplateNames"`
 
-	// Template ID. If it is left empty, all template IDs will be queried.
+	// Template ID. Query all if default.
 	TemplateIds []*int64 `json:"TemplateIds,omitnil,omitempty" name:"TemplateIds"`
 }
 
 type DescribeParamTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Engine version. If it is left empty, all parameter templates will be queried.
+	// Engine version. Query all if default. Valid values: 5.5, 5.6, 5.7, 8.0.
 	EngineVersions []*string `json:"EngineVersions,omitnil,omitempty" name:"EngineVersions"`
 
-	// Engine type. If it is left empty, all engine types will be queried.
+	// Engine type. Query all if default. Valid values: InnoDB, RocksDB. Case-insensitive.
 	EngineTypes []*string `json:"EngineTypes,omitnil,omitempty" name:"EngineTypes"`
 
-	// Template name. If it is left empty, all template names will be queried.
+	// Template name. Query all if default. Support fuzzy matching.
 	TemplateNames []*string `json:"TemplateNames,omitnil,omitempty" name:"TemplateNames"`
 
-	// Template ID. If it is left empty, all template IDs will be queried.
+	// Template ID. Query all if default.
 	TemplateIds []*int64 `json:"TemplateIds,omitnil,omitempty" name:"TemplateIds"`
 }
 
@@ -7965,14 +8810,14 @@ func (r *DescribeParamTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProjectSecurityGroupsRequestParams struct {
-	// Project ID.
+	// Project ID. You can obtain it through the [DescribeProjects](https://www.tencentcloud.com/document/api/651/78725?from_cn_redirect=1) API.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
 type DescribeProjectSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Project ID.
+	// Project ID. You can obtain it through the [DescribeProjects](https://www.tencentcloud.com/document/api/651/78725?from_cn_redirect=1) API.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
@@ -8025,7 +8870,7 @@ func (r *DescribeProjectSecurityGroupsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProxyCustomConfRequestParams struct {
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Paginated query offset
@@ -8038,7 +8883,7 @@ type DescribeProxyCustomConfRequestParams struct {
 type DescribeProxyCustomConfRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Paginated query offset
@@ -8071,17 +8916,19 @@ func (r *DescribeProxyCustomConfRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProxyCustomConfResponseParams struct {
-	// Number of queried proxy configurations
-	// Note: this field may return `null`, indicating that no valid value can be found.
+	// Number of proxy configurations
 	Count *uint64 `json:"Count,omitnil,omitempty" name:"Count"`
 
-	// Proxy configuration details
-	// Note: this field may return `null`, indicating that no valid value can be found.
+	// proxy configuration
+	//
+	// Deprecated: CustomConf is deprecated.
 	CustomConf *CustomConfig `json:"CustomConf,omitnil,omitempty" name:"CustomConf"`
 
-	// Weight rule
-	// Note: this field may return `null`, indicating that no valid value can be found.
+	// Weight limit
 	WeightRule *Rule `json:"WeightRule,omitnil,omitempty" name:"WeightRule"`
+
+	// proxy configuration
+	CustomConfInfo []*CustomConfig `json:"CustomConfInfo,omitnil,omitempty" name:"CustomConfInfo"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -8105,14 +8952,14 @@ func (r *DescribeProxyCustomConfResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProxySupportParamRequestParams struct {
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeProxySupportParamRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -8137,29 +8984,35 @@ func (r *DescribeProxySupportParamRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProxySupportParamResponseParams struct {
-	// The supported maximum proxy version Note: This field may return null, indicating that no valid values can be obtained.
+	// Proxy supports the maximum version
 	ProxyVersion *string `json:"ProxyVersion,omitnil,omitempty" name:"ProxyVersion"`
 
-	// Whether to support the connection pool Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether connection pool is supported
 	SupportPool *bool `json:"SupportPool,omitnil,omitempty" name:"SupportPool"`
 
-	// Minimum connections in the connection pool Note: This field may return null, indicating that no valid values can be obtained.
+	// Minimum value of the connection pool
 	PoolMin *uint64 `json:"PoolMin,omitnil,omitempty" name:"PoolMin"`
 
-	// Maximum connections in the connection pool Note: This field may return null, indicating that no valid values can be obtained.
+	// Maximum value of connection pool
 	PoolMax *uint64 `json:"PoolMax,omitnil,omitempty" name:"PoolMax"`
 
-	// Whether to support transaction splitting Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether transaction split is supported
 	SupportTransSplit *bool `json:"SupportTransSplit,omitnil,omitempty" name:"SupportTransSplit"`
 
-	// Minimum proxy version supporting connection pool Note: This field may return null, indicating that no valid values can be obtained.
+	// Minimum proxy version that supports connection pool
 	SupportPoolMinVersion *string `json:"SupportPoolMinVersion,omitnil,omitempty" name:"SupportPoolMinVersion"`
 
-	// Minimum proxy version supporting transaction splitting Note: This field may return null, indicating that no valid values can be obtained.
+	// Minimum proxy version supporting transaction split
 	SupportTransSplitMinVersion *string `json:"SupportTransSplitMinVersion,omitnil,omitempty" name:"SupportTransSplitMinVersion"`
 
-	// Whether read-only mode is supported Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether setting as read-only is supported.
 	SupportReadOnly *bool `json:"SupportReadOnly,omitnil,omitempty" name:"SupportReadOnly"`
+
+	// Whether to automatically balance the load
+	SupportAutoLoadBalance *bool `json:"SupportAutoLoadBalance,omitnil,omitempty" name:"SupportAutoLoadBalance"`
+
+	// Whether support access mode
+	SupportAccessMode *bool `json:"SupportAccessMode,omitnil,omitempty" name:"SupportAccessMode"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -8252,14 +9105,14 @@ func (r *DescribeRemoteBackupConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRoGroupsRequestParams struct {
-	// Instance ID in the format of `cdb-c1nl9rpv` or `cdb-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeRoGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of `cdb-c1nl9rpv` or `cdb-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -8284,7 +9137,7 @@ func (r *DescribeRoGroupsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRoGroupsResponseParams struct {
-	// RO group information array. An instance can be associated with multiple RO groups.
+	// RO group information array. An instance can associate with multiple RO groups.
 	RoGroups []*RoGroup `json:"RoGroups,omitnil,omitempty" name:"RoGroups"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -8456,7 +9309,7 @@ type DescribeRollbackTaskDetailRequestParams struct {
 	// Async task ID.
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
-	// Pagination parameter, i.e., the number of entries to be returned for a single request. Default value: 20. Maximum value: 100.
+	// Pagination parameter. Number of records returned per request. Default value: 20. Maximum value: 100 is recommended.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset. Default value: 0.
@@ -8472,7 +9325,7 @@ type DescribeRollbackTaskDetailRequest struct {
 	// Async task ID.
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
-	// Pagination parameter, i.e., the number of entries to be returned for a single request. Default value: 20. Maximum value: 100.
+	// Pagination parameter. Number of records returned per request. Default value: 20. Maximum value: 100 is recommended.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset. Default value: 0.
@@ -8507,7 +9360,6 @@ type DescribeRollbackTaskDetailResponseParams struct {
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Rollback task details.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Items []*RollbackTask `json:"Items,omitnil,omitempty" name:"Items"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -8532,20 +9384,24 @@ func (r *DescribeRollbackTaskDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSSLStatusRequestParams struct {
-	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872) API. Note: Either the instance ID or read-only group ID parameter needs to be specified. To query the enabling status of the SSL for two-node or three-node instances, you need to specify the instance ID parameter. Single-node (cloud disk) and Cluster Edition instances do not support enabling SSL; thus, queries are not supported.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+	// Description: Fill in either the instance ID or the read-only group ID. To query the SSL activation status of two-node or three-node instances, enter the instance ID parameter. Single-node (cloud disk) and cloud disk edition instances do not support enabling SSL, so queries are not supported.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Read-only group ID, which can be obtained through the [DescribeRoGroups](https://www.tencentcloud.com/document/product/236/35704) API. Note: Either the instance ID or read-only group ID parameter needs to be specified. To query the enabling status of the SSL for read-only instances or groups, you need to specify the RoGroupId parameter. Note that the value should be the read-only group ID. Single-node (cloud disk) and Cluster Edition instances do not support enabling SSL; thus, queries are not supported.
+	// Read-only group ID. Obtain through the [DescribeRoGroups](https://www.tencentcloud.com/document/api/236/40939?from_cn_redirect=1) API.
+	// Description: Fill in either the instance ID or the read-only group ID. To query the SSL activation status of a read-only instance or read-only group, fill in the RoGroupId parameter. Note that you should always enter the read-only group ID. Single-node (cloud disk) and cloud disk edition instances do not support enabling SSL, so they do not support querying.
 	RoGroupId *string `json:"RoGroupId,omitnil,omitempty" name:"RoGroupId"`
 }
 
 type DescribeSSLStatusRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872) API. Note: Either the instance ID or read-only group ID parameter needs to be specified. To query the enabling status of the SSL for two-node or three-node instances, you need to specify the instance ID parameter. Single-node (cloud disk) and Cluster Edition instances do not support enabling SSL; thus, queries are not supported.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+	// Description: Fill in either the instance ID or the read-only group ID. To query the SSL activation status of two-node or three-node instances, enter the instance ID parameter. Single-node (cloud disk) and cloud disk edition instances do not support enabling SSL, so queries are not supported.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Read-only group ID, which can be obtained through the [DescribeRoGroups](https://www.tencentcloud.com/document/product/236/35704) API. Note: Either the instance ID or read-only group ID parameter needs to be specified. To query the enabling status of the SSL for read-only instances or groups, you need to specify the RoGroupId parameter. Note that the value should be the read-only group ID. Single-node (cloud disk) and Cluster Edition instances do not support enabling SSL; thus, queries are not supported.
+	// Read-only group ID. Obtain through the [DescribeRoGroups](https://www.tencentcloud.com/document/api/236/40939?from_cn_redirect=1) API.
+	// Description: Fill in either the instance ID or the read-only group ID. To query the SSL activation status of a read-only instance or read-only group, fill in the RoGroupId parameter. Note that you should always enter the read-only group ID. Single-node (cloud disk) and cloud disk edition instances do not support enabling SSL, so they do not support querying.
 	RoGroupId *string `json:"RoGroupId,omitnil,omitempty" name:"RoGroupId"`
 }
 
@@ -8571,10 +9427,10 @@ func (r *DescribeSSLStatusRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSSLStatusResponseParams struct {
-	// Whether SSL is enabled. ON indicates enabled; OFF indicates not enabled.
+	// Whether to enable SSL. ON represents enabled, OFF represents not enabled.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Certificate download link.
+	// Certificate download URL.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -8599,13 +9455,15 @@ func (r *DescribeSSLStatusResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSlowLogDataRequestParams struct {
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Start timestamp, such as 1585142640.
+	// Session start timestamp. For example, 1585142640.
+	// Description: This parameter is a timestamp in seconds.
 	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End timestamp, such as 1585142640.
+	// End timestamp. Example: 1585142640.
+	// Description: This parameter is a timestamp in seconds.
 	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Client `Host` list.
@@ -8617,32 +9475,42 @@ type DescribeSlowLogDataRequestParams struct {
 	// Accessed database list.
 	DataBases []*string `json:"DataBases,omitnil,omitempty" name:"DataBases"`
 
-	// Sort by field. Valid values: Timestamp, QueryTime, LockTime, RowsExamined, RowsSent.
+	// Sorting field. Currently supported fields and their meanings are as follows. Default value is Timestamp.
+	// 1. Timestamp: SQL execution time
+	// 2. QueryTime: SQL execution duration (seconds)
+	// 3. LockTime: Lock duration (seconds)
+	// 4. RowsExamined: Number of scanned rows
+	// 5. RowsSent: Result set row count
 	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
 
-	// Sorting order. Valid values: ASC (ascending), DESC (descending).
+	// Ascending or descending order. Valid values: "ASC" - Ascending order, "DESC" - Descending order. Default value: "ASC".
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Offset. Default value: 0.
+	// Offset. The default is 0, and the maximum is 9999.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// The number of results per page in paginated queries. Default value: 100. Maximum value: 400.
+	// The number of records returned in a single use, default is 100, maximum is 800.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// This parameter is valid only for source or disaster recovery instances. Valid value: `slave`, which indicates pulling logs from the replica.
 	InstType *string `json:"InstType,omitnil,omitempty" name:"InstType"`
+
+	// Node ID.
+	OpResourceId *string `json:"OpResourceId,omitnil,omitempty" name:"OpResourceId"`
 }
 
 type DescribeSlowLogDataRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Start timestamp, such as 1585142640.
+	// Session start timestamp. For example, 1585142640.
+	// Description: This parameter is a timestamp in seconds.
 	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End timestamp, such as 1585142640.
+	// End timestamp. Example: 1585142640.
+	// Description: This parameter is a timestamp in seconds.
 	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Client `Host` list.
@@ -8654,20 +9522,28 @@ type DescribeSlowLogDataRequest struct {
 	// Accessed database list.
 	DataBases []*string `json:"DataBases,omitnil,omitempty" name:"DataBases"`
 
-	// Sort by field. Valid values: Timestamp, QueryTime, LockTime, RowsExamined, RowsSent.
+	// Sorting field. Currently supported fields and their meanings are as follows. Default value is Timestamp.
+	// 1. Timestamp: SQL execution time
+	// 2. QueryTime: SQL execution duration (seconds)
+	// 3. LockTime: Lock duration (seconds)
+	// 4. RowsExamined: Number of scanned rows
+	// 5. RowsSent: Result set row count
 	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
 
-	// Sorting order. Valid values: ASC (ascending), DESC (descending).
+	// Ascending or descending order. Valid values: "ASC" - Ascending order, "DESC" - Descending order. Default value: "ASC".
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Offset. Default value: 0.
+	// Offset. The default is 0, and the maximum is 9999.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// The number of results per page in paginated queries. Default value: 100. Maximum value: 400.
+	// The number of records returned in a single use, default is 100, maximum is 800.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// This parameter is valid only for source or disaster recovery instances. Valid value: `slave`, which indicates pulling logs from the replica.
 	InstType *string `json:"InstType,omitnil,omitempty" name:"InstType"`
+
+	// Node ID.
+	OpResourceId *string `json:"OpResourceId,omitnil,omitempty" name:"OpResourceId"`
 }
 
 func (r *DescribeSlowLogDataRequest) ToJsonString() string {
@@ -8693,6 +9569,7 @@ func (r *DescribeSlowLogDataRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "InstType")
+	delete(f, "OpResourceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSlowLogDataRequest has unknown keys!", "")
 	}
@@ -8704,8 +9581,7 @@ type DescribeSlowLogDataResponseParams struct {
 	// Number of eligible entries.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Queried results.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Queried records.
 	Items []*SlowLogItem `json:"Items,omitnil,omitempty" name:"Items"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -8736,7 +9612,7 @@ type DescribeSlowLogsRequestParams struct {
 	// Pagination offset, starting from `0`. Default value: `0`.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of entries per page. Value range: 1-100. Default value: 20.
+	// Page size. Default value: 20. Minimum value: 1. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -8749,7 +9625,7 @@ type DescribeSlowLogsRequest struct {
 	// Pagination offset, starting from `0`. Default value: `0`.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of entries per page. Value range: 1-100. Default value: 20.
+	// Page size. Default value: 20. Minimum value: 1. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -8869,6 +9745,80 @@ func (r *DescribeSupportedPrivilegesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeTableColumnsRequestParams struct {
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console. You can obtain it through the [Query Instance List](https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1) API. Its value is the InstanceId field in the output parameter.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Database name. Obtain through the [Query Database](https://www.tencentcloud.com/document/api/236/17493?from_cn_redirect=1) API.
+	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
+
+	// Name of the table in the database.
+	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
+}
+
+type DescribeTableColumnsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console. You can obtain it through the [Query Instance List](https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1) API. Its value is the InstanceId field in the output parameter.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Database name. Obtain through the [Query Database](https://www.tencentcloud.com/document/api/236/17493?from_cn_redirect=1) API.
+	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
+
+	// Name of the table in the database.
+	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
+}
+
+func (r *DescribeTableColumnsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTableColumnsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Database")
+	delete(f, "Table")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTableColumnsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTableColumnsResponseParams struct {
+	// Total number of eligible instances.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Returned database column information.
+	Items []*string `json:"Items,omitnil,omitempty" name:"Items"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTableColumnsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTableColumnsResponseParams `json:"Response"`
+}
+
+func (r *DescribeTableColumnsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTableColumnsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTablesRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -8879,7 +9829,7 @@ type DescribeTablesRequestParams struct {
 	// Record offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results to be returned for a single request. Default value: 20. Maximum value: 2,000.
+	// Number of items returned per request. Default value: 20. Maximum value: 5000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Regular expression for matching table names, which complies with the rules at MySQL's official website
@@ -8898,7 +9848,7 @@ type DescribeTablesRequest struct {
 	// Record offset. Default value: 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of results to be returned for a single request. Default value: 20. Maximum value: 2,000.
+	// Number of items returned per request. Default value: 20. Maximum value: 5000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Regular expression for matching table names, which complies with the rules at MySQL's official website
@@ -8958,26 +9908,26 @@ func (r *DescribeTablesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTagsOfInstanceIdsRequestParams struct {
-	// List of instances.
+	// Instance list. Instance ID can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API. The length of the array passed in is not limited.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Pagination offset.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of entries per page.
+	// Page size. Defaults to 15.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeTagsOfInstanceIdsRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of instances.
+	// Instance list. Instance ID can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API. The length of the array passed in is not limited.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Pagination offset.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of entries per page.
+	// Page size. Defaults to 15.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -9394,26 +10344,26 @@ type DeviceNetInfo struct {
 
 // Predefined struct for user
 type DisassociateSecurityGroupsRequestParams struct {
-	// Security group ID.
+	// Security group ID. Obtain through the [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/236/15854?from_cn_redirect=1) API.
 	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
-	// List of instance IDs, which is an array of one or more instance IDs.
+	// Instance ID list, an array consisting of one or more instance IDs, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// This parameter takes effect only when the IDs of read-only replicas are passed in. If this parameter is set to `False` or left empty, the security group will be unbound from the RO groups of these read-only replicas. If this parameter is set to `True`, the security group will be unbound from the read-only replicas themselves.
+	// When importing a read-only instance ID, the default operation is performed on the corresponding security group of the read-only group. If necessary to operate the security group of the read-only instance ID, set this input parameter to True. Default False.
 	ForReadonlyInstance *bool `json:"ForReadonlyInstance,omitnil,omitempty" name:"ForReadonlyInstance"`
 }
 
 type DisassociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Security group ID.
+	// Security group ID. Obtain through the [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/236/15854?from_cn_redirect=1) API.
 	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
-	// List of instance IDs, which is an array of one or more instance IDs.
+	// Instance ID list, an array consisting of one or more instance IDs, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// This parameter takes effect only when the IDs of read-only replicas are passed in. If this parameter is set to `False` or left empty, the security group will be unbound from the RO groups of these read-only replicas. If this parameter is set to `True`, the security group will be unbound from the read-only replicas themselves.
+	// When importing a read-only instance ID, the default operation is performed on the corresponding security group of the read-only group. If necessary to operate the security group of the read-only instance ID, set this input parameter to True. Default False.
 	ForReadonlyInstance *bool `json:"ForReadonlyInstance,omitnil,omitempty" name:"ForReadonlyInstance"`
 }
 
@@ -9497,23 +10447,21 @@ type DrInfo struct {
 }
 
 type ErrlogItem struct {
-	// Error occurrence time.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Error occurrence time. Timestamp in seconds.
 	Timestamp *uint64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
 
 	// Error details
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 }
 
 type ImportRecord struct {
-	// Status value
+	// Status value. 0 - Initializing, 1 - Running, 2 - Operation successful, 3 - Operation failure.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Status value
+	// Status value. Task exception when the value is negative.
 	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
 
-	// Execution duration
+	// Execution time, unit: seconds.
 	CostTime *int64 `json:"CostTime,omitnil,omitempty" name:"CostTime"`
 
 	// Instance ID
@@ -9525,13 +10473,13 @@ type ImportRecord struct {
 	// Name of the file to be imported
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
-	// Execution progress
+	// Execution progress, measurement unit: percentage.
 	Process *int64 `json:"Process,omitnil,omitempty" name:"Process"`
 
 	// Task creation time
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// File size
+	// File size, unit: byte.
 	FileSize *string `json:"FileSize,omitnil,omitempty" name:"FileSize"`
 
 	// Task execution information
@@ -9566,8 +10514,28 @@ type Inbound struct {
 	// Address module
 	AddressModule *string `json:"AddressModule,omitnil,omitempty" name:"AddressModule"`
 
+	// Rule ID, rule ID of the nested security group
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
 	// Rule description
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
+}
+
+type InstEventInfo struct {
+	// Event name.
+	EventName *string `json:"EventName,omitnil,omitempty" name:"EventName"`
+
+	// Event status.
+	EventStatus *string `json:"EventStatus,omitnil,omitempty" name:"EventStatus"`
+
+	// Event occurrence time.
+	OccurTime *string `json:"OccurTime,omitnil,omitempty" name:"OccurTime"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Node ID.
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
 }
 
 type InstanceAuditLogFilters struct {
@@ -9674,174 +10642,177 @@ type InstanceDbAuditStatus struct {
 }
 
 type InstanceInfo struct {
-	// Public network access status. Value range: 0 (not enabled), 1 (enabled), 2 (disabled)
+	// <p>Public network status. Possible returned values: 0 - External network not enabled; 1 - Public network enabled; 2 - Public network disabled</p>
 	WanStatus *int64 `json:"WanStatus,omitnil,omitempty" name:"WanStatus"`
 
-	// AZ information
+	// <p>AZ information</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Initialization flag. Value range: 0 (not initialized), 1 (initialized)
+	// <p>Initialization flag. Possible returned values: 0 - uninitialized; 1 - initialized.</p>
 	InitFlag *int64 `json:"InitFlag,omitnil,omitempty" name:"InitFlag"`
 
-	// Read-only VIP information. This field is available only for read-only instances with dedicated access enabled.
+	// <p>Read-only vip information. This field is available only for read-only instances with separate instance access enabled.</p>
 	RoVipInfo *RoVipInfo `json:"RoVipInfo,omitnil,omitempty" name:"RoVipInfo"`
 
-	// Memory capacity in MB
+	// <p>Memory capacity, in MB.</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance status. Valid values: `0` (creating), `1` (running), `4` (isolating), `5` (isolated).
+	// <p>Instance status. Valid values: 0: creating; 1: running; 4: isolation operation in progress; 5: isolated.</p>
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// VPC ID, such as 51102
+	// <p>VPC ID, for example: 51102</p>
 	VpcId *int64 `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Secondary server information.
+	// <p>Secondary server information</p>
 	SlaveInfo *SlaveInfo `json:"SlaveInfo,omitnil,omitempty" name:"SlaveInfo"`
 
-	// Instance ID
+	// <p>Instance ID</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Disk capacity in GB
+	// <p>Disk capacity, in GB.</p>
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// Auto-renewal flag. Value range: 0 (auto-renewal not enabled), 1 (auto-renewal enabled), 2 (auto-renewal disabled)
+	// <p>Auto-renewal flag. Possible returned values: 0 - auto-renewal is not enabled; 1 - auto-renewal is enabled; 2 - automatic renewal is disabled.</p>
 	AutoRenew *int64 `json:"AutoRenew,omitnil,omitempty" name:"AutoRenew"`
 
-	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync)
+	// <p>Data replication mode. 0 - async replication; 1 - semi-sync replication; 2 - strong sync replication</p>
 	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
 
-	// Detailed information about the read-only group.
+	// <p>Read-only group detailed information</p>
 	RoGroups []*RoGroup `json:"RoGroups,omitnil,omitempty" name:"RoGroups"`
 
-	// Subnet ID, such as 2333
+	// <p>Subnet ID, for example: 2333</p>
 	SubnetId *int64 `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Instance type. Value range: 1 (primary), 2 (disaster recovery), 3 (read-only)
+	// <p>Instance type. Possible returned values: 1 - Primary instance; 2 - Disaster recovery instance; 3 - Read-only instance.</p>
 	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Project ID
+	// <p>Project ID</p>
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Region information
+	// <p>Regional information</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Instance expiration time
+	// <p>Instance expiration time</p>
 	DeadlineTime *string `json:"DeadlineTime,omitnil,omitempty" name:"DeadlineTime"`
 
-	// AZ deployment mode. Valid values: 0 (single-AZ), 1 (multi-AZ)
+	// <p>Availability Zone Deployment method. Valid values: 0 - single availability zone; 1 - multi-availability zone.</p>
 	DeployMode *int64 `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 
-	// Instance task status. 0 - no task; 1 - upgrading; 2 - importing data; 3 - activating secondary; 4 - enabling public network access; 5 - batch operation in progress; 6 - rolling back; 7 - disabling public network access; 8 - changing password; 9 - renaming instance; 10 - restarting; 12 - migrating self-built instance; 13 - dropping table; 14 - creating and syncing disaster recovery instance; 15 - pending upgrade and switch; 16 - upgrade and switch in progress; 17 - upgrade and switch completed
+	// <p>Instance task status. 0 - No tasks, 1 - Upgrading, 2 - Data import, 3 - Opening Slave, 4 - Public network access enabling, 5 - Batch operation executing, 6 - Rolling back, 7 - Public network access disabling, 8 - Password modification, 9 - Renaming instance, 10 - Restarting, 12 - Self-built migration, 13 - Database deletion, 14 - Disaster recovery instance creation sync, 15 - Upgrade pending switch, 16 - Upgrade and switch, 17 - Upgrade and switch completed</p>
 	TaskStatus *int64 `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
-	// Detailed information about the primary instance.
+	// <p>Detailed information about the primary instance.</p>
 	MasterInfo *MasterInfo `json:"MasterInfo,omitnil,omitempty" name:"MasterInfo"`
 
-	// Instance type
+	// <p>Instance type</p>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// Kernel version
+	// <p>Kernel version</p>
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
-	// Instance name
+	// <p>Instance name</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Detailed information about the disaster recovery instance.
+	// <p>Disaster recovery instance details</p>
 	DrInfo []*DrInfo `json:"DrInfo,omitnil,omitempty" name:"DrInfo"`
 
-	// Public domain name
+	// <p>public network domain name</p>
 	WanDomain *string `json:"WanDomain,omitnil,omitempty" name:"WanDomain"`
 
-	// Public network port number
+	// <p>Public network port number</p>
 	WanPort *int64 `json:"WanPort,omitnil,omitempty" name:"WanPort"`
 
 	// Billing type
 	PayType *int64 `json:"PayType,omitnil,omitempty" name:"PayType"`
 
-	// Instance creation time
+	// <p>Instance creation time</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Instance IP
+	// <p>Instance IP</p>
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-	// Port number
+	// <p>Port number</p>
 	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 
-	// Whether the disk write is locked (It depends on whether the instance data in disk exceeds its quota). Valid values: `0` (unlocked), `1` (locked).
+	// <p>Whether disk write is locked (data write volume of the instance exceeds disk quota). 0 - Unlocked 1 - Locked</p>
 	CdbError *int64 `json:"CdbError,omitnil,omitempty" name:"CdbError"`
 
-	// VPC descriptor, such as "vpc-5v8wn9mg"
+	// <p>Private network descriptor, for example: "vpc-5v8wn9mg"</p>
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// Subnet descriptor, such as "subnet-1typ0s7d"
+	// <p>Subnet descriptor, such as "subnet-1typ0s7d"</p>
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// Physical ID
+	// <p>Physical ID</p>
 	PhysicalId *string `json:"PhysicalId,omitnil,omitempty" name:"PhysicalId"`
 
-	// Number of cores
+	// <p>Core count</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Queries per second
+	// <p>Queries per second.</p>
 	Qps *int64 `json:"Qps,omitnil,omitempty" name:"Qps"`
 
-	// AZ name
+	// <p>Chinese Name of Availability Zone</p>
 	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
-	// Physical server model.
+	// <p>Physical machine model</p>
 	DeviceClass *string `json:"DeviceClass,omitnil,omitempty" name:"DeviceClass"`
 
-	// Placement group ID.
+	// <p>Placement group ID</p>
 	DeployGroupId *string `json:"DeployGroupId,omitnil,omitempty" name:"DeployGroupId"`
 
-	// AZ ID.
+	// <p>Availability zone ID</p>
 	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Number of nodes
+	// <p>Number of nodes</p>
 	InstanceNodes *int64 `json:"InstanceNodes,omitnil,omitempty" name:"InstanceNodes"`
 
-	// Tag list.
+	// <p>Tag list</p>
 	TagList []*TagInfoItem `json:"TagList,omitnil,omitempty" name:"TagList"`
 
-	// Engine type.
+	// <p>Engine type</p>
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 
-	// Maximum delay threshold.
+	// <p>Maximum delay threshold</p>
 	MaxDelayTime *int64 `json:"MaxDelayTime,omitnil,omitempty" name:"MaxDelayTime"`
 
-	// Instance disk type. Valid values are returned only for Cluster Edition and single-node (cloud disk) instances.
-	// Note:
-	// 1. If "DiskType": "CLOUD_HSSD" is returned, it indicates that the instance disk type is Enhanced SSD.
-	// 2. If "DiskType": "CLOUD_SSD" is returned, it indicates that the instance disk type is Cloud SSD.
-	// 3. If "DiskType": "" is returned and the DeviceType parameter value is UNIVERSAL or EXCLUSIVE, it indicates that the instance uses a local SSD.
+	// <p>Instance disk type. Only CLOUD disk edition and single-node (CLOUD disk) instances will return a valid value.<br>Description:</p><ol><li>If "DiskType": "CLOUD_HSSD" is returned, it indicates that the instance disk type is enhanced SSD CLOUD disk.</li><li>If "DiskType": "CLOUD_SSD" is returned, it indicates that the instance disk type is SSD CLOUD Block Storage.</li><li>If "DiskType": "" is returned and the DeviceType parameter value is UNIVERSAL or EXCLUSIVE, it means that the instance uses local SSD.</li></ol>
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Current number of CPU cores for scale-out.
+	// <p>Current number of CPU cores for scale-out.</p>
 	ExpandCpu *int64 `json:"ExpandCpu,omitnil,omitempty" name:"ExpandCpu"`
 
-	// Cluster Edition instance node information.
+	// <p>Cloud Disk Edition instance node information</p>
 	ClusterInfo []*ClusterInfo `json:"ClusterInfo,omitnil,omitempty" name:"ClusterInfo"`
 
-	// Analysis engine node list.
+	// <p>Analysis engine node list</p>
 	AnalysisNodeInfos []*AnalysisNodeInfo `json:"AnalysisNodeInfos,omitnil,omitempty" name:"AnalysisNodeInfos"`
 
-	// Device bandwidth, in GB. This parameter is valid when DeviceClass is specified. For example, 25 means the current device bandwidth is 25 GB; 10 means the current device bandwidth is 10 GB.
+	// <p>Device bandwidth, in G. This parameter is valid only when DeviceClass is not empty. For example, 25 means the current device bandwidth is 25G; 10 means the current device bandwidth is 10G.</p>
 	DeviceBandwidth *uint64 `json:"DeviceBandwidth,omitnil,omitempty" name:"DeviceBandwidth"`
 
-	// Instance termination protection status. on indicates enabled; otherwise, the protection is disabled.
+	// <p>Instance termination protection status. on indicates enabled; otherwise, the protection is disabled.</p>
 	DestroyProtect *string `json:"DestroyProtect,omitnil,omitempty" name:"DestroyProtect"`
+
+	// <p>TDSQL engine parameters</p>
+	CpuModel *string `json:"CpuModel,omitnil,omitempty" name:"CpuModel"`
+
+	// <p>Analysis engine instance version upgrade information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AnalysisUpgradeVersionInfo *UpgradeAnalysisInstanceVersionInfo `json:"AnalysisUpgradeVersionInfo,omitnil,omitempty" name:"AnalysisUpgradeVersionInfo"`
 }
 
 type InstanceRebootTime struct {
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Estimated restart time
+	// Expected restart time, unit: second.
 	TimeInSeconds *int64 `json:"TimeInSeconds,omitnil,omitempty" name:"TimeInSeconds"`
 }
 
 type InstanceRollbackRangeTime struct {
-	// Queries database error code
+	// Query database error codes. 0 - Normal, 1600001 - Internal error, 1600003 - Input parameter exception, 1600009 - Instance does not exist, 1624001 - DB access exception.
 	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
 
 	// Queries database error message
@@ -9888,8 +10859,9 @@ func (r *IsolateDBInstanceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type IsolateDBInstanceResponseParams struct {
-	// Async task request ID, which can be used to query the execution result of an async task. (This returned field has been disused. You can query the isolation status of an instance through the `DescribeDBInstances` API.)
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Request ID of the async task. Use this ID to query the outcome of the async task. (This returned field is currently abandoned. The quarantined state of instances can be queried through the API to query instances.)
+	//
+	// Deprecated: AsyncRequestId is deprecated.
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -9913,106 +10885,102 @@ func (r *IsolateDBInstanceResponse) FromJsonString(s string) error {
 }
 
 type LocalBinlogConfig struct {
-	// Retention period of local binlog. Value range: [72,168].
+	// Local binlog retention duration. Valid values: [6,168].
 	SaveHours *int64 `json:"SaveHours,omitnil,omitempty" name:"SaveHours"`
 
-	// Space utilization of local binlog. Value range: [30,50].
+	// Local binlog space utilization. Valid values: [30,50].
 	MaxUsage *int64 `json:"MaxUsage,omitnil,omitempty" name:"MaxUsage"`
 }
 
 type LocalBinlogConfigDefault struct {
-	// Retention period of local binlog. Value range: [72,168].
+	// Local binlog retention duration. Valid values: [6,168].
 	SaveHours *int64 `json:"SaveHours,omitnil,omitempty" name:"SaveHours"`
 
-	// Space utilization of local binlog. Value range: [30,50].
+	// Local binlog space utilization. Valid values: [30,50].
 	MaxUsage *int64 `json:"MaxUsage,omitnil,omitempty" name:"MaxUsage"`
 }
 
 type LogRuleTemplateInfo struct {
-	// Template ID. 
-	// Note: The return value may be null, indicating that no valid data can be obtained.
+	// Template ID.
 	RuleTemplateId *string `json:"RuleTemplateId,omitnil,omitempty" name:"RuleTemplateId"`
 
-	// Template name.
-	// Note: The return value may be null, indicating that no valid data can be obtained.
+	// Rule template name
 	RuleTemplateName *string `json:"RuleTemplateName,omitnil,omitempty" name:"RuleTemplateName"`
 
-	// Alarm level. Valid values: 1: Low risk; 2: Medium risk; 3: High risk. 
-	// Note: The return value may be null, indicating that no valid data can be obtained.
+	// Alarm level. Valid values: 1 - Low risk, 2 - Medium risk, 3 - High risk.
 	AlarmLevel *string `json:"AlarmLevel,omitnil,omitempty" name:"AlarmLevel"`
 
-	// Template change status. Valid values: 0: Unchanged; 1: Changed; 2: Deleted.
-	// Note: The return value may be null, indicating that no valid data can be obtained.
+	// Rule template change status. Valid values: 0 - Not changed, 1 - changed, 2 - deleted.
 	RuleTemplateStatus *int64 `json:"RuleTemplateStatus,omitnil,omitempty" name:"RuleTemplateStatus"`
 }
 
 type LogToCLSConfig struct {
-	// Enabling status of the feature.
-	// Note: The return value may be null, indicating that no valid data can be obtained.
+	// Delivery status on or turn off
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// CLS log set ID.
-	// Note: The return value may be null, indicating that no valid data can be obtained.
+	// CLS Logset ID
 	LogSetId *string `json:"LogSetId,omitnil,omitempty" name:"LogSetId"`
 
-	// Log topic ID.
-	// Note: The return value may be null, indicating that no valid data can be obtained.
+	// Log topic ID
 	LogTopicId *string `json:"LogTopicId,omitnil,omitempty" name:"LogTopicId"`
+
+	// Region of the CLS service
+	ClsRegion *string `json:"ClsRegion,omitnil,omitempty" name:"ClsRegion"`
 }
 
 type MasterInfo struct {
-	// Region information
+	// <p>Regional information</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Region ID
+	// <p>Region ID</p>
 	RegionId *int64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
-	// AZ ID
+	// <p>Availability zone ID.</p>
 	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// AZ information
+	// <p>AZ information</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Instance ID
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Long instance ID
+	// <p>Instance long ID</p>
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
-	// Instance status
+	// <p>Instance status</p>
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Instance name
+	// <p>Instance name</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Instance type
+	// <p>Instance type</p>
 	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Task status
+	// <p>Task status.</p>
 	TaskStatus *int64 `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
-	// Memory capacity
+	// <p>Memory capacity</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Disk capacity
+	// <p>Disk capacity</p>
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// Instance model
+	// <p>Instance model</p>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// Queries per second
+	// <p>Queries per second.</p>
 	Qps *int64 `json:"Qps,omitnil,omitempty" name:"Qps"`
 
-	// VPC ID
+	// <p>VPC ID</p>
 	VpcId *int64 `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID
+	// <p>subnet ID</p>
 	SubnetId *int64 `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Dedicated cluster ID
+	// <p>Dedicated cluster ID</p>
 	ExClusterId *string `json:"ExClusterId,omitnil,omitempty" name:"ExClusterId"`
 
-	// Dedicated cluster name
+	// <p>Dedicated cluster name</p>
 	ExClusterName *string `json:"ExClusterName,omitnil,omitempty" name:"ExClusterName"`
 }
 
@@ -10021,10 +10989,10 @@ type ModifyAccountDescriptionRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// TencentDB account
+	// TDSQL for MySQL accounts. Obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499?from_cn_redirect=1) API.
 	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 
-	// Database account remarks
+	// Remark information of the database account. Input limit: 255 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
@@ -10034,10 +11002,10 @@ type ModifyAccountDescriptionRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// TencentDB account
+	// TDSQL for MySQL accounts. Obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499?from_cn_redirect=1) API.
 	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 
-	// Database account remarks
+	// Remark information of the database account. Input limit: 255 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
@@ -10089,7 +11057,7 @@ func (r *ModifyAccountDescriptionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAccountMaxUserConnectionsRequestParams struct {
-	// List of TencentDB accounts
+	// Cloud Database account. Obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499?from_cn_redirect=1) API.
 	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
@@ -10102,7 +11070,7 @@ type ModifyAccountMaxUserConnectionsRequestParams struct {
 type ModifyAccountMaxUserConnectionsRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of TencentDB accounts
+	// Cloud Database account. Obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499?from_cn_redirect=1) API.
 	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
@@ -10166,8 +11134,13 @@ type ModifyAccountPasswordRequestParams struct {
 	// New password of the database account. It can only contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and special characters (_+-&=!@#$%^*()).
 	NewPassword *string `json:"NewPassword,omitnil,omitempty" name:"NewPassword"`
 
-	// TencentDB account
+	// TDSQL for MySQL accounts. Obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499?from_cn_redirect=1) API.
 	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
+
+	// Deprecated.
+	//
+	// Deprecated: SkipValidatePassword is deprecated.
+	SkipValidatePassword *bool `json:"SkipValidatePassword,omitnil,omitempty" name:"SkipValidatePassword"`
 }
 
 type ModifyAccountPasswordRequest struct {
@@ -10179,8 +11152,11 @@ type ModifyAccountPasswordRequest struct {
 	// New password of the database account. It can only contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and special characters (_+-&=!@#$%^*()).
 	NewPassword *string `json:"NewPassword,omitnil,omitempty" name:"NewPassword"`
 
-	// TencentDB account
+	// TDSQL for MySQL accounts. Obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499?from_cn_redirect=1) API.
 	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
+
+	// Deprecated.
+	SkipValidatePassword *bool `json:"SkipValidatePassword,omitnil,omitempty" name:"SkipValidatePassword"`
 }
 
 func (r *ModifyAccountPasswordRequest) ToJsonString() string {
@@ -10198,6 +11174,7 @@ func (r *ModifyAccountPasswordRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "NewPassword")
 	delete(f, "Accounts")
+	delete(f, "SkipValidatePassword")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAccountPasswordRequest has unknown keys!", "")
 	}
@@ -10234,7 +11211,7 @@ type ModifyAccountPrivilegesRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Database account, including username and domain name.
+	// Database account, includes users and domain name. Obtain through the API [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499?from_cn_redirect=1).
 	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 
 	// Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER", "CREATE USER", "RELOAD", "REPLICATION CLIENT", "REPLICATION SLAVE".
@@ -10263,7 +11240,7 @@ type ModifyAccountPrivilegesRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Database account, including username and domain name.
+	// Database account, includes users and domain name. Obtain through the API [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499?from_cn_redirect=1).
 	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 
 	// Global permission. Valid values: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "PROCESS", "DROP", "REFERENCES", "INDEX", "ALTER", "SHOW DATABASES", "CREATE TEMPORARY TABLES", "LOCK TABLES", "EXECUTE", "CREATE VIEW", "SHOW VIEW", "CREATE ROUTINE", "ALTER ROUTINE", "EVENT", "TRIGGER", "CREATE USER", "RELOAD", "REPLICATION CLIENT", "REPLICATION SLAVE".
@@ -10593,7 +11570,12 @@ func (r *ModifyAuditServiceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAutoRenewFlagRequestParams struct {
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID, in the format of cdb-c1nl9rpv. This is identical to the instance ID displayed on the TencentDB console.
+	// Description: Multiple instance IDs can be entered for modification. The json format is as follows.
+	// [
+	//     "cdb-30z11v8s",
+	//     "cdb-93h11efg"
+	//   ]
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Auto-renewal flag. Value range: 0 (auto-renewal not enabled), 1 (auto-renewal enabled).
@@ -10603,7 +11585,12 @@ type ModifyAutoRenewFlagRequestParams struct {
 type ModifyAutoRenewFlagRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID, in the format of cdb-c1nl9rpv. This is identical to the instance ID displayed on the TencentDB console.
+	// Description: Multiple instance IDs can be entered for modification. The json format is as follows.
+	// [
+	//     "cdb-30z11v8s",
+	//     "cdb-93h11efg"
+	//   ]
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Auto-renewal flag. Value range: 0 (auto-renewal not enabled), 1 (auto-renewal enabled).
@@ -10654,10 +11641,12 @@ func (r *ModifyAutoRenewFlagResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyBackupConfigRequestParams struct {
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Backup file retention period in days. Value range: 7-1830.
+	// Retention time of the data backup file, in days.
+	// 1. MySQL two-node, three-node, and cloud disk edition data backup files can be retained for 7-1830 days.
+	// 2. MySQL single-node (cloud disk) data backup files can be retained for 7-30 days.
 	ExpireDays *int64 `json:"ExpireDays,omitnil,omitempty" name:"ExpireDays"`
 
 	// (This parameter will be disused. The `BackupTimeWindow` parameter is recommended.) Backup time range in the format of 02:00-06:00, with the start time and end time on the hour. Valid values: 00:00-12:00, 02:00-06:00, 06:00-10:00, 10:00-14:00, 14:00-18:00, 18:00-22:00, 22:00-02:00.
@@ -10666,13 +11655,15 @@ type ModifyBackupConfigRequestParams struct {
 	// Automatic backup mode. Only `physical` (physical cold backup) is supported
 	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
 
-	// Binlog retention period in days. Value range: 7-1830. It can’t be greater than the retention period of backup files.
+	// binlog retention time in days.
+	// 1. MySQL two-node, three-node, and cloud disk log backup files can be retained for 7 to 3650 days.
+	// 2. MySQL single-node (cloud disk) log backup files can be retained for 7-30 days.
 	BinlogExpireDays *int64 `json:"BinlogExpireDays,omitnil,omitempty" name:"BinlogExpireDays"`
 
 	// Backup time window; for example, to set up backup between 10:00 and 14:00 on every Tuesday and Sunday, you should set this parameter as follows: {"Monday": "", "Tuesday": "10:00-14:00", "Wednesday": "", "Thursday": "", "Friday": "", "Saturday": "", "Sunday": "10:00-14:00"} (Note: You can set up backup on different days, but the backup time windows need to be the same. If this field is set, the `StartTime` field will be ignored)
 	BackupTimeWindow *CommonTimeWindow `json:"BackupTimeWindow,omitnil,omitempty" name:"BackupTimeWindow"`
 
-	// Switch for periodic archive. Valid values: `off` (disable), `on` (enable). Default value:`off`. When you enable the periodic archive policy for the first time, you need to enter the `BackupPeriodSaveDays`, `BackupPeriodSaveInterval`, `BackupPeriodSaveCount`, and `StartBackupPeriodSaveDate` parameters; otherwise, the policy will not take effect.
+	// Periodic backup retention switch. off - periodic backup retention policy is not enabled, on - periodic backup retention policy is enabled. Default is off.
 	EnableBackupPeriodSave *string `json:"EnableBackupPeriodSave,omitnil,omitempty" name:"EnableBackupPeriodSave"`
 
 	// Switch for long-term backup retention (This field can be ignored, for its feature hasn’t been launched). Valid values: `off` (disable), `on` (enable). Default value: `off`. Once enabled, the parameters (BackupPeriodSaveDays, BackupPeriodSaveInterval, and BackupPeriodSaveCount) will be invalid.
@@ -10690,7 +11681,7 @@ type ModifyBackupConfigRequestParams struct {
 	// The start time in the format of yyyy-mm-dd HH:MM:SS, which is used to enable archive backup retention policy.
 	StartBackupPeriodSaveDate *string `json:"StartBackupPeriodSaveDate,omitnil,omitempty" name:"StartBackupPeriodSaveDate"`
 
-	// Whether to enable the archive backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	// Whether the data backup/archive policy is enabled. off - disabled, on - enabled. If not specified, remain unchanged.
 	EnableBackupArchive *string `json:"EnableBackupArchive,omitnil,omitempty" name:"EnableBackupArchive"`
 
 	// The period (in days) of how long a data backup is retained before being archived, which falls between 180 days and the number of days from the time it is created until it expires.
@@ -10699,16 +11690,16 @@ type ModifyBackupConfigRequestParams struct {
 	// The period (in days) of how long a log backup is retained before being archived, which falls between 180 days and the number of days from the time it is created until it expires.
 	BinlogArchiveDays *int64 `json:"BinlogArchiveDays,omitnil,omitempty" name:"BinlogArchiveDays"`
 
-	// Whether to enable the archive backup of the log. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	// Whether to enable log backup archive strategy. off - off, on - on. If not specified, remain unchanged.
 	EnableBinlogArchive *string `json:"EnableBinlogArchive,omitnil,omitempty" name:"EnableBinlogArchive"`
 
-	// Whether to enable the standard storage policy for data backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	// Whether to enable the standard storage policy for data backup. off - disabled, on - enabled. If not specified, it remains unchanged.
 	EnableBackupStandby *string `json:"EnableBackupStandby,omitnil,omitempty" name:"EnableBackupStandby"`
 
 	// The period (in days) of how long a data backup is retained before switching to standard storage, which falls between 30 days and the number of days from the time it is created until it expires. If the archive backup is enabled, this period cannot be greater than archive backup period.
 	BackupStandbyDays *int64 `json:"BackupStandbyDays,omitnil,omitempty" name:"BackupStandbyDays"`
 
-	// Whether to enable the standard storage policy for log backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	// Whether to enable log backup standard storage policy. off - off, on - on. If not specified, remain unchanged.
 	EnableBinlogStandby *string `json:"EnableBinlogStandby,omitnil,omitempty" name:"EnableBinlogStandby"`
 
 	// The period (in days) of how long a log backup is retained before switching to standard storage, which falls between 30 days and the number of days from the time it is created until it expires. If the archive backup is enabled, this period cannot be greater than archive backup period.
@@ -10718,10 +11709,12 @@ type ModifyBackupConfigRequestParams struct {
 type ModifyBackupConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Backup file retention period in days. Value range: 7-1830.
+	// Retention time of the data backup file, in days.
+	// 1. MySQL two-node, three-node, and cloud disk edition data backup files can be retained for 7-1830 days.
+	// 2. MySQL single-node (cloud disk) data backup files can be retained for 7-30 days.
 	ExpireDays *int64 `json:"ExpireDays,omitnil,omitempty" name:"ExpireDays"`
 
 	// (This parameter will be disused. The `BackupTimeWindow` parameter is recommended.) Backup time range in the format of 02:00-06:00, with the start time and end time on the hour. Valid values: 00:00-12:00, 02:00-06:00, 06:00-10:00, 10:00-14:00, 14:00-18:00, 18:00-22:00, 22:00-02:00.
@@ -10730,13 +11723,15 @@ type ModifyBackupConfigRequest struct {
 	// Automatic backup mode. Only `physical` (physical cold backup) is supported
 	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
 
-	// Binlog retention period in days. Value range: 7-1830. It can’t be greater than the retention period of backup files.
+	// binlog retention time in days.
+	// 1. MySQL two-node, three-node, and cloud disk log backup files can be retained for 7 to 3650 days.
+	// 2. MySQL single-node (cloud disk) log backup files can be retained for 7-30 days.
 	BinlogExpireDays *int64 `json:"BinlogExpireDays,omitnil,omitempty" name:"BinlogExpireDays"`
 
 	// Backup time window; for example, to set up backup between 10:00 and 14:00 on every Tuesday and Sunday, you should set this parameter as follows: {"Monday": "", "Tuesday": "10:00-14:00", "Wednesday": "", "Thursday": "", "Friday": "", "Saturday": "", "Sunday": "10:00-14:00"} (Note: You can set up backup on different days, but the backup time windows need to be the same. If this field is set, the `StartTime` field will be ignored)
 	BackupTimeWindow *CommonTimeWindow `json:"BackupTimeWindow,omitnil,omitempty" name:"BackupTimeWindow"`
 
-	// Switch for periodic archive. Valid values: `off` (disable), `on` (enable). Default value:`off`. When you enable the periodic archive policy for the first time, you need to enter the `BackupPeriodSaveDays`, `BackupPeriodSaveInterval`, `BackupPeriodSaveCount`, and `StartBackupPeriodSaveDate` parameters; otherwise, the policy will not take effect.
+	// Periodic backup retention switch. off - periodic backup retention policy is not enabled, on - periodic backup retention policy is enabled. Default is off.
 	EnableBackupPeriodSave *string `json:"EnableBackupPeriodSave,omitnil,omitempty" name:"EnableBackupPeriodSave"`
 
 	// Switch for long-term backup retention (This field can be ignored, for its feature hasn’t been launched). Valid values: `off` (disable), `on` (enable). Default value: `off`. Once enabled, the parameters (BackupPeriodSaveDays, BackupPeriodSaveInterval, and BackupPeriodSaveCount) will be invalid.
@@ -10754,7 +11749,7 @@ type ModifyBackupConfigRequest struct {
 	// The start time in the format of yyyy-mm-dd HH:MM:SS, which is used to enable archive backup retention policy.
 	StartBackupPeriodSaveDate *string `json:"StartBackupPeriodSaveDate,omitnil,omitempty" name:"StartBackupPeriodSaveDate"`
 
-	// Whether to enable the archive backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	// Whether the data backup/archive policy is enabled. off - disabled, on - enabled. If not specified, remain unchanged.
 	EnableBackupArchive *string `json:"EnableBackupArchive,omitnil,omitempty" name:"EnableBackupArchive"`
 
 	// The period (in days) of how long a data backup is retained before being archived, which falls between 180 days and the number of days from the time it is created until it expires.
@@ -10763,16 +11758,16 @@ type ModifyBackupConfigRequest struct {
 	// The period (in days) of how long a log backup is retained before being archived, which falls between 180 days and the number of days from the time it is created until it expires.
 	BinlogArchiveDays *int64 `json:"BinlogArchiveDays,omitnil,omitempty" name:"BinlogArchiveDays"`
 
-	// Whether to enable the archive backup of the log. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	// Whether to enable log backup archive strategy. off - off, on - on. If not specified, remain unchanged.
 	EnableBinlogArchive *string `json:"EnableBinlogArchive,omitnil,omitempty" name:"EnableBinlogArchive"`
 
-	// Whether to enable the standard storage policy for data backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	// Whether to enable the standard storage policy for data backup. off - disabled, on - enabled. If not specified, it remains unchanged.
 	EnableBackupStandby *string `json:"EnableBackupStandby,omitnil,omitempty" name:"EnableBackupStandby"`
 
 	// The period (in days) of how long a data backup is retained before switching to standard storage, which falls between 30 days and the number of days from the time it is created until it expires. If the archive backup is enabled, this period cannot be greater than archive backup period.
 	BackupStandbyDays *int64 `json:"BackupStandbyDays,omitnil,omitempty" name:"BackupStandbyDays"`
 
-	// Whether to enable the standard storage policy for log backup. Valid values: `off` (disable), `on` (enable). Default value: `off`.
+	// Whether to enable log backup standard storage policy. off - off, on - on. If not specified, remain unchanged.
 	EnableBinlogStandby *string `json:"EnableBinlogStandby,omitnil,omitempty" name:"EnableBinlogStandby"`
 
 	// The period (in days) of how long a log backup is retained before switching to standard storage, which falls between 30 days and the number of days from the time it is created until it expires. If the archive backup is enabled, this period cannot be greater than archive backup period.
@@ -10928,6 +11923,9 @@ type ModifyBackupEncryptionStatusRequestParams struct {
 
 	// Default encryption status for the new auto-generated physical backup files. Valid values: `on`, `off`.
 	EncryptionStatus *string `json:"EncryptionStatus,omitnil,omitempty" name:"EncryptionStatus"`
+
+	// Set the default encryption status of the newly-added automated log backup file for the instance. Available values are on or off.
+	BinlogEncryptionStatus *string `json:"BinlogEncryptionStatus,omitnil,omitempty" name:"BinlogEncryptionStatus"`
 }
 
 type ModifyBackupEncryptionStatusRequest struct {
@@ -10938,6 +11936,9 @@ type ModifyBackupEncryptionStatusRequest struct {
 
 	// Default encryption status for the new auto-generated physical backup files. Valid values: `on`, `off`.
 	EncryptionStatus *string `json:"EncryptionStatus,omitnil,omitempty" name:"EncryptionStatus"`
+
+	// Set the default encryption status of the newly-added automated log backup file for the instance. Available values are on or off.
+	BinlogEncryptionStatus *string `json:"BinlogEncryptionStatus,omitnil,omitempty" name:"BinlogEncryptionStatus"`
 }
 
 func (r *ModifyBackupEncryptionStatusRequest) ToJsonString() string {
@@ -10954,6 +11955,7 @@ func (r *ModifyBackupEncryptionStatusRequest) FromJsonString(s string) error {
 	}
 	delete(f, "InstanceId")
 	delete(f, "EncryptionStatus")
+	delete(f, "BinlogEncryptionStatus")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBackupEncryptionStatusRequest has unknown keys!", "")
 	}
@@ -10984,10 +11986,10 @@ func (r *ModifyBackupEncryptionStatusResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyCdbProxyAddressDescRequestParams struct {
-	// Proxy group ID
+	// Proxy group ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// Address ID of the proxy group
+	// Proxy group address ID. You can obtain it through the API [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1).
 	ProxyAddressId *string `json:"ProxyAddressId,omitnil,omitempty" name:"ProxyAddressId"`
 
 	// Description
@@ -10997,10 +11999,10 @@ type ModifyCdbProxyAddressDescRequestParams struct {
 type ModifyCdbProxyAddressDescRequest struct {
 	*tchttp.BaseRequest
 	
-	// Proxy group ID
+	// Proxy group ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// Address ID of the proxy group
+	// Proxy group address ID. You can obtain it through the API [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1).
 	ProxyAddressId *string `json:"ProxyAddressId,omitnil,omitempty" name:"ProxyAddressId"`
 
 	// Description
@@ -11052,50 +12054,50 @@ func (r *ModifyCdbProxyAddressDescResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyCdbProxyAddressVipAndVPortRequestParams struct {
-	// Proxy group ID
+	// Proxy group ID. Obtain through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// Address ID of the proxy group
+	// Proxy group address ID. Obtain through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyAddressId *string `json:"ProxyAddressId,omitnil,omitempty" name:"ProxyAddressId"`
 
-	// VPC ID
+	// VPC ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// VPC subnet ID
+	// Private subnet ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// IP address
+	// IP. If not specified, the system will assign an available IP under subnet.
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-	// Port
+	// Port. Default value 3306, value ranges from 1024 to 65535.
 	VPort *uint64 `json:"VPort,omitnil,omitempty" name:"VPort"`
 
-	// Valid Hours of Old IP
+	// Old IP valid hours. Measurement unit: hr, default value: 24, value ranges from 0 to 168.
 	ReleaseDuration *uint64 `json:"ReleaseDuration,omitnil,omitempty" name:"ReleaseDuration"`
 }
 
 type ModifyCdbProxyAddressVipAndVPortRequest struct {
 	*tchttp.BaseRequest
 	
-	// Proxy group ID
+	// Proxy group ID. Obtain through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// Address ID of the proxy group
+	// Proxy group address ID. Obtain through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyAddressId *string `json:"ProxyAddressId,omitnil,omitempty" name:"ProxyAddressId"`
 
-	// VPC ID
+	// VPC ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
-	// VPC subnet ID
+	// Private subnet ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
-	// IP address
+	// IP. If not specified, the system will assign an available IP under subnet.
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-	// Port
+	// Port. Default value 3306, value ranges from 1024 to 65535.
 	VPort *uint64 `json:"VPort,omitnil,omitempty" name:"VPort"`
 
-	// Valid Hours of Old IP
+	// Old IP valid hours. Measurement unit: hr, default value: 24, value ranges from 0 to 168.
 	ReleaseDuration *uint64 `json:"ReleaseDuration,omitnil,omitempty" name:"ReleaseDuration"`
 }
 
@@ -11148,26 +12150,28 @@ func (r *ModifyCdbProxyAddressVipAndVPortResponse) FromJsonString(s string) erro
 
 // Predefined struct for user
 type ModifyCdbProxyParamRequestParams struct {
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Proxy group ID
+	// Proxy group ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// Connection pool threshold
+	// Connection pool threshold. Value ranges from above 0 to less than or equal to 300.
+	// Note: If you need to use the database proxy connection pool capability, the kernel minor version of the MySQL 8.0 primary instance must be equal to or greater than MySQL 8.0 20230630.
 	ConnectionPoolLimit *uint64 `json:"ConnectionPoolLimit,omitnil,omitempty" name:"ConnectionPoolLimit"`
 }
 
 type ModifyCdbProxyParamRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Proxy group ID
+	// Proxy group ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// Connection pool threshold
+	// Connection pool threshold. Value ranges from above 0 to less than or equal to 300.
+	// Note: If you need to use the database proxy connection pool capability, the kernel minor version of the MySQL 8.0 primary instance must be equal to or greater than MySQL 8.0 20230630.
 	ConnectionPoolLimit *uint64 `json:"ConnectionPoolLimit,omitnil,omitempty" name:"ConnectionPoolLimit"`
 }
 
@@ -11216,63 +12220,73 @@ func (r *ModifyCdbProxyParamResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDBInstanceLogToCLSRequestParams struct {
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Log type. Valid values: error and slowLog.
+	// Log type. error: error log. slowlog: slow log.
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
-	// Enabling status. Valid values: ON and OFF.
+	// Delivery status. ON: Enabled, OFF: Disabled.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Indicates whether a log set needs to be created.
+	// Whether required to create logset. Default to false.
 	CreateLogset *bool `json:"CreateLogset,omitnil,omitempty" name:"CreateLogset"`
 
-	// Log set name if the log set is to be created or ID of the selected existing log set.
+	// Logset name when creating a logset; logset ID when selecting an existing log set. Empty by default.
+	// Description: When the parameter Status is set to ON, you must fill in either the Logset or LogTopic parameter.
 	Logset *string `json:"Logset,omitnil,omitempty" name:"Logset"`
 
-	// Indicates whether a log topic needs to be created.
+	// Whether required to create log topic. Default to false.
 	CreateLogTopic *bool `json:"CreateLogTopic,omitnil,omitempty" name:"CreateLogTopic"`
 
-	// Log topic name if the topic is to be created or ID of the selected existing topic.
+	// Log topic name when creating a log topic; log topic ID when selecting an existing log topic. Empty by default.
+	// Description: When the parameter Status is set to ON, you must fill in either the Logset or LogTopic parameter.
 	LogTopic *string `json:"LogTopic,omitnil,omitempty" name:"LogTopic"`
 
-	// Log topic validity period, which is 30 days by default if not specified.
+	// Log topic valid period. Default value: 30 days if left empty. Maximum value: 3600.
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Indicates whether to create an index when creating the log topic.
+	// Whether to create an index when creating a log topic. Default to false.
 	CreateIndex *bool `json:"CreateIndex,omitnil,omitempty" name:"CreateIndex"`
+
+	// The region of CLS. If left empty, it defaults to the parameter value of Region.
+	ClsRegion *string `json:"ClsRegion,omitnil,omitempty" name:"ClsRegion"`
 }
 
 type ModifyDBInstanceLogToCLSRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Log type. Valid values: error and slowLog.
+	// Log type. error: error log. slowlog: slow log.
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
-	// Enabling status. Valid values: ON and OFF.
+	// Delivery status. ON: Enabled, OFF: Disabled.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Indicates whether a log set needs to be created.
+	// Whether required to create logset. Default to false.
 	CreateLogset *bool `json:"CreateLogset,omitnil,omitempty" name:"CreateLogset"`
 
-	// Log set name if the log set is to be created or ID of the selected existing log set.
+	// Logset name when creating a logset; logset ID when selecting an existing log set. Empty by default.
+	// Description: When the parameter Status is set to ON, you must fill in either the Logset or LogTopic parameter.
 	Logset *string `json:"Logset,omitnil,omitempty" name:"Logset"`
 
-	// Indicates whether a log topic needs to be created.
+	// Whether required to create log topic. Default to false.
 	CreateLogTopic *bool `json:"CreateLogTopic,omitnil,omitempty" name:"CreateLogTopic"`
 
-	// Log topic name if the topic is to be created or ID of the selected existing topic.
+	// Log topic name when creating a log topic; log topic ID when selecting an existing log topic. Empty by default.
+	// Description: When the parameter Status is set to ON, you must fill in either the Logset or LogTopic parameter.
 	LogTopic *string `json:"LogTopic,omitnil,omitempty" name:"LogTopic"`
 
-	// Log topic validity period, which is 30 days by default if not specified.
+	// Log topic valid period. Default value: 30 days if left empty. Maximum value: 3600.
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Indicates whether to create an index when creating the log topic.
+	// Whether to create an index when creating a log topic. Default to false.
 	CreateIndex *bool `json:"CreateIndex,omitnil,omitempty" name:"CreateIndex"`
+
+	// The region of CLS. If left empty, it defaults to the parameter value of Region.
+	ClsRegion *string `json:"ClsRegion,omitnil,omitempty" name:"ClsRegion"`
 }
 
 func (r *ModifyDBInstanceLogToCLSRequest) ToJsonString() string {
@@ -11296,6 +12310,7 @@ func (r *ModifyDBInstanceLogToCLSRequest) FromJsonString(s string) error {
 	delete(f, "LogTopic")
 	delete(f, "Period")
 	delete(f, "CreateIndex")
+	delete(f, "ClsRegion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceLogToCLSRequest has unknown keys!", "")
 	}
@@ -11325,11 +12340,82 @@ func (r *ModifyDBInstanceLogToCLSResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyDBInstanceModesRequestParams struct {
+	// <p>Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>The mode of cloud databases currently only supports input "protectMode" to modify the Primary-standby sync mode.</p>
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
+
+	// <p>Data synchronization mode, available values: 0 - async replication, 1 - semi-sync replication, 2 - strong sync replication.</p>
+	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
+}
+
+type ModifyDBInstanceModesRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>The mode of cloud databases currently only supports input "protectMode" to modify the Primary-standby sync mode.</p>
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
+
+	// <p>Data synchronization mode, available values: 0 - async replication, 1 - semi-sync replication, 2 - strong sync replication.</p>
+	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
+}
+
+func (r *ModifyDBInstanceModesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceModesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Mode")
+	delete(f, "ProtectMode")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceModesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDBInstanceModesResponseParams struct {
+	// <p>Request ID of the asynchronous task. Use this ID to query the outcome of the async task.</p>
+	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyDBInstanceModesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDBInstanceModesResponseParams `json:"Response"`
+}
+
+func (r *ModifyDBInstanceModesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceModesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyDBInstanceNameRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// The modified instance name.
+	// Modified instance name, which can only contain digits, English uppercase and lowercase letters, Chinese, and special characters -_./()[]（）+=:：@. Its length cannot exceed 60.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 }
 
@@ -11339,7 +12425,7 @@ type ModifyDBInstanceNameRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// The modified instance name.
+	// Modified instance name, which can only contain digits, English uppercase and lowercase letters, Chinese, and special characters -_./()[]（）+=:：@. Its length cannot exceed 60.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 }
 
@@ -11387,20 +12473,32 @@ func (r *ModifyDBInstanceNameResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDBInstanceProjectRequestParams struct {
-	// Array of instance IDs in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console. You can obtain it through the query instance list API (https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1). The value is the InstanceId field in the output parameter.
+	// Description: Multiple instance IDs can be entered for modification. The json format is as follows.
+	// [
+	//     "cdb-30z11v8s",
+	//     "cdb-93h11efg"
+	//   ]
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Project ID.
+	// ID of the project to which instance belongs can be queried on the Projects page in the account center.
+	// Description: This item is required.
 	NewProjectId *int64 `json:"NewProjectId,omitnil,omitempty" name:"NewProjectId"`
 }
 
 type ModifyDBInstanceProjectRequest struct {
 	*tchttp.BaseRequest
 	
-	// Array of instance IDs in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console. You can obtain it through the query instance list API (https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1). The value is the InstanceId field in the output parameter.
+	// Description: Multiple instance IDs can be entered for modification. The json format is as follows.
+	// [
+	//     "cdb-30z11v8s",
+	//     "cdb-93h11efg"
+	//   ]
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Project ID.
+	// ID of the project to which instance belongs can be queried on the Projects page in the account center.
+	// Description: This item is required.
 	NewProjectId *int64 `json:"NewProjectId,omitnil,omitempty" name:"NewProjectId"`
 }
 
@@ -11451,11 +12549,15 @@ type ModifyDBInstanceSecurityGroupsRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// List of IDs of security groups to be modified, which is an array of one or more security group IDs.
+	// List of security group IDs to modify, an array of security group IDs. It can be obtained through the API [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/product/236/15854?from_cn_redirect=1). The input security group ID array has no length limit.
+	// **Note**: This input parameter performs a full replacement on all existing collections but not an incremental update. To modify it, import the expected full collections.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// This parameter takes effect only when the ID of read-only replica is passed in. If this parameter is set to `False` or left empty, the security groups bound with the RO group of the read-only replicas will be modified. If this parameter is set to `True`, the security groups bound with the read-only replica itself will be modified.
+	// When importing a read-only instance ID, the default operation is performed on the corresponding security group of the read-only group. If necessary to operate the security group of the read-only instance ID, set this input parameter to True. Default False.
 	ForReadonlyInstance *bool `json:"ForReadonlyInstance,omitnil,omitempty" name:"ForReadonlyInstance"`
+
+	// When updating the read-only group of a cloud disk edition instance, specify the instance ID in InstanceId and this parameter to indicate the operation is for the read-only group. If you perform the operation on the read-write node, this parameter is not required.
+	OpResourceId *string `json:"OpResourceId,omitnil,omitempty" name:"OpResourceId"`
 }
 
 type ModifyDBInstanceSecurityGroupsRequest struct {
@@ -11464,11 +12566,15 @@ type ModifyDBInstanceSecurityGroupsRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// List of IDs of security groups to be modified, which is an array of one or more security group IDs.
+	// List of security group IDs to modify, an array of security group IDs. It can be obtained through the API [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/product/236/15854?from_cn_redirect=1). The input security group ID array has no length limit.
+	// **Note**: This input parameter performs a full replacement on all existing collections but not an incremental update. To modify it, import the expected full collections.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// This parameter takes effect only when the ID of read-only replica is passed in. If this parameter is set to `False` or left empty, the security groups bound with the RO group of the read-only replicas will be modified. If this parameter is set to `True`, the security groups bound with the read-only replica itself will be modified.
+	// When importing a read-only instance ID, the default operation is performed on the corresponding security group of the read-only group. If necessary to operate the security group of the read-only instance ID, set this input parameter to True. Default False.
 	ForReadonlyInstance *bool `json:"ForReadonlyInstance,omitnil,omitempty" name:"ForReadonlyInstance"`
+
+	// When updating the read-only group of a cloud disk edition instance, specify the instance ID in InstanceId and this parameter to indicate the operation is for the read-only group. If you perform the operation on the read-write node, this parameter is not required.
+	OpResourceId *string `json:"OpResourceId,omitnil,omitempty" name:"OpResourceId"`
 }
 
 func (r *ModifyDBInstanceSecurityGroupsRequest) ToJsonString() string {
@@ -11486,6 +12592,7 @@ func (r *ModifyDBInstanceSecurityGroupsRequest) FromJsonString(s string) error {
 	delete(f, "InstanceId")
 	delete(f, "SecurityGroupIds")
 	delete(f, "ForReadonlyInstance")
+	delete(f, "OpResourceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceSecurityGroupsRequest has unknown keys!", "")
 	}
@@ -11519,10 +12626,10 @@ type ModifyDBInstanceVipVportRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv, cdbro-c2nl9rpv, or cdbrg-c3nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872) API to query the ID, which is the value of the `InstanceId` output parameter.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Target IP. Either this parameter or `DstPort` must be passed in.
+	// Target IP address.
 	DstIp *string `json:"DstIp,omitnil,omitempty" name:"DstIp"`
 
-	// Target port number. Value range: 1024-65535. Either this parameter or `DstIp` must be passed in.
+	// Destination port. Support scope: [1024-65535].
 	DstPort *int64 `json:"DstPort,omitnil,omitempty" name:"DstPort"`
 
 	// Unified VPC ID
@@ -11533,6 +12640,9 @@ type ModifyDBInstanceVipVportRequestParams struct {
 
 	// Repossession duration in hours for old IP in the original network when changing from classic network to VPC or changing the VPC subnet. Value range: 0–168. Default value: `24`.
 	ReleaseDuration *int64 `json:"ReleaseDuration,omitnil,omitempty" name:"ReleaseDuration"`
+
+	// When updating the read-only group of a cluster edition instance, specify the instance id in InstanceId and this parameter is required to indicate the operation is for the read-only group. If you perform the operation on the read-write node, this parameter is not required.
+	OpResourceId *string `json:"OpResourceId,omitnil,omitempty" name:"OpResourceId"`
 }
 
 type ModifyDBInstanceVipVportRequest struct {
@@ -11541,10 +12651,10 @@ type ModifyDBInstanceVipVportRequest struct {
 	// Instance ID in the format of cdb-c1nl9rpv, cdbro-c2nl9rpv, or cdbrg-c3nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872) API to query the ID, which is the value of the `InstanceId` output parameter.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Target IP. Either this parameter or `DstPort` must be passed in.
+	// Target IP address.
 	DstIp *string `json:"DstIp,omitnil,omitempty" name:"DstIp"`
 
-	// Target port number. Value range: 1024-65535. Either this parameter or `DstIp` must be passed in.
+	// Destination port. Support scope: [1024-65535].
 	DstPort *int64 `json:"DstPort,omitnil,omitempty" name:"DstPort"`
 
 	// Unified VPC ID
@@ -11555,6 +12665,9 @@ type ModifyDBInstanceVipVportRequest struct {
 
 	// Repossession duration in hours for old IP in the original network when changing from classic network to VPC or changing the VPC subnet. Value range: 0–168. Default value: `24`.
 	ReleaseDuration *int64 `json:"ReleaseDuration,omitnil,omitempty" name:"ReleaseDuration"`
+
+	// When updating the read-only group of a cluster edition instance, specify the instance id in InstanceId and this parameter is required to indicate the operation is for the read-only group. If you perform the operation on the read-write node, this parameter is not required.
+	OpResourceId *string `json:"OpResourceId,omitnil,omitempty" name:"OpResourceId"`
 }
 
 func (r *ModifyDBInstanceVipVportRequest) ToJsonString() string {
@@ -11575,6 +12688,7 @@ func (r *ModifyDBInstanceVipVportRequest) FromJsonString(s string) error {
 	delete(f, "UniqVpcId")
 	delete(f, "UniqSubnetId")
 	delete(f, "ReleaseDuration")
+	delete(f, "OpResourceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceVipVportRequest has unknown keys!", "")
 	}
@@ -11583,8 +12697,9 @@ func (r *ModifyDBInstanceVipVportRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDBInstanceVipVportResponseParams struct {
-	// Async task ID. This parameter is deprecated.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Asynchronous Task ID. (This returned field is currently abandoned)
+	//
+	// Deprecated: AsyncRequestId is deprecated.
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -11609,13 +12724,13 @@ func (r *ModifyDBInstanceVipVportResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyInstanceParamRequestParams struct {
-	// List of short instance IDs.
+	// Instance ID list, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// List of parameters to be modified. Every element is a combination of `Name` (parameter name) and `CurrentValue` (new value).
 	ParamList []*Parameter `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 
-	// Template ID. At least one of `ParamList` and `TemplateId` must be passed in.
+	// Template ID. At least one of ParamList and TemplateId must be provided. It can be obtained through the API [DescribeParamTemplates](https://www.tencentcloud.com/document/api/236/32659?from_cn_redirect=1).
 	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// When to perform the parameter adjustment task. Default value: 0. Valid values: 0 - execute immediately, 1 - execute during window. When its value is 1, only one instance ID can be passed in (i.e., only one `InstanceIds` can be passed in).
@@ -11631,13 +12746,13 @@ type ModifyInstanceParamRequestParams struct {
 type ModifyInstanceParamRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of short instance IDs.
+	// Instance ID list, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// List of parameters to be modified. Every element is a combination of `Name` (parameter name) and `CurrentValue` (new value).
 	ParamList []*Parameter `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 
-	// Template ID. At least one of `ParamList` and `TemplateId` must be passed in.
+	// Template ID. At least one of ParamList and TemplateId must be provided. It can be obtained through the API [DescribeParamTemplates](https://www.tencentcloud.com/document/api/236/32659?from_cn_redirect=1).
 	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// When to perform the parameter adjustment task. Default value: 0. Valid values: 0 - execute immediately, 1 - execute during window. When its value is 1, only one instance ID can be passed in (i.e., only one `InstanceIds` can be passed in).
@@ -11701,20 +12816,48 @@ func (r *ModifyInstanceParamResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyInstancePasswordComplexityRequestParams struct {
-	// Instance ID list
+	// Instance ID of the instance for which the password complexity needs to be modified. The [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API can be called to obtain it.
+	// Description: Support multiple instance IDs for modification.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// List of parameters to be modified. Every element is a combination of `Name` (parameter name) and `CurrentValue` (new value). Valid values for `Name` of version 8.0: `validate_password.policy`, `validate_password.lengt`, `validate_password.mixed_case_coun`, `validate_password.number_coun`, `validate_password.special_char_count`. Valid values for `Name` of version 5.6 and 5.7: `validate_password_polic`, `validate_password_lengt` `validate_password_mixed_case_coun`, `validate_password_number_coun`, `validate_password_special_char_coun`.
+	// Options to modify password complexity. Each option is written in metric combinations. A group includes Name and CurrentValue. Among them, Name refers to the parameter name of the corresponding option, and CurrentValue represents the parameter value. For example: [{"Name": "validate_password.length", "CurrentValue": "10"}] means changing the minimum number of characters in a password to 10.
+	// Description: The options for modifying password complexity vary by database version of instances as follows.
+	// 1. MySQL 8.0:
+	// The option validate_password.policy means the switch for password complexity. A value of LOW means disabling; a value of MEDIUM means enabling.
+	// The option validate_password.length indicates the minimum number of characters for the total code length.
+	// The option validate_password.mixed_case_count indicates the minimum number of lowercase and uppercase letters.
+	// Option validate_password.number_count indicates the minimum number of digits.
+	// The option validate_password.special_char_count indicates the minimum number of special characters.
+	// 2. MySQL 5.6,MySQL 5.7:
+	// The option validate_password_policy means the password complexity switch. A value of LOW means disabling; a value of MEDIUM means enabling.
+	// The option validate_password_length indicates the minimum number of characters for the total code length.
+	// The option validate_password_mixed_case_count means the minimum number of uppercase and lowercase letters.
+	// Option validate_password_number_count means the minimum number of digits.
+	// Option validate_password_special_char_count indicates the minimum number of special characters.
 	ParamList []*Parameter `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 }
 
 type ModifyInstancePasswordComplexityRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID list
+	// Instance ID of the instance for which the password complexity needs to be modified. The [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API can be called to obtain it.
+	// Description: Support multiple instance IDs for modification.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// List of parameters to be modified. Every element is a combination of `Name` (parameter name) and `CurrentValue` (new value). Valid values for `Name` of version 8.0: `validate_password.policy`, `validate_password.lengt`, `validate_password.mixed_case_coun`, `validate_password.number_coun`, `validate_password.special_char_count`. Valid values for `Name` of version 5.6 and 5.7: `validate_password_polic`, `validate_password_lengt` `validate_password_mixed_case_coun`, `validate_password_number_coun`, `validate_password_special_char_coun`.
+	// Options to modify password complexity. Each option is written in metric combinations. A group includes Name and CurrentValue. Among them, Name refers to the parameter name of the corresponding option, and CurrentValue represents the parameter value. For example: [{"Name": "validate_password.length", "CurrentValue": "10"}] means changing the minimum number of characters in a password to 10.
+	// Description: The options for modifying password complexity vary by database version of instances as follows.
+	// 1. MySQL 8.0:
+	// The option validate_password.policy means the switch for password complexity. A value of LOW means disabling; a value of MEDIUM means enabling.
+	// The option validate_password.length indicates the minimum number of characters for the total code length.
+	// The option validate_password.mixed_case_count indicates the minimum number of lowercase and uppercase letters.
+	// Option validate_password.number_count indicates the minimum number of digits.
+	// The option validate_password.special_char_count indicates the minimum number of special characters.
+	// 2. MySQL 5.6,MySQL 5.7:
+	// The option validate_password_policy means the password complexity switch. A value of LOW means disabling; a value of MEDIUM means enabling.
+	// The option validate_password_length indicates the minimum number of characters for the total code length.
+	// The option validate_password_mixed_case_count means the minimum number of uppercase and lowercase letters.
+	// Option validate_password_number_count means the minimum number of digits.
+	// Option validate_password_special_char_count indicates the minimum number of special characters.
 	ParamList []*Parameter `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 }
 
@@ -11765,26 +12908,26 @@ func (r *ModifyInstancePasswordComplexityResponse) FromJsonString(s string) erro
 
 // Predefined struct for user
 type ModifyInstanceTagRequestParams struct {
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Tag to be added or modified.
+	// Tags to add or modify. ReplaceTags or DeleteTags is mandatory to fill in one.
 	ReplaceTags []*TagInfo `json:"ReplaceTags,omitnil,omitempty" name:"ReplaceTags"`
 
-	// Tag to be deleted.
+	// Tag to delete. ReplaceTags or DeleteTags is mandatory to fill in one.
 	DeleteTags []*TagInfo `json:"DeleteTags,omitnil,omitempty" name:"DeleteTags"`
 }
 
 type ModifyInstanceTagRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Tag to be added or modified.
+	// Tags to add or modify. ReplaceTags or DeleteTags is mandatory to fill in one.
 	ReplaceTags []*TagInfo `json:"ReplaceTags,omitnil,omitempty" name:"ReplaceTags"`
 
-	// Tag to be deleted.
+	// Tag to delete. ReplaceTags or DeleteTags is mandatory to fill in one.
 	DeleteTags []*TagInfo `json:"DeleteTags,omitnil,omitempty" name:"DeleteTags"`
 }
 
@@ -11833,26 +12976,34 @@ func (r *ModifyInstanceTagResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyLocalBinlogConfigRequestParams struct {
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Retention period of local binlog. Valid range: 72-168 hours. When there is disaster recovery instance, the valid range will be 120-168 hours.
+	// Local binlog retention duration. Values for different instances are as follows:
+	// 1. The local binlog retention duration (hr) for cloud disk edition instances, dual-node instances, and three-node instances defaults to 120, with a range of 6 - 168.
+	// 2. The retention duration of local binlog for disaster recovery instance defaults to 120 hr, with a range of 120 - 168.
+	// 3. The retention duration (hr) of local binlog for a single-node cloud disk instance defaults to 120, with a range of 0 - 168.
+	// 4. If a dual-node instance or three-node instance has no disaster recovery instance, the retention duration (hr) of local binlog for the primary instance ranges from 6 to 168. If a dual-node instance or three-node instance has a disaster recovery instance, or you want to add a disaster recovery instance to a dual-node instance or three-node instance, to avoid synchronization exception, the retention duration (hr) of local binlog for the primary instance cannot be set to less than 120 hr, ranging from 120 to 168.
 	SaveHours *int64 `json:"SaveHours,omitnil,omitempty" name:"SaveHours"`
 
-	// Space utilization of local binlog. Value range: [30,50].
+	// Local binlog space utilization. Valid values: [30,50].
 	MaxUsage *int64 `json:"MaxUsage,omitnil,omitempty" name:"MaxUsage"`
 }
 
 type ModifyLocalBinlogConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Retention period of local binlog. Valid range: 72-168 hours. When there is disaster recovery instance, the valid range will be 120-168 hours.
+	// Local binlog retention duration. Values for different instances are as follows:
+	// 1. The local binlog retention duration (hr) for cloud disk edition instances, dual-node instances, and three-node instances defaults to 120, with a range of 6 - 168.
+	// 2. The retention duration of local binlog for disaster recovery instance defaults to 120 hr, with a range of 120 - 168.
+	// 3. The retention duration (hr) of local binlog for a single-node cloud disk instance defaults to 120, with a range of 0 - 168.
+	// 4. If a dual-node instance or three-node instance has no disaster recovery instance, the retention duration (hr) of local binlog for the primary instance ranges from 6 to 168. If a dual-node instance or three-node instance has a disaster recovery instance, or you want to add a disaster recovery instance to a dual-node instance or three-node instance, to avoid synchronization exception, the retention duration (hr) of local binlog for the primary instance cannot be set to less than 120 hr, ranging from 120 to 168.
 	SaveHours *int64 `json:"SaveHours,omitnil,omitempty" name:"SaveHours"`
 
-	// Space utilization of local binlog. Value range: [30,50].
+	// Local binlog space utilization. Valid values: [30,50].
 	MaxUsage *int64 `json:"MaxUsage,omitnil,omitempty" name:"MaxUsage"`
 }
 
@@ -11969,10 +13120,10 @@ func (r *ModifyNameOrDescByDpIdResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyParamTemplateRequestParams struct {
-	// Template ID.
+	// Template ID, which can be obtained through the [DescribeParamTemplates](https://www.tencentcloud.com/document/api/236/32659?from_cn_redirect=1) API.
 	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
-	// Template name (up to 64 characters)
+	// Template name, supports numbers, English uppercase and lowercase letters, Chinese, and special characters _-./()[]+=:@, and the length cannot exceed 60.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Template description (up to 255 characters)
@@ -11985,10 +13136,10 @@ type ModifyParamTemplateRequestParams struct {
 type ModifyParamTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Template ID.
+	// Template ID, which can be obtained through the [DescribeParamTemplates](https://www.tencentcloud.com/document/api/236/32659?from_cn_redirect=1) API.
 	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
-	// Template name (up to 64 characters)
+	// Template name, supports numbers, English uppercase and lowercase letters, Chinese, and special characters _-./()[]+=:@, and the length cannot exceed 60.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Template description (up to 255 characters)
@@ -12039,6 +13190,67 @@ func (r *ModifyParamTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyParamTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyProtectModeRequestParams struct {
+	// Data replication method, defaults to 0. Supported values include: 0 - asynchronous replication, 1 - semi-sync replication, 2 - strong sync replication.
+	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type ModifyProtectModeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data replication method, defaults to 0. Supported values include: 0 - asynchronous replication, 1 - semi-sync replication, 2 - strong sync replication.
+	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+func (r *ModifyProtectModeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyProtectModeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProtectMode")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyProtectModeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyProtectModeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyProtectModeResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyProtectModeResponseParams `json:"Response"`
+}
+
+func (r *ModifyProtectModeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyProtectModeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -12126,32 +13338,34 @@ func (r *ModifyRemoteBackupConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyRoGroupInfoRequestParams struct {
-	// RO group ID.
+	// ID of the RO group, which can be obtained through the [DescribeRoGroups](https://www.tencentcloud.com/document/api/236/40939?from_cn_redirect=1) API.
 	RoGroupId *string `json:"RoGroupId,omitnil,omitempty" name:"RoGroupId"`
 
 	// RO group details.
 	RoGroupInfo *RoGroupAttr `json:"RoGroupInfo,omitnil,omitempty" name:"RoGroupInfo"`
 
-	// Weights of instances in RO group. If the weighting mode of an RO group is changed to custom mode, this parameter must be set, and a weight value needs to be set for each RO instance.
+	// Weight of instances in the RO group. If modification is needed to set the weight mode of the RO group to user-defined mode (custom), this parameter must be set, and the weight value of each read-only instance needs to be set. The RO instance ID can be obtained through the [DescribeRoGroups](https://www.tencentcloud.com/document/api/236/40939?from_cn_redirect=1) API.
 	RoWeightValues []*RoWeightValue `json:"RoWeightValues,omitnil,omitempty" name:"RoWeightValues"`
 
 	// Whether to rebalance the loads of read-only replicas in the RO group. Valid values: `1` (yes), `0` (no). Default value: `0`. If this parameter is set to `1`, connections to the read-only replicas in the RO group will be interrupted transiently. Please ensure that your application has a reconnection mechanism.
 	IsBalanceRoLoad *int64 `json:"IsBalanceRoLoad,omitnil,omitempty" name:"IsBalanceRoLoad"`
 
 	// This field has been deprecated.
+	//
+	// Deprecated: ReplicationDelayTime is deprecated.
 	ReplicationDelayTime *int64 `json:"ReplicationDelayTime,omitnil,omitempty" name:"ReplicationDelayTime"`
 }
 
 type ModifyRoGroupInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// RO group ID.
+	// ID of the RO group, which can be obtained through the [DescribeRoGroups](https://www.tencentcloud.com/document/api/236/40939?from_cn_redirect=1) API.
 	RoGroupId *string `json:"RoGroupId,omitnil,omitempty" name:"RoGroupId"`
 
 	// RO group details.
 	RoGroupInfo *RoGroupAttr `json:"RoGroupInfo,omitnil,omitempty" name:"RoGroupInfo"`
 
-	// Weights of instances in RO group. If the weighting mode of an RO group is changed to custom mode, this parameter must be set, and a weight value needs to be set for each RO instance.
+	// Weight of instances in the RO group. If modification is needed to set the weight mode of the RO group to user-defined mode (custom), this parameter must be set, and the weight value of each read-only instance needs to be set. The RO instance ID can be obtained through the [DescribeRoGroups](https://www.tencentcloud.com/document/api/236/40939?from_cn_redirect=1) API.
 	RoWeightValues []*RoWeightValue `json:"RoWeightValues,omitnil,omitempty" name:"RoWeightValues"`
 
 	// Whether to rebalance the loads of read-only replicas in the RO group. Valid values: `1` (yes), `0` (no). Default value: `0`. If this parameter is set to `1`, connections to the read-only replicas in the RO group will be interrupted transiently. Please ensure that your application has a reconnection mechanism.
@@ -12186,8 +13400,7 @@ func (r *ModifyRoGroupInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyRoGroupInfoResponseParams struct {
-	// Async task ID.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Asynchronous Task ID.
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -12211,33 +13424,121 @@ func (r *ModifyRoGroupInfoResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyRoGroupVipVportRequestParams struct {
+	// ID of the RO group.
+	UGroupId *string `json:"UGroupId,omitnil,omitempty" name:"UGroupId"`
+
+	// Target IP address.
+	DstIp *string `json:"DstIp,omitnil,omitempty" name:"DstIp"`
+
+	// Target Port.
+	DstPort *int64 `json:"DstPort,omitnil,omitempty" name:"DstPort"`
+}
+
+type ModifyRoGroupVipVportRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the RO group.
+	UGroupId *string `json:"UGroupId,omitnil,omitempty" name:"UGroupId"`
+
+	// Target IP address.
+	DstIp *string `json:"DstIp,omitnil,omitempty" name:"DstIp"`
+
+	// Target Port.
+	DstPort *int64 `json:"DstPort,omitnil,omitempty" name:"DstPort"`
+}
+
+func (r *ModifyRoGroupVipVportRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRoGroupVipVportRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "UGroupId")
+	delete(f, "DstIp")
+	delete(f, "DstPort")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRoGroupVipVportRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRoGroupVipVportResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyRoGroupVipVportResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyRoGroupVipVportResponseParams `json:"Response"`
+}
+
+func (r *ModifyRoGroupVipVportResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRoGroupVipVportResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyTimeWindowRequestParams struct {
-	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Time period available for maintenance after modification in the format of 10:00-12:00. Each period lasts from half an hour to three hours, with the start time and end time aligned by half-hour. Up to two time periods can be set. Start and end time range: [00:00, 24:00].
+	// The modified maintenance time slot. Among them, each time period is in the format of 10:00-12:00. The start and end time is aligned by half hour. The shortest is half hour and the longest is three hours. Up to two time periods can be set. The start and end time ranges from [00:00, 24:00].
+	// Description: The following is an example of setting two time periods in json.
+	// [
+	//     "01:00-01:30",
+	//     "02:00-02:30"
+	//   ]
 	TimeRanges []*string `json:"TimeRanges,omitnil,omitempty" name:"TimeRanges"`
 
-	// Specifies for which day to modify the time period. Value range: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. If it is not specified or is left blank, the time period will be modified for every day by default.
+	// Specify which day to modify the maintenance time slot. Possible values are: monday, tuesday, wednesday, thursday, friday, saturday, sunday. If not specified or empty, modify all seven days of the week by default.
+	// Description: The json example for modifying more than one day is as follows.
+	// [
+	//     "monday",
+	//     "tuesday"
+	//   ]
 	Weekdays []*string `json:"Weekdays,omitnil,omitempty" name:"Weekdays"`
 
-	// Data delay threshold. It takes effect only for source instance and disaster recovery instance. Default value: 10.
+	// Data latency threshold (seconds), only applicable to primary instance and disaster recovery instance. No modification by default to keep the original threshold. Value ranges from 1 to 10 integers.
 	MaxDelayTime *uint64 `json:"MaxDelayTime,omitnil,omitempty" name:"MaxDelayTime"`
 }
 
 type ModifyTimeWindowRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Time period available for maintenance after modification in the format of 10:00-12:00. Each period lasts from half an hour to three hours, with the start time and end time aligned by half-hour. Up to two time periods can be set. Start and end time range: [00:00, 24:00].
+	// The modified maintenance time slot. Among them, each time period is in the format of 10:00-12:00. The start and end time is aligned by half hour. The shortest is half hour and the longest is three hours. Up to two time periods can be set. The start and end time ranges from [00:00, 24:00].
+	// Description: The following is an example of setting two time periods in json.
+	// [
+	//     "01:00-01:30",
+	//     "02:00-02:30"
+	//   ]
 	TimeRanges []*string `json:"TimeRanges,omitnil,omitempty" name:"TimeRanges"`
 
-	// Specifies for which day to modify the time period. Value range: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. If it is not specified or is left blank, the time period will be modified for every day by default.
+	// Specify which day to modify the maintenance time slot. Possible values are: monday, tuesday, wednesday, thursday, friday, saturday, sunday. If not specified or empty, modify all seven days of the week by default.
+	// Description: The json example for modifying more than one day is as follows.
+	// [
+	//     "monday",
+	//     "tuesday"
+	//   ]
 	Weekdays []*string `json:"Weekdays,omitnil,omitempty" name:"Weekdays"`
 
-	// Data delay threshold. It takes effect only for source instance and disaster recovery instance. Default value: 10.
+	// Data latency threshold (seconds), only applicable to primary instance and disaster recovery instance. No modification by default to keep the original threshold. Value ranges from 1 to 10 integers.
 	MaxDelayTime *uint64 `json:"MaxDelayTime,omitnil,omitempty" name:"MaxDelayTime"`
 }
 
@@ -12283,6 +13584,17 @@ func (r *ModifyTimeWindowResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ModifyTimeWindowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type NodeDistribution struct {
+	// Host ID of the Master node of the primary instance or host ID of the read-only instance
+	Node *string `json:"Node,omitnil,omitempty" name:"Node"`
+
+	// Host ID where the first Slave node of the primary instance resides
+	SlaveNodeOne *string `json:"SlaveNodeOne,omitnil,omitempty" name:"SlaveNodeOne"`
+
+	// Host ID where the second Slave node of the primary instance resides
+	SlaveNodeTwo *string `json:"SlaveNodeTwo,omitnil,omitempty" name:"SlaveNodeTwo"`
 }
 
 // Predefined struct for user
@@ -12341,44 +13653,76 @@ func (r *OfflineIsolatedInstancesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type OpenAuditServiceRequestParams struct {
-	// TencentDB for MySQL instance ID
+	// CDB instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Retention period of the audit log. Valid values:  `7` (one week), `30` (one month), `90` (three months), `180` (six months), `365` (one year), `1095` (three years), `1825` (five years).
+	// Audit log retention period. Supported values include:
+	// 7 - A week;
+	// 30 - one month
+	// 90 - three months;
+	// 180 - 6 months;
+	// 365 - One year;
+	// 1095 - Three years;
+	// 1825 - Five years.
 	LogExpireDay *uint64 `json:"LogExpireDay,omitnil,omitempty" name:"LogExpireDay"`
 
-	// Retention period of high-frequency audit logs. Valid values:  `7` (one week), `30` (one month).
+	// High frequency audit log retention period. Default value is 7. This item must take value less than or equal to LogExpireDay. Supported values include:
+	// 3 - 3 days;
+	// 7 - A week;
+	// 30 - one month
+	// 90 - three months;
+	// 180 - 6 months;
+	// 365 - One year;
+	// 1095 - Three years;
+	// 1825 - Five years.
 	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitnil,omitempty" name:"HighLogExpireDay"`
 
-	// Audit rule If both this parameter and `RuleTemplateIds` are left empty, full audit will be applied.
+	// Audit rule (deprecated, no longer effective).
+	//
+	// Deprecated: AuditRuleFilters is deprecated.
 	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitnil,omitempty" name:"AuditRuleFilters"`
 
-	// Rule template ID. If both this parameter and AuditRuleFilters are not specified, all SQL statements will be recorded.
+	// Rule template ID.
 	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil,omitempty" name:"RuleTemplateIds"`
 
-	// Audit type. Valid values: true: Record all; false: Record by rules (default value).
+	// Audit type. true - full audit; default false - rule audit.
 	AuditAll *bool `json:"AuditAll,omitnil,omitempty" name:"AuditAll"`
 }
 
 type OpenAuditServiceRequest struct {
 	*tchttp.BaseRequest
 	
-	// TencentDB for MySQL instance ID
+	// CDB instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Retention period of the audit log. Valid values:  `7` (one week), `30` (one month), `90` (three months), `180` (six months), `365` (one year), `1095` (three years), `1825` (five years).
+	// Audit log retention period. Supported values include:
+	// 7 - A week;
+	// 30 - one month
+	// 90 - three months;
+	// 180 - 6 months;
+	// 365 - One year;
+	// 1095 - Three years;
+	// 1825 - Five years.
 	LogExpireDay *uint64 `json:"LogExpireDay,omitnil,omitempty" name:"LogExpireDay"`
 
-	// Retention period of high-frequency audit logs. Valid values:  `7` (one week), `30` (one month).
+	// High frequency audit log retention period. Default value is 7. This item must take value less than or equal to LogExpireDay. Supported values include:
+	// 3 - 3 days;
+	// 7 - A week;
+	// 30 - one month
+	// 90 - three months;
+	// 180 - 6 months;
+	// 365 - One year;
+	// 1095 - Three years;
+	// 1825 - Five years.
 	HighLogExpireDay *uint64 `json:"HighLogExpireDay,omitnil,omitempty" name:"HighLogExpireDay"`
 
-	// Audit rule If both this parameter and `RuleTemplateIds` are left empty, full audit will be applied.
+	// Audit rule (deprecated, no longer effective).
 	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitnil,omitempty" name:"AuditRuleFilters"`
 
-	// Rule template ID. If both this parameter and AuditRuleFilters are not specified, all SQL statements will be recorded.
+	// Rule template ID.
 	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil,omitempty" name:"RuleTemplateIds"`
 
-	// Audit type. Valid values: true: Record all; false: Record by rules (default value).
+	// Audit type. true - full audit; default false - rule audit.
 	AuditAll *bool `json:"AuditAll,omitnil,omitempty" name:"AuditAll"`
 }
 
@@ -12430,26 +13774,26 @@ func (r *OpenAuditServiceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type OpenDBInstanceEncryptionRequestParams struct {
-	// TencentDB instance ID
+	// Cloud database instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Custom key ID, which is the unique CMK ID. If this value is empty, the key KMS-CDB auto-generated by Tencent Cloud will be used.
+	// Custom key ID, the unique identifier of CMK. If left empty, the automatically generated key KMS-CDB by using Tencent Cloud will be used.
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
-	// Custom storage region, such as ap-guangzhou. When `KeyId` is not empty, this parameter is required.
+	// Storage region of the custom key. For example: ap-guangzhou. This parameter is required when KeyId is not empty.
 	KeyRegion *string `json:"KeyRegion,omitnil,omitempty" name:"KeyRegion"`
 }
 
 type OpenDBInstanceEncryptionRequest struct {
 	*tchttp.BaseRequest
 	
-	// TencentDB instance ID
+	// Cloud database instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Custom key ID, which is the unique CMK ID. If this value is empty, the key KMS-CDB auto-generated by Tencent Cloud will be used.
+	// Custom key ID, the unique identifier of CMK. If left empty, the automatically generated key KMS-CDB by using Tencent Cloud will be used.
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
-	// Custom storage region, such as ap-guangzhou. When `KeyId` is not empty, this parameter is required.
+	// Storage region of the custom key. For example: ap-guangzhou. This parameter is required when KeyId is not empty.
 	KeyRegion *string `json:"KeyRegion,omitnil,omitempty" name:"KeyRegion"`
 }
 
@@ -12554,16 +13898,86 @@ func (r *OpenDBInstanceGTIDResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type OpenWanServiceRequestParams struct {
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+type OpenSSLRequestParams struct {
+	// Instance ID. Required when the read-only group ID is empty. Can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Read-only group ID. Required when the instance ID is empty. Can be obtained through the [DescribeRoGroups](https://www.tencentcloud.com/document/api/236/40939?from_cn_redirect=1) API.
+	RoGroupId *string `json:"RoGroupId,omitnil,omitempty" name:"RoGroupId"`
+}
+
+type OpenSSLRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID. Required when the read-only group ID is empty. Can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Read-only group ID. Required when the instance ID is empty. Can be obtained through the [DescribeRoGroups](https://www.tencentcloud.com/document/api/236/40939?from_cn_redirect=1) API.
+	RoGroupId *string `json:"RoGroupId,omitnil,omitempty" name:"RoGroupId"`
+}
+
+func (r *OpenSSLRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenSSLRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "RoGroupId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenSSLRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenSSLResponseParams struct {
+	// Asynchronous request ID.
+	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type OpenSSLResponse struct {
+	*tchttp.BaseResponse
+	Response *OpenSSLResponseParams `json:"Response"`
+}
+
+func (r *OpenSSLResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenSSLResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenWanServiceRequestParams struct {
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console. You can obtain it through the query instance list API (https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1). The value is the InstanceId field in the output parameter. The read-only group ID can be passed in.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// When updating the read-only group of a cluster edition instance, specify the instance id in InstanceId and this parameter is required to indicate the operation is for the read-only group. If you perform the operation on the read-write node, this parameter is not required.
+	OpResourceId *string `json:"OpResourceId,omitnil,omitempty" name:"OpResourceId"`
 }
 
 type OpenWanServiceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console. You can obtain it through the query instance list API (https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1). The value is the InstanceId field in the output parameter. The read-only group ID can be passed in.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// When updating the read-only group of a cluster edition instance, specify the instance id in InstanceId and this parameter is required to indicate the operation is for the read-only group. If you perform the operation on the read-write node, this parameter is not required.
+	OpResourceId *string `json:"OpResourceId,omitnil,omitempty" name:"OpResourceId"`
 }
 
 func (r *OpenWanServiceRequest) ToJsonString() string {
@@ -12579,6 +13993,7 @@ func (r *OpenWanServiceRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "InstanceId")
+	delete(f, "OpResourceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenWanServiceRequest has unknown keys!", "")
 	}
@@ -12667,7 +14082,7 @@ type ParamRecord struct {
 }
 
 type ParamTemplateInfo struct {
-	// Parameter template ID
+	// parameter template ID
 	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Parameter template name
@@ -12676,13 +14091,13 @@ type ParamTemplateInfo struct {
 	// Parameter template description
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Instance engine version
+	// Instance engine version. Values: 5.5, 5.6, 5.7, and 8.0.
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
-	// Parameter template type
+	// Parameter template type. Valid values: HIGH_STABILITY, HIGH_PERFORMANCE.
 	TemplateType *string `json:"TemplateType,omitnil,omitempty" name:"TemplateType"`
 
-	// Parameter template engine Note: This field may return null, indicating that no valid values can be obtained.
+	// Parameter template engine, values: InnoDB, RocksDB.
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 }
 
@@ -12728,8 +14143,16 @@ type ParameterDetail struct {
 	// Minimum parameter value, which is valid only when `ParamType` is set to `func`
 	MinFunc *string `json:"MinFunc,omitnil,omitempty" name:"MinFunc"`
 
-	// Whether the parameter can be modified Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether the parameter cannot be modified
 	IsNotSupportEdit *bool `json:"IsNotSupportEdit,omitnil,omitempty" name:"IsNotSupportEdit"`
+}
+
+type PeriodStrategy struct {
+	// Scale-out period
+	TimeCycle *TImeCycle `json:"TimeCycle,omitnil,omitempty" name:"TimeCycle"`
+
+	// Time interval
+	TimeInterval *TimeInterval `json:"TimeInterval,omitnil,omitempty" name:"TimeInterval"`
 }
 
 type ProxyAddress struct {
@@ -12748,38 +14171,51 @@ type ProxyAddress struct {
 	// Port
 	VPort *uint64 `json:"VPort,omitnil,omitempty" name:"VPort"`
 
-	// Assignment mode of weights. Valid values: `system` (auto-assigned), `custom`. Note: This field may return null, indicating that no valid values can be obtained.
+	// Weight allocation mode.
+	// System Auto-Assignment: "system", Custom: "custom"
 	WeightMode *string `json:"WeightMode,omitnil,omitempty" name:"WeightMode"`
 
-	// Whether to remove delayed read-only instances from the proxy group Valid values: `true`, `false`. Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to enable delay removal. Parameter value: "true" | "false"
 	IsKickOut *bool `json:"IsKickOut,omitnil,omitempty" name:"IsKickOut"`
 
-	// Least read-only instances. Minimum value:  `0`. Note: This field may return null, indicating that no valid values can be obtained.
+	// Minimum retention quantity, minimum value: 0.
 	MinCount *uint64 `json:"MinCount,omitnil,omitempty" name:"MinCount"`
 
-	// The delay threshold. Minimum value:  `0`. Note: This field may return null, indicating that no valid values can be obtained.
+	// Delay removal threshold, minimum value: 0
 	MaxDelay *uint64 `json:"MaxDelay,omitnil,omitempty" name:"MaxDelay"`
 
-	// Whether to automatically add newly created read-only instances. Valid values: `true`, `false`. Note: This field may return null, indicating that no valid values can be obtained.
+	// Automatically add RO. Value: "true" | "false"
 	AutoAddRo *bool `json:"AutoAddRo,omitnil,omitempty" name:"AutoAddRo"`
 
-	// Whether it is read-only. Valid values: `true`, `false`. Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether it is read-only. Value: "true" | "false".
 	ReadOnly *bool `json:"ReadOnly,omitnil,omitempty" name:"ReadOnly"`
 
-	// Whether to enable transaction splitting Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether transaction splitting is enabled
 	TransSplit *bool `json:"TransSplit,omitnil,omitempty" name:"TransSplit"`
 
-	// Whether to enable failover Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether fault migration is enabled
 	FailOver *bool `json:"FailOver,omitnil,omitempty" name:"FailOver"`
 
-	// Whether to enable the connection pool Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to enable connection pool
 	ConnectionPool *bool `json:"ConnectionPool,omitnil,omitempty" name:"ConnectionPool"`
 
-	// Note:  This field may return null, indicating that no valid values can be obtained.
+	// Description
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
-	// Read weight assignment for an instance Note: This field may return null, indicating that no valid values can be obtained.
+	// Read weight distribution of an instance
 	ProxyAllocation []*ProxyAllocation `json:"ProxyAllocation,omitnil,omitempty" name:"ProxyAllocation"`
+
+	// Access mode
+	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
+
+	// Whether automatic CLB is enabled
+	AutoLoadBalance *bool `json:"AutoLoadBalance,omitnil,omitempty" name:"AutoLoadBalance"`
+
+	// Whether to treat libra as a read-only node
+	ApNodeAsRoNode *bool `json:"ApNodeAsRoNode,omitnil,omitempty" name:"ApNodeAsRoNode"`
+
+	// libra node fault, whether to forward to other nodes
+	ApQueryToOtherNode *bool `json:"ApQueryToOtherNode,omitnil,omitempty" name:"ApQueryToOtherNode"`
 }
 
 type ProxyAllocation struct {
@@ -12797,77 +14233,83 @@ type ProxyGroupInfo struct {
 	// Proxy group ID
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// Proxy version Note: This field may return null, indicating that no valid values can be obtained.
+	// proxy version
 	ProxyVersion *string `json:"ProxyVersion,omitnil,omitempty" name:"ProxyVersion"`
 
-	// Supported proxy upgrade version Note: This field may return null, indicating that no valid values can be obtained.
+	// Proxy supports edition upgrade
 	SupportUpgradeProxyVersion *string `json:"SupportUpgradeProxyVersion,omitnil,omitempty" name:"SupportUpgradeProxyVersion"`
 
-	// Proxy status Note: This field may return null, indicating that no valid values can be obtained.
+	// Agent status. 0 - Initializing, 1 - Online, 2 - Online - Read-write separation, 3 - Offline, 4 - Terminated.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Proxy task status Note: This field may return null, indicating that no valid values can be obtained.
+	// Agent task status, Upgrading - upgrading, UpgradeTo - upgrade pending switch, UpgradeSwitching - upgrade and switch in progress, ProxyCreateAddress - configuring address, ProxyModifyAddress - changing address, ProxyCloseAddress - closing address.
 	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
-	// Node information of the proxy group Note: This field may return null, indicating that no valid values can be obtained.
+	// Proxy group node information
 	ProxyNode []*ProxyNode `json:"ProxyNode,omitnil,omitempty" name:"ProxyNode"`
 
-	// Address information of the proxy group Note: This field may return null, indicating that no valid values can be obtained.
+	// Proxy group address information
 	ProxyAddress []*ProxyAddress `json:"ProxyAddress,omitnil,omitempty" name:"ProxyAddress"`
 
-	// Connection pool threshold Note: This field may return null, indicating that no valid values can be obtained.
+	// Connection pool threshold
 	ConnectionPoolLimit *uint64 `json:"ConnectionPoolLimit,omitnil,omitempty" name:"ConnectionPoolLimit"`
 
-	// Whether to support address creation Note: This field may return null, indicating that no valid values can be obtained.
+	// Support creating an address
 	SupportCreateProxyAddress *bool `json:"SupportCreateProxyAddress,omitnil,omitempty" name:"SupportCreateProxyAddress"`
 
-	// TencentDB versions supporting proxy versions upgrade Note: This field may return null, indicating that no valid values can be obtained.
+	// cdb version required for proxy version upgrade
 	SupportUpgradeProxyMysqlVersion *string `json:"SupportUpgradeProxyMysqlVersion,omitnil,omitempty" name:"SupportUpgradeProxyMysqlVersion"`
 }
 
 type ProxyInst struct {
-	// Instance ID Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance name.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Instance type. Valid values:  `master` (source instance), `ro` (read-only instance), `dr` (disaster recovery instance), `sdr` (disaster recovery instance of small specifications). Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance type: 1 master primary instance; 2 read-only instance; 3 dr disaster recovery instance; 4 sdr (small disaster recovery) instance
 	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Instance status. Valid values:  `0` (creating), `1` (running), `4` (isolating), `5` (isolated). Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance status. Valid values: 0: creating; 1: running; 4: isolation; 5: isolated.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Read weight. If it is assigned by the system automatically, the modification will not take effect but represents whether the instance is enabled. Note: This field may return null, indicating that no valid values can be obtained.
+	// Read-only weight. If the weight is automatically assigned by the system, this value does not take effect and only indicates whether the instance is enabled or not.
 	Weight *uint64 `json:"Weight,omitnil,omitempty" name:"Weight"`
 
-	// Instance region Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance region
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Instance AZ Note: This field may return null, indicating that no valid values can be obtained.
+	// Availability zone to which the instance belongs
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Instance Node ID
+	InstNodeId *string `json:"InstNodeId,omitnil,omitempty" name:"InstNodeId"`
+
+	// Node role
+	InstNodeRole *string `json:"InstNodeRole,omitnil,omitempty" name:"InstNodeRole"`
 }
 
 type ProxyNode struct {
-	// Proxy node ID Note: This field may return null, indicating that no valid values can be obtained.
+	// Proxy node ID
 	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
-	// Number of CPU cores Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of CPU cores.
 	Cpu *uint64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Memory size Note: This field may return null, indicating that no valid values can be obtained.
+	// Memory size, measured in MB.
 	Mem *uint64 `json:"Mem,omitnil,omitempty" name:"Mem"`
 
-	// Node status Note: This field may return null, indicating that no valid values can be obtained.
+	// Node status: 0 - Initializing, 1 - Online, 2 - Offline, 3 - Being destroyed, 4 - Recovering, 5 - Node fault, 6 - Switching.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Proxy node AZ Note: This field may return null, indicating that no valid values can be obtained.
+	// Proxy node availability zone
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Proxy node region Note: This field may return null, indicating that no valid values can be obtained.
+	// Proxy Node Region
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Connections Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of connections
 	Connection *uint64 `json:"Connection,omitnil,omitempty" name:"Connection"`
 }
 
@@ -12909,14 +14351,24 @@ type ReadonlyNode struct {
 
 // Predefined struct for user
 type ReleaseIsolatedDBInstancesRequestParams struct {
-	// Array of instance IDs in the format of `cdb-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID, whose value is the `InstanceId` value in the output parameters.
+	// Instance ID. The instance ID is in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console. You can obtain it through the API for querying the instance list (https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1). The value is the InstanceId field in the output parameter.
+	// Description: Multiple instance IDs can be entered for operations. The json format is as follows.
+	// [
+	//     "cdb-30z11v8s",
+	//     "cdb-93h11efg"
+	//   ]
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type ReleaseIsolatedDBInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Array of instance IDs in the format of `cdb-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID, whose value is the `InstanceId` value in the output parameters.
+	// Instance ID. The instance ID is in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console. You can obtain it through the API for querying the instance list (https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1). The value is the InstanceId field in the output parameter.
+	// Description: Multiple instance IDs can be entered for operations. The json format is as follows.
+	// [
+	//     "cdb-30z11v8s",
+	//     "cdb-93h11efg"
+	//   ]
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -12977,20 +14429,26 @@ type ReleaseResult struct {
 
 // Predefined struct for user
 type ReloadBalanceProxyNodeRequestParams struct {
-	// Proxy group ID
+	// Proxy group ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// Address ID of the proxy group
+	// Proxy group address ID. You can obtain it through the API [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1).
+	// Note:
+	// 1. For dual-node instances, this parameter is optional. If not provided, load balancing will be performed for ALL proxy group addresses.
+	// 2. For cloud disk edition instances, this parameter is required.
 	ProxyAddressId *string `json:"ProxyAddressId,omitnil,omitempty" name:"ProxyAddressId"`
 }
 
 type ReloadBalanceProxyNodeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Proxy group ID
+	// Proxy group ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// Address ID of the proxy group
+	// Proxy group address ID. You can obtain it through the API [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1).
+	// Note:
+	// 1. For dual-node instances, this parameter is optional. If not provided, load balancing will be performed for ALL proxy group addresses.
+	// 2. For cloud disk edition instances, this parameter is required.
 	ProxyAddressId *string `json:"ProxyAddressId,omitnil,omitempty" name:"ProxyAddressId"`
 }
 
@@ -13135,15 +14593,83 @@ func (r *RenewDBInstanceResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ResetPasswordRequestParams struct {
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Instance account name with manually refreshed rotation password, such as root
+	User *string `json:"User,omitnil,omitempty" name:"User"`
+
+	// Manually refresh the domain name of the instance account with a rotated password, such as %
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+}
+
+type ResetPasswordRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Instance account name with manually refreshed rotation password, such as root
+	User *string `json:"User,omitnil,omitempty" name:"User"`
+
+	// Manually refresh the domain name of the instance account with a rotated password, such as %
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+}
+
+func (r *ResetPasswordRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetPasswordRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "User")
+	delete(f, "Host")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetPasswordRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResetPasswordResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ResetPasswordResponse struct {
+	*tchttp.BaseResponse
+	Response *ResetPasswordResponseParams `json:"Response"`
+}
+
+func (r *ResetPasswordResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetPasswordResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ResetRootAccountRequestParams struct {
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type ResetRootAccountRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -13299,19 +14825,21 @@ type RoGroupAttr struct {
 	// RO group name.
 	RoGroupName *string `json:"RoGroupName,omitnil,omitempty" name:"RoGroupName"`
 
-	// Maximum delay threshold for RO instances in seconds. Minimum value: 1. Please note that this value will take effect only if an instance removal policy is enabled in the RO group.
+	// Maximum delay threshold for the RO instance. Unit: seconds, minimum value is 1. Range: [1,10000], integer.
+	// Note: The RO group must have enabled the instance latency removal policy for this value to be valid.
 	RoMaxDelayTime *int64 `json:"RoMaxDelayTime,omitnil,omitempty" name:"RoMaxDelayTime"`
 
 	// Whether to enable instance removal. Valid values: 1 (enabled), 0 (not enabled). Please note that if instance removal is enabled, the delay threshold parameter (`RoMaxDelayTime`) must be set.
 	RoOfflineDelay *int64 `json:"RoOfflineDelay,omitnil,omitempty" name:"RoOfflineDelay"`
 
-	// Minimum number of instances to be retained, which can be set to any value less than or equal to the number of RO instances in the RO group. Please note that if this value is set to be greater than the number of RO instances, no removal will be performed, and if it is set to 0, all instances with an excessive delay will be removed.
+	// Minimum reserved instances. Can be set to any value ≤ the number of instances in the RO group. Default value: 1.
+	// Note: If the set value is larger than the RO instance count, do not remove. If set to 0, all instances with delay above the limit will be excluded.
 	MinRoInGroup *int64 `json:"MinRoInGroup,omitnil,omitempty" name:"MinRoInGroup"`
 
 	// Weighting mode. Supported values include `system` (automatically assigned by the system) and `custom` (defined by user). Please note that if the `custom` mode is selected, the RO instance weight configuration parameter (RoWeightValues) must be set.
 	WeightMode *string `json:"WeightMode,omitnil,omitempty" name:"WeightMode"`
 
-	// Replication delay.
+	// Delayed replication time. Unit: second, range: 1 - 259200 seconds, not required to enable delayed replication for the instance.
 	ReplicationDelayTime *int64 `json:"ReplicationDelayTime,omitnil,omitempty" name:"ReplicationDelayTime"`
 }
 
@@ -13416,51 +14944,42 @@ type RoWeightValue struct {
 
 type RollbackDBName struct {
 	// Original database name before rollback
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
 
-	// New database name after rollback
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Name of the rolled back database
 	NewDatabaseName *string `json:"NewDatabaseName,omitnil,omitempty" name:"NewDatabaseName"`
 }
 
 type RollbackInstancesInfo struct {
-	// TencentDB instance ID
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Cloud database instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Rollback policy. Valid values: `table` (ultrafast mode), `db` (faster mode), and `full` (fast mode). Default value: `full`. In the ultrafast mode, only backups and binlogs of the tables specified by the `Tables` parameter are imported; if `Tables` does not include all of the tables involved in cross-table operations, the rollback may fail; and the `Database` parameter must be left empty. In the faster mode, only backups and binlogs of the databases specified by the `Databases` parameter are imported, and if `Databases` does not include all of the databases involved in cross-database operations, the rollback may fail. In the fast mode, backups and binlogs of the entire instance will be imported in a speed slower than the other modes.
+	// Rollback strategy. Optional values: table, db, full. table - Ultra-fast rollback mode, only imports selected table-level backups and binlog. If there are cross-table operations and the associated table hasn't been selected, it will cause rollback failure. In this mode, parameter Databases must be empty. db - Quick mode, only imports selected database-level backups and binlog. If there are cross-database operations and the associated database hasn't been selected, it will cause rollback failure. full - Standard rollback mode, imports backups and binlog of the entire instance, speed is not as fast.
 	Strategy *string `json:"Strategy,omitnil,omitempty" name:"Strategy"`
 
-	// Database rollback time in the format of yyyy-mm-dd hh:mm:ss
+	// Database rollback time in the format of yyyy-mm-dd hh:mm:ss.
 	RollbackTime *string `json:"RollbackTime,omitnil,omitempty" name:"RollbackTime"`
 
-	// Information of the databases to be rolled back, which means rollback at the database level
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Database information to be rolled back, which means database rollback.
 	Databases []*RollbackDBName `json:"Databases,omitnil,omitempty" name:"Databases"`
 
-	// Information of the tables to be rolled back, which means rollback at the table level
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Database table information to be rolled back, which means rollback by table.
 	Tables []*RollbackTables `json:"Tables,omitnil,omitempty" name:"Tables"`
 }
 
 type RollbackTableName struct {
-	// Original table name before rollback
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Original database table name before rollback
 	TableName *string `json:"TableName,omitnil,omitempty" name:"TableName"`
 
-	// New table name after rollback
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Rolled back database table name
 	NewTableName *string `json:"NewTableName,omitnil,omitempty" name:"NewTableName"`
 }
 
 type RollbackTables struct {
 	// Database name
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
 
-	// Table details
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Database table details
 	Table []*RollbackTableName `json:"Table,omitnil,omitempty" name:"Table"`
 }
 
@@ -13480,8 +14999,7 @@ type RollbackTask struct {
 	// Task end time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Rollback task details.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Rollback task detail.
 	Detail []*RollbackInstancesInfo `json:"Detail,omitnil,omitempty" name:"Detail"`
 }
 
@@ -13494,12 +15012,10 @@ type RollbackTimeRange struct {
 }
 
 type Rule struct {
-	// The maximum weight
-	// Note: this field may return `null`, indicating that no valid value can be found.
+	// Division ceiling
 	LessThan *uint64 `json:"LessThan,omitnil,omitempty" name:"LessThan"`
 
 	// Weight
-	// Note: this field may return `null`, indicating that no valid value can be found.
 	Weight *uint64 `json:"Weight,omitnil,omitempty" name:"Weight"`
 }
 
@@ -13581,15 +15097,15 @@ type SlaveConfig struct {
 	// Replication mode of the secondary database. Value range: async, semi-sync
 	ReplicationMode *string `json:"ReplicationMode,omitnil,omitempty" name:"ReplicationMode"`
 
-	// AZ name of the secondary database, such as ap-shanghai-2
+	// Canonical name of the read-only availability zone, for example ap-shanghai-2
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 }
 
 type SlaveInfo struct {
-	// Information of secondary server 1
+	// <p>Secondary server information of the top spot</p>
 	First *SlaveInstanceInfo `json:"First,omitnil,omitempty" name:"First"`
 
-	// Second secondary server information.
+	// <p>Second standby machine information</p>
 	Second *SlaveInstanceInfo `json:"Second,omitnil,omitempty" name:"Second"`
 }
 
@@ -13614,7 +15130,7 @@ type SlowLogInfo struct {
 	// Backup file size in bytes
 	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
-	// Backup snapshot time in the format of yyyy-MM-dd HH:mm:ss, such as 2016-03-17 02:10:37
+	// Backup snapshot time. Time format: 2016-03-17.
 	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 
 	// Download address on the private network
@@ -13628,48 +15144,37 @@ type SlowLogInfo struct {
 }
 
 type SlowLogItem struct {
-	// SQL execution time.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Sql execution time. Unix second-level timestamp.
 	Timestamp *uint64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
 
-	// SQL execution duration in seconds.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Execution duration of Sql (seconds).
 	QueryTime *float64 `json:"QueryTime,omitnil,omitempty" name:"QueryTime"`
 
-	// SQL statement.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Sql statement.
 	SqlText *string `json:"SqlText,omitnil,omitempty" name:"SqlText"`
 
-	// Client address.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Client IP address.
 	UserHost *string `json:"UserHost,omitnil,omitempty" name:"UserHost"`
 
 	// Username.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Database name.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
 
-	// Lock duration in seconds.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Lock duration (unit: second).
 	LockTime *float64 `json:"LockTime,omitnil,omitempty" name:"LockTime"`
 
 	// Number of scanned rows.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	RowsExamined *int64 `json:"RowsExamined,omitnil,omitempty" name:"RowsExamined"`
 
-	// Number of rows in result set.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Result set row count.
 	RowsSent *int64 `json:"RowsSent,omitnil,omitempty" name:"RowsSent"`
 
-	// SQL template.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Sql Template.
 	SqlTemplate *string `json:"SqlTemplate,omitnil,omitempty" name:"SqlTemplate"`
 
-	// SQL statement MD5.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// md5 of the Sql statement.
 	Md5 *string `json:"Md5,omitnil,omitempty" name:"Md5"`
 }
 
@@ -13752,35 +15257,53 @@ func (r *StartBatchRollbackResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartCpuExpandRequestParams struct {
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Scale-out mode. Valid values: auto and
-	// manual.
+	// Scale-out type supports auto-scaling and custom scaling.
+	// Description: 1. auto means automatic scaling. 2. manual means custom scaling with immediate effect. 3. timeInterval means custom scaling by time. 4. period means custom scaling by cycle.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Number of CPU cores to increase during manual scale-out. This parameter is required when Type is set to manual.
+	// Number of CPU cores for scale-out during customization.
+	// Description: 1. This parameter is required when Type is set to manual, timeInterval, or period. 2. The maximum number of CPU cores to increase is the current instance's CPU core number. For example, an 8-core 16GB instance can scale out up to 8 CPU cores, with a range of 1 - 8.
 	ExpandCpu *int64 `json:"ExpandCpu,omitnil,omitempty" name:"ExpandCpu"`
 
 	// Automatic scale-out policy. This parameter is required when Type is set to auto.
 	AutoStrategy *AutoStrategy `json:"AutoStrategy,omitnil,omitempty" name:"AutoStrategy"`
+
+	// Scaling policy by time period.
+	// Description: When Type is timeInterval, TimeIntervalStrategy is required.
+	TimeIntervalStrategy *TimeIntervalStrategy `json:"TimeIntervalStrategy,omitnil,omitempty" name:"TimeIntervalStrategy"`
+
+	// Scale by cycle.
+	// Description: When Type is period, PeriodStrategy is required.
+	PeriodStrategy *PeriodStrategy `json:"PeriodStrategy,omitnil,omitempty" name:"PeriodStrategy"`
 }
 
 type StartCpuExpandRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Scale-out mode. Valid values: auto and
-	// manual.
+	// Scale-out type supports auto-scaling and custom scaling.
+	// Description: 1. auto means automatic scaling. 2. manual means custom scaling with immediate effect. 3. timeInterval means custom scaling by time. 4. period means custom scaling by cycle.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Number of CPU cores to increase during manual scale-out. This parameter is required when Type is set to manual.
+	// Number of CPU cores for scale-out during customization.
+	// Description: 1. This parameter is required when Type is set to manual, timeInterval, or period. 2. The maximum number of CPU cores to increase is the current instance's CPU core number. For example, an 8-core 16GB instance can scale out up to 8 CPU cores, with a range of 1 - 8.
 	ExpandCpu *int64 `json:"ExpandCpu,omitnil,omitempty" name:"ExpandCpu"`
 
 	// Automatic scale-out policy. This parameter is required when Type is set to auto.
 	AutoStrategy *AutoStrategy `json:"AutoStrategy,omitnil,omitempty" name:"AutoStrategy"`
+
+	// Scaling policy by time period.
+	// Description: When Type is timeInterval, TimeIntervalStrategy is required.
+	TimeIntervalStrategy *TimeIntervalStrategy `json:"TimeIntervalStrategy,omitnil,omitempty" name:"TimeIntervalStrategy"`
+
+	// Scale by cycle.
+	// Description: When Type is period, PeriodStrategy is required.
+	PeriodStrategy *PeriodStrategy `json:"PeriodStrategy,omitnil,omitempty" name:"PeriodStrategy"`
 }
 
 func (r *StartCpuExpandRequest) ToJsonString() string {
@@ -13799,6 +15322,8 @@ func (r *StartCpuExpandRequest) FromJsonString(s string) error {
 	delete(f, "Type")
 	delete(f, "ExpandCpu")
 	delete(f, "AutoStrategy")
+	delete(f, "TimeIntervalStrategy")
+	delete(f, "PeriodStrategy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartCpuExpandRequest has unknown keys!", "")
 	}
@@ -13807,7 +15332,7 @@ func (r *StartCpuExpandRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartCpuExpandResponseParams struct {
-	// Async task ID, which can be passed in by calling the `DescribeAsyncRequest` API for task progress query.
+	// Asynchronous Task ID. Call the API DescribeAsyncRequest and input the ID to query the task execution progress.
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -13832,14 +15357,14 @@ func (r *StartCpuExpandResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartReplicationRequestParams struct {
-	// Read-Only instance ID.
+	// Instance ID. It only supports read-only instances. It can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type StartReplicationRequest struct {
 	*tchttp.BaseRequest
 	
-	// Read-Only instance ID.
+	// Instance ID. It only supports read-only instances. It can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -13864,8 +15389,7 @@ func (r *StartReplicationRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartReplicationResponseParams struct {
-	// Async task ID.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Asynchronous Task ID.
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -13890,14 +15414,14 @@ func (r *StartReplicationResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StopCpuExpandRequestParams struct {
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type StopCpuExpandRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -13922,7 +15446,7 @@ func (r *StopCpuExpandRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StopCpuExpandResponseParams struct {
-	// Async task ID, which can be passed in by calling the `DescribeAsyncRequest` API for task progress query.
+	// Asynchronous Task ID. When calling [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/20410?from_cn_redirect=1) to query the task execution progress, you can pass in this ID.
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -14001,14 +15525,14 @@ func (r *StopDBImportJobResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StopReplicationRequestParams struct {
-	// Read-Only instance ID.
+	// Instance ID. It only supports read-only instances. It can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type StopReplicationRequest struct {
 	*tchttp.BaseRequest
 	
-	// Read-Only instance ID.
+	// Instance ID. It only supports read-only instances. It can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -14033,8 +15557,7 @@ func (r *StopReplicationRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StopReplicationResponseParams struct {
-	// Async task ID.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Asynchronous Task ID.
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -14059,14 +15582,14 @@ func (r *StopReplicationResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StopRollbackRequestParams struct {
-	// ID of the instance whose rollback task is canceled
+	// Revoke the corresponding instance ID of the rollback task. Obtain through the API [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type StopRollbackRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the instance whose rollback task is canceled
+	// Revoke the corresponding instance ID of the rollback task. Obtain through the API [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -14091,7 +15614,7 @@ func (r *StopRollbackRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StopRollbackResponseParams struct {
-	// Async task request ID
+	// Asynchronous Task ID of the execution request.
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -14115,21 +15638,87 @@ func (r *StopRollbackResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type SwitchCDBProxyRequestParams struct {
-	// Instance ID
+type SubmitInstanceUpgradeCheckJobRequestParams struct {
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Database proxy ID
+	// Target database version.
+	// Description: Available values: 5.6, 5.7, 8.0. Cross-version upgrade is not supported. Version downgrade is unsupported after upgrade.
+	DstMysqlVersion *string `json:"DstMysqlVersion,omitnil,omitempty" name:"DstMysqlVersion"`
+}
+
+type SubmitInstanceUpgradeCheckJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Target database version.
+	// Description: Available values: 5.6, 5.7, 8.0. Cross-version upgrade is not supported. Version downgrade is unsupported after upgrade.
+	DstMysqlVersion *string `json:"DstMysqlVersion,omitnil,omitempty" name:"DstMysqlVersion"`
+}
+
+func (r *SubmitInstanceUpgradeCheckJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SubmitInstanceUpgradeCheckJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "DstMysqlVersion")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SubmitInstanceUpgradeCheckJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SubmitInstanceUpgradeCheckJobResponseParams struct {
+	// Task ID
+	JobId *int64 `json:"JobId,omitnil,omitempty" name:"JobId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type SubmitInstanceUpgradeCheckJobResponse struct {
+	*tchttp.BaseResponse
+	Response *SubmitInstanceUpgradeCheckJobResponseParams `json:"Response"`
+}
+
+func (r *SubmitInstanceUpgradeCheckJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SubmitInstanceUpgradeCheckJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SwitchCDBProxyRequestParams struct {
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Database proxy ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 }
 
 type SwitchCDBProxyRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Database proxy ID
+	// Database proxy ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 }
 
@@ -14188,6 +15777,9 @@ type SwitchDBInstanceMasterSlaveRequestParams struct {
 
 	// Whether to perform the switch during a time window. Valid values: `True`, `False` (default). If `ForceSwitch` is set to `True`, this parameter is invalid.
 	WaitSwitch *bool `json:"WaitSwitch,omitnil,omitempty" name:"WaitSwitch"`
+
+	// Trigger primary-secondary switch for the designated node ID of the cluster edition instance.
+	DstNodeId *string `json:"DstNodeId,omitnil,omitempty" name:"DstNodeId"`
 }
 
 type SwitchDBInstanceMasterSlaveRequest struct {
@@ -14204,6 +15796,9 @@ type SwitchDBInstanceMasterSlaveRequest struct {
 
 	// Whether to perform the switch during a time window. Valid values: `True`, `False` (default). If `ForceSwitch` is set to `True`, this parameter is invalid.
 	WaitSwitch *bool `json:"WaitSwitch,omitnil,omitempty" name:"WaitSwitch"`
+
+	// Trigger primary-secondary switch for the designated node ID of the cluster edition instance.
+	DstNodeId *string `json:"DstNodeId,omitnil,omitempty" name:"DstNodeId"`
 }
 
 func (r *SwitchDBInstanceMasterSlaveRequest) ToJsonString() string {
@@ -14222,6 +15817,7 @@ func (r *SwitchDBInstanceMasterSlaveRequest) FromJsonString(s string) error {
 	delete(f, "DstSlave")
 	delete(f, "ForceSwitch")
 	delete(f, "WaitSwitch")
+	delete(f, "DstNodeId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SwitchDBInstanceMasterSlaveRequest has unknown keys!", "")
 	}
@@ -14255,14 +15851,14 @@ func (r *SwitchDBInstanceMasterSlaveResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SwitchDrInstanceToMasterRequestParams struct {
-	// Disaster recovery instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	// Disaster recovery instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type SwitchDrInstanceToMasterRequest struct {
 	*tchttp.BaseRequest
 	
-	// Disaster recovery instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
+	// Disaster recovery instance ID, in the format such as cdb-c1nl9rpv. This matches the instance ID displayed on the TencentDB console.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -14314,6 +15910,9 @@ func (r *SwitchDrInstanceToMasterResponse) FromJsonString(s string) error {
 type SwitchForUpgradeRequestParams struct {
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Whether to enable association switchover. Enable for true and shutdown for false. Default false.
+	IsRelatedSwitch *bool `json:"IsRelatedSwitch,omitnil,omitempty" name:"IsRelatedSwitch"`
 }
 
 type SwitchForUpgradeRequest struct {
@@ -14321,6 +15920,9 @@ type SwitchForUpgradeRequest struct {
 	
 	// Instance ID in the format of cdb-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Whether to enable association switchover. Enable for true and shutdown for false. Default false.
+	IsRelatedSwitch *bool `json:"IsRelatedSwitch,omitnil,omitempty" name:"IsRelatedSwitch"`
 }
 
 func (r *SwitchForUpgradeRequest) ToJsonString() string {
@@ -14336,6 +15938,7 @@ func (r *SwitchForUpgradeRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "InstanceId")
+	delete(f, "IsRelatedSwitch")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SwitchForUpgradeRequest has unknown keys!", "")
 	}
@@ -14362,6 +15965,36 @@ func (r *SwitchForUpgradeResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *SwitchForUpgradeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type TImeCycle struct {
+	// Whether to choose Monday for scaling during the period.
+	// Description: Value "true" means select, value "false" means not select.
+	Monday *bool `json:"Monday,omitnil,omitempty" name:"Monday"`
+
+	// During scaling, whether to choose Tuesday for expansion.
+	// Description: Value "true" means select, value "false" means not select.
+	Tuesday *bool `json:"Tuesday,omitnil,omitempty" name:"Tuesday"`
+
+	// Whether to choose Wednesday for scaling during the period.
+	// Description: Value "true" means select, value "false" means not select.
+	Wednesday *bool `json:"Wednesday,omitnil,omitempty" name:"Wednesday"`
+
+	// Whether to choose Thursday for scaling during the period.
+	// Description: Value "true" means select, value "false" means not select.
+	Thursday *bool `json:"Thursday,omitnil,omitempty" name:"Thursday"`
+
+	// Whether to choose Friday for scaling during the period.
+	// Description: Value "true" means select, value "false" means not select.
+	Friday *bool `json:"Friday,omitnil,omitempty" name:"Friday"`
+
+	// Whether to choose Saturday for scaling during the period.
+	// Description: Value "true" means select, value "false" means not select.
+	Saturday *bool `json:"Saturday,omitnil,omitempty" name:"Saturday"`
+
+	// Whether to choose Sunday for scaling during the period.
+	// Description: Value "true" means select, value "false" means not select.
+	Sunday *bool `json:"Sunday,omitnil,omitempty" name:"Sunday"`
 }
 
 type TablePrivilege struct {
@@ -14415,8 +16048,18 @@ type TagsInfoOfInstance struct {
 	Tags []*TagInfoUnit `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
+type TaskAttachInfo struct {
+	// Upgrade task
+	// "FastUpgradeStatus": Indicates the upgrade type. 1 - in-place upgrade; 0 - normal upgrade.
+	AttachKey *string `json:"AttachKey,omitnil,omitempty" name:"AttachKey"`
+
+	// Upgrade task
+	// "FastUpgradeStatus": Indicates the upgrade type. 1 - In-place upgrade; 0 - Normal upgrade.
+	AttachValue *string `json:"AttachValue,omitnil,omitempty" name:"AttachValue"`
+}
+
 type TaskDetail struct {
-	// Error code.
+	// Error code. `0` indicates success. Other values correspond to different error scenarios.
 	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
 
 	// Error message.
@@ -14461,20 +16104,54 @@ type TaskDetail struct {
 	// Instance task end time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// ID of an instance associated with a task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// ID of the associated instance.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Async task request ID.
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
+
+	// Additional information of the task.
+	TaskAttachInfo []*TaskAttachInfo `json:"TaskAttachInfo,omitnil,omitempty" name:"TaskAttachInfo"`
+}
+
+type TimeInterval struct {
+	// Start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+type TimeIntervalStrategy struct {
+	// Expansion time started.
+	// Description: This value is a timestamp in seconds in Integer format.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Expansion time ended.
+	// Description: This value is a timestamp in seconds in Integer format.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+type UpgradeAnalysisInstanceVersionInfo struct {
+	// <p>Grayscale ip for version upgrade</p>
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// <p>Grayscale port for version upgrade</p>
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// <p>Upgrade to a later version</p>
+	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
+
+	// <p>Grayscale event for instance upgrade</p><p>Unit: day</p>
+	ExpireTime *int64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 }
 
 // Predefined struct for user
 type UpgradeCDBProxyVersionRequestParams struct {
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Database proxy ID
+	// Database proxy ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
 	// Current version of database proxy
@@ -14490,10 +16167,10 @@ type UpgradeCDBProxyVersionRequestParams struct {
 type UpgradeCDBProxyVersionRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// Instance ID, which can be obtained through the [DescribeDBInstances](https://www.tencentcloud.com/document/product/236/15872?from_cn_redirect=1) API.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Database proxy ID
+	// Database proxy ID, which can be obtained through the [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/90585?from_cn_redirect=1) API.
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
 	// Current version of database proxy
@@ -14531,8 +16208,7 @@ func (r *UpgradeCDBProxyVersionRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpgradeCDBProxyVersionResponseParams struct {
-	// Async request ID
-	// Note: this field may return `null`, indicating that no valid value can be found.
+	// Async Processing ID
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -14557,39 +16233,51 @@ func (r *UpgradeCDBProxyVersionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpgradeDBInstanceEngineVersionRequestParams struct {
-	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// <p>Instance ID, in the format such as cdb-c1nl9rpv or cdbro-c1nl9rpv. This matches the instance ID displayed on the TencentDB console. You can obtain it through the <a href="https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1">Query Instance List</a> API, with its value being the InstanceId field in the output parameter.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Version of primary instance database engine. Value range: 5.6, 5.7
+	// <p>Database engine version of the primary instance. Supported values include 5.6, 5.7, 8.0.<br>Description: Cross-version upgrade is not supported. Downgrade is not supported after upgrade.</p>
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
-	// Switch mode for accessing the new instance.  Valid values:  `0` (switch immediately), `1` (switch within a time window). Default value: `0`. If the value is `1`, the switch process will be performed within a time window. Or, you can call the [SwitchForUpgrade](https://intl.cloud.tencent.com/document/product/236/15864?from_cn_redirect=1) API to trigger the process.
+	// <p>The way to switch to a new instance defaults to 0. Supported values include: 0 - switch immediately, 1 - switch in a time window. When the value is 1, during the upgrade process, the switchover to a new instance will be performed in the time window, or the user can proactively call the API <a href="https://www.tencentcloud.com/document/product/236/15864?from_cn_redirect=1">switch to a new instance</a> to trigger the process.</p>
 	WaitSwitch *int64 `json:"WaitSwitch,omitnil,omitempty" name:"WaitSwitch"`
 
-	// Whether to upgrade kernel minor version. Valid values: 1 (upgrade kernel minor version), 0 (upgrade database engine).
+	// <p>Whether to upgrade the kernel subversion. Supported values: 1 - upgrade kernel subversion; 0 - upgrade database engine version. No default value. Specify the version type to upgrade.</p>
 	UpgradeSubversion *int64 `json:"UpgradeSubversion,omitnil,omitempty" name:"UpgradeSubversion"`
 
-	// Delay threshold. Value range: 1-10
+	// <p>Delay threshold. Value ranges from 1 to 10. No default value. When not specified, the delay threshold is 0, which means the delay threshold is not set.</p>
 	MaxDelayTime *int64 `json:"MaxDelayTime,omitnil,omitempty" name:"MaxDelayTime"`
+
+	// <p>Whether to ignore keyword errors when upgrading from 5.7 to 8.0. The value ranges from 0 to 1. 1 means ignored, 0 means not ignored. No default value. Not specified means no action taken.</p>
+	IgnoreErrKeyword *int64 `json:"IgnoreErrKeyword,omitnil,omitempty" name:"IgnoreErrKeyword"`
+
+	// <p>Upgrade support for specified parameters</p>
+	ParamList []*UpgradeEngineVersionParams `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 }
 
 type UpgradeDBInstanceEngineVersionRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [instance list querying API](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) to query the ID, whose value is the `InstanceId` value in output parameters.
+	// <p>Instance ID, in the format such as cdb-c1nl9rpv or cdbro-c1nl9rpv. This matches the instance ID displayed on the TencentDB console. You can obtain it through the <a href="https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1">Query Instance List</a> API, with its value being the InstanceId field in the output parameter.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Version of primary instance database engine. Value range: 5.6, 5.7
+	// <p>Database engine version of the primary instance. Supported values include 5.6, 5.7, 8.0.<br>Description: Cross-version upgrade is not supported. Downgrade is not supported after upgrade.</p>
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
-	// Switch mode for accessing the new instance.  Valid values:  `0` (switch immediately), `1` (switch within a time window). Default value: `0`. If the value is `1`, the switch process will be performed within a time window. Or, you can call the [SwitchForUpgrade](https://intl.cloud.tencent.com/document/product/236/15864?from_cn_redirect=1) API to trigger the process.
+	// <p>The way to switch to a new instance defaults to 0. Supported values include: 0 - switch immediately, 1 - switch in a time window. When the value is 1, during the upgrade process, the switchover to a new instance will be performed in the time window, or the user can proactively call the API <a href="https://www.tencentcloud.com/document/product/236/15864?from_cn_redirect=1">switch to a new instance</a> to trigger the process.</p>
 	WaitSwitch *int64 `json:"WaitSwitch,omitnil,omitempty" name:"WaitSwitch"`
 
-	// Whether to upgrade kernel minor version. Valid values: 1 (upgrade kernel minor version), 0 (upgrade database engine).
+	// <p>Whether to upgrade the kernel subversion. Supported values: 1 - upgrade kernel subversion; 0 - upgrade database engine version. No default value. Specify the version type to upgrade.</p>
 	UpgradeSubversion *int64 `json:"UpgradeSubversion,omitnil,omitempty" name:"UpgradeSubversion"`
 
-	// Delay threshold. Value range: 1-10
+	// <p>Delay threshold. Value ranges from 1 to 10. No default value. When not specified, the delay threshold is 0, which means the delay threshold is not set.</p>
 	MaxDelayTime *int64 `json:"MaxDelayTime,omitnil,omitempty" name:"MaxDelayTime"`
+
+	// <p>Whether to ignore keyword errors when upgrading from 5.7 to 8.0. The value ranges from 0 to 1. 1 means ignored, 0 means not ignored. No default value. Not specified means no action taken.</p>
+	IgnoreErrKeyword *int64 `json:"IgnoreErrKeyword,omitnil,omitempty" name:"IgnoreErrKeyword"`
+
+	// <p>Upgrade support for specified parameters</p>
+	ParamList []*UpgradeEngineVersionParams `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 }
 
 func (r *UpgradeDBInstanceEngineVersionRequest) ToJsonString() string {
@@ -14609,6 +16297,8 @@ func (r *UpgradeDBInstanceEngineVersionRequest) FromJsonString(s string) error {
 	delete(f, "WaitSwitch")
 	delete(f, "UpgradeSubversion")
 	delete(f, "MaxDelayTime")
+	delete(f, "IgnoreErrKeyword")
+	delete(f, "ParamList")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeDBInstanceEngineVersionRequest has unknown keys!", "")
 	}
@@ -14617,7 +16307,7 @@ func (r *UpgradeDBInstanceEngineVersionRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpgradeDBInstanceEngineVersionResponseParams struct {
-	// Async task ID. The task execution result can be queried using the [async task execution result querying API](https://intl.cloud.tencent.com/document/api/236/20410?from_cn_redirect=1).
+	// <p>Asynchronous Task ID. Use <a href="https://www.tencentcloud.com/document/api/236/20410?from_cn_redirect=1">Query Asynchronous Task</a> to get its execution situation.</p>
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -14642,111 +16332,135 @@ func (r *UpgradeDBInstanceEngineVersionResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type UpgradeDBInstanceRequestParams struct {
-	// Instance ID in the format of `cdb-c1nl9rpv` or `cdbro-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID, whose value is the `InstanceId` value in output parameters.
+	// <p>Instance ID, in the format such as cdb-c1nl9rpv or cdbro-c1nl9rpv. This matches the instance ID displayed on the TencentDB console. You can obtain it through the <a href="https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1">Query Instance List</a> API, with its value being the InstanceId field in the output parameter.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Memory size in MB after upgrade. To ensure that the `Memory` value to be passed in is valid, please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/product/236/17229?from_cn_redirect=1) API to query the specifications of the memory that can be upgraded to.
+	// <p>Memory size after upgrade, unit: MB. To ensure the validity of the imported Memory value, please use the <a href="https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the upgradeable memory specifications.<br>Note: If you perform business migration, fill in the instance specification (CPU, memory), otherwise the system will use the minimum allowed specification by default.</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Disk size in GB after upgrade. To ensure that the `Volume` value to be passed in is valid, please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/product/236/17229?from_cn_redirect=1) API to query the specifications of the disk that can be upgraded to.
+	// <p>Disk size after upgrade, unit: GB. To ensure the validity of the imported Volume value, please use the <a href="https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the upgradeable disk range.</p>
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
+	// <p>Data replication method. Supported values include: 0 - async replication, 1 - semi-sync replication, 2 - strong sync replication. Specify this parameter when upgrading the primary instance. This parameter is invalid when upgrading a read-only instance or disaster recovery instance.</p>
 	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
 
-	// Deployment mode. Valid values: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
+	// <p>Deployment mode, defaults to 0. Supported values include: 0 - single-AZ deployment, 1 - multi-AZ deployment. You can specify this parameter when upgrading the primary instance. This parameter is invalid when upgrading a read-only instance or disaster recovery instance.</p>
 	DeployMode *int64 `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 
-	// AZ information of secondary database 1, which is the `Zone` value of the instance by default. This parameter can be specified when upgrading primary instances in multi-AZ mode and is meaningless for read-only or disaster recovery instances. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/product/236/17229?from_cn_redirect=1) API to query the supported AZs.
+	// <p>The availability zone information of standby database 1 matches the Zone parameter of the instance by default. You can specify this parameter when upgrading the primary instance to multi-AZ deployment. This parameter is invalid when upgrading a read-only instance or disaster recovery instance. You can query the supported availability zones via the <a href="https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API.</p>
 	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
 
-	// Version of primary instance database engine. Valid values: 5.5, 5.6, 5.7.
+	// <p>Database engine version of the primary instance. Supported values include 5.5, 5.6, 5.7, and 8.0.<br>Note: Please use the <a href="https://www.tencentcloud.com/document/api/236/15870?from_cn_redirect=1">UpgradeDBInstanceEngineVersion</a> API to upgrade the database version.</p>
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
-	// Switch mode for accessing the new instance.  Valid values:  `0` (switch immediately), `1` (switch within a time window). Default value: `0`. If the value is `1`, the switch process will be performed within a time window. Or, you can call the [SwitchForUpgrade](https://intl.cloud.tencent.com/document/product/236/15864?from_cn_redirect=1) API to trigger the process.
+	// <p>The way to switch to a new instance defaults to 0. Supported values include: 0 - switch immediately, 1 - switch within a time window. When the value is 1, during the upgrade, the process to switch to a new instance will be performed within the time window, or the user can actively call the API <a href="https://www.tencentcloud.com/document/product/236/15864?from_cn_redirect=1">Switch to a New Instance</a> to trigger the process.</p>
 	WaitSwitch *int64 `json:"WaitSwitch,omitnil,omitempty" name:"WaitSwitch"`
 
-	// AZ information of secondary database 2, which is empty by default. This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
+	// <p>The availability zone information of standby 2 is empty by default. You can specify this parameter when upgrading the primary instance, but it is invalid when upgrading a read-only instance or disaster recovery instance. Query the supported AZs via the <a href="https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API.<br>Remark: To downgrade a three-node instance to a two-node one, set this parameter to empty to achieve it.</p>
 	BackupZone *string `json:"BackupZone,omitnil,omitempty" name:"BackupZone"`
 
-	// Instance type. Valid values: master (primary instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+	// <p>Instance type, defaults to master. Supported values include: master - refers to the primary instance, dr - refers to the disaster recovery instance, ro - refers to the read-only instance.</p>
 	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 
-	// The resource isolation type after the instance is upgraded. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). If this parameter is left empty, the resource isolation type will be the same as the original one.
+	// <p>Instance isolation type. Supported values include "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC" - BASIC edition instance.</p>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// The number of CPU cores after the instance is upgraded. If this parameter is left empty, the minimum value will be automatically filled based on the value specified by `Memory`.
+	// <p>Number of cpu cores of the instance after upgrade. If not provided, the system will automatically fill in the minimum allowed specification based on the Memory size specified by Memory.<br>Description: If you need to migrate business, make sure to fill in the instance specification (cpu, Memory). Otherwise, the system will use the minimum allowed specification by default.</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// QuickChange options. Valid values: `0` (common upgrade), `1` (QuickChange), `2` (QuickChange first). After QuickChange is enabled, the required resources will be checked. QuickChange will be performed only when the required resources support the feature; otherwise, an error message will be returned.
+	// <p>Whether to perform Rapid Configuration Change. 0-Normal upgrade, 1-Rapid Configuration Change, 2-Precedence to rapid change. Selecting Rapid Configuration Change will validate whether it is possible to perform ultra-fast reconfiguration based on resource status. If conditions are met, ultra-fast reconfiguration will be performed; otherwise, error information will be returned.</p>
 	FastUpgrade *int64 `json:"FastUpgrade,omitnil,omitempty" name:"FastUpgrade"`
 
-	// Delay threshold. Value range: 1-10. Default value: `10`.
+	// <p>Delay threshold. Value ranges from 1 to 10, default value is 10.</p>
 	MaxDelayTime *int64 `json:"MaxDelayTime,omitnil,omitempty" name:"MaxDelayTime"`
 
-	// Whether to migrate the source node across AZs. Valid values: `0` (no), `1`(yes). Default value: `0`. If it is `1`, you can modify the source node AZ.
+	// <p>Whether to perform cross-region migration. 0 - ordinary migration, 1 - cross-region migration, default value is 0. When set to 1, it supports changes to the primary node availability zone of the instance.</p>
 	CrossCluster *int64 `json:"CrossCluster,omitnil,omitempty" name:"CrossCluster"`
 
-	// New AZ of the source node. This field is only valid when `CrossCluster` is `1`. Only migration across AZs in the same region is supported.
+	// <p>Primary node availability zone. This parameter is valid only when cross-AZ migration. You can only migrate in the same region.</p>
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Processing logic of the intra-AZ read-only instance for cross-cluster migration. Valid values: `together` (intra-AZ read-only instances will be migrated to the target AZ with the source instance by default.), `severally` (intra-AZ read-only instances will maintain the original deployment mode and will not be migrated to the target AZ.).
+	// <p>For cross-cluster migration scenarios, select the processing logic for intra-AZ read-only instances. together-intra-AZ read-only instances migrate with the primary instance to the target availability zone (default option), severally-intra-AZ read-only instances maintain the original deployment mode and do not move to the target availability zone.</p>
 	RoTransType *string `json:"RoTransType,omitnil,omitempty" name:"RoTransType"`
+
+	// <p>Topology configuration of cloud disk edition nodes.</p>
+	ClusterTopology *ClusterTopology `json:"ClusterTopology,omitnil,omitempty" name:"ClusterTopology"`
+
+	// <p>Check whether in-place upgrade requires restart. 1-Check, 0-Do not check. If the value is 1 and the check shows that in-place upgrade must be restarted, the upgrade will be stopped and a notification will be returned. If in-place upgrade does not require restart, the upgrade process will proceed normally.</p>
+	CheckFastUpgradeReboot *int64 `json:"CheckFastUpgradeReboot,omitnil,omitempty" name:"CheckFastUpgradeReboot"`
+
+	// <p>Data validation sensitivity. This parameter is used for non-Rapid Configuration Change scenarios. Sensitivity is calculated based on current instance specifications to determine cpu resource usage for data comparison during the migration process. Corresponding options are: "high", "normal", "low", empty by default. Parameter explanation: "high": Corresponds to high in the console, not recommended when database load is too high. "normal": Corresponds to standard in the console. "low": Corresponds to low in the console.</p>
+	DataCheckSensitive *string `json:"DataCheckSensitive,omitnil,omitempty" name:"DataCheckSensitive"`
+
+	// <p>AZ information of standby database 3 is empty by default. You can specify this parameter when you proceed to purchase a four-node primary instance.</p>
+	FourthZone *string `json:"FourthZone,omitnil,omitempty" name:"FourthZone"`
 }
 
 type UpgradeDBInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of `cdb-c1nl9rpv` or `cdbro-c1nl9rpv`. It is the same as the instance ID displayed on the TencentDB Console page. You can use the [DescribeDBInstances](https://intl.cloud.tencent.com/document/api/236/15872?from_cn_redirect=1) API to query the ID, whose value is the `InstanceId` value in output parameters.
+	// <p>Instance ID, in the format such as cdb-c1nl9rpv or cdbro-c1nl9rpv. This matches the instance ID displayed on the TencentDB console. You can obtain it through the <a href="https://www.tencentcloud.com/document/api/236/15872?from_cn_redirect=1">Query Instance List</a> API, with its value being the InstanceId field in the output parameter.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Memory size in MB after upgrade. To ensure that the `Memory` value to be passed in is valid, please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/product/236/17229?from_cn_redirect=1) API to query the specifications of the memory that can be upgraded to.
+	// <p>Memory size after upgrade, unit: MB. To ensure the validity of the imported Memory value, please use the <a href="https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the upgradeable memory specifications.<br>Note: If you perform business migration, fill in the instance specification (CPU, memory), otherwise the system will use the minimum allowed specification by default.</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Disk size in GB after upgrade. To ensure that the `Volume` value to be passed in is valid, please use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/product/236/17229?from_cn_redirect=1) API to query the specifications of the disk that can be upgraded to.
+	// <p>Disk size after upgrade, unit: GB. To ensure the validity of the imported Volume value, please use the <a href="https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API to get the upgradeable disk range.</p>
 	Volume *int64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 
-	// Data replication mode. Valid values: 0 (async), 1 (semi-sync), 2 (strong sync). This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
+	// <p>Data replication method. Supported values include: 0 - async replication, 1 - semi-sync replication, 2 - strong sync replication. Specify this parameter when upgrading the primary instance. This parameter is invalid when upgrading a read-only instance or disaster recovery instance.</p>
 	ProtectMode *int64 `json:"ProtectMode,omitnil,omitempty" name:"ProtectMode"`
 
-	// Deployment mode. Valid values: 0 (single-AZ), 1 (multi-AZ). Default value: 0. This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
+	// <p>Deployment mode, defaults to 0. Supported values include: 0 - single-AZ deployment, 1 - multi-AZ deployment. You can specify this parameter when upgrading the primary instance. This parameter is invalid when upgrading a read-only instance or disaster recovery instance.</p>
 	DeployMode *int64 `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 
-	// AZ information of secondary database 1, which is the `Zone` value of the instance by default. This parameter can be specified when upgrading primary instances in multi-AZ mode and is meaningless for read-only or disaster recovery instances. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/product/236/17229?from_cn_redirect=1) API to query the supported AZs.
+	// <p>The availability zone information of standby database 1 matches the Zone parameter of the instance by default. You can specify this parameter when upgrading the primary instance to multi-AZ deployment. This parameter is invalid when upgrading a read-only instance or disaster recovery instance. You can query the supported availability zones via the <a href="https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API.</p>
 	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
 
-	// Version of primary instance database engine. Valid values: 5.5, 5.6, 5.7.
+	// <p>Database engine version of the primary instance. Supported values include 5.5, 5.6, 5.7, and 8.0.<br>Note: Please use the <a href="https://www.tencentcloud.com/document/api/236/15870?from_cn_redirect=1">UpgradeDBInstanceEngineVersion</a> API to upgrade the database version.</p>
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
-	// Switch mode for accessing the new instance.  Valid values:  `0` (switch immediately), `1` (switch within a time window). Default value: `0`. If the value is `1`, the switch process will be performed within a time window. Or, you can call the [SwitchForUpgrade](https://intl.cloud.tencent.com/document/product/236/15864?from_cn_redirect=1) API to trigger the process.
+	// <p>The way to switch to a new instance defaults to 0. Supported values include: 0 - switch immediately, 1 - switch within a time window. When the value is 1, during the upgrade, the process to switch to a new instance will be performed within the time window, or the user can actively call the API <a href="https://www.tencentcloud.com/document/product/236/15864?from_cn_redirect=1">Switch to a New Instance</a> to trigger the process.</p>
 	WaitSwitch *int64 `json:"WaitSwitch,omitnil,omitempty" name:"WaitSwitch"`
 
-	// AZ information of secondary database 2, which is empty by default. This parameter can be specified when upgrading primary instances and is meaningless for read-only or disaster recovery instances.
+	// <p>The availability zone information of standby 2 is empty by default. You can specify this parameter when upgrading the primary instance, but it is invalid when upgrading a read-only instance or disaster recovery instance. Query the supported AZs via the <a href="https://www.tencentcloud.com/document/product/236/17229?from_cn_redirect=1">obtain the purchasable specifications of cloud databases</a> API.<br>Remark: To downgrade a three-node instance to a two-node one, set this parameter to empty to achieve it.</p>
 	BackupZone *string `json:"BackupZone,omitnil,omitempty" name:"BackupZone"`
 
-	// Instance type. Valid values: master (primary instance), dr (disaster recovery instance), ro (read-only instance). Default value: master.
+	// <p>Instance type, defaults to master. Supported values include: master - refers to the primary instance, dr - refers to the disaster recovery instance, ro - refers to the read-only instance.</p>
 	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 
-	// The resource isolation type after the instance is upgraded. Valid values: `UNIVERSAL` (general instance), `EXCLUSIVE` (dedicated instance), `BASIC` (basic instance). If this parameter is left empty, the resource isolation type will be the same as the original one.
+	// <p>Instance isolation type. Supported values include "UNIVERSAL" - general-purpose instance, "EXCLUSIVE" - dedicated instance, "BASIC" - BASIC edition instance.</p>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// The number of CPU cores after the instance is upgraded. If this parameter is left empty, the minimum value will be automatically filled based on the value specified by `Memory`.
+	// <p>Number of cpu cores of the instance after upgrade. If not provided, the system will automatically fill in the minimum allowed specification based on the Memory size specified by Memory.<br>Description: If you need to migrate business, make sure to fill in the instance specification (cpu, Memory). Otherwise, the system will use the minimum allowed specification by default.</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// QuickChange options. Valid values: `0` (common upgrade), `1` (QuickChange), `2` (QuickChange first). After QuickChange is enabled, the required resources will be checked. QuickChange will be performed only when the required resources support the feature; otherwise, an error message will be returned.
+	// <p>Whether to perform Rapid Configuration Change. 0-Normal upgrade, 1-Rapid Configuration Change, 2-Precedence to rapid change. Selecting Rapid Configuration Change will validate whether it is possible to perform ultra-fast reconfiguration based on resource status. If conditions are met, ultra-fast reconfiguration will be performed; otherwise, error information will be returned.</p>
 	FastUpgrade *int64 `json:"FastUpgrade,omitnil,omitempty" name:"FastUpgrade"`
 
-	// Delay threshold. Value range: 1-10. Default value: `10`.
+	// <p>Delay threshold. Value ranges from 1 to 10, default value is 10.</p>
 	MaxDelayTime *int64 `json:"MaxDelayTime,omitnil,omitempty" name:"MaxDelayTime"`
 
-	// Whether to migrate the source node across AZs. Valid values: `0` (no), `1`(yes). Default value: `0`. If it is `1`, you can modify the source node AZ.
+	// <p>Whether to perform cross-region migration. 0 - ordinary migration, 1 - cross-region migration, default value is 0. When set to 1, it supports changes to the primary node availability zone of the instance.</p>
 	CrossCluster *int64 `json:"CrossCluster,omitnil,omitempty" name:"CrossCluster"`
 
-	// New AZ of the source node. This field is only valid when `CrossCluster` is `1`. Only migration across AZs in the same region is supported.
+	// <p>Primary node availability zone. This parameter is valid only when cross-AZ migration. You can only migrate in the same region.</p>
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Processing logic of the intra-AZ read-only instance for cross-cluster migration. Valid values: `together` (intra-AZ read-only instances will be migrated to the target AZ with the source instance by default.), `severally` (intra-AZ read-only instances will maintain the original deployment mode and will not be migrated to the target AZ.).
+	// <p>For cross-cluster migration scenarios, select the processing logic for intra-AZ read-only instances. together-intra-AZ read-only instances migrate with the primary instance to the target availability zone (default option), severally-intra-AZ read-only instances maintain the original deployment mode and do not move to the target availability zone.</p>
 	RoTransType *string `json:"RoTransType,omitnil,omitempty" name:"RoTransType"`
+
+	// <p>Topology configuration of cloud disk edition nodes.</p>
+	ClusterTopology *ClusterTopology `json:"ClusterTopology,omitnil,omitempty" name:"ClusterTopology"`
+
+	// <p>Check whether in-place upgrade requires restart. 1-Check, 0-Do not check. If the value is 1 and the check shows that in-place upgrade must be restarted, the upgrade will be stopped and a notification will be returned. If in-place upgrade does not require restart, the upgrade process will proceed normally.</p>
+	CheckFastUpgradeReboot *int64 `json:"CheckFastUpgradeReboot,omitnil,omitempty" name:"CheckFastUpgradeReboot"`
+
+	// <p>Data validation sensitivity. This parameter is used for non-Rapid Configuration Change scenarios. Sensitivity is calculated based on current instance specifications to determine cpu resource usage for data comparison during the migration process. Corresponding options are: "high", "normal", "low", empty by default. Parameter explanation: "high": Corresponds to high in the console, not recommended when database load is too high. "normal": Corresponds to standard in the console. "low": Corresponds to low in the console.</p>
+	DataCheckSensitive *string `json:"DataCheckSensitive,omitnil,omitempty" name:"DataCheckSensitive"`
+
+	// <p>AZ information of standby database 3 is empty by default. You can specify this parameter when you proceed to purchase a four-node primary instance.</p>
+	FourthZone *string `json:"FourthZone,omitnil,omitempty" name:"FourthZone"`
 }
 
 func (r *UpgradeDBInstanceRequest) ToJsonString() string {
@@ -14778,6 +16492,10 @@ func (r *UpgradeDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "CrossCluster")
 	delete(f, "ZoneId")
 	delete(f, "RoTransType")
+	delete(f, "ClusterTopology")
+	delete(f, "CheckFastUpgradeReboot")
+	delete(f, "DataCheckSensitive")
+	delete(f, "FourthZone")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeDBInstanceRequest has unknown keys!", "")
 	}
@@ -14786,10 +16504,10 @@ func (r *UpgradeDBInstanceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpgradeDBInstanceResponseParams struct {
-	// Order ID.
+	// <p>Order ID.</p>
 	DealIds []*string `json:"DealIds,omitnil,omitempty" name:"DealIds"`
 
-	// Async task request ID, which can be used to query the execution result of an async task.
+	// <p>Request ID of the async task. Use this ID to <a href="https://www.tencentcloud.com/document/product/236/20410?from_cn_redirect=1">query the outcome of the async task</a>.</p>
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil,omitempty" name:"AsyncRequestId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -14810,6 +16528,14 @@ func (r *UpgradeDBInstanceResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *UpgradeDBInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpgradeEngineVersionParams struct {
+	// Parameter name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Parameter value.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type UploadInfo struct {

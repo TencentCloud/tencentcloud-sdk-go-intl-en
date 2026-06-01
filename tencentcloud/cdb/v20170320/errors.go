@@ -86,7 +86,7 @@ const (
 	// Failed to deserialize JSON.
 	FAILEDOPERATION_JSONUNMARSHALERROR = "FailedOperation.JsonUnmarshalError"
 
-	// The volume of the returned data is too large. Please narrow down the data query scope.
+	// Data volume is too large. Reduce the data query range.
 	FAILEDOPERATION_LOGCONTENTOVERLIMIT = "FailedOperation.LogContentOverLimit"
 
 	// No policy modification detected
@@ -95,8 +95,8 @@ const (
 	// It is not a read-only instance with delayed replication enabled.
 	FAILEDOPERATION_NOTDELAYRO = "FailedOperation.NotDelayRo"
 
-	// The instance has an operation in progress. Try again later.
-	FAILEDOPERATION_OPERATIONINCONFLICTERR = "FailedOperation.OperationInConflictErr"
+	// The instance is busy with other operations. Please try again later.
+	FAILEDOPERATION_OPERATIONINCONFLICTERROR = "FailedOperation.OperationInConflictError"
 
 	// The executed operation to modify permissions is invalid. You can refer to product documentation for more information about permissions that can be modified for this instance. If you have any questions, please contact customer service.
 	FAILEDOPERATION_PRIVILEGEDATAILLEGAL = "FailedOperation.PrivilegeDataIllegal"
@@ -122,6 +122,9 @@ const (
 	// The result set size of queried logs exceeds the limit. Please select a shorter time range.
 	FAILEDOPERATION_RESULTSETOVERLIMIT = "FailedOperation.ResultSetOverLimit"
 
+	// Log query failed. Please retry later or narrow down the query scope. If it continues to be unsuccessful, contact our customer service for handling.
+	FAILEDOPERATION_SERVICEACCESSERROR = "FailedOperation.ServiceAccessError"
+
 	// Failed to initiate the operation. Please try again later. If the operation remains unsuccessful, please contact customer service.
 	FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
 
@@ -130,6 +133,9 @@ const (
 
 	// Failed to submit the task. Please try again later. If the submission remains unsuccessful, please contact customer service.
 	FAILEDOPERATION_SUBMITASYNCTASKERROR = "FailedOperation.SubmitAsyncTaskError"
+
+	// A same task already exists
+	FAILEDOPERATION_TASKCONFLICTERROR = "FailedOperation.TaskConflictError"
 
 	// The query timed out.
 	FAILEDOPERATION_TIMEOUTERROR = "FailedOperation.TimeoutError"
@@ -194,7 +200,7 @@ const (
 	// Database operation failed.
 	INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
 
-	// The database record does not exist.
+	// The database instance does not exist.
 	INTERNALERROR_DBRECORDNOTEXISTERROR = "InternalError.DBRecordNotExistError"
 
 	// Internal database error.
@@ -235,6 +241,9 @@ const (
 
 	// An exception occurred while executing the request.
 	INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
+
+	// Internal service exception. Try again later.
+	INTERNALERROR_INTERNALINNERSERVICEERROR = "InternalError.InternalInnerServiceError"
 
 	// The backend failed to request the service. Please contact customer service.
 	INTERNALERROR_INTERNALREQUESTERROR = "InternalError.InternalRequestError"
@@ -461,6 +470,9 @@ const (
 	// The root account cannot be deleted.
 	OPERATIONDENIED_DELETEROOTACCOUNTERROR = "OperationDenied.DeleteRootAccountError"
 
+	// Process conflict, try again later.
+	OPERATIONDENIED_FLOWCONFLICT = "OperationDenied.FlowConflict"
+
 	// This instance needs permissions to use this feature.
 	OPERATIONDENIED_FUNCTIONDENIED = "OperationDenied.FunctionDenied"
 
@@ -560,7 +572,7 @@ const (
 	// The instance cannot be found. Please check whether your instance status is normal.
 	RESOURCENOTFOUND_CDBINSTANCENOTFOUNDERROR = "ResourceNotFound.CdbInstanceNotFoundError"
 
-	// High-availability instance doesn’t exist.
+	// The instance does not exist.
 	RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 
 	// The instance does not exist.

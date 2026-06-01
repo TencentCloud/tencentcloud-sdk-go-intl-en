@@ -513,7 +513,7 @@ type AddInstancesResponseParams struct {
 	// <p>Freeze transaction. One frozen flow is activated at a time.</p>
 	TranId *string `json:"TranId,omitnil,omitempty" name:"TranId"`
 
-	// <p>Order ID for payment. Description: Recommend you use the <a href="https://www.tencentcloud.com/document/product/1003/52131?from_cn_redirect=1">DescribeResourcesByDealName</a> api to query order associated instance.</p>
+	// <p>Order ID for payment. Description: Recommend you use the <a href="https://www.tencentcloud.com/document/product/1098/40735">DescribeResourcesByDealName</a> api to query order associated instance.</p>
 	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
 
 	// <p>Delivery resource id list.</p>
