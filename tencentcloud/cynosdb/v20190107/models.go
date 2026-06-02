@@ -31,6 +31,11 @@ type AIOptimizerStatus struct {
 	TrainingProgress *int64 `json:"TrainingProgress,omitnil,omitempty" name:"TrainingProgress"`
 }
 
+type AIOptimizerTaskData struct {
+	// <p>Template ID</p>
+	TemplateID *string `json:"TemplateID,omitnil,omitempty" name:"TemplateID"`
+}
+
 type Ability struct {
 	// Whether secondary AZ is supported
 	IsSupportSlaveZone *string `json:"IsSupportSlaveZone,omitnil,omitempty" name:"IsSupportSlaveZone"`
@@ -1353,129 +1358,136 @@ type BinlogItem struct {
 }
 
 type BizTaskInfo struct {
-
+	// <p>Task ID.</p>
 	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
-
+	// <p>User appid</p>
 	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
-
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Region
+	// <p>Region</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-
+	// <p>Task creation time</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Specifies the delayed execution time.
+	// <p>Delayed execution time</p>
 	DelayTime *string `json:"DelayTime,omitnil,omitempty" name:"DelayTime"`
 
-	// Task failure information.
+	// <p>Task failure information</p>
 	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
 
-
+	// <p>Asynchronous task flow id</p>
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
-
+	// <p>Task input information</p>
 	Input *string `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// <p>Instance group id.</p>
 	//
 	// Deprecated: InstanceGrpId is deprecated.
 	InstanceGrpId *string `json:"InstanceGrpId,omitnil,omitempty" name:"InstanceGrpId"`
 
-
+	// <p>Instance group id.</p>
 	InstanceGroupId *string `json:"InstanceGroupId,omitnil,omitempty" name:"InstanceGroupId"`
 
-
+	// <p>Instance id</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-
+	// <p>Task operation object id</p>
 	ObjectId *string `json:"ObjectId,omitnil,omitempty" name:"ObjectId"`
 
-
+	// <p>Task operation object type.</p>
 	ObjectType *string `json:"ObjectType,omitnil,omitempty" name:"ObjectType"`
 
-
+	// <p>Operator uin</p>
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
-
+	// <p>Task output information</p>
 	Output *string `json:"Output,omitnil,omitempty" name:"Output"`
 
-
+	// <p>Task status</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// <p>Task type</p>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-
+	// <p>Parent task ID that triggers this task</p>
 	TriggerTaskId *int64 `json:"TriggerTaskId,omitnil,omitempty" name:"TriggerTaskId"`
 
-
+	// <p>Update time.</p>
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-
+	// <p>Task start time</p>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-
+	// <p>Task end time</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-
+	// <p>Cluster name.</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-
+	// <p>Instance name</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-
+	// <p>Task progress</p>
 	Process *int64 `json:"Process,omitnil,omitempty" name:"Process"`
 
-
+	// <p>Modify parameter task information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	//
 	// Deprecated: ModifyParamsData is deprecated.
 	ModifyParamsData []*ModifyParamsData `json:"ModifyParamsData,omitnil,omitempty" name:"ModifyParamsData"`
 
-	// Create cluster task information.
+	// <p>Create cluster task information</p>
 	CreateClustersData *CreateClustersData `json:"CreateClustersData,omitnil,omitempty" name:"CreateClustersData"`
 
-	// Cluster rollback task information.
+	// <p>Cluster rollback task information</p>
 	RollbackData *RollbackData `json:"RollbackData,omitnil,omitempty" name:"RollbackData"`
 
-	// Instance configuration change task information.
+	// <p>Instance configuration change task information</p>
 	ModifyInstanceData *ModifyInstanceData `json:"ModifyInstanceData,omitnil,omitempty" name:"ModifyInstanceData"`
 
-
+	// <p>Manual backup task information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ManualBackupData *ManualBackupData `json:"ManualBackupData,omitnil,omitempty" name:"ManualBackupData"`
 
-	// Modify kernel version task information.
+	// <p>Modify kernel version task information</p>
 	ModifyDbVersionData *ModifyDbVersionData `json:"ModifyDbVersionData,omitnil,omitempty" name:"ModifyDbVersionData"`
 
-	// Cluster availability zone information.
+	// <p>Cluster Availability Zone Information</p>
 	ClusterSlaveData *ClusterSlaveData `json:"ClusterSlaveData,omitnil,omitempty" name:"ClusterSlaveData"`
 
-
+	// <p>Convert cluster logs</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SwitchClusterLogBin *SwitchClusterLogBin `json:"SwitchClusterLogBin,omitnil,omitempty" name:"SwitchClusterLogBin"`
 
-
+	// <p>Modify instance parameter data</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ModifyInstanceParamsData *BizTaskModifyParamsData `json:"ModifyInstanceParamsData,omitnil,omitempty" name:"ModifyInstanceParamsData"`
 
-	// Maintenance time.
+	// <p>Maintenance time</p>
 	TaskMaintainInfo *TaskMaintainInfo `json:"TaskMaintainInfo,omitnil,omitempty" name:"TaskMaintainInfo"`
 
-	// Instance log delivery information.
+	// <p>Instance Log Delivery Information</p>
 	InstanceCLSDeliveryInfos []*InstanceCLSDeliveryInfo `json:"InstanceCLSDeliveryInfos,omitnil,omitempty" name:"InstanceCLSDeliveryInfos"`
 
-	// Task progress information.
+	// <p>Task progress information</p>
 	TaskProgressInfo *TaskProgressInfo `json:"TaskProgressInfo,omitnil,omitempty" name:"TaskProgressInfo"`
 
-	// Global Database Network Task
+	// <p>Global database network task</p>
 	GdnTaskInfo *GdnTaskInfo `json:"GdnTaskInfo,omitnil,omitempty" name:"GdnTaskInfo"`
 
-	// Safe id
+	// <p>Safe id</p>
 	VaultId *string `json:"VaultId,omitnil,omitempty" name:"VaultId"`
 
-	// Safe name
+	// <p>Safe name</p>
 	VaultName *string `json:"VaultName,omitnil,omitempty" name:"VaultName"`
+
+	// <p>AI optimizer task information</p>
+	AIOptimizerTaskData *AIOptimizerTaskData `json:"AIOptimizerTaskData,omitnil,omitempty" name:"AIOptimizerTaskData"`
 }
 
 type BizTaskModifyInstanceParam struct {

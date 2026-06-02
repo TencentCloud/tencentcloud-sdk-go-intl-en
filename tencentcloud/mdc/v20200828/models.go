@@ -1245,6 +1245,9 @@ type DescribeStreamLinkFlowSRTStatisticsRequestParams struct {
 
 	// The query interval. Valid values: 5s, 1min, 5min, 15min.
 	Period *string `json:"Period,omitnil,omitempty" name:"Period"`
+
+	// Peer IP address
+	RemoteIp *string `json:"RemoteIp,omitnil,omitempty" name:"RemoteIp"`
 }
 
 type DescribeStreamLinkFlowSRTStatisticsRequest struct {
@@ -1272,6 +1275,9 @@ type DescribeStreamLinkFlowSRTStatisticsRequest struct {
 
 	// The query interval. Valid values: 5s, 1min, 5min, 15min.
 	Period *string `json:"Period,omitnil,omitempty" name:"Period"`
+
+	// Peer IP address
+	RemoteIp *string `json:"RemoteIp,omitnil,omitempty" name:"RemoteIp"`
 }
 
 func (r *DescribeStreamLinkFlowSRTStatisticsRequest) ToJsonString() string {
@@ -1293,6 +1299,7 @@ func (r *DescribeStreamLinkFlowSRTStatisticsRequest) FromJsonString(s string) er
 	delete(f, "StartTime")
 	delete(f, "EndTime")
 	delete(f, "Period")
+	delete(f, "RemoteIp")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamLinkFlowSRTStatisticsRequest has unknown keys!", "")
 	}
@@ -1763,6 +1770,51 @@ type FlowSRTInfo struct {
 
 	// The number of dropped packets for receiving.
 	RecvPacketDropNumber *int64 `json:"RecvPacketDropNumber,omitnil,omitempty" name:"RecvPacketDropNumber"`
+
+	// bandwidth
+	Bandwidth *float64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
+
+	// Transmit bandwidth
+	SendBandwidth *float64 `json:"SendBandwidth,omitnil,omitempty" name:"SendBandwidth"`
+
+	// Receive bandwidth
+	RecvBandwidth *float64 `json:"RecvBandwidth,omitnil,omitempty" name:"RecvBandwidth"`
+
+	// Number of packets sent
+	SendPackets *int64 `json:"SendPackets,omitnil,omitempty" name:"SendPackets"`
+
+	// Number of received packets
+	RecvPackets *int64 `json:"RecvPackets,omitnil,omitempty" name:"RecvPackets"`
+
+	// Send lost package
+	SendLostPackets *int64 `json:"SendLostPackets,omitnil,omitempty" name:"SendLostPackets"`
+
+	// Accept lost packages
+	RecvLostPackets *int64 `json:"RecvLostPackets,omitnil,omitempty" name:"RecvLostPackets"`
+
+	// Number of retransmission packets sent
+	SendRetransmitPackets *int64 `json:"SendRetransmitPackets,omitnil,omitempty" name:"SendRetransmitPackets"`
+
+	// Number of received retransmission packets
+	RecvRetransmitPackets *int64 `json:"RecvRetransmitPackets,omitnil,omitempty" name:"RecvRetransmitPackets"`
+
+	// Flight window size
+	FlightSize *int64 `json:"FlightSize,omitnil,omitempty" name:"FlightSize"`
+
+	// congestion window
+	CongestionWindow *int64 `json:"CongestionWindow,omitnil,omitempty" name:"CongestionWindow"`
+
+	// Send buffer (ms)
+	SendBuffer *int64 `json:"SendBuffer,omitnil,omitempty" name:"SendBuffer"`
+
+	// Receive buffer (ms)
+	RecvBuffer *int64 `json:"RecvBuffer,omitnil,omitempty" name:"RecvBuffer"`
+
+	// Sending delay
+	SendLatency *int64 `json:"SendLatency,omitnil,omitempty" name:"SendLatency"`
+
+	// Receiving delay
+	RecvLatency *int64 `json:"RecvLatency,omitnil,omitempty" name:"RecvLatency"`
 }
 
 type FlowStatistics struct {
