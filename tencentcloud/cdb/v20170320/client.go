@@ -4159,6 +4159,60 @@ func (c *Client) DescribeCloneListWithContext(ctx context.Context, request *Desc
     return
 }
 
+func NewDescribeClusterInfoRequest() (request *DescribeClusterInfoRequest) {
+    request = &DescribeClusterInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdb", APIVersion, "DescribeClusterInfo")
+    
+    
+    return
+}
+
+func NewDescribeClusterInfoResponse() (response *DescribeClusterInfoResponse) {
+    response = &DescribeClusterInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeClusterInfo
+// This API is used to query cloud disk edition instance info.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeClusterInfo(request *DescribeClusterInfoRequest) (response *DescribeClusterInfoResponse, err error) {
+    return c.DescribeClusterInfoWithContext(context.Background(), request)
+}
+
+// DescribeClusterInfo
+// This API is used to query cloud disk edition instance info.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBOPERATIONERROR = "InternalError.DBOperationError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeClusterInfoWithContext(ctx context.Context, request *DescribeClusterInfoRequest) (response *DescribeClusterInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cdb", APIVersion, "DescribeClusterInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeClusterInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBFeaturesRequest() (request *DescribeDBFeaturesRequest) {
     request = &DescribeDBFeaturesRequest{
         BaseRequest: &tchttp.BaseRequest{},

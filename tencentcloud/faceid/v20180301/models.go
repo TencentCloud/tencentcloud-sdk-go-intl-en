@@ -3964,7 +3964,7 @@ type NormalHKIDCard struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CurrentIssueDate *string `json:"CurrentIssueDate,omitnil,omitempty" name:"CurrentIssueDate"`
 
-	// Hong kong identity card version.
+	// Hong Kong identity card version number, HKID-2003: 03 edition ID card, HKID-2018: 18 edition ID card
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HKIDVersion *string `json:"HKIDVersion,omitnil,omitempty" name:"HKIDVersion"`
 }
@@ -4127,40 +4127,43 @@ type NormalThailandIDCard struct {
 }
 
 type OCRResult struct {
-	// Is the indentity verification or OCR process passed
+	// <p>Whether the identity authentication or OCR process is successful.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsPass *bool `json:"IsPass,omitnil,omitempty" name:"IsPass"`
 
-	// The Base64 of ID card image
+	// <p>Base64 of the ID image</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CardImageBase64 *string `json:"CardImageBase64,omitnil,omitempty" name:"CardImageBase64"`
 
-	// OCR result of the ID card.
+	// <p>ID card recognition result</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	//
 	// Deprecated: CardInfo is deprecated.
 	CardInfo *CardInfo `json:"CardInfo,omitnil,omitempty" name:"CardInfo"`
 
-	// OCR result of the ID card.
+	// <p>Document recognition result (when CheckMode value is 4, return the OriginalCardInfo field; other scenarios return the current field)</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	NormalCardInfo *NormalCardInfo `json:"NormalCardInfo,omitnil,omitempty" name:"NormalCardInfo"`
 
-	// The request id
+	// <p>Request id</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 
-	// Base64 of cropped image of ID card
+	// <p>Base64 of the cropped ID image</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CardCutImageBase64 *string `json:"CardCutImageBase64,omitnil,omitempty" name:"CardCutImageBase64"`
 
-	// Base64 of the cropped image on the reverse side of the ID card
+	// <p>Base64 of the cropped image of the back side of the ID</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CardBackCutImageBase64 *string `json:"CardBackCutImageBase64,omitnil,omitempty" name:"CardBackCutImageBase64"`
 
-	// Card Warning Information
-	// 
-	// -9101 Alarm for covered certificate,
-	// -9102 Alarm for photocopied certificate,
-	// -9103 Alarm for photographed certificate,
-	// -9104 Alarm for PS certificate,
-	// -9107 Alarm for reflective certificate,
-	// -9108 Alarm for blurry image,
-	// -9109 This capability is not enabled.
+	// <p>Alarm code</p><p>Enumeration value:</p><ul><li>-9101: Alarm for incomplete document border</li><li>-9102: Alarm for document photocopy</li><li>-9103: Alarm for rephotographing</li><li>-9104: PS alarm</li><li>-9107: Reflective alarm</li><li>-9108: Blurry alarm</li><li>-9109: Alarm capability not enabled</li></ul>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	WarnCardInfos []*int64 `json:"WarnCardInfos,omitnil,omitempty" name:"WarnCardInfos"`
+
+	// <p>Original document recognition information (the current field will be returned when CheckMode value is 4)</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginalCardInfo *string `json:"OriginalCardInfo,omitnil,omitempty" name:"OriginalCardInfo"`
 }
 
 type PakistanDrivingLicense struct {
@@ -4651,6 +4654,27 @@ type VerificationDetail struct {
 	// Unique ID of this verification process.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Seq *string `json:"Seq,omitnil,omitempty" name:"Seq"`
+
+	// Describe the detailed reason why the current request was rejected in the liveness phase. This parameter only applies to the PLUS edition eKYC service.
+	// -Details as follows:
+	// 01-User eyes closed throughout
+	// 02-User not completed specified action
+	// 03-Suspected rephotography attack
+	// 04-Suspected Synthesis Attack
+	// 05-Suspected fraudulent template
+	// 06-Suspected watermark
+	// 07-Reflection validation failed
+	// 08 - Suspected change of person midway
+	// 09-Poor face quality
+	// 10 - Distance validation failed
+	// 11-Suspected adversarial sample attack
+	// 12 - Suspected attack traces in the mouth area
+	// 13 - Suspected attack traces exist in the eye area
+	// 14 - Eye or mouth obstruction
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Example value: ["01"].
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LivenessInfoTag []*string `json:"LivenessInfoTag,omitnil,omitempty" name:"LivenessInfoTag"`
 }
 
 // Predefined struct for user

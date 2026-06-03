@@ -28,7 +28,7 @@ type AddProjectUserRoleRequestParams struct {
 	// User UIN
 	UserIds []*string `json:"UserIds,omitnil,omitempty" name:"UserIds"`
 
-	// Role id
+	// Role ID
 	RoleIds []*string `json:"RoleIds,omitnil,omitempty" name:"RoleIds"`
 }
 
@@ -41,7 +41,7 @@ type AddProjectUserRoleRequest struct {
 	// User UIN
 	UserIds []*string `json:"UserIds,omitnil,omitempty" name:"UserIds"`
 
-	// Role id
+	// Role ID
 	RoleIds []*string `json:"RoleIds,omitnil,omitempty" name:"RoleIds"`
 }
 

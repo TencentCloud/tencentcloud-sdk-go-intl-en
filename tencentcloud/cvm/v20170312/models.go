@@ -6438,10 +6438,10 @@ func (r *ModifyImageAttributeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyImageSharePermissionRequestParams struct {
-	// Image ID, such as `img-gvbnzy6f`. You can obtain the image ID in the following ways:<br><li>Call the [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) API and find the value of `ImageId` in the response.</li><br><li>Obtain it in the [Image console](https://console.cloud.tencent.com/cvm/image).</li><br>The image ID should correspond to an image in the `NORMAL` state. For more information on image status, see [Image Data Table](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#Image).
+	// Image ID, such as `img-gvbnzy6f`. You can obtain the image ID in the following ways:<br><li>Call the [DescribeImages](https://www.tencentcloud.com/document/api/213/33272) API and find the value of `ImageId` in the response.</li><br><li>Obtain it in the [Image console](https://console.cloud.tencent.com/cvm/image).</li><br>The image ID should correspond to an image in the `NORMAL` state. For more information on image status, see [Image Data Table](https://www.tencentcloud.com/document/api/1103/42519#Image).
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
-	// ID list of root accounts receiving shared images. For the format of array-type parameters, see [API Introduction](https://intl.cloud.tencent.com/document/api/213/568?from_cn_redirect=1). An account ID is different from a QQ number. For details on root account IDs, refer to the account ID section in [Account Information](https://console.cloud.tencent.com/developer).
+	// ID list of root accounts receiving shared images. An account ID is different from a QQ number. For details on root account IDs, refer to the account ID section in [Account Information](https://console.cloud.tencent.com/developer).
 	AccountIds []*string `json:"AccountIds,omitnil,omitempty" name:"AccountIds"`
 
 	// Operations. Valid values: `SHARE`, sharing an image; `CANCEL`, cancelling an image sharing. 
@@ -6451,10 +6451,10 @@ type ModifyImageSharePermissionRequestParams struct {
 type ModifyImageSharePermissionRequest struct {
 	*tchttp.BaseRequest
 	
-	// Image ID, such as `img-gvbnzy6f`. You can obtain the image ID in the following ways:<br><li>Call the [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) API and find the value of `ImageId` in the response.</li><br><li>Obtain it in the [Image console](https://console.cloud.tencent.com/cvm/image).</li><br>The image ID should correspond to an image in the `NORMAL` state. For more information on image status, see [Image Data Table](https://intl.cloud.tencent.com/document/product/213/15753?from_cn_redirect=1#Image).
+	// Image ID, such as `img-gvbnzy6f`. You can obtain the image ID in the following ways:<br><li>Call the [DescribeImages](https://www.tencentcloud.com/document/api/213/33272) API and find the value of `ImageId` in the response.</li><br><li>Obtain it in the [Image console](https://console.cloud.tencent.com/cvm/image).</li><br>The image ID should correspond to an image in the `NORMAL` state. For more information on image status, see [Image Data Table](https://www.tencentcloud.com/document/api/1103/42519#Image).
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
-	// ID list of root accounts receiving shared images. For the format of array-type parameters, see [API Introduction](https://intl.cloud.tencent.com/document/api/213/568?from_cn_redirect=1). An account ID is different from a QQ number. For details on root account IDs, refer to the account ID section in [Account Information](https://console.cloud.tencent.com/developer).
+	// ID list of root accounts receiving shared images. An account ID is different from a QQ number. For details on root account IDs, refer to the account ID section in [Account Information](https://console.cloud.tencent.com/developer).
 	AccountIds []*string `json:"AccountIds,omitnil,omitempty" name:"AccountIds"`
 
 	// Operations. Valid values: `SHARE`, sharing an image; `CANCEL`, cancelling an image sharing. 
@@ -8113,7 +8113,7 @@ type RunAutomationServiceEnabled struct {
 
 // Predefined struct for user
 type RunInstancesRequestParams struct {
-	// Instance [billing type](https://intl.cloud.tencent.com/document/product/213/2180?from_cn_redirect=1). <br><li>`PREPAID`: Monthly Subscription, used for at least one month <br><li>`POSTPAID_BY_HOUR`: Hourly-based pay-as-you-go <br><li>`CDHPAID`: [Dedicated CVM](https://www.tencentcloud.com/document/product/416/5068?lang=en&pg=) (associated with a dedicated host. Resource usage of the dedicated host is free of charge.) <br><li>`SPOTPAID`: [Spot instance](https://intl.cloud.tencent.com/document/product/213/17817)<br>Default value: `POSTPAID_BY_HOUR`.
+	// Instance [billing type](https://www.tencentcloud.com/document/product/213/2180). <br><li>`PREPAID`: Monthly Subscription, used for at least one month <br><li>`POSTPAID_BY_HOUR`: Hourly-based pay-as-you-go <br><li>`CDHPAID`: [Dedicated CVM](https://www.tencentcloud.com/document/product/416/5068?lang=en&pg=) (associated with a dedicated host. Resource usage of the dedicated host is free of charge.) <br><li>`SPOTPAID`: [Spot instance](https://intl.cloud.tencent.com/document/product/213/17817)<br>Default value: `POSTPAID_BY_HOUR`.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
 	// Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
@@ -8124,10 +8124,10 @@ type RunInstancesRequestParams struct {
 	Placement *Placement `json:"Placement,omitnil,omitempty" name:"Placement"`
 
 	// The instance model. 
-	// <br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call DescribeInstanceTypeConfigs or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). <br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
+	// <br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call DescribeInstanceTypeConfigs or refer to [Instance Types](https://www.tencentcloud.com/document/product/213/11518). <br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// The [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><br/>To check the image ID:<br/><li>For public images, custom images, and shared images, go to the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
+	// The [image](https://www.tencentcloud.com/document/product/213/4940) ID in the format of `img-xxx`. There are three types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><br/>To check the image ID:<br/><li>For public images, custom images, and shared images, go to the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE). </li><li>Call [DescribeImages](https://www.tencentcloud.com/document/api/213/33272), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
 	//  <b>Note: `ImageId` is required when `LaunchTemplate` is not specified. If both the parameters are passed in, `ImageId` prevails.</b>
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
@@ -8143,7 +8143,7 @@ type RunInstancesRequestParams struct {
 	// Configuration of public network bandwidth. If this parameter is not specified, 0 Mbps will be used by default.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil,omitempty" name:"InternetAccessible"`
 
-	// The number of instances to be purchased. Value range for pay-as-you-go instances: [1, 100]. Default value: `1`. The specified number of instances to be purchased cannot exceed the remaining quota allowed for the user. For more information on the quota, see [Quota for CVM Instances](https://intl.cloud.tencent.com/document/product/213/2664).
+	// The number of instances to be purchased. Value range for pay-as-you-go instances: [1, 100]. Default value: `1`. The specified number of instances to be purchased cannot exceed the remaining quota allowed for the user. For more information on the quota, see [Quota for CVM Instances](https://www.tencentcloud.com/document/product/213/2664).
 	InstanceCount *int64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
 	// Specifies the minimum number of instances to create. value range: positive integer not greater than InstanceCount.
@@ -8209,7 +8209,7 @@ type RunInstancesRequestParams struct {
 	// Information about the CPU topology of an instance. If not specified, it is determined by system resources.
 	CpuTopology *CpuTopology `json:"CpuTopology,omitnil,omitempty" name:"CpuTopology"`
 
-	// CAM role name, which can be obtained from the `roleName` field in the response of the [`DescribeRoleList`](https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1) API.
+	// CAM role name, which can be obtained from the `roleName` field in the response of the [`DescribeRoleList`](https://www.tencentcloud.com/document/product/598/33559) API.
 	CamRoleName *string `json:"CamRoleName,omitnil,omitempty" name:"CamRoleName"`
 
 	// HPC cluster ID. The HPC cluster must and can only be specified for a high-performance computing instance.
@@ -8234,7 +8234,7 @@ type RunInstancesRequestParams struct {
 type RunInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance [billing type](https://intl.cloud.tencent.com/document/product/213/2180?from_cn_redirect=1). <br><li>`PREPAID`: Monthly Subscription, used for at least one month <br><li>`POSTPAID_BY_HOUR`: Hourly-based pay-as-you-go <br><li>`CDHPAID`: [Dedicated CVM](https://www.tencentcloud.com/document/product/416/5068?lang=en&pg=) (associated with a dedicated host. Resource usage of the dedicated host is free of charge.) <br><li>`SPOTPAID`: [Spot instance](https://intl.cloud.tencent.com/document/product/213/17817)<br>Default value: `POSTPAID_BY_HOUR`.
+	// Instance [billing type](https://www.tencentcloud.com/document/product/213/2180). <br><li>`PREPAID`: Monthly Subscription, used for at least one month <br><li>`POSTPAID_BY_HOUR`: Hourly-based pay-as-you-go <br><li>`CDHPAID`: [Dedicated CVM](https://www.tencentcloud.com/document/product/416/5068?lang=en&pg=) (associated with a dedicated host. Resource usage of the dedicated host is free of charge.) <br><li>`SPOTPAID`: [Spot instance](https://intl.cloud.tencent.com/document/product/213/17817)<br>Default value: `POSTPAID_BY_HOUR`.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
 	// Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
@@ -8245,10 +8245,10 @@ type RunInstancesRequest struct {
 	Placement *Placement `json:"Placement,omitnil,omitempty" name:"Placement"`
 
 	// The instance model. 
-	// <br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call DescribeInstanceTypeConfigs or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). <br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
+	// <br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call DescribeInstanceTypeConfigs or refer to [Instance Types](https://www.tencentcloud.com/document/product/213/11518). <br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// The [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><br/>To check the image ID:<br/><li>For public images, custom images, and shared images, go to the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
+	// The [image](https://www.tencentcloud.com/document/product/213/4940) ID in the format of `img-xxx`. There are three types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><br/>To check the image ID:<br/><li>For public images, custom images, and shared images, go to the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE). </li><li>Call [DescribeImages](https://www.tencentcloud.com/document/api/213/33272), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
 	//  <b>Note: `ImageId` is required when `LaunchTemplate` is not specified. If both the parameters are passed in, `ImageId` prevails.</b>
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
@@ -8264,7 +8264,7 @@ type RunInstancesRequest struct {
 	// Configuration of public network bandwidth. If this parameter is not specified, 0 Mbps will be used by default.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil,omitempty" name:"InternetAccessible"`
 
-	// The number of instances to be purchased. Value range for pay-as-you-go instances: [1, 100]. Default value: `1`. The specified number of instances to be purchased cannot exceed the remaining quota allowed for the user. For more information on the quota, see [Quota for CVM Instances](https://intl.cloud.tencent.com/document/product/213/2664).
+	// The number of instances to be purchased. Value range for pay-as-you-go instances: [1, 100]. Default value: `1`. The specified number of instances to be purchased cannot exceed the remaining quota allowed for the user. For more information on the quota, see [Quota for CVM Instances](https://www.tencentcloud.com/document/product/213/2664).
 	InstanceCount *int64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
 	// Specifies the minimum number of instances to create. value range: positive integer not greater than InstanceCount.
@@ -8330,7 +8330,7 @@ type RunInstancesRequest struct {
 	// Information about the CPU topology of an instance. If not specified, it is determined by system resources.
 	CpuTopology *CpuTopology `json:"CpuTopology,omitnil,omitempty" name:"CpuTopology"`
 
-	// CAM role name, which can be obtained from the `roleName` field in the response of the [`DescribeRoleList`](https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1) API.
+	// CAM role name, which can be obtained from the `roleName` field in the response of the [`DescribeRoleList`](https://www.tencentcloud.com/document/product/598/33559) API.
 	CamRoleName *string `json:"CamRoleName,omitnil,omitempty" name:"CamRoleName"`
 
 	// HPC cluster ID. The HPC cluster must and can only be specified for a high-performance computing instance.
@@ -8404,7 +8404,7 @@ func (r *RunInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type RunInstancesResponseParams struct {
-	// If you use this API to create instance(s), this parameter will be returned, representing one or more instance IDs. Retuning the instance ID list does not necessarily mean that the instance(s) were created successfully. To check whether the instance(s) were created successfully, you can call [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and check the status of the instances in `InstancesSet` in the response. If the status of an instance changes from "PENDING" to "RUNNING", it means that the instance has been created successfully.
+	// If you use this API to create instance(s), this parameter will be returned, representing one or more instance IDs. Retuning the instance ID list does not necessarily mean that the instance(s) were created successfully. To check whether the instance(s) were created successfully, you can call [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258) and check the status of the instances in `InstancesSet` in the response. If the status of an instance changes from "PENDING" to "RUNNING", it means that the instance has been created successfully.
 	InstanceIdSet []*string `json:"InstanceIdSet,omitnil,omitempty" name:"InstanceIdSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
