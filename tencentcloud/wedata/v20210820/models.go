@@ -27529,7 +27529,7 @@ type SearchConditionInstanceNew struct {
 	//  "DRY_RUN"
 	ExecutionSpace *string `json:"ExecutionSpace,omitnil,omitempty" name:"ExecutionSpace"`
 
-	// Business Products, options: <DATA_DEV / DATA_QUALITY / DATA_INTEGRATION, default DATA_DEV. Non-empty. Default own project
+	// Business Products, options: DATA_DEV, DATA_QUALITY, DATA_INTEGRATION, default DATA_DEV. Non-empty. Default own project
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
 	// Resource Group Information, optional
