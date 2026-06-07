@@ -521,15 +521,23 @@ type DedicatedClusterOrder struct {
 	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
 
 	// CDC type id (moved to the next level, obsolete and will be deleted later)
+	//
+	// Deprecated: DedicatedClusterTypeId is deprecated.
 	DedicatedClusterTypeId *string `json:"DedicatedClusterTypeId,omitnil,omitempty" name:"DedicatedClusterTypeId"`
 
 	// List of supported storage types (moved to the next level, obsolete and will be deleted later)
+	//
+	// Deprecated: SupportedStorageType is deprecated.
 	SupportedStorageType []*string `json:"SupportedStorageType,omitnil,omitempty" name:"SupportedStorageType"`
 
 	// Supported uplink switch transmission rate (GiB) (moved to the next level, obsolete and will be deleted later)
+	//
+	// Deprecated: SupportedUplinkSpeed is deprecated.
 	SupportedUplinkSpeed []*int64 `json:"SupportedUplinkSpeed,omitnil,omitempty" name:"SupportedUplinkSpeed"`
 
 	// List of supported instance families (moved to the next level, obsolete and will be deleted later)
+	//
+	// Deprecated: SupportedInstanceFamily is deprecated.
 	SupportedInstanceFamily []*string `json:"SupportedInstanceFamily,omitnil,omitempty" name:"SupportedInstanceFamily"`
 
 	// Floor weight capacity (KG)
@@ -586,25 +594,25 @@ type DedicatedClusterOrder struct {
 	// Note: The returned value of this field may be null, indicating that no valid value is obtained.
 	OrderType *string `json:"OrderType,omitnil,omitempty" name:"OrderType"`
 
-	// Acceptance Status
+
 	CheckStatus *string `json:"CheckStatus,omitnil,omitempty" name:"CheckStatus"`
 
-	// Expected Delivery Time
+
 	DeliverExpectTime *string `json:"DeliverExpectTime,omitnil,omitempty" name:"DeliverExpectTime"`
 
-	// Actual Delivery Completion Time
+
 	DeliverFinishTime *string `json:"DeliverFinishTime,omitnil,omitempty" name:"DeliverFinishTime"`
 
-	// Expected Acceptance Time
+
 	CheckExpectTime *string `json:"CheckExpectTime,omitnil,omitempty" name:"CheckExpectTime"`
 
-	// Actual Acceptance Completion Time
+
 	CheckFinishTime *string `json:"CheckFinishTime,omitnil,omitempty" name:"CheckFinishTime"`
 
-	// Order SLA
+
 	OrderSLA *string `json:"OrderSLA,omitnil,omitempty" name:"OrderSLA"`
 
-	// Order Payment Plan
+
 	OrderPayPlan *string `json:"OrderPayPlan,omitnil,omitempty" name:"OrderPayPlan"`
 }
 
@@ -1113,7 +1121,7 @@ type DescribeDedicatedClusterOrdersRequestParams struct {
 	// The order type is the filter condition: CREATE EXTEND
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// Order Type List
+
 	OrderTypes []*string `json:"OrderTypes,omitnil,omitempty" name:"OrderTypes"`
 }
 
@@ -1138,7 +1146,6 @@ type DescribeDedicatedClusterOrdersRequest struct {
 	// The order type is the filter condition: CREATE EXTEND
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// Order Type List
 	OrderTypes []*string `json:"OrderTypes,omitnil,omitempty" name:"OrderTypes"`
 }
 
@@ -1700,24 +1707,26 @@ type DetailData struct {
 }
 
 type HostDetailInfo struct {
-	// Type Family
+
 	HostTypeFamily *string `json:"HostTypeFamily,omitnil,omitempty" name:"HostTypeFamily"`
 
-	// Total CPU
+
 	CpuTotal *float64 `json:"CpuTotal,omitnil,omitempty" name:"CpuTotal"`
 
-	// Available CPU
+
 	CpuAvailable *float64 `json:"CpuAvailable,omitnil,omitempty" name:"CpuAvailable"`
 
-	// Total Memory
+
 	MemTotal *float64 `json:"MemTotal,omitnil,omitempty" name:"MemTotal"`
 
-	// Available Memory
+
 	MemAvailable *float64 `json:"MemAvailable,omitnil,omitempty" name:"MemAvailable"`
 }
 
 type HostInfo struct {
 	// Host IP
+	//
+	// Deprecated: HostIp is deprecated.
 	HostIp *string `json:"HostIp,omitnil,omitempty" name:"HostIp"`
 
 	// Cloud service type

@@ -62,12 +62,12 @@ type CreateInput struct {
 }
 
 type CreateInputHLSPullSettings struct {
-	// The origin server address for the HLS origin server. There can be only one.
+
 	SourceAddresses []*HLSPullSourceAddress `json:"SourceAddresses,omitnil,omitempty" name:"SourceAddresses"`
 }
 
 type CreateInputRTMPPullSettings struct {
-	// The origin server address for the RTMP origin server. There can be only one.
+
 	SourceAddresses []*RTMPPullSourceAddress `json:"SourceAddresses,omitnil,omitempty" name:"SourceAddresses"`
 }
 
@@ -80,7 +80,7 @@ type CreateInputRTPSettings struct {
 }
 
 type CreateInputRTSPPullSettings struct {
-	// The origin server address for the RTSP origin server. There can be only one.
+
 	SourceAddresses []*RTSPPullSourceAddress `json:"SourceAddresses,omitnil,omitempty" name:"SourceAddresses"`
 }
 
@@ -233,6 +233,9 @@ type CreateStreamLinkFlowRequestParams struct {
 
 	// The media transmission event ID associated with the Flow. Each flow can only be associated with one event.
 	EventId *string `json:"EventId,omitnil,omitempty" name:"EventId"`
+
+	// Flow output group.
+	OutputGroup []*CreateOutputInfo `json:"OutputGroup,omitnil,omitempty" name:"OutputGroup"`
 }
 
 type CreateStreamLinkFlowRequest struct {
@@ -249,6 +252,9 @@ type CreateStreamLinkFlowRequest struct {
 
 	// The media transmission event ID associated with the Flow. Each flow can only be associated with one event.
 	EventId *string `json:"EventId,omitnil,omitempty" name:"EventId"`
+
+	// Flow output group.
+	OutputGroup []*CreateOutputInfo `json:"OutputGroup,omitnil,omitempty" name:"OutputGroup"`
 }
 
 func (r *CreateStreamLinkFlowRequest) ToJsonString() string {
@@ -267,6 +273,7 @@ func (r *CreateStreamLinkFlowRequest) FromJsonString(s string) error {
 	delete(f, "MaxBandwidth")
 	delete(f, "InputGroup")
 	delete(f, "EventId")
+	delete(f, "OutputGroup")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamLinkFlowRequest has unknown keys!", "")
 	}
@@ -566,7 +573,7 @@ type DescribeFlow struct {
 }
 
 type DescribeHLSPullSourceAddress struct {
-	// The Url of the HLS origin server.
+
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
@@ -608,16 +615,16 @@ type DescribeInput struct {
 	// Note: this field may return `null`, indicating that no valid value was found.
 	FailOver *string `json:"FailOver,omitnil,omitempty" name:"FailOver"`
 
-	// Input RTMP_PULL configuration.
+
 	RTMPPullSettings *DescribeInputRTMPPullSettings `json:"RTMPPullSettings,omitnil,omitempty" name:"RTMPPullSettings"`
 
-	// Input RTSP_PULL configuration.
+
 	RTSPPullSettings *DescribeInputRTSPPullSettings `json:"RTSPPullSettings,omitnil,omitempty" name:"RTSPPullSettings"`
 
-	// Input HLS_PULL configuration.
+
 	HLSPullSettings *DescribeInputHLSPullSettings `json:"HLSPullSettings,omitnil,omitempty" name:"HLSPullSettings"`
 
-	// Delayed broadcast smooth stream delivery configuration.
+
 	ResilientStream *ResilientStreamConf `json:"ResilientStream,omitnil,omitempty" name:"ResilientStream"`
 
 	// The bound security group ID.
@@ -625,12 +632,12 @@ type DescribeInput struct {
 }
 
 type DescribeInputHLSPullSettings struct {
-	// The address information of the HLS origin server.
+
 	SourceAddresses []*DescribeHLSPullSourceAddress `json:"SourceAddresses,omitnil,omitempty" name:"SourceAddresses"`
 }
 
 type DescribeInputRTMPPullSettings struct {
-	// The address information of the RTMP origin server.
+
 	SourceAddresses []*DescribeRTMPPullSourceAddress `json:"SourceAddresses,omitnil,omitempty" name:"SourceAddresses"`
 }
 
@@ -653,7 +660,7 @@ type DescribeInputRTPSettings struct {
 }
 
 type DescribeInputRTSPPullSettings struct {
-	// The address information of the RTSP origin server.
+
 	SourceAddresses []*DescribeRTSPPullSourceAddress `json:"SourceAddresses,omitnil,omitempty" name:"SourceAddresses"`
 }
 
@@ -733,13 +740,13 @@ type DescribeOutput struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	AllowIpList []*string `json:"AllowIpList,omitnil,omitempty" name:"AllowIpList"`
 
-	// Output RTSP pull stream configuration.
+
 	RTSPPullSettings *DescribeOutputRTSPPullSettings `json:"RTSPPullSettings,omitnil,omitempty" name:"RTSPPullSettings"`
 
-	// Output HLS pull stream configuration.
+
 	HLSPullSettings *DescribeOutputHLSPullSettings `json:"HLSPullSettings,omitnil,omitempty" name:"HLSPullSettings"`
 
-	// Maximum pull stream concurrency, maximum 4, default 4.
+
 	MaxConcurrent *uint64 `json:"MaxConcurrent,omitnil,omitempty" name:"MaxConcurrent"`
 
 	// The bound security group IDs.
@@ -747,12 +754,12 @@ type DescribeOutput struct {
 }
 
 type DescribeOutputHLSPullServerUrl struct {
-	// The Url of the HLS pull stream address.
+
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
 type DescribeOutputHLSPullSettings struct {
-	// HLS pull stream address list.
+
 	ServerUrls []*DescribeOutputHLSPullServerUrl `json:"ServerUrls,omitnil,omitempty" name:"ServerUrls"`
 }
 
@@ -799,12 +806,12 @@ type DescribeOutputRTPSettings struct {
 }
 
 type DescribeOutputRTSPPullServerUrl struct {
-	// RTSP pull stream address Url.
+
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
 type DescribeOutputRTSPPullSettings struct {
-	// RTSP pull stream address list.
+
 	ServerUrls []*DescribeOutputRTSPPullServerUrl `json:"ServerUrls,omitnil,omitempty" name:"ServerUrls"`
 }
 
@@ -851,17 +858,15 @@ type DescribeOutputSRTSettings struct {
 }
 
 type DescribeRTMPPullSourceAddress struct {
-	// The TcUrl address of the RTMP origin server.
+
 	TcUrl *string `json:"TcUrl,omitnil,omitempty" name:"TcUrl"`
 
-	// The StreamKey of the RTMP origin server.
-	// 
-	// The concatenation rule for the RTMP origin server address is: $TcUrl/$StreamKey.
+
 	StreamKey *string `json:"StreamKey,omitnil,omitempty" name:"StreamKey"`
 }
 
 type DescribeRTSPPullSourceAddress struct {
-	// The Url address of the RTSP origin server.
+
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
@@ -1771,49 +1776,49 @@ type FlowSRTInfo struct {
 	// The number of dropped packets for receiving.
 	RecvPacketDropNumber *int64 `json:"RecvPacketDropNumber,omitnil,omitempty" name:"RecvPacketDropNumber"`
 
-	// bandwidth
+	// Bandwidth
 	Bandwidth *float64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
-	// Transmit bandwidth
+	// transmit bandwidth
 	SendBandwidth *float64 `json:"SendBandwidth,omitnil,omitempty" name:"SendBandwidth"`
 
-	// Receive bandwidth
+	// Receiving bandwidth
 	RecvBandwidth *float64 `json:"RecvBandwidth,omitnil,omitempty" name:"RecvBandwidth"`
 
-	// Number of packets sent
+	// Sent packet count
 	SendPackets *int64 `json:"SendPackets,omitnil,omitempty" name:"SendPackets"`
 
-	// Number of received packets
+	// Received packets
 	RecvPackets *int64 `json:"RecvPackets,omitnil,omitempty" name:"RecvPackets"`
 
-	// Send lost package
+	// Sent lost packets
 	SendLostPackets *int64 `json:"SendLostPackets,omitnil,omitempty" name:"SendLostPackets"`
 
-	// Accept lost packages
+	// accept lost packets
 	RecvLostPackets *int64 `json:"RecvLostPackets,omitnil,omitempty" name:"RecvLostPackets"`
 
-	// Number of retransmission packets sent
+	// Retransmitted packet count
 	SendRetransmitPackets *int64 `json:"SendRetransmitPackets,omitnil,omitempty" name:"SendRetransmitPackets"`
 
-	// Number of received retransmission packets
+	// Retransmitted packets received
 	RecvRetransmitPackets *int64 `json:"RecvRetransmitPackets,omitnil,omitempty" name:"RecvRetransmitPackets"`
 
-	// Flight window size
+	// Window size
 	FlightSize *int64 `json:"FlightSize,omitnil,omitempty" name:"FlightSize"`
 
-	// congestion window
+	// Congestion window
 	CongestionWindow *int64 `json:"CongestionWindow,omitnil,omitempty" name:"CongestionWindow"`
 
-	// Send buffer (ms)
+	// Sending buffer (ms)
 	SendBuffer *int64 `json:"SendBuffer,omitnil,omitempty" name:"SendBuffer"`
 
 	// Receive buffer (ms)
 	RecvBuffer *int64 `json:"RecvBuffer,omitnil,omitempty" name:"RecvBuffer"`
 
-	// Sending delay
+	// Send delay
 	SendLatency *int64 `json:"SendLatency,omitnil,omitempty" name:"SendLatency"`
 
-	// Receiving delay
+	// receive latency
 	RecvLatency *int64 `json:"RecvLatency,omitnil,omitempty" name:"RecvLatency"`
 }
 
@@ -1854,7 +1859,7 @@ type FlowVideo struct {
 }
 
 type HLSPullSourceAddress struct {
-	// The Url of the HLS origin server.
+
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
@@ -2156,10 +2161,10 @@ type RTMPAddressDestination struct {
 }
 
 type RTMPPullSourceAddress struct {
-	// The TcUrl address of the RTMP origin server.
+
 	TcUrl *string `json:"TcUrl,omitnil,omitempty" name:"TcUrl"`
 
-	// The StreamKey of the RTMP origin server.
+
 	StreamKey *string `json:"StreamKey,omitnil,omitempty" name:"StreamKey"`
 }
 
@@ -2172,7 +2177,7 @@ type RTPAddressDestination struct {
 }
 
 type RTSPPullSourceAddress struct {
-	// The Url address of the RTSP origin server.
+
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
@@ -2182,10 +2187,10 @@ type RegionInfo struct {
 }
 
 type ResilientStreamConf struct {
-	// Whether to enable delayed broadcast smooth stream delivery: true to enable, false to disable. It is disabled by default.
+
 	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Delayed broadcast duration, in seconds. Supported range: 10 to 300 seconds.
+
 	BufferTime *uint64 `json:"BufferTime,omitnil,omitempty" name:"BufferTime"`
 }
 

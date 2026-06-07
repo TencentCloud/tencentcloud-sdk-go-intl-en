@@ -2527,8 +2527,7 @@ type GetWebVerificationResultIntlResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	BestFrameBase64 *string `json:"BestFrameBase64,omitnil,omitempty" name:"BestFrameBase64"`
 
-	// Card recognize result.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Card recognize result
 	OCRResult []*OCRResult `json:"OCRResult,omitnil,omitempty" name:"OCRResult"`
 
 	// The passthrough parameter of the business, max 1,000 characters, which will be returned in GetWebVerificationResultIntl.
