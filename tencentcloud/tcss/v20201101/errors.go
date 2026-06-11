@@ -74,6 +74,9 @@ const (
 	// The parameter format is incorrect.
 	INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 
+	// IP format error
+	INVALIDPARAMETER_IPNOVALID = "InvalidParameter.IpNoValid"
+
 	// The required parameter is missing.
 	INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 
@@ -82,6 +85,12 @@ const (
 
 	// The port format is invalid.
 	INVALIDPARAMETER_PORTNOVALID = "InvalidParameter.PortNoValid"
+
+	// The regular expression parameter format is incorrect.
+	INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+
+	// Query timed out, the backend is still processing, and the query request must be sent again.
+	INVALIDPARAMETER_REQUESTTIMEOUT = "InvalidParameter.RequestTimeout"
 
 	// The process name, target IP, and target port cannot be empty at the same time.
 	INVALIDPARAMETER_REVERSHELLKEYFIELDALLEMPTY = "InvalidParameter.ReverShellKeyFieldAllEmpty"
@@ -130,4 +139,7 @@ const (
 
 	// The parameter is unknown.
 	UNKNOWNPARAMETER = "UnknownParameter"
+
+	// The operation is not supported.
+	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 )

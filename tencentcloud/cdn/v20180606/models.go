@@ -591,7 +591,7 @@ type AdvancedAuthenticationTypeA struct {
 	// Whether the expiration time parameter is required
 	ExpireTimeRequired *bool `json:"ExpireTimeRequired,omitnil,omitempty" name:"ExpireTimeRequired"`
 
-	// URL composition, e.g., `${private_key}${schema}${host}${full_uri}`.
+	// URL format, for example: ${private_key}${schema}${host}${full_uri}.
 	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
 
 	// Time format. Valid values: dec (decimal), hex (hexadecimal).
@@ -1200,6 +1200,14 @@ type AuthenticationTypeD struct {
 	BackupSecretKey *string `json:"BackupSecretKey,omitnil,omitempty" name:"BackupSecretKey"`
 }
 
+type AutoGuard struct {
+
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+
+	FilterRules []*FilterRules `json:"FilterRules,omitnil,omitempty" name:"FilterRules"`
+}
+
 type AvifAdapter struct {
 	// Whether to enable `AvifAdapter` for image optimization. Values:
 	// `on`: Enable
@@ -1218,8 +1226,8 @@ type AwsPrivateAccess struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
 
-	// Key.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Key. the field is returned with masking.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
 
 	// Region.
@@ -1451,6 +1459,13 @@ type CacheConfigCache struct {
 	// It is disabled by default.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	IgnoreSetCookie *string `json:"IgnoreSetCookie,omitnil,omitempty" name:"IgnoreSetCookie"`
+
+	// Whether to enable origin server mtime verification after cache expires. valid values: equal, since, none, and null. default value: equal, which validates the origin server file's mtime and length. domains created prior to 2024-09-12 18:00 default to null, with behavior remaining unchanged.
+	// equal: the mtime in the origin server response must match the mtime in the cache. if there is a difference in parameter values, purge the cache.
+	// since: purges cache if the origin server response mtime is larger than the cache mtime.
+	// none: when the cache expires and the file is retrieved from the origin server again to get the mtime and Length, it does not validate the mtime in the origin response. if the origin response carries a Content-Length header, the cache is updated only when the file size changes. if the origin response does not carry a Content-Length header, the cache is updated.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginMtimeCheckType *string `json:"OriginMtimeCheckType,omitnil,omitempty" name:"OriginMtimeCheckType"`
 }
 
 type CacheConfigFollowOrigin struct {
@@ -1462,6 +1477,13 @@ type CacheConfigFollowOrigin struct {
 	// Heuristic cache configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	HeuristicCache *HeuristicCache `json:"HeuristicCache,omitnil,omitempty" name:"HeuristicCache"`
+
+	// Whether to enable origin server mtime verification after cache expires. valid values: equal, since, none, and null. default value: equal, which validates the origin server file's mtime and length. domains created prior to 2024-09-12 18:00 default to null, with behavior remaining unchanged.
+	// equal: the mtime in the origin server response must match the mtime in the cache. if there is a difference in parameter values, purge the cache.
+	// since: purges cache if the origin server response mtime is larger than the cache mtime.
+	// none: when the cache expires and the file is retrieved from the origin server again to get the mtime and Length, it does not validate the mtime in the origin response. if the origin response carries a Content-Length header, the cache is updated only when the file size changes. if the origin response does not carry a Content-Length header, the cache is updated.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginMtimeCheckType *string `json:"OriginMtimeCheckType,omitnil,omitempty" name:"OriginMtimeCheckType"`
 }
 
 type CacheConfigNoCache struct {
@@ -1485,8 +1507,10 @@ type CacheKey struct {
 	// `off`: Disable full-path cache (i.e., enable Ignore Query String)
 	FullUrlCache *string `json:"FullUrlCache,omitnil,omitempty" name:"FullUrlCache"`
 
-	// Specifies whether the cache key is case sensitive
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Specifies whether to use case-insensitive cache.
+	// on: enable.
+	// Off: turn off the switch.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IgnoreCase *string `json:"IgnoreCase,omitnil,omitempty" name:"IgnoreCase"`
 
 	// Request parameter contained in `CacheKey`
@@ -2908,16 +2932,13 @@ type DescribeIpStatusRequestParams struct {
 	// If this parameter is left empty, edge server information will be returned by default
 	Layer *string `json:"Layer,omitnil,omitempty" name:"Layer"`
 
-	// Specifies a region to query.
-	// `mainland`: Nodes in the Chinese mainland
-	// `overseas`: Nodes outside the Chinese mainland
-	// `global`: Global nodes
+	// Query region: mainland: node in chinese mainland; overseas: node outside the chinese mainland; global: global node.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Whether to return a value as an IP range
 	Segment *bool `json:"Segment,omitnil,omitempty" name:"Segment"`
 
-	// whether to query node IPV6 information.
+
 	ShowIpv6 *bool `json:"ShowIpv6,omitnil,omitempty" name:"ShowIpv6"`
 
 	// Whether to abbreviate the IPv6 address.
@@ -2936,16 +2957,12 @@ type DescribeIpStatusRequest struct {
 	// If this parameter is left empty, edge server information will be returned by default
 	Layer *string `json:"Layer,omitnil,omitempty" name:"Layer"`
 
-	// Specifies a region to query.
-	// `mainland`: Nodes in the Chinese mainland
-	// `overseas`: Nodes outside the Chinese mainland
-	// `global`: Global nodes
+	// Query region: mainland: node in chinese mainland; overseas: node outside the chinese mainland; global: global node.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Whether to return a value as an IP range
 	Segment *bool `json:"Segment,omitnil,omitempty" name:"Segment"`
 
-	// whether to query node IPV6 information.
 	ShowIpv6 *bool `json:"ShowIpv6,omitnil,omitempty" name:"ShowIpv6"`
 
 	// Whether to abbreviate the IPv6 address.
@@ -4666,7 +4683,7 @@ type ErrorPageRule struct {
 	RedirectCode *int64 `json:"RedirectCode,omitnil,omitempty" name:"RedirectCode"`
 
 	// Redirect URL
-	// Requires a full redirect path, such as https://www.test.com/error.html.
+	// Requires a full redirect path, such as `https://www.test.com/error.html`.
 	RedirectUrl *string `json:"RedirectUrl,omitnil,omitempty" name:"RedirectUrl"`
 }
 
@@ -4678,6 +4695,17 @@ type ExtraLogset struct {
 	// Log topic information
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Topics []*TopicInfo `json:"Topics,omitnil,omitempty" name:"Topics"`
+}
+
+type FilterRules struct {
+
+	FilterType *string `json:"FilterType,omitnil,omitempty" name:"FilterType"`
+
+
+	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
+
+
+	RulePaths []*string `json:"RulePaths,omitnil,omitempty" name:"RulePaths"`
 }
 
 type FollowRedirect struct {
@@ -4704,9 +4732,9 @@ type ForceRedirect struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	RedirectType *string `json:"RedirectType,omitnil,omitempty" name:"RedirectType"`
 
-	// Status code returned for forced redirect 
-	// Supports 301, 302.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Specifies the return status code for forced redirection. 
+	// Supports 301, 302, 307, and 308.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	RedirectStatusCode *int64 `json:"RedirectStatusCode,omitnil,omitempty" name:"RedirectStatusCode"`
 
 	// Whether to return the newly added header during force redirection
@@ -4851,10 +4879,10 @@ type HeaderKey struct {
 }
 
 type HeuristicCache struct {
-	// Whether to enable heuristic caching. Values:
-	// `on`: Enable
-	// `off`: Disable
-	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	// Specifies the heuristic cache configuration switch. valid values:.
+	// on: enable.
+	// Off: turn off the switch (default).
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Heuristic cache validity configuration
@@ -4889,10 +4917,10 @@ type HttpHeaderPathRule struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	HeaderName *string `json:"HeaderName,omitnil,omitempty" name:"HeaderName"`
 
-	// HTTP header value. Up to 1000 characters can be set.
-	// Not required when Mode is del
-	// Required when Mode is add/set
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// http header value. custom request header supports up to 1000 characters. custom response header can be set up to 2000 characters.
+	// Optional when Mode is del.
+	// Required when Mode is add/set.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	HeaderValue *string `json:"HeaderValue,omitnil,omitempty" name:"HeaderValue"`
 
 	// Rule types:
@@ -4977,8 +5005,8 @@ type Https struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Hsts *Hsts `json:"Hsts,omitnil,omitempty" name:"Hsts"`
 
-	// TLS version settings, which only support certain advanced domain names. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`. Only consecutive versions can be enabled at the same time.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Specifies the Tls version setting, which has partial support for Advance domain names and can be set to TLSv1, TLSv1.1, TLSv1.2, or TLSv1.3. consecutive versions must be enabled when modifying.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TlsVersion []*string `json:"TlsVersion,omitnil,omitempty" name:"TlsVersion"`
 }
 
@@ -4999,8 +5027,8 @@ type HwPrivateAccess struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
 
-	// Key
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Key. the field is returned with masking.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
 
 	// BucketName
@@ -5038,17 +5066,17 @@ type IpFilter struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	FilterType *string `json:"FilterType,omitnil,omitempty" name:"FilterType"`
 
-	// IP blocklist/allowlist
-	// Supports IPs in X.X.X.X format, or IP ranges in /8, /16, /24 format.
-	// Up to 50 whitelists or blacklists can be entered
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// IP blocklist/allowlist configuration.
+	// Supports IPV4 addresses in X.X.X.X format, IPV6 addresses in X:X:X:X:X:X:X:X format, or network segments in /X format (IPV4: 1≤X≤32; IPV6: 1≤X≤128).
+	// Specifies a maximum of 200 allowlist or blocklist entries.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Filters []*string `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// IP blocklist/allowlist path-based configuration. This feature is only available to selected beta customers.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// IP blocklist and allowlist path-specific configuration. the total count of blocklist and allowlist ips must not exceed 1000.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	FilterRules []*IpFilterPathRule `json:"FilterRules,omitnil,omitempty" name:"FilterRules"`
 
-	// (Disused) Expected HTTP code to return when the IP allowlist/blocklist verification fails. <br><font color=red>The 514 code is used instead.</font>
+	// (Disused) Expected HTTP code to return when the IP allowlist/blocklist verification fails. 
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ReturnCode *int64 `json:"ReturnCode,omitnil,omitempty" name:"ReturnCode"`
 }
@@ -5060,10 +5088,10 @@ type IpFilterPathRule struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	FilterType *string `json:"FilterType,omitnil,omitempty" name:"FilterType"`
 
-	// IP blocklist/allowlist list
-	// Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges.
-	// Up to 50 allowlists or blocklists can be entered.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// IP blocklist/allowlist configuration.
+	// Supports IPV4 addresses in X.X.X.X format, IPV6 addresses in X:X:X:X:X:X:X:X format, or network segments in /X format (IPV4: 1≤X≤32; IPV6: 1≤X≤128).
+	// Specifies a maximum of 500 allowlist or 200 blocklist entries.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Filters []*string `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Rule types:
@@ -5081,6 +5109,9 @@ type IpFilterPathRule struct {
 	// For `path`, enter the corresponding absolute path, such as /xxx/test.html.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	RulePaths []*string `json:"RulePaths,omitnil,omitempty" name:"RulePaths"`
+
+	// Remark information. supports up to 50 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 }
 
 type IpFreqLimit struct {
@@ -5153,8 +5184,10 @@ type KeyRule struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	FullUrlCache *string `json:"FullUrlCache,omitnil,omitempty" name:"FullUrlCache"`
 
-	// Whether caches are case insensitive
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Specifies whether to use case-insensitive cache.
+	// on: enable.
+	// Off: turn off the switch.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IgnoreCase *string `json:"IgnoreCase,omitnil,omitempty" name:"IgnoreCase"`
 
 	// Request parameter contained in `CacheKey`
@@ -5919,11 +5952,11 @@ type Origin struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	CosPrivateAccess *string `json:"CosPrivateAccess,omitnil,omitempty" name:"CosPrivateAccess"`
 
-	// Origin-pull protocol configuration
-	// http: forced HTTP origin-pull
-	// follow: protocol follow origin-pull
-	// https: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Configures the origin-pull protocol.
+	// Http: force http origin-pull.
+	// follow protocol for origin pull.
+	// Https: enforce https origin-pull.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	OriginPullProtocol *string `json:"OriginPullProtocol,omitnil,omitempty" name:"OriginPullProtocol"`
 
 	// List of secondary origin servers
@@ -5931,17 +5964,16 @@ type Origin struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	BackupOrigins []*string `json:"BackupOrigins,omitnil,omitempty" name:"BackupOrigins"`
 
-	// Secondary origin type
-	// <font color=red>This field is used together with `BackupOrigins`.</font>
-	// Values:
-	// `domain`: Domain name
-	// `ip`: IP address
-	// The following secondary origin types are only available to beta users. Submit a ticket to use it.
-	// `ipv6_domain`: Multiple IPv6 addresses and one domain name
-	// `ip_ipv6`: Multiple IPv4 addresses and one IPv6 address
-	// `ipv6_domain`: Multiple IPv6 addresses and one domain name
-	// `ip_ipv6_domain`: Multiple IPv4 and IPv6 addresses and one domain name
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Secondary origin type. valid values:.
+	// BackupOrigins specifies the backup origin list. required when not empty.
+	// Supports the following types.
+	// domain type.
+	// ip: ip list as the origin server.
+	// The following backup origin server types are not fully available yet and require trial use application.
+	// ipv6_domain: specifies the origin server list containing multiple ipv6 addresses and domain names.
+	// ip_ipv6: specifies the origin server list containing multiple ipv4 addresses and ipv6 addresses.
+	// ip_ipv6_domain: specifies the origin server list containing multiple ipv4 addresses, ipv6 addresses, and domain names.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	BackupOriginType *string `json:"BackupOriginType,omitnil,omitempty" name:"BackupOriginType"`
 
 	// Host header used when accessing the backup origin server. If it is left empty, the `ServerName` of primary origin server will be used by default.
@@ -6055,8 +6087,8 @@ type OssPrivateAccess struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
 
-	// Key.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Key. the field is returned with masking.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
 
 	// Region
@@ -6078,8 +6110,8 @@ type OthersPrivateAccess struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
 
-	// Key.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Key. specifies the field with masking back.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
 
 	// Region.
@@ -6203,6 +6235,31 @@ type OverseaConfig struct {
 	// Access authentication for QiNiu Cloud Kodo origin
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	QnPrivateAccess *QnPrivateAccess `json:"QnPrivateAccess,omitnil,omitempty" name:"QnPrivateAccess"`
+}
+
+type ParamFilter struct {
+	// Specifies the blocklist parameter switch.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Specifies the blocklist rule parameter.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FilterRules []*ParamFilterRule `json:"FilterRules,omitnil,omitempty" name:"FilterRules"`
+}
+
+type ParamFilterRule struct {
+	// Parameter name.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Numeric array. value range: less than 10.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+
+	// http status code (only supports 403).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReturnCode *string `json:"ReturnCode,omitnil,omitempty" name:"ReturnCode"`
 }
 
 type PathBasedOriginRule struct {
@@ -6394,7 +6451,7 @@ type PurgeTask struct {
 
 // Predefined struct for user
 type PurgeUrlsCacheRequestParams struct {
-	// List of URLs. The protocol header such as "http://" or "https://" needs to be included.
+	// List of URLs. The protocol header such as `http://` or `https://` needs to be included.
 	Urls []*string `json:"Urls,omitnil,omitempty" name:"Urls"`
 
 	// Purging region
@@ -6411,7 +6468,7 @@ type PurgeUrlsCacheRequestParams struct {
 type PurgeUrlsCacheRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of URLs. The protocol header such as "http://" or "https://" needs to be included.
+	// List of URLs. The protocol header such as `http://` or `https://` needs to be included.
 	Urls []*string `json:"Urls,omitnil,omitempty" name:"Urls"`
 
 	// Purging region
@@ -6504,7 +6561,7 @@ type PushTask struct {
 
 // Predefined struct for user
 type PushUrlsCacheRequestParams struct {
-	// List of URLs. The protocol header such as "http://" or "https://" needs to be included.
+	// List of URLs. The protocol header such as `http://` or `https://` needs to be included.
 	Urls []*string `json:"Urls,omitnil,omitempty" name:"Urls"`
 
 	// Specifies the User-Agent header of an HTTP prefetch request when it is forwarded to the origin server
@@ -6544,7 +6601,7 @@ type PushUrlsCacheRequestParams struct {
 type PushUrlsCacheRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of URLs. The protocol header such as "http://" or "https://" needs to be included.
+	// List of URLs. The protocol header such as `http://` or `https://` needs to be included.
 	Urls []*string `json:"Urls,omitnil,omitempty" name:"Urls"`
 
 	// Specifies the User-Agent header of an HTTP prefetch request when it is forwarded to the origin server
@@ -6642,7 +6699,7 @@ type QnPrivateAccess struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
 
-	// Key
+	// Key. the field is returned with masking.
 	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
 }
 
@@ -7253,7 +7310,7 @@ type SearchClsLogRequestParams struct {
 	// Specifies whether to access CDN or ECDN. Valid values: `cdn` (default) and `ecdn`.
 	Channel *string `json:"Channel,omitnil,omitempty" name:"Channel"`
 
-	// Query statement. For more details, see [https://intl.cloud.tencent.com/document/product/614/16982?from_cn_redirect=1].
+	// Query statement. For more details, see [Syntax Rules](https://www.tencentcloud.com/document/product/614/37803).
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// This field is used when loading more results. Pass through the last `context` value returned to get more log content. Up to 10,000 logs can be obtained through the cursor. Please narrow down the time range as much as possible.
@@ -7284,7 +7341,7 @@ type SearchClsLogRequest struct {
 	// Specifies whether to access CDN or ECDN. Valid values: `cdn` (default) and `ecdn`.
 	Channel *string `json:"Channel,omitnil,omitempty" name:"Channel"`
 
-	// Query statement. For more details, see [https://intl.cloud.tencent.com/document/product/614/16982?from_cn_redirect=1].
+	// Query statement. For more details, see [Syntax Rules](https://www.tencentcloud.com/document/product/614/37803).
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// This field is used when loading more results. Pass through the last `context` value returned to get more log content. Up to 10,000 logs can be obtained through the cursor. Please narrow down the time range as much as possible.
@@ -7562,8 +7619,8 @@ type StatisticItem struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	BpsThreshold *uint64 `json:"BpsThreshold,omitnil,omitempty" name:"BpsThreshold"`
 
-	// Specifies how to disable CDN service when the threshold is exceeded. `RETURN_404`: Return 404; `RESOLVE_DNS_TO_ORIGIN`: Forward to origin server.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Shutdown method RETURN 404: RETURN_404.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CounterMeasure *string `json:"CounterMeasure,omitnil,omitempty" name:"CounterMeasure"`
 
 	// Threshold (in percentage) that triggers alarms
@@ -7580,7 +7637,7 @@ type StatisticItem struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Metric *string `json:"Metric,omitnil,omitempty" name:"Metric"`
 
-	// Detection Cycle, Unit: Minutes, 60 or 1440
+
 	Cycle *uint64 `json:"Cycle,omitnil,omitempty" name:"Cycle"`
 
 	// Whether to enable cumulative usage limit. Values:
@@ -7904,6 +7961,12 @@ type UpdateDomainConfigRequestParams struct {
 
 	// HTTPS, which is a paid service. You can check the product document and Billing Overview for more information.
 	HttpsBilling *HttpsBilling `json:"HttpsBilling,omitnil,omitempty" name:"HttpsBilling"`
+
+	// Specifies the blocklist parameter.
+	ParamFilter *ParamFilter `json:"ParamFilter,omitnil,omitempty" name:"ParamFilter"`
+
+
+	AutoGuard *AutoGuard `json:"AutoGuard,omitnil,omitempty" name:"AutoGuard"`
 }
 
 type UpdateDomainConfigRequest struct {
@@ -8063,6 +8126,11 @@ type UpdateDomainConfigRequest struct {
 
 	// HTTPS, which is a paid service. You can check the product document and Billing Overview for more information.
 	HttpsBilling *HttpsBilling `json:"HttpsBilling,omitnil,omitempty" name:"HttpsBilling"`
+
+	// Specifies the blocklist parameter.
+	ParamFilter *ParamFilter `json:"ParamFilter,omitnil,omitempty" name:"ParamFilter"`
+
+	AutoGuard *AutoGuard `json:"AutoGuard,omitnil,omitempty" name:"AutoGuard"`
 }
 
 func (r *UpdateDomainConfigRequest) ToJsonString() string {
@@ -8126,6 +8194,8 @@ func (r *UpdateDomainConfigRequest) FromJsonString(s string) error {
 	delete(f, "QnPrivateAccess")
 	delete(f, "OthersPrivateAccess")
 	delete(f, "HttpsBilling")
+	delete(f, "ParamFilter")
+	delete(f, "AutoGuard")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateDomainConfigRequest has unknown keys!", "")
 	}
@@ -8346,13 +8416,16 @@ type UrlRedirectRule struct {
 	// Target URL, starting with `/` and excluding parameters. The path can contain up to 1,024 characters. The wildcards in the matching path can be respectively captured using `$1`, `$2`, `$3`, `$4`, and `$5`. Up to 10 values can be captured.
 	RedirectUrl *string `json:"RedirectUrl,omitnil,omitempty" name:"RedirectUrl"`
 
-	// Target host. It should be a standard domain name starting with `http://` or `https://`. If it is left empty, “http://[current domain name]” will be used by default.
+	// Target host. It should be a standard domain name starting with `http://` or `https://`. If it is left empty, "http://[current domain name]" will be used by default.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	RedirectHost *string `json:"RedirectHost,omitnil,omitempty" name:"RedirectHost"`
 
 	// Whether to use full-path matching or arbitrary matching
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	FullMatch *bool `json:"FullMatch,omitnil,omitempty" name:"FullMatch"`
+
+
+	Regex *bool `json:"Regex,omitnil,omitempty" name:"Regex"`
 }
 
 type UserAgentFilter struct {
@@ -8362,8 +8435,8 @@ type UserAgentFilter struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// UA blacklist/whitelist effect rule list
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Effective rule list for UA blacklist and whitelist. must not exceed 10 rules.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	FilterRules []*UserAgentFilterRule `json:"FilterRules,omitnil,omitempty" name:"FilterRules"`
 }
 
@@ -8380,8 +8453,8 @@ type UserAgentFilterRule struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	RulePaths []*string `json:"RulePaths,omitnil,omitempty" name:"RulePaths"`
 
-	// `UserAgent` list
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// UserAgent list. the count cannot exceed 10.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	UserAgents []*string `json:"UserAgents,omitnil,omitempty" name:"UserAgents"`
 
 	// Blocklist or allowlist. Valid values: `blacklist`, `whitelist`

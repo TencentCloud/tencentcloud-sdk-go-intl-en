@@ -911,9 +911,18 @@ type DescribeAutomationAgentStatusRequestParams struct {
 	// Parameters must not be specified simultaneously `InstanceIds` and `Filters`.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// -agent-status - String - required: no - (filter condition) filters by agent status. valid values: Online, Offline. 
-	// -environment - String - required: no - (filter condition) query by agent runtime environment. valid values: Linux, Windows.
-	// -instance-id - String - required: no - (filter condition) filter by instance id. you can get the instance id through the query instance API of the corresponding cloud services. currently supports instance types: CVM, Lighthouse, and managed instances.
+	// - agent-status 
+	//     - String 
+	//     - required: no 
+	//     - (filter condition) filters by agent status. valid values: Online, Offline. 
+	// - environment 
+	//     - String 
+	//     - required: no 
+	//     - (filter condition) query by agent runtime environment. valid values: Linux, Windows.
+	// - instance-id 
+	//     - String 
+	//     - required: no 
+	//     - (filter condition) filter by instance id. you can get the instance id through the query instance API of the corresponding cloud services. currently supports instance types: CVM, Lighthouse, and managed instances.
 	// 
 	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InstanceIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
@@ -937,9 +946,18 @@ type DescribeAutomationAgentStatusRequest struct {
 	// Parameters must not be specified simultaneously `InstanceIds` and `Filters`.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// -agent-status - String - required: no - (filter condition) filters by agent status. valid values: Online, Offline. 
-	// -environment - String - required: no - (filter condition) query by agent runtime environment. valid values: Linux, Windows.
-	// -instance-id - String - required: no - (filter condition) filter by instance id. you can get the instance id through the query instance API of the corresponding cloud services. currently supports instance types: CVM, Lighthouse, and managed instances.
+	// - agent-status 
+	//     - String 
+	//     - required: no 
+	//     - (filter condition) filters by agent status. valid values: Online, Offline. 
+	// - environment 
+	//     - String 
+	//     - required: no 
+	//     - (filter condition) query by agent runtime environment. valid values: Linux, Windows.
+	// - instance-id 
+	//     - String 
+	//     - required: no 
+	//     - (filter condition) filter by instance id. you can get the instance id through the query instance API of the corresponding cloud services. currently supports instance types: CVM, Lighthouse, and managed instances.
 	// 
 	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `InstanceIds` and `Filters` parameters cannot be specified at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
@@ -2188,7 +2206,7 @@ type GeneralResourceQuotaSet struct {
 	// Value is:.
 	// 
 	// - COMMAND: COMMAND.
-	// -REGISTER_CODE: managed instance registration code.
+	// - REGISTER_CODE: managed instance registration code.
 	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
 
 	// Used credit limit.
@@ -2210,15 +2228,15 @@ type Invocation struct {
 
 	// Execution task status. valid values:.
 	// 
-	// -PENDING: waiting for distribution.
-	// - RUNNING: command RUNNING.
-	// -Canceling.
-	// -SUCCESS: command success.
-	// -TIMEOUT: command timeout.
+	// - PENDING: waiting for distribution.
+	// - RUNNING: command is running.
+	// - CANCELLING: canceling.
+	// - SUCCESS: command success.
+	// - TIMEOUT: command timeout.
 	// - FAILED: command FAILED.
-	// -CANCELLED: all commands canceled.
-	// -PARTIAL_FAILED: the command partially failed.
-	// -PARTIAL_CANCELLED: the command is partially canceled.
+	// - CANCELLED: all commands canceled.
+	// - PARTIAL_FAILED: the command partially failed.
+	// - PARTIAL_CANCELLED: the command is partially canceled.
 	InvocationStatus *string `json:"InvocationStatus,omitnil,omitempty" name:"InvocationStatus"`
 
 	// Execution task information list.
@@ -2254,8 +2272,8 @@ type Invocation struct {
 
 	// Invocation source.
 	// 
-	// -USER: originate from user invocation.
-	// -INVOKER: originate from scheduled execution.
+	// - USER: originate from user invocation.
+	// - INVOKER: originate from scheduled execution.
 	InvocationSource *string `json:"InvocationSource,omitnil,omitempty" name:"InvocationSource"`
 
 	// Base64-encoded command
@@ -2289,19 +2307,19 @@ type InvocationTask struct {
 
 	// Execution task status. valid values:.
 	// 
-	// -PENDING: waiting for distribution.
-	// -DELIVERING: distributing.
-	// -DELIVER_DELAYED: delivery delay.
-	// -DELIVER_FAILED: delivery fail.
-	// -START_FAILED: command start failed.
+	// - PENDING: waiting for distribution.
+	// - DELIVERING: distributing.
+	// - DELIVER_DELAYED: delivery delay.
+	// - DELIVER_FAILED: delivery fail.
+	// - START_FAILED: command start failed.
 	// - RUNNING: command RUNNING.
-	// -SUCCESS: command success.
-	// -FAILED: command execution failed, exit code not 0.
-	// -TIMEOUT: command timeout.
-	// -TASK_TIMEOUT: client no response.
-	// -Canceling.
+	// - SUCCESS: command success.
+	// - FAILED: command execution failed, exit code not 0.
+	// - TIMEOUT: command timeout.
+	// - TASK_TIMEOUT: client no response.
+	// - CANCELLING: canceling.
 	// - CANCELLED: canceled (command canceled before startup).
-	// -TERMINATED: suspended (canceled during command execution).
+	// - TERMINATED: suspended (canceled during command execution).
 	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
 	// Instance ID.
@@ -2332,8 +2350,8 @@ type InvocationTask struct {
 
 	// Invocation source.
 	// 
-	// -USER: originate from user invocation.
-	// -INVOKER: originate from scheduled execution.
+	// - USER: originate from user invocation.
+	// - INVOKER: originate from scheduled execution.
 	InvocationSource *string `json:"InvocationSource,omitnil,omitempty" name:"InvocationSource"`
 
 	// Name of the executed command.
@@ -2346,19 +2364,19 @@ type InvocationTaskBasicInfo struct {
 
 	// Execution task status. valid values:.
 	// 
-	// -PENDING: waiting for distribution.
-	// -DELIVERING: distributing.
-	// -DELIVER_DELAYED: delivery delay.
-	// -DELIVER_FAILED: delivery fail.
-	// -START_FAILED: command start failed.
+	// - PENDING: waiting for distribution.
+	// - DELIVERING: distributing.
+	// - DELIVER_DELAYED: delivery delay.
+	// - DELIVER_FAILED: delivery fail.
+	// - START_FAILED: command start failed.
 	// - RUNNING: command RUNNING.
-	// -SUCCESS: command success.
-	// -FAILED: command execution failed, exit code not 0.
-	// -TIMEOUT: command timeout.
-	// -TASK_TIMEOUT: client no response.
-	// -Canceling.
+	// - SUCCESS: command success.
+	// - FAILED: command execution failed, exit code not 0.
+	// - TIMEOUT: command timeout.
+	// - TASK_TIMEOUT: client no response.
+	// - CANCELLING: cancelling.
 	// - CANCELLED: canceled (command canceled before startup).
-	// -TERMINATED: suspended (canceled during command execution).
+	// - TERMINATED: suspended (canceled during command execution).
 	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
 	// Instance ID.
@@ -2549,15 +2567,15 @@ type InvokerRecord struct {
 
 	// Trigger result.
 	// 
-	// -PENDING: waiting for distribution.
+	// - PENDING: waiting for distribution.
 	// - RUNNING: command RUNNING.
-	// -Canceling.
-	// -SUCCESS: command success.
-	// -TIMEOUT: command timeout.
+	// - CANCELLING: canceling.
+	// - SUCCESS: command success.
+	// - TIMEOUT: command timeout.
 	// - FAILED: command FAILED.
-	// -CANCELLED: all commands canceled.
-	// -PARTIAL_FAILED: the command partially failed.
-	// -PARTIAL_CANCELLED: the command is partially canceled.
+	// - CANCELLED: all commands canceled.
+	// - PARTIAL_FAILED: the command partially failed.
+	// - PARTIAL_CANCELLED: the command is partially canceled.
 	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 }
 
@@ -3320,8 +3338,8 @@ type Scene struct {
 type ScheduleSettings struct {
 	// Execution policy.
 	// 
-	// -ONCE: one-time execution.
-	// -RECURRENCE: execute periodically.
+	// - ONCE: one-time execution.
+	// - RECURRENCE: execute periodically.
 	Policy *string `json:"Policy,omitnil,omitempty" name:"Policy"`
 
 	// Trigger the crontab expression. This field is required if `Policy` is `RECURRENCE`. The crontab expression is parsed in UTC+8.

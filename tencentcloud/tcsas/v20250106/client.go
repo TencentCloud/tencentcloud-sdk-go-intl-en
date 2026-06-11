@@ -507,6 +507,60 @@ func (c *Client) CreateMNGWithContext(ctx context.Context, request *CreateMNGReq
     return
 }
 
+func NewCreateMNGAppSecretRequest() (request *CreateMNGAppSecretRequest) {
+    request = &CreateMNGAppSecretRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "CreateMNGAppSecret")
+    
+    
+    return
+}
+
+func NewCreateMNGAppSecretResponse() (response *CreateMNGAppSecretResponse) {
+    response = &CreateMNGAppSecretResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateMNGAppSecret
+// This API is used to generate a mini game secret key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) CreateMNGAppSecret(request *CreateMNGAppSecretRequest) (response *CreateMNGAppSecretResponse, err error) {
+    return c.CreateMNGAppSecretWithContext(context.Background(), request)
+}
+
+// CreateMNGAppSecret
+// This API is used to generate a mini game secret key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) CreateMNGAppSecretWithContext(ctx context.Context, request *CreateMNGAppSecretRequest) (response *CreateMNGAppSecretResponse, err error) {
+    if request == nil {
+        request = NewCreateMNGAppSecretRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "CreateMNGAppSecret")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMNGAppSecret require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateMNGAppSecretResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateMNGApprovalRequest() (request *CreateMNGApprovalRequest) {
     request = &CreateMNGApprovalRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -677,6 +731,60 @@ func (c *Client) CreateMNGSensitiveAPIPermissionApprovalWithContext(ctx context.
     return
 }
 
+func NewCreateMNGSubscribeMessageTemplateRequest() (request *CreateMNGSubscribeMessageTemplateRequest) {
+    request = &CreateMNGSubscribeMessageTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "CreateMNGSubscribeMessageTemplate")
+    
+    
+    return
+}
+
+func NewCreateMNGSubscribeMessageTemplateResponse() (response *CreateMNGSubscribeMessageTemplateResponse) {
+    response = &CreateMNGSubscribeMessageTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateMNGSubscribeMessageTemplate
+// This API is used to create a mini game subscription message template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) CreateMNGSubscribeMessageTemplate(request *CreateMNGSubscribeMessageTemplateRequest) (response *CreateMNGSubscribeMessageTemplateResponse, err error) {
+    return c.CreateMNGSubscribeMessageTemplateWithContext(context.Background(), request)
+}
+
+// CreateMNGSubscribeMessageTemplate
+// This API is used to create a mini game subscription message template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) CreateMNGSubscribeMessageTemplateWithContext(ctx context.Context, request *CreateMNGSubscribeMessageTemplateRequest) (response *CreateMNGSubscribeMessageTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateMNGSubscribeMessageTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "CreateMNGSubscribeMessageTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMNGSubscribeMessageTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateMNGSubscribeMessageTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateMNGVersionRequest() (request *CreateMNGVersionRequest) {
     request = &CreateMNGVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -799,6 +907,60 @@ func (c *Client) CreateMNPWithContext(ctx context.Context, request *CreateMNPReq
     request.SetContext(ctx)
     
     response = NewCreateMNPResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateMNPAppSecretRequest() (request *CreateMNPAppSecretRequest) {
+    request = &CreateMNPAppSecretRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "CreateMNPAppSecret")
+    
+    
+    return
+}
+
+func NewCreateMNPAppSecretResponse() (response *CreateMNPAppSecretResponse) {
+    response = &CreateMNPAppSecretResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateMNPAppSecret
+// This API is used to generate a mini program secret key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) CreateMNPAppSecret(request *CreateMNPAppSecretRequest) (response *CreateMNPAppSecretResponse, err error) {
+    return c.CreateMNPAppSecretWithContext(context.Background(), request)
+}
+
+// CreateMNPAppSecret
+// This API is used to generate a mini program secret key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) CreateMNPAppSecretWithContext(ctx context.Context, request *CreateMNPAppSecretRequest) (response *CreateMNPAppSecretResponse, err error) {
+    if request == nil {
+        request = NewCreateMNPAppSecretRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "CreateMNPAppSecret")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMNPAppSecret require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateMNPAppSecretResponse()
     err = c.Send(request, response)
     return
 }
@@ -1023,6 +1185,60 @@ func (c *Client) CreateMNPSensitiveAPIPermissionApprovalWithContext(ctx context.
     request.SetContext(ctx)
     
     response = NewCreateMNPSensitiveAPIPermissionApprovalResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateMNPSubscribeMessageTemplateRequest() (request *CreateMNPSubscribeMessageTemplateRequest) {
+    request = &CreateMNPSubscribeMessageTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "CreateMNPSubscribeMessageTemplate")
+    
+    
+    return
+}
+
+func NewCreateMNPSubscribeMessageTemplateResponse() (response *CreateMNPSubscribeMessageTemplateResponse) {
+    response = &CreateMNPSubscribeMessageTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateMNPSubscribeMessageTemplate
+// This API is used to create a mini program subscription message template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) CreateMNPSubscribeMessageTemplate(request *CreateMNPSubscribeMessageTemplateRequest) (response *CreateMNPSubscribeMessageTemplateResponse, err error) {
+    return c.CreateMNPSubscribeMessageTemplateWithContext(context.Background(), request)
+}
+
+// CreateMNPSubscribeMessageTemplate
+// This API is used to create a mini program subscription message template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) CreateMNPSubscribeMessageTemplateWithContext(ctx context.Context, request *CreateMNPSubscribeMessageTemplateRequest) (response *CreateMNPSubscribeMessageTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateMNPSubscribeMessageTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "CreateMNPSubscribeMessageTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMNPSubscribeMessageTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateMNPSubscribeMessageTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -1467,6 +1683,60 @@ func (c *Client) DeleteMNGWithContext(ctx context.Context, request *DeleteMNGReq
     return
 }
 
+func NewDeleteMNGSubscribeMessageTemplateRequest() (request *DeleteMNGSubscribeMessageTemplateRequest) {
+    request = &DeleteMNGSubscribeMessageTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DeleteMNGSubscribeMessageTemplate")
+    
+    
+    return
+}
+
+func NewDeleteMNGSubscribeMessageTemplateResponse() (response *DeleteMNGSubscribeMessageTemplateResponse) {
+    response = &DeleteMNGSubscribeMessageTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteMNGSubscribeMessageTemplate
+// This API is used to delete a mini game subscription message template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DeleteMNGSubscribeMessageTemplate(request *DeleteMNGSubscribeMessageTemplateRequest) (response *DeleteMNGSubscribeMessageTemplateResponse, err error) {
+    return c.DeleteMNGSubscribeMessageTemplateWithContext(context.Background(), request)
+}
+
+// DeleteMNGSubscribeMessageTemplate
+// This API is used to delete a mini game subscription message template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DeleteMNGSubscribeMessageTemplateWithContext(ctx context.Context, request *DeleteMNGSubscribeMessageTemplateRequest) (response *DeleteMNGSubscribeMessageTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteMNGSubscribeMessageTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DeleteMNGSubscribeMessageTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteMNGSubscribeMessageTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteMNGSubscribeMessageTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteMNPRequest() (request *DeleteMNPRequest) {
     request = &DeleteMNPRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1515,6 +1785,60 @@ func (c *Client) DeleteMNPWithContext(ctx context.Context, request *DeleteMNPReq
     request.SetContext(ctx)
     
     response = NewDeleteMNPResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteMNPSubscribeMessageTemplateRequest() (request *DeleteMNPSubscribeMessageTemplateRequest) {
+    request = &DeleteMNPSubscribeMessageTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DeleteMNPSubscribeMessageTemplate")
+    
+    
+    return
+}
+
+func NewDeleteMNPSubscribeMessageTemplateResponse() (response *DeleteMNPSubscribeMessageTemplateResponse) {
+    response = &DeleteMNPSubscribeMessageTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteMNPSubscribeMessageTemplate
+// This API is used to delete a mini program subscription message template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DeleteMNPSubscribeMessageTemplate(request *DeleteMNPSubscribeMessageTemplateRequest) (response *DeleteMNPSubscribeMessageTemplateResponse, err error) {
+    return c.DeleteMNPSubscribeMessageTemplateWithContext(context.Background(), request)
+}
+
+// DeleteMNPSubscribeMessageTemplate
+// This API is used to delete a mini program subscription message template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DeleteMNPSubscribeMessageTemplateWithContext(ctx context.Context, request *DeleteMNPSubscribeMessageTemplateRequest) (response *DeleteMNPSubscribeMessageTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteMNPSubscribeMessageTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DeleteMNPSubscribeMessageTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteMNPSubscribeMessageTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteMNPSubscribeMessageTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -2855,7 +3179,7 @@ func NewDescribeMNGAllStageVersionsResponse() (response *DescribeMNGAllStageVers
 }
 
 // DescribeMNGAllStageVersions
-// This API is used to query the mini game version information.
+// This API is used to query mini game version information across all phases.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2865,7 +3189,7 @@ func (c *Client) DescribeMNGAllStageVersions(request *DescribeMNGAllStageVersion
 }
 
 // DescribeMNGAllStageVersions
-// This API is used to query the mini game version information.
+// This API is used to query mini game version information across all phases.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -2883,6 +3207,58 @@ func (c *Client) DescribeMNGAllStageVersionsWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDescribeMNGAllStageVersionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNGAppSecretRequest() (request *DescribeMNGAppSecretRequest) {
+    request = &DescribeMNGAppSecretRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DescribeMNGAppSecret")
+    
+    
+    return
+}
+
+func NewDescribeMNGAppSecretResponse() (response *DescribeMNGAppSecretResponse) {
+    response = &DescribeMNGAppSecretResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNGAppSecret
+// This API is used to query mini game secret keys.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNGAppSecret(request *DescribeMNGAppSecretRequest) (response *DescribeMNGAppSecretResponse, err error) {
+    return c.DescribeMNGAppSecretWithContext(context.Background(), request)
+}
+
+// DescribeMNGAppSecret
+// This API is used to query mini game secret keys.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNGAppSecretWithContext(ctx context.Context, request *DescribeMNGAppSecretRequest) (response *DescribeMNGAppSecretResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNGAppSecretRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DescribeMNGAppSecret")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNGAppSecret require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNGAppSecretResponse()
     err = c.Send(request, response)
     return
 }
@@ -3745,6 +4121,222 @@ func (c *Client) DescribeMNGSensitiveAPIPermissionListWithContext(ctx context.Co
     return
 }
 
+func NewDescribeMNGSubscribeMessageTemplateRequest() (request *DescribeMNGSubscribeMessageTemplateRequest) {
+    request = &DescribeMNGSubscribeMessageTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DescribeMNGSubscribeMessageTemplate")
+    
+    
+    return
+}
+
+func NewDescribeMNGSubscribeMessageTemplateResponse() (response *DescribeMNGSubscribeMessageTemplateResponse) {
+    response = &DescribeMNGSubscribeMessageTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNGSubscribeMessageTemplate
+// This API is used to query mini game subscription message template details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNGSubscribeMessageTemplate(request *DescribeMNGSubscribeMessageTemplateRequest) (response *DescribeMNGSubscribeMessageTemplateResponse, err error) {
+    return c.DescribeMNGSubscribeMessageTemplateWithContext(context.Background(), request)
+}
+
+// DescribeMNGSubscribeMessageTemplate
+// This API is used to query mini game subscription message template details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNGSubscribeMessageTemplateWithContext(ctx context.Context, request *DescribeMNGSubscribeMessageTemplateRequest) (response *DescribeMNGSubscribeMessageTemplateResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNGSubscribeMessageTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DescribeMNGSubscribeMessageTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNGSubscribeMessageTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNGSubscribeMessageTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNGSubscribeMessageTemplateLibraryRequest() (request *DescribeMNGSubscribeMessageTemplateLibraryRequest) {
+    request = &DescribeMNGSubscribeMessageTemplateLibraryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DescribeMNGSubscribeMessageTemplateLibrary")
+    
+    
+    return
+}
+
+func NewDescribeMNGSubscribeMessageTemplateLibraryResponse() (response *DescribeMNGSubscribeMessageTemplateLibraryResponse) {
+    response = &DescribeMNGSubscribeMessageTemplateLibraryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNGSubscribeMessageTemplateLibrary
+// This API is used to query mini game subscription message template library details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNGSubscribeMessageTemplateLibrary(request *DescribeMNGSubscribeMessageTemplateLibraryRequest) (response *DescribeMNGSubscribeMessageTemplateLibraryResponse, err error) {
+    return c.DescribeMNGSubscribeMessageTemplateLibraryWithContext(context.Background(), request)
+}
+
+// DescribeMNGSubscribeMessageTemplateLibrary
+// This API is used to query mini game subscription message template library details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNGSubscribeMessageTemplateLibraryWithContext(ctx context.Context, request *DescribeMNGSubscribeMessageTemplateLibraryRequest) (response *DescribeMNGSubscribeMessageTemplateLibraryResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNGSubscribeMessageTemplateLibraryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DescribeMNGSubscribeMessageTemplateLibrary")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNGSubscribeMessageTemplateLibrary require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNGSubscribeMessageTemplateLibraryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNGSubscribeMessageTemplateLibraryListRequest() (request *DescribeMNGSubscribeMessageTemplateLibraryListRequest) {
+    request = &DescribeMNGSubscribeMessageTemplateLibraryListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DescribeMNGSubscribeMessageTemplateLibraryList")
+    
+    
+    return
+}
+
+func NewDescribeMNGSubscribeMessageTemplateLibraryListResponse() (response *DescribeMNGSubscribeMessageTemplateLibraryListResponse) {
+    response = &DescribeMNGSubscribeMessageTemplateLibraryListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNGSubscribeMessageTemplateLibraryList
+// This API is used to query the mini game subscription message template library list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNGSubscribeMessageTemplateLibraryList(request *DescribeMNGSubscribeMessageTemplateLibraryListRequest) (response *DescribeMNGSubscribeMessageTemplateLibraryListResponse, err error) {
+    return c.DescribeMNGSubscribeMessageTemplateLibraryListWithContext(context.Background(), request)
+}
+
+// DescribeMNGSubscribeMessageTemplateLibraryList
+// This API is used to query the mini game subscription message template library list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNGSubscribeMessageTemplateLibraryListWithContext(ctx context.Context, request *DescribeMNGSubscribeMessageTemplateLibraryListRequest) (response *DescribeMNGSubscribeMessageTemplateLibraryListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNGSubscribeMessageTemplateLibraryListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DescribeMNGSubscribeMessageTemplateLibraryList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNGSubscribeMessageTemplateLibraryList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNGSubscribeMessageTemplateLibraryListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNGSubscribeMessageTemplateListRequest() (request *DescribeMNGSubscribeMessageTemplateListRequest) {
+    request = &DescribeMNGSubscribeMessageTemplateListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DescribeMNGSubscribeMessageTemplateList")
+    
+    
+    return
+}
+
+func NewDescribeMNGSubscribeMessageTemplateListResponse() (response *DescribeMNGSubscribeMessageTemplateListResponse) {
+    response = &DescribeMNGSubscribeMessageTemplateListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNGSubscribeMessageTemplateList
+// This API is used to query the mini game subscription message template list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNGSubscribeMessageTemplateList(request *DescribeMNGSubscribeMessageTemplateListRequest) (response *DescribeMNGSubscribeMessageTemplateListResponse, err error) {
+    return c.DescribeMNGSubscribeMessageTemplateListWithContext(context.Background(), request)
+}
+
+// DescribeMNGSubscribeMessageTemplateList
+// This API is used to query the mini game subscription message template list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNGSubscribeMessageTemplateListWithContext(ctx context.Context, request *DescribeMNGSubscribeMessageTemplateListRequest) (response *DescribeMNGSubscribeMessageTemplateListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNGSubscribeMessageTemplateListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DescribeMNGSubscribeMessageTemplateList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNGSubscribeMessageTemplateList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNGSubscribeMessageTemplateListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMNGVersionRequest() (request *DescribeMNGVersionRequest) {
     request = &DescribeMNGVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4039,7 +4631,7 @@ func NewDescribeMNPAllStageVersionsResponse() (response *DescribeMNPAllStageVers
 }
 
 // DescribeMNPAllStageVersions
-// This API is used to query versions of a mini program across all stages.
+// This API is used to query mini program version information across all phases.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4049,7 +4641,7 @@ func (c *Client) DescribeMNPAllStageVersions(request *DescribeMNPAllStageVersion
 }
 
 // DescribeMNPAllStageVersions
-// This API is used to query versions of a mini program across all stages.
+// This API is used to query mini program version information across all phases.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -4067,6 +4659,58 @@ func (c *Client) DescribeMNPAllStageVersionsWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDescribeMNPAllStageVersionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPAppSecretRequest() (request *DescribeMNPAppSecretRequest) {
+    request = &DescribeMNPAppSecretRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DescribeMNPAppSecret")
+    
+    
+    return
+}
+
+func NewDescribeMNPAppSecretResponse() (response *DescribeMNPAppSecretResponse) {
+    response = &DescribeMNPAppSecretResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPAppSecret
+// This API is used to query mini program secret keys.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNPAppSecret(request *DescribeMNPAppSecretRequest) (response *DescribeMNPAppSecretResponse, err error) {
+    return c.DescribeMNPAppSecretWithContext(context.Background(), request)
+}
+
+// DescribeMNPAppSecret
+// This API is used to query mini program secret keys.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNPAppSecretWithContext(ctx context.Context, request *DescribeMNPAppSecretRequest) (response *DescribeMNPAppSecretResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPAppSecretRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DescribeMNPAppSecret")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPAppSecret require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPAppSecretResponse()
     err = c.Send(request, response)
     return
 }
@@ -4969,6 +5613,222 @@ func (c *Client) DescribeMNPSensitiveAPIPermissionListWithContext(ctx context.Co
     request.SetContext(ctx)
     
     response = NewDescribeMNPSensitiveAPIPermissionListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPSubscribeMessageTemplateRequest() (request *DescribeMNPSubscribeMessageTemplateRequest) {
+    request = &DescribeMNPSubscribeMessageTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DescribeMNPSubscribeMessageTemplate")
+    
+    
+    return
+}
+
+func NewDescribeMNPSubscribeMessageTemplateResponse() (response *DescribeMNPSubscribeMessageTemplateResponse) {
+    response = &DescribeMNPSubscribeMessageTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPSubscribeMessageTemplate
+// This API is used to query mini program subscription message template details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNPSubscribeMessageTemplate(request *DescribeMNPSubscribeMessageTemplateRequest) (response *DescribeMNPSubscribeMessageTemplateResponse, err error) {
+    return c.DescribeMNPSubscribeMessageTemplateWithContext(context.Background(), request)
+}
+
+// DescribeMNPSubscribeMessageTemplate
+// This API is used to query mini program subscription message template details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNPSubscribeMessageTemplateWithContext(ctx context.Context, request *DescribeMNPSubscribeMessageTemplateRequest) (response *DescribeMNPSubscribeMessageTemplateResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPSubscribeMessageTemplateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DescribeMNPSubscribeMessageTemplate")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPSubscribeMessageTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPSubscribeMessageTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPSubscribeMessageTemplateLibraryRequest() (request *DescribeMNPSubscribeMessageTemplateLibraryRequest) {
+    request = &DescribeMNPSubscribeMessageTemplateLibraryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DescribeMNPSubscribeMessageTemplateLibrary")
+    
+    
+    return
+}
+
+func NewDescribeMNPSubscribeMessageTemplateLibraryResponse() (response *DescribeMNPSubscribeMessageTemplateLibraryResponse) {
+    response = &DescribeMNPSubscribeMessageTemplateLibraryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPSubscribeMessageTemplateLibrary
+// This API is used to query mini program subscription message template library details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNPSubscribeMessageTemplateLibrary(request *DescribeMNPSubscribeMessageTemplateLibraryRequest) (response *DescribeMNPSubscribeMessageTemplateLibraryResponse, err error) {
+    return c.DescribeMNPSubscribeMessageTemplateLibraryWithContext(context.Background(), request)
+}
+
+// DescribeMNPSubscribeMessageTemplateLibrary
+// This API is used to query mini program subscription message template library details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNPSubscribeMessageTemplateLibraryWithContext(ctx context.Context, request *DescribeMNPSubscribeMessageTemplateLibraryRequest) (response *DescribeMNPSubscribeMessageTemplateLibraryResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPSubscribeMessageTemplateLibraryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DescribeMNPSubscribeMessageTemplateLibrary")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPSubscribeMessageTemplateLibrary require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPSubscribeMessageTemplateLibraryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPSubscribeMessageTemplateLibraryListRequest() (request *DescribeMNPSubscribeMessageTemplateLibraryListRequest) {
+    request = &DescribeMNPSubscribeMessageTemplateLibraryListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DescribeMNPSubscribeMessageTemplateLibraryList")
+    
+    
+    return
+}
+
+func NewDescribeMNPSubscribeMessageTemplateLibraryListResponse() (response *DescribeMNPSubscribeMessageTemplateLibraryListResponse) {
+    response = &DescribeMNPSubscribeMessageTemplateLibraryListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPSubscribeMessageTemplateLibraryList
+// This API is used to query the mini program subscription message template library list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNPSubscribeMessageTemplateLibraryList(request *DescribeMNPSubscribeMessageTemplateLibraryListRequest) (response *DescribeMNPSubscribeMessageTemplateLibraryListResponse, err error) {
+    return c.DescribeMNPSubscribeMessageTemplateLibraryListWithContext(context.Background(), request)
+}
+
+// DescribeMNPSubscribeMessageTemplateLibraryList
+// This API is used to query the mini program subscription message template library list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNPSubscribeMessageTemplateLibraryListWithContext(ctx context.Context, request *DescribeMNPSubscribeMessageTemplateLibraryListRequest) (response *DescribeMNPSubscribeMessageTemplateLibraryListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPSubscribeMessageTemplateLibraryListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DescribeMNPSubscribeMessageTemplateLibraryList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPSubscribeMessageTemplateLibraryList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPSubscribeMessageTemplateLibraryListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPSubscribeMessageTemplateListRequest() (request *DescribeMNPSubscribeMessageTemplateListRequest) {
+    request = &DescribeMNPSubscribeMessageTemplateListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DescribeMNPSubscribeMessageTemplateList")
+    
+    
+    return
+}
+
+func NewDescribeMNPSubscribeMessageTemplateListResponse() (response *DescribeMNPSubscribeMessageTemplateListResponse) {
+    response = &DescribeMNPSubscribeMessageTemplateListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPSubscribeMessageTemplateList
+// This API is used to query the mini program subscription message template list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNPSubscribeMessageTemplateList(request *DescribeMNPSubscribeMessageTemplateListRequest) (response *DescribeMNPSubscribeMessageTemplateListResponse, err error) {
+    return c.DescribeMNPSubscribeMessageTemplateListWithContext(context.Background(), request)
+}
+
+// DescribeMNPSubscribeMessageTemplateList
+// This API is used to query the mini program subscription message template list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) DescribeMNPSubscribeMessageTemplateListWithContext(ctx context.Context, request *DescribeMNPSubscribeMessageTemplateListRequest) (response *DescribeMNPSubscribeMessageTemplateListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPSubscribeMessageTemplateListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DescribeMNPSubscribeMessageTemplateList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPSubscribeMessageTemplateList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPSubscribeMessageTemplateListResponse()
     err = c.Send(request, response)
     return
 }
@@ -5905,6 +6765,58 @@ func (c *Client) ModifyMNGWithContext(ctx context.Context, request *ModifyMNGReq
     return
 }
 
+func NewModifyMNGAppSecretStatusRequest() (request *ModifyMNGAppSecretStatusRequest) {
+    request = &ModifyMNGAppSecretStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "ModifyMNGAppSecretStatus")
+    
+    
+    return
+}
+
+func NewModifyMNGAppSecretStatusResponse() (response *ModifyMNGAppSecretStatusResponse) {
+    response = &ModifyMNGAppSecretStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyMNGAppSecretStatus
+// This API is used to modify the secret key status of a mini game.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) ModifyMNGAppSecretStatus(request *ModifyMNGAppSecretStatusRequest) (response *ModifyMNGAppSecretStatusResponse, err error) {
+    return c.ModifyMNGAppSecretStatusWithContext(context.Background(), request)
+}
+
+// ModifyMNGAppSecretStatus
+// This API is used to modify the secret key status of a mini game.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) ModifyMNGAppSecretStatusWithContext(ctx context.Context, request *ModifyMNGAppSecretStatusRequest) (response *ModifyMNGAppSecretStatusResponse, err error) {
+    if request == nil {
+        request = NewModifyMNGAppSecretStatusRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "ModifyMNGAppSecretStatus")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMNGAppSecretStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyMNGAppSecretStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyMNGDomainRequest() (request *ModifyMNGDomainRequest) {
     request = &ModifyMNGDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6017,6 +6929,58 @@ func (c *Client) ModifyMNPWithContext(ctx context.Context, request *ModifyMNPReq
     request.SetContext(ctx)
     
     response = NewModifyMNPResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyMNPAppSecretStatusRequest() (request *ModifyMNPAppSecretStatusRequest) {
+    request = &ModifyMNPAppSecretStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "ModifyMNPAppSecretStatus")
+    
+    
+    return
+}
+
+func NewModifyMNPAppSecretStatusResponse() (response *ModifyMNPAppSecretStatusResponse) {
+    response = &ModifyMNPAppSecretStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyMNPAppSecretStatus
+// This API is used to modify the secret key status of a mini program.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) ModifyMNPAppSecretStatus(request *ModifyMNPAppSecretStatusRequest) (response *ModifyMNPAppSecretStatusResponse, err error) {
+    return c.ModifyMNPAppSecretStatusWithContext(context.Background(), request)
+}
+
+// ModifyMNPAppSecretStatus
+// This API is used to modify the secret key status of a mini program.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) ModifyMNPAppSecretStatusWithContext(ctx context.Context, request *ModifyMNPAppSecretStatusRequest) (response *ModifyMNPAppSecretStatusResponse, err error) {
+    if request == nil {
+        request = NewModifyMNPAppSecretStatusRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "ModifyMNPAppSecretStatus")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMNPAppSecretStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyMNPAppSecretStatusResponse()
     err = c.Send(request, response)
     return
 }
@@ -6577,6 +7541,110 @@ func (c *Client) RemoveMNPWithContext(ctx context.Context, request *RemoveMNPReq
     request.SetContext(ctx)
     
     response = NewRemoveMNPResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewResetMNGAppSecretRequest() (request *ResetMNGAppSecretRequest) {
+    request = &ResetMNGAppSecretRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "ResetMNGAppSecret")
+    
+    
+    return
+}
+
+func NewResetMNGAppSecretResponse() (response *ResetMNGAppSecretResponse) {
+    response = &ResetMNGAppSecretResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ResetMNGAppSecret
+// This API is used to reset a mini game secret key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) ResetMNGAppSecret(request *ResetMNGAppSecretRequest) (response *ResetMNGAppSecretResponse, err error) {
+    return c.ResetMNGAppSecretWithContext(context.Background(), request)
+}
+
+// ResetMNGAppSecret
+// This API is used to reset a mini game secret key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) ResetMNGAppSecretWithContext(ctx context.Context, request *ResetMNGAppSecretRequest) (response *ResetMNGAppSecretResponse, err error) {
+    if request == nil {
+        request = NewResetMNGAppSecretRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "ResetMNGAppSecret")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResetMNGAppSecret require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewResetMNGAppSecretResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewResetMNPAppSecretRequest() (request *ResetMNPAppSecretRequest) {
+    request = &ResetMNPAppSecretRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "ResetMNPAppSecret")
+    
+    
+    return
+}
+
+func NewResetMNPAppSecretResponse() (response *ResetMNPAppSecretResponse) {
+    response = &ResetMNPAppSecretResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ResetMNPAppSecret
+// This API is used to reset a mini program secret key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) ResetMNPAppSecret(request *ResetMNPAppSecretRequest) (response *ResetMNPAppSecretResponse, err error) {
+    return c.ResetMNPAppSecretWithContext(context.Background(), request)
+}
+
+// ResetMNPAppSecret
+// This API is used to reset a mini program secret key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) ResetMNPAppSecretWithContext(ctx context.Context, request *ResetMNPAppSecretRequest) (response *ResetMNPAppSecretResponse, err error) {
+    if request == nil {
+        request = NewResetMNPAppSecretRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "ResetMNPAppSecret")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResetMNPAppSecret require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewResetMNPAppSecretResponse()
     err = c.Send(request, response)
     return
 }

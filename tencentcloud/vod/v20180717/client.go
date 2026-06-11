@@ -1013,7 +1013,7 @@ func NewCreateAigcCustomVoiceResponse() (response *CreateAigcCustomVoiceResponse
 }
 
 // CreateAigcCustomVoice
-// This API is used to create custom voice types for AIGC.
+// This API is used to create custom voice types. Note that calling this API will incur customization fees. See the billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#5e5217e8-29fc-467e-ac2d-853648f988b7).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1030,7 +1030,7 @@ func (c *Client) CreateAigcCustomVoice(request *CreateAigcCustomVoiceRequest) (r
 }
 
 // CreateAigcCustomVoice
-// This API is used to create custom voice types for AIGC.
+// This API is used to create custom voice types. Note that calling this API will incur customization fees. See the billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#5e5217e8-29fc-467e-ac2d-853648f988b7).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1091,6 +1091,7 @@ func NewCreateAigcImageTaskResponse() (response *CreateAigcImageTaskResponse) {
 //  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
 //  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  LIMITEXCEEDED_QUOTA = "LimitExceeded.Quota"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAigcImageTask(request *CreateAigcImageTaskRequest) (response *CreateAigcImageTaskResponse, err error) {
     return c.CreateAigcImageTaskWithContext(context.Background(), request)
@@ -1109,6 +1110,7 @@ func (c *Client) CreateAigcImageTask(request *CreateAigcImageTaskRequest) (respo
 //  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
 //  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  LIMITEXCEEDED_QUOTA = "LimitExceeded.Quota"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAigcImageTaskWithContext(ctx context.Context, request *CreateAigcImageTaskRequest) (response *CreateAigcImageTaskResponse, err error) {
     if request == nil {
@@ -1290,6 +1292,7 @@ func NewCreateAigcVideoTaskResponse() (response *CreateAigcVideoTaskResponse) {
 //  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
 //  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  LIMITEXCEEDED_QUOTA = "LimitExceeded.Quota"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAigcVideoTask(request *CreateAigcVideoTaskRequest) (response *CreateAigcVideoTaskResponse, err error) {
     return c.CreateAigcVideoTaskWithContext(context.Background(), request)
@@ -1307,6 +1310,7 @@ func (c *Client) CreateAigcVideoTask(request *CreateAigcVideoTaskRequest) (respo
 //  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
 //  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  LIMITEXCEEDED_QUOTA = "LimitExceeded.Quota"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAigcVideoTaskWithContext(ctx context.Context, request *CreateAigcVideoTaskRequest) (response *CreateAigcVideoTaskResponse, err error) {
     if request == nil {
@@ -5935,6 +5939,72 @@ func (c *Client) DescribeAigcFaceInfoWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDescribeAigcFaceInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAigcFaceInfoAsyncRequest() (request *DescribeAigcFaceInfoAsyncRequest) {
+    request = &DescribeAigcFaceInfoAsyncRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeAigcFaceInfoAsync")
+    
+    
+    return
+}
+
+func NewDescribeAigcFaceInfoAsyncResponse() (response *DescribeAigcFaceInfoAsyncResponse) {
+    response = &DescribeAigcFaceInfoAsyncResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAigcFaceInfoAsync
+// This API is used to asynchronously fetch AIGC face information. Note that calling this API incurs face recognition fees. Refer to the billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#96b3b59a-f9e1-49e9-966a-bedb70a4bf12).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeAigcFaceInfoAsync(request *DescribeAigcFaceInfoAsyncRequest) (response *DescribeAigcFaceInfoAsyncResponse, err error) {
+    return c.DescribeAigcFaceInfoAsyncWithContext(context.Background(), request)
+}
+
+// DescribeAigcFaceInfoAsync
+// This API is used to asynchronously fetch AIGC face information. Note that calling this API incurs face recognition fees. Refer to the billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#96b3b59a-f9e1-49e9-966a-bedb70a4bf12).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeAigcFaceInfoAsyncWithContext(ctx context.Context, request *DescribeAigcFaceInfoAsyncRequest) (response *DescribeAigcFaceInfoAsyncResponse, err error) {
+    if request == nil {
+        request = NewDescribeAigcFaceInfoAsyncRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeAigcFaceInfoAsync")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAigcFaceInfoAsync require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAigcFaceInfoAsyncResponse()
     err = c.Send(request, response)
     return
 }

@@ -65,7 +65,11 @@ func NewAddAndPublishNetworkFirewallPolicyDetailResponse() (response *AddAndPubl
 }
 
 // AddAndPublishNetworkFirewallPolicyDetail
-// This API is used to create a task to add and publish a network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create a network policy and add and distribute tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -80,7 +84,11 @@ func (c *Client) AddAndPublishNetworkFirewallPolicyDetail(request *AddAndPublish
 }
 
 // AddAndPublishNetworkFirewallPolicyDetail
-// This API is used to create a task to add and publish a network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create a network policy and add and distribute tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -127,7 +135,11 @@ func NewAddAndPublishNetworkFirewallPolicyYamlDetailResponse() (response *AddAnd
 }
 
 // AddAndPublishNetworkFirewallPolicyYamlDetail
-// This API is used to create a task to configure and publish a YAML network policy in the container network.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Create a YAML network policy and distribute tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -142,7 +154,11 @@ func (c *Client) AddAndPublishNetworkFirewallPolicyYamlDetail(request *AddAndPub
 }
 
 // AddAndPublishNetworkFirewallPolicyYamlDetail
-// This API is used to create a task to configure and publish a YAML network policy in the container network.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Create a YAML network policy and distribute tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1011,7 +1027,11 @@ func NewAddNetworkFirewallPolicyDetailResponse() (response *AddNetworkFirewallPo
 }
 
 // AddNetworkFirewallPolicyDetail
-// This API is used to create a task to add a network policy in the container network.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Create a network policy and add tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1026,7 +1046,11 @@ func (c *Client) AddNetworkFirewallPolicyDetail(request *AddNetworkFirewallPolic
 }
 
 // AddNetworkFirewallPolicyDetail
-// This API is used to create a task to add a network policy in the container network.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Create a network policy and add tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1073,7 +1097,11 @@ func NewAddNetworkFirewallPolicyYamlDetailResponse() (response *AddNetworkFirewa
 }
 
 // AddNetworkFirewallPolicyYamlDetail
-// This API is used to create a task to add a YAML network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create a YAML network policy and add tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1088,7 +1116,11 @@ func (c *Client) AddNetworkFirewallPolicyYamlDetail(request *AddNetworkFirewallP
 }
 
 // AddNetworkFirewallPolicyYamlDetail
-// This API is used to create a task to add a YAML network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create a YAML network policy and add tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1115,6 +1147,144 @@ func (c *Client) AddNetworkFirewallPolicyYamlDetailWithContext(ctx context.Conte
     return
 }
 
+func NewAddOrModifyMaliciousConnectionWhiteListRequest() (request *AddOrModifyMaliciousConnectionWhiteListRequest) {
+    request = &AddOrModifyMaliciousConnectionWhiteListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "AddOrModifyMaliciousConnectionWhiteList")
+    
+    
+    return
+}
+
+func NewAddOrModifyMaliciousConnectionWhiteListResponse() (response *AddOrModifyMaliciousConnectionWhiteListResponse) {
+    response = &AddOrModifyMaliciousConnectionWhiteListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddOrModifyMaliciousConnectionWhiteList
+// Add or modify the allowlist for malicious external connections.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ERRRULENOTFIND = "FailedOperation.ErrRuleNotFind"
+//  FAILEDOPERATION_RULENOTFIND = "FailedOperation.RuleNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_IPNOVALID = "InvalidParameter.IpNoValid"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) AddOrModifyMaliciousConnectionWhiteList(request *AddOrModifyMaliciousConnectionWhiteListRequest) (response *AddOrModifyMaliciousConnectionWhiteListResponse, err error) {
+    return c.AddOrModifyMaliciousConnectionWhiteListWithContext(context.Background(), request)
+}
+
+// AddOrModifyMaliciousConnectionWhiteList
+// Add or modify the allowlist for malicious external connections.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ERRRULENOTFIND = "FailedOperation.ErrRuleNotFind"
+//  FAILEDOPERATION_RULENOTFIND = "FailedOperation.RuleNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_IPNOVALID = "InvalidParameter.IpNoValid"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) AddOrModifyMaliciousConnectionWhiteListWithContext(ctx context.Context, request *AddOrModifyMaliciousConnectionWhiteListRequest) (response *AddOrModifyMaliciousConnectionWhiteListResponse, err error) {
+    if request == nil {
+        request = NewAddOrModifyMaliciousConnectionWhiteListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "AddOrModifyMaliciousConnectionWhiteList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddOrModifyMaliciousConnectionWhiteList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddOrModifyMaliciousConnectionWhiteListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAddOrModifyVirusWhiteListRuleRequest() (request *AddOrModifyVirusWhiteListRuleRequest) {
+    request = &AddOrModifyVirusWhiteListRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "AddOrModifyVirusWhiteListRule")
+    
+    
+    return
+}
+
+func NewAddOrModifyVirusWhiteListRuleResponse() (response *AddOrModifyVirusWhiteListRuleResponse) {
+    response = &AddOrModifyVirusWhiteListRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddOrModifyVirusWhiteListRule
+// This API is used to add or modify Trojan allowlist rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DATANOTFOUND = "InvalidParameterValue.DataNotFound"
+func (c *Client) AddOrModifyVirusWhiteListRule(request *AddOrModifyVirusWhiteListRuleRequest) (response *AddOrModifyVirusWhiteListRuleResponse, err error) {
+    return c.AddOrModifyVirusWhiteListRuleWithContext(context.Background(), request)
+}
+
+// AddOrModifyVirusWhiteListRule
+// This API is used to add or modify Trojan allowlist rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DATANOTFOUND = "InvalidParameterValue.DataNotFound"
+func (c *Client) AddOrModifyVirusWhiteListRuleWithContext(ctx context.Context, request *AddOrModifyVirusWhiteListRuleRequest) (response *AddOrModifyVirusWhiteListRuleResponse, err error) {
+    if request == nil {
+        request = NewAddOrModifyVirusWhiteListRuleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "AddOrModifyVirusWhiteListRule")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddOrModifyVirusWhiteListRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddOrModifyVirusWhiteListRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCheckNetworkFirewallPolicyYamlRequest() (request *CheckNetworkFirewallPolicyYamlRequest) {
     request = &CheckNetworkFirewallPolicyYamlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1135,7 +1305,11 @@ func NewCheckNetworkFirewallPolicyYamlResponse() (response *CheckNetworkFirewall
 }
 
 // CheckNetworkFirewallPolicyYaml
-// This API is used to create a task to check a YAML network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create a task of check the YAML network policy for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1150,7 +1324,11 @@ func (c *Client) CheckNetworkFirewallPolicyYaml(request *CheckNetworkFirewallPol
 }
 
 // CheckNetworkFirewallPolicyYaml
-// This API is used to create a task to check a YAML network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create a task of check the YAML network policy for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1263,7 +1441,11 @@ func NewConfirmNetworkFirewallPolicyResponse() (response *ConfirmNetworkFirewall
 }
 
 // ConfirmNetworkFirewallPolicy
-// This API is used to create a task to confirm a network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create a network policy and confirm tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1278,7 +1460,11 @@ func (c *Client) ConfirmNetworkFirewallPolicy(request *ConfirmNetworkFirewallPol
 }
 
 // ConfirmNetworkFirewallPolicy
-// This API is used to create a task to confirm a network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create a network policy and confirm tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1757,6 +1943,68 @@ func (c *Client) CreateCheckComponentWithContext(ctx context.Context, request *C
     request.SetContext(ctx)
     
     response = NewCreateCheckComponentResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateClusterAccessRequest() (request *CreateClusterAccessRequest) {
+    request = &CreateClusterAccessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "CreateClusterAccess")
+    
+    
+    return
+}
+
+func NewCreateClusterAccessResponse() (response *CreateClusterAccessResponse) {
+    response = &CreateClusterAccessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateClusterAccess
+// Create cluster access.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateClusterAccess(request *CreateClusterAccessRequest) (response *CreateClusterAccessResponse, err error) {
+    return c.CreateClusterAccessWithContext(context.Background(), request)
+}
+
+// CreateClusterAccess
+// Create cluster access.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateClusterAccessWithContext(ctx context.Context, request *CreateClusterAccessRequest) (response *CreateClusterAccessResponse, err error) {
+    if request == nil {
+        request = NewCreateClusterAccessRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "CreateClusterAccess")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateClusterAccess require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateClusterAccessResponse()
     err = c.Send(request, response)
     return
 }
@@ -2521,7 +2769,7 @@ func NewCreateK8sApiAbnormalRuleInfoResponse() (response *CreateK8sApiAbnormalRu
 }
 
 // CreateK8sApiAbnormalRuleInfo
-// This API is used to create K8sApi abnormal event rules.
+// Create a k8s API exception event RULE. The Action in RuleInfoList only supports RULE_MODE_ALERT (ALERT) and no longer supports RULE_MODE_RELEASE/PASS (allow). The EventID parameter has been removed. To add an event to the allowlist, use the ModifyK8sApiAbnormalWhitelist API.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2531,7 +2779,7 @@ func (c *Client) CreateK8sApiAbnormalRuleInfo(request *CreateK8sApiAbnormalRuleI
 }
 
 // CreateK8sApiAbnormalRuleInfo
-// This API is used to create K8sApi abnormal event rules.
+// Create a k8s API exception event RULE. The Action in RuleInfoList only supports RULE_MODE_ALERT (ALERT) and no longer supports RULE_MODE_RELEASE/PASS (allow). The EventID parameter has been removed. To add an event to the allowlist, use the ModifyK8sApiAbnormalWhitelist API.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2573,7 +2821,11 @@ func NewCreateNetworkFirewallClusterRefreshResponse() (response *CreateNetworkFi
 }
 
 // CreateNetworkFirewallClusterRefresh
-// This API is used to distribute a refresh task in the container network cluster.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Distribute refresh tasks of clusters for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2588,7 +2840,11 @@ func (c *Client) CreateNetworkFirewallClusterRefresh(request *CreateNetworkFirew
 }
 
 // CreateNetworkFirewallClusterRefresh
-// This API is used to distribute a refresh task in the container network cluster.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Distribute refresh tasks of clusters for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2635,7 +2891,11 @@ func NewCreateNetworkFirewallPolicyDiscoverResponse() (response *CreateNetworkFi
 }
 
 // CreateNetworkFirewallPolicyDiscover
-// This API is used to create a task to sync a network policy from the container network cluster.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create an auto-discovery task according to the container network and cluster network policies.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2650,7 +2910,11 @@ func (c *Client) CreateNetworkFirewallPolicyDiscover(request *CreateNetworkFirew
 }
 
 // CreateNetworkFirewallPolicyDiscover
-// This API is used to create a task to sync a network policy from the container network cluster.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create an auto-discovery task according to the container network and cluster network policies.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2697,7 +2961,11 @@ func NewCreateNetworkFirewallPublishResponse() (response *CreateNetworkFirewallP
 }
 
 // CreateNetworkFirewallPublish
-// This API is used to create a task to publish a network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create a network policy and distribute tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2712,7 +2980,11 @@ func (c *Client) CreateNetworkFirewallPublish(request *CreateNetworkFirewallPubl
 }
 
 // CreateNetworkFirewallPublish
-// This API is used to create a task to publish a network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create a network policy and distribute tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2759,7 +3031,11 @@ func NewCreateNetworkFirewallUndoPublishResponse() (response *CreateNetworkFirew
 }
 
 // CreateNetworkFirewallUndoPublish
-// This API is used to create a task to revoke a network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create a network policy and cancel tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2774,7 +3050,11 @@ func (c *Client) CreateNetworkFirewallUndoPublish(request *CreateNetworkFirewall
 }
 
 // CreateNetworkFirewallUndoPublish
-// This API is used to create a task to revoke a network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create a network policy and cancel tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4035,7 +4315,11 @@ func NewDeleteCompliancePolicyItemFromWhitelistResponse() (response *DeleteCompl
 }
 
 // DeleteCompliancePolicyItemFromWhitelist
-// This API is used to remove the specified check item from the allowlist.
+// Product refactoring and optimization, none of these APIs are called.
+//
+// 
+//
+// Remove the designated detection item from the allowlist.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4049,7 +4333,11 @@ func (c *Client) DeleteCompliancePolicyItemFromWhitelist(request *DeleteComplian
 }
 
 // DeleteCompliancePolicyItemFromWhitelist
-// This API is used to remove the specified check item from the allowlist.
+// Product refactoring and optimization, none of these APIs are called.
+//
+// 
+//
+// Remove the designated detection item from the allowlist.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4353,7 +4641,11 @@ func NewDeleteNetworkFirewallPolicyDetailResponse() (response *DeleteNetworkFire
 }
 
 // DeleteNetworkFirewallPolicyDetail
-// This API is used to create a task to delete a network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create a network policy and delete tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4368,7 +4660,11 @@ func (c *Client) DeleteNetworkFirewallPolicyDetail(request *DeleteNetworkFirewal
 }
 
 // DeleteNetworkFirewallPolicyDetail
-// This API is used to create a task to delete a network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Create a network policy and delete tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4391,6 +4687,70 @@ func (c *Client) DeleteNetworkFirewallPolicyDetailWithContext(ctx context.Contex
     request.SetContext(ctx)
     
     response = NewDeleteNetworkFirewallPolicyDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteRaspRulesRequest() (request *DeleteRaspRulesRequest) {
+    request = &DeleteRaspRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DeleteRaspRules")
+    
+    
+    return
+}
+
+func NewDeleteRaspRulesResponse() (response *DeleteRaspRulesResponse) {
+    response = &DeleteRaspRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteRaspRules
+// Deleting Entries from the Vulnerability Defense Allowlist
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DeleteRaspRules(request *DeleteRaspRulesRequest) (response *DeleteRaspRulesResponse, err error) {
+    return c.DeleteRaspRulesWithContext(context.Background(), request)
+}
+
+// DeleteRaspRules
+// Deleting Entries from the Vulnerability Defense Allowlist
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DeleteRaspRulesWithContext(ctx context.Context, request *DeleteRaspRulesRequest) (response *DeleteRaspRulesResponse, err error) {
+    if request == nil {
+        request = NewDeleteRaspRulesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DeleteRaspRules")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRaspRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRaspRulesResponse()
     err = c.Send(request, response)
     return
 }
@@ -4689,6 +5049,68 @@ func (c *Client) DeleteSearchTemplateWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDeleteVirusWhiteListRuleRequest() (request *DeleteVirusWhiteListRuleRequest) {
+    request = &DeleteVirusWhiteListRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DeleteVirusWhiteListRule")
+    
+    
+    return
+}
+
+func NewDeleteVirusWhiteListRuleResponse() (response *DeleteVirusWhiteListRuleResponse) {
+    response = &DeleteVirusWhiteListRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteVirusWhiteListRule
+// This API is used to delete Trojan allowlist rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DATANOTFOUND = "InvalidParameterValue.DataNotFound"
+func (c *Client) DeleteVirusWhiteListRule(request *DeleteVirusWhiteListRuleRequest) (response *DeleteVirusWhiteListRuleResponse, err error) {
+    return c.DeleteVirusWhiteListRuleWithContext(context.Background(), request)
+}
+
+// DeleteVirusWhiteListRule
+// This API is used to delete Trojan allowlist rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DATANOTFOUND = "InvalidParameterValue.DataNotFound"
+func (c *Client) DeleteVirusWhiteListRuleWithContext(ctx context.Context, request *DeleteVirusWhiteListRuleRequest) (response *DeleteVirusWhiteListRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteVirusWhiteListRuleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DeleteVirusWhiteListRule")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteVirusWhiteListRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteVirusWhiteListRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeABTestConfigRequest() (request *DescribeABTestConfigRequest) {
     request = &DescribeABTestConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4931,76 +5353,6 @@ func (c *Client) DescribeAbnormalProcessEventsWithContext(ctx context.Context, r
     return
 }
 
-func NewDescribeAbnormalProcessEventsExportRequest() (request *DescribeAbnormalProcessEventsExportRequest) {
-    request = &DescribeAbnormalProcessEventsExportRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tcss", APIVersion, "DescribeAbnormalProcessEventsExport")
-    
-    
-    return
-}
-
-func NewDescribeAbnormalProcessEventsExportResponse() (response *DescribeAbnormalProcessEventsExportResponse) {
-    response = &DescribeAbnormalProcessEventsExportResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeAbnormalProcessEventsExport
-// 接口已废弃
-//
-// 
-//
-// This API is used to query and export the list of abnormal process events at runtime.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeAbnormalProcessEventsExport(request *DescribeAbnormalProcessEventsExportRequest) (response *DescribeAbnormalProcessEventsExportResponse, err error) {
-    return c.DescribeAbnormalProcessEventsExportWithContext(context.Background(), request)
-}
-
-// DescribeAbnormalProcessEventsExport
-// 接口已废弃
-//
-// 
-//
-// This API is used to query and export the list of abnormal process events at runtime.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeAbnormalProcessEventsExportWithContext(ctx context.Context, request *DescribeAbnormalProcessEventsExportRequest) (response *DescribeAbnormalProcessEventsExportResponse, err error) {
-    if request == nil {
-        request = NewDescribeAbnormalProcessEventsExportRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeAbnormalProcessEventsExport")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAbnormalProcessEventsExport require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAbnormalProcessEventsExportResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeAbnormalProcessLevelSummaryRequest() (request *DescribeAbnormalProcessLevelSummaryRequest) {
     request = &DescribeAbnormalProcessLevelSummaryRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5183,76 +5535,6 @@ func (c *Client) DescribeAbnormalProcessRulesWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewDescribeAbnormalProcessRulesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeAbnormalProcessRulesExportRequest() (request *DescribeAbnormalProcessRulesExportRequest) {
-    request = &DescribeAbnormalProcessRulesExportRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tcss", APIVersion, "DescribeAbnormalProcessRulesExport")
-    
-    
-    return
-}
-
-func NewDescribeAbnormalProcessRulesExportResponse() (response *DescribeAbnormalProcessRulesExportResponse) {
-    response = &DescribeAbnormalProcessRulesExportResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeAbnormalProcessRulesExport
-// 接口已废弃
-//
-// 
-//
-// This API is used to query and export the list of abnormal process policies at runtime.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeAbnormalProcessRulesExport(request *DescribeAbnormalProcessRulesExportRequest) (response *DescribeAbnormalProcessRulesExportResponse, err error) {
-    return c.DescribeAbnormalProcessRulesExportWithContext(context.Background(), request)
-}
-
-// DescribeAbnormalProcessRulesExport
-// 接口已废弃
-//
-// 
-//
-// This API is used to query and export the list of abnormal process policies at runtime.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeAbnormalProcessRulesExportWithContext(ctx context.Context, request *DescribeAbnormalProcessRulesExportRequest) (response *DescribeAbnormalProcessRulesExportResponse, err error) {
-    if request == nil {
-        request = NewDescribeAbnormalProcessRulesExportRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeAbnormalProcessRulesExport")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAbnormalProcessRulesExport require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAbnormalProcessRulesExportResponse()
     err = c.Send(request, response)
     return
 }
@@ -5569,76 +5851,6 @@ func (c *Client) DescribeAccessControlRulesWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDescribeAccessControlRulesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeAccessControlRulesExportRequest() (request *DescribeAccessControlRulesExportRequest) {
-    request = &DescribeAccessControlRulesExportRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tcss", APIVersion, "DescribeAccessControlRulesExport")
-    
-    
-    return
-}
-
-func NewDescribeAccessControlRulesExportResponse() (response *DescribeAccessControlRulesExportResponse) {
-    response = &DescribeAccessControlRulesExportResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeAccessControlRulesExport
-// 接口已废弃
-//
-// 
-//
-// This API is used to export the list of access control policies at runtime.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeAccessControlRulesExport(request *DescribeAccessControlRulesExportRequest) (response *DescribeAccessControlRulesExportResponse, err error) {
-    return c.DescribeAccessControlRulesExportWithContext(context.Background(), request)
-}
-
-// DescribeAccessControlRulesExport
-// 接口已废弃
-//
-// 
-//
-// This API is used to export the list of access control policies at runtime.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeAccessControlRulesExportWithContext(ctx context.Context, request *DescribeAccessControlRulesExportRequest) (response *DescribeAccessControlRulesExportResponse, err error) {
-    if request == nil {
-        request = NewDescribeAccessControlRulesExportRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeAccessControlRulesExport")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAccessControlRulesExport require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAccessControlRulesExportResponse()
     err = c.Send(request, response)
     return
 }
@@ -6615,6 +6827,7 @@ func NewDescribeAssetImageListResponse() (response *DescribeAssetImageListRespon
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REQUESTTIMEOUT = "InvalidParameter.RequestTimeout"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeAssetImageList(request *DescribeAssetImageListRequest) (response *DescribeAssetImageListResponse, err error) {
     return c.DescribeAssetImageListWithContext(context.Background(), request)
@@ -6627,6 +6840,7 @@ func (c *Client) DescribeAssetImageList(request *DescribeAssetImageListRequest) 
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REQUESTTIMEOUT = "InvalidParameter.RequestTimeout"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeAssetImageListWithContext(ctx context.Context, request *DescribeAssetImageListRequest) (response *DescribeAssetImageListResponse, err error) {
     if request == nil {
@@ -6641,70 +6855,6 @@ func (c *Client) DescribeAssetImageListWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeAssetImageListResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeAssetImageListExportRequest() (request *DescribeAssetImageListExportRequest) {
-    request = &DescribeAssetImageListExportRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tcss", APIVersion, "DescribeAssetImageListExport")
-    
-    
-    return
-}
-
-func NewDescribeAssetImageListExportResponse() (response *DescribeAssetImageListExportResponse) {
-    response = &DescribeAssetImageListExportResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeAssetImageListExport
-// 接口已废弃
-//
-// 
-//
-// This API is used to export the list of images.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeAssetImageListExport(request *DescribeAssetImageListExportRequest) (response *DescribeAssetImageListExportResponse, err error) {
-    return c.DescribeAssetImageListExportWithContext(context.Background(), request)
-}
-
-// DescribeAssetImageListExport
-// 接口已废弃
-//
-// 
-//
-// This API is used to export the list of images.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeAssetImageListExportWithContext(ctx context.Context, request *DescribeAssetImageListExportRequest) (response *DescribeAssetImageListExportResponse, err error) {
-    if request == nil {
-        request = NewDescribeAssetImageListExportRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeAssetImageListExport")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAssetImageListExport require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAssetImageListExportResponse()
     err = c.Send(request, response)
     return
 }
@@ -6842,6 +6992,7 @@ func NewDescribeAssetImageRegistryListResponse() (response *DescribeAssetImageRe
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_REQUESTTIMEOUT = "InvalidParameter.RequestTimeout"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeAssetImageRegistryList(request *DescribeAssetImageRegistryListRequest) (response *DescribeAssetImageRegistryListResponse, err error) {
     return c.DescribeAssetImageRegistryListWithContext(context.Background(), request)
@@ -6853,6 +7004,7 @@ func (c *Client) DescribeAssetImageRegistryList(request *DescribeAssetImageRegis
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_REQUESTTIMEOUT = "InvalidParameter.RequestTimeout"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeAssetImageRegistryListWithContext(ctx context.Context, request *DescribeAssetImageRegistryListRequest) (response *DescribeAssetImageRegistryListResponse, err error) {
     if request == nil {
@@ -9689,68 +9841,6 @@ func (c *Client) DescribeEscapeEventTypeSummaryWithContext(ctx context.Context, 
     return
 }
 
-func NewDescribeEscapeEventsExportRequest() (request *DescribeEscapeEventsExportRequest) {
-    request = &DescribeEscapeEventsExportRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tcss", APIVersion, "DescribeEscapeEventsExport")
-    
-    
-    return
-}
-
-func NewDescribeEscapeEventsExportResponse() (response *DescribeEscapeEventsExportResponse) {
-    response = &DescribeEscapeEventsExportResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeEscapeEventsExport
-// 接口已废弃
-//
-// 
-//
-// This API is used to export the list of container escape events.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INTERNALERROR = "InternalError"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeEscapeEventsExport(request *DescribeEscapeEventsExportRequest) (response *DescribeEscapeEventsExportResponse, err error) {
-    return c.DescribeEscapeEventsExportWithContext(context.Background(), request)
-}
-
-// DescribeEscapeEventsExport
-// 接口已废弃
-//
-// 
-//
-// This API is used to export the list of container escape events.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INTERNALERROR = "InternalError"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeEscapeEventsExportWithContext(ctx context.Context, request *DescribeEscapeEventsExportRequest) (response *DescribeEscapeEventsExportResponse, err error) {
-    if request == nil {
-        request = NewDescribeEscapeEventsExportRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeEscapeEventsExport")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeEscapeEventsExport require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeEscapeEventsExportResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeEscapeRuleInfoRequest() (request *DescribeEscapeRuleInfoRequest) {
     request = &DescribeEscapeRuleInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -10045,7 +10135,7 @@ func NewDescribeExportJobResultResponse() (response *DescribeExportJobResultResp
 }
 
 // DescribeExportJobResult
-// This API is used to query the result of an export task.
+// Query the progress of the export interface
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -10055,7 +10145,7 @@ func (c *Client) DescribeExportJobResult(request *DescribeExportJobResultRequest
 }
 
 // DescribeExportJobResult
-// This API is used to query the result of an export task.
+// Query the progress of the export interface
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -10385,6 +10475,410 @@ func (c *Client) DescribeImageComponentListWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeImageDenyEventDetailRequest() (request *DescribeImageDenyEventDetailRequest) {
+    request = &DescribeImageDenyEventDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeImageDenyEventDetail")
+    
+    
+    return
+}
+
+func NewDescribeImageDenyEventDetailResponse() (response *DescribeImageDenyEventDetailResponse) {
+    response = &DescribeImageDenyEventDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeImageDenyEventDetail
+// Query image interception event details.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeImageDenyEventDetail(request *DescribeImageDenyEventDetailRequest) (response *DescribeImageDenyEventDetailResponse, err error) {
+    return c.DescribeImageDenyEventDetailWithContext(context.Background(), request)
+}
+
+// DescribeImageDenyEventDetail
+// Query image interception event details.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeImageDenyEventDetailWithContext(ctx context.Context, request *DescribeImageDenyEventDetailRequest) (response *DescribeImageDenyEventDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeImageDenyEventDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeImageDenyEventDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImageDenyEventDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImageDenyEventDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeImageDenyEventListRequest() (request *DescribeImageDenyEventListRequest) {
+    request = &DescribeImageDenyEventListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeImageDenyEventList")
+    
+    
+    return
+}
+
+func NewDescribeImageDenyEventListResponse() (response *DescribeImageDenyEventListResponse) {
+    response = &DescribeImageDenyEventListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeImageDenyEventList
+// Query the list of image interception events.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeImageDenyEventList(request *DescribeImageDenyEventListRequest) (response *DescribeImageDenyEventListResponse, err error) {
+    return c.DescribeImageDenyEventListWithContext(context.Background(), request)
+}
+
+// DescribeImageDenyEventList
+// Query the list of image interception events.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeImageDenyEventListWithContext(ctx context.Context, request *DescribeImageDenyEventListRequest) (response *DescribeImageDenyEventListResponse, err error) {
+    if request == nil {
+        request = NewDescribeImageDenyEventListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeImageDenyEventList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImageDenyEventList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImageDenyEventListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeImageDenyEventTendencyRequest() (request *DescribeImageDenyEventTendencyRequest) {
+    request = &DescribeImageDenyEventTendencyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeImageDenyEventTendency")
+    
+    
+    return
+}
+
+func NewDescribeImageDenyEventTendencyResponse() (response *DescribeImageDenyEventTendencyResponse) {
+    response = &DescribeImageDenyEventTendencyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeImageDenyEventTendency
+// Query the trend of image interception events.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeImageDenyEventTendency(request *DescribeImageDenyEventTendencyRequest) (response *DescribeImageDenyEventTendencyResponse, err error) {
+    return c.DescribeImageDenyEventTendencyWithContext(context.Background(), request)
+}
+
+// DescribeImageDenyEventTendency
+// Query the trend of image interception events.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeImageDenyEventTendencyWithContext(ctx context.Context, request *DescribeImageDenyEventTendencyRequest) (response *DescribeImageDenyEventTendencyResponse, err error) {
+    if request == nil {
+        request = NewDescribeImageDenyEventTendencyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeImageDenyEventTendency")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImageDenyEventTendency require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImageDenyEventTendencyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeImageDenyRuleDetailRequest() (request *DescribeImageDenyRuleDetailRequest) {
+    request = &DescribeImageDenyRuleDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeImageDenyRuleDetail")
+    
+    
+    return
+}
+
+func NewDescribeImageDenyRuleDetailResponse() (response *DescribeImageDenyRuleDetailResponse) {
+    response = &DescribeImageDenyRuleDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeImageDenyRuleDetail
+// Query image interception rule details.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeImageDenyRuleDetail(request *DescribeImageDenyRuleDetailRequest) (response *DescribeImageDenyRuleDetailResponse, err error) {
+    return c.DescribeImageDenyRuleDetailWithContext(context.Background(), request)
+}
+
+// DescribeImageDenyRuleDetail
+// Query image interception rule details.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeImageDenyRuleDetailWithContext(ctx context.Context, request *DescribeImageDenyRuleDetailRequest) (response *DescribeImageDenyRuleDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeImageDenyRuleDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeImageDenyRuleDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImageDenyRuleDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImageDenyRuleDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeImageDenyRuleListRequest() (request *DescribeImageDenyRuleListRequest) {
+    request = &DescribeImageDenyRuleListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeImageDenyRuleList")
+    
+    
+    return
+}
+
+func NewDescribeImageDenyRuleListResponse() (response *DescribeImageDenyRuleListResponse) {
+    response = &DescribeImageDenyRuleListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeImageDenyRuleList
+// Query the image interception rule list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeImageDenyRuleList(request *DescribeImageDenyRuleListRequest) (response *DescribeImageDenyRuleListResponse, err error) {
+    return c.DescribeImageDenyRuleListWithContext(context.Background(), request)
+}
+
+// DescribeImageDenyRuleList
+// Query the image interception rule list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeImageDenyRuleListWithContext(ctx context.Context, request *DescribeImageDenyRuleListRequest) (response *DescribeImageDenyRuleListResponse, err error) {
+    if request == nil {
+        request = NewDescribeImageDenyRuleListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeImageDenyRuleList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImageDenyRuleList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImageDenyRuleListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeImageDenyRuleSummaryRequest() (request *DescribeImageDenyRuleSummaryRequest) {
+    request = &DescribeImageDenyRuleSummaryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeImageDenyRuleSummary")
+    
+    
+    return
+}
+
+func NewDescribeImageDenyRuleSummaryResponse() (response *DescribeImageDenyRuleSummaryResponse) {
+    response = &DescribeImageDenyRuleSummaryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeImageDenyRuleSummary
+// Query image interception rule statistics.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeImageDenyRuleSummary(request *DescribeImageDenyRuleSummaryRequest) (response *DescribeImageDenyRuleSummaryResponse, err error) {
+    return c.DescribeImageDenyRuleSummaryWithContext(context.Background(), request)
+}
+
+// DescribeImageDenyRuleSummary
+// Query image interception rule statistics.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeImageDenyRuleSummaryWithContext(ctx context.Context, request *DescribeImageDenyRuleSummaryRequest) (response *DescribeImageDenyRuleSummaryResponse, err error) {
+    if request == nil {
+        request = NewDescribeImageDenyRuleSummaryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeImageDenyRuleSummary")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImageDenyRuleSummary require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImageDenyRuleSummaryResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeImageRegistryNamespaceListRequest() (request *DescribeImageRegistryNamespaceListRequest) {
     request = &DescribeImageRegistryNamespaceListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -10409,15 +10903,15 @@ func NewDescribeImageRegistryNamespaceListResponse() (response *DescribeImageReg
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
-//  INTERNALERROR_MAINDBFAIL = "InternalError.MainDBFail"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeImageRegistryNamespaceList(request *DescribeImageRegistryNamespaceListRequest) (response *DescribeImageRegistryNamespaceListResponse, err error) {
     return c.DescribeImageRegistryNamespaceListWithContext(context.Background(), request)
 }
@@ -10427,15 +10921,15 @@ func (c *Client) DescribeImageRegistryNamespaceList(request *DescribeImageRegist
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
-//  INTERNALERROR_MAINDBFAIL = "InternalError.MainDBFail"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeImageRegistryNamespaceListWithContext(ctx context.Context, request *DescribeImageRegistryNamespaceListRequest) (response *DescribeImageRegistryNamespaceListResponse, err error) {
     if request == nil {
         request = NewDescribeImageRegistryNamespaceListRequest()
@@ -10957,7 +11451,7 @@ func NewDescribeK8sApiAbnormalRuleListResponse() (response *DescribeK8sApiAbnorm
 }
 
 // DescribeK8sApiAbnormalRuleList
-// This API is used to the K8sApi abnormal request rule list.
+// This API is used to query the list of abnormal request rules for k8sapi. It supports fuzzy search by cluster name (ClusterName) and Cluster ID, with cluster rules (is_all=1) always returned. The response includes newly-added RuleInfoList (sub-rule content), RuleActions (deduplicated execution action list), and the EffectAllCluster field.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -10967,7 +11461,7 @@ func (c *Client) DescribeK8sApiAbnormalRuleList(request *DescribeK8sApiAbnormalR
 }
 
 // DescribeK8sApiAbnormalRuleList
-// This API is used to the K8sApi abnormal request rule list.
+// This API is used to query the list of abnormal request rules for k8sapi. It supports fuzzy search by cluster name (ClusterName) and Cluster ID, with cluster rules (is_all=1) always returned. The response includes newly-added RuleInfoList (sub-rule content), RuleActions (deduplicated execution action list), and the EffectAllCluster field.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -11199,6 +11693,138 @@ func (c *Client) DescribeLogStorageStatisticWithContext(ctx context.Context, req
     return
 }
 
+func NewDescribeMaliciousConnectionBlackListRequest() (request *DescribeMaliciousConnectionBlackListRequest) {
+    request = &DescribeMaliciousConnectionBlackListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeMaliciousConnectionBlackList")
+    
+    
+    return
+}
+
+func NewDescribeMaliciousConnectionBlackListResponse() (response *DescribeMaliciousConnectionBlackListResponse) {
+    response = &DescribeMaliciousConnectionBlackListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMaliciousConnectionBlackList
+// Query the malicious external connection blocklist.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_MAINDBFAIL = "InternalError.MainDBFail"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeMaliciousConnectionBlackList(request *DescribeMaliciousConnectionBlackListRequest) (response *DescribeMaliciousConnectionBlackListResponse, err error) {
+    return c.DescribeMaliciousConnectionBlackListWithContext(context.Background(), request)
+}
+
+// DescribeMaliciousConnectionBlackList
+// Query the malicious external connection blocklist.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_MAINDBFAIL = "InternalError.MainDBFail"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeMaliciousConnectionBlackListWithContext(ctx context.Context, request *DescribeMaliciousConnectionBlackListRequest) (response *DescribeMaliciousConnectionBlackListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMaliciousConnectionBlackListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeMaliciousConnectionBlackList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMaliciousConnectionBlackList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMaliciousConnectionBlackListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMaliciousConnectionWhiteListRequest() (request *DescribeMaliciousConnectionWhiteListRequest) {
+    request = &DescribeMaliciousConnectionWhiteListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeMaliciousConnectionWhiteList")
+    
+    
+    return
+}
+
+func NewDescribeMaliciousConnectionWhiteListResponse() (response *DescribeMaliciousConnectionWhiteListResponse) {
+    response = &DescribeMaliciousConnectionWhiteListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMaliciousConnectionWhiteList
+// Query the allowlist for malicious external connections.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_MAINDBFAIL = "InternalError.MainDBFail"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeMaliciousConnectionWhiteList(request *DescribeMaliciousConnectionWhiteListRequest) (response *DescribeMaliciousConnectionWhiteListResponse, err error) {
+    return c.DescribeMaliciousConnectionWhiteListWithContext(context.Background(), request)
+}
+
+// DescribeMaliciousConnectionWhiteList
+// Query the allowlist for malicious external connections.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_MAINDBFAIL = "InternalError.MainDBFail"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeMaliciousConnectionWhiteListWithContext(ctx context.Context, request *DescribeMaliciousConnectionWhiteListRequest) (response *DescribeMaliciousConnectionWhiteListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMaliciousConnectionWhiteListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeMaliciousConnectionWhiteList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMaliciousConnectionWhiteList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMaliciousConnectionWhiteListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeNetworkFirewallAuditRecordRequest() (request *DescribeNetworkFirewallAuditRecordRequest) {
     request = &DescribeNetworkFirewallAuditRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -11219,7 +11845,11 @@ func NewDescribeNetworkFirewallAuditRecordResponse() (response *DescribeNetworkF
 }
 
 // DescribeNetworkFirewallAuditRecord
-// This API is used to query the list of cluster policy audits.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Query the cluster policy audit list.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11234,7 +11864,11 @@ func (c *Client) DescribeNetworkFirewallAuditRecord(request *DescribeNetworkFire
 }
 
 // DescribeNetworkFirewallAuditRecord
-// This API is used to query the list of cluster policy audits.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Query the cluster policy audit list.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11281,7 +11915,7 @@ func NewDescribeNetworkFirewallClusterListResponse() (response *DescribeNetworkF
 }
 
 // DescribeNetworkFirewallClusterList
-// This API is used to query the list of clusters.
+// Query the network firewall cluster policy list.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11296,7 +11930,7 @@ func (c *Client) DescribeNetworkFirewallClusterList(request *DescribeNetworkFire
 }
 
 // DescribeNetworkFirewallClusterList
-// This API is used to query the list of clusters.
+// Query the network firewall cluster policy list.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11343,7 +11977,11 @@ func NewDescribeNetworkFirewallClusterRefreshStatusResponse() (response *Describ
 }
 
 // DescribeNetworkFirewallClusterRefreshStatus
-// This API is used to query the progress of the asset query task in the container network.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Query the asset task progress for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11358,7 +11996,11 @@ func (c *Client) DescribeNetworkFirewallClusterRefreshStatus(request *DescribeNe
 }
 
 // DescribeNetworkFirewallClusterRefreshStatus
-// This API is used to query the progress of the asset query task in the container network.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Query the asset task progress for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11405,7 +12047,11 @@ func NewDescribeNetworkFirewallNamespaceLabelListResponse() (response *DescribeN
 }
 
 // DescribeNetworkFirewallNamespaceLabelList
-// This API is used to query the list of cluster network namespace labels.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Query the cluster network space tag list.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11420,7 +12066,11 @@ func (c *Client) DescribeNetworkFirewallNamespaceLabelList(request *DescribeNetw
 }
 
 // DescribeNetworkFirewallNamespaceLabelList
-// This API is used to query the list of cluster network namespace labels.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Query the cluster network space tag list.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11467,7 +12117,11 @@ func NewDescribeNetworkFirewallPodLabelsListResponse() (response *DescribeNetwor
 }
 
 // DescribeNetworkFirewallPodLabelsList
-// This API is used to query cluster network Pod labels.
+// deprecated pending reconstruction
+//
+// 
+//
+// Query the cluster network pod tags.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11482,7 +12136,11 @@ func (c *Client) DescribeNetworkFirewallPodLabelsList(request *DescribeNetworkFi
 }
 
 // DescribeNetworkFirewallPodLabelsList
-// This API is used to query cluster network Pod labels.
+// deprecated pending reconstruction
+//
+// 
+//
+// Query the cluster network pod tags.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11529,7 +12187,11 @@ func NewDescribeNetworkFirewallPolicyDetailResponse() (response *DescribeNetwork
 }
 
 // DescribeNetworkFirewallPolicyDetail
-// This API is used to view the details of a policy in the container network cluster.
+// deprecated pending reconstruction
+//
+// 
+//
+// View policy details of clusters for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11544,7 +12206,11 @@ func (c *Client) DescribeNetworkFirewallPolicyDetail(request *DescribeNetworkFir
 }
 
 // DescribeNetworkFirewallPolicyDetail
-// This API is used to view the details of a policy in the container network cluster.
+// deprecated pending reconstruction
+//
+// 
+//
+// View policy details of clusters for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11591,7 +12257,11 @@ func NewDescribeNetworkFirewallPolicyDiscoverResponse() (response *DescribeNetwo
 }
 
 // DescribeNetworkFirewallPolicyDiscover
-// This API is used to query the progress of a network policy sync task in the container network.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Query the auto-discovery task process of the network policy for the network policy.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11606,7 +12276,11 @@ func (c *Client) DescribeNetworkFirewallPolicyDiscover(request *DescribeNetworkF
 }
 
 // DescribeNetworkFirewallPolicyDiscover
-// This API is used to query the progress of a network policy sync task in the container network.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Query the auto-discovery task process of the network policy for the network policy.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11653,7 +12327,11 @@ func NewDescribeNetworkFirewallPolicyListResponse() (response *DescribeNetworkFi
 }
 
 // DescribeNetworkFirewallPolicyList
-// This API is used to query the list of cluster network policies.
+// deprecated pending reconstruction
+//
+// 
+//
+// Query the cluster network policy list.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11668,7 +12346,11 @@ func (c *Client) DescribeNetworkFirewallPolicyList(request *DescribeNetworkFirew
 }
 
 // DescribeNetworkFirewallPolicyList
-// This API is used to query the list of cluster network policies.
+// deprecated pending reconstruction
+//
+// 
+//
+// Query the cluster network policy list.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11715,7 +12397,11 @@ func NewDescribeNetworkFirewallPolicyStatusResponse() (response *DescribeNetwork
 }
 
 // DescribeNetworkFirewallPolicyStatus
-// This API is used to query the execution status of a network policy in the container network.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Query the network policy execution status for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11730,7 +12416,11 @@ func (c *Client) DescribeNetworkFirewallPolicyStatus(request *DescribeNetworkFir
 }
 
 // DescribeNetworkFirewallPolicyStatus
-// This API is used to query the execution status of a network policy in the container network.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Query the network policy execution status for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11777,7 +12467,11 @@ func NewDescribeNetworkFirewallPolicyYamlDetailResponse() (response *DescribeNet
 }
 
 // DescribeNetworkFirewallPolicyYamlDetail
-// This API is used to view the details of a YAML network policy in the container network cluster.
+// deprecated pending reconstruction
+//
+// 
+//
+// View YAML network policy details of clusters for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11792,7 +12486,11 @@ func (c *Client) DescribeNetworkFirewallPolicyYamlDetail(request *DescribeNetwor
 }
 
 // DescribeNetworkFirewallPolicyYamlDetail
-// This API is used to view the details of a YAML network policy in the container network cluster.
+// deprecated pending reconstruction
+//
+// 
+//
+// View YAML network policy details of clusters for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -12149,6 +12847,134 @@ func (c *Client) DescribePurchaseStateInfoWithContext(ctx context.Context, reque
     return
 }
 
+func NewDescribeRaspRuleVulsRequest() (request *DescribeRaspRuleVulsRequest) {
+    request = &DescribeRaspRuleVulsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeRaspRuleVuls")
+    
+    
+    return
+}
+
+func NewDescribeRaspRuleVulsResponse() (response *DescribeRaspRuleVulsResponse) {
+    response = &DescribeRaspRuleVulsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRaspRuleVuls
+// Retrieve the list of vulnerabilities in the Vulnerability Defense Allowlist
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeRaspRuleVuls(request *DescribeRaspRuleVulsRequest) (response *DescribeRaspRuleVulsResponse, err error) {
+    return c.DescribeRaspRuleVulsWithContext(context.Background(), request)
+}
+
+// DescribeRaspRuleVuls
+// Retrieve the list of vulnerabilities in the Vulnerability Defense Allowlist
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeRaspRuleVulsWithContext(ctx context.Context, request *DescribeRaspRuleVulsRequest) (response *DescribeRaspRuleVulsResponse, err error) {
+    if request == nil {
+        request = NewDescribeRaspRuleVulsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeRaspRuleVuls")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRaspRuleVuls require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRaspRuleVulsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRaspRulesRequest() (request *DescribeRaspRulesRequest) {
+    request = &DescribeRaspRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeRaspRules")
+    
+    
+    return
+}
+
+func NewDescribeRaspRulesResponse() (response *DescribeRaspRulesResponse) {
+    response = &DescribeRaspRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRaspRules
+// Query the list of vulnerabilities that can be defensed.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeRaspRules(request *DescribeRaspRulesRequest) (response *DescribeRaspRulesResponse, err error) {
+    return c.DescribeRaspRulesWithContext(context.Background(), request)
+}
+
+// DescribeRaspRules
+// Query the list of vulnerabilities that can be defensed.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeRaspRulesWithContext(ctx context.Context, request *DescribeRaspRulesRequest) (response *DescribeRaspRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeRaspRulesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeRaspRules")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRaspRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRaspRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRefreshTaskRequest() (request *DescribeRefreshTaskRequest) {
     request = &DescribeRefreshTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -12389,6 +13215,110 @@ func (c *Client) DescribeReverseShellEventsExportWithContext(ctx context.Context
     request.SetContext(ctx)
     
     response = NewDescribeReverseShellEventsExportResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeReverseShellRegexpWhiteListRequest() (request *DescribeReverseShellRegexpWhiteListRequest) {
+    request = &DescribeReverseShellRegexpWhiteListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeReverseShellRegexpWhiteList")
+    
+    
+    return
+}
+
+func NewDescribeReverseShellRegexpWhiteListResponse() (response *DescribeReverseShellRegexpWhiteListResponse) {
+    response = &DescribeReverseShellRegexpWhiteListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeReverseShellRegexpWhiteList
+// Query the reverse shell regular expression allowlist.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeReverseShellRegexpWhiteList(request *DescribeReverseShellRegexpWhiteListRequest) (response *DescribeReverseShellRegexpWhiteListResponse, err error) {
+    return c.DescribeReverseShellRegexpWhiteListWithContext(context.Background(), request)
+}
+
+// DescribeReverseShellRegexpWhiteList
+// Query the reverse shell regular expression allowlist.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeReverseShellRegexpWhiteListWithContext(ctx context.Context, request *DescribeReverseShellRegexpWhiteListRequest) (response *DescribeReverseShellRegexpWhiteListResponse, err error) {
+    if request == nil {
+        request = NewDescribeReverseShellRegexpWhiteListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeReverseShellRegexpWhiteList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeReverseShellRegexpWhiteList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeReverseShellRegexpWhiteListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeReverseShellRegexpWhiteListInfoRequest() (request *DescribeReverseShellRegexpWhiteListInfoRequest) {
+    request = &DescribeReverseShellRegexpWhiteListInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeReverseShellRegexpWhiteListInfo")
+    
+    
+    return
+}
+
+func NewDescribeReverseShellRegexpWhiteListInfoResponse() (response *DescribeReverseShellRegexpWhiteListInfoResponse) {
+    response = &DescribeReverseShellRegexpWhiteListInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeReverseShellRegexpWhiteListInfo
+// Query details of the reverse shell regular expression allowlist.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeReverseShellRegexpWhiteListInfo(request *DescribeReverseShellRegexpWhiteListInfoRequest) (response *DescribeReverseShellRegexpWhiteListInfoResponse, err error) {
+    return c.DescribeReverseShellRegexpWhiteListInfoWithContext(context.Background(), request)
+}
+
+// DescribeReverseShellRegexpWhiteListInfo
+// Query details of the reverse shell regular expression allowlist.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeReverseShellRegexpWhiteListInfoWithContext(ctx context.Context, request *DescribeReverseShellRegexpWhiteListInfoRequest) (response *DescribeReverseShellRegexpWhiteListInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeReverseShellRegexpWhiteListInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeReverseShellRegexpWhiteListInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeReverseShellRegexpWhiteListInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeReverseShellRegexpWhiteListInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -14687,6 +15617,60 @@ func (c *Client) DescribeVirusManualScanEstimateTimeoutWithContext(ctx context.C
     return
 }
 
+func NewDescribeVirusMonitorConfigRequest() (request *DescribeVirusMonitorConfigRequest) {
+    request = &DescribeVirusMonitorConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeVirusMonitorConfig")
+    
+    
+    return
+}
+
+func NewDescribeVirusMonitorConfigResponse() (response *DescribeVirusMonitorConfigResponse) {
+    response = &DescribeVirusMonitorConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeVirusMonitorConfig
+// Query real-time monitoring settings of file scan at runtime.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeVirusMonitorConfig(request *DescribeVirusMonitorConfigRequest) (response *DescribeVirusMonitorConfigResponse, err error) {
+    return c.DescribeVirusMonitorConfigWithContext(context.Background(), request)
+}
+
+// DescribeVirusMonitorConfig
+// Query real-time monitoring settings of file scan at runtime.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeVirusMonitorConfigWithContext(ctx context.Context, request *DescribeVirusMonitorConfigRequest) (response *DescribeVirusMonitorConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeVirusMonitorConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeVirusMonitorConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVirusMonitorConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeVirusMonitorConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeVirusMonitorSettingRequest() (request *DescribeVirusMonitorSettingRequest) {
     request = &DescribeVirusMonitorSettingRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -14793,6 +15777,60 @@ func (c *Client) DescribeVirusSampleDownloadUrlWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewDescribeVirusSampleDownloadUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeVirusScanConfigRequest() (request *DescribeVirusScanConfigRequest) {
+    request = &DescribeVirusScanConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeVirusScanConfig")
+    
+    
+    return
+}
+
+func NewDescribeVirusScanConfigResponse() (response *DescribeVirusScanConfigResponse) {
+    response = &DescribeVirusScanConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeVirusScanConfig
+// Query new settings of file scan at runtime.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeVirusScanConfig(request *DescribeVirusScanConfigRequest) (response *DescribeVirusScanConfigResponse, err error) {
+    return c.DescribeVirusScanConfigWithContext(context.Background(), request)
+}
+
+// DescribeVirusScanConfig
+// Query new settings of file scan at runtime.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeVirusScanConfigWithContext(ctx context.Context, request *DescribeVirusScanConfigRequest) (response *DescribeVirusScanConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeVirusScanConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeVirusScanConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVirusScanConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeVirusScanConfigResponse()
     err = c.Send(request, response)
     return
 }
@@ -15065,6 +16103,68 @@ func (c *Client) DescribeVirusTaskListWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeVirusTaskListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeVirusWhiteListRulesRequest() (request *DescribeVirusWhiteListRulesRequest) {
+    request = &DescribeVirusWhiteListRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeVirusWhiteListRules")
+    
+    
+    return
+}
+
+func NewDescribeVirusWhiteListRulesResponse() (response *DescribeVirusWhiteListRulesResponse) {
+    response = &DescribeVirusWhiteListRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeVirusWhiteListRules
+// This API is used to query the Trojan allowlist rule list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DATANOTFOUND = "InvalidParameterValue.DataNotFound"
+func (c *Client) DescribeVirusWhiteListRules(request *DescribeVirusWhiteListRulesRequest) (response *DescribeVirusWhiteListRulesResponse, err error) {
+    return c.DescribeVirusWhiteListRulesWithContext(context.Background(), request)
+}
+
+// DescribeVirusWhiteListRules
+// This API is used to query the Trojan allowlist rule list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DATANOTFOUND = "InvalidParameterValue.DataNotFound"
+func (c *Client) DescribeVirusWhiteListRulesWithContext(ctx context.Context, request *DescribeVirusWhiteListRulesRequest) (response *DescribeVirusWhiteListRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeVirusWhiteListRulesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "DescribeVirusWhiteListRules")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVirusWhiteListRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeVirusWhiteListRulesResponse()
     err = c.Send(request, response)
     return
 }
@@ -17265,6 +18365,58 @@ func (c *Client) ModifyContainerNetStatusWithContext(ctx context.Context, reques
     return
 }
 
+func NewModifyDefendStatusRequest() (request *ModifyDefendStatusRequest) {
+    request = &ModifyDefendStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "ModifyDefendStatus")
+    
+    
+    return
+}
+
+func NewModifyDefendStatusResponse() (response *ModifyDefendStatusResponse) {
+    response = &ModifyDefendStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDefendStatus
+// This API is used to modify the protection status.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ModifyDefendStatus(request *ModifyDefendStatusRequest) (response *ModifyDefendStatusResponse, err error) {
+    return c.ModifyDefendStatusWithContext(context.Background(), request)
+}
+
+// ModifyDefendStatus
+// This API is used to modify the protection status.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ModifyDefendStatusWithContext(ctx context.Context, request *ModifyDefendStatusRequest) (response *ModifyDefendStatusResponse, err error) {
+    if request == nil {
+        request = NewModifyDefendStatusRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "ModifyDefendStatus")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDefendStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDefendStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyEscapeEventStatusRequest() (request *ModifyEscapeEventStatusRequest) {
     request = &ModifyEscapeEventStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -17591,7 +18743,7 @@ func NewModifyK8sApiAbnormalRuleInfoResponse() (response *ModifyK8sApiAbnormalRu
 }
 
 // ModifyK8sApiAbnormalRuleInfo
-// This API is used to modify the information of K8sApi abnormal rules.
+// Modify the exception rule info of k8sapi. The Action in RuleInfoList only supports RULE_MODE_ALERT and no longer supports RULE_MODE_RELEASE/PASS.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -17601,7 +18753,7 @@ func (c *Client) ModifyK8sApiAbnormalRuleInfo(request *ModifyK8sApiAbnormalRuleI
 }
 
 // ModifyK8sApiAbnormalRuleInfo
-// This API is used to modify the information of K8sApi abnormal rules.
+// Modify the exception rule info of k8sapi. The Action in RuleInfoList only supports RULE_MODE_ALERT and no longer supports RULE_MODE_RELEASE/PASS.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -17675,6 +18827,70 @@ func (c *Client) ModifyK8sApiAbnormalRuleStatusWithContext(ctx context.Context, 
     return
 }
 
+func NewModifyRaspRulesRequest() (request *ModifyRaspRulesRequest) {
+    request = &ModifyRaspRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "ModifyRaspRules")
+    
+    
+    return
+}
+
+func NewModifyRaspRulesResponse() (response *ModifyRaspRulesResponse) {
+    response = &ModifyRaspRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyRaspRules
+// Edit or create a java Memory Trojan allowlist
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyRaspRules(request *ModifyRaspRulesRequest) (response *ModifyRaspRulesResponse, err error) {
+    return c.ModifyRaspRulesWithContext(context.Background(), request)
+}
+
+// ModifyRaspRules
+// Edit or create a java Memory Trojan allowlist
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyRaspRulesWithContext(ctx context.Context, request *ModifyRaspRulesRequest) (response *ModifyRaspRulesResponse, err error) {
+    if request == nil {
+        request = NewModifyRaspRulesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "ModifyRaspRules")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRaspRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRaspRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyReverseShellStatusRequest() (request *ModifyReverseShellStatusRequest) {
     request = &ModifyReverseShellStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -17733,6 +18949,80 @@ func (c *Client) ModifyReverseShellStatusWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewModifyReverseShellStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyRiskDnsEventStatusRequest() (request *ModifyRiskDnsEventStatusRequest) {
+    request = &ModifyRiskDnsEventStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "ModifyRiskDnsEventStatus")
+    
+    
+    return
+}
+
+func NewModifyRiskDnsEventStatusResponse() (response *ModifyRiskDnsEventStatusResponse) {
+    response = &ModifyRiskDnsEventStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyRiskDnsEventStatus
+// Edit the malicious request event status.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRIPNOVALID = "InvalidParameter.ErrIpNoValid"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_IPNOVALID = "InvalidParameter.IpNoValid"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyRiskDnsEventStatus(request *ModifyRiskDnsEventStatusRequest) (response *ModifyRiskDnsEventStatusResponse, err error) {
+    return c.ModifyRiskDnsEventStatusWithContext(context.Background(), request)
+}
+
+// ModifyRiskDnsEventStatus
+// Edit the malicious request event status.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ERRIPNOVALID = "InvalidParameter.ErrIpNoValid"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_IPNOVALID = "InvalidParameter.IpNoValid"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyRiskDnsEventStatusWithContext(ctx context.Context, request *ModifyRiskDnsEventStatusRequest) (response *ModifyRiskDnsEventStatusResponse, err error) {
+    if request == nil {
+        request = NewModifyRiskDnsEventStatusRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "ModifyRiskDnsEventStatus")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRiskDnsEventStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRiskDnsEventStatusResponse()
     err = c.Send(request, response)
     return
 }
@@ -19359,6 +20649,58 @@ func (c *Client) SyncAssetImageRegistryAssetWithContext(ctx context.Context, req
     return
 }
 
+func NewUninstallClusterContainerSecurityRequest() (request *UninstallClusterContainerSecurityRequest) {
+    request = &UninstallClusterContainerSecurityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "UninstallClusterContainerSecurity")
+    
+    
+    return
+}
+
+func NewUninstallClusterContainerSecurityResponse() (response *UninstallClusterContainerSecurityResponse) {
+    response = &UninstallClusterContainerSecurityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UninstallClusterContainerSecurity
+// Uninstall cluster container security.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UninstallClusterContainerSecurity(request *UninstallClusterContainerSecurityRequest) (response *UninstallClusterContainerSecurityResponse, err error) {
+    return c.UninstallClusterContainerSecurityWithContext(context.Background(), request)
+}
+
+// UninstallClusterContainerSecurity
+// Uninstall cluster container security.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UninstallClusterContainerSecurityWithContext(ctx context.Context, request *UninstallClusterContainerSecurityRequest) (response *UninstallClusterContainerSecurityResponse, err error) {
+    if request == nil {
+        request = NewUninstallClusterContainerSecurityRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcss", APIVersion, "UninstallClusterContainerSecurity")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UninstallClusterContainerSecurity require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUninstallClusterContainerSecurityResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateAndPublishNetworkFirewallPolicyDetailRequest() (request *UpdateAndPublishNetworkFirewallPolicyDetailRequest) {
     request = &UpdateAndPublishNetworkFirewallPolicyDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -19379,7 +20721,11 @@ func NewUpdateAndPublishNetworkFirewallPolicyDetailResponse() (response *UpdateA
 }
 
 // UpdateAndPublishNetworkFirewallPolicyDetail
-// This API is used to create a task to update and publish a network policy in the container network.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Create a network policy and update and distribute tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -19394,7 +20740,11 @@ func (c *Client) UpdateAndPublishNetworkFirewallPolicyDetail(request *UpdateAndP
 }
 
 // UpdateAndPublishNetworkFirewallPolicyDetail
-// This API is used to create a task to update and publish a network policy in the container network.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Create a network policy and update and distribute tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -19441,7 +20791,11 @@ func NewUpdateAndPublishNetworkFirewallPolicyYamlDetailResponse() (response *Upd
 }
 
 // UpdateAndPublishNetworkFirewallPolicyYamlDetail
-// This API is used to create a task to update and publish a YAML network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Update the YAML network policy and distribute tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -19456,7 +20810,11 @@ func (c *Client) UpdateAndPublishNetworkFirewallPolicyYamlDetail(request *Update
 }
 
 // UpdateAndPublishNetworkFirewallPolicyYamlDetail
-// This API is used to create a task to update and publish a YAML network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Update the YAML network policy and distribute tasks for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -19621,7 +20979,11 @@ func NewUpdateNetworkFirewallPolicyDetailResponse() (response *UpdateNetworkFire
 }
 
 // UpdateNetworkFirewallPolicyDetail
-// This API is used to create a task to update a network policy in the container network.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Create a network policy update task for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -19636,7 +20998,11 @@ func (c *Client) UpdateNetworkFirewallPolicyDetail(request *UpdateNetworkFirewal
 }
 
 // UpdateNetworkFirewallPolicyDetail
-// This API is used to create a task to update a network policy in the container network.
+// This feature is deprecated pending tripartite reconstruction
+//
+// 
+//
+// Create a network policy update task for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -19683,7 +21049,11 @@ func NewUpdateNetworkFirewallPolicyYamlDetailResponse() (response *UpdateNetwork
 }
 
 // UpdateNetworkFirewallPolicyYamlDetail
-// This API is used to create a task to update a YAML network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Update the YAML network policy task for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -19698,7 +21068,11 @@ func (c *Client) UpdateNetworkFirewallPolicyYamlDetail(request *UpdateNetworkFir
 }
 
 // UpdateNetworkFirewallPolicyYamlDetail
-// This API is used to create a task to update a YAML network policy in the container network.
+// deprecated pending reconstruction
+//
+// 
+//
+// Update the YAML network policy task for the container network.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"

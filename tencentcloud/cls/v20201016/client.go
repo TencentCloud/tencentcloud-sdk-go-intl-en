@@ -167,6 +167,132 @@ func (c *Client) ApplyConfigToMachineGroupWithContext(ctx context.Context, reque
     return
 }
 
+func NewCancelRebuildIndexTaskRequest() (request *CancelRebuildIndexTaskRequest) {
+    request = &CancelRebuildIndexTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CancelRebuildIndexTask")
+    
+    
+    return
+}
+
+func NewCancelRebuildIndexTaskResponse() (response *CancelRebuildIndexTaskResponse) {
+    response = &CancelRebuildIndexTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CancelRebuildIndexTask
+// This API is used to cancel creating a reindexing task.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CancelRebuildIndexTask(request *CancelRebuildIndexTaskRequest) (response *CancelRebuildIndexTaskResponse, err error) {
+    return c.CancelRebuildIndexTaskWithContext(context.Background(), request)
+}
+
+// CancelRebuildIndexTask
+// This API is used to cancel creating a reindexing task.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CancelRebuildIndexTaskWithContext(ctx context.Context, request *CancelRebuildIndexTaskRequest) (response *CancelRebuildIndexTaskResponse, err error) {
+    if request == nil {
+        request = NewCancelRebuildIndexTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CancelRebuildIndexTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CancelRebuildIndexTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCancelRebuildIndexTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewChatCompletionsRequest() (request *ChatCompletionsRequest) {
+    request = &ChatCompletionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ChatCompletions")
+    
+    
+    return
+}
+
+func NewChatCompletionsResponse() (response *ChatCompletionsResponse) {
+    response = &ChatCompletionsResponse{} 
+    return
+
+}
+
+// ChatCompletions
+// Call the API to initiate a dialogue request.
+//
+// This API supports AI-powered logging features such as intelligently generating retrieval analysis statements.
+//
+// Note: When calling this API via SSE streaming, ensure the request domain name is set to cls.ai.tencentcloudapi.com (configurable as cls.ai.internal.tencentcloudapi.com in a private network environment).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ChatCompletions(request *ChatCompletionsRequest) (response *ChatCompletionsResponse, err error) {
+    return c.ChatCompletionsWithContext(context.Background(), request)
+}
+
+// ChatCompletions
+// Call the API to initiate a dialogue request.
+//
+// This API supports AI-powered logging features such as intelligently generating retrieval analysis statements.
+//
+// Note: When calling this API via SSE streaming, ensure the request domain name is set to cls.ai.tencentcloudapi.com (configurable as cls.ai.internal.tencentcloudapi.com in a private network environment).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ChatCompletionsWithContext(ctx context.Context, request *ChatCompletionsRequest) (response *ChatCompletionsResponse, err error) {
+    if request == nil {
+        request = NewChatCompletionsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ChatCompletions")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ChatCompletions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewChatCompletionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCheckFunctionRequest() (request *CheckFunctionRequest) {
     request = &CheckFunctionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -192,6 +318,7 @@ func NewCheckFunctionResponse() (response *CheckFunctionResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CROSSACCOUNTCONFLICT = "InvalidParameter.CrossAccountConflict"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
@@ -209,6 +336,7 @@ func (c *Client) CheckFunction(request *CheckFunctionRequest) (response *CheckFu
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CROSSACCOUNTCONFLICT = "InvalidParameter.CrossAccountConflict"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
@@ -361,6 +489,70 @@ func (c *Client) CloseKafkaConsumerWithContext(ctx context.Context, request *Clo
     return
 }
 
+func NewCommitConsumerOffsetsRequest() (request *CommitConsumerOffsetsRequest) {
+    request = &CommitConsumerOffsetsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CommitConsumerOffsets")
+    
+    
+    return
+}
+
+func NewCommitConsumerOffsetsResponse() (response *CommitConsumerOffsetsResponse) {
+    response = &CommitConsumerOffsetsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CommitConsumerOffsets
+// This API is used to submit a consumption offset.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CommitConsumerOffsets(request *CommitConsumerOffsetsRequest) (response *CommitConsumerOffsetsResponse, err error) {
+    return c.CommitConsumerOffsetsWithContext(context.Background(), request)
+}
+
+// CommitConsumerOffsets
+// This API is used to submit a consumption offset.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CommitConsumerOffsetsWithContext(ctx context.Context, request *CommitConsumerOffsetsRequest) (response *CommitConsumerOffsetsResponse, err error) {
+    if request == nil {
+        request = NewCommitConsumerOffsetsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CommitConsumerOffsets")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CommitConsumerOffsets require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCommitConsumerOffsetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAlarmRequest() (request *CreateAlarmRequest) {
     request = &CreateAlarmRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -453,10 +645,25 @@ func NewCreateAlarmNoticeResponse() (response *CreateAlarmNoticeResponse) {
 }
 
 // CreateAlarmNotice
-// This API is used to create a notification group.
+// This API is used to create a notification channel group with two configuration modes to choose from.
+//
+// 1. Easy mode provides the most basic notification channel function. The following parameters are required:
+//
+// - Type
+//
+// - NoticeReceivers
+//
+// - WebCallbacks
+//
+// 
+//
+// 2. Advanced mode: On the basis of easy mode, it supports setting rules, setting notification channels for different types of alarms, and escalating alarms. The following parameters are required:
+//
+// - NoticeRules
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
@@ -469,10 +676,25 @@ func (c *Client) CreateAlarmNotice(request *CreateAlarmNoticeRequest) (response 
 }
 
 // CreateAlarmNotice
-// This API is used to create a notification group.
+// This API is used to create a notification channel group with two configuration modes to choose from.
+//
+// 1. Easy mode provides the most basic notification channel function. The following parameters are required:
+//
+// - Type
+//
+// - NoticeReceivers
+//
+// - WebCallbacks
+//
+// 
+//
+// 2. Advanced mode: On the basis of easy mode, it supports setting rules, setting notification channels for different types of alarms, and escalating alarms. The following parameters are required:
+//
+// - NoticeRules
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
@@ -563,6 +785,80 @@ func (c *Client) CreateAlarmShieldWithContext(ctx context.Context, request *Crea
     return
 }
 
+func NewCreateCloudProductLogCollectionRequest() (request *CreateCloudProductLogCollectionRequest) {
+    request = &CreateCloudProductLogCollectionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateCloudProductLogCollection")
+    
+    
+    return
+}
+
+func NewCreateCloudProductLogCollectionResponse() (response *CreateCloudProductLogCollectionResponse) {
+    response = &CreateCloudProductLogCollectionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateCloudProductLogCollection
+// Cloud product integration uses internal APIs
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLOUDPRODUCTINVOCATIONERROR = "FailedOperation.CloudProductInvocationError"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCloudProductLogCollection(request *CreateCloudProductLogCollectionRequest) (response *CreateCloudProductLogCollectionResponse, err error) {
+    return c.CreateCloudProductLogCollectionWithContext(context.Background(), request)
+}
+
+// CreateCloudProductLogCollection
+// Cloud product integration uses internal APIs
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLOUDPRODUCTINVOCATIONERROR = "FailedOperation.CloudProductInvocationError"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateCloudProductLogCollectionWithContext(ctx context.Context, request *CreateCloudProductLogCollectionRequest) (response *CreateCloudProductLogCollectionResponse, err error) {
+    if request == nil {
+        request = NewCreateCloudProductLogCollectionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateCloudProductLogCollection")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCloudProductLogCollection require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCloudProductLogCollectionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateConfigRequest() (request *CreateConfigRequest) {
     request = &CreateConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -639,6 +935,74 @@ func (c *Client) CreateConfigWithContext(ctx context.Context, request *CreateCon
     return
 }
 
+func NewCreateConsoleRequest() (request *CreateConsoleRequest) {
+    request = &CreateConsoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateConsole")
+    
+    
+    return
+}
+
+func NewCreateConsoleResponse() (response *CreateConsoleResponse) {
+    response = &CreateConsoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateConsole
+// This API is used to create the DataSight Console
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SEARCHTIMEOUT = "FailedOperation.SearchTimeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateConsole(request *CreateConsoleRequest) (response *CreateConsoleResponse, err error) {
+    return c.CreateConsoleWithContext(context.Background(), request)
+}
+
+// CreateConsole
+// This API is used to create the DataSight Console
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SEARCHTIMEOUT = "FailedOperation.SearchTimeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateConsoleWithContext(ctx context.Context, request *CreateConsoleRequest) (response *CreateConsoleResponse, err error) {
+    if request == nil {
+        request = NewCreateConsoleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateConsole")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateConsole require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateConsoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateConsumerRequest() (request *CreateConsumerRequest) {
     request = &CreateConsumerRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -709,6 +1073,72 @@ func (c *Client) CreateConsumerWithContext(ctx context.Context, request *CreateC
     return
 }
 
+func NewCreateConsumerGroupRequest() (request *CreateConsumerGroupRequest) {
+    request = &CreateConsumerGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateConsumerGroup")
+    
+    
+    return
+}
+
+func NewCreateConsumerGroupResponse() (response *CreateConsumerGroupResponse) {
+    response = &CreateConsumerGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateConsumerGroup
+// This API is used to check the heartbeat of a consumer group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateConsumerGroup(request *CreateConsumerGroupRequest) (response *CreateConsumerGroupResponse, err error) {
+    return c.CreateConsumerGroupWithContext(context.Background(), request)
+}
+
+// CreateConsumerGroup
+// This API is used to check the heartbeat of a consumer group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateConsumerGroupWithContext(ctx context.Context, request *CreateConsumerGroupRequest) (response *CreateConsumerGroupResponse, err error) {
+    if request == nil {
+        request = NewCreateConsumerGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateConsumerGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateConsumerGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateConsumerGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCosRechargeRequest() (request *CreateCosRechargeRequest) {
     request = &CreateCosRechargeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -733,9 +1163,11 @@ func NewCreateCosRechargeResponse() (response *CreateCosRechargeResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  LIMITEXCEEDED_BILLINGCOSRECHARGEOUTOFLIMIT = "LimitExceeded.BillingCosRechargeOutOfLimit"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
@@ -752,9 +1184,11 @@ func (c *Client) CreateCosRecharge(request *CreateCosRechargeRequest) (response 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  LIMITEXCEEDED_BILLINGCOSRECHARGEOUTOFLIMIT = "LimitExceeded.BillingCosRechargeOutOfLimit"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
@@ -775,6 +1209,152 @@ func (c *Client) CreateCosRechargeWithContext(ctx context.Context, request *Crea
     request.SetContext(ctx)
     
     response = NewCreateCosRechargeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateDashboardRequest() (request *CreateDashboardRequest) {
+    request = &CreateDashboardRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateDashboard")
+    
+    
+    return
+}
+
+func NewCreateDashboardResponse() (response *CreateDashboardResponse) {
+    response = &CreateDashboardResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDashboard
+// This API is used to create a dashboard.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DASHBOARDNAMECONFLICT = "InvalidParameter.DashboardNameConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_TAG = "LimitExceeded.Tag"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateDashboard(request *CreateDashboardRequest) (response *CreateDashboardResponse, err error) {
+    return c.CreateDashboardWithContext(context.Background(), request)
+}
+
+// CreateDashboard
+// This API is used to create a dashboard.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DASHBOARDNAMECONFLICT = "InvalidParameter.DashboardNameConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_TAG = "LimitExceeded.Tag"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateDashboardWithContext(ctx context.Context, request *CreateDashboardRequest) (response *CreateDashboardResponse, err error) {
+    if request == nil {
+        request = NewCreateDashboardRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateDashboard")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDashboard require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDashboardResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateDashboardSubscribeRequest() (request *CreateDashboardSubscribeRequest) {
+    request = &CreateDashboardSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateDashboardSubscribe")
+    
+    
+    return
+}
+
+func NewCreateDashboardSubscribeResponse() (response *CreateDashboardSubscribeResponse) {
+    response = &CreateDashboardSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDashboardSubscribe
+// This API is used to create a dashboard subscription.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DASHBOARDNAMECONFLICT = "InvalidParameter.DashboardNameConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_DASHBOARDRECORDNOTEXIST = "ResourceNotFound.DashboardRecordNotExist"
+func (c *Client) CreateDashboardSubscribe(request *CreateDashboardSubscribeRequest) (response *CreateDashboardSubscribeResponse, err error) {
+    return c.CreateDashboardSubscribeWithContext(context.Background(), request)
+}
+
+// CreateDashboardSubscribe
+// This API is used to create a dashboard subscription.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DASHBOARDNAMECONFLICT = "InvalidParameter.DashboardNameConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_DASHBOARDRECORDNOTEXIST = "ResourceNotFound.DashboardRecordNotExist"
+func (c *Client) CreateDashboardSubscribeWithContext(ctx context.Context, request *CreateDashboardSubscribeRequest) (response *CreateDashboardSubscribeResponse, err error) {
+    if request == nil {
+        request = NewCreateDashboardSubscribeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateDashboardSubscribe")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDashboardSubscribe require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDashboardSubscribeResponse()
     err = c.Send(request, response)
     return
 }
@@ -803,8 +1383,10 @@ func NewCreateDataTransformResponse() (response *CreateDataTransformResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CROSSACCOUNTCONFLICT = "InvalidParameter.CrossAccountConflict"
 //  INVALIDPARAMETER_DATAFROMTASKCONFLICT = "InvalidParameter.DataFromTaskConflict"
 //  INVALIDPARAMETER_INVALIDETLCONTENT = "InvalidParameter.InvalidEtlContent"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -824,8 +1406,10 @@ func (c *Client) CreateDataTransform(request *CreateDataTransformRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CROSSACCOUNTCONFLICT = "InvalidParameter.CrossAccountConflict"
 //  INVALIDPARAMETER_DATAFROMTASKCONFLICT = "InvalidParameter.DataFromTaskConflict"
 //  INVALIDPARAMETER_INVALIDETLCONTENT = "InvalidParameter.InvalidEtlContent"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -877,6 +1461,11 @@ func NewCreateDeliverCloudFunctionResponse() (response *CreateDeliverCloudFuncti
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateDeliverCloudFunction(request *CreateDeliverCloudFunctionRequest) (response *CreateDeliverCloudFunctionResponse, err error) {
     return c.CreateDeliverCloudFunctionWithContext(context.Background(), request)
 }
@@ -886,6 +1475,11 @@ func (c *Client) CreateDeliverCloudFunction(request *CreateDeliverCloudFunctionR
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateDeliverCloudFunctionWithContext(ctx context.Context, request *CreateDeliverCloudFunctionRequest) (response *CreateDeliverCloudFunctionResponse, err error) {
     if request == nil {
         request = NewCreateDeliverCloudFunctionRequest()
@@ -899,6 +1493,166 @@ func (c *Client) CreateDeliverCloudFunctionWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewCreateDeliverCloudFunctionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateDlcDeliverRequest() (request *CreateDlcDeliverRequest) {
+    request = &CreateDlcDeliverRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateDlcDeliver")
+    
+    
+    return
+}
+
+func NewCreateDlcDeliverResponse() (response *CreateDlcDeliverResponse) {
+    response = &CreateDlcDeliverResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDlcDeliver
+// Create a DLC delivery task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateDlcDeliver(request *CreateDlcDeliverRequest) (response *CreateDlcDeliverResponse, err error) {
+    return c.CreateDlcDeliverWithContext(context.Background(), request)
+}
+
+// CreateDlcDeliver
+// Create a DLC delivery task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateDlcDeliverWithContext(ctx context.Context, request *CreateDlcDeliverRequest) (response *CreateDlcDeliverResponse, err error) {
+    if request == nil {
+        request = NewCreateDlcDeliverRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateDlcDeliver")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDlcDeliver require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDlcDeliverResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateEsRechargeRequest() (request *CreateEsRechargeRequest) {
+    request = &CreateEsRechargeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateEsRecharge")
+    
+    
+    return
+}
+
+func NewCreateEsRechargeResponse() (response *CreateEsRechargeResponse) {
+    response = &CreateEsRechargeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateEsRecharge
+// This API is used to create an es import configuration
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateEsRecharge(request *CreateEsRechargeRequest) (response *CreateEsRechargeResponse, err error) {
+    return c.CreateEsRechargeWithContext(context.Background(), request)
+}
+
+// CreateEsRecharge
+// This API is used to create an es import configuration
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateEsRechargeWithContext(ctx context.Context, request *CreateEsRechargeRequest) (response *CreateEsRechargeResponse, err error) {
+    if request == nil {
+        request = NewCreateEsRechargeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateEsRecharge")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateEsRecharge require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateEsRechargeResponse()
     err = c.Send(request, response)
     return
 }
@@ -923,7 +1677,7 @@ func NewCreateExportResponse() (response *CreateExportResponse) {
 }
 
 // CreateExport
-// This API is used to create a download task. To get the returned download address, call DescribeExports to view the task list. The CosPath parameter is also included for download address. For more information, visit https://intl.cloud.tencent.com/document/product/614/56449.?from_cn_redirect=1
+// This API only creates download tasks. The download address returned by the task can be obtained by user invocation of [DescribeExports](https://www.tencentcloud.com/document/product/614/56449?from_cn_redirect=1) to view task list, which includes the CosPath parameter for the download address.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -942,7 +1696,7 @@ func (c *Client) CreateExport(request *CreateExportRequest) (response *CreateExp
 }
 
 // CreateExport
-// This API is used to create a download task. To get the returned download address, call DescribeExports to view the task list. The CosPath parameter is also included for download address. For more information, visit https://intl.cloud.tencent.com/document/product/614/56449.?from_cn_redirect=1
+// This API only creates download tasks. The download address returned by the task can be obtained by user invocation of [DescribeExports](https://www.tencentcloud.com/document/product/614/56449?from_cn_redirect=1) to view task list, which includes the CosPath parameter for the download address.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -973,6 +1727,86 @@ func (c *Client) CreateExportWithContext(ctx context.Context, request *CreateExp
     return
 }
 
+func NewCreateHostMetricConfigRequest() (request *CreateHostMetricConfigRequest) {
+    request = &CreateHostMetricConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateHostMetricConfig")
+    
+    
+    return
+}
+
+func NewCreateHostMetricConfigResponse() (response *CreateHostMetricConfigResponse) {
+    response = &CreateHostMetricConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateHostMetricConfig
+// This API is used to create host metric collection configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateHostMetricConfig(request *CreateHostMetricConfigRequest) (response *CreateHostMetricConfigResponse, err error) {
+    return c.CreateHostMetricConfigWithContext(context.Background(), request)
+}
+
+// CreateHostMetricConfig
+// This API is used to create host metric collection configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateHostMetricConfigWithContext(ctx context.Context, request *CreateHostMetricConfigRequest) (response *CreateHostMetricConfigResponse, err error) {
+    if request == nil {
+        request = NewCreateHostMetricConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateHostMetricConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateHostMetricConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateHostMetricConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateIndexRequest() (request *CreateIndexRequest) {
     request = &CreateIndexRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -998,12 +1832,14 @@ func NewCreateIndexResponse() (response *CreateIndexResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDINDEXRULEFORSEARCHLOW = "FailedOperation.InValidIndexRuleForSearchLow"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDINDEXRULEFORSEARCHLOW = "InvalidParameter.InValidIndexRuleForSearchLow"
 //  INVALIDPARAMETER_INDEXCONFLICT = "InvalidParameter.IndexConflict"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_INDEXKEYOVERLIMIT = "LimitExceeded.IndexKeyOverLimit"
 //  LIMITEXCEEDED_INDEXOPERATING = "LimitExceeded.IndexOperating"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -1023,12 +1859,14 @@ func (c *Client) CreateIndex(request *CreateIndexRequest) (response *CreateIndex
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDINDEXRULEFORSEARCHLOW = "FailedOperation.InValidIndexRuleForSearchLow"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDINDEXRULEFORSEARCHLOW = "InvalidParameter.InValidIndexRuleForSearchLow"
 //  INVALIDPARAMETER_INDEXCONFLICT = "InvalidParameter.IndexConflict"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_INDEXKEYOVERLIMIT = "LimitExceeded.IndexKeyOverLimit"
 //  LIMITEXCEEDED_INDEXOPERATING = "LimitExceeded.IndexOperating"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -1224,6 +2062,7 @@ func NewCreateMachineGroupResponse() (response *CreateMachineGroupResponse) {
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_MACHINEGROUPCONFLICT = "InvalidParameter.MachineGroupConflict"
@@ -1247,6 +2086,7 @@ func (c *Client) CreateMachineGroup(request *CreateMachineGroupRequest) (respons
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_MACHINEGROUPCONFLICT = "InvalidParameter.MachineGroupConflict"
@@ -1273,6 +2113,540 @@ func (c *Client) CreateMachineGroupWithContext(ctx context.Context, request *Cre
     request.SetContext(ctx)
     
     response = NewCreateMachineGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateMetricConfigRequest() (request *CreateMetricConfigRequest) {
+    request = &CreateMetricConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateMetricConfig")
+    
+    
+    return
+}
+
+func NewCreateMetricConfigResponse() (response *CreateMetricConfigResponse) {
+    response = &CreateMetricConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateMetricConfig
+// This API is used to create metric collection configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateMetricConfig(request *CreateMetricConfigRequest) (response *CreateMetricConfigResponse, err error) {
+    return c.CreateMetricConfigWithContext(context.Background(), request)
+}
+
+// CreateMetricConfig
+// This API is used to create metric collection configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateMetricConfigWithContext(ctx context.Context, request *CreateMetricConfigRequest) (response *CreateMetricConfigResponse, err error) {
+    if request == nil {
+        request = NewCreateMetricConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateMetricConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMetricConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateMetricConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateMetricSubscribeRequest() (request *CreateMetricSubscribeRequest) {
+    request = &CreateMetricSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateMetricSubscribe")
+    
+    
+    return
+}
+
+func NewCreateMetricSubscribeResponse() (response *CreateMetricSubscribeResponse) {
+    response = &CreateMetricSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateMetricSubscribe
+// This API is used to create metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateMetricSubscribe(request *CreateMetricSubscribeRequest) (response *CreateMetricSubscribeResponse, err error) {
+    return c.CreateMetricSubscribeWithContext(context.Background(), request)
+}
+
+// CreateMetricSubscribe
+// This API is used to create metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateMetricSubscribeWithContext(ctx context.Context, request *CreateMetricSubscribeRequest) (response *CreateMetricSubscribeResponse, err error) {
+    if request == nil {
+        request = NewCreateMetricSubscribeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateMetricSubscribe")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMetricSubscribe require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateMetricSubscribeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateNetworkApplicationRequest() (request *CreateNetworkApplicationRequest) {
+    request = &CreateNetworkApplicationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateNetworkApplication")
+    
+    
+    return
+}
+
+func NewCreateNetworkApplicationResponse() (response *CreateNetworkApplicationResponse) {
+    response = &CreateNetworkApplicationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateNetworkApplication
+// This API is used to create a network application.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateNetworkApplication(request *CreateNetworkApplicationRequest) (response *CreateNetworkApplicationResponse, err error) {
+    return c.CreateNetworkApplicationWithContext(context.Background(), request)
+}
+
+// CreateNetworkApplication
+// This API is used to create a network application.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateNetworkApplicationWithContext(ctx context.Context, request *CreateNetworkApplicationRequest) (response *CreateNetworkApplicationResponse, err error) {
+    if request == nil {
+        request = NewCreateNetworkApplicationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateNetworkApplication")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateNetworkApplication require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateNetworkApplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateNoticeContentRequest() (request *CreateNoticeContentRequest) {
+    request = &CreateNoticeContentRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateNoticeContent")
+    
+    
+    return
+}
+
+func NewCreateNoticeContentResponse() (response *CreateNoticeContentResponse) {
+    response = &CreateNoticeContentResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateNoticeContent
+// This API is used to create notification content.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateNoticeContent(request *CreateNoticeContentRequest) (response *CreateNoticeContentResponse, err error) {
+    return c.CreateNoticeContentWithContext(context.Background(), request)
+}
+
+// CreateNoticeContent
+// This API is used to create notification content.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateNoticeContentWithContext(ctx context.Context, request *CreateNoticeContentRequest) (response *CreateNoticeContentResponse, err error) {
+    if request == nil {
+        request = NewCreateNoticeContentRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateNoticeContent")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateNoticeContent require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateNoticeContentResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateRebuildIndexTaskRequest() (request *CreateRebuildIndexTaskRequest) {
+    request = &CreateRebuildIndexTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateRebuildIndexTask")
+    
+    
+    return
+}
+
+func NewCreateRebuildIndexTaskResponse() (response *CreateRebuildIndexTaskResponse) {
+    response = &CreateRebuildIndexTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateRebuildIndexTask
+// This API is used to creates rebuild index tasks.
+//
+// Note:
+//
+// -A single log topic allows only one index reconstruction task at a time and can have up to 10 rebuild index task records. Delete task records that are no longer needed before creating an index task.
+//
+// -Logs within the same time range only allow rebuilding indexes once. Delete previous task records before rebuilding again.
+//
+// -Deleting a rebuild index task record restores the index data before rebuilding an index.
+//
+// -The log write traffic of the selected time range cannot exceed 5TB.
+//
+// -The index rebuilding time range is subject to the log time. When the log uploading time has a deviation exceeding one hour from the index rebuilding time range (for example, reporting a new log at 16:00 for 02:00 to CLS and rebuilding the log index for 00:00–12:00), the logs will not be rebuilt and cannot be retrieved subsequently. When reporting a new log to the reconstructed log time range, it will not be rebuilt and cannot be retrieved subsequently.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateRebuildIndexTask(request *CreateRebuildIndexTaskRequest) (response *CreateRebuildIndexTaskResponse, err error) {
+    return c.CreateRebuildIndexTaskWithContext(context.Background(), request)
+}
+
+// CreateRebuildIndexTask
+// This API is used to creates rebuild index tasks.
+//
+// Note:
+//
+// -A single log topic allows only one index reconstruction task at a time and can have up to 10 rebuild index task records. Delete task records that are no longer needed before creating an index task.
+//
+// -Logs within the same time range only allow rebuilding indexes once. Delete previous task records before rebuilding again.
+//
+// -Deleting a rebuild index task record restores the index data before rebuilding an index.
+//
+// -The log write traffic of the selected time range cannot exceed 5TB.
+//
+// -The index rebuilding time range is subject to the log time. When the log uploading time has a deviation exceeding one hour from the index rebuilding time range (for example, reporting a new log at 16:00 for 02:00 to CLS and rebuilding the log index for 00:00–12:00), the logs will not be rebuilt and cannot be retrieved subsequently. When reporting a new log to the reconstructed log time range, it will not be rebuilt and cannot be retrieved subsequently.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateRebuildIndexTaskWithContext(ctx context.Context, request *CreateRebuildIndexTaskRequest) (response *CreateRebuildIndexTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateRebuildIndexTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateRebuildIndexTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRebuildIndexTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRebuildIndexTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateRecordingRuleTaskRequest() (request *CreateRecordingRuleTaskRequest) {
+    request = &CreateRecordingRuleTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateRecordingRuleTask")
+    
+    
+    return
+}
+
+func NewCreateRecordingRuleTaskResponse() (response *CreateRecordingRuleTaskResponse) {
+    response = &CreateRecordingRuleTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateRecordingRuleTask
+// Creating a Metric Pre-Aggregation Task
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateRecordingRuleTask(request *CreateRecordingRuleTaskRequest) (response *CreateRecordingRuleTaskResponse, err error) {
+    return c.CreateRecordingRuleTaskWithContext(context.Background(), request)
+}
+
+// CreateRecordingRuleTask
+// Creating a Metric Pre-Aggregation Task
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateRecordingRuleTaskWithContext(ctx context.Context, request *CreateRecordingRuleTaskRequest) (response *CreateRecordingRuleTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateRecordingRuleTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateRecordingRuleTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRecordingRuleTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRecordingRuleTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateRecordingRuleYamlTaskRequest() (request *CreateRecordingRuleYamlTaskRequest) {
+    request = &CreateRecordingRuleYamlTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateRecordingRuleYamlTask")
+    
+    
+    return
+}
+
+func NewCreateRecordingRuleYamlTaskResponse() (response *CreateRecordingRuleYamlTaskResponse) {
+    response = &CreateRecordingRuleYamlTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateRecordingRuleYamlTask
+// Creating a Metric Pre-Aggregation Task Through a YAML File
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateRecordingRuleYamlTask(request *CreateRecordingRuleYamlTaskRequest) (response *CreateRecordingRuleYamlTaskResponse, err error) {
+    return c.CreateRecordingRuleYamlTaskWithContext(context.Background(), request)
+}
+
+// CreateRecordingRuleYamlTask
+// Creating a Metric Pre-Aggregation Task Through a YAML File
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateRecordingRuleYamlTaskWithContext(ctx context.Context, request *CreateRecordingRuleYamlTaskRequest) (response *CreateRecordingRuleYamlTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateRecordingRuleYamlTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateRecordingRuleYamlTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRecordingRuleYamlTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRecordingRuleYamlTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -1347,6 +2721,80 @@ func (c *Client) CreateScheduledSqlWithContext(ctx context.Context, request *Cre
     request.SetContext(ctx)
     
     response = NewCreateScheduledSqlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSearchViewRequest() (request *CreateSearchViewRequest) {
+    request = &CreateSearchViewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateSearchView")
+    
+    
+    return
+}
+
+func NewCreateSearchViewResponse() (response *CreateSearchViewResponse) {
+    response = &CreateSearchViewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateSearchView
+// Create a query view
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateSearchView(request *CreateSearchViewRequest) (response *CreateSearchViewResponse, err error) {
+    return c.CreateSearchViewWithContext(context.Background(), request)
+}
+
+// CreateSearchView
+// Create a query view
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateSearchViewWithContext(ctx context.Context, request *CreateSearchViewRequest) (response *CreateSearchViewResponse, err error) {
+    if request == nil {
+        request = NewCreateSearchViewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateSearchView")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSearchView require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSearchViewResponse()
     err = c.Send(request, response)
     return
 }
@@ -1427,6 +2875,82 @@ func (c *Client) CreateShipperWithContext(ctx context.Context, request *CreateSh
     return
 }
 
+func NewCreateSplunkDeliverRequest() (request *CreateSplunkDeliverRequest) {
+    request = &CreateSplunkDeliverRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateSplunkDeliver")
+    
+    
+    return
+}
+
+func NewCreateSplunkDeliverResponse() (response *CreateSplunkDeliverResponse) {
+    response = &CreateSplunkDeliverResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateSplunkDeliver
+// Create a Splunk delivery task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CreateSplunkDeliver(request *CreateSplunkDeliverRequest) (response *CreateSplunkDeliverResponse, err error) {
+    return c.CreateSplunkDeliverWithContext(context.Background(), request)
+}
+
+// CreateSplunkDeliver
+// Create a Splunk delivery task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CreateSplunkDeliverWithContext(ctx context.Context, request *CreateSplunkDeliverRequest) (response *CreateSplunkDeliverResponse, err error) {
+    if request == nil {
+        request = NewCreateSplunkDeliverRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateSplunkDeliver")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSplunkDeliver require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSplunkDeliverResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateTopicRequest() (request *CreateTopicRequest) {
     request = &CreateTopicRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1447,7 +2971,7 @@ func NewCreateTopicResponse() (response *CreateTopicResponse) {
 }
 
 // CreateTopic
-// This API is used to create a log topic.
+// This API is used to create logs or metric topics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1457,6 +2981,7 @@ func NewCreateTopicResponse() (response *CreateTopicResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_BILLINGTOPICOUTOFLIMIT = "LimitExceeded.BillingTopicOutOfLimit"
 //  LIMITEXCEEDED_LOGSET = "LimitExceeded.Logset"
 //  LIMITEXCEEDED_TOPIC = "LimitExceeded.Topic"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -1470,7 +2995,7 @@ func (c *Client) CreateTopic(request *CreateTopicRequest) (response *CreateTopic
 }
 
 // CreateTopic
-// This API is used to create a log topic.
+// This API is used to create logs or metric topics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1480,6 +3005,7 @@ func (c *Client) CreateTopic(request *CreateTopicRequest) (response *CreateTopic
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
 //  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_BILLINGTOPICOUTOFLIMIT = "LimitExceeded.BillingTopicOutOfLimit"
 //  LIMITEXCEEDED_LOGSET = "LimitExceeded.Logset"
 //  LIMITEXCEEDED_TOPIC = "LimitExceeded.Topic"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -1501,6 +3027,72 @@ func (c *Client) CreateTopicWithContext(ctx context.Context, request *CreateTopi
     request.SetContext(ctx)
     
     response = NewCreateTopicResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateWebCallbackRequest() (request *CreateWebCallbackRequest) {
+    request = &CreateWebCallbackRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateWebCallback")
+    
+    
+    return
+}
+
+func NewCreateWebCallbackResponse() (response *CreateWebCallbackResponse) {
+    response = &CreateWebCallbackResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateWebCallback
+// This API is used to create alarm channel callback configurations.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateWebCallback(request *CreateWebCallbackRequest) (response *CreateWebCallbackResponse, err error) {
+    return c.CreateWebCallbackWithContext(context.Background(), request)
+}
+
+// CreateWebCallback
+// This API is used to create alarm channel callback configurations.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateWebCallbackWithContext(ctx context.Context, request *CreateWebCallbackRequest) (response *CreateWebCallbackResponse, err error) {
+    if request == nil {
+        request = NewCreateWebCallbackRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateWebCallback")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateWebCallback require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateWebCallbackResponse()
     err = c.Send(request, response)
     return
 }
@@ -1657,7 +3249,7 @@ func NewDeleteAlarmShieldResponse() (response *DeleteAlarmShieldResponse) {
 }
 
 // DeleteAlarmShield
-// This API is used to delete an alarm blocking rule.
+// This API is used to delete an alarm blocking rule. When the alarm blocking rule is active or invalid, it cannot be deleted.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1674,7 +3266,7 @@ func (c *Client) DeleteAlarmShield(request *DeleteAlarmShieldRequest) (response 
 }
 
 // DeleteAlarmShield
-// This API is used to delete an alarm blocking rule.
+// This API is used to delete an alarm blocking rule. When the alarm blocking rule is active or invalid, it cannot be deleted.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1699,6 +3291,76 @@ func (c *Client) DeleteAlarmShieldWithContext(ctx context.Context, request *Dele
     request.SetContext(ctx)
     
     response = NewDeleteAlarmShieldResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteCloudProductLogCollectionRequest() (request *DeleteCloudProductLogCollectionRequest) {
+    request = &DeleteCloudProductLogCollectionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteCloudProductLogCollection")
+    
+    
+    return
+}
+
+func NewDeleteCloudProductLogCollectionResponse() (response *DeleteCloudProductLogCollectionResponse) {
+    response = &DeleteCloudProductLogCollectionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteCloudProductLogCollection
+// Cloud product integration uses internal APIs
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLOUDPRODUCTINVOCATIONERROR = "FailedOperation.CloudProductInvocationError"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteCloudProductLogCollection(request *DeleteCloudProductLogCollectionRequest) (response *DeleteCloudProductLogCollectionResponse, err error) {
+    return c.DeleteCloudProductLogCollectionWithContext(context.Background(), request)
+}
+
+// DeleteCloudProductLogCollection
+// Cloud product integration uses internal APIs
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLOUDPRODUCTINVOCATIONERROR = "FailedOperation.CloudProductInvocationError"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteCloudProductLogCollectionWithContext(ctx context.Context, request *DeleteCloudProductLogCollectionRequest) (response *DeleteCloudProductLogCollectionResponse, err error) {
+    if request == nil {
+        request = NewDeleteCloudProductLogCollectionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteCloudProductLogCollection")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCloudProductLogCollection require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCloudProductLogCollectionResponse()
     err = c.Send(request, response)
     return
 }
@@ -1845,6 +3507,76 @@ func (c *Client) DeleteConfigFromMachineGroupWithContext(ctx context.Context, re
     return
 }
 
+func NewDeleteConsoleRequest() (request *DeleteConsoleRequest) {
+    request = &DeleteConsoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteConsole")
+    
+    
+    return
+}
+
+func NewDeleteConsoleResponse() (response *DeleteConsoleResponse) {
+    response = &DeleteConsoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteConsole
+// This API is used to delete the DataSight Console
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SEARCHTIMEOUT = "FailedOperation.SearchTimeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteConsole(request *DeleteConsoleRequest) (response *DeleteConsoleResponse, err error) {
+    return c.DeleteConsoleWithContext(context.Background(), request)
+}
+
+// DeleteConsole
+// This API is used to delete the DataSight Console
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SEARCHTIMEOUT = "FailedOperation.SearchTimeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteConsoleWithContext(ctx context.Context, request *DeleteConsoleRequest) (response *DeleteConsoleResponse, err error) {
+    if request == nil {
+        request = NewDeleteConsoleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteConsole")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteConsole require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteConsoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteConsumerRequest() (request *DeleteConsumerRequest) {
     request = &DeleteConsumerRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1865,7 +3597,7 @@ func NewDeleteConsumerResponse() (response *DeleteConsumerResponse) {
 }
 
 // DeleteConsumer
-// This API is used to delete a shipping task.
+// Deleting a CKafka Delivery Task
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1882,7 +3614,7 @@ func (c *Client) DeleteConsumer(request *DeleteConsumerRequest) (response *Delet
 }
 
 // DeleteConsumer
-// This API is used to delete a shipping task.
+// Deleting a CKafka Delivery Task
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1907,6 +3639,278 @@ func (c *Client) DeleteConsumerWithContext(ctx context.Context, request *DeleteC
     request.SetContext(ctx)
     
     response = NewDeleteConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteConsumerGroupRequest() (request *DeleteConsumerGroupRequest) {
+    request = &DeleteConsumerGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteConsumerGroup")
+    
+    
+    return
+}
+
+func NewDeleteConsumerGroupResponse() (response *DeleteConsumerGroupResponse) {
+    response = &DeleteConsumerGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteConsumerGroup
+// Delete consumer groups.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DeleteConsumerGroup(request *DeleteConsumerGroupRequest) (response *DeleteConsumerGroupResponse, err error) {
+    return c.DeleteConsumerGroupWithContext(context.Background(), request)
+}
+
+// DeleteConsumerGroup
+// Delete consumer groups.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DeleteConsumerGroupWithContext(ctx context.Context, request *DeleteConsumerGroupRequest) (response *DeleteConsumerGroupResponse, err error) {
+    if request == nil {
+        request = NewDeleteConsumerGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteConsumerGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteConsumerGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteConsumerGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteCosRechargeRequest() (request *DeleteCosRechargeRequest) {
+    request = &DeleteCosRechargeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteCosRecharge")
+    
+    
+    return
+}
+
+func NewDeleteCosRechargeResponse() (response *DeleteCosRechargeResponse) {
+    response = &DeleteCosRechargeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteCosRecharge
+// This API is used to delete a cos Import Task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteCosRecharge(request *DeleteCosRechargeRequest) (response *DeleteCosRechargeResponse, err error) {
+    return c.DeleteCosRechargeWithContext(context.Background(), request)
+}
+
+// DeleteCosRecharge
+// This API is used to delete a cos Import Task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteCosRechargeWithContext(ctx context.Context, request *DeleteCosRechargeRequest) (response *DeleteCosRechargeResponse, err error) {
+    if request == nil {
+        request = NewDeleteCosRechargeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteCosRecharge")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCosRecharge require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCosRechargeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteDashboardRequest() (request *DeleteDashboardRequest) {
+    request = &DeleteDashboardRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteDashboard")
+    
+    
+    return
+}
+
+func NewDeleteDashboardResponse() (response *DeleteDashboardResponse) {
+    response = &DeleteDashboardResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteDashboard
+// This API is used to delete dashboards.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_TAG = "LimitExceeded.Tag"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DeleteDashboard(request *DeleteDashboardRequest) (response *DeleteDashboardResponse, err error) {
+    return c.DeleteDashboardWithContext(context.Background(), request)
+}
+
+// DeleteDashboard
+// This API is used to delete dashboards.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_TAG = "LimitExceeded.Tag"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DeleteDashboardWithContext(ctx context.Context, request *DeleteDashboardRequest) (response *DeleteDashboardResponse, err error) {
+    if request == nil {
+        request = NewDeleteDashboardRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteDashboard")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDashboard require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDashboardResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteDashboardSubscribeRequest() (request *DeleteDashboardSubscribeRequest) {
+    request = &DeleteDashboardSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteDashboardSubscribe")
+    
+    
+    return
+}
+
+func NewDeleteDashboardSubscribeResponse() (response *DeleteDashboardSubscribeResponse) {
+    response = &DeleteDashboardSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteDashboardSubscribe
+// This API is used to delete dashboard subscriptions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_DASHBOARDSUBSCRIBERECORDNOTEXIST = "ResourceNotFound.DashboardSubscribeRecordNotExist"
+func (c *Client) DeleteDashboardSubscribe(request *DeleteDashboardSubscribeRequest) (response *DeleteDashboardSubscribeResponse, err error) {
+    return c.DeleteDashboardSubscribeWithContext(context.Background(), request)
+}
+
+// DeleteDashboardSubscribe
+// This API is used to delete dashboard subscriptions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_DASHBOARDSUBSCRIBERECORDNOTEXIST = "ResourceNotFound.DashboardSubscribeRecordNotExist"
+func (c *Client) DeleteDashboardSubscribeWithContext(ctx context.Context, request *DeleteDashboardSubscribeRequest) (response *DeleteDashboardSubscribeResponse, err error) {
+    if request == nil {
+        request = NewDeleteDashboardSubscribeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteDashboardSubscribe")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDashboardSubscribe require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDashboardSubscribeResponse()
     err = c.Send(request, response)
     return
 }
@@ -1983,6 +3987,164 @@ func (c *Client) DeleteDataTransformWithContext(ctx context.Context, request *De
     return
 }
 
+func NewDeleteDlcDeliverRequest() (request *DeleteDlcDeliverRequest) {
+    request = &DeleteDlcDeliverRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteDlcDeliver")
+    
+    
+    return
+}
+
+func NewDeleteDlcDeliverResponse() (response *DeleteDlcDeliverResponse) {
+    response = &DeleteDlcDeliverResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteDlcDeliver
+// Delete a DLC delivery task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteDlcDeliver(request *DeleteDlcDeliverRequest) (response *DeleteDlcDeliverResponse, err error) {
+    return c.DeleteDlcDeliverWithContext(context.Background(), request)
+}
+
+// DeleteDlcDeliver
+// Delete a DLC delivery task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteDlcDeliverWithContext(ctx context.Context, request *DeleteDlcDeliverRequest) (response *DeleteDlcDeliverResponse, err error) {
+    if request == nil {
+        request = NewDeleteDlcDeliverRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteDlcDeliver")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDlcDeliver require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDlcDeliverResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteEsRechargeRequest() (request *DeleteEsRechargeRequest) {
+    request = &DeleteEsRechargeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteEsRecharge")
+    
+    
+    return
+}
+
+func NewDeleteEsRechargeResponse() (response *DeleteEsRechargeResponse) {
+    response = &DeleteEsRechargeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteEsRecharge
+// Delete es import configuration
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteEsRecharge(request *DeleteEsRechargeRequest) (response *DeleteEsRechargeResponse, err error) {
+    return c.DeleteEsRechargeWithContext(context.Background(), request)
+}
+
+// DeleteEsRecharge
+// Delete es import configuration
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteEsRechargeWithContext(ctx context.Context, request *DeleteEsRechargeRequest) (response *DeleteEsRechargeResponse, err error) {
+    if request == nil {
+        request = NewDeleteEsRechargeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteEsRecharge")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteEsRecharge require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteEsRechargeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteExportRequest() (request *DeleteExportRequest) {
     request = &DeleteExportRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2049,6 +4211,86 @@ func (c *Client) DeleteExportWithContext(ctx context.Context, request *DeleteExp
     return
 }
 
+func NewDeleteHostMetricConfigRequest() (request *DeleteHostMetricConfigRequest) {
+    request = &DeleteHostMetricConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteHostMetricConfig")
+    
+    
+    return
+}
+
+func NewDeleteHostMetricConfigResponse() (response *DeleteHostMetricConfigResponse) {
+    response = &DeleteHostMetricConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteHostMetricConfig
+// Delete host metric collection configuration
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteHostMetricConfig(request *DeleteHostMetricConfigRequest) (response *DeleteHostMetricConfigResponse, err error) {
+    return c.DeleteHostMetricConfigWithContext(context.Background(), request)
+}
+
+// DeleteHostMetricConfig
+// Delete host metric collection configuration
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteHostMetricConfigWithContext(ctx context.Context, request *DeleteHostMetricConfigRequest) (response *DeleteHostMetricConfigResponse, err error) {
+    if request == nil {
+        request = NewDeleteHostMetricConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteHostMetricConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteHostMetricConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteHostMetricConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteIndexRequest() (request *DeleteIndexRequest) {
     request = &DeleteIndexRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2073,6 +4315,7 @@ func NewDeleteIndexResponse() (response *DeleteIndexResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_INDEXOPERATING = "LimitExceeded.IndexOperating"
@@ -2093,6 +4336,7 @@ func (c *Client) DeleteIndex(request *DeleteIndexRequest) (response *DeleteIndex
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_INDEXOPERATING = "LimitExceeded.IndexOperating"
@@ -2212,6 +4456,7 @@ func NewDeleteLogsetResponse() (response *DeleteLogsetResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LOGSETNOTEMPTY = "FailedOperation.LogsetNotEmpty"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -2231,6 +4476,7 @@ func (c *Client) DeleteLogset(request *DeleteLogsetRequest) (response *DeleteLog
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_LOGSETNOTEMPTY = "FailedOperation.LogsetNotEmpty"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -2377,6 +4623,454 @@ func (c *Client) DeleteMachineGroupInfoWithContext(ctx context.Context, request 
     return
 }
 
+func NewDeleteMetricConfigRequest() (request *DeleteMetricConfigRequest) {
+    request = &DeleteMetricConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteMetricConfig")
+    
+    
+    return
+}
+
+func NewDeleteMetricConfigResponse() (response *DeleteMetricConfigResponse) {
+    response = &DeleteMetricConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteMetricConfig
+// This API is used to delete metric collection configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteMetricConfig(request *DeleteMetricConfigRequest) (response *DeleteMetricConfigResponse, err error) {
+    return c.DeleteMetricConfigWithContext(context.Background(), request)
+}
+
+// DeleteMetricConfig
+// This API is used to delete metric collection configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteMetricConfigWithContext(ctx context.Context, request *DeleteMetricConfigRequest) (response *DeleteMetricConfigResponse, err error) {
+    if request == nil {
+        request = NewDeleteMetricConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteMetricConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteMetricConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteMetricConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteMetricSubscribeRequest() (request *DeleteMetricSubscribeRequest) {
+    request = &DeleteMetricSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteMetricSubscribe")
+    
+    
+    return
+}
+
+func NewDeleteMetricSubscribeResponse() (response *DeleteMetricSubscribeResponse) {
+    response = &DeleteMetricSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteMetricSubscribe
+// This API is used to delete metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteMetricSubscribe(request *DeleteMetricSubscribeRequest) (response *DeleteMetricSubscribeResponse, err error) {
+    return c.DeleteMetricSubscribeWithContext(context.Background(), request)
+}
+
+// DeleteMetricSubscribe
+// This API is used to delete metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteMetricSubscribeWithContext(ctx context.Context, request *DeleteMetricSubscribeRequest) (response *DeleteMetricSubscribeResponse, err error) {
+    if request == nil {
+        request = NewDeleteMetricSubscribeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteMetricSubscribe")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteMetricSubscribe require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteMetricSubscribeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteNetworkApplicationRequest() (request *DeleteNetworkApplicationRequest) {
+    request = &DeleteNetworkApplicationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteNetworkApplication")
+    
+    
+    return
+}
+
+func NewDeleteNetworkApplicationResponse() (response *DeleteNetworkApplicationResponse) {
+    response = &DeleteNetworkApplicationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteNetworkApplication
+// Delete a web application
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteNetworkApplication(request *DeleteNetworkApplicationRequest) (response *DeleteNetworkApplicationResponse, err error) {
+    return c.DeleteNetworkApplicationWithContext(context.Background(), request)
+}
+
+// DeleteNetworkApplication
+// Delete a web application
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteNetworkApplicationWithContext(ctx context.Context, request *DeleteNetworkApplicationRequest) (response *DeleteNetworkApplicationResponse, err error) {
+    if request == nil {
+        request = NewDeleteNetworkApplicationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteNetworkApplication")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteNetworkApplication require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteNetworkApplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteNoticeContentRequest() (request *DeleteNoticeContentRequest) {
+    request = &DeleteNoticeContentRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteNoticeContent")
+    
+    
+    return
+}
+
+func NewDeleteNoticeContentResponse() (response *DeleteNoticeContentResponse) {
+    response = &DeleteNoticeContentResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteNoticeContent
+// This API is used to delete notification content configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BINDEDALARM = "FailedOperation.BindedAlarm"
+//  INTERNALERROR = "InternalError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_NOTICEHASALARM = "OperationDenied.NoticeHasAlarm"
+//  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
+func (c *Client) DeleteNoticeContent(request *DeleteNoticeContentRequest) (response *DeleteNoticeContentResponse, err error) {
+    return c.DeleteNoticeContentWithContext(context.Background(), request)
+}
+
+// DeleteNoticeContent
+// This API is used to delete notification content configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BINDEDALARM = "FailedOperation.BindedAlarm"
+//  INTERNALERROR = "InternalError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_NOTICEHASALARM = "OperationDenied.NoticeHasAlarm"
+//  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
+func (c *Client) DeleteNoticeContentWithContext(ctx context.Context, request *DeleteNoticeContentRequest) (response *DeleteNoticeContentResponse, err error) {
+    if request == nil {
+        request = NewDeleteNoticeContentRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteNoticeContent")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteNoticeContent require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteNoticeContentResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteRecordingRuleTaskRequest() (request *DeleteRecordingRuleTaskRequest) {
+    request = &DeleteRecordingRuleTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteRecordingRuleTask")
+    
+    
+    return
+}
+
+func NewDeleteRecordingRuleTaskResponse() (response *DeleteRecordingRuleTaskResponse) {
+    response = &DeleteRecordingRuleTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteRecordingRuleTask
+// This API is used to delete a pre-aggregation analysis task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteRecordingRuleTask(request *DeleteRecordingRuleTaskRequest) (response *DeleteRecordingRuleTaskResponse, err error) {
+    return c.DeleteRecordingRuleTaskWithContext(context.Background(), request)
+}
+
+// DeleteRecordingRuleTask
+// This API is used to delete a pre-aggregation analysis task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteRecordingRuleTaskWithContext(ctx context.Context, request *DeleteRecordingRuleTaskRequest) (response *DeleteRecordingRuleTaskResponse, err error) {
+    if request == nil {
+        request = NewDeleteRecordingRuleTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteRecordingRuleTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRecordingRuleTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRecordingRuleTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteRecordingRuleYamlTaskRequest() (request *DeleteRecordingRuleYamlTaskRequest) {
+    request = &DeleteRecordingRuleYamlTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteRecordingRuleYamlTask")
+    
+    
+    return
+}
+
+func NewDeleteRecordingRuleYamlTaskResponse() (response *DeleteRecordingRuleYamlTaskResponse) {
+    response = &DeleteRecordingRuleYamlTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteRecordingRuleYamlTask
+// This API is used to delete the pre-aggregation task in yaml.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteRecordingRuleYamlTask(request *DeleteRecordingRuleYamlTaskRequest) (response *DeleteRecordingRuleYamlTaskResponse, err error) {
+    return c.DeleteRecordingRuleYamlTaskWithContext(context.Background(), request)
+}
+
+// DeleteRecordingRuleYamlTask
+// This API is used to delete the pre-aggregation task in yaml.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteRecordingRuleYamlTaskWithContext(ctx context.Context, request *DeleteRecordingRuleYamlTaskRequest) (response *DeleteRecordingRuleYamlTaskResponse, err error) {
+    if request == nil {
+        request = NewDeleteRecordingRuleYamlTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteRecordingRuleYamlTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRecordingRuleYamlTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRecordingRuleYamlTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteScheduledSqlRequest() (request *DeleteScheduledSqlRequest) {
     request = &DeleteScheduledSqlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2447,6 +5141,76 @@ func (c *Client) DeleteScheduledSqlWithContext(ctx context.Context, request *Del
     request.SetContext(ctx)
     
     response = NewDeleteScheduledSqlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteSearchViewRequest() (request *DeleteSearchViewRequest) {
+    request = &DeleteSearchViewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteSearchView")
+    
+    
+    return
+}
+
+func NewDeleteSearchViewResponse() (response *DeleteSearchViewResponse) {
+    response = &DeleteSearchViewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteSearchView
+// This API is used to delete a query view.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DeleteSearchView(request *DeleteSearchViewRequest) (response *DeleteSearchViewResponse, err error) {
+    return c.DeleteSearchViewWithContext(context.Background(), request)
+}
+
+// DeleteSearchView
+// This API is used to delete a query view.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DeleteSearchViewWithContext(ctx context.Context, request *DeleteSearchViewRequest) (response *DeleteSearchViewResponse, err error) {
+    if request == nil {
+        request = NewDeleteSearchViewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteSearchView")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSearchView require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteSearchViewResponse()
     err = c.Send(request, response)
     return
 }
@@ -2523,6 +5287,86 @@ func (c *Client) DeleteShipperWithContext(ctx context.Context, request *DeleteSh
     return
 }
 
+func NewDeleteSplunkDeliverRequest() (request *DeleteSplunkDeliverRequest) {
+    request = &DeleteSplunkDeliverRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteSplunkDeliver")
+    
+    
+    return
+}
+
+func NewDeleteSplunkDeliverResponse() (response *DeleteSplunkDeliverResponse) {
+    response = &DeleteSplunkDeliverResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteSplunkDeliver
+// Delete a Splunk delivery task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_RECORDNOTEXIST = "ResourceNotFound.RecordNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteSplunkDeliver(request *DeleteSplunkDeliverRequest) (response *DeleteSplunkDeliverResponse, err error) {
+    return c.DeleteSplunkDeliverWithContext(context.Background(), request)
+}
+
+// DeleteSplunkDeliver
+// Delete a Splunk delivery task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_RECORDNOTEXIST = "ResourceNotFound.RecordNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteSplunkDeliverWithContext(ctx context.Context, request *DeleteSplunkDeliverRequest) (response *DeleteSplunkDeliverResponse, err error) {
+    if request == nil {
+        request = NewDeleteSplunkDeliverRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteSplunkDeliver")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSplunkDeliver require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteSplunkDeliverResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteTopicRequest() (request *DeleteTopicRequest) {
     request = &DeleteTopicRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2543,7 +5387,7 @@ func NewDeleteTopicResponse() (response *DeleteTopicResponse) {
 }
 
 // DeleteTopic
-// This API is used to delete a log topic.
+// This API is used to delete logs or metric topics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2567,7 +5411,7 @@ func (c *Client) DeleteTopic(request *DeleteTopicRequest) (response *DeleteTopic
 }
 
 // DeleteTopic
-// This API is used to delete a log topic.
+// This API is used to delete logs or metric topics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2599,6 +5443,74 @@ func (c *Client) DeleteTopicWithContext(ctx context.Context, request *DeleteTopi
     request.SetContext(ctx)
     
     response = NewDeleteTopicResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteWebCallbackRequest() (request *DeleteWebCallbackRequest) {
+    request = &DeleteWebCallbackRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteWebCallback")
+    
+    
+    return
+}
+
+func NewDeleteWebCallbackResponse() (response *DeleteWebCallbackResponse) {
+    response = &DeleteWebCallbackResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteWebCallback
+// This API is used to delete alarm channel callback configurations.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BINDEDALARM = "FailedOperation.BindedAlarm"
+//  INTERNALERROR = "InternalError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_NOTICEHASALARM = "OperationDenied.NoticeHasAlarm"
+//  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
+func (c *Client) DeleteWebCallback(request *DeleteWebCallbackRequest) (response *DeleteWebCallbackResponse, err error) {
+    return c.DeleteWebCallbackWithContext(context.Background(), request)
+}
+
+// DeleteWebCallback
+// This API is used to delete alarm channel callback configurations.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BINDEDALARM = "FailedOperation.BindedAlarm"
+//  INTERNALERROR = "InternalError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_NOTICEHASALARM = "OperationDenied.NoticeHasAlarm"
+//  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
+func (c *Client) DeleteWebCallbackWithContext(ctx context.Context, request *DeleteWebCallbackRequest) (response *DeleteWebCallbackResponse, err error) {
+    if request == nil {
+        request = NewDeleteWebCallbackRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteWebCallback")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteWebCallback require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteWebCallbackResponse()
     err = c.Send(request, response)
     return
 }
@@ -2879,6 +5791,212 @@ func (c *Client) DescribeAlertRecordHistoryWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeCloudProductLogTasksRequest() (request *DescribeCloudProductLogTasksRequest) {
+    request = &DescribeCloudProductLogTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeCloudProductLogTasks")
+    
+    
+    return
+}
+
+func NewDescribeCloudProductLogTasksResponse() (response *DescribeCloudProductLogTasksResponse) {
+    response = &DescribeCloudProductLogTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCloudProductLogTasks
+// Cloud product integration uses relevant APIs
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeCloudProductLogTasks(request *DescribeCloudProductLogTasksRequest) (response *DescribeCloudProductLogTasksResponse, err error) {
+    return c.DescribeCloudProductLogTasksWithContext(context.Background(), request)
+}
+
+// DescribeCloudProductLogTasks
+// Cloud product integration uses relevant APIs
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeCloudProductLogTasksWithContext(ctx context.Context, request *DescribeCloudProductLogTasksRequest) (response *DescribeCloudProductLogTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeCloudProductLogTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeCloudProductLogTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCloudProductLogTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCloudProductLogTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeClusterBaseMetricConfigsRequest() (request *DescribeClusterBaseMetricConfigsRequest) {
+    request = &DescribeClusterBaseMetricConfigsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeClusterBaseMetricConfigs")
+    
+    
+    return
+}
+
+func NewDescribeClusterBaseMetricConfigsResponse() (response *DescribeClusterBaseMetricConfigsResponse) {
+    response = &DescribeClusterBaseMetricConfigsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeClusterBaseMetricConfigs
+// This API is used to obtain metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeClusterBaseMetricConfigs(request *DescribeClusterBaseMetricConfigsRequest) (response *DescribeClusterBaseMetricConfigsResponse, err error) {
+    return c.DescribeClusterBaseMetricConfigsWithContext(context.Background(), request)
+}
+
+// DescribeClusterBaseMetricConfigs
+// This API is used to obtain metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeClusterBaseMetricConfigsWithContext(ctx context.Context, request *DescribeClusterBaseMetricConfigsRequest) (response *DescribeClusterBaseMetricConfigsResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterBaseMetricConfigsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeClusterBaseMetricConfigs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterBaseMetricConfigs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeClusterBaseMetricConfigsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeClusterMetricConfigsRequest() (request *DescribeClusterMetricConfigsRequest) {
+    request = &DescribeClusterMetricConfigsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeClusterMetricConfigs")
+    
+    
+    return
+}
+
+func NewDescribeClusterMetricConfigsResponse() (response *DescribeClusterMetricConfigsResponse) {
+    response = &DescribeClusterMetricConfigsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeClusterMetricConfigs
+// This API is used to obtain metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeClusterMetricConfigs(request *DescribeClusterMetricConfigsRequest) (response *DescribeClusterMetricConfigsResponse, err error) {
+    return c.DescribeClusterMetricConfigsWithContext(context.Background(), request)
+}
+
+// DescribeClusterMetricConfigs
+// This API is used to obtain metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeClusterMetricConfigsWithContext(ctx context.Context, request *DescribeClusterMetricConfigsRequest) (response *DescribeClusterMetricConfigsResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterMetricConfigsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeClusterMetricConfigs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterMetricConfigs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeClusterMetricConfigsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeConfigMachineGroupsRequest() (request *DescribeConfigMachineGroupsRequest) {
     request = &DescribeConfigMachineGroupsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3023,6 +6141,56 @@ func (c *Client) DescribeConfigsWithContext(ctx context.Context, request *Descri
     return
 }
 
+func NewDescribeConsolesRequest() (request *DescribeConsolesRequest) {
+    request = &DescribeConsolesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeConsoles")
+    
+    
+    return
+}
+
+func NewDescribeConsolesResponse() (response *DescribeConsolesResponse) {
+    response = &DescribeConsolesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeConsoles
+// Query the DataSight console instance list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeConsoles(request *DescribeConsolesRequest) (response *DescribeConsolesResponse, err error) {
+    return c.DescribeConsolesWithContext(context.Background(), request)
+}
+
+// DescribeConsoles
+// Query the DataSight console instance list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeConsolesWithContext(ctx context.Context, request *DescribeConsolesRequest) (response *DescribeConsolesResponse, err error) {
+    if request == nil {
+        request = NewDescribeConsolesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeConsoles")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConsoles require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeConsolesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeConsumerRequest() (request *DescribeConsumerRequest) {
     request = &DescribeConsumerRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3087,6 +6255,278 @@ func (c *Client) DescribeConsumerWithContext(ctx context.Context, request *Descr
     request.SetContext(ctx)
     
     response = NewDescribeConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeConsumerGroupsRequest() (request *DescribeConsumerGroupsRequest) {
+    request = &DescribeConsumerGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeConsumerGroups")
+    
+    
+    return
+}
+
+func NewDescribeConsumerGroupsResponse() (response *DescribeConsumerGroupsResponse) {
+    response = &DescribeConsumerGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeConsumerGroups
+// This API is used to obtain the consumer group list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeConsumerGroups(request *DescribeConsumerGroupsRequest) (response *DescribeConsumerGroupsResponse, err error) {
+    return c.DescribeConsumerGroupsWithContext(context.Background(), request)
+}
+
+// DescribeConsumerGroups
+// This API is used to obtain the consumer group list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeConsumerGroupsWithContext(ctx context.Context, request *DescribeConsumerGroupsRequest) (response *DescribeConsumerGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeConsumerGroupsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeConsumerGroups")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConsumerGroups require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeConsumerGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeConsumerOffsetsRequest() (request *DescribeConsumerOffsetsRequest) {
+    request = &DescribeConsumerOffsetsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeConsumerOffsets")
+    
+    
+    return
+}
+
+func NewDescribeConsumerOffsetsResponse() (response *DescribeConsumerOffsetsResponse) {
+    response = &DescribeConsumerOffsetsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeConsumerOffsets
+// Obtaining the Consumer Group Point Information
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeConsumerOffsets(request *DescribeConsumerOffsetsRequest) (response *DescribeConsumerOffsetsResponse, err error) {
+    return c.DescribeConsumerOffsetsWithContext(context.Background(), request)
+}
+
+// DescribeConsumerOffsets
+// Obtaining the Consumer Group Point Information
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeConsumerOffsetsWithContext(ctx context.Context, request *DescribeConsumerOffsetsRequest) (response *DescribeConsumerOffsetsResponse, err error) {
+    if request == nil {
+        request = NewDescribeConsumerOffsetsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeConsumerOffsets")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConsumerOffsets require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeConsumerOffsetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeConsumerPreviewRequest() (request *DescribeConsumerPreviewRequest) {
+    request = &DescribeConsumerPreviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeConsumerPreview")
+    
+    
+    return
+}
+
+func NewDescribeConsumerPreviewResponse() (response *DescribeConsumerPreviewResponse) {
+    response = &DescribeConsumerPreviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeConsumerPreview
+// This API is used to preview Kafka shipping data.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeConsumerPreview(request *DescribeConsumerPreviewRequest) (response *DescribeConsumerPreviewResponse, err error) {
+    return c.DescribeConsumerPreviewWithContext(context.Background(), request)
+}
+
+// DescribeConsumerPreview
+// This API is used to preview Kafka shipping data.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeConsumerPreviewWithContext(ctx context.Context, request *DescribeConsumerPreviewRequest) (response *DescribeConsumerPreviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeConsumerPreviewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeConsumerPreview")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConsumerPreview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeConsumerPreviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeConsumersRequest() (request *DescribeConsumersRequest) {
+    request = &DescribeConsumersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeConsumers")
+    
+    
+    return
+}
+
+func NewDescribeConsumersResponse() (response *DescribeConsumersResponse) {
+    response = &DescribeConsumersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeConsumers
+// This API is used to obtain the shipping rule information list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeConsumers(request *DescribeConsumersRequest) (response *DescribeConsumersResponse, err error) {
+    return c.DescribeConsumersWithContext(context.Background(), request)
+}
+
+// DescribeConsumers
+// This API is used to obtain the shipping rule information list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeConsumersWithContext(ctx context.Context, request *DescribeConsumersRequest) (response *DescribeConsumersResponse, err error) {
+    if request == nil {
+        request = NewDescribeConsumersRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeConsumers")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConsumers require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeConsumersResponse()
     err = c.Send(request, response)
     return
 }
@@ -3163,6 +6603,78 @@ func (c *Client) DescribeCosRechargesWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeDashboardSubscribesRequest() (request *DescribeDashboardSubscribesRequest) {
+    request = &DescribeDashboardSubscribesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeDashboardSubscribes")
+    
+    
+    return
+}
+
+func NewDescribeDashboardSubscribesResponse() (response *DescribeDashboardSubscribesResponse) {
+    response = &DescribeDashboardSubscribesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDashboardSubscribes
+// This API is used to obtain the dashboard subscription list, and supports paging.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDashboardSubscribes(request *DescribeDashboardSubscribesRequest) (response *DescribeDashboardSubscribesResponse, err error) {
+    return c.DescribeDashboardSubscribesWithContext(context.Background(), request)
+}
+
+// DescribeDashboardSubscribes
+// This API is used to obtain the dashboard subscription list, and supports paging.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeDashboardSubscribesWithContext(ctx context.Context, request *DescribeDashboardSubscribesRequest) (response *DescribeDashboardSubscribesResponse, err error) {
+    if request == nil {
+        request = NewDescribeDashboardSubscribesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeDashboardSubscribes")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDashboardSubscribes require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDashboardSubscribesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDataTransformInfoRequest() (request *DescribeDataTransformInfoRequest) {
     request = &DescribeDataTransformInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3229,6 +6741,232 @@ func (c *Client) DescribeDataTransformInfoWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeDataTransformInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDlcDeliversRequest() (request *DescribeDlcDeliversRequest) {
+    request = &DescribeDlcDeliversRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeDlcDelivers")
+    
+    
+    return
+}
+
+func NewDescribeDlcDeliversResponse() (response *DescribeDlcDeliversResponse) {
+    response = &DescribeDlcDeliversResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDlcDelivers
+// This API is used to search alarm channel callback configuration lists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeDlcDelivers(request *DescribeDlcDeliversRequest) (response *DescribeDlcDeliversResponse, err error) {
+    return c.DescribeDlcDeliversWithContext(context.Background(), request)
+}
+
+// DescribeDlcDelivers
+// This API is used to search alarm channel callback configuration lists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeDlcDeliversWithContext(ctx context.Context, request *DescribeDlcDeliversRequest) (response *DescribeDlcDeliversResponse, err error) {
+    if request == nil {
+        request = NewDescribeDlcDeliversRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeDlcDelivers")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDlcDelivers require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDlcDeliversResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeEsRechargePreviewRequest() (request *DescribeEsRechargePreviewRequest) {
+    request = &DescribeEsRechargePreviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeEsRechargePreview")
+    
+    
+    return
+}
+
+func NewDescribeEsRechargePreviewResponse() (response *DescribeEsRechargePreviewResponse) {
+    response = &DescribeEsRechargePreviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeEsRechargePreview
+// Import Preview
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeEsRechargePreview(request *DescribeEsRechargePreviewRequest) (response *DescribeEsRechargePreviewResponse, err error) {
+    return c.DescribeEsRechargePreviewWithContext(context.Background(), request)
+}
+
+// DescribeEsRechargePreview
+// Import Preview
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeEsRechargePreviewWithContext(ctx context.Context, request *DescribeEsRechargePreviewRequest) (response *DescribeEsRechargePreviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeEsRechargePreviewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeEsRechargePreview")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEsRechargePreview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeEsRechargePreviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeEsRechargesRequest() (request *DescribeEsRechargesRequest) {
+    request = &DescribeEsRechargesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeEsRecharges")
+    
+    
+    return
+}
+
+func NewDescribeEsRechargesResponse() (response *DescribeEsRechargesResponse) {
+    response = &DescribeEsRechargesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeEsRecharges
+// Retrieve the es import configuration
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeEsRecharges(request *DescribeEsRechargesRequest) (response *DescribeEsRechargesResponse, err error) {
+    return c.DescribeEsRechargesWithContext(context.Background(), request)
+}
+
+// DescribeEsRecharges
+// Retrieve the es import configuration
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeEsRechargesWithContext(ctx context.Context, request *DescribeEsRechargesRequest) (response *DescribeEsRechargesResponse, err error) {
+    if request == nil {
+        request = NewDescribeEsRechargesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeEsRecharges")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEsRecharges require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeEsRechargesResponse()
     err = c.Send(request, response)
     return
 }
@@ -3305,6 +7043,84 @@ func (c *Client) DescribeExportsWithContext(ctx context.Context, request *Descri
     return
 }
 
+func NewDescribeHostMetricConfigsRequest() (request *DescribeHostMetricConfigsRequest) {
+    request = &DescribeHostMetricConfigsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeHostMetricConfigs")
+    
+    
+    return
+}
+
+func NewDescribeHostMetricConfigsResponse() (response *DescribeHostMetricConfigsResponse) {
+    response = &DescribeHostMetricConfigsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeHostMetricConfigs
+// This API is used to obtain metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeHostMetricConfigs(request *DescribeHostMetricConfigsRequest) (response *DescribeHostMetricConfigsResponse, err error) {
+    return c.DescribeHostMetricConfigsWithContext(context.Background(), request)
+}
+
+// DescribeHostMetricConfigs
+// This API is used to obtain metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeHostMetricConfigsWithContext(ctx context.Context, request *DescribeHostMetricConfigsRequest) (response *DescribeHostMetricConfigsResponse, err error) {
+    if request == nil {
+        request = NewDescribeHostMetricConfigsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeHostMetricConfigs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeHostMetricConfigs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeHostMetricConfigsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeIndexRequest() (request *DescribeIndexRequest) {
     request = &DescribeIndexRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3329,6 +7145,7 @@ func NewDescribeIndexResponse() (response *DescribeIndexResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3349,6 +7166,7 @@ func (c *Client) DescribeIndex(request *DescribeIndexRequest) (response *Describ
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3402,6 +7220,7 @@ func NewDescribeKafkaConsumerResponse() (response *DescribeKafkaConsumerResponse
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -3421,6 +7240,7 @@ func (c *Client) DescribeKafkaConsumer(request *DescribeKafkaConsumerRequest) (r
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -3443,6 +7263,268 @@ func (c *Client) DescribeKafkaConsumerWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeKafkaConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeKafkaConsumerGroupDetailRequest() (request *DescribeKafkaConsumerGroupDetailRequest) {
+    request = &DescribeKafkaConsumerGroupDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeKafkaConsumerGroupDetail")
+    
+    
+    return
+}
+
+func NewDescribeKafkaConsumerGroupDetailResponse() (response *DescribeKafkaConsumerGroupDetailResponse) {
+    response = &DescribeKafkaConsumerGroupDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeKafkaConsumerGroupDetail
+// Retrieve Kafka protocol consumption group details
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeKafkaConsumerGroupDetail(request *DescribeKafkaConsumerGroupDetailRequest) (response *DescribeKafkaConsumerGroupDetailResponse, err error) {
+    return c.DescribeKafkaConsumerGroupDetailWithContext(context.Background(), request)
+}
+
+// DescribeKafkaConsumerGroupDetail
+// Retrieve Kafka protocol consumption group details
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeKafkaConsumerGroupDetailWithContext(ctx context.Context, request *DescribeKafkaConsumerGroupDetailRequest) (response *DescribeKafkaConsumerGroupDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeKafkaConsumerGroupDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeKafkaConsumerGroupDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeKafkaConsumerGroupDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeKafkaConsumerGroupDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeKafkaConsumerGroupListRequest() (request *DescribeKafkaConsumerGroupListRequest) {
+    request = &DescribeKafkaConsumerGroupListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeKafkaConsumerGroupList")
+    
+    
+    return
+}
+
+func NewDescribeKafkaConsumerGroupListResponse() (response *DescribeKafkaConsumerGroupListResponse) {
+    response = &DescribeKafkaConsumerGroupListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeKafkaConsumerGroupList
+// Retrieve the information list of Kafka protocol consumption groups
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeKafkaConsumerGroupList(request *DescribeKafkaConsumerGroupListRequest) (response *DescribeKafkaConsumerGroupListResponse, err error) {
+    return c.DescribeKafkaConsumerGroupListWithContext(context.Background(), request)
+}
+
+// DescribeKafkaConsumerGroupList
+// Retrieve the information list of Kafka protocol consumption groups
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeKafkaConsumerGroupListWithContext(ctx context.Context, request *DescribeKafkaConsumerGroupListRequest) (response *DescribeKafkaConsumerGroupListResponse, err error) {
+    if request == nil {
+        request = NewDescribeKafkaConsumerGroupListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeKafkaConsumerGroupList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeKafkaConsumerGroupList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeKafkaConsumerGroupListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeKafkaConsumerPreviewRequest() (request *DescribeKafkaConsumerPreviewRequest) {
+    request = &DescribeKafkaConsumerPreviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeKafkaConsumerPreview")
+    
+    
+    return
+}
+
+func NewDescribeKafkaConsumerPreviewResponse() (response *DescribeKafkaConsumerPreviewResponse) {
+    response = &DescribeKafkaConsumerPreviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeKafkaConsumerPreview
+// This API is used to preview the Kafka consumption.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeKafkaConsumerPreview(request *DescribeKafkaConsumerPreviewRequest) (response *DescribeKafkaConsumerPreviewResponse, err error) {
+    return c.DescribeKafkaConsumerPreviewWithContext(context.Background(), request)
+}
+
+// DescribeKafkaConsumerPreview
+// This API is used to preview the Kafka consumption.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeKafkaConsumerPreviewWithContext(ctx context.Context, request *DescribeKafkaConsumerPreviewRequest) (response *DescribeKafkaConsumerPreviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeKafkaConsumerPreviewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeKafkaConsumerPreview")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeKafkaConsumerPreview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeKafkaConsumerPreviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeKafkaConsumerTopicsRequest() (request *DescribeKafkaConsumerTopicsRequest) {
+    request = &DescribeKafkaConsumerTopicsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeKafkaConsumerTopics")
+    
+    
+    return
+}
+
+func NewDescribeKafkaConsumerTopicsResponse() (response *DescribeKafkaConsumerTopicsResponse) {
+    response = &DescribeKafkaConsumerTopicsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeKafkaConsumerTopics
+// This API is used to obtain the topic information list of Kafka consumption.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeKafkaConsumerTopics(request *DescribeKafkaConsumerTopicsRequest) (response *DescribeKafkaConsumerTopicsResponse, err error) {
+    return c.DescribeKafkaConsumerTopicsWithContext(context.Background(), request)
+}
+
+// DescribeKafkaConsumerTopics
+// This API is used to obtain the topic information list of Kafka consumption.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeKafkaConsumerTopicsWithContext(ctx context.Context, request *DescribeKafkaConsumerTopicsRequest) (response *DescribeKafkaConsumerTopicsResponse, err error) {
+    if request == nil {
+        request = NewDescribeKafkaConsumerTopicsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeKafkaConsumerTopics")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeKafkaConsumerTopics require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeKafkaConsumerTopicsResponse()
     err = c.Send(request, response)
     return
 }
@@ -3634,6 +7716,7 @@ func NewDescribeLogHistogramResponse() (response *DescribeLogHistogramResponse) 
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
 //  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
+//  INTERNALERROR_SERVERBUSY = "InternalError.ServerBusy"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -3661,6 +7744,7 @@ func (c *Client) DescribeLogHistogram(request *DescribeLogHistogramRequest) (res
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
 //  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
+//  INTERNALERROR_SERVERBUSY = "InternalError.ServerBusy"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -3971,6 +8055,444 @@ func (c *Client) DescribeMachinesWithContext(ctx context.Context, request *Descr
     return
 }
 
+func NewDescribeMetricCorrectDimensionRequest() (request *DescribeMetricCorrectDimensionRequest) {
+    request = &DescribeMetricCorrectDimensionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeMetricCorrectDimension")
+    
+    
+    return
+}
+
+func NewDescribeMetricCorrectDimensionResponse() (response *DescribeMetricCorrectDimensionResponse) {
+    response = &DescribeMetricCorrectDimensionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMetricCorrectDimension
+// This API is used to obtain metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeMetricCorrectDimension(request *DescribeMetricCorrectDimensionRequest) (response *DescribeMetricCorrectDimensionResponse, err error) {
+    return c.DescribeMetricCorrectDimensionWithContext(context.Background(), request)
+}
+
+// DescribeMetricCorrectDimension
+// This API is used to obtain metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeMetricCorrectDimensionWithContext(ctx context.Context, request *DescribeMetricCorrectDimensionRequest) (response *DescribeMetricCorrectDimensionResponse, err error) {
+    if request == nil {
+        request = NewDescribeMetricCorrectDimensionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeMetricCorrectDimension")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMetricCorrectDimension require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMetricCorrectDimensionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMetricSubscribePreviewRequest() (request *DescribeMetricSubscribePreviewRequest) {
+    request = &DescribeMetricSubscribePreviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeMetricSubscribePreview")
+    
+    
+    return
+}
+
+func NewDescribeMetricSubscribePreviewResponse() (response *DescribeMetricSubscribePreviewResponse) {
+    response = &DescribeMetricSubscribePreviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMetricSubscribePreview
+// This API is used to create metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeMetricSubscribePreview(request *DescribeMetricSubscribePreviewRequest) (response *DescribeMetricSubscribePreviewResponse, err error) {
+    return c.DescribeMetricSubscribePreviewWithContext(context.Background(), request)
+}
+
+// DescribeMetricSubscribePreview
+// This API is used to create metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeMetricSubscribePreviewWithContext(ctx context.Context, request *DescribeMetricSubscribePreviewRequest) (response *DescribeMetricSubscribePreviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeMetricSubscribePreviewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeMetricSubscribePreview")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMetricSubscribePreview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMetricSubscribePreviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMetricSubscribesRequest() (request *DescribeMetricSubscribesRequest) {
+    request = &DescribeMetricSubscribesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeMetricSubscribes")
+    
+    
+    return
+}
+
+func NewDescribeMetricSubscribesResponse() (response *DescribeMetricSubscribesResponse) {
+    response = &DescribeMetricSubscribesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMetricSubscribes
+// This API is used to obtain metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeMetricSubscribes(request *DescribeMetricSubscribesRequest) (response *DescribeMetricSubscribesResponse, err error) {
+    return c.DescribeMetricSubscribesWithContext(context.Background(), request)
+}
+
+// DescribeMetricSubscribes
+// This API is used to obtain metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeMetricSubscribesWithContext(ctx context.Context, request *DescribeMetricSubscribesRequest) (response *DescribeMetricSubscribesResponse, err error) {
+    if request == nil {
+        request = NewDescribeMetricSubscribesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeMetricSubscribes")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMetricSubscribes require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMetricSubscribesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeNetworkApplicationDetailRequest() (request *DescribeNetworkApplicationDetailRequest) {
+    request = &DescribeNetworkApplicationDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeNetworkApplicationDetail")
+    
+    
+    return
+}
+
+func NewDescribeNetworkApplicationDetailResponse() (response *DescribeNetworkApplicationDetailResponse) {
+    response = &DescribeNetworkApplicationDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeNetworkApplicationDetail
+// Retrieve web application details
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) DescribeNetworkApplicationDetail(request *DescribeNetworkApplicationDetailRequest) (response *DescribeNetworkApplicationDetailResponse, err error) {
+    return c.DescribeNetworkApplicationDetailWithContext(context.Background(), request)
+}
+
+// DescribeNetworkApplicationDetail
+// Retrieve web application details
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) DescribeNetworkApplicationDetailWithContext(ctx context.Context, request *DescribeNetworkApplicationDetailRequest) (response *DescribeNetworkApplicationDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeNetworkApplicationDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeNetworkApplicationDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeNetworkApplicationDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeNetworkApplicationDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeNetworkApplicationsRequest() (request *DescribeNetworkApplicationsRequest) {
+    request = &DescribeNetworkApplicationsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeNetworkApplications")
+    
+    
+    return
+}
+
+func NewDescribeNetworkApplicationsResponse() (response *DescribeNetworkApplicationsResponse) {
+    response = &DescribeNetworkApplicationsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeNetworkApplications
+// Retrieve the network application list
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) DescribeNetworkApplications(request *DescribeNetworkApplicationsRequest) (response *DescribeNetworkApplicationsResponse, err error) {
+    return c.DescribeNetworkApplicationsWithContext(context.Background(), request)
+}
+
+// DescribeNetworkApplications
+// Retrieve the network application list
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) DescribeNetworkApplicationsWithContext(ctx context.Context, request *DescribeNetworkApplicationsRequest) (response *DescribeNetworkApplicationsResponse, err error) {
+    if request == nil {
+        request = NewDescribeNetworkApplicationsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeNetworkApplications")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeNetworkApplications require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeNetworkApplicationsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeNoticeContentsRequest() (request *DescribeNoticeContentsRequest) {
+    request = &DescribeNoticeContentsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeNoticeContents")
+    
+    
+    return
+}
+
+func NewDescribeNoticeContentsResponse() (response *DescribeNoticeContentsResponse) {
+    response = &DescribeNoticeContentsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeNoticeContents
+// This API is used to obtain the notification content list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeNoticeContents(request *DescribeNoticeContentsRequest) (response *DescribeNoticeContentsResponse, err error) {
+    return c.DescribeNoticeContentsWithContext(context.Background(), request)
+}
+
+// DescribeNoticeContents
+// This API is used to obtain the notification content list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeNoticeContentsWithContext(ctx context.Context, request *DescribeNoticeContentsRequest) (response *DescribeNoticeContentsResponse, err error) {
+    if request == nil {
+        request = NewDescribeNoticeContentsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeNoticeContents")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeNoticeContents require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeNoticeContentsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribePartitionsRequest() (request *DescribePartitionsRequest) {
     request = &DescribePartitionsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3991,7 +8513,7 @@ func NewDescribePartitionsResponse() (response *DescribePartitionsResponse) {
 }
 
 // DescribePartitions
-// This API is used to get the list of topic partitions.
+// This API is deprecated. If needed, please use the DescribeTopics API to get the number of partitions.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4010,7 +8532,7 @@ func (c *Client) DescribePartitions(request *DescribePartitionsRequest) (respons
 }
 
 // DescribePartitions
-// This API is used to get the list of topic partitions.
+// This API is deprecated. If needed, please use the DescribeTopics API to get the number of partitions.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4041,6 +8563,214 @@ func (c *Client) DescribePartitionsWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeRebuildIndexTasksRequest() (request *DescribeRebuildIndexTasksRequest) {
+    request = &DescribeRebuildIndexTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeRebuildIndexTasks")
+    
+    
+    return
+}
+
+func NewDescribeRebuildIndexTasksResponse() (response *DescribeRebuildIndexTasksResponse) {
+    response = &DescribeRebuildIndexTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRebuildIndexTasks
+// This API is used to obtain the list of rebuild index tasks.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeRebuildIndexTasks(request *DescribeRebuildIndexTasksRequest) (response *DescribeRebuildIndexTasksResponse, err error) {
+    return c.DescribeRebuildIndexTasksWithContext(context.Background(), request)
+}
+
+// DescribeRebuildIndexTasks
+// This API is used to obtain the list of rebuild index tasks.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeRebuildIndexTasksWithContext(ctx context.Context, request *DescribeRebuildIndexTasksRequest) (response *DescribeRebuildIndexTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeRebuildIndexTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeRebuildIndexTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRebuildIndexTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRebuildIndexTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRecordingRuleTaskRequest() (request *DescribeRecordingRuleTaskRequest) {
+    request = &DescribeRecordingRuleTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeRecordingRuleTask")
+    
+    
+    return
+}
+
+func NewDescribeRecordingRuleTaskResponse() (response *DescribeRecordingRuleTaskResponse) {
+    response = &DescribeRecordingRuleTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRecordingRuleTask
+// This API is used to retrieve the pre-aggregation task list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeRecordingRuleTask(request *DescribeRecordingRuleTaskRequest) (response *DescribeRecordingRuleTaskResponse, err error) {
+    return c.DescribeRecordingRuleTaskWithContext(context.Background(), request)
+}
+
+// DescribeRecordingRuleTask
+// This API is used to retrieve the pre-aggregation task list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeRecordingRuleTaskWithContext(ctx context.Context, request *DescribeRecordingRuleTaskRequest) (response *DescribeRecordingRuleTaskResponse, err error) {
+    if request == nil {
+        request = NewDescribeRecordingRuleTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeRecordingRuleTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRecordingRuleTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRecordingRuleTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRecordingRuleYamlTaskRequest() (request *DescribeRecordingRuleYamlTaskRequest) {
+    request = &DescribeRecordingRuleYamlTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeRecordingRuleYamlTask")
+    
+    
+    return
+}
+
+func NewDescribeRecordingRuleYamlTaskResponse() (response *DescribeRecordingRuleYamlTaskResponse) {
+    response = &DescribeRecordingRuleYamlTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRecordingRuleYamlTask
+// This API is used to retrieve the pre-aggregation task list in yaml.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeRecordingRuleYamlTask(request *DescribeRecordingRuleYamlTaskRequest) (response *DescribeRecordingRuleYamlTaskResponse, err error) {
+    return c.DescribeRecordingRuleYamlTaskWithContext(context.Background(), request)
+}
+
+// DescribeRecordingRuleYamlTask
+// This API is used to retrieve the pre-aggregation task list in yaml.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeRecordingRuleYamlTaskWithContext(ctx context.Context, request *DescribeRecordingRuleYamlTaskRequest) (response *DescribeRecordingRuleYamlTaskResponse, err error) {
+    if request == nil {
+        request = NewDescribeRecordingRuleYamlTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeRecordingRuleYamlTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRecordingRuleYamlTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRecordingRuleYamlTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeScheduledSqlInfoRequest() (request *DescribeScheduledSqlInfoRequest) {
     request = &DescribeScheduledSqlInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4066,6 +8796,7 @@ func NewDescribeScheduledSqlInfoResponse() (response *DescribeScheduledSqlInfoRe
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -4085,6 +8816,7 @@ func (c *Client) DescribeScheduledSqlInfo(request *DescribeScheduledSqlInfoReque
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -4107,6 +8839,76 @@ func (c *Client) DescribeScheduledSqlInfoWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribeScheduledSqlInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSearchViewsRequest() (request *DescribeSearchViewsRequest) {
+    request = &DescribeSearchViewsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeSearchViews")
+    
+    
+    return
+}
+
+func NewDescribeSearchViewsResponse() (response *DescribeSearchViewsResponse) {
+    response = &DescribeSearchViewsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSearchViews
+// Query view list
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_RECORDNOTEXIST = "ResourceNotFound.RecordNotExist"
+func (c *Client) DescribeSearchViews(request *DescribeSearchViewsRequest) (response *DescribeSearchViewsResponse, err error) {
+    return c.DescribeSearchViewsWithContext(context.Background(), request)
+}
+
+// DescribeSearchViews
+// Query view list
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_RECORDNOTEXIST = "ResourceNotFound.RecordNotExist"
+func (c *Client) DescribeSearchViewsWithContext(ctx context.Context, request *DescribeSearchViewsRequest) (response *DescribeSearchViewsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSearchViewsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeSearchViews")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSearchViews require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSearchViewsResponse()
     err = c.Send(request, response)
     return
 }
@@ -4257,6 +9059,312 @@ func (c *Client) DescribeShippersWithContext(ctx context.Context, request *Descr
     return
 }
 
+func NewDescribeSplunkDeliversRequest() (request *DescribeSplunkDeliversRequest) {
+    request = &DescribeSplunkDeliversRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeSplunkDelivers")
+    
+    
+    return
+}
+
+func NewDescribeSplunkDeliversResponse() (response *DescribeSplunkDeliversResponse) {
+    response = &DescribeSplunkDeliversResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSplunkDelivers
+// Retrieve the Splunk delivery task list
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_RECORDNOTEXIST = "ResourceNotFound.RecordNotExist"
+func (c *Client) DescribeSplunkDelivers(request *DescribeSplunkDeliversRequest) (response *DescribeSplunkDeliversResponse, err error) {
+    return c.DescribeSplunkDeliversWithContext(context.Background(), request)
+}
+
+// DescribeSplunkDelivers
+// Retrieve the Splunk delivery task list
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_RECORDNOTEXIST = "ResourceNotFound.RecordNotExist"
+func (c *Client) DescribeSplunkDeliversWithContext(ctx context.Context, request *DescribeSplunkDeliversRequest) (response *DescribeSplunkDeliversResponse, err error) {
+    if request == nil {
+        request = NewDescribeSplunkDeliversRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeSplunkDelivers")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSplunkDelivers require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSplunkDeliversResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSplunkPreviewRequest() (request *DescribeSplunkPreviewRequest) {
+    request = &DescribeSplunkPreviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeSplunkPreview")
+    
+    
+    return
+}
+
+func NewDescribeSplunkPreviewResponse() (response *DescribeSplunkPreviewResponse) {
+    response = &DescribeSplunkPreviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSplunkPreview
+// splunk delivery task preview
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeSplunkPreview(request *DescribeSplunkPreviewRequest) (response *DescribeSplunkPreviewResponse, err error) {
+    return c.DescribeSplunkPreviewWithContext(context.Background(), request)
+}
+
+// DescribeSplunkPreview
+// splunk delivery task preview
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeSplunkPreviewWithContext(ctx context.Context, request *DescribeSplunkPreviewRequest) (response *DescribeSplunkPreviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeSplunkPreviewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeSplunkPreview")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSplunkPreview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSplunkPreviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTopicBaseMetricConfigsRequest() (request *DescribeTopicBaseMetricConfigsRequest) {
+    request = &DescribeTopicBaseMetricConfigsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeTopicBaseMetricConfigs")
+    
+    
+    return
+}
+
+func NewDescribeTopicBaseMetricConfigsResponse() (response *DescribeTopicBaseMetricConfigsResponse) {
+    response = &DescribeTopicBaseMetricConfigsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTopicBaseMetricConfigs
+// This API is used to obtain metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTopicBaseMetricConfigs(request *DescribeTopicBaseMetricConfigsRequest) (response *DescribeTopicBaseMetricConfigsResponse, err error) {
+    return c.DescribeTopicBaseMetricConfigsWithContext(context.Background(), request)
+}
+
+// DescribeTopicBaseMetricConfigs
+// This API is used to obtain metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTopicBaseMetricConfigsWithContext(ctx context.Context, request *DescribeTopicBaseMetricConfigsRequest) (response *DescribeTopicBaseMetricConfigsResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopicBaseMetricConfigsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeTopicBaseMetricConfigs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTopicBaseMetricConfigs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTopicBaseMetricConfigsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTopicMetricConfigsRequest() (request *DescribeTopicMetricConfigsRequest) {
+    request = &DescribeTopicMetricConfigsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeTopicMetricConfigs")
+    
+    
+    return
+}
+
+func NewDescribeTopicMetricConfigsResponse() (response *DescribeTopicMetricConfigsResponse) {
+    response = &DescribeTopicMetricConfigsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTopicMetricConfigs
+// This API is used to obtain metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTopicMetricConfigs(request *DescribeTopicMetricConfigsRequest) (response *DescribeTopicMetricConfigsResponse, err error) {
+    return c.DescribeTopicMetricConfigsWithContext(context.Background(), request)
+}
+
+// DescribeTopicMetricConfigs
+// This API is used to obtain metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTopicMetricConfigsWithContext(ctx context.Context, request *DescribeTopicMetricConfigsRequest) (response *DescribeTopicMetricConfigsResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopicMetricConfigsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeTopicMetricConfigs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTopicMetricConfigs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTopicMetricConfigsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTopicsRequest() (request *DescribeTopicsRequest) {
     request = &DescribeTopicsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4277,11 +9385,12 @@ func NewDescribeTopicsResponse() (response *DescribeTopicsResponse) {
 }
 
 // DescribeTopics
-// This API is used to get the list of log topics and supports pagination.
+// This API is used to obtain logs or metric topic lists and supports pagination.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -4300,11 +9409,12 @@ func (c *Client) DescribeTopics(request *DescribeTopicsRequest) (response *Descr
 }
 
 // DescribeTopics
-// This API is used to get the list of log topics and supports pagination.
+// This API is used to obtain logs or metric topic lists and supports pagination.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -4331,6 +9441,138 @@ func (c *Client) DescribeTopicsWithContext(ctx context.Context, request *Describ
     request.SetContext(ctx)
     
     response = NewDescribeTopicsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeWebCallbacksRequest() (request *DescribeWebCallbacksRequest) {
+    request = &DescribeWebCallbacksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeWebCallbacks")
+    
+    
+    return
+}
+
+func NewDescribeWebCallbacksResponse() (response *DescribeWebCallbacksResponse) {
+    response = &DescribeWebCallbacksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeWebCallbacks
+// This API is used to search alarm channel callback configuration lists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeWebCallbacks(request *DescribeWebCallbacksRequest) (response *DescribeWebCallbacksResponse, err error) {
+    return c.DescribeWebCallbacksWithContext(context.Background(), request)
+}
+
+// DescribeWebCallbacks
+// This API is used to search alarm channel callback configuration lists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DescribeWebCallbacksWithContext(ctx context.Context, request *DescribeWebCallbacksRequest) (response *DescribeWebCallbacksResponse, err error) {
+    if request == nil {
+        request = NewDescribeWebCallbacksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeWebCallbacks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWebCallbacks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeWebCallbacksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEstimateRebuildIndexTaskRequest() (request *EstimateRebuildIndexTaskRequest) {
+    request = &EstimateRebuildIndexTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "EstimateRebuildIndexTask")
+    
+    
+    return
+}
+
+func NewEstimateRebuildIndexTaskResponse() (response *EstimateRebuildIndexTaskResponse) {
+    response = &EstimateRebuildIndexTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EstimateRebuildIndexTask
+// This API is used to estimate rebuild index tasks.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) EstimateRebuildIndexTask(request *EstimateRebuildIndexTaskRequest) (response *EstimateRebuildIndexTaskResponse, err error) {
+    return c.EstimateRebuildIndexTaskWithContext(context.Background(), request)
+}
+
+// EstimateRebuildIndexTask
+// This API is used to estimate rebuild index tasks.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) EstimateRebuildIndexTaskWithContext(ctx context.Context, request *EstimateRebuildIndexTaskRequest) (response *EstimateRebuildIndexTaskResponse, err error) {
+    if request == nil {
+        request = NewEstimateRebuildIndexTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "EstimateRebuildIndexTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EstimateRebuildIndexTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEstimateRebuildIndexTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -4369,6 +9611,7 @@ func NewGetAlarmLogResponse() (response *GetAlarmLogResponse) {
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
 //  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
+//  INTERNALERROR_SERVERBUSY = "InternalError.ServerBusy"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -4397,6 +9640,7 @@ func (c *Client) GetAlarmLog(request *GetAlarmLogRequest) (response *GetAlarmLog
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
 //  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
+//  INTERNALERROR_SERVERBUSY = "InternalError.ServerBusy"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -4423,6 +9667,134 @@ func (c *Client) GetAlarmLogWithContext(ctx context.Context, request *GetAlarmLo
     return
 }
 
+func NewGetClsServiceRequest() (request *GetClsServiceRequest) {
+    request = &GetClsServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "GetClsService")
+    
+    
+    return
+}
+
+func NewGetClsServiceResponse() (response *GetClsServiceResponse) {
+    response = &GetClsServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetClsService
+// This API is used to check whether CLS is enabled.
+//
+// This API is used to fill in any region for Region, recommend using Guangzhou (ap-guangzhou).
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) GetClsService(request *GetClsServiceRequest) (response *GetClsServiceResponse, err error) {
+    return c.GetClsServiceWithContext(context.Background(), request)
+}
+
+// GetClsService
+// This API is used to check whether CLS is enabled.
+//
+// This API is used to fill in any region for Region, recommend using Guangzhou (ap-guangzhou).
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) GetClsServiceWithContext(ctx context.Context, request *GetClsServiceRequest) (response *GetClsServiceResponse, err error) {
+    if request == nil {
+        request = NewGetClsServiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "GetClsService")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetClsService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetClsServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetMetricLabelValuesRequest() (request *GetMetricLabelValuesRequest) {
+    request = &GetMetricLabelValuesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "GetMetricLabelValues")
+    
+    
+    return
+}
+
+func NewGetMetricLabelValuesResponse() (response *GetMetricLabelValuesResponse) {
+    response = &GetMetricLabelValuesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetMetricLabelValues
+// This API is used to obtain the list of time series label values.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) GetMetricLabelValues(request *GetMetricLabelValuesRequest) (response *GetMetricLabelValuesResponse, err error) {
+    return c.GetMetricLabelValuesWithContext(context.Background(), request)
+}
+
+// GetMetricLabelValues
+// This API is used to obtain the list of time series label values.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) GetMetricLabelValuesWithContext(ctx context.Context, request *GetMetricLabelValuesRequest) (response *GetMetricLabelValuesResponse, err error) {
+    if request == nil {
+        request = NewGetMetricLabelValuesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "GetMetricLabelValues")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetMetricLabelValues require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetMetricLabelValuesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewMergePartitionRequest() (request *MergePartitionRequest) {
     request = &MergePartitionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4443,7 +9815,7 @@ func NewMergePartitionResponse() (response *MergePartitionResponse) {
 }
 
 // MergePartition
-// This API is used to merge a topic partition in read/write state. During merge, a topic partition ID can be specified, and CLS will automatically merge the partition adjacent to the right of the range.
+// This API is deprecated. If needed, please use the ModifyTopic API to change the number of partitions.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4464,7 +9836,7 @@ func (c *Client) MergePartition(request *MergePartitionRequest) (response *Merge
 }
 
 // MergePartition
-// This API is used to merge a topic partition in read/write state. During merge, a topic partition ID can be specified, and CLS will automatically merge the partition adjacent to the right of the range.
+// This API is deprecated. If needed, please use the ModifyTopic API to change the number of partitions.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4665,7 +10037,7 @@ func NewModifyAlarmShieldResponse() (response *ModifyAlarmShieldResponse) {
 }
 
 // ModifyAlarmShield
-// This API is used to modify alarm blocking rules.
+// This API is used to modify alarm blocking rules. When the alarm blocking rule is invalid, it cannot be modified.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4682,7 +10054,7 @@ func (c *Client) ModifyAlarmShield(request *ModifyAlarmShieldRequest) (response 
 }
 
 // ModifyAlarmShield
-// This API is used to modify alarm blocking rules.
+// This API is used to modify alarm blocking rules. When the alarm blocking rule is invalid, it cannot be modified.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4707,6 +10079,76 @@ func (c *Client) ModifyAlarmShieldWithContext(ctx context.Context, request *Modi
     request.SetContext(ctx)
     
     response = NewModifyAlarmShieldResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyCloudProductLogCollectionRequest() (request *ModifyCloudProductLogCollectionRequest) {
+    request = &ModifyCloudProductLogCollectionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyCloudProductLogCollection")
+    
+    
+    return
+}
+
+func NewModifyCloudProductLogCollectionResponse() (response *ModifyCloudProductLogCollectionResponse) {
+    response = &ModifyCloudProductLogCollectionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyCloudProductLogCollection
+// Cloud product integration uses internal APIs
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLOUDPRODUCTINVOCATIONERROR = "FailedOperation.CloudProductInvocationError"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyCloudProductLogCollection(request *ModifyCloudProductLogCollectionRequest) (response *ModifyCloudProductLogCollectionResponse, err error) {
+    return c.ModifyCloudProductLogCollectionWithContext(context.Background(), request)
+}
+
+// ModifyCloudProductLogCollection
+// Cloud product integration uses internal APIs
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLOUDPRODUCTINVOCATIONERROR = "FailedOperation.CloudProductInvocationError"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyCloudProductLogCollectionWithContext(ctx context.Context, request *ModifyCloudProductLogCollectionRequest) (response *ModifyCloudProductLogCollectionResponse, err error) {
+    if request == nil {
+        request = NewModifyCloudProductLogCollectionRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyCloudProductLogCollection")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCloudProductLogCollection require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCloudProductLogCollectionResponse()
     err = c.Send(request, response)
     return
 }
@@ -4787,6 +10229,76 @@ func (c *Client) ModifyConfigWithContext(ctx context.Context, request *ModifyCon
     return
 }
 
+func NewModifyConsoleRequest() (request *ModifyConsoleRequest) {
+    request = &ModifyConsoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyConsole")
+    
+    
+    return
+}
+
+func NewModifyConsoleResponse() (response *ModifyConsoleResponse) {
+    response = &ModifyConsoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyConsole
+// This API is used to edit the DataSight Console
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SEARCHTIMEOUT = "FailedOperation.SearchTimeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyConsole(request *ModifyConsoleRequest) (response *ModifyConsoleResponse, err error) {
+    return c.ModifyConsoleWithContext(context.Background(), request)
+}
+
+// ModifyConsole
+// This API is used to edit the DataSight Console
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SEARCHTIMEOUT = "FailedOperation.SearchTimeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyConsoleWithContext(ctx context.Context, request *ModifyConsoleRequest) (response *ModifyConsoleResponse, err error) {
+    if request == nil {
+        request = NewModifyConsoleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyConsole")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyConsole require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyConsoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyConsumerRequest() (request *ModifyConsumerRequest) {
     request = &ModifyConsumerRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4855,6 +10367,70 @@ func (c *Client) ModifyConsumerWithContext(ctx context.Context, request *ModifyC
     return
 }
 
+func NewModifyConsumerGroupRequest() (request *ModifyConsumerGroupRequest) {
+    request = &ModifyConsumerGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyConsumerGroup")
+    
+    
+    return
+}
+
+func NewModifyConsumerGroupResponse() (response *ModifyConsumerGroupResponse) {
+    response = &ModifyConsumerGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyConsumerGroup
+// This API is used to update the consumer group information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) ModifyConsumerGroup(request *ModifyConsumerGroupRequest) (response *ModifyConsumerGroupResponse, err error) {
+    return c.ModifyConsumerGroupWithContext(context.Background(), request)
+}
+
+// ModifyConsumerGroup
+// This API is used to update the consumer group information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) ModifyConsumerGroupWithContext(ctx context.Context, request *ModifyConsumerGroupRequest) (response *ModifyConsumerGroupResponse, err error) {
+    if request == nil {
+        request = NewModifyConsumerGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyConsumerGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyConsumerGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyConsumerGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyCosRechargeRequest() (request *ModifyCosRechargeRequest) {
     request = &ModifyCosRechargeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4879,6 +10455,7 @@ func NewModifyCosRechargeResponse() (response *ModifyCosRechargeResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
@@ -4889,6 +10466,7 @@ func NewModifyCosRechargeResponse() (response *ModifyCosRechargeResponse) {
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION_MODIFYBILLINGCOSRECHARGENOSUPPORT = "UnsupportedOperation.ModifyBillingCosRechargeNoSupport"
 func (c *Client) ModifyCosRecharge(request *ModifyCosRechargeRequest) (response *ModifyCosRechargeResponse, err error) {
     return c.ModifyCosRechargeWithContext(context.Background(), request)
 }
@@ -4898,6 +10476,7 @@ func (c *Client) ModifyCosRecharge(request *ModifyCosRechargeRequest) (response 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
@@ -4908,6 +10487,7 @@ func (c *Client) ModifyCosRecharge(request *ModifyCosRechargeRequest) (response 
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION_MODIFYBILLINGCOSRECHARGENOSUPPORT = "UnsupportedOperation.ModifyBillingCosRechargeNoSupport"
 func (c *Client) ModifyCosRechargeWithContext(ctx context.Context, request *ModifyCosRechargeRequest) (response *ModifyCosRechargeResponse, err error) {
     if request == nil {
         request = NewModifyCosRechargeRequest()
@@ -4921,6 +10501,152 @@ func (c *Client) ModifyCosRechargeWithContext(ctx context.Context, request *Modi
     request.SetContext(ctx)
     
     response = NewModifyCosRechargeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDashboardRequest() (request *ModifyDashboardRequest) {
+    request = &ModifyDashboardRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyDashboard")
+    
+    
+    return
+}
+
+func NewModifyDashboardResponse() (response *ModifyDashboardResponse) {
+    response = &ModifyDashboardResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDashboard
+// This API is used to modify the dashboard.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DASHBOARDNAMECONFLICT = "InvalidParameter.DashboardNameConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) ModifyDashboard(request *ModifyDashboardRequest) (response *ModifyDashboardResponse, err error) {
+    return c.ModifyDashboardWithContext(context.Background(), request)
+}
+
+// ModifyDashboard
+// This API is used to modify the dashboard.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DASHBOARDNAMECONFLICT = "InvalidParameter.DashboardNameConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) ModifyDashboardWithContext(ctx context.Context, request *ModifyDashboardRequest) (response *ModifyDashboardResponse, err error) {
+    if request == nil {
+        request = NewModifyDashboardRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyDashboard")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDashboard require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDashboardResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDashboardSubscribeRequest() (request *ModifyDashboardSubscribeRequest) {
+    request = &ModifyDashboardSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyDashboardSubscribe")
+    
+    
+    return
+}
+
+func NewModifyDashboardSubscribeResponse() (response *ModifyDashboardSubscribeResponse) {
+    response = &ModifyDashboardSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDashboardSubscribe
+// This API is used to modify dashboard subscriptions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_DASHBOARDRECORDNOTEXIST = "ResourceNotFound.DashboardRecordNotExist"
+//  RESOURCENOTFOUND_DASHBOARDSUBSCRIBERECORDNOTEXIST = "ResourceNotFound.DashboardSubscribeRecordNotExist"
+func (c *Client) ModifyDashboardSubscribe(request *ModifyDashboardSubscribeRequest) (response *ModifyDashboardSubscribeResponse, err error) {
+    return c.ModifyDashboardSubscribeWithContext(context.Background(), request)
+}
+
+// ModifyDashboardSubscribe
+// This API is used to modify dashboard subscriptions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_DASHBOARDRECORDNOTEXIST = "ResourceNotFound.DashboardRecordNotExist"
+//  RESOURCENOTFOUND_DASHBOARDSUBSCRIBERECORDNOTEXIST = "ResourceNotFound.DashboardSubscribeRecordNotExist"
+func (c *Client) ModifyDashboardSubscribeWithContext(ctx context.Context, request *ModifyDashboardSubscribeRequest) (response *ModifyDashboardSubscribeResponse, err error) {
+    if request == nil {
+        request = NewModifyDashboardSubscribeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyDashboardSubscribe")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDashboardSubscribe require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDashboardSubscribeResponse()
     err = c.Send(request, response)
     return
 }
@@ -4951,6 +10677,7 @@ func NewModifyDataTransformResponse() (response *ModifyDataTransformResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CROSSACCOUNTCONFLICT = "InvalidParameter.CrossAccountConflict"
 //  INVALIDPARAMETER_DATAFROMTASKCONFLICT = "InvalidParameter.DataFromTaskConflict"
 //  INVALIDPARAMETER_DATAFROMTASKNOTEXIST = "InvalidParameter.DataFromTaskNotExist"
 //  INVALIDPARAMETER_INVALIDETLCONTENT = "InvalidParameter.InvalidEtlContent"
@@ -4973,6 +10700,7 @@ func (c *Client) ModifyDataTransform(request *ModifyDataTransformRequest) (respo
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CROSSACCOUNTCONFLICT = "InvalidParameter.CrossAccountConflict"
 //  INVALIDPARAMETER_DATAFROMTASKCONFLICT = "InvalidParameter.DataFromTaskConflict"
 //  INVALIDPARAMETER_DATAFROMTASKNOTEXIST = "InvalidParameter.DataFromTaskNotExist"
 //  INVALIDPARAMETER_INVALIDETLCONTENT = "InvalidParameter.InvalidEtlContent"
@@ -4997,6 +10725,246 @@ func (c *Client) ModifyDataTransformWithContext(ctx context.Context, request *Mo
     request.SetContext(ctx)
     
     response = NewModifyDataTransformResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDlcDeliverRequest() (request *ModifyDlcDeliverRequest) {
+    request = &ModifyDlcDeliverRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyDlcDeliver")
+    
+    
+    return
+}
+
+func NewModifyDlcDeliverResponse() (response *ModifyDlcDeliverResponse) {
+    response = &ModifyDlcDeliverResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDlcDeliver
+// Modify a DLC delivery task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyDlcDeliver(request *ModifyDlcDeliverRequest) (response *ModifyDlcDeliverResponse, err error) {
+    return c.ModifyDlcDeliverWithContext(context.Background(), request)
+}
+
+// ModifyDlcDeliver
+// Modify a DLC delivery task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyDlcDeliverWithContext(ctx context.Context, request *ModifyDlcDeliverRequest) (response *ModifyDlcDeliverResponse, err error) {
+    if request == nil {
+        request = NewModifyDlcDeliverRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyDlcDeliver")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDlcDeliver require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDlcDeliverResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyEsRechargeRequest() (request *ModifyEsRechargeRequest) {
+    request = &ModifyEsRechargeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyEsRecharge")
+    
+    
+    return
+}
+
+func NewModifyEsRechargeResponse() (response *ModifyEsRechargeResponse) {
+    response = &ModifyEsRechargeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyEsRecharge
+// Modify es import configuration
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyEsRecharge(request *ModifyEsRechargeRequest) (response *ModifyEsRechargeResponse, err error) {
+    return c.ModifyEsRechargeWithContext(context.Background(), request)
+}
+
+// ModifyEsRecharge
+// Modify es import configuration
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyEsRechargeWithContext(ctx context.Context, request *ModifyEsRechargeRequest) (response *ModifyEsRechargeResponse, err error) {
+    if request == nil {
+        request = NewModifyEsRechargeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyEsRecharge")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyEsRecharge require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyEsRechargeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyHostMetricConfigRequest() (request *ModifyHostMetricConfigRequest) {
+    request = &ModifyHostMetricConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyHostMetricConfig")
+    
+    
+    return
+}
+
+func NewModifyHostMetricConfigResponse() (response *ModifyHostMetricConfigResponse) {
+    response = &ModifyHostMetricConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyHostMetricConfig
+// Modify host metric collection configuration
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyHostMetricConfig(request *ModifyHostMetricConfigRequest) (response *ModifyHostMetricConfigResponse, err error) {
+    return c.ModifyHostMetricConfigWithContext(context.Background(), request)
+}
+
+// ModifyHostMetricConfig
+// Modify host metric collection configuration
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyHostMetricConfigWithContext(ctx context.Context, request *ModifyHostMetricConfigRequest) (response *ModifyHostMetricConfigResponse, err error) {
+    if request == nil {
+        request = NewModifyHostMetricConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyHostMetricConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyHostMetricConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyHostMetricConfigResponse()
     err = c.Send(request, response)
     return
 }
@@ -5026,10 +10994,12 @@ func NewModifyIndexResponse() (response *ModifyIndexResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDINDEXRULEFORSEARCHLOW = "FailedOperation.InValidIndexRuleForSearchLow"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDINDEXRULEFORSEARCHLOW = "InvalidParameter.InValidIndexRuleForSearchLow"
+//  LIMITEXCEEDED_INDEXKEYOVERLIMIT = "LimitExceeded.IndexKeyOverLimit"
 //  LIMITEXCEEDED_INDEXOPERATING = "LimitExceeded.IndexOperating"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -5050,10 +11020,12 @@ func (c *Client) ModifyIndex(request *ModifyIndexRequest) (response *ModifyIndex
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDINDEXRULEFORSEARCHLOW = "FailedOperation.InValidIndexRuleForSearchLow"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INVALIDINDEXRULEFORSEARCHLOW = "InvalidParameter.InValidIndexRuleForSearchLow"
+//  LIMITEXCEEDED_INDEXKEYOVERLIMIT = "LimitExceeded.IndexKeyOverLimit"
 //  LIMITEXCEEDED_INDEXOPERATING = "LimitExceeded.IndexOperating"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -5106,6 +11078,7 @@ func NewModifyKafkaConsumerResponse() (response *ModifyKafkaConsumerResponse) {
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -5126,6 +11099,7 @@ func (c *Client) ModifyKafkaConsumer(request *ModifyKafkaConsumerRequest) (respo
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -5149,6 +11123,80 @@ func (c *Client) ModifyKafkaConsumerWithContext(ctx context.Context, request *Mo
     request.SetContext(ctx)
     
     response = NewModifyKafkaConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyKafkaConsumerGroupOffsetRequest() (request *ModifyKafkaConsumerGroupOffsetRequest) {
+    request = &ModifyKafkaConsumerGroupOffsetRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyKafkaConsumerGroupOffset")
+    
+    
+    return
+}
+
+func NewModifyKafkaConsumerGroupOffsetResponse() (response *ModifyKafkaConsumerGroupOffsetResponse) {
+    response = &ModifyKafkaConsumerGroupOffsetResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyKafkaConsumerGroupOffset
+// This API is used to modify Kafka protocol consumption group offsets.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyKafkaConsumerGroupOffset(request *ModifyKafkaConsumerGroupOffsetRequest) (response *ModifyKafkaConsumerGroupOffsetResponse, err error) {
+    return c.ModifyKafkaConsumerGroupOffsetWithContext(context.Background(), request)
+}
+
+// ModifyKafkaConsumerGroupOffset
+// This API is used to modify Kafka protocol consumption group offsets.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyKafkaConsumerGroupOffsetWithContext(ctx context.Context, request *ModifyKafkaConsumerGroupOffsetRequest) (response *ModifyKafkaConsumerGroupOffsetResponse, err error) {
+    if request == nil {
+        request = NewModifyKafkaConsumerGroupOffsetRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyKafkaConsumerGroupOffset")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyKafkaConsumerGroupOffset require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyKafkaConsumerGroupOffsetResponse()
     err = c.Send(request, response)
     return
 }
@@ -5242,6 +11290,7 @@ func NewModifyLogsetResponse() (response *ModifyLogsetResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_PERIODMODIFYFORBIDDEN = "FailedOperation.PeriodModifyForbidden"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_LOGSETCONFLICT = "InvalidParameter.LogsetConflict"
@@ -5263,6 +11312,7 @@ func (c *Client) ModifyLogset(request *ModifyLogsetRequest) (response *ModifyLog
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_PERIODMODIFYFORBIDDEN = "FailedOperation.PeriodModifyForbidden"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_LOGSETCONFLICT = "InvalidParameter.LogsetConflict"
@@ -5311,11 +11361,14 @@ func NewModifyMachineGroupResponse() (response *ModifyMachineGroupResponse) {
 }
 
 // ModifyMachineGroup
-// This API is used to modify a machine group.
+// Modify machine group.
+//
+// Note: Modifying the interface will directly overwrite historical data and change it to valid input parameters this time. Please be cautious when calling this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_MACHINEGROUPCONFLICT = "InvalidParameter.MachineGroupConflict"
@@ -5333,11 +11386,14 @@ func (c *Client) ModifyMachineGroup(request *ModifyMachineGroupRequest) (respons
 }
 
 // ModifyMachineGroup
-// This API is used to modify a machine group.
+// Modify machine group.
+//
+// Note: Modifying the interface will directly overwrite historical data and change it to valid input parameters this time. Please be cautious when calling this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_MACHINEGROUPCONFLICT = "InvalidParameter.MachineGroupConflict"
@@ -5363,6 +11419,458 @@ func (c *Client) ModifyMachineGroupWithContext(ctx context.Context, request *Mod
     request.SetContext(ctx)
     
     response = NewModifyMachineGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyMetricConfigRequest() (request *ModifyMetricConfigRequest) {
+    request = &ModifyMetricConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyMetricConfig")
+    
+    
+    return
+}
+
+func NewModifyMetricConfigResponse() (response *ModifyMetricConfigResponse) {
+    response = &ModifyMetricConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyMetricConfig
+// This API is used to create metric collection configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyMetricConfig(request *ModifyMetricConfigRequest) (response *ModifyMetricConfigResponse, err error) {
+    return c.ModifyMetricConfigWithContext(context.Background(), request)
+}
+
+// ModifyMetricConfig
+// This API is used to create metric collection configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyMetricConfigWithContext(ctx context.Context, request *ModifyMetricConfigRequest) (response *ModifyMetricConfigResponse, err error) {
+    if request == nil {
+        request = NewModifyMetricConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyMetricConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMetricConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyMetricConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyMetricSubscribeRequest() (request *ModifyMetricSubscribeRequest) {
+    request = &ModifyMetricSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyMetricSubscribe")
+    
+    
+    return
+}
+
+func NewModifyMetricSubscribeResponse() (response *ModifyMetricSubscribeResponse) {
+    response = &ModifyMetricSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyMetricSubscribe
+// This API is used to modify metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyMetricSubscribe(request *ModifyMetricSubscribeRequest) (response *ModifyMetricSubscribeResponse, err error) {
+    return c.ModifyMetricSubscribeWithContext(context.Background(), request)
+}
+
+// ModifyMetricSubscribe
+// This API is used to modify metric subscription configurations.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyMetricSubscribeWithContext(ctx context.Context, request *ModifyMetricSubscribeRequest) (response *ModifyMetricSubscribeResponse, err error) {
+    if request == nil {
+        request = NewModifyMetricSubscribeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyMetricSubscribe")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMetricSubscribe require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyMetricSubscribeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyNetworkApplicationRequest() (request *ModifyNetworkApplicationRequest) {
+    request = &ModifyNetworkApplicationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyNetworkApplication")
+    
+    
+    return
+}
+
+func NewModifyNetworkApplicationResponse() (response *ModifyNetworkApplicationResponse) {
+    response = &ModifyNetworkApplicationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyNetworkApplication
+// Modify a web application
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyNetworkApplication(request *ModifyNetworkApplicationRequest) (response *ModifyNetworkApplicationResponse, err error) {
+    return c.ModifyNetworkApplicationWithContext(context.Background(), request)
+}
+
+// ModifyNetworkApplication
+// Modify a web application
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyNetworkApplicationWithContext(ctx context.Context, request *ModifyNetworkApplicationRequest) (response *ModifyNetworkApplicationResponse, err error) {
+    if request == nil {
+        request = NewModifyNetworkApplicationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyNetworkApplication")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyNetworkApplication require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyNetworkApplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyNoticeContentRequest() (request *ModifyNoticeContentRequest) {
+    request = &ModifyNoticeContentRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyNoticeContent")
+    
+    
+    return
+}
+
+func NewModifyNoticeContentResponse() (response *ModifyNoticeContentResponse) {
+    response = &ModifyNoticeContentResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyNoticeContent
+// This API is used to modify notification content configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMCONFLICT = "InvalidParameter.AlarmConflict"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
+func (c *Client) ModifyNoticeContent(request *ModifyNoticeContentRequest) (response *ModifyNoticeContentResponse, err error) {
+    return c.ModifyNoticeContentWithContext(context.Background(), request)
+}
+
+// ModifyNoticeContent
+// This API is used to modify notification content configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMCONFLICT = "InvalidParameter.AlarmConflict"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
+func (c *Client) ModifyNoticeContentWithContext(ctx context.Context, request *ModifyNoticeContentRequest) (response *ModifyNoticeContentResponse, err error) {
+    if request == nil {
+        request = NewModifyNoticeContentRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyNoticeContent")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyNoticeContent require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyNoticeContentResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyRecordingRuleTaskRequest() (request *ModifyRecordingRuleTaskRequest) {
+    request = &ModifyRecordingRuleTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyRecordingRuleTask")
+    
+    
+    return
+}
+
+func NewModifyRecordingRuleTaskResponse() (response *ModifyRecordingRuleTaskResponse) {
+    response = &ModifyRecordingRuleTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyRecordingRuleTask
+// This API is used to modify a scheduled pre-aggregation task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyRecordingRuleTask(request *ModifyRecordingRuleTaskRequest) (response *ModifyRecordingRuleTaskResponse, err error) {
+    return c.ModifyRecordingRuleTaskWithContext(context.Background(), request)
+}
+
+// ModifyRecordingRuleTask
+// This API is used to modify a scheduled pre-aggregation task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyRecordingRuleTaskWithContext(ctx context.Context, request *ModifyRecordingRuleTaskRequest) (response *ModifyRecordingRuleTaskResponse, err error) {
+    if request == nil {
+        request = NewModifyRecordingRuleTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyRecordingRuleTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRecordingRuleTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRecordingRuleTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyRecordingRuleYamlTaskRequest() (request *ModifyRecordingRuleYamlTaskRequest) {
+    request = &ModifyRecordingRuleYamlTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyRecordingRuleYamlTask")
+    
+    
+    return
+}
+
+func NewModifyRecordingRuleYamlTaskResponse() (response *ModifyRecordingRuleYamlTaskResponse) {
+    response = &ModifyRecordingRuleYamlTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyRecordingRuleYamlTask
+// Modifying a Metric Pre-Aggregation Task Through a YAML File
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyRecordingRuleYamlTask(request *ModifyRecordingRuleYamlTaskRequest) (response *ModifyRecordingRuleYamlTaskResponse, err error) {
+    return c.ModifyRecordingRuleYamlTaskWithContext(context.Background(), request)
+}
+
+// ModifyRecordingRuleYamlTask
+// Modifying a Metric Pre-Aggregation Task Through a YAML File
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyRecordingRuleYamlTaskWithContext(ctx context.Context, request *ModifyRecordingRuleYamlTaskRequest) (response *ModifyRecordingRuleYamlTaskResponse, err error) {
+    if request == nil {
+        request = NewModifyRecordingRuleYamlTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyRecordingRuleYamlTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRecordingRuleYamlTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRecordingRuleYamlTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -5443,6 +11951,80 @@ func (c *Client) ModifyScheduledSqlWithContext(ctx context.Context, request *Mod
     return
 }
 
+func NewModifySearchViewRequest() (request *ModifySearchViewRequest) {
+    request = &ModifySearchViewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifySearchView")
+    
+    
+    return
+}
+
+func NewModifySearchViewResponse() (response *ModifySearchViewResponse) {
+    response = &ModifySearchViewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifySearchView
+// This API is used to modify a query view.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifySearchView(request *ModifySearchViewRequest) (response *ModifySearchViewResponse, err error) {
+    return c.ModifySearchViewWithContext(context.Background(), request)
+}
+
+// ModifySearchView
+// This API is used to modify a query view.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifySearchViewWithContext(ctx context.Context, request *ModifySearchViewRequest) (response *ModifySearchViewResponse, err error) {
+    if request == nil {
+        request = NewModifySearchViewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifySearchView")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySearchView require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifySearchViewResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyShipperRequest() (request *ModifyShipperRequest) {
     request = &ModifyShipperRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5513,6 +12095,84 @@ func (c *Client) ModifyShipperWithContext(ctx context.Context, request *ModifySh
     return
 }
 
+func NewModifySplunkDeliverRequest() (request *ModifySplunkDeliverRequest) {
+    request = &ModifySplunkDeliverRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifySplunkDeliver")
+    
+    
+    return
+}
+
+func NewModifySplunkDeliverResponse() (response *ModifySplunkDeliverResponse) {
+    response = &ModifySplunkDeliverResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifySplunkDeliver
+// Modify information related to splunk delivery task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifySplunkDeliver(request *ModifySplunkDeliverRequest) (response *ModifySplunkDeliverResponse, err error) {
+    return c.ModifySplunkDeliverWithContext(context.Background(), request)
+}
+
+// ModifySplunkDeliver
+// Modify information related to splunk delivery task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifySplunkDeliverWithContext(ctx context.Context, request *ModifySplunkDeliverRequest) (response *ModifySplunkDeliverResponse, err error) {
+    if request == nil {
+        request = NewModifySplunkDeliverRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifySplunkDeliver")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySplunkDeliver require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifySplunkDeliverResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyTopicRequest() (request *ModifyTopicRequest) {
     request = &ModifyTopicRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5533,7 +12193,7 @@ func NewModifyTopicResponse() (response *ModifyTopicResponse) {
 }
 
 // ModifyTopic
-// This API is used to modify a log topic.
+// This API is used to modify logs or metric topics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5558,7 +12218,7 @@ func (c *Client) ModifyTopic(request *ModifyTopicRequest) (response *ModifyTopic
 }
 
 // ModifyTopic
-// This API is used to modify a log topic.
+// This API is used to modify logs or metric topics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5591,6 +12251,228 @@ func (c *Client) ModifyTopicWithContext(ctx context.Context, request *ModifyTopi
     request.SetContext(ctx)
     
     response = NewModifyTopicResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyWebCallbackRequest() (request *ModifyWebCallbackRequest) {
+    request = &ModifyWebCallbackRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyWebCallback")
+    
+    
+    return
+}
+
+func NewModifyWebCallbackResponse() (response *ModifyWebCallbackResponse) {
+    response = &ModifyWebCallbackResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyWebCallback
+// This API is used to modify alarm channel callback configurations.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMCONFLICT = "InvalidParameter.AlarmConflict"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
+func (c *Client) ModifyWebCallback(request *ModifyWebCallbackRequest) (response *ModifyWebCallbackResponse, err error) {
+    return c.ModifyWebCallbackWithContext(context.Background(), request)
+}
+
+// ModifyWebCallback
+// This API is used to modify alarm channel callback configurations.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMCONFLICT = "InvalidParameter.AlarmConflict"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
+func (c *Client) ModifyWebCallbackWithContext(ctx context.Context, request *ModifyWebCallbackRequest) (response *ModifyWebCallbackResponse, err error) {
+    if request == nil {
+        request = NewModifyWebCallbackRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyWebCallback")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyWebCallback require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyWebCallbackResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewOpenClawServiceRequest() (request *OpenClawServiceRequest) {
+    request = &OpenClawServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "OpenClawService")
+    
+    
+    return
+}
+
+func NewOpenClawServiceResponse() (response *OpenClawServiceResponse) {
+    response = &OpenClawServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// OpenClawService
+// This API is used to create resources and indexes dependent on OpenClaw.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDINDEXRULEFORSEARCHLOW = "FailedOperation.InValidIndexRuleForSearchLow"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDINDEXRULEFORSEARCHLOW = "InvalidParameter.InValidIndexRuleForSearchLow"
+//  INVALIDPARAMETER_INDEXCONFLICT = "InvalidParameter.IndexConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_INDEXKEYOVERLIMIT = "LimitExceeded.IndexKeyOverLimit"
+//  LIMITEXCEEDED_INDEXOPERATING = "LimitExceeded.IndexOperating"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_INDEXNOTEXIST = "ResourceNotFound.IndexNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) OpenClawService(request *OpenClawServiceRequest) (response *OpenClawServiceResponse, err error) {
+    return c.OpenClawServiceWithContext(context.Background(), request)
+}
+
+// OpenClawService
+// This API is used to create resources and indexes dependent on OpenClaw.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDINDEXRULEFORSEARCHLOW = "FailedOperation.InValidIndexRuleForSearchLow"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDINDEXRULEFORSEARCHLOW = "InvalidParameter.InValidIndexRuleForSearchLow"
+//  INVALIDPARAMETER_INDEXCONFLICT = "InvalidParameter.IndexConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_INDEXKEYOVERLIMIT = "LimitExceeded.IndexKeyOverLimit"
+//  LIMITEXCEEDED_INDEXOPERATING = "LimitExceeded.IndexOperating"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_INDEXNOTEXIST = "ResourceNotFound.IndexNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) OpenClawServiceWithContext(ctx context.Context, request *OpenClawServiceRequest) (response *OpenClawServiceResponse, err error) {
+    if request == nil {
+        request = NewOpenClawServiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "OpenClawService")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OpenClawService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewOpenClawServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewOpenClsServiceRequest() (request *OpenClsServiceRequest) {
+    request = &OpenClsServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "OpenClsService")
+    
+    
+    return
+}
+
+func NewOpenClsServiceResponse() (response *OpenClsServiceResponse) {
+    response = &OpenClsServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// OpenClsService
+// Enable logging
+//
+// This API is used to enable CLS in all regions by filling any region for Region, recommend using Guangzhou (ap-guangzhou).
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) OpenClsService(request *OpenClsServiceRequest) (response *OpenClsServiceResponse, err error) {
+    return c.OpenClsServiceWithContext(context.Background(), request)
+}
+
+// OpenClsService
+// Enable logging
+//
+// This API is used to enable CLS in all regions by filling any region for Region, recommend using Guangzhou (ap-guangzhou).
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) OpenClsServiceWithContext(ctx context.Context, request *OpenClsServiceRequest) (response *OpenClsServiceResponse, err error) {
+    if request == nil {
+        request = NewOpenClsServiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "OpenClsService")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OpenClsService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewOpenClsServiceResponse()
     err = c.Send(request, response)
     return
 }
@@ -5757,7 +12639,9 @@ func NewQueryMetricResponse() (response *QueryMetricResponse) {
 }
 
 // QueryMetric
-// This API is used to query the latest metric value at a specified time.
+// Query the latest metric value at a specified time.
+//
+// If there is no metric data in the 5 minutes before that moment, there will be no query result.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5774,7 +12658,9 @@ func (c *Client) QueryMetric(request *QueryMetricRequest) (response *QueryMetric
 }
 
 // QueryMetric
-// This API is used to query the latest metric value at a specified time.
+// Query the latest metric value at a specified time.
+//
+// If there is no metric data in the 5 minutes before that moment, there will be no query result.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6021,6 +12907,78 @@ func (c *Client) SearchCosRechargeInfoWithContext(ctx context.Context, request *
     return
 }
 
+func NewSearchDashboardSubscribeRequest() (request *SearchDashboardSubscribeRequest) {
+    request = &SearchDashboardSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "SearchDashboardSubscribe")
+    
+    
+    return
+}
+
+func NewSearchDashboardSubscribeResponse() (response *SearchDashboardSubscribeResponse) {
+    response = &SearchDashboardSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SearchDashboardSubscribe
+// This API is used to preview the dashboard subscription.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_DASHBOARDRECORDNOTEXIST = "ResourceNotFound.DashboardRecordNotExist"
+func (c *Client) SearchDashboardSubscribe(request *SearchDashboardSubscribeRequest) (response *SearchDashboardSubscribeResponse, err error) {
+    return c.SearchDashboardSubscribeWithContext(context.Background(), request)
+}
+
+// SearchDashboardSubscribe
+// This API is used to preview the dashboard subscription.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND_DASHBOARDRECORDNOTEXIST = "ResourceNotFound.DashboardRecordNotExist"
+func (c *Client) SearchDashboardSubscribeWithContext(ctx context.Context, request *SearchDashboardSubscribeRequest) (response *SearchDashboardSubscribeResponse, err error) {
+    if request == nil {
+        request = NewSearchDashboardSubscribeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "SearchDashboardSubscribe")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SearchDashboardSubscribe require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSearchDashboardSubscribeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSearchLogRequest() (request *SearchLogRequest) {
     request = &SearchLogRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6041,9 +12999,11 @@ func NewSearchLogResponse() (response *SearchLogResponse) {
 }
 
 // SearchLog
-// This API is used to search and analyze logs. When using this API, please note the following:1. Besides being subject to the default API request frequency limit by this API, for a single log topic, the concurrency number cannot exceed 15. 2. For search syntax, it's recommended to use the CQL syntax rule. Please use the SyntaxRule parameter and set its value to 1.
+// This API is used to retrieve and analyze logs. Please note the following matters when using this API.
 //
-// 3. The maximum value of API's response data packet is 49MB. It is recommended to enable gzip compression (HTTP Request Header Accept-Encoding: gzip).
+// 1. Besides being subject to the default API request rate limit, for a single log topic, the number of concurrent queries cannot exceed 15.
+//
+// 2. The API's return data packet maximum is 49MB. It is recommended to enable gzip compression (HTTP Request Header Accept-Encoding: gzip).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6056,6 +13016,7 @@ func NewSearchLogResponse() (response *SearchLogResponse) {
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
 //  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
+//  INTERNALERROR_SERVERBUSY = "InternalError.ServerBusy"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  LIMITEXCEEDED_SEARCHRESOURCES = "LimitExceeded.SearchResources"
@@ -6073,9 +13034,11 @@ func (c *Client) SearchLog(request *SearchLogRequest) (response *SearchLogRespon
 }
 
 // SearchLog
-// This API is used to search and analyze logs. When using this API, please note the following:1. Besides being subject to the default API request frequency limit by this API, for a single log topic, the concurrency number cannot exceed 15. 2. For search syntax, it's recommended to use the CQL syntax rule. Please use the SyntaxRule parameter and set its value to 1.
+// This API is used to retrieve and analyze logs. Please note the following matters when using this API.
 //
-// 3. The maximum value of API's response data packet is 49MB. It is recommended to enable gzip compression (HTTP Request Header Accept-Encoding: gzip).
+// 1. Besides being subject to the default API request rate limit, for a single log topic, the number of concurrent queries cannot exceed 15.
+//
+// 2. The API's return data packet maximum is 49MB. It is recommended to enable gzip compression (HTTP Request Header Accept-Encoding: gzip).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6088,6 +13051,7 @@ func (c *Client) SearchLog(request *SearchLogRequest) (response *SearchLogRespon
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
 //  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
+//  INTERNALERROR_SERVERBUSY = "InternalError.ServerBusy"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  LIMITEXCEEDED_SEARCHRESOURCES = "LimitExceeded.SearchResources"
@@ -6117,6 +13081,70 @@ func (c *Client) SearchLogWithContext(ctx context.Context, request *SearchLogReq
     return
 }
 
+func NewSendConsumerHeartbeatRequest() (request *SendConsumerHeartbeatRequest) {
+    request = &SendConsumerHeartbeatRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "SendConsumerHeartbeat")
+    
+    
+    return
+}
+
+func NewSendConsumerHeartbeatResponse() (response *SendConsumerHeartbeatResponse) {
+    response = &SendConsumerHeartbeatResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SendConsumerHeartbeat
+// This API is used to check the heartbeat of a consumer group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) SendConsumerHeartbeat(request *SendConsumerHeartbeatRequest) (response *SendConsumerHeartbeatResponse, err error) {
+    return c.SendConsumerHeartbeatWithContext(context.Background(), request)
+}
+
+// SendConsumerHeartbeat
+// This API is used to check the heartbeat of a consumer group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) SendConsumerHeartbeatWithContext(ctx context.Context, request *SendConsumerHeartbeatRequest) (response *SendConsumerHeartbeatResponse, err error) {
+    if request == nil {
+        request = NewSendConsumerHeartbeatRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "SendConsumerHeartbeat")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SendConsumerHeartbeat require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSendConsumerHeartbeatResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSplitPartitionRequest() (request *SplitPartitionRequest) {
     request = &SplitPartitionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6137,7 +13165,7 @@ func NewSplitPartitionResponse() (response *SplitPartitionResponse) {
 }
 
 // SplitPartition
-// This API is used to split a topic partition.
+// This API is deprecated. If needed, please use the ModifyTopic API to change the number of partitions.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6161,7 +13189,7 @@ func (c *Client) SplitPartition(request *SplitPartitionRequest) (response *Split
 }
 
 // SplitPartition
-// This API is used to split a topic partition.
+// This API is deprecated. If needed, please use the ModifyTopic API to change the number of partitions.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6217,17 +13245,17 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 }
 
 // UploadLog
-// ## Note
+// ## Notification
 //
-// To ensure log data reliability and help you use CLS more efficiently, we recommend you use the optimized API to upload logs. For more information about the API, see [Uploading Log via API](https://intl.cloud.tencent.com/document/product/614/16873?from_cn_redirect=1).
-//
-// 
-//
-// For the optimized API, we have developed an SDK (available in multiple languages) that provides features including async sending, resource control, automatic retry, graceful shutdown, and detection-based reporting. For details, see [Uploading Log via SDK](https://intl.cloud.tencent.com/document/product/614/67157?from_cn_redirect=1).
+// To ensure the reliability of your log data and use the log service more efficiently, we recommend that you use the CLS-optimized API to upload structured logs (https://www.tencentcloud.com/document/product/614/16873?from_cn_redirect=1).
 //
 // 
 //
-// `UploadLog` allows you to synchronously upload log data. If you still want to continue to use this API instead of the optimized one, read this document.
+// Meanwhile, we have specially optimized and customized SDKs in multiple languages for this API for you to choose from. The SDK provides unified async sending, resource control, automatic retry, graceful shutdown, perception reporting, and other features to improve the log reporting function. For details, refer to [SDK Collection](https://www.tencentcloud.com/document/product/614/67157?from_cn_redirect=1).
+//
+// 
+//
+// Meanwhile, the log upload API also supports synchronous log data upload. If you select to continue using this API, refer to the following text.
 //
 // 
 //
@@ -6235,125 +13263,101 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// This API is used to write logs to a specified log topic.
+// This API is used to write logs to the designated log topic.
 //
 // 
 //
-// CLS provides the following two modes:
+// #### Input parameter (pb binary stream, located in body)
 //
 // 
 //
-// #### Load balancing mode
-//
-// 
-//
-// In this mode, logs will be automatically written to a target partition among all readable/writable partitions under the current log topic based on the load balancing principle. This mode is suitable for scenarios where sequential consumption is not needed.
-//
-// 
-//
-// #### Hash routing mode
-//
-// 
-//
-// In this mode, data will be written to a target partition that meets the range requirements based on the carried hash value (`X-CLS-HashKey`). For example, a log source can be bound to a topic partition through `HashKey`, strictly guaranteeing the sequence of the data written to and consumed in this partition.
-//
-// 
-//
-//                  
-//
-// 
-//
-// #### Input parameters (pb binary streams in `body`)
-//
-// 
-//
-// | Parameter       | Type    | Location | Required | Description                                                         |
+// | Field name | Data type | Location | Must | Description |
 //
 // | ------------ | ------- | ---- | ---- | ------------------------------------------------------------ |
 //
-// | logGroupList | message | pb   | Yes   | The `logGroup` list, which describes the encapsulated log groups. We recommend you enter up to five `logGroup` values. |
+// | logGroupList | message | pb   | Yes | logGroup list, encapsulated content of the log group list. It is advisable not to exceed 5 logGroups. |
 //
 // 
 //
-// `LogGroup` description:
+// Group description:
 //
 // 
 //
-// | Parameter      | Required | Description                                                         |
+// | Field name | Required or optional | Description |
 //
 // | ----------- | -------- | ------------------------------------------------------------ |
 //
-// | logs        | Yes       | Log array consisting of multiple `Log` values. The `Log` indicates a log, and a `LogGroup` can contain up to 10,000 `Log` values. |
+// | logs        | is       | a log array, which means a set of multiple logs. One Log represents one log, and the number of logs in one LogGroup cannot exceed 10000 |
 //
-// | contextFlow | No       | Unique `LogGroup` ID, which should be passed in if the context feature needs to be used. Format: "{Context ID}-{LogGroupID}". <br>Context ID: Uniquely identifies the context (a series of log files that are continuously scrolling or a series of logs that need to be sequenced), which is a 64-bit integer hex string. <br>LogGroupID: A 64-bit integer hex string that continuously increases, such as `102700A66102516A-59F59`.                        |
+// | contextFlow | No | The unique ID of LogGroup, which must be imported when using context features. Format: "{context ID}-{LogGroupID}".<br>Context ID: A unique identifier for a context (a series of consecutively scrolled log files or a sequence of logs requiring order preservation), a 64-bit integer string in base 16.<br>LogGroupID: A consecutively incremental integer string in base 16. Example: "102700A66102516A-59F59".
 //
-// | filename    | No       | Log filename                                                   |
+// | filename    | No       | Log file name |
 //
-// | source      | No       | Log source, which is generally the machine IP                           |
+// | source      | No       | Log source, using machine IP as a label in general use       |
 //
-// | logTags     | No       | List of log tags                                               |
-//
-// 
-//
-// `Log` description:
+// | logTags     | No       | Log tag list                                               |
 //
 // 
 //
-// | Parameter   | Required | Description                                                         |
+// Log description:
+//
+// 
+//
+// | field name | Required or optional | Description |
 //
 // | -------- | -------- | ------------------------------------------------------------ |
 //
-// | time     | Yes       | Unix timestamp of log time in seconds or milliseconds (recommended)      |
+// | time     | is       | log time (Unix timestamp), supports second, millisecond, microsecond, milliseconds is recommended |
 //
-// | contents | No       | Log content in key-value format. A log can contain multiple key-value pairs. |
-//
-// 
-//
-// `Content` description:
+// | contents | No | Key-value formatted log content, representing multiple key-value composites in a log |
 //
 // 
 //
-// | Parameter | Required | Description                                                         |
+// Content description:
+//
+// 
+//
+// | Field name | Required or optional | Description |
 //
 // | ------ | -------- | ------------------------------------------------------------ |
 //
-// | key    | Yes       | Key of a field group in one log, which cannot start with `_`.                 |
+// | key    | Yes       | The key value of a field group in a single-line log. It cannot start with `_` |
 //
-// | value  | Yes       | Value of a field group. The `value` of one log cannot exceed 1 MB and the total `value` in `LogGroup` cannot exceed 5 MB. |
-//
-// 
-//
-// `LogTag` description:
+// | value  | Yes       | The value of a field group in a single-line log. The value of a single-line log must not exceed 1MB, and the sum of ALL values in a LogGroup cannot exceed 5MB. |
 //
 // 
 //
-// | Parameter | Required | Description                             |
+// LogTag description:
+//
+// 
+//
+// | Field name | Required or optional | Description |
 //
 // | ------ | -------- | -------------------------------- |
 //
-// | key    | Yes       | Key of a custom tag                 |
+// | key    | Yes      | Custom tag key                 |
 //
-// | value  | Yes       | Value corresponding to the custom tag key |
-//
-// 
-//
-// ## pb Compilation Example
+// | value  | is       | value corresponding to the custom tag key |
 //
 // 
 //
-// This example shows you how to use the protoc compiler to compile a pb description file into a log upload API in C++.
+// ## PB Compilation Example
 //
 // 
 //
-// > ?Currently, protoc supports compilation in multiple programming languages such as Java, C++, and Python. For more information, see [protoc](https://github.com/protocolbuffers/protobuf).
+// This example shows how to use the official protoc compiler to compile and generate a C++ language adjustable log upload API from a description file.
 //
 // 
 //
-// #### 1. Install protocol buffers
+// Currently protoc officially supports compilation for languages such as Java, C++, and Python. For details, see [protoc](https://github.com/protocolbuffers/protobuf).
 //
 // 
 //
-// Download [Protocol Buffers](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the example is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and go to the directory:
+// #### 1. Protocol Buffer installation
+//
+// 
+//
+// Download [Protocol Buffer](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), unzip and install. The example version is protobuf 2.6.1, and the environment is Centos 7.3 system. Decompress the `protobuf-2.6.1.tar.gz` compressed package to the `/usr/local` directory and enter the directory. Execute the command as follows:
 //
 // 
 //
@@ -6365,7 +13369,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// Run the following commands to start compilation and installation and configure the environment variables:
+// Start compilation and installation, configure environment variables, execute the command as follows:
 //
 // 
 //
@@ -6381,7 +13385,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// After the compilation succeeds, run the following command to check the version:
+// After successful compilation, view the version using the following command:
 //
 // 
 //
@@ -6395,23 +13399,23 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// #### 2. Create a pb description file
+// #### 2. Create PB description file
 //
 // 
 //
-// A pb description file is an agreed-on data interchange format for communication. To upload logs, compile the specified protocol format to an API in the target programming language and add the API to the project code. For more information, see [protoc](https://github.com/protocolbuffers/protobuf).
+// The PB description file is the data interchange format agreed by the communication parties. When uploading logs, compile the specified protocol format into the calling interface of the corresponding language version, then add to engineering code. For details, see [protoc](https://github.com/protocolbuffers/protobuf).
 //
 // 
 //
-// Create a pb message description file `cls.proto` based on the pb data format content specified by CLS.
+// Create a local PB message description file cls.proto based on the PB data format specified by the log service.
 //
 // 
 //
-// > !The pb description file content cannot be modified, and the filename must end with `.proto`.
+// !PB description file content immutable, and the file name must end with `.proto`.
 //
 // 
 //
-// The content of `cls.proto` (pb description file) is as follows:
+// The content of cls.proto (PB description file) is as follows:
 //
 // 
 //
@@ -6429,15 +13433,15 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 //     {
 //
-//         required string key   = 1; // Key of each field group
+// required string key = 1; // key for each group of fields
 //
-//         required string value = 2; // Value of each field group
+// required string value = 2; // The value of the group field
 //
 //     }
 //
-//     required int64   time     = 1; // Unix timestamp
+// required int64   time     = 1; // A timestamp in UNIX time format
 //
-//     repeated Content contents = 2; // Multiple key-value pairs in one log
+// repeated Content contents = 2; // multiple kv combinations in a log
 //
 // }
 //
@@ -6459,13 +13463,13 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // {
 //
-//     repeated Log    logs        = 1; // Log array consisting of multiple logs
+// repeated Log    logs        = 1; // log array composed of multiple logs
 //
-//     optional string contextFlow = 2; // This parameter does not take effect currently
+// optional string contextFlow = 2; // Currently no utility
 //
-//     optional string filename    = 3; // Log filename
+// optional string filename = 3; // log file name
 //
-//     optional string source      = 4; // Log source, which is generally the machine IP
+// optional string source      = 4; // log source, general use machine IP
 //
 //     repeated LogTag logTags     = 5;
 //
@@ -6477,7 +13481,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // {
 //
-//     repeated LogGroup logGroupList = 1; // Log group list
+// repeated LogGroup logGroupList = 1; // log group list
 //
 // }
 //
@@ -6485,11 +13489,11 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// #### 3. Compile and generate the API
+// #### 3. Compile and generate
 //
 // 
 //
-// This example uses the proto compiler to generate a C++ file in the same directory as the `cls.proto` file. Run the following compilation command:
+// In this example, use the proto compiler to generate C++ language files under the same directory as the cls.proto file and execute the following compilation command:
 //
 // 
 //
@@ -6501,11 +13505,11 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// > ?`--cpp_out=./` indicates that the file will be compiled in cpp format and output to the current directory. `./cls.proto` indicates the `cls.proto` description file in the current directory.
+// `--cpp_out=./` means compile to cpp format and output in the current directory. `./cls.proto` refers to the cls.proto description file located in the current directory.
 //
 // 
 //
-// After the compilation succeeds, the code file in the corresponding programming language will be generated. This example generates the `cls.pb.h` header file and [cls.pb.cc](http://cls.pb.cc) code implementation file as shown below:
+// After successful compilation, it will output the code file in the corresponding language. This routine generates the cls.pb.h header file and the cls.pb.cc code implementation file, as shown below:
 //
 // 
 //
@@ -6521,16 +13525,17 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// #### 4. Call the API
+// #### 4. Call
 //
 // 
 //
-// Import the generated `cls.pb.h` header file into the code and call the API for data encapsulation.
+// Import the generated cls.pb.h header file into the code and call the interface to encapsulate the data format.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_MISSINGCONTENT = "FailedOperation.MissingContent"
 //  FAILEDOPERATION_READQPSLIMIT = "FailedOperation.ReadQpsLimit"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  FAILEDOPERATION_TOPICCLOSED = "FailedOperation.TopicClosed"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  FAILEDOPERATION_WRITEQPSLIMIT = "FailedOperation.WriteQpsLimit"
@@ -6554,17 +13559,17 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 }
 
 // UploadLog
-// ## Note
+// ## Notification
 //
-// To ensure log data reliability and help you use CLS more efficiently, we recommend you use the optimized API to upload logs. For more information about the API, see [Uploading Log via API](https://intl.cloud.tencent.com/document/product/614/16873?from_cn_redirect=1).
-//
-// 
-//
-// For the optimized API, we have developed an SDK (available in multiple languages) that provides features including async sending, resource control, automatic retry, graceful shutdown, and detection-based reporting. For details, see [Uploading Log via SDK](https://intl.cloud.tencent.com/document/product/614/67157?from_cn_redirect=1).
+// To ensure the reliability of your log data and use the log service more efficiently, we recommend that you use the CLS-optimized API to upload structured logs (https://www.tencentcloud.com/document/product/614/16873?from_cn_redirect=1).
 //
 // 
 //
-// `UploadLog` allows you to synchronously upload log data. If you still want to continue to use this API instead of the optimized one, read this document.
+// Meanwhile, we have specially optimized and customized SDKs in multiple languages for this API for you to choose from. The SDK provides unified async sending, resource control, automatic retry, graceful shutdown, perception reporting, and other features to improve the log reporting function. For details, refer to [SDK Collection](https://www.tencentcloud.com/document/product/614/67157?from_cn_redirect=1).
+//
+// 
+//
+// Meanwhile, the log upload API also supports synchronous log data upload. If you select to continue using this API, refer to the following text.
 //
 // 
 //
@@ -6572,125 +13577,101 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// This API is used to write logs to a specified log topic.
+// This API is used to write logs to the designated log topic.
 //
 // 
 //
-// CLS provides the following two modes:
+// #### Input parameter (pb binary stream, located in body)
 //
 // 
 //
-// #### Load balancing mode
-//
-// 
-//
-// In this mode, logs will be automatically written to a target partition among all readable/writable partitions under the current log topic based on the load balancing principle. This mode is suitable for scenarios where sequential consumption is not needed.
-//
-// 
-//
-// #### Hash routing mode
-//
-// 
-//
-// In this mode, data will be written to a target partition that meets the range requirements based on the carried hash value (`X-CLS-HashKey`). For example, a log source can be bound to a topic partition through `HashKey`, strictly guaranteeing the sequence of the data written to and consumed in this partition.
-//
-// 
-//
-//                  
-//
-// 
-//
-// #### Input parameters (pb binary streams in `body`)
-//
-// 
-//
-// | Parameter       | Type    | Location | Required | Description                                                         |
+// | Field name | Data type | Location | Must | Description |
 //
 // | ------------ | ------- | ---- | ---- | ------------------------------------------------------------ |
 //
-// | logGroupList | message | pb   | Yes   | The `logGroup` list, which describes the encapsulated log groups. We recommend you enter up to five `logGroup` values. |
+// | logGroupList | message | pb   | Yes | logGroup list, encapsulated content of the log group list. It is advisable not to exceed 5 logGroups. |
 //
 // 
 //
-// `LogGroup` description:
+// Group description:
 //
 // 
 //
-// | Parameter      | Required | Description                                                         |
+// | Field name | Required or optional | Description |
 //
 // | ----------- | -------- | ------------------------------------------------------------ |
 //
-// | logs        | Yes       | Log array consisting of multiple `Log` values. The `Log` indicates a log, and a `LogGroup` can contain up to 10,000 `Log` values. |
+// | logs        | is       | a log array, which means a set of multiple logs. One Log represents one log, and the number of logs in one LogGroup cannot exceed 10000 |
 //
-// | contextFlow | No       | Unique `LogGroup` ID, which should be passed in if the context feature needs to be used. Format: "{Context ID}-{LogGroupID}". <br>Context ID: Uniquely identifies the context (a series of log files that are continuously scrolling or a series of logs that need to be sequenced), which is a 64-bit integer hex string. <br>LogGroupID: A 64-bit integer hex string that continuously increases, such as `102700A66102516A-59F59`.                        |
+// | contextFlow | No | The unique ID of LogGroup, which must be imported when using context features. Format: "{context ID}-{LogGroupID}".<br>Context ID: A unique identifier for a context (a series of consecutively scrolled log files or a sequence of logs requiring order preservation), a 64-bit integer string in base 16.<br>LogGroupID: A consecutively incremental integer string in base 16. Example: "102700A66102516A-59F59".
 //
-// | filename    | No       | Log filename                                                   |
+// | filename    | No       | Log file name |
 //
-// | source      | No       | Log source, which is generally the machine IP                           |
+// | source      | No       | Log source, using machine IP as a label in general use       |
 //
-// | logTags     | No       | List of log tags                                               |
-//
-// 
-//
-// `Log` description:
+// | logTags     | No       | Log tag list                                               |
 //
 // 
 //
-// | Parameter   | Required | Description                                                         |
+// Log description:
+//
+// 
+//
+// | field name | Required or optional | Description |
 //
 // | -------- | -------- | ------------------------------------------------------------ |
 //
-// | time     | Yes       | Unix timestamp of log time in seconds or milliseconds (recommended)      |
+// | time     | is       | log time (Unix timestamp), supports second, millisecond, microsecond, milliseconds is recommended |
 //
-// | contents | No       | Log content in key-value format. A log can contain multiple key-value pairs. |
-//
-// 
-//
-// `Content` description:
+// | contents | No | Key-value formatted log content, representing multiple key-value composites in a log |
 //
 // 
 //
-// | Parameter | Required | Description                                                         |
+// Content description:
+//
+// 
+//
+// | Field name | Required or optional | Description |
 //
 // | ------ | -------- | ------------------------------------------------------------ |
 //
-// | key    | Yes       | Key of a field group in one log, which cannot start with `_`.                 |
+// | key    | Yes       | The key value of a field group in a single-line log. It cannot start with `_` |
 //
-// | value  | Yes       | Value of a field group. The `value` of one log cannot exceed 1 MB and the total `value` in `LogGroup` cannot exceed 5 MB. |
-//
-// 
-//
-// `LogTag` description:
+// | value  | Yes       | The value of a field group in a single-line log. The value of a single-line log must not exceed 1MB, and the sum of ALL values in a LogGroup cannot exceed 5MB. |
 //
 // 
 //
-// | Parameter | Required | Description                             |
+// LogTag description:
+//
+// 
+//
+// | Field name | Required or optional | Description |
 //
 // | ------ | -------- | -------------------------------- |
 //
-// | key    | Yes       | Key of a custom tag                 |
+// | key    | Yes      | Custom tag key                 |
 //
-// | value  | Yes       | Value corresponding to the custom tag key |
-//
-// 
-//
-// ## pb Compilation Example
+// | value  | is       | value corresponding to the custom tag key |
 //
 // 
 //
-// This example shows you how to use the protoc compiler to compile a pb description file into a log upload API in C++.
+// ## PB Compilation Example
 //
 // 
 //
-// > ?Currently, protoc supports compilation in multiple programming languages such as Java, C++, and Python. For more information, see [protoc](https://github.com/protocolbuffers/protobuf).
+// This example shows how to use the official protoc compiler to compile and generate a C++ language adjustable log upload API from a description file.
 //
 // 
 //
-// #### 1. Install protocol buffers
+// Currently protoc officially supports compilation for languages such as Java, C++, and Python. For details, see [protoc](https://github.com/protocolbuffers/protobuf).
 //
 // 
 //
-// Download [Protocol Buffers](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), decompress the package, and install the tool. The version used in the example is protobuf 2.6.1 running on CentOS 7.3. Run the following command to decompress the `protobuf-2.6.1.tar.gz` package to the `/usr/local` directory and go to the directory:
+// #### 1. Protocol Buffer installation
+//
+// 
+//
+// Download [Protocol Buffer](https://main.qcloudimg.com/raw/d7810aaf8b3073fbbc9d4049c21532aa/protobuf-2.6.1.tar.gz), unzip and install. The example version is protobuf 2.6.1, and the environment is Centos 7.3 system. Decompress the `protobuf-2.6.1.tar.gz` compressed package to the `/usr/local` directory and enter the directory. Execute the command as follows:
 //
 // 
 //
@@ -6702,7 +13683,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// Run the following commands to start compilation and installation and configure the environment variables:
+// Start compilation and installation, configure environment variables, execute the command as follows:
 //
 // 
 //
@@ -6718,7 +13699,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// After the compilation succeeds, run the following command to check the version:
+// After successful compilation, view the version using the following command:
 //
 // 
 //
@@ -6732,23 +13713,23 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// #### 2. Create a pb description file
+// #### 2. Create PB description file
 //
 // 
 //
-// A pb description file is an agreed-on data interchange format for communication. To upload logs, compile the specified protocol format to an API in the target programming language and add the API to the project code. For more information, see [protoc](https://github.com/protocolbuffers/protobuf).
+// The PB description file is the data interchange format agreed by the communication parties. When uploading logs, compile the specified protocol format into the calling interface of the corresponding language version, then add to engineering code. For details, see [protoc](https://github.com/protocolbuffers/protobuf).
 //
 // 
 //
-// Create a pb message description file `cls.proto` based on the pb data format content specified by CLS.
+// Create a local PB message description file cls.proto based on the PB data format specified by the log service.
 //
 // 
 //
-// > !The pb description file content cannot be modified, and the filename must end with `.proto`.
+// !PB description file content immutable, and the file name must end with `.proto`.
 //
 // 
 //
-// The content of `cls.proto` (pb description file) is as follows:
+// The content of cls.proto (PB description file) is as follows:
 //
 // 
 //
@@ -6766,15 +13747,15 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 //     {
 //
-//         required string key   = 1; // Key of each field group
+// required string key = 1; // key for each group of fields
 //
-//         required string value = 2; // Value of each field group
+// required string value = 2; // The value of the group field
 //
 //     }
 //
-//     required int64   time     = 1; // Unix timestamp
+// required int64   time     = 1; // A timestamp in UNIX time format
 //
-//     repeated Content contents = 2; // Multiple key-value pairs in one log
+// repeated Content contents = 2; // multiple kv combinations in a log
 //
 // }
 //
@@ -6796,13 +13777,13 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // {
 //
-//     repeated Log    logs        = 1; // Log array consisting of multiple logs
+// repeated Log    logs        = 1; // log array composed of multiple logs
 //
-//     optional string contextFlow = 2; // This parameter does not take effect currently
+// optional string contextFlow = 2; // Currently no utility
 //
-//     optional string filename    = 3; // Log filename
+// optional string filename = 3; // log file name
 //
-//     optional string source      = 4; // Log source, which is generally the machine IP
+// optional string source      = 4; // log source, general use machine IP
 //
 //     repeated LogTag logTags     = 5;
 //
@@ -6814,7 +13795,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // {
 //
-//     repeated LogGroup logGroupList = 1; // Log group list
+// repeated LogGroup logGroupList = 1; // log group list
 //
 // }
 //
@@ -6822,11 +13803,11 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// #### 3. Compile and generate the API
+// #### 3. Compile and generate
 //
 // 
 //
-// This example uses the proto compiler to generate a C++ file in the same directory as the `cls.proto` file. Run the following compilation command:
+// In this example, use the proto compiler to generate C++ language files under the same directory as the cls.proto file and execute the following compilation command:
 //
 // 
 //
@@ -6838,11 +13819,11 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// > ?`--cpp_out=./` indicates that the file will be compiled in cpp format and output to the current directory. `./cls.proto` indicates the `cls.proto` description file in the current directory.
+// `--cpp_out=./` means compile to cpp format and output in the current directory. `./cls.proto` refers to the cls.proto description file located in the current directory.
 //
 // 
 //
-// After the compilation succeeds, the code file in the corresponding programming language will be generated. This example generates the `cls.pb.h` header file and [cls.pb.cc](http://cls.pb.cc) code implementation file as shown below:
+// After successful compilation, it will output the code file in the corresponding language. This routine generates the cls.pb.h header file and the cls.pb.cc code implementation file, as shown below:
 //
 // 
 //
@@ -6858,16 +13839,17 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// #### 4. Call the API
+// #### 4. Call
 //
 // 
 //
-// Import the generated `cls.pb.h` header file into the code and call the API for data encapsulation.
+// Import the generated cls.pb.h header file into the code and call the interface to encapsulate the data format.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_MISSINGCONTENT = "FailedOperation.MissingContent"
 //  FAILEDOPERATION_READQPSLIMIT = "FailedOperation.ReadQpsLimit"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  FAILEDOPERATION_TOPICCLOSED = "FailedOperation.TopicClosed"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  FAILEDOPERATION_WRITEQPSLIMIT = "FailedOperation.WriteQpsLimit"

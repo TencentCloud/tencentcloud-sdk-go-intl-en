@@ -199,11 +199,17 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// false : Expired HKID is rejected and cannot enter the liveness process.
 	AllowExpiredDocument *bool `json:"AllowExpiredDocument,omitnil,omitempty" name:"AllowExpiredDocument"`
 
-
+	// <p>Whether to display the final result page</p><p>Enumeration values:</p><ul><li>true: Do not display the result page</li><li>false: Display the result page</li></ul><p>Default value: false</p>
 	SkipResultPage *bool `json:"SkipResultPage,omitnil,omitempty" name:"SkipResultPage"`
 
-
+	// <p>Identified fields displayed during document OCR</p><p>Parameter format: ["ChineseName","FullName"]</p><p>Input constraints: <strong>Supported field names by document type:</strong><br><strong>HK (Hong Kong Identity Card):</strong> "ChineseName","FullName","LicenseNumber","Birthday","Sex", "IssuedDate", "Permanent", "Symbol", "CurrentIssueDate"<br><strong>ML (Malaysia Identity Card):</strong> "FullName","LicenseNumber","Sex", "Birthday", "Type", "FormattedAddress"<br><strong>IndonesiaIDCard (Indonesia Identity Card):</strong> "LicenseNumber","FullName","Sex", "Birthday", "FormattedAddress", "Nationality", "DueDate", "IssuedDate", "Street", "Village","Area","Province","City","MaritalStatus", "BloodType", "Religion", "Occupation"<br><strong>PhilippinesVoteID (Philippines Voter's ID):</strong> "FirstName","LastName","Birthday"<br><strong>PhilippinesDrivingLicense (Philippines Driving License):</strong> "LastName","FirstName","MiddleName","Sex","Birthday"<br><strong>PhilippinesTinID (Philippines TIN ID):</strong> "LicenseNumber", "FullName", "Birthday"<br><strong>PhilippinesSSSID (Philippines SSS ID):</strong> "LicenseNumber", "FullName", "Birthday"<br><strong>PhilippinesUMID (Philippines UMID):</strong> "Surname", "MiddleName", "GivenName", "Sex", "Birthday"<br><strong>MLIDPassport (Passports of Hong Kong, Macao, Taiwan and overseas regions):</strong> "LicenseNumber","FullName", "Surname", "GivenName", "Birthday", "Sex","DateOfExpiration","IssuingCountry"<br><strong>ThailandIDCard (Thailand Identity Card):</strong> "FullName", "LastName", "FirstName", "FormattedAddress", "LicenseNumber", "Birthday", "ExpirationDate", "IssuedDate", "RegistrationNumber", "Religion", "ThaiBirthday", "ThaiExpirationDate", "ThaiIssueDate"<br><strong>MainlandIDCard (Chinese Mainland Identity Card):</strong> "LicenseNumber", "FullName", "Sex", "Nation", "Birthday", "FormattedAddress"<br><strong>SingaporeIDCard (Singapore Identity Card):</strong> "ChineseName","Sex","Birthday","LicenseNumber","Nationality","FullName","Address"<br><strong>HMTPermit (Mainland Travel Permit for Hong Kong and Macao Residents / Mainland Travel Permit for Taiwan Residents):</strong> "Name", "EnglishName", "Sex", "Number", "ValidDate", "Birthday"</p><p>If no fields are specified, all identified fields will be displayed by default.</p>
 	CardOcrDisplayFields []*string `json:"CardOcrDisplayFields,omitnil,omitempty" name:"CardOcrDisplayFields"`
+
+	// <p>Liveness retry attempts</p><p>Value range: [1, 5]</p><p>Default value: 5</p>
+	RetryLimit *int64 `json:"RetryLimit,omitnil,omitempty" name:"RetryLimit"`
+
+	// <p>Enable multi-image anti-spoofing for single-angle Identity Document Recognition</p><p>Default value: false</p><p>true - Enabled; false - Disabled</p>
+	EnableForgeryDetectionImages *bool `json:"EnableForgeryDetectionImages,omitnil,omitempty" name:"EnableForgeryDetectionImages"`
 }
 
 type ApplySdkVerificationTokenRequest struct {
@@ -285,9 +291,17 @@ type ApplySdkVerificationTokenRequest struct {
 	// false : Expired HKID is rejected and cannot enter the liveness process.
 	AllowExpiredDocument *bool `json:"AllowExpiredDocument,omitnil,omitempty" name:"AllowExpiredDocument"`
 
+	// <p>Whether to display the final result page</p><p>Enumeration values:</p><ul><li>true: Do not display the result page</li><li>false: Display the result page</li></ul><p>Default value: false</p>
 	SkipResultPage *bool `json:"SkipResultPage,omitnil,omitempty" name:"SkipResultPage"`
 
+	// <p>Identified fields displayed during document OCR</p><p>Parameter format: ["ChineseName","FullName"]</p><p>Input constraints: <strong>Supported field names by document type:</strong><br><strong>HK (Hong Kong Identity Card):</strong> "ChineseName","FullName","LicenseNumber","Birthday","Sex", "IssuedDate", "Permanent", "Symbol", "CurrentIssueDate"<br><strong>ML (Malaysia Identity Card):</strong> "FullName","LicenseNumber","Sex", "Birthday", "Type", "FormattedAddress"<br><strong>IndonesiaIDCard (Indonesia Identity Card):</strong> "LicenseNumber","FullName","Sex", "Birthday", "FormattedAddress", "Nationality", "DueDate", "IssuedDate", "Street", "Village","Area","Province","City","MaritalStatus", "BloodType", "Religion", "Occupation"<br><strong>PhilippinesVoteID (Philippines Voter's ID):</strong> "FirstName","LastName","Birthday"<br><strong>PhilippinesDrivingLicense (Philippines Driving License):</strong> "LastName","FirstName","MiddleName","Sex","Birthday"<br><strong>PhilippinesTinID (Philippines TIN ID):</strong> "LicenseNumber", "FullName", "Birthday"<br><strong>PhilippinesSSSID (Philippines SSS ID):</strong> "LicenseNumber", "FullName", "Birthday"<br><strong>PhilippinesUMID (Philippines UMID):</strong> "Surname", "MiddleName", "GivenName", "Sex", "Birthday"<br><strong>MLIDPassport (Passports of Hong Kong, Macao, Taiwan and overseas regions):</strong> "LicenseNumber","FullName", "Surname", "GivenName", "Birthday", "Sex","DateOfExpiration","IssuingCountry"<br><strong>ThailandIDCard (Thailand Identity Card):</strong> "FullName", "LastName", "FirstName", "FormattedAddress", "LicenseNumber", "Birthday", "ExpirationDate", "IssuedDate", "RegistrationNumber", "Religion", "ThaiBirthday", "ThaiExpirationDate", "ThaiIssueDate"<br><strong>MainlandIDCard (Chinese Mainland Identity Card):</strong> "LicenseNumber", "FullName", "Sex", "Nation", "Birthday", "FormattedAddress"<br><strong>SingaporeIDCard (Singapore Identity Card):</strong> "ChineseName","Sex","Birthday","LicenseNumber","Nationality","FullName","Address"<br><strong>HMTPermit (Mainland Travel Permit for Hong Kong and Macao Residents / Mainland Travel Permit for Taiwan Residents):</strong> "Name", "EnglishName", "Sex", "Number", "ValidDate", "Birthday"</p><p>If no fields are specified, all identified fields will be displayed by default.</p>
 	CardOcrDisplayFields []*string `json:"CardOcrDisplayFields,omitnil,omitempty" name:"CardOcrDisplayFields"`
+
+	// <p>Liveness retry attempts</p><p>Value range: [1, 5]</p><p>Default value: 5</p>
+	RetryLimit *int64 `json:"RetryLimit,omitnil,omitempty" name:"RetryLimit"`
+
+	// <p>Enable multi-image anti-spoofing for single-angle Identity Document Recognition</p><p>Default value: false</p><p>true - Enabled; false - Disabled</p>
+	EnableForgeryDetectionImages *bool `json:"EnableForgeryDetectionImages,omitnil,omitempty" name:"EnableForgeryDetectionImages"`
 }
 
 func (r *ApplySdkVerificationTokenRequest) ToJsonString() string {
@@ -316,6 +330,8 @@ func (r *ApplySdkVerificationTokenRequest) FromJsonString(s string) error {
 	delete(f, "AllowExpiredDocument")
 	delete(f, "SkipResultPage")
 	delete(f, "CardOcrDisplayFields")
+	delete(f, "RetryLimit")
+	delete(f, "EnableForgeryDetectionImages")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplySdkVerificationTokenRequest has unknown keys!", "")
 	}
@@ -350,8 +366,8 @@ func (r *ApplySdkVerificationTokenResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ApplyWebVerificationBizTokenIntlRequestParams struct {
 	// Web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. 
-	// After the verification process is completed, the BizToken of this process will be spliced to the callback URL in the format of https://www.tencentcloud.com/products/faceid?token={BizToken} before redirect.
-	// Example: https://www.tencentcloud.com/products/faceid.
+	// After the verification process is completed, the BizToken of this process will be spliced to the callback URL in the format of `https://www.tencentcloud.com/products/faceid?token={BizToken}` before redirect.
+	// Example: `https://www.tencentcloud.com/products/faceid.`
 	RedirectURL *string `json:"RedirectURL,omitnil,omitempty" name:"RedirectURL"`
 
 	// The Base64-encoded string (max 8 MB in size) of the photo to be compared.The Data URI scheme header needs to be removed from the encoded string
@@ -373,8 +389,8 @@ type ApplyWebVerificationBizTokenIntlRequest struct {
 	*tchttp.BaseRequest
 	
 	// Web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. 
-	// After the verification process is completed, the BizToken of this process will be spliced to the callback URL in the format of https://www.tencentcloud.com/products/faceid?token={BizToken} before redirect.
-	// Example: https://www.tencentcloud.com/products/faceid.
+	// After the verification process is completed, the BizToken of this process will be spliced to the callback URL in the format of `https://www.tencentcloud.com/products/faceid?token={BizToken}` before redirect.
+	// Example: `https://www.tencentcloud.com/products/faceid.`
 	RedirectURL *string `json:"RedirectURL,omitnil,omitempty" name:"RedirectURL"`
 
 	// The Base64-encoded string (max 8 MB in size) of the photo to be compared.The Data URI scheme header needs to be removed from the encoded string
@@ -418,7 +434,7 @@ func (r *ApplyWebVerificationBizTokenIntlRequest) FromJsonString(s string) error
 // Predefined struct for user
 type ApplyWebVerificationBizTokenIntlResponseParams struct {
 	// The token identifying this web-based verification process, valid for 7,200s after issuance. It is required for getting the result after the verification process is completed.
-	// Example: https://intl.faceid.qq.com/reflect/?token=81EEF678-28EE-4759-A82E-6CBBBE6BC442
+	// Example: `https://intl.faceid.qq.com/reflect/?token=81EEF678-28EE-4759-A82E-6CBBBE6BC442`
 	//
 	// Deprecated: VerificationUrl is deprecated.
 	VerificationUrl *string `json:"VerificationUrl,omitnil,omitempty" name:"VerificationUrl"`
@@ -1866,7 +1882,7 @@ type Encryption struct {
 }
 
 type ExtraInfo struct {
-
+	// Full details of the hit template; return solely the template with the maximum similarity.
 	RetrievalLivenessExtraInfo []*RetrievalLivenessExtraInfo `json:"RetrievalLivenessExtraInfo,omitnil,omitempty" name:"RetrievalLivenessExtraInfo"`
 }
 
@@ -3478,7 +3494,8 @@ type LivenessCompareResponseParams struct {
 	// Service result description.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-
+	// Best screenshot list.
+	// Returned only when multiple best screenshots are configured to be returned.
 	BestFrameList []*string `json:"BestFrameList,omitnil,omitempty" name:"BestFrameList"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4156,7 +4173,7 @@ type OCRResult struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CardBackCutImageBase64 *string `json:"CardBackCutImageBase64,omitnil,omitempty" name:"CardBackCutImageBase64"`
 
-	// <p>Alarm code</p><p>Enumeration value:</p><ul><li>-9101: Alarm for incomplete document border</li><li>-9102: Alarm for document photocopy</li><li>-9103: Alarm for rephotographing</li><li>-9104: PS alarm</li><li>-9107: Reflective alarm</li><li>-9108: Blurry alarm</li><li>-9109: Alarm capability not enabled</li></ul>
+	// <p>Alarm code</p><p>Enumeration value:</p><ul><li>9101: Alarm for incomplete document border</li><li>9102: Alarm for document photocopy</li><li>9103: Alarm for rephotographing</li><li>9104: PS alarm</li><li>9107: Reflective alarm</li><li>9108: Blurry alarm</li><li>9109: Alarm capability not enabled</li></ul>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	WarnCardInfos []*int64 `json:"WarnCardInfos,omitnil,omitempty" name:"WarnCardInfos"`
 

@@ -2791,6 +2791,66 @@ func (c *Client) DescribeGatherRuleDetailWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeOrgMemberAccountBalanceRequest() (request *DescribeOrgMemberAccountBalanceRequest) {
+    request = &DescribeOrgMemberAccountBalanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeOrgMemberAccountBalance")
+    
+    
+    return
+}
+
+func NewDescribeOrgMemberAccountBalanceResponse() (response *DescribeOrgMemberAccountBalanceResponse) {
+    response = &DescribeOrgMemberAccountBalanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeOrgMemberAccountBalance
+// Query member available balance in batches
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PAYPRICEERROR = "FailedOperation.PayPriceError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeOrgMemberAccountBalance(request *DescribeOrgMemberAccountBalanceRequest) (response *DescribeOrgMemberAccountBalanceResponse, err error) {
+    return c.DescribeOrgMemberAccountBalanceWithContext(context.Background(), request)
+}
+
+// DescribeOrgMemberAccountBalance
+// Query member available balance in batches
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PAYPRICEERROR = "FailedOperation.PayPriceError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeOrgMemberAccountBalanceWithContext(ctx context.Context, request *DescribeOrgMemberAccountBalanceRequest) (response *DescribeOrgMemberAccountBalanceResponse, err error) {
+    if request == nil {
+        request = NewDescribeOrgMemberAccountBalanceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "billing", APIVersion, "DescribeOrgMemberAccountBalance")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOrgMemberAccountBalance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeOrgMemberAccountBalanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRenewInstancesRequest() (request *DescribeRenewInstancesRequest) {
     request = &DescribeRenewInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2818,10 +2878,12 @@ func NewDescribeRenewInstancesResponse() (response *DescribeRenewInstancesRespon
 // 2. When using this API, a sub-user should have the QcloudFinanceRenewManageFullAccess permission policy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PAYPRICEERROR = "FailedOperation.PayPriceError"
 //  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBOPERATERROR = "InternalError.DbOperatError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
-//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeRenewInstances(request *DescribeRenewInstancesRequest) (response *DescribeRenewInstancesResponse, err error) {
     return c.DescribeRenewInstancesWithContext(context.Background(), request)
 }
@@ -2834,10 +2896,12 @@ func (c *Client) DescribeRenewInstances(request *DescribeRenewInstancesRequest) 
 // 2. When using this API, a sub-user should have the QcloudFinanceRenewManageFullAccess permission policy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PAYPRICEERROR = "FailedOperation.PayPriceError"
 //  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBOPERATERROR = "InternalError.DbOperatError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
-//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeRenewInstancesWithContext(ctx context.Context, request *DescribeRenewInstancesRequest) (response *DescribeRenewInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeRenewInstancesRequest()

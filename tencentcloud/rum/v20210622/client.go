@@ -5531,7 +5531,7 @@ func NewDescribeTawInstancesResponse() (response *DescribeTawInstancesResponse) 
 }
 
 // DescribeTawInstances
-// This API is used to query instance information.
+// Query instance information.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -5544,7 +5544,7 @@ func (c *Client) DescribeTawInstances(request *DescribeTawInstancesRequest) (res
 }
 
 // DescribeTawInstances
-// This API is used to query instance information.
+// Query instance information.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"

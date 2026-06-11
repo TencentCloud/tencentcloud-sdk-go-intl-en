@@ -1207,7 +1207,9 @@ func NewCreateScalingPolicyResponse() (response *CreateScalingPolicyResponse) {
 }
 
 // CreateScalingPolicy
-// This API (CreateScalingPolicy) is used to create an alarm trigger policy.
+// This API is used to create an alarm-triggered scaling policy.
+//
+// -The target tracking policy triggers scale-out when the specified type of metric exceeds the threshold (target value) for 3 consecutive cycles (1 minute each). It triggers auto scale-down when the specified type of metric is below the threshold (80% of the target value) for 15 consecutive cycles (1 minute each).
 //
 // error code that may be returned:
 //  INTERNALERROR_CALLMONITORERROR = "InternalError.CallMonitorError"
@@ -1230,7 +1232,9 @@ func (c *Client) CreateScalingPolicy(request *CreateScalingPolicyRequest) (respo
 }
 
 // CreateScalingPolicy
-// This API (CreateScalingPolicy) is used to create an alarm trigger policy.
+// This API is used to create an alarm-triggered scaling policy.
+//
+// -The target tracking policy triggers scale-out when the specified type of metric exceeds the threshold (target value) for 3 consecutive cycles (1 minute each). It triggers auto scale-down when the specified type of metric is below the threshold (80% of the target value) for 15 consecutive cycles (1 minute each).
 //
 // error code that may be returned:
 //  INTERNALERROR_CALLMONITORERROR = "InternalError.CallMonitorError"
@@ -1779,7 +1783,7 @@ func NewDescribeAutoScalingActivitiesResponse() (response *DescribeAutoScalingAc
 }
 
 // DescribeAutoScalingActivities
-// This API (DescribeAutoScalingActivities) is used to query the activity history of an auto scaling group.
+// This API is used to query the scaling activities of the scaling group. Currently, only scaling operations from the past two years are saved.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1796,7 +1800,7 @@ func (c *Client) DescribeAutoScalingActivities(request *DescribeAutoScalingActiv
 }
 
 // DescribeAutoScalingActivities
-// This API (DescribeAutoScalingActivities) is used to query the activity history of an auto scaling group.
+// This API is used to query the scaling activities of the scaling group. Currently, only scaling operations from the past two years are saved.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

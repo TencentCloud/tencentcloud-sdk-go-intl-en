@@ -193,6 +193,9 @@ type AdaptiveDynamicStreamingTaskInput struct {
 
 	// <p>List of subtitle suppression information. A maximum of 2 are supported.</p>
 	SubtitleInfoSet []*SubtitleInfoInput `json:"SubtitleInfoSet,omitnil,omitempty" name:"SubtitleInfoSet"`
+
+	// <p>Third-party DRM encrypted information. Task flow is not currently supported to initiate task via third-party DRM information.</p>
+	DrmInfo *ThirdPartyDrmInfo `json:"DrmInfo,omitnil,omitempty" name:"DrmInfo"`
 }
 
 type AdaptiveDynamicStreamingTemplate struct {
@@ -2145,7 +2148,7 @@ type AigcImageOutputConfig struct {
 	// <p>The expiry date of the output file. The file will be deleted longer than this time. It defaults to no expiration, format according to ISO 8601 standard. For details, see <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// <p>Resolution of the generated image. Available values for each model:</p><ul><li>OG: 1K, 2K, 4K, default 1K;</li><li>GG 2.5: 1K, 2K, 4K, default 1K;</li><li>GG 3.0: 1K, 2K, 4K, default 1K;</li><li>GG 3.1: 512, 1K, 2K, 4K, default 1K;</li><li>Kling 2.1: 1k, 2k, default 1k;</li><li>Kling 3.0: 1k, 2k, default 1k;</li><li>Kling 3.0-Omni: 1k, 2k, 4k, default 1k;</li><li>Kling O1: 1k, 2k, 4k, default 1k;</li><li>SI 4.0: 1K, 2K, 4K, default 1K;</li><li>SI 4.5: 2K, 4K, default 2K;</li><li>SI 5.0-lite: 2K, 3K, default 2K;</li><li>Vidu q2: 1080p, 2K, 4K, default 1080p;</li><li>Hunyuan 3.0: This field is not currently supported. Set resolution via the <code>ExtInfo</code> field;</li><li>Qwen 0925: This field is not currently supported. Set resolution via the <code>ExtInfo</code> field;</li></ul>
+	// <p>Image generation resolution. Available values for each model:</p><ul><li>OG: 1K, 2K, 4K, default 1K;</li><li>GG 2.5: 1K, 2K, 4K, default 1K;</li><li>GG 3.0: 1K, 2K, 4K, default 1K;</li><li>GG 3.1: 720P, 1K, 2K, 4K, default 1K;</li><li>Kling 2.1: 1k, 2k, default 1k;</li><li>Kling 3.0: 1k, 2k, default 1k;</li><li>Kling 3.0-Omni: 1k, 2k, 4k, default 1k;</li><li>Kling O1: 1k, 2k, 4k, default 1k;</li><li>SI 4.0: 1K, 2K, 4K, default 1K;</li><li>SI 4.5: 2K, 4K, default 2K;</li><li>SI 5.0-lite: 2K, 3K, default 2K;</li><li>Vidu q2: 1080p, 2K, 4K, default 1080p;</li><li>Hunyuan 3.0: This field is not currently supported. Use the <code>ExtInfo</code> field to set resolution;</li><li>Qwen 0925: This field is not currently supported. Use the <code>ExtInfo</code> field to set resolution;</li></ul>
 	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 
 	// <p>Specify the aspect ratio of the generated image.</p><ul><li>OG: 1:1, 3:2, 2:3, 3:4, 4:3, 16:9, 9:16, 21:9, 9:21;</li><li>GG 2.5: 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9;</li><li>GG 3.0: 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9;</li><li>GG 3.1: 1:1, 1:4, 1:8, 2:3, 3:2, 3:4, 4:1, 4:3, 4:5, 5:4, 8:1, 9:16, 16:9, 21:9;</li><li>Kling 2.1: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9;</li><li>Kling 3.0: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9;</li><li>Kling 3.0-Omni: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto;</li><li>Kling O1: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto;</li><li>Vidu q2: 16:9, 9:16, 1:1, 3:4, 4:3, 21:9, 2:3, 3:2;</li><li>SI 4.0: <strong>unsupported</strong>. Use prompt to specify 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9;</li><li>SI 4.5: <strong>unsupported</strong>. Use prompt to specify 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9;</li><li>SI 5.0-lite: <strong>unsupported</strong>. Use prompt to specify 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9;</li><li>Hunyuan 3.0: unsupported;</li><li>Qwen 2.0: unsupported;</li><li>Qwen 0925: unsupported;</li></ul>
@@ -2223,10 +2226,10 @@ type AigcImageTaskInput struct {
 	// <p>File information for AIGC image generation task input.</p>
 	FileInfos []*AigcImageTaskInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
 
-	// <p>Prompt for image generation. Supports up to 1000 characters. This parameter is required when FileInfos is empty.</p>
+	// <p>Prompt content for image generation. This parameter is required when FileInfos is empty.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
-	// <p>To prevent the model from generating images, set a prompt. Supports a maximum of 1000 characters.</p>
+	// <p>To prevent the model from generating image prompts.</p>
 	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
 
 	// <p>Whether to optimize Prompt content automatically. When Enabled, the passed in Prompt will be optimized automatically to enhance generation quality. Valid values: <li>Enabled: Enable;</li> <li>Disabled: Disable;</li></p>
@@ -2246,23 +2249,23 @@ type AigcImageTaskInput struct {
 }
 
 type AigcImageTaskInputFileInfo struct {
-	// Input video file type. Valid values: <li>File: on-demand media file;</li> <li>Url: accessible URL;</li>
+	// <p>Input file type. Valid values: <li>File: on-demand media file;</li> <li>Url: accessible Url;</li> <li>Base64: Base64 string of image or video conversion;</li></p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// The media File ID of the image File, which is the globally unique identifier of the File in vod, is assigned by the vod backend after successful upload. you can get this field in the [video upload completion event notification](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media). this parameter is valid when the Type value is File.
-	// Description:.
-	// 1. recommended for use: image less than 7 mb.
-	// 2. Valid values of image format: jpeg, jpg, png, and webp.
+	// <p>The media file ID of the image file, which is the globally unique identifier of this file in VOD, is assigned by the VOD backend after successful upload. You can obtain this field in the <a href="/document/product/266/7830">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when the Type value is File.<br>Note:</p><ol><li>Images less than 7M are recommended;</li><li>The image format values are: jpeg, jpg, png, webp.</li></ol>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// Accessible file URL. this parameter is valid when the Type value is URL.
-	// Description:.
-	// 1. recommended for use: image less than 7 mb.
-	// 2. Valid values of image format: jpeg, jpg, png, and webp.
+	// <p>Accessible file URL. This parameter is valid when the Type value is URL.</p><ol><li>Images less than 7M are recommended.</li><li>Image format values: jpeg, jpg, png, webp.</li></ol>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Description of the input image, used to help the model understand the image. valid for GEM 2.5 and GEM 3.0 only.
+	// <p>Accessible file Base64. This parameter is valid when Type value is Base64. Description:</p><ol><li>Total size of all files must not exceed 7 MB to avoid exceeding the 10 MB size limit of the cloud API after converting to Base64;</li><li>Format should be jpeg, jpg, png, or webp;</li><li>Do not include prefixes such as data:image/jpeg;base64,.</li></ol>
+	Base64 *string `json:"Base64,omitnil,omitempty" name:"Base64"`
+
+	// <p>Description of the input image, used to help the model understand the image. Only valid for GEM 2.5 and GEM 3.0.</p>
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// <p><strong>Valid only when ModelName is OG</strong>. Image type.</p><p>Enumeration value:</p><ul><li>mask: Image mask.</li></ul>
+	ReferenceType *string `json:"ReferenceType,omitnil,omitempty" name:"ReferenceType"`
 }
 
 type AigcImageTaskOutput struct {
@@ -2317,7 +2320,7 @@ type AigcVideoOutputConfig struct {
 	// <p>The expiry date of the output file. The file will be deleted longer than this time. It defaults to no expiration, format according to ISO 8601 standard. For details, see <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// <p>Duration of the generated video, unit: seconds.</p><li>When ModelName is Kling, available values are 5 and 10, default is 5;</li><li>When ModelName is Hailuo, available values are 6 and 10, default is 6;</li><li>When ModelName is Vidu, specify 1-10;</li><li>When ModelName is GV, available values are 8, default is 8;</li><li>When ModelName is OS, available values are 4, 8, and 12, default is 8;</li><li>When ModelName is PixVerse, specify 1-15, default is 5;</li>
+	// <p>Duration of the generated video, unit: seconds.</p><li>When ModelName is Kling, optional values are 3-15, default is 5.</li><li>When ModelName is Hailuo, optional values are 6 and 10, default is 6.</li><li>When ModelName is Vidu, specify 1-10.</li><li>When ModelName is GV, optional value is 8, default is 8.</li><li>When ModelName is OS, optional values are 4, 8, and 12, default is 8.</li><li>When ModelName is PixVerse, specify 1-15, default is 5.</li>
 	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// <p>Resolution of the generated video.</p><li>When ModelName is Kling, available values are 720P and 1080P, default is 720P;</li><li>When ModelName is Hailuo, available values are 768P and 1080P, default is 768P;</li><li>When ModelName is Vidu, available values are 720P and 1080P, default is 720P;</li><li>When ModelName is GV, available values are 720P and 1080P, default is 720P;</li><li>When ModelName is OS, available value is 720P;</li><li>When ModelName is PixVerse, available values are 540p, 720p, 1080p, 2k, and 4k, default is 720p;</li>
@@ -2536,7 +2539,7 @@ type AigcVideoTaskInput struct {
 }
 
 type AigcVideoTaskInputFileInfo struct {
-	// <p>Input video file type. Valid values: <li>File: On-demand media file;</li> <li>Url: Accessible URL;</li></p>
+	// <p>Input video file type. Valid values: <li>File: on-demand media file;</li> <li>Url: accessible Url;</li> <li>Base64: Base64 string of image or video conversion;</li></p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// <p>File category. Value is:</p><ul><li>Image: image. <strong>Note that the Usage field defines the image type.</strong></li><li>Video: video.</li></ul>
@@ -2548,7 +2551,7 @@ type AigcVideoTaskInputFileInfo struct {
 	// <p>Accessible file URL. This parameter is valid when the Type value is URL.<br>Description:</p><ol><li>Images less than 10M are recommended.</li><li>Image format values: jpeg, jpg, png.</li></ol>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-
+	// <p>Accessible file Base64. This parameter is valid when Type value is Base64. Description:</p><ol><li>The total size of all files must not exceed 7MB to avoid exceeding the 10MB upper limit of message size for cloud APIs after conversion to Base64.</li><li>Image format should be: jpeg, jpg, png, webp.</li><li>Video format should be: mp4, mov, avi.</li><li>Do not include prefixes like data:image/jpeg;base64.</li></ol>
 	Base64 *string `json:"Base64,omitnil,omitempty" name:"Base64"`
 
 	// <p>Reference Type, applicable to GV, Kling, and PixVerse models.<br>Note:<br>When using the GV model, it can be used as a reference method, available values: asset means material, style means style;<br>When using the Kling model and Category is Video, distinct reference video types can be identified, feature means feature reference video, base means video to be edited;<br>When using the PixVerse model, applicable to multi-image (subject) reference generation mode, available values: subject means subject, background means background;</p>
@@ -2563,7 +2566,7 @@ type AigcVideoTaskInputFileInfo struct {
 	// <p>Whether to retain the original sound of the video. Valid when Category is Video. Values are as follows:</p><li>Enabled: Retain</li><li>Disabled: Not retain</li>
 	KeepOriginalSound *string `json:"KeepOriginalSound,omitnil,omitempty" name:"KeepOriginalSound"`
 
-	// <p>Used to distinguish whether the input image is for <strong>first (last) frame to video</strong>, <strong>image to video</strong>, or <strong>reference to video</strong>. Available values:</p><ul><li>FirstFrame: For first (last) frame to video or image to video;</li><li>Reference: For reference to video;</li></ul><p><strong>Note: FirstFrame is selected by default</strong></p>
+	// <p>Used to distinguish whether the input image is for <strong>first (last) frame to video</strong>, <strong>image to video</strong>, or <strong>reference to video</strong>. Available values:</p><ul><li>FirstFrame: Used for the first frame of first (last) frame to video or image to video.</li><li>Reference: Used for reference to video.</li><li>LastFrame: Used for the last frame of first (last) frame to video.</li></ul><p><strong>Note that FirstFrame is selected by default</strong></p>
 	Usage *string `json:"Usage,omitnil,omitempty" name:"Usage"`
 
 	// <p><strong>Only the multi-image (subject) reference mode of the PixVerse model takes effect</strong>. Specify a name for the image to achieve more precise results. Usage: When the field value is "kitten", use @kitten in the Prompt to accurately describe the scenario. There must be a space after @Text, for example, @kitten run. The name referenced in the Prompt must be the same as the field value.</p>
@@ -2588,8 +2591,11 @@ type AigcVideoTaskInputSubjectInfo struct {
 }
 
 type AigcVideoTaskOutput struct {
-	// Output file information of the AIGC video task.	
+	// <p>Output file info of the AIGC video task.</p>
 	FileInfos []*AigcVideoTaskOutputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// <p>The task ID of the task type Procedure. If a task flow template (Procedure) is specified when initiating <a href="https://www.tencentcloud.com/document/product/266/126239?from_cn_redirect=1">AIGC video task creation</a>, the task is initiated when the task flow template specifies one or more of MediaProcessTask, AiAnalysisTask, or AiRecognitionTask.</p>
+	ProcedureTaskIds []*string `json:"ProcedureTaskIds,omitnil,omitempty" name:"ProcedureTaskIds"`
 }
 
 type AigcVideoTaskOutputFileInfo struct {
@@ -5071,6 +5077,9 @@ type CreateAigcAdvancedCustomElementRequestParams struct {
 	// <p>Configure tags for a subject. A subject can be configured with multiple tags.</p><ul><li>Use key:value pairs to carry them. Details are given below:</li></ul><p><pre><code>[  {        "tag_id": "o_101"  }, {        "tag_id": "o_102"    }]</code></pre></p>
 	TagList *string `json:"TagList,omitnil,omitempty" name:"TagList"`
 
+	// <p>If the overseas custom subject library is enabled, you can input <code>True</code> to use it.</p><p>Enumeration value:</p><ul><li>True: Use the overseas custom subject library.</li><li>False: Non-use of the overseas custom subject library.</li></ul>
+	DisableModeration *string `json:"DisableModeration,omitnil,omitempty" name:"DisableModeration"`
+
 	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
@@ -5108,6 +5117,9 @@ type CreateAigcAdvancedCustomElementRequest struct {
 	// <p>Configure tags for a subject. A subject can be configured with multiple tags.</p><ul><li>Use key:value pairs to carry them. Details are given below:</li></ul><p><pre><code>[  {        "tag_id": "o_101"  }, {        "tag_id": "o_102"    }]</code></pre></p>
 	TagList *string `json:"TagList,omitnil,omitempty" name:"TagList"`
 
+	// <p>If the overseas custom subject library is enabled, you can input <code>True</code> to use it.</p><p>Enumeration value:</p><ul><li>True: Use the overseas custom subject library.</li><li>False: Non-use of the overseas custom subject library.</li></ul>
+	DisableModeration *string `json:"DisableModeration,omitnil,omitempty" name:"DisableModeration"`
+
 	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
@@ -5138,6 +5150,7 @@ func (r *CreateAigcAdvancedCustomElementRequest) FromJsonString(s string) error 
 	delete(f, "ElementVideoList")
 	delete(f, "ElementImageList")
 	delete(f, "TagList")
+	delete(f, "DisableModeration")
 	delete(f, "SessionId")
 	delete(f, "SessionContext")
 	delete(f, "TasksPriority")
@@ -5462,13 +5475,16 @@ type CreateAigcAudioCloneTask struct {
 
 // Predefined struct for user
 type CreateAigcAudioTaskRequestParams struct {
+	// <p>VOD app ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created application).</p>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
 	// <p>Model name.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
 	// <p>Specify the model version number. By default, the system uses the supported stable version of the model.</p>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// <p>Designated scenarios currently support sfx (sound effects).</p>
+	// <p>Designated scenarios currently support sfx (sound effects) and music.</p>
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
 
 	// <p>Description of the generated audio</p>
@@ -5490,13 +5506,16 @@ type CreateAigcAudioTaskRequestParams struct {
 type CreateAigcAudioTaskRequest struct {
 	*tchttp.BaseRequest
 	
+	// <p>VOD app ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created application).</p>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
 	// <p>Model name.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
 	// <p>Specify the model version number. By default, the system uses the supported stable version of the model.</p>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// <p>Designated scenarios currently support sfx (sound effects).</p>
+	// <p>Designated scenarios currently support sfx (sound effects) and music.</p>
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
 
 	// <p>Description of the generated audio</p>
@@ -5527,6 +5546,7 @@ func (r *CreateAigcAudioTaskRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "SubAppId")
 	delete(f, "ModelName")
 	delete(f, "ModelVersion")
 	delete(f, "SceneType")
@@ -5684,6 +5704,9 @@ type CreateAigcCustomVoiceRequestParams struct {
 	// <p>History works ID. Audio material can be provided by referring to history works.</p>
 	VideoId *string `json:"VideoId,omitnil,omitempty" name:"VideoId"`
 
+	// <p>If the overseas custom timbre library is enabled, you can input <code>True</code> to use it.</p><p>Enumeration value:</p><ul><li>True: Use the overseas custom timbre library.</li><li>False: Non-use of the overseas custom timbre library.</li></ul>
+	DisableModeration *string `json:"DisableModeration,omitnil,omitempty" name:"DisableModeration"`
+
 	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
@@ -5708,6 +5731,9 @@ type CreateAigcCustomVoiceRequest struct {
 
 	// <p>History works ID. Audio material can be provided by referring to history works.</p>
 	VideoId *string `json:"VideoId,omitnil,omitempty" name:"VideoId"`
+
+	// <p>If the overseas custom timbre library is enabled, you can input <code>True</code> to use it.</p><p>Enumeration value:</p><ul><li>True: Use the overseas custom timbre library.</li><li>False: Non-use of the overseas custom timbre library.</li></ul>
+	DisableModeration *string `json:"DisableModeration,omitnil,omitempty" name:"DisableModeration"`
 
 	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
@@ -5735,6 +5761,7 @@ func (r *CreateAigcCustomVoiceRequest) FromJsonString(s string) error {
 	delete(f, "VoiceName")
 	delete(f, "VoiceUrl")
 	delete(f, "VideoId")
+	delete(f, "DisableModeration")
 	delete(f, "SessionId")
 	delete(f, "SessionContext")
 	delete(f, "TasksPriority")
@@ -5809,7 +5836,7 @@ type CreateAigcImageTaskRequestParams struct {
 	// <p>Model name. Value:</p><li>OG</li><li>GG</li><li>SI</li><li>Qwen</li><li>Hunyuan</li><li>Vidu</li><li>Kling</li>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// <p>Model version. Parameter value:</p><li>When ModelName is OG, available values are image2_low, image2_medium, image2_high;</li><li>When ModelName is GG, available values are 2.5, 3.0, 3.1;</li><li>When ModelName is Jimeng, available values are 4.0;</li><li>When ModelName is SI, available values are 4.0, 4.5, 5.0-lite;</li><li>When ModelName is Qwen, available values are 0925;</li><li>When ModelName is Hunyuan, available values are 3.0;</li><li>When ModelName is Vidu, available values are q2;</li><li>When ModelName is Kling, available values are 2.1, 3.0, 3.0-Omni, O1;</li>
+	// <p>Model version. Parameter:</p><li>When ModelName is OG, available values are image2_low, image2_medium, image2_high;</li><li>When ModelName is GG, available values are 2.5, 3.0, 3.1;</li><li>When ModelName is Jimeng, available values are 4.0;</li><li>When ModelName is SI, available values are 4.0, 4.5, 5.0-lite;</li><li>When ModelName is Qwen, available values are 0925;</li><li>When ModelName is Hunyuan, available values are 3.0;</li><li>When ModelName is Vidu, available values are q2;</li><li>When ModelName is Kling, available values are 2.1, 3.0, 3.0-Omni, O1, scene;</li>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
 	// <p>File information of the input image for the AIGC image generation task. Maximum number of reference images supported by each model:</p><ul><li>GG 2.5: 3;</li><li>GG 3.0: 14;</li><li>GG 3.1: 14;</li><li>Kling 2.1: 4;</li><li>Kling 3.0: 1;</li><li>Kling 3.0-Omni: 10;</li><li>Kling O1: 10;</li><li>SI 4.0: 14;</li><li>SI 4.5: 14;</li><li>SI 5.0-lite: 14;</li><li>Vidu q2: 7;</li><li>Hunyuan 3.0: 3;</li><li>Qwen 0925: 1;</li><li>MJ v7: 3.</li></ul>
@@ -5830,7 +5857,7 @@ type CreateAigcImageTaskRequestParams struct {
 	// <p>Input region information. Available values:</p><ul><li>Mainland: Chinese mainland;</li><li>Oversea: overseas;</li><li>OverseaUSWest: overseas - western United States;</li></ul>
 	InputRegion *string `json:"InputRegion,omitnil,omitempty" name:"InputRegion"`
 
-	// <p>Scenario type. Values as follows: <li>When ModelName is Hunyuan: 3d_panorama means Panoramic View;</li> <li>Other ModelName is not currently supported.</li></p>
+	// <p>Scenario type. Values are as follows:</p><li>When ModelName is Hunyuan: 3d_panorama means panoramic view;</li><li>When ModelName is Kling: image_expand means image expansion;</li><li>Other ModelNames are not currently supported.</li>
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
 
 	// <p>Random seed of the model.</p>
@@ -5845,7 +5872,7 @@ type CreateAigcImageTaskRequestParams struct {
 	// <p>Task priority. The higher the value, the higher the priority. The value range is from -10 to 10. If this is not specified, the default value is 0.</p>
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// <p>Reserved field, used for special purpose.</p><ul><li><p>Hunyuan 3.0</p><ul><li>Supports freely setting resolution width and height. Both width and height must be within [512, 2048] pixels, and the product of width and height must be ≤ 1024x1024 pixels. Example: <code>{"AdditionalParameters": "{\"size\":\"728x1024\"}"}</code></li></ul></li><li><p>SI series</p><ul><li>Supports freely setting resolution width and height:<ul><li>SI 4.0: Valid total pixel range [1280x720=921600, 4096x4096=16777216]. Example: <code>{"AdditionalParameters": "{\"size\":\"728x1356\"}"}</code></li><li>SI 4.5: Valid total pixel range [2560x1440=3686400, 4096x4096=16777216]. Example: <code>{"AdditionalParameters": "{\"size\":\"2560x1440\"}"}</code></li><li>SI 5.0-lite: Valid total pixel range [2560x1440=3686400, 3072x3072x1.1025=10404496]. Example: <code>{"AdditionalParameters": "{\"size\":\"2560x1440\"}"}</code></li></ul></li><li>Can be used to enable output of multiple images. Example: <code>{"AdditionalParameters": "{\"sequential_image_generation\":\"auto\"}"}</code>. Besides, the number of output images must be specified in <code>Prompt</code>, such as: output 3 images.</li></ul></li><li><p>Qwen 0925</p><ul><li>Supports freely setting resolution width and height. Valid total pixel range [512x512=261632, 2048x2048=4194304]. Example: <code>{"AdditionalParameters": "{\"size\":\"728*1024\"}"}</code></li></ul></li></ul>
+	// <p>Reserved field, used for special purpose.</p><ul><li><p>Hunyuan 3.0</p><ul><li>Supports freely setting resolution width and height, both within [512, 2048] pixels, with the product of width and height ≤ 1024x1024 pixels. Example: <code>{"AdditionalParameters": "{\"size\":\"728x1024\"}"}</code></li></ul></li><li><p>SI series</p><ul><li>Supports freely setting resolution width and height:<ul><li>SI 4.0: Valid total pixel range [1280x720=921600, 4096x4096=16777216]. Example: <code>{"AdditionalParameters": "{\"size\":\"728x1356\"}"}</code></li><li>SI 4.5: Valid total pixel range [2560x1440=3686400, 4096x4096=16777216]. Example: <code>{"AdditionalParameters": "{\"size\":\"2560x1440\"}"}</code></li><li>SI 5.0-lite: Valid total pixel range [2560x1440=3686400, 3072x3072x1.1025=10404496]. Example: <code>{"AdditionalParameters": "{\"size\":\"2560x1440\"}"}</code></li></ul></li><li>Can be used to enable output of multiple images. Example: <code>{"AdditionalParameters": "{\"sequential_image_generation\":\"auto\"}"}</code>. Besides, the number of images to output must be specified in the <code>Prompt</code>, such as "output 3 images".</li></ul></li><li><p>Qwen 0925</p><ul><li>Supports freely setting resolution width and height, with valid total pixel range [512x512=261632, 2048x2048=4194304]. Example: <code>{"AdditionalParameters": "{\"size\":\"728*1024\"}"}</code></li></ul></li><li><p>OG</p><ul><li>Supports freely setting resolution width and height:<ul><li>Pixel size must be divisible by 16.</li><li>Total pixels must be at least 655,360 and should not exceed 8,294,400.</li><li>Example: <code>{"AdditionalParameters": "{\"size\":\"728*1024\"}"}</code></li></ul></li><li>Supports setting transparent layer:<ul><li>Example: <code>{"AdditionalParameters": "{\"background\":\"transparent\"}"}</code></li></ul></li></ul></li><li><p>Kling</p><ul><li>Supports setting image expansion parameters. Example: <code>{AdditionalParameters":"{\"down_expansion_ratio\":0.2,\"left_expansion_ratio\":0.3,\"right_expansion_ratio\":0.4,\"up_expansion_ratio\":0.1}}</code><ul><li>Common constraints:<ul><li>Value range: [0, 2].</li><li>The overall area of the new image should not exceed 3 times that of the original image.</li><li>Forward prompts can be input through the <code>Prompt</code> field.</li><li>Example description:<ul><li>up_expansion_ratio: Upward expansion range, calculated based on a multiple of the original image height. If the original image height is 20 and the parameter value is 0.1, the distance from the top edge of the original image to the top edge of the new image is 20 × 0.1 = 2, which is the expansion range.</li><li>down_expansion_ratio: Downward expansion range, calculated based on a multiple of the original image height. If the original image height is 20 and the parameter value is 0.2, the distance from the bottom edge of the original image to the bottom edge of the new image is 20 × 0.2 = 4, which is the expansion range.</li><li>left_expansion_ratio: Leftward expansion range, calculated based on a multiple of the original image width. If the original image width is 30 and the parameter value is 0.3, the distance from the left edge of the original image to the left edge of the new image is 30 × 0.3 = 9, which is the expansion range.</li><li>right_expansion_ratio: Rightward expansion range, calculated based on a multiple of the original image width. If the original image width is 30 and the parameter value is 0.4, the distance from the right edge of the original image to the right edge of the new image is 30 × 0.4 = 12, which is the expansion range.</li></ul></li></ul></li></ul></li></ul></li></ul>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
@@ -5858,7 +5885,7 @@ type CreateAigcImageTaskRequest struct {
 	// <p>Model name. Value:</p><li>OG</li><li>GG</li><li>SI</li><li>Qwen</li><li>Hunyuan</li><li>Vidu</li><li>Kling</li>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// <p>Model version. Parameter value:</p><li>When ModelName is OG, available values are image2_low, image2_medium, image2_high;</li><li>When ModelName is GG, available values are 2.5, 3.0, 3.1;</li><li>When ModelName is Jimeng, available values are 4.0;</li><li>When ModelName is SI, available values are 4.0, 4.5, 5.0-lite;</li><li>When ModelName is Qwen, available values are 0925;</li><li>When ModelName is Hunyuan, available values are 3.0;</li><li>When ModelName is Vidu, available values are q2;</li><li>When ModelName is Kling, available values are 2.1, 3.0, 3.0-Omni, O1;</li>
+	// <p>Model version. Parameter:</p><li>When ModelName is OG, available values are image2_low, image2_medium, image2_high;</li><li>When ModelName is GG, available values are 2.5, 3.0, 3.1;</li><li>When ModelName is Jimeng, available values are 4.0;</li><li>When ModelName is SI, available values are 4.0, 4.5, 5.0-lite;</li><li>When ModelName is Qwen, available values are 0925;</li><li>When ModelName is Hunyuan, available values are 3.0;</li><li>When ModelName is Vidu, available values are q2;</li><li>When ModelName is Kling, available values are 2.1, 3.0, 3.0-Omni, O1, scene;</li>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
 	// <p>File information of the input image for the AIGC image generation task. Maximum number of reference images supported by each model:</p><ul><li>GG 2.5: 3;</li><li>GG 3.0: 14;</li><li>GG 3.1: 14;</li><li>Kling 2.1: 4;</li><li>Kling 3.0: 1;</li><li>Kling 3.0-Omni: 10;</li><li>Kling O1: 10;</li><li>SI 4.0: 14;</li><li>SI 4.5: 14;</li><li>SI 5.0-lite: 14;</li><li>Vidu q2: 7;</li><li>Hunyuan 3.0: 3;</li><li>Qwen 0925: 1;</li><li>MJ v7: 3.</li></ul>
@@ -5879,7 +5906,7 @@ type CreateAigcImageTaskRequest struct {
 	// <p>Input region information. Available values:</p><ul><li>Mainland: Chinese mainland;</li><li>Oversea: overseas;</li><li>OverseaUSWest: overseas - western United States;</li></ul>
 	InputRegion *string `json:"InputRegion,omitnil,omitempty" name:"InputRegion"`
 
-	// <p>Scenario type. Values as follows: <li>When ModelName is Hunyuan: 3d_panorama means Panoramic View;</li> <li>Other ModelName is not currently supported.</li></p>
+	// <p>Scenario type. Values are as follows:</p><li>When ModelName is Hunyuan: 3d_panorama means panoramic view;</li><li>When ModelName is Kling: image_expand means image expansion;</li><li>Other ModelNames are not currently supported.</li>
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
 
 	// <p>Random seed of the model.</p>
@@ -5894,7 +5921,7 @@ type CreateAigcImageTaskRequest struct {
 	// <p>Task priority. The higher the value, the higher the priority. The value range is from -10 to 10. If this is not specified, the default value is 0.</p>
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// <p>Reserved field, used for special purpose.</p><ul><li><p>Hunyuan 3.0</p><ul><li>Supports freely setting resolution width and height. Both width and height must be within [512, 2048] pixels, and the product of width and height must be ≤ 1024x1024 pixels. Example: <code>{"AdditionalParameters": "{\"size\":\"728x1024\"}"}</code></li></ul></li><li><p>SI series</p><ul><li>Supports freely setting resolution width and height:<ul><li>SI 4.0: Valid total pixel range [1280x720=921600, 4096x4096=16777216]. Example: <code>{"AdditionalParameters": "{\"size\":\"728x1356\"}"}</code></li><li>SI 4.5: Valid total pixel range [2560x1440=3686400, 4096x4096=16777216]. Example: <code>{"AdditionalParameters": "{\"size\":\"2560x1440\"}"}</code></li><li>SI 5.0-lite: Valid total pixel range [2560x1440=3686400, 3072x3072x1.1025=10404496]. Example: <code>{"AdditionalParameters": "{\"size\":\"2560x1440\"}"}</code></li></ul></li><li>Can be used to enable output of multiple images. Example: <code>{"AdditionalParameters": "{\"sequential_image_generation\":\"auto\"}"}</code>. Besides, the number of output images must be specified in <code>Prompt</code>, such as: output 3 images.</li></ul></li><li><p>Qwen 0925</p><ul><li>Supports freely setting resolution width and height. Valid total pixel range [512x512=261632, 2048x2048=4194304]. Example: <code>{"AdditionalParameters": "{\"size\":\"728*1024\"}"}</code></li></ul></li></ul>
+	// <p>Reserved field, used for special purpose.</p><ul><li><p>Hunyuan 3.0</p><ul><li>Supports freely setting resolution width and height, both within [512, 2048] pixels, with the product of width and height ≤ 1024x1024 pixels. Example: <code>{"AdditionalParameters": "{\"size\":\"728x1024\"}"}</code></li></ul></li><li><p>SI series</p><ul><li>Supports freely setting resolution width and height:<ul><li>SI 4.0: Valid total pixel range [1280x720=921600, 4096x4096=16777216]. Example: <code>{"AdditionalParameters": "{\"size\":\"728x1356\"}"}</code></li><li>SI 4.5: Valid total pixel range [2560x1440=3686400, 4096x4096=16777216]. Example: <code>{"AdditionalParameters": "{\"size\":\"2560x1440\"}"}</code></li><li>SI 5.0-lite: Valid total pixel range [2560x1440=3686400, 3072x3072x1.1025=10404496]. Example: <code>{"AdditionalParameters": "{\"size\":\"2560x1440\"}"}</code></li></ul></li><li>Can be used to enable output of multiple images. Example: <code>{"AdditionalParameters": "{\"sequential_image_generation\":\"auto\"}"}</code>. Besides, the number of images to output must be specified in the <code>Prompt</code>, such as "output 3 images".</li></ul></li><li><p>Qwen 0925</p><ul><li>Supports freely setting resolution width and height, with valid total pixel range [512x512=261632, 2048x2048=4194304]. Example: <code>{"AdditionalParameters": "{\"size\":\"728*1024\"}"}</code></li></ul></li><li><p>OG</p><ul><li>Supports freely setting resolution width and height:<ul><li>Pixel size must be divisible by 16.</li><li>Total pixels must be at least 655,360 and should not exceed 8,294,400.</li><li>Example: <code>{"AdditionalParameters": "{\"size\":\"728*1024\"}"}</code></li></ul></li><li>Supports setting transparent layer:<ul><li>Example: <code>{"AdditionalParameters": "{\"background\":\"transparent\"}"}</code></li></ul></li></ul></li><li><p>Kling</p><ul><li>Supports setting image expansion parameters. Example: <code>{AdditionalParameters":"{\"down_expansion_ratio\":0.2,\"left_expansion_ratio\":0.3,\"right_expansion_ratio\":0.4,\"up_expansion_ratio\":0.1}}</code><ul><li>Common constraints:<ul><li>Value range: [0, 2].</li><li>The overall area of the new image should not exceed 3 times that of the original image.</li><li>Forward prompts can be input through the <code>Prompt</code> field.</li><li>Example description:<ul><li>up_expansion_ratio: Upward expansion range, calculated based on a multiple of the original image height. If the original image height is 20 and the parameter value is 0.1, the distance from the top edge of the original image to the top edge of the new image is 20 × 0.1 = 2, which is the expansion range.</li><li>down_expansion_ratio: Downward expansion range, calculated based on a multiple of the original image height. If the original image height is 20 and the parameter value is 0.2, the distance from the bottom edge of the original image to the bottom edge of the new image is 20 × 0.2 = 4, which is the expansion range.</li><li>left_expansion_ratio: Leftward expansion range, calculated based on a multiple of the original image width. If the original image width is 30 and the parameter value is 0.3, the distance from the left edge of the original image to the left edge of the new image is 30 × 0.3 = 9, which is the expansion range.</li><li>right_expansion_ratio: Rightward expansion range, calculated based on a multiple of the original image width. If the original image width is 30 and the parameter value is 0.4, the distance from the right edge of the original image to the right edge of the new image is 30 × 0.4 = 12, which is the expansion range.</li></ul></li></ul></li></ul></li></ul></li></ul>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
@@ -6220,7 +6247,7 @@ type CreateAigcVideoTaskRequestParams struct {
 	// <p>Model name. Parameter Value:<br>Kling: Keling;<br>Vidu;<br>Hailuo: Hailuo;<br>Hunyuan: Hunyuan;<br>Mingmou: Mingmou;<br>GV;<br>OS;<br>PixVerse;</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// <p>Model version. Parameter Value:<br>When ModelName is Hailuo, optional values are 02, 2.3, and 2.3-fast.<br>When ModelName is Kling, optional values are 1.6, 2.0, 2.1, 2.5, 2.6, O1, 3.0, and 3.0-Omni.<br>When ModelName is Jimeng, optional value is 3.0pro.<br>When ModelName is Vidu, optional values are q2, q2-pro, q2-turbo, q3, q3-pro, and q3-turbo.<br>When ModelName is GV, optional values are 3.1 and 3.1-fast.<br>When ModelName is OS, optional value is 2.0.<br>When ModelName is Hunyuan, optional value is 1.5.<br>When ModelName is Mingmou, optional value is 1.0.<br>When ModelName is PixVerse, optional values are v5.6, v6, and c1.</p>
+	// <p>Model version. Parameter value:<br>When ModelName is Hailuo, optional values are 02, 2.3, and 2.3-fast.<br>When ModelName is Kling, optional values are 1.6, 2.0, 2.1, 2.5, 2.6, O1, 3.0, and 3.0-Omni.<br>When ModelName is Vidu, optional values are q2, q2-pro, q2-turbo, q3, q3-pro, and q3-turbo.<br>When ModelName is GV, optional values are 3.1 and 3.1-fast.<br>When ModelName is OS, optional value is 2.0.<br>When ModelName is Hunyuan, optional value is 1.5.<br>When ModelName is Mingmou, optional value is 1.0.<br>When ModelName is PixVerse, optional values are v5.6, v6, and c1.</p>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
 	// <p>Describes the resource file to be used by the model for video generation, divided into <strong>first and last frame mode, reference image, video reference, video editing, and other modes</strong>.</p><p><strong>First and last frame video generation</strong>: The first frame supports only a <strong>single image</strong>, with the <strong>Usage field of the image set to FirstFrame</strong>. LastFrameFileId or LastFrameUrl represents the last frame. The first frame can be imported separately, but the last frame cannot. <strong>First and last frame generation refers to the image aspect ratio</strong>.<br><strong>Reference image generation</strong>: Allows input of a single image or multiple images, with the <strong>Usage field of the image set to Reference</strong>. Reference images can adjust the aspect ratio of the generated video.<br><strong>Video editing and video reference</strong>: Vidu and Kling can input a video as a reference or proceed with editing. Images can also be imported along with the video, with the <strong>Usage field of the image set to Reference</strong>.</p><p>Note:</p><ol><li>Image size should be no more than 10M.</li><li>Supported image formats: jpeg, jpg, png. x0b</li><li>To check whether a specific model version supports reference images, first and last frames, video editing, and other features, request the document from us or refer to the original document information.</li></ol>
@@ -6252,6 +6279,9 @@ type CreateAigcVideoTaskRequestParams struct {
 
 	// <p>Scenario type. Values are as follows:</p><li>When ModelName is Kling: motion_control means action control; avatar_i2v means digital human; lip_sync means lip-sync;</li><li>When ModelName is Vidu: template_effect means special effect Template;</li><li>Other ModelNames are not currently supported.</li>
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
+
+	// <p><a href="https://www.tencentcloud.com/document/product/266/33475?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81">Task flow name</a>. Fill in when you need to execute task flow for the generated new video.</p>
+	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
 	// <p>Random seed of the model.</p>
 	Seed *int64 `json:"Seed,omitnil,omitempty" name:"Seed"`
@@ -6278,7 +6308,7 @@ type CreateAigcVideoTaskRequest struct {
 	// <p>Model name. Parameter Value:<br>Kling: Keling;<br>Vidu;<br>Hailuo: Hailuo;<br>Hunyuan: Hunyuan;<br>Mingmou: Mingmou;<br>GV;<br>OS;<br>PixVerse;</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// <p>Model version. Parameter Value:<br>When ModelName is Hailuo, optional values are 02, 2.3, and 2.3-fast.<br>When ModelName is Kling, optional values are 1.6, 2.0, 2.1, 2.5, 2.6, O1, 3.0, and 3.0-Omni.<br>When ModelName is Jimeng, optional value is 3.0pro.<br>When ModelName is Vidu, optional values are q2, q2-pro, q2-turbo, q3, q3-pro, and q3-turbo.<br>When ModelName is GV, optional values are 3.1 and 3.1-fast.<br>When ModelName is OS, optional value is 2.0.<br>When ModelName is Hunyuan, optional value is 1.5.<br>When ModelName is Mingmou, optional value is 1.0.<br>When ModelName is PixVerse, optional values are v5.6, v6, and c1.</p>
+	// <p>Model version. Parameter value:<br>When ModelName is Hailuo, optional values are 02, 2.3, and 2.3-fast.<br>When ModelName is Kling, optional values are 1.6, 2.0, 2.1, 2.5, 2.6, O1, 3.0, and 3.0-Omni.<br>When ModelName is Vidu, optional values are q2, q2-pro, q2-turbo, q3, q3-pro, and q3-turbo.<br>When ModelName is GV, optional values are 3.1 and 3.1-fast.<br>When ModelName is OS, optional value is 2.0.<br>When ModelName is Hunyuan, optional value is 1.5.<br>When ModelName is Mingmou, optional value is 1.0.<br>When ModelName is PixVerse, optional values are v5.6, v6, and c1.</p>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
 	// <p>Describes the resource file to be used by the model for video generation, divided into <strong>first and last frame mode, reference image, video reference, video editing, and other modes</strong>.</p><p><strong>First and last frame video generation</strong>: The first frame supports only a <strong>single image</strong>, with the <strong>Usage field of the image set to FirstFrame</strong>. LastFrameFileId or LastFrameUrl represents the last frame. The first frame can be imported separately, but the last frame cannot. <strong>First and last frame generation refers to the image aspect ratio</strong>.<br><strong>Reference image generation</strong>: Allows input of a single image or multiple images, with the <strong>Usage field of the image set to Reference</strong>. Reference images can adjust the aspect ratio of the generated video.<br><strong>Video editing and video reference</strong>: Vidu and Kling can input a video as a reference or proceed with editing. Images can also be imported along with the video, with the <strong>Usage field of the image set to Reference</strong>.</p><p>Note:</p><ol><li>Image size should be no more than 10M.</li><li>Supported image formats: jpeg, jpg, png. x0b</li><li>To check whether a specific model version supports reference images, first and last frames, video editing, and other features, request the document from us or refer to the original document information.</li></ol>
@@ -6310,6 +6340,9 @@ type CreateAigcVideoTaskRequest struct {
 
 	// <p>Scenario type. Values are as follows:</p><li>When ModelName is Kling: motion_control means action control; avatar_i2v means digital human; lip_sync means lip-sync;</li><li>When ModelName is Vidu: template_effect means special effect Template;</li><li>Other ModelNames are not currently supported.</li>
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
+
+	// <p><a href="https://www.tencentcloud.com/document/product/266/33475?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81">Task flow name</a>. Fill in when you need to execute task flow for the generated new video.</p>
+	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
 	// <p>Random seed of the model.</p>
 	Seed *int64 `json:"Seed,omitnil,omitempty" name:"Seed"`
@@ -6352,6 +6385,7 @@ func (r *CreateAigcVideoTaskRequest) FromJsonString(s string) error {
 	delete(f, "OutputConfig")
 	delete(f, "InputRegion")
 	delete(f, "SceneType")
+	delete(f, "Procedure")
 	delete(f, "Seed")
 	delete(f, "SessionId")
 	delete(f, "SessionContext")
@@ -12483,6 +12517,133 @@ func (r *DescribeAigcApiTokensResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeAigcFaceInfoAsyncInput struct {
+	// <p>Input video information that needs to get face information.</p>
+	FileInfos []*AigcFaceInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+}
+
+type DescribeAigcFaceInfoAsyncOutput struct {
+	// <p>Face information.</p>
+	FaceInfoSet []*AigcFaceInfo `json:"FaceInfoSet,omitnil,omitempty" name:"FaceInfoSet"`
+}
+
+// Predefined struct for user
+type DescribeAigcFaceInfoAsyncRequestParams struct {
+	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// <p>Input video information that needs to get face information. It can contain up to one file.</p>
+	FileInfos []*AigcFaceInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// <p>Source context. This is used to pass through user request information. The audio and video quality revival complete callback returns the value of this field. The maximum length is 1000 characters.</p>
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// <p>Task priority. The higher the value, the higher the priority. The value range is from -10 to 10. If this is not specified, the default value is 0.</p>
+	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
+}
+
+type DescribeAigcFaceInfoAsyncRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// <p>Input video information that needs to get face information. It can contain up to one file.</p>
+	FileInfos []*AigcFaceInputFileInfo `json:"FileInfos,omitnil,omitempty" name:"FileInfos"`
+
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// <p>Source context. This is used to pass through user request information. The audio and video quality revival complete callback returns the value of this field. The maximum length is 1000 characters.</p>
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// <p>Task priority. The higher the value, the higher the priority. The value range is from -10 to 10. If this is not specified, the default value is 0.</p>
+	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
+}
+
+func (r *DescribeAigcFaceInfoAsyncRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAigcFaceInfoAsyncRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubAppId")
+	delete(f, "FileInfos")
+	delete(f, "SessionId")
+	delete(f, "SessionContext")
+	delete(f, "TasksPriority")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAigcFaceInfoAsyncRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAigcFaceInfoAsyncResponseParams struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAigcFaceInfoAsyncResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAigcFaceInfoAsyncResponseParams `json:"Response"`
+}
+
+func (r *DescribeAigcFaceInfoAsyncResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAigcFaceInfoAsyncResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeAigcFaceInfoAsyncTask struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Task status. Valid values: </p><li>PROCESSING: Processing; </li><li>FINISH: Completed.</li>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Error code. It returns a non-zero error code in case of a source error. Please use the ErrCode of each specific task when it returns 0.</p>
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// <p>Extended error codes.</p><p>Parameter format: extended error codes.</p><p>Enumeration values:</p><ul><li>RequestLimitExceeded: The call exceeds the concurrency limit.</li><li>InvalidParameterValue: Parameter error.</li><li>InternalError: Internal error.</li><li>FailedOperation: Operation failed.</li></ul>
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+	// <p>Error message.</p>
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// <p>Task progress, in the range of [0-100].</p>
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// <p>Input information to asynchronously fetch face information of the AIGC task.</p>
+	Input *DescribeAigcFaceInfoAsyncInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// <p>Asynchronously fetch the output message of the human face information task for AIGC.</p>
+	Output *DescribeAigcFaceInfoAsyncOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+}
+
 // Predefined struct for user
 type DescribeAigcFaceInfoRequestParams struct {
 	// <b>VOD [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. Customers who activate VOD services after December 25, 2023 must fill this field with the application ID when accessing resources in on-demand applications (whether default or newly created).</b>
@@ -12555,11 +12716,17 @@ type DescribeAigcUsageDataRequestParams struct {
 	// <p>End date, which must be greater than or equal to the start date. Use the <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#52">ISO date format</a>.</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <p>AIGC type.</p><p>Enumeration value:</p><ul><li>Video: Video</li><li>Image: Image</li><li>Text: Text</li><li>SceneAigcVideo: Scenario-based video processing</li><li>SceneAigcImage: Scenario-based image processing</li><li>SceneAigcTime: Scenario-based processing times</li></ul>
+	// <p>AIGC type.</p><p>Enumeration value:</p><ul><li>Video: video</li><li>Image: image</li><li>Text: text</li><li>Audio: audio</li><li>SceneAigcVideo: scenario-based video processing</li><li>SceneAigcImage: scenario-based image processing</li><li>SceneAigcTime: scenario-based processing times</li></ul>
 	AigcType *string `json:"AigcType,omitnil,omitempty" name:"AigcType"`
 
 	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the application ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// <p>API Key</p>
+	APIKey *string `json:"APIKey,omitnil,omitempty" name:"APIKey"`
+
+	// <p>API Key</p>
+	APIKeys []*string `json:"APIKeys,omitnil,omitempty" name:"APIKeys"`
 }
 
 type DescribeAigcUsageDataRequest struct {
@@ -12571,11 +12738,17 @@ type DescribeAigcUsageDataRequest struct {
 	// <p>End date, which must be greater than or equal to the start date. Use the <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#52">ISO date format</a>.</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <p>AIGC type.</p><p>Enumeration value:</p><ul><li>Video: Video</li><li>Image: Image</li><li>Text: Text</li><li>SceneAigcVideo: Scenario-based video processing</li><li>SceneAigcImage: Scenario-based image processing</li><li>SceneAigcTime: Scenario-based processing times</li></ul>
+	// <p>AIGC type.</p><p>Enumeration value:</p><ul><li>Video: video</li><li>Image: image</li><li>Text: text</li><li>Audio: audio</li><li>SceneAigcVideo: scenario-based video processing</li><li>SceneAigcImage: scenario-based image processing</li><li>SceneAigcTime: scenario-based processing times</li></ul>
 	AigcType *string `json:"AigcType,omitnil,omitempty" name:"AigcType"`
 
 	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the application ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// <p>API Key</p>
+	APIKey *string `json:"APIKey,omitnil,omitempty" name:"APIKey"`
+
+	// <p>API Key</p>
+	APIKeys []*string `json:"APIKeys,omitnil,omitempty" name:"APIKeys"`
 }
 
 func (r *DescribeAigcUsageDataRequest) ToJsonString() string {
@@ -12594,6 +12767,8 @@ func (r *DescribeAigcUsageDataRequest) FromJsonString(s string) error {
 	delete(f, "EndTime")
 	delete(f, "AigcType")
 	delete(f, "SubAppId")
+	delete(f, "APIKey")
+	delete(f, "APIKeys")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAigcUsageDataRequest has unknown keys!", "")
 	}
@@ -16677,7 +16852,7 @@ func (r *DescribeTaskDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTaskDetailResponseParams struct {
-	// <p>Task type. Value: <li>Procedure: Video processing task;</li><li>EditMedia: Video editing task;</li><li>SplitMedia: Video splitting task;</li><li>ComposeMedia: Media file creation task;</li><li>WechatPublish: WeChat publish task;</li><li>WechatMiniProgramPublish: WeChat Mini Program Video Publishing Task;</li><li>PullUpload: Pull and upload media files task;</li><li>FastClipMedia: Quick trimming task;</li><li>RemoveWatermarkTask: Intelligent watermark removal task;</li><li>DescribeFileAttributesTask: File attribute retrieval task;</li><li>RebuildMedia: Audio and video quality regeneration task (not recommended);</li><li>ReviewAudioVideo: Audio/video moderation task;</li><li>ExtractTraceWatermark: Source watermark extraction task;</li><li>ExtractCopyRightWatermark: Copyright Watermark Extraction Task;</li><li>QualityInspect: Audio and video quality inspection task;</li><li>QualityEnhance: Audio and video quality regeneration task;</li><li>ComplexAdaptiveDynamicStreaming: Complex adaptive bitstream task;</li><li>ProcessMediaByMPS: MPS video processing task;</li><li>AigcImageTask: AIGC image generation task;</li><li>SceneAigcImageTask: Scenario-based AIGC image generation task;</li><li>AigcVideoTask: AIGC video generation task;</li><li>ImportMediaKnowledge: Import media knowledge task.</li><li>SceneAigcVideoTask: Scenario-based AIGC video generation task;</li><li>ExtractBlindWatermark: Digital watermark extraction task.</li><li>ExtractBlindWatermark: Digital watermark extraction task.</li><li>CreateAigcAdvancedCustomElement: Create custom subject task</li><li>CreateAigcCustomVoice: Create custom voice type task</li><li>CreateAigcSubject: Create subject task</li><li>AigcVideoRedrawTask: AIGC video redraw task</li><li>CreateAigcAudioClone: AIGC sound clone task</li></p>
+	// <p>Task type. Valid values: <li>Procedure: Video processing task;</li><li>EditMedia: Video editing task;</li><li>SplitMedia: Video splitting task;</li><li>ComposeMedia: Media file creation task;</li><li>WechatPublish: WeChat publishing task;</li><li>WechatMiniProgramPublish: WeChat Mini Program Video Publishing Task;</li><li>PullUpload: Pull and upload media files task;</li><li>FastClipMedia: Quick trimming task;</li><li>RemoveWatermarkTask: Intelligent watermark removal task;</li><li>DescribeFileAttributesTask: File attribute retrieval task;</li><li>RebuildMedia: Audio and video quality regeneration task (not recommended);</li><li>ReviewAudioVideo: Audio/video moderation task;</li><li>ExtractTraceWatermark: Source watermark extraction task;</li><li>ExtractCopyRightWatermark: Copyright Watermark Extraction Task;</li><li>QualityInspect: Audio and video quality inspection task;</li><li>QualityEnhance: Audio and video quality regeneration task;</li><li>ComplexAdaptiveDynamicStreaming: Complex adaptive bitstream task;</li><li>ProcessMediaByMPS: MPS video processing task;</li><li>AigcImageTask: AIGC image generation task;</li><li>SceneAigcImageTask: Scenario-based AIGC image generation task;</li><li>AigcVideoTask: AIGC video generation task;</li><li>ImportMediaKnowledge: Import media knowledge task.</li><li>SceneAigcVideoTask: Scenario-based AIGC video generation task;</li><li>ExtractBlindWatermark: Digital watermark extraction task.</li><li>ExtractBlindWatermark: Digital watermark extraction task.</li><li>CreateAigcAdvancedCustomElement: Create custom subject task</li><li>CreateAigcCustomVoice: Create custom voice type task</li><li>CreateAigcSubject: Create subject task</li><li>AigcVideoRedrawTask: AIGC video redraw task</li><li>CreateAigcAudioClone: AIGC voice clone task</li><li>DescribeAigcFaceInfoAsync: Asynchronously fetch AIGC face information task</li></p>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
 	// <p>Task status. Value:</p><li>WAITING: Waiting;</li><li>PROCESSING: Processing;</li><li>FINISH: Completed;</li><li>ABORTED: Terminated.</li>
@@ -16813,14 +16988,17 @@ type DescribeTaskDetailResponseParams struct {
 	// <p>Create entity information. This field has a value only when TaskType is CreateAigcSubject.</p>
 	CreateAigcSubjectTask *CreateAigcSubjectTask `json:"CreateAigcSubjectTask,omitnil,omitempty" name:"CreateAigcSubjectTask"`
 
-	// <p>AIGC video conversion info. This field has a value only when TaskType is AigcVideoRedrawTask.</p>
+	// <p>AIGC video redraw info, valid only when TaskType is AigcVideoRedrawTask and this field has a value.</p>
 	AigcVideoRedrawTask *AigcVideoRedrawTask `json:"AigcVideoRedrawTask,omitnil,omitempty" name:"AigcVideoRedrawTask"`
 
-	// <p>AIGC audio effect info. This field has a value only when TaskType is AigcAudioTask.</p>
+	// <p>AIGC sound effect information. This field has a value only when TaskType is AigcAudioTask.</p>
 	AigcAudioTask *AigcAudioTask `json:"AigcAudioTask,omitnil,omitempty" name:"AigcAudioTask"`
 
 	// <p>AIGC voice clone info. This field has a value only when TaskType is CreateAigcAudioClone.</p>
 	CreateAigcAudioCloneTask *CreateAigcAudioCloneTask `json:"CreateAigcAudioCloneTask,omitnil,omitempty" name:"CreateAigcAudioCloneTask"`
+
+	// <p>Asynchronously fetch AIGC face information. This field has a value only when TaskType is DescribeAigcFaceInfoAsync.</p>
+	DescribeAigcFaceInfoAsyncTask *DescribeAigcFaceInfoAsyncTask `json:"DescribeAigcFaceInfoAsyncTask,omitnil,omitempty" name:"DescribeAigcFaceInfoAsyncTask"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -20280,7 +20458,7 @@ type LiveRealTimeClipRequestParams struct {
 	// Post-editing Solidified Video On-demand Task Flow Processing. For details, see [upload specified task flow](https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1). Valid only when IsPersistence is 1.
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [Create Category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API.
+	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [Create Category](https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1) API.
 	// <li>Default value: 0, indicating other categories.</li>
 	// Valid when IsPersistence is 1.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
@@ -20330,7 +20508,7 @@ type LiveRealTimeClipRequest struct {
 	// Post-editing Solidified Video On-demand Task Flow Processing. For details, see [upload specified task flow](https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1). Valid only when IsPersistence is 1.
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [Create Category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API.
+	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [Create Category](https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1) API.
 	// <li>Default value: 0, indicating other categories.</li>
 	// Valid when IsPersistence is 1.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
@@ -22309,60 +22487,50 @@ type MediaTranscodeInfo struct {
 }
 
 type MediaTranscodeItem struct {
-	// Address of output video file.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>File URL of the transcoded video.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// For transcoding specification ID, see [Transcoding Parameter Template](https://intl.cloud.tencent.com/document/product/266/33476?from_cn_redirect=1). 
-	// <font color=red>Note: A value of 0 represents the original file. </font>
+	// <p>Transcoding specification ID. Please refer to <a href="https://www.tencentcloud.com/document/product/266/33476?from_cn_redirect=1">transcoding parameter template</a>.<br><font color="red">Note: A value of 0 means the raw file.</font></p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Sum of the average bitrate of a video stream and that of an audio stream in bps.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Sum of the mean bitrate of a stream and the mean audio stream bit rate, unit: bps.</p>
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// Maximum value of the height of a video stream in px.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Maximum value of video stream height. Unit: px.</p>
 	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// Maximum value of the width of a video stream in px.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Maximum value of video stream width. Unit: px.</p>
 	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// The file size (bytes).
-	// <li>If the file is an HLS file, the value of this parameter is the sum of the size of the M3U8 and TS files.</li>
+	// <p>Total size of media files, measurement unit: byte.</p><li>When the media file is HLS, the size is the sum of m3u8 and ts file sizes.</li>
 	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
-	// Video duration in seconds.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Video duration, in seconds.</p>
 	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
-	// MD5 value of video.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>md5 value of the video.</p>
 	Md5 *string `json:"Md5,omitnil,omitempty" name:"Md5"`
 
-	// Container, such as m4a and mp4.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Container type, such as m4a, mp4.</p>
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
-	// Video stream information.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Video stream information.</p>
 	VideoStreamSet []*MediaVideoStreamItem `json:"VideoStreamSet,omitnil,omitempty" name:"VideoStreamSet"`
 
-	// Audio stream information.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// <p>Audio stream information.</p>
 	AudioStreamSet []*MediaAudioStreamItem `json:"AudioStreamSet,omitnil,omitempty" name:"AudioStreamSet"`
 
-	// The watermark type. Valid values:
-	// <li>Trace: Digital watermark</li>
-	// <li>None: Regular watermark</li>
+	// <p>Digital watermark type. Available values:</p><li>Trace means transit watermark processing;</li><li>CopyRight means copyright watermark processing;</li><li>None means no digital watermark processing.</li>
 	DigitalWatermarkType *string `json:"DigitalWatermarkType,omitnil,omitempty" name:"DigitalWatermarkType"`
 
-
+	// <p>Copyright information.</p>
 	CopyRightWatermarkText *string `json:"CopyRightWatermarkText,omitnil,omitempty" name:"CopyRightWatermarkText"`
 
-	// Digital watermark template id.
+	// <p>Digital watermark template id.</p>
 	BlindWatermarkDefinition *int64 `json:"BlindWatermarkDefinition,omitnil,omitempty" name:"BlindWatermarkDefinition"`
+
+	// <p>Generated new FileId for transcoding. Valid when requesting to enable independence media output.</p>
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 }
 
 type MediaTransitionItem struct {
@@ -27587,6 +27755,9 @@ type ProcessMediaRequestParams struct {
 
 	// <p>Valid when FileID is empty. Pull the Url to generate new media assets and generate a new FileID. The media processing product will be affiliated with the new media assets.</p><p>Note: Storage fees will occur for new media assets.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// <p>The media processing transcoding result is output as standalone media assets. Enabling this option will output the product as standalone media assets and generate a brand-new FileID. Currently only support outputting TranscodeTask transcoding tasks as standalone media assets.</p><p>Enumeration value:</p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p><p>Note: New media assets will incur storage fees. This option does not currently support enabling for video opening/closing credits and traceable watermarks in transcoding tasks.</p>
+	OutputAsIndependentMedia *string `json:"OutputAsIndependentMedia,omitnil,omitempty" name:"OutputAsIndependentMedia"`
 }
 
 type ProcessMediaRequest struct {
@@ -27630,6 +27801,9 @@ type ProcessMediaRequest struct {
 
 	// <p>Valid when FileID is empty. Pull the Url to generate new media assets and generate a new FileID. The media processing product will be affiliated with the new media assets.</p><p>Note: Storage fees will occur for new media assets.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// <p>The media processing transcoding result is output as standalone media assets. Enabling this option will output the product as standalone media assets and generate a brand-new FileID. Currently only support outputting TranscodeTask transcoding tasks as standalone media assets.</p><p>Enumeration value:</p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p><p>Note: New media assets will incur storage fees. This option does not currently support enabling for video opening/closing credits and traceable watermarks in transcoding tasks.</p>
+	OutputAsIndependentMedia *string `json:"OutputAsIndependentMedia,omitnil,omitempty" name:"OutputAsIndependentMedia"`
 }
 
 func (r *ProcessMediaRequest) ToJsonString() string {
@@ -27657,6 +27831,7 @@ func (r *ProcessMediaRequest) FromJsonString(s string) error {
 	delete(f, "SessionId")
 	delete(f, "ExtInfo")
 	delete(f, "Url")
+	delete(f, "OutputAsIndependentMedia")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessMediaRequest has unknown keys!", "")
 	}
@@ -27873,7 +28048,7 @@ type PullUploadRequestParams struct {
 	// <li>If a designated upload park is specified, please confirm the [upload storage settings](https://www.tencentcloud.com/zh/document/product/266/18874) have already enabled corresponding storage regions.</li>
 	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
 
-	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API.
+	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1) API.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
 	// Task priority. The higher the value, the higher the priority. The value ranges from -10 to 10. If left blank, the default value is 0.
@@ -27927,7 +28102,7 @@ type PullUploadRequest struct {
 	// <li>If a designated upload park is specified, please confirm the [upload storage settings](https://www.tencentcloud.com/zh/document/product/266/18874) have already enabled corresponding storage regions.</li>
 	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
 
-	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API.
+	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1) API.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
 	// Task priority. The higher the value, the higher the priority. The value ranges from -10 to 10. If left blank, the default value is 0.
@@ -30266,6 +30441,26 @@ type SDMCDrmKeyProviderInfo struct {
 	FairPlayCertificateUrl *string `json:"FairPlayCertificateUrl,omitnil,omitempty" name:"FairPlayCertificateUrl"`
 }
 
+type SPEKEDrm struct {
+	// <p>Resource tagging. This field content is user-customized. It supports 1-128 characters, including numbers, letters, underscores (_), and hyphens (-). This field corresponds to the cid field in the Speke request. Note: Different DRM manufacturers have differences in limitations for this field (for example: Huawei Xloud does not support underscores (_) in this field). For specific rules, contact the DRM manufacturer for confirmation.</p>
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// <p>DRM manufacturer access address. The field content is obtained from the DRM manufacturer. Note: Different DRM manufacturers have different limits on the number of substreams. For example, PallyCon limits the number to a maximum of 5 substreams, while DRMtoday only supports up to 9 substream encryptions.</p>
+	KeyServerUrl *string `json:"KeyServerUrl,omitnil,omitempty" name:"KeyServerUrl"`
+
+	// <p>Initialization vector (32-byte hexadecimal string) for encryption. The field content is user-customized.</p>
+	Vector *string `json:"Vector,omitnil,omitempty" name:"Vector"`
+
+	// <p>Encryption method. Available values:<br>cbcs: supports PlayReady, Widevine, FairPlay, Widevine+FairPlay, Widevine+PlayReady, PlayReady+FairPlay, Widevine+PlayReady+FairPlay;<br>cenc: supports PlayReady, Widevine, Widevine+PlayReady;<br>If left blank, FairPlay defaults to cbcs;<br>PlayReady and Widevine default to cenc;<br>Widevine+FairPlay, PlayReady+FairPlay, and Widevine+PlayReady+FairPlay default to cbcs;<br>Widevine+PlayReady defaults to cenc;</p>
+	EncryptionMethod *string `json:"EncryptionMethod,omitnil,omitempty" name:"EncryptionMethod"`
+
+	// <p>Substream encryption rules, default preset 0<br>preset 0: use the same key to encrypt all substreams;<br>preset 1: use different keys to encrypt each substream;</p>
+	EncryptionPreset *string `json:"EncryptionPreset,omitnil,omitempty" name:"EncryptionPreset"`
+
+	// <p>DRM manufacturer request method.</p><p>Enumeration value:</p><ul><li>POST: Most DRM manufacturers use the POST method.</li><li>GET: Partial DRM manufacturers support the GET method. At the time of request using this method, the KeyServerUrl field needs to include all request information.</li></ul><p>Default value: POST</p>
+	KeyAcquireMode *string `json:"KeyAcquireMode,omitnil,omitempty" name:"KeyAcquireMode"`
+}
+
 type SampleSnapshotTaskInput struct {
 	// Sampled screencapturing template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
@@ -31132,7 +31327,7 @@ type SimpleHlsClipRequestParams struct {
 	// Post-editing Solidified Video On-demand Task Flow Processing. For details, see upload specified task flow (https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1). Valid only when IsPersistence is 1.
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API.
+	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1) API.
 	// <li>Default value: 0, indicating other categories.</li>
 	// Valid when IsPersistence is 1.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
@@ -31179,7 +31374,7 @@ type SimpleHlsClipRequest struct {
 	// Post-editing Solidified Video On-demand Task Flow Processing. For details, see upload specified task flow (https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1). Valid only when IsPersistence is 1.
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1) API.
+	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1) API.
 	// <li>Default value: 0, indicating other categories.</li>
 	// Valid when IsPersistence is 1.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
@@ -32284,6 +32479,14 @@ type TextWatermarkTemplateInputForUpdate struct {
 	// <li>0: completely transparent</li>
 	// <li>1: completely opaque</li>
 	FontAlpha *float64 `json:"FontAlpha,omitnil,omitempty" name:"FontAlpha"`
+}
+
+type ThirdPartyDrmInfo struct {
+	// <p>Encryption type:</p><ul><li>FairPlay: Can only be used for HLS. The slice format can only be mp4.</li><li>Widevine: Can be used for HLS and DASH. The slice format can only be mp4.</li><li>PlayReady: Can be used for HLS and DASH. The slice format can only be mp4.</li><li>Widevine+FairPlay, PlayReady+FairPlay, Widevine PlayReady FairPlay composite: Can only be used for HLS. The slice format can only be mp4.</li><li>Widevine PlayReady composite: Can be used for HLS and MPEG-DASH. The slice format can only be mp4.</li></ul>
+	DrmTypes []*string `json:"DrmTypes,omitnil,omitempty" name:"DrmTypes"`
+
+	// <p>External DRM vendor information.</p>
+	SPEKEDrm *SPEKEDrm `json:"SPEKEDrm,omitnil,omitempty" name:"SPEKEDrm"`
 }
 
 type TimeRange struct {

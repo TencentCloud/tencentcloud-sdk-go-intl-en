@@ -364,6 +364,9 @@ type AdaptiveFrequencyControl struct {
 	// Whether adaptive frequency control is enabled. valid values: <li>on: enable;</li> <li>off: disable.</li>.
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
+	// Rule ID of adaptive frequency control, returned as an output parameter.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
 	// The restriction level of adaptive frequency control. required when Enabled is on. valid values: <li>Loose: Loose</li><li>Moderate: Moderate</li><li>Strict: Strict</li>.
 	Sensitivity *string `json:"Sensitivity,omitnil,omitempty" name:"Sensitivity"`
 
@@ -571,7 +574,7 @@ type ApplicationProxy struct {
 	// <li>`1`: Enable acceleration.</li>
 	AccelerateType *int64 `json:"AccelerateType,omitnil,omitempty" name:"AccelerateType"`
 
-	// The session persistence duration.
+	// Session hold time, unit: seconds.
 	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil,omitempty" name:"SessionPersistTime"`
 
 	// The rule status. Values:
@@ -627,9 +630,9 @@ type ApplicationProxyRule struct {
 	// <li>origins: origin server group.</li>
 	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
 
-	// Origin server information.
+	// Details of the origin server:
 	// <li>When OriginType is custom, it indicates one or more origin servers, such as `["8.8.8.8","9.9.9.9"]` or `OriginValue=["test.com"]`;</li>
-	// <li>When OriginType is loadbalancer, it indicates a cloud load balancer, such as ["lb-xdffsfasdfs"];</li>
+	// <li>When OriginType is loadbalancer, it indicates a load balancer, such as ["lb-3pbiw4d9iqz0"];</li>
 	// <li>When OriginType is origins, it requires one and only one element, indicating the origin server group ID, such as ["origin-537f5b41-162a-11ed-abaa-525400c5da15"].</li>
 	OriginValue []*string `json:"OriginValue,omitnil,omitempty" name:"OriginValue"`
 
@@ -656,7 +659,7 @@ type ApplicationProxyRule struct {
 	// <li>false: Disable.</li>Default value: false.
 	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 
-	// Duration for session persistence. the value takes effect only when SessionPersist is true.
+	// Duration for session persistence, in seconds. The value takes effect only when SessionPersist is true.
 	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil,omitempty" name:"SessionPersistTime"`
 
 	// Origin server port. Supported formats:
@@ -806,6 +809,9 @@ type AuthenticationParameters struct {
 type BandwidthAbuseDefense struct {
 	// Whether bandwidth abuse protection (applicable to chinese mainland only) is enabled. valid values: <li>on: enabled;</li> <li>off: disabled.</li>.
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// Rule ID of traffic anti-fraud, returned as an output parameter.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Bandwidth abuse protection (applicable to chinese mainland) handling method. required when Enabled is on. valid values for SecurityAction Name: <li>Monitor: observe;</li> <li>Deny: block;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.</li>.
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
@@ -1153,14 +1159,17 @@ type BotExtendAction struct {
 }
 
 type BotIntelligence struct {
-	// Based on client and request features, divides request sources into human requests, legitimate Bot requests, suspected Bot requests, and high-risk Bot requests, and provides request handling options.
-	BotRatings *BotRatings `json:"BotRatings,omitnil,omitempty" name:"BotRatings"`
-
 	// Specifies the switch for Bot intelligent analysis configuration. valid values:.
 	// 
 	// on: enabled.
 	// off: disabled.
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// Rule ID of Bot intelligent analysis, returned as an output parameter.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Based on client and request features, divides request sources into human requests, legitimate Bot requests, suspected Bot requests, and high-risk Bot requests, and provides request handling options.
+	BotRatings *BotRatings `json:"BotRatings,omitnil,omitempty" name:"BotRatings"`
 }
 
 type BotManagedRule struct {
@@ -1921,6 +1930,9 @@ type ClientFiltering struct {
 	// Whether intelligent client filtering is enabled. valid values: <li>on: enable;</li> <li>off: disable.</li>.
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
+	// Rule ID of intelligent client filtering, returned as an output parameter.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
 	// The handling method of intelligent client filtering. when Enabled is on, this field is required. the Name parameter of SecurityAction supports: <li>Monitor: observation;</li> <li>Deny: block;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.</li>.
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 }
@@ -2632,7 +2644,7 @@ type CreateApplicationProxyRuleRequestParams struct {
 	// <li>`false`: Disable.</li>Default value: false.
 	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 
-	// Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
+	// Duration for session persistence, in seconds. The value takes effect only when SessionPersist is true.
 	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil,omitempty" name:"SessionPersistTime"`
 
 	// The origin port, which can be:
@@ -2682,7 +2694,7 @@ type CreateApplicationProxyRuleRequest struct {
 	// <li>`false`: Disable.</li>Default value: false.
 	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 
-	// Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
+	// Duration for session persistence, in seconds. The value takes effect only when SessionPersist is true.
 	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil,omitempty" name:"SessionPersistTime"`
 
 	// The origin port, which can be:
@@ -3222,6 +3234,88 @@ func (r *CreateEdgeKVNamespaceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateEdgeKVNamespaceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateFunctionReplicaRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Function ID.
+	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// Edge function copy name. Limit to enter 1-50 characters. Allowed characters are a-z, 0-9, and -. The - cannot be registered alone or used continuously, and cannot be placed at the beginning or the end. Copy names under the same FunctionId must be unique.
+	ReplicaName *string `json:"ReplicaName,omitnil,omitempty" name:"ReplicaName"`
+
+	// Edge function replica content. Currently only supports JavaScript code. Supports a maximum of 5 MB.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Edge function replica description. Supports up to 50 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+}
+
+type CreateFunctionReplicaRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Function ID.
+	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// Edge function copy name. Limit to enter 1-50 characters. Allowed characters are a-z, 0-9, and -. The - cannot be registered alone or used continuously, and cannot be placed at the beginning or the end. Copy names under the same FunctionId must be unique.
+	ReplicaName *string `json:"ReplicaName,omitnil,omitempty" name:"ReplicaName"`
+
+	// Edge function replica content. Currently only supports JavaScript code. Supports a maximum of 5 MB.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Edge function replica description. Supports up to 50 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+}
+
+func (r *CreateFunctionReplicaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateFunctionReplicaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "FunctionId")
+	delete(f, "ReplicaName")
+	delete(f, "Content")
+	delete(f, "Remark")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateFunctionReplicaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateFunctionReplicaResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateFunctionReplicaResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateFunctionReplicaResponseParams `json:"Response"`
+}
+
+func (r *CreateFunctionReplicaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateFunctionReplicaResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4574,7 +4668,7 @@ type CreatePurgeTaskRequestParams struct {
 	// Deprecated: EncodeUrl is deprecated.
 	EncodeUrl *bool `json:"EncodeUrl,omitnil,omitempty" name:"EncodeUrl"`
 
-	// The information attached when the node cache purge type is set to purge_cache_tag.
+	// The parameter is required when the node cache clearing type is set to purge_cache_tag, and the input value is the domain name.
 	CacheTag *CacheTag `json:"CacheTag,omitnil,omitempty" name:"CacheTag"`
 }
 
@@ -4604,7 +4698,7 @@ type CreatePurgeTaskRequest struct {
 	// Note that if it’s enabled, the purging is based on the converted URLs.
 	EncodeUrl *bool `json:"EncodeUrl,omitnil,omitempty" name:"EncodeUrl"`
 
-	// The information attached when the node cache purge type is set to purge_cache_tag.
+	// The parameter is required when the node cache clearing type is set to purge_cache_tag, and the input value is the domain name.
 	CacheTag *CacheTag `json:"CacheTag,omitnil,omitempty" name:"CacheTag"`
 }
 
@@ -4666,41 +4760,22 @@ type CreateRealtimeLogDeliveryTaskRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
+	// Data shipping area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding the Chinese mainland).</li></ul>
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Data delivery type. Available values: <ul><li>domain: site acceleration log;</li><li>application: four-layer proxy logs;</li><li>function: edge function logs;</li><li>web-rateLiming: rate limit and CC attack defense log;</li><li>web-attack: managed rule log;</li><li>web-rule: custom rule logs;</li><li>web-bot: bot management log.</li></ul>
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
 	// Name of a real-time log delivery task, which can contain up to 200 characters, including digits, English letters, hyphens (-) and underscores (_).
 	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
 
-	// Type of a real-time log shipping task. valid values:.
-	// <li>cls: push to tencent cloud cls.</li>.
-	// <li>custom_endpoint: push to a custom HTTP(S) address.</li>.
-	// <li>s3: push to an AWS s3-compatible bucket address.</li>.
-	// <li>log_analysis: pushes to EdgeOne log analytics. this task type only supports the "site acceleration log" data delivery type.</li>.
+	// Type of a real-time log shipping task. Valid values:<ul><li>cls: push to Tencent Cloud CLS;</li><li>custom_endpoint: push to a custom HTTP(S) address;</li><li>s3: push to an AWS S3-compatible bucket address;</li><li>log_analysis: push to EdgeOne log analytics. Only supported when LogType = domain or web-attack.</li></ul>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// Entity list corresponding to the real-time log delivery task. example values:.
-	// <Li>Specifies the layer-7 domain name: domain.example.com.</li>.
-	// <Li>Specifies the l4 proxy instance: sid-2s69eb5wcms7.</li>.
-	// <Li>Edge function instance: test-zone-2mxigizoh9l9-1257626257.</li>.
+	// List of entities corresponding to the real-time log delivery task. Example values are as follows: <ul><li>Layer 7 domain: domain.example.com</li><li>L4 proxy instance: sid-2s69eb5wcms7</li><li>Cloud function instance: test-zone-2mxigizoh9l9-1257626257</li></ul>
 	EntityList []*string `json:"EntityList,omitnil,omitempty" name:"EntityList"`
 
-	// Data delivery type. valid values:.
-	// <li>domain: specifies the site acceleration logs.</li>.
-	// <li>application: four-layer proxy logs.</li>.
-	// <Li>Function: specifies the edge function logs.</li>.
-	// <li>web-rateLiming: specifies the rate limit and CC attack defense logs.</li>.
-	// <li>web-attack: managed rule logs;</li>.
-	// <li>web-rule: custom rule logs;</li>.
-	// <li>web-bot: Bot management logs.</li>
-	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
-
-	// Data area. Valid values:
-	// <li>mainland: within the Chinese mainland;</li>
-	// <li>overseas: global (excluding the Chinese mainland).</li>
-	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
-
-	// Predefined fields for delivery. valid values:.
-	// <Li>[Site acceleration log (l7 access log)](https://www.tencentcloud.com/document/product/1552/105791?from_cn_redirect=1)</li>.
-	// <Li><A href="https://www.tencentcloud.com/document/product/1552/105792?from_cn_redirect=1">four-layer proxy logs</a></li>.
-	// <Li>Specifies the edge function logs (https://www.tencentcloud.com/document/product/1552/115585?from_cn_redirect=1).</li>.
+	// Predefined fields for delivery. Value reference: <ul><li>[Site acceleration log (Layer 7 Access Logs)](https://www.tencentcloud.com/document/product/1552/105791?from_cn_redirect=1)</li><li>[Four-layer proxy logs](https://www.tencentcloud.com/document/product/1552/105792?from_cn_redirect=1)</li><li>[Edge Function logs](https://www.tencentcloud.com/document/product/1552/115585?from_cn_redirect=1)</li></ul>
 	Fields []*string `json:"Fields,omitnil,omitempty" name:"Fields"`
 
 	// The list of custom fields for log delivery, which supports extracting specified content from HTTP request headers, response headers, cookies, and request bodies. Custom field names must be unique. The number of custom fields cannot exceed a maximum of 200. A single real-time log delivery task can configure up to 5 custom fields of the request body type. Currently, only site acceleration logs (`LogType`=`domain`) support custom fields.
@@ -4712,9 +4787,7 @@ type CreateRealtimeLogDeliveryTaskRequestParams struct {
 	// Sampling ratio in permille. Value range: 1-1000. For example, 605 indicates a sampling ratio of 60.5%. If this parameter is not specified, the sampling ratio is 100%.
 	Sample *uint64 `json:"Sample,omitnil,omitempty" name:"Sample"`
 
-	// Output format for log delivery. if this field is not specified, the default format is used, which works as follows:.
-	// <li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, with each JSON object representing a log entry;</li>.
-	// <li>When TaskType is 's3', the default format is JSON Lines;</li>specifically, when TaskType is 'cls' or 'log_analysis', the only allowed value for LogFormat.FormatType is 'JSON', and other parameters in LogFormat will be ignored. it is recommended not to transfer LogFormat.
+	// Output format for log delivery. If left empty, the default format is used. The default format logic is as follows:<ul><li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, each JSON object represents a log entry;</li><li>When TaskType is 's3', the default format is JSON Lines;</li></ul>Particularly, when TaskType is 'cls' or 'log_analysis', the only allowed value for LogFormat.FormatType is 'json', and other parameters in LogFormat will be ignored. It is recommended not to transfer LogFormat.
 	LogFormat *LogFormat `json:"LogFormat,omitnil,omitempty" name:"LogFormat"`
 
 	// Configuration information of CLS. This parameter is required when `TaskType` is `cls`.
@@ -4733,41 +4806,22 @@ type CreateRealtimeLogDeliveryTaskRequest struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
+	// Data shipping area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding the Chinese mainland).</li></ul>
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// Data delivery type. Available values: <ul><li>domain: site acceleration log;</li><li>application: four-layer proxy logs;</li><li>function: edge function logs;</li><li>web-rateLiming: rate limit and CC attack defense log;</li><li>web-attack: managed rule log;</li><li>web-rule: custom rule logs;</li><li>web-bot: bot management log.</li></ul>
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
 	// Name of a real-time log delivery task, which can contain up to 200 characters, including digits, English letters, hyphens (-) and underscores (_).
 	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
 
-	// Type of a real-time log shipping task. valid values:.
-	// <li>cls: push to tencent cloud cls.</li>.
-	// <li>custom_endpoint: push to a custom HTTP(S) address.</li>.
-	// <li>s3: push to an AWS s3-compatible bucket address.</li>.
-	// <li>log_analysis: pushes to EdgeOne log analytics. this task type only supports the "site acceleration log" data delivery type.</li>.
+	// Type of a real-time log shipping task. Valid values:<ul><li>cls: push to Tencent Cloud CLS;</li><li>custom_endpoint: push to a custom HTTP(S) address;</li><li>s3: push to an AWS S3-compatible bucket address;</li><li>log_analysis: push to EdgeOne log analytics. Only supported when LogType = domain or web-attack.</li></ul>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// Entity list corresponding to the real-time log delivery task. example values:.
-	// <Li>Specifies the layer-7 domain name: domain.example.com.</li>.
-	// <Li>Specifies the l4 proxy instance: sid-2s69eb5wcms7.</li>.
-	// <Li>Edge function instance: test-zone-2mxigizoh9l9-1257626257.</li>.
+	// List of entities corresponding to the real-time log delivery task. Example values are as follows: <ul><li>Layer 7 domain: domain.example.com</li><li>L4 proxy instance: sid-2s69eb5wcms7</li><li>Cloud function instance: test-zone-2mxigizoh9l9-1257626257</li></ul>
 	EntityList []*string `json:"EntityList,omitnil,omitempty" name:"EntityList"`
 
-	// Data delivery type. valid values:.
-	// <li>domain: specifies the site acceleration logs.</li>.
-	// <li>application: four-layer proxy logs.</li>.
-	// <Li>Function: specifies the edge function logs.</li>.
-	// <li>web-rateLiming: specifies the rate limit and CC attack defense logs.</li>.
-	// <li>web-attack: managed rule logs;</li>.
-	// <li>web-rule: custom rule logs;</li>.
-	// <li>web-bot: Bot management logs.</li>
-	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
-
-	// Data area. Valid values:
-	// <li>mainland: within the Chinese mainland;</li>
-	// <li>overseas: global (excluding the Chinese mainland).</li>
-	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
-
-	// Predefined fields for delivery. valid values:.
-	// <Li>[Site acceleration log (l7 access log)](https://www.tencentcloud.com/document/product/1552/105791?from_cn_redirect=1)</li>.
-	// <Li><A href="https://www.tencentcloud.com/document/product/1552/105792?from_cn_redirect=1">four-layer proxy logs</a></li>.
-	// <Li>Specifies the edge function logs (https://www.tencentcloud.com/document/product/1552/115585?from_cn_redirect=1).</li>.
+	// Predefined fields for delivery. Value reference: <ul><li>[Site acceleration log (Layer 7 Access Logs)](https://www.tencentcloud.com/document/product/1552/105791?from_cn_redirect=1)</li><li>[Four-layer proxy logs](https://www.tencentcloud.com/document/product/1552/105792?from_cn_redirect=1)</li><li>[Edge Function logs](https://www.tencentcloud.com/document/product/1552/115585?from_cn_redirect=1)</li></ul>
 	Fields []*string `json:"Fields,omitnil,omitempty" name:"Fields"`
 
 	// The list of custom fields for log delivery, which supports extracting specified content from HTTP request headers, response headers, cookies, and request bodies. Custom field names must be unique. The number of custom fields cannot exceed a maximum of 200. A single real-time log delivery task can configure up to 5 custom fields of the request body type. Currently, only site acceleration logs (`LogType`=`domain`) support custom fields.
@@ -4779,9 +4833,7 @@ type CreateRealtimeLogDeliveryTaskRequest struct {
 	// Sampling ratio in permille. Value range: 1-1000. For example, 605 indicates a sampling ratio of 60.5%. If this parameter is not specified, the sampling ratio is 100%.
 	Sample *uint64 `json:"Sample,omitnil,omitempty" name:"Sample"`
 
-	// Output format for log delivery. if this field is not specified, the default format is used, which works as follows:.
-	// <li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, with each JSON object representing a log entry;</li>.
-	// <li>When TaskType is 's3', the default format is JSON Lines;</li>specifically, when TaskType is 'cls' or 'log_analysis', the only allowed value for LogFormat.FormatType is 'JSON', and other parameters in LogFormat will be ignored. it is recommended not to transfer LogFormat.
+	// Output format for log delivery. If left empty, the default format is used. The default format logic is as follows:<ul><li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, each JSON object represents a log entry;</li><li>When TaskType is 's3', the default format is JSON Lines;</li></ul>Particularly, when TaskType is 'cls' or 'log_analysis', the only allowed value for LogFormat.FormatType is 'json', and other parameters in LogFormat will be ignored. It is recommended not to transfer LogFormat.
 	LogFormat *LogFormat `json:"LogFormat,omitnil,omitempty" name:"LogFormat"`
 
 	// Configuration information of CLS. This parameter is required when `TaskType` is `cls`.
@@ -4807,11 +4859,11 @@ func (r *CreateRealtimeLogDeliveryTaskRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ZoneId")
+	delete(f, "Area")
+	delete(f, "LogType")
 	delete(f, "TaskName")
 	delete(f, "TaskType")
 	delete(f, "EntityList")
-	delete(f, "LogType")
-	delete(f, "Area")
 	delete(f, "Fields")
 	delete(f, "CustomFields")
 	delete(f, "DeliveryConditions")
@@ -5706,10 +5758,10 @@ type DDoSAttackEvent struct {
 	// The attack status.
 	AttackStatus *int64 `json:"AttackStatus,omitnil,omitempty" name:"AttackStatus"`
 
-	// The maximum attack bandwidth.
+	// Maximum bandwidth of the attack in bps.
 	AttackMaxBandWidth *int64 `json:"AttackMaxBandWidth,omitnil,omitempty" name:"AttackMaxBandWidth"`
 
-	// The peak attack packet rate.
+	// Peak attack packet rate, unit: pps.
 	AttackPacketMaxRate *int64 `json:"AttackPacketMaxRate,omitnil,omitempty" name:"AttackPacketMaxRate"`
 
 	// The attack start time recorded in seconds.
@@ -6331,6 +6383,74 @@ func (r *DeleteEdgeKVNamespaceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteEdgeKVNamespaceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteFunctionReplicaRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Function ID.
+	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// Copy name of the deleted function. Input in the form of a list is supported.
+	ReplicaNames []*string `json:"ReplicaNames,omitnil,omitempty" name:"ReplicaNames"`
+}
+
+type DeleteFunctionReplicaRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Function ID.
+	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// Copy name of the deleted function. Input in the form of a list is supported.
+	ReplicaNames []*string `json:"ReplicaNames,omitnil,omitempty" name:"ReplicaNames"`
+}
+
+func (r *DeleteFunctionReplicaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteFunctionReplicaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "FunctionId")
+	delete(f, "ReplicaNames")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteFunctionReplicaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteFunctionReplicaResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteFunctionReplicaResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteFunctionReplicaResponseParams `json:"Response"`
+}
+
+func (r *DeleteFunctionReplicaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteFunctionReplicaResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9553,6 +9673,108 @@ func (r *DescribeFunctionComponentBindingsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeFunctionComponentBindingsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeFunctionReplicasRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Function ID.
+	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number limit of paginated query. Default value: 20. Maximum value: 200.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Sorting basis. Valid values: <li>created-on: Creation time.</li> Default sorting is based on the created-on attribute.
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// List sort method. Valid values: <li>asc: ascending order;</li> <li>desc: sort in descending order.</li> Default value: asc.
+	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
+
+	// Filtering Conditions. The maximum of Filters.Values is 20. If this parameter is left empty, it returns all function replicas under the function ID. Detailed filter criteria: <li>replica-name: Filter by function replica name. Fuzzy query is supported.</li>
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeFunctionReplicasRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Function ID.
+	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// The offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number limit of paginated query. Default value: 20. Maximum value: 200.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Sorting basis. Valid values: <li>created-on: Creation time.</li> Default sorting is based on the created-on attribute.
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// List sort method. Valid values: <li>asc: ascending order;</li> <li>desc: sort in descending order.</li> Default value: asc.
+	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
+
+	// Filtering Conditions. The maximum of Filters.Values is 20. If this parameter is left empty, it returns all function replicas under the function ID. Detailed filter criteria: <li>replica-name: Filter by function replica name. Fuzzy query is supported.</li>
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeFunctionReplicasRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeFunctionReplicasRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "FunctionId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "SortBy")
+	delete(f, "SortOrder")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeFunctionReplicasRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeFunctionReplicasResponseParams struct {
+	// Total number of edge function replicas.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Edge function replica list.
+	FunctionReplicas []*FunctionReplica `json:"FunctionReplicas,omitnil,omitempty" name:"FunctionReplicas"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeFunctionReplicasResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeFunctionReplicasResponseParams `json:"Response"`
+}
+
+func (r *DescribeFunctionReplicasResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeFunctionReplicasResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -14459,7 +14681,7 @@ type EdgeKVDeleteRequestParams struct {
 	// Namespace name.
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters. Allowed characters include letters, numbers, hyphens, and underscores. To delete a single key, import an array with one element.
+	// Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters, supporting valid UTF-8 characters. To delete one key, input an array containing one element.
 	Keys []*string `json:"Keys,omitnil,omitempty" name:"Keys"`
 }
 
@@ -14472,7 +14694,7 @@ type EdgeKVDeleteRequest struct {
 	// Namespace name.
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters. Allowed characters include letters, numbers, hyphens, and underscores. To delete a single key, import an array with one element.
+	// Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters, supporting valid UTF-8 characters. To delete one key, input an array containing one element.
 	Keys []*string `json:"Keys,omitnil,omitempty" name:"Keys"`
 }
 
@@ -14527,7 +14749,7 @@ type EdgeKVGetRequestParams struct {
 	// Namespace name. You can obtain the list of namespaces under the site through the DescribeEdgeKVNamespaces API.
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters. Allowed characters include letters, numbers, hyphens, and underscores. To query a single key, input an array with one element.
+	// Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters, and supports valid UTF-8 characters. When querying a single key, input an array with one element.
 	Keys []*string `json:"Keys,omitnil,omitempty" name:"Keys"`
 }
 
@@ -14540,7 +14762,7 @@ type EdgeKVGetRequest struct {
 	// Namespace name. You can obtain the list of namespaces under the site through the DescribeEdgeKVNamespaces API.
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters. Allowed characters include letters, numbers, hyphens, and underscores. To query a single key, input an array with one element.
+	// Name list. Maximum array length is 20. Each key cannot be empty, with a length of 1-512 characters, and supports valid UTF-8 characters. When querying a single key, input an array with one element.
 	Keys []*string `json:"Keys,omitnil,omitempty" name:"Keys"`
 }
 
@@ -14686,16 +14908,16 @@ type EdgeKVPutRequestParams struct {
 	// Namespace name.
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Key name. The length is 1-512 characters. Allowed characters include letters, digits, hyphens, and underscores.
+	// Key name, with a length of 1-512 characters, supports valid UTF-8 characters.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Key-value. Cannot be empty and supports up to 1 MB. Supports storing string data.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 
-	// Expiration time, absolute time. It means the seconds elapsed since midnight (UTC/GMT) on January 1, 1970, and cannot be earlier than the current time. If both Expiration and ExpirationTTL are filled in, ExpirationTTL takes precedence. If neither Expiration nor ExpirationTTL is specified, the key-value pair will never expire.
+	// Expiry date of the key-value pair, absolute time in seconds, represents the seconds elapsed since 00:00:00 on January 1, 1970 (UTC) (Unix timestamp). The value must be greater than or equal to current time + 60, meaning the expiry date is at least 60 seconds from now. When both Expiration and ExpirationTTL are filled, ExpirationTTL takes precedence. If left empty, the key-value pair will never expire.
 	Expiration *int64 `json:"Expiration,omitnil,omitempty" name:"Expiration"`
 
-	// Expiration time, relative time, in seconds. Indicates the data will expire after the specified seconds, must be greater than 0. If both Expiration and ExpirationTTL are filled in, ExpirationTTL takes precedence. If neither Expiration nor ExpirationTTL is specified, the key-value pair will never expire.
+	// The survival time of the key-value pair is a relative time in seconds, indicating that the data will expire after transit of specified seconds. Value ranges from 60. When both Expiration and ExpirationTTL are filled, ExpirationTTL takes precedence; if left empty, the key-value pair will never expire.
 	ExpirationTTL *int64 `json:"ExpirationTTL,omitnil,omitempty" name:"ExpirationTTL"`
 }
 
@@ -14708,16 +14930,16 @@ type EdgeKVPutRequest struct {
 	// Namespace name.
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Key name. The length is 1-512 characters. Allowed characters include letters, digits, hyphens, and underscores.
+	// Key name, with a length of 1-512 characters, supports valid UTF-8 characters.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Key-value. Cannot be empty and supports up to 1 MB. Supports storing string data.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 
-	// Expiration time, absolute time. It means the seconds elapsed since midnight (UTC/GMT) on January 1, 1970, and cannot be earlier than the current time. If both Expiration and ExpirationTTL are filled in, ExpirationTTL takes precedence. If neither Expiration nor ExpirationTTL is specified, the key-value pair will never expire.
+	// Expiry date of the key-value pair, absolute time in seconds, represents the seconds elapsed since 00:00:00 on January 1, 1970 (UTC) (Unix timestamp). The value must be greater than or equal to current time + 60, meaning the expiry date is at least 60 seconds from now. When both Expiration and ExpirationTTL are filled, ExpirationTTL takes precedence. If left empty, the key-value pair will never expire.
 	Expiration *int64 `json:"Expiration,omitnil,omitempty" name:"Expiration"`
 
-	// Expiration time, relative time, in seconds. Indicates the data will expire after the specified seconds, must be greater than 0. If both Expiration and ExpirationTTL are filled in, ExpirationTTL takes precedence. If neither Expiration nor ExpirationTTL is specified, the key-value pair will never expire.
+	// The survival time of the key-value pair is a relative time in seconds, indicating that the data will expire after transit of specified seconds. Value ranges from 60. When both Expiration and ExpirationTTL are filled, ExpirationTTL takes precedence; if left empty, the key-value pair will never expire.
 	ExpirationTTL *int64 `json:"ExpirationTTL,omitnil,omitempty" name:"ExpirationTTL"`
 }
 
@@ -15258,6 +15480,9 @@ type FrequentScanningProtection struct {
 	// Whether the high-frequency scan protection rule is enabled. valid values: <li>on: enable. the high-frequency scan protection rule takes effect.</li><li>off: disable. the high-frequency scan protection rule does not take effect.</li>.	
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
+	// Rule ID of high frequency scan protection, returned as an output parameter.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
 	// The handling action for high-frequency scan protection. required when Enabled is on. valid values for SecurityAction Name: <li>Deny: block and respond with an interception page;</li> <li>Monitor: observe without processing requests, log security events in logs;</li> <li>JSChallenge: respond with a JavaScript challenge page.</li>.
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 
@@ -15335,6 +15560,26 @@ type FunctionRegionSelection struct {
 
 	// List of countries/regions. example value: CN: china, CN.GD: guangdong, china. for values, see: [country/region and corresponding code enumeration](https://www.tencentcloud.com/document/product/1552/112542?from_cn_redirect=1).
 	Regions []*string `json:"Regions,omitnil,omitempty" name:"Regions"`
+}
+
+type FunctionReplica struct {
+	// Function ID.
+	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// Edge function copy name.
+	ReplicaName *string `json:"ReplicaName,omitnil,omitempty" name:"ReplicaName"`
+
+	// Edge function replica content. Format is JavaScript code.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Edge function replica description.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Edge function replica creation time.
+	CreatedOn *string `json:"CreatedOn,omitnil,omitempty" name:"CreatedOn"`
+
+	// Edge function replica last update time.
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
 }
 
 type FunctionRule struct {
@@ -15577,7 +15822,7 @@ type HealthChecker struct {
 	// Check port, which is required when Type = HTTP, Type = HTTPS, Type = TCP, or Type = UDP.
 	Port *uint64 `json:"Port,omitnil,omitempty" name:"Port"`
 
-	// Check frequency, in seconds. It indicates how often a health check task is initiated. Valid values: 30, 60, 180, 300, 600.
+	// Check frequency, in seconds. It indicates how often a health check task is initiated. Configurable range: 10-600 seconds.
 	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Timeout for each health check, in seconds. If the health check time exceeds this value, the check result is determined as "unhealthy". The default value is 5s, and the value should be less than Interval.
@@ -16209,7 +16454,7 @@ type KVNamespaceParameters struct {
 }
 
 type KeyValuePair struct {
-	// Key name. Each key name cannot be empty, with a length of 1-512 characters. Allowed characters include letters, digits, hyphens, and underscores.
+	// Key name. Each key name cannot be empty, with a length of 1-512 characters, and supports valid UTF-8 characters.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Key-value. Cannot be empty for input parameters and supports up to 1 MB. Returns an empty string if the key does not exist for output parameters.
@@ -17120,7 +17365,7 @@ type ModifyApplicationProxyRuleRequestParams struct {
 	// <li>`false`: Disable</li>If it is left empty, the default value `false` is used.
 	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 
-	// Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
+	// Duration for session persistence, in seconds. The value takes effect only when SessionPersist is true.
 	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil,omitempty" name:"SessionPersistTime"`
 
 	// The origin port, which can be:
@@ -17178,7 +17423,7 @@ type ModifyApplicationProxyRuleRequest struct {
 	// <li>`false`: Disable</li>If it is left empty, the default value `false` is used.
 	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 
-	// Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
+	// Duration for session persistence, in seconds. The value takes effect only when SessionPersist is true.
 	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil,omitempty" name:"SessionPersistTime"`
 
 	// The origin port, which can be:
@@ -17881,6 +18126,88 @@ func (r *ModifyFunctionComponentBindingsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyFunctionComponentBindingsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyFunctionReplicaRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Function ID.
+	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// Edge function copy name that needs to be modified.
+	ReplicaName *string `json:"ReplicaName,omitnil,omitempty" name:"ReplicaName"`
+
+	// Edge function replica content. Currently only supports JavaScript code. Supports a maximum of 5 MB.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Edge function replica description. Supports up to 50 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+}
+
+type ModifyFunctionReplicaRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Function ID.
+	FunctionId *string `json:"FunctionId,omitnil,omitempty" name:"FunctionId"`
+
+	// Edge function copy name that needs to be modified.
+	ReplicaName *string `json:"ReplicaName,omitnil,omitempty" name:"ReplicaName"`
+
+	// Edge function replica content. Currently only supports JavaScript code. Supports a maximum of 5 MB.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Edge function replica description. Supports up to 50 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+}
+
+func (r *ModifyFunctionReplicaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyFunctionReplicaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "FunctionId")
+	delete(f, "ReplicaName")
+	delete(f, "Content")
+	delete(f, "Remark")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyFunctionReplicaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyFunctionReplicaResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyFunctionReplicaResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyFunctionReplicaResponseParams `json:"Response"`
+}
+
+func (r *ModifyFunctionReplicaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyFunctionReplicaResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -19327,20 +19654,20 @@ func (r *ModifyOriginGroupResponse) FromJsonString(s string) error {
 }
 
 type ModifyOriginParameters struct {
-	// The origin type. values:.
-	// <Li>IPDomain: ipv4, ipv6, or domain name type origin server;</li>.
-	// <Li>OriginGroup: origin server group type origin server;</li>.
-	// <Li>LoadBalance: cloud load balancer (clb), this feature is in beta test. to use it, please submit a ticket or contact smart customer service;</li>.
-	// <Li>COS: tencent cloud COS origin server;</li>.
-	// <Li>AWSS3: all object storage origin servers that support the aws s3 protocol.</li>.
+	// Origin server type. Valid values:
+	// <li>IPDomain: IPV4, IPV6, or domain type origin server;</li>
+	// <li>OriginGroup: origin server group type origin server;</li>
+	// <li>LoadBalance: load balancing. This feature is in beta test. If needed, submit a ticket;</li>
+	// <li>COS: Tencent Cloud COS origin server;</li>
+	// <li>AWSS3: supports ALL AWS S3-compatible COS origin servers.</li>
 	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
 
-	// Origin server address, which varies according to the value of origintype:.
-	// <Li>When origintype = ipdomain, fill in an ipv4 address, an ipv6 address, or a domain name;</li>.
-	// <Li>When origintype = cos, please fill in the access domain name of the cos bucket;</li>.
-	// <Li>When origintype = awss3, fill in the access domain name of the s3 bucket;</li>.
-	// <Li>When origintype = origingroup, fill in the origin server group id;</li>.
-	// <Li>When origintype = loadbalance, fill in the cloud load balancer instance id. this feature is currently only available to the allowlist.</li>.
+	// Origin server address, which varies according to the value of OriginType:
+	// <li>When OriginType = IPDomain, specify this parameter with an IPV4 address, an IPV6 address, or a domain name;</li>
+	// <li>When OriginType = COS, specify the cos bucket access domain.</li>
+	// <li>When OriginType = AWSS3, specify this parameter as the access domain of the S3 bucket;</li>
+	// <li>When OriginType = OriginGroup, fill in the origin server group ID; when it is an output parameter, if the origin server group of other sites is referenced, the format is {origin server group ID}@{ZoneID}. For example: og-testorigin@zone-38moq1z10wwwy;</li>
+	// <li>When OriginType = LoadBalance, specify this parameter as the Cloud Load Balancer instance ID. This feature is currently only available to the allowlist. When it is an output parameter, if the load balancing of other sites is referenced, the format is {LoadBalancer ID}@{ZoneID}, such as lb-2rxpamcyqfzg@zone-38moq1z10wwwy.</li>
 	Origin *string `json:"Origin,omitnil,omitempty" name:"Origin"`
 
 	// Origin-Pull protocol configuration. this parameter is required when origintype is ipdomain, origingroup, or loadbalance. valid values are:.
@@ -21861,6 +22188,9 @@ type RateLimitingRule struct {
 	// The specific content of precise rate limiting must comply with expression grammar. for detailed requirements, please refer to [the product document](https://www.tencentcloud.com/document/product/1552/125343?from_cn_redirect=1) .
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
+	// Speed limit mode. Within the statistical time window CountingPeriod, the following speed limit modes can be configured for requests that meet the feature CountBy:<li>Block: Block access source. When the count exceeds the threshold MaxRequestThreshold, execute Action disposal for ALL subsequent requests that meet the feature within the ActionDuration. </li><li>Throttle: Only dispose excess requests. When the count exceeds the threshold MaxRequestThreshold, only execute Action disposal for requests that exceed the threshold, and stop disposal when the window ends. At this point, the ActionDuration parameter will be ignored.</li><br />Default value is Block.
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
+
 	// The match mode of the rate threshold request feature. this field is required when Enabled is on.<br /><br />when there are multiple conditions, composite conditions are used to collect statistics. the maximum number of conditions cannot exceed 5. valid values:<br/><li><b>http.request.ip</b>: client ip;</li><li><b>http.request.xff_header_ip</b>: client ip (priority match xff header);</li><li><b>http.request.uri.path</b>: access path of the request;</li><li><b>http.request.cookies['session']</b>: Cookie named session, where session can be replaced with your own parameter;</li><li><b>http.request.headers['user-agent']</b>: http header named user-agent, where user-agent can be replaced with your own parameter;</li><li><b>http.request.ja3</b>: ja3 fingerprint of the request;</li><li><b>http.request.ja4</b>: ja4 fingerprint of the request;</li><li><b>http.request.uri.query['test']</b>: URL query parameter named test, where test can be replaced with your own parameter.</li>.
 	CountBy []*string `json:"CountBy,omitnil,omitempty" name:"CountBy"`
 
@@ -21870,7 +22200,7 @@ type RateLimitingRule struct {
 	// Specifies the time window for statistics. valid values: <li>1s: 1 second;</li><li>5s: 5 seconds;</li><li>10s: 10 seconds;</li><li>20s: 20 seconds;</li><li>30s: 30 seconds;</li><li>40s: 40 seconds;</li><li>50s: 50 seconds;</li><li>1m: 1 minute;</li><li>2m: 2 minutes;</li><li>5m: 5 minutes;</li><li>10m: 10 minutes;</li><li>1h: 1 hour.</li>.
 	CountingPeriod *string `json:"CountingPeriod,omitnil,omitempty" name:"CountingPeriod"`
 
-	// The duration of an Action is only supported in the following units: <li>s: seconds, value range 1-120;</li> <li>m: minutes, value range 1-120;</li> <li>h: hours, value range 1-48;</li> <li>d: days, value range 1-30.</li>.
+	// Duration of the Action. Only the following units are supported: <li>s: second, value range 1-120;</li><li>m: minute, value range 1-120;</li><li>h: hour, value range 1-48;</li><li>d: day, value range 1-30.</li><br />This parameter will be ignored and will not take effect when Mode is Throttle.
 	ActionDuration *string `json:"ActionDuration,omitnil,omitempty" name:"ActionDuration"`
 
 	// Precision rate limiting handling methods. valid values: <li>Monitor: Monitor;</li> <li>Deny: block, where DenyActionParameters.Name supports Deny and ReturnCustomPage;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge;</li> <li>Redirect: Redirect to URL;</li>.
@@ -22340,45 +22670,47 @@ type RuleCondition struct {
 }
 
 type RuleEngineAction struct {
-	// Operation Name. the Name must correspond to the parameter structure, such as Name=Cache, then CacheParameters is required.
-	// <li>Cache: specifies the node Cache TTL.</li>.
-	// <Li>CacheKey: specifies the custom cache key.</li>.
-	// <Li>CachePrefresh: specifies cache pre-refresh.</li>.
-	// <Li>AccessURLRedirect: specifies access url redirection.</li>.
-	// <Li>UpstreamURLRewrite: specifies the origin-pull url rewrite.</li>.
+	// Operation name. The name must correspond to the parameter structure. For example, if Name=Cache, CacheParameters is required.
+	// <li>Cache: Node caching TTL;</li>
+	// <li>CacheKey: custom Cache Key;</li>
+	// <li>CachePrefresh: cache pre-refresh;</li>
+	// <li>AccessURLRedirect: URL redirection;</li>
+	// <li>UpstreamURLRewrite: origin-pull URL rewrite;</li>
 	// <li>QUIC:QUIC;</li>
 	// <li>WebSocket:WebSocket;</li>
-	// <li>Authentication: Token Authentication;</li>.
-	// <li>MaxAge: specifies the browser cache TTL.</li>.
-	// <li>StatusCodeCache: specifies the status code cache TTL.</li>.
-	// <Li>OfflineCache: specifies the offline cache.</li>.
-	// <Li>SmartRouting: specifies smart acceleration.</li>.
-	// <Li>RangeOriginPull: specifies range-based origin pull.</li>.
-	// <Li>UpstreamHTTP2: specifies http/2 origin pull.</li>.
-	// <Li>HostHeader: specifies the host header rewrite.</li>.
-	// <Li>ForceRedirectHTTPS: specifies the forced https redirect configuration for access protocol.</li>.
-	// <li>OriginPullProtocol: specifies HTTPS origin pull.</li>.
-	// <Li>Compression: specifies the intelligent compression configuration.</li>.
+	// <li>Authentication: Token authentication;</li>
+	// <li>MaxAge: Browser cache TTL;</li>
+	// <li>StatusCodeCache: Status code cache TTL;</li>
+	// <li>OfflineCache: Offline cache;</li>
+	// <li>SmartRouting: Smart acceleration;</li>
+	// <li>RangeOriginPull: Range-based origin pull;</li>
+	// <li>UpstreamHTTP2: HTTP/2 origin pull;</li>
+	// <li>HostHeader: Host header rewrite;</li>
+	// <li>ForceRedirectHTTPS: Forced HTTPS redirect configuration for access protocol.</li>
+	// <li>HTTPS origin pull (OriginPullProtocol);</li>
+	// <li>Compression: Intelligent compression configuration;</li>
 	// <li>HSTS:HSTS;</li>
-	// <Li>ClientIPHeader: specifies the header information configuration for storing client request ip.</li>.
-	// <Li>OCSPStapling: specifies ocsp stapling.</li>.
-	// <Li>HTTP2: specifies http/2 integration.</li>.
-	// <li>PostMaxSize: specifies the maximum limit for file streaming transmission in POST request upload.</li>.
-	// <Li>ClientIPCountry: specifies the regional information of the client ip carried during origin-pull.</li>.
-	// <Li>UpstreamFollowRedirect: specifies the parameter configuration for redirection during origin pull.</li>.
-	// <Li>UpstreamRequest: specifies the origin-pull request parameters.</li>.
-	// <li>TLSConfig: specifies SSL/TLS security.</li>.
-	// <Li>ModifyOrigin: modifies the origin server.</li>.
-	// <Li>HTTPUpstreamTimeout: specifies the layer-7 origin-pull timeout configuration.</li>.
-	// <li>HttpResponse: HTTP response.</li>.
-	// <Li>ErrorPage: specifies the custom error page.</li>.
-	// <li>ModifyResponseHeader: modifies the HTTP node response header.</li>.
-	// <li>ModifyRequestHeader: modifies the request header of an HTTP node.</li>.
-	// <Li>ResponseSpeedLimit: specifies the download speed limit for a single connection.</li>.
-	// <Li>SetContentIdentifier: specifies the content identifier.</li>.
-	// <Li>Vary: specifies the vary feature configuration.</li>.
-	// <Li>ContentCompression: specifies the content compression configuration.</li>.
-	// <Li>OriginAuthentication. specifies the origin authentication configuration.</li>.
+	// <li>ClientIPHeader: Header information configuration that stores the client request IP.</li>
+	// <li>OCSPStapling: OCSP stapling;</li>
+	// <li>HTTP2: HTTP/2 integration;</li>
+	// <li>PostMaxSize: Maximum limit for file streaming transmission in POST requests.</li>
+	// <li>ClientIPCountry: Carry regional information of the client IP during origin pull.</li>
+	// <li>UpstreamFollowRedirect: Parameter configuration for redirection during origin pull;</li>
+	// <li>UpstreamRequest: Origin-pull request parameter;</li>
+	// <li>Shield: Origin server uninstallation.</li>
+	// <li>TLSConfig: SSL/TLS security;</li>
+	// <li>ModifyOrigin: Modify origin server;</li>
+	// <li>SiteFailover: origin server failure failover;</li>
+	// <li>HTTPUpstreamTimeout: Layer-7 origin-pull timeout configuration.</li>
+	// <li>HTTP response: HTTP response;</li>
+	// <li>ErrorPage: Custom error page;</li>
+	// <li>ModifyResponseHeader: Modify the HTTP node response header;</li>
+	// <li>ModifyRequestHeader: Modify the request header of an HTTP node;</li>
+	// <li>ResponseSpeedLimit: Download speed limit for a single connection;</li>
+	// <li>SetContentIdentifier: Set the content identifier.</li>
+	// <li>Vary: Vary feature configuration;</li>
+	// <li>ContentCompression: Content compression configuration;</li>
+	// <li>OriginAuthentication: Origin authentication configuration.</li>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Node cache ttl configuration parameter. when name is cache, this parameter is required.
@@ -22485,6 +22817,10 @@ type RuleEngineAction struct {
 	// Note: this field may return null, which indicates a failure to obtain a valid value.
 	UpstreamRequestParameters *UpstreamRequestParameters `json:"UpstreamRequestParameters,omitnil,omitempty" name:"UpstreamRequestParameters"`
 
+	// Origin server uninstallation config. When the Name value is Shield, this parameter is required.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	ShieldParameters *ShieldParameters `json:"ShieldParameters,omitnil,omitempty" name:"ShieldParameters"`
+
 	// SSL/TLS security configuration parameter. this parameter is required when the name is set to tlsconfig.
 	// Note: this field may return null, which indicates a failure to obtain a valid value.
 	TLSConfigParameters *TLSConfigParameters `json:"TLSConfigParameters,omitnil,omitempty" name:"TLSConfigParameters"`
@@ -22492,6 +22828,10 @@ type RuleEngineAction struct {
 	// Configuration parameter for modifying the origin server. this parameter is required when the name is set to modifyorigin.
 	// Note: this field may return null, which indicates a failure to obtain a valid value.
 	ModifyOriginParameters *ModifyOriginParameters `json:"ModifyOriginParameters,omitnil,omitempty" name:"ModifyOriginParameters"`
+
+	// Origin server failure failover configuration parameter. This parameter is required when the Name value is SiteFailover.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	SiteFailoverParameters *SiteFailoverParameters `json:"SiteFailoverParameters,omitnil,omitempty" name:"SiteFailoverParameters"`
 
 	// Configuration of layer 7 origin timeout. this parameter is required when name is httpupstreamtimeout.
 	// Note: this field may return null, which indicates a failure to obtain a valid value.
@@ -22949,6 +23289,78 @@ type SharedCNAMEInfo struct {
 	AccelerationDomains []*ReferenceHolder `json:"AccelerationDomains,omitnil,omitempty" name:"AccelerationDomains"`
 }
 
+type ShieldParameters struct {
+	// Origin server uninstallation space ID.
+	ShieldSpaceId *string `json:"ShieldSpaceId,omitnil,omitempty" name:"ShieldSpaceId"`
+}
+
+type SiteFailover struct {
+	// Origin server failover type. Valid values:
+	// <li>FailoverToHost: Fail back to the specified IP/domain.</li>
+	// <li>FailoverToCOS: Fail back to Tencent Cloud COS;</li>
+	// <li>FailoverToS3CompatibleObjectStorage: Fail over to S3-compatible object storage;</li>
+	// <li> FailoverRedirectToURL: Redirect to the specified URL.</li>
+	// <li>FailoverCustomResponsePage: Use a custom response page.</li>
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
+
+	// Origin server address, divided into following scenarios based on the Mode value:
+	// <li>When Mode = FailoverToHost, specify an IPV4 address, an IPV6 address, or a domain name;</li>
+	// <li>When Mode = FailoverToCOS, specify the access domain name of the COS bucket;</li>
+	// <li>When Mode = FailoverToS3CompatibleObjectStorage, specify the access domain of the S3 bucket.</li>
+	Origin *string `json:"Origin,omitnil,omitempty" name:"Origin"`
+
+	// Protocol configuration. This parameter is required when Mode value is FailoverToHost. Valid values:
+	// <li>http: use HTTP protocol;</li>
+	// <li>https: Using HTTPS protocol;</li>
+	// <li>follow: protocol following.</li>
+	OriginProtocol *string `json:"OriginProtocol,omitnil,omitempty" name:"OriginProtocol"`
+
+	// HTTP origin port, value ranges from 1 to 65535. This parameter is required when the origin-pull protocol OriginProtocol is http or follow.
+	HTTPOriginPort *int64 `json:"HTTPOriginPort,omitnil,omitempty" name:"HTTPOriginPort"`
+
+	// HTTPS origin port, value ranges from 1–65535. This parameter is required when the origin-pull protocol OriginProtocol is https or follow.
+	HTTPSOriginPort *int64 `json:"HTTPSOriginPort,omitnil,omitempty" name:"HTTPSOriginPort"`
+
+	// Host Header rewrite configuration for origin-pull
+	UpstreamHostHeader *HostHeaderParameters `json:"UpstreamHostHeader,omitnil,omitempty" name:"UpstreamHostHeader"`
+
+	// Origin-pull URL rewrite configuration.
+	UpstreamURLRewrite *UpstreamURLRewriteParameters `json:"UpstreamURLRewrite,omitnil,omitempty" name:"UpstreamURLRewrite"`
+
+	// Origin Requests parameter configuration.
+	UpstreamRequestParameters *UpstreamRequestParameters `json:"UpstreamRequestParameters,omitnil,omitempty" name:"UpstreamRequestParameters"`
+
+	// HTTP2 origin-pull configuration parameters.
+	UpstreamHTTP2Parameters *UpstreamHTTP2Parameters `json:"UpstreamHTTP2Parameters,omitnil,omitempty" name:"UpstreamHTTP2Parameters"`
+
+	// Specify whether access to the private object storage origin server is allowed. This parameter is required when the origin server type is FailoverToCOS or FailoverToS3CompatibleObjectStorage. Valid values:
+	// <li>on: Enable private authentication;</li>
+	// <li>off: Disable private authentication.</li>
+	PrivateAccess *string `json:"PrivateAccess,omitnil,omitempty" name:"PrivateAccess"`
+
+	// Private authentication parameter. This parameter is valid only when Mode = FailoverToS3CompatibleObjectStorage and PrivateAccess = on.
+	PrivateParameters *OriginPrivateParameters `json:"PrivateParameters,omitnil,omitempty" name:"PrivateParameters"`
+
+	// Redirect target URL. This parameter is required when Mode has a value of FailoverRedirectToURL.
+	RedirectURL *string `json:"RedirectURL,omitnil,omitempty" name:"RedirectURL"`
+
+	// Response page ID. This parameter is required when Mode value is FailoverCustomResponsePage.
+	ResponsePageId *string `json:"ResponsePageId,omitnil,omitempty" name:"ResponsePageId"`
+
+	// Response status code. This parameter is required when Mode is a value of FailoverRedirectToURL or FailoverCustomResponsePage. Valid values:
+	// <li>When Mode = FailoverRedirectToURL, the parameter value is one of 301, 302, 303, 307, 308.</li>
+	// <li>When Mode = FailoverCustomResponsePage, the parameter value is one of 400, 403, 404, 405, 414, 416, 451, 500, 501, 502, 503, 504.</li>
+	StatusCode *int64 `json:"StatusCode,omitnil,omitempty" name:"StatusCode"`
+}
+
+type SiteFailoverParameters struct {
+	// Origin server fault migration condition status code. The origin server response status code must hit the field return to execute origin server migration as SiteFailoverParams. The parameter value is one of 4xx, 5xx.
+	SiteFailoverStatusCodes []*int64 `json:"SiteFailoverStatusCodes,omitnil,omitempty" name:"SiteFailoverStatusCodes"`
+
+	// Origin server failure failover configuration parameter list. Minimum length is 1, maximum length is 2.
+	SiteFailoverParams []*SiteFailover `json:"SiteFailoverParams,omitnil,omitempty" name:"SiteFailoverParams"`
+}
+
 type SkipCondition struct {
 	// The field type. Values:
 	// <li>`header_fields`: HTTP request header</li>
@@ -22989,6 +23401,9 @@ type SkipCondition struct {
 type SlowAttackDefense struct {
 	// Whether slow attack protection is enabled. valid values: <li>on: enabled;</li> <li>off: disabled.</li>.
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// Rule ID of slow attack protection, returned as an output parameter.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Slow attack protection handling method. required when Enabled is on. valid values for SecurityAction Name: <li>Monitor: observation;</li> <li>Deny: block;</li>.
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`

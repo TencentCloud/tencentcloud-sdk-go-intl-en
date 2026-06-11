@@ -659,6 +659,9 @@ const (
 	// Playlist length too large.
 	LIMITEXCEEDED_PLAYLIST = "LimitExceeded.PlayList"
 
+	// The quota limit is exceeded.
+	LIMITEXCEEDED_QUOTA = "LimitExceeded.Quota"
+
 	// The playlist list length exceeds the limit.
 	LIMITEXCEEDED_ROUNDPLAYLIST = "LimitExceeded.RoundPlaylist"
 

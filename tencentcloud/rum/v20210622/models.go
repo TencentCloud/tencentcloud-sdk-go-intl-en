@@ -9275,23 +9275,23 @@ type DescribeTawInstancesRequestParams struct {
 	// Pagination offset
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Region ID
+	// Region Id
 	AreaIds []*int64 `json:"AreaIds,omitnil,omitempty" name:"AreaIds"`
 
-	// Instance status (1: creating; 2: running; 3: exceptional; 4: restarting; 5: stopping; 6: stopped; 7: terminating; 8: terminated)
+	// Instance status (1=creating, 2=running, 3=abnormal, 4=restarting, 5=stopping, 6=stopped, 7=being destroyed, 8=terminated). Deprecated. Please note in Filters.
 	//
 	// Deprecated: InstanceStatuses is deprecated.
 	InstanceStatuses []*int64 `json:"InstanceStatuses,omitnil,omitempty" name:"InstanceStatuses"`
 
-	// Instance ID
+	// Instance Id, deprecated. Please note in Filters.
 	//
 	// Deprecated: InstanceIds is deprecated.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Filter parameter
+	// Filter parameters; In demo mode, pass {"Name": "IsDemo", "Values":["1"]}.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Whether it is in the demo mode. `1`: Yes; `2`: No.
+	// Deprecated. For demo mode, please note in Filters.
 	//
 	// Deprecated: IsDemo is deprecated.
 	IsDemo *int64 `json:"IsDemo,omitnil,omitempty" name:"IsDemo"`
@@ -9312,19 +9312,19 @@ type DescribeTawInstancesRequest struct {
 	// Pagination offset
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Region ID
+	// Region Id
 	AreaIds []*int64 `json:"AreaIds,omitnil,omitempty" name:"AreaIds"`
 
-	// Instance status (1: creating; 2: running; 3: exceptional; 4: restarting; 5: stopping; 6: stopped; 7: terminating; 8: terminated)
+	// Instance status (1=creating, 2=running, 3=abnormal, 4=restarting, 5=stopping, 6=stopped, 7=being destroyed, 8=terminated). Deprecated. Please note in Filters.
 	InstanceStatuses []*int64 `json:"InstanceStatuses,omitnil,omitempty" name:"InstanceStatuses"`
 
-	// Instance ID
+	// Instance Id, deprecated. Please note in Filters.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Filter parameter
+	// Filter parameters; In demo mode, pass {"Name": "IsDemo", "Values":["1"]}.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Whether it is in the demo mode. `1`: Yes; `2`: No.
+	// Deprecated. For demo mode, please note in Filters.
 	IsDemo *int64 `json:"IsDemo,omitnil,omitempty" name:"IsDemo"`
 }
 
@@ -10001,16 +10001,16 @@ type RumAreaInfo struct {
 }
 
 type RumInstanceInfo struct {
-	// Instance status (1: creating; 2: running; 3: exceptional; 4: restarting; 5: stopping; 6: stopped; 7: deleted)
+	// Instance status (1=creating, 2=running, 3=abnormal, 4=restarting, 5=stopping, 6=stopped, 7=deleted)
 	InstanceStatus *int64 `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
 
-	// Region ID
+	// Zone Id
 	AreaId *int64 `json:"AreaId,omitnil,omitempty" name:"AreaId"`
 
 	// Tag list
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Instance ID
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Cluster ID
@@ -10019,25 +10019,25 @@ type RumInstanceInfo struct {
 	// Instance description
 	InstanceDesc *string `json:"InstanceDesc,omitnil,omitempty" name:"InstanceDesc"`
 
-	// Billing status (1: in use; 2: expired; 3: terminated; 4: assigning; 5: assignment failed)
+	// Billing status (1=Active, 2=Expired, 3=Terminated, 4=Allocating, 5=Allocation failure)
 	ChargeStatus *int64 `json:"ChargeStatus,omitnil,omitempty" name:"ChargeStatus"`
 
-	// Billing type (1: free; 2: prepaid; 3: postpaid)
+	// Billing type (1=Free edition, 2=Prepayment, 3=Pay-as-you-go)
 	ChargeType *int64 `json:"ChargeType,omitnil,omitempty" name:"ChargeType"`
 
 	// Update time
 	UpdatedAt *string `json:"UpdatedAt,omitnil,omitempty" name:"UpdatedAt"`
 
-	// Data retention period (in days)
+	// Data retention time (days)
 	DataRetentionDays *int64 `json:"DataRetentionDays,omitnil,omitempty" name:"DataRetentionDays"`
 
-	// Instance name
+	// Instance name.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Creation time
+	// Creation time.
 	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
 
-
+	// Instance type 1: Original web-related class 2: app endpoint type
 	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 }
 

@@ -20,9 +20,24 @@ import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
+type AccessControlRule struct {
+	// <p>Network segment or IP, support IPv4 or IPv6.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CidrBlocks []*string `json:"CidrBlocks,omitnil,omitempty" name:"CidrBlocks"`
+
+	// <p>ACCEPT or DROP.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// <p>Access method: public - public network, internal - private network</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AccessMode *string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
+}
+
 // Predefined struct for user
 type AddMachineGroupInfoRequestParams struct {
-	// Machine group ID
+	// Machine group Id
+	// -Obtain the machine group Id through [Get Machine Group List](https://www.tencentcloud.com/document/product/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// Machine group type
@@ -33,7 +48,8 @@ type AddMachineGroupInfoRequestParams struct {
 type AddMachineGroupInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// Machine group ID
+	// Machine group Id
+	// -Obtain the machine group Id through [Get Machine Group List](https://www.tencentcloud.com/document/product/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// Machine group type
@@ -83,18 +99,46 @@ func (r *AddMachineGroupInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AdvanceFilterRuleInfo struct {
+	// Filter fields
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Filtering rule. 0: equal to; 1: the field exists; 2 the field does not exist.
+	Rule *uint64 `json:"Rule,omitnil,omitempty" name:"Rule"`
+
+	// Values after filtering
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type AdvancedConsumerConfiguration struct {
+	// Kafka partition hash status. Default false.
+	// 
+	// -true: Enable sending messages with equal field Hash values to the same Kafka partition.
+	// -false: Disable sending messages with equivalent field Hash values to the same kafka partition.
+	PartitionHashStatus *bool `json:"PartitionHashStatus,omitnil,omitempty" name:"PartitionHashStatus"`
+
+	// Field list to calculate hash. Supports a maximum of 5 fields.
+	PartitionFields []*string `json:"PartitionFields,omitnil,omitempty" name:"PartitionFields"`
+}
+
 type AlarmAnalysisConfig struct {
 	// Keys. The following keys are supported:
 	// SyntaxRule: Syntax rule, value supports 0: Lucene syntax; 1: CQL syntax.
-	// QueryIndex: Serial number of execution statement. Value supports -1: Custom; 1: Execute Statement 1; 2: Execute Statement 2.CustomQuery: Search statement. Valid and required when QueryIndex is -1, example of value: "* | select count(*) as count".Fields: Fields. Value supports __SOURCE__; __FILENAME__; __HOSTNAME__; __TIMESTAMP__; __INDEX_STATUS__; __PKG_LOGID__; __TOPIC__.
-	// Format: Display format. Value supports 1: One log per line; 2: One field per line per log.
-	// Limit: Maximum number of logs. Example of value: 5.Note: This field may return null, indicating that no valid values can be obtained.
+	// QueryIndex: Serial number of execution statement. value supports -1: custom; 1: execution statement 1; 2: execution statement 2.
+	// CustomQuery: Query statement. Required and valid when QueryIndex is -1. Example of value: "* | select count(*) as count".
+	// Fields: field. value supports __SOURCE__, __FILENAME__, __HOSTNAME__, __TIMESTAMP__, __INDEX_STATUS__, __PKG_LOGID__, __TOPIC__.
+	// Format: Display Format. value supports 1: one log per line; 2: one field per line for each log entry.
+	// Limit: Maximum number of logs. Example of value: 5.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Value.
 	// Key corresponds to the following values:
 	// SyntaxRule: Syntax rule, value supports 0: Lucene syntax; 1: CQL syntax.
-	// QueryIndex: Serial number of execution statement. Value supports -1: Custom; 1: Execute Statement 1; 2: Execute Statement 2.CustomQuery: Search statement. Valid and required when QueryIndex is -1, example of value: "* | select count(*) as count".Fields: Fields. Value supports __SOURCE__; __FILENAME__; __HOSTNAME__; __TIMESTAMP__; __INDEX_STATUS__; __PKG_LOGID__; __TOPIC__.Format: Display format. Value supports 1: One log per line; 2: One field per line per log.Limit: Maximum number of logs. Example of value: 5.Note: This field may return null, indicating that no valid values can be obtained.
+	// QueryIndex: Serial number of execution statement. value supports -1: custom; 1: execution statement 1; 2: execution statement 2.
+	// CustomQuery: Query statement. Required and valid when QueryIndex is -1. Example of value: "* | select count(*) as count".
+	// Fields: field. value supports __SOURCE__, __FILENAME__, __HOSTNAME__, __TIMESTAMP__, __INDEX_STATUS__, __PKG_LOGID__, __TOPIC__.
+	// Format: Display Format. value supports 1: one log per line; 2: one field per line for each log entry.
+	// Limit: Maximum number of logs. Example of value: 5.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
@@ -116,7 +160,7 @@ type AlarmInfo struct {
 	// Monitoring task running time point
 	MonitorTime *MonitorTime `json:"MonitorTime,omitnil,omitempty" name:"MonitorTime"`
 
-	// Single trigger condition. Mutually exclusive with the MultiConditions parameter.
+	// Single trigger condition for whether to trigger alarm. Mutually exclusive with the MultiConditions parameter.
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
 	// Alarm persistence cycle. An alarm will be triggered only after the corresponding trigger condition is met for the number of times specified by `TriggerCount`. Value range: 1–10.
@@ -125,7 +169,7 @@ type AlarmInfo struct {
 	// Repeated alarm interval in minutes. Value range: 0–1440.
 	AlarmPeriod *int64 `json:"AlarmPeriod,omitnil,omitempty" name:"AlarmPeriod"`
 
-	// List of associated alarm notification templates
+	// List of associated alarm notification channel groups. - Search the list of associated alarm notification channel groups via [Query notification channel group list](https://www.tencentcloud.com/document/product/614/56462?from_cn_redirect=1). It is mutually exclusive with MonitorNotice.
 	AlarmNoticeIds []*string `json:"AlarmNoticeIds,omitnil,omitempty" name:"AlarmNoticeIds"`
 
 	// Enablement status
@@ -134,10 +178,10 @@ type AlarmInfo struct {
 	// Alarm policy ID
 	AlarmId *string `json:"AlarmId,omitnil,omitempty" name:"AlarmId"`
 
-	// Creation time
+	// Creation time. Format: YYYY-MM-DD HH:MM:SS
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Last update time
+	// Latest update time. Format: YYYY-MM-DD HH:MM:SS
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Custom notification template
@@ -145,59 +189,126 @@ type AlarmInfo struct {
 	MessageTemplate *string `json:"MessageTemplate,omitnil,omitempty" name:"MessageTemplate"`
 
 	// Custom callback template
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	CallBack *CallBackInfo `json:"CallBack,omitnil,omitempty" name:"CallBack"`
 
-	// Multi-Dimensional analysis settings
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Multidimensional analysis settings
 	Analysis []*AnalysisDimensional `json:"Analysis,omitnil,omitempty" name:"Analysis"`
 
-	// Group trigger status. 1: Enabled, 0: Disabled (default)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Group trigger status. true: enabled, false: disabled (default)
 	GroupTriggerStatus *bool `json:"GroupTriggerStatus,omitnil,omitempty" name:"GroupTriggerStatus"`
 
-	// Group Trigger ConditionsNote: This field may return null, indicating that no valid values can be obtained.
+	// Grouping Trigger Conditions.
 	GroupTriggerCondition []*string `json:"GroupTriggerCondition,omitnil,omitempty" name:"GroupTriggerCondition"`
 
-	// Type of the monitored object. 0: common monitoring objects for execution statements; 1: separately selected monitoring objects for each execution statement.Note: This field may return null, indicating that no valid values can be obtained.
+	// Tag information bound to the alarm policy.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Monitored object type. 0: shared monitored object for execution statements; 1: separate monitored object for each execution statement. 
 	MonitorObjectType *uint64 `json:"MonitorObjectType,omitnil,omitempty" name:"MonitorObjectType"`
 
-	// Alarm severity. 0: warning (Warn); 1: Reminder (Info); 2: urgent (Critical).Note: This field may return null, indicating that no valid values can be obtained.
+	// Alarm level. 0: Warn; 1: Information; 2: Critical.
 	AlarmLevel *uint64 `json:"AlarmLevel,omitnil,omitempty" name:"AlarmLevel"`
 
-	// Multiple trigger conditions. Exclusive with Condition.Note: This field may return null, indicating that no valid values can be obtained.
+	// Additional classification field for alerts.
+	Classifications []*AlarmClassification `json:"Classifications,omitnil,omitempty" name:"Classifications"`
+
+	// Multiple trigger conditions.
+	// Mutually exclusive conditions.
 	MultiConditions []*MultiCondition `json:"MultiConditions,omitnil,omitempty" name:"MultiConditions"`
+
+	// Tencent Cloud observability platform channel-related information, mutually exclusive with AlarmNoticeIds
+	MonitorNotice *MonitorNotice `json:"MonitorNotice,omitnil,omitempty" name:"MonitorNotice"`
 }
 
 type AlarmNotice struct {
-	// Alarm notification template name
+	// Alarm notification channel group name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Tag information bound to the alarm notification channel group.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Alarm template type. Optional values:<br><li> Trigger - Alarm Trigger </li><br><li> Recovery - Alarm Recovery </li><br><li> All - Alarm Trigger and Alarm Recovery </li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Information of the recipient in alarm notification template
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Alarm notification template recipient information.
 	NoticeReceivers []*NoticeReceiver `json:"NoticeReceivers,omitnil,omitempty" name:"NoticeReceivers"`
 
-	// Callback information of alarm notification template
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Callback information of alarm notification template.
 	WebCallbacks []*WebCallback `json:"WebCallbacks,omitnil,omitempty" name:"WebCallbacks"`
 
-	// Alarm notification template ID
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Alarm notification template ID.
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitnil,omitempty" name:"AlarmNoticeId"`
 
-	// Creation time
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Notification rules.
+	NoticeRules []*NoticeRule `json:"NoticeRules,omitnil,omitempty" name:"NoticeRules"`
+
+	// Login-free operation alarm switch.
+	// Parameter value: 1: Turn off 2: Turn on (enabled by default)
+	AlarmShieldStatus *uint64 `json:"AlarmShieldStatus,omitnil,omitempty" name:"AlarmShieldStatus"`
+
+	// Call link domain name. It must start with http:// or https:// and must not end with /.
+	JumpDomain *string `json:"JumpDomain,omitnil,omitempty" name:"JumpDomain"`
+
+	// Shipping-related information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AlarmNoticeDeliverConfig *AlarmNoticeDeliverConfig `json:"AlarmNoticeDeliverConfig,omitnil,omitempty" name:"AlarmNoticeDeliverConfig"`
+
+	// Creation time. Format: YYYY-MM-DD HH:MM:SS
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Last update time
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Latest update time. Format: YYYY-MM-DD HH:MM:SS
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Notification rules.Note: This field may return null, indicating that no valid values can be obtained.
-	NoticeRules []*NoticeRule `json:"NoticeRules,omitnil,omitempty" name:"NoticeRules"`
+	// Delivery log switch.
+	// 
+	// Parameter value:
+	// 
+	// 1: Disabled
+	// 
+	// 2: enable 
+	DeliverStatus *uint64 `json:"DeliverStatus,omitnil,omitempty" name:"DeliverStatus"`
+
+	// Delivery log flag.
+	// 
+	// Parameter value:
+	// 
+	// 1: Disabled
+	// 
+	// 2: Enabled
+	// 
+	// 3: Delivery exception
+	DeliverFlag *uint64 `json:"DeliverFlag,omitnil,omitempty" name:"DeliverFlag"`
+
+	// Alarm silence status quantity information configured for a notification channel group.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AlarmShieldCount *AlarmShieldCount `json:"AlarmShieldCount,omitnil,omitempty" name:"AlarmShieldCount"`
+
+	// Unify the setting of custom callback parameters.
+	// -true: Use the custom callback parameters in the notification content template to override the request header and request body separately configured in the alarm policy.
+	// -false: Prioritize using the request header and request body separately configured in the alarm policy.
+	CallbackPrioritize *bool `json:"CallbackPrioritize,omitnil,omitempty" name:"CallbackPrioritize"`
+}
+
+type AlarmNoticeDeliverConfig struct {
+	// Log shipping configuration information of a notification channel.
+	DeliverConfig *DeliverConfig `json:"DeliverConfig,omitnil,omitempty" name:"DeliverConfig"`
+
+	// Shipping failure reason.
+	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
+}
+
+type AlarmShieldCount struct {
+	// Total number of alarm silence policies that meet the search conditions.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Number of ineffective alarm silence policies.
+	InvalidCount *uint64 `json:"InvalidCount,omitnil,omitempty" name:"InvalidCount"`
+
+	// Number of effective alarm silence policies.
+	ValidCount *uint64 `json:"ValidCount,omitnil,omitempty" name:"ValidCount"`
+
+	// Number of expired alarm silence policies.
+	ExpireCount *uint64 `json:"ExpireCount,omitnil,omitempty" name:"ExpireCount"`
 }
 
 type AlarmShieldInfo struct {
@@ -216,7 +327,7 @@ type AlarmShieldInfo struct {
 	// Block type. 1: Block all notifications, 2: Block matching rules notifications according to the Rule parameter.
 	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Rule for shielding, mandatory when Type is 2. See Product Documentation (https://intl.cloud.tencent.com/document/product/614/103178?from_cn_redirect=1#rule) for rule writing details.Note: This field may return null, indicating that no valid values can be obtained.
+	// Blocking rules, required when Type is 2. For detailed information on filling in rules, see [Product Documentation](https://www.tencentcloud.com/document/product/614/103178?from_cn_redirect=1#rule).
 	Rule *string `json:"Rule,omitnil,omitempty" name:"Rule"`
 
 	// Blocking reason.
@@ -233,34 +344,35 @@ type AlarmShieldInfo struct {
 	// 0: Not yet effective; 1: In effect; 2: Expired
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Rule Creation Time.
+	// Rule creation time. Unix second-level timestamp (s).
 	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Rule Update Time.
+	// Rule update time. Unix second-level timestamp (s).
 	UpdateTime *uint64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 type AlarmTarget struct {
-	// Log topic IDNote: This field may return null, indicating that no valid values can be obtained.
+	// Log topic ID. Obtain the log topic ID through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Query statementNote: This field may return null, indicating that no valid values can be obtained.
+	// Query statement.
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
-	// Serial number of alarm object, which is incremental from 1.Note: This field may return null, indicating that no valid values can be obtained.
+	// Alarm object SN. It starts from 1 and increments.
 	Number *int64 `json:"Number,omitnil,omitempty" name:"Number"`
 
-	// Offset of the query start time from the alarm execution time in minutes. The value cannot be positive. Maximum value: 0. Minimum value: -1440.Note: This field may return null, indicating that no valid values can be obtained.
+	// Offset of the start time of the query time range from alarm execution time, in minutes. The value cannot be positive. Maximum value: 0. Minimum value: -1,440.
 	StartTimeOffset *int64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// Offset of the query end time from the alarm execution time in minutes. The value cannot be positive and must be greater than StartTimeOffset. Maximum value: 0. Minimum value: -1440.Note: This field may return null, indicating that no valid values can be obtained.
+	// Offset of the end time of the query time range from alarm execution time, in minutes. The value cannot be positive and should be greater than StartTimeOffset. Maximum value: 0. Minimum value: -1440.
 	EndTimeOffset *int64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// Logset IDNote: This field may return null, indicating that no valid values can be obtained.
+	// Logset ID. Obtain the logset ID through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
-	// Search syntax rules; default value: 0.0: Lucene syntax; 1: CQL syntax.For detailed instructions, see <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">Search Condition Syntax Rules</a>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Search syntax rules. Default value is 0.
+	// 0: Lucene syntax; 1: CQL syntax.
+	// For detailed explanation, refer to <a href="https://www.tencentcloud.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">Retrieve Syntax Rules</a>
 	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
 }
 
@@ -288,6 +400,15 @@ type AlarmTargetInfo struct {
 
 	// Offset of the query end time from the alarm execution time in minutes. The value cannot be positive and must be greater than `StartTimeOffset`. Value range: -1440–0.
 	EndTimeOffset *int64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
+
+	// Retrieval syntax rules. Default value is 0.
+	// 0: Lucene syntax; 1: CQL syntax.
+	// For detailed explanation, refer to <a href="https://www.tencentcloud.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">Retrieve Syntax Rules</a>
+	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
+
+	// Topic type.
+	// 0: log topic; 1: metric topic
+	BizType *uint64 `json:"BizType,omitnil,omitempty" name:"BizType"`
 }
 
 type AlertHistoryNotice struct {
@@ -323,107 +444,127 @@ type AlertHistoryRecord struct {
 	// Number of cycles for which the alarm lasts. An alarm will be triggered only after the trigger condition is met for the number of cycles specified by `TriggerCount`.
 	TriggerCount *int64 `json:"TriggerCount,omitnil,omitempty" name:"TriggerCount"`
 
-	// Alarm notification frequency (minutes)
+	// Alert notification sent frequency, in minutes
 	AlarmPeriod *int64 `json:"AlarmPeriod,omitnil,omitempty" name:"AlarmPeriod"`
 
 	// Notification group
 	Notices []*AlertHistoryNotice `json:"Notices,omitnil,omitempty" name:"Notices"`
 
-	// Alarm duration (minutes)
+	// Duration of the alarm in minutes
 	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// Alarm status. Valid values: `0` (uncleared), `1` (cleared), `2` (expired)
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Alarm generation time, which is a Unix timestamp in ms
+	// Alarm occurrence time, Unix timestamp in milliseconds (ms)
 	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Group information corresponding to triggering by group
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Corresponding group information when alarm grouping is triggered
 	GroupTriggerCondition []*GroupTriggerConditionInfo `json:"GroupTriggerCondition,omitnil,omitempty" name:"GroupTriggerCondition"`
 
-	// Alarm severity. Valid values: `0` (Warn), `1` (Info), `2` (Critical)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Alarm level. 0: warning (Warn); 1: reminder (Info); 2: urgent (Critical).
 	AlarmLevel *uint64 `json:"AlarmLevel,omitnil,omitempty" name:"AlarmLevel"`
 
-	// Type of the monitored object
-	// `0`: The same object is specified for all statements. `1`: An object is separately specified for each statement. 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Monitored object type.
+	// `0`: The same object is specified for all statements. `1`: An object is separately specified for each statement.
 	MonitorObjectType *uint64 `json:"MonitorObjectType,omitnil,omitempty" name:"MonitorObjectType"`
+
+	// Notification channel type. 0 represents the internal notification channel of cls. 1 represents the Tencent Cloud observability platform notification channel.
+	SendType *uint64 `json:"SendType,omitnil,omitempty" name:"SendType"`
 }
 
 type AnalysisDimensional struct {
-	// Analysis name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Analysis Name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Type of data being analyzed. Valid values: `query`, `field`, `original`
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Analysis type: query (custom retrieval and analysis), field (TOP5 fields and proportion statistics), original (related raw logs)
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Analysis content
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// Multi-dimensional analysis configuration.
 	// 
-	// Supported when the type field of Analysis is query (custom){
-	// "Key": "SyntaxRule", // Syntax rules"Value": "1" // 0: Lucene syntax, 1: CQL syntax}
+	// When the Type field of Analysis is query (custom), support
+	// {
+	// "Key": "SyntaxRule",  // Syntax rule
+	// "Value": "1"  //0: Lucene syntax, 1: CQL syntax
+	// }
 	// 
-	// Supported when the Type field of Analysis is field (top5) {
+	// When the Type field of Analysis is field (top5), it supports
+	//  {
 	//     "Key": "QueryIndex",
-	// "Value": "-1" // -1: Custom, 1: Execute Statement 1, 2: Execute Statement 2},{
-	// "Key": "CustomQuery", // Search statement. Valid and required when QueryIndex is -1    "Value": "* | select count(*) as count"
+	// "Value": "-1" // -1: Custom, 1: Execute statement 1, 2: Execute statement 2
+	// },{
+	// "Key": "CustomQuery", //Query statement. Required and valid when QueryIndex is -1.
+	//     "Value": "* | select count(*) as count"
 	// },{
 	// "Key": "SyntaxRule", // If this field cannot be found, it's assumed to be the legacy syntax (Lucene)
 	//     "Value": "0"//0:Lucene, 1:CQL
 	// }       
 	// 
-	// When the Type field of Analysis is original (original log), it supports
+	// When the Type field of Analysis is original (raw log), it supports
 	// {
 	//     "Key": "Fields",
 	//     "Value": "__SOURCE__,__HOSTNAME__,__TIMESTAMP__,__PKG_LOGID__,__TAG__.pod_ip"
 	// }, {
 	//     "Key": "QueryIndex",
-	// "Value": "-1" // -1: Custom, 1: Execute Statement 1, 2: Execute Statement 2},{
-	// "Key": "CustomQuery", // //Search statement. Valid and required when QueryIndex is -1    "Value": "* | select count(*) as count"
+	// "Value": "-1" // -1: Custom, 1: Execute statement 1, 2: Execute statement 2
 	// },{
-	// "Key": "Format", // Display format. 1: One log per line, 2: One field per line for each log    "Value": "2"
+	// "Key": "CustomQuery", // Retrieval statement. Required and valid when QueryIndex is -1.
+	//     "Value": "* | select count(*) as count"
+	// },{
+	// "Key": "Format", //Display format. 1: one log per line, 2: one field per line for each log entry
+	//     "Value": "2"
 	// },
 	// {
-	// "Key": "Limit", // Maximum number of logs    "Value": "5"
+	// "Key": "Limit", //Maximum number of logs
+	//     "Value": "5"
 	// },{
-	// "Key": "SyntaxRule", // If this field cannot be found, it's considered the legacy syntax
+	// "Key": "SyntaxRule", // If this field is not found, it's also the old syntax
 	//     "Value": "0"//0:Lucene, 1:CQL
 	// }
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConfigInfo []*AlarmAnalysisConfig `json:"ConfigInfo,omitnil,omitempty" name:"ConfigInfo"`
 }
 
 type AnonymousInfo struct {
-	// Operation list supports trackLog (JS/HTTP log upload) and realtimeProducer (kafka protocol log upload).
+	// Operation list. Valid values: trackLog: log upload through JS/HTTP; realtimeProducer: log upload through Kafka protocol.
 	Operations []*string `json:"Operations,omitnil,omitempty" name:"Operations"`
 
-	// Condition list
+	// List of conditions.
 	Conditions []*ConditionInfo `json:"Conditions,omitnil,omitempty" name:"Conditions"`
+}
+
+type AnonymousLoginInfo struct {
+	// <p>Anonymous login account secretId</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SecretId *string `json:"SecretId,omitnil,omitempty" name:"SecretId"`
+
+	// <p>Anonymous login account secretKey</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
 }
 
 // Predefined struct for user
 type ApplyConfigToMachineGroupRequestParams struct {
-	// Collection configuration ID
+	// Collection Configuration ID
+	// -Obtain the collection configuration Id through [Access collection rule configuration](https://www.tencentcloud.com/document/product/614/58616?from_cn_redirect=1).
 	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
 
 	// Machine group ID
+	// -Get the machine group Id by searching the [machine group list](https://www.tencentcloud.com/document/api/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
 type ApplyConfigToMachineGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Collection configuration ID
+	// Collection Configuration ID
+	// -Obtain the collection configuration Id through [Access collection rule configuration](https://www.tencentcloud.com/document/product/614/58616?from_cn_redirect=1).
 	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
 
 	// Machine group ID
+	// -Get the machine group Id by searching the [machine group list](https://www.tencentcloud.com/document/api/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
@@ -469,21 +610,243 @@ func (r *ApplyConfigToMachineGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AppointLabel struct {
+	// Specify the tag type.
+	// 
+	// -0: ALL Pod labels, invalid field Keys
+	// -Specify the Pod label. The Keys field cannot be empty.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// The key of the metadata Pod tag. A valid tag key has two parts: an optional prefix and a name, separated by a slash (/). The name part is necessary and must be no more than 63 characters, starting and ending with alphanumeric characters ([a-z0-9A-Z]), with hyphens (-), underscores (_), dots (.), and alphanumerics in the middle. The prefix is optional. If specified, the prefix must be a DNS subdomain: a series of DNS labels separated by dots (.), with a total length not exceeding 253 characters, followed by a slash (/).
+	// 
+	// -Format of prefix: `[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*`
+	// -name format `([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]`
+	// -key must be unique
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Keys []*string `json:"Keys,omitnil,omitempty" name:"Keys"`
+}
+
+type AuthRoleInfo struct {
+	// <p>Auth role name</p>
+	RoleName *string `json:"RoleName,omitnil,omitempty" name:"RoleName"`
+
+	// <p>SecretId of the permission corresponding to the Auth role</p>
+	SecretId *string `json:"SecretId,omitnil,omitempty" name:"SecretId"`
+
+	// <p>SecretKey of the permission corresponding to the Auth role</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
+}
+
+type BaseMetricCollectConfig struct {
+	// Machine group ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Basic monitoring collection configuration information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Configs []*MetricCollectConfig `json:"Configs,omitnil,omitempty" name:"Configs"`
+}
+
 type CallBackInfo struct {
-	// `Body` during callback
+	// Callback Body.
+	// Place various alarm variables in the request content. For details, see the help documentation (https://www.tencentcloud.com/document/product/614/74718?from_cn_redirect=1).
+	// in the following example:
+	// 
+	// ```
+	// {
+	// "TopicId": "{{ .QueryLog[0][0].topicId }}",
+	// "key": "{{.Alarm}}",
+	// "time": "{{ .QueryLog[0][0].time }}",
+	// "log": "{{ .QueryLog[0][0].content.__CONTENT__ }}",
+	// "namespace": "{{ .QueryLog[0][0].content.__TAG__.namespace }}"
+	// }
+	// ```
 	Body *string `json:"Body,omitnil,omitempty" name:"Body"`
 
-	// `Headers` during callback
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// HTTP request header field for callbacks.
+	// For example, the following request header field informs the server request content type is JSON.
+	// ```
+	// "Content-Type: application/json"
+	// ```
 	Headers []*string `json:"Headers,omitnil,omitempty" name:"Headers"`
 }
 
 // Predefined struct for user
+type CancelRebuildIndexTaskRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Reindexing task ID
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type CancelRebuildIndexTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Reindexing task ID
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *CancelRebuildIndexTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CancelRebuildIndexTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CancelRebuildIndexTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CancelRebuildIndexTaskResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CancelRebuildIndexTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CancelRebuildIndexTaskResponseParams `json:"Response"`
+}
+
+func (r *CancelRebuildIndexTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CancelRebuildIndexTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ChatCompletionsRequestParams struct {
+	// <p>Feature name</p><p>Enumeration value:</p><ul><li>text2sql: Intelligent generation of retrieval analysis statement</li><li>text2sql-reasoning: Intelligent generation of retrieval analysis statement - deep thinking</li></ul>
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// <p>Chat context information.<br>Description:</p><ol><li>The maximum length is 11 (5 historical sessions + new user question), arranged in the array in chronological order from old to new. Session data beyond this length will be discarded.</li><li>Message.Role available values: user, assistant.<br>user and assistant must alternate, starting with a user question and ending with a user question. Content cannot be empty. Example of Role order: [user assistant user assistant user ...].</li></ol>
+	Messages []*Message `json:"Messages,omitnil,omitempty" name:"Messages"`
+
+	// <p>Streaming call switch.<br>Description:</p><ol><li>Defaults to non-streaming call (false) when no value is passed.</li><li>In streaming calls, results are incrementally returned via SSE protocol (return value is taken from Choices[n].Delta, and incremental data needs to be concatenated to obtain the complete result).</li><li>In non-streaming calls:<br>The calling method is the same as a regular HTTP request.<br>API response is time-consuming. If reduced latency is needed, set it to true.<br>Only the final result is returned once (return value is taken from Choices[n].Message).</li></ol><p>Note:</p><ol><li>When calling via SDK, streaming and non-streaming calls require different ways to obtain return values. Refer to comments or examples in the SDK (in the examples/cls/v20201016/ directory of each language SDK code repository).</li><li>Partial content may have been output, but if the FinishReason value in an intermediate response is "sensitive", it indicates the security review was not passed. If the business scenario requires real-time text display on the screen, manually withdraw the displayed content and customize a replacement reminder, such as "I can't answer this question. Let's try another topic", to ensure terminal experience.</li></ol>
+	Stream *bool `json:"Stream,omitnil,omitempty" name:"Stream"`
+
+	// <p>Additional metadata information. For example: [{"Key":"topic_id","Value":"xxxxxxxx-xxxx"},{"Key":"topic_region","Value":"ap-guangzhou"}]</p><p>It is recommended to transmit metadata information as per the example, otherwise it may cause inaccurate results. For example, in text2sql, not passing topic_id or topic_region will lead to unable to generate accurate query statements based on the log topic index.</p>
+	Metadata []*MetadataItem `json:"Metadata,omitnil,omitempty" name:"Metadata"`
+}
+
+type ChatCompletionsRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Feature name</p><p>Enumeration value:</p><ul><li>text2sql: Intelligent generation of retrieval analysis statement</li><li>text2sql-reasoning: Intelligent generation of retrieval analysis statement - deep thinking</li></ul>
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// <p>Chat context information.<br>Description:</p><ol><li>The maximum length is 11 (5 historical sessions + new user question), arranged in the array in chronological order from old to new. Session data beyond this length will be discarded.</li><li>Message.Role available values: user, assistant.<br>user and assistant must alternate, starting with a user question and ending with a user question. Content cannot be empty. Example of Role order: [user assistant user assistant user ...].</li></ol>
+	Messages []*Message `json:"Messages,omitnil,omitempty" name:"Messages"`
+
+	// <p>Streaming call switch.<br>Description:</p><ol><li>Defaults to non-streaming call (false) when no value is passed.</li><li>In streaming calls, results are incrementally returned via SSE protocol (return value is taken from Choices[n].Delta, and incremental data needs to be concatenated to obtain the complete result).</li><li>In non-streaming calls:<br>The calling method is the same as a regular HTTP request.<br>API response is time-consuming. If reduced latency is needed, set it to true.<br>Only the final result is returned once (return value is taken from Choices[n].Message).</li></ol><p>Note:</p><ol><li>When calling via SDK, streaming and non-streaming calls require different ways to obtain return values. Refer to comments or examples in the SDK (in the examples/cls/v20201016/ directory of each language SDK code repository).</li><li>Partial content may have been output, but if the FinishReason value in an intermediate response is "sensitive", it indicates the security review was not passed. If the business scenario requires real-time text display on the screen, manually withdraw the displayed content and customize a replacement reminder, such as "I can't answer this question. Let's try another topic", to ensure terminal experience.</li></ol>
+	Stream *bool `json:"Stream,omitnil,omitempty" name:"Stream"`
+
+	// <p>Additional metadata information. For example: [{"Key":"topic_id","Value":"xxxxxxxx-xxxx"},{"Key":"topic_region","Value":"ap-guangzhou"}]</p><p>It is recommended to transmit metadata information as per the example, otherwise it may cause inaccurate results. For example, in text2sql, not passing topic_id or topic_region will lead to unable to generate accurate query statements based on the log topic index.</p>
+	Metadata []*MetadataItem `json:"Metadata,omitnil,omitempty" name:"Metadata"`
+}
+
+func (r *ChatCompletionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ChatCompletionsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Model")
+	delete(f, "Messages")
+	delete(f, "Stream")
+	delete(f, "Metadata")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ChatCompletionsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ChatCompletionsResponseParams struct {
+	// <p>Unix timestamp, in seconds.</p>
+	Created *uint64 `json:"Created,omitnil,omitempty" name:"Created"`
+
+	// <p>Token statistical information.</p>
+	Usage *ChatUsage `json:"Usage,omitnil,omitempty" name:"Usage"`
+
+	// <p>Id of the current request.</p>
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// <p>Reply content.</p>
+	Choices []*Choice `json:"Choices,omitnil,omitempty" name:"Choices"`
+
+	// <p>Feature name</p><p>Enumeration value:</p><ul><li>text2sql: Intelligent generation of retrieval analysis statement</li><li>text2sql-reasoning: Intelligent generation of retrieval analysis statement - deep thinking</li></ul>
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem. As a streaming response API, when the request is successfully completed, the RequestId will be placed in the Header "X-TC-RequestId" of the HTTP response.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ChatCompletionsResponse struct {
+	tchttp.BaseSSEResponse `json:"-"`
+	Response *ChatCompletionsResponseParams `json:"Response"`
+}
+
+func (r *ChatCompletionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ChatCompletionsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ChatUsage struct {
+	// Number of input tokens.
+	PromptTokens *int64 `json:"PromptTokens,omitnil,omitempty" name:"PromptTokens"`
+
+	// Number of output tokens.
+	CompletionTokens *int64 `json:"CompletionTokens,omitnil,omitempty" name:"CompletionTokens"`
+
+	// Total number of tokens.
+	TotalTokens *int64 `json:"TotalTokens,omitnil,omitempty" name:"TotalTokens"`
+}
+
+// Predefined struct for user
 type CheckFunctionRequestParams struct {
-	// Processing statement entered by the user
+	// Processing statement. When FuncType is 2, EtlContent must use [log_auto_output](https://www.tencentcloud.com/document/product/614/70733?from_cn_redirect=1#b3c58797-4825-4807-bef4-68106e25024f). 
+	// 
+	// Other reference documents
+	// 
+	// -[Create processing task](https://www.tencentcloud.com/document/product/614/63940?from_cn_redirect=1) 
+	// -[Function overview](https://www.tencentcloud.com/document/product/614/70395?from_cn_redirect=1)
 	EtlContent *string `json:"EtlContent,omitnil,omitempty" name:"EtlContent"`
 
-	// Target topic ID and alias of the data processing task
+	// Target topic_id and alias of the processing task. This parameter is required when FuncType is 1.
+	// Obtain the target log topic ID through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	DstResources []*DataTransformResouceInfo `json:"DstResources,omitnil,omitempty" name:"DstResources"`
 
 	// Type of the target topic for data processing. Valid values: 1 (fixed Topic) and 2 (dynamic creation)
@@ -493,10 +856,16 @@ type CheckFunctionRequestParams struct {
 type CheckFunctionRequest struct {
 	*tchttp.BaseRequest
 	
-	// Processing statement entered by the user
+	// Processing statement. When FuncType is 2, EtlContent must use [log_auto_output](https://www.tencentcloud.com/document/product/614/70733?from_cn_redirect=1#b3c58797-4825-4807-bef4-68106e25024f). 
+	// 
+	// Other reference documents
+	// 
+	// -[Create processing task](https://www.tencentcloud.com/document/product/614/63940?from_cn_redirect=1) 
+	// -[Function overview](https://www.tencentcloud.com/document/product/614/70395?from_cn_redirect=1)
 	EtlContent *string `json:"EtlContent,omitnil,omitempty" name:"EtlContent"`
 
-	// Target topic ID and alias of the data processing task
+	// Target topic_id and alias of the processing task. This parameter is required when FuncType is 1.
+	// Obtain the target log topic ID through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	DstResources []*DataTransformResouceInfo `json:"DstResources,omitnil,omitempty" name:"DstResources"`
 
 	// Type of the target topic for data processing. Valid values: 1 (fixed Topic) and 2 (dynamic creation)
@@ -554,39 +923,51 @@ func (r *CheckFunctionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CheckRechargeKafkaServerRequestParams struct {
-	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka).
+	// Import Kafka type. 0: Tencent Cloud CKafka; 1: user-built kafka.
 	KafkaType *uint64 `json:"KafkaType,omitnil,omitempty" name:"KafkaType"`
 
-	// Tencent Cloud CKafka Instance IDWhen KafkaType is 0, KafkaInstance is required
+	// Tencent Cloud CKafka instance ID.
+	// When KafkaType is 0, KafkaInstance is required
+	// 
+	// - Obtain the instance id by searching the instance list information (https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
 	KafkaInstance *string `json:"KafkaInstance,omitnil,omitempty" name:"KafkaInstance"`
 
 	// Service AddressWhen KafkaType is 1, ServerAddr is required
 	ServerAddr *string `json:"ServerAddr,omitnil,omitempty" name:"ServerAddr"`
 
-	// Whether the service address uses an encrypted connection
+	// Whether ServerAddr is an encrypted connection. The default value is false. It is valid when KafkaType is 1, indicating a user self-built Kafka.
 	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitnil,omitempty" name:"IsEncryptionAddr"`
 
-	// Encryption access protocol. Required when IsEncryptionAddr parameter is set to true
+	// Encrypted access protocol. It is required when the parameter KafkaType is 1 and the parameter IsEncryptionAddr is true.
 	Protocol *KafkaProtocolInfo `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// User kafka extended information
+	UserKafkaMeta *UserKafkaMeta `json:"UserKafkaMeta,omitnil,omitempty" name:"UserKafkaMeta"`
 }
 
 type CheckRechargeKafkaServerRequest struct {
 	*tchttp.BaseRequest
 	
-	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka).
+	// Import Kafka type. 0: Tencent Cloud CKafka; 1: user-built kafka.
 	KafkaType *uint64 `json:"KafkaType,omitnil,omitempty" name:"KafkaType"`
 
-	// Tencent Cloud CKafka Instance IDWhen KafkaType is 0, KafkaInstance is required
+	// Tencent Cloud CKafka instance ID.
+	// When KafkaType is 0, KafkaInstance is required
+	// 
+	// - Obtain the instance id by searching the instance list information (https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
 	KafkaInstance *string `json:"KafkaInstance,omitnil,omitempty" name:"KafkaInstance"`
 
 	// Service AddressWhen KafkaType is 1, ServerAddr is required
 	ServerAddr *string `json:"ServerAddr,omitnil,omitempty" name:"ServerAddr"`
 
-	// Whether the service address uses an encrypted connection
+	// Whether ServerAddr is an encrypted connection. The default value is false. It is valid when KafkaType is 1, indicating a user self-built Kafka.
 	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitnil,omitempty" name:"IsEncryptionAddr"`
 
-	// Encryption access protocol. Required when IsEncryptionAddr parameter is set to true
+	// Encrypted access protocol. It is required when the parameter KafkaType is 1 and the parameter IsEncryptionAddr is true.
 	Protocol *KafkaProtocolInfo `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// User kafka extended information
+	UserKafkaMeta *UserKafkaMeta `json:"UserKafkaMeta,omitnil,omitempty" name:"UserKafkaMeta"`
 }
 
 func (r *CheckRechargeKafkaServerRequest) ToJsonString() string {
@@ -606,6 +987,7 @@ func (r *CheckRechargeKafkaServerRequest) FromJsonString(s string) error {
 	delete(f, "ServerAddr")
 	delete(f, "IsEncryptionAddr")
 	delete(f, "Protocol")
+	delete(f, "UserKafkaMeta")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckRechargeKafkaServerRequest has unknown keys!", "")
 	}
@@ -614,8 +996,20 @@ func (r *CheckRechargeKafkaServerRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CheckRechargeKafkaServerResponseParams struct {
-	// Kafka cluster accessibility. 0: Accessible.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Accessibility status of the Kafka cluster.
+	// 
+	// -0: Normal access. 
+	// -1: broker connection failure
+	// -2: sasl authentication failure
+	// -3: ckafka role not authorized
+	// -4: topic list does not exist.
+	// -5: No data available in the topic.
+	// -6: User has no ckafka permission.
+	// -7: The consumption group already exists.
+	// -8: The kafka instance does not exist or is terminated.
+	// -9: Broker list is empty
+	// -10: Incorrect Broker address format.
+	// -11: Broker port is not an integer.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -638,36 +1032,68 @@ func (r *CheckRechargeKafkaServerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Choice struct {
+	// <p>End flag, which may be stop, sensitive, or tool_calls.<br>stop means the output ends normally.<br>sensitive means the security review is not passed.<br>tool_calls identifies a function call.</p><p>Note:<br>Partial content may have been output, but if the FinishReason value in the middle of the response is sensitive, it means the security review is not passed. If the business scenario requires real-time text display on the screen, manually withdraw the displayed content and recommend replacing it with a custom reminder, such as "I can't answer this issue. Let's try another topic," to ensure terminal experience.</p>
+	FinishReason *string `json:"FinishReason,omitnil,omitempty" name:"FinishReason"`
+
+	// <p>Incremental return value. This field is used when streaming.</p>
+	Delta *Delta `json:"Delta,omitnil,omitempty" name:"Delta"`
+
+	// <p>Return value, used when Non-streaming calls.</p>
+	Message *Message `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// <p>Index value. This field is used when streaming.</p>
+	Index *int64 `json:"Index,omitnil,omitempty" name:"Index"`
+}
+
 type Ckafka struct {
-	// CKafka VIP
-	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
-
-	// CKafka Vport
-	Vport *string `json:"Vport,omitnil,omitempty" name:"Vport"`
-
-	// CKafka instance ID
+	// InstanceId of Ckafka.
+	// - Obtain the instance id by searching the instance list information (https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
+	// - Obtain the instance id by [creating an instance](https://www.tencentcloud.com/document/product/597/53207?from_cn_redirect=1).
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// CKafka instance name
+	// TopicName of Ckafka
+	// -Obtain the TopicName by creating a topic (https://www.tencentcloud.com/document/product/597/73566?from_cn_redirect=1).
+	// -Obtain the TopicName through [Get Topic List](https://www.tencentcloud.com/document/product/597/40847?from_cn_redirect=1).
+	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+
+	// Vip of Ckafka.
+	// - Obtain vip information by searching the instance attributes (https://www.tencentcloud.com/document/product/597/40836?from_cn_redirect=1).
+	// -If the delivery task is created via the role ARN method, the Vip field can be empty.
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
+
+	// Vport of Ckafka.
+	// -Obtain vip port information by [obtaining instance attributes](https://www.tencentcloud.com/document/product/597/40836?from_cn_redirect=1).
+	// -If it is created by the role ARN method, the Vport field can be empty.
+	Vport *string `json:"Vport,omitnil,omitempty" name:"Vport"`
+
+	// InstanceName of Ckafka.
+	// - Obtain the InstanceName by searching the instance list information (https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
+	// -Get InstanceName by [creating an instance](https://www.tencentcloud.com/document/product/597/53207?from_cn_redirect=1).
+	// - If the delivery task is created via the role ARN method, the InstanceName field can be empty.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// CKafka topic ID
+	// Topic ID of Ckafka.
+	// -Obtain the TopicId by creating a topic (https://www.tencentcloud.com/document/product/597/73566?from_cn_redirect=1).
+	// -Obtain the TopicId through [Get Topic List](https://www.tencentcloud.com/document/product/597/40847?from_cn_redirect=1).
+	// - If the delivery task is created via the role ARN method, the TopicId field can be empty.
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
-
-	// CKafka topic name
-	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 }
 
 // Predefined struct for user
 type CloseKafkaConsumerRequestParams struct {
-	// Log topic ID
+	// Log topic Id.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	FromTopicId *string `json:"FromTopicId,omitnil,omitempty" name:"FromTopicId"`
 }
 
 type CloseKafkaConsumerRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log topic ID
+	// Log topic Id.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	FromTopicId *string `json:"FromTopicId,omitnil,omitempty" name:"FromTopicId"`
 }
 
@@ -712,6 +1138,29 @@ func (r *CloseKafkaConsumerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CloudProductLogTaskInfo struct {
+	// Service region
+	ClsRegion *string `json:"ClsRegion,omitnil,omitempty" name:"ClsRegion"`
+
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Log configuration extended information, generally used for storage of additional log delivery configuration
+	Extend *string `json:"Extend,omitnil,omitempty" name:"Extend"`
+
+	// Log type, support enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// Task status: 0 Creating, 1 Creation completed, 2 Deleting
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
 type Column struct {
 	// Column name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -720,19 +1169,94 @@ type Column struct {
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
+// Predefined struct for user
+type CommitConsumerOffsetsRequestParams struct {
+	// Consumer group flag.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Consumption machine name.
+	Consumer *string `json:"Consumer,omitnil,omitempty" name:"Consumer"`
+
+	// Logset id
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// Topic partition offset information.
+	TopicPartitionOffsetsInfo []*TopicPartitionOffsetInfo `json:"TopicPartitionOffsetsInfo,omitnil,omitempty" name:"TopicPartitionOffsetsInfo"`
+}
+
+type CommitConsumerOffsetsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Consumer group flag.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Consumption machine name.
+	Consumer *string `json:"Consumer,omitnil,omitempty" name:"Consumer"`
+
+	// Logset id
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// Topic partition offset information.
+	TopicPartitionOffsetsInfo []*TopicPartitionOffsetInfo `json:"TopicPartitionOffsetsInfo,omitnil,omitempty" name:"TopicPartitionOffsetsInfo"`
+}
+
+func (r *CommitConsumerOffsetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CommitConsumerOffsetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ConsumerGroup")
+	delete(f, "Consumer")
+	delete(f, "LogsetId")
+	delete(f, "TopicPartitionOffsetsInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CommitConsumerOffsetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CommitConsumerOffsetsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CommitConsumerOffsetsResponse struct {
+	*tchttp.BaseResponse
+	Response *CommitConsumerOffsetsResponseParams `json:"Response"`
+}
+
+func (r *CommitConsumerOffsetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CommitConsumerOffsetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CompressInfo struct {
 	// Compression format. Valid values: `gzip`; `lzop`; `snappy`; `none` (no compression)
 	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
 }
 
 type ConditionInfo struct {
-	// Condition attribute, currently supports only VpcID
+	// Condition attribute. Currently, only VpcID is supported.
 	Attributes *string `json:"Attributes,omitnil,omitempty" name:"Attributes"`
 
-	// Condition rule, 1: equal to, 2: not equal to
+	// Conditional rule. 1: equal to; 2: not equal to.
 	Rule *uint64 `json:"Rule,omitnil,omitempty" name:"Rule"`
 
-	// Value of the corresponding condition attribute
+	// Value corresponding to the condition attribute.
 	ConditionValue *string `json:"ConditionValue,omitnil,omitempty" name:"ConditionValue"`
 }
 
@@ -740,23 +1264,28 @@ type ConfigInfo struct {
 	// Collection rule configuration ID
 	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
 
-	// Name of the collection rule configuration
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Collection rule configuration name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Log formatting method
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	LogFormat *string `json:"LogFormat,omitnil,omitempty" name:"LogFormat"`
 
-	// Log collection path
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// log collection path
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-	// Type of collected logs.- json_log: JSON File Log (For more information, see [Using JSON pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/17419?from_cn_redirect=1));- delimiter_log: Delimiter - File Logs (For more information, see [Using delimiter pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/17420?from_cn_redirect=1));- minimalist_log: Single-line Full-text File Log (For more information, see [Using single-line full-text pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/17421?from_cn_redirect=1));- fullregex_log: Single line full regular expression - File log (For more information, see [Using single-line - complete regular expression pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/52365?from_cn_redirect=1));- multiline_log: Multiline Full-text File Log (For more information, see [Using multi-line full-text pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/17422?from_cn_redirect=1));- multiline_fullregex_log: Multi-line complete regular expression - File Logs (For more information, see [Using multi-line - complete regular expression pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/52366?from_cn_redirect=1));- user_define_log: Combined parsing (Suitable for logs with multiple nested formats, see [Using combined parsing pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/61310?from_cn_redirect=1));- service_syslog: syslog collection (For more information, see [Collect Syslog](https://intl.cloud.tencent.com/document/product/614/81454?from_cn_redirect=1));- windows_event_log represents: Windows event logs (see Collecting Windows Event Logs (https://intl.cloud.tencent.com/document/product/614/96678?from_cn_redirect=1) for details.).Note: This field may return null, indicating that no valid values can be obtained.
+	// Type of log collected.
+	// -json_log represents JSON file logs (see [Use JSON extraction mode to collect logs](https://www.tencentcloud.com/document/product/614/17419?from_cn_redirect=1)).
+	// -delimiter_log represents: delimiter-file logs (see [use delimiter extraction mode to collect logs](https://www.tencentcloud.com/document/product/614/17420?from_cn_redirect=1)).
+	// -minimalist_log represents single-line full-text file logs (see [use single-line full-text extraction mode to collect logs](https://www.tencentcloud.com/document/product/614/17421?from_cn_redirect=1)).
+	// -fullregex_log represents single-line full regex-file logs (see [Collect logs using single-line full regex extraction mode](https://www.tencentcloud.com/document/product/614/52365?from_cn_redirect=1)).
+	// -multiline_log represents multi-line full-text file logs (see [use multi-line full-text extraction mode to collect logs](https://www.tencentcloud.com/document/product/614/17422?from_cn_redirect=1)).
+	// -multiline_fullregex_log represents: Multiline full regex-file log (see [Collect logs using multiline-full regex extraction mode](https://www.tencentcloud.com/document/product/614/52366?from_cn_redirect=1));
+	// -user_define_log represents: combined parsing mode (suitable for logs with multiple nested formats, see [Collecting logs using combined parsing extraction mode](https://www.tencentcloud.com/document/product/614/61310?from_cn_redirect=1));
+	// -service_syslog represents syslog collection (see [Collect Syslog](https://www.tencentcloud.com/document/product/614/81454?from_cn_redirect=1)).
+	// - windows_event_log: Windows event log (see [Collecting Windows Event Logs](https://www.tencentcloud.com/document/product/614/96678?from_cn_redirect=1)).
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
-	// Extraction rule. If `ExtractRule` is set, `LogType` must be set
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Extraction rule. If ExtractRule is set, then LogType must be set.
 	ExtractRule *ExtractRuleInfo `json:"ExtractRule,omitnil,omitempty" name:"ExtractRule"`
 
 	// Collection path blocklist
@@ -767,46 +1296,219 @@ type ConfigInfo struct {
 	Output *string `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Update time
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// -Time format: yyyy-MM-dd HH:mm:ss
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Creation time
+	// Creation time.
+	// -Time format: yyyy-MM-dd HH:mm:ss
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// User-defined parsing strings, see Collecting Logs Using Combined Parsing Extraction Mode (https://intl.cloud.tencent.com/document/product/614/61310?from_cn_redirect=1) for details.Note: This field may return null, indicating that no valid values can be obtained.
+	// Custom parsing string. For more information, see [Collecting logs using combined parsing extraction mode](https://www.tencentcloud.com/document/product/614/61310?from_cn_redirect=1).
 	UserDefineRule *string `json:"UserDefineRule,omitnil,omitempty" name:"UserDefineRule"`
 
-	// Advanced collection configuration. A JSON string, Key/Value definition as follows:- ClsAgentFileTimeout (timeout property), value range: an integer greater than or equal to 0, where 0 means no timeout- ClsAgentMaxDepth (maximum directory depth), value range: an integer greater than or equal to 0- ClsAgentParseFailMerge (merge logs that failed parsing), value range: true or falseSample:`{\"ClsAgentFileTimeout\":0,\"ClsAgentMaxDepth\":10,\"ClsAgentParseFailMerge\":true}`
+	// Advanced collection configuration. Json string, Key/Value is defined as follows:
+	// -ClsAgentFileTimeout (timeout attribute). Value ranges from 0 to integer. 0 means no timeout.
+	// -ClsAgentMaxDepth (maximum directory depth), value ranges from 0 to integer
+	// -ClsAgentParseFailMerge (merge parsing failure logs). Value ranges from true to false.
+	// Example:
+	// `{\"ClsAgentFileTimeout\":0,\"ClsAgentMaxDepth\":10,\"ClsAgentParseFailMerge\":true}`
 	// 
-	// Default placeholder value in the console: `{"ClsAgentDefault":0}`Note: This field may return null, indicating that no valid values can be obtained.
+	// Default placeholder value in console: `{\"ClsAgentDefault\":0}`
 	AdvancedConfig *string `json:"AdvancedConfig,omitnil,omitempty" name:"AdvancedConfig"`
+
+	// Log input type (<span style="color:red; font-weight:bold">Note: required for Windows scenario and only supports file and windows_event event type</span>)
+	// -file type collection
+	// -windows event collection
+	// -syslog: System log collection
+	InputType *string `json:"InputType,omitnil,omitempty" name:"InputType"`
+}
+
+type Console struct {
+	// <p>DataSight Console Id</p>
+	ConsoleId *string `json:"ConsoleId,omitnil,omitempty" name:"ConsoleId"`
+
+	// <p>Access method: public - internet, internal - intranet</p>
+	AccessMode []*string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
+
+	// <p>Log-in methods: 0-account password authentication, 1-anonymous login, 2-third-party authentication login</p>
+	LoginMode *uint64 `json:"LoginMode,omitnil,omitempty" name:"LoginMode"`
+
+	// <p>Custom domain name prefix</p>
+	DomainPrefix *string `json:"DomainPrefix,omitnil,omitempty" name:"DomainPrefix"`
+
+	// <p>User account information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Accounts []*ConsoleAccount `json:"Accounts,omitnil,omitempty" name:"Accounts"`
+
+	// <p>Private network type, defaults to 0</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IntranetType *uint64 `json:"IntranetType,omitnil,omitempty" name:"IntranetType"`
+
+	// <p>Private network region</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IntranetRegion *string `json:"IntranetRegion,omitnil,omitempty" name:"IntranetRegion"`
+
+	// <p>Private network VpcId</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Private subnet SubnetId</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Anonymous login account information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AnonymousLogin *AnonymousLoginInfo `json:"AnonymousLogin,omitnil,omitempty" name:"AnonymousLogin"`
+
+	// <p>auth user role information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AuthRoles []*AuthRoleInfo `json:"AuthRoles,omitnil,omitempty" name:"AuthRoles"`
+
+	// <p>Bound tag information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// <p>Custom hidden parameter</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HideParams []*string `json:"HideParams,omitnil,omitempty" name:"HideParams"`
+
+	// <p>Access Control Rule</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AccessControlRules []*AccessControlRule `json:"AccessControlRules,omitnil,omitempty" name:"AccessControlRules"`
+
+	// <p>Remark</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Remarks *string `json:"Remarks,omitnil,omitempty" name:"Remarks"`
+
+	// <p>Customize menu</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Menus []*string `json:"Menus,omitnil,omitempty" name:"Menus"`
+
+	// <p>Public access domain name</p>
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// <p>private network access domain</p>
+	IntranetDomain *string `json:"IntranetDomain,omitnil,omitempty" name:"IntranetDomain"`
+}
+
+type ConsoleAccount struct {
+	// <p>Username.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// <p>User password</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// <p>Tencent Cloud account SecretId</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SecretId *string `json:"SecretId,omitnil,omitempty" name:"SecretId"`
+
+	// <p>Tencent Cloud Account SecretKey</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
+
+	// <p>Electronic mailbox for sending verification code</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Email *string `json:"Email,omitnil,omitempty" name:"Email"`
 }
 
 type ConsumerContent struct {
-	// Whether to deliver TAG information.
-	// When EnableTag is true, it indicates the delivery of TAG metadata.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Whether to deliver TAG information.<br>When EnableTag is true, it means to deliver TAG metadata.</p>
 	EnableTag *bool `json:"EnableTag,omitnil,omitempty" name:"EnableTag"`
 
-	// List of metadata to ship. Supported metadata types: \_\_SOURCE\_\_, \_\_FILENAME\_\_, \_\_TIMESTAMP\_\_, \_\_HOSTNAME\_\_, and \_\_PKGID\_\_.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>List of metadata to be shipped, currently only support: __SOURCE__, __FILENAME__, __TIMESTAMP__, __HOSTNAME__, and __PKGID__</p>
 	MetaFields []*string `json:"MetaFields,omitnil,omitempty" name:"MetaFields"`
 
-	// When EnableTag is true, the TagJsonNotTiled field must be filled.TagJsonNotTiled is used to indicate whether tag information is JSON flattened.When TagJsonNotTiled is true, it is not flattened. Example:TAG information: `{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
-	// Untiled: `{"__TAG__":{"fieldA":200,"fieldB":"text"}}`When TagJsonNotTiled is false, the data is tiled. Example:TAG information: `{"__TAG__":{"fieldA":200,"fieldB":"text"}}`Tiled: `{"__TAG__.fieldA":200,"__TAG__.fieldB":"text"}`
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>When EnableTag is true, the TagJsonNotTiled field must be filled.<br>TagJsonNotTiled indicates whether tag information is json tiled.</p><p>When TagJsonNotTiled is true, it is not tiled. Example:<br>tag information: <code>{"__tag__":{"fieldA":200,"fieldB":"text"}}</code><br>Not Tiled: <code>{"__tag__":{"fieldA":200,"fieldB":"text"}}</code></p><p>When TagJsonNotTiled is false, tiling is applied. Example:<br>tag information: <code>{"__tag__":{"fieldA":200,"fieldB":"text"}}</code><br>Tiled: <code>{"__tag__.fieldA":200,"__tag__.fieldB":"text"}</code></p>
 	TagJsonNotTiled *bool `json:"TagJsonNotTiled,omitnil,omitempty" name:"TagJsonNotTiled"`
 
-	// Delivery timestamp precision, optional [1: second; 2: millisecond], default is 1.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Delivery timestamp precision, options [1: second; 2: millisecond], 1 is selected by default.</p>
 	TimestampAccuracy *int64 `json:"TimestampAccuracy,omitnil,omitempty" name:"TimestampAccuracy"`
 
-	// Deliver in JSON format.JsonType is 0: Consistent with the original log, no escape. Example:
-	// Original log: `{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`Deliver to CKafka: `{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`JsonType is 1: Escaped. Example:Original log: `{"a":"aa", "b":{"b1":"b1b1", "c1":"c1c1"}}`Delivered to CKafka: `{"a":"aa","b":"{\"b1\":\"b1b1\", \"c1\":\"c1c1\"}"}`
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Deliver in Json format.</p><p>Enumeration value:</p><ul><li>0: Escape. Example:<br>Original log: <code>{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}</code><br>Deliver to Ckafka: <code>{&quot;a&quot;:&quot;aa&quot;,&quot;b&quot;:&quot;{\&quot;b1\&quot;:\&quot;b1b1\&quot;, \&quot;c1\&quot;:\&quot;c1c1\&quot;}&quot;}</code></li><li>1: Consistent with original log, non-escaping. Example:<br>Original log: <code>{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}</code><br>Deliver to Ckafka: <code>{&quot;a&quot;:&quot;aa&quot;, &quot;b&quot;:{&quot;b1&quot;:&quot;b1b1&quot;, &quot;c1&quot;:&quot;c1c1&quot;}}</code></li></ul>
 	JsonType *int64 `json:"JsonType,omitnil,omitempty" name:"JsonType"`
 }
 
+type ConsumerGroup struct {
+	// Consumer group name
+	Group *string `json:"Group,omitnil,omitempty" name:"Group"`
+
+	// Status.
+	// 
+	// -Empty: The group has no members but has submitted offsets. All consumers left but retained offsets.
+	// -Dead: The group has no members and no submitted offsets. The group is deleted or has long-term inactivity.
+	// -Stable: Members in the group consume normally with balanced partition allocation. Normal operating status.
+	// -PreparingRebalance: The group is preparing to rebalance. New members join or existing members leave.
+	// -CompletingRebalance: The group is preparing to rebalance. New members join or existing members leave.
+	State *string `json:"State,omitnil,omitempty" name:"State"`
+
+	// Partition allocation policy balancing algorithm name.
+	// 
+	// -Common load balancing algorithms are as follows:
+	// -range: Allocate by partition range
+	// -roundrobin: Poll-based allocation
+	// -sticky: Sticky assignment (avoid unnecessary rebalance)
+	ProtocolName *string `json:"ProtocolName,omitnil,omitempty" name:"ProtocolName"`
+}
+
+type ConsumerGroupInfo struct {
+	// Consumer group flag.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Consumer heartbeat timeout (seconds).
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// topic list
+	Topics []*string `json:"Topics,omitnil,omitempty" name:"Topics"`
+}
+
+type ConsumerInfo struct {
+	// Shipping rule ID
+	ConsumerId *string `json:"ConsumerId,omitnil,omitempty" name:"ConsumerId"`
+
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Whether the shipping task is effective.
+	Effective *bool `json:"Effective,omitnil,omitempty" name:"Effective"`
+
+	// Description of CKafka
+	Ckafka *Ckafka `json:"Ckafka,omitnil,omitempty" name:"Ckafka"`
+
+	// Whether to ship the log's metadata information
+	NeedContent *bool `json:"NeedContent,omitnil,omitempty" name:"NeedContent"`
+
+	// Description of the metadata information to be shipped
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Content *ConsumerContent `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Compression mode [0:NONE；2:SNAPPY；3:LZ4]
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Compression *int64 `json:"Compression,omitnil,omitempty" name:"Compression"`
+
+	// Creation time of a shipping task (a millisecond-level timestamp).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// ARN (Access Role Name) [Create role](https://www.tencentcloud.com/document/product/598/19381?from_cn_redirect=1)	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RoleArn *string `json:"RoleArn,omitnil,omitempty" name:"RoleArn"`
+
+	// External ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExternalId *string `json:"ExternalId,omitnil,omitempty" name:"ExternalId"`
+
+	// Task running status. Valid values: 0: stopped; 1: running; 2: abnormal.	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskStatus *uint64 `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
+
+	// Advanced configuration
+	AdvancedConfig *AdvancedConsumerConfiguration `json:"AdvancedConfig,omitnil,omitempty" name:"AdvancedConfig"`
+}
+
 type ContentInfo struct {
-	// Content format. Valid values: `json`, `csv`
+	// Content format, support json, csv, parquet
 	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
 
 	// CSV format content description
@@ -824,102 +1526,159 @@ type ContentInfo struct {
 
 type CosRechargeInfo struct {
 	// COS import configuration ID.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// ID of the log topic.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Log topic ID
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// ID of the logset.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Logset ID
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
-	// COS import task name.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// COS import task name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// COS bucket.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// COS bucket
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
-	// Region where the COS bucket is located.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// COS bucket location.
+	// 
+	// -Obtain region information via [regions and access endpoints](https://www.tencentcloud.com/document/product/436/6224?from_cn_redirect=1).
 	BucketRegion *string `json:"BucketRegion,omitnil,omitempty" name:"BucketRegion"`
 
-	// The prefix of the folder where COS files are located.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Prefix of the COS file folder location
 	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
 
-	// The type of log collected. `json_log`: JSON logs; `delimiter_log`: separator logs; `minimalist_log`: full text in a single line
-	// Default value: `minimalist_log`
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Types of logs collected: json_log represents JSON logs, delimiter_log represents delimiter-separated format logs, minimalist_log represents single-line full-text representation.
+	// default is minimalist_log
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
-	// Status. `0`: Created, `1`: Running, `2`: Stopped, `3`: Completed, `4`: Run failed
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// status 0: Created, 1: Running, 2: Stopped, 3: Completed, 4: Execution failed.
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Whether the configuration is enabled. `0`: Not enabled, `1`: Enabled
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether this feature is enabled. 0: Disabled; 1: Enabled.
 	Enable *uint64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Creation time.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Creation time. Time format: YYYY-MM-DD HH:mm:ss
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Update time.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Update time. Time format: YYYY-MM-DD HH:mm:ss
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Progress in percentage.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Progress Bar Percentage
 	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Valid values: "" (default), "gzip", "lzop", "snappy"
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Compression methods supported: "", "gzip", "lzop", and "snappy". Default empty with no compression.
 	Compress *string `json:"Compress,omitnil,omitempty" name:"Compress"`
 
-	// See the description of the `ExtractRuleInfo` structure.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// See the description of the ExtractRuleInfo structure.
 	ExtractRuleInfo *ExtractRuleInfo `json:"ExtractRuleInfo,omitnil,omitempty" name:"ExtractRuleInfo"`
+
+	// COS import task type. Valid values: 1: one-time import task; 2: continuous import task.
+	TaskType *uint64 `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// Metadata. Buckets and objects are supported.
+	Metadata []*string `json:"Metadata,omitnil,omitempty" name:"Metadata"`
 }
 
 // Predefined struct for user
 type CreateAlarmNoticeRequestParams struct {
-	// Notification group name
+	// Notification channel group name. Supports a maximum of 255 bytes. Does not support '|'.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Notification type. Optional Values:<li> Trigger - Alarm triggered </li><li> Recovery - Alarm recovery</li><li> All - Alarm triggered and alarm recovery</li>
+	// Tag description list. By specifying this parameter, you can bind multiple tags to the corresponding notification channel group. A maximum of 50 tag key-value pairs are supported, and there should not be duplicate key-value pairs.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// [Easy mode] (Select either easy mode or alarm mode and configure corresponding parameters)
+	// Alarm types that require sending notifications. Available values:
+	// - Trigger - Alarm trigger
+	// -Alarm Recovery
+	// -All - Alarm trigger and alarm recovery
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Notification recipient
+	// [Easy mode] (Select either easy mode or alarm mode and configure corresponding parameters)
+	// Notification recipients
 	NoticeReceivers []*NoticeReceiver `json:"NoticeReceivers,omitnil,omitempty" name:"NoticeReceivers"`
 
-	// API callback information (including WeCom)
+	// [Easy mode] (Select either easy mode or alarm mode and configure corresponding parameters)
+	// Interface callback information (including WeCom, DingTalk, Lark).
 	WebCallbacks []*WebCallback `json:"WebCallbacks,omitnil,omitempty" name:"WebCallbacks"`
 
-	// Notification RulesNote: - Type, NoticeReceivers, and WebCallbacks form one set of configurations, and NoticeRules form another set. The two sets of configurations are mutually exclusive.
+	// [Advanced mode] (Choose between easy mode and alarm mode, and configure corresponding parameters)
+	// Notification rules.
 	NoticeRules []*NoticeRule `json:"NoticeRules,omitnil,omitempty" name:"NoticeRules"`
+
+	// Query data link. It should start with http:// or https:// and should not end with /.
+	JumpDomain *string `json:"JumpDomain,omitnil,omitempty" name:"JumpDomain"`
+
+	// Delivery log switch. Values are as follows:
+	// 1: Off (default value).
+	// 2: Enable 
+	// When the delivery log switch is enabled, the DeliverConfig parameter is required.
+	DeliverStatus *uint64 `json:"DeliverStatus,omitnil,omitempty" name:"DeliverStatus"`
+
+	// Log shipping configuration parameter. It is required when DeliverStatus is enabled.
+	DeliverConfig *DeliverConfig `json:"DeliverConfig,omitnil,omitempty" name:"DeliverConfig"`
+
+	// Login-free operation alarm switch. Values are as follows:
+	// - 1: disabled.
+	// -2: Enable (default value)
+	AlarmShieldStatus *uint64 `json:"AlarmShieldStatus,omitnil,omitempty" name:"AlarmShieldStatus"`
+
+	// Unify the custom callback parameter settings.
+	// -true: Use the custom callback parameters in the notification content template to override the request header and request body separately configured in the alarm policy.
+	// -false: Prioritize using the request header and request body separately configured in the alarm policy.
+	CallbackPrioritize *bool `json:"CallbackPrioritize,omitnil,omitempty" name:"CallbackPrioritize"`
 }
 
 type CreateAlarmNoticeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Notification group name
+	// Notification channel group name. Supports a maximum of 255 bytes. Does not support '|'.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Notification type. Optional Values:<li> Trigger - Alarm triggered </li><li> Recovery - Alarm recovery</li><li> All - Alarm triggered and alarm recovery</li>
+	// Tag description list. By specifying this parameter, you can bind multiple tags to the corresponding notification channel group. A maximum of 50 tag key-value pairs are supported, and there should not be duplicate key-value pairs.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// [Easy mode] (Select either easy mode or alarm mode and configure corresponding parameters)
+	// Alarm types that require sending notifications. Available values:
+	// - Trigger - Alarm trigger
+	// -Alarm Recovery
+	// -All - Alarm trigger and alarm recovery
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Notification recipient
+	// [Easy mode] (Select either easy mode or alarm mode and configure corresponding parameters)
+	// Notification recipients
 	NoticeReceivers []*NoticeReceiver `json:"NoticeReceivers,omitnil,omitempty" name:"NoticeReceivers"`
 
-	// API callback information (including WeCom)
+	// [Easy mode] (Select either easy mode or alarm mode and configure corresponding parameters)
+	// Interface callback information (including WeCom, DingTalk, Lark).
 	WebCallbacks []*WebCallback `json:"WebCallbacks,omitnil,omitempty" name:"WebCallbacks"`
 
-	// Notification RulesNote: - Type, NoticeReceivers, and WebCallbacks form one set of configurations, and NoticeRules form another set. The two sets of configurations are mutually exclusive.
+	// [Advanced mode] (Choose between easy mode and alarm mode, and configure corresponding parameters)
+	// Notification rules.
 	NoticeRules []*NoticeRule `json:"NoticeRules,omitnil,omitempty" name:"NoticeRules"`
+
+	// Query data link. It should start with http:// or https:// and should not end with /.
+	JumpDomain *string `json:"JumpDomain,omitnil,omitempty" name:"JumpDomain"`
+
+	// Delivery log switch. Values are as follows:
+	// 1: Off (default value).
+	// 2: Enable 
+	// When the delivery log switch is enabled, the DeliverConfig parameter is required.
+	DeliverStatus *uint64 `json:"DeliverStatus,omitnil,omitempty" name:"DeliverStatus"`
+
+	// Log shipping configuration parameter. It is required when DeliverStatus is enabled.
+	DeliverConfig *DeliverConfig `json:"DeliverConfig,omitnil,omitempty" name:"DeliverConfig"`
+
+	// Login-free operation alarm switch. Values are as follows:
+	// - 1: disabled.
+	// -2: Enable (default value)
+	AlarmShieldStatus *uint64 `json:"AlarmShieldStatus,omitnil,omitempty" name:"AlarmShieldStatus"`
+
+	// Unify the custom callback parameter settings.
+	// -true: Use the custom callback parameters in the notification content template to override the request header and request body separately configured in the alarm policy.
+	// -false: Prioritize using the request header and request body separately configured in the alarm policy.
+	CallbackPrioritize *bool `json:"CallbackPrioritize,omitnil,omitempty" name:"CallbackPrioritize"`
 }
 
 func (r *CreateAlarmNoticeRequest) ToJsonString() string {
@@ -935,10 +1694,16 @@ func (r *CreateAlarmNoticeRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Name")
+	delete(f, "Tags")
 	delete(f, "Type")
 	delete(f, "NoticeReceivers")
 	delete(f, "WebCallbacks")
 	delete(f, "NoticeRules")
+	delete(f, "JumpDomain")
+	delete(f, "DeliverStatus")
+	delete(f, "DeliverConfig")
+	delete(f, "AlarmShieldStatus")
+	delete(f, "CallbackPrioritize")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAlarmNoticeRequest has unknown keys!", "")
 	}
@@ -972,135 +1737,131 @@ func (r *CreateAlarmNoticeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAlarmRequestParams struct {
-	// Alarm policy name
+	// <p>Alarm policy name. Supports a maximum of 255 bytes. Unsupported '|'.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Monitoring object list
+	// <p>Monitoring object list.</p>
 	AlarmTargets []*AlarmTarget `json:"AlarmTargets,omitnil,omitempty" name:"AlarmTargets"`
 
-	// Monitoring task running time point
+	// <p>Monitoring task execution time point.</p>
 	MonitorTime *MonitorTime `json:"MonitorTime,omitnil,omitempty" name:"MonitorTime"`
 
-	// Alarm persistence cycle. An alarm will be triggered only after the corresponding trigger condition is met for the number of times specified by `TriggerCount`. Value range: 1–10.
+	// <p>Duration cycle. An alarm is triggered after trigger conditions are constantly met for TriggerCount cycles. Minimum value is 1. Maximum value is 2000.</p>
 	TriggerCount *int64 `json:"TriggerCount,omitnil,omitempty" name:"TriggerCount"`
 
-	// Alarm repeat interval in minutes. The value range is 0~1440.
+	// <p>Alarm repeat cycle in minutes. Value ranges from 0 to 1440.</p>
 	AlarmPeriod *int64 `json:"AlarmPeriod,omitnil,omitempty" name:"AlarmPeriod"`
 
-	// List of associated alarm notification templates
-	AlarmNoticeIds []*string `json:"AlarmNoticeIds,omitnil,omitempty" name:"AlarmNoticeIds"`
-
-	// Trigger ConditionNote:- Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
+	// <p>Trigger conditions for sending alarm notifications<br> Note: </p><ul><li>Condition and AlarmLevel are one set of configurations, and MultiConditions are another set of configurations. The two sets are mutually exclusive.</li></ul>
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
-	// Alarm Level0: Warning (Warn); 1: Reminder (Info); 2: Urgent (Critical).
-	// Note:- If not specified, the default is 0.
-	// - Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
+	// <p>Alarm level<br>0: Warning; 1: Info; 2: Critical.<br>Note:</p><ul><li>Defaults to 0 if left empty.</li><li>Condition and AlarmLevel are one set of configurations, and MultiConditions are another set of configurations. The two sets are mutually exclusive.</li></ul>
 	AlarmLevel *uint64 `json:"AlarmLevel,omitnil,omitempty" name:"AlarmLevel"`
 
-	// Multiple trigger conditions
-	// Note:- Condition and AlarmLevel form one set of configurations, while MultiConditions form another set of configurations, and the two sets are mutually exclusive.
-	// 
-	// 
+	// <p>Multiple trigger conditions<br> Note: </p><ul><li>Condition and AlarmLevel are one set of configurations, and MultiConditions are another set of configurations. These two sets are mutually exclusive.</li></ul>
 	MultiConditions []*MultiCondition `json:"MultiConditions,omitnil,omitempty" name:"MultiConditions"`
 
-	// Whether to enable the alarm policyThe default value is true
+	// <p>Whether to enable alarm policy.<br>Default value is true</p>
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// This parameter has been deprecated, please use the Status parameter to control whether to enable the alarm policy.
+	// <p>Please use the Status parameter to control whether to enable the alarm policy.</p>
+	//
+	// Deprecated: Enable is deprecated.
 	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Custom alarm content
+	// <p>User-defined alarm content</p>
 	MessageTemplate *string `json:"MessageTemplate,omitnil,omitempty" name:"MessageTemplate"`
 
-	// Custom callback
+	// <p>user-defined callback</p>
 	CallBack *CallBackInfo `json:"CallBack,omitnil,omitempty" name:"CallBack"`
 
-	// Multi-Dimensional analysis
+	// <p>Multi-dimensional analysis</p>
 	Analysis []*AnalysisDimensional `json:"Analysis,omitnil,omitempty" name:"Analysis"`
 
-	// Group trigger status.
-	// Default value is false
+	// <p>Group trigger status.<br>false by default</p>
 	GroupTriggerStatus *bool `json:"GroupTriggerStatus,omitnil,omitempty" name:"GroupTriggerStatus"`
 
-	// Grouping Trigger Conditions.
+	// <p>Group trigger conditions.</p>
 	GroupTriggerCondition []*string `json:"GroupTriggerCondition,omitnil,omitempty" name:"GroupTriggerCondition"`
 
-	// Tag description list, by specifying this parameter, you can simultaneously bind Tag to the corresponding alarm policy.Supports up to 10 Tag key-value pairs, and the pairs must be unique.
+	// <p>Tag description list. Tags can be bound to the corresponding alarm policy simultaneously by specifying this parameter.</p><p>It supports up to 10 tag key-value pairs, which cannot be duplicate.</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Monitored Object Type. 0: common monitoring objects for execution statements; 1: separately selected monitoring objects for each execution statement.If not specified, the default value is 0.When the value is 1, the number of AlarmTargets Elements (XML) cannot exceed 10, and the Numbers in AlarmTargets must be continuous positive integers starting from 1, without duplication.
+	// <p>Monitored object type. 0: Common monitoring object for execution statements; 1: Each execution statement selects its own monitored object.<br>Defaults to 0 if left blank.<br>When the value is 1, the number of elements in AlarmTargets must not exceed 10, and the Numbers in AlarmTargets must be consecutive positive integers starting from 1 without duplication.</p>
 	MonitorObjectType *uint64 `json:"MonitorObjectType,omitnil,omitempty" name:"MonitorObjectType"`
 
-	// Alarms additional classification information listThe number of Classifications elements cannot exceed 20.The Key of Classifications element must not be empty and duplicated, and its length cannot exceed 50 characters, complying with the regular expression ^[a-z]([a-z0-9_]{0,49})$.The Value length of Classifications element cannot exceed 200 characters.
+	// <p>Alert additional classification information list.<br>Number of Classifications elements must not exceed 20.<br>The Key of Classifications elements cannot be empty, must be unique, length cannot exceed 50 characters, and complies with the regular expression <code>^[a-z]([a-z0-9_]{0,49})$</code>.<br>Value of Classifications elements cannot exceed 200 characters.</p>
 	Classifications []*AlarmClassification `json:"Classifications,omitnil,omitempty" name:"Classifications"`
+
+	// <p>List of associated log service alarm notification channel groups. - Search the associated alarm notification channel group list via <a href="https://www.tencentcloud.com/document/product/614/56462?from_cn_redirect=1">Get Notification Channel Group List</a>, mutually exclusive with MonitorNotice.</p>
+	AlarmNoticeIds []*string `json:"AlarmNoticeIds,omitnil,omitempty" name:"AlarmNoticeIds"`
+
+	// <p>The associated observability platform notification template is mutually exclusive with the AlarmNoticeIds parameter and cannot be used simultaneously.</p>
+	MonitorNotice *MonitorNotice `json:"MonitorNotice,omitnil,omitempty" name:"MonitorNotice"`
 }
 
 type CreateAlarmRequest struct {
 	*tchttp.BaseRequest
 	
-	// Alarm policy name
+	// <p>Alarm policy name. Supports a maximum of 255 bytes. Unsupported '|'.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Monitoring object list
+	// <p>Monitoring object list.</p>
 	AlarmTargets []*AlarmTarget `json:"AlarmTargets,omitnil,omitempty" name:"AlarmTargets"`
 
-	// Monitoring task running time point
+	// <p>Monitoring task execution time point.</p>
 	MonitorTime *MonitorTime `json:"MonitorTime,omitnil,omitempty" name:"MonitorTime"`
 
-	// Alarm persistence cycle. An alarm will be triggered only after the corresponding trigger condition is met for the number of times specified by `TriggerCount`. Value range: 1–10.
+	// <p>Duration cycle. An alarm is triggered after trigger conditions are constantly met for TriggerCount cycles. Minimum value is 1. Maximum value is 2000.</p>
 	TriggerCount *int64 `json:"TriggerCount,omitnil,omitempty" name:"TriggerCount"`
 
-	// Alarm repeat interval in minutes. The value range is 0~1440.
+	// <p>Alarm repeat cycle in minutes. Value ranges from 0 to 1440.</p>
 	AlarmPeriod *int64 `json:"AlarmPeriod,omitnil,omitempty" name:"AlarmPeriod"`
 
-	// List of associated alarm notification templates
-	AlarmNoticeIds []*string `json:"AlarmNoticeIds,omitnil,omitempty" name:"AlarmNoticeIds"`
-
-	// Trigger ConditionNote:- Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
+	// <p>Trigger conditions for sending alarm notifications<br> Note: </p><ul><li>Condition and AlarmLevel are one set of configurations, and MultiConditions are another set of configurations. The two sets are mutually exclusive.</li></ul>
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
-	// Alarm Level0: Warning (Warn); 1: Reminder (Info); 2: Urgent (Critical).
-	// Note:- If not specified, the default is 0.
-	// - Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
+	// <p>Alarm level<br>0: Warning; 1: Info; 2: Critical.<br>Note:</p><ul><li>Defaults to 0 if left empty.</li><li>Condition and AlarmLevel are one set of configurations, and MultiConditions are another set of configurations. The two sets are mutually exclusive.</li></ul>
 	AlarmLevel *uint64 `json:"AlarmLevel,omitnil,omitempty" name:"AlarmLevel"`
 
-	// Multiple trigger conditions
-	// Note:- Condition and AlarmLevel form one set of configurations, while MultiConditions form another set of configurations, and the two sets are mutually exclusive.
-	// 
-	// 
+	// <p>Multiple trigger conditions<br> Note: </p><ul><li>Condition and AlarmLevel are one set of configurations, and MultiConditions are another set of configurations. These two sets are mutually exclusive.</li></ul>
 	MultiConditions []*MultiCondition `json:"MultiConditions,omitnil,omitempty" name:"MultiConditions"`
 
-	// Whether to enable the alarm policyThe default value is true
+	// <p>Whether to enable alarm policy.<br>Default value is true</p>
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// This parameter has been deprecated, please use the Status parameter to control whether to enable the alarm policy.
+	// <p>Please use the Status parameter to control whether to enable the alarm policy.</p>
 	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Custom alarm content
+	// <p>User-defined alarm content</p>
 	MessageTemplate *string `json:"MessageTemplate,omitnil,omitempty" name:"MessageTemplate"`
 
-	// Custom callback
+	// <p>user-defined callback</p>
 	CallBack *CallBackInfo `json:"CallBack,omitnil,omitempty" name:"CallBack"`
 
-	// Multi-Dimensional analysis
+	// <p>Multi-dimensional analysis</p>
 	Analysis []*AnalysisDimensional `json:"Analysis,omitnil,omitempty" name:"Analysis"`
 
-	// Group trigger status.
-	// Default value is false
+	// <p>Group trigger status.<br>false by default</p>
 	GroupTriggerStatus *bool `json:"GroupTriggerStatus,omitnil,omitempty" name:"GroupTriggerStatus"`
 
-	// Grouping Trigger Conditions.
+	// <p>Group trigger conditions.</p>
 	GroupTriggerCondition []*string `json:"GroupTriggerCondition,omitnil,omitempty" name:"GroupTriggerCondition"`
 
-	// Tag description list, by specifying this parameter, you can simultaneously bind Tag to the corresponding alarm policy.Supports up to 10 Tag key-value pairs, and the pairs must be unique.
+	// <p>Tag description list. Tags can be bound to the corresponding alarm policy simultaneously by specifying this parameter.</p><p>It supports up to 10 tag key-value pairs, which cannot be duplicate.</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Monitored Object Type. 0: common monitoring objects for execution statements; 1: separately selected monitoring objects for each execution statement.If not specified, the default value is 0.When the value is 1, the number of AlarmTargets Elements (XML) cannot exceed 10, and the Numbers in AlarmTargets must be continuous positive integers starting from 1, without duplication.
+	// <p>Monitored object type. 0: Common monitoring object for execution statements; 1: Each execution statement selects its own monitored object.<br>Defaults to 0 if left blank.<br>When the value is 1, the number of elements in AlarmTargets must not exceed 10, and the Numbers in AlarmTargets must be consecutive positive integers starting from 1 without duplication.</p>
 	MonitorObjectType *uint64 `json:"MonitorObjectType,omitnil,omitempty" name:"MonitorObjectType"`
 
-	// Alarms additional classification information listThe number of Classifications elements cannot exceed 20.The Key of Classifications element must not be empty and duplicated, and its length cannot exceed 50 characters, complying with the regular expression ^[a-z]([a-z0-9_]{0,49})$.The Value length of Classifications element cannot exceed 200 characters.
+	// <p>Alert additional classification information list.<br>Number of Classifications elements must not exceed 20.<br>The Key of Classifications elements cannot be empty, must be unique, length cannot exceed 50 characters, and complies with the regular expression <code>^[a-z]([a-z0-9_]{0,49})$</code>.<br>Value of Classifications elements cannot exceed 200 characters.</p>
 	Classifications []*AlarmClassification `json:"Classifications,omitnil,omitempty" name:"Classifications"`
+
+	// <p>List of associated log service alarm notification channel groups. - Search the associated alarm notification channel group list via <a href="https://www.tencentcloud.com/document/product/614/56462?from_cn_redirect=1">Get Notification Channel Group List</a>, mutually exclusive with MonitorNotice.</p>
+	AlarmNoticeIds []*string `json:"AlarmNoticeIds,omitnil,omitempty" name:"AlarmNoticeIds"`
+
+	// <p>The associated observability platform notification template is mutually exclusive with the AlarmNoticeIds parameter and cannot be used simultaneously.</p>
+	MonitorNotice *MonitorNotice `json:"MonitorNotice,omitnil,omitempty" name:"MonitorNotice"`
 }
 
 func (r *CreateAlarmRequest) ToJsonString() string {
@@ -1120,7 +1881,6 @@ func (r *CreateAlarmRequest) FromJsonString(s string) error {
 	delete(f, "MonitorTime")
 	delete(f, "TriggerCount")
 	delete(f, "AlarmPeriod")
-	delete(f, "AlarmNoticeIds")
 	delete(f, "Condition")
 	delete(f, "AlarmLevel")
 	delete(f, "MultiConditions")
@@ -1134,6 +1894,8 @@ func (r *CreateAlarmRequest) FromJsonString(s string) error {
 	delete(f, "Tags")
 	delete(f, "MonitorObjectType")
 	delete(f, "Classifications")
+	delete(f, "AlarmNoticeIds")
+	delete(f, "MonitorNotice")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAlarmRequest has unknown keys!", "")
 	}
@@ -1142,7 +1904,7 @@ func (r *CreateAlarmRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAlarmResponseParams struct {
-	// Alarm policy ID.
+	// <p>Alert policy ID.</p>
 	AlarmId *string `json:"AlarmId,omitnil,omitempty" name:"AlarmId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1167,13 +1929,13 @@ func (r *CreateAlarmResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAlarmShieldRequestParams struct {
-	// Notification Channel Group ID
+	// Notification channel group id. Search the notification channel group list (https://www.tencentcloud.com/document/product/614/56462?from_cn_redirect=1) to get the notification channel group id.
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitnil,omitempty" name:"AlarmNoticeId"`
 
-	// Block start time (second-level timestamp).
+	// Block rule start time (second-level timestamp).
 	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Block end time (second-level timestamp).
+	// Block rule end time (second-level timestamp). The end time must be greater than the current time.
 	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Block type. 1: Block all notifications, 2: Block matching rules notifications according to the Rule parameter.
@@ -1189,13 +1951,13 @@ type CreateAlarmShieldRequestParams struct {
 type CreateAlarmShieldRequest struct {
 	*tchttp.BaseRequest
 	
-	// Notification Channel Group ID
+	// Notification channel group id. Search the notification channel group list (https://www.tencentcloud.com/document/product/614/56462?from_cn_redirect=1) to get the notification channel group id.
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitnil,omitempty" name:"AlarmNoticeId"`
 
-	// Block start time (second-level timestamp).
+	// Block rule start time (second-level timestamp).
 	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Block end time (second-level timestamp).
+	// Block rule end time (second-level timestamp). The end time must be greater than the current time.
 	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Block type. 1: Block all notifications, 2: Block matching rules notifications according to the Rule parameter.
@@ -1258,14 +2020,156 @@ func (r *CreateAlarmShieldResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateCloudProductLogCollectionRequestParams struct {
+	// <p>Instance ID</p><ul><li>Obtained through official documentation of connected cloud services</li></ul>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Cloud product identifier, support enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS</p>
+	AssumerName *string `json:"AssumerName,omitnil,omitempty" name:"AssumerName"`
+
+	// <p>Log type, supports enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</p>
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// <p>Product region. The input parameter format for regions varies by log type (LogType). Refer to the following example:</p><ul><li>All CDS log types: ap-guangzhou</li><li>CDB-AUDIT: gz</li><li>TDSQL-C-AUDIT: gz</li><li>MongoDB-AUDIT: gz</li><li>MongoDB-SlowLog: ap-guangzhou</li><li>MongoDB-ErrorLog: ap-guangzhou</li><li>TDMYSQL-SLOW: gz</li><li>All DCDB log types: gz</li><li>All MariaDB log types: gz</li><li>All PostgreSQL log types: gz</li><li>All BH log types: overseas-polaris (Hong Kong (China) and other)/fsi-polaris (financial district)/general-polaris (general zone)/intl-sg-prod (international site)</li><li>All APIS log types: gz</li></ul>
+	CloudProductRegion *string `json:"CloudProductRegion,omitnil,omitempty" name:"CloudProductRegion"`
+
+	// <p>CLS target region</p><ul><li>Supported regions: see <a href="https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">region list</a> document</li></ul>
+	ClsRegion *string `json:"ClsRegion,omitnil,omitempty" name:"ClsRegion"`
+
+	// <p>Logset name. Required when LogsetId is not specified. If the log set does not exist, it will automatically create one.</p>
+	LogsetName *string `json:"LogsetName,omitnil,omitempty" name:"LogsetName"`
+
+	// <p>Log topic name. This parameter is required when TopicId is empty. If the log topic does not exist, the system will automatically create one.</p>
+	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+
+	// <p>Log configuration extension info, generally used to store additional log delivery configuration</p>
+	Extend *string `json:"Extend,omitnil,omitempty" name:"Extend"`
+
+	// <p>log set id</p><ul><li>Obtain the log set Id through <a href="https://www.tencentcloud.com/document/api/614/58624?from_cn_redirect=1">Get Logset List</a>.</li></ul>
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// <p>log topic id</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Tag description list. By specifying this parameter, you can simultaneously bind tags to the appropriate theme. Supports up to 10 tag key-value pairs. The same resource can only be bound to the same tag key.</p>
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+type CreateCloudProductLogCollectionRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID</p><ul><li>Obtained through official documentation of connected cloud services</li></ul>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Cloud product identifier, support enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS</p>
+	AssumerName *string `json:"AssumerName,omitnil,omitempty" name:"AssumerName"`
+
+	// <p>Log type, supports enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</p>
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// <p>Product region. The input parameter format for regions varies by log type (LogType). Refer to the following example:</p><ul><li>All CDS log types: ap-guangzhou</li><li>CDB-AUDIT: gz</li><li>TDSQL-C-AUDIT: gz</li><li>MongoDB-AUDIT: gz</li><li>MongoDB-SlowLog: ap-guangzhou</li><li>MongoDB-ErrorLog: ap-guangzhou</li><li>TDMYSQL-SLOW: gz</li><li>All DCDB log types: gz</li><li>All MariaDB log types: gz</li><li>All PostgreSQL log types: gz</li><li>All BH log types: overseas-polaris (Hong Kong (China) and other)/fsi-polaris (financial district)/general-polaris (general zone)/intl-sg-prod (international site)</li><li>All APIS log types: gz</li></ul>
+	CloudProductRegion *string `json:"CloudProductRegion,omitnil,omitempty" name:"CloudProductRegion"`
+
+	// <p>CLS target region</p><ul><li>Supported regions: see <a href="https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">region list</a> document</li></ul>
+	ClsRegion *string `json:"ClsRegion,omitnil,omitempty" name:"ClsRegion"`
+
+	// <p>Logset name. Required when LogsetId is not specified. If the log set does not exist, it will automatically create one.</p>
+	LogsetName *string `json:"LogsetName,omitnil,omitempty" name:"LogsetName"`
+
+	// <p>Log topic name. This parameter is required when TopicId is empty. If the log topic does not exist, the system will automatically create one.</p>
+	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+
+	// <p>Log configuration extension info, generally used to store additional log delivery configuration</p>
+	Extend *string `json:"Extend,omitnil,omitempty" name:"Extend"`
+
+	// <p>log set id</p><ul><li>Obtain the log set Id through <a href="https://www.tencentcloud.com/document/api/614/58624?from_cn_redirect=1">Get Logset List</a>.</li></ul>
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// <p>log topic id</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Tag description list. By specifying this parameter, you can simultaneously bind tags to the appropriate theme. Supports up to 10 tag key-value pairs. The same resource can only be bound to the same tag key.</p>
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+func (r *CreateCloudProductLogCollectionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudProductLogCollectionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "AssumerName")
+	delete(f, "LogType")
+	delete(f, "CloudProductRegion")
+	delete(f, "ClsRegion")
+	delete(f, "LogsetName")
+	delete(f, "TopicName")
+	delete(f, "Extend")
+	delete(f, "LogsetId")
+	delete(f, "TopicId")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudProductLogCollectionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCloudProductLogCollectionResponseParams struct {
+	// <p>Log topic ID.</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Log topic name</p>
+	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+
+	// <p>Logset ID</p>
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// <p>Logset name</p>
+	LogsetName *string `json:"LogsetName,omitnil,omitempty" name:"LogsetName"`
+
+	// <p>-1 Creating, 1 Creation completed</p>
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateCloudProductLogCollectionResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCloudProductLogCollectionResponseParams `json:"Response"`
+}
+
+func (r *CreateCloudProductLogCollectionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCloudProductLogCollectionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateConfigRequestParams struct {
-	// Collection configuration name
+	// collection configuration name
+	// -Names do not contain special characters
+	// - Name can be up to 255 characters, exceeding which will be truncated
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Log topic ID (TopicId) of collection configuration
+	// Log topic ID to which the collection configuration belongs, i.e., topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	Output *string `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// Log collection path containing the filename
+	// Log collection path, which contains the file name. Multiple paths are supported and should be separated by English commas. It is required for file collection.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
 	// The collected log type, default is minimalist_log. Supports the following types:- json_log: JSON File Log (For more information, see [Using JSON pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/17419?from_cn_redirect=1));- delimiter_log: Delimiter - File Logs (For more information, see [Using delimiter pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/17420?from_cn_redirect=1));- minimalist_log: Single-line Full-text File Log (For more information, see [Using single-line full-text pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/17421?from_cn_redirect=1));- fullregex_log: Single line full regular expression - File log (For more information, see [Using single-line - complete regular expression pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/52365?from_cn_redirect=1));- multiline_log: Multiline Full-text File Log (For more information, see [Using multi-line full-text pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/17422?from_cn_redirect=1));- multiline_fullregex_log: Multi-line complete regular expression - File Logs (For more information, see [Using multi-line - complete regular expression pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/52366?from_cn_redirect=1));- user_define_log: Combined parsing (Suitable for logs with multiple nested formats, see [Using combined parsing pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/61310?from_cn_redirect=1));- service_syslog: syslog collection (For more information, see [Collect Syslog](https://intl.cloud.tencent.com/document/product/614/81454?from_cn_redirect=1));- windows_event_log: Windows event log (see [Collecting Windows Event Logs](https://intl.cloud.tencent.com/document/product/614/96678?from_cn_redirect=1)).
@@ -1285,18 +2189,27 @@ type CreateConfigRequestParams struct {
 	// 
 	// Default placeholder value in console: `{\"ClsAgentDefault\":0}`
 	AdvancedConfig *string `json:"AdvancedConfig,omitnil,omitempty" name:"AdvancedConfig"`
+
+	// Log input type (<span style="color:red; font-weight:bold">Note: Required for Windows scenario and only supports file and windows_event type</span>)
+	// -file type collection
+	// -windows event collection
+	// -syslog: System log collection
+	InputType *string `json:"InputType,omitnil,omitempty" name:"InputType"`
 }
 
 type CreateConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Collection configuration name
+	// collection configuration name
+	// -Names do not contain special characters
+	// - Name can be up to 255 characters, exceeding which will be truncated
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Log topic ID (TopicId) of collection configuration
+	// Log topic ID to which the collection configuration belongs, i.e., topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	Output *string `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// Log collection path containing the filename
+	// Log collection path, which contains the file name. Multiple paths are supported and should be separated by English commas. It is required for file collection.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
 	// The collected log type, default is minimalist_log. Supports the following types:- json_log: JSON File Log (For more information, see [Using JSON pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/17419?from_cn_redirect=1));- delimiter_log: Delimiter - File Logs (For more information, see [Using delimiter pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/17420?from_cn_redirect=1));- minimalist_log: Single-line Full-text File Log (For more information, see [Using single-line full-text pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/17421?from_cn_redirect=1));- fullregex_log: Single line full regular expression - File log (For more information, see [Using single-line - complete regular expression pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/52365?from_cn_redirect=1));- multiline_log: Multiline Full-text File Log (For more information, see [Using multi-line full-text pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/17422?from_cn_redirect=1));- multiline_fullregex_log: Multi-line complete regular expression - File Logs (For more information, see [Using multi-line - complete regular expression pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/52366?from_cn_redirect=1));- user_define_log: Combined parsing (Suitable for logs with multiple nested formats, see [Using combined parsing pattern to collect logs](https://intl.cloud.tencent.com/document/product/614/61310?from_cn_redirect=1));- service_syslog: syslog collection (For more information, see [Collect Syslog](https://intl.cloud.tencent.com/document/product/614/81454?from_cn_redirect=1));- windows_event_log: Windows event log (see [Collecting Windows Event Logs](https://intl.cloud.tencent.com/document/product/614/96678?from_cn_redirect=1)).
@@ -1316,6 +2229,12 @@ type CreateConfigRequest struct {
 	// 
 	// Default placeholder value in console: `{\"ClsAgentDefault\":0}`
 	AdvancedConfig *string `json:"AdvancedConfig,omitnil,omitempty" name:"AdvancedConfig"`
+
+	// Log input type (<span style="color:red; font-weight:bold">Note: Required for Windows scenario and only supports file and windows_event type</span>)
+	// -file type collection
+	// -windows event collection
+	// -syslog: System log collection
+	InputType *string `json:"InputType,omitnil,omitempty" name:"InputType"`
 }
 
 func (r *CreateConfigRequest) ToJsonString() string {
@@ -1338,6 +2257,7 @@ func (r *CreateConfigRequest) FromJsonString(s string) error {
 	delete(f, "ExcludePaths")
 	delete(f, "UserDefineRule")
 	delete(f, "AdvancedConfig")
+	delete(f, "InputType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateConfigRequest has unknown keys!", "")
 	}
@@ -1370,8 +2290,245 @@ func (r *CreateConfigResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateConsoleRequestParams struct {
+	// <p>Access method: public - public network, internal - private network</p>
+	AccessMode []*string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
+
+	// <p>Login method</p><p>Enumeration value:</p><ul><li>0: Account password authentication</li><li>1: Anonymous login</li><li>2: Third-party authentication login</li></ul>
+	LoginMode *uint64 `json:"LoginMode,omitnil,omitempty" name:"LoginMode"`
+
+	// <p>Custom domain name prefix</p>
+	DomainPrefix *string `json:"DomainPrefix,omitnil,omitempty" name:"DomainPrefix"`
+
+	// <p>User account information</p><p>"Account password authentication" is required for login method</p>
+	Accounts []*ConsoleAccount `json:"Accounts,omitnil,omitempty" name:"Accounts"`
+
+	// <p>Anonymous login account information</p><p>"Anonymous login" is a required login method.</p>
+	AnonymousLogin *AnonymousLoginInfo `json:"AnonymousLogin,omitnil,omitempty" name:"AnonymousLogin"`
+
+	// <p>Private network type, defaults to 0</p>
+	IntranetType *uint64 `json:"IntranetType,omitnil,omitempty" name:"IntranetType"`
+
+	// <p>Private network region</p>
+	IntranetRegion *string `json:"IntranetRegion,omitnil,omitempty" name:"IntranetRegion"`
+
+	// <p>Private network VpcId</p>
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Private subnet SubnetId</p>
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Auth role information</p><p>"Third-party authentication login" is a required login method.</p>
+	AuthRoles []*AuthRoleInfo `json:"AuthRoles,omitnil,omitempty" name:"AuthRoles"`
+
+	// <p>Tag description list. By specifying this parameter, you can simultaneously bind tags to the corresponding log topic. Supports up to 10 tag key-value pairs. The same resource can only be bound to the same tag key.</p>
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// <p>Custom hidden parameter</p>
+	HideParams []*string `json:"HideParams,omitnil,omitempty" name:"HideParams"`
+
+	// <p>Access Control Rule</p><p>The "third-party authentication login" login method requires the AccessMode: internal && Action: ACCEPT rule.</p>
+	AccessControlRules []*AccessControlRule `json:"AccessControlRules,omitnil,omitempty" name:"AccessControlRules"`
+
+	// <p>Remark</p>
+	Remarks *string `json:"Remarks,omitnil,omitempty" name:"Remarks"`
+
+	// <p>Customize menu</p>
+	Menus []*string `json:"Menus,omitnil,omitempty" name:"Menus"`
+}
+
+type CreateConsoleRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Access method: public - public network, internal - private network</p>
+	AccessMode []*string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
+
+	// <p>Login method</p><p>Enumeration value:</p><ul><li>0: Account password authentication</li><li>1: Anonymous login</li><li>2: Third-party authentication login</li></ul>
+	LoginMode *uint64 `json:"LoginMode,omitnil,omitempty" name:"LoginMode"`
+
+	// <p>Custom domain name prefix</p>
+	DomainPrefix *string `json:"DomainPrefix,omitnil,omitempty" name:"DomainPrefix"`
+
+	// <p>User account information</p><p>"Account password authentication" is required for login method</p>
+	Accounts []*ConsoleAccount `json:"Accounts,omitnil,omitempty" name:"Accounts"`
+
+	// <p>Anonymous login account information</p><p>"Anonymous login" is a required login method.</p>
+	AnonymousLogin *AnonymousLoginInfo `json:"AnonymousLogin,omitnil,omitempty" name:"AnonymousLogin"`
+
+	// <p>Private network type, defaults to 0</p>
+	IntranetType *uint64 `json:"IntranetType,omitnil,omitempty" name:"IntranetType"`
+
+	// <p>Private network region</p>
+	IntranetRegion *string `json:"IntranetRegion,omitnil,omitempty" name:"IntranetRegion"`
+
+	// <p>Private network VpcId</p>
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Private subnet SubnetId</p>
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Auth role information</p><p>"Third-party authentication login" is a required login method.</p>
+	AuthRoles []*AuthRoleInfo `json:"AuthRoles,omitnil,omitempty" name:"AuthRoles"`
+
+	// <p>Tag description list. By specifying this parameter, you can simultaneously bind tags to the corresponding log topic. Supports up to 10 tag key-value pairs. The same resource can only be bound to the same tag key.</p>
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// <p>Custom hidden parameter</p>
+	HideParams []*string `json:"HideParams,omitnil,omitempty" name:"HideParams"`
+
+	// <p>Access Control Rule</p><p>The "third-party authentication login" login method requires the AccessMode: internal && Action: ACCEPT rule.</p>
+	AccessControlRules []*AccessControlRule `json:"AccessControlRules,omitnil,omitempty" name:"AccessControlRules"`
+
+	// <p>Remark</p>
+	Remarks *string `json:"Remarks,omitnil,omitempty" name:"Remarks"`
+
+	// <p>Customize menu</p>
+	Menus []*string `json:"Menus,omitnil,omitempty" name:"Menus"`
+}
+
+func (r *CreateConsoleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConsoleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AccessMode")
+	delete(f, "LoginMode")
+	delete(f, "DomainPrefix")
+	delete(f, "Accounts")
+	delete(f, "AnonymousLogin")
+	delete(f, "IntranetType")
+	delete(f, "IntranetRegion")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "AuthRoles")
+	delete(f, "Tags")
+	delete(f, "HideParams")
+	delete(f, "AccessControlRules")
+	delete(f, "Remarks")
+	delete(f, "Menus")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateConsoleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateConsoleResponseParams struct {
+	// <p>DataSight Console Id</p>
+	ConsoleId *string `json:"ConsoleId,omitnil,omitempty" name:"ConsoleId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateConsoleResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateConsoleResponseParams `json:"Response"`
+}
+
+func (r *CreateConsoleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConsoleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateConsumerGroupRequestParams struct {
+	// ID of the created consumer group
+	// Restriction: Alphanumeric underscore, numbers not allowed at the beginning, length limited to 256.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Consumer heartbeat timeout (seconds).
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// List of log topics included in the created consumer group.
+	Topics []*string `json:"Topics,omitnil,omitempty" name:"Topics"`
+
+	// Logset ID (the logset to which a log topic belongs).
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+}
+
+type CreateConsumerGroupRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the created consumer group
+	// Restriction: Alphanumeric underscore, numbers not allowed at the beginning, length limited to 256.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Consumer heartbeat timeout (seconds).
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// List of log topics included in the created consumer group.
+	Topics []*string `json:"Topics,omitnil,omitempty" name:"Topics"`
+
+	// Logset ID (the logset to which a log topic belongs).
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+}
+
+func (r *CreateConsumerGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConsumerGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ConsumerGroup")
+	delete(f, "Timeout")
+	delete(f, "Topics")
+	delete(f, "LogsetId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateConsumerGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateConsumerGroupResponseParams struct {
+	// Consumer group flag.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateConsumerGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateConsumerGroupResponseParams `json:"Response"`
+}
+
+func (r *CreateConsumerGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConsumerGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateConsumerRequestParams struct {
-	// Log topic ID to bind
+	// Id of the log topic bound to the delivery task.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Whether to deliver log Metadata information, default is true.When NeedContent is true: Content field is valid.When NeedContent is false: Content field is invalid.
@@ -1385,12 +2542,23 @@ type CreateConsumerRequestParams struct {
 
 	// Compression method during delivery. Valid values: 0, 2, and 3. [0: NONE; 2: SNAPPY; 3: LZ4]
 	Compression *int64 `json:"Compression,omitnil,omitempty" name:"Compression"`
+
+	// ARN [Create role](https://www.tencentcloud.com/document/product/598/19381?from_cn_redirect=1)
+	RoleArn *string `json:"RoleArn,omitnil,omitempty" name:"RoleArn"`
+
+	// external ID
+	ExternalId *string `json:"ExternalId,omitnil,omitempty" name:"ExternalId"`
+
+	// Advanced configuration item
+	AdvancedConfig *AdvancedConsumerConfiguration `json:"AdvancedConfig,omitnil,omitempty" name:"AdvancedConfig"`
 }
 
 type CreateConsumerRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log topic ID to bind
+	// Id of the log topic bound to the delivery task.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Whether to deliver log Metadata information, default is true.When NeedContent is true: Content field is valid.When NeedContent is false: Content field is invalid.
@@ -1404,6 +2572,15 @@ type CreateConsumerRequest struct {
 
 	// Compression method during delivery. Valid values: 0, 2, and 3. [0: NONE; 2: SNAPPY; 3: LZ4]
 	Compression *int64 `json:"Compression,omitnil,omitempty" name:"Compression"`
+
+	// ARN [Create role](https://www.tencentcloud.com/document/product/598/19381?from_cn_redirect=1)
+	RoleArn *string `json:"RoleArn,omitnil,omitempty" name:"RoleArn"`
+
+	// external ID
+	ExternalId *string `json:"ExternalId,omitnil,omitempty" name:"ExternalId"`
+
+	// Advanced configuration item
+	AdvancedConfig *AdvancedConsumerConfiguration `json:"AdvancedConfig,omitnil,omitempty" name:"AdvancedConfig"`
 }
 
 func (r *CreateConsumerRequest) ToJsonString() string {
@@ -1423,6 +2600,9 @@ func (r *CreateConsumerRequest) FromJsonString(s string) error {
 	delete(f, "Content")
 	delete(f, "Ckafka")
 	delete(f, "Compression")
+	delete(f, "RoleArn")
+	delete(f, "ExternalId")
+	delete(f, "AdvancedConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateConsumerRequest has unknown keys!", "")
 	}
@@ -1453,65 +2633,89 @@ func (r *CreateConsumerResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCosRechargeRequestParams struct {
-	// ID of the log topic.
+	// Log topic Id.
+	// 
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// ID of the logset.
+	// FL instance set ID.
+	// 
+	// -Obtain the logset Id by searching the [logset list](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1).
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
-	// Shipping task name.
+	// COS import task name, supports up to 128 bytes.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// COS bucket, see the supported [bucket naming conventions](https://intl.cloud.tencent.com/document/product/436/13312?from_cn_redirect=1).
+	// COS bucket, see the supported [bucket naming conventions](https://www.tencentcloud.com/document/product/436/13312?from_cn_redirect=1).	
+	// 
+	// -Get COS buckets via [GET Service (List Buckets)](https://www.tencentcloud.com/document/product/436/8291?from_cn_redirect=1).
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
 	// The region where the COS bucket is located, see the supported [region list](https://intl.cloud.tencent.com/document/product/436/6224?from_cn_redirect=1).
 	BucketRegion *string `json:"BucketRegion,omitnil,omitempty" name:"BucketRegion"`
 
-	// The prefix of the folder where COS files are located.
-	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
-
 	// The type of log collected. `json_log`: JSON logs; `delimiter_log`: separator logs; `minimalist_log`: full text in a single line
 	// Default value: `minimalist_log`
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
-	// Valid values: supported: "", "gzip", "lzop", "snappy"; Default value: "".
+	// The prefix of the folder where COS files are located. By default, it is null, meaning that all files under the bucket will be shipped.
+	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
+
+	// Valid values: supported: "", "gzip", "lzop", "snappy"; Default value: ""; no compression.
 	Compress *string `json:"Compress,omitnil,omitempty" name:"Compress"`
 
 	// Extraction rule. If `ExtractRule` is set, `LogType` must be set.
 	ExtractRuleInfo *ExtractRuleInfo `json:"ExtractRuleInfo,omitnil,omitempty" name:"ExtractRuleInfo"`
+
+	// COS import task type. Valid values: 1: one-time import task (default value); 2: continuous import task.
+	TaskType *uint64 `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// Metadata.
+	Metadata []*string `json:"Metadata,omitnil,omitempty" name:"Metadata"`
 }
 
 type CreateCosRechargeRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the log topic.
+	// Log topic Id.
+	// 
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// ID of the logset.
+	// FL instance set ID.
+	// 
+	// -Obtain the logset Id by searching the [logset list](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1).
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
-	// Shipping task name.
+	// COS import task name, supports up to 128 bytes.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// COS bucket, see the supported [bucket naming conventions](https://intl.cloud.tencent.com/document/product/436/13312?from_cn_redirect=1).
+	// COS bucket, see the supported [bucket naming conventions](https://www.tencentcloud.com/document/product/436/13312?from_cn_redirect=1).	
+	// 
+	// -Get COS buckets via [GET Service (List Buckets)](https://www.tencentcloud.com/document/product/436/8291?from_cn_redirect=1).
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
 	// The region where the COS bucket is located, see the supported [region list](https://intl.cloud.tencent.com/document/product/436/6224?from_cn_redirect=1).
 	BucketRegion *string `json:"BucketRegion,omitnil,omitempty" name:"BucketRegion"`
 
-	// The prefix of the folder where COS files are located.
-	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
-
 	// The type of log collected. `json_log`: JSON logs; `delimiter_log`: separator logs; `minimalist_log`: full text in a single line
 	// Default value: `minimalist_log`
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
-	// Valid values: supported: "", "gzip", "lzop", "snappy"; Default value: "".
+	// The prefix of the folder where COS files are located. By default, it is null, meaning that all files under the bucket will be shipped.
+	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
+
+	// Valid values: supported: "", "gzip", "lzop", "snappy"; Default value: ""; no compression.
 	Compress *string `json:"Compress,omitnil,omitempty" name:"Compress"`
 
 	// Extraction rule. If `ExtractRule` is set, `LogType` must be set.
 	ExtractRuleInfo *ExtractRuleInfo `json:"ExtractRuleInfo,omitnil,omitempty" name:"ExtractRuleInfo"`
+
+	// COS import task type. Valid values: 1: one-time import task (default value); 2: continuous import task.
+	TaskType *uint64 `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// Metadata.
+	Metadata []*string `json:"Metadata,omitnil,omitempty" name:"Metadata"`
 }
 
 func (r *CreateCosRechargeRequest) ToJsonString() string {
@@ -1531,10 +2735,12 @@ func (r *CreateCosRechargeRequest) FromJsonString(s string) error {
 	delete(f, "Name")
 	delete(f, "Bucket")
 	delete(f, "BucketRegion")
-	delete(f, "Prefix")
 	delete(f, "LogType")
+	delete(f, "Prefix")
 	delete(f, "Compress")
 	delete(f, "ExtractRuleInfo")
+	delete(f, "TaskType")
+	delete(f, "Metadata")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCosRechargeRequest has unknown keys!", "")
 	}
@@ -1543,8 +2749,7 @@ func (r *CreateCosRechargeRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCosRechargeResponseParams struct {
-	// cos_recharge record ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// COS import task ID.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1568,31 +2773,250 @@ func (r *CreateCosRechargeResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateDashboardRequestParams struct {
+	// dashboard name
+	DashboardName *string `json:"DashboardName,omitnil,omitempty" name:"DashboardName"`
+
+	// Dashboard configuration data
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// List of tag descriptions. When you specify this parameter, tags can be bound to the corresponding log topic at the same time. It supports up to 10 tag key-value pairs, and one resource can only be bound to one tag key.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+type CreateDashboardRequest struct {
+	*tchttp.BaseRequest
+	
+	// dashboard name
+	DashboardName *string `json:"DashboardName,omitnil,omitempty" name:"DashboardName"`
+
+	// Dashboard configuration data
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// List of tag descriptions. When you specify this parameter, tags can be bound to the corresponding log topic at the same time. It supports up to 10 tag key-value pairs, and one resource can only be bound to one tag key.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+func (r *CreateDashboardRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDashboardRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DashboardName")
+	delete(f, "Data")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDashboardRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDashboardResponseParams struct {
+	// Dashboard ID
+	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateDashboardResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDashboardResponseParams `json:"Response"`
+}
+
+func (r *CreateDashboardResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDashboardResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDashboardSubscribeRequestParams struct {
+	// Dashboard subscription name.
+	// Input limit:
+	// -Cannot be empty
+	// -Length cannot exceed 128 bytes
+	// -Cannot contain character '|'
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Dashboard Id.
+	// -Get the dashboard Id by [searching for the dashboard](https://www.tencentcloud.com/document/product/614/95636?from_cn_redirect=1).
+	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
+
+	// Subscription time cron expression, in format {seconds} {minutes} {hours} {date} {month} {weekday}; (valid data: {minutes} {hours} {date} {month} {weekday})
+	// -{seconds} Value ranges from 0 to 59. 
+	// -{Minutes} Value ranges from 0 to 59. 
+	// -Hour. Value ranges from 0 to 23. 
+	// -{Date} value ranges from 1 to 31 AND (last day of month: L) 
+	// -{Month} value ranges from 1 to 12. 
+	// -Week value ranges from 0 to 6 [0:Sunday, 6:Saturday]
+	Cron *string `json:"Cron,omitnil,omitempty" name:"Cron"`
+
+	// Dashboard subscription data.
+	SubscribeData *DashboardSubscribeData `json:"SubscribeData,omitnil,omitempty" name:"SubscribeData"`
+}
+
+type CreateDashboardSubscribeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Dashboard subscription name.
+	// Input limit:
+	// -Cannot be empty
+	// -Length cannot exceed 128 bytes
+	// -Cannot contain character '|'
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Dashboard Id.
+	// -Get the dashboard Id by [searching for the dashboard](https://www.tencentcloud.com/document/product/614/95636?from_cn_redirect=1).
+	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
+
+	// Subscription time cron expression, in format {seconds} {minutes} {hours} {date} {month} {weekday}; (valid data: {minutes} {hours} {date} {month} {weekday})
+	// -{seconds} Value ranges from 0 to 59. 
+	// -{Minutes} Value ranges from 0 to 59. 
+	// -Hour. Value ranges from 0 to 23. 
+	// -{Date} value ranges from 1 to 31 AND (last day of month: L) 
+	// -{Month} value ranges from 1 to 12. 
+	// -Week value ranges from 0 to 6 [0:Sunday, 6:Saturday]
+	Cron *string `json:"Cron,omitnil,omitempty" name:"Cron"`
+
+	// Dashboard subscription data.
+	SubscribeData *DashboardSubscribeData `json:"SubscribeData,omitnil,omitempty" name:"SubscribeData"`
+}
+
+func (r *CreateDashboardSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDashboardSubscribeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "DashboardId")
+	delete(f, "Cron")
+	delete(f, "SubscribeData")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDashboardSubscribeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDashboardSubscribeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateDashboardSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDashboardSubscribeResponseParams `json:"Response"`
+}
+
+func (r *CreateDashboardSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDashboardSubscribeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateDataTransformRequestParams struct {
 	// Task type. 1: Specify topic; 2: Dynamic creation. For details, please refer to Creating Processing Task Document (https://intl.cloud.tencent.com/document/product/614/63940?from_cn_redirect=1).
 	FuncType *int64 `json:"FuncType,omitnil,omitempty" name:"FuncType"`
 
-	// Source log topic
+	// Log topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	SrcTopicId *string `json:"SrcTopicId,omitnil,omitempty" name:"SrcTopicId"`
 
-	// Data processing task name
+	// Processing task name
+	// Name limit
+	// -Cannot be an empty string
+	// -Cannot contain character '|'
+	// -Longest 128 characters
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Data processing statement
+	// Processing statement. When FuncType is 2, EtlContent must use [log_auto_output](https://www.tencentcloud.com/document/product/614/70733?from_cn_redirect=1#b3c58797-4825-4807-bef4-68106e25024f). 
+	// 
+	// Other reference documents
+	// 
+	// -[Create a processing task](https://www.tencentcloud.com/document/product/614/63940?from_cn_redirect=1) 
+	// -[Function overview](https://www.tencentcloud.com/document/product/614/70395?from_cn_redirect=1)
 	EtlContent *string `json:"EtlContent,omitnil,omitempty" name:"EtlContent"`
 
 	// Processing type.
 	// 1: Process preview using random data from the source log topic; 2: Process preview using user-defined test data; 3: Create real processing tasks.
 	TaskType *int64 `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// Destination topic_id and alias of processing task. This parameter is required when FuncType=1, and not required when FuncType=2.
+	// Target topic_id and alias of the processing task. This parameter is required when FuncType=1, and not required when FuncType=2.
+	// Target topic_id. Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// Alias limitation: 1. Cannot be an empty string. 2. Cannot contain the character '|'.
 	DstResources []*DataTransformResouceInfo `json:"DstResources,omitnil,omitempty" name:"DstResources"`
 
 	// Task status. Valid values: 1 (enabled) and 2 (disabled).
 	EnableFlag *int64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
 
-	// Test data used for previewing the processing result
+	// Test data for preview processing results
+	// Obtain the target log topic ID through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	PreviewLogStatistics []*PreviewLogStatistic `json:"PreviewLogStatistics,omitnil,omitempty" name:"PreviewLogStatistics"`
+
+	// When FuncType is 2, whether to discard data if the count of dynamically created logsets and log topics exceeds product specification limits, default false.
+	// 
+	// false: Create a fallback logset and log topic and write to fallback topic.
+	// true: Discard log data.
+	BackupGiveUpData *bool `json:"BackupGiveUpData,omitnil,omitempty" name:"BackupGiveUpData"`
+
+	// Whether to enable service log shipping. Valid values: 1: disable; 2: enable.
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// Data processing type. Valid values: 0: standard processing task; 1: pre-processing task. A pre-processing task can process the collected logs and then write them into a log topic.
+	DataTransformType *uint64 `json:"DataTransformType,omitnil,omitempty" name:"DataTransformType"`
+
+	// Log status of failed jobs, 1: not retain (default), 2: retain.
+	KeepFailureLog *uint64 `json:"KeepFailureLog,omitnil,omitempty" name:"KeepFailureLog"`
+
+	// Field name of a failed log.
+	FailureLogKey *string `json:"FailureLogKey,omitnil,omitempty" name:"FailureLogKey"`
+
+	// Specify the start time of data processing, a Unix second-level timestamp.
+	// -For any time range within the log topic lifecycle, if it exceeds the lifecycle, only process the part with data within the lifecycle.
+	ProcessFromTimestamp *uint64 `json:"ProcessFromTimestamp,omitnil,omitempty" name:"ProcessFromTimestamp"`
+
+	// Specify the end time of data processing, a Unix second-level timestamp.
+	// 
+	// -Cannot specify a future time
+	// -Leave blank to run constantly
+	ProcessToTimestamp *uint64 `json:"ProcessToTimestamp,omitnil,omitempty" name:"ProcessToTimestamp"`
+
+	// Preview a task (TaskType is 1 or 2) that is already created and used the capacity to associate with external data. This parameter is required.
+	// Data processing task ID - Search the data processing task list basic information (https://www.tencentcloud.com/document/product/614/72182?from_cn_redirect=1) to get the data processing task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Associated data source information
+	DataTransformSqlDataSources []*DataTransformSqlDataSource `json:"DataTransformSqlDataSources,omitnil,omitempty" name:"DataTransformSqlDataSources"`
+
+	// Set environment variable
+	EnvInfos []*EnvInfo `json:"EnvInfos,omitnil,omitempty" name:"EnvInfos"`
 }
 
 type CreateDataTransformRequest struct {
@@ -1601,27 +3025,78 @@ type CreateDataTransformRequest struct {
 	// Task type. 1: Specify topic; 2: Dynamic creation. For details, please refer to Creating Processing Task Document (https://intl.cloud.tencent.com/document/product/614/63940?from_cn_redirect=1).
 	FuncType *int64 `json:"FuncType,omitnil,omitempty" name:"FuncType"`
 
-	// Source log topic
+	// Log topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	SrcTopicId *string `json:"SrcTopicId,omitnil,omitempty" name:"SrcTopicId"`
 
-	// Data processing task name
+	// Processing task name
+	// Name limit
+	// -Cannot be an empty string
+	// -Cannot contain character '|'
+	// -Longest 128 characters
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Data processing statement
+	// Processing statement. When FuncType is 2, EtlContent must use [log_auto_output](https://www.tencentcloud.com/document/product/614/70733?from_cn_redirect=1#b3c58797-4825-4807-bef4-68106e25024f). 
+	// 
+	// Other reference documents
+	// 
+	// -[Create a processing task](https://www.tencentcloud.com/document/product/614/63940?from_cn_redirect=1) 
+	// -[Function overview](https://www.tencentcloud.com/document/product/614/70395?from_cn_redirect=1)
 	EtlContent *string `json:"EtlContent,omitnil,omitempty" name:"EtlContent"`
 
 	// Processing type.
 	// 1: Process preview using random data from the source log topic; 2: Process preview using user-defined test data; 3: Create real processing tasks.
 	TaskType *int64 `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// Destination topic_id and alias of processing task. This parameter is required when FuncType=1, and not required when FuncType=2.
+	// Target topic_id and alias of the processing task. This parameter is required when FuncType=1, and not required when FuncType=2.
+	// Target topic_id. Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// Alias limitation: 1. Cannot be an empty string. 2. Cannot contain the character '|'.
 	DstResources []*DataTransformResouceInfo `json:"DstResources,omitnil,omitempty" name:"DstResources"`
 
 	// Task status. Valid values: 1 (enabled) and 2 (disabled).
 	EnableFlag *int64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
 
-	// Test data used for previewing the processing result
+	// Test data for preview processing results
+	// Obtain the target log topic ID through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	PreviewLogStatistics []*PreviewLogStatistic `json:"PreviewLogStatistics,omitnil,omitempty" name:"PreviewLogStatistics"`
+
+	// When FuncType is 2, whether to discard data if the count of dynamically created logsets and log topics exceeds product specification limits, default false.
+	// 
+	// false: Create a fallback logset and log topic and write to fallback topic.
+	// true: Discard log data.
+	BackupGiveUpData *bool `json:"BackupGiveUpData,omitnil,omitempty" name:"BackupGiveUpData"`
+
+	// Whether to enable service log shipping. Valid values: 1: disable; 2: enable.
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// Data processing type. Valid values: 0: standard processing task; 1: pre-processing task. A pre-processing task can process the collected logs and then write them into a log topic.
+	DataTransformType *uint64 `json:"DataTransformType,omitnil,omitempty" name:"DataTransformType"`
+
+	// Log status of failed jobs, 1: not retain (default), 2: retain.
+	KeepFailureLog *uint64 `json:"KeepFailureLog,omitnil,omitempty" name:"KeepFailureLog"`
+
+	// Field name of a failed log.
+	FailureLogKey *string `json:"FailureLogKey,omitnil,omitempty" name:"FailureLogKey"`
+
+	// Specify the start time of data processing, a Unix second-level timestamp.
+	// -For any time range within the log topic lifecycle, if it exceeds the lifecycle, only process the part with data within the lifecycle.
+	ProcessFromTimestamp *uint64 `json:"ProcessFromTimestamp,omitnil,omitempty" name:"ProcessFromTimestamp"`
+
+	// Specify the end time of data processing, a Unix second-level timestamp.
+	// 
+	// -Cannot specify a future time
+	// -Leave blank to run constantly
+	ProcessToTimestamp *uint64 `json:"ProcessToTimestamp,omitnil,omitempty" name:"ProcessToTimestamp"`
+
+	// Preview a task (TaskType is 1 or 2) that is already created and used the capacity to associate with external data. This parameter is required.
+	// Data processing task ID - Search the data processing task list basic information (https://www.tencentcloud.com/document/product/614/72182?from_cn_redirect=1) to get the data processing task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Associated data source information
+	DataTransformSqlDataSources []*DataTransformSqlDataSource `json:"DataTransformSqlDataSources,omitnil,omitempty" name:"DataTransformSqlDataSources"`
+
+	// Set environment variable
+	EnvInfos []*EnvInfo `json:"EnvInfos,omitnil,omitempty" name:"EnvInfos"`
 }
 
 func (r *CreateDataTransformRequest) ToJsonString() string {
@@ -1644,6 +3119,16 @@ func (r *CreateDataTransformRequest) FromJsonString(s string) error {
 	delete(f, "DstResources")
 	delete(f, "EnableFlag")
 	delete(f, "PreviewLogStatistics")
+	delete(f, "BackupGiveUpData")
+	delete(f, "HasServicesLog")
+	delete(f, "DataTransformType")
+	delete(f, "KeepFailureLog")
+	delete(f, "FailureLogKey")
+	delete(f, "ProcessFromTimestamp")
+	delete(f, "ProcessToTimestamp")
+	delete(f, "TaskId")
+	delete(f, "DataTransformSqlDataSources")
+	delete(f, "EnvInfos")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDataTransformRequest has unknown keys!", "")
 	}
@@ -1677,44 +3162,54 @@ func (r *CreateDataTransformResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDeliverCloudFunctionRequestParams struct {
-	// Topic id belonging to the delivery rule
+	// TopicId to which the Shipping Rule belongs.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// -Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Cloud Function name for delivery
+	// Name of the cloud function for delivery. Only event functions (https://www.tencentcloud.com/document/product/583/9694?from_cn_redirect=1#scf-.E4.BA.8B.E4.BB.B6.E5.87.BD.E6.95.B0) (function type selection (https://www.tencentcloud.com/document/product/583/73483?from_cn_redirect=1)) are supported.
+	// Get function information by [getting the function list](https://www.tencentcloud.com/document/product/583/18582?from_cn_redirect=1).
 	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
 
-	// Namespace
+	// Namespace. See [Namespace management](https://www.tencentcloud.com/document/product/583/35913?from_cn_redirect=1).
+	// -Obtain the Name by listing the namespace list (https://www.tencentcloud.com/document/product/583/37158?from_cn_redirect=1).
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Function version
+	// Function version.
+	// -Get the function version by [querying the function version](https://www.tencentcloud.com/document/product/583/37162?from_cn_redirect=1).
 	Qualifier *string `json:"Qualifier,omitnil,omitempty" name:"Qualifier"`
 
-	// Maximum waiting time for delivery. Unit: seconds
+	// Maximum waiting time for delivery. Unit: seconds. Default: 60.
 	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
-	// Maximum number of messages to deliver
+	// Maximum number of messages to deliver. Default is 100. Supported range [1,10000].
 	MaxMsgNum *uint64 `json:"MaxMsgNum,omitnil,omitempty" name:"MaxMsgNum"`
 }
 
 type CreateDeliverCloudFunctionRequest struct {
 	*tchttp.BaseRequest
 	
-	// Topic id belonging to the delivery rule
+	// TopicId to which the Shipping Rule belongs.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// -Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Cloud Function name for delivery
+	// Name of the cloud function for delivery. Only event functions (https://www.tencentcloud.com/document/product/583/9694?from_cn_redirect=1#scf-.E4.BA.8B.E4.BB.B6.E5.87.BD.E6.95.B0) (function type selection (https://www.tencentcloud.com/document/product/583/73483?from_cn_redirect=1)) are supported.
+	// Get function information by [getting the function list](https://www.tencentcloud.com/document/product/583/18582?from_cn_redirect=1).
 	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
 
-	// Namespace
+	// Namespace. See [Namespace management](https://www.tencentcloud.com/document/product/583/35913?from_cn_redirect=1).
+	// -Obtain the Name by listing the namespace list (https://www.tencentcloud.com/document/product/583/37158?from_cn_redirect=1).
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Function version
+	// Function version.
+	// -Get the function version by [querying the function version](https://www.tencentcloud.com/document/product/583/37162?from_cn_redirect=1).
 	Qualifier *string `json:"Qualifier,omitnil,omitempty" name:"Qualifier"`
 
-	// Maximum waiting time for delivery. Unit: seconds
+	// Maximum waiting time for delivery. Unit: seconds. Default: 60.
 	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
-	// Maximum number of messages to deliver
+	// Maximum number of messages to deliver. Default is 100. Supported range [1,10000].
 	MaxMsgNum *uint64 `json:"MaxMsgNum,omitnil,omitempty" name:"MaxMsgNum"`
 }
 
@@ -1765,8 +3260,232 @@ func (r *CreateDeliverCloudFunctionResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateDlcDeliverRequestParams struct {
+	// <p>Log topic id.</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Name: Length not exceeding 64 characters, starts with a letter, accepts 0-9, a-z, A-Z, _, -, Chinese character.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Delivery Type. 0: Batch delivery, 1: Real-time delivery</p>
+	DeliverType *uint64 `json:"DeliverType,omitnil,omitempty" name:"DeliverType"`
+
+	// <p>Start time of the delivery time range</p>
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>dlc configuration message</p>
+	DlcInfo *DlcInfo `json:"DlcInfo,omitnil,omitempty" name:"DlcInfo"`
+
+	// <p>Delivery file size in MB. Required when DeliverType=0. Range: 5&lt;= MaxSize &lt;= 256.</p>
+	MaxSize *uint64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
+
+	// <p>Delivery interval in seconds. Required when DeliverType=0. Valid range: 300 &lt;= Interval &lt;= 900.</p>
+	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// <p>End time of the delivery time range. If empty, it means unlimited time. When EndTime is not empty, it must be greater than StartTime.</p>
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Whether to enable delivery service log. Valid values: 1: disable; 2: enable. Enabled by default.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+type CreateDlcDeliverRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Log topic id.</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Name: Length not exceeding 64 characters, starts with a letter, accepts 0-9, a-z, A-Z, _, -, Chinese character.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Delivery Type. 0: Batch delivery, 1: Real-time delivery</p>
+	DeliverType *uint64 `json:"DeliverType,omitnil,omitempty" name:"DeliverType"`
+
+	// <p>Start time of the delivery time range</p>
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>dlc configuration message</p>
+	DlcInfo *DlcInfo `json:"DlcInfo,omitnil,omitempty" name:"DlcInfo"`
+
+	// <p>Delivery file size in MB. Required when DeliverType=0. Range: 5&lt;= MaxSize &lt;= 256.</p>
+	MaxSize *uint64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
+
+	// <p>Delivery interval in seconds. Required when DeliverType=0. Valid range: 300 &lt;= Interval &lt;= 900.</p>
+	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// <p>End time of the delivery time range. If empty, it means unlimited time. When EndTime is not empty, it must be greater than StartTime.</p>
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Whether to enable delivery service log. Valid values: 1: disable; 2: enable. Enabled by default.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+func (r *CreateDlcDeliverRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDlcDeliverRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Name")
+	delete(f, "DeliverType")
+	delete(f, "StartTime")
+	delete(f, "DlcInfo")
+	delete(f, "MaxSize")
+	delete(f, "Interval")
+	delete(f, "EndTime")
+	delete(f, "HasServicesLog")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDlcDeliverRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDlcDeliverResponseParams struct {
+	// <p>Configuration id</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateDlcDeliverResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDlcDeliverResponseParams `json:"Response"`
+}
+
+func (r *CreateDlcDeliverResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDlcDeliverResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateEsRechargeRequestParams struct {
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// -Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Name: Length not exceeding 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Index information. Different indexes can be separated by English commas and support wildcards.
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// Elasticsearch Query Statement.
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// Cluster configuration.
+	EsInfo *EsInfo `json:"EsInfo,omitnil,omitempty" name:"EsInfo"`
+
+	// es import information.
+	ImportInfo *EsImportInfo `json:"ImportInfo,omitnil,omitempty" name:"ImportInfo"`
+
+	// Field information of es import time.
+	TimeInfo *EsTimeInfo `json:"TimeInfo,omitnil,omitempty" name:"TimeInfo"`
+
+	// Whether to enable delivery service log. Valid values: 1: disable; 2: enable. Enabled by default.
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+type CreateEsRechargeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// -Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Name: Length not exceeding 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Index information. Different indexes can be separated by English commas and support wildcards.
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// Elasticsearch Query Statement.
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// Cluster configuration.
+	EsInfo *EsInfo `json:"EsInfo,omitnil,omitempty" name:"EsInfo"`
+
+	// es import information.
+	ImportInfo *EsImportInfo `json:"ImportInfo,omitnil,omitempty" name:"ImportInfo"`
+
+	// Field information of es import time.
+	TimeInfo *EsTimeInfo `json:"TimeInfo,omitnil,omitempty" name:"TimeInfo"`
+
+	// Whether to enable delivery service log. Valid values: 1: disable; 2: enable. Enabled by default.
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+func (r *CreateEsRechargeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateEsRechargeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Name")
+	delete(f, "Index")
+	delete(f, "Query")
+	delete(f, "EsInfo")
+	delete(f, "ImportInfo")
+	delete(f, "TimeInfo")
+	delete(f, "HasServicesLog")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateEsRechargeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateEsRechargeResponseParams struct {
+	// Configuration id
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateEsRechargeResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateEsRechargeResponseParams `json:"Response"`
+}
+
+func (r *CreateEsRechargeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateEsRechargeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateExportRequestParams struct {
 	// Log topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Number of logs to be exported. Maximum value: 50 million
@@ -1789,12 +3508,16 @@ type CreateExportRequestParams struct {
 
 	// Syntax rules; the default value is 0.0: Lucene syntax; 1: CQL syntax.
 	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
+
+	// Export fields
+	DerivedFields []*string `json:"DerivedFields,omitnil,omitempty" name:"DerivedFields"`
 }
 
 type CreateExportRequest struct {
 	*tchttp.BaseRequest
 	
 	// Log topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Number of logs to be exported. Maximum value: 50 million
@@ -1817,6 +3540,9 @@ type CreateExportRequest struct {
 
 	// Syntax rules; the default value is 0.0: Lucene syntax; 1: CQL syntax.
 	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
+
+	// Export fields
+	DerivedFields []*string `json:"DerivedFields,omitnil,omitempty" name:"DerivedFields"`
 }
 
 func (r *CreateExportRequest) ToJsonString() string {
@@ -1839,6 +3565,7 @@ func (r *CreateExportRequest) FromJsonString(s string) error {
 	delete(f, "Order")
 	delete(f, "Format")
 	delete(f, "SyntaxRule")
+	delete(f, "DerivedFields")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateExportRequest has unknown keys!", "")
 	}
@@ -1871,8 +3598,112 @@ func (r *CreateExportResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateHostMetricConfigRequestParams struct {
+	// Metric Topic id
+	// - Get the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note: BizType 0: log topic (default value), 1: metric topic.
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Name
+	// 
+	// -Length not exceeding 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Machine group id list. Supports up to 100 machine groups.
+	MachineGroupIds []*string `json:"MachineGroupIds,omitnil,omitempty" name:"MachineGroupIds"`
+
+	// Collection frequency. Unit: ms. Minimum support 5000 ms.
+	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// Collection items. Support "cpu", "mem", "net", "disk", "system". **Currently only support: ALL collection items require configuration**.
+	// - cpu:CPU
+	// -mem: memory
+	// -net: Network
+	// -disk
+	// -system
+	HostMetricItems []*HostMetricItem `json:"HostMetricItems,omitnil,omitempty" name:"HostMetricItems"`
+}
+
+type CreateHostMetricConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Metric Topic id
+	// - Get the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note: BizType 0: log topic (default value), 1: metric topic.
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Name
+	// 
+	// -Length not exceeding 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Machine group id list. Supports up to 100 machine groups.
+	MachineGroupIds []*string `json:"MachineGroupIds,omitnil,omitempty" name:"MachineGroupIds"`
+
+	// Collection frequency. Unit: ms. Minimum support 5000 ms.
+	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// Collection items. Support "cpu", "mem", "net", "disk", "system". **Currently only support: ALL collection items require configuration**.
+	// - cpu:CPU
+	// -mem: memory
+	// -net: Network
+	// -disk
+	// -system
+	HostMetricItems []*HostMetricItem `json:"HostMetricItems,omitnil,omitempty" name:"HostMetricItems"`
+}
+
+func (r *CreateHostMetricConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateHostMetricConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Name")
+	delete(f, "MachineGroupIds")
+	delete(f, "Interval")
+	delete(f, "HostMetricItems")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateHostMetricConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateHostMetricConfigResponseParams struct {
+	// Host metric collection configuration id
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateHostMetricConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateHostMetricConfigResponseParams `json:"Response"`
+}
+
+func (r *CreateHostMetricConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateHostMetricConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateIndexRequestParams struct {
-	// Log topic ID
+	// Log topic Id.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Index rule
@@ -1891,12 +3722,16 @@ type CreateIndexRequestParams struct {
 	// * `1`: Full-text indexing includes all metadata fields.
 	// * `2`: Full-text indexing does not include metadata fields.
 	MetadataFlag *uint64 `json:"MetadataFlag,omitnil,omitempty" name:"MetadataFlag"`
+
+	// Custom log parsing exception storage fields
+	CoverageField *string `json:"CoverageField,omitnil,omitempty" name:"CoverageField"`
 }
 
 type CreateIndexRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log topic ID
+	// Log topic Id.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Index rule
@@ -1915,6 +3750,9 @@ type CreateIndexRequest struct {
 	// * `1`: Full-text indexing includes all metadata fields.
 	// * `2`: Full-text indexing does not include metadata fields.
 	MetadataFlag *uint64 `json:"MetadataFlag,omitnil,omitempty" name:"MetadataFlag"`
+
+	// Custom log parsing exception storage fields
+	CoverageField *string `json:"CoverageField,omitnil,omitempty" name:"CoverageField"`
 }
 
 func (r *CreateIndexRequest) ToJsonString() string {
@@ -1934,6 +3772,7 @@ func (r *CreateIndexRequest) FromJsonString(s string) error {
 	delete(f, "Status")
 	delete(f, "IncludeInternalFields")
 	delete(f, "MetadataFlag")
+	delete(f, "CoverageField")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateIndexRequest has unknown keys!", "")
 	}
@@ -1964,7 +3803,9 @@ func (r *CreateIndexResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateKafkaRechargeRequestParams struct {
-	// Target topic ID
+	// Import the target topic ID of CLS.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Kafka data import configuration name
@@ -1982,26 +3823,34 @@ type CreateKafkaRechargeRequestParams struct {
 	// Log Import Rules.
 	LogRechargeRule *LogRechargeRuleInfo `json:"LogRechargeRule,omitnil,omitempty" name:"LogRechargeRule"`
 
-	// CKafka instance ID, which is required when `KafkaType` is set to `0`
+	// Tencent Cloud CKafka instance ID. Required when KafkaType is 0.
+	// -Obtain the instance id through [Get Instance List Information](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
 	KafkaInstance *string `json:"KafkaInstance,omitnil,omitempty" name:"KafkaInstance"`
 
-	// Service address, which is required when `KafkaType` is set to `1`
+	// Service address, which is required when KafkaType is 1.
 	ServerAddr *string `json:"ServerAddr,omitnil,omitempty" name:"ServerAddr"`
 
-	// Whether the service address uses an encrypted connection, which is required when `KafkaType` is set to `1`
+	// Whether ServerAddr is an encrypted connection. Required when KafkaType is 1.
 	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitnil,omitempty" name:"IsEncryptionAddr"`
 
-	// Encrypted Access ProtocolWhen KafkaType is 1 and IsEncryptionAddr is true, Protocol is required
+	// Encrypted Access Protocol.
+	// When KafkaType is 1 and IsEncryptionAddr is true, Protocol is required.
 	Protocol *KafkaProtocolInfo `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-	// Kafka consumer group name
+	// User Kafka consumer group name.
+	// -A consumption group is a scalable and fault-tolerant consumer mechanism provided by Kafka. Multiple consumers exist in a consumption group, and all consumers in the group consume subscribed messages of the Topic. A consumer can consume multiple partitions simultaneously, but one Partition can only be consumed by one consumer in the group.
 	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
+
+	// User kafka extended information
+	UserKafkaMeta *UserKafkaMeta `json:"UserKafkaMeta,omitnil,omitempty" name:"UserKafkaMeta"`
 }
 
 type CreateKafkaRechargeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Target topic ID
+	// Import the target topic ID of CLS.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Kafka data import configuration name
@@ -2019,20 +3868,26 @@ type CreateKafkaRechargeRequest struct {
 	// Log Import Rules.
 	LogRechargeRule *LogRechargeRuleInfo `json:"LogRechargeRule,omitnil,omitempty" name:"LogRechargeRule"`
 
-	// CKafka instance ID, which is required when `KafkaType` is set to `0`
+	// Tencent Cloud CKafka instance ID. Required when KafkaType is 0.
+	// -Obtain the instance id through [Get Instance List Information](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
 	KafkaInstance *string `json:"KafkaInstance,omitnil,omitempty" name:"KafkaInstance"`
 
-	// Service address, which is required when `KafkaType` is set to `1`
+	// Service address, which is required when KafkaType is 1.
 	ServerAddr *string `json:"ServerAddr,omitnil,omitempty" name:"ServerAddr"`
 
-	// Whether the service address uses an encrypted connection, which is required when `KafkaType` is set to `1`
+	// Whether ServerAddr is an encrypted connection. Required when KafkaType is 1.
 	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitnil,omitempty" name:"IsEncryptionAddr"`
 
-	// Encrypted Access ProtocolWhen KafkaType is 1 and IsEncryptionAddr is true, Protocol is required
+	// Encrypted Access Protocol.
+	// When KafkaType is 1 and IsEncryptionAddr is true, Protocol is required.
 	Protocol *KafkaProtocolInfo `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-	// Kafka consumer group name
+	// User Kafka consumer group name.
+	// -A consumption group is a scalable and fault-tolerant consumer mechanism provided by Kafka. Multiple consumers exist in a consumption group, and all consumers in the group consume subscribed messages of the Topic. A consumer can consume multiple partitions simultaneously, but one Partition can only be consumed by one consumer in the group.
 	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
+
+	// User kafka extended information
+	UserKafkaMeta *UserKafkaMeta `json:"UserKafkaMeta,omitnil,omitempty" name:"UserKafkaMeta"`
 }
 
 func (r *CreateKafkaRechargeRequest) ToJsonString() string {
@@ -2058,6 +3913,7 @@ func (r *CreateKafkaRechargeRequest) FromJsonString(s string) error {
 	delete(f, "IsEncryptionAddr")
 	delete(f, "Protocol")
 	delete(f, "ConsumerGroupName")
+	delete(f, "UserKafkaMeta")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateKafkaRechargeRequest has unknown keys!", "")
 	}
@@ -2091,21 +3947,39 @@ func (r *CreateKafkaRechargeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateLogsetRequestParams struct {
-	// Logset name, which must be unique
+	// Log set name.
+	// 
+	// -Supports a maximum of 255 characters. The `|` character is not supported.
 	LogsetName *string `json:"LogsetName,omitnil,omitempty" name:"LogsetName"`
 
 	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Logset ID, format: custom part-User APPID. Automatically generate ID if left empty.
+	// 
+	// -The custom part only supports lowercase letters, digits, and -, cannot start or end with -, and has a length of 3 to 40 characters.
+	// -The end requires the use of - to concatenate the User APPID, which can be queried on the https://console.cloud.tencent.com/developer page.
+	// -If you specify this field, ensure uniqueness across all regions.
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 }
 
 type CreateLogsetRequest struct {
 	*tchttp.BaseRequest
 	
-	// Logset name, which must be unique
+	// Log set name.
+	// 
+	// -Supports a maximum of 255 characters. The `|` character is not supported.
 	LogsetName *string `json:"LogsetName,omitnil,omitempty" name:"LogsetName"`
 
 	// Tag description list. Up to 10 tag key-value pairs are supported and must be unique.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Logset ID, format: custom part-User APPID. Automatically generate ID if left empty.
+	// 
+	// -The custom part only supports lowercase letters, digits, and -, cannot start or end with -, and has a length of 3 to 40 characters.
+	// -The end requires the use of - to concatenate the User APPID, which can be queried on the https://console.cloud.tencent.com/developer page.
+	// -If you specify this field, ensure uniqueness across all regions.
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 }
 
 func (r *CreateLogsetRequest) ToJsonString() string {
@@ -2122,6 +3996,7 @@ func (r *CreateLogsetRequest) FromJsonString(s string) error {
 	}
 	delete(f, "LogsetName")
 	delete(f, "Tags")
+	delete(f, "LogsetId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLogsetRequest has unknown keys!", "")
 	}
@@ -2155,68 +4030,90 @@ func (r *CreateLogsetResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateMachineGroupRequestParams struct {
-	// Machine group name, which must be unique
+	// Machine group name.
+	// Input limit:
+	// -Supports up to 255 characters and cannot be an empty string
+	// -Cannot contain character '|'
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 
-	// Type of the machine group to be created. Valid values: `ip`: use the IP string list in `Values` to create a machine group; `label`: use the tag string list in `Values` to create a machine group
+	// Create machine group type. Values are as follows:
+	// -Type: ip. Create a machine group with a string list of IPs in Values.
+	// -Type: label. Create a machine group with a string list of tags in Values.
 	MachineGroupType *MachineGroupTypeInfo `json:"MachineGroupType,omitnil,omitempty" name:"MachineGroupType"`
 
 	// Tag description list. This parameter is used to bind a tag to a machine group. Up to 10 tag key-value pairs are supported, and a resource can be bound to only one tag key.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Whether to enable automatic update for the machine group
+	// Whether to enable machine group auto-update. Default false.
 	AutoUpdate *bool `json:"AutoUpdate,omitnil,omitempty" name:"AutoUpdate"`
 
-	// Update start time. We recommend you update LogListener during off-peak hours.
+	// Start time of upgrade. It is suggested to upgrade LogListener in the off-peak period of the business.
+	// Time format: HH:mm:ss.
 	UpdateStartTime *string `json:"UpdateStartTime,omitnil,omitempty" name:"UpdateStartTime"`
 
-	// Update end time. We recommend you update LogListener during off-peak hours.
+	// End time of upgrade. It is suggested to upgrade LogListener in the off-peak period of the business.
+	// Time format: HH:mm:ss.
 	UpdateEndTime *string `json:"UpdateEndTime,omitnil,omitempty" name:"UpdateEndTime"`
 
-	// Whether to enable the service log to record the logs generated by the LogListener service itself. After it is enabled, the internal logset `cls_service_logging` and the `loglistener_status`, `loglistener_alarm`, and `loglistener_business` log topics will be created, which will not incur fees
+	// Whether to enable service logs, which is used to record logs generated by the Loglistener service itself. After enabling, it will create an internal logset named cls_service_logging and log topics named loglistener_status, loglistener_alarm, and loglistener_business, without incurring charges. The default value is false.
 	ServiceLogging *bool `json:"ServiceLogging,omitnil,omitempty" name:"ServiceLogging"`
 
-	// Offline cleaning time for machines in machine group
+	// Offline cleanup time for machines in the machine group, in days.
+	// 
+	// -This parameter is valid only when larger than 0.
 	DelayCleanupTime *int64 `json:"DelayCleanupTime,omitnil,omitempty" name:"DelayCleanupTime"`
 
 	// Metadata information list of a machine group
 	MetaTags []*MetaTagInfo `json:"MetaTags,omitnil,omitempty" name:"MetaTags"`
 
-	// System type, default 0, 0: Linux, 1: Windows
+	// System type. Values as follows:
+	// -0: Linux (default value)
+	// - 1:Windows
 	OSType *uint64 `json:"OSType,omitnil,omitempty" name:"OSType"`
 }
 
 type CreateMachineGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Machine group name, which must be unique
+	// Machine group name.
+	// Input limit:
+	// -Supports up to 255 characters and cannot be an empty string
+	// -Cannot contain character '|'
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 
-	// Type of the machine group to be created. Valid values: `ip`: use the IP string list in `Values` to create a machine group; `label`: use the tag string list in `Values` to create a machine group
+	// Create machine group type. Values are as follows:
+	// -Type: ip. Create a machine group with a string list of IPs in Values.
+	// -Type: label. Create a machine group with a string list of tags in Values.
 	MachineGroupType *MachineGroupTypeInfo `json:"MachineGroupType,omitnil,omitempty" name:"MachineGroupType"`
 
 	// Tag description list. This parameter is used to bind a tag to a machine group. Up to 10 tag key-value pairs are supported, and a resource can be bound to only one tag key.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Whether to enable automatic update for the machine group
+	// Whether to enable machine group auto-update. Default false.
 	AutoUpdate *bool `json:"AutoUpdate,omitnil,omitempty" name:"AutoUpdate"`
 
-	// Update start time. We recommend you update LogListener during off-peak hours.
+	// Start time of upgrade. It is suggested to upgrade LogListener in the off-peak period of the business.
+	// Time format: HH:mm:ss.
 	UpdateStartTime *string `json:"UpdateStartTime,omitnil,omitempty" name:"UpdateStartTime"`
 
-	// Update end time. We recommend you update LogListener during off-peak hours.
+	// End time of upgrade. It is suggested to upgrade LogListener in the off-peak period of the business.
+	// Time format: HH:mm:ss.
 	UpdateEndTime *string `json:"UpdateEndTime,omitnil,omitempty" name:"UpdateEndTime"`
 
-	// Whether to enable the service log to record the logs generated by the LogListener service itself. After it is enabled, the internal logset `cls_service_logging` and the `loglistener_status`, `loglistener_alarm`, and `loglistener_business` log topics will be created, which will not incur fees
+	// Whether to enable service logs, which is used to record logs generated by the Loglistener service itself. After enabling, it will create an internal logset named cls_service_logging and log topics named loglistener_status, loglistener_alarm, and loglistener_business, without incurring charges. The default value is false.
 	ServiceLogging *bool `json:"ServiceLogging,omitnil,omitempty" name:"ServiceLogging"`
 
-	// Offline cleaning time for machines in machine group
+	// Offline cleanup time for machines in the machine group, in days.
+	// 
+	// -This parameter is valid only when larger than 0.
 	DelayCleanupTime *int64 `json:"DelayCleanupTime,omitnil,omitempty" name:"DelayCleanupTime"`
 
 	// Metadata information list of a machine group
 	MetaTags []*MetaTagInfo `json:"MetaTags,omitnil,omitempty" name:"MetaTags"`
 
-	// System type, default 0, 0: Linux, 1: Windows
+	// System type. Values as follows:
+	// -0: Linux (default value)
+	// - 1:Windows
 	OSType *uint64 `json:"OSType,omitnil,omitempty" name:"OSType"`
 }
 
@@ -2274,11 +4171,731 @@ func (r *CreateMachineGroupResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateMetricConfigRequestParams struct {
+	// Metric log topic id.
+	// - Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Collection configuration source. Support: `0`, `1`.
+	// -0: Self-build k8s
+	// - 1:TKE
+	Source *uint64 `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// Machine group ID.
+	GroupIds []*string `json:"GroupIds,omitnil,omitempty" name:"GroupIds"`
+
+	// Monitoring type. Supported values: `0`, `1`. Cannot be modified.
+	// -0: Basic monitoring
+	// -Custom monitoring
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Collection configuration method. Supports `0`, `1`. Cannot be modified.
+	// -0: Ordinary setting method. The Type field is only for `1`.
+	// -YAML import method. Type can be `0` or `1`.
+	Flag *uint64 `json:"Flag,omitnil,omitempty" name:"Flag"`
+
+	// Name: Length not exceeding 253 characters, check format `[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*`.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Collection object. This parameter is valid only when Flag is 0.
+	Spec *MetricSpec `json:"Spec,omitnil,omitempty" name:"Spec"`
+
+	// Label processing. This parameter is valid only when Flag is 0.
+	MetricRelabels []*Relabeling `json:"MetricRelabels,omitnil,omitempty" name:"MetricRelabels"`
+
+	// Custom metadata. This parameter is valid only when Flag is 0.
+	MetricLabel *MetricConfigLabel `json:"MetricLabel,omitnil,omitempty" name:"MetricLabel"`
+
+	// Communication protocol. Valid values: HTTP and HTTPS. This parameter is valid only when Flag is 0.
+	Scheme *string `json:"Scheme,omitnil,omitempty" name:"Scheme"`
+
+	// Collection frequency. This parameter is valid only when Flag is 0.
+	// -Check format: `^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$`
+	// -Default: 60s
+	ScrapeInterval *string `json:"ScrapeInterval,omitnil,omitempty" name:"ScrapeInterval"`
+
+	// Collection timeout. This parameter is valid only when Flag is 0.
+	// -Check format: `^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$`
+	// -Default: 30s
+	ScrapeTimeout *string `json:"ScrapeTimeout,omitnil,omitempty" name:"ScrapeTimeout"`
+
+	// How to handle tag conflicts. This parameter is valid only when Flag=0 and supports `true` and `false`.
+	// -`false`: Rename conflicting tags in configuration data
+	// -`true`: Ignore server-side tag conflicts
+	HonorLabels *bool `json:"HonorLabels,omitnil,omitempty" name:"HonorLabels"`
+
+	// Collection configuration, which is a string in YAML format. It is required when Flag is 1.
+	YamlSpec *MetricYamlSpec `json:"YamlSpec,omitnil,omitempty" name:"YamlSpec"`
+}
+
+type CreateMetricConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Metric log topic id.
+	// - Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Collection configuration source. Support: `0`, `1`.
+	// -0: Self-build k8s
+	// - 1:TKE
+	Source *uint64 `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// Machine group ID.
+	GroupIds []*string `json:"GroupIds,omitnil,omitempty" name:"GroupIds"`
+
+	// Monitoring type. Supported values: `0`, `1`. Cannot be modified.
+	// -0: Basic monitoring
+	// -Custom monitoring
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Collection configuration method. Supports `0`, `1`. Cannot be modified.
+	// -0: Ordinary setting method. The Type field is only for `1`.
+	// -YAML import method. Type can be `0` or `1`.
+	Flag *uint64 `json:"Flag,omitnil,omitempty" name:"Flag"`
+
+	// Name: Length not exceeding 253 characters, check format `[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*`.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Collection object. This parameter is valid only when Flag is 0.
+	Spec *MetricSpec `json:"Spec,omitnil,omitempty" name:"Spec"`
+
+	// Label processing. This parameter is valid only when Flag is 0.
+	MetricRelabels []*Relabeling `json:"MetricRelabels,omitnil,omitempty" name:"MetricRelabels"`
+
+	// Custom metadata. This parameter is valid only when Flag is 0.
+	MetricLabel *MetricConfigLabel `json:"MetricLabel,omitnil,omitempty" name:"MetricLabel"`
+
+	// Communication protocol. Valid values: HTTP and HTTPS. This parameter is valid only when Flag is 0.
+	Scheme *string `json:"Scheme,omitnil,omitempty" name:"Scheme"`
+
+	// Collection frequency. This parameter is valid only when Flag is 0.
+	// -Check format: `^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$`
+	// -Default: 60s
+	ScrapeInterval *string `json:"ScrapeInterval,omitnil,omitempty" name:"ScrapeInterval"`
+
+	// Collection timeout. This parameter is valid only when Flag is 0.
+	// -Check format: `^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$`
+	// -Default: 30s
+	ScrapeTimeout *string `json:"ScrapeTimeout,omitnil,omitempty" name:"ScrapeTimeout"`
+
+	// How to handle tag conflicts. This parameter is valid only when Flag=0 and supports `true` and `false`.
+	// -`false`: Rename conflicting tags in configuration data
+	// -`true`: Ignore server-side tag conflicts
+	HonorLabels *bool `json:"HonorLabels,omitnil,omitempty" name:"HonorLabels"`
+
+	// Collection configuration, which is a string in YAML format. It is required when Flag is 1.
+	YamlSpec *MetricYamlSpec `json:"YamlSpec,omitnil,omitempty" name:"YamlSpec"`
+}
+
+func (r *CreateMetricConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateMetricConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Source")
+	delete(f, "GroupIds")
+	delete(f, "Type")
+	delete(f, "Flag")
+	delete(f, "Name")
+	delete(f, "Spec")
+	delete(f, "MetricRelabels")
+	delete(f, "MetricLabel")
+	delete(f, "Scheme")
+	delete(f, "ScrapeInterval")
+	delete(f, "ScrapeTimeout")
+	delete(f, "HonorLabels")
+	delete(f, "YamlSpec")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMetricConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateMetricConfigResponseParams struct {
+	// List of metric collection configuration IDs.
+	ConfigIds []*string `json:"ConfigIds,omitnil,omitempty" name:"ConfigIds"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateMetricConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateMetricConfigResponseParams `json:"Response"`
+}
+
+func (r *CreateMetricConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateMetricConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateMetricSubscribeRequestParams struct {
+	// Name. It can contain a maximum of 64 characters and should start with a letter. Digits (0-9), uppercase letters (A-Z), lowercase letters (a-z), underscores (_), and Chinese characters are allowed.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Log topic ID.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Cloud product namespace.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Database configuration information.
+	Metrics []*MetricConfig `json:"Metrics,omitnil,omitempty" name:"Metrics"`
+
+	// Instance configuration.
+	InstanceInfo *InstanceConfig `json:"InstanceInfo,omitnil,omitempty" name:"InstanceInfo"`
+}
+
+type CreateMetricSubscribeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Name. It can contain a maximum of 64 characters and should start with a letter. Digits (0-9), uppercase letters (A-Z), lowercase letters (a-z), underscores (_), and Chinese characters are allowed.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Log topic ID.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Cloud product namespace.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Database configuration information.
+	Metrics []*MetricConfig `json:"Metrics,omitnil,omitempty" name:"Metrics"`
+
+	// Instance configuration.
+	InstanceInfo *InstanceConfig `json:"InstanceInfo,omitnil,omitempty" name:"InstanceInfo"`
+}
+
+func (r *CreateMetricSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateMetricSubscribeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "TopicId")
+	delete(f, "Namespace")
+	delete(f, "Metrics")
+	delete(f, "InstanceInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMetricSubscribeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateMetricSubscribeResponseParams struct {
+	// Configuration id
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateMetricSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateMetricSubscribeResponseParams `json:"Response"`
+}
+
+func (r *CreateMetricSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateMetricSubscribeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNetworkApplicationRequestParams struct {
+	// <p>Network application name: length not exceeding 64 characters, name must be unique.</p><ul><li>Can only contain the following characters:<ul><li>English letters (a-z and A-Z)</li><li>Digits</li><li>Underscore</li><li>Hyphen (minus sign)</li><li>Chinese characters</li></ul></li><li>At least one character</li><li>Must not contain spaces</li><li>Cannot contain other special characters (such as @, #, $, %, etc.)</li></ul>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Log Set ID</p><ul><li>Obtain the Log Set ID through the <a href="https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1">logset list</a>.</li></ul>
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// <p>Topic name. The limits are as follows:</p><ul><li>Cannot be an empty string</li><li>Cannot contain character '|'</li><li>Cannot use the following names ["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"]</li></ul>
+	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+}
+
+type CreateNetworkApplicationRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Network application name: length not exceeding 64 characters, name must be unique.</p><ul><li>Can only contain the following characters:<ul><li>English letters (a-z and A-Z)</li><li>Digits</li><li>Underscore</li><li>Hyphen (minus sign)</li><li>Chinese characters</li></ul></li><li>At least one character</li><li>Must not contain spaces</li><li>Cannot contain other special characters (such as @, #, $, %, etc.)</li></ul>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Log Set ID</p><ul><li>Obtain the Log Set ID through the <a href="https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1">logset list</a>.</li></ul>
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// <p>Topic name. The limits are as follows:</p><ul><li>Cannot be an empty string</li><li>Cannot contain character '|'</li><li>Cannot use the following names ["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"]</li></ul>
+	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+}
+
+func (r *CreateNetworkApplicationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNetworkApplicationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "LogsetId")
+	delete(f, "TopicName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNetworkApplicationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNetworkApplicationResponseParams struct {
+	// <p>Web application id</p>
+	NetworkAppId *string `json:"NetworkAppId,omitnil,omitempty" name:"NetworkAppId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateNetworkApplicationResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateNetworkApplicationResponseParams `json:"Response"`
+}
+
+func (r *CreateNetworkApplicationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNetworkApplicationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNoticeContentRequestParams struct {
+	// Template name. Supports a maximum of 255 bytes.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Template content language. Valid values: 0: Chinese; 1: English.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Detailed configurations of a template.
+	NoticeContents []*NoticeContent `json:"NoticeContents,omitnil,omitempty" name:"NoticeContents"`
+}
+
+type CreateNoticeContentRequest struct {
+	*tchttp.BaseRequest
+	
+	// Template name. Supports a maximum of 255 bytes.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Template content language. Valid values: 0: Chinese; 1: English.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Detailed configurations of a template.
+	NoticeContents []*NoticeContent `json:"NoticeContents,omitnil,omitempty" name:"NoticeContents"`
+}
+
+func (r *CreateNoticeContentRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNoticeContentRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "Type")
+	delete(f, "NoticeContents")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateNoticeContentRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateNoticeContentResponseParams struct {
+	// Notification content configuration ID.
+	NoticeContentId *string `json:"NoticeContentId,omitnil,omitempty" name:"NoticeContentId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateNoticeContentResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateNoticeContentResponseParams `json:"Response"`
+}
+
+func (r *CreateNoticeContentResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateNoticeContentResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRebuildIndexTaskRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Reconstruction start timestamp, in milliseconds
+	// Start time cannot exceed log lifecycle
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Reconstruction end timestamp, in milliseconds
+	// End time not later than 15 minutes before the current time
+	// Note: It is advisable to use the "EstimateRebuildIndexTask" API in advance to assess the data volume and duration involved in index rebuilding within this time range, avoiding excessive cost or duration due to overly large data volume.
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+type CreateRebuildIndexTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Reconstruction start timestamp, in milliseconds
+	// Start time cannot exceed log lifecycle
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Reconstruction end timestamp, in milliseconds
+	// End time not later than 15 minutes before the current time
+	// Note: It is advisable to use the "EstimateRebuildIndexTask" API in advance to assess the data volume and duration involved in index rebuilding within this time range, avoiding excessive cost or duration due to overly large data volume.
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+func (r *CreateRebuildIndexTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRebuildIndexTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRebuildIndexTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRebuildIndexTaskResponseParams struct {
+	// Reindexing task ID
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateRebuildIndexTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateRebuildIndexTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateRebuildIndexTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRebuildIndexTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRecordingRuleTaskRequestParams struct {
+	// <p>Source metric topic id</p><p>For reference:</p><ul><li><a href="https://www.tencentcloud.com/document/api/614/56454?from_cn_redirect=1">DescribeTopics</a></li><li><a href="https://console.cloud.tencent.com/cls/metric">metric topic</a></li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Target metric topic id, which can be the same as TopicId.</p>
+	DstTopicId *string `json:"DstTopicId,omitnil,omitempty" name:"DstTopicId"`
+
+	// <p>Pre-aggregation task name</p><p>Input parameter restrictions: Only letters, numbers, and underscores are allowed. Cannot begin with an underscore. Less than 256 characters.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Task status. Valid values: 1: enabled; 2: disabled.</p>
+	EnableFlag *uint64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
+
+	// <p>Execution start time, Unix timestamp.</p><p>Unit: ms.</p>
+	ProcessStartTime *uint64 `json:"ProcessStartTime,omitnil,omitempty" name:"ProcessStartTime"`
+
+	// <p>Scheduling period (minutes). Supported range (0,1440] minutes.</p>
+	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
+
+	// <p>Execution delay. Set it to 30 seconds to avoid inaccuracy in pre-aggregation task calculation results due to latency in metric reporting.</p><p>Unit: seconds</p>
+	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
+
+	// <p>Execution statement (PromQL)</p>
+	RecordingRuleContent *string `json:"RecordingRuleContent,omitnil,omitempty" name:"RecordingRuleContent"`
+
+	// <p>Metric name</p>
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
+
+	// <p>Metric custom dimension</p>
+	CustomMetricLabels []*MetricLabel `json:"CustomMetricLabels,omitnil,omitempty" name:"CustomMetricLabels"`
+
+	// <p>Whether to enable the delivery service log. 1: Disabled, 2: Enabled.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+type CreateRecordingRuleTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Source metric topic id</p><p>For reference:</p><ul><li><a href="https://www.tencentcloud.com/document/api/614/56454?from_cn_redirect=1">DescribeTopics</a></li><li><a href="https://console.cloud.tencent.com/cls/metric">metric topic</a></li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Target metric topic id, which can be the same as TopicId.</p>
+	DstTopicId *string `json:"DstTopicId,omitnil,omitempty" name:"DstTopicId"`
+
+	// <p>Pre-aggregation task name</p><p>Input parameter restrictions: Only letters, numbers, and underscores are allowed. Cannot begin with an underscore. Less than 256 characters.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Task status. Valid values: 1: enabled; 2: disabled.</p>
+	EnableFlag *uint64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
+
+	// <p>Execution start time, Unix timestamp.</p><p>Unit: ms.</p>
+	ProcessStartTime *uint64 `json:"ProcessStartTime,omitnil,omitempty" name:"ProcessStartTime"`
+
+	// <p>Scheduling period (minutes). Supported range (0,1440] minutes.</p>
+	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
+
+	// <p>Execution delay. Set it to 30 seconds to avoid inaccuracy in pre-aggregation task calculation results due to latency in metric reporting.</p><p>Unit: seconds</p>
+	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
+
+	// <p>Execution statement (PromQL)</p>
+	RecordingRuleContent *string `json:"RecordingRuleContent,omitnil,omitempty" name:"RecordingRuleContent"`
+
+	// <p>Metric name</p>
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
+
+	// <p>Metric custom dimension</p>
+	CustomMetricLabels []*MetricLabel `json:"CustomMetricLabels,omitnil,omitempty" name:"CustomMetricLabels"`
+
+	// <p>Whether to enable the delivery service log. 1: Disabled, 2: Enabled.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+func (r *CreateRecordingRuleTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRecordingRuleTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "DstTopicId")
+	delete(f, "Name")
+	delete(f, "EnableFlag")
+	delete(f, "ProcessStartTime")
+	delete(f, "ProcessPeriod")
+	delete(f, "ProcessDelay")
+	delete(f, "RecordingRuleContent")
+	delete(f, "MetricName")
+	delete(f, "CustomMetricLabels")
+	delete(f, "HasServicesLog")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRecordingRuleTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRecordingRuleTaskResponseParams struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateRecordingRuleTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateRecordingRuleTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateRecordingRuleTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRecordingRuleTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRecordingRuleYamlTaskRequestParams struct {
+	// <p>Source metric topic id</p><p>For reference:</p><ul><li><a href="https://www.tencentcloud.com/document/api/614/56454?from_cn_redirect=1">DescribeTopics</a></li><li><a href="https://console.cloud.tencent.com/cls/metric">metric topic</a></li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Target metric topic id, which can be the same as TopicId.</p>
+	DstTopicId *string `json:"DstTopicId,omitnil,omitempty" name:"DstTopicId"`
+
+	// <p>Task status. Valid values: 1: enabled; 2: disabled.</p>
+	EnableFlag *uint64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
+
+	// <p>Execution start time, Unix timestamp.</p><p>Unit: ms.</p>
+	ProcessStartTime *uint64 `json:"ProcessStartTime,omitnil,omitempty" name:"ProcessStartTime"`
+
+	// <p>Scheduling period (minutes). Supported range (0,1440] minutes.</p><p>Measurement unit: minutes</p><p>Can also use interval: duration in YAML to set execution interval individually for each group.</p>
+	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
+
+	// <p>Execution delay. Set it to 30 seconds to avoid inaccuracy in pre-aggregation task calculation results due to latency in metric reporting.</p><p>Unit: seconds</p>
+	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
+
+	// <p>yaml configuration name</p>
+	YamlConfigName *string `json:"YamlConfigName,omitnil,omitempty" name:"YamlConfigName"`
+
+	// <p>yaml configuration content</p><p>Compatible with Prometheus Recording Rules configuration files. Please note the line breaks and indent in the string during API calls.</p>
+	YamlContent *string `json:"YamlContent,omitnil,omitempty" name:"YamlContent"`
+
+	// <p>Whether to enable the delivery service log. 1: Disabled, 2: Enabled.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+type CreateRecordingRuleYamlTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Source metric topic id</p><p>For reference:</p><ul><li><a href="https://www.tencentcloud.com/document/api/614/56454?from_cn_redirect=1">DescribeTopics</a></li><li><a href="https://console.cloud.tencent.com/cls/metric">metric topic</a></li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Target metric topic id, which can be the same as TopicId.</p>
+	DstTopicId *string `json:"DstTopicId,omitnil,omitempty" name:"DstTopicId"`
+
+	// <p>Task status. Valid values: 1: enabled; 2: disabled.</p>
+	EnableFlag *uint64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
+
+	// <p>Execution start time, Unix timestamp.</p><p>Unit: ms.</p>
+	ProcessStartTime *uint64 `json:"ProcessStartTime,omitnil,omitempty" name:"ProcessStartTime"`
+
+	// <p>Scheduling period (minutes). Supported range (0,1440] minutes.</p><p>Measurement unit: minutes</p><p>Can also use interval: duration in YAML to set execution interval individually for each group.</p>
+	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
+
+	// <p>Execution delay. Set it to 30 seconds to avoid inaccuracy in pre-aggregation task calculation results due to latency in metric reporting.</p><p>Unit: seconds</p>
+	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
+
+	// <p>yaml configuration name</p>
+	YamlConfigName *string `json:"YamlConfigName,omitnil,omitempty" name:"YamlConfigName"`
+
+	// <p>yaml configuration content</p><p>Compatible with Prometheus Recording Rules configuration files. Please note the line breaks and indent in the string during API calls.</p>
+	YamlContent *string `json:"YamlContent,omitnil,omitempty" name:"YamlContent"`
+
+	// <p>Whether to enable the delivery service log. 1: Disabled, 2: Enabled.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+func (r *CreateRecordingRuleYamlTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRecordingRuleYamlTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "DstTopicId")
+	delete(f, "EnableFlag")
+	delete(f, "ProcessStartTime")
+	delete(f, "ProcessPeriod")
+	delete(f, "ProcessDelay")
+	delete(f, "YamlConfigName")
+	delete(f, "YamlContent")
+	delete(f, "HasServicesLog")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRecordingRuleYamlTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRecordingRuleYamlTaskResponseParams struct {
+	// <p>Yaml configuration id, can be associated with multiple subtasks</p>
+	YamlId *string `json:"YamlId,omitnil,omitempty" name:"YamlId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateRecordingRuleYamlTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateRecordingRuleYamlTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateRecordingRuleYamlTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRecordingRuleYamlTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateScheduledSqlRequestParams struct {
-	// Source log topic
+	// Source log topic ID. Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	SrcTopicId *string `json:"SrcTopicId,omitnil,omitempty" name:"SrcTopicId"`
 
-	// Task name
+	// Task name, 0-255 characters
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Task start status. 1: Enabled, 2: Disabled
@@ -2296,16 +4913,16 @@ type CreateScheduledSqlRequestParams struct {
 	// Schedule type: 1: Continuous running; 2: Specified time range
 	ProcessType *int64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 
-	// Scheduling interval (minutes)
+	// Scheduling Interval (Minutes), 1-1440 minutes
 	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
 
 	// Time window for a single query. If your target topic is a metric topic, it is recommended that the size of this parameter not exceed 30 minutes, otherwise, metric conversion may fail.
 	ProcessTimeWindow *string `json:"ProcessTimeWindow,omitnil,omitempty" name:"ProcessTimeWindow"`
 
-	// Execution delay (Seconds)
+	// Execution Delay (Seconds), 0-120 seconds, default 60 seconds
 	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
 
-	// Source topic ID region information
+	// Regional information of the source topicId. For supported regions, see the region list (https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8) document.
 	SrcTopicRegion *string `json:"SrcTopicRegion,omitnil,omitempty" name:"SrcTopicRegion"`
 
 	// Schedule end time. Required field when ProcessType=2, Unix timestamp, in milliseconds
@@ -2318,10 +4935,10 @@ type CreateScheduledSqlRequestParams struct {
 type CreateScheduledSqlRequest struct {
 	*tchttp.BaseRequest
 	
-	// Source log topic
+	// Source log topic ID. Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	SrcTopicId *string `json:"SrcTopicId,omitnil,omitempty" name:"SrcTopicId"`
 
-	// Task name
+	// Task name, 0-255 characters
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Task start status. 1: Enabled, 2: Disabled
@@ -2339,16 +4956,16 @@ type CreateScheduledSqlRequest struct {
 	// Schedule type: 1: Continuous running; 2: Specified time range
 	ProcessType *int64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 
-	// Scheduling interval (minutes)
+	// Scheduling Interval (Minutes), 1-1440 minutes
 	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
 
 	// Time window for a single query. If your target topic is a metric topic, it is recommended that the size of this parameter not exceed 30 minutes, otherwise, metric conversion may fail.
 	ProcessTimeWindow *string `json:"ProcessTimeWindow,omitnil,omitempty" name:"ProcessTimeWindow"`
 
-	// Execution delay (Seconds)
+	// Execution Delay (Seconds), 0-120 seconds, default 60 seconds
 	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
 
-	// Source topic ID region information
+	// Regional information of the source topicId. For supported regions, see the region list (https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8) document.
 	SrcTopicRegion *string `json:"SrcTopicRegion,omitnil,omitempty" name:"SrcTopicRegion"`
 
 	// Schedule end time. Required field when ProcessType=2, Unix timestamp, in milliseconds
@@ -2415,94 +5032,217 @@ func (r *CreateScheduledSqlResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateSearchViewRequestParams struct {
+	// <p>log set id</p><p>Logset to which the query view belongs. It is only used to manage the query view. Topics contained in the query view can be irrelevant to this logset.</p>
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// <p>Region of the logset</p><p>Parameter format: ap-guangzhou</p>
+	LogsetRegion *string `json:"LogsetRegion,omitnil,omitempty" name:"LogsetRegion"`
+
+	// <p>View name</p><p>Input parameter limit: Supports up to 255 characters. Cannot contain "|" character.</p>
+	ViewName *string `json:"ViewName,omitnil,omitempty" name:"ViewName"`
+
+	// <p>View type</p><p>Enumeration value:</p><ul><li>log: Log topic</li><li>metric: Metric topic</li></ul><p>The topic type in the field of Topics should match the ViewType.</p>
+	ViewType *string `json:"ViewType,omitnil,omitempty" name:"ViewType"`
+
+	// <p>The query view contains topics, with a maximum of 10 topics.</p><p>The topic information configured in the Topics field should match the ViewType.</p>
+	Topics []*ViewSearchTopic `json:"Topics,omitnil,omitempty" name:"Topics"`
+
+	// <p>Custom query view id prefix</p><p>Parameter format: <code>^[a-z0-9][a-z0-9_-]{1,61}[a-z0-9]$</code></p><p>ViewId format of successfully created query view is ${ViewIdPrefix}-view</p>
+	ViewIdPrefix *string `json:"ViewIdPrefix,omitnil,omitempty" name:"ViewIdPrefix"`
+
+	// <p>Description</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+type CreateSearchViewRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>log set id</p><p>Logset to which the query view belongs. It is only used to manage the query view. Topics contained in the query view can be irrelevant to this logset.</p>
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// <p>Region of the logset</p><p>Parameter format: ap-guangzhou</p>
+	LogsetRegion *string `json:"LogsetRegion,omitnil,omitempty" name:"LogsetRegion"`
+
+	// <p>View name</p><p>Input parameter limit: Supports up to 255 characters. Cannot contain "|" character.</p>
+	ViewName *string `json:"ViewName,omitnil,omitempty" name:"ViewName"`
+
+	// <p>View type</p><p>Enumeration value:</p><ul><li>log: Log topic</li><li>metric: Metric topic</li></ul><p>The topic type in the field of Topics should match the ViewType.</p>
+	ViewType *string `json:"ViewType,omitnil,omitempty" name:"ViewType"`
+
+	// <p>The query view contains topics, with a maximum of 10 topics.</p><p>The topic information configured in the Topics field should match the ViewType.</p>
+	Topics []*ViewSearchTopic `json:"Topics,omitnil,omitempty" name:"Topics"`
+
+	// <p>Custom query view id prefix</p><p>Parameter format: <code>^[a-z0-9][a-z0-9_-]{1,61}[a-z0-9]$</code></p><p>ViewId format of successfully created query view is ${ViewIdPrefix}-view</p>
+	ViewIdPrefix *string `json:"ViewIdPrefix,omitnil,omitempty" name:"ViewIdPrefix"`
+
+	// <p>Description</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+func (r *CreateSearchViewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSearchViewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LogsetId")
+	delete(f, "LogsetRegion")
+	delete(f, "ViewName")
+	delete(f, "ViewType")
+	delete(f, "Topics")
+	delete(f, "ViewIdPrefix")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSearchViewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSearchViewResponseParams struct {
+	// <p>View ID</p>
+	ViewId *string `json:"ViewId,omitnil,omitempty" name:"ViewId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateSearchViewResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSearchViewResponseParams `json:"Response"`
+}
+
+func (r *CreateSearchViewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSearchViewResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateShipperRequestParams struct {
-	// ID of the log topic to which the shipping rule to be created belongs
+	// <p>Log topic Id belonging to the created shipping rule.</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li></ul>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Destination bucket in the shipping rule to be created
+	// <p>COS bucket, see the supported <a href="https://www.tencentcloud.com/document/product/436/13312?from_cn_redirect=1">bucket naming conventions</a>.</p><ul><li>Retrieve COS buckets via <a href="https://www.tencentcloud.com/document/product/436/8291?from_cn_redirect=1">GET Service (List Buckets)</a>.</li></ul>
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
-	// Prefix of the shipping directory in the shipping rule to be created
+	// <p>New directory prefix delivered by the Shipping Rule.</p><ul><li>Only supports 0-9A-Za-z-_/</li><li>Supports up to 256 characters</li></ul>
 	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
 
-	// Shipping rule name
+	// <p>Shipping rule name. Supports a maximum of 255 characters.</p>
 	ShipperName *string `json:"ShipperName,omitnil,omitempty" name:"ShipperName"`
 
-	// Interval between shipping tasks (in sec). Default value: 300. Value range: 300-900
+	// <p>Shipping time interval in seconds. Default: 300. Range: 300-900.</p>
 	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 5-256
+	// <p>Maximum value of delivered files in MB. Default: 256. Range: 5-256.</p>
 	MaxSize *uint64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 
-	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+	// <p>Filter rules for log shipping. Matched logs are shipped. The relationship between the rules is and. Up to 5 rules are allowed. An empty array indicates all logs are shipped without filtering.</p>
 	FilterRules []*FilterRuleInfo `json:"FilterRules,omitnil,omitempty" name:"FilterRules"`
 
-	// Rules for partitioning logs to be shipped. `strftime` can be used to define the presentation of time format.
+	// <p>Partition rules for log shipping support strftime time format representation</p>
 	Partition *string `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// Compression configuration of shipped log
+	// <p>Compression configuration of shipped logs</p>
 	Compress *CompressInfo `json:"Compress,omitnil,omitempty" name:"Compress"`
 
-	// Format configuration of shipped log content
+	// <p>Content format configuration for shipped logs</p>
 	Content *ContentInfo `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// Naming a shipping file. Valid values: `0` (by random number); `1` (by shipping time). Default value: `0`.
+	// <p>Delivery file naming configuration. 0: Random number naming, 1: Delivery time naming. Default: 0 (Random number naming).</p>
 	FilenameMode *uint64 `json:"FilenameMode,omitnil,omitempty" name:"FilenameMode"`
 
-	// Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.
+	// <p>Starting point of the data shipping range (Unix second-level timestamp). It cannot exceed the starting point of the log topic's lifecycle.<br>If not filled in by the user, it defaults to the time when the user creates the shipping task.</p>
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.
+	// <p>End time point of the data shipping range (unix second-level timestamp). It cannot be in the future.<br>If not filled in by the user, it defaults to continuous shipping, unlimited.</p>
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// COS bucket storage type
+	// <p>The storage type of an object. Default value is STANDARD. For enumeration values, please refer to the <a href="https://www.tencentcloud.com/document/product/436/33417?from_cn_redirect=1">storage type overview</a> document.<br>Reference values include:</p><ul><li>STANDARD: standard storage</li><li>STANDARD_IA: infrequent storage</li><li>ARCHIVE: archive storage</li><li>DEEP_ARCHIVE: deep archive storage</li><li>MAZ_STANDARD: standard storage (multi-AZ)</li><li>MAZ_STANDARD_IA: infrequent storage (multi-AZ)</li><li>INTELLIGENT_TIERING: intelligent tiering storage</li><li>MAZ_INTELLIGENT_TIERING: intelligent tiering storage (multi-AZ)</li></ul>
 	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>Role ARN <a href="https://www.tencentcloud.com/document/product/598/19381?from_cn_redirect=1">Create role</a></p>
+	RoleArn *string `json:"RoleArn,omitnil,omitempty" name:"RoleArn"`
+
+	// <p>External ID</p>
+	ExternalId *string `json:"ExternalId,omitnil,omitempty" name:"ExternalId"`
+
+	// <p>Used to generate time variables in the file path shipped to COS.</p><p>Input limit: Support the following time zone list.</p><ul><li>GMT-12:00</li><li>GMT-11:00</li><li>GMT-10:00</li><li>GMT-09:30</li><li>GMT-09:00</li><li>GMT-08:00</li><li>GMT-07:00</li><li>GMT-06:00</li><li>GMT-05:00</li><li>GMT-04:00</li><li>GMT-03:30</li><li>GMT-03:00</li><li>GMT-02:00</li><li>GMT-01:00</li><li>GMT+00:00</li><li>GMT+01:00</li><li>GMT+02:00</li><li>GMT+03:30</li><li>GMT+04:00</li><li>GMT+04:30</li><li>GMT+05:00</li><li>GMT+05:30</li><li>GMT+05:45</li><li>GMT+06:00</li><li>GMT+06:30</li><li>GMT+07:00</li><li>GMT+08:00</li><li>GMT+09:00</li><li>GMT+09:30</li><li>GMT+10:00</li><li>GMT+10:30</li><li>GMT+11:00</li><li>GMT+11:30</li><li>GMT+12:00</li><li>GMT+12:45</li><li>GMT+13:00</li><li>GMT+14:00</li><li>UTC-11:00</li><li>UTC-10:00</li><li>UTC-09:00</li><li>UTC-08:00</li><li>UTC-12:00</li><li>UTC-07:00</li><li>UTC-06:00</li><li>UTC-05:00</li><li>UTC-04:30</li><li>UTC-04:00</li><li>UTC-03:30</li><li>UTC-03:00</li><li>UTC-02:00</li><li>UTC-01:00</li><li>UTC+00:00</li><li>UTC+01:00</li><li>UTC+02:00</li><li>UTC+03:00</li><li>UTC+03:30</li><li>UTC+04:00</li><li>UTC+04:30</li><li>UTC+05:00</li><li>UTC+05:45</li><li>UTC+06:00</li><li>UTC+06:30</li><li>UTC+07:00</li><li>UTC+08:00</li><li>UTC+09:00</li><li>UTC+09:30</li><li>UTC+10:00</li><li>UTC+11:00</li><li>UTC+12:00</li><li>UTC+13:00</li></ul>
+	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// <p>Pre-filtering process - perform pre-filtering on the original data written to COS</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
 }
 
 type CreateShipperRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the log topic to which the shipping rule to be created belongs
+	// <p>Log topic Id belonging to the created shipping rule.</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li></ul>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Destination bucket in the shipping rule to be created
+	// <p>COS bucket, see the supported <a href="https://www.tencentcloud.com/document/product/436/13312?from_cn_redirect=1">bucket naming conventions</a>.</p><ul><li>Retrieve COS buckets via <a href="https://www.tencentcloud.com/document/product/436/8291?from_cn_redirect=1">GET Service (List Buckets)</a>.</li></ul>
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
-	// Prefix of the shipping directory in the shipping rule to be created
+	// <p>New directory prefix delivered by the Shipping Rule.</p><ul><li>Only supports 0-9A-Za-z-_/</li><li>Supports up to 256 characters</li></ul>
 	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
 
-	// Shipping rule name
+	// <p>Shipping rule name. Supports a maximum of 255 characters.</p>
 	ShipperName *string `json:"ShipperName,omitnil,omitempty" name:"ShipperName"`
 
-	// Interval between shipping tasks (in sec). Default value: 300. Value range: 300-900
+	// <p>Shipping time interval in seconds. Default: 300. Range: 300-900.</p>
 	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 5-256
+	// <p>Maximum value of delivered files in MB. Default: 256. Range: 5-256.</p>
 	MaxSize *uint64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 
-	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+	// <p>Filter rules for log shipping. Matched logs are shipped. The relationship between the rules is and. Up to 5 rules are allowed. An empty array indicates all logs are shipped without filtering.</p>
 	FilterRules []*FilterRuleInfo `json:"FilterRules,omitnil,omitempty" name:"FilterRules"`
 
-	// Rules for partitioning logs to be shipped. `strftime` can be used to define the presentation of time format.
+	// <p>Partition rules for log shipping support strftime time format representation</p>
 	Partition *string `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// Compression configuration of shipped log
+	// <p>Compression configuration of shipped logs</p>
 	Compress *CompressInfo `json:"Compress,omitnil,omitempty" name:"Compress"`
 
-	// Format configuration of shipped log content
+	// <p>Content format configuration for shipped logs</p>
 	Content *ContentInfo `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// Naming a shipping file. Valid values: `0` (by random number); `1` (by shipping time). Default value: `0`.
+	// <p>Delivery file naming configuration. 0: Random number naming, 1: Delivery time naming. Default: 0 (Random number naming).</p>
 	FilenameMode *uint64 `json:"FilenameMode,omitnil,omitempty" name:"FilenameMode"`
 
-	// Start time for data shipping, which cannot be earlier than the lifecycle start time of the log topic. If you do not specify this parameter, it will be set to the time when you create the data shipping task.
+	// <p>Starting point of the data shipping range (Unix second-level timestamp). It cannot exceed the starting point of the log topic's lifecycle.<br>If not filled in by the user, it defaults to the time when the user creates the shipping task.</p>
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time for data shipping, which cannot be set to a future time. If you do not specify this parameter, it indicates continuous data shipping.
+	// <p>End time point of the data shipping range (unix second-level timestamp). It cannot be in the future.<br>If not filled in by the user, it defaults to continuous shipping, unlimited.</p>
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// COS bucket storage type
+	// <p>The storage type of an object. Default value is STANDARD. For enumeration values, please refer to the <a href="https://www.tencentcloud.com/document/product/436/33417?from_cn_redirect=1">storage type overview</a> document.<br>Reference values include:</p><ul><li>STANDARD: standard storage</li><li>STANDARD_IA: infrequent storage</li><li>ARCHIVE: archive storage</li><li>DEEP_ARCHIVE: deep archive storage</li><li>MAZ_STANDARD: standard storage (multi-AZ)</li><li>MAZ_STANDARD_IA: infrequent storage (multi-AZ)</li><li>INTELLIGENT_TIERING: intelligent tiering storage</li><li>MAZ_INTELLIGENT_TIERING: intelligent tiering storage (multi-AZ)</li></ul>
 	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>Role ARN <a href="https://www.tencentcloud.com/document/product/598/19381?from_cn_redirect=1">Create role</a></p>
+	RoleArn *string `json:"RoleArn,omitnil,omitempty" name:"RoleArn"`
+
+	// <p>External ID</p>
+	ExternalId *string `json:"ExternalId,omitnil,omitempty" name:"ExternalId"`
+
+	// <p>Used to generate time variables in the file path shipped to COS.</p><p>Input limit: Support the following time zone list.</p><ul><li>GMT-12:00</li><li>GMT-11:00</li><li>GMT-10:00</li><li>GMT-09:30</li><li>GMT-09:00</li><li>GMT-08:00</li><li>GMT-07:00</li><li>GMT-06:00</li><li>GMT-05:00</li><li>GMT-04:00</li><li>GMT-03:30</li><li>GMT-03:00</li><li>GMT-02:00</li><li>GMT-01:00</li><li>GMT+00:00</li><li>GMT+01:00</li><li>GMT+02:00</li><li>GMT+03:30</li><li>GMT+04:00</li><li>GMT+04:30</li><li>GMT+05:00</li><li>GMT+05:30</li><li>GMT+05:45</li><li>GMT+06:00</li><li>GMT+06:30</li><li>GMT+07:00</li><li>GMT+08:00</li><li>GMT+09:00</li><li>GMT+09:30</li><li>GMT+10:00</li><li>GMT+10:30</li><li>GMT+11:00</li><li>GMT+11:30</li><li>GMT+12:00</li><li>GMT+12:45</li><li>GMT+13:00</li><li>GMT+14:00</li><li>UTC-11:00</li><li>UTC-10:00</li><li>UTC-09:00</li><li>UTC-08:00</li><li>UTC-12:00</li><li>UTC-07:00</li><li>UTC-06:00</li><li>UTC-05:00</li><li>UTC-04:30</li><li>UTC-04:00</li><li>UTC-03:30</li><li>UTC-03:00</li><li>UTC-02:00</li><li>UTC-01:00</li><li>UTC+00:00</li><li>UTC+01:00</li><li>UTC+02:00</li><li>UTC+03:00</li><li>UTC+03:30</li><li>UTC+04:00</li><li>UTC+04:30</li><li>UTC+05:00</li><li>UTC+05:45</li><li>UTC+06:00</li><li>UTC+06:30</li><li>UTC+07:00</li><li>UTC+08:00</li><li>UTC+09:00</li><li>UTC+09:30</li><li>UTC+10:00</li><li>UTC+11:00</li><li>UTC+12:00</li><li>UTC+13:00</li></ul>
+	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// <p>Pre-filtering process - perform pre-filtering on the original data written to COS</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
 }
 
 func (r *CreateShipperRequest) ToJsonString() string {
@@ -2531,6 +5271,10 @@ func (r *CreateShipperRequest) FromJsonString(s string) error {
 	delete(f, "StartTime")
 	delete(f, "EndTime")
 	delete(f, "StorageType")
+	delete(f, "RoleArn")
+	delete(f, "ExternalId")
+	delete(f, "TimeZone")
+	delete(f, "DSLFilter")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateShipperRequest has unknown keys!", "")
 	}
@@ -2539,7 +5283,7 @@ func (r *CreateShipperRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateShipperResponseParams struct {
-	// Shipping task ID.
+	// <p>Delivery task ID</p>
 	ShipperId *string `json:"ShipperId,omitnil,omitempty" name:"ShipperId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2563,76 +5307,246 @@ func (r *CreateShipperResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateSplunkDeliverRequestParams struct {
+	// <p>log topic id</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>The splunk delivery task name has the following restrictions: - Cannot be empty - Length not greater than 256 - Can only contain aA-zZ, underscore, -, 0-9</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Splunk delivery task - target configuration - network info</p>
+	NetInfo *NetInfo `json:"NetInfo,omitnil,omitempty" name:"NetInfo"`
+
+	// <p>Splunk delivery task meta information</p>
+	MetadataInfo *MetadataInfo `json:"MetadataInfo,omitnil,omitempty" name:"MetadataInfo"`
+
+	// <p>Whether service logs are enabled 1: Disabled; 2: Enabled; Enabled by default</p>
+	HasServiceLog *int64 `json:"HasServiceLog,omitnil,omitempty" name:"HasServiceLog"`
+
+	// <p>Advanced configuration - Whether to enable the indexer; 1 - Disable; 2 - Enable;<br>Default: 1</p>
+	IndexAck *int64 `json:"IndexAck,omitnil,omitempty" name:"IndexAck"`
+
+	// <p>Advanced configuration - data source; no more than 64 characters</p>
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// <p>Advanced configuration - data source type; no more than 64 characters</p>
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// <p>Advanced configuration - Indexes written to Splunk; no more than 64 characters</p>
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// <p>Advanced configuration - Channel.<br>To meet the limitation: If the indexer is enabled, then Channel is required.</p>
+	Channel *string `json:"Channel,omitnil,omitempty" name:"Channel"`
+
+	// <p>Log pre-filtering - filter out original data before writing to Splunk</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
+
+	// <p>Advanced configuration - Cross-account delivery user role authorization information</p><p>For reference: <a href="https://console.cloud.tencent.com/cam/role/create?payloadType=account">Create custom role</a></p>
+	ExternalRole *ExternalRole `json:"ExternalRole,omitnil,omitempty" name:"ExternalRole"`
+}
+
+type CreateSplunkDeliverRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>log topic id</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>The splunk delivery task name has the following restrictions: - Cannot be empty - Length not greater than 256 - Can only contain aA-zZ, underscore, -, 0-9</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Splunk delivery task - target configuration - network info</p>
+	NetInfo *NetInfo `json:"NetInfo,omitnil,omitempty" name:"NetInfo"`
+
+	// <p>Splunk delivery task meta information</p>
+	MetadataInfo *MetadataInfo `json:"MetadataInfo,omitnil,omitempty" name:"MetadataInfo"`
+
+	// <p>Whether service logs are enabled 1: Disabled; 2: Enabled; Enabled by default</p>
+	HasServiceLog *int64 `json:"HasServiceLog,omitnil,omitempty" name:"HasServiceLog"`
+
+	// <p>Advanced configuration - Whether to enable the indexer; 1 - Disable; 2 - Enable;<br>Default: 1</p>
+	IndexAck *int64 `json:"IndexAck,omitnil,omitempty" name:"IndexAck"`
+
+	// <p>Advanced configuration - data source; no more than 64 characters</p>
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// <p>Advanced configuration - data source type; no more than 64 characters</p>
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// <p>Advanced configuration - Indexes written to Splunk; no more than 64 characters</p>
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// <p>Advanced configuration - Channel.<br>To meet the limitation: If the indexer is enabled, then Channel is required.</p>
+	Channel *string `json:"Channel,omitnil,omitempty" name:"Channel"`
+
+	// <p>Log pre-filtering - filter out original data before writing to Splunk</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
+
+	// <p>Advanced configuration - Cross-account delivery user role authorization information</p><p>For reference: <a href="https://console.cloud.tencent.com/cam/role/create?payloadType=account">Create custom role</a></p>
+	ExternalRole *ExternalRole `json:"ExternalRole,omitnil,omitempty" name:"ExternalRole"`
+}
+
+func (r *CreateSplunkDeliverRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSplunkDeliverRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Name")
+	delete(f, "NetInfo")
+	delete(f, "MetadataInfo")
+	delete(f, "HasServiceLog")
+	delete(f, "IndexAck")
+	delete(f, "Source")
+	delete(f, "SourceType")
+	delete(f, "Index")
+	delete(f, "Channel")
+	delete(f, "DSLFilter")
+	delete(f, "ExternalRole")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSplunkDeliverRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSplunkDeliverResponseParams struct {
+	// <p>splunk delivery task id</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateSplunkDeliverResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSplunkDeliverResponseParams `json:"Response"`
+}
+
+func (r *CreateSplunkDeliverResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSplunkDeliverResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateTopicRequestParams struct {
-	// Logset ID
+	// <p>Logset ID</p><ul><li>Obtain the logset Id through <a href="https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1">Get Logset List</a>.</li></ul>
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
-	// Log topic name
+	// <p>Topic name<br>Name limitation</p><ul><li>Cannot be an empty string</li><li>Cannot contain character '|'</li><li>Cannot use the following names ["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"]</li></ul>
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Number of log topic partitions. Default value: 1. Maximum value: 10
+	// <p>Topic partition count. Default creation is 1 partition. Supports a maximum of 10 partitions.</p>
 	PartitionCount *int64 `json:"PartitionCount,omitnil,omitempty" name:"PartitionCount"`
 
-	// Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and a resource can be bound to only one tag key.
+	// <p>Tag description list, by specifying this parameter, you can simultaneously bind a tag to the corresponding topic. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Whether to enable automatic split. Default value: true
+	// <p>Whether to enable auto-split, true by default</p>
 	AutoSplit *bool `json:"AutoSplit,omitnil,omitempty" name:"AutoSplit"`
 
-	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50
+	// <p>When auto-split is enabled, the maximum number of partitions allowed for each topic is 50 by default.</p>
 	MaxSplitPartitions *int64 `json:"MaxSplitPartitions,omitnil,omitempty" name:"MaxSplitPartitions"`
 
-	// Log topic storage type. Valid values: `hot` (STANDARD storage); `cold` (IA storage). Default value: `hot`.
+	// <p>Log topic storage type. Available values: hot (standard storage), cold (infrequent storage). Default hot. This configuration is not supported for metric topics.</p>
 	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
 
-	// lifetime. Unit: days. Standard storage value range: 1 to 3600. Infrequent storage value range: 7 to 3600 days. A value of 3640 indicates permanent retention.If this value is not input, it defaults to the Period value of the log set corresponding to the accessed log topic (defaults to 30 days in case of access failure).
+	// <p>Storage time, in days.</p><ul><li>Log topic: When logs are collected to standard storage, the supported range is 1 to 3600 days. A value of 3640 indicates permanent retention.</li><li>Log topic: When logs are collected to infrequently accessed storage, the supported range is 7 to 3600 days. A value of 3640 indicates permanent retention.</li><li>Metric topic: The supported range is 1 to 3600 days. A value of 3640 indicates permanent retention.</li></ul>
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Log topic description
+	// <p>Topic description</p>
 	Describes *string `json:"Describes,omitnil,omitempty" name:"Describes"`
 
-	// 0: Disable log settlement.Non-zero: The number of Standard Storage days after enabling log settlement. HotPeriod needs to be greater than or equal to 7, and less than Period.Effective only when StorageType is hot.
+	// <p>0: Log topic disables log settlement.<br>Non-0: Number of days for standard storage after log settlement is enabled in the log topic. HotPeriod needs to be greater than or equal to 7 and less than Period.<br>Effective only when StorageType is hot. This configuration is not supported for metric topics.</p>
 	HotPeriod *uint64 `json:"HotPeriod,omitnil,omitempty" name:"HotPeriod"`
 
-	// Authentication switch. false: off; true: on. Default is false.Once enabled, it will support specified operations for anonymous access to this log topic. For details, please see [log Topic](https://intl.cloud.tencent.com/document/product/614/41035?from_cn_redirect=1).
+	// <p>Encryption-related parameters. Encrypted regions and allowlisted users can pass this parameter, which cannot be passed in other scenarios.<br>0 or not passed: no encryption<br>1: kms-cls cloud service key encryption</p><p>Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo</p>
+	Encryption *uint64 `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+
+	// <p>Topic type</p><ul><li>0: Log topic, default value</li><li>1: Metric topic</li></ul>
+	BizType *uint64 `json:"BizType,omitnil,omitempty" name:"BizType"`
+
+	// <p>Custom topic ID, format: custom part-User APPID. If this parameter is left empty, ID will be automatically generated.</p><ul><li>The custom part only supports lowercase letters, digits, and -, cannot start or end with -, and must be 3 to 40 characters in length.</li><li>The trailing part requires the use of - to concatenate User APPID. APPID can be queried on the page https://console.cloud.tencent.com/developer.</li><li>If this field is specified, ensure uniqueness across all regions.</li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Free authentication switch. False: turned off; true: turned on. Default false.<br>When enabled, anonymous access to the log topic will be supported for designated operations. For details, see <a href="https://www.tencentcloud.com/document/product/614/41035?from_cn_redirect=1">log topic</a>. This configuration is not supported for metric topics.</p>
 	IsWebTracking *bool `json:"IsWebTracking,omitnil,omitempty" name:"IsWebTracking"`
+
+	// <p>Topic extended information</p>
+	Extends *TopicExtendInfo `json:"Extends,omitnil,omitempty" name:"Extends"`
+
+	// <p>Enable logging of public network source IP and server receipt time</p>
+	IsSourceFrom *bool `json:"IsSourceFrom,omitnil,omitempty" name:"IsSourceFrom"`
+
+	// <p>Billing mode</p><p>Enumeration value:</p><ul><li>0: Function billing by usage</li><li>1: Raw log size billing (currently only supported for some customers)</li></ul><p>Default value: 0</p>
+	BillingMode *uint64 `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 }
 
 type CreateTopicRequest struct {
 	*tchttp.BaseRequest
 	
-	// Logset ID
+	// <p>Logset ID</p><ul><li>Obtain the logset Id through <a href="https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1">Get Logset List</a>.</li></ul>
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
-	// Log topic name
+	// <p>Topic name<br>Name limitation</p><ul><li>Cannot be an empty string</li><li>Cannot contain character '|'</li><li>Cannot use the following names ["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"]</li></ul>
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Number of log topic partitions. Default value: 1. Maximum value: 10
+	// <p>Topic partition count. Default creation is 1 partition. Supports a maximum of 10 partitions.</p>
 	PartitionCount *int64 `json:"PartitionCount,omitnil,omitempty" name:"PartitionCount"`
 
-	// Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and a resource can be bound to only one tag key.
+	// <p>Tag description list, by specifying this parameter, you can simultaneously bind a tag to the corresponding topic. Up to 10 tag key-value pairs are supported, and the same resource can only be bound to the same tag key.</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Whether to enable automatic split. Default value: true
+	// <p>Whether to enable auto-split, true by default</p>
 	AutoSplit *bool `json:"AutoSplit,omitnil,omitempty" name:"AutoSplit"`
 
-	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50
+	// <p>When auto-split is enabled, the maximum number of partitions allowed for each topic is 50 by default.</p>
 	MaxSplitPartitions *int64 `json:"MaxSplitPartitions,omitnil,omitempty" name:"MaxSplitPartitions"`
 
-	// Log topic storage type. Valid values: `hot` (STANDARD storage); `cold` (IA storage). Default value: `hot`.
+	// <p>Log topic storage type. Available values: hot (standard storage), cold (infrequent storage). Default hot. This configuration is not supported for metric topics.</p>
 	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
 
-	// lifetime. Unit: days. Standard storage value range: 1 to 3600. Infrequent storage value range: 7 to 3600 days. A value of 3640 indicates permanent retention.If this value is not input, it defaults to the Period value of the log set corresponding to the accessed log topic (defaults to 30 days in case of access failure).
+	// <p>Storage time, in days.</p><ul><li>Log topic: When logs are collected to standard storage, the supported range is 1 to 3600 days. A value of 3640 indicates permanent retention.</li><li>Log topic: When logs are collected to infrequently accessed storage, the supported range is 7 to 3600 days. A value of 3640 indicates permanent retention.</li><li>Metric topic: The supported range is 1 to 3600 days. A value of 3640 indicates permanent retention.</li></ul>
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Log topic description
+	// <p>Topic description</p>
 	Describes *string `json:"Describes,omitnil,omitempty" name:"Describes"`
 
-	// 0: Disable log settlement.Non-zero: The number of Standard Storage days after enabling log settlement. HotPeriod needs to be greater than or equal to 7, and less than Period.Effective only when StorageType is hot.
+	// <p>0: Log topic disables log settlement.<br>Non-0: Number of days for standard storage after log settlement is enabled in the log topic. HotPeriod needs to be greater than or equal to 7 and less than Period.<br>Effective only when StorageType is hot. This configuration is not supported for metric topics.</p>
 	HotPeriod *uint64 `json:"HotPeriod,omitnil,omitempty" name:"HotPeriod"`
 
-	// Authentication switch. false: off; true: on. Default is false.Once enabled, it will support specified operations for anonymous access to this log topic. For details, please see [log Topic](https://intl.cloud.tencent.com/document/product/614/41035?from_cn_redirect=1).
+	// <p>Encryption-related parameters. Encrypted regions and allowlisted users can pass this parameter, which cannot be passed in other scenarios.<br>0 or not passed: no encryption<br>1: kms-cls cloud service key encryption</p><p>Supported regions: ap-beijing, ap-guangzhou, ap-shanghai, ap-singapore, ap-bangkok, ap-jakarta, eu-frankfurt, ap-seoul, ap-tokyo</p>
+	Encryption *uint64 `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+
+	// <p>Topic type</p><ul><li>0: Log topic, default value</li><li>1: Metric topic</li></ul>
+	BizType *uint64 `json:"BizType,omitnil,omitempty" name:"BizType"`
+
+	// <p>Custom topic ID, format: custom part-User APPID. If this parameter is left empty, ID will be automatically generated.</p><ul><li>The custom part only supports lowercase letters, digits, and -, cannot start or end with -, and must be 3 to 40 characters in length.</li><li>The trailing part requires the use of - to concatenate User APPID. APPID can be queried on the page https://console.cloud.tencent.com/developer.</li><li>If this field is specified, ensure uniqueness across all regions.</li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Free authentication switch. False: turned off; true: turned on. Default false.<br>When enabled, anonymous access to the log topic will be supported for designated operations. For details, see <a href="https://www.tencentcloud.com/document/product/614/41035?from_cn_redirect=1">log topic</a>. This configuration is not supported for metric topics.</p>
 	IsWebTracking *bool `json:"IsWebTracking,omitnil,omitempty" name:"IsWebTracking"`
+
+	// <p>Topic extended information</p>
+	Extends *TopicExtendInfo `json:"Extends,omitnil,omitempty" name:"Extends"`
+
+	// <p>Enable logging of public network source IP and server receipt time</p>
+	IsSourceFrom *bool `json:"IsSourceFrom,omitnil,omitempty" name:"IsSourceFrom"`
+
+	// <p>Billing mode</p><p>Enumeration value:</p><ul><li>0: Function billing by usage</li><li>1: Raw log size billing (currently only supported for some customers)</li></ul><p>Default value: 0</p>
+	BillingMode *uint64 `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 }
 
 func (r *CreateTopicRequest) ToJsonString() string {
@@ -2657,7 +5571,13 @@ func (r *CreateTopicRequest) FromJsonString(s string) error {
 	delete(f, "Period")
 	delete(f, "Describes")
 	delete(f, "HotPeriod")
+	delete(f, "Encryption")
+	delete(f, "BizType")
+	delete(f, "TopicId")
 	delete(f, "IsWebTracking")
+	delete(f, "Extends")
+	delete(f, "IsSourceFrom")
+	delete(f, "BillingMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTopicRequest has unknown keys!", "")
 	}
@@ -2666,7 +5586,7 @@ func (r *CreateTopicRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateTopicResponseParams struct {
-	// Log topic ID
+	// <p>Topic ID</p>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2689,6 +5609,99 @@ func (r *CreateTopicResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateWebCallbackRequestParams struct {
+	// Notification content name. Supports a maximum of 255 bytes.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Channel type.
+	// 
+	// WeCom: WeCom; DingTalk: DingTalk; Lark: Lark; Http: Custom Callback.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Webhook URL.
+	Webhook *string `json:"Webhook,omitnil,omitempty" name:"Webhook"`
+
+	// Request method. Support POST, PUT.
+	// 
+	// Required when Type is Http.
+	Method *string `json:"Method,omitnil,omitempty" name:"Method"`
+
+	// Secret key. Supports a maximum of 1024 bytes.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+}
+
+type CreateWebCallbackRequest struct {
+	*tchttp.BaseRequest
+	
+	// Notification content name. Supports a maximum of 255 bytes.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Channel type.
+	// 
+	// WeCom: WeCom; DingTalk: DingTalk; Lark: Lark; Http: Custom Callback.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Webhook URL.
+	Webhook *string `json:"Webhook,omitnil,omitempty" name:"Webhook"`
+
+	// Request method. Support POST, PUT.
+	// 
+	// Required when Type is Http.
+	Method *string `json:"Method,omitnil,omitempty" name:"Method"`
+
+	// Secret key. Supports a maximum of 1024 bytes.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+}
+
+func (r *CreateWebCallbackRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateWebCallbackRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "Type")
+	delete(f, "Webhook")
+	delete(f, "Method")
+	delete(f, "Key")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateWebCallbackRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateWebCallbackResponseParams struct {
+	// Callback configuration ID.
+	WebCallbackId *string `json:"WebCallbackId,omitnil,omitempty" name:"WebCallbackId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateWebCallbackResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateWebCallbackResponseParams `json:"Response"`
+}
+
+func (r *CreateWebCallbackResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateWebCallbackResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CsvInfo struct {
 	// Whether to print `key` on the first row of the CSV file
 	PrintKey *bool `json:"PrintKey,omitnil,omitempty" name:"PrintKey"`
@@ -2707,12 +5720,188 @@ type CsvInfo struct {
 	NonExistingField *string `json:"NonExistingField,omitnil,omitempty" name:"NonExistingField"`
 }
 
+type CustomLabel struct {
+	// Tag key.
+	// -Must start with a letter or underscore, but cannot start with double underscores (__), followed by any letter, digit, or underscore.
+	// - Supports up to 256 characters.
+	// -key must be unique
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Tag value.
+	// - Supports up to 256 characters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type CustomMetricSpec struct {
+	// Port. Value range: [1,65535].
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Metric address. Verification format: ^/[a-zA-Z0-9-_./]*$.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// Namespace list.
+	// -Supports up to 100.
+	// -Check format of namespace `[a-z0-9]([-a-z0-9]*[a-z0-9])?`. Length cannot exceed 63.
+	// -namespace must be unique
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Namespaces []*string `json:"Namespaces,omitnil,omitempty" name:"Namespaces"`
+
+	// Pod tag.
+	// -supports a maximum of 100
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PodLabel []*Label `json:"PodLabel,omitnil,omitempty" name:"PodLabel"`
+}
+
+type DashboardNoticeMode struct {
+	// Dashboard notification method.
+	// 
+	// -Uin: Tencent Cloud user
+	// -Group: Tencent Cloud user group
+	// -WeCom: wecom callback
+	// -Email: Custom email
+	// -DingTalk
+	// -Lark
+	ReceiverType *string `json:"ReceiverType,omitnil,omitempty" name:"ReceiverType"`
+
+	// Value of the known method.
+	// -When ReceiverType is `WeCom`, `DingTalk`, or `Lark`, Values must be empty and the Url field is required.
+	// -When ReceiverType is `Uin`, `Group`, or `Email`, the Values field is required and the Url field must be empty.
+	// -When ReceiverType is `Uin`, Values is the user id. Obtain the sub-user UID by [querying sub-users](https://www.tencentcloud.com/document/product/598/34587?from_cn_redirect=1).
+	// -When ReceiverType is `Group`, Values is the user Group id. Obtain user Group id by querying the user Group list (https://www.tencentcloud.com/document/product/598/34589?from_cn_redirect=1).
+	// -When ReceiverType is `Email`, Values is the user email info.
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+
+	// Dashboard notification channel.
+	// 
+	// -Support: ["Email","Sms","WeChat","Phone"].
+	// -When ReceiverType is `Email` or `WeCom`, ReceiverChannels is invalid.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReceiverChannels []*string `json:"ReceiverChannels,omitnil,omitempty" name:"ReceiverChannels"`
+
+	// Subscription method - Callback URL.
+	// -When ReceiverType is `WeCom`, `DingTalk`, or `Lark`, the Url field is required as the callback URL of each channel.
+	// -When the value is `WeCom`, the Url is the enterprise wechat callback address.
+	// -When the value is `DingTalk`, Url is the chatbot Webhook address.
+	// -When `Lark`, Url is the chatbot Webhook address.
+	// -When ReceiverType is `Uin`, `Group`, or `Email`, the Url field must be empty.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+}
+
+type DashboardSubscribeData struct {
+	// Dashboard subscription notification method.
+	NoticeModes []*DashboardNoticeMode `json:"NoticeModes,omitnil,omitempty" name:"NoticeModes"`
+
+	// Dashboard subscription time. If this field is empty, the dashboard default time is used.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DashboardTime []*string `json:"DashboardTime,omitnil,omitempty" name:"DashboardTime"`
+
+	// Dashboard subscription template variable.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TemplateVariables []*DashboardTemplateVariable `json:"TemplateVariables,omitnil,omitempty" name:"TemplateVariables"`
+
+	// Time zone. Refer to: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#SHANGHAI.
+	Timezone *string `json:"Timezone,omitnil,omitempty" name:"Timezone"`
+
+	// Language. zh: Chinese; en: English.
+	SubscribeLanguage *string `json:"SubscribeLanguage,omitnil,omitempty" name:"SubscribeLanguage"`
+
+	// Call link domain name. It must start with http:// or https:// and must not end with /.
+	JumpDomain *string `json:"JumpDomain,omitnil,omitempty" name:"JumpDomain"`
+
+	// Custom redirection link.
+	JumpUrl *string `json:"JumpUrl,omitnil,omitempty" name:"JumpUrl"`
+}
+
+type DashboardSubscribeInfo struct {
+	// Dashboard subscription ID
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Dashboard subscription name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Dashboard ID.
+	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
+
+	// Dashboard subscription time.
+	Cron *string `json:"Cron,omitnil,omitempty" name:"Cron"`
+
+	// Dashboard subscription data.
+	SubscribeData *DashboardSubscribeData `json:"SubscribeData,omitnil,omitempty" name:"SubscribeData"`
+
+	// Creation time of dashboard subscription record. Format: `YYYY-MM-DD HH:MM:SS`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Dashboard subscription record update time. Format: `YYYY-MM-DD HH:MM:SS`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Time sent successfully of dashboard subscription record. Format: `YYYY-MM-DD HH:MM:SS`
+	LastTime *string `json:"LastTime,omitnil,omitempty" name:"LastTime"`
+
+	// Cloud primary account ID.
+	Uin *uint64 `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Sub-account ID under coud main account.
+	SubUin *uint64 `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Last sending status of the dashboard subscription records. success: all sent successfully; fail: not sent; partialSuccess: partially sent successfully.
+	LastStatus *string `json:"LastStatus,omitnil,omitempty" name:"LastStatus"`
+}
+
+type DashboardTemplateVariable struct {
+	// Key value
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Corresponding values of the key
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+}
+
 type DataTransformResouceInfo struct {
-	// Target topic ID
+	// <p>Log topic ID</p><ul><li>Get the log topic ID by <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">getting the log topic list</a>.</li></ul>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Alias
+	// <p>Alias<br>Limitation: Cannot contain character |.</p>
 	Alias *string `json:"Alias,omitnil,omitempty" name:"Alias"`
+
+	// <p>Whether it is a cross-account topic. false means it is not a cross-account topic, and true means it is a cross-account topic.</p><p>Default value: false</p>
+	IsCrossAccount *bool `json:"IsCrossAccount,omitnil,omitempty" name:"IsCrossAccount"`
+
+	// <p>In a cross-account scenario, search for the role ARN value created by the delivery account for the shipping account in the roles of the shipping account.</p>
+	RoleARN *string `json:"RoleARN,omitnil,omitempty" name:"RoleARN"`
+
+	// <p>External ID value. Can be found in the role-carrier of the shipping account.</p>
+	ExternalId *string `json:"ExternalId,omitnil,omitempty" name:"ExternalId"`
+
+	// <p>topic name</p>
+	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+
+	// <p>Logset name</p>
+	LogsetName *string `json:"LogsetName,omitnil,omitempty" name:"LogsetName"`
+}
+
+type DataTransformSqlDataSource struct {
+	// Data source type 1: MySql; 2: Self-built MySql; 3: PostgreSQL
+	DataSource *uint64 `json:"DataSource,omitnil,omitempty" name:"DataSource"`
+
+	// Region of the InstanceId. For example: ap-guangzhou
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Instance ID.
+	// -When DataSource is 1, it means the id of a cloud database Mysql Instance, such as cdb-zxcvbnm.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// mysql access username
+	User *string `json:"User,omitnil,omitempty" name:"User"`
+
+	// Alias. For use in data processing statement.
+	AliasName *string `json:"AliasName,omitnil,omitempty" name:"AliasName"`
+
+	// mysql access password.
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
 
 type DataTransformTaskInfo struct {
@@ -2725,7 +5914,7 @@ type DataTransformTaskInfo struct {
 	// Task status. Valid values: 1 (enabled) and 2 (disabled).
 	EnableFlag *int64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
 
-	// Task type. Valid values: 1 (DSL) and 2 (SQL).
+	// Processing task type, 1: DSL (processing task using custom language), 2: SQL (processing task using SQL)
 	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Source log topic
@@ -2734,13 +5923,16 @@ type DataTransformTaskInfo struct {
 	// Current task status. Valid values: 1 (preparing), 2 (in progress), 3 (being stopped), and 4 (stopped).
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Task creation time
+	// Creation time.
+	// Time format: yyyy-MM-dd HH:mm:ss
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Last modified time
+	// Last modification time
+	// Time format: yyyy-MM-dd HH:mm:ss
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Last enabled time. If you need to rebuild a cluster, modify this time.
+	// Last enabled time. Modify this time if the cluster needs to be rebuilt.
+	// Time format: yyyy-MM-dd HH:mm:ss
 	LastEnableTime *string `json:"LastEnableTime,omitnil,omitempty" name:"LastEnableTime"`
 
 	// Log topic name
@@ -2752,20 +5944,56 @@ type DataTransformTaskInfo struct {
 	// Target topic ID and alias of the data processing task
 	DstResources []*DataTransformResouceInfo `json:"DstResources,omitnil,omitempty" name:"DstResources"`
 
-	// Logical function for data processing
+	// Processing logic function.
 	EtlContent *string `json:"EtlContent,omitnil,omitempty" name:"EtlContent"`
+
+	// Fallback Topic ID
+	BackupTopicID *string `json:"BackupTopicID,omitnil,omitempty" name:"BackupTopicID"`
+
+	// Whether to discard log data after the limit is exceeded
+	BackupGiveUpData *bool `json:"BackupGiveUpData,omitnil,omitempty" name:"BackupGiveUpData"`
+
+	// Whether to enable service log shipping. Valid values: 1: disable; 2: enable.
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// Number of the target log topics of a task.
+	TaskDstCount *uint64 `json:"TaskDstCount,omitnil,omitempty" name:"TaskDstCount"`
+
+	// Data processing type. Valid values: 0: standard processing task; 1: pre-processing task.
+	DataTransformType *uint64 `json:"DataTransformType,omitnil,omitempty" name:"DataTransformType"`
+
+	// Whether to keep the failure log status. Valid values: 1: no; 2: yes.
+	KeepFailureLog *uint64 `json:"KeepFailureLog,omitnil,omitempty" name:"KeepFailureLog"`
+
+	// Field name of a failed log.
+	FailureLogKey *string `json:"FailureLogKey,omitnil,omitempty" name:"FailureLogKey"`
+
+	// Specify the start time of data processing (a second-level timestamp).
+	// -For any time range within the log topic lifecycle, if it exceeds the lifecycle, only process the part with data within the lifecycle.
+	ProcessFromTimestamp *uint64 `json:"ProcessFromTimestamp,omitnil,omitempty" name:"ProcessFromTimestamp"`
+
+	// Specify the end time of data processing, a Unix second-level timestamp.
+	// 1. Cannot specify a future time
+	// 2. If left blank, it means that the task will run constantly.
+	ProcessToTimestamp *uint64 `json:"ProcessToTimestamp,omitnil,omitempty" name:"ProcessToTimestamp"`
+
+	// sql data source information
+	DataTransformSqlDataSources []*DataTransformSqlDataSource `json:"DataTransformSqlDataSources,omitnil,omitempty" name:"DataTransformSqlDataSources"`
+
+	// Environment variable.
+	EnvInfos []*EnvInfo `json:"EnvInfos,omitnil,omitempty" name:"EnvInfos"`
 }
 
 // Predefined struct for user
 type DeleteAlarmNoticeRequestParams struct {
-	// Notification group ID
+	// Notification channel group ID. Obtain the notification channel group ID by searching the notification channel group list (https://www.tencentcloud.com/document/api/614/56462?from_cn_redirect=1).
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitnil,omitempty" name:"AlarmNoticeId"`
 }
 
 type DeleteAlarmNoticeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Notification group ID
+	// Notification channel group ID. Obtain the notification channel group ID by searching the notification channel group list (https://www.tencentcloud.com/document/api/614/56462?from_cn_redirect=1).
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitnil,omitempty" name:"AlarmNoticeId"`
 }
 
@@ -2866,20 +6094,20 @@ func (r *DeleteAlarmResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteAlarmShieldRequestParams struct {
-	// Blocking rule ID.
+	// Blocking rule id. Retrieve the blocking rule id by [searching for alert masking configuration rules](https://www.tencentcloud.com/document/api/614/103650?from_cn_redirect=1).
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Notification channel group ID.
+	// Notification channel group id. Retrieve the notification channel group id by [searching alert masking configuration rules](https://www.tencentcloud.com/document/api/614/103650?from_cn_redirect=1).
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitnil,omitempty" name:"AlarmNoticeId"`
 }
 
 type DeleteAlarmShieldRequest struct {
 	*tchttp.BaseRequest
 	
-	// Blocking rule ID.
+	// Blocking rule id. Retrieve the blocking rule id by [searching for alert masking configuration rules](https://www.tencentcloud.com/document/api/614/103650?from_cn_redirect=1).
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Notification channel group ID.
+	// Notification channel group id. Retrieve the notification channel group id by [searching alert masking configuration rules](https://www.tencentcloud.com/document/api/614/103650?from_cn_redirect=1).
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitnil,omitempty" name:"AlarmNoticeId"`
 }
 
@@ -2926,11 +6154,105 @@ func (r *DeleteAlarmShieldResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteCloudProductLogCollectionRequestParams struct {
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Cloud product identifier, support enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS</p>
+	AssumerName *string `json:"AssumerName,omitnil,omitempty" name:"AssumerName"`
+
+	// <p>Log type, supports enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</p>
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// <p>Product region. Input parameter format varies for different log types (LogType). Refer to the following example:</p><ul><li>All log types for CDS: ap-guangzhou</li><li>CDB-AUDIT: gz</li><li>TDSQL-C-AUDIT: gz</li><li>MongoDB-AUDIT: gz</li><li>MongoDB-SlowLog: ap-guangzhou</li><li>MongoDB-ErrorLog: ap-guangzhou</li><li>TDMYSQL-SLOW: gz</li><li>All log types for DCDB: gz</li><li>All log types for MariaDB: gz</li><li>All log types for PostgreSQL: gz</li><li>All log types for BH: overseas-polaris (Hong Kong (China) and other)/fsi-polaris (financial district)/general-polaris (general zone)/intl-sg-prod (international site)</li><li>All log types for APIS: gz</li></ul>
+	CloudProductRegion *string `json:"CloudProductRegion,omitnil,omitempty" name:"CloudProductRegion"`
+
+	// <p>Whether to delete the associated topic</p>
+	IsDeleteTopic *bool `json:"IsDeleteTopic,omitnil,omitempty" name:"IsDeleteTopic"`
+
+	// <p>Whether to delete the associated logset. If the logset still has topics, deletion will not be performed.</p>
+	IsDeleteLogset *bool `json:"IsDeleteLogset,omitnil,omitempty" name:"IsDeleteLogset"`
+}
+
+type DeleteCloudProductLogCollectionRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Cloud product identifier, support enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS</p>
+	AssumerName *string `json:"AssumerName,omitnil,omitempty" name:"AssumerName"`
+
+	// <p>Log type, supports enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</p>
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// <p>Product region. Input parameter format varies for different log types (LogType). Refer to the following example:</p><ul><li>All log types for CDS: ap-guangzhou</li><li>CDB-AUDIT: gz</li><li>TDSQL-C-AUDIT: gz</li><li>MongoDB-AUDIT: gz</li><li>MongoDB-SlowLog: ap-guangzhou</li><li>MongoDB-ErrorLog: ap-guangzhou</li><li>TDMYSQL-SLOW: gz</li><li>All log types for DCDB: gz</li><li>All log types for MariaDB: gz</li><li>All log types for PostgreSQL: gz</li><li>All log types for BH: overseas-polaris (Hong Kong (China) and other)/fsi-polaris (financial district)/general-polaris (general zone)/intl-sg-prod (international site)</li><li>All log types for APIS: gz</li></ul>
+	CloudProductRegion *string `json:"CloudProductRegion,omitnil,omitempty" name:"CloudProductRegion"`
+
+	// <p>Whether to delete the associated topic</p>
+	IsDeleteTopic *bool `json:"IsDeleteTopic,omitnil,omitempty" name:"IsDeleteTopic"`
+
+	// <p>Whether to delete the associated logset. If the logset still has topics, deletion will not be performed.</p>
+	IsDeleteLogset *bool `json:"IsDeleteLogset,omitnil,omitempty" name:"IsDeleteLogset"`
+}
+
+func (r *DeleteCloudProductLogCollectionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudProductLogCollectionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "AssumerName")
+	delete(f, "LogType")
+	delete(f, "CloudProductRegion")
+	delete(f, "IsDeleteTopic")
+	delete(f, "IsDeleteLogset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCloudProductLogCollectionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCloudProductLogCollectionResponseParams struct {
+	// <p>Enumeration value, 0 creating 1 creation completed 2 deleting 3 deletion completed</p>
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCloudProductLogCollectionResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCloudProductLogCollectionResponseParams `json:"Response"`
+}
+
+func (r *DeleteCloudProductLogCollectionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCloudProductLogCollectionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteConfigFromMachineGroupRequestParams struct {
 	// Machine group ID
+	// -Get the machine group Id through [Get Machine Group List](https://www.tencentcloud.com/document/api/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
-	// Collection configuration ID
+	// Collection Configuration ID
+	// -Obtain the collection configuration Id through [Access collection rule configuration](https://www.tencentcloud.com/document/product/614/58616?from_cn_redirect=1).
 	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
 }
 
@@ -2938,9 +6260,11 @@ type DeleteConfigFromMachineGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Machine group ID
+	// -Get the machine group Id through [Get Machine Group List](https://www.tencentcloud.com/document/api/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
-	// Collection configuration ID
+	// Collection Configuration ID
+	// -Obtain the collection configuration Id through [Access collection rule configuration](https://www.tencentcloud.com/document/product/614/58616?from_cn_redirect=1).
 	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
 }
 
@@ -2988,14 +6312,16 @@ func (r *DeleteConfigFromMachineGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteConfigRequestParams struct {
-	// Collection rule configuration ID
+	// Collection Configuration ID
+	// -Obtain the collection configuration Id through [Access collection rule configuration](https://www.tencentcloud.com/document/product/614/58616?from_cn_redirect=1).
 	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
 }
 
 type DeleteConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Collection rule configuration ID
+	// Collection Configuration ID
+	// -Obtain the collection configuration Id through [Access collection rule configuration](https://www.tencentcloud.com/document/product/614/58616?from_cn_redirect=1).
 	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
 }
 
@@ -3041,15 +6367,134 @@ func (r *DeleteConfigResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteConsoleRequestParams struct {
+	// <p>DataSight Console Id</p>
+	ConsoleId *string `json:"ConsoleId,omitnil,omitempty" name:"ConsoleId"`
+}
+
+type DeleteConsoleRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>DataSight Console Id</p>
+	ConsoleId *string `json:"ConsoleId,omitnil,omitempty" name:"ConsoleId"`
+}
+
+func (r *DeleteConsoleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteConsoleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ConsoleId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteConsoleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteConsoleResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteConsoleResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteConsoleResponseParams `json:"Response"`
+}
+
+func (r *DeleteConsoleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteConsoleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteConsumerGroupRequestParams struct {
+	// Consumer group flag to be deleted.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Logset id
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+}
+
+type DeleteConsumerGroupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Consumer group flag to be deleted.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Logset id
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+}
+
+func (r *DeleteConsumerGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteConsumerGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ConsumerGroup")
+	delete(f, "LogsetId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteConsumerGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteConsumerGroupResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteConsumerGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteConsumerGroupResponseParams `json:"Response"`
+}
+
+func (r *DeleteConsumerGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteConsumerGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteConsumerRequestParams struct {
-	// Log topic ID bound to the task
+	// Log topic Id bound to the delivery task.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
 type DeleteConsumerRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log topic ID bound to the task
+	// Log topic Id bound to the delivery task.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
@@ -3095,15 +6540,188 @@ func (r *DeleteConsumerResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteCosRechargeRequestParams struct {
+	// COS import configuration Id.
+	// -Get the cos import configuration Id by [searching for the cos import configuration](https://www.tencentcloud.com/document/product/614/88099?from_cn_redirect=1).
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Log topic Id.
+	// - Get the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/api/614/56454?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+type DeleteCosRechargeRequest struct {
+	*tchttp.BaseRequest
+	
+	// COS import configuration Id.
+	// -Get the cos import configuration Id by [searching for the cos import configuration](https://www.tencentcloud.com/document/product/614/88099?from_cn_redirect=1).
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Log topic Id.
+	// - Get the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/api/614/56454?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+func (r *DeleteCosRechargeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCosRechargeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "TopicId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCosRechargeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCosRechargeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCosRechargeResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCosRechargeResponseParams `json:"Response"`
+}
+
+func (r *DeleteCosRechargeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCosRechargeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteDashboardRequestParams struct {
+	// Dashboard ID
+	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
+}
+
+type DeleteDashboardRequest struct {
+	*tchttp.BaseRequest
+	
+	// Dashboard ID
+	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
+}
+
+func (r *DeleteDashboardRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDashboardRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DashboardId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDashboardRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteDashboardResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteDashboardResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteDashboardResponseParams `json:"Response"`
+}
+
+func (r *DeleteDashboardResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDashboardResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteDashboardSubscribeRequestParams struct {
+	// Dashboard subscription record id. Obtain the id through the [Get Dashboard Subscription List](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) api.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type DeleteDashboardSubscribeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Dashboard subscription record id. Obtain the id through the [Get Dashboard Subscription List](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) api.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+func (r *DeleteDashboardSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDashboardSubscribeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDashboardSubscribeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteDashboardSubscribeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteDashboardSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteDashboardSubscribeResponseParams `json:"Response"`
+}
+
+func (r *DeleteDashboardSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDashboardSubscribeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteDataTransformRequestParams struct {
-	// Data processing task ID
+	// Data processing task ID - Search the data processing task list basic information (https://www.tencentcloud.com/document/product/614/72182?from_cn_redirect=1) to get the data processing task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type DeleteDataTransformRequest struct {
 	*tchttp.BaseRequest
 	
-	// Data processing task ID
+	// Data processing task ID - Search the data processing task list basic information (https://www.tencentcloud.com/document/product/614/72182?from_cn_redirect=1) to get the data processing task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
@@ -3149,15 +6767,145 @@ func (r *DeleteDataTransformResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteDlcDeliverRequestParams struct {
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DeleteDlcDeliverRequest struct {
+	*tchttp.BaseRequest
+	
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DeleteDlcDeliverRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDlcDeliverRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDlcDeliverRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteDlcDeliverResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteDlcDeliverResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteDlcDeliverResponseParams `json:"Response"`
+}
+
+func (r *DeleteDlcDeliverResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDlcDeliverResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteEsRechargeRequestParams struct {
+	// Task ID
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Log topic id of the task configuration.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+type DeleteEsRechargeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Task ID
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Log topic id of the task configuration.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+func (r *DeleteEsRechargeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteEsRechargeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "TopicId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteEsRechargeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteEsRechargeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteEsRechargeResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteEsRechargeResponseParams `json:"Response"`
+}
+
+func (r *DeleteEsRechargeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteEsRechargeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteExportRequestParams struct {
-	// Log export ID
+	// Log export task ID.
+	// -Obtain the log export task Id through [Get Log Download Task List](https://www.tencentcloud.com/document/product/614/56449?from_cn_redirect=1).
 	ExportId *string `json:"ExportId,omitnil,omitempty" name:"ExportId"`
 }
 
 type DeleteExportRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log export ID
+	// Log export task ID.
+	// -Obtain the log export task Id through [Get Log Download Task List](https://www.tencentcloud.com/document/product/614/56449?from_cn_redirect=1).
 	ExportId *string `json:"ExportId,omitnil,omitempty" name:"ExportId"`
 }
 
@@ -3203,15 +6951,82 @@ func (r *DeleteExportResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteHostMetricConfigRequestParams struct {
+	// Metric Topic id
+	// - Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note: BizType 0: log topic (default value), 1: metric topic.
+	// -Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Collection Configuration id.
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+}
+
+type DeleteHostMetricConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Metric Topic id
+	// - Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note: BizType 0: log topic (default value), 1: metric topic.
+	// -Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Collection Configuration id.
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+}
+
+func (r *DeleteHostMetricConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteHostMetricConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "ConfigId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteHostMetricConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteHostMetricConfigResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteHostMetricConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteHostMetricConfigResponseParams `json:"Response"`
+}
+
+func (r *DeleteHostMetricConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteHostMetricConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteIndexRequestParams struct {
-	// Log topic ID
+	// Log topic Id.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
 type DeleteIndexRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log topic ID
+	// Log topic Id.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
@@ -3258,20 +7073,28 @@ func (r *DeleteIndexResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteKafkaRechargeRequestParams struct {
-	// Kafka data import configuration ID
+	// Kafka import configuration Id.
+	// 
+	// -Create a Kafka Data Subscription Task (https://www.tencentcloud.com/document/product/614/94448?from_cn_redirect=1) to obtain the Kafka import configuration Id.
+	// -Get the Kafka import configuration Id by [searching the Kafka Data Subscription Task list](https://www.tencentcloud.com/document/product/614/94446?from_cn_redirect=1).
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Target CLS log topic ID
+	// Import the target log topic Id of CLS.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
 type DeleteKafkaRechargeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Kafka data import configuration ID
+	// Kafka import configuration Id.
+	// 
+	// -Create a Kafka Data Subscription Task (https://www.tencentcloud.com/document/product/614/94448?from_cn_redirect=1) to obtain the Kafka import configuration Id.
+	// -Get the Kafka import configuration Id by [searching the Kafka Data Subscription Task list](https://www.tencentcloud.com/document/product/614/94446?from_cn_redirect=1).
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Target CLS log topic ID
+	// Import the target log topic Id of CLS.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
@@ -3319,14 +7142,14 @@ func (r *DeleteKafkaRechargeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteLogsetRequestParams struct {
-	// Logset ID
+	// Log Set Id. It can be obtained through the [logset list](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1).
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 }
 
 type DeleteLogsetRequest struct {
 	*tchttp.BaseRequest
 	
-	// Logset ID
+	// Log Set Id. It can be obtained through the [logset list](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1).
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 }
 
@@ -3373,7 +7196,8 @@ func (r *DeleteLogsetResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteMachineGroupInfoRequestParams struct {
-	// Machine group ID
+	// Machine group Id
+	// -Obtain the machine group Id by searching the [machine group list](https://www.tencentcloud.com/document/product/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// Machine group type
@@ -3384,7 +7208,8 @@ type DeleteMachineGroupInfoRequestParams struct {
 type DeleteMachineGroupInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// Machine group ID
+	// Machine group Id
+	// -Obtain the machine group Id by searching the [machine group list](https://www.tencentcloud.com/document/product/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// Machine group type
@@ -3436,14 +7261,16 @@ func (r *DeleteMachineGroupInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteMachineGroupRequestParams struct {
-	// Machine group ID
+	// Machine group Id
+	// -Obtain the machine group Id by searching the machine group list (https://www.tencentcloud.com/document/product/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
 type DeleteMachineGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Machine group ID
+	// Machine group Id
+	// -Obtain the machine group Id by searching the machine group list (https://www.tencentcloud.com/document/product/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
@@ -3489,21 +7316,377 @@ func (r *DeleteMachineGroupResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type DeleteScheduledSqlRequestParams struct {
-	// Task ID
+type DeleteMetricConfigRequestParams struct {
+	// Metric Topic id
+	// - Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note: BizType 0: log topic (default value), 1: metric topic.
+	// -Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Metric collection configuration ID.
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+}
+
+type DeleteMetricConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Metric Topic id
+	// - Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note: BizType 0: log topic (default value), 1: metric topic.
+	// -Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Metric collection configuration ID.
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+}
+
+func (r *DeleteMetricConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteMetricConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "ConfigId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMetricConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteMetricConfigResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteMetricConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteMetricConfigResponseParams `json:"Response"`
+}
+
+func (r *DeleteMetricConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteMetricConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteMetricSubscribeRequestParams struct {
+	// Metric collection task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Source Log Topic ID
+	// Log topic ID of a metric collection task configuration.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+type DeleteMetricSubscribeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Metric collection task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Log topic ID of a metric collection task configuration.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+func (r *DeleteMetricSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteMetricSubscribeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "TopicId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMetricSubscribeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteMetricSubscribeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteMetricSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteMetricSubscribeResponseParams `json:"Response"`
+}
+
+func (r *DeleteMetricSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteMetricSubscribeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNetworkApplicationRequestParams struct {
+	// <p>Web application id.</p>
+	NetworkAppId *string `json:"NetworkAppId,omitnil,omitempty" name:"NetworkAppId"`
+}
+
+type DeleteNetworkApplicationRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Web application id.</p>
+	NetworkAppId *string `json:"NetworkAppId,omitnil,omitempty" name:"NetworkAppId"`
+}
+
+func (r *DeleteNetworkApplicationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNetworkApplicationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NetworkAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteNetworkApplicationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNetworkApplicationResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteNetworkApplicationResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteNetworkApplicationResponseParams `json:"Response"`
+}
+
+func (r *DeleteNetworkApplicationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNetworkApplicationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNoticeContentRequestParams struct {
+	// Notification content template ID. Get the notification content template ID by searching the notification content template (https://www.tencentcloud.com/document/api/614/111714?from_cn_redirect=1).
+	NoticeContentId *string `json:"NoticeContentId,omitnil,omitempty" name:"NoticeContentId"`
+}
+
+type DeleteNoticeContentRequest struct {
+	*tchttp.BaseRequest
+	
+	// Notification content template ID. Get the notification content template ID by searching the notification content template (https://www.tencentcloud.com/document/api/614/111714?from_cn_redirect=1).
+	NoticeContentId *string `json:"NoticeContentId,omitnil,omitempty" name:"NoticeContentId"`
+}
+
+func (r *DeleteNoticeContentRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNoticeContentRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NoticeContentId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteNoticeContentRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteNoticeContentResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteNoticeContentResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteNoticeContentResponseParams `json:"Response"`
+}
+
+func (r *DeleteNoticeContentResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteNoticeContentResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRecordingRuleTaskRequestParams struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Source metric topic id</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+type DeleteRecordingRuleTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Source metric topic id</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+func (r *DeleteRecordingRuleTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRecordingRuleTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "TopicId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRecordingRuleTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRecordingRuleTaskResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteRecordingRuleTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteRecordingRuleTaskResponseParams `json:"Response"`
+}
+
+func (r *DeleteRecordingRuleTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRecordingRuleTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRecordingRuleYamlTaskRequestParams struct {
+	// <p>Task ID.</p>
+	YamlId *string `json:"YamlId,omitnil,omitempty" name:"YamlId"`
+
+	// <p>Source metric topic id</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+type DeleteRecordingRuleYamlTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Task ID.</p>
+	YamlId *string `json:"YamlId,omitnil,omitempty" name:"YamlId"`
+
+	// <p>Source metric topic id</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+func (r *DeleteRecordingRuleYamlTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRecordingRuleYamlTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "YamlId")
+	delete(f, "TopicId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRecordingRuleYamlTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRecordingRuleYamlTaskResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteRecordingRuleYamlTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteRecordingRuleYamlTaskResponseParams `json:"Response"`
+}
+
+func (r *DeleteRecordingRuleYamlTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRecordingRuleYamlTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteScheduledSqlRequestParams struct {
+	// Task ID, which can be obtained through [Scheduled SQL Analysis Task List](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1).
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Source log topic ID. Search the scheduled SQL analysis task list (https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1) to obtain it.
 	SrcTopicId *string `json:"SrcTopicId,omitnil,omitempty" name:"SrcTopicId"`
 }
 
 type DeleteScheduledSqlRequest struct {
 	*tchttp.BaseRequest
 	
-	// Task ID
+	// Task ID, which can be obtained through [Scheduled SQL Analysis Task List](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1).
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Source Log Topic ID
+	// Source log topic ID. Search the scheduled SQL analysis task list (https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1) to obtain it.
 	SrcTopicId *string `json:"SrcTopicId,omitnil,omitempty" name:"SrcTopicId"`
 }
 
@@ -3550,15 +7733,71 @@ func (r *DeleteScheduledSqlResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteSearchViewRequestParams struct {
+	// <p>View ID</p>
+	ViewId *string `json:"ViewId,omitnil,omitempty" name:"ViewId"`
+}
+
+type DeleteSearchViewRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>View ID</p>
+	ViewId *string `json:"ViewId,omitnil,omitempty" name:"ViewId"`
+}
+
+func (r *DeleteSearchViewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSearchViewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ViewId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSearchViewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSearchViewResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteSearchViewResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteSearchViewResponseParams `json:"Response"`
+}
+
+func (r *DeleteSearchViewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSearchViewResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteShipperRequestParams struct {
-	// Shipping rule ID
+	// Shipping Rule Id.
+	// -Obtain the ShipperId by [obtaining the shipping task list](https://www.tencentcloud.com/document/product/614/58745?from_cn_redirect=1).
 	ShipperId *string `json:"ShipperId,omitnil,omitempty" name:"ShipperId"`
 }
 
 type DeleteShipperRequest struct {
 	*tchttp.BaseRequest
 	
-	// Shipping rule ID
+	// Shipping Rule Id.
+	// -Obtain the ShipperId by [obtaining the shipping task list](https://www.tencentcloud.com/document/product/614/58745?from_cn_redirect=1).
 	ShipperId *string `json:"ShipperId,omitnil,omitempty" name:"ShipperId"`
 }
 
@@ -3604,15 +7843,78 @@ func (r *DeleteShipperResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteSplunkDeliverRequestParams struct {
+	// Task ID
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Log topic id
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+type DeleteSplunkDeliverRequest struct {
+	*tchttp.BaseRequest
+	
+	// Task ID
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Log topic id
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+func (r *DeleteSplunkDeliverRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSplunkDeliverRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "TopicId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSplunkDeliverRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSplunkDeliverResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteSplunkDeliverResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteSplunkDeliverResponseParams `json:"Response"`
+}
+
+func (r *DeleteSplunkDeliverResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSplunkDeliverResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteTopicRequestParams struct {
-	// Log topic ID
+	// Topic ID - Obtain the log topic ID through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
 type DeleteTopicRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log topic ID
+	// Topic ID - Obtain the log topic ID through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
@@ -3658,24 +7960,125 @@ func (r *DeleteTopicResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type DescribeAlarmNoticesRequestParams struct {
-	// <li> name
-	// Filter by Notification Channel Group Name.Type: String
-	// Required: No</li>
-	// <li> alarmNoticeId
-	// Filter by Notification Channel Group ID.Type: String
-	// Required: No</li>
-	// <li> uid
-	// Filter by Receiving User ID.Type: String
-	// Required: No</li>
-	// <li> groupId
-	// Filter by Receiving User Group ID.Type: String
-	// Required: No</li>
+type DeleteWebCallbackRequestParams struct {
+	// ID of the alarm channel callback configuration. Search the alarm channel callback configuration list (https://www.tencentcloud.com/document/api/614/115229?from_cn_redirect=1) to get the ID of the alarm channel callback configuration.
+	WebCallbackId *string `json:"WebCallbackId,omitnil,omitempty" name:"WebCallbackId"`
+}
+
+type DeleteWebCallbackRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the alarm channel callback configuration. Search the alarm channel callback configuration list (https://www.tencentcloud.com/document/api/614/115229?from_cn_redirect=1) to get the ID of the alarm channel callback configuration.
+	WebCallbackId *string `json:"WebCallbackId,omitnil,omitempty" name:"WebCallbackId"`
+}
+
+func (r *DeleteWebCallbackRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteWebCallbackRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "WebCallbackId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteWebCallbackRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteWebCallbackResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteWebCallbackResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteWebCallbackResponseParams `json:"Response"`
+}
+
+func (r *DeleteWebCallbackResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteWebCallbackResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeliverConfig struct {
+	// Region information.
 	// 
-	// <li> deliverFlag
-	// Filter by Delivery Status.Type: String
+	// Example
+	// ap-guangzhou: Guangzhou region.
+	// ap-nanjing Nanjing region.
+	// 
+	// For detailed information, see [regions and access endpoints](https://www.tencentcloud.com/document/product/614/18940?from_cn_redirect=1) on the official website.
+	// 
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Log topic ID. Obtain the log topic ID through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Data delivery scope.
+	// 
+	// All logs, including daily logs generated by periodic execution of alarm policies and logs generated by policy changes. Default value.
+	// 
+	// 1: Alarm triggering only and restore log
+	Scope *uint64 `json:"Scope,omitnil,omitempty" name:"Scope"`
+}
+
+type Delta struct {
+	// <p>Role</p><p>Enumeration value:</p><ul><li>user: User</li><li>assistant: AI assistant</li></ul>
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
+
+	// <p>Content details</p>
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// <p>Thought chain content.<br>Used to show the model thinking process, only available in deep thinking mode. Returned as an output parameter only, no need to input it in multi-round dialogue.</p>
+	ReasoningContent *string `json:"ReasoningContent,omitnil,omitempty" name:"ReasoningContent"`
+
+	// <p>Tool call generated by the model. Only support output parameter return.<br>For each output value, merge the Type, Name, and Arguments fields with Id as the flag.</p>
+	ToolCalls []*ToolCall `json:"ToolCalls,omitnil,omitempty" name:"ToolCalls"`
+}
+
+// Predefined struct for user
+type DescribeAlarmNoticesRequestParams struct {
+	// name
+	// Filter by [notification channel group name].
+	// Type: String
+	// "Filters":[{"Key":"name","Values":["test-notice"]}]
 	// Required: No
-	// Optional Values: "1": Not Enabled, "2": Enabled, "3": Delivery Exception</li>The maximum number of Filters per request is 10, and the maximum for Filter.Values is 5.
+	// alarmNoticeId
+	// Filter by [notification channel group ID].
+	// Type: String
+	// "Filters": [{Key: "alarmNoticeId", Values: ["notice-5281f1d2-6275-4e56-9ec3-a1eb19d8bc2f"]}]
+	// Required: No
+	// uid
+	// Filter by [recipient user ID].
+	// Type: String
+	// "Filters": [{Key: "uid", Values: ["1137546"]}]
+	// Required: No
+	// groupId
+	// Filter by [recipient user group ID].
+	// Type: String
+	// "Filters": [{Key: "groupId", Values: ["344098"]}]
+	// Required: No
+	// 
+	// deliverFlag
+	// Filter by [delivery status].
+	// Type: String
+	// Required: No
+	// Available values: "1": disabled, "2": enabled, "3": delivery exception
+	// "Filters":[{"Key":"deliverFlag","Values":["2"]}]
+	// The maximum number of Filters per request is 10, and the maximum for Filter.Values is 5.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0
@@ -3683,28 +8086,44 @@ type DescribeAlarmNoticesRequestParams struct {
 
 	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Whether to return the quantity information of alarm silence statistics status in the configured notification channel group.
+	// - true: Need to return.
+	// - false: do not return (default false).
+	HasAlarmShieldCount *bool `json:"HasAlarmShieldCount,omitnil,omitempty" name:"HasAlarmShieldCount"`
 }
 
 type DescribeAlarmNoticesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <li> name
-	// Filter by Notification Channel Group Name.Type: String
-	// Required: No</li>
-	// <li> alarmNoticeId
-	// Filter by Notification Channel Group ID.Type: String
-	// Required: No</li>
-	// <li> uid
-	// Filter by Receiving User ID.Type: String
-	// Required: No</li>
-	// <li> groupId
-	// Filter by Receiving User Group ID.Type: String
-	// Required: No</li>
-	// 
-	// <li> deliverFlag
-	// Filter by Delivery Status.Type: String
+	// name
+	// Filter by [notification channel group name].
+	// Type: String
+	// "Filters":[{"Key":"name","Values":["test-notice"]}]
 	// Required: No
-	// Optional Values: "1": Not Enabled, "2": Enabled, "3": Delivery Exception</li>The maximum number of Filters per request is 10, and the maximum for Filter.Values is 5.
+	// alarmNoticeId
+	// Filter by [notification channel group ID].
+	// Type: String
+	// "Filters": [{Key: "alarmNoticeId", Values: ["notice-5281f1d2-6275-4e56-9ec3-a1eb19d8bc2f"]}]
+	// Required: No
+	// uid
+	// Filter by [recipient user ID].
+	// Type: String
+	// "Filters": [{Key: "uid", Values: ["1137546"]}]
+	// Required: No
+	// groupId
+	// Filter by [recipient user group ID].
+	// Type: String
+	// "Filters": [{Key: "groupId", Values: ["344098"]}]
+	// Required: No
+	// 
+	// deliverFlag
+	// Filter by [delivery status].
+	// Type: String
+	// Required: No
+	// Available values: "1": disabled, "2": enabled, "3": delivery exception
+	// "Filters":[{"Key":"deliverFlag","Values":["2"]}]
+	// The maximum number of Filters per request is 10, and the maximum for Filter.Values is 5.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0
@@ -3712,6 +8131,11 @@ type DescribeAlarmNoticesRequest struct {
 
 	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Whether to return the quantity information of alarm silence statistics status in the configured notification channel group.
+	// - true: Need to return.
+	// - false: do not return (default false).
+	HasAlarmShieldCount *bool `json:"HasAlarmShieldCount,omitnil,omitempty" name:"HasAlarmShieldCount"`
 }
 
 func (r *DescribeAlarmNoticesRequest) ToJsonString() string {
@@ -3729,6 +8153,7 @@ func (r *DescribeAlarmNoticesRequest) FromJsonString(s string) error {
 	delete(f, "Filters")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "HasAlarmShieldCount")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAlarmNoticesRequest has unknown keys!", "")
 	}
@@ -3738,7 +8163,6 @@ func (r *DescribeAlarmNoticesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAlarmNoticesResponseParams struct {
 	// Alarm notification template list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	AlarmNotices []*AlarmNotice `json:"AlarmNotices,omitnil,omitempty" name:"AlarmNotices"`
 
 	// Total number of eligible alarm notification templates
@@ -3766,7 +8190,7 @@ func (r *DescribeAlarmNoticesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAlarmShieldsRequestParams struct {
-	// Notification Channel Group ID
+	// Notification channel group id. Obtain the notification channel group id by searching the [notification channel group list](https://www.tencentcloud.com/document/api/614/56462?from_cn_redirect=1).
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitnil,omitempty" name:"AlarmNoticeId"`
 
 	// - taskId: Filter by [Rule ID]. Type: String. Optional: No
@@ -3784,7 +8208,7 @@ type DescribeAlarmShieldsRequestParams struct {
 type DescribeAlarmShieldsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Notification Channel Group ID
+	// Notification channel group id. Obtain the notification channel group id by searching the [notification channel group list](https://www.tencentcloud.com/document/api/614/56462?from_cn_redirect=1).
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitnil,omitempty" name:"AlarmNoticeId"`
 
 	// - taskId: Filter by [Rule ID]. Type: String. Optional: No
@@ -3852,27 +8276,31 @@ func (r *DescribeAlarmShieldsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAlarmsRequestParams struct {
 	// name
-	// - Filter by **alarm policy name**
-	// - Type: String
-	// - Required: No
+	// -Filter by [alarm policy name].
+	// -Type: String
+	// -Optional: No.
+	// -Example: test-alarm
 	// 
 	// alarmId
-	// - Filter by **alarm policy ID**
-	// - Type: String
-	// - Required: No
+	// -Filter by [alert policy ID].
+	// -Type: String
+	// -Optional: No.
+	// -Example: alarm-b60cf034-c3d6-4b01-xxxx-4e877ebb4751
 	// 
 	// topicId
-	// - Filter by **log topic ID**
-	// - Type: String
-	// - Required: No
+	// -Filter by [log topic ID of the monitored object].
+	// -Type: String
+	// -Optional: No.
+	// -Example: 6766f83d-659e-xxxx-a8f7-9104a1012743
 	// 
 	// enable
-	// - Filter by **enablement status**
-	// - Type: String
-	// - Note: The valid values of `enable` include `1`, `t`, `T`, `TRUE`, `true`, `True`, `0`, `f`, `F`, `FALSE`, `false`, and `False`. If other values are entered, an "invalid parameter" error will be returned.
-	// - Required: No
+	// -Filter by [Enabled status].
+	// -Type: String
+	// -Remark: The parameter value range for enable is 1, t, T, TRUE, true, True, 0, f, F, FALSE, false, False. Other values will return error information.
+	// -Optional: No.
+	// -Example: true
 	// 
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+	// The maximum number of Filters per request is 10, and the maximum for Filter.Values is 5.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0
@@ -3886,27 +8314,31 @@ type DescribeAlarmsRequest struct {
 	*tchttp.BaseRequest
 	
 	// name
-	// - Filter by **alarm policy name**
-	// - Type: String
-	// - Required: No
+	// -Filter by [alarm policy name].
+	// -Type: String
+	// -Optional: No.
+	// -Example: test-alarm
 	// 
 	// alarmId
-	// - Filter by **alarm policy ID**
-	// - Type: String
-	// - Required: No
+	// -Filter by [alert policy ID].
+	// -Type: String
+	// -Optional: No.
+	// -Example: alarm-b60cf034-c3d6-4b01-xxxx-4e877ebb4751
 	// 
 	// topicId
-	// - Filter by **log topic ID**
-	// - Type: String
-	// - Required: No
+	// -Filter by [log topic ID of the monitored object].
+	// -Type: String
+	// -Optional: No.
+	// -Example: 6766f83d-659e-xxxx-a8f7-9104a1012743
 	// 
 	// enable
-	// - Filter by **enablement status**
-	// - Type: String
-	// - Note: The valid values of `enable` include `1`, `t`, `T`, `TRUE`, `true`, `True`, `0`, `f`, `F`, `FALSE`, `false`, and `False`. If other values are entered, an "invalid parameter" error will be returned.
-	// - Required: No
+	// -Filter by [Enabled status].
+	// -Type: String
+	// -Remark: The parameter value range for enable is 1, t, T, TRUE, true, True, 0, f, F, FALSE, false, False. Other values will return error information.
+	// -Optional: No.
+	// -Example: true
 	// 
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+	// The maximum number of Filters per request is 10, and the maximum for Filter.Values is 5.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0
@@ -3967,10 +8399,10 @@ func (r *DescribeAlarmsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAlertRecordHistoryRequestParams struct {
-	// Start time of the query range, which is a Unix timestamp in ms
+	// Start time of the query time range, unix timestamp in milliseconds (ms)
 	From *uint64 `json:"From,omitnil,omitempty" name:"From"`
 
-	// End time of the query range, which is a Unix timestamp in ms
+	// End time of query time range, unix timestamp in milliseconds (ms)
 	To *uint64 `json:"To,omitnil,omitempty" name:"To"`
 
 	// Page offset. Default value: 0
@@ -3991,10 +8423,10 @@ type DescribeAlertRecordHistoryRequestParams struct {
 type DescribeAlertRecordHistoryRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start time of the query range, which is a Unix timestamp in ms
+	// Start time of the query time range, unix timestamp in milliseconds (ms)
 	From *uint64 `json:"From,omitnil,omitempty" name:"From"`
 
-	// End time of the query range, which is a Unix timestamp in ms
+	// End time of query time range, unix timestamp in milliseconds (ms)
 	To *uint64 `json:"To,omitnil,omitempty" name:"To"`
 
 	// Page offset. Default value: 0
@@ -4064,15 +8496,261 @@ func (r *DescribeAlertRecordHistoryResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeCloudProductLogTasksRequestParams struct {
+	// <p>Paging offset. Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of entries per page. Default value: 20. Maximum value: 100.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <ul><li>assumerName<ul><li>Filter by [cloud product identifier].</li><li>Type: String</li><li>Required: No</li><li>Enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS</li></ul></li><li>logType<ul><li>Filter by [log type].</li><li>Type: String</li><li>Required: No</li><li>Enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</li></ul></li><li>instanceId<ul><li>Filter by [instance ID].</li><li>Type: String</li><li>Required: No</li></ul></li></ul>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeCloudProductLogTasksRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Paging offset. Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of entries per page. Default value: 20. Maximum value: 100.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <ul><li>assumerName<ul><li>Filter by [cloud product identifier].</li><li>Type: String</li><li>Required: No</li><li>Enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS</li></ul></li><li>logType<ul><li>Filter by [log type].</li><li>Type: String</li><li>Required: No</li><li>Enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</li></ul></li><li>instanceId<ul><li>Filter by [instance ID].</li><li>Type: String</li><li>Required: No</li></ul></li></ul>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeCloudProductLogTasksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudProductLogTasksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudProductLogTasksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloudProductLogTasksResponseParams struct {
+	// <p>Logging configuration detail list</p>
+	Tasks []*CloudProductLogTaskInfo `json:"Tasks,omitnil,omitempty" name:"Tasks"`
+
+	// <p>Total configuration count of logs</p>
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloudProductLogTasksResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloudProductLogTasksResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloudProductLogTasksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloudProductLogTasksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClusterBaseMetricConfigsRequestParams struct {
+	// Machine group ID.
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// <li> Filter the topicId by [metric topic id]. Type: String. Required: No</li>
+	// <li>Each request can have up to 10 Filters. The total upper limit of ALL Filter.Values is 100.</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeClusterBaseMetricConfigsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Machine group ID.
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// <li> Filter the topicId by [metric topic id]. Type: String. Required: No</li>
+	// <li>Each request can have up to 10 Filters. The total upper limit of ALL Filter.Values is 100.</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeClusterBaseMetricConfigsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterBaseMetricConfigsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GroupId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterBaseMetricConfigsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClusterBaseMetricConfigsResponseParams struct {
+	// Total number
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// List of metric collection configurations.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Datas []*BaseMetricCollectConfig `json:"Datas,omitnil,omitempty" name:"Datas"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeClusterBaseMetricConfigsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeClusterBaseMetricConfigsResponseParams `json:"Response"`
+}
+
+func (r *DescribeClusterBaseMetricConfigsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterBaseMetricConfigsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClusterMetricConfigsRequestParams struct {
+	// Machine group ID.
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// <li>Filter configId by [collection configuration id]. Type: String. Required: No</li>
+	// <li>name - String - required: no - filter by [configuration name]</li>
+	// <li>Each request can have up to 10 Filters. The total upper limit of ALL Filter.Values is 100.</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeClusterMetricConfigsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Machine group ID.
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// <li>Filter configId by [collection configuration id]. Type: String. Required: No</li>
+	// <li>name - String - required: no - filter by [configuration name]</li>
+	// <li>Each request can have up to 10 Filters. The total upper limit of ALL Filter.Values is 100.</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeClusterMetricConfigsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterMetricConfigsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "GroupId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterMetricConfigsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClusterMetricConfigsResponseParams struct {
+	// Total number
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// List of metric collection configurations.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Datas []*MetricCollectConfig `json:"Datas,omitnil,omitempty" name:"Datas"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeClusterMetricConfigsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeClusterMetricConfigsResponseParams `json:"Response"`
+}
+
+func (r *DescribeClusterMetricConfigsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterMetricConfigsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeConfigMachineGroupsRequestParams struct {
-	// Collection configuration ID
+	// Collection Configuration ID
+	// -Obtain the collection configuration Id by accessing the collection rule configuration (https://www.tencentcloud.com/document/product/614/58616?from_cn_redirect=1).
 	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
 }
 
 type DescribeConfigMachineGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Collection configuration ID
+	// Collection Configuration ID
+	// -Obtain the collection configuration Id by accessing the collection rule configuration (https://www.tencentcloud.com/document/product/614/58616?from_cn_redirect=1).
 	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
 }
 
@@ -4124,21 +8802,25 @@ func (r *DescribeConfigMachineGroupsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeConfigsRequestParams struct {
 	// configName
-	// - Filter by fuzzy match of **collection configuration name**
-	// - Type: String
-	// - Required: No
+	// -Filter by [collection configuration name] using fuzzy matching.
+	// -Type: String
+	// -Required: No
+	// -Example: test-config.
 	// 
 	// configId
-	// - Filter by **collection configuration ID**
-	// - Type: String
-	// - Required: No
+	// -Filter by [collection configuration ID].
+	// -Type: String
+	// -Required: No
+	// -Example: 3581a3be-aa41-423b-995a-54ec84da6264
 	// 
 	// topicId
-	// - Filter by **log topic**
-	// - Type: String
-	// - Required: No
+	// - Filter by [log topic].
+	// -Type: String
+	// -Required: No
+	// -Example: 3b83f9d6-3a4d-47f9-9b7f-285c868b2f9a
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	// 
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+	// The maximum number of Filters per request is 10, and the maximum for Filter.Values is 5.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0
@@ -4152,21 +8834,25 @@ type DescribeConfigsRequest struct {
 	*tchttp.BaseRequest
 	
 	// configName
-	// - Filter by fuzzy match of **collection configuration name**
-	// - Type: String
-	// - Required: No
+	// -Filter by [collection configuration name] using fuzzy matching.
+	// -Type: String
+	// -Required: No
+	// -Example: test-config.
 	// 
 	// configId
-	// - Filter by **collection configuration ID**
-	// - Type: String
-	// - Required: No
+	// -Filter by [collection configuration ID].
+	// -Type: String
+	// -Required: No
+	// -Example: 3581a3be-aa41-423b-995a-54ec84da6264
 	// 
 	// topicId
-	// - Filter by **log topic**
-	// - Type: String
-	// - Required: No
+	// - Filter by [log topic].
+	// -Type: String
+	// -Required: No
+	// -Example: 3b83f9d6-3a4d-47f9-9b7f-285c868b2f9a
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	// 
-	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`.
+	// The maximum number of Filters per request is 10, and the maximum for Filter.Values is 5.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0
@@ -4227,15 +8913,296 @@ func (r *DescribeConfigsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeConsolesRequestParams struct {
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of entries per page. Default value: 100. Maximum value: 100.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <li> DomainPrefix filters by [domain name prefix]. Type: String Required: No</li><li> ConsoleId filters by [DataSight instance ID]. Type: String Required: No</li><li> tagKey filters by [tag key]. Type: String Required: No</li><li> tag:tagKey filters by [tag key-value pair]. Replace tagKey with a specific tag key, such as tag:exampleKey. Type: String Required: No</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeConsolesRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of entries per page. Default value: 100. Maximum value: 100.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <li> DomainPrefix filters by [domain name prefix]. Type: String Required: No</li><li> ConsoleId filters by [DataSight instance ID]. Type: String Required: No</li><li> tagKey filters by [tag key]. Type: String Required: No</li><li> tag:tagKey filters by [tag key-value pair]. Replace tagKey with a specific tag key, such as tag:exampleKey. Type: String Required: No</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeConsolesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsolesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConsolesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConsolesResponseParams struct {
+	// <p>DataSight Console Instance List</p>
+	Consoles []*Console `json:"Consoles,omitnil,omitempty" name:"Consoles"`
+
+	// <p>Total number of instances</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeConsolesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeConsolesResponseParams `json:"Response"`
+}
+
+func (r *DescribeConsolesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsolesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConsumerGroupsRequestParams struct {
+	// Logset ID (the logset to which a log topic belongs).
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// topic list
+	Topics []*string `json:"Topics,omitnil,omitempty" name:"Topics"`
+}
+
+type DescribeConsumerGroupsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Logset ID (the logset to which a log topic belongs).
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// topic list
+	Topics []*string `json:"Topics,omitnil,omitempty" name:"Topics"`
+}
+
+func (r *DescribeConsumerGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumerGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LogsetId")
+	delete(f, "Topics")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConsumerGroupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConsumerGroupsResponseParams struct {
+	// List of consumer group details.
+	ConsumerGroupsInfo []*ConsumerGroupInfo `json:"ConsumerGroupsInfo,omitnil,omitempty" name:"ConsumerGroupsInfo"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeConsumerGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeConsumerGroupsResponseParams `json:"Response"`
+}
+
+func (r *DescribeConsumerGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumerGroupsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConsumerOffsetsRequestParams struct {
+	// Consumer group flag corresponding to a log topic.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Timestamp (second-level).
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Logset ID (corresponding to a log topic).
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// Log topic id
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Partition ID
+	PartitionId *string `json:"PartitionId,omitnil,omitempty" name:"PartitionId"`
+}
+
+type DescribeConsumerOffsetsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Consumer group flag corresponding to a log topic.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Timestamp (second-level).
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+
+	// Logset ID (corresponding to a log topic).
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// Log topic id
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Partition ID
+	PartitionId *string `json:"PartitionId,omitnil,omitempty" name:"PartitionId"`
+}
+
+func (r *DescribeConsumerOffsetsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumerOffsetsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ConsumerGroup")
+	delete(f, "From")
+	delete(f, "LogsetId")
+	delete(f, "TopicId")
+	delete(f, "PartitionId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConsumerOffsetsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConsumerOffsetsResponseParams struct {
+	// Consumer group flag.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Consumption offset information.
+	TopicPartitionOffsetsInfo []*TopicPartitionOffsetInfo `json:"TopicPartitionOffsetsInfo,omitnil,omitempty" name:"TopicPartitionOffsetsInfo"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeConsumerOffsetsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeConsumerOffsetsResponseParams `json:"Response"`
+}
+
+func (r *DescribeConsumerOffsetsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumerOffsetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConsumerPreviewRequestParams struct {
+
+}
+
+type DescribeConsumerPreviewRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeConsumerPreviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumerPreviewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConsumerPreviewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConsumerPreviewResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeConsumerPreviewResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeConsumerPreviewResponseParams `json:"Response"`
+}
+
+func (r *DescribeConsumerPreviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumerPreviewResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeConsumerRequestParams struct {
-	// Log topic ID bound to the task
+	// Log topic Id bound to the delivery task.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// -Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
 type DescribeConsumerRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log topic ID bound to the task
+	// Log topic Id bound to the delivery task.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// -Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
@@ -4273,8 +9240,7 @@ type DescribeConsumerResponseParams struct {
 	// CKafka information
 	Ckafka *Ckafka `json:"Ckafka,omitnil,omitempty" name:"Ckafka"`
 
-	// Compression mode. Valid values: `0` (no compression), `2` (snappy), `3` (LZ4).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Compression mode [0:NONE；2:SNAPPY；3:LZ4]
 	Compression *int64 `json:"Compression,omitnil,omitempty" name:"Compression"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4298,8 +9264,116 @@ func (r *DescribeConsumerResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeConsumersRequestParams struct {
+	// - consumerId
+	// Filter by [Delivery Rule ID].
+	// Type: String
+	// Required: No
+	// 
+	// - topicId
+	// Filter by [Log topic].
+	// Type: String
+	// Required: No
+	// 
+	// - taskStatus
+	// Filter by [task running status]. Supported values: `0`: stop, `1`: running, `2`: exception.
+	// Type: String
+	// Required: No
+	// 
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 10.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Pagination single page limit. The default value is 20, and the maximum value is 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeConsumersRequest struct {
+	*tchttp.BaseRequest
+	
+	// - consumerId
+	// Filter by [Delivery Rule ID].
+	// Type: String
+	// Required: No
+	// 
+	// - topicId
+	// Filter by [Log topic].
+	// Type: String
+	// Required: No
+	// 
+	// - taskStatus
+	// Filter by [task running status]. Supported values: `0`: stop, `1`: running, `2`: exception.
+	// Type: String
+	// Required: No
+	// 
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 10.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Pagination single page limit. The default value is 20, and the maximum value is 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeConsumersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConsumersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConsumersResponseParams struct {
+	// Shipping rule list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Consumers []*ConsumerInfo `json:"Consumers,omitnil,omitempty" name:"Consumers"`
+
+	// Total number obtained in this query
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeConsumersResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeConsumersResponseParams `json:"Response"`
+}
+
+func (r *DescribeConsumersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeCosRechargesRequestParams struct {
-	// ID of the log topic.
+	// Log topic Id.
+	// - Get the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/api/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Status. `0`: Created, `1`: Running, `2`: Stopped, `3`: Completed, `4`: Run failed
@@ -4312,7 +9386,8 @@ type DescribeCosRechargesRequestParams struct {
 type DescribeCosRechargesRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the log topic.
+	// Log topic Id.
+	// - Get the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/api/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Status. `0`: Created, `1`: Running, `2`: Stopped, `3`: Completed, `4`: Run failed
@@ -4345,8 +9420,7 @@ func (r *DescribeCosRechargesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCosRechargesResponseParams struct {
-	// See the description of the `CosRechargeInfo` structure.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// See CosRechargeInfo structural description.
 	Data []*CosRechargeInfo `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4370,29 +9444,131 @@ func (r *DescribeCosRechargesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDashboardSubscribesRequestParams struct {
+	// dashboardId: Filter by [dashboard id]. Type: String. Required: No.
+	// 
+	// -Dashboard id. Obtain DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) api.
+	// -Input parameter example: dashboard-522a5609-1f41-4b11-8086-5afd1d7574f5
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeDashboardSubscribesRequest struct {
+	*tchttp.BaseRequest
+	
+	// dashboardId: Filter by [dashboard id]. Type: String. Required: No.
+	// 
+	// -Dashboard id. Obtain DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) api.
+	// -Input parameter example: dashboard-522a5609-1f41-4b11-8086-5afd1d7574f5
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeDashboardSubscribesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDashboardSubscribesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDashboardSubscribesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDashboardSubscribesResponseParams struct {
+	// Dashboard subscription list
+	DashboardSubscribeInfos []*DashboardSubscribeInfo `json:"DashboardSubscribeInfos,omitnil,omitempty" name:"DashboardSubscribeInfos"`
+
+	// Total number
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDashboardSubscribesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDashboardSubscribesResponseParams `json:"Response"`
+}
+
+func (r *DescribeDashboardSubscribesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDashboardSubscribesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDataTransformInfoRequestParams struct {
-	// <br><li>taskName
-	// 
-	// Filter by **processing task name**.
+	// - taskName
+	// Filter by [processing task name].
 	// Type: String
-	// 
 	// Required: No
+	// Example: test-task
 	// 
-	// <br><li>taskId
-	// 
-	// Filter by **processing task ID**.
+	// - taskId
+	// Filter by [processing task id].
 	// Type: String
-	// 
 	// Required: No
+	// Example: a3622556-6402-4942-b4ff-5ae32ec29810
+	// Data processing task ID - Search the data processing task list basic information (https://www.tencentcloud.com/document/product/614/72182?from_cn_redirect=1) to get the data processing task ID.
 	// 
-	// <br><li>srctopicId
-	// 
-	// Filter by **source topic ID**.
+	// - topicId
+	// Filter by [source topicId].
 	// Type: String
-	// 
 	// Required: No
+	// Example: 756cec3e-a0a5-44c3-85a8-090870582000
+	// Log topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	// 
-	// Each request can have up to 10 `Filters` and 100 `Filter.Values`.
+	// - status
+	// Filter by [Task running status]. 1: Preparing, 2: Running, 3: Stopping, 4: Stopped.
+	// Type: String
+	// Required: No
+	// Example: 1
+	// 
+	// - hasServiceLog
+	// Filter by [whether service logs are enabled]. 1: not enabled, 2: on.
+	// Type: String
+	// Required: No
+	// Example: 1
+	// 
+	// - dstTopicType
+	// Filter by [Target topic Type]. 1: Fixed, 2: Dynamic.
+	// Type: String
+	// Required: No
+	// Example: 1
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// The pagination offset. Default value: 0.
@@ -4404,35 +9580,54 @@ type DescribeDataTransformInfoRequestParams struct {
 	// Task type. Valid values: 1: Get the details of a single task. 2 (default): Get the task list.
 	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Task ID, which is required when `Type` is set to `1`
+	// When Type is 1, this parameter is required.
+	// Data processing task ID - Search the data processing task list basic information (https://www.tencentcloud.com/document/product/614/72182?from_cn_redirect=1) to get the data processing task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type DescribeDataTransformInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// <br><li>taskName
-	// 
-	// Filter by **processing task name**.
+	// - taskName
+	// Filter by [processing task name].
 	// Type: String
-	// 
 	// Required: No
+	// Example: test-task
 	// 
-	// <br><li>taskId
-	// 
-	// Filter by **processing task ID**.
+	// - taskId
+	// Filter by [processing task id].
 	// Type: String
-	// 
 	// Required: No
+	// Example: a3622556-6402-4942-b4ff-5ae32ec29810
+	// Data processing task ID - Search the data processing task list basic information (https://www.tencentcloud.com/document/product/614/72182?from_cn_redirect=1) to get the data processing task ID.
 	// 
-	// <br><li>srctopicId
-	// 
-	// Filter by **source topic ID**.
+	// - topicId
+	// Filter by [source topicId].
 	// Type: String
-	// 
 	// Required: No
+	// Example: 756cec3e-a0a5-44c3-85a8-090870582000
+	// Log topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	// 
-	// Each request can have up to 10 `Filters` and 100 `Filter.Values`.
+	// - status
+	// Filter by [Task running status]. 1: Preparing, 2: Running, 3: Stopping, 4: Stopped.
+	// Type: String
+	// Required: No
+	// Example: 1
+	// 
+	// - hasServiceLog
+	// Filter by [whether service logs are enabled]. 1: not enabled, 2: on.
+	// Type: String
+	// Required: No
+	// Example: 1
+	// 
+	// - dstTopicType
+	// Filter by [Target topic Type]. 1: Fixed, 2: Dynamic.
+	// Type: String
+	// Required: No
+	// Example: 1
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// The pagination offset. Default value: 0.
@@ -4444,7 +9639,8 @@ type DescribeDataTransformInfoRequest struct {
 	// Task type. Valid values: 1: Get the details of a single task. 2 (default): Get the task list.
 	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Task ID, which is required when `Type` is set to `1`
+	// When Type is 1, this parameter is required.
+	// Data processing task ID - Search the data processing task list basic information (https://www.tencentcloud.com/document/product/614/72182?from_cn_redirect=1) to get the data processing task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
@@ -4500,8 +9696,326 @@ func (r *DescribeDataTransformInfoResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDlcDeliversRequestParams struct {
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// - taskId
+	// Filter by [task id].
+	// Type: String
+	// Required: No
+	// 
+	// - name
+	// Filter by [task name].
+	// Type: String
+	// Required: No
+	// 
+	// - tableName
+	// Filter by [data table].
+	// Type: String
+	// Required: No
+	// 
+	// - statusFlag
+	// Filter by [status]. Supported values: "1", "2", "3", "4". Meanings: 1: RUNNING, 2: STOPPED, 3: FINISHED, 4: FAILED.
+	// Type: String
+	// Required: No
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 10.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeDlcDeliversRequest struct {
+	*tchttp.BaseRequest
+	
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// - taskId
+	// Filter by [task id].
+	// Type: String
+	// Required: No
+	// 
+	// - name
+	// Filter by [task name].
+	// Type: String
+	// Required: No
+	// 
+	// - tableName
+	// Filter by [data table].
+	// Type: String
+	// Required: No
+	// 
+	// - statusFlag
+	// Filter by [status]. Supported values: "1", "2", "3", "4". Meanings: 1: RUNNING, 2: STOPPED, 3: FINISHED, 4: FAILED.
+	// Type: String
+	// Required: No
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 10.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeDlcDeliversRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDlcDeliversRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDlcDeliversRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDlcDeliversResponseParams struct {
+	// List of alarm channel callback configurations.
+	Infos []*DlcDeliverInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// Total number of notification content configurations that meet the conditions.
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDlcDeliversResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDlcDeliversResponseParams `json:"Response"`
+}
+
+func (r *DescribeDlcDeliversResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDlcDeliversResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEsRechargePreviewRequestParams struct {
+	// Name: Length not exceeding 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Index information. Different indexes can be separated by English commas and support wildcards.
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// Elasticsearch Query Statement.
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// es cluster configuration.
+	EsInfo *EsInfo `json:"EsInfo,omitnil,omitempty" name:"EsInfo"`
+
+	// es import information.
+	ImportInfo *EsImportInfo `json:"ImportInfo,omitnil,omitempty" name:"ImportInfo"`
+
+	// Field information of es import time.
+	TimeInfo *EsTimeInfo `json:"TimeInfo,omitnil,omitempty" name:"TimeInfo"`
+}
+
+type DescribeEsRechargePreviewRequest struct {
+	*tchttp.BaseRequest
+	
+	// Name: Length not exceeding 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Index information. Different indexes can be separated by English commas and support wildcards.
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// Elasticsearch Query Statement.
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// es cluster configuration.
+	EsInfo *EsInfo `json:"EsInfo,omitnil,omitempty" name:"EsInfo"`
+
+	// es import information.
+	ImportInfo *EsImportInfo `json:"ImportInfo,omitnil,omitempty" name:"ImportInfo"`
+
+	// Field information of es import time.
+	TimeInfo *EsTimeInfo `json:"TimeInfo,omitnil,omitempty" name:"TimeInfo"`
+}
+
+func (r *DescribeEsRechargePreviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEsRechargePreviewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "TopicId")
+	delete(f, "Index")
+	delete(f, "Query")
+	delete(f, "EsInfo")
+	delete(f, "ImportInfo")
+	delete(f, "TimeInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEsRechargePreviewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEsRechargePreviewResponseParams struct {
+	// Preview data info
+	Data []*string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeEsRechargePreviewResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeEsRechargePreviewResponseParams `json:"Response"`
+}
+
+func (r *DescribeEsRechargePreviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEsRechargePreviewResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEsRechargesRequestParams struct {
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// -taskId is filtered by [configuration id]. Type: String. Required: No.
+	// -Name is filtered by [configuration name]. Type: String. Required: No.
+	// - statusFlag: Filter by [Configuration Status Marking]. Type: String. Optional: No
+	// -Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeEsRechargesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// -taskId is filtered by [configuration id]. Type: String. Required: No.
+	// -Name is filtered by [configuration name]. Type: String. Required: No.
+	// - statusFlag: Filter by [Configuration Status Marking]. Type: String. Optional: No
+	// -Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeEsRechargesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEsRechargesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEsRechargesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEsRechargesResponseParams struct {
+	// Total number
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// es import configuration info
+	Infos []*EsRechargeInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeEsRechargesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeEsRechargesResponseParams `json:"Response"`
+}
+
+func (r *DescribeEsRechargesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEsRechargesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeExportsRequestParams struct {
 	// Log topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Page offset. Default value: 0
@@ -4515,6 +10029,7 @@ type DescribeExportsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Log topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Page offset. Default value: 0
@@ -4574,15 +10089,106 @@ func (r *DescribeExportsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeHostMetricConfigsRequestParams struct {
+	// Metric Topic id
+	// - Get the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note: BizType 0: log topic (default value), 1: metric topic.
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// -configId - String - required: no - filter by [configId].
+	// -Filter the name by [configuration name]. Type: String. Required: No.
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 10.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeHostMetricConfigsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Metric Topic id
+	// - Get the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note: BizType 0: log topic (default value), 1: metric topic.
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// -configId - String - required: no - filter by [configId].
+	// -Filter the name by [configuration name]. Type: String. Required: No.
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 10.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeHostMetricConfigsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostMetricConfigsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeHostMetricConfigsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeHostMetricConfigsResponseParams struct {
+	// Total number
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Metric subscription configuration information.
+	Infos []*HostMetricConfig `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeHostMetricConfigsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeHostMetricConfigsResponseParams `json:"Response"`
+}
+
+func (r *DescribeHostMetricConfigsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostMetricConfigsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeIndexRequestParams struct {
-	// Log topic ID
+	// <p>log topic Id</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li></ul>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
 type DescribeIndexRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log topic ID
+	// <p>log topic Id</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li></ul>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
@@ -4607,31 +10213,27 @@ func (r *DescribeIndexRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeIndexResponseParams struct {
-	// Log topic ID
+	// <p>Log topic Id</p>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Whether it takes effect
+	// <p>Index status. true: enabled, false: disabled<br>Once enabled, you can perform retrieval and analysis of logs, which will generate indexing traffic, index storage, and corresponding fees. <a href="https://www.tencentcloud.com/document/product/614/45802?from_cn_redirect=1#.E8.AE.A1.E8.B4.B9.E9.A1.B9">Billing details</a></p>
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Index configuration information
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// <p>Index configuration information</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Rule *RuleInfo `json:"Rule,omitnil,omitempty" name:"Rule"`
 
-	// Index modification time. The default value is the index creation time.
+	// <p>Index modification time, which is initially the index creation time. Format <code>YYYY-MM-DD HH:MM:SS</code></p>
 	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
 
-	// Whether full-text indexing includes internal fields (`__FILENAME__`, `__HOSTNAME__`, and `__SOURCE__`)
-	// * `false`: Full-text indexing does not include internal fields.
-	// * `true`: Full-text indexing includes internal fields.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Whether the built-in reserved fields (<code>__FILENAME__</code>, <code>__HOSTNAME__</code>, and <code>__SOURCE__</code>) are included in the full-text index</p><ul><li>false: does not include</li><li>true: includes</li></ul>
 	IncludeInternalFields *bool `json:"IncludeInternalFields,omitnil,omitempty" name:"IncludeInternalFields"`
 
-	// Whether full-text indexing includes metadata fields (which are prefixed with `__TAG__`)
-	// * `0`: Full-text indexing includes only the metadata fields with key-value indexing enabled.
-	// * `1`: Full-text indexing includes all metadata fields.
-	// * `2`: Full-text indexing does not include metadata fields.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Whether metadata fields (fields prefixed with <code>__TAG__</code>) are included in full-text indexing</p><ul><li>0: Contain only metadata fields with key-value index enabled</li><li>1: Include all metadata fields</li><li>2: Exclude any metadata fields</li></ul>
 	MetadataFlag *uint64 `json:"MetadataFlag,omitnil,omitempty" name:"MetadataFlag"`
+
+	// <p>Custom log parsing exception storage field.</p>
+	CoverageField *string `json:"CoverageField,omitnil,omitempty" name:"CoverageField"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -4654,15 +10256,246 @@ func (r *DescribeIndexResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeKafkaConsumerGroupDetailRequestParams struct {
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Consumer group name
+	Group *string `json:"Group,omitnil,omitempty" name:"Group"`
+}
+
+type DescribeKafkaConsumerGroupDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Consumer group name
+	Group *string `json:"Group,omitnil,omitempty" name:"Group"`
+}
+
+func (r *DescribeKafkaConsumerGroupDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeKafkaConsumerGroupDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Group")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeKafkaConsumerGroupDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeKafkaConsumerGroupDetailResponseParams struct {
+	// Logset id
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// Consumer group name
+	Group *string `json:"Group,omitnil,omitempty" name:"Group"`
+
+	// List of consumer group information
+	PartitionInfos []*GroupPartitionInfo `json:"PartitionInfos,omitnil,omitempty" name:"PartitionInfos"`
+
+	// Empty: The group has no members but has submitted offsets. All consumers have left but retained offsets.
+	// Dead: No members in the group and no submitted offset. The group is deleted or has long-term inactivity.
+	// Stable: Members in the group consume normally, and partition allocation is balanced. Normal operating status.
+	// PreparingRebalance: The group is preparing to rebalance. A new member joins or an existing member leaves.
+	// CompletingRebalance: The group is preparing to rebalance. New members join or existing members leave.
+	State *string `json:"State,omitnil,omitempty" name:"State"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeKafkaConsumerGroupDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeKafkaConsumerGroupDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeKafkaConsumerGroupDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeKafkaConsumerGroupDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeKafkaConsumerGroupListRequestParams struct {
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// - group
+	// Filter by [consumer group name].
+	// Type: String
+	// Required: No
+	// Example: Consumption group 1
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 10.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeKafkaConsumerGroupListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// - group
+	// Filter by [consumer group name].
+	// Type: String
+	// Required: No
+	// Example: Consumption group 1
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 10.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeKafkaConsumerGroupListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeKafkaConsumerGroupListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeKafkaConsumerGroupListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeKafkaConsumerGroupListResponseParams struct {
+	// log topic name
+	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+
+	// Logset id
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// Total number
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// List of consumer group information
+	Groups []*ConsumerGroup `json:"Groups,omitnil,omitempty" name:"Groups"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeKafkaConsumerGroupListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeKafkaConsumerGroupListResponseParams `json:"Response"`
+}
+
+func (r *DescribeKafkaConsumerGroupListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeKafkaConsumerGroupListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeKafkaConsumerPreviewRequestParams struct {
+
+}
+
+type DescribeKafkaConsumerPreviewRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeKafkaConsumerPreviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeKafkaConsumerPreviewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeKafkaConsumerPreviewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeKafkaConsumerPreviewResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeKafkaConsumerPreviewResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeKafkaConsumerPreviewResponseParams `json:"Response"`
+}
+
+func (r *DescribeKafkaConsumerPreviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeKafkaConsumerPreviewResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeKafkaConsumerRequestParams struct {
-	// Log Topic ID
+	// <p>Log topic Id.</p><ul><li>Get log topic Id by <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">get log topic list</a>.</li><li>Get log topic Id by <a href="https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1">create log topic</a>.</li></ul>
 	FromTopicId *string `json:"FromTopicId,omitnil,omitempty" name:"FromTopicId"`
 }
 
 type DescribeKafkaConsumerRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log Topic ID
+	// <p>Log topic Id.</p><ul><li>Get log topic Id by <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">get log topic list</a>.</li><li>Get log topic Id by <a href="https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1">create log topic</a>.</li></ul>
 	FromTopicId *string `json:"FromTopicId,omitnil,omitempty" name:"FromTopicId"`
 }
 
@@ -4687,17 +10520,23 @@ func (r *DescribeKafkaConsumerRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeKafkaConsumerResponseParams struct {
-	// Whether Kafka Protocol Consumption is enabled
+	// <p>Whether Kafka Protocol Consumption is enabled</p>
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Topic Parameter used by KafkaConsumer during consumption
+	// <p>Topic parameter used by KafkaConsumer during consumption</p>
 	TopicID *string `json:"TopicID,omitnil,omitempty" name:"TopicID"`
 
-	// Compression mode [0: NONE; 2: SNAPPY; 3: LZ4]
+	// <p>Compression mode [0:NONE;2:SNAPPY;3:LZ4]</p>
 	Compression *int64 `json:"Compression,omitnil,omitempty" name:"Compression"`
 
-	// Kafka protocol consumer data format
+	// <p>kafka protocol consumption data format</p>
 	ConsumerContent *KafkaConsumerContent `json:"ConsumerContent,omitnil,omitempty" name:"ConsumerContent"`
+
+	// <p>Whether to enable the delivery service log. 1: Disabled, 2: Enabled.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// <p>Range type of consumption, 0: latest, 1: history + latest</p>
+	ScopeType *uint64 `json:"ScopeType,omitnil,omitempty" name:"ScopeType"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -4720,27 +10559,84 @@ func (r *DescribeKafkaConsumerResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeKafkaConsumerTopicsRequestParams struct {
+
+}
+
+type DescribeKafkaConsumerTopicsRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeKafkaConsumerTopicsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeKafkaConsumerTopicsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeKafkaConsumerTopicsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeKafkaConsumerTopicsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeKafkaConsumerTopicsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeKafkaConsumerTopicsResponseParams `json:"Response"`
+}
+
+func (r *DescribeKafkaConsumerTopicsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeKafkaConsumerTopicsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeKafkaRechargesRequestParams struct {
-	// Log topic ID
+	// Log topic Id.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Import configuration ID
+	// Import configuration Id.
+	// -Create a Kafka Data Subscription Task (https://www.tencentcloud.com/document/product/614/94448?from_cn_redirect=1) to obtain the Kafka import configuration Id.
+	// -Get the Kafka import configuration Id by [searching the Kafka Data Subscription Task list](https://www.tencentcloud.com/document/product/614/94446?from_cn_redirect=1).
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Status. Valid values: 1 (running) and 2 (suspended).
+	// Status. 1: Running, 2: Suspension, 3: Error.
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type DescribeKafkaRechargesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log topic ID
+	// Log topic Id.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Import configuration ID
+	// Import configuration Id.
+	// -Create a Kafka Data Subscription Task (https://www.tencentcloud.com/document/product/614/94448?from_cn_redirect=1) to obtain the Kafka import configuration Id.
+	// -Get the Kafka import configuration Id by [searching the Kafka Data Subscription Task list](https://www.tencentcloud.com/document/product/614/94446?from_cn_redirect=1).
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Status. Valid values: 1 (running) and 2 (suspended).
+	// Status. 1: Running, 2: Suspension, 3: Error.
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
@@ -4795,17 +10691,18 @@ func (r *DescribeKafkaRechargesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeLogContextRequestParams struct {
-	// Log topic ID to be queried
+	// Log topic Id to query.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Log time in the format of YYYY-mm-dd HH:MM:SS.FFF
+	// Log time, which is the Time in the Results structure in the returned information of the [retrieve and analyze logs](https://www.tencentcloud.com/document/product/614/56447?from_cn_redirect=1) api, should be converted from the millisecond-level Unix timestamp to a string in the YYYY-mm-dd HH:MM:SS.FFF format according to the UTC+8 time zone.
 	BTime *string `json:"BTime,omitnil,omitempty" name:"BTime"`
 
-	// Log package sequence number. PkgId in the Results structure of the returned information of SearchLog API.
+	// Log package sequence number, which is the PkgId in the Results structure returned by the retrieve and analyze logs api (https://www.tencentcloud.com/document/product/614/56447?from_cn_redirect=1).
 	PkgId *string `json:"PkgId,omitnil,omitempty" name:"PkgId"`
 
-	// Sequence number of a log within the log package.
-	// The PkgLogId in the Results structure of the SearchLog API returned information.
+	// Sequence number of a log within the log package, which is the PkgLogId in the Results structure returned by the [retrieve and analyze logs](https://www.tencentcloud.com/document/product/614/56447?from_cn_redirect=1) api.
 	PkgLogId *int64 `json:"PkgLogId,omitnil,omitempty" name:"PkgLogId"`
 
 	// The previous ${PrevLogs} logs. Default value: 10.
@@ -4813,22 +10710,41 @@ type DescribeLogContextRequestParams struct {
 
 	// The next ${NextLogs} logs. Default value: 10.
 	NextLogs *int64 `json:"NextLogs,omitnil,omitempty" name:"NextLogs"`
+
+	// Query statement, filtering the log context with a maximum length of 12KB
+	// The statement consists of <a href="https://www.tencentcloud.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[retrieval criteria]</a> and does not support SQL statement.
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// Context search start time, unit: millisecond-level timestamp
+	// Note:
+	// -When From is empty, it means no restrictions on the start time of context search.
+	// -From and To are not empty, From < To
+	// -Currently, the system only supports the Shanghai/Virginia/Singapore region.
+	From *uint64 `json:"From,omitnil,omitempty" name:"From"`
+
+	// End time of context search. Measurement unit: millisecond-level timestamp.
+	// Note:
+	// -When To is empty, it means no restrictions on the end time of context search.
+	// -From and To are not empty, From < To
+	// -Currently, the system only supports the Shanghai/Virginia/Singapore region.
+	To *uint64 `json:"To,omitnil,omitempty" name:"To"`
 }
 
 type DescribeLogContextRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log topic ID to be queried
+	// Log topic Id to query.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Log time in the format of YYYY-mm-dd HH:MM:SS.FFF
+	// Log time, which is the Time in the Results structure in the returned information of the [retrieve and analyze logs](https://www.tencentcloud.com/document/product/614/56447?from_cn_redirect=1) api, should be converted from the millisecond-level Unix timestamp to a string in the YYYY-mm-dd HH:MM:SS.FFF format according to the UTC+8 time zone.
 	BTime *string `json:"BTime,omitnil,omitempty" name:"BTime"`
 
-	// Log package sequence number. PkgId in the Results structure of the returned information of SearchLog API.
+	// Log package sequence number, which is the PkgId in the Results structure returned by the retrieve and analyze logs api (https://www.tencentcloud.com/document/product/614/56447?from_cn_redirect=1).
 	PkgId *string `json:"PkgId,omitnil,omitempty" name:"PkgId"`
 
-	// Sequence number of a log within the log package.
-	// The PkgLogId in the Results structure of the SearchLog API returned information.
+	// Sequence number of a log within the log package, which is the PkgLogId in the Results structure returned by the [retrieve and analyze logs](https://www.tencentcloud.com/document/product/614/56447?from_cn_redirect=1) api.
 	PkgLogId *int64 `json:"PkgLogId,omitnil,omitempty" name:"PkgLogId"`
 
 	// The previous ${PrevLogs} logs. Default value: 10.
@@ -4836,6 +10752,24 @@ type DescribeLogContextRequest struct {
 
 	// The next ${NextLogs} logs. Default value: 10.
 	NextLogs *int64 `json:"NextLogs,omitnil,omitempty" name:"NextLogs"`
+
+	// Query statement, filtering the log context with a maximum length of 12KB
+	// The statement consists of <a href="https://www.tencentcloud.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[retrieval criteria]</a> and does not support SQL statement.
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// Context search start time, unit: millisecond-level timestamp
+	// Note:
+	// -When From is empty, it means no restrictions on the start time of context search.
+	// -From and To are not empty, From < To
+	// -Currently, the system only supports the Shanghai/Virginia/Singapore region.
+	From *uint64 `json:"From,omitnil,omitempty" name:"From"`
+
+	// End time of context search. Measurement unit: millisecond-level timestamp.
+	// Note:
+	// -When To is empty, it means no restrictions on the end time of context search.
+	// -From and To are not empty, From < To
+	// -Currently, the system only supports the Shanghai/Virginia/Singapore region.
+	To *uint64 `json:"To,omitnil,omitempty" name:"To"`
 }
 
 func (r *DescribeLogContextRequest) ToJsonString() string {
@@ -4856,6 +10790,9 @@ func (r *DescribeLogContextRequest) FromJsonString(s string) error {
 	delete(f, "PkgLogId")
 	delete(f, "PrevLogs")
 	delete(f, "NextLogs")
+	delete(f, "Query")
+	delete(f, "From")
+	delete(f, "To")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLogContextRequest has unknown keys!", "")
 	}
@@ -4901,10 +10838,13 @@ type DescribeLogHistogramRequestParams struct {
 	// End time of the log to be queried, which is a Unix timestamp in milliseconds
 	To *int64 `json:"To,omitnil,omitempty" name:"To"`
 
-	// Query statement
+	// Retrieval analysis statement.
+	// The statement consists of [retrieval condition] | [SQL statement]. When there is no need to perform statistical analysis on logs, the pipe character | and SQL statement can be omitted.
+	// Use * or an empty string to search all logs.
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
-	// ID of the log topic to be queried
+	// Log topic ID to query
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Interval in milliseconds. Condition: (To-From) / Interval <= 200
@@ -4925,10 +10865,13 @@ type DescribeLogHistogramRequest struct {
 	// End time of the log to be queried, which is a Unix timestamp in milliseconds
 	To *int64 `json:"To,omitnil,omitempty" name:"To"`
 
-	// Query statement
+	// Retrieval analysis statement.
+	// The statement consists of [retrieval condition] | [SQL statement]. When there is no need to perform statistical analysis on logs, the pipe character | and SQL statement can be omitted.
+	// Use * or an empty string to search all logs.
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
-	// ID of the log topic to be queried
+	// Log topic ID to query
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Interval in milliseconds. Condition: (To-From) / Interval <= 200
@@ -4998,26 +10941,27 @@ func (r *DescribeLogHistogramResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLogsetsRequestParams struct {
 	// logsetName
-	// - Filter by **logset name**
+	// -Filter by [logset name].
 	// - Type: String
-	// - Required: No
-	// 
+	// -Required: No
+	// - Obtain the logset name through [Get Logset List](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1).
 	// logsetId
-	// - Filter by **logset ID**
+	// -Filter by [logset ID].
 	// - Type: String
-	// - Required: No
+	// -Required: No
+	// -Obtain the logset Id through [Get Logset List](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1).
 	// 
 	// tagKey
-	// - Filter by **tag key**
+	// - Filter by [Tag key].
 	// - Type: String
-	// - Required: No
+	// -Required: No
 	// 
 	// tag:tagKey
-	// - Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key.
+	// -Filter by [tag key-value pair]. Replace tagKey with a specific tag key.
 	// - Type: String
-	// - Required: No
+	// -Required: No
 	// 
-	// Each request can have up to 10 `Filters` and 5 `Filter.Values`.
+	// The maximum number of Filters per request is 10, and the maximum for Filter.Values is 5.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0
@@ -5031,26 +10975,27 @@ type DescribeLogsetsRequest struct {
 	*tchttp.BaseRequest
 	
 	// logsetName
-	// - Filter by **logset name**
+	// -Filter by [logset name].
 	// - Type: String
-	// - Required: No
-	// 
+	// -Required: No
+	// - Obtain the logset name through [Get Logset List](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1).
 	// logsetId
-	// - Filter by **logset ID**
+	// -Filter by [logset ID].
 	// - Type: String
-	// - Required: No
+	// -Required: No
+	// -Obtain the logset Id through [Get Logset List](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1).
 	// 
 	// tagKey
-	// - Filter by **tag key**
+	// - Filter by [Tag key].
 	// - Type: String
-	// - Required: No
+	// -Required: No
 	// 
 	// tag:tagKey
-	// - Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key.
+	// -Filter by [tag key-value pair]. Replace tagKey with a specific tag key.
 	// - Type: String
-	// - Required: No
+	// -Required: No
 	// 
-	// Each request can have up to 10 `Filters` and 5 `Filter.Values`.
+	// The maximum number of Filters per request is 10, and the maximum for Filter.Values is 5.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0
@@ -5112,6 +11057,7 @@ func (r *DescribeLogsetsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMachineGroupConfigsRequestParams struct {
 	// Machine group ID
+	// -Obtain the machine group Id by searching the [machine group list](https://www.tencentcloud.com/document/api/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
@@ -5119,6 +11065,7 @@ type DescribeMachineGroupConfigsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Machine group ID
+	// -Obtain the machine group Id by searching the [machine group list](https://www.tencentcloud.com/document/api/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
@@ -5169,29 +11116,31 @@ func (r *DescribeMachineGroupConfigsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMachineGroupsRequestParams struct {
+	// Filter criteria.
 	// machineGroupName
 	// - Filter by [Machine Group Name].
 	// - Type: String
-	// - Required: No
+	// -Required: No
 	// 
 	// machineGroupId
-	// - Filter by [Machine group ID].
+	// - Filter by [machine group ID].
 	// - Type: String
-	// - Required: No
+	// -Required: No
 	// 
 	// osType
-	// - Filter by [Operating System Type].
-	// - Type: Int
-	// - Required: No
+	// - Filter by [Operating System Type]. 0: Linux; 1: Windows.
+	// -Type: Int
+	// -Required: No
 	// 
 	// tagKey
 	// - Filter by [Tag key].
 	// - Type: String
-	// - Required: No
+	// -Required: No
 	// 
 	// tag:tagKey
-	// - Filter by [Tag key-value pair]. Replace tagKey with the specific Tag key.- Type: String
-	// - Required: No
+	// -Filter by [tag key-value pair]. Replace tagKey with a specific tag key.
+	// - Type: String
+	// -Required: No
 	// 
 	// The maximum number of Filters per request is 10, and the maximum for Filter.Values is 5.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
@@ -5206,29 +11155,31 @@ type DescribeMachineGroupsRequestParams struct {
 type DescribeMachineGroupsRequest struct {
 	*tchttp.BaseRequest
 	
+	// Filter criteria.
 	// machineGroupName
 	// - Filter by [Machine Group Name].
 	// - Type: String
-	// - Required: No
+	// -Required: No
 	// 
 	// machineGroupId
-	// - Filter by [Machine group ID].
+	// - Filter by [machine group ID].
 	// - Type: String
-	// - Required: No
+	// -Required: No
 	// 
 	// osType
-	// - Filter by [Operating System Type].
-	// - Type: Int
-	// - Required: No
+	// - Filter by [Operating System Type]. 0: Linux; 1: Windows.
+	// -Type: Int
+	// -Required: No
 	// 
 	// tagKey
 	// - Filter by [Tag key].
 	// - Type: String
-	// - Required: No
+	// -Required: No
 	// 
 	// tag:tagKey
-	// - Filter by [Tag key-value pair]. Replace tagKey with the specific Tag key.- Type: String
-	// - Required: No
+	// -Filter by [tag key-value pair]. Replace tagKey with a specific tag key.
+	// - Type: String
+	// -Required: No
 	// 
 	// The maximum number of Filters per request is 10, and the maximum for Filter.Values is 5.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
@@ -5264,7 +11215,6 @@ func (r *DescribeMachineGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMachineGroupsResponseParams struct {
 	// Machine group information list
-	// Note: This field may return "null", indicating that no valid values can be obtained.
 	MachineGroups []*MachineGroupInfo `json:"MachineGroups,omitnil,omitempty" name:"MachineGroups"`
 
 	// Total number of pages
@@ -5292,15 +11242,91 @@ func (r *DescribeMachineGroupsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMachinesRequestParams struct {
-	// ID of the machine group to be queried
+	// Machine group ID to query.
+	// 
+	// -Obtain the machine group ID by searching the machine group list (https://www.tencentcloud.com/document/api/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// ip
+	// -Filter by ip.
+	// -Type: String
+	// -Required: No
+	// 
+	// instance
+	// -Filter by instance id.
+	// -Type: String
+	// -Required: No
+	// 
+	// version
+	// - Filter by LogListener version.
+	// -Type: String
+	// -Required: No
+	// 
+	// status
+	// - Filter by machine status.
+	// -Type: String
+	// -Optional: No.
+	// -Available values: 0: offline, 1: normal
+	// 
+	// offlineTime
+	// - Filter by machine offline time.
+	// -Type: String
+	// -Optional: No.
+	// -Available values: 0: no offline time, 12: within 12 hours, 24: within a day, 48: within two days, 99: before two days
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Pagination offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Limit on the number of entries per page. A maximum of 100 entries are supported.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeMachinesRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the machine group to be queried
+	// Machine group ID to query.
+	// 
+	// -Obtain the machine group ID by searching the machine group list (https://www.tencentcloud.com/document/api/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// ip
+	// -Filter by ip.
+	// -Type: String
+	// -Required: No
+	// 
+	// instance
+	// -Filter by instance id.
+	// -Type: String
+	// -Required: No
+	// 
+	// version
+	// - Filter by LogListener version.
+	// -Type: String
+	// -Required: No
+	// 
+	// status
+	// - Filter by machine status.
+	// -Type: String
+	// -Optional: No.
+	// -Available values: 0: offline, 1: normal
+	// 
+	// offlineTime
+	// - Filter by machine offline time.
+	// -Type: String
+	// -Optional: No.
+	// -Available values: 0: no offline time, 12: within 12 hours, 24: within a day, 48: within two days, 99: before two days
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Pagination offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Limit on the number of entries per page. A maximum of 100 entries are supported.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeMachinesRequest) ToJsonString() string {
@@ -5316,6 +11342,9 @@ func (r *DescribeMachinesRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "GroupId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMachinesRequest has unknown keys!", "")
 	}
@@ -5342,6 +11371,9 @@ type DescribeMachinesResponseParams struct {
 	// Whether to enable the service log
 	ServiceLogging *bool `json:"ServiceLogging,omitnil,omitempty" name:"ServiceLogging"`
 
+	// Total number
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -5363,8 +11395,455 @@ func (r *DescribeMachinesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeMetricCorrectDimensionRequestParams struct {
+
+}
+
+type DescribeMetricCorrectDimensionRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeMetricCorrectDimensionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMetricCorrectDimensionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMetricCorrectDimensionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMetricCorrectDimensionResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMetricCorrectDimensionResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMetricCorrectDimensionResponseParams `json:"Response"`
+}
+
+func (r *DescribeMetricCorrectDimensionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMetricCorrectDimensionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMetricSubscribePreviewRequestParams struct {
+	// Cloud product namespace.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Database configuration information.
+	Metrics []*MetricConfig `json:"Metrics,omitnil,omitempty" name:"Metrics"`
+
+	// Instance configuration.
+	InstanceInfo *InstanceConfig `json:"InstanceInfo,omitnil,omitempty" name:"InstanceInfo"`
+}
+
+type DescribeMetricSubscribePreviewRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cloud product namespace.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Database configuration information.
+	Metrics []*MetricConfig `json:"Metrics,omitnil,omitempty" name:"Metrics"`
+
+	// Instance configuration.
+	InstanceInfo *InstanceConfig `json:"InstanceInfo,omitnil,omitempty" name:"InstanceInfo"`
+}
+
+func (r *DescribeMetricSubscribePreviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMetricSubscribePreviewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Namespace")
+	delete(f, "Metrics")
+	delete(f, "InstanceInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMetricSubscribePreviewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMetricSubscribePreviewResponseParams struct {
+	// Total number.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Success count
+	SuccessCount *uint64 `json:"SuccessCount,omitnil,omitempty" name:"SuccessCount"`
+
+	// Failure Count
+	FailCount *uint64 `json:"FailCount,omitnil,omitempty" name:"FailCount"`
+
+	// Data of a successful instance.
+	SuccessInstances []*InstanceData `json:"SuccessInstances,omitnil,omitempty" name:"SuccessInstances"`
+
+	// Data of a failed instance.
+	FailInstances []*InstanceData `json:"FailInstances,omitnil,omitempty" name:"FailInstances"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMetricSubscribePreviewResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMetricSubscribePreviewResponseParams `json:"Response"`
+}
+
+func (r *DescribeMetricSubscribePreviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMetricSubscribePreviewResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMetricSubscribesRequestParams struct {
+	// Log topic id
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <br><li> Filter taskId by [configuration id]. Type: String. Required: No</li>
+	// <br><li> Name is filtered by [configuration name]. Type: String Required: No</li>
+	// <br><li> Filter status by [configuration status tag]. Type: String Required: No</li>
+	// <br><li>Each request can have up to 10 Filters. The maximum number of Filter.Values is 100.</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeMetricSubscribesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Log topic id
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <br><li> Filter taskId by [configuration id]. Type: String. Required: No</li>
+	// <br><li> Name is filtered by [configuration name]. Type: String Required: No</li>
+	// <br><li> Filter status by [configuration status tag]. Type: String Required: No</li>
+	// <br><li>Each request can have up to 10 Filters. The maximum number of Filter.Values is 100.</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeMetricSubscribesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMetricSubscribesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMetricSubscribesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMetricSubscribesResponseParams struct {
+	// Total number
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Metric subscription configuration information.
+	Datas []*MetricSubscribeInfo `json:"Datas,omitnil,omitempty" name:"Datas"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMetricSubscribesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMetricSubscribesResponseParams `json:"Response"`
+}
+
+func (r *DescribeMetricSubscribesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMetricSubscribesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNetworkApplicationDetailRequestParams struct {
+	// <p>Web application id</p>
+	NetworkAppId *string `json:"NetworkAppId,omitnil,omitempty" name:"NetworkAppId"`
+}
+
+type DescribeNetworkApplicationDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Web application id</p>
+	NetworkAppId *string `json:"NetworkAppId,omitnil,omitempty" name:"NetworkAppId"`
+}
+
+func (r *DescribeNetworkApplicationDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNetworkApplicationDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NetworkAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNetworkApplicationDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNetworkApplicationDetailResponseParams struct {
+	// <p>Query specified web application details</p>
+	Info *NetworkApplicationDetail `json:"Info,omitnil,omitempty" name:"Info"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeNetworkApplicationDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeNetworkApplicationDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeNetworkApplicationDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNetworkApplicationDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNetworkApplicationsRequestParams struct {
+	// <p>Filter items</p><ul><li><p>name<br>Filter as [task name]. Query by fuzzy matching method.<br>Type: String<br>Required: No</p></li><li><p>networkAppId<br>Filter as [web application id].<br>Type: String<br>Required: No</p></li></ul><p>The maximum number of Filters per request is 10, and the maximum number of Filter.Values is 10.</p>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Maximum number of entries per page. Default value: 20. Maximum value: 100.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeNetworkApplicationsRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Filter items</p><ul><li><p>name<br>Filter as [task name]. Query by fuzzy matching method.<br>Type: String<br>Required: No</p></li><li><p>networkAppId<br>Filter as [web application id].<br>Type: String<br>Required: No</p></li></ul><p>The maximum number of Filters per request is 10, and the maximum number of Filter.Values is 10.</p>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Maximum number of entries per page. Default value: 20. Maximum value: 100.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeNetworkApplicationsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNetworkApplicationsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNetworkApplicationsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNetworkApplicationsResponseParams struct {
+	// <p>Large model performance profiling task list that meet the search criteria</p>
+	Infos []*NetworkApplicationInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// <p>Total number of tasks that meet the search criteria.</p>
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeNetworkApplicationsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeNetworkApplicationsResponseParams `json:"Response"`
+}
+
+func (r *DescribeNetworkApplicationsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNetworkApplicationsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNoticeContentsRequestParams struct {
+	// <li> name
+	// Filter by [notification content template name].
+	// Type: String
+	// Required: No
+	// </li>
+	// <li> noticeContentId
+	// Filter by [notification content template ID].
+	// Type: String
+	// Required: No
+	// </li>
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeNoticeContentsRequest struct {
+	*tchttp.BaseRequest
+	
+	// <li> name
+	// Filter by [notification content template name].
+	// Type: String
+	// Required: No
+	// </li>
+	// <li> noticeContentId
+	// Filter by [notification content template ID].
+	// Type: String
+	// Required: No
+	// </li>
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeNoticeContentsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNoticeContentsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeNoticeContentsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeNoticeContentsResponseParams struct {
+	// Notification content template list.
+	NoticeContents []*NoticeContentTemplate `json:"NoticeContents,omitnil,omitempty" name:"NoticeContents"`
+
+	// Total number of notification content templates that meet the conditions.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeNoticeContentsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeNoticeContentsResponseParams `json:"Response"`
+}
+
+func (r *DescribeNoticeContentsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeNoticeContentsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribePartitionsRequestParams struct {
 	// Log topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
@@ -5372,6 +11851,7 @@ type DescribePartitionsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Log topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
@@ -5420,6 +11900,253 @@ func (r *DescribePartitionsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeRebuildIndexTasksRequestParams struct {
+	// <p>Log topic ID.</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Index rebuild task ID</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Index rebuild task status. Leave it blank to return the task list of all statuses. Multiple statuses are separated by commas.</p><p>Enumeration value:</p><ul><li>0: Reindexing task created</li><li>1: Creating reindexing resources</li><li>2: Index rebuild resource created</li><li>3: Rebuilding</li><li>4: Suspension</li><li>5: Rebuild complete</li><li>6: Rebuild successful (retrievable)</li><li>7: Rebuilding failed</li><li>8: Task cancellation</li><li>9: Metadata and index deleted</li></ul>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of entries per page. Default value: 10. Maximum value: 20.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeRebuildIndexTasksRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Log topic ID.</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Index rebuild task ID</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Index rebuild task status. Leave it blank to return the task list of all statuses. Multiple statuses are separated by commas.</p><p>Enumeration value:</p><ul><li>0: Reindexing task created</li><li>1: Creating reindexing resources</li><li>2: Index rebuild resource created</li><li>3: Rebuilding</li><li>4: Suspension</li><li>5: Rebuild complete</li><li>6: Rebuild successful (retrievable)</li><li>7: Rebuilding failed</li><li>8: Task cancellation</li><li>9: Metadata and index deleted</li></ul>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of entries per page. Default value: 10. Maximum value: 20.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeRebuildIndexTasksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRebuildIndexTasksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "TaskId")
+	delete(f, "Status")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRebuildIndexTasksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRebuildIndexTasksResponseParams struct {
+	// <p>Index rebuild task list</p>
+	RebuildTasks []*RebuildIndexTaskInfo `json:"RebuildTasks,omitnil,omitempty" name:"RebuildTasks"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeRebuildIndexTasksResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRebuildIndexTasksResponseParams `json:"Response"`
+}
+
+func (r *DescribeRebuildIndexTasksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRebuildIndexTasksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRecordingRuleTaskRequestParams struct {
+	// <p>Source metric topic id.</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Maximum number of entries per page. Default value: 20. Maximum value: 100.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <li>yamlId [Configuration ID of the associated yaml] for filtering, fuzzy matching. Type: String. Required: No</li> <li>taskName [Task name] for filtering, fuzzy matching. Type: String. Required: No</li> <li>taskId [Task ID] for filtering, fuzzy matching. Type: String. Required: No</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeRecordingRuleTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Source metric topic id.</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Maximum number of entries per page. Default value: 20. Maximum value: 100.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <li>yamlId [Configuration ID of the associated yaml] for filtering, fuzzy matching. Type: String. Required: No</li> <li>taskName [Task name] for filtering, fuzzy matching. Type: String. Required: No</li> <li>taskId [Task ID] for filtering, fuzzy matching. Type: String. Required: No</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeRecordingRuleTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRecordingRuleTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRecordingRuleTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRecordingRuleTaskResponseParams struct {
+	// <p>Task list information of RecordingRule</p>
+	RecordingRuleTaskInfos []*RecordingRuleTaskInfo `json:"RecordingRuleTaskInfos,omitnil,omitempty" name:"RecordingRuleTaskInfos"`
+
+	// <p>Total number of tasks.</p>
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeRecordingRuleTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRecordingRuleTaskResponseParams `json:"Response"`
+}
+
+func (r *DescribeRecordingRuleTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRecordingRuleTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRecordingRuleYamlTaskRequestParams struct {
+	// <p>Source metric topic id.</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Maximum number of entries per page. Default value: 20. Maximum value: 100.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <li>Filter by yamlConfigName [configuration file name] with fuzzy matching. Type: String. Required: No</li> <li>Filter by yamlId as [yamlID] with fuzzy matching. Type: String. Required: No</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeRecordingRuleYamlTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Source metric topic id.</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Maximum number of entries per page. Default value: 20. Maximum value: 100.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <li>Filter by yamlConfigName [configuration file name] with fuzzy matching. Type: String. Required: No</li> <li>Filter by yamlId as [yamlID] with fuzzy matching. Type: String. Required: No</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeRecordingRuleYamlTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRecordingRuleYamlTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRecordingRuleYamlTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRecordingRuleYamlTaskResponseParams struct {
+	// <p>Task list information of RecordingRule</p>
+	RecordingRuleYamlTaskInfos []*RecordingRuleYamlTaskInfo `json:"RecordingRuleYamlTaskInfos,omitnil,omitempty" name:"RecordingRuleYamlTaskInfos"`
+
+	// <p>Total number of tasks</p>
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeRecordingRuleYamlTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRecordingRuleYamlTaskResponseParams `json:"Response"`
+}
+
+func (r *DescribeRecordingRuleYamlTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRecordingRuleYamlTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeScheduledSqlInfoRequestParams struct {
 	// Page offset. Default value: 0
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
@@ -5433,7 +12160,14 @@ type DescribeScheduledSqlInfoRequestParams struct {
 	// Task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// <li>srcTopicName: Filter by Source Log Topic Name, fuzzy match. Type: String. Required: No</li><li>dstTopicName: Filter by Destination Log Topic Name, fuzzy match. Type: String. Required: No</li><li>srcTopicId: Filter by Source Log Topic ID. Type: String. Required: No</li><li>dstTopicId: Filter by Destination Log Topic ID. Type: String. Required: No</li><li>bizType: Filter by Topic Type, 0: log topic; 1: metric topic. Type: String. Required: No</li><li>status: Filter by Task Status, 1: running; 2: stopped. Type: String. Required: No</li><li>taskName: Filter by Task Name, fuzzy match. Type: String. Required: No</li><li>taskId: Filter by Task ID, fuzzy match. Type: String. Required: No</li>
+	// -srcTopicName is filtered by [source log topic name] with fuzzy matching. Type: String. Required: No. Example: business log topic 1. Get the log topic name by [get log topic list](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// -Filter dstTopicName by [target log topic name] with fuzzy matching. Type: String. Required: No. Example: Business log topic 2. Get the log topic name by [getting the log topic list](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - srcTopicId is filtered by [source log topic ID]. Type: String. Required: No. Example: a4478687-2382-4486-9692-de7986350f6b. Get the log topic id by [get log topic list](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// -dstTopicId is filtered by [target log topic ID]. Type: String. Required: No. Example: bd4d3375-d72a-4cd2-988d-d8eda2bd62b0. Get log topic ID by [get log topic list](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// -bizType is filtered by [topic type], 0: log topic; 1: metric topic. Type: String. Required: No.
+	// -Status is filtered by [task status]: 1: running; 2: stop; 3: exception. Type: String. Required: no.
+	// -Filter the taskName by [task name] with fuzzy matching. Type: String. Required: No. Example: metricTask. Search the task name by [retrieving the scheduled SQL analysis task list](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1).
+	// -taskId is filtered by [task ID] with fuzzy matching. Type: String. Required: No. Example: 9c64f9c1-a14e-4b59-b074-5b73cac3dd66. Obtain the task ID by [retrieving the scheduled SQL analysis task list](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1).
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -5452,7 +12186,14 @@ type DescribeScheduledSqlInfoRequest struct {
 	// Task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// <li>srcTopicName: Filter by Source Log Topic Name, fuzzy match. Type: String. Required: No</li><li>dstTopicName: Filter by Destination Log Topic Name, fuzzy match. Type: String. Required: No</li><li>srcTopicId: Filter by Source Log Topic ID. Type: String. Required: No</li><li>dstTopicId: Filter by Destination Log Topic ID. Type: String. Required: No</li><li>bizType: Filter by Topic Type, 0: log topic; 1: metric topic. Type: String. Required: No</li><li>status: Filter by Task Status, 1: running; 2: stopped. Type: String. Required: No</li><li>taskName: Filter by Task Name, fuzzy match. Type: String. Required: No</li><li>taskId: Filter by Task ID, fuzzy match. Type: String. Required: No</li>
+	// -srcTopicName is filtered by [source log topic name] with fuzzy matching. Type: String. Required: No. Example: business log topic 1. Get the log topic name by [get log topic list](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// -Filter dstTopicName by [target log topic name] with fuzzy matching. Type: String. Required: No. Example: Business log topic 2. Get the log topic name by [getting the log topic list](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - srcTopicId is filtered by [source log topic ID]. Type: String. Required: No. Example: a4478687-2382-4486-9692-de7986350f6b. Get the log topic id by [get log topic list](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// -dstTopicId is filtered by [target log topic ID]. Type: String. Required: No. Example: bd4d3375-d72a-4cd2-988d-d8eda2bd62b0. Get log topic ID by [get log topic list](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// -bizType is filtered by [topic type], 0: log topic; 1: metric topic. Type: String. Required: No.
+	// -Status is filtered by [task status]: 1: running; 2: stop; 3: exception. Type: String. Required: no.
+	// -Filter the taskName by [task name] with fuzzy matching. Type: String. Required: No. Example: metricTask. Search the task name by [retrieving the scheduled SQL analysis task list](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1).
+	// -taskId is filtered by [task ID] with fuzzy matching. Type: String. Required: No. Example: 9c64f9c1-a14e-4b59-b074-5b73cac3dd66. Obtain the task ID by [retrieving the scheduled SQL analysis task list](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1).
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -5508,27 +12249,109 @@ func (r *DescribeScheduledSqlInfoResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeSearchViewsRequestParams struct {
+	// <ul><li>viewId Filter by [view ID]. Type: String Required: No</li><li>viewName Filter by [view name]. Type: String Required: No</li><li>logsetId Filter by [logset ID]. Type: String Required: No<br>The maximum number of Filters per request is 10, and the maximum number of Filter.Values is 10.</li></ul>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Maximum number of entries per page. Default value: 20. Maximum value: 100.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeSearchViewsRequest struct {
+	*tchttp.BaseRequest
+	
+	// <ul><li>viewId Filter by [view ID]. Type: String Required: No</li><li>viewName Filter by [view name]. Type: String Required: No</li><li>logsetId Filter by [logset ID]. Type: String Required: No<br>The maximum number of Filters per request is 10, and the maximum number of Filter.Values is 10.</li></ul>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Maximum number of entries per page. Default value: 20. Maximum value: 100.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeSearchViewsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSearchViewsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSearchViewsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSearchViewsResponseParams struct {
+	// <p>Query view detailed information.</p>
+	Infos []*SearchViewInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// <p>Total number of qualified tasks.</p>
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSearchViewsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSearchViewsResponseParams `json:"Response"`
+}
+
+func (r *DescribeSearchViewsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSearchViewsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeShipperTasksRequestParams struct {
-	// Shipping rule ID
+	// Shipping Rule Id.
+	// 
+	// -Obtain the ShipperId by [obtaining the shipping task list](https://www.tencentcloud.com/document/product/614/58745?from_cn_redirect=1).
 	ShipperId *string `json:"ShipperId,omitnil,omitempty" name:"ShipperId"`
 
-	// Query start timestamp in milliseconds, which can be within the last three days
+	// Start timestamp for the query. Supports queries within the most recent 3 days in ms.
+	// StartTime must be less than EndTime
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Query end timestamp in milliseconds
+	// Query end timestamp, in ms.
+	// StartTime must be less than EndTime
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 type DescribeShipperTasksRequest struct {
 	*tchttp.BaseRequest
 	
-	// Shipping rule ID
+	// Shipping Rule Id.
+	// 
+	// -Obtain the ShipperId by [obtaining the shipping task list](https://www.tencentcloud.com/document/product/614/58745?from_cn_redirect=1).
 	ShipperId *string `json:"ShipperId,omitnil,omitempty" name:"ShipperId"`
 
-	// Query start timestamp in milliseconds, which can be within the last three days
+	// Start timestamp for the query. Supports queries within the most recent 3 days in ms.
+	// StartTime must be less than EndTime
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Query end timestamp in milliseconds
+	// Query end timestamp, in ms.
+	// StartTime must be less than EndTime
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
@@ -5581,11 +12404,20 @@ func (r *DescribeShipperTasksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeShippersRequestParams struct {
-	// - shipperName: Filter by **shipping rule name**. Type: String. Required: No.
-	// - shipperId: Filter by **shipping rule ID**. Type: String. Required: No.
-	// - topicId: Filter by **log topic**. Type: String. Required: No.
+	// -shipperName: Filter by [delivery rule name].
+	// Type: String.
+	//     Required: No
+	// -shipperId: Filter by [Delivery Rule ID].
+	// Type: String.
+	//     Required: No
+	// -topicId: Filter by [log topic].
+	// Type: String.
+	//     Required: No
+	// -taskStatus: Filter by [task running status]. Supported values: `0`: stop, `1`: running, `2`: exception.
+	// Type: String
+	//     Required: No
 	// 
-	// Each request can have up to 10 `Filters` and 100 `Filter.Values`.
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 10.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0
@@ -5593,16 +12425,28 @@ type DescribeShippersRequestParams struct {
 
 	// Maximum number of entries per page. Default value: 20. Maximum value: 100
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Control whether the relevant fields in Filters use exact matching. 0: Default value, fuzzy matching for shipperName. 1: Exact match for shipperName.
+	PreciseSearch *uint64 `json:"PreciseSearch,omitnil,omitempty" name:"PreciseSearch"`
 }
 
 type DescribeShippersRequest struct {
 	*tchttp.BaseRequest
 	
-	// - shipperName: Filter by **shipping rule name**. Type: String. Required: No.
-	// - shipperId: Filter by **shipping rule ID**. Type: String. Required: No.
-	// - topicId: Filter by **log topic**. Type: String. Required: No.
+	// -shipperName: Filter by [delivery rule name].
+	// Type: String.
+	//     Required: No
+	// -shipperId: Filter by [Delivery Rule ID].
+	// Type: String.
+	//     Required: No
+	// -topicId: Filter by [log topic].
+	// Type: String.
+	//     Required: No
+	// -taskStatus: Filter by [task running status]. Supported values: `0`: stop, `1`: running, `2`: exception.
+	// Type: String
+	//     Required: No
 	// 
-	// Each request can have up to 10 `Filters` and 100 `Filter.Values`.
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 10.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0
@@ -5610,6 +12454,9 @@ type DescribeShippersRequest struct {
 
 	// Maximum number of entries per page. Default value: 20. Maximum value: 100
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Control whether the relevant fields in Filters use exact matching. 0: Default value, fuzzy matching for shipperName. 1: Exact match for shipperName.
+	PreciseSearch *uint64 `json:"PreciseSearch,omitnil,omitempty" name:"PreciseSearch"`
 }
 
 func (r *DescribeShippersRequest) ToJsonString() string {
@@ -5627,6 +12474,7 @@ func (r *DescribeShippersRequest) FromJsonString(s string) error {
 	delete(f, "Filters")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "PreciseSearch")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeShippersRequest has unknown keys!", "")
 	}
@@ -5636,7 +12484,6 @@ func (r *DescribeShippersRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeShippersResponseParams struct {
 	// Shipping rule list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Shippers []*ShipperInfo `json:"Shippers,omitnil,omitempty" name:"Shippers"`
 
 	// Total number of results obtained in this query
@@ -5663,8 +12510,348 @@ func (r *DescribeShippersResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeSplunkDeliversRequestParams struct {
+	// <p>Log topic Id</p><ul><li>Get the log topic Id by <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">getting the log topic list</a>.</li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <ul><li>taskId Filter by [task id]. Type: String Required: No</li><li>name Filter by [task name]. Type: String Required: No</li><li>statusFlag Filter by [status]. Type: String Required: No<br>The maximum number of Filters per request is 10, and the maximum number of Filter.Values is 10.</li></ul>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Paging offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of entries per page. Default value: 20. Maximum value: 100.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeSplunkDeliversRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Log topic Id</p><ul><li>Get the log topic Id by <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">getting the log topic list</a>.</li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <ul><li>taskId Filter by [task id]. Type: String Required: No</li><li>name Filter by [task name]. Type: String Required: No</li><li>statusFlag Filter by [status]. Type: String Required: No<br>The maximum number of Filters per request is 10, and the maximum number of Filter.Values is 10.</li></ul>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Paging offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of entries per page. Default value: 20. Maximum value: 100.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeSplunkDeliversRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSplunkDeliversRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSplunkDeliversRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSplunkDeliversResponseParams struct {
+	// <p>Splunk delivery task information list</p>
+	Infos []*SplunkDeliverInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// <p>Total number of qualified tasks.</p>
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSplunkDeliversResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSplunkDeliversResponseParams `json:"Response"`
+}
+
+func (r *DescribeSplunkDeliversResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSplunkDeliversResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSplunkPreviewRequestParams struct {
+	// <p>Log topic id. Obtain the log topic id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>splunk delivery task meta-information</p>
+	MetadataInfo *MetadataInfo `json:"MetadataInfo,omitnil,omitempty" name:"MetadataInfo"`
+
+	// <p>splunk delivery task - deliver splunk filtered raw log statements</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
+}
+
+type DescribeSplunkPreviewRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Log topic id. Obtain the log topic id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>splunk delivery task meta-information</p>
+	MetadataInfo *MetadataInfo `json:"MetadataInfo,omitnil,omitempty" name:"MetadataInfo"`
+
+	// <p>splunk delivery task - deliver splunk filtered raw log statements</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
+}
+
+func (r *DescribeSplunkPreviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSplunkPreviewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "MetadataInfo")
+	delete(f, "DSLFilter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSplunkPreviewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSplunkPreviewResponseParams struct {
+	// <p>Preview result</p>
+	PreviewInfos []*string `json:"PreviewInfos,omitnil,omitempty" name:"PreviewInfos"`
+
+	// <p>Filtered results</p>
+	FilterStats *FilterStatistics `json:"FilterStats,omitnil,omitempty" name:"FilterStats"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSplunkPreviewResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSplunkPreviewResponseParams `json:"Response"`
+}
+
+func (r *DescribeSplunkPreviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSplunkPreviewResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTopicBaseMetricConfigsRequestParams struct {
+	// Metric log topic id.
+	// - Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// groupId is filtered by [Bound machine group id]. Type: String. Required: No.
+	// The maximum number of Filters per request is 10, and the total upper limit for ALL Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeTopicBaseMetricConfigsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Metric log topic id.
+	// - Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// groupId is filtered by [Bound machine group id]. Type: String. Required: No.
+	// The maximum number of Filters per request is 10, and the total upper limit for ALL Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeTopicBaseMetricConfigsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTopicBaseMetricConfigsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTopicBaseMetricConfigsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTopicBaseMetricConfigsResponseParams struct {
+	// Total number
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// List of metric collection configurations.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Datas []*BaseMetricCollectConfig `json:"Datas,omitnil,omitempty" name:"Datas"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTopicBaseMetricConfigsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTopicBaseMetricConfigsResponseParams `json:"Response"`
+}
+
+func (r *DescribeTopicBaseMetricConfigsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTopicBaseMetricConfigsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTopicMetricConfigsRequestParams struct {
+	// Metric Topic id
+	// - Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note: BizType 0: log topic (default value), 1: metric topic.
+	// -Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// configId is filtered by [metric collection configuration id]. Type: String. Required: No
+	// Filter the name by [configuration name]. Type: String. Required: No.
+	// Each request can have up to 10 Filters. The total upper limit of ALL Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeTopicMetricConfigsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Metric Topic id
+	// - Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note: BizType 0: log topic (default value), 1: metric topic.
+	// -Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// configId is filtered by [metric collection configuration id]. Type: String. Required: No
+	// Filter the name by [configuration name]. Type: String. Required: No.
+	// Each request can have up to 10 Filters. The total upper limit of ALL Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeTopicMetricConfigsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTopicMetricConfigsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTopicMetricConfigsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTopicMetricConfigsResponseParams struct {
+	// Total number
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// List of metric collection configurations.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Datas []*MetricCollectConfig `json:"Datas,omitnil,omitempty" name:"Datas"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTopicMetricConfigsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTopicMetricConfigsResponseParams `json:"Response"`
+}
+
+func (r *DescribeTopicMetricConfigsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTopicMetricConfigsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTopicsRequestParams struct {
-	// <li>topicName: Filter by **log topic name**. Fuzzy match is implemented by default. You can use the `PreciseSearch` parameter to set exact match. Type: String. Required. No. <br><li>logsetName: Filter by **logset name**. Fuzzy match is implemented by default. You can use the `PreciseSearch` parameter to set exact match. Type: String. Required: No. <br><li>topicId: Filter by **log topic ID**. Type: String. Required: No. <br><li>logsetId: Filter by **logset ID**. You can call `DescribeLogsets` to query the list of created logsets or log in to the console to view them. You can also call `CreateLogset` to create a logset. Type: String. Required: No. <br><li>tagKey: Filter by **tag key**. Type: String. Required: No. <br><li>tag:tagKey: Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key, such as `tag:exampleKey`. Type: String. Required: No. <br><li>storageType: Filter by **log topic storage type**. Valid values: `hot` (standard storage) and `cold` (IA storage). Type: String. Required: No. Each request can have up to 10 `Filters` and 100 `Filter.Values`.
+	// <ul><li>Filter topicName by [topic name]. The default is fuzzy matching. You can set the PreciseSearch parameter to exact match. Type: String. Required: No</li>
+	// <li>logsetName filters by [logset name], defaults to fuzzy matching, and can be set to exact match using the PreciseSearch parameter. Type: String. Required: No</li>
+	// <li>topicId filters by [topic ID]. Type: String. Required: No</li>
+	// <li>logsetId filters by [logset ID]. You can call the <a href="https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1">DescribeLogsets</a> API to query the list of created logsets or log in to the console to view. You can also call the <a href="https://www.tencentcloud.com/document/product/614/58626?from_cn_redirect=1">CreateLogset</a> API to create logset. Type: String. Required: No</li>
+	// <li>tagKey Filter by [tag key]. Type: String. Required: No</li>
+	// <li>tag:tagKey - filter by [tag key-value pair]. Replace tagKey with a specific tag key, such as tag:exampleKey. Type: String. Required: no</li>
+	// <li>storageType filters by [storage type of the topic]. Value range: hot (standard storage), cold (infrequent storage). Type: String. Required: No</li></ul>
+	// Note: Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0.
@@ -5673,23 +12860,30 @@ type DescribeTopicsRequestParams struct {
 	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Match mode for `Filters` fields.
-	// - 0: Fuzzy match for `topicName` and `logsetName`. This is the default value.
-	// - 1: Exact match for `topicName`.
-	// - 2: Exact match for `logsetName`.
-	// - 3: Exact match for `topicName` and `logsetName`.
+	// Control whether the related fields in Filters are exact matches.
+	// <ul><li>0: Default value. topicName and logsetName use fuzzy matching</li>
+	// <li>1: topicName   Exact match</li>
+	// <li>2: Exact match by logsetName</li>
+	// <li>3: Exact match by both topicName and logsetName</li></ul>
 	PreciseSearch *uint64 `json:"PreciseSearch,omitnil,omitempty" name:"PreciseSearch"`
 
 	// Topic type
-	// - 0 (default): Log topic.
-	// - 1: Metric topic.
+	// -0: Log topic, default value
+	// -Metric topic
 	BizType *uint64 `json:"BizType,omitnil,omitempty" name:"BizType"`
 }
 
 type DescribeTopicsRequest struct {
 	*tchttp.BaseRequest
 	
-	// <li>topicName: Filter by **log topic name**. Fuzzy match is implemented by default. You can use the `PreciseSearch` parameter to set exact match. Type: String. Required. No. <br><li>logsetName: Filter by **logset name**. Fuzzy match is implemented by default. You can use the `PreciseSearch` parameter to set exact match. Type: String. Required: No. <br><li>topicId: Filter by **log topic ID**. Type: String. Required: No. <br><li>logsetId: Filter by **logset ID**. You can call `DescribeLogsets` to query the list of created logsets or log in to the console to view them. You can also call `CreateLogset` to create a logset. Type: String. Required: No. <br><li>tagKey: Filter by **tag key**. Type: String. Required: No. <br><li>tag:tagKey: Filter by **tag key-value pair**. The `tagKey` should be replaced with a specified tag key, such as `tag:exampleKey`. Type: String. Required: No. <br><li>storageType: Filter by **log topic storage type**. Valid values: `hot` (standard storage) and `cold` (IA storage). Type: String. Required: No. Each request can have up to 10 `Filters` and 100 `Filter.Values`.
+	// <ul><li>Filter topicName by [topic name]. The default is fuzzy matching. You can set the PreciseSearch parameter to exact match. Type: String. Required: No</li>
+	// <li>logsetName filters by [logset name], defaults to fuzzy matching, and can be set to exact match using the PreciseSearch parameter. Type: String. Required: No</li>
+	// <li>topicId filters by [topic ID]. Type: String. Required: No</li>
+	// <li>logsetId filters by [logset ID]. You can call the <a href="https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1">DescribeLogsets</a> API to query the list of created logsets or log in to the console to view. You can also call the <a href="https://www.tencentcloud.com/document/product/614/58626?from_cn_redirect=1">CreateLogset</a> API to create logset. Type: String. Required: No</li>
+	// <li>tagKey Filter by [tag key]. Type: String. Required: No</li>
+	// <li>tag:tagKey - filter by [tag key-value pair]. Replace tagKey with a specific tag key, such as tag:exampleKey. Type: String. Required: no</li>
+	// <li>storageType filters by [storage type of the topic]. Value range: hot (standard storage), cold (infrequent storage). Type: String. Required: No</li></ul>
+	// Note: Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Page offset. Default value: 0.
@@ -5698,16 +12892,16 @@ type DescribeTopicsRequest struct {
 	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Match mode for `Filters` fields.
-	// - 0: Fuzzy match for `topicName` and `logsetName`. This is the default value.
-	// - 1: Exact match for `topicName`.
-	// - 2: Exact match for `logsetName`.
-	// - 3: Exact match for `topicName` and `logsetName`.
+	// Control whether the related fields in Filters are exact matches.
+	// <ul><li>0: Default value. topicName and logsetName use fuzzy matching</li>
+	// <li>1: topicName   Exact match</li>
+	// <li>2: Exact match by logsetName</li>
+	// <li>3: Exact match by both topicName and logsetName</li></ul>
 	PreciseSearch *uint64 `json:"PreciseSearch,omitnil,omitempty" name:"PreciseSearch"`
 
 	// Topic type
-	// - 0 (default): Log topic.
-	// - 1: Metric topic.
+	// -0: Log topic, default value
+	// -Metric topic
 	BizType *uint64 `json:"BizType,omitnil,omitempty" name:"BizType"`
 }
 
@@ -5736,7 +12930,7 @@ func (r *DescribeTopicsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTopicsResponseParams struct {
-	// Log topic list
+	// Topic list
 	Topics []*TopicInfo `json:"Topics,omitnil,omitempty" name:"Topics"`
 
 	// Total number
@@ -5762,23 +12956,489 @@ func (r *DescribeTopicsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type DynamicIndex struct {
-	// Key-Value Index Auto-Config Switch
+// Predefined struct for user
+type DescribeWebCallbacksRequestParams struct {
+	// - name
+	// Filter by [alarm channel callback configuration name].
+	// Type: String
+	// Required: No
+	// 
+	// - webCallbackId
+	// Filter by [alarm channel callback configuration ID].
+	// Type: String
+	// Required: No
+	// 
+	// - type
+	// Filter by [alarm channel callback configuration channel type].
+	// Type: String
+	// Required: No
+	// Enumeration value: WeCom, DingTalk, Lark, Http
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeWebCallbacksRequest struct {
+	*tchttp.BaseRequest
+	
+	// - name
+	// Filter by [alarm channel callback configuration name].
+	// Type: String
+	// Required: No
+	// 
+	// - webCallbackId
+	// Filter by [alarm channel callback configuration ID].
+	// Type: String
+	// Required: No
+	// 
+	// - type
+	// Filter by [alarm channel callback configuration channel type].
+	// Type: String
+	// Required: No
+	// Enumeration value: WeCom, DingTalk, Lark, Http
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeWebCallbacksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeWebCallbacksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWebCallbacksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeWebCallbacksResponseParams struct {
+	// List of alarm channel callback configurations.
+	WebCallbacks []*WebCallbackInfo `json:"WebCallbacks,omitnil,omitempty" name:"WebCallbacks"`
+
+	// Total number of notification content configurations that meet the conditions.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeWebCallbacksResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeWebCallbacksResponseParams `json:"Response"`
+}
+
+func (r *DescribeWebCallbacksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeWebCallbacksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type Dimension struct {
+	// Instance dimension name. This field may return null, indicating that no valid values can be obtained.
 	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Instance dimension value. This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type DlcDeliverInfo struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Account id.
+	Uin *uint64 `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Log topic ID.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Task name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Delivery Type. Valid values: 0: real-time delivery; 1: historic delivery.
+	DeliverType *uint64 `json:"DeliverType,omitnil,omitempty" name:"DeliverType"`
+
+	// Delivery file size in MB
+	MaxSize *uint64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
+
+	// Delivery interval in seconds
+	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// Start time of the delivery time range
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time of the delivery time range
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// dlc configuration message
+	DlcInfo *DlcInfo `json:"DlcInfo,omitnil,omitempty" name:"DlcInfo"`
+
+	// Whether to enable delivery service log. 1 for disabled, 2 for enabled
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// Task status.
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Task progress. Historic delivery tasks take effect.
+	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// Topic type of logs. 0: standard topic; 1: metric topic.
+	BizType *uint64 `json:"BizType,omitnil,omitempty" name:"BizType"`
+
+	// Task creation time.
+	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Task modification time.
+	UpdateTime *uint64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
+type DlcFiledInfo struct {
+	// <p>Field name in the cls log</p>
+	ClsField *string `json:"ClsField,omitnil,omitempty" name:"ClsField"`
+
+	// <p>Column name of the data lake computing service table</p>
+	DlcField *string `json:"DlcField,omitnil,omitempty" name:"DlcField"`
+
+	// <p>Data lake computing service field Type</p><p>Enumeration value:</p><ul><li>int|string|struct: See <a href="https://www.tencentcloud.com/document/product/1342/53778?from_cn_redirect=1#Column">Type definition in DLC Column</a></li></ul>
+	DlcFieldType *string `json:"DlcFieldType,omitnil,omitempty" name:"DlcFieldType"`
+
+	// <p>Parsing failure padding field</p>
+	FillField *string `json:"FillField,omitnil,omitempty" name:"FillField"`
+
+	// <p>Whether to disable</p>
+	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
+}
+
+type DlcInfo struct {
+	// dlc table information
+	TableInfo *DlcTableInfo `json:"TableInfo,omitnil,omitempty" name:"TableInfo"`
+
+	// dlc data field information
+	FieldInfos []*DlcFiledInfo `json:"FieldInfos,omitnil,omitempty" name:"FieldInfos"`
+
+	// dlc partition information
+	PartitionInfos []*DlcPartitionInfo `json:"PartitionInfos,omitnil,omitempty" name:"PartitionInfos"`
+
+	// dlc partition additional information
+	PartitionExtra *DlcPartitionExtra `json:"PartitionExtra,omitnil,omitempty" name:"PartitionExtra"`
+}
+
+type DlcPartitionExtra struct {
+	// Time format, e.g.: %Y-%m-%d %H:%m:%S.%f
+	TimeFormat *string `json:"TimeFormat,omitnil,omitempty" name:"TimeFormat"`
+
+	// Time zone
+	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+}
+
+type DlcPartitionInfo struct {
+	// <p>Field names in cls logs</p>
+	ClsField *string `json:"ClsField,omitnil,omitempty" name:"ClsField"`
+
+	// <p>Column name of the dlc table</p>
+	DlcField *string `json:"DlcField,omitnil,omitempty" name:"DlcField"`
+
+	// <p>Refer to <a href="https://www.tencentcloud.com/document/product/1342/53778?from_cn_redirect=1#Column">Type definition in DLC Column</a></p><p>Enumeration value:</p><ul><li>int|string|array: Refer to <a href="https://www.tencentcloud.com/document/product/1342/53778?from_cn_redirect=1#Column">Type definition in DLC Column</a></li></ul>
+	DlcFieldType *string `json:"DlcFieldType,omitnil,omitempty" name:"DlcFieldType"`
+}
+
+type DlcTableInfo struct {
+	// Data catalog
+	DataDirectory *string `json:"DataDirectory,omitnil,omitempty" name:"DataDirectory"`
+
+	// Database.
+	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
+
+	// data table
+	TableName *string `json:"TableName,omitnil,omitempty" name:"TableName"`
+}
+
+type DynamicIndex struct {
+	// Automatic configuration switch of the key-value index.
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
+type EnvInfo struct {
+	// Environment variable name
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Environment variable value
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type EsImportInfo struct {
+	// Import mode.
+	// 1. Import history data
+	// 2. Import real-time data
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Start time. Unit: unix second-level timestamp.
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time. Unit: unix second-level timestamp.
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Maximum delay time. Unit: s
+	// 
+	// Import mode is 2. Required for importing real-time data.
+	MaxDelay *uint64 `json:"MaxDelay,omitnil,omitempty" name:"MaxDelay"`
+
+	// Check interval. Unit: s
+	// 
+	// Import mode is 2. Required for importing real-time data.
+	CheckInterval *uint64 `json:"CheckInterval,omitnil,omitempty" name:"CheckInterval"`
+}
+
+type EsInfo struct {
+	// ES Types. 1: Cloud ES, 2: Self-build ES.
+	EsType *uint64 `json:"EsType,omitnil,omitempty" name:"EsType"`
+
+	// Access method 1: private network, 2: public network. Self-built ES required.
+	AccessMode *uint64 `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
+
+	// Instance id. Required for es instance.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Username.
+	User *string `json:"User,omitnil,omitempty" name:"User"`
+
+	// Access address. Self-built ES required.
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
+
+	// Access port. Self-built ES required.
+	Port *uint64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Network. Required when accessing self-built ES via private network.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Network service type. Required when accessing a self-built ES via private network.
+	// CLB:1025 Cloud Virtual Machine (CVM):0
+	VirtualGatewayType *uint64 `json:"VirtualGatewayType,omitnil,omitempty" name:"VirtualGatewayType"`
+
+	// Password.
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+}
+
+type EsRechargeInfo struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Main account id.
+	Uin *uint64 `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Configuration name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// es index.
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// Elasticsearch Query Statement.
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// es cluster information.
+	EsInfo *EsInfo `json:"EsInfo,omitnil,omitempty" name:"EsInfo"`
+
+	// es import information.
+	ImportInfo *EsImportInfo `json:"ImportInfo,omitnil,omitempty" name:"ImportInfo"`
+
+	// ES import time configuration message.
+	TimeInfo *EsTimeInfo `json:"TimeInfo,omitnil,omitempty" name:"TimeInfo"`
+
+	// Task status.
+	// 1. Running
+	// Suspend
+	// 3. Complete
+	// 4. Exception
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Task progress 0-100 percentage. 100: means done.
+	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// Sub-account id.
+	SubUin *uint64 `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Creation time.
+	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Modify the time.
+	UpdateTime *uint64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Whether to enable service log shipping. Valid values: 1: disable; 2: enable.
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+type EsTimeInfo struct {
+	// Time type 1: Log collection time 2: Specify log fields
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Log time field.
+	// 
+	// Time type is 2: Required when specifying log fields
+	TimeKey *string `json:"TimeKey,omitnil,omitempty" name:"TimeKey"`
+
+	// Log time format.
+	// 
+	// Time type is 2: Required when specifying log fields
+	TimeFormat *string `json:"TimeFormat,omitnil,omitempty" name:"TimeFormat"`
+
+	// Time field time zone.
+	// 
+	// Time type is 2: Required when specifying log fields
+	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+}
+
+type EscalateNoticeInfo struct {
+	// Alarm notification template recipient information.
+	NoticeReceivers []*NoticeReceiver `json:"NoticeReceivers,omitnil,omitempty" name:"NoticeReceivers"`
+
+	// Callback information of alarm notification template.
+	WebCallbacks []*WebCallback `json:"WebCallbacks,omitnil,omitempty" name:"WebCallbacks"`
+
+	// Alarm escalation switch. `true`: enable alarm escalation, `false`: disable alarm escalation. Default: false.
+	Escalate *bool `json:"Escalate,omitnil,omitempty" name:"Escalate"`
+
+	// Escalate alarms interval. Unit: minutes, range `[1, 14400]`.
+	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// Upgrade conditions. `1`: Unclaimed and unrecovered, `2`: Unrecovered, defaults to 1.
+	// -Unclaimed and unrecovered: Upgrade if the alert is not restored and no one claims it.
+	// -Unrecovered: Upgrade if the alarm persists without recovery.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Notification channel configuration for the next step after alarm severity escalation. A maximum of five steps can be configured.
+	EscalateNotice *EscalateNoticeInfo `json:"EscalateNotice,omitnil,omitempty" name:"EscalateNotice"`
+}
+
+// Predefined struct for user
+type EstimateRebuildIndexTaskRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Estimated task start time, in milliseconds
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Estimated end time of the task, in milliseconds.
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+type EstimateRebuildIndexTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Estimated task start time, in milliseconds
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Estimated end time of the task, in milliseconds.
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+func (r *EstimateRebuildIndexTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EstimateRebuildIndexTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EstimateRebuildIndexTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EstimateRebuildIndexTaskResponseParams struct {
+	// This API is used to Estimates the time needed for index rebuilding, in seconds.
+	RemainTime *uint64 `json:"RemainTime,omitnil,omitempty" name:"RemainTime"`
+
+	// Estimates write traffic size, in MB
+	WriteTraffic *uint64 `json:"WriteTraffic,omitnil,omitempty" name:"WriteTraffic"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type EstimateRebuildIndexTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *EstimateRebuildIndexTaskResponseParams `json:"Response"`
+}
+
+func (r *EstimateRebuildIndexTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EstimateRebuildIndexTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type EventLog struct {
-	// Event channel, supports Application, Security, Setup, System, ALL
+	// Event channel, support
+	// -Application log
+	// -Security log
+	// -Startup log
+	// -System log
+	// -ALL logs
 	EventChannel *string `json:"EventChannel,omitnil,omitempty" name:"EventChannel"`
 
-	// Time type, 1: User-defined, 2: Current time
+	// Supported types of the time field (Timestamp)
+	// -1 (User-customized time)
+	// -2 (current time)
 	TimeType *uint64 `json:"TimeType,omitnil,omitempty" name:"TimeType"`
 
-	// Time, when choosing custom time type, a specific time is required
+	// Time, when users choose custom time type, specify the time in seconds
+	// Format: timestamp, 1754897446
 	Timestamp *uint64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
 
 	// Event ID filter list
+	// 	
+	// Optional. Being empty indicates no filtering is applied.
+	// Support forward filtering for a single value (for example: 20) or a range (for example: 0-20), also support reverse filtering for a single value (for example: -20).
+	// Multiple filter items can be separated by commas, for example: 1-200,-100 means collect event logs within the range of 1-200 except 100.
 	EventIDs []*string `json:"EventIDs,omitnil,omitempty" name:"EventIDs"`
 }
 
@@ -5791,124 +13451,129 @@ type ExcludePathInfo struct {
 }
 
 type ExportInfo struct {
-	// Log topic ID
+	// <p>Log topic ID.</p>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Log export task ID
+	// <p>Log export task ID</p>
 	ExportId *string `json:"ExportId,omitnil,omitempty" name:"ExportId"`
 
-	// Log export query statement
+	// <p>Query statements of log export</p>
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
-	// Log export filename
+	// <p>Filenames of exported logs</p>
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
-	// Log file size
+	// <p>Log file size</p><p>Unit: Byte</p>
 	FileSize *uint64 `json:"FileSize,omitnil,omitempty" name:"FileSize"`
 
-	// Log export time sorting
+	// <p>Sorting of log export time</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// Log export format
+	// <p>Log export format</p>
 	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
 
-	// Number of logs to be exported
+	// <p>Number of logs to be exported</p>
 	Count *uint64 `json:"Count,omitnil,omitempty" name:"Count"`
 
-	// Log download status. Valid values: `Processing`, `Completed`, `Failed`, `Expired` (three-day validity period), and `Queuing`.
+	// <p>Log download status. Processing: export in progress, Completed: export completed, Failed: export failure, Expired: log export expired (valid for 3 days), Queuing: queuing</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Log export start time
+	// <p>Start time of log export, with a timestamp in milliseconds</p>
 	From *int64 `json:"From,omitnil,omitempty" name:"From"`
 
-	// Log export end time
+	// <p>End time of log export, timestamp in milliseconds</p>
 	To *int64 `json:"To,omitnil,omitempty" name:"To"`
 
-	// Log export path, valid for one hour. Please download using this path as soon as possible.
+	// <p>Log export path, valid for one hour. Please download using this path as soon as possible.</p>
 	CosPath *string `json:"CosPath,omitnil,omitempty" name:"CosPath"`
 
-	// Log export creation time
+	// <p>Log export creation time<br>Date and Time Formats: yyyy-MM-dd HH:mm:ss</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Syntax rules. The default value is 0.0: Lucene syntax, 1: CQL syntax.
+	// <p>Syntax rule. Default value is 0.<br>0: Lucene syntax, 1: CQL syntax.</p>
 	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
+
+	// <p>Export fields</p>
+	DerivedFields []*string `json:"DerivedFields,omitnil,omitempty" name:"DerivedFields"`
+}
+
+type ExternalRole struct {
+	// <p>Cross-account delivery - User role RoleArn</p>
+	RoleArn *string `json:"RoleArn,omitnil,omitempty" name:"RoleArn"`
+
+	// <p>Cross-account delivery - User role name</p>
+	ExternalId *string `json:"ExternalId,omitnil,omitempty" name:"ExternalId"`
 }
 
 type ExtractRuleInfo struct {
-	// Key name for the time field. TikeKey and TimeFormat must appear in pairsNote: This field may return null, indicating that no valid values can be obtained.
+	// <p>key name for the time field. TimeKey and TimeFormat must appear in pairs</p>
 	TimeKey *string `json:"TimeKey,omitnil,omitempty" name:"TimeKey"`
 
-	// Time field format. For more information, please see the output parameters of the time format description of the `strftime` function in C language
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// <p>Time field format. Refer to the strftime function in C language for time format description output parameter</p><ul><li>See <a href="https://www.tencentcloud.com/document/product/614/38614?from_cn_redirect=1">configure time format</a> document</li></ul>
 	TimeFormat *string `json:"TimeFormat,omitnil,omitempty" name:"TimeFormat"`
 
-	// Delimiter for log type. Valid only when LogType is delimiter_logNote: This field may return null, indicating that no valid values can be obtained.
+	// <p>Delimiter for log type. Only valid when LogType is delimiter_log</p>
 	Delimiter *string `json:"Delimiter,omitnil,omitempty" name:"Delimiter"`
 
-	// Full log matching rule. Valid only if LogType is fullregex_logNote: This field may return null, indicating that no valid values can be obtained.
+	// <p>The whole log matching rule is only valid when LogType is fullregex_log</p>
 	LogRegex *string `json:"LogRegex,omitnil,omitempty" name:"LogRegex"`
 
-	// Line beginning matching rule, valid only if LogType is multiline_log or fullregex_logNote: This field may return null, indicating that no valid values can be obtained.
+	// <p>First-line matching rule. Valid only when LogType is multiline_log or fullregex_log.</p>
 	BeginRegex *string `json:"BeginRegex,omitnil,omitempty" name:"BeginRegex"`
 
-	// Key name of each extracted field. An empty key indicates discarding the field. Valid only if LogType is delimiter_log. json_log logs use the key of JSON itself. Limited to 100.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>The key name of each field. An empty key means to discard the field. Valid only when LogType is delimiter_log. For json_log, use the key in the json itself. Limited to 100.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Keys []*string `json:"Keys,omitnil,omitempty" name:"Keys"`
 
-	// Log filter rule list (previous version), keys to be filtered in the log and their corresponding regex.Note: For LogListener version 2.9.3 and later, it is recommended to use the AdvanceFilterRules configuration for log filtering.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Log filtering rule list (legacy version), keys to be filtered, and corresponding regex.<br> Note: For LogListener 2.9.3 and above versions, it is recommended to use log filtering rules configuration.</p>
 	FilterKeyRegex []*KeyRegexInfo `json:"FilterKeyRegex,omitnil,omitempty" name:"FilterKeyRegex"`
 
-	// Whether to upload the logs that failed to be parsed. Valid values: `true`: yes; `false`: no
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// <p>Whether to upload logs that failed to be parsed, true for upload, false for not uploading</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	UnMatchUpLoadSwitch *bool `json:"UnMatchUpLoadSwitch,omitnil,omitempty" name:"UnMatchUpLoadSwitch"`
 
-	// Unmatched log key
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// <p>key of the failure log, required when UnMatchUpLoadSwitch is true</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	UnMatchLogKey *string `json:"UnMatchLogKey,omitnil,omitempty" name:"UnMatchLogKey"`
 
-	// Backtracking data volume under incremental collection pattern, default -1 indicates full collection; other non-negative numbers indicate incremental collection (collect logs backward from the latest position by ${Backtracking} bytes) with a maximum support of 1073741824 (1G).Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Backtracking data volume in incremental collection mode. Default: -1 (full collection). Other non-negative numbers indicate incremental collection (backward collection of ${Backtracking} Byte logs from the newest position). Supports up to 1073741824 (1G).<br>Note:</p><ul><li>COS import does not support this field.</li></ul>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Backtracking *int64 `json:"Backtracking,omitnil,omitempty" name:"Backtracking"`
 
-	// Whether to be encoded in GBK format. Valid values: `0` (No) and `1` (Yes).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Whether it is Gbk encoding. 0: No; 1: Yes.<br>Note</p><ul><li>Currently, a value of 0 indicates UTF-8 encoding.</li><li>COS import does not support this field.</li></ul>
 	IsGBK *int64 `json:"IsGBK,omitnil,omitempty" name:"IsGBK"`
 
-	// Whether to be formatted as JSON (standard). Valid values: `0` (No) and `1` (Yes).
+	// <p>Whether it is standard json. 0: No; 1: Yes.</p><ul><li>Standard json means the collector uses industry-standard open-source parsers for json parsing. Non-standard json means the collector uses CLS self-developed json parsers. There is no essential difference between the two parsers. We recommend customers use standard json for parsing.</li></ul>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	JsonStandard *int64 `json:"JsonStandard,omitnil,omitempty" name:"JsonStandard"`
 
-	// Syslog protocol. Valid values: `tcp`, `udp`.
-	// This field can be used when you create or modify collection rule configurations.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>syslog transport protocol, valid values: tcp, udp, this parameter is valid only when LogType is service_syslog, not required for other types.<br>Note:</p><ul><li>This field applies to: create collection rule configuration, modify collection rule configuration.</li><li>COS import does not support this field.</li></ul>
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-	// Listening address and port specified by the syslog collection. Format: [ip]:[port]. Example: 127.0.0.1:9000.
-	// This field can be used when you create or modify collection rule configurations.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>syslog system log collection specifies the address and port listened to by the collector, format: [ip]:[port]. This parameter is valid only when LogType is service_syslog. No need to specify for other types.<br>Note:</p><ul><li>This field applies to: create collection rule configuration, modify collection rule configuration.</li><li>COS import does not support this field.</li></ul>
 	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 
-	// `rfc3164`: Resolve logs by using the RFC 3164 protocol during the syslog collection.
-	// `rfc5424`: Resolve logs by using the RFC 5424 protocol during the syslog collection.
-	// `auto`: Automatically match either the RFC 3164 or RFC 5424 protocol.
-	// This field can be used when you create or modify collection rule configurations.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>rfc3164: Specify system log collection using RFC3164 protocol parsing.<br>rfc5424: Specify system log collection using RFC5424 protocol parsing.<br>auto: Automatically match either RFC3164 or RFC5424 protocol.<br>This parameter is valid only when LogType is service_syslog. Not required for other types.<br>Note:</p><ul><li>This field is applicable to: create collection rule configuration, modify collection rule configuration.</li><li>COS import does not support this field.</li></ul>
 	ParseProtocol *string `json:"ParseProtocol,omitnil,omitempty" name:"ParseProtocol"`
 
-	// Metadata type. Valid values:
-	// 0: Do not use metadata.
-	// 1: Use machine group metadata.
-	// 2: Use user-defined metadata.
-	// 3: Use the collection path to extract metadata.
+	// <p>Metadata type. 0: Not use metadata information; 1: Use machine group metadata; 2: Using custom metadata; 3: Use collection configuration path.<br>Note:</p><ul><li>COS import does not support this field.</li></ul>
 	MetadataType *int64 `json:"MetadataType,omitnil,omitempty" name:"MetadataType"`
 
-	// Regular expression of the collection configuration path, which is required when `MetadataType` is set to `3`
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Collection configuration path regular expression.</p><p><pre><code>Use "()" to identify the regular expression corresponding to the target field in the path. During parsing, "()" is considered as a capture group and reported together with logs in the form of __TAG__.{i}:{target field name}, where i is the serial number of the capture group. If you do not want to use the serial number as the key name, you can define a custom key name through the named capturing group "(?&lt;{key name}&gt;{regular expression})" and report it together with logs in the form of __TAG__.{key name}:{target field name}. Supports up to 5 capture groups.</code></pre></p><p>Note:</p><ul><li>Required when MetadataType is 3.</li><li>This field is not supported in COS import.</li></ul>
 	PathRegex *string `json:"PathRegex,omitnil,omitempty" name:"PathRegex"`
 
-	// User-defined metadata, which is required when `MetadataType` is set to `2`.
+	// <p>User-defined metadata information.<br>Note:</p><ul><li>Required when MetadataType is 2.</li><li>This field is not supported for COS import.</li></ul>
 	MetaTags []*MetaTagInfo `json:"MetaTags,omitnil,omitempty" name:"MetaTags"`
 
-	// Windows event log collection
+	// <p>The Windows Event Log Collection rule is valid only when LogType is windows_event_log. No need to specify for other types.</p>
 	EventLogRules []*EventLog `json:"EventLogRules,omitnil,omitempty" name:"EventLogRules"`
+
+	// <p>Log filtering rule list (new version).<br>Note:</p><ul><li>LogListener versions below 2.9.3 do not support this. Please use FilterKeyRegex to configure log filter rules.</li><li>Self-built k8s collection configuration (CreateConfigExtra, ModifyConfigExtra) does not support this field.</li></ul>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AdvanceFilterRules []*AdvanceFilterRuleInfo `json:"AdvanceFilterRules,omitnil,omitempty" name:"AdvanceFilterRules"`
+
+	// <p>Key name of raw logs. All raw logs are uploaded with the Key name you specified, and the original log content as Value. If left empty, raw log upload is disabled.</p><ul><li>COS import does not support this field.</li></ul>
+	RawLogKey *string `json:"RawLogKey,omitnil,omitempty" name:"RawLogKey"`
 }
 
 type Filter struct {
@@ -5930,6 +13595,17 @@ type FilterRuleInfo struct {
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
+type FilterStatistics struct {
+	// <p>Number of raw logs</p>
+	OriginalCount *uint64 `json:"OriginalCount,omitnil,omitempty" name:"OriginalCount"`
+
+	// <p>Number of filtered logs</p>
+	FilteredCount *uint64 `json:"FilteredCount,omitnil,omitempty" name:"FilteredCount"`
+
+	// <p>Filtered results</p>
+	FilteredResult []*string `json:"FilteredResult,omitnil,omitempty" name:"FilteredResult"`
+}
+
 type FullTextInfo struct {
 	// Case sensitivity
 	CaseSensitive *bool `json:"CaseSensitive,omitnil,omitempty" name:"CaseSensitive"`
@@ -5940,7 +13616,6 @@ type FullTextInfo struct {
 	Tokenizer *string `json:"Tokenizer,omitnil,omitempty" name:"Tokenizer"`
 
 	// Whether Chinese characters are contained
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ContainZH *bool `json:"ContainZH,omitnil,omitempty" name:"ContainZH"`
 }
 
@@ -5954,7 +13629,9 @@ type GetAlarmLogRequestParams struct {
 
 	// Query filter criteria, for example:
 	// - Query by alert policy ID: `alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971"`
+	// -Obtain the alert policy ID by [obtaining the alarm policy list](https://www.tencentcloud.com/document/api/614/56461?from_cn_redirect=1).
 	// - Query by monitoring object ID: `monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b" `
+	// -Obtain the monitoring object ID by [obtaining the alarm policy list](https://www.tencentcloud.com/document/api/614/56461?from_cn_redirect=1)
 	// - Query by alarm policy ID and monitoring object ID: `alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971" AND monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b"`
 	// - Query by alarm policy ID and monitoring object ID, supports SQL statement: `(alert_id:"alarm-5ce45495-09e8-4d58-xxxx-768134bf330c") AND (monitored_object:"3c514e84-6f1f-46ec-xxxx-05de6163f7fe") AND NOT condition_evaluate_result: "Skip" AND condition_evaluate_result:[* TO *] | SELECT count(*) as top50StatisticsTotalCount, count_if(condition_evaluate_result='ProcessError') as top50StatisticsFailureCount, count_if(notification_send_result!='NotSend') as top50NoticeTotalCount, count_if(notification_send_result='SendPartFail' or notification_send_result='SendFail') as top50NoticeFailureCount, alert_id, alert_name, monitored_object, topic_type, happen_threshold, alert_threshold, notify_template group by alert_id, alert_name, monitored_object, topic_type, happen_threshold, alert_threshold, notify_template order by top50StatisticsTotalCount desc limit 1`
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
@@ -5983,7 +13660,9 @@ type GetAlarmLogRequest struct {
 
 	// Query filter criteria, for example:
 	// - Query by alert policy ID: `alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971"`
+	// -Obtain the alert policy ID by [obtaining the alarm policy list](https://www.tencentcloud.com/document/api/614/56461?from_cn_redirect=1).
 	// - Query by monitoring object ID: `monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b" `
+	// -Obtain the monitoring object ID by [obtaining the alarm policy list](https://www.tencentcloud.com/document/api/614/56461?from_cn_redirect=1)
 	// - Query by alarm policy ID and monitoring object ID: `alert_id:"alarm-0745ec00-e605-xxxx-b50b-54afe61fc971" AND monitored_object:"823d8bfa-76a7-xxxx-8399-8cda74d4009b"`
 	// - Query by alarm policy ID and monitoring object ID, supports SQL statement: `(alert_id:"alarm-5ce45495-09e8-4d58-xxxx-768134bf330c") AND (monitored_object:"3c514e84-6f1f-46ec-xxxx-05de6163f7fe") AND NOT condition_evaluate_result: "Skip" AND condition_evaluate_result:[* TO *] | SELECT count(*) as top50StatisticsTotalCount, count_if(condition_evaluate_result='ProcessError') as top50StatisticsFailureCount, count_if(notification_send_result!='NotSend') as top50NoticeTotalCount, count_if(notification_send_result='SendPartFail' or notification_send_result='SendFail') as top50NoticeFailureCount, alert_id, alert_name, monitored_object, topic_type, happen_threshold, alert_threshold, notify_template group by alert_id, alert_name, monitored_object, topic_type, happen_threshold, alert_threshold, notify_template order by top50StatisticsTotalCount desc limit 1`
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
@@ -6078,6 +13757,156 @@ func (r *GetAlarmLogResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetClsServiceRequestParams struct {
+
+}
+
+type GetClsServiceRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *GetClsServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetClsServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetClsServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetClsServiceResponseParams struct {
+	// Account service activation status. 0: service activated; 1: service not activated
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type GetClsServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *GetClsServiceResponseParams `json:"Response"`
+}
+
+func (r *GetClsServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetClsServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetMetricLabelValuesRequestParams struct {
+	// <p>Time Series Topic id</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Name of time series label</p>
+	LabelName *string `json:"LabelName,omitnil,omitempty" name:"LabelName"`
+
+	// <p>Start time</p>
+	Start *uint64 `json:"Start,omitnil,omitempty" name:"Start"`
+
+	// <p>End time.</p>
+	End *uint64 `json:"End,omitnil,omitempty" name:"End"`
+
+	// <p>Label match rule</p>
+	Match []*string `json:"Match,omitnil,omitempty" name:"Match"`
+}
+
+type GetMetricLabelValuesRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Time Series Topic id</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Name of time series label</p>
+	LabelName *string `json:"LabelName,omitnil,omitempty" name:"LabelName"`
+
+	// <p>Start time</p>
+	Start *uint64 `json:"Start,omitnil,omitempty" name:"Start"`
+
+	// <p>End time.</p>
+	End *uint64 `json:"End,omitnil,omitempty" name:"End"`
+
+	// <p>Label match rule</p>
+	Match []*string `json:"Match,omitnil,omitempty" name:"Match"`
+}
+
+func (r *GetMetricLabelValuesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetMetricLabelValuesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "LabelName")
+	delete(f, "Start")
+	delete(f, "End")
+	delete(f, "Match")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetMetricLabelValuesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetMetricLabelValuesResponseParams struct {
+	// <p>label values of time series metric</p>
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type GetMetricLabelValuesResponse struct {
+	*tchttp.BaseResponse
+	Response *GetMetricLabelValuesResponseParams `json:"Response"`
+}
+
+func (r *GetMetricLabelValuesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetMetricLabelValuesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type GroupPartitionInfo struct {
+	// Partition ID
+	PartitionId *int64 `json:"PartitionId,omitnil,omitempty" name:"PartitionId"`
+
+	// Latest data timestamp of the partition, unit: s
+	CommitTimestamp *int64 `json:"CommitTimestamp,omitnil,omitempty" name:"CommitTimestamp"`
+
+	// consumer
+	Consumer *string `json:"Consumer,omitnil,omitempty" name:"Consumer"`
+}
+
 type GroupTriggerConditionInfo struct {
 	// Name of the field for triggering by group
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
@@ -6087,10 +13916,10 @@ type GroupTriggerConditionInfo struct {
 }
 
 type HighLightItem struct {
-	// Highlighted Log Key
+	// Highlighted log field name.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// Highlighted Syntax
+	// Highlighted keywords.
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
@@ -6102,16 +13931,97 @@ type HistogramInfo struct {
 	BTime *int64 `json:"BTime,omitnil,omitempty" name:"BTime"`
 }
 
+type HostMetricConfig struct {
+	// Collection Configuration id
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+
+	// Collection configuration name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Collection frequency, in milliseconds
+	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// Collection item
+	HostMetricItems []*HostMetricItem `json:"HostMetricItems,omitnil,omitempty" name:"HostMetricItems"`
+
+	// Machine group id list
+	MachineGroupIds []*string `json:"MachineGroupIds,omitnil,omitempty" name:"MachineGroupIds"`
+
+	// Creation time.
+	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Modification time.
+	UpdateTime *uint64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
+type HostMetricItem struct {
+	// Host metric collection item type. Supports "cpu", "mem", "net", "disk", "system".
+	// 
+	// - cpu:CPU
+	// -mem: memory
+	// -net: network
+	// -disk
+	// - system: System
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+type Instance struct {
+	// Instance information
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+}
+
+type InstanceConfig struct {
+	// instance dimension
+	InstanceDimension []*string `json:"InstanceDimension,omitnil,omitempty" name:"InstanceDimension"`
+
+	// Instance value
+	Instances []*Instance `json:"Instances,omitnil,omitempty" name:"Instances"`
+}
+
+type InstanceData struct {
+	// Cloud Monitor metric name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
+
+	// CLS metric name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CLSMetricName *string `json:"CLSMetricName,omitnil,omitempty" name:"CLSMetricName"`
+
+	// Cloud product namespace.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Instance information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Dimensions []*Dimension `json:"Dimensions,omitnil,omitempty" name:"Dimensions"`
+
+	// Period (seconds).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
+
+	// Statistical value of a metric.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Value *float64 `json:"Value,omitnil,omitempty" name:"Value"`
+
+	// Error message
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
+}
+
 type JsonInfo struct {
 	// Enablement flag
 	EnableTag *bool `json:"EnableTag,omitnil,omitempty" name:"EnableTag"`
 
-	// List of metadata. Supported metadata types: __SOURCE__, __FILENAME__, __TIMESTAMP__, __HOSTNAME__.
+	// Metadata information list, available values are __SOURCE__, __FILENAME__, __TIMESTAMP__, __HOSTNAME__.
+	// 
+	// -SOURCE IP for log collection, for example: 10.0.1.2
+	// -__FILENAME__: Log collection file name, for example: /data/log/nginx/access.log
+	// -__TIMESTAMP__: Log timestamp (millisecond-level Unix timestamp). When retrieving logs by time range, the time is automatically used to retrieve logs. It is displayed on the console as "log time", for example: 1640005601188.
+	// -__HOSTNAME__: Log source machine name. Need to use Loglistener 2.7.4 and above versions to capture this field, for example: localhost.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MetaFields []*string `json:"MetaFields,omitnil,omitempty" name:"MetaFields"`
 
-	// JSON format for shipping. `0`: String format; `1`: Structured format.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// JSON format for shipping. 0: shipped as a string; 1: shipped in a structured way.
 	JsonType *int64 `json:"JsonType,omitnil,omitempty" name:"JsonType"`
 }
 
@@ -6128,16 +14038,15 @@ type KafkaConsumerContent struct {
 	// This parameter does not need to be set when `Format` is set to `0`.
 	MetaFields []*string `json:"MetaFields,omitnil,omitempty" name:"MetaFields"`
 
-	// Tag data processing mode: 1: Do not tile (default); 2: Tile.
+	// tag data processing method: 1: Not Tiled (default value); 2: Tile.
 	// 
 	// Untiled example:
 	// TAG information: `{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
-	// Untiled: `{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
+	// No tiling: `{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
 	// 
 	// Tiled example:
 	// TAG information: `{"__TAG__":{"fieldA":200,"fieldB":"text"}}`
 	// Tiled: `{"__TAG__.fieldA":200,"__TAG__.fieldB":"text"}`
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TagTransaction *int64 `json:"TagTransaction,omitnil,omitempty" name:"TagTransaction"`
 
 	// JSON data format:
@@ -6152,76 +14061,82 @@ type KafkaConsumerContent struct {
 }
 
 type KafkaProtocolInfo struct {
-	// Protocol type, including plaintext, sasl_plaintext, or sasl_ssl. sasl_ssl is recommended for encrypted connections and user authentication.Required input parameters
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Protocol type. Supported protocol types include plaintext, sasl_plaintext, or sasl_ssl. Recommend using sasl_ssl. Protocol enables encrypted connection and also requires user authentication.
+	// 
+	// -Protocol is required when IsEncryptionAddr is true.
+	// -Supported protocol types are as follows:
+	// -plaintext: Plaintext without encryption protocol
+	// -sasl_ssl: sasl authentication + ssl encryption
+	// -ssl: Pure ssl/TLS encryption protocol
+	// -sasl_plaintext: SASL authentication + unencrypted tunnel
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-	// Encryption type, supports PLAIN, SCRAM-SHA-256, or SCRAM-SHA-512.Required when the Protocol is sasl_plaintext or sasl_ssl.Note: This field may return null, indicating that no valid values can be obtained.
+	// Encryption type, supports PLAIN, SCRAM-SHA-256, or SCRAM-SHA-512.
+	// 
+	// -Mechanism is required when Protocol is `sasl_plaintext` or `sasl_ssl`.
+	// -Supported encryption types are as follows.
+	// -PLAIN: plaintext authentication
+	// -SCRAM-SHA-256: Based on challenge-response mechanism, uses PBKDF2-HMAC-SHA256 algorithm.
+	// -SCRAM-SHA-512: Enhanced SCRAM that uses the PBKDF2-HMAC-SHA512 algorithm.
 	Mechanism *string `json:"Mechanism,omitnil,omitempty" name:"Mechanism"`
 
-	// UsernameRequired when the Protocol is sasl_plaintext or sasl_ssl.Note: This field may return null, indicating that no valid values can be obtained.
+	// Username.
+	// Required when Protocol is sasl_plaintext or sasl_ssl
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
-	// User PasswordRequired when the Protocol is sasl_plaintext or sasl_ssl.Note: This field may return null, indicating that no valid values can be obtained.
+	// User password.
+	// Required when Protocol is sasl_plaintext or sasl_ssl
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
 
 type KafkaRechargeInfo struct {
-	// ID of the Kafka data subscription configuration.Note: This field may return null, indicating that no valid values can be obtained.
+	// ID of Kafka data subscription configuration.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Log topic ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Kafka data import task name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Name of the Kafka import task
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Imports Kafka type. 0: Cloud CKafka; 1: user-built Kafka
 	KafkaType *uint64 `json:"KafkaType,omitnil,omitempty" name:"KafkaType"`
 
-	// CKafka instance ID, which is required when `KafkaType` is set to `0`
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// CKafka instance ID of cloud platform, required when KafkaType is 0.
 	KafkaInstance *string `json:"KafkaInstance,omitnil,omitempty" name:"KafkaInstance"`
 
 	// Service address
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ServerAddr *string `json:"ServerAddr,omitnil,omitempty" name:"ServerAddr"`
 
-	// Whether the service address uses an encrypted connection	
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether ServerAddr is an encrypted connection	
 	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitnil,omitempty" name:"IsEncryptionAddr"`
 
 	// Encryption access protocol, which is required when `IsEncryptionAddr` is set to `true`
 	Protocol *KafkaProtocolInfo `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-	// List of Kafka topics to import data from. Separate multiple topics with commas (,).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The list of Kafka-related topics that the user needs to import. Separate multiple topics by commas.
 	UserKafkaTopics *string `json:"UserKafkaTopics,omitnil,omitempty" name:"UserKafkaTopics"`
 
-	// Kafka consumer group name	
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Kafka consumer group name of the user	
 	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
 
-	// Status, 1: running; 2: paused.Note: This field may return null, indicating that no valid values can be obtained.
+	// Status. 1: Running; 2: Suspension.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Import data position, -2: earliest (default), -1: latestNote: This field may return null, indicating that no valid values can be obtained.
+	// Data import position. -2: earliest (default); -1: latest
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Creation time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Creation time. Format `YYYY-MM-DD HH:MM:SS`
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Update time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Update time. Format: `YYYY-MM-DD HH:MM:SS`
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Log import rule
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	LogRechargeRule *LogRechargeRuleInfo `json:"LogRechargeRule,omitnil,omitempty" name:"LogRechargeRule"`
+
+	// User kafka extended information
+	UserKafkaMeta *UserKafkaMeta `json:"UserKafkaMeta,omitnil,omitempty" name:"UserKafkaMeta"`
 }
 
 type KeyRegexInfo struct {
@@ -6246,6 +14161,27 @@ type KeyValueInfo struct {
 	Value *ValueInfo `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
+type Label struct {
+	// The key of the tag. A valid tag key has two parts: an optional prefix and a name, separated by a slash (/). The name part is necessary and must be no more than 63 characters, starting and ending with alphanumeric characters ([a-z0-9A-Z]), with hyphens (-), underscores (_), dots (.), and alphanumerics in the middle. The prefix is optional. If specified, the prefix must be a DNS subdomain: a series of DNS labels separated by dots (.), with a total length not exceeding 253 characters, followed by a slash (/).
+	// 
+	// -Format of prefix `[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*`
+	// -Format of `name`: `([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]`
+	// -key must be unique
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// The comparison operator between tag key values. Different business scenarios support different comparison operators. See the API business description for supported ones.
+	// such as `in`, `notin`
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Operate *string `json:"Operate,omitnil,omitempty" name:"Operate"`
+
+	// Tag value.
+	// -Supports up to 63 characters.
+	// -Format: `([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]`
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+}
+
 type LogContextInfo struct {
 	// Log source device
 	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
@@ -6265,19 +14201,16 @@ type LogContextInfo struct {
 	// Log timestamp
 	BTime *int64 `json:"BTime,omitnil,omitempty" name:"BTime"`
 
-	// Source host name of logs
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Log source host name
 	HostName *string `json:"HostName,omitnil,omitempty" name:"HostName"`
 
-	// Raw log (this parameter has a value only when an exception occurred while creating indexes for logs).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Raw log (only available when there is an error in creating the log index).
 	RawLog *string `json:"RawLog,omitnil,omitempty" name:"RawLog"`
 
-	// The cause of index creation exception (this parameter has a value only when an exception occurred while creating indexes for logs).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Cause for log index creation exception. It has a value only when a log index creation exception occurs.
 	IndexStatus *string `json:"IndexStatus,omitnil,omitempty" name:"IndexStatus"`
 
-	// Highlighted description of log contentNote: This field may return null, indicating that no valid values can be obtained.
+	// Highlighted description of the log content
 	HighLights []*HighLightItem `json:"HighLights,omitnil,omitempty" name:"HighLights"`
 }
 
@@ -6303,20 +14236,19 @@ type LogInfo struct {
 	// Log ID in request package
 	PkgLogId *string `json:"PkgLogId,omitnil,omitempty" name:"PkgLogId"`
 
-	// Serialized JSON string of log content
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Keywords that meet search criteria are generally highlighted. Only key-value search is supported, not full-text search.	
+	HighLights []*HighLightItem `json:"HighLights,omitnil,omitempty" name:"HighLights"`
+
+	// JSON serialized string of the log content
 	LogJson *string `json:"LogJson,omitnil,omitempty" name:"LogJson"`
 
-	// Source host name of logs
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Log source host name
 	HostName *string `json:"HostName,omitnil,omitempty" name:"HostName"`
 
-	// Raw log (this parameter has a value only when an exception occurred while creating indexes for logs).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Raw log (only available when there is an error in creating the log index).
 	RawLog *string `json:"RawLog,omitnil,omitempty" name:"RawLog"`
 
-	// The cause of index creation exception (this parameter has a value only when an exception occurred while creating indexes for logs).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Cause for log index creation exception. It has a value only when a log index creation exception occurs.
 	IndexStatus *string `json:"IndexStatus,omitnil,omitempty" name:"IndexStatus"`
 }
 
@@ -6340,51 +14272,135 @@ type LogRechargeRuleInfo struct {
 	// Encoding format. Valid values: 0 (default, UTF-8) and 1 GBK).
 	EncodingFormat *uint64 `json:"EncodingFormat,omitnil,omitempty" name:"EncodingFormat"`
 
-	// Whether to use the default time. Valid values: `true` (default) and `false`.
+	// Use default time status. true: when enabled, current system time or Kafka message timestamp will be used as log timestamp. false: when disabled, time field in the log will be used as log timestamp. Default: true.
 	DefaultTimeSwitch *bool `json:"DefaultTimeSwitch,omitnil,omitempty" name:"DefaultTimeSwitch"`
 
-	// Full log matching rule, which is valid only if `RechargeType` is `fullregex_log`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Full log matching rule. It is valid only when RechargeType is fullregex_log.
 	LogRegex *string `json:"LogRegex,omitnil,omitempty" name:"LogRegex"`
 
 	// Whether to upload the logs that failed to be parsed. Valid values: `true` and `false`.
 	UnMatchLogSwitch *bool `json:"UnMatchLogSwitch,omitnil,omitempty" name:"UnMatchLogSwitch"`
 
-	// Key of the log that failed to be parsed
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// key name of parsing-failed logs
 	UnMatchLogKey *string `json:"UnMatchLogKey,omitnil,omitempty" name:"UnMatchLogKey"`
 
-	// Time source of the log that failed to be parsed. Valid values: 0 (current system time) and 1 (Kafka message timestamp).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Time source for parsing failure logs. 0: current time of the system; 1: Kafka message timestamp.
 	UnMatchLogTimeSrc *uint64 `json:"UnMatchLogTimeSrc,omitnil,omitempty" name:"UnMatchLogTimeSrc"`
 
-	// Default time source. Valid values: 0 (current system time) and 1 (Kafka message timestamp).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Default time source. 0: Current system time; 1: Kafka message timestamp.
 	DefaultTimeSrc *uint64 `json:"DefaultTimeSrc,omitnil,omitempty" name:"DefaultTimeSrc"`
 
-	// Time field
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Time field. Field name representing time in logs.
+	// 
+	// -When DefaultTimeSwitch is false and RechargeType data extraction mode is `json_log` JSON file log or `fullregex_log` single-line full regex file log, TimeKey cannot be empty.
 	TimeKey *string `json:"TimeKey,omitnil,omitempty" name:"TimeKey"`
 
-	// Time regular expression
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Time extraction regular expression.
+	// -When DefaultTimeSwitch is false and the data extraction mode of RechargeType is `minimalist_log` (single-line full text - file log), TimeRegex cannot be empty.
+	// -Only need to input the regular expression representing the time field in logs. If multiple fields are matched to, the first will be used.
+	// Example: The original log is "message with time 2022-08-08 14:20:20". You can set the retrieval time regex to \d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d.
 	TimeRegex *string `json:"TimeRegex,omitnil,omitempty" name:"TimeRegex"`
 
-	// Time field format
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Time field format.
+	// -When DefaultTimeSwitch is false, TimeFormat cannot be empty.
 	TimeFormat *string `json:"TimeFormat,omitnil,omitempty" name:"TimeFormat"`
 
-	// Time zone
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Time field time zone.
+	// -When DefaultTimeSwitch is false, TimeZone cannot be empty.
+	// -Time zone format rule
+	// Prefix: Use GMT or UTC as the time zone benchmark.
+	// Offset:
+	// -`-` indicates a western time zone (later than the benchmark time).
+	// -`+` means the east time zone (earlier than the benchmark time).
+	// -Format ±HH:MM (hr:min)
+	// 
+	// -Currently supported:
+	// ```
+	// "GMT-12:00" 
+	// "GMT-11:00" 
+	// "GMT-10:00" 
+	// "GMT-09:30" 
+	// "GMT-09:00" 
+	// "GMT-08:00" 
+	// "GMT-07:00" 
+	// "GMT-06:00" 
+	// "GMT-05:00" 
+	// "GMT-04:00" 
+	// "GMT-03:30" 
+	// "GMT-03:00" 
+	// "GMT-02:00" 
+	// "GMT-01:00" 
+	// "GMT+00:00"
+	// "GMT+01:00"
+	// "GMT+02:00"
+	// "GMT+03:30"
+	// "GMT+04:00"
+	// "GMT+04:30"
+	// "GMT+05:00"
+	// "GMT+05:30"
+	// "GMT+05:45"
+	// "GMT+06:00"
+	// "GMT+06:30"
+	// "GMT+07:00"
+	// "GMT+08:00"
+	// "GMT+09:00"
+	// "GMT+09:30"
+	// "GMT+10:00"
+	// "GMT+10:30"
+	// "GMT+11:00"
+	// "GMT+11:30"
+	// "GMT+12:00"
+	// "GMT+12:45"
+	// "GMT+13:00"
+	// "GMT+14:00"
+	// "UTC-11:00"
+	// "UTC-10:00"
+	// "UTC-09:00"
+	// "UTC-08:00"
+	// "UTC-12:00"
+	// "UTC-07:00"
+	// "UTC-06:00"
+	// "UTC-05:00"
+	// "UTC-04:30"
+	// "UTC-04:00"
+	// "UTC-03:30"
+	// "UTC-03:00"
+	// "UTC-02:00"
+	// "UTC-01:00"
+	// "UTC+00:00"
+	// "UTC+01:00"
+	// "UTC+02:00"
+	// "UTC+03:00"
+	// "UTC+03:30"
+	// "UTC+04:00"
+	// "UTC+04:30"
+	// "UTC+05:00"
+	// "UTC+05:45"
+	// "UTC+06:00"
+	// "UTC+06:30"
+	// "UTC+07:00"
+	// "UTC+08:00"
+	// "UTC+09:00"
+	// "UTC+09:30"
+	// "UTC+10:00"
+	// "UTC+11:00"
+	// "UTC+12:00"
+	// "UTC+13:00"
+	// ```
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
 
-	// Metadata information. Kafka supports import of kafka_topic, kafka_partition, kafka_offset, and kafka_timestamp.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Metadata information. Kafka import supports kafka_topic, kafka_partition, kafka_offset, and kafka_timestamp.
 	Metadata []*string `json:"Metadata,omitnil,omitempty" name:"Metadata"`
 
-	// List of log keys, which is required when `RechargeType` is set to `full_regex_log`
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// log Key list. It is required when RechargeType is full_regex_log or delimiter_log.
 	Keys []*string `json:"Keys,omitnil,omitempty" name:"Keys"`
+
+	// JSON parsing mode. The first-level data parsing is enabled.
+	ParseArray *bool `json:"ParseArray,omitnil,omitempty" name:"ParseArray"`
+
+	// Delimiter parsing mode - Separator
+	// This field is required when the parsing format is delimiter extraction.
+	Delimiter *string `json:"Delimiter,omitnil,omitempty" name:"Delimiter"`
 }
 
 type LogsetInfo struct {
@@ -6394,15 +14410,16 @@ type LogsetInfo struct {
 	// Logset name
 	LogsetName *string `json:"LogsetName,omitnil,omitempty" name:"LogsetName"`
 
-	// Creation time
+	// Creation time. Format `YYYY-MM-DD HH:MM:SS`
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Cloud product identifier. If the logset is created by another cloud product, this field returns the name of the cloud product, such as `CDN` or `TKE`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// If AssumerUin is not empty, it indicates the Uin of the service provider that created the log set.
+	AssumerUin *uint64 `json:"AssumerUin,omitnil,omitempty" name:"AssumerUin"`
+
+	// Cloud product identifier. When the logset is created by other cloud products, this field displays the cloud product name, such as CDN and TKE.
 	AssumerName *string `json:"AssumerName,omitnil,omitempty" name:"AssumerName"`
 
-	// Tag bound to logset
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Tag bound to log set
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Number of log topics in logset
@@ -6410,6 +14427,9 @@ type LogsetInfo struct {
 
 	// If `AssumerName` is not empty, it indicates the service provider who creates the logset.
 	RoleName *string `json:"RoleName,omitnil,omitempty" name:"RoleName"`
+
+	// Number of metric topics under log sets
+	MetricTopicCount *int64 `json:"MetricTopicCount,omitnil,omitempty" name:"MetricTopicCount"`
 }
 
 type MachineGroupInfo struct {
@@ -6422,31 +14442,28 @@ type MachineGroupInfo struct {
 	// Machine group type
 	MachineGroupType *MachineGroupTypeInfo `json:"MachineGroupType,omitnil,omitempty" name:"MachineGroupType"`
 
-	// Creation time
+	// Creation time.
+	// Time format: yyyy-MM-dd HH:mm:ss
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// List of tags bound to machine group
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Whether to enable automatic update for the machine group
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Whether machine group auto-update is enabled
 	AutoUpdate *string `json:"AutoUpdate,omitnil,omitempty" name:"AutoUpdate"`
 
-	// Update start time. We recommend you update LogListener during off-peak hours.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Start time of upgrade. It is suggested to upgrade LogListener in the off-peak period of the business.
+	// Time format: HH:mm:ss
 	UpdateStartTime *string `json:"UpdateStartTime,omitnil,omitempty" name:"UpdateStartTime"`
 
-	// Update end time. We recommend you update LogListener during off-peak hours.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// End time of upgrade. It is suggested to upgrade LogListener in the off-peak period of the business.
+	// Time format: HH:mm:ss.
 	UpdateEndTime *string `json:"UpdateEndTime,omitnil,omitempty" name:"UpdateEndTime"`
 
-	// Whether to enable the service log to record the logs generated by the LogListener service itself. After it is enabled, the internal logset `cls_service_logging` and the `loglistener_status`, `loglistener_alarm`, and `loglistener_business` log topics will be created, which will not incur fees.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Whether service logs are enabled to record logs generated by the LogListener service itself. Once enabled, it will create an internal log set cls_service_logging, and log topics including loglistener_status, loglistener_alarm, and loglistener_business, without incurring charges.
 	ServiceLogging *bool `json:"ServiceLogging,omitnil,omitempty" name:"ServiceLogging"`
 
-	// Regular cleanup time for offline machines in the machine group
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Regular cleanup time for offline machines in the machine group, in days, default setting 30 days.
 	DelayCleanupTime *int64 `json:"DelayCleanupTime,omitnil,omitempty" name:"DelayCleanupTime"`
 
 	// Metadata information list of a machine group
@@ -6457,10 +14474,12 @@ type MachineGroupInfo struct {
 }
 
 type MachineGroupTypeInfo struct {
-	// Machine group type. Valid values: `ip`: the IP addresses of collection machines are stored in `Values` of the machine group; `label`: the tags of the machines are stored in `Values` of the machine group
+	// Machine group type. Support ip and label.
+	// -ip: Indicates that Values in this machine group represent the ip address of the collection machine.
+	// -label: means the Values in this group contain machine tags
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Machine description list
+	// Machine description list.
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
@@ -6468,13 +14487,13 @@ type MachineInfo struct {
 	// Machine IP
 	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
-	// Machine instance IDNote: This field may return null, indicating that no valid values can be obtained.
+	// Machine instance ID.
 	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
 	// Machine status. Valid values: `0`: exceptional; `1`: normal
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Machine disconnection time. If the value is empty, the machine is normal. If the machine is exceptional, a specific value will be returned.
+	// Machine offline time. Null indicates normal. Return a specific time in case of exceptions. Time format: YYYY-MM-DD HH:mm:ss.
 	OfflineTime *string `json:"OfflineTime,omitnil,omitempty" name:"OfflineTime"`
 
 	// Whether to enable automatic update for the machine. Valid values: `0`: no; `1`: yes
@@ -6496,9 +14515,14 @@ type MachineInfo struct {
 // Predefined struct for user
 type MergePartitionRequestParams struct {
 	// Log topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Merged `PartitionId`
+	// Merged partition id (find the next partition whose InclusiveBeginKey equals the ExclusiveEndKey of the corresponding partition id in the input parameter, and the found partition must be a read-write partition (Status:readwrite), set the input partition id and the found partition id to read-only partition (Status:readonly), then create a new read-write partition). [Get partition list](https://www.tencentcloud.com/document/product/614/56470?from_cn_redirect=1)
+	// 
+	// 1. PartitionId can only be a read-write partition (Status can be readonly or readwrite), and the next read-write partition of PartitionId can be found (the InclusiveBeginKey of the next partition equals to the ExclusiveEndKey of PartitionId).
+	// 2. The PartitionId cannot be the last partition (the ExclusiveEndKey of PartitionId cannot be ffffffffffffffffffffffffffffffff).
+	// 3. The number of topic partitions is limited (50 by default). After merging, it must not exceed the maximum partition, otherwise merging is not allowed.
 	PartitionId *int64 `json:"PartitionId,omitnil,omitempty" name:"PartitionId"`
 }
 
@@ -6506,9 +14530,14 @@ type MergePartitionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Log topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Merged `PartitionId`
+	// Merged partition id (find the next partition whose InclusiveBeginKey equals the ExclusiveEndKey of the corresponding partition id in the input parameter, and the found partition must be a read-write partition (Status:readwrite), set the input partition id and the found partition id to read-only partition (Status:readonly), then create a new read-write partition). [Get partition list](https://www.tencentcloud.com/document/product/614/56470?from_cn_redirect=1)
+	// 
+	// 1. PartitionId can only be a read-write partition (Status can be readonly or readwrite), and the next read-write partition of PartitionId can be found (the InclusiveBeginKey of the next partition equals to the ExclusiveEndKey of PartitionId).
+	// 2. The PartitionId cannot be the last partition (the ExclusiveEndKey of PartitionId cannot be ffffffffffffffffffffffffffffffff).
+	// 3. The number of topic partitions is limited (50 by default). After merging, it must not exceed the maximum partition, otherwise merging is not allowed.
 	PartitionId *int64 `json:"PartitionId,omitnil,omitempty" name:"PartitionId"`
 }
 
@@ -6557,6 +14586,20 @@ func (r *MergePartitionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Message struct {
+	// <p>Role</p><p>Enumeration value:</p><ul><li>user: User</li><li>assistant: AI assistant</li></ul>
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
+
+	// <p>Text content</p>
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// <p>Thought chain content.<br>Used to show the model thinking process, only available in deep thinking mode. Returned as an output parameter only. No need to import it into the input parameter during multi-round dialogue.</p>
+	ReasoningContent *string `json:"ReasoningContent,omitnil,omitempty" name:"ReasoningContent"`
+
+	// <p>Tool call generated by the model. Only support output parameter return.</p>
+	ToolCalls []*ToolCall `json:"ToolCalls,omitnil,omitempty" name:"ToolCalls"`
+}
+
 type MetaTagInfo struct {
 	// Metadata key
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
@@ -6565,18 +14608,249 @@ type MetaTagInfo struct {
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
-type MetricLabel struct {
-	// Metric NameNote: This field may return null, indicating that no valid values can be obtained.
+type MetadataInfo struct {
+	// data format, rawlog/json
+	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
+
+	// Fields to be delivered, including __SOURCE__, __FILENAME__
+	// ,\_\_TIMESTAMP\_\_,\_\_HOSTNAME\_\_,\_\_PKG\_ID\_\_
+	MetaFields []*string `json:"MetaFields,omitnil,omitempty" name:"MetaFields"`
+
+	// Whether to deliver the __TAG__ field
+	EnableTag *bool `json:"EnableTag,omitnil,omitempty" name:"EnableTag"`
+
+	// Whether JSON is flattened. Required when delivering the __TAG__ field.
+	TagJsonTiled *bool `json:"TagJsonTiled,omitnil,omitempty" name:"TagJsonTiled"`
+}
+
+type MetadataItem struct {
+	// <p>Metadata tag key</p>
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// Metric content Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Metadata tag value</p>
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type MetricCollectConfig struct {
+	// Collection configuration ID.
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+
+	// Log topic ID.
+	TopicIds []*string `json:"TopicIds,omitnil,omitempty" name:"TopicIds"`
+
+	// Collection configuration source. Support: `0`, `1`.
+	// -0: Self-build k8s
+	// - 1:TKE
+	Source *uint64 `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// Machine group ID.
+	GroupIds []*string `json:"GroupIds,omitnil,omitempty" name:"GroupIds"`
+
+	// Monitoring type. Supported values: `0`, `1`. Cannot be modified.
+	// 
+	// -0: Basic monitoring
+	// -Custom monitoring
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Collection configuration method. Supports `0` and `1`. Cannot be modified.
+	// -0: Ordinary setting method. The Type field is only for: `1`
+	// -YAML import method, Type can be `0` or `1`.
+	Flag *uint64 `json:"Flag,omitnil,omitempty" name:"Flag"`
+
+	// Name: Length not exceeding 253 characters, check format `[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Collection object. This parameter is valid only when Flag is 0.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Spec *MetricSpec `json:"Spec,omitnil,omitempty" name:"Spec"`
+
+	// Label processing. This parameter is valid only when Flag is 0.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MetricRelabels []*Relabeling `json:"MetricRelabels,omitnil,omitempty" name:"MetricRelabels"`
+
+	// Custom metadata. This parameter is valid only when Flag is 0.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MetricLabel *MetricConfigLabel `json:"MetricLabel,omitnil,omitempty" name:"MetricLabel"`
+
+	// Communication protocol. Valid values: HTTP and HTTPS. This parameter is valid only when Flag is 0.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Scheme *string `json:"Scheme,omitnil,omitempty" name:"Scheme"`
+
+	// Collection frequency. This parameter is valid only when Flag is 0.
+	// -Check format: `^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$`
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScrapeInterval *string `json:"ScrapeInterval,omitnil,omitempty" name:"ScrapeInterval"`
+
+	// Collection timeout. This parameter is valid only when Flag=0 && Type=1.
+	// - format:`^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$`
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScrapeTimeout *string `json:"ScrapeTimeout,omitnil,omitempty" name:"ScrapeTimeout"`
+
+	// How Prometheus handles tag conflicts. When Flag=0 takes effect, `true` and `false` are supported.
+	// 
+	// - `false`: Rename conflicting tags in configuration data
+	// -`true`: Ignore server-side tag conflicts
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HonorLabels *bool `json:"HonorLabels,omitnil,omitempty" name:"HonorLabels"`
+
+	// Collection configuration, which is a string in YAML format. It is required when Flag is 1.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	YamlSpec *MetricYamlSpec `json:"YamlSpec,omitnil,omitempty" name:"YamlSpec"`
+
+	// Operation status. Valid values: 0: applied; 1: paused.
+	Operate *uint64 `json:"Operate,omitnil,omitempty" name:"Operate"`
+
+	// Creation time (a second-level timestamp).
+	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Update timestamp (second-level).
+	UpdateTime *uint64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
+type MetricConfig struct {
+	// Metric name
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
+
+	// Statistical cycle (seconds).
+	Periods []*uint64 `json:"Periods,omitnil,omitempty" name:"Periods"`
+
+	// Custom metric label.
+	MetricLabels []*MetricLabel `json:"MetricLabels,omitnil,omitempty" name:"MetricLabels"`
+}
+
+type MetricConfigLabel struct {
+	// Metadata.
+	// support
+	// - `namespace`
+	// - `pod_name`
+	// - `pod_ip`
+	// - `pod_uid`
+	// - `container_name`
+	// - `container_id`
+	// - `image_name`
+	// - `cluster_id`
+	// - `node_id`
+	// - `node_ip`
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Metadata []*string `json:"Metadata,omitnil,omitempty" name:"Metadata"`
+
+	// Metadata Pod label information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Label *AppointLabel `json:"Label,omitnil,omitempty" name:"Label"`
+
+	// Custom label information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CustomLabels []*CustomLabel `json:"CustomLabels,omitnil,omitempty" name:"CustomLabels"`
+}
+
+type MetricLabel struct {
+	// Metric name
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Metric content.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type MetricSpec struct {
+	// Custom metric collection configuration item.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CustomSpecs []*CustomMetricSpec `json:"CustomSpecs,omitnil,omitempty" name:"CustomSpecs"`
+}
+
+type MetricSubscribeInfo struct {
+	// Subscription task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Log topic ID.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Subscription task name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Cloud product namespace.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Metric configuration information.
+	Metrics []*MetricConfig `json:"Metrics,omitnil,omitempty" name:"Metrics"`
+
+	// Instance configuration information.
+	InstanceInfo *InstanceConfig `json:"InstanceInfo,omitnil,omitempty" name:"InstanceInfo"`
+
+	// Subscription task switch. Valid values: 1: paused; 2: enabled.
+	Enable *uint64 `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// Subscription task running status. Valid values: 0 creating; 1: paused; 2: running; 3: abnormal.
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error information occurred when a subscription task runs abnormally.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
+
+	// Creation time (timestamp in seconds)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *int64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Update time (second-level timestamp)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdateTime *int64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
+type MetricYamlSpec struct {
+	// yaml monitoring type.
+	// Support:
+	// - PodMonitor
+	// - ServiceMonitor
+	// - ScrapeConfig
+	// - ScrapeConfig-prometheus
+	// 
+	// `PodMonitor`, `ServiceMonitor`, `ScrapeConfig` belong to prometheus-operator
+	// `ScrapeConfig-prometheus` belongs to Prometheus
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Configures the YAML format.
+	// For example: Type: ServiceMonitor
+	// 
+	// 
+	// ```
+	// apiVersion: monitoring.coreos.com/v1
+	// kind: ServiceMonitor
+	// metadata:
+	//   name: test
+	//   namespace: test
+	//   labels:
+	//     k8s-app1: test
+	//     k8s-app2: test
+	// spec:
+	//   endpoints:
+	//     - interval: 15s
+	//       port: 8080-8080-tcp
+	//       path: /metrics
+	//       relabelings:
+	//         - action: replace
+	//           sourceLabels:
+	//             - __meta_kubernetes_pod_label_app
+	//           targetLabel: application
+	//   namespaceSelector:
+	//     matchNames:
+	//       - test
+	//   selector:
+	//     matchLabels:
+	//       app: test
+	// ```
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Spec *string `json:"Spec,omitnil,omitempty" name:"Spec"`
 }
 
 // Predefined struct for user
 type ModifyAlarmNoticeRequestParams struct {
-	// Notification group ID
+	// Notification channel group ID. Obtain the notification channel group ID by searching the notification channel group list (https://www.tencentcloud.com/document/api/614/56462?from_cn_redirect=1).
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitnil,omitempty" name:"AlarmNoticeId"`
+
+	// Tag description list. Tags can be bound to corresponding notification channel groups at the same time by specifying this parameter. It supports up to 10 tag key-value pairs, which cannot be duplicate.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Notification group name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -6590,18 +14864,47 @@ type ModifyAlarmNoticeRequestParams struct {
 	// Notification recipient
 	NoticeReceivers []*NoticeReceiver `json:"NoticeReceivers,omitnil,omitempty" name:"NoticeReceivers"`
 
-	// API callback information (including WeCom)
+	// API callback information (including WeCom).
 	WebCallbacks []*WebCallback `json:"WebCallbacks,omitnil,omitempty" name:"WebCallbacks"`
 
 	// Notification rulesNote: - Type, NoticeReceivers, and WebCallbacks are one set of configurations, while NoticeRules is another set of configurations. The two sets are mutually exclusive.- Submitting one set of data will nullify the other set.
 	NoticeRules []*NoticeRule `json:"NoticeRules,omitnil,omitempty" name:"NoticeRules"`
+
+	// Call link domain name. It must start with http:// or https:// and must not end with /.
+	JumpDomain *string `json:"JumpDomain,omitnil,omitempty" name:"JumpDomain"`
+
+	// Delivery log switch.
+	// 
+	// Parameter value:
+	// 1: disabled.
+	// 
+	// 2: Enable 
+	DeliverStatus *uint64 `json:"DeliverStatus,omitnil,omitempty" name:"DeliverStatus"`
+
+	// Log shipping configuration.
+	DeliverConfig *DeliverConfig `json:"DeliverConfig,omitnil,omitempty" name:"DeliverConfig"`
+
+	// Login-free operation alarm switch.
+	// 
+	// Parameter value: 
+	// 1: disabled
+	// 2: Enable (enabled by default)
+	AlarmShieldStatus *uint64 `json:"AlarmShieldStatus,omitnil,omitempty" name:"AlarmShieldStatus"`
+
+	// Unify the custom callback parameter settings.
+	// -true: Use the custom callback parameters in the notification content template to override the request header and request body separately configured in the alarm policy.
+	// -false: Prioritize using the request header and request body separately configured in the alarm policy.
+	CallbackPrioritize *bool `json:"CallbackPrioritize,omitnil,omitempty" name:"CallbackPrioritize"`
 }
 
 type ModifyAlarmNoticeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Notification group ID
+	// Notification channel group ID. Obtain the notification channel group ID by searching the notification channel group list (https://www.tencentcloud.com/document/api/614/56462?from_cn_redirect=1).
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitnil,omitempty" name:"AlarmNoticeId"`
+
+	// Tag description list. Tags can be bound to corresponding notification channel groups at the same time by specifying this parameter. It supports up to 10 tag key-value pairs, which cannot be duplicate.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Notification group name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -6615,11 +14918,37 @@ type ModifyAlarmNoticeRequest struct {
 	// Notification recipient
 	NoticeReceivers []*NoticeReceiver `json:"NoticeReceivers,omitnil,omitempty" name:"NoticeReceivers"`
 
-	// API callback information (including WeCom)
+	// API callback information (including WeCom).
 	WebCallbacks []*WebCallback `json:"WebCallbacks,omitnil,omitempty" name:"WebCallbacks"`
 
 	// Notification rulesNote: - Type, NoticeReceivers, and WebCallbacks are one set of configurations, while NoticeRules is another set of configurations. The two sets are mutually exclusive.- Submitting one set of data will nullify the other set.
 	NoticeRules []*NoticeRule `json:"NoticeRules,omitnil,omitempty" name:"NoticeRules"`
+
+	// Call link domain name. It must start with http:// or https:// and must not end with /.
+	JumpDomain *string `json:"JumpDomain,omitnil,omitempty" name:"JumpDomain"`
+
+	// Delivery log switch.
+	// 
+	// Parameter value:
+	// 1: disabled.
+	// 
+	// 2: Enable 
+	DeliverStatus *uint64 `json:"DeliverStatus,omitnil,omitempty" name:"DeliverStatus"`
+
+	// Log shipping configuration.
+	DeliverConfig *DeliverConfig `json:"DeliverConfig,omitnil,omitempty" name:"DeliverConfig"`
+
+	// Login-free operation alarm switch.
+	// 
+	// Parameter value: 
+	// 1: disabled
+	// 2: Enable (enabled by default)
+	AlarmShieldStatus *uint64 `json:"AlarmShieldStatus,omitnil,omitempty" name:"AlarmShieldStatus"`
+
+	// Unify the custom callback parameter settings.
+	// -true: Use the custom callback parameters in the notification content template to override the request header and request body separately configured in the alarm policy.
+	// -false: Prioritize using the request header and request body separately configured in the alarm policy.
+	CallbackPrioritize *bool `json:"CallbackPrioritize,omitnil,omitempty" name:"CallbackPrioritize"`
 }
 
 func (r *ModifyAlarmNoticeRequest) ToJsonString() string {
@@ -6635,11 +14964,17 @@ func (r *ModifyAlarmNoticeRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "AlarmNoticeId")
+	delete(f, "Tags")
 	delete(f, "Name")
 	delete(f, "Type")
 	delete(f, "NoticeReceivers")
 	delete(f, "WebCallbacks")
 	delete(f, "NoticeRules")
+	delete(f, "JumpDomain")
+	delete(f, "DeliverStatus")
+	delete(f, "DeliverConfig")
+	delete(f, "AlarmShieldStatus")
+	delete(f, "CallbackPrioritize")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAlarmNoticeRequest has unknown keys!", "")
 	}
@@ -6670,135 +15005,137 @@ func (r *ModifyAlarmNoticeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAlarmRequestParams struct {
-	// Alarm policy ID
+	// <p>Alert policy ID. - Search the alert policy ID by <a href="https://www.tencentcloud.com/document/product/614/56461?from_cn_redirect=1">obtaining the alarm policy list</a>.</p>
 	AlarmId *string `json:"AlarmId,omitnil,omitempty" name:"AlarmId"`
 
-	// Alarm policy name
+	// <p>Alarm policy name. Supports a maximum of 255 bytes. The '|' character is unsupported.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Monitoring task running time point
+	// <p>Monitoring task execution time point.</p>
 	MonitorTime *MonitorTime `json:"MonitorTime,omitnil,omitempty" name:"MonitorTime"`
 
-	// Trigger condition. Note: - Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
+	// <p>Trigger condition for sending alarm information.</p><p>Note:</p><ul><li>Condition and AlarmLevel are one set of configurations, and MultiConditions is another set of configurations. The two sets are mutually exclusive.</li></ul>
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
-	// Alarm level.0: Warning (Warn); 1: Reminder (Info); 2: Urgent (Critical)
-	// 
-	// Note: - Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
+	// <p>Alarm level.</p><p>0: Warning (Warn); 1: Reminder (Info); 2: Emergency (Critical)</p><p>Note:</p><ul><li>Condition and AlarmLevel are one set of configurations, and MultiConditions are another set of configurations. The two sets are mutually exclusive.</li></ul>
 	AlarmLevel *uint64 `json:"AlarmLevel,omitnil,omitempty" name:"AlarmLevel"`
 
-	// Multiple trigger conditions. Note: - Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
+	// <p>Multiple trigger conditions.</p><p>Note:</p><ul><li>Condition and AlarmLevel are one set of configurations, and MultiConditions are another set of configurations. The two sets of configurations are mutually exclusive.</li></ul>
 	MultiConditions []*MultiCondition `json:"MultiConditions,omitnil,omitempty" name:"MultiConditions"`
 
-	// Alarm persistence cycle. An alarm will be triggered only after the corresponding trigger condition is met for the number of times specified by `TriggerCount`. Value range: 1 to 10
+	// <p>Duration cycle. An alarm is triggered after the trigger conditions are constantly met for TriggerCount cycles. The minimum value is 1, and the maximum value is 2000.</p>
 	TriggerCount *int64 `json:"TriggerCount,omitnil,omitempty" name:"TriggerCount"`
 
-	// Repeated alarm interval in minutes. Value range: 0 to 1440
+	// <p>Alarm repeat cycle. In minutes. Value ranges from 0 to 1440.</p>
 	AlarmPeriod *int64 `json:"AlarmPeriod,omitnil,omitempty" name:"AlarmPeriod"`
 
-	// List of associated alarm notification templates
-	AlarmNoticeIds []*string `json:"AlarmNoticeIds,omitnil,omitempty" name:"AlarmNoticeIds"`
-
-	// Monitoring object list
+	// <p>Monitoring object list.</p>
 	AlarmTargets []*AlarmTarget `json:"AlarmTargets,omitnil,omitempty" name:"AlarmTargets"`
 
-	// Whether to enable the alarm policy
+	// <p>Whether to enable alarm policy.</p>
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// This parameter has been deprecated. Use the Status parameter to control whether to enable the alarm policy.
+	// <p>This parameter has been deprecated, please use the Status parameter to control whether to enable the alarm policy.</p>
+	//
+	// Deprecated: Enable is deprecated.
 	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Custom alarm content
+	// <p>User-defined alarm content</p>
 	MessageTemplate *string `json:"MessageTemplate,omitnil,omitempty" name:"MessageTemplate"`
 
-	// Custom callback
+	// <p>user-defined callback</p>
 	CallBack *CallBackInfo `json:"CallBack,omitnil,omitempty" name:"CallBack"`
 
-	// Multi-Dimensional analysis
+	// <p>Multi-dimensional analysis</p>
 	Analysis []*AnalysisDimensional `json:"Analysis,omitnil,omitempty" name:"Analysis"`
 
-	// Group trigger status. true: enabled; false: disabled (default)
+	// <p>Group trigger status. true: enabled, false: disabled (default)</p>
 	GroupTriggerStatus *bool `json:"GroupTriggerStatus,omitnil,omitempty" name:"GroupTriggerStatus"`
 
-	// Grouping trigger conditions.
+	// <p>Group trigger conditions.</p>
 	GroupTriggerCondition []*string `json:"GroupTriggerCondition,omitnil,omitempty" name:"GroupTriggerCondition"`
 
-	// Tag description list, by specifying this parameter, you can simultaneously bind a Tag to the corresponding alarm policy. Up to 10 Tag key-value pairs are supported, and they must be unique.
+	// <p>Tag description list, by specifying this parameter, you can simultaneously bind a tag to the corresponding alarm policy. Up to 10 tag key-value pairs are supported, and no duplicate key-value pairs are allowed.</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Monitored Object Type. 0: common monitoring objects for execution statements; 1: separately selected monitoring objects for each execution statement.When the value is 1, the number of AlarmTargets Elements (XML) cannot exceed 10, and the Numbers in AlarmTargets must be continuous positive integers starting from 1, without duplication.
+	// <p>Monitored object type. 0: Common monitoring object for execution statements; 1: Each execution statement selects its own monitored object.<br>When the value is 1, the number of elements in AlarmTargets cannot exceed 10. The Number in AlarmTargets must be consecutive positive integers starting from 1 and must be unique.</p>
 	MonitorObjectType *uint64 `json:"MonitorObjectType,omitnil,omitempty" name:"MonitorObjectType"`
 
-	// Alarm additional classification information list.
-	// The number of Classifications elements cannot exceed 20.The Key of Classifications element must not be empty and duplicated, and its length cannot exceed 50 characters, complying with the regular expression ^[a-z]([a-z0-9_]{0,49})$.The Value length of Classifications element cannot exceed 200 characters.
+	// <p>Alert additional classification information list.<br>Number of Classifications Elements cannot exceed 20.<br>The Key of Classifications elements cannot be empty, must be unique, length cannot exceed 50 characters, and complies with the regular expression <code>^[a-z]([a-z0-9_]{0,49})$</code>.<br>Value of Classifications elements cannot exceed 200 characters.</p>
 	Classifications []*AlarmClassification `json:"Classifications,omitnil,omitempty" name:"Classifications"`
+
+	// <p>List of associated CLS alarm notification channel groups. - Search the list of associated alarm notification channel groups via <a href="https://www.tencentcloud.com/document/product/614/56462?from_cn_redirect=1">Query notification channel group list</a>. It is mutually exclusive with MonitorNotice.</p>
+	AlarmNoticeIds []*string `json:"AlarmNoticeIds,omitnil,omitempty" name:"AlarmNoticeIds"`
+
+	// <p>The associated observability platform notification template is mutually exclusive with the AlarmNoticeIds parameter and cannot include both.</p>
+	MonitorNotice *MonitorNotice `json:"MonitorNotice,omitnil,omitempty" name:"MonitorNotice"`
 }
 
 type ModifyAlarmRequest struct {
 	*tchttp.BaseRequest
 	
-	// Alarm policy ID
+	// <p>Alert policy ID. - Search the alert policy ID by <a href="https://www.tencentcloud.com/document/product/614/56461?from_cn_redirect=1">obtaining the alarm policy list</a>.</p>
 	AlarmId *string `json:"AlarmId,omitnil,omitempty" name:"AlarmId"`
 
-	// Alarm policy name
+	// <p>Alarm policy name. Supports a maximum of 255 bytes. The '|' character is unsupported.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Monitoring task running time point
+	// <p>Monitoring task execution time point.</p>
 	MonitorTime *MonitorTime `json:"MonitorTime,omitnil,omitempty" name:"MonitorTime"`
 
-	// Trigger condition. Note: - Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
+	// <p>Trigger condition for sending alarm information.</p><p>Note:</p><ul><li>Condition and AlarmLevel are one set of configurations, and MultiConditions is another set of configurations. The two sets are mutually exclusive.</li></ul>
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
-	// Alarm level.0: Warning (Warn); 1: Reminder (Info); 2: Urgent (Critical)
-	// 
-	// Note: - Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
+	// <p>Alarm level.</p><p>0: Warning (Warn); 1: Reminder (Info); 2: Emergency (Critical)</p><p>Note:</p><ul><li>Condition and AlarmLevel are one set of configurations, and MultiConditions are another set of configurations. The two sets are mutually exclusive.</li></ul>
 	AlarmLevel *uint64 `json:"AlarmLevel,omitnil,omitempty" name:"AlarmLevel"`
 
-	// Multiple trigger conditions. Note: - Condition and AlarmLevel are one set of configurations, MultiConditions is another set of configurations. The two sets of configurations are mutually exclusive.
+	// <p>Multiple trigger conditions.</p><p>Note:</p><ul><li>Condition and AlarmLevel are one set of configurations, and MultiConditions are another set of configurations. The two sets of configurations are mutually exclusive.</li></ul>
 	MultiConditions []*MultiCondition `json:"MultiConditions,omitnil,omitempty" name:"MultiConditions"`
 
-	// Alarm persistence cycle. An alarm will be triggered only after the corresponding trigger condition is met for the number of times specified by `TriggerCount`. Value range: 1 to 10
+	// <p>Duration cycle. An alarm is triggered after the trigger conditions are constantly met for TriggerCount cycles. The minimum value is 1, and the maximum value is 2000.</p>
 	TriggerCount *int64 `json:"TriggerCount,omitnil,omitempty" name:"TriggerCount"`
 
-	// Repeated alarm interval in minutes. Value range: 0 to 1440
+	// <p>Alarm repeat cycle. In minutes. Value ranges from 0 to 1440.</p>
 	AlarmPeriod *int64 `json:"AlarmPeriod,omitnil,omitempty" name:"AlarmPeriod"`
 
-	// List of associated alarm notification templates
-	AlarmNoticeIds []*string `json:"AlarmNoticeIds,omitnil,omitempty" name:"AlarmNoticeIds"`
-
-	// Monitoring object list
+	// <p>Monitoring object list.</p>
 	AlarmTargets []*AlarmTarget `json:"AlarmTargets,omitnil,omitempty" name:"AlarmTargets"`
 
-	// Whether to enable the alarm policy
+	// <p>Whether to enable alarm policy.</p>
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// This parameter has been deprecated. Use the Status parameter to control whether to enable the alarm policy.
+	// <p>This parameter has been deprecated, please use the Status parameter to control whether to enable the alarm policy.</p>
 	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Custom alarm content
+	// <p>User-defined alarm content</p>
 	MessageTemplate *string `json:"MessageTemplate,omitnil,omitempty" name:"MessageTemplate"`
 
-	// Custom callback
+	// <p>user-defined callback</p>
 	CallBack *CallBackInfo `json:"CallBack,omitnil,omitempty" name:"CallBack"`
 
-	// Multi-Dimensional analysis
+	// <p>Multi-dimensional analysis</p>
 	Analysis []*AnalysisDimensional `json:"Analysis,omitnil,omitempty" name:"Analysis"`
 
-	// Group trigger status. true: enabled; false: disabled (default)
+	// <p>Group trigger status. true: enabled, false: disabled (default)</p>
 	GroupTriggerStatus *bool `json:"GroupTriggerStatus,omitnil,omitempty" name:"GroupTriggerStatus"`
 
-	// Grouping trigger conditions.
+	// <p>Group trigger conditions.</p>
 	GroupTriggerCondition []*string `json:"GroupTriggerCondition,omitnil,omitempty" name:"GroupTriggerCondition"`
 
-	// Tag description list, by specifying this parameter, you can simultaneously bind a Tag to the corresponding alarm policy. Up to 10 Tag key-value pairs are supported, and they must be unique.
+	// <p>Tag description list, by specifying this parameter, you can simultaneously bind a tag to the corresponding alarm policy. Up to 10 tag key-value pairs are supported, and no duplicate key-value pairs are allowed.</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Monitored Object Type. 0: common monitoring objects for execution statements; 1: separately selected monitoring objects for each execution statement.When the value is 1, the number of AlarmTargets Elements (XML) cannot exceed 10, and the Numbers in AlarmTargets must be continuous positive integers starting from 1, without duplication.
+	// <p>Monitored object type. 0: Common monitoring object for execution statements; 1: Each execution statement selects its own monitored object.<br>When the value is 1, the number of elements in AlarmTargets cannot exceed 10. The Number in AlarmTargets must be consecutive positive integers starting from 1 and must be unique.</p>
 	MonitorObjectType *uint64 `json:"MonitorObjectType,omitnil,omitempty" name:"MonitorObjectType"`
 
-	// Alarm additional classification information list.
-	// The number of Classifications elements cannot exceed 20.The Key of Classifications element must not be empty and duplicated, and its length cannot exceed 50 characters, complying with the regular expression ^[a-z]([a-z0-9_]{0,49})$.The Value length of Classifications element cannot exceed 200 characters.
+	// <p>Alert additional classification information list.<br>Number of Classifications Elements cannot exceed 20.<br>The Key of Classifications elements cannot be empty, must be unique, length cannot exceed 50 characters, and complies with the regular expression <code>^[a-z]([a-z0-9_]{0,49})$</code>.<br>Value of Classifications elements cannot exceed 200 characters.</p>
 	Classifications []*AlarmClassification `json:"Classifications,omitnil,omitempty" name:"Classifications"`
+
+	// <p>List of associated CLS alarm notification channel groups. - Search the list of associated alarm notification channel groups via <a href="https://www.tencentcloud.com/document/product/614/56462?from_cn_redirect=1">Query notification channel group list</a>. It is mutually exclusive with MonitorNotice.</p>
+	AlarmNoticeIds []*string `json:"AlarmNoticeIds,omitnil,omitempty" name:"AlarmNoticeIds"`
+
+	// <p>The associated observability platform notification template is mutually exclusive with the AlarmNoticeIds parameter and cannot include both.</p>
+	MonitorNotice *MonitorNotice `json:"MonitorNotice,omitnil,omitempty" name:"MonitorNotice"`
 }
 
 func (r *ModifyAlarmRequest) ToJsonString() string {
@@ -6821,7 +15158,6 @@ func (r *ModifyAlarmRequest) FromJsonString(s string) error {
 	delete(f, "MultiConditions")
 	delete(f, "TriggerCount")
 	delete(f, "AlarmPeriod")
-	delete(f, "AlarmNoticeIds")
 	delete(f, "AlarmTargets")
 	delete(f, "Status")
 	delete(f, "Enable")
@@ -6833,6 +15169,8 @@ func (r *ModifyAlarmRequest) FromJsonString(s string) error {
 	delete(f, "Tags")
 	delete(f, "MonitorObjectType")
 	delete(f, "Classifications")
+	delete(f, "AlarmNoticeIds")
+	delete(f, "MonitorNotice")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAlarmRequest has unknown keys!", "")
 	}
@@ -6863,13 +15201,13 @@ func (r *ModifyAlarmResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAlarmShieldRequestParams struct {
-	// Blocking rule ID.
+	// Blocking rule ID. Retrieve the blocking rule ID via [retrieve alert masking configuration rules](https://www.tencentcloud.com/document/api/614/103650?from_cn_redirect=1).
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Notification channel group ID.
+	// id of the notification channel group. Retrieve alert masking configuration rules (https://www.tencentcloud.com/document/api/614/103650?from_cn_redirect=1) to get the id of the notification channel group.
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitnil,omitempty" name:"AlarmNoticeId"`
 
-	// Block start time (second-level timestamp).
+	// Block start time, second-level (s) timestamp.
 	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Block end time (second-level timestamp).
@@ -6885,19 +15223,20 @@ type ModifyAlarmShieldRequestParams struct {
 	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
 
 	// Rule status. Only when the rule status is in effect (status:1) can it be modified to expired (status:2).
+	// Enumerate: 0 (inactive), 1 (active), 2 (invalid)
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type ModifyAlarmShieldRequest struct {
 	*tchttp.BaseRequest
 	
-	// Blocking rule ID.
+	// Blocking rule ID. Retrieve the blocking rule ID via [retrieve alert masking configuration rules](https://www.tencentcloud.com/document/api/614/103650?from_cn_redirect=1).
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Notification channel group ID.
+	// id of the notification channel group. Retrieve alert masking configuration rules (https://www.tencentcloud.com/document/api/614/103650?from_cn_redirect=1) to get the id of the notification channel group.
 	AlarmNoticeId *string `json:"AlarmNoticeId,omitnil,omitempty" name:"AlarmNoticeId"`
 
-	// Block start time (second-level timestamp).
+	// Block start time, second-level (s) timestamp.
 	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Block end time (second-level timestamp).
@@ -6913,6 +15252,7 @@ type ModifyAlarmShieldRequest struct {
 	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
 
 	// Rule status. Only when the rule status is in effect (status:1) can it be modified to expired (status:2).
+	// Enumerate: 0 (inactive), 1 (active), 2 (invalid)
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
@@ -6965,11 +15305,119 @@ func (r *ModifyAlarmShieldResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyCloudProductLogCollectionRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Cloud product identifier, support enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS.
+	AssumerName *string `json:"AssumerName,omitnil,omitempty" name:"AssumerName"`
+
+	// Log type, support enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// Cloud product region. Data discrepancies exist in the format of region input parameters for different log types (LogType). Refer to the following example:
+	// -All log types of CDS: ap-guangzhou
+	// - CDB-AUDIT: gz
+	// - TDSQL-C-AUDIT: gz
+	// - MongoDB-AUDIT: gz
+	// - MongoDB-SlowLog:ap-guangzhou
+	// - MongoDB-ErrorLog:ap-guangzhou
+	// - TDMYSQL-SLOW:gz
+	// -All log types of DCDB: gz
+	// -All log types of MariaDB: gz
+	// -PostgreSQL all log types: gz
+	// -BH all log types: overseas-polaris (Hong Kong (China) and other)/fsi-polaris (financial district)/general-polaris (general zone)/intl-sg-prod (international site)
+	// -All log types of APIS: gz
+	CloudProductRegion *string `json:"CloudProductRegion,omitnil,omitempty" name:"CloudProductRegion"`
+
+	// Logging configuration extended information, normally used to store additional log shipping configuration
+	Extend *string `json:"Extend,omitnil,omitempty" name:"Extend"`
+}
+
+type ModifyCloudProductLogCollectionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Cloud product identifier, support enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS.
+	AssumerName *string `json:"AssumerName,omitnil,omitempty" name:"AssumerName"`
+
+	// Log type, support enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// Cloud product region. Data discrepancies exist in the format of region input parameters for different log types (LogType). Refer to the following example:
+	// -All log types of CDS: ap-guangzhou
+	// - CDB-AUDIT: gz
+	// - TDSQL-C-AUDIT: gz
+	// - MongoDB-AUDIT: gz
+	// - MongoDB-SlowLog:ap-guangzhou
+	// - MongoDB-ErrorLog:ap-guangzhou
+	// - TDMYSQL-SLOW:gz
+	// -All log types of DCDB: gz
+	// -All log types of MariaDB: gz
+	// -PostgreSQL all log types: gz
+	// -BH all log types: overseas-polaris (Hong Kong (China) and other)/fsi-polaris (financial district)/general-polaris (general zone)/intl-sg-prod (international site)
+	// -All log types of APIS: gz
+	CloudProductRegion *string `json:"CloudProductRegion,omitnil,omitempty" name:"CloudProductRegion"`
+
+	// Logging configuration extended information, normally used to store additional log shipping configuration
+	Extend *string `json:"Extend,omitnil,omitempty" name:"Extend"`
+}
+
+func (r *ModifyCloudProductLogCollectionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudProductLogCollectionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "AssumerName")
+	delete(f, "LogType")
+	delete(f, "CloudProductRegion")
+	delete(f, "Extend")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCloudProductLogCollectionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCloudProductLogCollectionResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyCloudProductLogCollectionResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCloudProductLogCollectionResponseParams `json:"Response"`
+}
+
+func (r *ModifyCloudProductLogCollectionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCloudProductLogCollectionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyConfigRequestParams struct {
 	// Collection rule configuration ID, accessed through [Access collection rule configuration](https://intl.cloud.tencent.com/document/product/614/58616?from_cn_redirect=1).
 	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
 
 	// Collection rule configuration name
+	// - Cannot contain special character '|'
+	// -Length cannot exceed 255 characters. Excess will be truncated.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Log collection path containing the filename
@@ -6985,7 +15433,8 @@ type ModifyConfigRequestParams struct {
 	// Collection path blocklist
 	ExcludePaths []*ExcludePathInfo `json:"ExcludePaths,omitnil,omitempty" name:"ExcludePaths"`
 
-	// Log topic (TopicId) associated with collection configuration
+	// Log topic associated with collection configuration (TopicId)
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	Output *string `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Custom parsing string, serialized as a JSON string.
@@ -6997,6 +15446,12 @@ type ModifyConfigRequestParams struct {
 	// Sample:
 	// `{\"ClsAgentFileTimeout\":0,\"ClsAgentMaxDepth\":10,\"ClsAgentParseFailMerge\":true}`
 	AdvancedConfig *string `json:"AdvancedConfig,omitnil,omitempty" name:"AdvancedConfig"`
+
+	// Log input type (<span style="color:red; font-weight:bold">Note: required for Windows scenario and only supports file and windows_event type</span>)
+	// -file type collection
+	// -windows event collection
+	// -syslog: System log collection
+	InputType *string `json:"InputType,omitnil,omitempty" name:"InputType"`
 }
 
 type ModifyConfigRequest struct {
@@ -7006,6 +15461,8 @@ type ModifyConfigRequest struct {
 	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
 
 	// Collection rule configuration name
+	// - Cannot contain special character '|'
+	// -Length cannot exceed 255 characters. Excess will be truncated.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Log collection path containing the filename
@@ -7021,7 +15478,8 @@ type ModifyConfigRequest struct {
 	// Collection path blocklist
 	ExcludePaths []*ExcludePathInfo `json:"ExcludePaths,omitnil,omitempty" name:"ExcludePaths"`
 
-	// Log topic (TopicId) associated with collection configuration
+	// Log topic associated with collection configuration (TopicId)
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	Output *string `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Custom parsing string, serialized as a JSON string.
@@ -7033,6 +15491,12 @@ type ModifyConfigRequest struct {
 	// Sample:
 	// `{\"ClsAgentFileTimeout\":0,\"ClsAgentMaxDepth\":10,\"ClsAgentParseFailMerge\":true}`
 	AdvancedConfig *string `json:"AdvancedConfig,omitnil,omitempty" name:"AdvancedConfig"`
+
+	// Log input type (<span style="color:red; font-weight:bold">Note: required for Windows scenario and only supports file and windows_event type</span>)
+	// -file type collection
+	// -windows event collection
+	// -syslog: System log collection
+	InputType *string `json:"InputType,omitnil,omitempty" name:"InputType"`
 }
 
 func (r *ModifyConfigRequest) ToJsonString() string {
@@ -7056,6 +15520,7 @@ func (r *ModifyConfigRequest) FromJsonString(s string) error {
 	delete(f, "Output")
 	delete(f, "UserDefineRule")
 	delete(f, "AdvancedConfig")
+	delete(f, "InputType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyConfigRequest has unknown keys!", "")
 	}
@@ -7085,8 +15550,240 @@ func (r *ModifyConfigResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyConsoleRequestParams struct {
+	// <p>DataSight Console ConsoleId</p>
+	ConsoleId *string `json:"ConsoleId,omitnil,omitempty" name:"ConsoleId"`
+
+	// <p>Access method: public - public network, internal - private network</p>
+	AccessMode []*string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
+
+	// <p>Login methods</p><p>Enumeration value:</p><ul><li>0: Account password authentication</li><li>1: Anonymous login</li><li>2: Third-party authentication login</li></ul>
+	LoginMode *uint64 `json:"LoginMode,omitnil,omitempty" name:"LoginMode"`
+
+	// <p>Custom domain name prefix</p>
+	DomainPrefix *string `json:"DomainPrefix,omitnil,omitempty" name:"DomainPrefix"`
+
+	// <p>User account information</p><p>"Account password authentication" is required for login methods.</p>
+	Accounts []*ConsoleAccount `json:"Accounts,omitnil,omitempty" name:"Accounts"`
+
+	// <p>Anonymous login account information</p><p>"Anonymous login" is required for the login method.</p>
+	AnonymousLogin *AnonymousLoginInfo `json:"AnonymousLogin,omitnil,omitempty" name:"AnonymousLogin"`
+
+	// <p>Private network type, defaults to 0</p>
+	IntranetType *uint64 `json:"IntranetType,omitnil,omitempty" name:"IntranetType"`
+
+	// <p>Private network region</p>
+	IntranetRegion *string `json:"IntranetRegion,omitnil,omitempty" name:"IntranetRegion"`
+
+	// <p>Private network VpcId</p>
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Private subnet SubnetId</p>
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Auth user role information</p><p>"Third-party authentication login" is required for the login method.</p>
+	AuthRoles []*AuthRoleInfo `json:"AuthRoles,omitnil,omitempty" name:"AuthRoles"`
+
+	// <p>Custom hidden parameter</p>
+	HideParams []*string `json:"HideParams,omitnil,omitempty" name:"HideParams"`
+
+	// <p>Access Control Rule</p><p>The "third-party authentication login" login method requires the AccessMode: internal && Action: ACCEPT rule.</p>
+	AccessControlRules []*AccessControlRule `json:"AccessControlRules,omitnil,omitempty" name:"AccessControlRules"`
+
+	// <p>Remark</p>
+	Remarks *string `json:"Remarks,omitnil,omitempty" name:"Remarks"`
+
+	// <p>Custom display menu</p>
+	Menus []*string `json:"Menus,omitnil,omitempty" name:"Menus"`
+}
+
+type ModifyConsoleRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>DataSight Console ConsoleId</p>
+	ConsoleId *string `json:"ConsoleId,omitnil,omitempty" name:"ConsoleId"`
+
+	// <p>Access method: public - public network, internal - private network</p>
+	AccessMode []*string `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
+
+	// <p>Login methods</p><p>Enumeration value:</p><ul><li>0: Account password authentication</li><li>1: Anonymous login</li><li>2: Third-party authentication login</li></ul>
+	LoginMode *uint64 `json:"LoginMode,omitnil,omitempty" name:"LoginMode"`
+
+	// <p>Custom domain name prefix</p>
+	DomainPrefix *string `json:"DomainPrefix,omitnil,omitempty" name:"DomainPrefix"`
+
+	// <p>User account information</p><p>"Account password authentication" is required for login methods.</p>
+	Accounts []*ConsoleAccount `json:"Accounts,omitnil,omitempty" name:"Accounts"`
+
+	// <p>Anonymous login account information</p><p>"Anonymous login" is required for the login method.</p>
+	AnonymousLogin *AnonymousLoginInfo `json:"AnonymousLogin,omitnil,omitempty" name:"AnonymousLogin"`
+
+	// <p>Private network type, defaults to 0</p>
+	IntranetType *uint64 `json:"IntranetType,omitnil,omitempty" name:"IntranetType"`
+
+	// <p>Private network region</p>
+	IntranetRegion *string `json:"IntranetRegion,omitnil,omitempty" name:"IntranetRegion"`
+
+	// <p>Private network VpcId</p>
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// <p>Private subnet SubnetId</p>
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// <p>Auth user role information</p><p>"Third-party authentication login" is required for the login method.</p>
+	AuthRoles []*AuthRoleInfo `json:"AuthRoles,omitnil,omitempty" name:"AuthRoles"`
+
+	// <p>Custom hidden parameter</p>
+	HideParams []*string `json:"HideParams,omitnil,omitempty" name:"HideParams"`
+
+	// <p>Access Control Rule</p><p>The "third-party authentication login" login method requires the AccessMode: internal && Action: ACCEPT rule.</p>
+	AccessControlRules []*AccessControlRule `json:"AccessControlRules,omitnil,omitempty" name:"AccessControlRules"`
+
+	// <p>Remark</p>
+	Remarks *string `json:"Remarks,omitnil,omitempty" name:"Remarks"`
+
+	// <p>Custom display menu</p>
+	Menus []*string `json:"Menus,omitnil,omitempty" name:"Menus"`
+}
+
+func (r *ModifyConsoleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConsoleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ConsoleId")
+	delete(f, "AccessMode")
+	delete(f, "LoginMode")
+	delete(f, "DomainPrefix")
+	delete(f, "Accounts")
+	delete(f, "AnonymousLogin")
+	delete(f, "IntranetType")
+	delete(f, "IntranetRegion")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "AuthRoles")
+	delete(f, "HideParams")
+	delete(f, "AccessControlRules")
+	delete(f, "Remarks")
+	delete(f, "Menus")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyConsoleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyConsoleResponseParams struct {
+	// <p>DataSight Console Id</p>
+	ConsoleId *string `json:"ConsoleId,omitnil,omitempty" name:"ConsoleId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyConsoleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyConsoleResponseParams `json:"Response"`
+}
+
+func (r *ModifyConsoleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConsoleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyConsumerGroupRequestParams struct {
+	// Consumer group flag to be updated.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Consumer heartbeat timeout (seconds).
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// List of log topics included in the updated consumer group.
+	Topics []*string `json:"Topics,omitnil,omitempty" name:"Topics"`
+
+	// Logset ID (the logset to which a log topic belongs).
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+}
+
+type ModifyConsumerGroupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Consumer group flag to be updated.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Consumer heartbeat timeout (seconds).
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// List of log topics included in the updated consumer group.
+	Topics []*string `json:"Topics,omitnil,omitempty" name:"Topics"`
+
+	// Logset ID (the logset to which a log topic belongs).
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+}
+
+func (r *ModifyConsumerGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConsumerGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ConsumerGroup")
+	delete(f, "Timeout")
+	delete(f, "Topics")
+	delete(f, "LogsetId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyConsumerGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyConsumerGroupResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyConsumerGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyConsumerGroupResponseParams `json:"Response"`
+}
+
+func (r *ModifyConsumerGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConsumerGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyConsumerRequestParams struct {
-	// Log topic ID bound to the task
+	// Log topic Id bound to the delivery task.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Whether the shipping task takes effect (default: no)
@@ -7103,12 +15800,23 @@ type ModifyConsumerRequestParams struct {
 
 	// Compression method during delivery. Valid values: 0, 2, and 3. [0: NONE; 2: SNAPPY; 3: LZ4]
 	Compression *int64 `json:"Compression,omitnil,omitempty" name:"Compression"`
+
+	// ARN [Create role](https://www.tencentcloud.com/document/product/598/19381?from_cn_redirect=1)
+	RoleArn *string `json:"RoleArn,omitnil,omitempty" name:"RoleArn"`
+
+	// external ID
+	ExternalId *string `json:"ExternalId,omitnil,omitempty" name:"ExternalId"`
+
+	// Advanced configuration
+	AdvancedConfig *AdvancedConsumerConfiguration `json:"AdvancedConfig,omitnil,omitempty" name:"AdvancedConfig"`
 }
 
 type ModifyConsumerRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log topic ID bound to the task
+	// Log topic Id bound to the delivery task.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Whether the shipping task takes effect (default: no)
@@ -7125,6 +15833,15 @@ type ModifyConsumerRequest struct {
 
 	// Compression method during delivery. Valid values: 0, 2, and 3. [0: NONE; 2: SNAPPY; 3: LZ4]
 	Compression *int64 `json:"Compression,omitnil,omitempty" name:"Compression"`
+
+	// ARN [Create role](https://www.tencentcloud.com/document/product/598/19381?from_cn_redirect=1)
+	RoleArn *string `json:"RoleArn,omitnil,omitempty" name:"RoleArn"`
+
+	// external ID
+	ExternalId *string `json:"ExternalId,omitnil,omitempty" name:"ExternalId"`
+
+	// Advanced configuration
+	AdvancedConfig *AdvancedConsumerConfiguration `json:"AdvancedConfig,omitnil,omitempty" name:"AdvancedConfig"`
 }
 
 func (r *ModifyConsumerRequest) ToJsonString() string {
@@ -7145,6 +15862,9 @@ func (r *ModifyConsumerRequest) FromJsonString(s string) error {
 	delete(f, "Content")
 	delete(f, "Ckafka")
 	delete(f, "Compression")
+	delete(f, "RoleArn")
+	delete(f, "ExternalId")
+	delete(f, "AdvancedConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyConsumerRequest has unknown keys!", "")
 	}
@@ -7175,33 +15895,93 @@ func (r *ModifyConsumerResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyCosRechargeRequestParams struct {
-	// COS import configuration ID.
+	// COS import configuration Id.
+	// 
+	// -Obtain the cos import configuration Id through the [Get cos import configuration](https://www.tencentcloud.com/document/product/614/88099?from_cn_redirect=1) API.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// ID of the log topic.
+	// Log topic Id.
+	// 
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// COS import task name.
+	// COS import task name, supports up to 128 bytes.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Whether the configuration is enabled. `0`: Not enabled, `1`: Enabled
+	// Task status. Valid values: 0: disabled; 1: enabled.
 	Enable *uint64 `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// COS bucket, see the supported [bucket naming conventions](https://www.tencentcloud.com/document/product/436/13312?from_cn_redirect=1).	
+	// 
+	// -Get COS buckets via [GET Service (List Buckets)](https://www.tencentcloud.com/document/product/436/8291?from_cn_redirect=1).
+	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
+
+	// The region where the COS bucket is located, see the supported [region list](https://www.tencentcloud.com/document/product/436/6224?from_cn_redirect=1).
+	BucketRegion *string `json:"BucketRegion,omitnil,omitempty" name:"BucketRegion"`
+
+	// Prefix of the folder where COS files are located. When it is an empty string, all files in the bucket will be delivered.
+	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
+
+	// Types of logs collected. json_log indicates logs in JSON format; delimiter_log indicates logs in delimiter-separated values format; minimalist_log indicates single-line full-text logs. The default value is minimalist_log.
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// Parsing format. Valid values: "", "gzip", "lzop", "snappy". Empty string means no compression.
+	Compress *string `json:"Compress,omitnil,omitempty" name:"Compress"`
+
+	// Extraction rule. If ExtractRule is set, then LogType must be set.
+	ExtractRuleInfo *ExtractRuleInfo `json:"ExtractRuleInfo,omitnil,omitempty" name:"ExtractRuleInfo"`
+
+	// COS import task type. Valid values: 1: one-time import task; 2: continuous import task.
+	TaskType *uint64 `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// Metadata. Buckets and objects are supported.
+	Metadata []*string `json:"Metadata,omitnil,omitempty" name:"Metadata"`
 }
 
 type ModifyCosRechargeRequest struct {
 	*tchttp.BaseRequest
 	
-	// COS import configuration ID.
+	// COS import configuration Id.
+	// 
+	// -Obtain the cos import configuration Id through the [Get cos import configuration](https://www.tencentcloud.com/document/product/614/88099?from_cn_redirect=1) API.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// ID of the log topic.
+	// Log topic Id.
+	// 
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// COS import task name.
+	// COS import task name, supports up to 128 bytes.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Whether the configuration is enabled. `0`: Not enabled, `1`: Enabled
+	// Task status. Valid values: 0: disabled; 1: enabled.
 	Enable *uint64 `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// COS bucket, see the supported [bucket naming conventions](https://www.tencentcloud.com/document/product/436/13312?from_cn_redirect=1).	
+	// 
+	// -Get COS buckets via [GET Service (List Buckets)](https://www.tencentcloud.com/document/product/436/8291?from_cn_redirect=1).
+	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
+
+	// The region where the COS bucket is located, see the supported [region list](https://www.tencentcloud.com/document/product/436/6224?from_cn_redirect=1).
+	BucketRegion *string `json:"BucketRegion,omitnil,omitempty" name:"BucketRegion"`
+
+	// Prefix of the folder where COS files are located. When it is an empty string, all files in the bucket will be delivered.
+	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
+
+	// Types of logs collected. json_log indicates logs in JSON format; delimiter_log indicates logs in delimiter-separated values format; minimalist_log indicates single-line full-text logs. The default value is minimalist_log.
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// Parsing format. Valid values: "", "gzip", "lzop", "snappy". Empty string means no compression.
+	Compress *string `json:"Compress,omitnil,omitempty" name:"Compress"`
+
+	// Extraction rule. If ExtractRule is set, then LogType must be set.
+	ExtractRuleInfo *ExtractRuleInfo `json:"ExtractRuleInfo,omitnil,omitempty" name:"ExtractRuleInfo"`
+
+	// COS import task type. Valid values: 1: one-time import task; 2: continuous import task.
+	TaskType *uint64 `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// Metadata. Buckets and objects are supported.
+	Metadata []*string `json:"Metadata,omitnil,omitempty" name:"Metadata"`
 }
 
 func (r *ModifyCosRechargeRequest) ToJsonString() string {
@@ -7220,6 +16000,14 @@ func (r *ModifyCosRechargeRequest) FromJsonString(s string) error {
 	delete(f, "TopicId")
 	delete(f, "Name")
 	delete(f, "Enable")
+	delete(f, "Bucket")
+	delete(f, "BucketRegion")
+	delete(f, "Prefix")
+	delete(f, "LogType")
+	delete(f, "Compress")
+	delete(f, "ExtractRuleInfo")
+	delete(f, "TaskType")
+	delete(f, "Metadata")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCosRechargeRequest has unknown keys!", "")
 	}
@@ -7249,14 +16037,183 @@ func (r *ModifyCosRechargeResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type ModifyDataTransformRequestParams struct {
-	// Data processing task ID
-	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+type ModifyDashboardRequestParams struct {
+	// Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
+	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
 
-	// Data processing task name
+	// dashboard name
+	DashboardName *string `json:"DashboardName,omitnil,omitempty" name:"DashboardName"`
+
+	// Dashboard configuration data
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// List of tag descriptions. When you specify this parameter, tags can be bound to the corresponding log topic at the same time. It supports up to 10 tag key-value pairs, and one resource can only be bound to one tag key.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+type ModifyDashboardRequest struct {
+	*tchttp.BaseRequest
+	
+	// Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
+	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
+
+	// dashboard name
+	DashboardName *string `json:"DashboardName,omitnil,omitempty" name:"DashboardName"`
+
+	// Dashboard configuration data
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// List of tag descriptions. When you specify this parameter, tags can be bound to the corresponding log topic at the same time. It supports up to 10 tag key-value pairs, and one resource can only be bound to one tag key.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+func (r *ModifyDashboardRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDashboardRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DashboardId")
+	delete(f, "DashboardName")
+	delete(f, "Data")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDashboardRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDashboardResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyDashboardResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDashboardResponseParams `json:"Response"`
+}
+
+func (r *ModifyDashboardResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDashboardResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDashboardSubscribeRequestParams struct {
+	// Dashboard subscription id. Obtain the id through the [Get Dashboard Subscription List](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) api.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) api.
+	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
+
+	// Dashboard subscription name. Supports a maximum of 128 characters and does not support the '|' character.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Data processing statement
+	// Subscription time cron expression, in format {seconds} {minutes} {hours} {date} {month} {weekday}; (valid data: {minutes} {hours} {date} {month} {weekday})
+	Cron *string `json:"Cron,omitnil,omitempty" name:"Cron"`
+
+	// Dashboard subscription data.
+	SubscribeData *DashboardSubscribeData `json:"SubscribeData,omitnil,omitempty" name:"SubscribeData"`
+}
+
+type ModifyDashboardSubscribeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Dashboard subscription id. Obtain the id through the [Get Dashboard Subscription List](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) api.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) api.
+	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
+
+	// Dashboard subscription name. Supports a maximum of 128 characters and does not support the '|' character.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Subscription time cron expression, in format {seconds} {minutes} {hours} {date} {month} {weekday}; (valid data: {minutes} {hours} {date} {month} {weekday})
+	Cron *string `json:"Cron,omitnil,omitempty" name:"Cron"`
+
+	// Dashboard subscription data.
+	SubscribeData *DashboardSubscribeData `json:"SubscribeData,omitnil,omitempty" name:"SubscribeData"`
+}
+
+func (r *ModifyDashboardSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDashboardSubscribeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "DashboardId")
+	delete(f, "Name")
+	delete(f, "Cron")
+	delete(f, "SubscribeData")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDashboardSubscribeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDashboardSubscribeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyDashboardSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDashboardSubscribeResponseParams `json:"Response"`
+}
+
+func (r *ModifyDashboardSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDashboardSubscribeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDataTransformRequestParams struct {
+	// Data processing task ID
+	// -Get the data processing task Id by [searching data processing task list basic information](https://www.tencentcloud.com/document/product/614/72182?from_cn_redirect=1).
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Processing task name
+	// -Get the name of a data processing task by [searching data processing task list basic information](https://www.tencentcloud.com/document/product/614/72182?from_cn_redirect=1).
+	// 
+	// Name limit
+	// -Cannot be an empty string
+	// -Cannot contain character '|'
+	// -Up to 255 characters
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Processing statement. When FuncType is 2, EtlContent must use [log_auto_output](https://www.tencentcloud.com/document/product/614/70733?from_cn_redirect=1#b3c58797-4825-4807-bef4-68106e25024f). 
+	// 
+	// Other reference documents:
+	// 
+	// -[Create a processing task](https://www.tencentcloud.com/document/product/614/63940?from_cn_redirect=1) 
+	// -[Function overview](https://www.tencentcloud.com/document/product/614/70395?from_cn_redirect=1)
 	EtlContent *string `json:"EtlContent,omitnil,omitempty" name:"EtlContent"`
 
 	// Task status. Valid values: 1 (enabled) and 2 (disabled).
@@ -7265,20 +16222,47 @@ type ModifyDataTransformRequestParams struct {
 	// Destination topic ID and alias of the data processing task
 	DstResources []*DataTransformResouceInfo `json:"DstResources,omitnil,omitempty" name:"DstResources"`
 
+	// Whether to discard log data after the limit is exceeded
+	BackupGiveUpData *bool `json:"BackupGiveUpData,omitnil,omitempty" name:"BackupGiveUpData"`
+
 	// Whether to enable delivery service log. 1 for disabled, 2 for enabled
 	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// Whether to keep the failure log status. Valid values: 1: no; 2: yes.
+	KeepFailureLog *uint64 `json:"KeepFailureLog,omitnil,omitempty" name:"KeepFailureLog"`
+
+	// Field name of a failed log.
+	FailureLogKey *string `json:"FailureLogKey,omitnil,omitempty" name:"FailureLogKey"`
+
+	// External data source information
+	DataTransformSqlDataSources []*DataTransformSqlDataSource `json:"DataTransformSqlDataSources,omitnil,omitempty" name:"DataTransformSqlDataSources"`
+
+	// Set environment variable
+	EnvInfos []*EnvInfo `json:"EnvInfos,omitnil,omitempty" name:"EnvInfos"`
 }
 
 type ModifyDataTransformRequest struct {
 	*tchttp.BaseRequest
 	
 	// Data processing task ID
+	// -Get the data processing task Id by [searching data processing task list basic information](https://www.tencentcloud.com/document/product/614/72182?from_cn_redirect=1).
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Data processing task name
+	// Processing task name
+	// -Get the name of a data processing task by [searching data processing task list basic information](https://www.tencentcloud.com/document/product/614/72182?from_cn_redirect=1).
+	// 
+	// Name limit
+	// -Cannot be an empty string
+	// -Cannot contain character '|'
+	// -Up to 255 characters
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Data processing statement
+	// Processing statement. When FuncType is 2, EtlContent must use [log_auto_output](https://www.tencentcloud.com/document/product/614/70733?from_cn_redirect=1#b3c58797-4825-4807-bef4-68106e25024f). 
+	// 
+	// Other reference documents:
+	// 
+	// -[Create a processing task](https://www.tencentcloud.com/document/product/614/63940?from_cn_redirect=1) 
+	// -[Function overview](https://www.tencentcloud.com/document/product/614/70395?from_cn_redirect=1)
 	EtlContent *string `json:"EtlContent,omitnil,omitempty" name:"EtlContent"`
 
 	// Task status. Valid values: 1 (enabled) and 2 (disabled).
@@ -7287,8 +16271,23 @@ type ModifyDataTransformRequest struct {
 	// Destination topic ID and alias of the data processing task
 	DstResources []*DataTransformResouceInfo `json:"DstResources,omitnil,omitempty" name:"DstResources"`
 
+	// Whether to discard log data after the limit is exceeded
+	BackupGiveUpData *bool `json:"BackupGiveUpData,omitnil,omitempty" name:"BackupGiveUpData"`
+
 	// Whether to enable delivery service log. 1 for disabled, 2 for enabled
 	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// Whether to keep the failure log status. Valid values: 1: no; 2: yes.
+	KeepFailureLog *uint64 `json:"KeepFailureLog,omitnil,omitempty" name:"KeepFailureLog"`
+
+	// Field name of a failed log.
+	FailureLogKey *string `json:"FailureLogKey,omitnil,omitempty" name:"FailureLogKey"`
+
+	// External data source information
+	DataTransformSqlDataSources []*DataTransformSqlDataSource `json:"DataTransformSqlDataSources,omitnil,omitempty" name:"DataTransformSqlDataSources"`
+
+	// Set environment variable
+	EnvInfos []*EnvInfo `json:"EnvInfos,omitnil,omitempty" name:"EnvInfos"`
 }
 
 func (r *ModifyDataTransformRequest) ToJsonString() string {
@@ -7308,7 +16307,12 @@ func (r *ModifyDataTransformRequest) FromJsonString(s string) error {
 	delete(f, "EtlContent")
 	delete(f, "EnableFlag")
 	delete(f, "DstResources")
+	delete(f, "BackupGiveUpData")
 	delete(f, "HasServicesLog")
+	delete(f, "KeepFailureLog")
+	delete(f, "FailureLogKey")
+	delete(f, "DataTransformSqlDataSources")
+	delete(f, "EnvInfos")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDataTransformRequest has unknown keys!", "")
 	}
@@ -7338,11 +16342,365 @@ func (r *ModifyDataTransformResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type ModifyIndexRequestParams struct {
-	// Log topic ID
+type ModifyDlcDeliverRequestParams struct {
+	// <p>log topic id</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li></ul>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// It does not take effect by default
+	// <p>Task id.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Name: Length not exceeding 64 characters, starts with a letter, accepts 0-9, a-z, A-Z, _, -, Chinese character.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Delivery Type. Valid values: 0: batch delivery; 1: real-time delivery.</p>
+	DeliverType *uint64 `json:"DeliverType,omitnil,omitempty" name:"DeliverType"`
+
+	// <p>Start time of the delivery time range</p>
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time of the delivery time range. If empty, it means unlimited time.</p>
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Delivery file size in MB. Required when DeliverType=0. Valid range: 5 &lt;= MaxSize &lt;= 256.</p>
+	MaxSize *uint64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
+
+	// <p>Delivery interval in seconds. Required when DeliverType=0. Valid range: 300 &lt;= Interval &lt;= 900.</p>
+	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// <p>dlc configuration message</p>
+	DlcInfo *DlcInfo `json:"DlcInfo,omitnil,omitempty" name:"DlcInfo"`
+
+	// <p>Whether to enable the delivery service log. 1: Disabled, 2: Enabled. Enabled by default.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// <p>Task status.</p><p>Enumeration values: </p><ul><li>1: Running, </li><li>2: Stop.</li></ul>
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+type ModifyDlcDeliverRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>log topic id</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Task id.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Name: Length not exceeding 64 characters, starts with a letter, accepts 0-9, a-z, A-Z, _, -, Chinese character.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Delivery Type. Valid values: 0: batch delivery; 1: real-time delivery.</p>
+	DeliverType *uint64 `json:"DeliverType,omitnil,omitempty" name:"DeliverType"`
+
+	// <p>Start time of the delivery time range</p>
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time of the delivery time range. If empty, it means unlimited time.</p>
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Delivery file size in MB. Required when DeliverType=0. Valid range: 5 &lt;= MaxSize &lt;= 256.</p>
+	MaxSize *uint64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
+
+	// <p>Delivery interval in seconds. Required when DeliverType=0. Valid range: 300 &lt;= Interval &lt;= 900.</p>
+	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// <p>dlc configuration message</p>
+	DlcInfo *DlcInfo `json:"DlcInfo,omitnil,omitempty" name:"DlcInfo"`
+
+	// <p>Whether to enable the delivery service log. 1: Disabled, 2: Enabled. Enabled by default.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// <p>Task status.</p><p>Enumeration values: </p><ul><li>1: Running, </li><li>2: Stop.</li></ul>
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+func (r *ModifyDlcDeliverRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDlcDeliverRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "TaskId")
+	delete(f, "Name")
+	delete(f, "DeliverType")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "MaxSize")
+	delete(f, "Interval")
+	delete(f, "DlcInfo")
+	delete(f, "HasServicesLog")
+	delete(f, "Status")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDlcDeliverRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDlcDeliverResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyDlcDeliverResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDlcDeliverResponseParams `json:"Response"`
+}
+
+func (r *ModifyDlcDeliverResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDlcDeliverResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyEsRechargeRequestParams struct {
+	// Import task id.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Name: Length not exceeding 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Index information. Different indexes can be separated by English commas and support wildcards.
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// Elasticsearch Query Statement.
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// es cluster configuration.
+	EsInfo *EsInfo `json:"EsInfo,omitnil,omitempty" name:"EsInfo"`
+
+	// es import information.
+	ImportInfo *EsImportInfo `json:"ImportInfo,omitnil,omitempty" name:"ImportInfo"`
+
+	// Field information of es import time.
+	TimeInfo *EsTimeInfo `json:"TimeInfo,omitnil,omitempty" name:"TimeInfo"`
+
+	// Task status. 1: Running, 2: Suspended.
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Whether to enable service log shipping. Valid values: 1: disable; 2: enable.
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+type ModifyEsRechargeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Import task id.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Log topic ID.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Name: Length not exceeding 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Index information. Different indexes can be separated by English commas and support wildcards.
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// Elasticsearch Query Statement.
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// es cluster configuration.
+	EsInfo *EsInfo `json:"EsInfo,omitnil,omitempty" name:"EsInfo"`
+
+	// es import information.
+	ImportInfo *EsImportInfo `json:"ImportInfo,omitnil,omitempty" name:"ImportInfo"`
+
+	// Field information of es import time.
+	TimeInfo *EsTimeInfo `json:"TimeInfo,omitnil,omitempty" name:"TimeInfo"`
+
+	// Task status. 1: Running, 2: Suspended.
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Whether to enable service log shipping. Valid values: 1: disable; 2: enable.
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+func (r *ModifyEsRechargeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyEsRechargeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "TopicId")
+	delete(f, "Name")
+	delete(f, "Index")
+	delete(f, "Query")
+	delete(f, "EsInfo")
+	delete(f, "ImportInfo")
+	delete(f, "TimeInfo")
+	delete(f, "Status")
+	delete(f, "HasServicesLog")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyEsRechargeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyEsRechargeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyEsRechargeResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyEsRechargeResponseParams `json:"Response"`
+}
+
+func (r *ModifyEsRechargeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyEsRechargeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyHostMetricConfigRequestParams struct {
+	// Metric Topic id
+	// - Get the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note: BizType 0: log topic (default value), 1: metric topic.
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Collection configuration ID.
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+
+	// Name
+	// 
+	// -Length not exceeding 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Machine group id list. Supports up to 100 machine groups.
+	MachineGroupIds []*string `json:"MachineGroupIds,omitnil,omitempty" name:"MachineGroupIds"`
+
+	// Collection frequency. Unit: ms. Minimum support 5000 ms.
+	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// Collection items. Support "cpu", "mem", "net", "disk", "system". **Currently only support: ALL collection items require configuration**.
+	// - cpu:CPU
+	// -mem: memory
+	// -net: Network
+	// -disk
+	// -system
+	HostMetricItems []*HostMetricItem `json:"HostMetricItems,omitnil,omitempty" name:"HostMetricItems"`
+}
+
+type ModifyHostMetricConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Metric Topic id
+	// - Get the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note: BizType 0: log topic (default value), 1: metric topic.
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Collection configuration ID.
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+
+	// Name
+	// 
+	// -Length not exceeding 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Machine group id list. Supports up to 100 machine groups.
+	MachineGroupIds []*string `json:"MachineGroupIds,omitnil,omitempty" name:"MachineGroupIds"`
+
+	// Collection frequency. Unit: ms. Minimum support 5000 ms.
+	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// Collection items. Support "cpu", "mem", "net", "disk", "system". **Currently only support: ALL collection items require configuration**.
+	// - cpu:CPU
+	// -mem: memory
+	// -net: Network
+	// -disk
+	// -system
+	HostMetricItems []*HostMetricItem `json:"HostMetricItems,omitnil,omitempty" name:"HostMetricItems"`
+}
+
+func (r *ModifyHostMetricConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyHostMetricConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "ConfigId")
+	delete(f, "Name")
+	delete(f, "MachineGroupIds")
+	delete(f, "Interval")
+	delete(f, "HostMetricItems")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyHostMetricConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyHostMetricConfigResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyHostMetricConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyHostMetricConfigResponseParams `json:"Response"`
+}
+
+func (r *ModifyHostMetricConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyHostMetricConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyIndexRequestParams struct {
+	// Log topic Id.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Index status. false: close index, true: enable index.
+	// Once enabled, retrieval and analysis of logs will generate indexing traffic, index storage and corresponding fees. [Billing details](https://www.tencentcloud.com/document/product/614/45802?from_cn_redirect=1#.E8.AE.A1.E8.B4.B9.E9.A1.B9)
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Index rule
@@ -7358,15 +16716,20 @@ type ModifyIndexRequestParams struct {
 	// * `1`: Full-text indexing includes all metadata fields.
 	// * `2`: Full-text indexing does not include metadata fields.
 	MetadataFlag *uint64 `json:"MetadataFlag,omitnil,omitempty" name:"MetadataFlag"`
+
+	// Custom log parsing exception storage fields
+	CoverageField *string `json:"CoverageField,omitnil,omitempty" name:"CoverageField"`
 }
 
 type ModifyIndexRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log topic ID
+	// Log topic Id.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// It does not take effect by default
+	// Index status. false: close index, true: enable index.
+	// Once enabled, retrieval and analysis of logs will generate indexing traffic, index storage and corresponding fees. [Billing details](https://www.tencentcloud.com/document/product/614/45802?from_cn_redirect=1#.E8.AE.A1.E8.B4.B9.E9.A1.B9)
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Index rule
@@ -7382,6 +16745,9 @@ type ModifyIndexRequest struct {
 	// * `1`: Full-text indexing includes all metadata fields.
 	// * `2`: Full-text indexing does not include metadata fields.
 	MetadataFlag *uint64 `json:"MetadataFlag,omitnil,omitempty" name:"MetadataFlag"`
+
+	// Custom log parsing exception storage fields
+	CoverageField *string `json:"CoverageField,omitnil,omitempty" name:"CoverageField"`
 }
 
 func (r *ModifyIndexRequest) ToJsonString() string {
@@ -7401,6 +16767,7 @@ func (r *ModifyIndexRequest) FromJsonString(s string) error {
 	delete(f, "Rule")
 	delete(f, "IncludeInternalFields")
 	delete(f, "MetadataFlag")
+	delete(f, "CoverageField")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyIndexRequest has unknown keys!", "")
 	}
@@ -7430,28 +16797,94 @@ func (r *ModifyIndexResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyKafkaConsumerGroupOffsetRequestParams struct {
+
+}
+
+type ModifyKafkaConsumerGroupOffsetRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *ModifyKafkaConsumerGroupOffsetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyKafkaConsumerGroupOffsetRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyKafkaConsumerGroupOffsetRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyKafkaConsumerGroupOffsetResponseParams struct {
+	// Status code. 0: Success, -1: Failure.
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyKafkaConsumerGroupOffsetResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyKafkaConsumerGroupOffsetResponseParams `json:"Response"`
+}
+
+func (r *ModifyKafkaConsumerGroupOffsetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyKafkaConsumerGroupOffsetResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyKafkaConsumerRequestParams struct {
-	// Log Topic ID
+	// <p>log topic id</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1">Create Log Topic</a>.</li></ul>
 	FromTopicId *string `json:"FromTopicId,omitnil,omitempty" name:"FromTopicId"`
 
-	// Compression mode [0: NONE; 2: SNAPPY; 3: LZ4]
+	// <p>Compression mode. 0: No compression; 2: Use Snappy compression; 3: Use LZ4 compression</p>
 	Compression *int64 `json:"Compression,omitnil,omitempty" name:"Compression"`
 
-	// Kafka protocol consumer data format
+	// <p>kafka protocol consumption data format</p>
 	ConsumerContent *KafkaConsumerContent `json:"ConsumerContent,omitnil,omitempty" name:"ConsumerContent"`
+
+	// <p>Whether to enable the delivery service log. 1: Disabled, 2: Enabled.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// <p>Range type of consumption, 0: latest, 1: history + latest</p>
+	ScopeType *uint64 `json:"ScopeType,omitnil,omitempty" name:"ScopeType"`
 }
 
 type ModifyKafkaConsumerRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log Topic ID
+	// <p>log topic id</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1">Create Log Topic</a>.</li></ul>
 	FromTopicId *string `json:"FromTopicId,omitnil,omitempty" name:"FromTopicId"`
 
-	// Compression mode [0: NONE; 2: SNAPPY; 3: LZ4]
+	// <p>Compression mode. 0: No compression; 2: Use Snappy compression; 3: Use LZ4 compression</p>
 	Compression *int64 `json:"Compression,omitnil,omitempty" name:"Compression"`
 
-	// Kafka protocol consumer data format
+	// <p>kafka protocol consumption data format</p>
 	ConsumerContent *KafkaConsumerContent `json:"ConsumerContent,omitnil,omitempty" name:"ConsumerContent"`
+
+	// <p>Whether to enable the delivery service log. 1: Disabled, 2: Enabled.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// <p>Range type of consumption, 0: latest, 1: history + latest</p>
+	ScopeType *uint64 `json:"ScopeType,omitnil,omitempty" name:"ScopeType"`
 }
 
 func (r *ModifyKafkaConsumerRequest) ToJsonString() string {
@@ -7469,6 +16902,8 @@ func (r *ModifyKafkaConsumerRequest) FromJsonString(s string) error {
 	delete(f, "FromTopicId")
 	delete(f, "Compression")
 	delete(f, "ConsumerContent")
+	delete(f, "HasServicesLog")
+	delete(f, "ScopeType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyKafkaConsumerRequest has unknown keys!", "")
 	}
@@ -7499,31 +16934,38 @@ func (r *ModifyKafkaConsumerResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyKafkaRechargeRequestParams struct {
-	// Kafka data import configuration ID
+	// Import configuration Id.
+	// -Create a Kafka Data Subscription Task (https://www.tencentcloud.com/document/product/614/94448?from_cn_redirect=1) to obtain the Kafka import configuration Id.
+	// -Get the Kafka import configuration Id by searching the [Kafka Data Subscription Task list](https://www.tencentcloud.com/document/product/614/94446?from_cn_redirect=1).
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Target topic ID
+	// Import the target topic ID of CLS.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Kafka data import configuration name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka)
+	// Import Kafka type. 0: Tencent Cloud CKafka; 1: user-built kafka.
 	KafkaType *uint64 `json:"KafkaType,omitnil,omitempty" name:"KafkaType"`
 
-	// CKafka instance ID, which is required when `KafkaType` is set to `0`
+	// Tencent Cloud CKafka instance ID. Required when KafkaType is 0.
+	// - Obtain the instance id by searching the instance list information (https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
 	KafkaInstance *string `json:"KafkaInstance,omitnil,omitempty" name:"KafkaInstance"`
 
-	// Service address
+	// Service address, which is required when KafkaType is 1.
 	ServerAddr *string `json:"ServerAddr,omitnil,omitempty" name:"ServerAddr"`
 
-	// Whether the service address uses an encrypted connection
+	// Whether ServerAddr is an encrypted connection. Required when KafkaType is 1.
 	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitnil,omitempty" name:"IsEncryptionAddr"`
 
-	// Encryption access protocol, which is required when IsEncryptionAddr` is set to `true`
+	// Encrypted access protocol. It is required when the parameter KafkaType is 1 and the parameter IsEncryptionAddr is true.
 	Protocol *KafkaProtocolInfo `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-	// List of Kafka topics to import data from. Separate multiple topics with commas (,).
+	// List of Kafka-related topics to be imported by the user, separated by commas.
+	// 
+	// -When Kafka Type is Tencent Cloud CKafka: Get TopicName by searching the topic list (https://www.tencentcloud.com/document/product/597/40847?from_cn_redirect=1).
 	UserKafkaTopics *string `json:"UserKafkaTopics,omitnil,omitempty" name:"UserKafkaTopics"`
 
 	// Kafka consumer group name
@@ -7532,38 +16974,48 @@ type ModifyKafkaRechargeRequestParams struct {
 	// Log import rule
 	LogRechargeRule *LogRechargeRuleInfo `json:"LogRechargeRule,omitnil,omitempty" name:"LogRechargeRule"`
 
-	// Import control. Valid values: 1 (suspend) and 2 (resume).
+	// Import control, 1: suspend; 2: start.
 	StatusControl *uint64 `json:"StatusControl,omitnil,omitempty" name:"StatusControl"`
+
+	// User kafka extended information
+	UserKafkaMeta *UserKafkaMeta `json:"UserKafkaMeta,omitnil,omitempty" name:"UserKafkaMeta"`
 }
 
 type ModifyKafkaRechargeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Kafka data import configuration ID
+	// Import configuration Id.
+	// -Create a Kafka Data Subscription Task (https://www.tencentcloud.com/document/product/614/94448?from_cn_redirect=1) to obtain the Kafka import configuration Id.
+	// -Get the Kafka import configuration Id by searching the [Kafka Data Subscription Task list](https://www.tencentcloud.com/document/product/614/94446?from_cn_redirect=1).
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Target topic ID
+	// Import the target topic ID of CLS.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Kafka data import configuration name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka)
+	// Import Kafka type. 0: Tencent Cloud CKafka; 1: user-built kafka.
 	KafkaType *uint64 `json:"KafkaType,omitnil,omitempty" name:"KafkaType"`
 
-	// CKafka instance ID, which is required when `KafkaType` is set to `0`
+	// Tencent Cloud CKafka instance ID. Required when KafkaType is 0.
+	// - Obtain the instance id by searching the instance list information (https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
 	KafkaInstance *string `json:"KafkaInstance,omitnil,omitempty" name:"KafkaInstance"`
 
-	// Service address
+	// Service address, which is required when KafkaType is 1.
 	ServerAddr *string `json:"ServerAddr,omitnil,omitempty" name:"ServerAddr"`
 
-	// Whether the service address uses an encrypted connection
+	// Whether ServerAddr is an encrypted connection. Required when KafkaType is 1.
 	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitnil,omitempty" name:"IsEncryptionAddr"`
 
-	// Encryption access protocol, which is required when IsEncryptionAddr` is set to `true`
+	// Encrypted access protocol. It is required when the parameter KafkaType is 1 and the parameter IsEncryptionAddr is true.
 	Protocol *KafkaProtocolInfo `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-	// List of Kafka topics to import data from. Separate multiple topics with commas (,).
+	// List of Kafka-related topics to be imported by the user, separated by commas.
+	// 
+	// -When Kafka Type is Tencent Cloud CKafka: Get TopicName by searching the topic list (https://www.tencentcloud.com/document/product/597/40847?from_cn_redirect=1).
 	UserKafkaTopics *string `json:"UserKafkaTopics,omitnil,omitempty" name:"UserKafkaTopics"`
 
 	// Kafka consumer group name
@@ -7572,8 +17024,11 @@ type ModifyKafkaRechargeRequest struct {
 	// Log import rule
 	LogRechargeRule *LogRechargeRuleInfo `json:"LogRechargeRule,omitnil,omitempty" name:"LogRechargeRule"`
 
-	// Import control. Valid values: 1 (suspend) and 2 (resume).
+	// Import control, 1: suspend; 2: start.
 	StatusControl *uint64 `json:"StatusControl,omitnil,omitempty" name:"StatusControl"`
+
+	// User kafka extended information
+	UserKafkaMeta *UserKafkaMeta `json:"UserKafkaMeta,omitnil,omitempty" name:"UserKafkaMeta"`
 }
 
 func (r *ModifyKafkaRechargeRequest) ToJsonString() string {
@@ -7600,6 +17055,7 @@ func (r *ModifyKafkaRechargeRequest) FromJsonString(s string) error {
 	delete(f, "ConsumerGroupName")
 	delete(f, "LogRechargeRule")
 	delete(f, "StatusControl")
+	delete(f, "UserKafkaMeta")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyKafkaRechargeRequest has unknown keys!", "")
 	}
@@ -7630,10 +17086,10 @@ func (r *ModifyKafkaRechargeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyLogsetRequestParams struct {
-	// Logset ID
+	// Log Set Id. It can be obtained through the [logset list](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1).
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
-	// Logset name
+	// Log set name. Supports a maximum of 255 characters. Unsupported character: `|`.
 	LogsetName *string `json:"LogsetName,omitnil,omitempty" name:"LogsetName"`
 
 	// Tag key-value pair bound to logset. Up to 10 tag key-value pairs are supported, and a resource can be bound to only one tag key at any time.
@@ -7643,10 +17099,10 @@ type ModifyLogsetRequestParams struct {
 type ModifyLogsetRequest struct {
 	*tchttp.BaseRequest
 	
-	// Logset ID
+	// Log Set Id. It can be obtained through the [logset list](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1).
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
-	// Logset name
+	// Log set name. Supports a maximum of 255 characters. Unsupported character: `|`.
 	LogsetName *string `json:"LogsetName,omitnil,omitempty" name:"LogsetName"`
 
 	// Tag key-value pair bound to logset. Up to 10 tag key-value pairs are supported, and a resource can be bound to only one tag key at any time.
@@ -7698,13 +17154,19 @@ func (r *ModifyLogsetResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyMachineGroupRequestParams struct {
-	// Machine group ID
+	// Machine group Id
+	// -Obtain the machine group Id through [Get Machine Group List](https://www.tencentcloud.com/document/product/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
-	// Machine group name
+	// machine group name
+	// Input limit:
+	// -Cannot be an empty string
+	// -Cannot contain character '|'
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 
-	// Machine group type
+	// Machine group type. 
+	// Type: ip; Values contains the string list of IP machines.
+	// Type: label. Values contains the string list of tag machine groups.
 	MachineGroupType *MachineGroupTypeInfo `json:"MachineGroupType,omitnil,omitempty" name:"MachineGroupType"`
 
 	// Tag list
@@ -7713,16 +17175,18 @@ type ModifyMachineGroupRequestParams struct {
 	// Whether to enable automatic update for the machine group
 	AutoUpdate *bool `json:"AutoUpdate,omitnil,omitempty" name:"AutoUpdate"`
 
-	// Update start time. We recommend you update LogListener during off-peak hours.
+	// Start time of upgrade. It is suggested to upgrade LogListener in the off-peak period of the business.
+	// Time format: HH:mm:ss.
 	UpdateStartTime *string `json:"UpdateStartTime,omitnil,omitempty" name:"UpdateStartTime"`
 
-	// Update end time. We recommend you update LogListener during off-peak hours.
+	// End time of upgrade. It is suggested to upgrade LogListener in the off-peak period of the business.
+	// Time format: HH:mm:ss.
 	UpdateEndTime *string `json:"UpdateEndTime,omitnil,omitempty" name:"UpdateEndTime"`
 
 	// Whether to enable the service log to record the logs generated by the LogListener service itself. After it is enabled, the internal logset `cls_service_logging` and the `loglistener_status`, `loglistener_alarm`, and `loglistener_business` log topics will be created, which will not incur fees.
 	ServiceLogging *bool `json:"ServiceLogging,omitnil,omitempty" name:"ServiceLogging"`
 
-	// Regular offline cleaning time for machines in machine group
+	// Periodic offline cleanup time for machines in a machine group. Unit: day
 	DelayCleanupTime *int64 `json:"DelayCleanupTime,omitnil,omitempty" name:"DelayCleanupTime"`
 
 	// Metadata information list of a machine group
@@ -7732,13 +17196,19 @@ type ModifyMachineGroupRequestParams struct {
 type ModifyMachineGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Machine group ID
+	// Machine group Id
+	// -Obtain the machine group Id through [Get Machine Group List](https://www.tencentcloud.com/document/product/614/56438?from_cn_redirect=1).
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
-	// Machine group name
+	// machine group name
+	// Input limit:
+	// -Cannot be an empty string
+	// -Cannot contain character '|'
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 
-	// Machine group type
+	// Machine group type. 
+	// Type: ip; Values contains the string list of IP machines.
+	// Type: label. Values contains the string list of tag machine groups.
 	MachineGroupType *MachineGroupTypeInfo `json:"MachineGroupType,omitnil,omitempty" name:"MachineGroupType"`
 
 	// Tag list
@@ -7747,16 +17217,18 @@ type ModifyMachineGroupRequest struct {
 	// Whether to enable automatic update for the machine group
 	AutoUpdate *bool `json:"AutoUpdate,omitnil,omitempty" name:"AutoUpdate"`
 
-	// Update start time. We recommend you update LogListener during off-peak hours.
+	// Start time of upgrade. It is suggested to upgrade LogListener in the off-peak period of the business.
+	// Time format: HH:mm:ss.
 	UpdateStartTime *string `json:"UpdateStartTime,omitnil,omitempty" name:"UpdateStartTime"`
 
-	// Update end time. We recommend you update LogListener during off-peak hours.
+	// End time of upgrade. It is suggested to upgrade LogListener in the off-peak period of the business.
+	// Time format: HH:mm:ss.
 	UpdateEndTime *string `json:"UpdateEndTime,omitnil,omitempty" name:"UpdateEndTime"`
 
 	// Whether to enable the service log to record the logs generated by the LogListener service itself. After it is enabled, the internal logset `cls_service_logging` and the `loglistener_status`, `loglistener_alarm`, and `loglistener_business` log topics will be created, which will not incur fees.
 	ServiceLogging *bool `json:"ServiceLogging,omitnil,omitempty" name:"ServiceLogging"`
 
-	// Regular offline cleaning time for machines in machine group
+	// Periodic offline cleanup time for machines in a machine group. Unit: day
 	DelayCleanupTime *int64 `json:"DelayCleanupTime,omitnil,omitempty" name:"DelayCleanupTime"`
 
 	// Metadata information list of a machine group
@@ -7814,11 +17286,662 @@ func (r *ModifyMachineGroupResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type ModifyScheduledSqlRequestParams struct {
-	// Task ID
+type ModifyMetricConfigRequestParams struct {
+	// Metric Topic id
+	// - Get the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note: BizType 0: log topic (default value), 1: metric topic.
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Metric collection configuration ID.
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+
+	// Collection configuration source. Support: `0`, `1`.
+	// -Self-built k8s
+	// - 1:TKE
+	Source *uint64 `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// Machine group ID.
+	GroupIds []*string `json:"GroupIds,omitnil,omitempty" name:"GroupIds"`
+
+	// Operation status. Valid values: 0: applied; 1: paused.
+	Operate *uint64 `json:"Operate,omitnil,omitempty" name:"Operate"`
+
+	// Collection object. This parameter is valid only when Flag is 0.
+	Spec *MetricSpec `json:"Spec,omitnil,omitempty" name:"Spec"`
+
+	// Label processing. This parameter is valid only when Flag is 0.
+	MetricRelabels []*Relabeling `json:"MetricRelabels,omitnil,omitempty" name:"MetricRelabels"`
+
+	// Custom metadata. This parameter is valid only when Flag is 0.
+	MetricLabel *MetricConfigLabel `json:"MetricLabel,omitnil,omitempty" name:"MetricLabel"`
+
+	// Communication protocol. Valid values: HTTP and HTTPS. This parameter is valid only when Flag is 0.
+	Scheme *string `json:"Scheme,omitnil,omitempty" name:"Scheme"`
+
+	// Collection frequency. This parameter is valid only when Flag=0.
+	// -Check format: `^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$`
+	// -Default: 60s
+	ScrapeInterval *string `json:"ScrapeInterval,omitnil,omitempty" name:"ScrapeInterval"`
+
+	// Collection timeout. This parameter is valid only when Flag=0.
+	// -Check format: `^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$`
+	ScrapeTimeout *string `json:"ScrapeTimeout,omitnil,omitempty" name:"ScrapeTimeout"`
+
+	// How Prometheus handles tag conflicts. This parameter is valid only when Flag=0 && Type=1 and supports `true`, `false`.
+	// -`false`: Rename conflicting tags in configuration data
+	// -`true`: Ignore server-side tag conflicts
+	HonorLabels *bool `json:"HonorLabels,omitnil,omitempty" name:"HonorLabels"`
+
+	// Collection configuration, which is a string in YAML format. It is required when Flag is 1.
+	YamlSpec *MetricYamlSpec `json:"YamlSpec,omitnil,omitempty" name:"YamlSpec"`
+}
+
+type ModifyMetricConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Metric Topic id
+	// - Get the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1). Note: BizType 0: log topic (default value), 1: metric topic.
+	// - Obtain the log topic Id through [Create Log Topic](https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1). Note that BizType 0: log topic (default value), 1: metric topic.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Metric collection configuration ID.
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+
+	// Collection configuration source. Support: `0`, `1`.
+	// -Self-built k8s
+	// - 1:TKE
+	Source *uint64 `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// Machine group ID.
+	GroupIds []*string `json:"GroupIds,omitnil,omitempty" name:"GroupIds"`
+
+	// Operation status. Valid values: 0: applied; 1: paused.
+	Operate *uint64 `json:"Operate,omitnil,omitempty" name:"Operate"`
+
+	// Collection object. This parameter is valid only when Flag is 0.
+	Spec *MetricSpec `json:"Spec,omitnil,omitempty" name:"Spec"`
+
+	// Label processing. This parameter is valid only when Flag is 0.
+	MetricRelabels []*Relabeling `json:"MetricRelabels,omitnil,omitempty" name:"MetricRelabels"`
+
+	// Custom metadata. This parameter is valid only when Flag is 0.
+	MetricLabel *MetricConfigLabel `json:"MetricLabel,omitnil,omitempty" name:"MetricLabel"`
+
+	// Communication protocol. Valid values: HTTP and HTTPS. This parameter is valid only when Flag is 0.
+	Scheme *string `json:"Scheme,omitnil,omitempty" name:"Scheme"`
+
+	// Collection frequency. This parameter is valid only when Flag=0.
+	// -Check format: `^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$`
+	// -Default: 60s
+	ScrapeInterval *string `json:"ScrapeInterval,omitnil,omitempty" name:"ScrapeInterval"`
+
+	// Collection timeout. This parameter is valid only when Flag=0.
+	// -Check format: `^(((\d+)y)?((\d+)w)?((\d+)d)?((\d+)h)?((\d+)m)?((\d+)s)?((\d+)ms)?|0)$`
+	ScrapeTimeout *string `json:"ScrapeTimeout,omitnil,omitempty" name:"ScrapeTimeout"`
+
+	// How Prometheus handles tag conflicts. This parameter is valid only when Flag=0 && Type=1 and supports `true`, `false`.
+	// -`false`: Rename conflicting tags in configuration data
+	// -`true`: Ignore server-side tag conflicts
+	HonorLabels *bool `json:"HonorLabels,omitnil,omitempty" name:"HonorLabels"`
+
+	// Collection configuration, which is a string in YAML format. It is required when Flag is 1.
+	YamlSpec *MetricYamlSpec `json:"YamlSpec,omitnil,omitempty" name:"YamlSpec"`
+}
+
+func (r *ModifyMetricConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMetricConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "ConfigId")
+	delete(f, "Source")
+	delete(f, "GroupIds")
+	delete(f, "Operate")
+	delete(f, "Spec")
+	delete(f, "MetricRelabels")
+	delete(f, "MetricLabel")
+	delete(f, "Scheme")
+	delete(f, "ScrapeInterval")
+	delete(f, "ScrapeTimeout")
+	delete(f, "HonorLabels")
+	delete(f, "YamlSpec")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMetricConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMetricConfigResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyMetricConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyMetricConfigResponseParams `json:"Response"`
+}
+
+func (r *ModifyMetricConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMetricConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMetricSubscribeRequestParams struct {
+	// Log topic ID of a metric collection task. This parameter is required.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Metric collection task ID. This parameter is required.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Source log topic
+	// Name. It can contain a maximum of 64 characters and should start with a letter. Digits (0-9), uppercase letters (A-Z), lowercase letters (a-z), underscores (_), and Chinese characters are allowed.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Cloud product namespace.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Metric configuration information.
+	Metrics []*MetricConfig `json:"Metrics,omitnil,omitempty" name:"Metrics"`
+
+	// Instance configuration information.
+	InstanceInfo *InstanceConfig `json:"InstanceInfo,omitnil,omitempty" name:"InstanceInfo"`
+
+	// Task status.
+	// 
+	// 1: disabled
+	// 
+	// 2: Enable
+	Enable *uint64 `json:"Enable,omitnil,omitempty" name:"Enable"`
+}
+
+type ModifyMetricSubscribeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Log topic ID of a metric collection task. This parameter is required.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Metric collection task ID. This parameter is required.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Name. It can contain a maximum of 64 characters and should start with a letter. Digits (0-9), uppercase letters (A-Z), lowercase letters (a-z), underscores (_), and Chinese characters are allowed.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Cloud product namespace.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// Metric configuration information.
+	Metrics []*MetricConfig `json:"Metrics,omitnil,omitempty" name:"Metrics"`
+
+	// Instance configuration information.
+	InstanceInfo *InstanceConfig `json:"InstanceInfo,omitnil,omitempty" name:"InstanceInfo"`
+
+	// Task status.
+	// 
+	// 1: disabled
+	// 
+	// 2: Enable
+	Enable *uint64 `json:"Enable,omitnil,omitempty" name:"Enable"`
+}
+
+func (r *ModifyMetricSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMetricSubscribeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "TaskId")
+	delete(f, "Name")
+	delete(f, "Namespace")
+	delete(f, "Metrics")
+	delete(f, "InstanceInfo")
+	delete(f, "Enable")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMetricSubscribeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMetricSubscribeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyMetricSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyMetricSubscribeResponseParams `json:"Response"`
+}
+
+func (r *ModifyMetricSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMetricSubscribeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNetworkApplicationRequestParams struct {
+	// <p>Web application id</p>
+	NetworkAppId *string `json:"NetworkAppId,omitnil,omitempty" name:"NetworkAppId"`
+
+	// <p>Network application name: Length not exceeding 64 characters, name must be unique.</p><ul><li>Can only contain the following characters:<ul><li>Letters (a-z and A-Z)</li><li>Numbers</li><li>Underscore</li><li>Hyphen (minus sign)</li><li>Chinese characters</li></ul></li><li>At least one character</li><li>Cannot contain spaces</li><li>Cannot contain other special characters (such as @, #, $, % etc.)</li></ul>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type ModifyNetworkApplicationRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Web application id</p>
+	NetworkAppId *string `json:"NetworkAppId,omitnil,omitempty" name:"NetworkAppId"`
+
+	// <p>Network application name: Length not exceeding 64 characters, name must be unique.</p><ul><li>Can only contain the following characters:<ul><li>Letters (a-z and A-Z)</li><li>Numbers</li><li>Underscore</li><li>Hyphen (minus sign)</li><li>Chinese characters</li></ul></li><li>At least one character</li><li>Cannot contain spaces</li><li>Cannot contain other special characters (such as @, #, $, % etc.)</li></ul>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+func (r *ModifyNetworkApplicationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNetworkApplicationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NetworkAppId")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNetworkApplicationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNetworkApplicationResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyNetworkApplicationResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyNetworkApplicationResponseParams `json:"Response"`
+}
+
+func (r *ModifyNetworkApplicationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNetworkApplicationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNoticeContentRequestParams struct {
+	// Notification content template ID. Obtain the notification content template ID by searching the notification content template (https://www.tencentcloud.com/document/api/614/111714?from_cn_redirect=1).
+	NoticeContentId *string `json:"NoticeContentId,omitnil,omitempty" name:"NoticeContentId"`
+
+	// Notification content template name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Content language of the notification.
+	// 
+	// 0-Chinese by default, 1-English
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Notification content template details.
+	NoticeContents []*NoticeContent `json:"NoticeContents,omitnil,omitempty" name:"NoticeContents"`
+}
+
+type ModifyNoticeContentRequest struct {
+	*tchttp.BaseRequest
+	
+	// Notification content template ID. Obtain the notification content template ID by searching the notification content template (https://www.tencentcloud.com/document/api/614/111714?from_cn_redirect=1).
+	NoticeContentId *string `json:"NoticeContentId,omitnil,omitempty" name:"NoticeContentId"`
+
+	// Notification content template name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Content language of the notification.
+	// 
+	// 0-Chinese by default, 1-English
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Notification content template details.
+	NoticeContents []*NoticeContent `json:"NoticeContents,omitnil,omitempty" name:"NoticeContents"`
+}
+
+func (r *ModifyNoticeContentRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNoticeContentRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NoticeContentId")
+	delete(f, "Name")
+	delete(f, "Type")
+	delete(f, "NoticeContents")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyNoticeContentRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyNoticeContentResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyNoticeContentResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyNoticeContentResponseParams `json:"Response"`
+}
+
+func (r *ModifyNoticeContentResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyNoticeContentResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRecordingRuleTaskRequestParams struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Source metric topic id</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Target metric topic id.</p>
+	DstTopicId *string `json:"DstTopicId,omitnil,omitempty" name:"DstTopicId"`
+
+	// <p>Task Name</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Task start status. 1: Enabled, 2: Disabled</p>
+	EnableFlag *int64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
+
+	// <p>Schedule start time, Unix timestamp, in milliseconds</p>
+	ProcessStartTime *int64 `json:"ProcessStartTime,omitnil,omitempty" name:"ProcessStartTime"`
+
+	// <p>Scheduling interval (minutes), supported range (0,1440] minutes.</p>
+	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
+
+	// <p>Execution Delay (Seconds)</p>
+	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
+
+	// <p>Metric name</p>
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
+
+	// <p>Execution statement (PromQL)</p>
+	RecordingRuleContent *string `json:"RecordingRuleContent,omitnil,omitempty" name:"RecordingRuleContent"`
+
+	// <p>Custom metric name</p>
+	CustomMetricLabels []*MetricLabel `json:"CustomMetricLabels,omitnil,omitempty" name:"CustomMetricLabels"`
+
+	// <p>Whether to enable service log shipping. Valid values: 1: disable; 2: enable.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+type ModifyRecordingRuleTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Source metric topic id</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Target metric topic id.</p>
+	DstTopicId *string `json:"DstTopicId,omitnil,omitempty" name:"DstTopicId"`
+
+	// <p>Task Name</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Task start status. 1: Enabled, 2: Disabled</p>
+	EnableFlag *int64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
+
+	// <p>Schedule start time, Unix timestamp, in milliseconds</p>
+	ProcessStartTime *int64 `json:"ProcessStartTime,omitnil,omitempty" name:"ProcessStartTime"`
+
+	// <p>Scheduling interval (minutes), supported range (0,1440] minutes.</p>
+	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
+
+	// <p>Execution Delay (Seconds)</p>
+	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
+
+	// <p>Metric name</p>
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
+
+	// <p>Execution statement (PromQL)</p>
+	RecordingRuleContent *string `json:"RecordingRuleContent,omitnil,omitempty" name:"RecordingRuleContent"`
+
+	// <p>Custom metric name</p>
+	CustomMetricLabels []*MetricLabel `json:"CustomMetricLabels,omitnil,omitempty" name:"CustomMetricLabels"`
+
+	// <p>Whether to enable service log shipping. Valid values: 1: disable; 2: enable.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+func (r *ModifyRecordingRuleTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRecordingRuleTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "TopicId")
+	delete(f, "DstTopicId")
+	delete(f, "Name")
+	delete(f, "EnableFlag")
+	delete(f, "ProcessStartTime")
+	delete(f, "ProcessPeriod")
+	delete(f, "ProcessDelay")
+	delete(f, "MetricName")
+	delete(f, "RecordingRuleContent")
+	delete(f, "CustomMetricLabels")
+	delete(f, "HasServicesLog")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRecordingRuleTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRecordingRuleTaskResponseParams struct {
+	// <p>Pre-aggregation task id.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyRecordingRuleTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyRecordingRuleTaskResponseParams `json:"Response"`
+}
+
+func (r *ModifyRecordingRuleTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRecordingRuleTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRecordingRuleYamlTaskRequestParams struct {
+	// <p>Yaml configuration id</p>
+	YamlID *string `json:"YamlID,omitnil,omitempty" name:"YamlID"`
+
+	// <p>Source metric topic id</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Target metric topic id</p>
+	DstTopicId *string `json:"DstTopicId,omitnil,omitempty" name:"DstTopicId"`
+
+	// <p>Task status: 1: Enabled; 2: Disabled</p>
+	EnableFlag *uint64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
+
+	// <p>Schedule start time, Unix timestamp in milliseconds</p>
+	ProcessStartTime *uint64 `json:"ProcessStartTime,omitnil,omitempty" name:"ProcessStartTime"`
+
+	// <p>Scheduling period (minutes). Supported range (0,1440] minutes.</p>
+	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
+
+	// <p>Execution Delay (Seconds)</p>
+	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
+
+	// <p>yaml configuration name</p>
+	YamlConfigName *string `json:"YamlConfigName,omitnil,omitempty" name:"YamlConfigName"`
+
+	// <p>yaml configuration content</p>
+	YamlContent *string `json:"YamlContent,omitnil,omitempty" name:"YamlContent"`
+
+	// <p>Whether to enable service log shipping. Valid values: 1: disable; 2: enable.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+type ModifyRecordingRuleYamlTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Yaml configuration id</p>
+	YamlID *string `json:"YamlID,omitnil,omitempty" name:"YamlID"`
+
+	// <p>Source metric topic id</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Target metric topic id</p>
+	DstTopicId *string `json:"DstTopicId,omitnil,omitempty" name:"DstTopicId"`
+
+	// <p>Task status: 1: Enabled; 2: Disabled</p>
+	EnableFlag *uint64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
+
+	// <p>Schedule start time, Unix timestamp in milliseconds</p>
+	ProcessStartTime *uint64 `json:"ProcessStartTime,omitnil,omitempty" name:"ProcessStartTime"`
+
+	// <p>Scheduling period (minutes). Supported range (0,1440] minutes.</p>
+	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
+
+	// <p>Execution Delay (Seconds)</p>
+	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
+
+	// <p>yaml configuration name</p>
+	YamlConfigName *string `json:"YamlConfigName,omitnil,omitempty" name:"YamlConfigName"`
+
+	// <p>yaml configuration content</p>
+	YamlContent *string `json:"YamlContent,omitnil,omitempty" name:"YamlContent"`
+
+	// <p>Whether to enable service log shipping. Valid values: 1: disable; 2: enable.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+func (r *ModifyRecordingRuleYamlTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRecordingRuleYamlTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "YamlID")
+	delete(f, "TopicId")
+	delete(f, "DstTopicId")
+	delete(f, "EnableFlag")
+	delete(f, "ProcessStartTime")
+	delete(f, "ProcessPeriod")
+	delete(f, "ProcessDelay")
+	delete(f, "YamlConfigName")
+	delete(f, "YamlContent")
+	delete(f, "HasServicesLog")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRecordingRuleYamlTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRecordingRuleYamlTaskResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyRecordingRuleYamlTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyRecordingRuleYamlTaskResponseParams `json:"Response"`
+}
+
+func (r *ModifyRecordingRuleYamlTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRecordingRuleYamlTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyScheduledSqlRequestParams struct {
+	// Task ID, which can be obtained through [scheduled SQL analysis task list](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1).
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Source log topic. Search the [scheduled SQL analysis task list](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1) to obtain it.
 	SrcTopicId *string `json:"SrcTopicId,omitnil,omitempty" name:"SrcTopicId"`
 
 	// Task start status. 1: Enabled, 2: Disabled
@@ -7830,19 +17953,19 @@ type ModifyScheduledSqlRequestParams struct {
 	// Queries statements
 	ScheduledSqlContent *string `json:"ScheduledSqlContent,omitnil,omitempty" name:"ScheduledSqlContent"`
 
-	// Scheduling interval (minutes)
+	// Scheduling cycle (minutes), 1-1440 minutes
 	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
 
 	// Time window for a single query. Example: last 15 minutes
 	ProcessTimeWindow *string `json:"ProcessTimeWindow,omitnil,omitempty" name:"ProcessTimeWindow"`
 
-	// Execution delay (seconds)
+	// Execution delay (seconds), 0-120 seconds, default 60
 	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
 
-	// Region information of source topic ID 
+	// Regional information of the source topicId. Supported regions are listed in the region list document (https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
 	SrcTopicRegion *string `json:"SrcTopicRegion,omitnil,omitempty" name:"SrcTopicRegion"`
 
-	// Task Name
+	// Task name, 0-255 characters
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Syntax rules. Default value: 0. 0: Lucene syntax, 1: CQL syntax
@@ -7852,10 +17975,10 @@ type ModifyScheduledSqlRequestParams struct {
 type ModifyScheduledSqlRequest struct {
 	*tchttp.BaseRequest
 	
-	// Task ID
+	// Task ID, which can be obtained through [scheduled SQL analysis task list](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1).
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Source log topic
+	// Source log topic. Search the [scheduled SQL analysis task list](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1) to obtain it.
 	SrcTopicId *string `json:"SrcTopicId,omitnil,omitempty" name:"SrcTopicId"`
 
 	// Task start status. 1: Enabled, 2: Disabled
@@ -7867,19 +17990,19 @@ type ModifyScheduledSqlRequest struct {
 	// Queries statements
 	ScheduledSqlContent *string `json:"ScheduledSqlContent,omitnil,omitempty" name:"ScheduledSqlContent"`
 
-	// Scheduling interval (minutes)
+	// Scheduling cycle (minutes), 1-1440 minutes
 	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
 
 	// Time window for a single query. Example: last 15 minutes
 	ProcessTimeWindow *string `json:"ProcessTimeWindow,omitnil,omitempty" name:"ProcessTimeWindow"`
 
-	// Execution delay (seconds)
+	// Execution delay (seconds), 0-120 seconds, default 60
 	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
 
-	// Region information of source topic ID 
+	// Regional information of the source topicId. Supported regions are listed in the region list document (https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
 	SrcTopicRegion *string `json:"SrcTopicRegion,omitnil,omitempty" name:"SrcTopicRegion"`
 
-	// Task Name
+	// Task name, 0-255 characters
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Syntax rules. Default value: 0. 0: Lucene syntax, 1: CQL syntax
@@ -7938,88 +18061,194 @@ func (r *ModifyScheduledSqlResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifySearchViewRequestParams struct {
+	// <p>View ID.</p>
+	ViewId *string `json:"ViewId,omitnil,omitempty" name:"ViewId"`
+
+	// <p>View name</p><p>Parameter format: <code>^[a-z0-9][a-z0-9_-]{1,61}[a-z0-9]$</code></p>
+	ViewName *string `json:"ViewName,omitnil,omitempty" name:"ViewName"`
+
+	// <p>View type</p><p>Enumeration value:</p><ul><li>log: Log topic</li><li>metric: Metric topic</li></ul><p>The topic information configured in the Topics field should match the ViewType.</p>
+	ViewType *string `json:"ViewType,omitnil,omitempty" name:"ViewType"`
+
+	// <p>The query view contains topics, with a maximum of 10 topics.</p>
+	Topics []*ViewSearchTopic `json:"Topics,omitnil,omitempty" name:"Topics"`
+
+	// <p>Description information</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+type ModifySearchViewRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>View ID.</p>
+	ViewId *string `json:"ViewId,omitnil,omitempty" name:"ViewId"`
+
+	// <p>View name</p><p>Parameter format: <code>^[a-z0-9][a-z0-9_-]{1,61}[a-z0-9]$</code></p>
+	ViewName *string `json:"ViewName,omitnil,omitempty" name:"ViewName"`
+
+	// <p>View type</p><p>Enumeration value:</p><ul><li>log: Log topic</li><li>metric: Metric topic</li></ul><p>The topic information configured in the Topics field should match the ViewType.</p>
+	ViewType *string `json:"ViewType,omitnil,omitempty" name:"ViewType"`
+
+	// <p>The query view contains topics, with a maximum of 10 topics.</p>
+	Topics []*ViewSearchTopic `json:"Topics,omitnil,omitempty" name:"Topics"`
+
+	// <p>Description information</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+func (r *ModifySearchViewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySearchViewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ViewId")
+	delete(f, "ViewName")
+	delete(f, "ViewType")
+	delete(f, "Topics")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySearchViewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySearchViewResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySearchViewResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySearchViewResponseParams `json:"Response"`
+}
+
+func (r *ModifySearchViewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySearchViewResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyShipperRequestParams struct {
-	// Shipping rule ID
+	// <p>Shipping rule ID.</p><ul><li>Obtain the ShipperId by <a href="https://www.tencentcloud.com/document/product/614/58745?from_cn_redirect=1">obtaining the shipping task list</a>.</li></ul>
 	ShipperId *string `json:"ShipperId,omitnil,omitempty" name:"ShipperId"`
 
-	// New destination bucket in shipping rule
+	// <p>COS bucket, see the supported <a href="https://www.tencentcloud.com/document/product/436/13312?from_cn_redirect=1">bucket naming conventions</a>.</p><ul><li>Obtain COS buckets via <a href="https://www.tencentcloud.com/document/product/436/8291?from_cn_redirect=1">GET Service (List Buckets)</a>.</li></ul>
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
-	// New destination directory prefix in shipping rule
+	// <p>The new directory prefix delivered by the Shipping Rule.</p><ul><li>Only 0-9A-Za-z-_/ are allowed.</li><li>Supports a maximum of 256 characters.</li></ul>
 	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
 
-	// Shipping rule status
+	// <p>Switch state of shipping rules. true: enable delivery task; false: disable delivery task.</p>
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Shipping rule name
+	// <p>Shipping rule name</p>
 	ShipperName *string `json:"ShipperName,omitnil,omitempty" name:"ShipperName"`
 
-	// Shipping time interval in seconds. Default value: 300. Value range: 300 to 900
+	// <p>Shipping time interval in seconds. Default: 300. Valid range: 300-900.</p>
 	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 5 to 256
+	// <p>Maximum value of delivered files in MB. Default: 256. Range: 5-256.</p>
 	MaxSize *uint64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 
-	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+	// <p>Filter rules for log shipping. Matched logs are shipped. The relationship between the rules is and. Up to 5 rules are allowed. An empty array indicates all logs are shipped without filtering.</p>
 	FilterRules []*FilterRuleInfo `json:"FilterRules,omitnil,omitempty" name:"FilterRules"`
 
-	// Partition rule of shipped log, which can be represented in `strftime` time format
+	// <p>Partition rules for log shipping support strftime time format representation</p>
 	Partition *string `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// Compression configuration of shipped log
+	// <p>Compression configuration of shipped logs</p>
 	Compress *CompressInfo `json:"Compress,omitnil,omitempty" name:"Compress"`
 
-	// Format configuration of shipped log content
+	// <p>Content format configuration for shipped logs</p>
 	Content *ContentInfo `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// Naming a shipping file. Valid values: `0` (by random number), `1` (by shipping time). Default value: `0`.
+	// <p>Delivery file naming configuration. 0: Random number naming. 1: Delivery time naming.</p>
 	FilenameMode *uint64 `json:"FilenameMode,omitnil,omitempty" name:"FilenameMode"`
 
-	// COS bucket type
+	// <p>The storage type. Default value is STANDARD. For enumeration values, please refer to the <a href="https://www.tencentcloud.com/document/product/436/33417?from_cn_redirect=1">storage class overview</a> document.<br>Reference values include:</p><ul><li>STANDARD: standard storage</li><li>STANDARD_IA: infrequent storage</li><li>ARCHIVE: archive storage</li><li>DEEP_ARCHIVE: deep archive storage</li><li>MAZ_STANDARD: standard storage (multi-AZ)</li><li>MAZ_STANDARD_IA: infrequent storage (multi-AZ)</li><li>INTELLIGENT_TIERING: intelligent tiering storage</li><li>MAZ_INTELLIGENT_TIERING: intelligent tiering storage (multi-AZ)</li></ul>
 	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>Role access description name <a href="https://www.tencentcloud.com/document/product/598/19381?from_cn_redirect=1">Create role</a></p>
+	RoleArn *string `json:"RoleArn,omitnil,omitempty" name:"RoleArn"`
+
+	// <p>External ID</p>
+	ExternalId *string `json:"ExternalId,omitnil,omitempty" name:"ExternalId"`
+
+	// <p>Used to generate time variables in the file path shipped to COS.</p><p>Input limitation: Supports the following time zone list</p><ul><li>GMT-12:00</li><li>GMT-11:00</li><li>GMT-10:00</li><li>GMT-09:30</li><li>GMT-09:00</li><li>GMT-08:00</li><li>GMT-07:00</li><li>GMT-06:00</li><li>GMT-05:00</li><li>GMT-04:00</li><li>GMT-03:30</li><li>GMT-03:00</li><li>GMT-02:00</li><li>GMT-01:00</li><li>GMT+00:00</li><li>GMT+01:00</li><li>GMT+02:00</li><li>GMT+03:30</li><li>GMT+04:00</li><li>GMT+04:30</li><li>GMT+05:00</li><li>GMT+05:30</li><li>GMT+05:45</li><li>GMT+06:00</li><li>GMT+06:30</li><li>GMT+07:00</li><li>GMT+08:00</li><li>GMT+09:00</li><li>GMT+09:30</li><li>GMT+10:00</li><li>GMT+10:30</li><li>GMT+11:00</li><li>GMT+11:30</li><li>GMT+12:00</li><li>GMT+12:45</li><li>GMT+13:00</li><li>GMT+14:00</li><li>UTC-11:00</li><li>UTC-10:00</li><li>UTC-09:00</li><li>UTC-08:00</li><li>UTC-12:00</li><li>UTC-07:00</li><li>UTC-06:00</li><li>UTC-05:00</li><li>UTC-04:30</li><li>UTC-04:00</li><li>UTC-03:30</li><li>UTC-03:00</li><li>UTC-02:00</li><li>UTC-01:00</li><li>UTC+00:00</li><li>UTC+01:00</li><li>UTC+02:00</li><li>UTC+03:00</li><li>UTC+03:30</li><li>UTC+04:00</li><li>UTC+04:30</li><li>UTC+05:00</li><li>UTC+05:45</li><li>UTC+06:00</li><li>UTC+06:30</li><li>UTC+07:00</li><li>UTC+08:00</li><li>UTC+09:00</li><li>UTC+09:30</li><li>UTC+10:00</li><li>UTC+11:00</li><li>UTC+12:00</li><li>UTC+13:00</li></ul>
+	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// <p>Pre-filtering process - filter out original data written to COS</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
 }
 
 type ModifyShipperRequest struct {
 	*tchttp.BaseRequest
 	
-	// Shipping rule ID
+	// <p>Shipping rule ID.</p><ul><li>Obtain the ShipperId by <a href="https://www.tencentcloud.com/document/product/614/58745?from_cn_redirect=1">obtaining the shipping task list</a>.</li></ul>
 	ShipperId *string `json:"ShipperId,omitnil,omitempty" name:"ShipperId"`
 
-	// New destination bucket in shipping rule
+	// <p>COS bucket, see the supported <a href="https://www.tencentcloud.com/document/product/436/13312?from_cn_redirect=1">bucket naming conventions</a>.</p><ul><li>Obtain COS buckets via <a href="https://www.tencentcloud.com/document/product/436/8291?from_cn_redirect=1">GET Service (List Buckets)</a>.</li></ul>
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
-	// New destination directory prefix in shipping rule
+	// <p>The new directory prefix delivered by the Shipping Rule.</p><ul><li>Only 0-9A-Za-z-_/ are allowed.</li><li>Supports a maximum of 256 characters.</li></ul>
 	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
 
-	// Shipping rule status
+	// <p>Switch state of shipping rules. true: enable delivery task; false: disable delivery task.</p>
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Shipping rule name
+	// <p>Shipping rule name</p>
 	ShipperName *string `json:"ShipperName,omitnil,omitempty" name:"ShipperName"`
 
-	// Shipping time interval in seconds. Default value: 300. Value range: 300 to 900
+	// <p>Shipping time interval in seconds. Default: 300. Valid range: 300-900.</p>
 	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Maximum size of a file to be shipped, in MB. Default value: 256. Value range: 5 to 256
+	// <p>Maximum value of delivered files in MB. Default: 256. Range: 5-256.</p>
 	MaxSize *uint64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 
-	// Filter rules for shipped logs. Only logs matching the rules can be shipped. All rules are in the AND relationship, and up to five rules can be added. If the array is empty, no filtering will be performed, and all logs will be shipped.
+	// <p>Filter rules for log shipping. Matched logs are shipped. The relationship between the rules is and. Up to 5 rules are allowed. An empty array indicates all logs are shipped without filtering.</p>
 	FilterRules []*FilterRuleInfo `json:"FilterRules,omitnil,omitempty" name:"FilterRules"`
 
-	// Partition rule of shipped log, which can be represented in `strftime` time format
+	// <p>Partition rules for log shipping support strftime time format representation</p>
 	Partition *string `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// Compression configuration of shipped log
+	// <p>Compression configuration of shipped logs</p>
 	Compress *CompressInfo `json:"Compress,omitnil,omitempty" name:"Compress"`
 
-	// Format configuration of shipped log content
+	// <p>Content format configuration for shipped logs</p>
 	Content *ContentInfo `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// Naming a shipping file. Valid values: `0` (by random number), `1` (by shipping time). Default value: `0`.
+	// <p>Delivery file naming configuration. 0: Random number naming. 1: Delivery time naming.</p>
 	FilenameMode *uint64 `json:"FilenameMode,omitnil,omitempty" name:"FilenameMode"`
 
-	// COS bucket type
+	// <p>The storage type. Default value is STANDARD. For enumeration values, please refer to the <a href="https://www.tencentcloud.com/document/product/436/33417?from_cn_redirect=1">storage class overview</a> document.<br>Reference values include:</p><ul><li>STANDARD: standard storage</li><li>STANDARD_IA: infrequent storage</li><li>ARCHIVE: archive storage</li><li>DEEP_ARCHIVE: deep archive storage</li><li>MAZ_STANDARD: standard storage (multi-AZ)</li><li>MAZ_STANDARD_IA: infrequent storage (multi-AZ)</li><li>INTELLIGENT_TIERING: intelligent tiering storage</li><li>MAZ_INTELLIGENT_TIERING: intelligent tiering storage (multi-AZ)</li></ul>
 	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>Role access description name <a href="https://www.tencentcloud.com/document/product/598/19381?from_cn_redirect=1">Create role</a></p>
+	RoleArn *string `json:"RoleArn,omitnil,omitempty" name:"RoleArn"`
+
+	// <p>External ID</p>
+	ExternalId *string `json:"ExternalId,omitnil,omitempty" name:"ExternalId"`
+
+	// <p>Used to generate time variables in the file path shipped to COS.</p><p>Input limitation: Supports the following time zone list</p><ul><li>GMT-12:00</li><li>GMT-11:00</li><li>GMT-10:00</li><li>GMT-09:30</li><li>GMT-09:00</li><li>GMT-08:00</li><li>GMT-07:00</li><li>GMT-06:00</li><li>GMT-05:00</li><li>GMT-04:00</li><li>GMT-03:30</li><li>GMT-03:00</li><li>GMT-02:00</li><li>GMT-01:00</li><li>GMT+00:00</li><li>GMT+01:00</li><li>GMT+02:00</li><li>GMT+03:30</li><li>GMT+04:00</li><li>GMT+04:30</li><li>GMT+05:00</li><li>GMT+05:30</li><li>GMT+05:45</li><li>GMT+06:00</li><li>GMT+06:30</li><li>GMT+07:00</li><li>GMT+08:00</li><li>GMT+09:00</li><li>GMT+09:30</li><li>GMT+10:00</li><li>GMT+10:30</li><li>GMT+11:00</li><li>GMT+11:30</li><li>GMT+12:00</li><li>GMT+12:45</li><li>GMT+13:00</li><li>GMT+14:00</li><li>UTC-11:00</li><li>UTC-10:00</li><li>UTC-09:00</li><li>UTC-08:00</li><li>UTC-12:00</li><li>UTC-07:00</li><li>UTC-06:00</li><li>UTC-05:00</li><li>UTC-04:30</li><li>UTC-04:00</li><li>UTC-03:30</li><li>UTC-03:00</li><li>UTC-02:00</li><li>UTC-01:00</li><li>UTC+00:00</li><li>UTC+01:00</li><li>UTC+02:00</li><li>UTC+03:00</li><li>UTC+03:30</li><li>UTC+04:00</li><li>UTC+04:30</li><li>UTC+05:00</li><li>UTC+05:45</li><li>UTC+06:00</li><li>UTC+06:30</li><li>UTC+07:00</li><li>UTC+08:00</li><li>UTC+09:00</li><li>UTC+09:30</li><li>UTC+10:00</li><li>UTC+11:00</li><li>UTC+12:00</li><li>UTC+13:00</li></ul>
+	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// <p>Pre-filtering process - filter out original data written to COS</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
 }
 
 func (r *ModifyShipperRequest) ToJsonString() string {
@@ -8047,6 +18276,10 @@ func (r *ModifyShipperRequest) FromJsonString(s string) error {
 	delete(f, "Content")
 	delete(f, "FilenameMode")
 	delete(f, "StorageType")
+	delete(f, "RoleArn")
+	delete(f, "ExternalId")
+	delete(f, "TimeZone")
+	delete(f, "DSLFilter")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyShipperRequest has unknown keys!", "")
 	}
@@ -8076,72 +18309,257 @@ func (r *ModifyShipperResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type ModifyTopicRequestParams struct {
-	// Log topic ID
+type ModifySplunkDeliverRequestParams struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>log topic id</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li></ul>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Log topic name
+	// <p>The delivery task name has the following restrictions: - Cannot be empty - Length not greater than 256 - Can only contain aA-zZ, underscore, -, 0-9</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Task enable status. Valid values: 0: disabled; 1: enabled.</p>
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// <p>splunk delivery task - target configuration</p>
+	NetInfo *NetInfo `json:"NetInfo,omitnil,omitempty" name:"NetInfo"`
+
+	// <p>splunk delivery task meta information</p>
+	MetadataInfo *MetadataInfo `json:"MetadataInfo,omitnil,omitempty" name:"MetadataInfo"`
+
+	// <p>Whether to enable the service log; 1: Disabled; 2: Enabled</p>
+	HasServiceLog *int64 `json:"HasServiceLog,omitnil,omitempty" name:"HasServiceLog"`
+
+	// <p>Advanced configuration - Whether to enable the indexer;<br>1 - Disable; 2 - Enable; Default: 1</p>
+	IndexAck *int64 `json:"IndexAck,omitnil,omitempty" name:"IndexAck"`
+
+	// <p>Advanced configuration - data source; no more than 64 characters</p>
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// <p>Advanced configuration - data source type; no more than 64 characters</p>
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// <p>Advanced configuration - Indexes written to Splunk; no more than 64 characters</p>
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// <p>Advanced configuration - Channel.<br>To meet the limitation: If the indexer is enabled, the value cannot be empty.</p>
+	Channel *string `json:"Channel,omitnil,omitempty" name:"Channel"`
+
+	// <p>Pre-filtering process - filter out original data before writing to Splunk</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
+
+	// <p>Advanced configuration - Cross-account delivery user role authorization information</p><p>For reference: <a href="https://console.cloud.tencent.com/cam/role/create?payloadType=account">Create custom role</a></p>
+	ExternalRole *ExternalRole `json:"ExternalRole,omitnil,omitempty" name:"ExternalRole"`
+}
+
+type ModifySplunkDeliverRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>log topic id</p><ul><li>Obtain the log topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Log Topic List</a>.</li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>The delivery task name has the following restrictions: - Cannot be empty - Length not greater than 256 - Can only contain aA-zZ, underscore, -, 0-9</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Task enable status. Valid values: 0: disabled; 1: enabled.</p>
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// <p>splunk delivery task - target configuration</p>
+	NetInfo *NetInfo `json:"NetInfo,omitnil,omitempty" name:"NetInfo"`
+
+	// <p>splunk delivery task meta information</p>
+	MetadataInfo *MetadataInfo `json:"MetadataInfo,omitnil,omitempty" name:"MetadataInfo"`
+
+	// <p>Whether to enable the service log; 1: Disabled; 2: Enabled</p>
+	HasServiceLog *int64 `json:"HasServiceLog,omitnil,omitempty" name:"HasServiceLog"`
+
+	// <p>Advanced configuration - Whether to enable the indexer;<br>1 - Disable; 2 - Enable; Default: 1</p>
+	IndexAck *int64 `json:"IndexAck,omitnil,omitempty" name:"IndexAck"`
+
+	// <p>Advanced configuration - data source; no more than 64 characters</p>
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// <p>Advanced configuration - data source type; no more than 64 characters</p>
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// <p>Advanced configuration - Indexes written to Splunk; no more than 64 characters</p>
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// <p>Advanced configuration - Channel.<br>To meet the limitation: If the indexer is enabled, the value cannot be empty.</p>
+	Channel *string `json:"Channel,omitnil,omitempty" name:"Channel"`
+
+	// <p>Pre-filtering process - filter out original data before writing to Splunk</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
+
+	// <p>Advanced configuration - Cross-account delivery user role authorization information</p><p>For reference: <a href="https://console.cloud.tencent.com/cam/role/create?payloadType=account">Create custom role</a></p>
+	ExternalRole *ExternalRole `json:"ExternalRole,omitnil,omitempty" name:"ExternalRole"`
+}
+
+func (r *ModifySplunkDeliverRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySplunkDeliverRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "TopicId")
+	delete(f, "Name")
+	delete(f, "Enable")
+	delete(f, "NetInfo")
+	delete(f, "MetadataInfo")
+	delete(f, "HasServiceLog")
+	delete(f, "IndexAck")
+	delete(f, "Source")
+	delete(f, "SourceType")
+	delete(f, "Index")
+	delete(f, "Channel")
+	delete(f, "DSLFilter")
+	delete(f, "ExternalRole")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySplunkDeliverRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySplunkDeliverResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySplunkDeliverResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySplunkDeliverResponseParams `json:"Response"`
+}
+
+func (r *ModifySplunkDeliverResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySplunkDeliverResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyTopicRequestParams struct {
+	// <p>Topic ID - Obtain the topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Topic List</a>.</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Topic name<br>Input restrictions:</p><ul><li>Cannot be an empty string</li><li>Cannot contain character '|'</li><li>Cannot use the following names ["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"]</li></ul>
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and they must be unique.
+	// <p>List of tag descriptions. By specifying this parameter, you can bind tags to the appropriate topic simultaneously. Supports up to 10 tag key-value pairs, and no duplicate key-value pairs are allowed.</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Whether the topic has log collection enabled. true: collection enabled; false: collection disabled.The console currently does not support modifying this parameter.
+	// <p>Whether the topic has log collection enabled. true: start collection; false: disable collection.<br>The console currently does not support modification of this parameter.</p>
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Whether to enable automatic split
+	// <p>Whether to enable auto-split</p>
 	AutoSplit *bool `json:"AutoSplit,omitnil,omitempty" name:"AutoSplit"`
 
-	// Maximum number of partitions to split into for this topic if automatic split is enabled
+	// <p>If maximum split is enabled, the maximum number of partitions allowed for this topic;<br>default is 50; must be a positive number</p>
 	MaxSplitPartitions *int64 `json:"MaxSplitPartitions,omitnil,omitempty" name:"MaxSplitPartitions"`
 
-	// Lifecycle in days. Value range: 1 to 3600 (STANDARD storage); 7 to 3600 (IA storage). 3640 indicates permanent retention.
+	// <p>Lifecycle in days. Standard storage value range is 1-3600. Infrequent storage value range is 7-3600. A value of 3640 indicates permanent retention.</p>
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Log topic description
+	// <p>Storage type: cold infrequent storage, hot standard storage</p>
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>Topic description</p>
 	Describes *string `json:"Describes,omitnil,omitempty" name:"Describes"`
 
-	// `0`: Disable log transitioning.
-	// A value other than `0`: The number of STANDARD storage days after log transitioning is enabled (valid only if `StorageType` is `hot`). Note: `HotPeriod` should be greater than or equal to `7` and less than `Period`.
+	// <p>0: The log topic disables log settlement.<br>Non-0: Number of days for standard storage after log settlement is enabled for the log topic. HotPeriod needs to be greater than or equal to 7 and less than Period.<br>Effective only when StorageType is hot. This configuration is not supported for metric topics.</p>
 	HotPeriod *uint64 `json:"HotPeriod,omitnil,omitempty" name:"HotPeriod"`
 
-	// Free authentication switch. false: disabled; true: enabled.Once enabled, it will support specified operations for anonymous access to this log topic. For details, please see [log Topic](https://intl.cloud.tencent.com/document/product/614/41035?from_cn_redirect=1).
+	// <p>Free authentication switch. false: disabled; true: enabled.<br>Once enabled, anonymous access to the log topic will be supported for specified operations. For details, please see <a href="https://www.tencentcloud.com/document/product/614/41035?from_cn_redirect=1">log topic</a>.</p>
 	IsWebTracking *bool `json:"IsWebTracking,omitnil,omitempty" name:"IsWebTracking"`
+
+	// <p>Topic extended information</p>
+	Extends *TopicExtendInfo `json:"Extends,omitnil,omitempty" name:"Extends"`
+
+	// <p>Number of topic partitions.<br>Defaults to 1.<br>Value ranges and constraints:</p><ul><li>When the input value &lt;=0, the system automatically adjusts it to 1.</li><li>If MaxSplitPartitions is not passed, PartitionCount must be &lt;=50.</li><li>If MaxSplitPartitions is passed, PartitionCount must be &lt;=MaxSplitPartitions.</li></ul>
+	PartitionCount *uint64 `json:"PartitionCount,omitnil,omitempty" name:"PartitionCount"`
+
+	// <p>id of the cancel switch storage task</p><ul><li>Obtain the id of the cancel switch storage task [TopicAsyncTaskID field in Topics] by <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">get log topic list</a>.</li></ul>
+	CancelTopicAsyncTaskID *string `json:"CancelTopicAsyncTaskID,omitnil,omitempty" name:"CancelTopicAsyncTaskID"`
+
+	// <p>Encryption-related parameters. Encrypted regions are supported and can be passed for allowlisted users. Cannot be passed in other scenarios.<br>Only support passing in 1: kms-cls secret key for cloud product encryption.</p>
+	Encryption *uint64 `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+
+	// <p>Enable logging of public network source IP and server receipt time</p>
+	IsSourceFrom *bool `json:"IsSourceFrom,omitnil,omitempty" name:"IsSourceFrom"`
+
+	// <p>Billing mode</p><p>Enumeration value:</p><ul><li>0: Function billing by usage</li><li>1: Raw log size billing (currently only supports some customers)</li></ul><p>Default value: 0</p>
+	BillingMode *uint64 `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 }
 
 type ModifyTopicRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log topic ID
+	// <p>Topic ID - Obtain the topic Id through <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">Get Topic List</a>.</p>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Log topic name
+	// <p>Topic name<br>Input restrictions:</p><ul><li>Cannot be an empty string</li><li>Cannot contain character '|'</li><li>Cannot use the following names ["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"]</li></ul>
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Tag description list. This parameter is used to bind a tag to a log topic. Up to 10 tag key-value pairs are supported, and they must be unique.
+	// <p>List of tag descriptions. By specifying this parameter, you can bind tags to the appropriate topic simultaneously. Supports up to 10 tag key-value pairs, and no duplicate key-value pairs are allowed.</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Whether the topic has log collection enabled. true: collection enabled; false: collection disabled.The console currently does not support modifying this parameter.
+	// <p>Whether the topic has log collection enabled. true: start collection; false: disable collection.<br>The console currently does not support modification of this parameter.</p>
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Whether to enable automatic split
+	// <p>Whether to enable auto-split</p>
 	AutoSplit *bool `json:"AutoSplit,omitnil,omitempty" name:"AutoSplit"`
 
-	// Maximum number of partitions to split into for this topic if automatic split is enabled
+	// <p>If maximum split is enabled, the maximum number of partitions allowed for this topic;<br>default is 50; must be a positive number</p>
 	MaxSplitPartitions *int64 `json:"MaxSplitPartitions,omitnil,omitempty" name:"MaxSplitPartitions"`
 
-	// Lifecycle in days. Value range: 1 to 3600 (STANDARD storage); 7 to 3600 (IA storage). 3640 indicates permanent retention.
+	// <p>Lifecycle in days. Standard storage value range is 1-3600. Infrequent storage value range is 7-3600. A value of 3640 indicates permanent retention.</p>
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Log topic description
+	// <p>Storage type: cold infrequent storage, hot standard storage</p>
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>Topic description</p>
 	Describes *string `json:"Describes,omitnil,omitempty" name:"Describes"`
 
-	// `0`: Disable log transitioning.
-	// A value other than `0`: The number of STANDARD storage days after log transitioning is enabled (valid only if `StorageType` is `hot`). Note: `HotPeriod` should be greater than or equal to `7` and less than `Period`.
+	// <p>0: The log topic disables log settlement.<br>Non-0: Number of days for standard storage after log settlement is enabled for the log topic. HotPeriod needs to be greater than or equal to 7 and less than Period.<br>Effective only when StorageType is hot. This configuration is not supported for metric topics.</p>
 	HotPeriod *uint64 `json:"HotPeriod,omitnil,omitempty" name:"HotPeriod"`
 
-	// Free authentication switch. false: disabled; true: enabled.Once enabled, it will support specified operations for anonymous access to this log topic. For details, please see [log Topic](https://intl.cloud.tencent.com/document/product/614/41035?from_cn_redirect=1).
+	// <p>Free authentication switch. false: disabled; true: enabled.<br>Once enabled, anonymous access to the log topic will be supported for specified operations. For details, please see <a href="https://www.tencentcloud.com/document/product/614/41035?from_cn_redirect=1">log topic</a>.</p>
 	IsWebTracking *bool `json:"IsWebTracking,omitnil,omitempty" name:"IsWebTracking"`
+
+	// <p>Topic extended information</p>
+	Extends *TopicExtendInfo `json:"Extends,omitnil,omitempty" name:"Extends"`
+
+	// <p>Number of topic partitions.<br>Defaults to 1.<br>Value ranges and constraints:</p><ul><li>When the input value &lt;=0, the system automatically adjusts it to 1.</li><li>If MaxSplitPartitions is not passed, PartitionCount must be &lt;=50.</li><li>If MaxSplitPartitions is passed, PartitionCount must be &lt;=MaxSplitPartitions.</li></ul>
+	PartitionCount *uint64 `json:"PartitionCount,omitnil,omitempty" name:"PartitionCount"`
+
+	// <p>id of the cancel switch storage task</p><ul><li>Obtain the id of the cancel switch storage task [TopicAsyncTaskID field in Topics] by <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">get log topic list</a>.</li></ul>
+	CancelTopicAsyncTaskID *string `json:"CancelTopicAsyncTaskID,omitnil,omitempty" name:"CancelTopicAsyncTaskID"`
+
+	// <p>Encryption-related parameters. Encrypted regions are supported and can be passed for allowlisted users. Cannot be passed in other scenarios.<br>Only support passing in 1: kms-cls secret key for cloud product encryption.</p>
+	Encryption *uint64 `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+
+	// <p>Enable logging of public network source IP and server receipt time</p>
+	IsSourceFrom *bool `json:"IsSourceFrom,omitnil,omitempty" name:"IsSourceFrom"`
+
+	// <p>Billing mode</p><p>Enumeration value:</p><ul><li>0: Function billing by usage</li><li>1: Raw log size billing (currently only supports some customers)</li></ul><p>Default value: 0</p>
+	BillingMode *uint64 `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 }
 
 func (r *ModifyTopicRequest) ToJsonString() string {
@@ -8163,9 +18581,16 @@ func (r *ModifyTopicRequest) FromJsonString(s string) error {
 	delete(f, "AutoSplit")
 	delete(f, "MaxSplitPartitions")
 	delete(f, "Period")
+	delete(f, "StorageType")
 	delete(f, "Describes")
 	delete(f, "HotPeriod")
 	delete(f, "IsWebTracking")
+	delete(f, "Extends")
+	delete(f, "PartitionCount")
+	delete(f, "CancelTopicAsyncTaskID")
+	delete(f, "Encryption")
+	delete(f, "IsSourceFrom")
+	delete(f, "BillingMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTopicRequest has unknown keys!", "")
 	}
@@ -8194,22 +18619,142 @@ func (r *ModifyTopicResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type MonitorTime struct {
-	// Valid values:
-	// <br><li> `Period`: periodic execution
-	// <br><li> `Fixed`: scheduled execution
+// Predefined struct for user
+type ModifyWebCallbackRequestParams struct {
+	// Alarm channel callback configuration ID. Obtain the alarm channel callback configuration ID by searching the alarm channel callback configuration list (https://www.tencentcloud.com/document/api/614/115229?from_cn_redirect=1).
+	WebCallbackId *string `json:"WebCallbackId,omitnil,omitempty" name:"WebCallbackId"`
+
+	// Alarm channel callback configuration name. Supports a maximum of 255 bytes.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Channel type
+	// 
+	// WeCom: WeCom; DingTalk: DingTalk; Lark: Lark; Http: Custom Callback;
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Execution interval or scheduled time point in minutes. Value range: 1–1440.
+	// Callback URL.
+	Webhook *string `json:"Webhook,omitnil,omitempty" name:"Webhook"`
+
+	// Request method.
+	// 
+	// Support POST, PUT.
+	// 
+	// Note: This parameter is required when Type is set to Http.
+	Method *string `json:"Method,omitnil,omitempty" name:"Method"`
+
+	// Secret key information. Supports a maximum of 1024 bytes.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+}
+
+type ModifyWebCallbackRequest struct {
+	*tchttp.BaseRequest
+	
+	// Alarm channel callback configuration ID. Obtain the alarm channel callback configuration ID by searching the alarm channel callback configuration list (https://www.tencentcloud.com/document/api/614/115229?from_cn_redirect=1).
+	WebCallbackId *string `json:"WebCallbackId,omitnil,omitempty" name:"WebCallbackId"`
+
+	// Alarm channel callback configuration name. Supports a maximum of 255 bytes.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Channel type
+	// 
+	// WeCom: WeCom; DingTalk: DingTalk; Lark: Lark; Http: Custom Callback;
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Callback URL.
+	Webhook *string `json:"Webhook,omitnil,omitempty" name:"Webhook"`
+
+	// Request method.
+	// 
+	// Support POST, PUT.
+	// 
+	// Note: This parameter is required when Type is set to Http.
+	Method *string `json:"Method,omitnil,omitempty" name:"Method"`
+
+	// Secret key information. Supports a maximum of 1024 bytes.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+}
+
+func (r *ModifyWebCallbackRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyWebCallbackRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "WebCallbackId")
+	delete(f, "Name")
+	delete(f, "Type")
+	delete(f, "Webhook")
+	delete(f, "Method")
+	delete(f, "Key")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyWebCallbackRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyWebCallbackResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyWebCallbackResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyWebCallbackResponseParams `json:"Response"`
+}
+
+func (r *ModifyWebCallbackResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyWebCallbackResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type MonitorNotice struct {
+	// MonitorNoticeRule in array format
+	Notices []*MonitorNoticeRule `json:"Notices,omitnil,omitempty" name:"Notices"`
+}
+
+type MonitorNoticeRule struct {
+	// <p>Tencent Cloud observability platform notification template ID</p>
+	NoticeId *string `json:"NoticeId,omitnil,omitempty" name:"NoticeId"`
+
+	// <p>ID of the Tencent Cloud observability platform content template. The default content template is used when empty.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ContentTmplId *string `json:"ContentTmplId,omitnil,omitempty" name:"ContentTmplId"`
+
+	// <p>Alarm level. 0: Warn; 1: Information; 2: Critical</p>
+	AlarmLevels []*uint64 `json:"AlarmLevels,omitnil,omitempty" name:"AlarmLevels"`
+}
+
+type MonitorTime struct {
+	// <p>Execution cycle. Value range: <code>Period</code>, <code>Fixed</code>, <code>Cron</code>.</p><ul><li>Period: at a fixed frequency</li><li>Fixed: fixed time</li><li>Cron: cron expression</li></ul>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// <p>Execution period or custom execution time point. Unit: minutes, value range: 1-1440.<br>When type is <code>Period</code> or <code>Fixed</code>, the time field takes effect.</p>
 	Time *int64 `json:"Time,omitnil,omitempty" name:"Time"`
+
+	// <p>The cron expression for the execution period. Example: <code>0/1 * * * *</code>. From left to right, each field represents Minutes field, Hours field, Day of month field, Month field, Day of week field. No support for second level. When the type is <code>Cron</code>, the CronExpression field takes effect.</p>
+	CronExpression *string `json:"CronExpression,omitnil,omitempty" name:"CronExpression"`
 }
 
 type MultiCondition struct {
-	// Trigger condition.Note: This field may return null, indicating that no valid values can be obtained.
+	// Trigger conditions
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
-	// Alarm severity. 0: Warning (Warn); 1: Reminder (Info); 2: Urgent (Critical).<li> If not specified, the default is 0.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Alarm severity. 0: Warning (Warn); 1: Reminder (Info); 2: Urgent (Critical).
+	// 
+	// - If not specified, the default is 0.
 	AlarmLevel *uint64 `json:"AlarmLevel,omitnil,omitempty" name:"AlarmLevel"`
 }
 
@@ -8221,68 +18766,461 @@ type MultiTopicSearchInformation struct {
 	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
 }
 
+type NetInfo struct {
+	// Network address.
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// Port.
+	Port *uint64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Authentication token
+	Token *string `json:"Token,omitnil,omitempty" name:"Token"`
+
+	// Network type; 1: Private network; 2: Public network
+	NetType *uint64 `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// Associated network; If the network type is private network, this field is required.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Network service type. If the network type is private network, this field is required.
+	// -0: Cloud cvm
+	// -3: Cloud Direct Connect Gateway
+	// -CCN
+	// -1025: Cloud clb
+	VirtualGatewayType *uint64 `json:"VirtualGatewayType,omitnil,omitempty" name:"VirtualGatewayType"`
+
+	// Authentication mechanism, whether to use SSL, default non-use
+	IsSSL *bool `json:"IsSSL,omitnil,omitempty" name:"IsSSL"`
+}
+
+type NetworkApplicationDetail struct {
+	// Web application Id
+	NetworkAppId *string `json:"NetworkAppId,omitnil,omitempty" name:"NetworkAppId"`
+
+	// network app name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Region code
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// log topic id
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Logset id
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// Application token
+	Token *string `json:"Token,omitnil,omitempty" name:"Token"`
+
+	// Host Account ID
+	Uin *uint64 `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Sub-account ID
+	SubUin *uint64 `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Creation time (a second-level timestamp)
+	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Update time (a second-level timestamp)
+	UpdateTime *uint64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
+type NetworkApplicationInfo struct {
+	// Web application Id
+	NetworkAppId *string `json:"NetworkAppId,omitnil,omitempty" name:"NetworkAppId"`
+
+	// Network app name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Region code
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Log topic id
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// log set id
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// Host Account ID
+	Uin *uint64 `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Sub-account ID
+	SubUin *uint64 `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Creation time, timestamp in seconds
+	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Update time (second-level timestamp)
+	UpdateTime *uint64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
+type NoticeContent struct {
+	// Channel type
+	// 
+	// Email: mail; Sms: Sms; WeChat: WeChat; Phone: call; WeCom: WeCom; DingTalk: DingTalk; Lark: Lark; Http: Custom Callback
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Alarm trigger notification content template.
+	TriggerContent *NoticeContentInfo `json:"TriggerContent,omitnil,omitempty" name:"TriggerContent"`
+
+	// Alarm clearing notification content template.
+	RecoveryContent *NoticeContentInfo `json:"RecoveryContent,omitnil,omitempty" name:"RecoveryContent"`
+}
+
+type NoticeContentInfo struct {
+	// Notification content template title information.
+	// Some notification channel types do not support "title". See the Tencent Cloud Console page (https://console.cloud.tencent.com/cls/alarm/notice-template).
+	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
+
+	// Body information of a notification content template.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Request Headers: The Request header in an HTTP Request contains additional information sent to server, such as user agent, authorization credentials, expected response format.
+	// Only "Custom Callback" supports this configuration.
+	Headers []*string `json:"Headers,omitnil,omitempty" name:"Headers"`
+}
+
+type NoticeContentTemplate struct {
+	// Notification content template ID.
+	NoticeContentId *string `json:"NoticeContentId,omitnil,omitempty" name:"NoticeContentId"`
+
+	// notification content template name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Language type.
+	// 
+	// 0: Chinese
+	// 1: English
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Notification content template information.
+	NoticeContents []*NoticeContent `json:"NoticeContents,omitnil,omitempty" name:"NoticeContents"`
+
+	// Notification content template tag.
+	// 
+	// 0: user-customized
+	// 1: Built-in
+	Flag *uint64 `json:"Flag,omitnil,omitempty" name:"Flag"`
+
+	// Root account of a creator.
+	Uin *uint64 `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Sub-account of a creator or modifier.
+	SubUin *uint64 `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Creation time. A timestamp in seconds.
+	CreateTime *int64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Update time. A timestamp in seconds.
+	UpdateTime *int64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
 type NoticeReceiver struct {
-	// Recipient type. Valid values:
-	// <br><li> `Uin`: user ID
-	// <br><li> `Group`: user group ID
-	// Currently, other recipient types are not supported.
+	// Recipient type. Available values:
+	// -Uin - User ID
+	// -Group - User group ID
+	// Other recipient types are not currently supported.
 	ReceiverType *string `json:"ReceiverType,omitnil,omitempty" name:"ReceiverType"`
 
-	// Recipient
+	// Recipient.
+	// When ReceiverType is Uin, the value of ReceiverIds is the user uid. [Sub-user information query](https://www.tencentcloud.com/document/api/598/53486?from_cn_redirect=1)
+	// When ReceiverType is Group, ReceiverIds is the user Group id. [CAM User Group](https://www.tencentcloud.com/document/product/598/34589?from_cn_redirect=1)
 	ReceiverIds []*int64 `json:"ReceiverIds,omitnil,omitempty" name:"ReceiverIds"`
 
-	// Notification method
-	// <br><li> `Email`: email
-	// <br><li> `Sms`: SMS
-	// <br><li> `WeChat`: WeChat
-	// <br><li> `Phone`: phone
+	// Notification receiving channel
+	// -Mail
+	// -Sms
+	// -WeChat
+	// -Phone - phone
 	ReceiverChannels []*string `json:"ReceiverChannels,omitnil,omitempty" name:"ReceiverChannels"`
 
-	// Start time for allowed message receipt
+	// Notification content template ID. Use Default-zh to refer to the Default template (Chinese). Use Default-en to refer to DefaultTemplate (English). Get the notification content template ID by searching the notification content template (https://www.tencentcloud.com/document/product/614/111714?from_cn_redirect=1).
+	NoticeContentId *string `json:"NoticeContentId,omitnil,omitempty" name:"NoticeContentId"`
+
+	// Start time to allow receipt of information. Format: `15:04:05`. Required.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time for allowed message receipt
+	// Allow receipt of information end time. Format: `15:04:05`. Required
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Index
+	// Bit order.
+	// 
+	// -Invalid when passed as an input parameter.
+	// -Valid at that time.
 	Index *int64 `json:"Index,omitnil,omitempty" name:"Index"`
 }
 
 type NoticeRule struct {
-	// Alarms notification template recipient informationNote: This field may return null, indicating that no valid values can be obtained.
+	// Match rule JSON string.
+	// **rule tree format is a nested structure JSON string**
+	// `{"Value":"AND","Type":"Operation","Children":[{"Value":"OR","Type":"Operation","Children":[{"Type":"Condition","Value":"Level","Children":[{"Value":"In","Type":"Compare"},{"Value":"[1,0]","Type":"Value"}]},{"Type":"Condition","Value":"Level","Children":[{"Value":"NotIn","Type":"Compare"},{"Value":"[2]","Type":"Value"}]}]}]}`
+	// 
+	// **Rule tree limiting rules are as follows**:
+	// -Valid values for Type in the top-level rule: `Condition`, `Operation`
+	// -Valid values for the Type of the `Operation` sub-node: `Condition`, `Operation`
+	// -Valid values for the Type of a `Condition` sub-node: `String`, `Compare`, `Array`, `TimeRange`, `Value`, `Key`.
+	// -Other types have no sub-node
+	// -When rule Type is `Operation`, the valid values for value are `AND`, `OR`.
+	// -When rule Type is `Condition`, value is required and the number of child nodes cannot be less than 2.
+	// -When the sub-node Type is `Compare`, the valid values for value are `>`, `<`, `>=`, `<=`, `=`, `!=`, `Between`, `NotBetween`, `=~`, `!=~`, `In`, `NotIn`.
+	// -When the value is `Between` or `NotBetween`, the next sub-node value must be an array of length 2.
+	// -When the value is `=~` or `!=~`, the next sub-node value must be a regular expression.
+	// -When value is `In` or `NotIn`, the next sub-node value must be an array.
+	// 
+	// **Business parameter meaning**:
+	// -Type: Condition means the rule condition. Value: Level means the alarm level.
+	// -Sub-node Type supports `Compare`, and Value supports `In` and `NotIn`.
+	// -Supported values for the next sub-node value: 0 (warning), 1 (reminder), 2 (critical).
+	// The following example means the alarm level belongs to reminder.
+	// `{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"Level\",\"Children\":[{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[1]\",\"Type\":\"Value\"}]}]}`
+	// 
+	// -Type: Condition means rule condition. Value: NotifyType refers to notification type.
+	// -Sub-node Type supports `Compare`, and Value supports `In` and `NotIn`.
+	// -Supported values for the next sub-node value: 1 (alarm notification), 2 (recovery notification).
+	// The following example means the notification type belongs to alarm notification or the notification type is not within restoration notification.
+	// `{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"NotifyType\",\"Children\":[{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[1]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"NotifyType\",\"Children\":[{\"Value\":\"NotIn\",\"Type\":\"Compare\"},{\"Value\":\"[2]\",\"Type\":\"Value\"}]}]}]}`
+	// 
+	// -Type: Condition means rule condition. Value: AlarmID indicates alarm policy.
+	// -Sub-node Type supports `Compare`, and Value supports `In` and `NotIn`.
+	// -Supported values for the next sub-node value: alarm policy id array.
+	// The following example means: The alarm policy belongs to alarm-53af048c-254b-4c73-bb48-xxx, alarm-6dfa8bc5-08da-4d64-b6cb-xxx or the alarm policy does not belong to alarm-1036314c-1e49-4cee-a8fb-xxx.
+	// `"{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"AlarmID\",\"Children\":[{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"alarm-53af048c-254b-4c73-bb48-xxx\\\",\\\"alarm-6dfa8bc5-08da-4d64-b6cb-xxx\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"AlarmID\",\"Children\":[{\"Value\":\"NotIn\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"alarm-1036314c-1e49-4cee-a8fb-xxx\\\"]\",\"Type\":\"Value\"}]}]}]}"`
+	// 
+	// -Type: Condition means the rule condition. Value: AlarmName means the alarm policy name.
+	// -Sub-node Type supports `Compare`, and Value supports `=~`, `!=~`
+	// -Next sub-node value supported values: Must be a regular expression.
+	// The following example means the alarm policy name regular expression matching ^test$ or the alarm policy name regular expression mismatch ^hahaha$.
+	// `{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"AlarmName\",\"Children\":[{\"Value\":\"=~\",\"Type\":\"Compare\"},{\"Value\":\"^test$\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"AlarmName\",\"Children\":[{\"Value\":\"!=~\",\"Type\":\"Compare\"},{\"Value\":\"^hahaha$\",\"Type\":\"Value\"}]}]}]}`
+	// 
+	// -Type: Condition means rule condition. Value: Label refers to alarm classification field.
+	// - The sub-node Type supports `Compare`, and Value supports `In`, `NotIn`, `=~`, `!=~`.
+	// -Supported values for the next sub-node value: `In`, `NotIn` where value is an array, `=~`, `!=~` where value is a regex.
+	// The following example means: the alarm classification field key1 belongs to v1, or the alarm classification field key2 NOT_IN v2, or the alarm classification field key3 matches the regular expression ^test$, or the alarm classification field key4 does not match the regular expression ^hahaha$.
+	// `{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key1\",\"Type\":\"Key\"},{\"Value\":\"In\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"v1\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key2\",\"Type\":\"Key\"},{\"Value\":\"NotIn\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"v2\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key3\",\"Type\":\"Key\"},{\"Value\":\"=~\",\"Type\":\"Compare\"},{\"Value\":\"^test$\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Label\",\"Children\":[{\"Value\":\"key4\",\"Type\":\"Key\"},{\"Value\":\"!=~\",\"Type\":\"Compare\"},{\"Value\":\"^hahaha$\",\"Type\":\"Value\"}]}]}]}`
+	// 
+	// -Type: Condition means Rule Condition. Value: NotifyTime refers to notification time.
+	// - Sub-node Type supports `Compare`, and Value supports `Between`, `NotBetween`
+	// -Next sub-node value supported values: An array of strings with a length of 2 in the format `14:20:36`.
+	// The following example indicates the notification time is within the specified scope 14:18:36 to 14:33:36 or not within specified range 14:20:36 to 14:30:36.
+	// `{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"NotifyTime\",\"Children\":[{\"Value\":\"Between\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"14:18:36\\\",\\\"14:33:36\\\"]\",\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"NotifyTime\",\"Children\":[{\"Value\":\"NotBetween\",\"Type\":\"Compare\"},{\"Value\":\"[\\\"14:20:36\\\",\\\"14:30:36\\\"]\",\"Type\":\"Value\"}]}]}]}`
+	// 
+	// -Type: Condition means the rule condition. Value: Duration indicates the duration of the alarm.
+	// -The sub-node Type supports `Compare`, and Value supports `>`, `<`, `>=`, `<=`.
+	// -Next sub-node value supported values: integer value in minutes
+	// The following example means: the duration of the alarm is greater than 1 minute, equal to or greater than 2 minutes, less than 3 minutes, or less than or equal to 4 minutes.
+	// `{\"Value\":\"AND\",\"Type\":\"Operation\",\"Children\":[{\"Value\":\"OR\",\"Type\":\"Operation\",\"Children\":[{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\">\",\"Type\":\"Compare\"},{\"Value\":1,\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\">=\",\"Type\":\"Compare\"},{\"Value\":2,\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\"<\",\"Type\":\"Compare\"},{\"Value\":3,\"Type\":\"Value\"}]},{\"Type\":\"Condition\",\"Value\":\"Duration\",\"Children\":[{\"Value\":\"<=\",\"Type\":\"Compare\"},{\"Value\":4,\"Type\":\"Value\"}]}]}]}`
+	Rule *string `json:"Rule,omitnil,omitempty" name:"Rule"`
+
+	// Alarm notification recipient information.
 	NoticeReceivers []*NoticeReceiver `json:"NoticeReceivers,omitnil,omitempty" name:"NoticeReceivers"`
 
-	// Alarms notification template callback informationNote: This field may return null, indicating that no valid values can be obtained.
+	// Alarm notification template callback information, including WeCom, DingTalk, and Lark.
 	WebCallbacks []*WebCallback `json:"WebCallbacks,omitnil,omitempty" name:"WebCallbacks"`
 
-	// Matching rules.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Rule *string `json:"Rule,omitnil,omitempty" name:"Rule"`
+	// Alarm escalation switch. `true`: enable alarm escalation, `false`: disable alarm escalation. Default: false.
+	Escalate *bool `json:"Escalate,omitnil,omitempty" name:"Escalate"`
+
+	// Alarm escalation conditions. `1`: Unclaimed and unrecovered, `2`: Unrecovered. Default is 1.
+	// -Unclaimed and unrecovered: Upgrade if the alert is not restored and no one claims it.
+	// -Unrecovered: Upgrade if the alarm persists without recovery.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Escalate alarms interval. Unit: minutes, range `[1, 14400]`.
+	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// Notification channel configuration for the next step after alarm severity escalation.
+	EscalateNotice *EscalateNoticeInfo `json:"EscalateNotice,omitnil,omitempty" name:"EscalateNotice"`
+}
+
+// Predefined struct for user
+type OpenClawServiceRequestParams struct {
+	// <p>Tag type</p><p>Enumeration value:</p><ul><li>OpenClaw: OpenClaw type</li><li>ClawPro: ClawPro type</li></ul>
+	Tag *string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// <p>Whether to create a trace topic, default to false</p><p>Enumeration value:</p><ul><li>true: Creates a trace topic</li><li>false: Does not create a trace topic</li></ul>
+	EnableTrace *bool `json:"EnableTrace,omitnil,omitempty" name:"EnableTrace"`
+}
+
+type OpenClawServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Tag type</p><p>Enumeration value:</p><ul><li>OpenClaw: OpenClaw type</li><li>ClawPro: ClawPro type</li></ul>
+	Tag *string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// <p>Whether to create a trace topic, default to false</p><p>Enumeration value:</p><ul><li>true: Creates a trace topic</li><li>false: Does not create a trace topic</li></ul>
+	EnableTrace *bool `json:"EnableTrace,omitnil,omitempty" name:"EnableTrace"`
+}
+
+func (r *OpenClawServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenClawServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Tag")
+	delete(f, "EnableTrace")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenClawServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenClawServiceResponseParams struct {
+	// <p>Logset id</p><p><a href="https://www.tencentcloud.com/document/product/614/41034?from_cn_redirect=1">Logset document</a></p>
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// <p>Logset name</p>
+	LogsetName *string `json:"LogsetName,omitnil,omitempty" name:"LogsetName"`
+
+	// <p>Log topic id</p><p><a href="https://www.tencentcloud.com/document/product/614/41035?from_cn_redirect=1">Log topic document</a></p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Log topic name</p>
+	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+
+	// <p>Metric topic id</p><p><a href="https://www.tencentcloud.com/document/product/614/90328?from_cn_redirect=1">Metric topic document</a></p>
+	MetricTopicId *string `json:"MetricTopicId,omitnil,omitempty" name:"MetricTopicId"`
+
+	// <p>Metric topic name</p>
+	MetricTopicName *string `json:"MetricTopicName,omitnil,omitempty" name:"MetricTopicName"`
+
+	// <p>Bound machine group id</p><p><a href="https://www.tencentcloud.com/document/product/614/17412?from_cn_redirect=1">Machine group document</a></p>
+	MachineGroupId *string `json:"MachineGroupId,omitnil,omitempty" name:"MachineGroupId"`
+
+	// <p>Machine group name</p>
+	MachineGroupName *string `json:"MachineGroupName,omitnil,omitempty" name:"MachineGroupName"`
+
+	// <p>Collection configuration id. Application log</p><p><a href="https://www.tencentcloud.com/document/product/614/33494?from_cn_redirect=1">Collection overview document</a> - <a href="https://www.tencentcloud.com/document/product/614/57497?from_cn_redirect=1">LogListener collection configuration import</a></p>
+	AppLogConfigId *string `json:"AppLogConfigId,omitnil,omitempty" name:"AppLogConfigId"`
+
+	// <p>Collection configuration name. Application log</p>
+	AppLogConfigName *string `json:"AppLogConfigName,omitnil,omitempty" name:"AppLogConfigName"`
+
+	// <p>Collection configuration id. Session log</p><p><a href="https://www.tencentcloud.com/document/product/614/33494?from_cn_redirect=1">Collection overview document</a> - <a href="https://www.tencentcloud.com/document/product/614/57497?from_cn_redirect=1">LogListener collection configuration import</a></p>
+	SessionLogConfigId *string `json:"SessionLogConfigId,omitnil,omitempty" name:"SessionLogConfigId"`
+
+	// <p>Collection configuration name. Session log</p>
+	SessionLogConfigName *string `json:"SessionLogConfigName,omitnil,omitempty" name:"SessionLogConfigName"`
+
+	// <p>trace topic ID</p>
+	TraceTopicId *string `json:"TraceTopicId,omitnil,omitempty" name:"TraceTopicId"`
+
+	// <p>trace topic name</p>
+	TraceTopicName *string `json:"TraceTopicName,omitnil,omitempty" name:"TraceTopicName"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type OpenClawServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *OpenClawServiceResponseParams `json:"Response"`
+}
+
+func (r *OpenClawServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenClawServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenClsServiceRequestParams struct {
+
+}
+
+type OpenClsServiceRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *OpenClsServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenClsServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenClsServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenClsServiceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type OpenClsServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *OpenClsServiceResponseParams `json:"Response"`
+}
+
+func (r *OpenClsServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenClsServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
 type OpenKafkaConsumerRequestParams struct {
-	// Log Topic ID
+	// <p>Log topic Id.</p><ul><li>Get log topic Id by <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">get log topic list</a>.</li><li>Get log topic Id by <a href="https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1">create log topic</a>.</li></ul>
 	FromTopicId *string `json:"FromTopicId,omitnil,omitempty" name:"FromTopicId"`
 
-	// Compression mode. Valid values: `0` (no compression); `2` (snappy); `3` (LZ4)
+	// <p>Compression mode [0:NONE; 2:SNAPPY; 3:LZ4], default: 0</p>
 	Compression *int64 `json:"Compression,omitnil,omitempty" name:"Compression"`
 
-	// Kafka consumer data format
+	// <p>kafka protocol consumption data format</p>
 	ConsumerContent *KafkaConsumerContent `json:"ConsumerContent,omitnil,omitempty" name:"ConsumerContent"`
+
+	// <p>Whether to enable service log shipping. Valid values: 1: disable; 2: enable. Default value: 2</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// <p>Range type of consumption, 0: latest; 1: historic + latest; default value: 0</p>
+	ScopeType *uint64 `json:"ScopeType,omitnil,omitempty" name:"ScopeType"`
 }
 
 type OpenKafkaConsumerRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log Topic ID
+	// <p>Log topic Id.</p><ul><li>Get log topic Id by <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">get log topic list</a>.</li><li>Get log topic Id by <a href="https://www.tencentcloud.com/document/product/614/56456?from_cn_redirect=1">create log topic</a>.</li></ul>
 	FromTopicId *string `json:"FromTopicId,omitnil,omitempty" name:"FromTopicId"`
 
-	// Compression mode. Valid values: `0` (no compression); `2` (snappy); `3` (LZ4)
+	// <p>Compression mode [0:NONE; 2:SNAPPY; 3:LZ4], default: 0</p>
 	Compression *int64 `json:"Compression,omitnil,omitempty" name:"Compression"`
 
-	// Kafka consumer data format
+	// <p>kafka protocol consumption data format</p>
 	ConsumerContent *KafkaConsumerContent `json:"ConsumerContent,omitnil,omitempty" name:"ConsumerContent"`
+
+	// <p>Whether to enable service log shipping. Valid values: 1: disable; 2: enable. Default value: 2</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// <p>Range type of consumption, 0: latest; 1: historic + latest; default value: 0</p>
+	ScopeType *uint64 `json:"ScopeType,omitnil,omitempty" name:"ScopeType"`
 }
 
 func (r *OpenKafkaConsumerRequest) ToJsonString() string {
@@ -8300,6 +19238,8 @@ func (r *OpenKafkaConsumerRequest) FromJsonString(s string) error {
 	delete(f, "FromTopicId")
 	delete(f, "Compression")
 	delete(f, "ConsumerContent")
+	delete(f, "HasServicesLog")
+	delete(f, "ScopeType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenKafkaConsumerRequest has unknown keys!", "")
 	}
@@ -8308,7 +19248,7 @@ func (r *OpenKafkaConsumerRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type OpenKafkaConsumerResponseParams struct {
-	// Topic Parameter used by KafkaConsumer during consumption
+	// <p>Topic parameter used by KafkaConsumer during consumption</p>
 	TopicID *string `json:"TopicID,omitnil,omitempty" name:"TopicID"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -8343,8 +19283,7 @@ type ParquetKeyInfo struct {
 	// Supported data types: string, boolean, int32, int64, float, and double
 	KeyType *string `json:"KeyType,omitnil,omitempty" name:"KeyType"`
 
-	// Assignment information returned upon resolution failure
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Assigned value for parsing failure
 	KeyNonExistingField *string `json:"KeyNonExistingField,omitnil,omitempty" name:"KeyNonExistingField"`
 }
 
@@ -8361,83 +19300,111 @@ type PartitionInfo struct {
 	// Partition hash end key
 	ExclusiveEndKey *string `json:"ExclusiveEndKey,omitnil,omitempty" name:"ExclusiveEndKey"`
 
-	// Partition creation time
+	// Partition Creation Time
+	// Time format: yyyy-MM-dd HH:mm:ss
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Last modified of read-only partition
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Time to stop writing data to the read-only partition
+	// Time format: yyyy-MM-dd HH:mm:ss
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LastWriteTime *string `json:"LastWriteTime,omitnil,omitempty" name:"LastWriteTime"`
+}
+
+type PartitionOffsetInfo struct {
+	// Partition ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PartitionId *uint64 `json:"PartitionId,omitnil,omitempty" name:"PartitionId"`
+
+	// Offset.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 // Predefined struct for user
 type PreviewKafkaRechargeRequestParams struct {
-	// Preview type. Valid values: 1 (source data preview) and 2 (result preview).
+	// Preview type. 1: preview of source data; 2: preview of exported results.
 	PreviewType *uint64 `json:"PreviewType,omitnil,omitempty" name:"PreviewType"`
 
-	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka)
+	// Import Kafka type. 0: Tencent Cloud CKafka; 1: user-built kafka.
 	KafkaType *uint64 `json:"KafkaType,omitnil,omitempty" name:"KafkaType"`
 
-	// List of Kafka-related topics that the user needs to import, separated by commas. Supports up to 100 topics.
+	// List of Kafka-related topics to be imported by the user, topics separated by commas.
+	// Supports up to 100.
 	UserKafkaTopics *string `json:"UserKafkaTopics,omitnil,omitempty" name:"UserKafkaTopics"`
 
-	// Position for data import. Valid values: -2 (earliest, default) and -1 (latest).
+	// Import data location. -2: earliest; -1: latest.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Tencent Cloud CKafka instance ID.
-	// KafkaInstance is required when KafkaType is 0
+	// Tencent Cloud CKafka instance ID. The parameter KafkaInstance is valid and required when KafkaType is 0.
+	// -Get the instance id through [Get Instance List](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
 	KafkaInstance *string `json:"KafkaInstance,omitnil,omitempty" name:"KafkaInstance"`
 
-	// Service AddressServerAddr is required when KafkaType is 1
+	// Service address.
+	// When KafkaType is 1, ServerAddr is required.
 	ServerAddr *string `json:"ServerAddr,omitnil,omitempty" name:"ServerAddr"`
 
 	// Whether ServerAddr is a secure connection.
 	// Valid when KafkaType is 1.
 	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitnil,omitempty" name:"IsEncryptionAddr"`
 
-	// Encrypted Access ProtocolWhen KafkaType is 1 and IsEncryptionAddr is true, Protocol is required
+	// Encrypted Access Protocol.
+	// When KafkaType is 1 and IsEncryptionAddr is true, Protocol is required.
 	Protocol *KafkaProtocolInfo `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-	// Kafka consumer group name
+	// User Kafka consumer group.
+	// 
+	// -A consumption group is a scalable and fault-tolerant consumer mechanism provided by Kafka. Multiple consumers exist in a consumption group, and all consumers in the group consume subscribed data of messages in the Topic. A consumer can consume multiple partitions simultaneously, but one Partition can only be consumed by a single consumer in the group.
 	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
 
 	// Log import rule
 	LogRechargeRule *LogRechargeRuleInfo `json:"LogRechargeRule,omitnil,omitempty" name:"LogRechargeRule"`
+
+	// User kafka extended information
+	UserKafkaMeta *UserKafkaMeta `json:"UserKafkaMeta,omitnil,omitempty" name:"UserKafkaMeta"`
 }
 
 type PreviewKafkaRechargeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Preview type. Valid values: 1 (source data preview) and 2 (result preview).
+	// Preview type. 1: preview of source data; 2: preview of exported results.
 	PreviewType *uint64 `json:"PreviewType,omitnil,omitempty" name:"PreviewType"`
 
-	// Kafka type. Valid values: 0 (Tencent Cloud CKafka) and 1 (customer's Kafka)
+	// Import Kafka type. 0: Tencent Cloud CKafka; 1: user-built kafka.
 	KafkaType *uint64 `json:"KafkaType,omitnil,omitempty" name:"KafkaType"`
 
-	// List of Kafka-related topics that the user needs to import, separated by commas. Supports up to 100 topics.
+	// List of Kafka-related topics to be imported by the user, topics separated by commas.
+	// Supports up to 100.
 	UserKafkaTopics *string `json:"UserKafkaTopics,omitnil,omitempty" name:"UserKafkaTopics"`
 
-	// Position for data import. Valid values: -2 (earliest, default) and -1 (latest).
+	// Import data location. -2: earliest; -1: latest.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Tencent Cloud CKafka instance ID.
-	// KafkaInstance is required when KafkaType is 0
+	// Tencent Cloud CKafka instance ID. The parameter KafkaInstance is valid and required when KafkaType is 0.
+	// -Get the instance id through [Get Instance List](https://www.tencentcloud.com/document/product/597/40835?from_cn_redirect=1).
 	KafkaInstance *string `json:"KafkaInstance,omitnil,omitempty" name:"KafkaInstance"`
 
-	// Service AddressServerAddr is required when KafkaType is 1
+	// Service address.
+	// When KafkaType is 1, ServerAddr is required.
 	ServerAddr *string `json:"ServerAddr,omitnil,omitempty" name:"ServerAddr"`
 
 	// Whether ServerAddr is a secure connection.
 	// Valid when KafkaType is 1.
 	IsEncryptionAddr *bool `json:"IsEncryptionAddr,omitnil,omitempty" name:"IsEncryptionAddr"`
 
-	// Encrypted Access ProtocolWhen KafkaType is 1 and IsEncryptionAddr is true, Protocol is required
+	// Encrypted Access Protocol.
+	// When KafkaType is 1 and IsEncryptionAddr is true, Protocol is required.
 	Protocol *KafkaProtocolInfo `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-	// Kafka consumer group name
+	// User Kafka consumer group.
+	// 
+	// -A consumption group is a scalable and fault-tolerant consumer mechanism provided by Kafka. Multiple consumers exist in a consumption group, and all consumers in the group consume subscribed data of messages in the Topic. A consumer can consume multiple partitions simultaneously, but one Partition can only be consumed by a single consumer in the group.
 	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
 
 	// Log import rule
 	LogRechargeRule *LogRechargeRuleInfo `json:"LogRechargeRule,omitnil,omitempty" name:"LogRechargeRule"`
+
+	// User kafka extended information
+	UserKafkaMeta *UserKafkaMeta `json:"UserKafkaMeta,omitnil,omitempty" name:"UserKafkaMeta"`
 }
 
 func (r *PreviewKafkaRechargeRequest) ToJsonString() string {
@@ -8462,6 +19429,7 @@ func (r *PreviewKafkaRechargeRequest) FromJsonString(s string) error {
 	delete(f, "Protocol")
 	delete(f, "ConsumerGroupName")
 	delete(f, "LogRechargeRule")
+	delete(f, "UserKafkaMeta")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PreviewKafkaRechargeRequest has unknown keys!", "")
 	}
@@ -8473,8 +19441,7 @@ type PreviewKafkaRechargeResponseParams struct {
 	// Log sample, which is returned when `PreviewType` is set to `2`
 	LogSample *string `json:"LogSample,omitnil,omitempty" name:"LogSample"`
 
-	// Log preview result
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Log preview results
 	LogData *string `json:"LogData,omitnil,omitempty" name:"LogData"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -8501,45 +19468,55 @@ type PreviewLogStatistic struct {
 	// Log content
 	LogContent *string `json:"LogContent,omitnil,omitempty" name:"LogContent"`
 
-	// Line number
+	// Line number. Starts from 0.
 	LineNum *int64 `json:"LineNum,omitnil,omitempty" name:"LineNum"`
 
-	// Target log topic
+	// target log topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	DstTopicId *string `json:"DstTopicId,omitnil,omitempty" name:"DstTopicId"`
 
-	// Error code. An empty string "" indicates no error.
+	// Error message for failure. A null string "" indicates normal.
 	FailReason *string `json:"FailReason,omitnil,omitempty" name:"FailReason"`
 
-	// Log timestamp
+	// Log time, format: `2024-05-07 17:13:17.105`
+	// 
+	// -Invalid input parameter
+	// -Valid at that time, the time format in logs
 	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// Target topic name
 	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: DstTopicName is deprecated.
 	DstTopicName *string `json:"DstTopicName,omitnil,omitempty" name:"DstTopicName"`
 }
 
 // Predefined struct for user
 type QueryMetricRequestParams struct {
-	// Query statement, using PromQL syntax	
+	// Queries statements; using PromQL syntax	
+	// -Refer to the [Syntax Rules](https://www.tencentcloud.com/document/product/614/90334?from_cn_redirect=1) document
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// Metric Topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Query time, Unix Timestamp in seconds	
+	// Query time, Unix timestamp in seconds. When empty, it represents the current timestamp.
 	Time *uint64 `json:"Time,omitnil,omitempty" name:"Time"`
 }
 
 type QueryMetricRequest struct {
 	*tchttp.BaseRequest
 	
-	// Query statement, using PromQL syntax	
+	// Queries statements; using PromQL syntax	
+	// -Refer to the [Syntax Rules](https://www.tencentcloud.com/document/product/614/90334?from_cn_redirect=1) document
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// Metric Topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Query time, Unix Timestamp in seconds	
+	// Query time, Unix timestamp in seconds. When empty, it represents the current timestamp.
 	Time *uint64 `json:"Time,omitnil,omitempty" name:"Time"`
 }
 
@@ -8566,7 +19543,11 @@ func (r *QueryMetricRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type QueryMetricResponseParams struct {
-	// Metric Query Result Type
+	// Metric Query Result Type, Support
+	// -scalar value
+	// -string value
+	// -instantaneous vector
+	// -matrix interval vector
 	ResultType *string `json:"ResultType,omitnil,omitempty" name:"ResultType"`
 
 	// Metric Query Result
@@ -8595,9 +19576,11 @@ func (r *QueryMetricResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type QueryRangeMetricRequestParams struct {
 	// Metric Topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Queries statements; using PromQL syntax
+	// -Refer to the [syntax rules](https://www.tencentcloud.com/document/product/614/90334?from_cn_redirect=1) document.
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// Queries start time; unix timestamp in seconds
@@ -8614,9 +19597,11 @@ type QueryRangeMetricRequest struct {
 	*tchttp.BaseRequest
 	
 	// Metric Topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// Queries statements; using PromQL syntax
+	// -Refer to the [syntax rules](https://www.tencentcloud.com/document/product/614/90334?from_cn_redirect=1) document.
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// Queries start time; unix timestamp in seconds
@@ -8654,7 +19639,11 @@ func (r *QueryRangeMetricRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type QueryRangeMetricResponseParams struct {
-	// Metric Query Result Type
+	// Metric Query Result Type, support
+	// -scalar value
+	// -string value
+	// -instantaneous vector
+	// -matrix interval vector
 	ResultType *string `json:"ResultType,omitnil,omitempty" name:"ResultType"`
 
 	// Metric Query Result
@@ -8680,22 +19669,203 @@ func (r *QueryRangeMetricResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type RebuildIndexTaskInfo struct {
+	// Reindexing task ID
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Current status of the reindexing task. 0: reindexing task created; 1: creating reindexing resources; 2: reindexing resources created; 3: reindexing; 4: paused; 5: reindexing completed; 6: reindexing succeeded (searchable); 7: reindexing failed; 8: revoked; 9: deleting the metadata and index.
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Start timestamp of the reindexing task
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Rebuild task end timestamp
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Estimated remaining time for reshipping, in seconds
+	RemainTime *int64 `json:"RemainTime,omitnil,omitempty" name:"RemainTime"`
+
+	// Rebuild task creation timestamp
+	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Re-shipping completion degree, in percentages.
+	Progress *float64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// Update time of the reindexing task
+	UpdateTime *uint64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Additional status description. Currently, it only describes the reason for failure.
+	StatusMessage *string `json:"StatusMessage,omitnil,omitempty" name:"StatusMessage"`
+}
+
+type RecordingRuleTaskInfo struct {
+	// Pre-aggregation task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Source Log Topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Pre-aggregation task name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Creation Time
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Task Update Time
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Task status: 1: Running 2: Stopped 3: Error - Source log topic not found 4: Error - Target topic not found
+	// 
+	// 5: Access permission issue 6: Internal failure 7: Other faults
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Task status: 1 Enabled, 2 Disabled
+	EnableFlag *int64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
+
+	// Schedule Start Time
+	ProcessStartTime *uint64 `json:"ProcessStartTime,omitnil,omitempty" name:"ProcessStartTime"`
+
+	// Scheduling Interval (Minutes)
+	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
+
+	// Execution Delay (Seconds)
+	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
+
+	// Whether to enable service log shipping. Valid values: 1: disable; 2: enable.
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// Pre-aggregation search statement.
+	RecordingRuleContent *string `json:"RecordingRuleContent,omitnil,omitempty" name:"RecordingRuleContent"`
+
+	// Metric name
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
+
+	// Custom metric name.
+	CustomMetricLabels []*MetricLabel `json:"CustomMetricLabels,omitnil,omitempty" name:"CustomMetricLabels"`
+
+	// YAML configuration file ID.
+	YamlId *string `json:"YamlId,omitnil,omitempty" name:"YamlId"`
+
+	// YAML configuration file name.
+	YamlConfigName *string `json:"YamlConfigName,omitnil,omitempty" name:"YamlConfigName"`
+
+	// Target log topic ID
+	DstTopicId *string `json:"DstTopicId,omitnil,omitempty" name:"DstTopicId"`
+}
+
+type RecordingRuleYamlTaskInfo struct {
+	// YAML configuration file ID.
+	YamlId *string `json:"YamlId,omitnil,omitempty" name:"YamlId"`
+
+	// Source Log Topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Log topic ID for the write description.
+	DstTopicId *string `json:"DstTopicId,omitnil,omitempty" name:"DstTopicId"`
+
+	// Creation Time
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Task Update Time
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Task status, 1: running 2: stopped 3: error - source log topic not found 4: error - destination topic not found
+	// 
+	// 5: Access permission issue 6: Internal failure 7: Other faults
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Task status: 1 Enabled, 2 Disabled
+	EnableFlag *int64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
+
+	// Schedule Start Time
+	ProcessStartTime *uint64 `json:"ProcessStartTime,omitnil,omitempty" name:"ProcessStartTime"`
+
+	// Scheduling Interval (Minutes)
+	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
+
+	// Execution Delay (Seconds)
+	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
+
+	// Whether to enable service log shipping. Valid values: 1: disable; 2: enable.
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// YAML configuration file name.
+	YamlConfigName *string `json:"YamlConfigName,omitnil,omitempty" name:"YamlConfigName"`
+
+	// YAML configuration file content.
+	YamlContent *string `json:"YamlContent,omitnil,omitempty" name:"YamlContent"`
+
+	// Number of subtasks of the YAML file.
+	SubTaskCount *int64 `json:"SubTaskCount,omitnil,omitempty" name:"SubTaskCount"`
+}
+
+type Relabeling struct {
+	// Action executed based on regular expression matching.
+	// -replace: Label replacement, required: SourceLabels, Separator, Regex, TargetLabel, Replacement
+	// -labeldrop: Discard Label, Required: Regex
+	// -labelkeep: Reserve Label, required: Regex
+	// -lowercase, required: SourceLabels, Separator, TargetLabel
+	// -Uppercase: uppercase, Required: SourceLabels, Separator, TargetLabel
+	// -dropequal: Drop metric - exact match, required: SourceLabels, Separator, TargetLabel
+	// -keepequal: retain metric - exact match, required: SourceLabels, Separator, TargetLabel
+	// -drop: Drop metric - Regular expression matching. Required: SourceLabels, Separator, Regex.
+	// -keep: Retain metric - Regular expression matching, Required: SourceLabels, Separator, Regex
+	// -hashmod: hash modulo, required: SourceLabels, Separator, TargetLabel, Modulus
+	// -labelmap: Label map, required: Regex, Replacement
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// original label
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SourceLabels []*string `json:"SourceLabels,omitnil,omitempty" name:"SourceLabels"`
+
+	// Original label delimiter. This parameter cannot be an empty string when it is required. Its length cannot exceed 256 characters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Separator *string `json:"Separator,omitnil,omitempty" name:"Separator"`
+
+	// Target label. This parameter cannot be an empty string when it is required. The verification format is ^[a-zA-Z_][a-zA-Z0-9_]*$, and its length cannot exceed 256 characters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TargetLabel *string `json:"TargetLabel,omitnil,omitempty" name:"TargetLabel"`
+
+	// Replacement value. If regular expression matching is performed, execute the replacement operation.
+	// -Cannot be an empty string when required. Length cannot exceed 256.
+	// -When the action is LabelMap, check format for Replacement: `^(?:(?:[a-zA-Z_]|\$(?:\{\w+\}|\w+))+\w*)+$`
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Replacement *string `json:"Replacement,omitnil,omitempty" name:"Replacement"`
+
+	// Regular expression. The matching value is extracted. This parameter cannot be an empty string when it is required. The regular expression should be a valid RE2. 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Regex *string `json:"Regex,omitnil,omitempty" name:"Regex"`
+
+	// Obtains the hash value of a label value. This parameter cannot be empty or 0 when it is required.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Modulus *uint64 `json:"Modulus,omitnil,omitempty" name:"Modulus"`
+}
+
 // Predefined struct for user
 type RetryShipperTaskRequestParams struct {
-	// Shipping rule ID
+	// Shipping Rule Id.
+	// 
+	// -Obtain the ShipperId by [obtaining the shipping task list](https://www.tencentcloud.com/document/product/614/58745?from_cn_redirect=1).
 	ShipperId *string `json:"ShipperId,omitnil,omitempty" name:"ShipperId"`
 
-	// Shipping task ID
+	// Delivery task Id.
+	// 
+	// -Obtain the TaskId by searching the shipping task list (https://www.tencentcloud.com/document/product/614/58745?from_cn_redirect=1).
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type RetryShipperTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// Shipping rule ID
+	// Shipping Rule Id.
+	// 
+	// -Obtain the ShipperId by [obtaining the shipping task list](https://www.tencentcloud.com/document/product/614/58745?from_cn_redirect=1).
 	ShipperId *string `json:"ShipperId,omitnil,omitempty" name:"ShipperId"`
 
-	// Shipping task ID
+	// Delivery task Id.
+	// 
+	// -Obtain the TaskId by searching the shipping task list (https://www.tencentcloud.com/document/product/614/58745?from_cn_redirect=1).
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
@@ -8776,10 +19946,10 @@ type RuleTagInfo struct {
 }
 
 type ScheduledSqlResouceInfo struct {
-	// Target topic ID
+	// Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Region information for the topic
+	// Regional information of the topic. Cross-region selection is not supported currently. For supported regions, see the region list (https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8) document.
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// Topic type: 0 for log topic, and 1 for metric topic
@@ -8818,10 +19988,10 @@ type ScheduledSqlTaskInfo struct {
 	// Scheduled SQL analysis of target topic
 	DstResource *ScheduledSqlResouceInfo `json:"DstResource,omitnil,omitempty" name:"DstResource"`
 
-	// Creation Time
+	// Task creation time. Format: yyyy-MM-dd HH:mm:ss
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Task Update Time
+	// Task update time. Format: yyyy-MM-dd HH:mm:ss
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Task status: 1: Running 2: Stop 3: Exception - Source log topic not found 4: Exception - target topic not found5: Access permission issue 6: Internal failure 7: Other faults
@@ -8833,77 +20003,93 @@ type ScheduledSqlTaskInfo struct {
 	// Queries statements
 	ScheduledSqlContent *string `json:"ScheduledSqlContent,omitnil,omitempty" name:"ScheduledSqlContent"`
 
-	// Schedule Start Time
+	// Schedule start time. Format: yyyy-MM-dd HH:mm:ss
 	ProcessStartTime *string `json:"ProcessStartTime,omitnil,omitempty" name:"ProcessStartTime"`
 
 	// Schedule Type: 1 Continuous Running 2 Specified Time Range
 	ProcessType *int64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 
-	// Schedule End Time, required when process_type=2
+	// Schedule End Time, format: yyyy-MM-dd HH:mm:ss, required when process_type=2
 	ProcessEndTime *string `json:"ProcessEndTime,omitnil,omitempty" name:"ProcessEndTime"`
 
-	// Scheduling Interval (Minutes)
+	// Scheduling cycle (minutes), 1-1440 minutes
 	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
 
 	// Query Time Window. @m-15m, @m, meaning the last 15 minutes
 	ProcessTimeWindow *string `json:"ProcessTimeWindow,omitnil,omitempty" name:"ProcessTimeWindow"`
 
-	// Execution Delay (Seconds)
+	// Execution delay (seconds), 0-120 seconds, default 60
 	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
 
-	// Source Topic ID Region Information
+	// Regional information of the source topicId. Supported regions are listed in the region list document (https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
 	SrcTopicRegion *string `json:"SrcTopicRegion,omitnil,omitempty" name:"SrcTopicRegion"`
 
-	// Syntax Rules: 0 Lucene syntax, 1 CQL syntaxNote: This field may return null, indicating that no valid values can be obtained.
+	// Syntax rules. 0: Lucene syntax; 1: CQL syntax.
 	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
+
+	// Whether to enable service log shipping. Valid values: 1: disable; 2: enable.
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// Full-text search tag. 1: Off, 2: On.
+	FullQuery *uint64 `json:"FullQuery,omitnil,omitempty" name:"FullQuery"`
 }
 
 // Predefined struct for user
 type SearchCosRechargeInfoRequestParams struct {
-	// Log topic ID
+	// Log topic Id.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Logset ID
+	// FL instance set ID.
+	// 
+	// -Obtain the logset Id by searching the [logset list](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1).
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
-	// Delivery Task Name
+	// COS import task name, supports up to 128 bytes.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// COS bucket, see the supported [bucket naming conventions](https://intl.cloud.tencent.com/document/product/436/13312?from_cn_redirect=1).
+	// COS bucket, see the supported [bucket naming conventions](https://www.tencentcloud.com/document/product/436/13312?from_cn_redirect=1).	
+	// 
+	// -Get COS buckets via [GET Service (List Buckets)](https://www.tencentcloud.com/document/product/436/8291?from_cn_redirect=1).
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
 	// The region where the COS bucket is located, see the supported [region list](https://intl.cloud.tencent.com/document/product/436/6224?from_cn_redirect=1).
 	BucketRegion *string `json:"BucketRegion,omitnil,omitempty" name:"BucketRegion"`
 
-	// The prefix of the folder where COS files are located
+	// The prefix of the folder where COS files are located. By default, it is null, meaning that all files under the bucket will be shipped.
 	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
 
-	// Compression mode: "", "gzip", "lzop", and "snappy". The default mode is "".
+	// Compression mode: "", "gzip", "lzop", "snappy". Default: ""; no compression.
 	Compress *string `json:"Compress,omitnil,omitempty" name:"Compress"`
 }
 
 type SearchCosRechargeInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// Log topic ID
+	// Log topic Id.
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Logset ID
+	// FL instance set ID.
+	// 
+	// -Obtain the logset Id by searching the [logset list](https://www.tencentcloud.com/document/product/614/58624?from_cn_redirect=1).
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
-	// Delivery Task Name
+	// COS import task name, supports up to 128 bytes.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// COS bucket, see the supported [bucket naming conventions](https://intl.cloud.tencent.com/document/product/436/13312?from_cn_redirect=1).
+	// COS bucket, see the supported [bucket naming conventions](https://www.tencentcloud.com/document/product/436/13312?from_cn_redirect=1).	
+	// 
+	// -Get COS buckets via [GET Service (List Buckets)](https://www.tencentcloud.com/document/product/436/8291?from_cn_redirect=1).
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
 	// The region where the COS bucket is located, see the supported [region list](https://intl.cloud.tencent.com/document/product/436/6224?from_cn_redirect=1).
 	BucketRegion *string `json:"BucketRegion,omitnil,omitempty" name:"BucketRegion"`
 
-	// The prefix of the folder where COS files are located
+	// The prefix of the folder where COS files are located. By default, it is null, meaning that all files under the bucket will be shipped.
 	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
 
-	// Compression mode: "", "gzip", "lzop", and "snappy". The default mode is "".
+	// Compression mode: "", "gzip", "lzop", "snappy". Default: ""; no compression.
 	Compress *string `json:"Compress,omitnil,omitempty" name:"Compress"`
 }
 
@@ -8934,20 +20120,28 @@ func (r *SearchCosRechargeInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SearchCosRechargeInfoResponseParams struct {
-	// The first few lines of a file under a matched bucketNote: This field may return null, indicating that no valid values can be obtained.
+	// First few lines of data from a certain file under the matched bucket
 	Data []*string `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Number of files under the matched bucket
 	Sum *uint64 `json:"Sum,omitnil,omitempty" name:"Sum"`
 
 	// Current preview file path
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-	// Reason for preview data retrieval failureNote: This field may return null, indicating that no valid values can be obtained.
+	// Reason for preview data fetch failure
 	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
-	// Status
+	// Status.
+	// -0: Success
+	// -10000: Parameter error. Parameter confirmation.
+	// -10001: Authorization failure. Please confirm authorization.
+	// -10002: Failed to get file list. Try again later. If the problem persists, consult [online support](https://andon.tencentcloud.com/online-service?from=doc_614) or [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=83&level2_id=469&source=14&data_title=%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1&step=1) to fix it.
+	// -10003: No corresponding prefix files in the bucket. Use the correct bucket, file prefix, and compression method.
+	// -10004: File download failed. Try again later. If the problem persists, consult [online support](https://andon.tencentcloud.com/online-service?from=doc_614) or [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=83&level2_id=469&source=14&data_title=%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1&step=1) to fix it.
+	// -10005: File decompression failed. Select the correct compression method and try again.
+	// -10006: Failed to read file content. Please confirm the file is readable.
+	// -10007: File preview failed, try again later. If the problem persists, consult [online support](https://andon.tencentcloud.com/online-service?from=doc_614) or [submit a ticket](https://console.cloud.tencent.com/workorder/category?level1_id=83&level2_id=469&source=14&data_title=%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1&step=1) to fix it.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -8970,14 +20164,89 @@ func (r *SearchCosRechargeInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SearchDashboardSubscribeRequestParams struct {
+	// Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
+	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
+
+	// Dashboard subscription data.
+	SubscribeData *DashboardSubscribeData `json:"SubscribeData,omitnil,omitempty" name:"SubscribeData"`
+
+	// Dashboard subscription Id. Obtain through the api [Dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1).
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Dashboard subscription Name. Obtain through the api [Dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1).
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type SearchDashboardSubscribeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
+	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
+
+	// Dashboard subscription data.
+	SubscribeData *DashboardSubscribeData `json:"SubscribeData,omitnil,omitempty" name:"SubscribeData"`
+
+	// Dashboard subscription Id. Obtain through the api [Dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1).
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Dashboard subscription Name. Obtain through the api [Dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1).
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+func (r *SearchDashboardSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SearchDashboardSubscribeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DashboardId")
+	delete(f, "SubscribeData")
+	delete(f, "Id")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SearchDashboardSubscribeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SearchDashboardSubscribeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type SearchDashboardSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *SearchDashboardSubscribeResponseParams `json:"Response"`
+}
+
+func (r *SearchDashboardSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SearchDashboardSubscribeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type SearchLogErrors struct {
-	// Log topic IDNote: This field may return null, indicating that no valid values can be obtained.
+	// Log topic ID
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Error MessageNote: This field may return null, indicating that no valid values can be obtained.
+	// Error message
 	ErrorMsg *string `json:"ErrorMsg,omitnil,omitempty" name:"ErrorMsg"`
 
-	// Error CodeNote: This field may return null, indicating that no valid values can be obtained.
+	// Error code.
 	ErrorCodeStr *string `json:"ErrorCodeStr,omitnil,omitempty" name:"ErrorCodeStr"`
 }
 
@@ -8988,111 +20257,109 @@ type SearchLogInfos struct {
 	// Log storage lifetime
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// You can pass through the Context value returned by this API to continue to get more logs. Expire time: 1 hour.Note: This field may return null, indicating that no valid values can be obtained.
+	// Pass through the Context value returned by this API, which can access more logs later, with an expiration time of 1 hour.
 	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
 }
 
 // Predefined struct for user
 type SearchLogRequestParams struct {
-	// Start time of the log to be searched, which is a Unix timestamp in milliseconds
+	// <p>Start time for logs to be searched and analyzed, <strong>Unix timestamp (ms)</strong></p>
 	From *int64 `json:"From,omitnil,omitempty" name:"From"`
 
-	// End time of the log to be searched, which is a Unix timestamp in milliseconds
+	// <p>End time for logs to be searched and analyzed, <strong>Unix timestamp (ms)</strong></p>
 	To *int64 `json:"To,omitnil,omitempty" name:"To"`
 
-	// Search and analysis statement. Maximum length: 12 KB
-	// A statement is in the format of <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[search criteria]</a> | <a href="https://intl.cloud.tencent.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statement]</a>. You can omit the pipe symbol <code> | </code> and SQL statement when log analysis is not required.
-	// Queries all logs using * or an empty string
-	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+	// <p>The retrieval analysis statement has a maximum length of 12KB.<br>The statement consists of <a href="https://www.tencentcloud.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[retrieval condition]</a> | <a href="https://www.tencentcloud.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statement]</a>. When there is no need to perform statistical analysis on logs, the pipe character <code> | </code> and SQL statement can be omitted.<br>Use * or an empty string to search all logs.</p><p>Default value: empty string</p>
+	QueryString *string `json:"QueryString,omitnil,omitempty" name:"QueryString"`
 
-	// Retrieval syntax rule, default is 0, recommended to use 1 (CQL syntax).0: Lucene syntax, 1: CQL syntax.
-	// For detailed explanation, refer to <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">Retrieve Syntax Rules</a>
-	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
+	// <p>Search syntax rules. Default value is 1. Recommended for use is 1.</p><ul><li>0: Lucene syntax</li><li>1: CQL syntax (CLS Query Language, dedicated retrieval syntax for log service)</li></ul><p>For details, see <a href="https://www.tencentcloud.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">retrieval condition syntax rules</a>.</p><p>Default value: 1</p>
+	QuerySyntax *uint64 `json:"QuerySyntax,omitnil,omitempty" name:"QuerySyntax"`
 
-	// - The ID of the log topic to be searched for. Only one log topic can be specified.
-	// - To search for multiple log topics at a time, use the `Topics` parameter.
+	// <ul><li>Log topic ID to be retrieved and analyzed. Only one can be specified.</li><li>If needed to retrieve multiple log topics at the same time, please use the Topics parameter.</li><li>TopicId and Topics cannot include both. Only select one in a single request.</li></ul>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// - The IDs of the log topics (up to 20) to be searched for.
-	// - To search for a single log topic, use the `TopicId` parameter.
-	// - You cannot use both `TopicId` and `Topics`.
+	// <ul><li>Log topic list for retrieval and analysis supports a maximum of 50 log topics.</li><li>Use TopicId to retrieve a single log topic.</li><li>TopicId and Topics cannot be used simultaneously. Only select one in a single request.</li></ul>
 	Topics []*MultiTopicSearchInformation `json:"Topics,omitnil,omitempty" name:"Topics"`
 
-	// Specifies the number of raw logs returned in a single query, default is 100, maximum is 1000. To obtain subsequent logs, use the Context parameter.Note:* This is only valid when the search and analysis statement (Query) does not contain SQL* Method for specifying SQL result count refers to <a href="https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT Syntax</a>
-	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Time order of the logs returned. Valid values: `asc` (ascending); `desc`: (descending). Default value: `desc`
-	// Notes:
-	// * This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
-	// * To sort the analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58978?from_cn_redirect=1" target="_blank">SQL ORDER BY Syntax</a>.
+	// <p>Whether raw logs are returned in time sequence. Value range: asc (ascending), desc (descending). Default is desc.<br>Note:</p><ul><li>Only valid when the search and analysis statement (Query) does not contain SQL.</li><li>For SQL result sorting, see <a href="https://www.tencentcloud.com/document/product/614/58978?from_cn_redirect=1" target="_blank">SQL ORDER BY syntax</a>.</li></ul>
 	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
 
-	// Pass the Context value returned by the last API call to retrieve more subsequent logs. A total of up to 10,000 raw logs can be obtained, with an expiration time of 1 hour.Note:* When passing this parameter, do not modify any other parameters except for this one* Only applicable for single log topic retrieval. When retrieving multiple log topics, use the Context in Topics.* This is only valid when the retrieval analysis statement (Query) does not contain SQL. For obtaining subsequent SQL results, refer to <a href="https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT Syntax</a>
+	// <p>Number of raw logs returned in a single query. Default is 100, maximum value is 1000.<br>Note:</p><ul><li>Only valid when the search and analysis statement (Query) does not contain SQL.</li><li>For the method for specifying SQL result count, see <a href="https://www.tencentcloud.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT syntax</a>.</li></ul><p>There are two methods to retrieve more logs:</p><ul><li>Context: Pass the Context value returned by the last API call to retrieve more logs. The total number of raw logs that can be obtained is up to 10,000 entries.</li><li>Offset: The offset refers to the line number from which raw logs start to return. There is no log entry limit.</li></ul>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Offset of the raw log Query, indicating the line number from which the raw log starts to return, defaults to 0.<br>Note:</p><ul><li>Valid only when the retrieval statement (Query) does not contain SQL</li><li>Cannot be used with Context parameter simultaneously</li><li>Applicable only for single log topic retrieval</li></ul>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Pass the Context value returned by the last API call to obtain more logs later. The total number of raw logs that can be retrieved is up to 10,000 entries, with an expiration time of 1 hour.<br>Note:</p><ul><li>When passing this parameter, do not modify other parameters except this one.</li><li>Applicable only for single log topic retrieval. To retrieve multiple log topics, use the Context in Topics.</li><li>Valid only when the search and analysis statement (Query) does not contain SQL. For SQL to obtain follow-up results, see <a href="https://www.tencentcloud.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT syntax</a>.</li></ul>
 	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
 
-	// Indicates whether to sample raw logs before statistical analysis (`Query` includes SQL statements).
-	// `0`: Auto-sample.
-	// `0-1`: Sample by the specified sample rate, such as `0.02`.
-	// `1`: Precise analysis without sampling.
-	// Default value: `1`
+	// <p>Whether to sample raw logs first and then perform statistical analysis when executing statistical analysis (SQL included in Query).<br>0: auto-sample;<br>0–1: sample at the specified sampling rate, such as 0.02;<br>1: indicates no sampling, that is, precise analysis.<br>The default value is 1.</p>
 	SamplingRate *float64 `json:"SamplingRate,omitnil,omitempty" name:"SamplingRate"`
 
-	// If the value is `true`, the new response method will be used, and the output parameters `AnalysisRecords` and `Columns` will be valid.
-	// If the value is `false`, the old response method will be used, and the output parameters `AnalysisResults` and `ColNames` will be valid.
-	// The two response methods differ slightly in terms of encoding format. You are advised to use the new method (`true`).
+	// <p>true means using the new retrieval result return method, and output parameters AnalysisRecords and Columns are valid.<br>false means using the old retrieval result return method, and output AnalysisResults and ColNames are valid.<br>There is a slight difference in encoding format between the two return methods. Recommend using true.</p>
 	UseNewAnalysis *bool `json:"UseNewAnalysis,omitnil,omitempty" name:"UseNewAnalysis"`
+
+	// <p>Whether to highlight keywords that meet retrieval criteria, generally used for highlighting. Only key-value retrieval is supported, full-text retrieval is not supported.</p>
+	HighLight *bool `json:"HighLight,omitnil,omitempty" name:"HighLight"`
+
+	// <p><strong>The Query field is deprecated. Please use the QueryString field.</strong><br>Field differences: When the syntax rule is not specified, Query uses Lucene syntax by default, while QueryString uses CQL syntax. For syntax differences, see <a href="https://www.tencentcloud.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules">Syntax Rule</a>.</p>
+	//
+	// Deprecated: Query is deprecated.
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// <p><strong>The SyntaxRule field is deprecated. Please use the QuerySyntax field.</strong></p><p>Field differences:</p><ul><li>SyntaxRule is used in conjunction with the Query field and uses Lucene syntax by default.</li><li>QuerySyntax is used in conjunction with the QueryString field and uses CQL syntax by default.</li></ul><p>SyntaxRule parameter description:</p><ul><li>0: Lucene syntax</li><li>1: CQL syntax (CLS Query Language, a dedicated retrieval syntax for log service)</li></ul>
+	//
+	// Deprecated: SyntaxRule is deprecated.
+	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
 }
 
 type SearchLogRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start time of the log to be searched, which is a Unix timestamp in milliseconds
+	// <p>Start time for logs to be searched and analyzed, <strong>Unix timestamp (ms)</strong></p>
 	From *int64 `json:"From,omitnil,omitempty" name:"From"`
 
-	// End time of the log to be searched, which is a Unix timestamp in milliseconds
+	// <p>End time for logs to be searched and analyzed, <strong>Unix timestamp (ms)</strong></p>
 	To *int64 `json:"To,omitnil,omitempty" name:"To"`
 
-	// Search and analysis statement. Maximum length: 12 KB
-	// A statement is in the format of <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[search criteria]</a> | <a href="https://intl.cloud.tencent.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statement]</a>. You can omit the pipe symbol <code> | </code> and SQL statement when log analysis is not required.
-	// Queries all logs using * or an empty string
-	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+	// <p>The retrieval analysis statement has a maximum length of 12KB.<br>The statement consists of <a href="https://www.tencentcloud.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[retrieval condition]</a> | <a href="https://www.tencentcloud.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statement]</a>. When there is no need to perform statistical analysis on logs, the pipe character <code> | </code> and SQL statement can be omitted.<br>Use * or an empty string to search all logs.</p><p>Default value: empty string</p>
+	QueryString *string `json:"QueryString,omitnil,omitempty" name:"QueryString"`
 
-	// Retrieval syntax rule, default is 0, recommended to use 1 (CQL syntax).0: Lucene syntax, 1: CQL syntax.
-	// For detailed explanation, refer to <a href="https://intl.cloud.tencent.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">Retrieve Syntax Rules</a>
-	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
+	// <p>Search syntax rules. Default value is 1. Recommended for use is 1.</p><ul><li>0: Lucene syntax</li><li>1: CQL syntax (CLS Query Language, dedicated retrieval syntax for log service)</li></ul><p>For details, see <a href="https://www.tencentcloud.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">retrieval condition syntax rules</a>.</p><p>Default value: 1</p>
+	QuerySyntax *uint64 `json:"QuerySyntax,omitnil,omitempty" name:"QuerySyntax"`
 
-	// - The ID of the log topic to be searched for. Only one log topic can be specified.
-	// - To search for multiple log topics at a time, use the `Topics` parameter.
+	// <ul><li>Log topic ID to be retrieved and analyzed. Only one can be specified.</li><li>If needed to retrieve multiple log topics at the same time, please use the Topics parameter.</li><li>TopicId and Topics cannot include both. Only select one in a single request.</li></ul>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// - The IDs of the log topics (up to 20) to be searched for.
-	// - To search for a single log topic, use the `TopicId` parameter.
-	// - You cannot use both `TopicId` and `Topics`.
+	// <ul><li>Log topic list for retrieval and analysis supports a maximum of 50 log topics.</li><li>Use TopicId to retrieve a single log topic.</li><li>TopicId and Topics cannot be used simultaneously. Only select one in a single request.</li></ul>
 	Topics []*MultiTopicSearchInformation `json:"Topics,omitnil,omitempty" name:"Topics"`
 
-	// Specifies the number of raw logs returned in a single query, default is 100, maximum is 1000. To obtain subsequent logs, use the Context parameter.Note:* This is only valid when the search and analysis statement (Query) does not contain SQL* Method for specifying SQL result count refers to <a href="https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT Syntax</a>
-	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Time order of the logs returned. Valid values: `asc` (ascending); `desc`: (descending). Default value: `desc`
-	// Notes:
-	// * This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
-	// * To sort the analysis results, see <a href="https://intl.cloud.tencent.com/document/product/614/58978?from_cn_redirect=1" target="_blank">SQL ORDER BY Syntax</a>.
+	// <p>Whether raw logs are returned in time sequence. Value range: asc (ascending), desc (descending). Default is desc.<br>Note:</p><ul><li>Only valid when the search and analysis statement (Query) does not contain SQL.</li><li>For SQL result sorting, see <a href="https://www.tencentcloud.com/document/product/614/58978?from_cn_redirect=1" target="_blank">SQL ORDER BY syntax</a>.</li></ul>
 	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
 
-	// Pass the Context value returned by the last API call to retrieve more subsequent logs. A total of up to 10,000 raw logs can be obtained, with an expiration time of 1 hour.Note:* When passing this parameter, do not modify any other parameters except for this one* Only applicable for single log topic retrieval. When retrieving multiple log topics, use the Context in Topics.* This is only valid when the retrieval analysis statement (Query) does not contain SQL. For obtaining subsequent SQL results, refer to <a href="https://intl.cloud.tencent.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT Syntax</a>
+	// <p>Number of raw logs returned in a single query. Default is 100, maximum value is 1000.<br>Note:</p><ul><li>Only valid when the search and analysis statement (Query) does not contain SQL.</li><li>For the method for specifying SQL result count, see <a href="https://www.tencentcloud.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT syntax</a>.</li></ul><p>There are two methods to retrieve more logs:</p><ul><li>Context: Pass the Context value returned by the last API call to retrieve more logs. The total number of raw logs that can be obtained is up to 10,000 entries.</li><li>Offset: The offset refers to the line number from which raw logs start to return. There is no log entry limit.</li></ul>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Offset of the raw log Query, indicating the line number from which the raw log starts to return, defaults to 0.<br>Note:</p><ul><li>Valid only when the retrieval statement (Query) does not contain SQL</li><li>Cannot be used with Context parameter simultaneously</li><li>Applicable only for single log topic retrieval</li></ul>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Pass the Context value returned by the last API call to obtain more logs later. The total number of raw logs that can be retrieved is up to 10,000 entries, with an expiration time of 1 hour.<br>Note:</p><ul><li>When passing this parameter, do not modify other parameters except this one.</li><li>Applicable only for single log topic retrieval. To retrieve multiple log topics, use the Context in Topics.</li><li>Valid only when the search and analysis statement (Query) does not contain SQL. For SQL to obtain follow-up results, see <a href="https://www.tencentcloud.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT syntax</a>.</li></ul>
 	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
 
-	// Indicates whether to sample raw logs before statistical analysis (`Query` includes SQL statements).
-	// `0`: Auto-sample.
-	// `0-1`: Sample by the specified sample rate, such as `0.02`.
-	// `1`: Precise analysis without sampling.
-	// Default value: `1`
+	// <p>Whether to sample raw logs first and then perform statistical analysis when executing statistical analysis (SQL included in Query).<br>0: auto-sample;<br>0–1: sample at the specified sampling rate, such as 0.02;<br>1: indicates no sampling, that is, precise analysis.<br>The default value is 1.</p>
 	SamplingRate *float64 `json:"SamplingRate,omitnil,omitempty" name:"SamplingRate"`
 
-	// If the value is `true`, the new response method will be used, and the output parameters `AnalysisRecords` and `Columns` will be valid.
-	// If the value is `false`, the old response method will be used, and the output parameters `AnalysisResults` and `ColNames` will be valid.
-	// The two response methods differ slightly in terms of encoding format. You are advised to use the new method (`true`).
+	// <p>true means using the new retrieval result return method, and output parameters AnalysisRecords and Columns are valid.<br>false means using the old retrieval result return method, and output AnalysisResults and ColNames are valid.<br>There is a slight difference in encoding format between the two return methods. Recommend using true.</p>
 	UseNewAnalysis *bool `json:"UseNewAnalysis,omitnil,omitempty" name:"UseNewAnalysis"`
+
+	// <p>Whether to highlight keywords that meet retrieval criteria, generally used for highlighting. Only key-value retrieval is supported, full-text retrieval is not supported.</p>
+	HighLight *bool `json:"HighLight,omitnil,omitempty" name:"HighLight"`
+
+	// <p><strong>The Query field is deprecated. Please use the QueryString field.</strong><br>Field differences: When the syntax rule is not specified, Query uses Lucene syntax by default, while QueryString uses CQL syntax. For syntax differences, see <a href="https://www.tencentcloud.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules">Syntax Rule</a>.</p>
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// <p><strong>The SyntaxRule field is deprecated. Please use the QuerySyntax field.</strong></p><p>Field differences:</p><ul><li>SyntaxRule is used in conjunction with the Query field and uses Lucene syntax by default.</li><li>QuerySyntax is used in conjunction with the QueryString field and uses CQL syntax by default.</li></ul><p>SyntaxRule parameter description:</p><ul><li>0: Lucene syntax</li><li>1: CQL syntax (CLS Query Language, a dedicated retrieval syntax for log service)</li></ul>
+	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
 }
 
 func (r *SearchLogRequest) ToJsonString() string {
@@ -9109,15 +20376,19 @@ func (r *SearchLogRequest) FromJsonString(s string) error {
 	}
 	delete(f, "From")
 	delete(f, "To")
-	delete(f, "Query")
-	delete(f, "SyntaxRule")
+	delete(f, "QueryString")
+	delete(f, "QuerySyntax")
 	delete(f, "TopicId")
 	delete(f, "Topics")
-	delete(f, "Limit")
 	delete(f, "Sort")
+	delete(f, "Limit")
+	delete(f, "Offset")
 	delete(f, "Context")
 	delete(f, "SamplingRate")
 	delete(f, "UseNewAnalysis")
+	delete(f, "HighLight")
+	delete(f, "Query")
+	delete(f, "SyntaxRule")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SearchLogRequest has unknown keys!", "")
 	}
@@ -9126,45 +20397,40 @@ func (r *SearchLogRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SearchLogResponseParams struct {
-	// Pass through the Context value returned by this API, which can access more logs later, with an expiration time of 1 hour.Note:* Applicable only for single log topic searches. When searching multiple log topics, please use the Context in Topics.
+	// <p>Pass through the Context value returned by this API to obtain more logs later. The expiration time is 1 hour.<br>Note:</p><ul><li>Applicable only for single log topic retrieval. To retrieve multiple log topics, use the Context in Topics.</li></ul>
 	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
 
-	// Whether to return all raw log query results. If not, you can use `Context` to continue to get logs.
-	// Note: This parameter is valid only when the query statement (`Query`) does not contain an SQL statement.
+	// <p>Whether all logs meeting the retrieval criteria have been returned. If not, use Context parameter to retrieve more logs.<br>Note: This is only valid when the search and analysis statement (Query) does not contain SQL.</p>
 	ListOver *bool `json:"ListOver,omitnil,omitempty" name:"ListOver"`
 
-	// Whether the returned data is the analysis (SQL) result
+	// <p>Whether the returned data is the SQL analysis result</p>
 	Analysis *bool `json:"Analysis,omitnil,omitempty" name:"Analysis"`
 
-	// Raw logs that meet the search conditions
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// <p>Raw logs matching the retrieval criteria</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Results []*LogInfo `json:"Results,omitnil,omitempty" name:"Results"`
 
-	// Column names of log analysis
-	// This parameter is valid only when `UseNewAnalysis` is `false`.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// <p>Column names of log statistics analysis results<br>This parameter is valid only when UseNewAnalysis is false</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ColNames []*string `json:"ColNames,omitnil,omitempty" name:"ColNames"`
 
-	// Log analysis result
-	// This parameter is valid only when `UseNewAnalysis` is `false`.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// <p>Statistical analysis results of logs<br>This parameter is valid only when UseNewAnalysis is false</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AnalysisResults []*LogItems `json:"AnalysisResults,omitnil,omitempty" name:"AnalysisResults"`
 
-	// Log analysis result
-	// This parameter is valid only when `UseNewAnalysis` is `true`.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// <p>Log statistics and analysis results<br>This parameter is valid only when UseNewAnalysis is true</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AnalysisRecords []*string `json:"AnalysisRecords,omitnil,omitempty" name:"AnalysisRecords"`
 
-	// Column attributes of log analysis
-	// This parameter is valid only when `UseNewAnalysis` is `true`.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// <p>Column attribute of log statistics and analysis results<br>This parameter is valid only when UseNewAnalysis is true</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Columns []*Column `json:"Columns,omitnil,omitempty" name:"Columns"`
 
-	// Sample rate used in this statistical analysis
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Sampling rate used in this analysis</p>
 	SamplingRate *float64 `json:"SamplingRate,omitnil,omitempty" name:"SamplingRate"`
 
-	// Refers to the basic information of each log topic when multiple log topics are used for search, such as error messages.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>When multiple log topics are used for retrieval, basic information of each log topic, such as error message.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Topics *SearchLogTopics `json:"Topics,omitnil,omitempty" name:"Topics"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -9188,88 +20454,200 @@ func (r *SearchLogResponse) FromJsonString(s string) error {
 }
 
 type SearchLogTopics struct {
-	// Error information for multi-log topic searchNote: This field may return null, indicating that no valid values can be obtained.
+	// Error information corresponding to multi-log topic retrieval
 	Errors []*SearchLogErrors `json:"Errors,omitnil,omitempty" name:"Errors"`
 
-	// Information for each log topic in multi-log topic searchNote: This field may return null, indicating that no valid values can be obtained.
+	// Information for each log topic during multi-log topic retrieval
 	Infos []*SearchLogInfos `json:"Infos,omitnil,omitempty" name:"Infos"`
 }
 
+type SearchViewInfo struct {
+	// <p>View ID</p>
+	ViewId *string `json:"ViewId,omitnil,omitempty" name:"ViewId"`
+
+	// <p>View name</p>
+	ViewName *string `json:"ViewName,omitnil,omitempty" name:"ViewName"`
+
+	// <p>View type</p><p>Enumeration value:</p><ul><li>log: Log topic</li><li>metric: Metric topic</li></ul>
+	ViewType *string `json:"ViewType,omitnil,omitempty" name:"ViewType"`
+
+	// <p>Logset id</p><p>Logset of the view</p>
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// <p>Region of the logset</p><p>Parameter format: ap-guangzhou</p>
+	LogsetRegion *string `json:"LogsetRegion,omitnil,omitempty" name:"LogsetRegion"`
+
+	// <p>View log topic information</p>
+	Topics []*ViewSearchTopic `json:"Topics,omitnil,omitempty" name:"Topics"`
+
+	// <p>View description</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>Creation time</p><p>Unit: second-level timestamp</p>
+	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Update time</p><p>Measurement unit: second-level timestamp</p>
+	UpdateTime *uint64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
+// Predefined struct for user
+type SendConsumerHeartbeatRequestParams struct {
+	// Flag of the consumer group that reports the heartbeat.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Consumer name for reporting heartbeat
+	// (alphanumeric underscore, no numbers or _ at the beginning, length less than 256)
+	Consumer *string `json:"Consumer,omitnil,omitempty" name:"Consumer"`
+
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// Topic partition information.
+	TopicPartitionsInfo []*TopicPartitionInfo `json:"TopicPartitionsInfo,omitnil,omitempty" name:"TopicPartitionsInfo"`
+}
+
+type SendConsumerHeartbeatRequest struct {
+	*tchttp.BaseRequest
+	
+	// Flag of the consumer group that reports the heartbeat.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Consumer name for reporting heartbeat
+	// (alphanumeric underscore, no numbers or _ at the beginning, length less than 256)
+	Consumer *string `json:"Consumer,omitnil,omitempty" name:"Consumer"`
+
+	// Logset ID
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// Topic partition information.
+	TopicPartitionsInfo []*TopicPartitionInfo `json:"TopicPartitionsInfo,omitnil,omitempty" name:"TopicPartitionsInfo"`
+}
+
+func (r *SendConsumerHeartbeatRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SendConsumerHeartbeatRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ConsumerGroup")
+	delete(f, "Consumer")
+	delete(f, "LogsetId")
+	delete(f, "TopicPartitionsInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SendConsumerHeartbeatRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SendConsumerHeartbeatResponseParams struct {
+	// Consumer group flag corresponding to a log topic.
+	ConsumerGroup *string `json:"ConsumerGroup,omitnil,omitempty" name:"ConsumerGroup"`
+
+	// Partition information
+	TopicPartitionsInfo []*TopicPartitionInfo `json:"TopicPartitionsInfo,omitnil,omitempty" name:"TopicPartitionsInfo"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type SendConsumerHeartbeatResponse struct {
+	*tchttp.BaseResponse
+	Response *SendConsumerHeartbeatResponseParams `json:"Response"`
+}
+
+func (r *SendConsumerHeartbeatResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SendConsumerHeartbeatResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ShipperInfo struct {
-	// Shipping rule ID
+	// <p>Delivery Rule ID</p>
 	ShipperId *string `json:"ShipperId,omitnil,omitempty" name:"ShipperId"`
 
-	// Log topic ID
+	// <p>Log topic ID.</p>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Bucket address shipped to
+	// <p>bucket address for shipping</p>
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
-	// Shipping prefix directory
+	// <p>Delivery prefix directory</p>
 	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
 
-	// Shipping rule name
+	// <p>Shipping rule name</p>
 	ShipperName *string `json:"ShipperName,omitnil,omitempty" name:"ShipperName"`
 
-	// Shipping time interval in seconds
+	// <p>Shipping time interval. Unit: seconds</p>
 	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Maximum size of shipped file in MB
+	// <p>Maximum value of delivered files in MB</p>
 	MaxSize *uint64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 
-	// Whether it takes effect
+	// <p>Whether effective</p>
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Filter rule for shipped log
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// <p>Filter rules for log shipping</p>
 	FilterRules []*FilterRuleInfo `json:"FilterRules,omitnil,omitempty" name:"FilterRules"`
 
-	// Partition rule of shipped log, which can be represented in `strftime` time format
+	// <p>Partition rules for log shipping support strftime time format representation</p>
 	Partition *string `json:"Partition,omitnil,omitempty" name:"Partition"`
 
-	// Compression configuration of shipped log
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// <p>Compression configuration of shipped logs</p>
 	Compress *CompressInfo `json:"Compress,omitnil,omitempty" name:"Compress"`
 
-	// Format configuration of shipped log content
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// <p>Content format configuration for shipped logs</p>
 	Content *ContentInfo `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// Creation time of shipped log
+	// <p>Creation time of shipped logs. Format: YYYY-MM-DD HH:MM:SS</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Shipping file naming configuration. Valid values: `0` (by random number); `1` (by shipping time). Default value: `0`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Delivery file naming configuration. 0: Random number naming, 1: Delivery time naming. Default: 0 (Random number naming).</p>
 	FilenameMode *uint64 `json:"FilenameMode,omitnil,omitempty" name:"FilenameMode"`
 
-	// Start time for data shipping
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Start time of the data shipping range</p>
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time for data shipping
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>End time of the data delivery range</p>
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Progress of historical data shipping (valid only when the selected data scope contains historical data)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Progress of historical data delivery (valid only when users select historical data within the dataset)</p>
 	Progress *float64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Remaining time required for shipping all historical data (valid only when the selected data scope contains historical data)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Remaining time for all historical data delivery completion (valid only when there is historical data in the selected data)</p><p>Unit: second</p>
 	RemainTime *int64 `json:"RemainTime,omitnil,omitempty" name:"RemainTime"`
 
-	// Status of historical data shipping. Valid values:
-	// 0: Real-time data is being shipped.
-	// 1: The system is preparing for historical data shipping.
-	// 2: Historical data is being shipped.
-	// 3: An error occurred while shipping historical data.
-	// 4: Historical data shipping ended.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Historical task status:<br>0: Real-time task<br>1: Task preparing<br>2: Task running<br>3: Task execution exception<br>4: Task execution complete</p>
 	HistoryStatus *int64 `json:"HistoryStatus,omitnil,omitempty" name:"HistoryStatus"`
 
-	// COS bucket type
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Storage type. Default value is STANDARD. For enumeration values, see the <a href="https://www.tencentcloud.com/document/product/436/33417?from_cn_redirect=1">storage type overview</a> document.<br>Reference values:<br>STANDARD: standard storage<br>STANDARD_IA: infrequent storage<br>ARCHIVE: archive storage<br>DEEP_ARCHIVE: deep archive storage<br>MAZ_STANDARD: standard storage (multi-AZ)<br>MAZ_STANDARD_IA: infrequent storage (multi-AZ)<br>INTELLIGENT_TIERING: intelligent tiering storage<br>MAZ_INTELLIGENT_TIERING: intelligent tiering storage (multi-AZ)</p>
 	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>ARN <a href="https://www.tencentcloud.com/document/product/598/19381?from_cn_redirect=1">Create role</a></p>
+	RoleArn *string `json:"RoleArn,omitnil,omitempty" name:"RoleArn"`
+
+	// <p>External ID</p>
+	ExternalId *string `json:"ExternalId,omitnil,omitempty" name:"ExternalId"`
+
+	// <p>Task running status. Supports <code>0</code>, <code>1</code>, <code>2</code></p><ul><li><code>0</code>: Stop</li><li><code>1</code>: Running</li><li><code>2</code>: Exception</li></ul>
+	TaskStatus *uint64 `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
+
+	// <p>Time variable used to generate the file path shipped to COS</p>
+	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// <p>Pre-filtering process - filter out original data before writing to COS</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
 }
 
 type ShipperTaskInfo struct {
@@ -9294,7 +20672,11 @@ type ShipperTaskInfo struct {
 	// End timestamp of the current shipping task in milliseconds
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Result of the current shipping task. Valid values: `success`, `running`, `failed`
+	// Result of this shipping: "success", "running", "failed".
+	// 
+	// -success: Task successful.
+	// - running: Task processing.
+	// - failed: Task failure.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Result details
@@ -9304,9 +20686,11 @@ type ShipperTaskInfo struct {
 // Predefined struct for user
 type SplitPartitionRequestParams struct {
 	// Log topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// ID of the partition to be split
+	// Partition Id to split
+	// -Get the Id of the partition to be split by [getting the partition list](https://www.tencentcloud.com/document/product/614/56470?from_cn_redirect=1).
 	PartitionId *int64 `json:"PartitionId,omitnil,omitempty" name:"PartitionId"`
 
 	// Partition split hash key position, which is meaningful only if `Number=2` is set
@@ -9320,9 +20704,11 @@ type SplitPartitionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Log topic ID
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// ID of the partition to be split
+	// Partition Id to split
+	// -Get the Id of the partition to be split by [getting the partition list](https://www.tencentcloud.com/document/product/614/56470?from_cn_redirect=1).
 	PartitionId *int64 `json:"PartitionId,omitnil,omitempty" name:"PartitionId"`
 
 	// Partition split hash key position, which is meaningful only if `Number=2` is set
@@ -9379,111 +20765,234 @@ func (r *SplitPartitionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type SplunkDeliverInfo struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Task Name</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>User id</p>
+	Uin *uint64 `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// <p>Log topic id</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Task status; 1. Running; 2. Suspended; 3. Exception</p>
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Enable status; 0: Disabled; 1: Enabled</p>
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// <p>Creation time; unit: second</p>
+	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Update time; Unit: seconds</p>
+	UpdateTime *uint64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// <p>splunk delivery task - target configuration</p>
+	NetInfo *NetInfo `json:"NetInfo,omitnil,omitempty" name:"NetInfo"`
+
+	// <p>splunk delivery task meta-information</p>
+	Metadata *MetadataInfo `json:"Metadata,omitnil,omitempty" name:"Metadata"`
+
+	// <p>Whether to enable service logs; 1: disable; 2: enable</p>
+	HasServiceLog *int64 `json:"HasServiceLog,omitnil,omitempty" name:"HasServiceLog"`
+
+	// <p>Advanced configuration - data source;</p>
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// <p>Advanced configuration - data source type;</p>
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// <p>Advanced configuration - Splunk write indexes</p>
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// <p>Advanced configuration - Whether to enable indexer; 1 - not enabled; 2 - enable;</p>
+	IndexAck *int64 `json:"IndexAck,omitnil,omitempty" name:"IndexAck"`
+
+	// <p>Advanced configuration - Channel</p>
+	Channel *string `json:"Channel,omitnil,omitempty" name:"Channel"`
+
+	// <p>Pre-filtering process - perform pre-filtering statements on original data written to Splunk</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
+
+	// <p>Advanced configuration - Cross-account delivery parameter</p>
+	ExternalRole *ExternalRole `json:"ExternalRole,omitnil,omitempty" name:"ExternalRole"`
+}
+
 type Tag struct {
-	// The tag key.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Tag key.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// The tag value.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Tag value.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
+type ToolCall struct {
+	// <p>Tool call id</p>
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// <p>Invocation type of the tool, currently only support function</p>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// <p>Specific function call</p>
+	Function *ToolCallFunction `json:"Function,omitnil,omitempty" name:"Function"`
+
+	// <p>Index value</p>
+	Index *uint64 `json:"Index,omitnil,omitempty" name:"Index"`
+}
+
+type ToolCallFunction struct {
+	// <p>Function name</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Function parameter, usually a json string</p>
+	Arguments *string `json:"Arguments,omitnil,omitempty" name:"Arguments"`
+}
+
 type TopicExtendInfo struct {
-	// Log topic authentication-free configuration information
+	// Log topic authentication-free configuration information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AnonymousAccess *AnonymousInfo `json:"AnonymousAccess,omitnil,omitempty" name:"AnonymousAccess"`
 }
 
 type TopicInfo struct {
-	// Logset ID
+	// <p>Logset ID</p>
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
-	//  Topic ID
+	// <p>Topic ID</p>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Topic Name
+	// <p>Topic name</p>
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Number of topic partitions
+	// <p>Topic partition count</p>
 	PartitionCount *int64 `json:"PartitionCount,omitnil,omitempty" name:"PartitionCount"`
 
-	// Whether the topic has indexing enabled (the topic type must be log topic)
+	// <p>Whether the topic has indexing enabled (the topic type must be log topic)</p>
 	Index *bool `json:"Index,omitnil,omitempty" name:"Index"`
 
-	// Cloud product identifier. When the topic is created by other cloud products, this field displays the name of the cloud product, such as CDN, TKE.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>If AssumerUin is not empty, it indicates the Uin of the service provider creating the log topic</p>
+	AssumerUin *uint64 `json:"AssumerUin,omitnil,omitempty" name:"AssumerUin"`
+
+	// <p>Cloud product identifier. When the topic is created by other cloud products, this field displays the cloud product name, such as CDN, TKE.</p>
 	AssumerName *string `json:"AssumerName,omitnil,omitempty" name:"AssumerName"`
 
-	// Creation time
+	// <p>Creation time. Format: yyyy-MM-dd HH:mm:ss</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Whether the topic has log collection enabled. true: collection enabled; false: collection disabled.Log collection is enabled by default when creating a log topic, and this field can be modified by calling ModifyTopic through the SDK.The console currently does not support modifying this parameter.
+	// <p>Whether the topic has log collection enabled. true: enable collection; false: disable collection.<br>Enabled by default during log topic creation. You can modify this field via SDK invocation of ModifyTopic.<br>The console currently does not support modification of this parameter.</p>
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Tag information bound to the topicNote: This field may return null, indicating that no valid values can be obtained.
+	// <p>Tag information bound to the topic</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Whether automatic split is enabled for this topic
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// <p>If RoleName is not empty, it indicates the role used by the service provider creating the log topic</p>
+	RoleName *string `json:"RoleName,omitnil,omitempty" name:"RoleName"`
+
+	// <p>Whether the topic has auto-split enabled</p>
 	AutoSplit *bool `json:"AutoSplit,omitnil,omitempty" name:"AutoSplit"`
 
-	// Maximum number of partitions to split into for this topic if automatic split is enabled
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// <p>Maximum number of partitions allowed for the topic if auto-split is enabled</p>
 	MaxSplitPartitions *int64 `json:"MaxSplitPartitions,omitnil,omitempty" name:"MaxSplitPartitions"`
 
-	// Storage type of the topicNote: This field may return null, indicating that no valid values can be obtained.
+	// <p>Storage type of the topic</p><ul><li>hot: standard storage</li><li>cold: infrequent storage</li></ul>
 	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
 
-	// Lifecycle in days. Value range: 1-3600 (3640 indicates permanent retention)
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// <p>Lifecycle in days, valid values 1~3600. A value of 3640 indicates permanent retention.</p>
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Cloud product sub-identifier. If the log topic is created by another cloud product, this field returns the name of the cloud product and its log type, such as `TKE-Audit` or `TKE-Event`. Some products only return the cloud product identifier (`AssumerName`), without this field.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Cloud product sub-identifier. When the log topic is created by other cloud products, this field displays the cloud product name and its log type sub-category, such as TKE-Audit, TKE-Event. Some cloud products only have the cloud product identifier (AssumerName) without this field.</p>
 	SubAssumerName *string `json:"SubAssumerName,omitnil,omitempty" name:"SubAssumerName"`
 
-	// Topic description
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Topic description</p>
 	Describes *string `json:"Describes,omitnil,omitempty" name:"Describes"`
 
-	// Enable log sinking, with the lifecycle of standard storage, where hotPeriod < Period.For standard storage, hotPeriod is used, and for infrequent access storage, it is Period-hotPeriod. (The topic type must be a log topic)HotPeriod=0 indicates that log sinking is not enabled.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Enable log settlement, lifecycle of standard storage, hotPeriod &lt; Period.<br>Standard storage is hotPeriod, infrequent storage is Period-hotPeriod. (Topic type must be log topic)<br>HotPeriod=0 means log settlement is not enabled.</p>
 	HotPeriod *uint64 `json:"HotPeriod,omitnil,omitempty" name:"HotPeriod"`
 
-	// Topic type.
-	// - 0:  log  Topic  
-	// - 1: Metric Topic
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>kms-cls service key id</p>
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// <p>Topic type.</p><ul><li>0: Log topic</li><li>1: Metric topic</li></ul>
 	BizType *uint64 `json:"BizType,omitnil,omitempty" name:"BizType"`
 
-	// Free authentication switch. false: disabled; true: enabled.After enabling, anonymous access to the log topic will be supported for specified operations. For details, please refer to Log Topic (https://intl.cloud.tencent.com/document/product/614/41035?from_cn_redirect=1).Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Free authentication switch. false: disabled; true: enabled.<br>Once enabled, designated operations will be supported for anonymous access to the log topic. See <a href="https://www.tencentcloud.com/document/product/614/41035?from_cn_redirect=1">log topic</a> for details.</p>
 	IsWebTracking *bool `json:"IsWebTracking,omitnil,omitempty" name:"IsWebTracking"`
 
-	// Log topic extended information
+	// <p>Log topic extended information</p>
 	Extends *TopicExtendInfo `json:"Extends,omitnil,omitempty" name:"Extends"`
+
+	// <p>Async migration task ID</p>
+	TopicAsyncTaskID *string `json:"TopicAsyncTaskID,omitnil,omitempty" name:"TopicAsyncTaskID"`
+
+	// <p>Asynchronous migration status</p><ul><li>1: In progress</li><li>2: Completed</li><li>3: Failure</li><li>4: Canceled</li></ul>
+	MigrationStatus *uint64 `json:"MigrationStatus,omitnil,omitempty" name:"MigrationStatus"`
+
+	// <p>After async migration, expected effective date<br>Time format: yyyy-MM-dd HH:mm:ss</p>
+	EffectiveDate *string `json:"EffectiveDate,omitnil,omitempty" name:"EffectiveDate"`
+
+	// <p>IsSourceFrom Enable recording public network source IP and server receipt time</p>
+	IsSourceFrom *bool `json:"IsSourceFrom,omitnil,omitempty" name:"IsSourceFrom"`
+
+	// <p>Current billing mode</p><p>Enumeration value:</p><ul><li>0: Function billing by usage</li><li>1: Billing by raw log size (currently supported for some customers only)</li></ul>
+	BillingMode *uint64 `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
+
+	// <p>If there is an async task, the new billing model after the task succeeds</p><p>Enumeration value:</p><ul><li>0: Function billing by usage</li><li>1: Billing by raw log size (currently only supported for some customers)</li></ul>
+	NewBillingMode *uint64 `json:"NewBillingMode,omitnil,omitempty" name:"NewBillingMode"`
+}
+
+type TopicPartitionInfo struct {
+	// Log topic ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TopicID *string `json:"TopicID,omitnil,omitempty" name:"TopicID"`
+
+	// Partition ID list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Partitions []*uint64 `json:"Partitions,omitnil,omitempty" name:"Partitions"`
+}
+
+type TopicPartitionOffsetInfo struct {
+	// Log topic id
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TopicID *string `json:"TopicID,omitnil,omitempty" name:"TopicID"`
+
+	// Partition offset information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PartitionOffsets []*PartitionOffsetInfo `json:"PartitionOffsets,omitnil,omitempty" name:"PartitionOffsets"`
 }
 
 // Predefined struct for user
 type UploadLogRequestParams struct {
-	// Topic ID
+	// Log topic id
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Topic partition where data will be written into by `HashKey` 
+	// This parameter has been deprecated and should not be used.
+	//
+	// Deprecated: HashKey is deprecated.
 	HashKey *string `json:"HashKey,omitnil,omitempty" name:"HashKey"`
 
-	// Compression type
+	// Compression method. Currently supports
+	// - lz4
+	// - zstd
 	CompressType *string `json:"CompressType,omitnil,omitempty" name:"CompressType"`
 }
 
 type UploadLogRequest struct {
 	*tchttp.BaseRequest
 	
-	// Topic ID
+	// Log topic id
+	// -Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Topic partition where data will be written into by `HashKey` 
+	// This parameter has been deprecated and should not be used.
 	HashKey *string `json:"HashKey,omitnil,omitempty" name:"HashKey"`
 
-	// Compression type
+	// Compression method. Currently supports
+	// - lz4
+	// - zstd
 	CompressType *string `json:"CompressType,omitnil,omitempty" name:"CompressType"`
 }
 
@@ -9530,8 +21039,25 @@ func (r *UploadLogResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type UserKafkaMeta struct {
+	// User kafka version
+	// Support the following versions:
+	//   - 0.10.2.0
+	//   - 1.0.0
+	//   - 2.0.0
+	//   - 2.2.0
+	//   - 2.4.0
+	//   - 2.6.0
+	//   - 2.7.0
+	//   - 2.8.0
+	//   - 3.0.0
+	//   - 3.2.0
+	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
+}
+
 type ValueInfo struct {
-	// Field type. Valid values: `long`, `text`, `double`
+	// Field type. Supported types: long, text, double, json.
+	// Note: The json data type is currently supported by partial users or log topics. If needed, contact us to enable the allowlist.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Separator of fields. Each character represents a separator.
@@ -9543,37 +21069,116 @@ type ValueInfo struct {
 	// Whether the analysis feature is enabled for the field
 	SqlFlag *bool `json:"SqlFlag,omitnil,omitempty" name:"SqlFlag"`
 
-	// Whether Chinese characters are contained. For `long` and `double` fields, set them to `false`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to include node data. Set this parameter to false for the long and double fields.
 	ContainZH *bool `json:"ContainZH,omitnil,omitempty" name:"ContainZH"`
+
+	// field alias
+	Alias *string `json:"Alias,omitnil,omitempty" name:"Alias"`
+
+	// Enable index only for sub-node. This field is not enabled.
+	// Note: Only json type fields can configure this parameter.
+	OpenIndexForChildOnly *bool `json:"OpenIndexForChildOnly,omitnil,omitempty" name:"OpenIndexForChildOnly"`
+
+	// subnode list
+	// Note: Only json type fields can configure this parameter.
+	ChildNode []*KeyValueInfo `json:"ChildNode,omitnil,omitempty" name:"ChildNode"`
+}
+
+type ViewSearchTopic struct {
+	// <p>Region of the logset and topic</p><p>Parameter format: ap-guangzhou</p><p>In the same query view, each topic must be in the same region.</p>
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// <p>Log set id</p>
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// <p>Log topic id</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 }
 
 type WebCallback struct {
-	// Callback address
-	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
-
 	// Callback type. Valid values:
-	// <li> WeCom
-	// <li> Http
+	// -Http (custom webhook configuration)
+	// -WeCom
+	// -DingTalk
+	// -Lark
 	CallbackType *string `json:"CallbackType,omitnil,omitempty" name:"CallbackType"`
 
+	// Callback URL, supports a maximum of 1024 bytes.
+	// You can also use WebCallbackId to refer to the URL in the integration configuration. At this point, please enter an empty string for this field.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// Integration configuration ID. Obtain the integration configuration ID by searching the alarm channel callback configuration list (https://www.tencentcloud.com/document/product/614/115229?from_cn_redirect=1).
+	WebCallbackId *string `json:"WebCallbackId,omitnil,omitempty" name:"WebCallbackId"`
+
 	// Callback method. Valid values:
-	// <li> POST
-	// <li> PUT
-	// Default value: `POST`. This parameter is required if `CallbackType` is `Http`.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// -POST (default value)
+	// - PUT
+	// 
+	// Note:
+	// -Required when CallbackType is Http. No need to specify for other callback methods.
 	Method *string `json:"Method,omitnil,omitempty" name:"Method"`
 
-	// Request header
-	// Note: This parameter is disused. To specify request headers, see `CallBack` in <a href="https://intl.cloud.tencent.com/document/product/614/56466?from_cn_redirect=1">CreateAlarmNotice</a>.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Notification content template ID. When Default-zh is used, DefaultTemplate (Chinese) is referenced. When Default-en is used, DefaultTemplate (English) is referenced.
+	NoticeContentId *string `json:"NoticeContentId,omitnil,omitempty" name:"NoticeContentId"`
+
+	// Reminder type.
+	// 
+	// 0: No reminder; 1: Specified individual; 2: Everyone
+	RemindType *uint64 `json:"RemindType,omitnil,omitempty" name:"RemindType"`
+
+	// Mobile phone list.
+	Mobiles []*string `json:"Mobiles,omitnil,omitempty" name:"Mobiles"`
+
+	// User ID list.
+	UserIds []*string `json:"UserIds,omitnil,omitempty" name:"UserIds"`
+
+	// This parameter is deprecated. Please use NoticeContentId.
+	//
+	// Deprecated: Headers is deprecated.
 	Headers []*string `json:"Headers,omitnil,omitempty" name:"Headers"`
 
-	// Request content
-	// Note: This parameter is disused. To specify request content, see `CallBack` in <a href="https://intl.cloud.tencent.com/document/product/614/56466?from_cn_redirect=1">CreateAlarmNotice</a>.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// This parameter is deprecated. Please use NoticeContentId.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: Body is deprecated.
 	Body *string `json:"Body,omitnil,omitempty" name:"Body"`
 
-	// Number
+	// Serial number.
+	// -Invalid input parameter.
+	// -Output parameter is valid.
 	Index *int64 `json:"Index,omitnil,omitempty" name:"Index"`
+}
+
+type WebCallbackInfo struct {
+	// Alarm channel callback configuration ID.
+	WebCallbackId *string `json:"WebCallbackId,omitnil,omitempty" name:"WebCallbackId"`
+
+	// Alarm channel callback configuration name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Channel type
+	// 
+	// WeCom: WeCom; DingTalk: DingTalk; Lark: Lark; Http: Custom Callback;
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Callback URL.
+	Webhook *string `json:"Webhook,omitnil,omitempty" name:"Webhook"`
+
+	// Request method.
+	Method *string `json:"Method,omitnil,omitempty" name:"Method"`
+
+	// Key information.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Root account.
+	Uin *uint64 `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Sub-account.
+	SubUin *uint64 `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Creation time. A timestamp in seconds.
+	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Update time. A timestamp in seconds.
+	UpdateTime *uint64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }

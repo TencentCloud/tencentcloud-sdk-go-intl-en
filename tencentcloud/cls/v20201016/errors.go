@@ -32,6 +32,9 @@ const (
 	// No corresponding prefix files in the bucket. Please use the correct bucket, file prefix, and compression method.
 	FAILEDOPERATION_BUCKETNOFILE = "FailedOperation.BucketNoFile"
 
+	// Cloud product interface call exception
+	FAILEDOPERATION_CLOUDPRODUCTINVOCATIONERROR = "FailedOperation.CloudProductInvocationError"
+
 	// File decompression failed. Please choose the correct compression method.
 	FAILEDOPERATION_DECOMPRESSFILE = "FailedOperation.DecompressFile"
 
@@ -125,6 +128,9 @@ const (
 	// Retrieval failed
 	INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
 
+	// Internal error server busy
+	INTERNALERROR_SERVERBUSY = "InternalError.ServerBusy"
+
 	// Incorrect parameter.
 	INVALIDPARAMETER = "InvalidParameter"
 
@@ -139,6 +145,12 @@ const (
 
 	// Invalid `Content`.
 	INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
+
+	// Cross-account identifier error
+	INVALIDPARAMETER_CROSSACCOUNTCONFLICT = "InvalidParameter.CrossAccountConflict"
+
+	// Dashboard names conflict.
+	INVALIDPARAMETER_DASHBOARDNAMECONFLICT = "InvalidParameter.DashboardNameConflict"
 
 	// There is a data processing task conflict.
 	INVALIDPARAMETER_DATAFROMTASKCONFLICT = "InvalidParameter.DataFromTaskConflict"
@@ -182,11 +194,20 @@ const (
 	// The quota limit has been reached.
 	LIMITEXCEEDED = "LimitExceeded"
 
+	// A billing topic can only create one cos collection configuration
+	LIMITEXCEEDED_BILLINGCOSRECHARGEOUTOFLIMIT = "LimitExceeded.BillingCosRechargeOutOfLimit"
+
+	// A uin can only create one billing topic
+	LIMITEXCEEDED_BILLINGTOPICOUTOFLIMIT = "LimitExceeded.BillingTopicOutOfLimit"
+
 	// The collection rule configuration exceeds the maximum value limit.
 	LIMITEXCEEDED_CONFIG = "LimitExceeded.Config"
 
 	// The number of log export tasks has exceeded the limit.
 	LIMITEXCEEDED_EXPORT = "LimitExceeded.Export"
+
+	// The number of key-value indices exceeds the limit
+	LIMITEXCEEDED_INDEXKEYOVERLIMIT = "LimitExceeded.IndexKeyOverLimit"
 
 	// Index operations exceed the frequency limit.
 	LIMITEXCEEDED_INDEXOPERATING = "LimitExceeded.IndexOperating"
@@ -275,6 +296,9 @@ const (
 	// The topic is bound to the `scheduleSql` job.
 	OPERATIONDENIED_TOPICHASSCHEDULESQLTASK = "OperationDenied.TopicHasScheduleSqlTask"
 
+	// Number of requests exceeds the frequency limit.
+	REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+
 	// The resource does not exist.
 	RESOURCENOTFOUND = "ResourceNotFound"
 
@@ -287,8 +311,17 @@ const (
 	// The alarm notification template does not exist.
 	RESOURCENOTFOUND_ALARMNOTICENOTEXIST = "ResourceNotFound.AlarmNoticeNotExist"
 
+	// Cluster id does not exist
+	RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+
 	// The specified collection rule configuration does not exist.
 	RESOURCENOTFOUND_CONFIGNOTEXIST = "ResourceNotFound.ConfigNotExist"
+
+	// The dashboard record does not exist.
+	RESOURCENOTFOUND_DASHBOARDRECORDNOTEXIST = "ResourceNotFound.DashboardRecordNotExist"
+
+	// The dashboard subscription record does not exist.
+	RESOURCENOTFOUND_DASHBOARDSUBSCRIBERECORDNOTEXIST = "ResourceNotFound.DashboardSubscribeRecordNotExist"
 
 	// Data processing task does not exist.
 	RESOURCENOTFOUND_DATAFROMTASKNOTEXIST = "ResourceNotFound.DataFromTaskNotExist"
@@ -328,4 +361,7 @@ const (
 
 	// Unsupported operation.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
+
+	// billing topic is not allowed to modify cos import configuration
+	UNSUPPORTEDOPERATION_MODIFYBILLINGCOSRECHARGENOSUPPORT = "UnsupportedOperation.ModifyBillingCosRechargeNoSupport"
 )

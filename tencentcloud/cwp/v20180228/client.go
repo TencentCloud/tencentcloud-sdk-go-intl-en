@@ -109,66 +109,6 @@ func (c *Client) AddLoginWhiteListsWithContext(ctx context.Context, request *Add
     return
 }
 
-func NewCancelIgnoreVulRequest() (request *CancelIgnoreVulRequest) {
-    request = &CancelIgnoreVulRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cwp", APIVersion, "CancelIgnoreVul")
-    
-    
-    return
-}
-
-func NewCancelIgnoreVulResponse() (response *CancelIgnoreVulResponse) {
-    response = &CancelIgnoreVulResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// CancelIgnoreVul
-// This API is used to unignore the vulnerabilities.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) CancelIgnoreVul(request *CancelIgnoreVulRequest) (response *CancelIgnoreVulResponse, err error) {
-    return c.CancelIgnoreVulWithContext(context.Background(), request)
-}
-
-// CancelIgnoreVul
-// This API is used to unignore the vulnerabilities.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) CancelIgnoreVulWithContext(ctx context.Context, request *CancelIgnoreVulRequest) (response *CancelIgnoreVulResponse, err error) {
-    if request == nil {
-        request = NewCancelIgnoreVulRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "CancelIgnoreVul")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CancelIgnoreVul require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCancelIgnoreVulResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewChangeRuleEventsIgnoreStatusRequest() (request *ChangeRuleEventsIgnoreStatusRequest) {
     request = &ChangeRuleEventsIgnoreStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1207,7 +1147,7 @@ func NewCreateNetAttackWhiteListResponse() (response *CreateNetAttackWhiteListRe
 }
 
 // CreateNetAttackWhiteList
-// This API is used to create a network attack allowlist.
+// This API is used to create a network attack allowlist.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1217,7 +1157,7 @@ func (c *Client) CreateNetAttackWhiteList(request *CreateNetAttackWhiteListReque
 }
 
 // CreateNetAttackWhiteList
-// This API is used to create a network attack allowlist.
+// This API is used to create a network attack allowlist.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -3149,6 +3089,80 @@ func (c *Client) DeletePrivilegeRulesWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDeleteRaspRulesRequest() (request *DeleteRaspRulesRequest) {
+    request = &DeleteRaspRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DeleteRaspRules")
+    
+    
+    return
+}
+
+func NewDeleteRaspRulesResponse() (response *DeleteRaspRulesResponse) {
+    response = &DeleteRaspRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteRaspRules
+// Deleting Entries from the Vulnerability Defense Allowlist
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETER_REVERSHELLKEYFIELDALLEMPTY = "InvalidParameter.ReverShellKeyFieldAllEmpty"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteRaspRules(request *DeleteRaspRulesRequest) (response *DeleteRaspRulesResponse, err error) {
+    return c.DeleteRaspRulesWithContext(context.Background(), request)
+}
+
+// DeleteRaspRules
+// Deleting Entries from the Vulnerability Defense Allowlist
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETER_REVERSHELLKEYFIELDALLEMPTY = "InvalidParameter.ReverShellKeyFieldAllEmpty"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteRaspRulesWithContext(ctx context.Context, request *DeleteRaspRulesRequest) (response *DeleteRaspRulesResponse, err error) {
+    if request == nil {
+        request = NewDeleteRaspRulesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DeleteRaspRules")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRaspRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRaspRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteReverseShellEventsRequest() (request *DeleteReverseShellEventsRequest) {
     request = &DeleteReverseShellEventsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3865,7 +3879,7 @@ func NewDescribeAccountStatisticsResponse() (response *DescribeAccountStatistics
 }
 
 // DescribeAccountStatistics
-// This API is used to obtain the account statistics data.
+// This API is used to obtain account statistics list data.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -3880,7 +3894,7 @@ func (c *Client) DescribeAccountStatistics(request *DescribeAccountStatisticsReq
 }
 
 // DescribeAccountStatistics
-// This API is used to obtain the account statistics data.
+// This API is used to obtain account statistics list data.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -6841,232 +6855,6 @@ func (c *Client) DescribeAttackEventsWithContext(ctx context.Context, request *D
     return
 }
 
-func NewDescribeAttackLogsRequest() (request *DescribeAttackLogsRequest) {
-    request = &DescribeAttackLogsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cwp", APIVersion, "DescribeAttackLogs")
-    
-    
-    return
-}
-
-func NewDescribeAttackLogsResponse() (response *DescribeAttackLogsResponse) {
-    response = &DescribeAttackLogsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeAttackLogs
-// DescribeAttackEvents 代替
-//
-// 
-//
-// This API is used to display the list of network attack logs in pagination.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeAttackLogs(request *DescribeAttackLogsRequest) (response *DescribeAttackLogsResponse, err error) {
-    return c.DescribeAttackLogsWithContext(context.Background(), request)
-}
-
-// DescribeAttackLogs
-// DescribeAttackEvents 代替
-//
-// 
-//
-// This API is used to display the list of network attack logs in pagination.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeAttackLogsWithContext(ctx context.Context, request *DescribeAttackLogsRequest) (response *DescribeAttackLogsResponse, err error) {
-    if request == nil {
-        request = NewDescribeAttackLogsRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeAttackLogs")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAttackLogs require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAttackLogsResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeAttackSourceRequest() (request *DescribeAttackSourceRequest) {
-    request = &DescribeAttackSourceRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cwp", APIVersion, "DescribeAttackSource")
-    
-    
-    return
-}
-
-func NewDescribeAttackSourceResponse() (response *DescribeAttackSourceResponse) {
-    response = &DescribeAttackSourceResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeAttackSource
-// 已废弃
-//
-// 
-//
-// This API is used to backtrack attacks.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeAttackSource(request *DescribeAttackSourceRequest) (response *DescribeAttackSourceResponse, err error) {
-    return c.DescribeAttackSourceWithContext(context.Background(), request)
-}
-
-// DescribeAttackSource
-// 已废弃
-//
-// 
-//
-// This API is used to backtrack attacks.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeAttackSourceWithContext(ctx context.Context, request *DescribeAttackSourceRequest) (response *DescribeAttackSourceResponse, err error) {
-    if request == nil {
-        request = NewDescribeAttackSourceRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeAttackSource")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAttackSource require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAttackSourceResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeAttackSourceEventsRequest() (request *DescribeAttackSourceEventsRequest) {
-    request = &DescribeAttackSourceEventsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cwp", APIVersion, "DescribeAttackSourceEvents")
-    
-    
-    return
-}
-
-func NewDescribeAttackSourceEventsResponse() (response *DescribeAttackSourceEventsResponse) {
-    response = &DescribeAttackSourceEventsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeAttackSourceEvents
-// 已废弃
-//
-// 
-//
-// This API is used to query attack backtracking events.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeAttackSourceEvents(request *DescribeAttackSourceEventsRequest) (response *DescribeAttackSourceEventsResponse, err error) {
-    return c.DescribeAttackSourceEventsWithContext(context.Background(), request)
-}
-
-// DescribeAttackSourceEvents
-// 已废弃
-//
-// 
-//
-// This API is used to query attack backtracking events.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeAttackSourceEventsWithContext(ctx context.Context, request *DescribeAttackSourceEventsRequest) (response *DescribeAttackSourceEventsResponse, err error) {
-    if request == nil {
-        request = NewDescribeAttackSourceEventsRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeAttackSourceEvents")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAttackSourceEvents require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAttackSourceEventsResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeAttackStatisticsRequest() (request *DescribeAttackStatisticsRequest) {
     request = &DescribeAttackStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7090,16 +6878,13 @@ func NewDescribeAttackStatisticsResponse() (response *DescribeAttackStatisticsRe
 // This API is used to obtain the statistics of network attack data.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeAttackStatistics(request *DescribeAttackStatisticsRequest) (response *DescribeAttackStatisticsResponse, err error) {
     return c.DescribeAttackStatisticsWithContext(context.Background(), request)
@@ -7109,16 +6894,13 @@ func (c *Client) DescribeAttackStatistics(request *DescribeAttackStatisticsReque
 // This API is used to obtain the statistics of network attack data.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeAttackStatisticsWithContext(ctx context.Context, request *DescribeAttackStatisticsRequest) (response *DescribeAttackStatisticsResponse, err error) {
     if request == nil {
@@ -7160,16 +6942,13 @@ func NewDescribeAttackTopResponse() (response *DescribeAttackTopResponse) {
 // This API is used to obtain the list of Top 5 network attacks.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeAttackTop(request *DescribeAttackTopRequest) (response *DescribeAttackTopResponse, err error) {
     return c.DescribeAttackTopWithContext(context.Background(), request)
@@ -7179,16 +6958,13 @@ func (c *Client) DescribeAttackTop(request *DescribeAttackTopRequest) (response 
 // This API is used to obtain the list of Top 5 network attacks.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeAttackTopWithContext(ctx context.Context, request *DescribeAttackTopRequest) (response *DescribeAttackTopResponse, err error) {
     if request == nil {
@@ -7230,16 +7006,13 @@ func NewDescribeAttackTrendsResponse() (response *DescribeAttackTrendsResponse) 
 // This API is used to obtain the network attack trend data.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeAttackTrends(request *DescribeAttackTrendsRequest) (response *DescribeAttackTrendsResponse, err error) {
     return c.DescribeAttackTrendsWithContext(context.Background(), request)
@@ -7249,16 +7022,13 @@ func (c *Client) DescribeAttackTrends(request *DescribeAttackTrendsRequest) (res
 // This API is used to obtain the network attack trend data.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeAttackTrendsWithContext(ctx context.Context, request *DescribeAttackTrendsRequest) (response *DescribeAttackTrendsResponse, err error) {
     if request == nil {
@@ -7273,6 +7043,78 @@ func (c *Client) DescribeAttackTrendsWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDescribeAttackTrendsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAttackTypeRequest() (request *DescribeAttackTypeRequest) {
+    request = &DescribeAttackTypeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeAttackType")
+    
+    
+    return
+}
+
+func NewDescribeAttackTypeResponse() (response *DescribeAttackTypeResponse) {
+    response = &DescribeAttackTypeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAttackType
+// This API is used to query the application protection allowlist attack type list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeAttackType(request *DescribeAttackTypeRequest) (response *DescribeAttackTypeResponse, err error) {
+    return c.DescribeAttackTypeWithContext(context.Background(), request)
+}
+
+// DescribeAttackType
+// This API is used to query the application protection allowlist attack type list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeAttackTypeWithContext(ctx context.Context, request *DescribeAttackTypeRequest) (response *DescribeAttackTypeResponse, err error) {
+    if request == nil {
+        request = NewDescribeAttackTypeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeAttackType")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAttackType require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAttackTypeResponse()
     err = c.Send(request, response)
     return
 }
@@ -7323,60 +7165,6 @@ func (c *Client) DescribeAttackVulTypeListWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeAttackVulTypeListResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeAvailableExpertServiceDetailRequest() (request *DescribeAvailableExpertServiceDetailRequest) {
-    request = &DescribeAvailableExpertServiceDetailRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cwp", APIVersion, "DescribeAvailableExpertServiceDetail")
-    
-    
-    return
-}
-
-func NewDescribeAvailableExpertServiceDetailResponse() (response *DescribeAvailableExpertServiceDetailResponse) {
-    response = &DescribeAvailableExpertServiceDetailResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeAvailableExpertServiceDetail
-// This API is used to obtain available order details.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_MAINDBFAIL = "InternalError.MainDBFail"
-//  INVALIDPARAMETER = "InvalidParameter"
-func (c *Client) DescribeAvailableExpertServiceDetail(request *DescribeAvailableExpertServiceDetailRequest) (response *DescribeAvailableExpertServiceDetailResponse, err error) {
-    return c.DescribeAvailableExpertServiceDetailWithContext(context.Background(), request)
-}
-
-// DescribeAvailableExpertServiceDetail
-// This API is used to obtain available order details.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_MAINDBFAIL = "InternalError.MainDBFail"
-//  INVALIDPARAMETER = "InvalidParameter"
-func (c *Client) DescribeAvailableExpertServiceDetailWithContext(ctx context.Context, request *DescribeAvailableExpertServiceDetailRequest) (response *DescribeAvailableExpertServiceDetailResponse, err error) {
-    if request == nil {
-        request = NewDescribeAvailableExpertServiceDetailRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeAvailableExpertServiceDetail")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAvailableExpertServiceDetail require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAvailableExpertServiceDetailResponse()
     err = c.Send(request, response)
     return
 }
@@ -9287,76 +9075,6 @@ func (c *Client) DescribeClientExceptionWithContext(ctx context.Context, request
     return
 }
 
-func NewDescribeComponentStatisticsRequest() (request *DescribeComponentStatisticsRequest) {
-    request = &DescribeComponentStatisticsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cwp", APIVersion, "DescribeComponentStatistics")
-    
-    
-    return
-}
-
-func NewDescribeComponentStatisticsResponse() (response *DescribeComponentStatisticsResponse) {
-    response = &DescribeComponentStatisticsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeComponentStatistics
-// 接口已无效
-//
-// 
-//
-// This API is used to obtain the data of the component statistics list.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeComponentStatistics(request *DescribeComponentStatisticsRequest) (response *DescribeComponentStatisticsResponse, err error) {
-    return c.DescribeComponentStatisticsWithContext(context.Background(), request)
-}
-
-// DescribeComponentStatistics
-// 接口已无效
-//
-// 
-//
-// This API is used to obtain the data of the component statistics list.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeComponentStatisticsWithContext(ctx context.Context, request *DescribeComponentStatisticsRequest) (response *DescribeComponentStatisticsResponse, err error) {
-    if request == nil {
-        request = NewDescribeComponentStatisticsRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeComponentStatistics")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeComponentStatistics require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeComponentStatisticsResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeDefenceEventDetailRequest() (request *DescribeDefenceEventDetailRequest) {
     request = &DescribeDefenceEventDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -9539,62 +9257,6 @@ func (c *Client) DescribeESAggregationsWithContext(ctx context.Context, request 
     return
 }
 
-func NewDescribeEmergencyResponseListRequest() (request *DescribeEmergencyResponseListRequest) {
-    request = &DescribeEmergencyResponseListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cwp", APIVersion, "DescribeEmergencyResponseList")
-    
-    
-    return
-}
-
-func NewDescribeEmergencyResponseListResponse() (response *DescribeEmergencyResponseListResponse) {
-    response = &DescribeEmergencyResponseListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeEmergencyResponseList
-// This API is used to obtain the emergency response list.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeEmergencyResponseList(request *DescribeEmergencyResponseListRequest) (response *DescribeEmergencyResponseListResponse, err error) {
-    return c.DescribeEmergencyResponseListWithContext(context.Background(), request)
-}
-
-// DescribeEmergencyResponseList
-// This API is used to obtain the emergency response list.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeEmergencyResponseListWithContext(ctx context.Context, request *DescribeEmergencyResponseListRequest) (response *DescribeEmergencyResponseListResponse, err error) {
-    if request == nil {
-        request = NewDescribeEmergencyResponseListRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeEmergencyResponseList")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeEmergencyResponseList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeEmergencyResponseListResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeEmergencyVulListRequest() (request *DescribeEmergencyVulListRequest) {
     request = &DescribeEmergencyVulListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -9711,118 +9373,6 @@ func (c *Client) DescribeEventByTableWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDescribeEventByTableResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeExpertServiceListRequest() (request *DescribeExpertServiceListRequest) {
-    request = &DescribeExpertServiceListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cwp", APIVersion, "DescribeExpertServiceList")
-    
-    
-    return
-}
-
-func NewDescribeExpertServiceListResponse() (response *DescribeExpertServiceListResponse) {
-    response = &DescribeExpertServiceListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeExpertServiceList
-// This API is used to obtain the security manager list.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeExpertServiceList(request *DescribeExpertServiceListRequest) (response *DescribeExpertServiceListResponse, err error) {
-    return c.DescribeExpertServiceListWithContext(context.Background(), request)
-}
-
-// DescribeExpertServiceList
-// This API is used to obtain the security manager list.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeExpertServiceListWithContext(ctx context.Context, request *DescribeExpertServiceListRequest) (response *DescribeExpertServiceListResponse, err error) {
-    if request == nil {
-        request = NewDescribeExpertServiceListRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeExpertServiceList")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeExpertServiceList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeExpertServiceListResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeExpertServiceOrderListRequest() (request *DescribeExpertServiceOrderListRequest) {
-    request = &DescribeExpertServiceOrderListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cwp", APIVersion, "DescribeExpertServiceOrderList")
-    
-    
-    return
-}
-
-func NewDescribeExpertServiceOrderListResponse() (response *DescribeExpertServiceOrderListResponse) {
-    response = &DescribeExpertServiceOrderListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeExpertServiceOrderList
-// This API is used to obtain the expert service order list.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeExpertServiceOrderList(request *DescribeExpertServiceOrderListRequest) (response *DescribeExpertServiceOrderListResponse, err error) {
-    return c.DescribeExpertServiceOrderListWithContext(context.Background(), request)
-}
-
-// DescribeExpertServiceOrderList
-// This API is used to obtain the expert service order list.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) DescribeExpertServiceOrderListWithContext(ctx context.Context, request *DescribeExpertServiceOrderListRequest) (response *DescribeExpertServiceOrderListResponse, err error) {
-    if request == nil {
-        request = NewDescribeExpertServiceOrderListRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeExpertServiceOrderList")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeExpertServiceOrderList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeExpertServiceOrderListResponse()
     err = c.Send(request, response)
     return
 }
@@ -10335,7 +9885,7 @@ func NewDescribeHistoryAccountsResponse() (response *DescribeHistoryAccountsResp
 }
 
 // DescribeHistoryAccounts
-// This API is used to obtain the data of the account change history list.
+// This API is used to obtain the account change history list data.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -10350,7 +9900,7 @@ func (c *Client) DescribeHistoryAccounts(request *DescribeHistoryAccountsRequest
 }
 
 // DescribeHistoryAccounts
-// This API is used to obtain the data of the account change history list.
+// This API is used to obtain the account change history list data.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -10507,7 +10057,7 @@ func NewDescribeHostLoginListResponse() (response *DescribeHostLoginListResponse
 }
 
 // DescribeHostLoginList
-// This API is used to retrieve the log-in audit list.
+// Retrieve the abnormal login list
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -10522,7 +10072,7 @@ func (c *Client) DescribeHostLoginList(request *DescribeHostLoginListRequest) (r
 }
 
 // DescribeHostLoginList
-// This API is used to retrieve the log-in audit list.
+// Retrieve the abnormal login list
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -10775,62 +10325,64 @@ func (c *Client) DescribeIgnoreRuleEffectHostListWithContext(ctx context.Context
     return
 }
 
-func NewDescribeIndexListRequest() (request *DescribeIndexListRequest) {
-    request = &DescribeIndexListRequest{
+func NewDescribeInjectRiskyServiceSwitchRequest() (request *DescribeInjectRiskyServiceSwitchRequest) {
+    request = &DescribeInjectRiskyServiceSwitchRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
     
-    request.Init().WithApiInfo("cwp", APIVersion, "DescribeIndexList")
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeInjectRiskyServiceSwitch")
     
     
     return
 }
 
-func NewDescribeIndexListResponse() (response *DescribeIndexListResponse) {
-    response = &DescribeIndexListResponse{
+func NewDescribeInjectRiskyServiceSwitchResponse() (response *DescribeInjectRiskyServiceSwitchResponse) {
+    response = &DescribeInjectRiskyServiceSwitchResponse{
         BaseResponse: &tchttp.BaseResponse{},
     } 
     return
 
 }
 
-// DescribeIndexList
-// 接口已废弃
-//
-// 
-//
-// This API is used to obtain the index list.
+// DescribeInjectRiskyServiceSwitch
+// Query java memory horse and rasp whether inject risk service configuration
 //
 // error code that may be returned:
-//  FAILEDOPERATION_APISERVERFAIL = "FailedOperation.APIServerFail"
 //  INTERNALERROR = "InternalError"
-func (c *Client) DescribeIndexList(request *DescribeIndexListRequest) (response *DescribeIndexListResponse, err error) {
-    return c.DescribeIndexListWithContext(context.Background(), request)
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeInjectRiskyServiceSwitch(request *DescribeInjectRiskyServiceSwitchRequest) (response *DescribeInjectRiskyServiceSwitchResponse, err error) {
+    return c.DescribeInjectRiskyServiceSwitchWithContext(context.Background(), request)
 }
 
-// DescribeIndexList
-// 接口已废弃
-//
-// 
-//
-// This API is used to obtain the index list.
+// DescribeInjectRiskyServiceSwitch
+// Query java memory horse and rasp whether inject risk service configuration
 //
 // error code that may be returned:
-//  FAILEDOPERATION_APISERVERFAIL = "FailedOperation.APIServerFail"
 //  INTERNALERROR = "InternalError"
-func (c *Client) DescribeIndexListWithContext(ctx context.Context, request *DescribeIndexListRequest) (response *DescribeIndexListResponse, err error) {
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeInjectRiskyServiceSwitchWithContext(ctx context.Context, request *DescribeInjectRiskyServiceSwitchRequest) (response *DescribeInjectRiskyServiceSwitchResponse, err error) {
     if request == nil {
-        request = NewDescribeIndexListRequest()
+        request = NewDescribeInjectRiskyServiceSwitchRequest()
     }
-    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeIndexList")
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeInjectRiskyServiceSwitch")
     
     if c.GetCredential() == nil {
-        return nil, errors.New("DescribeIndexList require credential")
+        return nil, errors.New("DescribeInjectRiskyServiceSwitch require credential")
     }
 
     request.SetContext(ctx)
     
-    response = NewDescribeIndexListResponse()
+    response = NewDescribeInjectRiskyServiceSwitchResponse()
     err = c.Send(request, response)
     return
 }
@@ -11895,6 +11447,110 @@ func (c *Client) DescribeLogTypeWithContext(ctx context.Context, request *Descri
     request.SetContext(ctx)
     
     response = NewDescribeLogTypeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLoginTypeGlobalConfRequest() (request *DescribeLoginTypeGlobalConfRequest) {
+    request = &DescribeLoginTypeGlobalConfRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeLoginTypeGlobalConf")
+    
+    
+    return
+}
+
+func NewDescribeLoginTypeGlobalConfResponse() (response *DescribeLoginTypeGlobalConfResponse) {
+    response = &DescribeLoginTypeGlobalConfResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLoginTypeGlobalConf
+// Retrieve the global configuration for uninstall protection
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeLoginTypeGlobalConf(request *DescribeLoginTypeGlobalConfRequest) (response *DescribeLoginTypeGlobalConfResponse, err error) {
+    return c.DescribeLoginTypeGlobalConfWithContext(context.Background(), request)
+}
+
+// DescribeLoginTypeGlobalConf
+// Retrieve the global configuration for uninstall protection
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeLoginTypeGlobalConfWithContext(ctx context.Context, request *DescribeLoginTypeGlobalConfRequest) (response *DescribeLoginTypeGlobalConfResponse, err error) {
+    if request == nil {
+        request = NewDescribeLoginTypeGlobalConfRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeLoginTypeGlobalConf")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLoginTypeGlobalConf require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLoginTypeGlobalConfResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLoginTypeHostRequest() (request *DescribeLoginTypeHostRequest) {
+    request = &DescribeLoginTypeHostRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeLoginTypeHost")
+    
+    
+    return
+}
+
+func NewDescribeLoginTypeHostResponse() (response *DescribeLoginTypeHostResponse) {
+    response = &DescribeLoginTypeHostResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLoginTypeHost
+// Retrieve the host list via QR code log-in
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeLoginTypeHost(request *DescribeLoginTypeHostRequest) (response *DescribeLoginTypeHostResponse, err error) {
+    return c.DescribeLoginTypeHostWithContext(context.Background(), request)
+}
+
+// DescribeLoginTypeHost
+// Retrieve the host list via QR code log-in
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeLoginTypeHostWithContext(ctx context.Context, request *DescribeLoginTypeHostRequest) (response *DescribeLoginTypeHostResponse, err error) {
+    if request == nil {
+        request = NewDescribeLoginTypeHostRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeLoginTypeHost")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLoginTypeHost require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLoginTypeHostResponse()
     err = c.Send(request, response)
     return
 }
@@ -13317,66 +12973,74 @@ func (c *Client) DescribeMalwareWhiteListAffectListWithContext(ctx context.Conte
     return
 }
 
-func NewDescribeMonthInspectionReportRequest() (request *DescribeMonthInspectionReportRequest) {
-    request = &DescribeMonthInspectionReportRequest{
+func NewDescribeMemShellRulesRequest() (request *DescribeMemShellRulesRequest) {
+    request = &DescribeMemShellRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
     
-    request.Init().WithApiInfo("cwp", APIVersion, "DescribeMonthInspectionReport")
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeMemShellRules")
     
     
     return
 }
 
-func NewDescribeMonthInspectionReportResponse() (response *DescribeMonthInspectionReportResponse) {
-    response = &DescribeMonthInspectionReportResponse{
+func NewDescribeMemShellRulesResponse() (response *DescribeMemShellRulesResponse) {
+    response = &DescribeMemShellRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
     } 
     return
 
 }
 
-// DescribeMonthInspectionReport
-// This API is used to download the monthly inspection report of the security manager.
+// DescribeMemShellRules
+// This API is used to obtain the list of Reverse Shell rules.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
 //  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeMonthInspectionReport(request *DescribeMonthInspectionReportRequest) (response *DescribeMonthInspectionReportResponse, err error) {
-    return c.DescribeMonthInspectionReportWithContext(context.Background(), request)
+func (c *Client) DescribeMemShellRules(request *DescribeMemShellRulesRequest) (response *DescribeMemShellRulesResponse, err error) {
+    return c.DescribeMemShellRulesWithContext(context.Background(), request)
 }
 
-// DescribeMonthInspectionReport
-// This API is used to download the monthly inspection report of the security manager.
+// DescribeMemShellRules
+// This API is used to obtain the list of Reverse Shell rules.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
 //  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeMonthInspectionReportWithContext(ctx context.Context, request *DescribeMonthInspectionReportRequest) (response *DescribeMonthInspectionReportResponse, err error) {
+func (c *Client) DescribeMemShellRulesWithContext(ctx context.Context, request *DescribeMemShellRulesRequest) (response *DescribeMemShellRulesResponse, err error) {
     if request == nil {
-        request = NewDescribeMonthInspectionReportRequest()
+        request = NewDescribeMemShellRulesRequest()
     }
-    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeMonthInspectionReport")
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeMemShellRules")
     
     if c.GetCredential() == nil {
-        return nil, errors.New("DescribeMonthInspectionReport require credential")
+        return nil, errors.New("DescribeMemShellRules require credential")
     }
 
     request.SetContext(ctx)
     
-    response = NewDescribeMonthInspectionReportResponse()
+    response = NewDescribeMemShellRulesResponse()
     err = c.Send(request, response)
     return
 }
@@ -13406,11 +13070,15 @@ func NewDescribeNetAttackSettingResponse() (response *DescribeNetAttackSettingRe
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
 //  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeNetAttackSetting(request *DescribeNetAttackSettingRequest) (response *DescribeNetAttackSettingResponse, err error) {
     return c.DescribeNetAttackSettingWithContext(context.Background(), request)
@@ -13422,11 +13090,15 @@ func (c *Client) DescribeNetAttackSetting(request *DescribeNetAttackSettingReque
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
 //  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeNetAttackSettingWithContext(ctx context.Context, request *DescribeNetAttackSettingRequest) (response *DescribeNetAttackSettingResponse, err error) {
     if request == nil {
@@ -13621,6 +13293,130 @@ func (c *Client) DescribeOverviewStatisticsWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDescribeOverviewStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePatchEffectHostListRequest() (request *DescribePatchEffectHostListRequest) {
+    request = &DescribePatchEffectHostListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribePatchEffectHostList")
+    
+    
+    return
+}
+
+func NewDescribePatchEffectHostListResponse() (response *DescribePatchEffectHostListResponse) {
+    response = &DescribePatchEffectHostListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribePatchEffectHostList
+// Query the information list of affected hosts by a patch
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribePatchEffectHostList(request *DescribePatchEffectHostListRequest) (response *DescribePatchEffectHostListResponse, err error) {
+    return c.DescribePatchEffectHostListWithContext(context.Background(), request)
+}
+
+// DescribePatchEffectHostList
+// Query the information list of affected hosts by a patch
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribePatchEffectHostListWithContext(ctx context.Context, request *DescribePatchEffectHostListRequest) (response *DescribePatchEffectHostListResponse, err error) {
+    if request == nil {
+        request = NewDescribePatchEffectHostListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribePatchEffectHostList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePatchEffectHostList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePatchEffectHostListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePatchInfoRequest() (request *DescribePatchInfoRequest) {
+    request = &DescribePatchInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribePatchInfo")
+    
+    
+    return
+}
+
+func NewDescribePatchInfoResponse() (response *DescribePatchInfoResponse) {
+    response = &DescribePatchInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribePatchInfo
+// Patch details
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribePatchInfo(request *DescribePatchInfoRequest) (response *DescribePatchInfoResponse, err error) {
+    return c.DescribePatchInfoWithContext(context.Background(), request)
+}
+
+// DescribePatchInfo
+// Patch details
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribePatchInfoWithContext(ctx context.Context, request *DescribePatchInfoRequest) (response *DescribePatchInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribePatchInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribePatchInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePatchInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePatchInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -14629,6 +14425,658 @@ func (c *Client) DescribeRansomDefenseTrendWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeRaspEventCWPRequest() (request *DescribeRaspEventCWPRequest) {
+    request = &DescribeRaspEventCWPRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeRaspEventCWP")
+    
+    
+    return
+}
+
+func NewDescribeRaspEventCWPResponse() (response *DescribeRaspEventCWPResponse) {
+    response = &DescribeRaspEventCWPResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRaspEventCWP
+// This API is used to query application protection event lists
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRaspEventCWP(request *DescribeRaspEventCWPRequest) (response *DescribeRaspEventCWPResponse, err error) {
+    return c.DescribeRaspEventCWPWithContext(context.Background(), request)
+}
+
+// DescribeRaspEventCWP
+// This API is used to query application protection event lists
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRaspEventCWPWithContext(ctx context.Context, request *DescribeRaspEventCWPRequest) (response *DescribeRaspEventCWPResponse, err error) {
+    if request == nil {
+        request = NewDescribeRaspEventCWPRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeRaspEventCWP")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRaspEventCWP require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRaspEventCWPResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRaspEventDetailCWPRequest() (request *DescribeRaspEventDetailCWPRequest) {
+    request = &DescribeRaspEventDetailCWPRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeRaspEventDetailCWP")
+    
+    
+    return
+}
+
+func NewDescribeRaspEventDetailCWPResponse() (response *DescribeRaspEventDetailCWPResponse) {
+    response = &DescribeRaspEventDetailCWPResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRaspEventDetailCWP
+// Application defense event details
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRaspEventDetailCWP(request *DescribeRaspEventDetailCWPRequest) (response *DescribeRaspEventDetailCWPResponse, err error) {
+    return c.DescribeRaspEventDetailCWPWithContext(context.Background(), request)
+}
+
+// DescribeRaspEventDetailCWP
+// Application defense event details
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRaspEventDetailCWPWithContext(ctx context.Context, request *DescribeRaspEventDetailCWPRequest) (response *DescribeRaspEventDetailCWPResponse, err error) {
+    if request == nil {
+        request = NewDescribeRaspEventDetailCWPRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeRaspEventDetailCWP")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRaspEventDetailCWP require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRaspEventDetailCWPResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRaspEventDetailTCSSRequest() (request *DescribeRaspEventDetailTCSSRequest) {
+    request = &DescribeRaspEventDetailTCSSRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeRaspEventDetailTCSS")
+    
+    
+    return
+}
+
+func NewDescribeRaspEventDetailTCSSResponse() (response *DescribeRaspEventDetailTCSSResponse) {
+    response = &DescribeRaspEventDetailTCSSResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRaspEventDetailTCSS
+// Application defense event details
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRaspEventDetailTCSS(request *DescribeRaspEventDetailTCSSRequest) (response *DescribeRaspEventDetailTCSSResponse, err error) {
+    return c.DescribeRaspEventDetailTCSSWithContext(context.Background(), request)
+}
+
+// DescribeRaspEventDetailTCSS
+// Application defense event details
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRaspEventDetailTCSSWithContext(ctx context.Context, request *DescribeRaspEventDetailTCSSRequest) (response *DescribeRaspEventDetailTCSSResponse, err error) {
+    if request == nil {
+        request = NewDescribeRaspEventDetailTCSSRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeRaspEventDetailTCSS")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRaspEventDetailTCSS require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRaspEventDetailTCSSResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRaspEventTCSSRequest() (request *DescribeRaspEventTCSSRequest) {
+    request = &DescribeRaspEventTCSSRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeRaspEventTCSS")
+    
+    
+    return
+}
+
+func NewDescribeRaspEventTCSSResponse() (response *DescribeRaspEventTCSSResponse) {
+    response = &DescribeRaspEventTCSSResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRaspEventTCSS
+// This API is used to query application protection event lists
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRaspEventTCSS(request *DescribeRaspEventTCSSRequest) (response *DescribeRaspEventTCSSResponse, err error) {
+    return c.DescribeRaspEventTCSSWithContext(context.Background(), request)
+}
+
+// DescribeRaspEventTCSS
+// This API is used to query application protection event lists
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRaspEventTCSSWithContext(ctx context.Context, request *DescribeRaspEventTCSSRequest) (response *DescribeRaspEventTCSSResponse, err error) {
+    if request == nil {
+        request = NewDescribeRaspEventTCSSRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeRaspEventTCSS")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRaspEventTCSS require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRaspEventTCSSResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRaspLicenseListRequest() (request *DescribeRaspLicenseListRequest) {
+    request = &DescribeRaspLicenseListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeRaspLicenseList")
+    
+    
+    return
+}
+
+func NewDescribeRaspLicenseListResponse() (response *DescribeRaspLicenseListResponse) {
+    response = &DescribeRaspLicenseListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRaspLicenseList
+// Query the application protection license list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRaspLicenseList(request *DescribeRaspLicenseListRequest) (response *DescribeRaspLicenseListResponse, err error) {
+    return c.DescribeRaspLicenseListWithContext(context.Background(), request)
+}
+
+// DescribeRaspLicenseList
+// Query the application protection license list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRaspLicenseListWithContext(ctx context.Context, request *DescribeRaspLicenseListRequest) (response *DescribeRaspLicenseListResponse, err error) {
+    if request == nil {
+        request = NewDescribeRaspLicenseListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeRaspLicenseList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRaspLicenseList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRaspLicenseListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRaspMaxCpuRequest() (request *DescribeRaspMaxCpuRequest) {
+    request = &DescribeRaspMaxCpuRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeRaspMaxCpu")
+    
+    
+    return
+}
+
+func NewDescribeRaspMaxCpuResponse() (response *DescribeRaspMaxCpuResponse) {
+    response = &DescribeRaspMaxCpuResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRaspMaxCpu
+// View the maximum cpu limitation for vulnerability defense
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeRaspMaxCpu(request *DescribeRaspMaxCpuRequest) (response *DescribeRaspMaxCpuResponse, err error) {
+    return c.DescribeRaspMaxCpuWithContext(context.Background(), request)
+}
+
+// DescribeRaspMaxCpu
+// View the maximum cpu limitation for vulnerability defense
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeRaspMaxCpuWithContext(ctx context.Context, request *DescribeRaspMaxCpuRequest) (response *DescribeRaspMaxCpuResponse, err error) {
+    if request == nil {
+        request = NewDescribeRaspMaxCpuRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeRaspMaxCpu")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRaspMaxCpu require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRaspMaxCpuResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRaspMemShellDetailTCSSRequest() (request *DescribeRaspMemShellDetailTCSSRequest) {
+    request = &DescribeRaspMemShellDetailTCSSRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeRaspMemShellDetailTCSS")
+    
+    
+    return
+}
+
+func NewDescribeRaspMemShellDetailTCSSResponse() (response *DescribeRaspMemShellDetailTCSSResponse) {
+    response = &DescribeRaspMemShellDetailTCSSResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRaspMemShellDetailTCSS
+// Retrieve application protection Java Webshell scan event details from container perspective
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeRaspMemShellDetailTCSS(request *DescribeRaspMemShellDetailTCSSRequest) (response *DescribeRaspMemShellDetailTCSSResponse, err error) {
+    return c.DescribeRaspMemShellDetailTCSSWithContext(context.Background(), request)
+}
+
+// DescribeRaspMemShellDetailTCSS
+// Retrieve application protection Java Webshell scan event details from container perspective
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeRaspMemShellDetailTCSSWithContext(ctx context.Context, request *DescribeRaspMemShellDetailTCSSRequest) (response *DescribeRaspMemShellDetailTCSSResponse, err error) {
+    if request == nil {
+        request = NewDescribeRaspMemShellDetailTCSSRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeRaspMemShellDetailTCSS")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRaspMemShellDetailTCSS require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRaspMemShellDetailTCSSResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRaspMemShellListTCSSRequest() (request *DescribeRaspMemShellListTCSSRequest) {
+    request = &DescribeRaspMemShellListTCSSRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeRaspMemShellListTCSS")
+    
+    
+    return
+}
+
+func NewDescribeRaspMemShellListTCSSResponse() (response *DescribeRaspMemShellListTCSSResponse) {
+    response = &DescribeRaspMemShellListTCSSResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRaspMemShellListTCSS
+// Retrieve Java Webshell scan event list from container perspective
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeRaspMemShellListTCSS(request *DescribeRaspMemShellListTCSSRequest) (response *DescribeRaspMemShellListTCSSResponse, err error) {
+    return c.DescribeRaspMemShellListTCSSWithContext(context.Background(), request)
+}
+
+// DescribeRaspMemShellListTCSS
+// Retrieve Java Webshell scan event list from container perspective
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeRaspMemShellListTCSSWithContext(ctx context.Context, request *DescribeRaspMemShellListTCSSRequest) (response *DescribeRaspMemShellListTCSSResponse, err error) {
+    if request == nil {
+        request = NewDescribeRaspMemShellListTCSSRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeRaspMemShellListTCSS")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRaspMemShellListTCSS require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRaspMemShellListTCSSResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRaspPluginListRequest() (request *DescribeRaspPluginListRequest) {
+    request = &DescribeRaspPluginListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeRaspPluginList")
+    
+    
+    return
+}
+
+func NewDescribeRaspPluginListResponse() (response *DescribeRaspPluginListResponse) {
+    response = &DescribeRaspPluginListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRaspPluginList
+// Important Period Guarantee Protection License Plugin Detail List
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeRaspPluginList(request *DescribeRaspPluginListRequest) (response *DescribeRaspPluginListResponse, err error) {
+    return c.DescribeRaspPluginListWithContext(context.Background(), request)
+}
+
+// DescribeRaspPluginList
+// Important Period Guarantee Protection License Plugin Detail List
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeRaspPluginListWithContext(ctx context.Context, request *DescribeRaspPluginListRequest) (response *DescribeRaspPluginListResponse, err error) {
+    if request == nil {
+        request = NewDescribeRaspPluginListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeRaspPluginList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRaspPluginList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRaspPluginListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRaspRuleVulsRequest() (request *DescribeRaspRuleVulsRequest) {
+    request = &DescribeRaspRuleVulsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeRaspRuleVuls")
+    
+    
+    return
+}
+
+func NewDescribeRaspRuleVulsResponse() (response *DescribeRaspRuleVulsResponse) {
+    response = &DescribeRaspRuleVulsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRaspRuleVuls
+// Retrieve the vulnerability list of the vulnerability defense allowlist
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRaspRuleVuls(request *DescribeRaspRuleVulsRequest) (response *DescribeRaspRuleVulsResponse, err error) {
+    return c.DescribeRaspRuleVulsWithContext(context.Background(), request)
+}
+
+// DescribeRaspRuleVuls
+// Retrieve the vulnerability list of the vulnerability defense allowlist
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRaspRuleVulsWithContext(ctx context.Context, request *DescribeRaspRuleVulsRequest) (response *DescribeRaspRuleVulsResponse, err error) {
+    if request == nil {
+        request = NewDescribeRaspRuleVulsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeRaspRuleVuls")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRaspRuleVuls require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRaspRuleVulsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRaspRulesRequest() (request *DescribeRaspRulesRequest) {
+    request = &DescribeRaspRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeRaspRules")
+    
+    
+    return
+}
+
+func NewDescribeRaspRulesResponse() (response *DescribeRaspRulesResponse) {
+    response = &DescribeRaspRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRaspRules
+// This example shows you how to query the vulnerability defense allowlist.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRaspRules(request *DescribeRaspRulesRequest) (response *DescribeRaspRulesResponse, err error) {
+    return c.DescribeRaspRulesWithContext(context.Background(), request)
+}
+
+// DescribeRaspRules
+// This example shows you how to query the vulnerability defense allowlist.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeRaspRulesWithContext(ctx context.Context, request *DescribeRaspRulesRequest) (response *DescribeRaspRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeRaspRulesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeRaspRules")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRaspRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRaspRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRecommendedProtectCpuRequest() (request *DescribeRecommendedProtectCpuRequest) {
     request = &DescribeRecommendedProtectCpuRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -14653,6 +15101,16 @@ func NewDescribeRecommendedProtectCpuResponse() (response *DescribeRecommendedPr
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeRecommendedProtectCpu(request *DescribeRecommendedProtectCpuRequest) (response *DescribeRecommendedProtectCpuResponse, err error) {
     return c.DescribeRecommendedProtectCpuWithContext(context.Background(), request)
@@ -14663,6 +15121,16 @@ func (c *Client) DescribeRecommendedProtectCpu(request *DescribeRecommendedProte
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeRecommendedProtectCpuWithContext(ctx context.Context, request *DescribeRecommendedProtectCpuRequest) (response *DescribeRecommendedProtectCpuResponse, err error) {
     if request == nil {
@@ -14885,6 +15353,130 @@ func (c *Client) DescribeReverseShellRulesWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeReverseShellRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeReverseShellRulesAggregationRequest() (request *DescribeReverseShellRulesAggregationRequest) {
+    request = &DescribeReverseShellRulesAggregationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeReverseShellRulesAggregation")
+    
+    
+    return
+}
+
+func NewDescribeReverseShellRulesAggregationResponse() (response *DescribeReverseShellRulesAggregationResponse) {
+    response = &DescribeReverseShellRulesAggregationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeReverseShellRulesAggregation
+// This API is used to obtain the list of Reverse Shell rules.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeReverseShellRulesAggregation(request *DescribeReverseShellRulesAggregationRequest) (response *DescribeReverseShellRulesAggregationResponse, err error) {
+    return c.DescribeReverseShellRulesAggregationWithContext(context.Background(), request)
+}
+
+// DescribeReverseShellRulesAggregation
+// This API is used to obtain the list of Reverse Shell rules.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeReverseShellRulesAggregationWithContext(ctx context.Context, request *DescribeReverseShellRulesAggregationRequest) (response *DescribeReverseShellRulesAggregationResponse, err error) {
+    if request == nil {
+        request = NewDescribeReverseShellRulesAggregationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeReverseShellRulesAggregation")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeReverseShellRulesAggregation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeReverseShellRulesAggregationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeReverseShellSystemPolicyConfigRequest() (request *DescribeReverseShellSystemPolicyConfigRequest) {
+    request = &DescribeReverseShellSystemPolicyConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeReverseShellSystemPolicyConfig")
+    
+    
+    return
+}
+
+func NewDescribeReverseShellSystemPolicyConfigResponse() (response *DescribeReverseShellSystemPolicyConfigResponse) {
+    response = &DescribeReverseShellSystemPolicyConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeReverseShellSystemPolicyConfig
+// Query the configuration of the reverse shell system policy.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeReverseShellSystemPolicyConfig(request *DescribeReverseShellSystemPolicyConfigRequest) (response *DescribeReverseShellSystemPolicyConfigResponse, err error) {
+    return c.DescribeReverseShellSystemPolicyConfigWithContext(context.Background(), request)
+}
+
+// DescribeReverseShellSystemPolicyConfig
+// Query the configuration of the reverse shell system policy.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeReverseShellSystemPolicyConfigWithContext(ctx context.Context, request *DescribeReverseShellSystemPolicyConfigRequest) (response *DescribeReverseShellSystemPolicyConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeReverseShellSystemPolicyConfigRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeReverseShellSystemPolicyConfig")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeReverseShellSystemPolicyConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeReverseShellSystemPolicyConfigResponse()
     err = c.Send(request, response)
     return
 }
@@ -16845,70 +17437,6 @@ func (c *Client) DescribeSecurityEventsCntWithContext(ctx context.Context, reque
     return
 }
 
-func NewDescribeSecurityProtectionStatRequest() (request *DescribeSecurityProtectionStatRequest) {
-    request = &DescribeSecurityProtectionStatRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cwp", APIVersion, "DescribeSecurityProtectionStat")
-    
-    
-    return
-}
-
-func NewDescribeSecurityProtectionStatResponse() (response *DescribeSecurityProtectionStatResponse) {
-    response = &DescribeSecurityProtectionStatResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeSecurityProtectionStat
-// 接口已无效
-//
-// 
-//
-// This API is used to obtain the summary of security protection statuses.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_MAINDBFAIL = "InternalError.MainDBFail"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-func (c *Client) DescribeSecurityProtectionStat(request *DescribeSecurityProtectionStatRequest) (response *DescribeSecurityProtectionStatResponse, err error) {
-    return c.DescribeSecurityProtectionStatWithContext(context.Background(), request)
-}
-
-// DescribeSecurityProtectionStat
-// 接口已无效
-//
-// 
-//
-// This API is used to obtain the summary of security protection statuses.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_MAINDBFAIL = "InternalError.MainDBFail"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-func (c *Client) DescribeSecurityProtectionStatWithContext(ctx context.Context, request *DescribeSecurityProtectionStatRequest) (response *DescribeSecurityProtectionStatResponse, err error) {
-    if request == nil {
-        request = NewDescribeSecurityProtectionStatRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeSecurityProtectionStat")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeSecurityProtectionStat require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeSecurityProtectionStatResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeSecurityTrendsRequest() (request *DescribeSecurityTrendsRequest) {
     request = &DescribeSecurityTrendsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -17017,6 +17545,120 @@ func (c *Client) DescribeServersAndRiskAndFirstInfoWithContext(ctx context.Conte
     request.SetContext(ctx)
     
     response = NewDescribeServersAndRiskAndFirstInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeShellPolicyListRequest() (request *DescribeShellPolicyListRequest) {
+    request = &DescribeShellPolicyListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeShellPolicyList")
+    
+    
+    return
+}
+
+func NewDescribeShellPolicyListResponse() (response *DescribeShellPolicyListResponse) {
+    response = &DescribeShellPolicyListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeShellPolicyList
+// This API is used to query the list of reverse shell policies.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeShellPolicyList(request *DescribeShellPolicyListRequest) (response *DescribeShellPolicyListResponse, err error) {
+    return c.DescribeShellPolicyListWithContext(context.Background(), request)
+}
+
+// DescribeShellPolicyList
+// This API is used to query the list of reverse shell policies.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeShellPolicyListWithContext(ctx context.Context, request *DescribeShellPolicyListRequest) (response *DescribeShellPolicyListResponse, err error) {
+    if request == nil {
+        request = NewDescribeShellPolicyListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeShellPolicyList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeShellPolicyList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeShellPolicyListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSkillInfoRequest() (request *DescribeSkillInfoRequest) {
+    request = &DescribeSkillInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeSkillInfo")
+    
+    
+    return
+}
+
+func NewDescribeSkillInfoResponse() (response *DescribeSkillInfoResponse) {
+    response = &DescribeSkillInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSkillInfo
+// Patch details
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeSkillInfo(request *DescribeSkillInfoRequest) (response *DescribeSkillInfoResponse, err error) {
+    return c.DescribeSkillInfoWithContext(context.Background(), request)
+}
+
+// DescribeSkillInfo
+// Patch details
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeSkillInfoWithContext(ctx context.Context, request *DescribeSkillInfoRequest) (response *DescribeSkillInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeSkillInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeSkillInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSkillInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSkillInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -17993,6 +18635,70 @@ func (c *Client) DescribeVulDefenceOverviewWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeVulDefenceOverviewCountRequest() (request *DescribeVulDefenceOverviewCountRequest) {
+    request = &DescribeVulDefenceOverviewCountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeVulDefenceOverviewCount")
+    
+    
+    return
+}
+
+func NewDescribeVulDefenceOverviewCountResponse() (response *DescribeVulDefenceOverviewCountResponse) {
+    response = &DescribeVulDefenceOverviewCountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeVulDefenceOverviewCount
+// This API is used to obtain vulnerability defense policies and event statistics.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeVulDefenceOverviewCount(request *DescribeVulDefenceOverviewCountRequest) (response *DescribeVulDefenceOverviewCountResponse, err error) {
+    return c.DescribeVulDefenceOverviewCountWithContext(context.Background(), request)
+}
+
+// DescribeVulDefenceOverviewCount
+// This API is used to obtain vulnerability defense policies and event statistics.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeVulDefenceOverviewCountWithContext(ctx context.Context, request *DescribeVulDefenceOverviewCountRequest) (response *DescribeVulDefenceOverviewCountResponse, err error) {
+    if request == nil {
+        request = NewDescribeVulDefenceOverviewCountRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeVulDefenceOverviewCount")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVulDefenceOverviewCount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeVulDefenceOverviewCountResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeVulDefencePluginDetailRequest() (request *DescribeVulDefencePluginDetailRequest) {
     request = &DescribeVulDefencePluginDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -18237,6 +18943,68 @@ func (c *Client) DescribeVulDefenceSettingWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeVulDefenceSettingResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeVulDefenceSettingListRequest() (request *DescribeVulDefenceSettingListRequest) {
+    request = &DescribeVulDefenceSettingListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeVulDefenceSettingList")
+    
+    
+    return
+}
+
+func NewDescribeVulDefenceSettingListResponse() (response *DescribeVulDefenceSettingListResponse) {
+    response = &DescribeVulDefenceSettingListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeVulDefenceSettingList
+// This API is used to query the list of vulnerability defense settings.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeVulDefenceSettingList(request *DescribeVulDefenceSettingListRequest) (response *DescribeVulDefenceSettingListResponse, err error) {
+    return c.DescribeVulDefenceSettingListWithContext(context.Background(), request)
+}
+
+// DescribeVulDefenceSettingList
+// This API is used to query the list of vulnerability defense settings.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeVulDefenceSettingListWithContext(ctx context.Context, request *DescribeVulDefenceSettingListRequest) (response *DescribeVulDefenceSettingListResponse, err error) {
+    if request == nil {
+        request = NewDescribeVulDefenceSettingListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeVulDefenceSettingList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVulDefenceSettingList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeVulDefenceSettingListResponse()
     err = c.Send(request, response)
     return
 }
@@ -19427,6 +20195,138 @@ func (c *Client) DescribeWebHookRulesWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeWindowsPatchListRequest() (request *DescribeWindowsPatchListRequest) {
+    request = &DescribeWindowsPatchListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeWindowsPatchList")
+    
+    
+    return
+}
+
+func NewDescribeWindowsPatchListResponse() (response *DescribeWindowsPatchListResponse) {
+    response = &DescribeWindowsPatchListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeWindowsPatchList
+// Search patch information list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeWindowsPatchList(request *DescribeWindowsPatchListRequest) (response *DescribeWindowsPatchListResponse, err error) {
+    return c.DescribeWindowsPatchListWithContext(context.Background(), request)
+}
+
+// DescribeWindowsPatchList
+// Search patch information list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeWindowsPatchListWithContext(ctx context.Context, request *DescribeWindowsPatchListRequest) (response *DescribeWindowsPatchListResponse, err error) {
+    if request == nil {
+        request = NewDescribeWindowsPatchListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeWindowsPatchList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWindowsPatchList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeWindowsPatchListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeYDRaspBlackWhiteRequest() (request *DescribeYDRaspBlackWhiteRequest) {
+    request = &DescribeYDRaspBlackWhiteRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeYDRaspBlackWhite")
+    
+    
+    return
+}
+
+func NewDescribeYDRaspBlackWhiteResponse() (response *DescribeYDRaspBlackWhiteResponse) {
+    response = &DescribeYDRaspBlackWhiteResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeYDRaspBlackWhite
+// Query application protection allowlist rules
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeYDRaspBlackWhite(request *DescribeYDRaspBlackWhiteRequest) (response *DescribeYDRaspBlackWhiteResponse, err error) {
+    return c.DescribeYDRaspBlackWhiteWithContext(context.Background(), request)
+}
+
+// DescribeYDRaspBlackWhite
+// Query application protection allowlist rules
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeYDRaspBlackWhiteWithContext(ctx context.Context, request *DescribeYDRaspBlackWhiteRequest) (response *DescribeYDRaspBlackWhiteResponse, err error) {
+    if request == nil {
+        request = NewDescribeYDRaspBlackWhiteRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeYDRaspBlackWhite")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeYDRaspBlackWhite require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeYDRaspBlackWhiteResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDestroyOrderRequest() (request *DestroyOrderRequest) {
     request = &DestroyOrderRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -19641,7 +20541,7 @@ func NewEditReverseShellRulesResponse() (response *EditReverseShellRulesResponse
 }
 
 // EditReverseShellRules
-// This API is used to edit reverse shell rules (multiple servers supported).
+// Editing Reverse Shell Rules. (Supporting Selecting Multiple Servers)
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -19664,7 +20564,7 @@ func (c *Client) EditReverseShellRules(request *EditReverseShellRulesRequest) (r
 }
 
 // EditReverseShellRules
-// This API is used to edit reverse shell rules (multiple servers supported).
+// Editing Reverse Shell Rules. (Supporting Selecting Multiple Servers)
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -21997,6 +22897,70 @@ func (c *Client) ExportNonlocalLoginPlacesWithContext(ctx context.Context, reque
     return
 }
 
+func NewExportPatchEffectHostListRequest() (request *ExportPatchEffectHostListRequest) {
+    request = &ExportPatchEffectHostListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ExportPatchEffectHostList")
+    
+    
+    return
+}
+
+func NewExportPatchEffectHostListResponse() (response *ExportPatchEffectHostListResponse) {
+    response = &ExportPatchEffectHostListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExportPatchEffectHostList
+// Export the affected host list of a patch
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) ExportPatchEffectHostList(request *ExportPatchEffectHostListRequest) (response *ExportPatchEffectHostListResponse, err error) {
+    return c.ExportPatchEffectHostListWithContext(context.Background(), request)
+}
+
+// ExportPatchEffectHostList
+// Export the affected host list of a patch
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) ExportPatchEffectHostListWithContext(ctx context.Context, request *ExportPatchEffectHostListRequest) (response *ExportPatchEffectHostListResponse, err error) {
+    if request == nil {
+        request = NewExportPatchEffectHostListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ExportPatchEffectHostList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportPatchEffectHostList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExportPatchEffectHostListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewExportPrivilegeEventsRequest() (request *ExportPrivilegeEventsRequest) {
     request = &ExportPrivilegeEventsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -23219,6 +24183,64 @@ func (c *Client) ExportVulListWithContext(ctx context.Context, request *ExportVu
     return
 }
 
+func NewExportWindowsPatchListRequest() (request *ExportWindowsPatchListRequest) {
+    request = &ExportWindowsPatchListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ExportWindowsPatchList")
+    
+    
+    return
+}
+
+func NewExportWindowsPatchListResponse() (response *ExportWindowsPatchListResponse) {
+    response = &ExportWindowsPatchListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExportWindowsPatchList
+// Export Windows patch list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ExportWindowsPatchList(request *ExportWindowsPatchListRequest) (response *ExportWindowsPatchListResponse, err error) {
+    return c.ExportWindowsPatchListWithContext(context.Background(), request)
+}
+
+// ExportWindowsPatchList
+// Export Windows patch list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ExportWindowsPatchListWithContext(ctx context.Context, request *ExportWindowsPatchListRequest) (response *ExportWindowsPatchListResponse, err error) {
+    if request == nil {
+        request = NewExportWindowsPatchListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ExportWindowsPatchList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportWindowsPatchList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExportWindowsPatchListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetLocalStorageItemRequest() (request *GetLocalStorageItemRequest) {
     request = &GetLocalStorageItemRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -23265,72 +24287,6 @@ func (c *Client) GetLocalStorageItemWithContext(ctx context.Context, request *Ge
     request.SetContext(ctx)
     
     response = NewGetLocalStorageItemResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewIgnoreImpactedHostsRequest() (request *IgnoreImpactedHostsRequest) {
-    request = &IgnoreImpactedHostsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cwp", APIVersion, "IgnoreImpactedHosts")
-    
-    
-    return
-}
-
-func NewIgnoreImpactedHostsResponse() (response *IgnoreImpactedHostsResponse) {
-    response = &IgnoreImpactedHostsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// IgnoreImpactedHosts
-// This API is used to ignore vulnerabilities.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) IgnoreImpactedHosts(request *IgnoreImpactedHostsRequest) (response *IgnoreImpactedHostsResponse, err error) {
-    return c.IgnoreImpactedHostsWithContext(context.Background(), request)
-}
-
-// IgnoreImpactedHosts
-// This API is used to ignore vulnerabilities.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) IgnoreImpactedHostsWithContext(ctx context.Context, request *IgnoreImpactedHostsRequest) (response *IgnoreImpactedHostsResponse, err error) {
-    if request == nil {
-        request = NewIgnoreImpactedHostsRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "IgnoreImpactedHosts")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("IgnoreImpactedHosts require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewIgnoreImpactedHostsResponse()
     err = c.Send(request, response)
     return
 }
@@ -25165,6 +26121,224 @@ func (c *Client) ModifyRansomDefenseStrategyStatusWithContext(ctx context.Contex
     return
 }
 
+func NewModifyRaspMaxCpuRequest() (request *ModifyRaspMaxCpuRequest) {
+    request = &ModifyRaspMaxCpuRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ModifyRaspMaxCpu")
+    
+    
+    return
+}
+
+func NewModifyRaspMaxCpuResponse() (response *ModifyRaspMaxCpuResponse) {
+    response = &ModifyRaspMaxCpuResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyRaspMaxCpu
+// Edit the maximum cpu configuration for vulnerability defense
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyRaspMaxCpu(request *ModifyRaspMaxCpuRequest) (response *ModifyRaspMaxCpuResponse, err error) {
+    return c.ModifyRaspMaxCpuWithContext(context.Background(), request)
+}
+
+// ModifyRaspMaxCpu
+// Edit the maximum cpu configuration for vulnerability defense
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyRaspMaxCpuWithContext(ctx context.Context, request *ModifyRaspMaxCpuRequest) (response *ModifyRaspMaxCpuResponse, err error) {
+    if request == nil {
+        request = NewModifyRaspMaxCpuRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ModifyRaspMaxCpu")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRaspMaxCpu require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRaspMaxCpuResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyRaspRulesRequest() (request *ModifyRaspRulesRequest) {
+    request = &ModifyRaspRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ModifyRaspRules")
+    
+    
+    return
+}
+
+func NewModifyRaspRulesResponse() (response *ModifyRaspRulesResponse) {
+    response = &ModifyRaspRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyRaspRules
+// This example shows you how to add entries to the vulnerability defense allowlist.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_IPNOVALID = "InvalidParameter.IpNoValid"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_PORTNOVALID = "InvalidParameter.PortNoValid"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETER_REVERSHELLKEYFIELDALLEMPTY = "InvalidParameter.ReverShellKeyFieldAllEmpty"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyRaspRules(request *ModifyRaspRulesRequest) (response *ModifyRaspRulesResponse, err error) {
+    return c.ModifyRaspRulesWithContext(context.Background(), request)
+}
+
+// ModifyRaspRules
+// This example shows you how to add entries to the vulnerability defense allowlist.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_IPNOVALID = "InvalidParameter.IpNoValid"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_PORTNOVALID = "InvalidParameter.PortNoValid"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETER_REVERSHELLKEYFIELDALLEMPTY = "InvalidParameter.ReverShellKeyFieldAllEmpty"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyRaspRulesWithContext(ctx context.Context, request *ModifyRaspRulesRequest) (response *ModifyRaspRulesResponse, err error) {
+    if request == nil {
+        request = NewModifyRaspRulesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ModifyRaspRules")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRaspRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRaspRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyReverseShellRulesAggregationRequest() (request *ModifyReverseShellRulesAggregationRequest) {
+    request = &ModifyReverseShellRulesAggregationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ModifyReverseShellRulesAggregation")
+    
+    
+    return
+}
+
+func NewModifyReverseShellRulesAggregationResponse() (response *ModifyReverseShellRulesAggregationResponse) {
+    response = &ModifyReverseShellRulesAggregationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyReverseShellRulesAggregation
+// Editing Reverse Shell Rules. (Supporting Selecting Multiple Servers)
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_IPNOVALID = "InvalidParameter.IpNoValid"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_PORTNOVALID = "InvalidParameter.PortNoValid"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETER_REVERSHELLKEYFIELDALLEMPTY = "InvalidParameter.ReverShellKeyFieldAllEmpty"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyReverseShellRulesAggregation(request *ModifyReverseShellRulesAggregationRequest) (response *ModifyReverseShellRulesAggregationResponse, err error) {
+    return c.ModifyReverseShellRulesAggregationWithContext(context.Background(), request)
+}
+
+// ModifyReverseShellRulesAggregation
+// Editing Reverse Shell Rules. (Supporting Selecting Multiple Servers)
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_IPNOVALID = "InvalidParameter.IpNoValid"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETER_PORTNOVALID = "InvalidParameter.PortNoValid"
+//  INVALIDPARAMETER_REGEXRULEERROR = "InvalidParameter.RegexRuleError"
+//  INVALIDPARAMETER_REVERSHELLKEYFIELDALLEMPTY = "InvalidParameter.ReverShellKeyFieldAllEmpty"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_AREAQUOTA = "LimitExceeded.AreaQuota"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyReverseShellRulesAggregationWithContext(ctx context.Context, request *ModifyReverseShellRulesAggregationRequest) (response *ModifyReverseShellRulesAggregationResponse, err error) {
+    if request == nil {
+        request = NewModifyReverseShellRulesAggregationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ModifyReverseShellRulesAggregation")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyReverseShellRulesAggregation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyReverseShellRulesAggregationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyRiskDnsPolicyRequest() (request *ModifyRiskDnsPolicyRequest) {
     request = &ModifyRiskDnsPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -26071,6 +27245,70 @@ func (c *Client) RansomDefenseRollbackWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewRansomDefenseRollbackResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRaspEventOverviewRequest() (request *RaspEventOverviewRequest) {
+    request = &RaspEventOverviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "RaspEventOverview")
+    
+    
+    return
+}
+
+func NewRaspEventOverviewResponse() (response *RaspEventOverviewResponse) {
+    response = &RaspEventOverviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RaspEventOverview
+// This API is used to obtain the vulnerability defense overview information, including event trend and plugin enabling status.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) RaspEventOverview(request *RaspEventOverviewRequest) (response *RaspEventOverviewResponse, err error) {
+    return c.RaspEventOverviewWithContext(context.Background(), request)
+}
+
+// RaspEventOverview
+// This API is used to obtain the vulnerability defense overview information, including event trend and plugin enabling status.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) RaspEventOverviewWithContext(ctx context.Context, request *RaspEventOverviewRequest) (response *RaspEventOverviewResponse, err error) {
+    if request == nil {
+        request = NewRaspEventOverviewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "RaspEventOverview")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RaspEventOverview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRaspEventOverviewResponse()
     err = c.Send(request, response)
     return
 }

@@ -119,9 +119,9 @@ type AttachInstancesRequestParams struct {
 	// <li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
-	// CVM instance ID list. you can obtain available instance ID in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>.
+	// CVM instance ID list. you can obtain available instance ID in the following ways:
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index).</li>
+	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -133,9 +133,9 @@ type AttachInstancesRequest struct {
 	// <li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
-	// CVM instance ID list. you can obtain available instance ID in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>.
+	// CVM instance ID list. you can obtain available instance ID in the following ways:
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index).</li>
+	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -186,7 +186,7 @@ func (r *AttachInstancesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AttachLoadBalancersRequestParams struct {
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Specifies a list of classic clb ids. each scaling group can bind a maximum of 20 classic clbs. either LoadBalancerIds or ForwardLoadBalancers can be specified at the same time. can be obtained through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
@@ -199,7 +199,7 @@ type AttachLoadBalancersRequestParams struct {
 type AttachLoadBalancersRequest struct {
 	*tchttp.BaseRequest
 	
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Specifies a list of classic clb ids. each scaling group can bind a maximum of 20 classic clbs. either LoadBalancerIds or ForwardLoadBalancers can be specified at the same time. can be obtained through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
@@ -807,7 +807,7 @@ type CreateAutoScalingGroupRequestParams struct {
 	// Minimum number of instances. value range: [0,2000]. to meet MaxSize >= DesiredCapacity >= MinSize at the same time.
 	MinSize *uint64 `json:"MinSize,omitnil,omitempty" name:"MinSize"`
 
-	// vpc ID. a valid vpc ID can be queried by logging in to the console (https://console.cloud.tencent.com/vpc/vpc). you can also call the api DescribeVpc (https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) and obtain it from the VpcId field in the api response.
+	// vpc ID. a valid vpc ID can be queried by logging in to the [console](https://console.cloud.tencent.com/vpc/vpc). you can also call the api [DescribeVpc](https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) and obtain it from the VpcId field in the api response.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Default cooldown period in seconds. default value: 300. value range: [0,3600].
@@ -825,7 +825,7 @@ type CreateAutoScalingGroupRequestParams struct {
 	// Specifies the list of load balancers with a current maximum length of 100. either LoadBalancerIds or ForwardLoadBalancers can be specified at the same time.
 	ForwardLoadBalancers []*ForwardLoadBalancer `json:"ForwardLoadBalancers,omitnil,omitempty" name:"ForwardLoadBalancers"`
 
-	// The subnet ID list must specify a subnet in VPC scenarios. multiple subnets are attempted sequentially based on the fill-in order as priority until successful instance creation. effective VPC subnet ids can be queried by logging in to the console (https://console.cloud.tencent.com/VPC/subnet) or obtained from the SubnetId field in the API response by calling the DescribeSubnets API (https://intl.cloud.tencent.com/document/product/215/15784?from_cn_redirect=1).
+	// The subnet ID list must specify a subnet in VPC scenarios. multiple subnets are attempted sequentially based on the fill-in order as priority until successful instance creation. effective VPC subnet ids can be queried by logging in to the [console](https://console.cloud.tencent.com/VPC/subnet) or obtained from the SubnetId field in the API response by calling the [DescribeSubnets](https://intl.cloud.tencent.com/document/product/215/15784?from_cn_redirect=1) API.
 	SubnetIds []*string `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
 	// Termination policy, whose maximum length is currently 1. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE. Default value: OLDEST_INSTANCE.
@@ -924,7 +924,7 @@ type CreateAutoScalingGroupRequest struct {
 	// Minimum number of instances. value range: [0,2000]. to meet MaxSize >= DesiredCapacity >= MinSize at the same time.
 	MinSize *uint64 `json:"MinSize,omitnil,omitempty" name:"MinSize"`
 
-	// vpc ID. a valid vpc ID can be queried by logging in to the console (https://console.cloud.tencent.com/vpc/vpc). you can also call the api DescribeVpc (https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) and obtain it from the VpcId field in the api response.
+	// vpc ID. a valid vpc ID can be queried by logging in to the [console](https://console.cloud.tencent.com/vpc/vpc). you can also call the api [DescribeVpc](https://intl.cloud.tencent.com/document/api/215/15778?from_cn_redirect=1) and obtain it from the VpcId field in the api response.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Default cooldown period in seconds. default value: 300. value range: [0,3600].
@@ -942,7 +942,7 @@ type CreateAutoScalingGroupRequest struct {
 	// Specifies the list of load balancers with a current maximum length of 100. either LoadBalancerIds or ForwardLoadBalancers can be specified at the same time.
 	ForwardLoadBalancers []*ForwardLoadBalancer `json:"ForwardLoadBalancers,omitnil,omitempty" name:"ForwardLoadBalancers"`
 
-	// The subnet ID list must specify a subnet in VPC scenarios. multiple subnets are attempted sequentially based on the fill-in order as priority until successful instance creation. effective VPC subnet ids can be queried by logging in to the console (https://console.cloud.tencent.com/VPC/subnet) or obtained from the SubnetId field in the API response by calling the DescribeSubnets API (https://intl.cloud.tencent.com/document/product/215/15784?from_cn_redirect=1).
+	// The subnet ID list must specify a subnet in VPC scenarios. multiple subnets are attempted sequentially based on the fill-in order as priority until successful instance creation. effective VPC subnet ids can be queried by logging in to the [console](https://console.cloud.tencent.com/VPC/subnet) or obtained from the SubnetId field in the API response by calling the [DescribeSubnets](https://intl.cloud.tencent.com/document/product/215/15784?from_cn_redirect=1) API.
 	SubnetIds []*string `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
 	// Termination policy, whose maximum length is currently 1. Valid values: OLDEST_INSTANCE and NEWEST_INSTANCE. Default value: OLDEST_INSTANCE.
@@ -1511,7 +1511,7 @@ func (r *CreateLifecycleHookResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateNotificationConfigurationRequestParams struct {
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Notification type, i.e., the set of types of notifications to be subscribed to. Value range:
@@ -1546,7 +1546,7 @@ type CreateNotificationConfigurationRequestParams struct {
 type CreateNotificationConfigurationRequest struct {
 	*tchttp.BaseRequest
 	
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Notification type, i.e., the set of types of notifications to be subscribed to. Value range:
@@ -1629,7 +1629,7 @@ func (r *CreateNotificationConfigurationResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type CreateScalingPolicyRequestParams struct {
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// The Alarm policy name must be unique in your account. the name length cannot exceed 60 characters. the name only supports chinese, english, digits, underscores, hyphens, and decimal points.
@@ -1690,7 +1690,7 @@ type CreateScalingPolicyRequestParams struct {
 type CreateScalingPolicyRequest struct {
 	*tchttp.BaseRequest
 	
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// The Alarm policy name must be unique in your account. the name length cannot exceed 60 characters. the name only supports chinese, english, digits, underscores, hyphens, and decimal points.
@@ -1831,7 +1831,7 @@ type CreateScheduledActionRequestParams struct {
 	// The repeating mode of a scheduled task follows the standard Cron format. the [Recurrence parameter limits](https://intl.cloud.tencent.com/document/product/377/88119?from_cn_redirect=1) in a scheduled task consist of 5 fields separated by spaces, with the structure: minute, hour, date, month, week. this parameter must be simultaneously specified with `EndTime`.
 	Recurrence *string `json:"Recurrence,omitnil,omitempty" name:"Recurrence"`
 
-	// Disable update DesiredCapacity Indicates the DesiredCapacity is updated normally during scheduled task triggering.
+	// This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
 	// 
 	// Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
 	// The following cases assume that DisableUpdateDesiredCapacity is True:
@@ -1870,7 +1870,7 @@ type CreateScheduledActionRequest struct {
 	// The repeating mode of a scheduled task follows the standard Cron format. the [Recurrence parameter limits](https://intl.cloud.tencent.com/document/product/377/88119?from_cn_redirect=1) in a scheduled task consist of 5 fields separated by spaces, with the structure: minute, hour, date, month, week. this parameter must be simultaneously specified with `EndTime`.
 	Recurrence *string `json:"Recurrence,omitnil,omitempty" name:"Recurrence"`
 
-	// Disable update DesiredCapacity Indicates the DesiredCapacity is updated normally during scheduled task triggering.
+	// This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
 	// 
 	// Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
 	// The following cases assume that DisableUpdateDesiredCapacity is True:
@@ -1977,14 +1977,14 @@ type DataDisk struct {
 
 // Predefined struct for user
 type DeleteAutoScalingGroupRequestParams struct {
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 }
 
 type DeleteAutoScalingGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 }
 
@@ -2139,14 +2139,14 @@ func (r *DeleteLifecycleHookResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteNotificationConfigurationRequestParams struct {
-	// The notification ID to be deleted. this is currently a required parameter. you can obtain the notification ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeNotificationConfigurations](https://intl.cloud.tencent.com/document/api/377/33183?from_cn_redirect=1) and retrieving the AutoScalingNotificationId from the returned information.
+	// The notification ID to be deleted. this is currently a required parameter. you can obtain the notification ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeNotificationConfigurations](https://intl.cloud.tencent.com/document/api/377/33183?from_cn_redirect=1) and retrieving the AutoScalingNotificationId from the returned information.
 	AutoScalingNotificationId *string `json:"AutoScalingNotificationId,omitnil,omitempty" name:"AutoScalingNotificationId"`
 }
 
 type DeleteNotificationConfigurationRequest struct {
 	*tchttp.BaseRequest
 	
-	// The notification ID to be deleted. this is currently a required parameter. you can obtain the notification ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeNotificationConfigurations](https://intl.cloud.tencent.com/document/api/377/33183?from_cn_redirect=1) and retrieving the AutoScalingNotificationId from the returned information.
+	// The notification ID to be deleted. this is currently a required parameter. you can obtain the notification ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeNotificationConfigurations](https://intl.cloud.tencent.com/document/api/377/33183?from_cn_redirect=1) and retrieving the AutoScalingNotificationId from the returned information.
 	AutoScalingNotificationId *string `json:"AutoScalingNotificationId,omitnil,omitempty" name:"AutoScalingNotificationId"`
 }
 
@@ -2193,14 +2193,14 @@ func (r *DeleteNotificationConfigurationResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type DeleteScalingPolicyRequestParams struct {
-	// The Alarm policy ID to be deleted. you can obtain the Alarm policy ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeScalingPolicies](https://intl.cloud.tencent.com/document/api/377/33178?from_cn_redirect=1) and retrieving the AutoScalingPolicyId from the returned information.
+	// The Alarm policy ID to be deleted. you can obtain the Alarm policy ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeScalingPolicies](https://intl.cloud.tencent.com/document/api/377/33178?from_cn_redirect=1) and retrieving the AutoScalingPolicyId from the returned information.
 	AutoScalingPolicyId *string `json:"AutoScalingPolicyId,omitnil,omitempty" name:"AutoScalingPolicyId"`
 }
 
 type DeleteScalingPolicyRequest struct {
 	*tchttp.BaseRequest
 	
-	// The Alarm policy ID to be deleted. you can obtain the Alarm policy ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeScalingPolicies](https://intl.cloud.tencent.com/document/api/377/33178?from_cn_redirect=1) and retrieving the AutoScalingPolicyId from the returned information.
+	// The Alarm policy ID to be deleted. you can obtain the Alarm policy ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeScalingPolicies](https://intl.cloud.tencent.com/document/api/377/33178?from_cn_redirect=1) and retrieving the AutoScalingPolicyId from the returned information.
 	AutoScalingPolicyId *string `json:"AutoScalingPolicyId,omitnil,omitempty" name:"AutoScalingPolicyId"`
 }
 
@@ -2379,7 +2379,7 @@ type DescribeAutoScalingActivitiesRequestParams struct {
 	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// The earliest start time of the scaling activity, which will be ignored if ActivityIds is specified. The value is in `UTC time` in the format of `YYYY-MM-DDThh:mm:ssZ` according to the `ISO8601` standard.
+	// The earliest start time of the scaling operation. if ActivityIds is specified, this parameter will be ignored. value is in UTC time, following the ISO8601 standard, format: YYYY-MM-DDThh:MM:ssZ. note: currently, only scaling operations from the past two years are saved.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The latest end time of the scaling activity, which will be ignored if ActivityIds is specified. The value is in `UTC time` in the format of `YYYY-MM-DDThh:mm:ssZ` according to the `ISO8601` standard.
@@ -2404,7 +2404,7 @@ type DescribeAutoScalingActivitiesRequest struct {
 	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// The earliest start time of the scaling activity, which will be ignored if ActivityIds is specified. The value is in `UTC time` in the format of `YYYY-MM-DDThh:mm:ssZ` according to the `ISO8601` standard.
+	// The earliest start time of the scaling operation. if ActivityIds is specified, this parameter will be ignored. value is in UTC time, following the ISO8601 standard, format: YYYY-MM-DDThh:MM:ssZ. note: currently, only scaling operations from the past two years are saved.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The latest end time of the scaling activity, which will be ignored if ActivityIds is specified. The value is in `UTC time` in the format of `YYYY-MM-DDThh:mm:ssZ` according to the `ISO8601` standard.
@@ -2465,14 +2465,14 @@ func (r *DescribeAutoScalingActivitiesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAutoScalingAdvicesRequestParams struct {
-	// The scaling group list to be queried, with an upper limit of 100. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.
+	// The scaling group list to be queried, with an upper limit of 100. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.
 	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitnil,omitempty" name:"AutoScalingGroupIds"`
 }
 
 type DescribeAutoScalingAdvicesRequest struct {
 	*tchttp.BaseRequest
 	
-	// The scaling group list to be queried, with an upper limit of 100. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.
+	// The scaling group list to be queried, with an upper limit of 100. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.
 	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitnil,omitempty" name:"AutoScalingGroupIds"`
 }
 
@@ -2522,7 +2522,7 @@ func (r *DescribeAutoScalingAdvicesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAutoScalingGroupLastActivitiesRequestParams struct {
-	// Auto scaling group ID list. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving AutoScalingGroupId from the returned information.
+	// Auto scaling group ID list. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving AutoScalingGroupId from the returned information.
 	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitnil,omitempty" name:"AutoScalingGroupIds"`
 
 	// Excludes cancelled type activities when querying. Default value is false, which means cancelled type activities are not excluded.
@@ -2532,7 +2532,7 @@ type DescribeAutoScalingGroupLastActivitiesRequestParams struct {
 type DescribeAutoScalingGroupLastActivitiesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Auto scaling group ID list. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving AutoScalingGroupId from the returned information.
+	// Auto scaling group ID list. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving AutoScalingGroupId from the returned information.
 	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitnil,omitempty" name:"AutoScalingGroupIds"`
 
 	// Excludes cancelled type activities when querying. Default value is false, which means cancelled type activities are not excluded.
@@ -2595,7 +2595,7 @@ type DescribeAutoScalingGroupsRequestParams struct {
 	// Specifies the scaling group ID obtained by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.
 	// <li> auto-scaling-group-name - String - required: no - (filter) filter by auto scaling group name.</li>.
 	// <li> vague-auto-scaling-group-name - String - required: no - (filter) filter by scaling group name fuzzy search.</li>.
-	// <li>launch-configuration-id - String - required: no - (filter condition) filter by launch configuration id. you can obtain the launch configuration id by logging in to the console (https://console.cloud.tencent.com/autoscaling/config) or calling the api DescribeLaunchConfigurations (https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the returned information.</li>.
+	// <li>launch-configuration-id - String - required: no - (filter condition) filter by launch configuration id. you can obtain the launch configuration id by logging in to the [console](https://console.cloud.tencent.com/autoscaling/config) or calling the api [DescribeLaunchConfigurations](https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the returned information.</li>.
 	// <li> `tag-key` - String - optional - filter by the tag key. you can call the API [GetTags](https://intl.cloud.tencent.com/document/product/651/72275?from_cn_redirect=1) to obtain the tag key from the returned information.</li>.
 	// <li>tag-value - String - required: no - (filter condition) filter by tag value. you can obtain the tag value by calling the API [GetTags](https://intl.cloud.tencent.com/document/product/651/72275?from_cn_redirect=1) and retrieving the TagValue from the returned information.</li>.
 	// <li>tag:tag-key - String - required: no - (filter condition) filter by tag key-value pair. replace tag-key with a specific tag key. see example 2 for reference. call the API [GetTags](https://intl.cloud.tencent.com/document/product/651/72275?from_cn_redirect=1) to obtain the TagKey from the returned information.</li>.
@@ -2621,7 +2621,7 @@ type DescribeAutoScalingGroupsRequest struct {
 	// Specifies the scaling group ID obtained by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.
 	// <li> auto-scaling-group-name - String - required: no - (filter) filter by auto scaling group name.</li>.
 	// <li> vague-auto-scaling-group-name - String - required: no - (filter) filter by scaling group name fuzzy search.</li>.
-	// <li>launch-configuration-id - String - required: no - (filter condition) filter by launch configuration id. you can obtain the launch configuration id by logging in to the console (https://console.cloud.tencent.com/autoscaling/config) or calling the api DescribeLaunchConfigurations (https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the returned information.</li>.
+	// <li>launch-configuration-id - String - required: no - (filter condition) filter by launch configuration id. you can obtain the launch configuration id by logging in to the [console](https://console.cloud.tencent.com/autoscaling/config) or calling the api [DescribeLaunchConfigurations](https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the returned information.</li>.
 	// <li> `tag-key` - String - optional - filter by the tag key. you can call the API [GetTags](https://intl.cloud.tencent.com/document/product/651/72275?from_cn_redirect=1) to obtain the tag key from the returned information.</li>.
 	// <li>tag-value - String - required: no - (filter condition) filter by tag value. you can obtain the tag value by calling the API [GetTags](https://intl.cloud.tencent.com/document/product/651/72275?from_cn_redirect=1) and retrieving the TagValue from the returned information.</li>.
 	// <li>tag:tag-key - String - required: no - (filter condition) filter by tag key-value pair. replace tag-key with a specific tag key. see example 2 for reference. call the API [GetTags](https://intl.cloud.tencent.com/document/product/651/72275?from_cn_redirect=1) to obtain the TagKey from the returned information.</li>.
@@ -2688,16 +2688,16 @@ func (r *DescribeAutoScalingGroupsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAutoScalingInstancesRequestParams struct {
 	// IDs of the CVM instances to query. the instance ID list has a length limit of 100. `InstanceIds` and `Filters` cannot be specified simultaneously.
-	// You can get available instance ids in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>.
+	// You can get available instance ids in the following ways:
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index).</li>
+	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Filter criteria
-	// 
-	// <li> instance-id - String - required: no - (filter condition) filter by instance id. get the instance id by logging in to the [console](https://console.cloud.tencent.com/cvm/index) or making an api call to [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1), and retrieve the `InstanceId` from the returned information.</li>.
-	// <li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id. you can obtain the scaling group id by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or making an api call to [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
-	// The maximum number of `Filters` per request is 10, and the maximum number of `Filter.Values` is 5. parameters do not support specifying both `InstanceIds` and `Filters`.
+	// <li> instance-id - String - required: no - (filter condition) filter by instance id. get the instance id by logging in to the console (https://console.cloud.tencent.com/cvm/index) or calling the api DescribeInstances (https://www.tencentcloud.com/document/api/213/15728?from_cn_redirect=1), and retrieve the `InstanceId` from the returned information.</li>.
+	// <li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id. obtain the scaling group id by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
+	// <li>private-ip-address - String - required: no - (filter condition) filters instances by private ip address. you can obtain the private ip address by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeInstances](https://www.tencentcloud.com/document/api/213/15728?from_cn_redirect=1), and retrieving the `PrivateIpAddresses` from the returned information.</li>.
+	// The maximum number of `Filters` per request is 10, and the maximum number of `Filter.Values` is 5. the parameter does not support specifying both `InstanceIds` and `Filters`.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -2711,16 +2711,16 @@ type DescribeAutoScalingInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// IDs of the CVM instances to query. the instance ID list has a length limit of 100. `InstanceIds` and `Filters` cannot be specified simultaneously.
-	// You can get available instance ids in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>.
+	// You can get available instance ids in the following ways:
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index).</li>
+	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Filter criteria
-	// 
-	// <li> instance-id - String - required: no - (filter condition) filter by instance id. get the instance id by logging in to the [console](https://console.cloud.tencent.com/cvm/index) or making an api call to [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1), and retrieve the `InstanceId` from the returned information.</li>.
-	// <li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id. you can obtain the scaling group id by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or making an api call to [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
-	// The maximum number of `Filters` per request is 10, and the maximum number of `Filter.Values` is 5. parameters do not support specifying both `InstanceIds` and `Filters`.
+	// <li> instance-id - String - required: no - (filter condition) filter by instance id. get the instance id by logging in to the console (https://console.cloud.tencent.com/cvm/index) or calling the api DescribeInstances (https://www.tencentcloud.com/document/api/213/15728?from_cn_redirect=1), and retrieve the `InstanceId` from the returned information.</li>.
+	// <li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id. obtain the scaling group id by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
+	// <li>private-ip-address - String - required: no - (filter condition) filters instances by private ip address. you can obtain the private ip address by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeInstances](https://www.tencentcloud.com/document/api/213/15728?from_cn_redirect=1), and retrieving the `PrivateIpAddresses` from the returned information.</li>.
+	// The maximum number of `Filters` per request is 10, and the maximum number of `Filter.Values` is 5. the parameter does not support specifying both `InstanceIds` and `Filters`.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -2968,13 +2968,13 @@ func (r *DescribeLifecycleHooksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeNotificationConfigurationsRequestParams struct {
-	// Query by one or more notification ids. the list length limit is 100. you can obtain the notification ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group). parameters AutoScalingNotificationIds and Filters must not be specified simultaneously.
+	// Query by one or more notification ids. the list length limit is 100. you can obtain the notification ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group). parameters AutoScalingNotificationIds and Filters must not be specified simultaneously.
 	AutoScalingNotificationIds []*string `json:"AutoScalingNotificationIds,omitnil,omitempty" name:"AutoScalingNotificationIds"`
 
 	// Filter criteria
 	// 
-	// <li> auto-scaling-notification-id - String - required: no - (filter) filter by notification id.</li>.
-	// <li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id. you can obtain the scaling group id by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
+	// <li> auto-scaling-notification-id - String - required: no - (filter) filter by notification id.</li>
+	// <li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id. you can obtain the scaling group id by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>
 	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `AutoScalingNotificationIds` and `Filters` parameters cannot be specified simultaneously.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
@@ -2988,13 +2988,13 @@ type DescribeNotificationConfigurationsRequestParams struct {
 type DescribeNotificationConfigurationsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Query by one or more notification ids. the list length limit is 100. you can obtain the notification ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group). parameters AutoScalingNotificationIds and Filters must not be specified simultaneously.
+	// Query by one or more notification ids. the list length limit is 100. you can obtain the notification ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group). parameters AutoScalingNotificationIds and Filters must not be specified simultaneously.
 	AutoScalingNotificationIds []*string `json:"AutoScalingNotificationIds,omitnil,omitempty" name:"AutoScalingNotificationIds"`
 
 	// Filter criteria
 	// 
-	// <li> auto-scaling-notification-id - String - required: no - (filter) filter by notification id.</li>.
-	// <li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id. you can obtain the scaling group id by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
+	// <li> auto-scaling-notification-id - String - required: no - (filter) filter by notification id.</li>
+	// <li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id. you can obtain the scaling group id by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>
 	// The maximum number of `Filters` per request is 10, and that of `Filter.Values` is 5. the `AutoScalingNotificationIds` and `Filters` parameters cannot be specified simultaneously.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
@@ -3069,10 +3069,10 @@ type DescribeRefreshActivitiesRequestParams struct {
 	// <li>The upper limit of Filters per request is 10, and that of Filter.Values is 5. The RefreshActivityIds and Filters parameters cannot be specified at the same time.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Number of returned pieces. Default value: 20. Maximum value: 100. For further information on Limit, please refer to relevant sections in API [Overview] (https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	// Number of returned pieces. Default value: 20. Maximum value: 100. For further information on Limit, please refer to relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset, 0 by default. For further information on Offset, please refer to relevant sections in API [Overview] (https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	// Offset, 0 by default. For further information on Offset, please refer to relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
@@ -3091,10 +3091,10 @@ type DescribeRefreshActivitiesRequest struct {
 	// <li>The upper limit of Filters per request is 10, and that of Filter.Values is 5. The RefreshActivityIds and Filters parameters cannot be specified at the same time.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Number of returned pieces. Default value: 20. Maximum value: 100. For further information on Limit, please refer to relevant sections in API [Overview] (https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	// Number of returned pieces. Default value: 20. Maximum value: 100. For further information on Limit, please refer to relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset, 0 by default. For further information on Offset, please refer to relevant sections in API [Overview] (https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	// Offset, 0 by default. For further information on Offset, please refer to relevant sections in API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
@@ -3243,13 +3243,13 @@ func (r *DescribeScalingPoliciesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeScheduledActionsRequestParams struct {
-	// Query by one or more scheduled task ids. you can obtain the scheduled task ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group). the maximum number of instances per request is 100. parameters ScheduledActionIds and Filters must not be specified simultaneously.
+	// Query by one or more scheduled task ids. you can obtain the scheduled task ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group). the maximum number of instances per request is 100. parameters ScheduledActionIds and Filters must not be specified simultaneously.
 	ScheduledActionIds []*string `json:"ScheduledActionIds,omitnil,omitempty" name:"ScheduledActionIds"`
 
-	// Filter criteria. obtain the scheduled task ID, scheduled task name, and scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group).
-	// <li> scheduled-action-id - String - required: no - (filter) filter by scheduled task id.</li>.
-	// <li> scheduled-action-name - String - required: no - (filter criteria) filters by scheduled task name.</li>.
-	// <li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id.</li>.
+	// Filter criteria. obtain the scheduled task ID, scheduled task name, and scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).
+	// <li> scheduled-action-id - String - required: no - (filter) filter by scheduled task id.</li>
+	// <li> scheduled-action-name - String - required: no - (filter criteria) filters by scheduled task name.</li>
+	// <li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -3262,13 +3262,13 @@ type DescribeScheduledActionsRequestParams struct {
 type DescribeScheduledActionsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Query by one or more scheduled task ids. you can obtain the scheduled task ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group). the maximum number of instances per request is 100. parameters ScheduledActionIds and Filters must not be specified simultaneously.
+	// Query by one or more scheduled task ids. you can obtain the scheduled task ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group). the maximum number of instances per request is 100. parameters ScheduledActionIds and Filters must not be specified simultaneously.
 	ScheduledActionIds []*string `json:"ScheduledActionIds,omitnil,omitempty" name:"ScheduledActionIds"`
 
-	// Filter criteria. obtain the scheduled task ID, scheduled task name, and scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group).
-	// <li> scheduled-action-id - String - required: no - (filter) filter by scheduled task id.</li>.
-	// <li> scheduled-action-name - String - required: no - (filter criteria) filters by scheduled task name.</li>.
-	// <li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id.</li>.
+	// Filter criteria. obtain the scheduled task ID, scheduled task name, and scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).
+	// <li> scheduled-action-id - String - required: no - (filter) filter by scheduled task id.</li>
+	// <li> scheduled-action-name - String - required: no - (filter criteria) filters by scheduled task name.</li>
+	// <li> auto-scaling-group-id - String - required: no - (filter) filter by auto scaling group id.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -3335,9 +3335,9 @@ type DetachInstancesRequestParams struct {
 	// <li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
-	// List of CVM instance ids. you can obtain available instance ids in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>.
+	// List of CVM instance ids. you can obtain available instance ids in the following ways:
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index).</li>
+	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -3349,9 +3349,9 @@ type DetachInstancesRequest struct {
 	// <li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
-	// List of CVM instance ids. you can obtain available instance ids in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>.
+	// List of CVM instance ids. you can obtain available instance ids in the following ways:
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index).</li>
+	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -3402,7 +3402,7 @@ func (r *DetachInstancesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DetachLoadBalancersRequestParams struct {
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Specifies a list of classic load balancer ids with a maximum length of 20. either LoadBalancerIds or ForwardLoadBalancerIdentifications can be specified at the same time. can be obtained through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
@@ -3415,7 +3415,7 @@ type DetachLoadBalancersRequestParams struct {
 type DetachLoadBalancersRequest struct {
 	*tchttp.BaseRequest
 	
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Specifies a list of classic load balancer ids with a maximum length of 20. either LoadBalancerIds or ForwardLoadBalancerIdentifications can be specified at the same time. can be obtained through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
@@ -3496,14 +3496,14 @@ type DetailedStatusMessage struct {
 
 // Predefined struct for user
 type DisableAutoScalingGroupRequestParams struct {
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 }
 
 type DisableAutoScalingGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 }
 
@@ -3625,9 +3625,9 @@ type EnterStandbyRequestParams struct {
 	// <li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
-	// List of running instances. non-running instances are not supported. you can obtain available instance ids in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>.
+	// List of running instances. non-running instances are not supported. you can obtain available instance ids in the following ways:
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index).</li>
+	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -3639,9 +3639,9 @@ type EnterStandbyRequest struct {
 	// <li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
-	// List of running instances. non-running instances are not supported. you can obtain available instance ids in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>.
+	// List of running instances. non-running instances are not supported. you can obtain available instance ids in the following ways:
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index).</li>
+	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -3768,9 +3768,9 @@ type ExitStandbyRequestParams struct {
 	// <li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
-	// List of CVM instances in standby status. you can obtain available instance ID in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>.
+	// List of CVM instances in standby status. you can obtain available instance ID in the following ways:
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index).</li>
+	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -3782,9 +3782,9 @@ type ExitStandbyRequest struct {
 	// <li>Specifies the scaling group ID obtained by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the return information.</li>.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
-	// List of CVM instances in standby status. you can obtain available instance ID in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>.
+	// List of CVM instances in standby status. you can obtain available instance ID in the following ways:
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index).</li>
+	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -3906,9 +3906,9 @@ type HostNameSettings struct {
 	// -  hyphen (-)
 	// - empty string.
 	// Delimiter used for concatenating host name, index, and suffix. Assuming host name is testGpu4090, index is 0007, and suffix is server.
-	// -The delimiter is a period (.), and the final concatenation is testGpu4090.007.server.
-	// -Specifies the delimiter as a hyphen (-), with the final concatenation as testGpu4090-007-server.
-	// -Delimiter is an empty string, finally concatenated as testGpu4090007server.
+	// - The delimiter is a period (.), and the final concatenation is testGpu4090.007.server.
+	// - Specifies the delimiter as a hyphen (-), with the final concatenation as testGpu4090-007-server.
+	// - Delimiter is an empty string, finally concatenated as testGpu4090007server.
 	HostNameDelimiter *string `json:"HostNameDelimiter,omitnil,omitempty" name:"HostNameDelimiter"`
 }
 
@@ -4050,9 +4050,9 @@ type InstanceNameSettings struct {
 	// -  hyphen (-)
 	// - empty string.
 	// Delimiter used for concatenating instance name, index, and suffix. Assuming instance name is testGpu4090, index is 0007, and suffix is server.
-	// -The delimiter is a period (.), and the final concatenation is testGpu4090.007.server.
-	// -Specifies the delimiter as a hyphen (-), with the final concatenation as testGpu4090-007-server.
-	// -Delimiter is an empty string, finally concatenated as testGpu4090007server.
+	// - The delimiter is a period (.), and the final concatenation is testGpu4090.007.server.
+	// - Specifies the delimiter as a hyphen (-), with the final concatenation as testGpu4090-007-server.
+	// - Delimiter is an empty string, finally concatenated as testGpu4090007server.
 	InstanceNameDelimiter *string `json:"InstanceNameDelimiter,omitnil,omitempty" name:"InstanceNameDelimiter"`
 }
 
@@ -4099,7 +4099,7 @@ type InternetAccessible struct {
 	// <Li>AntiDDoSEIP: anti-ddos eip. only partially supported regions can use anti-ddos eip. details visible in [elastic ip product overview](https://www.tencentcloud.com/zh/document/product/213/5733).</li>. 
 	// If needed to assign an elastic IPv4 address to a resource, specify the elastic IPv4 address type. if only use WanIP, do not set this field.
 	// 
-	// High quality IP the anti-ddos feature is only in beta test in some regions. if needed, submit a ticket for consultation (https://console.cloud.tencent.com/workorder/category).
+	// High quality IP the anti-ddos feature is only in beta test in some regions. if needed, [submit a ticket for consultation](https://console.cloud.tencent.com/workorder/category).
 	IPv4AddressType *string `json:"IPv4AddressType,omitnil,omitempty" name:"IPv4AddressType"`
 
 	// Anti-DDoS service package ID. This is required when you want to request an Anti-DDoS IP.
@@ -4208,7 +4208,7 @@ type LaunchConfiguration struct {
 	// Last update time is in standard UTC time.
 	UpdatedTime *string `json:"UpdatedTime,omitnil,omitempty" name:"UpdatedTime"`
 
-	// Role name of the CAM role. can be obtained from roleName in the return value from the DescribeRoleList API (https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1).
+	// Role name of the CAM role. can be obtained from roleName in the return value from the [DescribeRoleList API](https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1).
 	CamRoleName *string `json:"CamRoleName,omitnil,omitempty" name:"CamRoleName"`
 
 	// Value of InstanceTypesCheckPolicy upon the last operation.
@@ -4254,7 +4254,7 @@ type LifecycleActionResultInfo struct {
 	InvocationId *string `json:"InvocationId,omitnil,omitempty" name:"InvocationId"`
 
 	// Result of command invocation,
-	// <li>`SUCCESSFUL`: Successful command invocation. It does mean that the task is successfully. You can query the task result with the `InvocationId.</li>
+	// <li>`SUCCESSFUL`: Successful command invocation. It does mean that the task is successfully. You can query the task result with the `InvocationId`.</li>
 	// <li>`FAILED`: Failed to invoke the command</li>
 	// <li>`NONE`</li>
 	InvokeCommandResult *string `json:"InvokeCommandResult,omitnil,omitempty" name:"InvokeCommandResult"`
@@ -4302,16 +4302,16 @@ type LifecycleHook struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Action to be taken by the scaling group in case of lifecycle hook timeout or LifecycleCommand execution failure. valid values:.
-	// -CONTINUE execution by default means capacity expansion or reduction.
-	// -For scale-out hooks, cvms with hook timeout or failed LifecycleCommand execution will be released directly or removed; for scale-in hooks, scale-in activities will continue.
+	// - CONTINUE execution by default means capacity expansion or reduction.
+	// - For scale-out hooks, cvms with hook timeout or failed LifecycleCommand execution will be released directly or removed; for scale-in hooks, scale-in activities will continue.
 	DefaultResult *string `json:"DefaultResult,omitnil,omitempty" name:"DefaultResult"`
 
 	// Specifies the timeout waiting time of the lifecycle hook in seconds. value range: 30 to 7200.
 	HeartbeatTimeout *int64 `json:"HeartbeatTimeout,omitnil,omitempty" name:"HeartbeatTimeout"`
 
 	// Scenario for entering the lifecycle hook. valid values:.
-	// -`INSTANCE_LAUNCHING`: the lifecycle hook is being scaled out.
-	// -INSTANCE_TERMINATING: scale-in lifecycle hook.
+	// - `INSTANCE_LAUNCHING`: the lifecycle hook is being scaled out.
+	// - `INSTANCE_TERMINATING`: scale-in lifecycle hook.
 	LifecycleTransition *string `json:"LifecycleTransition,omitnil,omitempty" name:"LifecycleTransition"`
 
 	// Additional information for the notification target
@@ -4390,7 +4390,9 @@ type MetricAlarm struct {
 
 // Predefined struct for user
 type ModifyAutoScalingGroupRequestParams struct {
-	// <p>Scaling group ID. obtain available scaling group ids in the following ways:</p><li>query scaling group ids by logging in to the <a href="https://console.cloud.tencent.com/autoscaling/group">console</a>.</li><li>obtain scaling group ids by calling the <a href="https://www.tencentcloud.com/document/api/377/20438?from_cn_redirect=1">DescribeAutoScalingGroups</a> api and retrieving AutoScalingGroupId from the returned information.</li>.
+	// <p>Scaling group ID. obtain available scaling group ids in the following ways:</p>
+	// <li>query scaling group ids by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>
+	// <li>obtain scaling group ids by calling the [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/20438?from_cn_redirect=1) api and retrieving AutoScalingGroupId from the returned information.</li>
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// <p>The scaling group name must be unique in your account. name only supports chinese, english, digits, underscore, separator "-", and decimal point. the maximum length cannot exceed 55 bytes.</p>.
@@ -4402,7 +4404,9 @@ type ModifyAutoScalingGroupRequestParams struct {
 	// <P>Expected number of instances. value range [0,2000]. to meet the maximum value equal to or greater than the expected value, and the expected value equal to or greater than the minimum value.</p>.
 	DesiredCapacity *uint64 `json:"DesiredCapacity,omitnil,omitempty" name:"DesiredCapacity"`
 
-	// <p>Launch configuration ID. obtain available launch configuration ids in the following ways:</p><li>query the launch configuration ID by logging in to the <a href="https://console.cloud.tencent.com/autoscaling/config">console</a>.</li><li>obtain the launch configuration ID by calling the <a href="https://www.tencentcloud.com/document/api/377/20445?from_cn_redirect=1">DescribeLaunchConfigurations</a> api and retrieving the LaunchConfigurationId from the returned information.</li>.
+	// <p>Launch configuration ID. obtain available launch configuration ids in the following ways:</p>
+	// <li>query the launch configuration ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/config).</li>
+	// <li>obtain the launch configuration ID by calling the [DescribeLaunchConfigurations](https://www.tencentcloud.com/document/api/377/20445?from_cn_redirect=1) api and retrieving the LaunchConfigurationId from the returned information.</li>
 	LaunchConfigurationId *string `json:"LaunchConfigurationId,omitnil,omitempty" name:"LaunchConfigurationId"`
 
 	// <P>Maximum number of instances. value range: [0,2000]. to meet the requirement, the maximum value must be equal to or greater than the expected value, and the expected value must be equal to or greater than the minimum value.</p>.
@@ -4411,16 +4415,16 @@ type ModifyAutoScalingGroupRequestParams struct {
 	// <P>Minimum number of instances. value range: [0,2000]. to meet the requirement, the maximum value must be equal to or greater than the expected value, and the expected value must be equal to or greater than the minimum value.</p>.
 	MinSize *uint64 `json:"MinSize,omitnil,omitempty" name:"MinSize"`
 
-	// <p>Project ID. obtain this parameter by calling the `ProjectId` field in the return value of <a href="https://www.tencentcloud.com/document/api/651/78725?from_cn_redirect=1">DescribeProject</a>. default value is 0, indicating usage of the default project.</p>.
+	// <p>Project ID. obtain this parameter by calling the `ProjectId` field in the return value of [DescribeProject](https://www.tencentcloud.com/document/api/651/78725?from_cn_redirect=1). Default value is 0, indicating usage of the default project.</p>.
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// <p>subnet ID list. valid vpc subnet ids can be obtained by logging in to the <a href="https://console.cloud.tencent.com/vpc/subnet">console</a> for querying. you can also call the API <a href="https://www.tencentcloud.com/document/product/215/15784?from_cn_redirect=1">DescribeSubnets</a> and retrieve them from the SubnetId field in the API response.</p>.
+	// subnet ID list. valid vpc subnet ids can be obtained by logging in to the [console](https://console.cloud.tencent.com/vpc/subnet) for querying. you can also call the API [DescribeSubnets](https://www.tencentcloud.com/document/product/215/15784?from_cn_redirect=1) and retrieve them from the SubnetId field in the API response.
 	SubnetIds []*string `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
 	// <p>Termination policy, whose maximum length is currently 1. valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</p><li> OLDEST_INSTANCE terminates the OLDEST INSTANCE in the scaling group first.</li><li> NEWEST_INSTANCE terminates the NEWEST INSTANCE in the scaling group first.</li>.
 	TerminationPolicies []*string `json:"TerminationPolicies,omitnil,omitempty" name:"TerminationPolicies"`
 
-	// <p>vpc ID. when modifying the vpc, you need to change the SubnetIds parameter to the subnet of this vpc. effective VpcId can be queried by logging in to the <a href="https://console.cloud.tencent.com/vpc/vpc">console</a>; you can also call the <a href="https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1">DescribeVpc</a> api and get the VpcId field from the api response.</p>.
+	// vpc ID. when modifying the vpc, you need to change the SubnetIds parameter to the subnet of this vpc. effective VpcId can be queried by logging in to the [console](https://console.cloud.tencent.com/vpc/vpc); you can also call the [DescribeVpc](https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1) api and get the VpcId field from the api response.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// <P>AZ list</p>.
@@ -4469,7 +4473,9 @@ type ModifyAutoScalingGroupRequestParams struct {
 type ModifyAutoScalingGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Scaling group ID. obtain available scaling group ids in the following ways:</p><li>query scaling group ids by logging in to the <a href="https://console.cloud.tencent.com/autoscaling/group">console</a>.</li><li>obtain scaling group ids by calling the <a href="https://www.tencentcloud.com/document/api/377/20438?from_cn_redirect=1">DescribeAutoScalingGroups</a> api and retrieving AutoScalingGroupId from the returned information.</li>.
+	// <p>Scaling group ID. obtain available scaling group ids in the following ways:</p>
+	// <li>query scaling group ids by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>
+	// <li>obtain scaling group ids by calling the [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/20438?from_cn_redirect=1) api and retrieving AutoScalingGroupId from the returned information.</li>
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// <p>The scaling group name must be unique in your account. name only supports chinese, english, digits, underscore, separator "-", and decimal point. the maximum length cannot exceed 55 bytes.</p>.
@@ -4481,7 +4487,9 @@ type ModifyAutoScalingGroupRequest struct {
 	// <P>Expected number of instances. value range [0,2000]. to meet the maximum value equal to or greater than the expected value, and the expected value equal to or greater than the minimum value.</p>.
 	DesiredCapacity *uint64 `json:"DesiredCapacity,omitnil,omitempty" name:"DesiredCapacity"`
 
-	// <p>Launch configuration ID. obtain available launch configuration ids in the following ways:</p><li>query the launch configuration ID by logging in to the <a href="https://console.cloud.tencent.com/autoscaling/config">console</a>.</li><li>obtain the launch configuration ID by calling the <a href="https://www.tencentcloud.com/document/api/377/20445?from_cn_redirect=1">DescribeLaunchConfigurations</a> api and retrieving the LaunchConfigurationId from the returned information.</li>.
+	// <p>Launch configuration ID. obtain available launch configuration ids in the following ways:</p>
+	// <li>query the launch configuration ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/config).</li>
+	// <li>obtain the launch configuration ID by calling the [DescribeLaunchConfigurations](https://www.tencentcloud.com/document/api/377/20445?from_cn_redirect=1) api and retrieving the LaunchConfigurationId from the returned information.</li>
 	LaunchConfigurationId *string `json:"LaunchConfigurationId,omitnil,omitempty" name:"LaunchConfigurationId"`
 
 	// <P>Maximum number of instances. value range: [0,2000]. to meet the requirement, the maximum value must be equal to or greater than the expected value, and the expected value must be equal to or greater than the minimum value.</p>.
@@ -4490,16 +4498,16 @@ type ModifyAutoScalingGroupRequest struct {
 	// <P>Minimum number of instances. value range: [0,2000]. to meet the requirement, the maximum value must be equal to or greater than the expected value, and the expected value must be equal to or greater than the minimum value.</p>.
 	MinSize *uint64 `json:"MinSize,omitnil,omitempty" name:"MinSize"`
 
-	// <p>Project ID. obtain this parameter by calling the `ProjectId` field in the return value of <a href="https://www.tencentcloud.com/document/api/651/78725?from_cn_redirect=1">DescribeProject</a>. default value is 0, indicating usage of the default project.</p>.
+	// <p>Project ID. obtain this parameter by calling the `ProjectId` field in the return value of [DescribeProject](https://www.tencentcloud.com/document/api/651/78725?from_cn_redirect=1). Default value is 0, indicating usage of the default project.</p>.
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// <p>subnet ID list. valid vpc subnet ids can be obtained by logging in to the <a href="https://console.cloud.tencent.com/vpc/subnet">console</a> for querying. you can also call the API <a href="https://www.tencentcloud.com/document/product/215/15784?from_cn_redirect=1">DescribeSubnets</a> and retrieve them from the SubnetId field in the API response.</p>.
+	// subnet ID list. valid vpc subnet ids can be obtained by logging in to the [console](https://console.cloud.tencent.com/vpc/subnet) for querying. you can also call the API [DescribeSubnets](https://www.tencentcloud.com/document/product/215/15784?from_cn_redirect=1) and retrieve them from the SubnetId field in the API response.
 	SubnetIds []*string `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
 	// <p>Termination policy, whose maximum length is currently 1. valid values: OLDEST_INSTANCE and NEWEST_INSTANCE.</p><li> OLDEST_INSTANCE terminates the OLDEST INSTANCE in the scaling group first.</li><li> NEWEST_INSTANCE terminates the NEWEST INSTANCE in the scaling group first.</li>.
 	TerminationPolicies []*string `json:"TerminationPolicies,omitnil,omitempty" name:"TerminationPolicies"`
 
-	// <p>vpc ID. when modifying the vpc, you need to change the SubnetIds parameter to the subnet of this vpc. effective VpcId can be queried by logging in to the <a href="https://console.cloud.tencent.com/vpc/vpc">console</a>; you can also call the <a href="https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1">DescribeVpc</a> api and get the VpcId field from the api response.</p>.
+	// vpc ID. when modifying the vpc, you need to change the SubnetIds parameter to the subnet of this vpc. effective VpcId can be queried by logging in to the [console](https://console.cloud.tencent.com/vpc/vpc); you can also call the [DescribeVpc](https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1) api and get the VpcId field from the api response.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// <P>AZ list</p>.
@@ -4612,7 +4620,7 @@ func (r *ModifyAutoScalingGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDesiredCapacityRequestParams struct {
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api[ DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Expected number of instances, value ranges from 0 to 2000, to meet MaxSize >= DesiredCapacity >= MinSize.
@@ -4628,7 +4636,7 @@ type ModifyDesiredCapacityRequestParams struct {
 type ModifyDesiredCapacityRequest struct {
 	*tchttp.BaseRequest
 	
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api[ DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Expected number of instances, value ranges from 0 to 2000, to meet MaxSize >= DesiredCapacity >= MinSize.
@@ -4687,7 +4695,7 @@ func (r *ModifyDesiredCapacityResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyLaunchConfigurationAttributesRequestParams struct {
-	// Launch configuration ID. obtain the launch configuration ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/config) or calling the api DescribeLaunchConfigurations (https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the return information.
+	// Launch configuration ID. obtain the launch configuration ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/config) or calling the api [DescribeLaunchConfigurations](https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the return information.
 	LaunchConfigurationId *string `json:"LaunchConfigurationId,omitnil,omitempty" name:"LaunchConfigurationId"`
 
 	// [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><br/>You can obtain the image IDs in the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE).</li><li>You can also use the [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
@@ -4764,7 +4772,7 @@ type ModifyLaunchConfigurationAttributesRequestParams struct {
 	// Specifies whether to enable additional services, such as security services and monitoring service.
 	EnhancedService *EnhancedService `json:"EnhancedService,omitnil,omitempty" name:"EnhancedService"`
 
-	// Role name of the CAM role. can be obtained from roleName in the return value from the DescribeRoleList API (https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1).
+	// Role name of the CAM role. can be obtained from roleName in the return value from the [DescribeRoleList API](https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1).
 	CamRoleName *string `json:"CamRoleName,omitnil,omitempty" name:"CamRoleName"`
 
 	// High-Performance computing cluster ID. See [Tencent Cloud HPC Documentation](https://www.tencentcloud.com/zh/document/product/1236) for more details.
@@ -4797,7 +4805,7 @@ type ModifyLaunchConfigurationAttributesRequestParams struct {
 type ModifyLaunchConfigurationAttributesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Launch configuration ID. obtain the launch configuration ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/config) or calling the api DescribeLaunchConfigurations (https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the return information.
+	// Launch configuration ID. obtain the launch configuration ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/config) or calling the api [DescribeLaunchConfigurations](https://intl.cloud.tencent.com/document/api/377/20445?from_cn_redirect=1) and retrieving the LaunchConfigurationId from the return information.
 	LaunchConfigurationId *string `json:"LaunchConfigurationId,omitnil,omitempty" name:"LaunchConfigurationId"`
 
 	// [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><br/>You can obtain the image IDs in the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE).</li><li>You can also use the [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
@@ -4874,7 +4882,7 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	// Specifies whether to enable additional services, such as security services and monitoring service.
 	EnhancedService *EnhancedService `json:"EnhancedService,omitnil,omitempty" name:"EnhancedService"`
 
-	// Role name of the CAM role. can be obtained from roleName in the return value from the DescribeRoleList API (https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1).
+	// Role name of the CAM role. can be obtained from roleName in the return value from the [DescribeRoleList API](https://intl.cloud.tencent.com/document/product/598/36223?from_cn_redirect=1).
 	CamRoleName *string `json:"CamRoleName,omitnil,omitempty" name:"CamRoleName"`
 
 	// High-Performance computing cluster ID. See [Tencent Cloud HPC Documentation](https://www.tencentcloud.com/zh/document/product/1236) for more details.
@@ -5090,7 +5098,7 @@ func (r *ModifyLifecycleHookResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyLoadBalancerTargetAttributesRequestParams struct {
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Specifies the list of load balancers whose target rule attributes need modification, with a list length limit of 100. can be obtained through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
@@ -5100,7 +5108,7 @@ type ModifyLoadBalancerTargetAttributesRequestParams struct {
 type ModifyLoadBalancerTargetAttributesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api DescribeAutoScalingGroups (https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
+	// Scaling group ID. obtain the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1), and retrieve AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Specifies the list of load balancers whose target rule attributes need modification, with a list length limit of 100. can be obtained through the [DescribeLoadBalancers](https://intl.cloud.tencent.com/document/product/214/30685?from_cn_redirect=1) api.
@@ -5477,10 +5485,10 @@ type ModifyScheduledActionRequestParams struct {
 	// End time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard. <br>This parameter and `Recurrence` need to be specified at the same time. After the end time, the scheduled task will no longer take effect.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// The repeating mode of the scheduled task. follows the standard Cron format. the Recurrence parameter limits (https://intl.cloud.tencent.com/document/product/377/88119?from_cn_redirect=1) consist of 5 fields separated by space, with the structure: minute, hr, date, month, week. this parameter must be simultaneously specified with `EndTime`.
+	// The repeating mode of the scheduled task. follows the standard Cron format. The [Recurrence parameter limits](https://intl.cloud.tencent.com/document/product/377/88119?from_cn_redirect=1) consist of 5 fields separated by space, with the structure: minute, hr, date, month, week. this parameter must be simultaneously specified with `EndTime`.
 	Recurrence *string `json:"Recurrence,omitnil,omitempty" name:"Recurrence"`
 
-	// Disable update DesiredCapacity Indicates the DesiredCapacity is updated normally during scheduled task triggering.
+	// This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
 	// 
 	// Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
 	// The following cases assume that DisableUpdateDesiredCapacity is True:
@@ -5514,10 +5522,10 @@ type ModifyScheduledActionRequest struct {
 	// End time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard. <br>This parameter and `Recurrence` need to be specified at the same time. After the end time, the scheduled task will no longer take effect.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// The repeating mode of the scheduled task. follows the standard Cron format. the Recurrence parameter limits (https://intl.cloud.tencent.com/document/product/377/88119?from_cn_redirect=1) consist of 5 fields separated by space, with the structure: minute, hr, date, month, week. this parameter must be simultaneously specified with `EndTime`.
+	// The repeating mode of the scheduled task. follows the standard Cron format. The [Recurrence parameter limits](https://intl.cloud.tencent.com/document/product/377/88119?from_cn_redirect=1) consist of 5 fields separated by space, with the structure: minute, hr, date, month, week. this parameter must be simultaneously specified with `EndTime`.
 	Recurrence *string `json:"Recurrence,omitnil,omitempty" name:"Recurrence"`
 
-	// Disable update DesiredCapacity Indicates the DesiredCapacity is updated normally during scheduled task triggering.
+	// This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
 	// 
 	// Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
 	// The following cases assume that DisableUpdateDesiredCapacity is True:
@@ -5578,8 +5586,8 @@ func (r *ModifyScheduledActionResponse) FromJsonString(s string) error {
 
 type NotificationTarget struct {
 	// Target type. valid values include `CMQ_QUEUE`, `CMQ_TOPIC`, `TDMQ_CMQ_QUEUE`, `TDMQ_CMQ_TOPIC`.
-	// <li>CMQ_QUEUE, specifies tencent cloud message QUEUE - queueing model. the corresponding product is offline. it is recommended to switch to TDMQ_CMQ_QUEUE (https://intl.cloud.tencent.com/document/product/1496/83970?from_cn_redirect=1).</li>.
-	// <li>CMQ_TOPIC, specifies tencent cloud message queue - TOPIC model. the corresponding product is offline. it is recommended to switch to TDMQ_CMQ_TOPIC (https://intl.cloud.tencent.com/document/product/1496/83970?from_cn_redirect=1).</li>.
+	// <li>CMQ_QUEUE, specifies tencent cloud message QUEUE - queueing model. the corresponding product is offline. it is recommended to switch to [TDMQ_CMQ_QUEUE](https://intl.cloud.tencent.com/document/product/1496/83970?from_cn_redirect=1).</li>.
+	// <li>CMQ_TOPIC, specifies tencent cloud message queue - TOPIC model. the corresponding product is offline. it is recommended to switch to [TDMQ_CMQ_TOPIC](https://intl.cloud.tencent.com/document/product/1496/83970?from_cn_redirect=1).</li>.
 	// <li> TDMQ_CMQ_QUEUE. specifies the tencent cloud TDMQ message QUEUE - queueing model.</li>.
 	// <Li>TDMQ_CMQ_TOPIC. specifies tencent cloud tdmq message queue - topic model.</li>.
 	TargetType *string `json:"TargetType,omitnil,omitempty" name:"TargetType"`
@@ -5678,11 +5686,17 @@ type RefreshBatchRelatedInstance struct {
 }
 
 type RefreshSettings struct {
-	// Rolling update settings parameters. RefreshMode is rolling update. this parameter must be filled in.
+	// Rolling update settings. This parameter group must be configured if the RefreshMode parameter starts with ROLLING_UPDATE(e.g., ROLLING_UPDATE_RESET).
 	RollingUpdateSettings *RollingUpdateSettings `json:"RollingUpdateSettings,omitnil,omitempty" name:"RollingUpdateSettings"`
 
-	// Whether to enable the backend service health check for the instance. Default value: FALSE. This parameter is valid only for the scaling group bound to an application-based CLB. After this feature is enabled, if the instance fails the check after refresh, the port weight of the CLB will be always 0, and it will be marked as a refresh failure. Valid values: <li>TRUE: enable;</li> <li>FALSE: disable.</li>
+	// Whether to enable the backend service health check for the instance. Default value: FALSE. 
+	// This parameter is valid only for the scaling group bound to CLB. After this feature is enabled, if the instance fails the check after refresh, the port weight of the CLB will be always 0, and it will be marked as a refresh failure. Valid values: <li>TRUE: enable;</li> <li>FALSE: disable.</li>
 	CheckInstanceTargetHealth *bool `json:"CheckInstanceTargetHealth,omitnil,omitempty" name:"CheckInstanceTargetHealth"`
+
+	// Specifies the timeout period for instance backend service health check, in seconds. 
+	// Value range: [60,7200]. Default value: 1800 seconds. 
+	// This parameter takes effect only when the CheckInstanceTargetHealth parameter is enabled.  If an instance health check times out, the instance will be marked as a refresh failure.
+	CheckInstanceTargetHealthTimeout *uint64 `json:"CheckInstanceTargetHealthTimeout,omitnil,omitempty" name:"CheckInstanceTargetHealthTimeout"`
 }
 
 type RelatedInstance struct {
@@ -5705,8 +5719,8 @@ type RemoveInstancesRequestParams struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// CVM instance ID list. you can obtain available instance ID in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>.
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index).</li>
+	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -5719,8 +5733,8 @@ type RemoveInstancesRequest struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// CVM instance ID list. you can obtain available instance ID in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>.
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index).</li>
+	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -5844,8 +5858,8 @@ func (r *ResumeInstanceRefreshResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type RollbackInstanceRefreshRequestParams struct {
 	// Scaling group ID. you can obtain available scaling group ids in the following ways. 
-	// <li>Query the scaling group ID by logging in to the <a href="https://console.cloud.tencent.com/autoscaling/group">console</a>.</li>.
-	// <li>Obtain the scaling group ID by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
+	// <li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>
+	// <li>Obtain the scaling group ID by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Refresh settings.
@@ -5862,8 +5876,8 @@ type RollbackInstanceRefreshRequest struct {
 	*tchttp.BaseRequest
 	
 	// Scaling group ID. you can obtain available scaling group ids in the following ways. 
-	// <li>Query the scaling group ID by logging in to the <a href="https://console.cloud.tencent.com/autoscaling/group">console</a>.</li>.
-	// <li>Obtain the scaling group ID by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
+	// <li>Query the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>
+	// <li>Obtain the scaling group ID by calling the api [DescribeAutoScalingGroups](https://intl.cloud.tencent.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Refresh settings.
@@ -6035,20 +6049,24 @@ func (r *ScaleInInstancesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ScaleOutInstancesRequestParams struct {
-	// Scaling group ID
+	// Scaling group ID. obtain available scaling group ids in the following ways:.
+	// <li>Specifies the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+	// <li>Obtain the scaling group ID by calling the api [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
-	// Number of instances to be added
+	// Number of resource instances to scale out. the static value range of this parameter is [1,2000]. this parameter must not be larger than the difference between the expected number and the maximum value. for example, if the expected number of the scaling group is 20 and the maximum value is 100, the valid values are [1,80].
 	ScaleOutNumber *uint64 `json:"ScaleOutNumber,omitnil,omitempty" name:"ScaleOutNumber"`
 }
 
 type ScaleOutInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Scaling group ID
+	// Scaling group ID. obtain available scaling group ids in the following ways:.
+	// <li>Specifies the scaling group ID by logging in to the [console](https://console.cloud.tencent.com/autoscaling/group).</li>.
+	// <li>Obtain the scaling group ID by calling the api [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.</li>.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
-	// Number of instances to be added
+	// Number of resource instances to scale out. the static value range of this parameter is [1,2000]. this parameter must not be larger than the difference between the expected number and the maximum value. for example, if the expected number of the scaling group is 20 and the maximum value is 100, the valid values are [1,80].
 	ScaleOutNumber *uint64 `json:"ScaleOutNumber,omitnil,omitempty" name:"ScaleOutNumber"`
 }
 
@@ -6161,7 +6179,7 @@ type ScheduledAction struct {
 	// Start time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Specifies the repeating mode of the scheduled task. the Recurrence parameter limits (https://intl.cloud.tencent.com/document/product/377/88119?from_cn_redirect=1) consist of 5 fields separated by space, with the structure: minute, hour, date, month, week.
+	// Specifies the repeating mode of the scheduled task. The [Recurrence parameter limits](https://intl.cloud.tencent.com/document/product/377/88119?from_cn_redirect=1) consist of 5 fields separated by space, with the structure: minute, hour, date, month, week.
 	Recurrence *string `json:"Recurrence,omitnil,omitempty" name:"Recurrence"`
 
 	// End time of the scheduled task. The value is in `Beijing time` (UTC+8) in the format of `YYYY-MM-DDThh:mm:ss+08:00` according to the `ISO8601` standard.
@@ -6184,7 +6202,7 @@ type ScheduledAction struct {
 	// <li>ONCE: single execution.</li>
 	ScheduledType *string `json:"ScheduledType,omitnil,omitempty" name:"ScheduledType"`
 
-	// Disable update DesiredCapacity Indicates the DesiredCapacity is updated normally during scheduled task triggering.
+	// This flag disables the normal update of the DesiredCapacityproperty that would otherwise occur when a scheduled scaling task is triggered.
 	// 
 	// Specifies whether the scheduled task triggers proactive modification of the DesiredCapacity when the value is True. DesiredCapacity may be modified by the minSize and maxSize mechanism.
 	// The following cases assume that DisableUpdateDesiredCapacity is True:
@@ -6233,8 +6251,8 @@ type SetInstancesProtectionRequestParams struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Instance ID. you can obtain available instance ID in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>.
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index)</li>
+	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Whether to enable scale-in protection for this instance
@@ -6250,8 +6268,8 @@ type SetInstancesProtectionRequest struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Instance ID. you can obtain available instance ID in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>.
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index)</li>
+	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Whether to enable scale-in protection for this instance
@@ -6342,8 +6360,8 @@ type StartAutoScalingInstancesRequestParams struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Specifies the instance ID list of CVM to enable. you can obtain available instance ID in the following ways.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>.
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index)</li>
+	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -6356,8 +6374,8 @@ type StartAutoScalingInstancesRequest struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Specifies the instance ID list of CVM to enable. you can obtain available instance ID in the following ways.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>.
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index)</li>
+	// <li>Get the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and retrieving the `InstanceId` from the returned information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -6408,7 +6426,7 @@ func (r *StartAutoScalingInstancesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartInstanceRefreshRequestParams struct {
-	// Scaling group ID.
+	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Refresh settings.
@@ -6423,7 +6441,7 @@ type StartInstanceRefreshRequestParams struct {
 type StartInstanceRefreshRequest struct {
 	*tchttp.BaseRequest
 	
-	// Scaling group ID.
+	// Scaling group ID. obtain the scaling group ID by logging in to the console (https://console.cloud.tencent.com/autoscaling/group) or calling the api [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/20438?from_cn_redirect=1) and retrieving the AutoScalingGroupId from the returned information.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// Refresh settings.
@@ -6489,8 +6507,8 @@ type StopAutoScalingInstancesRequestParams struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// List of CVM instance ids to be closed. you can obtain available instance ids in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>.
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index).</li>
+	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Whether the shutdown instances will be charged. Valid values:  
@@ -6509,8 +6527,8 @@ type StopAutoScalingInstancesRequest struct {
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
 
 	// List of CVM instance ids to be closed. you can obtain available instance ids in the following ways:.
-	// <li>Query instance ID by logging in to the <a href="https://console.cloud.tencent.com/cvm/index">console</a>.</li>.
-	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>.
+	// <li>Query instance ID by logging in to the [console](https://console.cloud.tencent.com/cvm/index).</li>
+	// <li>Specifies the instance ID by calling the api [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1) and getting `InstanceId` from the return information.</li>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Whether the shutdown instances will be charged. Valid values:  

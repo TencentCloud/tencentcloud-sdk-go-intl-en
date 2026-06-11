@@ -79,7 +79,7 @@ func NewApplyFreeCertificateResponse() (response *ApplyFreeCertificateResponse) 
 //
 // The application method introduction in the document: [Free Certificate Application Description](https://www.tencentcloud.com/document/product/1552/90437?from_cn_redirect=1). 
 //
-// description:.
+// description:
 //
 // - Only CNAME access mode can call this API to specify the free certificate application method. NS/DNSPod hosting access modes use automatic validation to apply for free certificates with no need to call this API.
 //
@@ -105,7 +105,7 @@ func (c *Client) ApplyFreeCertificate(request *ApplyFreeCertificateRequest) (res
 //
 // The application method introduction in the document: [Free Certificate Application Description](https://www.tencentcloud.com/document/product/1552/90437?from_cn_redirect=1). 
 //
-// description:.
+// description:
 //
 // - Only CNAME access mode can call this API to specify the free certificate application method. NS/DNSPod hosting access modes use automatic validation to apply for free certificates with no need to call this API.
 //
@@ -600,7 +600,9 @@ func NewCreateAccelerationDomainResponse() (response *CreateAccelerationDomainRe
 //  INVALIDPARAMETERVALUE_INVALIDDNSNAME = "InvalidParameterValue.InvalidDNSName"
 //  INVALIDPARAMETERVALUE_INVALIDDOMAINNAME = "InvalidParameterValue.InvalidDomainName"
 //  INVALIDPARAMETERVALUE_INVALIDPROXYORIGIN = "InvalidParameterValue.InvalidProxyOrigin"
+//  INVALIDPARAMETERVALUE_INVALIDSITEFAILOVERUNSUPPORTED = "InvalidParameterValue.InvalidSiteFailoverUnsupported"
 //  INVALIDPARAMETERVALUE_ORIGINGROUPNOTEXISTS = "InvalidParameterValue.OriginGroupNotExists"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTORIGINTYPEVOD = "InvalidParameterValue.SiteFailoverNotSupportHostOriginTypeVod"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACCELERATEMAINLANDDISABLE = "OperationDenied.AccelerateMainlandDisable"
 //  OPERATIONDENIED_CONFIGLOCKED = "OperationDenied.ConfigLocked"
@@ -662,7 +664,9 @@ func (c *Client) CreateAccelerationDomain(request *CreateAccelerationDomainReque
 //  INVALIDPARAMETERVALUE_INVALIDDNSNAME = "InvalidParameterValue.InvalidDNSName"
 //  INVALIDPARAMETERVALUE_INVALIDDOMAINNAME = "InvalidParameterValue.InvalidDomainName"
 //  INVALIDPARAMETERVALUE_INVALIDPROXYORIGIN = "InvalidParameterValue.InvalidProxyOrigin"
+//  INVALIDPARAMETERVALUE_INVALIDSITEFAILOVERUNSUPPORTED = "InvalidParameterValue.InvalidSiteFailoverUnsupported"
 //  INVALIDPARAMETERVALUE_ORIGINGROUPNOTEXISTS = "InvalidParameterValue.OriginGroupNotExists"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTORIGINTYPEVOD = "InvalidParameterValue.SiteFailoverNotSupportHostOriginTypeVod"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACCELERATEMAINLANDDISABLE = "OperationDenied.AccelerateMainlandDisable"
 //  OPERATIONDENIED_CONFIGLOCKED = "OperationDenied.ConfigLocked"
@@ -1495,6 +1499,78 @@ func (c *Client) CreateFunctionWithContext(ctx context.Context, request *CreateF
     request.SetContext(ctx)
     
     response = NewCreateFunctionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateFunctionReplicaRequest() (request *CreateFunctionReplicaRequest) {
+    request = &CreateFunctionReplicaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "CreateFunctionReplica")
+    
+    
+    return
+}
+
+func NewCreateFunctionReplicaResponse() (response *CreateFunctionReplicaResponse) {
+    response = &CreateFunctionReplicaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateFunctionReplica
+// This API is used to create copies of specified edge functions. After creating copies, when client requests match configured trigger rules or the default domain name, you can access specific function copies by adding EO-Function-Replica-Name:[copy name] to the request header. Each function supports creating two copies by default.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FUNCTIONDEPLOYING = "FailedOperation.FunctionDeploying"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_BADCONTENT = "InvalidParameter.BadContent"
+//  INVALIDPARAMETER_BADFUNCTIONNAME = "InvalidParameter.BadFunctionName"
+//  INVALIDPARAMETER_CONTENTEXCEEDSLIMIT = "InvalidParameter.ContentExceedsLimit"
+//  INVALIDPARAMETER_FUNCTIONNAMECONFLICT = "InvalidParameter.FunctionNameConflict"
+//  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
+//  LIMITEXCEEDED_FUNCTIONLIMITEXCEEDED = "LimitExceeded.FunctionLimitExceeded"
+//  OPERATIONDENIED_VERSIONCONTROLLOCKED = "OperationDenied.VersionControlLocked"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) CreateFunctionReplica(request *CreateFunctionReplicaRequest) (response *CreateFunctionReplicaResponse, err error) {
+    return c.CreateFunctionReplicaWithContext(context.Background(), request)
+}
+
+// CreateFunctionReplica
+// This API is used to create copies of specified edge functions. After creating copies, when client requests match configured trigger rules or the default domain name, you can access specific function copies by adding EO-Function-Replica-Name:[copy name] to the request header. Each function supports creating two copies by default.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FUNCTIONDEPLOYING = "FailedOperation.FunctionDeploying"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_BADCONTENT = "InvalidParameter.BadContent"
+//  INVALIDPARAMETER_BADFUNCTIONNAME = "InvalidParameter.BadFunctionName"
+//  INVALIDPARAMETER_CONTENTEXCEEDSLIMIT = "InvalidParameter.ContentExceedsLimit"
+//  INVALIDPARAMETER_FUNCTIONNAMECONFLICT = "InvalidParameter.FunctionNameConflict"
+//  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
+//  LIMITEXCEEDED_FUNCTIONLIMITEXCEEDED = "LimitExceeded.FunctionLimitExceeded"
+//  OPERATIONDENIED_VERSIONCONTROLLOCKED = "OperationDenied.VersionControlLocked"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) CreateFunctionReplicaWithContext(ctx context.Context, request *CreateFunctionReplicaRequest) (response *CreateFunctionReplicaResponse, err error) {
+    if request == nil {
+        request = NewCreateFunctionReplicaRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "CreateFunctionReplica")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateFunctionReplica require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateFunctionReplicaResponse()
     err = c.Send(request, response)
     return
 }
@@ -2653,21 +2729,21 @@ func NewCreateRealtimeLogDeliveryTaskResponse() (response *CreateRealtimeLogDeli
 }
 
 // CreateRealtimeLogDeliveryTask
-// This API is used to create a real-time log delivery task. The following limits apply.
+// This API is used to create a real-time log delivery task. The following limits apply:
 //
-// -When the data delivery type (LogType) is site acceleration log (Layer 7 Access Logs), L4 proxy logs, or edge function logs, an entity (L7 domain, L4 proxy instance, or edge function instance) under the same combination of data delivery type (LogType) and data delivery area (Area) can only be added to the following real-time log delivery task type (TaskType) combinations:.
+// -When the data delivery type (LogType) is site acceleration log (Layer 7 Access Logs), four-layer proxy logs, or edge function logs, the same entity (L7 domain, L4 proxy instance, or edge function instance) under the same combination of data delivery type (LogType) and data delivery area (Area) can only be added to the following real-time log delivery task type (TaskType) combinations:
 //
-// -A task to push to Tencent Cloud CLS, add another task to push to a custom HTTP(S) address;.
+// -A task to push to Tencent Cloud CLS, add another task to push to a custom HTTP(S) address.
 //
-// -A task to push to Tencent Cloud CLS, add another task to push to AWS S3-compatible Cloud Object Storage;.
+// -A task to push to Tencent Cloud CLS, add another task to push to S3-compatible object storage.
 //
-// -When the data delivery type (LogType) is rate limit and CC attack defense log, managed rule log, custom rule log, or Bot Management Log, an entity can only be added to one real-time log delivery task under the same combination of data delivery type (LogType) and data delivery Area.
+// -When the data delivery type (LogType) is rate limit and CC attack defense log, managed rule log, custom rule log, or Bot Management Log, an entity can only be added to one real-time log delivery task under the combination of the same data delivery type (LogType) and data delivery area (Area).
 //
-// -When the real-time log delivery task type (TaskType) is EdgeOne log analysis (log_analysis), it supports only the data delivery type (LogType) as site acceleration log (domain). Under the combination of the same site (ZoneId) and data delivery area (Area), you can only add one real-time log delivery task for EdgeOne log analysis.
+// -When the real-time log delivery task type (TaskType) is EdgeOne log analysis (log_analysis), it supports only data delivery type (LogType) as site acceleration log (domain) or managed rule log (web-attack). Under the same site (ZoneId), same data delivery area (Area), and data combination, each data delivery type (LogType) can only add one real-time log delivery task pushed to EdgeOne log analysis.
 //
 // 
 //
-// This API is used to query the real-time log delivery task list based on the entity to check whether the entity has been added to another real-time log delivery task. It is advisable to use the [DescribeRealtimeLogDeliveryTasks](https://www.tencentcloud.com/document/product/1552/104110?from_cn_redirect=1) API first.
+// It is recommended to first query the real-time log delivery task list according to the entity via the [DescribeRealtimeLogDeliveryTasks](https://www.tencentcloud.com/document/product/1552/104110?from_cn_redirect=1) API, and check whether the entity has been added to another real-time log delivery task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2697,21 +2773,21 @@ func (c *Client) CreateRealtimeLogDeliveryTask(request *CreateRealtimeLogDeliver
 }
 
 // CreateRealtimeLogDeliveryTask
-// This API is used to create a real-time log delivery task. The following limits apply.
+// This API is used to create a real-time log delivery task. The following limits apply:
 //
-// -When the data delivery type (LogType) is site acceleration log (Layer 7 Access Logs), L4 proxy logs, or edge function logs, an entity (L7 domain, L4 proxy instance, or edge function instance) under the same combination of data delivery type (LogType) and data delivery area (Area) can only be added to the following real-time log delivery task type (TaskType) combinations:.
+// -When the data delivery type (LogType) is site acceleration log (Layer 7 Access Logs), four-layer proxy logs, or edge function logs, the same entity (L7 domain, L4 proxy instance, or edge function instance) under the same combination of data delivery type (LogType) and data delivery area (Area) can only be added to the following real-time log delivery task type (TaskType) combinations:
 //
-// -A task to push to Tencent Cloud CLS, add another task to push to a custom HTTP(S) address;.
+// -A task to push to Tencent Cloud CLS, add another task to push to a custom HTTP(S) address.
 //
-// -A task to push to Tencent Cloud CLS, add another task to push to AWS S3-compatible Cloud Object Storage;.
+// -A task to push to Tencent Cloud CLS, add another task to push to S3-compatible object storage.
 //
-// -When the data delivery type (LogType) is rate limit and CC attack defense log, managed rule log, custom rule log, or Bot Management Log, an entity can only be added to one real-time log delivery task under the same combination of data delivery type (LogType) and data delivery Area.
+// -When the data delivery type (LogType) is rate limit and CC attack defense log, managed rule log, custom rule log, or Bot Management Log, an entity can only be added to one real-time log delivery task under the combination of the same data delivery type (LogType) and data delivery area (Area).
 //
-// -When the real-time log delivery task type (TaskType) is EdgeOne log analysis (log_analysis), it supports only the data delivery type (LogType) as site acceleration log (domain). Under the combination of the same site (ZoneId) and data delivery area (Area), you can only add one real-time log delivery task for EdgeOne log analysis.
+// -When the real-time log delivery task type (TaskType) is EdgeOne log analysis (log_analysis), it supports only data delivery type (LogType) as site acceleration log (domain) or managed rule log (web-attack). Under the same site (ZoneId), same data delivery area (Area), and data combination, each data delivery type (LogType) can only add one real-time log delivery task pushed to EdgeOne log analysis.
 //
 // 
 //
-// This API is used to query the real-time log delivery task list based on the entity to check whether the entity has been added to another real-time log delivery task. It is advisable to use the [DescribeRealtimeLogDeliveryTasks](https://www.tencentcloud.com/document/product/1552/104110?from_cn_redirect=1) API first.
+// It is recommended to first query the real-time log delivery task list according to the entity via the [DescribeRealtimeLogDeliveryTasks](https://www.tencentcloud.com/document/product/1552/104110?from_cn_redirect=1) API, and check whether the entity has been added to another real-time log delivery task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4537,6 +4613,66 @@ func (c *Client) DeleteFunctionWithContext(ctx context.Context, request *DeleteF
     request.SetContext(ctx)
     
     response = NewDeleteFunctionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteFunctionReplicaRequest() (request *DeleteFunctionReplicaRequest) {
+    request = &DeleteFunctionReplicaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DeleteFunctionReplica")
+    
+    
+    return
+}
+
+func NewDeleteFunctionReplicaResponse() (response *DeleteFunctionReplicaResponse) {
+    response = &DeleteFunctionReplicaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteFunctionReplica
+// This API is used to delete specified edge function replicas.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RULEOPERATIONCONFLICT = "FailedOperation.RuleOperationConflict"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  OPERATIONDENIED_VERSIONCONTROLLOCKED = "OperationDenied.VersionControlLocked"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) DeleteFunctionReplica(request *DeleteFunctionReplicaRequest) (response *DeleteFunctionReplicaResponse, err error) {
+    return c.DeleteFunctionReplicaWithContext(context.Background(), request)
+}
+
+// DeleteFunctionReplica
+// This API is used to delete specified edge function replicas.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RULEOPERATIONCONFLICT = "FailedOperation.RuleOperationConflict"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  OPERATIONDENIED_VERSIONCONTROLLOCKED = "OperationDenied.VersionControlLocked"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) DeleteFunctionReplicaWithContext(ctx context.Context, request *DeleteFunctionReplicaRequest) (response *DeleteFunctionReplicaResponse, err error) {
+    if request == nil {
+        request = NewDeleteFunctionReplicaRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DeleteFunctionReplica")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteFunctionReplica require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteFunctionReplicaResponse()
     err = c.Send(request, response)
     return
 }
@@ -6973,6 +7109,60 @@ func (c *Client) DescribeFunctionComponentBindingsWithContext(ctx context.Contex
     request.SetContext(ctx)
     
     response = NewDescribeFunctionComponentBindingsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeFunctionReplicasRequest() (request *DescribeFunctionReplicasRequest) {
+    request = &DescribeFunctionReplicasRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeFunctionReplicas")
+    
+    
+    return
+}
+
+func NewDescribeFunctionReplicasResponse() (response *DescribeFunctionReplicasResponse) {
+    response = &DescribeFunctionReplicasResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeFunctionReplicas
+// This API is used to query the replica list of edge functions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDFILTERNAME = "InvalidParameter.InvalidFilterName"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeFunctionReplicas(request *DescribeFunctionReplicasRequest) (response *DescribeFunctionReplicasResponse, err error) {
+    return c.DescribeFunctionReplicasWithContext(context.Background(), request)
+}
+
+// DescribeFunctionReplicas
+// This API is used to query the replica list of edge functions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDFILTERNAME = "InvalidParameter.InvalidFilterName"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeFunctionReplicasWithContext(ctx context.Context, request *DescribeFunctionReplicasRequest) (response *DescribeFunctionReplicasResponse, err error) {
+    if request == nil {
+        request = NewDescribeFunctionReplicasRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeFunctionReplicas")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeFunctionReplicas require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeFunctionReplicasResponse()
     err = c.Send(request, response)
     return
 }
@@ -9483,9 +9673,9 @@ func NewDescribeTimingL7OriginPullDataResponse() (response *DescribeTimingL7Orig
 }
 
 // DescribeTimingL7OriginPullData
-// This API is used to query time series data of origin-pull for L7 domains. 
+// This API is used to query time series data of the layer-7 domain name business.
 //
-// Group aggregation can be performed by specifying the query dimension <code>DimensionName</code>, returning multiple groups of time series data. For detailed guide and limits, see [How to Use API to Implement Grouping Aggregation in a Single Call](https://www.tencentcloud.com/document/product/1145/77047?lang=en&pg=).
+// You can choose to perform grouping queries by specifying the query dimension <code>DimensionName</code>, returning multiple groups of time series data. For detailed directions and usage limits, see [How to Implement Group Query in a Single Call Using API](https://www.tencentcloud.com/document/product/1552/127501?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
@@ -9498,9 +9688,9 @@ func (c *Client) DescribeTimingL7OriginPullData(request *DescribeTimingL7OriginP
 }
 
 // DescribeTimingL7OriginPullData
-// This API is used to query time series data of origin-pull for L7 domains. 
+// This API is used to query time series data of the layer-7 domain name business.
 //
-// Group aggregation can be performed by specifying the query dimension <code>DimensionName</code>, returning multiple groups of time series data. For detailed guide and limits, see [How to Use API to Implement Grouping Aggregation in a Single Call](https://www.tencentcloud.com/document/product/1145/77047?lang=en&pg=).
+// You can choose to perform grouping queries by specifying the query dimension <code>DimensionName</code>, returning multiple groups of time series data. For detailed directions and usage limits, see [How to Implement Group Query in a Single Call Using API](https://www.tencentcloud.com/document/product/1552/127501?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
@@ -10838,6 +11028,7 @@ func NewModifyAccelerationDomainResponse() (response *ModifyAccelerationDomainRe
 //  INVALIDPARAMETERVALUE_CONFLICTRECORD = "InvalidParameterValue.ConflictRecord"
 //  INVALIDPARAMETERVALUE_DOMAINNOTMATCHZONE = "InvalidParameterValue.DomainNotMatchZone"
 //  INVALIDPARAMETERVALUE_INVALIDDOMAINSTATUS = "InvalidParameterValue.InvalidDomainStatus"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTORIGINTYPEVOD = "InvalidParameterValue.SiteFailoverNotSupportHostOriginTypeVod"
 //  OPERATIONDENIED_DOMAINNOICP = "OperationDenied.DomainNoICP"
 //  OPERATIONDENIED_RESOURCELOCKEDTEMPORARY = "OperationDenied.ResourceLockedTemporary"
 //  OPERATIONDENIED_VERSIONCONTROLISGRAYING = "OperationDenied.VersionControlIsGraying"
@@ -10874,6 +11065,7 @@ func (c *Client) ModifyAccelerationDomain(request *ModifyAccelerationDomainReque
 //  INVALIDPARAMETERVALUE_CONFLICTRECORD = "InvalidParameterValue.ConflictRecord"
 //  INVALIDPARAMETERVALUE_DOMAINNOTMATCHZONE = "InvalidParameterValue.DomainNotMatchZone"
 //  INVALIDPARAMETERVALUE_INVALIDDOMAINSTATUS = "InvalidParameterValue.InvalidDomainStatus"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTORIGINTYPEVOD = "InvalidParameterValue.SiteFailoverNotSupportHostOriginTypeVod"
 //  OPERATIONDENIED_DOMAINNOICP = "OperationDenied.DomainNoICP"
 //  OPERATIONDENIED_RESOURCELOCKEDTEMPORARY = "OperationDenied.ResourceLockedTemporary"
 //  OPERATIONDENIED_VERSIONCONTROLISGRAYING = "OperationDenied.VersionControlIsGraying"
@@ -11805,6 +11997,70 @@ func (c *Client) ModifyFunctionComponentBindingsWithContext(ctx context.Context,
     return
 }
 
+func NewModifyFunctionReplicaRequest() (request *ModifyFunctionReplicaRequest) {
+    request = &ModifyFunctionReplicaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyFunctionReplica")
+    
+    
+    return
+}
+
+func NewModifyFunctionReplicaResponse() (response *ModifyFunctionReplicaResponse) {
+    response = &ModifyFunctionReplicaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyFunctionReplica
+// This API is used to modify the content and description of a specified edge function replica.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_BINDINGNOTFOUND = "InvalidParameter.BindingNotFound"
+//  INVALIDPARAMETER_DUPLICATEBINDINGNAME = "InvalidParameter.DuplicateBindingName"
+//  INVALIDPARAMETER_FUNCTIONBINDVARIABLENAMECONFLICT = "InvalidParameter.FunctionBindVariableNameConflict"
+//  INVALIDPARAMETER_INVALIDOPERATION = "InvalidParameter.InvalidOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) ModifyFunctionReplica(request *ModifyFunctionReplicaRequest) (response *ModifyFunctionReplicaResponse, err error) {
+    return c.ModifyFunctionReplicaWithContext(context.Background(), request)
+}
+
+// ModifyFunctionReplica
+// This API is used to modify the content and description of a specified edge function replica.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_BINDINGNOTFOUND = "InvalidParameter.BindingNotFound"
+//  INVALIDPARAMETER_DUPLICATEBINDINGNAME = "InvalidParameter.DuplicateBindingName"
+//  INVALIDPARAMETER_FUNCTIONBINDVARIABLENAMECONFLICT = "InvalidParameter.FunctionBindVariableNameConflict"
+//  INVALIDPARAMETER_INVALIDOPERATION = "InvalidParameter.InvalidOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_NAMESPACENOTFOUND = "ResourceUnavailable.NamespaceNotFound"
+func (c *Client) ModifyFunctionReplicaWithContext(ctx context.Context, request *ModifyFunctionReplicaRequest) (response *ModifyFunctionReplicaResponse, err error) {
+    if request == nil {
+        request = NewModifyFunctionReplicaRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "ModifyFunctionReplica")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyFunctionReplica require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyFunctionReplicaResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyFunctionRuleRequest() (request *ModifyFunctionRuleRequest) {
     request = &ModifyFunctionRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -11998,6 +12254,7 @@ func NewModifyHostsCertificateResponse() (response *ModifyHostsCertificateRespon
 //  INVALIDPARAMETERVALUE_OCDIRECTORIGINDOMAINNOTSUPPORTUPSTREAMVERIFY = "InvalidParameterValue.OCDirectOriginDomainNotSupportUpstreamVerify"
 //  INVALIDPARAMETERVALUE_SERVERCERTINFONEEDCONTAINRSAORECC = "InvalidParameterValue.ServerCertInfoNeedContainRSAorECC"
 //  INVALIDPARAMETERVALUE_SERVERCERTINFONEEDCONTAINSM2 = "InvalidParameterValue.ServerCertInfoNeedContainSM2"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTUPSTREAMVERIFY = "InvalidParameterValue.SiteFailoverNotSupportHostUpstreamVerify"
 //  INVALIDPARAMETERVALUE_UPSTREAMCLIENTCERTINFOQUOTALIMIT = "InvalidParameterValue.UpstreamClientCertInfoQuotaLimit"
 //  INVALIDPARAMETERVALUE_UPSTREAMVERIFYCUSTOMCACERTINFOQUOTALIMIT = "InvalidParameterValue.UpstreamVerifyCustomCACertInfoQuotaLimit"
 //  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
@@ -12006,6 +12263,7 @@ func NewModifyHostsCertificateResponse() (response *ModifyHostsCertificateRespon
 //  OPERATIONDENIED_CONFIGLOCKED = "OperationDenied.ConfigLocked"
 //  OPERATIONDENIED_DISABLEZONENOTCOMPLETED = "OperationDenied.DisableZoneNotCompleted"
 //  OPERATIONDENIED_ERRZONEISALREADYPAUSED = "OperationDenied.ErrZoneIsAlreadyPaused"
+//  OPERATIONDENIED_HOSTSCERTIFICATEINCONSISTENCY = "OperationDenied.HostsCertificateInconsistency"
 //  OPERATIONDENIED_HOSTSCLIENTCERTIFICATEINCONSISTENCY = "OperationDenied.HostsClientCertificateInconsistency"
 //  OPERATIONDENIED_HOSTSKEYLESSSERVERINCONSISTENCY = "OperationDenied.HostsKeylessServerInconsistency"
 //  OPERATIONDENIED_HOSTSUPSTREAMCERTIFICATEINCONSISTENCY = "OperationDenied.HostsUpstreamCertificateInconsistency"
@@ -12078,6 +12336,7 @@ func (c *Client) ModifyHostsCertificate(request *ModifyHostsCertificateRequest) 
 //  INVALIDPARAMETERVALUE_OCDIRECTORIGINDOMAINNOTSUPPORTUPSTREAMVERIFY = "InvalidParameterValue.OCDirectOriginDomainNotSupportUpstreamVerify"
 //  INVALIDPARAMETERVALUE_SERVERCERTINFONEEDCONTAINRSAORECC = "InvalidParameterValue.ServerCertInfoNeedContainRSAorECC"
 //  INVALIDPARAMETERVALUE_SERVERCERTINFONEEDCONTAINSM2 = "InvalidParameterValue.ServerCertInfoNeedContainSM2"
+//  INVALIDPARAMETERVALUE_SITEFAILOVERNOTSUPPORTHOSTUPSTREAMVERIFY = "InvalidParameterValue.SiteFailoverNotSupportHostUpstreamVerify"
 //  INVALIDPARAMETERVALUE_UPSTREAMCLIENTCERTINFOQUOTALIMIT = "InvalidParameterValue.UpstreamClientCertInfoQuotaLimit"
 //  INVALIDPARAMETERVALUE_UPSTREAMVERIFYCUSTOMCACERTINFOQUOTALIMIT = "InvalidParameterValue.UpstreamVerifyCustomCACertInfoQuotaLimit"
 //  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
@@ -12086,6 +12345,7 @@ func (c *Client) ModifyHostsCertificate(request *ModifyHostsCertificateRequest) 
 //  OPERATIONDENIED_CONFIGLOCKED = "OperationDenied.ConfigLocked"
 //  OPERATIONDENIED_DISABLEZONENOTCOMPLETED = "OperationDenied.DisableZoneNotCompleted"
 //  OPERATIONDENIED_ERRZONEISALREADYPAUSED = "OperationDenied.ErrZoneIsAlreadyPaused"
+//  OPERATIONDENIED_HOSTSCERTIFICATEINCONSISTENCY = "OperationDenied.HostsCertificateInconsistency"
 //  OPERATIONDENIED_HOSTSCLIENTCERTIFICATEINCONSISTENCY = "OperationDenied.HostsClientCertificateInconsistency"
 //  OPERATIONDENIED_HOSTSKEYLESSSERVERINCONSISTENCY = "OperationDenied.HostsKeylessServerInconsistency"
 //  OPERATIONDENIED_HOSTSUPSTREAMCERTIFICATEINCONSISTENCY = "OperationDenied.HostsUpstreamCertificateInconsistency"
@@ -14755,6 +15015,9 @@ func NewModifyZoneResponse() (response *ModifyZoneResponse) {
 //  OPERATIONDENIED_NODOMAINACCESSZONEONLYSUPPORTMODIFYTYPE = "OperationDenied.NoDomainAccessZoneOnlySupportModifyType"
 //  OPERATIONDENIED_PLANNOTSUPPORTMODIFYZONEAREA = "OperationDenied.PlanNotSupportModifyZoneArea"
 //  OPERATIONDENIED_RESOURCELOCKEDTEMPORARY = "OperationDenied.ResourceLockedTemporary"
+//  OPERATIONDENIED_SWITCHAREACDNPLATFORMREUSE = "OperationDenied.SwitchAreaCdnPlatformReuse"
+//  OPERATIONDENIED_SWITCHAREAORIGINPROTECTIONDEPLOYING = "OperationDenied.SwitchAreaOriginProtectionDeploying"
+//  OPERATIONDENIED_ZONEHASHOSTSMODIFYCONFLICT = "OperationDenied.ZoneHasHostsModifyConflict"
 //  RESOURCEINUSE_CNAME = "ResourceInUse.Cname"
 //  RESOURCEINUSE_DNS = "ResourceInUse.Dns"
 //  RESOURCEINUSE_GENERICHOST = "ResourceInUse.GenericHost"
@@ -14800,6 +15063,9 @@ func (c *Client) ModifyZone(request *ModifyZoneRequest) (response *ModifyZoneRes
 //  OPERATIONDENIED_NODOMAINACCESSZONEONLYSUPPORTMODIFYTYPE = "OperationDenied.NoDomainAccessZoneOnlySupportModifyType"
 //  OPERATIONDENIED_PLANNOTSUPPORTMODIFYZONEAREA = "OperationDenied.PlanNotSupportModifyZoneArea"
 //  OPERATIONDENIED_RESOURCELOCKEDTEMPORARY = "OperationDenied.ResourceLockedTemporary"
+//  OPERATIONDENIED_SWITCHAREACDNPLATFORMREUSE = "OperationDenied.SwitchAreaCdnPlatformReuse"
+//  OPERATIONDENIED_SWITCHAREAORIGINPROTECTIONDEPLOYING = "OperationDenied.SwitchAreaOriginProtectionDeploying"
+//  OPERATIONDENIED_ZONEHASHOSTSMODIFYCONFLICT = "OperationDenied.ZoneHasHostsModifyConflict"
 //  RESOURCEINUSE_CNAME = "ResourceInUse.Cname"
 //  RESOURCEINUSE_DNS = "ResourceInUse.Dns"
 //  RESOURCEINUSE_GENERICHOST = "ResourceInUse.GenericHost"

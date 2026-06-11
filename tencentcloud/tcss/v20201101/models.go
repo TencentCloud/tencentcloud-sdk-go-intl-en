@@ -29,20 +29,19 @@ type ABTestConfig struct {
 }
 
 type AbnormalProcessChildRuleInfo struct {
-	// Policy mode. `RULE_MODE_RELEASE`: Allow.
-	//    `RULE_MODE_ALERT`: Alert.
-	//    `RULE_MODE_HOLDUP`: Block.
-	RuleMode *string `json:"RuleMode,omitnil,omitempty" name:"RuleMode"`
-
-	// Process path
+	// <p>Process path.</p>
 	ProcessPath *string `json:"ProcessPath,omitnil,omitempty" name:"ProcessPath"`
 
-	// Sub-policy ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Policy mode: RULE_MODE_RELEASE: allow<br>   RULE_MODE_ALERT: alarm<br>   RULE_MODE_HOLDUP: block</p>
+	RuleMode *string `json:"RuleMode,omitnil,omitempty" name:"RuleMode"`
+
+	// <p>Command line parameters.</p>
+	CmdLine *string `json:"CmdLine,omitnil,omitempty" name:"CmdLine"`
+
+	// <p>Sub-policy ID.</p>
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
-	// Severity. Valid values: `HIGH` (high); `MIDDLE` (medium); `LOW` (low).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Threat level: HIGH, MIDDLE, and LOW.</p>
 	RuleLevel *string `json:"RuleLevel,omitnil,omitempty" name:"RuleLevel"`
 }
 
@@ -53,8 +52,7 @@ type AbnormalProcessEventDescription struct {
 	// Solution
 	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
 
-	// Event remarks
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Event remark information
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// Details of the hit rule
@@ -66,158 +64,127 @@ type AbnormalProcessEventDescription struct {
 	// ID of the hit rule
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
-	// Last processing time of the event
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Last Time for Event Handling
 	OperationTime *string `json:"OperationTime,omitnil,omitempty" name:"OperationTime"`
 
-	// Name of the hit policy. Valid values: `SYSTEM_DEFINED_RULE` (preset policy); name of the custom policy.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Hit Policy Name: SYSTEM_DEFINED_RULE (System Policy) or Custom Policy Name
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 }
 
 type AbnormalProcessEventInfo struct {
-	// Process directory
+	// <p>Process directory.</p>
 	ProcessPath *string `json:"ProcessPath,omitnil,omitempty" name:"ProcessPath"`
 
-	// Event type. `MALICE_PROCESS_START`: Malicious process startup.
+	// <p>Event type. MALICE_PROCESS_START: malicious process startup.</p>
 	EventType *string `json:"EventType,omitnil,omitempty" name:"EventType"`
 
-	// Name of the hit rule. Valid values: `PROXY_TOOL` (proxy); `TRANSFER_CONTROL` (lateral movement); `ATTACK_CMD` (malicious command); `REVERSE_SHELL` (reverse shell); `FILELESS` (fileless execution); `RISK_CMD` (high-risk command); `ABNORMAL_CHILD_PROC` (unusual start found in the child process of the sensitive service); `USER_DEFINED_RULE` (custom rule).
+	// <p>Hit rule name. PROXY_TOOL: proxy software; TRANSFER_CONTROL: lateral movement; ATTACK_CMD: malicious command; REVERSE_SHELL: reverse shell; FILELESS: fileless execution; RISK_CMD: high-risk command; ABNORMAL_CHILD_PROC: abnormal child process startup of sensitive service; USER_DEFINED_RULE: user-defined rule</p>
 	MatchRuleName *string `json:"MatchRuleName,omitnil,omitempty" name:"MatchRuleName"`
 
-	// Generation time
+	// <p>Generation time.</p>
 	FoundTime *string `json:"FoundTime,omitnil,omitempty" name:"FoundTime"`
 
-	// Container name
+	// <p>Container name.</p>
 	ContainerName *string `json:"ContainerName,omitnil,omitempty" name:"ContainerName"`
 
-	// Image name
+	// <p>Image name.</p>
 	ImageName *string `json:"ImageName,omitnil,omitempty" name:"ImageName"`
 
-	// Action execution result. `BEHAVIOR_NONE`: None.
-	//     `BEHAVIOR_ALERT`: Alert.
-	//     `BEHAVIOR_RELEASE`: Allow.
-	//     `BEHAVIOR_HOLDUP_FAILED`: Failed to block.
-	//     `BEHAVIOR_HOLDUP_SUCCESSED`: Blocked.
+	// <p>Action execution result: BEHAVIOR_NONE: none<br>BEHAVIOR_ALERT: alarm<br>BEHAVIOR_RELEASE: allow<br>BEHAVIOR_HOLDUP_FAILED: block failed<br>BEHAVIOR_HOLDUP_SUCCESSED: block succeeded</p>
 	Behavior *string `json:"Behavior,omitnil,omitempty" name:"Behavior"`
 
-	// Status. `EVENT_UNDEAL`: Pending.
-	//     `EVENT_DEALED`: Processed.
-	//     `EVENT_INGNORE`: Ignored.
+	// <p>Status: EVENT_UNDEAL: event unhandled<br>    EVENT_DEALED: event handled<br>    EVENT_INGNORE: event ignored</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Unique event ID
+	// <p>Unique ID of the event record.</p>
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Image ID, which is used for redirect.
+	// <p>Image ID, used for redirection.</p>
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
-	// Container ID, which is used for redirect.
+	// <p>Container ID, used for redirection.</p>
 	ContainerId *string `json:"ContainerId,omitnil,omitempty" name:"ContainerId"`
 
-	// Event solution
+	// <p>Event solution.</p>
 	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
 
-	// Event description
+	// <p>Event detailed description.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Hit policy ID
+	// <p>Hit policy ID.</p>
 	MatchRuleId *string `json:"MatchRuleId,omitnil,omitempty" name:"MatchRuleId"`
 
-	// Action of the hit rule:
-	// `RULE_MODE_RELEASE`: Allow.
-	// `RULE_MODE_ALERT`: Alert.
-	// `RULE_MODE_HOLDUP`: Block.
+	// <p>Hit rule action:<br>RULE_MODE_RELEASE: allow<br>RULE_MODE_ALERT: alarm<br>RULE_MODE_HOLDUP: block</p>
 	MatchAction *string `json:"MatchAction,omitnil,omitempty" name:"MatchAction"`
 
-	// Information of the process that hits the rule
+	// <p>Hit rule process information.</p>
 	MatchProcessPath *string `json:"MatchProcessPath,omitnil,omitempty" name:"MatchProcessPath"`
 
-	// Whether the rule exists
+	// <p>Whether the rule exists.</p>
 	RuleExist *bool `json:"RuleExist,omitnil,omitempty" name:"RuleExist"`
 
-	// Number of events
+	// <p>Number of events.</p>
 	EventCount *int64 `json:"EventCount,omitnil,omitempty" name:"EventCount"`
 
-	// Last generation time
+	// <p>Last generation time.</p>
 	LatestFoundTime *string `json:"LatestFoundTime,omitnil,omitempty" name:"LatestFoundTime"`
 
-	// Rule group ID
+	// <p>Rule group ID.</p>
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
-	// Name of the hit policy. Valid values: `SYSTEM_DEFINED_RULE` (preset policy); name of the custom policy.
+	// <p>Hit policy name: SYSTEM_DEFINED_RULE (system policy) or user-defined policy name.</p>
 	MatchGroupName *string `json:"MatchGroupName,omitnil,omitempty" name:"MatchGroupName"`
 
-	// Level of the hit rule. Valid values: `HIGH` (high); `MIDDLE` (medium); `LOW` (low).
+	// <p>Hit rule level: HIGH, MIDDLE, and LOW.</p>
 	MatchRuleLevel *string `json:"MatchRuleLevel,omitnil,omitempty" name:"MatchRuleLevel"`
 
-	// Network status
-	// `NORMAL`: 	Not isolated.
-	// `ISOLATED`: 		Isolated.
-	// `ISOLATING`: 		Isolating.
-	// `ISOLATE_FAILED`: 	Isolation failed.
-	// `RESTORING`: Recovering.
-	// `RESTORE_FAILED`: Recovery failed.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Network status<br>Not isolated: NORMAL<br>Isolated: ISOLATED<br>Isolating: ISOLATING<br>Isolation failed: ISOLATE_FAILED<br>Restoring: RESTORING<br>Restoring failed: RESTORE_FAILED</p>
 	ContainerNetStatus *string `json:"ContainerNetStatus,omitnil,omitempty" name:"ContainerNetStatus"`
 
-	// Sub-status of the container
-	// "AGENT_OFFLINE"       // The agent is offline.
-	// "NODE_DESTROYED"      // The node is terminated.
-	// "CONTAINER_EXITED"    // The container exited.
-	// "CONTAINER_DESTROYED" // The container was terminated.
-	// "SHARED_HOST"         // The container shares the network with the server.
-	// "RESOURCE_LIMIT"      // The number of resources to be isolated exceeds the limit.
-	// "UNKNOW"              // The reason is unknown.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Container sub-status.<br>&quot;AGENT_OFFLINE&quot;       //Agent offline<br>&quot;NODE_DESTROYED&quot;      //Node destroyed<br>&quot;CONTAINER_EXITED&quot;    //Container exited<br>&quot;CONTAINER_DESTROYED&quot; //Container destroyed<br>&quot;SHARED_HOST&quot;         //Container and host sharing the network<br>&quot;RESOURCE_LIMIT&quot;      //Resource limit exceeded for the isolation operation<br>&quot;UNKNOW&quot;              //Unknown reason</p>
 	ContainerNetSubStatus *string `json:"ContainerNetSubStatus,omitnil,omitempty" name:"ContainerNetSubStatus"`
 
-	// Container isolation operation source
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Source of container isolation operation.</p>
 	ContainerIsolateOperationSrc *string `json:"ContainerIsolateOperationSrc,omitnil,omitempty" name:"ContainerIsolateOperationSrc"`
 
-	// Container status
-	// `RUNNING`: Running.
-	// `PAUSED`: Paused.
-	// `STOPPED`: Stopped.
-	// `CREATED`: Created.
-	// `DESTROYED`: Terminated.
-	// `RESTARTING`: Restarting.
-	// `REMOVING`: Removing.
+	// <p>Container status.<br>RUNNING<br>PAUSED<br>STOPPED<br>CREATED<br>DESTROYED<br>RESTARTING<br>REMOVING</p>
 	ContainerStatus *string `json:"ContainerStatus,omitnil,omitempty" name:"ContainerStatus"`
 
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
 
-	// Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+	// <p>Node type: NORMAL (normal node) and SUPER (super node).</p>
 	NodeType *string `json:"NodeType,omitnil,omitempty" name:"NodeType"`
 
-	// Pod name
+	// <p>Pod name.</p>
 	PodName *string `json:"PodName,omitnil,omitempty" name:"PodName"`
 
-	// Pod IP
+	// <p>pod ip</p>
 	PodIP *string `json:"PodIP,omitnil,omitempty" name:"PodIP"`
 
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	NodeUniqueID *string `json:"NodeUniqueID,omitnil,omitempty" name:"NodeUniqueID"`
 
-	// Node public IP
+	// <p>Node public IP address.</p>
 	PublicIP *string `json:"PublicIP,omitnil,omitempty" name:"PublicIP"`
 
-	// Node name
+	// <p>Node name.</p>
 	NodeName *string `json:"NodeName,omitnil,omitempty" name:"NodeName"`
 
-	// Node ID
+	// <p>Node ID.</p>
 	NodeID *string `json:"NodeID,omitnil,omitempty" name:"NodeID"`
 
-	// uuid
+	// <p>uuid</p>
 	HostID *string `json:"HostID,omitnil,omitempty" name:"HostID"`
 
-	// Private IP of the node
+	// <p>Node private IP address.</p>
 	HostIP *string `json:"HostIP,omitnil,omitempty" name:"HostIP"`
 
-	// Cluster name
+	// <p>Cluster name.</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// <p>Command line parameters.</p>
+	CmdLine *string `json:"CmdLine,omitnil,omitempty" name:"CmdLine"`
 }
 
 type AbnormalProcessEventTendencyInfo struct {
@@ -249,36 +216,76 @@ type AbnormalProcessEventTendencyInfo struct {
 	UserDefinedRuleEventCount *int64 `json:"UserDefinedRuleEventCount,omitnil,omitempty" name:"UserDefinedRuleEventCount"`
 }
 
-type AbnormalProcessRuleInfo struct {
-	// Valid values: `true` (enabled); `false` (disabled).
+type AbnormalProcessRuleExtSetItem struct {
+	// Sub-rule list of the user-defined policy. Has a value when IsDefault=false.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ChildRules []*AbnormalProcessChildRuleInfo `json:"ChildRules,omitnil,omitempty" name:"ChildRules"`
+
+	// Edit username
+	EditUserName *string `json:"EditUserName,omitnil,omitempty" name:"EditUserName"`
+
+	// Policy enforcement image count
+	EffectImageCount *uint64 `json:"EffectImageCount,omitnil,omitempty" name:"EffectImageCount"`
+
+	// true: default policy, false: custom policy
+	IsDefault *bool `json:"IsDefault,omitnil,omitempty" name:"IsDefault"`
+
+	// Whether the rule applies to all images. true indicates it takes effect on all images.
+	IsGlobal *bool `json:"IsGlobal,omitnil,omitempty" name:"IsGlobal"`
+
+	// true: Policy activation, false: Policy deactivation
 	IsEnable *bool `json:"IsEnable,omitnil,omitempty" name:"IsEnable"`
 
-	// IDs of associated images. An empty array indicates all images.
-	ImageIds []*string `json:"ImageIds,omitnil,omitempty" name:"ImageIds"`
+	// Deduplicated list of ALL execution actions in the rule group. RULE_MODE_ALERT: Alert RULE_MODE_HOLDUP: Block
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleActions []*string `json:"RuleActions,omitnil,omitempty" name:"RuleActions"`
 
-	// Array of sub-policies of the user policy
-	ChildRules []*AbnormalProcessChildRuleInfo `json:"ChildRules,omitnil,omitempty" name:"ChildRules"`
+	// Policy ID
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Policy name
 	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
-	// Policy ID
+	// Sub-rule list of system policy. Has value when IsDefault=true.
 	// Note: This field may return null, indicating that no valid values can be obtained.
+	SystemChildRules []*AbnormalProcessSystemChildRuleInfo `json:"SystemChildRules,omitnil,omitempty" name:"SystemChildRules"`
+
+	// Policy update time. May be empty.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
+type AbnormalProcessRuleInfo struct {
+	// Array of sub-policies of the user policy
+	ChildRules []*AbnormalProcessChildRuleInfo `json:"ChildRules,omitnil,omitempty" name:"ChildRules"`
+
+	// IDs of associated images. An empty array indicates all images.
+	ImageIds []*string `json:"ImageIds,omitnil,omitempty" name:"ImageIds"`
+
+	// Valid values: `true` (enabled); `false` (disabled).
+	IsEnable *bool `json:"IsEnable,omitnil,omitempty" name:"IsEnable"`
+
+	// Policy name
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
+
+	// Whether it is the default preset policy
+	IsDefault *bool `json:"IsDefault,omitnil,omitempty" name:"IsDefault"`
+
+	// Whether the rule applies to all images. true indicates it takes effect on all images.
+	IsGlobal *bool `json:"IsGlobal,omitnil,omitempty" name:"IsGlobal"`
+
+	// Policy ID
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Array of sub-policies of the preset policy
 	SystemChildRules []*AbnormalProcessSystemChildRuleInfo `json:"SystemChildRules,omitnil,omitempty" name:"SystemChildRules"`
-
-	// Whether it is the default preset policy
-	IsDefault *bool `json:"IsDefault,omitnil,omitempty" name:"IsDefault"`
 }
 
 type AbnormalProcessSystemChildRuleInfo struct {
-	// Sub-policy ID
-	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
-
 	// Sub-policy status. Valid values: `true` (enabled); `false` (disabled).
 	IsEnable *bool `json:"IsEnable,omitnil,omitempty" name:"IsEnable"`
+
+	// Sub-policy ID
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Policy mode. `RULE_MODE_RELEASE`: Allow.
 	//    `RULE_MODE_ALERT`: Alert.
@@ -295,25 +302,24 @@ type AbnormalProcessSystemChildRuleInfo struct {
 	// `ABNORMAL_CHILD_PROC`: Unusual start found in the child process of the sensitive service.
 	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
 
-	// Severity. Valid values: `HIGH` (high); `MIDDLE` (medium); `LOW` (low).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Threat Level. HIGH: High; MIDDLE: Medium; LOW: Low
 	RuleLevel *string `json:"RuleLevel,omitnil,omitempty" name:"RuleLevel"`
 }
 
 type AccessControlChildRuleInfo struct {
-	// Policy mode. `RULE_MODE_RELEASE`: Allow.
-	//    `RULE_MODE_ALERT`: Alert.
-	//    `RULE_MODE_HOLDUP`: Block.
-	RuleMode *string `json:"RuleMode,omitnil,omitempty" name:"RuleMode"`
-
-	// Process path
+	// <p>Process path.</p>
 	ProcessPath *string `json:"ProcessPath,omitnil,omitempty" name:"ProcessPath"`
 
-	// Accessed file path, which is valid only for access control.
+	// <p>Policy mode: RULE_MODE_RELEASE: allow<br>   RULE_MODE_ALERT: alarm<br>   RULE_MODE_HOLDUP: block</p>
+	RuleMode *string `json:"RuleMode,omitnil,omitempty" name:"RuleMode"`
+
+	// <p>Accessed file path, only effective during access control.</p>
 	TargetFilePath *string `json:"TargetFilePath,omitnil,omitempty" name:"TargetFilePath"`
 
-	// Sub-policy ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Command line parameters.</p>
+	CmdLine *string `json:"CmdLine,omitnil,omitempty" name:"CmdLine"`
+
+	// <p>Sub-policy ID.</p>
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 }
 
@@ -324,8 +330,7 @@ type AccessControlEventDescription struct {
 	// Solution
 	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
 
-	// Event remarks
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Event remark information
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// Details of the hit rule
@@ -337,178 +342,191 @@ type AccessControlEventDescription struct {
 	// ID of the hit rule
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
-	// Last processing time of the event
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Last Time for Event Handling
 	OperationTime *string `json:"OperationTime,omitnil,omitempty" name:"OperationTime"`
 }
 
 type AccessControlEventInfo struct {
-	// Process name
+	// <p>Process name.</p>
 	ProcessName *string `json:"ProcessName,omitnil,omitempty" name:"ProcessName"`
 
-	// Name of the hit rule
+	// <p>Hit rule name.</p>
 	MatchRuleName *string `json:"MatchRuleName,omitnil,omitempty" name:"MatchRuleName"`
 
-	// Generation time
+	// <p>Generation time.</p>
 	FoundTime *string `json:"FoundTime,omitnil,omitempty" name:"FoundTime"`
 
-	// Container name
+	// <p>Container name.</p>
 	ContainerName *string `json:"ContainerName,omitnil,omitempty" name:"ContainerName"`
 
-	// Image name
+	// <p>Image name.</p>
 	ImageName *string `json:"ImageName,omitnil,omitempty" name:"ImageName"`
 
-	// Action execution result. `BEHAVIOR_NONE`: None.
-	//     `BEHAVIOR_ALERT`: Alert.
-	//     `BEHAVIOR_RELEASE`: Allow.
-	//     `BEHAVIOR_HOLDUP_FAILED`: Failed to block.
-	//     `BEHAVIOR_HOLDUP_SUCCESSED`: Blocked.
+	// <p>Action execution result: BEHAVIOR_NONE: none<br>BEHAVIOR_ALERT: alarm<br>BEHAVIOR_RELEASE: allow<br>BEHAVIOR_HOLDUP_FAILED: block failed<br>BEHAVIOR_HOLDUP_SUCCESSED: block succeeded</p>
 	Behavior *string `json:"Behavior,omitnil,omitempty" name:"Behavior"`
 
-	// Status. `0`: Pending. `EVENT_UNDEAL`: Pending.
-	//     `EVENT_DEALED`: Processed.
-	//     `EVENT_INGNORE`: Ignored.
+	// <p>Status 0: unhandled  "EVENT_UNDEAL": event unhandled<br>    &quot;EVENT_DEALED&quot;: event handled<br>    &quot;EVENT_INGNORE&quot;: event ignored</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Unique event ID
+	// <p>Unique ID of the event record.</p>
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Filename
+	// <p>File name.</p>
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
-	// Event type. `FILE_ABNORMAL_READ`: Abnormal file read.
+	// <p>Event type. FILE_ABNORMAL_READ: abnormal file read.</p>
 	EventType *string `json:"EventType,omitnil,omitempty" name:"EventType"`
 
-	// Image ID, which is used for redirect.
+	// <p>Image ID, used for redirection.</p>
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
-	// Container ID, which is used for redirect.
+	// <p>Container ID, used for redirection.</p>
 	ContainerId *string `json:"ContainerId,omitnil,omitempty" name:"ContainerId"`
 
-	// Event solution
+	// <p>Event solution.</p>
 	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
 
-	// Event description
+	// <p>Event detailed description.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Hit policy ID
+	// <p>Hit policy ID.</p>
 	MatchRuleId *string `json:"MatchRuleId,omitnil,omitempty" name:"MatchRuleId"`
 
-	// Action of the hit rule:
-	// `RULE_MODE_RELEASE`: Allow.
-	// `RULE_MODE_ALERT`: Alert.
-	// `RULE_MODE_HOLDUP`: Block.
+	// <p>Hit rule action:<br>RULE_MODE_RELEASE: allow<br>RULE_MODE_ALERT: alarm<br>RULE_MODE_HOLDUP: block</p>
 	MatchAction *string `json:"MatchAction,omitnil,omitempty" name:"MatchAction"`
 
-	// Information of the process that hits the rule
+	// <p>Hit rule process information.</p>
 	MatchProcessPath *string `json:"MatchProcessPath,omitnil,omitempty" name:"MatchProcessPath"`
 
-	// Information of the file that hits the rule
+	// <p>Hit rule file information.</p>
 	MatchFilePath *string `json:"MatchFilePath,omitnil,omitempty" name:"MatchFilePath"`
 
-	// File path containing the name
+	// <p>File path, including name.</p>
 	FilePath *string `json:"FilePath,omitnil,omitempty" name:"FilePath"`
 
-	// Whether the rule exists
+	// <p>Whether the rule exists.</p>
 	RuleExist *bool `json:"RuleExist,omitnil,omitempty" name:"RuleExist"`
 
-	// Number of events
+	// <p>Number of events.</p>
 	EventCount *int64 `json:"EventCount,omitnil,omitempty" name:"EventCount"`
 
-	// Last generation time
+	// <p>Last generation time.</p>
 	LatestFoundTime *string `json:"LatestFoundTime,omitnil,omitempty" name:"LatestFoundTime"`
 
-	// Rule group ID
+	// <p>Rule group ID.</p>
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
-	// Network status
-	// `NORMAL`: 	Not isolated.
-	// `ISOLATED`: 		Isolated.
-	// `ISOLATING`: 		Isolating.
-	// `ISOLATE_FAILED`: 	Isolation failed.
-	// `RESTORING`: Recovering.
-	// `RESTORE_FAILED`: Recovery failed.
+	// <p>Network status<br>Not isolated: NORMAL<br>Isolated: ISOLATED<br>Isolating: ISOLATING<br>Isolation failed: ISOLATE_FAILED<br>Restoring: RESTORING<br>Restoring failed: RESTORE_FAILED</p>
 	ContainerNetStatus *string `json:"ContainerNetStatus,omitnil,omitempty" name:"ContainerNetStatus"`
 
-	// Sub-status of the container
-	// "AGENT_OFFLINE"       // The agent is offline.
-	// "NODE_DESTROYED"      // The node is terminated.
-	// "CONTAINER_EXITED"    // The container exited.
-	// "CONTAINER_DESTROYED" // The container was terminated.
-	// "SHARED_HOST"         // The container shares the network with the server.
-	// "RESOURCE_LIMIT"      // The number of resources to be isolated exceeds the limit.
-	// "UNKNOW"              // The reason is unknown.
+	// <p>Container sub-status.<br>&quot;AGENT_OFFLINE&quot;       //Agent offline<br>&quot;NODE_DESTROYED&quot;      //Node destroyed<br>&quot;CONTAINER_EXITED&quot;    //Container exited<br>&quot;CONTAINER_DESTROYED&quot; //Container destroyed<br>&quot;SHARED_HOST&quot;         //Container and host sharing the network<br>&quot;RESOURCE_LIMIT&quot;      //Resource limit exceeded for the isolation operation<br>&quot;UNKNOW&quot;              //Unknown reason</p>
 	ContainerNetSubStatus *string `json:"ContainerNetSubStatus,omitnil,omitempty" name:"ContainerNetSubStatus"`
 
-	// Container isolation operation source
+	// <p>Source of container isolation operation.</p>
 	ContainerIsolateOperationSrc *string `json:"ContainerIsolateOperationSrc,omitnil,omitempty" name:"ContainerIsolateOperationSrc"`
 
-	// Container status
-	// `RUNNING`: Running.
-	// `PAUSED`: Paused.
-	// `STOPPED`: Stopped.
-	// `CREATED`: Created.
-	// `DESTROYED`: Terminated.
-	// `RESTARTING`: Restarting.
-	// `REMOVING`: Removing.
+	// <p>Container status.<br>RUNNING<br>PAUSED<br>STOPPED<br>CREATED<br>DESTROYED<br>RESTARTING<br>REMOVING</p>
 	ContainerStatus *string `json:"ContainerStatus,omitnil,omitempty" name:"ContainerStatus"`
 
-	// Node name: For super nodes, the node_id is displayed.
+	// <p>Node name: For super nodes, the node_id is displayed instead.</p>
 	NodeName *string `json:"NodeName,omitnil,omitempty" name:"NodeName"`
 
-	// Pod name
+	// <p>Pod name.</p>
 	PodName *string `json:"PodName,omitnil,omitempty" name:"PodName"`
 
-	// Pod IP
+	// <p>pod ip</p>
 	PodIP *string `json:"PodIP,omitnil,omitempty" name:"PodIP"`
 
-	// Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+	// <p>Node type: NORMAL (normal node) and SUPER (super node).</p>
 	NodeType *string `json:"NodeType,omitnil,omitempty" name:"NodeType"`
 
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
 
-	// Node unique ID. It's used for super nodes.
+	// <p>Unique node ID, primarily used for super nodes.</p>
 	NodeUniqueID *string `json:"NodeUniqueID,omitnil,omitempty" name:"NodeUniqueID"`
 
-	// Node public IP
+	// <p>Node public IP address.</p>
 	PublicIP *string `json:"PublicIP,omitnil,omitempty" name:"PublicIP"`
 
-	// Node ID
+	// <p>Node ID.</p>
 	NodeID *string `json:"NodeID,omitnil,omitempty" name:"NodeID"`
 
-	// uuid
+	// <p>uuid</p>
 	HostID *string `json:"HostID,omitnil,omitempty" name:"HostID"`
 
-	// Private IP of the node
+	// <p>Node private IP address.</p>
 	HostIP *string `json:"HostIP,omitnil,omitempty" name:"HostIP"`
 
-	// Cluster name
+	// <p>Cluster name.</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// <p>Command line parameters.</p>
+	CmdLine *string `json:"CmdLine,omitnil,omitempty" name:"CmdLine"`
 }
 
-type AccessControlRuleInfo struct {
-	// Switch. Valid values: `true` (on); `false` (off).
+type AccessControlRuleExtSetItem struct {
+	// Sub-rule list of the user-defined policy. Has a value when IsDefault=false.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ChildRules []*AccessControlChildRuleInfo `json:"ChildRules,omitnil,omitempty" name:"ChildRules"`
+
+	// Edit username
+	EditUserName *string `json:"EditUserName,omitnil,omitempty" name:"EditUserName"`
+
+	// Policy enforcement image count
+	EffectImageCount *uint64 `json:"EffectImageCount,omitnil,omitempty" name:"EffectImageCount"`
+
+	// true: default policy, false: custom policy
+	IsDefault *bool `json:"IsDefault,omitnil,omitempty" name:"IsDefault"`
+
+	// Whether the rule applies to all images. true indicates it takes effect on all images.
+	IsGlobal *bool `json:"IsGlobal,omitnil,omitempty" name:"IsGlobal"`
+
+	// true: Policy activation, false: Policy deactivation
 	IsEnable *bool `json:"IsEnable,omitnil,omitempty" name:"IsEnable"`
 
-	// IDs of associated images. An empty array indicates all images.
-	ImageIds []*string `json:"ImageIds,omitnil,omitempty" name:"ImageIds"`
+	// Deduplicated list of ALL execution actions in the rule group. RULE_MODE_ALERT: Alert RULE_MODE_HOLDUP: Block
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleActions []*string `json:"RuleActions,omitnil,omitempty" name:"RuleActions"`
 
-	// Array of sub-policies of the user policy
-	ChildRules []*AccessControlChildRuleInfo `json:"ChildRules,omitnil,omitempty" name:"ChildRules"`
+	// Policy ID
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Policy name
 	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
-	// Policy ID
+	// Sub-rule list of system policy. Has value when IsDefault=true.
 	// Note: This field may return null, indicating that no valid values can be obtained.
+	SystemChildRules []*AccessControlSystemChildRuleInfo `json:"SystemChildRules,omitnil,omitempty" name:"SystemChildRules"`
+
+	// Policy update time. May be empty.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
+type AccessControlRuleInfo struct {
+	// Array of sub-policies of the user policy
+	ChildRules []*AccessControlChildRuleInfo `json:"ChildRules,omitnil,omitempty" name:"ChildRules"`
+
+	// IDs of associated images. An empty array indicates all images.
+	ImageIds []*string `json:"ImageIds,omitnil,omitempty" name:"ImageIds"`
+
+	// Switch. Valid values: `true` (on); `false` (off).
+	IsEnable *bool `json:"IsEnable,omitnil,omitempty" name:"IsEnable"`
+
+	// Policy name
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
+
+	// Whether it is the default preset policy
+	IsDefault *bool `json:"IsDefault,omitnil,omitempty" name:"IsDefault"`
+
+	// true: all images, false: specified images. When IsGlobal=true, ImageIds returns an empty array.
+	IsGlobal *bool `json:"IsGlobal,omitnil,omitempty" name:"IsGlobal"`
+
+	// Policy ID
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Array of sub-policies of the preset policy
 	SystemChildRules []*AccessControlSystemChildRuleInfo `json:"SystemChildRules,omitnil,omitempty" name:"SystemChildRules"`
-
-	// Whether it is the default preset policy
-	IsDefault *bool `json:"IsDefault,omitnil,omitempty" name:"IsDefault"`
 }
 
 type AccessControlSystemChildRuleInfo struct {
@@ -758,7 +776,7 @@ type AddAssetImageRegistryRegistryDetailRequestParams struct {
 	// Repository URL
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Repository type, which can be `harbor`.
+	// Repository type. Valid values: harbor, quay, jfrog, aws, azure, and other-tcr.
 	RegistryType *string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
 	// Network type, which can be `public` (public network).
@@ -775,6 +793,24 @@ type AddAssetImageRegistryRegistryDetailRequestParams struct {
 
 	// Valid values: `0` (secure mode with certificate verification, which is the default value); `1` (unsecure mode that skips certificate verification).
 	Insecure *uint64 `json:"Insecure,omitnil,omitempty" name:"Insecure"`
+
+
+	ConnDetectConfig []*ConnDetectConfig `json:"ConnDetectConfig,omitnil,omitempty" name:"ConnDetectConfig"`
+
+	// Whether authorization and scanning are performed automatically. For full synchronization, only images of the latest version are involved. For incremental synchronization, all new images are involved.
+	NeedScan *bool `json:"NeedScan,omitnil,omitempty" name:"NeedScan"`
+
+	// Synchronization method. 0: full synchronization; 1: incremental synchronization.
+	SyncMode *uint64 `json:"SyncMode,omitnil,omitempty" name:"SyncMode"`
+
+	// Webhook access address.
+	WebhookUrl *string `json:"WebhookUrl,omitnil,omitempty" name:"WebhookUrl"`
+
+	// Webhook access token.
+	WebhookToken *string `json:"WebhookToken,omitnil,omitempty" name:"WebhookToken"`
+
+	// TCR instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type AddAssetImageRegistryRegistryDetailRequest struct {
@@ -792,7 +828,7 @@ type AddAssetImageRegistryRegistryDetailRequest struct {
 	// Repository URL
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Repository type, which can be `harbor`.
+	// Repository type. Valid values: harbor, quay, jfrog, aws, azure, and other-tcr.
 	RegistryType *string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
 	// Network type, which can be `public` (public network).
@@ -809,6 +845,23 @@ type AddAssetImageRegistryRegistryDetailRequest struct {
 
 	// Valid values: `0` (secure mode with certificate verification, which is the default value); `1` (unsecure mode that skips certificate verification).
 	Insecure *uint64 `json:"Insecure,omitnil,omitempty" name:"Insecure"`
+
+	ConnDetectConfig []*ConnDetectConfig `json:"ConnDetectConfig,omitnil,omitempty" name:"ConnDetectConfig"`
+
+	// Whether authorization and scanning are performed automatically. For full synchronization, only images of the latest version are involved. For incremental synchronization, all new images are involved.
+	NeedScan *bool `json:"NeedScan,omitnil,omitempty" name:"NeedScan"`
+
+	// Synchronization method. 0: full synchronization; 1: incremental synchronization.
+	SyncMode *uint64 `json:"SyncMode,omitnil,omitempty" name:"SyncMode"`
+
+	// Webhook access address.
+	WebhookUrl *string `json:"WebhookUrl,omitnil,omitempty" name:"WebhookUrl"`
+
+	// Webhook access token.
+	WebhookToken *string `json:"WebhookToken,omitnil,omitempty" name:"WebhookToken"`
+
+	// TCR instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *AddAssetImageRegistryRegistryDetailRequest) ToJsonString() string {
@@ -833,6 +886,12 @@ func (r *AddAssetImageRegistryRegistryDetailRequest) FromJsonString(s string) er
 	delete(f, "RegistryRegion")
 	delete(f, "SpeedLimit")
 	delete(f, "Insecure")
+	delete(f, "ConnDetectConfig")
+	delete(f, "NeedScan")
+	delete(f, "SyncMode")
+	delete(f, "WebhookUrl")
+	delete(f, "WebhookToken")
+	delete(f, "InstanceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddAssetImageRegistryRegistryDetailRequest has unknown keys!", "")
 	}
@@ -842,15 +901,12 @@ func (r *AddAssetImageRegistryRegistryDetailRequest) FromJsonString(s string) er
 // Predefined struct for user
 type AddAssetImageRegistryRegistryDetailResponseParams struct {
 	// Connection error message
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	HealthCheckErr *string `json:"HealthCheckErr,omitnil,omitempty" name:"HealthCheckErr"`
 
-	// Name error message
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Error message of the name
 	NameRepeatErr *string `json:"NameRepeatErr,omitnil,omitempty" name:"NameRepeatErr"`
 
-	// Unique repository ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Repository unique id
 	RegistryId *int64 `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -877,6 +933,9 @@ func (r *AddAssetImageRegistryRegistryDetailResponse) FromJsonString(s string) e
 type AddComplianceAssetPolicySetToWhitelistRequestParams struct {
 	// List of asset IDs and check item IDs
 	AssetPolicySetList []*ComplianceAssetPolicySetItem `json:"AssetPolicySetList,omitnil,omitempty" name:"AssetPolicySetList"`
+
+	// Type of assets to be scanned. <li>ASSET_CONTAINER: Docker container.</li> <li>ASSET_IMAGE: Docker image.</li> <li>ASSET_HOST: Docker host.</li> <li>ASSET_K8S: Kubernetes.</li> <li>ASSET_CONTAINERD: containerd host.</li> <li>ASSET_CONTAINERD_CONTAINER: containerd container.</li>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 }
 
 type AddComplianceAssetPolicySetToWhitelistRequest struct {
@@ -884,6 +943,9 @@ type AddComplianceAssetPolicySetToWhitelistRequest struct {
 	
 	// List of asset IDs and check item IDs
 	AssetPolicySetList []*ComplianceAssetPolicySetItem `json:"AssetPolicySetList,omitnil,omitempty" name:"AssetPolicySetList"`
+
+	// Type of assets to be scanned. <li>ASSET_CONTAINER: Docker container.</li> <li>ASSET_IMAGE: Docker image.</li> <li>ASSET_HOST: Docker host.</li> <li>ASSET_K8S: Kubernetes.</li> <li>ASSET_CONTAINERD: containerd host.</li> <li>ASSET_CONTAINERD_CONTAINER: containerd container.</li>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 }
 
 func (r *AddComplianceAssetPolicySetToWhitelistRequest) ToJsonString() string {
@@ -899,6 +961,7 @@ func (r *AddComplianceAssetPolicySetToWhitelistRequest) FromJsonString(s string)
 		return err
 	}
 	delete(f, "AssetPolicySetList")
+	delete(f, "AssetType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddComplianceAssetPolicySetToWhitelistRequest has unknown keys!", "")
 	}
@@ -1779,6 +1842,181 @@ func (r *AddNetworkFirewallPolicyYamlDetailResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type AddOrModifyMaliciousConnectionWhiteListRequestParams struct {
+	// Enumerate
+	// IP: IP
+	// Domain name: DOMAIN
+	RequestType *string `json:"RequestType,omitnil,omitempty" name:"RequestType"`
+
+	// Allowlisted domain names
+	WhiteDomainList []*string `json:"WhiteDomainList,omitnil,omitempty" name:"WhiteDomainList"`
+
+	// Allowlisted IP
+	WhiteIPList []*string `json:"WhiteIPList,omitnil,omitempty" name:"WhiteIPList"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Allowlist Record ID, Required Only for Modification
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+}
+
+type AddOrModifyMaliciousConnectionWhiteListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Enumerate
+	// IP: IP
+	// Domain name: DOMAIN
+	RequestType *string `json:"RequestType,omitnil,omitempty" name:"RequestType"`
+
+	// Allowlisted domain names
+	WhiteDomainList []*string `json:"WhiteDomainList,omitnil,omitempty" name:"WhiteDomainList"`
+
+	// Allowlisted IP
+	WhiteIPList []*string `json:"WhiteIPList,omitnil,omitempty" name:"WhiteIPList"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Allowlist Record ID, Required Only for Modification
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+}
+
+func (r *AddOrModifyMaliciousConnectionWhiteListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddOrModifyMaliciousConnectionWhiteListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RequestType")
+	delete(f, "WhiteDomainList")
+	delete(f, "WhiteIPList")
+	delete(f, "Remark")
+	delete(f, "ID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddOrModifyMaliciousConnectionWhiteListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AddOrModifyMaliciousConnectionWhiteListResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type AddOrModifyMaliciousConnectionWhiteListResponse struct {
+	*tchttp.BaseResponse
+	Response *AddOrModifyMaliciousConnectionWhiteListResponseParams `json:"Response"`
+}
+
+func (r *AddOrModifyMaliciousConnectionWhiteListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddOrModifyMaliciousConnectionWhiteListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AddOrModifyVirusWhiteListRuleRequestParams struct {
+	// <p>MD5 list.</p>
+	Md5List []*string `json:"Md5List,omitnil,omitempty" name:"Md5List"`
+
+	// <p>Scope: 1 indicates all images, and 0 indicates selected images.</p>
+	Scope *uint64 `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// <p>Rule ID. Presence of rule ID values indicates modification, and absence of rule ID values indicates addition.</p>
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// <p>Image ID list, maximum 1,000. Required when Scope is 0 (selected images).</p>
+	ImageIds []*string `json:"ImageIds,omitnil,omitempty" name:"ImageIds"`
+
+	// <p>Rule remarks, with a maximum of 256 characters.</p>
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// <p>Event ID.</p>
+	EventId *uint64 `json:"EventId,omitnil,omitempty" name:"EventId"`
+}
+
+type AddOrModifyVirusWhiteListRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>MD5 list.</p>
+	Md5List []*string `json:"Md5List,omitnil,omitempty" name:"Md5List"`
+
+	// <p>Scope: 1 indicates all images, and 0 indicates selected images.</p>
+	Scope *uint64 `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// <p>Rule ID. Presence of rule ID values indicates modification, and absence of rule ID values indicates addition.</p>
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// <p>Image ID list, maximum 1,000. Required when Scope is 0 (selected images).</p>
+	ImageIds []*string `json:"ImageIds,omitnil,omitempty" name:"ImageIds"`
+
+	// <p>Rule remarks, with a maximum of 256 characters.</p>
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// <p>Event ID.</p>
+	EventId *uint64 `json:"EventId,omitnil,omitempty" name:"EventId"`
+}
+
+func (r *AddOrModifyVirusWhiteListRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddOrModifyVirusWhiteListRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Md5List")
+	delete(f, "Scope")
+	delete(f, "Id")
+	delete(f, "ImageIds")
+	delete(f, "Remark")
+	delete(f, "EventId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddOrModifyVirusWhiteListRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AddOrModifyVirusWhiteListRuleResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type AddOrModifyVirusWhiteListRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *AddOrModifyVirusWhiteListRuleResponseParams `json:"Response"`
+}
+
+func (r *AddOrModifyVirusWhiteListRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddOrModifyVirusWhiteListRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type AffectedNodeItem struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
@@ -1832,35 +2070,39 @@ type AffectedWorkloadItem struct {
 }
 
 type AssetClusterListItem struct {
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
 
-	// Cluster name
+	// <p>Cluster name.</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Cluster status
-	// `CSR_RUNNING`: Running
-	// `CSR_EXCEPTION`: Abnormal
-	// `CSR_DEL`: Deleted
+	// <p>Cluster status<br>CSR_RUNNING: Running<br>CSR_EXCEPTION: Exception<br>CSR_DEL: Deleted</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Bound rule name
+	// <p>ID of the bound cluster</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BindRuleID *string `json:"BindRuleID,omitnil,omitempty" name:"BindRuleID"`
+
+	// <p>Binding rule name</p>
 	BindRuleName *string `json:"BindRuleName,omitnil,omitempty" name:"BindRuleName"`
 
-	// Cluster type:
-	// `CT_TKE`: TKE cluster
-	// `CT_USER_CREATE`: External cluster
-	// `CT_TKE_SERVERLESS`: TKE Serverless cluster
+	// <p>ClusterType:<br>CT_TKE: tke cluster;<br>CT_USER_CREATE: user-built cluster;<br>CT_TKE_SERVERLESS: TKE Serverless Cluster;</p>
 	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
 
-	// Cluster version
+	// <p>Cluster edition</p>
 	ClusterVersion *string `json:"ClusterVersion,omitnil,omitempty" name:"ClusterVersion"`
 
-	// MEM usage
+	// <p>Memory capacity</p>
 	MemLimit *int64 `json:"MemLimit,omitnil,omitempty" name:"MemLimit"`
 
-	// cpu
+	// <p>cpu</p>
 	CpuLimit *int64 `json:"CpuLimit,omitnil,omitempty" name:"CpuLimit"`
+
+	// <p>Cluster audit switch status:<br>Closed/Closing/CloseFailed/Opened/Opening/OpenFailed</p>
+	ClusterAuditStatus *string `json:"ClusterAuditStatus,omitnil,omitempty" name:"ClusterAuditStatus"`
+
+	// <p>Access status:<br>Not connected: AccessedNone<br>Defended: AccessedDefended<br>No protection: AccessedInstalled<br>Partial protection: AccessedPartialDefence<br>Access exception: AccessedException<br>Uninstallation exception: AccessedUninstallException<br>Accessing: AccessedInstalling<br>Uninstalling: AccessedUninstalling</p>
+	AccessedStatus *string `json:"AccessedStatus,omitnil,omitempty" name:"AccessedStatus"`
 }
 
 type AssetFilters struct {
@@ -1941,24 +2183,19 @@ type AutoAuthorizedRuleHostInfo struct {
 }
 
 type CKafkaInstanceInfo struct {
-	// Instance ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance ID.
 	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
-	// Instance name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance name.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Topic list
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TopicList []*CKafkaTopicInfo `json:"TopicList,omitnil,omitempty" name:"TopicList"`
 
-	// Route list
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Routing List
 	RouteList []*CkafkaRouteInfo `json:"RouteList,omitnil,omitempty" name:"RouteList"`
 
-	// Kafka version number
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Kafka Version Number
 	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
 }
 
@@ -2085,8 +2322,7 @@ func (r *CheckRepeatAssetImageRegistryRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CheckRepeatAssetImageRegistryResponseParams struct {
-	// Whether it is repeated
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Check for duplicates.
 	IsRepeat *bool `json:"IsRepeat,omitnil,omitempty" name:"IsRepeat"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2110,32 +2346,26 @@ func (r *CheckRepeatAssetImageRegistryResponse) FromJsonString(s string) error {
 }
 
 type CkafkaRouteInfo struct {
-	// Route ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Routing ID
 	RouteID *int64 `json:"RouteID,omitnil,omitempty" name:"RouteID"`
 
 	// Domain name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// Domain port
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Domain Port
 	DomainPort *uint64 `json:"DomainPort,omitnil,omitempty" name:"DomainPort"`
 
-	// VIP
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Virtual IP
 	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
-	// VIP type
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Virtual IP Type
 	VipType *int64 `json:"VipType,omitnil,omitempty" name:"VipType"`
 
 	// Access type
-	// // `0`: PLAINTEXT (plaintext method, which does not carry user information and is supported for legacy versions and Community Edition)
-	// 	// `1`: SASL_PLAINTEXT (plaintext method, which authenticates the login through SASL before data start and is supported only for Community Edition)
-	// 	// `2`: SSL (SSL-encrypted communication, which does not carry user information and is supported for legacy versions and Community Edition)
-	// 	// `3`: SASL_SSL (SSL-encrypted communication, which authenticates the login through SASL before data start and is supported only for Community Edition)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// 0: PLAINTEXT (plaintext mode, no user information included, supported by older versions and community edition)
+	// 	SASL_PLAINTEXT (plaintext mode, however, login authentication with SASL is performed at the start of data transmission, only supported by community version).
+	// 	2: SSL (SSL encrypted communication, no user information included, supported by older versions and community edition)
+	// 	3: SASL_SSL (SSL encrypted communication. Authenticate the login with SASL when data transmission starts. Only supported by community version)
 	AccessType *int64 `json:"AccessType,omitnil,omitempty" name:"AccessType"`
 }
 
@@ -2143,12 +2373,10 @@ type ClsLogsetInfo struct {
 	// Logset ID
 	LogsetID *string `json:"LogsetID,omitnil,omitempty" name:"LogsetID"`
 
-	// Logset name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// logset name
 	LogsetName *string `json:"LogsetName,omitnil,omitempty" name:"LogsetName"`
 
-	// List of CLS topics
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// CLS Topic List
 	TopicList []*ClsTopicInfo `json:"TopicList,omitnil,omitempty" name:"TopicList"`
 }
 
@@ -2161,79 +2389,69 @@ type ClsTopicInfo struct {
 }
 
 type ClusterCheckItem struct {
-	// Unique ID of the check item
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Unique Check Item ID
 	CheckItemId *int64 `json:"CheckItemId,omitnil,omitempty" name:"CheckItemId"`
 
 	// Name of the risk item
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Detailed description of the check item
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Check Item Details
 	ItemDetail *string `json:"ItemDetail,omitnil,omitempty" name:"ItemDetail"`
 
-	// Severity. Valid values: `Serious` (critical); `High` (high); `Middle` (medium); `Hint` (prompt).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Threat Level: Serious, High, Medium, Hint
 	RiskLevel *string `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
 
-	// Check target and risky target. Valid values: `Runc`, `Kubelet`, `Containerd`, `Pods`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Check Object and Risk Object: Runc, Kubelet, Containerd, and Pods
 	RiskTarget *string `json:"RiskTarget,omitnil,omitempty" name:"RiskTarget"`
 
-	// Risk type. Valid values: `CVERisk` (vulnerability risk); `ConfigRisk` (configuration risk).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Risk Category. CVERisk: Vulnerability Risk; ConfigRisk: Configuration Risk
 	RiskType *string `json:"RiskType,omitnil,omitempty" name:"RiskType"`
 
-	// Risk type of the check item. Valid values: `PrivilegePromotion` (privilege escalation); `RefuseService` (service rejected); `DirectoryEscape` (directory traversal); `UnauthorizedAccess` (unauthorized access); `PrivilegeAndAccessControl` (permissions, privileges, and access controls); `SensitiveInfoLeak` (sensitive data leakage).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Risk Type of Check Item. PrivilegePromotion: Privilege Promotion; RefuseService: Refuse of Service; DirectoryEscape: Directory Traversal; UnauthorizedAccess: Unauthorized Access; PrivilegeAndAccessControl: Permission and Access Control Issues; SensitiveInfoLeak: Sensitive Information Leakage
 	RiskAttribute *string `json:"RiskAttribute,omitnil,omitempty" name:"RiskAttribute"`
 
-	// Risk characteristic and tag. Valid values: `ExistEXP` (an EXP exists); `ExistPOC` (a POC exists); `NoNeedReboot` (restart not required); `ServerRestart` (service restart); `RemoteInfoLeak` (remote information leakage); `RemoteRefuseService` (remote denial of service); `RemoteExploit` (remote exploit); `RemoteExecute` (remote execution).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Risk Characteristics Tag
+	// ExistEXP: With EXP
+	// ExistPOC: With POD
+	// NoNeedReboot: No Need of Reboot
+	// ServerRestart: Service Reboot
+	// RemoteInfoLeak: Remote Information Leakage
+	// RemoteRefuseService: Remote Refuse Service
+	// RemoteExploit: Remote Exploitation
+	// RemoteExecute: Remote Execution
 	RiskProperty *string `json:"RiskProperty,omitnil,omitempty" name:"RiskProperty"`
 
-	// CVE No.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// CVE id
 	CVENumber *string `json:"CVENumber,omitnil,omitempty" name:"CVENumber"`
 
 	// Disclosure time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	DiscoverTime *string `json:"DiscoverTime,omitnil,omitempty" name:"DiscoverTime"`
 
 	// Solution
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
 
-	// CVSS information, which is used for drawing.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// CVSS Information, Used for Drawing
 	CVSS *string `json:"CVSS,omitnil,omitempty" name:"CVSS"`
 
 	// CVSS score
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	CVSSScore *string `json:"CVSSScore,omitnil,omitempty" name:"CVSSScore"`
 
 	// Reference link
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	RelateLink *string `json:"RelateLink,omitnil,omitempty" name:"RelateLink"`
 
-	// Affected type. Valid values: `Node`, `Workload`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Impact Type: Node or Workload
 	AffectedType *string `json:"AffectedType,omitnil,omitempty" name:"AffectedType"`
 
-	// Affected version information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Affected Version Information
 	AffectedVersion *string `json:"AffectedVersion,omitnil,omitempty" name:"AffectedVersion"`
 
-	// Number of ignored assets
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of Ignored Assets
 	IgnoredAssetNum *int64 `json:"IgnoredAssetNum,omitnil,omitempty" name:"IgnoredAssetNum"`
 
-	// Whether to ignore the check item
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to Ignore the Check Item
 	IsIgnored *bool `json:"IsIgnored,omitnil,omitempty" name:"IsIgnored"`
 
-	// Impact assessment
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Affected Critique
 	RiskAssessment *string `json:"RiskAssessment,omitnil,omitempty" name:"RiskAssessment"`
 }
 
@@ -2289,11 +2507,17 @@ type ClusterInfoItem struct {
 	// Cluster region
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Status of the monitoring component. Valid values: `Defender_Uninstall`, `Defender_Normal`, `Defender_Error`, `Defender_Installing`.
+	// Protection Status 
+	// Defended 
+	// Unprotected
+	// Partially defended
 	DefenderStatus *string `json:"DefenderStatus,omitnil,omitempty" name:"DefenderStatus"`
 
 	// Cluster status
 	ClusterStatus *string `json:"ClusterStatus,omitnil,omitempty" name:"ClusterStatus"`
+
+	// Cluster operation sub-status.
+	ClusterSubStatus *string `json:"ClusterSubStatus,omitnil,omitempty" name:"ClusterSubStatus"`
 
 	// Cluster check mode. Valid values: `Cluster_Normal`, `Cluster_Actived`.
 	ClusterCheckMode *string `json:"ClusterCheckMode,omitnil,omitempty" name:"ClusterCheckMode"`
@@ -2327,6 +2551,51 @@ type ClusterInfoItem struct {
 
 	// Task creation time and check time
 	TaskCreateTime *string `json:"TaskCreateTime,omitnil,omitempty" name:"TaskCreateTime"`
+
+	// Access status
+	// Not connected
+	// Defended
+	// Unprotected: AccessedInstalled
+	// Partial protection: AccessedPartialDefence
+	// Access exception: AccessedException
+	// Uninstallation Exception: AccessedUninstallException
+	// ACCESSING: installing
+	// Uninstalling: AccessedUninstalling
+	AccessedStatus *string `json:"AccessedStatus,omitnil,omitempty" name:"AccessedStatus"`
+
+	// Reason for Access Failure
+	AccessedSubStatus *string `json:"AccessedSubStatus,omitnil,omitempty" name:"AccessedSubStatus"`
+
+	// Access/Uninstallation failure reason.
+	AccessedErrorReason *string `json:"AccessedErrorReason,omitnil,omitempty" name:"AccessedErrorReason"`
+
+	// Total number of nodes
+	NodeCount *uint64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
+
+	// Offline Node Count
+	OffLineNodeCount *uint64 `json:"OffLineNodeCount,omitnil,omitempty" name:"OffLineNodeCount"`
+
+	// Number of Nodes Without Agent Installed
+	UnInstallAgentNodeCount *uint64 `json:"UnInstallAgentNodeCount,omitnil,omitempty" name:"UnInstallAgentNodeCount"`
+
+	// Number of billing cores (elastic billing cores + regular billing cores).
+	ChargeCoresCnt *uint64 `json:"ChargeCoresCnt,omitnil,omitempty" name:"ChargeCoresCnt"`
+
+
+	MasterAddresses []*string `json:"MasterAddresses,omitnil,omitempty" name:"MasterAddresses"`
+
+
+	CoresCnt *uint64 `json:"CoresCnt,omitnil,omitempty" name:"CoresCnt"`
+
+	// Cluster audit switch status:
+	// Closed / Closing / CloseFailed / Opened / Opening / OpenFailed
+	ClusterAuditStatus *string `json:"ClusterAuditStatus,omitnil,omitempty" name:"ClusterAuditStatus"`
+
+	// Information on the failure to enable/disable cluster audit.
+	ClusterAuditFailedInfo *string `json:"ClusterAuditFailedInfo,omitnil,omitempty" name:"ClusterAuditFailedInfo"`
+
+	// Owner name.
+	OwnerName *string `json:"OwnerName,omitnil,omitempty" name:"OwnerName"`
 }
 
 type ClusterRiskItem struct {
@@ -2347,56 +2616,50 @@ type ClusterRiskItem struct {
 }
 
 type ComplianceAffectedAsset struct {
-	// Unique ID of the customer asset
+	// <p>Unique asset item ID allocated to the customer.</p>
 	CustomerAssetId *uint64 `json:"CustomerAssetId,omitnil,omitempty" name:"CustomerAssetId"`
 
-	// Asset name
+	// <p>Asset item name.</p>
 	AssetName *string `json:"AssetName,omitnil,omitempty" name:"AssetName"`
 
-	// Asset type
+	// <p>Asset item type.</p>
 	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 
-	// Check status
-	// 
-	// `CHECK_INIT`: To be checked.
-	// 
-	// `CHECK_RUNNING`: Checking.
-	// 
-	// `CHECK_FINISHED`: Checked.
-	// 
-	// `CHECK_FAILED`: Check failed.
+	// <p>Check status.</p><p>CHECK_INIT: pending check</p><p>CHECK_RUNNING: checking</p><p>CHECK_FINISHED: check completed</p><p>CHECK_FAILED: check failed</p>
 	CheckStatus *string `json:"CheckStatus,omitnil,omitempty" name:"CheckStatus"`
 
-	// Node name
+	// <p>Node name.</p>
 	NodeName *string `json:"NodeName,omitnil,omitempty" name:"NodeName"`
 
-	// Last check time in the format of "YYYY-MM-DD HH:m::SS"
-	// 
-	// It is "0000-00-00 00:00:00" if no check has been performed.
+	// <p>Last check time in the format of YYYY-MM-DD HH:m::SS.</p><p>If never checked, this field will be 0000-00-00 00:00:00.</p>
 	LastCheckTime *string `json:"LastCheckTime,omitnil,omitempty" name:"LastCheckTime"`
 
-	// Check result. Valid values:
-	// 
-	// `RESULT_FAILED`: Failed.
-	// 
-	// `RESULT_PASSED`: Passed.
+	// <p>Check result. Valid values:</p><p>RESULT_FAILED: failed</p><p>RESULT_PASSED: passed</p>
 	CheckResult *string `json:"CheckResult,omitnil,omitempty" name:"CheckResult"`
 
-	// Server IP
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Host IP address.</p>
 	HostIP *string `json:"HostIP,omitnil,omitempty" name:"HostIP"`
 
-	// Image tag
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Image tag.</p>
 	ImageTag *string `json:"ImageTag,omitnil,omitempty" name:"ImageTag"`
 
-	// Verification information of the check item
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Check item verification information.</p>
 	VerifyInfo *string `json:"VerifyInfo,omitnil,omitempty" name:"VerifyInfo"`
 
-	// Instance ID
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// <p>Host instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Image repository information.</p>
+	ImageRegistryInfo *ImageRegistryInfo `json:"ImageRegistryInfo,omitnil,omitempty" name:"ImageRegistryInfo"`
+
+	// <p>Cluster ID.</p>
+	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
+
+	// <p>Cluster name.</p>
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// <p>Unique asset ID.</p><p>Default value: -</p>
+	AssetUniqueID *string `json:"AssetUniqueID,omitnil,omitempty" name:"AssetUniqueID"`
 }
 
 type ComplianceAssetDetailInfo struct {
@@ -2431,14 +2694,12 @@ type ComplianceAssetDetailInfo struct {
 	// Number of check items that the asset failed
 	FailedPolicyItemCount *uint64 `json:"FailedPolicyItemCount,omitnil,omitempty" name:"FailedPolicyItemCount"`
 
-	// Last check time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Last detection time.
 	LastCheckTime *string `json:"LastCheckTime,omitnil,omitempty" name:"LastCheckTime"`
 
-	// Check result. Valid values:
-	// `RESULT_FAILED`: Failed.
-	// `RESULT_PASSED`: Passed.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Detection result:
+	// RESULT_FAILED: failed.
+	// RESULT_PASSED: Passed.
 	CheckResult *string `json:"CheckResult,omitnil,omitempty" name:"CheckResult"`
 
 	// Asset status
@@ -2453,57 +2714,53 @@ type ComplianceAssetDetailInfo struct {
 }
 
 type ComplianceAssetInfo struct {
-	// Customer asset ID
+	// <p>Customer asset ID.</p>
 	CustomerAssetId *uint64 `json:"CustomerAssetId,omitnil,omitempty" name:"CustomerAssetId"`
 
-	// Asset type
+	// <p>Asset category.</p>
 	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 
-	// Asset name
+	// <p>Asset name.</p>
 	AssetName *string `json:"AssetName,omitnil,omitempty" name:"AssetName"`
 
-	// This field is the image tag when the asset is an image.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>When the asset is an image, this field represents the image tag.</p>
 	ImageTag *string `json:"ImageTag,omitnil,omitempty" name:"ImageTag"`
 
-	// Server IP of the asset
+	// <p>The host IP address where the asset is located.</p>
 	HostIP *string `json:"HostIP,omitnil,omitempty" name:"HostIP"`
 
-	// Node name of the asset
+	// <p>Name of the node to which the asset belongs.</p>
 	NodeName *string `json:"NodeName,omitnil,omitempty" name:"NodeName"`
 
-	// Check status
-	// 
-	// `CHECK_INIT`: To be checked.
-	// 
-	// `CHECK_RUNNING`: Checking.
-	// 
-	// `CHECK_FINISHED`: Checked.
-	// 
-	// `CHECK_FAILED`: Check failed.
+	// <p>Check status.</p><p>CHECK_INIT: pending check</p><p>CHECK_RUNNING: checking</p><p>CHECK_FINISHED: check completed</p><p>CHECK_FAILED: check failed</p>
 	CheckStatus *string `json:"CheckStatus,omitnil,omitempty" name:"CheckStatus"`
 
-	// Number of check items that the asset passed
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Number of check items passed by this type of asset.</p>
 	PassedPolicyItemCount *uint64 `json:"PassedPolicyItemCount,omitnil,omitempty" name:"PassedPolicyItemCount"`
 
-	// Number of check items that the asset failed
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Number of check items failed by this type of asset.</p>
 	FailedPolicyItemCount *uint64 `json:"FailedPolicyItemCount,omitnil,omitempty" name:"FailedPolicyItemCount"`
 
-	// Last check time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Last check time.</p>
 	LastCheckTime *string `json:"LastCheckTime,omitnil,omitempty" name:"LastCheckTime"`
 
-	// Check result. Valid values:
-	// `RESULT_FAILED`: Failed.
-	// `RESULT_PASSED`: Passed.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Check result:<br>RESULT_FAILED: failed<br>RESULT_PASSED: passed</p>
 	CheckResult *string `json:"CheckResult,omitnil,omitempty" name:"CheckResult"`
 
-	// Node instance ID
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// <p>Host node instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Image repository information.</p>
+	ImageRegistryInfo *ImageRegistryInfo `json:"ImageRegistryInfo,omitnil,omitempty" name:"ImageRegistryInfo"`
+
+	// <p>Cluster ID.</p>
+	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
+
+	// <p>Cluster name.</p>
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// <p>Unique asset ID.</p><p>Default value: -</p>
+	AssetUniqueID *string `json:"AssetUniqueID,omitnil,omitempty" name:"AssetUniqueID"`
 }
 
 type ComplianceAssetPolicyItem struct {
@@ -2535,25 +2792,21 @@ type ComplianceAssetPolicyItem struct {
 	// `CHECK_FAILED`: Check failed.
 	CheckStatus *string `json:"CheckStatus,omitnil,omitempty" name:"CheckStatus"`
 
-	// Check result
-	// `RESULT_PASSED`: Passed.
-	// `RESULT_FAILED`: Failed.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// detection result
+	// RESULT_PASSED: Passed.
+	// RESULT_FAILED: failed
 	CheckResult *string `json:"CheckResult,omitnil,omitempty" name:"CheckResult"`
 
-	// Allowed item ID of the check item. If it exists and is not `0`, the check item is ignored.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// ID of the allowlist item corresponding to the detection item. If it exists and is not 0, it means the detection item is ignored by the user.
 	WhitelistId *uint64 `json:"WhitelistId,omitnil,omitempty" name:"WhitelistId"`
 
 	// Handling suggestion
 	FixSuggestion *string `json:"FixSuggestion,omitnil,omitempty" name:"FixSuggestion"`
 
-	// Last check time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Last detection time.
 	LastCheckTime *string `json:"LastCheckTime,omitnil,omitempty" name:"LastCheckTime"`
 
 	// Verification information
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	VerifyInfo *string `json:"VerifyInfo,omitnil,omitempty" name:"VerifyInfo"`
 }
 
@@ -2585,8 +2838,7 @@ type ComplianceAssetSummary struct {
 	// `CHECK_FAILED`: Check failed.
 	CheckStatus *string `json:"CheckStatus,omitnil,omitempty" name:"CheckStatus"`
 
-	// Check progress. Value range: 0-100. This field is valid only if the check is running.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The detection progress of this category is a number between 0 and 100. If not in progress, field not found.
 	CheckProgress *float64 `json:"CheckProgress,omitnil,omitempty" name:"CheckProgress"`
 
 	// Number of check items that the asset passed
@@ -2622,24 +2874,29 @@ type ComplianceAssetSummary struct {
 	// Number of assets that failed the check
 	ScanFailedAssetCount *uint64 `json:"ScanFailedAssetCount,omitnil,omitempty" name:"ScanFailedAssetCount"`
 
-	// Last check duration in seconds
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Time taken for last detection, in seconds.
 	CheckCostTime *float64 `json:"CheckCostTime,omitnil,omitempty" name:"CheckCostTime"`
 
-	// Last check time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Last detection time.
 	LastCheckTime *string `json:"LastCheckTime,omitnil,omitempty" name:"LastCheckTime"`
 
 	// Scheduled check rule
 	PeriodRule *CompliancePeriodTaskRule `json:"PeriodRule,omitnil,omitempty" name:"PeriodRule"`
 
-	// Total number of enabled check items
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Total Number of Enabled Check Items
 	OpenPolicyItemCount *uint64 `json:"OpenPolicyItemCount,omitnil,omitempty" name:"OpenPolicyItemCount"`
 
-	// Total number of ignored check items
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Total Number of Ignored Check Items
 	IgnoredPolicyItemCount *uint64 `json:"IgnoredPolicyItemCount,omitnil,omitempty" name:"IgnoredPolicyItemCount"`
+
+	// Total number of detection items.
+	TotalPolicyItemCount *uint64 `json:"TotalPolicyItemCount,omitnil,omitempty" name:"TotalPolicyItemCount"`
+
+	// Detection hosts
+	DetectHostCount *uint64 `json:"DetectHostCount,omitnil,omitempty" name:"DetectHostCount"`
+
+	// Remaining time of the current task, in seconds.
+	LeftTime *uint64 `json:"LeftTime,omitnil,omitempty" name:"LeftTime"`
 }
 
 type ComplianceBenchmarkStandard struct {
@@ -2671,8 +2928,7 @@ type ComplianceContainerDetailInfo struct {
 	// Container ID on the server
 	ContainerId *string `json:"ContainerId,omitnil,omitempty" name:"ContainerId"`
 
-	// Pod name of the container
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Name of the Pod the container belongs to.
 	PodName *string `json:"PodName,omitnil,omitempty" name:"PodName"`
 }
 
@@ -2688,13 +2944,14 @@ type ComplianceFilters struct {
 }
 
 type ComplianceHostDetailInfo struct {
-	// Docker version on the server
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Docker version on the host.
 	DockerVersion *string `json:"DockerVersion,omitnil,omitempty" name:"DockerVersion"`
 
-	// K8s version on the server
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// K8S version on the host.
 	K8SVersion *string `json:"K8SVersion,omitnil,omitempty" name:"K8SVersion"`
+
+	// Containerd Version on Host
+	ContainerdVersion *string `json:"ContainerdVersion,omitnil,omitempty" name:"ContainerdVersion"`
 }
 
 type ComplianceImageDetailInfo struct {
@@ -2707,18 +2964,15 @@ type ComplianceImageDetailInfo struct {
 	// Image tag
 	ImageTag *string `json:"ImageTag,omitnil,omitempty" name:"ImageTag"`
 
-	// Path of the remote repository of the image
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Path of the remote repository where the mirror resides.
 	Repository *string `json:"Repository,omitnil,omitempty" name:"Repository"`
 }
 
 type ComplianceK8SDetailInfo struct {
-	// K8s cluster name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Name of the K8S cluster.
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// K8s cluster version
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Kubernetes Cluster Version
 	ClusterVersion *string `json:"ClusterVersion,omitnil,omitempty" name:"ClusterVersion"`
 }
 
@@ -2734,7 +2988,6 @@ type CompliancePeriodTask struct {
 	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 
 	// Last trigger time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	LastTriggerTime *string `json:"LastTriggerTime,omitnil,omitempty" name:"LastTriggerTime"`
 
 	// Total number of check items
@@ -2754,8 +3007,7 @@ type CompliancePeriodTaskRule struct {
 	// Execution time in the format of "HH:mm:SS"
 	ExecutionTime *string `json:"ExecutionTime,omitnil,omitempty" name:"ExecutionTime"`
 
-	// Whether to enable
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether enabled
 	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 }
 
@@ -2789,8 +3041,7 @@ type CompliancePolicyItemSummary struct {
 	// Asset type of the check item
 	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 
-	// Last check time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Last detection time
 	LastCheckTime *string `json:"LastCheckTime,omitnil,omitempty" name:"LastCheckTime"`
 
 	// Check status
@@ -2804,22 +3055,18 @@ type CompliancePolicyItemSummary struct {
 	// `CHECK_FAILED`: Check failed.
 	CheckStatus *string `json:"CheckStatus,omitnil,omitempty" name:"CheckStatus"`
 
-	// Check result. Valid values: `RESULT_PASSED`: Passed.
+	// Detection result. RESULT_PASSED: Passed.
 	// 
-	// `RESULT_FAILED`: Failed.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// RESULT_FAILED: failed
 	CheckResult *string `json:"CheckResult,omitnil,omitempty" name:"CheckResult"`
 
-	// Number of assets that passed the check
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of assets passed detection
 	PassedAssetCount *uint64 `json:"PassedAssetCount,omitnil,omitempty" name:"PassedAssetCount"`
 
-	// Number of assets that failed the check
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of assets with detection failed
 	FailedAssetCount *uint64 `json:"FailedAssetCount,omitnil,omitempty" name:"FailedAssetCount"`
 
-	// Allowed item ID of the check item. If it exists and is not `0`, the check item is ignored.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// ID of the allowlist item corresponding to the detection item. If it exists and is not 0, it means the detection item is ignored by the user.
 	WhitelistId *uint64 `json:"WhitelistId,omitnil,omitempty" name:"WhitelistId"`
 
 	// Handling suggestion
@@ -2828,9 +3075,19 @@ type CompliancePolicyItemSummary struct {
 	// Compliance standard ID
 	BenchmarkStandardId *uint64 `json:"BenchmarkStandardId,omitnil,omitempty" name:"BenchmarkStandardId"`
 
-	// TCSS editions that support this check item
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Applicable Version for Check Items
 	ApplicableVersion *string `json:"ApplicableVersion,omitnil,omitempty" name:"ApplicableVersion"`
+
+	// Check Item Description
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Check Item Audit Method
+	AuditProcedure *string `json:"AuditProcedure,omitnil,omitempty" name:"AuditProcedure"`
+
+	// Whether enabled
+	// <li>0 Off</li>
+	// <li>1 Enable</li>
+	IsEnable *uint64 `json:"IsEnable,omitnil,omitempty" name:"IsEnable"`
 }
 
 type ComplianceScanFailedAsset struct {
@@ -2896,29 +3153,23 @@ type ComponentInfo struct {
 
 type ComponentsInfo struct {
 	// Component name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	//
 	// Deprecated: Component is deprecated.
 	Component *string `json:"Component,omitnil,omitempty" name:"Component"`
 
 	// Component version information
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
-	// Fixed version
-	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	// Repairable Version
 	FixedVersion *string `json:"FixedVersion,omitnil,omitempty" name:"FixedVersion"`
 
-	// Path
-	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	// Path.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-	// Type
-	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	// Type.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Add-on name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Component name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
@@ -2989,6 +3240,14 @@ func (r *ConfirmNetworkFirewallPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ConnDetectConfig struct {
+
+	Quuid *string `json:"Quuid,omitnil,omitempty" name:"Quuid"`
+
+
+	Uuid *string `json:"Uuid,omitnil,omitempty" name:"Uuid"`
+}
+
 type ContainerInfo struct {
 	// Container ID
 	ContainerID *string `json:"ContainerID,omitnil,omitempty" name:"ContainerID"`
@@ -3050,12 +3309,10 @@ type ContainerInfo struct {
 	// Sub-status of the network
 	NetSubStatus *string `json:"NetSubStatus,omitnil,omitempty" name:"NetSubStatus"`
 
-	// Isolation source
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Isolate source
 	IsolateSource *string `json:"IsolateSource,omitnil,omitempty" name:"IsolateSource"`
 
 	// Isolation time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsolateTime *string `json:"IsolateTime,omitnil,omitempty" name:"IsolateTime"`
 
 	// Super node ID
@@ -3079,10 +3336,10 @@ type ContainerInfo struct {
 	// Memory specification of the Pod
 	PodMem *int64 `json:"PodMem,omitnil,omitempty" name:"PodMem"`
 
-	// Cluster Name
+
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Cluster ID
+
 	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
 
 	// pod uid
@@ -3320,6 +3577,27 @@ type CreateAssetImageRegistryScanTaskOneKeyRequestParams struct {
 
 	// List of IDs of scanned images
 	Id []*uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// List of image IDs excluded from scanning.
+	ExcludeIDs []*uint64 `json:"ExcludeIDs,omitnil,omitempty" name:"ExcludeIDs"`
+
+
+	IsLatest *bool `json:"IsLatest,omitnil,omitempty" name:"IsLatest"`
+
+
+	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
+
+
+	RegistryType []*string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
+
+
+	Namespace []*string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+
+	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
+
+
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 }
 
 type CreateAssetImageRegistryScanTaskOneKeyRequest struct {
@@ -3336,6 +3614,21 @@ type CreateAssetImageRegistryScanTaskOneKeyRequest struct {
 
 	// List of IDs of scanned images
 	Id []*uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// List of image IDs excluded from scanning.
+	ExcludeIDs []*uint64 `json:"ExcludeIDs,omitnil,omitempty" name:"ExcludeIDs"`
+
+	IsLatest *bool `json:"IsLatest,omitnil,omitempty" name:"IsLatest"`
+
+	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
+
+	RegistryType []*string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
+
+	Namespace []*string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
+
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 }
 
 func (r *CreateAssetImageRegistryScanTaskOneKeyRequest) ToJsonString() string {
@@ -3354,6 +3647,13 @@ func (r *CreateAssetImageRegistryScanTaskOneKeyRequest) FromJsonString(s string)
 	delete(f, "Images")
 	delete(f, "ScanType")
 	delete(f, "Id")
+	delete(f, "ExcludeIDs")
+	delete(f, "IsLatest")
+	delete(f, "ScanScope")
+	delete(f, "RegistryType")
+	delete(f, "Namespace")
+	delete(f, "ContainerRunning")
+	delete(f, "Timeout")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAssetImageRegistryScanTaskOneKeyRequest has unknown keys!", "")
 	}
@@ -3362,7 +3662,7 @@ func (r *CreateAssetImageRegistryScanTaskOneKeyRequest) FromJsonString(s string)
 
 // Predefined struct for user
 type CreateAssetImageRegistryScanTaskOneKeyResponseParams struct {
-
+	// The task id 
 	TaskID *uint64 `json:"TaskID,omitnil,omitempty" name:"TaskID"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3387,51 +3687,57 @@ func (r *CreateAssetImageRegistryScanTaskOneKeyResponse) FromJsonString(s string
 
 // Predefined struct for user
 type CreateAssetImageRegistryScanTaskRequestParams struct {
-	// Whether to scan all images
+	// <p>Whether to scan all images.</p>
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// List of scanned images
+	// <p>List of images to be scanned.</p>
 	Images []*ImageInfo `json:"Images,omitnil,omitempty" name:"Images"`
 
-	// Array of scan types
+	// <p>Scan type array.</p>
 	ScanType []*string `json:"ScanType,omitnil,omitempty" name:"ScanType"`
 
-	// List of scanned images
+	// <p>List of images to be scanned.</p>
 	Id []*uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Filter
+	// <p>Filter conditions.</p>
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// List of images not to be scanned, which is used together with `Filters`.
+	// <p>List of images that do not need to be scanned, used in conjunction with Filters.</p>
 	ExcludeImageList []*uint64 `json:"ExcludeImageList,omitnil,omitempty" name:"ExcludeImageList"`
 
-	// Whether to scan only the latest repository images, which is used together with `Filters`.
+	// <p>Whether to scan only the latest version of the image in each repository, used in conjunction with Filters.</p>
 	OnlyScanLatest *bool `json:"OnlyScanLatest,omitnil,omitempty" name:"OnlyScanLatest"`
+
+	// <p>Task timeout duration.</p><p>Unit: seconds.</p>
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 }
 
 type CreateAssetImageRegistryScanTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// Whether to scan all images
+	// <p>Whether to scan all images.</p>
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// List of scanned images
+	// <p>List of images to be scanned.</p>
 	Images []*ImageInfo `json:"Images,omitnil,omitempty" name:"Images"`
 
-	// Array of scan types
+	// <p>Scan type array.</p>
 	ScanType []*string `json:"ScanType,omitnil,omitempty" name:"ScanType"`
 
-	// List of scanned images
+	// <p>List of images to be scanned.</p>
 	Id []*uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Filter
+	// <p>Filter conditions.</p>
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// List of images not to be scanned, which is used together with `Filters`.
+	// <p>List of images that do not need to be scanned, used in conjunction with Filters.</p>
 	ExcludeImageList []*uint64 `json:"ExcludeImageList,omitnil,omitempty" name:"ExcludeImageList"`
 
-	// Whether to scan only the latest repository images, which is used together with `Filters`.
+	// <p>Whether to scan only the latest version of the image in each repository, used in conjunction with Filters.</p>
 	OnlyScanLatest *bool `json:"OnlyScanLatest,omitnil,omitempty" name:"OnlyScanLatest"`
+
+	// <p>Task timeout duration.</p><p>Unit: seconds.</p>
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 }
 
 func (r *CreateAssetImageRegistryScanTaskRequest) ToJsonString() string {
@@ -3453,6 +3759,7 @@ func (r *CreateAssetImageRegistryScanTaskRequest) FromJsonString(s string) error
 	delete(f, "Filters")
 	delete(f, "ExcludeImageList")
 	delete(f, "OnlyScanLatest")
+	delete(f, "Timeout")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAssetImageRegistryScanTaskRequest has unknown keys!", "")
 	}
@@ -3461,7 +3768,7 @@ func (r *CreateAssetImageRegistryScanTaskRequest) FromJsonString(s string) error
 
 // Predefined struct for user
 type CreateAssetImageRegistryScanTaskResponseParams struct {
-
+	// <p>Returned task ID.</p>
 	TaskID *uint64 `json:"TaskID,omitnil,omitempty" name:"TaskID"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3486,59 +3793,89 @@ func (r *CreateAssetImageRegistryScanTaskResponse) FromJsonString(s string) erro
 
 // Predefined struct for user
 type CreateAssetImageScanSettingRequestParams struct {
-	// Switch
+	// <p>Switch.</p>
 	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Scan time
+	// <p>Scan start time<br>01:00 Time Division</p>
 	ScanTime *string `json:"ScanTime,omitnil,omitempty" name:"ScanTime"`
 
-	// Scan cycle
+	// <p>Scan cycle</p>
 	ScanPeriod *uint64 `json:"ScanPeriod,omitnil,omitempty" name:"ScanPeriod"`
 
-	// Trojan scan
+	// <p>Scan for trojans</p>
 	ScanVirus *bool `json:"ScanVirus,omitnil,omitempty" name:"ScanVirus"`
 
-	// Sensitive data scan
+	// <p>Scan sensitive information</p>
 	ScanRisk *bool `json:"ScanRisk,omitnil,omitempty" name:"ScanRisk"`
 
-	// Vulnerability scan
+	// <p>Scan for vulnerabilities</p>
 	ScanVul *bool `json:"ScanVul,omitnil,omitempty" name:"ScanVul"`
 
-	// All images
+	// <p>All images</p>
 	//
 	// Deprecated: All is deprecated.
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// Custom image
+	// <p>Custom Image</p>
 	Images []*string `json:"Images,omitnil,omitempty" name:"Images"`
+
+	// <p>Whether the image has running containers</p>
+	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
+
+	// <p>Scan range 0 all authorized images, 1 select mirror, 2 recommended scan, 3 cluster filtering scan</p><p>Value ranges from 0 to 3</p><p>Default value: 0</p>
+	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
+
+	// <p>Scan end time<br>02:00 Time Division</p>
+	ScanEndTime *string `json:"ScanEndTime,omitnil,omitempty" name:"ScanEndTime"`
+
+	// <p>Exclude mirror scan</p>
+	ExcludeImages []*string `json:"ExcludeImages,omitnil,omitempty" name:"ExcludeImages"`
+
+	// <p>Cluster ID.</p>
+	ClusterIDs []*string `json:"ClusterIDs,omitnil,omitempty" name:"ClusterIDs"`
 }
 
 type CreateAssetImageScanSettingRequest struct {
 	*tchttp.BaseRequest
 	
-	// Switch
+	// <p>Switch.</p>
 	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Scan time
+	// <p>Scan start time<br>01:00 Time Division</p>
 	ScanTime *string `json:"ScanTime,omitnil,omitempty" name:"ScanTime"`
 
-	// Scan cycle
+	// <p>Scan cycle</p>
 	ScanPeriod *uint64 `json:"ScanPeriod,omitnil,omitempty" name:"ScanPeriod"`
 
-	// Trojan scan
+	// <p>Scan for trojans</p>
 	ScanVirus *bool `json:"ScanVirus,omitnil,omitempty" name:"ScanVirus"`
 
-	// Sensitive data scan
+	// <p>Scan sensitive information</p>
 	ScanRisk *bool `json:"ScanRisk,omitnil,omitempty" name:"ScanRisk"`
 
-	// Vulnerability scan
+	// <p>Scan for vulnerabilities</p>
 	ScanVul *bool `json:"ScanVul,omitnil,omitempty" name:"ScanVul"`
 
-	// All images
+	// <p>All images</p>
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// Custom image
+	// <p>Custom Image</p>
 	Images []*string `json:"Images,omitnil,omitempty" name:"Images"`
+
+	// <p>Whether the image has running containers</p>
+	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
+
+	// <p>Scan range 0 all authorized images, 1 select mirror, 2 recommended scan, 3 cluster filtering scan</p><p>Value ranges from 0 to 3</p><p>Default value: 0</p>
+	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
+
+	// <p>Scan end time<br>02:00 Time Division</p>
+	ScanEndTime *string `json:"ScanEndTime,omitnil,omitempty" name:"ScanEndTime"`
+
+	// <p>Exclude mirror scan</p>
+	ExcludeImages []*string `json:"ExcludeImages,omitnil,omitempty" name:"ExcludeImages"`
+
+	// <p>Cluster ID.</p>
+	ClusterIDs []*string `json:"ClusterIDs,omitnil,omitempty" name:"ClusterIDs"`
 }
 
 func (r *CreateAssetImageScanSettingRequest) ToJsonString() string {
@@ -3561,6 +3898,11 @@ func (r *CreateAssetImageScanSettingRequest) FromJsonString(s string) error {
 	delete(f, "ScanVul")
 	delete(f, "All")
 	delete(f, "Images")
+	delete(f, "ContainerRunning")
+	delete(f, "ScanScope")
+	delete(f, "ScanEndTime")
+	delete(f, "ExcludeImages")
+	delete(f, "ClusterIDs")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAssetImageScanSettingRequest has unknown keys!", "")
 	}
@@ -3591,53 +3933,83 @@ func (r *CreateAssetImageScanSettingResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAssetImageScanTaskRequestParams struct {
-	// Whether to scan all images.
+	// <p>Whether to scan all images; select one from all images, image list, and filter by condition.</p>
 	//
 	// Deprecated: All is deprecated.
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// List of images to be scanned.
+	// <p>List of images to scan; choose one from all images, image list, and filter by condition.</p>
 	Images []*string `json:"Images,omitnil,omitempty" name:"Images"`
 
-	// Scan for vulnerabilities.
+	// <p>Scan vulnerabilities; select one from vulnerability, Trojan, and risk.</p>
 	ScanVul *bool `json:"ScanVul,omitnil,omitempty" name:"ScanVul"`
 
-	// Scan for trojans.
+	// <p>Scan for trojans; select either vulnerability, Trojan or risk.</p>
 	ScanVirus *bool `json:"ScanVirus,omitnil,omitempty" name:"ScanVirus"`
 
-	// Scan for risks.
+	// <p>Scan risk; select one from vulnerability, Trojan, and risk.</p>
 	ScanRisk *bool `json:"ScanRisk,omitnil,omitempty" name:"ScanRisk"`
 
-	// Filter
+	// <p>Filter images by conditions; select one from all images, image list, and filter by condition.</p>
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Specified image IDs to be excluded
+	// <p>Filter images by conditions and exclude individual images</p>
 	ExcludeImageIds []*string `json:"ExcludeImageIds,omitnil,omitempty" name:"ExcludeImageIds"`
+
+	// <p>Whether the image has running containers</p>
+	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
+
+	// <p>Scan range 0 all authorized images, 1 selected images, 2 recommended scan, 3 cluster scan</p><p>Value ranges from 0 to 3</p><p>Default value: 0</p>
+	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
+
+	// <p>Task timeout duration unit seconds, default 1 hour.</p>
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// <p>One-click scan task. Default false indicates non-one-click scan, true one-click scan.</p>
+	IsOneClickScanningTask *bool `json:"IsOneClickScanningTask,omitnil,omitempty" name:"IsOneClickScanningTask"`
+
+	// <p>Cluster ID.</p>
+	ClusterIDs []*string `json:"ClusterIDs,omitnil,omitempty" name:"ClusterIDs"`
 }
 
 type CreateAssetImageScanTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// Whether to scan all images.
+	// <p>Whether to scan all images; select one from all images, image list, and filter by condition.</p>
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// List of images to be scanned.
+	// <p>List of images to scan; choose one from all images, image list, and filter by condition.</p>
 	Images []*string `json:"Images,omitnil,omitempty" name:"Images"`
 
-	// Scan for vulnerabilities.
+	// <p>Scan vulnerabilities; select one from vulnerability, Trojan, and risk.</p>
 	ScanVul *bool `json:"ScanVul,omitnil,omitempty" name:"ScanVul"`
 
-	// Scan for trojans.
+	// <p>Scan for trojans; select either vulnerability, Trojan or risk.</p>
 	ScanVirus *bool `json:"ScanVirus,omitnil,omitempty" name:"ScanVirus"`
 
-	// Scan for risks.
+	// <p>Scan risk; select one from vulnerability, Trojan, and risk.</p>
 	ScanRisk *bool `json:"ScanRisk,omitnil,omitempty" name:"ScanRisk"`
 
-	// Filter
+	// <p>Filter images by conditions; select one from all images, image list, and filter by condition.</p>
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Specified image IDs to be excluded
+	// <p>Filter images by conditions and exclude individual images</p>
 	ExcludeImageIds []*string `json:"ExcludeImageIds,omitnil,omitempty" name:"ExcludeImageIds"`
+
+	// <p>Whether the image has running containers</p>
+	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
+
+	// <p>Scan range 0 all authorized images, 1 selected images, 2 recommended scan, 3 cluster scan</p><p>Value ranges from 0 to 3</p><p>Default value: 0</p>
+	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
+
+	// <p>Task timeout duration unit seconds, default 1 hour.</p>
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// <p>One-click scan task. Default false indicates non-one-click scan, true one-click scan.</p>
+	IsOneClickScanningTask *bool `json:"IsOneClickScanningTask,omitnil,omitempty" name:"IsOneClickScanningTask"`
+
+	// <p>Cluster ID.</p>
+	ClusterIDs []*string `json:"ClusterIDs,omitnil,omitempty" name:"ClusterIDs"`
 }
 
 func (r *CreateAssetImageScanTaskRequest) ToJsonString() string {
@@ -3659,6 +4031,11 @@ func (r *CreateAssetImageScanTaskRequest) FromJsonString(s string) error {
 	delete(f, "ScanRisk")
 	delete(f, "Filters")
 	delete(f, "ExcludeImageIds")
+	delete(f, "ContainerRunning")
+	delete(f, "ScanScope")
+	delete(f, "Timeout")
+	delete(f, "IsOneClickScanningTask")
+	delete(f, "ClusterIDs")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAssetImageScanTaskRequest has unknown keys!", "")
 	}
@@ -3667,7 +4044,7 @@ func (r *CreateAssetImageScanTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAssetImageScanTaskResponseParams struct {
-	// Task ID
+	// <p>Task ID.</p>
 	TaskID *string `json:"TaskID,omitnil,omitempty" name:"TaskID"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3847,6 +4224,60 @@ func (r *CreateCheckComponentResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateClusterAccessRequestParams struct {
+	// Cluster ID
+	ClusterIDs []*string `json:"ClusterIDs,omitnil,omitempty" name:"ClusterIDs"`
+}
+
+type CreateClusterAccessRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterIDs []*string `json:"ClusterIDs,omitnil,omitempty" name:"ClusterIDs"`
+}
+
+func (r *CreateClusterAccessRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateClusterAccessRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterIDs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClusterAccessRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateClusterAccessResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateClusterAccessResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateClusterAccessResponseParams `json:"Response"`
+}
+
+func (r *CreateClusterAccessResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateClusterAccessResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateClusterCheckTaskRequestParams struct {
 	// Information of the specified cluster to be scanned
 	ClusterCheckTaskList []*ClusterCheckTaskItem `json:"ClusterCheckTaskList,omitnil,omitempty" name:"ClusterCheckTaskList"`
@@ -3885,6 +4316,9 @@ type CreateClusterCheckTaskResponseParams struct {
 
 	// Result of creating the check task. Valid values: `Succ` (success); others (failure cause).
 	CreateResult *string `json:"CreateResult,omitnil,omitempty" name:"CreateResult"`
+
+	// Return the ID of the created new cluster task.
+	NewTaskID *string `json:"NewTaskID,omitnil,omitempty" name:"NewTaskID"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -4482,6 +4916,9 @@ type CreateExportComplianceStatusListJobRequestParams struct {
 
 	// List of IDs of assets or check items to be exported, which is determined by the value of `ExportByAsset`.
 	IdList []*uint64 `json:"IdList,omitnil,omitempty" name:"IdList"`
+
+	// filter
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type CreateExportComplianceStatusListJobRequest struct {
@@ -4498,6 +4935,9 @@ type CreateExportComplianceStatusListJobRequest struct {
 
 	// List of IDs of assets or check items to be exported, which is determined by the value of `ExportByAsset`.
 	IdList []*uint64 `json:"IdList,omitnil,omitempty" name:"IdList"`
+
+	// filter
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 func (r *CreateExportComplianceStatusListJobRequest) ToJsonString() string {
@@ -4516,6 +4956,7 @@ func (r *CreateExportComplianceStatusListJobRequest) FromJsonString(s string) er
 	delete(f, "ExportByAsset")
 	delete(f, "ExportAll")
 	delete(f, "IdList")
+	delete(f, "Filters")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateExportComplianceStatusListJobRequest has unknown keys!", "")
 	}
@@ -4524,8 +4965,7 @@ func (r *CreateExportComplianceStatusListJobRequest) FromJsonString(s string) er
 
 // Predefined struct for user
 type CreateExportComplianceStatusListJobResponseParams struct {
-	// ID of the created export task
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Return to create the ID of the export task
 	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4550,17 +4990,7 @@ func (r *CreateExportComplianceStatusListJobResponse) FromJsonString(s string) e
 
 // Predefined struct for user
 type CreateHostExportJobRequestParams struct {
-	// Filters.
-	// <li>`Status` - String - Optional - Agent status. Values: `ALL`; `UNINSTALL` (Not installed); `OFFLINE`, `ONLINE`. Default to `All` if it's not specified. </li>
-	// <li>`HostName` - String - Optional - Server name</li>
-	// <li>`Group - String - Optional - Server group</li>
-	// <li>`HostIP` - String - Optional - Server IP</li>
-	// <li>`HostID - String - Optional - Server ID</li>
-	// <li>`DockerVersion` - String - Optional - Docker version</li>
-	// <li>`MachineType` - String - Optional - Server type. Values: `ALL`; `CVM` (Cloud Virtual Machine); `ECM` (Edge Computing Machine); `LH` (Lighthouse), `BM` (Cloud Bare Metal); `Other` (non-Tencent Cloud server). Default to `ALL` if it's not specified.</li>
-	// <li>`DockerStatus` - String - Optional - Docker installation status. Values: `ALL`; `INSTALL` (Installed); `UNINSTALL` (Not installed)</li>
-	// <li>`ProjectID` - String - Optional - Project ID</li>
-	// <li>`Tag:xxx(tag:key)` - String - Optional - Tag key-value pair; Example: `Filters":[{"Name":"tag:tke-kind","Values":["service"]}]`</li>
+	// Filter conditions.<li>Status-String-Required: No-Filter by agent Status. "ALL": "ALL" (or leave this field blank), "UNINSTALL": "Not installed", "OFFLINE": "OFFLINE", "ONLINE": "Under protection"</li><li>HostName-String-Required: No-HostName Filtering</li><li>Group-String-Required: No-Host Group search</li><li>HostIP-String-Required: No-Search by host ip</li><li>HostID-String-Required: No-Search by host id</li><li>DockerVersion-String-Required: No-docker version search</li><li>MachineType-String-Required: No-Host origin MachineType search. "ALL": "ALL" (or leave this field blank). Host source: One of ["CVM", "ECM", "LH", "BM"] is a Tencent Cloud server; one of ["Other"] is a non-Tencent Cloud server.</li><li>DockerStatus-String-Required: No-docker installation Status. "ALL": "ALL" (or leave this field blank), "INSTALL": "Installed", "UNINSTALL": "Not installed"</li><li>ProjectID-String-Required: No-Project id search</li><li>Tag:(Tag: key)-String-Required: No-Tag key-value search. Example Filters":[{"Name":"Tag: tke-kind","Values":["service"]}]</li>
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: `0`.
@@ -4582,17 +5012,7 @@ type CreateHostExportJobRequestParams struct {
 type CreateHostExportJobRequest struct {
 	*tchttp.BaseRequest
 	
-	// Filters.
-	// <li>`Status` - String - Optional - Agent status. Values: `ALL`; `UNINSTALL` (Not installed); `OFFLINE`, `ONLINE`. Default to `All` if it's not specified. </li>
-	// <li>`HostName` - String - Optional - Server name</li>
-	// <li>`Group - String - Optional - Server group</li>
-	// <li>`HostIP` - String - Optional - Server IP</li>
-	// <li>`HostID - String - Optional - Server ID</li>
-	// <li>`DockerVersion` - String - Optional - Docker version</li>
-	// <li>`MachineType` - String - Optional - Server type. Values: `ALL`; `CVM` (Cloud Virtual Machine); `ECM` (Edge Computing Machine); `LH` (Lighthouse), `BM` (Cloud Bare Metal); `Other` (non-Tencent Cloud server). Default to `ALL` if it's not specified.</li>
-	// <li>`DockerStatus` - String - Optional - Docker installation status. Values: `ALL`; `INSTALL` (Installed); `UNINSTALL` (Not installed)</li>
-	// <li>`ProjectID` - String - Optional - Project ID</li>
-	// <li>`Tag:xxx(tag:key)` - String - Optional - Tag key-value pair; Example: `Filters":[{"Name":"tag:tke-kind","Values":["service"]}]`</li>
+	// Filter conditions.<li>Status-String-Required: No-Filter by agent Status. "ALL": "ALL" (or leave this field blank), "UNINSTALL": "Not installed", "OFFLINE": "OFFLINE", "ONLINE": "Under protection"</li><li>HostName-String-Required: No-HostName Filtering</li><li>Group-String-Required: No-Host Group search</li><li>HostIP-String-Required: No-Search by host ip</li><li>HostID-String-Required: No-Search by host id</li><li>DockerVersion-String-Required: No-docker version search</li><li>MachineType-String-Required: No-Host origin MachineType search. "ALL": "ALL" (or leave this field blank). Host source: One of ["CVM", "ECM", "LH", "BM"] is a Tencent Cloud server; one of ["Other"] is a non-Tencent Cloud server.</li><li>DockerStatus-String-Required: No-docker installation Status. "ALL": "ALL" (or leave this field blank), "INSTALL": "Installed", "UNINSTALL": "Not installed"</li><li>ProjectID-String-Required: No-Project id search</li><li>Tag:(Tag: key)-String-Required: No-Tag key-value search. Example Filters":[{"Name":"Tag: tke-kind","Values":["service"]}]</li>
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: `0`.
@@ -4947,7 +5367,7 @@ type CreateK8sApiAbnormalRuleInfoRequestParams struct {
 	// The ID of the copy rule (for copy rule scenarios)
 	CopySrcRuleID *string `json:"CopySrcRuleID,omitnil,omitempty" name:"CopySrcRuleID"`
 
-	// Event ID (for adding events to an allowlist)
+	// Event ID (abandoned, retained for compatibility. To add an event to the allowlist, use the API ModifyK8sApiAbnormalWhitelist).
 	EventID *uint64 `json:"EventID,omitnil,omitempty" name:"EventID"`
 }
 
@@ -4960,7 +5380,7 @@ type CreateK8sApiAbnormalRuleInfoRequest struct {
 	// The ID of the copy rule (for copy rule scenarios)
 	CopySrcRuleID *string `json:"CopySrcRuleID,omitnil,omitempty" name:"CopySrcRuleID"`
 
-	// Event ID (for adding events to an allowlist)
+	// Event ID (abandoned, retained for compatibility. To add an event to the allowlist, use the API ModifyK8sApiAbnormalWhitelist).
 	EventID *uint64 `json:"EventID,omitnil,omitempty" name:"EventID"`
 }
 
@@ -5409,20 +5829,18 @@ func (r *CreateProcessEventsExportJobResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateRefreshTaskRequestParams struct {
-	// Specify the cluster list. If empty, it indicates synchronization of all clusters.
+
 	ClusterIDs []*string `json:"ClusterIDs,omitnil,omitempty" name:"ClusterIDs"`
 
-	// Whether to synchronize only the list
+
 	IsSyncListOnly *bool `json:"IsSyncListOnly,omitnil,omitempty" name:"IsSyncListOnly"`
 }
 
 type CreateRefreshTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// Specify the cluster list. If empty, it indicates synchronization of all clusters.
 	ClusterIDs []*string `json:"ClusterIDs,omitnil,omitempty" name:"ClusterIDs"`
 
-	// Whether to synchronize only the list
 	IsSyncListOnly *bool `json:"IsSyncListOnly,omitnil,omitempty" name:"IsSyncListOnly"`
 }
 
@@ -6440,45 +6858,81 @@ func (r *CreateVulImageExportJobResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateVulScanTaskRequestParams struct {
-	// Local image scan scope. Valid values: `ALL` (all local images); `NOT_SCAN` (all licensed but not scanned local images); `IMAGEIDS` (IDs of specified local images).
+	// <p>Local image scan range type</p><p>Enumeration value:</p><ul><li>ALL: All local images</li><li>NOT_SCAN: All authorized unscanned local images</li><li>IMAGEIDS: Selected local image IDs</li><li>CLUSTER: Cluster filtering</li></ul>
 	LocalImageScanType *string `json:"LocalImageScanType,omitnil,omitempty" name:"LocalImageScanType"`
 
-	// Scan by licensed local image ID, with a higher priority than scan by licensed local image that meets the condition.
+	// <p>Scan by authorized local image IDs, which takes precedence over scanning by authorized local images that meet the conditions.</p>
 	LocalImageIDs []*string `json:"LocalImageIDs,omitnil,omitempty" name:"LocalImageIDs"`
 
-	// Repository image scan scope. Valid values: `ALL` (all repository images); `NOT_SCAN` (all licensed but not scanned repository images); `IMAGEIDS` (IDs of specified repository images).
+	// <p>Repository image scan range type. ALL: All repository images. NOT_SCAN: Total authorized unscanned repository images. IMAGEIDS: Selected repository image IDs.</p>
 	RegistryImageScanType *string `json:"RegistryImageScanType,omitnil,omitempty" name:"RegistryImageScanType"`
 
-	// Scan by licensed repository image ID, with a higher priority than scan by licensed repository image that meets the condition.
+	// <p>Scan by authorized repository image IDs, which takes precedence over scanning by authorized repository images that meet the conditions.</p>
 	RegistryImageIDs []*uint64 `json:"RegistryImageIDs,omitnil,omitempty" name:"RegistryImageIDs"`
 
-	// ID of the task to scan local images again for vulnerabilities
+	// <p>Task ID for local image re-vulnerability scanning</p>
 	LocalTaskID *int64 `json:"LocalTaskID,omitnil,omitempty" name:"LocalTaskID"`
 
-	// ID of the task to scan repository images again for vulnerabilities
+	// <p>Task ID for repository image re-vulnerability scanning</p>
 	RegistryTaskID *int64 `json:"RegistryTaskID,omitnil,omitempty" name:"RegistryTaskID"`
+
+	// <p>Local image container runtime</p>
+	LocalImageContainerRunning *bool `json:"LocalImageContainerRunning,omitnil,omitempty" name:"LocalImageContainerRunning"`
+
+	// <p>Image Container in repository is running</p>
+	RegistryImageContainerRunning *bool `json:"RegistryImageContainerRunning,omitnil,omitempty" name:"RegistryImageContainerRunning"`
+
+	// <p>Whether the repository image is the latest</p>
+	IsLatest *bool `json:"IsLatest,omitnil,omitempty" name:"IsLatest"`
+
+	// <p>Local image id to remove</p>
+	ExcludeLocalImageIDs []*string `json:"ExcludeLocalImageIDs,omitnil,omitempty" name:"ExcludeLocalImageIDs"`
+
+	// <p>id of the repository image to remove</p>
+	ExcludeRegistryImageIDs []*uint64 `json:"ExcludeRegistryImageIDs,omitnil,omitempty" name:"ExcludeRegistryImageIDs"`
+
+	// <p>Cluster ID.</p>
+	LocalClusterIDs []*string `json:"LocalClusterIDs,omitnil,omitempty" name:"LocalClusterIDs"`
 }
 
 type CreateVulScanTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// Local image scan scope. Valid values: `ALL` (all local images); `NOT_SCAN` (all licensed but not scanned local images); `IMAGEIDS` (IDs of specified local images).
+	// <p>Local image scan range type</p><p>Enumeration value:</p><ul><li>ALL: All local images</li><li>NOT_SCAN: All authorized unscanned local images</li><li>IMAGEIDS: Selected local image IDs</li><li>CLUSTER: Cluster filtering</li></ul>
 	LocalImageScanType *string `json:"LocalImageScanType,omitnil,omitempty" name:"LocalImageScanType"`
 
-	// Scan by licensed local image ID, with a higher priority than scan by licensed local image that meets the condition.
+	// <p>Scan by authorized local image IDs, which takes precedence over scanning by authorized local images that meet the conditions.</p>
 	LocalImageIDs []*string `json:"LocalImageIDs,omitnil,omitempty" name:"LocalImageIDs"`
 
-	// Repository image scan scope. Valid values: `ALL` (all repository images); `NOT_SCAN` (all licensed but not scanned repository images); `IMAGEIDS` (IDs of specified repository images).
+	// <p>Repository image scan range type. ALL: All repository images. NOT_SCAN: Total authorized unscanned repository images. IMAGEIDS: Selected repository image IDs.</p>
 	RegistryImageScanType *string `json:"RegistryImageScanType,omitnil,omitempty" name:"RegistryImageScanType"`
 
-	// Scan by licensed repository image ID, with a higher priority than scan by licensed repository image that meets the condition.
+	// <p>Scan by authorized repository image IDs, which takes precedence over scanning by authorized repository images that meet the conditions.</p>
 	RegistryImageIDs []*uint64 `json:"RegistryImageIDs,omitnil,omitempty" name:"RegistryImageIDs"`
 
-	// ID of the task to scan local images again for vulnerabilities
+	// <p>Task ID for local image re-vulnerability scanning</p>
 	LocalTaskID *int64 `json:"LocalTaskID,omitnil,omitempty" name:"LocalTaskID"`
 
-	// ID of the task to scan repository images again for vulnerabilities
+	// <p>Task ID for repository image re-vulnerability scanning</p>
 	RegistryTaskID *int64 `json:"RegistryTaskID,omitnil,omitempty" name:"RegistryTaskID"`
+
+	// <p>Local image container runtime</p>
+	LocalImageContainerRunning *bool `json:"LocalImageContainerRunning,omitnil,omitempty" name:"LocalImageContainerRunning"`
+
+	// <p>Image Container in repository is running</p>
+	RegistryImageContainerRunning *bool `json:"RegistryImageContainerRunning,omitnil,omitempty" name:"RegistryImageContainerRunning"`
+
+	// <p>Whether the repository image is the latest</p>
+	IsLatest *bool `json:"IsLatest,omitnil,omitempty" name:"IsLatest"`
+
+	// <p>Local image id to remove</p>
+	ExcludeLocalImageIDs []*string `json:"ExcludeLocalImageIDs,omitnil,omitempty" name:"ExcludeLocalImageIDs"`
+
+	// <p>id of the repository image to remove</p>
+	ExcludeRegistryImageIDs []*uint64 `json:"ExcludeRegistryImageIDs,omitnil,omitempty" name:"ExcludeRegistryImageIDs"`
+
+	// <p>Cluster ID.</p>
+	LocalClusterIDs []*string `json:"LocalClusterIDs,omitnil,omitempty" name:"LocalClusterIDs"`
 }
 
 func (r *CreateVulScanTaskRequest) ToJsonString() string {
@@ -6499,6 +6953,12 @@ func (r *CreateVulScanTaskRequest) FromJsonString(s string) error {
 	delete(f, "RegistryImageIDs")
 	delete(f, "LocalTaskID")
 	delete(f, "RegistryTaskID")
+	delete(f, "LocalImageContainerRunning")
+	delete(f, "RegistryImageContainerRunning")
+	delete(f, "IsLatest")
+	delete(f, "ExcludeLocalImageIDs")
+	delete(f, "ExcludeRegistryImageIDs")
+	delete(f, "LocalClusterIDs")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVulScanTaskRequest has unknown keys!", "")
 	}
@@ -6507,10 +6967,10 @@ func (r *CreateVulScanTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateVulScanTaskResponseParams struct {
-	// ID of the task to scan local images again for vulnerabilities
+	// <p>Task ID for local image re-vulnerability scanning</p>
 	LocalTaskID *int64 `json:"LocalTaskID,omitnil,omitempty" name:"LocalTaskID"`
 
-	// ID of the task to scan repository images again for vulnerabilities
+	// <p>Task ID for repository image re-vulnerability scanning</p>
 	RegistryTaskID *int64 `json:"RegistryTaskID,omitnil,omitempty" name:"RegistryTaskID"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6763,6 +7223,9 @@ type DeleteComplianceAssetPolicySetFromWhitelistRequestParams struct {
 
 	// List of IDs of check items to be ignored in the specified asset
 	CustomerPolicyItemIdSet []*uint64 `json:"CustomerPolicyItemIdSet,omitnil,omitempty" name:"CustomerPolicyItemIdSet"`
+
+	// Type of assets to be scanned. <li>ASSET_CONTAINER: Docker container.</li> <li>ASSET_IMAGE: Docker image.</li> <li>ASSET_HOST: Docker host.</li> <li>ASSET_K8S: Kubernetes.</li> <li>ASSET_CONTAINERD: containerd host.</li> <li>ASSET_CONTAINERD_CONTAINER: containerd container.</li>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 }
 
 type DeleteComplianceAssetPolicySetFromWhitelistRequest struct {
@@ -6773,6 +7236,9 @@ type DeleteComplianceAssetPolicySetFromWhitelistRequest struct {
 
 	// List of IDs of check items to be ignored in the specified asset
 	CustomerPolicyItemIdSet []*uint64 `json:"CustomerPolicyItemIdSet,omitnil,omitempty" name:"CustomerPolicyItemIdSet"`
+
+	// Type of assets to be scanned. <li>ASSET_CONTAINER: Docker container.</li> <li>ASSET_IMAGE: Docker image.</li> <li>ASSET_HOST: Docker host.</li> <li>ASSET_K8S: Kubernetes.</li> <li>ASSET_CONTAINERD: containerd host.</li> <li>ASSET_CONTAINERD_CONTAINER: containerd container.</li>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 }
 
 func (r *DeleteComplianceAssetPolicySetFromWhitelistRequest) ToJsonString() string {
@@ -6789,6 +7255,7 @@ func (r *DeleteComplianceAssetPolicySetFromWhitelistRequest) FromJsonString(s st
 	}
 	delete(f, "AssetItemId")
 	delete(f, "CustomerPolicyItemIdSet")
+	delete(f, "AssetType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteComplianceAssetPolicySetFromWhitelistRequest has unknown keys!", "")
 	}
@@ -7091,6 +7558,12 @@ func (r *DeleteK8sApiAbnormalRuleResponse) FromJsonString(s string) error {
 type DeleteMachineRequestParams struct {
 	// Agent UUID
 	Uuid *string `json:"Uuid,omitnil,omitempty" name:"Uuid"`
+
+	// Super Node Unique ID
+	NodeUniqueIds []*string `json:"NodeUniqueIds,omitnil,omitempty" name:"NodeUniqueIds"`
+
+	// UUID list
+	UUIDs []*string `json:"UUIDs,omitnil,omitempty" name:"UUIDs"`
 }
 
 type DeleteMachineRequest struct {
@@ -7098,6 +7571,12 @@ type DeleteMachineRequest struct {
 	
 	// Agent UUID
 	Uuid *string `json:"Uuid,omitnil,omitempty" name:"Uuid"`
+
+	// Super Node Unique ID
+	NodeUniqueIds []*string `json:"NodeUniqueIds,omitnil,omitempty" name:"NodeUniqueIds"`
+
+	// UUID list
+	UUIDs []*string `json:"UUIDs,omitnil,omitempty" name:"UUIDs"`
 }
 
 func (r *DeleteMachineRequest) ToJsonString() string {
@@ -7113,6 +7592,8 @@ func (r *DeleteMachineRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Uuid")
+	delete(f, "NodeUniqueIds")
+	delete(f, "UUIDs")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteMachineRequest has unknown keys!", "")
 	}
@@ -7205,6 +7686,60 @@ func (r *DeleteNetworkFirewallPolicyDetailResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteNetworkFirewallPolicyDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRaspRulesRequestParams struct {
+	// Array containing IDs of rules to be deleted (maximum value: 100).
+	IDs []*uint64 `json:"IDs,omitnil,omitempty" name:"IDs"`
+}
+
+type DeleteRaspRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Array containing IDs of rules to be deleted (maximum value: 100).
+	IDs []*uint64 `json:"IDs,omitnil,omitempty" name:"IDs"`
+}
+
+func (r *DeleteRaspRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRaspRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IDs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRaspRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRaspRulesResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteRaspRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteRaspRulesResponseParams `json:"Response"`
+}
+
+func (r *DeleteRaspRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRaspRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7479,6 +8014,60 @@ func (r *DeleteSearchTemplateResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteVirusWhiteListRuleRequestParams struct {
+	// Rule ID list
+	RuleIdSet []*uint64 `json:"RuleIdSet,omitnil,omitempty" name:"RuleIdSet"`
+}
+
+type DeleteVirusWhiteListRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Rule ID list
+	RuleIdSet []*uint64 `json:"RuleIdSet,omitnil,omitempty" name:"RuleIdSet"`
+}
+
+func (r *DeleteVirusWhiteListRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVirusWhiteListRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleIdSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteVirusWhiteListRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteVirusWhiteListRuleResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteVirusWhiteListRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteVirusWhiteListRuleResponseParams `json:"Response"`
+}
+
+func (r *DeleteVirusWhiteListRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVirusWhiteListRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeABTestConfigRequestParams struct {
 	// Canary project name
 	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
@@ -7582,7 +8171,6 @@ type DescribeAbnormalProcessDetailResponseParams struct {
 	EventDetail *AbnormalProcessEventDescription `json:"EventDetail,omitnil,omitempty" name:"EventDetail"`
 
 	// Ancestor process information
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	AncestorProcessInfo *ProcessBaseInfo `json:"AncestorProcessInfo,omitnil,omitempty" name:"AncestorProcessInfo"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -7666,99 +8254,6 @@ func (r *DescribeAbnormalProcessEventTendencyResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAbnormalProcessEventTendencyResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeAbnormalProcessEventsExportRequestParams struct {
-	// Export field
-	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
-
-	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
-	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Offset. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Filter parameter. "Filters":[{"Name":"Status","Values":["2"]}]
-	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Valid values: `asc`, `desc`.
-	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// Sorting field
-	By *string `json:"By,omitnil,omitempty" name:"By"`
-}
-
-type DescribeAbnormalProcessEventsExportRequest struct {
-	*tchttp.BaseRequest
-	
-	// Export field
-	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
-
-	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
-	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Offset. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Filter parameter. "Filters":[{"Name":"Status","Values":["2"]}]
-	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Valid values: `asc`, `desc`.
-	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// Sorting field
-	By *string `json:"By,omitnil,omitempty" name:"By"`
-}
-
-func (r *DescribeAbnormalProcessEventsExportRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAbnormalProcessEventsExportRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ExportField")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	delete(f, "Filters")
-	delete(f, "Order")
-	delete(f, "By")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAbnormalProcessEventsExportRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeAbnormalProcessEventsExportResponseParams struct {
-	// Excel download URL
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DescribeAbnormalProcessEventsExportResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeAbnormalProcessEventsExportResponseParams `json:"Response"`
-}
-
-func (r *DescribeAbnormalProcessEventsExportResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAbnormalProcessEventsExportResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7989,133 +8484,48 @@ func (r *DescribeAbnormalProcessRuleDetailResponse) FromJsonString(s string) err
 }
 
 // Predefined struct for user
-type DescribeAbnormalProcessRulesExportRequestParams struct {
-	// Export field
-	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
-
-	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
-	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Offset. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Filter parameter. "Filters":[{"Name":"Status","Values":["2"]}]
-	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Valid values: `asc`, `desc`.
-	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// Sorting field
-	By *string `json:"By,omitnil,omitempty" name:"By"`
-}
-
-type DescribeAbnormalProcessRulesExportRequest struct {
-	*tchttp.BaseRequest
-	
-	// Export field
-	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
-
-	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
-	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Offset. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Filter parameter. "Filters":[{"Name":"Status","Values":["2"]}]
-	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Valid values: `asc`, `desc`.
-	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// Sorting field
-	By *string `json:"By,omitnil,omitempty" name:"By"`
-}
-
-func (r *DescribeAbnormalProcessRulesExportRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAbnormalProcessRulesExportRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ExportField")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	delete(f, "Filters")
-	delete(f, "Order")
-	delete(f, "By")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAbnormalProcessRulesExportRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeAbnormalProcessRulesExportResponseParams struct {
-	// Excel download URL
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DescribeAbnormalProcessRulesExportResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeAbnormalProcessRulesExportResponseParams `json:"Response"`
-}
-
-func (r *DescribeAbnormalProcessRulesExportResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAbnormalProcessRulesExportResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type DescribeAbnormalProcessRulesRequestParams struct {
+	// Sorting field
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Filter parameters,"Filters":[{"Name":"Status","Values":["2"]}]
+	// <li>ImageName - String - required: no - mirror name, fuzzy search for rules bound to the image</li>
+	// <li>ImageId - String - required: no - image ID, fuzzy search for rules bound to the image</li>
+	// <li>RuleType - String - Required: No - Policy type filter. Value: system (system policy), user (user policy)</li>
+	// <li>RuleAction- String - Required: No - Execution action filter. Valid values: RULE_MODE_ALERT (alert), RULE_MODE_HOLDUP (block) </li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
 	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Filter parameter. "Filters":[{"Name":"Status","Values":["2"]}]
-	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
-
 	// Valid values: `asc`, `desc`.
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// Sorting field
-	By *string `json:"By,omitnil,omitempty" name:"By"`
 }
 
 type DescribeAbnormalProcessRulesRequest struct {
 	*tchttp.BaseRequest
 	
+	// Sorting field
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Filter parameters,"Filters":[{"Name":"Status","Values":["2"]}]
+	// <li>ImageName - String - required: no - mirror name, fuzzy search for rules bound to the image</li>
+	// <li>ImageId - String - required: no - image ID, fuzzy search for rules bound to the image</li>
+	// <li>RuleType - String - Required: No - Policy type filter. Value: system (system policy), user (user policy)</li>
+	// <li>RuleAction- String - Required: No - Execution action filter. Valid values: RULE_MODE_ALERT (alert), RULE_MODE_HOLDUP (block) </li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
 	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Filter parameter. "Filters":[{"Name":"Status","Values":["2"]}]
-	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
-
 	// Valid values: `asc`, `desc`.
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// Sorting field
-	By *string `json:"By,omitnil,omitempty" name:"By"`
 }
 
 func (r *DescribeAbnormalProcessRulesRequest) ToJsonString() string {
@@ -8130,11 +8540,11 @@ func (r *DescribeAbnormalProcessRulesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "By")
+	delete(f, "Filters")
 	delete(f, "Limit")
 	delete(f, "Offset")
-	delete(f, "Filters")
 	delete(f, "Order")
-	delete(f, "By")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAbnormalProcessRulesRequest has unknown keys!", "")
 	}
@@ -8143,11 +8553,15 @@ func (r *DescribeAbnormalProcessRulesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAbnormalProcessRulesResponseParams struct {
-	// Total number of events
-	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+	// Exception process strategy extension information list (including rule content and executed action). The new frontend preferentially uses this field.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleExtSet []*AbnormalProcessRuleExtSetItem `json:"RuleExtSet,omitnil,omitempty" name:"RuleExtSet"`
 
 	// List of abnormal process policies
 	RuleSet []*RuleBaseInfo `json:"RuleSet,omitnil,omitempty" name:"RuleSet"`
+
+	// Total number of events
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -8219,7 +8633,6 @@ type DescribeAccessControlDetailResponseParams struct {
 	ParentProcessInfo *ProcessBaseInfo `json:"ParentProcessInfo,omitnil,omitempty" name:"ParentProcessInfo"`
 
 	// Ancestor process information
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	AncestorProcessInfo *ProcessBaseInfo `json:"AncestorProcessInfo,omitnil,omitempty" name:"AncestorProcessInfo"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -8311,12 +8724,10 @@ func (r *DescribeAccessControlEventsExportRequest) FromJsonString(s string) erro
 
 // Predefined struct for user
 type DescribeAccessControlEventsExportResponseParams struct {
-	// Excel download URL
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Address for download the Excel file.
 	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
 
-	// Task ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task ID.
 	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -8406,6 +8817,12 @@ type DescribeAccessControlEventsResponseParams struct {
 
 	// Array of access control events
 	EventSet []*AccessControlEventInfo `json:"EventSet,omitnil,omitempty" name:"EventSet"`
+
+	// Supported kernel versions.
+	SupportCoreVersion *string `json:"SupportCoreVersion,omitnil,omitempty" name:"SupportCoreVersion"`
+
+	// Possible blocking failure reasons.
+	InterceptionFailureTip *string `json:"InterceptionFailureTip,omitnil,omitempty" name:"InterceptionFailureTip"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -8506,133 +8923,48 @@ func (r *DescribeAccessControlRuleDetailResponse) FromJsonString(s string) error
 }
 
 // Predefined struct for user
-type DescribeAccessControlRulesExportRequestParams struct {
-	// Export field
-	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
-
-	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
-	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Offset. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Filter parameter. "Filters":[{"Name":"Status","Values":["2"]}]
-	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Valid values: `asc`, `desc`.
-	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// Sorting field
-	By *string `json:"By,omitnil,omitempty" name:"By"`
-}
-
-type DescribeAccessControlRulesExportRequest struct {
-	*tchttp.BaseRequest
-	
-	// Export field
-	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
-
-	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
-	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Offset. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Filter parameter. "Filters":[{"Name":"Status","Values":["2"]}]
-	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Valid values: `asc`, `desc`.
-	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// Sorting field
-	By *string `json:"By,omitnil,omitempty" name:"By"`
-}
-
-func (r *DescribeAccessControlRulesExportRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAccessControlRulesExportRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ExportField")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	delete(f, "Filters")
-	delete(f, "Order")
-	delete(f, "By")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccessControlRulesExportRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeAccessControlRulesExportResponseParams struct {
-	// Excel download URL
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DescribeAccessControlRulesExportResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeAccessControlRulesExportResponseParams `json:"Response"`
-}
-
-func (r *DescribeAccessControlRulesExportResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAccessControlRulesExportResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type DescribeAccessControlRulesRequestParams struct {
+	// Sorting field
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Filter parameters,"Filters":[{"Name":"Status","Values":["2"]}]
+	// <li>ImageName - String - required: no - mirror name, fuzzy search for rules bound to the image</li>
+	// <li>ImageId - String - required: no - image ID, fuzzy search for rules bound to the image</li>
+	// <li>RuleType- String - Required: No - Filter by policy type. Value: system (system policy), user (user policy) </li>
+	// <li>RuleAction - String - Required: No - Execution action filter. Value: RULE_MODE_ALERT (Alert), RULE_MODE_HOLDUP (Intercept)</li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
 	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Filter parameter. "Filters":[{"Name":"Status","Values":["2"]}]
-	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
-
 	// Valid values: `asc`, `desc`.
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// Sorting field
-	By *string `json:"By,omitnil,omitempty" name:"By"`
 }
 
 type DescribeAccessControlRulesRequest struct {
 	*tchttp.BaseRequest
 	
+	// Sorting field
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Filter parameters,"Filters":[{"Name":"Status","Values":["2"]}]
+	// <li>ImageName - String - required: no - mirror name, fuzzy search for rules bound to the image</li>
+	// <li>ImageId - String - required: no - image ID, fuzzy search for rules bound to the image</li>
+	// <li>RuleType- String - Required: No - Filter by policy type. Value: system (system policy), user (user policy) </li>
+	// <li>RuleAction - String - Required: No - Execution action filter. Value: RULE_MODE_ALERT (Alert), RULE_MODE_HOLDUP (Intercept)</li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
 	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Filter parameter. "Filters":[{"Name":"Status","Values":["2"]}]
-	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
-
 	// Valid values: `asc`, `desc`.
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// Sorting field
-	By *string `json:"By,omitnil,omitempty" name:"By"`
 }
 
 func (r *DescribeAccessControlRulesRequest) ToJsonString() string {
@@ -8647,11 +8979,11 @@ func (r *DescribeAccessControlRulesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "By")
+	delete(f, "Filters")
 	delete(f, "Limit")
 	delete(f, "Offset")
-	delete(f, "Filters")
 	delete(f, "Order")
-	delete(f, "By")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccessControlRulesRequest has unknown keys!", "")
 	}
@@ -8660,11 +8992,15 @@ func (r *DescribeAccessControlRulesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAccessControlRulesResponseParams struct {
-	// Total number of events
-	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+	// Extended information list of access control policy (including rule content and executed action). The new frontend preferentially uses this field.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleExtSet []*AccessControlRuleExtSetItem `json:"RuleExtSet,omitnil,omitempty" name:"RuleExtSet"`
 
 	// List of access control policies
 	RuleSet []*RuleBaseInfo `json:"RuleSet,omitnil,omitempty" name:"RuleSet"`
+
+	// Total number of events
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -9015,6 +9351,12 @@ type DescribeAgentDaemonSetCmdResponseParams struct {
 	// Installation command
 	Command *string `json:"Command,omitnil,omitempty" name:"Command"`
 
+	// File URL
+	URL *string `json:"URL,omitnil,omitempty" name:"URL"`
+
+	// File content (Base64-encoded).
+	FileContent *string `json:"FileContent,omitnil,omitempty" name:"FileContent"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -9054,6 +9396,9 @@ type DescribeAgentInstallCommandRequestParams struct {
 
 	// Tag ID list, which is valid only when `IsCloud` is `false`.
 	TagIds []*uint64 `json:"TagIds,omitnil,omitempty" name:"TagIds"`
+
+	// Virtual IP
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 }
 
 type DescribeAgentInstallCommandRequest struct {
@@ -9076,6 +9421,9 @@ type DescribeAgentInstallCommandRequest struct {
 
 	// Tag ID list, which is valid only when `IsCloud` is `false`.
 	TagIds []*uint64 `json:"TagIds,omitnil,omitempty" name:"TagIds"`
+
+	// Virtual IP
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 }
 
 func (r *DescribeAgentInstallCommandRequest) ToJsonString() string {
@@ -9096,6 +9444,7 @@ func (r *DescribeAgentInstallCommandRequest) FromJsonString(s string) error {
 	delete(f, "VpcId")
 	delete(f, "ExpireDate")
 	delete(f, "TagIds")
+	delete(f, "Vip")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAgentInstallCommandRequest has unknown keys!", "")
 	}
@@ -9118,6 +9467,9 @@ type DescribeAgentInstallCommandResponseParams struct {
 
 	// Download URL of the agent for Windows
 	WindowsDownloadUrl *string `json:"WindowsDownloadUrl,omitnil,omitempty" name:"WindowsDownloadUrl"`
+
+	// Installation command for systems with the Arm architecture.
+	ARMCommand *string `json:"ARMCommand,omitnil,omitempty" name:"ARMCommand"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -9505,12 +9857,10 @@ type DescribeAssetContainerDetailResponseParams struct {
 	// Sub-status of the network
 	NetSubStatus *string `json:"NetSubStatus,omitnil,omitempty" name:"NetSubStatus"`
 
-	// Isolation source
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Isolate source
 	IsolateSource *string `json:"IsolateSource,omitnil,omitempty" name:"IsolateSource"`
 
 	// Isolation time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsolateTime *string `json:"IsolateTime,omitnil,omitempty" name:"IsolateTime"`
 
 	// Node ID
@@ -9872,6 +10222,18 @@ type DescribeAssetHostDetailResponseParams struct {
 	// Tags
 	Tags []*TagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
 
+
+	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
+
+
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+
+	ClusterAccessedStatus *string `json:"ClusterAccessedStatus,omitnil,omitempty" name:"ClusterAccessedStatus"`
+
+	// Asset synchronization time.
+	AssetSyncTime *string `json:"AssetSyncTime,omitnil,omitempty" name:"AssetSyncTime"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -9900,17 +10262,7 @@ type DescribeAssetHostListRequestParams struct {
 	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Filters.
-	// <li>`Status` - String - Optional - Agent status. Values: `ALL`; `UNINSTALL` (Not installed); `OFFLINE`, `ONLINE`. Default to `All` if it's not specified. </li>
-	// <li>`HostName` - String - Optional - Server name</li>
-	// <li>`Group - String - Optional - Server group</li>
-	// <li>`HostIP` - String - Optional - Server IP</li>
-	// <li>`HostID - String - Optional - Server ID</li>
-	// <li>`DockerVersion` - String - Optional - Docker version</li>
-	// <li>`MachineType` - String - Optional - Server type. Values: `ALL`; `CVM` (Cloud Virtual Machine); `ECM` (Edge Computing Machine); `LH` (Lighthouse), `BM` (Cloud Bare Metal); `Other` (non-Tencent Cloud server). Default to `ALL` if it's not specified.</li>
-	// <li>`DockerStatus` - String - Optional - Docker installation status. Values: `ALL`; `INSTALL` (Installed); `UNINSTALL` (Not installed)</li>
-	// <li>`ProjectID` - String - Optional - Project ID</li>
-	// <li>`Tag:xxx(tag:key)` - String - Optional - Tag key-value pair; Example: `Filters":[{"Name":"tag:tke-kind","Values":["service"]}]`</li>
+	// Filter criteria. <li>Status-String-Required: No-agent Status filtering, "ALL": "ALL" (or omit this field), "UNINSTALL": "not installed", "OFFLINE": "OFFLINE", "ONLINE": "under protection"</li> <li>HostName-String-Required: No-HostName filtering</li> <li>Group-String-Required: No-host Group search</li> <li>HostIP-String-Required: No-search by host ip</li> <li>HostID-String-Required: No-search by host id</li> <li>DockerVersion-String-Required: No-docker version search</li> <li>MachineType-String-Required: No-host origin MachineType search, "ALL": "ALL" (or omit this field), host source: one of ["CVM", "ECM", "LH", "BM"] for Tencent Cloud server; one of ["Other"] for non-Tencent Cloud server</li> <li>DockerStatus-String-Required: No-docker installation Status, "ALL": "ALL" (or omit this field), "INSTALL": "installed", "UNINSTALL": "not installed"</li> <li>ProjectID-String-Required: No-project id search</li> <li>Tag:(Tag: key)-String-Required: No-Tag key-value search example filter":[{"Name":"Tag: tke-kind","Values":["service"]}]</li> <li>NonClusterNode: whether to query non-cluster nodes (true: yes, false: no)</li>
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Sorting field
@@ -9929,17 +10281,7 @@ type DescribeAssetHostListRequest struct {
 	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Filters.
-	// <li>`Status` - String - Optional - Agent status. Values: `ALL`; `UNINSTALL` (Not installed); `OFFLINE`, `ONLINE`. Default to `All` if it's not specified. </li>
-	// <li>`HostName` - String - Optional - Server name</li>
-	// <li>`Group - String - Optional - Server group</li>
-	// <li>`HostIP` - String - Optional - Server IP</li>
-	// <li>`HostID - String - Optional - Server ID</li>
-	// <li>`DockerVersion` - String - Optional - Docker version</li>
-	// <li>`MachineType` - String - Optional - Server type. Values: `ALL`; `CVM` (Cloud Virtual Machine); `ECM` (Edge Computing Machine); `LH` (Lighthouse), `BM` (Cloud Bare Metal); `Other` (non-Tencent Cloud server). Default to `ALL` if it's not specified.</li>
-	// <li>`DockerStatus` - String - Optional - Docker installation status. Values: `ALL`; `INSTALL` (Installed); `UNINSTALL` (Not installed)</li>
-	// <li>`ProjectID` - String - Optional - Project ID</li>
-	// <li>`Tag:xxx(tag:key)` - String - Optional - Tag key-value pair; Example: `Filters":[{"Name":"tag:tke-kind","Values":["service"]}]`</li>
+	// Filter criteria. <li>Status-String-Required: No-agent Status filtering, "ALL": "ALL" (or omit this field), "UNINSTALL": "not installed", "OFFLINE": "OFFLINE", "ONLINE": "under protection"</li> <li>HostName-String-Required: No-HostName filtering</li> <li>Group-String-Required: No-host Group search</li> <li>HostIP-String-Required: No-search by host ip</li> <li>HostID-String-Required: No-search by host id</li> <li>DockerVersion-String-Required: No-docker version search</li> <li>MachineType-String-Required: No-host origin MachineType search, "ALL": "ALL" (or omit this field), host source: one of ["CVM", "ECM", "LH", "BM"] for Tencent Cloud server; one of ["Other"] for non-Tencent Cloud server</li> <li>DockerStatus-String-Required: No-docker installation Status, "ALL": "ALL" (or omit this field), "INSTALL": "installed", "UNINSTALL": "not installed"</li> <li>ProjectID-String-Required: No-project id search</li> <li>Tag:(Tag: key)-String-Required: No-Tag key-value search example filter":[{"Name":"Tag: tke-kind","Values":["service"]}]</li> <li>NonClusterNode: whether to query non-cluster nodes (true: yes, false: no)</li>
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Sorting field
@@ -10096,14 +10438,14 @@ func (r *DescribeAssetImageBindRuleInfoResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeAssetImageDetailRequestParams struct {
-	// Image ID
+	// <p>Image ID.</p>
 	ImageID *string `json:"ImageID,omitnil,omitempty" name:"ImageID"`
 }
 
 type DescribeAssetImageDetailRequest struct {
 	*tchttp.BaseRequest
 	
-	// Image ID
+	// <p>Image ID.</p>
 	ImageID *string `json:"ImageID,omitnil,omitempty" name:"ImageID"`
 }
 
@@ -10128,110 +10470,104 @@ func (r *DescribeAssetImageDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAssetImageDetailResponseParams struct {
-	// Image ID
+	// <p>Image ID.</p>
 	ImageID *string `json:"ImageID,omitnil,omitempty" name:"ImageID"`
 
-	// Image name
+	// <p>Image name.</p>
 	ImageName *string `json:"ImageName,omitnil,omitempty" name:"ImageName"`
 
-	// Creation time
+	// <p>Image digests.</p>
+	ImageDigest *string `json:"ImageDigest,omitnil,omitempty" name:"ImageDigest"`
+
+	// <p>Creation time.</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Image size
+	// <p>Image size.</p>
 	Size *uint64 `json:"Size,omitnil,omitempty" name:"Size"`
 
-	// Number of associated servers
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Number of associated hosts (including normal nodes and super nodes).</p>
 	HostCnt *uint64 `json:"HostCnt,omitnil,omitempty" name:"HostCnt"`
 
-	// Number of associated containers
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Number of associated containers.</p>
 	ContainerCnt *uint64 `json:"ContainerCnt,omitnil,omitempty" name:"ContainerCnt"`
 
-	// Last scan time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Number of super nodes.</p>
+	SuperNodeCnt *uint64 `json:"SuperNodeCnt,omitnil,omitempty" name:"SuperNodeCnt"`
+
+	// <p>Last scan time.</p>
 	ScanTime *string `json:"ScanTime,omitnil,omitempty" name:"ScanTime"`
 
-	// Number of vulnerabilities
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Number of vulnerabilities.</p>
 	VulCnt *uint64 `json:"VulCnt,omitnil,omitempty" name:"VulCnt"`
 
-	// Number of risky behaviors
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Number of risky behaviors.</p>
 	RiskCnt *uint64 `json:"RiskCnt,omitnil,omitempty" name:"RiskCnt"`
 
-	// Number of sensitive data items
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Number of sensitive information entries.</p>
 	SensitiveInfoCnt *uint64 `json:"SensitiveInfoCnt,omitnil,omitempty" name:"SensitiveInfoCnt"`
 
-	// Whether it is a trusted image
+	// <p>Whether the image is trusted.</p>
 	IsTrustImage *bool `json:"IsTrustImage,omitnil,omitempty" name:"IsTrustImage"`
 
-	// Image system
+	// <p>Image OS.</p>
 	OsName *string `json:"OsName,omitnil,omitempty" name:"OsName"`
 
-	// Image scan error in the agent
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Agent image scan error.</p>
 	AgentError *string `json:"AgentError,omitnil,omitempty" name:"AgentError"`
 
-	// Image scan error on the backend
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Backend image scan error.</p>
 	ScanError *string `json:"ScanError,omitnil,omitempty" name:"ScanError"`
 
-	// System architecture
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>System architecture.</p>
 	Architecture *string `json:"Architecture,omitnil,omitempty" name:"Architecture"`
 
-	// Author
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Author.</p>
 	Author *string `json:"Author,omitnil,omitempty" name:"Author"`
 
-	// Build history
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Build history.</p>
 	BuildHistory *string `json:"BuildHistory,omitnil,omitempty" name:"BuildHistory"`
 
-	// Trojan scanning progress
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Trojan scan progress.</p>
 	ScanVirusProgress *uint64 `json:"ScanVirusProgress,omitnil,omitempty" name:"ScanVirusProgress"`
 
-	// Vulnerability scan progress
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Vulnerability scan progress.</p>
 	ScanVulProgress *uint64 `json:"ScanVulProgress,omitnil,omitempty" name:"ScanVulProgress"`
 
-	// Sensitive data scanning progress
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Sensitive information scan progress.</p>
 	ScanRiskProgress *uint64 `json:"ScanRiskProgress,omitnil,omitempty" name:"ScanRiskProgress"`
 
-	// Trojan scan error
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Trojan scan error.</p>
 	ScanVirusError *string `json:"ScanVirusError,omitnil,omitempty" name:"ScanVirusError"`
 
-	// Vulnerability scan error
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Vulnerability scan error.</p>
 	ScanVulError *string `json:"ScanVulError,omitnil,omitempty" name:"ScanVulError"`
 
-	// Sensitive data error
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Sensitive information error.</p>
 	ScanRiskError *string `json:"ScanRiskError,omitnil,omitempty" name:"ScanRiskError"`
 
-	// Image scanning status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Image scan status.</p>
 	ScanStatus *string `json:"ScanStatus,omitnil,omitempty" name:"ScanStatus"`
 
-	// Number of viruses and trojans
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Number of Trojans and viruses.</p>
 	VirusCnt *uint64 `json:"VirusCnt,omitnil,omitempty" name:"VirusCnt"`
 
-	// Image scanning status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Image scan status.</p>
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Remaining scan time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Remaining scan time.</p>
 	RemainScanTime *uint64 `json:"RemainScanTime,omitnil,omitempty" name:"RemainScanTime"`
 
-	// Valid values: `1` (licensed); `0` (unlicensed).
+	// <p>Whether authorization is performed. 1 indicates authorized and 0 indicates unauthorized.</p>
 	IsAuthorized *int64 `json:"IsAuthorized,omitnil,omitempty" name:"IsAuthorized"`
+
+	// <p>Solution.</p>
+	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
+
+	// <p>Reason.</p>
+	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
+
+	// <p>Repository digests.</p>
+	RepoDigests []*string `json:"RepoDigests,omitnil,omitempty" name:"RepoDigests"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -10314,147 +10650,39 @@ func (r *DescribeAssetImageHostListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type DescribeAssetImageListExportRequestParams struct {
-	// Export field
-	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
-
-	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
-	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Offset. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Filter
-	// <li>ImageName- String - Required: No - Image name</li>
-	// <li>ScanStatus - String - Required: No - Image scanning status. Valid values: `notScan`, `scanning`, `scanned`, `scanErr`.</li>
-	// <li>ImageID- String - Required: No - Image ID</li>
-	// <li>SecurityRisk- String - Required: No - Security risks. Valid values: `VulCnt`, `VirusCnt`, `RiskCnt`, `IsTrustImage`.</li>
-	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Sorting field
-	By *string `json:"By,omitnil,omitempty" name:"By"`
-
-	// Sorting order. Valid values: `asc`, `desc`.
-	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-}
-
-type DescribeAssetImageListExportRequest struct {
-	*tchttp.BaseRequest
-	
-	// Export field
-	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
-
-	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
-	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Offset. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Filter
-	// <li>ImageName- String - Required: No - Image name</li>
-	// <li>ScanStatus - String - Required: No - Image scanning status. Valid values: `notScan`, `scanning`, `scanned`, `scanErr`.</li>
-	// <li>ImageID- String - Required: No - Image ID</li>
-	// <li>SecurityRisk- String - Required: No - Security risks. Valid values: `VulCnt`, `VirusCnt`, `RiskCnt`, `IsTrustImage`.</li>
-	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Sorting field
-	By *string `json:"By,omitnil,omitempty" name:"By"`
-
-	// Sorting order. Valid values: `asc`, `desc`.
-	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-}
-
-func (r *DescribeAssetImageListExportRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAssetImageListExportRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ExportField")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	delete(f, "Filters")
-	delete(f, "By")
-	delete(f, "Order")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAssetImageListExportRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeAssetImageListExportResponseParams struct {
-	// Excel file download URL
-	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DescribeAssetImageListExportResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeAssetImageListExportResponseParams `json:"Response"`
-}
-
-func (r *DescribeAssetImageListExportResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAssetImageListExportResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type DescribeAssetImageListRequestParams struct {
-	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
+	// <p>Number of items to return. The default number is 10, and the maximum number is 100.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset. Default value: `0`.
+	// <p>Offset. Default value: 0.</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Filter
-	// <li>ImageName- String - Required: No - Image name</li>
-	// <li>ScanStatus - String - Required: No - Image scanning status. Valid values: `notScan`, `scanning`, `scanned`, `scanErr`.</li>
-	// <li>ImageID- String - Required: No - Image ID</li>
-	// <li>SecurityRisk- String - Required: No - Security risks. Valid values: `VulCnt`, `VirusCnt`, `RiskCnt`, `IsTrustImage`.</li>
+	// <p>Filter conditions.</p><li>ImageName - String - Required: No - Image name filter;</li><li>ScanStatus - String - Required: No - Image scan status: notScan, scanning, scanned, and scanErr</li><li>ImageID - String - Required: No - Image ID filter;</li><li>SecurityRisk - String - Required: No - Security risk: VirusCnt, RiskCnt, IsTrustImage, CriticalLevelVul, HighLevelVul, MediumLevelVul, and LowLevelVul.</li>
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Sorting field
+	// <p>Sorting field.</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 
-	// Sorting order. Valid values: `asc`, `desc`.
+	// <p>Sorting method. Valid values: asc and desc.</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 }
 
 type DescribeAssetImageListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
+	// <p>Number of items to return. The default number is 10, and the maximum number is 100.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset. Default value: `0`.
+	// <p>Offset. Default value: 0.</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Filter
-	// <li>ImageName- String - Required: No - Image name</li>
-	// <li>ScanStatus - String - Required: No - Image scanning status. Valid values: `notScan`, `scanning`, `scanned`, `scanErr`.</li>
-	// <li>ImageID- String - Required: No - Image ID</li>
-	// <li>SecurityRisk- String - Required: No - Security risks. Valid values: `VulCnt`, `VirusCnt`, `RiskCnt`, `IsTrustImage`.</li>
+	// <p>Filter conditions.</p><li>ImageName - String - Required: No - Image name filter;</li><li>ScanStatus - String - Required: No - Image scan status: notScan, scanning, scanned, and scanErr</li><li>ImageID - String - Required: No - Image ID filter;</li><li>SecurityRisk - String - Required: No - Security risk: VirusCnt, RiskCnt, IsTrustImage, CriticalLevelVul, HighLevelVul, MediumLevelVul, and LowLevelVul.</li>
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Sorting field
+	// <p>Sorting field.</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 
-	// Sorting order. Valid values: `asc`, `desc`.
+	// <p>Sorting method. Valid values: asc and desc.</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 }
 
@@ -10483,10 +10711,10 @@ func (r *DescribeAssetImageListRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAssetImageListResponseParams struct {
-	// List of images
+	// <p>Image list.</p>
 	List []*ImagesInfo `json:"List,omitnil,omitempty" name:"List"`
 
-	// Total number
+	// <p>Total quantity.</p>
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -10544,8 +10772,10 @@ type DescribeAssetImageRegistryAssetStatusResponseParams struct {
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Error message
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Err *string `json:"Err,omitnil,omitempty" name:"Err"`
+
+	// Last synchronization success time.
+	LatestSyncSuccessTime *string `json:"LatestSyncSuccessTime,omitnil,omitempty" name:"LatestSyncSuccessTime"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -10608,135 +10838,115 @@ func (r *DescribeAssetImageRegistryDetailRequest) FromJsonString(s string) error
 
 // Predefined struct for user
 type DescribeAssetImageRegistryDetailResponseParams struct {
-	// Image digest
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Image Digest
 	ImageDigest *string `json:"ImageDigest,omitnil,omitempty" name:"ImageDigest"`
 
-	// Image address
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Image address.
 	ImageRepoAddress *string `json:"ImageRepoAddress,omitnil,omitempty" name:"ImageRepoAddress"`
 
 	// Image type
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	RegistryType *string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
 	// Repository name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ImageName *string `json:"ImageName,omitnil,omitempty" name:"ImageName"`
 
-	// Image tag
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Mirror version
 	ImageTag *string `json:"ImageTag,omitnil,omitempty" name:"ImageTag"`
 
 	// Scan time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ScanTime *string `json:"ScanTime,omitnil,omitempty" name:"ScanTime"`
 
-	// Scanning status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// scan status
 	ScanStatus *string `json:"ScanStatus,omitnil,omitempty" name:"ScanStatus"`
 
-	// Number of vulnerabilities
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of security vulnerabilities
 	VulCnt *uint64 `json:"VulCnt,omitnil,omitempty" name:"VulCnt"`
 
-	// Number of viruses and trojans
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of Trojan viruses
 	VirusCnt *uint64 `json:"VirusCnt,omitnil,omitempty" name:"VirusCnt"`
 
 	// Number of risky behaviors
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	RiskCnt *uint64 `json:"RiskCnt,omitnil,omitempty" name:"RiskCnt"`
 
 	// Number of sensitive data items
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	//
 	// Deprecated: SentiveInfoCnt is deprecated.
 	SentiveInfoCnt *uint64 `json:"SentiveInfoCnt,omitnil,omitempty" name:"SentiveInfoCnt"`
 
-	// Image system
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Image system.
 	OsName *string `json:"OsName,omitnil,omitempty" name:"OsName"`
 
 	// Trojan scan error
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ScanVirusError *string `json:"ScanVirusError,omitnil,omitempty" name:"ScanVirusError"`
 
-	// Vulnerability scan error
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Vulnerability scanning error
 	ScanVulError *string `json:"ScanVulError,omitnil,omitempty" name:"ScanVulError"`
 
 	// Layer file information
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	LayerInfo *string `json:"LayerInfo,omitnil,omitempty" name:"LayerInfo"`
 
-	// Instance ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance name.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Namespace
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// High-risk scan error
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// High risk scan error
 	ScanRiskError *string `json:"ScanRiskError,omitnil,omitempty" name:"ScanRiskError"`
 
-	// Trojan scanning progress
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Trojan information scan progress
 	ScanVirusProgress *uint64 `json:"ScanVirusProgress,omitnil,omitempty" name:"ScanVirusProgress"`
 
-	// Vulnerability scanning progress
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Vulnerability scan progress.
 	ScanVulProgress *uint64 `json:"ScanVulProgress,omitnil,omitempty" name:"ScanVulProgress"`
 
-	// Sensitive data scanning progress
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Sensitive scanning progress
 	ScanRiskProgress *uint64 `json:"ScanRiskProgress,omitnil,omitempty" name:"ScanRiskProgress"`
 
-	// Remaining scan time in seconds
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Remaining scan time (seconds)
 	ScanRemainTime *uint64 `json:"ScanRemainTime,omitnil,omitempty" name:"ScanRemainTime"`
 
-	// CVE scanning status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// cve scan status
 	CveStatus *string `json:"CveStatus,omitnil,omitempty" name:"CveStatus"`
 
-	// High-risk scanning status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// High risk scan status
 	RiskStatus *string `json:"RiskStatus,omitnil,omitempty" name:"RiskStatus"`
 
-	// Trojan scanning status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Trojan scan status
 	VirusStatus *string `json:"VirusStatus,omitnil,omitempty" name:"VirusStatus"`
 
 	// Overall progress
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Licensing status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Authorization status
 	IsAuthorized *uint64 `json:"IsAuthorized,omitnil,omitempty" name:"IsAuthorized"`
 
 	// Image size
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ImageSize *uint64 `json:"ImageSize,omitnil,omitempty" name:"ImageSize"`
 
-	// Image ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Image ID.
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
-	// Image region
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Image Zone
 	RegistryRegion *string `json:"RegistryRegion,omitnil,omitempty" name:"RegistryRegion"`
 
-	// Image creation time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Image Creation Time
 	ImageCreateTime *string `json:"ImageCreateTime,omitnil,omitempty" name:"ImageCreateTime"`
+
+	// Number of sensitive data items
+	SensitiveInfoCnt *uint64 `json:"SensitiveInfoCnt,omitnil,omitempty" name:"SensitiveInfoCnt"`
+
+
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Solution
+	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
+
+	// Reason
+	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -10834,9 +11044,11 @@ func (r *DescribeAssetImageRegistryListExportRequest) FromJsonString(s string) e
 
 // Predefined struct for user
 type DescribeAssetImageRegistryListExportResponseParams struct {
-	// Excel file download URL
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// file download link
 	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
+
+	// Export task ID.
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -10860,47 +11072,51 @@ func (r *DescribeAssetImageRegistryListExportResponse) FromJsonString(s string) 
 
 // Predefined struct for user
 type DescribeAssetImageRegistryListRequestParams struct {
-	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
+	// <p>Number of items to return. The default number is 10, and the maximum number is 100.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset. Default value: `0`.
+	// <p>Offset. Default value: 0.</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Filter field
-	// `IsAuthorized` (whether licensed). Valid values: `all` (all); `0` (unlicensed); `1` (licensed).
+	// <p>Filter field.<br>IsAuthorized can be set to all, 0 (unauthorized), and 1 (authorized).</p>
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Sorting field
+	// <p>Sorting field.</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 
-	// Sorting order. Valid values: `asc`, `desc`.
+	// <p>Sorting method. Valid values: asc and desc.</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// Whether to show only the latest repository images. Default value: `false`.
+	// <p>Whether to display only the latest image of each repository. Default value: false.</p>
 	OnlyShowLatest *bool `json:"OnlyShowLatest,omitnil,omitempty" name:"OnlyShowLatest"`
+
+	// <p>Whether to display only running container images.</p>
+	IsRunning *bool `json:"IsRunning,omitnil,omitempty" name:"IsRunning"`
 }
 
 type DescribeAssetImageRegistryListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
+	// <p>Number of items to return. The default number is 10, and the maximum number is 100.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset. Default value: `0`.
+	// <p>Offset. Default value: 0.</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Filter field
-	// `IsAuthorized` (whether licensed). Valid values: `all` (all); `0` (unlicensed); `1` (licensed).
+	// <p>Filter field.<br>IsAuthorized can be set to all, 0 (unauthorized), and 1 (authorized).</p>
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Sorting field
+	// <p>Sorting field.</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 
-	// Sorting order. Valid values: `asc`, `desc`.
+	// <p>Sorting method. Valid values: asc and desc.</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// Whether to show only the latest repository images. Default value: `false`.
+	// <p>Whether to display only the latest image of each repository. Default value: false.</p>
 	OnlyShowLatest *bool `json:"OnlyShowLatest,omitnil,omitempty" name:"OnlyShowLatest"`
+
+	// <p>Whether to display only running container images.</p>
+	IsRunning *bool `json:"IsRunning,omitnil,omitempty" name:"IsRunning"`
 }
 
 func (r *DescribeAssetImageRegistryListRequest) ToJsonString() string {
@@ -10921,6 +11137,7 @@ func (r *DescribeAssetImageRegistryListRequest) FromJsonString(s string) error {
 	delete(f, "By")
 	delete(f, "Order")
 	delete(f, "OnlyShowLatest")
+	delete(f, "IsRunning")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAssetImageRegistryListRequest has unknown keys!", "")
 	}
@@ -10929,12 +11146,10 @@ func (r *DescribeAssetImageRegistryListRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAssetImageRegistryListResponseParams struct {
-	// List of image repositories
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Image repository list.</p>
 	List []*ImageRepoInfo `json:"List,omitnil,omitempty" name:"List"`
 
-	// Total number
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Total quantity.</p>
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -11006,24 +11221,38 @@ type DescribeAssetImageRegistryRegistryDetailResponseParams struct {
 	// Repository type, which can be `harbor`.
 	RegistryType *string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
-	// Repository version
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// warehouse version
 	RegistryVersion *string `json:"RegistryVersion,omitnil,omitempty" name:"RegistryVersion"`
 
 	// Network type, which can be `public` (public network).
 	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
-	// Region. Default value: `default`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Region, list: default
 	RegistryRegion *string `json:"RegistryRegion,omitnil,omitempty" name:"RegistryRegion"`
 
-	// Speed limit
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// rate limiting
 	SpeedLimit *uint64 `json:"SpeedLimit,omitnil,omitempty" name:"SpeedLimit"`
 
-	// Valid values: `0` (secure mode with certificate verification, which is the default value); `1` (unsecure mode that skips certificate verification).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// 0: Secure Mode (Certificate Verification) (Default); 1: Insecure Mode (Skip Certificate Verification)
 	Insecure *uint64 `json:"Insecure,omitnil,omitempty" name:"Insecure"`
+
+
+	ConnDetectDetail []*RegistryConnDetectResult `json:"ConnDetectDetail,omitnil,omitempty" name:"ConnDetectDetail"`
+
+
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
+
+	// Synchronization method. 0: full synchronization; 1: incremental synchronization.
+	SyncMode *uint64 `json:"SyncMode,omitnil,omitempty" name:"SyncMode"`
+
+	// Whether authorization and scanning are performed automatically. For full synchronization, only images of the latest version are involved. For incremental synchronization, all new images are involved.
+	NeedScan *bool `json:"NeedScan,omitnil,omitempty" name:"NeedScan"`
+
+	// Webhook access address.
+	WebhookUrl *string `json:"WebhookUrl,omitnil,omitempty" name:"WebhookUrl"`
+
+	// Webhook access token.	
+	WebhookToken *string `json:"WebhookToken,omitnil,omitempty" name:"WebhookToken"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -11047,38 +11276,40 @@ func (r *DescribeAssetImageRegistryRegistryDetailResponse) FromJsonString(s stri
 
 // Predefined struct for user
 type DescribeAssetImageRegistryRegistryListRequestParams struct {
-	// Number to return, default is 10, maximum is 100
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset, the default is 0
+	// Offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Filter field IsAuthorized Whether to authorize. The value can be all, 0 unauthorized, 1 authorized
+	// Filter fields
+	// Authorization status, with possible values: all, unauthorized (0), authorized (1)
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Sort field
+	// Sorting field.
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 
-	// Sort by asc, desc
+	// Sorting method: asc, desc
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 }
 
 type DescribeAssetImageRegistryRegistryListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Number to return, default is 10, maximum is 100
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset, the default is 0
+	// Offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Filter field IsAuthorized Whether to authorize. The value can be all, 0 unauthorized, 1 authorized
+	// Filter fields
+	// Authorization status, with possible values: all, unauthorized (0), authorized (1)
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Sort field
+	// Sorting field.
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 
-	// Sort by asc, desc
+	// Sorting method: asc, desc
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 }
 
@@ -11107,10 +11338,10 @@ func (r *DescribeAssetImageRegistryRegistryListRequest) FromJsonString(s string)
 
 // Predefined struct for user
 type DescribeAssetImageRegistryRegistryListResponseParams struct {
-	// Mirror repository list
+	// Image repository list
 	List []*ImageRepoRegistryInfo `json:"List,omitnil,omitempty" name:"List"`
 
-	// Total quantity
+	// Total number.
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -11213,12 +11444,10 @@ func (r *DescribeAssetImageRegistryRiskInfoListRequest) FromJsonString(s string)
 
 // Predefined struct for user
 type DescribeAssetImageRegistryRiskInfoListResponseParams struct {
-	// List of image vulnerabilities
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Image vulnerability list
 	List []*ImageRisk `json:"List,omitnil,omitempty" name:"List"`
 
-	// Total number
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Total number.
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -11243,9 +11472,6 @@ func (r *DescribeAssetImageRegistryRiskInfoListResponse) FromJsonString(s string
 
 // Predefined struct for user
 type DescribeAssetImageRegistryRiskListExportRequestParams struct {
-	// Export field
-	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
-
 	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
@@ -11259,6 +11485,9 @@ type DescribeAssetImageRegistryRiskListExportRequestParams struct {
 
 	// Image information
 	ImageInfo *ImageInfo `json:"ImageInfo,omitnil,omitempty" name:"ImageInfo"`
+
+	// Export field
+	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
 
 	// Image ID
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
@@ -11267,9 +11496,6 @@ type DescribeAssetImageRegistryRiskListExportRequestParams struct {
 type DescribeAssetImageRegistryRiskListExportRequest struct {
 	*tchttp.BaseRequest
 	
-	// Export field
-	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
-
 	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
@@ -11283,6 +11509,9 @@ type DescribeAssetImageRegistryRiskListExportRequest struct {
 
 	// Image information
 	ImageInfo *ImageInfo `json:"ImageInfo,omitnil,omitempty" name:"ImageInfo"`
+
+	// Export field
+	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
 
 	// Image ID
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
@@ -11300,11 +11529,11 @@ func (r *DescribeAssetImageRegistryRiskListExportRequest) FromJsonString(s strin
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "ExportField")
 	delete(f, "Limit")
 	delete(f, "Offset")
 	delete(f, "Filters")
 	delete(f, "ImageInfo")
+	delete(f, "ExportField")
 	delete(f, "Id")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAssetImageRegistryRiskListExportRequest has unknown keys!", "")
@@ -11314,9 +11543,11 @@ func (r *DescribeAssetImageRegistryRiskListExportRequest) FromJsonString(s strin
 
 // Predefined struct for user
 type DescribeAssetImageRegistryRiskListExportResponseParams struct {
-	// Excel file download URL
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// excel file download link
 	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
+
+	// Export task ID.
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -11392,8 +11623,7 @@ type DescribeAssetImageRegistryScanStatusOneKeyResponseParams struct {
 	// Number of scanned images
 	ImageScanCnt *uint64 `json:"ImageScanCnt,omitnil,omitempty" name:"ImageScanCnt"`
 
-	// Scanning progress list
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Scan progress list
 	ImageStatus []*ImageProgress `json:"ImageStatus,omitnil,omitempty" name:"ImageStatus"`
 
 	// Number of successfully scanned images
@@ -11409,7 +11639,6 @@ type DescribeAssetImageRegistryScanStatusOneKeyResponseParams struct {
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Remaining scan time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ScanRemainTime *uint64 `json:"ScanRemainTime,omitnil,omitempty" name:"ScanRemainTime"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -11434,14 +11663,13 @@ func (r *DescribeAssetImageRegistryScanStatusOneKeyResponse) FromJsonString(s st
 
 // Predefined struct for user
 type DescribeAssetImageRegistrySummaryRequestParams struct {
-	// Filter Field
+
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeAssetImageRegistrySummaryRequest struct {
 	*tchttp.BaseRequest
 	
-	// Filter Field
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -11466,6 +11694,9 @@ func (r *DescribeAssetImageRegistrySummaryRequest) FromJsonString(s string) erro
 
 // Predefined struct for user
 type DescribeAssetImageRegistrySummaryResponseParams struct {
+	// Number of Images to Be Scanned
+	UnScannedImageCnt *uint64 `json:"UnScannedImageCnt,omitnil,omitempty" name:"UnScannedImageCnt"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -11488,9 +11719,6 @@ func (r *DescribeAssetImageRegistrySummaryResponse) FromJsonString(s string) err
 
 // Predefined struct for user
 type DescribeAssetImageRegistryVirusListExportRequestParams struct {
-	// Export field
-	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
-
 	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
@@ -11504,6 +11732,9 @@ type DescribeAssetImageRegistryVirusListExportRequestParams struct {
 
 	// Image information
 	ImageInfo *ImageInfo `json:"ImageInfo,omitnil,omitempty" name:"ImageInfo"`
+
+	// Export field
+	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
 
 	// Image ID
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
@@ -11512,9 +11743,6 @@ type DescribeAssetImageRegistryVirusListExportRequestParams struct {
 type DescribeAssetImageRegistryVirusListExportRequest struct {
 	*tchttp.BaseRequest
 	
-	// Export field
-	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
-
 	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
@@ -11528,6 +11756,9 @@ type DescribeAssetImageRegistryVirusListExportRequest struct {
 
 	// Image information
 	ImageInfo *ImageInfo `json:"ImageInfo,omitnil,omitempty" name:"ImageInfo"`
+
+	// Export field
+	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
 
 	// Image ID
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
@@ -11545,11 +11776,11 @@ func (r *DescribeAssetImageRegistryVirusListExportRequest) FromJsonString(s stri
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "ExportField")
 	delete(f, "Limit")
 	delete(f, "Offset")
 	delete(f, "Filters")
 	delete(f, "ImageInfo")
+	delete(f, "ExportField")
 	delete(f, "Id")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAssetImageRegistryVirusListExportRequest has unknown keys!", "")
@@ -11559,9 +11790,11 @@ func (r *DescribeAssetImageRegistryVirusListExportRequest) FromJsonString(s stri
 
 // Predefined struct for user
 type DescribeAssetImageRegistryVirusListExportResponseParams struct {
-	// Excel file download URL
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// excel file download link
 	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
+
+	// Export task ID.
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -11649,12 +11882,10 @@ func (r *DescribeAssetImageRegistryVirusListRequest) FromJsonString(s string) er
 
 // Predefined struct for user
 type DescribeAssetImageRegistryVirusListResponseParams struct {
-	// List of image vulnerabilities
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Image vulnerability list
 	List []*ImageVirus `json:"List,omitnil,omitempty" name:"List"`
 
-	// Total number
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Total number.
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -11696,7 +11927,7 @@ type DescribeAssetImageRegistryVulListExportRequestParams struct {
 	// Image information
 	ImageInfo *ImageInfo `json:"ImageInfo,omitnil,omitempty" name:"ImageInfo"`
 
-	// Image ID
+	// Unique image ID, obtainable by calling the DescribeAssetImageRegistryList API.
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
@@ -11720,7 +11951,7 @@ type DescribeAssetImageRegistryVulListExportRequest struct {
 	// Image information
 	ImageInfo *ImageInfo `json:"ImageInfo,omitnil,omitempty" name:"ImageInfo"`
 
-	// Image ID
+	// Unique image ID, obtainable by calling the DescribeAssetImageRegistryList API.
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
@@ -11750,9 +11981,11 @@ func (r *DescribeAssetImageRegistryVulListExportRequest) FromJsonString(s string
 
 // Predefined struct for user
 type DescribeAssetImageRegistryVulListExportResponseParams struct {
-	// Excel file download URL
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// file download link
 	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
+
+	// Export task ID.
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -11790,7 +12023,7 @@ type DescribeAssetImageRegistryVulListRequestParams struct {
 	// Image information
 	ImageInfo *ImageInfo `json:"ImageInfo,omitnil,omitempty" name:"ImageInfo"`
 
-	// Image ID
+	// Unique image ID, obtainable by calling the DescribeAssetImageRegistryList API.
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
@@ -11811,7 +12044,7 @@ type DescribeAssetImageRegistryVulListRequest struct {
 	// Image information
 	ImageInfo *ImageInfo `json:"ImageInfo,omitnil,omitempty" name:"ImageInfo"`
 
-	// Image ID
+	// Unique image ID, obtainable by calling the DescribeAssetImageRegistryList API.
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
@@ -11840,12 +12073,10 @@ func (r *DescribeAssetImageRegistryVulListRequest) FromJsonString(s string) erro
 
 // Predefined struct for user
 type DescribeAssetImageRegistryVulListResponseParams struct {
-	// List of image vulnerabilities
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Image vulnerability list
 	List []*ImageVul `json:"List,omitnil,omitempty" name:"List"`
 
-	// Total number
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Total number.
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -12077,31 +12308,52 @@ func (r *DescribeAssetImageScanSettingRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAssetImageScanSettingResponseParams struct {
-	// Switch
+	// <p>Switch.</p>
 	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Scan time, which is a complete time and parsed as hour/minute/second in time zone 0 on the backend.
+	// <p>Scan time (complete time; backend parses hour/minute/second in UTC)</p>
 	ScanTime *string `json:"ScanTime,omitnil,omitempty" name:"ScanTime"`
 
-	// Scan interval
+	// <p>Scan interval</p>
 	ScanPeriod *uint64 `json:"ScanPeriod,omitnil,omitempty" name:"ScanPeriod"`
 
-	// Trojan scan
+	// <p>Scan for trojans</p>
 	ScanVirus *bool `json:"ScanVirus,omitnil,omitempty" name:"ScanVirus"`
 
-	// Sensitive data scan
+	// <p>Scan sensitive information</p>
 	ScanRisk *bool `json:"ScanRisk,omitnil,omitempty" name:"ScanRisk"`
 
-	// Vulnerability scan
+	// <p>Scan vulnerabilities</p>
 	ScanVul *bool `json:"ScanVul,omitnil,omitempty" name:"ScanVul"`
 
-	// Scan of all images
+	// <p>Scan all images</p>
 	//
 	// Deprecated: All is deprecated.
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// Scan of specified images
+	// <p>Custom scan image</p>
 	Images []*string `json:"Images,omitnil,omitempty" name:"Images"`
+
+	// <p>Whether the image has running containers</p>
+	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
+
+	// <p>Scan range 0 all authorized images, 1 selected images, 2 recommended scan, 3 cluster filtering scan</p>
+	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
+
+	// <p>Scan end time 02:00 Time Division</p>
+	ScanEndTime *string `json:"ScanEndTime,omitnil,omitempty" name:"ScanEndTime"`
+
+	// <p>Excluded scanned images</p>
+	ExcludeImages []*string `json:"ExcludeImages,omitnil,omitempty" name:"ExcludeImages"`
+
+	// <p>Last scan time</p>
+	LastScanTime *string `json:"LastScanTime,omitnil,omitempty" name:"LastScanTime"`
+
+	// <p>Scanning result (Success|InsufficientLicense|ImageNeedIsEmpty|InternalError)</p>
+	ScanResult *string `json:"ScanResult,omitnil,omitempty" name:"ScanResult"`
+
+	// <p>Cluster ID.</p>
+	ClusterIDs []*string `json:"ClusterIDs,omitnil,omitempty" name:"ClusterIDs"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -12231,6 +12483,15 @@ func (r *DescribeAssetImageScanTaskRequest) FromJsonString(s string) error {
 type DescribeAssetImageScanTaskResponseParams struct {
 	// Task ID
 	TaskID *string `json:"TaskID,omitnil,omitempty" name:"TaskID"`
+
+	// Last scan time
+	LastScanTime *string `json:"LastScanTime,omitnil,omitempty" name:"LastScanTime"`
+
+	// Scanning status. Valid values: READY, SCANNING, and END.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Scanning sub-status. Valid values: Success, Timeout, Cancel, and Error.
+	SubStatus *string `json:"SubStatus,omitnil,omitempty" name:"SubStatus"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -12984,17 +13245,20 @@ type DescribeAssetSummaryResponseParams struct {
 	// Number of running super nodes
 	SuperNodeRunningCnt *uint64 `json:"SuperNodeRunningCnt,omitnil,omitempty" name:"SuperNodeRunningCnt"`
 
-
+	// New image count added today
 	TodayNewImageCnt *uint64 `json:"TodayNewImageCnt,omitnil,omitempty" name:"TodayNewImageCnt"`
 
-
+	// New unsafe image count added today
 	TodayUnsafeImageCnt *uint64 `json:"TodayUnsafeImageCnt,omitnil,omitempty" name:"TodayUnsafeImageCnt"`
 
-
+	// The count of image should be fixed
 	RecommendedFixImageCnt *uint64 `json:"RecommendedFixImageCnt,omitnil,omitempty" name:"RecommendedFixImageCnt"`
 
-
+	// The count of image scanned
 	ScannedImageCnt *uint64 `json:"ScannedImageCnt,omitnil,omitempty" name:"ScannedImageCnt"`
+
+	// Number of Images to Be Scanned
+	UnScannedImageCnt *uint64 `json:"UnScannedImageCnt,omitnil,omitempty" name:"UnScannedImageCnt"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -13049,6 +13313,18 @@ func (r *DescribeAssetSyncLastTimeRequest) FromJsonString(s string) error {
 type DescribeAssetSyncLastTimeResponseParams struct {
 	// Last asset sync time
 	AssetSyncLastTime *string `json:"AssetSyncLastTime,omitnil,omitempty" name:"AssetSyncLastTime"`
+
+
+	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
+
+
+	TaskProcess *int64 `json:"TaskProcess,omitnil,omitempty" name:"TaskProcess"`
+
+	// Number of failed hosts.
+	FailedHostCount *uint64 `json:"FailedHostCount,omitnil,omitempty" name:"FailedHostCount"`
+
+	// Task ID.
+	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -13373,6 +13649,9 @@ type DescribeClusterDetailResponseParams struct {
 	// Cluster status. Valid values: `Running`, `Creating`, `Abnormal`.
 	ClusterStatus *string `json:"ClusterStatus,omitnil,omitempty" name:"ClusterStatus"`
 
+	// Cluster operation sub-status.
+	ClusterSubStatus *string `json:"ClusterSubStatus,omitnil,omitempty" name:"ClusterSubStatus"`
+
 	// Cluster type. Valid values: `MANAGED_CLUSTER` (managed cluster); `INDEPENDENT_CLUSTER` (self-deployed cluster).
 	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
 
@@ -13426,6 +13705,12 @@ type DescribeClusterDetailResponseParams struct {
 
 	// IPs of the primary nodes
 	MasterIps *string `json:"MasterIps,omitnil,omitempty" name:"MasterIps"`
+
+	// Owner name.
+	OwnerName *string `json:"OwnerName,omitnil,omitempty" name:"OwnerName"`
+
+	// Check failure reasons.
+	CheckFailReason *string `json:"CheckFailReason,omitnil,omitempty" name:"CheckFailReason"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -13514,13 +13799,13 @@ type DescribeClusterSummaryResponseParams struct {
 	// Number of EKS clusters
 	ServerlessClusterCount *uint64 `json:"ServerlessClusterCount,omitnil,omitempty" name:"ServerlessClusterCount"`
 
-
+	// TKE Cluster Count
 	TkeClusterCount *uint64 `json:"TkeClusterCount,omitnil,omitempty" name:"TkeClusterCount"`
 
-
+	// Number of User-Built Tencent Cloud Clusters
 	UserCreateTencentClusterCount *uint64 `json:"UserCreateTencentClusterCount,omitnil,omitempty" name:"UserCreateTencentClusterCount"`
 
-
+	// Number of User-Built Cluster Hybrid Clouds
 	UserCreateHybridClusterCount *uint64 `json:"UserCreateHybridClusterCount,omitnil,omitempty" name:"UserCreateHybridClusterCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -13547,6 +13832,9 @@ func (r *DescribeClusterSummaryResponse) FromJsonString(s string) error {
 type DescribeComplianceAssetDetailInfoRequestParams struct {
 	// Customer asset ID
 	CustomerAssetId *uint64 `json:"CustomerAssetId,omitnil,omitempty" name:"CustomerAssetId"`
+
+	// Asset type. <li>ASSET_CONTAINER: Docker container.</li> <li>ASSET_IMAGE: Docker image.</li> <li>ASSET_HOST: Docker host.</li> <li>ASSET_K8S: Kubernetes.</li> <li>ASSET_CONTAINERD: Containerd host.</li> <li>ASSET_CONTAINERD_CONTAINER: Containerd container.</li>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 }
 
 type DescribeComplianceAssetDetailInfoRequest struct {
@@ -13554,6 +13842,9 @@ type DescribeComplianceAssetDetailInfoRequest struct {
 	
 	// Customer asset ID
 	CustomerAssetId *uint64 `json:"CustomerAssetId,omitnil,omitempty" name:"CustomerAssetId"`
+
+	// Asset type. <li>ASSET_CONTAINER: Docker container.</li> <li>ASSET_IMAGE: Docker image.</li> <li>ASSET_HOST: Docker host.</li> <li>ASSET_K8S: Kubernetes.</li> <li>ASSET_CONTAINERD: Containerd host.</li> <li>ASSET_CONTAINERD_CONTAINER: Containerd container.</li>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 }
 
 func (r *DescribeComplianceAssetDetailInfoRequest) ToJsonString() string {
@@ -13569,6 +13860,7 @@ func (r *DescribeComplianceAssetDetailInfoRequest) FromJsonString(s string) erro
 		return err
 	}
 	delete(f, "CustomerAssetId")
+	delete(f, "AssetType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeComplianceAssetDetailInfoRequest has unknown keys!", "")
 	}
@@ -13581,19 +13873,15 @@ type DescribeComplianceAssetDetailInfoResponseParams struct {
 	AssetDetailInfo *ComplianceAssetDetailInfo `json:"AssetDetailInfo,omitnil,omitempty" name:"AssetDetailInfo"`
 
 	// This field is returned when the asset is a container.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ContainerDetailInfo *ComplianceContainerDetailInfo `json:"ContainerDetailInfo,omitnil,omitempty" name:"ContainerDetailInfo"`
 
-	// This field is returned when the asset is an image.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// When the asset is a mirror, return this field.
 	ImageDetailInfo *ComplianceImageDetailInfo `json:"ImageDetailInfo,omitnil,omitempty" name:"ImageDetailInfo"`
 
-	// This field is returned when the asset is a server.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// This field is returned when the asset is a host.
 	HostDetailInfo *ComplianceHostDetailInfo `json:"HostDetailInfo,omitnil,omitempty" name:"HostDetailInfo"`
 
-	// This field is returned when the asset is a K8s asset.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// When the asset is K8S, return this field.
 	K8SDetailInfo *ComplianceK8SDetailInfo `json:"K8SDetailInfo,omitnil,omitempty" name:"K8SDetailInfo"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -13618,7 +13906,11 @@ func (r *DescribeComplianceAssetDetailInfoResponse) FromJsonString(s string) err
 
 // Predefined struct for user
 type DescribeComplianceAssetListRequestParams struct {
-	// List of asset types
+	// Asset type list.
+	// ASSET_CONTAINER, container
+	// ASSET_IMAGE - Mirror
+	// ASSET_HOST, Host
+	// ASSET_K8S, K8S asset
 	AssetTypeSet []*string `json:"AssetTypeSet,omitnil,omitempty" name:"AssetTypeSet"`
 
 	// Initial offset. Default value: `0`.
@@ -13634,7 +13926,11 @@ type DescribeComplianceAssetListRequestParams struct {
 type DescribeComplianceAssetListRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of asset types
+	// Asset type list.
+	// ASSET_CONTAINER, container
+	// ASSET_IMAGE - Mirror
+	// ASSET_HOST, Host
+	// ASSET_K8S, K8S asset
 	AssetTypeSet []*string `json:"AssetTypeSet,omitnil,omitempty" name:"AssetTypeSet"`
 
 	// Initial offset. Default value: `0`.
@@ -13674,8 +13970,7 @@ type DescribeComplianceAssetListResponseParams struct {
 	// Total number of assets
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// List of assets
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Return a list of various assets.
 	AssetInfoList []*ComplianceAssetInfo `json:"AssetInfoList,omitnil,omitempty" name:"AssetInfoList"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -13709,9 +14004,12 @@ type DescribeComplianceAssetPolicyItemListRequestParams struct {
 	// Number of results to be obtained. Default value: `10`. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter list, which is supported by the `Name` field.
-	// RiskLevel
+	// Filter list. Name field support
+	// RiskLevel, AppId
 	Filters []*ComplianceFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Asset type. <li>ASSET_CONTAINER: Docker container.</li> <li>ASSET_IMAGE: Docker image.</li> <li>ASSET_HOST: Docker host.</li> <li>ASSET_K8S: Kubernetes.</li> <li>ASSET_CONTAINERD: Containerd host.</li> <li>ASSET_CONTAINERD_CONTAINER: Containerd container.</li>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 }
 
 type DescribeComplianceAssetPolicyItemListRequest struct {
@@ -13726,9 +14024,12 @@ type DescribeComplianceAssetPolicyItemListRequest struct {
 	// Number of results to be obtained. Default value: `10`. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter list, which is supported by the `Name` field.
-	// RiskLevel
+	// Filter list. Name field support
+	// RiskLevel, AppId
 	Filters []*ComplianceFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Asset type. <li>ASSET_CONTAINER: Docker container.</li> <li>ASSET_IMAGE: Docker image.</li> <li>ASSET_HOST: Docker host.</li> <li>ASSET_K8S: Kubernetes.</li> <li>ASSET_CONTAINERD: Containerd host.</li> <li>ASSET_CONTAINERD_CONTAINER: Containerd container.</li>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 }
 
 func (r *DescribeComplianceAssetPolicyItemListRequest) ToJsonString() string {
@@ -13747,6 +14048,7 @@ func (r *DescribeComplianceAssetPolicyItemListRequest) FromJsonString(s string) 
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Filters")
+	delete(f, "AssetType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeComplianceAssetPolicyItemListRequest has unknown keys!", "")
 	}
@@ -14071,8 +14373,7 @@ type DescribeComplianceScanFailedAssetListResponseParams struct {
 	// Total number of assets that failed the check
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// List of aggregated information of each type of asset that failed the check
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Return the list of summary information for assets with various types of detection failures.
 	ScanFailedAssetList []*ComplianceScanFailedAsset `json:"ScanFailedAssetList,omitnil,omitempty" name:"ScanFailedAssetList"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -14186,10 +14487,7 @@ type DescribeComplianceTaskPolicyItemSummaryListRequestParams struct {
 	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter
-	// Name - String
-	// Name. Valid values: `ItemType`, `StandardId`, `RiskLevel`.
-	// `ClusterName` is also available for K8s assets.
+	// Filtering conditions. <li>Name      string Detection item name.</li> <li>ItemType  string Detection item type.</li> <li>RiskLevel string Risk level.</li> <li>IsOpen    int    Enabling status.</li>
 	Filters []*ComplianceFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -14213,10 +14511,7 @@ type DescribeComplianceTaskPolicyItemSummaryListRequest struct {
 	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter
-	// Name - String
-	// Name. Valid values: `ItemType`, `StandardId`, `RiskLevel`.
-	// `ClusterName` is also available for K8s assets.
+	// Filtering conditions. <li>Name      string Detection item name.</li> <li>ItemType  string Detection item type.</li> <li>RiskLevel string Risk level.</li> <li>IsOpen    int    Enabling status.</li>
 	Filters []*ComplianceFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -14244,8 +14539,7 @@ func (r *DescribeComplianceTaskPolicyItemSummaryListRequest) FromJsonString(s st
 
 // Predefined struct for user
 type DescribeComplianceTaskPolicyItemSummaryListResponseParams struct {
-	// ID of the last compliance check task, which is the source of the displayed data.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Return the ID of the last compliance check task. This task is the source of the data display this time.
 	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// Total number of check items
@@ -14508,8 +14802,7 @@ type DescribeContainerSecEventSummaryResponseParams struct {
 	// Unhandled malicious outgoing connections
 	UnhandledMaliciousConnectionEventCnt *uint64 `json:"UnhandledMaliciousConnectionEventCnt,omitnil,omitempty" name:"UnhandledMaliciousConnectionEventCnt"`
 
-	// Unhandled K8sApi events
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Unresolved Kubernetes API Events
 	UnhandledK8sApiEventCnt *uint64 `json:"UnhandledK8sApiEventCnt,omitnil,omitempty" name:"UnhandledK8sApiEventCnt"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -14536,6 +14829,9 @@ func (r *DescribeContainerSecEventSummaryResponse) FromJsonString(s string) erro
 type DescribeESAggregationsRequestParams struct {
 	// ES aggregation condition in JSON
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// Log Type List
+	LogTypes []*string `json:"LogTypes,omitnil,omitempty" name:"LogTypes"`
 }
 
 type DescribeESAggregationsRequest struct {
@@ -14543,6 +14839,9 @@ type DescribeESAggregationsRequest struct {
 	
 	// ES aggregation condition in JSON
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// Log Type List
+	LogTypes []*string `json:"LogTypes,omitnil,omitempty" name:"LogTypes"`
 }
 
 func (r *DescribeESAggregationsRequest) ToJsonString() string {
@@ -14558,6 +14857,7 @@ func (r *DescribeESAggregationsRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Query")
+	delete(f, "LogTypes")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeESAggregationsRequest has unknown keys!", "")
 	}
@@ -14599,6 +14899,9 @@ type DescribeESHitsRequestParams struct {
 
 	// Number of results to be returned. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Log Type List
+	LogTypes []*string `json:"LogTypes,omitnil,omitempty" name:"LogTypes"`
 }
 
 type DescribeESHitsRequest struct {
@@ -14612,6 +14915,9 @@ type DescribeESHitsRequest struct {
 
 	// Number of results to be returned. Maximum value: `100`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Log Type List
+	LogTypes []*string `json:"LogTypes,omitnil,omitempty" name:"LogTypes"`
 }
 
 func (r *DescribeESHitsRequest) ToJsonString() string {
@@ -14629,6 +14935,7 @@ func (r *DescribeESHitsRequest) FromJsonString(s string) error {
 	delete(f, "Query")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "LogTypes")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeESHitsRequest has unknown keys!", "")
 	}
@@ -14817,7 +15124,6 @@ type DescribeEscapeEventDetailResponseParams struct {
 	ParentProcessInfo *ProcessBaseInfo `json:"ParentProcessInfo,omitnil,omitempty" name:"ParentProcessInfo"`
 
 	// Ancestor process information
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	AncestorProcessInfo *ProcessBaseInfo `json:"AncestorProcessInfo,omitnil,omitempty" name:"AncestorProcessInfo"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -15052,99 +15358,6 @@ func (r *DescribeEscapeEventTypeSummaryResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeEscapeEventTypeSummaryResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeEscapeEventsExportRequestParams struct {
-	// Export field
-	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
-
-	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
-	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Offset. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Filter parameter. "Filters":[{"Name":"Status","Values":["2"]}]
-	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Valid values: `asc`, `desc`.
-	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// Sorting field
-	By *string `json:"By,omitnil,omitempty" name:"By"`
-}
-
-type DescribeEscapeEventsExportRequest struct {
-	*tchttp.BaseRequest
-	
-	// Export field
-	ExportField []*string `json:"ExportField,omitnil,omitempty" name:"ExportField"`
-
-	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
-	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Offset. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Filter parameter. "Filters":[{"Name":"Status","Values":["2"]}]
-	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Valid values: `asc`, `desc`.
-	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// Sorting field
-	By *string `json:"By,omitnil,omitempty" name:"By"`
-}
-
-func (r *DescribeEscapeEventsExportRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeEscapeEventsExportRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "ExportField")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	delete(f, "Filters")
-	delete(f, "Order")
-	delete(f, "By")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEscapeEventsExportRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeEscapeEventsExportResponseParams struct {
-	// Excel download URL
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DescribeEscapeEventsExportResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeEscapeEventsExportResponseParams `json:"Response"`
-}
-
-func (r *DescribeEscapeEventsExportResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeEscapeEventsExportResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -15540,16 +15753,13 @@ type DescribeExportJobResultResponseParams struct {
 	// Export status. Valid values: `SUCCESS`, `FAILURE`, `RUNNING`.
 	ExportStatus *string `json:"ExportStatus,omitnil,omitempty" name:"ExportStatus"`
 
-	// Download URL
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// return download URL
 	DownloadURL *string `json:"DownloadURL,omitnil,omitempty" name:"DownloadURL"`
 
-	// Export progress when `ExportStatus` is `RUNNING`. Value range: Floating points between `0` and `100`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// When ExportStatus is RUNNING, return the export progress. A floating-point number in the range of 0 to 100.
 	ExportProgress *float64 `json:"ExportProgress,omitnil,omitempty" name:"ExportProgress"`
 
-	// Failure cause
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Reason for failure
 	FailureMsg *string `json:"FailureMsg,omitnil,omitempty" name:"FailureMsg"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -15617,6 +15827,27 @@ type DescribeImageAuthorizedInfoResponseParams struct {
 
 	// Number of local images with scan not enabled
 	NotScannedLocalImageCnt *uint64 `json:"NotScannedLocalImageCnt,omitnil,omitempty" name:"NotScannedLocalImageCnt"`
+
+
+	TrialAuthorizedCnt *uint64 `json:"TrialAuthorizedCnt,omitnil,omitempty" name:"TrialAuthorizedCnt"`
+
+
+	UsedTrialAuthorizedCnt *uint64 `json:"UsedTrialAuthorizedCnt,omitnil,omitempty" name:"UsedTrialAuthorizedCnt"`
+
+
+	PurchasedAuthorizedCnt *uint64 `json:"PurchasedAuthorizedCnt,omitnil,omitempty" name:"PurchasedAuthorizedCnt"`
+
+
+	UsedPurchasedAuthorizedCnt *uint64 `json:"UsedPurchasedAuthorizedCnt,omitnil,omitempty" name:"UsedPurchasedAuthorizedCnt"`
+
+
+	CanApplyFreeImageAuthorize *bool `json:"CanApplyFreeImageAuthorize,omitnil,omitempty" name:"CanApplyFreeImageAuthorize"`
+
+	// Image scanning billing information.
+	ImageScanInquireInfo *ImageScanInquireInfo `json:"ImageScanInquireInfo,omitnil,omitempty" name:"ImageScanInquireInfo"`
+
+	// Number of duplicate images (local images and repository images).
+	RepeatImageIdCnt *uint64 `json:"RepeatImageIdCnt,omitnil,omitempty" name:"RepeatImageIdCnt"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -15767,21 +15998,23 @@ type DescribeImageAutoAuthorizedRuleResponseParams struct {
 	// Whether the rule takes effect. Valid values: `0` (no); `1` (yes).
 	IsEnabled *int64 `json:"IsEnabled,omitnil,omitempty" name:"IsEnabled"`
 
-	// Scope. Valid values: `MANUAL` (specified servers); `ALL` (all images).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Authorization Scope Category. MANUAL: Selected Host Nodes; ALL: All Images
 	RangeType *string `json:"RangeType,omitnil,omitempty" name:"RangeType"`
 
-	// Number of servers when the scope is `MANUAL`
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of Hosts When Authorization Scope Is Optional Host
 	HostCount *int64 `json:"HostCount,omitnil,omitempty" name:"HostCount"`
 
-	// Maximum number of image licenses per day. `0`: Unlimited.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Maximum Number of Authorized Mirrors Per Day. 0: Unlimited
 	MaxDailyCount *int64 `json:"MaxDailyCount,omitnil,omitempty" name:"MaxDailyCount"`
 
-	// Rule ID, which is `0` if not specified.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Rule ID. Set it to 0 when it is not configured.
 	RuleId *int64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+
+	AutoScanEnabled *int64 `json:"AutoScanEnabled,omitnil,omitempty" name:"AutoScanEnabled"`
+
+
+	ScanType []*string `json:"ScanType,omitnil,omitempty" name:"ScanType"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -15995,6 +16228,651 @@ func (r *DescribeImageComponentListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeImageDenyEventDetailRequestParams struct {
+	// Event ID
+	EventID *int64 `json:"EventID,omitnil,omitempty" name:"EventID"`
+}
+
+type DescribeImageDenyEventDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Event ID
+	EventID *int64 `json:"EventID,omitnil,omitempty" name:"EventID"`
+}
+
+func (r *DescribeImageDenyEventDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageDenyEventDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EventID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeImageDenyEventDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageDenyEventDetailResponseParams struct {
+	// Event ID
+	EventID *int64 `json:"EventID,omitnil,omitempty" name:"EventID"`
+
+	// Event Type. EVENT_RISK: Risk Event Type; EVENT_PRIVILEGE: Privilege
+	EventType *string `json:"EventType,omitnil,omitempty" name:"EventType"`
+
+	// Rule name
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
+
+	// Rule ID
+	RuleID *string `json:"RuleID,omitnil,omitempty" name:"RuleID"`
+
+	// Rule type
+	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
+
+	// Rule Enable Status. 0: Enabled; 1: Disabled
+	RuleStatus *int64 `json:"RuleStatus,omitnil,omitempty" name:"RuleStatus"`
+
+	// Rule Policy Status. IN_THE_TEST: Observing; IN_EFFECT: Effective
+	RuleEffectStatus *string `json:"RuleEffectStatus,omitnil,omitempty" name:"RuleEffectStatus"`
+
+	// Rule content
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleInfo []*string `json:"RuleInfo,omitnil,omitempty" name:"RuleInfo"`
+
+	// Rule description
+	RuleDescription *string `json:"RuleDescription,omitnil,omitempty" name:"RuleDescription"`
+
+	// Image ID
+	ImageID *string `json:"ImageID,omitnil,omitempty" name:"ImageID"`
+
+	// Image name
+	ImageName *string `json:"ImageName,omitnil,omitempty" name:"ImageName"`
+
+	// Node name.
+	NodeName *string `json:"NodeName,omitnil,omitempty" name:"NodeName"`
+
+	// Private IP address
+	NodeIP *string `json:"NodeIP,omitnil,omitempty" name:"NodeIP"`
+
+	// Public IP address
+	PublicIP *string `json:"PublicIP,omitnil,omitempty" name:"PublicIP"`
+
+	// Host QUUID
+	QUUID *string `json:"QUUID,omitnil,omitempty" name:"QUUID"`
+
+	// First generation time
+	FoundTime *string `json:"FoundTime,omitnil,omitempty" name:"FoundTime"`
+
+	// Latest creation time
+	LatestFoundTime *string `json:"LatestFoundTime,omitnil,omitempty" name:"LatestFoundTime"`
+
+	// Number of events
+	EventCount *int64 `json:"EventCount,omitnil,omitempty" name:"EventCount"`
+
+	// Execute action
+	// BEHAVIOR_ALERT: Alert
+	// BEHAVIOR_HOLDUP_SUCCESSED: Interception
+	DealBehavior *string `json:"DealBehavior,omitnil,omitempty" name:"DealBehavior"`
+
+	// Pod name
+	PodName *string `json:"PodName,omitnil,omitempty" name:"PodName"`
+
+	// Rule Start Interception Time
+	RuleEffectTime *string `json:"RuleEffectTime,omitnil,omitempty" name:"RuleEffectTime"`
+
+	// Event description
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Image startup parameter
+	StartParam *string `json:"StartParam,omitnil,omitempty" name:"StartParam"`
+
+	// Solution
+	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
+
+	// pod ip
+	PodIP *string `json:"PodIP,omitnil,omitempty" name:"PodIP"`
+
+	//  Pod Status
+	PodStatus *string `json:"PodStatus,omitnil,omitempty" name:"PodStatus"`
+
+	// Cluster ID.
+	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
+
+	// Node type.
+	NodeType *string `json:"NodeType,omitnil,omitempty" name:"NodeType"`
+
+	// Node ID.
+	NodeID *string `json:"NodeID,omitnil,omitempty" name:"NodeID"`
+
+	// Node Unique ID
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil,omitempty" name:"NodeUniqueID"`
+
+	// Node subnet id
+	NodeSubNetID *string `json:"NodeSubNetID,omitnil,omitempty" name:"NodeSubNetID"`
+
+	// Node Subnet Name
+	NodeSubNetName *string `json:"NodeSubNetName,omitnil,omitempty" name:"NodeSubNetName"`
+
+	// Node subnet cidr
+	NodeSubNetCIDR *string `json:"NodeSubNetCIDR,omitnil,omitempty" name:"NodeSubNetCIDR"`
+
+	// Cluster name.
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// Image repository information.
+	ImageRegistryInfo *ImageRegistryInfo `json:"ImageRegistryInfo,omitnil,omitempty" name:"ImageRegistryInfo"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeImageDenyEventDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeImageDenyEventDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeImageDenyEventDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageDenyEventDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageDenyEventListRequestParams struct {
+	// Filter criteria
+	// <li>EventType - String - Required: No - Event type. EVENT_RISK: Risk event type. EVENT_PRIVILEGE: Privilege.</li>
+	// <li>DealBehavior - String - required: no - execution action, BEHAVIOR_ALERT: alert, BEHAVIOR_HOLDUP_SUCCESSED: block.</li>
+	// <li>RuleName - string - required: no - rule name.</li>
+	// <li>NodeName- string - required: no - node name.</li>
+	// <li>NodeIP - string - required: no - private and public IP.</li>
+	// <li>PublicIP - string - required: no - public IP address.</li>
+	// <li>ImageName- string - required: no - image name.</li>
+	// <li>ImageID - string - required: no - image ID.</li>
+	// <li>TimeRange - String - required: no - time range, the first value represents the start time, second value represents end time</li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sort Mode: DESC, ACS
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sort field. EventCount: Alarm quantity; LatestFoundTime: Most recent generation time
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+type DescribeImageDenyEventListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Filter criteria
+	// <li>EventType - String - Required: No - Event type. EVENT_RISK: Risk event type. EVENT_PRIVILEGE: Privilege.</li>
+	// <li>DealBehavior - String - required: no - execution action, BEHAVIOR_ALERT: alert, BEHAVIOR_HOLDUP_SUCCESSED: block.</li>
+	// <li>RuleName - string - required: no - rule name.</li>
+	// <li>NodeName- string - required: no - node name.</li>
+	// <li>NodeIP - string - required: no - private and public IP.</li>
+	// <li>PublicIP - string - required: no - public IP address.</li>
+	// <li>ImageName- string - required: no - image name.</li>
+	// <li>ImageID - string - required: no - image ID.</li>
+	// <li>TimeRange - String - required: no - time range, the first value represents the start time, second value represents end time</li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sort Mode: DESC, ACS
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sort field. EventCount: Alarm quantity; LatestFoundTime: Most recent generation time
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+func (r *DescribeImageDenyEventListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageDenyEventListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Order")
+	delete(f, "By")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeImageDenyEventListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageDenyEventListResponseParams struct {
+	// Image Interception List
+	List []*ImageDenyEvent `json:"List,omitnil,omitempty" name:"List"`
+
+	// Total number.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeImageDenyEventListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeImageDenyEventListResponseParams `json:"Response"`
+}
+
+func (r *DescribeImageDenyEventListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageDenyEventListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageDenyEventTendencyRequestParams struct {
+	// Start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+type DescribeImageDenyEventTendencyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+func (r *DescribeImageDenyEventTendencyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageDenyEventTendencyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeImageDenyEventTendencyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageDenyEventTendencyResponseParams struct {
+	// Image Interception Success Event Trend
+	DenyList []*ImageDenyEventTendency `json:"DenyList,omitnil,omitempty" name:"DenyList"`
+
+	// Image Interception Alarm Event Trend
+	AlarmList []*ImageDenyEventTendency `json:"AlarmList,omitnil,omitempty" name:"AlarmList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeImageDenyEventTendencyResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeImageDenyEventTendencyResponseParams `json:"Response"`
+}
+
+func (r *DescribeImageDenyEventTendencyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageDenyEventTendencyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageDenyRuleDetailRequestParams struct {
+	// Rule ID
+	RuleID *string `json:"RuleID,omitnil,omitempty" name:"RuleID"`
+}
+
+type DescribeImageDenyRuleDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Rule ID
+	RuleID *string `json:"RuleID,omitnil,omitempty" name:"RuleID"`
+}
+
+func (r *DescribeImageDenyRuleDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageDenyRuleDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeImageDenyRuleDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageDenyRuleDetailResponseParams struct {
+	// Rule ID
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Rule name
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
+
+	// Rule Type. RULE_RISK: Risk; RULE_PRIVILEGE: Privilege
+	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
+
+	// Number of Effective Images
+	EffectImageCount *int64 `json:"EffectImageCount,omitnil,omitempty" name:"EffectImageCount"`
+
+	// Application to All Scanned Images. 0: Select All Images; 1: Custom Images
+	IsEffectAllImage *int64 `json:"IsEffectAllImage,omitnil,omitempty" name:"IsEffectAllImage"`
+
+	// Rule Effective Start Time
+	EffectTime *string `json:"EffectTime,omitnil,omitempty" name:"EffectTime"`
+
+	// Update time
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Operator
+	OperationUin *string `json:"OperationUin,omitnil,omitempty" name:"OperationUin"`
+
+	// Effective Status. IN_THE_TEST: Observing; IN_EFFECT: Effective
+	EffectStatus *string `json:"EffectStatus,omitnil,omitempty" name:"EffectStatus"`
+
+	// Rule description
+	RuleDescription *string `json:"RuleDescription,omitnil,omitempty" name:"RuleDescription"`
+
+	// Enable Status. 0: Enabled; 1: Disabled
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Vulnerability. 0: Not Selected; 1: Selected
+	Vul *int64 `json:"Vul,omitnil,omitempty" name:"Vul"`
+
+	// CVE ID
+	CVEIDSet []*string `json:"CVEIDSet,omitnil,omitempty" name:"CVEIDSet"`
+
+	// Component ID
+	ComponentSet []*string `json:"ComponentSet,omitnil,omitempty" name:"ComponentSet"`
+
+	// Vulnerability category
+	VulClassSet []*string `json:"VulClassSet,omitnil,omitempty" name:"VulClassSet"`
+
+	// Vulnerability level
+	VulLevelSet []*string `json:"VulLevelSet,omitnil,omitempty" name:"VulLevelSet"`
+
+	// vulnerability tag
+	VulLabelSet []*string `json:"VulLabelSet,omitnil,omitempty" name:"VulLabelSet"`
+
+	// Trojan. 0: Not Selected; 1: Selected
+	Virus *int64 `json:"Virus,omitnil,omitempty" name:"Virus"`
+
+	// Trojan MD5 List
+	VirusMD5Set []*string `json:"VirusMD5Set,omitnil,omitempty" name:"VirusMD5Set"`
+
+	// Trojan Level
+	VirusLevelSet []*string `json:"VirusLevelSet,omitnil,omitempty" name:"VirusLevelSet"`
+
+	// Virus name
+	VirusName []*string `json:"VirusName,omitnil,omitempty" name:"VirusName"`
+
+	// Sensitive Information. 0: Not Selected; 1: Selected
+	Risk *int64 `json:"Risk,omitnil,omitempty" name:"Risk"`
+
+	// Sensitivity Level
+	RiskLevelSet []*string `json:"RiskLevelSet,omitnil,omitempty" name:"RiskLevelSet"`
+
+	// Sensitive Information Classification
+	RiskType []*string `json:"RiskType,omitnil,omitempty" name:"RiskType"`
+
+	// Privileged Startup. 0: Not Allowed; 1: Allowed
+	PrivilegeRun *int64 `json:"PrivilegeRun,omitnil,omitempty" name:"PrivilegeRun"`
+
+	// Privilege type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PrivilegeDetail []*string `json:"PrivilegeDetail,omitnil,omitempty" name:"PrivilegeDetail"`
+
+	// Image ID List
+	EffectImageSet []*string `json:"EffectImageSet,omitnil,omitempty" name:"EffectImageSet"`
+
+	// Effective After X Days
+	EffectDay *uint64 `json:"EffectDay,omitnil,omitempty" name:"EffectDay"`
+
+	// Rule ID
+	RuleID *string `json:"RuleID,omitnil,omitempty" name:"RuleID"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeImageDenyRuleDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeImageDenyRuleDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeImageDenyRuleDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageDenyRuleDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageDenyRuleListRequestParams struct {
+	// Filter criteria
+	// <li>RuleType - String - required: no - rule type RULE_RISK: risk, RULE_PRIVILEGE: privilege</li>
+	// <li>EffectStatus- String - Required: No - Effective status IN_THE_TEST: Observing, IN_EFFECT: Active.</li>
+	// <li>RuleName - string - required: no - rule name.</li>
+	// <li>Status - string - required: no - enabled Status: 0: enabled, 1: disabled.</li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sort Mode: DESC, ACS
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sort field
+	// EffectTime: Effective time; UpdateTime: Update time
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Top-positioning of Enabled Rules. true: Yes; false: No
+	TopTurnOn *bool `json:"TopTurnOn,omitnil,omitempty" name:"TopTurnOn"`
+}
+
+type DescribeImageDenyRuleListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Filter criteria
+	// <li>RuleType - String - required: no - rule type RULE_RISK: risk, RULE_PRIVILEGE: privilege</li>
+	// <li>EffectStatus- String - Required: No - Effective status IN_THE_TEST: Observing, IN_EFFECT: Active.</li>
+	// <li>RuleName - string - required: no - rule name.</li>
+	// <li>Status - string - required: no - enabled Status: 0: enabled, 1: disabled.</li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sort Mode: DESC, ACS
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sort field
+	// EffectTime: Effective time; UpdateTime: Update time
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Top-positioning of Enabled Rules. true: Yes; false: No
+	TopTurnOn *bool `json:"TopTurnOn,omitnil,omitempty" name:"TopTurnOn"`
+}
+
+func (r *DescribeImageDenyRuleListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageDenyRuleListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Order")
+	delete(f, "By")
+	delete(f, "TopTurnOn")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeImageDenyRuleListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageDenyRuleListResponseParams struct {
+	// List of rules
+	List []*ImageDenyRule `json:"List,omitnil,omitempty" name:"List"`
+
+	// Total Rule Count
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeImageDenyRuleListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeImageDenyRuleListResponseParams `json:"Response"`
+}
+
+func (r *DescribeImageDenyRuleListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageDenyRuleListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageDenyRuleSummaryRequestParams struct {
+
+}
+
+type DescribeImageDenyRuleSummaryRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeImageDenyRuleSummaryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageDenyRuleSummaryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeImageDenyRuleSummaryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageDenyRuleSummaryResponseParams struct {
+	// Total Number of Image Interception Rules (Disabled and Enabled)
+	RuleTotalCount *uint64 `json:"RuleTotalCount,omitnil,omitempty" name:"RuleTotalCount"`
+
+	// Number of Enabled Image Interception Rules
+	EnabledRuleCount *uint64 `json:"EnabledRuleCount,omitnil,omitempty" name:"EnabledRuleCount"`
+
+	// Number of Image Interception Rules During Observation
+	ObservedRuleCount *uint64 `json:"ObservedRuleCount,omitnil,omitempty" name:"ObservedRuleCount"`
+
+	// Number of Effective Image Blocking Rules
+	EffectiveRuleCount *uint64 `json:"EffectiveRuleCount,omitnil,omitempty" name:"EffectiveRuleCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeImageDenyRuleSummaryResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeImageDenyRuleSummaryResponseParams `json:"Response"`
+}
+
+func (r *DescribeImageDenyRuleSummaryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageDenyRuleSummaryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeImageRegistryNamespaceListRequestParams struct {
 	// Initial offset of the query. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
@@ -16100,7 +16978,6 @@ func (r *DescribeImageRegistryTimingScanTaskRequest) FromJsonString(s string) er
 // Predefined struct for user
 type DescribeImageRegistryTimingScanTaskResponseParams struct {
 	// Scheduled scan switch
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// Scheduled scan time
@@ -16109,8 +16986,7 @@ type DescribeImageRegistryTimingScanTaskResponseParams struct {
 	// Scheduled scan interval
 	ScanPeriod *uint64 `json:"ScanPeriod,omitnil,omitempty" name:"ScanPeriod"`
 
-	// Array of scan types
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Scan type array
 	ScanType []*string `json:"ScanType,omitnil,omitempty" name:"ScanType"`
 
 	// Scan of all images
@@ -16118,32 +16994,38 @@ type DescribeImageRegistryTimingScanTaskResponseParams struct {
 	// Deprecated: All is deprecated.
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// Scan of specified images
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Custom scan mirror
 	Images []*ImageInfo `json:"Images,omitnil,omitempty" name:"Images"`
 
-	// ID of the specified image
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Automatically scan the image ID.
 	Id []*uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Whether to scan the latest image tag
-	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	// Whether to Scan the Latest Version of Images
 	Latest *bool `json:"Latest,omitnil,omitempty" name:"Latest"`
 
-
+	// Scan end time
 	ScanEndTime *string `json:"ScanEndTime,omitnil,omitempty" name:"ScanEndTime"`
 
-
+	// The registry type
 	RegistryType []*string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
-
+	// Is container Running
 	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
 
-
+	// The scan scope
 	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
 
-
+	// The namespace of image
 	Namespace []*string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// IDs of excluded image assets.
+	ExcludeImageAssetIds []*uint64 `json:"ExcludeImageAssetIds,omitnil,omitempty" name:"ExcludeImageAssetIds"`
+
+	// Last scan time
+	LastScanTime *string `json:"LastScanTime,omitnil,omitempty" name:"LastScanTime"`
+
+	// Scanning result. Valid values: Success, InsufficientLicense, ImageNeedIsEmpty, and InternalError.
+	ScanResult *string `json:"ScanResult,omitnil,omitempty" name:"ScanResult"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -16300,10 +17182,10 @@ type DescribeImageSimpleListRequestParams struct {
 	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Sorting order
+	// Sorting method. Valid values: asc and desc.
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// Sorting field
+	// Sorting field. For example, ContainerCnt.
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 }
 
@@ -16319,10 +17201,10 @@ type DescribeImageSimpleListRequest struct {
 	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Sorting order
+	// Sorting method. Valid values: asc and desc.
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// Sorting field
+	// Sorting field. For example, ContainerCnt.
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 }
 
@@ -16547,58 +17429,38 @@ func (r *DescribeK8sApiAbnormalEventInfoResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type DescribeK8sApiAbnormalEventListRequestParams struct {
-	// Filters.
-	// <li>TimeRange - String - Optional - Time range. Example: ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]</li>
-	// <li>`MatchRules` - String - Optional - Hit rule</li>
-	// <li>`RiskLevel` - String - Optional - Threat level</li>
-	// <li>`Status` - String - Optional - Event status</li>
-	// <li>`MatchRuleType` - String - Optional - Hit rule type</li>
-	// <li>`ClusterRunningStatus` - String - Optional - Cluster running status</li>
-	// <li>`ClusterName` - String - Optional - Cluster name</li>
-	// <li>`ClusterID` - String - Optional - Cluster ID</li>
+	// <p>Filter conditions.</p><li>TimeRange - String - Required: No - Time range filter ["2022-03-31 16:55:00", "2022-03-31 17:00:00"];</li><li>MatchRules - String - Required: No - Hit rule filter;</li><li>RiskLevel - String - Required: No - Threat level filter;</li><li>Status - String - Required: No - Event status filter;</li><li>MatchRuleType - String - Required: No - Hit rule type filter;</li><li>ClusterRunningStatus - String - Required: No - Cluster running status;</li><li>ClusterName - String - Required: No - Cluster name;</li><li>ClusterID - String - Required: No - Cluster ID.</li>
 	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// The number of results returned. Default value: 10. Maximum value: 100.
+	// <p>Number of items to return. The default number is 10, and the maximum number is 100.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset. Default value: 0
+	// <p>Offset. Default value: 0.</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Sort order
+	// <p>Sorting method.</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// Sorting field
-	// `LatestFoundTime`: Last creation time
-	// `AlarmCount`: Number of alarms
+	// <p>Sorting field.<br>LatestFoundTime: Last generation time.<br>AlarmCount: Number of alarms.</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 }
 
 type DescribeK8sApiAbnormalEventListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Filters.
-	// <li>TimeRange - String - Optional - Time range. Example: ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]</li>
-	// <li>`MatchRules` - String - Optional - Hit rule</li>
-	// <li>`RiskLevel` - String - Optional - Threat level</li>
-	// <li>`Status` - String - Optional - Event status</li>
-	// <li>`MatchRuleType` - String - Optional - Hit rule type</li>
-	// <li>`ClusterRunningStatus` - String - Optional - Cluster running status</li>
-	// <li>`ClusterName` - String - Optional - Cluster name</li>
-	// <li>`ClusterID` - String - Optional - Cluster ID</li>
+	// <p>Filter conditions.</p><li>TimeRange - String - Required: No - Time range filter ["2022-03-31 16:55:00", "2022-03-31 17:00:00"];</li><li>MatchRules - String - Required: No - Hit rule filter;</li><li>RiskLevel - String - Required: No - Threat level filter;</li><li>Status - String - Required: No - Event status filter;</li><li>MatchRuleType - String - Required: No - Hit rule type filter;</li><li>ClusterRunningStatus - String - Required: No - Cluster running status;</li><li>ClusterName - String - Required: No - Cluster name;</li><li>ClusterID - String - Required: No - Cluster ID.</li>
 	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// The number of results returned. Default value: 10. Maximum value: 100.
+	// <p>Number of items to return. The default number is 10, and the maximum number is 100.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset. Default value: 0
+	// <p>Offset. Default value: 0.</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Sort order
+	// <p>Sorting method.</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// Sorting field
-	// `LatestFoundTime`: Last creation time
-	// `AlarmCount`: Number of alarms
+	// <p>Sorting field.<br>LatestFoundTime: Last generation time.<br>AlarmCount: Number of alarms.</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 }
 
@@ -16627,11 +17489,14 @@ func (r *DescribeK8sApiAbnormalEventListRequest) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeK8sApiAbnormalEventListResponseParams struct {
-	// Event list
+	// <p>Event list.</p>
 	List []*K8sApiAbnormalEventListItem `json:"List,omitnil,omitempty" name:"List"`
 
-	// Total count
+	// <p>Total quantity.</p>
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>K8s alarm types and corresponding descriptions.</p>
+	RuleTypeZhSet []*K8SAPIRuleTypeZhItem `json:"RuleTypeZhSet,omitnil,omitempty" name:"RuleTypeZhSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -16712,9 +17577,18 @@ func (r *DescribeK8sApiAbnormalRuleInfoResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeK8sApiAbnormalRuleListRequestParams struct {
-	// Filters.
-	// <li>`RuleType` - String - Optional - Rule type</li>
-	// <li>`Status` - String - Optional - Status</li>
+	// Sorting field.
+	// <li>`UpdateTime` - String - Optional - Last updated</li>
+	// <li>`EffectClusterCount` - String - Optional - Number of clusters affected</li>
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Filter criteria
+	// <li>RuleType - string - required: no - rule type</li>
+	// <li>Status - string - required: no - status</li>
+	// <li>RuleName - string - required: no - rule name (fuzzy query)</li>
+	// <li>ClusterName - string - Required: No - Cluster name. Fuzzy search for rules bound to the cluster (including full cluster rules).</li>
+	// <li>ClusterID - string - Required: No - Cluster ID. Fuzzy search for rules bound to the cluster (including cluster rules).</li>
+	// <li>RuleAction - string - Required: No - Execution action filter. Value: RULE_MODE_ALERT (alert), RULE_MODE_HOLDUP (intercept)</li>
 	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// The number of results returned. Default value: 10. Maximum value: 100.
@@ -16725,19 +17599,23 @@ type DescribeK8sApiAbnormalRuleListRequestParams struct {
 
 	// Sort order
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// Sorting field.
-	// <li>`UpdateTime` - String - Optional - Last updated</li>
-	// <li>`EffectClusterCount` - String - Optional - Number of clusters affected</li>
-	By *string `json:"By,omitnil,omitempty" name:"By"`
 }
 
 type DescribeK8sApiAbnormalRuleListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Filters.
-	// <li>`RuleType` - String - Optional - Rule type</li>
-	// <li>`Status` - String - Optional - Status</li>
+	// Sorting field.
+	// <li>`UpdateTime` - String - Optional - Last updated</li>
+	// <li>`EffectClusterCount` - String - Optional - Number of clusters affected</li>
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Filter criteria
+	// <li>RuleType - string - required: no - rule type</li>
+	// <li>Status - string - required: no - status</li>
+	// <li>RuleName - string - required: no - rule name (fuzzy query)</li>
+	// <li>ClusterName - string - Required: No - Cluster name. Fuzzy search for rules bound to the cluster (including full cluster rules).</li>
+	// <li>ClusterID - string - Required: No - Cluster ID. Fuzzy search for rules bound to the cluster (including cluster rules).</li>
+	// <li>RuleAction - string - Required: No - Execution action filter. Value: RULE_MODE_ALERT (alert), RULE_MODE_HOLDUP (intercept)</li>
 	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// The number of results returned. Default value: 10. Maximum value: 100.
@@ -16748,11 +17626,6 @@ type DescribeK8sApiAbnormalRuleListRequest struct {
 
 	// Sort order
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
-
-	// Sorting field.
-	// <li>`UpdateTime` - String - Optional - Last updated</li>
-	// <li>`EffectClusterCount` - String - Optional - Number of clusters affected</li>
-	By *string `json:"By,omitnil,omitempty" name:"By"`
 }
 
 func (r *DescribeK8sApiAbnormalRuleListRequest) ToJsonString() string {
@@ -16767,11 +17640,11 @@ func (r *DescribeK8sApiAbnormalRuleListRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "By")
 	delete(f, "Filters")
 	delete(f, "Limit")
 	delete(f, "Offset")
 	delete(f, "Order")
-	delete(f, "By")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeK8sApiAbnormalRuleListRequest has unknown keys!", "")
 	}
@@ -16959,14 +17832,14 @@ func (r *DescribeK8sApiAbnormalSummaryResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeK8sApiAbnormalTendencyRequestParams struct {
-	// Trend period (default value: 7 days)
+	// <p>Trend period (the default is 7 days).</p>
 	TendencyPeriod *uint64 `json:"TendencyPeriod,omitnil,omitempty" name:"TendencyPeriod"`
 }
 
 type DescribeK8sApiAbnormalTendencyRequest struct {
 	*tchttp.BaseRequest
 	
-	// Trend period (default value: 7 days)
+	// <p>Trend period (the default is 7 days).</p>
 	TendencyPeriod *uint64 `json:"TendencyPeriod,omitnil,omitempty" name:"TendencyPeriod"`
 }
 
@@ -16991,8 +17864,11 @@ func (r *DescribeK8sApiAbnormalTendencyRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeK8sApiAbnormalTendencyResponseParams struct {
-	// Trend list
+	// <p>Trend list.</p>
 	List []*K8sApiAbnormalTendencyItem `json:"List,omitnil,omitempty" name:"List"`
+
+	// <p>Description of the rule type.</p>
+	RuleTypeZhSet []*K8SAPIRuleTypeZhItem `json:"RuleTypeZhSet,omitnil,omitempty" name:"RuleTypeZhSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -17068,6 +17944,194 @@ func (r *DescribeLogStorageStatisticResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeLogStorageStatisticResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMaliciousConnectionBlackListRequestParams struct {
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Filter criteria
+	// <li>RequestType - string - Required: No - Request type. All request types: ALL; Domain name: DOMAIN; IP: IP</li>
+	// <li>BlackDomain- string - required: no - custom black domain name</li>
+	// <li>BlackIP - string - required: no - custom black IP</li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Sorting method.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field.
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+type DescribeMaliciousConnectionBlackListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Filter criteria
+	// <li>RequestType - string - Required: No - Request type. All request types: ALL; Domain name: DOMAIN; IP: IP</li>
+	// <li>BlackDomain- string - required: no - custom black domain name</li>
+	// <li>BlackIP - string - required: no - custom black IP</li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Sorting method.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field.
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+func (r *DescribeMaliciousConnectionBlackListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMaliciousConnectionBlackListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	delete(f, "Order")
+	delete(f, "By")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMaliciousConnectionBlackListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMaliciousConnectionBlackListResponseParams struct {
+	// Total Number of Malicious Request Allowlists
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Malicious Request Allowlist
+	List []*MaliciousConnectionRuleInfo `json:"List,omitnil,omitempty" name:"List"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMaliciousConnectionBlackListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMaliciousConnectionBlackListResponseParams `json:"Response"`
+}
+
+func (r *DescribeMaliciousConnectionBlackListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMaliciousConnectionBlackListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMaliciousConnectionWhiteListRequestParams struct {
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Filter criteria
+	// <li>RequestType - string - Required: yes - Request type. All request types: ALL; domain name: DOMAIN; IP: IP</li>
+	// <li>WhiteDomain- string - required: no - custom white domain name</li>
+	// <li>WhiteIP - string - Required: No - Custom allowlist IP</li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Sorting method.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field.
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+type DescribeMaliciousConnectionWhiteListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Filter criteria
+	// <li>RequestType - string - Required: yes - Request type. All request types: ALL; domain name: DOMAIN; IP: IP</li>
+	// <li>WhiteDomain- string - required: no - custom white domain name</li>
+	// <li>WhiteIP - string - Required: No - Custom allowlist IP</li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Sorting method.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field.
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+func (r *DescribeMaliciousConnectionWhiteListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMaliciousConnectionWhiteListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	delete(f, "Order")
+	delete(f, "By")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMaliciousConnectionWhiteListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMaliciousConnectionWhiteListResponseParams struct {
+	// Total Number of Malicious Request Allowlists
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Malicious Request Allowlist
+	List []*MaliciousConnectionRuleInfo `json:"List,omitnil,omitempty" name:"List"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMaliciousConnectionWhiteListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMaliciousConnectionWhiteListResponseParams `json:"Response"`
+}
+
+func (r *DescribeMaliciousConnectionWhiteListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMaliciousConnectionWhiteListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -17479,8 +18543,7 @@ type DescribeNetworkFirewallPodLabelsListResponseParams struct {
 	// Total number of cluster Pods
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Details of the cluster Pod
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Cluster Pod Details
 	PodList []*NetworkClusterPodInfo `json:"PodList,omitnil,omitempty" name:"PodList"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -17544,7 +18607,6 @@ type DescribeNetworkFirewallPolicyDetailResponseParams struct {
 	PolicyName *string `json:"PolicyName,omitnil,omitempty" name:"PolicyName"`
 
 	// Namespace
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
 	// Inbound type
@@ -17554,14 +18616,12 @@ type DescribeNetworkFirewallPolicyDetailResponseParams struct {
 	ToPolicyRule *int64 `json:"ToPolicyRule,omitnil,omitempty" name:"ToPolicyRule"`
 
 	// Custom rule
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	CustomPolicy []*NetworkCustomPolicy `json:"CustomPolicy,omitnil,omitempty" name:"CustomPolicy"`
 
 	// Pod selector
 	PodSelector *string `json:"PodSelector,omitnil,omitempty" name:"PodSelector"`
 
 	// Policy description
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Policy creation time
@@ -17570,15 +18630,13 @@ type DescribeNetworkFirewallPolicyDetailResponseParams struct {
 	// Policy source type. Valid values: `System` (synched from the cluster); `Manual` (added manually).
 	PolicySourceType *string `json:"PolicySourceType,omitnil,omitempty" name:"PolicySourceType"`
 
-	// Network plugin of the network policy
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Network Plugins Corresponding to Network Policies
 	NetworkPolicyPlugin *string `json:"NetworkPolicyPlugin,omitnil,omitempty" name:"NetworkPolicyPlugin"`
 
 	// Network policy status
 	PublishStatus *string `json:"PublishStatus,omitnil,omitempty" name:"PublishStatus"`
 
-	// Policy publishing result
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Network Distribution Result
 	PublishResult *string `json:"PublishResult,omitnil,omitempty" name:"PublishResult"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -17792,8 +18850,7 @@ type DescribeNetworkFirewallPolicyStatusResponseParams struct {
 	// Task status. Valid values: `Task_Running`, `Task_Succ`, `Task_Error`, `Task_NoExist`.
 	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
-	// Task result, such as `NameRepeat` and `K8sRuleIngressPortError`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// NameRepeat, K8sRuleIngressPortError, etc.
 	TaskResult []*string `json:"TaskResult,omitnil,omitempty" name:"TaskResult"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -17856,12 +18913,10 @@ type DescribeNetworkFirewallPolicyYamlDetailResponseParams struct {
 	// Policy name
 	PolicyName *string `json:"PolicyName,omitnil,omitempty" name:"PolicyName"`
 
-	// Base64-encoded YAML string
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Base64 Encoded YAML String
 	Yaml *string `json:"Yaml,omitnil,omitempty" name:"Yaml"`
 
 	// Policy description
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Policy creation time
@@ -17870,15 +18925,13 @@ type DescribeNetworkFirewallPolicyYamlDetailResponseParams struct {
 	// Policy source type. Valid values: `System` (synched from the cluster); `Manual` (added manually).
 	PolicySourceType *string `json:"PolicySourceType,omitnil,omitempty" name:"PolicySourceType"`
 
-	// Network plugin of the network policy
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Network Plugins Corresponding to Network Policies
 	NetworkPolicyPlugin *string `json:"NetworkPolicyPlugin,omitnil,omitempty" name:"NetworkPolicyPlugin"`
 
 	// Network policy status
 	PublishStatus *string `json:"PublishStatus,omitnil,omitempty" name:"PublishStatus"`
 
-	// Policy publishing result
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Network Distribution Result
 	PublishResult *string `json:"PublishResult,omitnil,omitempty" name:"PublishResult"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -17947,6 +19000,9 @@ type DescribeNewestVulResponseParams struct {
 	// Vulnerability CVE ID
 	CVEID *string `json:"CVEID,omitnil,omitempty" name:"CVEID"`
 
+	// Whether defense is supported for the vulnerability. 0: not supported; 1: supported.
+	SupportDefense *int64 `json:"SupportDefense,omitnil,omitempty" name:"SupportDefense"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -18008,8 +19064,7 @@ func (r *DescribePostPayDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePostPayDetailResponseParams struct {
-	// Elastic billing details
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Elastic billing deduction details
 	SoftQuotaDayDetail []*SoftQuotaDayInfo `json:"SoftQuotaDayDetail,omitnil,omitempty" name:"SoftQuotaDayDetail"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -18063,12 +19118,10 @@ func (r *DescribeProVersionInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProVersionInfoResponseParams struct {
-	// Start time of the Pro Edition, which is not empty only when the edition is purchased.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Pro Edition start time, not null during supplement purchase
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time of the Pro Edition, which is not empty only when more resources are purchased.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Pro Edition end time, not null when supplement purchase is made
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of cores to be purchased
@@ -18078,7 +19131,6 @@ type DescribeProVersionInfoResponseParams struct {
 	MaxPostPayCoresCnt *uint64 `json:"MaxPostPayCoresCnt,omitnil,omitempty" name:"MaxPostPayCoresCnt"`
 
 	// Resource ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
 	// Purchase status
@@ -18255,46 +19307,66 @@ type DescribePurchaseStateInfoResponseParams struct {
 	// Valid values: `0` (available for trial and purchase); `1` (available for purchase only after failed trial review or trial expiration); `2` (trial effective); `3` (Pro Edition effective); `4` (Pro Edition expired).
 	State *int64 `json:"State,omitnil,omitempty" name:"State"`
 
-	// Total number of cores
-	// Note: This field may return null, indicating that no valid values can be obtained.
+
+	AllCoresCnt *uint64 `json:"AllCoresCnt,omitnil,omitempty" name:"AllCoresCnt"`
+
+	// Total number of protected cores. It is the sum of the number of purchased cores, the number of free trial cores, and the number of elastic billing cores.
 	CoresCnt *uint64 `json:"CoresCnt,omitnil,omitempty" name:"CoresCnt"`
 
+
+	UndefendCoresCnt *uint64 `json:"UndefendCoresCnt,omitnil,omitempty" name:"UndefendCoresCnt"`
+
 	// Number of purchased cores
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	AuthorizedCoresCnt *uint64 `json:"AuthorizedCoresCnt,omitnil,omitempty" name:"AuthorizedCoresCnt"`
 
-	// Number of images
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of free trial cores for Pro Edition.
+	GivenAuthorizedCoresCnt *int64 `json:"GivenAuthorizedCoresCnt,omitnil,omitempty" name:"GivenAuthorizedCoresCnt"`
+
+
+	CurrentFlexibleCoresCnt *uint64 `json:"CurrentFlexibleCoresCnt,omitnil,omitempty" name:"CurrentFlexibleCoresCnt"`
+
+	// Image count
 	ImageCnt *uint64 `json:"ImageCnt,omitnil,omitempty" name:"ImageCnt"`
 
 	// Number of licensed images
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	AuthorizedImageCnt *uint64 `json:"AuthorizedImageCnt,omitnil,omitempty" name:"AuthorizedImageCnt"`
 
-	// Number of purchased image licenses
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	PurchasedAuthorizedCnt *uint64 `json:"PurchasedAuthorizedCnt,omitnil,omitempty" name:"PurchasedAuthorizedCnt"`
-
 	// Expiration time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExpirationTime *string `json:"ExpirationTime,omitnil,omitempty" name:"ExpirationTime"`
 
-	// Valid values: `0` (initial status, which is the default value and not set by the user); `1` (auto-renewal); `2` (no auto-renewal, which is specified by the user).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of purchased image licenses
+	PurchasedAuthorizedCnt *uint64 `json:"PurchasedAuthorizedCnt,omitnil,omitempty" name:"PurchasedAuthorizedCnt"`
+
+	// 0 indicates the default status (it has not been set by the user, namely the initial status); 1 indicates automatic renewal; 2 indicates explicit non-automatic renewal (it has been set by the user).
 	AutomaticRenewal *int64 `json:"AutomaticRenewal,omitnil,omitempty" name:"AutomaticRenewal"`
 
-	// Number of free image licenses during the trial, which may expire.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Complimentary image licenses during the trial period may expire.
 	GivenAuthorizedCnt *uint64 `json:"GivenAuthorizedCnt,omitnil,omitempty" name:"GivenAuthorizedCnt"`
 
-	// Start time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Start time.
 	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
-	// Sub-status, the meaning of which is subject to the `State` field.
-	// Valid values when `State` is `4`: `ISOLATE` (isolated); `DESTROED` (terminated).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Substatus (specific meaning depending on the State field)
+	// Valid values when State is 4: ISOLATE, TERMINATED.
 	SubState *string `json:"SubState,omitnil,omitempty" name:"SubState"`
+
+	// Billing key.
+	InquireKey *string `json:"InquireKey,omitnil,omitempty" name:"InquireKey"`
+
+
+	DefendPolicy *string `json:"DefendPolicy,omitnil,omitempty" name:"DefendPolicy"`
+
+
+	FlexibleCoresLimit *uint64 `json:"FlexibleCoresLimit,omitnil,omitempty" name:"FlexibleCoresLimit"`
+
+
+	DefendClusterCoresCnt *uint64 `json:"DefendClusterCoresCnt,omitnil,omitempty" name:"DefendClusterCoresCnt"`
+
+
+	DefendHostCoresCnt *uint64 `json:"DefendHostCoresCnt,omitnil,omitempty" name:"DefendHostCoresCnt"`
+
+	// Number of trial cores for Pro Edition.
+	TrialCoresCnt *uint64 `json:"TrialCoresCnt,omitnil,omitempty" name:"TrialCoresCnt"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -18313,6 +19385,194 @@ func (r *DescribePurchaseStateInfoResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribePurchaseStateInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRaspRuleVulsRequestParams struct {
+	// Filter criteria
+	// <li>Level - String - required: no - threat level, CRITICAL: critical, HIGH: high, MIDDLE: medium, LOW: low</li>
+	// <li>CVEID- string - required: no - cve id</li>
+	// <li>Name- string - required: no - vulnerability name</li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sort Mode: DESC, ACS
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sort field. SubmitTime: Disclosure time
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+type DescribeRaspRuleVulsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Filter criteria
+	// <li>Level - String - required: no - threat level, CRITICAL: critical, HIGH: high, MIDDLE: medium, LOW: low</li>
+	// <li>CVEID- string - required: no - cve id</li>
+	// <li>Name- string - required: no - vulnerability name</li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sort Mode: DESC, ACS
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sort field. SubmitTime: Disclosure time
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+func (r *DescribeRaspRuleVulsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRaspRuleVulsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Order")
+	delete(f, "By")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRaspRuleVulsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRaspRuleVulsResponseParams struct {
+	// List content	
+	List []*RaspRuleVul `json:"List,omitnil,omitempty" name:"List"`
+
+	// Total number.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeRaspRuleVulsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRaspRuleVulsResponseParams `json:"Response"`
+}
+
+func (r *DescribeRaspRuleVulsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRaspRuleVulsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRaspRulesRequestParams struct {
+	// Filter criteria
+	// <li>Level - String - required: no - threat level, CRITICAL: critical HIGH: high/MIDDLE: medium/LOW: low</li>
+	// <li>CVEID- string - required: no - cve id</li>
+	// <li>Name- string - required: no - vulnerability name</li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sort Mode: DESC, ACS
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sort field. SubmitTime: Disclosure time
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+type DescribeRaspRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Filter criteria
+	// <li>Level - String - required: no - threat level, CRITICAL: critical HIGH: high/MIDDLE: medium/LOW: low</li>
+	// <li>CVEID- string - required: no - cve id</li>
+	// <li>Name- string - required: no - vulnerability name</li>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sort Mode: DESC, ACS
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sort field. SubmitTime: Disclosure time
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+func (r *DescribeRaspRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRaspRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Order")
+	delete(f, "By")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRaspRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRaspRulesResponseParams struct {
+	// List content	
+	List []*RaspRule `json:"List,omitnil,omitempty" name:"List"`
+
+	// Total number.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeRaspRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRaspRulesResponseParams `json:"Response"`
+}
+
+func (r *DescribeRaspRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRaspRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -18420,7 +19680,6 @@ type DescribeReverseShellDetailResponseParams struct {
 	EventDetail *ReverseShellEventDescription `json:"EventDetail,omitnil,omitempty" name:"EventDetail"`
 
 	// Ancestor process information
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	AncestorProcessInfo *ProcessBaseInfo `json:"AncestorProcessInfo,omitnil,omitempty" name:"AncestorProcessInfo"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -18512,12 +19771,10 @@ func (r *DescribeReverseShellEventsExportRequest) FromJsonString(s string) error
 
 // Predefined struct for user
 type DescribeReverseShellEventsExportResponseParams struct {
-	// Excel download URL
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Address for download the Excel file.
 	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
 
-	// Task ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task ID.
 	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -18627,6 +19884,155 @@ func (r *DescribeReverseShellEventsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeReverseShellEventsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeReverseShellRegexpWhiteListInfoRequestParams struct {
+	// Rule ID
+	RuleID *string `json:"RuleID,omitnil,omitempty" name:"RuleID"`
+}
+
+type DescribeReverseShellRegexpWhiteListInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// Rule ID
+	RuleID *string `json:"RuleID,omitnil,omitempty" name:"RuleID"`
+}
+
+func (r *DescribeReverseShellRegexpWhiteListInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeReverseShellRegexpWhiteListInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeReverseShellRegexpWhiteListInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeReverseShellRegexpWhiteListInfoResponseParams struct {
+	// Rule details
+	RuleInfo *RegexpRuleInfo `json:"RuleInfo,omitnil,omitempty" name:"RuleInfo"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeReverseShellRegexpWhiteListInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeReverseShellRegexpWhiteListInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeReverseShellRegexpWhiteListInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeReverseShellRegexpWhiteListInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeReverseShellRegexpWhiteListRequestParams struct {
+	// Filter criteria
+	// 
+	// RuleName - String - Required: no - Rule name
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field.
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Sorting method.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+}
+
+type DescribeReverseShellRegexpWhiteListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Filter criteria
+	// 
+	// RuleName - String - Required: no - Rule name
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number of entries to be returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field.
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Sorting method.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+}
+
+func (r *DescribeReverseShellRegexpWhiteListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeReverseShellRegexpWhiteListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "By")
+	delete(f, "Order")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeReverseShellRegexpWhiteListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeReverseShellRegexpWhiteListResponseParams struct {
+	// Total number.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// List
+	List []*RegexpRuleListItem `json:"List,omitnil,omitempty" name:"List"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeReverseShellRegexpWhiteListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeReverseShellRegexpWhiteListResponseParams `json:"Response"`
+}
+
+func (r *DescribeReverseShellRegexpWhiteListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeReverseShellRegexpWhiteListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -18919,7 +20325,6 @@ type DescribeRiskSyscallDetailResponseParams struct {
 	EventDetail *RiskSyscallEventDescription `json:"EventDetail,omitnil,omitempty" name:"EventDetail"`
 
 	// Ancestor process information
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	AncestorProcessInfo *ProcessBaseInfo `json:"AncestorProcessInfo,omitnil,omitempty" name:"AncestorProcessInfo"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -19011,12 +20416,10 @@ func (r *DescribeRiskSyscallEventsExportRequest) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeRiskSyscallEventsExportResponseParams struct {
-	// Excel download URL
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Excel download link
 	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
 
 	// Task ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -19425,6 +20828,9 @@ func (r *DescribeScanIgnoreVulListResponse) FromJsonString(s string) error {
 type DescribeSearchExportListRequestParams struct {
 	// ES query condition in JSON
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// Log Type List
+	LogTypes []*string `json:"LogTypes,omitnil,omitempty" name:"LogTypes"`
 }
 
 type DescribeSearchExportListRequest struct {
@@ -19432,6 +20838,9 @@ type DescribeSearchExportListRequest struct {
 	
 	// ES query condition in JSON
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// Log Type List
+	LogTypes []*string `json:"LogTypes,omitnil,omitempty" name:"LogTypes"`
 }
 
 func (r *DescribeSearchExportListRequest) ToJsonString() string {
@@ -19447,6 +20856,7 @@ func (r *DescribeSearchExportListRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Query")
+	delete(f, "LogTypes")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSearchExportListRequest has unknown keys!", "")
 	}
@@ -19995,28 +21405,22 @@ func (r *DescribeSecLogDeliveryKafkaSettingRequest) FromJsonString(s string) err
 
 // Predefined struct for user
 type DescribeSecLogDeliveryKafkaSettingResponseParams struct {
-	// Message queue instance ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Message Queue Instance ID
 	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
-	// Message queue instance name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Message Queue Instance Name
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Domain
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// List of log types
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Log Type Queue
 	LogTypeList []*SecLogDeliveryKafkaSettingInfo `json:"LogTypeList,omitnil,omitempty" name:"LogTypeList"`
 
-	// Username
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Username.
 	User *string `json:"User,omitnil,omitempty" name:"User"`
 
-	// Region ID
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Region ID.
 	RegionID *string `json:"RegionID,omitnil,omitempty" name:"RegionID"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -20128,6 +21532,15 @@ type DescribeSecLogJoinObjectListResponseParams struct {
 	// List of accessed objects
 	List []*SecLogJoinObjectInfo `json:"List,omitnil,omitempty" name:"List"`
 
+	// Log node scope type. 0: specified; 1: all.
+	RangeType *int64 `json:"RangeType,omitnil,omitempty" name:"RangeType"`
+
+	// Whether new assets are accessed automatically. This parameter is valid only when the node scope involves all nodes.
+	AutoJoin *bool `json:"AutoJoin,omitnil,omitempty" name:"AutoJoin"`
+
+	// Number of excluded nodes.
+	ExcludedCount *uint64 `json:"ExcludedCount,omitnil,omitempty" name:"ExcludedCount"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -20182,6 +21595,9 @@ type DescribeSecLogJoinTypeListResponseParams struct {
 	// List of log access types
 	List []*SecLogJoinInfo `json:"List,omitnil,omitempty" name:"List"`
 
+	// Language type
+	MsgLanguage *string `json:"MsgLanguage,omitnil,omitempty" name:"MsgLanguage"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -20234,11 +21650,9 @@ func (r *DescribeSecLogKafkaUINRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSecLogKafkaUINResponseParams struct {
 	// Target UIN
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	DstUIN *string `json:"DstUIN,omitnil,omitempty" name:"DstUIN"`
 
-	// Licensing status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Authorization status
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -20318,6 +21732,9 @@ type DescribeSecLogVasInfoResponseParams struct {
 
 	// Trial storage capacity (GB)
 	TrialCapacity *uint64 `json:"TrialCapacity,omitnil,omitempty" name:"TrialCapacity"`
+
+	// Objects in the resource details array.
+	ResourceDetailList []*VasInfoResourceDetail `json:"ResourceDetailList,omitnil,omitempty" name:"ResourceDetailList"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -20820,6 +22237,9 @@ type DescribeUnfinishRefreshTaskResponseParams struct {
 	// Task status. Valid values: `Task_New`, `Task_Running`, `Task_Finish`, `Task_Error`, `Task_NoExist`. `Task_New` and `Task_Running` indicate that a task exists and no new task can be distributed.
 	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
+	// New Task ID
+	NewTaskID *string `json:"NewTaskID,omitnil,omitempty" name:"NewTaskID"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -21027,36 +22447,28 @@ type DescribeVirusAutoIsolateSampleDetailResponseParams struct {
 	// MD5 checksum of the file
 	MD5 *string `json:"MD5,omitnil,omitempty" name:"MD5"`
 
-	// File size (B)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// File Size (B)
 	Size *uint64 `json:"Size,omitnil,omitempty" name:"Size"`
 
 	// Virus name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	VirusName *string `json:"VirusName,omitnil,omitempty" name:"VirusName"`
 
-	// Risk level. Valid values: `RISK_CRITICAL`, `RISK_HIGH`, `RISK_MEDIUM`, `RISK_LOW`, `RISK_NOTICE`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Risk Level: RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM, RISK_LOW, and RISK_NOTICE
 	RiskLevel *string `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
 
-	// Anti-virus engine
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// antivirus engine
 	KillEngine []*string `json:"KillEngine,omitnil,omitempty" name:"KillEngine"`
 
-	// Tag
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Tag.
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Event description
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	HarmDescribe *string `json:"HarmDescribe,omitnil,omitempty" name:"HarmDescribe"`
 
-	// Solution
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Recommended solution
 	SuggestScheme *string `json:"SuggestScheme,omitnil,omitempty" name:"SuggestScheme"`
 
 	// Reference link
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReferenceLink *string `json:"ReferenceLink,omitnil,omitempty" name:"ReferenceLink"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -21267,6 +22679,9 @@ type DescribeVirusAutoIsolateSettingResponseParams struct {
 	// Whether the process associated with the isolated file is interrupted. Valid values: `true` (yes); `false` (no).
 	IsKillProgress *bool `json:"IsKillProgress,omitnil,omitempty" name:"IsKillProgress"`
 
+	// Enabling status customized by the user.
+	UserAutoIsolateKillSwitch *bool `json:"UserAutoIsolateKillSwitch,omitnil,omitempty" name:"UserAutoIsolateKillSwitch"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -21322,218 +22737,169 @@ func (r *DescribeVirusDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeVirusDetailResponseParams struct {
 	// Image ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
 	// Image name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ImageName *string `json:"ImageName,omitnil,omitempty" name:"ImageName"`
 
-	// Creation time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Creation time.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Trojan file size
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Trojan File Size
 	Size *uint64 `json:"Size,omitnil,omitempty" name:"Size"`
 
 	// Trojan file path
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	FilePath *string `json:"FilePath,omitnil,omitempty" name:"FilePath"`
 
-	// Last generation time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Latest creation time
 	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
 
 	// Virus name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	VirusName *string `json:"VirusName,omitnil,omitempty" name:"VirusName"`
 
-	// Risk level. Valid values: `RISK_CRITICAL`, `RISK_HIGH`, `RISK_MEDIUM`, `RISK_LOW`, `RISK_NOTICE`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Risk Level: RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM, RISK_LOW, and RISK_NOTICE
 	RiskLevel *string `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
 
 	// Container name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ContainerName *string `json:"ContainerName,omitnil,omitempty" name:"ContainerName"`
 
-	// Container ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Container id
 	ContainerId *string `json:"ContainerId,omitnil,omitempty" name:"ContainerId"`
 
-	// Server name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Host name
 	HostName *string `json:"HostName,omitnil,omitempty" name:"HostName"`
 
-	// Server ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Host ID
 	HostId *string `json:"HostId,omitnil,omitempty" name:"HostId"`
 
 	// Process name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProcessName *string `json:"ProcessName,omitnil,omitempty" name:"ProcessName"`
 
 	// Process path
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProcessPath *string `json:"ProcessPath,omitnil,omitempty" name:"ProcessPath"`
 
-	// Process MD5
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Process md5
 	ProcessMd5 *string `json:"ProcessMd5,omitnil,omitempty" name:"ProcessMd5"`
 
-	// Process ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Process id
 	ProcessId *uint64 `json:"ProcessId,omitnil,omitempty" name:"ProcessId"`
 
 	// Process parameter
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProcessArgv *string `json:"ProcessArgv,omitnil,omitempty" name:"ProcessArgv"`
 
 	// Process chain
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProcessChan *string `json:"ProcessChan,omitnil,omitempty" name:"ProcessChan"`
 
-	// Process group
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Process Group
 	ProcessAccountGroup *string `json:"ProcessAccountGroup,omitnil,omitempty" name:"ProcessAccountGroup"`
 
-	// Process initiator
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// process initiator
 	ProcessStartAccount *string `json:"ProcessStartAccount,omitnil,omitempty" name:"ProcessStartAccount"`
 
 	// Process file permission
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProcessFileAuthority *string `json:"ProcessFileAuthority,omitnil,omitempty" name:"ProcessFileAuthority"`
 
-	// Source. Valid values: `0` (quick scan); `1` (scheduled scan); `2` (real-time monitoring).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Source. 0: One-Click Scan; 1: Scheduled Scan; 2: Real-Time Monitoring
 	SourceType *int64 `json:"SourceType,omitnil,omitempty" name:"SourceType"`
 
-	// Tag
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Tag.
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Event description
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	HarmDescribe *string `json:"HarmDescribe,omitnil,omitempty" name:"HarmDescribe"`
 
-	// Solution
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Recommended solution
 	SuggestScheme *string `json:"SuggestScheme,omitnil,omitempty" name:"SuggestScheme"`
 
 	// Remarks
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Mark *string `json:"Mark,omitnil,omitempty" name:"Mark"`
 
-	// Suspicious file name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Risk File Name
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
-	// MD5 checksum of the file
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// File MD5
 	FileMd5 *string `json:"FileMd5,omitnil,omitempty" name:"FileMd5"`
 
 	// Event type
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	EventType *string `json:"EventType,omitnil,omitempty" name:"EventType"`
 
-	// Cluster name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Cluster name.
 	PodName *string `json:"PodName,omitnil,omitempty" name:"PodName"`
 
-	// `DEAL_NONE`: Pending.
-	// `DEAL_IGNORE`: Ignored.
-	// `DEAL_ADD_WHITELIST`: Allowed.
-	// `DEAL_DEL`: Deleted.
-	// `DEAL_ISOLATE`: Isolated.
-	// `DEAL_ISOLATING`: Isolating.
-	// `DEAL_ISOLATE_FAILED`: Isolation failed.
-	// `DEAL_RECOVERING`: Recovering.
-	// `DEAL_RECOVER_FAILED`: Recovery failed.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// DEAL_NONE: File pending
+	// DEAL_IGNORE: Already ignored
+	// DEAL_ADD_WHITELIST: Add to whitelist
+	// DEAL_DEL: File deleted
+	// DEAL_ISOLATE: Has been isolated
+	// DEAL_ISOLATING: Isolated
+	// DEAL_ISOLATE_FAILED: Isolation failed
+	// DEAL_RECOVERING: Recovering
+	// DEAL_RECOVER_FAILED: Recovery failed
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Sub-status of the failure:
-	// `FILE_NOT_FOUND`: The file does not exist.
-	// `FILE_ABNORMAL`: The file is abnormal.
-	// `FILE_ABNORMAL_DEAL_RECOVER`: The file is abnormal when recovered.
-	// `BACKUP_FILE_NOT_FOUND`: The backup file does not exist.
-	// `CONTAINER_NOT_FOUND_DEAL_ISOLATE`: The container does not exist during isolation.
-	// `CONTAINER_NOT_FOUND_DEAL_RECOVER`: The container does not exist during recovery.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Failed sub-status
+	// FILE_NOT_FOUND: File not found
+	// FILE_ABNORMAL: File abnormality
+	// FILE_ABNORMAL_DEAL_RECOVER: File abnormality when recovering file
+	// BACKUP FILE NOT FOUND
+	// CONTAINER_NOT_FOUND_DEAL_ISOLATE: Container not found in isolation
+	// CONTAINER_NOT_FOUND_DEAL_RECOVER: Container not found when recovering
 	SubStatus *string `json:"SubStatus,omitnil,omitempty" name:"SubStatus"`
 
-	// Private IP
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Private IP address
 	HostIP *string `json:"HostIP,omitnil,omitempty" name:"HostIP"`
 
-	// Public IP
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Public IP address
 	ClientIP *string `json:"ClientIP,omitnil,omitempty" name:"ClientIP"`
 
-	// Parent process initiator
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Parent Process Startup User
 	PProcessStartUser *string `json:"PProcessStartUser,omitnil,omitempty" name:"PProcessStartUser"`
 
-	// User group of the parent process
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Parent process user group
 	PProcessUserGroup *string `json:"PProcessUserGroup,omitnil,omitempty" name:"PProcessUserGroup"`
 
-	// Path of the parent process
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Parent process path
 	PProcessPath *string `json:"PProcessPath,omitnil,omitempty" name:"PProcessPath"`
 
-	// Command line parameters of the parent process
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Parent Process Command Line Parameters
 	PProcessParam *string `json:"PProcessParam,omitnil,omitempty" name:"PProcessParam"`
 
-	// Ancestor process initiator
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Ancestor Process Startup User
 	AncestorProcessStartUser *string `json:"AncestorProcessStartUser,omitnil,omitempty" name:"AncestorProcessStartUser"`
 
-	// Ancestor process user group
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Ancestor Process User Group
 	AncestorProcessUserGroup *string `json:"AncestorProcessUserGroup,omitnil,omitempty" name:"AncestorProcessUserGroup"`
 
 	// Ancestor process path
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	AncestorProcessPath *string `json:"AncestorProcessPath,omitnil,omitempty" name:"AncestorProcessPath"`
 
-	// Command line parameters of the ancestor process
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Ancestor Process Command Line Parameters
 	AncestorProcessParam *string `json:"AncestorProcessParam,omitnil,omitempty" name:"AncestorProcessParam"`
 
-	// Last processing time of the event
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Last Time for Event Handling
 	OperationTime *string `json:"OperationTime,omitnil,omitempty" name:"OperationTime"`
 
 	// Container isolation status
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ContainerNetStatus *string `json:"ContainerNetStatus,omitnil,omitempty" name:"ContainerNetStatus"`
 
-	// Sub-status of container isolation
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Container Isolation Sub-status
 	ContainerNetSubStatus *string `json:"ContainerNetSubStatus,omitnil,omitempty" name:"ContainerNetSubStatus"`
 
-	// Container isolation operation source
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Container Isolation Operation Source
 	ContainerIsolateOperationSrc *string `json:"ContainerIsolateOperationSrc,omitnil,omitempty" name:"ContainerIsolateOperationSrc"`
 
-	// Check platform
-	// `1`: Tencent Cloud Security Engine.
-	// `2`: tav.
-	// `3`: binaryAi.
-	// `4`: Unusual behavior.
-	// `5`: Threat intelligence.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// detection platform
+	// 1: Cloud Killing Engine
+	// 2: tav
+	// 3: binaryAi
+	// 4: Abnormal behavior
+	// 5: TI
 	CheckPlatform []*string `json:"CheckPlatform,omitnil,omitempty" name:"CheckPlatform"`
 
-	// File accessed time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// File Access Time
 	FileAccessTime *string `json:"FileAccessTime,omitnil,omitempty" name:"FileAccessTime"`
 
-	// File modified time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// File Modification Time
 	FileModifyTime *string `json:"FileModifyTime,omitnil,omitempty" name:"FileModifyTime"`
 
 	// Node subnet ID
@@ -21566,11 +22932,14 @@ type DescribeVirusDetailResponseParams struct {
 	// Cluster name
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-
+	// Namespace
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-
+	// Workload type
 	WorkloadType *string `json:"WorkloadType,omitnil,omitempty" name:"WorkloadType"`
+
+	// Container status.
+	ContainerStatus *string `json:"ContainerStatus,omitnil,omitempty" name:"ContainerStatus"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -21840,6 +23209,73 @@ func (r *DescribeVirusManualScanEstimateTimeoutResponse) FromJsonString(s string
 }
 
 // Predefined struct for user
+type DescribeVirusMonitorConfigRequestParams struct {
+
+}
+
+type DescribeVirusMonitorConfigRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeVirusMonitorConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVirusMonitorConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVirusMonitorConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVirusMonitorConfigResponseParams struct {
+	// Real-Time Monitoring Enabled
+	EnableScan *bool `json:"EnableScan,omitnil,omitempty" name:"EnableScan"`
+
+	// true: Including Path; false: Excluding Path
+	IsIncludePath *bool `json:"IsIncludePath,omitnil,omitempty" name:"IsIncludePath"`
+
+	// Custom Excluded or Scanned Address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ScanPath []*string `json:"ScanPath,omitnil,omitempty" name:"ScanPath"`
+
+	// Scan path mode:
+	// SCAN_PATH_ALL: All paths
+	// SCAN_PATH_DEFAULT: Default path
+	// SCAN_PATH_USER_DEFINE: User-defined path
+	ScanPathMode *string `json:"ScanPathMode,omitnil,omitempty" name:"ScanPathMode"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeVirusMonitorConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeVirusMonitorConfigResponseParams `json:"Response"`
+}
+
+func (r *DescribeVirusMonitorConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVirusMonitorConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeVirusMonitorSettingRequestParams struct {
 
 }
@@ -21873,16 +23309,13 @@ type DescribeVirusMonitorSettingResponseParams struct {
 	// Whether to enable real-time monitoring
 	EnableScan *bool `json:"EnableScan,omitnil,omitempty" name:"EnableScan"`
 
-	// Scan all paths
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Scan all paths.
 	ScanPathAll *bool `json:"ScanPathAll,omitnil,omitempty" name:"ScanPathAll"`
 
-	// Valid when `ScanPathAll` is `true`. Valid values of `ScanPathAll`: `0` (scan the following paths); `1` (scan all paths except the following).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// It is effective when ScanPathAll is true. 0: Scan the following paths; 1: Scan the following paths.
 	ScanPathType *uint64 `json:"ScanPathType,omitnil,omitempty" name:"ScanPathType"`
 
-	// Specified path to be excluded or scanned
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Custom Excluded or Scanned Address
 	ScanPath []*string `json:"ScanPath,omitnil,omitempty" name:"ScanPath"`
 
 	// Path scanning mode: 
@@ -21969,6 +23402,89 @@ func (r *DescribeVirusSampleDownloadUrlResponse) FromJsonString(s string) error 
 }
 
 // Predefined struct for user
+type DescribeVirusScanConfigRequestParams struct {
+
+}
+
+type DescribeVirusScanConfigRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeVirusScanConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVirusScanConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVirusScanConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVirusScanConfigResponseParams struct {
+	// Enable Regular Scanning
+	EnableScan *bool `json:"EnableScan,omitnil,omitempty" name:"EnableScan"`
+
+	// Detection Interval in Days
+	Cycle *uint64 `json:"Cycle,omitnil,omitempty" name:"Cycle"`
+
+	// Scan start time
+	BeginScanAt *string `json:"BeginScanAt,omitnil,omitempty" name:"BeginScanAt"`
+
+	// Timeout Duration (Hours)
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// SCAN_NODE: Scanning node
+	// SCAN CONTAINER
+	ScanRangeType *string `json:"ScanRangeType,omitnil,omitempty" name:"ScanRangeType"`
+
+	// Container ID or Node ID in Custom Scan Range 
+	ScanIDs []*ScanRangeInfo `json:"ScanIDs,omitnil,omitempty" name:"ScanIDs"`
+
+	// Custom Excluded or Scanned Address
+	ScanPath []*string `json:"ScanPath,omitnil,omitempty" name:"ScanPath"`
+
+	// Scan path mode:
+	// SCAN_PATH_ALL: All paths.
+	// SCAN_PATH_DEFAULT: Default path
+	// SCAN_PATH_USER_DEFINE: User-defined path
+	ScanPathMode *string `json:"ScanPathMode,omitnil,omitempty" name:"ScanPathMode"`
+
+	// true: including path
+	// Default value: false. Excluded path.
+	IsIncludePath *bool `json:"IsIncludePath,omitnil,omitempty" name:"IsIncludePath"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeVirusScanConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeVirusScanConfigResponseParams `json:"Response"`
+}
+
+func (r *DescribeVirusScanConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVirusScanConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeVirusScanSettingRequestParams struct {
 
 }
@@ -22029,8 +23545,7 @@ type DescribeVirusScanSettingResponseParams struct {
 	// Specified path to be excluded or scanned
 	ScanPath []*string `json:"ScanPath,omitnil,omitempty" name:"ScanPath"`
 
-	// Timeout settings of quick check
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// One-Click Detection Timeout Setting
 	ClickTimeout *uint64 `json:"ClickTimeout,omitnil,omitempty" name:"ClickTimeout"`
 
 	// Path scanning mode: 
@@ -22183,8 +23698,7 @@ func (r *DescribeVirusScanTimeoutSettingRequest) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeVirusScanTimeoutSettingResponseParams struct {
-	// Timeout period in hours
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Timeout Duration (Hours)
 	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -22241,32 +23755,25 @@ type DescribeVirusSummaryResponseParams struct {
 	// ID of the last scan task
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Number of containers affected by the trojan
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of Containers Affected by Trojans
 	RiskContainerCnt *uint64 `json:"RiskContainerCnt,omitnil,omitempty" name:"RiskContainerCnt"`
 
-	// Number of pending risks
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of Pending Risks
 	RiskCnt *uint64 `json:"RiskCnt,omitnil,omitempty" name:"RiskCnt"`
 
-	// Update time of the virus library
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Virus database update time
 	VirusDataBaseModifyTime *string `json:"VirusDataBaseModifyTime,omitnil,omitempty" name:"VirusDataBaseModifyTime"`
 
-	// Increase in the number of containers affected by trojans from yesterday
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Increase in the Number of Containers Affected by Trojans Compared to Yesterday
 	RiskContainerIncrease *int64 `json:"RiskContainerIncrease,omitnil,omitempty" name:"RiskContainerIncrease"`
 
-	// Increase in the number of pending risks from yesterday
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of Pending Risks Increased Compared to Yesterday
 	RiskIncrease *int64 `json:"RiskIncrease,omitnil,omitempty" name:"RiskIncrease"`
 
-	// Increase in the number of isolated events from yesterday
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Isolation Event Count Increased Compared to Yesterday
 	IsolateIncrease *int64 `json:"IsolateIncrease,omitnil,omitempty" name:"IsolateIncrease"`
 
-	// Total number of isolated events
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Total Number of Isolation Events
 	IsolateCnt *int64 `json:"IsolateCnt,omitnil,omitempty" name:"IsolateCnt"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -22395,6 +23902,94 @@ func (r *DescribeVirusTaskListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeVirusTaskListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVirusWhiteListRulesRequestParams struct {
+	// <p>Page size. Default value: 10.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Page offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Sorting order. Valid values: ASC and DESC. Default value: DESC.</p>
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// <p>Sorting field. Valid values: InsertTime and UpdateTime.</p>
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// <p>Filter.</p>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeVirusWhiteListRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Page size. Default value: 10.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Page offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Sorting order. Valid values: ASC and DESC. Default value: DESC.</p>
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// <p>Sorting field. Valid values: InsertTime and UpdateTime.</p>
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// <p>Filter.</p>
+	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeVirusWhiteListRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVirusWhiteListRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Order")
+	delete(f, "By")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVirusWhiteListRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVirusWhiteListRulesResponseParams struct {
+	// <p>Total.</p>
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>Allowlist rule list.</p>
+	List []*VirusWhiteListRuleInfo `json:"List,omitnil,omitempty" name:"List"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeVirusWhiteListRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeVirusWhiteListRulesResponseParams `json:"Response"`
+}
+
+func (r *DescribeVirusWhiteListRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVirusWhiteListRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -22955,16 +24550,13 @@ type DescribeVulDefenceSettingResponseParams struct {
 	// Number of abnormal servers with exploit prevention enabled
 	ExceptionHostCount *int64 `json:"ExceptionHostCount,omitnil,omitempty" name:"ExceptionHostCount"`
 
-	// Specified servers with exploit prevention enabled
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Custom Vulnerability Defense Hosts
 	HostIDs []*string `json:"HostIDs,omitnil,omitempty" name:"HostIDs"`
 
-	// Total number of servers with TCSS activated
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Total Number of Hosts with Container Security Enabled
 	HostTotalCount *int64 `json:"HostTotalCount,omitnil,omitempty" name:"HostTotalCount"`
 
-	// Number of vulnerabilities that can be prevented
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Supported Defense Vulnerability Count
 	SupportDefenseVulCount *int64 `json:"SupportDefenseVulCount,omitnil,omitempty" name:"SupportDefenseVulCount"`
 
 	// Number of normal nodes
@@ -23565,7 +25157,7 @@ type DescribeVulRegistryImageListRequestParams struct {
 	// The number of results returned. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset, defaults to 0.
+
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Filter condition
@@ -23595,7 +25187,6 @@ type DescribeVulRegistryImageListRequest struct {
 	// The number of results returned. Default value: 10. Maximum value: 100.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Offset, defaults to 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Filter condition
@@ -23645,7 +25236,7 @@ type DescribeVulRegistryImageListResponseParams struct {
 	// Total number of images
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-
+	// Result list
 	List []*VulAffectedRegistryImageInfo `json:"List,omitnil,omitempty" name:"List"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -24229,7 +25820,7 @@ type DescribeWebVulListRequestParams struct {
 	// <li>ComponentName- string - Required: No - Component name</li>
 	// <li>ComponentVersion- string - Required: No - Component version</li>
 	// <li>Name- string - Required: No - Vulnerability name</li>
-	// <li>FocusOnType - string - Required: No - Urgency. Valid values: `ALL` (all); `SERIOUS_LEVEL (critical and high risks); `IS_SUGGEST` (high-priority); `POC_EXP` (POC/EXP); `NETWORK_EXP` (remote EXP).</li>
+	// <li>FocusOnType - string - Required: No - Urgency. Valid values: `ALL` (all); `SERIOUS_LEVEL` (critical and high risks); `IS_SUGGEST` (high-priority); `POC_EXP` (POC/EXP); `NETWORK_EXP` (remote EXP).</li>
 	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Sorting order
@@ -24262,7 +25853,7 @@ type DescribeWebVulListRequest struct {
 	// <li>ComponentName- string - Required: No - Component name</li>
 	// <li>ComponentVersion- string - Required: No - Component version</li>
 	// <li>Name- string - Required: No - Vulnerability name</li>
-	// <li>FocusOnType - string - Required: No - Urgency. Valid values: `ALL` (all); `SERIOUS_LEVEL (critical and high risks); `IS_SUGGEST` (high-priority); `POC_EXP` (POC/EXP); `NETWORK_EXP` (remote EXP).</li>
+	// <li>FocusOnType - string - Required: No - Urgency. Valid values: `ALL` (all); `SERIOUS_LEVEL` (critical and high risks); `IS_SUGGEST` (high-priority); `POC_EXP` (POC/EXP); `NETWORK_EXP` (remote EXP).</li>
 	Filters []*RunTimeFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Sorting order
@@ -24327,31 +25918,25 @@ type EmergencyVulInfo struct {
 	// Vulnerability name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Vulnerability tag
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// vulnerability tag
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// CVSS V3 score
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	CVSSV3Score *float64 `json:"CVSSV3Score,omitnil,omitempty" name:"CVSSV3Score"`
 
 	// Risk level
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// CVE No.
 	CVEID *string `json:"CVEID,omitnil,omitempty" name:"CVEID"`
 
 	// Vulnerability type
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
 
 	// Vulnerability disclosure time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubmitTime *string `json:"SubmitTime,omitnil,omitempty" name:"SubmitTime"`
 
 	// Last discovery time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	LatestFoundTime *string `json:"LatestFoundTime,omitnil,omitempty" name:"LatestFoundTime"`
 
 	// Emergency vulnerability risk information. Valid values: `NOT_SCAN` (not scanned); `SCANNING` (scanning); `SCANNED_NOT_RISK` (scanned and at no risk); `SCANNED_RISK` (scanned and at risk).
@@ -24363,20 +25948,16 @@ type EmergencyVulInfo struct {
 	// POC ID
 	PocID *string `json:"PocID,omitnil,omitempty" name:"PocID"`
 
-	// Defense status. Valid values: `NO_DEFENDED`, `DEFENDED`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Defense Status. NO_DEFENDED: Not Defended; DEFENDED: Defended
 	DefenceStatus *string `json:"DefenceStatus,omitnil,omitempty" name:"DefenceStatus"`
 
-	// Scope of servers with exploit prevention enabled. Valid values: `MANUAL` (specified servers); `ALL` (all servers).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Vulnerability Defense Host Range. MANUAL: Selected Host Nodes; ALL: All
 	DefenceScope *string `json:"DefenceScope,omitnil,omitempty" name:"DefenceScope"`
 
-	// Number of servers with exploit prevention enabled
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of Hosts Defended Against Vulnerabilities
 	DefenceHostCount *int64 `json:"DefenceHostCount,omitnil,omitempty" name:"DefenceHostCount"`
 
-	// Number of attacks defended against
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of Attacks Defended
 	DefendedCount *int64 `json:"DefendedCount,omitnil,omitempty" name:"DefendedCount"`
 }
 
@@ -24387,12 +25968,10 @@ type EscapeEventDescription struct {
 	// Solution
 	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
 
-	// Event remarks
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Event remark information
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-	// Last processing time of the event
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Last Time for Event Handling
 	OperationTime *string `json:"OperationTime,omitnil,omitempty" name:"OperationTime"`
 }
 
@@ -24455,37 +26034,32 @@ type EscapeEventInfo struct {
 	// Last generation time
 	LatestFoundTime *string `json:"LatestFoundTime,omitnil,omitempty" name:"LatestFoundTime"`
 
-	// Node IP
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// node IP
 	NodeIP *string `json:"NodeIP,omitnil,omitempty" name:"NodeIP"`
 
-	// Server IP
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Host IP address
 	HostID *string `json:"HostID,omitnil,omitempty" name:"HostID"`
 
-	// Network status
-	// `NORMAL`: 	Not isolated.
-	// `ISOLATED`: 		Isolated.
-	// `ISOLATING`: 		Isolating.
-	// `ISOLATE_FAILED`: 	Isolation failed.
-	// `RESTORING`: Recovering.
-	// `RESTORE_FAILED`: Recovery failed.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Network status.
+	// Unisolated  NORMAL
+	// ISOLATED
+	// isolated
+	// Isolation FAILED
+	// RESTORING isolation
+	// Isolation restoration failed RESTORE_FAILED
 	ContainerNetStatus *string `json:"ContainerNetStatus,omitnil,omitempty" name:"ContainerNetStatus"`
 
-	// Sub-status of the container
-	// "AGENT_OFFLINE"       // The agent is offline.
-	// "NODE_DESTROYED"      // The node is terminated.
-	// "CONTAINER_EXITED"    // The container exited.
-	// "CONTAINER_DESTROYED" // The container was terminated.
-	// "SHARED_HOST"         // The container shares the network with the server.
-	// "RESOURCE_LIMIT"      // The number of resources to be isolated exceeds the limit.
-	// "UNKNOW"              // The reason is unknown.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// container sub-status
+	// AGENT_OFFLINE
+	// NODE_DESTROYED
+	// CONTAINER_EXITED
+	// CONTAINER_DESTROYED
+	// "SHARED_HOST"         // Container shares network with host
+	// RESOURCE_LIMIT
+	// "UNKNOW": Unknown
 	ContainerNetSubStatus *string `json:"ContainerNetSubStatus,omitnil,omitempty" name:"ContainerNetSubStatus"`
 
-	// Container isolation operation source
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Container Isolation Operation Source
 	ContainerIsolateOperationSrc *string `json:"ContainerIsolateOperationSrc,omitnil,omitempty" name:"ContainerIsolateOperationSrc"`
 
 	// Container status
@@ -24565,12 +26139,13 @@ type EscapeRule struct {
 
 type EscapeRuleEnabled struct {
 	// Rule type
-	//    `ESCAPE_HOST_ACESS_FILE`: Host file access escape.
-	//    `ESCAPE_MOUNT_NAMESPACE`: Mount namespace escape.
-	//    `ESCAPE_PRIVILEDGE`: Program privilege escalation escape.
-	//    `ESCAPE_PRIVILEDGE_CONTAINER_START`: Privileged container startup escape.
-	//    `ESCAPE_MOUNT_SENSITIVE_PTAH`: Sensitive path mount.
-	//    `ESCAPE_SYSCALL`: Syscall escape.
+	// ESCAPE_CGROUPS: Escape by using the cgroup mechanism
+	// ESCAPE_TAMPER_SENSITIVE_FILE: Escape by tampering with sensitive files
+	// ESCAPE_DOCKER_API: Escape by accessing the Docker API
+	// ESCAPE_VUL_OCCURRED: Escape vulnerability exploitation.
+	// MOUNT_SENSITIVE_PATH: MOUNT SENSITIVE path
+	// PRIVILEGE_CONTAINER_START: Privilege container
+	// PRIVILEGE: Escape by program privilege escalation
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Whether to enable. Valid values: `false` (no); `true` (yes).
@@ -24587,8 +26162,11 @@ type EscapeWhiteListInfo struct {
 	// Allowed item ID
 	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
-	// Number of associated servers
+	// Number of associated hosts (including regular nodes and super nodes).
 	HostCount *int64 `json:"HostCount,omitnil,omitempty" name:"HostCount"`
+
+	// Number of associated super nodes.
+	SuperNodeCount *int64 `json:"SuperNodeCount,omitnil,omitempty" name:"SuperNodeCount"`
 
 	// Number of associated containers
 	ContainerCount *int64 `json:"ContainerCount,omitnil,omitempty" name:"ContainerCount"`
@@ -24765,67 +26343,83 @@ type FileAttributeInfo struct {
 }
 
 type HostInfo struct {
-	// Server ID
+	// <p>Host ID.</p>
 	HostID *string `json:"HostID,omitnil,omitempty" name:"HostID"`
 
-	// Server IP, which is the private IP
+	// <p>Host IP address, which is the private IP address.</p>
 	HostIP *string `json:"HostIP,omitnil,omitempty" name:"HostIP"`
 
-	// Server name
+	// <p>Host name.</p>
 	HostName *string `json:"HostName,omitnil,omitempty" name:"HostName"`
 
-	// Project
+	// <p>Business group.</p>
 	Group *string `json:"Group,omitnil,omitempty" name:"Group"`
 
-	// Docker version
+	// <p>Docker version.</p>
 	DockerVersion *string `json:"DockerVersion,omitnil,omitempty" name:"DockerVersion"`
 
-	// Docker file system type
+	// <p>Docker file system type.</p>
 	DockerFileSystemDriver *string `json:"DockerFileSystemDriver,omitnil,omitempty" name:"DockerFileSystemDriver"`
 
-	// Number of images
+	// <p>Number of images.</p>
 	ImageCnt *uint64 `json:"ImageCnt,omitnil,omitempty" name:"ImageCnt"`
 
-	// Number of containers
+	// <p>Number of containers.</p>
 	ContainerCnt *uint64 `json:"ContainerCnt,omitnil,omitempty" name:"ContainerCnt"`
 
-	// Agent status
+	// <p>Agent running status.</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Whether it is Containerd
+	// <p>Whether it is containerd.</p>
 	IsContainerd *bool `json:"IsContainerd,omitnil,omitempty" name:"IsContainerd"`
 
-	// Server source. Valid values: `CVM`, `ECM`, `LH`, `BM`, `Other`. The first four values indicate Tencent Cloud instances, while the last one indicates non-Tencent Cloud instances.
+	// <p>Server source: one of ["CVM", "ECM", "LH", "BM"] is a Tencent Cloud server; one of ["Other"] is a non-Tencent Cloud server;</p>
 	MachineType *string `json:"MachineType,omitnil,omitempty" name:"MachineType"`
 
-	// Public IP
+	// <p>Public IP address.</p>
 	PublicIp *string `json:"PublicIp,omitnil,omitempty" name:"PublicIp"`
 
-	// Server UUID
+	// <p>Host UUID.</p>
 	Uuid *string `json:"Uuid,omitnil,omitempty" name:"Uuid"`
 
-	// Server instance ID
+	// <p>Host instance ID.</p>
 	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
-	// Region ID
+	// <p>Region ID.</p>
 	RegionID *int64 `json:"RegionID,omitnil,omitempty" name:"RegionID"`
 
-	// Project
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// <p>Project.</p>
 	Project *ProjectInfo `json:"Project,omitnil,omitempty" name:"Project"`
 
-	// Tags
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// <p>Tag.</p>
 	Tags []*TagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
 
-	// Cluster Name
+	// <p>Cluster name.</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Cluster Access Status
+	// <p>Cluster access status.</p>
 	ClusterAccessedStatus *string `json:"ClusterAccessedStatus,omitnil,omitempty" name:"ClusterAccessedStatus"`
+
+	// <p>Cluster access sub-status.</p><p>Enumeration values:</p><ul><li>AccessedSubNone: none</li><li>AccessedSubUninstallException: uninstallation exception</li><li>AccessedSubTimeout: access timeout</li><li>AccessedSubUninstallTimeout: uninstallation timeout</li><li>AccessedSubResourceException: cluster component check exception, including Deployment and DaemonSet</li><li>AccessedSubCAMPermissionDenied: insufficient CAM permissions</li></ul>
+	ClusterAccessedSubStatus *string `json:"ClusterAccessedSubStatus,omitnil,omitempty" name:"ClusterAccessedSubStatus"`
+
+	// <p>Detailed description of the failure reason.</p>
+	ClusterAccessedErrorReason *string `json:"ClusterAccessedErrorReason,omitnil,omitempty" name:"ClusterAccessedErrorReason"`
+
+	// <p>Billable cores.</p>
+	ChargeCoresCnt *uint64 `json:"ChargeCoresCnt,omitnil,omitempty" name:"ChargeCoresCnt"`
+
+	// <p>Protection status:<br>Defended<br>Undefended</p>
+	DefendStatus *string `json:"DefendStatus,omitnil,omitempty" name:"DefendStatus"`
+
+	// <p>Number of cores.</p>
+	CoresCnt *uint64 `json:"CoresCnt,omitnil,omitempty" name:"CoresCnt"`
+
+	// <p>Last online time.</p>
+	LastOnlineTime *string `json:"LastOnlineTime,omitnil,omitempty" name:"LastOnlineTime"`
 }
 
 type ImageAutoAuthorizedTask struct {
@@ -24867,13 +26461,139 @@ type ImageComponent struct {
 	// Component type
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Number of component vulnerabilities
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of Component Vulnerabilities
 	VulCount *uint64 `json:"VulCount,omitnil,omitempty" name:"VulCount"`
 
 	// Image ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ImageID *string `json:"ImageID,omitnil,omitempty" name:"ImageID"`
+}
+
+type ImageDenyEvent struct {
+	// Event Type. EVENT_RISK: Risk Event Type; EVENT_PRIVILEGE: Privilege
+	EventType *string `json:"EventType,omitnil,omitempty" name:"EventType"`
+
+	// Rule name
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
+
+	// Rule ID
+	RuleID *string `json:"RuleID,omitnil,omitempty" name:"RuleID"`
+
+	// Rule type
+	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
+
+	// Rule Enable Status. 0: Enabled; 1: Disabled
+	RuleStatus *int64 `json:"RuleStatus,omitnil,omitempty" name:"RuleStatus"`
+
+	// Rule Policy Status. IN_THE_TEST: Observing; IN_EFFECT: Effective
+	RuleEffectStatus *string `json:"RuleEffectStatus,omitnil,omitempty" name:"RuleEffectStatus"`
+
+	// Rule content
+	RuleInfo []*string `json:"RuleInfo,omitnil,omitempty" name:"RuleInfo"`
+
+	// Rule description
+	RuleDescription *string `json:"RuleDescription,omitnil,omitempty" name:"RuleDescription"`
+
+	// Image ID
+	ImageID *string `json:"ImageID,omitnil,omitempty" name:"ImageID"`
+
+	// Image Name
+	ImageName *string `json:"ImageName,omitnil,omitempty" name:"ImageName"`
+
+	// Node name.
+	NodeName *string `json:"NodeName,omitnil,omitempty" name:"NodeName"`
+
+	// Private IP address
+	NodeIP *string `json:"NodeIP,omitnil,omitempty" name:"NodeIP"`
+
+	// Host QUUID
+	QUUID *string `json:"QUUID,omitnil,omitempty" name:"QUUID"`
+
+	// First generation time
+	FoundTime *string `json:"FoundTime,omitnil,omitempty" name:"FoundTime"`
+
+	// Latest creation time
+	LatestFoundTime *string `json:"LatestFoundTime,omitnil,omitempty" name:"LatestFoundTime"`
+
+	// Number of events
+	EventCount *int64 `json:"EventCount,omitnil,omitempty" name:"EventCount"`
+
+	// Execution action
+	// BEHAVIOR_ALERT: Alert
+	// BEHAVIOR_HOLDUP_SUCCESSED: Interception
+	DealBehavior *string `json:"DealBehavior,omitnil,omitempty" name:"DealBehavior"`
+
+	// Event ID
+	EventID *int64 `json:"EventID,omitnil,omitempty" name:"EventID"`
+
+	// Public IP address
+	PublicIP *string `json:"PublicIP,omitnil,omitempty" name:"PublicIP"`
+
+	// Node ID
+	NodeID *string `json:"NodeID,omitnil,omitempty" name:"NodeID"`
+
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
+
+	// Node type.
+	NodeType *string `json:"NodeType,omitnil,omitempty" name:"NodeType"`
+
+	// Super Node Unique ID
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil,omitempty" name:"NodeUniqueID"`
+
+	// pod ip
+	PodIP *string `json:"PodIP,omitnil,omitempty" name:"PodIP"`
+
+	// pod name
+	PodName *string `json:"PodName,omitnil,omitempty" name:"PodName"`
+
+	// Cluster name.
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// Image repository information.
+	ImageRegistryInfo *ImageRegistryInfo `json:"ImageRegistryInfo,omitnil,omitempty" name:"ImageRegistryInfo"`
+}
+
+type ImageDenyEventTendency struct {
+	// Date
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
+
+	// Number of events
+	EventCount *int64 `json:"EventCount,omitnil,omitempty" name:"EventCount"`
+}
+
+type ImageDenyRule struct {
+	// Rule ID
+	RuleID *string `json:"RuleID,omitnil,omitempty" name:"RuleID"`
+
+	// Rule name
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
+
+	// Rule Type. RULE_RISK: Risk; RULE_PRIVILEGE: Privilege
+	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
+
+	// Number of Effective Images
+	EffectImageCount *int64 `json:"EffectImageCount,omitnil,omitempty" name:"EffectImageCount"`
+
+	// Application to All Scanned Images. 0: Select All Images; 1: Custom Images
+	IsEffectAllImage *int64 `json:"IsEffectAllImage,omitnil,omitempty" name:"IsEffectAllImage"`
+
+	// Rule Effective Start Time
+	EffectTime *string `json:"EffectTime,omitnil,omitempty" name:"EffectTime"`
+
+	// Update time
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Operator
+	OperationUin *string `json:"OperationUin,omitnil,omitempty" name:"OperationUin"`
+
+	// Enabled status
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Effective Status. IN_THE_TEST: Observing; IN_EFFECT: Effective
+	EffectStatus *string `json:"EffectStatus,omitnil,omitempty" name:"EffectStatus"`
+
+	// Rule ID
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 type ImageHost struct {
@@ -24914,53 +26634,59 @@ type ImageInfo struct {
 }
 
 type ImageProgress struct {
-	// Image ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Image id
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
-	// Repository type
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// repository type
 	RegistryType *string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
 	// Image repository address
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ImageRepoAddress *string `json:"ImageRepoAddress,omitnil,omitempty" name:"ImageRepoAddress"`
 
-	// Instance ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance name.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Namespace
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Repository name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// repository name
 	ImageName *string `json:"ImageName,omitnil,omitempty" name:"ImageName"`
 
 	// Image tag
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ImageTag *string `json:"ImageTag,omitnil,omitempty" name:"ImageTag"`
 
-	// Image scanning status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Image scan status
 	ScanStatus *string `json:"ScanStatus,omitnil,omitempty" name:"ScanStatus"`
 
-	// CVE scanning progress of the image
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Mirror cve scan progress
 	CveProgress *uint64 `json:"CveProgress,omitnil,omitempty" name:"CveProgress"`
 
-	// Sensitive data scanning progress of the image
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Mirror sensitivity scan progress
 	RiskProgress *uint64 `json:"RiskProgress,omitnil,omitempty" name:"RiskProgress"`
 
-	// Trojan scanning progress of the image
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Trojan mirror scan progress
 	VirusProgress *uint64 `json:"VirusProgress,omitnil,omitempty" name:"VirusProgress"`
+}
+
+type ImageRegistryInfo struct {
+	// repository name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// repository type
+	// aws
+	// ccr
+	// harbor
+	// jfrog
+	// other-tcr
+	// quay
+	// tcr
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// repository address
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 }
 
 type ImageRepoInfo struct {
@@ -25009,11 +26735,9 @@ type ImageRepoInfo struct {
 	OsName *string `json:"OsName,omitnil,omitempty" name:"OsName"`
 
 	// Trojan scan error
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ScanVirusError *string `json:"ScanVirusError,omitnil,omitempty" name:"ScanVirusError"`
 
-	// Vulnerability scan error
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Vulnerability scan error.
 	ScanVulError *string `json:"ScanVulError,omitnil,omitempty" name:"ScanVulError"`
 
 	// Instance ID
@@ -25025,40 +26749,31 @@ type ImageRepoInfo struct {
 	// Namespace
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// High-risk scan error
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// High risk scan error
 	ScanRiskError *string `json:"ScanRiskError,omitnil,omitempty" name:"ScanRiskError"`
 
-	// Sensitive data scanning progress
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Sensitive information scan progress
 	ScanVirusProgress *uint64 `json:"ScanVirusProgress,omitnil,omitempty" name:"ScanVirusProgress"`
 
-	// Trojan scanning progress
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Trojan scan progress.
 	ScanVulProgress *uint64 `json:"ScanVulProgress,omitnil,omitempty" name:"ScanVulProgress"`
 
-	// Vulnerability scanning progress
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Vulnerability scan progress.
 	ScanRiskProgress *uint64 `json:"ScanRiskProgress,omitnil,omitempty" name:"ScanRiskProgress"`
 
-	// Remaining scan time in seconds
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Remaining scan time (seconds)
 	ScanRemainTime *uint64 `json:"ScanRemainTime,omitnil,omitempty" name:"ScanRemainTime"`
 
-	// CVE scanning status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// cve scan status
 	CveStatus *string `json:"CveStatus,omitnil,omitempty" name:"CveStatus"`
 
-	// High-risk scanning status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// High risk scan status
 	RiskStatus *string `json:"RiskStatus,omitnil,omitempty" name:"RiskStatus"`
 
-	// Trojan scanning status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Trojan scan status
 	VirusStatus *string `json:"VirusStatus,omitnil,omitempty" name:"VirusStatus"`
 
 	// Overall progress
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
 	// Licensing status
@@ -25070,60 +26785,93 @@ type ImageRepoInfo struct {
 	// List of IDs
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Image ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Image ID.
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
-	// Image creation time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Image Creation Time
 	ImageCreateTime *string `json:"ImageCreateTime,omitnil,omitempty" name:"ImageCreateTime"`
 
-	// Whether it is the latest image tag
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether the Latest Version of the Image
 	IsLatestImage *bool `json:"IsLatestImage,omitnil,omitempty" name:"IsLatestImage"`
+
+
+	LowLevelVulCnt *uint64 `json:"LowLevelVulCnt,omitnil,omitempty" name:"LowLevelVulCnt"`
+
+
+	MediumLevelVulCnt *uint64 `json:"MediumLevelVulCnt,omitnil,omitempty" name:"MediumLevelVulCnt"`
+
+
+	HighLevelVulCnt *uint64 `json:"HighLevelVulCnt,omitnil,omitempty" name:"HighLevelVulCnt"`
+
+
+	CriticalLevelVulCnt *uint64 `json:"CriticalLevelVulCnt,omitnil,omitempty" name:"CriticalLevelVulCnt"`
+
+
+	ContainerCnt *uint64 `json:"ContainerCnt,omitnil,omitempty" name:"ContainerCnt"`
+
+
+	ComponentCnt *uint64 `json:"ComponentCnt,omitnil,omitempty" name:"ComponentCnt"`
+
+
+	IsRunning *bool `json:"IsRunning,omitnil,omitempty" name:"IsRunning"`
+
+
+	HasNeedFixVul *bool `json:"HasNeedFixVul,omitnil,omitempty" name:"HasNeedFixVul"`
+
+	// Sensitive information
+	SensitiveInfoCnt *uint64 `json:"SensitiveInfoCnt,omitnil,omitempty" name:"SensitiveInfoCnt"`
+
+
+	RecommendedFix *bool `json:"RecommendedFix,omitnil,omitempty" name:"RecommendedFix"`
+
+	// Solution
+	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
+
+	// <p>Reason.</p>
+	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
 }
 
 type ImageRepoRegistryInfo struct {
-	// Repository id
+	// Repository ID
 	RegistryId *uint64 `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Repository Name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Repository Type, list: harbor, tcr
+	// Repository type, list: harbor, tcr
 	RegistryType *string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
-	// Repository url
+	// Warehouse url
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Network Type, list: public
+	// Network type, list: public
 	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Region, list: default
 	RegistryRegion *string `json:"RegistryRegion,omitnil,omitempty" name:"RegistryRegion"`
 
-	// Repository Version
+	// warehouse version
 	RegistryVersion *string `json:"RegistryVersion,omitnil,omitempty" name:"RegistryVersion"`
 
-	// Repository connection error message (to be deprecated, use ConnDetectException instead)
+	// Repository connection error message (to be deprecated). Use ConnDetectException.
 	ConnectMsg *string `json:"ConnectMsg,omitnil,omitempty" name:"ConnectMsg"`
 
-	// Connectivity Detection Method
+	// Connectivity Check Method
 	ConnDetectType *string `json:"ConnDetectType,omitnil,omitempty" name:"ConnDetectType"`
 
-	// Connectivity Detection Host Count
+	// Connectivity Check Host Count
 	ConnDetectHostCount *uint64 `json:"ConnDetectHostCount,omitnil,omitempty" name:"ConnDetectHostCount"`
 
-	// Connectivity Detection Details
+	// Connectivity Check Details
 	ConnDetectDetail []*RegistryConnDetectResult `json:"ConnDetectDetail,omitnil,omitempty" name:"ConnDetectDetail"`
 
-	// instance_id in tcr
+	// Instance ID in TCR Scenario
 	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
-	// Latest Successful Synchronization Time
+	// Most Recent Time for Successful Synchronization
 	LatestSyncTime *string `json:"LatestSyncTime,omitnil,omitempty" name:"LatestSyncTime"`
 
-	// Synchronization Status
+	// Synchronization status
 	SyncStatus *string `json:"SyncStatus,omitnil,omitempty" name:"SyncStatus"`
 
 	// Synchronization Failure Reason
@@ -25132,29 +26880,27 @@ type ImageRepoRegistryInfo struct {
 	// Synchronization Failure Solution
 	SyncSolution *string `json:"SyncSolution,omitnil,omitempty" name:"SyncSolution"`
 
-	// Synchronization Failure Message
+	// Synchronization Failure Information
 	SyncMessage *string `json:"SyncMessage,omitnil,omitempty" name:"SyncMessage"`
+
+	// Synchronization method. 0: full synchronization; 1: incremental synchronization.	
+	SyncMode *uint64 `json:"SyncMode,omitnil,omitempty" name:"SyncMode"`
 }
 
 type ImageRisk struct {
-	// High-risk behavior
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// high-risk behavior
 	Behavior *uint64 `json:"Behavior,omitnil,omitempty" name:"Behavior"`
 
 	// Type
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Risk level
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Description
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
 	// Solution
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstructionContent *string `json:"InstructionContent,omitnil,omitempty" name:"InstructionContent"`
 }
 
@@ -25186,6 +26932,41 @@ type ImageRiskTendencyInfo struct {
 	ImageRiskType *string `json:"ImageRiskType,omitnil,omitempty" name:"ImageRiskType"`
 }
 
+type ImageScanInquireInfo struct {
+	// Billing item
+	InquireKey *string `json:"InquireKey,omitnil,omitempty" name:"InquireKey"`
+
+	// Total Capacity
+	Capcity *uint64 `json:"Capcity,omitnil,omitempty" name:"Capcity"`
+
+	// Used amount
+	Useage *uint64 `json:"Useage,omitnil,omitempty" name:"Useage"`
+
+	// Start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Billing status
+	// Pending purchase
+	// Normal: Normal.
+	// Isolate
+	PurchaseStatus *string `json:"PurchaseStatus,omitnil,omitempty" name:"PurchaseStatus"`
+
+	// Resource ID
+	ResourceID *string `json:"ResourceID,omitnil,omitempty" name:"ResourceID"`
+
+	// Number of purchased scans.
+	PayNum *uint64 `json:"PayNum,omitnil,omitempty" name:"PayNum"`
+
+	// Number of trial scans.
+	TrialNum *uint64 `json:"TrialNum,omitnil,omitempty" name:"TrialNum"`
+
+	// Number of purchased scanning operations that have been used.
+	PayUsage *uint64 `json:"PayUsage,omitnil,omitempty" name:"PayUsage"`
+}
+
 type ImageSimpleInfo struct {
 	// Image ID
 	ImageID *string `json:"ImageID,omitnil,omitempty" name:"ImageID"`
@@ -25201,193 +26982,166 @@ type ImageSimpleInfo struct {
 
 	// Number of associated containers
 	ContainerCnt *int64 `json:"ContainerCnt,omitnil,omitempty" name:"ContainerCnt"`
+
+	// Associated hosts
+	HostCnt *uint64 `json:"HostCnt,omitnil,omitempty" name:"HostCnt"`
 }
 
 type ImageVirus struct {
-	// Path
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Path.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
 	// Risk level
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	RiskLevel *string `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
 
-	// Category
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// category
 	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
 
 	// Virus name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	VirusName *string `json:"VirusName,omitnil,omitempty" name:"VirusName"`
 
-	// Tag
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Tag.
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Description
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
 	// Solution
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
 
 	// File type
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
 
 	// File path
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
-	// MD5 checksum of the file
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// File md5
 	FileMd5 *string `json:"FileMd5,omitnil,omitempty" name:"FileMd5"`
 
 	// Size
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	FileSize *uint64 `json:"FileSize,omitnil,omitempty" name:"FileSize"`
 
-	// First discovery time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// First detection time
 	FirstScanTime *string `json:"FirstScanTime,omitnil,omitempty" name:"FirstScanTime"`
 
 	// Last scan time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	LatestScanTime *string `json:"LatestScanTime,omitnil,omitempty" name:"LatestScanTime"`
 }
 
 type ImageVirusInfo struct {
-	// Path
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Path.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
 	// Risk level
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	RiskLevel *uint64 `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
 
 	// Virus name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	VirusName *string `json:"VirusName,omitnil,omitempty" name:"VirusName"`
 
-	// Tag
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Tag.
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Description
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
-	// Fix suggestion
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Remediation Suggestions
 	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
 
 	// Size
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Size *uint64 `json:"Size,omitnil,omitempty" name:"Size"`
 
-	// First discovery time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// First detection time
 	FirstScanTime *string `json:"FirstScanTime,omitnil,omitempty" name:"FirstScanTime"`
 
 	// Last scan time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	LatestScanTime *string `json:"LatestScanTime,omitnil,omitempty" name:"LatestScanTime"`
 
-	// MD5 checksum of the file
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// File md5
 	Md5 *string `json:"Md5,omitnil,omitempty" name:"Md5"`
 
-	// Filename
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// File name
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
-	// Check platform
-	// `1`: Tencent Cloud Security Engine.
-	// `2`: tav.
-	// `3`: binaryAi.
-	// `4`: Unusual behavior.
-	// `5`: Threat intelligence.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Detection platform
+	// 1: Cloud Killing Engine
+	// 2: tav
+	// 3: binaryAi
+	// 4: Abnormal behavior
+	// 5: Threat Intelligence
 	CheckPlatform []*string `json:"CheckPlatform,omitnil,omitempty" name:"CheckPlatform"`
 }
 
 type ImageVul struct {
 	// Vulnerability ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	CVEID *string `json:"CVEID,omitnil,omitempty" name:"CVEID"`
 
-	// POC ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// viewpoint validation program ID
 	POCID *string `json:"POCID,omitnil,omitempty" name:"POCID"`
 
 	// Vulnerability name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Component information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Component Information
 	Components []*ComponentsInfo `json:"Components,omitnil,omitempty" name:"Components"`
 
-	// Category
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// category
 	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
 
 	// Category 2
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	CategoryType *string `json:"CategoryType,omitnil,omitempty" name:"CategoryType"`
 
 	// Risk level
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Description
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Des *string `json:"Des,omitnil,omitempty" name:"Des"`
 
 	// Solution
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	OfficialSolution *string `json:"OfficialSolution,omitnil,omitempty" name:"OfficialSolution"`
 
-	// Reference
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Refer
 	Reference *string `json:"Reference,omitnil,omitempty" name:"Reference"`
 
-	// Defense solution
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// defense solution
 	DefenseSolution *string `json:"DefenseSolution,omitnil,omitempty" name:"DefenseSolution"`
 
 	// Submission time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubmitTime *string `json:"SubmitTime,omitnil,omitempty" name:"SubmitTime"`
 
-	// CVSS score
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// CVSS Score
 	CvssScore *string `json:"CvssScore,omitnil,omitempty" name:"CvssScore"`
 
-	// CVSS information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// CVSS information.
 	CvssVector *string `json:"CvssVector,omitnil,omitempty" name:"CvssVector"`
 
-	// Whether fix is suggested
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether repair is suggested.
 	IsSuggest *string `json:"IsSuggest,omitnil,omitempty" name:"IsSuggest"`
 
-	// Number of the fixed version
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Repair Version Number
 	FixedVersions *string `json:"FixedVersions,omitnil,omitempty" name:"FixedVersions"`
 
-	// Vulnerability tag. Valid values: `CanBeFixed`, `DynamicLevelPoc`, `DynamicLevelExp`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Vulnerability Tag: "CanBeFixed", "DynamicLevelPoc", and "DynamicLevelExp"
 	Tag []*string `json:"Tag,omitnil,omitempty" name:"Tag"`
 
-	// Component name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Component name.
 	Component *string `json:"Component,omitnil,omitempty" name:"Component"`
 
 	// Component version
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
+
+	// Attack Heat 0-3
+	AttackLevel *int64 `json:"AttackLevel,omitnil,omitempty" name:"AttackLevel"`
+
+	// Image Layer Information List
+	LayerInfos []*ImageVulLayerInfo `json:"LayerInfos,omitnil,omitempty" name:"LayerInfos"`
+}
+
+type ImageVulLayerInfo struct {
+	// Layer ID
+	LayerId *string `json:"LayerId,omitnil,omitempty" name:"LayerId"`
+
+	// Layer CMD
+	LayerCmd *string `json:"LayerCmd,omitnil,omitempty" name:"LayerCmd"`
 }
 
 type ImagesBindRuleInfo struct {
@@ -25400,20 +27154,16 @@ type ImagesBindRuleInfo struct {
 	// Number of associated containers
 	ContainerCnt *int64 `json:"ContainerCnt,omitnil,omitempty" name:"ContainerCnt"`
 
-	// Bound rule ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Binding rule id
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Rule name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
-	// Image size
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// image size
 	ImageSize *int64 `json:"ImageSize,omitnil,omitempty" name:"ImageSize"`
 
 	// Last scan time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ScanTime *string `json:"ScanTime,omitnil,omitempty" name:"ScanTime"`
 }
 
@@ -25430,8 +27180,11 @@ type ImagesInfo struct {
 	// Image size
 	Size *uint64 `json:"Size,omitnil,omitempty" name:"Size"`
 
-	// Number of servers
+	// Number of hosts (includes regular nodes and super nodes).
 	HostCnt *uint64 `json:"HostCnt,omitnil,omitempty" name:"HostCnt"`
+
+	// Number of super nodes.
+	SuperNodeCnt *uint64 `json:"SuperNodeCnt,omitnil,omitempty" name:"SuperNodeCnt"`
 
 	// Number of containers
 	ContainerCnt *uint64 `json:"ContainerCnt,omitnil,omitempty" name:"ContainerCnt"`
@@ -25480,6 +27233,30 @@ type ImagesInfo struct {
 
 	// Number of components
 	ComponentCnt *uint64 `json:"ComponentCnt,omitnil,omitempty" name:"ComponentCnt"`
+
+
+	CriticalLevelVulCnt *uint64 `json:"CriticalLevelVulCnt,omitnil,omitempty" name:"CriticalLevelVulCnt"`
+
+
+	HighLevelVulCnt *uint64 `json:"HighLevelVulCnt,omitnil,omitempty" name:"HighLevelVulCnt"`
+
+
+	MediumLevelVulCnt *uint64 `json:"MediumLevelVulCnt,omitnil,omitempty" name:"MediumLevelVulCnt"`
+
+
+	LowLevelVulCnt *uint64 `json:"LowLevelVulCnt,omitnil,omitempty" name:"LowLevelVulCnt"`
+
+
+	IsLatestImage *bool `json:"IsLatestImage,omitnil,omitempty" name:"IsLatestImage"`
+
+
+	RecommendedFix *bool `json:"RecommendedFix,omitnil,omitempty" name:"RecommendedFix"`
+
+	// Solution
+	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
+
+	// Reason
+	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
 }
 
 type ImagesVul struct {
@@ -25528,13 +27305,14 @@ type ImagesVul struct {
 	// Whether it is of high priority. Valid values: `true` (yes); `false` (no).
 	IsSuggest *bool `json:"IsSuggest,omitnil,omitempty" name:"IsSuggest"`
 
-	// Number of the fixed version
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Repair Version Number
 	FixedVersions *string `json:"FixedVersions,omitnil,omitempty" name:"FixedVersions"`
 
-	// Vulnerability tag. Valid values: `CanBeFixed`, `DynamicLevelPoc`, `DynamicLevelExp`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Vulnerability Tag: "CanBeFixed", "DynamicLevelPoc", and "DynamicLevelExp"
 	Tag []*string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// Attack Heat
+	AttackLevel *int64 `json:"AttackLevel,omitnil,omitempty" name:"AttackLevel"`
 }
 
 // Predefined struct for user
@@ -25588,68 +27366,85 @@ func (r *InitializeUserComplianceEnvironmentResponse) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type K8SAPIRuleTypeCountItem struct {
+	// <p>Rule type.</p><p>Enumeration values:</p><ul><li>ABNORMAL_CREATE_POD: suspicious container creation</li></ul>
+	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
+
+	// <p>Number of alarms corresponding to the rule.</p>
+	EventCount *uint64 `json:"EventCount,omitnil,omitempty" name:"EventCount"`
+}
+
+type K8SAPIRuleTypeZhItem struct {
+	// <p>Rule type.</p><p>Enumeration values:</p><ul><li>&quot;rule_type&quot;: &quot;ABNORMAL_CREATE_POD&quot;,: suspicious container creation</li></ul>
+	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
+
+	// <p>Description of the rule type.</p>
+	RuleTypeZh *string `json:"RuleTypeZh,omitnil,omitempty" name:"RuleTypeZh"`
+}
+
 type K8sApiAbnormalEventInfo struct {
-	// Hit rule name
+	// <p>Hit rule name.</p>
 	MatchRuleName *string `json:"MatchRuleName,omitnil,omitempty" name:"MatchRuleName"`
 
-	// Hit rule type
+	// <p>Hit rule type.</p>
 	MatchRuleType *string `json:"MatchRuleType,omitnil,omitempty" name:"MatchRuleType"`
 
-	// Alarm level
+	// <p>Alarm level.</p>
 	RiskLevel *string `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
 
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
 
-	// Cluster name
+	// <p>Cluster name.</p>
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Cluster running status
+	// <p>Cluster running status: CSR_RUNNING, CSR_EXCEPTION, and CSR_CREATING</p>
 	ClusterRunningStatus *string `json:"ClusterRunningStatus,omitnil,omitempty" name:"ClusterRunningStatus"`
 
-	// First creation time
+	// <p>Initial generation time.</p>
 	FirstCreateTime *string `json:"FirstCreateTime,omitnil,omitempty" name:"FirstCreateTime"`
 
-	// Last creation time
+	// <p>Last generation time.</p>
 	LastCreateTime *string `json:"LastCreateTime,omitnil,omitempty" name:"LastCreateTime"`
 
-	// Number of alarms
+	// <p>Number of alarms.</p>
 	AlarmCount *uint64 `json:"AlarmCount,omitnil,omitempty" name:"AlarmCount"`
 
-	// Status
-	// `EVENT_UNDEAL`: Unhandled
-	// `EVENT_DEALED`: Handled
-	// `EVENT_IGNORE`: Ignored
-	// `EVENT_DEL`: Deleted
-	// `EVENT_ADD_WHITE`: Added to an allowlist
+	// <p>Status.<br>&quot;EVENT_UNDEAL&quot;: unhandled<br>&quot;EVENT_DEALED&quot;: handled<br>&quot;EVENT_IGNORE&quot;: ignored<br>&quot;EVENT_DEL&quot;: deleted<br>&quot;EVENT_ADD_WHITE&quot;: allowlisted</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// The master IP of a cluster
+	// <p>Cluster master IP address.</p>
 	ClusterMasterIP *string `json:"ClusterMasterIP,omitnil,omitempty" name:"ClusterMasterIP"`
 
-	// K8s version
+	// <p>K8s version.</p>
 	K8sVersion *string `json:"K8sVersion,omitnil,omitempty" name:"K8sVersion"`
 
-	// Runtime component
+	// <p>Runtime component.</p>
 	RunningComponent []*string `json:"RunningComponent,omitnil,omitempty" name:"RunningComponent"`
 
-	// Description
+	// <p>Description.</p>
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
-	// Suggestion
+	// <p>Suggestion.</p>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Request information
+	// <p>Request information.</p>
 	Info *string `json:"Info,omitnil,omitempty" name:"Info"`
 
-	// Rule ID
+	// <p>Rule ID.</p>
 	MatchRuleID *string `json:"MatchRuleID,omitnil,omitempty" name:"MatchRuleID"`
 
-	// An array of highlighted fields
+	// <p>Array of highlighted fields.</p>
 	HighLightFields []*string `json:"HighLightFields,omitnil,omitempty" name:"HighLightFields"`
 
-	// Hit rule
+	// <p>Hit rule.</p>
 	MatchRule *K8sApiAbnormalRuleScopeInfo `json:"MatchRule,omitnil,omitempty" name:"MatchRule"`
+
+	// <p>Hit rule content corresponding to highlighted fields (JSON string, such as {&quot;field1&quot;:&quot;value1&quot;,&quot;field2&quot;:&quot;value2&quot;})</p><p>Parameter format: {&quot;field1&quot;:&quot;value1&quot;,&quot;field2&quot;:&quot;value2&quot;}</p>
+	HighLightFieldsVal *string `json:"HighLightFieldsVal,omitnil,omitempty" name:"HighLightFieldsVal"`
+
+	// <p>Rule type.</p>
+	RuleTypeZH *string `json:"RuleTypeZH,omitnil,omitempty" name:"RuleTypeZH"`
 }
 
 type K8sApiAbnormalEventListItem struct {
@@ -25725,8 +27520,25 @@ type K8sApiAbnormalRuleInfo struct {
 }
 
 type K8sApiAbnormalRuleListItem struct {
+	// Whether take effect on all clusters. true indicates all clusters take effect. false indicates only specified clusters take effect.
+	EffectAllCluster *bool `json:"EffectAllCluster,omitnil,omitempty" name:"EffectAllCluster"`
+
+	// Total number of affected clusters
+	EffectClusterCount *uint64 `json:"EffectClusterCount,omitnil,omitempty" name:"EffectClusterCount"`
+
+	// Edit account
+	OprUin *string `json:"OprUin,omitnil,omitempty" name:"OprUin"`
+
+	// Deduplicated list of ALL execution actions in the rule group. The present blocklist contains only RULE_MODE_ALERT (Alert).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleActions []*string `json:"RuleActions,omitnil,omitempty" name:"RuleActions"`
+
 	// Rule ID
 	RuleID *string `json:"RuleID,omitnil,omitempty" name:"RuleID"`
+
+	// Subrule content list, deserialized from rule_details JSON
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleInfoList []*K8sApiAbnormalRuleScopeInfo `json:"RuleInfoList,omitnil,omitempty" name:"RuleInfoList"`
 
 	// Rule name
 	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
@@ -25736,87 +27548,94 @@ type K8sApiAbnormalRuleListItem struct {
 	// RT_USER User defined
 	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
 
-	// Total number of affected clusters
-	EffectClusterCount *uint64 `json:"EffectClusterCount,omitnil,omitempty" name:"EffectClusterCount"`
+	// Status
+	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Update time
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
+type K8sApiAbnormalRuleScopeInfo struct {
+	// <p>Execution action. The blocklist rule only supports RULE_MODE_ALERT (alert) and no longer supports RULE_MODE_RELEASE/PASS (allow). To allow, use the allowlist API ModifyK8sApiAbnormalWhitelist.</p>
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// <p>Scope.<br>System events:<br>ANONYMOUS_ACCESS: anonymous access<br>ABNORMAL_UA_REQ: abnormal UA request<br>ANONYMOUS_ABNORMAL_PERMISSION: anonymous user permission change<br>GET_CREDENTIALS: credential information acquisition<br>MOUNT_SENSITIVE_PATH: sensitive path mounting<br>COMMAND_RUN: command execution<br>PRIVILEGE_CONTAINER: privileged container<br>EXCEPTION_CRONTAB_TASK: abnormal scheduled task<br>STATICS_POD: static Pod creation<br>ABNORMAL_CREATE_POD: abnormal Pod creation<br>USER_DEFINED: user-defined</p>
+	Scope *string `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// <p>Whether it has been deleted.</p>
+	IsDelete *bool `json:"IsDelete,omitnil,omitempty" name:"IsDelete"`
+
+	// <p>Threat level: HIGH, MIDDLE, LOW, and NOTICE.</p>
+	RiskLevel *string `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
+
+	// <p>Description of the rule type.</p>
+	RuleTypeZH *string `json:"RuleTypeZH,omitnil,omitempty" name:"RuleTypeZH"`
+
+	// <p>Switch status (true: on, false: off) applicable to system rules.</p>
+	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+type K8sApiAbnormalTendencyItem struct {
+	// <p>Date</p>
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
+
+	// <p>Number of abnormal UA request events.</p>
+	ExceptionUARequestCount *uint64 `json:"ExceptionUARequestCount,omitnil,omitempty" name:"ExceptionUARequestCount"`
+
+	// <p>Number of anonymous user permission events.</p>
+	AnonymousUserRightCount *uint64 `json:"AnonymousUserRightCount,omitnil,omitempty" name:"AnonymousUserRightCount"`
+
+	// <p>Number of credential information acquisition events.</p>
+	CredentialInformationObtainCount *uint64 `json:"CredentialInformationObtainCount,omitnil,omitempty" name:"CredentialInformationObtainCount"`
+
+	// <p>Number of sensitive data mount events.</p>
+	SensitiveDataMountCount *uint64 `json:"SensitiveDataMountCount,omitnil,omitempty" name:"SensitiveDataMountCount"`
+
+	// <p>Number of command execution events.</p>
+	CmdExecCount *uint64 `json:"CmdExecCount,omitnil,omitempty" name:"CmdExecCount"`
+
+	// <p>Number of abnormal scheduled task events.</p>
+	AbnormalScheduledTaskCount *uint64 `json:"AbnormalScheduledTaskCount,omitnil,omitempty" name:"AbnormalScheduledTaskCount"`
+
+	// <p>Number of static Pod creations.</p>
+	StaticsPodCreateCount *uint64 `json:"StaticsPodCreateCount,omitnil,omitempty" name:"StaticsPodCreateCount"`
+
+	// <p>Number of suspicious container creations.</p>
+	DoubtfulContainerCreateCount *uint64 `json:"DoubtfulContainerCreateCount,omitnil,omitempty" name:"DoubtfulContainerCreateCount"`
+
+	// <p>Number of custom rule events.</p>
+	UserDefinedRuleCount *uint64 `json:"UserDefinedRuleCount,omitnil,omitempty" name:"UserDefinedRuleCount"`
+
+	// <p>Number of anonymous access events.</p>
+	AnonymousAccessCount *uint64 `json:"AnonymousAccessCount,omitnil,omitempty" name:"AnonymousAccessCount"`
+
+	// <p>Number of privileged container events.</p>
+	PrivilegeContainerCount *uint64 `json:"PrivilegeContainerCount,omitnil,omitempty" name:"PrivilegeContainerCount"`
+
+	// <p>Number of alarms corresponding to the rule type.</p>
+	RuleTypeCountSet []*K8SAPIRuleTypeCountItem `json:"RuleTypeCountSet,omitnil,omitempty" name:"RuleTypeCountSet"`
+}
+
+type MaliciousConnectionRuleInfo struct {
+	// Enumerate:
+	// IP: Indicates ipv4 or ipv6
+	// DOMAIN: Indicates the domain name
+	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
+
+	// Custom Blocklist/Allowlist Domain/IP
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
+
+	// Creation time.
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
 	// Update time
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Edit account
-	OprUin *string `json:"OprUin,omitnil,omitempty" name:"OprUin"`
+	// Remarks
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-	// Status
-	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
-}
-
-type K8sApiAbnormalRuleScopeInfo struct {
-	// Range
-	// System event:
-	// ANONYMOUS_ACCESS: Anonymous access
-	// ABNORMAL_UA_REQ: Abnormal UA request
-	// ANONYMOUS_ABNORMAL_PERMISSION: Abnormal changes on permissions of an anonymous user
-	// GET_CREDENTIALS: Credential information acquisition
-	// MOUNT_SENSITIVE_PATH: Sensitive path mounting
-	// COMMAND_RUN: Command execution
-	// PRIVILEGE_CONTAINER: Privilege container
-	// EXCEPTION_CRONTAB_TASK: Aabnormal scheduled task
-	// STATICS_POD: Static pod creation
-	// ABNORMAL_CREATE_POD: Abnormal pod creation
-	// USER_DEFINED: User defined
-	Scope *string `json:"Scope,omitnil,omitempty" name:"Scope"`
-
-	// Action (RULE_MODE_ALERT: Alarm RULE_MODE_RELEASE: Release)
-	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
-
-	// Threat level: "HIGH": High-risk level; "MIDDLE": Middle-risk level; "LOW": Low-risk level; "NOTICE": Notice level
-	// Note: This field may return `null`, indicating that no valid value was found.
-	RiskLevel *string `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
-
-	// Switch status (true: On; false: Off): applicable to system rules.
-	// Note: This field may return `null`, indicating that no valid value was found.
-	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
-
-	// Whether to delete: applicable to custom rule input parameters.
-	// Note: This field may return `null`, indicating that no valid value was found.
-	IsDelete *bool `json:"IsDelete,omitnil,omitempty" name:"IsDelete"`
-}
-
-type K8sApiAbnormalTendencyItem struct {
-	// Date
-	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
-
-	// The number of abnormal UA request events
-	ExceptionUARequestCount *uint64 `json:"ExceptionUARequestCount,omitnil,omitempty" name:"ExceptionUARequestCount"`
-
-	// The number of anonymous user permission events
-	AnonymousUserRightCount *uint64 `json:"AnonymousUserRightCount,omitnil,omitempty" name:"AnonymousUserRightCount"`
-
-	// The number of credential information acquisition events
-	CredentialInformationObtainCount *uint64 `json:"CredentialInformationObtainCount,omitnil,omitempty" name:"CredentialInformationObtainCount"`
-
-	// The number of sensitive data mounting events
-	SensitiveDataMountCount *uint64 `json:"SensitiveDataMountCount,omitnil,omitempty" name:"SensitiveDataMountCount"`
-
-	// The number of command execution events
-	CmdExecCount *uint64 `json:"CmdExecCount,omitnil,omitempty" name:"CmdExecCount"`
-
-	// The number of abnormal scheduled task events
-	AbnormalScheduledTaskCount *uint64 `json:"AbnormalScheduledTaskCount,omitnil,omitempty" name:"AbnormalScheduledTaskCount"`
-
-	// The number of static pods created
-	StaticsPodCreateCount *uint64 `json:"StaticsPodCreateCount,omitnil,omitempty" name:"StaticsPodCreateCount"`
-
-	// The number of suspicious containers created
-	DoubtfulContainerCreateCount *uint64 `json:"DoubtfulContainerCreateCount,omitnil,omitempty" name:"DoubtfulContainerCreateCount"`
-
-	// The number of custom rule events
-	UserDefinedRuleCount *uint64 `json:"UserDefinedRuleCount,omitnil,omitempty" name:"UserDefinedRuleCount"`
-
-	// The number of anonymous access events
-	AnonymousAccessCount *uint64 `json:"AnonymousAccessCount,omitnil,omitempty" name:"AnonymousAccessCount"`
-
-	// The number of privilege container events
-	PrivilegeContainerCount *uint64 `json:"PrivilegeContainerCount,omitnil,omitempty" name:"PrivilegeContainerCount"`
+	// Rule ID
+	RuleID *uint64 `json:"RuleID,omitnil,omitempty" name:"RuleID"`
 }
 
 // Predefined struct for user
@@ -26330,21 +28149,39 @@ func (r *ModifyAssetImageScanStopResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAssetRequestParams struct {
-	// Sync all
+	// Synchronizes all regular nodes.
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// List of servers to be synced. Either this parameter or `All` (preferred) must be selected.
+	// List of UUIDs of hosts to be synchronized. 
 	Hosts []*string `json:"Hosts,omitnil,omitempty" name:"Hosts"`
+
+	// Synchronizes all super nodes.
+	AllSuperHost *bool `json:"AllSuperHost,omitnil,omitempty" name:"AllSuperHost"`
+
+	// Unique IDs of super nodes to be synchronized.
+	NodeUniqueIds []*string `json:"NodeUniqueIds,omitnil,omitempty" name:"NodeUniqueIds"`
+
+	// Timeout (in seconds). Minimum value: 3600.
+	TimeoutSec *uint64 `json:"TimeoutSec,omitnil,omitempty" name:"TimeoutSec"`
 }
 
 type ModifyAssetRequest struct {
 	*tchttp.BaseRequest
 	
-	// Sync all
+	// Synchronizes all regular nodes.
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// List of servers to be synced. Either this parameter or `All` (preferred) must be selected.
+	// List of UUIDs of hosts to be synchronized. 
 	Hosts []*string `json:"Hosts,omitnil,omitempty" name:"Hosts"`
+
+	// Synchronizes all super nodes.
+	AllSuperHost *bool `json:"AllSuperHost,omitnil,omitempty" name:"AllSuperHost"`
+
+	// Unique IDs of super nodes to be synchronized.
+	NodeUniqueIds []*string `json:"NodeUniqueIds,omitnil,omitempty" name:"NodeUniqueIds"`
+
+	// Timeout (in seconds). Minimum value: 3600.
+	TimeoutSec *uint64 `json:"TimeoutSec,omitnil,omitempty" name:"TimeoutSec"`
 }
 
 func (r *ModifyAssetRequest) ToJsonString() string {
@@ -26361,6 +28198,9 @@ func (r *ModifyAssetRequest) FromJsonString(s string) error {
 	}
 	delete(f, "All")
 	delete(f, "Hosts")
+	delete(f, "AllSuperHost")
+	delete(f, "NodeUniqueIds")
+	delete(f, "TimeoutSec")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAssetRequest has unknown keys!", "")
 	}
@@ -26371,6 +28211,9 @@ func (r *ModifyAssetRequest) FromJsonString(s string) error {
 type ModifyAssetResponseParams struct {
 	// Sending result of the sync task
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Task ID.
+	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -26524,6 +28367,81 @@ func (r *ModifyContainerNetStatusResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyContainerNetStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDefendStatusRequestParams struct {
+	// Whether to enable protection.
+	SwitchOn *bool `json:"SwitchOn,omitnil,omitempty" name:"SwitchOn"`
+
+	// Instance type. Valid values:<li>Cluster;</li> <li>Node.</li>
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Whether all instances are involved.
+	IsAll *bool `json:"IsAll,omitnil,omitempty" name:"IsAll"`
+
+	// Instance ID list
+	InstanceIDs []*string `json:"InstanceIDs,omitnil,omitempty" name:"InstanceIDs"`
+}
+
+type ModifyDefendStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Whether to enable protection.
+	SwitchOn *bool `json:"SwitchOn,omitnil,omitempty" name:"SwitchOn"`
+
+	// Instance type. Valid values:<li>Cluster;</li> <li>Node.</li>
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Whether all instances are involved.
+	IsAll *bool `json:"IsAll,omitnil,omitempty" name:"IsAll"`
+
+	// Instance ID list
+	InstanceIDs []*string `json:"InstanceIDs,omitnil,omitempty" name:"InstanceIDs"`
+}
+
+func (r *ModifyDefendStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDefendStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SwitchOn")
+	delete(f, "InstanceType")
+	delete(f, "IsAll")
+	delete(f, "InstanceIDs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDefendStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDefendStatusResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyDefendStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDefendStatusResponseParams `json:"Response"`
+}
+
+func (r *ModifyDefendStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDefendStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -27089,6 +29007,81 @@ func (r *ModifyK8sApiAbnormalRuleStatusResponse) FromJsonString(s string) error 
 }
 
 // Predefined struct for user
+type ModifyRaspRulesRequestParams struct {
+	// Rule ID. (Leave it blank during addition, and specify it during editing.)
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Vulnerability ID array.
+	VulVulsIDs []*uint64 `json:"VulVulsIDs,omitnil,omitempty" name:"VulVulsIDs"`
+
+	// Base64-encoded regular expression for allowlisting requests within a custom request scope. It cannot be left blank unless all requests are to be allowlisted.
+	URLRegexp *string `json:"URLRegexp,omitnil,omitempty" name:"URLRegexp"`
+
+	// Allowlisting method. 0: allowlist requests within a custom request scope; 1: allowlist all requests.
+	WhiteType *uint64 `json:"WhiteType,omitnil,omitempty" name:"WhiteType"`
+}
+
+type ModifyRaspRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Rule ID. (Leave it blank during addition, and specify it during editing.)
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Vulnerability ID array.
+	VulVulsIDs []*uint64 `json:"VulVulsIDs,omitnil,omitempty" name:"VulVulsIDs"`
+
+	// Base64-encoded regular expression for allowlisting requests within a custom request scope. It cannot be left blank unless all requests are to be allowlisted.
+	URLRegexp *string `json:"URLRegexp,omitnil,omitempty" name:"URLRegexp"`
+
+	// Allowlisting method. 0: allowlist requests within a custom request scope; 1: allowlist all requests.
+	WhiteType *uint64 `json:"WhiteType,omitnil,omitempty" name:"WhiteType"`
+}
+
+func (r *ModifyRaspRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRaspRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "VulVulsIDs")
+	delete(f, "URLRegexp")
+	delete(f, "WhiteType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRaspRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRaspRulesResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyRaspRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyRaspRulesResponseParams `json:"Response"`
+}
+
+func (r *ModifyRaspRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRaspRulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyReverseShellStatusRequestParams struct {
 	// List of event IDs
 	EventIdSet []*string `json:"EventIdSet,omitnil,omitempty" name:"EventIdSet"`
@@ -27161,6 +29154,109 @@ func (r *ModifyReverseShellStatusResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyReverseShellStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRiskDnsEventStatusRequestParams struct {
+	// Array of malicious request event IDs. It is required for adding to the allowlist. Otherwise, choose Filters or EventIDSet.
+	EventIDSet []*uint64 `json:"EventIDSet,omitnil,omitempty" name:"EventIDSet"`
+
+	// Mark the status of the event.
+	// EVENT_UNDEAL: Unprocessed (unignore)
+	// EVENT_DEALED: Processed
+	// EVENT_IGNORE: Ignore
+	// EVENT_DELETE: Deleted
+	// EVENT_ADD_WHITE: Add to whitelist
+	// EVENT_ISOLATE_CONTAINER: Isolate container
+	// EVENT_RESTORE_CONTAINER: Restore CONTAINER.
+	EventStatus *string `json:"EventStatus,omitnil,omitempty" name:"EventStatus"`
+
+	// Allowlist Domain/IP
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Adding Identical Request Domain Name/IP Events to Allowlist
+	AllSameEventAddWhite *bool `json:"AllSameEventAddWhite,omitnil,omitempty" name:"AllSameEventAddWhite"`
+
+	// Allowlist Adding Event Type. DOMAIN: Malicious Domain Request; IP: Malicious IP Request
+	AddWhiteEventType *string `json:"AddWhiteEventType,omitnil,omitempty" name:"AddWhiteEventType"`
+}
+
+type ModifyRiskDnsEventStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Array of malicious request event IDs. It is required for adding to the allowlist. Otherwise, choose Filters or EventIDSet.
+	EventIDSet []*uint64 `json:"EventIDSet,omitnil,omitempty" name:"EventIDSet"`
+
+	// Mark the status of the event.
+	// EVENT_UNDEAL: Unprocessed (unignore)
+	// EVENT_DEALED: Processed
+	// EVENT_IGNORE: Ignore
+	// EVENT_DELETE: Deleted
+	// EVENT_ADD_WHITE: Add to whitelist
+	// EVENT_ISOLATE_CONTAINER: Isolate container
+	// EVENT_RESTORE_CONTAINER: Restore CONTAINER.
+	EventStatus *string `json:"EventStatus,omitnil,omitempty" name:"EventStatus"`
+
+	// Allowlist Domain/IP
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Adding Identical Request Domain Name/IP Events to Allowlist
+	AllSameEventAddWhite *bool `json:"AllSameEventAddWhite,omitnil,omitempty" name:"AllSameEventAddWhite"`
+
+	// Allowlist Adding Event Type. DOMAIN: Malicious Domain Request; IP: Malicious IP Request
+	AddWhiteEventType *string `json:"AddWhiteEventType,omitnil,omitempty" name:"AddWhiteEventType"`
+}
+
+func (r *ModifyRiskDnsEventStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRiskDnsEventStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EventIDSet")
+	delete(f, "EventStatus")
+	delete(f, "Address")
+	delete(f, "Remark")
+	delete(f, "AllSameEventAddWhite")
+	delete(f, "AddWhiteEventType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRiskDnsEventStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRiskDnsEventStatusResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyRiskDnsEventStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyRiskDnsEventStatusResponseParams `json:"Response"`
+}
+
+func (r *ModifyRiskDnsEventStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRiskDnsEventStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -27480,16 +29576,22 @@ type ModifySecLogJoinObjectsRequestParams struct {
 	// K8s API: k8s_api
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
-	// List of QUuids of bound servers
+	// Bound list
 	BindList []*string `json:"BindList,omitnil,omitempty" name:"BindList"`
 
-	// List of QUuids of servers to be unbound
+	// List of assets to be unbound. When the node scope involves all nodes, this parameter indicates the list of assets to be excluded.
 	UnBindList []*string `json:"UnBindList,omitnil,omitempty" name:"UnBindList"`
 
 	// Node type.
 	// `NORMAL`: General node (default)
 	// `SUPER`: Super node
 	NodeType *string `json:"NodeType,omitnil,omitempty" name:"NodeType"`
+
+	// Log node scope type. 0: specified; 1: all.
+	RangeType *int64 `json:"RangeType,omitnil,omitempty" name:"RangeType"`
+
+	// Whether new assets are accessed automatically. This parameter is valid only when the node scope involves all nodes.
+	AutoJoin *bool `json:"AutoJoin,omitnil,omitempty" name:"AutoJoin"`
 }
 
 type ModifySecLogJoinObjectsRequest struct {
@@ -27501,16 +29603,22 @@ type ModifySecLogJoinObjectsRequest struct {
 	// K8s API: k8s_api
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
-	// List of QUuids of bound servers
+	// Bound list
 	BindList []*string `json:"BindList,omitnil,omitempty" name:"BindList"`
 
-	// List of QUuids of servers to be unbound
+	// List of assets to be unbound. When the node scope involves all nodes, this parameter indicates the list of assets to be excluded.
 	UnBindList []*string `json:"UnBindList,omitnil,omitempty" name:"UnBindList"`
 
 	// Node type.
 	// `NORMAL`: General node (default)
 	// `SUPER`: Super node
 	NodeType *string `json:"NodeType,omitnil,omitempty" name:"NodeType"`
+
+	// Log node scope type. 0: specified; 1: all.
+	RangeType *int64 `json:"RangeType,omitnil,omitempty" name:"RangeType"`
+
+	// Whether new assets are accessed automatically. This parameter is valid only when the node scope involves all nodes.
+	AutoJoin *bool `json:"AutoJoin,omitnil,omitempty" name:"AutoJoin"`
 }
 
 func (r *ModifySecLogJoinObjectsRequest) ToJsonString() string {
@@ -27529,6 +29637,8 @@ func (r *ModifySecLogJoinObjectsRequest) FromJsonString(s string) error {
 	delete(f, "BindList")
 	delete(f, "UnBindList")
 	delete(f, "NodeType")
+	delete(f, "RangeType")
+	delete(f, "AutoJoin")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySecLogJoinObjectsRequest has unknown keys!", "")
 	}
@@ -27680,7 +29790,7 @@ func (r *ModifySecLogKafkaUINResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyVirusAutoIsolateExampleSwitchRequestParams struct {
-	// MD5 checksum of the file
+	// File MD5 Value
 	MD5 *string `json:"MD5,omitnil,omitempty" name:"MD5"`
 
 	// Switch. Valid values: `true` (on); `false` (off).
@@ -27690,7 +29800,7 @@ type ModifyVirusAutoIsolateExampleSwitchRequestParams struct {
 type ModifyVirusAutoIsolateExampleSwitchRequest struct {
 	*tchttp.BaseRequest
 	
-	// MD5 checksum of the file
+	// File MD5 Value
 	MD5 *string `json:"MD5,omitnil,omitempty" name:"MD5"`
 
 	// Switch. Valid values: `true` (on); `false` (off).
@@ -27746,6 +29856,9 @@ type ModifyVirusAutoIsolateSettingRequestParams struct {
 
 	// Whether to interrupt the process associated with the isolated file. Valid values: `true` (yes); `false` (no).
 	IsKillProgress *bool `json:"IsKillProgress,omitnil,omitempty" name:"IsKillProgress"`
+
+	// Enabling status customized by the user.
+	UserAutoIsolateKillSwitch *bool `json:"UserAutoIsolateKillSwitch,omitnil,omitempty" name:"UserAutoIsolateKillSwitch"`
 }
 
 type ModifyVirusAutoIsolateSettingRequest struct {
@@ -27756,6 +29869,9 @@ type ModifyVirusAutoIsolateSettingRequest struct {
 
 	// Whether to interrupt the process associated with the isolated file. Valid values: `true` (yes); `false` (no).
 	IsKillProgress *bool `json:"IsKillProgress,omitnil,omitempty" name:"IsKillProgress"`
+
+	// Enabling status customized by the user.
+	UserAutoIsolateKillSwitch *bool `json:"UserAutoIsolateKillSwitch,omitnil,omitempty" name:"UserAutoIsolateKillSwitch"`
 }
 
 func (r *ModifyVirusAutoIsolateSettingRequest) ToJsonString() string {
@@ -27772,6 +29888,7 @@ func (r *ModifyVirusAutoIsolateSettingRequest) FromJsonString(s string) error {
 	}
 	delete(f, "AutoIsolateSwitch")
 	delete(f, "IsKillProgress")
+	delete(f, "UserAutoIsolateKillSwitch")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVirusAutoIsolateSettingRequest has unknown keys!", "")
 	}
@@ -27805,14 +29922,7 @@ type ModifyVirusFileStatusRequestParams struct {
 	// IDs of events
 	EventIdSet []*string `json:"EventIdSet,omitnil,omitempty" name:"EventIdSet"`
 
-	// Event status   
-	//     `EVENT_DEALED`: Processed.
-	//     `EVENT_INGNORE`: Ignored.
-	//     `EVENT_DEL`: Deleted.
-	//     `EVENT_ADD_WHITE`: Allowed.
-	//     `EVENT_PENDING`: Pending.
-	// 	`EVENT_ISOLATE_CONTAINER`: Container isolated.
-	// 	`EVENT_RESOTRE_CONTAINER`: Container recovered.
+	// Identifies the event status.       EVENT_DEALED: event handled; EVENT_IGNORE: event ignored; EVENT_DEL: event deleted; EVENT_ADD_WHITE: event allowlisted; EVENT_PENDING: event pending handling;	EVENT_ISOLATE_CONTAINER: container isolated;	EVENT_RESOTRE_CONTAINER: container restored.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Event remarks
@@ -27828,14 +29938,7 @@ type ModifyVirusFileStatusRequest struct {
 	// IDs of events
 	EventIdSet []*string `json:"EventIdSet,omitnil,omitempty" name:"EventIdSet"`
 
-	// Event status   
-	//     `EVENT_DEALED`: Processed.
-	//     `EVENT_INGNORE`: Ignored.
-	//     `EVENT_DEL`: Deleted.
-	//     `EVENT_ADD_WHITE`: Allowed.
-	//     `EVENT_PENDING`: Pending.
-	// 	`EVENT_ISOLATE_CONTAINER`: Container isolated.
-	// 	`EVENT_RESOTRE_CONTAINER`: Container recovered.
+	// Identifies the event status.       EVENT_DEALED: event handled; EVENT_IGNORE: event ignored; EVENT_DEL: event deleted; EVENT_ADD_WHITE: event allowlisted; EVENT_PENDING: event pending handling;	EVENT_ISOLATE_CONTAINER: container isolated;	EVENT_RESOTRE_CONTAINER: container restored.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Event remarks
@@ -28342,15 +30445,13 @@ type NetworkAuditRecord struct {
 	// Operation time
 	OperationTime *string `json:"OperationTime,omitnil,omitempty" name:"OperationTime"`
 
-	// Operator `appid`
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Operator App ID
 	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// Operator UIN
 	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
 
-	// The policy ID.
-	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	// Policy ID
 	PolicyId *uint64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 }
 
@@ -28388,12 +30489,10 @@ type NetworkClusterInfoItem struct {
 	// Status of the cluster network plugin. Valid values: `Running` (normal); `Error` (abnormal).
 	NetworkPolicyPluginStatus *string `json:"NetworkPolicyPluginStatus,omitnil,omitempty" name:"NetworkPolicyPluginStatus"`
 
-	// Error message of the cluster network plugin
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Cluster Network Plugin Error Message
 	NetworkPolicyPluginError *string `json:"NetworkPolicyPluginError,omitnil,omitempty" name:"NetworkPolicyPluginError"`
 
-	// Cluster network plugin
-	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	// container network plugin
 	ClusterNetworkSettings *string `json:"ClusterNetworkSettings,omitnil,omitempty" name:"ClusterNetworkSettings"`
 }
 
@@ -28409,16 +30508,13 @@ type NetworkClusterPodInfo struct {
 	// Pod name
 	PodName *string `json:"PodName,omitnil,omitempty" name:"PodName"`
 
-	// Pod space
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Pod Space
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Pod label
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// pod tag
 	Labels *string `json:"Labels,omitnil,omitempty" name:"Labels"`
 
-	// Pod type
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Pod Type
 	WorkloadKind *string `json:"WorkloadKind,omitnil,omitempty" name:"WorkloadKind"`
 }
 
@@ -28426,22 +30522,20 @@ type NetworkCustomPolicy struct {
 	// Network policy direction. Valid values: `FROM`, `TO`.
 	Direction *string `json:"Direction,omitnil,omitempty" name:"Direction"`
 
-	// Network policy port
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Network Policy Port
 	Ports []*NetworkPorts `json:"Ports,omitnil,omitempty" name:"Ports"`
 
 	// Network policy object
 	// 
-	// `PublishedNoConfirm`: Enabled and to be confirmed.
+	// Enable but not confirmed: PublishedNoConfirm
 	// 
-	// `PublishedConfirmed`: Enabled and confirmed.
+	// Enabled and confirmed: PublishedConfirmed
 	// 
-	// `unPublishing`: Disabled.
+	// Disabling: unPublishing
 	// 
-	// `Publishing`: Enabled.
+	// Enabled: Publishing
 	// 
-	// `unPublishEdit`: To be enabled.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Enable: unPublishEdit
 	Peer []*NetworkPeer `json:"Peer,omitnil,omitempty" name:"Peer"`
 }
 
@@ -28455,16 +30549,13 @@ type NetworkPeer struct {
 	// IP type: `IPBlock`, which indicates that only `IPBlock` has a value.
 	PeerType *string `json:"PeerType,omitnil,omitempty" name:"PeerType"`
 
-	// Namespace selector
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Namespace Selector
 	NamespaceSelector *string `json:"NamespaceSelector,omitnil,omitempty" name:"NamespaceSelector"`
 
-	// Pod selector
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Pod Selector
 	PodSelector *string `json:"PodSelector,omitnil,omitempty" name:"PodSelector"`
 
-	// IP selector
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// IP Selector
 	IPBlock *string `json:"IPBlock,omitnil,omitempty" name:"IPBlock"`
 }
 
@@ -28472,8 +30563,7 @@ type NetworkPolicyInfoItem struct {
 	// Network policy name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Network policy description
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Network Policy Description
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Publishing status:
@@ -28509,8 +30599,7 @@ type NetworkPolicyInfoItem struct {
 	// cilium: Cilium
 	NetworkPolicyPlugin *string `json:"NetworkPolicyPlugin,omitnil,omitempty" name:"NetworkPolicyPlugin"`
 
-	// Policy publishing result
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Policy Distribution Result
 	PublishResult *string `json:"PublishResult,omitnil,omitempty" name:"PublishResult"`
 
 	// Inbound rule
@@ -28531,8 +30620,7 @@ type NetworkPolicyInfoItem struct {
 	// `3`: Custom.
 	ToPolicyRule *int64 `json:"ToPolicyRule,omitnil,omitempty" name:"ToPolicyRule"`
 
-	// Object
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Target Object
 	PodSelector *string `json:"PodSelector,omitnil,omitempty" name:"PodSelector"`
 
 	// Network policy ID
@@ -28540,12 +30628,10 @@ type NetworkPolicyInfoItem struct {
 }
 
 type NetworkPorts struct {
-	// Protocol of the network policy
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Network Policy Protocol
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-	// Port of the network policy
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Network Policy Port
 	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
 }
 
@@ -28666,20 +30752,16 @@ type PortInfo struct {
 }
 
 type ProcessBaseInfo struct {
-	// Process initiator
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// process startup user
 	ProcessStartUser *string `json:"ProcessStartUser,omitnil,omitempty" name:"ProcessStartUser"`
 
 	// Process user group
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProcessUserGroup *string `json:"ProcessUserGroup,omitnil,omitempty" name:"ProcessUserGroup"`
 
 	// Process path
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProcessPath *string `json:"ProcessPath,omitnil,omitempty" name:"ProcessPath"`
 
-	// Process command line parameter
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Process command line parameters
 	ProcessParam *string `json:"ProcessParam,omitnil,omitempty" name:"ProcessParam"`
 }
 
@@ -28815,6 +30897,104 @@ type RaspInfo struct {
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
+type RaspRule struct {
+	// Rule ID
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Regular expression for a custom request URL range. If this parameter is left blank, saving fails.
+	URLRegexp *string `json:"URLRegexp,omitnil,omitempty" name:"URLRegexp"`
+
+	// Vulnerability ID
+	VulVulsID *uint64 `json:"VulVulsID,omitnil,omitempty" name:"VulVulsID"`
+
+	// Vulnerability name
+	VulVulsName *string `json:"VulVulsName,omitnil,omitempty" name:"VulVulsName"`
+
+	// cve_id
+	CveID *string `json:"CveID,omitnil,omitempty" name:"CveID"`
+
+	// Vulnerability defense type, which comes from the vulnerability table. 1: component vulnerability defense supported, with component vulnerabilities not allowlisted through a regular expression; 2: regular expression defense supported.
+	SupportDefense *uint64 `json:"SupportDefense,omitnil,omitempty" name:"SupportDefense"`
+
+	// Allowlisting scope. 0: Allowlist all requests; 1: Allowlist requests within a custom request scope.
+	WhiteType *uint64 `json:"WhiteType,omitnil,omitempty" name:"WhiteType"`
+
+	// Status. 0: valid.
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Creation time.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Modification time.
+	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
+}
+
+type RaspRuleVul struct {
+	// Vulnerability ID
+	VulVulsID *uint64 `json:"VulVulsID,omitnil,omitempty" name:"VulVulsID"`
+
+	// Vulnerability name
+	VulVulsName *string `json:"VulVulsName,omitnil,omitempty" name:"VulVulsName"`
+
+	// cve_id
+	CveID *string `json:"CveID,omitnil,omitempty" name:"CveID"`
+
+	// Vulnerability defense type, which comes from the vulnerability table. 1: component vulnerability defense supported, with component vulnerabilities not allowlisted through a regular expression; 2: regular expression defense supported.
+	SupportDefense *uint64 `json:"SupportDefense,omitnil,omitempty" name:"SupportDefense"`
+}
+
+type RegexpRuleInfo struct {
+	// Rule name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
+
+	// Enabled status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Regular Expression List
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpressionList []*WhiteListRegexpExpressionInfo `json:"ExpressionList,omitnil,omitempty" name:"ExpressionList"`
+
+	// Rule ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleID *string `json:"RuleID,omitnil,omitempty" name:"RuleID"`
+
+	// Latest update time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Latest Operating Account
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OperatorUIN *string `json:"OperatorUIN,omitnil,omitempty" name:"OperatorUIN"`
+}
+
+type RegexpRuleListItem struct {
+	// Rule ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleID *string `json:"RuleID,omitnil,omitempty" name:"RuleID"`
+
+	// Rule name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
+
+	// Number of Effective Expressions
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EffectiveExpression *uint64 `json:"EffectiveExpression,omitnil,omitempty" name:"EffectiveExpression"`
+
+	// Latest edit time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// most recently edited account
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OperatorUin *string `json:"OperatorUin,omitnil,omitempty" name:"OperatorUin"`
+
+	// Enabled status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
 type RegionInfo struct {
 	// Region identifier
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
@@ -28824,22 +31004,22 @@ type RegionInfo struct {
 }
 
 type RegistryConnDetectResult struct {
-	// Host quuid or backend for Connectivity Detection
+
 	Quuid *string `json:"Quuid,omitnil,omitempty" name:"Quuid"`
 
-	// Host uuid or backend for Connectivity Detection
+
 	Uuid *string `json:"Uuid,omitnil,omitempty" name:"Uuid"`
 
-	// Detection Result Status
+
 	ConnDetectStatus *string `json:"ConnDetectStatus,omitnil,omitempty" name:"ConnDetectStatus"`
 
-	// Detection Result Information
+
 	ConnDetectMessage *string `json:"ConnDetectMessage,omitnil,omitempty" name:"ConnDetectMessage"`
 
-	// Failure Resolution
+
 	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
 
-	// Failure Cause
+
 	FailReason *string `json:"FailReason,omitnil,omitempty" name:"FailReason"`
 }
 
@@ -29026,15 +31206,13 @@ type ReverseShellEventDescription struct {
 	// Solution
 	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
 
-	// Event remarks
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Event remark information
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// Destination address
 	DstAddress *string `json:"DstAddress,omitnil,omitempty" name:"DstAddress"`
 
-	// Last processing time of the event
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Last Time for Event Handling
 	OperationTime *string `json:"OperationTime,omitnil,omitempty" name:"OperationTime"`
 }
 
@@ -29121,6 +31299,39 @@ type ReverseShellEventInfo struct {
 	// `RESTARTING`: Restarting.
 	// `REMOVING`: Removing.
 	ContainerStatus *string `json:"ContainerStatus,omitnil,omitempty" name:"ContainerStatus"`
+
+	// Cluster ID.
+	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
+
+	// Node Type. NORMAL: Common Node; SUPER: Super Node
+	NodeType *string `json:"NodeType,omitnil,omitempty" name:"NodeType"`
+
+	// pod name
+	PodName *string `json:"PodName,omitnil,omitempty" name:"PodName"`
+
+	// pod ip
+	PodIP *string `json:"PodIP,omitnil,omitempty" name:"PodIP"`
+
+	// Node Unique ID
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil,omitempty" name:"NodeUniqueID"`
+
+	// Node Public IP
+	PublicIP *string `json:"PublicIP,omitnil,omitempty" name:"PublicIP"`
+
+	// Node name.
+	NodeName *string `json:"NodeName,omitnil,omitempty" name:"NodeName"`
+
+	// uuid
+	HostID *string `json:"HostID,omitnil,omitempty" name:"HostID"`
+
+	// Node private network IP.
+	HostIP *string `json:"HostIP,omitnil,omitempty" name:"HostIP"`
+
+	// Node ID.
+	NodeID *string `json:"NodeID,omitnil,omitempty" name:"NodeID"`
+
+	// Cluster name.
+	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 }
 
 type ReverseShellWhiteListBaseInfo struct {
@@ -29176,15 +31387,13 @@ type RiskSyscallEventDescription struct {
 	// Solution
 	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
 
-	// Event remarks
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Event remark information
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// Syscall name
 	SyscallName *string `json:"SyscallName,omitnil,omitempty" name:"SyscallName"`
 
-	// Last processing time of the event
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Last Time for Event Handling
 	OperationTime *string `json:"OperationTime,omitnil,omitempty" name:"OperationTime"`
 }
 
@@ -29347,27 +31556,29 @@ type RiskSyscallWhiteListInfo struct {
 }
 
 type RuleBaseInfo struct {
-	// Valid values: `true` (default policy); `false` (custom policy).
-	IsDefault *bool `json:"IsDefault,omitnil,omitempty" name:"IsDefault"`
+	// Name of the editing user
+	EditUserName *string `json:"EditUserName,omitnil,omitempty" name:"EditUserName"`
 
 	// Number of associated images
 	EffectImageCount *uint64 `json:"EffectImageCount,omitnil,omitempty" name:"EffectImageCount"`
 
+	// Valid values: `true` (default policy); `false` (custom policy).
+	IsDefault *bool `json:"IsDefault,omitnil,omitempty" name:"IsDefault"`
+
+	// Whether the rule applies to all images. true indicates it takes effect for all images.
+	IsGlobal *bool `json:"IsGlobal,omitnil,omitempty" name:"IsGlobal"`
+
+	// Valid values: `true` (enable the policy); `false` (disable the policy).
+	IsEnable *bool `json:"IsEnable,omitnil,omitempty" name:"IsEnable"`
+
 	// Policy ID
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
-
-	// Policy update time, which can be empty.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Policy name
 	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
-	// Name of the editing user
-	EditUserName *string `json:"EditUserName,omitnil,omitempty" name:"EditUserName"`
-
-	// Valid values: `true` (enable the policy); `false` (disable the policy).
-	IsEnable *bool `json:"IsEnable,omitnil,omitempty" name:"IsEnable"`
+	// Policy update time. Can be empty.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 type RunTimeEventBaseInfo struct {
@@ -29423,37 +31634,32 @@ type RunTimeEventBaseInfo struct {
 	// Last generation time
 	LatestFoundTime *string `json:"LatestFoundTime,omitnil,omitempty" name:"LatestFoundTime"`
 
-	// Private IP
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Private IP address
 	HostIP *string `json:"HostIP,omitnil,omitempty" name:"HostIP"`
 
-	// Public IP
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Public IP address
 	ClientIP *string `json:"ClientIP,omitnil,omitempty" name:"ClientIP"`
 
-	// Network status
-	// `NORMAL`: 	Not isolated.
-	// `ISOLATED`: 		Isolated.
-	// `ISOLATING`: 		Isolating.
-	// `ISOLATE_FAILED`: 	Isolation failed.
-	// `RESTORING`: Recovering.
-	// `RESTORE_FAILED`: Recovery failed.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Network status.
+	// Unisolated  NORMAL
+	// ISOLATED
+	// isolated
+	// Isolation FAILED
+	// RESTORING isolation
+	// Isolation restoration failed RESTORE_FAILED
 	ContainerNetStatus *string `json:"ContainerNetStatus,omitnil,omitempty" name:"ContainerNetStatus"`
 
-	// Sub-status of the container
-	// "AGENT_OFFLINE"       // The agent is offline.
-	// "NODE_DESTROYED"      // The node is terminated.
-	// "CONTAINER_EXITED"    // The container exited.
-	// "CONTAINER_DESTROYED" // The container was terminated.
-	// "SHARED_HOST"         // The container shares the network with the server.
-	// "RESOURCE_LIMIT"      // The number of resources to be isolated exceeds the limit.
-	// "UNKNOW"              // The reason is unknown.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// container sub-status
+	// AGENT_OFFLINE
+	// NODE_DESTROYED
+	// CONTAINER_EXITED
+	// CONTAINER_DESTROYED
+	// "SHARED_HOST"         // Container shares network with host
+	// RESOURCE_LIMIT
+	// "UNKNOW": Unknown
 	ContainerNetSubStatus *string `json:"ContainerNetSubStatus,omitnil,omitempty" name:"ContainerNetSubStatus"`
 
-	// Container isolation operation source
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Container Isolation Operation Source
 	ContainerIsolateOperationSrc *string `json:"ContainerIsolateOperationSrc,omitnil,omitempty" name:"ContainerIsolateOperationSrc"`
 
 	// Node ID
@@ -29492,11 +31698,14 @@ type RunTimeEventBaseInfo struct {
 	// uuid
 	HostID *string `json:"HostID,omitnil,omitempty" name:"HostID"`
 
-	// Namespace
+
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// WorkloadType
+
 	WorkloadType *string `json:"WorkloadType,omitnil,omitempty" name:"WorkloadType"`
+
+	// Container running status
+	ContainerStatus *string `json:"ContainerStatus,omitnil,omitempty" name:"ContainerStatus"`
 }
 
 type RunTimeFilters struct {
@@ -29537,6 +31746,9 @@ type ScanComplianceAssetsByPolicyItemRequestParams struct {
 
 	// List of IDs of customer assets to be scanned again
 	CustomerAssetIdSet []*uint64 `json:"CustomerAssetIdSet,omitnil,omitempty" name:"CustomerAssetIdSet"`
+
+	// Type of assets to be scanned. <li>ASSET_CONTAINER: Docker container.</li> <li>ASSET_IMAGE: Docker image.</li> <li>ASSET_HOST: Docker host.</li> <li>ASSET_K8S: Kubernetes.</li> <li>ASSET_CONTAINERD: containerd host.</li> <li>ASSET_CONTAINERD_CONTAINER: containerd container.</li>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 }
 
 type ScanComplianceAssetsByPolicyItemRequest struct {
@@ -29547,6 +31759,9 @@ type ScanComplianceAssetsByPolicyItemRequest struct {
 
 	// List of IDs of customer assets to be scanned again
 	CustomerAssetIdSet []*uint64 `json:"CustomerAssetIdSet,omitnil,omitempty" name:"CustomerAssetIdSet"`
+
+	// Type of assets to be scanned. <li>ASSET_CONTAINER: Docker container.</li> <li>ASSET_IMAGE: Docker image.</li> <li>ASSET_HOST: Docker host.</li> <li>ASSET_K8S: Kubernetes.</li> <li>ASSET_CONTAINERD: containerd host.</li> <li>ASSET_CONTAINERD_CONTAINER: containerd container.</li>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 }
 
 func (r *ScanComplianceAssetsByPolicyItemRequest) ToJsonString() string {
@@ -29563,6 +31778,7 @@ func (r *ScanComplianceAssetsByPolicyItemRequest) FromJsonString(s string) error
 	}
 	delete(f, "CustomerPolicyItemId")
 	delete(f, "CustomerAssetIdSet")
+	delete(f, "AssetType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ScanComplianceAssetsByPolicyItemRequest has unknown keys!", "")
 	}
@@ -29598,6 +31814,9 @@ func (r *ScanComplianceAssetsByPolicyItemResponse) FromJsonString(s string) erro
 type ScanComplianceAssetsRequestParams struct {
 	// List of IDs of customer assets to be scanned again
 	CustomerAssetIdSet []*uint64 `json:"CustomerAssetIdSet,omitnil,omitempty" name:"CustomerAssetIdSet"`
+
+	// Type of assets to be scanned. <li>ASSET_CONTAINER: Docker container.</li> <li>ASSET_IMAGE: Docker image.</li> <li>ASSET_HOST: Docker host.</li> <li>ASSET_K8S: Kubernetes.</li> <li>ASSET_CONTAINERD: containerd host.</li> <li>ASSET_CONTAINERD_CONTAINER: containerd container.</li>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 }
 
 type ScanComplianceAssetsRequest struct {
@@ -29605,6 +31824,9 @@ type ScanComplianceAssetsRequest struct {
 	
 	// List of IDs of customer assets to be scanned again
 	CustomerAssetIdSet []*uint64 `json:"CustomerAssetIdSet,omitnil,omitempty" name:"CustomerAssetIdSet"`
+
+	// Type of assets to be scanned. <li>ASSET_CONTAINER: Docker container.</li> <li>ASSET_IMAGE: Docker image.</li> <li>ASSET_HOST: Docker host.</li> <li>ASSET_K8S: Kubernetes.</li> <li>ASSET_CONTAINERD: containerd host.</li> <li>ASSET_CONTAINERD_CONTAINER: containerd container.</li>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 }
 
 func (r *ScanComplianceAssetsRequest) ToJsonString() string {
@@ -29620,6 +31842,7 @@ func (r *ScanComplianceAssetsRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "CustomerAssetIdSet")
+	delete(f, "AssetType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ScanComplianceAssetsRequest has unknown keys!", "")
 	}
@@ -29712,6 +31935,9 @@ func (r *ScanCompliancePolicyItemsResponse) FromJsonString(s string) error {
 type ScanComplianceScanFailedAssetsRequestParams struct {
 	// List of IDs of customer assets to be scanned again
 	CustomerAssetIdSet []*uint64 `json:"CustomerAssetIdSet,omitnil,omitempty" name:"CustomerAssetIdSet"`
+
+	// Type of assets to be scanned. <li>ASSET_CONTAINER: Docker container.</li> <li>ASSET_IMAGE: Docker image.</li> <li>ASSET_HOST: Docker host.</li> <li>ASSET_K8S: Kubernetes.</li> <li>ASSET_CONTAINERD: containerd host.</li> <li>ASSET_CONTAINERD_CONTAINER: containerd container.</li>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 }
 
 type ScanComplianceScanFailedAssetsRequest struct {
@@ -29719,6 +31945,9 @@ type ScanComplianceScanFailedAssetsRequest struct {
 	
 	// List of IDs of customer assets to be scanned again
 	CustomerAssetIdSet []*uint64 `json:"CustomerAssetIdSet,omitnil,omitempty" name:"CustomerAssetIdSet"`
+
+	// Type of assets to be scanned. <li>ASSET_CONTAINER: Docker container.</li> <li>ASSET_IMAGE: Docker image.</li> <li>ASSET_HOST: Docker host.</li> <li>ASSET_K8S: Kubernetes.</li> <li>ASSET_CONTAINERD: containerd host.</li> <li>ASSET_CONTAINERD_CONTAINER: containerd container.</li>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
 }
 
 func (r *ScanComplianceScanFailedAssetsRequest) ToJsonString() string {
@@ -29734,6 +31963,7 @@ func (r *ScanComplianceScanFailedAssetsRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "CustomerAssetIdSet")
+	delete(f, "AssetType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ScanComplianceScanFailedAssetsRequest has unknown keys!", "")
 	}
@@ -29786,6 +32016,20 @@ type ScanIgnoreVul struct {
 
 	// Number of ignored local images
 	LocalImageCount *int64 `json:"LocalImageCount,omitnil,omitempty" name:"LocalImageCount"`
+}
+
+type ScanRangeInfo struct {
+	// true: select all;
+	// false: partial select
+	IsAll *bool `json:"IsAll,omitnil,omitempty" name:"IsAll"`
+
+	// SCAN_NORMAL: Regular node;
+	// SCAN_SUPER: Super node
+	// SCAN_CONTAINER: Container
+	RangeType *string `json:"RangeType,omitnil,omitempty" name:"RangeType"`
+
+	// Selected ID
+	IDs []*string `json:"IDs,omitnil,omitempty" name:"IDs"`
 }
 
 type SearchTemplate struct {
@@ -29841,28 +32085,37 @@ type SecLogDeliveryClsSettingInfo struct {
 	// Topic ID
 	TopicID *string `json:"TopicID,omitnil,omitempty" name:"TopicID"`
 
-	// Logset name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// logset name
 	LogSetName *string `json:"LogSetName,omitnil,omitempty" name:"LogSetName"`
 
 	// Topic name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+
+	// Log type	
+	SubLogType []*string `json:"SubLogType,omitnil,omitempty" name:"SubLogType"`
+
+	// Error message
+	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
 }
 
 type SecLogDeliveryKafkaSettingInfo struct {
-	// Log type
+	// Security log module.
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
 	// Topic ID
 	TopicID *string `json:"TopicID,omitnil,omitempty" name:"TopicID"`
 
 	// Topic name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
 	// Delivery status. Valid values: `false` (disabled); `true` (enabled).
 	State *bool `json:"State,omitnil,omitempty" name:"State"`
+
+	// Log type
+	SubLogType []*string `json:"SubLogType,omitnil,omitempty" name:"SubLogType"`
+
+	// Error message
+	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
 }
 
 type SecLogJoinInfo struct {
@@ -29881,44 +32134,50 @@ type SecLogJoinInfo struct {
 	// K8s API: "k8s_api"
 	// )
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// Number of accessed clusters.
+	ClusterCount *uint64 `json:"ClusterCount,omitnil,omitempty" name:"ClusterCount"`
 }
 
 type SecLogJoinObjectInfo struct {
 	// Server ID
 	HostID *string `json:"HostID,omitnil,omitempty" name:"HostID"`
 
-	// Server name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Host name
 	HostName *string `json:"HostName,omitnil,omitempty" name:"HostName"`
 
-	// Server IP
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Host IP address
 	HostIP *string `json:"HostIP,omitnil,omitempty" name:"HostIP"`
 
 	// Server status
 	HostStatus *string `json:"HostStatus,omitnil,omitempty" name:"HostStatus"`
 
 	// Cluster ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
 
-	// Cluster name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Cluster name.
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Public IP
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Public IP address
 	PublicIP *string `json:"PublicIP,omitnil,omitempty" name:"PublicIP"`
 
 	// Access status. Valid values: `true` (accessed); `false` (not accessed).
 	JoinState *bool `json:"JoinState,omitnil,omitempty" name:"JoinState"`
 
-	// Cluster version
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// cluster edition
 	ClusterVersion *string `json:"ClusterVersion,omitnil,omitempty" name:"ClusterVersion"`
 
 	// Master node address of the cluster
 	ClusterMainAddress *string `json:"ClusterMainAddress,omitnil,omitempty" name:"ClusterMainAddress"`
+
+	// Number of containers
+	ContainerCnt *uint64 `json:"ContainerCnt,omitnil,omitempty" name:"ContainerCnt"`
+
+	// Cluster type.
+	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
+
+	// Cluster status
+	ClusterStatus *string `json:"ClusterStatus,omitnil,omitempty" name:"ClusterStatus"`
 }
 
 type SecTendencyEventInfo struct {
@@ -30252,6 +32511,12 @@ type SupportDefenceVul struct {
 
 	// Vulnerability disclosure time
 	SubmitTime *string `json:"SubmitTime,omitnil,omitempty" name:"SubmitTime"`
+
+	// Vulnerability ID
+	VulId *int64 `json:"VulId,omitnil,omitempty" name:"VulId"`
+
+	// Status. 0: defending; 1: allowlisted. It indicates that the vulnerability is included in an allowlist, which may not be a global allowlist.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 // Predefined struct for user
@@ -30317,20 +32582,18 @@ func (r *SwitchImageAutoAuthorizedRuleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SyncAssetImageRegistryAssetRequestParams struct {
-	// Whether to synchronize all image repositories
+
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// Partial image repositories requiring synchronization
+
 	RegistryIds []*uint64 `json:"RegistryIds,omitnil,omitempty" name:"RegistryIds"`
 }
 
 type SyncAssetImageRegistryAssetRequest struct {
 	*tchttp.BaseRequest
 	
-	// Whether to synchronize all image repositories
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// Partial image repositories requiring synchronization
 	RegistryIds []*uint64 `json:"RegistryIds,omitnil,omitempty" name:"RegistryIds"`
 }
 
@@ -30390,6 +32653,60 @@ type UnauthorizedCoresTendency struct {
 
 	// Number of unlicensed cores
 	CoresCount *int64 `json:"CoresCount,omitnil,omitempty" name:"CoresCount"`
+}
+
+// Predefined struct for user
+type UninstallClusterContainerSecurityRequestParams struct {
+	// Cluster ID
+	ClusterIDs []*string `json:"ClusterIDs,omitnil,omitempty" name:"ClusterIDs"`
+}
+
+type UninstallClusterContainerSecurityRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID
+	ClusterIDs []*string `json:"ClusterIDs,omitnil,omitempty" name:"ClusterIDs"`
+}
+
+func (r *UninstallClusterContainerSecurityRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UninstallClusterContainerSecurityRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterIDs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UninstallClusterContainerSecurityRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UninstallClusterContainerSecurityResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UninstallClusterContainerSecurityResponse struct {
+	*tchttp.BaseResponse
+	Response *UninstallClusterContainerSecurityResponseParams `json:"Response"`
+}
+
+func (r *UninstallClusterContainerSecurityResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UninstallClusterContainerSecurityResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -30637,6 +32954,21 @@ type UpdateAssetImageRegistryRegistryDetailRequestParams struct {
 
 	// Valid values: `0` (secure mode with certificate verification, which is the default value); `1` (unsecure mode that skips certificate verification).
 	Insecure *uint64 `json:"Insecure,omitnil,omitempty" name:"Insecure"`
+
+
+	ConnDetectConfig []*ConnDetectConfig `json:"ConnDetectConfig,omitnil,omitempty" name:"ConnDetectConfig"`
+
+	// Repository unique id
+	RegistryId *int64 `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
+
+	// Synchronization method. 0: full synchronization; 1: incremental synchronization.
+	SyncMode *uint64 `json:"SyncMode,omitnil,omitempty" name:"SyncMode"`
+
+	// Whether to perform authorization and scanning automatically. This parameter is valid for incremental synchronization, which involves all new images.
+	NeedScan *bool `json:"NeedScan,omitnil,omitempty" name:"NeedScan"`
+
+	// TCR instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type UpdateAssetImageRegistryRegistryDetailRequest struct {
@@ -30671,6 +33003,20 @@ type UpdateAssetImageRegistryRegistryDetailRequest struct {
 
 	// Valid values: `0` (secure mode with certificate verification, which is the default value); `1` (unsecure mode that skips certificate verification).
 	Insecure *uint64 `json:"Insecure,omitnil,omitempty" name:"Insecure"`
+
+	ConnDetectConfig []*ConnDetectConfig `json:"ConnDetectConfig,omitnil,omitempty" name:"ConnDetectConfig"`
+
+	// Repository unique id
+	RegistryId *int64 `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
+
+	// Synchronization method. 0: full synchronization; 1: incremental synchronization.
+	SyncMode *uint64 `json:"SyncMode,omitnil,omitempty" name:"SyncMode"`
+
+	// Whether to perform authorization and scanning automatically. This parameter is valid for incremental synchronization, which involves all new images.
+	NeedScan *bool `json:"NeedScan,omitnil,omitempty" name:"NeedScan"`
+
+	// TCR instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *UpdateAssetImageRegistryRegistryDetailRequest) ToJsonString() string {
@@ -30695,6 +33041,11 @@ func (r *UpdateAssetImageRegistryRegistryDetailRequest) FromJsonString(s string)
 	delete(f, "RegistryRegion")
 	delete(f, "SpeedLimit")
 	delete(f, "Insecure")
+	delete(f, "ConnDetectConfig")
+	delete(f, "RegistryId")
+	delete(f, "SyncMode")
+	delete(f, "NeedScan")
+	delete(f, "InstanceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateAssetImageRegistryRegistryDetailRequest has unknown keys!", "")
 	}
@@ -30704,15 +33055,12 @@ func (r *UpdateAssetImageRegistryRegistryDetailRequest) FromJsonString(s string)
 // Predefined struct for user
 type UpdateAssetImageRegistryRegistryDetailResponseParams struct {
 	// Connection error message
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	HealthCheckErr *string `json:"HealthCheckErr,omitnil,omitempty" name:"HealthCheckErr"`
 
-	// Name error message
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Incorrect name message
 	NameRepeatErr *string `json:"NameRepeatErr,omitnil,omitempty" name:"NameRepeatErr"`
 
-	// Unique repository ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// repository unique id
 	RegistryId *int64 `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -30763,19 +33111,19 @@ type UpdateImageRegistryTimingScanTaskRequestParams struct {
 	// Whether to scan for the latest version
 	Latest *bool `json:"Latest,omitnil,omitempty" name:"Latest"`
 
-	// Whether running containers exist
+
 	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
 
-	// Scan End Time
+
 	ScanEndTime *string `json:"ScanEndTime,omitnil,omitempty" name:"ScanEndTime"`
 
-	// Scan Scope: 0 All Images, 1 Custom Images, 2 Recommended Scan Images
+
 	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
 
-	// Repository Type tcr,ccr,harbor
+
 	RegistryType []*string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
-	// Namespace
+
 	Namespace []*string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 }
 
@@ -30806,19 +33154,14 @@ type UpdateImageRegistryTimingScanTaskRequest struct {
 	// Whether to scan for the latest version
 	Latest *bool `json:"Latest,omitnil,omitempty" name:"Latest"`
 
-	// Whether running containers exist
 	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
 
-	// Scan End Time
 	ScanEndTime *string `json:"ScanEndTime,omitnil,omitempty" name:"ScanEndTime"`
 
-	// Scan Scope: 0 All Images, 1 Custom Images, 2 Recommended Scan Images
 	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
 
-	// Repository Type tcr,ccr,harbor
 	RegistryType []*string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
-	// Namespace
 	Namespace []*string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 }
 
@@ -31089,6 +33432,23 @@ func (r *UpdateNetworkFirewallPolicyYamlDetailResponse) FromJsonString(s string)
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type VasInfoResourceDetail struct {
+	// Resource ID
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Expiration time.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// 0: paid order; 1: trial use; 2: offered for free.
+	SourceType *uint64 `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// purchase quantity
+	InquireNum *uint64 `json:"InquireNum,omitnil,omitempty" name:"InquireNum"`
+}
+
 type VirusAutoIsolateSampleInfo struct {
 	// MD5 checksum of the file
 	MD5 *string `json:"MD5,omitnil,omitempty" name:"MD5"`
@@ -31104,7 +33464,7 @@ type VirusAutoIsolateSampleInfo struct {
 }
 
 type VirusInfo struct {
-	// Filename
+	// File name
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
 	// File path
@@ -31113,7 +33473,7 @@ type VirusInfo struct {
 	// Virus name
 	VirusName *string `json:"VirusName,omitnil,omitempty" name:"VirusName"`
 
-	// Creation time
+	// Creation time.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Update time
@@ -31122,34 +33482,34 @@ type VirusInfo struct {
 	// Container name
 	ContainerName *string `json:"ContainerName,omitnil,omitempty" name:"ContainerName"`
 
-	// Container ID
+	// container id
 	ContainerId *string `json:"ContainerId,omitnil,omitempty" name:"ContainerId"`
 
-	// Container status
-	// `RUNNING`: Running.
-	// `PAUSED`: Paused.
-	// `STOPPED`: Stopped.
-	// `CREATED`: Created.
-	// `DESTROYED`: Terminated.
-	// `RESTARTING`: Restarting.
-	// `REMOVING`: Removing.
+	// Container status.
+	// RUNNING: running
+	// Suspend: PAUSED
+	// Stop: STOPPED
+	// CREATED
+	// DESTROYED
+	// RESTARTING
+	// Migrating: REMOVING
 	ContainerStatus *string `json:"ContainerStatus,omitnil,omitempty" name:"ContainerStatus"`
 
-	// Image name
+	// Image Name
 	ImageName *string `json:"ImageName,omitnil,omitempty" name:"ImageName"`
 
-	// Image ID
+	// Image id
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
-	// `DEAL_NONE`: Pending.
-	// `DEAL_IGNORE`: Ignored.
-	// `DEAL_ADD_WHITELIST`: Allowed.
-	// `DEAL_DEL`: Deleted.
-	// `DEAL_ISOLATE`: Isolated.
-	// `DEAL_ISOLATING`: Isolating.
-	// `DEAL_ISOLATE_FAILED`: Isolation failed.
-	// `DEAL_RECOVERING`: Recovering.
-	// `DEAL_RECOVER_FAILED`: Recovery failed.
+	// DEAL_NONE: File pending
+	// DEAL_IGNORE: Already ignored
+	// DEAL_ADD_WHITELIST: Add to whitelist
+	// DEAL_DEL: File deleted
+	// DEAL_ISOLATE: Has been isolated
+	// DEAL_ISOLATING: Isolated
+	// DEAL_ISOLATE_FAILED: Isolation failed
+	// DEAL_RECOVERING: Recovering
+	// DEAL_RECOVER_FAILED: Recovery failed
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Event ID
@@ -31158,94 +33518,94 @@ type VirusInfo struct {
 	// Event description
 	HarmDescribe *string `json:"HarmDescribe,omitnil,omitempty" name:"HarmDescribe"`
 
-	// Solution
+	// Recommended solution
 	SuggestScheme *string `json:"SuggestScheme,omitnil,omitempty" name:"SuggestScheme"`
 
-	// Sub-status of the failure:
-	// `FILE_NOT_FOUND`: The file does not exist.
-	// `FILE_ABNORMAL`: The file is abnormal.
-	// `FILE_ABNORMAL_DEAL_RECOVER`: The file is abnormal when recovered.
-	// `BACKUP_FILE_NOT_FOUND`: The backup file does not exist.
-	// `CONTAINER_NOT_FOUND_DEAL_ISOLATE`: The container does not exist during isolation.
-	// `CONTAINER_NOT_FOUND_DEAL_RECOVER`: The container does not exist during recovery.
-	// `TIMEOUT`: Timed out.
-	// `TOO_MANY`: Too many tasks.
-	// `OFFLINE`: Offline.
-	// `INTERNAL`: Internal service error.
-	// `VALIDATION`: Invalid parameter.
+	// Failed sub-status
+	// FILE_NOT_FOUND: File does not exist
+	// FILE_ABNORMAL: abnormal file
+	// FILE_ABNORMAL_DEAL_RECOVER: Abnormal file when recovering file.
+	// BACKUP_FILE_NOT_FOUND: Backup file not found
+	// CONTAINER_NOT_FOUND_DEAL_ISOLATE: Container not found in isolation
+	// CONTAINER_NOT_FOUND_DEAL_RECOVER: Container not found when recovering
+	// TIMEOUT: Timeout
+	// TOO_MANY: Too many tasks
+	// OFFLINE: Offline
+	// INTERNAL Server Error
+	// VALIDATION: Invalid parameter
 	SubStatus *string `json:"SubStatus,omitnil,omitempty" name:"SubStatus"`
 
-	// Network status
-	// `NORMAL`: 	Not isolated.
-	// `ISOLATED`: 		Isolated.
-	// `ISOLATING`: 		Isolating.
-	// `ISOLATE_FAILED`: 	Isolation failed.
-	// `RESTORING`: Recovering.
-	// `RESTORE_FAILED`: Recovery failed.
+	// Network status.
+	// Unisolated  NORMAL
+	// ISOLATED
+	// isolated
+	// Isolation FAILED
+	// RESTORING isolation
+	// Isolation restoration failed RESTORE_FAILED
 	ContainerNetStatus *string `json:"ContainerNetStatus,omitnil,omitempty" name:"ContainerNetStatus"`
 
-	// Sub-status of the container
-	// "AGENT_OFFLINE"       // The agent is offline.
-	// 	"NODE_DESTROYED"      // The node is terminated.
-	// 	"CONTAINER_EXITED"    // The container exited.
-	// 	"CONTAINER_DESTROYED" // The container was terminated.
-	// 	"SHARED_HOST"         // The container shares the network with the server.
-	// 	"RESOURCE_LIMIT"      // The number of resources to be isolated exceeds the limit.
-	// 	"UNKNOW"              // The reason is unknown.
+	// container sub-status
+	// AGENT_OFFLINE
+	// 	NODE_DESTROYED
+	// 	CONTAINER_EXITED
+	// 	"CONTAINER_DESTROYED" //Container destroyed
+	// 	SHARED_HOST
+	// 	RESOURCE_LIMIT
+	// 	"UNKNOW": Unknown
 	ContainerNetSubStatus *string `json:"ContainerNetSubStatus,omitnil,omitempty" name:"ContainerNetSubStatus"`
 
-	// Container isolation operation source
+	// Container Isolation Operation Source
 	ContainerIsolateOperationSrc *string `json:"ContainerIsolateOperationSrc,omitnil,omitempty" name:"ContainerIsolateOperationSrc"`
 
-	// MD5 checksum
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// MD5 Value
 	MD5 *string `json:"MD5,omitnil,omitempty" name:"MD5"`
 
-	// Risk level. Valid values: `RISK_CRITICAL`, `RISK_HIGH`, `RISK_MEDIUM`, `RISK_LOW`, `RISK_NOTICE`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Risk Level: RISK_CRITICAL, RISK_HIGH, RISK_MEDIUM, RISK_LOW, and RISK_NOTICE
 	RiskLevel *string `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
 
-	// Check platform
-	// `1`: Tencent Cloud Security Engine.
-	// `2`: tav.
-	// `3`: binaryAi.
-	// `4`: Unusual behavior.
-	// `5`: Threat intelligence.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Detection platform
+	// 1: Cloud Killing Engine
+	// 2: tav
+	// 3: binaryAi
+	// 4: Abnormal behavior
+	// 5: Threat Intelligence
 	CheckPlatform []*string `json:"CheckPlatform,omitnil,omitempty" name:"CheckPlatform"`
 
-	// Node ID.
+	// Node ID
 	NodeID *string `json:"NodeID,omitnil,omitempty" name:"NodeID"`
 
-	// Node name
+	// Node name.
 	NodeName *string `json:"NodeName,omitnil,omitempty" name:"NodeName"`
 
-	// Pod IP
+	// pod ip
 	PodIP *string `json:"PodIP,omitnil,omitempty" name:"PodIP"`
 
-	// Pod (instance) name
+	// Name of the pod (instance)
 	PodName *string `json:"PodName,omitnil,omitempty" name:"PodName"`
 
-	// ID of the cluster where the node resides
+	// Node Cluster ID
 	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
 
-	// Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+	// Node Type. NORMAL: Common Node; SUPER: Super Node
 	NodeType *string `json:"NodeType,omitnil,omitempty" name:"NodeType"`
 
 	// Public IP of the node
 	PublicIP *string `json:"PublicIP,omitnil,omitempty" name:"PublicIP"`
 
-	// Node private IP
+	// Node private network IP
 	InnerIP *string `json:"InnerIP,omitnil,omitempty" name:"InnerIP"`
 
-	// UID of the node
+	// Node Unique ID
 	NodeUniqueID *string `json:"NodeUniqueID,omitnil,omitempty" name:"NodeUniqueID"`
 
-	// ID for the general node
+	// Common Node ID
 	HostID *string `json:"HostID,omitnil,omitempty" name:"HostID"`
 
-	// Cluster name
+	// Cluster name.
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// Private IP address of the node, which is the same as the value of InnerIP.
+	HostIP *string `json:"HostIP,omitnil,omitempty" name:"HostIP"`
 }
 
 type VirusTaskInfo struct {
@@ -31332,17 +33692,43 @@ type VirusTendencyInfo struct {
 	IsolateEventCount *uint64 `json:"IsolateEventCount,omitnil,omitempty" name:"IsolateEventCount"`
 }
 
+type VirusWhiteListRuleInfo struct {
+	// <p>Allowlist ID.</p>
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// <p>MD5 allowlist content.</p>
+	Md5List []*string `json:"Md5List,omitnil,omitempty" name:"Md5List"`
+
+	// <p>Image ID.</p>
+	ImageIds []*string `json:"ImageIds,omitnil,omitempty" name:"ImageIds"`
+
+	// <p>Scope.</p>
+	Scope *uint64 `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// <p>Number of images.</p>
+	ImageCount *uint64 `json:"ImageCount,omitnil,omitempty" name:"ImageCount"`
+
+	// <p>MD5 count.</p>
+	Md5Count *uint64 `json:"Md5Count,omitnil,omitempty" name:"Md5Count"`
+
+	// <p>Mark.</p>
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// <p>Insertion time.</p>
+	InsertTime *string `json:"InsertTime,omitnil,omitempty" name:"InsertTime"`
+
+	// <p>Update time.</p>
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
 type VulAffectedComponentInfo struct {
 	// Component name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Component version
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Version []*string `json:"Version,omitnil,omitempty" name:"Version"`
 
-	// Fixed component version
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Component Repair Version
 	FixedVersion []*string `json:"FixedVersion,omitnil,omitempty" name:"FixedVersion"`
 }
 
@@ -31388,23 +33774,22 @@ type VulAffectedContainerInfo struct {
 
 	// Super node name
 	NodeName *string `json:"NodeName,omitnil,omitempty" name:"NodeName"`
+
+	// Container status. "RUNNING": running; "PAUSED": paused; "STOPPED": stopped; "CREATED": created; "DESTROYED": terminated; "RESTARTING": restarting; "REMOVING": migrating; "DEAD": dead; "UNKNOWN": unknown.
+	ContainerStatus *string `json:"ContainerStatus,omitnil,omitempty" name:"ContainerStatus"`
 }
 
 type VulAffectedImageComponentInfo struct {
 	// Component name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Component version
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
-	// Fixed component version
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Component Repair Version
 	FixedVersion *string `json:"FixedVersion,omitnil,omitempty" name:"FixedVersion"`
 
 	// Component path
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 }
 
@@ -31415,8 +33800,11 @@ type VulAffectedImageInfo struct {
 	// Image name
 	ImageName *string `json:"ImageName,omitnil,omitempty" name:"ImageName"`
 
-	// Number of associated servers
+	// Number of associated hosts (including regular nodes and super nodes).
 	HostCount *int64 `json:"HostCount,omitnil,omitempty" name:"HostCount"`
+
+	// Number of associated super nodes.
+	SuperNodeCount *int64 `json:"SuperNodeCount,omitnil,omitempty" name:"SuperNodeCount"`
 
 	// Number of associated containers
 	ContainerCount *int64 `json:"ContainerCount,omitnil,omitempty" name:"ContainerCount"`
@@ -31429,25 +33817,25 @@ type VulAffectedRegistryImageInfo struct {
 	// Image ID
 	ImageID *string `json:"ImageID,omitnil,omitempty" name:"ImageID"`
 
-	// Image name
+	// Image Name
 	ImageName *string `json:"ImageName,omitnil,omitempty" name:"ImageName"`
 
-	// Image tag
+	// Mirror version
 	ImageTag *string `json:"ImageTag,omitnil,omitempty" name:"ImageTag"`
 
-	// Image namespace
+	// Image Namespace
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Image address
+	// Image address.
 	ImageRepoAddress *string `json:"ImageRepoAddress,omitnil,omitempty" name:"ImageRepoAddress"`
 
-	// List of components
+	// Component List
 	ComponentList []*VulAffectedImageComponentInfo `json:"ComponentList,omitnil,omitempty" name:"ComponentList"`
 
-	// Whether it is the latest image tag
+	// Whether the Latest Version of the Image
 	IsLatestImage *bool `json:"IsLatestImage,omitnil,omitempty" name:"IsLatestImage"`
 
-	// Internal image asset ID
+	// Internal Image Asset ID
 	ImageAssetId *int64 `json:"ImageAssetId,omitnil,omitempty" name:"ImageAssetId"`
 }
 
@@ -31491,8 +33879,7 @@ type VulDefenceEvent struct {
 	// Event ID
 	EventID *int64 `json:"EventID,omitnil,omitempty" name:"EventID"`
 
-	// First discovery time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// First detection time
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Isolation status
@@ -31505,45 +33892,38 @@ type VulDefenceEvent struct {
 	ContainerNetStatus *string `json:"ContainerNetStatus,omitnil,omitempty" name:"ContainerNetStatus"`
 
 	// Last discovery time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	MergeTime *string `json:"MergeTime,omitnil,omitempty" name:"MergeTime"`
 
-	// Container status
-	// `RUNNING`: Running.
-	// `PAUSED`: Paused.
-	// `STOPPED`: Stopped.
-	// `CREATED`: Created.
-	// `DESTROYED`: Terminated.
-	// `RESTARTING`: Restarting.
-	// `REMOVING`: Removing.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Container status.
+	// RUNNING: running
+	// PAUSED
+	// Stop: STOPPED
+	// CREATED
+	// DESTROYED
+	// RESTARTING
+	// Migrating: REMOVING
 	ContainerStatus *string `json:"ContainerStatus,omitnil,omitempty" name:"ContainerStatus"`
 
-	// Sub-status of the container
-	// "AGENT_OFFLINE"       // The agent is offline.
-	// 	"NODE_DESTROYED"      // The node is terminated.
-	// 	"CONTAINER_EXITED"    // The container exited.
-	// 	"CONTAINER_DESTROYED" // The container was terminated.
-	// 	"SHARED_HOST"         // The container shares the network with the server.
-	// 	"RESOURCE_LIMIT"      // The number of resources to be isolated exceeds the limit.
-	// 	"UNKNOW"              // The reason is unknown.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Container sub-status
+	// AGENT_OFFLINE
+	// 	NODE_DESTROYED
+	// 	CONTAINER_EXITED
+	// 	"CONTAINER_DESTROYED" //Container destroyed
+	// 	"SHARED_HOST"         // Container shares network with host
+	// 	RESOURCE_LIMIT
+	// 	"UNKNOW"              // Reason unknown
 	ContainerNetSubStatus *string `json:"ContainerNetSubStatus,omitnil,omitempty" name:"ContainerNetSubStatus"`
 
-	// Container isolation operation source
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Container Isolation Operation Source
 	ContainerIsolateOperationSrc *string `json:"ContainerIsolateOperationSrc,omitnil,omitempty" name:"ContainerIsolateOperationSrc"`
 
-	// Node QUuid/Super node ID
-	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	// Host QUUID/Super Node ID
 	QUUID *string `json:"QUUID,omitnil,omitempty" name:"QUUID"`
 
-	// Server private IP
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Host private IP address
 	HostIP *string `json:"HostIP,omitnil,omitempty" name:"HostIP"`
 
-	// General node/Super node name
-	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	// Host Name/Super Node Name
 	HostName *string `json:"HostName,omitnil,omitempty" name:"HostName"`
 
 	// Node type. Values: `NORMAL` (general node), `SUPER` (super node).
@@ -31563,6 +33943,12 @@ type VulDefenceEvent struct {
 
 	// Cluster name
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
+
+	// Pod name
+	PodName *string `json:"PodName,omitnil,omitempty" name:"PodName"`
+
+	// pod ip
+	PodIP *string `json:"PodIP,omitnil,omitempty" name:"PodIP"`
 }
 
 type VulDefenceEventDetail struct {
@@ -31630,79 +34016,65 @@ type VulDefenceEventDetail struct {
 	NetworkPayload *string `json:"NetworkPayload,omitnil,omitempty" name:"NetworkPayload"`
 
 	// Process PID
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	PID *int64 `json:"PID,omitnil,omitempty" name:"PID"`
 
-	// Main class name of the process
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Main class name of process
 	MainClass *string `json:"MainClass,omitnil,omitempty" name:"MainClass"`
 
 	// Stack information
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	StackTrace *string `json:"StackTrace,omitnil,omitempty" name:"StackTrace"`
 
-	// Listened account
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Listen to account
 	ServerAccount *string `json:"ServerAccount,omitnil,omitempty" name:"ServerAccount"`
 
-	// Listened port
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Listening port
 	ServerPort *string `json:"ServerPort,omitnil,omitempty" name:"ServerPort"`
 
 	// Process path
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ServerExe *string `json:"ServerExe,omitnil,omitempty" name:"ServerExe"`
 
 	// Process command line parameter
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ServerArg *string `json:"ServerArg,omitnil,omitempty" name:"ServerArg"`
 
-	// Node QUuid/Super node ID
-	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	// Host QUUID/Super Node ID
 	QUUID *string `json:"QUUID,omitnil,omitempty" name:"QUUID"`
 
 	// Isolation status
-	// `NORMAL`: 	Not isolated.
-	// `ISOLATED`: 		Isolated.
-	// `ISOLATING`: 		Isolating.
-	// `ISOLATE_FAILED`: 	Isolation failed.
-	// `RESTORING`: Recovering.
-	// `RESTORE_FAILED`: Recovery failed.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// UNISOLATED NORMAL
+	// ISOLATED
+	// ISOLATING
+	// Isolation FAILED
+	// RESTORING isolation
+	// Isolation restoration failed RESTORE_FAILED
 	ContainerNetStatus *string `json:"ContainerNetStatus,omitnil,omitempty" name:"ContainerNetStatus"`
 
-	// Sub-status of the container
-	// "AGENT_OFFLINE"       // The agent is offline.
-	// 	"NODE_DESTROYED"      // The node is terminated.
-	// 	"CONTAINER_EXITED"    // The container exited.
-	// 	"CONTAINER_DESTROYED" // The container was terminated.
-	// 	"SHARED_HOST"         // The container shares the network with the server.
-	// 	"RESOURCE_LIMIT"      // The number of resources to be isolated exceeds the limit.
-	// 	"UNKNOW"              // The reason is unknown.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Container sub-status
+	// AGENT_OFFLINE
+	// 	NODE_DESTROYED
+	// 	CONTAINER_EXITED
+	// 	"CONTAINER_DESTROYED" //Container destroyed
+	// 	"SHARED_HOST"         // Container shares network with host
+	// 	RESOURCE_LIMIT
+	// 	"UNKNOW"              // Reason unknown
 	ContainerNetSubStatus *string `json:"ContainerNetSubStatus,omitnil,omitempty" name:"ContainerNetSubStatus"`
 
-	// Container isolation operation source
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Container Isolation Operation Source
 	ContainerIsolateOperationSrc *string `json:"ContainerIsolateOperationSrc,omitnil,omitempty" name:"ContainerIsolateOperationSrc"`
 
-	// Container status
-	// `RUNNING`: Running.
-	// `PAUSED`: Paused.
-	// `STOPPED`: Stopped.
-	// `CREATED`: Created.
-	// `DESTROYED`: Terminated.
-	// `RESTARTING`: Restarting.
-	// `REMOVING`: Removing.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Container status.
+	// RUNNING: running
+	// PAUSED
+	// Stop: STOPPED
+	// CREATED
+	// DESTROYED
+	// RESTARTING
+	// Migrating: REMOVING
 	ContainerStatus *string `json:"ContainerStatus,omitnil,omitempty" name:"ContainerStatus"`
 
 	// API URL
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	JNDIUrl *string `json:"JNDIUrl,omitnil,omitempty" name:"JNDIUrl"`
 
-	// RASP details
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// rasp detail
 	RaspDetail []*RaspInfo `json:"RaspDetail,omitnil,omitempty" name:"RaspDetail"`
 
 	// Super node subnet name
@@ -31732,10 +34104,10 @@ type VulDefenceEventDetail struct {
 	// Cluster name
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-	// Namespace
+
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Workload
+
 	WorkloadType *string `json:"WorkloadType,omitnil,omitempty" name:"WorkloadType"`
 }
 
@@ -31815,20 +34187,16 @@ type VulDetailInfo struct {
 	// Vulnerability name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Vulnerability tag
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// vulnerability tag
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Vulnerability type
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	CategoryType *string `json:"CategoryType,omitnil,omitempty" name:"CategoryType"`
 
-	// Vulnerability severity
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Vulnerability threat level
 	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Vulnerability disclosure time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubmitTime *string `json:"SubmitTime,omitnil,omitempty" name:"SubmitTime"`
 
 	// Vulnerability description
@@ -31873,24 +34241,19 @@ type VulDetailInfo struct {
 	// POC ID
 	PocID *string `json:"PocID,omitnil,omitempty" name:"PocID"`
 
-	// Defense status. Valid values: `NO_DEFENDED`, `DEFENDED`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Defense Status. NO_DEFENDED: Not Defended; DEFENDED: Defended
 	DefenceStatus *string `json:"DefenceStatus,omitnil,omitempty" name:"DefenceStatus"`
 
-	// Scope of servers with exploit prevention enabled. Valid values: `MANUAL` (specified servers); `ALL` (all servers).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Vulnerability Defense Host Range. MANUAL: Selected Host Nodes; ALL: All
 	DefenceScope *string `json:"DefenceScope,omitnil,omitempty" name:"DefenceScope"`
 
-	// Number of servers with exploit prevention enabled
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of Hosts Defended Against Vulnerabilities
 	DefenceHostCount *int64 `json:"DefenceHostCount,omitnil,omitempty" name:"DefenceHostCount"`
 
-	// Number of attacks defended against
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of Attacks Defended
 	DefendedCount *int64 `json:"DefendedCount,omitnil,omitempty" name:"DefendedCount"`
 
-	// Whether it is scanned. Valid values: `NOT_SCAN` (not scanned); `SCANNED` (scanned).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Scanned. NOT_SCAN: Not Scanned; SCANNED: Scanned
 	ScanStatus *string `json:"ScanStatus,omitnil,omitempty" name:"ScanStatus"`
 }
 
@@ -31935,31 +34298,25 @@ type VulInfo struct {
 	// Vulnerability name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Vulnerability tag
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// vulnerability tag
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// CVSS V3 score
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	CVSSV3Score *float64 `json:"CVSSV3Score,omitnil,omitempty" name:"CVSSV3Score"`
 
 	// Risk level
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// CVE No.
 	CVEID *string `json:"CVEID,omitnil,omitempty" name:"CVEID"`
 
-	// Vulnerability sub-category
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Vulnerability Subtype
 	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
 
-	// First discovery time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// First detection time
 	FoundTime *string `json:"FoundTime,omitnil,omitempty" name:"FoundTime"`
 
 	// Last discovery time
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	LatestFoundTime *string `json:"LatestFoundTime,omitnil,omitempty" name:"LatestFoundTime"`
 
 	// Vulnerability ID
@@ -31968,33 +34325,32 @@ type VulInfo struct {
 	// Number of affected local images
 	LocalImageCount *int64 `json:"LocalImageCount,omitnil,omitempty" name:"LocalImageCount"`
 
-	// Number of affected containers
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Affected Container Count
 	ContainerCount *int64 `json:"ContainerCount,omitnil,omitempty" name:"ContainerCount"`
 
-	// Number of affected repository images
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Affected Repository Image Count
 	RegistryImageCount *int64 `json:"RegistryImageCount,omitnil,omitempty" name:"RegistryImageCount"`
 
-	// POC ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Vulnerability Poc ID
 	PocID *string `json:"PocID,omitnil,omitempty" name:"PocID"`
 
-	// Defense status. Valid values: `NO_DEFENDED`, `DEFENDED`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Defense Status. NO_DEFENDED: Not Defended; DEFENDED: Defended
 	DefenceStatus *string `json:"DefenceStatus,omitnil,omitempty" name:"DefenceStatus"`
 
-	// Scope of servers with exploit prevention enabled. Valid values: `MANUAL` (specified servers); `ALL` (all servers).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Vulnerability Defense Host Range. MANUAL: Selected Host Nodes; ALL: All
 	DefenceScope *string `json:"DefenceScope,omitnil,omitempty" name:"DefenceScope"`
 
-	// Number of servers with exploit prevention enabled
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of Hosts Defended Against Vulnerabilities
 	DefenceHostCount *int64 `json:"DefenceHostCount,omitnil,omitempty" name:"DefenceHostCount"`
 
-	// Number of attacks defended against
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Number of Attacks Defended
 	DefendedCount *int64 `json:"DefendedCount,omitnil,omitempty" name:"DefendedCount"`
+
+	// Number of hosts with application protection enabled for the vulnerability.
+	RaspOpenNodeCount *int64 `json:"RaspOpenNodeCount,omitnil,omitempty" name:"RaspOpenNodeCount"`
+
+	// Number of hosts with application protection disabled for the vulnerability.
+	RaspClosedNodeCount *int64 `json:"RaspClosedNodeCount,omitnil,omitempty" name:"RaspClosedNodeCount"`
 }
 
 type VulScanImageInfo struct {
@@ -32011,7 +34367,6 @@ type VulScanImageInfo struct {
 	ScanStatus *string `json:"ScanStatus,omitnil,omitempty" name:"ScanStatus"`
 
 	// Scan duration
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ScanDuration *float64 `json:"ScanDuration,omitnil,omitempty" name:"ScanDuration"`
 
 	// Number of high-risk vulnerabilities
@@ -32102,4 +34457,18 @@ type WarningRule struct {
 	// For example, if the high and medium levels indicate to enable the alert and the low level indicates to disable it, the binary value is `110`.
 	// If level control does not take effect for the alert type, pass in `1`.
 	ControlBits *string `json:"ControlBits,omitnil,omitempty" name:"ControlBits"`
+}
+
+type WhiteListRegexpExpressionInfo struct {
+	// Logic symbol
+	// AND
+	// OR
+	// NOT
+	LogicSymbol *string `json:"LogicSymbol,omitnil,omitempty" name:"LogicSymbol"`
+
+	// Matching field
+	MatchField *string `json:"MatchField,omitnil,omitempty" name:"MatchField"`
+
+	// Matching content
+	MatchContent *string `json:"MatchContent,omitnil,omitempty" name:"MatchContent"`
 }

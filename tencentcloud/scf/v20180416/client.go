@@ -1365,6 +1365,7 @@ func NewGetFunctionLogsResponse() (response *GetFunctionLogsResponse) {
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ES = "InternalError.ES"
 //  INTERNALERROR_EXCEPTION = "InternalError.Exception"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
 //  INTERNALERROR_SYSTEM = "InternalError.System"
 //  INVALIDPARAMETER_CLS = "InvalidParameter.Cls"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
@@ -1384,6 +1385,7 @@ func NewGetFunctionLogsResponse() (response *GetFunctionLogsResponse) {
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 //  RESOURCENOTFOUND_ROLECHECK = "ResourceNotFound.RoleCheck"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_NOTSUPPORTREGION = "UnsupportedOperation.NotSupportRegion"
 func (c *Client) GetFunctionLogs(request *GetFunctionLogsRequest) (response *GetFunctionLogsResponse, err error) {
     return c.GetFunctionLogsWithContext(context.Background(), request)
@@ -1400,6 +1402,7 @@ func (c *Client) GetFunctionLogs(request *GetFunctionLogsRequest) (response *Get
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ES = "InternalError.ES"
 //  INTERNALERROR_EXCEPTION = "InternalError.Exception"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
 //  INTERNALERROR_SYSTEM = "InternalError.System"
 //  INVALIDPARAMETER_CLS = "InvalidParameter.Cls"
 //  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
@@ -1419,6 +1422,7 @@ func (c *Client) GetFunctionLogs(request *GetFunctionLogsRequest) (response *Get
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
 //  RESOURCENOTFOUND_ROLECHECK = "ResourceNotFound.RoleCheck"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_NOTSUPPORTREGION = "UnsupportedOperation.NotSupportRegion"
 func (c *Client) GetFunctionLogsWithContext(ctx context.Context, request *GetFunctionLogsRequest) (response *GetFunctionLogsResponse, err error) {
     if request == nil {

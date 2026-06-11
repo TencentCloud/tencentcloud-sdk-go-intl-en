@@ -4754,9 +4754,9 @@ type VendorHardware struct {
 	LastOnlineTime *string `json:"LastOnlineTime,omitnil,omitempty" name:"LastOnlineTime"`
 
 	// Authorization validity period
-	// Monthly authorization
+	// 0: Monthly authorization
 	// 1: Permanent license
-	// -Unknown
+	// -1: Unknown
 	LicensePayMode *int64 `json:"LicensePayMode,omitnil,omitempty" name:"LicensePayMode"`
 
 	// Payer
