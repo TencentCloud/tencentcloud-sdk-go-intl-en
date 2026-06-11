@@ -125,7 +125,7 @@ type AllocationDetail struct {
 	// Billing mode code
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Billing mode: Resource billing mode, which can be monthly subscription or pay-as-you-go.
+	// Billing mode: Resource billing mode, which can be yearly/monthly subscriptionor pay-as-you-go.
 	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
 
 	// Project ID
@@ -794,7 +794,7 @@ type AllocationSummaryByItem struct {
 	// Billing mode code
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Billing mode: Resource billing mode, which can be monthly subscription or pay-as-you-go.
+	// Billing mode: Resource billing mode, which can be  yearly/monthly subscriptionor pay-as-you-go.
 	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
 
 	// Transaction type code
@@ -1026,7 +1026,7 @@ type AllocationSummaryByResource struct {
 	// Billing mode code
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Billing mode: Resource billing mode, which can be monthly subscription or pay-as-you-go.
+	// Billing mode: Resource billing mode, which can be  yearly/monthly subscriptionor pay-as-you-go.
 	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
 
 	// Transaction type code
@@ -1662,7 +1662,7 @@ type BillDistributionResourceSummary struct {
 	// Subproduct name: The subcategory of a Tencent Cloud product purchased by the user, such as CVM - Standard S1.
 	ProductCodeName *string `json:"ProductCodeName,omitnil,omitempty" name:"ProductCodeName"`
 
-	// Billing mode: The billing mode, which can be monthly subscription or pay-as-you-go.
+	// Billing mode: The billing mode, which can be yearly/monthly subscription or pay-as-you-go.
 	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
 
 	// Project Name: The project to which a resource belongs, which is user-designated. If a resource has not been assigned to a project, it will automatically belong to the default project.
@@ -1680,10 +1680,10 @@ type BillDistributionResourceSummary struct {
 	// Instance name: The resource name set by the user in the console. If it is not set, it will be empty by default.
 	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
 
-	// Transaction type, which can be monthly subscription purchase, monthly subscription renewal, pay-as-you-go deduction, etc.
+	// Transaction type, which can be yearly/monthly subscription purchase, yearly/monthly subscription renewal, pay-as-you-go deduction, etc.
 	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
 
-	// Order ID: The ID of a monthly subscription order.
+	// Order ID: The ID of a yearly/monthly subscription order.
 	OrderId *string `json:"OrderId,omitnil,omitempty" name:"OrderId"`
 
 	// Deduction time: The settlement cost deduction time.
@@ -1803,7 +1803,7 @@ type BillPayMode struct {
 	// Billing mode code
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Billing mode: Resource billing mode, which can be monthly subscription or pay-as-you-go.
+	// Billing mode: Resource billing mode, which can be yearly/monthly subscription or pay-as-you-go.
 	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
 }
 
@@ -8697,7 +8697,7 @@ type DistributionBillDetail struct {
 	// Subproduct name: The subcategory of a Tencent Cloud product purchased by the user, such as CVM - Standard S1.
 	ProductCodeName *string `json:"ProductCodeName,omitnil,omitempty" name:"ProductCodeName"`
 
-	// Billing mode: The billing mode, which can be monthly subscription or pay-as-you-go.
+	// Billing mode: The billing mode, which can be yearly/monthly subscriptionor pay-as-you-go.
 	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
 
 	// Project Name: The project to which a resource belongs, which is user-designated. If a resource has not been assigned to a project, it will automatically belong to the default project.
@@ -8715,10 +8715,10 @@ type DistributionBillDetail struct {
 	// Instance name: The resource name set by the user in the console. If it is not set, it will be empty by default.
 	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
 
-	// Transaction type, which can be monthly subscription purchase, monthly subscription renewal, pay-as-you-go deduction, etc.
+	// Transaction type, which can be yearly/monthly subscription purchase, yearly/monthly subscription renewal, pay-as-you-go deduction, etc.
 	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
 
-	// Order ID: The ID of a monthly subscription order.
+	// Order ID: The ID of a yearly/monthly subscription order.
 	OrderId *string `json:"OrderId,omitnil,omitempty" name:"OrderId"`
 
 	// Transaction ID: The ID of a settlement bill.
@@ -8890,7 +8890,7 @@ type GatherResourceSummary struct {
 	// Billing mode code
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Billing mode: Resource billing mode, which can be monthly subscription or pay-as-you-go.
+	// Billing mode: Resource billing mode, which can be yearly/monthly subscription or pay-as-you-go.
 	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
 
 	// Transaction type code

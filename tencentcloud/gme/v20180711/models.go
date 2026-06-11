@@ -272,6 +272,9 @@ type DeleteRoomMemberRequestParams struct {
 
 	// List of the members to remove
 	Uids []*string `json:"Uids,omitnil,omitempty" name:"Uids"`
+
+	// List of users to exclude (string type)
+	StrUids []*string `json:"StrUids,omitnil,omitempty" name:"StrUids"`
 }
 
 type DeleteRoomMemberRequest struct {
@@ -288,6 +291,9 @@ type DeleteRoomMemberRequest struct {
 
 	// List of the members to remove
 	Uids []*string `json:"Uids,omitnil,omitempty" name:"Uids"`
+
+	// List of users to exclude (string type)
+	StrUids []*string `json:"StrUids,omitnil,omitempty" name:"StrUids"`
 }
 
 func (r *DeleteRoomMemberRequest) ToJsonString() string {
@@ -306,6 +312,7 @@ func (r *DeleteRoomMemberRequest) FromJsonString(s string) error {
 	delete(f, "DeleteType")
 	delete(f, "BizId")
 	delete(f, "Uids")
+	delete(f, "StrUids")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRoomMemberRequest has unknown keys!", "")
 	}
@@ -837,13 +844,15 @@ type RecordInfo struct {
 }
 
 type SceneInfo struct {
-
+	// RealTime: Real-time Voice Analysis; 
+	// VoiceMessage: Voice Message; 
+	// GMECloudApi: GME Cloud API; 
 	SceneId *string `json:"SceneId,omitnil,omitempty" name:"SceneId"`
 
-
+	// Switch state, true for on, false for off.
 	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// callback URL
 	CallbackUrl *string `json:"CallbackUrl,omitnil,omitempty" name:"CallbackUrl"`
 }
 

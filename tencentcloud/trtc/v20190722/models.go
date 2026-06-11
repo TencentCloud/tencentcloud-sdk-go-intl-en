@@ -192,6 +192,18 @@ type AsrParam struct {
 
 	// vad far-field voice suppression capacity (does not impact asr recognition accuracy), range [0, 3], default is 0. Recommended setting is 2 for better far-field voice suppression.
 	VadLevel *uint64 `json:"VadLevel,omitnil,omitempty" name:"VadLevel"`
+
+	// Whether to filter out dirty words (currently only support basic language engine and standard language engine). Range: [0, 2]. Default value: 0.
+	// 0: Not filtering; 1: Filter out dirty words; 2: Replace dirty words with "*".
+	FilterDirty *uint64 `json:"FilterDirty,omitnil,omitempty" name:"FilterDirty"`
+
+	// Whether to filter filler words (currently only support basic language engine and standard language engine). Range:  [0, 2]. Default value 0.
+	// 0:No filtering; 1: Partial filtering; 2: Strict filtering.
+	FilterModal *uint64 `json:"FilterModal,omitnil,omitempty" name:"FilterModal"`
+
+	// Whether to filter periods at the end of sentences (currently only support basic language engine and standard language engine), range [0, 1], default value 0.
+	// 0: Do not filter out periods at the end of sentences; 1: Filter out periods at the end of sentences.
+	FilterPunc *uint64 `json:"FilterPunc,omitnil,omitempty" name:"FilterPunc"`
 }
 
 type AudioEncode struct {
@@ -783,45 +795,51 @@ func (r *CreateCloudSliceTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCloudTranscriptionRequestParams struct {
-	// [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid) of TRTC, which is the same as the SdkAppId corresponding to the transcribed room.
+	// <p>The <a href="https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid">SdkAppId</a> of TRTC is the same as the SdkAppId corresponding to the transcribe room.</p>
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#roomid) of TRTC, which is the RoomId corresponding to the transcribed TRTC room. Note: The room ID type defaults to integer. If the room ID type is string, specify it via RoomIdType.
+	// <p>The <a href="https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#roomid">RoomId</a> of TRTC, which is the RoomId corresponding to the transcribed TRTC room. Note: The room ID type defaults to integer. If the room ID type is string, specify it through RoomIdType.</p>
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
-	// Room information RoomType must be the same as the RoomId type of the corresponding transcribed room. 0 indicates an integer type room ID, and 1 indicates a string Room Number.
+	// <p>The room information RoomType must be identical to the data type of the RoomId corresponding to the transcribed room. 0 indicates an integer room number, and 1 indicates a string Room Number.</p>
 	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
 
-	// Parameters for transcribe service to join TRTC room.
+	// <p>Parameters for the transcribe service to join TRTC room.</p>
 	TranscriptionParam *TranscriptionParam `json:"TranscriptionParam,omitnil,omitempty" name:"TranscriptionParam"`
 
-	// Parameters used by the ASR transcribe service.
+	// <p>Parameters used by the ASR transcribe service.</p>
 	AsrParam *AsrParam `json:"AsrParam,omitnil,omitempty" name:"AsrParam"`
 
-	// Translation parameters used for transcription.
+	// <p>Parameters used to transcribe the translation service.</p>
 	TranslationParam *TranslationParam `json:"TranslationParam,omitnil,omitempty" name:"TranslationParam"`
+
+	// <p>Parameters used by the TTS transcribe service.</p>
+	TTSParam []*TTSParam `json:"TTSParam,omitnil,omitempty" name:"TTSParam"`
 }
 
 type CreateCloudTranscriptionRequest struct {
 	*tchttp.BaseRequest
 	
-	// [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid) of TRTC, which is the same as the SdkAppId corresponding to the transcribed room.
+	// <p>The <a href="https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid">SdkAppId</a> of TRTC is the same as the SdkAppId corresponding to the transcribe room.</p>
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// [RoomId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#roomid) of TRTC, which is the RoomId corresponding to the transcribed TRTC room. Note: The room ID type defaults to integer. If the room ID type is string, specify it via RoomIdType.
+	// <p>The <a href="https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#roomid">RoomId</a> of TRTC, which is the RoomId corresponding to the transcribed TRTC room. Note: The room ID type defaults to integer. If the room ID type is string, specify it through RoomIdType.</p>
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
-	// Room information RoomType must be the same as the RoomId type of the corresponding transcribed room. 0 indicates an integer type room ID, and 1 indicates a string Room Number.
+	// <p>The room information RoomType must be identical to the data type of the RoomId corresponding to the transcribed room. 0 indicates an integer room number, and 1 indicates a string Room Number.</p>
 	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
 
-	// Parameters for transcribe service to join TRTC room.
+	// <p>Parameters for the transcribe service to join TRTC room.</p>
 	TranscriptionParam *TranscriptionParam `json:"TranscriptionParam,omitnil,omitempty" name:"TranscriptionParam"`
 
-	// Parameters used by the ASR transcribe service.
+	// <p>Parameters used by the ASR transcribe service.</p>
 	AsrParam *AsrParam `json:"AsrParam,omitnil,omitempty" name:"AsrParam"`
 
-	// Translation parameters used for transcription.
+	// <p>Parameters used to transcribe the translation service.</p>
 	TranslationParam *TranslationParam `json:"TranslationParam,omitnil,omitempty" name:"TranslationParam"`
+
+	// <p>Parameters used by the TTS transcribe service.</p>
+	TTSParam []*TTSParam `json:"TTSParam,omitnil,omitempty" name:"TTSParam"`
 }
 
 func (r *CreateCloudTranscriptionRequest) ToJsonString() string {
@@ -842,6 +860,7 @@ func (r *CreateCloudTranscriptionRequest) FromJsonString(s string) error {
 	delete(f, "TranscriptionParam")
 	delete(f, "AsrParam")
 	delete(f, "TranslationParam")
+	delete(f, "TTSParam")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCloudTranscriptionRequest has unknown keys!", "")
 	}
@@ -850,7 +869,7 @@ func (r *CreateCloudTranscriptionRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCloudTranscriptionResponseParams struct {
-	// A unique identifier for the transcription task, generated by the Tencent Cloud server. The TaskID parameter is required for all subsequent query and stop requests.
+	// <p>A unique identifier for the transcription task, generated by the Tencent Cloud server. The TaskID parameter is required for all subsequent query and stop requests.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4275,49 +4294,43 @@ type STTConfig struct {
 	// 
 	// Supported languages for different speech to text package versions are as follows:.
 	// 
-	// Basic language engine:.
-	// -"zh": chinese (simplified).
-	// -`zh-TW`: chinese (traditional).
-	// -"En": english.
-	// -"16k_zh_edu": chinese education.
-	// -"16k_zh_medical": medical chinese.
-	// -"16k_zh_court": chinese court.
-	// 
-	// **Standard language engine:**.
-	// -"8k_zh_large": engine (large model version) for telecommunication. the current model supports chinese and other language recognition, has a large number of parameters, and features language model performance enhancement. it greatly improves recognition accuracy for telephone audio in various scenarios and chinese dialects.
-	// -"16k_zh_large": large model engine for mandarin, chinese dialects, and english. the current model supports language recognition for chinese, english, and multiple chinese dialects. it has a large number of parameters and enhanced language model performance, targeting low-quality audio such as loud noise, strong echo, low voice volume, and voice from far away with greatly improved recognition accuracy.
-	// -"16k_multi_lang": multilingual large model engine. the current model simultaneously supports english, japanese, korean, arabic, filipino, french, hindi, indonesian, malay, portuguese, spanish, thai, turkish, vietnamese, and german. it achieves auto-identification of 15 languages at the sentence or paragraph level.
-	// -"16k_zh_en": chinese-english large model engine. the current model supports chinese and english recognition at the same time, has a large number of parameters, and features language model performance enhancement. it greatly improves recognition accuracy against low-quality audio such as loud noise, echo, low voice volume, and voice from far away.
-	// 
-	// **Advanced language engine:**.
-	// -"zh-dialect": chinese dialect.
-	// -"zh-yue": cantonese in china.
-	// -"Vi": "vietnamese.".
-	// -"Ja": "japanese.".
-	// -"Ko": "korean.".
-	// -"id": "indonesian".
-	// -"Th": thai.
-	// -"pt": portuguese.
-	// -"tr": "turkish.".
-	// -"Ar": "arabic".
-	// -"es": "spanish".
-	// -"Hi": "hindi".
-	// -"Fr": "french.".
-	// -"ms": malay.
-	// -"Fil": filipino.
-	// -"de": german.
-	// -`It`: italian.
-	// -"Ru": russian.
-	// -"sv": "swedish.".
-	// -"Da": "danish.".
-	// -"No": norwegian.
+	// - "zh": chinese (simplified).
+	// - "zh-TW": chinese (traditional).
+	// - "en": english.
+	// - "zh-yue": cantonese in china.
+	// - "vi": "vietnamese.".
+	// - "ja": "japanese.".
+	// - "ko": "korean.".
+	// - "id": "indonesian".
+	// - "th": thai.
+	// - "pt": portuguese.
+	// - "tr": "turkish.".
+	// - "ar": "arabic".
+	// - "es": "spanish".
+	// - "hi": "hindi".
+	// - "ft": "french.".
+	// - "ms": malay.
+	// - "fil": filipino.
+	// - "de": german.
+	// -`it`: italian.
+	// - "ru": russian.
+	// - "sv": "swedish.".
+	// - "da": "danish.".
+	// - "no": norwegian.
+	// - "pl": polski.
+	// -"af-ZA": afrikaans.
+	// - "nl-NL": dutch.
+	// - "nl-BE": flemish.
+	// - "uz": uzbek.
+	// - "hu": hungarian.
+	// - "he": hebrew.
+	// - "ur": urdu.
 	// 
 	// **Note**:.
 	// If the language you need is not available, contact our technical staff.
 	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
 
 	// **Fuzzy recognition is an advanced edition capacity, charged by default as the advanced edition.**.
-	// Note: does not support entering "zh-dialect", "16k_zh_edu", "16k_zh_medical", "16k_zh_court", "8k_zh_large", "16k_zh_large", "16k_multi_lang", "16k_zh_en".
 	AlternativeLanguage []*string `json:"AlternativeLanguage,omitnil,omitempty" name:"AlternativeLanguage"`
 
 	// Custom parameter. contact for background usage.
@@ -5595,6 +5608,37 @@ type TTSConfig struct {
 	Volume *float64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 }
 
+type TTSParam struct {
+	// <p>TTS model</p>
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// <p>TTS language must be in the TargetLang list of TranslationParam.</p>
+	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
+
+	// <p>The user requesting TTS playback. They must be on the subscription allowlist and not on the blocklist.</p>
+	TargetUser *TranscriptionUserInfoParams `json:"TargetUser,omitnil,omitempty" name:"TargetUser"`
+
+	// <p>The robot user that pushes TTS audio back into the room.</p>
+	TTSRobotUser *TranscriptionUserInfoParams `json:"TTSRobotUser,omitnil,omitempty" name:"TTSRobotUser"`
+
+	// <p>TTS configuration parameters.</p>
+	Voice *TTSVoice `json:"Voice,omitnil,omitempty" name:"Voice"`
+}
+
+type TTSVoice struct {
+	// <p>Voice ID.</p>
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// <p>Speech speed. 0.5 for half speed, 2.0 for 2x speed, 1.0 for normal speed. Value range: [0.5, 2.0]. Default: 1.0.</p>
+	Speed *float64 `json:"Speed,omitnil,omitempty" name:"Speed"`
+
+	// <p>Audio volume. 0 is mute, 10 is maximum volume. It is recommended to keep the default value to 1.0. Value range: [0, 10]. Default: 1.0.</p>
+	Volume *float64 `json:"Volume,omitnil,omitempty" name:"Volume"`
+
+	// <p>Pitch. Negative value makes the sound low and deep, positive value makes it sharper. 0 indicates the original pitch. Value range: [-12, 12]. Default 0.</p>
+	Pitch *int64 `json:"Pitch,omitnil,omitempty" name:"Pitch"`
+}
+
 type TencentVod struct {
 	// Subsequent media task processing operations allow automatic task initiation after media upload is completed. the parameter value is the task flow template name. VOD (video on demand) supports creating task flow templates and template naming.
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
@@ -5626,12 +5670,28 @@ type TencentVod struct {
 	UserDefineRecordId *string `json:"UserDefineRecordId,omitnil,omitempty" name:"UserDefineRecordId"`
 }
 
+type TermPair struct {
+	// <p>Source terms.</p>
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// <p>Translated terms in target language.</p>
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+}
+
 type Terminology struct {
 	// Source terminology.
 	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
 
 	// Terminology translation result.
 	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+}
+
+type TerminologyItem struct {
+	// <p>Target language.</p>
+	TargetLang *string `json:"TargetLang,omitnil,omitempty" name:"TargetLang"`
+
+	// <p>Terminology configuration.</p>
+	Terminology []*TermPair `json:"Terminology,omitnil,omitempty" name:"Terminology"`
 }
 
 // Predefined struct for user
@@ -5894,7 +5954,8 @@ type TranscriptionParam struct {
 	// - Range: 5 - 86400 (24 hours)
 	MaxIdleTime *uint64 `json:"MaxIdleTime,omitnil,omitempty" name:"MaxIdleTime"`
 
-	// Controls whether the custom data channel is enabled. Accepted values: 0 (disabled) or 1 (enabled). Defaults to 0 if omitted.
+	// Custom data mode: 0 indicates disabled, 1 indicates enabled.
+	// Leave blank defaults to 0, meaning custom data is disabled.
 	SendCustomMode *uint64 `json:"SendCustomMode,omitnil,omitempty" name:"SendCustomMode"`
 }
 
@@ -5941,26 +6002,11 @@ type TranslationConfig struct {
 }
 
 type TranslationParam struct {
-	// Target language for translation. Example: ["en", "ja"].
-	// 
-	// Supported target languages:
-	// 
-	// - <code>"zh"</code>: Chinese
-	// - <code>"en"</code>: English
-	// - <code>"vi"</code>: Vietnamese
-	// - <code>"ja"</code>: Japanese
-	// - <code>"ko"</code>: Korean
-	// - <code>"id"</code>: Indonesian
-	// - <code>"th"</code>: Thai
-	// - <code>"pt"</code>: Portuguese
-	// - <code>"ar"</code>: Arabic
-	// - <code>"es"</code>: Spanish
-	// - <code>"fr"</code>: French
-	// - <code>"ms"</code>: Malay
-	// - <code>"de"</code>: German
-	// - <code>"it"</code>: Italian
-	// - <code>"ru"</code>: Russian
+	// <p>Target language for translation, example value ["en", "ja"]. Target language list [Chinese "zh", English "en", Vietnamese "vi", Japanese "ja", Korean "ko", Indonesian "id", Thai "th", Portuguese "pt", Arabic "ar", Spanish "es", French "fr", Malay "ms", German "de", Italian "it", Russian "ru"].</p>
 	TargetLang []*string `json:"TargetLang,omitnil,omitempty" name:"TargetLang"`
+
+	// <p>Glossary configuration.</p>
+	Terminologies []*TerminologyItem `json:"Terminologies,omitnil,omitempty" name:"Terminologies"`
 }
 
 type TrtcUsage struct {

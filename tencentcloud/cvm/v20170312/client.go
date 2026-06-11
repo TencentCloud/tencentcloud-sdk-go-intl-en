@@ -861,7 +861,7 @@ func NewCreateLaunchTemplateResponse() (response *CreateLaunchTemplateResponse) 
 //
 // 
 //
-// This API is used to create an instance launch template. After the initial creation of the instance template, its template version is the default version 1. A new version can be created using CreateLaunchTemplateVersion (https://intl.cloud.tencent.com/document/product/213/66326?from_cn_redirect=1), and the version number will increment. By default, when specifying an instance launch template in RunInstances (https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1), if the template version number is not specified, the default version will be used.
+// This API is used to create an instance launch template. After the initial creation of the instance template, its template version is the default version 1. A new version can be created using [CreateLaunchTemplateVersion](https://www.tencentcloud.com/document/api/213/45361), and the version number will increment. By default, when specifying an instance launch template in [RunInstances](https://www.tencentcloud.com/document/api/213/33237), if the template version number is not specified, the default version will be used.
 //
 // error code that may be returned:
 //  ACCOUNTQUALIFICATIONRESTRICTIONS = "AccountQualificationRestrictions"
@@ -967,7 +967,7 @@ func (c *Client) CreateLaunchTemplate(request *CreateLaunchTemplateRequest) (res
 //
 // 
 //
-// This API is used to create an instance launch template. After the initial creation of the instance template, its template version is the default version 1. A new version can be created using CreateLaunchTemplateVersion (https://intl.cloud.tencent.com/document/product/213/66326?from_cn_redirect=1), and the version number will increment. By default, when specifying an instance launch template in RunInstances (https://intl.cloud.tencent.com/document/product/213/15730?from_cn_redirect=1), if the template version number is not specified, the default version will be used.
+// This API is used to create an instance launch template. After the initial creation of the instance template, its template version is the default version 1. A new version can be created using [CreateLaunchTemplateVersion](https://www.tencentcloud.com/document/api/213/45361), and the version number will increment. By default, when specifying an instance launch template in [RunInstances](https://www.tencentcloud.com/document/api/213/33237), if the template version number is not specified, the default version will be used.
 //
 // error code that may be returned:
 //  ACCOUNTQUALIFICATIONRESTRICTIONS = "AccountQualificationRestrictions"
@@ -1843,7 +1843,7 @@ func NewDescribeDisasterRecoverGroupQuotaResponse() (response *DescribeDisasterR
 }
 
 // DescribeDisasterRecoverGroupQuota
-// This API is used to query the quota of [spread placement groups](https://intl.cloud.tencent.com/document/product/213/15486?from_cn_redirect=1).
+// This API is used to query the quota of [spread placement groups](https://www.tencentcloud.com/document/product/213/15486).
 //
 // error code that may be returned:
 //  ACCOUNTQUALIFICATIONRESTRICTIONS = "AccountQualificationRestrictions"
@@ -1865,7 +1865,7 @@ func (c *Client) DescribeDisasterRecoverGroupQuota(request *DescribeDisasterReco
 }
 
 // DescribeDisasterRecoverGroupQuota
-// This API is used to query the quota of [spread placement groups](https://intl.cloud.tencent.com/document/product/213/15486?from_cn_redirect=1).
+// This API is used to query the quota of [spread placement groups](https://www.tencentcloud.com/document/product/213/15486).
 //
 // error code that may be returned:
 //  ACCOUNTQUALIFICATIONRESTRICTIONS = "AccountQualificationRestrictions"
@@ -6549,7 +6549,7 @@ func NewRenewInstancesResponse() (response *RenewInstancesResponse) {
 //
 // This API is used to operate on monthly subscription instances only.
 //
-// This API is used to ensure your account balance is sufficient for renewal. You can check the balance via the DescribeAccountBalance API (https://www.tencentcloud.com/document/product/555/20253?from_cn_redirect=1).
+// This API is used to ensure your account balance is sufficient for renewal. You can check the balance via the [DescribeAccountBalance API](https://www.tencentcloud.com/document/api/555/50284).
 //
 // * You can query the result of the instance operation by calling the API [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258). If the latest operation status (LatestOperationState) of the instance is **SUCCESS**, the operation is successful.
 //
@@ -6593,7 +6593,7 @@ func (c *Client) RenewInstances(request *RenewInstancesRequest) (response *Renew
 //
 // This API is used to operate on monthly subscription instances only.
 //
-// This API is used to ensure your account balance is sufficient for renewal. You can check the balance via the DescribeAccountBalance API (https://www.tencentcloud.com/document/product/555/20253?from_cn_redirect=1).
+// This API is used to ensure your account balance is sufficient for renewal. You can check the balance via the [DescribeAccountBalance API](https://www.tencentcloud.com/document/api/555/50284).
 //
 // * You can query the result of the instance operation by calling the API [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258). If the latest operation status (LatestOperationState) of the instance is **SUCCESS**, the operation is successful.
 //
@@ -7351,7 +7351,7 @@ func NewResizeInstanceDisksResponse() (response *ResizeInstanceDisksResponse) {
 //
 // 
 //
-// * Currently, you can only use the API to expand non-elastic data disks whose [disk type](https://www.tencentcloud.com/document/product/213/15753) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`. You can use [`DescribeDisks`](https://intl.cloud.tencent.com/document/api/362/16315?from_cn_redirect=1) to check whether a disk is elastic. If the `Portable` field in the response is `false`, it means that the disk is non-elastic.
+// * Currently, you can only use the API to expand non-elastic data disks whose [disk type](https://www.tencentcloud.com/document/product/213/15753) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`. You can use [`DescribeDisks`](https://www.tencentcloud.com/document/api/362/16315) to check whether a disk is elastic. If the `Portable` field in the response is `false`, it means that the disk is non-elastic.
 //
 // * Currently, this API does not support [CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) instances.
 //
@@ -7402,7 +7402,7 @@ func (c *Client) ResizeInstanceDisks(request *ResizeInstanceDisksRequest) (respo
 //
 // 
 //
-// * Currently, you can only use the API to expand non-elastic data disks whose [disk type](https://www.tencentcloud.com/document/product/213/15753) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`. You can use [`DescribeDisks`](https://intl.cloud.tencent.com/document/api/362/16315?from_cn_redirect=1) to check whether a disk is elastic. If the `Portable` field in the response is `false`, it means that the disk is non-elastic.
+// * Currently, you can only use the API to expand non-elastic data disks whose [disk type](https://www.tencentcloud.com/document/product/213/15753) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`. You can use [`DescribeDisks`](https://www.tencentcloud.com/document/api/362/16315) to check whether a disk is elastic. If the `Portable` field in the response is `false`, it means that the disk is non-elastic.
 //
 // * Currently, this API does not support [CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) instances.
 //

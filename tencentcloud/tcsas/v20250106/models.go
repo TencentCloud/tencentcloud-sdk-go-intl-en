@@ -1380,6 +1380,21 @@ type CreateMNGVersionRequestParams struct {
 
 	// <p>Version description.</p>
 	MNPVersionIntro *string `json:"MNPVersionIntro,omitnil,omitempty" name:"MNPVersionIntro"`
+
+	// <p>Version type. Valid values: 1: Debug; 2: Development. Default value: 2.</p>
+	VersionType *int64 `json:"VersionType,omitnil,omitempty" name:"VersionType"`
+
+	// <p>Compilation condition.</p>
+	CompileCondition *string `json:"CompileCondition,omitnil,omitempty" name:"CompileCondition"`
+
+	// <p>Compilation configuration.</p>
+	CompileConfig *string `json:"CompileConfig,omitnil,omitempty" name:"CompileConfig"`
+
+	// <p>CI/CD key ID.</p>
+	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
+
+	// <p>Internal file URL.</p>
+	FileInnerUrl *string `json:"FileInnerUrl,omitnil,omitempty" name:"FileInnerUrl"`
 }
 
 type CreateMNGVersionRequest struct {
@@ -1399,6 +1414,21 @@ type CreateMNGVersionRequest struct {
 
 	// <p>Version description.</p>
 	MNPVersionIntro *string `json:"MNPVersionIntro,omitnil,omitempty" name:"MNPVersionIntro"`
+
+	// <p>Version type. Valid values: 1: Debug; 2: Development. Default value: 2.</p>
+	VersionType *int64 `json:"VersionType,omitnil,omitempty" name:"VersionType"`
+
+	// <p>Compilation condition.</p>
+	CompileCondition *string `json:"CompileCondition,omitnil,omitempty" name:"CompileCondition"`
+
+	// <p>Compilation configuration.</p>
+	CompileConfig *string `json:"CompileConfig,omitnil,omitempty" name:"CompileConfig"`
+
+	// <p>CI/CD key ID.</p>
+	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
+
+	// <p>Internal file URL.</p>
+	FileInnerUrl *string `json:"FileInnerUrl,omitnil,omitempty" name:"FileInnerUrl"`
 }
 
 func (r *CreateMNGVersionRequest) ToJsonString() string {
@@ -1418,6 +1448,11 @@ func (r *CreateMNGVersionRequest) FromJsonString(s string) error {
 	delete(f, "FileUrl")
 	delete(f, "PlatformId")
 	delete(f, "MNPVersionIntro")
+	delete(f, "VersionType")
+	delete(f, "CompileCondition")
+	delete(f, "CompileConfig")
+	delete(f, "PipelineId")
+	delete(f, "FileInnerUrl")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMNGVersionRequest has unknown keys!", "")
 	}
@@ -1787,6 +1822,9 @@ type CreateMNPSecretKeyRequestParams struct {
 
 	// <p>Mini program appid.</p>
 	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
+
+	// <p>CI/CD key ID.</p>
+	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
 }
 
 type CreateMNPSecretKeyRequest struct {
@@ -1797,6 +1835,9 @@ type CreateMNPSecretKeyRequest struct {
 
 	// <p>Mini program appid.</p>
 	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
+
+	// <p>CI/CD key ID.</p>
+	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
 }
 
 func (r *CreateMNPSecretKeyRequest) ToJsonString() string {
@@ -1813,6 +1854,7 @@ func (r *CreateMNPSecretKeyRequest) FromJsonString(s string) error {
 	}
 	delete(f, "PlatformId")
 	delete(f, "MNPId")
+	delete(f, "PipelineId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMNPSecretKeyRequest has unknown keys!", "")
 	}
@@ -2032,6 +2074,21 @@ type CreateMNPVersionRequestParams struct {
 
 	// <p>Version description.</p>
 	MNPVersionIntro *string `json:"MNPVersionIntro,omitnil,omitempty" name:"MNPVersionIntro"`
+
+	// <p>Version type. Valid values: 1: Debug; 2: Development. Default value: 2.</p>
+	VersionType *int64 `json:"VersionType,omitnil,omitempty" name:"VersionType"`
+
+	// <p>Compilation condition.</p>
+	CompileCondition *string `json:"CompileCondition,omitnil,omitempty" name:"CompileCondition"`
+
+	// <p>Compilation configuration.</p>
+	CompileConfig *string `json:"CompileConfig,omitnil,omitempty" name:"CompileConfig"`
+
+	// <p>CI/CD key ID.</p>
+	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
+
+	// <p>Internal file URL.</p>
+	FileInnerUrl *string `json:"FileInnerUrl,omitnil,omitempty" name:"FileInnerUrl"`
 }
 
 type CreateMNPVersionRequest struct {
@@ -2051,6 +2108,21 @@ type CreateMNPVersionRequest struct {
 
 	// <p>Version description.</p>
 	MNPVersionIntro *string `json:"MNPVersionIntro,omitnil,omitempty" name:"MNPVersionIntro"`
+
+	// <p>Version type. Valid values: 1: Debug; 2: Development. Default value: 2.</p>
+	VersionType *int64 `json:"VersionType,omitnil,omitempty" name:"VersionType"`
+
+	// <p>Compilation condition.</p>
+	CompileCondition *string `json:"CompileCondition,omitnil,omitempty" name:"CompileCondition"`
+
+	// <p>Compilation configuration.</p>
+	CompileConfig *string `json:"CompileConfig,omitnil,omitempty" name:"CompileConfig"`
+
+	// <p>CI/CD key ID.</p>
+	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
+
+	// <p>Internal file URL.</p>
+	FileInnerUrl *string `json:"FileInnerUrl,omitnil,omitempty" name:"FileInnerUrl"`
 }
 
 func (r *CreateMNPVersionRequest) ToJsonString() string {
@@ -2070,6 +2142,11 @@ func (r *CreateMNPVersionRequest) FromJsonString(s string) error {
 	delete(f, "FileUrl")
 	delete(f, "PlatformId")
 	delete(f, "MNPVersionIntro")
+	delete(f, "VersionType")
+	delete(f, "CompileCondition")
+	delete(f, "CompileConfig")
+	delete(f, "PipelineId")
+	delete(f, "FileInnerUrl")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMNPVersionRequest has unknown keys!", "")
 	}
@@ -7268,6 +7345,9 @@ type DescribeMNGVersionRequestParams struct {
 
 	// <p>Platform ID.</p>
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>CI/CD key ID.</p>
+	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
 }
 
 type DescribeMNGVersionRequest struct {
@@ -7278,6 +7358,9 @@ type DescribeMNGVersionRequest struct {
 
 	// <p>Platform ID.</p>
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>CI/CD key ID.</p>
+	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
 }
 
 func (r *DescribeMNGVersionRequest) ToJsonString() string {
@@ -7294,6 +7377,7 @@ func (r *DescribeMNGVersionRequest) FromJsonString(s string) error {
 	}
 	delete(f, "BusinessId")
 	delete(f, "PlatformId")
+	delete(f, "PipelineId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMNGVersionRequest has unknown keys!", "")
 	}
@@ -7315,6 +7399,15 @@ type DescribeMNGVersionResp struct {
 
 	// <p>Mini game version ID (returned upon successful compilation).</p>
 	MNPVersionId *int64 `json:"MNPVersionId,omitnil,omitempty" name:"MNPVersionId"`
+
+	// <p>QR code expiration time.</p>
+	ExpireTime *int64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// <p>Version QR code.</p>
+	QRCode *string `json:"QRCode,omitnil,omitempty" name:"QRCode"`
+
+	// <p>Compilation package information.</p>
+	SubPackageInfos []*MNPVersionSubPackageInfo `json:"SubPackageInfos,omitnil,omitempty" name:"SubPackageInfos"`
 }
 
 // Predefined struct for user
@@ -9926,6 +10019,9 @@ type DescribeMNPVersionRequestParams struct {
 
 	// <p>Platform ID.</p>
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>CI/CD key ID.</p>
+	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
 }
 
 type DescribeMNPVersionRequest struct {
@@ -9936,6 +10032,9 @@ type DescribeMNPVersionRequest struct {
 
 	// <p>Platform ID.</p>
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>CI/CD key ID.</p>
+	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
 }
 
 func (r *DescribeMNPVersionRequest) ToJsonString() string {
@@ -9952,6 +10051,7 @@ func (r *DescribeMNPVersionRequest) FromJsonString(s string) error {
 	}
 	delete(f, "BusinessId")
 	delete(f, "PlatformId")
+	delete(f, "PipelineId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMNPVersionRequest has unknown keys!", "")
 	}
@@ -9973,6 +10073,15 @@ type DescribeMNPVersionResp struct {
 
 	// <p>Mini program version ID (returned upon successful compilation).</p>
 	MNPVersionId *int64 `json:"MNPVersionId,omitnil,omitempty" name:"MNPVersionId"`
+
+	// <p>QR code expiration time.</p>
+	ExpireTime *int64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// <p>Version QR code.</p>
+	QRCode *string `json:"QRCode,omitnil,omitempty" name:"QRCode"`
+
+	// <p>Compilation package information.</p>
+	SubPackageInfos []*MNPVersionSubPackageInfo `json:"SubPackageInfos,omitnil,omitempty" name:"SubPackageInfos"`
 }
 
 // Predefined struct for user
@@ -11665,6 +11774,14 @@ type MNPTypeDefine struct {
 
 	// Whether it is a system category.
 	IsSystem *bool `json:"IsSystem,omitnil,omitempty" name:"IsSystem"`
+}
+
+type MNPVersionSubPackageInfo struct {
+	// Package name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Package size. 
+	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 }
 
 // Predefined struct for user

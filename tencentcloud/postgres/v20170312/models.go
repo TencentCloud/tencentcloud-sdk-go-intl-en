@@ -1325,7 +1325,7 @@ type CreateDatabaseRequestParams struct {
 	// Name specification: consists of letters (a-z, a-z), digits (0-9), and underscores (_), starting with a letter or underscore (_), up to 63 characters. system reserved keywords cannot be used, and 'postgres' is not allowed.
 	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
 
-	// Owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+	// Owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109).
 	DatabaseOwner *string `json:"DatabaseOwner,omitnil,omitempty" name:"DatabaseOwner"`
 
 	// Specifies the character encoding of the database.
@@ -1350,7 +1350,7 @@ type CreateDatabaseRequest struct {
 	// Name specification: consists of letters (a-z, a-z), digits (0-9), and underscores (_), starting with a letter or underscore (_), up to 63 characters. system reserved keywords cannot be used, and 'postgres' is not allowed.
 	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
 
-	// Owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+	// Owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109).
 	DatabaseOwner *string `json:"DatabaseOwner,omitnil,omitempty" name:"DatabaseOwner"`
 
 	// Specifies the character encoding of the database.
@@ -2512,7 +2512,7 @@ type DeleteAccountRequestParams struct {
 	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Account name to be deleted. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+	// Account name to be deleted. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109).
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 }
 
@@ -2522,7 +2522,7 @@ type DeleteAccountRequest struct {
 	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Account name to be deleted. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+	// Account name to be deleted. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109).
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 }
 
@@ -7247,7 +7247,7 @@ type ModifyAccountPrivilegesRequestParams struct {
 	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Modify the permission of this account for a database object. obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1) api.
+	// Modify the permission of this account for a database object. obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109) api.
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Permission information to modify. supports batch modification. the maximum number of modifications per batch is 50.
@@ -7260,7 +7260,7 @@ type ModifyAccountPrivilegesRequest struct {
 	// Instance ID. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Modify the permission of this account for a database object. obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1) api.
+	// Modify the permission of this account for a database object. obtain through the [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109) api.
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Permission information to modify. supports batch modification. the maximum number of modifications per batch is 50.
@@ -8642,7 +8642,7 @@ type ModifyDatabaseOwnerRequestParams struct {
 	// Database name. obtain through the api [DescribeDatabases](https://www.tencentcloud.com/document/product/409/37118).
 	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
 
-	// New owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+	// New owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109).
 	DatabaseOwner *string `json:"DatabaseOwner,omitnil,omitempty" name:"DatabaseOwner"`
 }
 
@@ -8655,7 +8655,7 @@ type ModifyDatabaseOwnerRequest struct {
 	// Database name. obtain through the api [DescribeDatabases](https://www.tencentcloud.com/document/product/409/37118).
 	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
 
-	// New owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+	// New owner of the database. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109).
 	DatabaseOwner *string `json:"DatabaseOwner,omitnil,omitempty" name:"DatabaseOwner"`
 }
 
@@ -9905,16 +9905,16 @@ type ResetAccountPasswordRequestParams struct {
 	// Specifies the instance ID, such as postgres-4wdeb0zv. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Instance account name. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+	// Instance account name. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109).
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Specifies the new password for the UserName account.
 	// Password settings rule specifies the following:.
 	// - valid values: 8 to 32 characters. a password with more than 12 characters is recommended.
-	// -Must not start with "/".
-	// -Must include the following four items:.
-	// Lowercase letters a ~ z.
-	// Uppercase letters: A – Z.
+	// - Must not start with "/".
+	// - Must include the following four items:.
+	// Lowercase letters a - z.
+	// Uppercase letters: A - Z.
 	// Digits: 0-9.
 	// Special symbols: ()`~!@#$%^&*-+=_|{}[]:<>,.?/.
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
@@ -9926,16 +9926,16 @@ type ResetAccountPasswordRequest struct {
 	// Specifies the instance ID, such as postgres-4wdeb0zv. obtain through the api [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773?from_cn_redirect=1).
 	DBInstanceId *string `json:"DBInstanceId,omitnil,omitempty" name:"DBInstanceId"`
 
-	// Instance account name. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109?from_cn_redirect=1).
+	// Instance account name. obtain through the api [DescribeAccounts](https://www.tencentcloud.com/document/product/409/18109).
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Specifies the new password for the UserName account.
 	// Password settings rule specifies the following:.
 	// - valid values: 8 to 32 characters. a password with more than 12 characters is recommended.
-	// -Must not start with "/".
-	// -Must include the following four items:.
-	// Lowercase letters a ~ z.
-	// Uppercase letters: A – Z.
+	// - Must not start with "/".
+	// - Must include the following four items:.
+	// Lowercase letters a - z.
+	// Uppercase letters: A - Z.
 	// Digits: 0-9.
 	// Special symbols: ()`~!@#$%^&*-+=_|{}[]:<>,.?/.
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
