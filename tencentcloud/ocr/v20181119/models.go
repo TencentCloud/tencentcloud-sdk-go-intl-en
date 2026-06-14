@@ -1328,9 +1328,9 @@ type GeneralCard struct {
 	LastName *string `json:"LastName,omitnil,omitempty" name:"LastName"`
 
 	// Gender on the document.
-	// -M: man.
-	// -F: woman.
-	// -X: other gender identity.
+	// - M: man.
+	// - F: woman.
+	// - X: other gender identity.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
 
@@ -3773,10 +3773,10 @@ type RecognizeBrazilRNMOCRResponseParams struct {
 	// CPF
 	CPF *string `json:"CPF,omitnil,omitempty" name:"CPF"`
 
-
+	// Residence category
 	CLASSIFICATION *string `json:"CLASSIFICATION,omitnil,omitempty" name:"CLASSIFICATION"`
 
-
+	// Residence validity term
 	PRAZODERESIDENCIA *string `json:"PRAZODERESIDENCIA,omitnil,omitempty" name:"PRAZODERESIDENCIA"`
 
 	// Issue Date
