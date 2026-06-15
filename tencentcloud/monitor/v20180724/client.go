@@ -703,6 +703,56 @@ func (c *Client) CreateGrafanaNotificationChannelWithContext(ctx context.Context
     return
 }
 
+func NewCreateOnCallFormRequest() (request *CreateOnCallFormRequest) {
+    request = &CreateOnCallFormRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "CreateOnCallForm")
+    
+    
+    return
+}
+
+func NewCreateOnCallFormResponse() (response *CreateOnCallFormResponse) {
+    response = &CreateOnCallFormResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateOnCallForm
+// Creates an on-call schedule.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateOnCallForm(request *CreateOnCallFormRequest) (response *CreateOnCallFormResponse, err error) {
+    return c.CreateOnCallFormWithContext(context.Background(), request)
+}
+
+// CreateOnCallForm
+// Creates an on-call schedule.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateOnCallFormWithContext(ctx context.Context, request *CreateOnCallFormRequest) (response *CreateOnCallFormResponse, err error) {
+    if request == nil {
+        request = NewCreateOnCallFormRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "CreateOnCallForm")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateOnCallForm require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateOnCallFormResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreatePolicyGroupRequest() (request *CreatePolicyGroupRequest) {
     request = &CreatePolicyGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2117,6 +2167,56 @@ func (c *Client) DeleteGrafanaNotificationChannelWithContext(ctx context.Context
     request.SetContext(ctx)
     
     response = NewDeleteGrafanaNotificationChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteOnCallFormsRequest() (request *DeleteOnCallFormsRequest) {
+    request = &DeleteOnCallFormsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DeleteOnCallForms")
+    
+    
+    return
+}
+
+func NewDeleteOnCallFormsResponse() (response *DeleteOnCallFormsResponse) {
+    response = &DeleteOnCallFormsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteOnCallForms
+// Deletes an on-call schedule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
+func (c *Client) DeleteOnCallForms(request *DeleteOnCallFormsRequest) (response *DeleteOnCallFormsResponse, err error) {
+    return c.DeleteOnCallFormsWithContext(context.Background(), request)
+}
+
+// DeleteOnCallForms
+// Deletes an on-call schedule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
+func (c *Client) DeleteOnCallFormsWithContext(ctx context.Context, request *DeleteOnCallFormsRequest) (response *DeleteOnCallFormsResponse, err error) {
+    if request == nil {
+        request = NewDeleteOnCallFormsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "DeleteOnCallForms")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteOnCallForms require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteOnCallFormsResponse()
     err = c.Send(request, response)
     return
 }
@@ -4573,6 +4673,106 @@ func (c *Client) DescribeMonitorTypesWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDescribeMonitorTypesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeOnCallFormRequest() (request *DescribeOnCallFormRequest) {
+    request = &DescribeOnCallFormRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribeOnCallForm")
+    
+    
+    return
+}
+
+func NewDescribeOnCallFormResponse() (response *DescribeOnCallFormResponse) {
+    response = &DescribeOnCallFormResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeOnCallForm
+// Describes On-Call Schedule Details.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeOnCallForm(request *DescribeOnCallFormRequest) (response *DescribeOnCallFormResponse, err error) {
+    return c.DescribeOnCallFormWithContext(context.Background(), request)
+}
+
+// DescribeOnCallForm
+// Describes On-Call Schedule Details.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeOnCallFormWithContext(ctx context.Context, request *DescribeOnCallFormRequest) (response *DescribeOnCallFormResponse, err error) {
+    if request == nil {
+        request = NewDescribeOnCallFormRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "DescribeOnCallForm")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOnCallForm require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeOnCallFormResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeOnCallFormsRequest() (request *DescribeOnCallFormsRequest) {
+    request = &DescribeOnCallFormsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "DescribeOnCallForms")
+    
+    
+    return
+}
+
+func NewDescribeOnCallFormsResponse() (response *DescribeOnCallFormsResponse) {
+    response = &DescribeOnCallFormsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeOnCallForms
+// Describes on-call schedule list.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeOnCallForms(request *DescribeOnCallFormsRequest) (response *DescribeOnCallFormsResponse, err error) {
+    return c.DescribeOnCallFormsWithContext(context.Background(), request)
+}
+
+// DescribeOnCallForms
+// Describes on-call schedule list.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeOnCallFormsWithContext(ctx context.Context, request *DescribeOnCallFormsRequest) (response *DescribeOnCallFormsResponse, err error) {
+    if request == nil {
+        request = NewDescribeOnCallFormsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "DescribeOnCallForms")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOnCallForms require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeOnCallFormsResponse()
     err = c.Send(request, response)
     return
 }
@@ -9455,6 +9655,56 @@ func (c *Client) UpdateGrafanaWhiteListWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewUpdateGrafanaWhiteListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateOnCallFormRequest() (request *UpdateOnCallFormRequest) {
+    request = &UpdateOnCallFormRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "UpdateOnCallForm")
+    
+    
+    return
+}
+
+func NewUpdateOnCallFormResponse() (response *UpdateOnCallFormResponse) {
+    response = &UpdateOnCallFormResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateOnCallForm
+// Modifies an on-call schedule.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpdateOnCallForm(request *UpdateOnCallFormRequest) (response *UpdateOnCallFormResponse, err error) {
+    return c.UpdateOnCallFormWithContext(context.Background(), request)
+}
+
+// UpdateOnCallForm
+// Modifies an on-call schedule.
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpdateOnCallFormWithContext(ctx context.Context, request *UpdateOnCallFormRequest) (response *UpdateOnCallFormResponse, err error) {
+    if request == nil {
+        request = NewUpdateOnCallFormRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "UpdateOnCallForm")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateOnCallForm require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateOnCallFormResponse()
     err = c.Send(request, response)
     return
 }

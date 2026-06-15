@@ -427,6 +427,9 @@ type CreateCfsFileSystemRequestParams struct {
 	// Custom file system name
 	FsName *string `json:"FsName,omitnil,omitempty" name:"FsName"`
 
+
+	Encrypted *bool `json:"Encrypted,omitnil,omitempty" name:"Encrypted"`
+
 	// File system tag
 	ResourceTags []*TagInfo `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
@@ -497,6 +500,8 @@ type CreateCfsFileSystemRequest struct {
 	// Custom file system name
 	FsName *string `json:"FsName,omitnil,omitempty" name:"FsName"`
 
+	Encrypted *bool `json:"Encrypted,omitnil,omitempty" name:"Encrypted"`
+
 	// File system tag
 	ResourceTags []*TagInfo `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
@@ -556,6 +561,7 @@ func (r *CreateCfsFileSystemRequest) FromJsonString(s string) error {
 	delete(f, "SubnetId")
 	delete(f, "MountIP")
 	delete(f, "FsName")
+	delete(f, "Encrypted")
 	delete(f, "ResourceTags")
 	delete(f, "ClientToken")
 	delete(f, "CcnId")
@@ -1022,11 +1028,11 @@ type CreateLifecycleDataTaskRequestParams struct {
 	// Lifecycle task type; archive: settlement; restore: preheating; release: data release; metaload: metadata loading.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// The path or file to be settled supports passing only one path and cannot be empty.
-	TaskPath *string `json:"TaskPath,omitnil,omitempty" name:"TaskPath"`
-
 	// Task name.
 	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
+
+	// The path or file to be settled supports passing only one path and cannot be empty.
+	TaskPath *string `json:"TaskPath,omitnil,omitempty" name:"TaskPath"`
 
 	// Data flow ID. this api can be accessed through DescribeDataFlow.
 	DataFlowId *string `json:"DataFlowId,omitnil,omitempty" name:"DataFlowId"`
@@ -1044,11 +1050,11 @@ type CreateLifecycleDataTaskRequest struct {
 	// Lifecycle task type; archive: settlement; restore: preheating; release: data release; metaload: metadata loading.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// The path or file to be settled supports passing only one path and cannot be empty.
-	TaskPath *string `json:"TaskPath,omitnil,omitempty" name:"TaskPath"`
-
 	// Task name.
 	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
+
+	// The path or file to be settled supports passing only one path and cannot be empty.
+	TaskPath *string `json:"TaskPath,omitnil,omitempty" name:"TaskPath"`
 
 	// Data flow ID. this api can be accessed through DescribeDataFlow.
 	DataFlowId *string `json:"DataFlowId,omitnil,omitempty" name:"DataFlowId"`
@@ -1071,8 +1077,8 @@ func (r *CreateLifecycleDataTaskRequest) FromJsonString(s string) error {
 	}
 	delete(f, "FileSystemId")
 	delete(f, "Type")
-	delete(f, "TaskPath")
 	delete(f, "TaskName")
+	delete(f, "TaskPath")
 	delete(f, "DataFlowId")
 	delete(f, "IsOverwrite")
 	if len(f) > 0 {

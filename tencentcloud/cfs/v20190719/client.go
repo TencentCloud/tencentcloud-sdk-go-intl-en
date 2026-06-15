@@ -356,6 +356,7 @@ func NewCreateCfsFileSystemResponse() (response *CreateCfsFileSystemResponse) {
 //  RESOURCEINSUFFICIENT_TAGQUOTASEXCEEDED = "ResourceInsufficient.TagQuotasExceeded"
 //  RESOURCEINSUFFICIENT_TURBOSPECIALCAPACITYFILESYSTEMCOUNTLIMIT = "ResourceInsufficient.TurboSpecialCapacityFileSystemCountLimit"
 //  RESOURCENOTFOUND_PGROUPNOTFOUND = "ResourceNotFound.PgroupNotFound"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_BASICNETINTERFACENOTSUPPORTED = "UnsupportedOperation.BasicNetInterfaceNotSupported"
 //  UNSUPPORTEDOPERATION_OUTOFSERVICE = "UnsupportedOperation.OutOfService"
@@ -422,6 +423,7 @@ func (c *Client) CreateCfsFileSystem(request *CreateCfsFileSystemRequest) (respo
 //  RESOURCEINSUFFICIENT_TAGQUOTASEXCEEDED = "ResourceInsufficient.TagQuotasExceeded"
 //  RESOURCEINSUFFICIENT_TURBOSPECIALCAPACITYFILESYSTEMCOUNTLIMIT = "ResourceInsufficient.TurboSpecialCapacityFileSystemCountLimit"
 //  RESOURCENOTFOUND_PGROUPNOTFOUND = "ResourceNotFound.PgroupNotFound"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_BASICNETINTERFACENOTSUPPORTED = "UnsupportedOperation.BasicNetInterfaceNotSupported"
 //  UNSUPPORTEDOPERATION_OUTOFSERVICE = "UnsupportedOperation.OutOfService"
@@ -776,12 +778,16 @@ func NewCreateLifecycleDataTaskResponse() (response *CreateLifecycleDataTaskResp
 // Support proactive settlement/preheat API.
 //
 // error code that may be returned:
+//  INVALIDPARAMETER_LISTPATHANDTASKPATHCONFLICT = "InvalidParameter.ListPathAndTaskPathConflict"
+//  INVALIDPARAMETER_LISTPATHINVALIDPREFIX = "InvalidParameter.ListPathInvalidPrefix"
 //  INVALIDPARAMETERVALUE_INVALIDDATAFLOWID = "InvalidParameterValue.InvalidDataFlowId"
 //  INVALIDPARAMETERVALUE_INVALIDDATAFLOWSOURCESTORAGETYPE = "InvalidParameterValue.InvalidDataFlowSourceStorageType"
 //  INVALIDPARAMETERVALUE_INVALIDDATAFLOWTARGETPATH = "InvalidParameterValue.InvalidDataFlowTargetPath"
 //  INVALIDPARAMETERVALUE_INVALIDFILESYSTEMID = "InvalidParameterValue.InvalidFileSystemId"
 //  INVALIDPARAMETERVALUE_INVALIDFSSTATUS = "InvalidParameterValue.InvalidFsStatus"
 //  INVALIDPARAMETERVALUE_INVALIDLIFECYCLEDATATASKTYPE = "InvalidParameterValue.InvalidLifecycleDataTaskType"
+//  INVALIDPARAMETERVALUE_LISTPATHFILEINVALID = "InvalidParameterValue.ListPathFileInvalid"
+//  INVALIDPARAMETERVALUE_LISTPATHFILENOTFOUND = "InvalidParameterValue.ListPathFileNotFound"
 //  INVALIDPARAMETERVALUE_WAITINGTASKLIMITEXCEEDED = "InvalidParameterValue.WaitingTaskLimitExceeded"
 func (c *Client) CreateLifecycleDataTask(request *CreateLifecycleDataTaskRequest) (response *CreateLifecycleDataTaskResponse, err error) {
     return c.CreateLifecycleDataTaskWithContext(context.Background(), request)
@@ -791,12 +797,16 @@ func (c *Client) CreateLifecycleDataTask(request *CreateLifecycleDataTaskRequest
 // Support proactive settlement/preheat API.
 //
 // error code that may be returned:
+//  INVALIDPARAMETER_LISTPATHANDTASKPATHCONFLICT = "InvalidParameter.ListPathAndTaskPathConflict"
+//  INVALIDPARAMETER_LISTPATHINVALIDPREFIX = "InvalidParameter.ListPathInvalidPrefix"
 //  INVALIDPARAMETERVALUE_INVALIDDATAFLOWID = "InvalidParameterValue.InvalidDataFlowId"
 //  INVALIDPARAMETERVALUE_INVALIDDATAFLOWSOURCESTORAGETYPE = "InvalidParameterValue.InvalidDataFlowSourceStorageType"
 //  INVALIDPARAMETERVALUE_INVALIDDATAFLOWTARGETPATH = "InvalidParameterValue.InvalidDataFlowTargetPath"
 //  INVALIDPARAMETERVALUE_INVALIDFILESYSTEMID = "InvalidParameterValue.InvalidFileSystemId"
 //  INVALIDPARAMETERVALUE_INVALIDFSSTATUS = "InvalidParameterValue.InvalidFsStatus"
 //  INVALIDPARAMETERVALUE_INVALIDLIFECYCLEDATATASKTYPE = "InvalidParameterValue.InvalidLifecycleDataTaskType"
+//  INVALIDPARAMETERVALUE_LISTPATHFILEINVALID = "InvalidParameterValue.ListPathFileInvalid"
+//  INVALIDPARAMETERVALUE_LISTPATHFILENOTFOUND = "InvalidParameterValue.ListPathFileNotFound"
 //  INVALIDPARAMETERVALUE_WAITINGTASKLIMITEXCEEDED = "InvalidParameterValue.WaitingTaskLimitExceeded"
 func (c *Client) CreateLifecycleDataTaskWithContext(ctx context.Context, request *CreateLifecycleDataTaskRequest) (response *CreateLifecycleDataTaskResponse, err error) {
     if request == nil {

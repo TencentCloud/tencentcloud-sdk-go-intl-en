@@ -891,6 +891,20 @@ type ConditionsTemp struct {
 	EventCondition *AlarmPolicyEventCondition `json:"EventCondition,omitnil,omitempty" name:"EventCondition"`
 }
 
+type CoverStaffInfo struct {
+	// Shift personnel ID group.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CoverStaffIDs []*string `json:"CoverStaffIDs,omitnil,omitempty" name:"CoverStaffIDs"`
+
+	// Shift start time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CoverStartTime *int64 `json:"CoverStartTime,omitnil,omitempty" name:"CoverStartTime"`
+
+	// Shift end time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CoverEndTime *int64 `json:"CoverEndTime,omitnil,omitempty" name:"CoverEndTime"`
+}
+
 // Predefined struct for user
 type CreateAlarmNoticeRequestParams struct {
 	// Module name. Enter "monitor" here
@@ -1650,6 +1664,133 @@ func (r *CreateGrafanaNotificationChannelResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateGrafanaNotificationChannelResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateOnCallFormRequestParams struct {
+	// The fixed value is monitor.
+	Module *string `json:"Module,omitnil,omitempty" name:"Module"`
+
+	// On-call schedule name.
+	OnCallFormName *string `json:"OnCallFormName,omitnil,omitempty" name:"OnCallFormName"`
+
+	// On-call personnel ID group.
+	StaffInfos []*StaffInfo `json:"StaffInfos,omitnil,omitempty" name:"StaffInfos"`
+
+	// Rotation type.
+	RotationType *string `json:"RotationType,omitnil,omitempty" name:"RotationType"`
+
+	// Shift change time.
+	ShiftTime *string `json:"ShiftTime,omitnil,omitempty" name:"ShiftTime"`
+
+	// Effect time. Unit: seconds.
+	EffectiveStartTime *int64 `json:"EffectiveStartTime,omitnil,omitempty" name:"EffectiveStartTime"`
+
+	// End time of the validity period (in seconds).
+	EffectiveEndTime *int64 `json:"EffectiveEndTime,omitnil,omitempty" name:"EffectiveEndTime"`
+
+	// Time zone (-12 to 12).
+	TimeZone *float64 `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// Description of the shift schedule.
+	OnCallFormDesc *string `json:"OnCallFormDesc,omitnil,omitempty" name:"OnCallFormDesc"`
+
+	// Shift information.
+	CoverStaffInfos []*CoverStaffInfo `json:"CoverStaffInfos,omitnil,omitempty" name:"CoverStaffInfos"`
+
+	// Tag bound to the template
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+type CreateOnCallFormRequest struct {
+	*tchttp.BaseRequest
+	
+	// The fixed value is monitor.
+	Module *string `json:"Module,omitnil,omitempty" name:"Module"`
+
+	// On-call schedule name.
+	OnCallFormName *string `json:"OnCallFormName,omitnil,omitempty" name:"OnCallFormName"`
+
+	// On-call personnel ID group.
+	StaffInfos []*StaffInfo `json:"StaffInfos,omitnil,omitempty" name:"StaffInfos"`
+
+	// Rotation type.
+	RotationType *string `json:"RotationType,omitnil,omitempty" name:"RotationType"`
+
+	// Shift change time.
+	ShiftTime *string `json:"ShiftTime,omitnil,omitempty" name:"ShiftTime"`
+
+	// Effect time. Unit: seconds.
+	EffectiveStartTime *int64 `json:"EffectiveStartTime,omitnil,omitempty" name:"EffectiveStartTime"`
+
+	// End time of the validity period (in seconds).
+	EffectiveEndTime *int64 `json:"EffectiveEndTime,omitnil,omitempty" name:"EffectiveEndTime"`
+
+	// Time zone (-12 to 12).
+	TimeZone *float64 `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// Description of the shift schedule.
+	OnCallFormDesc *string `json:"OnCallFormDesc,omitnil,omitempty" name:"OnCallFormDesc"`
+
+	// Shift information.
+	CoverStaffInfos []*CoverStaffInfo `json:"CoverStaffInfos,omitnil,omitempty" name:"CoverStaffInfos"`
+
+	// Tag bound to the template
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+func (r *CreateOnCallFormRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOnCallFormRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Module")
+	delete(f, "OnCallFormName")
+	delete(f, "StaffInfos")
+	delete(f, "RotationType")
+	delete(f, "ShiftTime")
+	delete(f, "EffectiveStartTime")
+	delete(f, "EffectiveEndTime")
+	delete(f, "TimeZone")
+	delete(f, "OnCallFormDesc")
+	delete(f, "CoverStaffInfos")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateOnCallFormRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateOnCallFormResponseParams struct {
+	// On-call schedule ID.
+	OnCallFormID *string `json:"OnCallFormID,omitnil,omitempty" name:"OnCallFormID"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateOnCallFormResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateOnCallFormResponseParams `json:"Response"`
+}
+
+func (r *CreateOnCallFormResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOnCallFormResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3290,6 +3431,73 @@ func (r *DeleteGrafanaNotificationChannelResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteGrafanaNotificationChannelResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteOnCallFormsRequestParams struct {
+	// The fixed value is monitor.
+	Module *string `json:"Module,omitnil,omitempty" name:"Module"`
+
+	// ID of the on-call schedule to be deleted.
+	OnCallFormIDs []*string `json:"OnCallFormIDs,omitnil,omitempty" name:"OnCallFormIDs"`
+}
+
+type DeleteOnCallFormsRequest struct {
+	*tchttp.BaseRequest
+	
+	// The fixed value is monitor.
+	Module *string `json:"Module,omitnil,omitempty" name:"Module"`
+
+	// ID of the on-call schedule to be deleted.
+	OnCallFormIDs []*string `json:"OnCallFormIDs,omitnil,omitempty" name:"OnCallFormIDs"`
+}
+
+func (r *DeleteOnCallFormsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteOnCallFormsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Module")
+	delete(f, "OnCallFormIDs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteOnCallFormsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteOnCallFormsResponseParams struct {
+	// On-call schedule IDs failed to be deleted.
+	FailedOnCallFormIDs []*string `json:"FailedOnCallFormIDs,omitnil,omitempty" name:"FailedOnCallFormIDs"`
+
+	// On-call schedule IDs deleted successfully.
+	SuccessOnCallFormIDs []*string `json:"SuccessOnCallFormIDs,omitnil,omitempty" name:"SuccessOnCallFormIDs"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteOnCallFormsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteOnCallFormsResponseParams `json:"Response"`
+}
+
+func (r *DeleteOnCallFormsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteOnCallFormsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6682,6 +6890,172 @@ func (r *DescribeMonitorTypesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeMonitorTypesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeOnCallFormRequestParams struct {
+	// The fixed value is monitor.
+	Module *string `json:"Module,omitnil,omitempty" name:"Module"`
+
+	// On-call schedule ID.
+	OnCallFormID *string `json:"OnCallFormID,omitnil,omitempty" name:"OnCallFormID"`
+}
+
+type DescribeOnCallFormRequest struct {
+	*tchttp.BaseRequest
+	
+	// The fixed value is monitor.
+	Module *string `json:"Module,omitnil,omitempty" name:"Module"`
+
+	// On-call schedule ID.
+	OnCallFormID *string `json:"OnCallFormID,omitnil,omitempty" name:"OnCallFormID"`
+}
+
+func (r *DescribeOnCallFormRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOnCallFormRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Module")
+	delete(f, "OnCallFormID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeOnCallFormRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeOnCallFormResponseParams struct {
+	// On-call schedule details.
+	OnCallForm *OneOnCallForm `json:"OnCallForm,omitnil,omitempty" name:"OnCallForm"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeOnCallFormResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeOnCallFormResponseParams `json:"Response"`
+}
+
+func (r *DescribeOnCallFormResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOnCallFormResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeOnCallFormsRequestParams struct {
+	// The fixed value is monitor.
+	Module *string `json:"Module,omitnil,omitempty" name:"Module"`
+
+	// Pagination start offset.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of pages for pagination query.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Supports searching based on user ID.
+	OnCallFormStaffIDs []*string `json:"OnCallFormStaffIDs,omitnil,omitempty" name:"OnCallFormStaffIDs"`
+
+	// Rotation type
+	RotationType *string `json:"RotationType,omitnil,omitempty" name:"RotationType"`
+
+	// Sorting method.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Supports searching bay on ID and name.
+	OnCallFormName *string `json:"OnCallFormName,omitnil,omitempty" name:"OnCallFormName"`
+}
+
+type DescribeOnCallFormsRequest struct {
+	*tchttp.BaseRequest
+	
+	// The fixed value is monitor.
+	Module *string `json:"Module,omitnil,omitempty" name:"Module"`
+
+	// Pagination start offset.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of pages for pagination query.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Supports searching based on user ID.
+	OnCallFormStaffIDs []*string `json:"OnCallFormStaffIDs,omitnil,omitempty" name:"OnCallFormStaffIDs"`
+
+	// Rotation type
+	RotationType *string `json:"RotationType,omitnil,omitempty" name:"RotationType"`
+
+	// Sorting method.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Supports searching bay on ID and name.
+	OnCallFormName *string `json:"OnCallFormName,omitnil,omitempty" name:"OnCallFormName"`
+}
+
+func (r *DescribeOnCallFormsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOnCallFormsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Module")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "OnCallFormStaffIDs")
+	delete(f, "RotationType")
+	delete(f, "Order")
+	delete(f, "OnCallFormName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeOnCallFormsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeOnCallFormsResponseParams struct {
+	// On-call schedule information
+	OnCallForms []*OnCallForm `json:"OnCallForms,omitnil,omitempty" name:"OnCallForms"`
+
+	// Total number.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeOnCallFormsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeOnCallFormsResponseParams `json:"Response"`
+}
+
+func (r *DescribeOnCallFormsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOnCallFormsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -12054,6 +12428,94 @@ type NoticeBindPolicys struct {
 	PolicyIds []*string `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 }
 
+type OnCallForm struct {
+	// Schedule ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OnCallFormID *string `json:"OnCallFormID,omitnil,omitempty" name:"OnCallFormID"`
+
+	// Shift name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OnCallFormName *string `json:"OnCallFormName,omitnil,omitempty" name:"OnCallFormName"`
+
+	// Schedule description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OnCallFormDesc *string `json:"OnCallFormDesc,omitnil,omitempty" name:"OnCallFormDesc"`
+
+	// Rotation type.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RotationType *string `json:"RotationType,omitnil,omitempty" name:"RotationType"`
+
+	// Shift change time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ShiftTime *string `json:"ShiftTime,omitnil,omitempty" name:"ShiftTime"`
+
+	// Validity start time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EffectiveStartTime *int64 `json:"EffectiveStartTime,omitnil,omitempty" name:"EffectiveStartTime"`
+
+	// Validity end time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EffectiveEndTime *int64 `json:"EffectiveEndTime,omitnil,omitempty" name:"EffectiveEndTime"`
+
+	// Time zone
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TimeZone *float64 `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// Current on-duty personnel
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CurrOnCallStaffs []*string `json:"CurrOnCallStaffs,omitnil,omitempty" name:"CurrOnCallStaffs"`
+
+	// Tag bound to the template
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+type OneOnCallForm struct {
+	// Duty ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OnCallFormID *string `json:"OnCallFormID,omitnil,omitempty" name:"OnCallFormID"`
+
+	// On-call name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OnCallFormName *string `json:"OnCallFormName,omitnil,omitempty" name:"OnCallFormName"`
+
+	// Shift description
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OnCallFormDesc *string `json:"OnCallFormDesc,omitnil,omitempty" name:"OnCallFormDesc"`
+
+	// On-duty personnel
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StaffInfos []*StaffInfo `json:"StaffInfos,omitnil,omitempty" name:"StaffInfos"`
+
+	// Rotation type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RotationType *string `json:"RotationType,omitnil,omitempty" name:"RotationType"`
+
+	// Shift change time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ShiftTime *string `json:"ShiftTime,omitnil,omitempty" name:"ShiftTime"`
+
+	// Start time of the on-call validity period
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EffectiveStartTime *int64 `json:"EffectiveStartTime,omitnil,omitempty" name:"EffectiveStartTime"`
+
+	// End time of the on-call validity period
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EffectiveEndTime *int64 `json:"EffectiveEndTime,omitnil,omitempty" name:"EffectiveEndTime"`
+
+	// Time zone
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TimeZone *float64 `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// Shift information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CoverStaffInfos []*CoverStaffInfo `json:"CoverStaffInfos,omitnil,omitempty" name:"CoverStaffInfos"`
+
+	// Tag bound to the template
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
 type Operator struct {
 	// Operator ID
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
@@ -13408,6 +13870,12 @@ func (r *SetDefaultAlarmPolicyResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *SetDefaultAlarmPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type StaffInfo struct {
+	// On-duty personnel ID group.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StaffIDs []*string `json:"StaffIDs,omitnil,omitempty" name:"StaffIDs"`
 }
 
 // Predefined struct for user
@@ -14774,6 +15242,133 @@ func (r *UpdateGrafanaWhiteListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UpdateGrafanaWhiteListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateOnCallFormRequestParams struct {
+	// The fixed value is monitor.
+	Module *string `json:"Module,omitnil,omitempty" name:"Module"`
+
+	// On-call schedule ID.
+	OnCallFormID *string `json:"OnCallFormID,omitnil,omitempty" name:"OnCallFormID"`
+
+	// On-call schedule name.
+	OnCallFormName *string `json:"OnCallFormName,omitnil,omitempty" name:"OnCallFormName"`
+
+	// On-call personnel ID group.
+	StaffInfos []*StaffInfo `json:"StaffInfos,omitnil,omitempty" name:"StaffInfos"`
+
+	// Rotation type.
+	RotationType *string `json:"RotationType,omitnil,omitempty" name:"RotationType"`
+
+	// Shift change time.
+	ShiftTime *string `json:"ShiftTime,omitnil,omitempty" name:"ShiftTime"`
+
+	// Effect time. Unit: seconds.
+	EffectiveStartTime *int64 `json:"EffectiveStartTime,omitnil,omitempty" name:"EffectiveStartTime"`
+
+	// End time of the validity period (in seconds).
+	EffectiveEndTime *int64 `json:"EffectiveEndTime,omitnil,omitempty" name:"EffectiveEndTime"`
+
+	// Time zone (-12 to 12).
+	TimeZone *float64 `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// Description of the shift schedule.
+	OnCallFormDesc *string `json:"OnCallFormDesc,omitnil,omitempty" name:"OnCallFormDesc"`
+
+	// Shift information.
+	CoverStaffInfos []*CoverStaffInfo `json:"CoverStaffInfos,omitnil,omitempty" name:"CoverStaffInfos"`
+}
+
+type UpdateOnCallFormRequest struct {
+	*tchttp.BaseRequest
+	
+	// The fixed value is monitor.
+	Module *string `json:"Module,omitnil,omitempty" name:"Module"`
+
+	// On-call schedule ID.
+	OnCallFormID *string `json:"OnCallFormID,omitnil,omitempty" name:"OnCallFormID"`
+
+	// On-call schedule name.
+	OnCallFormName *string `json:"OnCallFormName,omitnil,omitempty" name:"OnCallFormName"`
+
+	// On-call personnel ID group.
+	StaffInfos []*StaffInfo `json:"StaffInfos,omitnil,omitempty" name:"StaffInfos"`
+
+	// Rotation type.
+	RotationType *string `json:"RotationType,omitnil,omitempty" name:"RotationType"`
+
+	// Shift change time.
+	ShiftTime *string `json:"ShiftTime,omitnil,omitempty" name:"ShiftTime"`
+
+	// Effect time. Unit: seconds.
+	EffectiveStartTime *int64 `json:"EffectiveStartTime,omitnil,omitempty" name:"EffectiveStartTime"`
+
+	// End time of the validity period (in seconds).
+	EffectiveEndTime *int64 `json:"EffectiveEndTime,omitnil,omitempty" name:"EffectiveEndTime"`
+
+	// Time zone (-12 to 12).
+	TimeZone *float64 `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// Description of the shift schedule.
+	OnCallFormDesc *string `json:"OnCallFormDesc,omitnil,omitempty" name:"OnCallFormDesc"`
+
+	// Shift information.
+	CoverStaffInfos []*CoverStaffInfo `json:"CoverStaffInfos,omitnil,omitempty" name:"CoverStaffInfos"`
+}
+
+func (r *UpdateOnCallFormRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateOnCallFormRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Module")
+	delete(f, "OnCallFormID")
+	delete(f, "OnCallFormName")
+	delete(f, "StaffInfos")
+	delete(f, "RotationType")
+	delete(f, "ShiftTime")
+	delete(f, "EffectiveStartTime")
+	delete(f, "EffectiveEndTime")
+	delete(f, "TimeZone")
+	delete(f, "OnCallFormDesc")
+	delete(f, "CoverStaffInfos")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateOnCallFormRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateOnCallFormResponseParams struct {
+	// On-call schedule ID.
+	OnCallFormID *string `json:"OnCallFormID,omitnil,omitempty" name:"OnCallFormID"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateOnCallFormResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateOnCallFormResponseParams `json:"Response"`
+}
+
+func (r *UpdateOnCallFormResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateOnCallFormResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
