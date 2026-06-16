@@ -205,6 +205,86 @@ func (c *Client) ClearEmbedTokenWithContext(ctx context.Context, request *ClearE
     return
 }
 
+func NewCreateDataTableRequest() (request *CreateDataTableRequest) {
+    request = &CreateDataTableRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "CreateDataTable")
+    
+    
+    return
+}
+
+func NewCreateDataTableResponse() (response *CreateDataTableResponse) {
+    response = &CreateDataTableResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDataTable
+// Add a data table
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) CreateDataTable(request *CreateDataTableRequest) (response *CreateDataTableResponse, err error) {
+    return c.CreateDataTableWithContext(context.Background(), request)
+}
+
+// CreateDataTable
+// Add a data table
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNAUTHORIZEDOPERATION_USERNOTEXIST = "UnauthorizedOperation.UserNotExist"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) CreateDataTableWithContext(ctx context.Context, request *CreateDataTableRequest) (response *CreateDataTableResponse, err error) {
+    if request == nil {
+        request = NewCreateDataTableRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "CreateDataTable")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDataTable require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDataTableResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDatasourceRequest() (request *CreateDatasourceRequest) {
     request = &CreateDatasourceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -439,6 +519,62 @@ func (c *Client) CreateEmbedTokenWithContext(ctx context.Context, request *Creat
     request.SetContext(ctx)
     
     response = NewCreateEmbedTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreatePermissionRanksRequest() (request *CreatePermissionRanksRequest) {
+    request = &CreatePermissionRanksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "CreatePermissionRanks")
+    
+    
+    return
+}
+
+func NewCreatePermissionRanksResponse() (response *CreatePermissionRanksResponse) {
+    response = &CreatePermissionRanksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreatePermissionRanks
+// Create row/column permissions
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) CreatePermissionRanks(request *CreatePermissionRanksRequest) (response *CreatePermissionRanksResponse, err error) {
+    return c.CreatePermissionRanksWithContext(context.Background(), request)
+}
+
+// CreatePermissionRanks
+// Create row/column permissions
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) CreatePermissionRanksWithContext(ctx context.Context, request *CreatePermissionRanksRequest) (response *CreatePermissionRanksResponse, err error) {
+    if request == nil {
+        request = NewCreatePermissionRanksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "CreatePermissionRanks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePermissionRanks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreatePermissionRanksResponse()
     err = c.Send(request, response)
     return
 }
@@ -1137,6 +1273,62 @@ func (c *Client) DescribeProjectListWithContext(ctx context.Context, request *De
     return
 }
 
+func NewDescribeSourceFieldListRequest() (request *DescribeSourceFieldListRequest) {
+    request = &DescribeSourceFieldListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "DescribeSourceFieldList")
+    
+    
+    return
+}
+
+func NewDescribeSourceFieldListResponse() (response *DescribeSourceFieldListResponse) {
+    response = &DescribeSourceFieldListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSourceFieldList
+// API information for raw data table fields
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DescribeSourceFieldList(request *DescribeSourceFieldListRequest) (response *DescribeSourceFieldListResponse, err error) {
+    return c.DescribeSourceFieldListWithContext(context.Background(), request)
+}
+
+// DescribeSourceFieldList
+// API information for raw data table fields
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+//  UNSUPPORTEDOPERATION_BIERROR = "UnsupportedOperation.BIError"
+func (c *Client) DescribeSourceFieldListWithContext(ctx context.Context, request *DescribeSourceFieldListRequest) (response *DescribeSourceFieldListResponse, err error) {
+    if request == nil {
+        request = NewDescribeSourceFieldListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "DescribeSourceFieldList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSourceFieldList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSourceFieldListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUserProjectListRequest() (request *DescribeUserProjectListRequest) {
     request = &DescribeUserProjectListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1581,6 +1773,114 @@ func (c *Client) ModifyProjectWithContext(ctx context.Context, request *ModifyPr
     request.SetContext(ctx)
     
     response = NewModifyProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyResourceUserRequest() (request *ModifyResourceUserRequest) {
+    request = &ModifyResourceUserRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "ModifyResourceUser")
+    
+    
+    return
+}
+
+func NewModifyResourceUserResponse() (response *ModifyResourceUserResponse) {
+    response = &ModifyResourceUserResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyResourceUser
+// This API is used to modify by user resource.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+func (c *Client) ModifyResourceUser(request *ModifyResourceUserRequest) (response *ModifyResourceUserResponse, err error) {
+    return c.ModifyResourceUserWithContext(context.Background(), request)
+}
+
+// ModifyResourceUser
+// This API is used to modify by user resource.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+func (c *Client) ModifyResourceUserWithContext(ctx context.Context, request *ModifyResourceUserRequest) (response *ModifyResourceUserResponse, err error) {
+    if request == nil {
+        request = NewModifyResourceUserRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "ModifyResourceUser")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyResourceUser require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyResourceUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyResourceUserGroupResourceRequest() (request *ModifyResourceUserGroupResourceRequest) {
+    request = &ModifyResourceUserGroupResourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("bi", APIVersion, "ModifyResourceUserGroupResource")
+    
+    
+    return
+}
+
+func NewModifyResourceUserGroupResourceResponse() (response *ModifyResourceUserGroupResourceResponse) {
+    response = &ModifyResourceUserGroupResourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyResourceUserGroupResource
+// Update user group permission based on resources
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+func (c *Client) ModifyResourceUserGroupResource(request *ModifyResourceUserGroupResourceRequest) (response *ModifyResourceUserGroupResourceResponse, err error) {
+    return c.ModifyResourceUserGroupResourceWithContext(context.Background(), request)
+}
+
+// ModifyResourceUserGroupResource
+// Update user group permission based on resources
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNAL = "InternalError.Internal"
+//  MISSINGPARAMETER_MISSINGPARAM = "MissingParameter.MissingParam"
+//  UNAUTHORIZEDOPERATION_AUTHORIZE = "UnauthorizedOperation.Authorize"
+func (c *Client) ModifyResourceUserGroupResourceWithContext(ctx context.Context, request *ModifyResourceUserGroupResourceRequest) (response *ModifyResourceUserGroupResourceResponse, err error) {
+    if request == nil {
+        request = NewModifyResourceUserGroupResourceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "bi", APIVersion, "ModifyResourceUserGroupResource")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyResourceUserGroupResource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyResourceUserGroupResourceResponse()
     err = c.Send(request, response)
     return
 }
