@@ -12345,6 +12345,72 @@ func (c *Client) OfflineLibraDBInstanceWithContext(ctx context.Context, request 
     return
 }
 
+func NewOpenAIOptimizerRequest() (request *OpenAIOptimizerRequest) {
+    request = &OpenAIOptimizerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "OpenAIOptimizer")
+    
+    
+    return
+}
+
+func NewOpenAIOptimizerResponse() (response *OpenAIOptimizerResponse) {
+    response = &OpenAIOptimizerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// OpenAIOptimizer
+// This API is used to start the optimizer switch of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INVALIDPARAMETERVALUE_INSTANCENOTFOUND = "InvalidParameterValue.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CLUSTEROPNOTALLOWEDERROR = "OperationDenied.ClusterOpNotAllowedError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  RESOURCENOTFOUND_RESOURCEERROR = "ResourceNotFound.ResourceError"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) OpenAIOptimizer(request *OpenAIOptimizerRequest) (response *OpenAIOptimizerResponse, err error) {
+    return c.OpenAIOptimizerWithContext(context.Background(), request)
+}
+
+// OpenAIOptimizer
+// This API is used to start the optimizer switch of an instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INVALIDPARAMETERVALUE_INSTANCENOTFOUND = "InvalidParameterValue.InstanceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CLUSTEROPNOTALLOWEDERROR = "OperationDenied.ClusterOpNotAllowedError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+//  RESOURCENOTFOUND_RESOURCEERROR = "ResourceNotFound.ResourceError"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) OpenAIOptimizerWithContext(ctx context.Context, request *OpenAIOptimizerRequest) (response *OpenAIOptimizerResponse, err error) {
+    if request == nil {
+        request = NewOpenAIOptimizerRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "OpenAIOptimizer")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OpenAIOptimizer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewOpenAIOptimizerResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewOpenAuditServiceRequest() (request *OpenAuditServiceRequest) {
     request = &OpenAuditServiceRequest{
         BaseRequest: &tchttp.BaseRequest{},

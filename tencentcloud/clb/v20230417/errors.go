@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package v20180317
+package v20230417
 
 const (
 	// error codes for specific actions
@@ -20,38 +20,14 @@ const (
 	// CAM signature/authentication error.
 	AUTHFAILURE = "AuthFailure"
 
-	// Token error.
-	AUTHFAILURE_TOKENFAILURE = "AuthFailure.TokenFailure"
-
 	// DryRun operation means the request will be successful, but the DryRun parameter is passed.
 	DRYRUNOPERATION = "DryRunOperation"
 
 	// Operation failed.
 	FAILEDOPERATION = "FailedOperation"
 
-	// The business bandwidth of the EIP resource bound to the instance exceeds the anti-misoperation detection threshold. Performing the operation may pose risks. If you want to proceed, please disable the anti-misoperation detection for the corresponding EIP in the EIP console and try again.
-	FAILEDOPERATION_EIPTRAFFICCHECKRISK = "FailedOperation.EipTrafficCheckRisk"
-
-	// Instance deletion is determined to be a high-risk operation through frequency verification. Please check the business or try again later.
-	FAILEDOPERATION_FREQUENCYCHECKRISK = "FailedOperation.FrequencyCheckRisk"
-
 	// LB status exception.
 	FAILEDOPERATION_INVALIDLBSTATUS = "FailedOperation.InvalidLBStatus"
-
-	// Instances without listeners cannot be stopped.
-	FAILEDOPERATION_NOLISTENERINLB = "FailedOperation.NoListenerInLB"
-
-	// The specified resource is being cloned. please try again later.
-	FAILEDOPERATION_RESOURCEINCLONING = "FailedOperation.ResourceInCloning"
-
-	// The specified resource is currently being operated. Please try again later.
-	FAILEDOPERATION_RESOURCEINOPERATING = "FailedOperation.ResourceInOperating"
-
-	// Instance deletion is determined to be a high-risk operation through rule quantity verification. To forcibly delete the instance, set the forced verification parameter ForceDelete to true.
-	FAILEDOPERATION_TARGETNUMCHECKRISK = "FailedOperation.TargetNumCheckRisk"
-
-	// Instance deletion is determined to be a high-risk operation through traffic verification. To forcibly delete the instance, set the forced verification parameter ForceDelete to true.
-	FAILEDOPERATION_TRAFFICCHECKRISK = "FailedOperation.TrafficCheckRisk"
 
 	// Internal error.
 	INTERNALERROR = "InternalError"
@@ -64,9 +40,6 @@ const (
 
 	// Incorrect parameter format.
 	INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
-
-	// Failed to query the parameter
-	INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
 
 	// CLB instance ID error.
 	INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
@@ -124,9 +97,6 @@ const (
 
 	// Insufficient resources.
 	RESOURCEINSUFFICIENT = "ResourceInsufficient"
-
-	// Resources do not exist.
-	RESOURCENOTFOUND = "ResourceNotFound"
 
 	// Resources are sold out.
 	RESOURCESSOLDOUT = "ResourcesSoldOut"
