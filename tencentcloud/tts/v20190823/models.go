@@ -69,7 +69,7 @@ type TextToVoiceRequestParams struct {
 	// <li>101056-zhilin (Northeastern Mandarin)</li>
 	VoiceType *int64 `json:"VoiceType,omitnil,omitempty" name:"VoiceType"`
 
-
+	// Instant Voice Clone Voice ID. Required when using Instant Voice Clone voices.
 	FastVoiceType *string `json:"FastVoiceType,omitnil,omitempty" name:"FastVoiceType"`
 
 	// Primary language type: <li>1 - Chinese (default)</li><li>2 - English</li>
@@ -87,10 +87,10 @@ type TextToVoiceRequestParams struct {
 	// The threshold of speech segmentation sensibility, which can be `0` (default), `1`, or `2`. A larger value indicates fewer segments, and the model tends to only segment sentences based on punctuation marks. We recommend you not change this parameter to avoid adverse effect on speech synthesis.
 	SegmentRate *uint64 `json:"SegmentRate,omitnil,omitempty" name:"SegmentRate"`
 
-
+	// Controls the emotion of synthesized speech. This parameter is supported only by multi-emotion voices. Valid values: neutral, sad, happy, angry, fear, news, story, radio, poetry, call, sajiao, disgusted, amaze, peaceful, exciting, aojiao, jieshuo. <br>Example value: neutral.
 	EmotionCategory *string `json:"EmotionCategory,omitnil,omitempty" name:"EmotionCategory"`
 
-
+	// Controls the intensity of emotion in synthesized speech. Valid values: [50, 200]. Default: 100. Takes effect only when EmotionCategoryis specified.
 	EmotionIntensity *int64 `json:"EmotionIntensity,omitnil,omitempty" name:"EmotionIntensity"`
 }
 
@@ -123,6 +123,7 @@ type TextToVoiceRequest struct {
 	// <li>101056-zhilin (Northeastern Mandarin)</li>
 	VoiceType *int64 `json:"VoiceType,omitnil,omitempty" name:"VoiceType"`
 
+	// Instant Voice Clone Voice ID. Required when using Instant Voice Clone voices.
 	FastVoiceType *string `json:"FastVoiceType,omitnil,omitempty" name:"FastVoiceType"`
 
 	// Primary language type: <li>1 - Chinese (default)</li><li>2 - English</li>
@@ -140,8 +141,10 @@ type TextToVoiceRequest struct {
 	// The threshold of speech segmentation sensibility, which can be `0` (default), `1`, or `2`. A larger value indicates fewer segments, and the model tends to only segment sentences based on punctuation marks. We recommend you not change this parameter to avoid adverse effect on speech synthesis.
 	SegmentRate *uint64 `json:"SegmentRate,omitnil,omitempty" name:"SegmentRate"`
 
+	// Controls the emotion of synthesized speech. This parameter is supported only by multi-emotion voices. Valid values: neutral, sad, happy, angry, fear, news, story, radio, poetry, call, sajiao, disgusted, amaze, peaceful, exciting, aojiao, jieshuo. <br>Example value: neutral.
 	EmotionCategory *string `json:"EmotionCategory,omitnil,omitempty" name:"EmotionCategory"`
 
+	// Controls the intensity of emotion in synthesized speech. Valid values: [50, 200]. Default: 100. Takes effect only when EmotionCategoryis specified.
 	EmotionIntensity *int64 `json:"EmotionIntensity,omitnil,omitempty" name:"EmotionIntensity"`
 }
 

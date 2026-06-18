@@ -11963,6 +11963,66 @@ func (c *Client) DescribeMachineGeneralWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeMachineInfoRequest() (request *DescribeMachineInfoRequest) {
+    request = &DescribeMachineInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeMachineInfo")
+    
+    
+    return
+}
+
+func NewDescribeMachineInfoResponse() (response *DescribeMachineInfoResponse) {
+    response = &DescribeMachineInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMachineInfo
+// This API is used to get server details.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeMachineInfo(request *DescribeMachineInfoRequest) (response *DescribeMachineInfoResponse, err error) {
+    return c.DescribeMachineInfoWithContext(context.Background(), request)
+}
+
+// DescribeMachineInfo
+// This API is used to get server details.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeMachineInfoWithContext(ctx context.Context, request *DescribeMachineInfoRequest) (response *DescribeMachineInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeMachineInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeMachineInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMachineInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMachineInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMachineLicenseDetailRequest() (request *DescribeMachineLicenseDetailRequest) {
     request = &DescribeMachineLicenseDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},

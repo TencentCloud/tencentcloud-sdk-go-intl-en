@@ -227,6 +227,166 @@ func (c *Client) CreateDomainAndIpWithContext(ctx context.Context, request *Crea
     return
 }
 
+func NewCreateIaCAccessTokenRequest() (request *CreateIaCAccessTokenRequest) {
+    request = &CreateIaCAccessTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "CreateIaCAccessToken")
+    
+    
+    return
+}
+
+func NewCreateIaCAccessTokenResponse() (response *CreateIaCAccessTokenResponse) {
+    response = &CreateIaCAccessTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateIaCAccessToken
+// Create an IaC detection integration Token
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateIaCAccessToken(request *CreateIaCAccessTokenRequest) (response *CreateIaCAccessTokenResponse, err error) {
+    return c.CreateIaCAccessTokenWithContext(context.Background(), request)
+}
+
+// CreateIaCAccessToken
+// Create an IaC detection integration Token
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateIaCAccessTokenWithContext(ctx context.Context, request *CreateIaCAccessTokenRequest) (response *CreateIaCAccessTokenResponse, err error) {
+    if request == nil {
+        request = NewCreateIaCAccessTokenRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "CreateIaCAccessToken")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateIaCAccessToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateIaCAccessTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateIaCFileExportJobRequest() (request *CreateIaCFileExportJobRequest) {
+    request = &CreateIaCFileExportJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "CreateIaCFileExportJob")
+    
+    
+    return
+}
+
+func NewCreateIaCFileExportJobResponse() (response *CreateIaCFileExportJobResponse) {
+    response = &CreateIaCFileExportJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateIaCFileExportJob
+// Create an IaC detection file export task
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateIaCFileExportJob(request *CreateIaCFileExportJobRequest) (response *CreateIaCFileExportJobResponse, err error) {
+    return c.CreateIaCFileExportJobWithContext(context.Background(), request)
+}
+
+// CreateIaCFileExportJob
+// Create an IaC detection file export task
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateIaCFileExportJobWithContext(ctx context.Context, request *CreateIaCFileExportJobRequest) (response *CreateIaCFileExportJobResponse, err error) {
+    if request == nil {
+        request = NewCreateIaCFileExportJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "CreateIaCFileExportJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateIaCFileExportJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateIaCFileExportJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateIaCFileReScanTaskRequest() (request *CreateIaCFileReScanTaskRequest) {
+    request = &CreateIaCFileReScanTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "CreateIaCFileReScanTask")
+    
+    
+    return
+}
+
+func NewCreateIaCFileReScanTaskResponse() (response *CreateIaCFileReScanTaskResponse) {
+    response = &CreateIaCFileReScanTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateIaCFileReScanTask
+// Create an IaC detection file rescan task
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateIaCFileReScanTask(request *CreateIaCFileReScanTaskRequest) (response *CreateIaCFileReScanTaskResponse, err error) {
+    return c.CreateIaCFileReScanTaskWithContext(context.Background(), request)
+}
+
+// CreateIaCFileReScanTask
+// Create an IaC detection file rescan task
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateIaCFileReScanTaskWithContext(ctx context.Context, request *CreateIaCFileReScanTaskRequest) (response *CreateIaCFileReScanTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateIaCFileReScanTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "CreateIaCFileReScanTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateIaCFileReScanTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateIaCFileReScanTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateRiskCenterScanTaskRequest() (request *CreateRiskCenterScanTaskRequest) {
     request = &CreateRiskCenterScanTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -307,6 +467,90 @@ func (c *Client) CreateRiskCenterScanTaskWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewCreateRiskCenterScanTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSkillScanRequest() (request *CreateSkillScanRequest) {
+    request = &CreateSkillScanRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "CreateSkillScan")
+    
+    
+    return
+}
+
+func NewCreateSkillScanResponse() (response *CreateSkillScanResponse) {
+    response = &CreateSkillScanResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateSkillScan
+// Upload the Skill ZIP file to trigger asynchronous security detection. After a successful upload, use the returned ContentHash and EngineVersion to poll the DescribeSkillScanResult API to obtain the result. The upload API is idempotent, and uploading the same file with an identical hash will not create a repetition task. The detection result is reserved for 90 days. If overdue, reupload the file for detection.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateSkillScan(request *CreateSkillScanRequest) (response *CreateSkillScanResponse, err error) {
+    return c.CreateSkillScanWithContext(context.Background(), request)
+}
+
+// CreateSkillScan
+// Upload the Skill ZIP file to trigger asynchronous security detection. After a successful upload, use the returned ContentHash and EngineVersion to poll the DescribeSkillScanResult API to obtain the result. The upload API is idempotent, and uploading the same file with an identical hash will not create a repetition task. The detection result is reserved for 90 days. If overdue, reupload the file for detection.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateSkillScanWithContext(ctx context.Context, request *CreateSkillScanRequest) (response *CreateSkillScanResponse, err error) {
+    if request == nil {
+        request = NewCreateSkillScanRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "CreateSkillScan")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSkillScan require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSkillScanResponse()
     err = c.Send(request, response)
     return
 }
@@ -395,6 +639,110 @@ func (c *Client) DeleteDomainAndIpWithContext(ctx context.Context, request *Dele
     return
 }
 
+func NewDeleteIaCAccessTokenRequest() (request *DeleteIaCAccessTokenRequest) {
+    request = &DeleteIaCAccessTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DeleteIaCAccessToken")
+    
+    
+    return
+}
+
+func NewDeleteIaCAccessTokenResponse() (response *DeleteIaCAccessTokenResponse) {
+    response = &DeleteIaCAccessTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteIaCAccessToken
+// Delete an IaC detection integration Token
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteIaCAccessToken(request *DeleteIaCAccessTokenRequest) (response *DeleteIaCAccessTokenResponse, err error) {
+    return c.DeleteIaCAccessTokenWithContext(context.Background(), request)
+}
+
+// DeleteIaCAccessToken
+// Delete an IaC detection integration Token
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteIaCAccessTokenWithContext(ctx context.Context, request *DeleteIaCAccessTokenRequest) (response *DeleteIaCAccessTokenResponse, err error) {
+    if request == nil {
+        request = NewDeleteIaCAccessTokenRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DeleteIaCAccessToken")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteIaCAccessToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteIaCAccessTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteIaCFileRequest() (request *DeleteIaCFileRequest) {
+    request = &DeleteIaCFileRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DeleteIaCFile")
+    
+    
+    return
+}
+
+func NewDeleteIaCFileResponse() (response *DeleteIaCFileResponse) {
+    response = &DeleteIaCFileResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteIaCFile
+// Delete IaC detection file
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteIaCFile(request *DeleteIaCFileRequest) (response *DeleteIaCFileResponse, err error) {
+    return c.DeleteIaCFileWithContext(context.Background(), request)
+}
+
+// DeleteIaCFile
+// Delete IaC detection file
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteIaCFileWithContext(ctx context.Context, request *DeleteIaCFileRequest) (response *DeleteIaCFileResponse, err error) {
+    if request == nil {
+        request = NewDeleteIaCFileRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DeleteIaCFile")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteIaCFile require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteIaCFileResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteRiskScanTaskRequest() (request *DeleteRiskScanTaskRequest) {
     request = &DeleteRiskScanTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -475,6 +823,174 @@ func (c *Client) DeleteRiskScanTaskWithContext(ctx context.Context, request *Del
     request.SetContext(ctx)
     
     response = NewDeleteRiskScanTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAIAgentAssetListRequest() (request *DescribeAIAgentAssetListRequest) {
+    request = &DescribeAIAgentAssetListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeAIAgentAssetList")
+    
+    
+    return
+}
+
+func NewDescribeAIAgentAssetListResponse() (response *DescribeAIAgentAssetListResponse) {
+    response = &DescribeAIAgentAssetListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAIAgentAssetList
+// Retrieve the AI agent asset list
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAIAgentAssetList(request *DescribeAIAgentAssetListRequest) (response *DescribeAIAgentAssetListResponse, err error) {
+    return c.DescribeAIAgentAssetListWithContext(context.Background(), request)
+}
+
+// DescribeAIAgentAssetList
+// Retrieve the AI agent asset list
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAIAgentAssetListWithContext(ctx context.Context, request *DescribeAIAgentAssetListRequest) (response *DescribeAIAgentAssetListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAIAgentAssetListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeAIAgentAssetList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAIAgentAssetList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAIAgentAssetListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAKAnalysisDetailRequest() (request *DescribeAKAnalysisDetailRequest) {
+    request = &DescribeAKAnalysisDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeAKAnalysisDetail")
+    
+    
+    return
+}
+
+func NewDescribeAKAnalysisDetailResponse() (response *DescribeAKAnalysisDetailResponse) {
+    response = &DescribeAKAnalysisDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAKAnalysisDetail
+// Access key alarm record AI analysis result details
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAKAnalysisDetail(request *DescribeAKAnalysisDetailRequest) (response *DescribeAKAnalysisDetailResponse, err error) {
+    return c.DescribeAKAnalysisDetailWithContext(context.Background(), request)
+}
+
+// DescribeAKAnalysisDetail
+// Access key alarm record AI analysis result details
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAKAnalysisDetailWithContext(ctx context.Context, request *DescribeAKAnalysisDetailRequest) (response *DescribeAKAnalysisDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeAKAnalysisDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeAKAnalysisDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAKAnalysisDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAKAnalysisDetailResponse()
     err = c.Send(request, response)
     return
 }
@@ -1151,6 +1667,90 @@ func (c *Client) DescribeAccessKeyUserListWithContext(ctx context.Context, reque
     return
 }
 
+func NewDescribeAlertListRequest() (request *DescribeAlertListRequest) {
+    request = &DescribeAlertListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeAlertList")
+    
+    
+    return
+}
+
+func NewDescribeAlertListResponse() (response *DescribeAlertListResponse) {
+    response = &DescribeAlertListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAlertList
+// This API is used to list all alarms in the alert center.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAlertList(request *DescribeAlertListRequest) (response *DescribeAlertListResponse, err error) {
+    return c.DescribeAlertListWithContext(context.Background(), request)
+}
+
+// DescribeAlertList
+// This API is used to list all alarms in the alert center.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAlertListWithContext(ctx context.Context, request *DescribeAlertListRequest) (response *DescribeAlertListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAlertListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeAlertList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlertList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAlertListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAssetProcessListRequest() (request *DescribeAssetProcessListRequest) {
     request = &DescribeAssetProcessListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1231,6 +1831,174 @@ func (c *Client) DescribeAssetProcessListWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribeAssetProcessListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAssetRiskListRequest() (request *DescribeAssetRiskListRequest) {
+    request = &DescribeAssetRiskListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeAssetRiskList")
+    
+    
+    return
+}
+
+func NewDescribeAssetRiskListResponse() (response *DescribeAssetRiskListResponse) {
+    response = &DescribeAssetRiskListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAssetRiskList
+// Cloud resource configuration risk list from asset perspective
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAssetRiskList(request *DescribeAssetRiskListRequest) (response *DescribeAssetRiskListResponse, err error) {
+    return c.DescribeAssetRiskListWithContext(context.Background(), request)
+}
+
+// DescribeAssetRiskList
+// Cloud resource configuration risk list from asset perspective
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAssetRiskListWithContext(ctx context.Context, request *DescribeAssetRiskListRequest) (response *DescribeAssetRiskListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAssetRiskListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeAssetRiskList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAssetRiskList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAssetRiskListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAssetViewVulRiskListRequest() (request *DescribeAssetViewVulRiskListRequest) {
+    request = &DescribeAssetViewVulRiskListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeAssetViewVulRiskList")
+    
+    
+    return
+}
+
+func NewDescribeAssetViewVulRiskListResponse() (response *DescribeAssetViewVulRiskListResponse) {
+    response = &DescribeAssetViewVulRiskListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAssetViewVulRiskList
+// Obtain Vulnerability Risk List from Asset's Perspective
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAssetViewVulRiskList(request *DescribeAssetViewVulRiskListRequest) (response *DescribeAssetViewVulRiskListResponse, err error) {
+    return c.DescribeAssetViewVulRiskListWithContext(context.Background(), request)
+}
+
+// DescribeAssetViewVulRiskList
+// Obtain Vulnerability Risk List from Asset's Perspective
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAssetViewVulRiskListWithContext(ctx context.Context, request *DescribeAssetViewVulRiskListRequest) (response *DescribeAssetViewVulRiskListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAssetViewVulRiskListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeAssetViewVulRiskList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAssetViewVulRiskList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAssetViewVulRiskListResponse()
     err = c.Send(request, response)
     return
 }
@@ -1507,7 +2275,7 @@ func NewDescribeCVMAssetsResponse() (response *DescribeCVMAssetsResponse) {
 }
 
 // DescribeCVMAssets
-// This API is used to query the list of CVM assets.
+// Retrieve the cvm list.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1533,7 +2301,7 @@ func (c *Client) DescribeCVMAssets(request *DescribeCVMAssetsRequest) (response 
 }
 
 // DescribeCVMAssets
-// This API is used to query the list of CVM assets.
+// Retrieve the cvm list.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1651,6 +2419,90 @@ func (c *Client) DescribeCallRecordWithContext(ctx context.Context, request *Des
     request.SetContext(ctx)
     
     response = NewDescribeCallRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCheckViewRisksRequest() (request *DescribeCheckViewRisksRequest) {
+    request = &DescribeCheckViewRisksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeCheckViewRisks")
+    
+    
+    return
+}
+
+func NewDescribeCheckViewRisksResponse() (response *DescribeCheckViewRisksResponse) {
+    response = &DescribeCheckViewRisksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCheckViewRisks
+// List of cloud resource configuration risks from a check perspective
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCheckViewRisks(request *DescribeCheckViewRisksRequest) (response *DescribeCheckViewRisksResponse, err error) {
+    return c.DescribeCheckViewRisksWithContext(context.Background(), request)
+}
+
+// DescribeCheckViewRisks
+// List of cloud resource configuration risks from a check perspective
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCheckViewRisksWithContext(ctx context.Context, request *DescribeCheckViewRisksRequest) (response *DescribeCheckViewRisksResponse, err error) {
+    if request == nil {
+        request = NewDescribeCheckViewRisksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeCheckViewRisks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCheckViewRisks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCheckViewRisksResponse()
     err = c.Send(request, response)
     return
 }
@@ -1819,6 +2671,90 @@ func (c *Client) DescribeClusterPodAssetsWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribeClusterPodAssetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeConfigCheckRulesRequest() (request *DescribeConfigCheckRulesRequest) {
+    request = &DescribeConfigCheckRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeConfigCheckRules")
+    
+    
+    return
+}
+
+func NewDescribeConfigCheckRulesResponse() (response *DescribeConfigCheckRulesResponse) {
+    response = &DescribeConfigCheckRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeConfigCheckRules
+// Cloud Resource Configuration Risk Rule List Example
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeConfigCheckRules(request *DescribeConfigCheckRulesRequest) (response *DescribeConfigCheckRulesResponse, err error) {
+    return c.DescribeConfigCheckRulesWithContext(context.Background(), request)
+}
+
+// DescribeConfigCheckRules
+// Cloud Resource Configuration Risk Rule List Example
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeConfigCheckRulesWithContext(ctx context.Context, request *DescribeConfigCheckRulesRequest) (response *DescribeConfigCheckRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeConfigCheckRulesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeConfigCheckRules")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConfigCheckRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeConfigCheckRulesResponse()
     err = c.Send(request, response)
     return
 }
@@ -2495,6 +3431,320 @@ func (c *Client) DescribeHighBaseLineRiskListWithContext(ctx context.Context, re
     return
 }
 
+func NewDescribeIaCFileListRequest() (request *DescribeIaCFileListRequest) {
+    request = &DescribeIaCFileListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeIaCFileList")
+    
+    
+    return
+}
+
+func NewDescribeIaCFileListResponse() (response *DescribeIaCFileListResponse) {
+    response = &DescribeIaCFileListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeIaCFileList
+// Retrieve the IaC detection file list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeIaCFileList(request *DescribeIaCFileListRequest) (response *DescribeIaCFileListResponse, err error) {
+    return c.DescribeIaCFileListWithContext(context.Background(), request)
+}
+
+// DescribeIaCFileList
+// Retrieve the IaC detection file list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeIaCFileListWithContext(ctx context.Context, request *DescribeIaCFileListRequest) (response *DescribeIaCFileListResponse, err error) {
+    if request == nil {
+        request = NewDescribeIaCFileListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeIaCFileList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIaCFileList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeIaCFileListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeIaCFileOverviewRequest() (request *DescribeIaCFileOverviewRequest) {
+    request = &DescribeIaCFileOverviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeIaCFileOverview")
+    
+    
+    return
+}
+
+func NewDescribeIaCFileOverviewResponse() (response *DescribeIaCFileOverviewResponse) {
+    response = &DescribeIaCFileOverviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeIaCFileOverview
+// Retrieve IaC detection file overview
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeIaCFileOverview(request *DescribeIaCFileOverviewRequest) (response *DescribeIaCFileOverviewResponse, err error) {
+    return c.DescribeIaCFileOverviewWithContext(context.Background(), request)
+}
+
+// DescribeIaCFileOverview
+// Retrieve IaC detection file overview
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeIaCFileOverviewWithContext(ctx context.Context, request *DescribeIaCFileOverviewRequest) (response *DescribeIaCFileOverviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeIaCFileOverviewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeIaCFileOverview")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIaCFileOverview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeIaCFileOverviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeIaCFileReportRequest() (request *DescribeIaCFileReportRequest) {
+    request = &DescribeIaCFileReportRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeIaCFileReport")
+    
+    
+    return
+}
+
+func NewDescribeIaCFileReportResponse() (response *DescribeIaCFileReportResponse) {
+    response = &DescribeIaCFileReportResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeIaCFileReport
+// Retrieve the IaC detection file report
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeIaCFileReport(request *DescribeIaCFileReportRequest) (response *DescribeIaCFileReportResponse, err error) {
+    return c.DescribeIaCFileReportWithContext(context.Background(), request)
+}
+
+// DescribeIaCFileReport
+// Retrieve the IaC detection file report
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeIaCFileReportWithContext(ctx context.Context, request *DescribeIaCFileReportRequest) (response *DescribeIaCFileReportResponse, err error) {
+    if request == nil {
+        request = NewDescribeIaCFileReportRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeIaCFileReport")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIaCFileReport require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeIaCFileReportResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeIaCTokenListRequest() (request *DescribeIaCTokenListRequest) {
+    request = &DescribeIaCTokenListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeIaCTokenList")
+    
+    
+    return
+}
+
+func NewDescribeIaCTokenListResponse() (response *DescribeIaCTokenListResponse) {
+    response = &DescribeIaCTokenListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeIaCTokenList
+// Retrieve the IaC detection integration Token list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeIaCTokenList(request *DescribeIaCTokenListRequest) (response *DescribeIaCTokenListResponse, err error) {
+    return c.DescribeIaCTokenListWithContext(context.Background(), request)
+}
+
+// DescribeIaCTokenList
+// Retrieve the IaC detection integration Token list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeIaCTokenListWithContext(ctx context.Context, request *DescribeIaCTokenListRequest) (response *DescribeIaCTokenListResponse, err error) {
+    if request == nil {
+        request = NewDescribeIaCTokenListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeIaCTokenList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIaCTokenList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeIaCTokenListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeKeySandboxCredentialRequest() (request *DescribeKeySandboxCredentialRequest) {
+    request = &DescribeKeySandboxCredentialRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeKeySandboxCredential")
+    
+    
+    return
+}
+
+func NewDescribeKeySandboxCredentialResponse() (response *DescribeKeySandboxCredentialResponse) {
+    response = &DescribeKeySandboxCredentialResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeKeySandboxCredential
+// Query credential details and return credential metadata and masked credential data. The access kind returns an Access array (original Key, masked Value), and the sts kind returns an STS object (original System, masked SecretID and SecretKey).
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeKeySandboxCredential(request *DescribeKeySandboxCredentialRequest) (response *DescribeKeySandboxCredentialResponse, err error) {
+    return c.DescribeKeySandboxCredentialWithContext(context.Background(), request)
+}
+
+// DescribeKeySandboxCredential
+// Query credential details and return credential metadata and masked credential data. The access kind returns an Access array (original Key, masked Value), and the sts kind returns an STS object (original System, masked SecretID and SecretKey).
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeKeySandboxCredentialWithContext(ctx context.Context, request *DescribeKeySandboxCredentialRequest) (response *DescribeKeySandboxCredentialResponse, err error) {
+    if request == nil {
+        request = NewDescribeKeySandboxCredentialRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeKeySandboxCredential")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeKeySandboxCredential require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeKeySandboxCredentialResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeKeySandboxCredentialListRequest() (request *DescribeKeySandboxCredentialListRequest) {
+    request = &DescribeKeySandboxCredentialListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeKeySandboxCredentialList")
+    
+    
+    return
+}
+
+func NewDescribeKeySandboxCredentialListResponse() (response *DescribeKeySandboxCredentialListResponse) {
+    response = &DescribeKeySandboxCredentialListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeKeySandboxCredentialList
+// Query the voucher list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeKeySandboxCredentialList(request *DescribeKeySandboxCredentialListRequest) (response *DescribeKeySandboxCredentialListResponse, err error) {
+    return c.DescribeKeySandboxCredentialListWithContext(context.Background(), request)
+}
+
+// DescribeKeySandboxCredentialList
+// Query the voucher list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeKeySandboxCredentialListWithContext(ctx context.Context, request *DescribeKeySandboxCredentialListRequest) (response *DescribeKeySandboxCredentialListResponse, err error) {
+    if request == nil {
+        request = NewDescribeKeySandboxCredentialListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeKeySandboxCredentialList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeKeySandboxCredentialList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeKeySandboxCredentialListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeListenerListRequest() (request *DescribeListenerListRequest) {
     request = &DescribeListenerListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2518,24 +3768,8 @@ func NewDescribeListenerListResponse() (response *DescribeListenerListResponse) 
 // This API is used to query the list of TCP listeners.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeListenerList(request *DescribeListenerListRequest) (response *DescribeListenerListResponse, err error) {
     return c.DescribeListenerListWithContext(context.Background(), request)
 }
@@ -2544,24 +3778,8 @@ func (c *Client) DescribeListenerList(request *DescribeListenerListRequest) (res
 // This API is used to query the list of TCP listeners.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeListenerListWithContext(ctx context.Context, request *DescribeListenerListRequest) (response *DescribeListenerListResponse, err error) {
     if request == nil {
         request = NewDescribeListenerListRequest()
@@ -2602,24 +3820,8 @@ func NewDescribeNICAssetsResponse() (response *DescribeNICAssetsResponse) {
 // Obtain Network Interface Card List
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeNICAssets(request *DescribeNICAssetsRequest) (response *DescribeNICAssetsResponse, err error) {
     return c.DescribeNICAssetsWithContext(context.Background(), request)
 }
@@ -2628,24 +3830,8 @@ func (c *Client) DescribeNICAssets(request *DescribeNICAssetsRequest) (response 
 // Obtain Network Interface Card List
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeNICAssetsWithContext(ctx context.Context, request *DescribeNICAssetsRequest) (response *DescribeNICAssetsResponse, err error) {
     if request == nil {
         request = NewDescribeNICAssetsRequest()
@@ -2683,53 +3869,21 @@ func NewDescribeOrganizationInfoResponse() (response *DescribeOrganizationInfoRe
 }
 
 // DescribeOrganizationInfo
-// Check group account details
+// Query Group Account Details
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeOrganizationInfo(request *DescribeOrganizationInfoRequest) (response *DescribeOrganizationInfoResponse, err error) {
     return c.DescribeOrganizationInfoWithContext(context.Background(), request)
 }
 
 // DescribeOrganizationInfo
-// Check group account details
+// Query Group Account Details
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeOrganizationInfoWithContext(ctx context.Context, request *DescribeOrganizationInfoRequest) (response *DescribeOrganizationInfoResponse, err error) {
     if request == nil {
         request = NewDescribeOrganizationInfoRequest()
@@ -2767,53 +3921,21 @@ func NewDescribeOrganizationUserInfoResponse() (response *DescribeOrganizationUs
 }
 
 // DescribeOrganizationUserInfo
-// Query group account user list
+// Query Group Account User List
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeOrganizationUserInfo(request *DescribeOrganizationUserInfoRequest) (response *DescribeOrganizationUserInfoResponse, err error) {
     return c.DescribeOrganizationUserInfoWithContext(context.Background(), request)
 }
 
 // DescribeOrganizationUserInfo
-// Query group account user list
+// Query Group Account User List
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeOrganizationUserInfoWithContext(ctx context.Context, request *DescribeOrganizationUserInfoRequest) (response *DescribeOrganizationUserInfoResponse, err error) {
     if request == nil {
         request = NewDescribeOrganizationUserInfoRequest()
@@ -2854,24 +3976,8 @@ func NewDescribeOtherCloudAssetsResponse() (response *DescribeOtherCloudAssetsRe
 // Gets the list of other cloud assets
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeOtherCloudAssets(request *DescribeOtherCloudAssetsRequest) (response *DescribeOtherCloudAssetsResponse, err error) {
     return c.DescribeOtherCloudAssetsWithContext(context.Background(), request)
 }
@@ -2880,24 +3986,8 @@ func (c *Client) DescribeOtherCloudAssets(request *DescribeOtherCloudAssetsReque
 // Gets the list of other cloud assets
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeOtherCloudAssetsWithContext(ctx context.Context, request *DescribeOtherCloudAssetsRequest) (response *DescribeOtherCloudAssetsResponse, err error) {
     if request == nil {
         request = NewDescribeOtherCloudAssetsRequest()
@@ -2938,24 +4028,8 @@ func NewDescribePublicIpAssetsResponse() (response *DescribePublicIpAssetsRespon
 // This API is used to query the list of public IP assets.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribePublicIpAssets(request *DescribePublicIpAssetsRequest) (response *DescribePublicIpAssetsResponse, err error) {
     return c.DescribePublicIpAssetsWithContext(context.Background(), request)
 }
@@ -2964,24 +4038,8 @@ func (c *Client) DescribePublicIpAssets(request *DescribePublicIpAssetsRequest) 
 // This API is used to query the list of public IP assets.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribePublicIpAssetsWithContext(ctx context.Context, request *DescribePublicIpAssetsRequest) (response *DescribePublicIpAssetsResponse, err error) {
     if request == nil {
         request = NewDescribePublicIpAssetsRequest()
@@ -3022,24 +4080,8 @@ func NewDescribeRepositoryImageAssetsResponse() (response *DescribeRepositoryIma
 // Repository Image List
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeRepositoryImageAssets(request *DescribeRepositoryImageAssetsRequest) (response *DescribeRepositoryImageAssetsResponse, err error) {
     return c.DescribeRepositoryImageAssetsWithContext(context.Background(), request)
 }
@@ -3048,24 +4090,8 @@ func (c *Client) DescribeRepositoryImageAssets(request *DescribeRepositoryImageA
 // Repository Image List
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeRepositoryImageAssetsWithContext(ctx context.Context, request *DescribeRepositoryImageAssetsRequest) (response *DescribeRepositoryImageAssetsResponse, err error) {
     if request == nil {
         request = NewDescribeRepositoryImageAssetsRequest()
@@ -3106,24 +4132,8 @@ func NewDescribeRiskCallRecordResponse() (response *DescribeRiskCallRecordRespon
 // Retrieve risk call record list.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeRiskCallRecord(request *DescribeRiskCallRecordRequest) (response *DescribeRiskCallRecordResponse, err error) {
     return c.DescribeRiskCallRecordWithContext(context.Background(), request)
 }
@@ -3132,24 +4142,8 @@ func (c *Client) DescribeRiskCallRecord(request *DescribeRiskCallRecordRequest) 
 // Retrieve risk call record list.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeRiskCallRecordWithContext(ctx context.Context, request *DescribeRiskCallRecordRequest) (response *DescribeRiskCallRecordResponse, err error) {
     if request == nil {
         request = NewDescribeRiskCallRecordRequest()
@@ -3190,24 +4184,8 @@ func NewDescribeRiskCenterAssetViewCFGRiskListResponse() (response *DescribeRisk
 // This API is used to query the list of configuration risks by assets.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeRiskCenterAssetViewCFGRiskList(request *DescribeRiskCenterAssetViewCFGRiskListRequest) (response *DescribeRiskCenterAssetViewCFGRiskListResponse, err error) {
     return c.DescribeRiskCenterAssetViewCFGRiskListWithContext(context.Background(), request)
 }
@@ -3216,24 +4194,8 @@ func (c *Client) DescribeRiskCenterAssetViewCFGRiskList(request *DescribeRiskCen
 // This API is used to query the list of configuration risks by assets.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeRiskCenterAssetViewCFGRiskListWithContext(ctx context.Context, request *DescribeRiskCenterAssetViewCFGRiskListRequest) (response *DescribeRiskCenterAssetViewCFGRiskListResponse, err error) {
     if request == nil {
         request = NewDescribeRiskCenterAssetViewCFGRiskListRequest()
@@ -3919,7 +4881,7 @@ func NewDescribeRiskCenterWebsiteRiskListResponse() (response *DescribeRiskCente
 }
 
 // DescribeRiskCenterWebsiteRiskList
-// This API is used to get the list of content risks.
+// Obtain Content Risk List
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3945,7 +4907,7 @@ func (c *Client) DescribeRiskCenterWebsiteRiskList(request *DescribeRiskCenterWe
 }
 
 // DescribeRiskCenterWebsiteRiskList
-// This API is used to get the list of content risks.
+// Obtain Content Risk List
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3979,6 +4941,258 @@ func (c *Client) DescribeRiskCenterWebsiteRiskListWithContext(ctx context.Contex
     request.SetContext(ctx)
     
     response = NewDescribeRiskCenterWebsiteRiskListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRiskDetailListRequest() (request *DescribeRiskDetailListRequest) {
+    request = &DescribeRiskDetailListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeRiskDetailList")
+    
+    
+    return
+}
+
+func NewDescribeRiskDetailListResponse() (response *DescribeRiskDetailListResponse) {
+    response = &DescribeRiskDetailListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRiskDetailList
+// Risk detail list example
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRiskDetailList(request *DescribeRiskDetailListRequest) (response *DescribeRiskDetailListResponse, err error) {
+    return c.DescribeRiskDetailListWithContext(context.Background(), request)
+}
+
+// DescribeRiskDetailList
+// Risk detail list example
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRiskDetailListWithContext(ctx context.Context, request *DescribeRiskDetailListRequest) (response *DescribeRiskDetailListResponse, err error) {
+    if request == nil {
+        request = NewDescribeRiskDetailListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeRiskDetailList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRiskDetailList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRiskDetailListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRiskRuleDetailRequest() (request *DescribeRiskRuleDetailRequest) {
+    request = &DescribeRiskRuleDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeRiskRuleDetail")
+    
+    
+    return
+}
+
+func NewDescribeRiskRuleDetailResponse() (response *DescribeRiskRuleDetailResponse) {
+    response = &DescribeRiskRuleDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRiskRuleDetail
+// Query risk rule details example
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRiskRuleDetail(request *DescribeRiskRuleDetailRequest) (response *DescribeRiskRuleDetailResponse, err error) {
+    return c.DescribeRiskRuleDetailWithContext(context.Background(), request)
+}
+
+// DescribeRiskRuleDetail
+// Query risk rule details example
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRiskRuleDetailWithContext(ctx context.Context, request *DescribeRiskRuleDetailRequest) (response *DescribeRiskRuleDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeRiskRuleDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeRiskRuleDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRiskRuleDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRiskRuleDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeRiskRulesRequest() (request *DescribeRiskRulesRequest) {
+    request = &DescribeRiskRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeRiskRules")
+    
+    
+    return
+}
+
+func NewDescribeRiskRulesResponse() (response *DescribeRiskRulesResponse) {
+    response = &DescribeRiskRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRiskRules
+// Advanced configuration risk rule list illustrative example
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRiskRules(request *DescribeRiskRulesRequest) (response *DescribeRiskRulesResponse, err error) {
+    return c.DescribeRiskRulesWithContext(context.Background(), request)
+}
+
+// DescribeRiskRules
+// Advanced configuration risk rule list illustrative example
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeRiskRulesWithContext(ctx context.Context, request *DescribeRiskRulesRequest) (response *DescribeRiskRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeRiskRulesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeRiskRules")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRiskRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRiskRulesResponse()
     err = c.Send(request, response)
     return
 }
@@ -4319,6 +5533,174 @@ func (c *Client) DescribeSearchBugInfoWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeSkillScanPayInfoRequest() (request *DescribeSkillScanPayInfoRequest) {
+    request = &DescribeSkillScanPayInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeSkillScanPayInfo")
+    
+    
+    return
+}
+
+func NewDescribeSkillScanPayInfoResponse() (response *DescribeSkillScanPayInfoResponse) {
+    response = &DescribeSkillScanPayInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSkillScanPayInfo
+// This API is used to query the billing information of Skill security detection, including order status, total quota, consumed quota, expiry time, and payment mode. It returns zero values (only TimeNow and BetaEndTime included) when no order exists. Trial orders can be claimed via ModifyTrialStatus(Module=9), and official orders are generated by the billing system.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeSkillScanPayInfo(request *DescribeSkillScanPayInfoRequest) (response *DescribeSkillScanPayInfoResponse, err error) {
+    return c.DescribeSkillScanPayInfoWithContext(context.Background(), request)
+}
+
+// DescribeSkillScanPayInfo
+// This API is used to query the billing information of Skill security detection, including order status, total quota, consumed quota, expiry time, and payment mode. It returns zero values (only TimeNow and BetaEndTime included) when no order exists. Trial orders can be claimed via ModifyTrialStatus(Module=9), and official orders are generated by the billing system.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeSkillScanPayInfoWithContext(ctx context.Context, request *DescribeSkillScanPayInfoRequest) (response *DescribeSkillScanPayInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeSkillScanPayInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeSkillScanPayInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSkillScanPayInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSkillScanPayInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSkillScanResultRequest() (request *DescribeSkillScanResultRequest) {
+    request = &DescribeSkillScanResultRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeSkillScanResult")
+    
+    
+    return
+}
+
+func NewDescribeSkillScanResultResponse() (response *DescribeSkillScanResultResponse) {
+    response = &DescribeSkillScanResultResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSkillScanResult
+// Query the security detection result of Skill. After successfully calling CreateSkillScan, use the returned ContentHash + EngineVersion to poll this interface and obtain the result. For the first time, poll 5 minutes after successful upload. If detection is not completed, poll every 1 minute afterward. The response distinguishes four types of status via the Status field: detection complete (SUCCESS), in-progress detection (SCANNING), no record (NOT_FOUND), and detection failed (FAILED). Note: The detection result is retained for 90 days. It will return NOT_FOUND when overdue.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeSkillScanResult(request *DescribeSkillScanResultRequest) (response *DescribeSkillScanResultResponse, err error) {
+    return c.DescribeSkillScanResultWithContext(context.Background(), request)
+}
+
+// DescribeSkillScanResult
+// Query the security detection result of Skill. After successfully calling CreateSkillScan, use the returned ContentHash + EngineVersion to poll this interface and obtain the result. For the first time, poll 5 minutes after successful upload. If detection is not completed, poll every 1 minute afterward. The response distinguishes four types of status via the Status field: detection complete (SUCCESS), in-progress detection (SCANNING), no record (NOT_FOUND), and detection failed (FAILED). Note: The detection result is retained for 90 days. It will return NOT_FOUND when overdue.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeSkillScanResultWithContext(ctx context.Context, request *DescribeSkillScanResultRequest) (response *DescribeSkillScanResultResponse, err error) {
+    if request == nil {
+        request = NewDescribeSkillScanResultRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeSkillScanResult")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSkillScanResult require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSkillScanResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSourceIPAssetRequest() (request *DescribeSourceIPAssetRequest) {
     request = &DescribeSourceIPAssetRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4423,7 +5805,7 @@ func NewDescribeSubUserInfoResponse() (response *DescribeSubUserInfoResponse) {
 }
 
 // DescribeSubUserInfo
-// Query the group's sub-account list
+// Query the sub-account list of the group
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4449,7 +5831,7 @@ func (c *Client) DescribeSubUserInfo(request *DescribeSubUserInfoRequest) (respo
 }
 
 // DescribeSubUserInfo
-// Query the group's sub-account list
+// Query the sub-account list of the group
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4735,6 +6117,174 @@ func (c *Client) DescribeTaskLogURLWithContext(ctx context.Context, request *Des
     request.SetContext(ctx)
     
     response = NewDescribeTaskLogURLResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTopAttackInfoRequest() (request *DescribeTopAttackInfoRequest) {
+    request = &DescribeTopAttackInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeTopAttackInfo")
+    
+    
+    return
+}
+
+func NewDescribeTopAttackInfoResponse() (response *DescribeTopAttackInfoResponse) {
+    response = &DescribeTopAttackInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTopAttackInfo
+// Query TOP attack information
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTopAttackInfo(request *DescribeTopAttackInfoRequest) (response *DescribeTopAttackInfoResponse, err error) {
+    return c.DescribeTopAttackInfoWithContext(context.Background(), request)
+}
+
+// DescribeTopAttackInfo
+// Query TOP attack information
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTopAttackInfoWithContext(ctx context.Context, request *DescribeTopAttackInfoRequest) (response *DescribeTopAttackInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopAttackInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeTopAttackInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTopAttackInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTopAttackInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUebaRuleRequest() (request *DescribeUebaRuleRequest) {
+    request = &DescribeUebaRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeUebaRule")
+    
+    
+    return
+}
+
+func NewDescribeUebaRuleResponse() (response *DescribeUebaRuleResponse) {
+    response = &DescribeUebaRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeUebaRule
+// Query the user behavior analysis policy list
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeUebaRule(request *DescribeUebaRuleRequest) (response *DescribeUebaRuleResponse, err error) {
+    return c.DescribeUebaRuleWithContext(context.Background(), request)
+}
+
+// DescribeUebaRule
+// Query the user behavior analysis policy list
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeUebaRuleWithContext(ctx context.Context, request *DescribeUebaRuleRequest) (response *DescribeUebaRuleResponse, err error) {
+    if request == nil {
+        request = NewDescribeUebaRuleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeUebaRule")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUebaRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUebaRuleResponse()
     err = c.Send(request, response)
     return
 }
@@ -5327,6 +6877,60 @@ func (c *Client) DescribeVulViewVulRiskListWithContext(ctx context.Context, requ
     return
 }
 
+func NewModifyIaCTokenPeriodRequest() (request *ModifyIaCTokenPeriodRequest) {
+    request = &ModifyIaCTokenPeriodRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "ModifyIaCTokenPeriod")
+    
+    
+    return
+}
+
+func NewModifyIaCTokenPeriodResponse() (response *ModifyIaCTokenPeriodResponse) {
+    response = &ModifyIaCTokenPeriodResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyIaCTokenPeriod
+// This API is used to modify the storage cycle of the IaC detection integration Token.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyIaCTokenPeriod(request *ModifyIaCTokenPeriodRequest) (response *ModifyIaCTokenPeriodResponse, err error) {
+    return c.ModifyIaCTokenPeriodWithContext(context.Background(), request)
+}
+
+// ModifyIaCTokenPeriod
+// This API is used to modify the storage cycle of the IaC detection integration Token.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyIaCTokenPeriodWithContext(ctx context.Context, request *ModifyIaCTokenPeriodRequest) (response *ModifyIaCTokenPeriodResponse, err error) {
+    if request == nil {
+        request = NewModifyIaCTokenPeriodRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "ModifyIaCTokenPeriod")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyIaCTokenPeriod require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyIaCTokenPeriodResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyOrganizationAccountStatusRequest() (request *ModifyOrganizationAccountStatusRequest) {
     request = &ModifyOrganizationAccountStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5350,24 +6954,9 @@ func NewModifyOrganizationAccountStatusResponse() (response *ModifyOrganizationA
 // Modify group account status
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyOrganizationAccountStatus(request *ModifyOrganizationAccountStatusRequest) (response *ModifyOrganizationAccountStatusResponse, err error) {
     return c.ModifyOrganizationAccountStatusWithContext(context.Background(), request)
 }
@@ -5376,24 +6965,9 @@ func (c *Client) ModifyOrganizationAccountStatus(request *ModifyOrganizationAcco
 // Modify group account status
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
 //  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyOrganizationAccountStatusWithContext(ctx context.Context, request *ModifyOrganizationAccountStatusRequest) (response *ModifyOrganizationAccountStatusResponse, err error) {
     if request == nil {
         request = NewModifyOrganizationAccountStatusRequest()
@@ -5575,6 +7149,90 @@ func (c *Client) ModifyRiskCenterScanTaskWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewModifyRiskCenterScanTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyUebaRuleSwitchRequest() (request *ModifyUebaRuleSwitchRequest) {
+    request = &ModifyUebaRuleSwitchRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "ModifyUebaRuleSwitch")
+    
+    
+    return
+}
+
+func NewModifyUebaRuleSwitchResponse() (response *ModifyUebaRuleSwitchResponse) {
+    response = &ModifyUebaRuleSwitchResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyUebaRuleSwitch
+// Refresh the custom policy switch
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyUebaRuleSwitch(request *ModifyUebaRuleSwitchRequest) (response *ModifyUebaRuleSwitchResponse, err error) {
+    return c.ModifyUebaRuleSwitchWithContext(context.Background(), request)
+}
+
+// ModifyUebaRuleSwitch
+// Refresh the custom policy switch
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyUebaRuleSwitchWithContext(ctx context.Context, request *ModifyUebaRuleSwitchRequest) (response *ModifyUebaRuleSwitchResponse, err error) {
+    if request == nil {
+        request = NewModifyUebaRuleSwitchRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "ModifyUebaRuleSwitch")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyUebaRuleSwitch require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyUebaRuleSwitchResponse()
     err = c.Send(request, response)
     return
 }
@@ -5827,6 +7485,90 @@ func (c *Client) UpdateAccessKeyRemarkWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewUpdateAccessKeyRemarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateAlertStatusListRequest() (request *UpdateAlertStatusListRequest) {
+    request = &UpdateAlertStatusListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "UpdateAlertStatusList")
+    
+    
+    return
+}
+
+func NewUpdateAlertStatusListResponse() (response *UpdateAlertStatusListResponse) {
+    response = &UpdateAlertStatusListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateAlertStatusList
+// Batch alarm status process API
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpdateAlertStatusList(request *UpdateAlertStatusListRequest) (response *UpdateAlertStatusListResponse, err error) {
+    return c.UpdateAlertStatusListWithContext(context.Background(), request)
+}
+
+// UpdateAlertStatusList
+// Batch alarm status process API
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpdateAlertStatusListWithContext(ctx context.Context, request *UpdateAlertStatusListRequest) (response *UpdateAlertStatusListResponse, err error) {
+    if request == nil {
+        request = NewUpdateAlertStatusListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "UpdateAlertStatusList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateAlertStatusList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateAlertStatusListResponse()
     err = c.Send(request, response)
     return
 }
