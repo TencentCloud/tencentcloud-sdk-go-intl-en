@@ -12440,7 +12440,7 @@ type DescribeReserveIpAddressesRequestParams struct {
 	// reserve-ip-id - String - (Filter criteria) Unique ID of a reserved private IP address, for example, rsvip-pvqgv9vi.
 	// vpc-id - String - (Filter criteria) VPC instance ID, for example, vpc-f49l6u0z.
 	// subnet-id - String - (Filter criteria) Subnet instance ID, for example, subnet-f49l6u0z.
-	// address-ip - String - (Filter criteria) Reserved private IP address, for example, 192.168.0.10.
+	// reserve-address-ip - String - (Filter criteria) Reserved private IP address, for example, 192.168.0.10.
 	// ip-type - String - (Filter criteria) Business type (IpType), for example, 0.
 	// name - String - (Filter criteria) Name.
 	// state - String - (Filter criteria) Status. Valid values: Bind and UnBind.
@@ -12467,7 +12467,7 @@ type DescribeReserveIpAddressesRequest struct {
 	// reserve-ip-id - String - (Filter criteria) Unique ID of a reserved private IP address, for example, rsvip-pvqgv9vi.
 	// vpc-id - String - (Filter criteria) VPC instance ID, for example, vpc-f49l6u0z.
 	// subnet-id - String - (Filter criteria) Subnet instance ID, for example, subnet-f49l6u0z.
-	// address-ip - String - (Filter criteria) Reserved private IP address, for example, 192.168.0.10.
+	// reserve-address-ip - String - (Filter criteria) Reserved private IP address, for example, 192.168.0.10.
 	// ip-type - String - (Filter criteria) Business type (IpType), for example, 0.
 	// name - String - (Filter criteria) Name.
 	// state - String - (Filter criteria) Status. Valid values: Bind and UnBind.
