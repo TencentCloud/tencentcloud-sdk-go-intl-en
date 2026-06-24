@@ -1416,7 +1416,7 @@ type BillDetail struct {
 	// Subproduct name: The subcategory of a Tencent Cloud product purchased by the user, such as CVM Standard S1.
 	ProductCodeName *string `json:"ProductCodeName,omitnil,omitempty" name:"ProductCodeName"`
 
-	// Billing mode, which can be monthly subscription or pay-as-you-go.
+	// Billing mode, which can be yearly/monthly subscription or pay-as-you-go.
 	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
 
 	// Project name: The project to which a resource belongs, which is user-designated. If a resource has not been assigned to a project, it will automatically belong to the default project.
@@ -1434,10 +1434,10 @@ type BillDetail struct {
 	// Instance name: The resource name set by the user in the console. If it is not set, it will be empty by default.
 	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
 
-	// Transaction type, which can be monthly subscription purchase, monthly subscription renewal, or pay-as-you-go deduction.
+	// Transaction type, which can be yearly/monthly subscription purchase, yearly/monthly subscription renewal, or pay-as-you-go deduction.
 	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
 
-	// Order ID: The sub-order number corresponding to the monthly subscription mode. In the postpaid billing model, the bill amount does not exist as an order concept, and this parameter can be ignored.
+	// Order ID: The sub-order number corresponding to the yearly/monthly subscription mode. In the postpaid billing model, the bill amount does not exist as an order concept, and this parameter can be ignored.
 	OrderId *string `json:"OrderId,omitnil,omitempty" name:"OrderId"`
 
 	// Transaction ID: The bill number for a deducted payment
@@ -1849,7 +1849,7 @@ type BillResourceSummary struct {
 	// Subproduct name: The subcategory of a Tencent Cloud product purchased by the user, such as CVM Computing C5t.
 	ProductCodeName *string `json:"ProductCodeName,omitnil,omitempty" name:"ProductCodeName"`
 
-	// Billing mode, which can be monthly subscription or pay-as-you-go.
+	// Billing mode, which can be yearly/monthly subscription or pay-as-you-go.
 	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
 
 	// Project name: The project to which a resource belongs, which is user-designated. If a resource has not been assigned to a project, it will automatically belong to the default project.
@@ -1867,10 +1867,10 @@ type BillResourceSummary struct {
 	// Instance name: The resource name set by the user in the console. If it is not set, it will be empty by default.
 	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
 
-	// Transaction type, which can be monthly subscription purchase, monthly subscription renewal, or pay-as-you-go deduction.
+	// Transaction type, which can be yearly/monthly subscription purchase, yearly/monthly subscription renewal, or pay-as-you-go deduction.
 	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
 
-	// Order ID: The order number for a monthly subscription purchase
+	// Order ID: The order number for a yearly/monthly subscription purchase
 	OrderId *string `json:"OrderId,omitnil,omitempty" name:"OrderId"`
 
 	// Transaction time: The time at which a payment was deducted
@@ -9279,7 +9279,7 @@ type PayModeSummaryOverviewItem struct {
 	// Billing mode code
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Billing mode, which can be monthly subscription or pay-as-you-go.
+	// Billing mode, which can be yearly/monthly subscription or pay-as-you-go.
 	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
 
 	// Cost ratio, to two decimal points
@@ -9288,16 +9288,16 @@ type PayModeSummaryOverviewItem struct {
 	// Total amount after discount
 	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
 
-	// Cash credit: The amount paid from the user’s cash balance
+	// Cash credit: The amount paid from the user's cash balance
 	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
 
-	// Free credit: The amount paid with the user’s free credit
+	// Free credit: The amount paid with the user's free credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
 
 	// Voucher payment: The voucher deduction amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
 
-	// Commission credit: The amount paid with the user’s commission credit.
+	// Commission credit: The amount paid with the user's commission credit.
 	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
 
 	// The original cost in USD. This parameter has become valid since v3.0 bills took effect in May 2021, and before that `-` was returned for this parameter. If a customer uses a contract price different from the published price, `-` will also be returned for this parameter.
