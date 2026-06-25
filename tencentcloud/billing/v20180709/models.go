@@ -3015,16 +3015,15 @@ type Deal struct {
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
 	// Transaction type
-	// 
 	// Modify network mode adjust bandwidth mode.
 	// Adjust bandwidth size.
-	// `Refund`: refund.
+	// Refund: refund.
 	// downgrade.
 	// upgrade configuration.
 	// renew.
 	// purchase.
-	// preMoveOut monthly subscription resource migration out.
-	// preMoveIn specifies the monthly subscription resources to migrate.
+	// preMoveOut yearly/monthly subscription resource migration out.
+	// preMoveIn specifies the yearly/monthly subscription resources to migrate.
 	// preToPost specifies the prepaid to postpaid conversion.
 	// postMoveOut specifies the pay-as-you-go resources to be migrated out.
 	// postMoveIn specifies the pay-as-you-go resources for inbound migration.
@@ -7563,7 +7562,7 @@ func (r *DescribeCostSummaryByResourceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDealsByCondRequestParams struct {
 	// Start time 
-	// Example :2016-01-01 00:00:00
+	// Example :2016-01-01 00:00:00.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time 
@@ -7583,11 +7582,11 @@ type DescribeDealsByCondRequestParams struct {
 	// 2: paid 
 	// 3: shipment in progress
 	// 4: shipped
-	// 5`: Shipment Failed
-	// 6`: Refunded
-	// 7`: Ticket closed
-	// 8`: Order expired
-	// 9`: Order invalid
+	// 5: Shipment Failed
+	// 6: Refunded
+	// 7: Ticket closed
+	// 8: Order expired
+	// 9: Order invalid
 	// 10: product invalidated
 	// 11: third-party payment refused
 	// 12: payment in process
@@ -7613,7 +7612,7 @@ type DescribeDealsByCondRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time 
-	// Example :2016-01-01 00:00:00
+	// Example :2016-01-01 00:00:00.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time 
@@ -7633,11 +7632,11 @@ type DescribeDealsByCondRequest struct {
 	// 2: paid 
 	// 3: shipment in progress
 	// 4: shipped
-	// 5`: Shipment Failed
-	// 6`: Refunded
-	// 7`: Ticket closed
-	// 8`: Order expired
-	// 9`: Order invalid
+	// 5: Shipment Failed
+	// 6: Refunded
+	// 7: Ticket closed
+	// 8: Order expired
+	// 9: Order invalid
 	// 10: product invalidated
 	// 11: third-party payment refused
 	// 12: payment in process

@@ -2232,6 +2232,37 @@ type AiSampleWordInfo struct {
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
+type AigcAudioExtraParam struct {
+
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+}
+
+type AigcAudioOutputAudioInfo struct {
+
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+}
+
+type AigcAudioOutputVideoInfo struct {
+
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+}
+
+type AigcAudioReferenceAudioInfo struct {
+
+	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
+}
+
+type AigcAudioReferenceVideoInfo struct {
+
+	VideoUrl *string `json:"VideoUrl,omitnil,omitempty" name:"VideoUrl"`
+}
+
 type AigcImageExtraParam struct {
 	// <p>Aspect ratio of the generated video.</p><p>Supported aspect ratios for different models:</p><ol><li>GEM: 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, and 21:9.</li></ol><p>Note: For more information about the aspect ratios of specific models, see the model website.</p>
 	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
@@ -3899,6 +3930,133 @@ func (r *CreateAdaptiveDynamicStreamingTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateAdaptiveDynamicStreamingTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAigcAudioTaskRequestParams struct {
+	// Model name. Currently supported models for music generation: GL, MinimaxMusic.Example value: MiniMaxMusic
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// Specifies the model version. By default, the system uses the supported stable version of the model.Supported versions for GL: 2.0, 3.0-clip, 3.0-pro.Supported versions for MinimaxMusic: 2.0, 2.5, 2.6.Example value: 2.0
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// Specifies the audio generation scene. Music: music.Example value: music
+	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
+
+	// Description of the generated audio. (Note: Supports up to 2000 characters.) This parameter is required when no reference image is passed in.Example value: generate a piece of music
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// Reference video information. Only supported by certain models.
+	VideoInfos []*AigcAudioReferenceVideoInfo `json:"VideoInfos,omitnil,omitempty" name:"VideoInfos"`
+
+	// Reference audio information.For example, this parameter is required when generating music from a reference audio.
+	AudioInfos []*AigcAudioReferenceAudioInfo `json:"AudioInfos,omitnil,omitempty" name:"AudioInfos"`
+
+	// Output audio format. Empty by default. Supported values: mp3, wav.Example value: wav
+	OutputAudioFormat *string `json:"OutputAudioFormat,omitnil,omitempty" name:"OutputAudioFormat"`
+
+	// COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.
+	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
+
+	// Additional parameters required for the model.
+	ExtraParameters *AigcAudioExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
+
+	// Used to input some special scene parameters required by the model, serialized into a string in JSON format.Example: when passing lyrics to the MinimaxMusic model:{"lyric":{"The pony runs happily, flowers are blooming"}}Example value: {"sequential_image_generation":"auto"}
+	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
+
+	// API operator name.Example value: admin
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
+}
+
+type CreateAigcAudioTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Model name. Currently supported models for music generation: GL, MinimaxMusic.Example value: MiniMaxMusic
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// Specifies the model version. By default, the system uses the supported stable version of the model.Supported versions for GL: 2.0, 3.0-clip, 3.0-pro.Supported versions for MinimaxMusic: 2.0, 2.5, 2.6.Example value: 2.0
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// Specifies the audio generation scene. Music: music.Example value: music
+	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
+
+	// Description of the generated audio. (Note: Supports up to 2000 characters.) This parameter is required when no reference image is passed in.Example value: generate a piece of music
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// Reference video information. Only supported by certain models.
+	VideoInfos []*AigcAudioReferenceVideoInfo `json:"VideoInfos,omitnil,omitempty" name:"VideoInfos"`
+
+	// Reference audio information.For example, this parameter is required when generating music from a reference audio.
+	AudioInfos []*AigcAudioReferenceAudioInfo `json:"AudioInfos,omitnil,omitempty" name:"AudioInfos"`
+
+	// Output audio format. Empty by default. Supported values: mp3, wav.Example value: wav
+	OutputAudioFormat *string `json:"OutputAudioFormat,omitnil,omitempty" name:"OutputAudioFormat"`
+
+	// COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.
+	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
+
+	// Additional parameters required for the model.
+	ExtraParameters *AigcAudioExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
+
+	// Used to input some special scene parameters required by the model, serialized into a string in JSON format.Example: when passing lyrics to the MinimaxMusic model:{"lyric":{"The pony runs happily, flowers are blooming"}}Example value: {"sequential_image_generation":"auto"}
+	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
+
+	// API operator name.Example value: admin
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
+}
+
+func (r *CreateAigcAudioTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAigcAudioTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ModelName")
+	delete(f, "ModelVersion")
+	delete(f, "SceneType")
+	delete(f, "Prompt")
+	delete(f, "VideoInfos")
+	delete(f, "AudioInfos")
+	delete(f, "OutputAudioFormat")
+	delete(f, "StoreCosParam")
+	delete(f, "ExtraParameters")
+	delete(f, "AdditionalParameters")
+	delete(f, "Operator")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAigcAudioTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAigcAudioTaskResponseParams struct {
+	// The task ID returned after the task is created successfully.Call the query API to poll for task progress and the generation result.Example value: 24*******AigcAudio-6a38**3a9f51468da5bfc25****9a462
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateAigcAudioTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAigcAudioTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateAigcAudioTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAigcAudioTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7847,6 +8005,72 @@ func (r *DescribeAdaptiveDynamicStreamingTemplatesResponse) ToJsonString() strin
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAdaptiveDynamicStreamingTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAigcAudioTaskRequestParams struct {
+	// The task ID returned when creating the AIGC audio generation task.Example value: 24000145-****d**-cb46b8040b684b539bbd46****e*e2fd
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DescribeAigcAudioTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// The task ID returned when creating the AIGC audio generation task.Example value: 24000145-****d**-cb46b8040b684b539bbd46****e*e2fd
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DescribeAigcAudioTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAigcAudioTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAigcAudioTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAigcAudioTaskResponseParams struct {
+	// Current task status. WAIT: waiting; RUN: running; FAIL: failed; DONE: successful.Example value: DONE
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// When the task status is FAIL, the failure information is returned.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Output audio information.
+	AudioInfos []*AigcAudioOutputAudioInfo `json:"AudioInfos,omitnil,omitempty" name:"AudioInfos"`
+
+	// Output video information. Only returned for scenarios such as video dubbing.
+	VideoInfos []*AigcAudioOutputVideoInfo `json:"VideoInfos,omitnil,omitempty" name:"VideoInfos"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAigcAudioTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAigcAudioTaskResponseParams `json:"Response"`
+}
+
+func (r *DescribeAigcAudioTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAigcAudioTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

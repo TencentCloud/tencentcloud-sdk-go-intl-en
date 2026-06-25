@@ -3772,6 +3772,15 @@ type DescribeApplicationMNPInfoResp struct {
 
 	// Category information.
 	CategoryList []*CategoryInfo `json:"CategoryList,omitnil,omitempty" name:"CategoryList"`
+
+	// Team ID.
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// Team name.
+	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
+
+	// Team type ID.
+	TeamTypeId *int64 `json:"TeamTypeId,omitnil,omitempty" name:"TeamTypeId"`
 }
 
 // Predefined struct for user
@@ -5457,6 +5466,12 @@ type DescribeMNGListData struct {
 
 	// <p>Effective mini game version number bound to the superapp. </p>
 	EffectMNPVersion *string `json:"EffectMNPVersion,omitnil,omitempty" name:"EffectMNPVersion"`
+
+	// Team ID.
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.
+	TeamTypeId *int64 `json:"TeamTypeId,omitnil,omitempty" name:"TeamTypeId"`
 }
 
 // Predefined struct for user
@@ -5869,6 +5884,9 @@ type DescribeMNGManagerDetailData struct {
 
 	// <p>Mini game information in multiple languages.</p>
 	I18nList []*MNPDetailI18nVO `json:"I18nList,omitnil,omitempty" name:"I18nList"`
+
+	// Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.
+	TeamTypeId *int64 `json:"TeamTypeId,omitnil,omitempty" name:"TeamTypeId"`
 }
 
 // Predefined struct for user
@@ -8179,6 +8197,12 @@ type DescribeMNPListData struct {
 
 	// Effective mini program version number bound to the superapp. 
 	EffectMNPVersion *string `json:"EffectMNPVersion,omitnil,omitempty" name:"EffectMNPVersion"`
+
+	// Team ID.
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.
+	TeamTypeId *int64 `json:"TeamTypeId,omitnil,omitempty" name:"TeamTypeId"`
 }
 
 // Predefined struct for user
@@ -8591,6 +8615,9 @@ type DescribeMNPManagerDetailData struct {
 
 	// <p>The mini program name and description in multiple languages.</p>
 	I18nList []*MNPDetailI18nVO `json:"I18nList,omitnil,omitempty" name:"I18nList"`
+
+	// Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.
+	TeamTypeId *int64 `json:"TeamTypeId,omitnil,omitempty" name:"TeamTypeId"`
 }
 
 // Predefined struct for user
