@@ -2004,6 +2004,7 @@ func NewListRabbitMQServerlessInstancesResponse() (response *ListRabbitMQServerl
 // This API is used to obtain instance lists.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2018,6 +2019,7 @@ func (c *Client) ListRabbitMQServerlessInstances(request *ListRabbitMQServerless
 // This API is used to obtain instance lists.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"

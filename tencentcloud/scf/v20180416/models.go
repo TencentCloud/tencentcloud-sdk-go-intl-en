@@ -1524,8 +1524,8 @@ func (r *GetFunctionEventInvokeConfigResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetFunctionLogsRequestParams struct {
 	// Function name.
-	// - To ensure the compatibility of the [`GetFunctionLogs`](https://intl.cloud.tencent.com/document/product/583/18583?from_cn_redirect=1) API, the input parameter `FunctionName` is optional, but we recommend you enter it; otherwise, log acquisition may fail.
-	// - After the function is connected to CLS, we recommend you use the [related CLS API](https://intl.cloud.tencent.com/document/product/614/16875?from_cn_redirect=1) to get the best log retrieval experience.
+	// - To ensure the compatibility of the [`GetFunctionLogs`](https://intl.cloud.tencent.com/document/product/583/18583) API, the input parameter `FunctionName` is optional, but we recommend you enter it; otherwise, log acquisition may fail.
+	// - After the function is connected to CLS, we recommend you use the [related CLS API](https://intl.cloud.tencent.com/document/product/614/16875) to get the best log retrieval experience.
 	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
 
 	// Data offset. The addition of `Offset` and `Limit` cannot exceed 10,000.
@@ -1566,8 +1566,8 @@ type GetFunctionLogsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Function name.
-	// - To ensure the compatibility of the [`GetFunctionLogs`](https://intl.cloud.tencent.com/document/product/583/18583?from_cn_redirect=1) API, the input parameter `FunctionName` is optional, but we recommend you enter it; otherwise, log acquisition may fail.
-	// - After the function is connected to CLS, we recommend you use the [related CLS API](https://intl.cloud.tencent.com/document/product/614/16875?from_cn_redirect=1) to get the best log retrieval experience.
+	// - To ensure the compatibility of the [`GetFunctionLogs`](https://intl.cloud.tencent.com/document/product/583/18583) API, the input parameter `FunctionName` is optional, but we recommend you enter it; otherwise, log acquisition may fail.
+	// - After the function is connected to CLS, we recommend you use the [related CLS API](https://intl.cloud.tencent.com/document/product/614/16875) to get the best log retrieval experience.
 	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
 
 	// Data offset. The addition of `Offset` and `Limit` cannot exceed 10,000.
@@ -4507,7 +4507,7 @@ type UpdateTriggerStatusRequestParams struct {
 	// Trigger Type
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Function version. It defaults to `$LATEST`. It’s recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
+	// Function version. It defaults to `$LATEST`. It's recommended to use [$DEFAULT](https://www.tencentcloud.com/document/product/583/37458) for canary release.
 	Qualifier *string `json:"Qualifier,omitnil,omitempty" name:"Qualifier"`
 
 	// Function namespace
@@ -4532,7 +4532,7 @@ type UpdateTriggerStatusRequest struct {
 	// Trigger Type
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Function version. It defaults to `$LATEST`. It’s recommended to use `[$DEFAULT](https://intl.cloud.tencent.com/document/product/583/36149?from_cn_redirect=1#.E9.BB.98.E8.AE.A4.E5.88.AB.E5.90.8D)` for canary release.
+	// Function version. It defaults to `$LATEST`. It's recommended to use [$DEFAULT](https://www.tencentcloud.com/document/product/583/37458) for canary release.
 	Qualifier *string `json:"Qualifier,omitnil,omitempty" name:"Qualifier"`
 
 	// Function namespace

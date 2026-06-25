@@ -1891,6 +1891,7 @@ func NewModifyMountPointResponse() (response *ModifyMountPointResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTSUSPENDED = "FailedOperation.AccountSuspended"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1908,6 +1909,7 @@ func (c *Client) ModifyMountPoint(request *ModifyMountPointRequest) (response *M
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_ACCOUNTSUSPENDED = "FailedOperation.AccountSuspended"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"

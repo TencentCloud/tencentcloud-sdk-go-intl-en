@@ -47,6 +47,9 @@ const (
 	// This operation cannot be performed due to a status conflict.
 	FAILEDOPERATION_STATUSINCONFLICT = "FailedOperation.StatusInConflict"
 
+	// The current state does not allow the operation.
+	FAILEDOPERATION_STATUSINCONFLICTERROR = "FailedOperation.StatusInConflictError"
+
 	// The user has not completed real-name authentication.
 	FAILEDOPERATION_USERNOTAUTHED = "FailedOperation.UserNotAuthed"
 
@@ -113,6 +116,9 @@ const (
 	// Invalid parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 
+	// Invalid business parameters.
+	INVALIDPARAMETERVALUE_BIZINVALIDPARAMETERVALUEERROR = "InvalidParameterValue.BizInvalidParameterValueError"
+
 	// A data conversion error occurred.
 	INVALIDPARAMETERVALUE_DATACONVERTERROR = "InvalidParameterValue.DataConvertError"
 
@@ -151,6 +157,9 @@ const (
 
 	// The operation was denied.
 	OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+
+	// 
+	REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 
 	// The number of requests exceeds the limit.
 	REQUESTLIMITEXCEEDED_REQUESTLIMITEXCEEDEDERROR = "RequestLimitExceeded.RequestLimitExceededError"

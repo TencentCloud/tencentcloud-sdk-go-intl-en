@@ -266,14 +266,14 @@ type CreateFileSystemRequestParams struct {
 	// File system name
 	FileSystemName *string `json:"FileSystemName,omitnil,omitempty" name:"FileSystemName"`
 
-	// File system capacity (in bytes), which can range from 1 GB to 1 PB and must be an integer multiple of 1 GB
-	CapacityQuota *uint64 `json:"CapacityQuota,omitnil,omitempty" name:"CapacityQuota"`
-
 	// Whether to verify POSIX ACL
 	PosixAcl *bool `json:"PosixAcl,omitnil,omitempty" name:"PosixAcl"`
 
 	// File system description, which is an empty string by default
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// File system capacity (in bytes), which can range from 1 GB to 1 PB and must be an integer multiple of 1 GB
+	CapacityQuota *uint64 `json:"CapacityQuota,omitnil,omitempty" name:"CapacityQuota"`
 
 	// List of superuser names, which is an empty array by default
 	SuperUsers []*string `json:"SuperUsers,omitnil,omitempty" name:"SuperUsers"`
@@ -300,14 +300,14 @@ type CreateFileSystemRequest struct {
 	// File system name
 	FileSystemName *string `json:"FileSystemName,omitnil,omitempty" name:"FileSystemName"`
 
-	// File system capacity (in bytes), which can range from 1 GB to 1 PB and must be an integer multiple of 1 GB
-	CapacityQuota *uint64 `json:"CapacityQuota,omitnil,omitempty" name:"CapacityQuota"`
-
 	// Whether to verify POSIX ACL
 	PosixAcl *bool `json:"PosixAcl,omitnil,omitempty" name:"PosixAcl"`
 
 	// File system description, which is an empty string by default
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// File system capacity (in bytes), which can range from 1 GB to 1 PB and must be an integer multiple of 1 GB
+	CapacityQuota *uint64 `json:"CapacityQuota,omitnil,omitempty" name:"CapacityQuota"`
 
 	// List of superuser names, which is an empty array by default
 	SuperUsers []*string `json:"SuperUsers,omitnil,omitempty" name:"SuperUsers"`
@@ -341,9 +341,9 @@ func (r *CreateFileSystemRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "FileSystemName")
-	delete(f, "CapacityQuota")
 	delete(f, "PosixAcl")
 	delete(f, "Description")
+	delete(f, "CapacityQuota")
 	delete(f, "SuperUsers")
 	delete(f, "RootInodeUser")
 	delete(f, "RootInodeGroup")
@@ -1108,11 +1108,13 @@ func (r *DescribeFileSystemResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeFileSystemsRequestParams struct {
 
+	FileSystemIdMarker *string `json:"FileSystemIdMarker,omitnil,omitempty" name:"FileSystemIdMarker"`
 }
 
 type DescribeFileSystemsRequest struct {
 	*tchttp.BaseRequest
 	
+	FileSystemIdMarker *string `json:"FileSystemIdMarker,omitnil,omitempty" name:"FileSystemIdMarker"`
 }
 
 func (r *DescribeFileSystemsRequest) ToJsonString() string {
@@ -1127,7 +1129,7 @@ func (r *DescribeFileSystemsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "FileSystemIdMarker")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeFileSystemsRequest has unknown keys!", "")
 	}

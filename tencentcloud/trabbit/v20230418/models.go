@@ -39,6 +39,9 @@ type CreateRabbitMQServerlessBindingRequestParams struct {
 
 	// Binding key.
 	RoutingKey *string `json:"RoutingKey,omitnil,omitempty" name:"RoutingKey"`
+
+
+	Arguments []*RabbitMQServerlessKeyValuePair `json:"Arguments,omitnil,omitempty" name:"Arguments"`
 }
 
 type CreateRabbitMQServerlessBindingRequest struct {
@@ -61,6 +64,8 @@ type CreateRabbitMQServerlessBindingRequest struct {
 
 	// Binding key.
 	RoutingKey *string `json:"RoutingKey,omitnil,omitempty" name:"RoutingKey"`
+
+	Arguments []*RabbitMQServerlessKeyValuePair `json:"Arguments,omitnil,omitempty" name:"Arguments"`
 }
 
 func (r *CreateRabbitMQServerlessBindingRequest) ToJsonString() string {
@@ -81,6 +86,7 @@ func (r *CreateRabbitMQServerlessBindingRequest) FromJsonString(s string) error 
 	delete(f, "DestinationType")
 	delete(f, "Destination")
 	delete(f, "RoutingKey")
+	delete(f, "Arguments")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRabbitMQServerlessBindingRequest has unknown keys!", "")
 	}
@@ -1165,6 +1171,21 @@ type DescribeRabbitMQServerlessConnectionRequestParams struct {
 
 	// Specifies the vhost name.
 	VirtualHost *string `json:"VirtualHost,omitnil,omitempty" name:"VirtualHost"`
+
+	// Sort by which field. Supported options: channel (channel count), incoming_bytes (inbound traffic size), outgoing_bytes (outbound traffic size)
+	SortElement *string `json:"SortElement,omitnil,omitempty" name:"SortElement"`
+
+	// Sort order: ASC, DESC
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DescribeRabbitMQServerlessConnectionRequest struct {
@@ -1175,6 +1196,18 @@ type DescribeRabbitMQServerlessConnectionRequest struct {
 
 	// Specifies the vhost name.
 	VirtualHost *string `json:"VirtualHost,omitnil,omitempty" name:"VirtualHost"`
+
+	// Sort by which field. Supported options: channel (channel count), incoming_bytes (inbound traffic size), outgoing_bytes (outbound traffic size)
+	SortElement *string `json:"SortElement,omitnil,omitempty" name:"SortElement"`
+
+	// Sort order: ASC, DESC
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *DescribeRabbitMQServerlessConnectionRequest) ToJsonString() string {
@@ -1191,6 +1224,11 @@ func (r *DescribeRabbitMQServerlessConnectionRequest) FromJsonString(s string) e
 	}
 	delete(f, "InstanceId")
 	delete(f, "VirtualHost")
+	delete(f, "SortElement")
+	delete(f, "SortType")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Name")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRabbitMQServerlessConnectionRequest has unknown keys!", "")
 	}
@@ -3178,6 +3216,14 @@ type RabbitMQServerlessInstance struct {
 
 	// Isolation time
 	IsolatedTime *uint64 `json:"IsolatedTime,omitnil,omitempty" name:"IsolatedTime"`
+}
+
+type RabbitMQServerlessKeyValuePair struct {
+
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type RabbitMQServerlessWhiteListInfo struct {

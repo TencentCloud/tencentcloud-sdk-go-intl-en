@@ -1058,9 +1058,13 @@ type DstInfo struct {
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Target instance VIP, which has been disused and does not need to be entered
+	//
+	// Deprecated: Ip is deprecated.
 	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
 	// Target instance Vport, which has been disused and does not need to be entered
+	//
+	// Deprecated: Port is deprecated.
 	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Only valid for MySQL currently. For instance-level migration, the value range is: 1 (read-only), 0 (read/write)

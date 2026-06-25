@@ -198,6 +198,9 @@ type CompareOptions struct {
 	// The number of threads, which defaults to 1. Value range: 1-5.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ThreadCount *int64 `json:"ThreadCount,omitnil,omitempty" name:"ThreadCount"`
+
+
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type CompareTableItem struct {
@@ -375,6 +378,12 @@ type ConfigureSubscribeJobRequestParams struct {
 
 	// Additional information added for the business. The parameter name is called key, and the parameter value is called value.Optional parameters for mysql: ProcessXA. If true is filled in, it will be processed. If it is left blank or filled with other values, it will not be processed.Optional parameters for mongo: SubscribeType. Currently only changeStream is supported. If not filled in, the default is changeStream.Other businesses currently have no optional parameters.
 	ExtraAttr []*KeyValuePairOption `json:"ExtraAttr,omitnil,omitempty" name:"ExtraAttr"`
+
+
+	ConsumerVpcId *string `json:"ConsumerVpcId,omitnil,omitempty" name:"ConsumerVpcId"`
+
+
+	ConsumerSubnetId *string `json:"ConsumerSubnetId,omitnil,omitempty" name:"ConsumerSubnetId"`
 }
 
 type ConfigureSubscribeJobRequest struct {
@@ -406,6 +415,10 @@ type ConfigureSubscribeJobRequest struct {
 
 	// Additional information added for the business. The parameter name is called key, and the parameter value is called value.Optional parameters for mysql: ProcessXA. If true is filled in, it will be processed. If it is left blank or filled with other values, it will not be processed.Optional parameters for mongo: SubscribeType. Currently only changeStream is supported. If not filled in, the default is changeStream.Other businesses currently have no optional parameters.
 	ExtraAttr []*KeyValuePairOption `json:"ExtraAttr,omitnil,omitempty" name:"ExtraAttr"`
+
+	ConsumerVpcId *string `json:"ConsumerVpcId,omitnil,omitempty" name:"ConsumerVpcId"`
+
+	ConsumerSubnetId *string `json:"ConsumerSubnetId,omitnil,omitempty" name:"ConsumerSubnetId"`
 }
 
 func (r *ConfigureSubscribeJobRequest) ToJsonString() string {
@@ -429,6 +442,8 @@ func (r *ConfigureSubscribeJobRequest) FromJsonString(s string) error {
 	delete(f, "Protocol")
 	delete(f, "PipelineInfo")
 	delete(f, "ExtraAttr")
+	delete(f, "ConsumerVpcId")
+	delete(f, "ConsumerSubnetId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ConfigureSubscribeJobRequest has unknown keys!", "")
 	}
@@ -1257,6 +1272,9 @@ type CreateSubscribeRequestParams struct {
 
 	// Custom task name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+
+	InstanceClass *string `json:"InstanceClass,omitnil,omitempty" name:"InstanceClass"`
 }
 
 type CreateSubscribeRequest struct {
@@ -1282,6 +1300,8 @@ type CreateSubscribeRequest struct {
 
 	// Custom task name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	InstanceClass *string `json:"InstanceClass,omitnil,omitempty" name:"InstanceClass"`
 }
 
 func (r *CreateSubscribeRequest) ToJsonString() string {
@@ -1303,6 +1323,7 @@ func (r *CreateSubscribeRequest) FromJsonString(s string) error {
 	delete(f, "Count")
 	delete(f, "Tags")
 	delete(f, "Name")
+	delete(f, "InstanceClass")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSubscribeRequest has unknown keys!", "")
 	}
@@ -1355,6 +1376,9 @@ type CreateSyncJobRequestParams struct {
 	// Sync task specification, such as `Standard`.
 	Specification *string `json:"Specification,omitnil,omitempty" name:"Specification"`
 
+
+	TimeSpan *uint64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
 	// Tag information
 	Tags []*TagItem `json:"Tags,omitnil,omitempty" name:"Tags"`
 
@@ -1395,6 +1419,8 @@ type CreateSyncJobRequest struct {
 	// Sync task specification, such as `Standard`.
 	Specification *string `json:"Specification,omitnil,omitempty" name:"Specification"`
 
+	TimeSpan *uint64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
 	// Tag information
 	Tags []*TagItem `json:"Tags,omitnil,omitempty" name:"Tags"`
 
@@ -1432,6 +1458,7 @@ func (r *CreateSyncJobRequest) FromJsonString(s string) error {
 	delete(f, "DstDatabaseType")
 	delete(f, "DstRegion")
 	delete(f, "Specification")
+	delete(f, "TimeSpan")
 	delete(f, "Tags")
 	delete(f, "Count")
 	delete(f, "AutoRenew")
@@ -1502,7 +1529,7 @@ type DBEndpointInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DatabaseNetEnv *string `json:"DatabaseNetEnv,omitnil,omitempty" name:"DatabaseNetEnv"`
 
-	// TDSQL connection method: proxy - access each set node via TDSQL proxy hosts. Note that this connection method is only available in self-developed cloud environments. Only proxy host information needs to be provided in Info. set - directly connect to set nodes. If selecting direct set connection, both proxy host information and all set node information must be correctly filled in Info. Mandatory when source is TDSQL MySQL type.
+
 	ConnectType *string `json:"ConnectType,omitnil,omitempty" name:"ConnectType"`
 }
 
@@ -1583,6 +1610,9 @@ type DBInfo struct {
 
 	// Temporary token, you can obtain the temporary key by [GetFederationToken](https://intl.cloud.tencent.com/document/product/1312/48195?from_cn_redirect=1).Note: This field may return null, indicating that no valid values can be obtained.
 	TmpToken *string `json:"TmpToken,omitnil,omitempty" name:"TmpToken"`
+
+
+	EncryptConn *string `json:"EncryptConn,omitnil,omitempty" name:"EncryptConn"`
 }
 
 type DBItem struct {
@@ -3061,6 +3091,9 @@ type DescribeSubscribeDetailResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	KafkaConfig *SubscribeKafkaConfig `json:"KafkaConfig,omitnil,omitempty" name:"KafkaConfig"`
 
+
+	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
+
 	// Source database access type. Valid values: extranet (public network); vpncloud (VPN access); dcg (Direct Connect); ccn (CCN); cdb (database); cvm (self-build on CVM); intranet (intranet); vpc (VPC). Note: The specific optional values depend on the current link support capabilities.Note: This field may return null, indicating that no valid values can be obtained.
 	AccessType *string `json:"AccessType,omitnil,omitempty" name:"AccessType"`
 
@@ -3081,6 +3114,18 @@ type DescribeSubscribeDetailResponseParams struct {
 
 	// Additional information added for the business. The parameter name is called key, and the parameter value is called value.Optional parameters for mysql: ProcessXA. Fill in true to process, others will not be processed.Optional parameters for mongo: SubscribeType. Currently only changeStream is supported.Note: This field may return null, indicating that no valid values can be obtained.
 	ExtraAttr []*KeyValuePairOption `json:"ExtraAttr,omitnil,omitempty" name:"ExtraAttr"`
+
+
+	SubscribeVersion *string `json:"SubscribeVersion,omitnil,omitempty" name:"SubscribeVersion"`
+
+
+	ConsumerVpcId *string `json:"ConsumerVpcId,omitnil,omitempty" name:"ConsumerVpcId"`
+
+
+	ConsumerSubnetId *string `json:"ConsumerSubnetId,omitnil,omitempty" name:"ConsumerSubnetId"`
+
+
+	InstanceClass *string `json:"InstanceClass,omitnil,omitempty" name:"InstanceClass"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -3107,11 +3152,17 @@ type DescribeSubscribeJobsRequestParams struct {
 	// Subscription ID (exact match)
 	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
 
+
+	SubscribeIds []*string `json:"SubscribeIds,omitnil,omitempty" name:"SubscribeIds"`
+
 	// Subscription name (prefix fuzzy match)
 	SubscribeName *string `json:"SubscribeName,omitnil,omitempty" name:"SubscribeName"`
 
 	// Subscribed cloud database instance ID (exact match)
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+
+	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
 
 	// Payment method. Valid values: 0 (monthly subscription); 1 (pay-as-you-go).
 	PayType *int64 `json:"PayType,omitnil,omitempty" name:"PayType"`
@@ -3144,11 +3195,15 @@ type DescribeSubscribeJobsRequest struct {
 	// Subscription ID (exact match)
 	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
 
+	SubscribeIds []*string `json:"SubscribeIds,omitnil,omitempty" name:"SubscribeIds"`
+
 	// Subscription name (prefix fuzzy match)
 	SubscribeName *string `json:"SubscribeName,omitnil,omitempty" name:"SubscribeName"`
 
 	// Subscribed cloud database instance ID (exact match)
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
 
 	// Payment method. Valid values: 0 (monthly subscription); 1 (pay-as-you-go).
 	PayType *int64 `json:"PayType,omitnil,omitempty" name:"PayType"`
@@ -3188,8 +3243,10 @@ func (r *DescribeSubscribeJobsRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "SubscribeId")
+	delete(f, "SubscribeIds")
 	delete(f, "SubscribeName")
 	delete(f, "InstanceId")
+	delete(f, "Topic")
 	delete(f, "PayType")
 	delete(f, "Product")
 	delete(f, "Status")
@@ -3807,13 +3864,13 @@ type Endpoint struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	CcnOwnerUin *string `json:"CcnOwnerUin,omitnil,omitempty" name:"CcnOwnerUin"`
 
-	// The ID of the sub-instance when the database is cynos and it is a sub-database instance within a cynos cluster
+
 	ChildInstanceId *string `json:"ChildInstanceId,omitnil,omitempty" name:"ChildInstanceId"`
 
-	// When the database is cynos and it is a sub-database instance within a cynos cluster, this parameter represents the type of the sub-instance, for example: pass 'ro' for read-only instances, 'rw' for read-write instances.
+
 	ChildInstanceType *string `json:"ChildInstanceType,omitnil,omitempty" name:"ChildInstanceType"`
 
-	// Shard id of tdsql. Mandatory when node type is set.
+
 	SetId *string `json:"SetId,omitnil,omitempty" name:"SetId"`
 }
 
@@ -3866,10 +3923,10 @@ type EndpointItem struct {
 	// Additional information added for the business. Parameter name is called key, parameter value is called value. Mandatory parameters for tdpg: PgDatabase (subscribed database name).Note: This field may return null, indicating that no valid values can be obtained.
 	ExtraAttr []*KeyValuePairOption `json:"ExtraAttr,omitnil,omitempty" name:"ExtraAttr"`
 
-	// The ID of the sub-instance when the database is cynos and it is a sub-database instance within a cynos cluster
+
 	ChildInstanceId *string `json:"ChildInstanceId,omitnil,omitempty" name:"ChildInstanceId"`
 
-	// When the database is cynos and it is a sub-database instance within a cynos cluster, this parameter represents the type of the sub-instance, for example: pass 'ro' for read-only instances, 'rw' for read-write instances.
+
 	ChildInstanceType *string `json:"ChildInstanceType,omitnil,omitempty" name:"ChildInstanceType"`
 }
 
@@ -4284,7 +4341,7 @@ type MigrateOption struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExtraAttr []*KeyValuePairOption `json:"ExtraAttr,omitnil,omitempty" name:"ExtraAttr"`
 
-	// PostgreSQL migration types: logical (logical migration), physical (physical migration)
+
 	MigrateWay *string `json:"MigrateWay,omitnil,omitempty" name:"MigrateWay"`
 }
 
@@ -4542,9 +4599,6 @@ type ModifyConsumerGroupPasswordRequestParams struct {
 	// Consumer group name. The full name of the actual consumer group is in the form: consumer-grp-#{SubscribeId}-#{ConsumerGroupName}.
 	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
 
-	// Old Password.
-	OldPassword *string `json:"OldPassword,omitnil,omitempty" name:"OldPassword"`
-
 	// New password. The character length is no less than 3 and no more than 32.
 	NewPassword *string `json:"NewPassword,omitnil,omitempty" name:"NewPassword"`
 }
@@ -4560,9 +4614,6 @@ type ModifyConsumerGroupPasswordRequest struct {
 
 	// Consumer group name. The full name of the actual consumer group is in the form: consumer-grp-#{SubscribeId}-#{ConsumerGroupName}.
 	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
-
-	// Old Password.
-	OldPassword *string `json:"OldPassword,omitnil,omitempty" name:"OldPassword"`
 
 	// New password. The character length is no less than 3 and no more than 32.
 	NewPassword *string `json:"NewPassword,omitnil,omitempty" name:"NewPassword"`
@@ -4583,7 +4634,6 @@ func (r *ModifyConsumerGroupPasswordRequest) FromJsonString(s string) error {
 	delete(f, "SubscribeId")
 	delete(f, "AccountName")
 	delete(f, "ConsumerGroupName")
-	delete(f, "OldPassword")
 	delete(f, "NewPassword")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyConsumerGroupPasswordRequest has unknown keys!", "")
@@ -5387,10 +5437,6 @@ type Objects struct {
 
 	// Advanced object types, such as function and procedure. Note: If you want to migrate and synchronize advanced objects, the corresponding advanced object type should be included in this configuration. When advanced objects need to be synchronized, the initialization type must include the structure initialization type, that is, the Options.InitType value of the task is Structure or Full.Note: This field may return null, indicating that no valid values can be obtained.
 	AdvancedObjects []*string `json:"AdvancedObjects,omitnil,omitempty" name:"AdvancedObjects"`
-
-	// A redundant field that specifies the online DDL type
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	OnlineDDL *OnlineDDL `json:"OnlineDDL,omitnil,omitempty" name:"OnlineDDL"`
 }
 
 type OffsetTimeMap struct {
@@ -5399,12 +5445,6 @@ type OffsetTimeMap struct {
 
 	// Kafka offsetNote: This field may return null, indicating that no valid values can be obtained.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-}
-
-type OnlineDDL struct {
-	// Status
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type Options struct {
@@ -5448,10 +5488,13 @@ type Options struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AutoRetryTimeRangeMinutes *int64 `json:"AutoRetryTimeRangeMinutes,omitnil,omitempty" name:"AutoRetryTimeRangeMinutes"`
 
-	// Whether to filter out begin and commit messages when synchronizing to the kafka link. Currently only supported for MySQL-to-kafka links.
+
+	StartPosition *string `json:"StartPosition,omitnil,omitempty" name:"StartPosition"`
+
+
 	FilterBeginCommit *bool `json:"FilterBeginCommit,omitnil,omitempty" name:"FilterBeginCommit"`
 
-	// Whether to filter out checkpoint messages when synchronizing to the kafka link. Currently only supported for MySQL-to-kafka links.
+
 	FilterCheckpoint *bool `json:"FilterCheckpoint,omitnil,omitempty" name:"FilterCheckpoint"`
 }
 
@@ -7164,6 +7207,9 @@ type SyncJobInfo struct {
 	// Deletion time in the format of `yyyy-mm-dd hh:mm:ss`
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OfflineTime *string `json:"OfflineTime,omitnil,omitempty" name:"OfflineTime"`
+
+
+	OptObjStatus *string `json:"OptObjStatus,omitnil,omitempty" name:"OptObjStatus"`
 
 	// Settings of automatic retry time
 	// Note: This field may return null, indicating that no valid values can be obtained.
