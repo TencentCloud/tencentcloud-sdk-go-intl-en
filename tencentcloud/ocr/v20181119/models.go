@@ -29,15 +29,23 @@ type AddressInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PostalCode *string `json:"PostalCode,omitnil,omitempty" name:"PostalCode"`
 
-	// Specifies the sub-region.
+	// Sub-region or state/province.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Subdivision *string `json:"Subdivision,omitnil,omitempty" name:"Subdivision"`
 
-	// Specifies the city.
+	// District or county.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	District *string `json:"District,omitnil,omitempty" name:"District"`
+
+	// City name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	City *string `json:"City,omitnil,omitempty" name:"City"`
 
-	// Complete address.
+	// Subdistrict or township.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Subdistrict *string `json:"Subdistrict,omitnil,omitempty" name:"Subdistrict"`
+
+	// Formatted complete address.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FormattedAddress *string `json:"FormattedAddress,omitnil,omitempty" name:"FormattedAddress"`
 
@@ -57,7 +65,7 @@ type AddressInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	LineFour *string `json:"LineFour,omitnil,omitempty" name:"LineFour"`
 
-	// Specifies the fifth line in the address bar.
+	// Specifies the fifth line of the address bar.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	LineFive *string `json:"LineFive,omitnil,omitempty" name:"LineFive"`
 }
@@ -152,130 +160,88 @@ type AnalyzedLog struct {
 
 // Predefined struct for user
 type ApplyCardVerificationExternalRequestParams struct {
-	// Specifies the country of the document.
-	// ARG:Argentina
-	// AUS:Australia
-	// KHM:Cambodia
-	// CAN:Canada
-	// SGP:Singapore
-	// CHL:Chile
-	// DEU:Germany
-	// MEX:Mexico
-	// MMR:Myanmar
-	// NZL:New Zealand
-	// BGD:Bangladesh
-	// NGA:Nigeria
-	// PAK:Pakistan
-	// RUS:Russia
-	// IDN:Indonesia
-	// HKG:Hong Kong, China
-	// THA:Thailand
-	// MYS:Malaysia
-	// JPN:Japan
-	// PHL:Philippines
-	// MAC:Macao, China
-	// CHN:ChinaPermit
-	// TWN:Taiwan, China
-	// BGD:Bangladesh
-	// NGA:Nigeria 
-	// PAK:Pakistan
-	// 
-	// AUTO: supports cards and documents from 200+ countries
+	// Country/Region of the document. For the full list of supported countries/regions, refer to the API description.
 	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
-	// Document type.
-	// ID_CARD
-	// PASSPORT
-	// DRIVING_LICENSE
-	// RESIDENCE_PERMIT (Supported in certain countries/regions, including Australia, Canada, Germany, New Zealand, Nigeria, Singapore).
+	// Document type. Supported values: ID_CARD, PASSPORT, DRIVING_LICENSE, RESIDENCE_PERMIT (only supported in certain countries/regions, including Australia, Canada, Germany, New Zealand, Nigeria, Singapore).
 	CardType *string `json:"CardType,omitnil,omitempty" name:"CardType"`
 
-	// The Base64 value of the document Front. supported image formats: PNG, JPG/JPEG. 
-	// Supported image size: the downloaded image after Base64 encoding must be no more than 2M. image download time must be no more than 5 seconds. 
-	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only ImageUrlFront will be used.
+	// Base64-encoded image of the document front.
+	// Supported image formats: PNG, JPG/JPEG (GIF not supported).
+	// Supported image size: The downloaded image after Base64 encoding must not exceed 2 MB. Image download time must not exceed 5 seconds.
+	// Supported image resolution: Between 256*256 and 4096*4096 pixels.
+	// Note: You must provide either ImageUrlFront or ImageBase64Front. If both are provided, only ImageUrlFront is used.
 	ImageBase64Front *string `json:"ImageBase64Front,omitnil,omitempty" name:"ImageBase64Front"`
 
 	// The Base64 value of the reverse side of the document. Supported image formats: PNG, JPG/JPEG. 
-	// Supported image size: the downloaded image after Base64 encoding must be no more than 2M. image download time must be no more than 5 seconds. 
+	// Supported image size: the downloaded image after Base64 encoding must be no more than 2M. Image download time must be no more than 5 seconds. 
 	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only ImageUrlBack is used.
 	ImageBase64Back *string `json:"ImageBase64Back,omitnil,omitempty" name:"ImageBase64Back"`
 
-	// Url of the document Front. supported image formats: PNG, JPG/JPEG. 
-	// Supported image size: the downloaded image after Base64 encoding must be no more than 2M. image download time must be no more than 5 seconds. 
-	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only ImageUrlFront will be used.
+	// URL of the document front image.
+	// Supported image formats: PNG, JPG/JPEG (GIF not supported).
+	// Supported image size: The downloaded image after Base64 encoding must not exceed 2 MB. Image download time must not exceed 5 seconds.
+	// Supported image resolution: Between 256*256 and 4096*4096 pixels.
+	// Note: You must provide either ImageUrlFront or ImageBase64Front. If both are provided, only ImageUrlFront is used.
 	ImageUrlFront *string `json:"ImageUrlFront,omitnil,omitempty" name:"ImageUrlFront"`
 
-	// Specifies the Url of the document Back. supported image formats: PNG, JPG/JPEG
-	// Supported image size: no more than 2M after Base64 encoding. image download time should not exceed 5 seconds. 
-	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only use ImageUrlBack.
+	// URL of the document back image.
+	// Supported image formats: PNG, JPG/JPEG (GIF not supported).
+	// Supported image size: The downloaded image after Base64 encoding must not exceed 2 MB. Image download time must not exceed 5 seconds.
+	// Supported image resolution: Between 256*256 and 4096*4096 pixels.
+	// Note: For some documents, you must provide either ImageUrlBack or ImageBase64Back. If both are provided, only ImageUrlBack is used.
 	ImageUrlBack *string `json:"ImageUrlBack,omitnil,omitempty" name:"ImageUrlBack"`
 
-	// Whether to extract the ID portrait. Default value: false.
+	// Whether to crop and return the face image from the document. Default: false.
+	// If set to true, the image constraints are:
+	// - Size after Base64 encoding must not exceed 5 MB.
+	// - Maximum pixel width/height: 4000 for JPG, 2000 for other formats.
+	// - Minimum pixel width/height: 64.
+	// - Supported formats: PNG, JPG, JPEG, BMP (GIF not supported).
 	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
 }
 
 type ApplyCardVerificationExternalRequest struct {
 	*tchttp.BaseRequest
 	
-	// Specifies the country of the document.
-	// ARG:Argentina
-	// AUS:Australia
-	// KHM:Cambodia
-	// CAN:Canada
-	// SGP:Singapore
-	// CHL:Chile
-	// DEU:Germany
-	// MEX:Mexico
-	// MMR:Myanmar
-	// NZL:New Zealand
-	// BGD:Bangladesh
-	// NGA:Nigeria
-	// PAK:Pakistan
-	// RUS:Russia
-	// IDN:Indonesia
-	// HKG:Hong Kong, China
-	// THA:Thailand
-	// MYS:Malaysia
-	// JPN:Japan
-	// PHL:Philippines
-	// MAC:Macao, China
-	// CHN:ChinaPermit
-	// TWN:Taiwan, China
-	// BGD:Bangladesh
-	// NGA:Nigeria 
-	// PAK:Pakistan
-	// 
-	// AUTO: supports cards and documents from 200+ countries
+	// Country/Region of the document. For the full list of supported countries/regions, refer to the API description.
 	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
-	// Document type.
-	// ID_CARD
-	// PASSPORT
-	// DRIVING_LICENSE
-	// RESIDENCE_PERMIT (Supported in certain countries/regions, including Australia, Canada, Germany, New Zealand, Nigeria, Singapore).
+	// Document type. Supported values: ID_CARD, PASSPORT, DRIVING_LICENSE, RESIDENCE_PERMIT (only supported in certain countries/regions, including Australia, Canada, Germany, New Zealand, Nigeria, Singapore).
 	CardType *string `json:"CardType,omitnil,omitempty" name:"CardType"`
 
-	// The Base64 value of the document Front. supported image formats: PNG, JPG/JPEG. 
-	// Supported image size: the downloaded image after Base64 encoding must be no more than 2M. image download time must be no more than 5 seconds. 
-	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only ImageUrlFront will be used.
+	// Base64-encoded image of the document front.
+	// Supported image formats: PNG, JPG/JPEG (GIF not supported).
+	// Supported image size: The downloaded image after Base64 encoding must not exceed 2 MB. Image download time must not exceed 5 seconds.
+	// Supported image resolution: Between 256*256 and 4096*4096 pixels.
+	// Note: You must provide either ImageUrlFront or ImageBase64Front. If both are provided, only ImageUrlFront is used.
 	ImageBase64Front *string `json:"ImageBase64Front,omitnil,omitempty" name:"ImageBase64Front"`
 
 	// The Base64 value of the reverse side of the document. Supported image formats: PNG, JPG/JPEG. 
-	// Supported image size: the downloaded image after Base64 encoding must be no more than 2M. image download time must be no more than 5 seconds. 
+	// Supported image size: the downloaded image after Base64 encoding must be no more than 2M. Image download time must be no more than 5 seconds. 
 	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only ImageUrlBack is used.
 	ImageBase64Back *string `json:"ImageBase64Back,omitnil,omitempty" name:"ImageBase64Back"`
 
-	// Url of the document Front. supported image formats: PNG, JPG/JPEG. 
-	// Supported image size: the downloaded image after Base64 encoding must be no more than 2M. image download time must be no more than 5 seconds. 
-	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only ImageUrlFront will be used.
+	// URL of the document front image.
+	// Supported image formats: PNG, JPG/JPEG (GIF not supported).
+	// Supported image size: The downloaded image after Base64 encoding must not exceed 2 MB. Image download time must not exceed 5 seconds.
+	// Supported image resolution: Between 256*256 and 4096*4096 pixels.
+	// Note: You must provide either ImageUrlFront or ImageBase64Front. If both are provided, only ImageUrlFront is used.
 	ImageUrlFront *string `json:"ImageUrlFront,omitnil,omitempty" name:"ImageUrlFront"`
 
-	// Specifies the Url of the document Back. supported image formats: PNG, JPG/JPEG
-	// Supported image size: no more than 2M after Base64 encoding. image download time should not exceed 5 seconds. 
-	// Supported image resolution: between 256 \* 256 and 4096 \* 4096. For some documents, either ImageUrlBack or ImageBase64Back must be provided. If both are provided, only use ImageUrlBack.
+	// URL of the document back image.
+	// Supported image formats: PNG, JPG/JPEG (GIF not supported).
+	// Supported image size: The downloaded image after Base64 encoding must not exceed 2 MB. Image download time must not exceed 5 seconds.
+	// Supported image resolution: Between 256*256 and 4096*4096 pixels.
+	// Note: For some documents, you must provide either ImageUrlBack or ImageBase64Back. If both are provided, only ImageUrlBack is used.
 	ImageUrlBack *string `json:"ImageUrlBack,omitnil,omitempty" name:"ImageUrlBack"`
 
-	// Whether to extract the ID portrait. Default value: false.
+	// Whether to crop and return the face image from the document. Default: false.
+	// If set to true, the image constraints are:
+	// - Size after Base64 encoding must not exceed 5 MB.
+	// - Maximum pixel width/height: 4000 for JPG, 2000 for other formats.
+	// - Minimum pixel width/height: 64.
+	// - Supported formats: PNG, JPG, JPEG, BMP (GIF not supported).
 	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
 }
 
@@ -306,7 +272,7 @@ func (r *ApplyCardVerificationExternalRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ApplyCardVerificationExternalResponseParams struct {
-	// Process token, which is used to obtain the result.
+	// Unique token for the verification process, used to retrieve the result.
 	CardVerificationToken *string `json:"CardVerificationToken,omitnil,omitempty" name:"CardVerificationToken"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1283,49 +1249,41 @@ type GeneralCard struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	LicenseNumber *string `json:"LicenseNumber,omitnil,omitempty" name:"LicenseNumber"`
 
-	// Personal number. returned when the identity document type is passport.
+	// Personal number. 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PersonalNumber *string `json:"PersonalNumber,omitnil,omitempty" name:"PersonalNumber"`
 
-	// Passport mrz line 1.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	PassportCodeFirst *string `json:"PassportCodeFirst,omitnil,omitempty" name:"PassportCodeFirst"`
-
-	// Passport mrz line 2.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	PassportCodeSecond *string `json:"PassportCodeSecond,omitnil,omitempty" name:"PassportCodeSecond"`
-
-	// Expiration date, in YYYY-MM-DD format.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	ExpirationDate *string `json:"ExpirationDate,omitnil,omitempty" name:"ExpirationDate"`
-
-	// Expiration date in YYYY-MM-DD format.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	DueDate *string `json:"DueDate,omitnil,omitempty" name:"DueDate"`
-
-	// Issue date, in YYYY-MM-DD format.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	IssuedDate *string `json:"IssuedDate,omitnil,omitempty" name:"IssuedDate"`
-
-	// Issuing authority.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	IssuedAuthority *string `json:"IssuedAuthority,omitnil,omitempty" name:"IssuedAuthority"`
-
-	// Issuing country, following the ISO 3166 country coding specification.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	IssuedCountry *string `json:"IssuedCountry,omitnil,omitempty" name:"IssuedCountry"`
-
-	// Specifies the name.
+	// Full name on the document.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FullName *string `json:"FullName,omitnil,omitempty" name:"FullName"`
 
-	// Name.
+	// Full name in local language.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FullNameLocal *string `json:"FullNameLocal,omitnil,omitempty" name:"FullNameLocal"`
+
+	// First name or given name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FirstName *string `json:"FirstName,omitnil,omitempty" name:"FirstName"`
 
-	// Name.
+	// First name in local language.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FirstNameLocal *string `json:"FirstNameLocal,omitnil,omitempty" name:"FirstNameLocal"`
+
+	// Middle name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MiddleName *string `json:"MiddleName,omitnil,omitempty" name:"MiddleName"`
+
+	// Middle name in local language.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MiddleNameLocal *string `json:"MiddleNameLocal,omitnil,omitempty" name:"MiddleNameLocal"`
+
+	// Last name or surname.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	LastName *string `json:"LastName,omitnil,omitempty" name:"LastName"`
+
+	// Last name in local language.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastNameLocal *string `json:"LastNameLocal,omitnil,omitempty" name:"LastNameLocal"`
 
 	// Gender on the document.
 	// - M: man.
@@ -1333,10 +1291,6 @@ type GeneralCard struct {
 	// - X: other gender identity.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
-
-	// Age. 0 means no valid info.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Age *string `json:"Age,omitnil,omitempty" name:"Age"`
 
 	// Date of birth.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -1346,29 +1300,111 @@ type GeneralCard struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	BirthPlace *string `json:"BirthPlace,omitnil,omitempty" name:"BirthPlace"`
 
+	// Issue date.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuedDate *string `json:"IssuedDate,omitnil,omitempty" name:"IssuedDate"`
+
+	// Issuing authority.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuedAuthority *string `json:"IssuedAuthority,omitnil,omitempty" name:"IssuedAuthority"`
+
+	// Place of issue.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuedPlace *string `json:"IssuedPlace,omitnil,omitempty" name:"IssuedPlace"`
+
+	// Issuing country.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuedCountry *string `json:"IssuedCountry,omitnil,omitempty" name:"IssuedCountry"`
+
+	// Country code of issue, ISO Alpha-3 format.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuedCountryCode *string `json:"IssuedCountryCode,omitnil,omitempty" name:"IssuedCountryCode"`
+
+	// Expiry date.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpirationDate *string `json:"ExpirationDate,omitnil,omitempty" name:"ExpirationDate"`
+
+	// First line of the Machine Readable Zone (MRZ).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MRZLine1 *string `json:"MRZLine1,omitnil,omitempty" name:"MRZLine1"`
+
+	// Second line of the Machine Readable Zone (MRZ).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MRZLine2 *string `json:"MRZLine2,omitnil,omitempty" name:"MRZLine2"`
+
 	// Document nationality, following ISO 3166 country coding specification.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
-	// Registration number.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	RegistrationNumber *string `json:"RegistrationNumber,omitnil,omitempty" name:"RegistrationNumber"`
-
-	// Specifies the address information of the document.
+	// Address information on the document.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Address *AddressInfo `json:"Address,omitnil,omitempty" name:"Address"`
 
-	// Localized name.
+	// Religion (if displayed on the document).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FullNameLocal *string `json:"FullNameLocal,omitnil,omitempty" name:"FullNameLocal"`
+	Religion *string `json:"Religion,omitnil,omitempty" name:"Religion"`
 
-	// Localization name.
+	// Type of document.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FirstNameLocal *string `json:"FirstNameLocal,omitnil,omitempty" name:"FirstNameLocal"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Localized surname.
+	// Blood type.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LastNameLocal *string `json:"LastNameLocal,omitnil,omitempty" name:"LastNameLocal"`
+	BloodType *string `json:"BloodType,omitnil,omitempty" name:"BloodType"`
+
+	// Height.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Height *string `json:"Height,omitnil,omitempty" name:"Height"`
+
+	// Weight.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Weight *string `json:"Weight,omitnil,omitempty" name:"Weight"`
+
+	// Vehicle class authorized on the driver license (e.g., A, B, C).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VehicleClass *string `json:"VehicleClass,omitnil,omitempty" name:"VehicleClass"`
+
+	// Restrictions on the driver license.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Restrictions *string `json:"Restrictions,omitnil,omitempty" name:"Restrictions"`
+
+	// Endorsements or additional records on the driver license.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Endorsement *string `json:"Endorsement,omitnil,omitempty" name:"Endorsement"`
+
+	// Supplementary fields (varies by document type).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Others *string `json:"Others,omitnil,omitempty" name:"Others"`
+
+	// First line of the passport MRZ (Machine Readable Zone).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: PassportCodeFirst is deprecated.
+	PassportCodeFirst *string `json:"PassportCodeFirst,omitnil,omitempty" name:"PassportCodeFirst"`
+
+	// Second line of the passport MRZ (Machine Readable Zone).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: PassportCodeSecond is deprecated.
+	PassportCodeSecond *string `json:"PassportCodeSecond,omitnil,omitempty" name:"PassportCodeSecond"`
+
+	// Expiry date.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: DueDate is deprecated.
+	DueDate *string `json:"DueDate,omitnil,omitempty" name:"DueDate"`
+
+	// Age. 0 means no valid info.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: Age is deprecated.
+	Age *string `json:"Age,omitnil,omitempty" name:"Age"`
+
+	// Registration number.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: RegistrationNumber is deprecated.
+	RegistrationNumber *string `json:"RegistrationNumber,omitnil,omitempty" name:"RegistrationNumber"`
 }
 
 type GeneralMachineItem struct {
@@ -1431,33 +1467,44 @@ func (r *GetCardVerificationExternalResultRequest) FromJsonString(s string) erro
 
 // Predefined struct for user
 type GetCardVerificationExternalResultResponseParams struct {
-	// Indicates the status. valid values: 
-	// PASSED
+	// Verification status. Valid values: 
 	// PROCESSING
-	// WARNING
+	// ABNORMAL
+	// COMPLETED
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Indicates the anti-counterfeiting information.
-	// -ScreenshotSuspected: The image is a screenshot.
-	// -RetakeSuspected: The image is taken from another screen.
-	// -PaperCopy: The image is a black and white, or color photocopy.
-	// -FakeSuspected: The image of the card, or the information on the card has been edited or altered.
-	// -OtherWarning: Document's authenticity is not verified for various reasons.
+	// Anti-counterfeiting information. 
+	// - ScreenshotSuspected: The image is a screenshot.
+	// - RetakeSuspected: The image is taken from another screen.
+	// - PaperCopy: The image is a black and white, or color photocopy.
+	// - FakeSuspected: The image of the card, or the information on the card has been edited or altered.
+	// - PoorImageQuality: The image is bad quality.
+	// - InformationVerificationFailed: Information verification failed based on OCR recognition results
+	// - TooManyCards: Multiple cards present in the frame.
+	// - IncompleteCard: Captured document is incomplete.
+	// - OtherWarning: Document's authenticity is not verified for various reasons.
+	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	WarnInfo []*string `json:"WarnInfo,omitnil,omitempty" name:"WarnInfo"`
 
-	// Country Code.
+	// Country or region of the document.
 	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: Nationality is deprecated.
 	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
-	// Recognition result of the text in the id photo.	
+	// Front-side document recognition results. 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CardInfo *GeneralCard `json:"CardInfo,omitnil,omitempty" name:"CardInfo"`
 
-	// Specifies the token in the request parameters.
+	// Back-side document recognition results.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BackCardInfo *GeneralCard `json:"BackCardInfo,omitnil,omitempty" name:"BackCardInfo"`
+
+	// The token passed in the input parameters.
 	CardVerificationToken *string `json:"CardVerificationToken,omitnil,omitempty" name:"CardVerificationToken"`
 
-	// If the ReturnHeadImage is false or not passed when initiating the card and certificate recognition, the HeadImageBase64 will return an empty string. If the ReturnHeadImage is true when initiating the card and certificate recognition and the HeadImageBase64 returns an empty string, it indicates that the face image recognition has failed. Please check the image.
+	// Base64-encoded head image from the document. If ReturnHeadImage was set to false or not provided in the request, this field returns an empty string. If ReturnHeadImage was set to true and this field returns an empty string, indicating a failure to extract the head image extraction failed. Please check the input document photo.
 	HeadImageBase64 *string `json:"HeadImageBase64,omitnil,omitempty" name:"HeadImageBase64"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.

@@ -19972,19 +19972,19 @@ type ProxyZone struct {
 }
 
 type QueryFilter struct {
-	// Search field. Valid values: "InstanceId", "ProjectId", "InstanceName", "Vip"
-	Names []*string `json:"Names,omitnil,omitempty" name:"Names"`
-
-	// Search string
+	// Field value list, in one-to-one correspondence with Names. InstanceId/ClusterId uses exact matching, and InstanceName uses fuzzy matching by default.
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 
-	// Whether to use exact match
+	// Search field name list, support the following 3 fields (case-insensitive, multiple values are OR relationship): ClusterId (filter by cluster ID, exact match), InstanceId (reverse-check cluster by instance ID), InstanceName (reverse-check cluster by instance name, default LIKE fuzzy matching, exact match when ExactMatch=true). Take the intersection when InstanceId and InstanceName are input at the same time (AND semantics).
+	Names []*string `json:"Names,omitnil,omitempty" name:"Names"`
+
+	// Exact match. Only applicable to InstanceName: true for exact matching, false (default) for LIKE fuzzy matching.
 	ExactMatch *bool `json:"ExactMatch,omitnil,omitempty" name:"ExactMatch"`
 
-	// Search field
+	// Search field name (single field mode, choose between this and Names). ClusterId, InstanceId, and InstanceName are supported.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Operator
+	// Operator (reserved field, currently disabled). Available values: >, >=, !=, =, <, <=
 	//
 	// Deprecated: Operator is deprecated.
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
