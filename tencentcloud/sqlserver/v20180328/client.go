@@ -2065,6 +2065,64 @@ func (c *Client) DeletePublishSubscribeWithContext(ctx context.Context, request 
     return
 }
 
+func NewDeleteRestoreTaskRequest() (request *DeleteRestoreTaskRequest) {
+    request = &DeleteRestoreTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DeleteRestoreTask")
+    
+    
+    return
+}
+
+func NewDeleteRestoreTaskResponse() (response *DeleteRestoreTaskResponse) {
+    response = &DeleteRestoreTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteRestoreTask
+// This API is used to delete rollback task records.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCENOTFOUND_PARAMSNOTFOUND = "ResourceNotFound.ParamsNotFound"
+func (c *Client) DeleteRestoreTask(request *DeleteRestoreTaskRequest) (response *DeleteRestoreTaskResponse, err error) {
+    return c.DeleteRestoreTaskWithContext(context.Background(), request)
+}
+
+// DeleteRestoreTask
+// This API is used to delete rollback task records.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCENOTFOUND_PARAMSNOTFOUND = "ResourceNotFound.ParamsNotFound"
+func (c *Client) DeleteRestoreTaskWithContext(ctx context.Context, request *DeleteRestoreTaskRequest) (response *DeleteRestoreTaskResponse, err error) {
+    if request == nil {
+        request = NewDeleteRestoreTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DeleteRestoreTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRestoreTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRestoreTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAccountPrivilegeByDBRequest() (request *DescribeAccountPrivilegeByDBRequest) {
     request = &DescribeAccountPrivilegeByDBRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5563,6 +5621,78 @@ func (c *Client) DescribeUploadBackupInfoWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeUploadIncrementalInfoRequest() (request *DescribeUploadIncrementalInfoRequest) {
+    request = &DescribeUploadIncrementalInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeUploadIncrementalInfo")
+    
+    
+    return
+}
+
+func NewDescribeUploadIncrementalInfoResponse() (response *DescribeUploadIncrementalInfoResponse) {
+    response = &DescribeUploadIncrementalInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeUploadIncrementalInfo
+// This API is used to query upload permissions for incremental backups.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COSPROPERTIESERROR = "FailedOperation.CosPropertiesError"
+//  FAILEDOPERATION_MIGRATIONLOCKERROR = "FailedOperation.MigrationLockError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_STSERROR = "InternalError.StsError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETERVALUE_COSPATHERROR = "InvalidParameterValue.CosPathError"
+//  RESOURCENOTFOUND_FULLBACKUPMIGRATIONNOTEXIST = "ResourceNotFound.FullBackupMigrationNotExist"
+//  RESOURCENOTFOUND_INCREBACKUPMIGRATIONNOTEXIST = "ResourceNotFound.IncreBackupMigrationNotExist"
+//  RESOURCEUNAVAILABLE_COSSTATUSERR = "ResourceUnavailable.CosStatusErr"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNSUPPORTEDOPERATION_UPLOADTYPEERROR = "UnsupportedOperation.UploadTypeError"
+func (c *Client) DescribeUploadIncrementalInfo(request *DescribeUploadIncrementalInfoRequest) (response *DescribeUploadIncrementalInfoResponse, err error) {
+    return c.DescribeUploadIncrementalInfoWithContext(context.Background(), request)
+}
+
+// DescribeUploadIncrementalInfo
+// This API is used to query upload permissions for incremental backups.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COSPROPERTIESERROR = "FailedOperation.CosPropertiesError"
+//  FAILEDOPERATION_MIGRATIONLOCKERROR = "FailedOperation.MigrationLockError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_STSERROR = "InternalError.StsError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETERVALUE_COSPATHERROR = "InvalidParameterValue.CosPathError"
+//  RESOURCENOTFOUND_FULLBACKUPMIGRATIONNOTEXIST = "ResourceNotFound.FullBackupMigrationNotExist"
+//  RESOURCENOTFOUND_INCREBACKUPMIGRATIONNOTEXIST = "ResourceNotFound.IncreBackupMigrationNotExist"
+//  RESOURCEUNAVAILABLE_COSSTATUSERR = "ResourceUnavailable.CosStatusErr"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNSUPPORTEDOPERATION_UPLOADTYPEERROR = "UnsupportedOperation.UploadTypeError"
+func (c *Client) DescribeUploadIncrementalInfoWithContext(ctx context.Context, request *DescribeUploadIncrementalInfoRequest) (response *DescribeUploadIncrementalInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeUploadIncrementalInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "DescribeUploadIncrementalInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUploadIncrementalInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUploadIncrementalInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeXEventsRequest() (request *DescribeXEventsRequest) {
     request = &DescribeXEventsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5817,6 +5947,74 @@ func (c *Client) InquiryPriceCreateDBInstancesWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewInquiryPriceCreateDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquiryPriceRenewDBInstanceRequest() (request *InquiryPriceRenewDBInstanceRequest) {
+    request = &InquiryPriceRenewDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "InquiryPriceRenewDBInstance")
+    
+    
+    return
+}
+
+func NewInquiryPriceRenewDBInstanceResponse() (response *InquiryPriceRenewDBInstanceResponse) {
+    response = &InquiryPriceRenewDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// InquiryPriceRenewDBInstance
+// This API is used to query the renewal price of a monthly subscription instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYPRICEFAILED = "FailedOperation.QueryPriceFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETERVALUE_COSTTYPENOTSUPPORTED = "InvalidParameterValue.CostTypeNotSupported"
+//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
+//  INVALIDPARAMETERVALUE_PARAMETERTYPEERROR = "InvalidParameterValue.ParameterTypeError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) InquiryPriceRenewDBInstance(request *InquiryPriceRenewDBInstanceRequest) (response *InquiryPriceRenewDBInstanceResponse, err error) {
+    return c.InquiryPriceRenewDBInstanceWithContext(context.Background(), request)
+}
+
+// InquiryPriceRenewDBInstance
+// This API is used to query the renewal price of a monthly subscription instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYPRICEFAILED = "FailedOperation.QueryPriceFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETERVALUE_COSTTYPENOTSUPPORTED = "InvalidParameterValue.CostTypeNotSupported"
+//  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
+//  INVALIDPARAMETERVALUE_PARAMETERTYPEERROR = "InvalidParameterValue.ParameterTypeError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) InquiryPriceRenewDBInstanceWithContext(ctx context.Context, request *InquiryPriceRenewDBInstanceRequest) (response *InquiryPriceRenewDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceRenewDBInstanceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "InquiryPriceRenewDBInstance")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquiryPriceRenewDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInquiryPriceRenewDBInstanceResponse()
     err = c.Send(request, response)
     return
 }
@@ -6701,6 +6899,68 @@ func (c *Client) ModifyDBInstanceProjectWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewModifyDBInstanceProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDBInstanceRenewFlagRequest() (request *ModifyDBInstanceRenewFlagRequest) {
+    request = &ModifyDBInstanceRenewFlagRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "ModifyDBInstanceRenewFlag")
+    
+    
+    return
+}
+
+func NewModifyDBInstanceRenewFlagResponse() (response *ModifyDBInstanceRenewFlagResponse) {
+    response = &ModifyDBInstanceRenewFlagResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDBInstanceRenewFlag
+// This API is used to modify the instance renewal flag.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSINVALID = "ResourceUnavailable.InstanceStatusInvalid"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyDBInstanceRenewFlag(request *ModifyDBInstanceRenewFlagRequest) (response *ModifyDBInstanceRenewFlagResponse, err error) {
+    return c.ModifyDBInstanceRenewFlagWithContext(context.Background(), request)
+}
+
+// ModifyDBInstanceRenewFlag
+// This API is used to modify the instance renewal flag.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSINVALID = "ResourceUnavailable.InstanceStatusInvalid"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) ModifyDBInstanceRenewFlagWithContext(ctx context.Context, request *ModifyDBInstanceRenewFlagRequest) (response *ModifyDBInstanceRenewFlagResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceRenewFlagRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "ModifyDBInstanceRenewFlag")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDBInstanceRenewFlag require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDBInstanceRenewFlagResponse()
     err = c.Send(request, response)
     return
 }
@@ -8243,6 +8503,70 @@ func (c *Client) RemoveBackupsWithContext(ctx context.Context, request *RemoveBa
     return
 }
 
+func NewRenewDBInstanceRequest() (request *RenewDBInstanceRequest) {
+    request = &RenewDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "RenewDBInstance")
+    
+    
+    return
+}
+
+func NewRenewDBInstanceResponse() (response *RenewDBInstanceResponse) {
+    response = &RenewDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RenewDBInstance
+// This API is used to renew instances. For pay-as-you-go instances, the billing method will change to monthly subscription after renewal. You can call the InquiryPriceRenewDBInstance API for the renewal price of pay-as-you-go instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETER_PAYORDERFAILED = "InvalidParameter.PayOrderFailed"
+//  INVALIDPARAMETERVALUE_ILLEGALSPEC = "InvalidParameterValue.IllegalSpec"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) RenewDBInstance(request *RenewDBInstanceRequest) (response *RenewDBInstanceResponse, err error) {
+    return c.RenewDBInstanceWithContext(context.Background(), request)
+}
+
+// RenewDBInstance
+// This API is used to renew instances. For pay-as-you-go instances, the billing method will change to monthly subscription after renewal. You can call the InquiryPriceRenewDBInstance API for the renewal price of pay-as-you-go instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEORDERFAILED = "FailedOperation.CreateOrderFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  INVALIDPARAMETER_PAYORDERFAILED = "InvalidParameter.PayOrderFailed"
+//  INVALIDPARAMETERVALUE_ILLEGALSPEC = "InvalidParameterValue.IllegalSpec"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) RenewDBInstanceWithContext(ctx context.Context, request *RenewDBInstanceRequest) (response *RenewDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewRenewDBInstanceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "RenewDBInstance")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RenewDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRenewDBInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRenewPostpaidDBInstanceRequest() (request *RenewPostpaidDBInstanceRequest) {
     request = &RenewPostpaidDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8849,6 +9173,160 @@ func (c *Client) StartInstanceXEventWithContext(ctx context.Context, request *St
     request.SetContext(ctx)
     
     response = NewStartInstanceXEventResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartMigrationCheckRequest() (request *StartMigrationCheckRequest) {
+    request = &StartMigrationCheckRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "StartMigrationCheck")
+    
+    
+    return
+}
+
+func NewStartMigrationCheckResponse() (response *StartMigrationCheckResponse) {
+    response = &StartMigrationCheckResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StartMigrationCheck
+// This API is used to start a pre-migration verification task, applicable to the migration method where the migration source type is TencentDB for SQL Server.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CREATEFLOWFAILED = "InternalError.CreateFlowFailed"
+//  INTERNALERROR_DBCONNECTERROR = "InternalError.DBConnectError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GCSERROR = "InternalError.GcsError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_DBNOTFOUND = "ResourceNotFound.DBNotFound"
+//  RESOURCEUNAVAILABLE_DBINVALIDSTATUS = "ResourceUnavailable.DBInvalidStatus"
+//  RESOURCEUNAVAILABLE_INSTANCEMIGRATESTATUSINVALID = "ResourceUnavailable.InstanceMigrateStatusInvalid"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) StartMigrationCheck(request *StartMigrationCheckRequest) (response *StartMigrationCheckResponse, err error) {
+    return c.StartMigrationCheckWithContext(context.Background(), request)
+}
+
+// StartMigrationCheck
+// This API is used to start a pre-migration verification task, applicable to the migration method where the migration source type is TencentDB for SQL Server.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CREATEFLOWFAILED = "InternalError.CreateFlowFailed"
+//  INTERNALERROR_DBCONNECTERROR = "InternalError.DBConnectError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GCSERROR = "InternalError.GcsError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_DBNOTFOUND = "ResourceNotFound.DBNotFound"
+//  RESOURCEUNAVAILABLE_DBINVALIDSTATUS = "ResourceUnavailable.DBInvalidStatus"
+//  RESOURCEUNAVAILABLE_INSTANCEMIGRATESTATUSINVALID = "ResourceUnavailable.InstanceMigrateStatusInvalid"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) StartMigrationCheckWithContext(ctx context.Context, request *StartMigrationCheckRequest) (response *StartMigrationCheckResponse, err error) {
+    if request == nil {
+        request = NewStartMigrationCheckRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "StartMigrationCheck")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartMigrationCheck require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartMigrationCheckResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopMigrationRequest() (request *StopMigrationRequest) {
+    request = &StopMigrationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "StopMigration")
+    
+    
+    return
+}
+
+func NewStopMigrationResponse() (response *StopMigrationResponse) {
+    response = &StopMigrationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StopMigration
+// This API is used to terminate a migration task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CREATEFLOWFAILED = "InternalError.CreateFlowFailed"
+//  INTERNALERROR_DBCONNECTERROR = "InternalError.DBConnectError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GCSERROR = "InternalError.GcsError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_DBNOTFOUND = "ResourceNotFound.DBNotFound"
+//  RESOURCEUNAVAILABLE_DBINVALIDSTATUS = "ResourceUnavailable.DBInvalidStatus"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) StopMigration(request *StopMigrationRequest) (response *StopMigrationResponse, err error) {
+    return c.StopMigrationWithContext(context.Background(), request)
+}
+
+// StopMigration
+// This API is used to terminate a migration task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CREATEFLOWFAILED = "InternalError.CreateFlowFailed"
+//  INTERNALERROR_DBCONNECTERROR = "InternalError.DBConnectError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GCSERROR = "InternalError.GcsError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  INVALIDPARAMETER_PARAMSASSERTFAILED = "InvalidParameter.ParamsAssertFailed"
+//  RESOURCENOTFOUND_DBNOTFOUND = "ResourceNotFound.DBNotFound"
+//  RESOURCEUNAVAILABLE_DBINVALIDSTATUS = "ResourceUnavailable.DBInvalidStatus"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) StopMigrationWithContext(ctx context.Context, request *StopMigrationRequest) (response *StopMigrationResponse, err error) {
+    if request == nil {
+        request = NewStopMigrationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sqlserver", APIVersion, "StopMigration")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopMigration require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStopMigrationResponse()
     err = c.Send(request, response)
     return
 }

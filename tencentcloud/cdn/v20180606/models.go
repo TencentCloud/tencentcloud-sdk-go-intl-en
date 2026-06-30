@@ -68,6 +68,9 @@ type AddCLSTopicDomainsRequestParams struct {
 
 	// Specifies whether to access CDN or ECDN. Valid values: `cdn` (default) and `ecdn`.
 	Channel *string `json:"Channel,omitnil,omitempty" name:"Channel"`
+
+	// Specifies whether to inherit the domain name tag. default reservation is the value changed last time.
+	InheritDomainTags *bool `json:"InheritDomainTags,omitnil,omitempty" name:"InheritDomainTags"`
 }
 
 type AddCLSTopicDomainsRequest struct {
@@ -84,6 +87,9 @@ type AddCLSTopicDomainsRequest struct {
 
 	// Specifies whether to access CDN or ECDN. Valid values: `cdn` (default) and `ecdn`.
 	Channel *string `json:"Channel,omitnil,omitempty" name:"Channel"`
+
+	// Specifies whether to inherit the domain name tag. default reservation is the value changed last time.
+	InheritDomainTags *bool `json:"InheritDomainTags,omitnil,omitempty" name:"InheritDomainTags"`
 }
 
 func (r *AddCLSTopicDomainsRequest) ToJsonString() string {
@@ -102,6 +108,7 @@ func (r *AddCLSTopicDomainsRequest) FromJsonString(s string) error {
 	delete(f, "TopicId")
 	delete(f, "DomainAreaConfigs")
 	delete(f, "Channel")
+	delete(f, "InheritDomainTags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddCLSTopicDomainsRequest has unknown keys!", "")
 	}
@@ -718,47 +725,6 @@ type AdvancedAuthenticationTypeF struct {
 	BackupSecretKey *string `json:"BackupSecretKey,omitnil,omitempty" name:"BackupSecretKey"`
 }
 
-type AdvancedCCRules struct {
-	// Rule name
-	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
-
-	// Detection duration
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	DetectionTime *uint64 `json:"DetectionTime,omitnil,omitempty" name:"DetectionTime"`
-
-	// Detection frequency threshold
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	FrequencyLimit *uint64 `json:"FrequencyLimit,omitnil,omitempty" name:"FrequencyLimit"`
-
-	// Whether to enable IP blocking. Values:
-	// `on`: Enable
-	// `off`: Disable
-	// Note: This field may return·`null`, indicating that no valid values can be obtained.
-	PunishmentSwitch *string `json:"PunishmentSwitch,omitnil,omitempty" name:"PunishmentSwitch"`
-
-	// IP penalty duration
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	PunishmentTime *uint64 `json:"PunishmentTime,omitnil,omitempty" name:"PunishmentTime"`
-
-	// Action. Valid values: `intercept` and `redirect`.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
-
-	// A redirection URL used when Action is `redirect`
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	RedirectUrl *string `json:"RedirectUrl,omitnil,omitempty" name:"RedirectUrl"`
-
-	// Layer-7 rule configuration for CC frequency limiting
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Configure []*ScdnSevenLayerRules `json:"Configure,omitnil,omitempty" name:"Configure"`
-
-	// Whether to enable custom CC rules. Values:
-	// `on`: Enable
-	// `off`: Disable
-	// Note: This field may return·`null`, indicating that no valid values can be obtained.
-	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
-}
-
 type AdvancedCache struct {
 	// Cache expiration rule
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
@@ -778,276 +744,6 @@ type AdvancedCache struct {
 	// It is disabled by default.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	IgnoreSetCookie *string `json:"IgnoreSetCookie,omitnil,omitempty" name:"IgnoreSetCookie"`
-}
-
-type AdvancedScdnAclGroup struct {
-	// Rule name
-	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
-
-	// Specific configurations
-	Configure []*AdvancedScdnAclRule `json:"Configure,omitnil,omitempty" name:"Configure"`
-
-	// Action. Valid values: `intercept` and `redirect`.
-	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
-
-	// Whether the rule is activated. Valid values: `active` and `inactive`.
-	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
-
-	// Error page configuration
-	ErrorPage *ScdnErrorPage `json:"ErrorPage,omitnil,omitempty" name:"ErrorPage"`
-}
-
-type AdvancedScdnAclRule struct {
-	// Keyword. Valid values:
-	// `protocol`: HTTP protocol
-	// `httpVersion`: HTTP version
-	// `method`: request method
-	// `ip`: requester IP
-	// `ipAsn`: ASN of the requester IP
-	// `ipCountry`: country/region of the requester IP
-	// `ipArea`: region of the requester IP
-	// `xForwardFor`: X-Forward-For request header
-	// `directory`: Path
-	// `index`: Homepage
-	// `path`: Full path of a file
-	// `file`: File extension
-	// `param`: Request parameter
-	// `referer`: Referer request header
-	// `cookie`: Cookie request header
-	// `userAgent`: User-Agent request header
-	// `head`: Custom request header
-	MatchKey *string `json:"MatchKey,omitnil,omitempty" name:"MatchKey"`
-
-	// Logical operator. Valid values:
-	// `exclude`: The keyword is not included
-	// `include`: The keyword is included
-	// `notequal`: Not the same as the keyword
-	// `equal`: The same as the keyword
-	// `matching`: The prefix is matched
-	// `null`: Empty or does not exist
-	LogicOperator *string `json:"LogicOperator,omitnil,omitempty" name:"LogicOperator"`
-
-	// Matched value.
-	// When `MatchKey` is `protocol`,
-	// Values: `HTTP` and `HTTPS`.
-	// 
-	// When `MatchKey` is `httpVersion`,
-	// Values: `HTTP/1.0`, `HTTP/1.1`, `HTTP/1.2`, `HTTP/2`, and `HTTP/3`.
-	// 
-	// When `MatchKey` is `method`,
-	// Values: `HEAD`, `GET`, `POST`, `PUT`, `OPTIONS`, `TRACE`, `DELETE`, `PATCH` and `CONNECT`.
-	// 
-	// When `MatchKey` is `ipCountry`, valid values include:
-	// `OTHER`: Other areas
-	// `VE`: Venezuela
-	// `UY`: Uruguay
-	// `SR`: Suriname
-	// `PY`: Paraguay
-	// `PE`: Peru
-	// `GY`: Guyana
-	// `EC`: Ecuador
-	// `CO`: Colombia
-	// `CL`: Chile
-	// `BR`: Brazil
-	// `BO`: Bolivia
-	// `AR`: Argentina
-	// `NZ`: New Zealand
-	// `WS`: Samoa
-	// `VU`: Vanuatu
-	// `TV`: Tuvalu
-	// `TO`: Tonga
-	// `TK`: Tokelau
-	// `PW`: Palau
-	// `NU`: Niue
-	// `NR`: Nauru
-	// `KI`: Kiribati
-	// `GU`: Guam
-	// `FM`: Micronesia
-	// `AU`: Australia
-	// `US`: United States
-	// `PR`: Puerto Rico
-	// `DO`: Dominican Republic
-	// `CR`: Costa Rica
-	// `AS`: American Samoa
-	// `AG`: Antigua and Barbuda
-	// `PA`: Panama
-	// `NI`: Nicaragua
-	// `MX`: Mexico
-	// `JM`: Jamaica
-	// `HT`: Haiti
-	// `HN`: Honduras
-	// `GT`: Guatemala
-	// `GP`: Guadeloupe
-	// `GL`: Greenland
-	// `GD`: Grenada
-	// `CU`: Cuba
-	// `CA`: Canada
-	// `BZ`: Belize
-	// `BS`: Bahamas
-	// `BM`: Bermuda
-	// `BB`: Barbados
-	// `AW`: Aruba
-	// `AI`: Anguilla
-	// `VA`: Vatican
-	// `SK`: Slovakia
-	// `GB`: United Kingdom
-	// `CZ`: Czech Republic
-	// `UA`: Ukraine
-	// `TR`: Türkiye
-	// `SI`: Slovenia
-	// `SE`: Sweden
-	// `RS`: Republic of Serbia
-	// `RO`: Romania
-	// `PT`: Portugal
-	// `PL`: Poland
-	// `NO`: Norway
-	// `NL`: Netherlands
-	// `MT`: Malta
-	// `MK`: Macedonia
-	// `ME`: Montenegro
-	// `MD`: Moldova
-	// `MC`: Monaco
-	// `LV`: Latvia
-	// `LU`: Luxembourg
-	// `LT`: Lithuania
-	// `LI`: Liechtenstein
-	// `KZ`: Kazakhstan
-	// `IT`: Italy
-	// `IS`: Iceland
-	// `IE`: Ireland
-	// `HU`: Hungary
-	// `HR`: Croatia
-	// `GR`: Greece
-	// `GI`: Gibraltar
-	// `GG`: Guernsey
-	// `GE`: Georgia
-	// `FR`: France
-	// `FI`: Finland
-	// `ES`: Spain
-	// `EE`: Estonia
-	// `DK`: Denmark
-	// `DE`: Germany
-	// `CY`: Cyprus
-	// `CH`: Switzerland
-	// `BY`: Belarus
-	// `BG`: Bulgaria
-	// `BE`: Belgium
-	// `AZ`: Azerbaijan
-	// `AT`: Austria
-	// `AM`: Armenia
-	// `AL`: Albania
-	// `AD`: Andorra
-	// `TL`: East Timor
-	// `SY`: Syria
-	// `SA`: Saudi Arabia
-	// `PS`: Palestine
-	// `LK`: Sri Lanka
-	// `LK`: Sri Lanka
-	// `KP`: North Korea
-	// `KG`: Kyrgyzstan
-	// `HK`: Hong Kong, China
-	// `BN`: Brunei
-	// `BD`: Bangladesh
-	// `AE`: United Arab Emirates
-	// `YE`: Yemen
-	// `VN`: Vietnam
-	// `UZ`: Uzbekistan
-	// `TW`: Taiwan, China
-	// `TM`: Turkmenistan
-	// `TJ`: Tajikistan
-	// `TH`: Thailand
-	// `SG`: Singapore
-	// `QA`: Qatar
-	// `PK`: Pakistan
-	// `PH`: Philippines
-	// `OM`: Oman
-	// `NP`: Nepal
-	// `MY`: Malaysia
-	// `MV`: Maldives
-	// `MO`: Macao, China
-	// `MN`: Mongolia
-	// `MM`: Myanmar
-	// `LB`: Lebanon
-	// `KW`: Kuwait
-	// `KR`: South Korea
-	// `KH`: Cambodia
-	// `JP`: Japan
-	// `JO`: Jordan
-	// `IR`: Iran
-	// `IQ`: Iraq
-	// `IN`: India
-	// `IL`: Israel
-	// `ID`: Indonesia
-	// `CN`: China
-	// `BT`: Bhutan
-	// `BH`: Bahrain
-	// `AF`: Afghanistan
-	// `LY`: Libya
-	// `CD`: Democratic Republic of the Congo
-	// `RE`: La Réunion
-	// `SZ`: Swaziland
-	// `ZW`: Zimbabwe
-	// `ZM`: Zambia
-	// `YT`: Mayotte
-	// `UG`: Uganda
-	// `TZ`: Tanzania
-	// `TN`: Tunisia
-	// `TG`: Togo
-	// `TD`: Chad
-	// `SO`: Somalia
-	// `SN`: Senegal
-	// `SD`: Sudan
-	// `SC`: Seychelles
-	// `RW`: Rwanda
-	// `NG`: Nigeria
-	// `NE`: Niger
-	// `NA`: Namibia
-	// `MZ`: Mozambique
-	// `MW`: Malawi
-	// `MU`: Mauritius
-	// `MR`: Mauritania
-	// `ML`: Mali
-	// `MG`: Madagascar
-	// `MA`: Morocco
-	// `LS`: Lesotho
-	// `LR`: Liberia
-	// `KM`: Comoros
-	// `KE`: Kenya
-	// `GN`: Guinea
-	// `GM`: Gambia
-	// `GH`: Ghana
-	// `GA`: Gabon
-	// `ET`: Ethiopia
-	// `ER`: Eritrea
-	// `EG`: Egypt
-	// `DZ`: Algeria
-	// `DJ`: Djibouti
-	// `CM`: Cameroon
-	// `CG`: Republic of the Congo
-	// `BW`: Botswana
-	// `BJ`: Benin
-	// `BI`: Burundi
-	// `AO`: Angola
-	// 
-	// When MatchKey is `ipArea`, valid values include:
-	// `OTHER`: Other areas
-	// `AS`: Asia
-	// `EU`: Europe
-	// `AN`: Antarctica
-	// `AF`: Africa
-	// `OC`: Oceania
-	// `NA`: North America
-	// `SA`: South America
-	// 
-	// When MatchKey is `index`,
-	// valid value is `/;/index.html`.
-	MatchValue []*string `json:"MatchValue,omitnil,omitempty" name:"MatchValue"`
-
-	// Whether to distinguish uppercase or lowercase letters. `true`: case sensitive; `false`: case insensitive.
-	CaseSensitive *bool `json:"CaseSensitive,omitnil,omitempty" name:"CaseSensitive"`
-
-	// This field is required when `MatchKey` is `param` or `cookie`. For `param`, it indicates a key value of the request parameter if MatchKey is `param`, while a key value of the Cookie request header if MatchKey is `cookie`.
-	MatchKeyParam *string `json:"MatchKeyParam,omitnil,omitempty" name:"MatchKeyParam"`
 }
 
 type Authentication struct {
@@ -1214,6 +910,19 @@ type AvifAdapter struct {
 	// `off`: Disable
 	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// When the original image is avif and the client Accept header contains image/avif, return directly the original image.
+	// When the original image is in avif format and the client Accept header does not include image/avif but includes image/webp, convert avif to webp format and return. if the Accept header does not include image/webp, convert to jpeg and return.
+	// 
+	// Valid values:. 
+	// - []
+	// - ["webp"]
+	// - ["jpeg"]
+	// - ["webp", "jpeg"]
+	// 
+	// "Webp": whether avif to webp is enabled, "jpeg": whether avif to jpeg is enabled. if both webp and jpeg are enabled, webp must be before jpeg.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FallbackFormats []*string `json:"FallbackFormats,omitnil,omitempty" name:"FallbackFormats"`
 }
 
 type AwsPrivateAccess struct {
@@ -1281,54 +990,6 @@ type BandwidthAlert struct {
 	// Usage limit configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	StatisticItems []*StatisticItem `json:"StatisticItems,omitnil,omitempty" name:"StatisticItems"`
-}
-
-type BotCookie struct {
-	// Whether to enable bot cookie policies. Values:
-	// `on`: Enable
-	// `off`: Disable
-	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
-
-	// Rule type, which can only be `all` currently.
-	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
-
-	// Rule value. Valid value: `*`.
-	RuleValue []*string `json:"RuleValue,omitnil,omitempty" name:"RuleValue"`
-
-	// Action. Valid values: `monitor`, `intercept`, `redirect`, and `captcha`.
-	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
-
-	// Redirection target page
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	RedirectUrl *string `json:"RedirectUrl,omitnil,omitempty" name:"RedirectUrl"`
-
-	// Update time
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
-}
-
-type BotJavaScript struct {
-	// Whether to enable bot JS policies. Values:
-	// `on`: Enable
-	// `off`: Disable
-	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
-
-	// Rule type, which can only be `file` currently.
-	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
-
-	// Rule value. Valid values: `html` and `htm`.
-	RuleValue []*string `json:"RuleValue,omitnil,omitempty" name:"RuleValue"`
-
-	// Action. Valid values: `monitor`, `intercept`, `redirect`, and `captcha`.
-	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
-
-	// Redirection target page
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	RedirectUrl *string `json:"RedirectUrl,omitnil,omitempty" name:"RedirectUrl"`
-
-	// Update time
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 type BriefDomain struct {
@@ -1536,16 +1197,6 @@ type CacheKey struct {
 	// Path-specific cache key configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	KeyRules []*KeyRule `json:"KeyRules,omitnil,omitempty" name:"KeyRules"`
-}
-
-type CacheOptResult struct {
-	// List of succeeded URLs
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	SuccessUrls []*string `json:"SuccessUrls,omitnil,omitempty" name:"SuccessUrls"`
-
-	// List of failed URLs
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	FailUrls []*string `json:"FailUrls,omitnil,omitempty" name:"FailUrls"`
 }
 
 type CacheTagKey struct {
@@ -1778,6 +1429,9 @@ type CreateClsLogTopicRequestParams struct {
 
 	// Domain name region information
 	DomainAreaConfigs []*DomainAreaConfig `json:"DomainAreaConfigs,omitnil,omitempty" name:"DomainAreaConfigs"`
+
+	// Specifies whether to inherit the domain name tag. default false.
+	InheritDomainTags *bool `json:"InheritDomainTags,omitnil,omitempty" name:"InheritDomainTags"`
 }
 
 type CreateClsLogTopicRequest struct {
@@ -1794,6 +1448,9 @@ type CreateClsLogTopicRequest struct {
 
 	// Domain name region information
 	DomainAreaConfigs []*DomainAreaConfig `json:"DomainAreaConfigs,omitnil,omitempty" name:"DomainAreaConfigs"`
+
+	// Specifies whether to inherit the domain name tag. default false.
+	InheritDomainTags *bool `json:"InheritDomainTags,omitnil,omitempty" name:"InheritDomainTags"`
 }
 
 func (r *CreateClsLogTopicRequest) ToJsonString() string {
@@ -1812,6 +1469,7 @@ func (r *CreateClsLogTopicRequest) FromJsonString(s string) error {
 	delete(f, "LogsetId")
 	delete(f, "Channel")
 	delete(f, "DomainAreaConfigs")
+	delete(f, "InheritDomainTags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClsLogTopicRequest has unknown keys!", "")
 	}
@@ -1821,7 +1479,6 @@ func (r *CreateClsLogTopicRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateClsLogTopicResponseParams struct {
 	// Topic ID
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1841,71 +1498,6 @@ func (r *CreateClsLogTopicResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateClsLogTopicResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateScdnFailedLogTaskRequestParams struct {
-	// ID of the failed task to retry
-	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
-
-	// Region. Valid values: `mainland` and `overseas`.
-	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
-}
-
-type CreateScdnFailedLogTaskRequest struct {
-	*tchttp.BaseRequest
-	
-	// ID of the failed task to retry
-	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
-
-	// Region. Valid values: `mainland` and `overseas`.
-	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
-}
-
-func (r *CreateScdnFailedLogTaskRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateScdnFailedLogTaskRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "TaskId")
-	delete(f, "Area")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateScdnFailedLogTaskRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateScdnFailedLogTaskResponseParams struct {
-	// Creation result. 
-	// 0: Creation succeeded
-	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type CreateScdnFailedLogTaskResponse struct {
-	*tchttp.BaseResponse
-	Response *CreateScdnFailedLogTaskResponseParams `json:"Response"`
-}
-
-func (r *CreateScdnFailedLogTaskResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateScdnFailedLogTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2081,7 +1673,7 @@ type DescribeBillingDataRequestParams struct {
 	// Specifies the product to query, either `cdn` (default) or `ecdn`.
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
-	// Specify the time zone for query time, default UTC+08:00
+
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
 }
 
@@ -2134,7 +1726,6 @@ type DescribeBillingDataRequest struct {
 	// Specifies the product to query, either `cdn` (default) or `ecdn`.
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
-	// Specify the time zone for query time, default UTC+08:00
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
 }
 
@@ -2247,8 +1838,8 @@ type DescribeCdnDataRequestParams struct {
 	// `day`: Return data with 1-day granularity. It’s available when the query period is longer than 31 days.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// The aggregate data for multiple domain names is returned by default (false) during a multi-domain-name query.
-	// You can set it to true to return the details for each Domain (the statusCode metric is currently not supported).
+	// Queries multiple domain names and returns aggregated data by default (false).
+	// Specifies as required to be true, returns detailed data for each Domain (statusCode, 2xx, 3xx, 4xx, 5xx metrics not currently supported).
 	Detail *bool `json:"Detail,omitnil,omitempty" name:"Detail"`
 
 	// Specifies an ISP when you query the CDN data within the Chinese mainland. If this is left blank, all ISPs will be queried.
@@ -2346,8 +1937,8 @@ type DescribeCdnDataRequest struct {
 	// `day`: Return data with 1-day granularity. It’s available when the query period is longer than 31 days.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// The aggregate data for multiple domain names is returned by default (false) during a multi-domain-name query.
-	// You can set it to true to return the details for each Domain (the statusCode metric is currently not supported).
+	// Queries multiple domain names and returns aggregated data by default (false).
+	// Specifies as required to be true, returns detailed data for each Domain (statusCode, 2xx, 3xx, 4xx, 5xx metrics not currently supported).
 	Detail *bool `json:"Detail,omitnil,omitempty" name:"Detail"`
 
 	// Specifies an ISP when you query the CDN data within the Chinese mainland. If this is left blank, all ISPs will be queried.
@@ -2466,10 +2057,10 @@ type DescribeCdnDomainLogsRequestParams struct {
 	// Specifies a domain name for the query
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// Starting time, such as `2019-09-04 00:00:00`
+	// Start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time, such as `2019-09-04 12:00:00`
+	// End time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Offset for paginated queries. Default value: 0
@@ -2478,15 +2069,14 @@ type DescribeCdnDomainLogsRequestParams struct {
 	// Limit on paginated queries. Default value: 100. Maximum value: 1,000
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Specifies a region for the query.
-	// `mainland`: specifies to return the download link of logs on acceleration within Mainland China;
-	// `overseas`: specifies to return the download link of logs on acceleration outside Mainland China;
-	// `global`: specifies to return a download link of logs on acceleration within Mainland China and a link of logs on acceleration outside Mainland China.
-	// Default value: `mainland`.
+	// Specifies the region for log download, defaults to mainland. valid values:.
+	// <li>mainland: specifies the download url for the domestic acceleration log package.</li>.
+	// <Li>Overseas: specifies the url for obtaining overseas acceleration logs package download.</li>.
+	// <li>global: simultaneously obtain domestic and overseas acceleration logs package download urls (separately packaged).</li>.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
-	// Specifies the type of logs to download (only access logs supported).
-	// `access`: Access logs.
+	// Specifies the type of logs to download. valid values:.
+	// <Li>Access: specifies the access log.</li>.
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 }
 
@@ -2496,10 +2086,10 @@ type DescribeCdnDomainLogsRequest struct {
 	// Specifies a domain name for the query
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// Starting time, such as `2019-09-04 00:00:00`
+	// Start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time, such as `2019-09-04 12:00:00`
+	// End time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Offset for paginated queries. Default value: 0
@@ -2508,15 +2098,14 @@ type DescribeCdnDomainLogsRequest struct {
 	// Limit on paginated queries. Default value: 100. Maximum value: 1,000
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Specifies a region for the query.
-	// `mainland`: specifies to return the download link of logs on acceleration within Mainland China;
-	// `overseas`: specifies to return the download link of logs on acceleration outside Mainland China;
-	// `global`: specifies to return a download link of logs on acceleration within Mainland China and a link of logs on acceleration outside Mainland China.
-	// Default value: `mainland`.
+	// Specifies the region for log download, defaults to mainland. valid values:.
+	// <li>mainland: specifies the download url for the domestic acceleration log package.</li>.
+	// <Li>Overseas: specifies the url for obtaining overseas acceleration logs package download.</li>.
+	// <li>global: simultaneously obtain domestic and overseas acceleration logs package download urls (separately packaged).</li>.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
-	// Specifies the type of logs to download (only access logs supported).
-	// `access`: Access logs.
+	// Specifies the type of logs to download. valid values:.
+	// <Li>Access: specifies the access log.</li>.
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 }
 
@@ -2547,8 +2136,8 @@ func (r *DescribeCdnDomainLogsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCdnDomainLogsResponseParams struct {
-	// Download link of the log package.
-	// You can open the link to download a .gz log package that contains all log files without extension.
+	// Specifies the download url of the log package.
+	// Download content is a compression package with the gz suffix. after decompression, it becomes a text file without an extension. link validity period is 1 day.
 	DomainLogs []*DomainLog `json:"DomainLogs,omitnil,omitempty" name:"DomainLogs"`
 
 	// Total number of entries obtained
@@ -2576,14 +2165,14 @@ func (r *DescribeCdnDomainLogsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCdnIpRequestParams struct {
-	// List of IPs to be queried
+	// IP list you want to query. supports 1-20 ip inquiries at a time.
 	Ips []*string `json:"Ips,omitnil,omitempty" name:"Ips"`
 }
 
 type DescribeCdnIpRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of IPs to be queried
+	// IP list you want to query. supports 1-20 ip inquiries at a time.
 	Ips []*string `json:"Ips,omitnil,omitempty" name:"Ips"`
 }
 
@@ -2693,7 +2282,7 @@ type DescribeCertDomainsRequestParams struct {
 	// Base64-encoded string of certificate in PEM format
 	Cert *string `json:"Cert,omitnil,omitempty" name:"Cert"`
 
-	// Managed certificate ID. `Cert` and `CertId` cannot be both empty. If they’re both filled in, `CerID` prevails.
+	// Managed certificate ID. Cert and CertId cannot both be empty. if both are filled in, CertId takes precedence.
 	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
 
 	// Product of the domain name, either `cdn` (default) or `ecdn`.
@@ -2706,7 +2295,7 @@ type DescribeCertDomainsRequest struct {
 	// Base64-encoded string of certificate in PEM format
 	Cert *string `json:"Cert,omitnil,omitempty" name:"Cert"`
 
-	// Managed certificate ID. `Cert` and `CertId` cannot be both empty. If they’re both filled in, `CerID` prevails.
+	// Managed certificate ID. Cert and CertId cannot both be empty. if both are filled in, CertId takes precedence.
 	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
 
 	// Product of the domain name, either `cdn` (default) or `ecdn`.
@@ -2736,12 +2325,10 @@ func (r *DescribeCertDomainsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCertDomainsResponseParams struct {
-	// List of domain names connected to CDN
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// List of domain names integrated with CDN.
 	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
-	// List of CDN domain names with certificates configured
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// List of CDN domain names with configured certificates.
 	CertifiedDomains []*string `json:"CertifiedDomains,omitnil,omitempty" name:"CertifiedDomains"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2769,7 +2356,7 @@ type DescribeDomainsConfigRequestParams struct {
 	// Offset for paginated queries. Default value: 0
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Limit on paginated queries. Default value: 100. Maximum value: 1000.
+	// Number limit of paginated query. default value: 100. maximum settable: 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Query condition filter, complex type.
@@ -2785,7 +2372,7 @@ type DescribeDomainsConfigRequest struct {
 	// Offset for paginated queries. Default value: 0
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Limit on paginated queries. Default value: 100. Maximum value: 1000.
+	// Number limit of paginated query. default value: 100. maximum settable: 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Query condition filter, complex type.
@@ -3229,8 +2816,8 @@ type DescribeOriginDataRequestParams struct {
 	// `day`: Return data with 1-day granularity. It’s available when the query period is longer than 31 days.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// The aggregate data for multiple domain names is returned by default (false) when multiple `Domains` are passed in.
-	// You can set it to true to return the details for each Domain (the statusCode metric is currently not supported)
+	// Domains specifies multiple domain names to import. default (false) indicates aggregated data for multiple domain names.
+	// Specifies as required to be true, returns detailed data for each Domain (statusCode, 2xx, 3xx, 4xx, 5xx metrics not currently supported).
 	Detail *bool `json:"Detail,omitnil,omitempty" name:"Detail"`
 
 	// Specifies the service region. If this value is left blank, it means to query CDN data within the Chinese mainland.
@@ -3284,8 +2871,8 @@ type DescribeOriginDataRequest struct {
 	// `day`: Return data with 1-day granularity. It’s available when the query period is longer than 31 days.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// The aggregate data for multiple domain names is returned by default (false) when multiple `Domains` are passed in.
-	// You can set it to true to return the details for each Domain (the statusCode metric is currently not supported)
+	// Domains specifies multiple domain names to import. default (false) indicates aggregated data for multiple domain names.
+	// Specifies as required to be true, returns detailed data for each Domain (statusCode, 2xx, 3xx, 4xx, 5xx metrics not currently supported).
 	Detail *bool `json:"Detail,omitnil,omitempty" name:"Detail"`
 
 	// Specifies the service region. If this value is left blank, it means to query CDN data within the Chinese mainland.
@@ -3635,12 +3222,10 @@ func (r *DescribePurgeTasksRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePurgeTasksResponseParams struct {
-	// Detailed purge record.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Specifies the detailed refresh record.
 	PurgeLogs []*PurgeTask `json:"PurgeLogs,omitnil,omitempty" name:"PurgeLogs"`
 
-	// Total number of tasks, which is used for pagination.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Total number of tasks. for pagination.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3816,12 +3401,10 @@ func (r *DescribePushTasksRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePushTasksResponseParams struct {
-	// Prefetch history
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Preheating history.
 	PushLogs []*PushTask `json:"PushLogs,omitnil,omitempty" name:"PushLogs"`
 
-	// Total number of tasks, which is used for pagination.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Total number of tasks. for pagination.
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4325,70 +3908,13 @@ type DetailDomain struct {
 	// Origin-pull authentication for other origins
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	OthersPrivateAccess *OthersPrivateAccess `json:"OthersPrivateAccess,omitnil,omitempty" name:"OthersPrivateAccess"`
-}
 
-// Predefined struct for user
-type DisableCachesRequestParams struct {
-	// List of URLs to be blocked (URLs must contain `http://` or `https://`).
-	// Up to 100 entries can be submitted at a time and 3,000 entries per day.
-	Urls []*string `json:"Urls,omitnil,omitempty" name:"Urls"`
-}
+	// Specifies the blocklist parameter.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ParamFilter *ParamFilter `json:"ParamFilter,omitnil,omitempty" name:"ParamFilter"`
 
-type DisableCachesRequest struct {
-	*tchttp.BaseRequest
-	
-	// List of URLs to be blocked (URLs must contain `http://` or `https://`).
-	// Up to 100 entries can be submitted at a time and 3,000 entries per day.
-	Urls []*string `json:"Urls,omitnil,omitempty" name:"Urls"`
-}
 
-func (r *DisableCachesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DisableCachesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Urls")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableCachesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DisableCachesResponseParams struct {
-	// Submission result
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	CacheOptResult *CacheOptResult `json:"CacheOptResult,omitnil,omitempty" name:"CacheOptResult"`
-
-	// Task ID
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DisableCachesResponse struct {
-	*tchttp.BaseResponse
-	Response *DisableCachesResponseParams `json:"Response"`
-}
-
-func (r *DisableCachesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DisableCachesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
+	AutoGuard *AutoGuard `json:"AutoGuard,omitnil,omitempty" name:"AutoGuard"`
 }
 
 // Predefined struct for user
@@ -4468,21 +3994,21 @@ type DomainAreaConfig struct {
 }
 
 type DomainFilter struct {
-	// Filter filter. Values:
-	// - `origin`: Primary origin server.
-	// - `domain`: Domain name.
-	// - `resourceId`: Domain name ID.
-	// - `status`: Domain name status. Values: `online`, `offline`, and `processing`.
-	// - `serviceType`: Service type. Values: `web`, `download`, `media`, `hybrid` and `dynamic`.
-	// - `projectId`: Project ID.
-	// - `domainType`: Primary origin type. Values: `cname` (customer origin), `COS` (COS origin), `third_party` (third-party object storage origin), and `igtm` (IGTM origin).
-	// - `fullUrlCache`: Whether to enable path cache. Values: `on`, `off`.
-	// - `https`: Whether to configure HTTPS. Values: `on`, `off` and `processing`.
-	// - `originPullProtocol`: Origin-pull protocol type. Value: `http`, `follow`, and `https`.
-	// - `tagKey`: Tag key.
+	// Filter field name. supported list as follows:.
+	// -`Origin`: specifies the primary origin server.
+	// -Domain name. specifies the domain name.
+	// -resourceId: domain id.
+	// -Status: specifies the domain name status. valid values: online, offline, processing, deleted.
+	// -serviceType: specifies the business type. valid values: web, download, media, hybrid, dynamic.
+	// -projectId: specifies the project ID.
+	// -domainType: specifies the primary origin server type. valid values: cname (self-owned origin), cos (cloud object storage integration), third_party (third-party object storage), igtm (igtm multi-active origin).
+	// -fullUrlCache. specifies full path cache. valid values: on, off.
+	// -Specifies whether to configure https. valid values: on, off, processing.
+	// -originPullProtocol: specifies the origin-pull protocol. valid values: http, follow, https.
+	// -tagKey: specifies the Tag key.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Filter field value.
+	// Specifies the filter field value. the default maximum is 5. when Name is origin/domain and Fuzzy is true, the maximum is 1.
 	Value []*string `json:"Value,omitnil,omitempty" name:"Value"`
 
 	// Whether to enable fuzzy query. Only `origin` or `domain` is supported for the filter field name.
@@ -4525,71 +4051,63 @@ type DownstreamCapping struct {
 }
 
 // Predefined struct for user
-type EnableCachesRequestParams struct {
-	// List of unblocked URLs
-	Urls []*string `json:"Urls,omitnil,omitempty" name:"Urls"`
+type DuplicateDomainConfigRequestParams struct {
+	// Adds a domain name.
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// URL blocking date
-	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
+	// Specifies the configured domain name to be copied.
+	ReferenceDomain *string `json:"ReferenceDomain,omitnil,omitempty" name:"ReferenceDomain"`
 }
 
-type EnableCachesRequest struct {
+type DuplicateDomainConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of unblocked URLs
-	Urls []*string `json:"Urls,omitnil,omitempty" name:"Urls"`
+	// Adds a domain name.
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// URL blocking date
-	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
+	// Specifies the configured domain name to be copied.
+	ReferenceDomain *string `json:"ReferenceDomain,omitnil,omitempty" name:"ReferenceDomain"`
 }
 
-func (r *EnableCachesRequest) ToJsonString() string {
+func (r *DuplicateDomainConfigRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *EnableCachesRequest) FromJsonString(s string) error {
+func (r *DuplicateDomainConfigRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "Urls")
-	delete(f, "Date")
+	delete(f, "Domain")
+	delete(f, "ReferenceDomain")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnableCachesRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DuplicateDomainConfigRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
-type EnableCachesResponseParams struct {
-	// Result list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	CacheOptResult *CacheOptResult `json:"CacheOptResult,omitnil,omitempty" name:"CacheOptResult"`
-
-	// Task ID
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
-
+type DuplicateDomainConfigResponseParams struct {
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
-type EnableCachesResponse struct {
+type DuplicateDomainConfigResponse struct {
 	*tchttp.BaseResponse
-	Response *EnableCachesResponseParams `json:"Response"`
+	Response *DuplicateDomainConfigResponseParams `json:"Response"`
 }
 
-func (r *EnableCachesResponse) ToJsonString() string {
+func (r *DuplicateDomainConfigResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *EnableCachesResponse) FromJsonString(s string) error {
+func (r *DuplicateDomainConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4740,114 +4258,6 @@ type ForceRedirect struct {
 	// Whether to return the newly added header during force redirection
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	CarryHeaders *string `json:"CarryHeaders,omitnil,omitempty" name:"CarryHeaders"`
-}
-
-// Predefined struct for user
-type GetDisableRecordsRequestParams struct {
-	// Specifies the URL to be queried
-	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
-
-	// Starting time, such as `2018-12-12 10:24:00`
-	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
-
-	// End time, such as `2018-12-14 10:24:00`
-	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
-
-	// Current URL status
-	// disable: The URL remains disabled, and accessing it will return an error 403
-	// enable: The URL is enabled (unblocked) and can be normally accessed
-	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
-
-	// Offset for paginated queries. Default value: 0
-	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Pagination limit. Default value: 20.
-	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Task ID. The task ID and start time cannot be both left empty.
-	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
-}
-
-type GetDisableRecordsRequest struct {
-	*tchttp.BaseRequest
-	
-	// Specifies the URL to be queried
-	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
-
-	// Starting time, such as `2018-12-12 10:24:00`
-	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
-
-	// End time, such as `2018-12-14 10:24:00`
-	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
-
-	// Current URL status
-	// disable: The URL remains disabled, and accessing it will return an error 403
-	// enable: The URL is enabled (unblocked) and can be normally accessed
-	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
-
-	// Offset for paginated queries. Default value: 0
-	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Pagination limit. Default value: 20.
-	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Task ID. The task ID and start time cannot be both left empty.
-	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
-}
-
-func (r *GetDisableRecordsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *GetDisableRecordsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Url")
-	delete(f, "StartTime")
-	delete(f, "EndTime")
-	delete(f, "Status")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "TaskId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetDisableRecordsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type GetDisableRecordsResponseParams struct {
-	// Blocking history
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	UrlRecordList []*UrlRecord `json:"UrlRecordList,omitnil,omitempty" name:"UrlRecordList"`
-
-	// Total number of tasks, which is used for pagination.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type GetDisableRecordsResponse struct {
-	*tchttp.BaseResponse
-	Response *GetDisableRecordsResponseParams `json:"Response"`
-}
-
-func (r *GetDisableRecordsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *GetDisableRecordsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
 }
 
 type GuetzliAdapter struct {
@@ -5330,9 +4740,11 @@ type ListClsTopicDomainsResponseParams struct {
 	// Log topic name
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Last modified time of log topic
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Latest update time of the log topic.
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Specifies whether to inherit the domain name tag.
+	InheritDomainTags *bool `json:"InheritDomainTags,omitnil,omitempty" name:"InheritDomainTags"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -5366,12 +4778,12 @@ type ListTopDataRequestParams struct {
 	// `EndTime` must be later than or equal to `StartTime`.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Objects to be sorted. Valid values:
-	// `url`: Sort by access URL (URLs carrying no parameters). Supported filters are `flux` and `request`.
-	// `district`: sorts provinces or countries/regions. Supported filters are `flux` and `request`.
-	// `isp`: sorts ISPs. Supported filters are `flux` and `request`.
-	// `host`: Sort by domain name access data. Supported filters are `flux`, `request`, `bandwidth`, `fluxHitRate`, and `statusCode` (2XX, 3XX, 4XX, 5XX).
-	// `originHost`: Sort by domain name origin-pull data. Supported filters are `flux`, `request`, `bandwidth`, and `OriginStatusCode` (origin_2XX, origin_3XX, origin_4XX, origin_5XX).
+	// Sorting object, which supports the following formats.
+	// url: specifies the access url in alphabetical order (no parameters). supported filters: flux, request.
+	// district: specifies the province or country/region sorting order. supported filters are flux and request.
+	// isp: specifies the carrier sorting order. supported filters are flux and request.
+	// host: specifies the domain name data access sorting order. supported filters: flux, request, bandwidth, fluxHitRate, 2XX, 3XX, 4XX, 5XX, statusCode.   
+	// originHost: specifies the domain name origin-pull data sort. supported filters: flux, request, bandwidth, origin_2XX, origin_3XX, origin_4XX, origin_5XX, OriginStatusCode.
 	Metric *string `json:"Metric,omitnil,omitempty" name:"Metric"`
 
 	// Metric name used for sorting:
@@ -5435,12 +4847,12 @@ type ListTopDataRequest struct {
 	// `EndTime` must be later than or equal to `StartTime`.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Objects to be sorted. Valid values:
-	// `url`: Sort by access URL (URLs carrying no parameters). Supported filters are `flux` and `request`.
-	// `district`: sorts provinces or countries/regions. Supported filters are `flux` and `request`.
-	// `isp`: sorts ISPs. Supported filters are `flux` and `request`.
-	// `host`: Sort by domain name access data. Supported filters are `flux`, `request`, `bandwidth`, `fluxHitRate`, and `statusCode` (2XX, 3XX, 4XX, 5XX).
-	// `originHost`: Sort by domain name origin-pull data. Supported filters are `flux`, `request`, `bandwidth`, and `OriginStatusCode` (origin_2XX, origin_3XX, origin_4XX, origin_5XX).
+	// Sorting object, which supports the following formats.
+	// url: specifies the access url in alphabetical order (no parameters). supported filters: flux, request.
+	// district: specifies the province or country/region sorting order. supported filters are flux and request.
+	// isp: specifies the carrier sorting order. supported filters are flux and request.
+	// host: specifies the domain name data access sorting order. supported filters: flux, request, bandwidth, fluxHitRate, 2XX, 3XX, 4XX, 5XX, statusCode.   
+	// originHost: specifies the domain name origin-pull data sort. supported filters: flux, request, bandwidth, origin_2XX, origin_3XX, origin_4XX, origin_5XX, OriginStatusCode.
 	Metric *string `json:"Metric,omitnil,omitempty" name:"Metric"`
 
 	// Metric name used for sorting:
@@ -5708,6 +5120,9 @@ type ManageClsTopicDomainsRequestParams struct {
 
 	// Domain name region configuration. Note: if this field is empty, it means to unbind all domain names from the corresponding topic
 	DomainAreaConfigs []*DomainAreaConfig `json:"DomainAreaConfigs,omitnil,omitempty" name:"DomainAreaConfigs"`
+
+	// Specifies whether to inherit the domain name tag.
+	InheritDomainTags *bool `json:"InheritDomainTags,omitnil,omitempty" name:"InheritDomainTags"`
 }
 
 type ManageClsTopicDomainsRequest struct {
@@ -5724,6 +5139,9 @@ type ManageClsTopicDomainsRequest struct {
 
 	// Domain name region configuration. Note: if this field is empty, it means to unbind all domain names from the corresponding topic
 	DomainAreaConfigs []*DomainAreaConfig `json:"DomainAreaConfigs,omitnil,omitempty" name:"DomainAreaConfigs"`
+
+	// Specifies whether to inherit the domain name tag.
+	InheritDomainTags *bool `json:"InheritDomainTags,omitnil,omitempty" name:"InheritDomainTags"`
 }
 
 func (r *ManageClsTopicDomainsRequest) ToJsonString() string {
@@ -5742,6 +5160,7 @@ func (r *ManageClsTopicDomainsRequest) FromJsonString(s string) error {
 	delete(f, "TopicId")
 	delete(f, "Channel")
 	delete(f, "DomainAreaConfigs")
+	delete(f, "InheritDomainTags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ManageClsTopicDomainsRequest has unknown keys!", "")
 	}
@@ -7060,228 +6479,6 @@ type RuleQueryString struct {
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
-type ScdnAclConfig struct {
-	// Whether to enable SCDN access. Values:
-	// `on`: Enable
-	// `off`: Disable
-	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
-
-	// This field is disused. Please use `AdvancedScriptData` instead.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ScriptData []*ScdnAclGroup `json:"ScriptData,omitnil,omitempty" name:"ScriptData"`
-
-	// Error page configuration
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ErrorPage *ScdnErrorPage `json:"ErrorPage,omitnil,omitempty" name:"ErrorPage"`
-
-	// ACL rule group, which is required when the access control is on.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	AdvancedScriptData []*AdvancedScdnAclGroup `json:"AdvancedScriptData,omitnil,omitempty" name:"AdvancedScriptData"`
-}
-
-type ScdnAclGroup struct {
-	// Rule name
-	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
-
-	// Specific configurations
-	Configure []*ScdnAclRule `json:"Configure,omitnil,omitempty" name:"Configure"`
-
-	// Action. Valid values: `intercept` and `redirect`.
-	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
-
-	// Whether the rule is activated. Valid values: `active` and `inactive`.
-	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
-
-	// Error page configuration
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	ErrorPage *ScdnErrorPage `json:"ErrorPage,omitnil,omitempty" name:"ErrorPage"`
-}
-
-type ScdnAclRule struct {
-	// Keyword
-	MatchKey *string `json:"MatchKey,omitnil,omitempty" name:"MatchKey"`
-
-	// Logical operator. Valid values:
-	LogiOperator *string `json:"LogiOperator,omitnil,omitempty" name:"LogiOperator"`
-
-	// Matched value
-	MatchValue *string `json:"MatchValue,omitnil,omitempty" name:"MatchValue"`
-}
-
-type ScdnBotConfig struct {
-	// Whether to enable SCDN bot configuration. Values:
-	// `on`: Enable
-	// `off`: Disable
-	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
-
-	// Bot cookie policy
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	BotCookie []*BotCookie `json:"BotCookie,omitnil,omitempty" name:"BotCookie"`
-
-	// Bot JS policy
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	BotJavaScript []*BotJavaScript `json:"BotJavaScript,omitnil,omitempty" name:"BotJavaScript"`
-}
-
-type ScdnCCRules struct {
-	// Rule types:
-	// `all`: effective for all files.
-	// `file`: Apply to files with the specified suffixes.
-	// `directory`: Apply to specified paths.
-	// `path`: Apply to specified absolute paths.
-	// `index`: effective for web homepages and root directories.
-	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
-
-	// Rule value (blocking condition)
-	RuleValue []*string `json:"RuleValue,omitnil,omitempty" name:"RuleValue"`
-
-	// IP access limit rule
-	Qps *uint64 `json:"Qps,omitnil,omitempty" name:"Qps"`
-
-	// Detection granularity
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	DetectionTime *uint64 `json:"DetectionTime,omitnil,omitempty" name:"DetectionTime"`
-
-	// Frequency threshold
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	FrequencyLimit *uint64 `json:"FrequencyLimit,omitnil,omitempty" name:"FrequencyLimit"`
-
-	// Whether to enable IP blocking. Values:
-	// `on`: Enable
-	// `off`: Disable
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	PunishmentSwitch *string `json:"PunishmentSwitch,omitnil,omitempty" name:"PunishmentSwitch"`
-
-	// Suspicious IP restriction duration
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	PunishmentTime *uint64 `json:"PunishmentTime,omitnil,omitempty" name:"PunishmentTime"`
-
-	// Action. Valid values: `intercept` and `redirect`.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
-
-	// The redirection target URL used when the `Action` is `redirect`
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	RedirectUrl *string `json:"RedirectUrl,omitnil,omitempty" name:"RedirectUrl"`
-}
-
-type ScdnConfig struct {
-	// Whether to enable SCDN CC configuration. Values:
-	// `on`: Enable
-	// `off`: Disable
-	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
-
-	// Custom CC attack defense rule
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Rules []*ScdnCCRules `json:"Rules,omitnil,omitempty" name:"Rules"`
-
-	// Advanced custom CC attack defense rule
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	AdvancedRules []*AdvancedCCRules `json:"AdvancedRules,omitnil,omitempty" name:"AdvancedRules"`
-
-	// Global advanced CC protection rules
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	GlobalAdvancedRules []*AdvancedCCRules `json:"GlobalAdvancedRules,omitnil,omitempty" name:"GlobalAdvancedRules"`
-}
-
-type ScdnDdosConfig struct {
-	// Whether to enable SCDN DDoS configuration. Values:
-	// `on`: Enable
-	// `off`: Disable
-	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
-}
-
-type ScdnErrorPage struct {
-	// Status code
-	// `403` is passed in when the action is `intercept`.
-	// `301` is passed in when the action is `redirect`.
-	RedirectCode *int64 `json:"RedirectCode,omitnil,omitempty" name:"RedirectCode"`
-
-	// URL to be redirected
-	RedirectUrl *string `json:"RedirectUrl,omitnil,omitempty" name:"RedirectUrl"`
-}
-
-type ScdnSevenLayerRules struct {
-	// Whether values are case sensitive
-	CaseSensitive *bool `json:"CaseSensitive,omitnil,omitempty" name:"CaseSensitive"`
-
-	// Rule types:
-	// `protocol`: protocol. Valid values: `HTTP` and `HTTPS`.
-	// `method`: request method. Valid values: `HEAD`, `GET`, `POST`, `PUT`, `OPTIONS`, `TRACE`, `DELETE`, `PATCH` and `CONNECT`.
-	// `all`: domain name. The matching content is `*` and cannot be edited.
-	// `ip`: IP in CIDR format.
-	// `directory`: path starting with a slash (/). You can specify a directory or specific path using up to 128 characters.
-	// `index`: default homepage, which is specified by `/;/index.html` and cannot be edited.
-	// `path`: full path of the file, such as `/acb/test.png`. Wildcard is supported, such as `/abc/*.jpg`.
-	// `file`: file extension, such as `jpg`, `png` and `css`.
-	// `param`: request parameter. The value can contain up to 512 characters.
-	// `referer`: Referer. The value can contain up to 512 characters.
-	// `cookie`: Cookie. The value can contain up to 512 characters.
-	// `user-agent`: User-Agent. The value can contain up to 512 characters.
-	// `head`: custom header. The value can contain up to 512 characters. If the matching content is blank or does not exist, enter the matching parameter directly.
-	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
-
-	// Logical operator, which connects the relation between RuleType and RuleValue. Valid values:
-	// `exclude`: the rule value is not contained. 
-	// `include`: the rule value is contained. 
-	// `notequal`: the rule value is not equal to the specified rule type. 
-	// `equal`: the rule value is equal to the specified rule type. 
-	// `matching`: the rule value matches with the prefix of the specified rule type.
-	// `null`: the rule value is empty or does not exist.
-	LogicOperator *string `json:"LogicOperator,omitnil,omitempty" name:"LogicOperator"`
-
-	// Rule value
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	RuleValue []*string `json:"RuleValue,omitnil,omitempty" name:"RuleValue"`
-
-	// Matched parameter. Only request parameters, Cookie, and custom request headers have a value.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	RuleParam *string `json:"RuleParam,omitnil,omitempty" name:"RuleParam"`
-}
-
-type ScdnWafConfig struct {
-	// Whether to enable SCDN WAF configuration. Values:
-	// `on`: Enable
-	// `off`: Disable
-	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
-
-	// WAF protection mode. Valid values: `intercept` and `observe`. Default value: `intercept`.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
-
-	// Redirection error page
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ErrorPage *ScdnErrorPage `json:"ErrorPage,omitnil,omitempty" name:"ErrorPage"`
-
-	// Whether to enable webshell blocking. Values:
-	// `on`: Enable
-	// `off`: Disable
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	WebShellSwitch *string `json:"WebShellSwitch,omitnil,omitempty" name:"WebShellSwitch"`
-
-	// Attack blocking rules
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Rules []*ScdnWafRule `json:"Rules,omitnil,omitempty" name:"Rules"`
-
-	// WAF rule level. Valid values: 100, 200, and 300.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Level *int64 `json:"Level,omitnil,omitempty" name:"Level"`
-
-	// Whether to enable WAF sub-rules. Values:
-	// `on`: Enable
-	// `off`: Disable
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	SubRuleSwitch []*WafSubRuleStatus `json:"SubRuleSwitch,omitnil,omitempty" name:"SubRuleSwitch"`
-}
-
-type ScdnWafRule struct {
-	// Attack type
-	AttackType *string `json:"AttackType,omitnil,omitempty" name:"AttackType"`
-
-	// Defense action. Valid value: `observe`.
-	Operate *string `json:"Operate,omitnil,omitempty" name:"Operate"`
-}
-
 type SchemeKey struct {
 	// Whether to enable scheme as part of the cache key. Values:
 	// `on`: Enable
@@ -8285,116 +7482,6 @@ func (r *UpdatePayTypeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-// Predefined struct for user
-type UpdateScdnDomainRequestParams struct {
-	// Domain name
-	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
-
-	// WAF configuration
-	Waf *ScdnWafConfig `json:"Waf,omitnil,omitempty" name:"Waf"`
-
-	// Custom defense policy configuration
-	Acl *ScdnAclConfig `json:"Acl,omitnil,omitempty" name:"Acl"`
-
-	// CC attack defense configurations. CC attack defense is enabled by default.
-	CC *ScdnConfig `json:"CC,omitnil,omitempty" name:"CC"`
-
-	// DDoS defense configuration. DDoS defense is enabled by default.
-	Ddos *ScdnDdosConfig `json:"Ddos,omitnil,omitempty" name:"Ddos"`
-
-	// Bot defense configuration
-	Bot *ScdnBotConfig `json:"Bot,omitnil,omitempty" name:"Bot"`
-}
-
-type UpdateScdnDomainRequest struct {
-	*tchttp.BaseRequest
-	
-	// Domain name
-	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
-
-	// WAF configuration
-	Waf *ScdnWafConfig `json:"Waf,omitnil,omitempty" name:"Waf"`
-
-	// Custom defense policy configuration
-	Acl *ScdnAclConfig `json:"Acl,omitnil,omitempty" name:"Acl"`
-
-	// CC attack defense configurations. CC attack defense is enabled by default.
-	CC *ScdnConfig `json:"CC,omitnil,omitempty" name:"CC"`
-
-	// DDoS defense configuration. DDoS defense is enabled by default.
-	Ddos *ScdnDdosConfig `json:"Ddos,omitnil,omitempty" name:"Ddos"`
-
-	// Bot defense configuration
-	Bot *ScdnBotConfig `json:"Bot,omitnil,omitempty" name:"Bot"`
-}
-
-func (r *UpdateScdnDomainRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *UpdateScdnDomainRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Domain")
-	delete(f, "Waf")
-	delete(f, "Acl")
-	delete(f, "CC")
-	delete(f, "Ddos")
-	delete(f, "Bot")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateScdnDomainRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type UpdateScdnDomainResponseParams struct {
-	// Result of the request. `Success` indicates that the configurations are updated.
-	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type UpdateScdnDomainResponse struct {
-	*tchttp.BaseResponse
-	Response *UpdateScdnDomainResponseParams `json:"Response"`
-}
-
-func (r *UpdateScdnDomainResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *UpdateScdnDomainResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type UrlRecord struct {
-	// Status. `disable`: Blocked; `enable`: Unblocked.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
-
-	// Corresponding URL
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	RealUrl *string `json:"RealUrl,omitnil,omitempty" name:"RealUrl"`
-
-	// Creation time
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
-
-	// Update time.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
-}
-
 type UrlRedirect struct {
 	// Whether to enable URL rewriting. Values:
 	// `on`: Enable
@@ -8492,16 +7579,6 @@ type ViolationUrl struct {
 
 	// Update time
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
-}
-
-type WafSubRuleStatus struct {
-	// Whether to enable WAF sub-rules. Values:
-	// `on`: Enable
-	// `off`: Disable
-	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
-
-	// List of rule IDs
-	SubIds []*int64 `json:"SubIds,omitnil,omitempty" name:"SubIds"`
 }
 
 type WebSocket struct {

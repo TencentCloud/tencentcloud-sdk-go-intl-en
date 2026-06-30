@@ -389,6 +389,7 @@ func NewCreateAIAgentCallResponse() (response *CreateAIAgentCallResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AILICENSEHASEXPIRED = "FailedOperation.AILicenseHasExpired"
+//  FAILEDOPERATION_ACQUIREQUOTA = "FailedOperation.AcquireQuota"
 //  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
 //  FAILEDOPERATION_CALLEEISBLACKUSER = "FailedOperation.CalleeIsBlackUser"
 //  FAILEDOPERATION_CALLEROVERFREQUENCY = "FailedOperation.CallerOverFrequency"
@@ -415,6 +416,7 @@ func (c *Client) CreateAIAgentCall(request *CreateAIAgentCallRequest) (response 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AILICENSEHASEXPIRED = "FailedOperation.AILicenseHasExpired"
+//  FAILEDOPERATION_ACQUIREQUOTA = "FailedOperation.AcquireQuota"
 //  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
 //  FAILEDOPERATION_CALLEEISBLACKUSER = "FailedOperation.CalleeIsBlackUser"
 //  FAILEDOPERATION_CALLEROVERFREQUENCY = "FailedOperation.CallerOverFrequency"

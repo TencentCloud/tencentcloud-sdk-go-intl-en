@@ -203,6 +203,7 @@ func NewAddCdnDomainResponse() (response *AddCdnDomainResponse) {
 //  INVALIDPARAMETER_CDNCONFIGINVALIDHOST = "InvalidParameter.CdnConfigInvalidHost"
 //  INVALIDPARAMETER_CDNCONFIGINVALIDTAG = "InvalidParameter.CdnConfigInvalidTag"
 //  INVALIDPARAMETER_CDNCONFIGTAGREQUIRED = "InvalidParameter.CdnConfigTagRequired"
+//  INVALIDPARAMETER_CDNHOSTEXISTSINEDGEONE = "InvalidParameter.CdnHostExistsInEdgeOne"
 //  INVALIDPARAMETER_CDNHOSTINTERNALHOST = "InvalidParameter.CdnHostInternalHost"
 //  INVALIDPARAMETER_CDNHOSTISCOSDEFAULTACCESS = "InvalidParameter.CdnHostIsCosDefaultAccess"
 //  INVALIDPARAMETER_CDNHOSTTOOLONGHOST = "InvalidParameter.CdnHostTooLongHost"
@@ -219,6 +220,9 @@ func NewAddCdnDomainResponse() (response *AddCdnDomainResponse) {
 //  LIMITEXCEEDED_CDNCONFIGTOOMANYCACHERULES = "LimitExceeded.CdnConfigTooManyCacheRules"
 //  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
 //  LIMITEXCEEDED_CDNUSERTOOMANYHOSTS = "LimitExceeded.CdnUserTooManyHosts"
+//  OPERATIONDENIED_CDNHOSTHASDDOSRISK = "OperationDenied.CdnHostHasDDosRisk"
+//  OPERATIONDENIED_PRODUCTUPGRADED = "OperationDenied.ProductUpgraded"
+//  OPERATIONDENIED_USERMIGRATING = "OperationDenied.UserMigrating"
 //  RESOURCEINUSE_CDNCONFLICTHOSTEXISTS = "ResourceInUse.CdnConflictHostExists"
 //  RESOURCEINUSE_CDNHOSTEXISTS = "ResourceInUse.CdnHostExists"
 //  RESOURCEINUSE_CDNOPINPROGRESS = "ResourceInUse.CdnOpInProgress"
@@ -229,6 +233,7 @@ func NewAddCdnDomainResponse() (response *AddCdnDomainResponse) {
 //  RESOURCEUNAVAILABLE_CDNHOSTEXISTSINTCB = "ResourceUnavailable.CdnHostExistsInTcb"
 //  RESOURCEUNAVAILABLE_CDNHOSTISMALICIOUS = "ResourceUnavailable.CdnHostIsMalicious"
 //  RESOURCEUNAVAILABLE_CDNHOSTNOICP = "ResourceUnavailable.CdnHostNoIcp"
+//  RESOURCEUNAVAILABLE_CHECKUSERHIGHRISK = "ResourceUnavailable.CheckUserHighRisk"
 //  RESOURCEUNAVAILABLE_HOSTEXISTINVOD = "ResourceUnavailable.HostExistInVod"
 //  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
 //  UNAUTHORIZEDOPERATION_CDNDOMAINRECORDNOTVERIFIED = "UnauthorizedOperation.CdnDomainRecordNotVerified"
@@ -269,6 +274,7 @@ func (c *Client) AddCdnDomain(request *AddCdnDomainRequest) (response *AddCdnDom
 //  INVALIDPARAMETER_CDNCONFIGINVALIDHOST = "InvalidParameter.CdnConfigInvalidHost"
 //  INVALIDPARAMETER_CDNCONFIGINVALIDTAG = "InvalidParameter.CdnConfigInvalidTag"
 //  INVALIDPARAMETER_CDNCONFIGTAGREQUIRED = "InvalidParameter.CdnConfigTagRequired"
+//  INVALIDPARAMETER_CDNHOSTEXISTSINEDGEONE = "InvalidParameter.CdnHostExistsInEdgeOne"
 //  INVALIDPARAMETER_CDNHOSTINTERNALHOST = "InvalidParameter.CdnHostInternalHost"
 //  INVALIDPARAMETER_CDNHOSTISCOSDEFAULTACCESS = "InvalidParameter.CdnHostIsCosDefaultAccess"
 //  INVALIDPARAMETER_CDNHOSTTOOLONGHOST = "InvalidParameter.CdnHostTooLongHost"
@@ -285,6 +291,9 @@ func (c *Client) AddCdnDomain(request *AddCdnDomainRequest) (response *AddCdnDom
 //  LIMITEXCEEDED_CDNCONFIGTOOMANYCACHERULES = "LimitExceeded.CdnConfigTooManyCacheRules"
 //  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
 //  LIMITEXCEEDED_CDNUSERTOOMANYHOSTS = "LimitExceeded.CdnUserTooManyHosts"
+//  OPERATIONDENIED_CDNHOSTHASDDOSRISK = "OperationDenied.CdnHostHasDDosRisk"
+//  OPERATIONDENIED_PRODUCTUPGRADED = "OperationDenied.ProductUpgraded"
+//  OPERATIONDENIED_USERMIGRATING = "OperationDenied.UserMigrating"
 //  RESOURCEINUSE_CDNCONFLICTHOSTEXISTS = "ResourceInUse.CdnConflictHostExists"
 //  RESOURCEINUSE_CDNHOSTEXISTS = "ResourceInUse.CdnHostExists"
 //  RESOURCEINUSE_CDNOPINPROGRESS = "ResourceInUse.CdnOpInProgress"
@@ -295,6 +304,7 @@ func (c *Client) AddCdnDomain(request *AddCdnDomainRequest) (response *AddCdnDom
 //  RESOURCEUNAVAILABLE_CDNHOSTEXISTSINTCB = "ResourceUnavailable.CdnHostExistsInTcb"
 //  RESOURCEUNAVAILABLE_CDNHOSTISMALICIOUS = "ResourceUnavailable.CdnHostIsMalicious"
 //  RESOURCEUNAVAILABLE_CDNHOSTNOICP = "ResourceUnavailable.CdnHostNoIcp"
+//  RESOURCEUNAVAILABLE_CHECKUSERHIGHRISK = "ResourceUnavailable.CheckUserHighRisk"
 //  RESOURCEUNAVAILABLE_HOSTEXISTINVOD = "ResourceUnavailable.HostExistInVod"
 //  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
 //  UNAUTHORIZEDOPERATION_CDNDOMAINRECORDNOTVERIFIED = "UnauthorizedOperation.CdnDomainRecordNotVerified"
@@ -443,76 +453,6 @@ func (c *Client) CreateClsLogTopicWithContext(ctx context.Context, request *Crea
     request.SetContext(ctx)
     
     response = NewCreateClsLogTopicResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewCreateScdnFailedLogTaskRequest() (request *CreateScdnFailedLogTaskRequest) {
-    request = &CreateScdnFailedLogTaskRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cdn", APIVersion, "CreateScdnFailedLogTask")
-    
-    
-    return
-}
-
-func NewCreateScdnFailedLogTaskResponse() (response *CreateScdnFailedLogTaskResponse) {
-    response = &CreateScdnFailedLogTaskResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// CreateScdnFailedLogTask
-// This API is used to recreate a failed event log task.
-//
-// error code that may be returned:
-//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
-//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
-//  INVALIDPARAMETER_CDNSTATUSINVALIDDOMAIN = "InvalidParameter.CDNStatusInvalidDomain"
-//  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
-//  INVALIDPARAMETER_SCDNLOGTASKEXPIRED = "InvalidParameter.ScdnLogTaskExpired"
-//  INVALIDPARAMETER_SCDNLOGTASKNOTFOUNDORNOTFAIL = "InvalidParameter.ScdnLogTaskNotFoundOrNotFail"
-//  INVALIDPARAMETER_SCDNLOGTASKTIMERANGEINVALID = "InvalidParameter.ScdnLogTaskTimeRangeInvalid"
-//  LIMITEXCEEDED_SCDNLOGTASKEXCEEDDAYLIMIT = "LimitExceeded.ScdnLogTaskExceedDayLimit"
-//  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
-//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
-//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
-func (c *Client) CreateScdnFailedLogTask(request *CreateScdnFailedLogTaskRequest) (response *CreateScdnFailedLogTaskResponse, err error) {
-    return c.CreateScdnFailedLogTaskWithContext(context.Background(), request)
-}
-
-// CreateScdnFailedLogTask
-// This API is used to recreate a failed event log task.
-//
-// error code that may be returned:
-//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
-//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
-//  INVALIDPARAMETER_CDNSTATUSINVALIDDOMAIN = "InvalidParameter.CDNStatusInvalidDomain"
-//  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
-//  INVALIDPARAMETER_SCDNLOGTASKEXPIRED = "InvalidParameter.ScdnLogTaskExpired"
-//  INVALIDPARAMETER_SCDNLOGTASKNOTFOUNDORNOTFAIL = "InvalidParameter.ScdnLogTaskNotFoundOrNotFail"
-//  INVALIDPARAMETER_SCDNLOGTASKTIMERANGEINVALID = "InvalidParameter.ScdnLogTaskTimeRangeInvalid"
-//  LIMITEXCEEDED_SCDNLOGTASKEXCEEDDAYLIMIT = "LimitExceeded.ScdnLogTaskExceedDayLimit"
-//  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
-//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
-//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
-func (c *Client) CreateScdnFailedLogTaskWithContext(ctx context.Context, request *CreateScdnFailedLogTaskRequest) (response *CreateScdnFailedLogTaskResponse, err error) {
-    if request == nil {
-        request = NewCreateScdnFailedLogTaskRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "CreateScdnFailedLogTask")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateScdnFailedLogTask require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateScdnFailedLogTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -1111,6 +1051,8 @@ func NewDescribeCdnIpResponse() (response *DescribeCdnIpResponse) {
 // DescribeCdnIp
 // This API is used to query CDN IP ownership.
 //
+// This API is used to create and bind a policy. (Note: The API request frequency limit follows CDN's restriction: 200 requests/10 minutes).
+//
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
@@ -1130,6 +1072,8 @@ func (c *Client) DescribeCdnIp(request *DescribeCdnIpRequest) (response *Describ
 
 // DescribeCdnIp
 // This API is used to query CDN IP ownership.
+//
+// This API is used to create and bind a policy. (Note: The API request frequency limit follows CDN's restriction: 200 requests/10 minutes).
 //
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
@@ -1181,7 +1125,9 @@ func NewDescribeCdnOriginIpResponse() (response *DescribeCdnOriginIpResponse) {
 }
 
 // DescribeCdnOriginIp
-// This API is used to query the IP information of CDN intermediate nodes. Note: this API will be deactivated soon and no longer be maintained. Please call `DescribeIpStatus` instead.
+// **This API is deprecated.**.
+//
+// This API is used to query the IP information of CDN origin-pull nodes. (Note: The replace API is DescribeIpStatus.).
 //
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
@@ -1200,7 +1146,9 @@ func (c *Client) DescribeCdnOriginIp(request *DescribeCdnOriginIpRequest) (respo
 }
 
 // DescribeCdnOriginIp
-// This API is used to query the IP information of CDN intermediate nodes. Note: this API will be deactivated soon and no longer be maintained. Please call `DescribeIpStatus` instead.
+// **This API is deprecated.**.
+//
+// This API is used to query the IP information of CDN origin-pull nodes. (Note: The replace API is DescribeIpStatus.).
 //
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
@@ -2383,9 +2331,9 @@ func NewDescribeUrlViolationsResponse() (response *DescribeUrlViolationsResponse
 }
 
 // DescribeUrlViolations
-// This API is used to query the list of domain name URLs containing regulation-violating content scanned and detected by the CDN system, and the current status of the URLs.
+// This API is used to query the URL list with domain violations detected by the CDN system scan and their status.
 //
-// It corresponds to the **Pornography Detection** page on the CDN Console.
+// This API is used to correspond to the content compliant webpage in the CDN console.
 //
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
@@ -2402,9 +2350,9 @@ func (c *Client) DescribeUrlViolations(request *DescribeUrlViolationsRequest) (r
 }
 
 // DescribeUrlViolations
-// This API is used to query the list of domain name URLs containing regulation-violating content scanned and detected by the CDN system, and the current status of the URLs.
+// This API is used to query the URL list with domain violations detected by the CDN system scan and their status.
 //
-// It corresponds to the **Pornography Detection** page on the CDN Console.
+// This API is used to correspond to the content compliant webpage in the CDN console.
 //
 // error code that may be returned:
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
@@ -2429,96 +2377,6 @@ func (c *Client) DescribeUrlViolationsWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeUrlViolationsResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDisableCachesRequest() (request *DisableCachesRequest) {
-    request = &DisableCachesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cdn", APIVersion, "DisableCaches")
-    
-    
-    return
-}
-
-func NewDisableCachesResponse() (response *DisableCachesResponse) {
-    response = &DisableCachesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DisableCaches
-// This API is used to block access to a specific URL on CDN. When a URL is blocked, error 403 will be returned for requests from the Chinese mainland. URL blocking is not permanent. Note that this API is only available to beta users now. 
-//
-// error code that may be returned:
-//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
-//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
-//  INVALIDPARAMETER_CDNSTATUSINVALIDDOMAIN = "InvalidParameter.CDNStatusInvalidDomain"
-//  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
-//  INVALIDPARAMETER_CDNHOSTINVALIDSTATUS = "InvalidParameter.CdnHostInvalidStatus"
-//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
-//  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
-//  INVALIDPARAMETER_CDNSTATINVALIDDATE = "InvalidParameter.CdnStatInvalidDate"
-//  INVALIDPARAMETER_CDNSTATINVALIDPROJECTID = "InvalidParameter.CdnStatInvalidProjectId"
-//  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
-//  LIMITEXCEEDED_CDNPUSHEXCEEDDAYLIMIT = "LimitExceeded.CdnPushExceedDayLimit"
-//  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
-//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
-//  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNUSERAUTHFAIL = "UnauthorizedOperation.CdnUserAuthFail"
-//  UNAUTHORIZEDOPERATION_CDNUSERAUTHWAIT = "UnauthorizedOperation.CdnUserAuthWait"
-//  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
-//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
-//  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
-func (c *Client) DisableCaches(request *DisableCachesRequest) (response *DisableCachesResponse, err error) {
-    return c.DisableCachesWithContext(context.Background(), request)
-}
-
-// DisableCaches
-// This API is used to block access to a specific URL on CDN. When a URL is blocked, error 403 will be returned for requests from the Chinese mainland. URL blocking is not permanent. Note that this API is only available to beta users now. 
-//
-// error code that may be returned:
-//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
-//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
-//  INVALIDPARAMETER_CDNSTATUSINVALIDDOMAIN = "InvalidParameter.CDNStatusInvalidDomain"
-//  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
-//  INVALIDPARAMETER_CDNHOSTINVALIDSTATUS = "InvalidParameter.CdnHostInvalidStatus"
-//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
-//  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
-//  INVALIDPARAMETER_CDNSTATINVALIDDATE = "InvalidParameter.CdnStatInvalidDate"
-//  INVALIDPARAMETER_CDNSTATINVALIDPROJECTID = "InvalidParameter.CdnStatInvalidProjectId"
-//  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
-//  LIMITEXCEEDED_CDNPUSHEXCEEDDAYLIMIT = "LimitExceeded.CdnPushExceedDayLimit"
-//  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
-//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
-//  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNUSERAUTHFAIL = "UnauthorizedOperation.CdnUserAuthFail"
-//  UNAUTHORIZEDOPERATION_CDNUSERAUTHWAIT = "UnauthorizedOperation.CdnUserAuthWait"
-//  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
-//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
-//  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
-func (c *Client) DisableCachesWithContext(ctx context.Context, request *DisableCachesRequest) (response *DisableCachesResponse, err error) {
-    if request == nil {
-        request = NewDisableCachesRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DisableCaches")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DisableCaches require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDisableCachesResponse()
     err = c.Send(request, response)
     return
 }
@@ -2631,84 +2489,140 @@ func (c *Client) DisableClsLogTopicWithContext(ctx context.Context, request *Dis
     return
 }
 
-func NewEnableCachesRequest() (request *EnableCachesRequest) {
-    request = &EnableCachesRequest{
+func NewDuplicateDomainConfigRequest() (request *DuplicateDomainConfigRequest) {
+    request = &DuplicateDomainConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
     
-    request.Init().WithApiInfo("cdn", APIVersion, "EnableCaches")
+    request.Init().WithApiInfo("cdn", APIVersion, "DuplicateDomainConfig")
     
     
     return
 }
 
-func NewEnableCachesResponse() (response *EnableCachesResponse) {
-    response = &EnableCachesResponse{
+func NewDuplicateDomainConfigResponse() (response *DuplicateDomainConfigResponse) {
+    response = &DuplicateDomainConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
     } 
     return
 
 }
 
-// EnableCaches
-// This API (EnableCaches) is used to unblock manually blocked URLs. After a URL is successfully unblocked, it takes about 5 to 10 minutes to take effect across the entire network. (This API is during beta test and not fully available now.)
+// DuplicateDomainConfig
+// This API is used to copy the configuration of a reference domain to a new domain name. Self-owned certificates and customization options are not currently supported.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CDNCONFIGERROR = "FailedOperation.CdnConfigError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
-//  INVALIDPARAMETER_CDNSTATUSINVALIDDOMAIN = "InvalidParameter.CDNStatusInvalidDomain"
-//  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
-//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
+//  INTERNALERROR_ERROR = "InternalError.Error"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CDNCERTINFONOTFOUND = "InvalidParameter.CdnCertInfoNotFound"
+//  INVALIDPARAMETER_CDNCONFIGINVALIDHOST = "InvalidParameter.CdnConfigInvalidHost"
+//  INVALIDPARAMETER_CDNHOSTINTERNALHOST = "InvalidParameter.CdnHostInternalHost"
+//  INVALIDPARAMETER_CDNKEYRULESEXCLUDECUSTOMREQUIRESFULLLEGO = "InvalidParameter.CdnKeyRulesExcludeCustomRequiresFullLego"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
-//  INVALIDPARAMETER_CDNSTATINVALIDDATE = "InvalidParameter.CdnStatInvalidDate"
-//  INVALIDPARAMETER_CDNSTATINVALIDPROJECTID = "InvalidParameter.CdnStatInvalidProjectId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_CAMTAGQUOTAEXCEEDLIMIT = "LimitExceeded.CamTagQuotaExceedLimit"
+//  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
+//  LIMITEXCEEDED_CDNUSERTOOMANYHOSTS = "LimitExceeded.CdnUserTooManyHosts"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE_CDNCONFLICTHOSTEXISTS = "ResourceInUse.CdnConflictHostExists"
+//  RESOURCEINUSE_CDNHOSTEXISTS = "ResourceInUse.CdnHostExists"
+//  RESOURCEINUSE_CDNOPINPROGRESS = "ResourceInUse.CdnOpInProgress"
+//  RESOURCEINUSE_TCBHOSTEXISTS = "ResourceInUse.TcbHostExists"
+//  RESOURCENOTFOUND_CAMTAGKEYNOTEXIST = "ResourceNotFound.CamTagKeyNotExist"
 //  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
 //  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
-//  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
+//  RESOURCENOTFOUND_CDNUSERTOOMANYHOSTS = "ResourceNotFound.CdnUserTooManyHosts"
+//  RESOURCEUNAVAILABLE_CDNHOSTISLOCKED = "ResourceUnavailable.CdnHostIsLocked"
+//  RESOURCEUNAVAILABLE_CDNHOSTISMALICIOUS = "ResourceUnavailable.CdnHostIsMalicious"
+//  RESOURCEUNAVAILABLE_CDNHOSTNOICP = "ResourceUnavailable.CdnHostNoIcp"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNDOMAINRECORDNOTVERIFIED = "UnauthorizedOperation.CdnDomainRecordNotVerified"
+//  UNAUTHORIZEDOPERATION_CDNHOSTEXISTSININTERNAL = "UnauthorizedOperation.CdnHostExistsInInternal"
+//  UNAUTHORIZEDOPERATION_CDNHOSTISOWNEDBYOTHER = "UnauthorizedOperation.CdnHostIsOwnedByOther"
+//  UNAUTHORIZEDOPERATION_CDNHOSTISTOAPPLYHOST = "UnauthorizedOperation.CdnHostIsToApplyHost"
+//  UNAUTHORIZEDOPERATION_CDNHOSTISUSEDBYOTHER = "UnauthorizedOperation.CdnHostIsUsedByOther"
+//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNINVALIDUSERSTATUS = "UnauthorizedOperation.CdnInvalidUserStatus"
+//  UNAUTHORIZEDOPERATION_CDNTAGUNAUTHORIZED = "UnauthorizedOperation.CdnTagUnauthorized"
 //  UNAUTHORIZEDOPERATION_CDNUSERAUTHFAIL = "UnauthorizedOperation.CdnUserAuthFail"
-//  UNAUTHORIZEDOPERATION_CDNUSERAUTHWAIT = "UnauthorizedOperation.CdnUserAuthWait"
+//  UNAUTHORIZEDOPERATION_CDNUSERISISOLATED = "UnauthorizedOperation.CdnUserIsIsolated"
 //  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
-//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
-func (c *Client) EnableCaches(request *EnableCachesRequest) (response *EnableCachesResponse, err error) {
-    return c.EnableCachesWithContext(context.Background(), request)
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DuplicateDomainConfig(request *DuplicateDomainConfigRequest) (response *DuplicateDomainConfigResponse, err error) {
+    return c.DuplicateDomainConfigWithContext(context.Background(), request)
 }
 
-// EnableCaches
-// This API (EnableCaches) is used to unblock manually blocked URLs. After a URL is successfully unblocked, it takes about 5 to 10 minutes to take effect across the entire network. (This API is during beta test and not fully available now.)
+// DuplicateDomainConfig
+// This API is used to copy the configuration of a reference domain to a new domain name. Self-owned certificates and customization options are not currently supported.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_CDNCONFIGERROR = "FailedOperation.CdnConfigError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
 //  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
 //  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
-//  INVALIDPARAMETER_CDNSTATUSINVALIDDOMAIN = "InvalidParameter.CDNStatusInvalidDomain"
-//  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
-//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
+//  INTERNALERROR_ERROR = "InternalError.Error"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CDNCERTINFONOTFOUND = "InvalidParameter.CdnCertInfoNotFound"
+//  INVALIDPARAMETER_CDNCONFIGINVALIDHOST = "InvalidParameter.CdnConfigInvalidHost"
+//  INVALIDPARAMETER_CDNHOSTINTERNALHOST = "InvalidParameter.CdnHostInternalHost"
+//  INVALIDPARAMETER_CDNKEYRULESEXCLUDECUSTOMREQUIRESFULLLEGO = "InvalidParameter.CdnKeyRulesExcludeCustomRequiresFullLego"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
-//  INVALIDPARAMETER_CDNSTATINVALIDDATE = "InvalidParameter.CdnStatInvalidDate"
-//  INVALIDPARAMETER_CDNSTATINVALIDPROJECTID = "InvalidParameter.CdnStatInvalidProjectId"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_CAMTAGQUOTAEXCEEDLIMIT = "LimitExceeded.CamTagQuotaExceedLimit"
+//  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
+//  LIMITEXCEEDED_CDNUSERTOOMANYHOSTS = "LimitExceeded.CdnUserTooManyHosts"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE_CDNCONFLICTHOSTEXISTS = "ResourceInUse.CdnConflictHostExists"
+//  RESOURCEINUSE_CDNHOSTEXISTS = "ResourceInUse.CdnHostExists"
+//  RESOURCEINUSE_CDNOPINPROGRESS = "ResourceInUse.CdnOpInProgress"
+//  RESOURCEINUSE_TCBHOSTEXISTS = "ResourceInUse.TcbHostExists"
+//  RESOURCENOTFOUND_CAMTAGKEYNOTEXIST = "ResourceNotFound.CamTagKeyNotExist"
 //  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
 //  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
-//  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
+//  RESOURCENOTFOUND_CDNUSERTOOMANYHOSTS = "ResourceNotFound.CdnUserTooManyHosts"
+//  RESOURCEUNAVAILABLE_CDNHOSTISLOCKED = "ResourceUnavailable.CdnHostIsLocked"
+//  RESOURCEUNAVAILABLE_CDNHOSTISMALICIOUS = "ResourceUnavailable.CdnHostIsMalicious"
+//  RESOURCEUNAVAILABLE_CDNHOSTNOICP = "ResourceUnavailable.CdnHostNoIcp"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNDOMAINRECORDNOTVERIFIED = "UnauthorizedOperation.CdnDomainRecordNotVerified"
+//  UNAUTHORIZEDOPERATION_CDNHOSTEXISTSININTERNAL = "UnauthorizedOperation.CdnHostExistsInInternal"
+//  UNAUTHORIZEDOPERATION_CDNHOSTISOWNEDBYOTHER = "UnauthorizedOperation.CdnHostIsOwnedByOther"
+//  UNAUTHORIZEDOPERATION_CDNHOSTISTOAPPLYHOST = "UnauthorizedOperation.CdnHostIsToApplyHost"
+//  UNAUTHORIZEDOPERATION_CDNHOSTISUSEDBYOTHER = "UnauthorizedOperation.CdnHostIsUsedByOther"
+//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
+//  UNAUTHORIZEDOPERATION_CDNINVALIDUSERSTATUS = "UnauthorizedOperation.CdnInvalidUserStatus"
+//  UNAUTHORIZEDOPERATION_CDNTAGUNAUTHORIZED = "UnauthorizedOperation.CdnTagUnauthorized"
 //  UNAUTHORIZEDOPERATION_CDNUSERAUTHFAIL = "UnauthorizedOperation.CdnUserAuthFail"
-//  UNAUTHORIZEDOPERATION_CDNUSERAUTHWAIT = "UnauthorizedOperation.CdnUserAuthWait"
+//  UNAUTHORIZEDOPERATION_CDNUSERISISOLATED = "UnauthorizedOperation.CdnUserIsIsolated"
 //  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
-//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
 //  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
-func (c *Client) EnableCachesWithContext(ctx context.Context, request *EnableCachesRequest) (response *EnableCachesResponse, err error) {
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DuplicateDomainConfigWithContext(ctx context.Context, request *DuplicateDomainConfigRequest) (response *DuplicateDomainConfigResponse, err error) {
     if request == nil {
-        request = NewEnableCachesRequest()
+        request = NewDuplicateDomainConfigRequest()
     }
-    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "EnableCaches")
+    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "DuplicateDomainConfig")
     
     if c.GetCredential() == nil {
-        return nil, errors.New("EnableCaches require credential")
+        return nil, errors.New("DuplicateDomainConfig require credential")
     }
 
     request.SetContext(ctx)
     
-    response = NewEnableCachesResponse()
+    response = NewDuplicateDomainConfigResponse()
     err = c.Send(request, response)
     return
 }
@@ -2817,88 +2731,6 @@ func (c *Client) EnableClsLogTopicWithContext(ctx context.Context, request *Enab
     request.SetContext(ctx)
     
     response = NewEnableClsLogTopicResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewGetDisableRecordsRequest() (request *GetDisableRecordsRequest) {
-    request = &GetDisableRecordsRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cdn", APIVersion, "GetDisableRecords")
-    
-    
-    return
-}
-
-func NewGetDisableRecordsResponse() (response *GetDisableRecordsResponse) {
-    response = &GetDisableRecordsResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// GetDisableRecords
-// This API is used to query the resource blocking history and the current URL status. (This API is in beta test and not generally available yet.)
-//
-// error code that may be returned:
-//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
-//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
-//  INTERNALERROR_ERROR = "InternalError.Error"
-//  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
-//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
-//  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
-//  INVALIDPARAMETER_CDNSTATINVALIDDATE = "InvalidParameter.CdnStatInvalidDate"
-//  INVALIDPARAMETER_CDNSTATINVALIDPROJECTID = "InvalidParameter.CdnStatInvalidProjectId"
-//  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
-//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
-//  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNUSERAUTHFAIL = "UnauthorizedOperation.CdnUserAuthFail"
-//  UNAUTHORIZEDOPERATION_CDNUSERAUTHWAIT = "UnauthorizedOperation.CdnUserAuthWait"
-//  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
-//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
-//  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
-func (c *Client) GetDisableRecords(request *GetDisableRecordsRequest) (response *GetDisableRecordsResponse, err error) {
-    return c.GetDisableRecordsWithContext(context.Background(), request)
-}
-
-// GetDisableRecords
-// This API is used to query the resource blocking history and the current URL status. (This API is in beta test and not generally available yet.)
-//
-// error code that may be returned:
-//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
-//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
-//  INTERNALERROR_ERROR = "InternalError.Error"
-//  INVALIDPARAMETER_CDNHOSTINVALIDPARAM = "InvalidParameter.CdnHostInvalidParam"
-//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
-//  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
-//  INVALIDPARAMETER_CDNSTATINVALIDDATE = "InvalidParameter.CdnStatInvalidDate"
-//  INVALIDPARAMETER_CDNSTATINVALIDPROJECTID = "InvalidParameter.CdnStatInvalidProjectId"
-//  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
-//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
-//  UNAUTHORIZEDOPERATION_CDNACCOUNTUNAUTHORIZED = "UnauthorizedOperation.CdnAccountUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNUSERAUTHFAIL = "UnauthorizedOperation.CdnUserAuthFail"
-//  UNAUTHORIZEDOPERATION_CDNUSERAUTHWAIT = "UnauthorizedOperation.CdnUserAuthWait"
-//  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
-//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
-//  UNAUTHORIZEDOPERATION_OPERATIONTOOOFTEN = "UnauthorizedOperation.OperationTooOften"
-func (c *Client) GetDisableRecordsWithContext(ctx context.Context, request *GetDisableRecordsRequest) (response *GetDisableRecordsResponse, err error) {
-    if request == nil {
-        request = NewGetDisableRecordsRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "GetDisableRecords")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("GetDisableRecords require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewGetDisableRecordsResponse()
     err = c.Send(request, response)
     return
 }
@@ -4146,6 +3978,8 @@ func NewStopCdnDomainResponse() (response *StopCdnDomainResponse) {
 //  INVALIDPARAMETER_CDNKEYRULESEXCLUDECUSTOMREQUIRESFULLLEGO = "InvalidParameter.CdnKeyRulesExcludeCustomRequiresFullLego"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
 //  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
+//  OPERATIONDENIED_PRODUCTUPDATING = "OperationDenied.ProductUpdating"
+//  OPERATIONDENIED_PRODUCTUPGRADED = "OperationDenied.ProductUpgraded"
 //  RESOURCEINUSE_CDNOPINPROGRESS = "ResourceInUse.CdnOpInProgress"
 //  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
 //  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
@@ -4178,6 +4012,8 @@ func (c *Client) StopCdnDomain(request *StopCdnDomainRequest) (response *StopCdn
 //  INVALIDPARAMETER_CDNKEYRULESEXCLUDECUSTOMREQUIRESFULLLEGO = "InvalidParameter.CdnKeyRulesExcludeCustomRequiresFullLego"
 //  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
 //  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
+//  OPERATIONDENIED_PRODUCTUPDATING = "OperationDenied.ProductUpdating"
+//  OPERATIONDENIED_PRODUCTUPGRADED = "OperationDenied.ProductUpgraded"
 //  RESOURCEINUSE_CDNOPINPROGRESS = "ResourceInUse.CdnOpInProgress"
 //  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
 //  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
@@ -4441,98 +4277,6 @@ func (c *Client) UpdatePayTypeWithContext(ctx context.Context, request *UpdatePa
     request.SetContext(ctx)
     
     response = NewUpdatePayTypeResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewUpdateScdnDomainRequest() (request *UpdateScdnDomainRequest) {
-    request = &UpdateScdnDomainRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cdn", APIVersion, "UpdateScdnDomain")
-    
-    
-    return
-}
-
-func NewUpdateScdnDomainResponse() (response *UpdateScdnDomainResponse) {
-    response = &UpdateScdnDomainResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// UpdateScdnDomain
-// This API is used to modify security configurations of SCDN acceleration domain names.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_CDNCONFIGERROR = "FailedOperation.CdnConfigError"
-//  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
-//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
-//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
-//  INTERNALERROR_SCDNUSERNOPACKAGE = "InternalError.ScdnUserNoPackage"
-//  INTERNALERROR_SCDNUSERSUSPEND = "InternalError.ScdnUserSuspend"
-//  INVALIDPARAMETER_ACCESSPORTOPENEDHTTPS = "InvalidParameter.AccessPortOpenedHttps"
-//  INVALIDPARAMETER_CDNSTATUSINVALIDDOMAIN = "InvalidParameter.CDNStatusInvalidDomain"
-//  INVALIDPARAMETER_CDNHOSTINTERNALHOST = "InvalidParameter.CdnHostInternalHost"
-//  INVALIDPARAMETER_CDNHOSTINVALIDSTATUS = "InvalidParameter.CdnHostInvalidStatus"
-//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
-//  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
-//  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
-//  RESOURCEINUSE_CDNOPINPROGRESS = "ResourceInUse.CdnOpInProgress"
-//  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
-//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
-//  RESOURCEUNAVAILABLE_CDNHOSTISLOCKED = "ResourceUnavailable.CdnHostIsLocked"
-//  RESOURCEUNAVAILABLE_SCDNUSERNOPACKAGE = "ResourceUnavailable.ScdnUserNoPackage"
-//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
-//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
-func (c *Client) UpdateScdnDomain(request *UpdateScdnDomainRequest) (response *UpdateScdnDomainResponse, err error) {
-    return c.UpdateScdnDomainWithContext(context.Background(), request)
-}
-
-// UpdateScdnDomain
-// This API is used to modify security configurations of SCDN acceleration domain names.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_CDNCONFIGERROR = "FailedOperation.CdnConfigError"
-//  INTERNALERROR_CDNCONFIGERROR = "InternalError.CdnConfigError"
-//  INTERNALERROR_CDNDBERROR = "InternalError.CdnDbError"
-//  INTERNALERROR_CDNSYSTEMERROR = "InternalError.CdnSystemError"
-//  INTERNALERROR_SCDNUSERNOPACKAGE = "InternalError.ScdnUserNoPackage"
-//  INTERNALERROR_SCDNUSERSUSPEND = "InternalError.ScdnUserSuspend"
-//  INVALIDPARAMETER_ACCESSPORTOPENEDHTTPS = "InvalidParameter.AccessPortOpenedHttps"
-//  INVALIDPARAMETER_CDNSTATUSINVALIDDOMAIN = "InvalidParameter.CDNStatusInvalidDomain"
-//  INVALIDPARAMETER_CDNHOSTINTERNALHOST = "InvalidParameter.CdnHostInternalHost"
-//  INVALIDPARAMETER_CDNHOSTINVALIDSTATUS = "InvalidParameter.CdnHostInvalidStatus"
-//  INVALIDPARAMETER_CDNINTERFACEERROR = "InvalidParameter.CdnInterfaceError"
-//  INVALIDPARAMETER_CDNPARAMERROR = "InvalidParameter.CdnParamError"
-//  LIMITEXCEEDED_CDNHOSTOPTOOOFTEN = "LimitExceeded.CdnHostOpTooOften"
-//  RESOURCEINUSE_CDNOPINPROGRESS = "ResourceInUse.CdnOpInProgress"
-//  RESOURCENOTFOUND_CDNHOSTNOTEXISTS = "ResourceNotFound.CdnHostNotExists"
-//  RESOURCENOTFOUND_CDNUSERNOTEXISTS = "ResourceNotFound.CdnUserNotExists"
-//  RESOURCEUNAVAILABLE_CDNHOSTISLOCKED = "ResourceUnavailable.CdnHostIsLocked"
-//  RESOURCEUNAVAILABLE_SCDNUSERNOPACKAGE = "ResourceUnavailable.ScdnUserNoPackage"
-//  UNAUTHORIZEDOPERATION_CDNCAMUNAUTHORIZED = "UnauthorizedOperation.CdnCamUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNHOSTUNAUTHORIZED = "UnauthorizedOperation.CdnHostUnauthorized"
-//  UNAUTHORIZEDOPERATION_CDNUSERISSUSPENDED = "UnauthorizedOperation.CdnUserIsSuspended"
-//  UNAUTHORIZEDOPERATION_CDNUSERNOWHITELIST = "UnauthorizedOperation.CdnUserNoWhitelist"
-func (c *Client) UpdateScdnDomainWithContext(ctx context.Context, request *UpdateScdnDomainRequest) (response *UpdateScdnDomainResponse, err error) {
-    if request == nil {
-        request = NewUpdateScdnDomainRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cdn", APIVersion, "UpdateScdnDomain")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("UpdateScdnDomain require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewUpdateScdnDomainResponse()
     err = c.Send(request, response)
     return
 }

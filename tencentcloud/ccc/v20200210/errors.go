@@ -29,6 +29,9 @@ const (
 	// AI package expired. please renew or repurchase.
 	FAILEDOPERATION_AILICENSEHASEXPIRED = "FailedOperation.AILicenseHasExpired"
 
+	// 
+	FAILEDOPERATION_ACQUIREQUOTA = "FailedOperation.AcquireQuota"
+
 	// Outbound call failure.
 	FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
 
