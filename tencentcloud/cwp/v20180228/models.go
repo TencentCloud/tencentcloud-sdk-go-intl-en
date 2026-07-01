@@ -17688,7 +17688,7 @@ type DescribeLoginTypeHostRequestParams struct {
 	// <p>Offset. Default value: 0.</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <p>Sort order: [ASC: ascending | DESC: descending]</p>
+	// <p>Sort order: [ASC: ascending, DESC: descending]</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
 	// <p>Optional sorting column: [Id]</p>
@@ -17707,7 +17707,7 @@ type DescribeLoginTypeHostRequest struct {
 	// <p>Offset. Default value: 0.</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <p>Sort order: [ASC: ascending | DESC: descending]</p>
+	// <p>Sort order: [ASC: ascending, DESC: descending]</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
 	// <p>Optional sorting column: [Id]</p>

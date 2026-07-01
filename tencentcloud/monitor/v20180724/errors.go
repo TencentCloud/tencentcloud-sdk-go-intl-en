@@ -248,6 +248,9 @@ const (
 	// The task has already been submitted.
 	INVALIDPARAMETER_DUPTASK = "InvalidParameter.DupTask"
 
+	// Invalid AppId.
+	INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+
 	// Invalid parameter.
 	INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
 

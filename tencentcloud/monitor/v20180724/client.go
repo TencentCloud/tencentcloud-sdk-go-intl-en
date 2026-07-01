@@ -7115,6 +7115,174 @@ func (c *Client) EnableSSOCamCheckWithContext(ctx context.Context, request *Enab
     return
 }
 
+func NewExportPrometheusReadOnlyDynamicAPIRequest() (request *ExportPrometheusReadOnlyDynamicAPIRequest) {
+    request = &ExportPrometheusReadOnlyDynamicAPIRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "ExportPrometheusReadOnlyDynamicAPI")
+    
+    
+    return
+}
+
+func NewExportPrometheusReadOnlyDynamicAPIResponse() (response *ExportPrometheusReadOnlyDynamicAPIResponse) {
+    response = &ExportPrometheusReadOnlyDynamicAPIResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExportPrometheusReadOnlyDynamicAPI
+// Prometheus internal read-only dynamic api proxy supports accessing native Prometheus APIs via cloud api format
+//
+// support the following APIs:
+//
+// 
+//
+// | path | method | purpose |
+//
+// | - | - | - |
+//
+// /api/v1/query | GET, POST | point query
+//
+// /api/v1/query_range | GET, POST | Range query
+//
+// /api/v1/series | GET, POST | Query the series list
+//
+// /api/v1/labels | GET, POST | Query labels
+//
+// /api/v1/label/{label_name}/values | GET | Query label values.
+//
+// /api/v1/rules | GET | Query pre-aggregation and alert rules.
+//
+// /api/v1/user_limits | GET | Query prometheus instance limits
+//
+//  /alertmanager/api/v2/alerts/groups | GET | Query current alarm information 
+//
+// /alertmanager/api/v2/silences | GET | Query alert silences
+//
+// /alertmanager/api/v2/silence/{id} | GET | Query alert silence details
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATACOLUMNNOTFOUND = "FailedOperation.DataColumnNotFound"
+//  FAILEDOPERATION_DATAQUERYFAILED = "FailedOperation.DataQueryFailed"
+//  FAILEDOPERATION_DATATABLENOTFOUND = "FailedOperation.DataTableNotFound"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_DBTRANSACTIONBEGINFAILED = "FailedOperation.DbTransactionBeginFailed"
+//  FAILEDOPERATION_DBTRANSACTIONCOMMITFAILED = "FailedOperation.DbTransactionCommitFailed"
+//  FAILEDOPERATION_INSTANCENOTFOUND = "FailedOperation.InstanceNotFound"
+//  FAILEDOPERATION_INTERNALERROR = "FailedOperation.InternalError"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERPARAM = "InvalidParameter.InvalidParameterParam"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ExportPrometheusReadOnlyDynamicAPI(request *ExportPrometheusReadOnlyDynamicAPIRequest) (response *ExportPrometheusReadOnlyDynamicAPIResponse, err error) {
+    return c.ExportPrometheusReadOnlyDynamicAPIWithContext(context.Background(), request)
+}
+
+// ExportPrometheusReadOnlyDynamicAPI
+// Prometheus internal read-only dynamic api proxy supports accessing native Prometheus APIs via cloud api format
+//
+// support the following APIs:
+//
+// 
+//
+// | path | method | purpose |
+//
+// | - | - | - |
+//
+// /api/v1/query | GET, POST | point query
+//
+// /api/v1/query_range | GET, POST | Range query
+//
+// /api/v1/series | GET, POST | Query the series list
+//
+// /api/v1/labels | GET, POST | Query labels
+//
+// /api/v1/label/{label_name}/values | GET | Query label values.
+//
+// /api/v1/rules | GET | Query pre-aggregation and alert rules.
+//
+// /api/v1/user_limits | GET | Query prometheus instance limits
+//
+//  /alertmanager/api/v2/alerts/groups | GET | Query current alarm information 
+//
+// /alertmanager/api/v2/silences | GET | Query alert silences
+//
+// /alertmanager/api/v2/silence/{id} | GET | Query alert silence details
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATACOLUMNNOTFOUND = "FailedOperation.DataColumnNotFound"
+//  FAILEDOPERATION_DATAQUERYFAILED = "FailedOperation.DataQueryFailed"
+//  FAILEDOPERATION_DATATABLENOTFOUND = "FailedOperation.DataTableNotFound"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_DBTRANSACTIONBEGINFAILED = "FailedOperation.DbTransactionBeginFailed"
+//  FAILEDOPERATION_DBTRANSACTIONCOMMITFAILED = "FailedOperation.DbTransactionCommitFailed"
+//  FAILEDOPERATION_INSTANCENOTFOUND = "FailedOperation.InstanceNotFound"
+//  FAILEDOPERATION_INTERNALERROR = "FailedOperation.InternalError"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERPARAM = "InvalidParameter.InvalidParameterParam"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ExportPrometheusReadOnlyDynamicAPIWithContext(ctx context.Context, request *ExportPrometheusReadOnlyDynamicAPIRequest) (response *ExportPrometheusReadOnlyDynamicAPIResponse, err error) {
+    if request == nil {
+        request = NewExportPrometheusReadOnlyDynamicAPIRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "ExportPrometheusReadOnlyDynamicAPI")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportPrometheusReadOnlyDynamicAPI require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExportPrometheusReadOnlyDynamicAPIResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetMonitorDataRequest() (request *GetMonitorDataRequest) {
     request = &GetMonitorDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8373,6 +8541,182 @@ func (c *Client) ResumeGrafanaInstanceWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewResumeGrafanaInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRoutePrometheusDynamicAPIRequest() (request *RoutePrometheusDynamicAPIRequest) {
+    request = &RoutePrometheusDynamicAPIRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("monitor", APIVersion, "RoutePrometheusDynamicAPI")
+    
+    
+    return
+}
+
+func NewRoutePrometheusDynamicAPIResponse() (response *RoutePrometheusDynamicAPIResponse) {
+    response = &RoutePrometheusDynamicAPIResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RoutePrometheusDynamicAPI
+// Prometheus internal dynamics api proxy supports accessing Prometheus native APIs via cloud APIs.
+//
+// support the following APIs:
+//
+//  
+//
+// It is recommended to use the ExportPrometheusReadOnlyDynamicAPI call for Read API, supporting longer query latency and response size. Meanwhile, it makes permission management easy.
+//
+// 
+//
+// | path | method | purpose |
+//
+// | - | - | - |
+//
+// /api/v1/query | GET, POST | point query
+//
+// /api/v1/query_range | GET, POST | Range query
+//
+// /api/v1/series | GET, POST | Query the series list
+//
+// /api/v1/labels | GET, POST | Query labels
+//
+// /api/v1/label/{label_name}/values | GET | Query label values.
+//
+// /api/v1/rules | GET | Query pre-aggregation and alert rules.
+//
+// /api/v1/user_limits | GET | Query prometheus instance limits
+//
+//  /alertmanager/api/v2/alerts/groups | GET | Query current alarm information 
+//
+// /alertmanager/api/v2/silences | GET, POST | Query, create, or modify alert silences
+//
+// /alertmanager/api/v2/silence/{id} | GET, DELETE | Query alert silence details, Delete alert silence
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATACOLUMNNOTFOUND = "FailedOperation.DataColumnNotFound"
+//  FAILEDOPERATION_DATAQUERYFAILED = "FailedOperation.DataQueryFailed"
+//  FAILEDOPERATION_DATATABLENOTFOUND = "FailedOperation.DataTableNotFound"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_DBTRANSACTIONBEGINFAILED = "FailedOperation.DbTransactionBeginFailed"
+//  FAILEDOPERATION_DBTRANSACTIONCOMMITFAILED = "FailedOperation.DbTransactionCommitFailed"
+//  FAILEDOPERATION_INSTANCENOTFOUND = "FailedOperation.InstanceNotFound"
+//  FAILEDOPERATION_INTERNALERROR = "FailedOperation.InternalError"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERPARAM = "InvalidParameter.InvalidParameterParam"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) RoutePrometheusDynamicAPI(request *RoutePrometheusDynamicAPIRequest) (response *RoutePrometheusDynamicAPIResponse, err error) {
+    return c.RoutePrometheusDynamicAPIWithContext(context.Background(), request)
+}
+
+// RoutePrometheusDynamicAPI
+// Prometheus internal dynamics api proxy supports accessing Prometheus native APIs via cloud APIs.
+//
+// support the following APIs:
+//
+//  
+//
+// It is recommended to use the ExportPrometheusReadOnlyDynamicAPI call for Read API, supporting longer query latency and response size. Meanwhile, it makes permission management easy.
+//
+// 
+//
+// | path | method | purpose |
+//
+// | - | - | - |
+//
+// /api/v1/query | GET, POST | point query
+//
+// /api/v1/query_range | GET, POST | Range query
+//
+// /api/v1/series | GET, POST | Query the series list
+//
+// /api/v1/labels | GET, POST | Query labels
+//
+// /api/v1/label/{label_name}/values | GET | Query label values.
+//
+// /api/v1/rules | GET | Query pre-aggregation and alert rules.
+//
+// /api/v1/user_limits | GET | Query prometheus instance limits
+//
+//  /alertmanager/api/v2/alerts/groups | GET | Query current alarm information 
+//
+// /alertmanager/api/v2/silences | GET, POST | Query, create, or modify alert silences
+//
+// /alertmanager/api/v2/silence/{id} | GET, DELETE | Query alert silence details, Delete alert silence
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DATACOLUMNNOTFOUND = "FailedOperation.DataColumnNotFound"
+//  FAILEDOPERATION_DATAQUERYFAILED = "FailedOperation.DataQueryFailed"
+//  FAILEDOPERATION_DATATABLENOTFOUND = "FailedOperation.DataTableNotFound"
+//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
+//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
+//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
+//  FAILEDOPERATION_DBTRANSACTIONBEGINFAILED = "FailedOperation.DbTransactionBeginFailed"
+//  FAILEDOPERATION_DBTRANSACTIONCOMMITFAILED = "FailedOperation.DbTransactionCommitFailed"
+//  FAILEDOPERATION_INSTANCENOTFOUND = "FailedOperation.InstanceNotFound"
+//  FAILEDOPERATION_INTERNALERROR = "FailedOperation.InternalError"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERPARAM = "InvalidParameter.InvalidParameterParam"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) RoutePrometheusDynamicAPIWithContext(ctx context.Context, request *RoutePrometheusDynamicAPIRequest) (response *RoutePrometheusDynamicAPIResponse, err error) {
+    if request == nil {
+        request = NewRoutePrometheusDynamicAPIRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "RoutePrometheusDynamicAPI")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RoutePrometheusDynamicAPI require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRoutePrometheusDynamicAPIResponse()
     err = c.Send(request, response)
     return
 }
