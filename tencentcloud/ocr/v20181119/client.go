@@ -1531,88 +1531,6 @@ func (c *Client) ApplyCardVerificationExternalWithContext(ctx context.Context, r
     return
 }
 
-func NewBankCardOCRRequest() (request *BankCardOCRRequest) {
-    request = &BankCardOCRRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("ocr", APIVersion, "BankCardOCR")
-    
-    
-    return
-}
-
-func NewBankCardOCRResponse() (response *BankCardOCRResponse) {
-    response = &BankCardOCRResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// BankCardOCR
-// This API is used to detect and recognize key fields such as the card number, bank information, and expiration date on mainstream bank cards in Mainland China.
-//
-// 
-//
-// This API is not fully available for the time being. For more information, please contact your [Tencent Cloud sales rep](https://intl.cloud.tencent.com/contact-sales).
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_ILLEGALBANKCARDERROR = "FailedOperation.IllegalBankCardError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_NOBANKCARDERROR = "FailedOperation.NoBankCardError"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETER_ENGINEIMAGEDECODEFAILED = "InvalidParameter.EngineImageDecodeFailed"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) BankCardOCR(request *BankCardOCRRequest) (response *BankCardOCRResponse, err error) {
-    return c.BankCardOCRWithContext(context.Background(), request)
-}
-
-// BankCardOCR
-// This API is used to detect and recognize key fields such as the card number, bank information, and expiration date on mainstream bank cards in Mainland China.
-//
-// 
-//
-// This API is not fully available for the time being. For more information, please contact your [Tencent Cloud sales rep](https://intl.cloud.tencent.com/contact-sales).
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_ILLEGALBANKCARDERROR = "FailedOperation.IllegalBankCardError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_NOBANKCARDERROR = "FailedOperation.NoBankCardError"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETER_ENGINEIMAGEDECODEFAILED = "InvalidParameter.EngineImageDecodeFailed"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) BankCardOCRWithContext(ctx context.Context, request *BankCardOCRRequest) (response *BankCardOCRResponse, err error) {
-    if request == nil {
-        request = NewBankCardOCRRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "BankCardOCR")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("BankCardOCR require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewBankCardOCRResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewExtractDocMultiRequest() (request *ExtractDocMultiRequest) {
     request = &ExtractDocMultiRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1847,6 +1765,7 @@ func NewGeneralBasicOCRResponse() (response *GeneralBasicOCRResponse) {
 //  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
 //  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
 //  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
 func (c *Client) GeneralBasicOCR(request *GeneralBasicOCRRequest) (response *GeneralBasicOCRResponse, err error) {
     return c.GeneralBasicOCRWithContext(context.Background(), request)
@@ -1879,6 +1798,7 @@ func (c *Client) GeneralBasicOCR(request *GeneralBasicOCRRequest) (response *Gen
 //  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
 //  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
 //  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
 func (c *Client) GeneralBasicOCRWithContext(ctx context.Context, request *GeneralBasicOCRRequest) (response *GeneralBasicOCRResponse, err error) {
     if request == nil {
@@ -1986,6 +1906,7 @@ func NewHKIDCardOCRResponse() (response *HKIDCardOCRResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 //  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
 //  FAILEDOPERATION_NOHKIDCARD = "FailedOperation.NoHKIDCard"
 //  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
@@ -2009,6 +1930,7 @@ func (c *Client) HKIDCardOCR(request *HKIDCardOCRRequest) (response *HKIDCardOCR
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 //  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
 //  FAILEDOPERATION_NOHKIDCARD = "FailedOperation.NoHKIDCard"
 //  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
@@ -2031,434 +1953,6 @@ func (c *Client) HKIDCardOCRWithContext(ctx context.Context, request *HKIDCardOC
     request.SetContext(ctx)
     
     response = NewHKIDCardOCRResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewHmtResidentPermitOCRRequest() (request *HmtResidentPermitOCRRequest) {
-    request = &HmtResidentPermitOCRRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("ocr", APIVersion, "HmtResidentPermitOCR")
-    
-    
-    return
-}
-
-func NewHmtResidentPermitOCRResponse() (response *HmtResidentPermitOCRResponse) {
-    response = &HmtResidentPermitOCRResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// HmtResidentPermitOCR
-// This API is used to recognize key fields on the front and back sides of a residence permit for Hong Kong, Macao, or Taiwan residents, including name, gender, date of birth, address, ID number, issuing authority, validity period, number of issues, and permit number. It can be used for residence permit OCR in scenarios such as bank account opening and user registration.
-//
-// 
-//
-// A maximum of 20 requests can be initiated per second for this API.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_IMAGENOTEXT = "FailedOperation.ImageNoText"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) HmtResidentPermitOCR(request *HmtResidentPermitOCRRequest) (response *HmtResidentPermitOCRResponse, err error) {
-    return c.HmtResidentPermitOCRWithContext(context.Background(), request)
-}
-
-// HmtResidentPermitOCR
-// This API is used to recognize key fields on the front and back sides of a residence permit for Hong Kong, Macao, or Taiwan residents, including name, gender, date of birth, address, ID number, issuing authority, validity period, number of issues, and permit number. It can be used for residence permit OCR in scenarios such as bank account opening and user registration.
-//
-// 
-//
-// A maximum of 20 requests can be initiated per second for this API.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_IMAGENOTEXT = "FailedOperation.ImageNoText"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) HmtResidentPermitOCRWithContext(ctx context.Context, request *HmtResidentPermitOCRRequest) (response *HmtResidentPermitOCRResponse, err error) {
-    if request == nil {
-        request = NewHmtResidentPermitOCRRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "HmtResidentPermitOCR")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("HmtResidentPermitOCR require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewHmtResidentPermitOCRResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewIDCardOCRRequest() (request *IDCardOCRRequest) {
-    request = &IDCardOCRRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("ocr", APIVersion, "IDCardOCR")
-    
-    
-    return
-}
-
-func NewIDCardOCRResponse() (response *IDCardOCRResponse) {
-    response = &IDCardOCRResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// IDCardOCR
-// This API is used to recognize all fields on the front and back sides of a second-generation resident identity card for the Chinese mainland: name, gender, ethnicity, date of birth, domicile, identification number, issuing authority, and validity period, with a recognition accuracy of over 99%.
-//
-// 
-//
-// In addition, this API supports multiple value-added capabilities to meet the needs of different scenarios. It can crop ID card photos and profile photos, and provide warnings for nine cases, as detailed below.
-//
-// 
-//
-// <table style="width:650px">
-//
-//       <thead>
-//
-//         <tr>
-//
-//        <th width="150">Capability</th>
-//
-//           <th width="500">Description</th>
-//
-//         </tr>
-//
-//       </thead>
-//
-//       <tbody>
-//
-//         <tr>
-//
-//           <td rowspan="2">Cropping</td>
-//
-//           <td>Crops the ID card photo (by removing extra edges outside the ID card and automatically correcting the shooting angle).</td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td>Crops the profile photo (by automatically cutting out the face area in the ID card).</td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td rowspan="9">Warning</td>
-//
-//           <td>Warns about invalid ID card validity periods.</td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td>Warns about  incomplete ID card borders.</td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td>Warns about photocopied images.</td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td>Warns about spoofed images.</td>
-//
-//         </tr>
-//
-//           <tr>
-//
-//           <td>Warns about border and frame occlusions.</td>
-//
-//         </tr>
-//
-//          <tr>
-//
-//           <td>Warns about temporary ID cards.</td>
-//
-//         </tr>
-//
-//           <tr>
-//
-//           <td>Warns about photoshopped images.</td>
-//
-//         </tr>
-//
-//           <tr>
-//
-//           <td>Warns about blurry ID card images (blurriness can be determined based on the image quality score).</td>
-//
-//         </tr>
-//
-//       </tbody>
-//
-//     </table>
-//
-// 
-//
-// A maximum of 20 requests can be initiated per second for this API.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_CARDSIDEERROR = "FailedOperation.CardSideError"
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
-//  FAILEDOPERATION_IDCARDINFOILLEGAL = "FailedOperation.IdCardInfoIllegal"
-//  FAILEDOPERATION_IDCARDTOOSMALL = "FailedOperation.IdCardTooSmall"
-//  FAILEDOPERATION_IMAGEBLUR = "FailedOperation.ImageBlur"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_IMAGENOIDCARD = "FailedOperation.ImageNoIdCard"
-//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
-//  FAILEDOPERATION_MULTICARDERROR = "FailedOperation.MultiCardError"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETER_CONFIGFORMATERROR = "InvalidParameter.ConfigFormatError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) IDCardOCR(request *IDCardOCRRequest) (response *IDCardOCRResponse, err error) {
-    return c.IDCardOCRWithContext(context.Background(), request)
-}
-
-// IDCardOCR
-// This API is used to recognize all fields on the front and back sides of a second-generation resident identity card for the Chinese mainland: name, gender, ethnicity, date of birth, domicile, identification number, issuing authority, and validity period, with a recognition accuracy of over 99%.
-//
-// 
-//
-// In addition, this API supports multiple value-added capabilities to meet the needs of different scenarios. It can crop ID card photos and profile photos, and provide warnings for nine cases, as detailed below.
-//
-// 
-//
-// <table style="width:650px">
-//
-//       <thead>
-//
-//         <tr>
-//
-//        <th width="150">Capability</th>
-//
-//           <th width="500">Description</th>
-//
-//         </tr>
-//
-//       </thead>
-//
-//       <tbody>
-//
-//         <tr>
-//
-//           <td rowspan="2">Cropping</td>
-//
-//           <td>Crops the ID card photo (by removing extra edges outside the ID card and automatically correcting the shooting angle).</td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td>Crops the profile photo (by automatically cutting out the face area in the ID card).</td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td rowspan="9">Warning</td>
-//
-//           <td>Warns about invalid ID card validity periods.</td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td>Warns about  incomplete ID card borders.</td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td>Warns about photocopied images.</td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td>Warns about spoofed images.</td>
-//
-//         </tr>
-//
-//           <tr>
-//
-//           <td>Warns about border and frame occlusions.</td>
-//
-//         </tr>
-//
-//          <tr>
-//
-//           <td>Warns about temporary ID cards.</td>
-//
-//         </tr>
-//
-//           <tr>
-//
-//           <td>Warns about photoshopped images.</td>
-//
-//         </tr>
-//
-//           <tr>
-//
-//           <td>Warns about blurry ID card images (blurriness can be determined based on the image quality score).</td>
-//
-//         </tr>
-//
-//       </tbody>
-//
-//     </table>
-//
-// 
-//
-// A maximum of 20 requests can be initiated per second for this API.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_CARDSIDEERROR = "FailedOperation.CardSideError"
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
-//  FAILEDOPERATION_IDCARDINFOILLEGAL = "FailedOperation.IdCardInfoIllegal"
-//  FAILEDOPERATION_IDCARDTOOSMALL = "FailedOperation.IdCardTooSmall"
-//  FAILEDOPERATION_IMAGEBLUR = "FailedOperation.ImageBlur"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_IMAGENOIDCARD = "FailedOperation.ImageNoIdCard"
-//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
-//  FAILEDOPERATION_MULTICARDERROR = "FailedOperation.MultiCardError"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETER_CONFIGFORMATERROR = "InvalidParameter.ConfigFormatError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) IDCardOCRWithContext(ctx context.Context, request *IDCardOCRRequest) (response *IDCardOCRResponse, err error) {
-    if request == nil {
-        request = NewIDCardOCRRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "IDCardOCR")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("IDCardOCR require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewIDCardOCRResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewLicensePlateOCRRequest() (request *LicensePlateOCRRequest) {
-    request = &LicensePlateOCRRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("ocr", APIVersion, "LicensePlateOCR")
-    
-    
-    return
-}
-
-func NewLicensePlateOCRResponse() (response *LicensePlateOCRResponse) {
-    response = &LicensePlateOCRResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// LicensePlateOCR
-// This API is used to recognize a license plate attached to a motor vehicle in the Chinese mainland and return the regional code, license plate number, and license plate color.
-//
-// 
-//
-// A maximum of 10 requests can be initiated per second for this API.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) LicensePlateOCR(request *LicensePlateOCRRequest) (response *LicensePlateOCRResponse, err error) {
-    return c.LicensePlateOCRWithContext(context.Background(), request)
-}
-
-// LicensePlateOCR
-// This API is used to recognize a license plate attached to a motor vehicle in the Chinese mainland and return the regional code, license plate number, and license plate color.
-//
-// 
-//
-// A maximum of 10 requests can be initiated per second for this API.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) LicensePlateOCRWithContext(ctx context.Context, request *LicensePlateOCRRequest) (response *LicensePlateOCRResponse, err error) {
-    if request == nil {
-        request = NewLicensePlateOCRRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "LicensePlateOCR")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("LicensePlateOCR require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewLicensePlateOCRResponse()
     err = c.Send(request, response)
     return
 }
@@ -2492,6 +1986,8 @@ func NewMLIDCardOCRResponse() (response *MLIDCardOCRResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 //  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
+//  FAILEDOPERATION_INVALIDPOSTALCODELENGTH = "FailedOperation.InvalidPostalCodeLength"
 //  FAILEDOPERATION_NOMASIDCARD = "FailedOperation.NoMASIDCard"
 //  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
@@ -2516,6 +2012,8 @@ func (c *Client) MLIDCardOCR(request *MLIDCardOCRRequest) (response *MLIDCardOCR
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 //  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
+//  FAILEDOPERATION_INVALIDPOSTALCODELENGTH = "FailedOperation.InvalidPostalCodeLength"
 //  FAILEDOPERATION_NOMASIDCARD = "FailedOperation.NoMASIDCard"
 //  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
@@ -2652,6 +2150,7 @@ func NewMainlandPermitOCRResponse() (response *MainlandPermitOCRResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 //  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
 //  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
@@ -2673,6 +2172,7 @@ func (c *Client) MainlandPermitOCR(request *MainlandPermitOCRRequest) (response 
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 //  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
 //  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
@@ -2800,6 +2300,7 @@ func NewPermitOCRResponse() (response *PermitOCRResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 //  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
 //  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
@@ -2821,6 +2322,7 @@ func (c *Client) PermitOCR(request *PermitOCRRequest) (response *PermitOCRRespon
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 //  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
 //  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
@@ -3231,580 +2733,6 @@ func (c *Client) RecognizeDetectCardCoordsWithContext(ctx context.Context, reque
     return
 }
 
-func NewRecognizeGeneralInvoiceRequest() (request *RecognizeGeneralInvoiceRequest) {
-    request = &RecognizeGeneralInvoiceRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("ocr", APIVersion, "RecognizeGeneralInvoice")
-    
-    
-    return
-}
-
-func NewRecognizeGeneralInvoiceResponse() (response *RecognizeGeneralInvoiceResponse) {
-    response = &RecognizeGeneralInvoiceResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// RecognizeGeneralInvoice
-// This API is used to recognize various types of invoices or tickets in an image or PDF file. You can also specify a type. 14 types of standard expense reimbursement invoices are supported, including value-added tax (VAT) invoice (special, general, roll, blockchain, and toll), fully digitalized electronic invoice (special and general), non-tax revenue invoice (general receipt and general payment voucher), quota invoice, general machine-printed invoice, car sales invoice (motor vehicle sales invoice and used car invoice), train ticket, taxi receipt, itinerary/receipt of e-ticket for air transportation, bus ticket, ship ticket, toll receipt, and medical invoice (inpatient and outpatient). This API can also be used for intelligent recognition of other types of invoices. To try now, click [here](https://intl.cloud.tencent.com/product/ocr?from_cn_redirect=1).
-//
-// 
-//
-// A maximum of 5 requests can be initiated per second for this API.
-//
-// 
-//
-// 
-//
-// The invoice/ticket subtype (SubType), subtype description (TypeDescription), and parent type (Type) can be returned, as described below:
-//
-// <table style="width:715px">
-//
-//       <thead>
-//
-//         <tr>
-//
-//           <th style="width:200px">SubType</th>
-//
-//           <th style="width:200px">TypeDescription</th>
-//
-//           <th >Type</th>
-//
-//         </tr>
-//
-//       </thead>
-//
-//       <tbody>
-//
-//         <tr>
-//
-//           <td> VatSpecialInvoice</td>
-//
-//           <td> Special VAT invoice </td>
-//
-//           <td> 3 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatCommonInvoice</td>
-//
-//           <td> General VAT invoice </td>
-//
-//           <td> 3 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatElectronicCommonInvoice </td>
-//
-//           <td> Electronic general VAT invoice </td>
-//
-//           <td> 3 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatElectronicSpecialInvoice </td>
-//
-//           <td> Electronic special VAT invoice </td>
-//
-//           <td> 3 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatElectronicInvoiceBlockchain</td>
-//
-//           <td> Blockchain electronic invoice </td>
-//
-//           <td> 3 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatElectronicInvoiceToll</td>
-//
-//           <td> Electronic general VAT invoice (toll)</td>
-//
-//           <td> 3 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatElectronicSpecialInvoiceFull</td>
-//
-//           <td> Electronic invoice (special)</td>
-//
-//           <td> 16 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatElectronicInvoiceFull</td>
-//
-//           <td> Electronic invoice (general) </td>
-//
-//           <td> 16 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> MotorVehicleSaleInvoice </td>
-//
-//           <td> Motor vehicle sales invoice </td>
-//
-//           <td> 12 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> UsedCarPurchaseInvoice </td>
-//
-//           <td> Used car invoice </td>
-//
-//           <td> 12 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatInvoiceRoll </td>
-//
-//           <td> General VAT invoice (roll) </td>
-//
-//           <td> 11 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> TaxiTicket </td>
-//
-//           <td> Taxi receipt </td>
-//
-//           <td> 0 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> QuotaInvoice </td>
-//
-//           <td> Quota invoice </td>
-//
-//           <td> 1 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> TrainTicket </td>
-//
-//           <td> Train ticket </td>
-//
-//           <td> 2 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> AirTransport </td>
-//
-//           <td> Itinerary/Receipt of e-ticket for air transportation </td>
-//
-//           <td> 5 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> MachinePrintedInvoice </td>
-//
-//           <td> General machine-printed invoice </td>
-//
-//           <td> 8 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> BusInvoice </td>
-//
-//           <td> Bus ticket </td>
-//
-//           <td> 9 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> ShippingInvoice </td>
-//
-//           <td> Ship ticket </td>
-//
-//           <td> 10 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> NonTaxIncomeGeneralBill </td>
-//
-//           <td> General receipt for non-tax revenue </td>
-//
-//           <td> 15 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> NonTaxIncomeElectronicBill </td>
-//
-//           <td> General payment voucher for non-tax revenue (electronic) </td>
-//
-//           <td> 15 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> TollInvoice </td>
-//
-//           <td> Toll receipt </td>
-//
-//           <td> 13 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> OtherInvoice </td>
-//
-//           <td> Other </td>
-//
-//           <td> -1 </td>
-//
-//         </tr>
-//
-//       </tbody>
-//
-//     </table>
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_IMAGEBLUR = "FailedOperation.ImageBlur"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) RecognizeGeneralInvoice(request *RecognizeGeneralInvoiceRequest) (response *RecognizeGeneralInvoiceResponse, err error) {
-    return c.RecognizeGeneralInvoiceWithContext(context.Background(), request)
-}
-
-// RecognizeGeneralInvoice
-// This API is used to recognize various types of invoices or tickets in an image or PDF file. You can also specify a type. 14 types of standard expense reimbursement invoices are supported, including value-added tax (VAT) invoice (special, general, roll, blockchain, and toll), fully digitalized electronic invoice (special and general), non-tax revenue invoice (general receipt and general payment voucher), quota invoice, general machine-printed invoice, car sales invoice (motor vehicle sales invoice and used car invoice), train ticket, taxi receipt, itinerary/receipt of e-ticket for air transportation, bus ticket, ship ticket, toll receipt, and medical invoice (inpatient and outpatient). This API can also be used for intelligent recognition of other types of invoices. To try now, click [here](https://intl.cloud.tencent.com/product/ocr?from_cn_redirect=1).
-//
-// 
-//
-// A maximum of 5 requests can be initiated per second for this API.
-//
-// 
-//
-// 
-//
-// The invoice/ticket subtype (SubType), subtype description (TypeDescription), and parent type (Type) can be returned, as described below:
-//
-// <table style="width:715px">
-//
-//       <thead>
-//
-//         <tr>
-//
-//           <th style="width:200px">SubType</th>
-//
-//           <th style="width:200px">TypeDescription</th>
-//
-//           <th >Type</th>
-//
-//         </tr>
-//
-//       </thead>
-//
-//       <tbody>
-//
-//         <tr>
-//
-//           <td> VatSpecialInvoice</td>
-//
-//           <td> Special VAT invoice </td>
-//
-//           <td> 3 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatCommonInvoice</td>
-//
-//           <td> General VAT invoice </td>
-//
-//           <td> 3 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatElectronicCommonInvoice </td>
-//
-//           <td> Electronic general VAT invoice </td>
-//
-//           <td> 3 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatElectronicSpecialInvoice </td>
-//
-//           <td> Electronic special VAT invoice </td>
-//
-//           <td> 3 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatElectronicInvoiceBlockchain</td>
-//
-//           <td> Blockchain electronic invoice </td>
-//
-//           <td> 3 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatElectronicInvoiceToll</td>
-//
-//           <td> Electronic general VAT invoice (toll)</td>
-//
-//           <td> 3 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatElectronicSpecialInvoiceFull</td>
-//
-//           <td> Electronic invoice (special)</td>
-//
-//           <td> 16 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatElectronicInvoiceFull</td>
-//
-//           <td> Electronic invoice (general) </td>
-//
-//           <td> 16 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> MotorVehicleSaleInvoice </td>
-//
-//           <td> Motor vehicle sales invoice </td>
-//
-//           <td> 12 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> UsedCarPurchaseInvoice </td>
-//
-//           <td> Used car invoice </td>
-//
-//           <td> 12 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> VatInvoiceRoll </td>
-//
-//           <td> General VAT invoice (roll) </td>
-//
-//           <td> 11 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> TaxiTicket </td>
-//
-//           <td> Taxi receipt </td>
-//
-//           <td> 0 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> QuotaInvoice </td>
-//
-//           <td> Quota invoice </td>
-//
-//           <td> 1 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> TrainTicket </td>
-//
-//           <td> Train ticket </td>
-//
-//           <td> 2 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> AirTransport </td>
-//
-//           <td> Itinerary/Receipt of e-ticket for air transportation </td>
-//
-//           <td> 5 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> MachinePrintedInvoice </td>
-//
-//           <td> General machine-printed invoice </td>
-//
-//           <td> 8 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> BusInvoice </td>
-//
-//           <td> Bus ticket </td>
-//
-//           <td> 9 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> ShippingInvoice </td>
-//
-//           <td> Ship ticket </td>
-//
-//           <td> 10 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> NonTaxIncomeGeneralBill </td>
-//
-//           <td> General receipt for non-tax revenue </td>
-//
-//           <td> 15 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> NonTaxIncomeElectronicBill </td>
-//
-//           <td> General payment voucher for non-tax revenue (electronic) </td>
-//
-//           <td> 15 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> TollInvoice </td>
-//
-//           <td> Toll receipt </td>
-//
-//           <td> 13 </td>
-//
-//         </tr>
-//
-//         <tr>
-//
-//           <td> OtherInvoice </td>
-//
-//           <td> Other </td>
-//
-//           <td> -1 </td>
-//
-//         </tr>
-//
-//       </tbody>
-//
-//     </table>
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_IMAGEBLUR = "FailedOperation.ImageBlur"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) RecognizeGeneralInvoiceWithContext(ctx context.Context, request *RecognizeGeneralInvoiceRequest) (response *RecognizeGeneralInvoiceResponse, err error) {
-    if request == nil {
-        request = NewRecognizeGeneralInvoiceRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeGeneralInvoice")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("RecognizeGeneralInvoice require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewRecognizeGeneralInvoiceResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewRecognizeIndonesiaIDCardOCRRequest() (request *RecognizeIndonesiaIDCardOCRRequest) {
     request = &RecognizeIndonesiaIDCardOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3881,138 +2809,6 @@ func (c *Client) RecognizeIndonesiaIDCardOCRWithContext(ctx context.Context, req
     return
 }
 
-func NewRecognizeKoreanDrivingLicenseOCRRequest() (request *RecognizeKoreanDrivingLicenseOCRRequest) {
-    request = &RecognizeKoreanDrivingLicenseOCRRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("ocr", APIVersion, "RecognizeKoreanDrivingLicenseOCR")
-    
-    
-    return
-}
-
-func NewRecognizeKoreanDrivingLicenseOCRResponse() (response *RecognizeKoreanDrivingLicenseOCRResponse) {
-    response = &RecognizeKoreanDrivingLicenseOCRResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// RecognizeKoreanDrivingLicenseOCR
-// This API is used to recognize a South Korean driver's license.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETER_ENGINEIMAGEDECODEFAILED = "InvalidParameter.EngineImageDecodeFailed"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) RecognizeKoreanDrivingLicenseOCR(request *RecognizeKoreanDrivingLicenseOCRRequest) (response *RecognizeKoreanDrivingLicenseOCRResponse, err error) {
-    return c.RecognizeKoreanDrivingLicenseOCRWithContext(context.Background(), request)
-}
-
-// RecognizeKoreanDrivingLicenseOCR
-// This API is used to recognize a South Korean driver's license.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETER_ENGINEIMAGEDECODEFAILED = "InvalidParameter.EngineImageDecodeFailed"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) RecognizeKoreanDrivingLicenseOCRWithContext(ctx context.Context, request *RecognizeKoreanDrivingLicenseOCRRequest) (response *RecognizeKoreanDrivingLicenseOCRResponse, err error) {
-    if request == nil {
-        request = NewRecognizeKoreanDrivingLicenseOCRRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeKoreanDrivingLicenseOCR")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("RecognizeKoreanDrivingLicenseOCR require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewRecognizeKoreanDrivingLicenseOCRResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewRecognizeKoreanIDCardOCRRequest() (request *RecognizeKoreanIDCardOCRRequest) {
-    request = &RecognizeKoreanIDCardOCRRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("ocr", APIVersion, "RecognizeKoreanIDCardOCR")
-    
-    
-    return
-}
-
-func NewRecognizeKoreanIDCardOCRResponse() (response *RecognizeKoreanIDCardOCRResponse) {
-    response = &RecognizeKoreanIDCardOCRResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// RecognizeKoreanIDCardOCR
-// This API is used to recognize a South Korean ID card.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETER_ENGINEIMAGEDECODEFAILED = "InvalidParameter.EngineImageDecodeFailed"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) RecognizeKoreanIDCardOCR(request *RecognizeKoreanIDCardOCRRequest) (response *RecognizeKoreanIDCardOCRResponse, err error) {
-    return c.RecognizeKoreanIDCardOCRWithContext(context.Background(), request)
-}
-
-// RecognizeKoreanIDCardOCR
-// This API is used to recognize a South Korean ID card.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETER_ENGINEIMAGEDECODEFAILED = "InvalidParameter.EngineImageDecodeFailed"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) RecognizeKoreanIDCardOCRWithContext(ctx context.Context, request *RecognizeKoreanIDCardOCRRequest) (response *RecognizeKoreanIDCardOCRResponse, err error) {
-    if request == nil {
-        request = NewRecognizeKoreanIDCardOCRRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeKoreanIDCardOCR")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("RecognizeKoreanIDCardOCR require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewRecognizeKoreanIDCardOCRResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewRecognizeMacaoIDCardOCRRequest() (request *RecognizeMacaoIDCardOCRRequest) {
     request = &RecognizeMacaoIDCardOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4043,6 +2839,7 @@ func NewRecognizeMacaoIDCardOCRResponse() (response *RecognizeMacaoIDCardOCRResp
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 //  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
 //  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
 //  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
@@ -4065,6 +2862,7 @@ func (c *Client) RecognizeMacaoIDCardOCR(request *RecognizeMacaoIDCardOCRRequest
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 //  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
 //  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
 //  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
@@ -4109,9 +2907,11 @@ func NewRecognizeMainlandIDCardOCRResponse() (response *RecognizeMainlandIDCardO
 }
 
 // RecognizeMainlandIDCardOCR
-// This interface supports the identification of all fields on the front and back of the second-generation ID card for mainland Chinese residents.Including name, gender, ethnicity, date of birth, address, citizen ID number, issuing authority, and validity period, the identification accuracy reaches more than 99%.In addition, this interface also supports a variety of value-added capabilities to meet the needs of different scenarios. Such as the cropping function of ID card photos and portrait photos, and also has 5 alarm functions.
+// This interface recognizes all fields on both sides of the Mainland China Resident Identity Card (second-generation), including name, gender, ethnicity, date of birth, address, ID number, issuing authority, and validity period, with an accuracy of over 99%.
 //
-// As shown in the table below. <table style="width:650px"> <thead> <tr> <th width="150">Value-added ability</th> <th width="500">Ability items</th> </tr> </thead> <tbody> <tr> <td rowspan="9">Alarm function</td> </tr> <tr> <td>ID card photocopy warning</td> </tr> <tr> <td>ID card on-screen display warning</td> </tr> <tr> <td>Alarm for occlusion in the ID card frame</td> </tr> <tr> <td>ID card reflective warning</td> </tr> <tr> <td>Blurry picture warning</td> </tr> </tbody> </table> Default interface request frequency limit: 20 times/second
+// 
+//
+// In addition, the interface provides additional features for various scenarios, such as ID card and portrait photo cropping, along with five alarm detections (see table below).<table style="width:650px"> <thead> <tr> <th width="150">Value-added ability</th> <th width="500">Ability items</th> </tr> </thead> <tbody> <tr> <td rowspan="9">Alarm function</td> </tr> <tr> <td>ID card photocopy warning</td> </tr> <tr> <td>ID card on-screen display warning</td> </tr> <tr> <td>Alarm for occlusion in the ID card frame</td> </tr> <tr> <td>ID card reflective warning</td> </tr> <tr> <td>Blurry picture warning</td> </tr> </tbody> </table> Default rate limit: 20 requests/second.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CARDSIDEERROR = "FailedOperation.CardSideError"
@@ -4139,9 +2939,11 @@ func (c *Client) RecognizeMainlandIDCardOCR(request *RecognizeMainlandIDCardOCRR
 }
 
 // RecognizeMainlandIDCardOCR
-// This interface supports the identification of all fields on the front and back of the second-generation ID card for mainland Chinese residents.Including name, gender, ethnicity, date of birth, address, citizen ID number, issuing authority, and validity period, the identification accuracy reaches more than 99%.In addition, this interface also supports a variety of value-added capabilities to meet the needs of different scenarios. Such as the cropping function of ID card photos and portrait photos, and also has 5 alarm functions.
+// This interface recognizes all fields on both sides of the Mainland China Resident Identity Card (second-generation), including name, gender, ethnicity, date of birth, address, ID number, issuing authority, and validity period, with an accuracy of over 99%.
 //
-// As shown in the table below. <table style="width:650px"> <thead> <tr> <th width="150">Value-added ability</th> <th width="500">Ability items</th> </tr> </thead> <tbody> <tr> <td rowspan="9">Alarm function</td> </tr> <tr> <td>ID card photocopy warning</td> </tr> <tr> <td>ID card on-screen display warning</td> </tr> <tr> <td>Alarm for occlusion in the ID card frame</td> </tr> <tr> <td>ID card reflective warning</td> </tr> <tr> <td>Blurry picture warning</td> </tr> </tbody> </table> Default interface request frequency limit: 20 times/second
+// 
+//
+// In addition, the interface provides additional features for various scenarios, such as ID card and portrait photo cropping, along with five alarm detections (see table below).<table style="width:650px"> <thead> <tr> <th width="150">Value-added ability</th> <th width="500">Ability items</th> </tr> </thead> <tbody> <tr> <td rowspan="9">Alarm function</td> </tr> <tr> <td>ID card photocopy warning</td> </tr> <tr> <td>ID card on-screen display warning</td> </tr> <tr> <td>Alarm for occlusion in the ID card frame</td> </tr> <tr> <td>ID card reflective warning</td> </tr> <tr> <td>Blurry picture warning</td> </tr> </tbody> </table> Default rate limit: 20 requests/second.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CARDSIDEERROR = "FailedOperation.CardSideError"
@@ -4649,86 +3451,6 @@ func (c *Client) RecognizeSingaporeIDCardOCRWithContext(ctx context.Context, req
     return
 }
 
-func NewRecognizeTableAccurateOCRRequest() (request *RecognizeTableAccurateOCRRequest) {
-    request = &RecognizeTableAccurateOCRRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("ocr", APIVersion, "RecognizeTableAccurateOCR")
-    
-    
-    return
-}
-
-func NewRecognizeTableAccurateOCRResponse() (response *RecognizeTableAccurateOCRResponse) {
-    response = &RecognizeTableAccurateOCRResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// RecognizeTableAccurateOCR
-// This API is used to recognize regular tables, borderless tables, or multi-tables in images or PDF files containing Chinese and English texts. It returns the text content of each cell, supports recognition of rotated table images, and can save the recognition results into an Excel document. It delivers higher recognition accuracy than that of table OCR v2 and applies to more scenarios. The recognition accuracy in difficult table scenarios, such as irregular tables and nested tables (borderless tables contained in bordered tables), is better than that of table OCR v2. To try it, click [here](https://intl.cloud.tencent.com/product/smart?from_cn_redirect=1-ocr).
-//
-// 
-//
-// A maximum of 2 requests can be initiated per second for this API.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) RecognizeTableAccurateOCR(request *RecognizeTableAccurateOCRRequest) (response *RecognizeTableAccurateOCRResponse, err error) {
-    return c.RecognizeTableAccurateOCRWithContext(context.Background(), request)
-}
-
-// RecognizeTableAccurateOCR
-// This API is used to recognize regular tables, borderless tables, or multi-tables in images or PDF files containing Chinese and English texts. It returns the text content of each cell, supports recognition of rotated table images, and can save the recognition results into an Excel document. It delivers higher recognition accuracy than that of table OCR v2 and applies to more scenarios. The recognition accuracy in difficult table scenarios, such as irregular tables and nested tables (borderless tables contained in bordered tables), is better than that of table OCR v2. To try it, click [here](https://intl.cloud.tencent.com/product/smart?from_cn_redirect=1-ocr).
-//
-// 
-//
-// A maximum of 2 requests can be initiated per second for this API.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) RecognizeTableAccurateOCRWithContext(ctx context.Context, request *RecognizeTableAccurateOCRRequest) (response *RecognizeTableAccurateOCRResponse, err error) {
-    if request == nil {
-        request = NewRecognizeTableAccurateOCRRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "RecognizeTableAccurateOCR")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("RecognizeTableAccurateOCR require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewRecognizeTableAccurateOCRResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewRecognizeThaiIDCardOCRRequest() (request *RecognizeThaiIDCardOCRRequest) {
     request = &RecognizeThaiIDCardOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4889,84 +3611,6 @@ func (c *Client) RecognizeThaiPinkCardWithContext(ctx context.Context, request *
     return
 }
 
-func NewSealOCRRequest() (request *SealOCRRequest) {
-    request = &SealOCRRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("ocr", APIVersion, "SealOCR")
-    
-    
-    return
-}
-
-func NewSealOCRResponse() (response *SealOCRResponse) {
-    response = &SealOCRResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// SealOCR
-// This API is used to recognize various types of seals, including invoice seals and finance seals. It is suitable for scenarios such as official document and invoice/ticket OCR.
-//
-// 
-//
-// A maximum of 5 requests can be initiated per second for this API.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_IMAGENOTEXT = "FailedOperation.ImageNoText"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) SealOCR(request *SealOCRRequest) (response *SealOCRResponse, err error) {
-    return c.SealOCRWithContext(context.Background(), request)
-}
-
-// SealOCR
-// This API is used to recognize various types of seals, including invoice seals and finance seals. It is suitable for scenarios such as official document and invoice/ticket OCR.
-//
-// 
-//
-// A maximum of 5 requests can be initiated per second for this API.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_IMAGENOTEXT = "FailedOperation.ImageNoText"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) SealOCRWithContext(ctx context.Context, request *SealOCRRequest) (response *SealOCRResponse, err error) {
-    if request == nil {
-        request = NewSealOCRRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "SealOCR")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("SealOCR require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewSealOCRResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewSmartStructuralOCRV2Request() (request *SmartStructuralOCRV2Request) {
     request = &SmartStructuralOCRV2Request{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5039,164 +3683,6 @@ func (c *Client) SmartStructuralOCRV2WithContext(ctx context.Context, request *S
     request.SetContext(ctx)
     
     response = NewSmartStructuralOCRV2Response()
-    err = c.Send(request, response)
-    return
-}
-
-func NewSmartStructuralProRequest() (request *SmartStructuralProRequest) {
-    request = &SmartStructuralProRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("ocr", APIVersion, "SmartStructuralPro")
-    
-    
-    return
-}
-
-func NewSmartStructuralProResponse() (response *SmartStructuralProResponse) {
-    response = &SmartStructuralProResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// SmartStructuralPro
-// This API is used to recognize fields from cards, documents, bills, forms, contracts, and other structured information. It is flexible and efficient to use, without any configuration required. This API is suitable for recognizing structured information.
-//
-// 
-//
-// A maximum of 10 requests can be initiated per second for this API.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) SmartStructuralPro(request *SmartStructuralProRequest) (response *SmartStructuralProResponse, err error) {
-    return c.SmartStructuralProWithContext(context.Background(), request)
-}
-
-// SmartStructuralPro
-// This API is used to recognize fields from cards, documents, bills, forms, contracts, and other structured information. It is flexible and efficient to use, without any configuration required. This API is suitable for recognizing structured information.
-//
-// 
-//
-// A maximum of 10 requests can be initiated per second for this API.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) SmartStructuralProWithContext(ctx context.Context, request *SmartStructuralProRequest) (response *SmartStructuralProResponse, err error) {
-    if request == nil {
-        request = NewSmartStructuralProRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "SmartStructuralPro")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("SmartStructuralPro require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewSmartStructuralProResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewTableOCRRequest() (request *TableOCRRequest) {
-    request = &TableOCRRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("ocr", APIVersion, "TableOCR")
-    
-    
-    return
-}
-
-func NewTableOCRResponse() (response *TableOCRResponse) {
-    response = &TableOCRResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// TableOCR
-// This API is used to detect and recognize Chinese and English forms in images. It can return the text content of each cell and save the recognition result as Excel.
-//
-// 
-//
-// This API is not fully available for the time being. For more information, please contact your [Tencent Cloud sales rep](https://intl.cloud.tencent.com/contact-sales).
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_IMAGENOTEXT = "FailedOperation.ImageNoText"
-//  FAILEDOPERATION_LANGUAGENOTSUPPORT = "FailedOperation.LanguageNotSupport"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) TableOCR(request *TableOCRRequest) (response *TableOCRResponse, err error) {
-    return c.TableOCRWithContext(context.Background(), request)
-}
-
-// TableOCR
-// This API is used to detect and recognize Chinese and English forms in images. It can return the text content of each cell and save the recognition result as Excel.
-//
-// 
-//
-// This API is not fully available for the time being. For more information, please contact your [Tencent Cloud sales rep](https://intl.cloud.tencent.com/contact-sales).
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
-//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
-//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
-//  FAILEDOPERATION_IMAGENOTEXT = "FailedOperation.ImageNoText"
-//  FAILEDOPERATION_LANGUAGENOTSUPPORT = "FailedOperation.LanguageNotSupport"
-//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
-//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
-//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
-//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
-//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
-//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
-//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
-func (c *Client) TableOCRWithContext(ctx context.Context, request *TableOCRRequest) (response *TableOCRResponse, err error) {
-    if request == nil {
-        request = NewTableOCRRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "TableOCR")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("TableOCR require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewTableOCRResponse()
     err = c.Send(request, response)
     return
 }

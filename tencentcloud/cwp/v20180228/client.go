@@ -11471,7 +11471,7 @@ func NewDescribeLoginTypeGlobalConfResponse() (response *DescribeLoginTypeGlobal
 }
 
 // DescribeLoginTypeGlobalConf
-// Retrieve the global configuration for uninstall protection
+// This API is used to obtain the global configuration for QR code login.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -11480,7 +11480,7 @@ func (c *Client) DescribeLoginTypeGlobalConf(request *DescribeLoginTypeGlobalCon
 }
 
 // DescribeLoginTypeGlobalConf
-// Retrieve the global configuration for uninstall protection
+// This API is used to obtain the global configuration for QR code login.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

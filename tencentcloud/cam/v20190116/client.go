@@ -2665,6 +2665,58 @@ func (c *Client) GetGroupWithContext(ctx context.Context, request *GetGroupReque
     return
 }
 
+func NewGetPasswordRulesRequest() (request *GetPasswordRulesRequest) {
+    request = &GetPasswordRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cam", APIVersion, "GetPasswordRules")
+    
+    
+    return
+}
+
+func NewGetPasswordRulesResponse() (response *GetPasswordRulesResponse) {
+    response = &GetPasswordRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetPasswordRules
+// Obtaining CAM Console Password Rules
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) GetPasswordRules(request *GetPasswordRulesRequest) (response *GetPasswordRulesResponse, err error) {
+    return c.GetPasswordRulesWithContext(context.Background(), request)
+}
+
+// GetPasswordRules
+// Obtaining CAM Console Password Rules
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) GetPasswordRulesWithContext(ctx context.Context, request *GetPasswordRulesRequest) (response *GetPasswordRulesResponse, err error) {
+    if request == nil {
+        request = NewGetPasswordRulesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cam", APIVersion, "GetPasswordRules")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetPasswordRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetPasswordRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetPolicyRequest() (request *GetPolicyRequest) {
     request = &GetPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4643,6 +4695,56 @@ func (c *Client) UpdateOIDCConfigWithContext(ctx context.Context, request *Updat
     request.SetContext(ctx)
     
     response = NewUpdateOIDCConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdatePasswordRulesRequest() (request *UpdatePasswordRulesRequest) {
+    request = &UpdatePasswordRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cam", APIVersion, "UpdatePasswordRules")
+    
+    
+    return
+}
+
+func NewUpdatePasswordRulesResponse() (response *UpdatePasswordRulesResponse) {
+    response = &UpdatePasswordRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdatePasswordRules
+// Updating CAM Console Password Rules
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PASSWORDRULEERROR = "InvalidParameter.PasswordRuleError"
+func (c *Client) UpdatePasswordRules(request *UpdatePasswordRulesRequest) (response *UpdatePasswordRulesResponse, err error) {
+    return c.UpdatePasswordRulesWithContext(context.Background(), request)
+}
+
+// UpdatePasswordRules
+// Updating CAM Console Password Rules
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PASSWORDRULEERROR = "InvalidParameter.PasswordRuleError"
+func (c *Client) UpdatePasswordRulesWithContext(ctx context.Context, request *UpdatePasswordRulesRequest) (response *UpdatePasswordRulesResponse, err error) {
+    if request == nil {
+        request = NewUpdatePasswordRulesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cam", APIVersion, "UpdatePasswordRules")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdatePasswordRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdatePasswordRulesResponse()
     err = c.Send(request, response)
     return
 }

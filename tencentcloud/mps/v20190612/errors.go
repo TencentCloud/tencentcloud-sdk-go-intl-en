@@ -65,6 +65,9 @@ const (
 	// InvalidParameter.Id
 	INVALIDPARAMETER_ID = "InvalidParameter.Id"
 
+	// Illegal input.
+	INVALIDPARAMETER_INPUTINFO = "InvalidParameter.InputInfo"
+
 	// InvalidParameter.NotFound
 	INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
 
@@ -163,6 +166,9 @@ const (
 
 	// Duplicated watermark text.
 	INVALIDPARAMETERVALUE_DUPLICATEDTEXTCONTENT = "InvalidParameterValue.DuplicatedTextContent"
+
+	// The Duration parameter is too large.
+	INVALIDPARAMETERVALUE_DURATIONTOOLONG = "InvalidParameterValue.DurationTooLong"
 
 	// The enabled detection items of the template are empty.
 	INVALIDPARAMETERVALUE_EMPTYDETECTITEM = "InvalidParameterValue.EmptyDetectItem"
@@ -454,6 +460,9 @@ const (
 
 	// The resource does not exist: the COS bucket does not exist.
 	RESOURCENOTFOUND_COSBUCKETNOTEXIST = "ResourceNotFound.CosBucketNotExist"
+
+	// Download failed.
+	RESOURCENOTFOUND_DOWNLOADERROR = "ResourceNotFound.DownloadError"
 
 	// The resource does not exist: figure.
 	RESOURCENOTFOUND_PERSON = "ResourceNotFound.Person"

@@ -1213,6 +1213,32 @@ type AiParagraphInfo struct {
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 }
 
+type AiPosterSuiteConfig struct {
+
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
+
+
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+
+	Recipe []*RecipeItem `json:"Recipe,omitnil,omitempty" name:"Recipe"`
+
+
+	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
+
+
+	PanelRatio *string `json:"PanelRatio,omitnil,omitempty" name:"PanelRatio"`
+
+
+	PanelResolution *string `json:"PanelResolution,omitnil,omitempty" name:"PanelResolution"`
+
+
+	CustomVariables []*CustomVariable `json:"CustomVariables,omitnil,omitempty" name:"CustomVariables"`
+
+
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+}
+
 type AiQualityControlTaskInput struct {
 	// Media quality inspection template ID.
 	// You can directly use a preset template or customize a template in the console. The preset templates are as follows:
@@ -1319,19 +1345,19 @@ type AiRecognitionTaskAsrFullTextResultOutput struct {
 }
 
 type AiRecognitionTaskAsrFullTextSegmentItem struct {
-	// Confidence of a recognition segment. Value range: 0-100.
+	// <p>Confidence of the recognized segment. Value range: 0–100.</p>
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Start time offset of a recognition segment in seconds.
+	// <p>Start time offset of the recognized segment, in seconds.</p>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// End time offset of a recognition segment in seconds.
+	// <p>End time offset of the recognized segment, in seconds.</p>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// Recognized text.
+	// <p>Recognized text.</p>
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
-	// Word timestamp information.
+	// <p>Word timestamp information.</p>
 	Wordlist []*WordResult `json:"Wordlist,omitnil,omitempty" name:"Wordlist"`
 }
 
@@ -1579,13 +1605,13 @@ type AiRecognitionTaskOcrFullTextSegmentItem struct {
 }
 
 type AiRecognitionTaskOcrFullTextSegmentTextItem struct {
-	// Confidence of a recognition segment. Value range: 0-100.
+	// <p>Confidence of the recognized segment. Value range: 0–100.</p>
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Zone coordinates of a recognition result. The array contains four elements: [x1,y1,x2,y2], i.e., the horizontal and vertical coordinates of the top-left and bottom-right corners.
+	// <p>Area coordinates of the recognition result. The array contains 4 elements [x1,y1,x2,y2], representing the horizontal and vertical coordinates of the top-left corner and bottom-right corner.</p>
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil,omitempty" name:"AreaCoordSet"`
 
-	// Recognized text.
+	// <p>Recognized text.</p>
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 }
 
@@ -1681,22 +1707,22 @@ type AiRecognitionTaskTransTextResultOutput struct {
 }
 
 type AiRecognitionTaskTransTextSegmentItem struct {
-	// The confidence score for a segment. Value range: 0-100.
+	// <p>Confidence of the recognized segment. Value range: 0–100.</p>
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// The start time offset (seconds) of a segment.
+	// <p>Start time offset of the recognized segment, in seconds.</p>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// The end time offset (seconds) of a segment.
+	// <p>End time offset of the recognized segment, in seconds.</p>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// The text transcript.
+	// <p>Recognized text.</p>
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
-	// The translation.
+	// <p>Translated text.</p>
 	Trans *string `json:"Trans,omitnil,omitempty" name:"Trans"`
 
-	// Word timestamp information.
+	// <p>Word timestamp information.</p>
 	Wordlist []*WordResult `json:"Wordlist,omitnil,omitempty" name:"Wordlist"`
 }
 
@@ -2264,7 +2290,7 @@ type AigcAudioReferenceVideoInfo struct {
 }
 
 type AigcImageExtraParam struct {
-	// <p>Aspect ratio of the generated video.</p><p>Supported aspect ratios for different models:</p><ol><li>GEM: 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, and 21:9.</li></ol><p>Note: For more information about the aspect ratios of specific models, see the model website.</p>
+	// <p>Aspect ratio of the generated video.</p><p>Supported aspect ratios for different models:</p><ol><li>Kling 2.1: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, and 21:9.</li><li>Kling 3.0: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, and 21:9.</li><li>Kling 3.0-Omni: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, and 21:9.</li><li>Kling O1: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, and 21:9.</li><li>Vidu q2: 16:9, 9:16, 1:1, 3:4, 4:3, 21:9, 2:3, and 3:2.</li><li>MJ v7: The aspect ratio needs to be specified in the prompt.</li></ol><p>Note: For more information about the aspect ratios of specific models, see the model website.</p>
 	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
 
 	// <p>Output resolution of the image.</p><p>Models that support this parameter:<br>Valid values: 720P, 1080P, 2K, and 4K.</p>
@@ -2273,7 +2299,7 @@ type AigcImageExtraParam struct {
 	// <p>Indicates whether to add a logo watermark. No watermark is added by default. 1 - A watermark is added. 0 - No watermark is added.</p><p>Value range: [0, 1].</p><p>Default value: 0.</p>
 	LogoAdd *int64 `json:"LogoAdd,omitnil,omitempty" name:"LogoAdd"`
 
-
+	// <p>Specifies the output format of the image. JPEG and PNG formats are supported.</p>
 	OutputFormat *string `json:"OutputFormat,omitnil,omitempty" name:"OutputFormat"`
 }
 
@@ -2298,16 +2324,16 @@ type AigcStoreCosParam struct {
 }
 
 type AigcVideoExtraParam struct {
-	// <p>Resolution of the generated video. The resolution is related to the selected model and set video duration.</p><p>Supported resolution options for different models:</p><ol><li>Kling: 720P (default) and 1080P.</li><li>Hailuo: 768P (default) and 1080P.</li><li>Vidu: 720P (default) and 1080P.</li><li>GV: 720P (default) and 1080P.</li><li>OS: 720P. For images, only 1280x720 and 720x1280 are supported. Resolution cannot be specified.</li></ol><p>Note: In addition to the resolution supported by the model, 2K and 4K resolutions are also available.</p>
+	// <p>Resolution of the generated video. The resolution is related to the selected model and set video duration.</p><p>Supported resolution options for different models:</p><ol><li>Kling: 720P (default) and 1080P. Kling 3.0 and Kling 3.0-Omni support 4K.</li><li>Hailuo: 768P (default) and 1080P.</li><li>Vidu: 540P, 720P (default), and 1080P.</li><li>PixVerse: 540P, 720P (default), and 1080P.</li><li>H2: 720P and 1080P (default).</li></ol><p>Note: In addition to the resolution supported by the model, 2K and 4K resolutions are also available.</p>
 	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 
-	// <p>Aspect ratio of the generated video.</p><p>Support for this parameter by different models:</p><ol><li>Kling only supports this parameter for text-to-video, with aspect ratios of 16:9 (default), 9:16, and 1:1.</li><li>Hailuo does not support this parameter.</li><li>Vidu supports [16:9, 9:16, 4:3, 3:4, 1:1] for text-to-video and reference image-to-video only. Only q2 supports 4:3 and 3:4.</li><li>GV supports 16:9 (default) and 9:16.</li><li>OS only supports this parameter for text-to-video, with aspect ratios of 16:9 (default) and 9:16.</li></ol><p>Note: For more information about the supported aspect ratios of specific models, see the model website.</p>
+	// <p>Aspect ratio of the generated video.</p><p>Support for this parameter by different models:</p><ol><li>Kling only supports this parameter for text-to-video, with aspect ratios of 16:9 (default), 9:16, and 1:1.</li><li>Hailuo does not support this parameter.</li><li>Vidu supports [16:9, 9:16, 4:3, 3:4, 1:1] for text-to-video and reference image-to-video only. Only q2 supports 4:3 and 3:4.</li><li>PixVerse supports [16:9, 9:16, 4:3, 3:4, 1:1, 2:3, 3:2, 21:9] for text-to-video and reference image-to-video only. Only v6 and c1 support 2:3, 3:2, and 21:9.</li><li>H2 supports [16:9, 9:16, 4:3, 3:4, 4:5, 5:4, 1:1, 21:9, 9:21] for text-to-video and reference image-to-video only.</li></ol><p>Note: For more information about the supported aspect ratios of specific models, see the model website.</p>
 	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
 
-	// <p>Indicates whether to add a logo watermark.</p><ol><li>Hailuo supports this parameter.</li><li>Kling supports this parameter.</li><li>Vidu supports this parameter.</li></ol>
+	// <p>Indicates whether to add a logo watermark.</p><ol><li>Hailuo supports this parameter.</li><li>Kling supports this parameter.</li><li>Vidu supports this parameter.</li><li>H2 supports this parameter.</li></ol>
 	LogoAdd *int64 `json:"LogoAdd,omitnil,omitempty" name:"LogoAdd"`
 
-	// <p>Indicates whether to generate audio for the video. Valid values: true or false.</p><p>Models that support this parameter:</p><ol><li>GV. Default value: true.</li><li>OS. Default value: true.</li></ol>
+	// <p>Indicates whether to generate audio for the video. Valid values: true or false.</p><p>Models that support this parameter:</p><ol><li>Vidu. Only q3 series models support this parameter. Default value: false.</li><li>PixVerse. Default value: false.</li><li>Kling. Default value: false.</li></ol>
 	EnableAudio *bool `json:"EnableAudio,omitnil,omitempty" name:"EnableAudio"`
 
 	// <p>Indicates whether to use the off-peak scheduling mode. Only Vidu supports this parameter.<br>Tasks submitted in off-peak mode will be processed within 48 hours. Uncompleted tasks will be canceled.</p>
@@ -2598,98 +2624,42 @@ type AudioSeparateConfig struct {
 }
 
 type AudioTemplateInfo struct {
-	// Specifies the encoding format of the audio stream.
-	// When audio transcoding is not needed, the optional values are:.
-	// <li>copy.</li>
-	// When the outer parameter Container is mp3, the valid values are:.
-	// <li>mp3.</li>
-	// When the outer parameter Container is ogg or flac, the valid values are:.
-	// <li>flac.</li>
-	// When the outer parameter Container is m4a, valid values are:.
-	// <li>aac;</li>
-	// <li>ac3.</li>
-	// When the outer parameter Container is mp4 or flv, valid values are:.
-	// <li>aac: more suitable for mp4;</li>.
-	// <li>mp3: more suitable for flv;</li>.
-	// <li>mp2.</li>
-	// When the outer parameter Container is hls, valid values are:.
-	// <li>aac;</li>
-	// <li>mp3;</li>
-	// <li>eac3: used when merging adaptive transcoding audio tracks.</li>.
+	// <p>Audio stream encoding format.<br>When audio transcoding is not needed, the valid value is:</p><li>copy.</li>When the outer parameter Container is mp3, the valid value is:<li>mp3.</li>When the outer parameter Container is ogg or flac, the valid value is:<li>flac.</li>When the outer parameter Container is m4a, the valid values are:<li>aac;</li><li>ac3.</li>When the outer parameter Container is mp4 or flv, the valid values are:<li>aac: suitable for mp4.</li><li>mp3: suitable for flv.</li><li>mp2.</li>When the outer parameter Container is hls, the valid values are:<li>aac.</li><li>mp3.</li><li>eac3: used when merging audio tracks with adaptive transcoding.</li>When the outer parameter Container is wav, the valid values are:<li>pcm16 and pcm24.</li>
 	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
 
-	// The bitrate of the audio stream. value ranges from 0 to 26 and in the range of [26, 256]. measurement unit: kbps.
-	// If the value is 0, the audio bitrate will be the same as that of the original audio.
-	// Specifies that when using the TrackChannelInfo parameter for adaptive transcoding audio track merging, the valid values are:.
-	// Cannot be set to 0.
-	// 2). when Codec is aac, valid values: [26, 256].
-	// 3). when Codec is ac3, valid values: [26, 640].
-	// 4) when Codec is eac3, value range: [26, 6144]. remark: when SampleRate is 44100HZ, maximum value: 5644. when SampleRate is 48000HZ, maximum value: 6144.
-	// 
+	// <p>Audio stream bitrate, in kbps. Value range: 0 and [26, 256].<br>When the value is 0, it means the audio bitrate remains consistent with that of the original audio.<br>Note: If the TrackChannelInfo parameter is used for audio track merging with adaptive transcoding, the value range:<br>1) cannot be 0.<br>2) When Codec is aac, the value range is [26, 256].<br>3) When Codec is ac3, the value range is [26, 640].<br>4) When Codec is eac3, the value range is [26, 6144]. Note: When SampleRate is 44100HZ, the maximum value is 5644. When SampleRate is 48000HZ, the maximum value is 6144.</p>
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
-	// Unit: Hz.
-	// Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
+	// <p>Audio stream sampling rate. Different sampling rate options are provided for different encoding standards. Enter 0 to use the source audio sampling rate.<br>For details, see <a href="https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53">Audio Sampling Rate Range</a>.<br>Unit: Hz.<br>Note: Ensure the source audio stream sampling rate is within the supported range. Otherwise, transcoding may fail.</p>
 	SampleRate *uint64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
 
-	// Audio channel mode. Valid values:
-	// <li>1: mono-channel.</li>
-	// <li>2: dual-channel.</li>
-	// <li>6: 5.1 surround sound.
-	// <li>Default value: 2.
-	// When the container format is audio (flac, ogg, mp3, and m4a), the audio channel cannot be set to 5.1 surround sound.
+	// <p>Audio channel mode. Valid values:</p><li>0: The number of audio channels follows that of the source.</li><li>1: Single channel.</li><li>2: Two channels.</li><li>6: 5.1 channels.</li>When the media container format is an audio format (mp3), the number of audio channels cannot be set to 5.1.<p>Default value: 2.<br>Note: If you set the audio channel to follow that of the source and the audio encoding format does not support the current audio channel, the transcoding task may fail.</p>
 	AudioChannel *int64 `json:"AudioChannel,omitnil,omitempty" name:"AudioChannel"`
 
-	// Merge audio track information.
-	// This field only takes effect in adaptive bitrate transcoding.
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Audio track merging information.<br>Note: This field only takes effect for adaptive transcoding.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TrackChannelInfo *AudioTrackChannelInfo `json:"TrackChannelInfo,omitnil,omitempty" name:"TrackChannelInfo"`
 }
 
 type AudioTemplateInfoForUpdate struct {
-	// Audio stream encoding format.
-	// When audio transcoding is not needed, the value is:
-	// <li>copy.</li>
-	// When the outer parameter Container is mp3, the value is:
-	// <li>mp3.</li>
-	// When the outer parameter Container is ogg or flac, the value is:
-	// <li>flac.</li>
-	// When the outer parameter Container is m4a, valid values are:
-	// <li>aac;</li>
-	// <li>ac3.</li>
-	// When the outer parameter Container is mp4 or flv, valid values are:
-	// <li>aac: more suitable for mp4;</li>
-	// <li>mp3: more suitable for flv;</li>
-	// <li>mp2.</li>
-	// When the outer parameter Container is hls, valid values are:
-	// <li>aac;</li>
-	// <li>mp3.</li>
+	// <p>Audio stream encoding format.<br>When audio transcoding is not needed, the valid value is:</p><li>copy.</li>When the outer parameter Container is mp3, the valid value is:<li>mp3.</li>When the outer parameter Container is ogg or flac, the valid value is:<li>flac.</li>When the outer parameter Container is m4a, the valid values are:<li>aac;</li><li>ac3.</li>When the outer parameter Container is mp4 or flv, the valid values are:<li>aac: suitable for mp4.</li><li>mp3: suitable for flv.</li><li>mp2.</li>When the outer parameter Container is hls, the valid values are:<li>aac.</li><li>mp3.</li>When the outer parameter Container is wav, the valid values are:<li>pcm16 and pcm24.</li>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
 
-	// Audio stream bitrate in Kbps. Value range: 0 and [26, 256]. If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+	// <p>Audio stream bitrate, in kbps. Value range: 0 and [26, 256]. When the value is 0, it means the audio bitrate remains consistent with that of the original audio.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// Sampling rate of the audio stream. Different encoding standards support different sampling rate options. The value of 0 indicates using the sampling rate value of the source audio.
-	// For details, see [Supported Range of Audio Sampling Rate](https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
-	// Unit: Hz.
-	// Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
+	// <p>Audio stream sampling rate. Different sampling rate options are provided for different encoding standards. Enter 0 to use the source audio sampling rate.<br>For details, see <a href="https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53">Audio Sampling Rate Range</a>.<br>Unit: Hz.<br>Note: Ensure the source audio stream sampling rate is within the supported range. Otherwise, transcoding may fail.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SampleRate *uint64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
 
-	// Audio channel mode. Valid values:
-	// <li>1: mono-channel.</li>
-	// <li>2: dual-channel.</li>
-	// <li>6: 5.1 surround sound.
-	// When the container format is audio (flac, ogg, mp3, and m4a), the audio channel cannot be set to 5.1 surround sound.
-	// 
+	// <p>Audio channel mode. Valid values:</p><li>0: The number of audio channels follows that of the source.</li><li>1: Single channel.</li><li>2: Two channels.</li><li>6: 5.1 channels.</li>When the media container format is an audio format (mp3), the number of audio channels cannot be set to 5.1.<p>Default value: 2.<br>Note: If you set the audio channel to follow that of the source and the audio encoding format does not support the current audio channel, the transcoding task may fail.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AudioChannel *int64 `json:"AudioChannel,omitnil,omitempty" name:"AudioChannel"`
 
-	// The audio tracks to retain. All audio tracks are retained by default.
+	// <p>Specifies the retained audio tracks for output. All source tracks are retained by default.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	StreamSelects []*int64 `json:"StreamSelects,omitnil,omitempty" name:"StreamSelects"`
 }
 
@@ -4062,28 +4032,31 @@ func (r *CreateAigcAudioTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAigcImageTaskRequestParams struct {
-	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>GEM.<br>Qwen.</p>
+	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>Qwen.<br>Vidu.<br>Kling.<br>MJ.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// <p>Specify the model version number. By default, the system uses the supported stable version of the model.</p><ol><li>GEM: [2.5 and 3.0].</li></ol>
+	// <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hunyuan: [3.0].</li><li>Vidu: [q2].</li><li>Kling: [2.1, O1, 3.0, and 3.0-Omni].</li><li>Qwen: [0925].</li><li>MJ: [v7].</li></ol>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// <p>Description of the generated image. (Note: Supports up to 1000 characters.) This parameter is required when no reference image is passed in.</p>
+	// <p>Used for scene-based image generation; only supported by some models.</p><p>Enumeration value:</p><ul><li>3d_panorama: panoramic view. Only Hunyuan supports this.</li></ul>
+	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
+
+	// <p>Description of the generated image. This parameter is required when no reference image is specified.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
-	// <p>Specifies the content you want to prevent the model from generating. Note: Not all models support this. For example: top lighting, bright colors, people, animals, multiple vehicles, and wind.</p>
+	// <p>Specifies the content you want to prevent the model from generating. Note: Not all models support this.</p><p>For example: top lighting, bright colors, people, animals, multiple vehicles, and wind.</p>
 	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
 
-	// <p>The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
+	// <p>The default value is False, meaning the model follows instructions strictly.<br>For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
 	EnhancePrompt *bool `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-	// <p>Used for inputting image information as a resource for reference. Default support for inputting an image.</p><p>Models supporting multi-image input:</p><ol><li>GEM, supporting up to 3 images as resource input.</li></ol><p>Note:</p><ol><li>Recommended image less than 7M. Limits vary by model.</li><li>Format support: jpeg, png, webp.</li></ol>
+	// <p>Reference resource images. By default, one image can be specified.</p><p>Models supporting multiple images:</p><ol><li>Kling 2.1 supports up to 4 images as resource image input.</li><li>Kling 3.0-Omni supports up to 10 images as resource image input.</li><li>Kling O1 supports up to 10 images as resource image input.</li><li>Vidu q2 supports up to 7 images as resource image input.</li><li>Hunyuan 3.0 supports up to 3 images as resource image input.</li><li>MJ v7 supports up to 3 images as resource image input.</li></ol><p>Note:</p><ol><li>The recommended image size is less than 7 MB. Different models have different limits.</li><li>Supported image formats: JPEG, PNG, and WebP.</li></ol>
 	ImageInfos []*AigcImageInfo `json:"ImageInfos,omitnil,omitempty" name:"ImageInfos"`
 
 	// <p>Additional parameters required for the model.</p>
 	ExtraParameters *AigcImageExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
 
-	// <p>Used to input some special scene parameters required by the model, serialized into a string in Json format. Example: {"size":"2048x2048"}</p>
+	// <p>Special scenario parameters required by the model, formatted as a JSON serialized string.</p><ol><li>Hunyuan 3.0 supports freely setting resolution width and height within [512, 2048] pixels, with the product of width and height less than or equal to 1024x1024 pixels.</li><li>Qwen 0925 supports freely setting resolution width and height, with a valid total pixel range of [512x512=261632, 2048x2048=4194304].</li></ol><p>Example: {"size":"1024x1024"}.</p>
 	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
 
 	// <p>COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.</p>
@@ -4096,28 +4069,31 @@ type CreateAigcImageTaskRequestParams struct {
 type CreateAigcImageTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>GEM.<br>Qwen.</p>
+	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>Qwen.<br>Vidu.<br>Kling.<br>MJ.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// <p>Specify the model version number. By default, the system uses the supported stable version of the model.</p><ol><li>GEM: [2.5 and 3.0].</li></ol>
+	// <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hunyuan: [3.0].</li><li>Vidu: [q2].</li><li>Kling: [2.1, O1, 3.0, and 3.0-Omni].</li><li>Qwen: [0925].</li><li>MJ: [v7].</li></ol>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// <p>Description of the generated image. (Note: Supports up to 1000 characters.) This parameter is required when no reference image is passed in.</p>
+	// <p>Used for scene-based image generation; only supported by some models.</p><p>Enumeration value:</p><ul><li>3d_panorama: panoramic view. Only Hunyuan supports this.</li></ul>
+	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
+
+	// <p>Description of the generated image. This parameter is required when no reference image is specified.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
-	// <p>Specifies the content you want to prevent the model from generating. Note: Not all models support this. For example: top lighting, bright colors, people, animals, multiple vehicles, and wind.</p>
+	// <p>Specifies the content you want to prevent the model from generating. Note: Not all models support this.</p><p>For example: top lighting, bright colors, people, animals, multiple vehicles, and wind.</p>
 	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
 
-	// <p>The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
+	// <p>The default value is False, meaning the model follows instructions strictly.<br>For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
 	EnhancePrompt *bool `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-	// <p>Used for inputting image information as a resource for reference. Default support for inputting an image.</p><p>Models supporting multi-image input:</p><ol><li>GEM, supporting up to 3 images as resource input.</li></ol><p>Note:</p><ol><li>Recommended image less than 7M. Limits vary by model.</li><li>Format support: jpeg, png, webp.</li></ol>
+	// <p>Reference resource images. By default, one image can be specified.</p><p>Models supporting multiple images:</p><ol><li>Kling 2.1 supports up to 4 images as resource image input.</li><li>Kling 3.0-Omni supports up to 10 images as resource image input.</li><li>Kling O1 supports up to 10 images as resource image input.</li><li>Vidu q2 supports up to 7 images as resource image input.</li><li>Hunyuan 3.0 supports up to 3 images as resource image input.</li><li>MJ v7 supports up to 3 images as resource image input.</li></ol><p>Note:</p><ol><li>The recommended image size is less than 7 MB. Different models have different limits.</li><li>Supported image formats: JPEG, PNG, and WebP.</li></ol>
 	ImageInfos []*AigcImageInfo `json:"ImageInfos,omitnil,omitempty" name:"ImageInfos"`
 
 	// <p>Additional parameters required for the model.</p>
 	ExtraParameters *AigcImageExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
 
-	// <p>Used to input some special scene parameters required by the model, serialized into a string in Json format. Example: {"size":"2048x2048"}</p>
+	// <p>Special scenario parameters required by the model, formatted as a JSON serialized string.</p><ol><li>Hunyuan 3.0 supports freely setting resolution width and height within [512, 2048] pixels, with the product of width and height less than or equal to 1024x1024 pixels.</li><li>Qwen 0925 supports freely setting resolution width and height, with a valid total pixel range of [512x512=261632, 2048x2048=4194304].</li></ol><p>Example: {"size":"1024x1024"}.</p>
 	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
 
 	// <p>COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.</p>
@@ -4141,6 +4117,7 @@ func (r *CreateAigcImageTaskRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ModelName")
 	delete(f, "ModelVersion")
+	delete(f, "SceneType")
 	delete(f, "Prompt")
 	delete(f, "NegativePrompt")
 	delete(f, "EnhancePrompt")
@@ -4182,37 +4159,37 @@ func (r *CreateAigcImageTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAigcVideoTaskRequestParams struct {
-	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>OS.<br>GV.<br>PixVerse.</p>
+	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>PixVerse.<br>Mingmou.<br>H2.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hailuo: [02, 2.3, and 2.3-fast].</li><li>Kling: [1.6, 2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, q3-turbo, q3, and q3-mix].</li><li>GV: [3.1 and 3.1-fast].</li><li>OS: [2.0].</li><li>PixVerse: [v5.6, v6, and c1].</li></ol>
+	// <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hunyuan: [1.5].</li><li>Hailuo: [02, 2.3, and 2.3-fast].</li><li>Kling: [1.6, 2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, q3-turbo, q3, and q3-mix].</li><li>PixVerse: [v5.6, v6, and c1].</li><li>H2: [1.0].</li></ol>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// <p>Scenario for the generated video.<br>Note: Not all models support scenarios.</p><ol><li>Kling supports motion control (motion_control).</li><li>Mingmou supports landscape-to-portrait conversion (land2port).</li><li>Vidu supports special effect templates (template_effect).</li></ol>
+	// <p>Scenario for the generated video.<br>Note: Not all models support scenarios.</p><ol><li>Kling supports: motion control (motion_control), digital human (avatar_i2v), and lip sync (lip_sync).</li><li>Mingmou supports: landscape-to-portrait conversion (land2port).</li><li>Vidu supports: effect templates (template_effect).</li><li>Hunyuan supports: 3D world model (3d_scene). The returned file is not a video.</li></ol>
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
 
-	// <p>Description of the generated video. (Note: A maximum of 2000 characters is supported.) This parameter is required when no reference image is specified.</p>
+	// <p>Description of the generated video. This parameter is required when no image is specified.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
 	// <p>Specifies the content you want to prevent the model from generating.<br>Note: Not all models support this.<br>For example:<br>Top lighting and bright colors.<br>People and animals.<br>Multiple vehicles and wind.</p>
 	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
 
-	// <p>The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
+	// <p>The default value is False, meaning the model follows instructions strictly.<br>For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
 	EnhancePrompt *bool `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-	// <p>Image URL for video generation. The URL must be accessible from the public network.<br>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different size limits.</li><li>Supported image formats: JPEG and PNG.</li><li>If the OS model is used, the input image dimension should be 1280x720 or 720x1280.</li></ol>
+	// <p>Image URL used for video generation. The URL must be accessible from the public network.<br>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different size limits. See the model website for a more complete description.</li><li>Supported image formats: JPEG and PNG.</li></ol>
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
-	// <p>The model will generate a video using the image of this parameter as the ending frame.<br>Models that support this parameter:</p><ol><li>GV. If the ending frame image is specified, ImageUrl is required as the starting frame.</li><li>Kling. Version 2.1 supports starting and ending frames with a resolution of 1080P.</li><li>Vidu. q2-pro and q2-turbo support starting and ending frames.</li></ol><p>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different limits.</li><li>Supported image formats: JPEG and PNG.</li></ol>
+	// <p>The model will generate a video using the image of this parameter as the ending frame.<br>Models that support this parameter:</p><ol><li>Kling 2.0, O1, 3.0, and 3.0-Omni support starting and ending frames.</li><li>Kling 1.6, 2.1, 2.5, and 2.6 support starting and ending frames with Resolution:1080p.</li><li>Vidu q2-pro, q2-turbo, q3-pro, and q3-turbo support starting and ending frames.</li><li>PixVerse v5.6, v6, and c1 support starting and ending frames.</li><li>Hailuo 02 supports starting and ending frames.</li></ol><p>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different limits.</li><li>Supported image formats: JPEG and PNG.</li></ol>
 	LastImageUrl *string `json:"LastImageUrl,omitnil,omitempty" name:"LastImageUrl"`
 
-	// <p>List of up to 3 asset images, used to describe the images the model should use for video generation.</p><p>Model that supports multiple images:</p><ol><li>GV. If multiple images are specified, ImageUrl and LastImageUrl are unavailable.</li><li>Vidu supports video generation with multiple reference images. The q2 model accepts 1 to 7 images. The ReferenceType in ImageInfos can be used to specify the subject ID for the input.</li></ol><p>Note:</p><ol><li>The image size cannot exceed 10 MB.</li><li>Supported image formats: JPEG and PNG.</li></ol>
+	// <p>List of multiple asset resource images used to describe the resource images used by the model for video generation.</p><p>Models that support multiple images:</p><ol><li>Vidu q2, q2-pro, q3-turbo, q3, and q3-mix support video generation with multiple reference images. One to 7 images can be uploaded. The ReferenceType in ImageInfos can be used to specify the subject ID for the input.</li><li>Kling O1, 3.0-Omni, and 1.6 support video generation with multiple reference images.<ol><li>Kling 1.6 allows uploading 1 to 4 images.</li><li>Kling O1 and 3.0-Omni allow uploading 1 to 7 images. If a reference video is present, 0 to 4 images can be uploaded.</li></ol></li><li>PixVerse, v5.6, v6, and c1 support video generation with multiple reference images. One to 7 images can be uploaded, and image names need to be specified via the Text field in ImageInfos.</li><li>H2 1.0 supports video generation with multiple image parameters. One to 9 images can be uploaded. If a reference video is present, 0 to 5 images can be uploaded.</li></ol><p>Note:</p><ol><li>The image size cannot exceed 10 MB.</li><li>Supported image formats: JPEG and PNG.</li></ol>
 	ImageInfos []*AigcVideoReferenceImageInfo `json:"ImageInfos,omitnil,omitempty" name:"ImageInfos"`
 
-	// <p>Only Kling O1 supports reference video information.<br>This can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.</p>
+	// <p>Only Kling O1, Kling 3.0-Omni, Vidu q2-pro, and H2 1.0 support reference video information.</p><ol><li>For Kling O1 and 3.0-Omni, the reference video can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.</li><li>Vidu q2-pro supports video reference.</li><li>H2 1.0 supports video reference.</li></ol>
 	VideoInfos []*AigcVideoReferenceVideoInfo `json:"VideoInfos,omitnil,omitempty" name:"VideoInfos"`
 
-	// <p>Duration of the generated video.<br>Note:</p><ol><li>Kling supports 5 and 10 seconds. Default value: 5 seconds.</li><li>The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.</li><li>Vidu supports 1 to 10 seconds.</li><li>GV supports 8 seconds. Default value: 8 seconds.</li><li>OS supports 4, 8, and 12 seconds. Default value: 8 seconds.</li></ol>
+	// <p>Duration of the generated video.<br>Note:</p><ol><li>Kling: default value: 5 seconds.<ul><li>O1 supports 3 to 10 seconds.</li><li>3.0-Omni supports 3 to 15 seconds, or 3 to 10 seconds when a video reference is used.</li><li>3.0 supports 3 to 15 seconds.</li><li>Other versions support 5 and 10 seconds.</li></ul></li><li>The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.</li><li>Vidu: default value: 5 seconds.<ul><li>q3-pro, q3-turbo, q3, and q3-mix support 3 to 16 seconds.</li><li>q2-pro, q2-turbo, and q2 support 1 to 10 seconds.</li></ul></li><li>PixVerse: default value: 5 seconds.<ul><li>v5.6 supports 5, 8, and 10 seconds.</li><li>v6 and c1 support 1 to 15 seconds.</li></ul></li><li>H2 supports 3 to 15 seconds. Default value: 5 seconds.</li></ol>
 	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// <p>Additional parameters required.</p>
@@ -4221,7 +4198,7 @@ type CreateAigcVideoTaskRequestParams struct {
 	// <p>COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.</p>
 	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
 
-	// <p>Special scenario parameters required by the model, formatted as a JSON serialized string.<br>Example:<br>{"camera_control":{"type":"simple"}}.</p>
+	// <p>Special scenario parameters or storyboard prompts required by the model, formatted as a JSON serialized string.<br>Example:<br>{"camera_control":{"type":"simple"}}.</p>
 	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
 
 	// <p>API operator name.</p>
@@ -4231,37 +4208,37 @@ type CreateAigcVideoTaskRequestParams struct {
 type CreateAigcVideoTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>OS.<br>GV.<br>PixVerse.</p>
+	// <p>Model name.<br>Supported models:<br>Hunyuan.<br>Hailuo.<br>Kling.<br>Vidu.<br>PixVerse.<br>Mingmou.<br>H2.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hailuo: [02, 2.3, and 2.3-fast].</li><li>Kling: [1.6, 2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, q3-turbo, q3, and q3-mix].</li><li>GV: [3.1 and 3.1-fast].</li><li>OS: [2.0].</li><li>PixVerse: [v5.6, v6, and c1].</li></ol>
+	// <p>Specific version number of the model. By default, the system uses the supported stable version of the model.</p><ol><li>Hunyuan: [1.5].</li><li>Hailuo: [02, 2.3, and 2.3-fast].</li><li>Kling: [1.6, 2.0, 2.1, 2.5, O1, 2.6, 3.0, and 3.0-Omni].</li><li>Vidu: [q2, q2-pro, q2-turbo, q3-pro, q3-turbo, q3, and q3-mix].</li><li>PixVerse: [v5.6, v6, and c1].</li><li>H2: [1.0].</li></ol>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// <p>Scenario for the generated video.<br>Note: Not all models support scenarios.</p><ol><li>Kling supports motion control (motion_control).</li><li>Mingmou supports landscape-to-portrait conversion (land2port).</li><li>Vidu supports special effect templates (template_effect).</li></ol>
+	// <p>Scenario for the generated video.<br>Note: Not all models support scenarios.</p><ol><li>Kling supports: motion control (motion_control), digital human (avatar_i2v), and lip sync (lip_sync).</li><li>Mingmou supports: landscape-to-portrait conversion (land2port).</li><li>Vidu supports: effect templates (template_effect).</li><li>Hunyuan supports: 3D world model (3d_scene). The returned file is not a video.</li></ol>
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
 
-	// <p>Description of the generated video. (Note: A maximum of 2000 characters is supported.) This parameter is required when no reference image is specified.</p>
+	// <p>Description of the generated video. This parameter is required when no image is specified.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
 	// <p>Specifies the content you want to prevent the model from generating.<br>Note: Not all models support this.<br>For example:<br>Top lighting and bright colors.<br>People and animals.<br>Multiple vehicles and wind.</p>
 	NegativePrompt *string `json:"NegativePrompt,omitnil,omitempty" name:"NegativePrompt"`
 
-	// <p>The default value is False, meaning the model follows instructions strictly. For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
+	// <p>The default value is False, meaning the model follows instructions strictly.<br>For better results with more nuanced prompts, set this parameter to True to automatically optimize the input prompt and improve generation quality.</p>
 	EnhancePrompt *bool `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-	// <p>Image URL for video generation. The URL must be accessible from the public network.<br>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different size limits.</li><li>Supported image formats: JPEG and PNG.</li><li>If the OS model is used, the input image dimension should be 1280x720 or 720x1280.</li></ol>
+	// <p>Image URL used for video generation. The URL must be accessible from the public network.<br>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different size limits. See the model website for a more complete description.</li><li>Supported image formats: JPEG and PNG.</li></ol>
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
-	// <p>The model will generate a video using the image of this parameter as the ending frame.<br>Models that support this parameter:</p><ol><li>GV. If the ending frame image is specified, ImageUrl is required as the starting frame.</li><li>Kling. Version 2.1 supports starting and ending frames with a resolution of 1080P.</li><li>Vidu. q2-pro and q2-turbo support starting and ending frames.</li></ol><p>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different limits.</li><li>Supported image formats: JPEG and PNG.</li></ol>
+	// <p>The model will generate a video using the image of this parameter as the ending frame.<br>Models that support this parameter:</p><ol><li>Kling 2.0, O1, 3.0, and 3.0-Omni support starting and ending frames.</li><li>Kling 1.6, 2.1, 2.5, and 2.6 support starting and ending frames with Resolution:1080p.</li><li>Vidu q2-pro, q2-turbo, q3-pro, and q3-turbo support starting and ending frames.</li><li>PixVerse v5.6, v6, and c1 support starting and ending frames.</li><li>Hailuo 02 supports starting and ending frames.</li></ol><p>Note:</p><ol><li>The recommended image size is no more than 10 MB. Different models have different limits.</li><li>Supported image formats: JPEG and PNG.</li></ol>
 	LastImageUrl *string `json:"LastImageUrl,omitnil,omitempty" name:"LastImageUrl"`
 
-	// <p>List of up to 3 asset images, used to describe the images the model should use for video generation.</p><p>Model that supports multiple images:</p><ol><li>GV. If multiple images are specified, ImageUrl and LastImageUrl are unavailable.</li><li>Vidu supports video generation with multiple reference images. The q2 model accepts 1 to 7 images. The ReferenceType in ImageInfos can be used to specify the subject ID for the input.</li></ol><p>Note:</p><ol><li>The image size cannot exceed 10 MB.</li><li>Supported image formats: JPEG and PNG.</li></ol>
+	// <p>List of multiple asset resource images used to describe the resource images used by the model for video generation.</p><p>Models that support multiple images:</p><ol><li>Vidu q2, q2-pro, q3-turbo, q3, and q3-mix support video generation with multiple reference images. One to 7 images can be uploaded. The ReferenceType in ImageInfos can be used to specify the subject ID for the input.</li><li>Kling O1, 3.0-Omni, and 1.6 support video generation with multiple reference images.<ol><li>Kling 1.6 allows uploading 1 to 4 images.</li><li>Kling O1 and 3.0-Omni allow uploading 1 to 7 images. If a reference video is present, 0 to 4 images can be uploaded.</li></ol></li><li>PixVerse, v5.6, v6, and c1 support video generation with multiple reference images. One to 7 images can be uploaded, and image names need to be specified via the Text field in ImageInfos.</li><li>H2 1.0 supports video generation with multiple image parameters. One to 9 images can be uploaded. If a reference video is present, 0 to 5 images can be uploaded.</li></ol><p>Note:</p><ol><li>The image size cannot exceed 10 MB.</li><li>Supported image formats: JPEG and PNG.</li></ol>
 	ImageInfos []*AigcVideoReferenceImageInfo `json:"ImageInfos,omitnil,omitempty" name:"ImageInfos"`
 
-	// <p>Only Kling O1 supports reference video information.<br>This can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.</p>
+	// <p>Only Kling O1, Kling 3.0-Omni, Vidu q2-pro, and H2 1.0 support reference video information.</p><ol><li>For Kling O1 and 3.0-Omni, the reference video can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.</li><li>Vidu q2-pro supports video reference.</li><li>H2 1.0 supports video reference.</li></ol>
 	VideoInfos []*AigcVideoReferenceVideoInfo `json:"VideoInfos,omitnil,omitempty" name:"VideoInfos"`
 
-	// <p>Duration of the generated video.<br>Note:</p><ol><li>Kling supports 5 and 10 seconds. Default value: 5 seconds.</li><li>The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.</li><li>Vidu supports 1 to 10 seconds.</li><li>GV supports 8 seconds. Default value: 8 seconds.</li><li>OS supports 4, 8, and 12 seconds. Default value: 8 seconds.</li></ol>
+	// <p>Duration of the generated video.<br>Note:</p><ol><li>Kling: default value: 5 seconds.<ul><li>O1 supports 3 to 10 seconds.</li><li>3.0-Omni supports 3 to 15 seconds, or 3 to 10 seconds when a video reference is used.</li><li>3.0 supports 3 to 15 seconds.</li><li>Other versions support 5 and 10 seconds.</li></ul></li><li>The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.</li><li>Vidu: default value: 5 seconds.<ul><li>q3-pro, q3-turbo, q3, and q3-mix support 3 to 16 seconds.</li><li>q2-pro, q2-turbo, and q2 support 1 to 10 seconds.</li></ul></li><li>PixVerse: default value: 5 seconds.<ul><li>v5.6 supports 5, 8, and 10 seconds.</li><li>v6 and c1 support 1 to 15 seconds.</li></ul></li><li>H2 supports 3 to 15 seconds. Default value: 5 seconds.</li></ol>
 	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// <p>Additional parameters required.</p>
@@ -4270,7 +4247,7 @@ type CreateAigcVideoTaskRequest struct {
 	// <p>COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.</p>
 	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
 
-	// <p>Special scenario parameters required by the model, formatted as a JSON serialized string.<br>Example:<br>{"camera_control":{"type":"simple"}}.</p>
+	// <p>Special scenario parameters or storyboard prompts required by the model, formatted as a JSON serialized string.<br>Example:<br>{"camera_control":{"type":"simple"}}.</p>
 	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
 
 	// <p>API operator name.</p>
@@ -5672,12 +5649,7 @@ type CreateSmartSubtitleTemplateRequestParams struct {
 	// <p>Intelligent subtitle template name<br>Length limit: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br><br>ASR recognition and pure caption translation currently support the following: 
-	// 
-	// [ASR Supported Languages](https://www.tencentcloud.com/zh/document/product/1041/68175#ASRlanguages)
-	// 
-	// 
-	// Common available language codes:<br>`auto` (Auto Recognition), <br>`zh` (Simplified Chinese), <br>`en` (English), <br>`ja` (Japanese), <br>`ko` (Korean), <br>`zh-PY `(Chinese, English and Cantonese), <br>`zh_medical `(Medical Chinese), <br>`vi` (Vietnamese), <br>`ms` (Malay), <br>`id` (Indonesian), <br>`fil` (Filipino), <br>`th` (Thai), <br>`pt` (Portuguese), <br>`tr` (Turkish), <br>`ar` (Arabic), <br>`es` (Spanish), <br>`hi` (Hindi), <br>`fr` (French), <br>`de` (German), <br>`it` (Italian), <br>`zh_dialect` (Chinese Dialects), <br>`zh_en` (Chinese & English Mixed), <br>`yue` (Cantonese), <br>`ru` (Russian), <br>`prime_zh` (Chinese, English & Chinese Dialects)
+	// <p>Smart subtitling video source language.</p><p>For ASR and subtitle translation parameter values, see <a href="https://www.tencentcloud.com/document/product/862/116243?from_cn_redirect=1#ASRlanguages">ASR Languages</a>.</p><p>The following lists some commonly used values:</p><p><code>auto</code>: automatic identification. <code>zh</code>: Simplified Chinese. <code>en</code>: English. <code>ja</code>: Japanese. <code>ko</code>: Korean. <code>zh-PY</code>: Chinese, English, and Cantonese. <code>zh_medical</code>: Chinese health care. <code>vi</code>: Vietnamese. <code>ms</code>: Malay. <code>id</code>: Indonesian. <code>fil</code>: Filipino. <code>th</code>: Thai. <code>pt</code>: Portuguese. <code>tr</code>: Turkish. <code>ar</code>: Arabic. <code>es</code>: Spanish. <code>hi</code>: Hindi. <code>fr</code>: French. <code>de</code>: German. <code>it</code>: Italian. <code>zh_dialect</code>: Chinese dialect. <code>zh_en</code>: Chinese and English. <code>yue</code>: Cantonese. <code>ru</code>: Russian. <code>prime_zh</code>: Chinese and English dialects.</p><p>OCR only supports the following values:</p><p><code>zh_en</code>: Chinese and English<br><code>multi</code>: others</p><p>For languages supported by different values, see <a href="https://www.tencentcloud.com/document/product/862/116243?from_cn_redirect=1#OCRlanguages">OCR Languages</a></p>
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
 	// <p>Intelligent caption subtitle language type<br>0: Source language<br>1: Target language<br>2: Source language + target language<br>Only 0 is supported when TranslateSwitch is OFF<br>Only 1 or 2 is supported when TranslateSwitch is ON</p>
@@ -5695,7 +5667,7 @@ type CreateSmartSubtitleTemplateRequestParams struct {
 	// <p>Subtitle translation switch<br><code>ON</code>: Enable translation<br><code>OFF</code>: Disable translation</p><p><strong>Note</strong>: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to <code>OFF</code>.</p>
 	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
 
-	// <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: GaLanguage<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method.<code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
+	// <p>This parameter takes effect when the value of TranslateSwitch is ON. Valid translation languages:</p><p>For ASR extraction and translation, see <a href="https://www.tencentcloud.com/document/product/862/116243?from_cn_redirect=1#ASRlanguages">ASR Translation Languages</a>.<br>For OCR extraction and translation, see <a href="https://www.tencentcloud.com/document/product/862/116243?from_cn_redirect=1#OCRlanguages">OCR Translation Languages</a>.</p><p><strong>Note</strong>: Use <code>/</code> to separate multiple languages, such as <code>en/ja</code>, which indicates English and Japanese.</p><p>Examples of some commonly used languages:</p><p><code>ar</code>: Arabic<br><code>en</code>: English<br><code>fr</code>: French<br><code>it</code>: Italian<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>ru</code>: Russian<br><code>th</code>: Thai<br><code>tr</code>: Turkish<br><code>vi</code>: Vietnamese<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese</p>
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
 
 	// <p>Subtitle processing type:</p><ul><li>0: ASR recognition subtitle</li><li>1: Pure caption translation</li><li>2: OCR recognition subtitle</li></ul><p><strong>Note</strong>: The default type is ASR recognition subtitle if the field is unspecified.</p>
@@ -5720,12 +5692,7 @@ type CreateSmartSubtitleTemplateRequest struct {
 	// <p>Intelligent subtitle template name<br>Length limit: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br><br>ASR recognition and pure caption translation currently support the following: 
-	// 
-	// [ASR Supported Languages](https://www.tencentcloud.com/zh/document/product/1041/68175#ASRlanguages)
-	// 
-	// 
-	// Common available language codes:<br>`auto` (Auto Recognition), <br>`zh` (Simplified Chinese), <br>`en` (English), <br>`ja` (Japanese), <br>`ko` (Korean), <br>`zh-PY `(Chinese, English and Cantonese), <br>`zh_medical `(Medical Chinese), <br>`vi` (Vietnamese), <br>`ms` (Malay), <br>`id` (Indonesian), <br>`fil` (Filipino), <br>`th` (Thai), <br>`pt` (Portuguese), <br>`tr` (Turkish), <br>`ar` (Arabic), <br>`es` (Spanish), <br>`hi` (Hindi), <br>`fr` (French), <br>`de` (German), <br>`it` (Italian), <br>`zh_dialect` (Chinese Dialects), <br>`zh_en` (Chinese & English Mixed), <br>`yue` (Cantonese), <br>`ru` (Russian), <br>`prime_zh` (Chinese, English & Chinese Dialects)
+	// <p>Smart subtitling video source language.</p><p>For ASR and subtitle translation parameter values, see <a href="https://www.tencentcloud.com/document/product/862/116243?from_cn_redirect=1#ASRlanguages">ASR Languages</a>.</p><p>The following lists some commonly used values:</p><p><code>auto</code>: automatic identification. <code>zh</code>: Simplified Chinese. <code>en</code>: English. <code>ja</code>: Japanese. <code>ko</code>: Korean. <code>zh-PY</code>: Chinese, English, and Cantonese. <code>zh_medical</code>: Chinese health care. <code>vi</code>: Vietnamese. <code>ms</code>: Malay. <code>id</code>: Indonesian. <code>fil</code>: Filipino. <code>th</code>: Thai. <code>pt</code>: Portuguese. <code>tr</code>: Turkish. <code>ar</code>: Arabic. <code>es</code>: Spanish. <code>hi</code>: Hindi. <code>fr</code>: French. <code>de</code>: German. <code>it</code>: Italian. <code>zh_dialect</code>: Chinese dialect. <code>zh_en</code>: Chinese and English. <code>yue</code>: Cantonese. <code>ru</code>: Russian. <code>prime_zh</code>: Chinese and English dialects.</p><p>OCR only supports the following values:</p><p><code>zh_en</code>: Chinese and English<br><code>multi</code>: others</p><p>For languages supported by different values, see <a href="https://www.tencentcloud.com/document/product/862/116243?from_cn_redirect=1#OCRlanguages">OCR Languages</a></p>
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
 	// <p>Intelligent caption subtitle language type<br>0: Source language<br>1: Target language<br>2: Source language + target language<br>Only 0 is supported when TranslateSwitch is OFF<br>Only 1 or 2 is supported when TranslateSwitch is ON</p>
@@ -5743,7 +5710,7 @@ type CreateSmartSubtitleTemplateRequest struct {
 	// <p>Subtitle translation switch<br><code>ON</code>: Enable translation<br><code>OFF</code>: Disable translation</p><p><strong>Note</strong>: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to <code>OFF</code>.</p>
 	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
 
-	// <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: GaLanguage<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method.<code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
+	// <p>This parameter takes effect when the value of TranslateSwitch is ON. Valid translation languages:</p><p>For ASR extraction and translation, see <a href="https://www.tencentcloud.com/document/product/862/116243?from_cn_redirect=1#ASRlanguages">ASR Translation Languages</a>.<br>For OCR extraction and translation, see <a href="https://www.tencentcloud.com/document/product/862/116243?from_cn_redirect=1#OCRlanguages">OCR Translation Languages</a>.</p><p><strong>Note</strong>: Use <code>/</code> to separate multiple languages, such as <code>en/ja</code>, which indicates English and Japanese.</p><p>Examples of some commonly used languages:</p><p><code>ar</code>: Arabic<br><code>en</code>: English<br><code>fr</code>: French<br><code>it</code>: Italian<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>ru</code>: Russian<br><code>th</code>: Thai<br><code>tr</code>: Turkish<br><code>vi</code>: Vietnamese<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese</p>
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
 
 	// <p>Subtitle processing type:</p><ul><li>0: ASR recognition subtitle</li><li>1: Pure caption translation</li><li>2: OCR recognition subtitle</li></ul><p><strong>Note</strong>: The default type is ASR recognition subtitle if the field is unspecified.</p>
@@ -6006,80 +5973,68 @@ func (r *CreateSubtitleEmbedTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateTranscodeTemplateRequestParams struct {
-	// Container format. Valid values: mp4, flv, hls, ts, webm, mkv, mxf, mov, mp3, flac, ogg, and m4a. Among them, mp3, flac, ogg, and m4a are for audio-only files.
+	// <p>Container format. Valid values: mp4, flv, hls, ts, webm, mkv, mxf, mov, mp3, flac, ogg, m4a, and wav. Among them, mp3, flac, ogg, m4a, and wav are for audio-only files.</p>
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
-	// Name of a transcoding template. Length limit: 64 characters.
+	// <p>Transcoding template name. Length limit: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Template description. Length limit: 256 characters.
+	// <p>Transcoding template description. Length limit: 256 characters.</p>
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Whether to remove video data. Valid values:
-	// <li>0: Retain</li>
-	// <li>1: Remove</li>
-	// Default value: 0.
+	// <p>Indicates whether to remove video data. Valid values:</p><li>0: Data is reserved.</li><li>1: Data is removed.</li>Default value: 0.
 	RemoveVideo *int64 `json:"RemoveVideo,omitnil,omitempty" name:"RemoveVideo"`
 
-	// Whether to remove audio data. Valid values:
-	// <li>0: Retain</li>
-	// <li>1: Remove</li>
-	// Default value: 0.
+	// <p>Indicates whether to remove audio data. Valid values:</p><li>0: Data is reserved.</li><li>1: Data is removed.</li>Default value: 0.
 	RemoveAudio *int64 `json:"RemoveAudio,omitnil,omitempty" name:"RemoveAudio"`
 
-	// Video stream configuration parameter. This field is required when `RemoveVideo` is 0.
+	// <p>Video stream configuration parameters. This field is required when RemoveVideo is 0.</p>
 	VideoTemplate *VideoTemplateInfo `json:"VideoTemplate,omitnil,omitempty" name:"VideoTemplate"`
 
-	// Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
+	// <p>Audio stream configuration parameters. This field is required when RemoveAudio is 0.</p>
 	AudioTemplate *AudioTemplateInfo `json:"AudioTemplate,omitnil,omitempty" name:"AudioTemplate"`
 
-	// TESHD transcoding parameter. To enable it, please contact your Tencent Cloud sales rep.
+	// <p>Top Speed Codec transcoding parameters.</p>
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
 
-	// Audio/Video enhancement configuration.
+	// <p>Audio/video enhancement configurations.</p>
 	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
 
-	// Additional parameter, which is a serialized JSON string.
+	// <p>Extended parameter, which is a serialized JSON string.</p>
 	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
 type CreateTranscodeTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Container format. Valid values: mp4, flv, hls, ts, webm, mkv, mxf, mov, mp3, flac, ogg, and m4a. Among them, mp3, flac, ogg, and m4a are for audio-only files.
+	// <p>Container format. Valid values: mp4, flv, hls, ts, webm, mkv, mxf, mov, mp3, flac, ogg, m4a, and wav. Among them, mp3, flac, ogg, m4a, and wav are for audio-only files.</p>
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
-	// Name of a transcoding template. Length limit: 64 characters.
+	// <p>Transcoding template name. Length limit: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Template description. Length limit: 256 characters.
+	// <p>Transcoding template description. Length limit: 256 characters.</p>
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Whether to remove video data. Valid values:
-	// <li>0: Retain</li>
-	// <li>1: Remove</li>
-	// Default value: 0.
+	// <p>Indicates whether to remove video data. Valid values:</p><li>0: Data is reserved.</li><li>1: Data is removed.</li>Default value: 0.
 	RemoveVideo *int64 `json:"RemoveVideo,omitnil,omitempty" name:"RemoveVideo"`
 
-	// Whether to remove audio data. Valid values:
-	// <li>0: Retain</li>
-	// <li>1: Remove</li>
-	// Default value: 0.
+	// <p>Indicates whether to remove audio data. Valid values:</p><li>0: Data is reserved.</li><li>1: Data is removed.</li>Default value: 0.
 	RemoveAudio *int64 `json:"RemoveAudio,omitnil,omitempty" name:"RemoveAudio"`
 
-	// Video stream configuration parameter. This field is required when `RemoveVideo` is 0.
+	// <p>Video stream configuration parameters. This field is required when RemoveVideo is 0.</p>
 	VideoTemplate *VideoTemplateInfo `json:"VideoTemplate,omitnil,omitempty" name:"VideoTemplate"`
 
-	// Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
+	// <p>Audio stream configuration parameters. This field is required when RemoveAudio is 0.</p>
 	AudioTemplate *AudioTemplateInfo `json:"AudioTemplate,omitnil,omitempty" name:"AudioTemplate"`
 
-	// TESHD transcoding parameter. To enable it, please contact your Tencent Cloud sales rep.
+	// <p>Top Speed Codec transcoding parameters.</p>
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
 
-	// Audio/Video enhancement configuration.
+	// <p>Audio/video enhancement configurations.</p>
 	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
 
-	// Additional parameter, which is a serialized JSON string.
+	// <p>Extended parameter, which is a serialized JSON string.</p>
 	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
@@ -6113,7 +6068,7 @@ func (r *CreateTranscodeTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateTranscodeTemplateResponseParams struct {
-	// Unique ID of a transcoding template.
+	// <p>Unique identifier of the transcoding template.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6477,6 +6432,14 @@ func (r *CreateWorkflowResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CreateWorkflowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type CustomVariable struct {
+
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 // Predefined struct for user
@@ -7556,6 +7519,73 @@ func (r *DeleteTranscodeTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteTranscodeTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteVoiceRequestParams struct {
+	// <p>Voice ID.</p>
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// <p>Extended parameters in the format of a JSON string.</p>
+	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
+}
+
+type DeleteVoiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Voice ID.</p>
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// <p>Extended parameters in the format of a JSON string.</p>
+	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
+}
+
+func (r *DeleteVoiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVoiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VoiceId")
+	delete(f, "ExtParam")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteVoiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteVoiceResponseParams struct {
+	// <p>Error code. 0 is returned if the request is successful.</p>
+	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
+
+	// <p>Error message. success is returned if the request is successful.</p>
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteVoiceResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteVoiceResponseParams `json:"Response"`
+}
+
+func (r *DeleteVoiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVoiceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8889,6 +8919,9 @@ type DescribeDesignTaskResponseParams struct {
 	// <p>Voice ID.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// <p>Audition audio URL.</p>
+	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
 
 	// <p>Extended information.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -10775,8 +10808,32 @@ func (r *DescribeUsageDataResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVoicesRequestParams struct {
-	// <p>Voice type. </p><p>Enumeration value: </p><ul><li>system: System audio.</li></ul>
+	// <p>Voice ID.</p>
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// <p>Voice type.</p><p>Enumeration values:</p><ul><li>system: system audio.</li><li>clone: cloned audio.</li><li>design: designed audio.</li><li>all: All voices (default).</li></ul>
 	VoiceType *string `json:"VoiceType,omitnil,omitempty" name:"VoiceType"`
+
+	// <p>Voice name.</p>
+	VoiceName *string `json:"VoiceName,omitnil,omitempty" name:"VoiceName"`
+
+	// <p>Voice description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>Gender.</p><p>Enumeration values:</p><ul><li>male: male</li><li>female: female</li><li>unknown: unknown</li></ul>
+	Gender *string `json:"Gender,omitnil,omitempty" name:"Gender"`
+
+	// <p>Age.</p><p>Enumeration values:</p><ul><li>child: child</li><li>teenager: teenager</li><li>youth: youth</li><li>middle_aged: middle-aged</li><li>senior: senior</li><li>unknown: unknown</li></ul>
+	Age *string `json:"Age,omitnil,omitempty" name:"Age"`
+
+	// <p>Language.</p>
+	Languages []*string `json:"Languages,omitnil,omitempty" name:"Languages"`
+
+	// <p>Tag.</p>
+	Labels []*string `json:"Labels,omitnil,omitempty" name:"Labels"`
+
+	// <p>Scenario.</p>
+	Scenes []*string `json:"Scenes,omitnil,omitempty" name:"Scenes"`
 
 	// <p>Extended parameters in the format of a JSON string. </p><p>Other filter criteria:
 	// voiceName (String): Voice name, fuzzy matching. labels (Array of String): Tags. Matches voices that contain these tags.</p>
@@ -10786,8 +10843,32 @@ type DescribeVoicesRequestParams struct {
 type DescribeVoicesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Voice type. </p><p>Enumeration value: </p><ul><li>system: System audio.</li></ul>
+	// <p>Voice ID.</p>
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// <p>Voice type.</p><p>Enumeration values:</p><ul><li>system: system audio.</li><li>clone: cloned audio.</li><li>design: designed audio.</li><li>all: All voices (default).</li></ul>
 	VoiceType *string `json:"VoiceType,omitnil,omitempty" name:"VoiceType"`
+
+	// <p>Voice name.</p>
+	VoiceName *string `json:"VoiceName,omitnil,omitempty" name:"VoiceName"`
+
+	// <p>Voice description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>Gender.</p><p>Enumeration values:</p><ul><li>male: male</li><li>female: female</li><li>unknown: unknown</li></ul>
+	Gender *string `json:"Gender,omitnil,omitempty" name:"Gender"`
+
+	// <p>Age.</p><p>Enumeration values:</p><ul><li>child: child</li><li>teenager: teenager</li><li>youth: youth</li><li>middle_aged: middle-aged</li><li>senior: senior</li><li>unknown: unknown</li></ul>
+	Age *string `json:"Age,omitnil,omitempty" name:"Age"`
+
+	// <p>Language.</p>
+	Languages []*string `json:"Languages,omitnil,omitempty" name:"Languages"`
+
+	// <p>Tag.</p>
+	Labels []*string `json:"Labels,omitnil,omitempty" name:"Labels"`
+
+	// <p>Scenario.</p>
+	Scenes []*string `json:"Scenes,omitnil,omitempty" name:"Scenes"`
 
 	// <p>Extended parameters in the format of a JSON string. </p><p>Other filter criteria:
 	// voiceName (String): Voice name, fuzzy matching. labels (Array of String): Tags. Matches voices that contain these tags.</p>
@@ -10806,7 +10887,15 @@ func (r *DescribeVoicesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "VoiceId")
 	delete(f, "VoiceType")
+	delete(f, "VoiceName")
+	delete(f, "Description")
+	delete(f, "Gender")
+	delete(f, "Age")
+	delete(f, "Languages")
+	delete(f, "Labels")
+	delete(f, "Scenes")
 	delete(f, "ExtParam")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVoicesRequest has unknown keys!", "")
@@ -11139,6 +11228,12 @@ type DesignVoiceAsyncRequestParams struct {
 	// <p>Voice description.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
+	// <p>Voice attribute.</p>
+	VoiceProfile *VoiceProfile `json:"VoiceProfile,omitnil,omitempty" name:"VoiceProfile"`
+
+	// <p>Audition audio text. The length cannot exceed 500.</p>
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
 	// <p>Extended parameters in the format of a JSON string.</p>
 	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
 }
@@ -11148,6 +11243,12 @@ type DesignVoiceAsyncRequest struct {
 	
 	// <p>Voice description.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// <p>Voice attribute.</p>
+	VoiceProfile *VoiceProfile `json:"VoiceProfile,omitnil,omitempty" name:"VoiceProfile"`
+
+	// <p>Audition audio text. The length cannot exceed 500.</p>
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
 	// <p>Extended parameters in the format of a JSON string.</p>
 	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
@@ -11166,6 +11267,8 @@ func (r *DesignVoiceAsyncRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Prompt")
+	delete(f, "VoiceProfile")
+	delete(f, "Text")
 	delete(f, "ExtParam")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DesignVoiceAsyncRequest has unknown keys!", "")
@@ -11201,6 +11304,153 @@ func (r *DesignVoiceAsyncResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DesignVoiceAsyncResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DetectVideoSubtitleAreaRequestParams struct {
+	// <p>Input information, which supports only URL and COS.</p>
+	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// <p>Video language. If you know the language of the video, you can specify this parameter to improve the recognition accuracy.</p><p>Enumeration values:</p><ul><li>zh_en: Chinese and English</li><li>en: English</li><li>ja: Japanese</li><li>ko: Korean</li></ul>
+	VideoLanguage *string `json:"VideoLanguage,omitnil,omitempty" name:"VideoLanguage"`
+
+	// <p>Extended parameter. This is left empty by default.</p>
+	UserExtPara *string `json:"UserExtPara,omitnil,omitempty" name:"UserExtPara"`
+}
+
+type DetectVideoSubtitleAreaRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Input information, which supports only URL and COS.</p>
+	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// <p>Video language. If you know the language of the video, you can specify this parameter to improve the recognition accuracy.</p><p>Enumeration values:</p><ul><li>zh_en: Chinese and English</li><li>en: English</li><li>ja: Japanese</li><li>ko: Korean</li></ul>
+	VideoLanguage *string `json:"VideoLanguage,omitnil,omitempty" name:"VideoLanguage"`
+
+	// <p>Extended parameter. This is left empty by default.</p>
+	UserExtPara *string `json:"UserExtPara,omitnil,omitempty" name:"UserExtPara"`
+}
+
+func (r *DetectVideoSubtitleAreaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetectVideoSubtitleAreaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InputInfo")
+	delete(f, "VideoLanguage")
+	delete(f, "UserExtPara")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetectVideoSubtitleAreaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DetectVideoSubtitleAreaResponseParams struct {
+	// <p>Video width.</p><p>Unit: px.</p>
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
+
+	// <p>Video height.</p><p>Unit: px.</p>
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
+
+	// <p>Detected subtitle box. If nothing is detected, the value is empty.</p>
+	Result []*SubtitleArea `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DetectVideoSubtitleAreaResponse struct {
+	*tchttp.BaseResponse
+	Response *DetectVideoSubtitleAreaResponseParams `json:"Response"`
+}
+
+func (r *DetectVideoSubtitleAreaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetectVideoSubtitleAreaResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DetectVideoWatermarkRequestParams struct {
+	// <p>Input information, which supports only URL and COS.</p>
+	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// <p>Extended parameter. This is left empty by default.</p>
+	UserExtPara *string `json:"UserExtPara,omitnil,omitempty" name:"UserExtPara"`
+}
+
+type DetectVideoWatermarkRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Input information, which supports only URL and COS.</p>
+	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// <p>Extended parameter. This is left empty by default.</p>
+	UserExtPara *string `json:"UserExtPara,omitnil,omitempty" name:"UserExtPara"`
+}
+
+func (r *DetectVideoWatermarkRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetectVideoWatermarkRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InputInfo")
+	delete(f, "UserExtPara")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetectVideoWatermarkRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DetectVideoWatermarkResponseParams struct {
+	// <p>Confidence of watermark presence.</p><p>Value range: [0, 100].</p>
+	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+
+	// <p>Indicates whether a watermark is present in the video.</p>
+	HasWatermark *bool `json:"HasWatermark,omitnil,omitempty" name:"HasWatermark"`
+
+	// <p>Watermark description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DetectVideoWatermarkResponse struct {
+	*tchttp.BaseResponse
+	Response *DetectVideoWatermarkResponseParams `json:"Response"`
+}
+
+func (r *DetectVideoWatermarkResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetectVideoWatermarkResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -12390,17 +12640,20 @@ type ImageSpriteTemplate struct {
 }
 
 type ImageTaskInput struct {
-	// Image encoding configuration.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Image encoding configuration.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	EncodeConfig *ImageEncodeConfig `json:"EncodeConfig,omitnil,omitempty" name:"EncodeConfig"`
 
-	// Image enhancement configuration.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Image enhancement configuration.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	EnhanceConfig *ImageEnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
 
-	// Image erasing configuration.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Image erasing configuration.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	EraseConfig *ImageEraseConfig `json:"EraseConfig,omitnil,omitempty" name:"EraseConfig"`
+
+
+	AiPosterSuiteConfig *AiPosterSuiteConfig `json:"AiPosterSuiteConfig,omitnil,omitempty" name:"AiPosterSuiteConfig"`
 }
 
 type ImageWatermarkInput struct {
@@ -12469,6 +12722,57 @@ type ImageWatermarkTemplate struct {
 	// <li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
 	// <li>repeat (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitnil,omitempty" name:"RepeatType"`
+}
+
+type LLMDetectionIssue struct {
+	// <p>Issue category tag.</p>
+	Tag *string `json:"Tag,omitnil,omitempty" name:"Tag"`
+
+	// <p>Issue description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>Quality score of the issue. Value range: [0, 100].</p>
+	Score *float64 `json:"Score,omitnil,omitempty" name:"Score"`
+
+	// <p>Detection confidence for the issue. Value range: [0, 100].</p>
+	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+
+	// <p>Issue start time (ms).</p>
+	StartTimeMs *int64 `json:"StartTimeMs,omitnil,omitempty" name:"StartTimeMs"`
+
+	// <p>Issue end time (ms).</p>
+	EndTimeMs *int64 `json:"EndTimeMs,omitnil,omitempty" name:"EndTimeMs"`
+
+	// <p>Additional data (JSON format), such as severity and other supplementary information.</p>
+	ExtraData *string `json:"ExtraData,omitnil,omitempty" name:"ExtraData"`
+}
+
+type LLMDetectionReport struct {
+	// <p>Number of detection results.</p>
+	ResultCount *int64 `json:"ResultCount,omitnil,omitempty" name:"ResultCount"`
+
+	// <p>Detection item result list.</p>
+	ResultSet []*LLMDetectionResultItem `json:"ResultSet,omitnil,omitempty" name:"ResultSet"`
+}
+
+type LLMDetectionResultItem struct {
+	// <p>Detection category.</p><p>Enumeration value:</p><ul><li>AIGCQualityCharacteristics: AIGC quality characteristics.</li></ul>
+	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
+
+	// <p>Detection group.</p><p>Enumeration values:</p><ul><li>AIGCAuthenticity: AIGC authenticity, including human body plausibility, physical plausibility, and cross-frame consistency.</li><li>AIGCTechQuality: AIGC technology quality, including aspect ratio, black border, and forced portrait mode.</li></ul>
+	Group *string `json:"Group,omitnil,omitempty" name:"Group"`
+
+	// <p>Detection type name.</p><p>Enumeration values:</p><ul><li>BodyPoseCheck: Human body pose plausibility, which belongs to AIGCAuthenticity.</li><li>BodyDetailCheck: Human body detail plausibility, including finger count and facial symmetry, which belongs to AIGCAuthenticity.</li><li>PhysicRulesCheck: Physics rules plausibility, including perspective, lighting, and gravity, which belongs to AIGCAuthenticity.</li><li>ObjectConsistencyCheck: Cross-frame object consistency, which belongs to AIGCAuthenticity.</li><li>FormatCheck: Aspect ratio, black border, forced portrait mode, and other format issues, which belong to AIGCTechQuality.</li></ul>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// <p>Overall quality score. Value range: [0, 100]. Higher values indicate better quality.</p>
+	Score *float64 `json:"Score,omitnil,omitempty" name:"Score"`
+
+	// <p>Detection confidence. Value range: [0, 100]. Higher values indicate greater certainty.</p>
+	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+
+	// <p>List of issues detected. This is empty if no issue is detected.</p>
+	IssueSet []*LLMDetectionIssue `json:"IssueSet,omitnil,omitempty" name:"IssueSet"`
 }
 
 type LiveActivityResItem struct {
@@ -15970,76 +16274,68 @@ func (r *ModifySubtitleEmbedTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyTranscodeTemplateRequestParams struct {
-	// Unique ID of a transcoding template.
+	// <p>Unique identifier of the transcoding template.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Container format. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
+	// <p>Container format. Valid values: mp4, flv, hls, mp3, flac, ogg, m4a, and wav. Among them, mp3, flac, ogg, m4a, and wav are for audio-only files.</p>
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
-	// Name of a transcoding template. Length limit: 64 characters.
+	// <p>Transcoding template name. Length limit: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Template description. Length limit: 256 characters.
+	// <p>Transcoding template description. Length limit: 256 characters.</p>
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Whether to remove video data. Valid values:
-	// <li>0: Retain</li>
-	// <li>1: Remove</li>
+	// <p>Indicates whether to remove video data. Valid values:</p><li>0: Data is reserved.</li><li>1: Data is removed.</li>
 	RemoveVideo *int64 `json:"RemoveVideo,omitnil,omitempty" name:"RemoveVideo"`
 
-	// Whether to remove audio data. Valid values:
-	// <li>0: Retain</li>
-	// <li>1: Remove</li>
+	// <p>Indicates whether to remove audio data. Valid values:</p><li>0: Data is reserved.</li><li>1: Data is removed.</li>
 	RemoveAudio *int64 `json:"RemoveAudio,omitnil,omitempty" name:"RemoveAudio"`
 
-	// Video stream configuration parameter.
+	// <p>Video stream configuration parameters.</p>
 	VideoTemplate *VideoTemplateInfoForUpdate `json:"VideoTemplate,omitnil,omitempty" name:"VideoTemplate"`
 
-	// Audio stream configuration parameter.
+	// <p>Audio stream configuration parameters.</p>
 	AudioTemplate *AudioTemplateInfoForUpdate `json:"AudioTemplate,omitnil,omitempty" name:"AudioTemplate"`
 
-	// TESHD transcoding parameter. To enable it, please contact your Tencent Cloud sales rep.
+	// <p>Top Speed Codec transcoding parameters.</p>
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
 
-	// Audio/Video enhancement settings.
+	// <p>Audio/video enhancement parameters.</p>
 	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
 }
 
 type ModifyTranscodeTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Unique ID of a transcoding template.
+	// <p>Unique identifier of the transcoding template.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Container format. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
+	// <p>Container format. Valid values: mp4, flv, hls, mp3, flac, ogg, m4a, and wav. Among them, mp3, flac, ogg, m4a, and wav are for audio-only files.</p>
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
-	// Name of a transcoding template. Length limit: 64 characters.
+	// <p>Transcoding template name. Length limit: 64 characters.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Template description. Length limit: 256 characters.
+	// <p>Transcoding template description. Length limit: 256 characters.</p>
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Whether to remove video data. Valid values:
-	// <li>0: Retain</li>
-	// <li>1: Remove</li>
+	// <p>Indicates whether to remove video data. Valid values:</p><li>0: Data is reserved.</li><li>1: Data is removed.</li>
 	RemoveVideo *int64 `json:"RemoveVideo,omitnil,omitempty" name:"RemoveVideo"`
 
-	// Whether to remove audio data. Valid values:
-	// <li>0: Retain</li>
-	// <li>1: Remove</li>
+	// <p>Indicates whether to remove audio data. Valid values:</p><li>0: Data is reserved.</li><li>1: Data is removed.</li>
 	RemoveAudio *int64 `json:"RemoveAudio,omitnil,omitempty" name:"RemoveAudio"`
 
-	// Video stream configuration parameter.
+	// <p>Video stream configuration parameters.</p>
 	VideoTemplate *VideoTemplateInfoForUpdate `json:"VideoTemplate,omitnil,omitempty" name:"VideoTemplate"`
 
-	// Audio stream configuration parameter.
+	// <p>Audio stream configuration parameters.</p>
 	AudioTemplate *AudioTemplateInfoForUpdate `json:"AudioTemplate,omitnil,omitempty" name:"AudioTemplate"`
 
-	// TESHD transcoding parameter. To enable it, please contact your Tencent Cloud sales rep.
+	// <p>Top Speed Codec transcoding parameters.</p>
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
 
-	// Audio/Video enhancement settings.
+	// <p>Audio/video enhancement parameters.</p>
 	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
 }
 
@@ -17040,7 +17336,7 @@ type ProcessImageTemplate struct {
 
 // Predefined struct for user
 type ProcessLiveStreamRequestParams struct {
-	// <p>The live streaming URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the trtc room number ID, which must be a number.<br><code>&lt;sdkappid&gt;</code> is the trtc SDK app ID.<br><code>&lt;userid&gt;</code> is the user ID of the service entering the room, which can distinguish robots.<br><code>&lt;usersig&gt;</code> is the trtc user's signature.</p><p>WebRTC supports the live stream of <a href="https://www.tencentcloud.com/products/css?from_qcintl=topnav&lang=en&pg=">CSS</a>. To obtain the address, <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">see</a>.</p><p>For SRT-supported addresses, <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a>.</p>
+	// <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// <p>Event notification information of the task. This is used to specify the live stream processing result.</p>
@@ -17083,7 +17379,7 @@ type ProcessLiveStreamRequestParams struct {
 type ProcessLiveStreamRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>The live streaming URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the trtc room number ID, which must be a number.<br><code>&lt;sdkappid&gt;</code> is the trtc SDK app ID.<br><code>&lt;userid&gt;</code> is the user ID of the service entering the room, which can distinguish robots.<br><code>&lt;usersig&gt;</code> is the trtc user's signature.</p><p>WebRTC supports the live stream of <a href="https://www.tencentcloud.com/products/css?from_qcintl=topnav&lang=en&pg=">CSS</a>. To obtain the address, <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">see</a>.</p><p>For SRT-supported addresses, <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a>.</p>
+	// <p>Live stream URL (this must be a live stream address; supported formats include RTMP, HLS, FLV, TRTC, WebRTC, and SRT).<br>TRTC address example:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room ID.<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID.<br><code>&lt;userid&gt;</code> is the ID of the user who enters the room, which can be used to distinguish bots.<br><code>&lt;usersig&gt;</code> is the TRTC user signature.</p><p>WebRTC supports <a href="https://www.tencentcloud.com/product/leb?from_cn_redirect=1">LEB</a> live streams. For more information about how to obtain the address, see <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">this reference</a>.</p><p>For supported SRT addresses, see <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">this reference</a>.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// <p>Event notification information of the task. This is used to specify the live stream processing result.</p>
@@ -17533,6 +17829,9 @@ type QualityControlData struct {
 
 	// <p>Exception items detected in format diagnosis.</p>
 	ContainerDiagnoseResultSet []*ContainerDiagnoseResultItem `json:"ContainerDiagnoseResultSet,omitnil,omitempty" name:"ContainerDiagnoseResultSet"`
+
+	// <p>LLM AIGC quality detection result.</p>
+	LLMDetectionReport *LLMDetectionReport `json:"LLMDetectionReport,omitnil,omitempty" name:"LLMDetectionReport"`
 }
 
 type QualityControlItem struct {
@@ -17958,6 +18257,14 @@ type RawWatermarkParameter struct {
 
 	// Image watermark template. This field is required when `Type` is `image` and is invalid when `Type` is `text`.
 	ImageTemplate *RawImageWatermarkInput `json:"ImageTemplate,omitnil,omitempty" name:"ImageTemplate"`
+}
+
+type RecipeItem struct {
+
+	Theme *string `json:"Theme,omitnil,omitempty" name:"Theme"`
+
+
+	Num *int64 `json:"Num,omitnil,omitempty" name:"Num"`
 }
 
 // Predefined struct for user
@@ -18905,24 +19212,23 @@ type SmartSubtitleTaskAsrFullTextResultOutput struct {
 }
 
 type SmartSubtitleTaskAsrFullTextSegmentItem struct {
-	// Confidence of a recognized segment. Value range: 0-100.
+	// <p>Confidence of the recognized segment. Value range: 0–100.</p>
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Start time offset of a recognized segment, in seconds.
+	// <p>Start time offset of the recognized segment, in seconds.</p>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// End time offset of a recognized segment, in seconds.
+	// <p>End time offset of the recognized segment, in seconds.</p>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// Recognized text.
+	// <p>Recognized text.</p>
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
-	// Word timestamp information.
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Word timestamp information.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Wordlist []*WordResult `json:"Wordlist,omitnil,omitempty" name:"Wordlist"`
 
-	// Speaker ID (if speaker recognition is enabled).
+	// <p>Speaker ID (if speaker recognition is enabled).</p>
 	SpeakerId *string `json:"SpeakerId,omitnil,omitempty" name:"SpeakerId"`
 }
 
@@ -19335,6 +19641,14 @@ type SpekeDrm struct {
 	// preset 0: use the same key to encrypt all substreams
 	// preset1: use different keys for each substream
 	EncryptionPreset *string `json:"EncryptionPreset,omitnil,omitempty" name:"EncryptionPreset"`
+}
+
+type SubtitleArea struct {
+	// <p>Detected subtitle area.</p>
+	Area *EraseArea `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// <p>Confidence of the detected area.</p><p>Value range: [0, 100].</p>
+	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 }
 
 type SubtitleBoardConfig struct {
@@ -19846,10 +20160,16 @@ type SyncDubbingRequestParams struct {
 	// <p>Cloning audio language. The default language is Chinese. <br>Supported languages are the same as those for TextLang.</p>
 	AudioLang *string `json:"AudioLang,omitnil,omitempty" name:"AudioLang"`
 
-	// <p>Output parameters.</p><p>Specifies the output format, etc.</p>
+	// <p>Voice attribute.</p>
+	VoiceProfile *VoiceProfile `json:"VoiceProfile,omitnil,omitempty" name:"VoiceProfile"`
+
+	// <p>Output parameters.</p><p>Specifies the output format, etc. The default output audio format is base64.</p>
 	Output *SyncDubbingOutputOption `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// <p>Extended parameters in the format of a JSON string.</p><p>‑ synExt (Object): Speech synthesis extension parameter.<br>- duration (Float): Synthesized audio duration, in seconds. Example: 5.2.<br>- sampleRate (Integer): Synthesized audio sample rate. Default value: 16000. Supported values: [8000,16000,22050,32000,44100].<br> pitch (Integer): -Pitch. Default value: 0 (original voice output). Valid values: [-12, 12].<br>‑ cloneExt (Object): Voice cloning extension parameter.<br>    - timeRanges (Float[][]): Specifies the time ranges for audio cloning. Default value: [[0, 20]]. Example: [[5.2, 10], [45, 59.8]].</p>
+	// <p>Resource ID. The resource needs to be enabled. The default value is the account's primary resource ID.</p>
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// <p>Extended parameters in the format of a JSON string.</p><p><strong>synExt</strong>    Object    Extended text to speech parameter.<br>  <strong>duration</strong>    Float    Synthesized audio duration, in seconds. Example: 5.2.<br>  <strong>sampleRate</strong>    Integer    Synthesized audio sample rate. Default value: 16000. Valid values: [8000, 16000, 22050, 24000, 32000, 44100].<br>  <strong>pitch</strong>    Integer    Pitch. Default value: 0 (original voice output). Valid values: [-12, 12].<br><strong>cloneExt</strong>    Object    Extended voice cloning parameter.<br>  <strong>timeRanges</strong>    Float[][]    Specifies the time ranges for audio cloning. The default value is the first 20 seconds of the audio. Example: [[5.2, 10], [45, 59.8]].</p>
 	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
 }
 
@@ -19874,10 +20194,16 @@ type SyncDubbingRequest struct {
 	// <p>Cloning audio language. The default language is Chinese. <br>Supported languages are the same as those for TextLang.</p>
 	AudioLang *string `json:"AudioLang,omitnil,omitempty" name:"AudioLang"`
 
-	// <p>Output parameters.</p><p>Specifies the output format, etc.</p>
+	// <p>Voice attribute.</p>
+	VoiceProfile *VoiceProfile `json:"VoiceProfile,omitnil,omitempty" name:"VoiceProfile"`
+
+	// <p>Output parameters.</p><p>Specifies the output format, etc. The default output audio format is base64.</p>
 	Output *SyncDubbingOutputOption `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// <p>Extended parameters in the format of a JSON string.</p><p>‑ synExt (Object): Speech synthesis extension parameter.<br>- duration (Float): Synthesized audio duration, in seconds. Example: 5.2.<br>- sampleRate (Integer): Synthesized audio sample rate. Default value: 16000. Supported values: [8000,16000,22050,32000,44100].<br> pitch (Integer): -Pitch. Default value: 0 (original voice output). Valid values: [-12, 12].<br>‑ cloneExt (Object): Voice cloning extension parameter.<br>    - timeRanges (Float[][]): Specifies the time ranges for audio cloning. Default value: [[0, 20]]. Example: [[5.2, 10], [45, 59.8]].</p>
+	// <p>Resource ID. The resource needs to be enabled. The default value is the account's primary resource ID.</p>
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// <p>Extended parameters in the format of a JSON string.</p><p><strong>synExt</strong>    Object    Extended text to speech parameter.<br>  <strong>duration</strong>    Float    Synthesized audio duration, in seconds. Example: 5.2.<br>  <strong>sampleRate</strong>    Integer    Synthesized audio sample rate. Default value: 16000. Valid values: [8000, 16000, 22050, 24000, 32000, 44100].<br>  <strong>pitch</strong>    Integer    Pitch. Default value: 0 (original voice output). Valid values: [-12, 12].<br><strong>cloneExt</strong>    Object    Extended voice cloning parameter.<br>  <strong>timeRanges</strong>    Float[][]    Specifies the time ranges for audio cloning. The default value is the first 20 seconds of the audio. Example: [[5.2, 10], [45, 59.8]].</p>
 	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
 }
 
@@ -19899,7 +20225,9 @@ func (r *SyncDubbingRequest) FromJsonString(s string) error {
 	delete(f, "AudioData")
 	delete(f, "AudioUrl")
 	delete(f, "AudioLang")
+	delete(f, "VoiceProfile")
 	delete(f, "Output")
+	delete(f, "ResourceId")
 	delete(f, "ExtParam")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SyncDubbingRequest has unknown keys!", "")
@@ -19988,39 +20316,32 @@ type TagConfigureInfoForUpdate struct {
 }
 
 type TaskNotifyConfig struct {
-	// Notification type. available values:.
-	// <li>CMQ: offline. switch to TDMQ-CMQ.</li>.
-	// <Li>TDMQ-CMQ: message queue</li>.
-	// <li>URL: when a URL is specified, the HTTP callback is pushed to the address specified by NotifyUrl. the callback protocol is HTTP+json. the content of the packet body is the same as the output parameters of the parseeventnotification api.</li>.
-	// <Li>SCF: not recommended. additional configuration is required in the console.</li>.
-	// <Li>AWS-SQS: aws queue, suitable for aws tasks only and requires the same region.</li>.
-	// <font color="red">note: if left blank, it is TDMQ-CMQ by default. to use another type, you need to fill in the corresponding type value. if using TDMQ-CMQ message queue, an excessively large task response may cause queue failure.</font>.
+	// <p>Notification type. Valid values:</p><li>CMQ: Removed. We recommend that you switch to TDMQ-CMQ.</li><li>TDMQ-CMQ: TDMQ.</li><li>URL: If URL is specified, HTTP callbacks are pushed to the URL specified in NotifyUrl. The callback protocol is HTTP and JSON. The packet body is the same as the output parameter of the event parsing notification API.</li><li>SCF: This is not recommended. Additional configuration for SCF is required in the console.</li><li>AWS-SQS: AWS queue. This is only suitable for AWS tasks in the same region.</li><font color="red"> Note: The default value is TDMQ-CMQ if this is not specified or empty. To use another type, you need to specify the corresponding value. If TDMQ-CMQ is used, oversized task response may cause failure to write to the queue. </font>
 	NotifyType *string `json:"NotifyType,omitnil,omitempty" name:"NotifyType"`
 
-	// Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
+	// <p>Workflow notification mode. Valid values are Finish and Change. If this is not specified, the default value is Finish.</p>
 	NotifyMode *string `json:"NotifyMode,omitnil,omitempty" name:"NotifyMode"`
 
-	// HTTP callback URL, required if `NotifyType` is set to `URL`
+	// <p>HTTP callback URL. This is required if NotifyType is URL.</p>
 	NotifyUrl *string `json:"NotifyUrl,omitnil,omitempty" name:"NotifyUrl"`
 
-	// The CMQ or TDMQ-CMQ model. Valid values: Queue, Topic.
+	// <p>CMQ or TDMQ for CMQ model. Valid values are Queue and Topic.</p>
 	CmqModel *string `json:"CmqModel,omitnil,omitempty" name:"CmqModel"`
 
-	// The CMQ or TDMQ-CMQ region, such as `sh` (Shanghai) or `bj` (Beijing).
+	// <p>CMQ or TDMQ for CMQ region, such as sh or bj.</p>
 	CmqRegion *string `json:"CmqRegion,omitnil,omitempty" name:"CmqRegion"`
 
-	// The CMQ or TDMQ-CMQ topic to receive notifications. This parameter is valid when `CmqModel` is `Topic`.
+	// <p>This field takes effect if the model is Topic. It indicates the topic name of the CMQ or TDMQ for CMQ for receiving event notifications.</p>
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// The CMQ or TDMQ-CMQ queue to receive notifications. This parameter is valid when `CmqModel` is `Queue`.
+	// <p>This field takes effect if the model is Queue. It indicates the queue name of the CMQ or TDMQ for CMQ for receiving event notifications.</p>
 	QueueName *string `json:"QueueName,omitnil,omitempty" name:"QueueName"`
 
-	// The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.
-	// 
+	// <p>AWS SQS callback. This is required if NotifyType is AWS-SQS.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AwsSQS *AwsSQS `json:"AwsSQS,omitnil,omitempty" name:"AwsSQS"`
 
-	// key used to generate a callback signature.
+	// <p>Key used to generate the callback signature.</p>
 	NotifyKey *string `json:"NotifyKey,omitnil,omitempty" name:"NotifyKey"`
 }
 
@@ -20870,6 +21191,83 @@ type UpdateSmartEraseWatermarkConfig struct {
 	CustomAreas []*EraseTimeArea `json:"CustomAreas,omitnil,omitempty" name:"CustomAreas"`
 }
 
+// Predefined struct for user
+type UpdateVoiceRequestParams struct {
+	// <p>Voice ID.</p>
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// <p>Fields of the updated voice.</p>
+	VoiceFields *VoiceUpdateFields `json:"VoiceFields,omitnil,omitempty" name:"VoiceFields"`
+
+	// <p>Extended parameters in the format of a JSON string.</p>
+	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
+}
+
+type UpdateVoiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Voice ID.</p>
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+
+	// <p>Fields of the updated voice.</p>
+	VoiceFields *VoiceUpdateFields `json:"VoiceFields,omitnil,omitempty" name:"VoiceFields"`
+
+	// <p>Extended parameters in the format of a JSON string.</p>
+	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
+}
+
+func (r *UpdateVoiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateVoiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VoiceId")
+	delete(f, "VoiceFields")
+	delete(f, "ExtParam")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateVoiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateVoiceResponseParams struct {
+	// <p>Error code. 0 is returned if the request is successful.</p>
+	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
+
+	// <p>Error message. success is returned if the request is successful.</p>
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// <p>Voice information after the update.</p>
+	Voice *VoiceInfo `json:"Voice,omitnil,omitempty" name:"Voice"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateVoiceResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateVoiceResponseParams `json:"Response"`
+}
+
+func (r *UpdateVoiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateVoiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type UrlInputInfo struct {
 	// URL of a video.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
@@ -21561,6 +21959,9 @@ type VoiceInfo struct {
 	// <p>Gender. </p><p>Enumeration values: </p><ul><li>male: Male, </li><li>female: Female.</li></ul>
 	Gender *string `json:"Gender,omitnil,omitempty" name:"Gender"`
 
+	// <p>Age.</p><p>Enumeration values:</p><ul><li>child: child</li><li>teenager: teenager</li><li>youth: youth</li><li>middle_aged: middle-aged</li><li>senior: senior</li><li>unknown: unknown</li></ul>
+	Age *string `json:"Age,omitnil,omitempty" name:"Age"`
+
 	// <p>List of supported languages. </p><p>For example: en.</p>
 	Languages []*string `json:"Languages,omitnil,omitempty" name:"Languages"`
 
@@ -21572,6 +21973,55 @@ type VoiceInfo struct {
 
 	// <p>Recommended scenarios. </p><p>For example: education.</p>
 	Scenes []*string `json:"Scenes,omitnil,omitempty" name:"Scenes"`
+}
+
+type VoiceProfile struct {
+	// <p>Voice name.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Voice description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>Gender.</p><p>Enumeration values:</p><ul><li>male: male</li><li>female: female</li><li>unknown: unknown</li></ul>
+	Gender *string `json:"Gender,omitnil,omitempty" name:"Gender"`
+
+	// <p>Age.</p><p>Enumeration values:</p><ul><li>child: child</li><li>teenager: teenager</li><li>youth: youth</li><li>middle_aged: middle-aged</li><li>senior: senior</li><li>unknown: unknown</li></ul>
+	Age *string `json:"Age,omitnil,omitempty" name:"Age"`
+
+	// <p>Language. Supported languages:<br>zh Chinese<br>en English<br>ja Japanese<br>de German<br>fr French<br>ko Korean<br>ru Russian<br>uk Ukrainian<br>pt Portuguese<br>it Italian<br>es Spanish<br>id Indonesian<br>nl Dutch<br>tr Turkish<br>fil Filipino<br>ms Malay<br>el Greek<br>fi Finnish<br>hr Croatian<br>sk Slovak<br>pl Polish<br>sv Swedish<br>hi Hindi<br>bg Bulgarian<br>ro Romanian<br>ar Arabic<br>cs Czech<br>da Danish<br>ta Tamil<br>hun Hungarian<br>vi Vietnamese<br>no Norwegian<br>yue Cantonese<br>th Thai<br>he Hebrew<br>ca Catalan<br>nn Nynorsk<br>af Afrikaans<br>fa Persian<br>sl Slovenian</p>
+	Languages []*string `json:"Languages,omitnil,omitempty" name:"Languages"`
+
+	// <p>Tag.</p>
+	Labels []*string `json:"Labels,omitnil,omitempty" name:"Labels"`
+
+	// <p>Scenario.</p>
+	Scenes []*string `json:"Scenes,omitnil,omitempty" name:"Scenes"`
+}
+
+type VoiceUpdateFields struct {
+	// <p>Voice name.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Voice description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>Gender.</p><p>Enumeration values:</p><ul><li>male: male</li><li>female: female</li><li>unknown: unknown</li></ul>
+	Gender *string `json:"Gender,omitnil,omitempty" name:"Gender"`
+
+	// <p>Age.</p><p>Enumeration values:</p><ul><li>child: child</li><li>teenager: teenager</li><li>youth: youth</li><li>middle_aged: middle-aged</li><li>senior: senior</li><li>unknown: unknown</li></ul>
+	Age *string `json:"Age,omitnil,omitempty" name:"Age"`
+
+	// <p>Language.</p>
+	Languages []*string `json:"Languages,omitnil,omitempty" name:"Languages"`
+
+	// <p>Tag.</p>
+	Labels []*string `json:"Labels,omitnil,omitempty" name:"Labels"`
+
+	// <p>Scenario.</p>
+	Scenes []*string `json:"Scenes,omitnil,omitempty" name:"Scenes"`
+
+	// <p>Audition audio.</p>
+	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
 }
 
 type VolumeBalanceConfig struct {

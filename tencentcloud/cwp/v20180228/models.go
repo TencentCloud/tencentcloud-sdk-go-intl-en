@@ -17633,7 +17633,7 @@ func (r *DescribeLoginTypeGlobalConfRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeLoginTypeGlobalConfResponseParams struct {
-	// <p>Whether uninstall protection is enabled <li>0: No</li> <li>1: Yes</li> <li>9: Not set, equivalent to 0 (disabled)</li></p>
+	// <p>Whether to enable QR code log-in <li>0 No</li> <li>1 Yes</li> <li>9 Not set, same as 0 means not enabled</li></p>
 	Enable *uint64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// <p>Scope <li>0: Selected hosts</li> <li>1: All hosts</li></p>

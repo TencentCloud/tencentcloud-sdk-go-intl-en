@@ -3059,6 +3059,66 @@ func (c *Client) DeleteTranscodeTemplateWithContext(ctx context.Context, request
     return
 }
 
+func NewDeleteVoiceRequest() (request *DeleteVoiceRequest) {
+    request = &DeleteVoiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DeleteVoice")
+    
+    
+    return
+}
+
+func NewDeleteVoiceResponse() (response *DeleteVoiceResponse) {
+    response = &DeleteVoiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteVoice
+// This API is used to delete a voice (created via voice cloning or design).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteVoice(request *DeleteVoiceRequest) (response *DeleteVoiceResponse, err error) {
+    return c.DeleteVoiceWithContext(context.Background(), request)
+}
+
+// DeleteVoice
+// This API is used to delete a voice (created via voice cloning or design).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DEFINITION = "InvalidParameterValue.Definition"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteVoiceWithContext(ctx context.Context, request *DeleteVoiceRequest) (response *DeleteVoiceResponse, err error) {
+    if request == nil {
+        request = NewDeleteVoiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DeleteVoice")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteVoice require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteVoiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteWatermarkTemplateRequest() (request *DeleteWatermarkTemplateRequest) {
     request = &DeleteWatermarkTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5345,7 +5405,7 @@ func NewDesignVoiceAsyncResponse() (response *DesignVoiceAsyncResponse) {
 }
 
 // DesignVoiceAsync
-// This API is used to design a voice. It generates a voice ID based on a prompt.
+// This API is used to design a voice. It generates a voice ID based on a prompt. The default maximum number of cloned or designed voices is 100.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -5356,7 +5416,7 @@ func (c *Client) DesignVoiceAsync(request *DesignVoiceAsyncRequest) (response *D
 }
 
 // DesignVoiceAsync
-// This API is used to design a voice. It generates a voice ID based on a prompt.
+// This API is used to design a voice. It generates a voice ID based on a prompt. The default maximum number of cloned or designed voices is 100.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -5375,6 +5435,128 @@ func (c *Client) DesignVoiceAsyncWithContext(ctx context.Context, request *Desig
     request.SetContext(ctx)
     
     response = NewDesignVoiceAsyncResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDetectVideoSubtitleAreaRequest() (request *DetectVideoSubtitleAreaRequest) {
+    request = &DetectVideoSubtitleAreaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DetectVideoSubtitleArea")
+    
+    
+    return
+}
+
+func NewDetectVideoSubtitleAreaResponse() (response *DetectVideoSubtitleAreaResponse) {
+    response = &DetectVideoSubtitleAreaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DetectVideoSubtitleArea
+// This API is used to quickly detect the hard subtitle area in a video file.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_RECOGNITIONERROR = "InternalError.RecognitionError"
+//  INVALIDPARAMETER_INPUTINFO = "InvalidParameter.InputInfo"
+//  RESOURCENOTFOUND_DOWNLOADERROR = "ResourceNotFound.DownloadError"
+//  RESOURCENOTFOUND_USERUNREGISTER = "ResourceNotFound.UserUnregister"
+func (c *Client) DetectVideoSubtitleArea(request *DetectVideoSubtitleAreaRequest) (response *DetectVideoSubtitleAreaResponse, err error) {
+    return c.DetectVideoSubtitleAreaWithContext(context.Background(), request)
+}
+
+// DetectVideoSubtitleArea
+// This API is used to quickly detect the hard subtitle area in a video file.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_RECOGNITIONERROR = "InternalError.RecognitionError"
+//  INVALIDPARAMETER_INPUTINFO = "InvalidParameter.InputInfo"
+//  RESOURCENOTFOUND_DOWNLOADERROR = "ResourceNotFound.DownloadError"
+//  RESOURCENOTFOUND_USERUNREGISTER = "ResourceNotFound.UserUnregister"
+func (c *Client) DetectVideoSubtitleAreaWithContext(ctx context.Context, request *DetectVideoSubtitleAreaRequest) (response *DetectVideoSubtitleAreaResponse, err error) {
+    if request == nil {
+        request = NewDetectVideoSubtitleAreaRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DetectVideoSubtitleArea")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DetectVideoSubtitleArea require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDetectVideoSubtitleAreaResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDetectVideoWatermarkRequest() (request *DetectVideoWatermarkRequest) {
+    request = &DetectVideoWatermarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DetectVideoWatermark")
+    
+    
+    return
+}
+
+func NewDetectVideoWatermarkResponse() (response *DetectVideoWatermarkResponse) {
+    response = &DetectVideoWatermarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DetectVideoWatermark
+// This API is used to quickly detect whether a video file contains a watermark.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_RECOGNITIONERROR = "InternalError.RecognitionError"
+//  INVALIDPARAMETER_INPUTINFO = "InvalidParameter.InputInfo"
+//  INVALIDPARAMETERVALUE_DURATIONTOOLONG = "InvalidParameterValue.DurationTooLong"
+//  RESOURCENOTFOUND_DOWNLOADERROR = "ResourceNotFound.DownloadError"
+//  RESOURCENOTFOUND_USERUNREGISTER = "ResourceNotFound.UserUnregister"
+func (c *Client) DetectVideoWatermark(request *DetectVideoWatermarkRequest) (response *DetectVideoWatermarkResponse, err error) {
+    return c.DetectVideoWatermarkWithContext(context.Background(), request)
+}
+
+// DetectVideoWatermark
+// This API is used to quickly detect whether a video file contains a watermark.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_RECOGNITIONERROR = "InternalError.RecognitionError"
+//  INVALIDPARAMETER_INPUTINFO = "InvalidParameter.InputInfo"
+//  INVALIDPARAMETERVALUE_DURATIONTOOLONG = "InvalidParameterValue.DurationTooLong"
+//  RESOURCENOTFOUND_DOWNLOADERROR = "ResourceNotFound.DownloadError"
+//  RESOURCENOTFOUND_USERUNREGISTER = "ResourceNotFound.UserUnregister"
+func (c *Client) DetectVideoWatermarkWithContext(ctx context.Context, request *DetectVideoWatermarkRequest) (response *DetectVideoWatermarkResponse, err error) {
+    if request == nil {
+        request = NewDetectVideoWatermarkRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DetectVideoWatermark")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DetectVideoWatermark require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDetectVideoWatermarkResponse()
     err = c.Send(request, response)
     return
 }
@@ -8011,7 +8193,7 @@ func NewSyncDubbingResponse() (response *SyncDubbingResponse) {
 }
 
 // SyncDubbing
-// This API is used to return the clone voice type Id or synthetic audio results synchronously.
+// This API is used to return the cloned voice ID or synthetic audio result. The default maximum number of cloned or designed voices is 100.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -8023,7 +8205,7 @@ func (c *Client) SyncDubbing(request *SyncDubbingRequest) (response *SyncDubbing
 }
 
 // SyncDubbing
-// This API is used to return the clone voice type Id or synthetic audio results synchronously.
+// This API is used to return the cloned voice ID or synthetic audio result. The default maximum number of cloned or designed voices is 100.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -8213,6 +8395,60 @@ func (c *Client) UpdateProjectWithContext(ctx context.Context, request *UpdatePr
     request.SetContext(ctx)
     
     response = NewUpdateProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateVoiceRequest() (request *UpdateVoiceRequest) {
+    request = &UpdateVoiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "UpdateVoice")
+    
+    
+    return
+}
+
+func NewUpdateVoiceResponse() (response *UpdateVoiceResponse) {
+    response = &UpdateVoiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateVoice
+// This API is used to update the voice information.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_PROJECTNAMEDUPLICATE = "InvalidParameterValue.ProjectNameDuplicate"
+//  INVALIDPARAMETERVALUE_PROJECTNOTFOUND = "InvalidParameterValue.ProjectNotFound"
+//  INVALIDPARAMETERVALUE_USERUNREGISTER = "InvalidParameterValue.UserUnRegister"
+func (c *Client) UpdateVoice(request *UpdateVoiceRequest) (response *UpdateVoiceResponse, err error) {
+    return c.UpdateVoiceWithContext(context.Background(), request)
+}
+
+// UpdateVoice
+// This API is used to update the voice information.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_PROJECTNAMEDUPLICATE = "InvalidParameterValue.ProjectNameDuplicate"
+//  INVALIDPARAMETERVALUE_PROJECTNOTFOUND = "InvalidParameterValue.ProjectNotFound"
+//  INVALIDPARAMETERVALUE_USERUNREGISTER = "InvalidParameterValue.UserUnRegister"
+func (c *Client) UpdateVoiceWithContext(ctx context.Context, request *UpdateVoiceRequest) (response *UpdateVoiceResponse, err error) {
+    if request == nil {
+        request = NewUpdateVoiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "UpdateVoice")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateVoice require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateVoiceResponse()
     err = c.Send(request, response)
     return
 }
