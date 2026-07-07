@@ -45,6 +45,74 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewCreateApiKeyRequest() (request *CreateApiKeyRequest) {
+    request = &CreateApiKeyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "CreateApiKey")
+    
+    
+    return
+}
+
+func NewCreateApiKeyResponse() (response *CreateApiKeyResponse) {
+    response = &CreateApiKeyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateApiKey
+// Create an API key.
+//
+// 
+//
+// Create a new API key. Upon successful creation, return the API Key ID. Specify the platform kind, binding method, and initial state.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) CreateApiKey(request *CreateApiKeyRequest) (response *CreateApiKeyResponse, err error) {
+    return c.CreateApiKeyWithContext(context.Background(), request)
+}
+
+// CreateApiKey
+// Create an API key.
+//
+// 
+//
+// Create a new API key. Upon successful creation, return the API Key ID. Specify the platform kind, binding method, and initial state.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) CreateApiKeyWithContext(ctx context.Context, request *CreateApiKeyRequest) (response *CreateApiKeyResponse, err error) {
+    if request == nil {
+        request = NewCreateApiKeyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "CreateApiKey")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateApiKey require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateApiKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateGlossaryRequest() (request *CreateGlossaryRequest) {
     request = &CreateGlossaryRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -175,6 +243,66 @@ func (c *Client) CreateGlossaryEntriesWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewCreateGlossaryEntriesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteApiKeyRequest() (request *DeleteApiKeyRequest) {
+    request = &DeleteApiKeyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "DeleteApiKey")
+    
+    
+    return
+}
+
+func NewDeleteApiKeyResponse() (response *DeleteApiKeyResponse) {
+    response = &DeleteApiKeyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteApiKey
+// This API is used to delete specified api keys and clean up associated model binding relationships.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DeleteApiKey(request *DeleteApiKeyRequest) (response *DeleteApiKeyResponse, err error) {
+    return c.DeleteApiKeyWithContext(context.Background(), request)
+}
+
+// DeleteApiKey
+// This API is used to delete specified api keys and clean up associated model binding relationships.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DeleteApiKeyWithContext(ctx context.Context, request *DeleteApiKeyRequest) (response *DeleteApiKeyResponse, err error) {
+    if request == nil {
+        request = NewDeleteApiKeyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "DeleteApiKey")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteApiKey require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteApiKeyResponse()
     err = c.Send(request, response)
     return
 }
@@ -441,6 +569,134 @@ func (c *Client) DescribeGlossaryEntriesWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeGlossaryEntriesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyApiKeyInfoRequest() (request *ModifyApiKeyInfoRequest) {
+    request = &ModifyApiKeyInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "ModifyApiKeyInfo")
+    
+    
+    return
+}
+
+func NewModifyApiKeyInfoResponse() (response *ModifyApiKeyInfoResponse) {
+    response = &ModifyApiKeyInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyApiKeyInfo
+// Refresh API key information.
+//
+// 
+//
+// This API is used to update the remark information, IP allowlist and Token quota of an API key (recommended to use QuotaDesired parameter for quota modification). Passing no optional parameters means no modification.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) ModifyApiKeyInfo(request *ModifyApiKeyInfoRequest) (response *ModifyApiKeyInfoResponse, err error) {
+    return c.ModifyApiKeyInfoWithContext(context.Background(), request)
+}
+
+// ModifyApiKeyInfo
+// Refresh API key information.
+//
+// 
+//
+// This API is used to update the remark information, IP allowlist and Token quota of an API key (recommended to use QuotaDesired parameter for quota modification). Passing no optional parameters means no modification.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) ModifyApiKeyInfoWithContext(ctx context.Context, request *ModifyApiKeyInfoRequest) (response *ModifyApiKeyInfoResponse, err error) {
+    if request == nil {
+        request = NewModifyApiKeyInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "ModifyApiKeyInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyApiKeyInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyApiKeyInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyApiKeyStatusRequest() (request *ModifyApiKeyStatusRequest) {
+    request = &ModifyApiKeyStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "ModifyApiKeyStatus")
+    
+    
+    return
+}
+
+func NewModifyApiKeyStatusResponse() (response *ModifyApiKeyStatusResponse) {
+    response = &ModifyApiKeyStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyApiKeyStatus
+// This API is used to enable or disable the status of an api key.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) ModifyApiKeyStatus(request *ModifyApiKeyStatusRequest) (response *ModifyApiKeyStatusResponse, err error) {
+    return c.ModifyApiKeyStatusWithContext(context.Background(), request)
+}
+
+// ModifyApiKeyStatus
+// This API is used to enable or disable the status of an api key.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) ModifyApiKeyStatusWithContext(ctx context.Context, request *ModifyApiKeyStatusRequest) (response *ModifyApiKeyStatusResponse, err error) {
+    if request == nil {
+        request = NewModifyApiKeyStatusRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "ModifyApiKeyStatus")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyApiKeyStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyApiKeyStatusResponse()
     err = c.Send(request, response)
     return
 }
