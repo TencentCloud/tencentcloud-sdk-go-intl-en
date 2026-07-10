@@ -441,6 +441,130 @@ func (c *Client) DeleteGlossaryEntriesWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeApiKeyRequest() (request *DescribeApiKeyRequest) {
+    request = &DescribeApiKeyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "DescribeApiKey")
+    
+    
+    return
+}
+
+func NewDescribeApiKeyResponse() (response *DescribeApiKeyResponse) {
+    response = &DescribeApiKeyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApiKey
+// This API is used to query API Key details based on API Key ID or key value, and return the plaintext key. At least one of ApiKeyId and ApiKey must be input, with priority given to ApiKeyId.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeApiKey(request *DescribeApiKeyRequest) (response *DescribeApiKeyResponse, err error) {
+    return c.DescribeApiKeyWithContext(context.Background(), request)
+}
+
+// DescribeApiKey
+// This API is used to query API Key details based on API Key ID or key value, and return the plaintext key. At least one of ApiKeyId and ApiKey must be input, with priority given to ApiKeyId.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeApiKeyWithContext(ctx context.Context, request *DescribeApiKeyRequest) (response *DescribeApiKeyResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiKeyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "DescribeApiKey")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApiKey require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApiKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeApiKeyListRequest() (request *DescribeApiKeyListRequest) {
+    request = &DescribeApiKeyListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "DescribeApiKeyList")
+    
+    
+    return
+}
+
+func NewDescribeApiKeyListResponse() (response *DescribeApiKeyListResponse) {
+    response = &DescribeApiKeyListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApiKeyList
+// Query API key list.
+//
+// 
+//
+// Query the API key list of the current user with key values in masking display. Support pagination, filtering, and sorting.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeApiKeyList(request *DescribeApiKeyListRequest) (response *DescribeApiKeyListResponse, err error) {
+    return c.DescribeApiKeyListWithContext(context.Background(), request)
+}
+
+// DescribeApiKeyList
+// Query API key list.
+//
+// 
+//
+// Query the API key list of the current user with key values in masking display. Support pagination, filtering, and sorting.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeApiKeyListWithContext(ctx context.Context, request *DescribeApiKeyListRequest) (response *DescribeApiKeyListResponse, err error) {
+    if request == nil {
+        request = NewDescribeApiKeyListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "DescribeApiKeyList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApiKeyList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApiKeyListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeGlossariesRequest() (request *DescribeGlossariesRequest) {
     request = &DescribeGlossariesRequest{
         BaseRequest: &tchttp.BaseRequest{},

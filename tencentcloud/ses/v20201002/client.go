@@ -2321,6 +2321,7 @@ func NewUpdateEmailIdentityResponse() (response *UpdateEmailIdentityResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_DKIMNOTAPPLIED = "FailedOperation.DKIMNotApplied"
 //  FAILEDOPERATION_SERVICENOTAVAILABLE = "FailedOperation.ServiceNotAvailable"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -2339,6 +2340,7 @@ func (c *Client) UpdateEmailIdentity(request *UpdateEmailIdentityRequest) (respo
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_DKIMNOTAPPLIED = "FailedOperation.DKIMNotApplied"
 //  FAILEDOPERATION_SERVICENOTAVAILABLE = "FailedOperation.ServiceNotAvailable"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"

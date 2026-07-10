@@ -20,6 +20,73 @@ import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
+type ApiKeyDetail struct {
+	// API Key ID.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+
+	// Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// API key value. The API response contains the masking value.
+	ApiKey *string `json:"ApiKey,omitnil,omitempty" name:"ApiKey"`
+
+	// Remarks.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Platform type. Currently supported values: maas.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Root account.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Sub-account.
+	SubUin *string `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Status. Valid values: enable, disable.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Binding type. Value: all (all models and services), model_all_endpoint_custom (all models + custom service), model_custom_endpoint_all (custom model + all services), model_custom_endpoint_custom (custom model + custom service).
+	BindType *string `json:"BindType,omitnil,omitempty" name:"BindType"`
+
+	// Creation time. Format: YYYY-MM-DD HH:mm:ss.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Last update time. Format: YYYY-MM-DD HH:mm:ss.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// App ID.
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// Whether it is editable. true means editable, false means non-editable.
+	Editable *bool `json:"Editable,omitnil,omitempty" name:"Editable"`
+
+	// List of bound resources, case-sensitive for endpoint and model kind.
+	BindingItems []*BindingItem `json:"BindingItems,omitnil,omitempty" name:"BindingItems"`
+
+	// IP allowlist. Supports IPv4 and CIDR format. Empty array indicates no restriction.
+	IpWhitelist []*string `json:"IpWhitelist,omitnil,omitempty" name:"IpWhitelist"`
+
+	// This field is empty when Platform is maas.
+	Creator *string `json:"Creator,omitnil,omitempty" name:"Creator"`
+
+	// Multi-dimensional list of Token quota information. This field is not returned when unconfigured.
+	QuotaSet []*QuotaInfo `json:"QuotaSet,omitnil,omitempty" name:"QuotaSet"`
+
+	// Token quota status. An empty string means no configuration. active means configured with current availability. inactive means configured but quota exhausted.
+	QuotaStatus *string `json:"QuotaStatus,omitnil,omitempty" name:"QuotaStatus"`
+}
+
+type BindingItem struct {
+	// Resource ID (model ID or service ID).
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Resource type. Value: endpoint (service), model (model).
+	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
+
+	// Resource status
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
 // Predefined struct for user
 type CreateApiKeyRequestParams struct {
 
@@ -387,6 +454,216 @@ func (r *DeleteGlossaryResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteGlossaryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApiKeyListRequestParams struct {
+	// Platform type. Currently supported values: maas.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Number of returned results, defaults to 20, maximum value 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Filter condition list. Supported filter fields: apikeyId (API Key ID), apiKeyName (name), platform (platform type), status (status), bindType (binding type).
+	Filters []*RequestFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Sorting condition list. Supported sorting field: apiKeyName
+	Sorts []*RequestSort `json:"Sorts,omitnil,omitempty" name:"Sorts"`
+}
+
+type DescribeApiKeyListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Platform type. Currently supported values: maas.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Number of returned results, defaults to 20, maximum value 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Filter condition list. Supported filter fields: apikeyId (API Key ID), apiKeyName (name), platform (platform type), status (status), bindType (binding type).
+	Filters []*RequestFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Sorting condition list. Supported sorting field: apiKeyName
+	Sorts []*RequestSort `json:"Sorts,omitnil,omitempty" name:"Sorts"`
+}
+
+func (r *DescribeApiKeyListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApiKeyListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Platform")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	delete(f, "Sorts")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApiKeyListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApiKeyListResponseParams struct {
+	// API Key List.
+	ApiKeySet []*ApiKeyDetail `json:"ApiKeySet,omitnil,omitempty" name:"ApiKeySet"`
+
+	// Total number of eligible API keys.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeApiKeyListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeApiKeyListResponseParams `json:"Response"`
+}
+
+func (r *DescribeApiKeyListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApiKeyListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApiKeyRequestParams struct {
+	// Platform type. Currently supported values: maas.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// API Key ID. At least one of this or ApiKey is required. Prioritize ApiKeyId.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+
+	// API key plaintext. At least one of it and ApiKeyId must be imported.
+	ApiKey *string `json:"ApiKey,omitnil,omitempty" name:"ApiKey"`
+}
+
+type DescribeApiKeyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Platform type. Currently supported values: maas.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// API Key ID. At least one of this or ApiKey is required. Prioritize ApiKeyId.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+
+	// API key plaintext. At least one of it and ApiKeyId must be imported.
+	ApiKey *string `json:"ApiKey,omitnil,omitempty" name:"ApiKey"`
+}
+
+func (r *DescribeApiKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApiKeyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Platform")
+	delete(f, "ApiKeyId")
+	delete(f, "ApiKey")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApiKeyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApiKeyResponseParams struct {
+	// API Key ID.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+
+	// Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// API Key value (plaintext).
+	ApiKey *string `json:"ApiKey,omitnil,omitempty" name:"ApiKey"`
+
+	// Remarks.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Platform type. Enumerate: maas.
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
+
+	// Root account.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Sub-account.
+	SubUin *string `json:"SubUin,omitnil,omitempty" name:"SubUin"`
+
+	// Status. Valid values: enable, disable.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Binding type. Value: all (all models and access points), model_all_endpoint_custom (all models + custom access point), model_custom_endpoint_all (custom model + all access points), model_custom_endpoint_custom (custom model + custom access point).
+	BindType *string `json:"BindType,omitnil,omitempty" name:"BindType"`
+
+	// Creation time. Format: YYYY-MM-DD HH:mm:ss.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Last update time. Format: YYYY-MM-DD HH:mm:ss.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// App ID.
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// Whether it is editable. true means editable, false means non-editable.
+	Editable *bool `json:"Editable,omitnil,omitempty" name:"Editable"`
+
+	// List of bound resources, case-sensitive for endpoint and model kind.
+	BindingItems []*BindingItem `json:"BindingItems,omitnil,omitempty" name:"BindingItems"`
+
+	// IP allowlist. Supports IPv4 and CIDR format. Empty array indicates no restriction.
+	IpWhitelist []*string `json:"IpWhitelist,omitnil,omitempty" name:"IpWhitelist"`
+
+	// This field is empty when Platform is maas.
+	Creator *string `json:"Creator,omitnil,omitempty" name:"Creator"`
+
+	// Multi-dimensional information of Token quota. This field is not returned when unconfigured.
+	QuotaSet []*QuotaInfo `json:"QuotaSet,omitnil,omitempty" name:"QuotaSet"`
+
+	// Token quota status. An empty string means no configuration. active means configured with current availability. inactive means configured but quota exhausted.
+	QuotaStatus *string `json:"QuotaStatus,omitnil,omitempty" name:"QuotaStatus"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeApiKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeApiKeyResponseParams `json:"Response"`
+}
+
+func (r *DescribeApiKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApiKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -777,6 +1054,29 @@ type ModifyGlossaryEntryInput struct {
 
 	// Target language terminology. Maximum 1000 characters. Remain unchanged if not passed.
 	TargetTerm *string `json:"TargetTerm,omitnil,omitempty" name:"TargetTerm"`
+}
+
+type QuotaInfo struct {
+	// Quota package ID.
+	PkgId *string `json:"PkgId,omitnil,omitempty" name:"PkgId"`
+
+	// Package status. Value: 1 (normal), 3 (exhausted), 4 (terminated).
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Quota period. Value: d (by day), m (monthly), lifetime (total quota, no reset).
+	CycleUnit *string `json:"CycleUnit,omitnil,omitempty" name:"CycleUnit"`
+
+	// Dimensional quota total amount (number of tokens). Use string to avoid precision loss.
+	CycleCredits *string `json:"CycleCredits,omitnil,omitempty" name:"CycleCredits"`
+
+	// Dimensional used amount (number of tokens). Use string literal to avoid precision loss.
+	CycleUsed *string `json:"CycleUsed,omitnil,omitempty" name:"CycleUsed"`
+
+	// Quota effective start time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Quota expiration time.
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 }
 
 type RequestFilter struct {
