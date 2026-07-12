@@ -563,7 +563,7 @@ func NewCreateGrafanaInstanceResponse() (response *CreateGrafanaInstanceResponse
 }
 
 // CreateGrafanaInstance
-// This API is used to create a monthly subscribed TCMG instance of the Basic Edition, with auto-renewal enabled and vouchers not allowed by default.
+// This API is used to create a yearly/monthly subscribed TCMG instance of the Basic Edition, with auto-renewal enabled and vouchers not allowed by default.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -572,12 +572,13 @@ func NewCreateGrafanaInstanceResponse() (response *CreateGrafanaInstanceResponse
 //  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
 //  FAILEDOPERATION_REGIONUNAVAILABLE = "FailedOperation.RegionUnavailable"
 //  FAILEDOPERATION_ZONEUNAVAILABLE = "FailedOperation.ZoneUnavailable"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
 func (c *Client) CreateGrafanaInstance(request *CreateGrafanaInstanceRequest) (response *CreateGrafanaInstanceResponse, err error) {
     return c.CreateGrafanaInstanceWithContext(context.Background(), request)
 }
 
 // CreateGrafanaInstance
-// This API is used to create a monthly subscribed TCMG instance of the Basic Edition, with auto-renewal enabled and vouchers not allowed by default.
+// This API is used to create a yearly/monthly subscribed TCMG instance of the Basic Edition, with auto-renewal enabled and vouchers not allowed by default.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -586,6 +587,7 @@ func (c *Client) CreateGrafanaInstance(request *CreateGrafanaInstanceRequest) (r
 //  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
 //  FAILEDOPERATION_REGIONUNAVAILABLE = "FailedOperation.RegionUnavailable"
 //  FAILEDOPERATION_ZONEUNAVAILABLE = "FailedOperation.ZoneUnavailable"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
 func (c *Client) CreateGrafanaInstanceWithContext(ctx context.Context, request *CreateGrafanaInstanceRequest) (response *CreateGrafanaInstanceResponse, err error) {
     if request == nil {
         request = NewCreateGrafanaInstanceRequest()
@@ -2029,7 +2031,7 @@ func NewDeleteGrafanaInstanceResponse() (response *DeleteGrafanaInstanceResponse
 }
 
 // DeleteGrafanaInstance
-// This API is used to refund a monthly subscribed TCMG instance. Once it is called, the instance cannot be used and will be automatically terminated seven days later.
+// This API is used to refund a yearly/monthly subscribed TCMG instance. Once it is called, the instance cannot be used and will be automatically terminated seven days later.
 //
 // error code that may be returned:
 //  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
@@ -2040,7 +2042,7 @@ func (c *Client) DeleteGrafanaInstance(request *DeleteGrafanaInstanceRequest) (r
 }
 
 // DeleteGrafanaInstance
-// This API is used to refund a monthly subscribed TCMG instance. Once it is called, the instance cannot be used and will be automatically terminated seven days later.
+// This API is used to refund a yearly/monthly subscribed TCMG instance. Once it is called, the instance cannot be used and will be automatically terminated seven days later.
 //
 // error code that may be returned:
 //  AUTHFAILURE_ACCESSCAMFAIL = "AuthFailure.AccessCAMFail"
@@ -5790,6 +5792,7 @@ func NewDescribePrometheusInstanceDetailResponse() (response *DescribePrometheus
 // This API is used to get the details of a TMP instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
@@ -5803,6 +5806,7 @@ func (c *Client) DescribePrometheusInstanceDetail(request *DescribePrometheusIns
 // This API is used to get the details of a TMP instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
@@ -8505,7 +8509,7 @@ func NewResumeGrafanaInstanceResponse() (response *ResumeGrafanaInstanceResponse
 }
 
 // ResumeGrafanaInstance
-// This API is used to renew a monthly subscribed TCMG instance for a month without changing the instance edition. It doesn't apply to running instances.
+// This API is used to renew a yearly/monthly subscribed TCMG instance for a month without changing the instance edition. It doesn't apply to running instances.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -8519,7 +8523,7 @@ func (c *Client) ResumeGrafanaInstance(request *ResumeGrafanaInstanceRequest) (r
 }
 
 // ResumeGrafanaInstance
-// This API is used to renew a monthly subscribed TCMG instance for a month without changing the instance edition. It doesn't apply to running instances.
+// This API is used to renew a yearly/monthly subscribed TCMG instance for a month without changing the instance edition. It doesn't apply to running instances.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

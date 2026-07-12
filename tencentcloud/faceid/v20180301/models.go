@@ -3623,6 +3623,14 @@ type MainlandIDCard struct {
 	// Address
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FormattedAddress *string `json:"FormattedAddress,omitnil,omitempty" name:"FormattedAddress"`
+
+	// Issuing authority
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Authority *string `json:"Authority,omitnil,omitempty" name:"Authority"`
+
+	// Validity period
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ValidDate *string `json:"ValidDate,omitnil,omitempty" name:"ValidDate"`
 }
 
 // Predefined struct for user
@@ -4180,6 +4188,10 @@ type OCRResult struct {
 	// <p>Original document recognition information (the current field will be returned when CheckMode value is 4)</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OriginalCardInfo *string `json:"OriginalCardInfo,omitnil,omitempty" name:"OriginalCardInfo"`
+
+	// Base64 of the cropped portrait image extracted from the identity document</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HeadImageBase64 *string `json:"HeadImageBase64,omitnil,omitempty" name:"HeadImageBase64"`
 }
 
 type PakistanDrivingLicense struct {

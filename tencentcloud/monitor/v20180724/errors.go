@@ -239,7 +239,7 @@ const (
 	// InternalError.UnexpectedInternal
 	INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 
-	// Invalid parameter.
+	// Parameter error.
 	INVALIDPARAMETER = "InvalidParameter"
 
 	// InvalidParameter.ClusterNotFound
@@ -328,6 +328,9 @@ const (
 
 	// Unauthorized operation.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+
+	// 
+	UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
 
 	// Unknown parameter.
 	UNKNOWNPARAMETER = "UnknownParameter"

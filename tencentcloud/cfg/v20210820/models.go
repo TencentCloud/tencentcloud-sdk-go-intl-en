@@ -211,6 +211,9 @@ type CreateTaskFromActionRequestParams struct {
 
 	// Automatic experiment pause time, in minutes. If this parameter is left blank, the default value 60 is used.
 	TaskPauseDuration *uint64 `json:"TaskPauseDuration,omitnil,omitempty" name:"TaskPauseDuration"`
+
+
+	TaskTags []*TagWithCreate `json:"TaskTags,omitnil,omitempty" name:"TaskTags"`
 }
 
 type CreateTaskFromActionRequest struct {
@@ -236,6 +239,8 @@ type CreateTaskFromActionRequest struct {
 
 	// Automatic experiment pause time, in minutes. If this parameter is left blank, the default value 60 is used.
 	TaskPauseDuration *uint64 `json:"TaskPauseDuration,omitnil,omitempty" name:"TaskPauseDuration"`
+
+	TaskTags []*TagWithCreate `json:"TaskTags,omitnil,omitempty" name:"TaskTags"`
 }
 
 func (r *CreateTaskFromActionRequest) ToJsonString() string {
@@ -257,6 +262,7 @@ func (r *CreateTaskFromActionRequest) FromJsonString(s string) error {
 	delete(f, "TaskActionGeneralConfiguration")
 	delete(f, "TaskActionCustomConfiguration")
 	delete(f, "TaskPauseDuration")
+	delete(f, "TaskTags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTaskFromActionRequest has unknown keys!", "")
 	}
@@ -765,10 +771,10 @@ type DescribeTaskListRequestParams struct {
 	// Task status for filtering, supporting multiple states (1001: not started; 1002: in progress; 1003: paused; 1004: ended)
 	TaskStatusList []*uint64 `json:"TaskStatusList,omitnil,omitempty" name:"TaskStatusList"`
 
-	// Architecture ID
+
 	ArchId *string `json:"ArchId,omitnil,omitempty" name:"ArchId"`
 
-	// Architecture Name
+
 	ArchName *string `json:"ArchName,omitnil,omitempty" name:"ArchName"`
 }
 
@@ -817,10 +823,8 @@ type DescribeTaskListRequest struct {
 	// Task status for filtering, supporting multiple states (1001: not started; 1002: in progress; 1003: paused; 1004: ended)
 	TaskStatusList []*uint64 `json:"TaskStatusList,omitnil,omitempty" name:"TaskStatusList"`
 
-	// Architecture ID
 	ArchId *string `json:"ArchId,omitnil,omitempty" name:"ArchId"`
 
-	// Architecture Name
 	ArchName *string `json:"ArchName,omitnil,omitempty" name:"ArchName"`
 }
 
@@ -1348,6 +1352,15 @@ type ModifyTaskRunStatusRequestParams struct {
 
 	// Experiment result (This field is required when the experiment status changes to Execution Ended.)
 	Summary *string `json:"Summary,omitnil,omitempty" name:"Summary"`
+
+
+	Issue *string `json:"Issue,omitnil,omitempty" name:"Issue"`
+
+
+	Record *string `json:"Record,omitnil,omitempty" name:"Record"`
+
+
+	IncludeRecordInReport *int64 `json:"IncludeRecordInReport,omitnil,omitempty" name:"IncludeRecordInReport"`
 }
 
 type ModifyTaskRunStatusRequest struct {
@@ -1364,6 +1377,12 @@ type ModifyTaskRunStatusRequest struct {
 
 	// Experiment result (This field is required when the experiment status changes to Execution Ended.)
 	Summary *string `json:"Summary,omitnil,omitempty" name:"Summary"`
+
+	Issue *string `json:"Issue,omitnil,omitempty" name:"Issue"`
+
+	Record *string `json:"Record,omitnil,omitempty" name:"Record"`
+
+	IncludeRecordInReport *int64 `json:"IncludeRecordInReport,omitnil,omitempty" name:"IncludeRecordInReport"`
 }
 
 func (r *ModifyTaskRunStatusRequest) ToJsonString() string {
@@ -1382,6 +1401,9 @@ func (r *ModifyTaskRunStatusRequest) FromJsonString(s string) error {
 	delete(f, "Status")
 	delete(f, "IsExpect")
 	delete(f, "Summary")
+	delete(f, "Issue")
+	delete(f, "Record")
+	delete(f, "IncludeRecordInReport")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTaskRunStatusRequest has unknown keys!", "")
 	}
