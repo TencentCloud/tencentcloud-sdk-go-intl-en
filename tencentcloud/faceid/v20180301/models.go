@@ -3594,41 +3594,41 @@ type MacaoIDCard struct {
 }
 
 type MainlandIDCard struct {
-	// Chinese name
+	// <p>name</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FullName *string `json:"FullName,omitnil,omitempty" name:"FullName"`
 
-	// Sex
+	// <p>Gender</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
 
-	// Nation
+	// <p>Ethnicity</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Nation *string `json:"Nation,omitnil,omitempty" name:"Nation"`
 
-	// Birthday
+	// <p>Birthday</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 
-	// Address
+	// <p>Address</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	//
 	// Deprecated: Address is deprecated.
 	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 
-	// License number
+	// <p>Identity card number</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	LicenseNumber *string `json:"LicenseNumber,omitnil,omitempty" name:"LicenseNumber"`
 
-	// Address
+	// <p>Address</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FormattedAddress *string `json:"FormattedAddress,omitnil,omitempty" name:"FormattedAddress"`
 
-	// Issuing authority
+	// <p>Issuing authority</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Authority *string `json:"Authority,omitnil,omitempty" name:"Authority"`
 
-	// Validity period
+	// <p>Validity period</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ValidDate *string `json:"ValidDate,omitnil,omitempty" name:"ValidDate"`
 }
@@ -4155,7 +4155,7 @@ type OCRResult struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsPass *bool `json:"IsPass,omitnil,omitempty" name:"IsPass"`
 
-	// <p>Base64 of the ID image</p>
+	// <p>Base64 of the front side ID image</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CardImageBase64 *string `json:"CardImageBase64,omitnil,omitempty" name:"CardImageBase64"`
 
@@ -4189,9 +4189,13 @@ type OCRResult struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OriginalCardInfo *string `json:"OriginalCardInfo,omitnil,omitempty" name:"OriginalCardInfo"`
 
-	// Base64 of the cropped portrait image extracted from the identity document</p>
+	// <p>Document portrait matting</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HeadImageBase64 *string `json:"HeadImageBase64,omitnil,omitempty" name:"HeadImageBase64"`
+
+	// <p>Base64 of the back side ID image</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CardBackImageBase64 *string `json:"CardBackImageBase64,omitnil,omitempty" name:"CardBackImageBase64"`
 }
 
 type PakistanDrivingLicense struct {

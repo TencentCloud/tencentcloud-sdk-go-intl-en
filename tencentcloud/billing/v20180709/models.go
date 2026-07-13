@@ -1987,6 +1987,368 @@ type BillZoneId struct {
 	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 }
 
+type BudgetConditionsForm struct {
+	// <p>Product.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Business []*string `json:"Business,omitnil,omitempty" name:"Business"`
+
+	// <p>Billing mode</p><p>Enumeration value:</p><ul><li>prePay: Monthly Subscription</li><li>postPay: Pay-As-You-Go</li></ul>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PayMode []*string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// <p>Subproduct</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProductCodes []*string `json:"ProductCodes,omitnil,omitempty" name:"ProductCodes"`
+
+	// <p>Component code</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ComponentCodes []*string `json:"ComponentCodes,omitnil,omitempty" name:"ComponentCodes"`
+
+	// <p>Region.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// <p>AZ.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RegionIds []*string `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
+
+	// <p>Project</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectIds []*string `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
+
+	// <p>Transaction type</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ActionTypes []*string `json:"ActionTypes,omitnil,omitempty" name:"ActionTypes"`
+
+	// <p>Consumption type</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ConsumptionTypes []*string `json:"ConsumptionTypes,omitnil,omitempty" name:"ConsumptionTypes"`
+
+	// <p>Tag.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []*TagsForm `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// <p>Leaf-level cost allocation unit</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PayerUins []*string `json:"PayerUins,omitnil,omitempty" name:"PayerUins"`
+
+	// <p>Primary user Uin</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OwnerUins []*string `json:"OwnerUins,omitnil,omitempty" name:"OwnerUins"`
+
+	// <p>Unique key of the leaf-level cost allocation unit</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TreeNodeUniqKeys []*string `json:"TreeNodeUniqKeys,omitnil,omitempty" name:"TreeNodeUniqKeys"`
+}
+
+type BudgetExtend struct {
+	// Budget Name
+	BudgetName *string `json:"BudgetName,omitnil,omitempty" name:"BudgetName"`
+
+	// Budget limit
+	BudgetQuota *string `json:"BudgetQuota,omitnil,omitempty" name:"BudgetQuota"`
+
+	// DAY, MONTH, QUARTER, YEAR
+	CycleType *string `json:"CycleType,omitnil,omitempty" name:"CycleType"`
+
+	// BILL System bill, CONSUMPTION Consumption bill
+	BillType *string `json:"BillType,omitnil,omitempty" name:"BillType"`
+
+	// COST Original price, REAL_COST Actual fee, CASH Cash, INCENTIVE Free credit, VOUCHER Voucher, TRANSFER Allocated fees (royalty amount), TAX Tax, AMOUNT_BEFORE_TAX Cash payment (before tax)
+	FeeType *string `json:"FeeType,omitnil,omitempty" name:"FeeType"`
+
+	// Validity start time 2025-01-01
+	PeriodBegin *string `json:"PeriodBegin,omitnil,omitempty" name:"PeriodBegin"`
+
+	// Validity end time 2025-12-01
+	PeriodEnd *string `json:"PeriodEnd,omitnil,omitempty" name:"PeriodEnd"`
+
+	// COST,USAGE,RI,SP
+	Dimensions *string `json:"Dimensions,omitnil,omitempty" name:"Dimensions"`
+
+	// FIX fixed value, CYCLE different value
+	PlanType *string `json:"PlanType,omitnil,omitempty" name:"PlanType"`
+
+	// threshold alert
+	WarnJson []*BudgetWarn `json:"WarnJson,omitnil,omitempty" name:"WarnJson"`
+
+	// User UIN
+	PayerUin *uint64 `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// fluctuation alert
+	WaveThresholdJson []*WaveThresholdForm `json:"WaveThresholdJson,omitnil,omitempty" name:"WaveThresholdJson"`
+
+	// Budget remark
+	BudgetNote *string `json:"BudgetNote,omitnil,omitempty" name:"BudgetNote"`
+
+	// Custom sending object information
+	SendDetail *string `json:"SendDetail,omitnil,omitempty" name:"SendDetail"`
+
+	// Default uin sent
+	DefaultMode *int64 `json:"DefaultMode,omitnil,omitempty" name:"DefaultMode"`
+
+	// CUS custom budget, ZERO_COST zero-cost budget template, BY_MONTH monthly cost budget template
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TemplateType *string `json:"TemplateType,omitnil,omitempty" name:"TemplateType"`
+
+	// (1, "Not over budget")
+	// (2, "Overspend")
+	MoneyStatus *int64 `json:"MoneyStatus,omitnil,omitempty" name:"MoneyStatus"`
+
+	// Reminder count
+	RemindTimes *int64 `json:"RemindTimes,omitnil,omitempty" name:"RemindTimes"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Update budget time
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Associated Id of the budget
+	BudgetId *string `json:"BudgetId,omitnil,omitempty" name:"BudgetId"`
+
+	// NO_FORECAST (Not set)
+	// FORECAST_NO_DATA (Set up prediction but no data)
+	// FORECAST_HAS_DATA (Set up prediction with predictive data)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HasForecast *string `json:"HasForecast,omitnil,omitempty" name:"HasForecast"`
+
+	// predicted fee
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ForecastCost *string `json:"ForecastCost,omitnil,omitempty" name:"ForecastCost"`
+
+	// Projection progress
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ForecastProgress *string `json:"ForecastProgress,omitnil,omitempty" name:"ForecastProgress"`
+
+	// actual fee
+	RealCost *string `json:"RealCost,omitnil,omitempty" name:"RealCost"`
+
+	// Custom send
+	BudgetSendInfoForm []*BudgetSendInfoDto `json:"BudgetSendInfoForm,omitnil,omitempty" name:"BudgetSendInfoForm"`
+
+	// current cycle
+	CurDateDesc *string `json:"CurDateDesc,omitnil,omitempty" name:"CurDateDesc"`
+
+	// EXPIRED
+	// ACTIVE
+	// UNACTIVATED Invalid
+	// ACTIVATED To be effective
+	BudgetStatus *string `json:"BudgetStatus,omitnil,omitempty" name:"BudgetStatus"`
+
+	// Budget dimension range condition
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DimensionsRange *BudgetConditionsForm `json:"DimensionsRange,omitnil,omitempty" name:"DimensionsRange"`
+
+	// Budget progress
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BudgetProgress *string `json:"BudgetProgress,omitnil,omitempty" name:"BudgetProgress"`
+
+	// Budget Type is set to budget planning and returns the budget limit
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BudgetQuotaJson []*BudgetPlan `json:"BudgetQuotaJson,omitnil,omitempty" name:"BudgetQuotaJson"`
+}
+
+type BudgetInfoApiResponse struct {
+	// Budget project id
+	BudgetId *string `json:"BudgetId,omitnil,omitempty" name:"BudgetId"`
+
+	// Update budget time
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
+type BudgetInfoDiffEntity struct {
+	// Modify properties
+	Property *string `json:"Property,omitnil,omitempty" name:"Property"`
+
+	// Content before modification.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Before *string `json:"Before,omitnil,omitempty" name:"Before"`
+
+	// Content after modification.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	After *string `json:"After,omitnil,omitempty" name:"After"`
+}
+
+type BudgetOperationLogEntity struct {
+	// Payer Uin
+	PayerUin *uint64 `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// User Uin
+	OwnerUin *uint64 `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
+
+	// Operation user Uin
+	OperateUin *uint64 `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
+
+	// Date
+	BillDay *uint64 `json:"BillDay,omitnil,omitempty" name:"BillDay"`
+
+	// month
+	BillMonth *string `json:"BillMonth,omitnil,omitempty" name:"BillMonth"`
+
+	// Modify type: ADD (add new), UPDATE (update), DELETE (delete)
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// modification information
+	DiffValue []*BudgetInfoDiffEntity `json:"DiffValue,omitnil,omitempty" name:"DiffValue"`
+
+	// Creation time.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Modification time.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Modify channel: CONSOLE/API
+	OperationChannel *string `json:"OperationChannel,omitnil,omitempty" name:"OperationChannel"`
+
+	// Budget project id
+	BudgetId *string `json:"BudgetId,omitnil,omitempty" name:"BudgetId"`
+}
+
+type BudgetPlan struct {
+	// Frontend page date display
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DateDesc *string `json:"DateDesc,omitnil,omitempty" name:"DateDesc"`
+
+	// Budget limit
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Quota *string `json:"Quota,omitnil,omitempty" name:"Quota"`
+}
+
+type BudgetRemindRecordList struct {
+	// Optimize COUNT SQL automatically if encounter unresolved jSqlParser case, set the parameter to false
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OptimizeCountSql *bool `json:"OptimizeCountSql,omitnil,omitempty" name:"OptimizeCountSql"`
+
+	// Pagination
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Pages *uint64 `json:"Pages,omitnil,omitempty" name:"Pages"`
+
+	// Sorting field information. When allowing frontend input, be aware of SQL injection issue. Use SqlInjectionUtils.check(...) to check the text.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Orders []*OrderDto `json:"Orders,omitnil,omitempty" name:"Orders"`
+
+	// The statementId for a custom count query in xml can also be set without specifying it. Just add _mpCount after the pagination statementId. For example, for the pagination selectPageById, set the count query statementId to selectPageById_mpCount. The SQL execution can then be found by default.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CountId *string `json:"CountId,omitnil,omitempty" name:"CountId"`
+
+	// Pagination size.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Size *uint64 `json:"Size,omitnil,omitempty" name:"Size"`
+
+	// total amount
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Number of items per page limit
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MaxLimit *string `json:"MaxLimit,omitnil,omitempty" name:"MaxLimit"`
+
+	// Querying the data list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Records []*BudgetRemindRecords `json:"Records,omitnil,omitempty" name:"Records"`
+
+	// Current Page
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Current *uint64 `json:"Current,omitnil,omitempty" name:"Current"`
+
+	// Whether to perform a count query. If you only want to query the list and do not query the total record count, set the parameter to false.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SearchCount *bool `json:"SearchCount,omitnil,omitempty" name:"SearchCount"`
+}
+
+type BudgetRemindRecords struct {
+	// budget period
+	DateDesc *string `json:"DateDesc,omitnil,omitempty" name:"DateDesc"`
+
+	// actual fee
+	RealCost *string `json:"RealCost,omitnil,omitempty" name:"RealCost"`
+
+	// Budget amount limit
+	BudgetQuota *string `json:"BudgetQuota,omitnil,omitempty" name:"BudgetQuota"`
+
+	// Reminder type.
+	// Enumeration values:
+	// BUDGET reminder
+	// Fluctuation alert
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AlarmType *string `json:"AlarmType,omitnil,omitempty" name:"AlarmType"`
+
+	// message content
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MessageContent *string `json:"MessageContent,omitnil,omitempty" name:"MessageContent"`
+
+	// Send time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SendTime *int64 `json:"SendTime,omitnil,omitempty" name:"SendTime"`
+
+	// Creation time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *int64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+}
+
+type BudgetSendInfoDto struct {
+	// Notification cycle, separated by commas.
+	// Enumeration values:
+	// Monday:1
+	// Tuesday:2
+	// Sunday: 7
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WeekDays []*uint64 `json:"WeekDays,omitnil,omitempty" name:"WeekDays"`
+
+	// Reception type.
+	// Enumeration values:
+	// UIN default mode
+	// USER
+	// GROUP User group.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReceiverType *string `json:"ReceiverType,omitnil,omitempty" name:"ReceiverType"`
+
+	// Sending and receiving window HH:mm:ss
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Budget configuration id (budget name)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BudgetId *int64 `json:"BudgetId,omitnil,omitempty" name:"BudgetId"`
+
+	// receiving channel, separated by commas
+	// Enumeration values:
+	// TITLE
+	// Message Center
+	// mail
+	// SMS
+	// WECHAT
+	// VOICE
+	// WeCom
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NoticeWays []*string `json:"NoticeWays,omitnil,omitempty" name:"NoticeWays"`
+
+	// Send start window HH:mm:ss
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// id
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// user id, user group id
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReceiverIds []*uint64 `json:"ReceiverIds,omitnil,omitempty" name:"ReceiverIds"`
+}
+
+type BudgetWarn struct {
+	// ACTUAL amount
+	// FORECAST Amount
+	WarnType *string `json:"WarnType,omitnil,omitempty" name:"WarnType"`
+
+	// PERCENTAGE Percentage of the budget amount, ABS Fixed value
+	CalType *string `json:"CalType,omitnil,omitempty" name:"CalType"`
+
+	// Threshold (greater than or equal to 0)
+	ThresholdValue *string `json:"ThresholdValue,omitnil,omitempty" name:"ThresholdValue"`
+}
+
 type BusinessSummaryInfo struct {
 	// Product code
 	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
@@ -2732,6 +3094,150 @@ func (r *CreateAllocationUnitResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateBudgetRequestParams struct {
+	// Budget Name
+	BudgetName *string `json:"BudgetName,omitnil,omitempty" name:"BudgetName"`
+
+	// DAY, MONTH, QUARTER, YEAR
+	CycleType *string `json:"CycleType,omitnil,omitempty" name:"CycleType"`
+
+	// Validity start time 2025-01-01 (Period: day) / 2025-01 (Period: month)
+	PeriodBegin *string `json:"PeriodBegin,omitnil,omitempty" name:"PeriodBegin"`
+
+	// Validity end time 2025-12-01 (Period: day) / 2025-12 (Cycle: month)
+	PeriodEnd *string `json:"PeriodEnd,omitnil,omitempty" name:"PeriodEnd"`
+
+	// FIX Fixed Budget, CYCLE Budget Planning
+	PlanType *string `json:"PlanType,omitnil,omitempty" name:"PlanType"`
+
+	// Budget amount limit
+	// Pass a fixed value when the schedule type is FIX (fixed budget).
+	// When the schedule type is CYCLE (budget planning), pass [{"dateDesc":"2025-07","quota":"1000"},{"dateDesc":"2025-08","quota":"2000"}].
+	BudgetQuota *string `json:"BudgetQuota,omitnil,omitempty" name:"BudgetQuota"`
+
+	// BILL System bill, CONSUMPTION Consumption bill
+	BillType *string `json:"BillType,omitnil,omitempty" name:"BillType"`
+
+	// COST Original price, REAL_COST Actual fee, CASH Cash, INCENTIVE Free credit, VOUCHER Voucher, TRANSFER Allocated fees (royalty amount), TAX Tax, AMOUNT_BEFORE_TAX Cash payment (before tax)
+	FeeType *string `json:"FeeType,omitnil,omitempty" name:"FeeType"`
+
+	// Threshold alert
+	WarnJson []*BudgetWarn `json:"WarnJson,omitnil,omitempty" name:"WarnJson"`
+
+	// Budget remark
+	BudgetNote *string `json:"BudgetNote,omitnil,omitempty" name:"BudgetNote"`
+
+	// Budget Dimension Range Condition
+	DimensionsRange *BudgetConditionsForm `json:"DimensionsRange,omitnil,omitempty" name:"DimensionsRange"`
+
+	// Fluctuation alert
+	WaveThresholdJson []*WaveThresholdForm `json:"WaveThresholdJson,omitnil,omitempty" name:"WaveThresholdJson"`
+}
+
+type CreateBudgetRequest struct {
+	*tchttp.BaseRequest
+	
+	// Budget Name
+	BudgetName *string `json:"BudgetName,omitnil,omitempty" name:"BudgetName"`
+
+	// DAY, MONTH, QUARTER, YEAR
+	CycleType *string `json:"CycleType,omitnil,omitempty" name:"CycleType"`
+
+	// Validity start time 2025-01-01 (Period: day) / 2025-01 (Period: month)
+	PeriodBegin *string `json:"PeriodBegin,omitnil,omitempty" name:"PeriodBegin"`
+
+	// Validity end time 2025-12-01 (Period: day) / 2025-12 (Cycle: month)
+	PeriodEnd *string `json:"PeriodEnd,omitnil,omitempty" name:"PeriodEnd"`
+
+	// FIX Fixed Budget, CYCLE Budget Planning
+	PlanType *string `json:"PlanType,omitnil,omitempty" name:"PlanType"`
+
+	// Budget amount limit
+	// Pass a fixed value when the schedule type is FIX (fixed budget).
+	// When the schedule type is CYCLE (budget planning), pass [{"dateDesc":"2025-07","quota":"1000"},{"dateDesc":"2025-08","quota":"2000"}].
+	BudgetQuota *string `json:"BudgetQuota,omitnil,omitempty" name:"BudgetQuota"`
+
+	// BILL System bill, CONSUMPTION Consumption bill
+	BillType *string `json:"BillType,omitnil,omitempty" name:"BillType"`
+
+	// COST Original price, REAL_COST Actual fee, CASH Cash, INCENTIVE Free credit, VOUCHER Voucher, TRANSFER Allocated fees (royalty amount), TAX Tax, AMOUNT_BEFORE_TAX Cash payment (before tax)
+	FeeType *string `json:"FeeType,omitnil,omitempty" name:"FeeType"`
+
+	// Threshold alert
+	WarnJson []*BudgetWarn `json:"WarnJson,omitnil,omitempty" name:"WarnJson"`
+
+	// Budget remark
+	BudgetNote *string `json:"BudgetNote,omitnil,omitempty" name:"BudgetNote"`
+
+	// Budget Dimension Range Condition
+	DimensionsRange *BudgetConditionsForm `json:"DimensionsRange,omitnil,omitempty" name:"DimensionsRange"`
+
+	// Fluctuation alert
+	WaveThresholdJson []*WaveThresholdForm `json:"WaveThresholdJson,omitnil,omitempty" name:"WaveThresholdJson"`
+}
+
+func (r *CreateBudgetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBudgetRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BudgetName")
+	delete(f, "CycleType")
+	delete(f, "PeriodBegin")
+	delete(f, "PeriodEnd")
+	delete(f, "PlanType")
+	delete(f, "BudgetQuota")
+	delete(f, "BillType")
+	delete(f, "FeeType")
+	delete(f, "WarnJson")
+	delete(f, "BudgetNote")
+	delete(f, "DimensionsRange")
+	delete(f, "WaveThresholdJson")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBudgetRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateBudgetResponseParams struct {
+	// Create budget return information
+	Data *BudgetInfoApiResponse `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// create success
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Return code
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateBudgetResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateBudgetResponseParams `json:"Response"`
+}
+
+func (r *CreateBudgetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateBudgetResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateGatherRuleRequestParams struct {
 	// Cost allocation unit ID that the rule belongs to.
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
@@ -2945,6 +3451,42 @@ func (r *CreateInstanceResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CreateInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DataForBudgetInfoPage struct {
+	// Pagination
+	Pages *uint64 `json:"Pages,omitnil,omitempty" name:"Pages"`
+
+	// Pagination size.
+	Size *uint64 `json:"Size,omitnil,omitempty" name:"Size"`
+
+	// total amount
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Querying the data list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Records []*BudgetExtend `json:"Records,omitnil,omitempty" name:"Records"`
+
+	// Current Page
+	Current *uint64 `json:"Current,omitnil,omitempty" name:"Current"`
+}
+
+type DataForBudgetOperationLogPage struct {
+	// Pagination
+	Pages *uint64 `json:"Pages,omitnil,omitempty" name:"Pages"`
+
+	// Pagination size.
+	Size *uint64 `json:"Size,omitnil,omitempty" name:"Size"`
+
+	// Total amount
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Querying the data list
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Records []*BudgetOperationLogEntity `json:"Records,omitnil,omitempty" name:"Records"`
+
+	// Current Page
+	Current *uint64 `json:"Current,omitnil,omitempty" name:"Current"`
 }
 
 type Deal struct {
@@ -3216,6 +3758,69 @@ func (r *DeleteAllocationUnitResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteAllocationUnitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteBudgetRequestParams struct {
+	// Budget project id
+	BudgetIds []*string `json:"BudgetIds,omitnil,omitempty" name:"BudgetIds"`
+}
+
+type DeleteBudgetRequest struct {
+	*tchttp.BaseRequest
+	
+	// Budget project id
+	BudgetIds []*string `json:"BudgetIds,omitnil,omitempty" name:"BudgetIds"`
+}
+
+func (r *DeleteBudgetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBudgetRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BudgetIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteBudgetRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteBudgetResponseParams struct {
+	// Return the deleted budget project id
+	Data []*string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Prompt
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Return code
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteBudgetResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteBudgetResponseParams `json:"Response"`
+}
+
+func (r *DeleteBudgetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBudgetResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6740,6 +7345,260 @@ func (r *DescribeBillSummaryResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeBudgetOperationLogRequestParams struct {
+	// Page number
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// Number of Items per Page
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Budget project id
+	BudgetId *string `json:"BudgetId,omitnil,omitempty" name:"BudgetId"`
+}
+
+type DescribeBudgetOperationLogRequest struct {
+	*tchttp.BaseRequest
+	
+	// Page number
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// Number of Items per Page
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Budget project id
+	BudgetId *string `json:"BudgetId,omitnil,omitempty" name:"BudgetId"`
+}
+
+func (r *DescribeBudgetOperationLogRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBudgetOperationLogRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PageNo")
+	delete(f, "PageSize")
+	delete(f, "BudgetId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBudgetOperationLogRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBudgetOperationLogResponseParams struct {
+	// Budget modification record details
+	Data *DataForBudgetOperationLogPage `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// prompt
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Return code
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeBudgetOperationLogResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBudgetOperationLogResponseParams `json:"Response"`
+}
+
+func (r *DescribeBudgetOperationLogResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBudgetOperationLogResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBudgetRemindRecordListRequestParams struct {
+	// Page number, int
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// Number of items per page, integer
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Budget base information association id
+	BudgetId *string `json:"BudgetId,omitnil,omitempty" name:"BudgetId"`
+}
+
+type DescribeBudgetRemindRecordListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Page number, int
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// Number of items per page, integer
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Budget base information association id
+	BudgetId *string `json:"BudgetId,omitnil,omitempty" name:"BudgetId"`
+}
+
+func (r *DescribeBudgetRemindRecordListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBudgetRemindRecordListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PageNo")
+	delete(f, "PageSize")
+	delete(f, "BudgetId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBudgetRemindRecordListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBudgetRemindRecordListResponseParams struct {
+	// Budget configuration properties
+	Data *BudgetRemindRecordList `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Error message prompt.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Error response code
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeBudgetRemindRecordListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBudgetRemindRecordListResponseParams `json:"Response"`
+}
+
+func (r *DescribeBudgetRemindRecordListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBudgetRemindRecordListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBudgetRequestParams struct {
+	// Page number, int
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// Number of items per page, integer
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Budget project id
+	BudgetId *string `json:"BudgetId,omitnil,omitempty" name:"BudgetId"`
+
+	// Budget Name
+	BudgetName *string `json:"BudgetName,omitnil,omitempty" name:"BudgetName"`
+
+	// EXPIRED, ACTIVE, ACTIVATED pending activation
+	BudgetStatus *string `json:"BudgetStatus,omitnil,omitempty" name:"BudgetStatus"`
+
+	// DAY day MONTH monthly QUARTER quarter YEAR annual
+	CycleTypes []*string `json:"CycleTypes,omitnil,omitempty" name:"CycleTypes"`
+}
+
+type DescribeBudgetRequest struct {
+	*tchttp.BaseRequest
+	
+	// Page number, int
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// Number of items per page, integer
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Budget project id
+	BudgetId *string `json:"BudgetId,omitnil,omitempty" name:"BudgetId"`
+
+	// Budget Name
+	BudgetName *string `json:"BudgetName,omitnil,omitempty" name:"BudgetName"`
+
+	// EXPIRED, ACTIVE, ACTIVATED pending activation
+	BudgetStatus *string `json:"BudgetStatus,omitnil,omitempty" name:"BudgetStatus"`
+
+	// DAY day MONTH monthly QUARTER quarter YEAR annual
+	CycleTypes []*string `json:"CycleTypes,omitnil,omitempty" name:"CycleTypes"`
+}
+
+func (r *DescribeBudgetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBudgetRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PageNo")
+	delete(f, "PageSize")
+	delete(f, "BudgetId")
+	delete(f, "BudgetName")
+	delete(f, "BudgetStatus")
+	delete(f, "CycleTypes")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBudgetRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBudgetResponseParams struct {
+	// Budget project detail
+	Data *DataForBudgetInfoPage `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// prompt
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Return code
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeBudgetResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBudgetResponseParams `json:"Response"`
+}
+
+func (r *DescribeBudgetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBudgetResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeCPQBillingMappingRequestParams struct {
 	// Offset
 	Offset *string `json:"Offset,omitnil,omitempty" name:"Offset"`
@@ -9095,6 +9954,158 @@ func (r *ModifyAllocationUnitResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyBudgetRequestParams struct {
+	// Budget project id
+	BudgetId *string `json:"BudgetId,omitnil,omitempty" name:"BudgetId"`
+
+	// Budget Name
+	BudgetName *string `json:"BudgetName,omitnil,omitempty" name:"BudgetName"`
+
+	// DAY, MONTH, QUARTER, YEAR
+	CycleType *string `json:"CycleType,omitnil,omitempty" name:"CycleType"`
+
+	// Validity start time 2025-01-01
+	PeriodBegin *string `json:"PeriodBegin,omitnil,omitempty" name:"PeriodBegin"`
+
+	// Validity End Time 2025-12-01
+	PeriodEnd *string `json:"PeriodEnd,omitnil,omitempty" name:"PeriodEnd"`
+
+	// FIX fixed value, CYCLE different value
+	PlanType *string `json:"PlanType,omitnil,omitempty" name:"PlanType"`
+
+	// Budget amount limit 
+	// Set as a fixed value when the schedule type is fixed budget.
+	// When the schedule type is CYCLE (budget planning), pass [{"dateDesc":"2025-07","quota":"1000"},{"dateDesc":"2025-08","quota":"2000"}].
+	BudgetQuota *string `json:"BudgetQuota,omitnil,omitempty" name:"BudgetQuota"`
+
+	// BILL System bill, CONSUMPTION Consumption bill
+	BillType *string `json:"BillType,omitnil,omitempty" name:"BillType"`
+
+	// COST Original price, REAL_COST Actual fee, CASH Cash, INCENTIVE Free credit, VOUCHER Voucher, TRANSFER Allocated fees (royalty amount), TAX Tax, AMOUNT_BEFORE_TAX Cash payment (pre-tax)
+	FeeType *string `json:"FeeType,omitnil,omitempty" name:"FeeType"`
+
+	// threshold alert
+	WarnJson []*BudgetWarn `json:"WarnJson,omitnil,omitempty" name:"WarnJson"`
+
+	// Budget remark
+	BudgetNote *string `json:"BudgetNote,omitnil,omitempty" name:"BudgetNote"`
+
+	// Budget dimension range condition
+	DimensionsRange *BudgetConditionsForm `json:"DimensionsRange,omitnil,omitempty" name:"DimensionsRange"`
+
+	// fluctuation alert
+	WaveThresholdJson []*WaveThresholdForm `json:"WaveThresholdJson,omitnil,omitempty" name:"WaveThresholdJson"`
+}
+
+type ModifyBudgetRequest struct {
+	*tchttp.BaseRequest
+	
+	// Budget project id
+	BudgetId *string `json:"BudgetId,omitnil,omitempty" name:"BudgetId"`
+
+	// Budget Name
+	BudgetName *string `json:"BudgetName,omitnil,omitempty" name:"BudgetName"`
+
+	// DAY, MONTH, QUARTER, YEAR
+	CycleType *string `json:"CycleType,omitnil,omitempty" name:"CycleType"`
+
+	// Validity start time 2025-01-01
+	PeriodBegin *string `json:"PeriodBegin,omitnil,omitempty" name:"PeriodBegin"`
+
+	// Validity End Time 2025-12-01
+	PeriodEnd *string `json:"PeriodEnd,omitnil,omitempty" name:"PeriodEnd"`
+
+	// FIX fixed value, CYCLE different value
+	PlanType *string `json:"PlanType,omitnil,omitempty" name:"PlanType"`
+
+	// Budget amount limit 
+	// Set as a fixed value when the schedule type is fixed budget.
+	// When the schedule type is CYCLE (budget planning), pass [{"dateDesc":"2025-07","quota":"1000"},{"dateDesc":"2025-08","quota":"2000"}].
+	BudgetQuota *string `json:"BudgetQuota,omitnil,omitempty" name:"BudgetQuota"`
+
+	// BILL System bill, CONSUMPTION Consumption bill
+	BillType *string `json:"BillType,omitnil,omitempty" name:"BillType"`
+
+	// COST Original price, REAL_COST Actual fee, CASH Cash, INCENTIVE Free credit, VOUCHER Voucher, TRANSFER Allocated fees (royalty amount), TAX Tax, AMOUNT_BEFORE_TAX Cash payment (pre-tax)
+	FeeType *string `json:"FeeType,omitnil,omitempty" name:"FeeType"`
+
+	// threshold alert
+	WarnJson []*BudgetWarn `json:"WarnJson,omitnil,omitempty" name:"WarnJson"`
+
+	// Budget remark
+	BudgetNote *string `json:"BudgetNote,omitnil,omitempty" name:"BudgetNote"`
+
+	// Budget dimension range condition
+	DimensionsRange *BudgetConditionsForm `json:"DimensionsRange,omitnil,omitempty" name:"DimensionsRange"`
+
+	// fluctuation alert
+	WaveThresholdJson []*WaveThresholdForm `json:"WaveThresholdJson,omitnil,omitempty" name:"WaveThresholdJson"`
+}
+
+func (r *ModifyBudgetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBudgetRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BudgetId")
+	delete(f, "BudgetName")
+	delete(f, "CycleType")
+	delete(f, "PeriodBegin")
+	delete(f, "PeriodEnd")
+	delete(f, "PlanType")
+	delete(f, "BudgetQuota")
+	delete(f, "BillType")
+	delete(f, "FeeType")
+	delete(f, "WarnJson")
+	delete(f, "BudgetNote")
+	delete(f, "DimensionsRange")
+	delete(f, "WaveThresholdJson")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBudgetRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyBudgetResponseParams struct {
+	// Refresh budget return information
+	Data *BudgetInfoApiResponse `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// update success
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Return code
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyBudgetResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyBudgetResponseParams `json:"Response"`
+}
+
+func (r *ModifyBudgetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBudgetResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyGatherRuleRequestParams struct {
 	// Edit collection rule ID.
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
@@ -9174,6 +10185,16 @@ type OperateRsp struct {
 	// Instance ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+}
+
+type OrderDto struct {
+	// Field
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Column *string `json:"Column,omitnil,omitempty" name:"Column"`
+
+	// whether in ascending order
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Asc *bool `json:"Asc,omitnil,omitempty" name:"Asc"`
 }
 
 // Predefined struct for user
@@ -9852,6 +10873,16 @@ type TagSummaryOverviewItem struct {
 	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
 }
 
+type TagsForm struct {
+	// key
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
+
+	// value
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagValue []*string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
+}
+
 type UinTempAmountModel struct {
 	// User UIN
 	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
@@ -9960,4 +10991,24 @@ type VoucherInfos struct {
 
 	// Coupon issuance time
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+}
+
+type WaveThresholdForm struct {
+	// ACTUAL actual amount, FORECAST forecast amount
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WarnType *string `json:"WarnType,omitnil,omitempty" name:"WarnType"`
+
+	// Fluctuation threshold (equal to or greater than 0)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Threshold *string `json:"Threshold,omitnil,omitempty" name:"Threshold"`
+
+	// Alarm type: chain period-over-period, yoy year-over-year, fix fixed value
+	// Supported types: day-on-day comparison chain day, day-on-day comparison chain weekday, year-on-year comparison by month yoy day, daily fixed value fix day, month-on-month comparison chain month, fixed monthly value fix month
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MetaType *string `json:"MetaType,omitnil,omitempty" name:"MetaType"`
+
+	// Alarm dimension: day, month, weekday
+	// Supported types: day-on-day comparison chain day, day-on-day comparison chain weekday, year-on-year comparison by month yoy day, daily fixed value fix day, month-on-month comparison chain month, fixed monthly value fix month
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
 }
