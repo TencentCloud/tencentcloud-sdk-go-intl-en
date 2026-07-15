@@ -369,7 +369,7 @@ func NewCreateAigcAudioTaskResponse() (response *CreateAigcAudioTaskResponse) {
 }
 
 // CreateAigcAudioTask
-// This API is used to create AIGC audio generation tasks.
+// This API is used to create AI audio generation tasks.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_VIOLATIONCONTENT = "InvalidParameter.ViolationContent"
@@ -378,7 +378,7 @@ func (c *Client) CreateAigcAudioTask(request *CreateAigcAudioTaskRequest) (respo
 }
 
 // CreateAigcAudioTask
-// This API is used to create AIGC audio generation tasks.
+// This API is used to create AI audio generation tasks.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_VIOLATIONCONTENT = "InvalidParameter.ViolationContent"
@@ -3483,7 +3483,7 @@ func NewDescribeAigcAudioTaskResponse() (response *DescribeAigcAudioTaskResponse
 }
 
 // DescribeAigcAudioTask
-// This API is used to query the progress of AIGC audio generation tasks and obtain the generation results.
+// This API is used to query the progress of AIGC video generation tasks and obtain the generation results.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -3497,7 +3497,7 @@ func (c *Client) DescribeAigcAudioTask(request *DescribeAigcAudioTaskRequest) (r
 }
 
 // DescribeAigcAudioTask
-// This API is used to query the progress of AIGC audio generation tasks and obtain the generation results.
+// This API is used to query the progress of AIGC video generation tasks and obtain the generation results.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"

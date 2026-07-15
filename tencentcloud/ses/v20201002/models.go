@@ -21,43 +21,43 @@ import (
 )
 
 type AbuseReport struct {
-	// Send time.
+	// <p>Send time</p>
 	DeliverTime *string `json:"DeliverTime,omitnil,omitempty" name:"DeliverTime"`
 
-	// Sender address.
+	// <p>Sender address</p>
 	OriginalMailFrom *string `json:"OriginalMailFrom,omitnil,omitempty" name:"OriginalMailFrom"`
 
-	// Receive email.
+	// <p>Receive email address</p>
 	OriginalRcptTo *string `json:"OriginalRcptTo,omitnil,omitempty" name:"OriginalRcptTo"`
 
-	// Sender domain name.
+	// <p>Sender domain name</p>
 	FromDomain *string `json:"FromDomain,omitnil,omitempty" name:"FromDomain"`
 
-	// Complaint time.
+	// <p>Complaint time</p>
 	ComplainTime *string `json:"ComplainTime,omitnil,omitempty" name:"ComplainTime"`
 
-	// Recipient domain name.
+	// <p>Recipient domain name</p>
 	Mta *string `json:"Mta,omitnil,omitempty" name:"Mta"`
 
-	// Source IP
+	// <p>Source ip</p>
 	SourceIp *string `json:"SourceIp,omitnil,omitempty" name:"SourceIp"`
 
-	// Data time.
+	// <p>Data time</p>
 	InsertTime *string `json:"InsertTime,omitnil,omitempty" name:"InsertTime"`
 
-	// Template ID
+	// <p>Template ID</p>
 	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
-	// bulkId
+	// <p>bulkId</p>
 	BulkId *string `json:"BulkId,omitnil,omitempty" name:"BulkId"`
 
-	// Message-Id in mail.
+	// <p>Message-Id of the mail</p>
 	MessageId *string `json:"MessageId,omitnil,omitempty" name:"MessageId"`
 
-	// Complaint time.
+	// <p>Complaint time</p>
 	AbuseTime *string `json:"AbuseTime,omitnil,omitempty" name:"AbuseTime"`
 
-	// Email subject.
+	// <p>Email Subject</p>
 	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 }
 
@@ -91,7 +91,7 @@ type BatchSendEmailRequestParams struct {
 	// <p>Recipient list ID</p>
 	ReceiverId *uint64 `json:"ReceiverId,omitnil,omitempty" name:"ReceiverId"`
 
-	// <p>Email Subject</p>
+	// <p>Email Subject</p><p>When sending with templates, supports the use of template variable parameters for fill</p>
 	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 
 	// <p>Task type 1: Send now 2: Scheduled sending 3: Cycle (frequency) sending</p>
@@ -131,7 +131,7 @@ type BatchSendEmailRequest struct {
 	// <p>Recipient list ID</p>
 	ReceiverId *uint64 `json:"ReceiverId,omitnil,omitempty" name:"ReceiverId"`
 
-	// <p>Email Subject</p>
+	// <p>Email Subject</p><p>When sending with templates, supports the use of template variable parameters for fill</p>
 	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 
 	// <p>Task type 1: Send now 2: Scheduled sending 3: Cycle (frequency) sending</p>
@@ -453,26 +453,26 @@ func (r *CreateEmailAddressResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateEmailIdentityRequestParams struct {
-	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
+	// <p>For your sender domain name, recommend using a level 3 or higher domain name. Example: mail.qcloud.com.</p>
 	EmailIdentity *string `json:"EmailIdentity,omitnil,omitempty" name:"EmailIdentity"`
 
-	// Generated dkim key length. valid values: 0 (1024), 1 (2048).
+	// <p>Generated dkim key length. 0:1024, 1:2048</p>
 	DKIMOption *uint64 `json:"DKIMOption,omitnil,omitempty" name:"DKIMOption"`
 
-	// tag.
+	// <p>tag</p>
 	TagList []*TagList `json:"TagList,omitnil,omitempty" name:"TagList"`
 }
 
 type CreateEmailIdentityRequest struct {
 	*tchttp.BaseRequest
 	
-	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
+	// <p>For your sender domain name, recommend using a level 3 or higher domain name. Example: mail.qcloud.com.</p>
 	EmailIdentity *string `json:"EmailIdentity,omitnil,omitempty" name:"EmailIdentity"`
 
-	// Generated dkim key length. valid values: 0 (1024), 1 (2048).
+	// <p>Generated dkim key length. 0:1024, 1:2048</p>
 	DKIMOption *uint64 `json:"DKIMOption,omitnil,omitempty" name:"DKIMOption"`
 
-	// tag.
+	// <p>tag</p>
 	TagList []*TagList `json:"TagList,omitnil,omitempty" name:"TagList"`
 }
 
@@ -499,14 +499,17 @@ func (r *CreateEmailIdentityRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateEmailIdentityResponseParams struct {
-	// Verification type. The value is fixed to `DOMAIN`.
+	// <p>Validation type. Fixed value: DOMAIN</p>
 	IdentityType *string `json:"IdentityType,omitnil,omitempty" name:"IdentityType"`
 
-	// Verification passed or not.
+	// <p>Whether verified</p>
 	VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitnil,omitempty" name:"VerifiedForSendingStatus"`
 
-	// DNS information that needs to be configured.
+	// <p>DNS information needs to be configured</p>
 	Attributes []*DNSAttributes `json:"Attributes,omitnil,omitempty" name:"Attributes"`
+
+	// <p>dkim digits</p><p>Enumeration value:</p><ul><li>0: 1024</li><li>1: 2048</li><li>2: Dual signature</li></ul>
+	DKIMOption *uint64 `json:"DKIMOption,omitnil,omitempty" name:"DKIMOption"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -1215,26 +1218,29 @@ func (r *DeleteReceiverResponse) FromJsonString(s string) error {
 }
 
 type EmailIdentity struct {
-	// Sender domain.
+	// <p>Sender domain name</p>
 	IdentityName *string `json:"IdentityName,omitnil,omitempty" name:"IdentityName"`
 
-	// Verification type. The value is fixed to `DOMAIN`.
+	// <p>Validation type, fixed as DOMAIN</p>
 	IdentityType *string `json:"IdentityType,omitnil,omitempty" name:"IdentityType"`
 
-	// Verification passed or not.
+	// <p>Whether verified</p>
 	SendingEnabled *bool `json:"SendingEnabled,omitnil,omitempty" name:"SendingEnabled"`
 
-	// Current reputation level
+	// <p>Current reputation level</p>
 	CurrentReputationLevel *uint64 `json:"CurrentReputationLevel,omitnil,omitempty" name:"CurrentReputationLevel"`
 
-	// Maximum number of messages sent per day
+	// <p>Maximum message sending capacity of the current day</p>
 	DailyQuota *uint64 `json:"DailyQuota,omitnil,omitempty" name:"DailyQuota"`
 
-	// Independent ip for domain configuration.
+	// <p>Independent ip for domain configuration</p>
 	SendIp []*string `json:"SendIp,omitnil,omitempty" name:"SendIp"`
 
-	// tag.
+	// <p>tag</p>
 	TagList []*TagList `json:"TagList,omitnil,omitempty" name:"TagList"`
+
+	// <p>dkim bit number</p><p>Enumeration value:</p><ul><li>0: 1024</li><li>1: 2048</li><li>2: Dual signature</li></ul><p>Default value: 0</p>
+	DKIMOption *uint64 `json:"DKIMOption,omitnil,omitempty" name:"DKIMOption"`
 }
 
 type EmailSender struct {
@@ -1370,14 +1376,14 @@ func (r *GetAbuseReportResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type GetEmailIdentityRequestParams struct {
-	// Sender domain.
+	// <p>Sender domain name</p>
 	EmailIdentity *string `json:"EmailIdentity,omitnil,omitempty" name:"EmailIdentity"`
 }
 
 type GetEmailIdentityRequest struct {
 	*tchttp.BaseRequest
 	
-	// Sender domain.
+	// <p>Sender domain name</p>
 	EmailIdentity *string `json:"EmailIdentity,omitnil,omitempty" name:"EmailIdentity"`
 }
 
@@ -1402,14 +1408,20 @@ func (r *GetEmailIdentityRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type GetEmailIdentityResponseParams struct {
-	// Verification type. The value is fixed to `DOMAIN`.
+	// <p>Validation type. Fixed value: DOMAIN</p>
 	IdentityType *string `json:"IdentityType,omitnil,omitempty" name:"IdentityType"`
 
-	// Verification passed or not.
+	// <p>Whether verified</p>
 	VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitnil,omitempty" name:"VerifiedForSendingStatus"`
 
-	// DNS configuration details.
+	// <p>DNS configuration detail</p>
 	Attributes []*DNSAttributes `json:"Attributes,omitnil,omitempty" name:"Attributes"`
+
+	// <p>dkim key length</p><p>Enumeration value:</p><ul><li>0: 1024</li><li>1: 2048</li><li>2: both</li></ul>
+	DKIMOption *uint64 `json:"DKIMOption,omitnil,omitempty" name:"DKIMOption"`
+
+	// <p>tag</p>
+	TagList []*TagList `json:"TagList,omitnil,omitempty" name:"TagList"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -2439,7 +2451,7 @@ type SendEmailRequestParams struct {
 	// <p>Sender's email address. If no alias is used, enter the sender's email address directly, for example: noreply@mail.qcloud.com. To use a sender alias, follow this format (note that a space must be used between the alias and the email address): alias+space+&lt;email address&gt;. The alias cannot contain a colon (:).</p>
 	FromEmailAddress *string `json:"FromEmailAddress,omitnil,omitempty" name:"FromEmailAddress"`
 
-	// <p>Email Subject</p>
+	// <p>Email Subject</p><p>When using templates to send, support using template variable parameters for population.</p>
 	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 
 	// <p>Recipient email address, supports up to 50 recipients in mass sending. Note: The email content displays all recipient addresses. For non-mass sending, call the API multiple times to send.<br>At least one of the three parameters Destination/Cc/Bcc must exist.</p>
@@ -2485,7 +2497,7 @@ type SendEmailRequest struct {
 	// <p>Sender's email address. If no alias is used, enter the sender's email address directly, for example: noreply@mail.qcloud.com. To use a sender alias, follow this format (note that a space must be used between the alias and the email address): alias+space+&lt;email address&gt;. The alias cannot contain a colon (:).</p>
 	FromEmailAddress *string `json:"FromEmailAddress,omitnil,omitempty" name:"FromEmailAddress"`
 
-	// <p>Email Subject</p>
+	// <p>Email Subject</p><p>When using templates to send, support using template variable parameters for population.</p>
 	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 
 	// <p>Recipient email address, supports up to 50 recipients in mass sending. Note: The email content displays all recipient addresses. For non-mass sending, call the API multiple times to send.<br>At least one of the three parameters Destination/Cc/Bcc must exist.</p>
@@ -2900,26 +2912,26 @@ func (r *UpdateCustomBlackListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdateEmailIdentityRequestParams struct {
-	// Domain to be verified.
+	// <p>Domain name for request verification</p>
 	EmailIdentity *string `json:"EmailIdentity,omitnil,omitempty" name:"EmailIdentity"`
 
-	// The  DKIMOption parameter is effective or not
+	// <p>Match the new and old APIs in the console</p>
 	NewAPI *bool `json:"NewAPI,omitnil,omitempty" name:"NewAPI"`
 
-	// dkim option, 0: 1024, 1: 2048, 2: both
+	// <p>dkim digits</p><p>Enumeration value:</p><ul><li>0: 1024</li><li>1: 2048</li><li>2: Dual signature</li></ul>
 	DKIMOption *uint64 `json:"DKIMOption,omitnil,omitempty" name:"DKIMOption"`
 }
 
 type UpdateEmailIdentityRequest struct {
 	*tchttp.BaseRequest
 	
-	// Domain to be verified.
+	// <p>Domain name for request verification</p>
 	EmailIdentity *string `json:"EmailIdentity,omitnil,omitempty" name:"EmailIdentity"`
 
-	// The  DKIMOption parameter is effective or not
+	// <p>Match the new and old APIs in the console</p>
 	NewAPI *bool `json:"NewAPI,omitnil,omitempty" name:"NewAPI"`
 
-	// dkim option, 0: 1024, 1: 2048, 2: both
+	// <p>dkim digits</p><p>Enumeration value:</p><ul><li>0: 1024</li><li>1: 2048</li><li>2: Dual signature</li></ul>
 	DKIMOption *uint64 `json:"DKIMOption,omitnil,omitempty" name:"DKIMOption"`
 }
 
@@ -2946,16 +2958,16 @@ func (r *UpdateEmailIdentityRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdateEmailIdentityResponseParams struct {
-	// Verification type. The value is fixed to `DOMAIN`.
+	// <p>Validation type. Fixed value: DOMAIN</p>
 	IdentityType *string `json:"IdentityType,omitnil,omitempty" name:"IdentityType"`
 
-	// Verification passed or not.
+	// <p>Whether verified</p>
 	VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitnil,omitempty" name:"VerifiedForSendingStatus"`
 
-	// DNS information that needs to be configured.
+	// <p>DNS information needs to be configured</p>
 	Attributes []*DNSAttributes `json:"Attributes,omitnil,omitempty" name:"Attributes"`
 
-	// dkim option, 0: 1024, 1: 2048, 2: both
+	// <p>dkim digits</p><p>Enumeration value:</p><ul><li>0: 1024</li><li>1: 2048</li><li>2: Dual signature</li></ul>
 	DKIMOption *uint64 `json:"DKIMOption,omitnil,omitempty" name:"DKIMOption"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3108,27 +3120,27 @@ func (r *UpdateEmailTemplateResponse) FromJsonString(s string) error {
 }
 
 type Volume struct {
-	// Date
+	// <p>Date</p>
 	SendDate *string `json:"SendDate,omitnil,omitempty" name:"SendDate"`
 
-	// Number of email requests.
+	// <p>Request quantity by email</p>
 	RequestCount *uint64 `json:"RequestCount,omitnil,omitempty" name:"RequestCount"`
 
-	// Number of email requests accepted by Tencent Cloud.
+	// <p>Tencent Cloud pass count</p>
 	AcceptedCount *uint64 `json:"AcceptedCount,omitnil,omitempty" name:"AcceptedCount"`
 
-	// Number of delivered emails.
+	// <p>Delivery quantity</p>
 	DeliveredCount *uint64 `json:"DeliveredCount,omitnil,omitempty" name:"DeliveredCount"`
 
-	// Number of users (deduplicated) who opened emails.
+	// <p>Total number of times emails were opened</p>
 	OpenedCount *uint64 `json:"OpenedCount,omitnil,omitempty" name:"OpenedCount"`
 
-	// Number of recipients who clicked on links in emails.
+	// <p>Number of users who clicked the link in the mail</p>
 	ClickedCount *uint64 `json:"ClickedCount,omitnil,omitempty" name:"ClickedCount"`
 
-	// Number of bounced emails.
+	// <p>Bounced count</p>
 	BounceCount *uint64 `json:"BounceCount,omitnil,omitempty" name:"BounceCount"`
 
-	// Number of users for unsubscription.
+	// <p>Number of users for unsubscription</p>
 	UnsubscribeCount *uint64 `json:"UnsubscribeCount,omitnil,omitempty" name:"UnsubscribeCount"`
 }

@@ -267,59 +267,53 @@ type AdaptiveDynamicStreamingInfoItem struct {
 }
 
 type AdaptiveDynamicStreamingTaskInput struct {
-	// Adaptive dynamic streaming template ID.
+	// <p>Adaptive bitrate streaming template ID.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Watermark list. Multiple image or text watermarks up to a maximum of 10 are supported.
+	// <p>Watermark list. Up to 10 image or text watermarks are supported.</p>
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitnil,omitempty" name:"WatermarkSet"`
 
-	// Digital watermark parameter.	
+	// <p>Digital watermark parameter.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	BlindWatermark *BlindWatermarkInput `json:"BlindWatermark,omitnil,omitempty" name:"BlindWatermark"`
 
-	// Target storage for files after adaptive dynamic streaming. If left blank, it inherits the upper-level OutputStorage value.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Target storage for files after adaptive bitrate streaming. If this is not specified, the upper-level OutputStorage value is used.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Output path for the manifest file after adaptive dynamic streaming. It can be either a relative path or an absolute path.
-	// If you need to define an output path, the path must end with `.{format}`. Refer to [Filename Variable Description](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1) for variable names.
-	// Example of relative path:
-	// <li>filename_{variable name}.{format}</li>
-	// <li>filename.{format}</li>
-	// Example of absolute path:
-	// <li>/custom path/filename_{variable name}.{format}</li>
-	// If not filled in, it is a relative path by default: {inputName}_adaptiveDynamicStreaming_{definition}.{format}.
+	// <p>Output path for the manifest file after adaptive bitrate streaming, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">Filename Variables</a>.<br>Relative path example:</p><li>Filename_{variable name}.{format}</li><li>Filename.{format}</li>Absolute path example:<li>/custom path/Filename_{variable name}.{format}</li>If this is not specified, the default relative path is {inputName}_adaptiveDynamicStreaming_{definition}.{format}.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 
-	// After adaptive dynamic streaming, the output path of substream files can only be a relative path. If not filled in, it is a relative path by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}`.
+	// <p>Output path for substream files after adaptive bitrate streaming, which can only be a relative path. If this is not specified, the default relative path is <code>{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}.{format}</code>.</p>
 	SubStreamObjectName *string `json:"SubStreamObjectName,omitnil,omitempty" name:"SubStreamObjectName"`
 
-	// After adaptive dynamic streaming (for HLS only), the output path of segment files can only be a relative path. If not filled in, it is a relative path by default: `{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}`.
+	// <p>Output path for segment files after adaptive bitrate streaming (HLS only), which can only be a relative path. If this is not specified, the default relative path is <code>{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}</code>.</p>
 	SegmentObjectName *string `json:"SegmentObjectName,omitnil,omitempty" name:"SegmentObjectName"`
 
-	// External subtitle feature specifies the subtitle file to be inserted.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>External subtitle feature. Specifies the subtitle file to be inserted.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AddOnSubtitles []*AddOnSubtitle `json:"AddOnSubtitles,omitnil,omitempty" name:"AddOnSubtitles"`
 
-	// Specifies the Drm information.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>DRM information.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DrmInfo *DrmInfo `json:"DrmInfo,omitnil,omitempty" name:"DrmInfo"`
 
-	// Adaptive transcoding template type.
-	// Common: audio/video type.
-	// PureAudio: audio-only.
+	// <p>Adaptive bitrate streaming template type. Valid values:<br>Common: audio and video.<br>PureAudio: audio only.</p>
 	DefinitionType *string `json:"DefinitionType,omitnil,omitempty" name:"DefinitionType"`
 
-	// Hard subtitle (suppression subtitle) feature, specify subtitles source, font size, position and other subtitle parameters.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Hard subtitle (burned-in subtitle) feature. Specifies the subtitle source, font size, location, and other subtitle parameters.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubtitleTemplate *SubtitleTemplate `json:"SubtitleTemplate,omitnil,omitempty" name:"SubtitleTemplate"`
 
-	// Transcoding parameter extension field.
+	// <p>Extended transcoding parameter field.</p>
 	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 
-	// Specifies the frame at the given pts time as a key frame and segments it. unit: milliseconds (relative deviation <=1ms is allowed). when gop and segment duration are specified simultaneously, they function together. note: enable RawPts, keep the frame rate as source, and ensure the passed-in pts time corresponds to a frame in the source.
+	// <p>Specifies frames at specified PTS times as keyframes and splits segments. Unit: milliseconds (relative deviation of up to 1 ms is allowed). When both GOP and segment duration are specified, they function together. Note that you need to enable RawPts, keep the frame rate as that of the source, and ensure the specified PTS time corresponds to a frame in the source.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	KeyPTSList []*int64 `json:"KeyPTSList,omitnil,omitempty" name:"KeyPTSList"`
+
+	// <p>External audio feature. Specifies the audio files to be inserted.</p>
+	AddOnAudios []*AddOnAudio `json:"AddOnAudios,omitnil,omitempty" name:"AddOnAudios"`
 }
 
 type AdaptiveDynamicStreamingTemplate struct {
@@ -401,29 +395,40 @@ type AdaptiveStreamTemplate struct {
 	AudioList []*AudioTemplateInfo `json:"AudioList,omitnil,omitempty" name:"AudioList"`
 }
 
+type AddOnAudio struct {
+	// <p>Audio file input information. Note: (1) Supported audio stream encoding formats: AAC, AC3, EAC3, FLAC, Opus, and MP3. (2) If the segment type set in the adaptive bitrate streaming template is TS, the audio stream encoding format cannot be FLAC.</p>
+	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// <p>Audio track name, such as Chinese or English. Note: Only Chinese characters, letters, digits, spaces, underscores (_), hyphens (-), periods (.), and brackets are supported. The length cannot exceed 64 characters.</p>
+	AudioName *string `json:"AudioName,omitnil,omitempty" name:"AudioName"`
+
+	// <p>Audio track language, such as chi or eng. This follows the ISO 639-2 standard.</p>
+	AudioLanguage *string `json:"AudioLanguage,omitnil,omitempty" name:"AudioLanguage"`
+
+	// <p>Default audio track. When set to true, the current audio is designated as the default audio track. A maximum of 1 default audio track can be specified.</p><p>Default value: false.</p>
+	DefaultTrack *bool `json:"DefaultTrack,omitnil,omitempty" name:"DefaultTrack"`
+}
+
 type AddOnSubtitle struct {
-	// The mode. Valid values:
-	// <li>`subtitle-stream`: Add a subtitle track.</li>
-	// <li>`close-caption-708`: Embed CEA-708 subtitles in SEI frames.</li>
-	// <li>`close-caption-608`: Embed CEA-608 subtitles in SEI frames.</li>
+	// <p>Insertion method. Valid values:</p><li>subtitle-stream: Inserts a subtitle track.</li><li>close-caption-708: Encodes CEA-708 subtitles into SEI frames.</li><li>close-caption-608: Encodes CEA-608 subtitles into SEI frames.</li>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// The subtitle file.
+	// <p>Subtitle file.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Subtitle *MediaInputInfo `json:"Subtitle,omitnil,omitempty" name:"Subtitle"`
 
-	// Subtitle name.
-	// Note: supports Chinese characters, letters, digits, spaces, underscores (_), hyphens (-), periods (.), and parentheses. Max 64 characters.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Subtitle name.<br>Note: Only Chinese characters, letters, digits, spaces, underscores (_), hyphens (-), periods (.), and brackets are supported. The length cannot exceed 64 characters.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SubtitleName *string `json:"SubtitleName,omitnil,omitempty" name:"SubtitleName"`
 
-	// Output format of the subtitle. valid values: "WebVTT", "TTML".
-	// Default value: "WebVTT".
+	// <p>Subtitle language, such as eng.</p>
+	SubtitleLanguage *string `json:"SubtitleLanguage,omitnil,omitempty" name:"SubtitleLanguage"`
+
+	// <p>Subtitle output format. Valid values: {&quot;WebVTT&quot;,&quot;TTML&quot;}.<br>Default value: &quot;WebVTT&quot;.</p>
 	OutputFormat *string `json:"OutputFormat,omitnil,omitempty" name:"OutputFormat"`
 
-	// Default subtitle track. specifies the current subtitle as the default track when true. a maximum of 1 default subtitle track can be specified.
-	// Default value: `false`.
+	// <p>Default subtitle track. When set to true, the current subtitle is designated as the default subtitle track. A maximum of 1 default subtitle track can be specified.<br>Default value: false.</p>
 	DefaultTrack *bool `json:"DefaultTrack,omitnil,omitempty" name:"DefaultTrack"`
 }
 
@@ -1214,28 +1219,28 @@ type AiParagraphInfo struct {
 }
 
 type AiPosterSuiteConfig struct {
-
+	// <p>Image output mode.</p><p>Enumeration values:</p><ul><li>auto: fully automatic mode. CustomVariables can be passed in this mode.</li><li>modify: modification mode. The corresponding description needs to be provided in the AddOnParameter.ExtPrompt field in this mode. CustomVariables cannot be passed in this mode.</li></ul><p>Default value: auto.</p>
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
-
+	// <p>Ecommerce platform visual template ID.</p><p>If you need a personalized visual template, submit a ticket.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-
+	// <p>Sub-image configuration.</p>
 	Recipe []*RecipeItem `json:"Recipe,omitnil,omitempty" name:"Recipe"`
 
-
+	// <p>Sub-image text language.</p><p>Enumeration values:</p><ul><li>zh-CN: Simplified Chinese.</li><li>en-US: American English.</li></ul><p>Default value: zh-CN.</p><p>If you need more languages, submit a ticket.</p>
 	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
 
-
+	// <p>Sub-image aspect ratio.</p><p>Enumeration values:</p><ul><li>1:1: 1:1.</li><li>3:4: 3:4.</li><li>4:3: 4:3.</li><li>9:16: 9:16.</li><li>16:9: 16:9.</li></ul><p>Default value: 1:1.</p>
 	PanelRatio *string `json:"PanelRatio,omitnil,omitempty" name:"PanelRatio"`
 
-
+	// <p>Sub-image resolution.</p><p>Enumeration values:</p><ul><li>720: 720.</li><li>1K: 1K.</li><li>2K: 2K.</li><li>4K: 4K.</li></ul><p>Default value: 1K.</p>
 	PanelResolution *string `json:"PanelResolution,omitnil,omitempty" name:"PanelResolution"`
 
-
+	// <p>User-defined variable.</p>
 	CustomVariables []*CustomVariable `json:"CustomVariables,omitnil,omitempty" name:"CustomVariables"`
 
-
+	// <p>Model name.</p><p>Enumeration value:</p><ul><li>WAND-suite-1.0-flash: WAND-suite-1.0-flash.</li></ul>
 	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
 }
 
@@ -2259,33 +2264,33 @@ type AiSampleWordInfo struct {
 }
 
 type AigcAudioExtraParam struct {
-
+	// <p>Resource ID. Specify this based on your needs.</p>
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 }
 
 type AigcAudioOutputAudioInfo struct {
-
+	// <p>Audio URL.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-
+	// <p>Audio duration.</p>
 	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 }
 
 type AigcAudioOutputVideoInfo struct {
-
+	// <p>Video URL.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-
+	// <p>Video duration.</p>
 	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 }
 
 type AigcAudioReferenceAudioInfo struct {
-
+	// <p>Reference audio URL, which must be accessible from the public network.</p>
 	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
 }
 
 type AigcAudioReferenceVideoInfo struct {
-
+	// <p>Reference video URL, which must be accessible from the public network.</p>
 	VideoUrl *string `json:"VideoUrl,omitnil,omitempty" name:"VideoUrl"`
 }
 
@@ -2639,6 +2644,15 @@ type AudioTemplateInfo struct {
 	// <p>Audio track merging information.<br>Note: This field only takes effect for adaptive transcoding.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TrackChannelInfo *AudioTrackChannelInfo `json:"TrackChannelInfo,omitnil,omitempty" name:"TrackChannelInfo"`
+
+	// <p>Audio track language, such as chi or eng. Note: (1) This follows the ISO 639-2 standard. (2) This applies only to adaptive bitrate streaming templates. (3) The value "source" means that the source language is used.</p>
+	AudioLanguage *string `json:"AudioLanguage,omitnil,omitempty" name:"AudioLanguage"`
+
+	// <p>Audio track name, such as Chinese or English. Note: (1) Only Chinese characters, letters, digits, spaces, underscores (_), hyphens (-), periods (.), and brackets are supported. The length cannot exceed 64 characters. (2) This applies only to adaptive bitrate streaming templates. (3) The value "source" means that the source name is used.</p>
+	AudioName *string `json:"AudioName,omitnil,omitempty" name:"AudioName"`
+
+	// <p>Default audio track. When set to true, the current audio track is designated as the default audio track. A maximum of 1 default audio track can be specified.</p><p>Default value: false.</p>
+	DefaultTrack *bool `json:"DefaultTrack,omitnil,omitempty" name:"DefaultTrack"`
 }
 
 type AudioTemplateInfoForUpdate struct {
@@ -3905,74 +3919,74 @@ func (r *CreateAdaptiveDynamicStreamingTemplateResponse) FromJsonString(s string
 
 // Predefined struct for user
 type CreateAigcAudioTaskRequestParams struct {
-	// Model name. Currently supported models for music generation: GL, MinimaxMusic.Example value: MiniMaxMusic
+	// <p>Model name. Supported models for music generation: GL and MiniMaxMusic.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// Specifies the model version. By default, the system uses the supported stable version of the model.Supported versions for GL: 2.0, 3.0-clip, 3.0-pro.Supported versions for MinimaxMusic: 2.0, 2.5, 2.6.Example value: 2.0
+	// <p>Specifies the model version. By default, the system uses the supported stable version of the model.<br>Supported versions for GL: 3.0-clip and 3.0-pro.<br>Supported versions for MinimaxMusic: 2.0, 2.5, and 2.6.</p>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// Specifies the audio generation scene. Music: music.Example value: music
+	// <p>Specifies the scenario for audio generation. Music: music.</p>
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
 
-	// Description of the generated audio. (Note: Supports up to 2000 characters.) This parameter is required when no reference image is passed in.Example value: generate a piece of music
+	// <p>Description of the generated video. (Note: A maximum of 2000 characters is supported.) This parameter is required when no reference image is specified.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
-	// Reference video information. Only supported by certain models.
+	// <p>Reference video information, which is supported by some models.</p>
 	VideoInfos []*AigcAudioReferenceVideoInfo `json:"VideoInfos,omitnil,omitempty" name:"VideoInfos"`
 
-	// Reference audio information.For example, this parameter is required when generating music from a reference audio.
+	// <p>Specify the reference audio information.</p><p>For example, this is required for music generation.</p>
 	AudioInfos []*AigcAudioReferenceAudioInfo `json:"AudioInfos,omitnil,omitempty" name:"AudioInfos"`
 
-	// Output audio format. Empty by default. Supported values: mp3, wav.Example value: wav
+	// <p>Output audio format. By default, this is not specified. Valid values: mp3 and wav.</p>
 	OutputAudioFormat *string `json:"OutputAudioFormat,omitnil,omitempty" name:"OutputAudioFormat"`
 
-	// COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.
+	// <p>COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.</p>
 	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
 
-	// Additional parameters required for the model.
+	// <p>Additional parameters required.</p>
 	ExtraParameters *AigcAudioExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
 
-	// Used to input some special scene parameters required by the model, serialized into a string in JSON format.Example: when passing lyrics to the MinimaxMusic model:{"lyric":{"The pony runs happily, flowers are blooming"}}Example value: {"sequential_image_generation":"auto"}
+	// <p>This is used to specify special scenario parameters required by the model, in the format of a serialized JSON string.<br>Example to specify lyrics for the MinimaxMusic model:<br>{"lyric":{"The pony is running with joy. The flowers are blooming."}}</p>
 	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
 
-	// API operator name.Example value: admin
+	// <p>API operator name.</p>
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 }
 
 type CreateAigcAudioTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// Model name. Currently supported models for music generation: GL, MinimaxMusic.Example value: MiniMaxMusic
+	// <p>Model name. Supported models for music generation: GL and MiniMaxMusic.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// Specifies the model version. By default, the system uses the supported stable version of the model.Supported versions for GL: 2.0, 3.0-clip, 3.0-pro.Supported versions for MinimaxMusic: 2.0, 2.5, 2.6.Example value: 2.0
+	// <p>Specifies the model version. By default, the system uses the supported stable version of the model.<br>Supported versions for GL: 3.0-clip and 3.0-pro.<br>Supported versions for MinimaxMusic: 2.0, 2.5, and 2.6.</p>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
-	// Specifies the audio generation scene. Music: music.Example value: music
+	// <p>Specifies the scenario for audio generation. Music: music.</p>
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
 
-	// Description of the generated audio. (Note: Supports up to 2000 characters.) This parameter is required when no reference image is passed in.Example value: generate a piece of music
+	// <p>Description of the generated video. (Note: A maximum of 2000 characters is supported.) This parameter is required when no reference image is specified.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
-	// Reference video information. Only supported by certain models.
+	// <p>Reference video information, which is supported by some models.</p>
 	VideoInfos []*AigcAudioReferenceVideoInfo `json:"VideoInfos,omitnil,omitempty" name:"VideoInfos"`
 
-	// Reference audio information.For example, this parameter is required when generating music from a reference audio.
+	// <p>Specify the reference audio information.</p><p>For example, this is required for music generation.</p>
 	AudioInfos []*AigcAudioReferenceAudioInfo `json:"AudioInfos,omitnil,omitempty" name:"AudioInfos"`
 
-	// Output audio format. Empty by default. Supported values: mp3, wav.Example value: wav
+	// <p>Output audio format. By default, this is not specified. Valid values: mp3 and wav.</p>
 	OutputAudioFormat *string `json:"OutputAudioFormat,omitnil,omitempty" name:"OutputAudioFormat"`
 
-	// COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.
+	// <p>COS bucket information for the file result. Note: COS is required and the MPS_QcsRole role needs to be created and authorized.</p>
 	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
 
-	// Additional parameters required for the model.
+	// <p>Additional parameters required.</p>
 	ExtraParameters *AigcAudioExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
 
-	// Used to input some special scene parameters required by the model, serialized into a string in JSON format.Example: when passing lyrics to the MinimaxMusic model:{"lyric":{"The pony runs happily, flowers are blooming"}}Example value: {"sequential_image_generation":"auto"}
+	// <p>This is used to specify special scenario parameters required by the model, in the format of a serialized JSON string.<br>Example to specify lyrics for the MinimaxMusic model:<br>{"lyric":{"The pony is running with joy. The flowers are blooming."}}</p>
 	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
 
-	// API operator name.Example value: admin
+	// <p>API operator name.</p>
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 }
 
@@ -4007,7 +4021,7 @@ func (r *CreateAigcAudioTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAigcAudioTaskResponseParams struct {
-	// The task ID returned after the task is created successfully.Call the query API to poll for task progress and the generation result.Example value: 24*******AigcAudio-6a38**3a9f51468da5bfc25****9a462
+	// <p>Returned task ID after the task is created successfully.<br>The task progress and generation results can be obtained by calling the query API.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4053,7 +4067,7 @@ type CreateAigcImageTaskRequestParams struct {
 	// <p>Reference resource images. By default, one image can be specified.</p><p>Models supporting multiple images:</p><ol><li>Kling 2.1 supports up to 4 images as resource image input.</li><li>Kling 3.0-Omni supports up to 10 images as resource image input.</li><li>Kling O1 supports up to 10 images as resource image input.</li><li>Vidu q2 supports up to 7 images as resource image input.</li><li>Hunyuan 3.0 supports up to 3 images as resource image input.</li><li>MJ v7 supports up to 3 images as resource image input.</li></ol><p>Note:</p><ol><li>The recommended image size is less than 7 MB. Different models have different limits.</li><li>Supported image formats: JPEG, PNG, and WebP.</li></ol>
 	ImageInfos []*AigcImageInfo `json:"ImageInfos,omitnil,omitempty" name:"ImageInfos"`
 
-
+	// <p>Specifies the number of output images. One image is supported by default.</p>
 	OutputImageCount *int64 `json:"OutputImageCount,omitnil,omitempty" name:"OutputImageCount"`
 
 	// <p>Additional parameters required for the model.</p>
@@ -4093,6 +4107,7 @@ type CreateAigcImageTaskRequest struct {
 	// <p>Reference resource images. By default, one image can be specified.</p><p>Models supporting multiple images:</p><ol><li>Kling 2.1 supports up to 4 images as resource image input.</li><li>Kling 3.0-Omni supports up to 10 images as resource image input.</li><li>Kling O1 supports up to 10 images as resource image input.</li><li>Vidu q2 supports up to 7 images as resource image input.</li><li>Hunyuan 3.0 supports up to 3 images as resource image input.</li><li>MJ v7 supports up to 3 images as resource image input.</li></ol><p>Note:</p><ol><li>The recommended image size is less than 7 MB. Different models have different limits.</li><li>Supported image formats: JPEG, PNG, and WebP.</li></ol>
 	ImageInfos []*AigcImageInfo `json:"ImageInfos,omitnil,omitempty" name:"ImageInfos"`
 
+	// <p>Specifies the number of output images. One image is supported by default.</p>
 	OutputImageCount *int64 `json:"OutputImageCount,omitnil,omitempty" name:"OutputImageCount"`
 
 	// <p>Additional parameters required for the model.</p>
@@ -6441,10 +6456,10 @@ func (r *CreateWorkflowResponse) FromJsonString(s string) error {
 }
 
 type CustomVariable struct {
-
+	// <p>User-defined variable type.</p><p>Parameter format: PascalCase format.</p><p>This cannot be UserPrompt. The default platform template is not adapted for custom content. Submit a ticket if needed.</p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// <p>Custom variable description.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
@@ -8046,14 +8061,14 @@ func (r *DescribeAdaptiveDynamicStreamingTemplatesResponse) FromJsonString(s str
 
 // Predefined struct for user
 type DescribeAigcAudioTaskRequestParams struct {
-	// The task ID returned when creating the AIGC audio generation task.Example value: 24000145-****d**-cb46b8040b684b539bbd46****e*e2fd
+	// <p>Task ID returned when the AIGC video generation task is created.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type DescribeAigcAudioTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// The task ID returned when creating the AIGC audio generation task.Example value: 24000145-****d**-cb46b8040b684b539bbd46****e*e2fd
+	// <p>Task ID returned when the AIGC video generation task is created.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
@@ -8078,16 +8093,16 @@ func (r *DescribeAigcAudioTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAigcAudioTaskResponseParams struct {
-	// Current task status. WAIT: waiting; RUN: running; FAIL: failed; DONE: successful.Example value: DONE
+	// <p>Current task status. WAIT: waiting. RUN: running. FAIL: failed. DONE: successful.</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// When the task status is FAIL, the failure information is returned.
+	// <p>If the task status is FAIL, the failure information is returned.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Output audio information.
+	// <p>Output audio information.</p>
 	AudioInfos []*AigcAudioOutputAudioInfo `json:"AudioInfos,omitnil,omitempty" name:"AudioInfos"`
 
-	// Output video information. Only returned for scenarios such as video dubbing.
+	// <p>Output video information, which is only available for scenarios such as video dubbing.</p>
 	VideoInfos []*AigcAudioOutputVideoInfo `json:"VideoInfos,omitnil,omitempty" name:"VideoInfos"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -12658,7 +12673,7 @@ type ImageTaskInput struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EraseConfig *ImageEraseConfig `json:"EraseConfig,omitnil,omitempty" name:"EraseConfig"`
 
-
+	// <p>AI image set configuration.</p>
 	AiPosterSuiteConfig *AiPosterSuiteConfig `json:"AiPosterSuiteConfig,omitnil,omitempty" name:"AiPosterSuiteConfig"`
 }
 
@@ -18266,10 +18281,10 @@ type RawWatermarkParameter struct {
 }
 
 type RecipeItem struct {
-
+	// <p>Sub-image type.</p><p>Enumeration values:</p><ul><li>hero: product hero image.</li><li>detail: product details image.</li><li>selling: core selling point image.</li><li>atmosphere: scene atmosphere image.</li><li>angles: multiple-angle image.</li><li>scene: usage scenario image.</li></ul>
 	Theme *string `json:"Theme,omitnil,omitempty" name:"Theme"`
 
-
+	// <p>Number of corresponding sub-images.</p><p>Value range: 1 to 4.</p><p>Unit: image.</p><p>Each type can have up to 4 sub-images. The total number of sub-images must be within the range of 4 to 12.</p>
 	Num *int64 `json:"Num,omitnil,omitempty" name:"Num"`
 }
 
@@ -19285,6 +19300,26 @@ type SmartSubtitleTaskFullTextResult struct {
 	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 }
 
+type SmartSubtitleTaskFullTextSegmentItem struct {
+	// <p>Confidence of the recognized segment. Value range: 0–100.</p>
+	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+
+	// <p>Start time offset of the recognized segment, in seconds.</p>
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
+
+	// <p>End time offset of the recognized segment, in seconds.</p>
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
+
+	// <p>Recognized text.</p>
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// <p>Translated text.</p>
+	Trans *string `json:"Trans,omitnil,omitempty" name:"Trans"`
+
+	// <p>Speaker ID.</p>
+	SpeakerId *string `json:"SpeakerId,omitnil,omitempty" name:"SpeakerId"`
+}
+
 type SmartSubtitleTaskResultInput struct {
 	// <p>Smart subtitle template ID.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
@@ -19298,6 +19333,10 @@ type SmartSubtitleTaskResultInput struct {
 }
 
 type SmartSubtitleTaskTextResultOutput struct {
+	// <p>List of segments for smart subtitle recognition.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SegmentSet []*SmartSubtitleTaskFullTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
+
 	// <p>Subtitle recognition result</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RecognizeSubtitleResult []*SubtitleResult `json:"RecognizeSubtitleResult,omitnil,omitempty" name:"RecognizeSubtitleResult"`
