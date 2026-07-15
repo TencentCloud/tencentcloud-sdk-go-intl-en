@@ -1139,26 +1139,32 @@ func (r *CloseKafkaConsumerResponse) FromJsonString(s string) error {
 }
 
 type CloudProductLogTaskInfo struct {
-	// Service region
+	// <p>Log service region</p>
 	ClsRegion *string `json:"ClsRegion,omitnil,omitempty" name:"ClsRegion"`
 
-	// Instance ID.
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Logset ID
+	// <p>Logset ID</p>
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
-	// Log topic ID
+	// <p>Log topic ID.</p>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Log configuration extended information, generally used for storage of additional log delivery configuration
+	// <p>Extended information for logging configuration, generally used to store additional log delivery configuration</p>
 	Extend *string `json:"Extend,omitnil,omitempty" name:"Extend"`
 
-	// Log type, support enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS
+	// <p>Log type, supports enumeration: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</p>
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
-	// Task status: 0 Creating, 1 Creation completed, 2 Deleting
+	// <p>Task status: 0 creating, 1 creation completed, 2 deleting</p>
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Tag information of the topic associated with the delivery task</p>
+	TopicTags []*Tag `json:"TopicTags,omitnil,omitempty" name:"TopicTags"`
+
+	// <p>Tag information of the logset associated with the delivery task</p>
+	LogsetTags []*Tag `json:"LogsetTags,omitnil,omitempty" name:"LogsetTags"`
 }
 
 type Column struct {
@@ -2024,13 +2030,13 @@ type CreateCloudProductLogCollectionRequestParams struct {
 	// <p>Instance ID</p><ul><li>Obtained through official documentation of connected cloud services</li></ul>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// <p>Cloud product identifier, support enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS</p>
+	// <p>Cloud product identifier. Support the following products</p><ul><li>APIS</li><li>BH</li><li>CDB</li><li>CDS</li><li>CFS</li><li>CLB</li><li>CSIP</li><li>CWP</li><li>DCDB</li><li>DNSPod</li><li>EMR</li><li>HTTPDNS</li><li>KHL</li><li>llmsgw</li><li>MariaDB</li><li>MDP</li><li>MongoDB</li><li>PostgreSQL</li><li>TCSS</li><li>TDSQL-C</li><li>TDStore</li><li>TencentDB-Redis</li><li>TEO</li><li>TokenHub</li><li>TSE</li></ul>
 	AssumerName *string `json:"AssumerName,omitnil,omitempty" name:"AssumerName"`
 
-	// <p>Log type, supports enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</p>
+	// <p>Log types supported by each cloud product are as follows:</p><table><thead><tr><th>assumer_name</th><th>Supported log_type</th></tr></thead><tbody><tr><td>APIS</td><td>APIS-ACCESS</td></tr><tr><td>BH</td><td>BH-COMMANDLOG, BH-FILELOG</td></tr><tr><td>CDB</td><td>CDB-AUDIT</td></tr><tr><td>CDS</td><td>CDS-AUDIT, CDS-RISK</td></tr><tr><td>CFS</td><td>CFS-AUDIT</td></tr><tr><td>CLB</td><td>CMR-SPEND</td></tr><tr><td>CSIP</td><td>CSIP</td></tr><tr><td>CWP</td><td>CWP</td></tr><tr><td>DCDB</td><td>DCDB-AUDIT, DCDB-ERROR, DCDB-SLOW</td></tr><tr><td>DNSPod</td><td>DNSPod-RESOLVELOG</td></tr><tr><td>EMR</td><td>EMR-OPERATION</td></tr><tr><td>HTTPDNS</td><td>HTTPDNS-RESOLVELOG</td></tr><tr><td>MariaDB</td><td>MariaDB-AUDIT, MariaDB-ERROR, MariaDB-SLOW</td></tr><tr><td>MDP</td><td>MDP-SSAI</td></tr><tr><td>MongoDB</td><td>MongoDB-AUDIT, MongoDB-ErrorLog, MongoDB-OperationLog, MongoDB-SlowLog</td></tr><tr><td>PostgreSQL</td><td>PostgreSQL-AUDIT, PostgreSQL-ERROR, PostgreSQL-SLOW</td></tr><tr><td>TCSS</td><td>TCSS</td></tr><tr><td>TDSQL-C</td><td>TDSQL-C-AUDIT</td></tr><tr><td>TDStore</td><td>TDMYSQL-SLOW</td></tr><tr><td>TencentDB-Redis</td><td>Redis-AUDIT, Redis-ERROR, Redis-SLOW</td></tr><tr><td>TEO</td><td>TEO-INEFERENCE</td></tr><tr><td>llmsgw</td><td>llmsgw-mcp-security-alarm</td></tr></tbody></table>
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
-	// <p>Product region. The input parameter format for regions varies by log type (LogType). Refer to the following example:</p><ul><li>All CDS log types: ap-guangzhou</li><li>CDB-AUDIT: gz</li><li>TDSQL-C-AUDIT: gz</li><li>MongoDB-AUDIT: gz</li><li>MongoDB-SlowLog: ap-guangzhou</li><li>MongoDB-ErrorLog: ap-guangzhou</li><li>TDMYSQL-SLOW: gz</li><li>All DCDB log types: gz</li><li>All MariaDB log types: gz</li><li>All PostgreSQL log types: gz</li><li>All BH log types: overseas-polaris (Hong Kong (China) and other)/fsi-polaris (financial district)/general-polaris (general zone)/intl-sg-prod (international site)</li><li>All APIS log types: gz</li></ul>
+	// <p>Product region. Different LogTypes have different input parameter formats:</p><p><strong>Format A: Short region code</strong> (gz / sh / bj …)</p><ul><li>All APIS log types: for example, <code>gz</code></li><li>CDB-AUDIT</li><li>TDSQL-C-AUDIT</li><li>TDMYSQL-SLOW</li><li>All DCDB log types</li><li>All MariaDB log types</li><li>All PostgreSQL log types</li><li>MongoDB-AUDIT (<strong>Note that this is different from SlowLog/ErrorLog/OperationLog</strong>)</li><li>All TencentDB-Redis log types</li><li>EMR-OPERATION</li></ul><p><strong>Format B: Long region code</strong> (ap-guangzhou / ap-shanghai / ap-singapore …)</p><ul><li>All CDS log types: for example, <code>ap-guangzhou</code></li><li>MongoDB-SlowLog / MongoDB-ErrorLog / MongoDB-OperationLog</li><li>DNSPod-RESOLVELOG</li><li>HTTPDNS-RESOLVELOG</li><li>MDP-SSAI</li><li>CFS-AUDIT</li><li>TEO-INEFERENCE</li><li>TokenHub-ActivityLog / TokenHub-AuditLog</li><li>llmsgw-mcp-security-alarm</li><li>CSIP / TCSS / TSE / CWP / KHL and others</li></ul><p><strong>Format C: Dedicated BH Polaris name</strong></p><ul><li>All BH log types: <code>overseas-polaris</code> (Hong Kong (China) and other overseas) / <code>fsi-polaris</code> (financial district) / <code>general-polaris</code> (general zone) / <code>intl-sg-prod</code> (international website)</li></ul>
 	CloudProductRegion *string `json:"CloudProductRegion,omitnil,omitempty" name:"CloudProductRegion"`
 
 	// <p>CLS target region</p><ul><li>Supported regions: see <a href="https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">region list</a> document</li></ul>
@@ -2061,13 +2067,13 @@ type CreateCloudProductLogCollectionRequest struct {
 	// <p>Instance ID</p><ul><li>Obtained through official documentation of connected cloud services</li></ul>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// <p>Cloud product identifier, support enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS</p>
+	// <p>Cloud product identifier. Support the following products</p><ul><li>APIS</li><li>BH</li><li>CDB</li><li>CDS</li><li>CFS</li><li>CLB</li><li>CSIP</li><li>CWP</li><li>DCDB</li><li>DNSPod</li><li>EMR</li><li>HTTPDNS</li><li>KHL</li><li>llmsgw</li><li>MariaDB</li><li>MDP</li><li>MongoDB</li><li>PostgreSQL</li><li>TCSS</li><li>TDSQL-C</li><li>TDStore</li><li>TencentDB-Redis</li><li>TEO</li><li>TokenHub</li><li>TSE</li></ul>
 	AssumerName *string `json:"AssumerName,omitnil,omitempty" name:"AssumerName"`
 
-	// <p>Log type, supports enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</p>
+	// <p>Log types supported by each cloud product are as follows:</p><table><thead><tr><th>assumer_name</th><th>Supported log_type</th></tr></thead><tbody><tr><td>APIS</td><td>APIS-ACCESS</td></tr><tr><td>BH</td><td>BH-COMMANDLOG, BH-FILELOG</td></tr><tr><td>CDB</td><td>CDB-AUDIT</td></tr><tr><td>CDS</td><td>CDS-AUDIT, CDS-RISK</td></tr><tr><td>CFS</td><td>CFS-AUDIT</td></tr><tr><td>CLB</td><td>CMR-SPEND</td></tr><tr><td>CSIP</td><td>CSIP</td></tr><tr><td>CWP</td><td>CWP</td></tr><tr><td>DCDB</td><td>DCDB-AUDIT, DCDB-ERROR, DCDB-SLOW</td></tr><tr><td>DNSPod</td><td>DNSPod-RESOLVELOG</td></tr><tr><td>EMR</td><td>EMR-OPERATION</td></tr><tr><td>HTTPDNS</td><td>HTTPDNS-RESOLVELOG</td></tr><tr><td>MariaDB</td><td>MariaDB-AUDIT, MariaDB-ERROR, MariaDB-SLOW</td></tr><tr><td>MDP</td><td>MDP-SSAI</td></tr><tr><td>MongoDB</td><td>MongoDB-AUDIT, MongoDB-ErrorLog, MongoDB-OperationLog, MongoDB-SlowLog</td></tr><tr><td>PostgreSQL</td><td>PostgreSQL-AUDIT, PostgreSQL-ERROR, PostgreSQL-SLOW</td></tr><tr><td>TCSS</td><td>TCSS</td></tr><tr><td>TDSQL-C</td><td>TDSQL-C-AUDIT</td></tr><tr><td>TDStore</td><td>TDMYSQL-SLOW</td></tr><tr><td>TencentDB-Redis</td><td>Redis-AUDIT, Redis-ERROR, Redis-SLOW</td></tr><tr><td>TEO</td><td>TEO-INEFERENCE</td></tr><tr><td>llmsgw</td><td>llmsgw-mcp-security-alarm</td></tr></tbody></table>
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
-	// <p>Product region. The input parameter format for regions varies by log type (LogType). Refer to the following example:</p><ul><li>All CDS log types: ap-guangzhou</li><li>CDB-AUDIT: gz</li><li>TDSQL-C-AUDIT: gz</li><li>MongoDB-AUDIT: gz</li><li>MongoDB-SlowLog: ap-guangzhou</li><li>MongoDB-ErrorLog: ap-guangzhou</li><li>TDMYSQL-SLOW: gz</li><li>All DCDB log types: gz</li><li>All MariaDB log types: gz</li><li>All PostgreSQL log types: gz</li><li>All BH log types: overseas-polaris (Hong Kong (China) and other)/fsi-polaris (financial district)/general-polaris (general zone)/intl-sg-prod (international site)</li><li>All APIS log types: gz</li></ul>
+	// <p>Product region. Different LogTypes have different input parameter formats:</p><p><strong>Format A: Short region code</strong> (gz / sh / bj …)</p><ul><li>All APIS log types: for example, <code>gz</code></li><li>CDB-AUDIT</li><li>TDSQL-C-AUDIT</li><li>TDMYSQL-SLOW</li><li>All DCDB log types</li><li>All MariaDB log types</li><li>All PostgreSQL log types</li><li>MongoDB-AUDIT (<strong>Note that this is different from SlowLog/ErrorLog/OperationLog</strong>)</li><li>All TencentDB-Redis log types</li><li>EMR-OPERATION</li></ul><p><strong>Format B: Long region code</strong> (ap-guangzhou / ap-shanghai / ap-singapore …)</p><ul><li>All CDS log types: for example, <code>ap-guangzhou</code></li><li>MongoDB-SlowLog / MongoDB-ErrorLog / MongoDB-OperationLog</li><li>DNSPod-RESOLVELOG</li><li>HTTPDNS-RESOLVELOG</li><li>MDP-SSAI</li><li>CFS-AUDIT</li><li>TEO-INEFERENCE</li><li>TokenHub-ActivityLog / TokenHub-AuditLog</li><li>llmsgw-mcp-security-alarm</li><li>CSIP / TCSS / TSE / CWP / KHL and others</li></ul><p><strong>Format C: Dedicated BH Polaris name</strong></p><ul><li>All BH log types: <code>overseas-polaris</code> (Hong Kong (China) and other overseas) / <code>fsi-polaris</code> (financial district) / <code>general-polaris</code> (general zone) / <code>intl-sg-prod</code> (international website)</li></ul>
 	CloudProductRegion *string `json:"CloudProductRegion,omitnil,omitempty" name:"CloudProductRegion"`
 
 	// <p>CLS target region</p><ul><li>Supported regions: see <a href="https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">region list</a> document</li></ul>
@@ -3287,6 +3293,15 @@ type CreateDlcDeliverRequestParams struct {
 
 	// <p>Whether to enable delivery service log. Valid values: 1: disable; 2: enable. Enabled by default.</p>
 	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// <p>Auto-create dlc field</p><p>Default value: false</p><p>When there are additional fields in your log, the system will automatically ship them to DLC.</p>
+	AutoCreateField *bool `json:"AutoCreateField,omitnil,omitempty" name:"AutoCreateField"`
+
+	// <p>Store delivery failure logs in DLC tables</p>
+	DlcFailHandle *DlcFailHandle `json:"DlcFailHandle,omitnil,omitempty" name:"DlcFailHandle"`
+
+	// <p>Log pre-filtering - Perform pre-filtering on original data for data ingestion into Splunk</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
 }
 
 type CreateDlcDeliverRequest struct {
@@ -3318,6 +3333,15 @@ type CreateDlcDeliverRequest struct {
 
 	// <p>Whether to enable delivery service log. Valid values: 1: disable; 2: enable. Enabled by default.</p>
 	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// <p>Auto-create dlc field</p><p>Default value: false</p><p>When there are additional fields in your log, the system will automatically ship them to DLC.</p>
+	AutoCreateField *bool `json:"AutoCreateField,omitnil,omitempty" name:"AutoCreateField"`
+
+	// <p>Store delivery failure logs in DLC tables</p>
+	DlcFailHandle *DlcFailHandle `json:"DlcFailHandle,omitnil,omitempty" name:"DlcFailHandle"`
+
+	// <p>Log pre-filtering - Perform pre-filtering on original data for data ingestion into Splunk</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
 }
 
 func (r *CreateDlcDeliverRequest) ToJsonString() string {
@@ -3341,6 +3365,9 @@ func (r *CreateDlcDeliverRequest) FromJsonString(s string) error {
 	delete(f, "Interval")
 	delete(f, "EndTime")
 	delete(f, "HasServicesLog")
+	delete(f, "AutoCreateField")
+	delete(f, "DlcFailHandle")
+	delete(f, "DSLFilter")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDlcDeliverRequest has unknown keys!", "")
 	}
@@ -4891,88 +4918,230 @@ func (r *CreateRecordingRuleYamlTaskResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type CreateScheduledSqlRequestParams struct {
-	// Source log topic ID. Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
-	SrcTopicId *string `json:"SrcTopicId,omitnil,omitempty" name:"SrcTopicId"`
+type CreateRemoteWriteTaskRequestParams struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Task name, 0-255 characters
+	// Task Name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Task start status. 1: Enabled, 2: Disabled
+	// Target service name.
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+
+	// Destination address
+	RemoteWriteURL *string `json:"RemoteWriteURL,omitnil,omitempty" name:"RemoteWriteURL"`
+
+	// Authentication type
+	// - 0: No authentication
+	// 1: basic_auth 
+	// 2: token
+	AuthType *uint64 `json:"AuthType,omitnil,omitempty" name:"AuthType"`
+
+	// Network type. Valid values: 1 private network; 2: public network.
+	NetType *uint64 `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// VPC id
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Authentication information
+	AuthInfo *RemoteWriteAuthInfo `json:"AuthInfo,omitnil,omitempty" name:"AuthInfo"`
+
+	// Backend service type
+	// 0 CVM
+	// 1025 CLB
+	VirtualGatewayType *int64 `json:"VirtualGatewayType,omitnil,omitempty" name:"VirtualGatewayType"`
+}
+
+type CreateRemoteWriteTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Task Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Target service name.
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+
+	// Destination address
+	RemoteWriteURL *string `json:"RemoteWriteURL,omitnil,omitempty" name:"RemoteWriteURL"`
+
+	// Authentication type
+	// - 0: No authentication
+	// 1: basic_auth 
+	// 2: token
+	AuthType *uint64 `json:"AuthType,omitnil,omitempty" name:"AuthType"`
+
+	// Network type. Valid values: 1 private network; 2: public network.
+	NetType *uint64 `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// VPC id
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Authentication information
+	AuthInfo *RemoteWriteAuthInfo `json:"AuthInfo,omitnil,omitempty" name:"AuthInfo"`
+
+	// Backend service type
+	// 0 CVM
+	// 1025 CLB
+	VirtualGatewayType *int64 `json:"VirtualGatewayType,omitnil,omitempty" name:"VirtualGatewayType"`
+}
+
+func (r *CreateRemoteWriteTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRemoteWriteTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TopicId")
+	delete(f, "Name")
+	delete(f, "Target")
+	delete(f, "RemoteWriteURL")
+	delete(f, "AuthType")
+	delete(f, "NetType")
+	delete(f, "VpcId")
+	delete(f, "AuthInfo")
+	delete(f, "VirtualGatewayType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRemoteWriteTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRemoteWriteTaskResponseParams struct {
+	// RemoteWrite task ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateRemoteWriteTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateRemoteWriteTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateRemoteWriteTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRemoteWriteTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateScheduledSqlRequestParams struct {
+	// <p>Source log topic ID - Obtain the log topic ID by <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">searching the log topic list</a>.</p>
+	SrcTopicId *string `json:"SrcTopicId,omitnil,omitempty" name:"SrcTopicId"`
+
+	// <p>Task name, 0-255 characters</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Task start status. 1: Enabled, 2: Disabled</p>
 	EnableFlag *int64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
 
-	// Target log topic for scheduled SQL analysis
+	// <p>Target log topic for scheduled SQL analysis</p>
 	DstResource *ScheduledSqlResouceInfo `json:"DstResource,omitnil,omitempty" name:"DstResource"`
 
-	// Query statement
+	// <p>Query statement</p>
 	ScheduledSqlContent *string `json:"ScheduledSqlContent,omitnil,omitempty" name:"ScheduledSqlContent"`
 
-	// Schedule start time, Unix timestamp, in milliseconds
+	// <p>Schedule start time, Unix timestamp, in milliseconds</p>
 	ProcessStartTime *uint64 `json:"ProcessStartTime,omitnil,omitempty" name:"ProcessStartTime"`
 
-	// Schedule type: 1: Continuous running; 2: Specified time range
+	// <p>Schedule Type: 1 Continuous Running 2 Specified Time Range</p>
 	ProcessType *int64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 
-	// Scheduling Interval (Minutes), 1-1440 minutes
+	// <p>Scheduling Interval (Minutes), 1-1440 minutes</p>
 	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
 
-	// Time window for a single query. If your target topic is a metric topic, it is recommended that the size of this parameter not exceed 30 minutes, otherwise, metric conversion may fail.
+	// <p>Time window for a single query. If your target topic is a metric topic, it is recommended that the size of this parameter not exceed 30 minutes, otherwise, metric conversion may fail.</p>
 	ProcessTimeWindow *string `json:"ProcessTimeWindow,omitnil,omitempty" name:"ProcessTimeWindow"`
 
-	// Execution Delay (Seconds), 0-120 seconds, default 60 seconds
+	// <p>Execution delay (seconds), 0-120 seconds, default 60 seconds</p>
 	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
 
-	// Regional information of the source topicId. For supported regions, see the region list (https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8) document.
+	// <p>Regional information of the source topicId. For supported regions, see the <a href="https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">region list</a> document.</p>
 	SrcTopicRegion *string `json:"SrcTopicRegion,omitnil,omitempty" name:"SrcTopicRegion"`
 
-	// Schedule end time. Required field when ProcessType=2, Unix timestamp, in milliseconds
+	// <p>Scheduling Time Unit</p><p>Value ranges from 1 to 2</p><p>Default value: 1</p><p>The default value is 1 (minute), and the additional value is 2 (second).</p>
+	ProcessPeriodUnit *int64 `json:"ProcessPeriodUnit,omitnil,omitempty" name:"ProcessPeriodUnit"`
+
+	// <p>Schedule End Time, required when ProcessType=2, Unix timestamp, in milliseconds</p>
 	ProcessEndTime *uint64 `json:"ProcessEndTime,omitnil,omitempty" name:"ProcessEndTime"`
 
-	// Query syntax rules. Default value is 0. 0: Lucene syntax, 1: CQL syntax
+	// <p>Query syntax rules. Default value: 0. 0: Lucene syntax, 1: CQL syntax</p>
 	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
+
+	// <p>Whether to enable delivery service log. 1: Disabled, 2: Enabled.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// <p>Full-text search tag. 1: Off, 2: On. Default: 1</p>
+	FullQuery *uint64 `json:"FullQuery,omitnil,omitempty" name:"FullQuery"`
 }
 
 type CreateScheduledSqlRequest struct {
 	*tchttp.BaseRequest
 	
-	// Source log topic ID. Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// <p>Source log topic ID - Obtain the log topic ID by <a href="https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1">searching the log topic list</a>.</p>
 	SrcTopicId *string `json:"SrcTopicId,omitnil,omitempty" name:"SrcTopicId"`
 
-	// Task name, 0-255 characters
+	// <p>Task name, 0-255 characters</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Task start status. 1: Enabled, 2: Disabled
+	// <p>Task start status. 1: Enabled, 2: Disabled</p>
 	EnableFlag *int64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
 
-	// Target log topic for scheduled SQL analysis
+	// <p>Target log topic for scheduled SQL analysis</p>
 	DstResource *ScheduledSqlResouceInfo `json:"DstResource,omitnil,omitempty" name:"DstResource"`
 
-	// Query statement
+	// <p>Query statement</p>
 	ScheduledSqlContent *string `json:"ScheduledSqlContent,omitnil,omitempty" name:"ScheduledSqlContent"`
 
-	// Schedule start time, Unix timestamp, in milliseconds
+	// <p>Schedule start time, Unix timestamp, in milliseconds</p>
 	ProcessStartTime *uint64 `json:"ProcessStartTime,omitnil,omitempty" name:"ProcessStartTime"`
 
-	// Schedule type: 1: Continuous running; 2: Specified time range
+	// <p>Schedule Type: 1 Continuous Running 2 Specified Time Range</p>
 	ProcessType *int64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 
-	// Scheduling Interval (Minutes), 1-1440 minutes
+	// <p>Scheduling Interval (Minutes), 1-1440 minutes</p>
 	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
 
-	// Time window for a single query. If your target topic is a metric topic, it is recommended that the size of this parameter not exceed 30 minutes, otherwise, metric conversion may fail.
+	// <p>Time window for a single query. If your target topic is a metric topic, it is recommended that the size of this parameter not exceed 30 minutes, otherwise, metric conversion may fail.</p>
 	ProcessTimeWindow *string `json:"ProcessTimeWindow,omitnil,omitempty" name:"ProcessTimeWindow"`
 
-	// Execution Delay (Seconds), 0-120 seconds, default 60 seconds
+	// <p>Execution delay (seconds), 0-120 seconds, default 60 seconds</p>
 	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
 
-	// Regional information of the source topicId. For supported regions, see the region list (https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8) document.
+	// <p>Regional information of the source topicId. For supported regions, see the <a href="https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">region list</a> document.</p>
 	SrcTopicRegion *string `json:"SrcTopicRegion,omitnil,omitempty" name:"SrcTopicRegion"`
 
-	// Schedule end time. Required field when ProcessType=2, Unix timestamp, in milliseconds
+	// <p>Scheduling Time Unit</p><p>Value ranges from 1 to 2</p><p>Default value: 1</p><p>The default value is 1 (minute), and the additional value is 2 (second).</p>
+	ProcessPeriodUnit *int64 `json:"ProcessPeriodUnit,omitnil,omitempty" name:"ProcessPeriodUnit"`
+
+	// <p>Schedule End Time, required when ProcessType=2, Unix timestamp, in milliseconds</p>
 	ProcessEndTime *uint64 `json:"ProcessEndTime,omitnil,omitempty" name:"ProcessEndTime"`
 
-	// Query syntax rules. Default value is 0. 0: Lucene syntax, 1: CQL syntax
+	// <p>Query syntax rules. Default value: 0. 0: Lucene syntax, 1: CQL syntax</p>
 	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
+
+	// <p>Whether to enable delivery service log. 1: Disabled, 2: Enabled.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// <p>Full-text search tag. 1: Off, 2: On. Default: 1</p>
+	FullQuery *uint64 `json:"FullQuery,omitnil,omitempty" name:"FullQuery"`
 }
 
 func (r *CreateScheduledSqlRequest) ToJsonString() string {
@@ -4998,8 +5167,11 @@ func (r *CreateScheduledSqlRequest) FromJsonString(s string) error {
 	delete(f, "ProcessTimeWindow")
 	delete(f, "ProcessDelay")
 	delete(f, "SrcTopicRegion")
+	delete(f, "ProcessPeriodUnit")
 	delete(f, "ProcessEndTime")
 	delete(f, "SyntaxRule")
+	delete(f, "HasServicesLog")
+	delete(f, "FullQuery")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateScheduledSqlRequest has unknown keys!", "")
 	}
@@ -5008,7 +5180,7 @@ func (r *CreateScheduledSqlRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateScheduledSqlResponseParams struct {
-	// Task ID
+	// <p>Task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -7672,6 +7844,67 @@ func (r *DeleteRecordingRuleYamlTaskResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteRemoteWriteTaskRequestParams struct {
+	// RemoteWrite import task ID
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+type DeleteRemoteWriteTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// RemoteWrite import task ID
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
+func (r *DeleteRemoteWriteTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRemoteWriteTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "TopicId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteRemoteWriteTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteRemoteWriteTaskResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteRemoteWriteTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteRemoteWriteTaskResponseParams `json:"Response"`
+}
+
+func (r *DeleteRemoteWriteTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteRemoteWriteTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteScheduledSqlRequestParams struct {
 	// Task ID, which can be obtained through [Scheduled SQL Analysis Task List](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1).
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
@@ -8505,6 +8738,9 @@ type DescribeCloudProductLogTasksRequestParams struct {
 
 	// <ul><li>assumerName<ul><li>Filter by [cloud product identifier].</li><li>Type: String</li><li>Required: No</li><li>Enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS</li></ul></li><li>logType<ul><li>Filter by [log type].</li><li>Type: String</li><li>Required: No</li><li>Enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</li></ul></li><li>instanceId<ul><li>Filter by [instance ID].</li><li>Type: String</li><li>Required: No</li></ul></li></ul>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Whether to carry tag information of the topic and logset</p>
+	WithTags *bool `json:"WithTags,omitnil,omitempty" name:"WithTags"`
 }
 
 type DescribeCloudProductLogTasksRequest struct {
@@ -8518,6 +8754,9 @@ type DescribeCloudProductLogTasksRequest struct {
 
 	// <ul><li>assumerName<ul><li>Filter by [cloud product identifier].</li><li>Type: String</li><li>Required: No</li><li>Enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS</li></ul></li><li>logType<ul><li>Filter by [log type].</li><li>Type: String</li><li>Required: No</li><li>Enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</li></ul></li><li>instanceId<ul><li>Filter by [instance ID].</li><li>Type: String</li><li>Required: No</li></ul></li></ul>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Whether to carry tag information of the topic and logset</p>
+	WithTags *bool `json:"WithTags,omitnil,omitempty" name:"WithTags"`
 }
 
 func (r *DescribeCloudProductLogTasksRequest) ToJsonString() string {
@@ -8535,6 +8774,7 @@ func (r *DescribeCloudProductLogTasksRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Filters")
+	delete(f, "WithTags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloudProductLogTasksRequest has unknown keys!", "")
 	}
@@ -8548,6 +8788,9 @@ type DescribeCloudProductLogTasksResponseParams struct {
 
 	// <p>Total configuration count of logs</p>
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>Additional information. For example, error in querying topic or logset tag information.</p>
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -12147,6 +12390,122 @@ func (r *DescribeRecordingRuleYamlTaskResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeRemoteWriteTasksRequestParams struct {
+	// - taskId
+	// Filter by [task ID].
+	// Type: String
+	// Required: No
+	// 
+	// - topicId
+	// Filter by [Log topic].
+	// Type: String
+	// Required: No
+	// 
+	// - taskStatus
+	// Filter by [task running status]. Supports `1`: running, `2`: stop, `3`: exception.
+	// Type: String
+	// Required: No
+	// 
+	// - name
+	// Filter by [task name] using fuzzy filtering. 
+	// Type: String
+	// Required: No
+	// 
+	// 
+	// Each request can have up to 10 Filters. The maximum of Filter.Values is 10.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.	
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeRemoteWriteTasksRequest struct {
+	*tchttp.BaseRequest
+	
+	// - taskId
+	// Filter by [task ID].
+	// Type: String
+	// Required: No
+	// 
+	// - topicId
+	// Filter by [Log topic].
+	// Type: String
+	// Required: No
+	// 
+	// - taskStatus
+	// Filter by [task running status]. Supports `1`: running, `2`: stop, `3`: exception.
+	// Type: String
+	// Required: No
+	// 
+	// - name
+	// Filter by [task name] using fuzzy filtering. 
+	// Type: String
+	// Required: No
+	// 
+	// 
+	// Each request can have up to 10 Filters. The maximum of Filter.Values is 10.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Page offset. Default value: 0
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.	
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeRemoteWriteTasksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRemoteWriteTasksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRemoteWriteTasksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRemoteWriteTasksResponseParams struct {
+	// RemoteWrite information list.
+	Infos []*RemoteWriteInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// Total number of RemoteWrite tasks.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeRemoteWriteTasksResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRemoteWriteTasksResponseParams `json:"Response"`
+}
+
+func (r *DescribeRemoteWriteTasksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRemoteWriteTasksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeScheduledSqlInfoRequestParams struct {
 	// Page offset. Default value: 0
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
@@ -13071,53 +13430,78 @@ type Dimension struct {
 }
 
 type DlcDeliverInfo struct {
-	// Task ID.
+	// <p>Task id.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Account id.
+	// <p>Account id.</p>
 	Uin *uint64 `json:"Uin,omitnil,omitempty" name:"Uin"`
 
-	// Log topic ID.
+	// <p>Log topic id.</p>
 	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Task name.
+	// <p>Task name.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Delivery Type. Valid values: 0: real-time delivery; 1: historic delivery.
+	// <p>Delivery Type, 0: real-time delivery, 1: history delivery</p>
 	DeliverType *uint64 `json:"DeliverType,omitnil,omitempty" name:"DeliverType"`
 
-	// Delivery file size in MB
+	// <p>Delivery file size, in MB.</p>
 	MaxSize *uint64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 
-	// Delivery interval in seconds
+	// <p>Delivery interval in seconds</p>
 	Interval *uint64 `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Start time of the delivery time range
+	// <p>Start time of the delivery time range</p>
 	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time of the delivery time range
+	// <p>End time of the delivery time range</p>
 	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// dlc configuration message
+	// <p>dlc configuration message</p>
 	DlcInfo *DlcInfo `json:"DlcInfo,omitnil,omitempty" name:"DlcInfo"`
 
-	// Whether to enable delivery service log. 1 for disabled, 2 for enabled
+	// <p>Whether to enable delivery service log. 1 Disabled, 2 Enabled</p>
 	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
 
-	// Task status.
+	// <p>Task status.</p>
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Task progress. Historic delivery tasks take effect.
+	// <p>Task progress. Historic delivery tasks take effect.</p>
 	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Topic type of logs. 0: standard topic; 1: metric topic.
+	// <p>Log topic type. 0: Standard topic, 1: Metric topic</p>
 	BizType *uint64 `json:"BizType,omitnil,omitempty" name:"BizType"`
 
-	// Task creation time.
+	// <p>Task creation time.</p>
 	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Task modification time.
+	// <p>Task last modified.</p>
 	UpdateTime *uint64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// <p>Auto-create dlc field</p><p>Default value: false</p><p>When there are additional fields in your log, the system will automatically ship them to DLC.</p>
+	AutoCreateField *bool `json:"AutoCreateField,omitnil,omitempty" name:"AutoCreateField"`
+
+	// <p>Store logs with delivery failure in a DLC table</p>
+	DlcFailHandle *DlcFailHandle `json:"DlcFailHandle,omitnil,omitempty" name:"DlcFailHandle"`
+
+	// <p>Log pre-filtering - Perform pre-filtering process on the original data for data ingestion into Splunk.</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
+}
+
+type DlcFailHandle struct {
+	// <p>Whether to store in DLC</p><p>Default value: false</p><p>Controls whether to enable storing delivery failure logs in DLC tables</p>
+	StoreToDlc *bool `json:"StoreToDlc,omitnil,omitempty" name:"StoreToDlc"`
+
+	// <p>DLC table information</p>
+	DlcFailTableInfo *DlcFailTableInfo `json:"DlcFailTableInfo,omitnil,omitempty" name:"DlcFailTableInfo"`
+}
+
+type DlcFailTableInfo struct {
+	// <p>DLC table name</p>
+	TableName *string `json:"TableName,omitnil,omitempty" name:"TableName"`
+
+	// <p>Field name in the table</p><p>Field type must be String type</p>
+	FieldName *string `json:"FieldName,omitnil,omitempty" name:"FieldName"`
 }
 
 type DlcFiledInfo struct {
@@ -14008,6 +14392,20 @@ type InstanceData struct {
 	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
 }
 
+type JsonExpandInfo struct {
+	// <p>Whether to enable the JSON nested unfold functionality. Once enabled, it will flatten and process the specified JSON field.</p><p>Default value: None (Required parameter)</p>
+	Switch *bool `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// <p>List of JSON field names to be unfolded, supporting 1 to 3 fields. Field names cannot be empty strings and cannot be repeated.</p><p>Input parameter limits: 1. Number of fields: 1 to 3. 2. Length of each field name not exceeding 128 characters. 3. Field names cannot be empty strings. 4. Field names cannot be repeated.</p><p>Default value: None (required parameter)</p><p>Value for reference: Value: message; Description: Example field name</p><p>Example: ["message", "data", "content"]</p>
+	Fields []*string `json:"Fields,omitnil,omitempty" name:"Fields"`
+
+	// <p>Whether to discard the original nested field after unfolding. true: discard the original field and keep only the flattened field after unfolding; false: keep the original field and add the flattened field after unfolding.</p><p>Enumeration value:</p><ul><li>true / false: discard the original field / keep the original field</li></ul><p>Default value: true</p><p>Optional. Default is true if not provided.</p>
+	DropOriginal *bool `json:"DropOriginal,omitnil,omitempty" name:"DropOriginal"`
+
+	// <p>Processing policy when the unfolded field conflicts with an existing field</p><p>Enumeration value:</p><ul><li>keep_outer / keep_inner: Keep the outer (existing) field / Keep the inner (newly unfolded) field</li></ul><p>Default value: keep_outer</p><p>Optional. Defaults to keep_outer if not passed.</p>
+	ConflictPolicy *string `json:"ConflictPolicy,omitnil,omitempty" name:"ConflictPolicy"`
+}
+
 type JsonInfo struct {
 	// Enablement flag
 	EnableTag *bool `json:"EnableTag,omitnil,omitempty" name:"EnableTag"`
@@ -14266,141 +14664,56 @@ type LogItems struct {
 }
 
 type LogRechargeRuleInfo struct {
-	// Import type. Valid values: `json_log` (JSON logs), `minimalist_log` (single-line full text), and fullregex_log (single-line full regex)
+	// <p>Import type, support json_log: JSON logs, minimalist_log: single-line full-text log, fullregex_log: single-line full regular expression</p>
 	RechargeType *string `json:"RechargeType,omitnil,omitempty" name:"RechargeType"`
 
-	// Encoding format. Valid values: 0 (default, UTF-8) and 1 GBK).
+	// <p>Parse encoding format. 0: UTF-8 (default value), 1: GBK</p>
 	EncodingFormat *uint64 `json:"EncodingFormat,omitnil,omitempty" name:"EncodingFormat"`
 
-	// Use default time status. true: when enabled, current system time or Kafka message timestamp will be used as log timestamp. false: when disabled, time field in the log will be used as log timestamp. Default: true.
+	// <p>Use default time status. true: once enabled, current system time or Kafka message timestamp will be used as log timestamp; false: when turned off, time field in the log will be used as log timestamp. Default: true</p>
 	DefaultTimeSwitch *bool `json:"DefaultTimeSwitch,omitnil,omitempty" name:"DefaultTimeSwitch"`
 
-	// Full log matching rule. It is valid only when RechargeType is fullregex_log.
+	// <p>The whole log matching rule is valid only when RechargeType is fullregex_log.</p>
 	LogRegex *string `json:"LogRegex,omitnil,omitempty" name:"LogRegex"`
 
-	// Whether to upload the logs that failed to be parsed. Valid values: `true` and `false`.
+	// <p>Whether to upload logs that failed to be parsed. true for upload, false for not uploading.</p>
 	UnMatchLogSwitch *bool `json:"UnMatchLogSwitch,omitnil,omitempty" name:"UnMatchLogSwitch"`
 
-	// key name of parsing-failed logs
+	// <p>Key name of parsing-failed logs</p>
 	UnMatchLogKey *string `json:"UnMatchLogKey,omitnil,omitempty" name:"UnMatchLogKey"`
 
-	// Time source for parsing failure logs. 0: current time of the system; 1: Kafka message timestamp.
+	// <p>Parsing failure log time source. 0: Current system time. 1: Kafka message timestamp.</p>
 	UnMatchLogTimeSrc *uint64 `json:"UnMatchLogTimeSrc,omitnil,omitempty" name:"UnMatchLogTimeSrc"`
 
-	// Default time source. 0: Current system time; 1: Kafka message timestamp.
+	// <p>Default time source. 0: Current system time, 1: Kafka message timestamp</p>
 	DefaultTimeSrc *uint64 `json:"DefaultTimeSrc,omitnil,omitempty" name:"DefaultTimeSrc"`
 
-	// Time field. Field name representing time in logs.
-	// 
-	// -When DefaultTimeSwitch is false and RechargeType data extraction mode is `json_log` JSON file log or `fullregex_log` single-line full regex file log, TimeKey cannot be empty.
+	// <p>Time field. Field name that represents time in logs.</p><ul><li>When DefaultTimeSwitch is false and the RechargeType data extraction mode is <code>json_log</code> JSON-file log or <code>fullregex_log</code> single-line full regex-file log, the TimeKey cannot be empty.</li></ul>
 	TimeKey *string `json:"TimeKey,omitnil,omitempty" name:"TimeKey"`
 
-	// Time extraction regular expression.
-	// -When DefaultTimeSwitch is false and the data extraction mode of RechargeType is `minimalist_log` (single-line full text - file log), TimeRegex cannot be empty.
-	// -Only need to input the regular expression representing the time field in logs. If multiple fields are matched to, the first will be used.
-	// Example: The original log is "message with time 2022-08-08 14:20:20". You can set the retrieval time regex to \d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d.
+	// <p>Time extraction regular expression.</p><ul><li>When DefaultTimeSwitch is false and the RechargeType data extraction mode is <code>minimalist_log</code> single-line full text - file log, the TimeRegex cannot be empty.</li><li>Only need to input the regular expression for the field representing time in logs. If multiple fields are matched to, the first one will be used.<br> For example: If the original log is: message with time 2022-08-08 14:20:20, you can set the retrieval time regular expression to \d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d</li></ul>
 	TimeRegex *string `json:"TimeRegex,omitnil,omitempty" name:"TimeRegex"`
 
-	// Time field format.
-	// -When DefaultTimeSwitch is false, TimeFormat cannot be empty.
+	// <p>Time field format.</p><ul><li>When DefaultTimeSwitch is false, TimeFormat cannot be empty.</li></ul>
 	TimeFormat *string `json:"TimeFormat,omitnil,omitempty" name:"TimeFormat"`
 
-	// Time field time zone.
-	// -When DefaultTimeSwitch is false, TimeZone cannot be empty.
-	// -Time zone format rule
-	// Prefix: Use GMT or UTC as the time zone benchmark.
-	// Offset:
-	// -`-` indicates a western time zone (later than the benchmark time).
-	// -`+` means the east time zone (earlier than the benchmark time).
-	// -Format ±HH:MM (hr:min)
-	// 
-	// -Currently supported:
-	// ```
-	// "GMT-12:00" 
-	// "GMT-11:00" 
-	// "GMT-10:00" 
-	// "GMT-09:30" 
-	// "GMT-09:00" 
-	// "GMT-08:00" 
-	// "GMT-07:00" 
-	// "GMT-06:00" 
-	// "GMT-05:00" 
-	// "GMT-04:00" 
-	// "GMT-03:30" 
-	// "GMT-03:00" 
-	// "GMT-02:00" 
-	// "GMT-01:00" 
-	// "GMT+00:00"
-	// "GMT+01:00"
-	// "GMT+02:00"
-	// "GMT+03:30"
-	// "GMT+04:00"
-	// "GMT+04:30"
-	// "GMT+05:00"
-	// "GMT+05:30"
-	// "GMT+05:45"
-	// "GMT+06:00"
-	// "GMT+06:30"
-	// "GMT+07:00"
-	// "GMT+08:00"
-	// "GMT+09:00"
-	// "GMT+09:30"
-	// "GMT+10:00"
-	// "GMT+10:30"
-	// "GMT+11:00"
-	// "GMT+11:30"
-	// "GMT+12:00"
-	// "GMT+12:45"
-	// "GMT+13:00"
-	// "GMT+14:00"
-	// "UTC-11:00"
-	// "UTC-10:00"
-	// "UTC-09:00"
-	// "UTC-08:00"
-	// "UTC-12:00"
-	// "UTC-07:00"
-	// "UTC-06:00"
-	// "UTC-05:00"
-	// "UTC-04:30"
-	// "UTC-04:00"
-	// "UTC-03:30"
-	// "UTC-03:00"
-	// "UTC-02:00"
-	// "UTC-01:00"
-	// "UTC+00:00"
-	// "UTC+01:00"
-	// "UTC+02:00"
-	// "UTC+03:00"
-	// "UTC+03:30"
-	// "UTC+04:00"
-	// "UTC+04:30"
-	// "UTC+05:00"
-	// "UTC+05:45"
-	// "UTC+06:00"
-	// "UTC+06:30"
-	// "UTC+07:00"
-	// "UTC+08:00"
-	// "UTC+09:00"
-	// "UTC+09:30"
-	// "UTC+10:00"
-	// "UTC+11:00"
-	// "UTC+12:00"
-	// "UTC+13:00"
-	// ```
+	// <p>Time field time zone.</p><ul><li><p>When DefaultTimeSwitch is false, TimeZone cannot be empty.</p></li><li><p>Time zone format rule<br>Prefix: Use GMT or UTC as the time zone benchmark<br>Offset:</p><ul><li><code>-</code> indicates a western time zone (later than the benchmark time)</li><li><code>+</code> indicates an eastern time zone (earlier than the benchmark time)</li><li>Format is ±HH:MM (hour:minute)</li></ul></li><li><p>Currently supported:<br><pre><code>&quot;GMT-12:00&quot; &quot;GMT-11:00&quot; &quot;GMT-10:00&quot; &quot;GMT-09:30&quot; &quot;GMT-09:00&quot; &quot;GMT-08:00&quot; &quot;GMT-07:00&quot; &quot;GMT-06:00&quot; &quot;GMT-05:00&quot; &quot;GMT-04:00&quot; &quot;GMT-03:30&quot; &quot;GMT-03:00&quot; &quot;GMT-02:00&quot; &quot;GMT-01:00&quot; &quot;GMT+00:00&quot;&quot;GMT+01:00&quot;&quot;GMT+02:00&quot;&quot;GMT+03:30&quot;&quot;GMT+04:00&quot;&quot;GMT+04:30&quot;&quot;GMT+05:00&quot;&quot;GMT+05:30&quot;&quot;GMT+05:45&quot;&quot;GMT+06:00&quot;&quot;GMT+06:30&quot;&quot;GMT+07:00&quot;&quot;GMT+08:00&quot;&quot;GMT+09:00&quot;&quot;GMT+09:30&quot;&quot;GMT+10:00&quot;&quot;GMT+10:30&quot;&quot;GMT+11:00&quot;&quot;GMT+11:30&quot;&quot;GMT+12:00&quot;&quot;GMT+12:45&quot;&quot;GMT+13:00&quot;&quot;GMT+14:00&quot;&quot;UTC-11:00&quot;&quot;UTC-10:00&quot;&quot;UTC-09:00&quot;&quot;UTC-08:00&quot;&quot;UTC-12:00&quot;&quot;UTC-07:00&quot;&quot;UTC-06:00&quot;&quot;UTC-05:00&quot;&quot;UTC-04:30&quot;&quot;UTC-04:00&quot;&quot;UTC-03:30&quot;&quot;UTC-03:00&quot;&quot;UTC-02:00&quot;&quot;UTC-01:00&quot;&quot;UTC+00:00&quot;&quot;UTC+01:00&quot;&quot;UTC+02:00&quot;&quot;UTC+03:00&quot;&quot;UTC+03:30&quot;&quot;UTC+04:00&quot;&quot;UTC+04:30&quot;&quot;UTC+05:00&quot;&quot;UTC+05:45&quot;&quot;UTC+06:00&quot;&quot;UTC+06:30&quot;&quot;UTC+07:00&quot;&quot;UTC+08:00&quot;&quot;UTC+09:00&quot;&quot;UTC+09:30&quot;&quot;UTC+10:00&quot;&quot;UTC+11:00&quot;&quot;UTC+12:00&quot;&quot;UTC+13:00&quot;</code></pre></p></li></ul>
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
 
-	// Metadata information. Kafka import supports kafka_topic, kafka_partition, kafka_offset, and kafka_timestamp.
+	// <p>Metadata information, Kafka import supports kafka_topic, kafka_partition, kafka_offset, kafka_timestamp</p>
 	Metadata []*string `json:"Metadata,omitnil,omitempty" name:"Metadata"`
 
-	// log Key list. It is required when RechargeType is full_regex_log or delimiter_log.
+	// <p>log Key list, required when RechargeType is full_regex_log or delimiter_log.</p>
 	Keys []*string `json:"Keys,omitnil,omitempty" name:"Keys"`
 
-	// JSON parsing mode. The first-level data parsing is enabled.
+	// <p>json parsing mode, enable first level data parsing</p>
 	ParseArray *bool `json:"ParseArray,omitnil,omitempty" name:"ParseArray"`
 
-	// Delimiter parsing mode - Separator
-	// This field is required when the parsing format is delimiter extraction.
+	// <p>Delimiter parsing mode - Separator<br>This field is required when the parsing format is delimiter extraction.</p>
 	Delimiter *string `json:"Delimiter,omitnil,omitempty" name:"Delimiter"`
+
+	// <p>JSON nest unfold configuration. This parameter is valid only when RechargeType is json_log. If it is not passed, it is disabled.</p>
+	JsonExpand *JsonExpandInfo `json:"JsonExpand,omitnil,omitempty" name:"JsonExpand"`
 }
 
 type LogsetInfo struct {
@@ -15306,63 +15619,45 @@ func (r *ModifyAlarmShieldResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyCloudProductLogCollectionRequestParams struct {
-	// Instance ID.
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Cloud product identifier, support enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS.
+	// <p>Cloud product identifier, supports enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS</p>
 	AssumerName *string `json:"AssumerName,omitnil,omitempty" name:"AssumerName"`
 
-	// Log type, support enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS
+	// <p>Log type. Supports enumeration: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB  ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</p>
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
-	// Cloud product region. Data discrepancies exist in the format of region input parameters for different log types (LogType). Refer to the following example:
-	// -All log types of CDS: ap-guangzhou
-	// - CDB-AUDIT: gz
-	// - TDSQL-C-AUDIT: gz
-	// - MongoDB-AUDIT: gz
-	// - MongoDB-SlowLog:ap-guangzhou
-	// - MongoDB-ErrorLog:ap-guangzhou
-	// - TDMYSQL-SLOW:gz
-	// -All log types of DCDB: gz
-	// -All log types of MariaDB: gz
-	// -PostgreSQL all log types: gz
-	// -BH all log types: overseas-polaris (Hong Kong (China) and other)/fsi-polaris (financial district)/general-polaris (general zone)/intl-sg-prod (international site)
-	// -All log types of APIS: gz
+	// <p>Product region. Different log types have different region input formats. Refer to the following example:</p><ul><li>All CDS log types: ap-guangzhou</li><li>CDB-AUDIT: gz</li><li>TDSQL-C-AUDIT: gz</li><li>MongoDB-AUDIT: gz</li><li>MongoDB-SlowLog: ap-guangzhou</li><li>MongoDB-ErrorLog: ap-guangzhou</li><li>TDMYSQL-SLOW: gz</li><li>All DCDB log types: gz</li><li>All MariaDB log types: gz</li><li>All PostgreSQL log types: gz</li><li>All BH log types: overseas-polaris(Hong Kong (China) and other)/fsi-polaris(financial district)/general-polaris(general zone)/intl-sg-prod(international site)</li><li>All APIS log types: gz</li></ul>
 	CloudProductRegion *string `json:"CloudProductRegion,omitnil,omitempty" name:"CloudProductRegion"`
 
-	// Logging configuration extended information, normally used to store additional log shipping configuration
+	// <p>Logging configuration extended information, generally used to store additional log delivery configuration</p>
 	Extend *string `json:"Extend,omitnil,omitempty" name:"Extend"`
+
+	// <p>Description list of tags. By specifying this parameter, you can simultaneously bind tags to the appropriate logset and topic. Supports a maximum of 10 tag key-value pairs. The same resource can only be bound to the same tag key.</p>
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type ModifyCloudProductLogCollectionRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID.
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Cloud product identifier, support enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS.
+	// <p>Cloud product identifier, supports enumerate: CDS, CWP, CDB, TDSQL-C, MongoDB, TDStore, DCDB, MariaDB, PostgreSQL, BH, APIS</p>
 	AssumerName *string `json:"AssumerName,omitnil,omitempty" name:"AssumerName"`
 
-	// Log type, support enumerate: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB-ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS
+	// <p>Log type. Supports enumeration: CDS-AUDIT, CDS-RISK, CDB-AUDIT, TDSQL-C-AUDIT, MongoDB-AUDIT, MongoDB-SlowLog, MongoDB  ErrorLog, TDMYSQL-SLOW, DCDB-AUDIT, DCDB-SLOW, DCDB-ERROR, MariaDB-AUDIT, MariaDB-SLOW, MariaDB-ERROR, PostgreSQL-SLOW, PostgreSQL-ERROR, PostgreSQL-AUDIT, BH-FILELOG, BH-COMMANDLOG, APIS-ACCESS</p>
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
-	// Cloud product region. Data discrepancies exist in the format of region input parameters for different log types (LogType). Refer to the following example:
-	// -All log types of CDS: ap-guangzhou
-	// - CDB-AUDIT: gz
-	// - TDSQL-C-AUDIT: gz
-	// - MongoDB-AUDIT: gz
-	// - MongoDB-SlowLog:ap-guangzhou
-	// - MongoDB-ErrorLog:ap-guangzhou
-	// - TDMYSQL-SLOW:gz
-	// -All log types of DCDB: gz
-	// -All log types of MariaDB: gz
-	// -PostgreSQL all log types: gz
-	// -BH all log types: overseas-polaris (Hong Kong (China) and other)/fsi-polaris (financial district)/general-polaris (general zone)/intl-sg-prod (international site)
-	// -All log types of APIS: gz
+	// <p>Product region. Different log types have different region input formats. Refer to the following example:</p><ul><li>All CDS log types: ap-guangzhou</li><li>CDB-AUDIT: gz</li><li>TDSQL-C-AUDIT: gz</li><li>MongoDB-AUDIT: gz</li><li>MongoDB-SlowLog: ap-guangzhou</li><li>MongoDB-ErrorLog: ap-guangzhou</li><li>TDMYSQL-SLOW: gz</li><li>All DCDB log types: gz</li><li>All MariaDB log types: gz</li><li>All PostgreSQL log types: gz</li><li>All BH log types: overseas-polaris(Hong Kong (China) and other)/fsi-polaris(financial district)/general-polaris(general zone)/intl-sg-prod(international site)</li><li>All APIS log types: gz</li></ul>
 	CloudProductRegion *string `json:"CloudProductRegion,omitnil,omitempty" name:"CloudProductRegion"`
 
-	// Logging configuration extended information, normally used to store additional log shipping configuration
+	// <p>Logging configuration extended information, generally used to store additional log delivery configuration</p>
 	Extend *string `json:"Extend,omitnil,omitempty" name:"Extend"`
+
+	// <p>Description list of tags. By specifying this parameter, you can simultaneously bind tags to the appropriate logset and topic. Supports a maximum of 10 tag key-value pairs. The same resource can only be bound to the same tag key.</p>
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *ModifyCloudProductLogCollectionRequest) ToJsonString() string {
@@ -15382,6 +15677,7 @@ func (r *ModifyCloudProductLogCollectionRequest) FromJsonString(s string) error 
 	delete(f, "LogType")
 	delete(f, "CloudProductRegion")
 	delete(f, "Extend")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCloudProductLogCollectionRequest has unknown keys!", "")
 	}
@@ -15390,6 +15686,9 @@ func (r *ModifyCloudProductLogCollectionRequest) FromJsonString(s string) error 
 
 // Predefined struct for user
 type ModifyCloudProductLogCollectionResponseParams struct {
+	// <p>Additional information. For example, failed to modify the topic or logset tag.</p>
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -16375,6 +16674,15 @@ type ModifyDlcDeliverRequestParams struct {
 
 	// <p>Task status.</p><p>Enumeration values: </p><ul><li>1: Running, </li><li>2: Stop.</li></ul>
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Auto-create dlc field</p><p>Default value: false</p><p>When there are additional fields in your log, the system will automatically ship them to DLC.</p>
+	AutoCreateField *bool `json:"AutoCreateField,omitnil,omitempty" name:"AutoCreateField"`
+
+	// <p>Store logs with delivery failure in a DLC table</p>
+	DlcFailHandle *DlcFailHandle `json:"DlcFailHandle,omitnil,omitempty" name:"DlcFailHandle"`
+
+	// <p>Log pre-filtering - Perform pre-filtering process on the original data for data ingestion into Splunk.</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
 }
 
 type ModifyDlcDeliverRequest struct {
@@ -16412,6 +16720,15 @@ type ModifyDlcDeliverRequest struct {
 
 	// <p>Task status.</p><p>Enumeration values: </p><ul><li>1: Running, </li><li>2: Stop.</li></ul>
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Auto-create dlc field</p><p>Default value: false</p><p>When there are additional fields in your log, the system will automatically ship them to DLC.</p>
+	AutoCreateField *bool `json:"AutoCreateField,omitnil,omitempty" name:"AutoCreateField"`
+
+	// <p>Store logs with delivery failure in a DLC table</p>
+	DlcFailHandle *DlcFailHandle `json:"DlcFailHandle,omitnil,omitempty" name:"DlcFailHandle"`
+
+	// <p>Log pre-filtering - Perform pre-filtering process on the original data for data ingestion into Splunk.</p>
+	DSLFilter *string `json:"DSLFilter,omitnil,omitempty" name:"DSLFilter"`
 }
 
 func (r *ModifyDlcDeliverRequest) ToJsonString() string {
@@ -16437,6 +16754,9 @@ func (r *ModifyDlcDeliverRequest) FromJsonString(s string) error {
 	delete(f, "DlcInfo")
 	delete(f, "HasServicesLog")
 	delete(f, "Status")
+	delete(f, "AutoCreateField")
+	delete(f, "DlcFailHandle")
+	delete(f, "DSLFilter")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDlcDeliverRequest has unknown keys!", "")
 	}
@@ -17937,76 +18257,226 @@ func (r *ModifyRecordingRuleYamlTaskResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type ModifyScheduledSqlRequestParams struct {
-	// Task ID, which can be obtained through [scheduled SQL analysis task list](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1).
+type ModifyRemoteWriteTaskRequestParams struct {
+	// Task ID
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Source log topic. Search the [scheduled SQL analysis task list](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1) to obtain it.
-	SrcTopicId *string `json:"SrcTopicId,omitnil,omitempty" name:"SrcTopicId"`
+	// Log topic id
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
 
-	// Task start status. 1: Enabled, 2: Disabled
-	EnableFlag *int64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
+	// Task status.
+	// 0: disabled, 1: enabled.
+	Enable *uint64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Target log topic for scheduled SQL analysis
-	DstResource *ScheduledSqlResouceInfo `json:"DstResource,omitnil,omitempty" name:"DstResource"`
-
-	// Queries statements
-	ScheduledSqlContent *string `json:"ScheduledSqlContent,omitnil,omitempty" name:"ScheduledSqlContent"`
-
-	// Scheduling cycle (minutes), 1-1440 minutes
-	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
-
-	// Time window for a single query. Example: last 15 minutes
-	ProcessTimeWindow *string `json:"ProcessTimeWindow,omitnil,omitempty" name:"ProcessTimeWindow"`
-
-	// Execution delay (seconds), 0-120 seconds, default 60
-	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
-
-	// Regional information of the source topicId. Supported regions are listed in the region list document (https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
-	SrcTopicRegion *string `json:"SrcTopicRegion,omitnil,omitempty" name:"SrcTopicRegion"`
-
-	// Task name, 0-255 characters
+	// RemoteWrite task name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Syntax rules. Default value: 0. 0: Lucene syntax, 1: CQL syntax
+	// Valid values: 1: private network; 2: public network.
+	NetType *uint64 `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// VPC id
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Target service name.
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+
+	// Destination address
+	RemoteWriteURL *string `json:"RemoteWriteURL,omitnil,omitempty" name:"RemoteWriteURL"`
+
+	// Valid values: 0: no authentication; 1: basic_auth; 2: token.	
+	AuthType *uint64 `json:"AuthType,omitnil,omitempty" name:"AuthType"`
+
+	// Authentication information
+	AuthInfo *RemoteWriteAuthInfo `json:"AuthInfo,omitnil,omitempty" name:"AuthInfo"`
+
+	// Backend service type
+	// -1 No
+	// 0 CVM
+	// 1025 CLB
+	VirtualGatewayType *int64 `json:"VirtualGatewayType,omitnil,omitempty" name:"VirtualGatewayType"`
+}
+
+type ModifyRemoteWriteTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Task ID
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Log topic id
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Task status.
+	// 0: disabled, 1: enabled.
+	Enable *uint64 `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// RemoteWrite task name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Valid values: 1: private network; 2: public network.
+	NetType *uint64 `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// VPC id
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Target service name.
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+
+	// Destination address
+	RemoteWriteURL *string `json:"RemoteWriteURL,omitnil,omitempty" name:"RemoteWriteURL"`
+
+	// Valid values: 0: no authentication; 1: basic_auth; 2: token.	
+	AuthType *uint64 `json:"AuthType,omitnil,omitempty" name:"AuthType"`
+
+	// Authentication information
+	AuthInfo *RemoteWriteAuthInfo `json:"AuthInfo,omitnil,omitempty" name:"AuthInfo"`
+
+	// Backend service type
+	// -1 No
+	// 0 CVM
+	// 1025 CLB
+	VirtualGatewayType *int64 `json:"VirtualGatewayType,omitnil,omitempty" name:"VirtualGatewayType"`
+}
+
+func (r *ModifyRemoteWriteTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRemoteWriteTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "TopicId")
+	delete(f, "Enable")
+	delete(f, "Name")
+	delete(f, "NetType")
+	delete(f, "VpcId")
+	delete(f, "Target")
+	delete(f, "RemoteWriteURL")
+	delete(f, "AuthType")
+	delete(f, "AuthInfo")
+	delete(f, "VirtualGatewayType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRemoteWriteTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyRemoteWriteTaskResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyRemoteWriteTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyRemoteWriteTaskResponseParams `json:"Response"`
+}
+
+func (r *ModifyRemoteWriteTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyRemoteWriteTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyScheduledSqlRequestParams struct {
+	// <p>Task ID, obtained by <a href="https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1">searching the scheduled SQL analysis task list</a>.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Source log topic, obtained via <a href="https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1">search scheduled SQL analysis task list</a></p>
+	SrcTopicId *string `json:"SrcTopicId,omitnil,omitempty" name:"SrcTopicId"`
+
+	// <p>Task start status. 1: Enabled, 2: Disabled</p>
+	EnableFlag *int64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
+
+	// <p>Target log topic for scheduled SQL analysis</p>
+	DstResource *ScheduledSqlResouceInfo `json:"DstResource,omitnil,omitempty" name:"DstResource"`
+
+	// <p>Query statement</p>
+	ScheduledSqlContent *string `json:"ScheduledSqlContent,omitnil,omitempty" name:"ScheduledSqlContent"`
+
+	// <p>Scheduling Interval (Minutes), 1-1440 minutes</p>
+	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
+
+	// <p>Time window for a single query. Example: last 15 minutes</p>
+	ProcessTimeWindow *string `json:"ProcessTimeWindow,omitnil,omitempty" name:"ProcessTimeWindow"`
+
+	// <p>Execution delay (seconds), 0-120 seconds, default 60 seconds</p>
+	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
+
+	// <p>Regional information of the source topicId. For supported regions, see the <a href="https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">region list</a> document.</p>
+	SrcTopicRegion *string `json:"SrcTopicRegion,omitnil,omitempty" name:"SrcTopicRegion"`
+
+	// <p>Task name, 0-255 characters</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Syntax rules. Default value: 0. 0: Lucene syntax, 1: CQL syntax</p>
 	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
+
+	// <p>Whether to enable delivery service log. 1: Disabled, 2: Enabled.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// <p>Full-text search query tag. 1: Off, 2: On.</p>
+	FullQuery *uint64 `json:"FullQuery,omitnil,omitempty" name:"FullQuery"`
+
+	// <p>Scheduling period unit</p><p>Value ranges from 1 to 2</p><p>Default value: 1</p><p>Default value 1 (minute), other value 2 (second)</p>
+	ProcessPeriodUnit *int64 `json:"ProcessPeriodUnit,omitnil,omitempty" name:"ProcessPeriodUnit"`
 }
 
 type ModifyScheduledSqlRequest struct {
 	*tchttp.BaseRequest
 	
-	// Task ID, which can be obtained through [scheduled SQL analysis task list](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1).
+	// <p>Task ID, obtained by <a href="https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1">searching the scheduled SQL analysis task list</a>.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Source log topic. Search the [scheduled SQL analysis task list](https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1) to obtain it.
+	// <p>Source log topic, obtained via <a href="https://www.tencentcloud.com/document/product/614/95519?from_cn_redirect=1">search scheduled SQL analysis task list</a></p>
 	SrcTopicId *string `json:"SrcTopicId,omitnil,omitempty" name:"SrcTopicId"`
 
-	// Task start status. 1: Enabled, 2: Disabled
+	// <p>Task start status. 1: Enabled, 2: Disabled</p>
 	EnableFlag *int64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
 
-	// Target log topic for scheduled SQL analysis
+	// <p>Target log topic for scheduled SQL analysis</p>
 	DstResource *ScheduledSqlResouceInfo `json:"DstResource,omitnil,omitempty" name:"DstResource"`
 
-	// Queries statements
+	// <p>Query statement</p>
 	ScheduledSqlContent *string `json:"ScheduledSqlContent,omitnil,omitempty" name:"ScheduledSqlContent"`
 
-	// Scheduling cycle (minutes), 1-1440 minutes
+	// <p>Scheduling Interval (Minutes), 1-1440 minutes</p>
 	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
 
-	// Time window for a single query. Example: last 15 minutes
+	// <p>Time window for a single query. Example: last 15 minutes</p>
 	ProcessTimeWindow *string `json:"ProcessTimeWindow,omitnil,omitempty" name:"ProcessTimeWindow"`
 
-	// Execution delay (seconds), 0-120 seconds, default 60
+	// <p>Execution delay (seconds), 0-120 seconds, default 60 seconds</p>
 	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
 
-	// Regional information of the source topicId. Supported regions are listed in the region list document (https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
+	// <p>Regional information of the source topicId. For supported regions, see the <a href="https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">region list</a> document.</p>
 	SrcTopicRegion *string `json:"SrcTopicRegion,omitnil,omitempty" name:"SrcTopicRegion"`
 
-	// Task name, 0-255 characters
+	// <p>Task name, 0-255 characters</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Syntax rules. Default value: 0. 0: Lucene syntax, 1: CQL syntax
+	// <p>Syntax rules. Default value: 0. 0: Lucene syntax, 1: CQL syntax</p>
 	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
+
+	// <p>Whether to enable delivery service log. 1: Disabled, 2: Enabled.</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// <p>Full-text search query tag. 1: Off, 2: On.</p>
+	FullQuery *uint64 `json:"FullQuery,omitnil,omitempty" name:"FullQuery"`
+
+	// <p>Scheduling period unit</p><p>Value ranges from 1 to 2</p><p>Default value: 1</p><p>Default value 1 (minute), other value 2 (second)</p>
+	ProcessPeriodUnit *int64 `json:"ProcessPeriodUnit,omitnil,omitempty" name:"ProcessPeriodUnit"`
 }
 
 func (r *ModifyScheduledSqlRequest) ToJsonString() string {
@@ -18032,6 +18502,9 @@ func (r *ModifyScheduledSqlRequest) FromJsonString(s string) error {
 	delete(f, "SrcTopicRegion")
 	delete(f, "Name")
 	delete(f, "SyntaxRule")
+	delete(f, "HasServicesLog")
+	delete(f, "FullQuery")
+	delete(f, "ProcessPeriodUnit")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyScheduledSqlRequest has unknown keys!", "")
 	}
@@ -19842,6 +20315,88 @@ type Relabeling struct {
 	Modulus *uint64 `json:"Modulus,omitnil,omitempty" name:"Modulus"`
 }
 
+type RemoteWriteAuthInfo struct {
+	// basic auth username
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
+
+	// basic auth password
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// basic auth token
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Token *string `json:"Token,omitnil,omitempty" name:"Token"`
+}
+
+type RemoteWriteInfo struct {
+	// Task ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Log topic ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// RemoteWrite task name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Network type.
+	// Valid values: 1: private network
+	// 2: Public network
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NetType *uint64 `json:"NetType,omitnil,omitempty" name:"NetType"`
+
+	// VPC id
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Task running status
+	// 1: Running
+	// 2: Suspend
+	// 3: Failure
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Creation time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Update time
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Target service name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+
+	// Destination address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RemoteWriteURL *string `json:"RemoteWriteURL,omitnil,omitempty" name:"RemoteWriteURL"`
+
+	// Authentication type
+	// Valid values: 0: no authentication; 1: basic_auth; 2: token.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AuthType *uint64 `json:"AuthType,omitnil,omitempty" name:"AuthType"`
+
+	// Authentication information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AuthInfo *RemoteWriteAuthInfo `json:"AuthInfo,omitnil,omitempty" name:"AuthInfo"`
+
+	// Logset
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// Task status.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Enable *uint64 `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// Backend service type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VirtualGatewayType *int64 `json:"VirtualGatewayType,omitnil,omitempty" name:"VirtualGatewayType"`
+}
+
 // Predefined struct for user
 type RetryShipperTaskRequestParams struct {
 	// Shipping Rule Id.
@@ -19973,65 +20528,68 @@ type ScheduledSqlResouceInfo struct {
 }
 
 type ScheduledSqlTaskInfo struct {
-	// ScheduledSql task id
+	// <p>ScheduledSql task id</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// ScheduledSql task name
+	// <p>ScheduledSql task name</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Source Log Topic ID
+	// <p>Source log topic id.</p>
 	SrcTopicId *string `json:"SrcTopicId,omitnil,omitempty" name:"SrcTopicId"`
 
-	// Source Log Topic Name
+	// <p>source log topic name</p>
 	SrcTopicName *string `json:"SrcTopicName,omitnil,omitempty" name:"SrcTopicName"`
 
-	// Scheduled SQL analysis of target topic
+	// <p>Scheduled SQL analysis target topic</p>
 	DstResource *ScheduledSqlResouceInfo `json:"DstResource,omitnil,omitempty" name:"DstResource"`
 
-	// Task creation time. Format: yyyy-MM-dd HH:mm:ss
+	// <p>Task creation time. Format: yyyy-MM-dd HH:mm:ss</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Task update time. Format: yyyy-MM-dd HH:mm:ss
+	// <p>Task update time. Format: yyyy-MM-dd HH:mm:ss</p>
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Task status: 1: Running 2: Stop 3: Exception - Source log topic not found 4: Exception - target topic not found5: Access permission issue 6: Internal failure 7: Other faults
+	// <p>Task status, 1: Running 2: Stopped 3: Exception - Source log topic not found 4: Exception - Target topic not found</p><p>5: Access permission issue 6: Internal fault 7: Other faults</p>
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Task status: 1 Enabled, 2 Disabled
+	// <p>Task status: 1 Enabled, 2 Disabled</p>
 	EnableFlag *int64 `json:"EnableFlag,omitnil,omitempty" name:"EnableFlag"`
 
-	// Queries statements
+	// <p>Query statement</p>
 	ScheduledSqlContent *string `json:"ScheduledSqlContent,omitnil,omitempty" name:"ScheduledSqlContent"`
 
-	// Schedule start time. Format: yyyy-MM-dd HH:mm:ss
+	// <p>Schedule start time. Format: yyyy-MM-dd HH:mm:ss</p>
 	ProcessStartTime *string `json:"ProcessStartTime,omitnil,omitempty" name:"ProcessStartTime"`
 
-	// Schedule Type: 1 Continuous Running 2 Specified Time Range
+	// <p>Schedule Type: 1 Continuous Running 2 Specified Time Range</p>
 	ProcessType *int64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 
-	// Schedule End Time, format: yyyy-MM-dd HH:mm:ss, required when process_type=2
+	// <p>Schedule End Time, format: yyyy-MM-dd HH:mm:ss, required when process_type=2</p>
 	ProcessEndTime *string `json:"ProcessEndTime,omitnil,omitempty" name:"ProcessEndTime"`
 
-	// Scheduling cycle (minutes), 1-1440 minutes
+	// <p>Scheduling Interval (Minutes), 1-1440 minutes</p>
 	ProcessPeriod *int64 `json:"ProcessPeriod,omitnil,omitempty" name:"ProcessPeriod"`
 
-	// Query Time Window. @m-15m, @m, meaning the last 15 minutes
+	// <p>Query Time Window. @m-15m, @m, meaning the last 15 minutes</p>
 	ProcessTimeWindow *string `json:"ProcessTimeWindow,omitnil,omitempty" name:"ProcessTimeWindow"`
 
-	// Execution delay (seconds), 0-120 seconds, default 60
+	// <p>Execution delay (seconds), 0-120 seconds, default 60 seconds</p>
 	ProcessDelay *int64 `json:"ProcessDelay,omitnil,omitempty" name:"ProcessDelay"`
 
-	// Regional information of the source topicId. Supported regions are listed in the region list document (https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
+	// <p>Regional information of the source topicId. For supported regions, see the <a href="https://www.tencentcloud.com/document/api/614/56474?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">region list</a> document.</p>
 	SrcTopicRegion *string `json:"SrcTopicRegion,omitnil,omitempty" name:"SrcTopicRegion"`
 
-	// Syntax rules. 0: Lucene syntax; 1: CQL syntax.
+	// <p>Syntax rules. 0: Lucene syntax, 1: CQL syntax</p>
 	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
 
-	// Whether to enable service log shipping. Valid values: 1: disable; 2: enable.
+	// <p>Whether the delivery service log is enabled. 1: Turn off, 2: Turn on.</p>
 	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
 
-	// Full-text search tag. 1: Off, 2: On.
+	// <p>Full-text search tag. 1: Off, 2: On.</p>
 	FullQuery *uint64 `json:"FullQuery,omitnil,omitempty" name:"FullQuery"`
+
+	// <p>Scheduling cycle time unit</p><p>Value ranges from 1 to 2</p><p>Default value: 1</p><p>Default value 1 (minute), other value 2 (second)</p>
+	ProcessPeriodUnit *int64 `json:"ProcessPeriodUnit,omitnil,omitempty" name:"ProcessPeriodUnit"`
 }
 
 // Predefined struct for user

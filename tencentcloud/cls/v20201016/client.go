@@ -2651,6 +2651,76 @@ func (c *Client) CreateRecordingRuleYamlTaskWithContext(ctx context.Context, req
     return
 }
 
+func NewCreateRemoteWriteTaskRequest() (request *CreateRemoteWriteTaskRequest) {
+    request = &CreateRemoteWriteTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateRemoteWriteTask")
+    
+    
+    return
+}
+
+func NewCreateRemoteWriteTaskResponse() (response *CreateRemoteWriteTaskResponse) {
+    response = &CreateRemoteWriteTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateRemoteWriteTask
+// This API is used to create a remote write delivery task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateRemoteWriteTask(request *CreateRemoteWriteTaskRequest) (response *CreateRemoteWriteTaskResponse, err error) {
+    return c.CreateRemoteWriteTaskWithContext(context.Background(), request)
+}
+
+// CreateRemoteWriteTask
+// This API is used to create a remote write delivery task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateRemoteWriteTaskWithContext(ctx context.Context, request *CreateRemoteWriteTaskRequest) (response *CreateRemoteWriteTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateRemoteWriteTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateRemoteWriteTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRemoteWriteTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRemoteWriteTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateScheduledSqlRequest() (request *CreateScheduledSqlRequest) {
     request = &CreateScheduledSqlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5067,6 +5137,72 @@ func (c *Client) DeleteRecordingRuleYamlTaskWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDeleteRecordingRuleYamlTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteRemoteWriteTaskRequest() (request *DeleteRemoteWriteTaskRequest) {
+    request = &DeleteRemoteWriteTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteRemoteWriteTask")
+    
+    
+    return
+}
+
+func NewDeleteRemoteWriteTaskResponse() (response *DeleteRemoteWriteTaskResponse) {
+    response = &DeleteRemoteWriteTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteRemoteWriteTask
+// This API is used to delete a RemoteWrite task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteRemoteWriteTask(request *DeleteRemoteWriteTaskRequest) (response *DeleteRemoteWriteTaskResponse, err error) {
+    return c.DeleteRemoteWriteTaskWithContext(context.Background(), request)
+}
+
+// DeleteRemoteWriteTask
+// This API is used to delete a RemoteWrite task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteRemoteWriteTaskWithContext(ctx context.Context, request *DeleteRemoteWriteTaskRequest) (response *DeleteRemoteWriteTaskResponse, err error) {
+    if request == nil {
+        request = NewDeleteRemoteWriteTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteRemoteWriteTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteRemoteWriteTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteRemoteWriteTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -8771,6 +8907,78 @@ func (c *Client) DescribeRecordingRuleYamlTaskWithContext(ctx context.Context, r
     return
 }
 
+func NewDescribeRemoteWriteTasksRequest() (request *DescribeRemoteWriteTasksRequest) {
+    request = &DescribeRemoteWriteTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeRemoteWriteTasks")
+    
+    
+    return
+}
+
+func NewDescribeRemoteWriteTasksResponse() (response *DescribeRemoteWriteTasksResponse) {
+    response = &DescribeRemoteWriteTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRemoteWriteTasks
+// This API is used to obtain the list of RemoteWrite delivery tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeRemoteWriteTasks(request *DescribeRemoteWriteTasksRequest) (response *DescribeRemoteWriteTasksResponse, err error) {
+    return c.DescribeRemoteWriteTasksWithContext(context.Background(), request)
+}
+
+// DescribeRemoteWriteTasks
+// This API is used to obtain the list of RemoteWrite delivery tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_TOPICCONFLICT = "InvalidParameter.TopicConflict"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeRemoteWriteTasksWithContext(ctx context.Context, request *DescribeRemoteWriteTasksRequest) (response *DescribeRemoteWriteTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeRemoteWriteTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeRemoteWriteTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRemoteWriteTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRemoteWriteTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeScheduledSqlInfoRequest() (request *DescribeScheduledSqlInfoRequest) {
     request = &DescribeScheduledSqlInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -11871,6 +12079,76 @@ func (c *Client) ModifyRecordingRuleYamlTaskWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewModifyRecordingRuleYamlTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyRemoteWriteTaskRequest() (request *ModifyRemoteWriteTaskRequest) {
+    request = &ModifyRemoteWriteTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyRemoteWriteTask")
+    
+    
+    return
+}
+
+func NewModifyRemoteWriteTaskResponse() (response *ModifyRemoteWriteTaskResponse) {
+    response = &ModifyRemoteWriteTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyRemoteWriteTask
+// This API is used to modify a RemoteWrite task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyRemoteWriteTask(request *ModifyRemoteWriteTaskRequest) (response *ModifyRemoteWriteTaskResponse, err error) {
+    return c.ModifyRemoteWriteTaskWithContext(context.Background(), request)
+}
+
+// ModifyRemoteWriteTask
+// This API is used to modify a RemoteWrite task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyRemoteWriteTaskWithContext(ctx context.Context, request *ModifyRemoteWriteTaskRequest) (response *ModifyRemoteWriteTaskResponse, err error) {
+    if request == nil {
+        request = NewModifyRemoteWriteTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyRemoteWriteTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyRemoteWriteTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyRemoteWriteTaskResponse()
     err = c.Send(request, response)
     return
 }
