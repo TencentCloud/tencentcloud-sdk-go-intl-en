@@ -70,6 +70,8 @@ func NewAddTeamMemberResponse() (response *AddTeamMemberResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDROLEID = "InvalidParameterValue.InvalidRoleId"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 //  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
@@ -83,6 +85,8 @@ func (c *Client) AddTeamMember(request *AddTeamMemberRequest) (response *AddTeam
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDROLEID = "InvalidParameterValue.InvalidRoleId"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 //  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
@@ -99,6 +103,208 @@ func (c *Client) AddTeamMemberWithContext(ctx context.Context, request *AddTeamM
     request.SetContext(ctx)
     
     response = NewAddTeamMemberResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewApproveMNPPaymentEnableRequest() (request *ApproveMNPPaymentEnableRequest) {
+    request = &ApproveMNPPaymentEnableRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "ApproveMNPPaymentEnable")
+    
+    
+    return
+}
+
+func NewApproveMNPPaymentEnableResponse() (response *ApproveMNPPaymentEnableResponse) {
+    response = &ApproveMNPPaymentEnableResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ApproveMNPPaymentEnable
+// This API is used to allow the superapp to approve the activation of mini program payment.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPROVALALREADYPROCESSED = "FailedOperation.ApprovalAlreadyProcessed"
+//  FAILEDOPERATION_APPROVALNOTBELONGTOAPPLICATION = "FailedOperation.ApprovalNotBelongToApplication"
+//  FAILEDOPERATION_MNPPAYMENTALREADYENABLED = "FailedOperation.MNPPaymentAlreadyEnabled"
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_PAYMENTRECORDNOTFOUND = "FailedOperation.PaymentRecordNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_APPROVALNOTEREQUIRED = "InvalidParameterValue.ApprovalNoteRequired"
+//  INVALIDPARAMETERVALUE_INVALIDAPPROVALTYPE = "InvalidParameterValue.InvalidApprovalType"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_PAYMENTRECORDNOTFOUND = "InvalidParameterValue.PaymentRecordNotFound"
+func (c *Client) ApproveMNPPaymentEnable(request *ApproveMNPPaymentEnableRequest) (response *ApproveMNPPaymentEnableResponse, err error) {
+    return c.ApproveMNPPaymentEnableWithContext(context.Background(), request)
+}
+
+// ApproveMNPPaymentEnable
+// This API is used to allow the superapp to approve the activation of mini program payment.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPROVALALREADYPROCESSED = "FailedOperation.ApprovalAlreadyProcessed"
+//  FAILEDOPERATION_APPROVALNOTBELONGTOAPPLICATION = "FailedOperation.ApprovalNotBelongToApplication"
+//  FAILEDOPERATION_MNPPAYMENTALREADYENABLED = "FailedOperation.MNPPaymentAlreadyEnabled"
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_PAYMENTRECORDNOTFOUND = "FailedOperation.PaymentRecordNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_APPROVALNOTEREQUIRED = "InvalidParameterValue.ApprovalNoteRequired"
+//  INVALIDPARAMETERVALUE_INVALIDAPPROVALTYPE = "InvalidParameterValue.InvalidApprovalType"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_PAYMENTRECORDNOTFOUND = "InvalidParameterValue.PaymentRecordNotFound"
+func (c *Client) ApproveMNPPaymentEnableWithContext(ctx context.Context, request *ApproveMNPPaymentEnableRequest) (response *ApproveMNPPaymentEnableResponse, err error) {
+    if request == nil {
+        request = NewApproveMNPPaymentEnableRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "ApproveMNPPaymentEnable")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ApproveMNPPaymentEnable require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewApproveMNPPaymentEnableResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewApprovePaymentMerchantBindingRequest() (request *ApprovePaymentMerchantBindingRequest) {
+    request = &ApprovePaymentMerchantBindingRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "ApprovePaymentMerchantBinding")
+    
+    
+    return
+}
+
+func NewApprovePaymentMerchantBindingResponse() (response *ApprovePaymentMerchantBindingResponse) {
+    response = &ApprovePaymentMerchantBindingResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ApprovePaymentMerchantBinding
+// This API is used to allow the superapp to approve the payment merchant binding request of a mini program team.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPROVALALREADYPROCESSED = "FailedOperation.ApprovalAlreadyProcessed"
+//  FAILEDOPERATION_APPROVALNOTBELONGTOAPPLICATION = "FailedOperation.ApprovalNotBelongToApplication"
+//  FAILEDOPERATION_EXISTMERCHANTBINDAPPLY = "FailedOperation.ExistMerchantBindApply"
+//  FAILEDOPERATION_EXISTMERCHANTBINDRELATION = "FailedOperation.ExistMerchantBindRelation"
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  FAILEDOPERATION_PAYMENTRECORDNOTBELONGTOAPPLICATION = "FailedOperation.PaymentRecordNotBelongToApplication"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_APPROVALNOTEREQUIRED = "InvalidParameterValue.ApprovalNoteRequired"
+//  INVALIDPARAMETERVALUE_INVALIDAPPROVALTYPE = "InvalidParameterValue.InvalidApprovalType"
+//  INVALIDPARAMETERVALUE_PAYMENTRECORDNOTFOUND = "InvalidParameterValue.PaymentRecordNotFound"
+func (c *Client) ApprovePaymentMerchantBinding(request *ApprovePaymentMerchantBindingRequest) (response *ApprovePaymentMerchantBindingResponse, err error) {
+    return c.ApprovePaymentMerchantBindingWithContext(context.Background(), request)
+}
+
+// ApprovePaymentMerchantBinding
+// This API is used to allow the superapp to approve the payment merchant binding request of a mini program team.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPROVALALREADYPROCESSED = "FailedOperation.ApprovalAlreadyProcessed"
+//  FAILEDOPERATION_APPROVALNOTBELONGTOAPPLICATION = "FailedOperation.ApprovalNotBelongToApplication"
+//  FAILEDOPERATION_EXISTMERCHANTBINDAPPLY = "FailedOperation.ExistMerchantBindApply"
+//  FAILEDOPERATION_EXISTMERCHANTBINDRELATION = "FailedOperation.ExistMerchantBindRelation"
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  FAILEDOPERATION_PAYMENTRECORDNOTBELONGTOAPPLICATION = "FailedOperation.PaymentRecordNotBelongToApplication"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_APPROVALNOTEREQUIRED = "InvalidParameterValue.ApprovalNoteRequired"
+//  INVALIDPARAMETERVALUE_INVALIDAPPROVALTYPE = "InvalidParameterValue.InvalidApprovalType"
+//  INVALIDPARAMETERVALUE_PAYMENTRECORDNOTFOUND = "InvalidParameterValue.PaymentRecordNotFound"
+func (c *Client) ApprovePaymentMerchantBindingWithContext(ctx context.Context, request *ApprovePaymentMerchantBindingRequest) (response *ApprovePaymentMerchantBindingResponse, err error) {
+    if request == nil {
+        request = NewApprovePaymentMerchantBindingRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "ApprovePaymentMerchantBinding")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ApprovePaymentMerchantBinding require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewApprovePaymentMerchantBindingResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewChangePaymentBoundMerchantRequest() (request *ChangePaymentBoundMerchantRequest) {
+    request = &ChangePaymentBoundMerchantRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "ChangePaymentBoundMerchant")
+    
+    
+    return
+}
+
+func NewChangePaymentBoundMerchantResponse() (response *ChangePaymentBoundMerchantResponse) {
+    response = &ChangePaymentBoundMerchantResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ChangePaymentBoundMerchant
+// This API is used to change the bound payment merchant.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EXISTMERCHANTBINDAPPLY = "FailedOperation.ExistMerchantBindApply"
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_PAYMENTRECORDNOTBELONGTOAPPLICATION = "FailedOperation.PaymentRecordNotBelongToApplication"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDMERCHANTID = "InvalidParameterValue.InvalidMerchantId"
+//  INVALIDPARAMETERVALUE_INVALIDMERCHANTNAME = "InvalidParameterValue.InvalidMerchantName"
+func (c *Client) ChangePaymentBoundMerchant(request *ChangePaymentBoundMerchantRequest) (response *ChangePaymentBoundMerchantResponse, err error) {
+    return c.ChangePaymentBoundMerchantWithContext(context.Background(), request)
+}
+
+// ChangePaymentBoundMerchant
+// This API is used to change the bound payment merchant.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EXISTMERCHANTBINDAPPLY = "FailedOperation.ExistMerchantBindApply"
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_PAYMENTRECORDNOTBELONGTOAPPLICATION = "FailedOperation.PaymentRecordNotBelongToApplication"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDMERCHANTID = "InvalidParameterValue.InvalidMerchantId"
+//  INVALIDPARAMETERVALUE_INVALIDMERCHANTNAME = "InvalidParameterValue.InvalidMerchantName"
+func (c *Client) ChangePaymentBoundMerchantWithContext(ctx context.Context, request *ChangePaymentBoundMerchantRequest) (response *ChangePaymentBoundMerchantResponse, err error) {
+    if request == nil {
+        request = NewChangePaymentBoundMerchantRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "ChangePaymentBoundMerchant")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ChangePaymentBoundMerchant require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewChangePaymentBoundMerchantResponse()
     err = c.Send(request, response)
     return
 }
@@ -129,6 +335,8 @@ func NewConfigureMNGPreviewResponse() (response *ConfigureMNGPreviewResponse) {
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  FAILEDOPERATION_SHOWCASEVERSIONALREADYEXIST = "FailedOperation.ShowcaseVersionAlreadyExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) ConfigureMNGPreview(request *ConfigureMNGPreviewRequest) (response *ConfigureMNGPreviewResponse, err error) {
     return c.ConfigureMNGPreviewWithContext(context.Background(), request)
 }
@@ -140,6 +348,8 @@ func (c *Client) ConfigureMNGPreview(request *ConfigureMNGPreviewRequest) (respo
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  FAILEDOPERATION_SHOWCASEVERSIONALREADYEXIST = "FailedOperation.ShowcaseVersionAlreadyExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) ConfigureMNGPreviewWithContext(ctx context.Context, request *ConfigureMNGPreviewRequest) (response *ConfigureMNGPreviewResponse, err error) {
     if request == nil {
         request = NewConfigureMNGPreviewRequest()
@@ -183,6 +393,8 @@ func NewConfigureMNPPreviewResponse() (response *ConfigureMNPPreviewResponse) {
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  FAILEDOPERATION_SHOWCASEVERSIONALREADYEXIST = "FailedOperation.ShowcaseVersionAlreadyExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) ConfigureMNPPreview(request *ConfigureMNPPreviewRequest) (response *ConfigureMNPPreviewResponse, err error) {
     return c.ConfigureMNPPreviewWithContext(context.Background(), request)
 }
@@ -194,6 +406,8 @@ func (c *Client) ConfigureMNPPreview(request *ConfigureMNPPreviewRequest) (respo
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  FAILEDOPERATION_SHOWCASEVERSIONALREADYEXIST = "FailedOperation.ShowcaseVersionAlreadyExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) ConfigureMNPPreviewWithContext(ctx context.Context, request *ConfigureMNPPreviewRequest) (response *ConfigureMNPPreviewResponse, err error) {
     if request == nil {
         request = NewConfigureMNPPreviewRequest()
@@ -237,6 +451,7 @@ func NewCreateApplicationResponse() (response *CreateApplicationResponse) {
 //  FAILEDOPERATION_APPLICATIONNAMEALREADYEXISTED = "FailedOperation.ApplicationNameAlreadyExisted"
 //  FAILEDOPERATION_APPLICATIONNUMBEREXCEEDLIMIT = "FailedOperation.ApplicationNumberExceedLimit"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_APPPACKAGENAMENOTCONFIG = "InvalidParameterValue.AppPackageNameNotConfig"
 //  INVALIDPARAMETERVALUE_INVALIDAPPPACKAGENAMELAYOUT = "InvalidParameterValue.InvalidAppPackageNameLayout"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONINTRO = "InvalidParameterValue.InvalidApplicationIntro"
@@ -253,6 +468,7 @@ func (c *Client) CreateApplication(request *CreateApplicationRequest) (response 
 //  FAILEDOPERATION_APPLICATIONNAMEALREADYEXISTED = "FailedOperation.ApplicationNameAlreadyExisted"
 //  FAILEDOPERATION_APPLICATIONNUMBEREXCEEDLIMIT = "FailedOperation.ApplicationNumberExceedLimit"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_APPPACKAGENAMENOTCONFIG = "InvalidParameterValue.AppPackageNameNotConfig"
 //  INVALIDPARAMETERVALUE_INVALIDAPPPACKAGENAMELAYOUT = "InvalidParameterValue.InvalidAppPackageNameLayout"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONINTRO = "InvalidParameterValue.InvalidApplicationIntro"
@@ -300,6 +516,7 @@ func NewCreateApplicationConfigResponse() (response *CreateApplicationConfigResp
 // error code that may be returned:
 //  FAILEDOPERATION_PRODAPPLICATIONCONFIGEXCEEDLIMIT = "FailedOperation.ProdApplicationConfigExceedLimit"
 //  FAILEDOPERATION_TESTAPPLICATIONCONFIGEXCEEDLIMIT = "FailedOperation.TestApplicationConfigExceedLimit"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_INVALIDEXISTSAMEAPPKEY = "InvalidParameter.InvalidExistSameAppKey"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_APPKEYLENGTHEXCEEDLIMIT = "InvalidParameterValue.AppKeyLengthExceedLimit"
@@ -314,6 +531,7 @@ func (c *Client) CreateApplicationConfig(request *CreateApplicationConfigRequest
 // error code that may be returned:
 //  FAILEDOPERATION_PRODAPPLICATIONCONFIGEXCEEDLIMIT = "FailedOperation.ProdApplicationConfigExceedLimit"
 //  FAILEDOPERATION_TESTAPPLICATIONCONFIGEXCEEDLIMIT = "FailedOperation.TestApplicationConfigExceedLimit"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_INVALIDEXISTSAMEAPPKEY = "InvalidParameter.InvalidExistSameAppKey"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_APPKEYLENGTHEXCEEDLIMIT = "InvalidParameterValue.AppKeyLengthExceedLimit"
@@ -361,6 +579,8 @@ func NewCreateApplicationSensitiveAPIResponse() (response *CreateApplicationSens
 //  FAILEDOPERATION_EXISTSENSITIVEAPI = "FailedOperation.ExistSensitiveAPI"
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
 func (c *Client) CreateApplicationSensitiveAPI(request *CreateApplicationSensitiveAPIRequest) (response *CreateApplicationSensitiveAPIResponse, err error) {
     return c.CreateApplicationSensitiveAPIWithContext(context.Background(), request)
@@ -373,6 +593,8 @@ func (c *Client) CreateApplicationSensitiveAPI(request *CreateApplicationSensiti
 //  FAILEDOPERATION_EXISTSENSITIVEAPI = "FailedOperation.ExistSensitiveAPI"
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
 func (c *Client) CreateApplicationSensitiveAPIWithContext(ctx context.Context, request *CreateApplicationSensitiveAPIRequest) (response *CreateApplicationSensitiveAPIResponse, err error) {
     if request == nil {
@@ -416,6 +638,7 @@ func NewCreateGlobalDomainACLResponse() (response *CreateGlobalDomainACLResponse
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) CreateGlobalDomainACL(request *CreateGlobalDomainACLRequest) (response *CreateGlobalDomainACLResponse, err error) {
     return c.CreateGlobalDomainACLWithContext(context.Background(), request)
 }
@@ -426,6 +649,7 @@ func (c *Client) CreateGlobalDomainACL(request *CreateGlobalDomainACLRequest) (r
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) CreateGlobalDomainACLWithContext(ctx context.Context, request *CreateGlobalDomainACLRequest) (response *CreateGlobalDomainACLResponse, err error) {
     if request == nil {
         request = NewCreateGlobalDomainACLRequest()
@@ -468,6 +692,12 @@ func NewCreateMNGResponse() (response *CreateMNGResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_MNPNUMBEREXCEEDLIMIT = "FailedOperation.MNPNumberExceedLimit"
 //  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_AGERATINGEXCEEDSUPPERAPPLIMIT = "InvalidParameterValue.AgeRatingExceedSupperAppLimit"
+//  INVALIDPARAMETERVALUE_DUPLICATEAGERATINGSTANDARD = "InvalidParameterValue.DuplicateAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDAGERATINGSTANDARD = "InvalidParameterValue.InvalidAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDMNPI18NLANG = "InvalidParameterValue.InvalidMNPI18NLang"
 //  INVALIDPARAMETERVALUE_INVALIDMNPICON = "InvalidParameterValue.InvalidMNPIcon"
 //  INVALIDPARAMETERVALUE_INVALIDMNPINTRO = "InvalidParameterValue.InvalidMNPIntro"
 //  INVALIDPARAMETERVALUE_INVALIDMNPNAME = "InvalidParameterValue.InvalidMNPName"
@@ -484,6 +714,12 @@ func (c *Client) CreateMNG(request *CreateMNGRequest) (response *CreateMNGRespon
 // error code that may be returned:
 //  FAILEDOPERATION_MNPNUMBEREXCEEDLIMIT = "FailedOperation.MNPNumberExceedLimit"
 //  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_AGERATINGEXCEEDSUPPERAPPLIMIT = "InvalidParameterValue.AgeRatingExceedSupperAppLimit"
+//  INVALIDPARAMETERVALUE_DUPLICATEAGERATINGSTANDARD = "InvalidParameterValue.DuplicateAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDAGERATINGSTANDARD = "InvalidParameterValue.InvalidAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDMNPI18NLANG = "InvalidParameterValue.InvalidMNPI18NLang"
 //  INVALIDPARAMETERVALUE_INVALIDMNPICON = "InvalidParameterValue.InvalidMNPIcon"
 //  INVALIDPARAMETERVALUE_INVALIDMNPINTRO = "InvalidParameterValue.InvalidMNPIntro"
 //  INVALIDPARAMETERVALUE_INVALIDMNPNAME = "InvalidParameterValue.InvalidMNPName"
@@ -532,6 +768,7 @@ func NewCreateMNGAppSecretResponse() (response *CreateMNGAppSecretResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) CreateMNGAppSecret(request *CreateMNGAppSecretRequest) (response *CreateMNGAppSecretResponse, err error) {
     return c.CreateMNGAppSecretWithContext(context.Background(), request)
@@ -543,6 +780,7 @@ func (c *Client) CreateMNGAppSecret(request *CreateMNGAppSecretRequest) (respons
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) CreateMNGAppSecretWithContext(ctx context.Context, request *CreateMNGAppSecretRequest) (response *CreateMNGAppSecretResponse, err error) {
     if request == nil {
@@ -588,6 +826,8 @@ func NewCreateMNGApprovalResponse() (response *CreateMNGApprovalResponse) {
 //  FAILEDOPERATION_MNPTEAMASSOCIATEDAPPLICATIONTEAMNOTCREATEAPPLICATION = "FailedOperation.MNPTeamAssociatedApplicationTeamNotCreateApplication"
 //  FAILEDOPERATION_MNPTEAMNOTASSOCIATEDAPPLICATIONTEAM = "FailedOperation.MNPTeamNotAssociatedApplicationTeam"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLYACTION = "InvalidParameterValue.InvalidApplyAction"
 //  INVALIDPARAMETERVALUE_MNPAPPROVALSTATUSERROR = "InvalidParameterValue.MNPApprovalStatusError"
 //  INVALIDPARAMETERVALUE_MNPVERSIONISNOTPLATFORMPHASE = "InvalidParameterValue.MNPVersionIsNotPlatformPhase"
@@ -603,6 +843,8 @@ func (c *Client) CreateMNGApproval(request *CreateMNGApprovalRequest) (response 
 //  FAILEDOPERATION_MNPTEAMASSOCIATEDAPPLICATIONTEAMNOTCREATEAPPLICATION = "FailedOperation.MNPTeamAssociatedApplicationTeamNotCreateApplication"
 //  FAILEDOPERATION_MNPTEAMNOTASSOCIATEDAPPLICATIONTEAM = "FailedOperation.MNPTeamNotAssociatedApplicationTeam"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLYACTION = "InvalidParameterValue.InvalidApplyAction"
 //  INVALIDPARAMETERVALUE_MNPAPPROVALSTATUSERROR = "InvalidParameterValue.MNPApprovalStatusError"
 //  INVALIDPARAMETERVALUE_MNPVERSIONISNOTPLATFORMPHASE = "InvalidParameterValue.MNPVersionIsNotPlatformPhase"
@@ -649,6 +891,8 @@ func NewCreateMNGDomainACLResponse() (response *CreateMNGDomainACLResponse) {
 //  FAILEDOPERATION_EXISTREPEATDOMAINURL = "FailedOperation.ExistRepeatDomainUrl"
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) CreateMNGDomainACL(request *CreateMNGDomainACLRequest) (response *CreateMNGDomainACLResponse, err error) {
     return c.CreateMNGDomainACLWithContext(context.Background(), request)
@@ -661,6 +905,8 @@ func (c *Client) CreateMNGDomainACL(request *CreateMNGDomainACLRequest) (respons
 //  FAILEDOPERATION_EXISTREPEATDOMAINURL = "FailedOperation.ExistRepeatDomainUrl"
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) CreateMNGDomainACLWithContext(ctx context.Context, request *CreateMNGDomainACLRequest) (response *CreateMNGDomainACLResponse, err error) {
     if request == nil {
@@ -704,6 +950,8 @@ func NewCreateMNGSensitiveAPIPermissionApprovalResponse() (response *CreateMNGSe
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) CreateMNGSensitiveAPIPermissionApproval(request *CreateMNGSensitiveAPIPermissionApprovalRequest) (response *CreateMNGSensitiveAPIPermissionApprovalResponse, err error) {
     return c.CreateMNGSensitiveAPIPermissionApprovalWithContext(context.Background(), request)
 }
@@ -714,6 +962,8 @@ func (c *Client) CreateMNGSensitiveAPIPermissionApproval(request *CreateMNGSensi
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) CreateMNGSensitiveAPIPermissionApprovalWithContext(ctx context.Context, request *CreateMNGSensitiveAPIPermissionApprovalRequest) (response *CreateMNGSensitiveAPIPermissionApprovalResponse, err error) {
     if request == nil {
         request = NewCreateMNGSensitiveAPIPermissionApprovalRequest()
@@ -756,6 +1006,7 @@ func NewCreateMNGSubscribeMessageTemplateResponse() (response *CreateMNGSubscrib
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) CreateMNGSubscribeMessageTemplate(request *CreateMNGSubscribeMessageTemplateRequest) (response *CreateMNGSubscribeMessageTemplateResponse, err error) {
     return c.CreateMNGSubscribeMessageTemplateWithContext(context.Background(), request)
@@ -767,6 +1018,7 @@ func (c *Client) CreateMNGSubscribeMessageTemplate(request *CreateMNGSubscribeMe
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) CreateMNGSubscribeMessageTemplateWithContext(ctx context.Context, request *CreateMNGSubscribeMessageTemplateRequest) (response *CreateMNGSubscribeMessageTemplateResponse, err error) {
     if request == nil {
@@ -810,6 +1062,7 @@ func NewCreateMNGVersionResponse() (response *CreateMNGVersionResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_FILEDOWNLOADFAILED = "FailedOperation.FileDownloadFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_EXISTMISMATCHPARAMETERTYPE = "InvalidParameterValue.ExistMismatchParameterType"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 //  INVALIDPARAMETERVALUE_INVALIDMNPVERSION = "InvalidParameterValue.InvalidMNPVersion"
@@ -825,6 +1078,7 @@ func (c *Client) CreateMNGVersion(request *CreateMNGVersionRequest) (response *C
 // error code that may be returned:
 //  FAILEDOPERATION_FILEDOWNLOADFAILED = "FailedOperation.FileDownloadFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_EXISTMISMATCHPARAMETERTYPE = "InvalidParameterValue.ExistMismatchParameterType"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 //  INVALIDPARAMETERVALUE_INVALIDMNPVERSION = "InvalidParameterValue.InvalidMNPVersion"
@@ -872,6 +1126,12 @@ func NewCreateMNPResponse() (response *CreateMNPResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_MNPNUMBEREXCEEDLIMIT = "FailedOperation.MNPNumberExceedLimit"
 //  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_AGERATINGEXCEEDSUPPERAPPLIMIT = "InvalidParameterValue.AgeRatingExceedSupperAppLimit"
+//  INVALIDPARAMETERVALUE_DUPLICATEAGERATINGSTANDARD = "InvalidParameterValue.DuplicateAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDAGERATINGSTANDARD = "InvalidParameterValue.InvalidAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDMNPI18NLANG = "InvalidParameterValue.InvalidMNPI18NLang"
 //  INVALIDPARAMETERVALUE_INVALIDMNPICON = "InvalidParameterValue.InvalidMNPIcon"
 //  INVALIDPARAMETERVALUE_INVALIDMNPINTRO = "InvalidParameterValue.InvalidMNPIntro"
 //  INVALIDPARAMETERVALUE_INVALIDMNPNAME = "InvalidParameterValue.InvalidMNPName"
@@ -888,6 +1148,12 @@ func (c *Client) CreateMNP(request *CreateMNPRequest) (response *CreateMNPRespon
 // error code that may be returned:
 //  FAILEDOPERATION_MNPNUMBEREXCEEDLIMIT = "FailedOperation.MNPNumberExceedLimit"
 //  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_AGERATINGEXCEEDSUPPERAPPLIMIT = "InvalidParameterValue.AgeRatingExceedSupperAppLimit"
+//  INVALIDPARAMETERVALUE_DUPLICATEAGERATINGSTANDARD = "InvalidParameterValue.DuplicateAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDAGERATINGSTANDARD = "InvalidParameterValue.InvalidAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDMNPI18NLANG = "InvalidParameterValue.InvalidMNPI18NLang"
 //  INVALIDPARAMETERVALUE_INVALIDMNPICON = "InvalidParameterValue.InvalidMNPIcon"
 //  INVALIDPARAMETERVALUE_INVALIDMNPINTRO = "InvalidParameterValue.InvalidMNPIntro"
 //  INVALIDPARAMETERVALUE_INVALIDMNPNAME = "InvalidParameterValue.InvalidMNPName"
@@ -936,6 +1202,7 @@ func NewCreateMNPAppSecretResponse() (response *CreateMNPAppSecretResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) CreateMNPAppSecret(request *CreateMNPAppSecretRequest) (response *CreateMNPAppSecretResponse, err error) {
     return c.CreateMNPAppSecretWithContext(context.Background(), request)
@@ -947,6 +1214,7 @@ func (c *Client) CreateMNPAppSecret(request *CreateMNPAppSecretRequest) (respons
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) CreateMNPAppSecretWithContext(ctx context.Context, request *CreateMNPAppSecretRequest) (response *CreateMNPAppSecretResponse, err error) {
     if request == nil {
@@ -992,6 +1260,8 @@ func NewCreateMNPApprovalResponse() (response *CreateMNPApprovalResponse) {
 //  FAILEDOPERATION_MNPTEAMASSOCIATEDAPPLICATIONTEAMNOTCREATEAPPLICATION = "FailedOperation.MNPTeamAssociatedApplicationTeamNotCreateApplication"
 //  FAILEDOPERATION_MNPTEAMNOTASSOCIATEDAPPLICATIONTEAM = "FailedOperation.MNPTeamNotAssociatedApplicationTeam"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLYACTION = "InvalidParameterValue.InvalidApplyAction"
 //  INVALIDPARAMETERVALUE_MNPAPPROVALSTATUSERROR = "InvalidParameterValue.MNPApprovalStatusError"
 //  INVALIDPARAMETERVALUE_MNPVERSIONISNOTPLATFORMPHASE = "InvalidParameterValue.MNPVersionIsNotPlatformPhase"
@@ -1007,6 +1277,8 @@ func (c *Client) CreateMNPApproval(request *CreateMNPApprovalRequest) (response 
 //  FAILEDOPERATION_MNPTEAMASSOCIATEDAPPLICATIONTEAMNOTCREATEAPPLICATION = "FailedOperation.MNPTeamAssociatedApplicationTeamNotCreateApplication"
 //  FAILEDOPERATION_MNPTEAMNOTASSOCIATEDAPPLICATIONTEAM = "FailedOperation.MNPTeamNotAssociatedApplicationTeam"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLYACTION = "InvalidParameterValue.InvalidApplyAction"
 //  INVALIDPARAMETERVALUE_MNPAPPROVALSTATUSERROR = "InvalidParameterValue.MNPApprovalStatusError"
 //  INVALIDPARAMETERVALUE_MNPVERSIONISNOTPLATFORMPHASE = "InvalidParameterValue.MNPVersionIsNotPlatformPhase"
@@ -1053,6 +1325,8 @@ func NewCreateMNPDomainACLResponse() (response *CreateMNPDomainACLResponse) {
 //  FAILEDOPERATION_EXISTREPEATDOMAINURL = "FailedOperation.ExistRepeatDomainUrl"
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) CreateMNPDomainACL(request *CreateMNPDomainACLRequest) (response *CreateMNPDomainACLResponse, err error) {
     return c.CreateMNPDomainACLWithContext(context.Background(), request)
@@ -1065,6 +1339,8 @@ func (c *Client) CreateMNPDomainACL(request *CreateMNPDomainACLRequest) (respons
 //  FAILEDOPERATION_EXISTREPEATDOMAINURL = "FailedOperation.ExistRepeatDomainUrl"
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) CreateMNPDomainACLWithContext(ctx context.Context, request *CreateMNPDomainACLRequest) (response *CreateMNPDomainACLResponse, err error) {
     if request == nil {
@@ -1107,6 +1383,7 @@ func NewCreateMNPSecretKeyResponse() (response *CreateMNPSecretKeyResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_EXISTMISMATCHPARAMETERTYPE = "InvalidParameterValue.ExistMismatchParameterType"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) CreateMNPSecretKey(request *CreateMNPSecretKeyRequest) (response *CreateMNPSecretKeyResponse, err error) {
@@ -1118,6 +1395,7 @@ func (c *Client) CreateMNPSecretKey(request *CreateMNPSecretKeyRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_EXISTMISMATCHPARAMETERTYPE = "InvalidParameterValue.ExistMismatchParameterType"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) CreateMNPSecretKeyWithContext(ctx context.Context, request *CreateMNPSecretKeyRequest) (response *CreateMNPSecretKeyResponse, err error) {
@@ -1162,6 +1440,8 @@ func NewCreateMNPSensitiveAPIPermissionApprovalResponse() (response *CreateMNPSe
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) CreateMNPSensitiveAPIPermissionApproval(request *CreateMNPSensitiveAPIPermissionApprovalRequest) (response *CreateMNPSensitiveAPIPermissionApprovalResponse, err error) {
     return c.CreateMNPSensitiveAPIPermissionApprovalWithContext(context.Background(), request)
 }
@@ -1172,6 +1452,8 @@ func (c *Client) CreateMNPSensitiveAPIPermissionApproval(request *CreateMNPSensi
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) CreateMNPSensitiveAPIPermissionApprovalWithContext(ctx context.Context, request *CreateMNPSensitiveAPIPermissionApprovalRequest) (response *CreateMNPSensitiveAPIPermissionApprovalResponse, err error) {
     if request == nil {
         request = NewCreateMNPSensitiveAPIPermissionApprovalRequest()
@@ -1214,6 +1496,7 @@ func NewCreateMNPSubscribeMessageTemplateResponse() (response *CreateMNPSubscrib
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) CreateMNPSubscribeMessageTemplate(request *CreateMNPSubscribeMessageTemplateRequest) (response *CreateMNPSubscribeMessageTemplateResponse, err error) {
     return c.CreateMNPSubscribeMessageTemplateWithContext(context.Background(), request)
@@ -1225,6 +1508,7 @@ func (c *Client) CreateMNPSubscribeMessageTemplate(request *CreateMNPSubscribeMe
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) CreateMNPSubscribeMessageTemplateWithContext(ctx context.Context, request *CreateMNPSubscribeMessageTemplateRequest) (response *CreateMNPSubscribeMessageTemplateResponse, err error) {
     if request == nil {
@@ -1268,6 +1552,7 @@ func NewCreateMNPVersionResponse() (response *CreateMNPVersionResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_FILEDOWNLOADFAILED = "FailedOperation.FileDownloadFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_EXISTMISMATCHPARAMETERTYPE = "InvalidParameterValue.ExistMismatchParameterType"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 //  INVALIDPARAMETERVALUE_INVALIDMNPVERSION = "InvalidParameterValue.InvalidMNPVersion"
@@ -1283,6 +1568,7 @@ func (c *Client) CreateMNPVersion(request *CreateMNPVersionRequest) (response *C
 // error code that may be returned:
 //  FAILEDOPERATION_FILEDOWNLOADFAILED = "FailedOperation.FileDownloadFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_EXISTMISMATCHPARAMETERTYPE = "InvalidParameterValue.ExistMismatchParameterType"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 //  INVALIDPARAMETERVALUE_INVALIDMNPVERSION = "InvalidParameterValue.InvalidMNPVersion"
@@ -1384,6 +1670,7 @@ func NewCreateTeamResponse() (response *CreateTeamResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_EXISTTEAMNAME = "InvalidParameterValue.ExistTeamName"
 func (c *Client) CreateTeam(request *CreateTeamRequest) (response *CreateTeamResponse, err error) {
     return c.CreateTeamWithContext(context.Background(), request)
@@ -1395,6 +1682,7 @@ func (c *Client) CreateTeam(request *CreateTeamRequest) (response *CreateTeamRes
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_EXISTTEAMNAME = "InvalidParameterValue.ExistTeamName"
 func (c *Client) CreateTeamWithContext(ctx context.Context, request *CreateTeamRequest) (response *CreateTeamResponse, err error) {
     if request == nil {
@@ -1438,6 +1726,7 @@ func NewCreateUserResponse() (response *CreateUserResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_EXISTUSERACCOUNT = "InvalidParameterValue.ExistUserAccount"
 func (c *Client) CreateUser(request *CreateUserRequest) (response *CreateUserResponse, err error) {
     return c.CreateUserWithContext(context.Background(), request)
@@ -1449,6 +1738,7 @@ func (c *Client) CreateUser(request *CreateUserRequest) (response *CreateUserRes
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_EXISTUSERACCOUNT = "InvalidParameterValue.ExistUserAccount"
 func (c *Client) CreateUserWithContext(ctx context.Context, request *CreateUserRequest) (response *CreateUserResponse, err error) {
     if request == nil {
@@ -1493,6 +1783,7 @@ func NewDeleteApplicationResponse() (response *DeleteApplicationResponse) {
 //  FAILEDOPERATION_APPALREADYBINDAUDIT = "FailedOperation.AppAlreadyBindAudit"
 //  FAILEDOPERATION_APPALREADYBINDMINIPROGRAM = "FailedOperation.AppAlreadyBindMiniProgram"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
 //  RESOURCENOTFOUND_NOTFOUNDPURCHASEDPACKAGE = "ResourceNotFound.NotFoundPurchasedPackage"
 func (c *Client) DeleteApplication(request *DeleteApplicationRequest) (response *DeleteApplicationResponse, err error) {
@@ -1506,6 +1797,7 @@ func (c *Client) DeleteApplication(request *DeleteApplicationRequest) (response 
 //  FAILEDOPERATION_APPALREADYBINDAUDIT = "FailedOperation.AppAlreadyBindAudit"
 //  FAILEDOPERATION_APPALREADYBINDMINIPROGRAM = "FailedOperation.AppAlreadyBindMiniProgram"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
 //  RESOURCENOTFOUND_NOTFOUNDPURCHASEDPACKAGE = "ResourceNotFound.NotFoundPurchasedPackage"
 func (c *Client) DeleteApplicationWithContext(ctx context.Context, request *DeleteApplicationRequest) (response *DeleteApplicationResponse, err error) {
@@ -1551,6 +1843,8 @@ func NewDeleteApplicationSensitiveAPIResponse() (response *DeleteApplicationSens
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DeleteApplicationSensitiveAPI(request *DeleteApplicationSensitiveAPIRequest) (response *DeleteApplicationSensitiveAPIResponse, err error) {
     return c.DeleteApplicationSensitiveAPIWithContext(context.Background(), request)
 }
@@ -1562,6 +1856,8 @@ func (c *Client) DeleteApplicationSensitiveAPI(request *DeleteApplicationSensiti
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DeleteApplicationSensitiveAPIWithContext(ctx context.Context, request *DeleteApplicationSensitiveAPIRequest) (response *DeleteApplicationSensitiveAPIResponse, err error) {
     if request == nil {
         request = NewDeleteApplicationSensitiveAPIRequest()
@@ -1604,6 +1900,7 @@ func NewDeleteGlobalDomainResponse() (response *DeleteGlobalDomainResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DeleteGlobalDomain(request *DeleteGlobalDomainRequest) (response *DeleteGlobalDomainResponse, err error) {
     return c.DeleteGlobalDomainWithContext(context.Background(), request)
 }
@@ -1614,6 +1911,7 @@ func (c *Client) DeleteGlobalDomain(request *DeleteGlobalDomainRequest) (respons
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DeleteGlobalDomainWithContext(ctx context.Context, request *DeleteGlobalDomainRequest) (response *DeleteGlobalDomainResponse, err error) {
     if request == nil {
         request = NewDeleteGlobalDomainRequest()
@@ -1655,6 +1953,8 @@ func NewDeleteMNGResponse() (response *DeleteMNGResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DeleteMNG(request *DeleteMNGRequest) (response *DeleteMNGResponse, err error) {
     return c.DeleteMNGWithContext(context.Background(), request)
@@ -1665,6 +1965,8 @@ func (c *Client) DeleteMNG(request *DeleteMNGRequest) (response *DeleteMNGRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DeleteMNGWithContext(ctx context.Context, request *DeleteMNGRequest) (response *DeleteMNGResponse, err error) {
     if request == nil {
@@ -1708,6 +2010,7 @@ func NewDeleteMNGSubscribeMessageTemplateResponse() (response *DeleteMNGSubscrib
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DeleteMNGSubscribeMessageTemplate(request *DeleteMNGSubscribeMessageTemplateRequest) (response *DeleteMNGSubscribeMessageTemplateResponse, err error) {
     return c.DeleteMNGSubscribeMessageTemplateWithContext(context.Background(), request)
@@ -1719,6 +2022,7 @@ func (c *Client) DeleteMNGSubscribeMessageTemplate(request *DeleteMNGSubscribeMe
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DeleteMNGSubscribeMessageTemplateWithContext(ctx context.Context, request *DeleteMNGSubscribeMessageTemplateRequest) (response *DeleteMNGSubscribeMessageTemplateResponse, err error) {
     if request == nil {
@@ -1761,6 +2065,8 @@ func NewDeleteMNPResponse() (response *DeleteMNPResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DeleteMNP(request *DeleteMNPRequest) (response *DeleteMNPResponse, err error) {
     return c.DeleteMNPWithContext(context.Background(), request)
@@ -1771,6 +2077,8 @@ func (c *Client) DeleteMNP(request *DeleteMNPRequest) (response *DeleteMNPRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DeleteMNPWithContext(ctx context.Context, request *DeleteMNPRequest) (response *DeleteMNPResponse, err error) {
     if request == nil {
@@ -1814,6 +2122,7 @@ func NewDeleteMNPSubscribeMessageTemplateResponse() (response *DeleteMNPSubscrib
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DeleteMNPSubscribeMessageTemplate(request *DeleteMNPSubscribeMessageTemplateRequest) (response *DeleteMNPSubscribeMessageTemplateResponse, err error) {
     return c.DeleteMNPSubscribeMessageTemplateWithContext(context.Background(), request)
@@ -1825,6 +2134,7 @@ func (c *Client) DeleteMNPSubscribeMessageTemplate(request *DeleteMNPSubscribeMe
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DeleteMNPSubscribeMessageTemplateWithContext(ctx context.Context, request *DeleteMNPSubscribeMessageTemplateRequest) (response *DeleteMNPSubscribeMessageTemplateResponse, err error) {
     if request == nil {
@@ -1867,6 +2177,7 @@ func NewDeleteTeamResponse() (response *DeleteTeamResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) DeleteTeam(request *DeleteTeamRequest) (response *DeleteTeamResponse, err error) {
     return c.DeleteTeamWithContext(context.Background(), request)
@@ -1877,6 +2188,7 @@ func (c *Client) DeleteTeam(request *DeleteTeamRequest) (response *DeleteTeamRes
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) DeleteTeamWithContext(ctx context.Context, request *DeleteTeamRequest) (response *DeleteTeamResponse, err error) {
     if request == nil {
@@ -1920,6 +2232,7 @@ func NewDeleteTeamMemberResponse() (response *DeleteTeamMemberResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) DeleteTeamMember(request *DeleteTeamMemberRequest) (response *DeleteTeamMemberResponse, err error) {
     return c.DeleteTeamMemberWithContext(context.Background(), request)
@@ -1931,6 +2244,7 @@ func (c *Client) DeleteTeamMember(request *DeleteTeamMemberRequest) (response *D
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) DeleteTeamMemberWithContext(ctx context.Context, request *DeleteTeamMemberRequest) (response *DeleteTeamMemberResponse, err error) {
     if request == nil {
@@ -1974,6 +2288,8 @@ func NewDeleteUserResponse() (response *DeleteUserResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
 func (c *Client) DeleteUser(request *DeleteUserRequest) (response *DeleteUserResponse, err error) {
     return c.DeleteUserWithContext(context.Background(), request)
@@ -1985,6 +2301,8 @@ func (c *Client) DeleteUser(request *DeleteUserRequest) (response *DeleteUserRes
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
 func (c *Client) DeleteUserWithContext(ctx context.Context, request *DeleteUserRequest) (response *DeleteUserResponse, err error) {
     if request == nil {
@@ -2028,7 +2346,6 @@ func NewDescribeAPPDataDetailLineChartResponse() (response *DescribeAPPDataDetai
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeAPPDataDetailLineChart(request *DescribeAPPDataDetailLineChartRequest) (response *DescribeAPPDataDetailLineChartResponse, err error) {
     return c.DescribeAPPDataDetailLineChartWithContext(context.Background(), request)
@@ -2040,7 +2357,6 @@ func (c *Client) DescribeAPPDataDetailLineChart(request *DescribeAPPDataDetailLi
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeAPPDataDetailLineChartWithContext(ctx context.Context, request *DescribeAPPDataDetailLineChartRequest) (response *DescribeAPPDataDetailLineChartResponse, err error) {
     if request == nil {
@@ -2083,7 +2399,6 @@ func NewDescribeAPPDataOverviewResponse() (response *DescribeAPPDataOverviewResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeAPPDataOverview(request *DescribeAPPDataOverviewRequest) (response *DescribeAPPDataOverviewResponse, err error) {
@@ -2095,7 +2410,6 @@ func (c *Client) DescribeAPPDataOverview(request *DescribeAPPDataOverviewRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeAPPDataOverviewWithContext(ctx context.Context, request *DescribeAPPDataOverviewRequest) (response *DescribeAPPDataOverviewResponse, err error) {
@@ -2141,7 +2455,6 @@ func NewDescribeAdvertisingLineChartResponse() (response *DescribeAdvertisingLin
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  FAILEDOPERATION_USERNOTFOUND = "FailedOperation.UserNotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribeAdvertisingLineChart(request *DescribeAdvertisingLineChartRequest) (response *DescribeAdvertisingLineChartResponse, err error) {
@@ -2155,7 +2468,6 @@ func (c *Client) DescribeAdvertisingLineChart(request *DescribeAdvertisingLineCh
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  FAILEDOPERATION_USERNOTFOUND = "FailedOperation.UserNotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribeAdvertisingLineChartWithContext(ctx context.Context, request *DescribeAdvertisingLineChartRequest) (response *DescribeAdvertisingLineChartResponse, err error) {
@@ -2201,7 +2513,6 @@ func NewDescribeAdvertisingOverviewResponse() (response *DescribeAdvertisingOver
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  FAILEDOPERATION_USERNOTFOUND = "FailedOperation.UserNotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribeAdvertisingOverview(request *DescribeAdvertisingOverviewRequest) (response *DescribeAdvertisingOverviewResponse, err error) {
@@ -2215,7 +2526,6 @@ func (c *Client) DescribeAdvertisingOverview(request *DescribeAdvertisingOvervie
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  FAILEDOPERATION_USERNOTFOUND = "FailedOperation.UserNotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribeAdvertisingOverviewWithContext(ctx context.Context, request *DescribeAdvertisingOverviewRequest) (response *DescribeAdvertisingOverviewResponse, err error) {
@@ -2259,6 +2569,7 @@ func NewDescribeApplicationResponse() (response *DescribeApplicationResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
 func (c *Client) DescribeApplication(request *DescribeApplicationRequest) (response *DescribeApplicationResponse, err error) {
     return c.DescribeApplicationWithContext(context.Background(), request)
@@ -2269,6 +2580,7 @@ func (c *Client) DescribeApplication(request *DescribeApplicationRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
 func (c *Client) DescribeApplicationWithContext(ctx context.Context, request *DescribeApplicationRequest) (response *DescribeApplicationResponse, err error) {
     if request == nil {
@@ -2311,6 +2623,8 @@ func NewDescribeApplicationConfigFileResponse() (response *DescribeApplicationCo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
 func (c *Client) DescribeApplicationConfigFile(request *DescribeApplicationConfigFileRequest) (response *DescribeApplicationConfigFileResponse, err error) {
     return c.DescribeApplicationConfigFileWithContext(context.Background(), request)
@@ -2321,6 +2635,8 @@ func (c *Client) DescribeApplicationConfigFile(request *DescribeApplicationConfi
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
 func (c *Client) DescribeApplicationConfigFileWithContext(ctx context.Context, request *DescribeApplicationConfigFileRequest) (response *DescribeApplicationConfigFileResponse, err error) {
     if request == nil {
@@ -2363,8 +2679,6 @@ func NewDescribeApplicationConfigInfosResponse() (response *DescribeApplicationC
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeApplicationConfigInfos(request *DescribeApplicationConfigInfosRequest) (response *DescribeApplicationConfigInfosResponse, err error) {
     return c.DescribeApplicationConfigInfosWithContext(context.Background(), request)
@@ -2375,8 +2689,6 @@ func (c *Client) DescribeApplicationConfigInfos(request *DescribeApplicationConf
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeApplicationConfigInfosWithContext(ctx context.Context, request *DescribeApplicationConfigInfosRequest) (response *DescribeApplicationConfigInfosResponse, err error) {
     if request == nil {
@@ -2419,6 +2731,7 @@ func NewDescribeApplicationListResponse() (response *DescribeApplicationListResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
 func (c *Client) DescribeApplicationList(request *DescribeApplicationListRequest) (response *DescribeApplicationListResponse, err error) {
     return c.DescribeApplicationListWithContext(context.Background(), request)
@@ -2429,6 +2742,7 @@ func (c *Client) DescribeApplicationList(request *DescribeApplicationListRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
 func (c *Client) DescribeApplicationListWithContext(ctx context.Context, request *DescribeApplicationListRequest) (response *DescribeApplicationListResponse, err error) {
     if request == nil {
@@ -2471,6 +2785,8 @@ func NewDescribeApplicationMNPListResponse() (response *DescribeApplicationMNPLi
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
 func (c *Client) DescribeApplicationMNPList(request *DescribeApplicationMNPListRequest) (response *DescribeApplicationMNPListResponse, err error) {
     return c.DescribeApplicationMNPListWithContext(context.Background(), request)
@@ -2481,6 +2797,8 @@ func (c *Client) DescribeApplicationMNPList(request *DescribeApplicationMNPListR
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
 func (c *Client) DescribeApplicationMNPListWithContext(ctx context.Context, request *DescribeApplicationMNPListRequest) (response *DescribeApplicationMNPListResponse, err error) {
     if request == nil {
@@ -2523,6 +2841,8 @@ func NewDescribeApplicationSensitiveAPIListResponse() (response *DescribeApplica
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
 func (c *Client) DescribeApplicationSensitiveAPIList(request *DescribeApplicationSensitiveAPIListRequest) (response *DescribeApplicationSensitiveAPIListResponse, err error) {
     return c.DescribeApplicationSensitiveAPIListWithContext(context.Background(), request)
@@ -2533,6 +2853,8 @@ func (c *Client) DescribeApplicationSensitiveAPIList(request *DescribeApplicatio
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
 func (c *Client) DescribeApplicationSensitiveAPIListWithContext(ctx context.Context, request *DescribeApplicationSensitiveAPIListRequest) (response *DescribeApplicationSensitiveAPIListResponse, err error) {
     if request == nil {
@@ -2575,6 +2897,7 @@ func NewDescribeGlobalDomainACLResponse() (response *DescribeGlobalDomainACLResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
 func (c *Client) DescribeGlobalDomainACL(request *DescribeGlobalDomainACLRequest) (response *DescribeGlobalDomainACLResponse, err error) {
     return c.DescribeGlobalDomainACLWithContext(context.Background(), request)
@@ -2585,6 +2908,7 @@ func (c *Client) DescribeGlobalDomainACL(request *DescribeGlobalDomainACLRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
 func (c *Client) DescribeGlobalDomainACLWithContext(ctx context.Context, request *DescribeGlobalDomainACLRequest) (response *DescribeGlobalDomainACLResponse, err error) {
     if request == nil {
@@ -2626,7 +2950,6 @@ func NewDescribeGlobalOverviewDataSummaryResponse() (response *DescribeGlobalOve
 // This API is used to query the data summary for the global overview.
 //
 // error code that may be returned:
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeGlobalOverviewDataSummary(request *DescribeGlobalOverviewDataSummaryRequest) (response *DescribeGlobalOverviewDataSummaryResponse, err error) {
@@ -2637,7 +2960,6 @@ func (c *Client) DescribeGlobalOverviewDataSummary(request *DescribeGlobalOvervi
 // This API is used to query the data summary for the global overview.
 //
 // error code that may be returned:
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) DescribeGlobalOverviewDataSummaryWithContext(ctx context.Context, request *DescribeGlobalOverviewDataSummaryRequest) (response *DescribeGlobalOverviewDataSummaryResponse, err error) {
@@ -2681,7 +3003,6 @@ func NewDescribeGlobalOverviewReportDetailResponse() (response *DescribeGlobalOv
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeGlobalOverviewReportDetail(request *DescribeGlobalOverviewReportDetailRequest) (response *DescribeGlobalOverviewReportDetailResponse, err error) {
     return c.DescribeGlobalOverviewReportDetailWithContext(context.Background(), request)
@@ -2692,7 +3013,6 @@ func (c *Client) DescribeGlobalOverviewReportDetail(request *DescribeGlobalOverv
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeGlobalOverviewReportDetailWithContext(ctx context.Context, request *DescribeGlobalOverviewReportDetailRequest) (response *DescribeGlobalOverviewReportDetailResponse, err error) {
     if request == nil {
@@ -2735,6 +3055,7 @@ func NewDescribeMNGResponse() (response *DescribeMNGResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNG(request *DescribeMNGRequest) (response *DescribeMNGResponse, err error) {
     return c.DescribeMNGWithContext(context.Background(), request)
@@ -2745,6 +3066,7 @@ func (c *Client) DescribeMNG(request *DescribeMNGRequest) (response *DescribeMNG
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGWithContext(ctx context.Context, request *DescribeMNGRequest) (response *DescribeMNGResponse, err error) {
     if request == nil {
@@ -2787,7 +3109,6 @@ func NewDescribeMNGAccessAnalysisDetailResponse() (response *DescribeMNGAccessAn
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGAccessAnalysisDetail(request *DescribeMNGAccessAnalysisDetailRequest) (response *DescribeMNGAccessAnalysisDetailResponse, err error) {
     return c.DescribeMNGAccessAnalysisDetailWithContext(context.Background(), request)
@@ -2798,7 +3119,6 @@ func (c *Client) DescribeMNGAccessAnalysisDetail(request *DescribeMNGAccessAnaly
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGAccessAnalysisDetailWithContext(ctx context.Context, request *DescribeMNGAccessAnalysisDetailRequest) (response *DescribeMNGAccessAnalysisDetailResponse, err error) {
     if request == nil {
@@ -2843,7 +3163,6 @@ func NewDescribeMNGAccessAnalysisLineChartResponse() (response *DescribeMNGAcces
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  FAILEDOPERATION_USERNOTFOUND = "FailedOperation.UserNotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribeMNGAccessAnalysisLineChart(request *DescribeMNGAccessAnalysisLineChartRequest) (response *DescribeMNGAccessAnalysisLineChartResponse, err error) {
@@ -2857,7 +3176,6 @@ func (c *Client) DescribeMNGAccessAnalysisLineChart(request *DescribeMNGAccessAn
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  FAILEDOPERATION_USERNOTFOUND = "FailedOperation.UserNotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribeMNGAccessAnalysisLineChartWithContext(ctx context.Context, request *DescribeMNGAccessAnalysisLineChartRequest) (response *DescribeMNGAccessAnalysisLineChartResponse, err error) {
@@ -2902,7 +3220,6 @@ func NewDescribeMNGAccessAnalysisOverviewResponse() (response *DescribeMNGAccess
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGAccessAnalysisOverview(request *DescribeMNGAccessAnalysisOverviewRequest) (response *DescribeMNGAccessAnalysisOverviewResponse, err error) {
     return c.DescribeMNGAccessAnalysisOverviewWithContext(context.Background(), request)
@@ -2914,7 +3231,6 @@ func (c *Client) DescribeMNGAccessAnalysisOverview(request *DescribeMNGAccessAna
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGAccessAnalysisOverviewWithContext(ctx context.Context, request *DescribeMNGAccessAnalysisOverviewRequest) (response *DescribeMNGAccessAnalysisOverviewResponse, err error) {
     if request == nil {
@@ -2958,7 +3274,6 @@ func NewDescribeMNGActiveUserRealTimeStatisticsResponse() (response *DescribeMNG
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGActiveUserRealTimeStatistics(request *DescribeMNGActiveUserRealTimeStatisticsRequest) (response *DescribeMNGActiveUserRealTimeStatisticsResponse, err error) {
     return c.DescribeMNGActiveUserRealTimeStatisticsWithContext(context.Background(), request)
@@ -2970,7 +3285,6 @@ func (c *Client) DescribeMNGActiveUserRealTimeStatistics(request *DescribeMNGAct
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGActiveUserRealTimeStatisticsWithContext(ctx context.Context, request *DescribeMNGActiveUserRealTimeStatisticsRequest) (response *DescribeMNGActiveUserRealTimeStatisticsResponse, err error) {
     if request == nil {
@@ -3015,7 +3329,6 @@ func NewDescribeMNGAdvertisingDetailResponse() (response *DescribeMNGAdvertising
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) DescribeMNGAdvertisingDetail(request *DescribeMNGAdvertisingDetailRequest) (response *DescribeMNGAdvertisingDetailResponse, err error) {
@@ -3029,7 +3342,6 @@ func (c *Client) DescribeMNGAdvertisingDetail(request *DescribeMNGAdvertisingDet
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) DescribeMNGAdvertisingDetailWithContext(ctx context.Context, request *DescribeMNGAdvertisingDetailRequest) (response *DescribeMNGAdvertisingDetailResponse, err error) {
@@ -3073,7 +3385,6 @@ func NewDescribeMNGAdvertisingLineChartResponse() (response *DescribeMNGAdvertis
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGAdvertisingLineChart(request *DescribeMNGAdvertisingLineChartRequest) (response *DescribeMNGAdvertisingLineChartResponse, err error) {
     return c.DescribeMNGAdvertisingLineChartWithContext(context.Background(), request)
@@ -3084,7 +3395,6 @@ func (c *Client) DescribeMNGAdvertisingLineChart(request *DescribeMNGAdvertising
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGAdvertisingLineChartWithContext(ctx context.Context, request *DescribeMNGAdvertisingLineChartRequest) (response *DescribeMNGAdvertisingLineChartResponse, err error) {
     if request == nil {
@@ -3128,7 +3438,6 @@ func NewDescribeMNGAdvertisingOverviewResponse() (response *DescribeMNGAdvertisi
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGAdvertisingOverview(request *DescribeMNGAdvertisingOverviewRequest) (response *DescribeMNGAdvertisingOverviewResponse, err error) {
     return c.DescribeMNGAdvertisingOverviewWithContext(context.Background(), request)
@@ -3140,7 +3449,6 @@ func (c *Client) DescribeMNGAdvertisingOverview(request *DescribeMNGAdvertisingO
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGAdvertisingOverviewWithContext(ctx context.Context, request *DescribeMNGAdvertisingOverviewRequest) (response *DescribeMNGAdvertisingOverviewResponse, err error) {
     if request == nil {
@@ -3183,6 +3491,8 @@ func NewDescribeMNGAllStageVersionsResponse() (response *DescribeMNGAllStageVers
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGAllStageVersions(request *DescribeMNGAllStageVersionsRequest) (response *DescribeMNGAllStageVersionsResponse, err error) {
     return c.DescribeMNGAllStageVersionsWithContext(context.Background(), request)
@@ -3193,6 +3503,8 @@ func (c *Client) DescribeMNGAllStageVersions(request *DescribeMNGAllStageVersion
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGAllStageVersionsWithContext(ctx context.Context, request *DescribeMNGAllStageVersionsRequest) (response *DescribeMNGAllStageVersionsResponse, err error) {
     if request == nil {
@@ -3235,6 +3547,7 @@ func NewDescribeMNGAppSecretResponse() (response *DescribeMNGAppSecretResponse) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGAppSecret(request *DescribeMNGAppSecretRequest) (response *DescribeMNGAppSecretResponse, err error) {
     return c.DescribeMNGAppSecretWithContext(context.Background(), request)
@@ -3245,6 +3558,7 @@ func (c *Client) DescribeMNGAppSecret(request *DescribeMNGAppSecretRequest) (res
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGAppSecretWithContext(ctx context.Context, request *DescribeMNGAppSecretRequest) (response *DescribeMNGAppSecretResponse, err error) {
     if request == nil {
@@ -3287,6 +3601,7 @@ func NewDescribeMNGCategoryResponse() (response *DescribeMNGCategoryResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeMNGCategory(request *DescribeMNGCategoryRequest) (response *DescribeMNGCategoryResponse, err error) {
     return c.DescribeMNGCategoryWithContext(context.Background(), request)
 }
@@ -3296,6 +3611,7 @@ func (c *Client) DescribeMNGCategory(request *DescribeMNGCategoryRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeMNGCategoryWithContext(ctx context.Context, request *DescribeMNGCategoryRequest) (response *DescribeMNGCategoryResponse, err error) {
     if request == nil {
         request = NewDescribeMNGCategoryRequest()
@@ -3337,6 +3653,8 @@ func NewDescribeMNGDomainACLResponse() (response *DescribeMNGDomainACLResponse) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeMNGDomainACL(request *DescribeMNGDomainACLRequest) (response *DescribeMNGDomainACLResponse, err error) {
     return c.DescribeMNGDomainACLWithContext(context.Background(), request)
 }
@@ -3346,6 +3664,8 @@ func (c *Client) DescribeMNGDomainACL(request *DescribeMNGDomainACLRequest) (res
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeMNGDomainACLWithContext(ctx context.Context, request *DescribeMNGDomainACLRequest) (response *DescribeMNGDomainACLResponse, err error) {
     if request == nil {
         request = NewDescribeMNGDomainACLRequest()
@@ -3387,6 +3707,8 @@ func NewDescribeMNGListResponse() (response *DescribeMNGListResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeMNGList(request *DescribeMNGListRequest) (response *DescribeMNGListResponse, err error) {
     return c.DescribeMNGListWithContext(context.Background(), request)
 }
@@ -3396,6 +3718,8 @@ func (c *Client) DescribeMNGList(request *DescribeMNGListRequest) (response *Des
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeMNGListWithContext(ctx context.Context, request *DescribeMNGListRequest) (response *DescribeMNGListResponse, err error) {
     if request == nil {
         request = NewDescribeMNGListRequest()
@@ -3437,7 +3761,6 @@ func NewDescribeMNGMAUDataDetailResponse() (response *DescribeMNGMAUDataDetailRe
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGMAUDataDetail(request *DescribeMNGMAUDataDetailRequest) (response *DescribeMNGMAUDataDetailResponse, err error) {
     return c.DescribeMNGMAUDataDetailWithContext(context.Background(), request)
@@ -3448,7 +3771,6 @@ func (c *Client) DescribeMNGMAUDataDetail(request *DescribeMNGMAUDataDetailReque
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGMAUDataDetailWithContext(ctx context.Context, request *DescribeMNGMAUDataDetailRequest) (response *DescribeMNGMAUDataDetailResponse, err error) {
     if request == nil {
@@ -3491,7 +3813,6 @@ func NewDescribeMNGMAULineChartResponse() (response *DescribeMNGMAULineChartResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeMNGMAULineChart(request *DescribeMNGMAULineChartRequest) (response *DescribeMNGMAULineChartResponse, err error) {
@@ -3503,7 +3824,6 @@ func (c *Client) DescribeMNGMAULineChart(request *DescribeMNGMAULineChartRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) DescribeMNGMAULineChartWithContext(ctx context.Context, request *DescribeMNGMAULineChartRequest) (response *DescribeMNGMAULineChartResponse, err error) {
@@ -3547,7 +3867,6 @@ func NewDescribeMNGMAUMonthlyComparisonMetricCardResponse() (response *DescribeM
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGMAUMonthlyComparisonMetricCard(request *DescribeMNGMAUMonthlyComparisonMetricCardRequest) (response *DescribeMNGMAUMonthlyComparisonMetricCardResponse, err error) {
     return c.DescribeMNGMAUMonthlyComparisonMetricCardWithContext(context.Background(), request)
@@ -3558,7 +3877,6 @@ func (c *Client) DescribeMNGMAUMonthlyComparisonMetricCard(request *DescribeMNGM
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGMAUMonthlyComparisonMetricCardWithContext(ctx context.Context, request *DescribeMNGMAUMonthlyComparisonMetricCardRequest) (response *DescribeMNGMAUMonthlyComparisonMetricCardResponse, err error) {
     if request == nil {
@@ -3602,6 +3920,7 @@ func NewDescribeMNGOfflinePackageURLResponse() (response *DescribeMNGOfflinePack
 // error code that may be returned:
 //  FAILEDOPERATION_MNPONLINEVERSIONNOTEXIST = "FailedOperation.MNPOnlineVersionNotExist"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeMNGOfflinePackageURL(request *DescribeMNGOfflinePackageURLRequest) (response *DescribeMNGOfflinePackageURLResponse, err error) {
     return c.DescribeMNGOfflinePackageURLWithContext(context.Background(), request)
 }
@@ -3612,6 +3931,7 @@ func (c *Client) DescribeMNGOfflinePackageURL(request *DescribeMNGOfflinePackage
 // error code that may be returned:
 //  FAILEDOPERATION_MNPONLINEVERSIONNOTEXIST = "FailedOperation.MNPOnlineVersionNotExist"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeMNGOfflinePackageURLWithContext(ctx context.Context, request *DescribeMNGOfflinePackageURLRequest) (response *DescribeMNGOfflinePackageURLResponse, err error) {
     if request == nil {
         request = NewDescribeMNGOfflinePackageURLRequest()
@@ -3654,7 +3974,6 @@ func NewDescribeMNGPaymentLineChartResponse() (response *DescribeMNGPaymentLineC
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGPaymentLineChart(request *DescribeMNGPaymentLineChartRequest) (response *DescribeMNGPaymentLineChartResponse, err error) {
     return c.DescribeMNGPaymentLineChartWithContext(context.Background(), request)
@@ -3666,7 +3985,6 @@ func (c *Client) DescribeMNGPaymentLineChart(request *DescribeMNGPaymentLineChar
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGPaymentLineChartWithContext(ctx context.Context, request *DescribeMNGPaymentLineChartRequest) (response *DescribeMNGPaymentLineChartResponse, err error) {
     if request == nil {
@@ -3710,7 +4028,6 @@ func NewDescribeMNGPaymentOverviewResponse() (response *DescribeMNGPaymentOvervi
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGPaymentOverview(request *DescribeMNGPaymentOverviewRequest) (response *DescribeMNGPaymentOverviewResponse, err error) {
     return c.DescribeMNGPaymentOverviewWithContext(context.Background(), request)
@@ -3722,7 +4039,6 @@ func (c *Client) DescribeMNGPaymentOverview(request *DescribeMNGPaymentOverviewR
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGPaymentOverviewWithContext(ctx context.Context, request *DescribeMNGPaymentOverviewRequest) (response *DescribeMNGPaymentOverviewResponse, err error) {
     if request == nil {
@@ -3766,7 +4082,6 @@ func NewDescribeMNGPaymentReportDetailResponse() (response *DescribeMNGPaymentRe
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGPaymentReportDetail(request *DescribeMNGPaymentReportDetailRequest) (response *DescribeMNGPaymentReportDetailResponse, err error) {
     return c.DescribeMNGPaymentReportDetailWithContext(context.Background(), request)
@@ -3778,7 +4093,6 @@ func (c *Client) DescribeMNGPaymentReportDetail(request *DescribeMNGPaymentRepor
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGPaymentReportDetailWithContext(ctx context.Context, request *DescribeMNGPaymentReportDetailRequest) (response *DescribeMNGPaymentReportDetailResponse, err error) {
     if request == nil {
@@ -3822,7 +4136,6 @@ func NewDescribeMNGPaymentRetentionAnalysisResponse() (response *DescribeMNGPaym
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGPaymentRetentionAnalysis(request *DescribeMNGPaymentRetentionAnalysisRequest) (response *DescribeMNGPaymentRetentionAnalysisResponse, err error) {
     return c.DescribeMNGPaymentRetentionAnalysisWithContext(context.Background(), request)
@@ -3834,7 +4147,6 @@ func (c *Client) DescribeMNGPaymentRetentionAnalysis(request *DescribeMNGPayment
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGPaymentRetentionAnalysisWithContext(ctx context.Context, request *DescribeMNGPaymentRetentionAnalysisRequest) (response *DescribeMNGPaymentRetentionAnalysisResponse, err error) {
     if request == nil {
@@ -3878,6 +4190,7 @@ func NewDescribeMNGPreviewResponse() (response *DescribeMNGPreviewResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGPreview(request *DescribeMNGPreviewRequest) (response *DescribeMNGPreviewResponse, err error) {
     return c.DescribeMNGPreviewWithContext(context.Background(), request)
@@ -3889,6 +4202,7 @@ func (c *Client) DescribeMNGPreview(request *DescribeMNGPreviewRequest) (respons
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGPreviewWithContext(ctx context.Context, request *DescribeMNGPreviewRequest) (response *DescribeMNGPreviewResponse, err error) {
     if request == nil {
@@ -3931,6 +4245,7 @@ func NewDescribeMNGReleasedVersionHistoryResponse() (response *DescribeMNGReleas
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGReleasedVersionHistory(request *DescribeMNGReleasedVersionHistoryRequest) (response *DescribeMNGReleasedVersionHistoryResponse, err error) {
     return c.DescribeMNGReleasedVersionHistoryWithContext(context.Background(), request)
@@ -3941,6 +4256,7 @@ func (c *Client) DescribeMNGReleasedVersionHistory(request *DescribeMNGReleasedV
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGReleasedVersionHistoryWithContext(ctx context.Context, request *DescribeMNGReleasedVersionHistoryRequest) (response *DescribeMNGReleasedVersionHistoryResponse, err error) {
     if request == nil {
@@ -3983,8 +4299,6 @@ func NewDescribeMNGRetentionDataResponse() (response *DescribeMNGRetentionDataRe
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGRetentionData(request *DescribeMNGRetentionDataRequest) (response *DescribeMNGRetentionDataResponse, err error) {
     return c.DescribeMNGRetentionDataWithContext(context.Background(), request)
@@ -3995,8 +4309,6 @@ func (c *Client) DescribeMNGRetentionData(request *DescribeMNGRetentionDataReque
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNGRetentionDataWithContext(ctx context.Context, request *DescribeMNGRetentionDataRequest) (response *DescribeMNGRetentionDataResponse, err error) {
     if request == nil {
@@ -4041,6 +4353,8 @@ func NewDescribeMNGSensitiveAPIPermissionApprovalResponse() (response *DescribeM
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeMNGSensitiveAPIPermissionApproval(request *DescribeMNGSensitiveAPIPermissionApprovalRequest) (response *DescribeMNGSensitiveAPIPermissionApprovalResponse, err error) {
     return c.DescribeMNGSensitiveAPIPermissionApprovalWithContext(context.Background(), request)
 }
@@ -4052,6 +4366,8 @@ func (c *Client) DescribeMNGSensitiveAPIPermissionApproval(request *DescribeMNGS
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeMNGSensitiveAPIPermissionApprovalWithContext(ctx context.Context, request *DescribeMNGSensitiveAPIPermissionApprovalRequest) (response *DescribeMNGSensitiveAPIPermissionApprovalResponse, err error) {
     if request == nil {
         request = NewDescribeMNGSensitiveAPIPermissionApprovalRequest()
@@ -4093,6 +4409,8 @@ func NewDescribeMNGSensitiveAPIPermissionListResponse() (response *DescribeMNGSe
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGSensitiveAPIPermissionList(request *DescribeMNGSensitiveAPIPermissionListRequest) (response *DescribeMNGSensitiveAPIPermissionListResponse, err error) {
     return c.DescribeMNGSensitiveAPIPermissionListWithContext(context.Background(), request)
@@ -4103,6 +4421,8 @@ func (c *Client) DescribeMNGSensitiveAPIPermissionList(request *DescribeMNGSensi
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGSensitiveAPIPermissionListWithContext(ctx context.Context, request *DescribeMNGSensitiveAPIPermissionListRequest) (response *DescribeMNGSensitiveAPIPermissionListResponse, err error) {
     if request == nil {
@@ -4146,6 +4466,7 @@ func NewDescribeMNGSubscribeMessageTemplateResponse() (response *DescribeMNGSubs
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGSubscribeMessageTemplate(request *DescribeMNGSubscribeMessageTemplateRequest) (response *DescribeMNGSubscribeMessageTemplateResponse, err error) {
     return c.DescribeMNGSubscribeMessageTemplateWithContext(context.Background(), request)
@@ -4157,6 +4478,7 @@ func (c *Client) DescribeMNGSubscribeMessageTemplate(request *DescribeMNGSubscri
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGSubscribeMessageTemplateWithContext(ctx context.Context, request *DescribeMNGSubscribeMessageTemplateRequest) (response *DescribeMNGSubscribeMessageTemplateResponse, err error) {
     if request == nil {
@@ -4200,6 +4522,7 @@ func NewDescribeMNGSubscribeMessageTemplateLibraryResponse() (response *Describe
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGSubscribeMessageTemplateLibrary(request *DescribeMNGSubscribeMessageTemplateLibraryRequest) (response *DescribeMNGSubscribeMessageTemplateLibraryResponse, err error) {
     return c.DescribeMNGSubscribeMessageTemplateLibraryWithContext(context.Background(), request)
@@ -4211,6 +4534,7 @@ func (c *Client) DescribeMNGSubscribeMessageTemplateLibrary(request *DescribeMNG
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGSubscribeMessageTemplateLibraryWithContext(ctx context.Context, request *DescribeMNGSubscribeMessageTemplateLibraryRequest) (response *DescribeMNGSubscribeMessageTemplateLibraryResponse, err error) {
     if request == nil {
@@ -4254,6 +4578,7 @@ func NewDescribeMNGSubscribeMessageTemplateLibraryListResponse() (response *Desc
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGSubscribeMessageTemplateLibraryList(request *DescribeMNGSubscribeMessageTemplateLibraryListRequest) (response *DescribeMNGSubscribeMessageTemplateLibraryListResponse, err error) {
     return c.DescribeMNGSubscribeMessageTemplateLibraryListWithContext(context.Background(), request)
@@ -4265,6 +4590,7 @@ func (c *Client) DescribeMNGSubscribeMessageTemplateLibraryList(request *Describ
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGSubscribeMessageTemplateLibraryListWithContext(ctx context.Context, request *DescribeMNGSubscribeMessageTemplateLibraryListRequest) (response *DescribeMNGSubscribeMessageTemplateLibraryListResponse, err error) {
     if request == nil {
@@ -4308,6 +4634,7 @@ func NewDescribeMNGSubscribeMessageTemplateListResponse() (response *DescribeMNG
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGSubscribeMessageTemplateList(request *DescribeMNGSubscribeMessageTemplateListRequest) (response *DescribeMNGSubscribeMessageTemplateListResponse, err error) {
     return c.DescribeMNGSubscribeMessageTemplateListWithContext(context.Background(), request)
@@ -4319,6 +4646,7 @@ func (c *Client) DescribeMNGSubscribeMessageTemplateList(request *DescribeMNGSub
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNGSubscribeMessageTemplateListWithContext(ctx context.Context, request *DescribeMNGSubscribeMessageTemplateListRequest) (response *DescribeMNGSubscribeMessageTemplateListResponse, err error) {
     if request == nil {
@@ -4361,6 +4689,7 @@ func NewDescribeMNGVersionResponse() (response *DescribeMNGVersionResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPVERSIONTASKID = "InvalidParameterValue.InvalidMNPVersionTaskId"
 func (c *Client) DescribeMNGVersion(request *DescribeMNGVersionRequest) (response *DescribeMNGVersionResponse, err error) {
     return c.DescribeMNGVersionWithContext(context.Background(), request)
@@ -4371,6 +4700,7 @@ func (c *Client) DescribeMNGVersion(request *DescribeMNGVersionRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPVERSIONTASKID = "InvalidParameterValue.InvalidMNPVersionTaskId"
 func (c *Client) DescribeMNGVersionWithContext(ctx context.Context, request *DescribeMNGVersionRequest) (response *DescribeMNGVersionResponse, err error) {
     if request == nil {
@@ -4413,6 +4743,7 @@ func NewDescribeMNPResponse() (response *DescribeMNPResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNP(request *DescribeMNPRequest) (response *DescribeMNPResponse, err error) {
     return c.DescribeMNPWithContext(context.Background(), request)
@@ -4423,6 +4754,7 @@ func (c *Client) DescribeMNP(request *DescribeMNPRequest) (response *DescribeMNP
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPWithContext(ctx context.Context, request *DescribeMNPRequest) (response *DescribeMNPResponse, err error) {
     if request == nil {
@@ -4466,7 +4798,6 @@ func NewDescribeMNPAccessAnalysisOverviewResponse() (response *DescribeMNPAccess
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNPAccessAnalysisOverview(request *DescribeMNPAccessAnalysisOverviewRequest) (response *DescribeMNPAccessAnalysisOverviewResponse, err error) {
     return c.DescribeMNPAccessAnalysisOverviewWithContext(context.Background(), request)
@@ -4478,7 +4809,6 @@ func (c *Client) DescribeMNPAccessAnalysisOverview(request *DescribeMNPAccessAna
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNPAccessAnalysisOverviewWithContext(ctx context.Context, request *DescribeMNPAccessAnalysisOverviewRequest) (response *DescribeMNPAccessAnalysisOverviewResponse, err error) {
     if request == nil {
@@ -4522,7 +4852,6 @@ func NewDescribeMNPActiveUserRealTimeStatisticsResponse() (response *DescribeMNP
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribeMNPActiveUserRealTimeStatistics(request *DescribeMNPActiveUserRealTimeStatisticsRequest) (response *DescribeMNPActiveUserRealTimeStatisticsResponse, err error) {
@@ -4535,7 +4864,6 @@ func (c *Client) DescribeMNPActiveUserRealTimeStatistics(request *DescribeMNPAct
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribeMNPActiveUserRealTimeStatisticsWithContext(ctx context.Context, request *DescribeMNPActiveUserRealTimeStatisticsRequest) (response *DescribeMNPActiveUserRealTimeStatisticsResponse, err error) {
@@ -4580,7 +4908,6 @@ func NewDescribeMNPAdvertisingDetailResponse() (response *DescribeMNPAdvertising
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNPAdvertisingDetail(request *DescribeMNPAdvertisingDetailRequest) (response *DescribeMNPAdvertisingDetailResponse, err error) {
     return c.DescribeMNPAdvertisingDetailWithContext(context.Background(), request)
@@ -4592,7 +4919,6 @@ func (c *Client) DescribeMNPAdvertisingDetail(request *DescribeMNPAdvertisingDet
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNPAdvertisingDetailWithContext(ctx context.Context, request *DescribeMNPAdvertisingDetailRequest) (response *DescribeMNPAdvertisingDetailResponse, err error) {
     if request == nil {
@@ -4635,6 +4961,8 @@ func NewDescribeMNPAllStageVersionsResponse() (response *DescribeMNPAllStageVers
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPAllStageVersions(request *DescribeMNPAllStageVersionsRequest) (response *DescribeMNPAllStageVersionsResponse, err error) {
     return c.DescribeMNPAllStageVersionsWithContext(context.Background(), request)
@@ -4645,6 +4973,8 @@ func (c *Client) DescribeMNPAllStageVersions(request *DescribeMNPAllStageVersion
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPAllStageVersionsWithContext(ctx context.Context, request *DescribeMNPAllStageVersionsRequest) (response *DescribeMNPAllStageVersionsResponse, err error) {
     if request == nil {
@@ -4687,6 +5017,7 @@ func NewDescribeMNPAppSecretResponse() (response *DescribeMNPAppSecretResponse) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPAppSecret(request *DescribeMNPAppSecretRequest) (response *DescribeMNPAppSecretResponse, err error) {
     return c.DescribeMNPAppSecretWithContext(context.Background(), request)
@@ -4697,6 +5028,7 @@ func (c *Client) DescribeMNPAppSecret(request *DescribeMNPAppSecretRequest) (res
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPAppSecretWithContext(ctx context.Context, request *DescribeMNPAppSecretRequest) (response *DescribeMNPAppSecretResponse, err error) {
     if request == nil {
@@ -4739,6 +5071,7 @@ func NewDescribeMNPApprovalListResponse() (response *DescribeMNPApprovalListResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
 func (c *Client) DescribeMNPApprovalList(request *DescribeMNPApprovalListRequest) (response *DescribeMNPApprovalListResponse, err error) {
     return c.DescribeMNPApprovalListWithContext(context.Background(), request)
@@ -4749,6 +5082,7 @@ func (c *Client) DescribeMNPApprovalList(request *DescribeMNPApprovalListRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
 func (c *Client) DescribeMNPApprovalListWithContext(ctx context.Context, request *DescribeMNPApprovalListRequest) (response *DescribeMNPApprovalListResponse, err error) {
     if request == nil {
@@ -4791,6 +5125,7 @@ func NewDescribeMNPCategoryResponse() (response *DescribeMNPCategoryResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeMNPCategory(request *DescribeMNPCategoryRequest) (response *DescribeMNPCategoryResponse, err error) {
     return c.DescribeMNPCategoryWithContext(context.Background(), request)
 }
@@ -4800,6 +5135,7 @@ func (c *Client) DescribeMNPCategory(request *DescribeMNPCategoryRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeMNPCategoryWithContext(ctx context.Context, request *DescribeMNPCategoryRequest) (response *DescribeMNPCategoryResponse, err error) {
     if request == nil {
         request = NewDescribeMNPCategoryRequest()
@@ -4841,6 +5177,8 @@ func NewDescribeMNPDomainACLResponse() (response *DescribeMNPDomainACLResponse) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) DescribeMNPDomainACL(request *DescribeMNPDomainACLRequest) (response *DescribeMNPDomainACLResponse, err error) {
     return c.DescribeMNPDomainACLWithContext(context.Background(), request)
@@ -4851,6 +5189,8 @@ func (c *Client) DescribeMNPDomainACL(request *DescribeMNPDomainACLRequest) (res
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) DescribeMNPDomainACLWithContext(ctx context.Context, request *DescribeMNPDomainACLRequest) (response *DescribeMNPDomainACLResponse, err error) {
     if request == nil {
@@ -4893,6 +5233,8 @@ func NewDescribeMNPListResponse() (response *DescribeMNPListResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeMNPList(request *DescribeMNPListRequest) (response *DescribeMNPListResponse, err error) {
     return c.DescribeMNPListWithContext(context.Background(), request)
 }
@@ -4902,6 +5244,8 @@ func (c *Client) DescribeMNPList(request *DescribeMNPListRequest) (response *Des
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeMNPListWithContext(ctx context.Context, request *DescribeMNPListRequest) (response *DescribeMNPListResponse, err error) {
     if request == nil {
         request = NewDescribeMNPListRequest()
@@ -4943,7 +5287,6 @@ func NewDescribeMNPMAUDataDetailResponse() (response *DescribeMNPMAUDataDetailRe
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNPMAUDataDetail(request *DescribeMNPMAUDataDetailRequest) (response *DescribeMNPMAUDataDetailResponse, err error) {
     return c.DescribeMNPMAUDataDetailWithContext(context.Background(), request)
@@ -4954,7 +5297,6 @@ func (c *Client) DescribeMNPMAUDataDetail(request *DescribeMNPMAUDataDetailReque
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNPMAUDataDetailWithContext(ctx context.Context, request *DescribeMNPMAUDataDetailRequest) (response *DescribeMNPMAUDataDetailResponse, err error) {
     if request == nil {
@@ -4997,7 +5339,6 @@ func NewDescribeMNPMAULineChartResponse() (response *DescribeMNPMAULineChartResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNPMAULineChart(request *DescribeMNPMAULineChartRequest) (response *DescribeMNPMAULineChartResponse, err error) {
     return c.DescribeMNPMAULineChartWithContext(context.Background(), request)
@@ -5008,7 +5349,6 @@ func (c *Client) DescribeMNPMAULineChart(request *DescribeMNPMAULineChartRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNPMAULineChartWithContext(ctx context.Context, request *DescribeMNPMAULineChartRequest) (response *DescribeMNPMAULineChartResponse, err error) {
     if request == nil {
@@ -5051,7 +5391,6 @@ func NewDescribeMNPMAUMetricCardResponse() (response *DescribeMNPMAUMetricCardRe
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNPMAUMetricCard(request *DescribeMNPMAUMetricCardRequest) (response *DescribeMNPMAUMetricCardResponse, err error) {
     return c.DescribeMNPMAUMetricCardWithContext(context.Background(), request)
@@ -5062,7 +5401,6 @@ func (c *Client) DescribeMNPMAUMetricCard(request *DescribeMNPMAUMetricCardReque
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNPMAUMetricCardWithContext(ctx context.Context, request *DescribeMNPMAUMetricCardRequest) (response *DescribeMNPMAUMetricCardResponse, err error) {
     if request == nil {
@@ -5106,6 +5444,7 @@ func NewDescribeMNPOfflinePackageURLResponse() (response *DescribeMNPOfflinePack
 // error code that may be returned:
 //  FAILEDOPERATION_MNPONLINEVERSIONNOTEXIST = "FailedOperation.MNPOnlineVersionNotExist"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeMNPOfflinePackageURL(request *DescribeMNPOfflinePackageURLRequest) (response *DescribeMNPOfflinePackageURLResponse, err error) {
     return c.DescribeMNPOfflinePackageURLWithContext(context.Background(), request)
 }
@@ -5116,6 +5455,7 @@ func (c *Client) DescribeMNPOfflinePackageURL(request *DescribeMNPOfflinePackage
 // error code that may be returned:
 //  FAILEDOPERATION_MNPONLINEVERSIONNOTEXIST = "FailedOperation.MNPOnlineVersionNotExist"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeMNPOfflinePackageURLWithContext(ctx context.Context, request *DescribeMNPOfflinePackageURLRequest) (response *DescribeMNPOfflinePackageURLResponse, err error) {
     if request == nil {
         request = NewDescribeMNPOfflinePackageURLRequest()
@@ -5157,7 +5497,6 @@ func NewDescribeMNPPageAnalysisDetailResponse() (response *DescribeMNPPageAnalys
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNPPageAnalysisDetail(request *DescribeMNPPageAnalysisDetailRequest) (response *DescribeMNPPageAnalysisDetailResponse, err error) {
     return c.DescribeMNPPageAnalysisDetailWithContext(context.Background(), request)
@@ -5168,7 +5507,6 @@ func (c *Client) DescribeMNPPageAnalysisDetail(request *DescribeMNPPageAnalysisD
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNPPageAnalysisDetailWithContext(ctx context.Context, request *DescribeMNPPageAnalysisDetailRequest) (response *DescribeMNPPageAnalysisDetailResponse, err error) {
     if request == nil {
@@ -5183,6 +5521,62 @@ func (c *Client) DescribeMNPPageAnalysisDetailWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDescribeMNPPageAnalysisDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPPaymentApprovalInfoRequest() (request *DescribeMNPPaymentApprovalInfoRequest) {
+    request = &DescribeMNPPaymentApprovalInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DescribeMNPPaymentApprovalInfo")
+    
+    
+    return
+}
+
+func NewDescribeMNPPaymentApprovalInfoResponse() (response *DescribeMNPPaymentApprovalInfoResponse) {
+    response = &DescribeMNPPaymentApprovalInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPPaymentApprovalInfo
+// This API is used to query the mini program payment approval information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeMNPPaymentApprovalInfo(request *DescribeMNPPaymentApprovalInfoRequest) (response *DescribeMNPPaymentApprovalInfoResponse, err error) {
+    return c.DescribeMNPPaymentApprovalInfoWithContext(context.Background(), request)
+}
+
+// DescribeMNPPaymentApprovalInfo
+// This API is used to query the mini program payment approval information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeMNPPaymentApprovalInfoWithContext(ctx context.Context, request *DescribeMNPPaymentApprovalInfoRequest) (response *DescribeMNPPaymentApprovalInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPPaymentApprovalInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DescribeMNPPaymentApprovalInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPPaymentApprovalInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPPaymentApprovalInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -5212,6 +5606,7 @@ func NewDescribeMNPPreviewResponse() (response *DescribeMNPPreviewResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPPreview(request *DescribeMNPPreviewRequest) (response *DescribeMNPPreviewResponse, err error) {
     return c.DescribeMNPPreviewWithContext(context.Background(), request)
@@ -5223,6 +5618,7 @@ func (c *Client) DescribeMNPPreview(request *DescribeMNPPreviewRequest) (respons
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPPreviewWithContext(ctx context.Context, request *DescribeMNPPreviewRequest) (response *DescribeMNPPreviewResponse, err error) {
     if request == nil {
@@ -5265,6 +5661,7 @@ func NewDescribeMNPReleasedVersionHistoryResponse() (response *DescribeMNPReleas
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPReleasedVersionHistory(request *DescribeMNPReleasedVersionHistoryRequest) (response *DescribeMNPReleasedVersionHistoryResponse, err error) {
     return c.DescribeMNPReleasedVersionHistoryWithContext(context.Background(), request)
@@ -5275,6 +5672,7 @@ func (c *Client) DescribeMNPReleasedVersionHistory(request *DescribeMNPReleasedV
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPReleasedVersionHistoryWithContext(ctx context.Context, request *DescribeMNPReleasedVersionHistoryRequest) (response *DescribeMNPReleasedVersionHistoryResponse, err error) {
     if request == nil {
@@ -5318,7 +5716,6 @@ func NewDescribeMNPReportDataLineChartResponse() (response *DescribeMNPReportDat
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNPReportDataLineChart(request *DescribeMNPReportDataLineChartRequest) (response *DescribeMNPReportDataLineChartResponse, err error) {
     return c.DescribeMNPReportDataLineChartWithContext(context.Background(), request)
@@ -5330,7 +5727,6 @@ func (c *Client) DescribeMNPReportDataLineChart(request *DescribeMNPReportDataLi
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeMNPReportDataLineChartWithContext(ctx context.Context, request *DescribeMNPReportDataLineChartRequest) (response *DescribeMNPReportDataLineChartResponse, err error) {
     if request == nil {
@@ -5427,7 +5823,6 @@ func NewDescribeMNPRetentionDataResponse() (response *DescribeMNPRetentionDataRe
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  FAILEDOPERATION_USERNOTFOUND = "FailedOperation.UserNotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribeMNPRetentionData(request *DescribeMNPRetentionDataRequest) (response *DescribeMNPRetentionDataResponse, err error) {
@@ -5441,7 +5836,6 @@ func (c *Client) DescribeMNPRetentionData(request *DescribeMNPRetentionDataReque
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  FAILEDOPERATION_USERNOTFOUND = "FailedOperation.UserNotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribeMNPRetentionDataWithContext(ctx context.Context, request *DescribeMNPRetentionDataRequest) (response *DescribeMNPRetentionDataResponse, err error) {
@@ -5487,6 +5881,8 @@ func NewDescribeMNPSensitiveAPIPermissionApprovalResponse() (response *DescribeM
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeMNPSensitiveAPIPermissionApproval(request *DescribeMNPSensitiveAPIPermissionApprovalRequest) (response *DescribeMNPSensitiveAPIPermissionApprovalResponse, err error) {
     return c.DescribeMNPSensitiveAPIPermissionApprovalWithContext(context.Background(), request)
 }
@@ -5498,6 +5894,8 @@ func (c *Client) DescribeMNPSensitiveAPIPermissionApproval(request *DescribeMNPS
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeMNPSensitiveAPIPermissionApprovalWithContext(ctx context.Context, request *DescribeMNPSensitiveAPIPermissionApprovalRequest) (response *DescribeMNPSensitiveAPIPermissionApprovalResponse, err error) {
     if request == nil {
         request = NewDescribeMNPSensitiveAPIPermissionApprovalRequest()
@@ -5539,6 +5937,8 @@ func NewDescribeMNPSensitiveAPIPermissionApprovalListResponse() (response *Descr
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeMNPSensitiveAPIPermissionApprovalList(request *DescribeMNPSensitiveAPIPermissionApprovalListRequest) (response *DescribeMNPSensitiveAPIPermissionApprovalListResponse, err error) {
     return c.DescribeMNPSensitiveAPIPermissionApprovalListWithContext(context.Background(), request)
 }
@@ -5548,6 +5948,8 @@ func (c *Client) DescribeMNPSensitiveAPIPermissionApprovalList(request *Describe
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribeMNPSensitiveAPIPermissionApprovalListWithContext(ctx context.Context, request *DescribeMNPSensitiveAPIPermissionApprovalListRequest) (response *DescribeMNPSensitiveAPIPermissionApprovalListResponse, err error) {
     if request == nil {
         request = NewDescribeMNPSensitiveAPIPermissionApprovalListRequest()
@@ -5589,6 +5991,8 @@ func NewDescribeMNPSensitiveAPIPermissionListResponse() (response *DescribeMNPSe
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPSensitiveAPIPermissionList(request *DescribeMNPSensitiveAPIPermissionListRequest) (response *DescribeMNPSensitiveAPIPermissionListResponse, err error) {
     return c.DescribeMNPSensitiveAPIPermissionListWithContext(context.Background(), request)
@@ -5599,6 +6003,8 @@ func (c *Client) DescribeMNPSensitiveAPIPermissionList(request *DescribeMNPSensi
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPSensitiveAPIPermissionListWithContext(ctx context.Context, request *DescribeMNPSensitiveAPIPermissionListRequest) (response *DescribeMNPSensitiveAPIPermissionListResponse, err error) {
     if request == nil {
@@ -5642,6 +6048,7 @@ func NewDescribeMNPSubscribeMessageTemplateResponse() (response *DescribeMNPSubs
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPSubscribeMessageTemplate(request *DescribeMNPSubscribeMessageTemplateRequest) (response *DescribeMNPSubscribeMessageTemplateResponse, err error) {
     return c.DescribeMNPSubscribeMessageTemplateWithContext(context.Background(), request)
@@ -5653,6 +6060,7 @@ func (c *Client) DescribeMNPSubscribeMessageTemplate(request *DescribeMNPSubscri
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPSubscribeMessageTemplateWithContext(ctx context.Context, request *DescribeMNPSubscribeMessageTemplateRequest) (response *DescribeMNPSubscribeMessageTemplateResponse, err error) {
     if request == nil {
@@ -5696,6 +6104,7 @@ func NewDescribeMNPSubscribeMessageTemplateLibraryResponse() (response *Describe
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPSubscribeMessageTemplateLibrary(request *DescribeMNPSubscribeMessageTemplateLibraryRequest) (response *DescribeMNPSubscribeMessageTemplateLibraryResponse, err error) {
     return c.DescribeMNPSubscribeMessageTemplateLibraryWithContext(context.Background(), request)
@@ -5707,6 +6116,7 @@ func (c *Client) DescribeMNPSubscribeMessageTemplateLibrary(request *DescribeMNP
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPSubscribeMessageTemplateLibraryWithContext(ctx context.Context, request *DescribeMNPSubscribeMessageTemplateLibraryRequest) (response *DescribeMNPSubscribeMessageTemplateLibraryResponse, err error) {
     if request == nil {
@@ -5750,6 +6160,7 @@ func NewDescribeMNPSubscribeMessageTemplateLibraryListResponse() (response *Desc
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPSubscribeMessageTemplateLibraryList(request *DescribeMNPSubscribeMessageTemplateLibraryListRequest) (response *DescribeMNPSubscribeMessageTemplateLibraryListResponse, err error) {
     return c.DescribeMNPSubscribeMessageTemplateLibraryListWithContext(context.Background(), request)
@@ -5761,6 +6172,7 @@ func (c *Client) DescribeMNPSubscribeMessageTemplateLibraryList(request *Describ
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPSubscribeMessageTemplateLibraryListWithContext(ctx context.Context, request *DescribeMNPSubscribeMessageTemplateLibraryListRequest) (response *DescribeMNPSubscribeMessageTemplateLibraryListResponse, err error) {
     if request == nil {
@@ -5804,6 +6216,7 @@ func NewDescribeMNPSubscribeMessageTemplateListResponse() (response *DescribeMNP
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPSubscribeMessageTemplateList(request *DescribeMNPSubscribeMessageTemplateListRequest) (response *DescribeMNPSubscribeMessageTemplateListResponse, err error) {
     return c.DescribeMNPSubscribeMessageTemplateListWithContext(context.Background(), request)
@@ -5815,6 +6228,7 @@ func (c *Client) DescribeMNPSubscribeMessageTemplateList(request *DescribeMNPSub
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) DescribeMNPSubscribeMessageTemplateListWithContext(ctx context.Context, request *DescribeMNPSubscribeMessageTemplateListRequest) (response *DescribeMNPSubscribeMessageTemplateListResponse, err error) {
     if request == nil {
@@ -5857,6 +6271,7 @@ func NewDescribeMNPVersionResponse() (response *DescribeMNPVersionResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPVERSIONTASKID = "InvalidParameterValue.InvalidMNPVersionTaskId"
 func (c *Client) DescribeMNPVersion(request *DescribeMNPVersionRequest) (response *DescribeMNPVersionResponse, err error) {
     return c.DescribeMNPVersionWithContext(context.Background(), request)
@@ -5867,6 +6282,7 @@ func (c *Client) DescribeMNPVersion(request *DescribeMNPVersionRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPVERSIONTASKID = "InvalidParameterValue.InvalidMNPVersionTaskId"
 func (c *Client) DescribeMNPVersionWithContext(ctx context.Context, request *DescribeMNPVersionRequest) (response *DescribeMNPVersionResponse, err error) {
     if request == nil {
@@ -5909,7 +6325,6 @@ func NewDescribePaymentDataDetailResponse() (response *DescribePaymentDataDetail
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribePaymentDataDetail(request *DescribePaymentDataDetailRequest) (response *DescribePaymentDataDetailResponse, err error) {
@@ -5921,7 +6336,6 @@ func (c *Client) DescribePaymentDataDetail(request *DescribePaymentDataDetailReq
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribePaymentDataDetailWithContext(ctx context.Context, request *DescribePaymentDataDetailRequest) (response *DescribePaymentDataDetailResponse, err error) {
@@ -5966,7 +6380,6 @@ func NewDescribePaymentDataLineChartResponse() (response *DescribePaymentDataLin
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribePaymentDataLineChart(request *DescribePaymentDataLineChartRequest) (response *DescribePaymentDataLineChartResponse, err error) {
     return c.DescribePaymentDataLineChartWithContext(context.Background(), request)
@@ -5978,7 +6391,6 @@ func (c *Client) DescribePaymentDataLineChart(request *DescribePaymentDataLineCh
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribePaymentDataLineChartWithContext(ctx context.Context, request *DescribePaymentDataLineChartRequest) (response *DescribePaymentDataLineChartResponse, err error) {
     if request == nil {
@@ -6023,7 +6435,6 @@ func NewDescribePaymentDataOverviewResponse() (response *DescribePaymentDataOver
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  FAILEDOPERATION_USERNOTFOUND = "FailedOperation.UserNotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribePaymentDataOverview(request *DescribePaymentDataOverviewRequest) (response *DescribePaymentDataOverviewResponse, err error) {
@@ -6037,7 +6448,6 @@ func (c *Client) DescribePaymentDataOverview(request *DescribePaymentDataOvervie
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  FAILEDOPERATION_USERNOTFOUND = "FailedOperation.UserNotFound"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribePaymentDataOverviewWithContext(ctx context.Context, request *DescribePaymentDataOverviewRequest) (response *DescribePaymentDataOverviewResponse, err error) {
@@ -6081,6 +6491,7 @@ func NewDescribeRoleListResponse() (response *DescribeRoleListResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeRoleList(request *DescribeRoleListRequest) (response *DescribeRoleListResponse, err error) {
     return c.DescribeRoleListWithContext(context.Background(), request)
 }
@@ -6090,6 +6501,7 @@ func (c *Client) DescribeRoleList(request *DescribeRoleListRequest) (response *D
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeRoleListWithContext(ctx context.Context, request *DescribeRoleListRequest) (response *DescribeRoleListResponse, err error) {
     if request == nil {
         request = NewDescribeRoleListRequest()
@@ -6131,6 +6543,7 @@ func NewDescribeTeamResponse() (response *DescribeTeamResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeTeam(request *DescribeTeamRequest) (response *DescribeTeamResponse, err error) {
     return c.DescribeTeamWithContext(context.Background(), request)
 }
@@ -6140,6 +6553,7 @@ func (c *Client) DescribeTeam(request *DescribeTeamRequest) (response *DescribeT
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeTeamWithContext(ctx context.Context, request *DescribeTeamRequest) (response *DescribeTeamResponse, err error) {
     if request == nil {
         request = NewDescribeTeamRequest()
@@ -6181,6 +6595,7 @@ func NewDescribeTeamListResponse() (response *DescribeTeamListResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
 func (c *Client) DescribeTeamList(request *DescribeTeamListRequest) (response *DescribeTeamListResponse, err error) {
     return c.DescribeTeamListWithContext(context.Background(), request)
@@ -6191,6 +6606,7 @@ func (c *Client) DescribeTeamList(request *DescribeTeamListRequest) (response *D
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
 func (c *Client) DescribeTeamListWithContext(ctx context.Context, request *DescribeTeamListRequest) (response *DescribeTeamListResponse, err error) {
     if request == nil {
@@ -6233,6 +6649,7 @@ func NewDescribeTeamMemberListResponse() (response *DescribeTeamMemberListRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeTeamMemberList(request *DescribeTeamMemberListRequest) (response *DescribeTeamMemberListResponse, err error) {
     return c.DescribeTeamMemberListWithContext(context.Background(), request)
 }
@@ -6242,6 +6659,7 @@ func (c *Client) DescribeTeamMemberList(request *DescribeTeamMemberListRequest) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeTeamMemberListWithContext(ctx context.Context, request *DescribeTeamMemberListRequest) (response *DescribeTeamMemberListResponse, err error) {
     if request == nil {
         request = NewDescribeTeamMemberListRequest()
@@ -6285,6 +6703,7 @@ func NewDescribeTempSecret4UploadFile2CosResponse() (response *DescribeTempSecre
 //  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
 //  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribeTempSecret4UploadFile2Cos(request *DescribeTempSecret4UploadFile2CosRequest) (response *DescribeTempSecret4UploadFile2CosResponse, err error) {
@@ -6298,6 +6717,7 @@ func (c *Client) DescribeTempSecret4UploadFile2Cos(request *DescribeTempSecret4U
 //  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
 //  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 //  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
 func (c *Client) DescribeTempSecret4UploadFile2CosWithContext(ctx context.Context, request *DescribeTempSecret4UploadFile2CosRequest) (response *DescribeTempSecret4UploadFile2CosResponse, err error) {
@@ -6341,6 +6761,7 @@ func NewDescribeUserResponse() (response *DescribeUserResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
 func (c *Client) DescribeUser(request *DescribeUserRequest) (response *DescribeUserResponse, err error) {
     return c.DescribeUserWithContext(context.Background(), request)
@@ -6351,6 +6772,7 @@ func (c *Client) DescribeUser(request *DescribeUserRequest) (response *DescribeU
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
 func (c *Client) DescribeUserWithContext(ctx context.Context, request *DescribeUserRequest) (response *DescribeUserResponse, err error) {
     if request == nil {
@@ -6393,6 +6815,7 @@ func NewDescribeUserListResponse() (response *DescribeUserListResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDACCOUNTTYPE = "InvalidParameterValue.InvalidAccountType"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) DescribeUserList(request *DescribeUserListRequest) (response *DescribeUserListResponse, err error) {
@@ -6404,6 +6827,7 @@ func (c *Client) DescribeUserList(request *DescribeUserListRequest) (response *D
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDACCOUNTTYPE = "InvalidParameterValue.InvalidAccountType"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) DescribeUserListWithContext(ctx context.Context, request *DescribeUserListRequest) (response *DescribeUserListResponse, err error) {
@@ -6449,6 +6873,7 @@ func NewDisableApplicationSensitiveAPIResponse() (response *DisableApplicationSe
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DisableApplicationSensitiveAPI(request *DisableApplicationSensitiveAPIRequest) (response *DisableApplicationSensitiveAPIResponse, err error) {
     return c.DisableApplicationSensitiveAPIWithContext(context.Background(), request)
 }
@@ -6460,6 +6885,7 @@ func (c *Client) DisableApplicationSensitiveAPI(request *DisableApplicationSensi
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
 func (c *Client) DisableApplicationSensitiveAPIWithContext(ctx context.Context, request *DisableApplicationSensitiveAPIRequest) (response *DisableApplicationSensitiveAPIResponse, err error) {
     if request == nil {
         request = NewDisableApplicationSensitiveAPIRequest()
@@ -6473,6 +6899,66 @@ func (c *Client) DisableApplicationSensitiveAPIWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewDisableApplicationSensitiveAPIResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDisableMNPPaymentRequest() (request *DisableMNPPaymentRequest) {
+    request = &DisableMNPPaymentRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DisableMNPPayment")
+    
+    
+    return
+}
+
+func NewDisableMNPPaymentResponse() (response *DisableMNPPaymentResponse) {
+    response = &DisableMNPPaymentResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DisableMNPPayment
+// This API is used to allow the superapp to actively disable mini program payment.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_PAYMENTRECORDNOTBELONGTOAPPLICATION = "FailedOperation.PaymentRecordNotBelongToApplication"
+//  FAILEDOPERATION_PAYMENTRECORDNOTFOUND = "FailedOperation.PaymentRecordNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDMNPTYPE = "InvalidParameterValue.InvalidMNPType"
+func (c *Client) DisableMNPPayment(request *DisableMNPPaymentRequest) (response *DisableMNPPaymentResponse, err error) {
+    return c.DisableMNPPaymentWithContext(context.Background(), request)
+}
+
+// DisableMNPPayment
+// This API is used to allow the superapp to actively disable mini program payment.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_PAYMENTRECORDNOTBELONGTOAPPLICATION = "FailedOperation.PaymentRecordNotBelongToApplication"
+//  FAILEDOPERATION_PAYMENTRECORDNOTFOUND = "FailedOperation.PaymentRecordNotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDMNPTYPE = "InvalidParameterValue.InvalidMNPType"
+func (c *Client) DisableMNPPaymentWithContext(ctx context.Context, request *DisableMNPPaymentRequest) (response *DisableMNPPaymentResponse, err error) {
+    if request == nil {
+        request = NewDisableMNPPaymentRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DisableMNPPayment")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisableMNPPayment require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDisableMNPPaymentResponse()
     err = c.Send(request, response)
     return
 }
@@ -6504,6 +6990,7 @@ func NewEnableApplicationSensitiveAPIResponse() (response *EnableApplicationSens
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
 func (c *Client) EnableApplicationSensitiveAPI(request *EnableApplicationSensitiveAPIRequest) (response *EnableApplicationSensitiveAPIResponse, err error) {
     return c.EnableApplicationSensitiveAPIWithContext(context.Background(), request)
 }
@@ -6516,6 +7003,7 @@ func (c *Client) EnableApplicationSensitiveAPI(request *EnableApplicationSensiti
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
 func (c *Client) EnableApplicationSensitiveAPIWithContext(ctx context.Context, request *EnableApplicationSensitiveAPIRequest) (response *EnableApplicationSensitiveAPIResponse, err error) {
     if request == nil {
         request = NewEnableApplicationSensitiveAPIRequest()
@@ -6558,6 +7046,7 @@ func NewModifyApplicationResponse() (response *ModifyApplicationResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_APPLICATIONNAMEALREADYEXISTED = "FailedOperation.ApplicationNameAlreadyExisted"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDAPPPACKAGENAMELAYOUT = "InvalidParameterValue.InvalidAppPackageNameLayout"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONINTRO = "InvalidParameterValue.InvalidApplicationIntro"
@@ -6574,6 +7063,7 @@ func (c *Client) ModifyApplication(request *ModifyApplicationRequest) (response 
 // error code that may be returned:
 //  FAILEDOPERATION_APPLICATIONNAMEALREADYEXISTED = "FailedOperation.ApplicationNameAlreadyExisted"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDAPPPACKAGENAMELAYOUT = "InvalidParameterValue.InvalidAppPackageNameLayout"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
 //  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONINTRO = "InvalidParameterValue.InvalidApplicationIntro"
@@ -6620,6 +7110,7 @@ func NewModifyApplicationConfigResponse() (response *ModifyApplicationConfigResp
 // This API is used to edit the configuration of a superapp.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_APPKEYLENGTHEXCEEDLIMIT = "InvalidParameterValue.AppKeyLengthExceedLimit"
 //  INVALIDPARAMETERVALUE_APPURLLENGTHEXCEEDLIMIT = "InvalidParameterValue.AppURLLengthExceedLimit"
 func (c *Client) ModifyApplicationConfig(request *ModifyApplicationConfigRequest) (response *ModifyApplicationConfigResponse, err error) {
@@ -6630,6 +7121,7 @@ func (c *Client) ModifyApplicationConfig(request *ModifyApplicationConfigRequest
 // This API is used to edit the configuration of a superapp.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_APPKEYLENGTHEXCEEDLIMIT = "InvalidParameterValue.AppKeyLengthExceedLimit"
 //  INVALIDPARAMETERVALUE_APPURLLENGTHEXCEEDLIMIT = "InvalidParameterValue.AppURLLengthExceedLimit"
 func (c *Client) ModifyApplicationConfigWithContext(ctx context.Context, request *ModifyApplicationConfigRequest) (response *ModifyApplicationConfigResponse, err error) {
@@ -6675,6 +7167,7 @@ func NewModifyGlobalDomainResponse() (response *ModifyGlobalDomainResponse) {
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
 func (c *Client) ModifyGlobalDomain(request *ModifyGlobalDomainRequest) (response *ModifyGlobalDomainResponse, err error) {
     return c.ModifyGlobalDomainWithContext(context.Background(), request)
 }
@@ -6686,6 +7179,7 @@ func (c *Client) ModifyGlobalDomain(request *ModifyGlobalDomainRequest) (respons
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
 func (c *Client) ModifyGlobalDomainWithContext(ctx context.Context, request *ModifyGlobalDomainRequest) (response *ModifyGlobalDomainResponse, err error) {
     if request == nil {
         request = NewModifyGlobalDomainRequest()
@@ -6728,6 +7222,11 @@ func NewModifyMNGResponse() (response *ModifyMNGResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_MINIPROGRAMICONANALYSISFAILED = "FailedOperation.MiniProgramIconAnalysisFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_AGERATINGEXCEEDSUPPERAPPLIMIT = "InvalidParameterValue.AgeRatingExceedSupperAppLimit"
+//  INVALIDPARAMETERVALUE_DUPLICATEAGERATINGSTANDARD = "InvalidParameterValue.DuplicateAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDAGERATINGSTANDARD = "InvalidParameterValue.InvalidAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDMNPI18NLANG = "InvalidParameterValue.InvalidMNPI18NLang"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 //  INVALIDPARAMETERVALUE_INVALIDMNPNAME = "InvalidParameterValue.InvalidMNPName"
 //  INVALIDPARAMETERVALUE_INVALIDMNPTYPE = "InvalidParameterValue.InvalidMNPType"
@@ -6743,6 +7242,11 @@ func (c *Client) ModifyMNG(request *ModifyMNGRequest) (response *ModifyMNGRespon
 // error code that may be returned:
 //  FAILEDOPERATION_MINIPROGRAMICONANALYSISFAILED = "FailedOperation.MiniProgramIconAnalysisFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_AGERATINGEXCEEDSUPPERAPPLIMIT = "InvalidParameterValue.AgeRatingExceedSupperAppLimit"
+//  INVALIDPARAMETERVALUE_DUPLICATEAGERATINGSTANDARD = "InvalidParameterValue.DuplicateAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDAGERATINGSTANDARD = "InvalidParameterValue.InvalidAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDMNPI18NLANG = "InvalidParameterValue.InvalidMNPI18NLang"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 //  INVALIDPARAMETERVALUE_INVALIDMNPNAME = "InvalidParameterValue.InvalidMNPName"
 //  INVALIDPARAMETERVALUE_INVALIDMNPTYPE = "InvalidParameterValue.InvalidMNPType"
@@ -6789,6 +7293,7 @@ func NewModifyMNGAppSecretStatusResponse() (response *ModifyMNGAppSecretStatusRe
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) ModifyMNGAppSecretStatus(request *ModifyMNGAppSecretStatusRequest) (response *ModifyMNGAppSecretStatusResponse, err error) {
     return c.ModifyMNGAppSecretStatusWithContext(context.Background(), request)
@@ -6799,6 +7304,7 @@ func (c *Client) ModifyMNGAppSecretStatus(request *ModifyMNGAppSecretStatusReque
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) ModifyMNGAppSecretStatusWithContext(ctx context.Context, request *ModifyMNGAppSecretStatusRequest) (response *ModifyMNGAppSecretStatusResponse, err error) {
     if request == nil {
@@ -6842,6 +7348,8 @@ func NewModifyMNGDomainResponse() (response *ModifyMNGDomainResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) ModifyMNGDomain(request *ModifyMNGDomainRequest) (response *ModifyMNGDomainResponse, err error) {
     return c.ModifyMNGDomainWithContext(context.Background(), request)
@@ -6853,6 +7361,8 @@ func (c *Client) ModifyMNGDomain(request *ModifyMNGDomainRequest) (response *Mod
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) ModifyMNGDomainWithContext(ctx context.Context, request *ModifyMNGDomainRequest) (response *ModifyMNGDomainResponse, err error) {
     if request == nil {
@@ -6896,6 +7406,11 @@ func NewModifyMNPResponse() (response *ModifyMNPResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_MINIPROGRAMICONANALYSISFAILED = "FailedOperation.MiniProgramIconAnalysisFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_AGERATINGEXCEEDSUPPERAPPLIMIT = "InvalidParameterValue.AgeRatingExceedSupperAppLimit"
+//  INVALIDPARAMETERVALUE_DUPLICATEAGERATINGSTANDARD = "InvalidParameterValue.DuplicateAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDAGERATINGSTANDARD = "InvalidParameterValue.InvalidAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDMNPI18NLANG = "InvalidParameterValue.InvalidMNPI18NLang"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 //  INVALIDPARAMETERVALUE_INVALIDMNPNAME = "InvalidParameterValue.InvalidMNPName"
 //  INVALIDPARAMETERVALUE_INVALIDMNPTYPE = "InvalidParameterValue.InvalidMNPType"
@@ -6911,6 +7426,11 @@ func (c *Client) ModifyMNP(request *ModifyMNPRequest) (response *ModifyMNPRespon
 // error code that may be returned:
 //  FAILEDOPERATION_MINIPROGRAMICONANALYSISFAILED = "FailedOperation.MiniProgramIconAnalysisFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_AGERATINGEXCEEDSUPPERAPPLIMIT = "InvalidParameterValue.AgeRatingExceedSupperAppLimit"
+//  INVALIDPARAMETERVALUE_DUPLICATEAGERATINGSTANDARD = "InvalidParameterValue.DuplicateAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDAGERATINGSTANDARD = "InvalidParameterValue.InvalidAgeRatingStandard"
+//  INVALIDPARAMETERVALUE_INVALIDMNPI18NLANG = "InvalidParameterValue.InvalidMNPI18NLang"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 //  INVALIDPARAMETERVALUE_INVALIDMNPNAME = "InvalidParameterValue.InvalidMNPName"
 //  INVALIDPARAMETERVALUE_INVALIDMNPTYPE = "InvalidParameterValue.InvalidMNPType"
@@ -6957,6 +7477,7 @@ func NewModifyMNPAppSecretStatusResponse() (response *ModifyMNPAppSecretStatusRe
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) ModifyMNPAppSecretStatus(request *ModifyMNPAppSecretStatusRequest) (response *ModifyMNPAppSecretStatusResponse, err error) {
     return c.ModifyMNPAppSecretStatusWithContext(context.Background(), request)
@@ -6967,6 +7488,7 @@ func (c *Client) ModifyMNPAppSecretStatus(request *ModifyMNPAppSecretStatusReque
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) ModifyMNPAppSecretStatusWithContext(ctx context.Context, request *ModifyMNPAppSecretStatusRequest) (response *ModifyMNPAppSecretStatusResponse, err error) {
     if request == nil {
@@ -7010,6 +7532,8 @@ func NewModifyMNPDomainResponse() (response *ModifyMNPDomainResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) ModifyMNPDomain(request *ModifyMNPDomainRequest) (response *ModifyMNPDomainResponse, err error) {
     return c.ModifyMNPDomainWithContext(context.Background(), request)
@@ -7021,6 +7545,8 @@ func (c *Client) ModifyMNPDomain(request *ModifyMNPDomainRequest) (response *Mod
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) ModifyMNPDomainWithContext(ctx context.Context, request *ModifyMNPDomainRequest) (response *ModifyMNPDomainResponse, err error) {
     if request == nil {
@@ -7063,6 +7589,7 @@ func NewModifyTeamResponse() (response *ModifyTeamResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_EXISTTEAMNAME = "InvalidParameterValue.ExistTeamName"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) ModifyTeam(request *ModifyTeamRequest) (response *ModifyTeamResponse, err error) {
@@ -7074,6 +7601,7 @@ func (c *Client) ModifyTeam(request *ModifyTeamRequest) (response *ModifyTeamRes
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_EXISTTEAMNAME = "InvalidParameterValue.ExistTeamName"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) ModifyTeamWithContext(ctx context.Context, request *ModifyTeamRequest) (response *ModifyTeamResponse, err error) {
@@ -7117,6 +7645,7 @@ func NewModifyTeamMemberResponse() (response *ModifyTeamMemberResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDROLEID = "InvalidParameterValue.InvalidRoleId"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 //  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
@@ -7129,6 +7658,7 @@ func (c *Client) ModifyTeamMember(request *ModifyTeamMemberRequest) (response *M
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDROLEID = "InvalidParameterValue.InvalidRoleId"
 //  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 //  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
@@ -7174,6 +7704,7 @@ func NewModifyUserResponse() (response *ModifyUserResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDACCOUNTTYPE = "InvalidParameterValue.InvalidAccountType"
 //  INVALIDPARAMETERVALUE_INVALIDUSERNAME = "InvalidParameterValue.InvalidUserName"
 func (c *Client) ModifyUser(request *ModifyUserRequest) (response *ModifyUserResponse, err error) {
@@ -7186,6 +7717,7 @@ func (c *Client) ModifyUser(request *ModifyUserRequest) (response *ModifyUserRes
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDACCOUNTTYPE = "InvalidParameterValue.InvalidAccountType"
 //  INVALIDPARAMETERVALUE_INVALIDUSERNAME = "InvalidParameterValue.InvalidUserName"
 func (c *Client) ModifyUserWithContext(ctx context.Context, request *ModifyUserRequest) (response *ModifyUserResponse, err error) {
@@ -7229,6 +7761,8 @@ func NewProcessMNPApprovalResponse() (response *ProcessMNPApprovalResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDAPPROVALNO = "InvalidParameterValue.InvalidApprovalNo"
 //  INVALIDPARAMETERVALUE_INVALIDAPPROVALNOTE = "InvalidParameterValue.InvalidApprovalNote"
 //  INVALIDPARAMETERVALUE_PROCESSAPPLICATIONANDAPPROVALAPPLICATIONMISMATCH = "InvalidParameterValue.ProcessApplicationAndApprovalApplicationMismatch"
@@ -7243,6 +7777,8 @@ func (c *Client) ProcessMNPApproval(request *ProcessMNPApprovalRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDAPPROVALNO = "InvalidParameterValue.InvalidApprovalNo"
 //  INVALIDPARAMETERVALUE_INVALIDAPPROVALNOTE = "InvalidParameterValue.InvalidApprovalNote"
 //  INVALIDPARAMETERVALUE_PROCESSAPPLICATIONANDAPPROVALAPPLICATIONMISMATCH = "InvalidParameterValue.ProcessApplicationAndApprovalApplicationMismatch"
@@ -7290,6 +7826,8 @@ func NewProcessMNPSensitiveAPIPermissionApprovalResponse() (response *ProcessMNP
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) ProcessMNPSensitiveAPIPermissionApproval(request *ProcessMNPSensitiveAPIPermissionApprovalRequest) (response *ProcessMNPSensitiveAPIPermissionApprovalResponse, err error) {
     return c.ProcessMNPSensitiveAPIPermissionApprovalWithContext(context.Background(), request)
 }
@@ -7300,6 +7838,8 @@ func (c *Client) ProcessMNPSensitiveAPIPermissionApproval(request *ProcessMNPSen
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) ProcessMNPSensitiveAPIPermissionApprovalWithContext(ctx context.Context, request *ProcessMNPSensitiveAPIPermissionApprovalRequest) (response *ProcessMNPSensitiveAPIPermissionApprovalResponse, err error) {
     if request == nil {
         request = NewProcessMNPSensitiveAPIPermissionApprovalRequest()
@@ -7313,6 +7853,62 @@ func (c *Client) ProcessMNPSensitiveAPIPermissionApprovalWithContext(ctx context
     request.SetContext(ctx)
     
     response = NewProcessMNPSensitiveAPIPermissionApprovalResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewQueryMNPMerchantInfoRequest() (request *QueryMNPMerchantInfoRequest) {
+    request = &QueryMNPMerchantInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "QueryMNPMerchantInfo")
+    
+    
+    return
+}
+
+func NewQueryMNPMerchantInfoResponse() (response *QueryMNPMerchantInfoResponse) {
+    response = &QueryMNPMerchantInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryMNPMerchantInfo
+// This API is used to query the merchant information of a mini program.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) QueryMNPMerchantInfo(request *QueryMNPMerchantInfoRequest) (response *QueryMNPMerchantInfoResponse, err error) {
+    return c.QueryMNPMerchantInfoWithContext(context.Background(), request)
+}
+
+// QueryMNPMerchantInfo
+// This API is used to query the merchant information of a mini program.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) QueryMNPMerchantInfoWithContext(ctx context.Context, request *QueryMNPMerchantInfoRequest) (response *QueryMNPMerchantInfoResponse, err error) {
+    if request == nil {
+        request = NewQueryMNPMerchantInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "QueryMNPMerchantInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryMNPMerchantInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryMNPMerchantInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -7345,6 +7941,8 @@ func NewReleaseMNGVersionResponse() (response *ReleaseMNGVersionResponse) {
 //  FAILEDOPERATION_ONLYRELEASEPLATFORMAPPROVEDMNPVERSION = "FailedOperation.OnlyReleasePlatformApprovedMNPVersion"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RELEASEMNPVERSIONNEEDGREATERTHANONLINEVERSION = "FailedOperation.ReleaseMNPVersionNeedGreaterThanOnlineVersion"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPVERSIONID = "InvalidParameterValue.InvalidMNPVersionId"
 func (c *Client) ReleaseMNGVersion(request *ReleaseMNGVersionRequest) (response *ReleaseMNGVersionResponse, err error) {
     return c.ReleaseMNGVersionWithContext(context.Background(), request)
@@ -7359,6 +7957,8 @@ func (c *Client) ReleaseMNGVersion(request *ReleaseMNGVersionRequest) (response 
 //  FAILEDOPERATION_ONLYRELEASEPLATFORMAPPROVEDMNPVERSION = "FailedOperation.OnlyReleasePlatformApprovedMNPVersion"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RELEASEMNPVERSIONNEEDGREATERTHANONLINEVERSION = "FailedOperation.ReleaseMNPVersionNeedGreaterThanOnlineVersion"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPVERSIONID = "InvalidParameterValue.InvalidMNPVersionId"
 func (c *Client) ReleaseMNGVersionWithContext(ctx context.Context, request *ReleaseMNGVersionRequest) (response *ReleaseMNGVersionResponse, err error) {
     if request == nil {
@@ -7405,6 +8005,8 @@ func NewReleaseMNPVersionResponse() (response *ReleaseMNPVersionResponse) {
 //  FAILEDOPERATION_ONLYRELEASEPLATFORMAPPROVEDMNPVERSION = "FailedOperation.OnlyReleasePlatformApprovedMNPVersion"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RELEASEMNPVERSIONNEEDGREATERTHANONLINEVERSION = "FailedOperation.ReleaseMNPVersionNeedGreaterThanOnlineVersion"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPVERSIONID = "InvalidParameterValue.InvalidMNPVersionId"
 func (c *Client) ReleaseMNPVersion(request *ReleaseMNPVersionRequest) (response *ReleaseMNPVersionResponse, err error) {
     return c.ReleaseMNPVersionWithContext(context.Background(), request)
@@ -7419,6 +8021,8 @@ func (c *Client) ReleaseMNPVersion(request *ReleaseMNPVersionRequest) (response 
 //  FAILEDOPERATION_ONLYRELEASEPLATFORMAPPROVEDMNPVERSION = "FailedOperation.OnlyReleasePlatformApprovedMNPVersion"
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RELEASEMNPVERSIONNEEDGREATERTHANONLINEVERSION = "FailedOperation.ReleaseMNPVersionNeedGreaterThanOnlineVersion"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPVERSIONID = "InvalidParameterValue.InvalidMNPVersionId"
 func (c *Client) ReleaseMNPVersionWithContext(ctx context.Context, request *ReleaseMNPVersionRequest) (response *ReleaseMNPVersionResponse, err error) {
     if request == nil {
@@ -7462,6 +8066,8 @@ func NewRemoveMNGResponse() (response *RemoveMNGResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) RemoveMNG(request *RemoveMNGRequest) (response *RemoveMNGResponse, err error) {
     return c.RemoveMNGWithContext(context.Background(), request)
@@ -7473,6 +8079,8 @@ func (c *Client) RemoveMNG(request *RemoveMNGRequest) (response *RemoveMNGRespon
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) RemoveMNGWithContext(ctx context.Context, request *RemoveMNGRequest) (response *RemoveMNGResponse, err error) {
     if request == nil {
@@ -7516,6 +8124,8 @@ func NewRemoveMNPResponse() (response *RemoveMNPResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) RemoveMNP(request *RemoveMNPRequest) (response *RemoveMNPResponse, err error) {
     return c.RemoveMNPWithContext(context.Background(), request)
@@ -7527,6 +8137,8 @@ func (c *Client) RemoveMNP(request *RemoveMNPRequest) (response *RemoveMNPRespon
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) RemoveMNPWithContext(ctx context.Context, request *RemoveMNPRequest) (response *RemoveMNPResponse, err error) {
     if request == nil {
@@ -7541,6 +8153,132 @@ func (c *Client) RemoveMNPWithContext(ctx context.Context, request *RemoveMNPReq
     request.SetContext(ctx)
     
     response = NewRemoveMNPResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRequestPaymentEnableRequest() (request *RequestPaymentEnableRequest) {
+    request = &RequestPaymentEnableRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "RequestPaymentEnable")
+    
+    
+    return
+}
+
+func NewRequestPaymentEnableResponse() (response *RequestPaymentEnableResponse) {
+    response = &RequestPaymentEnableResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RequestPaymentEnable
+// This API is used to request the activation of mini program payment.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EXISTPAYMENTOPENAPPLY = "FailedOperation.ExistPaymentOpenApply"
+//  FAILEDOPERATION_MNPPAYMENTALREADYENABLED = "FailedOperation.MNPPaymentAlreadyEnabled"
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_PAYMENTRECORDNOTBELONGTOAPPLICATION = "FailedOperation.PaymentRecordNotBelongToApplication"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) RequestPaymentEnable(request *RequestPaymentEnableRequest) (response *RequestPaymentEnableResponse, err error) {
+    return c.RequestPaymentEnableWithContext(context.Background(), request)
+}
+
+// RequestPaymentEnable
+// This API is used to request the activation of mini program payment.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EXISTPAYMENTOPENAPPLY = "FailedOperation.ExistPaymentOpenApply"
+//  FAILEDOPERATION_MNPPAYMENTALREADYENABLED = "FailedOperation.MNPPaymentAlreadyEnabled"
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_PAYMENTRECORDNOTBELONGTOAPPLICATION = "FailedOperation.PaymentRecordNotBelongToApplication"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+func (c *Client) RequestPaymentEnableWithContext(ctx context.Context, request *RequestPaymentEnableRequest) (response *RequestPaymentEnableResponse, err error) {
+    if request == nil {
+        request = NewRequestPaymentEnableRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "RequestPaymentEnable")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RequestPaymentEnable require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRequestPaymentEnableResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRequestPaymentMerchantBindingRequest() (request *RequestPaymentMerchantBindingRequest) {
+    request = &RequestPaymentMerchantBindingRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "RequestPaymentMerchantBinding")
+    
+    
+    return
+}
+
+func NewRequestPaymentMerchantBindingResponse() (response *RequestPaymentMerchantBindingResponse) {
+    response = &RequestPaymentMerchantBindingResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RequestPaymentMerchantBinding
+// This API is used to request the binding of a payment merchant to a team.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EXISTMERCHANTBINDAPPLY = "FailedOperation.ExistMerchantBindApply"
+//  FAILEDOPERATION_EXISTMERCHANTBINDRELATION = "FailedOperation.ExistMerchantBindRelation"
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  FAILEDOPERATION_PAYMENTRECORDNOTBELONGTOAPPLICATION = "FailedOperation.PaymentRecordNotBelongToApplication"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDMERCHANTID = "InvalidParameterValue.InvalidMerchantId"
+//  INVALIDPARAMETERVALUE_INVALIDMERCHANTNAME = "InvalidParameterValue.InvalidMerchantName"
+func (c *Client) RequestPaymentMerchantBinding(request *RequestPaymentMerchantBindingRequest) (response *RequestPaymentMerchantBindingResponse, err error) {
+    return c.RequestPaymentMerchantBindingWithContext(context.Background(), request)
+}
+
+// RequestPaymentMerchantBinding
+// This API is used to request the binding of a payment merchant to a team.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EXISTMERCHANTBINDAPPLY = "FailedOperation.ExistMerchantBindApply"
+//  FAILEDOPERATION_EXISTMERCHANTBINDRELATION = "FailedOperation.ExistMerchantBindRelation"
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  FAILEDOPERATION_PAYMENTRECORDNOTBELONGTOAPPLICATION = "FailedOperation.PaymentRecordNotBelongToApplication"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDMERCHANTID = "InvalidParameterValue.InvalidMerchantId"
+//  INVALIDPARAMETERVALUE_INVALIDMERCHANTNAME = "InvalidParameterValue.InvalidMerchantName"
+func (c *Client) RequestPaymentMerchantBindingWithContext(ctx context.Context, request *RequestPaymentMerchantBindingRequest) (response *RequestPaymentMerchantBindingResponse, err error) {
+    if request == nil {
+        request = NewRequestPaymentMerchantBindingRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "RequestPaymentMerchantBinding")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RequestPaymentMerchantBinding require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRequestPaymentMerchantBindingResponse()
     err = c.Send(request, response)
     return
 }
@@ -7569,6 +8307,7 @@ func NewResetMNGAppSecretResponse() (response *ResetMNGAppSecretResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) ResetMNGAppSecret(request *ResetMNGAppSecretRequest) (response *ResetMNGAppSecretResponse, err error) {
     return c.ResetMNGAppSecretWithContext(context.Background(), request)
@@ -7579,6 +8318,7 @@ func (c *Client) ResetMNGAppSecret(request *ResetMNGAppSecretRequest) (response 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) ResetMNGAppSecretWithContext(ctx context.Context, request *ResetMNGAppSecretRequest) (response *ResetMNGAppSecretResponse, err error) {
     if request == nil {
@@ -7621,6 +8361,7 @@ func NewResetMNPAppSecretResponse() (response *ResetMNPAppSecretResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) ResetMNPAppSecret(request *ResetMNPAppSecretRequest) (response *ResetMNPAppSecretResponse, err error) {
     return c.ResetMNPAppSecretWithContext(context.Background(), request)
@@ -7631,6 +8372,7 @@ func (c *Client) ResetMNPAppSecret(request *ResetMNPAppSecretRequest) (response 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
 func (c *Client) ResetMNPAppSecretWithContext(ctx context.Context, request *ResetMNPAppSecretRequest) (response *ResetMNPAppSecretResponse, err error) {
     if request == nil {
@@ -7673,6 +8415,7 @@ func NewRollbackMNGVersionResponse() (response *RollbackMNGVersionResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMINIAPPID = "InvalidParameterValue.InvalidMiniAppId"
 func (c *Client) RollbackMNGVersion(request *RollbackMNGVersionRequest) (response *RollbackMNGVersionResponse, err error) {
     return c.RollbackMNGVersionWithContext(context.Background(), request)
@@ -7683,6 +8426,7 @@ func (c *Client) RollbackMNGVersion(request *RollbackMNGVersionRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMINIAPPID = "InvalidParameterValue.InvalidMiniAppId"
 func (c *Client) RollbackMNGVersionWithContext(ctx context.Context, request *RollbackMNGVersionRequest) (response *RollbackMNGVersionResponse, err error) {
     if request == nil {
@@ -7725,6 +8469,7 @@ func NewRollbackMNPVersionResponse() (response *RollbackMNPVersionResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMINIAPPID = "InvalidParameterValue.InvalidMiniAppId"
 func (c *Client) RollbackMNPVersion(request *RollbackMNPVersionRequest) (response *RollbackMNPVersionResponse, err error) {
     return c.RollbackMNPVersionWithContext(context.Background(), request)
@@ -7735,6 +8480,7 @@ func (c *Client) RollbackMNPVersion(request *RollbackMNPVersionRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_INVALIDMINIAPPID = "InvalidParameterValue.InvalidMiniAppId"
 func (c *Client) RollbackMNPVersionWithContext(ctx context.Context, request *RollbackMNPVersionRequest) (response *RollbackMNPVersionResponse, err error) {
     if request == nil {
@@ -7749,6 +8495,128 @@ func (c *Client) RollbackMNPVersionWithContext(ctx context.Context, request *Rol
     request.SetContext(ctx)
     
     response = NewRollbackMNPVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUnbindMNPPaymentMerchantRequest() (request *UnbindMNPPaymentMerchantRequest) {
+    request = &UnbindMNPPaymentMerchantRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "UnbindMNPPaymentMerchant")
+    
+    
+    return
+}
+
+func NewUnbindMNPPaymentMerchantResponse() (response *UnbindMNPPaymentMerchantResponse) {
+    response = &UnbindMNPPaymentMerchantResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UnbindMNPPaymentMerchant
+// This API is used to allow a mini program team to actively unbind the payment merchant.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  FAILEDOPERATION_PAYMENTRECORDNOTFOUND = "FailedOperation.PaymentRecordNotFound"
+//  FAILEDOPERATION_PAYMENTVERSIONCHECKERROR = "FailedOperation.PaymentVersionCheckError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
+func (c *Client) UnbindMNPPaymentMerchant(request *UnbindMNPPaymentMerchantRequest) (response *UnbindMNPPaymentMerchantResponse, err error) {
+    return c.UnbindMNPPaymentMerchantWithContext(context.Background(), request)
+}
+
+// UnbindMNPPaymentMerchant
+// This API is used to allow a mini program team to actively unbind the payment merchant.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  FAILEDOPERATION_PAYMENTRECORDNOTFOUND = "FailedOperation.PaymentRecordNotFound"
+//  FAILEDOPERATION_PAYMENTVERSIONCHECKERROR = "FailedOperation.PaymentVersionCheckError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
+func (c *Client) UnbindMNPPaymentMerchantWithContext(ctx context.Context, request *UnbindMNPPaymentMerchantRequest) (response *UnbindMNPPaymentMerchantResponse, err error) {
+    if request == nil {
+        request = NewUnbindMNPPaymentMerchantRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "UnbindMNPPaymentMerchant")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UnbindMNPPaymentMerchant require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUnbindMNPPaymentMerchantResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUnbindPaymentMerchantRequest() (request *UnbindPaymentMerchantRequest) {
+    request = &UnbindPaymentMerchantRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "UnbindPaymentMerchant")
+    
+    
+    return
+}
+
+func NewUnbindPaymentMerchantResponse() (response *UnbindPaymentMerchantResponse) {
+    response = &UnbindPaymentMerchantResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UnbindPaymentMerchant
+// This API is used to allow the superapp to actively unbind the payment merchant.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  FAILEDOPERATION_PAYMENTRECORDNOTBELONGTOAPPLICATION = "FailedOperation.PaymentRecordNotBelongToApplication"
+//  FAILEDOPERATION_PAYMENTRECORDNOTFOUND = "FailedOperation.PaymentRecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UnbindPaymentMerchant(request *UnbindPaymentMerchantRequest) (response *UnbindPaymentMerchantResponse, err error) {
+    return c.UnbindPaymentMerchantWithContext(context.Background(), request)
+}
+
+// UnbindPaymentMerchant
+// This API is used to allow the superapp to actively unbind the payment merchant.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MERCHANTPAYMENTFUNCTIONCLOSED = "FailedOperation.MerchantPaymentFunctionClosed"
+//  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
+//  FAILEDOPERATION_PAYMENTRECORDNOTBELONGTOAPPLICATION = "FailedOperation.PaymentRecordNotBelongToApplication"
+//  FAILEDOPERATION_PAYMENTRECORDNOTFOUND = "FailedOperation.PaymentRecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) UnbindPaymentMerchantWithContext(ctx context.Context, request *UnbindPaymentMerchantRequest) (response *UnbindPaymentMerchantResponse, err error) {
+    if request == nil {
+        request = NewUnbindPaymentMerchantRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "UnbindPaymentMerchant")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UnbindPaymentMerchant require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUnbindPaymentMerchantResponse()
     err = c.Send(request, response)
     return
 }

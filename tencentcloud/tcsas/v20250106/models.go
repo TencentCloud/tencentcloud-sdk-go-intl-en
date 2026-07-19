@@ -241,6 +241,25 @@ type AdvertDataOverview struct {
 	ECPM *string `json:"ECPM,omitnil,omitempty" name:"ECPM"`
 }
 
+type AgeRatingItem struct {
+	// <p>Age rating standard.</p><p>Valid values:</p><ul><li>apple: Apple</li><li>iarc: Android.</li></ul>
+	StandardId *string `json:"StandardId,omitnil,omitempty" name:"StandardId"`
+
+	// <p>Applicable age for age rating.</p>
+	AgeRating *int64 `json:"AgeRating,omitnil,omitempty" name:"AgeRating"`
+
+	// <p>Age rating label.</p>
+	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
+}
+
+type AgeRatingItemReq struct {
+	// <p>Age rating standard.</p><p>Valid values:</p><ul><li>apple: Apple</li><li>iarc: Android.</li></ul>
+	StandardId *string `json:"StandardId,omitnil,omitempty" name:"StandardId"`
+
+	// <p>Applicable age for age rating.</p>
+	AgeRating *int64 `json:"AgeRating,omitnil,omitempty" name:"AgeRating"`
+}
+
 type AnalysisAdvertOverview struct {
 	// Ad overview. 
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -269,6 +288,26 @@ type ApplicationConfigInfo struct {
 	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
+type ApplyPaymentOpenDetailRes struct {
+	// <p>Approval status. Valid values: 0: In progress; 10: Approved; 20: Rejected.</p>
+	ApprovalStatus *int64 `json:"ApprovalStatus,omitnil,omitempty" name:"ApprovalStatus"`
+
+	// <p>Application time.</p><p>Unit: Milliseconds.</p>
+	ApplyTime *int64 `json:"ApplyTime,omitnil,omitempty" name:"ApplyTime"`
+
+	// <p>Approval time.</p><p>Unit: milliseconds.</p>
+	ApprovalTime *int64 `json:"ApprovalTime,omitnil,omitempty" name:"ApprovalTime"`
+
+	// <p>Approval note.</p>
+	ApprovalNote *string `json:"ApprovalNote,omitnil,omitempty" name:"ApprovalNote"`
+
+	// <p>Specifies whether to display the approval records. Valid values: 0: No; 1: Yes.</p>
+	ApprovalShow *int64 `json:"ApprovalShow,omitnil,omitempty" name:"ApprovalShow"`
+
+	// <p>Specifies whether the activation of mini program payment can be requested again. Valid values: 0: No; 1: Yes.</p>
+	ApplyShow *int64 `json:"ApplyShow,omitnil,omitempty" name:"ApplyShow"`
+}
+
 type ApprovalItem struct {
 	// Superapp ID.
 	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
@@ -278,6 +317,192 @@ type ApprovalItem struct {
 
 	// Approval notes. It is required when the request is rejected.
 	ApprovalNote *string `json:"ApprovalNote,omitnil,omitempty" name:"ApprovalNote"`
+}
+
+type ApprovalPaymentV2MerchantBindRes struct {
+	// <p>API response result. A value of true indicates that the operation succeeded.</p>
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// <p>The unique merchant binding ID of the mini program team, used for the superapp to unbind the merchant.</p>
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+}
+
+// Predefined struct for user
+type ApproveMNPPaymentEnableRequestParams struct {
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Superapp ID.</p>
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
+
+	// <p>Approval number.</p>
+	ApprovalNo *string `json:"ApprovalNo,omitnil,omitempty" name:"ApprovalNo"`
+
+	// <p>Approval status. Valid values: 10: Approved; 20: Rejected.</p>
+	ApprovalType *int64 `json:"ApprovalType,omitnil,omitempty" name:"ApprovalType"`
+
+	// <p>Approval note.</p>
+	ApprovalNote *string `json:"ApprovalNote,omitnil,omitempty" name:"ApprovalNote"`
+}
+
+type ApproveMNPPaymentEnableRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Superapp ID.</p>
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
+
+	// <p>Approval number.</p>
+	ApprovalNo *string `json:"ApprovalNo,omitnil,omitempty" name:"ApprovalNo"`
+
+	// <p>Approval status. Valid values: 10: Approved; 20: Rejected.</p>
+	ApprovalType *int64 `json:"ApprovalType,omitnil,omitempty" name:"ApprovalType"`
+
+	// <p>Approval note.</p>
+	ApprovalNote *string `json:"ApprovalNote,omitnil,omitempty" name:"ApprovalNote"`
+}
+
+func (r *ApproveMNPPaymentEnableRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApproveMNPPaymentEnableRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PlatformId")
+	delete(f, "ApplicationId")
+	delete(f, "ApprovalNo")
+	delete(f, "ApprovalType")
+	delete(f, "ApprovalNote")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApproveMNPPaymentEnableRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ApproveMNPPaymentEnableResponseParams struct {
+	// <p>Approval result.</p>
+	Data *ApproveMNPPaymentOpenRes `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ApproveMNPPaymentEnableResponse struct {
+	*tchttp.BaseResponse
+	Response *ApproveMNPPaymentEnableResponseParams `json:"Response"`
+}
+
+func (r *ApproveMNPPaymentEnableResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApproveMNPPaymentEnableResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ApproveMNPPaymentOpenRes struct {
+	// <p>Execution result of the API operation. Valid values: true: Operation succeeded; false: Operation failed.</p>
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// <p>The unique ID of the mini program payment activation. Used for the API where the superapp actively disables mini program payment.</p>
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+}
+
+// Predefined struct for user
+type ApprovePaymentMerchantBindingRequestParams struct {
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Superapp ID.</p>
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
+
+	// <p>Approval number.</p>
+	ApprovalNo *string `json:"ApprovalNo,omitnil,omitempty" name:"ApprovalNo"`
+
+	// <p>Approval status. Valid values: 10: Approved; 20: Rejected.</p>
+	ApprovalType *uint64 `json:"ApprovalType,omitnil,omitempty" name:"ApprovalType"`
+
+	// <p>Approval note.</p>
+	ApprovalNote *string `json:"ApprovalNote,omitnil,omitempty" name:"ApprovalNote"`
+}
+
+type ApprovePaymentMerchantBindingRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Superapp ID.</p>
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
+
+	// <p>Approval number.</p>
+	ApprovalNo *string `json:"ApprovalNo,omitnil,omitempty" name:"ApprovalNo"`
+
+	// <p>Approval status. Valid values: 10: Approved; 20: Rejected.</p>
+	ApprovalType *uint64 `json:"ApprovalType,omitnil,omitempty" name:"ApprovalType"`
+
+	// <p>Approval note.</p>
+	ApprovalNote *string `json:"ApprovalNote,omitnil,omitempty" name:"ApprovalNote"`
+}
+
+func (r *ApprovePaymentMerchantBindingRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApprovePaymentMerchantBindingRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PlatformId")
+	delete(f, "ApplicationId")
+	delete(f, "ApprovalNo")
+	delete(f, "ApprovalType")
+	delete(f, "ApprovalNote")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApprovePaymentMerchantBindingRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ApprovePaymentMerchantBindingResponseParams struct {
+	// <p>Approval result.</p>
+	Data *ApprovalPaymentV2MerchantBindRes `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ApprovePaymentMerchantBindingResponse struct {
+	*tchttp.BaseResponse
+	Response *ApprovePaymentMerchantBindingResponseParams `json:"Response"`
+}
+
+func (r *ApprovePaymentMerchantBindingResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApprovePaymentMerchantBindingResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type BooleanInfo struct {
@@ -303,6 +528,92 @@ type CategoryItem struct {
 
 	// Category name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+// Predefined struct for user
+type ChangePaymentBoundMerchantRequestParams struct {
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini program appid.</p>
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// <p>Merchant ID.</p>
+	MerchantID *string `json:"MerchantID,omitnil,omitempty" name:"MerchantID"`
+
+	// <p>Merchant name.</p>
+	MerchantName *string `json:"MerchantName,omitnil,omitempty" name:"MerchantName"`
+}
+
+type ChangePaymentBoundMerchantRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini program appid.</p>
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// <p>Merchant ID.</p>
+	MerchantID *string `json:"MerchantID,omitnil,omitempty" name:"MerchantID"`
+
+	// <p>Merchant name.</p>
+	MerchantName *string `json:"MerchantName,omitnil,omitempty" name:"MerchantName"`
+}
+
+func (r *ChangePaymentBoundMerchantRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ChangePaymentBoundMerchantRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PlatformId")
+	delete(f, "TeamId")
+	delete(f, "MerchantID")
+	delete(f, "MerchantName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ChangePaymentBoundMerchantRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ChangePaymentBoundMerchantResponseParams struct {
+	// <p>Response parameters structure for changing the bound payment merchant. The returned approval number is required when calling the approval API.</p>
+	Data *ChangePaymentV2BindMerchantRes `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ChangePaymentBoundMerchantResponse struct {
+	*tchttp.BaseResponse
+	Response *ChangePaymentBoundMerchantResponseParams `json:"Response"`
+}
+
+func (r *ChangePaymentBoundMerchantResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ChangePaymentBoundMerchantResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ChangePaymentV2BindMerchantRes struct {
+	// <p>API response result. Valid values: true: Operation succeeded; false: Operation failed.</p>
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// <p>Approval number. Used for the API where the superapp approves the merchant binding of a mini program team.</p>
+	ApprovalNo *string `json:"ApprovalNo,omitnil,omitempty" name:"ApprovalNo"`
 }
 
 // Predefined struct for user
@@ -1119,6 +1430,9 @@ type CreateMNGRequestParams struct {
 
 	// <p>Mini game name and introduction in multiple languages.</p>
 	I18nList []*MNPI18NSyncDto `json:"I18nList,omitnil,omitempty" name:"I18nList"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItemReq `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
 }
 
 type CreateMNGRequest struct {
@@ -1147,6 +1461,9 @@ type CreateMNGRequest struct {
 
 	// <p>Mini game name and introduction in multiple languages.</p>
 	I18nList []*MNPI18NSyncDto `json:"I18nList,omitnil,omitempty" name:"I18nList"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItemReq `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
 }
 
 func (r *CreateMNGRequest) ToJsonString() string {
@@ -1169,6 +1486,7 @@ func (r *CreateMNGRequest) FromJsonString(s string) error {
 	delete(f, "PlatformId")
 	delete(f, "TeamId")
 	delete(f, "I18nList")
+	delete(f, "AgeRatings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMNGRequest has unknown keys!", "")
 	}
@@ -1381,16 +1699,16 @@ type CreateMNGVersionRequestParams struct {
 	// <p>Version description.</p>
 	MNPVersionIntro *string `json:"MNPVersionIntro,omitnil,omitempty" name:"MNPVersionIntro"`
 
-	// <p>Version type. Valid values: 1: Debug; 2: Development. Default value: 2.</p>
+	// <p>Version type. Valid values: 1: Debug version; 2: Development version.</p> Default value: 2.</p>
 	VersionType *int64 `json:"VersionType,omitnil,omitempty" name:"VersionType"`
 
-	// <p>Compilation condition.</p>
+	// <p>Compilation conditions.</p>
 	CompileCondition *string `json:"CompileCondition,omitnil,omitempty" name:"CompileCondition"`
 
 	// <p>Compilation configuration.</p>
 	CompileConfig *string `json:"CompileConfig,omitnil,omitempty" name:"CompileConfig"`
 
-	// <p>CI/CD key ID.</p>
+	// <p>CICD ID</p>
 	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
 
 	// <p>Internal file URL.</p>
@@ -1415,16 +1733,16 @@ type CreateMNGVersionRequest struct {
 	// <p>Version description.</p>
 	MNPVersionIntro *string `json:"MNPVersionIntro,omitnil,omitempty" name:"MNPVersionIntro"`
 
-	// <p>Version type. Valid values: 1: Debug; 2: Development. Default value: 2.</p>
+	// <p>Version type. Valid values: 1: Debug version; 2: Development version.</p> Default value: 2.</p>
 	VersionType *int64 `json:"VersionType,omitnil,omitempty" name:"VersionType"`
 
-	// <p>Compilation condition.</p>
+	// <p>Compilation conditions.</p>
 	CompileCondition *string `json:"CompileCondition,omitnil,omitempty" name:"CompileCondition"`
 
 	// <p>Compilation configuration.</p>
 	CompileConfig *string `json:"CompileConfig,omitnil,omitempty" name:"CompileConfig"`
 
-	// <p>CI/CD key ID.</p>
+	// <p>CICD ID</p>
 	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
 
 	// <p>Internal file URL.</p>
@@ -1734,6 +2052,9 @@ type CreateMNPRequestParams struct {
 
 	// <p>Mini program name and introduction in multiple languages.</p>
 	I18nList []*MNPI18NSyncDto `json:"I18nList,omitnil,omitempty" name:"I18nList"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItemReq `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
 }
 
 type CreateMNPRequest struct {
@@ -1762,6 +2083,9 @@ type CreateMNPRequest struct {
 
 	// <p>Mini program name and introduction in multiple languages.</p>
 	I18nList []*MNPI18NSyncDto `json:"I18nList,omitnil,omitempty" name:"I18nList"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItemReq `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
 }
 
 func (r *CreateMNPRequest) ToJsonString() string {
@@ -1784,6 +2108,7 @@ func (r *CreateMNPRequest) FromJsonString(s string) error {
 	delete(f, "PlatformId")
 	delete(f, "TeamId")
 	delete(f, "I18nList")
+	delete(f, "AgeRatings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateMNPRequest has unknown keys!", "")
 	}
@@ -1820,10 +2145,10 @@ type CreateMNPSecretKeyRequestParams struct {
 	// <p>Platform ID.</p>
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 
-	// <p>Mini program appid.</p>
+	// <p>Mini program or mini game appid.</p>
 	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
 
-	// <p>CI/CD key ID.</p>
+	// <p>CICD ID</p>
 	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
 }
 
@@ -1833,10 +2158,10 @@ type CreateMNPSecretKeyRequest struct {
 	// <p>Platform ID.</p>
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 
-	// <p>Mini program appid.</p>
+	// <p>Mini program or mini game appid.</p>
 	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
 
-	// <p>CI/CD key ID.</p>
+	// <p>CICD ID</p>
 	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
 }
 
@@ -2075,16 +2400,16 @@ type CreateMNPVersionRequestParams struct {
 	// <p>Version description.</p>
 	MNPVersionIntro *string `json:"MNPVersionIntro,omitnil,omitempty" name:"MNPVersionIntro"`
 
-	// <p>Version type. Valid values: 1: Debug; 2: Development. Default value: 2.</p>
+	// <p>Version type. Valid values: 1: Debug version; 2: Development version. Default value: 2.</p>
 	VersionType *int64 `json:"VersionType,omitnil,omitempty" name:"VersionType"`
 
-	// <p>Compilation condition.</p>
+	// <p>Compilation conditions.</p>
 	CompileCondition *string `json:"CompileCondition,omitnil,omitempty" name:"CompileCondition"`
 
 	// <p>Compilation configuration.</p>
 	CompileConfig *string `json:"CompileConfig,omitnil,omitempty" name:"CompileConfig"`
 
-	// <p>CI/CD key ID.</p>
+	// <p>CICD ID</p>
 	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
 
 	// <p>Internal file URL.</p>
@@ -2109,16 +2434,16 @@ type CreateMNPVersionRequest struct {
 	// <p>Version description.</p>
 	MNPVersionIntro *string `json:"MNPVersionIntro,omitnil,omitempty" name:"MNPVersionIntro"`
 
-	// <p>Version type. Valid values: 1: Debug; 2: Development. Default value: 2.</p>
+	// <p>Version type. Valid values: 1: Debug version; 2: Development version. Default value: 2.</p>
 	VersionType *int64 `json:"VersionType,omitnil,omitempty" name:"VersionType"`
 
-	// <p>Compilation condition.</p>
+	// <p>Compilation conditions.</p>
 	CompileCondition *string `json:"CompileCondition,omitnil,omitempty" name:"CompileCondition"`
 
 	// <p>Compilation configuration.</p>
 	CompileConfig *string `json:"CompileConfig,omitnil,omitempty" name:"CompileConfig"`
 
-	// <p>CI/CD key ID.</p>
+	// <p>CICD ID</p>
 	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
 
 	// <p>Internal file URL.</p>
@@ -3740,47 +4065,50 @@ func (r *DescribeApplicationListResponse) FromJsonString(s string) error {
 }
 
 type DescribeApplicationMNPInfoResp struct {
-	// Mini program or mini game appid.
+	// <p>Mini program or mini game appid.</p>
 	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
 
-	// Mini program or mini game icon.
+	// <p>Mini program or mini game icon.</p>
 	MNPIcon *string `json:"MNPIcon,omitnil,omitempty" name:"MNPIcon"`
 
-	// Mini program or mini game name.
+	// <p>Mini program or mini game name.</p>
 	MNPName *string `json:"MNPName,omitnil,omitempty" name:"MNPName"`
 
-	// Mini program or mini game information.
+	// <p>Mini program or mini game introduction.</p>
 	MNPIntro *string `json:"MNPIntro,omitnil,omitempty" name:"MNPIntro"`
 
-	// Creator.
+	// <p>Creator.</p>
 	CreateUser *string `json:"CreateUser,omitnil,omitempty" name:"CreateUser"`
 
-	// Creation time.
+	// <p>Creation time.</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Last modifier.
+	// <p>Last modifier.</p>
 	UpdateUser *string `json:"UpdateUser,omitnil,omitempty" name:"UpdateUser"`
 
-	// Last modified time.
+	// <p>Last modified time.</p>
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Available status. Valid value: 0: Not available; 1 Available; 2: In canary release.
+	// <p>Available status. Valid value: 0: Not available; 1 Available; 2: In canary release.</p>
 	OnlineStatus *int64 `json:"OnlineStatus,omitnil,omitempty" name:"OnlineStatus"`
 
-	// Engine type. Specifies the runtime engine by product type. Valid values: 0: Mini program; 1: Mini game.
+	// <p>Engine type. Specifies the runtime engine by product type. Valid values: 0: Mini program; 1: Mini game.</p>
 	EngineType *int64 `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 
-	// Category information.
+	// <p>Category information.</p>
 	CategoryList []*CategoryInfo `json:"CategoryList,omitnil,omitempty" name:"CategoryList"`
 
-	// Team ID.
+	// <p>Team ID.</p>
 	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
 
-	// Team name.
+	// <p>Team name.</p>
 	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
 
-	// Team type ID.
+	// <p>Team type ID.</p>
 	TeamTypeId *int64 `json:"TeamTypeId,omitnil,omitempty" name:"TeamTypeId"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItem `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
 }
 
 // Predefined struct for user
@@ -5192,6 +5520,9 @@ type DescribeMNGAllStageVersionsResp struct {
 
 	// <p>Current version approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
 	VersionCurrentStatus *int64 `json:"VersionCurrentStatus,omitnil,omitempty" name:"VersionCurrentStatus"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItem `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
 }
 
 // Predefined struct for user
@@ -5467,11 +5798,14 @@ type DescribeMNGListData struct {
 	// <p>Effective mini game version number bound to the superapp. </p>
 	EffectMNPVersion *string `json:"EffectMNPVersion,omitnil,omitempty" name:"EffectMNPVersion"`
 
-	// Team ID.
+	// <p>Team ID.</p>
 	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
 
-	// Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.
+	// <p>Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.</p>
 	TeamTypeId *int64 `json:"TeamTypeId,omitnil,omitempty" name:"TeamTypeId"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItem `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
 }
 
 // Predefined struct for user
@@ -5885,8 +6219,14 @@ type DescribeMNGManagerDetailData struct {
 	// <p>Mini game information in multiple languages.</p>
 	I18nList []*MNPDetailI18nVO `json:"I18nList,omitnil,omitempty" name:"I18nList"`
 
-	// Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.
+	// <p>Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.</p>
 	TeamTypeId *int64 `json:"TeamTypeId,omitnil,omitempty" name:"TeamTypeId"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItem `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
+
+	// <p>Merchant ID information bound to the team to which this mini program belongs.</p>
+	MerchantId *string `json:"MerchantId,omitnil,omitempty" name:"MerchantId"`
 }
 
 // Predefined struct for user
@@ -7364,7 +7704,7 @@ type DescribeMNGVersionRequestParams struct {
 	// <p>Platform ID.</p>
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 
-	// <p>CI/CD key ID.</p>
+	// <p>CICD ID</p>
 	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
 }
 
@@ -7377,7 +7717,7 @@ type DescribeMNGVersionRequest struct {
 	// <p>Platform ID.</p>
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 
-	// <p>CI/CD key ID.</p>
+	// <p>CICD ID</p>
 	PipelineId *string `json:"PipelineId,omitnil,omitempty" name:"PipelineId"`
 }
 
@@ -7865,62 +8205,65 @@ func (r *DescribeMNPAppSecretResponse) FromJsonString(s string) error {
 }
 
 type DescribeMNPApprovalListData struct {
-	// Approval number.
+	// <p>Approval number.</p>
 	ApprovalNo *string `json:"ApprovalNo,omitnil,omitempty" name:"ApprovalNo"`
 
-	// Superapp ID.
+	// <p>Superapp ID.</p>
 	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
 
-	// Approval status. Valid values: 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.
+	// <p>Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
 	ApprovalStatus *int64 `json:"ApprovalStatus,omitnil,omitempty" name:"ApprovalStatus"`
 
-	// Mini program appid.
+	// <p>Mini program appid.</p>
 	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
 
-	// Mini program version.
+	// <p>Mini program version.</p>
 	MNPVersion *string `json:"MNPVersion,omitnil,omitempty" name:"MNPVersion"`
 
-	// Mini program version ID.
+	// <p>Mini program version ID.</p>
 	MNPVersionId *int64 `json:"MNPVersionId,omitnil,omitempty" name:"MNPVersionId"`
 
-	// Applicant.
+	// <p>Applicant.</p>
 	ApplyUser *string `json:"ApplyUser,omitnil,omitempty" name:"ApplyUser"`
 
-	// Application time.
+	// <p>Application time.</p>
 	ApplyTime *string `json:"ApplyTime,omitnil,omitempty" name:"ApplyTime"`
 
-	// Mini program name.
+	// <p>Mini program name.</p>
 	MNPName *string `json:"MNPName,omitnil,omitempty" name:"MNPName"`
 
-	// Mini program icon.
+	// <p>Mini program icon.</p>
 	MNPIcon *string `json:"MNPIcon,omitnil,omitempty" name:"MNPIcon"`
 
-	// Superapp name.
+	// <p>Superapp name.</p>
 	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
 
-	// Superapp icon.
+	// <p>Superapp icon.</p>
 	ApplicationLogo *string `json:"ApplicationLogo,omitnil,omitempty" name:"ApplicationLogo"`
 
-	// Team ID.
+	// <p>Team ID.</p>
 	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
 
-	// Team name.
+	// <p>Team name.</p>
 	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
 
-	// Mini program approval QR code URL.
+	// <p>Mini program approval QR code URL.</p>
 	MNPQrCodeUrl *string `json:"MNPQrCodeUrl,omitnil,omitempty" name:"MNPQrCodeUrl"`
 
-	// Mini program category.
+	// <p>Mini program category.</p>
 	MNPType *string `json:"MNPType,omitnil,omitempty" name:"MNPType"`
 
-	// Approver.
+	// <p>Approver.</p>
 	ApprovalUser *string `json:"ApprovalUser,omitnil,omitempty" name:"ApprovalUser"`
 
-	// Approval time.
+	// <p>Approval time.</p>
 	ApprovalTime *string `json:"ApprovalTime,omitnil,omitempty" name:"ApprovalTime"`
 
-	// Approval note.
+	// <p>Approval note.</p>
 	ApprovalNote *string `json:"ApprovalNote,omitnil,omitempty" name:"ApprovalNote"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItem `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
 }
 
 // Predefined struct for user
@@ -8153,56 +8496,59 @@ func (r *DescribeMNPDomainACLResponse) FromJsonString(s string) error {
 }
 
 type DescribeMNPListData struct {
-	// Mini program appid.
+	// <p>Mini game appid.</p>
 	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
 
-	// Mini program icon.
+	// <p>Mini game icon.</p>
 	MNPIcon *string `json:"MNPIcon,omitnil,omitempty" name:"MNPIcon"`
 
-	// Mini program name.
+	// <p>Mini game name.</p>
 	MNPName *string `json:"MNPName,omitnil,omitempty" name:"MNPName"`
 
-	// Team name. 
+	// <p>Team name.</p>
 	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
 
-	// Mini program category.
+	// <p>Mini game category.</p>
 	MNPType *string `json:"MNPType,omitnil,omitempty" name:"MNPType"`
 
-	// Mini program available status. Valid values: 1: Available; 2: Removed.
+	// <p>Mini game available status. Valid values: 1: Available; 2: Not available.</p>
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Mini program introduction.
+	// <p>Mini game introduction.</p>
 	MNPIntro *string `json:"MNPIntro,omitnil,omitempty" name:"MNPIntro"`
 
-	// Creator.
+	// <p>Creator.</p>
 	CreateUser *string `json:"CreateUser,omitnil,omitempty" name:"CreateUser"`
 
-	// Creation time.
+	// <p>Creation time.</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Last modifier.
+	// <p>Last modifier.</p>
 	UpdateUser *string `json:"UpdateUser,omitnil,omitempty" name:"UpdateUser"`
 
-	// Last modified time.
+	// <p>Last modified time.</p>
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Superapp name.
+	// <p>Superapp name.</p>
 	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
 
-	// Binding effective status for the superapp. Valid values: 1: Not effective; 2: Effective.
+	// <p>Binding effective status for the superapp. Valid values: 1: Not effective; 2: Effective.</p>
 	EffectStatus *int64 `json:"EffectStatus,omitnil,omitempty" name:"EffectStatus"`
 
-	// Effective mini program version ID bound to the superapp. 
+	// <p>Effective mini program version ID bound to the superapp.</p>
 	EffectMNPVersionId *int64 `json:"EffectMNPVersionId,omitnil,omitempty" name:"EffectMNPVersionId"`
 
-	// Effective mini program version number bound to the superapp. 
+	// <p>Effective mini program version number bound to the superapp.</p>
 	EffectMNPVersion *string `json:"EffectMNPVersion,omitnil,omitempty" name:"EffectMNPVersion"`
 
-	// Team ID.
+	// <p>Team ID.</p>
 	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
 
-	// Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.
+	// <p>Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.</p>
 	TeamTypeId *int64 `json:"TeamTypeId,omitnil,omitempty" name:"TeamTypeId"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItem `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
 }
 
 // Predefined struct for user
@@ -8616,8 +8962,15 @@ type DescribeMNPManagerDetailData struct {
 	// <p>The mini program name and description in multiple languages.</p>
 	I18nList []*MNPDetailI18nVO `json:"I18nList,omitnil,omitempty" name:"I18nList"`
 
-	// Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.
+	// <p>Team type ID. Valid values: 1: Mini program team; 2: Superapp team; 3: Service provider team.</p>
 	TeamTypeId *int64 `json:"TeamTypeId,omitnil,omitempty" name:"TeamTypeId"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItem `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
+
+	// <p>Merchant ID bound to the team to which the mini program belongs.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MerchantId *string `json:"MerchantId,omitnil,omitempty" name:"MerchantId"`
 }
 
 // Predefined struct for user
@@ -8774,6 +9127,70 @@ func (r *DescribeMNPPageAnalysisDetailResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeMNPPageAnalysisDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMNPPaymentApprovalInfoRequestParams struct {
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini program appid.</p>
+	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
+}
+
+type DescribeMNPPaymentApprovalInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini program appid.</p>
+	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
+}
+
+func (r *DescribeMNPPaymentApprovalInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMNPPaymentApprovalInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PlatformId")
+	delete(f, "MNPId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMNPPaymentApprovalInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMNPPaymentApprovalInfoResponseParams struct {
+	// <p>Queries the approval status of mini program payment activation.</p>
+	Data *ApplyPaymentOpenDetailRes `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMNPPaymentApprovalInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMNPPaymentApprovalInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeMNPPaymentApprovalInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMNPPaymentApprovalInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -10039,6 +10456,20 @@ func (r *DescribeMNPSubscribeMessageTemplateResponse) FromJsonString(s string) e
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DescribeMNPTeamMerchantInfoRes struct {
+	// <p>Merchant ID.</p>
+	MerchantID *string `json:"MerchantID,omitnil,omitempty" name:"MerchantID"`
+
+	// <p>Approval status. Valid values: 0: In progress; 10: Approved; 20: Rejected.</p>
+	ApprovalStatus *int64 `json:"ApprovalStatus,omitnil,omitempty" name:"ApprovalStatus"`
+
+	// <p>Merchant binding ID of the mini program team, used to unbind the merchant.</p>
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// <p>Merchant name.</p>
+	MerchantName *string `json:"MerchantName,omitnil,omitempty" name:"MerchantName"`
+}
+
 // Predefined struct for user
 type DescribeMNPVersionRequestParams struct {
 	// <p>Task ID returned by the CreateMNPVersion API.</p>
@@ -10137,59 +10568,62 @@ func (r *DescribeMNPVersionResponse) FromJsonString(s string) error {
 }
 
 type DescribeMPAllStageVersionsResp struct {
-	// Mini program appid.
+	// <p>Mini program appid.</p>
 	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
 
-	// Mini program version primary key ID.
+	// <p>Mini program version primary key ID.</p>
 	MNPVersionId *int64 `json:"MNPVersionId,omitnil,omitempty" name:"MNPVersionId"`
 
-	// Mini program name.
+	// <p>Mini program name.</p>
 	MNPName *string `json:"MNPName,omitnil,omitempty" name:"MNPName"`
 
-	// Mini program icon.
+	// <p>Mini program icon.</p>
 	MNPIcon *string `json:"MNPIcon,omitnil,omitempty" name:"MNPIcon"`
 
-	// Mini program category.
+	// <p>Mini program category.</p>
 	MNPType *string `json:"MNPType,omitnil,omitempty" name:"MNPType"`
 
-	// Mini program introduction.
+	// <p>Mini program introduction.</p>
 	MNPIntro *string `json:"MNPIntro,omitnil,omitempty" name:"MNPIntro"`
 
-	// Mini program description.
+	// <p>Mini program description.</p>
 	MNPDesc *string `json:"MNPDesc,omitnil,omitempty" name:"MNPDesc"`
 
-	// Creator.
+	// <p>Creator.</p>
 	CreateUser *string `json:"CreateUser,omitnil,omitempty" name:"CreateUser"`
 
-	// Creation time.
+	// <p>Creation time.</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Mini program version number.
+	// <p>Mini program version.</p>
 	MNPVersion *string `json:"MNPVersion,omitnil,omitempty" name:"MNPVersion"`
 
-	// Version introduction.
+	// <p>Version introduction.</p>
 	MNPVersionIntro *string `json:"MNPVersionIntro,omitnil,omitempty" name:"MNPVersionIntro"`
 
-	// Phase: Valid values: Develop; Platform; Online.
+	// <p>Phase:  Valid values: Develop; Platform; Online.</p>
 	Phase *string `json:"Phase,omitnil,omitempty" name:"Phase"`
 
-	// Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.
+	// <p>Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
 	ApprovalStatus *int64 `json:"ApprovalStatus,omitnil,omitempty" name:"ApprovalStatus"`
 
-	// Approval number.
+	// <p>Approval number.</p>
 	ApprovalNo *string `json:"ApprovalNo,omitnil,omitempty" name:"ApprovalNo"`
 
-	// Whether this is a preview. Valid values: 0: No; 1: Yes.
+	// <p>Whether this is a preview. Valid values: 0: No; 1: Yes.</p>
 	ShowCase *int64 `json:"ShowCase,omitnil,omitempty" name:"ShowCase"`
 
-	// Rollback version number.
+	// <p>Rollback version number.</p>
 	RollbackVersion *int64 `json:"RollbackVersion,omitnil,omitempty" name:"RollbackVersion"`
 
-	// Available status. Valid value: 0: All; 1 Available; 2: In canary release.
+	// <p>Available status. Valid value: 0: All; 1 Available; 2: In canary release.</p>
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Current version approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.
+	// <p>Current version approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
 	VersionCurrentStatus *int64 `json:"VersionCurrentStatus,omitnil,omitempty" name:"VersionCurrentStatus"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItem `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
 }
 
 // Predefined struct for user
@@ -11384,6 +11818,77 @@ func (r *DisableApplicationSensitiveAPIResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DisableMNPPaymentRequestParams struct {
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Superapp ID.</p>
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
+
+	// <p>Primary key ID, obtained from the API response of approving mini program payment activation.</p>
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+}
+
+type DisableMNPPaymentRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Superapp ID.</p>
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
+
+	// <p>Primary key ID, obtained from the API response of approving mini program payment activation.</p>
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+}
+
+func (r *DisableMNPPaymentRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisableMNPPaymentRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PlatformId")
+	delete(f, "ApplicationId")
+	delete(f, "ID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisableMNPPaymentRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DisableMNPPaymentResponseParams struct {
+	// <p>Response parameters structure for disabling mini program payment.</p>
+	Data *BooleanInfo `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DisableMNPPaymentResponse struct {
+	*tchttp.BaseResponse
+	Response *DisableMNPPaymentResponseParams `json:"Response"`
+}
+
+func (r *DisableMNPPaymentResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisableMNPPaymentResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DownloadApplicationConfigResp struct {
 	// Configuration information in Base64 encoding.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -11804,11 +12309,19 @@ type MNPTypeDefine struct {
 }
 
 type MNPVersionSubPackageInfo struct {
-	// Package name.
+	// <p>Package name.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Package size. 
+	// <p>Package size.</p>
 	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
+}
+
+type MerchantBindApprovalResp struct {
+	// <p>Operation response result. A value of true indicates that the operation succeeded.</p>
+	ApprovalResult *bool `json:"ApprovalResult,omitnil,omitempty" name:"ApprovalResult"`
+
+	// <p>Approval number. Required as an input parameter when calling the API to approve merchant binding.</p>
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 }
 
 // Predefined struct for user
@@ -12259,6 +12772,9 @@ type ModifyMNGRequestParams struct {
 
 	// <p>Mini game name and introduction in multiple languages.</p>
 	I18nList []*MNPI18NSyncDto `json:"I18nList,omitnil,omitempty" name:"I18nList"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItemReq `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
 }
 
 type ModifyMNGRequest struct {
@@ -12287,6 +12803,9 @@ type ModifyMNGRequest struct {
 
 	// <p>Mini game name and introduction in multiple languages.</p>
 	I18nList []*MNPI18NSyncDto `json:"I18nList,omitnil,omitempty" name:"I18nList"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItemReq `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
 }
 
 func (r *ModifyMNGRequest) ToJsonString() string {
@@ -12309,6 +12828,7 @@ func (r *ModifyMNGRequest) FromJsonString(s string) error {
 	delete(f, "PlatformId")
 	delete(f, "MNPIcon")
 	delete(f, "I18nList")
+	delete(f, "AgeRatings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMNGRequest has unknown keys!", "")
 	}
@@ -12513,6 +13033,9 @@ type ModifyMNPRequestParams struct {
 
 	// <p>Mini program name and introduction in multiple languages.</p>
 	I18nList []*MNPI18NSyncDto `json:"I18nList,omitnil,omitempty" name:"I18nList"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItemReq `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
 }
 
 type ModifyMNPRequest struct {
@@ -12541,6 +13064,9 @@ type ModifyMNPRequest struct {
 
 	// <p>Mini program name and introduction in multiple languages.</p>
 	I18nList []*MNPI18NSyncDto `json:"I18nList,omitnil,omitempty" name:"I18nList"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItemReq `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
 }
 
 func (r *ModifyMNPRequest) ToJsonString() string {
@@ -12563,6 +13089,7 @@ func (r *ModifyMNPRequest) FromJsonString(s string) error {
 	delete(f, "PlatformId")
 	delete(f, "MNPIcon")
 	delete(f, "I18nList")
+	delete(f, "AgeRatings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMNPRequest has unknown keys!", "")
 	}
@@ -13127,6 +13654,70 @@ type QueryMNGOnlineVersionResp struct {
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
+// Predefined struct for user
+type QueryMNPMerchantInfoRequestParams struct {
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini program appid.</p>
+	QueryTeamID *string `json:"QueryTeamID,omitnil,omitempty" name:"QueryTeamID"`
+}
+
+type QueryMNPMerchantInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini program appid.</p>
+	QueryTeamID *string `json:"QueryTeamID,omitnil,omitempty" name:"QueryTeamID"`
+}
+
+func (r *QueryMNPMerchantInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryMNPMerchantInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PlatformId")
+	delete(f, "QueryTeamID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryMNPMerchantInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type QueryMNPMerchantInfoResponseParams struct {
+	// <p>Response parameters structure for querying the merchant approval status of a mini program team.</p>
+	Data *DescribeMNPTeamMerchantInfoRes `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type QueryMNPMerchantInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *QueryMNPMerchantInfoResponseParams `json:"Response"`
+}
+
+func (r *QueryMNPMerchantInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QueryMNPMerchantInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type QueryOnlineVersionResp struct {
 	// Mini program appid.
 	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
@@ -13415,6 +14006,155 @@ type ReportDataResult struct {
 	// Query index ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IndexId *string `json:"IndexId,omitnil,omitempty" name:"IndexId"`
+}
+
+// Predefined struct for user
+type RequestPaymentEnableRequestParams struct {
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini program appid.</p>
+	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
+
+	// <p>Note for requesting payment activation.</p>
+	ApplyNote *string `json:"ApplyNote,omitnil,omitempty" name:"ApplyNote"`
+}
+
+type RequestPaymentEnableRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini program appid.</p>
+	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
+
+	// <p>Note for requesting payment activation.</p>
+	ApplyNote *string `json:"ApplyNote,omitnil,omitempty" name:"ApplyNote"`
+}
+
+func (r *RequestPaymentEnableRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RequestPaymentEnableRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PlatformId")
+	delete(f, "MNPId")
+	delete(f, "ApplyNote")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RequestPaymentEnableRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RequestPaymentEnableResponseParams struct {
+	// <p>Response parameters structure for mini program payment activation. The returned approval number is required when calling the API to approve payment activation.</p>
+	Data *ChangePaymentV2BindMerchantRes `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RequestPaymentEnableResponse struct {
+	*tchttp.BaseResponse
+	Response *RequestPaymentEnableResponseParams `json:"Response"`
+}
+
+func (r *RequestPaymentEnableResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RequestPaymentEnableResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RequestPaymentMerchantBindingRequestParams struct {
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini program appid.</p>
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// <p>Merchant ID.</p>
+	MerchantID *string `json:"MerchantID,omitnil,omitempty" name:"MerchantID"`
+
+	// <p>Merchant name.</p>
+	MerchantName *string `json:"MerchantName,omitnil,omitempty" name:"MerchantName"`
+}
+
+type RequestPaymentMerchantBindingRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini program appid.</p>
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// <p>Merchant ID.</p>
+	MerchantID *string `json:"MerchantID,omitnil,omitempty" name:"MerchantID"`
+
+	// <p>Merchant name.</p>
+	MerchantName *string `json:"MerchantName,omitnil,omitempty" name:"MerchantName"`
+}
+
+func (r *RequestPaymentMerchantBindingRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RequestPaymentMerchantBindingRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PlatformId")
+	delete(f, "TeamId")
+	delete(f, "MerchantID")
+	delete(f, "MerchantName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RequestPaymentMerchantBindingRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RequestPaymentMerchantBindingResponseParams struct {
+	// <p>Response parameters structure for the application of a mini program team to bind a merchant ID.</p>
+	Data *MerchantBindApprovalResp `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RequestPaymentMerchantBindingResponse struct {
+	*tchttp.BaseResponse
+	Response *RequestPaymentMerchantBindingResponseParams `json:"Response"`
+}
+
+func (r *RequestPaymentMerchantBindingResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RequestPaymentMerchantBindingResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -13797,6 +14537,148 @@ type StringData struct {
 type SubscribeMessageTemplateLibraryKeywordI18nInfoResp struct {
 	// <p>Multilanguage list.</p>
 	I18nList []*I18nItem `json:"I18nList,omitnil,omitempty" name:"I18nList"`
+}
+
+// Predefined struct for user
+type UnbindMNPPaymentMerchantRequestParams struct {
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini program team ID.</p>
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// <p>Primary key ID, obtained from the API response of approving the merchant binding of a mini program team.</p>
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
+}
+
+type UnbindMNPPaymentMerchantRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini program team ID.</p>
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// <p>Primary key ID, obtained from the API response of approving the merchant binding of a mini program team.</p>
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
+}
+
+func (r *UnbindMNPPaymentMerchantRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindMNPPaymentMerchantRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PlatformId")
+	delete(f, "TeamId")
+	delete(f, "ID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnbindMNPPaymentMerchantRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UnbindMNPPaymentMerchantResponseParams struct {
+	// <p>Response parameters structure for the mini program team actively unbinding the merchant account.</p>
+	Data *BooleanInfo `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UnbindMNPPaymentMerchantResponse struct {
+	*tchttp.BaseResponse
+	Response *UnbindMNPPaymentMerchantResponseParams `json:"Response"`
+}
+
+func (r *UnbindMNPPaymentMerchantResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindMNPPaymentMerchantResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UnbindPaymentMerchantRequestParams struct {
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Superapp ID.</p>
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
+
+	// <p>Primary key ID, obtained from the API response of approving the merchant binding of a mini program team.</p>
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+}
+
+type UnbindPaymentMerchantRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Superapp ID.</p>
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
+
+	// <p>Primary key ID, obtained from the API response of approving the merchant binding of a mini program team.</p>
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+}
+
+func (r *UnbindPaymentMerchantRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindPaymentMerchantRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PlatformId")
+	delete(f, "ApplicationId")
+	delete(f, "ID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnbindPaymentMerchantRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UnbindPaymentMerchantResponseParams struct {
+	// <p>Response parameters structure for the superapp actively unbinding the merchant account of a mini program team.</p>
+	Data *BooleanInfo `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UnbindPaymentMerchantResponse struct {
+	*tchttp.BaseResponse
+	Response *UnbindPaymentMerchantResponseParams `json:"Response"`
+}
+
+func (r *UnbindPaymentMerchantResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindPaymentMerchantResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type UploadFileTempSecret struct {
