@@ -1285,7 +1285,7 @@ func NewCreateAigcVideoRedrawTaskResponse() (response *CreateAigcVideoRedrawTask
 }
 
 // CreateAigcVideoRedrawTask
-// This API is used to generate AIGC videos. API calls will occur actual fee. Refer to the video-on-demand [AIGC video generation billing documentation](https://www.tencentcloud.com/zh/document/product/266/14666#96b3b59a-f9e1-49e9-966a-bedb70a4bf12). The feature settlement mode is [pay-as-you-go](https://www.tencentcloud.com/document/product/266/2838?from_cn_redirect=1). Daily billing customers will be charged on the second day for usage on the day, while monthly billing customers will be billed on the 1st of the next month for usage in the previous month.
+// This API is used to generate AIGC videos. API calls incur actual fees. Refer to the video-on-demand (VOD) AIGC video generation billing documentation. The feature settlement mode is pay-as-you-go. Daily billing customers will be billed on the second day for usage on the day. Monthly billing customers will be billed on the 1st of the next month for usage in the previous month.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1296,13 +1296,14 @@ func NewCreateAigcVideoRedrawTaskResponse() (response *CreateAigcVideoRedrawTask
 //  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
 //  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  LIMITEXCEEDED_QUOTA = "LimitExceeded.Quota"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAigcVideoRedrawTask(request *CreateAigcVideoRedrawTaskRequest) (response *CreateAigcVideoRedrawTaskResponse, err error) {
     return c.CreateAigcVideoRedrawTaskWithContext(context.Background(), request)
 }
 
 // CreateAigcVideoRedrawTask
-// This API is used to generate AIGC videos. API calls will occur actual fee. Refer to the video-on-demand [AIGC video generation billing documentation](https://www.tencentcloud.com/zh/document/product/266/14666#96b3b59a-f9e1-49e9-966a-bedb70a4bf12). The feature settlement mode is [pay-as-you-go](https://www.tencentcloud.com/document/product/266/2838?from_cn_redirect=1). Daily billing customers will be charged on the second day for usage on the day, while monthly billing customers will be billed on the 1st of the next month for usage in the previous month.
+// This API is used to generate AIGC videos. API calls incur actual fees. Refer to the video-on-demand (VOD) AIGC video generation billing documentation. The feature settlement mode is pay-as-you-go. Daily billing customers will be billed on the second day for usage on the day. Monthly billing customers will be billed on the 1st of the next month for usage in the previous month.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1313,6 +1314,7 @@ func (c *Client) CreateAigcVideoRedrawTask(request *CreateAigcVideoRedrawTaskReq
 //  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
 //  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  LIMITEXCEEDED_QUOTA = "LimitExceeded.Quota"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAigcVideoRedrawTaskWithContext(ctx context.Context, request *CreateAigcVideoRedrawTaskRequest) (response *CreateAigcVideoRedrawTaskResponse, err error) {
     if request == nil {
@@ -3021,7 +3023,7 @@ func NewCreateSceneAigcImageTaskResponse() (response *CreateSceneAigcImageTaskRe
 }
 
 // CreateSceneAigcImageTask
-// This API is used to generate scenario-based AIGC images. <b>This interface is in beta. If you need to use it, please contact us. API calls will incur actual fees.</b>
+// This API is used to generate scenario-based AIGC images. API calls will incur actual fees. Refer to the on-demand video AIGC image generation billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#9c4dc6ff-4b3f-4b25-bf2d-393889dfb9ac). The feature's settlement mode is postpaid (https://www.tencentcloud.com/document/product/266/2838?from_cn_redirect=1). For daily billing customers, usage on the day will be billed on the second day. For monthly billing customers, usage fees from the previous month will be unified and billed on the 1st of the next month.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3033,13 +3035,14 @@ func NewCreateSceneAigcImageTaskResponse() (response *CreateSceneAigcImageTaskRe
 //  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
 //  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  LIMITEXCEEDED_QUOTA = "LimitExceeded.Quota"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateSceneAigcImageTask(request *CreateSceneAigcImageTaskRequest) (response *CreateSceneAigcImageTaskResponse, err error) {
     return c.CreateSceneAigcImageTaskWithContext(context.Background(), request)
 }
 
 // CreateSceneAigcImageTask
-// This API is used to generate scenario-based AIGC images. <b>This interface is in beta. If you need to use it, please contact us. API calls will incur actual fees.</b>
+// This API is used to generate scenario-based AIGC images. API calls will incur actual fees. Refer to the on-demand video AIGC image generation billing documentation (https://www.tencentcloud.com/document/product/266/95125?from_cn_redirect=1#9c4dc6ff-4b3f-4b25-bf2d-393889dfb9ac). The feature's settlement mode is postpaid (https://www.tencentcloud.com/document/product/266/2838?from_cn_redirect=1). For daily billing customers, usage on the day will be billed on the second day. For monthly billing customers, usage fees from the previous month will be unified and billed on the 1st of the next month.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3051,6 +3054,7 @@ func (c *Client) CreateSceneAigcImageTask(request *CreateSceneAigcImageTaskReque
 //  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
 //  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  LIMITEXCEEDED_QUOTA = "LimitExceeded.Quota"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateSceneAigcImageTaskWithContext(ctx context.Context, request *CreateSceneAigcImageTaskRequest) (response *CreateSceneAigcImageTaskResponse, err error) {
     if request == nil {
@@ -3101,6 +3105,7 @@ func NewCreateSceneAigcVideoTaskResponse() (response *CreateSceneAigcVideoTaskRe
 //  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
 //  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  LIMITEXCEEDED_QUOTA = "LimitExceeded.Quota"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateSceneAigcVideoTask(request *CreateSceneAigcVideoTaskRequest) (response *CreateSceneAigcVideoTaskResponse, err error) {
     return c.CreateSceneAigcVideoTaskWithContext(context.Background(), request)
@@ -3119,6 +3124,7 @@ func (c *Client) CreateSceneAigcVideoTask(request *CreateSceneAigcVideoTaskReque
 //  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
 //  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  LIMITEXCEEDED_QUOTA = "LimitExceeded.Quota"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateSceneAigcVideoTaskWithContext(ctx context.Context, request *CreateSceneAigcVideoTaskRequest) (response *CreateSceneAigcVideoTaskResponse, err error) {
     if request == nil {
@@ -15007,6 +15013,62 @@ func (c *Client) StartCDNDomainWithContext(ctx context.Context, request *StartCD
     request.SetContext(ctx)
     
     response = NewStartCDNDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateAigcApiTokenRequest() (request *UpdateAigcApiTokenRequest) {
+    request = &UpdateAigcApiTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "UpdateAigcApiToken")
+    
+    
+    return
+}
+
+func NewUpdateAigcApiTokenResponse() (response *UpdateAigcApiTokenResponse) {
+    response = &UpdateAigcApiTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateAigcApiToken
+// This API is used to create a Token for invoking the AIGC API. After creation, data sync has a delay. It becomes queryable or deletable after about 30 seconds.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) UpdateAigcApiToken(request *UpdateAigcApiTokenRequest) (response *UpdateAigcApiTokenResponse, err error) {
+    return c.UpdateAigcApiTokenWithContext(context.Background(), request)
+}
+
+// UpdateAigcApiToken
+// This API is used to create a Token for invoking the AIGC API. After creation, data sync has a delay. It becomes queryable or deletable after about 30 seconds.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) UpdateAigcApiTokenWithContext(ctx context.Context, request *UpdateAigcApiTokenRequest) (response *UpdateAigcApiTokenResponse, err error) {
+    if request == nil {
+        request = NewUpdateAigcApiTokenRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "UpdateAigcApiToken")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateAigcApiToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateAigcApiTokenResponse()
     err = c.Send(request, response)
     return
 }

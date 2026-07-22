@@ -1940,6 +1940,17 @@ type AiSampleWordInfo struct {
 	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
+type AiTryOnConfig struct {
+	// <p>Dress up model.</p><p>Enumeration value:</p><ul><li>WAND-tryon-1.0-lite: Lightweight tier, prioritizing speed.</li><li>WAND-tryon-1.0-flash: Balanced tier, taking into account effect and latency.</li><li>WAND-tryon-1.0-pro: High-quality tier, prioritizing effect.</li></ul>
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// <p>Input the image list of clothing that needs to be replaced. 1-4 images are supported.</p>
+	ClothesFileInfos []*SceneAigcImageTaskInputFileInfo `json:"ClothesFileInfos,omitnil,omitempty" name:"ClothesFileInfos"`
+
+	// <p>Dress up command Prompt.</p>
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+}
+
 type AigcAdvancedCustomElementInfo struct {
 	// <p>Subject ID.</p>
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
@@ -2174,13 +2185,16 @@ type AigcImageOutputConfig struct {
 }
 
 type AigcImageSceneInfo struct {
-	// <p>AI image generation scenario type. Available values:</p><ul><li>change_clothes: Change clothes in regular scenes.</li><li>change_clothes_under: Change clothes in special scenarios.</li><li>change_clothes_top_wear: Change upper body clothes.</li><li>change_clothes_bottom_wear: Change lower body clothes.</li><li>change_clothes_full_wear: Change full body clothes.</li><li>product_image: AI-generated product image.</li><li>outpainting: AI image outpainting.</li></ul>
+	// <p>AI image generation scenario type, available values:</p><ul><li><code>ai_try_on</code>: AI dress up.</li><li><code>product_image</code>: AI product image.</li><li><code>outpainting</code>: AI outpainting.</li></ul><p>The following <code>Type</code> are abandoned and no longer updated subsequently:</p><ul><li><code>change_clothes</code></li><li><code>change_clothes_under</code></li><li><code>change_clothes_top_wear</code></li><li><code>change_clothes_bottom_wear</code></li><li><code>change_clothes_full_wear</code></li></ul>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// <p>When the Type is one of the following column types, this item is required and represents the AI clothing change image generation config:</p><ul><li>change_clothes</li><li>change_clothes_under</li><li>change_clothes_full_wear</li><li>change_clothes_top_wear</li><li>change_clothes_bottom_wear</li></ul>
+	// <p>Required when Type is ai_try_on. Represents AI dress up config.</p>
+	AiTryOnConfig *AiTryOnConfig `json:"AiTryOnConfig,omitnil,omitempty" name:"AiTryOnConfig"`
+
+	// <p><strong>Abandoned, please use AiTryOnConfig.</strong> When Type is one of the following column types, this item is required and represents AI try-on image generation configuration parameters:</p><ul><li>change_clothes</li><li>change_clothes_under</li></ul>
 	ChangeClothesConfig *ChangeClothesConfig `json:"ChangeClothesConfig,omitnil,omitempty" name:"ChangeClothesConfig"`
 
-	// <p>Valid when Type is product_image, indicating AI-generated product image config.</p>
+	// <p>Required when Type is product_image. It represents the AI product image config.</p>
 	ProductImageConfig *ProductImageConfig `json:"ProductImageConfig,omitnil,omitempty" name:"ProductImageConfig"`
 }
 
@@ -2313,6 +2327,67 @@ type AigcQuotaItem struct {
 	Usage *uint64 `json:"Usage,omitnil,omitempty" name:"Usage"`
 }
 
+type AigcTextDetail struct {
+	// <p>Entries per page</p>
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// <p>The scroll_token returned in response on the previous page is used to turn to the next page</p>
+	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
+
+	// <p>Raw data details</p>
+	Data []*AigcTextDetailData `json:"Data,omitnil,omitempty" name:"Data"`
+}
+
+type AigcTextDetailData struct {
+	// <p>Request start time (RFC3339)</p>
+	Timestamp *string `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
+
+	// <p>Gateway layer request ID</p>
+	ReqId *string `json:"ReqId,omitnil,omitempty" name:"ReqId"`
+
+	// <p>Dialogue ID returned by the backend model</p>
+	ChatId *string `json:"ChatId,omitnil,omitempty" name:"ChatId"`
+
+	// <p>HTTP status code returned to client</p>
+	StatusCode *uint64 `json:"StatusCode,omitnil,omitempty" name:"StatusCode"`
+
+	// <p>Model name</p>
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// <p>Application ID</p>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// <p>api_key after masking: first 8 digits + **** (return without modification when length ≤ 8)</p>
+	ApiKey *string `json:"ApiKey,omitnil,omitempty" name:"ApiKey"`
+
+	// <p>Whether to return in streaming mode</p>
+	Stream *bool `json:"Stream,omitnil,omitempty" name:"Stream"`
+
+	// <p>Number of input tokens</p>
+	InputTokens *int64 `json:"InputTokens,omitnil,omitempty" name:"InputTokens"`
+
+	// <p>Number of output tokens</p>
+	OutputTokens *int64 `json:"OutputTokens,omitnil,omitempty" name:"OutputTokens"`
+
+	// <p>Number of tokens with prompt cache hit</p>
+	CacheInputTokens *int64 `json:"CacheInputTokens,omitnil,omitempty" name:"CacheInputTokens"`
+
+	// <p>Total tokens</p>
+	TotalTokens *int64 `json:"TotalTokens,omitnil,omitempty" name:"TotalTokens"`
+
+	// <p>tokens per second in the generation stage</p>
+	TPS *float64 `json:"TPS,omitnil,omitempty" name:"TPS"`
+
+	// <p>Time To First Token</p><p>Measurement unit: seconds</p>
+	TTFT *float64 `json:"TTFT,omitnil,omitempty" name:"TTFT"`
+
+	// <p>End-to-end total time</p><p>Unit: seconds</p>
+	Total *float64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// <p>Entry protocol:completions / responses / anthropic</p>
+	ApiType *string `json:"ApiType,omitnil,omitempty" name:"ApiType"`
+}
+
 type AigcUsageDataItem struct {
 	// <p>AIGC specification.<br>Valid values:</p><li>Qwen2.0</li><li>Hunyuan3.0_1K</li><li>Hunyuan3.0_2K</li><li>Hunyuan3.0_4K</li><li>Mingmou1.0_1K</li><li>Mingmou1.0_2K</li><li>Mingmou1.0_4K</li><li>ViduQ2_T2i_1080P</li><li>ViduQ2_T2i_2K</li><li>ViduQ2_T2i_4K</li><li>ViduQ2_I2i_1080P</li><li>ViduQ2_I2i_2K</li><li>ViduQ2_I2i_4K</li><li>ViduQ2_Refer2i_1080P</li><li>ViduQ2_Refer2i_2K</li><li>ViduQ2_Refer2i_4K</li><li>Kling2.1_T2i_1K2K</li><li>Kling2.1_T2i_4K</li><li>Kling2.1_Refer2i_1K</li><li>Kling2.1_Refer2i_2K</li><li>Kling2.1_Refer2i_4K</li><li>Veo3.1Standard</li><li>Veo3.1Fast</li><li>Kling2.0&amp;2.1std_720P</li><li>Kling2.0&amp;2.1pro_1080P</li><li>Kling2.5pro_720P</li><li>Kling2.5pro_1080P</li><li>KlingO1_720P</li><li>KlingO1_1080P</li><li>KlingO1_NoVideo_720P</li><li>KlingO1_NoVideo_1080P</li><li>Kling2.6</li><li>Kling2.6Sound</li><li>Kling2.6MotionControl_720P</li><li>Kling2.6MotionControl_1080P</li><li>Kling3.0_720P</li><li>Kling3.0Sound_720P</li><li>Kling3.0CustomVoice_720P</li><li>Kling3.0_1080P</li><li>Kling3.0Sound_1080P</li><li>Kling3.0CustomVoice_1080P</li><li>Kling3.0CustomVoice_2K</li><li>Kling3.0CustomVoice_4K</li><li>Kling3.0MotionControl_720P</li><li>Kling3.0MotionControl_1080P</li><li>Kling3.0MotionControl_2K</li><li>Kling3.0MotionControl_4K</li><li>Kling_Avatar_I2v_720P</li><li>Kling_Avatar_I2v_1080P</li><li>Kling_Identifyface</li><li>Hailuo02&amp;2.3_768P</li><li>Hailuo02&amp;2.3_1080P</li><li>Hailuo2.3fast_768P</li><li>Hailuo2.3fast_1080P</li><li>ViduQ2_720P</li><li>ViduQ2_720P_OffPeak</li><li>ViduQ2_1080P</li><li>ViduQ2_1080P_OffPeak</li><li>ViduQ2_Refer_540P</li><li>ViduQ2_Refer_540P_OffPeak</li><li>ViduQ2_Refer_720P</li><li>ViduQ2_Refer_720P_OffPeak</li><li>ViduQ2_Refer_1080P</li><li>ViduQ2_Refer_1080P_OffPeak</li><li>ViduQ2pro_720P</li><li>ViduQ2pro_720P_OffPeak</li><li>ViduQ2pro_1080P</li><li>ViduQ2pro_1080P_OffPeak</li><li>ViduQ2pro_Refer_720P</li><li>ViduQ2pro_Refer_720P_OffPeak</li><li>ViduQ2pro_Refer_720P</li><li>ViduQ2pro_Refer_720P_OffPeak</li><li>ViduQ2pro_Refer_1080P</li><li>ViduQ2pro_Refer_1080P_OffPeak</li><li>ViduQ2turbo_720P</li><li>ViduQ2turbo_720P_OffPeak</li><li>ViduQ2turbo_1080P</li><li>ViduQ2turbo_1080P_OffPeak</li><li>ViduQ3_Refer_720P</li><li>ViduQ3_Refer_720P_OffPeak</li><li>ViduQ3_Refer_1080P</li><li>ViduQ3_Refer_1080P_OffPeak</li><li>ViduQ3_Refer_2K</li><li>ViduQ3_Refer_2K_OffPeak</li><li>ViduQ3_Refer_4K</li><li>ViduQ3_Refer_4K_OffPeak</li><li>ViduQ3pro_540P</li><li>ViduQ3pro_540P_OffPeak</li><li>ViduQ3pro_720P</li><li>ViduQ3pro_720P_OffPeak</li><li>ViduQ3pro_1080P</li><li>ViduQ3pro_1080P_OffPeak</li><li>ViduQ3turbo_540P</li><li>ViduQ3turbo_540P_OffPeak</li><li>ViduQ3turbo_720P</li><li>ViduQ3turbo_720P_OffPeak</li><li>ViduQ3turbo_1080P</li><li>ViduQ3turbo_1080P_OffPeak</li><li>ViduQ3turbo_2K</li><li>ViduQ3turbo_2K_OffPeak</li><li>ViduQ3turbo_4K</li><li>ViduQ3turbo_4K_OffPeak</li><li>Vidu_TemplateEffect</li><li>Hunyuan1.5_720P</li><li>Hunyuan1.5_1080P</li><li>Mingmou1.0_720P</li><li>Mingmou1.0_1080P</li><li>ImageProductImage</li><li>ImageChangeClothes</li><li>VideoProductShowcase</li><li>ImageOutPainting</li><li>FaceInfo</li><li>CustomVoice</li><li>Subject</li><li>unknown</li>
 	Specification *string `json:"Specification,omitnil,omitempty" name:"Specification"`
@@ -2443,9 +2518,17 @@ type AigcVideoRedrawTask struct {
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 }
 
+type AigcVideoRedrawTaskInfo struct {
+	// <p>For description of style. Limited to 50 characters.</p>
+	Style *string `json:"Style,omitnil,omitempty" name:"Style"`
+}
+
 type AigcVideoRedrawTaskInput struct {
 	// <p>Input info of the AIGC video conversion task.</p>
 	FileInfo *AigcVideoRedrawTaskInputFileInfo `json:"FileInfo,omitnil,omitempty" name:"FileInfo"`
+
+	// <p>AIGC video conversion task parameter information.</p>
+	TaskInfo *AigcVideoRedrawTaskInfo `json:"TaskInfo,omitnil,omitempty" name:"TaskInfo"`
 
 	// <p>AIGC video conversion output configuration.</p>
 	OutputConfig *AigcVideoRedrawOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
@@ -2610,6 +2693,9 @@ type AigcVideoTaskOutput struct {
 
 	// <p>The task ID of the task type Procedure. If a task flow template (Procedure) is specified when initiating <a href="https://www.tencentcloud.com/document/product/266/126239?from_cn_redirect=1">AIGC video task creation</a>, the task is initiated when the task flow template specifies one or more of MediaProcessTask, AiAnalysisTask, or AiRecognitionTask.</p>
 	ProcedureTaskIds []*string `json:"ProcedureTaskIds,omitnil,omitempty" name:"ProcedureTaskIds"`
+
+	// <p>Usage information for AIGC video tasks.</p>
+	Usage *AigcVideoTaskUsage `json:"Usage,omitnil,omitempty" name:"Usage"`
 }
 
 type AigcVideoTaskOutputFileInfo struct {
@@ -2642,6 +2728,14 @@ type AigcVideoTaskOutputFileInfo struct {
 
 	// <p>Purpose type of the file.</p><p>Enumeration value:</p><ul><li>scene_url: 3D scene file. The FileUrl field has a return value.</li><li>point_url: Point cloud file. The FileUrl field has a return value.</li><li>mesh_url: Original grid model file. The FileUrl field has a return value.</li><li>mesh_simplified_url: Simplified grid model file. The FileUrl field has a return value.</li><li>position_info: Spatial position info of the scenario. The FileContent field has a return value.</li><li>image_url: Generated image. The FileUrl field has a return value.</li></ul>
 	UsageType *string `json:"UsageType,omitnil,omitempty" name:"UsageType"`
+}
+
+type AigcVideoTaskUsage struct {
+	// <p>Manually input the number of tokens.</p>
+	InputTokens *int64 `json:"InputTokens,omitnil,omitempty" name:"InputTokens"`
+
+	// <p>Number of tokens generated by thinking.</p>
+	ThoughtTokens *int64 `json:"ThoughtTokens,omitnil,omitempty" name:"ThoughtTokens"`
 }
 
 type AnimatedGraphicTaskInput struct {
@@ -3391,44 +3485,20 @@ type AudioTemplateInfo struct {
 }
 
 type AudioTemplateInfoForUpdate struct {
-	// The audio codec.
-	// If `Container` is `mp3`, the valid value is:
-	// <li>`libmp3lame`</li>
-	// If `Container` is `ogg` or `flac`, the valid value is:
-	// <li>`flac`</li>
-	// If `Container` is `m4a`, the valid values are:
-	// <li>`libfdk_aac`</li>
-	// <li>`libmp3lame`</li>
-	// <li>`ac3`</li>
-	// If `Container` is `mp4` or `flv`, the valid values are:
-	// <li>`libfdk_aac` (Recommended for MP4)</li>
-	// <li>`libmp3lame` (Recommended for FLV)</li>
-	// <li>`mp2`</li>
-	// If `Container` is `hls`, the valid value is:
-	// <li>`libfdk_aac`</li>
-	// If `Format` is `HLS` or `MPEG-DASH`, the valid value is:
-	// <li>`libfdk_aac`</li>
-	// If `Container` is `wav`, the valid value is:
-	// <li>`pcm16`</li>
+	// <p>Audio stream encoding format.<br>When the outer parameter Container is mp3, the valid value is:</p><li>libmp3lame.</li>When the outer parameter Container is ogg or flac, the valid value is:<li>flac.</li>When the outer parameter Container is m4a, the valid values are:<li>libfdk_aac;</li><li>libmp3lame;</li><li>ac3.</li>When the outer parameter Container is mp4 or flv, the valid values are:<li>libfdk_aac: suitable for mp4.</li><li>libmp3lame: suitable for flv.</li><li>mp2.</li>When the outer parameter Container is hls, the valid value is:<li>libfdk_aac.</li>When the outer parameter Format is HLS or MPEG-DASH, the valid value is:<li>libfdk_aac.</li>When the outer parameter Container is wav, the valid value is:<li>pcm16.</li>
 	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
 
-	// Bitrate of the audio stream, value ranges from 0 to [26, 256], measurement unit: kbps. When value is 0, it means VOD automatically sets bitrate.
+	// <p>Audio stream bitrate, in kbps. Value range: 0 and [26, 256]. When the value is 0, it means the bitrate is set automatically by VOD.</p>
 	Bitrate *uint64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// The audio sample rate. Valid values:
-	// <li>`16000` (valid only if `Codec` is `pcm16`)</li>
-	// <li>`32000`</li>
-	// <li>`44100`</li>
-	// <li>`48000`</li>
-	// Unit: Hz.
+	// <p>Sampling rate of the audio stream. Available values:</p><li>16000. Available only when Codec is pcm16.</li><li>32000</li><li>44100</li><li>48000</li>Unit: Hz.
 	SampleRate *uint64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
 
-	// Audio channel system. Valid values:
-	// <li>1: mono-channel</li>
-	// <li>2: dual-channel</li>
-	// <li>6: stereo</li>
-	// You cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).
+	// <p>Audio channel. Available values:</p><li>1: Single channel.</li><li>2: Two channels.</li><li>6: Stereo.</li><li>0: The number of audio channels remains the same as the original audio.</li>When the media container format is an audio format (flac, ogg, mp3, m4a), the number of audio channels cannot be set to stereo.
 	AudioChannel *int64 `json:"AudioChannel,omitnil,omitempty" name:"AudioChannel"`
+
+	// <p>Specifies the retained audio tracks for output. All source tracks are retained. </p><p>This parameter is valid only when specified in the OverrideParameter parameter and is disabled in other cases.</p>
+	StreamSelects []*int64 `json:"StreamSelects,omitnil,omitempty" name:"StreamSelects"`
 }
 
 type AudioTrackItem struct {
@@ -3606,6 +3676,34 @@ type AwsPrivateAccess struct {
 
 	// BucketName.
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
+}
+
+type BeautyEffectItem struct {
+	// <p>Whether to enable beauty effects.</p><p>Enumeration value:</p><ul><li>ON: On</li><li>OFF: Off</li></ul>
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// <p>Beauty option.</p>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// <p>Intensity of beauty effects.</p>
+	Value *int64 `json:"Value,omitnil,omitempty" name:"Value"`
+
+	// <p>Attach the resource path.</p>
+	ResourcePath *string `json:"ResourcePath,omitnil,omitempty" name:"ResourcePath"`
+
+	// <p>Additional information.</p>
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+}
+
+type BeautyFilterItem struct {
+	// <p>Whether to enable filters.</p><p>Enumeration value:</p><ul><li>ON: On</li><li>OFF: Off</li></ul>
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// <p>Filter item.</p>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// <p>Filter strength.</p>
+	Value *int64 `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type BlackWhiteEdgeConfigureInfo struct {
@@ -6234,7 +6332,7 @@ type CreateAigcVideoRedrawTaskRequestParams struct {
 	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// <p>Input video file information for the AIGC video conversion task.</p>
+	// <p>File information of the input video for the AIGC video conversion task. The input video duration should be less than 90 seconds, and the size should be within 2GB.</p>
 	FileInfo *AigcVideoRedrawTaskInputFileInfo `json:"FileInfo,omitnil,omitempty" name:"FileInfo"`
 
 	// <p>Output media file configuration for the AIGC video conversion task.</p>
@@ -6259,7 +6357,7 @@ type CreateAigcVideoRedrawTaskRequest struct {
 	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// <p>Input video file information for the AIGC video conversion task.</p>
+	// <p>File information of the input video for the AIGC video conversion task. The input video duration should be less than 90 seconds, and the size should be within 2GB.</p>
 	FileInfo *AigcVideoRedrawTaskInputFileInfo `json:"FileInfo,omitnil,omitempty" name:"FileInfo"`
 
 	// <p>Output media file configuration for the AIGC video conversion task.</p>
@@ -12619,14 +12717,14 @@ func (r *DescribeAigcAdvancedCustomElementsResponse) FromJsonString(s string) er
 
 // Predefined struct for user
 type DescribeAigcApiTokensRequestParams struct {
-	// <b>The VOD [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. customers who activate vod services after december 25, 2023 must fill this field with the application ID when accessing resources in on-demand applications (whether default or newly created).</b>.
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. For customers who activate on-demand services from December 25, 2023, to access resources in on-demand applications (whether the default application or a newly created application), you must fill this <b>field</b> with the application ID.</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
 type DescribeAigcApiTokensRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. customers who activate vod services after december 25, 2023 must fill this field with the application ID when accessing resources in on-demand applications (whether default or newly created).</b>.
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. For customers who activate on-demand services from December 25, 2023, to access resources in on-demand applications (whether the default application or a newly created application), you must fill this <b>field</b> with the application ID.</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -12651,8 +12749,11 @@ func (r *DescribeAigcApiTokensRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAigcApiTokensResponseParams struct {
-	// API Token list.
+	// <p>API Token list</p>
 	ApiTokens []*string `json:"ApiTokens,omitnil,omitempty" name:"ApiTokens"`
+
+	// <p>ExtInfo info, which corresponds one-to-one to the API Token list</p>
+	ExtInfos []*string `json:"ExtInfos,omitnil,omitempty" name:"ExtInfos"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -12961,7 +13062,7 @@ type DescribeAigcUsageDataRequestParams struct {
 	// <p>End date, which must be greater than or equal to the start date. Use the <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#52">ISO date format</a>.</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <p>AIGC type.</p><p>Enumeration value:</p><ul><li>Video: video</li><li>Image: image</li><li>Text: text</li><li>Audio: audio</li><li>SceneAigcVideo: scenario-based video processing</li><li>SceneAigcImage: scenario-based image processing</li><li>SceneAigcTime: scenario-based processing times</li></ul>
+	// <p>AIGC type.</p><p>Enumeration values:</p><ul><li>Video: Video</li><li>Image: Image</li><li>Text: Text</li><li>Audio: Audio</li><li>SceneAigcVideo: Scenario-based video processing</li><li>SceneAigcImage: Scenario-based image processing</li><li>SceneAigcTime: Scenario-based processing times</li><li>TextDetail: Text detailed record</li></ul>
 	AigcType *string `json:"AigcType,omitnil,omitempty" name:"AigcType"`
 
 	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the application ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
@@ -12972,6 +13073,15 @@ type DescribeAigcUsageDataRequestParams struct {
 
 	// <p>API Key</p>
 	APIKeys []*string `json:"APIKeys,omitnil,omitempty" name:"APIKeys"`
+
+	// <p>Query cursor</p>
+	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
+
+	// <p>Size per page, maximum 200, it will be truncated to 200</p>
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// <p>RequestId of the raw text. Valid at that time when AigcType is TextDetail.</p>
+	ReqId *string `json:"ReqId,omitnil,omitempty" name:"ReqId"`
 }
 
 type DescribeAigcUsageDataRequest struct {
@@ -12983,7 +13093,7 @@ type DescribeAigcUsageDataRequest struct {
 	// <p>End date, which must be greater than or equal to the start date. Use the <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#52">ISO date format</a>.</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <p>AIGC type.</p><p>Enumeration value:</p><ul><li>Video: video</li><li>Image: image</li><li>Text: text</li><li>Audio: audio</li><li>SceneAigcVideo: scenario-based video processing</li><li>SceneAigcImage: scenario-based image processing</li><li>SceneAigcTime: scenario-based processing times</li></ul>
+	// <p>AIGC type.</p><p>Enumeration values:</p><ul><li>Video: Video</li><li>Image: Image</li><li>Text: Text</li><li>Audio: Audio</li><li>SceneAigcVideo: Scenario-based video processing</li><li>SceneAigcImage: Scenario-based image processing</li><li>SceneAigcTime: Scenario-based processing times</li><li>TextDetail: Text detailed record</li></ul>
 	AigcType *string `json:"AigcType,omitnil,omitempty" name:"AigcType"`
 
 	// <p><b>VOD <a href="/document/product/266/14574?from_cn_redirect=1">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the application ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
@@ -12994,6 +13104,15 @@ type DescribeAigcUsageDataRequest struct {
 
 	// <p>API Key</p>
 	APIKeys []*string `json:"APIKeys,omitnil,omitempty" name:"APIKeys"`
+
+	// <p>Query cursor</p>
+	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
+
+	// <p>Size per page, maximum 200, it will be truncated to 200</p>
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// <p>RequestId of the raw text. Valid at that time when AigcType is TextDetail.</p>
+	ReqId *string `json:"ReqId,omitnil,omitempty" name:"ReqId"`
 }
 
 func (r *DescribeAigcUsageDataRequest) ToJsonString() string {
@@ -13014,6 +13133,9 @@ func (r *DescribeAigcUsageDataRequest) FromJsonString(s string) error {
 	delete(f, "SubAppId")
 	delete(f, "APIKey")
 	delete(f, "APIKeys")
+	delete(f, "ScrollToken")
+	delete(f, "PageSize")
+	delete(f, "ReqId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAigcUsageDataRequest has unknown keys!", "")
 	}
@@ -13024,6 +13146,10 @@ func (r *DescribeAigcUsageDataRequest) FromJsonString(s string) error {
 type DescribeAigcUsageDataResponseParams struct {
 	// <p>AIGC stats.</p>
 	AigcUsageDataSet []*AigcUsageDataItem `json:"AigcUsageDataSet,omitnil,omitempty" name:"AigcUsageDataSet"`
+
+	// <p>Detailed log</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AigcTextDetails *AigcTextDetail `json:"AigcTextDetails,omitnil,omitempty" name:"AigcTextDetails"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -18492,165 +18618,146 @@ func (r *EnhanceMediaQualityResponse) FromJsonString(s string) error {
 }
 
 type EventContent struct {
-	// Event handler. The caller must call ConfirmEvents to acknowledge the message has been received. Confirmed Valid Time is 30 seconds. After expiration, the event can be retrieved again.
+	// <p>Event handler. The caller must call ConfirmEvents to acknowledge the message has been received. Confirmed Valid Time is 30 seconds. After expiration, the event can be retrieved again.</p>
 	EventHandle *string `json:"EventHandle,omitnil,omitempty" name:"EventHandle"`
 
-	// <b>Supported event types:</b>
-	// <li>NewFileUpload: Video upload completed;</li>
-	// <li>ProcedureStateChanged: Task flow status change.</li>
-	// <li>FileDeleted: Video deletion completed;</li>
-	// <li>RestoreMediaComplete: Video retrieval completion;</li>
-	// <li>PullComplete: Video conversion pull completed.</li>
-	// <li>EditMediaComplete: Video editing completed;</li>
-	// <li>SplitMediaComplete: Video splitting completed;</li>
-	// <li>ComposeMediaComplete: Media file creation completion;</li>
-	// <li>WechatMiniProgramPublishComplete: WeChat Mini Program Publishing Completed.</li>
-	// <li>RemoveWatermark: Intelligent watermark removal completion.</li>
-	// <li>RebuildMediaComplete: Audio and video quality rebirth completion event (This is not recommended).</li>
-	// <li>ReviewAudioVideoComplete: Audio/video moderation completed;</li>
-	// <li>ExtractTraceWatermarkComplete: Traceability watermark extraction completed;</li>
-	// <li>ExtractCopyRightWatermarkComplete: Extracting copyright watermark completion.</li>
-	// <li>DescribeFileAttributesComplete: File attribute acquisition completion.</li>
-	// <li>QualityInspectComplete: Audio and video quality inspection completed;</li>
-	// <li>QualityEnhanceComplete: Audio and video quality rebirth task completion;</li>
-	// <li>PersistenceComplete: Edit completed.</li>
-	// <li>ComplexAdaptiveDynamicStreamingComplete: complex adaptive bitstream task completed.</li>
-	// <li>ProcessMediaByMPSComplete: MPS video processing is completed.</li>
-	// <li>AigcImageTaskComplete: AIGC image generation task complete.</li>
-	// <li>AigcVideoTaskComplete: AIGC video generation task completed.</li>
-	// <b>Event types compatible with the 2017 version:</b>
-	// <li>TranscodeComplete: video transcoding completion;</li>
-	// <li>ConcatComplete: Video splicing completion.</li>
-	// <li>ClipComplete: Video editing completed;</li>
-	// <li>CreateImageSpriteComplete: Video thumbnail capture completion.</li>
-	// <li>CreateSnapshotByTimeOffsetComplete: Video screenshot by time point.</li>
+	// <p><b>Supported event types:</b></p><li>NewFileUpload: Video upload complete;</li><li>ProcedureStateChanged: Task flow status change;</li><li>FileDeleted: Video deletion completed;</li><li>RestoreMediaComplete: Video retrieval completion;</li><li>PullComplete: Video conversion completed;</li><li>EditMediaComplete: Video editing completed;</li><li>SplitMediaComplete: Video splitting completed;</li><li>ComposeMediaComplete: Media file creation completion;</li><li>WechatMiniProgramPublishComplete: WeChat Mini Program Publishing Completed.</li><li>RemoveWatermark: Intelligent watermark removal completion.</li><li>RebuildMediaComplete: Audio and video quality rebirth completion event (not recommended).</li><li>ReviewAudioVideoComplete: Audio/video moderation completed;</li><li>ExtractTraceWatermarkComplete: Traceability watermark extraction completed;</li><li>ExtractCopyRightWatermarkComplete: Extracting copyright watermark completion;</li><li>DescribeFileAttributesComplete: File attribute acquisition completion;</li><li>QualityInspectComplete: Audio and video quality inspection completed;</li><li>QualityEnhanceComplete: Audio and video quality rebirth task completion;</li><li>PersistenceComplete: Edit persistence completed;</li><li>ComplexAdaptiveDynamicStreamingComplete: Complex adaptive bitstream task completion.</li><li>ProcessMediaByMPSComplete: MPS video processing completed.</li><li>AigcImageTaskComplete: AIGC image generation task completed.</li><li>AigcVideoTaskComplete: AIGC video generation task completed.</li><li>DescribeAigcFaceInfoAsyncComplete: Asynchronously fetch AIGC human face information task completed.</li><b>Event types compatible with the 2017 version:</b><li>TranscodeComplete: Video transcoding completion;</li><li>ConcatComplete: Video splicing completion;</li><li>ClipComplete: Video editing completed;</li><li>CreateImageSpriteComplete: Video thumbnail capture completion;</li><li>CreateSnapshotByTimeOffsetComplete: Video screenshot by time point.</li>
 	EventType *string `json:"EventType,omitnil,omitempty" name:"EventType"`
 
-	// Video upload completion event. Valid when the event type is NewFileUpload.
+	// <p>Video upload completion event. Valid when the event type is NewFileUpload.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FileUploadEvent *FileUploadTask `json:"FileUploadEvent,omitnil,omitempty" name:"FileUploadEvent"`
 
-	// Task flow status change event. Valid when the event type is ProcedureStateChanged.
+	// <p>Task flow status change event. Valid when the event type is ProcedureStateChanged.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProcedureStateChangeEvent *ProcedureTask `json:"ProcedureStateChangeEvent,omitnil,omitempty" name:"ProcedureStateChangeEvent"`
 
-	// File deletion event. Valid when the event type is FileDeleted.
+	// <p>File deletion event. Valid when the event type is FileDeleted.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FileDeleteEvent *FileDeleteTask `json:"FileDeleteEvent,omitnil,omitempty" name:"FileDeleteEvent"`
 
-	// Video pull completion event. Valid when the event type is PullComplete.
+	// <p>Video pull completion event. Valid when the event type is PullComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PullCompleteEvent *PullUploadTask `json:"PullCompleteEvent,omitnil,omitempty" name:"PullCompleteEvent"`
 
-	// Video editing completion event. Valid when the event type is EditMediaComplete.
+	// <p>Video editing completion event. Valid when the event type is EditMediaComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EditMediaCompleteEvent *EditMediaTask `json:"EditMediaCompleteEvent,omitnil,omitempty" name:"EditMediaCompleteEvent"`
 
-	// Video splitting completion event. Valid when the event type is SplitMediaComplete.
+	// <p>Video splitting completion event. Valid when the event type is SplitMediaComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SplitMediaCompleteEvent *SplitMediaTask `json:"SplitMediaCompleteEvent,omitnil,omitempty" name:"SplitMediaCompleteEvent"`
 
-	// Media file creation task completion event. Valid when the event type is ComposeMediaComplete.
+	// <p>Media file creation task completion event. Valid when the event type is ComposeMediaComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ComposeMediaCompleteEvent *ComposeMediaTask `json:"ComposeMediaCompleteEvent,omitnil,omitempty" name:"ComposeMediaCompleteEvent"`
 
-	// Video editing completion event. Valid when the event type is ClipComplete.
+	// <p>Video editing completion event. Valid when the event type is ClipComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ClipCompleteEvent *ClipTask2017 `json:"ClipCompleteEvent,omitnil,omitempty" name:"ClipCompleteEvent"`
 
-	// Video transcoding completion event, valid when the event type is TranscodeComplete.
+	// <p>Video transcoding completion event. Valid when the event type is TranscodeComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TranscodeCompleteEvent *TranscodeTask2017 `json:"TranscodeCompleteEvent,omitnil,omitempty" name:"TranscodeCompleteEvent"`
 
-	// Video thumbnail capture completion event. Valid when the event type is CreateImageSpriteComplete.
+	// <p>Video thumbnail capture completion event. Valid when the event type is CreateImageSpriteComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CreateImageSpriteCompleteEvent *CreateImageSpriteTask2017 `json:"CreateImageSpriteCompleteEvent,omitnil,omitempty" name:"CreateImageSpriteCompleteEvent"`
 
-	// Video splicing completion event. Valid when the event type is ConcatComplete.
+	// <p>Video splicing completion event. Valid when the event type is ConcatComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ConcatCompleteEvent *ConcatTask2017 `json:"ConcatCompleteEvent,omitnil,omitempty" name:"ConcatCompleteEvent"`
 
-	// Video screenshot by time point completion event. Valid when the event type is CreateSnapshotByTimeOffsetComplete.
+	// <p>Video screenshot by time point completion event. Valid when the event type is CreateSnapshotByTimeOffsetComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SnapshotByTimeOffsetCompleteEvent *SnapshotByTimeOffsetTask2017 `json:"SnapshotByTimeOffsetCompleteEvent,omitnil,omitempty" name:"SnapshotByTimeOffsetCompleteEvent"`
 
-	// WeChat Publishing Completion Event. Valid when the event type is WechatPublishComplete.
+	// <p>WeChat Publishing Completion Event. Valid when the event type is WechatPublishComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	WechatPublishCompleteEvent *WechatPublishTask `json:"WechatPublishCompleteEvent,omitnil,omitempty" name:"WechatPublishCompleteEvent"`
 
-	// WeChat Mini Program Publishing Task Completion Event. Valid when the event type is WechatMiniProgramPublishComplete.
+	// <p>WeChat Mini Program Publishing Task Completion Event. Valid when the event type is WechatMiniProgramPublishComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	WechatMiniProgramPublishCompleteEvent *WechatMiniProgramPublishTask `json:"WechatMiniProgramPublishCompleteEvent,omitnil,omitempty" name:"WechatMiniProgramPublishCompleteEvent"`
 
-	// Intelligent Watermark Removal Completion Event is valid when the event type is RemoveWatermark.
+	// <p>Intelligent Watermark Removal Completion Event. Valid when the event type is RemoveWatermark.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RemoveWatermarkCompleteEvent *RemoveWatermarkTask `json:"RemoveWatermarkCompleteEvent,omitnil,omitempty" name:"RemoveWatermarkCompleteEvent"`
 
-	// Video retrieval completion event. Valid when the event type is RestoreMediaComplete.
+	// <p>Video retrieval completion event. Valid when the event type is RestoreMediaComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RestoreMediaCompleteEvent *RestoreMediaTask `json:"RestoreMediaCompleteEvent,omitnil,omitempty" name:"RestoreMediaCompleteEvent"`
 
-	// Audio and video quality rebirth completion event. Valid when the event type is RebuildMediaComplete.
+	// <p>Audio and video quality rebirth completion event. Valid when the event type is RebuildMediaComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RebuildMediaCompleteEvent *RebuildMediaTask `json:"RebuildMediaCompleteEvent,omitnil,omitempty" name:"RebuildMediaCompleteEvent"`
 
-	// Traceability watermark extraction completion event. Valid when the event type is ExtractTraceWatermarkComplete.
+	// <p>Traceability watermark extraction completion event. Valid when the event type is ExtractTraceWatermarkComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExtractTraceWatermarkCompleteEvent *ExtractTraceWatermarkTask `json:"ExtractTraceWatermarkCompleteEvent,omitnil,omitempty" name:"ExtractTraceWatermarkCompleteEvent"`
 
-	// Copyright watermark extraction completion event. Valid when the event type is ExtractCopyRightWatermarkComplete.
+	// <p>Copyright watermark extraction completion event. Valid when the event type is ExtractCopyRightWatermarkComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExtractCopyRightWatermarkCompleteEvent *ExtractCopyRightWatermarkTask `json:"ExtractCopyRightWatermarkCompleteEvent,omitnil,omitempty" name:"ExtractCopyRightWatermarkCompleteEvent"`
 
-	// Audio/video moderation completed event. Valid when the event type is ReviewAudioVideoComplete.
+	// <p>Audio/video moderation completed event. Valid when the event type is ReviewAudioVideoComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReviewAudioVideoCompleteEvent *ReviewAudioVideoTask `json:"ReviewAudioVideoCompleteEvent,omitnil,omitempty" name:"ReviewAudioVideoCompleteEvent"`
 
-	// This field is invalid.
+	// <p>This field is invalid.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReduceMediaBitrateCompleteEvent *ReduceMediaBitrateTask `json:"ReduceMediaBitrateCompleteEvent,omitnil,omitempty" name:"ReduceMediaBitrateCompleteEvent"`
 
-	// File attribute acquisition completion event. Valid when the event type is DescribeFileAttributesComplete.
+	// <p>File attribute acquisition completion event. Valid when the event type is DescribeFileAttributesComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DescribeFileAttributesCompleteEvent *DescribeFileAttributesTask `json:"DescribeFileAttributesCompleteEvent,omitnil,omitempty" name:"DescribeFileAttributesCompleteEvent"`
 
-	// Audio and video quality detection completion event. Valid when the event type is QualityInspectComplete.
+	// <p>Audio and video quality detection completion event. Valid when the event type is QualityInspectComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	QualityInspectCompleteEvent *QualityInspectTask `json:"QualityInspectCompleteEvent,omitnil,omitempty" name:"QualityInspectCompleteEvent"`
 
-	// Audio and video quality rebirth completion event. Valid when the event type is QualityEnhanceComplete.
+	// <p>Audio and video quality rebirth completion event. Valid when the event type is QualityEnhanceComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	QualityEnhanceCompleteEvent *QualityEnhanceTask `json:"QualityEnhanceCompleteEvent,omitnil,omitempty" name:"QualityEnhanceCompleteEvent"`
 
-	// MediaCastStatus changed event, valid when the event type is MediaCastStatusChanged.
-	// Pay attention to: this field may return null, indicating that no valid value can be obtained.
+	// <p>Media forwarding status change event. Valid when the event type is MediaCastStatusChanged.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MediaCastStatusChangedEvent *MediaCastEvent `json:"MediaCastStatusChangedEvent,omitnil,omitempty" name:"MediaCastStatusChangedEvent"`
 
-	// Editing solidification completion event. Valid when the event type is PersistenceComplete.
+	// <p>Editing solidification completion event. Valid when the event type is PersistenceComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PersistenceCompleteEvent *PersistenceCompleteTask `json:"PersistenceCompleteEvent,omitnil,omitempty" name:"PersistenceCompleteEvent"`
 
-	// Adaptive bitrate task information, valid only when EventType is ComplexAdaptiveDynamicStreamingComplete.
+	// <p>Adaptive bitrate task information. Valid only when EventType is ComplexAdaptiveDynamicStreamingComplete.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ComplexAdaptiveDynamicStreamingCompleteEvent *ComplexAdaptiveDynamicStreamingTask `json:"ComplexAdaptiveDynamicStreamingCompleteEvent,omitnil,omitempty" name:"ComplexAdaptiveDynamicStreamingCompleteEvent"`
 
-	// MPS video processing task information. Valid only when EventType is ProcessMediaByMPSComplete.
+	// <p>MPS video processing task information. Valid only when EventType is ProcessMediaByMPSComplete.</p>
 	ProcessMediaByMPSCompleteEvent *ProcessMediaByMPS `json:"ProcessMediaByMPSCompleteEvent,omitnil,omitempty" name:"ProcessMediaByMPSCompleteEvent"`
 
-	// AIGC image generation task info. Valid only when EventType is AigcImageTaskComplete.
+	// <p>AIGC image generation task info, valid only when EventType is AigcImageTaskComplete.</p>
 	AigcImageCompleteEvent *AigcImageTask `json:"AigcImageCompleteEvent,omitnil,omitempty" name:"AigcImageCompleteEvent"`
 
-	// AIGC video task info. Valid only when EventType is AigcVideoTaskComplete.
+	// <p>AIGC video task info, valid only when EventType is AigcVideoTaskComplete.</p>
 	AigcVideoCompleteEvent *AigcVideoTask `json:"AigcVideoCompleteEvent,omitnil,omitempty" name:"AigcVideoCompleteEvent"`
 
-	// Extract digital watermark information. Valid at that time only when EventType is ExtractBlindWatermarkComplete.
+	// <p>Extract digital watermark info, valid only when EventType is ExtractBlindWatermarkComplete.</p>
 	ExtractBlindWatermarkComplete *ExtractBlindWatermarkTask `json:"ExtractBlindWatermarkComplete,omitnil,omitempty" name:"ExtractBlindWatermarkComplete"`
 
-	// AIGC scenario-based image generation task info, valid only when EventType is SceneAigcImageCompleteEvent.
+	// <p>Scenario-based AIGC image generation task info. Valid only when EventType is SceneAigcImageCompleteEvent.</p>
 	SceneAigcImageCompleteEvent *SceneAigcImageTask `json:"SceneAigcImageCompleteEvent,omitnil,omitempty" name:"SceneAigcImageCompleteEvent"`
 
-	// Image asynchronous task processing info, valid only when EventType is ProcessImageAsyncCompleteEvent.
+	// <p>Image asynchronous task processing information. Valid only when EventType is ProcessImageAsyncCompleteEvent.</p>
 	ProcessImageAsyncCompleteEvent *ProcessImageAsyncTask `json:"ProcessImageAsyncCompleteEvent,omitnil,omitempty" name:"ProcessImageAsyncCompleteEvent"`
+
+	// <p>AIGC custom entity information, valid only when EventType is CreateAigcAdvancedCustomElementCompleteEvent and this field has a value.</p>
+	CreateAigcAdvancedCustomElementCompleteEvent *CreateAigcAdvancedCustomElementTask `json:"CreateAigcAdvancedCustomElementCompleteEvent,omitnil,omitempty" name:"CreateAigcAdvancedCustomElementCompleteEvent"`
+
+	// <p>AIGC custom tone information. This field has a value only when EventType is CreateAigcCustomVoiceCompleteEvent.</p>
+	CreateAigcCustomVoiceCompleteEvent *CreateAigcCustomVoiceTask `json:"CreateAigcCustomVoiceCompleteEvent,omitnil,omitempty" name:"CreateAigcCustomVoiceCompleteEvent"`
+
+	// <p>Asynchronously fetch AIGC face information. This field has a value only when EventType is DescribeAigcFaceInfoAsyncComplete.</p>
+	DescribeAigcFaceInfoAsyncCompleteEvent *DescribeAigcFaceInfoAsyncTask `json:"DescribeAigcFaceInfoAsyncCompleteEvent,omitnil,omitempty" name:"DescribeAigcFaceInfoAsyncCompleteEvent"`
 }
 
 // Predefined struct for user
@@ -19850,6 +19957,14 @@ type IPFilterPolicy struct {
 	IPList []*string `json:"IPList,omitnil,omitempty" name:"IPList"`
 }
 
+type ImageBeautyConfig struct {
+	// <p>Beauty effect item.</p>
+	BeautyEffectItems []*BeautyEffectItem `json:"BeautyEffectItems,omitnil,omitempty" name:"BeautyEffectItems"`
+
+	// <p>Beauty filter item.</p>
+	BeautyFilterItems []*BeautyFilterItem `json:"BeautyFilterItems,omitnil,omitempty" name:"BeautyFilterItems"`
+}
+
 type ImageBlur struct {
 	// The blur type. Valid values:
 	// <li>`Gaussian`</li>
@@ -20461,9 +20576,28 @@ type JustInTimeTranscodeTemplate struct {
 	WatermarkConfigure *WatermarkConfigureData `json:"WatermarkConfigure,omitnil,omitempty" name:"WatermarkConfigure"`
 }
 
+type KnowledgeAnalysisInfo struct {
+	// <p>Large model parsing template ID</p>
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Parsing result of large model</p>
+	AnalysisResults []*KnowledgeAnalysisResult `json:"AnalysisResults,omitnil,omitempty" name:"AnalysisResults"`
+}
+
+type KnowledgeAnalysisResult struct {
+	// <p>Process task type</p><p>Enumeration value:</p><ul><li>AiAnalysis.DescriptionTask: Intelligent summary task</li><li>AiAnalysis.VideoComprehensionTask: Video understanding task</li><li>SmartSubtitle.AsrFullTextTask: Intelligent speech full-text recognition task</li></ul>
+	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// <p>Task output file collection</p>
+	File *MPSOutputFileInfo `json:"File,omitnil,omitempty" name:"File"`
+}
+
 type KnowledgeBasesInfo struct {
 	// <p>Current library list of media assets to import</p>
 	Bases []*string `json:"Bases,omitnil,omitempty" name:"Bases"`
+
+	// <p>Media analysis information in the knowledge base</p>
+	KnowledgeAnalysisInfos []*KnowledgeAnalysisInfo `json:"KnowledgeAnalysisInfos,omitnil,omitempty" name:"KnowledgeAnalysisInfos"`
 }
 
 type LLMComprehendAsr struct {
@@ -20682,100 +20816,92 @@ type LiveRealTimeClipMediaSegmentInfo struct {
 
 // Predefined struct for user
 type LiveRealTimeClipRequestParams struct {
-	// Push stream live code.
+	// <p>Push stream live code.</p>
 	StreamId *string `json:"StreamId,omitnil,omitempty" name:"StreamId"`
 
-	// Start time of stream clipping. Format reference [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+	// <p>Start time of stream clipping. Format reference: <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time of stream clipping. Format reference [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+	// <p>The end time of stream clipping. Format reference <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>VOD [app](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who have enabled VOD since December 25, 2023, to access resources in an VOD application (whether it is a default application or a newly created application), this field must be filled in as the application ID. </b>
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether it is the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Whether solidified. 0 not solidified, 1 solidified. Default non-permanent.
+	// <p>Whether solidified. 0 for default non-permanent, 1 for solidified. Default non-permanent.</p>
 	IsPersistence *int64 `json:"IsPersistence,omitnil,omitempty" name:"IsPersistence"`
 
-	// Video storage expiry time after editing solidification. Format reference [ISO date format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I). Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding result, sprites) will be permanently deleted. Valid at that time only when IsPersistence is 1. The default video editing never expires.
+	// <p>Video storage expiry time after editing solidification. Format reference <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>. Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding result, sprites) will be permanently deleted. Valid at that time only when IsPersistence is 1. The default video editing never expires.</p>
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Post-editing Solidified Video On-demand Task Flow Processing. For details, see [upload specified task flow](https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1). Valid only when IsPersistence is 1.
+	// <p>Post-editing Solidified Video On-demand Task Flow Processing. For details, see <a href="https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1">upload specified task flow</a>. Valid when IsPersistence is 1.</p>
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [Create Category](https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1) API.
-	// <li>Default value: 0, indicating other categories.</li>
-	// Valid when IsPersistence is 1.
+	// <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the <a href="/document/product/266/31772">Create Category</a> API.</p><li>Default value: 0, indicating other categories.</li>Valid at that time only when IsPersistence is 1.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// Source context, used for passing through user request information. The [callback on upload completion](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) will return the value of this field, up to 250 characters. Valid only when IsPersistence is 1.
+	// <p>Source context. This is used to pass user request information. The <a href="/document/product/266/7830">upload completion callback</a> returns the value of this field. The maximum length is 250 characters. Valid only when IsPersistence is 1.</p>
 	SourceContext *string `json:"SourceContext,omitnil,omitempty" name:"SourceContext"`
 
-	// Session context, used to pass through user request information. When specifying the Procedure parameter, the [task flow status change callback](https://www.tencentcloud.com/document/product/266/9636?from_cn_redirect=1) will return the value of this field, up to 1000 characters. Valid at that time only when IsPersistence is 1.
+	// <p>Session context. This is used to pass through user request information. When specifying the Procedure parameter, the <a href="/document/product/266/9636">task flow status change callback</a> returns the value of this field. The maximum length is 1000 characters. Valid only when IsPersistence is 1.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// Whether to return edited video metadata. 0: not required, 1: required. By default, does not need.
+	// <p>Whether to return edited video metadata. 0: not required, 1: required. By default, does not need.</p>
 	MetaDataRequired *uint64 `json:"MetaDataRequired,omitnil,omitempty" name:"MetaDataRequired"`
 
-	// The domain name added in VOD for time shift playback must be associated with a recording template and have the time-shift service enabled in Cloud Streaming Services (https://www.tencentcloud.com/document/product/266/52220?from_cn_redirect=1#.E6.AD.A5.E9.AA.A43.EF.BC.9A.E5.85.B3.E8.81.94.E5.BD.95.E5.88.B6.E6.A8.A1.E6.9D.BF.3Ca-id.3D.22step3.22.3E.3C.2Fa.3E). **If the first call time of this interface is after 2021-01-01T00:00:00Z, this field is a required field.**
+	// <p>The domain name added in VOD for time-shifting playback must have <a href="https://www.tencentcloud.com/document/product/266/52220?from_cn_redirect=1#.E6.AD.A5.E9.AA.A43.EF.BC.9A.E5.85.B3.E8.81.94.E5.BD.95.E5.88.B6.E6.A8.A1.E6.9D.BF.3Ca-id.3D.22step3.22.3E.3C.2Fa.3E">recording template binding and time-shift service enabled</a> in Cloud Streaming Services. <strong>If the first call time of this interface is after 2021-01-01T00:00:00Z, this field is a required field.</strong></p>
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
-	// Edited live stream information
-	// <li>Default video editing for the original stream.</li>
-	// <li>When the Type specified in StreamInfo is Transcoding, edit the live streaming transcoding stream corresponding to TemplateId.</li>
+	// <p>Live stream information for editing:</p><li>Edit the original stream by default.</li><li>When the Type specified in StreamInfo is Transcoding, edit the live streaming transcoding corresponding to TemplateId.</li>
 	StreamInfo *LiveRealTimeClipStreamInfo `json:"StreamInfo,omitnil,omitempty" name:"StreamInfo"`
 
-	// System reserved field. Do not fill in.
+	// <p>System reserved field. Do not fill in.</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 type LiveRealTimeClipRequest struct {
 	*tchttp.BaseRequest
 	
-	// Push stream live code.
+	// <p>Push stream live code.</p>
 	StreamId *string `json:"StreamId,omitnil,omitempty" name:"StreamId"`
 
-	// Start time of stream clipping. Format reference [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+	// <p>Start time of stream clipping. Format reference: <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time of stream clipping. Format reference [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+	// <p>The end time of stream clipping. Format reference <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <b>VOD [app](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who have enabled VOD since December 25, 2023, to access resources in an VOD application (whether it is a default application or a newly created application), this field must be filled in as the application ID. </b>
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether it is the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Whether solidified. 0 not solidified, 1 solidified. Default non-permanent.
+	// <p>Whether solidified. 0 for default non-permanent, 1 for solidified. Default non-permanent.</p>
 	IsPersistence *int64 `json:"IsPersistence,omitnil,omitempty" name:"IsPersistence"`
 
-	// Video storage expiry time after editing solidification. Format reference [ISO date format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I). Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding result, sprites) will be permanently deleted. Valid at that time only when IsPersistence is 1. The default video editing never expires.
+	// <p>Video storage expiry time after editing solidification. Format reference <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>. Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding result, sprites) will be permanently deleted. Valid at that time only when IsPersistence is 1. The default video editing never expires.</p>
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Post-editing Solidified Video On-demand Task Flow Processing. For details, see [upload specified task flow](https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1). Valid only when IsPersistence is 1.
+	// <p>Post-editing Solidified Video On-demand Task Flow Processing. For details, see <a href="https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1">upload specified task flow</a>. Valid when IsPersistence is 1.</p>
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [Create Category](https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1) API.
-	// <li>Default value: 0, indicating other categories.</li>
-	// Valid when IsPersistence is 1.
+	// <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the <a href="/document/product/266/31772">Create Category</a> API.</p><li>Default value: 0, indicating other categories.</li>Valid at that time only when IsPersistence is 1.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// Source context, used for passing through user request information. The [callback on upload completion](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) will return the value of this field, up to 250 characters. Valid only when IsPersistence is 1.
+	// <p>Source context. This is used to pass user request information. The <a href="/document/product/266/7830">upload completion callback</a> returns the value of this field. The maximum length is 250 characters. Valid only when IsPersistence is 1.</p>
 	SourceContext *string `json:"SourceContext,omitnil,omitempty" name:"SourceContext"`
 
-	// Session context, used to pass through user request information. When specifying the Procedure parameter, the [task flow status change callback](https://www.tencentcloud.com/document/product/266/9636?from_cn_redirect=1) will return the value of this field, up to 1000 characters. Valid at that time only when IsPersistence is 1.
+	// <p>Session context. This is used to pass through user request information. When specifying the Procedure parameter, the <a href="/document/product/266/9636">task flow status change callback</a> returns the value of this field. The maximum length is 1000 characters. Valid only when IsPersistence is 1.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// Whether to return edited video metadata. 0: not required, 1: required. By default, does not need.
+	// <p>Whether to return edited video metadata. 0: not required, 1: required. By default, does not need.</p>
 	MetaDataRequired *uint64 `json:"MetaDataRequired,omitnil,omitempty" name:"MetaDataRequired"`
 
-	// The domain name added in VOD for time shift playback must be associated with a recording template and have the time-shift service enabled in Cloud Streaming Services (https://www.tencentcloud.com/document/product/266/52220?from_cn_redirect=1#.E6.AD.A5.E9.AA.A43.EF.BC.9A.E5.85.B3.E8.81.94.E5.BD.95.E5.88.B6.E6.A8.A1.E6.9D.BF.3Ca-id.3D.22step3.22.3E.3C.2Fa.3E). **If the first call time of this interface is after 2021-01-01T00:00:00Z, this field is a required field.**
+	// <p>The domain name added in VOD for time-shifting playback must have <a href="https://www.tencentcloud.com/document/product/266/52220?from_cn_redirect=1#.E6.AD.A5.E9.AA.A43.EF.BC.9A.E5.85.B3.E8.81.94.E5.BD.95.E5.88.B6.E6.A8.A1.E6.9D.BF.3Ca-id.3D.22step3.22.3E.3C.2Fa.3E">recording template binding and time-shift service enabled</a> in Cloud Streaming Services. <strong>If the first call time of this interface is after 2021-01-01T00:00:00Z, this field is a required field.</strong></p>
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
-	// Edited live stream information
-	// <li>Default video editing for the original stream.</li>
-	// <li>When the Type specified in StreamInfo is Transcoding, edit the live streaming transcoding stream corresponding to TemplateId.</li>
+	// <p>Live stream information for editing:</p><li>Edit the original stream by default.</li><li>When the Type specified in StreamInfo is Transcoding, edit the live streaming transcoding corresponding to TemplateId.</li>
 	StreamInfo *LiveRealTimeClipStreamInfo `json:"StreamInfo,omitnil,omitempty" name:"StreamInfo"`
 
-	// System reserved field. Do not fill in.
+	// <p>System reserved field. Do not fill in.</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
@@ -20813,20 +20939,20 @@ func (r *LiveRealTimeClipRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type LiveRealTimeClipResponseParams struct {
-	// Edited Video Playback URL
+	// <p>Edited Video Playback URL.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Unique identifier of media file for post-editing solidified video.
+	// <p>Unique identifier of media file for post-editing solidified video.</p>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// Edited video task flow ID after solidification.
+	// <p>ID of the edited video task flow after solidification.</p>
 	VodTaskId *string `json:"VodTaskId,omitnil,omitempty" name:"VodTaskId"`
 
-	// Edited Video Metadata
+	// <p>Edited video metadata.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 
-	// <span id="p_segmentset">Edited video clip information.</span>
+	// <p><span id="p_segmentset">Edited video clip information.</span></p>
 	SegmentSet []*LiveRealTimeClipMediaSegmentInfo `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -26855,6 +26981,33 @@ type OutputVideoStream struct {
 	Fps *int64 `json:"Fps,omitnil,omitempty" name:"Fps"`
 }
 
+type OverrideTranscodeParameter struct {
+	// Container format. Valid values: mp4, flv, hls, mp3, flac, ogg, m4a, and wav. Among them, mp3, flac, ogg, m4a, and wav are for audio-only files.
+	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
+
+	// Indicates whether to remove video data. Valid values:
+	// <li>`0`: reserved;</li>
+	// <li>1: Remove.</li>
+	RemoveVideo *uint64 `json:"RemoveVideo,omitnil,omitempty" name:"RemoveVideo"`
+
+	// Indicates whether to remove audio data. Valid values:
+	// <li>`0`: reserved;</li>
+	// <li>1: Remove.</li>
+	RemoveAudio *uint64 `json:"RemoveAudio,omitnil,omitempty" name:"RemoveAudio"`
+
+	// Video stream configuration parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VideoTemplate *VideoTemplateInfoForUpdate `json:"VideoTemplate,omitnil,omitempty" name:"VideoTemplate"`
+
+	// Audio stream configuration parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AudioTemplate *AudioTemplateInfoForUpdate `json:"AudioTemplate,omitnil,omitempty" name:"AudioTemplate"`
+
+	// Top Speed Codec transcoding configuration parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
+}
+
 // Predefined struct for user
 type ParseStreamingManifestRequestParams struct {
 	// Index file content to be parsed.
@@ -27458,13 +27611,16 @@ type ProcessImageAsync struct {
 }
 
 type ProcessImageAsyncInput struct {
-	// FileId for image processing.
+	// <p>FileId of image processing.</p>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// Image processing parameter.
+	// <p>Image URL.</p>
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// <p>Image processing parameter.</p>
 	ImageTaskInput *ProcessImageAsyncTaskInput `json:"ImageTaskInput,omitnil,omitempty" name:"ImageTaskInput"`
 
-	// Output media file configuration for image processing tasks.
+	// <p>Output media file configuration for the image processing task.</p>
 	OutputConfig *ProcessImageAsyncOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
 }
 
@@ -27637,13 +27793,17 @@ func (r *ProcessImageAsyncResponse) FromJsonString(s string) error {
 }
 
 type ProcessImageAsyncTask struct {
-	// Image transcoding output configuration.
+	// <p>Image transcoding output configuration.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EncodeConfig *ImageEncodeConfig `json:"EncodeConfig,omitnil,omitempty" name:"EncodeConfig"`
 
-	// Image enhancement configuration.
+	// <p>Image enhancement configuration.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EnhanceConfig *ImageEnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
+
+	// <p>Image beauty effect configuration.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BeautyConfig *ImageBeautyConfig `json:"BeautyConfig,omitnil,omitempty" name:"BeautyConfig"`
 }
 
 type ProcessImageAsyncTaskInput struct {
@@ -28340,108 +28500,98 @@ func (r *PullEventsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type PullUploadRequestParams struct {
-	// Media URL to be pulled. Temporary not support pull Dash format (support HLS).
-	// Supported extensions are listed in [Media type](https://www.tencentcloud.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B). Please ensure the media URL can access.
+	// <p>Media URL to be pulled. Dash format is not currently supported (HLS is supported).<br>For supported extensions, see <a href="https://www.tencentcloud.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B">media type</a>. Please ensure the media URL can be accessed.</p>
 	MediaUrl *string `json:"MediaUrl,omitnil,omitempty" name:"MediaUrl"`
 
-	// Media type (extension). Supported types are detailed in [media type](https://www.tencentcloud.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B).
-	// If MediaType is not filled in or takes an empty string, the file type will be automatically obtained based on MediaUrl.
+	// <p>Media type (extension). For supported types, see <a href="https://www.tencentcloud.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B">media type</a>.<br>If MediaType is not specified or set to an empty string, the file type will be obtained automatically based on MediaUrl.</p>
 	MediaType *string `json:"MediaType,omitnil,omitempty" name:"MediaType"`
 
-	// <b>On-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created).</b>
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. Customers who activate on-demand services after December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Media name.
+	// <p>Media name.</p>
 	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
 
-	// Video cover URL to pull. Supported file formats: gif, jpeg (jpg), png.
+	// <p>Video cover URL to pull. Supported file formats: gif, jpeg (jpg), png.</p>
 	CoverUrl *string `json:"CoverUrl,omitnil,omitempty" name:"CoverUrl"`
 
-	// Media subsequent task operation. For details, see [Upload Specified Task Flow](https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1).
+	// <p>For media subsequent task operation, see <a href="https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1">upload specified task flow</a>.</p>
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// The media file expiry time, format according to ISO 8601. For details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+	// <p>Media file expiry time, format according to ISO 8601 standard representation. For details, see <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Designate the upload park, applicable only to the user with special requirement for upload target region.
-	// <li>If left blank, files will be uploaded to your [default region](https://www.tencentcloud.com/zh/document/product/266/18874?has_map=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4) by default.</li>
-	// <li>If a designated upload park is specified, please confirm the [upload storage settings](https://www.tencentcloud.com/zh/document/product/266/18874) have already enabled corresponding storage regions.</li>
+	// <p>Designated upload park, applicable only to the user with special requirement for upload target region:</p><li>By default if left blank, upload to your [default region](https://www.tencentcloud.com/document/product/266/14059?from=11329?from_cn_redirect=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4).</li><li>If you designate an upload park, please confirm the [upload storage settings](https://www.tencentcloud.com/document/product/266/14059?from=11329?from_cn_redirect=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4) have already enabled corresponding storage regions.</li>
 	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
 
-	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1) API.
+	// <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the <a href="https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1">Create Category</a> API.</p>
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// Task priority. The higher the value, the higher the priority. The value ranges from -10 to 10. If left blank, the default value is 0.
+	// <p>Task priority. The higher the value, the higher the priority. The value ranges from -10 to 10. If this is not specified, the default value is 0.</p>
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// Source context, used for passing through user request information. When specifying a Procedure task, the task flow status change callback will return the value of this field, up to 1000 characters.
+	// <p>Source context. This is used to pass through user request information. When specifying a Procedure task, the task flow status change callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// Reserved field, used when special purpose.
+	// <p>Reserved field, used for special purpose.</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 
-	// Source context, used to pass through user request information. The [callback on upload completion](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) will return the value of this field, up to 250 characters.
+	// <p>Source context. This is used to pass through user request information. The <a href="/document/product/266/7830">upload completion callback</a> returns the value of this field. The maximum length is 250 characters.</p>
 	SourceContext *string `json:"SourceContext,omitnil,omitempty" name:"SourceContext"`
 
-	// Media storage path, starting with /.
-	// Only sub-apps in [FileID + Path mode](https://www.tencentcloud.com/document/product/266/126825?from_cn_redirect=1) can specify the storage path.
+	// <p>Media storage path, starting with /. <br>Only sub-apps in <a href="https://www.tencentcloud.com/document/product/266/126825?from_cn_redirect=1">FileID + Path mode</a> can specify the storage path.</p>
 	MediaStoragePath *string `json:"MediaStoragePath,omitnil,omitempty" name:"MediaStoragePath"`
 }
 
 type PullUploadRequest struct {
 	*tchttp.BaseRequest
 	
-	// Media URL to be pulled. Temporary not support pull Dash format (support HLS).
-	// Supported extensions are listed in [Media type](https://www.tencentcloud.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B). Please ensure the media URL can access.
+	// <p>Media URL to be pulled. Dash format is not currently supported (HLS is supported).<br>For supported extensions, see <a href="https://www.tencentcloud.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B">media type</a>. Please ensure the media URL can be accessed.</p>
 	MediaUrl *string `json:"MediaUrl,omitnil,omitempty" name:"MediaUrl"`
 
-	// Media type (extension). Supported types are detailed in [media type](https://www.tencentcloud.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B).
-	// If MediaType is not filled in or takes an empty string, the file type will be automatically obtained based on MediaUrl.
+	// <p>Media type (extension). For supported types, see <a href="https://www.tencentcloud.com/document/product/266/9760?from_cn_redirect=1#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B">media type</a>.<br>If MediaType is not specified or set to an empty string, the file type will be obtained automatically based on MediaUrl.</p>
 	MediaType *string `json:"MediaType,omitnil,omitempty" name:"MediaType"`
 
-	// <b>On-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created).</b>
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. Customers who activate on-demand services after December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Media name.
+	// <p>Media name.</p>
 	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
 
-	// Video cover URL to pull. Supported file formats: gif, jpeg (jpg), png.
+	// <p>Video cover URL to pull. Supported file formats: gif, jpeg (jpg), png.</p>
 	CoverUrl *string `json:"CoverUrl,omitnil,omitempty" name:"CoverUrl"`
 
-	// Media subsequent task operation. For details, see [Upload Specified Task Flow](https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1).
+	// <p>For media subsequent task operation, see <a href="https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1">upload specified task flow</a>.</p>
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// The media file expiry time, format according to ISO 8601. For details, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+	// <p>Media file expiry time, format according to ISO 8601 standard representation. For details, see <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Designate the upload park, applicable only to the user with special requirement for upload target region.
-	// <li>If left blank, files will be uploaded to your [default region](https://www.tencentcloud.com/zh/document/product/266/18874?has_map=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4) by default.</li>
-	// <li>If a designated upload park is specified, please confirm the [upload storage settings](https://www.tencentcloud.com/zh/document/product/266/18874) have already enabled corresponding storage regions.</li>
+	// <p>Designated upload park, applicable only to the user with special requirement for upload target region:</p><li>By default if left blank, upload to your [default region](https://www.tencentcloud.com/document/product/266/14059?from=11329?from_cn_redirect=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4).</li><li>If you designate an upload park, please confirm the [upload storage settings](https://www.tencentcloud.com/document/product/266/14059?from=11329?from_cn_redirect=1#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4) have already enabled corresponding storage regions.</li>
 	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
 
-	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1) API.
+	// <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the <a href="https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1">Create Category</a> API.</p>
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// Task priority. The higher the value, the higher the priority. The value ranges from -10 to 10. If left blank, the default value is 0.
+	// <p>Task priority. The higher the value, the higher the priority. The value ranges from -10 to 10. If this is not specified, the default value is 0.</p>
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// Source context, used for passing through user request information. When specifying a Procedure task, the task flow status change callback will return the value of this field, up to 1000 characters.
+	// <p>Source context. This is used to pass through user request information. When specifying a Procedure task, the task flow status change callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// Reserved field, used when special purpose.
+	// <p>Reserved field, used for special purpose.</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 
-	// Source context, used to pass through user request information. The [callback on upload completion](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) will return the value of this field, up to 250 characters.
+	// <p>Source context. This is used to pass through user request information. The <a href="/document/product/266/7830">upload completion callback</a> returns the value of this field. The maximum length is 250 characters.</p>
 	SourceContext *string `json:"SourceContext,omitnil,omitempty" name:"SourceContext"`
 
-	// Media storage path, starting with /.
-	// Only sub-apps in [FileID + Path mode](https://www.tencentcloud.com/document/product/266/126825?from_cn_redirect=1) can specify the storage path.
+	// <p>Media storage path, starting with /. <br>Only sub-apps in <a href="https://www.tencentcloud.com/document/product/266/126825?from_cn_redirect=1">FileID + Path mode</a> can specify the storage path.</p>
 	MediaStoragePath *string `json:"MediaStoragePath,omitnil,omitempty" name:"MediaStoragePath"`
 }
 
@@ -28480,7 +28630,7 @@ func (r *PullUploadRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type PullUploadResponseParams struct {
-	// Pull Upload Task ID. The status of the pull upload task can be queried through this ID.
+	// <p>Pull upload video task ID. This can be used to query the task status.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -30867,7 +31017,7 @@ type SceneAigcImageOutputConfig struct {
 	// <p>Specify the aspect ratio of the generated image. The input format is W:H.<br>This field is valid in the following scenarios:</p><ul><li>Product image generation scenario. Available values are: 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 16:9, 9:16, 21:9.</li><li>AI image expansion scenario. Available values are: 1:1, 3:2, 2:3, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9. It can be used in conjunction with ImageWidth and ImageHeight. The rules are as follows: <ol><li>When only AspectRatio is specified, adaptively adjust based on the original image input.</li><li>When AspectRatio and ImageWidth are specified, ImageHeight is calculated based on both, and vice versa.</li><li>When AspectRatio, ImageWidth, and ImageHeight are specified simultaneously, prioritize using ImageWidth and ImageHeight.</li></ol></li></ul>
 	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
 
-	// <p>Output image encoding format parameters. <strong>Valid only for AI clothing change scenarios.</strong></p>
+	// <p>Output image encoding format parameters.</p>
 	EncodeConfig *ImageSceneAigcEncodeConfig `json:"EncodeConfig,omitnil,omitempty" name:"EncodeConfig"`
 
 	// <p>Output image width. <strong>Valid only for AI image expansion scenarios.</strong></p>
@@ -30876,7 +31026,7 @@ type SceneAigcImageOutputConfig struct {
 	// <p>Output image height, <strong>valid only for AI image expansion scenarios</strong>.</p>
 	ImageHeight *uint64 `json:"ImageHeight,omitnil,omitempty" name:"ImageHeight"`
 
-	// <p>Output resolution. Only valid for change_clothes and change_clothes_under scenarios. Available values: 1K, 2K, 4K.</p>
+	// <p>Output resolution. Only valid for <code>ai_try_on</code> scenarios. Value range: 1K, 2K, 4K.</p>
 	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 }
 
@@ -31626,92 +31776,88 @@ type SharpEnhanceInfo struct {
 
 // Predefined struct for user
 type SimpleHlsClipRequestParams struct {
-	// Tencent Cloud VOD HLS video URL that needs to be cropped.
+	// <p>Tencent Cloud Video on Demand (VOD) HLS video URL that needs to crop.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// <b>On-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created).</b>
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether it is the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Crop start offset time, in seconds. Default 0, crop from the beginning of the video. Negative numbers indicate how many seconds from the end of the video to start cropping. For example, -10 means start trimming from 10 seconds before the end.
+	// <p>Crop start offset time in seconds. Default is 0, crop from the beginning of the video. Negative numbers indicate how many seconds from the end of the video to start cropping. For example, -10 means start trimming from 10 seconds before the end.</p>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// Crop end offset time in seconds. Default is 0, which means crop to the end of the video. Negative numbers indicate how many seconds from the end of the video to end cropping. For example, -10 means end cropping at 10 seconds before the end.
+	// <p>Crop end offset time in seconds. Default is 0, which means crop to the end of the video. Negative numbers indicate how many seconds from the end of the video to end trimming. For example, -10 means end trimming at 10 seconds before the end.</p>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// Whether solidified. 0: not solidified, 1: solidified. Default non-permanent.
+	// <p>Whether solidified. 0 for default non-permanent, 1 for solidified. Default non-permanent.</p>
 	IsPersistence *int64 `json:"IsPersistence,omitnil,omitempty" name:"IsPersistence"`
 
-	// Video storage expiry time after editing solidification. Format reference [ISO date format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I). Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding result, sprites) will be permanently deleted. Valid at that time only when IsPersistence is 1. The default video editing never expires.
+	// <p>Video storage expiry time after editing solidification. Format reference <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>. Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding result, sprites) will be permanently deleted. Valid at that time only when IsPersistence is 1. The default video editing never expires.</p>
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Post-editing Solidified Video On-demand Task Flow Processing. For details, see upload specified task flow (https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1). Valid only when IsPersistence is 1.
+	// <p>Post-editing Solidified Video On-demand Task Flow Processing. For details, see <a href="https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1">upload specified task flow</a>. Valid only when IsPersistence is 1.</p>
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1) API.
-	// <li>Default value: 0, indicating other categories.</li>
-	// Valid when IsPersistence is 1.
+	// <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the <a href="/document/product/266/31772">create category</a> API.</p><li>Default value: 0, indicating other categories.</li>Valid only when IsPersistence is 1.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// Source context, used to pass through user request information. The [callback on upload completion](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) will return the value of this field, up to 250 characters. Valid when IsPersistence is 1.
+	// <p>Source context. This is used to pass through user request information. The <a href="/document/product/266/7830">upload completion callback</a> returns the value of this field. The maximum length is 250 characters. Valid when IsPersistence is 1.</p>
 	SourceContext *string `json:"SourceContext,omitnil,omitempty" name:"SourceContext"`
 
-	// Session context, used to pass through user request information. When specifying the Procedure parameter, the [task flow status change callback](https://www.tencentcloud.com/document/product/266/9636?from_cn_redirect=1) will return the value of this field, up to 1000 characters. Valid only when IsPersistence is 1.
+	// <p>Session context. This is used to pass through user request information. When specifying the Procedure parameter, the <a href="/document/product/266/9636">task flow status change callback</a> returns the value of this field. The maximum length is 1000 characters. Valid only when IsPersistence is 1.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// Deprecated.
+	// <p>Deprecated.</p>
 	//
 	// Deprecated: Precision is deprecated.
 	Precision *string `json:"Precision,omitnil,omitempty" name:"Precision"`
 
-	// Output video type. Valid values: <li>hls: Output hls file.</li>Default value hls.
+	// <p>Output video type. Valid values: <li>hls: Output hls file.</li>Default value hls.</p>
 	OutputMediaType *string `json:"OutputMediaType,omitnil,omitempty" name:"OutputMediaType"`
 
-	// Reserved field, used when special purpose. Example value: ""
+	// <p>Reserved field, used for special purpose. Example value: ""</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 type SimpleHlsClipRequest struct {
 	*tchttp.BaseRequest
 	
-	// Tencent Cloud VOD HLS video URL that needs to be cropped.
+	// <p>Tencent Cloud Video on Demand (VOD) HLS video URL that needs to crop.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// <b>On-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether default or newly created).</b>
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. Customers who activate on-demand services from December 25, 2023 must fill this field with the app ID when accessing resources in on-demand applications (whether it is the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Crop start offset time, in seconds. Default 0, crop from the beginning of the video. Negative numbers indicate how many seconds from the end of the video to start cropping. For example, -10 means start trimming from 10 seconds before the end.
+	// <p>Crop start offset time in seconds. Default is 0, crop from the beginning of the video. Negative numbers indicate how many seconds from the end of the video to start cropping. For example, -10 means start trimming from 10 seconds before the end.</p>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// Crop end offset time in seconds. Default is 0, which means crop to the end of the video. Negative numbers indicate how many seconds from the end of the video to end cropping. For example, -10 means end cropping at 10 seconds before the end.
+	// <p>Crop end offset time in seconds. Default is 0, which means crop to the end of the video. Negative numbers indicate how many seconds from the end of the video to end trimming. For example, -10 means end trimming at 10 seconds before the end.</p>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// Whether solidified. 0: not solidified, 1: solidified. Default non-permanent.
+	// <p>Whether solidified. 0 for default non-permanent, 1 for solidified. Default non-permanent.</p>
 	IsPersistence *int64 `json:"IsPersistence,omitnil,omitempty" name:"IsPersistence"`
 
-	// Video storage expiry time after editing solidification. Format reference [ISO date format](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I). Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding result, sprites) will be permanently deleted. Valid at that time only when IsPersistence is 1. The default video editing never expires.
+	// <p>Video storage expiry time after editing solidification. Format reference <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>. Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding result, sprites) will be permanently deleted. Valid at that time only when IsPersistence is 1. The default video editing never expires.</p>
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Post-editing Solidified Video On-demand Task Flow Processing. For details, see upload specified task flow (https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1). Valid only when IsPersistence is 1.
+	// <p>Post-editing Solidified Video On-demand Task Flow Processing. For details, see <a href="https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1">upload specified task flow</a>. Valid only when IsPersistence is 1.</p>
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the [create category](https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1) API.
-	// <li>Default value: 0, indicating other categories.</li>
-	// Valid when IsPersistence is 1.
+	// <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID via the <a href="/document/product/266/31772">create category</a> API.</p><li>Default value: 0, indicating other categories.</li>Valid only when IsPersistence is 1.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// Source context, used to pass through user request information. The [callback on upload completion](https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1) will return the value of this field, up to 250 characters. Valid when IsPersistence is 1.
+	// <p>Source context. This is used to pass through user request information. The <a href="/document/product/266/7830">upload completion callback</a> returns the value of this field. The maximum length is 250 characters. Valid when IsPersistence is 1.</p>
 	SourceContext *string `json:"SourceContext,omitnil,omitempty" name:"SourceContext"`
 
-	// Session context, used to pass through user request information. When specifying the Procedure parameter, the [task flow status change callback](https://www.tencentcloud.com/document/product/266/9636?from_cn_redirect=1) will return the value of this field, up to 1000 characters. Valid only when IsPersistence is 1.
+	// <p>Session context. This is used to pass through user request information. When specifying the Procedure parameter, the <a href="/document/product/266/9636">task flow status change callback</a> returns the value of this field. The maximum length is 1000 characters. Valid only when IsPersistence is 1.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// Deprecated.
+	// <p>Deprecated.</p>
 	Precision *string `json:"Precision,omitnil,omitempty" name:"Precision"`
 
-	// Output video type. Valid values: <li>hls: Output hls file.</li>Default value hls.
+	// <p>Output video type. Valid values: <li>hls: Output hls file.</li>Default value hls.</p>
 	OutputMediaType *string `json:"OutputMediaType,omitnil,omitempty" name:"OutputMediaType"`
 
-	// Reserved field, used when special purpose. Example value: ""
+	// <p>Reserved field, used for special purpose. Example value: ""</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
@@ -31748,16 +31894,16 @@ func (r *SimpleHlsClipRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SimpleHlsClipResponseParams struct {
-	// Trimmed video address
+	// <p>Trimmed video address.</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Cropped video metadata. Currently, the `Size`, `Rotate`, `VideoDuration`, and `AudioDuration` fields are temporarily default with no real data.
+	// <p>Cropped video metadata. Currently, the <code>Size</code>, <code>Rotate</code>, <code>VideoDuration</code>, and <code>AudioDuration</code> fields are temporarily default with no real data.</p>
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 
-	// Unique identifier of the media file for post-editing solidified video.
+	// <p>Unique identifier of media file for post-editing solidified video.</p>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// Edited video task flow ID after solidification.
+	// <p>ID of the edited video task flow after solidification.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -32911,6 +33057,9 @@ type TranscodeTaskInput struct {
 	// <p>Offset of the termination time of the transcoded video, unit: second.</p><li>Leave it blank or enter 0 means the transcoded video lasts until the end of the original video.</li><li>When the value is greater than 0 (assume it is n), it means the transcoded video lasts until the nth second of the original video.</li><li>When the value is less than 0 (assume it is -n), it means the transcoded video lasts until n seconds before the end of the original video.</li>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
+	// <p>Custom video transcoding parameters.</p>
+	OverrideParameter *OverrideTranscodeParameter `json:"OverrideParameter,omitnil,omitempty" name:"OverrideParameter"`
+
 	// <p>List of subtitle suppression information. Up to 2 are supported.</p>
 	SubtitleInfoSet []*SubtitleInfoInput `json:"SubtitleInfoSet,omitnil,omitempty" name:"SubtitleInfoSet"`
 }
@@ -33081,6 +33230,81 @@ type TrtcRecordInfo struct {
 
 	// The IDs of users whose streams are mixed.
 	UserIds []*string `json:"UserIds,omitnil,omitempty" name:"UserIds"`
+}
+
+// Predefined struct for user
+type UpdateAigcApiTokenRequestParams struct {
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. For customers who activate on-demand services from December 25, 2023, to access resources in on-demand applications (whether it is the default application or a newly created application), you must fill in this field with the application ID.</b></p>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// <p>To refresh the Api Key</p>
+	ApiToken *string `json:"ApiToken,omitnil,omitempty" name:"ApiToken"`
+
+	// <p>Merge (default, merges ExtInfo JSON by top-level key), Overwrite (directly overwrite)</p>
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
+
+	// <p>Extended information of the token</p>
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+}
+
+type UpdateAigcApiTokenRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p><b>Video-on-demand (VOD) <a href="/document/product/266/14574">application</a> ID. For customers who activate on-demand services from December 25, 2023, to access resources in on-demand applications (whether it is the default application or a newly created application), you must fill in this field with the application ID.</b></p>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// <p>To refresh the Api Key</p>
+	ApiToken *string `json:"ApiToken,omitnil,omitempty" name:"ApiToken"`
+
+	// <p>Merge (default, merges ExtInfo JSON by top-level key), Overwrite (directly overwrite)</p>
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
+
+	// <p>Extended information of the token</p>
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+}
+
+func (r *UpdateAigcApiTokenRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateAigcApiTokenRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubAppId")
+	delete(f, "ApiToken")
+	delete(f, "ActionType")
+	delete(f, "ExtInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateAigcApiTokenRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateAigcApiTokenResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateAigcApiTokenResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateAigcApiTokenResponseParams `json:"Response"`
+}
+
+func (r *UpdateAigcApiTokenResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateAigcApiTokenResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type UrlSignatureAuthPolicy struct {
