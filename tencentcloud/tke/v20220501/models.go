@@ -935,7 +935,7 @@ type Disk struct {
 	// Cloud disk type
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Cloud disk size (GB)
+	// Cloud disk size (G)
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// Whether to automatically format and mount disks.
@@ -946,6 +946,18 @@ type Disk struct {
 
 	// Mounting directory
 	MountTarget *string `json:"MountTarget,omitnil,omitempty" name:"MountTarget"`
+
+	// Cloud disk ID
+	// Note: This field may return "null", indicating that no valid value can be obtained.
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
+
+	// Encrypt the system disk
+	// Note: This field may return "null", indicating that no valid value can be obtained.
+	Encrypt *string `json:"Encrypt,omitnil,omitempty" name:"Encrypt"`
+
+	// Custom KMS ID
+	// Note: This field may return "null", indicating that no valid value can be obtained.
+	KmsKeyId *string `json:"KmsKeyId,omitnil,omitempty" name:"KmsKeyId"`
 }
 
 type ExternalNodeInfo struct {
@@ -1122,12 +1134,12 @@ type InstanceAdvancedSettings struct {
 
 type InstanceChargePrepaid struct {
 	// Billing cycle of the pay-as-you-go mode (unit: month):
-	// 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60
+	// 1,2,3,4,5,6,7, 8,9,10,11,12,24,36,48,60
 	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// Renewal method of the prepayment mode:
-	// - NOTIFY_AND_AUTO_RENEW: Notify the user of expiration and auto-renew (default)
-	// - NOTIFY_AND_MANUAL_RENEW: Notify the user of expiration but do not auto-renew
+	// - NOTIFY_AND_AUTO_RENEW: Notify the user of expiration and auto-renew 
+	// - NOTIFY_AND_MANUAL_RENEW: Notify the user of expiration but auto-renewal is not performed (default)
 	// - DISABLE_NOTIFY_AND_MANUAL_RENEW: Do not notify the user of expiration and do not auto-renew
 	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 }
@@ -1239,6 +1251,109 @@ type ManuallyAdded struct {
 
 	// Total number of nodes
 	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+}
+
+// Predefined struct for user
+type ModifyClusterMachineRequestParams struct {
+	// <p>Cluster ID</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Node name list.</p>
+	MachineNames []*string `json:"MachineNames,omitnil,omitempty" name:"MachineNames"`
+
+	// <p>display name of the machine</p>
+	DisplayName *string `json:"DisplayName,omitnil,omitempty" name:"DisplayName"`
+
+	// <p>System disk C</p>
+	SystemDisk *Disk `json:"SystemDisk,omitnil,omitempty" name:"SystemDisk"`
+
+	// <p>Security group list</p>
+	SecurityGroupIDs []*string `json:"SecurityGroupIDs,omitnil,omitempty" name:"SecurityGroupIDs"`
+
+	// <p>Node prepayment information.</p>
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
+
+	// <p>Change node billing type</p><p>Enumeration value:</p><ul><li>POSTPAID_BY_HOUR: The targeted billing type is pay-as-you-go.</li><li>PREPAID: The targeted billing type is annual and monthly subscription.</li></ul>
+	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
+
+	// <p>Whether to switch the billing mode of the elastic data cloud disk simultaneously. Value ranges from true to false: true indicates switching the billing mode of the elastic data cloud disk, false indicates not switching the billing mode of the elastic data cloud disk. Default value: true.</p><p>Default value: true</p>
+	ModifyPortableDataDisk *bool `json:"ModifyPortableDataDisk,omitnil,omitempty" name:"ModifyPortableDataDisk"`
+}
+
+type ModifyClusterMachineRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Cluster ID</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Node name list.</p>
+	MachineNames []*string `json:"MachineNames,omitnil,omitempty" name:"MachineNames"`
+
+	// <p>display name of the machine</p>
+	DisplayName *string `json:"DisplayName,omitnil,omitempty" name:"DisplayName"`
+
+	// <p>System disk C</p>
+	SystemDisk *Disk `json:"SystemDisk,omitnil,omitempty" name:"SystemDisk"`
+
+	// <p>Security group list</p>
+	SecurityGroupIDs []*string `json:"SecurityGroupIDs,omitnil,omitempty" name:"SecurityGroupIDs"`
+
+	// <p>Node prepayment information.</p>
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
+
+	// <p>Change node billing type</p><p>Enumeration value:</p><ul><li>POSTPAID_BY_HOUR: The targeted billing type is pay-as-you-go.</li><li>PREPAID: The targeted billing type is annual and monthly subscription.</li></ul>
+	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
+
+	// <p>Whether to switch the billing mode of the elastic data cloud disk simultaneously. Value ranges from true to false: true indicates switching the billing mode of the elastic data cloud disk, false indicates not switching the billing mode of the elastic data cloud disk. Default value: true.</p><p>Default value: true</p>
+	ModifyPortableDataDisk *bool `json:"ModifyPortableDataDisk,omitnil,omitempty" name:"ModifyPortableDataDisk"`
+}
+
+func (r *ModifyClusterMachineRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyClusterMachineRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	delete(f, "MachineNames")
+	delete(f, "DisplayName")
+	delete(f, "SystemDisk")
+	delete(f, "SecurityGroupIDs")
+	delete(f, "InstanceChargePrepaid")
+	delete(f, "InstanceChargeType")
+	delete(f, "ModifyPortableDataDisk")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyClusterMachineRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyClusterMachineResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyClusterMachineResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyClusterMachineResponseParams `json:"Response"`
+}
+
+func (r *ModifyClusterMachineResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyClusterMachineResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

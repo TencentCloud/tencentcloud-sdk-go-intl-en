@@ -1636,13 +1636,15 @@ type MLIDPassportOCRResponseParams struct {
 	// Document content in the visual zone
 	PassportRecognizeInfos *PassportRecognizeInfos `json:"PassportRecognizeInfos,omitnil,omitempty" name:"PassportRecognizeInfos"`
 
-	// Warning information for the document. This field applies only to international site requests and will return an empty array for domestic site requests. Valid warning codes: 
-	// -9101 (incomplete card border), 
-	// -9102 (photocopied document), 
-	// -9103 (re-photographed document), -9104 (PS-altered document), 
-	// -9107 (reflective document), 
-	// -9108 (blurry image), 
-	// -9109 (warning capability not enabled).
+	// Card Warning Information
+	// 
+	// -9101 Alarm for covered certificate
+	// -9102 Alarm for photocopied certificate
+	// -9103 Alarm for photographed certificate
+	// -9104 Alarm for tamper certificate
+	// -9107 Alarm for reflective certificate
+	// -9108 Alarm for blurry certificate 
+	// -9109 This capability is not enabled. Please contact customer support to activate the alert service.
 	WarnCardInfos []*int64 `json:"WarnCardInfos,omitnil,omitempty" name:"WarnCardInfos"`
 
 	// The number of cards detected in the input image.(Currently supported only in ap-bangkok region)
@@ -1914,50 +1916,71 @@ func (r *PODAuditAIResponse) FromJsonString(s string) error {
 }
 
 type PassportRecognizeInfos struct {
-
+	// Document type, obtained from passport visual zone
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Issuing country, obtained from passport visual zone
 	IssuingCountry *string `json:"IssuingCountry,omitnil,omitempty" name:"IssuingCountry"`
 
-
+	// Unique serial number / identification number of the passport, obtained from passport visual zone
 	PassportID *string `json:"PassportID,omitnil,omitempty" name:"PassportID"`
 
-
+	// Last name, obtained from passport visual zone
 	Surname *string `json:"Surname,omitnil,omitempty" name:"Surname"`
 
-
+	// First name, obtained from passport visual zone
 	GivenName *string `json:"GivenName,omitnil,omitempty" name:"GivenName"`
 
-
+	// Full name, obtained from passport visual zone
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// Nationality, obtained from passport visual zone
 	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
-
+	// Date of birth, obtained from passport visual zone
 	DateOfBirth *string `json:"DateOfBirth,omitnil,omitempty" name:"DateOfBirth"`
 
-
+	// Gender, obtained from passport visual zone
 	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
 
-
+	// Date of issue, obtained from passport visual zone
 	DateOfIssuance *string `json:"DateOfIssuance,omitnil,omitempty" name:"DateOfIssuance"`
 
-
+	// Passport expiry date, obtained from passport visual zone
 	DateOfExpiration *string `json:"DateOfExpiration,omitnil,omitempty" name:"DateOfExpiration"`
 
-
+	// Holder's signature, obtained from passport visual zone
+	// (Note: Only returned for PRC passport)
 	Signature *string `json:"Signature,omitnil,omitempty" name:"Signature"`
 
-
+	// Place of issue, obtained from passport visual zone
+	// (Note: Only returned for PRC passport)
 	IssuePlace *string `json:"IssuePlace,omitnil,omitempty" name:"IssuePlace"`
 
-
+	// Issuing Authority, obtained from passport visual zone
+	// (Note: Only returned for PRC passport)
 	IssuingAuthority *string `json:"IssuingAuthority,omitnil,omitempty" name:"IssuingAuthority"`
 
-
+	// Place of birth, obtained from passport visual zone
 	BirthPlace *string `json:"BirthPlace,omitnil,omitempty" name:"BirthPlace"`
+
+	// Passport flag, obtained from passport visual zone
+	PassportFlag *string `json:"PassportFlag,omitnil,omitempty" name:"PassportFlag"`
+
+	// Middle name, obtained from passport visual zone
+	MiddleName *string `json:"MiddleName,omitnil,omitempty" name:"MiddleName"`
+
+	// Father's name, obtained from passport visual zone
+	FatherName *string `json:"FatherName,omitnil,omitempty" name:"FatherName"`
+
+	// Mother's name, obtained from passport visual zone
+	MotherName *string `json:"MotherName,omitnil,omitempty" name:"MotherName"`
+
+	// Title, obtained from passport visual zone
+	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
+
+	// Name suffix, obtained from passport visual zone
+	Postname *string `json:"Postname,omitnil,omitempty" name:"Postname"`
 }
 
 // Predefined struct for user

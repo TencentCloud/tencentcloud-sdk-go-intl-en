@@ -565,6 +565,62 @@ func (c *Client) DescribeNodePoolsWithContext(ctx context.Context, request *Desc
     return
 }
 
+func NewModifyClusterMachineRequest() (request *ModifyClusterMachineRequest) {
+    request = &ModifyClusterMachineRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterMachine")
+    
+    
+    return
+}
+
+func NewModifyClusterMachineResponse() (response *ModifyClusterMachineResponse) {
+    response = &ModifyClusterMachineResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyClusterMachine
+// This API is used to modify a native node.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyClusterMachine(request *ModifyClusterMachineRequest) (response *ModifyClusterMachineResponse, err error) {
+    return c.ModifyClusterMachineWithContext(context.Background(), request)
+}
+
+// ModifyClusterMachine
+// This API is used to modify a native node.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyClusterMachineWithContext(ctx context.Context, request *ModifyClusterMachineRequest) (response *ModifyClusterMachineResponse, err error) {
+    if request == nil {
+        request = NewModifyClusterMachineRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tke", APIVersion, "ModifyClusterMachine")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyClusterMachine require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyClusterMachineResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyHealthCheckPolicyRequest() (request *ModifyHealthCheckPolicyRequest) {
     request = &ModifyHealthCheckPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},

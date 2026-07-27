@@ -70,4 +70,7 @@ const (
 
 	// The cluster status does not support this operation.
 	RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+
+	// Unknown parameter error.
+	UNKNOWNPARAMETER = "UnknownParameter"
 )
