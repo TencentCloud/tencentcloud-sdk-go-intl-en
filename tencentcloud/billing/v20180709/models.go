@@ -1274,8 +1274,8 @@ type AnalyseConditions struct {
 	// cashPayAmount: Cash 
 	// incentivePayAmount: Bonus 
 	// voucherPayAmount: Coupon 
-	// tax: tax. 
-	// costBeforeTax: pre-tax price
+	// tax: tax
+	// amountBeforeTax: pre-tax price
 	FeeType *string `json:"FeeType,omitnil,omitempty" name:"FeeType"`
 
 	// User UIN for querying cost analysis data

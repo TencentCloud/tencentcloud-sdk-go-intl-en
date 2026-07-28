@@ -6335,6 +6335,9 @@ type CreateAigcVideoRedrawTaskRequestParams struct {
 	// <p>File information of the input video for the AIGC video conversion task. The input video duration should be less than 90 seconds, and the size should be within 2GB.</p>
 	FileInfo *AigcVideoRedrawTaskInputFileInfo `json:"FileInfo,omitnil,omitempty" name:"FileInfo"`
 
+	// <p>Parameters for the AIGC video conversion task.</p>
+	TaskInfo *AigcVideoRedrawTaskInfo `json:"TaskInfo,omitnil,omitempty" name:"TaskInfo"`
+
 	// <p>Output media file configuration for the AIGC video conversion task.</p>
 	OutputConfig *AigcVideoRedrawOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
 
@@ -6359,6 +6362,9 @@ type CreateAigcVideoRedrawTaskRequest struct {
 
 	// <p>File information of the input video for the AIGC video conversion task. The input video duration should be less than 90 seconds, and the size should be within 2GB.</p>
 	FileInfo *AigcVideoRedrawTaskInputFileInfo `json:"FileInfo,omitnil,omitempty" name:"FileInfo"`
+
+	// <p>Parameters for the AIGC video conversion task.</p>
+	TaskInfo *AigcVideoRedrawTaskInfo `json:"TaskInfo,omitnil,omitempty" name:"TaskInfo"`
 
 	// <p>Output media file configuration for the AIGC video conversion task.</p>
 	OutputConfig *AigcVideoRedrawOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
@@ -6390,6 +6396,7 @@ func (r *CreateAigcVideoRedrawTaskRequest) FromJsonString(s string) error {
 	}
 	delete(f, "SubAppId")
 	delete(f, "FileInfo")
+	delete(f, "TaskInfo")
 	delete(f, "OutputConfig")
 	delete(f, "SessionId")
 	delete(f, "SessionContext")
