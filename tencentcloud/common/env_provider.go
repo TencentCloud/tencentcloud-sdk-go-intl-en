@@ -1,8 +1,9 @@
 package common
 
 import (
-	tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
 	"os"
+
+	tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
 )
 
 type EnvProvider struct {

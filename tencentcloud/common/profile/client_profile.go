@@ -30,15 +30,15 @@ type ClientProfile struct {
 
 	// Language specifies the language of the client profile.
 	// Valid options: "zh-CN" (Chinese), "en-US" (English).
-	// Default value is "zh-CN".
+	// Default value is "en-US".
 	Language string
 
 	// Debug enables or disables debug output for client operations.
 	Debug bool
 
-	// DisableRegionBreaker determines whether to enable the Regional auto switch.
-	// The SDK uses ap-guangzhou.tencentcloudapi.com as the default backup endpoint.
-	// You can override this by specifying the BackupEndpoint.
+	// DisableRegionBreaker disables the domain failover pipeline (per-host
+	// circuit breakers + TLD rotation / backupEndpoint).
+	// Default: false (failover enabled).
 	DisableRegionBreaker bool
 
 	// BackupEndPoint specifies an alternative endpoint to use by region breaker.
@@ -69,8 +69,9 @@ func NewClientProfile() *ClientProfile {
 		UnsignedPayload: false,
 		Language:        "en-US",
 		Debug:           false,
-		// now is true, will become to false in future
-		DisableRegionBreaker: true,
+		// Failover is enabled by default. Opt out by setting
+		// DisableRegionBreaker = true.
+		DisableRegionBreaker: false,
 		BackupEndPoint:       "",
 		BackupEndpoint:       "",
 	}
