@@ -125,6 +125,9 @@ type ApplyCardVerificationExternalRequestParams struct {
 	// - Minimum pixel width/height: 64.
 	// - Supported formats: PNG, JPG, JPEG, BMP (GIF not supported).
 	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
+
+	// Verification status callback URL. When set, this endpoint will be actively notified with the final verification result upon process completion. Leave blank to disable callbacks. Since callbacks are not fully reliable, a polling mechanism is advised to guarantee retrieval of the final status.
+	WebhookUrl *string `json:"WebhookUrl,omitnil,omitempty" name:"WebhookUrl"`
 }
 
 type ApplyCardVerificationExternalRequest struct {
@@ -169,6 +172,9 @@ type ApplyCardVerificationExternalRequest struct {
 	// - Minimum pixel width/height: 64.
 	// - Supported formats: PNG, JPG, JPEG, BMP (GIF not supported).
 	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
+
+	// Verification status callback URL. When set, this endpoint will be actively notified with the final verification result upon process completion. Leave blank to disable callbacks. Since callbacks are not fully reliable, a polling mechanism is advised to guarantee retrieval of the final status.
+	WebhookUrl *string `json:"WebhookUrl,omitnil,omitempty" name:"WebhookUrl"`
 }
 
 func (r *ApplyCardVerificationExternalRequest) ToJsonString() string {
@@ -190,6 +196,7 @@ func (r *ApplyCardVerificationExternalRequest) FromJsonString(s string) error {
 	delete(f, "ImageUrlFront")
 	delete(f, "ImageUrlBack")
 	delete(f, "ReturnHeadImage")
+	delete(f, "WebhookUrl")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplyCardVerificationExternalRequest has unknown keys!", "")
 	}

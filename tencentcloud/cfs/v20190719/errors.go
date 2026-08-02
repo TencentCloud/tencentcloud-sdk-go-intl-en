@@ -35,6 +35,9 @@ const (
 	// The resource is being created.
 	FAILEDOPERATION_CLIENTTOKENINUSE = "FailedOperation.ClientTokenInUse"
 
+	// 
+	FAILEDOPERATION_COSMULTIVERSIONDISABLED = "FailedOperation.CosMultiVersionDisabled"
+
 	// There are mount targets on the file system.
 	FAILEDOPERATION_MOUNTTARGETEXISTS = "FailedOperation.MountTargetExists"
 
@@ -202,6 +205,15 @@ const (
 
 	// Invalid value of `IntervalDays`.
 	INVALIDPARAMETERVALUE_INVALIDPARAMINTERVALDAYS = "InvalidParameterValue.InvalidParamIntervalDays"
+
+	// 
+	INVALIDPARAMETERVALUE_INVALIDPARAMISCREATEREALTIMESYNC = "InvalidParameterValue.InvalidParamIsCreateRealTimeSync"
+
+	// 
+	INVALIDPARAMETERVALUE_INVALIDPARAMISMODIFYREALTIMESYNC = "InvalidParameterValue.InvalidParamIsModifyRealTimeSync"
+
+	// 
+	INVALIDPARAMETERVALUE_INVALIDPARAMISSYNCDELETE = "InvalidParameterValue.InvalidParamIsSyncDelete"
 
 	// The permission group is not under this user.
 	INVALIDPARAMETERVALUE_INVALIDPGROUP = "InvalidParameterValue.InvalidPgroup"
@@ -463,6 +475,9 @@ const (
 
 	// This AZ does not support the basic network.
 	UNSUPPORTEDOPERATION_BASICNETINTERFACENOTSUPPORTED = "UnsupportedOperation.BasicNetInterfaceNotSupported"
+
+	// 
+	UNSUPPORTEDOPERATION_FIELDONLYFOREXTERNALSTORAGE = "UnsupportedOperation.FieldOnlyForExternalStorage"
 
 	// The data flow cannot be deleted. the data management task associated with the data flow is in progress. please wait for execution completion or terminate execution.
 	UNSUPPORTEDOPERATION_INVALIDLIFECYCLEDATATASKSTATUS = "UnsupportedOperation.InvalidLifecycleDataTaskStatus"

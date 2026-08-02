@@ -1701,6 +1701,7 @@ func NewCreateCLSDeliveryResponse() (response *CreateCLSDeliveryResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  RESOURCENOTFOUND_RESOURCEERROR = "ResourceNotFound.ResourceError"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) CreateCLSDelivery(request *CreateCLSDeliveryRequest) (response *CreateCLSDeliveryResponse, err error) {
     return c.CreateCLSDeliveryWithContext(context.Background(), request)
 }
@@ -1712,6 +1713,7 @@ func (c *Client) CreateCLSDelivery(request *CreateCLSDeliveryRequest) (response 
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  RESOURCENOTFOUND_RESOURCEERROR = "ResourceNotFound.ResourceError"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) CreateCLSDeliveryWithContext(ctx context.Context, request *CreateCLSDeliveryRequest) (response *CreateCLSDeliveryResponse, err error) {
     if request == nil {
         request = NewCreateCLSDeliveryRequest()
@@ -2498,12 +2500,7 @@ func NewCreateVaultResponse() (response *CreateVaultResponse) {
 // Create a backup safe
 //
 // error code that may be returned:
-//  FAILEDOPERATION_CREATESOURCEPACKAGEERROR = "FailedOperation.CreateSourcePackageError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) CreateVault(request *CreateVaultRequest) (response *CreateVaultResponse, err error) {
     return c.CreateVaultWithContext(context.Background(), request)
 }
@@ -2512,12 +2509,7 @@ func (c *Client) CreateVault(request *CreateVaultRequest) (response *CreateVault
 // Create a backup safe
 //
 // error code that may be returned:
-//  FAILEDOPERATION_CREATESOURCEPACKAGEERROR = "FailedOperation.CreateSourcePackageError"
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) CreateVaultWithContext(ctx context.Context, request *CreateVaultRequest) (response *CreateVaultResponse, err error) {
     if request == nil {
         request = NewCreateVaultRequest()
@@ -3947,6 +3939,80 @@ func (c *Client) DescribeBackupListByVaultWithContext(ctx context.Context, reque
     return
 }
 
+func NewDescribeBackupOverviewRequest() (request *DescribeBackupOverviewRequest) {
+    request = &DescribeBackupOverviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "DescribeBackupOverview")
+    
+    
+    return
+}
+
+func NewDescribeBackupOverviewResponse() (response *DescribeBackupOverviewResponse) {
+    response = &DescribeBackupOverviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBackupOverview
+// This API is used to query the backup usage overview.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_TRADECREATEORDERERROR = "FailedOperation.TradeCreateOrderError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETERVALUE_CLUSTERNOTFOUND = "InvalidParameterValue.ClusterNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDREGIONIDERROR = "InvalidParameterValue.InvalidRegionIdError"
+//  OPERATIONDENIED_CLUSTEROPNOTALLOWEDERROR = "OperationDenied.ClusterOpNotAllowedError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  RESOURCEUNAVAILABLE_INSTANCELOCKFAIL = "ResourceUnavailable.InstanceLockFail"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeBackupOverview(request *DescribeBackupOverviewRequest) (response *DescribeBackupOverviewResponse, err error) {
+    return c.DescribeBackupOverviewWithContext(context.Background(), request)
+}
+
+// DescribeBackupOverview
+// This API is used to query the backup usage overview.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_TRADECREATEORDERERROR = "FailedOperation.TradeCreateOrderError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETERVALUE_CLUSTERNOTFOUND = "InvalidParameterValue.ClusterNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_INVALIDREGIONIDERROR = "InvalidParameterValue.InvalidRegionIdError"
+//  OPERATIONDENIED_CLUSTEROPNOTALLOWEDERROR = "OperationDenied.ClusterOpNotAllowedError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  RESOURCEUNAVAILABLE_INSTANCELOCKFAIL = "ResourceUnavailable.InstanceLockFail"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeBackupOverviewWithContext(ctx context.Context, request *DescribeBackupOverviewRequest) (response *DescribeBackupOverviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeBackupOverviewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "DescribeBackupOverview")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBackupOverview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBackupOverviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBinlogConfigRequest() (request *DescribeBinlogConfigRequest) {
     request = &DescribeBinlogConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5026,18 +5092,7 @@ func NewDescribeClusterTransparentEncryptInfoResponse() (response *DescribeClust
 // This API is used to query cluster transparent encryption information.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
-//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INSTANCENOTFOUND = "InvalidParameterValue.InstanceNotFound"
-//  OPERATIONDENIED_CLUSTEROPNOTALLOWEDERROR = "OperationDenied.ClusterOpNotAllowedError"
-//  OPERATIONDENIED_SERVERLESSCLUSTERSTATUSDENIED = "OperationDenied.ServerlessClusterStatusDenied"
-//  OPERATIONDENIED_SERVERLESSINSTANCESTATUSDENIED = "OperationDenied.ServerlessInstanceStatusDenied"
-//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
-//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) DescribeClusterTransparentEncryptInfo(request *DescribeClusterTransparentEncryptInfoRequest) (response *DescribeClusterTransparentEncryptInfoResponse, err error) {
     return c.DescribeClusterTransparentEncryptInfoWithContext(context.Background(), request)
 }
@@ -5046,18 +5101,7 @@ func (c *Client) DescribeClusterTransparentEncryptInfo(request *DescribeClusterT
 // This API is used to query cluster transparent encryption information.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
-//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
-//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INSTANCENOTFOUND = "InvalidParameterValue.InstanceNotFound"
-//  OPERATIONDENIED_CLUSTEROPNOTALLOWEDERROR = "OperationDenied.ClusterOpNotAllowedError"
-//  OPERATIONDENIED_SERVERLESSCLUSTERSTATUSDENIED = "OperationDenied.ServerlessClusterStatusDenied"
-//  OPERATIONDENIED_SERVERLESSINSTANCESTATUSDENIED = "OperationDenied.ServerlessInstanceStatusDenied"
-//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
-//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) DescribeClusterTransparentEncryptInfoWithContext(ctx context.Context, request *DescribeClusterTransparentEncryptInfoRequest) (response *DescribeClusterTransparentEncryptInfoResponse, err error) {
     if request == nil {
         request = NewDescribeClusterTransparentEncryptInfoRequest()
@@ -5289,6 +5333,7 @@ func NewDescribeInstanceCLSLogDeliveryResponse() (response *DescribeInstanceCLSL
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) DescribeInstanceCLSLogDelivery(request *DescribeInstanceCLSLogDeliveryRequest) (response *DescribeInstanceCLSLogDeliveryResponse, err error) {
     return c.DescribeInstanceCLSLogDeliveryWithContext(context.Background(), request)
 }
@@ -5302,6 +5347,7 @@ func (c *Client) DescribeInstanceCLSLogDelivery(request *DescribeInstanceCLSLogD
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) DescribeInstanceCLSLogDeliveryWithContext(ctx context.Context, request *DescribeInstanceCLSLogDeliveryRequest) (response *DescribeInstanceCLSLogDeliveryResponse, err error) {
     if request == nil {
         request = NewDescribeInstanceCLSLogDeliveryRequest()
@@ -10260,10 +10306,7 @@ func NewModifyClusterGlobalEncryptionResponse() (response *ModifyClusterGlobalEn
 // Enable global encryption
 //
 // error code that may be returned:
-//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
-//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) ModifyClusterGlobalEncryption(request *ModifyClusterGlobalEncryptionRequest) (response *ModifyClusterGlobalEncryptionResponse, err error) {
     return c.ModifyClusterGlobalEncryptionWithContext(context.Background(), request)
 }
@@ -10272,10 +10315,7 @@ func (c *Client) ModifyClusterGlobalEncryption(request *ModifyClusterGlobalEncry
 // Enable global encryption
 //
 // error code that may be returned:
-//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
-//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) ModifyClusterGlobalEncryptionWithContext(ctx context.Context, request *ModifyClusterGlobalEncryptionRequest) (response *ModifyClusterGlobalEncryptionResponse, err error) {
     if request == nil {
         request = NewModifyClusterGlobalEncryptionRequest()
@@ -12043,6 +12083,7 @@ func NewModifyVaultResponse() (response *ModifyVaultResponse) {
 //
 // error code that may be returned:
 //  OPERATIONDENIED_BACKUPVAULTTASKCONFLICTERROR = "OperationDenied.BackupVaultTaskConflictError"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) ModifyVault(request *ModifyVaultRequest) (response *ModifyVaultResponse, err error) {
     return c.ModifyVaultWithContext(context.Background(), request)
 }
@@ -12052,6 +12093,7 @@ func (c *Client) ModifyVault(request *ModifyVaultRequest) (response *ModifyVault
 //
 // error code that may be returned:
 //  OPERATIONDENIED_BACKUPVAULTTASKCONFLICTERROR = "OperationDenied.BackupVaultTaskConflictError"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) ModifyVaultWithContext(ctx context.Context, request *ModifyVaultRequest) (response *ModifyVaultResponse, err error) {
     if request == nil {
         request = NewModifyVaultRequest()
@@ -12496,6 +12538,7 @@ func NewOpenAuditServiceResponse() (response *OpenAuditServiceResponse) {
 // This API is used to enable database audit service for an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CREATEAUDITFAILERROR = "FailedOperation.CreateAuditFailError"
 //  FAILEDOPERATION_INSTANCEQUERYERROR = "FailedOperation.InstanceQueryError"
 //  INTERNALERROR_LISTINSTANCESERROR = "InternalError.ListInstancesError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -12509,6 +12552,7 @@ func (c *Client) OpenAuditService(request *OpenAuditServiceRequest) (response *O
 // This API is used to enable database audit service for an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CREATEAUDITFAILERROR = "FailedOperation.CreateAuditFailError"
 //  FAILEDOPERATION_INSTANCEQUERYERROR = "FailedOperation.InstanceQueryError"
 //  INTERNALERROR_LISTINSTANCESERROR = "InternalError.ListInstancesError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -12682,13 +12726,8 @@ func NewOpenClusterTransparentEncryptResponse() (response *OpenClusterTransparen
 // Enable transparent data encryption for the cluster.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
-//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) OpenClusterTransparentEncrypt(request *OpenClusterTransparentEncryptRequest) (response *OpenClusterTransparentEncryptResponse, err error) {
     return c.OpenClusterTransparentEncryptWithContext(context.Background(), request)
 }
@@ -12697,13 +12736,8 @@ func (c *Client) OpenClusterTransparentEncrypt(request *OpenClusterTransparentEn
 // Enable transparent data encryption for the cluster.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
-//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
-//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
-//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
-//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
-//  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
-//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) OpenClusterTransparentEncryptWithContext(ctx context.Context, request *OpenClusterTransparentEncryptRequest) (response *OpenClusterTransparentEncryptResponse, err error) {
     if request == nil {
         request = NewOpenClusterTransparentEncryptRequest()
@@ -14229,6 +14263,7 @@ func NewStartCLSDeliveryResponse() (response *StartCLSDeliveryResponse) {
 //
 // error code that may be returned:
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) StartCLSDelivery(request *StartCLSDeliveryRequest) (response *StartCLSDeliveryResponse, err error) {
     return c.StartCLSDeliveryWithContext(context.Background(), request)
 }
@@ -14238,6 +14273,7 @@ func (c *Client) StartCLSDelivery(request *StartCLSDeliveryRequest) (response *S
 //
 // error code that may be returned:
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 func (c *Client) StartCLSDeliveryWithContext(ctx context.Context, request *StartCLSDeliveryRequest) (response *StartCLSDeliveryResponse, err error) {
     if request == nil {
         request = NewStartCLSDeliveryRequest()
@@ -14491,6 +14527,70 @@ func (c *Client) SwitchProxyVpcWithContext(ctx context.Context, request *SwitchP
     return
 }
 
+func NewTransferClusterPrepayToPostpayRequest() (request *TransferClusterPrepayToPostpayRequest) {
+    request = &TransferClusterPrepayToPostpayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "TransferClusterPrepayToPostpay")
+    
+    
+    return
+}
+
+func NewTransferClusterPrepayToPostpayResponse() (response *TransferClusterPrepayToPostpayResponse) {
+    response = &TransferClusterPrepayToPostpayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// TransferClusterPrepayToPostpay
+// This API is used to convert a Prepaid Cluster to a postpaid cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) TransferClusterPrepayToPostpay(request *TransferClusterPrepayToPostpayRequest) (response *TransferClusterPrepayToPostpayResponse, err error) {
+    return c.TransferClusterPrepayToPostpayWithContext(context.Background(), request)
+}
+
+// TransferClusterPrepayToPostpay
+// This API is used to convert a Prepaid Cluster to a postpaid cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMERROR = "InvalidParameterValue.ParamError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) TransferClusterPrepayToPostpayWithContext(ctx context.Context, request *TransferClusterPrepayToPostpayRequest) (response *TransferClusterPrepayToPostpayResponse, err error) {
+    if request == nil {
+        request = NewTransferClusterPrepayToPostpayRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "TransferClusterPrepayToPostpay")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TransferClusterPrepayToPostpay require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewTransferClusterPrepayToPostpayResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewTransferClusterZoneRequest() (request *TransferClusterZoneRequest) {
     request = &TransferClusterZoneRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -14551,6 +14651,62 @@ func (c *Client) TransferClusterZoneWithContext(ctx context.Context, request *Tr
     request.SetContext(ctx)
     
     response = NewTransferClusterZoneResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewTransferStoragePrepayToPostpayRequest() (request *TransferStoragePrepayToPostpayRequest) {
+    request = &TransferStoragePrepayToPostpayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "TransferStoragePrepayToPostpay")
+    
+    
+    return
+}
+
+func NewTransferStoragePrepayToPostpayResponse() (response *TransferStoragePrepayToPostpayResponse) {
+    response = &TransferStoragePrepayToPostpayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// TransferStoragePrepayToPostpay
+// This API is used to convert prepaid storage to postpaid storage.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INVALIDPARAMETERVALUE_INVALIDREGIONIDERROR = "InvalidParameterValue.InvalidRegionIdError"
+//  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+func (c *Client) TransferStoragePrepayToPostpay(request *TransferStoragePrepayToPostpayRequest) (response *TransferStoragePrepayToPostpayResponse, err error) {
+    return c.TransferStoragePrepayToPostpayWithContext(context.Background(), request)
+}
+
+// TransferStoragePrepayToPostpay
+// This API is used to convert prepaid storage to postpaid storage.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  INVALIDPARAMETERVALUE_INVALIDREGIONIDERROR = "InvalidParameterValue.InvalidRegionIdError"
+//  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUNDERROR = "ResourceNotFound.ClusterNotFoundError"
+func (c *Client) TransferStoragePrepayToPostpayWithContext(ctx context.Context, request *TransferStoragePrepayToPostpayRequest) (response *TransferStoragePrepayToPostpayResponse, err error) {
+    if request == nil {
+        request = NewTransferStoragePrepayToPostpayRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "TransferStoragePrepayToPostpay")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TransferStoragePrepayToPostpay require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewTransferStoragePrepayToPostpayResponse()
     err = c.Send(request, response)
     return
 }

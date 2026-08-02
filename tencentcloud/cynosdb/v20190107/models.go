@@ -946,6 +946,8 @@ type AssociateSecurityGroupsRequestParams struct {
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
 	// Availability zone
+	//
+	// Deprecated: Zone is deprecated.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 }
 
@@ -1094,38 +1096,39 @@ type AutoMapRule struct {
 }
 
 type BackupConfigInfo struct {
-	// System automation time.
+	// <p>System automation time</p>
 	BackupCustomAutoTime *bool `json:"BackupCustomAutoTime,omitnil,omitempty" name:"BackupCustomAutoTime"`
 
-	// Indicates the full backup start time. value range: [0-24*3600]. for example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.
+	// <p>Indicates the full backup start time, [0-24*3600]. For example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.</p>
 	BackupTimeBeg *uint64 `json:"BackupTimeBeg,omitnil,omitempty" name:"BackupTimeBeg"`
 
-	// Indicates the full backup end time. value range: [0-24*3600]. for example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.
+	// <p>Indicates the full backup end time, [0-24*3600]. For example, 0:00, 1:00, and 2:00 are 0, 3600, and 7200 respectively.</p>
 	BackupTimeEnd *uint64 `json:"BackupTimeEnd,omitnil,omitempty" name:"BackupTimeEnd"`
 
-	// Currently this parameter cannot be modified. no need to specify. backup frequency is an array of length 7, corresponding to the backup method from sunday to saturday, full for full backup and increment for incremental backup.
+	// <p>This parameter currently does not support modification and is not required. Backup frequency is an array of length 7, corresponding to the backup method from Sunday to Saturday, full-full backup, increment-incremental backup.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	BackupWeekDays []*string `json:"BackupWeekDays,omitnil,omitempty" name:"BackupWeekDays"`
 
-	// Interval.
+	// <p>Interval</p>
 	BackupIntervalTime *int64 `json:"BackupIntervalTime,omitnil,omitempty" name:"BackupIntervalTime"`
 
-	// Indicates the backup retention period in seconds. data will be cleaned up longer than this time. 7 days means 3600247=604800. the maximum is 158112000.
+	// <p>Indicates the backup retention period in seconds. Backups will be cleaned up longer than this time. 7 days means 3600*24*7=604800. The maximum value is 158112000.</p>
 	ReserveDuration *uint64 `json:"ReserveDuration,omitnil,omitempty" name:"ReserveDuration"`
 
-	// Enable cross-region backup.
-	// Enable.
-	// 0: disabled.
+	// <p>Cross-region backup enabled<br>yes-Enable<br>no-Disable</p>
 	CrossRegionsEnable *string `json:"CrossRegionsEnable,omitnil,omitempty" name:"CrossRegionsEnable"`
 
-	// Cross-Regional backup region.
+	// <p>Cross-regional backup region</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CrossRegions []*string `json:"CrossRegions,omitnil,omitempty" name:"CrossRegions"`
 
-	// Automatic data backup trigger policy, periodically: automatic periodic backup, frequent: high-frequency backup
+	// <p>Cross-region backup retention period</p><p>Unit: Day</p>
+	CrossRegionSaveDays *int64 `json:"CrossRegionSaveDays,omitnil,omitempty" name:"CrossRegionSaveDays"`
+
+	// <p>Automatic data backup trigger policy, periodically: automatic periodic backup, frequent: high frequency backup</p>
 	BackupTriggerStrategy *string `json:"BackupTriggerStrategy,omitnil,omitempty" name:"BackupTriggerStrategy"`
 
-	// Backup delivery relationship
+	// <p>Backup delivery relationship</p>
 	AutoCopyVaults []*CreateBackupVaultItem `json:"AutoCopyVaults,omitnil,omitempty" name:"AutoCopyVaults"`
 }
 
@@ -1225,6 +1228,17 @@ type BackupRegionAndIds struct {
 	BackupId *int64 `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 }
 
+type BackupVolumeInfo struct {
+	// Backup usage
+	BackupVolume *float64 `json:"BackupVolume,omitnil,omitempty" name:"BackupVolume"`
+
+	// Backup type
+	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
+
+	// Backup method
+	BackupMethod *string `json:"BackupMethod,omitnil,omitempty" name:"BackupMethod"`
+}
+
 type BillingResourceInfo struct {
 	// Cluster ID
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
@@ -1312,50 +1326,64 @@ type BindInstanceInfo struct {
 }
 
 type BinlogConfigInfo struct {
-	// Specifies the retention time of binlogs.
+	// <p>binlog retention time</p>
 	BinlogSaveDays *int64 `json:"BinlogSaveDays,omitnil,omitempty" name:"BinlogSaveDays"`
 
-	// Whether binlog cross-region backup is enabled.
+	// <p>Whether cross-region backup of binlog is enabled</p>
 	BinlogCrossRegionsEnable *string `json:"BinlogCrossRegionsEnable,omitnil,omitempty" name:"BinlogCrossRegionsEnable"`
 
-	// binlog in a different region.
+	// <p>binlog cross-region</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	BinlogCrossRegions []*string `json:"BinlogCrossRegions,omitnil,omitempty" name:"BinlogCrossRegions"`
 
-	// Safe info
+	// <p>Cross-region backup retention period</p><p>Unit: Day</p>
+	BinlogCrossRegionSaveDays *int64 `json:"BinlogCrossRegionSaveDays,omitnil,omitempty" name:"BinlogCrossRegionSaveDays"`
+
+	// <p>Safe info</p>
 	AutoCopyVaults []*CreateBackupVaultItem `json:"AutoCopyVaults,omitnil,omitempty" name:"AutoCopyVaults"`
 }
 
 type BinlogItem struct {
-	// Binlog filename
+	// <p>Binlog filename</p>
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
-	// File size in bytes
+	// <p>File size, measurement unit: byte</p>
 	FileSize *int64 `json:"FileSize,omitnil,omitempty" name:"FileSize"`
 
-	// Transaction start time
+	// <p>Earliest transaction time</p>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Transaction end time
+	// <p>Latest transaction time</p>
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 
-	// Binlog file ID
+	// <p>Binlog file ID</p>
 	BinlogId *int64 `json:"BinlogId,omitnil,omitempty" name:"BinlogId"`
 
-	// binlog cross-region coverage
+	// <p>Cross-regional binlog</p>
 	CrossRegions []*string `json:"CrossRegions,omitnil,omitempty" name:"CrossRegions"`
 
-	// Backup delivery status
+	// <p>Backup delivery status</p>
 	CopyStatus *string `json:"CopyStatus,omitnil,omitempty" name:"CopyStatus"`
 
-	// Safe info
+	// <p>Safe information</p>
 	VaultInfos []*VaultInfo `json:"VaultInfos,omitnil,omitempty" name:"VaultInfos"`
 
-	// Encryption key
+	// <p>Encryption key</p>
 	EncryptKeyId *string `json:"EncryptKeyId,omitnil,omitempty" name:"EncryptKeyId"`
 
-	// Encrypt key region
+	// <p>Key region for encryption</p>
 	EncryptRegion *string `json:"EncryptRegion,omitnil,omitempty" name:"EncryptRegion"`
+
+	// <p>Geographical distribution of backups</p>
+	ExistRegions []*BinlogRegionInfo `json:"ExistRegions,omitnil,omitempty" name:"ExistRegions"`
+}
+
+type BinlogRegionInfo struct {
+	// <p>Backup region</p>
+	BackupRegion *string `json:"BackupRegion,omitnil,omitempty" name:"BackupRegion"`
+
+	// <p>Backup ID</p>
+	BackupId *int64 `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 }
 
 type BizTaskInfo struct {
@@ -6975,6 +7003,96 @@ func (r *DescribeBackupListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeBackupListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBackupOverviewRequestParams struct {
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+}
+
+type DescribeBackupOverviewRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster ID.
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeBackupOverviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupOverviewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBackupOverviewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBackupOverviewResponseParams struct {
+	// Total Backup Capacity
+	BackupTotalVolume *float64 `json:"BackupTotalVolume,omitnil,omitempty" name:"BackupTotalVolume"`
+
+	// Backup snapshot capacity
+	BackupSnapshotVolume *float64 `json:"BackupSnapshotVolume,omitnil,omitempty" name:"BackupSnapshotVolume"`
+
+	// Backup logical capacity
+	BackupLogicVolume *float64 `json:"BackupLogicVolume,omitnil,omitempty" name:"BackupLogicVolume"`
+
+	// Total Log Capacity
+	LogTotalVolume *float64 `json:"LogTotalVolume,omitnil,omitempty" name:"LogTotalVolume"`
+
+	// binlog capacity
+	LogBinlogVolume *float64 `json:"LogBinlogVolume,omitnil,omitempty" name:"LogBinlogVolume"`
+
+	// Redo log capacity
+	LogRedoLogVolume *float64 `json:"LogRedoLogVolume,omitnil,omitempty" name:"LogRedoLogVolume"`
+
+	// Total Cross-Region Backup Capacity
+	CrossTotalVolume *float64 `json:"CrossTotalVolume,omitnil,omitempty" name:"CrossTotalVolume"`
+
+	// Cross-Region Backup Capacity
+	CrossRegionBackupVolume *float64 `json:"CrossRegionBackupVolume,omitnil,omitempty" name:"CrossRegionBackupVolume"`
+
+	// Cross-regional log capacity
+	CrossRegionLogVolume *float64 `json:"CrossRegionLogVolume,omitnil,omitempty" name:"CrossRegionLogVolume"`
+
+	// Backup capacity details
+	BackupVolumeInfos []*BackupVolumeInfo `json:"BackupVolumeInfos,omitnil,omitempty" name:"BackupVolumeInfos"`
+
+	// Cross-region backup capacity details
+	CrossRegionBackupVolumeInfos []*BackupVolumeInfo `json:"CrossRegionBackupVolumeInfos,omitnil,omitempty" name:"CrossRegionBackupVolumeInfos"`
+
+	// Cross-region information
+	CrossRegions []*string `json:"CrossRegions,omitnil,omitempty" name:"CrossRegions"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeBackupOverviewResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBackupOverviewResponseParams `json:"Response"`
+}
+
+func (r *DescribeBackupOverviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBackupOverviewResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -12635,6 +12753,8 @@ type DisassociateSecurityGroupsRequestParams struct {
 
 	// Availability zone.
 	// Description: Please enter the primary AZ of the cluster location correctly. If you enter a non-primary AZ of the cluster location, the call may display success but the actual execution will fail.
+	//
+	// Deprecated: Zone is deprecated.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 }
 
@@ -13429,79 +13549,87 @@ type InputAccount struct {
 
 // Predefined struct for user
 type InquirePriceCreateRequestParams struct {
-	// AZ
+	// <p>Availability zone, each region provision best practice</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Number of compute node to purchase
+	// <p>Number of compute nodes to purchase</p>
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// Instance type for purchase. Valid values: `PREPAID`, `POSTPAID`, `SERVERLESS`.
+	// <p>Instance purchase type, optional values: PREPAID, POSTPAID, SERVERLESS</p>
 	InstancePayMode *string `json:"InstancePayMode,omitnil,omitempty" name:"InstancePayMode"`
 
-	// Storage type for purchase. Valid values: `PREPAID`, `POSTPAID`.
+	// <p>Storage purchase type, optional values: PREPAID, POSTPAID</p>
 	StoragePayMode *string `json:"StoragePayMode,omitnil,omitempty" name:"StoragePayMode"`
 
-	// Instance device type. Supported values are as follows:
-	// - common: indicates the general type
-	// - exclusive: indicates the exclusive type.
+	// <p>Instance device type. Supported values are as follows:</p><ul><li>common: refers to universal type</li><li>exclusive: refers to dedicated type</li></ul>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// Number of CPU cores, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
+	// <p>Number of CPU cores. Required for PREPAID and POSTPAID instance types.</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Memory size in GB, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
+	// <p>Memory size in GB. Required for PREPAID and POSTPAID instance types.</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// CCU size, which is required when `InstancePayMode` is `SERVERLESS`.
+	// <p>Ccu size. Required for the serverless type.</p>
 	Ccu *float64 `json:"Ccu,omitnil,omitempty" name:"Ccu"`
 
-	// Storage size, which is required when `StoragePayMode` is `PREPAID`.
+	// <p>Storage size. Required for PREPAID storage type</p>
 	StorageLimit *int64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
 
-	// Validity period, which is required when `InstancePayMode` is `PREPAID`.
+	// <p>Purchase period, required for PREPAID purchase type</p>
 	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
-	// Duration unit, which is required when `InstancePayMode` is `PREPAID`. Valid values: `m` (month), `d` (day).
+	// <p>Duration unit. Optional values: m, d. Required for PREPAID purchase type.</p>
 	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
+
+	// <p>Storage architecture type. Enumeration value: 1.0/2.0 Default value: 1.0</p>
+	StorageVersion *string `json:"StorageVersion,omitnil,omitempty" name:"StorageVersion"`
+
+	// <p>Whether storage spans AZs. Valid for storage architecture 2.0</p>
+	IsMultiAz *bool `json:"IsMultiAz,omitnil,omitempty" name:"IsMultiAz"`
 }
 
 type InquirePriceCreateRequest struct {
 	*tchttp.BaseRequest
 	
-	// AZ
+	// <p>Availability zone, each region provision best practice</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Number of compute node to purchase
+	// <p>Number of compute nodes to purchase</p>
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// Instance type for purchase. Valid values: `PREPAID`, `POSTPAID`, `SERVERLESS`.
+	// <p>Instance purchase type, optional values: PREPAID, POSTPAID, SERVERLESS</p>
 	InstancePayMode *string `json:"InstancePayMode,omitnil,omitempty" name:"InstancePayMode"`
 
-	// Storage type for purchase. Valid values: `PREPAID`, `POSTPAID`.
+	// <p>Storage purchase type, optional values: PREPAID, POSTPAID</p>
 	StoragePayMode *string `json:"StoragePayMode,omitnil,omitempty" name:"StoragePayMode"`
 
-	// Instance device type. Supported values are as follows:
-	// - common: indicates the general type
-	// - exclusive: indicates the exclusive type.
+	// <p>Instance device type. Supported values are as follows:</p><ul><li>common: refers to universal type</li><li>exclusive: refers to dedicated type</li></ul>
 	DeviceType *string `json:"DeviceType,omitnil,omitempty" name:"DeviceType"`
 
-	// Number of CPU cores, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
+	// <p>Number of CPU cores. Required for PREPAID and POSTPAID instance types.</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Memory size in GB, which is required when `InstancePayMode` is `PREPAID` or `POSTPAID`.
+	// <p>Memory size in GB. Required for PREPAID and POSTPAID instance types.</p>
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// CCU size, which is required when `InstancePayMode` is `SERVERLESS`.
+	// <p>Ccu size. Required for the serverless type.</p>
 	Ccu *float64 `json:"Ccu,omitnil,omitempty" name:"Ccu"`
 
-	// Storage size, which is required when `StoragePayMode` is `PREPAID`.
+	// <p>Storage size. Required for PREPAID storage type</p>
 	StorageLimit *int64 `json:"StorageLimit,omitnil,omitempty" name:"StorageLimit"`
 
-	// Validity period, which is required when `InstancePayMode` is `PREPAID`.
+	// <p>Purchase period, required for PREPAID purchase type</p>
 	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
-	// Duration unit, which is required when `InstancePayMode` is `PREPAID`. Valid values: `m` (month), `d` (day).
+	// <p>Duration unit. Optional values: m, d. Required for PREPAID purchase type.</p>
 	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
+
+	// <p>Storage architecture type. Enumeration value: 1.0/2.0 Default value: 1.0</p>
+	StorageVersion *string `json:"StorageVersion,omitnil,omitempty" name:"StorageVersion"`
+
+	// <p>Whether storage spans AZs. Valid for storage architecture 2.0</p>
+	IsMultiAz *bool `json:"IsMultiAz,omitnil,omitempty" name:"IsMultiAz"`
 }
 
 func (r *InquirePriceCreateRequest) ToJsonString() string {
@@ -13527,6 +13655,8 @@ func (r *InquirePriceCreateRequest) FromJsonString(s string) error {
 	delete(f, "StorageLimit")
 	delete(f, "TimeSpan")
 	delete(f, "TimeUnit")
+	delete(f, "StorageVersion")
+	delete(f, "IsMultiAz")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquirePriceCreateRequest has unknown keys!", "")
 	}
@@ -13535,10 +13665,10 @@ func (r *InquirePriceCreateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type InquirePriceCreateResponseParams struct {
-	// Instance price
+	// <p>Instance price</p>
 	InstancePrice *TradePrice `json:"InstancePrice,omitnil,omitempty" name:"InstancePrice"`
 
-	// Storage price
+	// <p>Storage price</p>
 	StoragePrice *TradePrice `json:"StoragePrice,omitnil,omitempty" name:"StoragePrice"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -14907,28 +15037,30 @@ type LogFilter struct {
 }
 
 type LogicBackupConfigInfo struct {
-	// Whether automatic logical backup is enabled.
+	// <p>Whether automatic logical backup is enabled</p>
 	LogicBackupEnable *string `json:"LogicBackupEnable,omitnil,omitempty" name:"LogicBackupEnable"`
 
-	// Specifies the automatic logic backup start time.
+	// <p>Automatic logic backup start time</p>
 	LogicBackupTimeBeg *uint64 `json:"LogicBackupTimeBeg,omitnil,omitempty" name:"LogicBackupTimeBeg"`
 
-	// Specifies the termination time of automatic logical backup.
+	// <p>Automated logic backup end time</p>
 	LogicBackupTimeEnd *uint64 `json:"LogicBackupTimeEnd,omitnil,omitempty" name:"LogicBackupTimeEnd"`
 
-	// Automatic logical backup retention time.
-	// Unit: seconds.
+	// <p>Automatic logical backup retention time<br>Unit: second</p>
 	LogicReserveDuration *uint64 `json:"LogicReserveDuration,omitnil,omitempty" name:"LogicReserveDuration"`
 
-	// Is cross-regional logical backup enabled?.
-	// Valid values: ON/OFF.
+	// <p>Whether cross-regional logical backup is enabled<br>Available values: ON/OFF</p>
 	LogicCrossRegionsEnable *string `json:"LogicCrossRegionsEnable,omitnil,omitempty" name:"LogicCrossRegionsEnable"`
 
-	// Regions covered by logical backup.
+	// <p>Cross-regional logic backup</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LogicCrossRegions []*string `json:"LogicCrossRegions,omitnil,omitempty" name:"LogicCrossRegions"`
 
-	// Backup delivery relationship
+	// <p>Backup delivery relationship</p>
 	AutoCopyVaults []*CreateBackupVaultItem `json:"AutoCopyVaults,omitnil,omitempty" name:"AutoCopyVaults"`
+
+	// <p>Day</p><p>Unit: Cross-regional logical backup retention time</p>
+	LogicCrossRegionSaveDays *int64 `json:"LogicCrossRegionSaveDays,omitnil,omitempty" name:"LogicCrossRegionSaveDays"`
 }
 
 type ManualBackupData struct {
@@ -15808,21 +15940,27 @@ func (r *ModifyBinlogConfigResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyBinlogSaveDaysRequestParams struct {
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Binlog retention period in days
+	// <p>Binlog retention days</p>
 	BinlogSaveDays *int64 `json:"BinlogSaveDays,omitnil,omitempty" name:"BinlogSaveDays"`
+
+	// <p>Cross-region backup retention period</p><p>Unit: Day</p>
+	BinlogCrossRegionSaveDays *int64 `json:"BinlogCrossRegionSaveDays,omitnil,omitempty" name:"BinlogCrossRegionSaveDays"`
 }
 
 type ModifyBinlogSaveDaysRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Binlog retention period in days
+	// <p>Binlog retention days</p>
 	BinlogSaveDays *int64 `json:"BinlogSaveDays,omitnil,omitempty" name:"BinlogSaveDays"`
+
+	// <p>Cross-region backup retention period</p><p>Unit: Day</p>
+	BinlogCrossRegionSaveDays *int64 `json:"BinlogCrossRegionSaveDays,omitnil,omitempty" name:"BinlogCrossRegionSaveDays"`
 }
 
 func (r *ModifyBinlogSaveDaysRequest) ToJsonString() string {
@@ -15839,6 +15977,7 @@ func (r *ModifyBinlogSaveDaysRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ClusterId")
 	delete(f, "BinlogSaveDays")
+	delete(f, "BinlogCrossRegionSaveDays")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBinlogSaveDaysRequest has unknown keys!", "")
 	}
@@ -18172,27 +18311,33 @@ func (r *ModifyServerlessStrategyResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifySnapBackupCrossRegionConfigRequestParams struct {
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Whether cross-region snapshot backup is enabled.
+	// <p>Whether cross-region snapshot backup is enabled ON/OFF</p>
 	CrossRegionsEnable *string `json:"CrossRegionsEnable,omitnil,omitempty" name:"CrossRegionsEnable"`
 
-	// Cross-Regional snapshot backup.
+	// <p>Cross-regional snapshot backup</p>
 	CrossRegions []*string `json:"CrossRegions,omitnil,omitempty" name:"CrossRegions"`
+
+	// <p>Cross-region backup retention period</p><p>Unit: day</p>
+	CrossRegionSaveDays *int64 `json:"CrossRegionSaveDays,omitnil,omitempty" name:"CrossRegionSaveDays"`
 }
 
 type ModifySnapBackupCrossRegionConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Whether cross-region snapshot backup is enabled.
+	// <p>Whether cross-region snapshot backup is enabled ON/OFF</p>
 	CrossRegionsEnable *string `json:"CrossRegionsEnable,omitnil,omitempty" name:"CrossRegionsEnable"`
 
-	// Cross-Regional snapshot backup.
+	// <p>Cross-regional snapshot backup</p>
 	CrossRegions []*string `json:"CrossRegions,omitnil,omitempty" name:"CrossRegions"`
+
+	// <p>Cross-region backup retention period</p><p>Unit: day</p>
+	CrossRegionSaveDays *int64 `json:"CrossRegionSaveDays,omitnil,omitempty" name:"CrossRegionSaveDays"`
 }
 
 func (r *ModifySnapBackupCrossRegionConfigRequest) ToJsonString() string {
@@ -18210,6 +18355,7 @@ func (r *ModifySnapBackupCrossRegionConfigRequest) FromJsonString(s string) erro
 	delete(f, "ClusterId")
 	delete(f, "CrossRegionsEnable")
 	delete(f, "CrossRegions")
+	delete(f, "CrossRegionSaveDays")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySnapBackupCrossRegionConfigRequest has unknown keys!", "")
 	}
@@ -18218,7 +18364,7 @@ func (r *ModifySnapBackupCrossRegionConfigRequest) FromJsonString(s string) erro
 
 // Predefined struct for user
 type ModifySnapBackupCrossRegionConfigResponseParams struct {
-	// Task ID.
+	// <p>Task ID.</p>
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -19813,32 +19959,38 @@ type ProxyEndPointConfigInfo struct {
 }
 
 type ProxyGroup struct {
-	// Database proxy group ID
+	// <p>Database Proxy Group ID.</p>
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// Number of nodes in the proxy group
+	// <p>Number of database proxy group nodes</p>
 	ProxyNodeCount *int64 `json:"ProxyNodeCount,omitnil,omitempty" name:"ProxyNodeCount"`
 
-	// Database proxy group status
+	// <p>Database Proxy Group status</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Region
+	// <p>Region.</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// AZ
+	// <p>AZ.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Current proxy version
+	// <p>Current proxy version</p>
 	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitnil,omitempty" name:"CurrentProxyVersion"`
 
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// User AppId
+	// <p>User AppId</p>
 	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
-	// Specifies that a read-write node activates the database proxy.
+	// <p>Activate database proxy for RWNode</p>
 	OpenRw *string `json:"OpenRw,omitnil,omitempty" name:"OpenRw"`
+
+	// <p>Creation time.</p>
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Update time.</p>
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 type ProxyGroupInfo struct {
@@ -19913,38 +20065,44 @@ type ProxyInstanceWeight struct {
 }
 
 type ProxyNodeInfo struct {
-	// Database proxy node ID.
+	// <p>Database Proxy Node ID</p>
 	ProxyNodeId *string `json:"ProxyNodeId,omitnil,omitempty" name:"ProxyNodeId"`
 
-	// Current node connections, which is not returned by the `DescribeProxyNodes` API.
+	// <p>Current connection number of nodes. This field value does not return in the DescribeProxyNodes API.</p>
 	ProxyNodeConnections *int64 `json:"ProxyNodeConnections,omitnil,omitempty" name:"ProxyNodeConnections"`
 
-	// CPU of the database proxy node.
+	// <p>Database proxy node cpu</p>
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-	// Memory of the database proxy node.
+	// <p>Database proxy node memory</p>
 	Mem *int64 `json:"Mem,omitnil,omitempty" name:"Mem"`
 
-	// Status of the database proxy node.
+	// <p>Database Proxy Node Status</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Database proxy group ID.
+	// <p>Database Proxy Group ID</p>
 	ProxyGroupId *string `json:"ProxyGroupId,omitnil,omitempty" name:"ProxyGroupId"`
 
-	// Cluster ID.
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// User AppID.
+	// <p>User AppID</p>
 	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
-	// Region.
+	// <p>Region.</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// AZ.
+	// <p>AZ.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Database proxy node name.
+	// <p>Database Proxy Node Name</p>
 	OssProxyNodeName *string `json:"OssProxyNodeName,omitnil,omitempty" name:"OssProxyNodeName"`
+
+	// <p>Creation time.</p>
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Update time.</p>
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 type ProxySpec struct {
@@ -22657,6 +22815,57 @@ type TradePrice struct {
 }
 
 // Predefined struct for user
+type TransferClusterPrepayToPostpayRequestParams struct {
+
+}
+
+type TransferClusterPrepayToPostpayRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *TransferClusterPrepayToPostpayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TransferClusterPrepayToPostpayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TransferClusterPrepayToPostpayRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type TransferClusterPrepayToPostpayResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type TransferClusterPrepayToPostpayResponse struct {
+	*tchttp.BaseResponse
+	Response *TransferClusterPrepayToPostpayResponseParams `json:"Response"`
+}
+
+func (r *TransferClusterPrepayToPostpayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TransferClusterPrepayToPostpayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type TransferClusterZoneRequestParams struct {
 	// Source Cluster Id
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
@@ -22745,6 +22954,57 @@ func (r *TransferClusterZoneResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *TransferClusterZoneResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type TransferStoragePrepayToPostpayRequestParams struct {
+
+}
+
+type TransferStoragePrepayToPostpayRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *TransferStoragePrepayToPostpayRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TransferStoragePrepayToPostpayRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TransferStoragePrepayToPostpayRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type TransferStoragePrepayToPostpayResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type TransferStoragePrepayToPostpayResponse struct {
+	*tchttp.BaseResponse
+	Response *TransferStoragePrepayToPostpayResponseParams `json:"Response"`
+}
+
+func (r *TransferStoragePrepayToPostpayResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *TransferStoragePrepayToPostpayResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

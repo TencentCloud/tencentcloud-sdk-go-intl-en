@@ -850,12 +850,17 @@ func NewCreateLifecyclePolicyResponse() (response *CreateLifecyclePolicyResponse
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_COSMULTIVERSIONDISABLED = "FailedOperation.CosMultiVersionDisabled"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISCREATEREALTIMESYNC = "InvalidParameterValue.InvalidParamIsCreateRealTimeSync"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISMODIFYREALTIMESYNC = "InvalidParameterValue.InvalidParamIsModifyRealTimeSync"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISSYNCDELETE = "InvalidParameterValue.InvalidParamIsSyncDelete"
 //  RESOURCEINSUFFICIENT_POLICYLIMITEXCEEDED = "ResourceInsufficient.PolicyLimitExceeded"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_FIELDONLYFOREXTERNALSTORAGE = "UnsupportedOperation.FieldOnlyForExternalStorage"
 func (c *Client) CreateLifecyclePolicy(request *CreateLifecyclePolicyRequest) (response *CreateLifecyclePolicyResponse, err error) {
     return c.CreateLifecyclePolicyWithContext(context.Background(), request)
 }
@@ -866,12 +871,17 @@ func (c *Client) CreateLifecyclePolicy(request *CreateLifecyclePolicyRequest) (r
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_COSMULTIVERSIONDISABLED = "FailedOperation.CosMultiVersionDisabled"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISCREATEREALTIMESYNC = "InvalidParameterValue.InvalidParamIsCreateRealTimeSync"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISMODIFYREALTIMESYNC = "InvalidParameterValue.InvalidParamIsModifyRealTimeSync"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISSYNCDELETE = "InvalidParameterValue.InvalidParamIsSyncDelete"
 //  RESOURCEINSUFFICIENT_POLICYLIMITEXCEEDED = "ResourceInsufficient.PolicyLimitExceeded"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_FIELDONLYFOREXTERNALSTORAGE = "UnsupportedOperation.FieldOnlyForExternalStorage"
 func (c *Client) CreateLifecyclePolicyWithContext(ctx context.Context, request *CreateLifecyclePolicyRequest) (response *CreateLifecyclePolicyResponse, err error) {
     if request == nil {
         request = NewCreateLifecyclePolicyRequest()
@@ -914,12 +924,17 @@ func NewCreateLifecyclePolicyDownloadTaskResponse() (response *CreateLifecyclePo
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_COSMULTIVERSIONDISABLED = "FailedOperation.CosMultiVersionDisabled"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISCREATEREALTIMESYNC = "InvalidParameterValue.InvalidParamIsCreateRealTimeSync"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISMODIFYREALTIMESYNC = "InvalidParameterValue.InvalidParamIsModifyRealTimeSync"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISSYNCDELETE = "InvalidParameterValue.InvalidParamIsSyncDelete"
 //  RESOURCEINSUFFICIENT_POLICYLIMITEXCEEDED = "ResourceInsufficient.PolicyLimitExceeded"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_FIELDONLYFOREXTERNALSTORAGE = "UnsupportedOperation.FieldOnlyForExternalStorage"
 func (c *Client) CreateLifecyclePolicyDownloadTask(request *CreateLifecyclePolicyDownloadTaskRequest) (response *CreateLifecyclePolicyDownloadTaskResponse, err error) {
     return c.CreateLifecyclePolicyDownloadTaskWithContext(context.Background(), request)
 }
@@ -930,12 +945,17 @@ func (c *Client) CreateLifecyclePolicyDownloadTask(request *CreateLifecyclePolic
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_COSMULTIVERSIONDISABLED = "FailedOperation.CosMultiVersionDisabled"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_TIMEOUT = "InternalError.Timeout"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISCREATEREALTIMESYNC = "InvalidParameterValue.InvalidParamIsCreateRealTimeSync"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISMODIFYREALTIMESYNC = "InvalidParameterValue.InvalidParamIsModifyRealTimeSync"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISSYNCDELETE = "InvalidParameterValue.InvalidParamIsSyncDelete"
 //  RESOURCEINSUFFICIENT_POLICYLIMITEXCEEDED = "ResourceInsufficient.PolicyLimitExceeded"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_FIELDONLYFOREXTERNALSTORAGE = "UnsupportedOperation.FieldOnlyForExternalStorage"
 func (c *Client) CreateLifecyclePolicyDownloadTaskWithContext(ctx context.Context, request *CreateLifecyclePolicyDownloadTaskRequest) (response *CreateLifecyclePolicyDownloadTaskResponse, err error) {
     if request == nil {
         request = NewCreateLifecyclePolicyDownloadTaskRequest()
@@ -2700,10 +2720,15 @@ func NewModifyLifecyclePolicyResponse() (response *ModifyLifecyclePolicyResponse
 // Update a file storage lifecycle policy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COSMULTIVERSIONDISABLED = "FailedOperation.CosMultiVersionDisabled"
 //  INVALIDPARAMETERVALUE_CFSPATH = "InvalidParameterValue.CfsPath"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISCREATEREALTIMESYNC = "InvalidParameterValue.InvalidParamIsCreateRealTimeSync"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISMODIFYREALTIMESYNC = "InvalidParameterValue.InvalidParamIsModifyRealTimeSync"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISSYNCDELETE = "InvalidParameterValue.InvalidParamIsSyncDelete"
 //  INVALIDPARAMETERVALUE_POLICYRULESTORAGETYPEINVALID = "InvalidParameterValue.PolicyRuleStorageTypeInvalid"
 //  INVALIDPARAMETERVALUE_STORAGETYPEINVALID = "InvalidParameterValue.StorageTypeInvalid"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_FIELDONLYFOREXTERNALSTORAGE = "UnsupportedOperation.FieldOnlyForExternalStorage"
 func (c *Client) ModifyLifecyclePolicy(request *ModifyLifecyclePolicyRequest) (response *ModifyLifecyclePolicyResponse, err error) {
     return c.ModifyLifecyclePolicyWithContext(context.Background(), request)
 }
@@ -2712,10 +2737,15 @@ func (c *Client) ModifyLifecyclePolicy(request *ModifyLifecyclePolicyRequest) (r
 // Update a file storage lifecycle policy.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COSMULTIVERSIONDISABLED = "FailedOperation.CosMultiVersionDisabled"
 //  INVALIDPARAMETERVALUE_CFSPATH = "InvalidParameterValue.CfsPath"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISCREATEREALTIMESYNC = "InvalidParameterValue.InvalidParamIsCreateRealTimeSync"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISMODIFYREALTIMESYNC = "InvalidParameterValue.InvalidParamIsModifyRealTimeSync"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMISSYNCDELETE = "InvalidParameterValue.InvalidParamIsSyncDelete"
 //  INVALIDPARAMETERVALUE_POLICYRULESTORAGETYPEINVALID = "InvalidParameterValue.PolicyRuleStorageTypeInvalid"
 //  INVALIDPARAMETERVALUE_STORAGETYPEINVALID = "InvalidParameterValue.StorageTypeInvalid"
 //  MISSINGPARAMETER = "MissingParameter"
+//  UNSUPPORTEDOPERATION_FIELDONLYFOREXTERNALSTORAGE = "UnsupportedOperation.FieldOnlyForExternalStorage"
 func (c *Client) ModifyLifecyclePolicyWithContext(ctx context.Context, request *ModifyLifecyclePolicyRequest) (response *ModifyLifecyclePolicyResponse, err error) {
     if request == nil {
         request = NewModifyLifecyclePolicyRequest()

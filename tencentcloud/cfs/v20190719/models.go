@@ -2154,7 +2154,8 @@ func (r *DescribeBucketListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCfsFileSystemClientsRequestParams struct {
-	// File system ID. obtain it by querying the file system interface (https://www.tencentcloud.com/document/api/582/38170?from_cn_redirect=1).
+	// File system ID. obtain it by querying the file system interface [DescribeCfsFileSystems
+	// ](https://www.tencentcloud.com/zh/document/product/582/34514)
 	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// Offset paging number, defaults to 0.
@@ -2167,7 +2168,8 @@ type DescribeCfsFileSystemClientsRequestParams struct {
 type DescribeCfsFileSystemClientsRequest struct {
 	*tchttp.BaseRequest
 	
-	// File system ID. obtain it by querying the file system interface (https://www.tencentcloud.com/document/api/582/38170?from_cn_redirect=1).
+	// File system ID. obtain it by querying the file system interface [DescribeCfsFileSystems
+	// ](https://www.tencentcloud.com/zh/document/product/582/34514)
 	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// Offset paging number, defaults to 0.
@@ -3281,7 +3283,8 @@ type FileSystemClient struct {
 	// File system VPCID
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Availability zone name, such as ap-beijing-1. see the region and availability zone list in the description document (https://www.tencentcloud.com/document/api/582/38144?from_cn_redirect=1).
+	// Availability zone name, such as ap-beijing-1. see the region and availability zone list in the description [Introduction
+	// ](https://www.tencentcloud.com/zh/document/product/582/50830)
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// AZ name
@@ -4489,7 +4492,8 @@ func (r *UpdateAutoSnapshotPolicyResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdateCfsFileSystemNameRequestParams struct {
-	// File system ID. obtain it by querying the file system interface (https://www.tencentcloud.com/document/api/582/38170?from_cn_redirect=1).
+	// File system ID. obtain it by querying the file system interface [DescribeCfsFileSystems
+	// ](https://www.tencentcloud.com/zh/document/product/582/34514)
 	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// User-Defined file system name, alphanumeric chinese characters or _,- within 64 bytes. at least one of them or CreationToken must be provided.
@@ -4499,7 +4503,8 @@ type UpdateCfsFileSystemNameRequestParams struct {
 type UpdateCfsFileSystemNameRequest struct {
 	*tchttp.BaseRequest
 	
-	// File system ID. obtain it by querying the file system interface (https://www.tencentcloud.com/document/api/582/38170?from_cn_redirect=1).
+	// File system ID. obtain it by querying the file system interface [DescribeCfsFileSystems
+	// ](https://www.tencentcloud.com/zh/document/product/582/34514)
 	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// User-Defined file system name, alphanumeric chinese characters or _,- within 64 bytes. at least one of them or CreationToken must be provided.
@@ -4562,7 +4567,8 @@ type UpdateCfsFileSystemPGroupRequestParams struct {
 	// Permission group ID, which can be obtained through the api [DescribeCfsPGroups](https://www.tencentcloud.com/document/api/582/38157?from_cn_redirect=1).
 	PGroupId *string `json:"PGroupId,omitnil,omitempty" name:"PGroupId"`
 
-	// File system ID. obtain it by querying the file system interface (https://www.tencentcloud.com/document/api/582/38170?from_cn_redirect=1).
+	// File system ID. obtain it by querying the file system interface [DescribeCfsFileSystems
+	// ](https://www.tencentcloud.com/zh/document/product/582/34514)
 	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 }
 
@@ -4572,7 +4578,8 @@ type UpdateCfsFileSystemPGroupRequest struct {
 	// Permission group ID, which can be obtained through the api [DescribeCfsPGroups](https://www.tencentcloud.com/document/api/582/38157?from_cn_redirect=1).
 	PGroupId *string `json:"PGroupId,omitnil,omitempty" name:"PGroupId"`
 
-	// File system ID. obtain it by querying the file system interface (https://www.tencentcloud.com/document/api/582/38170?from_cn_redirect=1).
+	// File system ID. obtain it by querying the file system interface [DescribeCfsFileSystems
+	// ](https://www.tencentcloud.com/zh/document/product/582/34514)
 	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 }
 
