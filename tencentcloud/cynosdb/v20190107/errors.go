@@ -35,7 +35,7 @@ const (
 	// Authentication failed. Please try again later. If the problem persists, please contact customer service.
 	FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 
-	// 
+	// Create audit failure
 	FAILEDOPERATION_CREATEAUDITFAILERROR = "FailedOperation.CreateAuditFailError"
 
 	// Failed to create the order and make a payment.
@@ -428,6 +428,6 @@ const (
 	// CAM authentication failed.
 	UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 
-	// 
+	// Authorization failure or authorization canceled
 	UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
 )

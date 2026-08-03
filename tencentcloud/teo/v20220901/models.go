@@ -13082,62 +13082,50 @@ func (r *DescribeTimingL4DataResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTimingL7AnalysisDataRequestParams struct {
-	// The start time.
+	// <p>Start time.</p>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
+	// <p>End time. The query time range (<code>EndTime</code> - <code>StartTime</code>) must be less than or equal to 31 days.</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Metric list. Valid values:
-	// <Li>l7Flow_outFlux: L7 EdgeOne response traffic. Unit: byte;</li><Li>l7Flow_inFlux: L7 client request traffic. Unit: byte;</li><Li>l7Flow_flux: L7 total traffic (including EdgeOne response traffic and client request traffic). Unit: byte;</li><Li>l7Flow_outBandwidth: L7 EdgeOne response bandwidth. Unit: bps;</li><Li>l7Flow_inBandwidth: L7 client request bandwidth. Unit: bps;</li><Li>l7Flow_bandwidth: L7 total bandwidth (including EdgeOne response bandwidth and client request bandwidth). Unit: bps;</li><Li>l7Flow_request: L7 request count. Unit: times;</li><Li>l7Flow_avgResponseTime: Average L7 edge response time. Unit: ms (milliseconds);</li><Li>l7Flow_avgFirstByteResponseTime: Average L7 edge first byte response time. Unit: ms.</li>
+	// <p>Metric list. Valid values:</p><li>l7Flow_outFlux: L7 EdgeOne response traffic. Measurement unit: Byte;</li><li>l7Flow_inFlux: L7 client request traffic. Measurement unit: Byte;</li><li>l7Flow_flux: L7 total access traffic (EdgeOne response + client request). Measurement unit: Byte;</li><li>l7Flow_outBandwidth: L7 EdgeOne response bandwidth. Measurement unit: bps;</li><li>l7Flow_inBandwidth: L7 client request bandwidth. Measurement unit: bps;</li><li>l7Flow_bandwidth: L7 total access bandwidth (EdgeOne response + client request). Measurement unit: bps;</li><li>l7Flow_request: L7 client request count. Measurement unit: count;</li><li>l7Flow_avgResponseTime: L7 average response time. Measurement unit: ms;</li><li>l7Flow_avgFirstByteResponseTime: L7 average first byte response time. Measurement unit: ms;</li><li>l7Flow_requestRate: L7 client request rate. Measurement unit: qps.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Site ID set. this parameter will change from option to required after may 30, 2024. for details, see the notice: [tencent cloud EdgeOne API change notification](https://www.tencentcloud.com/document/product/1145/59980). a maximum of 100 site ids can be imported. use `*` to query all site data under the tencent cloud root account. querying account-level data requires all resource permissions for all sites in this interface.
+	// <p>Site ID set. This parameter will change from optional to required after May 30, 2024. For details, see the notice: <a href="https://www.tencentcloud.com/document/product/1552/104902?from_cn_redirect=1">[Tencent Cloud EdgeOne] Cloud API Change Notification</a>. A maximum of 100 site IDs can be imported. To query all site data under the Tencent Cloud root account, use <code>*</code> as a replacement. Querying account-level data requires permission to all site resources of this interface.</p>
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// Query period granularity. Valid values:
-	// <li>min: 1 minute;</li>
-	// <li>5min: 5 minutes;</li>
-	// <li>hour: 1 hour;</li>
-	// <li>day: 1 day.</li>If this parameter is not filled in, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 2 hours, no more than 2 days, no more than 7 days, and over 7 days.
+	// <p>Query time granularity.</p><p>Enumeration values:</p><ul><li>min: 1 minute</li><li>5min: 5 minutes</li><li>hour: 1 hour</li><li>day: 1 day</li></ul><p>If this parameter is not input, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 2 hours, no more than 2 days, no more than 7 days, and over 7 days.</p>
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Filter criteria used when filtering data. valid values refer to the available filter options for L7 access traffic, bandwidth, and request count in the [metric analysis filtering condition description](https://www.tencentcloud.com/document/product/1145/56985#1aaf1150-55a4-4b4d-b103-3a8317ac7945).
-	// If needed, limit the site or content identifier by importing the corresponding value in the `ZoneIds.N` parameter.
+	// <p>Filter conditions used when filtering data. For available filter options, refer to the <a href="https://www.tencentcloud.com/document/product/1552/98219?from_cn_redirect=1#1aaf1150-55a4-4b4d-b103-3a8317ac7945">Analytics Filter Options</a> for L7 client traffic, bandwidth, and request counts.<br>To limit the query to specific sites or content identifiers, pass the corresponding values in the <code>ZoneIds.N</code> parameter separately.</p>
 	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Data ownership region. this parameter is deprecated. please filter data by client region in `Filters.country`.
+	// <p>The region to which the data belongs. This parameter is deprecated. To filter data by client region, use <code>Filters.country</code> instead.</p>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
 type DescribeTimingL7AnalysisDataRequest struct {
 	*tchttp.BaseRequest
 	
-	// The start time.
+	// <p>Start time.</p>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
+	// <p>End time. The query time range (<code>EndTime</code> - <code>StartTime</code>) must be less than or equal to 31 days.</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Metric list. Valid values:
-	// <Li>l7Flow_outFlux: L7 EdgeOne response traffic. Unit: byte;</li><Li>l7Flow_inFlux: L7 client request traffic. Unit: byte;</li><Li>l7Flow_flux: L7 total traffic (including EdgeOne response traffic and client request traffic). Unit: byte;</li><Li>l7Flow_outBandwidth: L7 EdgeOne response bandwidth. Unit: bps;</li><Li>l7Flow_inBandwidth: L7 client request bandwidth. Unit: bps;</li><Li>l7Flow_bandwidth: L7 total bandwidth (including EdgeOne response bandwidth and client request bandwidth). Unit: bps;</li><Li>l7Flow_request: L7 request count. Unit: times;</li><Li>l7Flow_avgResponseTime: Average L7 edge response time. Unit: ms (milliseconds);</li><Li>l7Flow_avgFirstByteResponseTime: Average L7 edge first byte response time. Unit: ms.</li>
+	// <p>Metric list. Valid values:</p><li>l7Flow_outFlux: L7 EdgeOne response traffic. Measurement unit: Byte;</li><li>l7Flow_inFlux: L7 client request traffic. Measurement unit: Byte;</li><li>l7Flow_flux: L7 total access traffic (EdgeOne response + client request). Measurement unit: Byte;</li><li>l7Flow_outBandwidth: L7 EdgeOne response bandwidth. Measurement unit: bps;</li><li>l7Flow_inBandwidth: L7 client request bandwidth. Measurement unit: bps;</li><li>l7Flow_bandwidth: L7 total access bandwidth (EdgeOne response + client request). Measurement unit: bps;</li><li>l7Flow_request: L7 client request count. Measurement unit: count;</li><li>l7Flow_avgResponseTime: L7 average response time. Measurement unit: ms;</li><li>l7Flow_avgFirstByteResponseTime: L7 average first byte response time. Measurement unit: ms;</li><li>l7Flow_requestRate: L7 client request rate. Measurement unit: qps.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Site ID set. this parameter will change from option to required after may 30, 2024. for details, see the notice: [tencent cloud EdgeOne API change notification](https://www.tencentcloud.com/document/product/1145/59980). a maximum of 100 site ids can be imported. use `*` to query all site data under the tencent cloud root account. querying account-level data requires all resource permissions for all sites in this interface.
+	// <p>Site ID set. This parameter will change from optional to required after May 30, 2024. For details, see the notice: <a href="https://www.tencentcloud.com/document/product/1552/104902?from_cn_redirect=1">[Tencent Cloud EdgeOne] Cloud API Change Notification</a>. A maximum of 100 site IDs can be imported. To query all site data under the Tencent Cloud root account, use <code>*</code> as a replacement. Querying account-level data requires permission to all site resources of this interface.</p>
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// Query period granularity. Valid values:
-	// <li>min: 1 minute;</li>
-	// <li>5min: 5 minutes;</li>
-	// <li>hour: 1 hour;</li>
-	// <li>day: 1 day.</li>If this parameter is not filled in, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 2 hours, no more than 2 days, no more than 7 days, and over 7 days.
+	// <p>Query time granularity.</p><p>Enumeration values:</p><ul><li>min: 1 minute</li><li>5min: 5 minutes</li><li>hour: 1 hour</li><li>day: 1 day</li></ul><p>If this parameter is not input, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 2 hours, no more than 2 days, no more than 7 days, and over 7 days.</p>
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Filter criteria used when filtering data. valid values refer to the available filter options for L7 access traffic, bandwidth, and request count in the [metric analysis filtering condition description](https://www.tencentcloud.com/document/product/1145/56985#1aaf1150-55a4-4b4d-b103-3a8317ac7945).
-	// If needed, limit the site or content identifier by importing the corresponding value in the `ZoneIds.N` parameter.
+	// <p>Filter conditions used when filtering data. For available filter options, refer to the <a href="https://www.tencentcloud.com/document/product/1552/98219?from_cn_redirect=1#1aaf1150-55a4-4b4d-b103-3a8317ac7945">Analytics Filter Options</a> for L7 client traffic, bandwidth, and request counts.<br>To limit the query to specific sites or content identifiers, pass the corresponding values in the <code>ZoneIds.N</code> parameter separately.</p>
 	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Data ownership region. this parameter is deprecated. please filter data by client region in `Filters.country`.
+	// <p>The region to which the data belongs. This parameter is deprecated. To filter data by client region, use <code>Filters.country</code> instead.</p>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
@@ -13168,11 +13156,11 @@ func (r *DescribeTimingL7AnalysisDataRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTimingL7AnalysisDataResponseParams struct {
-	// Total number of query results.
+	// <p>The total number of records in the query result.</p>
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// The list of L7 traffic data recorded over time.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Layer-7 time series traffic data list.<br>For different queried metrics, time series data will be returned from different parameters according to the value type.<br>Currently existing value types include the following two:</p><ul>  <li><strong>Integer</strong>: Metrics with <code>Integer</code> value type will return corresponding time series data from <code>Data.N.TypeValue</code>.<br>Queried metrics <code>MetricName</code> include:    <ul>      <li><code>l7Flow_outFlux</code>: L7 EdgeOne response traffic, unit: Byte;</li>      <li><code>l7Flow_inFlux</code>: L7 client request traffic, unit: Byte;</li>      <li><code>l7Flow_flux</code>: L7 total access traffic (EdgeOne response + client requests), unit: Byte;</li>      <li><code>l7Flow_outBandwidth</code>: L7 EdgeOne response bandwidth, unit: bps;</li>      <li><code>l7Flow_inBandwidth</code>: L7 client request bandwidth, unit: bps;</li>      <li><code>l7Flow_bandwidth</code>: L7 total access bandwidth (EdgeOne response + client requests), unit: bps;</li>      <li><code>l7Flow_request</code>: L7 access request count, unit: count;</li>      <li><code>l7Flow_avgResponseTime</code>: L7 average response time, unit: ms;</li>      <li><code>l7Flow_avgFirstByteResponseTime</code>: L7 average first byte response time, unit: ms.</li>    </ul>  </li>  <li><strong>Float</strong>: Metrics with <code>Float</code> value type will return corresponding time series data from <code>Data.N.FloatTypeValue</code>.<br>Queried metrics <code>MetricName</code> include:    <ul>      <li><code>l7Flow_requestRate</code>: L7 access request rate, unit: qps.</li>    </ul>  </li></ul>
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
 	Data []*TimingDataRecord `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.

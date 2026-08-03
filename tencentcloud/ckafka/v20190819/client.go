@@ -1699,82 +1699,6 @@ func (c *Client) DeleteTopicWithContext(ctx context.Context, request *DeleteTopi
     return
 }
 
-func NewDeleteTopicIpWhiteListRequest() (request *DeleteTopicIpWhiteListRequest) {
-    request = &DeleteTopicIpWhiteListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("ckafka", APIVersion, "DeleteTopicIpWhiteList")
-    
-    
-    return
-}
-
-func NewDeleteTopicIpWhiteListResponse() (response *DeleteTopicIpWhiteListResponse) {
-    response = &DeleteTopicIpWhiteListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DeleteTopicIpWhiteList
-// This API is used to delete a topic IP allowlist.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
-//  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
-//  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
-//  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
-//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
-//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
-//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
-func (c *Client) DeleteTopicIpWhiteList(request *DeleteTopicIpWhiteListRequest) (response *DeleteTopicIpWhiteListResponse, err error) {
-    return c.DeleteTopicIpWhiteListWithContext(context.Background(), request)
-}
-
-// DeleteTopicIpWhiteList
-// This API is used to delete a topic IP allowlist.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  INVALIDPARAMETERVALUE_REPETITIONVALUE = "InvalidParameterValue.RepetitionValue"
-//  INVALIDPARAMETERVALUE_SUBNETIDINVALID = "InvalidParameterValue.SubnetIdInvalid"
-//  INVALIDPARAMETERVALUE_SUBNETNOTBELONGTOZONE = "InvalidParameterValue.SubnetNotBelongToZone"
-//  INVALIDPARAMETERVALUE_VPCIDINVALID = "InvalidParameterValue.VpcIdInvalid"
-//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
-//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNSUPPORTEDOPERATION_BATCHDELINSTANCELIMIT = "UnsupportedOperation.BatchDelInstanceLimit"
-//  UNSUPPORTEDOPERATION_OSSREJECT = "UnsupportedOperation.OssReject"
-func (c *Client) DeleteTopicIpWhiteListWithContext(ctx context.Context, request *DeleteTopicIpWhiteListRequest) (response *DeleteTopicIpWhiteListResponse, err error) {
-    if request == nil {
-        request = NewDeleteTopicIpWhiteListRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "DeleteTopicIpWhiteList")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteTopicIpWhiteList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteTopicIpWhiteListResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDeleteUserRequest() (request *DeleteUserRequest) {
     request = &DeleteUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1923,6 +1847,90 @@ func (c *Client) DescribeACLWithContext(ctx context.Context, request *DescribeAC
     request.SetContext(ctx)
     
     response = NewDescribeACLResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAccessPolicyRequest() (request *DescribeAccessPolicyRequest) {
+    request = &DescribeAccessPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "DescribeAccessPolicy")
+    
+    
+    return
+}
+
+func NewDescribeAccessPolicyResponse() (response *DescribeAccessPolicyResponse) {
+    response = &DescribeAccessPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAccessPolicy
+// This API is used to query the public IP allowlist of an instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_NOTALLOWEDEMPTY = "InvalidParameterValue.NotAllowedEmpty"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REGIONERROR = "RegionError"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAccessPolicy(request *DescribeAccessPolicyRequest) (response *DescribeAccessPolicyResponse, err error) {
+    return c.DescribeAccessPolicyWithContext(context.Background(), request)
+}
+
+// DescribeAccessPolicy
+// This API is used to query the public IP allowlist of an instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_NOTALLOWEDEMPTY = "InvalidParameterValue.NotAllowedEmpty"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORT = "InvalidParameterValue.ZoneNotSupport"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REGIONERROR = "RegionError"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAccessPolicyWithContext(ctx context.Context, request *DescribeAccessPolicyRequest) (response *DescribeAccessPolicyResponse, err error) {
+    if request == nil {
+        request = NewDescribeAccessPolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "DescribeAccessPolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAccessPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAccessPolicyResponse()
     err = c.Send(request, response)
     return
 }
@@ -4131,6 +4139,140 @@ func (c *Client) InstanceScalingDownWithContext(ctx context.Context, request *In
     request.SetContext(ctx)
     
     response = NewInstanceScalingDownResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewIsolatedInstancePreRequest() (request *IsolatedInstancePreRequest) {
+    request = &IsolatedInstancePreRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "IsolatedInstancePre")
+    
+    
+    return
+}
+
+func NewIsolatedInstancePreResponse() (response *IsolatedInstancePreResponse) {
+    response = &IsolatedInstancePreResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// IsolatedInstancePre
+// Isolate a prepaid instance. This API is used to perform isolation on the instance. After successful execution, the instance is isolated.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) IsolatedInstancePre(request *IsolatedInstancePreRequest) (response *IsolatedInstancePreResponse, err error) {
+    return c.IsolatedInstancePreWithContext(context.Background(), request)
+}
+
+// IsolatedInstancePre
+// Isolate a prepaid instance. This API is used to perform isolation on the instance. After successful execution, the instance is isolated.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) IsolatedInstancePreWithContext(ctx context.Context, request *IsolatedInstancePreRequest) (response *IsolatedInstancePreResponse, err error) {
+    if request == nil {
+        request = NewIsolatedInstancePreRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "IsolatedInstancePre")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("IsolatedInstancePre require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewIsolatedInstancePreResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyAccessPolicyRequest() (request *ModifyAccessPolicyRequest) {
+    request = &ModifyAccessPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ckafka", APIVersion, "ModifyAccessPolicy")
+    
+    
+    return
+}
+
+func NewModifyAccessPolicyResponse() (response *ModifyAccessPolicyResponse) {
+    response = &ModifyAccessPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyAccessPolicy
+// This API is used to modify the public IP allowlist of an instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_NOTALLOWEDEMPTY = "InvalidParameterValue.NotAllowedEmpty"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REGIONERROR = "RegionError"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyAccessPolicy(request *ModifyAccessPolicyRequest) (response *ModifyAccessPolicyResponse, err error) {
+    return c.ModifyAccessPolicyWithContext(context.Background(), request)
+}
+
+// ModifyAccessPolicy
+// This API is used to modify the public IP allowlist of an instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_NOTALLOWEDEMPTY = "InvalidParameterValue.NotAllowedEmpty"
+//  INVALIDPARAMETERVALUE_WRONGACTION = "InvalidParameterValue.WrongAction"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REGIONERROR = "RegionError"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyAccessPolicyWithContext(ctx context.Context, request *ModifyAccessPolicyRequest) (response *ModifyAccessPolicyResponse, err error) {
+    if request == nil {
+        request = NewModifyAccessPolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ckafka", APIVersion, "ModifyAccessPolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAccessPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyAccessPolicyResponse()
     err = c.Send(request, response)
     return
 }

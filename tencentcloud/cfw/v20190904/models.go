@@ -300,6 +300,77 @@ func (r *AddAcRuleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type AddAclRuleRequestParams struct {
+	// The list of Internet boundary rules to be added cannot be empty. Each rule must meet the requirements for direction, source and target, action, scope, protocol port, and template restrictions. The entire request must also comply with rule quota and effective rule count limitations. Account-related values must come from read-only queries: for address templates, call DescribeAddressTemplateList, filter the request with TemplateType=1 or 5, and confirm that the returned Data[].Type is 1 or 5. Write Data[].Uuid (with the mb_ prefix) to the corresponding Content, and do not use Data[].TemplateId (with the ip-/dm- prefix). For protocol port templates, filter the request with TemplateType=6, and write Data[].TemplateId (with the pp- prefix) to ParamTemplateId. For asset instances, call DescribeCfwAssets, parse the returned results, and use assets[].instance_id. For asset groups, call DescribeResourceGroupNew, pass QueryType=resource, GroupId="0", ShowType=all, parse the returned results, and use GroupId. For resource tags, pass QueryType=tag, skip the "all assets" root node, and construct JSON using the first-level node GroupName as the Key and the selected second-level sub-node GroupName as the Value, without writing GroupId. For regions, call DescribeAclRegInfo: for Scope=serial, pass FwType=["SERIAL"]; for Scope=side, pass FwType=["BYPASS"]; for Scope=all, pass both items simultaneously, and use Data[].RegionCode. Do not use display names or manually concatenate values. The range for overwrite import is determined solely by the Direction of the first rule.
+	Rules []*CreateRuleItem `json:"Rules,omitnil,omitempty" name:"Rules"`
+
+	// <p>AI operation source</p><p>Enumeration value:</p><ul><li>console: console source value</li><li>wechat: WeChat</li></ul>
+	CfwAiAgentOperationSource *string `json:"CfwAiAgentOperationSource,omitnil,omitempty" name:"CfwAiAgentOperationSource"`
+
+	// Add method. Omit or an empty string means ordinary addition; insert_rule means adding new at a specified position; batch_import means non-overwrite batch import; batch_import_cover means overwrite import, which deletes the existing operation rule corresponding to the first rule's Direction and then adds Rules. Deleted rules will not be restored if addition fails, with extremely high risk. The coverage area is only determined by the first rule. The caller must ensure the Directions of the Rules match. Only the above values are supported.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+}
+
+type AddAclRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The list of Internet boundary rules to be added cannot be empty. Each rule must meet the requirements for direction, source and target, action, scope, protocol port, and template restrictions. The entire request must also comply with rule quota and effective rule count limitations. Account-related values must come from read-only queries: for address templates, call DescribeAddressTemplateList, filter the request with TemplateType=1 or 5, and confirm that the returned Data[].Type is 1 or 5. Write Data[].Uuid (with the mb_ prefix) to the corresponding Content, and do not use Data[].TemplateId (with the ip-/dm- prefix). For protocol port templates, filter the request with TemplateType=6, and write Data[].TemplateId (with the pp- prefix) to ParamTemplateId. For asset instances, call DescribeCfwAssets, parse the returned results, and use assets[].instance_id. For asset groups, call DescribeResourceGroupNew, pass QueryType=resource, GroupId="0", ShowType=all, parse the returned results, and use GroupId. For resource tags, pass QueryType=tag, skip the "all assets" root node, and construct JSON using the first-level node GroupName as the Key and the selected second-level sub-node GroupName as the Value, without writing GroupId. For regions, call DescribeAclRegInfo: for Scope=serial, pass FwType=["SERIAL"]; for Scope=side, pass FwType=["BYPASS"]; for Scope=all, pass both items simultaneously, and use Data[].RegionCode. Do not use display names or manually concatenate values. The range for overwrite import is determined solely by the Direction of the first rule.
+	Rules []*CreateRuleItem `json:"Rules,omitnil,omitempty" name:"Rules"`
+
+	// <p>AI operation source</p><p>Enumeration value:</p><ul><li>console: console source value</li><li>wechat: WeChat</li></ul>
+	CfwAiAgentOperationSource *string `json:"CfwAiAgentOperationSource,omitnil,omitempty" name:"CfwAiAgentOperationSource"`
+
+	// Add method. Omit or an empty string means ordinary addition; insert_rule means adding new at a specified position; batch_import means non-overwrite batch import; batch_import_cover means overwrite import, which deletes the existing operation rule corresponding to the first rule's Direction and then adds Rules. Deleted rules will not be restored if addition fails, with extremely high risk. The coverage area is only determined by the first rule. The caller must ensure the Directions of the Rules match. Only the above values are supported.
+	From *string `json:"From,omitnil,omitempty" name:"From"`
+}
+
+func (r *AddAclRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddAclRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Rules")
+	delete(f, "CfwAiAgentOperationSource")
+	delete(f, "From")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddAclRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AddAclRuleResponseParams struct {
+	// ID list of the added rules, in the same sequence as Rules.
+	RuleUuid []*int64 `json:"RuleUuid,omitnil,omitempty" name:"RuleUuid"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type AddAclRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *AddAclRuleResponseParams `json:"Response"`
+}
+
+func (r *AddAclRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AddAclRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type AddEnterpriseSecurityGroupRulesRequestParams struct {
 	// Creates rule data
 	Data []*SecurityGroupRule `json:"Data,omitnil,omitempty" name:"Data"`
@@ -580,6 +651,20 @@ type CfwNatDnatRule struct {
 
 	// The description of NAT firewall forwarding rules.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+type CfwStatusMonitorFilter struct {
+	// Filter field name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Filter value list, up to 10.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+
+	// Operator type, optional; only supported for backend permission types.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OperatorType *int64 `json:"OperatorType,omitnil,omitempty" name:"OperatorType"`
 }
 
 type CommonFilter struct {
@@ -1008,6 +1093,56 @@ type CreateNatRuleItem struct {
 
 	// Description
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+type CreateRuleItem struct {
+	// Rule direction: 1 means inbound, 0 means outbound; other integers or omitted values result in verification failure. Direction also determines the available combinations of SourceType, TargetType, Scope, and Protocol.
+	Direction *uint64 `json:"Direction,omitnil,omitempty" name:"Direction"`
+
+	// Rule order, required. Pass -1 to append to the end of the current direction; a positive serial number indicates insertion at the corresponding position and postponement of subsequent rules; treat 0 as 1, other negative numbers and out-of-scope values should not be used. When a new request contains multiple rules, Direction must be the same; pass all -1 for appending, pass consecutive incremental positive serial numbers in request order for insertion. A modify request accepts only one rule.
+	OrderIndex *int64 `json:"OrderIndex,omitnil,omitempty" name:"OrderIndex"`
+
+	// Destination port. Ignore this field and set it to an empty string when Protocol is ICMP. For other protocols, you must provide a parse string. You can enter a positive integer single port or a "start/end" range separated with commas. The starting value must not be larger than the end value. -1/-1 indicates all ports. FTP only accepts one positive integer. For domain or domain name template targets within the side or all scope, only -1/-1 or 0/65535 are accepted.
+	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Protocol, case-insensitive parsing. Layer-4 values TCP, UDP, ICMP, ICMPV6, ANY are normalized to uppercase. Application-layer values HTTP, HTTPS, HTTP/HTTPS, SMTP, SMTPS, SMTP/SMTPS, FTP, DNS, TLS/SSL and aliases domain, TLS, SSL are normalized to corresponding standard values. ANY means no protocol limitation, not an empty Protocol. It belongs to both parseable Layer-4 protocols and application protocols. domain, TLS, SSL are all normalized to TLS/SSL. The target for domain or domain name template accepts the above application-layer protocols and ANY, but does not accept FTP and other Layer-4 protocols. dnsparse and domainiptwoverify only accept TCP or UDP and only support serial. Other targets in the public cloud environment do not accept application-layer protocols outside of FTP and ANY. Under the side or all scope, inbound only accepts TCP, outbound only accepts TCP, HTTP/HTTPS, or TLS/SSL. When DNS is used for a non-domain target and the target is not *, the destination content must also be a rule list of valid non-IP domain names. When using a protocol port template, each group of protocol and port in the template also executes these integration validations.
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// Traffic processing actions are case-insensitive. accept means allow, drop means deny, and log means observe. isolateinaccept means allow access to allowlisted traffic for isolated assets, isolateindrop means block access to other traffic for isolated assets, isolateoutaccept means allow isolated assets to access allowlisted targets, and isolateoutdrop means block isolated assets from accessing other targets. drop and its deny alias also verify whether the current account has Internet boundary blocking capability.
+	RuleAction *string `json:"RuleAction,omitnil,omitempty" name:"RuleAction"`
+
+	// Access the source content. For ip or net, use a valid IP/CIDR list, with a maximum of 10 items in a regular list. For template, use a parseable address template identifier of the current account. When Direction=0, use the corresponding resource identifier for instance, group, and tag. Among them, the instance must be resolvable to a public IP, and the tag must exist with the format {"Key":"tag key","Value":"tag value"}. When Direction=1, use a CSV of region codes for location, which must pass the verification of the new regional rules capability of the current account. For vendor, use a CSV of tencent, aliyun, aws, huawei, azure, or all. location and vendor are converted to region or manufacturer matchmaking information when saved.
+	SourceContent *string `json:"SourceContent,omitnil,omitempty" name:"SourceContent"`
+
+	// Access source type, case-insensitive parsing. net and ip both indicate IP/CIDR, template refers to address template, instance refers to asset instance, group refers to asset group, tag refers to resource tag, location refers to region, vendor refers to cloud service provider. Direction=1 accepts ip, net, template, location, vendor; Direction=0 accepts ip, net, template, instance, group, tag. ip and net are handled as the same type.
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// Access the destination content. For ip or net, use a valid IP/CIDR list. For domain, use a valid IP, standard domain name, or wildcard domain name list, and also accept a single *. The regular list supports up to 10 items, and wildcard domain names support up to 5 levels. When domain is used with the DNS protocol, IP is not accepted. For dnsparse, use a single valid domain name, wildcard domain name, or an mb_ domain name template that can be resolved by the current account. For domainiptwoverify, use a single valid domain name without wildcards or such a template. Both do not accept a single *, IP, comma-separated list, or wildcard domain names within the segment. For serial domain segments with wildcards and domainiptwoverify templates, the current environment must support the corresponding capacity. For template, use the address template identifier that can be resolved by the current account. For Direction=1, instance, group, and tag use the corresponding resource identifiers. The instance must be resolvable to a public network IP, and the tag must exist with the format {"Key":"tag key","Value":"tag value"}. For Direction=0, location uses region code CSV, and vendor uses CSV of tencent, aliyun, aws, huawei, azure, or all. The standardized content has a maximum length of 1023.
+	TargetContent *string `json:"TargetContent,omitnil,omitempty" name:"TargetContent"`
+
+	// Access purpose type. Case-insensitive parsing. net and ip both indicate IP/CIDR, template indicates address template, instance indicates asset instance, group indicates asset group, tag indicates resource tag, location indicates region, vendor indicates cloud service provider, domain indicates FQDN matching (content can also be IP or *), dnsparse indicates loose matching: Host/SNI matches the domain name, or the destination IP belongs to the IP range of the current DNS resolution result of that domain name, hit if any condition is met; domainiptwoverify indicates strict matching: the above two conditions require simultaneous satisfaction. Direction=1 accepts ip, net, template, domain, instance, group, tag; Direction=0 accepts ip, net, template, domain, dnsparse, domainiptwoverify, location, or vendor.
+	TargetType *string `json:"TargetType,omitnil,omitempty" name:"TargetType"`
+
+	// Rule description, no more than 100 characters. When projects are added, save the requested value; when modified, replace fully, do not inherit old values.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Enable status. Non-empty values accept the string true or false in a case-insensitive manner and are normalized to enable or disable. When omitted or an empty string is input, the default enabled configuration for access control of the current account is read. If this configuration is unavailable, it is enabled by default. Existing rules are replaced without inheriting old values.
+	Enable *string `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// Associated alarm or source event ID. When projects are added, omit or input an empty string to indicate not associated. When modifying, import the rules[].log_id returned by DescribeCfwRules as is. If not returned, omit or input an empty string. The old value is not automatically inherited during replacement. When From=batch_import_cover, a non-empty value is also reused as the string literal identification for the rule after overwrite import.
+	LogId *string `json:"LogId,omitnil,omitempty" name:"LogId"`
+
+	// Protocol port template ID. Omit or input an empty string to indicate no template is used. If not empty, it must point to an existing template in the current account with the content format "protocol:port", otherwise the request fails. The protocol and port in the template must meet the integration restrictions of Direction, TargetType, and Scope. Protocol and Port must still comply with their respective field rules, but are not required to be fixed as ANY, -1/-1, or serial.
+	ParamTemplateId *string `json:"ParamTemplateId,omitnil,omitempty" name:"ParamTemplateId"`
+
+	// Rule source: 0 means General rule, 2 means isolated asset outgoing access rule. It can be omitted when projects are added, and omitted values are handled as 0. Only 0 or 2 are accepted for explicit input and modification, and the original rule value should be imported during modification.
+	RuleSource *int64 `json:"RuleSource,omitnil,omitempty" name:"RuleSource"`
+
+	// Effective scope. Case insensitivity: serial means only Internet boundary serial firewall, side means only Internet boundary bypass firewall, all means acting on both serial and bypass firewalls simultaneously. Omitted, empty string, or other values will result in verification failure. The international site environment will normalize valid user-submitted input to serial. For linkage restrictions on protocol, port, destination type, and protocol port templates, refer to Protocol, Port, and ParamTemplateId.
+	Scope *string `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// Rule numeric value ID. Ordinary new additions, user-specified location additions, and batch import ignore this field; positive integer ID is usable when From=batch_import_cover; must provide an existing and modifiable positive integer ID of the current account for modification, used for locating and fully replacing the original rule, omitted, non-positive integer, or non-existing IDs cause request failure.
+	Uuid *int64 `json:"Uuid,omitnil,omitempty" name:"Uuid"`
 }
 
 // Predefined struct for user
@@ -2069,6 +2204,274 @@ func (r *DescribeBlockStaticListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeBlockStaticListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCfwLogsRequestParams struct {
+	// Log type. Required for the initial query; cannot be passed when using NextToken for continuation. cfw_netflow_border=Internet boundary traffic, cfw_netflow_vpc=VPC east-west traffic, cfw_netflow_nat=NAT firewall traffic, cfw_netflow_nta=NDR/NTA traffic, cfw_netflow_dns=DNS firewall log, cfw_rule_threatinfo=Intrusion defense/Threat Intelligence Alarm, cfw_rule_acl=Internet Boundary Access Control log, cfw_rule_vpc_acl=VPC access control log, cfw_rule_nat_acl=NAT access control log, cfw_ndr_subject_risk=NDR topic risk, cfw_ndr_dataleak_entry=NDR sensitive data leak, cfw_ndr_ai_audit=NDR AI application identification and Large Model Invocation audit, cfw_feature_collect=Statistical feature and baseline anomaly, cfw_behavior_collect=Beacon/DNS/port/cert/VPC mutual access behavior, operate_log_all=Operation audit log.
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// Log filter expression. Default * means no filtering; for example src_ip:1.1.1.1. Queryable fields vary with LogType. You should preferentially use the field name returned in the corresponding Items. Do not guess non-existing fields. It cannot be passed when using NextToken for continued query.
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// Query start time. Supports RFC3339, YYYY-MM-DD HH:MM:SS, YYYY-MM-DD, or Unix timestamp. Input to query the TimeRange backward from this time. Cannot be imported when using NextToken for continued querying.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Query time range. Default 1h; format is positive integer plus unit m/h/d, such as 5m, 1h, 24h, 7d; cannot be passed when using NextToken for continuation.
+	TimeRange *string `json:"TimeRange,omitnil,omitempty" name:"TimeRange"`
+
+	// Return limit. Selectable for initial query, default 100; value 1 to 1000; cannot be passed when using NextToken for continued query.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Previous page opaque continuation token returned by Response.Data. Not required for initial query; only required for continuation query with NextToken. Invalid, tampered, or mismatched tenant will be rejected.
+	NextToken *string `json:"NextToken,omitnil,omitempty" name:"NextToken"`
+}
+
+type DescribeCfwLogsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Log type. Required for the initial query; cannot be passed when using NextToken for continuation. cfw_netflow_border=Internet boundary traffic, cfw_netflow_vpc=VPC east-west traffic, cfw_netflow_nat=NAT firewall traffic, cfw_netflow_nta=NDR/NTA traffic, cfw_netflow_dns=DNS firewall log, cfw_rule_threatinfo=Intrusion defense/Threat Intelligence Alarm, cfw_rule_acl=Internet Boundary Access Control log, cfw_rule_vpc_acl=VPC access control log, cfw_rule_nat_acl=NAT access control log, cfw_ndr_subject_risk=NDR topic risk, cfw_ndr_dataleak_entry=NDR sensitive data leak, cfw_ndr_ai_audit=NDR AI application identification and Large Model Invocation audit, cfw_feature_collect=Statistical feature and baseline anomaly, cfw_behavior_collect=Beacon/DNS/port/cert/VPC mutual access behavior, operate_log_all=Operation audit log.
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// Log filter expression. Default * means no filtering; for example src_ip:1.1.1.1. Queryable fields vary with LogType. You should preferentially use the field name returned in the corresponding Items. Do not guess non-existing fields. It cannot be passed when using NextToken for continued query.
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// Query start time. Supports RFC3339, YYYY-MM-DD HH:MM:SS, YYYY-MM-DD, or Unix timestamp. Input to query the TimeRange backward from this time. Cannot be imported when using NextToken for continued querying.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Query time range. Default 1h; format is positive integer plus unit m/h/d, such as 5m, 1h, 24h, 7d; cannot be passed when using NextToken for continuation.
+	TimeRange *string `json:"TimeRange,omitnil,omitempty" name:"TimeRange"`
+
+	// Return limit. Selectable for initial query, default 100; value 1 to 1000; cannot be passed when using NextToken for continued query.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Previous page opaque continuation token returned by Response.Data. Not required for initial query; only required for continuation query with NextToken. Invalid, tampered, or mismatched tenant will be rejected.
+	NextToken *string `json:"NextToken,omitnil,omitempty" name:"NextToken"`
+}
+
+func (r *DescribeCfwLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCfwLogsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LogType")
+	delete(f, "Query")
+	delete(f, "StartTime")
+	delete(f, "TimeRange")
+	delete(f, "Limit")
+	delete(f, "NextToken")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCfwLogsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCfwLogsResponseParams struct {
+	// Query result. UTF-8 JSON object string; the caller must parse Response.Data. Items is the log array of the current page, and fields vary with LogType. TotalCount is the return limit of the current page, Limit is the page size, and LogType and TimeWindow echo the query scope. When HasMore=true, NextToken must be saved and used as-is for continued querying. When HasMore=false, pagination ends.
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCfwLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCfwLogsResponseParams `json:"Response"`
+}
+
+func (r *DescribeCfwLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCfwLogsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCfwStatusMonitorRequestParams struct {
+	// Operation type. describe_scene means discovery of scenarios and secondary dropdown options; fetch_scene means acquisition of scenario-based snapshots. Required.
+	Op *string `json:"Op,omitnil,omitempty" name:"Op"`
+
+	// Firewall scenario type. Supports internet_edge (Internet edge firewall), nat_cluster (NAT border firewall - cluster), nat_ha (NAT border firewall - primary/secondary), vpc_cluster (VPC boundary firewall - cluster), vpc_ha (VPC boundary firewall - primary/secondary). Required.
+	FirewallType *string `json:"FirewallType,omitnil,omitempty" name:"FirewallType"`
+
+	// Secondary dropdown option ID. fetch_scene is imported as needed, and the value comes from selection.available_options[].ID returned by describe_scene. internet_edge is the region, NAT is the instance ID, and VPC bandwidth scenario is the firewall group ID. The connections aggregation scenario for VPC_cluster ignores this parameter.
+	SelectionId *string `json:"SelectionId,omitnil,omitempty" name:"SelectionId"`
+
+	// Secondary dropdown display name. Can be used as an alternative to SelectionId for matching by name. The value comes from selection.available_options[].name returned by describe_scene.
+	SelectionName *string `json:"SelectionName,omitnil,omitempty" name:"SelectionName"`
+
+	// Engine instance ID. Mainly used in vpc ha scenarios where a firewall group corresponds to multiple instances. Preferentially use the selection.available_options[].instance_ID returned by describe_scene. If only instance_ids are available, select a string value from the array.
+	SelectionInstanceId *string `json:"SelectionInstanceId,omitnil,omitempty" name:"SelectionInstanceId"`
+
+	// Metrics tab. fetch_scene can be passed; used when not passed, this scenario default value. Support bandwidth, connections.
+	Metric *string `json:"Metric,omitnil,omitempty" name:"Metric"`
+
+	// Perspective under the metric. fetch_scene is optional; the default value for this scenario is used when not provided. Supports ip, subnet, session, switch, and vpc. The actual usable composite is subject to the return from describe_scene.
+	Perspective *string `json:"Perspective,omitnil,omitempty" name:"Perspective"`
+
+	// NAT primary/secondary number of connections IP perspective range. External means external IP, asset means Asset IP. Only nat_ha + connections + ip is used. Other group input will return InvalidParameter.
+	IpScope *string `json:"IpScope,omitnil,omitempty" name:"IpScope"`
+
+	// Preset time range. Default 24h; used by fetch_scene. Supports 5m, 15m, 30m, 1h, 6h, 24h, 3d, 7d, 30d, today, yesterday, day before yesterday, this week, last week, this month.
+	TimePreset *string `json:"TimePreset,omitnil,omitempty" name:"TimePreset"`
+
+	// Custom start time. Format YYYY-MM-DD HH:MM:SS; must be specified together with EndTime, maximum span 30 days.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Custom end time. Format YYYY-MM-DD HH:MM:SS; must be consistent with StartTime at the same time, maximum span 30 days.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Page number, starting from 1. Default is 1; used for the fetch_scene list viewing angle.
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
+
+	// Entries per page. Default 10, value 1 to 100; used for the viewing angle of the fetch_scene list.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Whether to only get overview data. When true, fetch_scene only requests overview, skips table/detail, and is suitable for viewing scenario snapshot summary.
+	OverviewOnly *bool `json:"OverviewOnly,omitnil,omitempty" name:"OverviewOnly"`
+
+	// Original offset coverage. Option, overwrites the calculation result of Page after input; value 0 to 10000.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field. Option. InputMax and OutputMax are supported for the Internet boundary IP and NAT IP/subnet perspective. SwitchName is supported for the VPC switch perspective. FlowMax is supported for the VPC IP/VPC perspective. Do not pass other groups.
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// Sorting order. Default desc; supports asc, desc.
+	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
+
+	// Filter condition list. Reserved.
+	Filters []*CfwStatusMonitorFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeCfwStatusMonitorRequest struct {
+	*tchttp.BaseRequest
+	
+	// Operation type. describe_scene means discovery of scenarios and secondary dropdown options; fetch_scene means acquisition of scenario-based snapshots. Required.
+	Op *string `json:"Op,omitnil,omitempty" name:"Op"`
+
+	// Firewall scenario type. Supports internet_edge (Internet edge firewall), nat_cluster (NAT border firewall - cluster), nat_ha (NAT border firewall - primary/secondary), vpc_cluster (VPC boundary firewall - cluster), vpc_ha (VPC boundary firewall - primary/secondary). Required.
+	FirewallType *string `json:"FirewallType,omitnil,omitempty" name:"FirewallType"`
+
+	// Secondary dropdown option ID. fetch_scene is imported as needed, and the value comes from selection.available_options[].ID returned by describe_scene. internet_edge is the region, NAT is the instance ID, and VPC bandwidth scenario is the firewall group ID. The connections aggregation scenario for VPC_cluster ignores this parameter.
+	SelectionId *string `json:"SelectionId,omitnil,omitempty" name:"SelectionId"`
+
+	// Secondary dropdown display name. Can be used as an alternative to SelectionId for matching by name. The value comes from selection.available_options[].name returned by describe_scene.
+	SelectionName *string `json:"SelectionName,omitnil,omitempty" name:"SelectionName"`
+
+	// Engine instance ID. Mainly used in vpc ha scenarios where a firewall group corresponds to multiple instances. Preferentially use the selection.available_options[].instance_ID returned by describe_scene. If only instance_ids are available, select a string value from the array.
+	SelectionInstanceId *string `json:"SelectionInstanceId,omitnil,omitempty" name:"SelectionInstanceId"`
+
+	// Metrics tab. fetch_scene can be passed; used when not passed, this scenario default value. Support bandwidth, connections.
+	Metric *string `json:"Metric,omitnil,omitempty" name:"Metric"`
+
+	// Perspective under the metric. fetch_scene is optional; the default value for this scenario is used when not provided. Supports ip, subnet, session, switch, and vpc. The actual usable composite is subject to the return from describe_scene.
+	Perspective *string `json:"Perspective,omitnil,omitempty" name:"Perspective"`
+
+	// NAT primary/secondary number of connections IP perspective range. External means external IP, asset means Asset IP. Only nat_ha + connections + ip is used. Other group input will return InvalidParameter.
+	IpScope *string `json:"IpScope,omitnil,omitempty" name:"IpScope"`
+
+	// Preset time range. Default 24h; used by fetch_scene. Supports 5m, 15m, 30m, 1h, 6h, 24h, 3d, 7d, 30d, today, yesterday, day before yesterday, this week, last week, this month.
+	TimePreset *string `json:"TimePreset,omitnil,omitempty" name:"TimePreset"`
+
+	// Custom start time. Format YYYY-MM-DD HH:MM:SS; must be specified together with EndTime, maximum span 30 days.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Custom end time. Format YYYY-MM-DD HH:MM:SS; must be consistent with StartTime at the same time, maximum span 30 days.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Page number, starting from 1. Default is 1; used for the fetch_scene list viewing angle.
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
+
+	// Entries per page. Default 10, value 1 to 100; used for the viewing angle of the fetch_scene list.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Whether to only get overview data. When true, fetch_scene only requests overview, skips table/detail, and is suitable for viewing scenario snapshot summary.
+	OverviewOnly *bool `json:"OverviewOnly,omitnil,omitempty" name:"OverviewOnly"`
+
+	// Original offset coverage. Option, overwrites the calculation result of Page after input; value 0 to 10000.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Sorting field. Option. InputMax and OutputMax are supported for the Internet boundary IP and NAT IP/subnet perspective. SwitchName is supported for the VPC switch perspective. FlowMax is supported for the VPC IP/VPC perspective. Do not pass other groups.
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// Sorting order. Default desc; supports asc, desc.
+	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
+
+	// Filter condition list. Reserved.
+	Filters []*CfwStatusMonitorFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeCfwStatusMonitorRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCfwStatusMonitorRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Op")
+	delete(f, "FirewallType")
+	delete(f, "SelectionId")
+	delete(f, "SelectionName")
+	delete(f, "SelectionInstanceId")
+	delete(f, "Metric")
+	delete(f, "Perspective")
+	delete(f, "IpScope")
+	delete(f, "TimePreset")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Page")
+	delete(f, "Limit")
+	delete(f, "OverviewOnly")
+	delete(f, "Offset")
+	delete(f, "SortBy")
+	delete(f, "SortOrder")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCfwStatusMonitorRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCfwStatusMonitorResponseParams struct {
+	// Query result. UTF-8 JSON object string; the caller needs to parse Response.Data. The scene returned by describe_scene includes metric_options, perspective_options, default_metric, default_perspective, selection_required_by_metric, selection_kind_by_metric, and time_preset_options; selection.available_options returns options applicable to SelectionId, SelectionName, and SelectionInstanceId. fetch_scene returns a data snapshot of the selected scenario, which may contain overview, table, or detail. The example below is a section of the field structure, and the array only shows representative values.
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCfwStatusMonitorResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCfwStatusMonitorResponseParams `json:"Response"`
+}
+
+func (r *DescribeCfwStatusMonitorResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCfwStatusMonitorResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

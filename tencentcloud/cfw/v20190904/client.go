@@ -129,6 +129,90 @@ func (c *Client) AddAcRuleWithContext(ctx context.Context, request *AddAcRuleReq
     return
 }
 
+func NewAddAclRuleRequest() (request *AddAclRuleRequest) {
+    request = &AddAclRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfw", APIVersion, "AddAclRule")
+    
+    
+    return
+}
+
+func NewAddAclRuleResponse() (response *AddAclRuleResponse) {
+    response = &AddAclRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddAclRule
+// Add one or more Internet Boundary Access Control Rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddAclRule(request *AddAclRuleRequest) (response *AddAclRuleResponse, err error) {
+    return c.AddAclRuleWithContext(context.Background(), request)
+}
+
+// AddAclRule
+// Add one or more Internet Boundary Access Control Rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddAclRuleWithContext(ctx context.Context, request *AddAclRuleRequest) (response *AddAclRuleResponse, err error) {
+    if request == nil {
+        request = NewAddAclRuleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cfw", APIVersion, "AddAclRule")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddAclRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddAclRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAddEnterpriseSecurityGroupRulesRequest() (request *AddEnterpriseSecurityGroupRulesRequest) {
     request = &AddEnterpriseSecurityGroupRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1191,6 +1275,114 @@ func (c *Client) DescribeBlockStaticListWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeBlockStaticListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCfwLogsRequest() (request *DescribeCfwLogsRequest) {
+    request = &DescribeCfwLogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfw", APIVersion, "DescribeCfwLogs")
+    
+    
+    return
+}
+
+func NewDescribeCfwLogsResponse() (response *DescribeCfwLogsResponse) {
+    response = &DescribeCfwLogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCfwLogs
+// This API is used to query the firewall log of the current tenant. Only use HasMore/NextToken in Response.Data to paginate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RESPONSETOOLARGE = "FailedOperation.ResponseTooLarge"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeCfwLogs(request *DescribeCfwLogsRequest) (response *DescribeCfwLogsResponse, err error) {
+    return c.DescribeCfwLogsWithContext(context.Background(), request)
+}
+
+// DescribeCfwLogs
+// This API is used to query the firewall log of the current tenant. Only use HasMore/NextToken in Response.Data to paginate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RESPONSETOOLARGE = "FailedOperation.ResponseTooLarge"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeCfwLogsWithContext(ctx context.Context, request *DescribeCfwLogsRequest) (response *DescribeCfwLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCfwLogsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cfw", APIVersion, "DescribeCfwLogs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCfwLogs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCfwLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCfwStatusMonitorRequest() (request *DescribeCfwStatusMonitorRequest) {
+    request = &DescribeCfwStatusMonitorRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfw", APIVersion, "DescribeCfwStatusMonitor")
+    
+    
+    return
+}
+
+func NewDescribeCfwStatusMonitorResponse() (response *DescribeCfwStatusMonitorResponse) {
+    response = &DescribeCfwStatusMonitorResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCfwStatusMonitor
+// Query status monitoring scenario. Op=describe_scene is used to detect available scenarios, metrics, perspectives, and secondary dropdown available_options. Op=fetch_scene is used to pull specific scenario snapshots, with results in the JSON string of Response.Data.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RESPONSETOOLARGE = "FailedOperation.ResponseTooLarge"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeCfwStatusMonitor(request *DescribeCfwStatusMonitorRequest) (response *DescribeCfwStatusMonitorResponse, err error) {
+    return c.DescribeCfwStatusMonitorWithContext(context.Background(), request)
+}
+
+// DescribeCfwStatusMonitor
+// Query status monitoring scenario. Op=describe_scene is used to detect available scenarios, metrics, perspectives, and secondary dropdown available_options. Op=fetch_scene is used to pull specific scenario snapshots, with results in the JSON string of Response.Data.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RESPONSETOOLARGE = "FailedOperation.ResponseTooLarge"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeCfwStatusMonitorWithContext(ctx context.Context, request *DescribeCfwStatusMonitorRequest) (response *DescribeCfwStatusMonitorResponse, err error) {
+    if request == nil {
+        request = NewDescribeCfwStatusMonitorRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cfw", APIVersion, "DescribeCfwStatusMonitor")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCfwStatusMonitor require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCfwStatusMonitorResponse()
     err = c.Send(request, response)
     return
 }

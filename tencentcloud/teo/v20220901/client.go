@@ -9555,13 +9555,13 @@ func NewDescribeTimingL7AnalysisDataResponse() (response *DescribeTimingL7Analys
 }
 
 // DescribeTimingL7AnalysisData
-// This API is used to query time series data for L7 domain name business.
+// This API is used to query time-series data for Layer 7 domain services.
 //
-// Create and bind policy Query instance Reset instance access password.
+// Notes:
 //
-// This API is used to query data with a delay of about 10 minutes. It is recommended to pull data from at least 10 minutes before the current time.
+// 1. Data queried by this API has a latency of approximately 10 minutes. It is recommended to pull data from at least 10 minutes prior to the current time.
 //
-// This API is used to return post-protection traffic request data by default. Users can query defended data in `Filters.mitigatedByWebSecurity`.
+// 2. By default, this API returns post-protection traffic request data. Users can customize queries for mitigated data by using `Filters.mitigatedByWebSecurity`.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -9579,13 +9579,13 @@ func (c *Client) DescribeTimingL7AnalysisData(request *DescribeTimingL7AnalysisD
 }
 
 // DescribeTimingL7AnalysisData
-// This API is used to query time series data for L7 domain name business.
+// This API is used to query time-series data for Layer 7 domain services.
 //
-// Create and bind policy Query instance Reset instance access password.
+// Notes:
 //
-// This API is used to query data with a delay of about 10 minutes. It is recommended to pull data from at least 10 minutes before the current time.
+// 1. Data queried by this API has a latency of approximately 10 minutes. It is recommended to pull data from at least 10 minutes prior to the current time.
 //
-// This API is used to return post-protection traffic request data by default. Users can query defended data in `Filters.mitigatedByWebSecurity`.
+// 2. By default, this API returns post-protection traffic request data. Users can customize queries for mitigated data by using `Filters.mitigatedByWebSecurity`.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

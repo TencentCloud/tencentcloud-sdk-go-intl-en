@@ -37,63 +37,63 @@ type AIOptimizerTaskData struct {
 }
 
 type Ability struct {
-	// Whether secondary AZ is supported
+	// <p>Whether support from availability zone is supported</p>
 	IsSupportSlaveZone *string `json:"IsSupportSlaveZone,omitnil,omitempty" name:"IsSupportSlaveZone"`
 
-	// The causes for no support from an availability zone.
+	// <p>The causes for no support from availability zone</p>
 	NonsupportSlaveZoneReason *string `json:"NonsupportSlaveZoneReason,omitnil,omitempty" name:"NonsupportSlaveZoneReason"`
 
-	// Whether read-only instance is supported
+	// <p>Whether RO instance is supported</p>
 	IsSupportRo *string `json:"IsSupportRo,omitnil,omitempty" name:"IsSupportRo"`
 
-	// Reasons why RO instances are not supported.
+	// <p>Reason for unsupported RO instance</p>
 	NonsupportRoReason *string `json:"NonsupportRoReason,omitnil,omitempty" name:"NonsupportRoReason"`
 
-	// Whether manual snapshot backup initiation is supported.
+	// <p>Whether manual snapshot backup initiation is supported</p>
 	IsSupportManualSnapshot *string `json:"IsSupportManualSnapshot,omitnil,omitempty" name:"IsSupportManualSnapshot"`
 
-	// Whether transparent data encryption is supported.
+	// <p>Whether transparent data encryption is supported</p>
 	IsSupportTransparentDataEncryption *string `json:"IsSupportTransparentDataEncryption,omitnil,omitempty" name:"IsSupportTransparentDataEncryption"`
 
-	// Reasons for no support of transparent data encryption.
+	// <p>The causes for unsupported transparent data encryption</p>
 	NoSupportTransparentDataEncryptionReason *string `json:"NoSupportTransparentDataEncryptionReason,omitnil,omitempty" name:"NoSupportTransparentDataEncryptionReason"`
 
-	// Whether manual initiation of logical backup is supported.
+	// <p>Whether manual initiation of logical backup is supported</p>
 	IsSupportManualLogic *string `json:"IsSupportManualLogic,omitnil,omitempty" name:"IsSupportManualLogic"`
 
-	// Enable global encryption.
+	// <p>Whether global encryption can be enabled</p>
 	IsSupportGlobalEncryption *string `json:"IsSupportGlobalEncryption,omitnil,omitempty" name:"IsSupportGlobalEncryption"`
 
-	// The causes for unsupported global encryption.
+	// <p>The causes for unsupported global encryption</p>
 	NoSupportGlobalEncryptionReason *string `json:"NoSupportGlobalEncryptionReason,omitnil,omitempty" name:"NoSupportGlobalEncryptionReason"`
 
-	// Status code for unsupported tde reason.
+	// <p>Status code for unsupported transparent encryption reason</p>
 	NoSupportTransparentDataEncryptionReasonCode *string `json:"NoSupportTransparentDataEncryptionReasonCode,omitnil,omitempty" name:"NoSupportTransparentDataEncryptionReasonCode"`
 
-	// Status code for unsupported global encryption.
+	// <p>Status code for unsupported global encryption reason</p>
 	NoSupportGlobalEncryptionReasonCode *string `json:"NoSupportGlobalEncryptionReasonCode,omitnil,omitempty" name:"NoSupportGlobalEncryptionReasonCode"`
 }
 
 type Account struct {
-	// Database account name
+	// <p>Database account name.</p>
 	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
 
-	// Host
+	// <p>host</p>
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
-	// Database account description
+	// <p>Database account description.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Creation time
+	// <p>Creation time.</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Update time
+	// <p>Update time.</p>
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// The max connections
+	// <p>Maximum user connections</p>
 	MaxUserConnections *int64 `json:"MaxUserConnections,omitnil,omitempty" name:"MaxUserConnections"`
 
-	// Whether password rotation is enabled (0: turn off; 1: turn on)
+	// <p>Whether password rotation is enabled (0: turn off; 1: turn on)</p>
 	PasswordRotation *int64 `json:"PasswordRotation,omitnil,omitempty" name:"PasswordRotation"`
 }
 
@@ -2438,20 +2438,20 @@ func (r *CopyClusterPasswordComplexityResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAccountsRequestParams struct {
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// List of new accounts
+	// <p>New account list</p>
 	Accounts []*NewAccount `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 }
 
 type CreateAccountsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// List of new accounts
+	// <p>New account list</p>
 	Accounts []*NewAccount `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 }
 
@@ -2990,6 +2990,12 @@ type CreateClustersRequestParams struct {
 
 	// <p>Kernel minor version</p>
 	CynosVersion *string `json:"CynosVersion,omitnil,omitempty" name:"CynosVersion"`
+
+	// <p>Synchronization method. Value range: async, semisync, sync.</p>
+	SyncWay *string `json:"SyncWay,omitnil,omitempty" name:"SyncWay"`
+
+	// <p>Semi-sync timeout period, in milliseconds. To ensure business stability, semi-synchronous replication has a degradation logic. When the primary availability zone cluster waits for the secondary availability zone cluster to confirm a transaction, if the timeout period is exceeded, the replication method will degrade to asynchronous replication.</p><p>Value ranges from 1000 to 4294967295.</p><p>Unit: ms</p><p>Default value: 10000</p>
+	SemiSyncTimeout *int64 `json:"SemiSyncTimeout,omitnil,omitempty" name:"SemiSyncTimeout"`
 }
 
 type CreateClustersRequest struct {
@@ -3135,6 +3141,12 @@ type CreateClustersRequest struct {
 
 	// <p>Kernel minor version</p>
 	CynosVersion *string `json:"CynosVersion,omitnil,omitempty" name:"CynosVersion"`
+
+	// <p>Synchronization method. Value range: async, semisync, sync.</p>
+	SyncWay *string `json:"SyncWay,omitnil,omitempty" name:"SyncWay"`
+
+	// <p>Semi-sync timeout period, in milliseconds. To ensure business stability, semi-synchronous replication has a degradation logic. When the primary availability zone cluster waits for the secondary availability zone cluster to confirm a transaction, if the timeout period is exceeded, the replication method will degrade to asynchronous replication.</p><p>Value ranges from 1000 to 4294967295.</p><p>Unit: ms</p><p>Default value: 10000</p>
+	SemiSyncTimeout *int64 `json:"SemiSyncTimeout,omitnil,omitempty" name:"SemiSyncTimeout"`
 }
 
 func (r *CreateClustersRequest) ToJsonString() string {
@@ -3196,6 +3208,8 @@ func (r *CreateClustersRequest) FromJsonString(s string) error {
 	delete(f, "AutoArchiveDelayHours")
 	delete(f, "ClusterLevel")
 	delete(f, "CynosVersion")
+	delete(f, "SyncWay")
+	delete(f, "SemiSyncTimeout")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateClustersRequest has unknown keys!", "")
 	}
@@ -5289,20 +5303,20 @@ type DbTable struct {
 
 // Predefined struct for user
 type DeleteAccountsRequestParams struct {
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Accounts in array, which contains `account` and `host`.
+	// <p>Account array, including account and host.</p>
 	Accounts []*InputAccount `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 }
 
 type DeleteAccountsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Cluster ID
+	// <p>Cluster ID.</p>
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
-	// Accounts in array, which contains `account` and `host`.
+	// <p>Account array, including account and host.</p>
 	Accounts []*InputAccount `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 }
 
@@ -18655,22 +18669,22 @@ type NetAddr struct {
 }
 
 type NewAccount struct {
-	// Account name, which can contain 1-16 letters, digits, and underscores. It must begin with a letter and end with a letter or digit.
+	// <p>Account name, containing letters, digits, and underscores, starting with a letter, ending with a letter or digit, length 1-30</p>
 	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
 
-	// Host
+	// <p>host (% or ipv4 address)</p>
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
-	// Password, which can contain 8-64 characters.
+	// <p>Password. The length range is 8 to 64 characters.</p>
 	AccountPassword *string `json:"AccountPassword,omitnil,omitempty" name:"AccountPassword"`
 
-	// Whether password rotation is enabled (0: turn off; 1: turn on)
+	// <p>Whether password rotation is enabled (0: turn off; 1: turn on)</p>
 	PasswordRotation *int64 `json:"PasswordRotation,omitnil,omitempty" name:"PasswordRotation"`
 
-	// Description
+	// <p>Description.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Maximum number of user connections, which cannot be above 10,240.
+	// <p>Maximum user connections cannot be greater than 10240</p>
 	MaxUserConnections *int64 `json:"MaxUserConnections,omitnil,omitempty" name:"MaxUserConnections"`
 }
 
@@ -21452,6 +21466,15 @@ type RollbackToNewClusterRequestParams struct {
 
 	// <p>Whether to restore from the saved backup</p>
 	FromSaveBackup *bool `json:"FromSaveBackup,omitnil,omitempty" name:"FromSaveBackup"`
+
+	// <p>Synchronization method. Available values: async, semisync, sync. Async as a default.</p>
+	SyncWay *string `json:"SyncWay,omitnil,omitempty" name:"SyncWay"`
+
+	// <p>Semi-synchronous timeout period, in milliseconds. To ensure business stability, semi-synchronous replication has a degradation logic. When the primary availability zone cluster waits for the secondary availability zone cluster to confirm a transaction, if the timeout period is exceeded, the replication method will degrade to asynchronous replication.</p><p>Value ranges from 1000 to 4294967295.</p><p>Unit: ms</p><p>Default value: 10000</p>
+	SemiSyncTimeout *int64 `json:"SemiSyncTimeout,omitnil,omitempty" name:"SemiSyncTimeout"`
+
+	// <p>Standby availability zone</p>
+	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
 }
 
 type RollbackToNewClusterRequest struct {
@@ -21543,6 +21566,15 @@ type RollbackToNewClusterRequest struct {
 
 	// <p>Whether to restore from the saved backup</p>
 	FromSaveBackup *bool `json:"FromSaveBackup,omitnil,omitempty" name:"FromSaveBackup"`
+
+	// <p>Synchronization method. Available values: async, semisync, sync. Async as a default.</p>
+	SyncWay *string `json:"SyncWay,omitnil,omitempty" name:"SyncWay"`
+
+	// <p>Semi-synchronous timeout period, in milliseconds. To ensure business stability, semi-synchronous replication has a degradation logic. When the primary availability zone cluster waits for the secondary availability zone cluster to confirm a transaction, if the timeout period is exceeded, the replication method will degrade to asynchronous replication.</p><p>Value ranges from 1000 to 4294967295.</p><p>Unit: ms</p><p>Default value: 10000</p>
+	SemiSyncTimeout *int64 `json:"SemiSyncTimeout,omitnil,omitempty" name:"SemiSyncTimeout"`
+
+	// <p>Standby availability zone</p>
+	SlaveZone *string `json:"SlaveZone,omitnil,omitempty" name:"SlaveZone"`
 }
 
 func (r *RollbackToNewClusterRequest) ToJsonString() string {
@@ -21586,6 +21618,9 @@ func (r *RollbackToNewClusterRequest) FromJsonString(s string) error {
 	delete(f, "ProjectId")
 	delete(f, "AutoArchive")
 	delete(f, "FromSaveBackup")
+	delete(f, "SyncWay")
+	delete(f, "SemiSyncTimeout")
+	delete(f, "SlaveZone")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RollbackToNewClusterRequest has unknown keys!", "")
 	}
