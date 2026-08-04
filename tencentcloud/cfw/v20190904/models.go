@@ -667,6 +667,14 @@ type CfwStatusMonitorFilter struct {
 	OperatorType *int64 `json:"OperatorType,omitnil,omitempty" name:"OperatorType"`
 }
 
+type Column struct {
+	// Column name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Column attribute
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
 type CommonFilter struct {
 	// Search key.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -4374,6 +4382,58 @@ type IpStatic struct {
 	StatTime *string `json:"StatTime,omitnil,omitempty" name:"StatTime"`
 }
 
+type LogInfo struct {
+	// Log time, in milliseconds
+	Time *int64 `json:"Time,omitnil,omitempty" name:"Time"`
+
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Log topic name
+	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+
+	// Log source IP address
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// Log file name
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+
+	// ID of Log Upload Request Packet
+	PkgId *string `json:"PkgId,omitnil,omitempty" name:"PkgId"`
+
+	// Log ID in Request Packet
+	PkgLogId *string `json:"PkgLogId,omitnil,omitempty" name:"PkgLogId"`
+
+	// JSON serialized string of the log content
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogJson *string `json:"LogJson,omitnil,omitempty" name:"LogJson"`
+
+	// Log source host name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HostName *string `json:"HostName,omitnil,omitempty" name:"HostName"`
+
+	// Raw log (only available when there is an error in creating the log index).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RawLog *string `json:"RawLog,omitnil,omitempty" name:"RawLog"`
+
+	// Cause for log index creation exception. It has a value only when a log index creation exception occurs.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IndexStatus *string `json:"IndexStatus,omitnil,omitempty" name:"IndexStatus"`
+}
+
+type LogItem struct {
+	// Log key
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Log Value
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type LogItems struct {
+	// Key-Value Data Pair returned from analysis results
+	Data []*LogItem `json:"Data,omitnil,omitempty" name:"Data"`
+}
+
 // Predefined struct for user
 type ModifyAcRuleRequestParams struct {
 	// Array of rules
@@ -5930,6 +5990,14 @@ func (r *ModifyTableStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type MultiTopicSearchInformation struct {
+	// ID of the log topic to be searched and analyzed
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Pass the Context value returned by the last API call to retrieve more subsequent logs. A total of up to 10,000 raw logs can be obtained, with a validity period of 1 hour.
+	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
+}
+
 type NatFwFilter struct {
 	// Filter type, e.g., instance ID
 	FilterType *string `json:"FilterType,omitnil,omitempty" name:"FilterType"`
@@ -6328,6 +6396,210 @@ type ScanResultInfo struct {
 
 	// Port blocking status
 	BanStatus *bool `json:"BanStatus,omitnil,omitempty" name:"BanStatus"`
+}
+
+type SearchLogErrors struct {
+	// Log topic ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Error message
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorMsg *string `json:"ErrorMsg,omitnil,omitempty" name:"ErrorMsg"`
+
+	// Error code.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrorCodeStr *string `json:"ErrorCodeStr,omitnil,omitempty" name:"ErrorCodeStr"`
+}
+
+type SearchLogInfos struct {
+	// Log topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Log storage lifetime
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
+
+	// Pass through the Context value returned by this API, which can access more logs later, with an expiration time of 1 hour.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
+}
+
+// Predefined struct for user
+type SearchLogRequestParams struct {
+	// <p>Start time for logs to be searched and analyzed, which is a Unix timestamp in milliseconds</p>
+	From *int64 `json:"From,omitnil,omitempty" name:"From"`
+
+	// <p>End time for logs to be searched and analyzed, which is a Unix timestamp in milliseconds</p>
+	To *int64 `json:"To,omitnil,omitempty" name:"To"`
+
+	// <p>The retrieval and analysis statement has a maximum length of 12 KB.<br>The statement consists of <a href="https://www.tencentcloud.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[retrieval condition]</a> | <a href="https://www.tencentcloud.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statement]</a>. When there is no need to perform statistical analysis on logs, the pipe character <code> | </code> and the SQL statement can be omitted.<br>Use * or an empty string to search all logs.</p>
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// <p>Search syntax rules. Default value is 0. Recommended for use is 1.</p><ul><li>0: Lucene syntax</li><li>1: CQL syntax (dedicated retrieval syntax for CLS, also the default syntax rule used in the console).</li></ul><p>For details, see <a href="https://www.tencentcloud.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">Retrieval condition syntax rules</a></p>
+	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
+
+	// <ul><li>Log topic ID to be retrieved and analyzed. Only one log topic can be specified.</li><li>If needed, use the Topics parameter to retrieve multiple log topics.</li><li>The TopicId and Topics parameters cannot be used simultaneously. Only one can be selected in a single request.<br>The log topic IDs are as follows:<br>Access control - Internet boundary: cfw_rule_acl<br>Access control - NAT boundary: cfw_rule_nat_acl<br>Access control - VPC boundary: cfw_rule_vpc_acl<br>Access control - DNS switch: cfw_rule_dns_acl<br>Intrusion defense: cfw_rule_threatinfo<br>Full traffic detection and response logs - Traffic analysis: cfw_netflow_nta<br>Full traffic detection and response logs - Traffic alarm: cfw_rule_ndr_threatinfo<br>Zero trust operations and maintenance - Database logon: cfw_operate_db<br>Zero trust operations and maintenance - Server access: operate_remote_om<br>Zero trust operations and maintenance - Web service access: operate_web_access<br>Zero trust operations and maintenance - Behavioral audit: remoteom_commands<br>Traffic log - Internet boundary: cfw_netflow_border<br>Traffic log - NAT boundary: cfw_netflow_nat<br>Traffic log - VPC boundary: cfw_netflow_vpc<br>Traffic log - DNS switch: cfw_netflow_dns<br>Traffic log - Private network traffic: cfw_netflow_fl<br>Operation log: operate_log_all</li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <ul><li>Log topic list for retrieval and analysis, supports a maximum of 50 log topics.</li><li>Use TopicId to retrieve a single log topic.</li><li>TopicId and Topics cannot be used simultaneously. Only select one in a single request.</li></ul>
+	Topics []*MultiTopicSearchInformation `json:"Topics,omitnil,omitempty" name:"Topics"`
+
+	// <p>Whether raw logs are returned in time sequence; value range: asc (ascending), desc (descending), default is desc<br>Note:</p><ul><li>Valid only when the search and analysis statement (Query) does not contain SQL</li><li>For SQL result sorting, refer to <a href="https://www.tencentcloud.com/document/product/614/58978?from_cn_redirect=1" target="_blank">SQL ORDER BY syntax</a></li></ul>
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// <p>Number of raw logs returned in a single query. Default value: 100. Maximum value: 1000.<br>Note:</p><ul><li>This parameter is valid only when the search and analysis statement (Query) does not contain SQL.</li><li>For the method for specifying SQL result count, see <a href="https://www.tencentcloud.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT syntax</a>.</li></ul><p>You can retrieve more logs in two ways:</p><ul><li>Context: Pass the Context value returned by the last API call to retrieve more logs. You can retrieve up to 10,000 entries of raw logs in total.</li><li>Offset: The offset indicates the line number from which to start returning raw logs. There is no log entry limit.</li></ul>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Query the offset of raw logs, indicating the line number from which to start returning raw logs. Default value is 0.<br>Note:</p><ul><li>Applicable only when the retrieval and analysis statement (Query) does not contain SQL.</li><li>Cannot be used with the Context parameter.</li><li>Applicable only for single log topic retrieval.</li></ul>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Pass the Context value returned by the last API call to obtain more logs later. The total number of raw logs that can be obtained is up to 10,000 entries. The expiration time is 1 hour.<br>Note:</p><ul><li>When passing this parameter, do not modify other parameters.</li><li>Applicable only for single log topic retrieval. To retrieve multiple log topics, use the Context in Topics.</li><li>This is valid only when the search and analysis statement (Query) does not contain SQL. For obtaining subsequent results with SQL, refer to <a href="https://www.tencentcloud.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT syntax</a>.</li></ul>
+	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
+
+	// <p>When performing statistical analysis (SQL included in Query), whether to sample raw logs first and then perform statistical analysis.<br>0: Automatic sampling;<br>0–1: Sample at the specified sampling rate, for example 0.02;<br>1: Indicates no sampling, that is, precision analysis.<br>Default value: 1</p>
+	SamplingRate *float64 `json:"SamplingRate,omitnil,omitempty" name:"SamplingRate"`
+
+	// <p>true means using the new retrieval result return method, and output parameters AnalysisRecords and Columns are valid.<br>false means using the old retrieval result return method, and output parameters AnalysisResults and ColNames are valid.<br>The two return methods have a slight difference in encoding format. It is recommended to use true.</p>
+	UseNewAnalysis *bool `json:"UseNewAnalysis,omitnil,omitempty" name:"UseNewAnalysis"`
+}
+
+type SearchLogRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Start time for logs to be searched and analyzed, which is a Unix timestamp in milliseconds</p>
+	From *int64 `json:"From,omitnil,omitempty" name:"From"`
+
+	// <p>End time for logs to be searched and analyzed, which is a Unix timestamp in milliseconds</p>
+	To *int64 `json:"To,omitnil,omitempty" name:"To"`
+
+	// <p>The retrieval and analysis statement has a maximum length of 12 KB.<br>The statement consists of <a href="https://www.tencentcloud.com/document/product/614/47044?from_cn_redirect=1" target="_blank">[retrieval condition]</a> | <a href="https://www.tencentcloud.com/document/product/614/44061?from_cn_redirect=1" target="_blank">[SQL statement]</a>. When there is no need to perform statistical analysis on logs, the pipe character <code> | </code> and the SQL statement can be omitted.<br>Use * or an empty string to search all logs.</p>
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// <p>Search syntax rules. Default value is 0. Recommended for use is 1.</p><ul><li>0: Lucene syntax</li><li>1: CQL syntax (dedicated retrieval syntax for CLS, also the default syntax rule used in the console).</li></ul><p>For details, see <a href="https://www.tencentcloud.com/document/product/614/47044?from_cn_redirect=1#RetrievesConditionalRules" target="_blank">Retrieval condition syntax rules</a></p>
+	SyntaxRule *uint64 `json:"SyntaxRule,omitnil,omitempty" name:"SyntaxRule"`
+
+	// <ul><li>Log topic ID to be retrieved and analyzed. Only one log topic can be specified.</li><li>If needed, use the Topics parameter to retrieve multiple log topics.</li><li>The TopicId and Topics parameters cannot be used simultaneously. Only one can be selected in a single request.<br>The log topic IDs are as follows:<br>Access control - Internet boundary: cfw_rule_acl<br>Access control - NAT boundary: cfw_rule_nat_acl<br>Access control - VPC boundary: cfw_rule_vpc_acl<br>Access control - DNS switch: cfw_rule_dns_acl<br>Intrusion defense: cfw_rule_threatinfo<br>Full traffic detection and response logs - Traffic analysis: cfw_netflow_nta<br>Full traffic detection and response logs - Traffic alarm: cfw_rule_ndr_threatinfo<br>Zero trust operations and maintenance - Database logon: cfw_operate_db<br>Zero trust operations and maintenance - Server access: operate_remote_om<br>Zero trust operations and maintenance - Web service access: operate_web_access<br>Zero trust operations and maintenance - Behavioral audit: remoteom_commands<br>Traffic log - Internet boundary: cfw_netflow_border<br>Traffic log - NAT boundary: cfw_netflow_nat<br>Traffic log - VPC boundary: cfw_netflow_vpc<br>Traffic log - DNS switch: cfw_netflow_dns<br>Traffic log - Private network traffic: cfw_netflow_fl<br>Operation log: operate_log_all</li></ul>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <ul><li>Log topic list for retrieval and analysis, supports a maximum of 50 log topics.</li><li>Use TopicId to retrieve a single log topic.</li><li>TopicId and Topics cannot be used simultaneously. Only select one in a single request.</li></ul>
+	Topics []*MultiTopicSearchInformation `json:"Topics,omitnil,omitempty" name:"Topics"`
+
+	// <p>Whether raw logs are returned in time sequence; value range: asc (ascending), desc (descending), default is desc<br>Note:</p><ul><li>Valid only when the search and analysis statement (Query) does not contain SQL</li><li>For SQL result sorting, refer to <a href="https://www.tencentcloud.com/document/product/614/58978?from_cn_redirect=1" target="_blank">SQL ORDER BY syntax</a></li></ul>
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// <p>Number of raw logs returned in a single query. Default value: 100. Maximum value: 1000.<br>Note:</p><ul><li>This parameter is valid only when the search and analysis statement (Query) does not contain SQL.</li><li>For the method for specifying SQL result count, see <a href="https://www.tencentcloud.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT syntax</a>.</li></ul><p>You can retrieve more logs in two ways:</p><ul><li>Context: Pass the Context value returned by the last API call to retrieve more logs. You can retrieve up to 10,000 entries of raw logs in total.</li><li>Offset: The offset indicates the line number from which to start returning raw logs. There is no log entry limit.</li></ul>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Query the offset of raw logs, indicating the line number from which to start returning raw logs. Default value is 0.<br>Note:</p><ul><li>Applicable only when the retrieval and analysis statement (Query) does not contain SQL.</li><li>Cannot be used with the Context parameter.</li><li>Applicable only for single log topic retrieval.</li></ul>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Pass the Context value returned by the last API call to obtain more logs later. The total number of raw logs that can be obtained is up to 10,000 entries. The expiration time is 1 hour.<br>Note:</p><ul><li>When passing this parameter, do not modify other parameters.</li><li>Applicable only for single log topic retrieval. To retrieve multiple log topics, use the Context in Topics.</li><li>This is valid only when the search and analysis statement (Query) does not contain SQL. For obtaining subsequent results with SQL, refer to <a href="https://www.tencentcloud.com/document/product/614/58977?from_cn_redirect=1" target="_blank">SQL LIMIT syntax</a>.</li></ul>
+	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
+
+	// <p>When performing statistical analysis (SQL included in Query), whether to sample raw logs first and then perform statistical analysis.<br>0: Automatic sampling;<br>0–1: Sample at the specified sampling rate, for example 0.02;<br>1: Indicates no sampling, that is, precision analysis.<br>Default value: 1</p>
+	SamplingRate *float64 `json:"SamplingRate,omitnil,omitempty" name:"SamplingRate"`
+
+	// <p>true means using the new retrieval result return method, and output parameters AnalysisRecords and Columns are valid.<br>false means using the old retrieval result return method, and output parameters AnalysisResults and ColNames are valid.<br>The two return methods have a slight difference in encoding format. It is recommended to use true.</p>
+	UseNewAnalysis *bool `json:"UseNewAnalysis,omitnil,omitempty" name:"UseNewAnalysis"`
+}
+
+func (r *SearchLogRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SearchLogRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "From")
+	delete(f, "To")
+	delete(f, "Query")
+	delete(f, "SyntaxRule")
+	delete(f, "TopicId")
+	delete(f, "Topics")
+	delete(f, "Sort")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Context")
+	delete(f, "SamplingRate")
+	delete(f, "UseNewAnalysis")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SearchLogRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SearchLogResponseParams struct {
+	// <p>Pass through the Context value returned by this API to obtain more logs later. The expiration time is 1 hour.<br>Note:</p><ul><li>Applicable only for single log topic retrieval. To retrieve multiple log topics, use the Context in Topics.</li></ul>
+	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
+
+	// <p>Whether all logs meeting the retrieval criteria have been returned. If not, use Context parameter to retrieve more logs.<br>  <br>Note: This is only valid when the search and analysis statement (Query) does not contain SQL.</p>
+	ListOver *bool `json:"ListOver,omitnil,omitempty" name:"ListOver"`
+
+	// <p>Whether the returned data is the SQL analysis result</p>
+	Analysis *bool `json:"Analysis,omitnil,omitempty" name:"Analysis"`
+
+	// <p>Raw logs matching the retrieval criteria</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Results []*LogInfo `json:"Results,omitnil,omitempty" name:"Results"`
+
+	// <p>Column names of log statistics analysis results<br>This parameter is valid only when UseNewAnalysis is false.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ColNames []*string `json:"ColNames,omitnil,omitempty" name:"ColNames"`
+
+	// <p>Log statistics and analysis results<br>This parameter is valid only when UseNewAnalysis is false.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AnalysisResults []*LogItems `json:"AnalysisResults,omitnil,omitempty" name:"AnalysisResults"`
+
+	// <p>Log statistics and analysis results<br>This parameter is valid only when UseNewAnalysis is true.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AnalysisRecords []*string `json:"AnalysisRecords,omitnil,omitempty" name:"AnalysisRecords"`
+
+	// <p>Column attribute of the statistical analysis result<br>This parameter is valid only when UseNewAnalysis is true.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Columns []*Column `json:"Columns,omitnil,omitempty" name:"Columns"`
+
+	// <p>Sampling rate used for this statistical analysis</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SamplingRate *float64 `json:"SamplingRate,omitnil,omitempty" name:"SamplingRate"`
+
+	// <p>When multiple log topics are used for retrieval, basic information of each log topic, such as error message.</p>
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Topics *SearchLogTopics `json:"Topics,omitnil,omitempty" name:"Topics"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type SearchLogResponse struct {
+	*tchttp.BaseResponse
+	Response *SearchLogResponseParams `json:"Response"`
+}
+
+func (r *SearchLogResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SearchLogResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type SearchLogTopics struct {
+	// Error information corresponding to multi-log topic retrieval
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Errors []*SearchLogErrors `json:"Errors,omitnil,omitempty" name:"Errors"`
+
+	// Information for each log topic during multi-log topic retrieval
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Infos []*SearchLogInfos `json:"Infos,omitnil,omitempty" name:"Infos"`
 }
 
 type SecurityGroupBothWayInfo struct {

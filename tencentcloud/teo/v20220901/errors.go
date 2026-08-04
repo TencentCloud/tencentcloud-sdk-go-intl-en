@@ -971,6 +971,12 @@ const (
 	// Contains invalid value.
 	INVALIDPARAMETERVALUE_INCLUDEINVALIDVALUE = "InvalidParameterValue.IncludeInvalidValue"
 
+	// Incorrect inference service name format.
+	INVALIDPARAMETERVALUE_INFERENCESERVICENAME = "InvalidParameterValue.InferenceServiceName"
+
+	// Duplicated reasoning service name.
+	INVALIDPARAMETERVALUE_INFERENCESERVICENAMEDUPLICATE = "InvalidParameterValue.InferenceServiceNameDuplicate"
+
 	// The alias domain name is invalid. It must contain numerics, English characters, and hyphens, but hyphen is not allowed at the beginning or the end.
 	INVALIDPARAMETERVALUE_INVALIDALIASDOMAINNAME = "InvalidParameterValue.InvalidAliasDomainName"
 
@@ -1099,6 +1105,9 @@ const (
 
 	// The number of functions has reached the limit.
 	LIMITEXCEEDED_FUNCTIONLIMITEXCEEDED = "LimitExceeded.FunctionLimitExceeded"
+
+	// The number of inference services has exceeded the limit.
+	LIMITEXCEEDED_INFERENCESERVICE = "LimitExceeded.InferenceService"
 
 	// The number of LoadBalancers exceeds the limit.
 	LIMITEXCEEDED_LOADBALANCINGCOUNTLIMITEXCEEDED = "LimitExceeded.LoadBalancingCountLimitExceeded"
@@ -1498,6 +1507,9 @@ const (
 
 	// The domain name is not properly accessed via DNSPod. Please try again after DNSPod access.
 	RESOURCENOTFOUND_DNSPODDOMAINNOTINACCOUNT = "ResourceNotFound.DNSPodDomainNotInAccount"
+
+	// The reasoning service does not exist.
+	RESOURCENOTFOUND_INFERENCESERVICE = "ResourceNotFound.InferenceService"
 
 	// Maximum upload size is not configured.
 	RESOURCENOTFOUND_POSTMAXSIZEQUOTANOTFOUND = "ResourceNotFound.PostMaxSizeQuotaNotFound"

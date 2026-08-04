@@ -3729,6 +3729,72 @@ func (c *Client) ReEncryptWithContext(ctx context.Context, request *ReEncryptReq
     return
 }
 
+func NewRotateKeyRequest() (request *RotateKeyRequest) {
+    request = &RotateKeyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("kms", APIVersion, "RotateKey")
+    
+    
+    return
+}
+
+func NewRotateKeyResponse() (response *RotateKeyResponse) {
+    response = &RotateKeyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RotateKey
+// Rotate the designated customer master key immediately. You can call DescribeKey to return the last rotation time and the next rotation time, and determine whether the rotation is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ROTATETASKRUNNING = "FailedOperation.RotateTaskRunning"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
+//  REQUESTLIMITEXCEEDED_ROTATERATELIMITED = "RequestLimitExceeded.RotateRateLimited"
+//  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
+//  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_ROTATENOTSUPPORTED = "UnsupportedOperation.RotateNotSupported"
+func (c *Client) RotateKey(request *RotateKeyRequest) (response *RotateKeyResponse, err error) {
+    return c.RotateKeyWithContext(context.Background(), request)
+}
+
+// RotateKey
+// Rotate the designated customer master key immediately. You can call DescribeKey to return the last rotation time and the next rotation time, and determine whether the rotation is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ROTATETASKRUNNING = "FailedOperation.RotateTaskRunning"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
+//  REQUESTLIMITEXCEEDED_ROTATERATELIMITED = "RequestLimitExceeded.RotateRateLimited"
+//  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
+//  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_ROTATENOTSUPPORTED = "UnsupportedOperation.RotateNotSupported"
+func (c *Client) RotateKeyWithContext(ctx context.Context, request *RotateKeyRequest) (response *RotateKeyResponse, err error) {
+    if request == nil {
+        request = NewRotateKeyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "kms", APIVersion, "RotateKey")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RotateKey require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRotateKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewScheduleDataKeyDeletionRequest() (request *ScheduleDataKeyDeletionRequest) {
     request = &ScheduleDataKeyDeletionRequest{
         BaseRequest: &tchttp.BaseRequest{},

@@ -699,77 +699,80 @@ type DataKey struct {
 }
 
 type DataKeyMetadata struct {
-	// DataKey globally unique id.
+	// <p>Globally unique ID of the DataKey</p>
 	DataKeyId *string `json:"DataKeyId,omitnil,omitempty" name:"DataKeyId"`
 
-	// Globally unique id of the CMK.
+	// <p>Globally unique ID of the CMK.</p>
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
-	// CMK name.
+	// <p>CMK name</p>
 	KeyName *string `json:"KeyName,omitnil,omitempty" name:"KeyName"`
 
-	// Key name as a more recognizable and understandable data key.
+	// <p>Data key name that is easier to identify and understand as a key</p>
 	DataKeyName *string `json:"DataKeyName,omitnil,omitempty" name:"DataKeyName"`
 
-	// Specifies the length of the data key in bytes.
+	// <p>Length of the data key, in bytes</p>
 	NumberOfBytes *uint64 `json:"NumberOfBytes,omitnil,omitempty" name:"NumberOfBytes"`
 
-	// Key key creation time.
+	// <p>Key creation time</p>
 	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// DataKey description.
+	// <p>Description of DataKey</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// DataKey status. valid values: Enabled, Disabled, PendingDelete.
+	// <p>DataKey state, value: Enabled | Disabled | PendingDelete</p>
 	KeyState *string `json:"KeyState,omitnil,omitempty" name:"KeyState"`
 
-	// Creator.
+	// <p>Creator.</p>
 	CreatorUin *uint64 `json:"CreatorUin,omitnil,omitempty" name:"CreatorUin"`
 
-	// Specifies the creator of the data key. valid values: user (user-created) or product name (auto-created by authorized cloud services).
+	// <p>Creator of the data key. For user-created keys, it is user; for keys automatically created by authorized cloud services, it is the corresponding product name.</p>
 	Owner *string `json:"Owner,omitnil,omitempty" name:"Owner"`
 
-	// The time when schedule deletion.
+	// <p>Schedule deletion time</p>
 	DeletionDate *uint64 `json:"DeletionDate,omitnil,omitempty" name:"DeletionDate"`
 
-	// Specifies the key material type of DataKey. valid values: TENCENT_KMS (created by KMS), EXTERNAL (user import).
+	// <p>DataKey key material type. For keys created by KMS: TENCENT_KMS. For keys of user import type: EXTERNAL.</p>
 	Origin *string `json:"Origin,omitnil,omitempty" name:"Origin"`
 
-	// HSM cluster ID (only applicable to KMS exclusive/managed service instance).
+	// <p>HSM Cluster ID (only applicable to KMS exclusive edition/managed version service instances)</p>
 	HsmClusterId *string `json:"HsmClusterId,omitnil,omitempty" name:"HsmClusterId"`
 
-	// Resource ID in the format of `creatorUin/$creatorUin/$dataKeyId`.
+	// <p>Resource ID, format: creatorUin/$creatorUin/$dataKeyId</p>
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
-	// Whether the key is a primary replica. valid values: `0` (primary), `1` (synced replica).
+	// <p>Whether the key is a primary replica. 0: primary replica, 1: synced replica.</p>
 	IsSyncReplica *int64 `json:"IsSyncReplica,omitnil,omitempty" name:"IsSyncReplica"`
 
-	// Synchronous original region.
+	// <p>Synchronous original region</p>
 	SourceRegion *string `json:"SourceRegion,omitnil,omitempty" name:"SourceRegion"`
 
-	// The state of key synchronization. valid values: 0 (unsynced), 1 (synchronization successful), 2 (synchronization failed), 3 (synchronizing).
+	// <p>Key synchronization status. 0: unsynced, 1: synchronization successful, 2: synchronization failure, 3: syncing.</p>
 	SyncStatus *int64 `json:"SyncStatus,omitnil,omitempty" name:"SyncStatus"`
 
-	// Sresult description}.
+	// <p>Synchronous result description</p>
 	SyncMessages *string `json:"SyncMessages,omitnil,omitempty" name:"SyncMessages"`
 
-	// Start time of synchronization.
+	// <p>Start time of synchronization</p>
 	SyncStartTime *uint64 `json:"SyncStartTime,omitnil,omitempty" name:"SyncStartTime"`
 
-	// Specifies the synchronous end time.
+	// <p>Synchronous end time</p>
 	SyncEndTime *uint64 `json:"SyncEndTime,omitnil,omitempty" name:"SyncEndTime"`
 
-	// Synchronous original cluster. if empty, it is a public cloud public cluster.
+	// <p>Synchronous primitive cluster. If empty, it is a public cloud public cluster.</p>
 	SourceHsmClusterId *string `json:"SourceHsmClusterId,omitnil,omitempty" name:"SourceHsmClusterId"`
 
-	// Member account appId.
+	// <p>Member account appId</p>
 	AccountAppId *uint64 `json:"AccountAppId,omitnil,omitempty" name:"AccountAppId"`
 
-	// Member account UIN
+	// <p>member account uin</p>
 	AccountUin *uint64 `json:"AccountUin,omitnil,omitempty" name:"AccountUin"`
 
-	// Member account name.
+	// <p>Enter the member account name.</p>
 	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
+
+	// <p>Creator UIN</p>
+	CreatorUinString *string `json:"CreatorUinString,omitnil,omitempty" name:"CreatorUinString"`
 }
 
 // Predefined struct for user
@@ -3219,6 +3222,12 @@ type GetServiceStatusResponseParams struct {
 	// <p>QPS in the region</p>
 	RegionsQps []*RegionQps `json:"RegionsQps,omitnil,omitempty" name:"RegionsQps"`
 
+	// <p>Regional information of the resource</p>
+	ResourceZone *uint64 `json:"ResourceZone,omitnil,omitempty" name:"ResourceZone"`
+
+	// <p>Regional availability zone info of the resource</p>
+	ResourceRegion *uint64 `json:"ResourceRegion,omitnil,omitempty" name:"ResourceRegion"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -3513,6 +3522,9 @@ type KeyMetadata struct {
 
 	// <p>Member account name</p>
 	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
+
+	// <p>Creator UIN</p>
+	CreatorUinString *string `json:"CreatorUinString,omitnil,omitempty" name:"CreatorUinString"`
 }
 
 // Predefined struct for user
@@ -4443,6 +4455,70 @@ type RegionQps struct {
 
 	// <p>qps size</p>
 	Qps *uint64 `json:"Qps,omitnil,omitempty" name:"Qps"`
+}
+
+// Predefined struct for user
+type RotateKeyRequestParams struct {
+	// <p>Globally unique ID of the CMK.</p>
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// <p>Member account information for multi-account scenarios</p>
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
+}
+
+type RotateKeyRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Globally unique ID of the CMK.</p>
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+	// <p>Member account information for multi-account scenarios</p>
+	MemberAccount *MemberAccount `json:"MemberAccount,omitnil,omitempty" name:"MemberAccount"`
+}
+
+func (r *RotateKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RotateKeyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "KeyId")
+	delete(f, "MemberAccount")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RotateKeyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RotateKeyResponseParams struct {
+	// <p>Task ID used to identify this rotation. You can call DescribeKey to return the last rotation time and next rotation time, and determine whether the rotation is successful.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RotateKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *RotateKeyResponseParams `json:"Response"`
+}
+
+func (r *RotateKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RotateKeyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

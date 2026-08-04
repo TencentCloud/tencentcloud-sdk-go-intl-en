@@ -1142,7 +1142,9 @@ type DescribeOnlineRecordResponseParams struct {
 	// List of recorded videos
 	VideoInfos []*VideoInfo `json:"VideoInfos,omitnil,omitempty" name:"VideoInfos"`
 
-
+	// Playback URL, must be used with a signaling player. This field is only applicable to video generation mode
+	// Note: This field may return null, indicating that no valid value can be retrieved.
+	// Example value: http://replayurl
 	ReplayUrl *string `json:"ReplayUrl,omitnil,omitempty" name:"ReplayUrl"`
 
 	// Number of video stream interruptions during recording.

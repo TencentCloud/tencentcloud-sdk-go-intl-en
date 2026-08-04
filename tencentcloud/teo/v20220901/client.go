@@ -1641,6 +1641,118 @@ func (c *Client) CreateFunctionRuleWithContext(ctx context.Context, request *Cre
     return
 }
 
+func NewCreateInferenceAPITokenRequest() (request *CreateInferenceAPITokenRequest) {
+    request = &CreateInferenceAPITokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "CreateInferenceAPIToken")
+    
+    
+    return
+}
+
+func NewCreateInferenceAPITokenResponse() (response *CreateInferenceAPITokenResponse) {
+    response = &CreateInferenceAPITokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateInferenceAPIToken
+// Create an inference API Token for authenticating access to the inference service. The Token content is returned only once when creating. Each site can create up to 100 tokens.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) CreateInferenceAPIToken(request *CreateInferenceAPITokenRequest) (response *CreateInferenceAPITokenResponse, err error) {
+    return c.CreateInferenceAPITokenWithContext(context.Background(), request)
+}
+
+// CreateInferenceAPIToken
+// Create an inference API Token for authenticating access to the inference service. The Token content is returned only once when creating. Each site can create up to 100 tokens.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+//  LIMITEXCEEDED = "LimitExceeded"
+func (c *Client) CreateInferenceAPITokenWithContext(ctx context.Context, request *CreateInferenceAPITokenRequest) (response *CreateInferenceAPITokenResponse, err error) {
+    if request == nil {
+        request = NewCreateInferenceAPITokenRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "CreateInferenceAPIToken")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateInferenceAPIToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateInferenceAPITokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateInferenceServiceRequest() (request *CreateInferenceServiceRequest) {
+    request = &CreateInferenceServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "CreateInferenceService")
+    
+    
+    return
+}
+
+func NewCreateInferenceServiceResponse() (response *CreateInferenceServiceResponse) {
+    response = &CreateInferenceServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateInferenceService
+// This API is used to create an inference service. It allows setting the service name, listening port, container image configuration, and resource configuration. Once created successfully, an inference access address is provided.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INFERENCESERVICENAME = "InvalidParameterValue.InferenceServiceName"
+//  INVALIDPARAMETERVALUE_INFERENCESERVICENAMEDUPLICATE = "InvalidParameterValue.InferenceServiceNameDuplicate"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+//  LIMITEXCEEDED_INFERENCESERVICE = "LimitExceeded.InferenceService"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) CreateInferenceService(request *CreateInferenceServiceRequest) (response *CreateInferenceServiceResponse, err error) {
+    return c.CreateInferenceServiceWithContext(context.Background(), request)
+}
+
+// CreateInferenceService
+// This API is used to create an inference service. It allows setting the service name, listening port, container image configuration, and resource configuration. Once created successfully, an inference access address is provided.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_INFERENCESERVICENAME = "InvalidParameterValue.InferenceServiceName"
+//  INVALIDPARAMETERVALUE_INFERENCESERVICENAMEDUPLICATE = "InvalidParameterValue.InferenceServiceNameDuplicate"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+//  LIMITEXCEEDED_INFERENCESERVICE = "LimitExceeded.InferenceService"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) CreateInferenceServiceWithContext(ctx context.Context, request *CreateInferenceServiceRequest) (response *CreateInferenceServiceResponse, err error) {
+    if request == nil {
+        request = NewCreateInferenceServiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "CreateInferenceService")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateInferenceService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateInferenceServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateJustInTimeTranscodeTemplateRequest() (request *CreateJustInTimeTranscodeTemplateRequest) {
     request = &CreateJustInTimeTranscodeTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4753,6 +4865,58 @@ func (c *Client) DeleteFunctionRulesWithContext(ctx context.Context, request *De
     return
 }
 
+func NewDeleteInferenceAPITokenRequest() (request *DeleteInferenceAPITokenRequest) {
+    request = &DeleteInferenceAPITokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DeleteInferenceAPIToken")
+    
+    
+    return
+}
+
+func NewDeleteInferenceAPITokenResponse() (response *DeleteInferenceAPITokenResponse) {
+    response = &DeleteInferenceAPITokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteInferenceAPIToken
+// This API is used to delete an inference API Token. Once deleted, the Token will expire immediately, and requests for accessing the inference service using it will no longer be accessible.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+func (c *Client) DeleteInferenceAPIToken(request *DeleteInferenceAPITokenRequest) (response *DeleteInferenceAPITokenResponse, err error) {
+    return c.DeleteInferenceAPITokenWithContext(context.Background(), request)
+}
+
+// DeleteInferenceAPIToken
+// This API is used to delete an inference API Token. Once deleted, the Token will expire immediately, and requests for accessing the inference service using it will no longer be accessible.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+func (c *Client) DeleteInferenceAPITokenWithContext(ctx context.Context, request *DeleteInferenceAPITokenRequest) (response *DeleteInferenceAPITokenResponse, err error) {
+    if request == nil {
+        request = NewDeleteInferenceAPITokenRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DeleteInferenceAPIToken")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteInferenceAPIToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteInferenceAPITokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteJustInTimeTranscodeTemplatesRequest() (request *DeleteJustInTimeTranscodeTemplatesRequest) {
     request = &DeleteJustInTimeTranscodeTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7535,6 +7699,334 @@ func (c *Client) DescribeIdentificationsWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeIdentificationsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInferenceAPITokensRequest() (request *DescribeInferenceAPITokensRequest) {
+    request = &DescribeInferenceAPITokensRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeInferenceAPITokens")
+    
+    
+    return
+}
+
+func NewDescribeInferenceAPITokensResponse() (response *DescribeInferenceAPITokensResponse) {
+    response = &DescribeInferenceAPITokensResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInferenceAPITokens
+// This API is used to query the list of reasoning API Tokens, return the ID, name, content, and creation time of the Tokens, and support paging query.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+func (c *Client) DescribeInferenceAPITokens(request *DescribeInferenceAPITokensRequest) (response *DescribeInferenceAPITokensResponse, err error) {
+    return c.DescribeInferenceAPITokensWithContext(context.Background(), request)
+}
+
+// DescribeInferenceAPITokens
+// This API is used to query the list of reasoning API Tokens, return the ID, name, content, and creation time of the Tokens, and support paging query.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+func (c *Client) DescribeInferenceAPITokensWithContext(ctx context.Context, request *DescribeInferenceAPITokensRequest) (response *DescribeInferenceAPITokensResponse, err error) {
+    if request == nil {
+        request = NewDescribeInferenceAPITokensRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeInferenceAPITokens")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInferenceAPITokens require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInferenceAPITokensResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInferenceHardwareSpecificationsRequest() (request *DescribeInferenceHardwareSpecificationsRequest) {
+    request = &DescribeInferenceHardwareSpecificationsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeInferenceHardwareSpecifications")
+    
+    
+    return
+}
+
+func NewDescribeInferenceHardwareSpecificationsResponse() (response *DescribeInferenceHardwareSpecificationsResponse) {
+    response = &DescribeInferenceHardwareSpecificationsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInferenceHardwareSpecifications
+// This API is used to query the reasoning hardware specification list, returning configurations such as CPU, memory, GPU, and memory for each specification. You can select the required specification during service creation.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+func (c *Client) DescribeInferenceHardwareSpecifications(request *DescribeInferenceHardwareSpecificationsRequest) (response *DescribeInferenceHardwareSpecificationsResponse, err error) {
+    return c.DescribeInferenceHardwareSpecificationsWithContext(context.Background(), request)
+}
+
+// DescribeInferenceHardwareSpecifications
+// This API is used to query the reasoning hardware specification list, returning configurations such as CPU, memory, GPU, and memory for each specification. You can select the required specification during service creation.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+func (c *Client) DescribeInferenceHardwareSpecificationsWithContext(ctx context.Context, request *DescribeInferenceHardwareSpecificationsRequest) (response *DescribeInferenceHardwareSpecificationsResponse, err error) {
+    if request == nil {
+        request = NewDescribeInferenceHardwareSpecificationsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeInferenceHardwareSpecifications")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInferenceHardwareSpecifications require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInferenceHardwareSpecificationsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInferenceServiceDeploymentLogsRequest() (request *DescribeInferenceServiceDeploymentLogsRequest) {
+    request = &DescribeInferenceServiceDeploymentLogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeInferenceServiceDeploymentLogs")
+    
+    
+    return
+}
+
+func NewDescribeInferenceServiceDeploymentLogsResponse() (response *DescribeInferenceServiceDeploymentLogsResponse) {
+    response = &DescribeInferenceServiceDeploymentLogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInferenceServiceDeploymentLogs
+// This API is used to query the logs of a designated deployment of an inference service, return log content and generation time, and support time-based range search, pagination, and sorting.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+func (c *Client) DescribeInferenceServiceDeploymentLogs(request *DescribeInferenceServiceDeploymentLogsRequest) (response *DescribeInferenceServiceDeploymentLogsResponse, err error) {
+    return c.DescribeInferenceServiceDeploymentLogsWithContext(context.Background(), request)
+}
+
+// DescribeInferenceServiceDeploymentLogs
+// This API is used to query the logs of a designated deployment of an inference service, return log content and generation time, and support time-based range search, pagination, and sorting.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+func (c *Client) DescribeInferenceServiceDeploymentLogsWithContext(ctx context.Context, request *DescribeInferenceServiceDeploymentLogsRequest) (response *DescribeInferenceServiceDeploymentLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeInferenceServiceDeploymentLogsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeInferenceServiceDeploymentLogs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInferenceServiceDeploymentLogs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInferenceServiceDeploymentLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInferenceServiceDeploymentRecordsRequest() (request *DescribeInferenceServiceDeploymentRecordsRequest) {
+    request = &DescribeInferenceServiceDeploymentRecordsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeInferenceServiceDeploymentRecords")
+    
+    
+    return
+}
+
+func NewDescribeInferenceServiceDeploymentRecordsResponse() (response *DescribeInferenceServiceDeploymentRecordsResponse) {
+    response = &DescribeInferenceServiceDeploymentRecordsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInferenceServiceDeploymentRecords
+// This API is used to query the deployment history list of inference services, returning the operation type, status, duration, configuration snapshot, and whether it is the currently effective configuration for each deployment, with support for pagination and sorting.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeInferenceServiceDeploymentRecords(request *DescribeInferenceServiceDeploymentRecordsRequest) (response *DescribeInferenceServiceDeploymentRecordsResponse, err error) {
+    return c.DescribeInferenceServiceDeploymentRecordsWithContext(context.Background(), request)
+}
+
+// DescribeInferenceServiceDeploymentRecords
+// This API is used to query the deployment history list of inference services, returning the operation type, status, duration, configuration snapshot, and whether it is the currently effective configuration for each deployment, with support for pagination and sorting.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeInferenceServiceDeploymentRecordsWithContext(ctx context.Context, request *DescribeInferenceServiceDeploymentRecordsRequest) (response *DescribeInferenceServiceDeploymentRecordsResponse, err error) {
+    if request == nil {
+        request = NewDescribeInferenceServiceDeploymentRecordsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeInferenceServiceDeploymentRecords")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInferenceServiceDeploymentRecords require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInferenceServiceDeploymentRecordsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInferenceServiceMonitorDataRequest() (request *DescribeInferenceServiceMonitorDataRequest) {
+    request = &DescribeInferenceServiceMonitorDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeInferenceServiceMonitorData")
+    
+    
+    return
+}
+
+func NewDescribeInferenceServiceMonitorDataResponse() (response *DescribeInferenceServiceMonitorDataResponse) {
+    response = &DescribeInferenceServiceMonitorDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInferenceServiceMonitorData
+// This API is used to query service monitoring data for reasoning, supporting indicators such as CPU, memory, GPU, video memory utilization, and instance count. You can specify the time range and aggregation granularity, and query data for up to the most recent 30 days.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+func (c *Client) DescribeInferenceServiceMonitorData(request *DescribeInferenceServiceMonitorDataRequest) (response *DescribeInferenceServiceMonitorDataResponse, err error) {
+    return c.DescribeInferenceServiceMonitorDataWithContext(context.Background(), request)
+}
+
+// DescribeInferenceServiceMonitorData
+// This API is used to query service monitoring data for reasoning, supporting indicators such as CPU, memory, GPU, video memory utilization, and instance count. You can specify the time range and aggregation granularity, and query data for up to the most recent 30 days.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+func (c *Client) DescribeInferenceServiceMonitorDataWithContext(ctx context.Context, request *DescribeInferenceServiceMonitorDataRequest) (response *DescribeInferenceServiceMonitorDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeInferenceServiceMonitorDataRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeInferenceServiceMonitorData")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInferenceServiceMonitorData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInferenceServiceMonitorDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInferenceServicesRequest() (request *DescribeInferenceServicesRequest) {
+    request = &DescribeInferenceServicesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeInferenceServices")
+    
+    
+    return
+}
+
+func NewDescribeInferenceServicesResponse() (response *DescribeInferenceServicesResponse) {
+    response = &DescribeInferenceServicesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInferenceServices
+// This API is used to query the service list for reasoning, supporting filtering by service name, service ID, and status. It returns information such as service configuration, running state, number of instances, and reasoning access address.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+func (c *Client) DescribeInferenceServices(request *DescribeInferenceServicesRequest) (response *DescribeInferenceServicesResponse, err error) {
+    return c.DescribeInferenceServicesWithContext(context.Background(), request)
+}
+
+// DescribeInferenceServices
+// This API is used to query the service list for reasoning, supporting filtering by service name, service ID, and status. It returns information such as service configuration, running state, number of instances, and reasoning access address.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+func (c *Client) DescribeInferenceServicesWithContext(ctx context.Context, request *DescribeInferenceServicesRequest) (response *DescribeInferenceServicesResponse, err error) {
+    if request == nil {
+        request = NewDescribeInferenceServicesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeInferenceServices")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInferenceServices require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInferenceServicesResponse()
     err = c.Send(request, response)
     return
 }
@@ -12397,6 +12889,60 @@ func (c *Client) ModifyHostsCertificateWithContext(ctx context.Context, request 
     return
 }
 
+func NewModifyInferenceServiceRequest() (request *ModifyInferenceServiceRequest) {
+    request = &ModifyInferenceServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyInferenceService")
+    
+    
+    return
+}
+
+func NewModifyInferenceServiceResponse() (response *ModifyInferenceServiceResponse) {
+    response = &ModifyInferenceServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyInferenceService
+// This API is used to modify the inference service, supporting updates to the listening port, request path, container image, resource configuration, and description. Only the passed parameters are modified, while others remain unchanged.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+//  RESOURCENOTFOUND_INFERENCESERVICE = "ResourceNotFound.InferenceService"
+func (c *Client) ModifyInferenceService(request *ModifyInferenceServiceRequest) (response *ModifyInferenceServiceResponse, err error) {
+    return c.ModifyInferenceServiceWithContext(context.Background(), request)
+}
+
+// ModifyInferenceService
+// This API is used to modify the inference service, supporting updates to the listening port, request path, container image, resource configuration, and description. Only the passed parameters are modified, while others remain unchanged.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+//  RESOURCENOTFOUND_INFERENCESERVICE = "ResourceNotFound.InferenceService"
+func (c *Client) ModifyInferenceServiceWithContext(ctx context.Context, request *ModifyInferenceServiceRequest) (response *ModifyInferenceServiceResponse, err error) {
+    if request == nil {
+        request = NewModifyInferenceServiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "ModifyInferenceService")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInferenceService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyInferenceServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyL4ProxyRequest() (request *ModifyL4ProxyRequest) {
     request = &ModifyL4ProxyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -15465,6 +16011,60 @@ func (c *Client) ModifyZoneWorkModeWithContext(ctx context.Context, request *Mod
     request.SetContext(ctx)
     
     response = NewModifyZoneWorkModeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewOperateInferenceServiceRequest() (request *OperateInferenceServiceRequest) {
+    request = &OperateInferenceServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "OperateInferenceService")
+    
+    
+    return
+}
+
+func NewOperateInferenceServiceResponse() (response *OperateInferenceServiceResponse) {
+    response = &OperateInferenceServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// OperateInferenceService
+// This API is used to operate an inference service, support stopping, starting up, and deleting the inference service. Once deleted, resources cannot be recovered.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+//  RESOURCENOTFOUND_INFERENCESERVICE = "ResourceNotFound.InferenceService"
+func (c *Client) OperateInferenceService(request *OperateInferenceServiceRequest) (response *OperateInferenceServiceResponse, err error) {
+    return c.OperateInferenceServiceWithContext(context.Background(), request)
+}
+
+// OperateInferenceService
+// This API is used to operate an inference service, support stopping, starting up, and deleting the inference service. Once deleted, resources cannot be recovered.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+//  RESOURCENOTFOUND_INFERENCESERVICE = "ResourceNotFound.InferenceService"
+func (c *Client) OperateInferenceServiceWithContext(ctx context.Context, request *OperateInferenceServiceRequest) (response *OperateInferenceServiceResponse, err error) {
+    if request == nil {
+        request = NewOperateInferenceServiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "OperateInferenceService")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OperateInferenceService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewOperateInferenceServiceResponse()
     err = c.Send(request, response)
     return
 }
