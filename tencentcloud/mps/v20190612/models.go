@@ -314,6 +314,9 @@ type AdaptiveDynamicStreamingTaskInput struct {
 
 	// <p>External audio feature. Specifies the audio files to be inserted.</p>
 	AddOnAudios []*AddOnAudio `json:"AddOnAudios,omitnil,omitempty" name:"AddOnAudios"`
+
+	// <p>When not empty, directly replace the StreamInfos field of the template. The field format is the same as the StreamInfos when creating an adaptive template.</p>
+	StdExtStreamInfos []*AdaptiveStreamTemplate `json:"StdExtStreamInfos,omitnil,omitempty" name:"StdExtStreamInfos"`
 }
 
 type AdaptiveDynamicStreamingTemplate struct {
@@ -671,6 +674,21 @@ type AiAnalysisTaskDelLogoOutput struct {
 	// <p>File address of the voice type clone annotation</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	VoiceClonedMarkFile *string `json:"VoiceClonedMarkFile,omitnil,omitempty" name:"VoiceClonedMarkFile"`
+
+	// <p>Result path of a video for removal only</p>
+	ErasedVideoPath *string `json:"ErasedVideoPath,omitnil,omitempty" name:"ErasedVideoPath"`
+
+	// <p>Voice cloning editing information</p><p>Editing information for secondary modifications of voice cloning</p>
+	DubbingEditInfoUrl *string `json:"DubbingEditInfoUrl,omitnil,omitempty" name:"DubbingEditInfoUrl"`
+
+	// <p>FileId of a file after removal.</p>
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// <p>FileId of the subtitle file extracted from video.</p>
+	OriginSubtitleFileId *string `json:"OriginSubtitleFileId,omitnil,omitempty" name:"OriginSubtitleFileId"`
+
+	// <p>FileId of a subtitle translation file extracted from a video.</p>
+	TranslateSubtitleFileId *string `json:"TranslateSubtitleFileId,omitnil,omitempty" name:"TranslateSubtitleFileId"`
 }
 
 type AiAnalysisTaskDelLogoResult struct {
@@ -741,6 +759,15 @@ type AiAnalysisTaskDubbingOutput struct {
 
 	// <p>Storage location of the dubbed video.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+
+	// <p>Additional results, currently including subtitle file result URLs</p>
+	ExtraOutput *string `json:"ExtraOutput,omitnil,omitempty" name:"ExtraOutput"`
+
+	// <p>FileId of the dubbed video.</p>
+	VideoFileId *string `json:"VideoFileId,omitnil,omitempty" name:"VideoFileId"`
+
+	// <p>FileId of the tag file.</p>
+	SpeakerFileId *string `json:"SpeakerFileId,omitnil,omitempty" name:"SpeakerFileId"`
 }
 
 type AiAnalysisTaskDubbingResult struct {
@@ -1196,6 +1223,20 @@ type AiContentReviewResult struct {
 type AiContentReviewTaskInput struct {
 	// Video content audit template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type AiDramaInput struct {
+	// <p>AI comic playbook.</p><p>Parameter format: None</p><p>Input parameter limitation: None</p>
+	Script *string `json:"Script,omitnil,omitempty" name:"Script"`
+
+	// <p>AI comic style</p><p>Enumeration values: </p><ul><li>chinese_ink_wash: Chinese ink‑wash</li><li>fantasy_cyberpunk: fantasy cyberpunk</li><li>japanese_anime_2d: Japanese anime 2D</li></ul><p>Default value: chinese_ink_wash</p><p>Enumeration values: </p><ul><li>realistic_live_action: realistic live action</li><li>chinese_ink_wash: Chinese ink-wash</li><li>fantasy_cyberpunk: fantasy cyberpunk</li><li>japanese_anime_2d: Japanese anime 2D</li></ul><p>Default value: chinese_ink_wash</p>
+	Style *string `json:"Style,omitnil,omitempty" name:"Style"`
+
+	// <p>Aspect ratio</p><p>Enumeration values: </p><ul><li>16:9: 16:9</li><li>9:16: 9:16</li></ul><p>Default value: 16:9</p>
+	Ratio *string `json:"Ratio,omitnil,omitempty" name:"Ratio"`
+
+	// <p>Output video resolution</p><p>Enumeration values: </p><ul><li>720p: 720p</li><li>1080p: 1080p</li></ul><p>Default value: 720p</p>
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 }
 
 type AiParagraphInfo struct {
@@ -1729,6 +1770,15 @@ type AiRecognitionTaskTransTextSegmentItem struct {
 
 	// <p>Word timestamp information.</p>
 	Wordlist []*WordResult `json:"Wordlist,omitnil,omitempty" name:"Wordlist"`
+}
+
+type AiRestorationConfig struct {
+	// <p>Capability configuration switch</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p>
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// <p>Strength type</p><p>Enumeration values: </p><ul><li>weak: Weak</li><li>normal: Medium</li><li>strong: Strong</li></ul><p>Default value: normal</p>
+	// Attention: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type AiReviewPoliticalAsrTaskInput struct {
@@ -2348,6 +2398,11 @@ type AigcVideoExtraParam struct {
 	EnableBgm *bool `json:"EnableBgm,omitnil,omitempty" name:"EnableBgm"`
 }
 
+type AigcVideoReferenceAudioInfo struct {
+	// <p>Reference audio URL, which must be accessible from the public network.</p>
+	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
+}
+
 type AigcVideoReferenceImageInfo struct {
 	// Image URL for video generation. The URL must be accessible from the public network and must be accessible to crawlers.
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
@@ -2936,6 +2991,150 @@ type ClassificationConfigureInfoForUpdate struct {
 	// <li>ON: enables intelligent categorization task;</li>
 	// <li>OFF: disables intelligent categorization task.</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+}
+
+type CloneViralAIGC struct {
+	// <p>Video duration</p><p>Range: [4, 15]</p>
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// <p>Aspect ratio. Options: 16:9/4:3/1:1/3:4/9:16/21:9/adaptive</p>
+	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
+
+	// <p>Resolution. Supports 720p (default)/1080p/2k/4k</p>
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+
+	// <p>Model tier. flagship (default), standard</p>
+	ModelTier *string `json:"ModelTier,omitnil,omitempty" name:"ModelTier"`
+}
+
+type CloneViralContent struct {
+	// <p>Custom prompt describing requirements for video generation</p>
+	UserPrompt *string `json:"UserPrompt,omitnil,omitempty" name:"UserPrompt"`
+
+	// <p>Target language for video generation. Default: not specified. Supported values: zh / en / ja / ko / es / pt / instrumental (pure music without voiceover)</p>
+	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
+
+	// <p>Target market. Default: not specified. Supported values: north_america / europe / china / japan / korea / sea / brazil</p>
+	Market *string `json:"Market,omitnil,omitempty" name:"Market"`
+
+	// <p>Fission level. Values: exact/low/medium/high. Default: exact (1:1 clone)</p>
+	FissionLevel *string `json:"FissionLevel,omitnil,omitempty" name:"FissionLevel"`
+}
+
+type CloneViralPersona struct {
+	// <p>Model gender. Values: male/female/any</p>
+	Gender *string `json:"Gender,omitnil,omitempty" name:"Gender"`
+
+	// <p>Age segment. Values: teenager/youth/middle_aged/senior</p>
+	Age *string `json:"Age,omitnil,omitempty" name:"Age"`
+
+	// <p>Appearance feature. Values: caucasian/asian/latino/african/middle_eastern</p>
+	Ethnicity *string `json:"Ethnicity,omitnil,omitempty" name:"Ethnicity"`
+
+	// <p>Body type. Values: slim / standard / athletic / chubby</p>
+	BodyType *string `json:"BodyType,omitnil,omitempty" name:"BodyType"`
+}
+
+type CloneViralProduct struct {
+	// <p>Product image</p>
+	Images []*string `json:"Images,omitnil,omitempty" name:"Images"`
+
+	// <p>Product name</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Product description</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+// Predefined struct for user
+type CloneViralRequestParams struct {
+	// <p>Viral video Url</p>
+	VideoUrl *string `json:"VideoUrl,omitnil,omitempty" name:"VideoUrl"`
+
+	// <p>Product information</p>
+	Product *CloneViralProduct `json:"Product,omitnil,omitempty" name:"Product"`
+
+	// <p>AIGC video-related parameters</p>
+	AIGCParam *CloneViralAIGC `json:"AIGCParam,omitnil,omitempty" name:"AIGCParam"`
+
+	// <p>Content/style-related parameters</p>
+	ContentParam *CloneViralContent `json:"ContentParam,omitnil,omitempty" name:"ContentParam"`
+
+	// <p>Model appearance</p>
+	Persona *CloneViralPersona `json:"Persona,omitnil,omitempty" name:"Persona"`
+}
+
+type CloneViralRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Viral video Url</p>
+	VideoUrl *string `json:"VideoUrl,omitnil,omitempty" name:"VideoUrl"`
+
+	// <p>Product information</p>
+	Product *CloneViralProduct `json:"Product,omitnil,omitempty" name:"Product"`
+
+	// <p>AIGC video-related parameters</p>
+	AIGCParam *CloneViralAIGC `json:"AIGCParam,omitnil,omitempty" name:"AIGCParam"`
+
+	// <p>Content/style-related parameters</p>
+	ContentParam *CloneViralContent `json:"ContentParam,omitnil,omitempty" name:"ContentParam"`
+
+	// <p>Model appearance</p>
+	Persona *CloneViralPersona `json:"Persona,omitnil,omitempty" name:"Persona"`
+}
+
+func (r *CloneViralRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloneViralRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "VideoUrl")
+	delete(f, "Product")
+	delete(f, "AIGCParam")
+	delete(f, "ContentParam")
+	delete(f, "Persona")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloneViralRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CloneViralResponseParams struct {
+	// <p>Task status. FAIL is returned on failure.</p>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Error message is returned on failure</p>
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// <p>Returned task ID after the task is created successfully. The task progress and generation results can be obtained by calling the query API.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CloneViralResponse struct {
+	*tchttp.BaseResponse
+	Response *CloneViralResponseParams `json:"Response"`
+}
+
+func (r *CloneViralResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloneViralResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ColorEnhanceConfig struct {
@@ -3918,11 +4117,75 @@ func (r *CreateAdaptiveDynamicStreamingTemplateResponse) FromJsonString(s string
 }
 
 // Predefined struct for user
+type CreateAiDramaTaskRequestParams struct {
+	// <p>ai comic input</p>
+	Input *AiDramaInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// <p>User cos information</p>
+	CosInfo *VideoDramaCosInfo `json:"CosInfo,omitnil,omitempty" name:"CosInfo"`
+}
+
+type CreateAiDramaTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>ai comic input</p>
+	Input *AiDramaInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// <p>User cos information</p>
+	CosInfo *VideoDramaCosInfo `json:"CosInfo,omitnil,omitempty" name:"CosInfo"`
+}
+
+func (r *CreateAiDramaTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAiDramaTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Input")
+	delete(f, "CosInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAiDramaTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAiDramaTaskResponseParams struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateAiDramaTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAiDramaTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateAiDramaTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAiDramaTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateAigcAudioTaskRequestParams struct {
 	// <p>Model name. Supported models for music generation: GL and MiniMaxMusic.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// <p>Specifies the model version. By default, the system uses the supported stable version of the model.<br>Supported versions for GL: 3.0-clip and 3.0-pro.<br>Supported versions for MinimaxMusic: 2.0, 2.5, and 2.6.</p>
+	// <p>Specifies the model version. By default, the system uses the supported stable version of the model.<br>Supported versions for GL: 3.0-clip and 3.0-pro.<br>Supported versions for MiniMaxMusic: 2.0, 2.5, and 2.6.</p>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
 	// <p>Specifies the scenario for audio generation. Music: music.</p>
@@ -3946,7 +4209,7 @@ type CreateAigcAudioTaskRequestParams struct {
 	// <p>Additional parameters required.</p>
 	ExtraParameters *AigcAudioExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
 
-	// <p>This is used to specify special scenario parameters required by the model, in the format of a serialized JSON string.<br>Example to specify lyrics for the MinimaxMusic model:<br>{"lyric":{"The pony is running with joy. The flowers are blooming."}}</p>
+	// <p>This is used to specify special scenario parameters required by the model, in the format of a serialized JSON string.<br>Example to specify lyrics for the MinimaxMusic model:<br>{"lyric":{"The pony is running with joy. The flowers are blooming."}}</p><ol><li>Example for MiniMaxMusic instrumental music: &quot;AdditionalParameters&quot;:&quot;{"is_instrumental":true}&quot;</li></ol>
 	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
 
 	// <p>API operator name.</p>
@@ -3959,7 +4222,7 @@ type CreateAigcAudioTaskRequest struct {
 	// <p>Model name. Supported models for music generation: GL and MiniMaxMusic.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// <p>Specifies the model version. By default, the system uses the supported stable version of the model.<br>Supported versions for GL: 3.0-clip and 3.0-pro.<br>Supported versions for MinimaxMusic: 2.0, 2.5, and 2.6.</p>
+	// <p>Specifies the model version. By default, the system uses the supported stable version of the model.<br>Supported versions for GL: 3.0-clip and 3.0-pro.<br>Supported versions for MiniMaxMusic: 2.0, 2.5, and 2.6.</p>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
 	// <p>Specifies the scenario for audio generation. Music: music.</p>
@@ -3983,7 +4246,7 @@ type CreateAigcAudioTaskRequest struct {
 	// <p>Additional parameters required.</p>
 	ExtraParameters *AigcAudioExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
 
-	// <p>This is used to specify special scenario parameters required by the model, in the format of a serialized JSON string.<br>Example to specify lyrics for the MinimaxMusic model:<br>{"lyric":{"The pony is running with joy. The flowers are blooming."}}</p>
+	// <p>This is used to specify special scenario parameters required by the model, in the format of a serialized JSON string.<br>Example to specify lyrics for the MinimaxMusic model:<br>{"lyric":{"The pony is running with joy. The flowers are blooming."}}</p><ol><li>Example for MiniMaxMusic instrumental music: &quot;AdditionalParameters&quot;:&quot;{"is_instrumental":true}&quot;</li></ol>
 	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
 
 	// <p>API operator name.</p>
@@ -4210,6 +4473,9 @@ type CreateAigcVideoTaskRequestParams struct {
 	// <p>Only Kling O1, Kling 3.0-Omni, Vidu q2-pro, and H2 1.0 support reference video information.</p><ol><li>For Kling O1 and 3.0-Omni, the reference video can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.</li><li>Vidu q2-pro supports video reference.</li><li>H2 1.0 supports video reference.</li></ol>
 	VideoInfos []*AigcVideoReferenceVideoInfo `json:"VideoInfos,omitnil,omitempty" name:"VideoInfos"`
 
+	// <p>Some models support reference audio input via URL.</p>
+	AudioInfos []*AigcVideoReferenceAudioInfo `json:"AudioInfos,omitnil,omitempty" name:"AudioInfos"`
+
 	// <p>Duration of the generated video.<br>Note:</p><ol><li>Kling: default value: 5 seconds.<ul><li>O1 supports 3 to 10 seconds.</li><li>3.0-Omni supports 3 to 15 seconds, or 3 to 10 seconds when a video reference is used.</li><li>3.0 supports 3 to 15 seconds.</li><li>Other versions support 5 and 10 seconds.</li></ul></li><li>The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.</li><li>Vidu: default value: 5 seconds.<ul><li>q3-pro, q3-turbo, q3, and q3-mix support 3 to 16 seconds.</li><li>q2-pro, q2-turbo, and q2 support 1 to 10 seconds.</li></ul></li><li>PixVerse: default value: 5 seconds.<ul><li>v5.6 supports 5, 8, and 10 seconds.</li><li>v6 and c1 support 1 to 15 seconds.</li></ul></li><li>H2 supports 3 to 15 seconds. Default value: 5 seconds.</li></ol>
 	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
@@ -4259,6 +4525,9 @@ type CreateAigcVideoTaskRequest struct {
 	// <p>Only Kling O1, Kling 3.0-Omni, Vidu q2-pro, and H2 1.0 support reference video information.</p><ol><li>For Kling O1 and 3.0-Omni, the reference video can be used as a feature reference video or a video for editing. The default type is video for editing. You can choose to keep the original sound of the video.</li><li>Vidu q2-pro supports video reference.</li><li>H2 1.0 supports video reference.</li></ol>
 	VideoInfos []*AigcVideoReferenceVideoInfo `json:"VideoInfos,omitnil,omitempty" name:"VideoInfos"`
 
+	// <p>Some models support reference audio input via URL.</p>
+	AudioInfos []*AigcVideoReferenceAudioInfo `json:"AudioInfos,omitnil,omitempty" name:"AudioInfos"`
+
 	// <p>Duration of the generated video.<br>Note:</p><ol><li>Kling: default value: 5 seconds.<ul><li>O1 supports 3 to 10 seconds.</li><li>3.0-Omni supports 3 to 15 seconds, or 3 to 10 seconds when a video reference is used.</li><li>3.0 supports 3 to 15 seconds.</li><li>Other versions support 5 and 10 seconds.</li></ul></li><li>The std mode of Hailuo supports 6 and 10 seconds, and other modes support 6 seconds. Default value: 6 seconds.</li><li>Vidu: default value: 5 seconds.<ul><li>q3-pro, q3-turbo, q3, and q3-mix support 3 to 16 seconds.</li><li>q2-pro, q2-turbo, and q2 support 1 to 10 seconds.</li></ul></li><li>PixVerse: default value: 5 seconds.<ul><li>v5.6 supports 5, 8, and 10 seconds.</li><li>v6 and c1 support 1 to 15 seconds.</li></ul></li><li>H2 supports 3 to 15 seconds. Default value: 5 seconds.</li></ol>
 	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
@@ -4297,6 +4566,7 @@ func (r *CreateAigcVideoTaskRequest) FromJsonString(s string) error {
 	delete(f, "LastImageUrl")
 	delete(f, "ImageInfos")
 	delete(f, "VideoInfos")
+	delete(f, "AudioInfos")
 	delete(f, "Duration")
 	delete(f, "ExtraParameters")
 	delete(f, "StoreCosParam")
@@ -4745,6 +5015,70 @@ func (r *CreateContentReviewTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateContentReviewTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDocToVideoTaskRequestParams struct {
+	// <p>Input information for AIGC document‑to‑video generation</p>
+	Input *DocToVideoInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// <p>User cos information, used to store the generation result</p>
+	CosInfo *DocToVideoCosInfo `json:"CosInfo,omitnil,omitempty" name:"CosInfo"`
+}
+
+type CreateDocToVideoTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Input information for AIGC document‑to‑video generation</p>
+	Input *DocToVideoInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// <p>User cos information, used to store the generation result</p>
+	CosInfo *DocToVideoCosInfo `json:"CosInfo,omitnil,omitempty" name:"CosInfo"`
+}
+
+func (r *CreateDocToVideoTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDocToVideoTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Input")
+	delete(f, "CosInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDocToVideoTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDocToVideoTaskResponseParams struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateDocToVideoTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDocToVideoTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateDocToVideoTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDocToVideoTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6109,6 +6443,77 @@ func (r *CreateTranscodeTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateTranscodeTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateVideoRedrawTaskRequestParams struct {
+	// <p>Input the url information of the video to be redrawn</p>
+	Input *VideoRedrawInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// <p>User cos information, used to store the generation result</p>
+	CosInfo *VideoRedrawCosInfo `json:"CosInfo,omitnil,omitempty" name:"CosInfo"`
+
+	// <p>ai redrawing task information</p>
+	TaskInfo *VideoRedrawTaskInfo `json:"TaskInfo,omitnil,omitempty" name:"TaskInfo"`
+}
+
+type CreateVideoRedrawTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Input the url information of the video to be redrawn</p>
+	Input *VideoRedrawInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// <p>User cos information, used to store the generation result</p>
+	CosInfo *VideoRedrawCosInfo `json:"CosInfo,omitnil,omitempty" name:"CosInfo"`
+
+	// <p>ai redrawing task information</p>
+	TaskInfo *VideoRedrawTaskInfo `json:"TaskInfo,omitnil,omitempty" name:"TaskInfo"`
+}
+
+func (r *CreateVideoRedrawTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVideoRedrawTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Input")
+	delete(f, "CosInfo")
+	delete(f, "TaskInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVideoRedrawTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateVideoRedrawTaskResponseParams struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateVideoRedrawTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateVideoRedrawTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateVideoRedrawTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVideoRedrawTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8189,6 +8594,91 @@ func (r *DescribeAigcImageTaskResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeAigcTaskStatusRequestParams struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DescribeAigcTaskStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DescribeAigcTaskStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAigcTaskStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAigcTaskStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAigcTaskStatusResponseParams struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Task status description</p><p>Enumeration values: </p><ul><li>PENDING: Task waiting for scheduling</li><li>RUNNING: Task running</li><li>FINISHED: Task executed successfully</li><li>STOP: Task termination</li><li>FAILED: Task failure</li><li>TIMEOUT: Task timeout</li></ul>
+	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
+
+	// <p>Output url</p>
+	// Attention: This field may return null, indicating that no valid values can be obtained.
+	OutputUrl *string `json:"OutputUrl,omitnil,omitempty" name:"OutputUrl"`
+
+	// <p>Task creation time</p>
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Task scheduling time</p>
+	ScheduledTime *string `json:"ScheduledTime,omitnil,omitempty" name:"ScheduledTime"`
+
+	// <p>Task completion time</p>
+	FinishedTime *string `json:"FinishedTime,omitnil,omitempty" name:"FinishedTime"`
+
+	// <p>Task error code</p>
+	TaskResultCode *int64 `json:"TaskResultCode,omitnil,omitempty" name:"TaskResultCode"`
+
+	// <p>Task returned error message</p>
+	TaskResultMsg *string `json:"TaskResultMsg,omitnil,omitempty" name:"TaskResultMsg"`
+
+	// <p>Request structure</p>
+	RequestBody *string `json:"RequestBody,omitnil,omitempty" name:"RequestBody"`
+
+	// <p>Task type</p>
+	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAigcTaskStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAigcTaskStatusResponseParams `json:"Response"`
+}
+
+func (r *DescribeAigcTaskStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAigcTaskStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeAigcVideoTaskRequestParams struct {
 	// Task ID returned when the AIGC video generation task is created.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
@@ -8803,6 +9293,69 @@ func (r *DescribeBlindWatermarkTemplatesResponse) FromJsonString(s string) error
 }
 
 // Predefined struct for user
+type DescribeCloneViralTaskRequestParams struct {
+	// <p>Task ID returned from the hit product clone creation task request</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DescribeCloneViralTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Task ID returned from the hit product clone creation task request</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DescribeCloneViralTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloneViralTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCloneViralTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCloneViralTaskResponseParams struct {
+	// <p>Task status</p><p>Enumeration values: </p><ul><li>WAIT: Waiting</li><li>RUN: Executing</li><li>FAIL: Task failed</li><li>DONE: Task succeeded</li></ul>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Error message is returned on failure</p>
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// <p>When the task status is DONE, the list of video URLs is returned. The videos are stored for 24 hours.</p>
+	VideoUrls []*string `json:"VideoUrls,omitnil,omitempty" name:"VideoUrls"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCloneViralTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCloneViralTaskResponseParams `json:"Response"`
+}
+
+func (r *DescribeCloneViralTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCloneViralTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeContentReviewTemplatesRequestParams struct {
 	// The IDs of the content moderation templates to query. Array length limit: 50.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
@@ -9149,6 +9702,104 @@ func (r *DescribeImageTaskDetailResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeImageTaskDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageTasksRequestParams struct {
+	// <p>Task status filter condition.</p>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Number of returned records.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Scrolling identifier which is used for pulling in batches. If a single request cannot pull all the data entries, the API will return `ScrollToken`, and if the next request carries it, the next pull will start from the next entry.</p>
+	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
+
+	// <p>Task start time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>Task end time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Filter subtask status.</p>
+	SubTaskHasFailed *bool `json:"SubTaskHasFailed,omitnil,omitempty" name:"SubTaskHasFailed"`
+}
+
+type DescribeImageTasksRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Task status filter condition.</p>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Number of returned records.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Scrolling identifier which is used for pulling in batches. If a single request cannot pull all the data entries, the API will return `ScrollToken`, and if the next request carries it, the next pull will start from the next entry.</p>
+	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
+
+	// <p>Task start time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>Task end time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Filter subtask status.</p>
+	SubTaskHasFailed *bool `json:"SubTaskHasFailed,omitnil,omitempty" name:"SubTaskHasFailed"`
+}
+
+func (r *DescribeImageTasksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageTasksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Status")
+	delete(f, "Limit")
+	delete(f, "ScrollToken")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "SubTaskHasFailed")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeImageTasksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageTasksResponseParams struct {
+	// <p>Total number of records that meet filter conditions.</p><p>Unit: entries</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>Scrolling identifier. If a request does not return all the data entries, this field indicates the ID of the next entry. If this field is an empty string, there is no more data.</p>
+	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
+
+	// <p>Image task summary list.</p>
+	TaskSet []*ImageTaskInfo `json:"TaskSet,omitnil,omitempty" name:"TaskSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeImageTasksResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeImageTasksResponseParams `json:"Response"`
+}
+
+func (r *DescribeImageTasksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -10932,6 +11583,9 @@ type DescribeVoicesResponseParams struct {
 	// <p>Error message. success is returned if the request is successful.</p>
 	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
+	// <p>Total number of voices that meet the search criteria</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
 	// <p>Available voice list.</p>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Voices []*VoiceInfo `json:"Voices,omitnil,omitempty" name:"Voices"`
@@ -11675,6 +12329,46 @@ func (r *DisableWorkflowResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DocToVideoCosInfo struct {
+	// <p>cos bucket region</p>
+	CosBucketRegion *string `json:"CosBucketRegion,omitnil,omitempty" name:"CosBucketRegion"`
+
+	// <p>cos bucket name</p>
+	CosBucketName *string `json:"CosBucketName,omitnil,omitempty" name:"CosBucketName"`
+
+	// <p>cos bucket path</p>
+	CosBucketPath *string `json:"CosBucketPath,omitnil,omitempty" name:"CosBucketPath"`
+}
+
+type DocToVideoInput struct {
+	// <p>Document link for video generation.</p><p>Supported document types: pdf, pptx, docx, png, jpg<br>Document count limit: 3<br>Document size limit: 10MB<br>Document page limit: 100</p>
+	FileUrl []*string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
+
+	// <p>Prompt information for video generation.</p><p>Prompt length limit: 2,000 characters.</p>
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// <p>Document-to-video model name</p><p>Default value: Wand</p>
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// <p>Document-to-video model version number</p><p>Default value: 1.0</p>
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// <p>Aspect ratio of the generated video.</p><p>Enumeration values: </p><ul><li>16:9: 16:9</li><li>9:16: 9:16</li><li>1:1: 1:1</li></ul><p>Default value: 16:9</p>
+	Ratio *string `json:"Ratio,omitnil,omitempty" name:"Ratio"`
+
+	// <p>Language of the generated video.</p><p>Enumeration values: </p><ul><li>zh: Chinese</li><li>en: English</li><li>ja: Japanese</li><li>ko: Korean</li><li>ru: Russian</li><li>fr: French</li><li>es: Spanish</li><li>de: German</li></ul><p>Default value: zh</p>
+	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
+
+	// <p>Video duration for reference.</p><p>This is not an exact duration; it serves as a reference for the LLM only.</p><p>Range: [15, 1200]</p><p>Unit: second</p>
+	ReferenceDuration *int64 `json:"ReferenceDuration,omitnil,omitempty" name:"ReferenceDuration"`
+
+	// <p>Whether the AI dubbing feature is enabled.</p><p>Default value: false</p>
+	EnableTTS *bool `json:"EnableTTS,omitnil,omitempty" name:"EnableTTS"`
+
+	// <p>Voice ID. Valid only when AI dubbing feature is enabled.</p>
+	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
+}
+
 type DrmInfo struct {
 	// Encryption type.
 	// 
@@ -11899,6 +12593,93 @@ type EditMediaTaskOutput struct {
 
 	// Path of edited video file.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+}
+
+type EmbeddingData struct {
+	// <p>Data type</p><p>Enumeration values:</p><ul><li>text: Text</li></ul>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// <p>Data content. When Type is text, it is a text string.</p>
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+}
+
+// Predefined struct for user
+type EmbeddingDataRequestParams struct {
+	// <p>Embedding model; currently only supports text_embedding_v1</p><p>Enumeration values: </p><ul><li>text_embedding_v1: The text embedding model. Prompt can be filled.</li></ul>
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// <p>Embedding input</p>
+	Files []*EmbeddingData `json:"Files,omitnil,omitempty" name:"Files"`
+
+	// <p>Prompt for embedding input</p>
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+}
+
+type EmbeddingDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Embedding model; currently only supports text_embedding_v1</p><p>Enumeration values: </p><ul><li>text_embedding_v1: The text embedding model. Prompt can be filled.</li></ul>
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// <p>Embedding input</p>
+	Files []*EmbeddingData `json:"Files,omitnil,omitempty" name:"Files"`
+
+	// <p>Prompt for embedding input</p>
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+}
+
+func (r *EmbeddingDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EmbeddingDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Model")
+	delete(f, "Files")
+	delete(f, "Prompt")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EmbeddingDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EmbeddingDataResponseParams struct {
+	// <p>Embedding result</p>
+	Data []*EmbeddingResultItem `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// <p>Token usage of the embedding</p>
+	Usage *TokensUsage `json:"Usage,omitnil,omitempty" name:"Usage"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type EmbeddingDataResponse struct {
+	*tchttp.BaseResponse
+	Response *EmbeddingDataResponseParams `json:"Response"`
+}
+
+func (r *EmbeddingDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EmbeddingDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type EmbeddingResultItem struct {
+	// <p>Vector</p>
+	Result []*float64 `json:"Result,omitnil,omitempty" name:"Result"`
 }
 
 // Predefined struct for user
@@ -12534,16 +13315,19 @@ type ImageEraseLogoConfig struct {
 }
 
 type ImageProcessTaskOutput struct {
-	// Path of the output file.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Path of the output file.</p>
+	// Attention: This field may return null, indicating that no valid values can be obtained.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-	// Storage location of the output file.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Storage location of the output file.</p>
+	// Attention: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Processing result of the image-to-text task.
+	// <p>Processing result of the image-to-text task.</p>
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// <p>VOD Standard Edition FileId</p>
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 }
 
 type ImageProcessTaskResult struct {
@@ -12658,6 +13442,29 @@ type ImageSpriteTemplate struct {
 
 	// The image format.
 	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
+}
+
+type ImageTaskInfo struct {
+	// <p>TaskId of the image processing task.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Task status.</p><p>Enumeration values: </p><ul><li>FINISH: Task completion</li><li>PROCESSING: Task processing</li></ul>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Input file.</p>
+	Input *string `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// <p>Creation time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Processing start time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
+
+	// <p>End time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
+	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
+
+	// <p>Subtask failure identifier.</p>
+	SubTaskHasFailed *bool `json:"SubTaskHasFailed,omitnil,omitempty" name:"SubTaskHasFailed"`
 }
 
 type ImageTaskInput struct {
@@ -19893,6 +20700,9 @@ type SubtitleResult struct {
 
 	// <p>Subtitle suppression video path.</p>
 	SubtitleEmbedPath *string `json:"SubtitleEmbedPath,omitnil,omitempty" name:"SubtitleEmbedPath"`
+
+	// <p>FileId of the subtitle file.</p>
+	SubtitleFileId *string `json:"SubtitleFileId,omitnil,omitempty" name:"SubtitleFileId"`
 }
 
 type SubtitleShadowConfig struct {
@@ -20109,6 +20919,9 @@ type SubtitleTransResultItem struct {
 
 	// <p>Subtitle translation suppression video path.</p>
 	SubtitleEmbedPath *string `json:"SubtitleEmbedPath,omitnil,omitempty" name:"SubtitleEmbedPath"`
+
+	// <p>FileId of the subtitle file.</p>
+	SubtitleFileId *string `json:"SubtitleFileId,omitnil,omitempty" name:"SubtitleFileId"`
 }
 
 type SuperResolutionConfig struct {
@@ -20904,6 +21717,17 @@ type TimeSpotCheck struct {
 	CirclesNumber *uint64 `json:"CirclesNumber,omitnil,omitempty" name:"CirclesNumber"`
 }
 
+type TokensUsage struct {
+	// <p>Input token count</p>
+	InputTokens *uint64 `json:"InputTokens,omitnil,omitempty" name:"InputTokens"`
+
+	// <p>Output token count</p>
+	OutputTokens *uint64 `json:"OutputTokens,omitnil,omitempty" name:"OutputTokens"`
+
+	// <p>Total token count, generally input + output</p>
+	TotalTokens *uint64 `json:"TotalTokens,omitnil,omitempty" name:"TotalTokens"`
+}
+
 type TrackInfo struct {
 	// The serial number of the audio track and sound channel.
 	// <li>When the value of SelectType is track, this value is an integer, for example: 1.
@@ -21470,28 +22294,37 @@ type UserDefineOcrTextReviewTemplateInfoForUpdate struct {
 }
 
 type VODInputInfo struct {
-	// Specifies the Bucket ID where the input file resides.
+	// <p><em>Bucket ID</em> where the media processing object file resides</p>
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
-	// Specifies the region where the input file's Bucket resides.
+	// <p>Region of the Bucket where the media processing object file resides</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Path of the input file.
+	// <p>Input path of the media processing object file</p>
 	Object *string `json:"Object,omitnil,omitempty" name:"Object"`
 
-	// VOD Pro application Id.
+	// <p>VOD application ID.</p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// <p>Whether to use VOD Standard Edition.<br>Attention: If left empty, VOD Pro Edition is used.</p><p>Enumeration values: </p><ul><li>Use VOD Pro Edition</li><li>Use VOD Standard Edition, allowing tasks to be initiated with FileId</li></ul><p>Default value: 0</p>
+	VodBasic *int64 `json:"VodBasic,omitnil,omitempty" name:"VodBasic"`
+
+	// <p>VOD Standard Edition FileId</p>
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 }
 
 type VODOutputStorage struct {
-	// Specifies the destination Bucket ID for the generated output file of MPS.
+	// <p>Target <em>Bucket ID</em> for the output file generated by media processing</p>
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
-	// Specifies the region of the target Bucket for the output.
+	// <p>Region of the target Bucket for the output file generated by media processing</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// VOD Pro application Id.
+	// <p>VOD application ID</p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// <p>Whether to use VOD Standard Edition.<br>Attention: If left empty, VOD Pro Edition is used.</p><p>Enumeration values: </p><ul><li>0: Do not use VOD Standard Edition</li><li>1: Use VOD Standard Edition</li></ul>
+	VodBasic *int64 `json:"VodBasic,omitnil,omitempty" name:"VodBasic"`
 }
 
 type VideoComprehensionResultItem struct {
@@ -21526,63 +22359,84 @@ type VideoDenoiseConfig struct {
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
+type VideoDramaCosInfo struct {
+	// <p>cos bucket region</p>
+	CosBucketRegion *string `json:"CosBucketRegion,omitnil,omitempty" name:"CosBucketRegion"`
+
+	// <p>cos bucket name</p>
+	CosBucketName *string `json:"CosBucketName,omitnil,omitempty" name:"CosBucketName"`
+
+	// <p>cos bucket path</p>
+	CosBucketPath *string `json:"CosBucketPath,omitnil,omitempty" name:"CosBucketPath"`
+}
+
 type VideoEnhanceConfig struct {
-	// Frame rate configuration (old) for the frame interpolation. New users are recommended to use FrameRateWithDen for configuring the frame rate of frame interpolation, which supports fractions and provides better results. Note that FrameRate and FrameRateWithDen are mutually exclusive; configuring both simultaneously may cause task failures. The configuration does not take effect if the source frame rate is greater than or equal to the target frame rate.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Frame rate configuration (old) for the frame interpolation. New users are recommended to use FrameRateWithDen for configuring the frame rate of frame interpolation, which supports fractions and provides better results. Note that FrameRate and FrameRateWithDen are mutually exclusive; configuring both simultaneously may cause task failures. The configuration does not take effect if the source frame rate is greater than or equal to the target frame rate.</p>
+	// Attention: This field may return null, indicating that no valid values can be obtained.
 	FrameRate *FrameRateConfig `json:"FrameRate,omitnil,omitempty" name:"FrameRate"`
 
-	// Super-resolution configuration. The video is not processed when the source resolution is higher than the target resolution. Note that it cannot be enabled simultaneously with Large Model enhancement.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Super-resolution configuration. The video is not processed when the source resolution is higher than the target resolution. Note that it cannot be enabled simultaneously with LLM enhancement.</p>
+	// Attention: This field may return null, indicating that no valid values can be obtained.
 	SuperResolution *SuperResolutionConfig `json:"SuperResolution,omitnil,omitempty" name:"SuperResolution"`
 
-	// HDR configuration.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>HDR configuration.</p>
+	// Attention: This field may return null, indicating that no valid values can be obtained.
 	Hdr *HdrConfig `json:"Hdr,omitnil,omitempty" name:"Hdr"`
 
-	// Video noise reduction configuration. Note that it cannot be enabled simultaneously with LLM enhancement.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Video noise reduction configuration. Note that it cannot be enabled simultaneously with LLM enhancement.</p>
+	// Attention: This field may return null, indicating that no valid values can be obtained.
 	Denoise *VideoDenoiseConfig `json:"Denoise,omitnil,omitempty" name:"Denoise"`
 
-	// Comprehensive enhancement configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Comprehensive enhancement configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured.</p>
+	// Attention: This field may return null, indicating that no valid values can be obtained.
 	ImageQualityEnhance *ImageQualityEnhanceConfig `json:"ImageQualityEnhance,omitnil,omitempty" name:"ImageQualityEnhance"`
 
-	// Color enhancement configuration.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Color enhancement configuration.</p>Attention: This field may return null, indicating that no valid values can be obtained.
 	ColorEnhance *ColorEnhanceConfig `json:"ColorEnhance,omitnil,omitempty" name:"ColorEnhance"`
 
-	// Low-light enhancement configuration.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Low-light enhancement configuration.</p>Attention: This field may return null, indicating that no valid values can be obtained.
 	LowLightEnhance *LowLightEnhanceConfig `json:"LowLightEnhance,omitnil,omitempty" name:"LowLightEnhance"`
 
-	// Banding removal configuration.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Scratch removal configuration.</p>Attention: This field may return null, indicating that no valid values can be obtained.
 	ScratchRepair *ScratchRepairConfig `json:"ScratchRepair,omitnil,omitempty" name:"ScratchRepair"`
 
-	// Artifacts removal configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Artifacts removal configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured.</p>
+	// Attention: This field may return null, indicating that no valid values can be obtained.
 	ArtifactRepair *ArtifactRepairConfig `json:"ArtifactRepair,omitnil,omitempty" name:"ArtifactRepair"`
 
-	// Enhancement scenario configuration. Valid values:
-	// <li>common: common enhancement parameters, which are basic optimization parameters suitable for various video types, enhancing overall image quality.</li>
-	// <li>AIGC: overall resolution enhancement. It uses AI technology to improve the overall video resolution and image clarity.</li>
-	// <li>short_play: enhance facial and subtitle details, emphasizing characters' facial expressions and subtitle clarity to improve the viewing experience.</li>
-	// <li>short_video: optimize complex and diverse image quality issues, tailoring quality enhancements for the complex scenarios such as short videos to address various visual issues.</li>
-	// <li>game: fix motion blur and enhance details, with a focus on enhancing the clarity of game details and restoring blurry areas during motions to make the image content during gaming clearer and richer.</li>
-	// <li>HD_movie_series: provide a smooth playback effect for UHD videos. Standard 4K HDR videos with an FPS of 60 are generated to meet the needs of broadcasting/OTT for UHD videos. Formats for broadcasting scenarios are supported.</li>
-	// <li>LQ_material: low-definition material/old video restoration. It enhances overall resolution, and solves issues of old videos, such as low resolution, blur, distortion, scratches, and color temperature due to their age.</li>
-	// <li>lecture: live shows, e-commerce, conferences, and lectures. It improves the face display effect and performs specific optimizations, including face region enhancement, noise reduction, and artifacts removal, for scenarios involving human explanation, such as live shows, e-commerce, conferences, and lectures.</li>
-	// <li>Input of a null string indicates that the enhancement scenario is not used.</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Enhancement scenario configuration. Valid values:</p><li>common: common enhancement parameters, which are basic optimization parameters suitable for various video types, enhancing overall image quality.</li><li>AIGC: overall resolution enhancement. It uses AI technology to improve the overall video resolution and image clarity.</li><li>short_play (short dramas &amp; AI human-like dramas): enhance facial and subtitle details, emphasizing characters' facial expressions and subtitle clarity to improve the viewing experience.</li><li>ai_comic: enhance details in comic-style visuals.</li><li>short_video: optimize complex and diverse image quality issues, tailoring quality enhancements for the complex scenarios such as short videos to address various visual issues.</li><li>game: fix motion blur and enhance details, with a focus on enhancing the clarity of game details and restoring blurry areas during motions to make the image content during gaming clearer and richer.</li><li>HD_movie_series: provide a smooth playback effect for UHD videos. Standard 4K HDR videos with an FPS of 60 are generated to meet the needs of broadcasting/OTT for UHD videos. Formats for broadcasting scenarios are supported.</li><li>LQ_material: low-definition material/old video restoration. It enhances overall resolution, and solves issues of old videos, such as low resolution, blur, distortion, scratches, and color temperature due to their age.</li><li>lecture: live shows, e-commerce, conferences, and lectures. It improves the face display effect and performs specific optimizations, including face region enhancement, noise reduction, and artifacts removal, for scenarios involving human explanation, such as live shows, e-commerce, conferences, and lectures.</li><li>Input of a null string indicates that the enhancement scenario is not used.</li>
+	// Attention: This field may return null, indicating that no valid values can be obtained.
 	EnhanceSceneType *string `json:"EnhanceSceneType,omitnil,omitempty" name:"EnhanceSceneType"`
 
-	// Large Model enhancement configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured. It cannot be enabled simultaneously with super-resolution and noise reduction.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>LLM enhancement configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured. It cannot be enabled simultaneously with super-resolution and noise reduction.</p>Attention: This field may return null, indicating that no valid values can be obtained.
 	DiffusionEnhance *DiffusionEnhanceConfig `json:"DiffusionEnhance,omitnil,omitempty" name:"DiffusionEnhance"`
 
-	// New frame rate configuration for the frame interpolation, which supports fractions. Note that it is mutually exclusive with FrameRate. The configuration does not take effect if the source frame rate is greater than or equal to the target frame rate.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>New frame rate configuration for the frame interpolation, which supports fractions. Note that it is mutually exclusive with FrameRate. The configuration does not take effect if the source frame rate is greater than or equal to the target frame rate.</p>Attention: This field may return null, indicating that no valid values can be obtained.
 	FrameRateWithDen *FrameRateWithDenConfig `json:"FrameRateWithDen,omitnil,omitempty" name:"FrameRateWithDen"`
+
+	// <p>LLM repair configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured. It cannot be enabled simultaneously with super-resolution and noise reduction.</p>Attention: This field may return null, indicating that no valid values can be obtained.
+	AiRestoration *AiRestorationConfig `json:"AiRestoration,omitnil,omitempty" name:"AiRestoration"`
+}
+
+type VideoRedrawCosInfo struct {
+	// <p>cos bucket region</p>
+	CosBucketRegion *string `json:"CosBucketRegion,omitnil,omitempty" name:"CosBucketRegion"`
+
+	// <p>cos bucket name</p>
+	CosBucketName *string `json:"CosBucketName,omitnil,omitempty" name:"CosBucketName"`
+
+	// <p>cos bucket path</p>
+	CosBucketPath *string `json:"CosBucketPath,omitnil,omitempty" name:"CosBucketPath"`
+}
+
+type VideoRedrawInput struct {
+	// <p>Input the video URL to be redrawn</p>
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+}
+
+type VideoRedrawTaskInfo struct {
+	// <p>Convert the video style, such as anime, cyberpunk, and ink wash</p>
+	Style *string `json:"Style,omitnil,omitempty" name:"Style"`
 }
 
 type VideoTemplateInfo struct {

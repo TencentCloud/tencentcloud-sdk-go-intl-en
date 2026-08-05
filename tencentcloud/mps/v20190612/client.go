@@ -111,6 +111,68 @@ func (c *Client) BatchProcessMediaWithContext(ctx context.Context, request *Batc
     return
 }
 
+func NewCloneViralRequest() (request *CloneViralRequest) {
+    request = &CloneViralRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "CloneViral")
+    
+    
+    return
+}
+
+func NewCloneViralResponse() (response *CloneViralResponse) {
+    response = &CloneViralResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CloneViral
+// Clone a hit product. Input a reference video of a hit product and a product image to generate a video with aligned style and pace.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+func (c *Client) CloneViral(request *CloneViralRequest) (response *CloneViralResponse, err error) {
+    return c.CloneViralWithContext(context.Background(), request)
+}
+
+// CloneViral
+// Clone a hit product. Input a reference video of a hit product and a product image to generate a video with aligned style and pace.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+func (c *Client) CloneViralWithContext(ctx context.Context, request *CloneViralRequest) (response *CloneViralResponse, err error) {
+    if request == nil {
+        request = NewCloneViralRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "CloneViral")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CloneViral require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCloneViralResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAIAnalysisTemplateRequest() (request *CreateAIAnalysisTemplateRequest) {
     request = &CreateAIAnalysisTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -345,6 +407,62 @@ func (c *Client) CreateAdaptiveDynamicStreamingTemplateWithContext(ctx context.C
     request.SetContext(ctx)
     
     response = NewCreateAdaptiveDynamicStreamingTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateAiDramaTaskRequest() (request *CreateAiDramaTaskRequest) {
+    request = &CreateAiDramaTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "CreateAiDramaTask")
+    
+    
+    return
+}
+
+func NewCreateAiDramaTaskResponse() (response *CreateAiDramaTaskResponse) {
+    response = &CreateAiDramaTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAiDramaTask
+// AI comic workflow, input a playbook, automatically split scenes, generate an AI comic
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEAIGCTASKFAILED = "FailedOperation.CreateAIGCTaskFailed"
+//  FAILEDOPERATION_USERARREARS = "FailedOperation.UserArrears"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_CREATETASK = "LimitExceeded.CreateTask"
+func (c *Client) CreateAiDramaTask(request *CreateAiDramaTaskRequest) (response *CreateAiDramaTaskResponse, err error) {
+    return c.CreateAiDramaTaskWithContext(context.Background(), request)
+}
+
+// CreateAiDramaTask
+// AI comic workflow, input a playbook, automatically split scenes, generate an AI comic
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEAIGCTASKFAILED = "FailedOperation.CreateAIGCTaskFailed"
+//  FAILEDOPERATION_USERARREARS = "FailedOperation.UserArrears"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_CREATETASK = "LimitExceeded.CreateTask"
+func (c *Client) CreateAiDramaTaskWithContext(ctx context.Context, request *CreateAiDramaTaskRequest) (response *CreateAiDramaTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateAiDramaTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "CreateAiDramaTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAiDramaTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAiDramaTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -757,6 +875,62 @@ func (c *Client) CreateContentReviewTemplateWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewCreateContentReviewTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateDocToVideoTaskRequest() (request *CreateDocToVideoTaskRequest) {
+    request = &CreateDocToVideoTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "CreateDocToVideoTask")
+    
+    
+    return
+}
+
+func NewCreateDocToVideoTaskResponse() (response *CreateDocToVideoTaskResponse) {
+    response = &CreateDocToVideoTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDocToVideoTask
+// Creates an AIGC document-to-video task
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEAIGCTASKFAILED = "FailedOperation.CreateAIGCTaskFailed"
+//  FAILEDOPERATION_USERARREARS = "FailedOperation.UserArrears"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_CREATETASK = "LimitExceeded.CreateTask"
+func (c *Client) CreateDocToVideoTask(request *CreateDocToVideoTaskRequest) (response *CreateDocToVideoTaskResponse, err error) {
+    return c.CreateDocToVideoTaskWithContext(context.Background(), request)
+}
+
+// CreateDocToVideoTask
+// Creates an AIGC document-to-video task
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEAIGCTASKFAILED = "FailedOperation.CreateAIGCTaskFailed"
+//  FAILEDOPERATION_USERARREARS = "FailedOperation.UserArrears"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_CREATETASK = "LimitExceeded.CreateTask"
+func (c *Client) CreateDocToVideoTaskWithContext(ctx context.Context, request *CreateDocToVideoTaskRequest) (response *CreateDocToVideoTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateDocToVideoTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "CreateDocToVideoTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDocToVideoTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDocToVideoTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -1685,6 +1859,64 @@ func (c *Client) CreateTranscodeTemplateWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewCreateTranscodeTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateVideoRedrawTaskRequest() (request *CreateVideoRedrawTaskRequest) {
+    request = &CreateVideoRedrawTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "CreateVideoRedrawTask")
+    
+    
+    return
+}
+
+func NewCreateVideoRedrawTaskResponse() (response *CreateVideoRedrawTaskResponse) {
+    response = &CreateVideoRedrawTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateVideoRedrawTask
+// Creates an AIGC redrawing task
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEAIGCTASKFAILED = "FailedOperation.CreateAIGCTaskFailed"
+//  FAILEDOPERATION_USERARREARS = "FailedOperation.UserArrears"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDURL = "InvalidParameter.InvalidUrl"
+//  LIMITEXCEEDED_CREATETASK = "LimitExceeded.CreateTask"
+func (c *Client) CreateVideoRedrawTask(request *CreateVideoRedrawTaskRequest) (response *CreateVideoRedrawTaskResponse, err error) {
+    return c.CreateVideoRedrawTaskWithContext(context.Background(), request)
+}
+
+// CreateVideoRedrawTask
+// Creates an AIGC redrawing task
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEAIGCTASKFAILED = "FailedOperation.CreateAIGCTaskFailed"
+//  FAILEDOPERATION_USERARREARS = "FailedOperation.UserArrears"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDURL = "InvalidParameter.InvalidUrl"
+//  LIMITEXCEEDED_CREATETASK = "LimitExceeded.CreateTask"
+func (c *Client) CreateVideoRedrawTaskWithContext(ctx context.Context, request *CreateVideoRedrawTaskRequest) (response *CreateVideoRedrawTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateVideoRedrawTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "CreateVideoRedrawTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateVideoRedrawTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateVideoRedrawTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -3583,6 +3815,58 @@ func (c *Client) DescribeAigcImageTaskWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeAigcTaskStatusRequest() (request *DescribeAigcTaskStatusRequest) {
+    request = &DescribeAigcTaskStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeAigcTaskStatus")
+    
+    
+    return
+}
+
+func NewDescribeAigcTaskStatusResponse() (response *DescribeAigcTaskStatusResponse) {
+    response = &DescribeAigcTaskStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAigcTaskStatus
+// Queries AIGC scenario task APIs
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYAIGCTASKFAILED = "FailedOperation.QueryAIGCTaskFailed"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
+func (c *Client) DescribeAigcTaskStatus(request *DescribeAigcTaskStatusRequest) (response *DescribeAigcTaskStatusResponse, err error) {
+    return c.DescribeAigcTaskStatusWithContext(context.Background(), request)
+}
+
+// DescribeAigcTaskStatus
+// Queries AIGC scenario task APIs
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYAIGCTASKFAILED = "FailedOperation.QueryAIGCTaskFailed"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
+func (c *Client) DescribeAigcTaskStatusWithContext(ctx context.Context, request *DescribeAigcTaskStatusRequest) (response *DescribeAigcTaskStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeAigcTaskStatusRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DescribeAigcTaskStatus")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAigcTaskStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAigcTaskStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAigcVideoTaskRequest() (request *DescribeAigcVideoTaskRequest) {
     request = &DescribeAigcVideoTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3606,12 +3890,8 @@ func NewDescribeAigcVideoTaskResponse() (response *DescribeAigcVideoTaskResponse
 // This API is used to query the progress of AIGC video generation tasks and obtain the generation results.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
-//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
-//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  FAILEDOPERATION_QUERYAIGCTASKFAILED = "FailedOperation.QueryAIGCTaskFailed"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
 func (c *Client) DescribeAigcVideoTask(request *DescribeAigcVideoTaskRequest) (response *DescribeAigcVideoTaskResponse, err error) {
     return c.DescribeAigcVideoTaskWithContext(context.Background(), request)
 }
@@ -3620,12 +3900,8 @@ func (c *Client) DescribeAigcVideoTask(request *DescribeAigcVideoTaskRequest) (r
 // This API is used to query the progress of AIGC video generation tasks and obtain the generation results.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
-//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
-//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  FAILEDOPERATION_QUERYAIGCTASKFAILED = "FailedOperation.QueryAIGCTaskFailed"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
 func (c *Client) DescribeAigcVideoTaskWithContext(ctx context.Context, request *DescribeAigcVideoTaskRequest) (response *DescribeAigcVideoTaskResponse, err error) {
     if request == nil {
         request = NewDescribeAigcVideoTaskRequest()
@@ -3921,6 +4197,66 @@ func (c *Client) DescribeBlindWatermarkTemplatesWithContext(ctx context.Context,
     return
 }
 
+func NewDescribeCloneViralTaskRequest() (request *DescribeCloneViralTaskRequest) {
+    request = &DescribeCloneViralTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeCloneViralTask")
+    
+    
+    return
+}
+
+func NewDescribeCloneViralTaskResponse() (response *DescribeCloneViralTaskResponse) {
+    response = &DescribeCloneViralTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCloneViralTask
+// Queries the results of a hit product clone task
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeCloneViralTask(request *DescribeCloneViralTaskRequest) (response *DescribeCloneViralTaskResponse, err error) {
+    return c.DescribeCloneViralTaskWithContext(context.Background(), request)
+}
+
+// DescribeCloneViralTask
+// Queries the results of a hit product clone task
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeCloneViralTaskWithContext(ctx context.Context, request *DescribeCloneViralTaskRequest) (response *DescribeCloneViralTaskResponse, err error) {
+    if request == nil {
+        request = NewDescribeCloneViralTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DescribeCloneViralTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCloneViralTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCloneViralTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeContentReviewTemplatesRequest() (request *DescribeContentReviewTemplatesRequest) {
     request = &DescribeContentReviewTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4151,6 +4487,62 @@ func (c *Client) DescribeImageTaskDetailWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeImageTaskDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeImageTasksRequest() (request *DescribeImageTasksRequest) {
+    request = &DescribeImageTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeImageTasks")
+    
+    
+    return
+}
+
+func NewDescribeImageTasksResponse() (response *DescribeImageTasksResponse) {
+    response = &DescribeImageTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeImageTasks
+// Image processing task query API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+func (c *Client) DescribeImageTasks(request *DescribeImageTasksRequest) (response *DescribeImageTasksResponse, err error) {
+    return c.DescribeImageTasksWithContext(context.Background(), request)
+}
+
+// DescribeImageTasks
+// Image processing task query API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+func (c *Client) DescribeImageTasksWithContext(ctx context.Context, request *DescribeImageTasksRequest) (response *DescribeImageTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeImageTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DescribeImageTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImageTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImageTasksResponse()
     err = c.Send(request, response)
     return
 }
@@ -5799,6 +6191,60 @@ func (c *Client) EditMediaWithContext(ctx context.Context, request *EditMediaReq
     request.SetContext(ctx)
     
     response = NewEditMediaResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEmbeddingDataRequest() (request *EmbeddingDataRequest) {
+    request = &EmbeddingDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "EmbeddingData")
+    
+    
+    return
+}
+
+func NewEmbeddingDataResponse() (response *EmbeddingDataResponse) {
+    response = &EmbeddingDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EmbeddingData
+// Model embedding API
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_MODELNOTSUPPORTED = "InvalidParameter.ModelNotSupported"
+//  INVALIDPARAMETER_VALUE = "InvalidParameter.Value"
+func (c *Client) EmbeddingData(request *EmbeddingDataRequest) (response *EmbeddingDataResponse, err error) {
+    return c.EmbeddingDataWithContext(context.Background(), request)
+}
+
+// EmbeddingData
+// Model embedding API
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_MODELNOTSUPPORTED = "InvalidParameter.ModelNotSupported"
+//  INVALIDPARAMETER_VALUE = "InvalidParameter.Value"
+func (c *Client) EmbeddingDataWithContext(ctx context.Context, request *EmbeddingDataRequest) (response *EmbeddingDataResponse, err error) {
+    if request == nil {
+        request = NewEmbeddingDataRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "EmbeddingData")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EmbeddingData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEmbeddingDataResponse()
     err = c.Send(request, response)
     return
 }
@@ -7737,13 +8183,15 @@ func NewProcessImageResponse() (response *ProcessImageResponse) {
 }
 
 // ProcessImage
-// This API is used to initiate image processing, with features including:
+// This API is used to initiate image processing. Its features include:
 //
-// 1. Format conversion.
+// 1. Format conversion;
 //
-// 2. Image enhancement.
+// 2. Image enhancement;
 //
-// 3. Image erasure.
+// 3. Image erasure;4. Digital watermark;
+//
+// 5. Beauty filter;
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -7757,13 +8205,15 @@ func (c *Client) ProcessImage(request *ProcessImageRequest) (response *ProcessIm
 }
 
 // ProcessImage
-// This API is used to initiate image processing, with features including:
+// This API is used to initiate image processing. Its features include:
 //
-// 1. Format conversion.
+// 1. Format conversion;
 //
-// 2. Image enhancement.
+// 2. Image enhancement;
 //
-// 3. Image erasure.
+// 3. Image erasure;4. Digital watermark;
+//
+// 5. Beauty filter;
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
