@@ -45,104 +45,110 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
-func NewTextTranslateRequest() (request *TextTranslateRequest) {
-    request = &TextTranslateRequest{
+func NewImageTranslateLLMRequest() (request *ImageTranslateLLMRequest) {
+    request = &ImageTranslateLLMRequest{
         BaseRequest: &tchttp.BaseRequest{},
     }
     
-    request.Init().WithApiInfo("tmt", APIVersion, "TextTranslate")
+    request.Init().WithApiInfo("tmt", APIVersion, "ImageTranslateLLM")
     
     
     return
 }
 
-func NewTextTranslateResponse() (response *TextTranslateResponse) {
-    response = &TextTranslateResponse{
+func NewImageTranslateLLMResponse() (response *ImageTranslateLLMResponse) {
+    response = &ImageTranslateLLMResponse{
         BaseResponse: &tchttp.BaseResponse{},
     } 
     return
 
 }
 
-// TextTranslate
-// This API is used to translate text in multiple language pairs, such as Chinese-English.<br />
+// ImageTranslateLLM
+// This API is used to provide translation service for images in 18 languages. It can automatically recognize text content in images and translate it into the target language. The recognized text is translated line by line, and a version that supports paragraph translation will be offered subsequently.
 //
-// Note: We recommend that you simplify your development with the SDK integration mode. For how to use the SDK, see Section 5 "Developer Resources".
+// 
+//
+// -Input image format: png, jpg, jpeg and other common image formats. gif animation is not supported.
+//
+// -Output image format: jpg.
+//
+// 
+//
+// Notification: For general developers, we recommend prioritizing SDK integration to simplify development. For SDK usage introduction, directly view the 5. Developer Resources part.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DECODEERR = "FailedOperation.DecodeErr"
+//  FAILEDOPERATION_DOWNLOADERR = "FailedOperation.DownloadErr"
 //  FAILEDOPERATION_ERRORUSERAREA = "FailedOperation.ErrorUserArea"
-//  FAILEDOPERATION_LANGUAGERECOGNITIONERR = "FailedOperation.LanguageRecognitionErr"
 //  FAILEDOPERATION_NOFREEAMOUNT = "FailedOperation.NoFreeAmount"
-//  FAILEDOPERATION_REQUESTAILABERR = "FailedOperation.RequestAiLabErr"
 //  FAILEDOPERATION_SERVICEISOLATE = "FailedOperation.ServiceIsolate"
 //  FAILEDOPERATION_STOPUSING = "FailedOperation.StopUsing"
 //  FAILEDOPERATION_USERNOTREGISTERED = "FailedOperation.UserNotRegistered"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_BACKENDTIMEOUT = "InternalError.BackendTimeout"
-//  INTERNALERROR_ERRORGETROUTE = "InternalError.ErrorGetRoute"
 //  INTERNALERROR_ERRORUNKNOWN = "InternalError.ErrorUnknown"
 //  INTERNALERROR_REQUESTFAILED = "InternalError.RequestFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED = "LimitExceeded"
-//  LIMITEXCEEDED_LIMITEDACCESSFREQUENCY = "LimitExceeded.LimitedAccessFrequency"
 //  MISSINGPARAMETER = "MissingParameter"
-//  REQUESTLIMITEXCEEDED_UINLIMITEXCEEDED = "RequestLimitExceeded.UinLimitExceeded"
 //  UNAUTHORIZEDOPERATION_ACTIONNOTFOUND = "UnauthorizedOperation.ActionNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-//  UNSUPPORTEDOPERATION_TEXTTOOLONG = "UnsupportedOperation.TextTooLong"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDTARGETLANGUAGE = "UnsupportedOperation.UnSupportedTargetLanguage"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDLANGUAGE = "UnsupportedOperation.UnsupportedLanguage"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDSOURCELANGUAGE = "UnsupportedOperation.UnsupportedSourceLanguage"
-func (c *Client) TextTranslate(request *TextTranslateRequest) (response *TextTranslateResponse, err error) {
-    return c.TextTranslateWithContext(context.Background(), request)
+func (c *Client) ImageTranslateLLM(request *ImageTranslateLLMRequest) (response *ImageTranslateLLMResponse, err error) {
+    return c.ImageTranslateLLMWithContext(context.Background(), request)
 }
 
-// TextTranslate
-// This API is used to translate text in multiple language pairs, such as Chinese-English.<br />
+// ImageTranslateLLM
+// This API is used to provide translation service for images in 18 languages. It can automatically recognize text content in images and translate it into the target language. The recognized text is translated line by line, and a version that supports paragraph translation will be offered subsequently.
 //
-// Note: We recommend that you simplify your development with the SDK integration mode. For how to use the SDK, see Section 5 "Developer Resources".
+// 
+//
+// -Input image format: png, jpg, jpeg and other common image formats. gif animation is not supported.
+//
+// -Output image format: jpg.
+//
+// 
+//
+// Notification: For general developers, we recommend prioritizing SDK integration to simplify development. For SDK usage introduction, directly view the 5. Developer Resources part.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DECODEERR = "FailedOperation.DecodeErr"
+//  FAILEDOPERATION_DOWNLOADERR = "FailedOperation.DownloadErr"
 //  FAILEDOPERATION_ERRORUSERAREA = "FailedOperation.ErrorUserArea"
-//  FAILEDOPERATION_LANGUAGERECOGNITIONERR = "FailedOperation.LanguageRecognitionErr"
 //  FAILEDOPERATION_NOFREEAMOUNT = "FailedOperation.NoFreeAmount"
-//  FAILEDOPERATION_REQUESTAILABERR = "FailedOperation.RequestAiLabErr"
 //  FAILEDOPERATION_SERVICEISOLATE = "FailedOperation.ServiceIsolate"
 //  FAILEDOPERATION_STOPUSING = "FailedOperation.StopUsing"
 //  FAILEDOPERATION_USERNOTREGISTERED = "FailedOperation.UserNotRegistered"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_BACKENDTIMEOUT = "InternalError.BackendTimeout"
-//  INTERNALERROR_ERRORGETROUTE = "InternalError.ErrorGetRoute"
 //  INTERNALERROR_ERRORUNKNOWN = "InternalError.ErrorUnknown"
 //  INTERNALERROR_REQUESTFAILED = "InternalError.RequestFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED = "LimitExceeded"
-//  LIMITEXCEEDED_LIMITEDACCESSFREQUENCY = "LimitExceeded.LimitedAccessFrequency"
 //  MISSINGPARAMETER = "MissingParameter"
-//  REQUESTLIMITEXCEEDED_UINLIMITEXCEEDED = "RequestLimitExceeded.UinLimitExceeded"
 //  UNAUTHORIZEDOPERATION_ACTIONNOTFOUND = "UnauthorizedOperation.ActionNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-//  UNSUPPORTEDOPERATION_TEXTTOOLONG = "UnsupportedOperation.TextTooLong"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDTARGETLANGUAGE = "UnsupportedOperation.UnSupportedTargetLanguage"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDLANGUAGE = "UnsupportedOperation.UnsupportedLanguage"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDSOURCELANGUAGE = "UnsupportedOperation.UnsupportedSourceLanguage"
-func (c *Client) TextTranslateWithContext(ctx context.Context, request *TextTranslateRequest) (response *TextTranslateResponse, err error) {
+func (c *Client) ImageTranslateLLMWithContext(ctx context.Context, request *ImageTranslateLLMRequest) (response *ImageTranslateLLMResponse, err error) {
     if request == nil {
-        request = NewTextTranslateRequest()
+        request = NewImageTranslateLLMRequest()
     }
-    c.InitBaseRequest(&request.BaseRequest, "tmt", APIVersion, "TextTranslate")
+    c.InitBaseRequest(&request.BaseRequest, "tmt", APIVersion, "ImageTranslateLLM")
     
     if c.GetCredential() == nil {
-        return nil, errors.New("TextTranslate require credential")
+        return nil, errors.New("ImageTranslateLLM require credential")
     }
 
     request.SetContext(ctx)
     
-    response = NewTextTranslateResponse()
+    response = NewImageTranslateLLMResponse()
     err = c.Send(request, response)
     return
 }

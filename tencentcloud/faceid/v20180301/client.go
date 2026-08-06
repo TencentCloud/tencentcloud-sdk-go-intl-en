@@ -1215,7 +1215,7 @@ func NewGetNFCTokenResponse() (response *GetNFCTokenResponse) {
 }
 
 // GetNFCToken
-// NFC verification service, obtain Token information for the NFC identify request.
+// NFC verification service, obtain Token information for the NFC identify request.This API supports NFC recognition and verification of ID cards (second-generation resident identity card, Residence Permit for Hong Kong (China) and Macao (China), Residence Permit for Taiwan (China), Permanent Residence Permit for Foreigners) as well as travel documents (exit-entry permit for travelling to and from Hong Kong (China) and Macao (China), Taiwan travel permit, Mainland Travel Permit for Taiwan Residents, Return Home Permit).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1226,7 +1226,7 @@ func (c *Client) GetNFCToken(request *GetNFCTokenRequest) (response *GetNFCToken
 }
 
 // GetNFCToken
-// NFC verification service, obtain Token information for the NFC identify request.
+// NFC verification service, obtain Token information for the NFC identify request.This API supports NFC recognition and verification of ID cards (second-generation resident identity card, Residence Permit for Hong Kong (China) and Macao (China), Residence Permit for Taiwan (China), Permanent Residence Permit for Foreigners) as well as travel documents (exit-entry permit for travelling to and from Hong Kong (China) and Macao (China), Taiwan travel permit, Mainland Travel Permit for Taiwan Residents, Return Home Permit).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

@@ -20,179 +20,154 @@ import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
-// Predefined struct for user
-type TextTranslateRequestParams struct {
-	// The texts to be translated, which must be encoded in UTF-8 and can contain up to 2,000 characters in a request. For non-pure texts such as those with HTML tags, the translation may fail.
-	SourceText *string `json:"SourceText,omitnil,omitempty" name:"SourceText"`
+type BoundingBox struct {
+	// <p>x-coordinate of the top-left corner</p>
+	X *int64 `json:"X,omitnil,omitempty" name:"X"`
 
-	// Supported source languages:
-	// auto: Automatic language detection
-	// zh: Simplified Chinese
-	// zh_TW: Traditional Chinese
-	// en: English
-	// ja: Japanese
-	// fr: French
-	// es: Spanish
-	// it: Italian
-	// de: German
-	// tr: Turkish
-	// ru: Russian
-	// pt: Portuguese
-	// vi: Vietnamese
-	// id: Bahasa Indonesian
-	// th: Thai
-	// ms: Malay
-	// ar: Arabic
-	// hi: Hindi
-	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+	// <p>y-coordinate of the top-left corner</p>
+	Y *int64 `json:"Y,omitnil,omitempty" name:"Y"`
 
-	// Supported target languages for the above source languages:
-	// 
-	// <li>zh (Simplified Chinese): en (English), ja (Japanese), fr (French), es (Spanish), it (Italian), de (German), tr (Turkish), ru (Russian), pt (Portuguese), vi (Vietnamese), id (Bahasa Indonesian), th (Thai), and ms (Malay)</li>
-	// <li>zh-TW (Traditional Chinese): en (English), ja (Japanese), fr (French), es (Spanish), it (Italian), tr (Turkish), ru (Russian), pt (Portuguese), vi (Vietnamese), id (Bahasa Indonesian), th (Thai), and ms (Malay)</li>
-	// <li>en (English): zh (Simplified Chinese), zh-TW (Traditional Chinese), ja (Japanese), fr (French), es (Spanish), it (Italian), de (German), tr (Turkish), vi (Vietnamese), id (Bahasa Indonesian), th (Thai), ms (Malay), and hi (Hindi)</li>
-	// <li>fr (French): zh (Simplified Chinese), zh-TW (Traditional Chinese) and en (English)</li>
-	// <li>it (Italian): zh (Simplified Chinese), zh-TW (Traditional Chinese) and en (English)</li>
-	// <li>de (German): zh (Simplified Chinese), zh-TW (Traditional Chinese) and en (English)</li>
-	// <li>ru (Russian): zh (Simplified Chinese) and zh-TW (Traditional Chinese)</li>
-	// <li>tr (Turkish): zh (Simplified Chinese) and zh-TW (Traditional Chinese)</li>
-	// <li>pt (Portuguese): zh (Simplified Chinese) and tr (Turkish)</li>
-	// <li>es (Spanish): zh (Simplified Chinese), zh-TW (Traditional Chinese) and en (English)</li>
-	// <li>ja (Japanese): zh (Simplified Chinese), zh-TW (Traditional Chinese) and en (English)</li>
-	// <li>vi (Vietnamese): zh (Simplified Chinese), zh-TW (Traditional Chinese) and en (English)</li>
-	// <li>th (Thai): zh (Simplified Chinese) and en (English)</li>
-	// <li>id (Bahasa Indonesian): zh (Simplified Chinese), zh-TW (Traditional Chinese) and en (English)</li>
-	// <li>ms (Malay): zh (Simplified Chinese) and zh-TW (Traditional Chinese)</li>
-	// <li>ar (Arabic): en (English)</li>
-	// <li>hi (Hindi): en (English)</li>
-	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+	// <p>Width.</p><p>Unit: px.</p>
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// The project ID, which can be obtained from **Console -> Account Center -> Project Management**. If no one is set, enter the default project ID `0`.
-	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
-
-	// The parameter used to mark the text content that needs to remain untranslated, such as special symbols and names of people and places. You can set only one word for this parameter in each request. Only nouns (like names of people and places) are supported, and verbs or phrases may cause poor translation outcomes.
-	UntranslatedText *string `json:"UntranslatedText,omitnil,omitempty" name:"UntranslatedText"`
-
-	// Term base list to be used; obtain by creating your own term base via the [Term Base Operation Guide](https://cloud.tencent.com/document/product/551/107926).
-	TermRepoIDList []*string `json:"TermRepoIDList,omitnil,omitempty" name:"TermRepoIDList"`
-
-	// The list of example sentence libraries to be used; obtain by creating your own example sentence library via the [Example Sentence Library Operation Guide](https://cloud.tencent.com/document/product/551/107927).
-	SentRepoIDList []*string `json:"SentRepoIDList,omitnil,omitempty" name:"SentRepoIDList"`
+	// <p>High.</p><p>Unit: px.</p>
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 }
 
-type TextTranslateRequest struct {
+type Coord struct {
+	// X coordinate
+	X *int64 `json:"X,omitnil,omitempty" name:"X"`
+
+	// Y-axis coordinate
+	Y *int64 `json:"Y,omitnil,omitempty" name:"Y"`
+}
+
+// Predefined struct for user
+type ImageTranslateLLMRequestParams struct {
+	// <p>Base64 string of the image data, no more than 9M after Base64 encoding. A resolution of 600*800 or higher is recommended. PNG, JPG, and JPEG formats are supported.</p>
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// <p>Target language, supported languages:</p><ul><li>Chinese: zh</li><li>Traditional (Taiwan): zh-TW</li><li>Traditional (Hong Kong (China)): zh-HK</li><li>English: en</li><li>Japanese: ja</li><li>Korean: ko</li><li>Thai: th</li><li>Vietnamese: vi</li><li>Russian: ru</li><li>German: de</li><li>French: fr</li><li>Arabic: ar</li><li>Spanish: es</li><li>Italian: it</li><li>Indonesian: id</li><li>Malay language: ms</li><li>Portuguese: pt</li><li>Turkish: tr<br>-</li></ul>
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+
+	// <p>Enter image Url. When using a Url, the Data parameter requires the input of "". Image restrictions: less than 10MB, resolution recommendation 600*800 or higher, format support jpg, jpeg, png.</p>
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// <p>Invocation method.</p><p>Enumeration value:</p><ul><li>0: End-to-end image translation large model pro version</li><li>1: End-to-end image translation large model lite version</li></ul><p>Default value: 0</p>
+	Mode *int64 `json:"Mode,omitnil,omitempty" name:"Mode"`
+}
+
+type ImageTranslateLLMRequest struct {
 	*tchttp.BaseRequest
 	
-	// The texts to be translated, which must be encoded in UTF-8 and can contain up to 2,000 characters in a request. For non-pure texts such as those with HTML tags, the translation may fail.
-	SourceText *string `json:"SourceText,omitnil,omitempty" name:"SourceText"`
+	// <p>Base64 string of the image data, no more than 9M after Base64 encoding. A resolution of 600*800 or higher is recommended. PNG, JPG, and JPEG formats are supported.</p>
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// Supported source languages:
-	// auto: Automatic language detection
-	// zh: Simplified Chinese
-	// zh_TW: Traditional Chinese
-	// en: English
-	// ja: Japanese
-	// fr: French
-	// es: Spanish
-	// it: Italian
-	// de: German
-	// tr: Turkish
-	// ru: Russian
-	// pt: Portuguese
-	// vi: Vietnamese
-	// id: Bahasa Indonesian
-	// th: Thai
-	// ms: Malay
-	// ar: Arabic
-	// hi: Hindi
-	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
-
-	// Supported target languages for the above source languages:
-	// 
-	// <li>zh (Simplified Chinese): en (English), ja (Japanese), fr (French), es (Spanish), it (Italian), de (German), tr (Turkish), ru (Russian), pt (Portuguese), vi (Vietnamese), id (Bahasa Indonesian), th (Thai), and ms (Malay)</li>
-	// <li>zh-TW (Traditional Chinese): en (English), ja (Japanese), fr (French), es (Spanish), it (Italian), tr (Turkish), ru (Russian), pt (Portuguese), vi (Vietnamese), id (Bahasa Indonesian), th (Thai), and ms (Malay)</li>
-	// <li>en (English): zh (Simplified Chinese), zh-TW (Traditional Chinese), ja (Japanese), fr (French), es (Spanish), it (Italian), de (German), tr (Turkish), vi (Vietnamese), id (Bahasa Indonesian), th (Thai), ms (Malay), and hi (Hindi)</li>
-	// <li>fr (French): zh (Simplified Chinese), zh-TW (Traditional Chinese) and en (English)</li>
-	// <li>it (Italian): zh (Simplified Chinese), zh-TW (Traditional Chinese) and en (English)</li>
-	// <li>de (German): zh (Simplified Chinese), zh-TW (Traditional Chinese) and en (English)</li>
-	// <li>ru (Russian): zh (Simplified Chinese) and zh-TW (Traditional Chinese)</li>
-	// <li>tr (Turkish): zh (Simplified Chinese) and zh-TW (Traditional Chinese)</li>
-	// <li>pt (Portuguese): zh (Simplified Chinese) and tr (Turkish)</li>
-	// <li>es (Spanish): zh (Simplified Chinese), zh-TW (Traditional Chinese) and en (English)</li>
-	// <li>ja (Japanese): zh (Simplified Chinese), zh-TW (Traditional Chinese) and en (English)</li>
-	// <li>vi (Vietnamese): zh (Simplified Chinese), zh-TW (Traditional Chinese) and en (English)</li>
-	// <li>th (Thai): zh (Simplified Chinese) and en (English)</li>
-	// <li>id (Bahasa Indonesian): zh (Simplified Chinese), zh-TW (Traditional Chinese) and en (English)</li>
-	// <li>ms (Malay): zh (Simplified Chinese) and zh-TW (Traditional Chinese)</li>
-	// <li>ar (Arabic): en (English)</li>
-	// <li>hi (Hindi): en (English)</li>
+	// <p>Target language, supported languages:</p><ul><li>Chinese: zh</li><li>Traditional (Taiwan): zh-TW</li><li>Traditional (Hong Kong (China)): zh-HK</li><li>English: en</li><li>Japanese: ja</li><li>Korean: ko</li><li>Thai: th</li><li>Vietnamese: vi</li><li>Russian: ru</li><li>German: de</li><li>French: fr</li><li>Arabic: ar</li><li>Spanish: es</li><li>Italian: it</li><li>Indonesian: id</li><li>Malay language: ms</li><li>Portuguese: pt</li><li>Turkish: tr<br>-</li></ul>
 	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
 
-	// The project ID, which can be obtained from **Console -> Account Center -> Project Management**. If no one is set, enter the default project ID `0`.
-	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+	// <p>Enter image Url. When using a Url, the Data parameter requires the input of "". Image restrictions: less than 10MB, resolution recommendation 600*800 or higher, format support jpg, jpeg, png.</p>
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// The parameter used to mark the text content that needs to remain untranslated, such as special symbols and names of people and places. You can set only one word for this parameter in each request. Only nouns (like names of people and places) are supported, and verbs or phrases may cause poor translation outcomes.
-	UntranslatedText *string `json:"UntranslatedText,omitnil,omitempty" name:"UntranslatedText"`
-
-	// Term base list to be used; obtain by creating your own term base via the [Term Base Operation Guide](https://cloud.tencent.com/document/product/551/107926).
-	TermRepoIDList []*string `json:"TermRepoIDList,omitnil,omitempty" name:"TermRepoIDList"`
-
-	// The list of example sentence libraries to be used; obtain by creating your own example sentence library via the [Example Sentence Library Operation Guide](https://cloud.tencent.com/document/product/551/107927).
-	SentRepoIDList []*string `json:"SentRepoIDList,omitnil,omitempty" name:"SentRepoIDList"`
+	// <p>Invocation method.</p><p>Enumeration value:</p><ul><li>0: End-to-end image translation large model pro version</li><li>1: End-to-end image translation large model lite version</li></ul><p>Default value: 0</p>
+	Mode *int64 `json:"Mode,omitnil,omitempty" name:"Mode"`
 }
 
-func (r *TextTranslateRequest) ToJsonString() string {
+func (r *ImageTranslateLLMRequest) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *TextTranslateRequest) FromJsonString(s string) error {
+func (r *ImageTranslateLLMRequest) FromJsonString(s string) error {
 	f := make(map[string]interface{})
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "SourceText")
-	delete(f, "Source")
+	delete(f, "Data")
 	delete(f, "Target")
-	delete(f, "ProjectId")
-	delete(f, "UntranslatedText")
-	delete(f, "TermRepoIDList")
-	delete(f, "SentRepoIDList")
+	delete(f, "Url")
+	delete(f, "Mode")
 	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TextTranslateRequest has unknown keys!", "")
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ImageTranslateLLMRequest has unknown keys!", "")
 	}
 	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
-type TextTranslateResponseParams struct {
-	// The translation outcome.
-	TargetText *string `json:"TargetText,omitnil,omitempty" name:"TargetText"`
+type ImageTranslateLLMResponseParams struct {
+	// <p>Base64 string of the image data. The output format is JPG.</p>
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// The source language. See the request parameter `Source` for details.
+	// <p>Primary source language.</p>
 	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
 
-	// The target language. See the request parameter `Target` for details.
+	// <p>Target translation language.</p>
 	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+
+	// <p>All original text in the image.</p>
+	SourceText *string `json:"SourceText,omitnil,omitempty" name:"SourceText"`
+
+	// <p>All translations in the image.</p>
+	TargetText *string `json:"TargetText,omitnil,omitempty" name:"TargetText"`
+
+	// <p>Image angle counterclockwise, value range 0-359</p>
+	Angle *float64 `json:"Angle,omitnil,omitempty" name:"Angle"`
+
+	// <p>Translation detailed information</p>
+	TransDetails []*TransDetail `json:"TransDetails,omitnil,omitempty" name:"TransDetails"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
-type TextTranslateResponse struct {
+type ImageTranslateLLMResponse struct {
 	*tchttp.BaseResponse
-	Response *TextTranslateResponseParams `json:"Response"`
+	Response *ImageTranslateLLMResponseParams `json:"Response"`
 }
 
-func (r *TextTranslateResponse) ToJsonString() string {
+func (r *ImageTranslateLLMResponse) ToJsonString() string {
     b, _ := json.Marshal(r)
     return string(b)
 }
 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
-func (r *TextTranslateResponse) FromJsonString(s string) error {
+func (r *ImageTranslateLLMResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type RotateParagraphRect struct {
+	// Paragraph text coordinates
+	Coord []*Coord `json:"Coord,omitnil,omitempty" name:"Coord"`
+
+	// Rotation angle
+	TiltAngle *float64 `json:"TiltAngle,omitnil,omitempty" name:"TiltAngle"`
+
+	// Whether the paragraph text information is valid
+	Valid *bool `json:"Valid,omitnil,omitempty" name:"Valid"`
+}
+
+type TransDetail struct {
+	// <p>Original text of the current row</p>
+	SourceLineText *string `json:"SourceLineText,omitnil,omitempty" name:"SourceLineText"`
+
+	// <p>Translation of the current row</p>
+	TargetLineText *string `json:"TargetLineText,omitnil,omitempty" name:"TargetLineText"`
+
+	// <p>Paragraph text box location</p>
+	BoundingBox *BoundingBox `json:"BoundingBox,omitnil,omitempty" name:"BoundingBox"`
+
+	// <p>Row count</p>
+	LinesCount *int64 `json:"LinesCount,omitnil,omitempty" name:"LinesCount"`
+
+	// <p>Line height.</p><p>Unit: px.</p>
+	LineHeight *int64 `json:"LineHeight,omitnil,omitempty" name:"LineHeight"`
+
+	// <p>The spam_code field is 0 in a normal paragraph; if the spam_code field exists and its value is above 0 (1: hit garbage check; 2: hit security policy; 3: another.), then the security check hit is filtered.</p>
+	SpamCode *int64 `json:"SpamCode,omitnil,omitempty" name:"SpamCode"`
+
+	// <p>Rotation information of paragraph text. Coordinates are valid only when valid is true.</p>
+	RotateParagraphRect *RotateParagraphRect `json:"RotateParagraphRect,omitnil,omitempty" name:"RotateParagraphRect"`
 }

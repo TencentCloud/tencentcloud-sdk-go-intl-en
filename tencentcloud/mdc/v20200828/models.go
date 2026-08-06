@@ -175,6 +175,17 @@ type CreateOutputRTPSettingsDestinations struct {
 	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 }
 
+type CreateOutputRistSettings struct {
+
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
+
+
+	Profile *string `json:"Profile,omitnil,omitempty" name:"Profile"`
+
+
+	Buffer *int64 `json:"Buffer,omitnil,omitempty" name:"Buffer"`
+}
+
 type CreateOutputRtmpSettingsDestinations struct {
 	// The relay URL. Format: `rtmp://domain/live`.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
@@ -1931,6 +1942,12 @@ type ModifyOutputInfo struct {
 	// The output protocol. Valid values: SRT, RTP, RTMP.
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
+	// Output Type: Internet/Tencent CSS/StreamLive
+	OutputType *string `json:"OutputType,omitnil,omitempty" name:"OutputType"`
+
+	// Output module types include Pinpoint (single-point output, supporting up to four concurrent outputs) and MultiMesh (multi-output, supporting concurrent outputs exceeding four, currently capable of reaching 200 channels). The default type is Pinpoint output. For a single Flow, only one MultiMesh output can be assigned per region.
+	OutputKind *string `json:"OutputKind,omitnil,omitempty" name:"OutputKind"`
+
 	// The SRT relay configuration.
 	SRTSettings *CreateOutputSrtSettings `json:"SRTSettings,omitnil,omitempty" name:"SRTSettings"`
 
@@ -1948,6 +1965,20 @@ type ModifyOutputInfo struct {
 
 	// The bound security group IDs.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// Availability Zone
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
+
+	// Transfer the configuration of RIST.
+	RISTSettings *CreateOutputRistSettings `json:"RISTSettings,omitnil,omitempty" name:"RISTSettings"`
+
+	// For streams containing multiple audio/video tracks, you can specify the tracks that need to be used
+	//
+	// Deprecated: PidSelector is deprecated.
+	PidSelector *PidSelector `json:"PidSelector,omitnil,omitempty" name:"PidSelector"`
+
+	// For streams containing multiple audio/video tracks, you can specify the tracks that need to be used
+	StreamSelector *StreamSelector `json:"StreamSelector,omitnil,omitempty" name:"StreamSelector"`
 }
 
 // Predefined struct for user
@@ -2152,6 +2183,14 @@ type OutputSRTSourceAddressResp struct {
 	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 }
 
+type PidSelector struct {
+
+	AudioPID []*int64 `json:"AudioPID,omitnil,omitempty" name:"AudioPID"`
+
+
+	VideoPID []*int64 `json:"VideoPID,omitnil,omitempty" name:"VideoPID"`
+}
+
 type RTMPAddressDestination struct {
 	// Destination URL of RTMP push in the format of 'rtmp://domain/live'.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
@@ -2329,4 +2368,23 @@ func (r *StopStreamLinkFlowResponse) FromJsonString(s string) error {
 type StreamLinkRegionInfo struct {
 	// List of StreamLink regions
 	Regions []*RegionInfo `json:"Regions,omitnil,omitempty" name:"Regions"`
+}
+
+type StreamSelector struct {
+
+	SelectorType *string `json:"SelectorType,omitnil,omitempty" name:"SelectorType"`
+
+
+	PidSelector *PidSelector `json:"PidSelector,omitnil,omitempty" name:"PidSelector"`
+
+
+	TrackSelector *TrackSelector `json:"TrackSelector,omitnil,omitempty" name:"TrackSelector"`
+}
+
+type TrackSelector struct {
+
+	VideoIndex []*int64 `json:"VideoIndex,omitnil,omitempty" name:"VideoIndex"`
+
+
+	AudioIndex []*int64 `json:"AudioIndex,omitnil,omitempty" name:"AudioIndex"`
 }

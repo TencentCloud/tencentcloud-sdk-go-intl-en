@@ -1718,6 +1718,10 @@ type Database struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	NewSchemaName *string `json:"NewSchemaName,omitnil,omitempty" name:"NewSchemaName"`
 
+	// Table selection mode, which is required if `DBMode` is `Partial` for postgresql or sqlserver. Valid values: `All`, `Partial`. To sync an entire schema, set this parameter to `All`.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SchemaMode *string `json:"SchemaMode,omitnil,omitempty" name:"SchemaMode"`
+
 	// Table selection mode, which is required if `DBMode` is `Partial`. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TableMode *string `json:"TableMode,omitnil,omitempty" name:"TableMode"`
@@ -1750,7 +1754,7 @@ type Database struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Procedures []*string `json:"Procedures,omitnil,omitempty" name:"Procedures"`
 
-	// Trigger sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`. Currently, the advanced object “trigger” is not supported for data sync.
+	// Trigger sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`. Currently, the advanced object "trigger" is not supported for data sync.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TriggerMode *string `json:"TriggerMode,omitnil,omitempty" name:"TriggerMode"`
 
@@ -1758,7 +1762,7 @@ type Database struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Triggers []*string `json:"Triggers,omitnil,omitempty" name:"Triggers"`
 
-	// Event sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`. Currently, the advanced object “event” is not supported for data sync.
+	// Event sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`. Currently, the advanced object "event" is not supported for data sync.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EventMode *string `json:"EventMode,omitnil,omitempty" name:"EventMode"`
 
@@ -5437,6 +5441,10 @@ type Objects struct {
 
 	// Advanced object types, such as function and procedure. Note: If you want to migrate and synchronize advanced objects, the corresponding advanced object type should be included in this configuration. When advanced objects need to be synchronized, the initialization type must include the structure initialization type, that is, the Options.InitType value of the task is Structure or Full.Note: This field may return null, indicating that no valid values can be obtained.
 	AdvancedObjects []*string `json:"AdvancedObjects,omitnil,omitempty" name:"AdvancedObjects"`
+
+	// A redundant field that specifies the online DDL type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OnlineDDL *OnlineDDL `json:"OnlineDDL,omitnil,omitempty" name:"OnlineDDL"`
 }
 
 type OffsetTimeMap struct {
@@ -5445,6 +5453,12 @@ type OffsetTimeMap struct {
 
 	// Kafka offsetNote: This field may return null, indicating that no valid values can be obtained.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type OnlineDDL struct {
+	// Status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type Options struct {
