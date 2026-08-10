@@ -8755,7 +8755,7 @@ func NewTextTranslationResponse() (response *TextTranslationResponse) {
 }
 
 // TextTranslation
-// 
+// This API is used to translate text. The "subtitle translation (additional languages)" billing item is used. Billing is calculated by converting characters to minutes at a rate of 1,100 characters per minute (based on Unicode code points. For example, "hello" counts as 5 characters).
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_SOURCELANGUAGE = "InvalidParameterValue.SourceLanguage"
@@ -8769,7 +8769,7 @@ func (c *Client) TextTranslation(request *TextTranslationRequest) (response *Tex
 }
 
 // TextTranslation
-// 
+// This API is used to translate text. The "subtitle translation (additional languages)" billing item is used. Billing is calculated by converting characters to minutes at a rate of 1,100 characters per minute (based on Unicode code points. For example, "hello" counts as 5 characters).
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_SOURCELANGUAGE = "InvalidParameterValue.SourceLanguage"
