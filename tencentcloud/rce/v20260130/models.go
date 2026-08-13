@@ -25,7 +25,7 @@ type AssessDeviceRiskPremiumProRequestParams struct {
 	// <p>Device fingerprint token, obtained after integration of the device fingerprint SDK into your website or application</p>
 	DeviceToken *string `json:"DeviceToken,omitnil,omitempty" name:"DeviceToken"`
 
-	// <p>User client IP address(IPv4 or IPv6)</p>
+	// <p>User client IP address (IPv4 or IPv6)</p>
 	UserIp *string `json:"UserIp,omitnil,omitempty" name:"UserIp"`
 }
 
@@ -35,7 +35,7 @@ type AssessDeviceRiskPremiumProRequest struct {
 	// <p>Device fingerprint token, obtained after integration of the device fingerprint SDK into your website or application</p>
 	DeviceToken *string `json:"DeviceToken,omitnil,omitempty" name:"DeviceToken"`
 
-	// <p>User client IP address(IPv4 or IPv6)</p>
+	// <p>User client IP address (IPv4 or IPv6)</p>
 	UserIp *string `json:"UserIp,omitnil,omitempty" name:"UserIp"`
 }
 
@@ -95,7 +95,6 @@ type AssessDeviceRiskPremiumRsp struct {
 	Device *Device `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// <p>Basic IP environment information</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Environment *Environment `json:"Environment,omitnil,omitempty" name:"Environment"`
 }
 
@@ -104,7 +103,7 @@ type AssessDeviceRiskProRequestParams struct {
 	// <p>Device fingerprint token, obtained after integration of the device fingerprint SDK into your website or application</p>
 	DeviceToken *string `json:"DeviceToken,omitnil,omitempty" name:"DeviceToken"`
 
-	// <p>User client IP address(IPv4 or IPv6)</p>
+	// <p>User client IP address (IPv4 or IPv6)</p>
 	UserIp *string `json:"UserIp,omitnil,omitempty" name:"UserIp"`
 }
 
@@ -114,7 +113,7 @@ type AssessDeviceRiskProRequest struct {
 	// <p>Device fingerprint token, obtained after integration of the device fingerprint SDK into your website or application</p>
 	DeviceToken *string `json:"DeviceToken,omitnil,omitempty" name:"DeviceToken"`
 
-	// <p>User client IP address(IPv4 or IPv6)</p>
+	// <p>User client IP address (IPv4 or IPv6)</p>
 	UserIp *string `json:"UserIp,omitnil,omitempty" name:"UserIp"`
 }
 
@@ -169,6 +168,9 @@ type AssessDeviceRiskRsp struct {
 
 	// <p>The basic information of the device</p>
 	Device *Device `json:"Device,omitnil,omitempty" name:"Device"`
+
+	// <p>Basic IP environment information</p>
+	Environment *Environment `json:"Environment,omitnil,omitempty" name:"Environment"`
 }
 
 // Predefined struct for user
@@ -242,11 +244,17 @@ type DataScore struct {
 
 	// <p>Risk label</p>
 	RiskLabels []*RiskLabel `json:"RiskLabels,omitnil,omitempty" name:"RiskLabels"`
+
+	// <p>Comprehensive risk score.</p><p>Value ranges from 1 to 1000.</p><p>The larger the value, the larger the risk.</p>
+	RiskScore *int64 `json:"RiskScore,omitnil,omitempty" name:"RiskScore"`
 }
 
 type Decision struct {
 	// <p>Decision result</p><ul><li>pass: Pass</li><li>review: Review</li><li>reject: Reject</li></ul>
 	DecisionResult *string `json:"DecisionResult,omitnil,omitempty" name:"DecisionResult"`
+
+	// <p>Decision action when a strategy is matched. Configurable in the console.</p>
+	Disposition *string `json:"Disposition,omitnil,omitempty" name:"Disposition"`
 }
 
 type Device struct {
@@ -279,6 +287,12 @@ type Device struct {
 
 	// <p>The build version of SDK</p>
 	SdkBuildVersion *string `json:"SdkBuildVersion,omitnil,omitempty" name:"SdkBuildVersion"`
+
+	// <p>Signature verification token. Please contact us to enable signature verification</p>
+	SignToken *string `json:"SignToken,omitnil,omitempty" name:"SignToken"`
+
+	// <p>Token generation timestamp, in milliseconds</p>
+	TokenTime *string `json:"TokenTime,omitnil,omitempty" name:"TokenTime"`
 }
 
 type Environment struct {
