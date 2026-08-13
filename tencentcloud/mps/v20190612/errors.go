@@ -20,7 +20,7 @@ const (
 	// Operation failed.
 	FAILEDOPERATION = "FailedOperation"
 
-	// Operation failed: notification has already been set for the bucket.
+	// Operation failure: bucket notifications have already been set.
 	FAILEDOPERATION_BUCKETNOTIFYALREADYEXIST = "FailedOperation.BucketNotifyAlreadyExist"
 
 	// Operation failed: COS service is suspended.
@@ -32,7 +32,7 @@ const (
 	// Resource generation failed.
 	FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
 
-	// Operation failed: Error getting the source notification.
+	// Operation failure: error retrieving source notification.
 	FAILEDOPERATION_GETSOURCENOTIFY = "FailedOperation.GetSourceNotify"
 
 	// Operation failed: unauthorized MPS user.
@@ -47,7 +47,7 @@ const (
 	// Error occurred while querying the task
 	FAILEDOPERATION_QUERYAIGCTASKFAILED = "FailedOperation.QueryAIGCTaskFailed"
 
-	// Operation failed: Error setting the source notification.
+	// Operation failure: error setting source notification.
 	FAILEDOPERATION_SETSOURCENOTIFY = "FailedOperation.SetSourceNotify"
 
 	// User account has been suspended
@@ -230,10 +230,10 @@ const (
 	// Incorrect parameter value: the control field parameter for intelligent frame-specific tagging is incorrect.
 	INVALIDPARAMETERVALUE_FRAMETAGCONFIGURE = "InvalidParameterValue.FrameTagConfigure"
 
-	// Incorrect parameter value: FunctionArg.
+	// Parameter value error: FunctionArg.
 	INVALIDPARAMETERVALUE_FUNCTIONARG = "InvalidParameterValue.FunctionArg"
 
-	// Incorrect parameter value: FunctionName.
+	// Parameter value error: FunctionName.
 	INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
 
 	// Invalid GOP value.
@@ -245,7 +245,7 @@ const (
 	// Parameter error. The hotword lexicon does not exist.
 	INVALIDPARAMETERVALUE_HOTWORDSNOTEXIST = "InvalidParameterValue.HotWordsNotExist"
 
-	// Hot word vocabulary format error. see the hot word configuration instruction document (https://intl.cloud.tencent.com/document/product/862/116244?from_cn_redirect=1#afc37e17-2786-4289-9bc3-8e24435d3f45).
+	// Hot word lexicon format error. Refer to the hot word configuration instructions document (https://www.tencentcloud.com/document/product/862/116244?from_cn_redirect=1#afc37e17-2786 4289-9bc3-8e24435d3f45).
 	INVALIDPARAMETERVALUE_HOTWORDSFORMATERROR = "InvalidParameterValue.HotwordsFormatError"
 
 	// Invalid ImageContent

@@ -173,6 +173,68 @@ func (c *Client) CloneViralWithContext(ctx context.Context, request *CloneViralR
     return
 }
 
+func NewCloneVoiceRequest() (request *CloneVoiceRequest) {
+    request = &CloneVoiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "CloneVoice")
+    
+    
+    return
+}
+
+func NewCloneVoiceResponse() (response *CloneVoiceResponse) {
+    response = &CloneVoiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CloneVoice
+// This API is used to clone a voice type from a reference audio.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+func (c *Client) CloneVoice(request *CloneVoiceRequest) (response *CloneVoiceResponse, err error) {
+    return c.CloneVoiceWithContext(context.Background(), request)
+}
+
+// CloneVoice
+// This API is used to clone a voice type from a reference audio.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+func (c *Client) CloneVoiceWithContext(ctx context.Context, request *CloneVoiceRequest) (response *CloneVoiceResponse, err error) {
+    if request == nil {
+        request = NewCloneVoiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "CloneVoice")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CloneVoice require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCloneVoiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAIAnalysisTemplateRequest() (request *CreateAIAnalysisTemplateRequest) {
     request = &CreateAIAnalysisTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -463,6 +525,56 @@ func (c *Client) CreateAiDramaTaskWithContext(ctx context.Context, request *Crea
     request.SetContext(ctx)
     
     response = NewCreateAiDramaTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateAiFissionTaskRequest() (request *CreateAiFissionTaskRequest) {
+    request = &CreateAiFissionTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "CreateAiFissionTask")
+    
+    
+    return
+}
+
+func NewCreateAiFissionTaskResponse() (response *CreateAiFissionTaskResponse) {
+    response = &CreateAiFissionTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAiFissionTask
+// Create an ai video fission task
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_VIOLATIONCONTENT = "InvalidParameter.ViolationContent"
+func (c *Client) CreateAiFissionTask(request *CreateAiFissionTaskRequest) (response *CreateAiFissionTaskResponse, err error) {
+    return c.CreateAiFissionTaskWithContext(context.Background(), request)
+}
+
+// CreateAiFissionTask
+// Create an ai video fission task
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_VIOLATIONCONTENT = "InvalidParameter.ViolationContent"
+func (c *Client) CreateAiFissionTaskWithContext(ctx context.Context, request *CreateAiFissionTaskRequest) (response *CreateAiFissionTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateAiFissionTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "CreateAiFissionTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAiFissionTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAiFissionTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -2369,7 +2481,7 @@ func NewDeleteAnimatedGraphicsTemplateResponse() (response *DeleteAnimatedGraphi
 }
 
 // DeleteAnimatedGraphicsTemplate
-// This API is used to delete a custom animated image generating template.
+// This API is used to delete custom animated image generating templates.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -2380,7 +2492,7 @@ func (c *Client) DeleteAnimatedGraphicsTemplate(request *DeleteAnimatedGraphicsT
 }
 
 // DeleteAnimatedGraphicsTemplate
-// This API is used to delete a custom animated image generating template.
+// This API is used to delete custom animated image generating templates.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -2535,7 +2647,7 @@ func NewDeleteContentReviewTemplateResponse() (response *DeleteContentReviewTemp
 }
 
 // DeleteContentReviewTemplate
-// This API is used to delete a custom content moderation template.
+// This API is used to delete a user-defined content moderation template.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2547,7 +2659,7 @@ func (c *Client) DeleteContentReviewTemplate(request *DeleteContentReviewTemplat
 }
 
 // DeleteContentReviewTemplate
-// This API is used to delete a custom content moderation template.
+// This API is used to delete a user-defined content moderation template.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2591,7 +2703,7 @@ func NewDeleteImageSpriteTemplateResponse() (response *DeleteImageSpriteTemplate
 }
 
 // DeleteImageSpriteTemplate
-// This API is used to delete an image sprite generating template.
+// This API is used to delete a sprite sheet template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -2602,7 +2714,7 @@ func (c *Client) DeleteImageSpriteTemplate(request *DeleteImageSpriteTemplateReq
 }
 
 // DeleteImageSpriteTemplate
-// This API is used to delete an image sprite generating template.
+// This API is used to delete a sprite sheet template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -2913,7 +3025,7 @@ func NewDeleteSampleSnapshotTemplateResponse() (response *DeleteSampleSnapshotTe
 }
 
 // DeleteSampleSnapshotTemplate
-// This API is used to delete a custom sampled screencapturing template.
+// This API is used to delete a user-customized sampled screenshot template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -2924,7 +3036,7 @@ func (c *Client) DeleteSampleSnapshotTemplate(request *DeleteSampleSnapshotTempl
 }
 
 // DeleteSampleSnapshotTemplate
-// This API is used to delete a custom sampled screencapturing template.
+// This API is used to delete a user-customized sampled screenshot template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -2967,7 +3079,7 @@ func NewDeleteScheduleResponse() (response *DeleteScheduleResponse) {
 }
 
 // DeleteSchedule
-// This API is used to delete a scheme.
+// Delete orchestration
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2979,7 +3091,7 @@ func (c *Client) DeleteSchedule(request *DeleteScheduleRequest) (response *Delet
 }
 
 // DeleteSchedule
-// This API is used to delete a scheme.
+// Delete orchestration
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -3139,7 +3251,7 @@ func NewDeleteSnapshotByTimeOffsetTemplateResponse() (response *DeleteSnapshotBy
 }
 
 // DeleteSnapshotByTimeOffsetTemplate
-// This API is used to delete a custom time point screencapturing template.
+// This API is used to delete a user-customized specified time point screenshot template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -3150,7 +3262,7 @@ func (c *Client) DeleteSnapshotByTimeOffsetTemplate(request *DeleteSnapshotByTim
 }
 
 // DeleteSnapshotByTimeOffsetTemplate
-// This API is used to delete a custom time point screencapturing template.
+// This API is used to delete a user-customized specified time point screenshot template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -3371,7 +3483,7 @@ func NewDeleteWatermarkTemplateResponse() (response *DeleteWatermarkTemplateResp
 }
 
 // DeleteWatermarkTemplate
-// This API is used to delete a custom watermarking template.
+// This API is used to delete a user-customized watermark template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -3383,7 +3495,7 @@ func (c *Client) DeleteWatermarkTemplate(request *DeleteWatermarkTemplateRequest
 }
 
 // DeleteWatermarkTemplate
-// This API is used to delete a custom watermarking template.
+// This API is used to delete a user-customized watermark template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -3479,7 +3591,7 @@ func NewDeleteWorkflowResponse() (response *DeleteWorkflowResponse) {
 }
 
 // DeleteWorkflow
-// This API is used to delete a workflow. An enabled workflow must be disabled before it can be deleted.
+// Delete workflow. For enabled workflows, they must be disabled before they can be deleted.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -3491,7 +3603,7 @@ func (c *Client) DeleteWorkflow(request *DeleteWorkflowRequest) (response *Delet
 }
 
 // DeleteWorkflow
-// This API is used to delete a workflow. An enabled workflow must be disabled before it can be deleted.
+// Delete workflow. For enabled workflows, they must be disabled before they can be deleted.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -3811,6 +3923,58 @@ func (c *Client) DescribeAigcImageTaskWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeAigcImageTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAigcTaskListRequest() (request *DescribeAigcTaskListRequest) {
+    request = &DescribeAigcTaskListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeAigcTaskList")
+    
+    
+    return
+}
+
+func NewDescribeAigcTaskListResponse() (response *DescribeAigcTaskListResponse) {
+    response = &DescribeAigcTaskListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAigcTaskList
+// Query AIGC task list details
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYAIGCTASKFAILED = "FailedOperation.QueryAIGCTaskFailed"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
+func (c *Client) DescribeAigcTaskList(request *DescribeAigcTaskListRequest) (response *DescribeAigcTaskListResponse, err error) {
+    return c.DescribeAigcTaskListWithContext(context.Background(), request)
+}
+
+// DescribeAigcTaskList
+// Query AIGC task list details
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYAIGCTASKFAILED = "FailedOperation.QueryAIGCTaskFailed"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
+func (c *Client) DescribeAigcTaskListWithContext(ctx context.Context, request *DescribeAigcTaskListRequest) (response *DescribeAigcTaskListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAigcTaskListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "DescribeAigcTaskList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAigcTaskList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAigcTaskListResponse()
     err = c.Send(request, response)
     return
 }
@@ -4623,7 +4787,7 @@ func NewDescribeMediaMetaDataResponse() (response *DescribeMediaMetaDataResponse
 }
 
 // DescribeMediaMetaData
-// This API is used to get the metadata of media, such as video image width/height, codec, length, and frame rate.
+// This API is used to obtain media meta information, including video image width, height, encoding format, duration, and frame rate.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -4635,7 +4799,7 @@ func (c *Client) DescribeMediaMetaData(request *DescribeMediaMetaDataRequest) (r
 }
 
 // DescribeMediaMetaData
-// This API is used to get the metadata of media, such as video image width/height, codec, length, and frame rate.
+// This API is used to obtain media meta information, including video image width, height, encoding format, duration, and frame rate.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -5973,7 +6137,7 @@ func NewDisableScheduleResponse() (response *DisableScheduleResponse) {
 }
 
 // DisableSchedule
-// This API is used to disable a scheme.
+// Disable automated trigger orchestration tasks.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5994,7 +6158,7 @@ func (c *Client) DisableSchedule(request *DisableScheduleRequest) (response *Dis
 }
 
 // DisableSchedule
-// This API is used to disable a scheme.
+// Disable automated trigger orchestration tasks.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6269,7 +6433,7 @@ func NewEnableScheduleResponse() (response *EnableScheduleResponse) {
 }
 
 // EnableSchedule
-// This API is used to enable a scheme.
+// Enable automated trigger orchestration tasks.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6291,7 +6455,7 @@ func (c *Client) EnableSchedule(request *EnableScheduleRequest) (response *Enabl
 }
 
 // EnableSchedule
-// This API is used to enable a scheme.
+// Enable automated trigger orchestration tasks.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6345,7 +6509,7 @@ func NewEnableWorkflowResponse() (response *EnableWorkflowResponse) {
 }
 
 // EnableWorkflow
-// This API is used to enable a workflow.
+// Enables a workflow.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6361,7 +6525,7 @@ func (c *Client) EnableWorkflow(request *EnableWorkflowRequest) (response *Enabl
 }
 
 // EnableWorkflow
-// This API is used to enable a workflow.
+// Enables a workflow.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6409,7 +6573,7 @@ func NewExecuteFunctionResponse() (response *ExecuteFunctionResponse) {
 }
 
 // ExecuteFunction
-// This API is reserved for special circumstances. Do not use it unless you are directed to use it by technical support.
+// This interface is only used for custom development in special scenarios. Unless a Media Processing Service customer service representative proactively informs you that you need to use this interface, do not call it in other cases.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -6423,7 +6587,7 @@ func (c *Client) ExecuteFunction(request *ExecuteFunctionRequest) (response *Exe
 }
 
 // ExecuteFunction
-// This API is reserved for special circumstances. Do not use it unless you are directed to use it by technical support.
+// This interface is only used for custom development in special scenarios. Unless a Media Processing Service customer service representative proactively informs you that you need to use this interface, do not call it in other cases.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -7161,7 +7325,7 @@ func NewModifyLiveRecordTemplateResponse() (response *ModifyLiveRecordTemplateRe
 }
 
 // ModifyLiveRecordTemplate
-// This API is used to modify a live recording template.
+// This example shows you how to modify a live streaming recording template.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -7173,7 +7337,7 @@ func (c *Client) ModifyLiveRecordTemplate(request *ModifyLiveRecordTemplateReque
 }
 
 // ModifyLiveRecordTemplate
-// This API is used to modify a live recording template.
+// This example shows you how to modify a live streaming recording template.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -8587,7 +8751,7 @@ func NewResetWorkflowResponse() (response *ResetWorkflowResponse) {
 }
 
 // ResetWorkflow
-// This API is used to reset an existing workflow that is disabled.
+// This API is used to reset a workflow that already exists and is in disable status.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -8599,7 +8763,7 @@ func (c *Client) ResetWorkflow(request *ResetWorkflowRequest) (response *ResetWo
 }
 
 // ResetWorkflow
-// This API is used to reset an existing workflow that is disabled.
+// This API is used to reset a workflow that already exists and is in disable status.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -8675,6 +8839,62 @@ func (c *Client) SyncDubbingWithContext(ctx context.Context, request *SyncDubbin
     request.SetContext(ctx)
     
     response = NewSyncDubbingResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewTextToSpeechRequest() (request *TextToSpeechRequest) {
+    request = &TextToSpeechRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "TextToSpeech")
+    
+    
+    return
+}
+
+func NewTextToSpeechResponse() (response *TextToSpeechResponse) {
+    response = &TextToSpeechResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// TextToSpeech
+// This API is used to generate speech synchronously based on input text and specified voice tone.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) TextToSpeech(request *TextToSpeechRequest) (response *TextToSpeechResponse, err error) {
+    return c.TextToSpeechWithContext(context.Background(), request)
+}
+
+// TextToSpeech
+// This API is used to generate speech synchronously based on input text and specified voice tone.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) TextToSpeechWithContext(ctx context.Context, request *TextToSpeechRequest) (response *TextToSpeechResponse, err error) {
+    if request == nil {
+        request = NewTextToSpeechRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "TextToSpeech")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TextToSpeech require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewTextToSpeechResponse()
     err = c.Send(request, response)
     return
 }
