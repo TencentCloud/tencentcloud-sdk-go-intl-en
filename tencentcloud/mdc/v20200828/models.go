@@ -626,25 +626,48 @@ type DescribeInput struct {
 	// Note: this field may return `null`, indicating that no valid value was found.
 	FailOver *string `json:"FailOver,omitnil,omitempty" name:"FailOver"`
 
+	// Available Zone Configuration: Under disaster recovery conditions, up to two are supported, corresponding to pipeline 0 and 1 in order. Otherwise, only one available zone is allowed.
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 
+	// The input RTMP_PULL configuration information.
 	RTMPPullSettings *DescribeInputRTMPPullSettings `json:"RTMPPullSettings,omitnil,omitempty" name:"RTMPPullSettings"`
 
-
+	// The RTSP_PULL configuration information entered.
 	RTSPPullSettings *DescribeInputRTSPPullSettings `json:"RTSPPullSettings,omitnil,omitempty" name:"RTSPPullSettings"`
 
-
+	// The input HLS-PULL configuration information.
 	HLSPullSettings *DescribeInputHLSPullSettings `json:"HLSPullSettings,omitnil,omitempty" name:"HLSPullSettings"`
 
-
+	// Extended smooth streaming configuration information.
 	ResilientStream *ResilientStreamConf `json:"ResilientStream,omitnil,omitempty" name:"ResilientStream"`
 
 	// The bound security group ID.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// The input RIST configuration information.
+	RISTSettings *DescribeInputRISTSettings `json:"RISTSettings,omitnil,omitempty" name:"RISTSettings"`
+
+	// Enter URL information related to module configuration, including the provided streaming address or the configured third-party source address
+	StreamUrls []*StreamUrlDetail `json:"StreamUrls,omitnil,omitempty" name:"StreamUrls"`
+
+	// Disaster recovery configuration items
+	FailOverOption *FailOverOption `json:"FailOverOption,omitnil,omitempty" name:"FailOverOption"`
 }
 
 type DescribeInputHLSPullSettings struct {
 
 	SourceAddresses []*DescribeHLSPullSourceAddress `json:"SourceAddresses,omitnil,omitempty" name:"SourceAddresses"`
+}
+
+type DescribeInputRISTSettings struct {
+
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
+
+
+	Profile *string `json:"Profile,omitnil,omitempty" name:"Profile"`
+
+
+	Buffer *int64 `json:"Buffer,omitnil,omitempty" name:"Buffer"`
 }
 
 type DescribeInputRTMPPullSettings struct {
@@ -1580,6 +1603,11 @@ func (r *DescribeStreamLinkRegionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type FailOverOption struct {
+
+	FailOverType *string `json:"FailOverType,omitnil,omitempty" name:"FailOverType"`
+}
+
 type FlowAudio struct {
 	// The frame rate.
 	Fps *int64 `json:"Fps,omitnil,omitempty" name:"Fps"`
@@ -2379,6 +2407,17 @@ type StreamSelector struct {
 
 
 	TrackSelector *TrackSelector `json:"TrackSelector,omitnil,omitempty" name:"TrackSelector"`
+}
+
+type StreamUrlDetail struct {
+
+	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
+
+	// URL 
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type TrackSelector struct {
