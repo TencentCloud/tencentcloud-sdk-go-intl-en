@@ -176,7 +176,7 @@ type ApplySdkVerificationTokenRequestParams struct {
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
 	// BASIC: Basic version (Default).
-	// ENHANCE: Enhance version, enable additional output of device risk level field.
+	// ENHANCED: Enhance version, enable additional output of device risk level field.
 	// PRO: Pro version, enable additional output of attack type fields.
 	// PLUS: Plus version, enable additional output of device risk level and attack type fields.
 	// Please contact us to access enhance version & plus version.	
@@ -284,7 +284,7 @@ type ApplySdkVerificationTokenRequest struct {
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
 	// BASIC: Basic version (Default).
-	// ENHANCE: Enhance version, enable additional output of device risk level field.
+	// ENHANCED: Enhance version, enable additional output of device risk level field.
 	// PRO: Pro version, enable additional output of attack type fields.
 	// PLUS: Plus version, enable additional output of device risk level and attack type fields.
 	// Please contact us to access enhance version & plus version.	
@@ -2238,7 +2238,11 @@ type GetFaceIdTokenIntlRequestParams struct {
 	// <p>This API is used to control the sequence of actions. The action types are as follows:<br>"blink"<br>"mouth"<br>"nod"<br>"shake"<br>Choose 1-2 actions from the four.<br>Single action example: "blink"<br>Multi-action example: "blink,mouth".<br>Default value is blink.<br>Input this parameter only when SecureLevel is 2 or 4 for different action types to take effect; otherwise, the API returns an error.</p>
 	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
 
-	// <p>PLUS: PLUS version, PRO: PRO version, ENHANCED: enhanced, BASIC: basic (default)</p>
+	// BASIC: Basic version (Default).
+	// ENHANCED: Enhance version, enable additional output of device risk level field.
+	// PRO: Pro version, enable additional output of attack type fields.
+	// PLUS: Plus version, enable additional output of device risk level and attack type fields.
+	// Please contact us to access enhance version & plus version.	
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 
 	// <p>Liveness retry count</p><p>Value ranges from 1 to 5</p><p>Default value: 5</p>
@@ -2264,7 +2268,11 @@ type GetFaceIdTokenIntlRequest struct {
 	// <p>This API is used to control the sequence of actions. The action types are as follows:<br>"blink"<br>"mouth"<br>"nod"<br>"shake"<br>Choose 1-2 actions from the four.<br>Single action example: "blink"<br>Multi-action example: "blink,mouth".<br>Default value is blink.<br>Input this parameter only when SecureLevel is 2 or 4 for different action types to take effect; otherwise, the API returns an error.</p>
 	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
 
-	// <p>PLUS: PLUS version, PRO: PRO version, ENHANCED: enhanced, BASIC: basic (default)</p>
+	// BASIC: Basic version (Default).
+	// ENHANCED: Enhance version, enable additional output of device risk level field.
+	// PRO: Pro version, enable additional output of attack type fields.
+	// PLUS: Plus version, enable additional output of device risk level and attack type fields.
+	// Please contact us to access enhance version & plus version.	
 	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 
 	// <p>Liveness retry count</p><p>Value ranges from 1 to 5</p><p>Default value: 5</p>

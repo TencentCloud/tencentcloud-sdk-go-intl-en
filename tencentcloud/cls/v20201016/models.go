@@ -2780,7 +2780,7 @@ func (r *CreateCosRechargeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDashboardRequestParams struct {
-	// dashboard name
+	// Dashboard name
 	DashboardName *string `json:"DashboardName,omitnil,omitempty" name:"DashboardName"`
 
 	// Dashboard configuration data
@@ -2793,7 +2793,7 @@ type CreateDashboardRequestParams struct {
 type CreateDashboardRequest struct {
 	*tchttp.BaseRequest
 	
-	// dashboard name
+	// Dashboard name
 	DashboardName *string `json:"DashboardName,omitnil,omitempty" name:"DashboardName"`
 
 	// Dashboard configuration data
@@ -2853,22 +2853,22 @@ func (r *CreateDashboardResponse) FromJsonString(s string) error {
 type CreateDashboardSubscribeRequestParams struct {
 	// Dashboard subscription name.
 	// Input limit:
-	// -Cannot be empty
-	// -Length cannot exceed 128 bytes
-	// -Cannot contain character '|'
+	// -cannot be empty
+	// -Length cannot exceed 128 bytes.
+	// -Cannot contain the character '|'
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Dashboard Id.
-	// -Get the dashboard Id by [searching for the dashboard](https://www.tencentcloud.com/document/product/614/95636?from_cn_redirect=1).
+	// -Get the dashboard Id by [searching for a dashboard](https://www.tencentcloud.com/document/product/614/95636?from_cn_redirect=1).
 	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
 
 	// Subscription time cron expression, in format {seconds} {minutes} {hours} {date} {month} {weekday}; (valid data: {minutes} {hours} {date} {month} {weekday})
-	// -{seconds} Value ranges from 0 to 59. 
+	// -{seconds} value ranges from 0 to 59. 
 	// -{Minutes} Value ranges from 0 to 59. 
 	// -Hour. Value ranges from 0 to 23. 
-	// -{Date} value ranges from 1 to 31 AND (last day of month: L) 
+	// -{Date} value ranges from 1 to 31 AND (dayOfMonth last day: L) 
 	// -{Month} value ranges from 1 to 12. 
-	// -Week value ranges from 0 to 6 [0:Sunday, 6:Saturday]
+	// -Week value ranges from 0 to 6 [0:Sunday, 6:Saturday].
 	Cron *string `json:"Cron,omitnil,omitempty" name:"Cron"`
 
 	// Dashboard subscription data.
@@ -2880,22 +2880,22 @@ type CreateDashboardSubscribeRequest struct {
 	
 	// Dashboard subscription name.
 	// Input limit:
-	// -Cannot be empty
-	// -Length cannot exceed 128 bytes
-	// -Cannot contain character '|'
+	// -cannot be empty
+	// -Length cannot exceed 128 bytes.
+	// -Cannot contain the character '|'
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Dashboard Id.
-	// -Get the dashboard Id by [searching for the dashboard](https://www.tencentcloud.com/document/product/614/95636?from_cn_redirect=1).
+	// -Get the dashboard Id by [searching for a dashboard](https://www.tencentcloud.com/document/product/614/95636?from_cn_redirect=1).
 	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
 
 	// Subscription time cron expression, in format {seconds} {minutes} {hours} {date} {month} {weekday}; (valid data: {minutes} {hours} {date} {month} {weekday})
-	// -{seconds} Value ranges from 0 to 59. 
+	// -{seconds} value ranges from 0 to 59. 
 	// -{Minutes} Value ranges from 0 to 59. 
 	// -Hour. Value ranges from 0 to 23. 
-	// -{Date} value ranges from 1 to 31 AND (last day of month: L) 
+	// -{Date} value ranges from 1 to 31 AND (dayOfMonth last day: L) 
 	// -{Month} value ranges from 1 to 12. 
-	// -Week value ranges from 0 to 6 [0:Sunday, 6:Saturday]
+	// -Week value ranges from 0 to 6 [0:Sunday, 6:Saturday].
 	Cron *string `json:"Cron,omitnil,omitempty" name:"Cron"`
 
 	// Dashboard subscription data.
@@ -5929,6 +5929,41 @@ type CustomMetricSpec struct {
 	PodLabel []*Label `json:"PodLabel,omitnil,omitempty" name:"PodLabel"`
 }
 
+type DashboardInfo struct {
+	// Dashboard ID
+	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
+
+	// Dashboard name
+	DashboardName *string `json:"DashboardName,omitnil,omitempty" name:"DashboardName"`
+
+	// Dashboard data
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Time when the dashboard was created. Format: YYYY-MM-DD HH:MM:SS
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// If AssumerUin is not empty, it indicates the UIN of the service party that created the log topic.
+	AssumerUin *uint64 `json:"AssumerUin,omitnil,omitempty" name:"AssumerUin"`
+
+	// If RoleName is not empty, it indicates the role of the service provider creating the log set.
+	RoleName *string `json:"RoleName,omitnil,omitempty" name:"RoleName"`
+
+	// If AssumerName is not empty, it indicates the name of the service provider creating the log topic.
+	AssumerName *string `json:"AssumerName,omitnil,omitempty" name:"AssumerName"`
+
+	// Information of tag bound to log topic
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Dashboard region: For compatibility with old regions.
+	DashboardRegion *string `json:"DashboardRegion,omitnil,omitempty" name:"DashboardRegion"`
+
+	// Modify dashboard time. Format: YYYY-MM-DD HH:MM:SS
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Topic-related information corresponding to the dashboard
+	DashboardTopicInfos []*DashboardTopicInfo `json:"DashboardTopicInfos,omitnil,omitempty" name:"DashboardTopicInfos"`
+}
+
 type DashboardNoticeMode struct {
 	// Dashboard notification method.
 	// 
@@ -5936,30 +5971,29 @@ type DashboardNoticeMode struct {
 	// -Group: Tencent Cloud user group
 	// -WeCom: wecom callback
 	// -Email: Custom email
-	// -DingTalk
+	// - DingTalk: DingTalk
 	// -Lark
 	ReceiverType *string `json:"ReceiverType,omitnil,omitempty" name:"ReceiverType"`
 
-	// Value of the known method.
+	// Method corresponding value.
 	// -When ReceiverType is `WeCom`, `DingTalk`, or `Lark`, Values must be empty and the Url field is required.
-	// -When ReceiverType is `Uin`, `Group`, or `Email`, the Values field is required and the Url field must be empty.
-	// -When ReceiverType is `Uin`, Values is the user id. Obtain the sub-user UID by [querying sub-users](https://www.tencentcloud.com/document/product/598/34587?from_cn_redirect=1).
-	// -When ReceiverType is `Group`, Values is the user Group id. Obtain user Group id by querying the user Group list (https://www.tencentcloud.com/document/product/598/34589?from_cn_redirect=1).
-	// -When ReceiverType is `Email`, Values is the user email info.
+	// -When ReceiverType is `Uin`, `Group`, or `Email`, the Values field is required, and the Url field must be empty.
+	// -When ReceiverType is `Uin`, Values is the user id. Obtain the sub-user UID by pulling sub-users (https://www.tencentcloud.com/document/product/598/34587?from_cn_redirect=1).
+	// -When ReceiverType is `Group`, Values is the user Group id. Query the user Group list (https://www.tencentcloud.com/document/product/598/34589?from_cn_redirect=1) to obtain the user Group id.
+	// -When ReceiverType is `Email`, Values is the user email.
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 
 	// Dashboard notification channel.
 	// 
 	// -Support: ["Email","Sms","WeChat","Phone"].
-	// -When ReceiverType is `Email` or `WeCom`, ReceiverChannels is invalid.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// -   When ReceiverType is `Email` or `WeCom`, ReceiverChannels is unavailable.
 	ReceiverChannels []*string `json:"ReceiverChannels,omitnil,omitempty" name:"ReceiverChannels"`
 
 	// Subscription method - Callback URL.
-	// -When ReceiverType is `WeCom`, `DingTalk`, or `Lark`, the Url field is required as the callback URL of each channel.
-	// -When the value is `WeCom`, the Url is the enterprise wechat callback address.
-	// -When the value is `DingTalk`, Url is the chatbot Webhook address.
-	// -When `Lark`, Url is the chatbot Webhook address.
+	// -When ReceiverType is `WeCom`, `DingTalk`, or `Lark`, the Url field is required as the callback URL for each channel.
+	// -When it is `WeCom`, the Url is the enterprise wechat callback address.
+	// -For `DingTalk`, the Url is the chatbot Webhook address.
+	// -When it is `Lark`, the Url is the chatbot Webhook address.
 	// -When ReceiverType is `Uin`, `Group`, or `Email`, the Url field must be empty.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
@@ -5969,11 +6003,9 @@ type DashboardSubscribeData struct {
 	NoticeModes []*DashboardNoticeMode `json:"NoticeModes,omitnil,omitempty" name:"NoticeModes"`
 
 	// Dashboard subscription time. If this field is empty, the dashboard default time is used.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	DashboardTime []*string `json:"DashboardTime,omitnil,omitempty" name:"DashboardTime"`
 
 	// Dashboard subscription template variable.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TemplateVariables []*DashboardTemplateVariable `json:"TemplateVariables,omitnil,omitempty" name:"TemplateVariables"`
 
 	// Time zone. Refer to: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#SHANGHAI.
@@ -6008,10 +6040,10 @@ type DashboardSubscribeInfo struct {
 	// Creation time of dashboard subscription record. Format: `YYYY-MM-DD HH:MM:SS`
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Dashboard subscription record update time. Format: `YYYY-MM-DD HH:MM:SS`
+	// Dashboard subscription record update time. Format: YYYY-MM-DD HH:MM:SS
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Time sent successfully of dashboard subscription record. Format: `YYYY-MM-DD HH:MM:SS`
+	// Last time for successful sending of dashboard subscription record. Format: `YYYY-MM-DD HH:MM:SS`
 	LastTime *string `json:"LastTime,omitnil,omitempty" name:"LastTime"`
 
 	// Cloud primary account ID.
@@ -6030,6 +6062,36 @@ type DashboardTemplateVariable struct {
 
 	// Corresponding values of the key
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+}
+
+type DashboardTopicInfo struct {
+	// Topic ID
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// Region of the topic.
+	// - 1: Guangzhou
+	// -4: Shanghai
+	// - 5: Hong Kong (China)
+	// - 7: Shanghai Finance
+	// -8: Beijing
+	// -9: Singapore
+	// - 11: Shenzhen Finance
+	// - 15: Silicon Valley
+	// -16: Chengdu
+	// -17: Frankfurt
+	// - 18: Seoul
+	// - 19: Chongqing
+	// - 22: Virginia
+	// - 23: Bangkok
+	// - 25: Tokyo
+	// - 33: Nanjing
+	// - 36: Tianjin
+	// -39: Taipei (China)
+	// - 46: Beijing Finance
+	// -72: Jakarta
+	// -74: São Paulo
+	// -78: Shanghai Autonomous Driving Cloud
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 }
 
 type DataTransformResouceInfo struct {
@@ -9690,7 +9752,7 @@ func (r *DescribeCosRechargesResponse) FromJsonString(s string) error {
 type DescribeDashboardSubscribesRequestParams struct {
 	// dashboardId: Filter by [dashboard id]. Type: String. Required: No.
 	// 
-	// -Dashboard id. Obtain DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) api.
+	// - Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
 	// -Input parameter example: dashboard-522a5609-1f41-4b11-8086-5afd1d7574f5
 	// 
 	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
@@ -9708,7 +9770,7 @@ type DescribeDashboardSubscribesRequest struct {
 	
 	// dashboardId: Filter by [dashboard id]. Type: String. Required: No.
 	// 
-	// -Dashboard id. Obtain DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) api.
+	// - Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
 	// -Input parameter example: dashboard-522a5609-1f41-4b11-8086-5afd1d7574f5
 	// 
 	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
@@ -9767,6 +9829,205 @@ func (r *DescribeDashboardSubscribesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDashboardSubscribesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDashboardsRequestParams struct {
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// -dashboardId filter by [dashboard id], type: String, required: No.
+	// -Example value: dashboard-522a5609-1f41-4b11-8086-5afd1d7574f5
+	// -dashboardName: Filter by fuzzy search as dashboard name. Type: String. Required: No.
+	// -Example value: Business dashboard
+	// -dashboardRegion filter by dashboard region (compatible with legacy dashboards). This property for dashboards created via cloud API, type: String, required: No.
+	// -See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/614/18940?from_cn_redirect=1)
+	// -Example: ap-guangzhou
+	// - tagKey - String - Required: No - Filter by the tag key.
+	// -Example value:
+	//     ```
+	//     "Filters":[
+	//         {
+	//             "Key": "tagKey",
+	//             "Values": [
+	//                 "tag-key-test"
+	//             ]
+	//         }
+	//     ]
+	//     ```
+	// 
+	// -tag:tagKey Filter by [tag key-value pair]. Replace tagKey with a specific tag key. Type: String. Required: No.
+	// -Refer to [Example 1](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1#4.-.E7.A4.BA.E4.BE.8B) for usage.
+	//     ```
+	//     "Filters": [
+	//         {
+	//             "Key": "tag:tag-key-test",
+	//             "Values": [
+	//                 "12"
+	//             ]
+	//         }
+	//     ]
+	//     ```
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Filter is performed by topicId and regionId.
+	// -topicId: Log topic id.
+	// - Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// -Example value: 439a5304-08f9-484b-9c4d-46ff57133816
+	// - regionId
+	// - 1: Guangzhou
+	// -4: Shanghai
+	// -5: Hong Kong (China)
+	// - 7: Shanghai Finance
+	// - 8: Beijing
+	// -9: Singapore
+	// - 11: Shenzhen Finance
+	// - 15: Silicon Valley
+	// - 16: Chengdu
+	// - 17: Frankfurt
+	// - 18: Seoul
+	// - 19: Chongqing
+	// - 22: Virginia
+	// - 23: Bangkok
+	// - 25: Tokyo
+	// - 33: Nanjing
+	// - 36: Tianjin
+	// -39: Taipei (China)
+	// - 46: Beijing Finance
+	// -72: Jakarta
+	// -74: São Paulo
+	// -78: Shanghai Autonomous Driving Cloud
+	TopicIdRegionFilter []*TopicIdAndRegion `json:"TopicIdRegionFilter,omitnil,omitempty" name:"TopicIdRegionFilter"`
+}
+
+type DescribeDashboardsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Maximum number of entries per page. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// -dashboardId filter by [dashboard id], type: String, required: No.
+	// -Example value: dashboard-522a5609-1f41-4b11-8086-5afd1d7574f5
+	// -dashboardName: Filter by fuzzy search as dashboard name. Type: String. Required: No.
+	// -Example value: Business dashboard
+	// -dashboardRegion filter by dashboard region (compatible with legacy dashboards). This property for dashboards created via cloud API, type: String, required: No.
+	// -See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/614/18940?from_cn_redirect=1)
+	// -Example: ap-guangzhou
+	// - tagKey - String - Required: No - Filter by the tag key.
+	// -Example value:
+	//     ```
+	//     "Filters":[
+	//         {
+	//             "Key": "tagKey",
+	//             "Values": [
+	//                 "tag-key-test"
+	//             ]
+	//         }
+	//     ]
+	//     ```
+	// 
+	// -tag:tagKey Filter by [tag key-value pair]. Replace tagKey with a specific tag key. Type: String. Required: No.
+	// -Refer to [Example 1](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1#4.-.E7.A4.BA.E4.BE.8B) for usage.
+	//     ```
+	//     "Filters": [
+	//         {
+	//             "Key": "tag:tag-key-test",
+	//             "Values": [
+	//                 "12"
+	//             ]
+	//         }
+	//     ]
+	//     ```
+	// 
+	// Each request can have up to 10 Filters. The upper limit of Filter.Values is 100.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Filter is performed by topicId and regionId.
+	// -topicId: Log topic id.
+	// - Obtain the log topic Id through [Get Log Topic List](https://www.tencentcloud.com/document/product/614/56454?from_cn_redirect=1).
+	// -Example value: 439a5304-08f9-484b-9c4d-46ff57133816
+	// - regionId
+	// - 1: Guangzhou
+	// -4: Shanghai
+	// -5: Hong Kong (China)
+	// - 7: Shanghai Finance
+	// - 8: Beijing
+	// -9: Singapore
+	// - 11: Shenzhen Finance
+	// - 15: Silicon Valley
+	// - 16: Chengdu
+	// - 17: Frankfurt
+	// - 18: Seoul
+	// - 19: Chongqing
+	// - 22: Virginia
+	// - 23: Bangkok
+	// - 25: Tokyo
+	// - 33: Nanjing
+	// - 36: Tianjin
+	// -39: Taipei (China)
+	// - 46: Beijing Finance
+	// -72: Jakarta
+	// -74: São Paulo
+	// -78: Shanghai Autonomous Driving Cloud
+	TopicIdRegionFilter []*TopicIdAndRegion `json:"TopicIdRegionFilter,omitnil,omitempty" name:"TopicIdRegionFilter"`
+}
+
+func (r *DescribeDashboardsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDashboardsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	delete(f, "TopicIdRegionFilter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDashboardsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDashboardsResponseParams struct {
+	// Number of dashboards
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Dashboard details
+	DashboardInfos []*DashboardInfo `json:"DashboardInfos,omitnil,omitempty" name:"DashboardInfos"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDashboardsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDashboardsResponseParams `json:"Response"`
+}
+
+func (r *DescribeDashboardsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDashboardsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -13961,10 +14222,10 @@ type ExtractRuleInfo struct {
 }
 
 type Filter struct {
-	// Field to be filtered
+	// Fields that need to be filtered.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// Value to be filtered
+	// Values to be filtered
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
@@ -16337,10 +16598,10 @@ func (r *ModifyCosRechargeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDashboardRequestParams struct {
-	// Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
+	// Dashboard id. Obtain DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
 	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
 
-	// dashboard name
+	// Dashboard name
 	DashboardName *string `json:"DashboardName,omitnil,omitempty" name:"DashboardName"`
 
 	// Dashboard configuration data
@@ -16353,10 +16614,10 @@ type ModifyDashboardRequestParams struct {
 type ModifyDashboardRequest struct {
 	*tchttp.BaseRequest
 	
-	// Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
+	// Dashboard id. Obtain DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
 	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
 
-	// dashboard name
+	// Dashboard name
 	DashboardName *string `json:"DashboardName,omitnil,omitempty" name:"DashboardName"`
 
 	// Dashboard configuration data
@@ -16412,10 +16673,10 @@ func (r *ModifyDashboardResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDashboardSubscribeRequestParams struct {
-	// Dashboard subscription id. Obtain the id through the [Get Dashboard Subscription List](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) api.
+	// Dashboard subscription id. Obtain the Id through the [dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) API.
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) api.
+	// Dashboard id. Obtain DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
 	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
 
 	// Dashboard subscription name. Supports a maximum of 128 characters and does not support the '|' character.
@@ -16431,10 +16692,10 @@ type ModifyDashboardSubscribeRequestParams struct {
 type ModifyDashboardSubscribeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Dashboard subscription id. Obtain the id through the [Get Dashboard Subscription List](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) api.
+	// Dashboard subscription id. Obtain the Id through the [dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) API.
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) api.
+	// Dashboard id. Obtain DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
 	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
 
 	// Dashboard subscription name. Supports a maximum of 128 characters and does not support the '|' character.
@@ -20724,32 +20985,32 @@ func (r *SearchCosRechargeInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SearchDashboardSubscribeRequestParams struct {
-	// Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
+	// Dashboard id. Obtain the DashboardId through the [search for a dashboard.](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
 	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
 
 	// Dashboard subscription data.
 	SubscribeData *DashboardSubscribeData `json:"SubscribeData,omitnil,omitempty" name:"SubscribeData"`
 
-	// Dashboard subscription Id. Obtain through the api [Dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1).
+	// Dashboard subscription Id. Obtain the Id through the [dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) api.
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Dashboard subscription Name. Obtain through the api [Dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1).
+	// Dashboard subscription name. Obtain the Name through the [dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) API.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type SearchDashboardSubscribeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Dashboard id. Obtain the DashboardId through the [Get Dashboard](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
+	// Dashboard id. Obtain the DashboardId through the [search for a dashboard.](https://www.tencentcloud.com/document/api/614/95636?from_cn_redirect=1) API.
 	DashboardId *string `json:"DashboardId,omitnil,omitempty" name:"DashboardId"`
 
 	// Dashboard subscription data.
 	SubscribeData *DashboardSubscribeData `json:"SubscribeData,omitnil,omitempty" name:"SubscribeData"`
 
-	// Dashboard subscription Id. Obtain through the api [Dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1).
+	// Dashboard subscription Id. Obtain the Id through the [dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) api.
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Dashboard subscription Name. Obtain through the api [Dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1).
+	// Dashboard subscription name. Obtain the Name through the [dashboard subscription list](https://www.tencentcloud.com/document/api/614/105779?from_cn_redirect=1) API.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
@@ -21413,6 +21674,35 @@ type TopicExtendInfo struct {
 	// Log topic authentication-free configuration information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AnonymousAccess *AnonymousInfo `json:"AnonymousAccess,omitnil,omitempty" name:"AnonymousAccess"`
+}
+
+type TopicIdAndRegion struct {
+	// Log topic id
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// The ID of the region where the log topic ID is located.
+	// 
+	// id, region, abbreviation information follows:
+	// - 1: Guangzhou, ap-guangzhou
+	// - 4: Shanghai, ap-shanghai
+	// -5, Hong Kong (China), ap-hongkong
+	// - 7: Shanghai Finance, ap-shanghai-fsi
+	// -8, Beijing, ap-beijing
+	// - 9, Singapore, ap-singapore
+	// - 11: Shenzhen Finance, ap-shenzhen-fsi
+	// -15, Silicon Valley, na-siliconvalley
+	// -16, Chengdu, ap-chengdu
+	// -17, Frankfurt, eu-frankfurt
+	// - 18, Seoul, ap-seoul
+	// - 19: Chongqing, ap-chongqing
+	// - 22, Virginia, na-ashburn
+	// - 23, Bangkok, ap-bangkok
+	// -25, Tokyo, ap-tokyo
+	// - 33, Nanjing, ap-nanjing
+	// -46, Beijing Finance, ap-beijing-fsi
+	// - 72, Jakarta, ap-jakarta
+	// -74, São Paulo, sa-saopaulo
+	RegionId *uint64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 }
 
 type TopicInfo struct {
