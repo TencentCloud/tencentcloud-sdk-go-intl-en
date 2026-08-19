@@ -18,10 +18,20 @@ func NewProviderChain(providers []Provider) Provider {
 // DefaultProviderChain returns a default provider chain and try to get credentials in the following order:
 //  1. Environment variable
 //  2. Profile
-//  3. CvmRole
+//  3. TCCLI profile
+//  4. TKE OIDC role ARN
+//  5. CvmRole
+//
 // If you want to customize the search order, please use the function NewProviderChain
 func DefaultProviderChain() Provider {
-	return NewProviderChain([]Provider{DefaultEnvProvider(), DefaultProfileProvider(), DefaultCvmRoleProvider()})
+	providers := []Provider{DefaultEnvProvider(), DefaultProfileProvider(), DefaultTccliProfileProvider()}
+	tkeOIDCRoleArnProvider, err := DefaultTkeOIDCRoleArnProvider()
+	if err == nil {
+		providers = append(providers, tkeOIDCRoleArnProvider)
+	}
+	providers = append(providers, DefaultCvmRoleProvider())
+
+	return NewProviderChain(providers)
 }
 
 func (c *ProviderChain) GetCredential() (CredentialIface, error) {
