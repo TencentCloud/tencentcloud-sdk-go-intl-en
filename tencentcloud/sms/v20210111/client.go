@@ -1297,7 +1297,7 @@ func NewPullSmsSendStatusResponse() (response *PullSmsSendStatusResponse) {
 // PullSmsSendStatus
 // This API is used to pull SMS delivery status.
 //
-// Currently, you can also [configure the callback](https://intl.cloud.tencent.com/document/product/382/37809?from_cn_redirect=1#.E8.AE.BE.E7.BD.AE.E4.BA.8B.E4.BB.B6.E5.9B.9E.E8.B0.83.E9.85.8D.E7.BD.AE) to get the delivery status.
+// Currently, you can also [configure the callback](https://www.tencentcloud.com/document/product/382/35469#38206134-503f-4344-b118-cfc7a72c4a9b) to get the delivery status.
 //
 // >- Note: you need to contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81) to activate this API.
 //
@@ -1325,6 +1325,7 @@ func NewPullSmsSendStatusResponse() (response *PullSmsSendStatusResponse) {
 //  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppIdIsDisabled"
 //  UNAUTHORIZEDOPERATION_SERVICESUSPENDDUETOARREARS = "UnauthorizedOperation.ServiceSuspendDueToArrears"
 //  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppIdVerifyFail"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) PullSmsSendStatus(request *PullSmsSendStatusRequest) (response *PullSmsSendStatusResponse, err error) {
     return c.PullSmsSendStatusWithContext(context.Background(), request)
@@ -1333,7 +1334,7 @@ func (c *Client) PullSmsSendStatus(request *PullSmsSendStatusRequest) (response 
 // PullSmsSendStatus
 // This API is used to pull SMS delivery status.
 //
-// Currently, you can also [configure the callback](https://intl.cloud.tencent.com/document/product/382/37809?from_cn_redirect=1#.E8.AE.BE.E7.BD.AE.E4.BA.8B.E4.BB.B6.E5.9B.9E.E8.B0.83.E9.85.8D.E7.BD.AE) to get the delivery status.
+// Currently, you can also [configure the callback](https://www.tencentcloud.com/document/product/382/35469#38206134-503f-4344-b118-cfc7a72c4a9b) to get the delivery status.
 //
 // >- Note: you need to contact [SMS Helper](https://intl.cloud.tencent.com/document/product/382/3773?from_cn_redirect=1#.E6.8A.80.E6.9C.AF.E4.BA.A4.E6.B5.81) to activate this API.
 //
@@ -1361,6 +1362,7 @@ func (c *Client) PullSmsSendStatus(request *PullSmsSendStatusRequest) (response 
 //  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppIdIsDisabled"
 //  UNAUTHORIZEDOPERATION_SERVICESUSPENDDUETOARREARS = "UnauthorizedOperation.ServiceSuspendDueToArrears"
 //  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppIdVerifyFail"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) PullSmsSendStatusWithContext(ctx context.Context, request *PullSmsSendStatusRequest) (response *PullSmsSendStatusResponse, err error) {
     if request == nil {
@@ -1401,7 +1403,7 @@ func NewPullSmsSendStatusByPhoneNumberResponse() (response *PullSmsSendStatusByP
 // PullSmsSendStatusByPhoneNumber
 // This API is used to pull SMS delivery status for one single number.
 //
-// Currently, you can also [configure the callback](https://intl.cloud.tencent.com/document/product/382/37809?from_cn_redirect=1#.E8.AE.BE.E7.BD.AE.E4.BA.8B.E4.BB.B6.E5.9B.9E.E8.B0.83.E9.85.8D.E7.BD.AE) to get the delivery status.
+// Currently, you can also [configure the callback](https://www.tencentcloud.com/document/product/382/35469#38206134-503f-4344-b118-cfc7a72c4a9b) to get the delivery status.
 //
 // >- Note: because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the SDK.
 //
@@ -1432,6 +1434,7 @@ func NewPullSmsSendStatusByPhoneNumberResponse() (response *PullSmsSendStatusByP
 //  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppIdIsDisabled"
 //  UNAUTHORIZEDOPERATION_SERVICESUSPENDDUETOARREARS = "UnauthorizedOperation.ServiceSuspendDueToArrears"
 //  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppIdVerifyFail"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) PullSmsSendStatusByPhoneNumber(request *PullSmsSendStatusByPhoneNumberRequest) (response *PullSmsSendStatusByPhoneNumberResponse, err error) {
     return c.PullSmsSendStatusByPhoneNumberWithContext(context.Background(), request)
@@ -1440,7 +1443,7 @@ func (c *Client) PullSmsSendStatusByPhoneNumber(request *PullSmsSendStatusByPhon
 // PullSmsSendStatusByPhoneNumber
 // This API is used to pull SMS delivery status for one single number.
 //
-// Currently, you can also [configure the callback](https://intl.cloud.tencent.com/document/product/382/37809?from_cn_redirect=1#.E8.AE.BE.E7.BD.AE.E4.BA.8B.E4.BB.B6.E5.9B.9E.E8.B0.83.E9.85.8D.E7.BD.AE) to get the delivery status.
+// Currently, you can also [configure the callback](https://www.tencentcloud.com/document/product/382/35469#38206134-503f-4344-b118-cfc7a72c4a9b) to get the delivery status.
 //
 // >- Note: because of the improved security of **TencentCloud API 3.0**, **API authentication** is more complicated. We recommend you use the Tencent Cloud SMS service with the SDK.
 //
@@ -1471,6 +1474,7 @@ func (c *Client) PullSmsSendStatusByPhoneNumber(request *PullSmsSendStatusByPhon
 //  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppIdIsDisabled"
 //  UNAUTHORIZEDOPERATION_SERVICESUSPENDDUETOARREARS = "UnauthorizedOperation.ServiceSuspendDueToArrears"
 //  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppIdVerifyFail"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) PullSmsSendStatusByPhoneNumberWithContext(ctx context.Context, request *PullSmsSendStatusByPhoneNumberRequest) (response *PullSmsSendStatusByPhoneNumberResponse, err error) {
     if request == nil {

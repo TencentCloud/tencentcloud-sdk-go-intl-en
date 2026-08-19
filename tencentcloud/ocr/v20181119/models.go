@@ -1844,6 +1844,9 @@ type PODAuditAIRequestParams struct {
 
 	// <p>No      The acknowledge type, 0 is selected by default</p><p>Enumeration value:</p><ul><li>0: Doorstep/yard</li><li>1: Parcel reception room</li><li>2: Myself/others acknowledge</li><li>3: Front desk/reception</li><li>4: Express delivery collection point</li><li>5: Express cabinet</li></ul>
 	SignType *int64 `json:"SignType,omitnil,omitempty" name:"SignType"`
+
+	// <p>Shipping address of the waybill in the business system</p>
+	ShipToAddress *string `json:"ShipToAddress,omitnil,omitempty" name:"ShipToAddress"`
 }
 
 type PODAuditAIRequest struct {
@@ -1860,6 +1863,9 @@ type PODAuditAIRequest struct {
 
 	// <p>No      The acknowledge type, 0 is selected by default</p><p>Enumeration value:</p><ul><li>0: Doorstep/yard</li><li>1: Parcel reception room</li><li>2: Myself/others acknowledge</li><li>3: Front desk/reception</li><li>4: Express delivery collection point</li><li>5: Express cabinet</li></ul>
 	SignType *int64 `json:"SignType,omitnil,omitempty" name:"SignType"`
+
+	// <p>Shipping address of the waybill in the business system</p>
+	ShipToAddress *string `json:"ShipToAddress,omitnil,omitempty" name:"ShipToAddress"`
 }
 
 func (r *PODAuditAIRequest) ToJsonString() string {
@@ -1878,6 +1884,7 @@ func (r *PODAuditAIRequest) FromJsonString(s string) error {
 	delete(f, "ImageUrlList")
 	delete(f, "WaybillNumber")
 	delete(f, "SignType")
+	delete(f, "ShipToAddress")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "PODAuditAIRequest has unknown keys!", "")
 	}
@@ -1889,7 +1896,7 @@ type PODAuditAIResponseParams struct {
 	// <p>0 means non-compliance 1 means compliance</p>
 	AuditorDecision *int64 `json:"AuditorDecision,omitnil,omitempty" name:"AuditorDecision"`
 
-	// <p>Reason code for non-compliance. If there are multiple, return a list of multiple codes.</p><p>Enumeration value:</p><ul><li>100: Wrong delivery address</li><li>101: No house number</li><li>104: Single question</li><li>200: No package</li><li>202: Privacy leakage</li></ul>
+	// <p>Non-compliance reason code. If there are multiple, return a list of multiple codes</p><p>Enumeration values:</p><ul><li>-2: Not supported currently or internal logic error</li><li>100: Delivered to the wrong address</li><li>104: No shipping label</li><li>105: Shipping label number not the same as the system</li><li>200: Package delivery location unclear</li><li>202: Acknowledgment contains personal privacy</li></ul>
 	FailCode []*string `json:"FailCode,omitnil,omitempty" name:"FailCode"`
 
 	// <p>Entire approval result analysis content</p>

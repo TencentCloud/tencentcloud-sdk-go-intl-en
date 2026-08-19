@@ -4149,6 +4149,112 @@ func (r *CreateLoadBalancerResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateLogAnalysisDownloadTaskRequestParams struct {
+	// <p>Site ID.</p>
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// <p>Data service area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding Mainland China).</li></ul>Note: If the service area of the site is "global availability zone", you need to query the data of mainland and overseas separately to obtain all data.</p>
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// <p>Start time, example value: 2020-04-29T00:00:00Z. The maximum span from the supported query start time to this day varies for different package versions. For details, see <a href="https://www.tencentcloud.com/document/product/1552/94165?from_cn_redirect=1#45435466-9103-4ff6-be22-e31717044fb2">Package Selection Comparison</a>.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time, for example, 2020-04-30T00:00:00Z. The time span from the start time to the end time per request is up to 31 days.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Log type. Value range: <ul><li> l7-access-logs: Layer 7 Access Logs;</li><li>web-attack: managed rule log.</li></ul>Defaults to l7-access-logs.</p>
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// <p><a href="https://www.tencentcloud.com/document/product/1552/124662?from_cn_redirect=1">Log match condition</a>. Maximum length 12KB.</p>
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
+
+	// <p>File format, available values: <ul><li>csv</li></ul>Defaults to csv.</p>
+	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
+
+	// <p>Time sorting of raw logs. Available values: <ul><li>asc: ascending order;</li> <li>desc: descending order.</li></ul> Default is desc.</p>
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+}
+
+type CreateLogAnalysisDownloadTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Site ID.</p>
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// <p>Data service area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding Mainland China).</li></ul>Note: If the service area of the site is "global availability zone", you need to query the data of mainland and overseas separately to obtain all data.</p>
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// <p>Start time, example value: 2020-04-29T00:00:00Z. The maximum span from the supported query start time to this day varies for different package versions. For details, see <a href="https://www.tencentcloud.com/document/product/1552/94165?from_cn_redirect=1#45435466-9103-4ff6-be22-e31717044fb2">Package Selection Comparison</a>.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time, for example, 2020-04-30T00:00:00Z. The time span from the start time to the end time per request is up to 31 days.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Log type. Value range: <ul><li> l7-access-logs: Layer 7 Access Logs;</li><li>web-attack: managed rule log.</li></ul>Defaults to l7-access-logs.</p>
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// <p><a href="https://www.tencentcloud.com/document/product/1552/124662?from_cn_redirect=1">Log match condition</a>. Maximum length 12KB.</p>
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
+
+	// <p>File format, available values: <ul><li>csv</li></ul>Defaults to csv.</p>
+	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
+
+	// <p>Time sorting of raw logs. Available values: <ul><li>asc: ascending order;</li> <li>desc: descending order.</li></ul> Default is desc.</p>
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+}
+
+func (r *CreateLogAnalysisDownloadTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateLogAnalysisDownloadTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Area")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "LogType")
+	delete(f, "Condition")
+	delete(f, "Format")
+	delete(f, "Sort")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLogAnalysisDownloadTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateLogAnalysisDownloadTaskResponseParams struct {
+	// <p>Log analysis download task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateLogAnalysisDownloadTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateLogAnalysisDownloadTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateLogAnalysisDownloadTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateLogAnalysisDownloadTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateMultiPathGatewayLineRequestParams struct {
 	// Specifies the site ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -16890,20 +16996,20 @@ type ImageOptimize struct {
 
 // Predefined struct for user
 type ImportZoneConfigRequestParams struct {
-	// Zone ID.
+	// <p>Site ID.</p>
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// The configuration content to be imported, which should be in the JSON format and be encoded in the UTF-8 mode. The configuration content can be obtained through the site configuration export API (ExportZoneConfig). You can individually import "Site Acceleration - Global Acceleration Configuration" or "Site Acceleration - Rule Engine" by passing in the corresponding fields. Refer to the example below for details.
+	// <p>Configuration content to be imported. Use JSON format and encode by UTF-8. You can obtain the configuration content through the site configuration export interface (ExportZoneConfig). You can individually import "Site Acceleration - Global Acceleration Configuration" or "Site Acceleration - Rule Engine". Just pass in the corresponding fields. For specific details, see the example below.<br>Note: AccelerationDomain (acceleration domain name configuration) and Origin (origin configuration) exported by ExportZoneConfig are temporary not supported for import through this interface. If the Content contains the above configuration content, it will cause import failure.</p>
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 }
 
 type ImportZoneConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Zone ID.
+	// <p>Site ID.</p>
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// The configuration content to be imported, which should be in the JSON format and be encoded in the UTF-8 mode. The configuration content can be obtained through the site configuration export API (ExportZoneConfig). You can individually import "Site Acceleration - Global Acceleration Configuration" or "Site Acceleration - Rule Engine" by passing in the corresponding fields. Refer to the example below for details.
+	// <p>Configuration content to be imported. Use JSON format and encode by UTF-8. You can obtain the configuration content through the site configuration export interface (ExportZoneConfig). You can individually import "Site Acceleration - Global Acceleration Configuration" or "Site Acceleration - Rule Engine". Just pass in the corresponding fields. For specific details, see the example below.<br>Note: AccelerationDomain (acceleration domain name configuration) and Origin (origin configuration) exported by ExportZoneConfig are temporary not supported for import through this interface. If the Content contains the above configuration content, it will cause import failure.</p>
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 }
 
@@ -16929,7 +17035,7 @@ func (r *ImportZoneConfigRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ImportZoneConfigResponseParams struct {
-	// It indicates the task ID of this import configuration. You can obtain the result of this import task through the site configuration import result query API (DescribeZoneConfigImportResult). Note: The import task ID is only retained for 7 days.
+	// <p>Task Id of this import configuration. Use the site configuration import result query API (DescribeZoneConfigImportResult) to get the execution result of this import job. Note: The import task Id only supports querying the most recent 7 days of import tasks.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.

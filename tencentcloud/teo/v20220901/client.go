@@ -2299,6 +2299,80 @@ func (c *Client) CreateLoadBalancerWithContext(ctx context.Context, request *Cre
     return
 }
 
+func NewCreateLogAnalysisDownloadTaskRequest() (request *CreateLogAnalysisDownloadTaskRequest) {
+    request = &CreateLogAnalysisDownloadTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "CreateLogAnalysisDownloadTask")
+    
+    
+    return
+}
+
+func NewCreateLogAnalysisDownloadTaskResponse() (response *CreateLogAnalysisDownloadTaskResponse) {
+    response = &CreateLogAnalysisDownloadTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateLogAnalysisDownloadTask
+// This API is used to create a log analysis download task. After creation, you can query the download task via the DescribeLogAnalysisDownloadTasks API.
+//
+// Note:
+//
+// 1. Supports up to 50 million log entries per download.
+//
+// 2. Log files are reserved for 3 days.
+//
+// 3. When multiple tasks exist at the same time, they are processed sequentially based on task creation time.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LOADBALANCERBINDORIGINGROUPINVALID = "InvalidParameter.LoadBalancerBindOriginGroupInvalid"
+//  INVALIDPARAMETER_LOADBALANCERNAMEREPEATED = "InvalidParameter.LoadBalancerNameRepeated"
+//  INVALIDPARAMETER_ORIGINGROUPTYPECANNOTMATCHLBTYPE = "InvalidParameter.OriginGroupTypeCanNotMatchLBType"
+//  INVALIDPARAMETER_SOMEORIGINGROUPNOTEXIST = "InvalidParameter.SomeOriginGroupNotExist"
+//  LIMITEXCEEDED_LOADBALANCINGCOUNTLIMITEXCEEDED = "LimitExceeded.LoadBalancingCountLimitExceeded"
+func (c *Client) CreateLogAnalysisDownloadTask(request *CreateLogAnalysisDownloadTaskRequest) (response *CreateLogAnalysisDownloadTaskResponse, err error) {
+    return c.CreateLogAnalysisDownloadTaskWithContext(context.Background(), request)
+}
+
+// CreateLogAnalysisDownloadTask
+// This API is used to create a log analysis download task. After creation, you can query the download task via the DescribeLogAnalysisDownloadTasks API.
+//
+// Note:
+//
+// 1. Supports up to 50 million log entries per download.
+//
+// 2. Log files are reserved for 3 days.
+//
+// 3. When multiple tasks exist at the same time, they are processed sequentially based on task creation time.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LOADBALANCERBINDORIGINGROUPINVALID = "InvalidParameter.LoadBalancerBindOriginGroupInvalid"
+//  INVALIDPARAMETER_LOADBALANCERNAMEREPEATED = "InvalidParameter.LoadBalancerNameRepeated"
+//  INVALIDPARAMETER_ORIGINGROUPTYPECANNOTMATCHLBTYPE = "InvalidParameter.OriginGroupTypeCanNotMatchLBType"
+//  INVALIDPARAMETER_SOMEORIGINGROUPNOTEXIST = "InvalidParameter.SomeOriginGroupNotExist"
+//  LIMITEXCEEDED_LOADBALANCINGCOUNTLIMITEXCEEDED = "LimitExceeded.LoadBalancingCountLimitExceeded"
+func (c *Client) CreateLogAnalysisDownloadTaskWithContext(ctx context.Context, request *CreateLogAnalysisDownloadTaskRequest) (response *CreateLogAnalysisDownloadTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateLogAnalysisDownloadTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "CreateLogAnalysisDownloadTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateLogAnalysisDownloadTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateLogAnalysisDownloadTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateMultiPathGatewayRequest() (request *CreateMultiPathGatewayRequest) {
     request = &CreateMultiPathGatewayRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -11397,7 +11471,7 @@ func NewImportZoneConfigResponse() (response *ImportZoneConfigResponse) {
 }
 
 // ImportZoneConfig
-// This API is used to quickly import site configuration files. After the import is initiated, the API will return the corresponding task ID (TaskId). Users need to use the site configuration import result query API (DescribeZoneConfigImportResult) to obtain the results of this import task. This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
+// This API is used to quickly import site configuration files. After the import is initiated, the API will return the corresponding task ID. Users need to use the site configuration import result query API to obtain the execution result of this import task.
 //
 // error code that may be returned:
 //  OPERATIONDENIED = "OperationDenied"
@@ -11408,7 +11482,7 @@ func (c *Client) ImportZoneConfig(request *ImportZoneConfigRequest) (response *I
 }
 
 // ImportZoneConfig
-// This API is used to quickly import site configuration files. After the import is initiated, the API will return the corresponding task ID (TaskId). Users need to use the site configuration import result query API (DescribeZoneConfigImportResult) to obtain the results of this import task. This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
+// This API is used to quickly import site configuration files. After the import is initiated, the API will return the corresponding task ID. Users need to use the site configuration import result query API to obtain the execution result of this import task.
 //
 // error code that may be returned:
 //  OPERATIONDENIED = "OperationDenied"
