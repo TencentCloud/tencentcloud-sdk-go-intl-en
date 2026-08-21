@@ -2993,6 +2993,80 @@ func (c *Client) ModifyCloudSliceTaskWithContext(ctx context.Context, request *M
     return
 }
 
+func NewQueryAIMessageListRequest() (request *QueryAIMessageListRequest) {
+    request = &QueryAIMessageListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "QueryAIMessageList")
+    
+    
+    return
+}
+
+func NewQueryAIMessageListResponse() (response *QueryAIMessageListResponse) {
+    response = &QueryAIMessageListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryAIMessageList
+// input a task ID to query the list of AI conversation context information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) QueryAIMessageList(request *QueryAIMessageListRequest) (response *QueryAIMessageListResponse, err error) {
+    return c.QueryAIMessageListWithContext(context.Background(), request)
+}
+
+// QueryAIMessageList
+// input a task ID to query the list of AI conversation context information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
+//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) QueryAIMessageListWithContext(ctx context.Context, request *QueryAIMessageListRequest) (response *QueryAIMessageListResponse, err error) {
+    if request == nil {
+        request = NewQueryAIMessageListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "QueryAIMessageList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryAIMessageList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryAIMessageListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRemoveUserRequest() (request *RemoveUserRequest) {
     request = &RemoveUserRequest{
         BaseRequest: &tchttp.BaseRequest{},

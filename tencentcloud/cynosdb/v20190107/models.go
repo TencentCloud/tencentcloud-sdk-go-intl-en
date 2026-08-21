@@ -4746,6 +4746,12 @@ type CynosdbClusterDetail struct {
 
 	// <p>Current instance availability zone</p>
 	RealZone *string `json:"RealZone,omitnil,omitempty" name:"RealZone"`
+
+	// <p>Exceed limit enabled status</p><p>Enumeration value:</p><ul><li>yes: Exceed limit enabled</li><li>no: Exceed limit disabled</li></ul><p>Default value: no</p>
+	StorageOverUse *string `json:"StorageOverUse,omitnil,omitempty" name:"StorageOverUse"`
+
+	// <p>Auto-scaling enabled status</p><p>Enumeration value:</p><ul><li>yes: On</li><li>no: Off</li></ul><p>Default value: no</p>
+	StorageAutoExpand *string `json:"StorageAutoExpand,omitnil,omitempty" name:"StorageAutoExpand"`
 }
 
 type CynosdbErrorLogItem struct {
