@@ -136,21 +136,21 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// Default value: 4
 	SecurityLevel *int64 `json:"SecurityLevel,omitnil,omitempty" name:"SecurityLevel"`
 
-	// Specifies the identity document type used for authentication. valid values:.  
+	// Specifies the identity document type used for authentication. Valid values:
 	// 
-	// 1. HK (default): hong kong (china) identity card.
-	// 2. ML: malaysian identity card.
-	// 3. Indonesian identity card.
-	// 4. PhilippinesVoteID: specifies the voter card in the philippines.
-	// 5. PhilippinesDrivingLicense: specifies the driving license in philippines.
-	// 6. PhilippinesTinID: specifies the philippines tin id.
-	// 7. PhilippinesSSSID: specifies the SSSID in the philippines.
-	// 8. philippines UMID: specifies the philippines UMID.
-	// 9. MLIDPassport: specifies the passport for hong kong (china), macao (china), and taiwan (china) as well as overseas passports.
-	// 10. ThailandIDCard: specifies the thai identity card.
-	// 11. Mainland id card.
-	// 12. SingaporeIDCard: specifies the Singapore id card.
-	// 13. HMTPermit: specifies the hong kong, macau and taiwan travel permit.
+	// 1. HK (default): Hong Kong (China) Identity Card.
+	// 2. ML: Malaysia Identity Card.
+	// 3. IndonesiaIDCard: Indonesia Identity Card.
+	// 4. PhilippinesVoteID: Philippines Voter's ID.
+	// 5. PhilippinesDrivingLicense: Philippines Driving License.
+	// 6. PhilippinesTinID: Philippines TIN ID.
+	// 7. PhilippinesSSSID: Philippines SSS ID.
+	// 8. PhilippinesUMID: Philippines UMID.
+	// 9. MLIDPassport: Passports of Hong Kong (China), Macao (China), and Taiwan (China), as well as overseas regions.
+	// 10. ThailandIDCard: Thailand Identity Card.
+	// 11. MainlandIDCard: Chinese Mainland Identity Card.
+	// 12. SingaporeIDCard: Singapore Identity Card.
+	// 13. HMTPermit: Travel Permit for Hong Kong (China), Macao (China), and Taiwan (China).
 	IdCardType *string `json:"IdCardType,omitnil,omitempty" name:"IdCardType"`
 
 	// The Base64-encoded value of the photo to compare, which is required only when `CheckMode` is set to `2`.
@@ -226,6 +226,9 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// <p>Whether uploading photos from the album is permitted for verification during the ID validation phase (prohibited when single-angle multi-image forgery detection is enabled)
 	//  </p><p>Enumeration values:</p><ul><li>true: Album photo upload for verification enabled</li><li>false: Album photo upload for verification disabled</li></ul><p>Default value: false</p>
 	AllowUploadPhoto *bool `json:"AllowUploadPhoto,omitnil,omitempty" name:"AllowUploadPhoto"`
+
+	// <p>Whether to enable Bank of Thailand-specific background detection.<br>This parameter requires whitelist activation; please contact us to request access before it can take effect.</p><p>Default value: false</p>
+	EnableBotBgDetection *bool `json:"EnableBotBgDetection,omitnil,omitempty" name:"EnableBotBgDetection"`
 }
 
 type ApplySdkVerificationTokenRequest struct {
@@ -246,21 +249,21 @@ type ApplySdkVerificationTokenRequest struct {
 	// Default value: 4
 	SecurityLevel *int64 `json:"SecurityLevel,omitnil,omitempty" name:"SecurityLevel"`
 
-	// Specifies the identity document type used for authentication. valid values:.  
+	// Specifies the identity document type used for authentication. Valid values:
 	// 
-	// 1. HK (default): hong kong (china) identity card.
-	// 2. ML: malaysian identity card.
-	// 3. Indonesian identity card.
-	// 4. PhilippinesVoteID: specifies the voter card in the philippines.
-	// 5. PhilippinesDrivingLicense: specifies the driving license in philippines.
-	// 6. PhilippinesTinID: specifies the philippines tin id.
-	// 7. PhilippinesSSSID: specifies the SSSID in the philippines.
-	// 8. philippines UMID: specifies the philippines UMID.
-	// 9. MLIDPassport: specifies the passport for hong kong (china), macao (china), and taiwan (china) as well as overseas passports.
-	// 10. ThailandIDCard: specifies the thai identity card.
-	// 11. Mainland id card.
-	// 12. SingaporeIDCard: specifies the Singapore id card.
-	// 13. HMTPermit: specifies the hong kong, macau and taiwan travel permit.
+	// 1. HK (default): Hong Kong (China) Identity Card.
+	// 2. ML: Malaysia Identity Card.
+	// 3. IndonesiaIDCard: Indonesia Identity Card.
+	// 4. PhilippinesVoteID: Philippines Voter's ID.
+	// 5. PhilippinesDrivingLicense: Philippines Driving License.
+	// 6. PhilippinesTinID: Philippines TIN ID.
+	// 7. PhilippinesSSSID: Philippines SSS ID.
+	// 8. PhilippinesUMID: Philippines UMID.
+	// 9. MLIDPassport: Passports of Hong Kong (China), Macao (China), and Taiwan (China), as well as overseas regions.
+	// 10. ThailandIDCard: Thailand Identity Card.
+	// 11. MainlandIDCard: Chinese Mainland Identity Card.
+	// 12. SingaporeIDCard: Singapore Identity Card.
+	// 13. HMTPermit: Travel Permit for Hong Kong (China), Macao (China), and Taiwan (China).
 	IdCardType *string `json:"IdCardType,omitnil,omitempty" name:"IdCardType"`
 
 	// The Base64-encoded value of the photo to compare, which is required only when `CheckMode` is set to `2`.
@@ -334,6 +337,9 @@ type ApplySdkVerificationTokenRequest struct {
 	// <p>Whether uploading photos from the album is permitted for verification during the ID validation phase (prohibited when single-angle multi-image forgery detection is enabled)
 	//  </p><p>Enumeration values:</p><ul><li>true: Album photo upload for verification enabled</li><li>false: Album photo upload for verification disabled</li></ul><p>Default value: false</p>
 	AllowUploadPhoto *bool `json:"AllowUploadPhoto,omitnil,omitempty" name:"AllowUploadPhoto"`
+
+	// <p>Whether to enable Bank of Thailand-specific background detection.<br>This parameter requires whitelist activation; please contact us to request access before it can take effect.</p><p>Default value: false</p>
+	EnableBotBgDetection *bool `json:"EnableBotBgDetection,omitnil,omitempty" name:"EnableBotBgDetection"`
 }
 
 func (r *ApplySdkVerificationTokenRequest) ToJsonString() string {
@@ -369,6 +375,7 @@ func (r *ApplySdkVerificationTokenRequest) FromJsonString(s string) error {
 	delete(f, "SkipOcrConfirmPage")
 	delete(f, "HideProgressBar")
 	delete(f, "AllowUploadPhoto")
+	delete(f, "EnableBotBgDetection")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplySdkVerificationTokenRequest has unknown keys!", "")
 	}
@@ -2247,6 +2254,9 @@ type GetFaceIdTokenIntlRequestParams struct {
 
 	// <p>Liveness retry count</p><p>Value ranges from 1 to 5</p><p>Default value: 5</p>
 	RetryLimit *int64 `json:"RetryLimit,omitnil,omitempty" name:"RetryLimit"`
+
+	// <p>Whether to enable Bank of Thailand-specific background detection.<br>This parameter requires whitelist activation; please contact us to request access before it can take effect.</p><p>Default value: false</p>
+	EnableBotBgDetection *bool `json:"EnableBotBgDetection,omitnil,omitempty" name:"EnableBotBgDetection"`
 }
 
 type GetFaceIdTokenIntlRequest struct {
@@ -2277,6 +2287,9 @@ type GetFaceIdTokenIntlRequest struct {
 
 	// <p>Liveness retry count</p><p>Value ranges from 1 to 5</p><p>Default value: 5</p>
 	RetryLimit *int64 `json:"RetryLimit,omitnil,omitempty" name:"RetryLimit"`
+
+	// <p>Whether to enable Bank of Thailand-specific background detection.<br>This parameter requires whitelist activation; please contact us to request access before it can take effect.</p><p>Default value: false</p>
+	EnableBotBgDetection *bool `json:"EnableBotBgDetection,omitnil,omitempty" name:"EnableBotBgDetection"`
 }
 
 func (r *GetFaceIdTokenIntlRequest) ToJsonString() string {
@@ -2298,6 +2311,7 @@ func (r *GetFaceIdTokenIntlRequest) FromJsonString(s string) error {
 	delete(f, "ActionList")
 	delete(f, "SdkVersion")
 	delete(f, "RetryLimit")
+	delete(f, "EnableBotBgDetection")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetFaceIdTokenIntlRequest has unknown keys!", "")
 	}
@@ -2308,6 +2322,9 @@ func (r *GetFaceIdTokenIntlRequest) FromJsonString(s string) error {
 type GetFaceIdTokenIntlResponseParams struct {
 	// <p>SdkToken, used to connect the identity verification process. The verification result can be retrieved with this token. Each SdkToken has a validity of 10 minutes.</p>
 	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
+
+	// Encrypted string of server-side parameters
+	ServerParamInfo *string `json:"ServerParamInfo,omitnil,omitempty" name:"ServerParamInfo"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
