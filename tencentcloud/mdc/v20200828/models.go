@@ -769,22 +769,40 @@ type DescribeOutput struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	RTMPPullSettings *DescribeOutputRTMPPullSettings `json:"RTMPPullSettings,omitnil,omitempty" name:"RTMPPullSettings"`
 
-	// CIDR allowlist
-	// This parameter is valid if `Protocol` is set to `RTMP_PULL`. If this parameter is left empty, there is no restriction on clients’ IP addresses.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// CIDR Whitelist List. Effective when Protocol is RTMP_PULL. Empty means no restriction on client IP.
 	AllowIpList []*string `json:"AllowIpList,omitnil,omitempty" name:"AllowIpList"`
 
-
+	// The output RTSP streaming configuration information.
 	RTSPPullSettings *DescribeOutputRTSPPullSettings `json:"RTSPPullSettings,omitnil,omitempty" name:"RTSPPullSettings"`
 
-
+	// Output the HLS streaming configuration information.
 	HLSPullSettings *DescribeOutputHLSPullSettings `json:"HLSPullSettings,omitnil,omitempty" name:"HLSPullSettings"`
 
-
+	// The maximum number of concurrent streams is 4, with a default of 4.
 	MaxConcurrent *uint64 `json:"MaxConcurrent,omitnil,omitempty" name:"MaxConcurrent"`
 
 	// The bound security group IDs.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// The available zone currently only supports a maximum of one output.
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
+
+	// Output RIST configuration information.
+	RISTSettings *DescribeOutputRISTSettings `json:"RISTSettings,omitnil,omitempty" name:"RISTSettings"`
+
+	// For streams containing multiple audio/video tracks, you can specify the tracks that need to be used
+	//
+	// Deprecated: PidSelector is deprecated.
+	PidSelector *PidSelector `json:"PidSelector,omitnil,omitempty" name:"PidSelector"`
+
+	// Output module types, including Pinpoint (single point output, supporting up to four concurrent outputs); MultiMesh (Multi output, supports concurrent outputs greater than four, currently up to 200). The default type is Pinpoint output. For a single Flow, a region can only have a maximum of one MultiMesh output.
+	OutputKind *string `json:"OutputKind,omitnil,omitempty" name:"OutputKind"`
+
+	// Output module configuration, relevant URLs, including provided streaming addresses or configured output to third-party forwarding addresses
+	StreamUrls []*StreamUrlDetail `json:"StreamUrls,omitnil,omitempty" name:"StreamUrls"`
+
+	// For streams containing multiple audio/video tracks, you can specify the tracks that need to be used
+	StreamSelector *StreamSelector `json:"StreamSelector,omitnil,omitempty" name:"StreamSelector"`
 }
 
 type DescribeOutputHLSPullServerUrl struct {
@@ -795,6 +813,20 @@ type DescribeOutputHLSPullServerUrl struct {
 type DescribeOutputHLSPullSettings struct {
 
 	ServerUrls []*DescribeOutputHLSPullServerUrl `json:"ServerUrls,omitnil,omitempty" name:"ServerUrls"`
+}
+
+type DescribeOutputRISTSettings struct {
+
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
+
+
+	Profile *string `json:"Profile,omitnil,omitempty" name:"Profile"`
+
+
+	Buffer *int64 `json:"Buffer,omitnil,omitempty" name:"Buffer"`
+
+
+	SourceAddresses []*OutputRISTSourceAddressResp `json:"SourceAddresses,omitnil,omitempty" name:"SourceAddresses"`
 }
 
 type DescribeOutputRTMPPullServerUrl struct {
@@ -2201,6 +2233,14 @@ func (r *ModifyStreamLinkOutputInfoResponse) FromJsonString(s string) error {
 type OutputAddress struct {
 	// Output destination IP.
 	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
+}
+
+type OutputRISTSourceAddressResp struct {
+
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
+
+
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 }
 
 type OutputSRTSourceAddressResp struct {
