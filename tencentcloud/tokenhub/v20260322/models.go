@@ -76,6 +76,17 @@ type ApiKeyDetail struct {
 	QuotaStatus *string `json:"QuotaStatus,omitnil,omitempty" name:"QuotaStatus"`
 }
 
+type BatchCreateFailedItem struct {
+	// Serial number of the failed item (starting from 1, corresponding to the suffix number).
+	Index *int64 `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// Name of the failed item.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Failure reason.
+	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
+}
+
 type BindingItem struct {
 	// Resource ID (model ID or service ID).
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
@@ -136,6 +147,11 @@ func (r *CreateApiKeyResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *CreateApiKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type CreateApiKeysResultItem struct {
+	// APIKey ID.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
 }
 
 // Predefined struct for user
@@ -283,6 +299,208 @@ func (r *CreateGlossaryResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateGlossaryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateTokenPlanApiKeysRequestParams struct {
+	// Package ID. You can obtain it through the DescribeTokenPlanList API.
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// API key name, up to 128 characters. If the number of API keys created exceeds 1, the actual name format is {ApiKeyName}-{serial number} (for example, mykey-1, mykey-2).
+	ApiKeyName *string `json:"ApiKeyName,omitnil,omitempty" name:"ApiKeyName"`
+
+	// Number of creations. Value range: 1–10.
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
+
+	// List of available models. If the package type is the enterprise edition professional package, you can specify a model or pass in "all". "all" means all models supported by the package are available for use. To specify specific models, pass in Model IDs. "all" and specific Model IDs cannot be specified at the same time. If not provided, it indicates the API Key does not support any models, thereby impacting normal use of the API Key. If the package type is the enterprise edition lite package, this field will be force overwritten to ["auto"] regardless of whether it is provided and what value is passed in.
+	AllowedModels []*string `json:"AllowedModels,omitnil,omitempty" name:"AllowedModels"`
+
+	// Exclusive reserved quota. If not passed in, the value is `0`, which means no exclusive reserved quota is assigned to the API Key. Measurement units are as follows:
+	// -Package type is professional, unit value is points;
+	// -Package type is lite package, and the measurement unit is token.
+	ExclusiveQuota *int64 `json:"ExclusiveQuota,omitnil,omitempty" name:"ExclusiveQuota"`
+
+	// Total credit limit. -1 means unlimited. It must be -1 or greater than or equal to the current ExclusiveQuota of the API Key. If not passed, no upper limit is set. The units are as follows:
+	// -Package type is professional, unit value is points;
+	// -Package type is lite package, and the measurement unit is token.
+	TotalQuota *int64 `json:"TotalQuota,omitnil,omitempty" name:"TotalQuota"`
+
+	// TPM (Tokens Per Minute) limit. If not passed, the plan-level TPM is used. Must be >= 0 and <= the package TPM.
+	TPM *int64 `json:"TPM,omitnil,omitempty" name:"TPM"`
+}
+
+type CreateTokenPlanApiKeysRequest struct {
+	*tchttp.BaseRequest
+	
+	// Package ID. You can obtain it through the DescribeTokenPlanList API.
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// API key name, up to 128 characters. If the number of API keys created exceeds 1, the actual name format is {ApiKeyName}-{serial number} (for example, mykey-1, mykey-2).
+	ApiKeyName *string `json:"ApiKeyName,omitnil,omitempty" name:"ApiKeyName"`
+
+	// Number of creations. Value range: 1–10.
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
+
+	// List of available models. If the package type is the enterprise edition professional package, you can specify a model or pass in "all". "all" means all models supported by the package are available for use. To specify specific models, pass in Model IDs. "all" and specific Model IDs cannot be specified at the same time. If not provided, it indicates the API Key does not support any models, thereby impacting normal use of the API Key. If the package type is the enterprise edition lite package, this field will be force overwritten to ["auto"] regardless of whether it is provided and what value is passed in.
+	AllowedModels []*string `json:"AllowedModels,omitnil,omitempty" name:"AllowedModels"`
+
+	// Exclusive reserved quota. If not passed in, the value is `0`, which means no exclusive reserved quota is assigned to the API Key. Measurement units are as follows:
+	// -Package type is professional, unit value is points;
+	// -Package type is lite package, and the measurement unit is token.
+	ExclusiveQuota *int64 `json:"ExclusiveQuota,omitnil,omitempty" name:"ExclusiveQuota"`
+
+	// Total credit limit. -1 means unlimited. It must be -1 or greater than or equal to the current ExclusiveQuota of the API Key. If not passed, no upper limit is set. The units are as follows:
+	// -Package type is professional, unit value is points;
+	// -Package type is lite package, and the measurement unit is token.
+	TotalQuota *int64 `json:"TotalQuota,omitnil,omitempty" name:"TotalQuota"`
+
+	// TPM (Tokens Per Minute) limit. If not passed, the plan-level TPM is used. Must be >= 0 and <= the package TPM.
+	TPM *int64 `json:"TPM,omitnil,omitempty" name:"TPM"`
+}
+
+func (r *CreateTokenPlanApiKeysRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateTokenPlanApiKeysRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TeamId")
+	delete(f, "ApiKeyName")
+	delete(f, "Count")
+	delete(f, "AllowedModels")
+	delete(f, "ExclusiveQuota")
+	delete(f, "TotalQuota")
+	delete(f, "TPM")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTokenPlanApiKeysRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateTokenPlanApiKeysResponseParams struct {
+	// Item list of successful creation.
+	Items []*CreateApiKeysResultItem `json:"Items,omitnil,omitempty" name:"Items"`
+
+	// Item list that failed to be created.
+	FailedItems []*BatchCreateFailedItem `json:"FailedItems,omitnil,omitempty" name:"FailedItems"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateTokenPlanApiKeysResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateTokenPlanApiKeysResponseParams `json:"Response"`
+}
+
+func (r *CreateTokenPlanApiKeysResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateTokenPlanApiKeysResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateTokenPlanTeamOrderAndBuyRequestParams struct {
+	// <p>Package type. Value: enterprise (enterprise edition professional package), enterprise-auto (enterprise edition lite package).</p>
+	ProductType *string `json:"ProductType,omitnil,omitempty" name:"ProductType"`
+
+	// <p>Package name. It can only contain Chinese, letters, digits, underscores, and hyphens. It must start with a Chinese character or a letter and end with a Chinese character, letter, or digit. The length should be 2-50 characters.</p>
+	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
+
+	// <p>Purchase duration. Unit: Month. It must be greater than 0, supporting 1 to 12 months.</p>
+	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
+	// <p>Specification of the purchased package. If the package type is enterprise, the measurement unit is point; if the package type is enterprise-auto, the measurement unit is tokens.</p>
+	CreditOrToken *int64 `json:"CreditOrToken,omitnil,omitempty" name:"CreditOrToken"`
+
+	// <p>Whether to enable auto-renewal. Not enabled by default.</p>
+	EnableAutoRenew *bool `json:"EnableAutoRenew,omitnil,omitempty" name:"EnableAutoRenew"`
+
+	// <p>Existing package ID (if not empty, the renewal process is performed; if empty, a new purchase is performed)</p>
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+}
+
+type CreateTokenPlanTeamOrderAndBuyRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Package type. Value: enterprise (enterprise edition professional package), enterprise-auto (enterprise edition lite package).</p>
+	ProductType *string `json:"ProductType,omitnil,omitempty" name:"ProductType"`
+
+	// <p>Package name. It can only contain Chinese, letters, digits, underscores, and hyphens. It must start with a Chinese character or a letter and end with a Chinese character, letter, or digit. The length should be 2-50 characters.</p>
+	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
+
+	// <p>Purchase duration. Unit: Month. It must be greater than 0, supporting 1 to 12 months.</p>
+	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
+	// <p>Specification of the purchased package. If the package type is enterprise, the measurement unit is point; if the package type is enterprise-auto, the measurement unit is tokens.</p>
+	CreditOrToken *int64 `json:"CreditOrToken,omitnil,omitempty" name:"CreditOrToken"`
+
+	// <p>Whether to enable auto-renewal. Not enabled by default.</p>
+	EnableAutoRenew *bool `json:"EnableAutoRenew,omitnil,omitempty" name:"EnableAutoRenew"`
+
+	// <p>Existing package ID (if not empty, the renewal process is performed; if empty, a new purchase is performed)</p>
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+}
+
+func (r *CreateTokenPlanTeamOrderAndBuyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateTokenPlanTeamOrderAndBuyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProductType")
+	delete(f, "TeamName")
+	delete(f, "TimeSpan")
+	delete(f, "CreditOrToken")
+	delete(f, "EnableAutoRenew")
+	delete(f, "TeamId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTokenPlanTeamOrderAndBuyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateTokenPlanTeamOrderAndBuyResponseParams struct {
+	// <p>Tencent Cloud order ID. Used to associate all sub-orders under a purchase operation.</p>
+	BigOrderId *string `json:"BigOrderId,omitnil,omitempty" name:"BigOrderId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateTokenPlanTeamOrderAndBuyResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateTokenPlanTeamOrderAndBuyResponseParams `json:"Response"`
+}
+
+func (r *CreateTokenPlanTeamOrderAndBuyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateTokenPlanTeamOrderAndBuyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -454,6 +672,60 @@ func (r *DeleteGlossaryResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteGlossaryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteTokenPlanApiKeyRequestParams struct {
+	// API Key ID. You can obtain it through the DescribeTokenPlanApiKeyList API.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+}
+
+type DeleteTokenPlanApiKeyRequest struct {
+	*tchttp.BaseRequest
+	
+	// API Key ID. You can obtain it through the DescribeTokenPlanApiKeyList API.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+}
+
+func (r *DeleteTokenPlanApiKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteTokenPlanApiKeyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiKeyId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteTokenPlanApiKeyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteTokenPlanApiKeyResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteTokenPlanApiKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteTokenPlanApiKeyResponseParams `json:"Response"`
+}
+
+func (r *DeleteTokenPlanApiKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteTokenPlanApiKeyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -834,6 +1106,448 @@ func (r *DescribeGlossaryEntriesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeTokenPlanApiKeyListRequestParams struct {
+	// Package ID. You can obtain it through the DescribeTokenPlanList API.
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// Offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of results returned by paging query. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Paginate the list of query filter criteria. Supported filter fields: ApiKeyId (API Key ID), Name (API Key name), Status (whether the API Key is available), StopReason (reason for disabling the API Key), UseStatus (API Key user-side switch).
+	Filters []*RequestFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Paginate the list of sorting criteria. Supported sorting fields: CreatedAt (creation time) and UpdatedAt (update time). By default, results are sorted by CreatedAt in descending order.
+	Sorts []*RequestSort `json:"Sorts,omitnil,omitempty" name:"Sorts"`
+}
+
+type DescribeTokenPlanApiKeyListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Package ID. You can obtain it through the DescribeTokenPlanList API.
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// Offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of results returned by paging query. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Paginate the list of query filter criteria. Supported filter fields: ApiKeyId (API Key ID), Name (API Key name), Status (whether the API Key is available), StopReason (reason for disabling the API Key), UseStatus (API Key user-side switch).
+	Filters []*RequestFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Paginate the list of sorting criteria. Supported sorting fields: CreatedAt (creation time) and UpdatedAt (update time). By default, results are sorted by CreatedAt in descending order.
+	Sorts []*RequestSort `json:"Sorts,omitnil,omitempty" name:"Sorts"`
+}
+
+func (r *DescribeTokenPlanApiKeyListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTokenPlanApiKeyListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TeamId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	delete(f, "Sorts")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTokenPlanApiKeyListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTokenPlanApiKeyListResponseParams struct {
+	// API Key list.
+	ApiKeySet []*TokenPlanApiKeyListItem `json:"ApiKeySet,omitnil,omitempty" name:"ApiKeySet"`
+
+	// Total number of API Keys.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTokenPlanApiKeyListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTokenPlanApiKeyListResponseParams `json:"Response"`
+}
+
+func (r *DescribeTokenPlanApiKeyListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTokenPlanApiKeyListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTokenPlanApiKeyRequestParams struct {
+	// API Key ID. You can obtain it through the DescribeTokenPlanApiKeyList API.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+}
+
+type DescribeTokenPlanApiKeyRequest struct {
+	*tchttp.BaseRequest
+	
+	// API Key ID. You can obtain it through the DescribeTokenPlanApiKeyList API.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+}
+
+func (r *DescribeTokenPlanApiKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTokenPlanApiKeyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiKeyId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTokenPlanApiKeyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTokenPlanApiKeyResponseParams struct {
+	// API Key details.
+	ApiKey *TokenPlanApiKeyInfo `json:"ApiKey,omitnil,omitempty" name:"ApiKey"`
+
+	// API Key limit and usage information.
+	Balance *SubPackageBalance `json:"Balance,omitnil,omitempty" name:"Balance"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTokenPlanApiKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTokenPlanApiKeyResponseParams `json:"Response"`
+}
+
+func (r *DescribeTokenPlanApiKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTokenPlanApiKeyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTokenPlanApiKeySecretRequestParams struct {
+	// API Key ID. You can obtain it through the DescribeTokenPlanApiKeyList API.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+}
+
+type DescribeTokenPlanApiKeySecretRequest struct {
+	*tchttp.BaseRequest
+	
+	// API Key ID. You can obtain it through the DescribeTokenPlanApiKeyList API.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+}
+
+func (r *DescribeTokenPlanApiKeySecretRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTokenPlanApiKeySecretRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiKeyId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTokenPlanApiKeySecretRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTokenPlanApiKeySecretResponseParams struct {
+	// APIKey ID.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+
+	// APIKey key value (plaintext). Keep it safe.
+	ApiKey *string `json:"ApiKey,omitnil,omitempty" name:"ApiKey"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTokenPlanApiKeySecretResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTokenPlanApiKeySecretResponseParams `json:"Response"`
+}
+
+func (r *DescribeTokenPlanApiKeySecretResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTokenPlanApiKeySecretResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTokenPlanApiKeyUsageDetailRequestParams struct {
+
+}
+
+type DescribeTokenPlanApiKeyUsageDetailRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeTokenPlanApiKeyUsageDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTokenPlanApiKeyUsageDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTokenPlanApiKeyUsageDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTokenPlanApiKeyUsageDetailResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTokenPlanApiKeyUsageDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTokenPlanApiKeyUsageDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeTokenPlanApiKeyUsageDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTokenPlanApiKeyUsageDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTokenPlanListRequestParams struct {
+	// Offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of results returned by paging query. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Paginate the query filter criteria list. Supported filter fields: TeamId (Package ID), Name (package name), StopReason (disable reason), ProductType (package type).
+	Filters []*RequestFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// List of sorting criteria. Supported sorting fields: CreatedAt (creation time) and UpdatedAt (update time). By default, results are sorted by CreatedAt in descending order.
+	Sorts []*RequestSort `json:"Sorts,omitnil,omitempty" name:"Sorts"`
+}
+
+type DescribeTokenPlanListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Offset of paginated query. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of results returned by paging query. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Paginate the query filter criteria list. Supported filter fields: TeamId (Package ID), Name (package name), StopReason (disable reason), ProductType (package type).
+	Filters []*RequestFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// List of sorting criteria. Supported sorting fields: CreatedAt (creation time) and UpdatedAt (update time). By default, results are sorted by CreatedAt in descending order.
+	Sorts []*RequestSort `json:"Sorts,omitnil,omitempty" name:"Sorts"`
+}
+
+func (r *DescribeTokenPlanListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTokenPlanListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	delete(f, "Sorts")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTokenPlanListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTokenPlanListResponseParams struct {
+	// List of package options.
+	TokenPlanSet []*TokenPlanListItem `json:"TokenPlanSet,omitnil,omitempty" name:"TokenPlanSet"`
+
+	// Total number of packages.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTokenPlanListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTokenPlanListResponseParams `json:"Response"`
+}
+
+func (r *DescribeTokenPlanListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTokenPlanListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTokenPlanRequestParams struct {
+	// Package ID. You can obtain it through the DescribeTokenPlanList API.
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+}
+
+type DescribeTokenPlanRequest struct {
+	*tchttp.BaseRequest
+	
+	// Package ID. You can obtain it through the DescribeTokenPlanList API.
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+}
+
+func (r *DescribeTokenPlanRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTokenPlanRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TeamId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTokenPlanRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTokenPlanResponseParams struct {
+	// Package ID
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// Package name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Root account APP ID.
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// Main account UIN.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Status. Valid values: enable, disable.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Disablement reason. Value: NORMAL, ISOLATED, FROZEN, EXHAUSTED, DESTROYED.
+	StopReason *string `json:"StopReason,omitnil,omitempty" name:"StopReason"`
+
+	// Maximum number of API Keys that can be created.
+	ApiKeyMax *int64 `json:"ApiKeyMax,omitnil,omitempty" name:"ApiKeyMax"`
+
+	// Cloud billing prepaid resource package ID.
+	PrepayResourceID *string `json:"PrepayResourceID,omitnil,omitempty" name:"PrepayResourceID"`
+
+	// Creator. Packages created by a sub-account show the sub-account UIN.
+	Creator *string `json:"Creator,omitnil,omitempty" name:"Creator"`
+
+	// Creation time.
+	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
+
+	// Update time.
+	UpdatedAt *string `json:"UpdatedAt,omitnil,omitempty" name:"UpdatedAt"`
+
+	// Basic information of the package.
+	PackageInfo *TokenPlanPackageInfo `json:"PackageInfo,omitnil,omitempty" name:"PackageInfo"`
+
+	// Auto-renewal flag. Value: 0 (manual renewal), 1 (auto renewal), 2 (no automatic renewal). It is not returned if not bound to a prepaid resource.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
+
+	// Current number of created API Keys.
+	ApiKeyCount *int64 `json:"ApiKeyCount,omitnil,omitempty" name:"ApiKeyCount"`
+
+	// Token usage details in the current cycle
+	TokenSummary *TokenSummary `json:"TokenSummary,omitnil,omitempty" name:"TokenSummary"`
+
+	// Package type. Values: enterprise (Enterprise Professional package), enterprise-auto (Enterprise Light package)
+	ProductType *string `json:"ProductType,omitnil,omitempty" name:"ProductType"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTokenPlanResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTokenPlanResponseParams `json:"Response"`
+}
+
+func (r *DescribeTokenPlanResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTokenPlanResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type GlossaryEntryInput struct {
 	// Source language terminology. Maximum 1000 characters.
 	SourceTerm *string `json:"SourceTerm,omitnil,omitempty" name:"SourceTerm"`
@@ -1056,6 +1770,177 @@ type ModifyGlossaryEntryInput struct {
 	TargetTerm *string `json:"TargetTerm,omitnil,omitempty" name:"TargetTerm"`
 }
 
+// Predefined struct for user
+type ModifyTokenPlanApiKeyRequestParams struct {
+	// API Key ID.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+
+	// Available model list. If this parameter is not specified, no modification is made.
+	// 
+	// - If the package type is enterprise professional:
+	// 1) Input "all": use all models supported by the package
+	// 2) Import Model ID: specify a specific model. "all" and a specific Model ID cannot be specified at the same time.
+	// 
+	// -If the package type is enterprise lightweight edition, do not pass in this parameter.
+	AllowedModels []*string `json:"AllowedModels,omitnil,omitempty" name:"AllowedModels"`
+
+	// Dedicated limit. If this parameter is not specified, no modification will be made. Unit:
+	// 
+	// -Package type: professional. Measurement unit: point.
+	// - Package type is lite package, and the measurement unit is token.
+	ExclusiveQuota *int64 `json:"ExclusiveQuota,omitnil,omitempty" name:"ExclusiveQuota"`
+
+	// Total credit limit. -1 means unlimited. It must be -1 or greater than or equal to the current ExclusiveQuota of the API Key. If not passed, no modification is made. Measurement units are as follows:
+	// -Package type: professional. Measurement unit: point.
+	// - Package type is lite package, and the measurement unit is token.
+	TotalQuota *int64 `json:"TotalQuota,omitnil,omitempty" name:"TotalQuota"`
+
+	// Whether to enable the API Key. Values: enable (enable), disable (disable). If not passed, no modification is made.
+	UseStatus *string `json:"UseStatus,omitnil,omitempty" name:"UseStatus"`
+
+	// TPM (Tokens Per Minute) limit. If not passed, no modification will be made. Must be >= 0 and <= the package TPM.
+	TPM *int64 `json:"TPM,omitnil,omitempty" name:"TPM"`
+}
+
+type ModifyTokenPlanApiKeyRequest struct {
+	*tchttp.BaseRequest
+	
+	// API Key ID.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+
+	// Available model list. If this parameter is not specified, no modification is made.
+	// 
+	// - If the package type is enterprise professional:
+	// 1) Input "all": use all models supported by the package
+	// 2) Import Model ID: specify a specific model. "all" and a specific Model ID cannot be specified at the same time.
+	// 
+	// -If the package type is enterprise lightweight edition, do not pass in this parameter.
+	AllowedModels []*string `json:"AllowedModels,omitnil,omitempty" name:"AllowedModels"`
+
+	// Dedicated limit. If this parameter is not specified, no modification will be made. Unit:
+	// 
+	// -Package type: professional. Measurement unit: point.
+	// - Package type is lite package, and the measurement unit is token.
+	ExclusiveQuota *int64 `json:"ExclusiveQuota,omitnil,omitempty" name:"ExclusiveQuota"`
+
+	// Total credit limit. -1 means unlimited. It must be -1 or greater than or equal to the current ExclusiveQuota of the API Key. If not passed, no modification is made. Measurement units are as follows:
+	// -Package type: professional. Measurement unit: point.
+	// - Package type is lite package, and the measurement unit is token.
+	TotalQuota *int64 `json:"TotalQuota,omitnil,omitempty" name:"TotalQuota"`
+
+	// Whether to enable the API Key. Values: enable (enable), disable (disable). If not passed, no modification is made.
+	UseStatus *string `json:"UseStatus,omitnil,omitempty" name:"UseStatus"`
+
+	// TPM (Tokens Per Minute) limit. If not passed, no modification will be made. Must be >= 0 and <= the package TPM.
+	TPM *int64 `json:"TPM,omitnil,omitempty" name:"TPM"`
+}
+
+func (r *ModifyTokenPlanApiKeyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyTokenPlanApiKeyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiKeyId")
+	delete(f, "AllowedModels")
+	delete(f, "ExclusiveQuota")
+	delete(f, "TotalQuota")
+	delete(f, "UseStatus")
+	delete(f, "TPM")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTokenPlanApiKeyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyTokenPlanApiKeyResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyTokenPlanApiKeyResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyTokenPlanApiKeyResponseParams `json:"Response"`
+}
+
+func (r *ModifyTokenPlanApiKeyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyTokenPlanApiKeyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyTokenPlanApiKeySecretRequestParams struct {
+	// API Key ID. You can obtain it through the DescribeTokenPlanApiKeyList API.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+}
+
+type ModifyTokenPlanApiKeySecretRequest struct {
+	*tchttp.BaseRequest
+	
+	// API Key ID. You can obtain it through the DescribeTokenPlanApiKeyList API.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+}
+
+func (r *ModifyTokenPlanApiKeySecretRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyTokenPlanApiKeySecretRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ApiKeyId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTokenPlanApiKeySecretRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyTokenPlanApiKeySecretResponseParams struct {
+	// API Key ID.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+
+	// Key version after resetting.
+	KeyVersion *int64 `json:"KeyVersion,omitnil,omitempty" name:"KeyVersion"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyTokenPlanApiKeySecretResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyTokenPlanApiKeySecretResponseParams `json:"Response"`
+}
+
+func (r *ModifyTokenPlanApiKeySecretResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyTokenPlanApiKeySecretResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type QuotaInfo struct {
 	// Quota package ID.
 	PkgId *string `json:"PkgId,omitnil,omitempty" name:"PkgId"`
@@ -1079,6 +1964,70 @@ type QuotaInfo struct {
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 }
 
+// Predefined struct for user
+type RenewTokenPlanTeamOrderRequestParams struct {
+	// Package ID, which can be obtained through the DescribeTokenPlanList API.
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// Renewal duration. Unit: month. Must be greater than 0.
+	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+}
+
+type RenewTokenPlanTeamOrderRequest struct {
+	*tchttp.BaseRequest
+	
+	// Package ID, which can be obtained through the DescribeTokenPlanList API.
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// Renewal duration. Unit: month. Must be greater than 0.
+	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+}
+
+func (r *RenewTokenPlanTeamOrderRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RenewTokenPlanTeamOrderRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TeamId")
+	delete(f, "TimeSpan")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RenewTokenPlanTeamOrderRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RenewTokenPlanTeamOrderResponseParams struct {
+	// Tencent Cloud order ID. Used to associate all sub-orders under a renewal operation.
+	BigOrderId *string `json:"BigOrderId,omitnil,omitempty" name:"BigOrderId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RenewTokenPlanTeamOrderResponse struct {
+	*tchttp.BaseResponse
+	Response *RenewTokenPlanTeamOrderResponseParams `json:"Response"`
+}
+
+func (r *RenewTokenPlanTeamOrderResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RenewTokenPlanTeamOrderResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type RequestFilter struct {
 	// Filter field name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -1096,4 +2045,319 @@ type RequestSort struct {
 
 	// Sorting order. Value: ASC (ascending), DESC (descending).
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+}
+
+type SubPackageBalance struct {
+	// Dedicated limit. Units are as follows:
+	// -Package type: professional. Measurement unit: point.
+	// - Package type is lite package, and the measurement unit is token.
+	ExclusiveQuota *string `json:"ExclusiveQuota,omitnil,omitempty" name:"ExclusiveQuota"`
+
+	// Used amount of the dedicated limit. The measurement units are as follows:
+	// -Package type: professional. Measurement unit: point.
+	// - Package type is lite package, and the measurement unit is token.
+	ExclusiveUsed *string `json:"ExclusiveUsed,omitnil,omitempty" name:"ExclusiveUsed"`
+
+	// Remaining exclusive quota. Units are as follows:
+	// -Package type: professional. Measurement unit: point.
+	// -Package type: lite package. Measurement unit: token.
+	ExclusiveRemain *string `json:"ExclusiveRemain,omitnil,omitempty" name:"ExclusiveRemain"`
+
+	// Shared credit limit. -1 means unlimited. Measurement units are as follows:
+	// -Package type is professional package, measurement unit value is point;
+	// -Package type: lite package. Measurement unit: token.
+	SharedQuota *string `json:"SharedQuota,omitnil,omitempty" name:"SharedQuota"`
+
+	// Used amount of the shared quota. Measurement units are as follows:
+	// -Package type is professional package, measurement unit value is point;
+	// -Package type: lite package. Measurement unit: token.
+	SharedUsed *string `json:"SharedUsed,omitnil,omitempty" name:"SharedUsed"`
+
+	// Remaining shared quota. Units are described as follows:
+	// -Package type is professional package, measurement unit value is point;
+	// -Package type: lite package. Measurement unit: token.
+	SharedRemain *string `json:"SharedRemain,omitnil,omitempty" name:"SharedRemain"`
+
+	// API Key package status. Valid values: 0 (normal), 1 (exhausted).
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+type TokenPlanApiKeyInfo struct {
+	// API Key ID.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+
+	// API Key secret key value (masked).
+	ApiKey *string `json:"ApiKey,omitnil,omitempty" name:"ApiKey"`
+
+	// API Key name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Bundle ID.
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// Account APP ID.
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// Main account UIN.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// API Key available model list (JSON array string).
+	AllowedModels *string `json:"AllowedModels,omitnil,omitempty" name:"AllowedModels"`
+
+	// Whether the API Key is available. Values: enable (enable), disable (disable).
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Reason for disabling the API Key. Valid values: NORMAL (normal, default value), QUOTA_EXHAUSTED (API Key quota package exhausted), ABNORMAL (exception, human intervention required)
+	StopReason *string `json:"StopReason,omitnil,omitempty" name:"StopReason"`
+
+	// User-side switch. Valid values: enable, disable.
+	UseStatus *string `json:"UseStatus,omitnil,omitempty" name:"UseStatus"`
+
+	// Key version.
+	KeyVersion *int64 `json:"KeyVersion,omitnil,omitempty" name:"KeyVersion"`
+
+	// Last reset time (ISO 8601).
+	LastRotatedAt *string `json:"LastRotatedAt,omitnil,omitempty" name:"LastRotatedAt"`
+
+	// Creator. If it is created by a sub-account, this value is the sub-account UIN.
+	Creator *string `json:"Creator,omitnil,omitempty" name:"Creator"`
+
+	// Creation time.
+	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
+
+	// Update time.
+	UpdatedAt *string `json:"UpdatedAt,omitnil,omitempty" name:"UpdatedAt"`
+
+	// TPM limit (Tokens Per Minute).
+	TPM *int64 `json:"TPM,omitnil,omitempty" name:"TPM"`
+
+	// Package type. Values: enterprise (Enterprise Professional package), enterprise-auto (Enterprise Light package)
+	ProductType *string `json:"ProductType,omitnil,omitempty" name:"ProductType"`
+}
+
+type TokenPlanApiKeyListItem struct {
+	// API Key ID.
+	ApiKeyId *string `json:"ApiKeyId,omitnil,omitempty" name:"ApiKeyId"`
+
+	// API Key secret key value (masking).
+	ApiKey *string `json:"ApiKey,omitnil,omitempty" name:"ApiKey"`
+
+	// API Key name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Bundle ID
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// Account APP ID.
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// Main account UIN. Maximum 128 characters.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// API Key available model list (JSON array string).
+	AllowedModels *string `json:"AllowedModels,omitnil,omitempty" name:"AllowedModels"`
+
+	// Whether the API Key is available. Values: enable (enable), disable (disable).
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Reason for disabling the API Key. Value: NORMAL (normal, default value), QUOTA_EXHAUSTED (API Key quota package exhausted), ABNORMAL (abnormal, requires human intervention)
+	StopReason *string `json:"StopReason,omitnil,omitempty" name:"StopReason"`
+
+	// User-side switch. Valid values: enable, disable.
+	UseStatus *string `json:"UseStatus,omitnil,omitempty" name:"UseStatus"`
+
+	// Key version.
+	KeyVersion *int64 `json:"KeyVersion,omitnil,omitempty" name:"KeyVersion"`
+
+	// Last reset time (ISO 8601).
+	LastRotatedAt *string `json:"LastRotatedAt,omitnil,omitempty" name:"LastRotatedAt"`
+
+	// Creator. If it is created by a sub-account, this value is the sub-account UIN.
+	Creator *string `json:"Creator,omitnil,omitempty" name:"Creator"`
+
+	// Creation time.
+	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
+
+	// Update time.
+	UpdatedAt *string `json:"UpdatedAt,omitnil,omitempty" name:"UpdatedAt"`
+
+	// API Key limit usage information
+	Balance *SubPackageBalance `json:"Balance,omitnil,omitempty" name:"Balance"`
+
+	// Package type. Values: enterprise (Enterprise Professional package), enterprise-auto (Enterprise Light package).
+	ProductType *string `json:"ProductType,omitnil,omitempty" name:"ProductType"`
+}
+
+type TokenPlanListItem struct {
+	// <p>Package ID.</p>
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// <p>Package type. Values: enterprise (Enterprise Professional package), enterprise-auto (Enterprise Light package)</p>
+	ProductType *string `json:"ProductType,omitnil,omitempty" name:"ProductType"`
+
+	// <p>Package name. Maximum 128 characters.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Account APP ID.</p>
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <p>Main account UIN.</p>
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// <p>Package status. Valid values: enable, disable.</p>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Reason for package disablement. Value: NORMAL, ISOLATED, FROZEN, EXHAUSTED, DESTROYED</p>
+	StopReason *string `json:"StopReason,omitnil,omitempty" name:"StopReason"`
+
+	// <p>Maximum number of API Keys that can be created.</p>
+	ApiKeyMax *int64 `json:"ApiKeyMax,omitnil,omitempty" name:"ApiKeyMax"`
+
+	// <p>Number of API Keys currently created</p>
+	ApiKeyCount *int64 `json:"ApiKeyCount,omitnil,omitempty" name:"ApiKeyCount"`
+
+	// <p>Cloud billing prepaid resource package ID.</p>
+	PrepayResourceID *string `json:"PrepayResourceID,omitnil,omitempty" name:"PrepayResourceID"`
+
+	// <p>Creator. If the package is created by a sub-account, this value is the sub-account UIN.</p>
+	Creator *string `json:"Creator,omitnil,omitempty" name:"Creator"`
+
+	// <p>Creation time.</p>
+	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
+
+	// <p>Update time.</p>
+	UpdatedAt *string `json:"UpdatedAt,omitnil,omitempty" name:"UpdatedAt"`
+
+	// <p>Basic information of the package.</p>
+	PackageInfo *TokenPlanPackageInfo `json:"PackageInfo,omitnil,omitempty" name:"PackageInfo"`
+
+	// <p>Whether to enable auto-renewal. Value: 0 (not enabled), 1 (enabled)</p>
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
+}
+
+type TokenPlanPackageInfo struct {
+	// Total quota. The unit is determined by the package type: credits for the Enterprise Professional package and tokens for the Enterprise auto package.
+	TotalQuota *string `json:"TotalQuota,omitnil,omitempty" name:"TotalQuota"`
+
+	// Total used quota. The unit varies by package type: credits (enterprise edition professional package), tokens (enterprise edition auto package)
+	TotalUsed *string `json:"TotalUsed,omitnil,omitempty" name:"TotalUsed"`
+
+	// Total number of periods.
+	TotalCycles *int64 `json:"TotalCycles,omitnil,omitempty" name:"TotalCycles"`
+
+	// Period unit. Value: month
+	CycleUnit *string `json:"CycleUnit,omitnil,omitempty" name:"CycleUnit"`
+
+	// Package effective time.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Package expiration time.
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// Allocated quota for dedicated pool. The unit varies by package type: credits (enterprise edition professional package), tokens (enterprise edition auto package)
+	ExclusiveAllocated *string `json:"ExclusiveAllocated,omitnil,omitempty" name:"ExclusiveAllocated"`
+
+	// Used credit of the dedicated pool. The unit varies based on the package type: credits for the enterprise professional package, and tokens for the enterprise auto package.
+	ExclusiveUsed *string `json:"ExclusiveUsed,omitnil,omitempty" name:"ExclusiveUsed"`
+
+	// Total shared pool quota. The measurement unit varies based on the package type: credits (enterprise edition professional package), tokens (enterprise edition auto package).
+	SharedPool *string `json:"SharedPool,omitnil,omitempty" name:"SharedPool"`
+
+	// Shared used credit. The unit varies by package type: credits (enterprise edition professional package), tokens (enterprise edition auto package)
+	SharedUsed *string `json:"SharedUsed,omitnil,omitempty" name:"SharedUsed"`
+
+	// Current period limit. The unit varies by package type: credits (Enterprise Edition Professional), tokens (Enterprise Edition auto).
+	CycleQuota *string `json:"CycleQuota,omitnil,omitempty" name:"CycleQuota"`
+
+	// Current cycle.
+	CurrentCycle *int64 `json:"CurrentCycle,omitnil,omitempty" name:"CurrentCycle"`
+
+	// Remaining cycle.
+	RemainCycles *int64 `json:"RemainCycles,omitnil,omitempty" name:"RemainCycles"`
+}
+
+type TokenSummary struct {
+	// Package serial number of the current billing cycle
+	CycleSeq *int64 `json:"CycleSeq,omitnil,omitempty" name:"CycleSeq"`
+
+	// Package billing cycle start time (RFC3339)
+	CycleStartTime *string `json:"CycleStartTime,omitnil,omitempty" name:"CycleStartTime"`
+
+	// Package billing cycle end time (RFC3339)
+	CycleEndTime *string `json:"CycleEndTime,omitnil,omitempty" name:"CycleEndTime"`
+
+	// Summary list of tokens grouped by billing item
+	BillingItems []*TokenSummaryBillingItem `json:"BillingItems,omitnil,omitempty" name:"BillingItems"`
+}
+
+type TokenSummaryBillingItem struct {
+	// Billing item. Values: input (input Token), output (output Token), cache (cache Token), call_count (call count).
+	BillingItem *string `json:"BillingItem,omitnil,omitempty" name:"BillingItem"`
+
+	// Aggregated raw usage of this billing item during a period. Unit: tokens.
+	TotalQty *int64 `json:"TotalQty,omitnil,omitempty" name:"TotalQty"`
+}
+
+// Predefined struct for user
+type UpgradeTokenPlanTeamOrderRequestParams struct {
+	// Package ID. You can obtain it through the DescribeTokenPlanList API.
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// Limit of the new specification after upgrade. For the enterprise package type, it refers to the point limit. For the enterprise-auto package type, it refers to the Token count. Must be greater than the current limit.
+	NewCreditOrToken *int64 `json:"NewCreditOrToken,omitnil,omitempty" name:"NewCreditOrToken"`
+}
+
+type UpgradeTokenPlanTeamOrderRequest struct {
+	*tchttp.BaseRequest
+	
+	// Package ID. You can obtain it through the DescribeTokenPlanList API.
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// Limit of the new specification after upgrade. For the enterprise package type, it refers to the point limit. For the enterprise-auto package type, it refers to the Token count. Must be greater than the current limit.
+	NewCreditOrToken *int64 `json:"NewCreditOrToken,omitnil,omitempty" name:"NewCreditOrToken"`
+}
+
+func (r *UpgradeTokenPlanTeamOrderRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeTokenPlanTeamOrderRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TeamId")
+	delete(f, "NewCreditOrToken")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpgradeTokenPlanTeamOrderRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpgradeTokenPlanTeamOrderResponseParams struct {
+	// Tencent Cloud order ID. Used to associate all sub-orders under an upgrade operation.
+	BigOrderId *string `json:"BigOrderId,omitnil,omitempty" name:"BigOrderId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpgradeTokenPlanTeamOrderResponse struct {
+	*tchttp.BaseResponse
+	Response *UpgradeTokenPlanTeamOrderResponseParams `json:"Response"`
+}
+
+func (r *UpgradeTokenPlanTeamOrderResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpgradeTokenPlanTeamOrderResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }

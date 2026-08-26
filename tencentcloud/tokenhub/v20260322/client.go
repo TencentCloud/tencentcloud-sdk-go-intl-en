@@ -247,6 +247,142 @@ func (c *Client) CreateGlossaryEntriesWithContext(ctx context.Context, request *
     return
 }
 
+func NewCreateTokenPlanApiKeysRequest() (request *CreateTokenPlanApiKeysRequest) {
+    request = &CreateTokenPlanApiKeysRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "CreateTokenPlanApiKeys")
+    
+    
+    return
+}
+
+func NewCreateTokenPlanApiKeysResponse() (response *CreateTokenPlanApiKeysResponse) {
+    response = &CreateTokenPlanApiKeysResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateTokenPlanApiKeys
+// Batch create TokenPlan API Keys.
+//
+// 
+//
+// Import a name prefix and quantity to automatically generate names in the `{Api Key Name}-{serial number}` format (for example, aaa-1, aaa-2). Duplicate names are allowed. Partial success is supported for up to 100 entries.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) CreateTokenPlanApiKeys(request *CreateTokenPlanApiKeysRequest) (response *CreateTokenPlanApiKeysResponse, err error) {
+    return c.CreateTokenPlanApiKeysWithContext(context.Background(), request)
+}
+
+// CreateTokenPlanApiKeys
+// Batch create TokenPlan API Keys.
+//
+// 
+//
+// Import a name prefix and quantity to automatically generate names in the `{Api Key Name}-{serial number}` format (for example, aaa-1, aaa-2). Duplicate names are allowed. Partial success is supported for up to 100 entries.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) CreateTokenPlanApiKeysWithContext(ctx context.Context, request *CreateTokenPlanApiKeysRequest) (response *CreateTokenPlanApiKeysResponse, err error) {
+    if request == nil {
+        request = NewCreateTokenPlanApiKeysRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "CreateTokenPlanApiKeys")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTokenPlanApiKeys require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateTokenPlanApiKeysResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateTokenPlanTeamOrderAndBuyRequest() (request *CreateTokenPlanTeamOrderAndBuyRequest) {
+    request = &CreateTokenPlanTeamOrderAndBuyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "CreateTokenPlanTeamOrderAndBuy")
+    
+    
+    return
+}
+
+func NewCreateTokenPlanTeamOrderAndBuyResponse() (response *CreateTokenPlanTeamOrderAndBuyResponse) {
+    response = &CreateTokenPlanTeamOrderAndBuyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateTokenPlanTeamOrderAndBuy
+// Purchase a package (This API is also used to reactivate and renew expired packages. The teamId of the expired package is required. After the renewal is successful, the total cycle count of the package will include historical cycles. The actual effective cycle of the package is determined by the effective time and expiration time.)
+//
+// 
+//
+// Initiate an order for a TokenPlan package and complete payment. Return the order ID and associated sub-orders and resource information upon success.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) CreateTokenPlanTeamOrderAndBuy(request *CreateTokenPlanTeamOrderAndBuyRequest) (response *CreateTokenPlanTeamOrderAndBuyResponse, err error) {
+    return c.CreateTokenPlanTeamOrderAndBuyWithContext(context.Background(), request)
+}
+
+// CreateTokenPlanTeamOrderAndBuy
+// Purchase a package (This API is also used to reactivate and renew expired packages. The teamId of the expired package is required. After the renewal is successful, the total cycle count of the package will include historical cycles. The actual effective cycle of the package is determined by the effective time and expiration time.)
+//
+// 
+//
+// Initiate an order for a TokenPlan package and complete payment. Return the order ID and associated sub-orders and resource information upon success.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) CreateTokenPlanTeamOrderAndBuyWithContext(ctx context.Context, request *CreateTokenPlanTeamOrderAndBuyRequest) (response *CreateTokenPlanTeamOrderAndBuyResponse, err error) {
+    if request == nil {
+        request = NewCreateTokenPlanTeamOrderAndBuyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "CreateTokenPlanTeamOrderAndBuy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTokenPlanTeamOrderAndBuy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateTokenPlanTeamOrderAndBuyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteApiKeyRequest() (request *DeleteApiKeyRequest) {
     request = &DeleteApiKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -437,6 +573,72 @@ func (c *Client) DeleteGlossaryEntriesWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDeleteGlossaryEntriesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteTokenPlanApiKeyRequest() (request *DeleteTokenPlanApiKeyRequest) {
+    request = &DeleteTokenPlanApiKeyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "DeleteTokenPlanApiKey")
+    
+    
+    return
+}
+
+func NewDeleteTokenPlanApiKeyResponse() (response *DeleteTokenPlanApiKeyResponse) {
+    response = &DeleteTokenPlanApiKeyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteTokenPlanApiKey
+// Delete the Token Plan API key.
+//
+// 
+//
+// Simultaneously delete the limit center sub-limit package and notify the Notification Gateway to purge cache.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DeleteTokenPlanApiKey(request *DeleteTokenPlanApiKeyRequest) (response *DeleteTokenPlanApiKeyResponse, err error) {
+    return c.DeleteTokenPlanApiKeyWithContext(context.Background(), request)
+}
+
+// DeleteTokenPlanApiKey
+// Delete the Token Plan API key.
+//
+// 
+//
+// Simultaneously delete the limit center sub-limit package and notify the Notification Gateway to purge cache.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DeleteTokenPlanApiKeyWithContext(ctx context.Context, request *DeleteTokenPlanApiKeyRequest) (response *DeleteTokenPlanApiKeyResponse, err error) {
+    if request == nil {
+        request = NewDeleteTokenPlanApiKeyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "DeleteTokenPlanApiKey")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteTokenPlanApiKey require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteTokenPlanApiKeyResponse()
     err = c.Send(request, response)
     return
 }
@@ -697,6 +899,398 @@ func (c *Client) DescribeGlossaryEntriesWithContext(ctx context.Context, request
     return
 }
 
+func NewDescribeTokenPlanRequest() (request *DescribeTokenPlanRequest) {
+    request = &DescribeTokenPlanRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "DescribeTokenPlan")
+    
+    
+    return
+}
+
+func NewDescribeTokenPlanResponse() (response *DescribeTokenPlanResponse) {
+    response = &DescribeTokenPlanResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTokenPlan
+// Query the TokenPlan package details.
+//
+// 
+//
+// Return the package basic info and the remaining quota of the package.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeTokenPlan(request *DescribeTokenPlanRequest) (response *DescribeTokenPlanResponse, err error) {
+    return c.DescribeTokenPlanWithContext(context.Background(), request)
+}
+
+// DescribeTokenPlan
+// Query the TokenPlan package details.
+//
+// 
+//
+// Return the package basic info and the remaining quota of the package.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeTokenPlanWithContext(ctx context.Context, request *DescribeTokenPlanRequest) (response *DescribeTokenPlanResponse, err error) {
+    if request == nil {
+        request = NewDescribeTokenPlanRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "DescribeTokenPlan")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTokenPlan require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTokenPlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTokenPlanApiKeyRequest() (request *DescribeTokenPlanApiKeyRequest) {
+    request = &DescribeTokenPlanApiKeyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "DescribeTokenPlanApiKey")
+    
+    
+    return
+}
+
+func NewDescribeTokenPlanApiKeyResponse() (response *DescribeTokenPlanApiKeyResponse) {
+    response = &DescribeTokenPlanApiKeyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTokenPlanApiKey
+// Query TokenPlan APIKey details.
+//
+// 
+//
+// Return the complete APIKey information (including the plaintext key) and the remaining quota of the sub-quota package.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeTokenPlanApiKey(request *DescribeTokenPlanApiKeyRequest) (response *DescribeTokenPlanApiKeyResponse, err error) {
+    return c.DescribeTokenPlanApiKeyWithContext(context.Background(), request)
+}
+
+// DescribeTokenPlanApiKey
+// Query TokenPlan APIKey details.
+//
+// 
+//
+// Return the complete APIKey information (including the plaintext key) and the remaining quota of the sub-quota package.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeTokenPlanApiKeyWithContext(ctx context.Context, request *DescribeTokenPlanApiKeyRequest) (response *DescribeTokenPlanApiKeyResponse, err error) {
+    if request == nil {
+        request = NewDescribeTokenPlanApiKeyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "DescribeTokenPlanApiKey")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTokenPlanApiKey require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTokenPlanApiKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTokenPlanApiKeyListRequest() (request *DescribeTokenPlanApiKeyListRequest) {
+    request = &DescribeTokenPlanApiKeyListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "DescribeTokenPlanApiKeyList")
+    
+    
+    return
+}
+
+func NewDescribeTokenPlanApiKeyListResponse() (response *DescribeTokenPlanApiKeyListResponse) {
+    response = &DescribeTokenPlanApiKeyListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTokenPlanApiKeyList
+// Query the list of Token Plan API keys.
+//
+// 
+//
+// Returns the API key list under a specified package. Keys are masked. Root accounts can view all keys, while sub-accounts can only view keys created by themselves.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeTokenPlanApiKeyList(request *DescribeTokenPlanApiKeyListRequest) (response *DescribeTokenPlanApiKeyListResponse, err error) {
+    return c.DescribeTokenPlanApiKeyListWithContext(context.Background(), request)
+}
+
+// DescribeTokenPlanApiKeyList
+// Query the list of Token Plan API keys.
+//
+// 
+//
+// Returns the API key list under a specified package. Keys are masked. Root accounts can view all keys, while sub-accounts can only view keys created by themselves.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeTokenPlanApiKeyListWithContext(ctx context.Context, request *DescribeTokenPlanApiKeyListRequest) (response *DescribeTokenPlanApiKeyListResponse, err error) {
+    if request == nil {
+        request = NewDescribeTokenPlanApiKeyListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "DescribeTokenPlanApiKeyList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTokenPlanApiKeyList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTokenPlanApiKeyListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTokenPlanApiKeySecretRequest() (request *DescribeTokenPlanApiKeySecretRequest) {
+    request = &DescribeTokenPlanApiKeySecretRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "DescribeTokenPlanApiKeySecret")
+    
+    
+    return
+}
+
+func NewDescribeTokenPlanApiKeySecretResponse() (response *DescribeTokenPlanApiKeySecretResponse) {
+    response = &DescribeTokenPlanApiKeySecretResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTokenPlanApiKeySecret
+// Query the TokenPlan APIKey (plaintext).
+//
+// 
+//
+// Return the plaintext key value of the designated APIKey. Keep it safe.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeTokenPlanApiKeySecret(request *DescribeTokenPlanApiKeySecretRequest) (response *DescribeTokenPlanApiKeySecretResponse, err error) {
+    return c.DescribeTokenPlanApiKeySecretWithContext(context.Background(), request)
+}
+
+// DescribeTokenPlanApiKeySecret
+// Query the TokenPlan APIKey (plaintext).
+//
+// 
+//
+// Return the plaintext key value of the designated APIKey. Keep it safe.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeTokenPlanApiKeySecretWithContext(ctx context.Context, request *DescribeTokenPlanApiKeySecretRequest) (response *DescribeTokenPlanApiKeySecretResponse, err error) {
+    if request == nil {
+        request = NewDescribeTokenPlanApiKeySecretRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "DescribeTokenPlanApiKeySecret")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTokenPlanApiKeySecret require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTokenPlanApiKeySecretResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTokenPlanApiKeyUsageDetailRequest() (request *DescribeTokenPlanApiKeyUsageDetailRequest) {
+    request = &DescribeTokenPlanApiKeyUsageDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "DescribeTokenPlanApiKeyUsageDetail")
+    
+    
+    return
+}
+
+func NewDescribeTokenPlanApiKeyUsageDetailResponse() (response *DescribeTokenPlanApiKeyUsageDetailResponse) {
+    response = &DescribeTokenPlanApiKeyUsageDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTokenPlanApiKeyUsageDetail
+// Query the Token Plan APIKey call detail.
+//
+// 
+//
+// This API is used to query call details under a package from CLS log service, filter by team_id, and support cursor-based pagination.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeTokenPlanApiKeyUsageDetail(request *DescribeTokenPlanApiKeyUsageDetailRequest) (response *DescribeTokenPlanApiKeyUsageDetailResponse, err error) {
+    return c.DescribeTokenPlanApiKeyUsageDetailWithContext(context.Background(), request)
+}
+
+// DescribeTokenPlanApiKeyUsageDetail
+// Query the Token Plan APIKey call detail.
+//
+// 
+//
+// This API is used to query call details under a package from CLS log service, filter by team_id, and support cursor-based pagination.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeTokenPlanApiKeyUsageDetailWithContext(ctx context.Context, request *DescribeTokenPlanApiKeyUsageDetailRequest) (response *DescribeTokenPlanApiKeyUsageDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeTokenPlanApiKeyUsageDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "DescribeTokenPlanApiKeyUsageDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTokenPlanApiKeyUsageDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTokenPlanApiKeyUsageDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTokenPlanListRequest() (request *DescribeTokenPlanListRequest) {
+    request = &DescribeTokenPlanListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "DescribeTokenPlanList")
+    
+    
+    return
+}
+
+func NewDescribeTokenPlanListResponse() (response *DescribeTokenPlanListResponse) {
+    response = &DescribeTokenPlanListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTokenPlanList
+// Query the list of Token Plan package options.
+//
+// 
+//
+// Supports pagination, filtering, and sorting. Root accounts can view all packages, while sub-accounts can only view packages created by themselves. Returned results include the main limit package details associated with each package in the limit center.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+func (c *Client) DescribeTokenPlanList(request *DescribeTokenPlanListRequest) (response *DescribeTokenPlanListResponse, err error) {
+    return c.DescribeTokenPlanListWithContext(context.Background(), request)
+}
+
+// DescribeTokenPlanList
+// Query the list of Token Plan package options.
+//
+// 
+//
+// Supports pagination, filtering, and sorting. Root accounts can view all packages, while sub-accounts can only view packages created by themselves. Returned results include the main limit package details associated with each package in the limit center.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+func (c *Client) DescribeTokenPlanListWithContext(ctx context.Context, request *DescribeTokenPlanListRequest) (response *DescribeTokenPlanListResponse, err error) {
+    if request == nil {
+        request = NewDescribeTokenPlanListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "DescribeTokenPlanList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTokenPlanList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTokenPlanListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyApiKeyInfoRequest() (request *ModifyApiKeyInfoRequest) {
     request = &ModifyApiKeyInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -889,6 +1483,274 @@ func (c *Client) ModifyGlossaryEntriesWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewModifyGlossaryEntriesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyTokenPlanApiKeyRequest() (request *ModifyTokenPlanApiKeyRequest) {
+    request = &ModifyTokenPlanApiKeyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "ModifyTokenPlanApiKey")
+    
+    
+    return
+}
+
+func NewModifyTokenPlanApiKeyResponse() (response *ModifyTokenPlanApiKeyResponse) {
+    response = &ModifyTokenPlanApiKeyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyTokenPlanApiKey
+// Modify the Token Plan APIKey configuration (field that the gateway focuses on).
+//
+// 
+//
+// After modification, automatically notify the gateway to update the cache and sync the limit center.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) ModifyTokenPlanApiKey(request *ModifyTokenPlanApiKeyRequest) (response *ModifyTokenPlanApiKeyResponse, err error) {
+    return c.ModifyTokenPlanApiKeyWithContext(context.Background(), request)
+}
+
+// ModifyTokenPlanApiKey
+// Modify the Token Plan APIKey configuration (field that the gateway focuses on).
+//
+// 
+//
+// After modification, automatically notify the gateway to update the cache and sync the limit center.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) ModifyTokenPlanApiKeyWithContext(ctx context.Context, request *ModifyTokenPlanApiKeyRequest) (response *ModifyTokenPlanApiKeyResponse, err error) {
+    if request == nil {
+        request = NewModifyTokenPlanApiKeyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "ModifyTokenPlanApiKey")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyTokenPlanApiKey require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyTokenPlanApiKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyTokenPlanApiKeySecretRequest() (request *ModifyTokenPlanApiKeySecretRequest) {
+    request = &ModifyTokenPlanApiKeySecretRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "ModifyTokenPlanApiKeySecret")
+    
+    
+    return
+}
+
+func NewModifyTokenPlanApiKeySecretResponse() (response *ModifyTokenPlanApiKeySecretResponse) {
+    response = &ModifyTokenPlanApiKeySecretResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyTokenPlanApiKeySecret
+// Reset the TokenPlan API Key.
+//
+// 
+//
+// Regenerate the key value. The key version increments and the old key expires immediately. The API Key ID remains unchanged. After resetting, the new key can be queried through DescribeTokenPlanApiKeySecret.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) ModifyTokenPlanApiKeySecret(request *ModifyTokenPlanApiKeySecretRequest) (response *ModifyTokenPlanApiKeySecretResponse, err error) {
+    return c.ModifyTokenPlanApiKeySecretWithContext(context.Background(), request)
+}
+
+// ModifyTokenPlanApiKeySecret
+// Reset the TokenPlan API Key.
+//
+// 
+//
+// Regenerate the key value. The key version increments and the old key expires immediately. The API Key ID remains unchanged. After resetting, the new key can be queried through DescribeTokenPlanApiKeySecret.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) ModifyTokenPlanApiKeySecretWithContext(ctx context.Context, request *ModifyTokenPlanApiKeySecretRequest) (response *ModifyTokenPlanApiKeySecretResponse, err error) {
+    if request == nil {
+        request = NewModifyTokenPlanApiKeySecretRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "ModifyTokenPlanApiKeySecret")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyTokenPlanApiKeySecret require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyTokenPlanApiKeySecretResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRenewTokenPlanTeamOrderRequest() (request *RenewTokenPlanTeamOrderRequest) {
+    request = &RenewTokenPlanTeamOrderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "RenewTokenPlanTeamOrder")
+    
+    
+    return
+}
+
+func NewRenewTokenPlanTeamOrderResponse() (response *RenewTokenPlanTeamOrderResponse) {
+    response = &RenewTokenPlanTeamOrderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RenewTokenPlanTeamOrder
+// Renew a package.
+//
+// 
+//
+// Initiate a renewal order for an existing Token Plan package and complete payment. Return the order ID and associated sub-orders and resource information upon success.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) RenewTokenPlanTeamOrder(request *RenewTokenPlanTeamOrderRequest) (response *RenewTokenPlanTeamOrderResponse, err error) {
+    return c.RenewTokenPlanTeamOrderWithContext(context.Background(), request)
+}
+
+// RenewTokenPlanTeamOrder
+// Renew a package.
+//
+// 
+//
+// Initiate a renewal order for an existing Token Plan package and complete payment. Return the order ID and associated sub-orders and resource information upon success.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) RenewTokenPlanTeamOrderWithContext(ctx context.Context, request *RenewTokenPlanTeamOrderRequest) (response *RenewTokenPlanTeamOrderResponse, err error) {
+    if request == nil {
+        request = NewRenewTokenPlanTeamOrderRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "RenewTokenPlanTeamOrder")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RenewTokenPlanTeamOrder require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRenewTokenPlanTeamOrderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradeTokenPlanTeamOrderRequest() (request *UpgradeTokenPlanTeamOrderRequest) {
+    request = &UpgradeTokenPlanTeamOrderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "UpgradeTokenPlanTeamOrder")
+    
+    
+    return
+}
+
+func NewUpgradeTokenPlanTeamOrderResponse() (response *UpgradeTokenPlanTeamOrderResponse) {
+    response = &UpgradeTokenPlanTeamOrderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpgradeTokenPlanTeamOrder
+// Upgrade the package.
+//
+// 
+//
+// Initiate an upgrade order for an existing Token Plan package and complete payment to expand point or token limits. Return the order ID and associated sub-orders and resource information upon success. The new limit must be greater than the current limit.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) UpgradeTokenPlanTeamOrder(request *UpgradeTokenPlanTeamOrderRequest) (response *UpgradeTokenPlanTeamOrderResponse, err error) {
+    return c.UpgradeTokenPlanTeamOrderWithContext(context.Background(), request)
+}
+
+// UpgradeTokenPlanTeamOrder
+// Upgrade the package.
+//
+// 
+//
+// Initiate an upgrade order for an existing Token Plan package and complete payment to expand point or token limits. Return the order ID and associated sub-orders and resource information upon success. The new limit must be greater than the current limit.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) UpgradeTokenPlanTeamOrderWithContext(ctx context.Context, request *UpgradeTokenPlanTeamOrderRequest) (response *UpgradeTokenPlanTeamOrderResponse, err error) {
+    if request == nil {
+        request = NewUpgradeTokenPlanTeamOrderRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "UpgradeTokenPlanTeamOrder")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradeTokenPlanTeamOrder require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpgradeTokenPlanTeamOrderResponse()
     err = c.Send(request, response)
     return
 }

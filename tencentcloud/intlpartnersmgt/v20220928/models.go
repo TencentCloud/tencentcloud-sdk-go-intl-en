@@ -315,107 +315,113 @@ func (r *ApproveSubAgentApplyResponse) FromJsonString(s string) error {
 }
 
 type BillDetailData struct {
-	// reseller account.
+	// <p> Distributor account</p>
 	PayerAccountId *int64 `json:"PayerAccountId,omitnil,omitempty" name:"PayerAccountId"`
 
-	// Subaccount.
+	// <p>Sub-Customer account</p>
 	OwnerAccountId *int64 `json:"OwnerAccountId,omitnil,omitempty" name:"OwnerAccountId"`
 
-	// Operator account.
+	// <p>Operator account</p>
 	OperatorAccountId *int64 `json:"OperatorAccountId,omitnil,omitempty" name:"OperatorAccountId"`
 
-	// Product name.
+	// <p>Product name.</p>
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
-	// Billing mode
-	// .
-	// Monthly subscription (annual and monthly).
-	// Pay-As-You-Go resources.
-	// Standard ri reserved instance.
+	// <p>Billing mode</p><p>Enumeration values:</p><ul><li>yearly/monthly subscription</li><li>Pay-As-You-Go resources</li></ul>
 	BillingMode *string `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 
-	// Project name.
+	// <p>Project name.</p>
 	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
 
-	// Resource region.
+	// <p>Associated region of the resource</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Resource available zone.
+	// <p>Availability zone of resource</p>
 	AvailabilityZone *string `json:"AvailabilityZone,omitnil,omitempty" name:"AvailabilityZone"`
 
-	// Instance id.
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name.
+	// <p>Instance name.</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Sub-Product name
-	// .
+	// <p>Sub-product name</p>
 	SubProductName *string `json:"SubProductName,omitnil,omitempty" name:"SubProductName"`
 
-	// Settlement type.
+	// <p>Settlement type</p>
 	TransactionType *string `json:"TransactionType,omitnil,omitempty" name:"TransactionType"`
 
-	// <Transaction id>.
+	// <p>Transaction log ID</p>
 	TransactionId *string `json:"TransactionId,omitnil,omitempty" name:"TransactionId"`
 
-	// Settlement time.
+	// <p>Time of settlement</p>
 	TransactionTime *string `json:"TransactionTime,omitnil,omitempty" name:"TransactionTime"`
 
-	// <Resource start time>.
+	// <p>Resource usage start time</p>
 	UsageStartTime *string `json:"UsageStartTime,omitnil,omitempty" name:"UsageStartTime"`
 
-	// <Resource end usage time>.
+	// <p>Resource usage end time</p>
 	UsageEndTime *string `json:"UsageEndTime,omitnil,omitempty" name:"UsageEndTime"`
 
-	// Component.
+	// <p>Component</p>
 	ComponentType *string `json:"ComponentType,omitnil,omitempty" name:"ComponentType"`
 
-	// Component name.
+	// <p>Component name</p>
 	ComponentName *string `json:"ComponentName,omitnil,omitempty" name:"ComponentName"`
 
-	// Component list price.
+	// <p>Component list price</p>
 	ComponentListPrice *string `json:"ComponentListPrice,omitnil,omitempty" name:"ComponentListPrice"`
 
-	// Price unit.
+	// <p>Price unit</p>
 	ComponentPriceMeasurementUnit *string `json:"ComponentPriceMeasurementUnit,omitnil,omitempty" name:"ComponentPriceMeasurementUnit"`
 
-	// Component usage.
+	// <p>Component usage</p>
 	ComponentUsage *string `json:"ComponentUsage,omitnil,omitempty" name:"ComponentUsage"`
 
-	// Component usage unit.
+	// <p>Component usage unit</p>
 	ComponentUsageUnit *string `json:"ComponentUsageUnit,omitnil,omitempty" name:"ComponentUsageUnit"`
 
-	// Resource usage duration.
+	// <p>Resource usage duration</p>
 	UsageDuration *string `json:"UsageDuration,omitnil,omitempty" name:"UsageDuration"`
 
-	// duration unit.
+	// <p>Duration unit</p>
 	DurationUnit *string `json:"DurationUnit,omitnil,omitempty" name:"DurationUnit"`
 
-	// Total original price.
-	// Original cost = component list price * component usage * usage duration.
+	// <p>Original total price<br>Original Cost = Component List Price * Component Usage * Usage Duration</p>
 	OriginalCost *string `json:"OriginalCost,omitnil,omitempty" name:"OriginalCost"`
 
-	// Discount (default is 1) - abandoned.
+	// <p>Discount (default: 1) - abandoned</p>
 	DiscountRate *string `json:"DiscountRate,omitnil,omitempty" name:"DiscountRate"`
 
-	// Currency.
+	// <p>Currency.</p>
 	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
 
-	// Total cost after discount.
+	// <p>Total cost after discount</p>
 	TotalAmountAfterDiscount *string `json:"TotalAmountAfterDiscount,omitnil,omitempty" name:"TotalAmountAfterDiscount"`
 
-	// Voucher deduction amount.
+	// <p>Voucher deducted amount</p>
 	VoucherDeduction *string `json:"VoucherDeduction,omitnil,omitempty" name:"VoucherDeduction"`
 
-	// = Total Amount After Discount - Voucher Deduction
+	// <p>= Total Amount After Discount - Voucher Deduction</p>
 	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
 
-	// Identifier (id).
+	// <p>id</p>
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// customer discount rate. The discount rate applied to the reseller's customer, which set by reseller, default value equal to 1.
+	// <p>customer discount rate. The discount rate for customers of resellers, set by the reseller. The default value is 1.</p>
 	CustomerDiscountRate *string `json:"CustomerDiscountRate,omitnil,omitempty" name:"CustomerDiscountRate"`
+
+	// <p>Product code</p>
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// <p>Sub-product code</p>
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// <p>Component type code</p>
+	ComponentCode *string `json:"ComponentCode,omitnil,omitempty" name:"ComponentCode"`
+
+	// <p>Component code</p>
+	ItemCode *string `json:"ItemCode,omitnil,omitempty" name:"ItemCode"`
 }
 
 type BillQueryFilterMsg struct {
@@ -835,7 +841,7 @@ type CustomerBillDetailData struct {
 
 	// Billing mode
 	// .
-	// Monthly subscription.
+	// yearly/monthly subscription.
 	// Pay-As-You-Go resources.
 	// Standard ri reserved instances.
 	BillingMode *string `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
@@ -914,42 +920,54 @@ type CustomerBillDetailData struct {
 
 	// Tag information.
 	Tags []*TagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Product code
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Subproduct code
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Component type code
+	ComponentCode *string `json:"ComponentCode,omitnil,omitempty" name:"ComponentCode"`
+
+	// Component code
+	ItemCode *string `json:"ItemCode,omitnil,omitempty" name:"ItemCode"`
 }
 
 // Predefined struct for user
 type DescribeBillDetailRequestParams struct {
-	// Inquiry month, in the format of YYYY-MM, such as 2023-01
+	// <p>Query month, in the format of YYYY-MM, such as 2023-01</p>
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// Page parameter: number of entries per page. Value range: [1, 200]
+	// <p>Page parameter: number of entries per page. Value range: [1, 200]</p>
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Page parameter: current page number. The minimum value is 1.
+	// <p>Page parameter: current page number. The minimum value is 1.</p>
 	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
 
-	// Billing mode. Valid values: prePay (Monthly subscription) and postPay (Pay-As-You-Go resources)
+	// <p>Billing mode</p><p>Enumeration values:</p><ul><li>prePay: yearly/monthly subscription</li><li>postPay: Pay-As-You-Go resources</li></ul>
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Transaction type. Valid values: prepay_purchase (Purchase), prepay_renew (Renewal), prepay_modify (Upgrade/Downgrade), prepay_return ( Monthly subscription refund), postpay_deduct (Pay-as-you-go), postpay_deduct_h (Hourly settlement), postpay_deduct_d (Daily settlement), postpay_deduct_m (Monthly settlement), offline_deduct (Offline project deduction), online_deduct (Offline product deduction), recon_deduct (Adjustment - deduction), recon_increase (Adjustment - compensation), ripay_purchase (One-off RI Fee), postpay_deduct_s (Spot), ri_hour_pay (Hourly RI fee), prePurchase (New monthly subscription), preRenew (Monthly subscription renewal), preUpgrade (Upgrade/Downgrade), preDowngrade (Upgrade/Downgrade), svp_hour_pay (Hourly Savings Plan fee), recon_guarantee (Minimum spend deduction), pre_purchase (New monthly subscription), pre_renew (Monthly subscription renewal), pre_upgrade (Upgrade/Downgrade), pre_downgrade (Upgrade/Downgrade)
+	// <p>Transaction type</p><p>Enumeration values:</p><ul><li>prepay_purchase: Purchase</li><li>prepay_renew:  Renewal</li><li>prepay_modify: Upgrade/Downgrade</li><li>prepay_return: yearly/monthly subscription refund</li><li>postpay_deduct: Pay-as-you-go</li><li>postpay_deduct_h: Hourly settlement</li><li>postpay_deduct_d: Daily settlement</li><li>postpay_deduct_m: Monthly settlement</li><li>offline_deduct: Offline project deduction</li><li>online_deduct: Offline product deduction</li><li>recon_deduct: Adjustment - deduction</li><li>recon_increase: Adjustment - compensation</li><li>ripay_purchase: One-off RI Fee</li><li>postpay_deduct_s: Spot</li><li>ri_hour_pay: Hourly RI fee</li><li>prePurchase: New yearly/monthly subscription</li><li>preRenew: yearly/monthly subscription renewal</li><li>preUpgrade: Upgrade/Downgrade</li><li>preDowngrade: Upgrade/Downgrade</li><li>svp_hour_pay: Hourly Savings Plan fee</li><li>recon_guarantee: Minimum spend deduction</li><li>pre_purchase: New yearly/monthly subscription</li><li>pre_renew: yearly/monthly subscription renewal</li><li>pre_upgrade: Upgrade/Downgrade</li><li>pre_downgrade: Upgrade/Downgrade</li></ul>
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 }
 
 type DescribeBillDetailRequest struct {
 	*tchttp.BaseRequest
 	
-	// Inquiry month, in the format of YYYY-MM, such as 2023-01
+	// <p>Query month, in the format of YYYY-MM, such as 2023-01</p>
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// Page parameter: number of entries per page. Value range: [1, 200]
+	// <p>Page parameter: number of entries per page. Value range: [1, 200]</p>
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Page parameter: current page number. The minimum value is 1.
+	// <p>Page parameter: current page number. The minimum value is 1.</p>
 	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
 
-	// Billing mode. Valid values: prePay (Monthly subscription) and postPay (Pay-As-You-Go resources)
+	// <p>Billing mode</p><p>Enumeration values:</p><ul><li>prePay: yearly/monthly subscription</li><li>postPay: Pay-As-You-Go resources</li></ul>
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Transaction type. Valid values: prepay_purchase (Purchase), prepay_renew (Renewal), prepay_modify (Upgrade/Downgrade), prepay_return ( Monthly subscription refund), postpay_deduct (Pay-as-you-go), postpay_deduct_h (Hourly settlement), postpay_deduct_d (Daily settlement), postpay_deduct_m (Monthly settlement), offline_deduct (Offline project deduction), online_deduct (Offline product deduction), recon_deduct (Adjustment - deduction), recon_increase (Adjustment - compensation), ripay_purchase (One-off RI Fee), postpay_deduct_s (Spot), ri_hour_pay (Hourly RI fee), prePurchase (New monthly subscription), preRenew (Monthly subscription renewal), preUpgrade (Upgrade/Downgrade), preDowngrade (Upgrade/Downgrade), svp_hour_pay (Hourly Savings Plan fee), recon_guarantee (Minimum spend deduction), pre_purchase (New monthly subscription), pre_renew (Monthly subscription renewal), pre_upgrade (Upgrade/Downgrade), pre_downgrade (Upgrade/Downgrade)
+	// <p>Transaction type</p><p>Enumeration values:</p><ul><li>prepay_purchase: Purchase</li><li>prepay_renew:  Renewal</li><li>prepay_modify: Upgrade/Downgrade</li><li>prepay_return: yearly/monthly subscription refund</li><li>postpay_deduct: Pay-as-you-go</li><li>postpay_deduct_h: Hourly settlement</li><li>postpay_deduct_d: Daily settlement</li><li>postpay_deduct_m: Monthly settlement</li><li>offline_deduct: Offline project deduction</li><li>online_deduct: Offline product deduction</li><li>recon_deduct: Adjustment - deduction</li><li>recon_increase: Adjustment - compensation</li><li>ripay_purchase: One-off RI Fee</li><li>postpay_deduct_s: Spot</li><li>ri_hour_pay: Hourly RI fee</li><li>prePurchase: New yearly/monthly subscription</li><li>preRenew: yearly/monthly subscription renewal</li><li>preUpgrade: Upgrade/Downgrade</li><li>preDowngrade: Upgrade/Downgrade</li><li>svp_hour_pay: Hourly Savings Plan fee</li><li>recon_guarantee: Minimum spend deduction</li><li>pre_purchase: New yearly/monthly subscription</li><li>pre_renew: yearly/monthly subscription renewal</li><li>pre_upgrade: Upgrade/Downgrade</li><li>pre_downgrade: Upgrade/Downgrade</li></ul>
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 }
 
@@ -978,10 +996,10 @@ func (r *DescribeBillDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillDetailResponseParams struct {
-	// Data details.
+	// <p>Data details</p>
 	DetailSet []*CustomerBillDetailData `json:"DetailSet,omitnil,omitempty" name:"DetailSet"`
 
-	// Total number of entries.
+	// <p>Total quantity.</p>
 	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1406,110 +1424,50 @@ func (r *DescribeCustomerBillDetailByDayResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type DescribeCustomerBillDetailRequestParams struct {
-	// Sub-account UIN.
+	// <p>Sub-customer uin</p>
 	CustomerUin *uint64 `json:"CustomerUin,omitnil,omitempty" name:"CustomerUin"`
 
-	// Inquiry month, in the format of YYYY-MM, such as 2023-01.
+	// <p>Inquiry month, in the format of YYYY-MM, such as 2023-01</p>
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// Page parameter: number of entries per page. Value range: [1, 200]
+	// <p>Pagination parameter: entries per page. Value range: [1, 200]</p>
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Page parameter: current page number. The minimum value is 1.
+	// <p>Pagination parameter: current page number. The minimum value is 1.</p>
 	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
 
-	// Billing mode. Valid values:
-	// prePay (Monthly subscription)
-	// postPay (Pay-As-You-Go resources)
+	// <p>Billing mode</p><p>Enumeration values:</p><ul><li>prePay: yearly/monthly subscription</li><li>postPay: Pay-As-You-Go resources</li></ul>
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Transaction type. Valid values:
-	// prepay_purchase (Purchase)
-	// prepay_renew (Renewal)
-	// prepay_modify (Upgrade/Downgrade)
-	// prepay_return ( Monthly subscription refund)
-	// postpay_deduct (Pay-as-you-go)
-	// postpay_deduct_h (Hourly settlement)
-	// postpay_deduct_d (Daily settlement)
-	// postpay_deduct_m (Monthly settlement)
-	// offline_deduct (Offline project deduction)
-	// online_deduct (Offline product deduction)
-	// recon_deduct (Adjustment - deduction)
-	// recon_increase (Adjustment - compensation)
-	// ripay_purchase (One-off RI Fee)
-	// postpay_deduct_s (Spot)
-	// ri_hour_pay (Hourly RI fee)
-	// prePurchase (New monthly subscription)
-	// preRenew (Monthly subscription renewal)
-	// preUpgrade (Upgrade/Downgrade)
-	// preDowngrade (Upgrade/Downgrade)
-	// svp_hour_pay (Hourly Savings Plan fee)
-	// recon_guarantee (Minimum spend deduction)
-	// pre_purchase (New monthly subscription)
-	// pre_renew (Monthly subscription renewal)
-	// pre_upgrade (Upgrade/Downgrade)
-	// pre_downgrade (Upgrade/Downgrade)
+	// <p>Transaction type</p><p>Enumeration values:</p><ul><li>prepay_purchase: Purchase</li><li>prepay_renew: Renewal</li><li>prepay_modify: Upgrade/Downgrade</li><li>prepay_return: yearly/monthly subscription refund</li><li>postpay_deduct: Pay-as-you-go</li><li>postpay_deduct_h: Hourly settlement</li><li>postpay_deduct_d: Daily settlement</li><li>postpay_deduct_m: Monthly settlement</li><li>offline_deduct: Offline project deduction</li><li>online_deduct: Offline product deduction</li><li>recon_deduct: Adjustment - deduction</li><li>recon_increase: Adjustment - compensation</li><li>ripay_purchase: One-off RI Fee</li><li>postpay_deduct_s: Spot</li><li>ri_hour_pay: Hourly RI fee</li><li>prePurchase: New yearly/monthly subscription</li><li>preRenew: yearly/monthly subscription renewal</li><li>preUpgrade: Upgrade/Downgrade</li><li>preDowngrade: Upgrade/Downgrade</li><li>svp_hour_pay: Hourly Savings Plan fee</li><li>recon_guarantee: Minimum spend deduction</li><li>pre_purchase: New yearly/monthly subscription</li><li>pre_renew: yearly/monthly subscription renewal</li><li>pre_upgrade: Upgrade/Downgrade</li><li>pre_downgrade: Upgrade/Downgrade</li></ul>
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// Payment status
-	// 0: not distinguished
-	// 1: paid
-	// 2: unpaid
+	// <p>Payment Status<br>0: case-insensitive<br>1: paid<br>2: unpaid</p>
 	IsConfirmed *string `json:"IsConfirmed,omitnil,omitempty" name:"IsConfirmed"`
 }
 
 type DescribeCustomerBillDetailRequest struct {
 	*tchttp.BaseRequest
 	
-	// Sub-account UIN.
+	// <p>Sub-customer uin</p>
 	CustomerUin *uint64 `json:"CustomerUin,omitnil,omitempty" name:"CustomerUin"`
 
-	// Inquiry month, in the format of YYYY-MM, such as 2023-01.
+	// <p>Inquiry month, in the format of YYYY-MM, such as 2023-01</p>
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// Page parameter: number of entries per page. Value range: [1, 200]
+	// <p>Pagination parameter: entries per page. Value range: [1, 200]</p>
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Page parameter: current page number. The minimum value is 1.
+	// <p>Pagination parameter: current page number. The minimum value is 1.</p>
 	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
 
-	// Billing mode. Valid values:
-	// prePay (Monthly subscription)
-	// postPay (Pay-As-You-Go resources)
+	// <p>Billing mode</p><p>Enumeration values:</p><ul><li>prePay: yearly/monthly subscription</li><li>postPay: Pay-As-You-Go resources</li></ul>
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Transaction type. Valid values:
-	// prepay_purchase (Purchase)
-	// prepay_renew (Renewal)
-	// prepay_modify (Upgrade/Downgrade)
-	// prepay_return ( Monthly subscription refund)
-	// postpay_deduct (Pay-as-you-go)
-	// postpay_deduct_h (Hourly settlement)
-	// postpay_deduct_d (Daily settlement)
-	// postpay_deduct_m (Monthly settlement)
-	// offline_deduct (Offline project deduction)
-	// online_deduct (Offline product deduction)
-	// recon_deduct (Adjustment - deduction)
-	// recon_increase (Adjustment - compensation)
-	// ripay_purchase (One-off RI Fee)
-	// postpay_deduct_s (Spot)
-	// ri_hour_pay (Hourly RI fee)
-	// prePurchase (New monthly subscription)
-	// preRenew (Monthly subscription renewal)
-	// preUpgrade (Upgrade/Downgrade)
-	// preDowngrade (Upgrade/Downgrade)
-	// svp_hour_pay (Hourly Savings Plan fee)
-	// recon_guarantee (Minimum spend deduction)
-	// pre_purchase (New monthly subscription)
-	// pre_renew (Monthly subscription renewal)
-	// pre_upgrade (Upgrade/Downgrade)
-	// pre_downgrade (Upgrade/Downgrade)
+	// <p>Transaction type</p><p>Enumeration values:</p><ul><li>prepay_purchase: Purchase</li><li>prepay_renew: Renewal</li><li>prepay_modify: Upgrade/Downgrade</li><li>prepay_return: yearly/monthly subscription refund</li><li>postpay_deduct: Pay-as-you-go</li><li>postpay_deduct_h: Hourly settlement</li><li>postpay_deduct_d: Daily settlement</li><li>postpay_deduct_m: Monthly settlement</li><li>offline_deduct: Offline project deduction</li><li>online_deduct: Offline product deduction</li><li>recon_deduct: Adjustment - deduction</li><li>recon_increase: Adjustment - compensation</li><li>ripay_purchase: One-off RI Fee</li><li>postpay_deduct_s: Spot</li><li>ri_hour_pay: Hourly RI fee</li><li>prePurchase: New yearly/monthly subscription</li><li>preRenew: yearly/monthly subscription renewal</li><li>preUpgrade: Upgrade/Downgrade</li><li>preDowngrade: Upgrade/Downgrade</li><li>svp_hour_pay: Hourly Savings Plan fee</li><li>recon_guarantee: Minimum spend deduction</li><li>pre_purchase: New yearly/monthly subscription</li><li>pre_renew: yearly/monthly subscription renewal</li><li>pre_upgrade: Upgrade/Downgrade</li><li>pre_downgrade: Upgrade/Downgrade</li></ul>
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// Payment status
-	// 0: not distinguished
-	// 1: paid
-	// 2: unpaid
+	// <p>Payment Status<br>0: case-insensitive<br>1: paid<br>2: unpaid</p>
 	IsConfirmed *string `json:"IsConfirmed,omitnil,omitempty" name:"IsConfirmed"`
 }
 
@@ -1540,10 +1498,10 @@ func (r *DescribeCustomerBillDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCustomerBillDetailResponseParams struct {
-	// Total number of data entries
+	// <p>total number of records</p>
 	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
-	// Data detailsNote: This field may return null, indicating that no valid values can be obtained.
+	// <p>Data details</p>
 	DetailSet []*BillDetailData `json:"DetailSet,omitnil,omitempty" name:"DetailSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1656,98 +1614,38 @@ func (r *DescribeCustomerBillDownloadUrlResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type DescribeCustomerBillSummaryRequestParams struct {
-	// Customer UIN
+	// <p>Sub-customer uin</p>
 	CustomerUin *uint64 `json:"CustomerUin,omitnil,omitempty" name:"CustomerUin"`
 
-	// The queried month in "YYYY-MM" format, such as 2023-01.
+	// <p>Inquiry month, in the format of YYYY-MM, such as 2023-01</p>
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// Billing mode. Valid values:
-	// `prePay` (Monthly subscription)
-	// `postPay` (Pay-as-you-go)
+	// <p>Billing mode</p><p>Enumeration values:</p><ul><li>prePay: yearly/monthly subscription</li><li>postPay: Pay-As-You-Go resources</li></ul>
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Transaction type. Valid values:
-	// `prepay_purchase` (Purchase)
-	// `prepay_renew` (Renewal)
-	// `prepay_modify` (Upgrade/Downgrade)
-	// `prepay_return` (Monthly subscription refund)
-	// `postpay_deduct` (Pay-as-you-go)
-	// `postpay_deduct_h` (Hourly settlement)
-	// `postpay_deduct_d` (Daily settlement)
-	// `postpay_deduct_m` (Monthly settlement)
-	// `offline_deduct` (Offline project deduction)
-	// `online_deduct` (Offline product deduction)
-	// `recon_deduct` (Adjustment - deduction)
-	// `recon_increase` (Adjustment - compensation)
-	// `ripay_purchase` (One-off RI Fee)
-	// `postpay_deduct_s` (Spot)
-	// `ri_hour_pay` (Hourly RI fee)
-	// `prePurchase` (New monthly subscription)
-	// `preRenew` (Monthly subscription renewal)
-	// `preUpgrade` (Upgrade/Downgrade)
-	// `preDowngrade` (Upgrade/Downgrade)
-	// `svp_hour_pay` (Hourly Savings Plan fee)
-	// `recon_guarantee` (Minimum spend deduction)
-	// `pre_purchase` (New monthly subscription)
-	// `pre_renew` (Monthly subscription renewal)
-	// `pre_upgrade` (Upgrade/Downgrade)
-	// `pre_downgrade` (Upgrade/Downgrade)
+	// <p>Transaction type</p><p>Enumeration values:</p><ul><li>prepay_purchase: Purchase</li><li>prepay_renew: Renewal</li><li>prepay_modify: Upgrade/Downgrade</li><li>prepay_return: yearly/monthly subscription refund</li><li>postpay_deduct: Pay-as-you-go</li><li>postpay_deduct_h: Hourly settlement</li><li>postpay_deduct_d: Daily settlement</li><li>postpay_deduct_m: Monthly settlement</li><li>offline_deduct: Offline project deduction</li><li>online_deduct: Offline product deduction</li><li>recon_deduct: Adjustment - deduction</li><li>ripay_purchase: One-off RI Fee</li><li>postpay_deduct_s: Spot</li><li>ri_hour_pay: Hourly RI fee</li><li>prePurchase: New yearly/monthly subscription</li><li>preRenew: yearly/monthly subscription renewal</li><li>preUpgrade: Upgrade/Downgrade</li></ul>
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// Payment status
-	// `0`: N/A
-	// `1`: Paid
-	// `2`: Unpaid
+	// <p>Payment Status<br>0: case-insensitive<br>1: paid<br>2: unpaid</p>
 	IsConfirmed *string `json:"IsConfirmed,omitnil,omitempty" name:"IsConfirmed"`
 }
 
 type DescribeCustomerBillSummaryRequest struct {
 	*tchttp.BaseRequest
 	
-	// Customer UIN
+	// <p>Sub-customer uin</p>
 	CustomerUin *uint64 `json:"CustomerUin,omitnil,omitempty" name:"CustomerUin"`
 
-	// The queried month in "YYYY-MM" format, such as 2023-01.
+	// <p>Inquiry month, in the format of YYYY-MM, such as 2023-01</p>
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// Billing mode. Valid values:
-	// `prePay` (Monthly subscription)
-	// `postPay` (Pay-as-you-go)
+	// <p>Billing mode</p><p>Enumeration values:</p><ul><li>prePay: yearly/monthly subscription</li><li>postPay: Pay-As-You-Go resources</li></ul>
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Transaction type. Valid values:
-	// `prepay_purchase` (Purchase)
-	// `prepay_renew` (Renewal)
-	// `prepay_modify` (Upgrade/Downgrade)
-	// `prepay_return` (Monthly subscription refund)
-	// `postpay_deduct` (Pay-as-you-go)
-	// `postpay_deduct_h` (Hourly settlement)
-	// `postpay_deduct_d` (Daily settlement)
-	// `postpay_deduct_m` (Monthly settlement)
-	// `offline_deduct` (Offline project deduction)
-	// `online_deduct` (Offline product deduction)
-	// `recon_deduct` (Adjustment - deduction)
-	// `recon_increase` (Adjustment - compensation)
-	// `ripay_purchase` (One-off RI Fee)
-	// `postpay_deduct_s` (Spot)
-	// `ri_hour_pay` (Hourly RI fee)
-	// `prePurchase` (New monthly subscription)
-	// `preRenew` (Monthly subscription renewal)
-	// `preUpgrade` (Upgrade/Downgrade)
-	// `preDowngrade` (Upgrade/Downgrade)
-	// `svp_hour_pay` (Hourly Savings Plan fee)
-	// `recon_guarantee` (Minimum spend deduction)
-	// `pre_purchase` (New monthly subscription)
-	// `pre_renew` (Monthly subscription renewal)
-	// `pre_upgrade` (Upgrade/Downgrade)
-	// `pre_downgrade` (Upgrade/Downgrade)
+	// <p>Transaction type</p><p>Enumeration values:</p><ul><li>prepay_purchase: Purchase</li><li>prepay_renew: Renewal</li><li>prepay_modify: Upgrade/Downgrade</li><li>prepay_return: yearly/monthly subscription refund</li><li>postpay_deduct: Pay-as-you-go</li><li>postpay_deduct_h: Hourly settlement</li><li>postpay_deduct_d: Daily settlement</li><li>postpay_deduct_m: Monthly settlement</li><li>offline_deduct: Offline project deduction</li><li>online_deduct: Offline product deduction</li><li>recon_deduct: Adjustment - deduction</li><li>ripay_purchase: One-off RI Fee</li><li>postpay_deduct_s: Spot</li><li>ri_hour_pay: Hourly RI fee</li><li>prePurchase: New yearly/monthly subscription</li><li>preRenew: yearly/monthly subscription renewal</li><li>preUpgrade: Upgrade/Downgrade</li></ul>
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// Payment status
-	// `0`: N/A
-	// `1`: Paid
-	// `2`: Unpaid
+	// <p>Payment Status<br>0: case-insensitive<br>1: paid<br>2: unpaid</p>
 	IsConfirmed *string `json:"IsConfirmed,omitnil,omitempty" name:"IsConfirmed"`
 }
 
@@ -1776,7 +1674,7 @@ func (r *DescribeCustomerBillSummaryRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCustomerBillSummaryResponseParams struct {
-	// Total amount
+	// <p>Total amount</p>
 	TotalCost *float64 `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.

@@ -550,6 +550,9 @@ type CreateStreamPackageHarvestJobRequestParams struct {
 
 	// The file name of the recording file stored in Cos.
 	Manifest *string `json:"Manifest,omitnil,omitempty" name:"Manifest"`
+
+	// Callback address after recording completion
+	CallbackURL *string `json:"CallbackURL,omitnil,omitempty" name:"CallbackURL"`
 }
 
 type CreateStreamPackageHarvestJobRequest struct {
@@ -578,6 +581,9 @@ type CreateStreamPackageHarvestJobRequest struct {
 
 	// The file name of the recording file stored in Cos.
 	Manifest *string `json:"Manifest,omitnil,omitempty" name:"Manifest"`
+
+	// Callback address after recording completion
+	CallbackURL *string `json:"CallbackURL,omitnil,omitempty" name:"CallbackURL"`
 }
 
 func (r *CreateStreamPackageHarvestJobRequest) ToJsonString() string {
@@ -600,6 +606,7 @@ func (r *CreateStreamPackageHarvestJobRequest) FromJsonString(s string) error {
 	delete(f, "EndTime")
 	delete(f, "Destination")
 	delete(f, "Manifest")
+	delete(f, "CallbackURL")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamPackageHarvestJobRequest has unknown keys!", "")
 	}

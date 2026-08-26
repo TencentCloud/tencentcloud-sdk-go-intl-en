@@ -933,9 +933,9 @@ func NewDescribeCustomerBillDetailResponse() (response *DescribeCustomerBillDeta
 }
 
 // DescribeCustomerBillDetail
-// This API is used to query the customer bill details by resellers.
+// Description: Query customer bill details.
 //
-// Callable roles: Distributor, Second-level reseller, Reseller.
+// Resellers, first-level resellers, and second-level resellers can call this API.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -947,9 +947,9 @@ func (c *Client) DescribeCustomerBillDetail(request *DescribeCustomerBillDetailR
 }
 
 // DescribeCustomerBillDetail
-// This API is used to query the customer bill details by resellers.
+// Description: Query customer bill details.
 //
-// Callable roles: Distributor, Second-level reseller, Reseller.
+// Resellers, first-level resellers, and second-level resellers can call this API.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -1115,9 +1115,7 @@ func NewDescribeCustomerBillSummaryResponse() (response *DescribeCustomerBillSum
 }
 
 // DescribeCustomerBillSummary
-// This API is used to query the total amount of customer bills.
-//
-// Callable roles: Distributor, Second-level reseller, Reseller
+// Query the aggregate value of a sub-client bill
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -1128,9 +1126,7 @@ func (c *Client) DescribeCustomerBillSummary(request *DescribeCustomerBillSummar
 }
 
 // DescribeCustomerBillSummary
-// This API is used to query the total amount of customer bills.
-//
-// Callable roles: Distributor, Second-level reseller, Reseller
+// Query the aggregate value of a sub-client bill
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"

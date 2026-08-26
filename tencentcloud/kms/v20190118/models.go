@@ -3589,80 +3589,80 @@ func (r *ListAlgorithmsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ListDataKeyDetailRequestParams struct {
-	// Meaning matches the Offset in SQL queries, indicates the retrieval starts from the Offset-th element in a sequentially arranged array, defaults to 0.
+	// <p>It means the same as the Offset in SQL queries, indicating that this retrieval starts from the Offset-th element of the sequentially arranged array. It defaults to 0.</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Specifies the maximum number of elements to retrieve, same as the Limit in SQL queries. default value is 10. maximum value is 200.
+	// <p>The meaning is consistent with the Limit in SQL queries, indicating that this time up to Limit elements can be retrieved. The default value is 10, and the maximum value is 200.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter by creator role. default 0 means data keys created by the user, 1 means data keys automatically created by authorized cloud services.
+	// <p>Filter by creator role. Default value 0 indicates data keys created by the user, and 1 indicates data keys automatically created by authorized other Cloud services.</p>
 	Role *uint64 `json:"Role,omitnil,omitempty" name:"Role"`
 
-	// Sorts according to the creation time of DataKey. 0 indicates descending sort. 1 indicates ascending sort.
+	// <p>Sort by DataKey creation time. 0 indicates sort in descending order, and 1 indicates sort in ascending order.</p>
 	OrderType *uint64 `json:"OrderType,omitnil,omitempty" name:"OrderType"`
 
-	// Filter based on DataKey state. 0 means all datakeys, 1 means querying only Enabled datakeys, 2 means querying only Disabled datakeys, 3 means querying datakeys in PendingDelete state (keys in scheduled deletion status).
+	// <p>Filter by DataKey status. 0 indicates all DataKeys, 1 indicates querying only Enabled DataKeys, 2 indicates querying only Disabled DataKeys, and 3 indicates querying DataKeys in PendingDelete state (keys in scheduled deletion status).</p>
 	KeyState *uint64 `json:"KeyState,omitnil,omitempty" name:"KeyState"`
 
-	// Performs a fuzzy match query based on DataKeyId or DataKeyName.
+	// <p>Perform a fuzzy match query by DataKeyId or DataKeyName</p>
 	SearchKeyAlias *string `json:"SearchKeyAlias,omitnil,omitempty" name:"SearchKeyAlias"`
 
-	// Filters data keys by DateKey type. "TENCENT_KMS" filters data keys with key material created by KMS. "EXTERNAL" filters EXTERNAL type data keys requiring user-imported key material. "ALL" or leave unset queries both types. case-sensitive.
+	// <p>Filter by DateKey type. "TENCENT_KMS" filters data keys with key material created by KMS. "EXTERNAL" filters EXTERNAL type data keys with key material to import. "ALL" or leave unset queries both types. Case-sensitive.</p>
 	Origin *string `json:"Origin,omitnil,omitempty" name:"Origin"`
 
-	// HSM cluster ID corresponding to KMS advanced edition.
+	// <p>HSM Cluster ID corresponding to the KMS advanced edition. When specifying a cluster ID, query the key list within the specified cluster. When specifying default, query the key list of the public cloud shared version. If empty, query all key lists by default, including cluster and non-cluster.</p>
 	HsmClusterId *string `json:"HsmClusterId,omitnil,omitempty" name:"HsmClusterId"`
 
-	// Specifies the globally unique identifier of the root key.
+	// <p>Root key globally unique identifier</p>
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
-	// Length of the data key.
+	// <p>Length of the data key</p>
 	DataKeyLen *uint64 `json:"DataKeyLen,omitnil,omitempty" name:"DataKeyLen"`
 
-	// Tag filtering conditions.
+	// <p>Tag filtering condition</p>
 	TagFilters []*TagFilter `json:"TagFilters,omitnil,omitempty" name:"TagFilters"`
 
-	// Array of member account information.
+	// <p>Member account information array</p>
 	MemberAccounts []*MemberAccount `json:"MemberAccounts,omitnil,omitempty" name:"MemberAccounts"`
 }
 
 type ListDataKeyDetailRequest struct {
 	*tchttp.BaseRequest
 	
-	// Meaning matches the Offset in SQL queries, indicates the retrieval starts from the Offset-th element in a sequentially arranged array, defaults to 0.
+	// <p>It means the same as the Offset in SQL queries, indicating that this retrieval starts from the Offset-th element of the sequentially arranged array. It defaults to 0.</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Specifies the maximum number of elements to retrieve, same as the Limit in SQL queries. default value is 10. maximum value is 200.
+	// <p>The meaning is consistent with the Limit in SQL queries, indicating that this time up to Limit elements can be retrieved. The default value is 10, and the maximum value is 200.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter by creator role. default 0 means data keys created by the user, 1 means data keys automatically created by authorized cloud services.
+	// <p>Filter by creator role. Default value 0 indicates data keys created by the user, and 1 indicates data keys automatically created by authorized other Cloud services.</p>
 	Role *uint64 `json:"Role,omitnil,omitempty" name:"Role"`
 
-	// Sorts according to the creation time of DataKey. 0 indicates descending sort. 1 indicates ascending sort.
+	// <p>Sort by DataKey creation time. 0 indicates sort in descending order, and 1 indicates sort in ascending order.</p>
 	OrderType *uint64 `json:"OrderType,omitnil,omitempty" name:"OrderType"`
 
-	// Filter based on DataKey state. 0 means all datakeys, 1 means querying only Enabled datakeys, 2 means querying only Disabled datakeys, 3 means querying datakeys in PendingDelete state (keys in scheduled deletion status).
+	// <p>Filter by DataKey status. 0 indicates all DataKeys, 1 indicates querying only Enabled DataKeys, 2 indicates querying only Disabled DataKeys, and 3 indicates querying DataKeys in PendingDelete state (keys in scheduled deletion status).</p>
 	KeyState *uint64 `json:"KeyState,omitnil,omitempty" name:"KeyState"`
 
-	// Performs a fuzzy match query based on DataKeyId or DataKeyName.
+	// <p>Perform a fuzzy match query by DataKeyId or DataKeyName</p>
 	SearchKeyAlias *string `json:"SearchKeyAlias,omitnil,omitempty" name:"SearchKeyAlias"`
 
-	// Filters data keys by DateKey type. "TENCENT_KMS" filters data keys with key material created by KMS. "EXTERNAL" filters EXTERNAL type data keys requiring user-imported key material. "ALL" or leave unset queries both types. case-sensitive.
+	// <p>Filter by DateKey type. "TENCENT_KMS" filters data keys with key material created by KMS. "EXTERNAL" filters EXTERNAL type data keys with key material to import. "ALL" or leave unset queries both types. Case-sensitive.</p>
 	Origin *string `json:"Origin,omitnil,omitempty" name:"Origin"`
 
-	// HSM cluster ID corresponding to KMS advanced edition.
+	// <p>HSM Cluster ID corresponding to the KMS advanced edition. When specifying a cluster ID, query the key list within the specified cluster. When specifying default, query the key list of the public cloud shared version. If empty, query all key lists by default, including cluster and non-cluster.</p>
 	HsmClusterId *string `json:"HsmClusterId,omitnil,omitempty" name:"HsmClusterId"`
 
-	// Specifies the globally unique identifier of the root key.
+	// <p>Root key globally unique identifier</p>
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
-	// Length of the data key.
+	// <p>Length of the data key</p>
 	DataKeyLen *uint64 `json:"DataKeyLen,omitnil,omitempty" name:"DataKeyLen"`
 
-	// Tag filtering conditions.
+	// <p>Tag filtering condition</p>
 	TagFilters []*TagFilter `json:"TagFilters,omitnil,omitempty" name:"TagFilters"`
 
-	// Array of member account information.
+	// <p>Member account information array</p>
 	MemberAccounts []*MemberAccount `json:"MemberAccounts,omitnil,omitempty" name:"MemberAccounts"`
 }
 
@@ -3698,10 +3698,10 @@ func (r *ListDataKeyDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ListDataKeyDetailResponseParams struct {
-	// Returns the attribute information list.
+	// <p>Returned attribute information list.</p>
 	DataKeyMetadatas []*DataKeyMetadata `json:"DataKeyMetadatas,omitnil,omitempty" name:"DataKeyMetadatas"`
 
-	// Total number of datakeys.
+	// <p>Total number of DataKeys</p>
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3807,74 +3807,74 @@ func (r *ListDataKeysResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ListKeyDetailRequestParams struct {
-	// This parameter has the same meaning of the `Offset` in an SQL query, indicating that this acquisition starts from the "No. Offset value" element of the array arranged in a certain order. The default value is 0.
+	// <p>It means the same as the Offset in SQL queries, indicating that this retrieval starts from the Offset-th element of the sequentially arranged array. It defaults to 0.</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// This parameter has the same meaning of the `Limit` in an SQL query, indicating that up to `Limit` value elements can be obtained in this request. The default value is 10 and the maximum value is 200.
+	// <p>The meaning is consistent with the Limit in SQL queries, indicating that this time up to Limit elements can be retrieved. The default value is 10, and the maximum value is 200.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filters by creator role. 0 (default value): the CMK is created by the user; 1: the CMK is created automatically by an authorized Tencent Cloud service.
+	// <p>Filter by creator role. Default value 0 indicates CMKs created by the user, and 1 indicates CMKs automatically created by authorized other Cloud services.</p>
 	Role *uint64 `json:"Role,omitnil,omitempty" name:"Role"`
 
-	// Sorts by CMK creation time. 0: descending; 1: ascending
+	// <p>Sort by CMK creation time. 0 indicates sort in descending order, and 1 indicates sort in ascending order.</p>
 	OrderType *uint64 `json:"OrderType,omitnil,omitempty" name:"OrderType"`
 
-	// Filters by CMK status. 0: all CMKs; 1: CMKs in `Enabled` status only; 2: CMKs in `Disabled` status only; 3: CMKs in `PendingDelete` status only (i.e., keys with schedule deletion enabled); 4: CMKs in `PendingImport` status only; 5: CMKs in `Archived` status only.
+	// <p>Filter by CMK status. 0 indicates all CMKs, 1 indicates querying only Enabled CMKs, 2 indicates querying only Disabled CMKs, 3 indicates querying CMKs in PendingDelete state (keys in scheduled deletion status), 4 indicates querying CMKs in PendingImport state, and 5 indicates querying CMKs in Archived state.</p>
 	KeyState *uint64 `json:"KeyState,omitnil,omitempty" name:"KeyState"`
 
-	// Performs a fuzzy query by `KeyId` or `Alias`
+	// <p>Perform a fuzzy match query by KeyId or Alias</p>
 	SearchKeyAlias *string `json:"SearchKeyAlias,omitnil,omitempty" name:"SearchKeyAlias"`
 
-	// Filters by CMK type. "TENCENT_KMS" indicates to filter CMKs whose key materials are created by KMS; "EXTERNAL" indicates to filter CMKs of `EXTERNAL` type whose key materials are imported by users; "ALL" or empty indicates to filter CMKs of both types. This value is case-sensitive.
+	// <p>Filter by CMK type. "TENCENT_KMS" means to filter CMKs whose key material is created by KMS. "EXTERNAL" means to filter EXTERNAL type CMKs whose key material needs user import. "ALL" or unset means to query both types. Case-sensitive.</p>
 	Origin *string `json:"Origin,omitnil,omitempty" name:"Origin"`
 
-	// Filters by the `KeyUsage` field value. Valid values: `ALL` (all CMKs), `ENCRYPT_DECRYPT` (used when this field is left empty), `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, and `ASYMMETRIC_SIGN_VERIFY_ECC`.
+	// <p>Filter by the KeyUsage of the CMK. ALL indicates filtering all. The parameters used can be: ALL, ENCRYPT_DECRYPT, ASYMMETRIC_DECRYPT_RSA_2048, ASYMMETRIC_DECRYPT_SM2, ASYMMETRIC_SIGN_VERIFY_SM2, ASYMMETRIC_SIGN_VERIFY_RSA_2048, or ASYMMETRIC_SIGN_VERIFY_ECC. If empty, it filters the ENCRYPT_DECRYPT type by default.</p>
 	KeyUsage *string `json:"KeyUsage,omitnil,omitempty" name:"KeyUsage"`
 
-	// Tag filter condition
+	// <p>Tag filtering condition</p>
 	TagFilters []*TagFilter `json:"TagFilters,omitnil,omitempty" name:"TagFilters"`
 
-	// ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+	// <p>HSM Cluster ID corresponding to the KMS advanced edition (only applicable to KMS exclusive/managed service instances). When specifying a cluster ID, query the key list within the specified cluster. When specifying default, query the key list of the public cloud shared version. If empty, query all key lists by default, including cluster and non-cluster.</p>
 	HsmClusterId *string `json:"HsmClusterId,omitnil,omitempty" name:"HsmClusterId"`
 
-	// Array of trusted service member account information.
+	// <p>Array of member account information of the trusted service</p>
 	MemberAccounts []*MemberAccount `json:"MemberAccounts,omitnil,omitempty" name:"MemberAccounts"`
 }
 
 type ListKeyDetailRequest struct {
 	*tchttp.BaseRequest
 	
-	// This parameter has the same meaning of the `Offset` in an SQL query, indicating that this acquisition starts from the "No. Offset value" element of the array arranged in a certain order. The default value is 0.
+	// <p>It means the same as the Offset in SQL queries, indicating that this retrieval starts from the Offset-th element of the sequentially arranged array. It defaults to 0.</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// This parameter has the same meaning of the `Limit` in an SQL query, indicating that up to `Limit` value elements can be obtained in this request. The default value is 10 and the maximum value is 200.
+	// <p>The meaning is consistent with the Limit in SQL queries, indicating that this time up to Limit elements can be retrieved. The default value is 10, and the maximum value is 200.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filters by creator role. 0 (default value): the CMK is created by the user; 1: the CMK is created automatically by an authorized Tencent Cloud service.
+	// <p>Filter by creator role. Default value 0 indicates CMKs created by the user, and 1 indicates CMKs automatically created by authorized other Cloud services.</p>
 	Role *uint64 `json:"Role,omitnil,omitempty" name:"Role"`
 
-	// Sorts by CMK creation time. 0: descending; 1: ascending
+	// <p>Sort by CMK creation time. 0 indicates sort in descending order, and 1 indicates sort in ascending order.</p>
 	OrderType *uint64 `json:"OrderType,omitnil,omitempty" name:"OrderType"`
 
-	// Filters by CMK status. 0: all CMKs; 1: CMKs in `Enabled` status only; 2: CMKs in `Disabled` status only; 3: CMKs in `PendingDelete` status only (i.e., keys with schedule deletion enabled); 4: CMKs in `PendingImport` status only; 5: CMKs in `Archived` status only.
+	// <p>Filter by CMK status. 0 indicates all CMKs, 1 indicates querying only Enabled CMKs, 2 indicates querying only Disabled CMKs, 3 indicates querying CMKs in PendingDelete state (keys in scheduled deletion status), 4 indicates querying CMKs in PendingImport state, and 5 indicates querying CMKs in Archived state.</p>
 	KeyState *uint64 `json:"KeyState,omitnil,omitempty" name:"KeyState"`
 
-	// Performs a fuzzy query by `KeyId` or `Alias`
+	// <p>Perform a fuzzy match query by KeyId or Alias</p>
 	SearchKeyAlias *string `json:"SearchKeyAlias,omitnil,omitempty" name:"SearchKeyAlias"`
 
-	// Filters by CMK type. "TENCENT_KMS" indicates to filter CMKs whose key materials are created by KMS; "EXTERNAL" indicates to filter CMKs of `EXTERNAL` type whose key materials are imported by users; "ALL" or empty indicates to filter CMKs of both types. This value is case-sensitive.
+	// <p>Filter by CMK type. "TENCENT_KMS" means to filter CMKs whose key material is created by KMS. "EXTERNAL" means to filter EXTERNAL type CMKs whose key material needs user import. "ALL" or unset means to query both types. Case-sensitive.</p>
 	Origin *string `json:"Origin,omitnil,omitempty" name:"Origin"`
 
-	// Filters by the `KeyUsage` field value. Valid values: `ALL` (all CMKs), `ENCRYPT_DECRYPT` (used when this field is left empty), `ASYMMETRIC_DECRYPT_RSA_2048`, `ASYMMETRIC_DECRYPT_SM2`, `ASYMMETRIC_SIGN_VERIFY_SM2`, `ASYMMETRIC_SIGN_VERIFY_RSA_2048`, and `ASYMMETRIC_SIGN_VERIFY_ECC`.
+	// <p>Filter by the KeyUsage of the CMK. ALL indicates filtering all. The parameters used can be: ALL, ENCRYPT_DECRYPT, ASYMMETRIC_DECRYPT_RSA_2048, ASYMMETRIC_DECRYPT_SM2, ASYMMETRIC_SIGN_VERIFY_SM2, ASYMMETRIC_SIGN_VERIFY_RSA_2048, or ASYMMETRIC_SIGN_VERIFY_ECC. If empty, it filters the ENCRYPT_DECRYPT type by default.</p>
 	KeyUsage *string `json:"KeyUsage,omitnil,omitempty" name:"KeyUsage"`
 
-	// Tag filter condition
+	// <p>Tag filtering condition</p>
 	TagFilters []*TagFilter `json:"TagFilters,omitnil,omitempty" name:"TagFilters"`
 
-	// ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+	// <p>HSM Cluster ID corresponding to the KMS advanced edition (only applicable to KMS exclusive/managed service instances). When specifying a cluster ID, query the key list within the specified cluster. When specifying default, query the key list of the public cloud shared version. If empty, query all key lists by default, including cluster and non-cluster.</p>
 	HsmClusterId *string `json:"HsmClusterId,omitnil,omitempty" name:"HsmClusterId"`
 
-	// Array of trusted service member account information.
+	// <p>Array of member account information of the trusted service</p>
 	MemberAccounts []*MemberAccount `json:"MemberAccounts,omitnil,omitempty" name:"MemberAccounts"`
 }
 
@@ -3909,10 +3909,10 @@ func (r *ListKeyDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ListKeyDetailResponseParams struct {
-	// Total number of CMKs
+	// <p>Total number of CMKs</p>
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Specifies the returned attribute information list.
+	// <p>Returned attribute information list.</p>
 	KeyMetadatas []*KeyMetadata `json:"KeyMetadatas,omitnil,omitempty" name:"KeyMetadatas"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.

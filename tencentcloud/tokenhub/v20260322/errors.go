@@ -32,11 +32,17 @@ const (
 	// MissingParameter.MissingParameter
 	MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
 
+	// Operation denied.
+	OPERATIONDENIED = "OperationDenied"
+
 	// The resource does not exist.
 	RESOURCENOTFOUND = "ResourceNotFound"
 
 	// ResourceNotFound.GlossaryNotFound
 	RESOURCENOTFOUND_GLOSSARYNOTFOUND = "ResourceNotFound.GlossaryNotFound"
+
+	// ResourceNotFound.ResourceNotFound
+	RESOURCENOTFOUND_RESOURCENOTFOUND = "ResourceNotFound.ResourceNotFound"
 
 	// UnauthorizedOperation.UnauthorizedOperation
 	UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"

@@ -1072,6 +1072,9 @@ type CreateLaunchTemplateRequestParams struct {
 	// -Replace: if the template t contains this parameter with a value of Replace and metadata=[k1:v1, k2:v2], then when creating a cvm using RunInstances (with metadata=[k2:v3]) + t, the created cvm will use metadata=[k2:v3]. 
 	// Note: this field is in beta test.
 	TemplateDataModifyAction *string `json:"TemplateDataModifyAction,omitnil,omitempty" name:"TemplateDataModifyAction"`
+
+	// Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).
+	NetworkInterfaces []*NetworkInterfaces `json:"NetworkInterfaces,omitnil,omitempty" name:"NetworkInterfaces"`
 }
 
 type CreateLaunchTemplateRequest struct {
@@ -1185,6 +1188,9 @@ type CreateLaunchTemplateRequest struct {
 	// -Replace: if the template t contains this parameter with a value of Replace and metadata=[k1:v1, k2:v2], then when creating a cvm using RunInstances (with metadata=[k2:v3]) + t, the created cvm will use metadata=[k2:v3]. 
 	// Note: this field is in beta test.
 	TemplateDataModifyAction *string `json:"TemplateDataModifyAction,omitnil,omitempty" name:"TemplateDataModifyAction"`
+
+	// Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).
+	NetworkInterfaces []*NetworkInterfaces `json:"NetworkInterfaces,omitnil,omitempty" name:"NetworkInterfaces"`
 }
 
 func (r *CreateLaunchTemplateRequest) ToJsonString() string {
@@ -1230,6 +1236,7 @@ func (r *CreateLaunchTemplateRequest) FromJsonString(s string) error {
 	delete(f, "LaunchTemplateTagSpecification")
 	delete(f, "Metadata")
 	delete(f, "TemplateDataModifyAction")
+	delete(f, "NetworkInterfaces")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLaunchTemplateRequest has unknown keys!", "")
 	}
@@ -1371,6 +1378,9 @@ type CreateLaunchTemplateVersionRequestParams struct {
 	// -Replace: if the template t contains this parameter with a value of Replace and metadata=[k1:v1, k2:v2], then when creating a cvm using RunInstances (with metadata=[k2:v3]) + t, the created cvm will use metadata=[k2:v3]. 
 	// Note: this field is in beta test.
 	TemplateDataModifyAction *string `json:"TemplateDataModifyAction,omitnil,omitempty" name:"TemplateDataModifyAction"`
+
+	// Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).
+	NetworkInterfaces []*NetworkInterfaces `json:"NetworkInterfaces,omitnil,omitempty" name:"NetworkInterfaces"`
 }
 
 type CreateLaunchTemplateVersionRequest struct {
@@ -1484,6 +1494,9 @@ type CreateLaunchTemplateVersionRequest struct {
 	// -Replace: if the template t contains this parameter with a value of Replace and metadata=[k1:v1, k2:v2], then when creating a cvm using RunInstances (with metadata=[k2:v3]) + t, the created cvm will use metadata=[k2:v3]. 
 	// Note: this field is in beta test.
 	TemplateDataModifyAction *string `json:"TemplateDataModifyAction,omitnil,omitempty" name:"TemplateDataModifyAction"`
+
+	// Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).
+	NetworkInterfaces []*NetworkInterfaces `json:"NetworkInterfaces,omitnil,omitempty" name:"NetworkInterfaces"`
 }
 
 func (r *CreateLaunchTemplateVersionRequest) ToJsonString() string {
@@ -1529,6 +1542,7 @@ func (r *CreateLaunchTemplateVersionRequest) FromJsonString(s string) error {
 	delete(f, "EnableJumboFrame")
 	delete(f, "Metadata")
 	delete(f, "TemplateDataModifyAction")
+	delete(f, "NetworkInterfaces")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLaunchTemplateVersionRequest has unknown keys!", "")
 	}
@@ -5367,6 +5381,9 @@ type InquiryPriceRunInstancesRequestParams struct {
 
 	// Instance launch template.
 	LaunchTemplate *LaunchTemplate `json:"LaunchTemplate,omitnil,omitempty" name:"LaunchTemplate"`
+
+	// Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).
+	NetworkInterfaces []*NetworkInterfaces `json:"NetworkInterfaces,omitnil,omitempty" name:"NetworkInterfaces"`
 }
 
 type InquiryPriceRunInstancesRequest struct {
@@ -5442,6 +5459,9 @@ type InquiryPriceRunInstancesRequest struct {
 
 	// Instance launch template.
 	LaunchTemplate *LaunchTemplate `json:"LaunchTemplate,omitnil,omitempty" name:"LaunchTemplate"`
+
+	// Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).
+	NetworkInterfaces []*NetworkInterfaces `json:"NetworkInterfaces,omitnil,omitempty" name:"NetworkInterfaces"`
 }
 
 func (r *InquiryPriceRunInstancesRequest) ToJsonString() string {
@@ -5478,6 +5498,7 @@ func (r *InquiryPriceRunInstancesRequest) FromJsonString(s string) error {
 	delete(f, "HpcClusterId")
 	delete(f, "CpuTopology")
 	delete(f, "LaunchTemplate")
+	delete(f, "NetworkInterfaces")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceRunInstancesRequest has unknown keys!", "")
 	}
@@ -7099,6 +7120,29 @@ func (r *ModifyLaunchTemplateDefaultVersionResponse) FromJsonString(s string) er
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type NetworkInterfaces struct {
+	// Specifies whether the network interface is primary or secondary. Valid values must be uppercase. The `NetworkInterfaces` array must contain exactly one `PRIMARY` network interface and can contain multiple `SECONDARY` network interfaces. Valid values:<li>`PRIMARY`: Primary network interface.</li><li>`SECONDARY`: Secondary network interface.</li>
+	InterfaceType *string `json:"InterfaceType,omitnil,omitempty" name:"InterfaceType"`
+
+	// VPC ID in the format of `vpc-xxx`. You can obtain a valid VPC ID from the [VPC console](https://console.tencentcloud.com/vpc/vpc?rid=1) or from the `VpcId` field returned by the [DescribeVpcs](https://www.tencentcloud.com/document/product/215/15778) API. If both `VpcId` and `SubnetId` are set to `DEFAULT` when creating an instance, the default VPC is used.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// VPC subnet ID in the format of `subnet-xxx`. You can obtain a valid subnet ID from the [subnet console](https://console.tencentcloud.com/vpc/subnet) or from the `SubnetId` field returned by the [DescribeSubnets](https://www.tencentcloud.com/document/product/215/15784) API. If both `SubnetId` and `VpcId` are set to `DEFAULT` when creating an instance, the default VPC is used.
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// Required. Specifies the number of private IPv4 addresses automatically assigned to each network interface. Manually specifying IP addresses and automatically assigning IP addresses at the same time is not supported. Valid range: [1, 50].
+	PrivateIpv4AddressCount *int64 `json:"PrivateIpv4AddressCount,omitnil,omitempty" name:"PrivateIpv4AddressCount"`
+
+	// ID of an existing elastic network interface (ENI) to be attached. This parameter applies only to secondary network interfaces. The primary network interface is created automatically through the existing process and cannot be specified using this parameter. When an existing ENI is specified, `InstanceCount` must be set to 1.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitnil,omitempty" name:"NetworkInterfaceId"`
+
+	// Security groups associated with the instance. You can obtain the security group IDs from the `SecurityGroupId` field returned by the [DescribeSecurityGroups](https://www.tencentcloud.com/document/api/215/15808) API. If this parameter is not specified, the default security group of the specified project is associated. If no default security group exists, one is automatically created. Each user can configure up to 50 security groups per project in each region.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
+
+	// Specifies whether the associated elastic network interface (ENI) is deleted when the CVM instance is terminated. This parameter applies only to secondary network interfaces. By default, secondary network interfaces are retained to preserve the existing behavior. This parameter does not apply to the primary network interface, which is always deleted when the instance is terminated. Default value: `false`.
+	DeleteWithInstance *bool `json:"DeleteWithInstance,omitnil,omitempty" name:"DeleteWithInstance"`
+}
+
 type OperationCountLimit struct {
 	// Instance operation. Valid values: <br><li>`INSTANCE_DEGRADE`: downgrade an instance<br><li>`INTERNET_CHARGE_TYPE_CHANGE`: modify the billing plan of the network connection
 	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
@@ -8220,11 +8264,17 @@ type RunInstancesRequestParams struct {
 	// Specify the CHC physical server that used to create the CHC CVM.
 	ChcIds []*string `json:"ChcIds,omitnil,omitempty" name:"ChcIds"`
 
+	// Partition number of the partition placement group. Valid values depend on the number of partitions in the selected placement group. If the selected placement group is a partition placement group and this parameter is not specified, a partition is randomly assigned. This feature is in beta test.
+	PartitionNumber *int64 `json:"PartitionNumber,omitnil,omitempty" name:"PartitionNumber"`
+
 	// Instance termination protection flag, indicating whether an instance is allowed to be deleted through an API. Valid values:<br><li>true: Instance protection is enabled, and the instance is not allowed to be deleted through the API.</li><br><li>false: Instance protection is disabled, and the instance is allowed to be deleted through the API.</li><br><br>Default value: false.
 	DisableApiTermination *bool `json:"DisableApiTermination,omitnil,omitempty" name:"DisableApiTermination"`
 
 	// Whether the instance enables jumbo frames. valid values:<br><li/> true: means the instance enables jumbo frames. only models supporting jumbo frames can be set to true.<br><li/> false: means the instance disables jumbo frames. only models supporting jumbo frames can be set to false.<br> instance specifications supporting jumbo frames: [instance specifications](https://www.tencentcloud.com/document/product/213/11518?lang=en&pg=).
 	EnableJumboFrame *bool `json:"EnableJumboFrame,omitnil,omitempty" name:"EnableJumboFrame"`
+
+	// Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).
+	NetworkInterfaces []*NetworkInterfaces `json:"NetworkInterfaces,omitnil,omitempty" name:"NetworkInterfaces"`
 }
 
 type RunInstancesRequest struct {
@@ -8341,11 +8391,17 @@ type RunInstancesRequest struct {
 	// Specify the CHC physical server that used to create the CHC CVM.
 	ChcIds []*string `json:"ChcIds,omitnil,omitempty" name:"ChcIds"`
 
+	// Partition number of the partition placement group. Valid values depend on the number of partitions in the selected placement group. If the selected placement group is a partition placement group and this parameter is not specified, a partition is randomly assigned. This feature is in beta test.
+	PartitionNumber *int64 `json:"PartitionNumber,omitnil,omitempty" name:"PartitionNumber"`
+
 	// Instance termination protection flag, indicating whether an instance is allowed to be deleted through an API. Valid values:<br><li>true: Instance protection is enabled, and the instance is not allowed to be deleted through the API.</li><br><li>false: Instance protection is disabled, and the instance is allowed to be deleted through the API.</li><br><br>Default value: false.
 	DisableApiTermination *bool `json:"DisableApiTermination,omitnil,omitempty" name:"DisableApiTermination"`
 
 	// Whether the instance enables jumbo frames. valid values:<br><li/> true: means the instance enables jumbo frames. only models supporting jumbo frames can be set to true.<br><li/> false: means the instance disables jumbo frames. only models supporting jumbo frames can be set to false.<br> instance specifications supporting jumbo frames: [instance specifications](https://www.tencentcloud.com/document/product/213/11518?lang=en&pg=).
 	EnableJumboFrame *bool `json:"EnableJumboFrame,omitnil,omitempty" name:"EnableJumboFrame"`
+
+	// Network interface configuration for instance creation, including VPCs, subnets, and IP address allocation for primary and secondary network interfaces. This feature is in beta test in selected regions. To use this feature, [submit a ticket](https://console.tencentcloud.com/workorder/category).
+	NetworkInterfaces []*NetworkInterfaces `json:"NetworkInterfaces,omitnil,omitempty" name:"NetworkInterfaces"`
 }
 
 func (r *RunInstancesRequest) ToJsonString() string {
@@ -8390,8 +8446,10 @@ func (r *RunInstancesRequest) FromJsonString(s string) error {
 	delete(f, "LaunchTemplate")
 	delete(f, "DedicatedClusterId")
 	delete(f, "ChcIds")
+	delete(f, "PartitionNumber")
 	delete(f, "DisableApiTermination")
 	delete(f, "EnableJumboFrame")
+	delete(f, "NetworkInterfaces")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RunInstancesRequest has unknown keys!", "")
 	}
