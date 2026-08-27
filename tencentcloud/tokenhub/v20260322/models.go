@@ -1548,6 +1548,151 @@ func (r *DescribeTokenPlanResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeUsageRankListRequestParams struct {
+	// <p>Statistical dimension. Values: apikey (statistics by APIKey), endpoint (statistics by access point), model (statistics by model).</p>
+	Dimension *string `json:"Dimension,omitnil,omitempty" name:"Dimension"`
+
+	// <p>Start time (inclusive interval), in RFC3339 format.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time (open interval) in RFC3339 format. The maximum span from StartTime is 90 days.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Metric family switch field.</p><ul><li>tokens (default): Token consumption chart (statistics=sum), supports Dimension = apikey/endpoint/model</li><li>search [to be launched]: Online search call count (statistics=sum), only supports Dimension = model</li><li>Other values return InvalidParameter.</li></ul><p>Enum values:</p><ul><li>tokens: tokens</li></ul>
+	MetricType *string `json:"MetricType,omitnil,omitempty" name:"MetricType"`
+
+	// <p>Dimension filtering value. An empty string indicates querying all objects; a non-empty string indicates querying only the specified single object (for example, a designated APIKey ID). Maximum 256 characters.</p>
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+
+	// <p>Statistical granularity (seconds). Value: 60, 300, 3600, 86400. Must not be less than the lower limit corresponding to the span: span ≤ 1 day → 60; 1–5 days → 300; 5–10 days → 3600; &gt; 10 days → 86400. Used only when ShowAll=false.</p>
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
+
+	// <p>Pagination starting point, starting from 0, default 0. Ignore timing when ShowAll=true. Page size fixed as 10.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Whether to return full result.</p><ul><li>false (default): Return TopList in pages by Offset (10 items per page). Each object contains <br>Series time series points for drawing curves.</li><li>true: Ignore Offset and return the full object list without Series (CSV export scenario).</li></ul>
+	ShowAll *bool `json:"ShowAll,omitnil,omitempty" name:"ShowAll"`
+}
+
+type DescribeUsageRankListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Statistical dimension. Values: apikey (statistics by APIKey), endpoint (statistics by access point), model (statistics by model).</p>
+	Dimension *string `json:"Dimension,omitnil,omitempty" name:"Dimension"`
+
+	// <p>Start time (inclusive interval), in RFC3339 format.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time (open interval) in RFC3339 format. The maximum span from StartTime is 90 days.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Metric family switch field.</p><ul><li>tokens (default): Token consumption chart (statistics=sum), supports Dimension = apikey/endpoint/model</li><li>search [to be launched]: Online search call count (statistics=sum), only supports Dimension = model</li><li>Other values return InvalidParameter.</li></ul><p>Enum values:</p><ul><li>tokens: tokens</li></ul>
+	MetricType *string `json:"MetricType,omitnil,omitempty" name:"MetricType"`
+
+	// <p>Dimension filtering value. An empty string indicates querying all objects; a non-empty string indicates querying only the specified single object (for example, a designated APIKey ID). Maximum 256 characters.</p>
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
+
+	// <p>Statistical granularity (seconds). Value: 60, 300, 3600, 86400. Must not be less than the lower limit corresponding to the span: span ≤ 1 day → 60; 1–5 days → 300; 5–10 days → 3600; &gt; 10 days → 86400. Used only when ShowAll=false.</p>
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
+
+	// <p>Pagination starting point, starting from 0, default 0. Ignore timing when ShowAll=true. Page size fixed as 10.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Whether to return full result.</p><ul><li>false (default): Return TopList in pages by Offset (10 items per page). Each object contains <br>Series time series points for drawing curves.</li><li>true: Ignore Offset and return the full object list without Series (CSV export scenario).</li></ul>
+	ShowAll *bool `json:"ShowAll,omitnil,omitempty" name:"ShowAll"`
+}
+
+func (r *DescribeUsageRankListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUsageRankListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Dimension")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "MetricType")
+	delete(f, "Target")
+	delete(f, "Period")
+	delete(f, "Offset")
+	delete(f, "ShowAll")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUsageRankListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUsageRankListResponseParams struct {
+	// <p>Statistical dimension of the backfill request.</p>
+	Dimension *string `json:"Dimension,omitnil,omitempty" name:"Dimension"`
+
+	// <p>Metrics family of the backfill request: tokens / search.</p>
+	MetricType *string `json:"MetricType,omitnil,omitempty" name:"MetricType"`
+
+	// <p>List of metric keys actually included in Stats / Series / PageStats / TotalStats in this response, case-sensitive by MetricType: tokens=[Total,Input,Output,Cache], search=[SearchRequestCount,SearchCount]</p>
+	MetricKeys []*string `json:"MetricKeys,omitnil,omitempty" name:"MetricKeys"`
+
+	// <p>View (data source)</p>
+	ViewName *string `json:"ViewName,omitnil,omitempty" name:"ViewName"`
+
+	// <p>Statistical granularity (in seconds) of the backfill request. It is 0 when ShowAll=true.</p>
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
+
+	// <p>Backfill the start time of the request.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time of the backfill request.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Total number of objects.</p>
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// <p>Backfill the pagination starting point of the request. It is 0 when ShowAll=true.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Page size. It is always 10. When ShowAll=true, it is Total.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Timestamp sequence corresponding to the Series array (Unix seconds). Empty array when ShowAll=true.</p>
+	Timestamps []*int64 `json:"Timestamps,omitnil,omitempty" name:"Timestamps"`
+
+	// <p>Object ranking list, sorted by <code>MetricKeys[0]</code> in descending order. When ShowAll=false, it is the 10 objects on the current page (including Series); when ShowAll=true, it is all objects (excluding Series, used for CSV export).</p>
+	TopList []*UsageRankItem `json:"TopList,omitnil,omitempty" name:"TopList"`
+
+	// <p>Pagination statistics result</p>
+	PageStats *UsageStats `json:"PageStats,omitnil,omitempty" name:"PageStats"`
+
+	// <p>Total statistics result</p>
+	TotalStats *UsageStats `json:"TotalStats,omitnil,omitempty" name:"TotalStats"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeUsageRankListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUsageRankListResponseParams `json:"Response"`
+}
+
+func (r *DescribeUsageRankListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUsageRankListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type GlossaryEntryInput struct {
 	// Source language terminology. Maximum 1000 characters.
 	SourceTerm *string `json:"SourceTerm,omitnil,omitempty" name:"SourceTerm"`
@@ -2360,4 +2505,62 @@ func (r *UpgradeTokenPlanTeamOrderResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *UpgradeTokenPlanTeamOrderResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type UsageRankItem struct {
+	// Global ranking (starting from 1). In pagination scenarios, this is still the position in the full sorting order, not the serial number within the page.
+	Rank *int64 `json:"Rank,omitnil,omitempty" name:"Rank"`
+
+	// Object identifier. The apikey dimension is the APIKey ID; the endpoint dimension is the access point; the model dimension is the model name.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Display name of the object. In the apikey dimension, return the APIKey name (deleted APIKeys retain their original names);
+	// Key whose endpoint and model dimensions are equal.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Statistical value within a time period
+	Stats *UsageStats `json:"Stats,omitnil,omitempty" name:"Stats"`
+
+	// List of time series points within a time period
+	Series *UsageSeries `json:"Series,omitnil,omitempty" name:"Series"`
+}
+
+type UsageSeries struct {
+	// <p>Amount of total tokens used within a time period in JSON string form, for example, <code>&quot;[12,null,15]&quot;</code>.</p>
+	TotalToken *string `json:"TotalToken,omitnil,omitempty" name:"TotalToken"`
+
+	// <p>Amount of input tokens used within a time period in JSON string form, for example, <code>&quot;[7,null,9]&quot;</code>.</p>
+	InputTotalToken *string `json:"InputTotalToken,omitnil,omitempty" name:"InputTotalToken"`
+
+	// <p>Amount of output tokens used within a time period in JSON string form, for example, <code>&quot;[5,null,6]&quot;</code>.</p>
+	OutputTotalToken *string `json:"OutputTotalToken,omitnil,omitempty" name:"OutputTotalToken"`
+
+	// <p>Read cache token count usage of the tokens family in JSON string form within a time period, for example, <code>&quot;[5,null,6]&quot;</code>.</p>
+	CacheTotalToken *string `json:"CacheTotalToken,omitnil,omitempty" name:"CacheTotalToken"`
+
+	// <p>Usage of search requests in JSON string form within a time period, for example, <code>&quot;[5,null,6]&quot;</code>.</p>
+	SearchRequestCount *string `json:"SearchRequestCount,omitnil,omitempty" name:"SearchRequestCount"`
+
+	// <p>Usage of search engine call count in JSON string form within a time period, for example, <code>&quot;[5,null,6]&quot;</code>.</p>
+	SearchCount *string `json:"SearchCount,omitnil,omitempty" name:"SearchCount"`
+}
+
+type UsageStats struct {
+	// <p>Total tokens accumulated within a time period.</p>
+	TotalToken *int64 `json:"TotalToken,omitnil,omitempty" name:"TotalToken"`
+
+	// <p>[tokens family] Total input tokens within a time period.</p>
+	InputTotalToken *int64 `json:"InputTotalToken,omitnil,omitempty" name:"InputTotalToken"`
+
+	// <p>[tokens family] Total output tokens within a time period.</p>
+	OutputTotalToken *int64 `json:"OutputTotalToken,omitnil,omitempty" name:"OutputTotalToken"`
+
+	// <p>[token family] Cumulative number of tokens read from the cache within a time period (cache hit part)</p>
+	CacheTotalToken *int64 `json:"CacheTotalToken,omitnil,omitempty" name:"CacheTotalToken"`
+
+	// <p>Total online search requests in the [search group]</p>
+	SearchRequestCount *int64 `json:"SearchRequestCount,omitnil,omitempty" name:"SearchRequestCount"`
+
+	// <p>[search family] Total search engine calls</p>
+	SearchCount *int64 `json:"SearchCount,omitnil,omitempty" name:"SearchCount"`
 }

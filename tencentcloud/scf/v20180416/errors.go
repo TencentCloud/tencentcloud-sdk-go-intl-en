@@ -92,6 +92,9 @@ const (
 	// Failed to delete the trigger.
 	FAILEDOPERATION_DELETETRIGGER = "FailedOperation.DeleteTrigger"
 
+	// 
+	FAILEDOPERATION_DELETETRIGGER_URLUSED = "FailedOperation.DeleteTrigger.UrlUsed"
+
 	// You cannot update code in the current function state. Please try again when the state is normal.
 	FAILEDOPERATION_FUNCTIONNAMESTATUSERROR = "FailedOperation.FunctionNameStatusError"
 

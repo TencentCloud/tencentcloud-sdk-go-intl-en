@@ -1291,6 +1291,118 @@ func (c *Client) DescribeTokenPlanListWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeUsageRankListRequest() (request *DescribeUsageRankListRequest) {
+    request = &DescribeUsageRankListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tokenhub", APIVersion, "DescribeUsageRankList")
+    
+    
+    return
+}
+
+func NewDescribeUsageRankListResponse() (response *DescribeUsageRankListResponse) {
+    response = &DescribeUsageRankListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeUsageRankList
+// Query the usage ranking list.
+//
+// 
+//
+// Metric family (MetricType)
+//
+// - `tokens` (default): Token usage statistics. Supports Dimension = apikey / endpoint / model.
+//
+// Metrics returned: TotalToken (total) / InputTotalToken (input) / OutputTotalToken (output) / CacheTotalToken (read cache).
+//
+// - `search`: [To be launched] Online search usage statistics. Supports Dimension = apikey / endpoint / model.
+//
+// Returns metrics: SearchRequestCount (search request count)/SearchCount (search engine call count).
+//
+// 
+//
+// content
+//
+// -The MetricType field is used to switch metric families. The response echoes back MetricType and MetricKeys.
+//
+// -TotalStats: The aggregated value of all objects over the entire time window.
+//
+// -PageStats: The aggregated value of objects on the current page.
+//
+// - TopList: A list of objects sorted by MetricKeys[0] in descending order, including the aggregated value over the entire period and point-in-time curves.
+//
+// error code that may be returned:
+//  INTERNALERROR_BARADERROR = "InternalError.BaradError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_PERIODEXCEEDSSPAN = "InvalidParameter.PeriodExceedsSpan"
+//  INVALIDPARAMETER_PERIODTOOFINEFORDATA = "InvalidParameter.PeriodTooFineForData"
+//  INVALIDPARAMETER_TOOMANYOBJECTS = "InvalidParameter.TooManyObjects"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeUsageRankList(request *DescribeUsageRankListRequest) (response *DescribeUsageRankListResponse, err error) {
+    return c.DescribeUsageRankListWithContext(context.Background(), request)
+}
+
+// DescribeUsageRankList
+// Query the usage ranking list.
+//
+// 
+//
+// Metric family (MetricType)
+//
+// - `tokens` (default): Token usage statistics. Supports Dimension = apikey / endpoint / model.
+//
+// Metrics returned: TotalToken (total) / InputTotalToken (input) / OutputTotalToken (output) / CacheTotalToken (read cache).
+//
+// - `search`: [To be launched] Online search usage statistics. Supports Dimension = apikey / endpoint / model.
+//
+// Returns metrics: SearchRequestCount (search request count)/SearchCount (search engine call count).
+//
+// 
+//
+// content
+//
+// -The MetricType field is used to switch metric families. The response echoes back MetricType and MetricKeys.
+//
+// -TotalStats: The aggregated value of all objects over the entire time window.
+//
+// -PageStats: The aggregated value of objects on the current page.
+//
+// - TopList: A list of objects sorted by MetricKeys[0] in descending order, including the aggregated value over the entire period and point-in-time curves.
+//
+// error code that may be returned:
+//  INTERNALERROR_BARADERROR = "InternalError.BaradError"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETER_PERIODEXCEEDSSPAN = "InvalidParameter.PeriodExceedsSpan"
+//  INVALIDPARAMETER_PERIODTOOFINEFORDATA = "InvalidParameter.PeriodTooFineForData"
+//  INVALIDPARAMETER_TOOMANYOBJECTS = "InvalidParameter.TooManyObjects"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DescribeUsageRankListWithContext(ctx context.Context, request *DescribeUsageRankListRequest) (response *DescribeUsageRankListResponse, err error) {
+    if request == nil {
+        request = NewDescribeUsageRankListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tokenhub", APIVersion, "DescribeUsageRankList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUsageRankList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUsageRankListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyApiKeyInfoRequest() (request *ModifyApiKeyInfoRequest) {
     request = &ModifyApiKeyInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
