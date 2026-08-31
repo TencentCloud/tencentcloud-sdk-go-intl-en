@@ -115,6 +115,62 @@ func (c *Client) ApplyPublicIpsWithContext(ctx context.Context, request *ApplyPu
     return
 }
 
+func NewCreateEdgeNodeServiceRequest() (request *CreateEdgeNodeServiceRequest) {
+    request = &CreateEdgeNodeServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("edgezone", APIVersion, "CreateEdgeNodeService")
+    
+    
+    return
+}
+
+func NewCreateEdgeNodeServiceResponse() (response *CreateEdgeNodeServiceResponse) {
+    response = &CreateEdgeNodeServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateEdgeNodeService
+// Enable the billing service for edge nodes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_ZONE = "ResourceNotFound.Zone"
+func (c *Client) CreateEdgeNodeService(request *CreateEdgeNodeServiceRequest) (response *CreateEdgeNodeServiceResponse, err error) {
+    return c.CreateEdgeNodeServiceWithContext(context.Background(), request)
+}
+
+// CreateEdgeNodeService
+// Enable the billing service for edge nodes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_ZONE = "ResourceNotFound.Zone"
+func (c *Client) CreateEdgeNodeServiceWithContext(ctx context.Context, request *CreateEdgeNodeServiceRequest) (response *CreateEdgeNodeServiceResponse, err error) {
+    if request == nil {
+        request = NewCreateEdgeNodeServiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "edgezone", APIVersion, "CreateEdgeNodeService")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateEdgeNodeService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateEdgeNodeServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateInstancesRequest() (request *CreateInstancesRequest) {
     request = &CreateInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},

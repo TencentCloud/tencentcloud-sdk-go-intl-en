@@ -1585,25 +1585,25 @@ func (r *MLIDPassportOCRRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type MLIDPassportOCRResponseParams struct {
-	// Passport ID
+	// Parsed passport ID extracted from the MRZ (Machine-Readable Zone) of passport
 	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
 
-	// Name
+	// Parsed full name extracted from the MRZ (Machine-Readable Zone) of passport
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Date of birth
+	// Parsed date of birth extracted from the MRZ (Machine-Readable Zone) of passport
 	DateOfBirth *string `json:"DateOfBirth,omitnil,omitempty" name:"DateOfBirth"`
 
-	// Gender (F: female, M: male)
+	// Parsed gender extracted from the MRZ (Machine-Readable Zone) of passport
 	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
 
-	// Expiration date
+	// Parsed expiry date extracted from the MRZ (Machine-Readable Zone) of passport
 	DateOfExpiration *string `json:"DateOfExpiration,omitnil,omitempty" name:"DateOfExpiration"`
 
-	// Issuing country
+	// Parsed issuing country extracted from the MRZ (Machine-Readable Zone) of passport
 	IssuingCountry *string `json:"IssuingCountry,omitnil,omitempty" name:"IssuingCountry"`
 
-	// Nationality code (MRZ field)
+	// Parsed country-region code extracted from the MRZ (Machine-Readable Zone) of passport
 	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
 	// This field is deprecated and will always return an empty array. Usage is not recommended.
@@ -1619,21 +1619,19 @@ type MLIDPassportOCRResponseParams struct {
 	// Deprecated: AdvancedInfo is deprecated.
 	AdvancedInfo *string `json:"AdvancedInfo,omitnil,omitempty" name:"AdvancedInfo"`
 
-	// The first row of the machine-readable zone (MRZ) at the bottom
+	// Parsed MRZ line 1 raw sequence extracted from the MRZ (Machine-Readable Zone) of passport
 	CodeSet *string `json:"CodeSet,omitnil,omitempty" name:"CodeSet"`
 
-	// The second row of the MRZ at the bottom
+	// Parsed MRZ line 2 raw sequence extracted from the MRZ (Machine-Readable Zone) of passport
 	CodeCrc *string `json:"CodeCrc,omitnil,omitempty" name:"CodeCrc"`
 
-	// The surname.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Parsed surname extracted from the MRZ (Machine-Readable Zone) of passport
 	Surname *string `json:"Surname,omitnil,omitempty" name:"Surname"`
 
-	// The given name.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Parsed given name extracted from the MRZ (Machine-Readable Zone) of passport
 	GivenName *string `json:"GivenName,omitnil,omitempty" name:"GivenName"`
 
-	// Type (in Machine Readable Zone)
+	// Parsed document type extracted from the MRZ (Machine-Readable Zone) of passport
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Document content in the visual zone
@@ -1644,7 +1642,7 @@ type MLIDPassportOCRResponseParams struct {
 	// -9101 Alarm for covered certificate
 	// -9102 Alarm for photocopied certificate
 	// -9103 Alarm for photographed certificate
-	// -9104 Alarm for tamper certificate
+	// -9104 Alarm for PS certificate
 	// -9107 Alarm for reflective certificate
 	// -9108 Alarm for blurry certificate 
 	// -9109 This capability is not enabled. Please contact customer support to activate the alert service.

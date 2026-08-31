@@ -7669,6 +7669,68 @@ func (c *Client) DescribeHostsSettingWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeIPGroupReferencesRequest() (request *DescribeIPGroupReferencesRequest) {
+    request = &DescribeIPGroupReferencesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeIPGroupReferences")
+    
+    
+    return
+}
+
+func NewDescribeIPGroupReferencesResponse() (response *DescribeIPGroupReferencesResponse) {
+    response = &DescribeIPGroupReferencesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeIPGroupReferences
+// This API is used to query policy configurations that reference a specified IP group.
+//
+// error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribeIPGroupReferences(request *DescribeIPGroupReferencesRequest) (response *DescribeIPGroupReferencesResponse, err error) {
+    return c.DescribeIPGroupReferencesWithContext(context.Background(), request)
+}
+
+// DescribeIPGroupReferences
+// This API is used to query policy configurations that reference a specified IP group.
+//
+// error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribeIPGroupReferencesWithContext(ctx context.Context, request *DescribeIPGroupReferencesRequest) (response *DescribeIPGroupReferencesResponse, err error) {
+    if request == nil {
+        request = NewDescribeIPGroupReferencesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeIPGroupReferences")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIPGroupReferences require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeIPGroupReferencesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeIPRegionRequest() (request *DescribeIPRegionRequest) {
     request = &DescribeIPRegionRequest{
         BaseRequest: &tchttp.BaseRequest{},
