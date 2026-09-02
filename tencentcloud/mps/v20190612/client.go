@@ -8603,6 +8603,68 @@ func (c *Client) ProcessMediaWithContext(ctx context.Context, request *ProcessMe
     return
 }
 
+func NewQueryHunyuan3DTaskRequest() (request *QueryHunyuan3DTaskRequest) {
+    request = &QueryHunyuan3DTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "QueryHunyuan3DTask")
+    
+    
+    return
+}
+
+func NewQueryHunyuan3DTaskResponse() (response *QueryHunyuan3DTaskResponse) {
+    response = &QueryHunyuan3DTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryHunyuan3DTask
+// Query the result corresponding to a Hunyuan3D task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+func (c *Client) QueryHunyuan3DTask(request *QueryHunyuan3DTaskRequest) (response *QueryHunyuan3DTaskResponse, err error) {
+    return c.QueryHunyuan3DTaskWithContext(context.Background(), request)
+}
+
+// QueryHunyuan3DTask
+// Query the result corresponding to a Hunyuan3D task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+func (c *Client) QueryHunyuan3DTaskWithContext(ctx context.Context, request *QueryHunyuan3DTaskRequest) (response *QueryHunyuan3DTaskResponse, err error) {
+    if request == nil {
+        request = NewQueryHunyuan3DTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "QueryHunyuan3DTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryHunyuan3DTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryHunyuan3DTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryProjectRequest() (request *QueryProjectRequest) {
     request = &QueryProjectRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8779,6 +8841,62 @@ func (c *Client) ResetWorkflowWithContext(ctx context.Context, request *ResetWor
     request.SetContext(ctx)
     
     response = NewResetWorkflowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSubmitHunyuan3DTaskRequest() (request *SubmitHunyuan3DTaskRequest) {
+    request = &SubmitHunyuan3DTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "SubmitHunyuan3DTask")
+    
+    
+    return
+}
+
+func NewSubmitHunyuan3DTaskResponse() (response *SubmitHunyuan3DTaskResponse) {
+    response = &SubmitHunyuan3DTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SubmitHunyuan3DTask
+// Submit creation of a Hunyuan 3D task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) SubmitHunyuan3DTask(request *SubmitHunyuan3DTaskRequest) (response *SubmitHunyuan3DTaskResponse, err error) {
+    return c.SubmitHunyuan3DTaskWithContext(context.Background(), request)
+}
+
+// SubmitHunyuan3DTask
+// Submit creation of a Hunyuan 3D task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) SubmitHunyuan3DTaskWithContext(ctx context.Context, request *SubmitHunyuan3DTaskRequest) (response *SubmitHunyuan3DTaskResponse, err error) {
+    if request == nil {
+        request = NewSubmitHunyuan3DTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "SubmitHunyuan3DTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SubmitHunyuan3DTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSubmitHunyuan3DTaskResponse()
     err = c.Send(request, response)
     return
 }
