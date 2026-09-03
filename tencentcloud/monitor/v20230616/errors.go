@@ -17,9 +17,18 @@ package v20230616
 const (
 	// error codes for specific actions
 
+	// Operation failed.
+	FAILEDOPERATION = "FailedOperation"
+
 	// Internal error.
 	INTERNALERROR = "InternalError"
 
 	// Parameter error.
 	INVALIDPARAMETER = "InvalidParameter"
+
+	// InvalidParameter.Param
+	INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+
+	// Unauthorized operation.
+	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 )

@@ -1896,6 +1896,7 @@ func NewSendStatusStatisticsResponse() (response *SendStatusStatisticsResponse) 
 //  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppIdIsDisabled"
 //  UNAUTHORIZEDOPERATION_SERVICESUSPENDDUETOARREARS = "UnauthorizedOperation.ServiceSuspendDueToArrears"
 //  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppIdVerifyFail"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) SendStatusStatistics(request *SendStatusStatisticsRequest) (response *SendStatusStatisticsResponse, err error) {
     return c.SendStatusStatisticsWithContext(context.Background(), request)
@@ -1935,6 +1936,7 @@ func (c *Client) SendStatusStatistics(request *SendStatusStatisticsRequest) (res
 //  UNAUTHORIZEDOPERATION_SDKAPPIDISDISABLED = "UnauthorizedOperation.SdkAppIdIsDisabled"
 //  UNAUTHORIZEDOPERATION_SERVICESUSPENDDUETOARREARS = "UnauthorizedOperation.ServiceSuspendDueToArrears"
 //  UNAUTHORIZEDOPERATION_SMSSDKAPPIDVERIFYFAIL = "UnauthorizedOperation.SmsSdkAppIdVerifyFail"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_ = "UnsupportedOperation."
 func (c *Client) SendStatusStatisticsWithContext(ctx context.Context, request *SendStatusStatisticsRequest) (response *SendStatusStatisticsResponse, err error) {
     if request == nil {

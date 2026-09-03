@@ -53,6 +53,12 @@ type AuthTokenLimit struct {
 	Max *uint64 `json:"Max,omitnil,omitempty" name:"Max"`
 }
 
+type CBSConfig struct {
+	// Storage size.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VolumeSizeInGB *int64 `json:"VolumeSizeInGB,omitnil,omitempty" name:"VolumeSizeInGB"`
+}
+
 type CFSConfig struct {
 	// CFS instance ID.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
@@ -65,6 +71,24 @@ type CFSConfig struct {
 
 	// Protocol. Valid values: NFS and TURBO.Note: This field may return null, indicating that no valid values can be obtained.
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+}
+
+type CFSTurbo struct {
+	// CFSTurbo instance ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// CFSTurbo path.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+}
+
+type CodeRepoConfig struct {
+	// Code repository ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Target address for the code repository download.
+	TargetPath *string `json:"TargetPath,omitnil,omitempty" name:"TargetPath"`
 }
 
 type Container struct {
@@ -110,6 +134,268 @@ type CosPathInfo struct {
 	Paths []*string `json:"Paths,omitnil,omitempty" name:"Paths"`
 }
 
+// Predefined struct for user
+type CreateTrainingTaskRequestParams struct {
+	// Training task name. The name cannot exceed 60 characters in length, and can contain only Chinese characters, letters, digits, underscores (_), and hyphens (-). It must start with a Chinese character, letter, or digit.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Billing mode. For example, PREPAID indicates yearly/monthly subscription (resource group).
+	// POSTPAID_BY_HOUR indicates pay-as-you-go mode.
+	ChargeType *string `json:"ChargeType,omitnil,omitempty" name:"ChargeType"`
+
+	// Resource configuration. Specify the CVM instance specification ID and number of nodes. The API for querying the CVM instance specification ID is DescribeBillingSpecsPrice. For example, [{"Role":"WORKER", "InstanceType": "TI.S.MEDIUM.POST", "InstanceNum": 1}].
+	ResourceConfigInfos []*ResourceConfigInfo `json:"ResourceConfigInfos,omitnil,omitempty" name:"ResourceConfigInfos"`
+
+	// TI Workspace ID. Used solely for the "Workspace" allowlist feature. To use this feature, please contact a TI administrator to enable allowlisting.
+	TiProjectId *string `json:"TiProjectId,omitnil,omitempty" name:"TiProjectId"`
+
+	// Training framework name, which can be queried via the DescribeTrainingFrameworks API. For example, SPARK, PYSPARK, TENSORFLOW, and PYTORCH.
+	FrameworkName *string `json:"FrameworkName,omitnil,omitempty" name:"FrameworkName"`
+
+	// Training framework version, which can be queried via the DescribeTrainingFrameworks API. For example, 1.15 and 1.9.
+	FrameworkVersion *string `json:"FrameworkVersion,omitnil,omitempty" name:"FrameworkVersion"`
+
+	// Training framework environment, which can be queried via the DescribeTrainingFrameworks API. For example, tf1.15-py3.7-cpu and torch1.9-py3.8-cuda11.1-gpu.
+	FrameworkEnvironment *string `json:"FrameworkEnvironment,omitnil,omitempty" name:"FrameworkEnvironment"`
+
+	// ID of the prepaid dedicated resource group, which can be queried via the DescribeBillingResourceGroups API.
+	ResourceGroupId *string `json:"ResourceGroupId,omitnil,omitempty" name:"ResourceGroupId"`
+
+	// Tag configuration.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Custom image information.
+	ImageInfo *ImageInfo `json:"ImageInfo,omitnil,omitempty" name:"ImageInfo"`
+
+	// COS code package path.
+	CodePackagePath *CosPathInfo `json:"CodePackagePath,omitnil,omitempty" name:"CodePackagePath"`
+
+	// Task startup command. Specify this parameter based on the task training mode. If the configuration fails due to special characters, use the EncodedStartCmdInfo parameter instead.
+	StartCmdInfo *StartCmdInfo `json:"StartCmdInfo,omitnil,omitempty" name:"StartCmdInfo"`
+
+	// Training mode, which can be queried via the DescribeTrainingFrameworks API. For example, PS_WORKER, DDP, MPI, and HOROVOD.
+	TrainingMode *string `json:"TrainingMode,omitnil,omitempty" name:"TrainingMode"`
+
+	// Data configurations. This parameter depends on the DataSource field. The maximum number of configurations is 10.
+	DataConfigs []*DataConfig `json:"DataConfigs,omitnil,omitempty" name:"DataConfigs"`
+
+	// VPC Id
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Subnet ID.
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// COS training output path.
+	Output *CosPathInfo `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// CLS logging configuration.
+	LogConfig *LogConfig `json:"LogConfig,omitnil,omitempty" name:"LogConfig"`
+
+	// Tuning parameters. The value of this parameter cannot exceed 2048 characters in length.
+	TuningParameters *string `json:"TuningParameters,omitnil,omitempty" name:"TuningParameters"`
+
+	// Indicates whether to report logs.
+	LogEnable *bool `json:"LogEnable,omitnil,omitempty" name:"LogEnable"`
+
+	// Remarks. The value of this parameter cannot exceed 1024 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Data source. For example, DATASET, COS, CFS, CFSTurbo, HDFS, and GooseFSx.
+	DataSource *string `json:"DataSource,omitnil,omitempty" name:"DataSource"`
+
+	// Callback URL. This parameter is used for the asynchronous callback to create, start, or stop training tasks. For the callback format and content, see [[TI-ONE API Callback Description]](https://www.tencentcloud.com/document/product/851/84292?from_cn_redirect=1).
+	CallbackUrl *string `json:"CallbackUrl,omitnil,omitempty" name:"CallbackUrl"`
+
+	// Encoded task startup command. If StartCmdInfo is also configured, only this parameter takes effect.
+	EncodedStartCmdInfo *EncodedStartCmdInfo `json:"EncodedStartCmdInfo,omitnil,omitempty" name:"EncodedStartCmdInfo"`
+
+	// Code repository configuration.
+	CodeRepos []*CodeRepoConfig `json:"CodeRepos,omitnil,omitempty" name:"CodeRepos"`
+
+	// Network exposure configuration.
+	ExposeNetworkConfig *ExposeNetworkConfig `json:"ExposeNetworkConfig,omitnil,omitempty" name:"ExposeNetworkConfig"`
+
+	// Environment Variables.
+	Envs []*EnvVar `json:"Envs,omitnil,omitempty" name:"Envs"`
+
+	// Train tool configuration.
+	TrainToolConfig *TrainToolConfig `json:"TrainToolConfig,omitnil,omitempty" name:"TrainToolConfig"`
+
+	// Training Diagnostic Tool Configuration.
+	ResourceSupplyAttribute *ResourceSupplyAttribute `json:"ResourceSupplyAttribute,omitnil,omitempty" name:"ResourceSupplyAttribute"`
+
+	// Queue ID.
+	Queues []*string `json:"Queues,omitnil,omitempty" name:"Queues"`
+}
+
+type CreateTrainingTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Training task name. The name cannot exceed 60 characters in length, and can contain only Chinese characters, letters, digits, underscores (_), and hyphens (-). It must start with a Chinese character, letter, or digit.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Billing mode. For example, PREPAID indicates yearly/monthly subscription (resource group).
+	// POSTPAID_BY_HOUR indicates pay-as-you-go mode.
+	ChargeType *string `json:"ChargeType,omitnil,omitempty" name:"ChargeType"`
+
+	// Resource configuration. Specify the CVM instance specification ID and number of nodes. The API for querying the CVM instance specification ID is DescribeBillingSpecsPrice. For example, [{"Role":"WORKER", "InstanceType": "TI.S.MEDIUM.POST", "InstanceNum": 1}].
+	ResourceConfigInfos []*ResourceConfigInfo `json:"ResourceConfigInfos,omitnil,omitempty" name:"ResourceConfigInfos"`
+
+	// TI Workspace ID. Used solely for the "Workspace" allowlist feature. To use this feature, please contact a TI administrator to enable allowlisting.
+	TiProjectId *string `json:"TiProjectId,omitnil,omitempty" name:"TiProjectId"`
+
+	// Training framework name, which can be queried via the DescribeTrainingFrameworks API. For example, SPARK, PYSPARK, TENSORFLOW, and PYTORCH.
+	FrameworkName *string `json:"FrameworkName,omitnil,omitempty" name:"FrameworkName"`
+
+	// Training framework version, which can be queried via the DescribeTrainingFrameworks API. For example, 1.15 and 1.9.
+	FrameworkVersion *string `json:"FrameworkVersion,omitnil,omitempty" name:"FrameworkVersion"`
+
+	// Training framework environment, which can be queried via the DescribeTrainingFrameworks API. For example, tf1.15-py3.7-cpu and torch1.9-py3.8-cuda11.1-gpu.
+	FrameworkEnvironment *string `json:"FrameworkEnvironment,omitnil,omitempty" name:"FrameworkEnvironment"`
+
+	// ID of the prepaid dedicated resource group, which can be queried via the DescribeBillingResourceGroups API.
+	ResourceGroupId *string `json:"ResourceGroupId,omitnil,omitempty" name:"ResourceGroupId"`
+
+	// Tag configuration.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Custom image information.
+	ImageInfo *ImageInfo `json:"ImageInfo,omitnil,omitempty" name:"ImageInfo"`
+
+	// COS code package path.
+	CodePackagePath *CosPathInfo `json:"CodePackagePath,omitnil,omitempty" name:"CodePackagePath"`
+
+	// Task startup command. Specify this parameter based on the task training mode. If the configuration fails due to special characters, use the EncodedStartCmdInfo parameter instead.
+	StartCmdInfo *StartCmdInfo `json:"StartCmdInfo,omitnil,omitempty" name:"StartCmdInfo"`
+
+	// Training mode, which can be queried via the DescribeTrainingFrameworks API. For example, PS_WORKER, DDP, MPI, and HOROVOD.
+	TrainingMode *string `json:"TrainingMode,omitnil,omitempty" name:"TrainingMode"`
+
+	// Data configurations. This parameter depends on the DataSource field. The maximum number of configurations is 10.
+	DataConfigs []*DataConfig `json:"DataConfigs,omitnil,omitempty" name:"DataConfigs"`
+
+	// VPC Id
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Subnet ID.
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// COS training output path.
+	Output *CosPathInfo `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// CLS logging configuration.
+	LogConfig *LogConfig `json:"LogConfig,omitnil,omitempty" name:"LogConfig"`
+
+	// Tuning parameters. The value of this parameter cannot exceed 2048 characters in length.
+	TuningParameters *string `json:"TuningParameters,omitnil,omitempty" name:"TuningParameters"`
+
+	// Indicates whether to report logs.
+	LogEnable *bool `json:"LogEnable,omitnil,omitempty" name:"LogEnable"`
+
+	// Remarks. The value of this parameter cannot exceed 1024 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Data source. For example, DATASET, COS, CFS, CFSTurbo, HDFS, and GooseFSx.
+	DataSource *string `json:"DataSource,omitnil,omitempty" name:"DataSource"`
+
+	// Callback URL. This parameter is used for the asynchronous callback to create, start, or stop training tasks. For the callback format and content, see [[TI-ONE API Callback Description]](https://www.tencentcloud.com/document/product/851/84292?from_cn_redirect=1).
+	CallbackUrl *string `json:"CallbackUrl,omitnil,omitempty" name:"CallbackUrl"`
+
+	// Encoded task startup command. If StartCmdInfo is also configured, only this parameter takes effect.
+	EncodedStartCmdInfo *EncodedStartCmdInfo `json:"EncodedStartCmdInfo,omitnil,omitempty" name:"EncodedStartCmdInfo"`
+
+	// Code repository configuration.
+	CodeRepos []*CodeRepoConfig `json:"CodeRepos,omitnil,omitempty" name:"CodeRepos"`
+
+	// Network exposure configuration.
+	ExposeNetworkConfig *ExposeNetworkConfig `json:"ExposeNetworkConfig,omitnil,omitempty" name:"ExposeNetworkConfig"`
+
+	// Environment Variables.
+	Envs []*EnvVar `json:"Envs,omitnil,omitempty" name:"Envs"`
+
+	// Train tool configuration.
+	TrainToolConfig *TrainToolConfig `json:"TrainToolConfig,omitnil,omitempty" name:"TrainToolConfig"`
+
+	// Training Diagnostic Tool Configuration.
+	ResourceSupplyAttribute *ResourceSupplyAttribute `json:"ResourceSupplyAttribute,omitnil,omitempty" name:"ResourceSupplyAttribute"`
+
+	// Queue ID.
+	Queues []*string `json:"Queues,omitnil,omitempty" name:"Queues"`
+}
+
+func (r *CreateTrainingTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateTrainingTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "ChargeType")
+	delete(f, "ResourceConfigInfos")
+	delete(f, "TiProjectId")
+	delete(f, "FrameworkName")
+	delete(f, "FrameworkVersion")
+	delete(f, "FrameworkEnvironment")
+	delete(f, "ResourceGroupId")
+	delete(f, "Tags")
+	delete(f, "ImageInfo")
+	delete(f, "CodePackagePath")
+	delete(f, "StartCmdInfo")
+	delete(f, "TrainingMode")
+	delete(f, "DataConfigs")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
+	delete(f, "Output")
+	delete(f, "LogConfig")
+	delete(f, "TuningParameters")
+	delete(f, "LogEnable")
+	delete(f, "Remark")
+	delete(f, "DataSource")
+	delete(f, "CallbackUrl")
+	delete(f, "EncodedStartCmdInfo")
+	delete(f, "CodeRepos")
+	delete(f, "ExposeNetworkConfig")
+	delete(f, "Envs")
+	delete(f, "TrainToolConfig")
+	delete(f, "ResourceSupplyAttribute")
+	delete(f, "Queues")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTrainingTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateTrainingTaskResponseParams struct {
+	// Training task ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateTrainingTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateTrainingTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateTrainingTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateTrainingTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type CronScaleJob struct {
 	// Cron expression, which identifies the task execution time, and is accurate to minutes.
 	Schedule *string `json:"Schedule,omitnil,omitempty" name:"Schedule"`
@@ -138,6 +424,63 @@ type CrossTenantENIInfo struct {
 	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
 }
 
+type DataConfig struct {
+	// Mapping path.
+	MappingPath *string `json:"MappingPath,omitnil,omitempty" name:"MappingPath"`
+
+	// Storage purpose.
+	// Valid values: BUILTIN_CODE, BUILTIN_DATA, BUILTIN_MODEL, USER_DATA, USER_CODE, USER_MODEL, OUTPUT, and OTHER.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DataSourceUsage *string `json:"DataSourceUsage,omitnil,omitempty" name:"DataSourceUsage"`
+
+	// DATASET, COS, CFS, CFSTurbo, GooseFSx, HDFS, and WEDATA_HDFS
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DataSourceType *string `json:"DataSourceType,omitnil,omitempty" name:"DataSourceType"`
+
+	// Data from the data set.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DataSetSource *DataSetConfig `json:"DataSetSource,omitnil,omitempty" name:"DataSetSource"`
+
+	// Data from COS.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	COSSource *CosPathInfo `json:"COSSource,omitnil,omitempty" name:"COSSource"`
+
+	// Data from CFS.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CFSSource *CFSConfig `json:"CFSSource,omitnil,omitempty" name:"CFSSource"`
+
+	// Data from HDFS.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HDFSSource *HDFSConfig `json:"HDFSSource,omitnil,omitempty" name:"HDFSSource"`
+
+	// GooseFS data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GooseFSSource *GooseFS `json:"GooseFSSource,omitnil,omitempty" name:"GooseFSSource"`
+
+	// TurboFS data.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CFSTurboSource *CFSTurbo `json:"CFSTurboSource,omitnil,omitempty" name:"CFSTurboSource"`
+
+	// Information from local disks.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LocalDiskSource *LocalDisk `json:"LocalDiskSource,omitnil,omitempty" name:"LocalDiskSource"`
+
+	// CBS configuration information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CBSSource *CBSConfig `json:"CBSSource,omitnil,omitempty" name:"CBSSource"`
+
+	// Host path information.
+	HostPathSource *HostPath `json:"HostPathSource,omitnil,omitempty" name:"HostPathSource"`
+
+
+	PublicDataSource *PublicDataSourceFS `json:"PublicDataSource,omitnil,omitempty" name:"PublicDataSource"`
+}
+
+type DataSetConfig struct {
+	// Data set ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
 // Predefined struct for user
 type DescribeModelServiceGroupsRequestParams struct {
 	// Offset. Default value: 0.
@@ -159,6 +502,8 @@ type DescribeModelServiceGroupsRequestParams struct {
 	TagFilters []*TagFilter `json:"TagFilters,omitnil,omitempty" name:"TagFilters"`
 
 	// Service classification.
+	//
+	// Deprecated: ServiceCategory is deprecated.
 	ServiceCategory *string `json:"ServiceCategory,omitnil,omitempty" name:"ServiceCategory"`
 }
 
@@ -240,6 +585,11 @@ func (r *DescribeModelServiceGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type EncodedStartCmdInfo struct {
+	// Startup command of the task, which is input in base64 format. Note that the complete input of {"StartCmd":"","PsStartCmd":"","WorkerStartCmd":""} is required for conversion.
+	StartCmdInfo *string `json:"StartCmdInfo,omitnil,omitempty" name:"StartCmdInfo"`
+}
+
 type EnvVar struct {
 	// Environment variable key.Note: This field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -251,6 +601,28 @@ type EnvVar struct {
 type ExecAction struct {
 	// Execution command list.
 	Command []*string `json:"Command,omitnil,omitempty" name:"Command"`
+}
+
+type ExposeNetworkConfig struct {
+
+	SSHConfig *SSHConfig `json:"SSHConfig,omitnil,omitempty" name:"SSHConfig"`
+
+
+	ExposePortConfig *ExposePortConfig `json:"ExposePortConfig,omitnil,omitempty" name:"ExposePortConfig"`
+}
+
+type ExposePortConfig struct {
+
+	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+
+	ClbId *string `json:"ClbId,omitnil,omitempty" name:"ClbId"`
+
+
+	ClbHost *string `json:"ClbHost,omitnil,omitempty" name:"ClbHost"`
 }
 
 type Filter struct {
@@ -267,6 +639,24 @@ type Filter struct {
 	Fuzzy *bool `json:"Fuzzy,omitnil,omitempty" name:"Fuzzy"`
 }
 
+type GooseFS struct {
+	// GooseFS instance ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// GooseFS type, including GooseFS and GooseFSx.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Path to mount the GooseFSx instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// GooseFS namespace.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NameSpace *string `json:"NameSpace,omitnil,omitempty" name:"NameSpace"`
+}
+
 type GooseFSx struct {
 	// GooseFSx instance ID.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
@@ -281,6 +671,14 @@ type GpuDetail struct {
 
 	// GPU card quantity, in 1/100 cards. For example, 100 represents 1 card.Note: This field may return null, indicating that no valid values can be obtained.
 	Value *uint64 `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type HDFSConfig struct {
+	// Cluster instance ID, such as emr-xxxxxxxx.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Path.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 }
 
 type HTTPGetAction struct {
@@ -319,6 +717,11 @@ type HorizontalPodAutoscaler struct {
 	ScaleDownStabilizationWindowSeconds *int64 `json:"ScaleDownStabilizationWindowSeconds,omitnil,omitempty" name:"ScaleDownStabilizationWindowSeconds"`
 }
 
+type HostPath struct {
+	// Host path to be mounted.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+}
+
 type ImageInfo struct {
 	// Image type. Valid values: TCR ( which indicates a Tencent Container Registry (TCR) image), CCR (which indicates a TCR Personal Edition image), PreSet (which indicates a platform preset image), and CUSTOM (which indicates a third-party custom image).
 	ImageType *string `json:"ImageType,omitnil,omitempty" name:"ImageType"`
@@ -340,11 +743,38 @@ type ImageInfo struct {
 
 	// Whether to support data generation.Note: This field may return null, indicating that no valid values can be obtained.
 	SupportDataPipeline *bool `json:"SupportDataPipeline,omitnil,omitempty" name:"SupportDataPipeline"`
+
+
+	ImageSecret *ImageSecret `json:"ImageSecret,omitnil,omitempty" name:"ImageSecret"`
+}
+
+type ImageSecret struct {
+
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
+
+
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
+
+
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+
+	SecretId *string `json:"SecretId,omitnil,omitempty" name:"SecretId"`
 }
 
 type InferCodeInfo struct {
 	// Details of Cloud Object Storage (COS) where the inference code is located.Note: This field may return null, indicating that no valid values can be obtained.
 	CosPathInfo *CosPathInfo `json:"CosPathInfo,omitnil,omitempty" name:"CosPathInfo"`
+}
+
+type LocalDisk struct {
+	// Node ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Local path.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LocalPath *string `json:"LocalPath,omitnil,omitempty" name:"LocalPath"`
 }
 
 type LogConfig struct {
@@ -374,7 +804,8 @@ type ModelInfo struct {
 	// COS path information.
 	CosPathInfo *CosPathInfo `json:"CosPathInfo,omitnil,omitempty" name:"CosPathInfo"`
 
-	// GooseFSx configurations, and is valid when ModelSource is GooseFSx.
+	// GooseFSx configuration. This parameter takes effect if ModelSource is GooseFSx.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	GooseFSx *GooseFSx `json:"GooseFSx,omitnil,omitempty" name:"GooseFSx"`
 
 	// Algorithm framework corresponding to the model (reserved field).Note: This field may return null, indicating that no valid values can be obtained.
@@ -467,6 +898,17 @@ type Pod struct {
 	ResourceInfo *ResourceInfo `json:"ResourceInfo,omitnil,omitempty" name:"ResourceInfo"`
 }
 
+type PodSSHInfo struct {
+	// IP address of the Pod.
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// SSH port of the Pod.
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// SSH access command.
+	LoginCommand *string `json:"LoginCommand,omitnil,omitempty" name:"LoginCommand"`
+}
+
 type Probe struct {
 	// Probe action.
 	ProbeAction *ProbeAction `json:"ProbeAction,omitnil,omitempty" name:"ProbeAction"`
@@ -509,6 +951,76 @@ type PublicDataSourceFS struct {
 	SubPath *string `json:"SubPath,omitnil,omitempty" name:"SubPath"`
 }
 
+type RDMAConfig struct {
+	// Whether to enable RDMA.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
+}
+
+type ResourceConfigInfo struct {
+	// Role. For example, PS, WORKER, DRIVER, and EXECUTOR.
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
+
+	// Number of CPU cores, which is required to be configured when resource groups are used. Unit: 1/1000, where 1000 represents 1 core.
+	Cpu *uint64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
+
+	// Memory size, in MB. This parameter needs to be configured when resource groups are used.
+	Memory *uint64 `json:"Memory,omitnil,omitempty" name:"Memory"`
+
+	// GPU card type, which is required to be configured when resource groups are used.
+	GpuType *string `json:"GpuType,omitnil,omitempty" name:"GpuType"`
+
+	// Number of GPU cards, which is required to be configured when resource groups are used. Unit: 1/100, where 100 represents 1 card.
+	Gpu *uint64 `json:"Gpu,omitnil,omitempty" name:"Gpu"`
+
+	// CVM instance specification ID.
+	// CVM instance specification (for postpaid billing). Valid values:
+	// TI.S.LARGE.POST: 4C8G 
+	// TI.S.2XLARGE16.POST:  8C16G 
+	// TI.S.2XLARGE32.POST:  8C32G 
+	// TI.S.4XLARGE32.POST:  16C32G
+	// TI.S.4XLARGE64.POST:  16C64G
+	// TI.S.6XLARGE48.POST:  24C48G
+	// TI.S.6XLARGE96.POST:  24C96G
+	// TI.S.8XLARGE64.POST:  32C64G
+	// TI.S.8XLARGE128.POST : 32C128G
+	// TI.GN10.2XLARGE40.POST: 8C40G V100*1 
+	// TI.GN10.5XLARGE80.POST:  18C80G V100*2 
+	// TI.GN10.10XLARGE160.POST :  32C160G V100*4
+	// TI.GN10.20XLARGE320.POST :  72C320G V100*8
+	// TI.GN7.8XLARGE128.POST: 32C128G T4*1 
+	// TI.GN7.10XLARGE160.POST: 40C160G T4*2 
+	// TI.GN7.20XLARGE320.POST: 80C32
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Number of compute nodes.
+	InstanceNum *uint64 `json:"InstanceNum,omitnil,omitempty" name:"InstanceNum"`
+
+	// CVM instance specification name.
+	// CVM instance specification (for postpaid billing). Valid values:
+	// 4C8G 
+	// 8C16G 
+	// 8C32G 
+	// 16C32G
+	// 6C64G
+	// 24C48G
+	// 24C96G
+	// 32C64G
+	// 32C128G
+	// 8C40G V100*1 
+	// 8C80G V100*2 
+	// 32C160G V100*4
+	// 72C320G V100*8
+	// 32C128G T4*1 
+	// 40C160G T4*2 
+	// 80C32
+	InstanceTypeAlias *string `json:"InstanceTypeAlias,omitnil,omitempty" name:"InstanceTypeAlias"`
+
+	// RDMA configuration.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RDMAConfig *RDMAConfig `json:"RDMAConfig,omitnil,omitempty" name:"RDMAConfig"`
+}
+
 type ResourceGroupInfo struct {
 	// Resource group ID.
 	ResourceGroupId *string `json:"ResourceGroupId,omitnil,omitempty" name:"ResourceGroupId"`
@@ -535,6 +1047,24 @@ type ResourceInfo struct {
 
 	// It is not required for creation or update operations. This field is used for display only. It involves detailed GPU usage information.
 	RealGpuDetailSet []*GpuDetail `json:"RealGpuDetailSet,omitnil,omitempty" name:"RealGpuDetailSet"`
+
+	// Indicates whether to enable RDMA.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnableRDMA *bool `json:"EnableRDMA,omitnil,omitempty" name:"EnableRDMA"`
+
+
+	RootDisk *uint64 `json:"RootDisk,omitnil,omitempty" name:"RootDisk"`
+
+
+	DataDisk *uint64 `json:"DataDisk,omitnil,omitempty" name:"DataDisk"`
+}
+
+type ResourceSupplyAttribute struct {
+
+	SupplyType *string `json:"SupplyType,omitnil,omitempty" name:"SupplyType"`
+
+
+	ClusterType *string `json:"ClusterType,omitnil,omitempty" name:"ClusterType"`
 }
 
 type RollingUpdate struct {
@@ -543,6 +1073,32 @@ type RollingUpdate struct {
 
 	// Maximum number of new instances during rolling updates. 
 	MaxSurge *NumOrPercent `json:"MaxSurge,omitnil,omitempty" name:"MaxSurge"`
+}
+
+type SSHConfig struct {
+	// Whether to enable SSH.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// Public key information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PublicKey *string `json:"PublicKey,omitnil,omitempty" name:"PublicKey"`
+
+	// Port number.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Login command.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LoginCommand *string `json:"LoginCommand,omitnil,omitempty" name:"LoginCommand"`
+
+	// Whether to change the login address.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsAddressChanged *bool `json:"IsAddressChanged,omitnil,omitempty" name:"IsAddressChanged"`
+
+	// Pod access information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PodSSHInfo *PodSSHInfo `json:"PodSSHInfo,omitnil,omitempty" name:"PodSSHInfo"`
 }
 
 type ScheduledAction struct {
@@ -899,6 +1455,17 @@ type ServiceLimit struct {
 	InstanceReqLimit *int64 `json:"InstanceReqLimit,omitnil,omitempty" name:"InstanceReqLimit"`
 }
 
+type StartCmdInfo struct {
+	// Startup command.
+	StartCmd *string `json:"StartCmd,omitnil,omitempty" name:"StartCmd"`
+
+	// Startup command for ps nodes.
+	PsStartCmd *string `json:"PsStartCmd,omitnil,omitempty" name:"PsStartCmd"`
+
+	// Startup command for Worker nodes.
+	WorkerStartCmd *string `json:"WorkerStartCmd,omitnil,omitempty" name:"WorkerStartCmd"`
+}
+
 type StatefulSetCondition struct {
 	// Information.Note: This field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
@@ -938,6 +1505,17 @@ type TagFilter struct {
 
 	// Multiple tag values.
 	TagValues []*string `json:"TagValues,omitnil,omitempty" name:"TagValues"`
+}
+
+type TrainToolConfig struct {
+
+	EnableHangMonitor *bool `json:"EnableHangMonitor,omitnil,omitempty" name:"EnableHangMonitor"`
+
+
+	HangMonitorNodes []*string `json:"HangMonitorNodes,omitnil,omitempty" name:"HangMonitorNodes"`
+
+
+	LogHangTimeoutInMinute *uint64 `json:"LogHangTimeoutInMinute,omitnil,omitempty" name:"LogHangTimeoutInMinute"`
 }
 
 type VolumeMount struct {

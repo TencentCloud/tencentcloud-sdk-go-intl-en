@@ -1800,11 +1800,11 @@ type SendStatusStatistics struct {
 
 // Predefined struct for user
 type SendStatusStatisticsRequestParams struct {
-	// Start time in the format of `yyyymmddhh` accurate to the hour, such as 2021050113 (13:00 on May 1, 2021).
+	// Start time in the format of `yyyymmddhh` accurate to the hour, such as 2021050113 (13:00 on May 1, 2021).Note: the statistical range includes the current hour.
 	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
 	// End time in the format of `yyyymmddhh` accurate to the hour, such as 2021050118 (18:00 on May 1, 2021).
-	// Note: `EndTime` must be after `BeginTime`.
+	// Note: `EndTime` must be after `BeginTime`, and the statistical range includes the current hour.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.
@@ -1822,11 +1822,11 @@ type SendStatusStatisticsRequestParams struct {
 type SendStatusStatisticsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start time in the format of `yyyymmddhh` accurate to the hour, such as 2021050113 (13:00 on May 1, 2021).
+	// Start time in the format of `yyyymmddhh` accurate to the hour, such as 2021050113 (13:00 on May 1, 2021).Note: the statistical range includes the current hour.
 	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
 	// End time in the format of `yyyymmddhh` accurate to the hour, such as 2021050118 (18:00 on May 1, 2021).
-	// Note: `EndTime` must be after `BeginTime`.
+	// Note: `EndTime` must be after `BeginTime`, and the statistical range includes the current hour.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The SMS `SdkAppId` generated after an application is added in the [SMS console](https://console.cloud.tencent.com/smsv2/app-manage), such as 1400006666.

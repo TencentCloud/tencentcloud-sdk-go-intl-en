@@ -480,6 +480,7 @@ func NewCreateAutoScalingGroupResponse() (response *CreateAutoScalingGroupRespon
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETER_INSCENARIO = "InvalidParameter.InScenario"
+//  INVALIDPARAMETERCOMBINATION_NETWORKINTERFACESCONFLICT = "InvalidParameterCombination.NetworkInterfacesConflict"
 //  INVALIDPARAMETERVALUE_BASECAPACITYTOOLARGE = "InvalidParameterValue.BaseCapacityTooLarge"
 //  INVALIDPARAMETERVALUE_CLASSICLB = "InvalidParameterValue.ClassicLb"
 //  INVALIDPARAMETERVALUE_CVMERROR = "InvalidParameterValue.CvmError"
@@ -532,6 +533,7 @@ func (c *Client) CreateAutoScalingGroup(request *CreateAutoScalingGroupRequest) 
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETER_INSCENARIO = "InvalidParameter.InScenario"
+//  INVALIDPARAMETERCOMBINATION_NETWORKINTERFACESCONFLICT = "InvalidParameterCombination.NetworkInterfacesConflict"
 //  INVALIDPARAMETERVALUE_BASECAPACITYTOOLARGE = "InvalidParameterValue.BaseCapacityTooLarge"
 //  INVALIDPARAMETERVALUE_CLASSICLB = "InvalidParameterValue.ClassicLb"
 //  INVALIDPARAMETERVALUE_CVMERROR = "InvalidParameterValue.CvmError"
@@ -705,15 +707,15 @@ func NewCreateLaunchConfigurationResponse() (response *CreateLaunchConfiguration
 }
 
 // CreateLaunchConfiguration
-// This interface (CreateLaunchConfiguration) is used to create new launch configuration.
+// This API is used to create a new launch configuration.
 //
 // 
 //
-// * To modify a launch configuration, use [ModifyLaunchConfigurationAttributes](https://intl.cloud.tencent.com/document/api/377/31298?from_cn_redirect=1) to partially modify fields. If needed, create a new launch configuration.
+// * Launch configuration can be partially modified through [ModifyLaunchConfigurationAttributes](https://www.tencentcloud.com/document/api/377/31298?from_cn_redirect=1). If a new launch configuration is needed, it is advisable to create a new one.
 //
 // 
 //
-// By default, 50 launch configurations can be created per region. For details, see [Usage Limits](https://intl.cloud.tencent.com/document/product/377/3120?from_cn_redirect=1).
+// * A maximum of 50 launch configurations can be created per region by default. For details, see usage limits (https://www.tencentcloud.com/document/product/377/3120?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  INTERNALERROR_CALLSTSERROR = "InternalError.CallStsError"
@@ -725,6 +727,7 @@ func NewCreateLaunchConfigurationResponse() (response *CreateLaunchConfiguration
 //  INVALIDPARAMETER_MUSTONEPARAMETER = "InvalidParameter.MustOneParameter"
 //  INVALIDPARAMETER_PARAMETERDEPRECATED = "InvalidParameter.ParameterDeprecated"
 //  INVALIDPARAMETER_PARAMETERMUSTBEDELETED = "InvalidParameter.ParameterMustBeDeleted"
+//  INVALIDPARAMETERCOMBINATION_NETWORKINTERFACESCONFLICT = "InvalidParameterCombination.NetworkInterfacesConflict"
 //  INVALIDPARAMETERVALUE_ACCOUNTNOTSUPPORTBANDWIDTHPACKAGEID = "InvalidParameterValue.AccountNotSupportBandwidthPackageId"
 //  INVALIDPARAMETERVALUE_CVMCONFIGURATIONERROR = "InvalidParameterValue.CvmConfigurationError"
 //  INVALIDPARAMETERVALUE_HOSTNAMEILLEGAL = "InvalidParameterValue.HostNameIllegal"
@@ -744,6 +747,8 @@ func NewCreateLaunchConfigurationResponse() (response *CreateLaunchConfiguration
 //  INVALIDPARAMETERVALUE_LAUNCHCONFIGURATIONNAMEDUPLICATED = "InvalidParameterValue.LaunchConfigurationNameDuplicated"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MISSINGBANDWIDTHPACKAGEID = "InvalidParameterValue.MissingBandwidthPackageId"
+//  INVALIDPARAMETERVALUE_NETWORKINTERFACESINVALID = "InvalidParameterValue.NetworkInterfacesInvalid"
+//  INVALIDPARAMETERVALUE_NETWORKINTERFACESLIMITEXCEEDED = "InvalidParameterValue.NetworkInterfacesLimitExceeded"
 //  INVALIDPARAMETERVALUE_NOTSTRINGTYPEFLOAT = "InvalidParameterValue.NotStringTypeFloat"
 //  INVALIDPARAMETERVALUE_PROJECTIDNOTFOUND = "InvalidParameterValue.ProjectIdNotFound"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
@@ -762,15 +767,15 @@ func (c *Client) CreateLaunchConfiguration(request *CreateLaunchConfigurationReq
 }
 
 // CreateLaunchConfiguration
-// This interface (CreateLaunchConfiguration) is used to create new launch configuration.
+// This API is used to create a new launch configuration.
 //
 // 
 //
-// * To modify a launch configuration, use [ModifyLaunchConfigurationAttributes](https://intl.cloud.tencent.com/document/api/377/31298?from_cn_redirect=1) to partially modify fields. If needed, create a new launch configuration.
+// * Launch configuration can be partially modified through [ModifyLaunchConfigurationAttributes](https://www.tencentcloud.com/document/api/377/31298?from_cn_redirect=1). If a new launch configuration is needed, it is advisable to create a new one.
 //
 // 
 //
-// By default, 50 launch configurations can be created per region. For details, see [Usage Limits](https://intl.cloud.tencent.com/document/product/377/3120?from_cn_redirect=1).
+// * A maximum of 50 launch configurations can be created per region by default. For details, see usage limits (https://www.tencentcloud.com/document/product/377/3120?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  INTERNALERROR_CALLSTSERROR = "InternalError.CallStsError"
@@ -782,6 +787,7 @@ func (c *Client) CreateLaunchConfiguration(request *CreateLaunchConfigurationReq
 //  INVALIDPARAMETER_MUSTONEPARAMETER = "InvalidParameter.MustOneParameter"
 //  INVALIDPARAMETER_PARAMETERDEPRECATED = "InvalidParameter.ParameterDeprecated"
 //  INVALIDPARAMETER_PARAMETERMUSTBEDELETED = "InvalidParameter.ParameterMustBeDeleted"
+//  INVALIDPARAMETERCOMBINATION_NETWORKINTERFACESCONFLICT = "InvalidParameterCombination.NetworkInterfacesConflict"
 //  INVALIDPARAMETERVALUE_ACCOUNTNOTSUPPORTBANDWIDTHPACKAGEID = "InvalidParameterValue.AccountNotSupportBandwidthPackageId"
 //  INVALIDPARAMETERVALUE_CVMCONFIGURATIONERROR = "InvalidParameterValue.CvmConfigurationError"
 //  INVALIDPARAMETERVALUE_HOSTNAMEILLEGAL = "InvalidParameterValue.HostNameIllegal"
@@ -801,6 +807,8 @@ func (c *Client) CreateLaunchConfiguration(request *CreateLaunchConfigurationReq
 //  INVALIDPARAMETERVALUE_LAUNCHCONFIGURATIONNAMEDUPLICATED = "InvalidParameterValue.LaunchConfigurationNameDuplicated"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MISSINGBANDWIDTHPACKAGEID = "InvalidParameterValue.MissingBandwidthPackageId"
+//  INVALIDPARAMETERVALUE_NETWORKINTERFACESINVALID = "InvalidParameterValue.NetworkInterfacesInvalid"
+//  INVALIDPARAMETERVALUE_NETWORKINTERFACESLIMITEXCEEDED = "InvalidParameterValue.NetworkInterfacesLimitExceeded"
 //  INVALIDPARAMETERVALUE_NOTSTRINGTYPEFLOAT = "InvalidParameterValue.NotStringTypeFloat"
 //  INVALIDPARAMETERVALUE_PROJECTIDNOTFOUND = "InvalidParameterValue.ProjectIdNotFound"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
@@ -3163,6 +3171,7 @@ func NewModifyAutoScalingGroupResponse() (response *ModifyAutoScalingGroupRespon
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
 //  INVALIDPARAMETER_INSCENARIO = "InvalidParameter.InScenario"
+//  INVALIDPARAMETERCOMBINATION_NETWORKINTERFACESCONFLICT = "InvalidParameterCombination.NetworkInterfacesConflict"
 //  INVALIDPARAMETERVALUE_ASSERTDESIREDCAPACITYFAILED = "InvalidParameterValue.AssertDesiredCapacityFailed"
 //  INVALIDPARAMETERVALUE_BASECAPACITYTOOLARGE = "InvalidParameterValue.BaseCapacityTooLarge"
 //  INVALIDPARAMETERVALUE_CVMERROR = "InvalidParameterValue.CvmError"
@@ -3203,6 +3212,7 @@ func (c *Client) ModifyAutoScalingGroup(request *ModifyAutoScalingGroupRequest) 
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
 //  INVALIDPARAMETER_INSCENARIO = "InvalidParameter.InScenario"
+//  INVALIDPARAMETERCOMBINATION_NETWORKINTERFACESCONFLICT = "InvalidParameterCombination.NetworkInterfacesConflict"
 //  INVALIDPARAMETERVALUE_ASSERTDESIREDCAPACITYFAILED = "InvalidParameterValue.AssertDesiredCapacityFailed"
 //  INVALIDPARAMETERVALUE_BASECAPACITYTOOLARGE = "InvalidParameterValue.BaseCapacityTooLarge"
 //  INVALIDPARAMETERVALUE_CVMERROR = "InvalidParameterValue.CvmError"
@@ -3352,6 +3362,7 @@ func NewModifyLaunchConfigurationAttributesResponse() (response *ModifyLaunchCon
 //  INVALIDPARAMETER_INVALIDCOMBINATION = "InvalidParameter.InvalidCombination"
 //  INVALIDPARAMETER_PARAMETERDEPRECATED = "InvalidParameter.ParameterDeprecated"
 //  INVALIDPARAMETER_PARAMETERMUSTBEDELETED = "InvalidParameter.ParameterMustBeDeleted"
+//  INVALIDPARAMETERCOMBINATION_NETWORKINTERFACESCONFLICT = "InvalidParameterCombination.NetworkInterfacesConflict"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_ACCOUNTNOTSUPPORTBANDWIDTHPACKAGEID = "InvalidParameterValue.AccountNotSupportBandwidthPackageId"
 //  INVALIDPARAMETERVALUE_CVMCONFIGURATIONERROR = "InvalidParameterValue.CvmConfigurationError"
@@ -3371,6 +3382,8 @@ func NewModifyLaunchConfigurationAttributesResponse() (response *ModifyLaunchCon
 //  INVALIDPARAMETERVALUE_LAUNCHCONFIGURATIONNAMEDUPLICATED = "InvalidParameterValue.LaunchConfigurationNameDuplicated"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MISSINGBANDWIDTHPACKAGEID = "InvalidParameterValue.MissingBandwidthPackageId"
+//  INVALIDPARAMETERVALUE_NETWORKINTERFACESINVALID = "InvalidParameterValue.NetworkInterfacesInvalid"
+//  INVALIDPARAMETERVALUE_NETWORKINTERFACESLIMITEXCEEDED = "InvalidParameterValue.NetworkInterfacesLimitExceeded"
 //  INVALIDPARAMETERVALUE_NOTSTRINGTYPEFLOAT = "InvalidParameterValue.NotStringTypeFloat"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_TOOSHORT = "InvalidParameterValue.TooShort"
@@ -3401,6 +3414,7 @@ func (c *Client) ModifyLaunchConfigurationAttributes(request *ModifyLaunchConfig
 //  INVALIDPARAMETER_INVALIDCOMBINATION = "InvalidParameter.InvalidCombination"
 //  INVALIDPARAMETER_PARAMETERDEPRECATED = "InvalidParameter.ParameterDeprecated"
 //  INVALIDPARAMETER_PARAMETERMUSTBEDELETED = "InvalidParameter.ParameterMustBeDeleted"
+//  INVALIDPARAMETERCOMBINATION_NETWORKINTERFACESCONFLICT = "InvalidParameterCombination.NetworkInterfacesConflict"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_ACCOUNTNOTSUPPORTBANDWIDTHPACKAGEID = "InvalidParameterValue.AccountNotSupportBandwidthPackageId"
 //  INVALIDPARAMETERVALUE_CVMCONFIGURATIONERROR = "InvalidParameterValue.CvmConfigurationError"
@@ -3420,6 +3434,8 @@ func (c *Client) ModifyLaunchConfigurationAttributes(request *ModifyLaunchConfig
 //  INVALIDPARAMETERVALUE_LAUNCHCONFIGURATIONNAMEDUPLICATED = "InvalidParameterValue.LaunchConfigurationNameDuplicated"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MISSINGBANDWIDTHPACKAGEID = "InvalidParameterValue.MissingBandwidthPackageId"
+//  INVALIDPARAMETERVALUE_NETWORKINTERFACESINVALID = "InvalidParameterValue.NetworkInterfacesInvalid"
+//  INVALIDPARAMETERVALUE_NETWORKINTERFACESLIMITEXCEEDED = "InvalidParameterValue.NetworkInterfacesLimitExceeded"
 //  INVALIDPARAMETERVALUE_NOTSTRINGTYPEFLOAT = "InvalidParameterValue.NotStringTypeFloat"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_TOOSHORT = "InvalidParameterValue.TooShort"
