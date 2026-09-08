@@ -38,9 +38,6 @@ func main() {
 		InternetMaxBandwidthOut: common.Int64Ptr(10),
 		PublicIpAssigned:        common.BoolPtr(true),
 	}
-	request.LoginSettings = &cvm.LoginSettings{
-		Password: common.StringPtr("passw0rdExample"),
-	}
 	request.SecurityGroupIds = common.StringPtrs([]string{"sg-icy671l9"})
 	request.SystemDisk = &cvm.SystemDisk{
 		DiskSize: common.Int64Ptr(50),
