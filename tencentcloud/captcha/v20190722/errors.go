@@ -17,8 +17,17 @@ package v20190722
 const (
 	// error codes for specific actions
 
+	// CAM signature/authentication error.
+	AUTHFAILURE = "AuthFailure"
+
+	// Request not authorized by CAM.
+	AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+
 	// Internal error.
 	INTERNALERROR = "InternalError"
+
+	// Parameter error.
+	INVALIDPARAMETER = "InvalidParameter"
 
 	// Missing parameter.
 	MISSINGPARAMETER = "MissingParameter"
