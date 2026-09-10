@@ -2800,18 +2800,18 @@ func (r *RecognizeDetectCardCoordsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type RecognizeIndonesiaIDCardOCRRequestParams struct {
-	// The Base64 value of the image. Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. Supported image size: the downloaded image after Base64 encoding is no more than 7M. Image download time is not more than 3 seconds. Either ImageUrl or ImageBase64 must be provided. If both are provided, only use ImageUrl.
+	// The Base64 value of the image. Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. Supported image size: the downloaded image after Base64 encoding is no more than 2M. Image download time is not more than 3 seconds. Either ImageUrl or ImageBase64 must be provided. If both are provided, only use ImageUrl.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
 	// The Url address of the image. 
 	// Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. 
-	// Supported image size: the downloaded image after Base64 encoding is no more than 7M. Image download time is no more than 3 seconds. 
+	// Supported image size: the downloaded image after Base64 encoding is no more than 2M. Image download time is no more than 3 seconds. 
 	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
 	// For a non-Tencent Cloud URL, the download speed and stability may be affected.
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
 	// Whether to return the portrait photo.
-	// If selected true, image restrictions are: Image size after encoding must not exceed 5M, jpg format long side pixel cannot exceed 4000, other formats image long edge pixel maximum of 2000. Short side pixel of all format images not less than 64.
+	// If selected true, image restrictions are: Image size after encoding must not exceed 2M, jpg format long side pixel cannot exceed 4000, other formats image long edge pixel maximum of 2000. Short side pixel of all format images not less than 64.
 	// Support PNG, jpg, JPEG, BMP, no support for GIF images.
 	// If portrait matting fails, return an empty string.
 	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
@@ -2828,18 +2828,18 @@ type RecognizeIndonesiaIDCardOCRRequestParams struct {
 type RecognizeIndonesiaIDCardOCRRequest struct {
 	*tchttp.BaseRequest
 	
-	// The Base64 value of the image. Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. Supported image size: the downloaded image after Base64 encoding is no more than 7M. Image download time is not more than 3 seconds. Either ImageUrl or ImageBase64 must be provided. If both are provided, only use ImageUrl.
+	// The Base64 value of the image. Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. Supported image size: the downloaded image after Base64 encoding is no more than 2M. Image download time is not more than 3 seconds. Either ImageUrl or ImageBase64 must be provided. If both are provided, only use ImageUrl.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
 	// The Url address of the image. 
 	// Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. 
-	// Supported image size: the downloaded image after Base64 encoding is no more than 7M. Image download time is no more than 3 seconds. 
+	// Supported image size: the downloaded image after Base64 encoding is no more than 2M. Image download time is no more than 3 seconds. 
 	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
 	// For a non-Tencent Cloud URL, the download speed and stability may be affected.
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
 	// Whether to return the portrait photo.
-	// If selected true, image restrictions are: Image size after encoding must not exceed 5M, jpg format long side pixel cannot exceed 4000, other formats image long edge pixel maximum of 2000. Short side pixel of all format images not less than 64.
+	// If selected true, image restrictions are: Image size after encoding must not exceed 2M, jpg format long side pixel cannot exceed 4000, other formats image long edge pixel maximum of 2000. Short side pixel of all format images not less than 64.
 	// Support PNG, jpg, JPEG, BMP, no support for GIF images.
 	// If portrait matting fails, return an empty string.
 	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
@@ -2931,7 +2931,7 @@ type RecognizeIndonesiaIDCardOCRResponseParams struct {
 
 	// Card Warning Information
 	// 
-	// -9101 Alarm for covered certificate
+	// -9101 Alarm for incomplete or covered certificate
 	// -9102 Alarm for photocopied certificate
 	// -9103 Alarm for photographed certificate
 	// -9104 Alarm for tamper certificate

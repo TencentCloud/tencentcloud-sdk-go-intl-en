@@ -347,6 +347,9 @@ type ControlAIConversationRequestParams struct {
 
 	// The server sends a Command to proactively request the large model. when Command is InvokeLLM, it sends the content request to the large model and adds X-Invoke-LLM="1" to the header.
 	InvokeLLM *InvokeLLM `json:"InvokeLLM,omitnil,omitempty" name:"InvokeLLM"`
+
+	// Information passed through to the client
+	TransparentData *TransparentData `json:"TransparentData,omitnil,omitempty" name:"TransparentData"`
 }
 
 type ControlAIConversationRequest struct {
@@ -363,6 +366,9 @@ type ControlAIConversationRequest struct {
 
 	// The server sends a Command to proactively request the large model. when Command is InvokeLLM, it sends the content request to the large model and adds X-Invoke-LLM="1" to the header.
 	InvokeLLM *InvokeLLM `json:"InvokeLLM,omitnil,omitempty" name:"InvokeLLM"`
+
+	// Information passed through to the client
+	TransparentData *TransparentData `json:"TransparentData,omitnil,omitempty" name:"TransparentData"`
 }
 
 func (r *ControlAIConversationRequest) ToJsonString() string {
@@ -381,6 +387,7 @@ func (r *ControlAIConversationRequest) FromJsonString(s string) error {
 	delete(f, "Command")
 	delete(f, "ServerPushText")
 	delete(f, "InvokeLLM")
+	delete(f, "TransparentData")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ControlAIConversationRequest has unknown keys!", "")
 	}
@@ -4441,17 +4448,20 @@ type ServerPushText struct {
 	Audio *string `json:"Audio,omitnil,omitempty" name:"Audio"`
 
 	// Defaults to 0. valid at that time only when Interrupt is false.
-	// -0 means drop messages with Interrupt set to false during the occurrence of interaction.
-	// -1 indicates that during the occurrence of an interaction, messages with Interrupt as false will not be dropped but cached, waiting to be processed when finished.
-	// 
+	// <ul>
+	// <li>0 means drop messages with Interrupt set to false during the occurrence of interaction.</li>
+	// <li>1 indicates that during the occurrence of an interaction, messages with Interrupt as false will not be dropped but cached, waiting to be processed when finished.</li>
+	// </ul>
 	// Note: if DropMode is 1, multiple messages can be cached. if an interruption occurs subsequently, the cache of messages will be cleared.
 	DropMode *uint64 `json:"DropMode,omitnil,omitempty" name:"DropMode"`
 
 	// The message priority of ServerPushText. 0 means interruptible, 1 means not interruptible. currently only support 0. if you need to input 1, submit a ticket to contact us to grant permission.
 	// Note: after receiving a message with Priority=1, any other messages will be ignored (including messages with Priority=1) until the message processing of Priority=1 is complete. this field can be used together with the Interrupt and DropMode fields.
 	// Example:.
-	// -Priority=1, Interrupt=true, interrupts existing interaction and broadcasts immediately. the broadcast will not be interrupted during the process.
-	// -Priority=1, Interrupt=false, DropMode=1. wait for the current interaction to complete before broadcasting. the broadcast will not be interrupted during the process.
+	// <ul>
+	// <li>Priority=1, Interrupt=true, interrupts existing interaction and broadcasts immediately. the broadcast will not be interrupted during the process.</li>
+	// <li>Priority=1, Interrupt=false, DropMode=1. wait for the current interaction to complete before broadcasting. the broadcast will not be interrupted during the process.</li>
+	// </ul>
 	Priority *uint64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
 	// Whether to add the text to the llm history context.
@@ -6067,6 +6077,11 @@ type TranslationParam struct {
 
 	// <p>Glossary configuration.</p>
 	Terminologies []*TerminologyItem `json:"Terminologies,omitnil,omitempty" name:"Terminologies"`
+}
+
+type TransparentData struct {
+	// Information passed through to the client
+	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
 }
 
 type TrtcUsage struct {

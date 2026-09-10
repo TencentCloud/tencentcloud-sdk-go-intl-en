@@ -20,7 +20,7 @@ const (
 	// The CardSide type of the ID card is incorrect.
 	FAILEDOPERATION_CARDSIDEERROR = "FailedOperation.CardSideError"
 
-	// Failed to download the file.
+	// File download failed.
 	FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 
 	// The image is empty.
@@ -41,13 +41,13 @@ const (
 	// The image is blurry.
 	FAILEDOPERATION_IMAGEBLUR = "FailedOperation.ImageBlur"
 
-	// Failed to decode the image.
+	// Image decoding failed.
 	FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
 
 	// No ID card is detected in the image.
 	FAILEDOPERATION_IMAGENOIDCARD = "FailedOperation.ImageNoIdCard"
 
-	// The card in the image is not of the specified type.
+	// Image is not of the specified card category.
 	FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
 
 	// No text is detected in the image.
@@ -80,7 +80,7 @@ const (
 	// Not a passport.
 	FAILEDOPERATION_NOPASSPORT = "FailedOperation.NoPassport"
 
-	// OCR recognition failed. This error may be caused by unstable network connections, service anomalies, or other issues.
+	// OCR recognition failed.
 	FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 
 	// Unknown error.
@@ -92,7 +92,7 @@ const (
 	// The service has not been activated.
 	FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
 
-	// The general warning service encountered an exception.
+	// General warning service exception
 	FAILEDOPERATION_WARNINGSERVICEFAILED = "FailedOperation.WarningServiceFailed"
 
 	// Config is not in valid JSON format.
@@ -107,7 +107,7 @@ const (
 	// Incorrect parameter value.
 	INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
 
-	// The file size exceeds the limit
+	// File content too large.
 	LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
 
 	// Image file download failed.

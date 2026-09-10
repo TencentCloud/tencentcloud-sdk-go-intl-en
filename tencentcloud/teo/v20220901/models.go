@@ -21,16 +21,16 @@ import (
 )
 
 type AICrawlerDetection struct {
-	// Whether AI crawler detection is enabled. valid values:.
+	// Whether AI crawler detection is enabled. Valid values:
 	// <li>`on`: Enable;</li>
 	// <li>off: Disable.</li>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// AI crawler detection execution action. this field is required when Enabled is on. valid values for the Name parameter in SecurityAction:.
-	// <Li>Deny: block;</li>.
-	// <Li>Monitor: observation.</li>.
-	// <Li>Allow: pass;</li>.
-	// <li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters only supports JSChallenge and ManagedChallenge.</li>.
+	// Execution action of AI crawler detection. Required if Enabled is on. Name of SecurityAction only supports:
+	// <li>Deny: block;</li>
+	// <li>Monitor: observation;</li>
+	// <li>Allow: allow;</li>
+	// <li>Challenge: Among them, ChallengeOption in ChallengeActionParameters only supports JSChallenge and ManagedChallenge.</li>
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
