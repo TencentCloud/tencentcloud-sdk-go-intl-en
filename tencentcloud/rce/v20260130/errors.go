@@ -23,6 +23,9 @@ const (
 	// Invalid parameter.
 	INVALIDPARAMETER = "InvalidParameter"
 
+	// Field missed.
+	INVALIDPARAMETER_FIELDMISSED = "InvalidParameter.FieldMissed"
+
 	// Invalid field format.
 	INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
 
@@ -32,8 +35,17 @@ const (
 	// Field length exceeds the maximum limit.
 	INVALIDPARAMETER_LENGTHEXCEED = "InvalidParameter.LengthExceed"
 
+	// Data is unauthorized. Check the data authorization letter.
+	INVALIDPARAMETERVALUE_DATAUNAUTHORIZED = "InvalidParameterValue.DataUnauthorized"
+
+	// Custom parameter keys cannot be duplicated.
+	INVALIDPARAMETERVALUE_DUPLICATEDKEY = "InvalidParameterValue.DuplicatedKey"
+
 	// Event not exist.
 	INVALIDPARAMETERVALUE_EVENTNOTEXIST = "InvalidParameterValue.EventNotExist"
+
+	// EventTime differs too much from the current system time
+	INVALIDPARAMETERVALUE_INVALIDEVENTTIME = "InvalidParameterValue.InvalidEventTime"
 
 	// Tenant not exist.
 	INVALIDPARAMETERVALUE_TENANTNOTEXIST = "InvalidParameterValue.TenantNotExist"

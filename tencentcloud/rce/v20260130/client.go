@@ -248,3 +248,79 @@ func (c *Client) AssessEnvironmentRiskWithContext(ctx context.Context, request *
     err = c.Send(request, response)
     return
 }
+
+func NewReportEventRequest() (request *ReportEventRequest) {
+    request = &ReportEventRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("rce", APIVersion, "ReportEvent")
+    
+    
+    return
+}
+
+func NewReportEventResponse() (response *ReportEventResponse) {
+    response = &ReportEventResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ReportEvent
+// Used to report events that do not require real-time decision-making in your business. Our engine will perform computations and apply machine learning to mine risk features from these events, which are then used to support real-time event risk assessment.
+//
+// error code that may be returned:
+//  INTERNALERROR_SYSTEMEXCEPTION = "InternalError.SystemException"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FIELDMISSED = "InvalidParameter.FieldMissed"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_INVALIDVALUE = "InvalidParameter.InvalidValue"
+//  INVALIDPARAMETER_LENGTHEXCEED = "InvalidParameter.LengthExceed"
+//  INVALIDPARAMETERVALUE_DATAUNAUTHORIZED = "InvalidParameterValue.DataUnauthorized"
+//  INVALIDPARAMETERVALUE_DUPLICATEDKEY = "InvalidParameterValue.DuplicatedKey"
+//  INVALIDPARAMETERVALUE_EVENTNOTEXIST = "InvalidParameterValue.EventNotExist"
+//  INVALIDPARAMETERVALUE_INVALIDEVENTTIME = "InvalidParameterValue.InvalidEventTime"
+//  INVALIDPARAMETERVALUE_TENANTNOTEXIST = "InvalidParameterValue.TenantNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_FIELDMISSED = "MissingParameter.FieldMissed"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ReportEvent(request *ReportEventRequest) (response *ReportEventResponse, err error) {
+    return c.ReportEventWithContext(context.Background(), request)
+}
+
+// ReportEvent
+// Used to report events that do not require real-time decision-making in your business. Our engine will perform computations and apply machine learning to mine risk features from these events, which are then used to support real-time event risk assessment.
+//
+// error code that may be returned:
+//  INTERNALERROR_SYSTEMEXCEPTION = "InternalError.SystemException"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FIELDMISSED = "InvalidParameter.FieldMissed"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_INVALIDVALUE = "InvalidParameter.InvalidValue"
+//  INVALIDPARAMETER_LENGTHEXCEED = "InvalidParameter.LengthExceed"
+//  INVALIDPARAMETERVALUE_DATAUNAUTHORIZED = "InvalidParameterValue.DataUnauthorized"
+//  INVALIDPARAMETERVALUE_DUPLICATEDKEY = "InvalidParameterValue.DuplicatedKey"
+//  INVALIDPARAMETERVALUE_EVENTNOTEXIST = "InvalidParameterValue.EventNotExist"
+//  INVALIDPARAMETERVALUE_INVALIDEVENTTIME = "InvalidParameterValue.InvalidEventTime"
+//  INVALIDPARAMETERVALUE_TENANTNOTEXIST = "InvalidParameterValue.TenantNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_FIELDMISSED = "MissingParameter.FieldMissed"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ReportEventWithContext(ctx context.Context, request *ReportEventRequest) (response *ReportEventResponse, err error) {
+    if request == nil {
+        request = NewReportEventRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "rce", APIVersion, "ReportEvent")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ReportEvent require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewReportEventResponse()
+    err = c.Send(request, response)
+    return
+}

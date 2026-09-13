@@ -1351,6 +1351,136 @@ func (r *HKIDCardOCRResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type HmtResidentPermitOCRRequestParams struct {
+	// <p>Base64 value of the image. Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. Supported image size: no more than 7M after the downloaded image is Base64-encoded. The image download must complete within 3 seconds.Either ImageUrl or ImageBase64 must be provided. If both are provided, only ImageUrl is used.</p>
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// <p>Image URL.Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. Supported image size: no more than 7M after Base64 encoding. Image download time no more than 3 seconds. URLs stored in Tencent Cloud guarantee higher download speed and stability. It is recommended to store images in Tencent Cloud. Speed and stability may be impacted for URLs not stored in Tencent Cloud.</p>
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// <p>FRONT: the side with a photo (portrait side),<br>BACK: the side without a photo (national emblem side),<br>if this parameter is left empty or incorrect, the front or back side is automatically determined for you.</p>
+	CardSide *string `json:"CardSide,omitnil,omitempty" name:"CardSide"`
+
+	// Whether to return the portrait image and position coordinates
+	CropPortrait *bool `json:"CropPortrait,omitnil,omitempty" name:"CropPortrait"`
+}
+
+type HmtResidentPermitOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Base64 value of the image. Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. Supported image size: no more than 7M after the downloaded image is Base64-encoded. The image download must complete within 3 seconds.Either ImageUrl or ImageBase64 must be provided. If both are provided, only ImageUrl is used.</p>
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// <p>Image URL.Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. Supported image size: no more than 7M after Base64 encoding. Image download time no more than 3 seconds. URLs stored in Tencent Cloud guarantee higher download speed and stability. It is recommended to store images in Tencent Cloud. Speed and stability may be impacted for URLs not stored in Tencent Cloud.</p>
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// <p>FRONT: the side with a photo (portrait side),<br>BACK: the side without a photo (national emblem side),<br>if this parameter is left empty or incorrect, the front or back side is automatically determined for you.</p>
+	CardSide *string `json:"CardSide,omitnil,omitempty" name:"CardSide"`
+
+	// Whether to return the portrait image and position coordinates
+	CropPortrait *bool `json:"CropPortrait,omitnil,omitempty" name:"CropPortrait"`
+}
+
+func (r *HmtResidentPermitOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *HmtResidentPermitOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "CardSide")
+	delete(f, "CropPortrait")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "HmtResidentPermitOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type HmtResidentPermitOCRResponseParams struct {
+	// <p>Name on the document</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Gender</p>
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
+
+	// <p>Date of birth</p>
+	Birth *string `json:"Birth,omitnil,omitempty" name:"Birth"`
+
+	// <p>Address</p>
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
+
+	// <p>Identity card number</p>
+	IdCardNo *string `json:"IdCardNo,omitnil,omitempty" name:"IdCardNo"`
+
+	// <p>0-Front<br>1-Back</p>
+	CardType *int64 `json:"CardType,omitnil,omitempty" name:"CardType"`
+
+	// <p>Document validity period</p>
+	ValidDate *string `json:"ValidDate,omitnil,omitempty" name:"ValidDate"`
+
+	// <p>Issuing authority</p>
+	Authority *string `json:"Authority,omitnil,omitempty" name:"Authority"`
+
+	// <p>Number of issuances</p>
+	VisaNum *string `json:"VisaNum,omitnil,omitempty" name:"VisaNum"`
+
+	// Travel permit number
+	PassNo *string `json:"PassNo,omitnil,omitempty" name:"PassNo"`
+
+	// Portrait image and coordinate information
+	PortraitImageInfo *PortraitImageInfo `json:"PortraitImageInfo,omitnil,omitempty" name:"PortraitImageInfo"`
+
+	// Card Warning Information
+	// 
+	// -9102 Alarm for photocopied certificate
+	// -9103 Alarm for photographed certificate
+	// -9104 Alarm for tamper certificate
+	// -9109 This capability is not enabled. Please contact customer support to activate the alert service
+	WarnCardInfos []*int64 `json:"WarnCardInfos,omitnil,omitempty" name:"WarnCardInfos"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type HmtResidentPermitOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *HmtResidentPermitOCRResponseParams `json:"Response"`
+}
+
+func (r *HmtResidentPermitOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *HmtResidentPermitOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type ImageCoordinates struct {
+	// <p>Top-left horizontal coordinate of the avatar</p>
+	X *int64 `json:"X,omitnil,omitempty" name:"X"`
+
+	// <p>Top-left vertical coordinate of the avatar</p>
+	Y *int64 `json:"Y,omitnil,omitempty" name:"Y"`
+
+	// <p>Avatar frame width.</p><p>Unit: px.</p>
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
+
+	// <p>Avatar frame height.</p><p>Unit: px.</p>
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
+}
+
 type ItemCoord struct {
 	// X-coordinate of top-left point.
 	X *int64 `json:"X,omitnil,omitempty" name:"X"`
@@ -2112,6 +2242,14 @@ type Polygon struct {
 
 	// The coordinates of the lower-right vertex.
 	LeftBottom *Coord `json:"LeftBottom,omitnil,omitempty" name:"LeftBottom"`
+}
+
+type PortraitImageInfo struct {
+	// <p>Avatar</p>
+	PortraitImage *string `json:"PortraitImage,omitnil,omitempty" name:"PortraitImage"`
+
+	// <p>Avatar coordinate</p>
+	ImageCoordinates *ImageCoordinates `json:"ImageCoordinates,omitnil,omitempty" name:"ImageCoordinates"`
 }
 
 // Predefined struct for user
@@ -4115,13 +4253,13 @@ type RecognizeThaiIDCardOCRResponseParams struct {
 
 	// Card Warning Information
 	// 
-	// -9101 Alarm for covered certificate,
-	// -9102 Alarm for photocopied certificate,
-	// -9103 Alarm for photographed certificate,
-	// -9104 Alarm for PS certificate,
-	// -9107 Alarm for reflective certificate,
-	// -9108 Alarm for blurry image,
-	// -9109 This capability is not enabled.
+	// -9101 Alarm for covered certificate
+	// -9102 Alarm for photocopied certificate
+	// -9103 Alarm for photographed certificate
+	// -9104 Alarm for tamper certificate
+	// -9107 Alarm for reflective certificate
+	// -9108 Alarm for blurry certificate 
+	// -9109 This capability is not enabled. Please contact customer support to activate the alert service
 	WarnCardInfos []*int64 `json:"WarnCardInfos,omitnil,omitempty" name:"WarnCardInfos"`
 
 	// This field is deprecated and will always return "1". Usage is not recommended.

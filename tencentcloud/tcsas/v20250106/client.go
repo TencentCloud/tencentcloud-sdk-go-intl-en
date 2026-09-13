@@ -763,7 +763,7 @@ func NewCreateMNGAppSecretResponse() (response *CreateMNGAppSecretResponse) {
 }
 
 // CreateMNGAppSecret
-// This API is used to generate a mini game secret key.
+// This API is used to create a mini game secret key.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
@@ -775,7 +775,7 @@ func (c *Client) CreateMNGAppSecret(request *CreateMNGAppSecretRequest) (respons
 }
 
 // CreateMNGAppSecret
-// This API is used to generate a mini game secret key.
+// This API is used to create a mini game secret key.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
@@ -2341,7 +2341,7 @@ func NewDescribeAPPDataDetailLineChartResponse() (response *DescribeAPPDataDetai
 }
 
 // DescribeAPPDataDetailLineChart
-// This API is used to query the line chart data for selected superapp metrics.
+// This API is used to query the time-series data for selected superapp metrics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -2352,7 +2352,7 @@ func (c *Client) DescribeAPPDataDetailLineChart(request *DescribeAPPDataDetailLi
 }
 
 // DescribeAPPDataDetailLineChart
-// This API is used to query the line chart data for selected superapp metrics.
+// This API is used to query the time-series data for selected superapp metrics.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -2449,7 +2449,7 @@ func NewDescribeAdvertisingLineChartResponse() (response *DescribeAdvertisingLin
 }
 
 // DescribeAdvertisingLineChart
-// This API is used to query the advertising line chart data for a mini program within a specified date range.
+// This API is used to query the time-series advertising data for a mini program within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -2462,7 +2462,7 @@ func (c *Client) DescribeAdvertisingLineChart(request *DescribeAdvertisingLineCh
 }
 
 // DescribeAdvertisingLineChart
-// This API is used to query the advertising line chart data for a mini program within a specified date range.
+// This API is used to query the time-series advertising data for a mini program within a specified date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3157,7 +3157,7 @@ func NewDescribeMNGAccessAnalysisLineChartResponse() (response *DescribeMNGAcces
 }
 
 // DescribeMNGAccessAnalysisLineChart
-// This API is used to query the mini game visit analysis line chart.
+// This API is used to query the time-series visit data of a mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3170,7 +3170,7 @@ func (c *Client) DescribeMNGAccessAnalysisLineChart(request *DescribeMNGAccessAn
 }
 
 // DescribeMNGAccessAnalysisLineChart
-// This API is used to query the mini game visit analysis line chart.
+// This API is used to query the time-series visit data of a mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3381,7 +3381,7 @@ func NewDescribeMNGAdvertisingLineChartResponse() (response *DescribeMNGAdvertis
 }
 
 // DescribeMNGAdvertisingLineChart
-// This API is used to query the mini game advertising data in a line chart format.
+// This API is used to query the time-series advertising data of a mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3391,7 +3391,7 @@ func (c *Client) DescribeMNGAdvertisingLineChart(request *DescribeMNGAdvertising
 }
 
 // DescribeMNGAdvertisingLineChart
-// This API is used to query the mini game advertising data in a line chart format.
+// This API is used to query the time-series advertising data of a mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3809,7 +3809,7 @@ func NewDescribeMNGMAULineChartResponse() (response *DescribeMNGMAULineChartResp
 }
 
 // DescribeMNGMAULineChart
-// This API is used to query the mini game MAU line chart.
+// This API is used to query the time-series MAU data of a mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3820,7 +3820,7 @@ func (c *Client) DescribeMNGMAULineChart(request *DescribeMNGMAULineChartRequest
 }
 
 // DescribeMNGMAULineChart
-// This API is used to query the mini game MAU line chart.
+// This API is used to query the time-series MAU data of a mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -3969,7 +3969,7 @@ func NewDescribeMNGPaymentLineChartResponse() (response *DescribeMNGPaymentLineC
 }
 
 // DescribeMNGPaymentLineChart
-// This API is used to query the mini game payment line chart.
+// This API is used to query the time-series payment data of a mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -3980,7 +3980,7 @@ func (c *Client) DescribeMNGPaymentLineChart(request *DescribeMNGPaymentLineChar
 }
 
 // DescribeMNGPaymentLineChart
-// This API is used to query the mini game payment line chart.
+// This API is used to query the time-series payment data of a mini game.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -4719,6 +4719,114 @@ func (c *Client) DescribeMNGVersionWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeMNGVersionAuditDetailRequest() (request *DescribeMNGVersionAuditDetailRequest) {
+    request = &DescribeMNGVersionAuditDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DescribeMNGVersionAuditDetail")
+    
+    
+    return
+}
+
+func NewDescribeMNGVersionAuditDetailResponse() (response *DescribeMNGVersionAuditDetailResponse) {
+    response = &DescribeMNGVersionAuditDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNGVersionAuditDetail
+// This API is used to query mini game version approval details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
+func (c *Client) DescribeMNGVersionAuditDetail(request *DescribeMNGVersionAuditDetailRequest) (response *DescribeMNGVersionAuditDetailResponse, err error) {
+    return c.DescribeMNGVersionAuditDetailWithContext(context.Background(), request)
+}
+
+// DescribeMNGVersionAuditDetail
+// This API is used to query mini game version approval details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
+func (c *Client) DescribeMNGVersionAuditDetailWithContext(ctx context.Context, request *DescribeMNGVersionAuditDetailRequest) (response *DescribeMNGVersionAuditDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNGVersionAuditDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DescribeMNGVersionAuditDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNGVersionAuditDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNGVersionAuditDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNGVersionAuditListRequest() (request *DescribeMNGVersionAuditListRequest) {
+    request = &DescribeMNGVersionAuditListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DescribeMNGVersionAuditList")
+    
+    
+    return
+}
+
+func NewDescribeMNGVersionAuditListResponse() (response *DescribeMNGVersionAuditListResponse) {
+    response = &DescribeMNGVersionAuditListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNGVersionAuditList
+// This API is used to query mini game version approval records.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
+func (c *Client) DescribeMNGVersionAuditList(request *DescribeMNGVersionAuditListRequest) (response *DescribeMNGVersionAuditListResponse, err error) {
+    return c.DescribeMNGVersionAuditListWithContext(context.Background(), request)
+}
+
+// DescribeMNGVersionAuditList
+// This API is used to query mini game version approval records.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
+func (c *Client) DescribeMNGVersionAuditListWithContext(ctx context.Context, request *DescribeMNGVersionAuditListRequest) (response *DescribeMNGVersionAuditListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNGVersionAuditListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DescribeMNGVersionAuditList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNGVersionAuditList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNGVersionAuditListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMNPRequest() (request *DescribeMNPRequest) {
     request = &DescribeMNPRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5335,7 +5443,7 @@ func NewDescribeMNPMAULineChartResponse() (response *DescribeMNPMAULineChartResp
 }
 
 // DescribeMNPMAULineChart
-// This API is used to query the mini program monthly active user data in a line chart format.
+// This API is used to query the time-series MAU data of a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -5345,7 +5453,7 @@ func (c *Client) DescribeMNPMAULineChart(request *DescribeMNPMAULineChartRequest
 }
 
 // DescribeMNPMAULineChart
-// This API is used to query the mini program monthly active user data in a line chart format.
+// This API is used to query the time-series MAU data of a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -5711,7 +5819,7 @@ func NewDescribeMNPReportDataLineChartResponse() (response *DescribeMNPReportDat
 }
 
 // DescribeMNPReportDataLineChart
-// This API is used to query the mini program visit analysis line chart within a given date range.
+// This API is used to query the time-series visit data of a mini program within a given date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -5722,7 +5830,7 @@ func (c *Client) DescribeMNPReportDataLineChart(request *DescribeMNPReportDataLi
 }
 
 // DescribeMNPReportDataLineChart
-// This API is used to query the mini program visit analysis line chart within a given date range.
+// This API is used to query the time-series visit data of a mini program within a given date range.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -6301,6 +6409,114 @@ func (c *Client) DescribeMNPVersionWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeMNPVersionAuditDetailRequest() (request *DescribeMNPVersionAuditDetailRequest) {
+    request = &DescribeMNPVersionAuditDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DescribeMNPVersionAuditDetail")
+    
+    
+    return
+}
+
+func NewDescribeMNPVersionAuditDetailResponse() (response *DescribeMNPVersionAuditDetailResponse) {
+    response = &DescribeMNPVersionAuditDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPVersionAuditDetail
+// This API is used to query mini program version approval details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
+func (c *Client) DescribeMNPVersionAuditDetail(request *DescribeMNPVersionAuditDetailRequest) (response *DescribeMNPVersionAuditDetailResponse, err error) {
+    return c.DescribeMNPVersionAuditDetailWithContext(context.Background(), request)
+}
+
+// DescribeMNPVersionAuditDetail
+// This API is used to query mini program version approval details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
+func (c *Client) DescribeMNPVersionAuditDetailWithContext(ctx context.Context, request *DescribeMNPVersionAuditDetailRequest) (response *DescribeMNPVersionAuditDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPVersionAuditDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DescribeMNPVersionAuditDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPVersionAuditDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPVersionAuditDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPVersionAuditListRequest() (request *DescribeMNPVersionAuditListRequest) {
+    request = &DescribeMNPVersionAuditListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcsas", APIVersion, "DescribeMNPVersionAuditList")
+    
+    
+    return
+}
+
+func NewDescribeMNPVersionAuditListResponse() (response *DescribeMNPVersionAuditListResponse) {
+    response = &DescribeMNPVersionAuditListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPVersionAuditList
+// This API is used to query mini program version approval records.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
+func (c *Client) DescribeMNPVersionAuditList(request *DescribeMNPVersionAuditListRequest) (response *DescribeMNPVersionAuditListResponse, err error) {
+    return c.DescribeMNPVersionAuditListWithContext(context.Background(), request)
+}
+
+// DescribeMNPVersionAuditList
+// This API is used to query mini program version approval records.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
+func (c *Client) DescribeMNPVersionAuditListWithContext(ctx context.Context, request *DescribeMNPVersionAuditListRequest) (response *DescribeMNPVersionAuditListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPVersionAuditListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tcsas", APIVersion, "DescribeMNPVersionAuditList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPVersionAuditList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPVersionAuditListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribePaymentDataDetailRequest() (request *DescribePaymentDataDetailRequest) {
     request = &DescribePaymentDataDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6375,7 +6591,7 @@ func NewDescribePaymentDataLineChartResponse() (response *DescribePaymentDataLin
 }
 
 // DescribePaymentDataLineChart
-// This API is used to query the mini program payment line chart within a specified date range.
+// This API is used to query the time-series payment data of a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -6386,7 +6602,7 @@ func (c *Client) DescribePaymentDataLineChart(request *DescribePaymentDataLineCh
 }
 
 // DescribePaymentDataLineChart
-// This API is used to query the mini program payment line chart within a specified date range.
+// This API is used to query the time-series payment data of a mini program.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
@@ -6591,7 +6807,7 @@ func NewDescribeTeamListResponse() (response *DescribeTeamListResponse) {
 }
 
 // DescribeTeamList
-// This API is used to query a list of teams.
+// This API is used to query the teams.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
@@ -6602,7 +6818,7 @@ func (c *Client) DescribeTeamList(request *DescribeTeamListRequest) (response *D
 }
 
 // DescribeTeamList
-// This API is used to query a list of teams.
+// This API is used to query the teams.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"

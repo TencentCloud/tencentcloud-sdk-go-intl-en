@@ -506,8 +506,7 @@ func (r *ApprovePaymentMerchantBindingResponse) FromJsonString(s string) error {
 }
 
 type BooleanInfo struct {
-	// The Boolean response object. 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The Boolean response object.
 	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
 }
 
@@ -2575,45 +2574,57 @@ type CreateTeamMemberInfoReq struct {
 
 // Predefined struct for user
 type CreateTeamRequestParams struct {
-	// Team name.
+	// <p>Team name.</p>
 	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
 
-	// Admin name.
+	// <p>Administrator name.</p>
 	AdminUserId *string `json:"AdminUserId,omitnil,omitempty" name:"AdminUserId"`
 
-	// Team role type. Valid values: 1: Mini program; 2: Superapp (only one type is currently supported).
+	// <p>Team role type. Valid values: 1: Mini program; 2: Superapp (only one type is currently supported).</p>
 	TeamRoleTypeList []*int64 `json:"TeamRoleTypeList,omitnil,omitempty" name:"TeamRoleTypeList"`
 
-	// Remark.
+	// <p>Remarks.</p>
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-	// Platform ID, required for API call.
+	// <p>Platform ID, required for API call.</p>
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 
-	// Associated team ID.
+	// <p>Associated team ID.</p>
 	RelatedTeamId *string `json:"RelatedTeamId,omitnil,omitempty" name:"RelatedTeamId"`
+
+	// <p>Team expiration time as a Unix timestamp in seconds. 0 indicates no expiration. This parameter takes effect only when creating a mini program team.</p>
+	ExpiryTime *int64 `json:"ExpiryTime,omitnil,omitempty" name:"ExpiryTime"`
+
+	// <p>Administrator user IDs.</p>
+	AdminUserIds []*string `json:"AdminUserIds,omitnil,omitempty" name:"AdminUserIds"`
 }
 
 type CreateTeamRequest struct {
 	*tchttp.BaseRequest
 	
-	// Team name.
+	// <p>Team name.</p>
 	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
 
-	// Admin name.
+	// <p>Administrator name.</p>
 	AdminUserId *string `json:"AdminUserId,omitnil,omitempty" name:"AdminUserId"`
 
-	// Team role type. Valid values: 1: Mini program; 2: Superapp (only one type is currently supported).
+	// <p>Team role type. Valid values: 1: Mini program; 2: Superapp (only one type is currently supported).</p>
 	TeamRoleTypeList []*int64 `json:"TeamRoleTypeList,omitnil,omitempty" name:"TeamRoleTypeList"`
 
-	// Remark.
+	// <p>Remarks.</p>
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-	// Platform ID, required for API call.
+	// <p>Platform ID, required for API call.</p>
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 
-	// Associated team ID.
+	// <p>Associated team ID.</p>
 	RelatedTeamId *string `json:"RelatedTeamId,omitnil,omitempty" name:"RelatedTeamId"`
+
+	// <p>Team expiration time as a Unix timestamp in seconds. 0 indicates no expiration. This parameter takes effect only when creating a mini program team.</p>
+	ExpiryTime *int64 `json:"ExpiryTime,omitnil,omitempty" name:"ExpiryTime"`
+
+	// <p>Administrator user IDs.</p>
+	AdminUserIds []*string `json:"AdminUserIds,omitnil,omitempty" name:"AdminUserIds"`
 }
 
 func (r *CreateTeamRequest) ToJsonString() string {
@@ -2634,6 +2645,8 @@ func (r *CreateTeamRequest) FromJsonString(s string) error {
 	delete(f, "Remark")
 	delete(f, "PlatformId")
 	delete(f, "RelatedTeamId")
+	delete(f, "ExpiryTime")
+	delete(f, "AdminUserIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTeamRequest has unknown keys!", "")
 	}
@@ -3494,7 +3507,7 @@ func (r *DescribeAPPDataDetailLineChartRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAPPDataDetailLineChartResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*ReportDataResult `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -3566,7 +3579,7 @@ func (r *DescribeAPPDataOverviewRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAPPDataOverviewResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data *APPOverview `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -3659,7 +3672,7 @@ func (r *DescribeAdvertisingLineChartRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAdvertisingLineChartResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data *AdTrendChart `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -3752,7 +3765,7 @@ func (r *DescribeAdvertisingOverviewRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAdvertisingOverviewResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data *MNPAdvertisingOverview `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -4671,7 +4684,7 @@ func (r *DescribeGlobalOverviewDataSummaryRequest) FromJsonString(s string) erro
 
 // Predefined struct for user
 type DescribeGlobalOverviewDataSummaryResponseParams struct {
-	// Data display at the top of the page.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data *AccessAnalysisOverview `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -4750,7 +4763,7 @@ func (r *DescribeGlobalOverviewReportDetailRequest) FromJsonString(s string) err
 
 // Predefined struct for user
 type DescribeGlobalOverviewReportDetailResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*ReportDataResult `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -4843,7 +4856,7 @@ func (r *DescribeMNGAccessAnalysisDetailRequest) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeMNGAccessAnalysisDetailResponseParams struct {
-	// Data display at the top of the page.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*AccessAnalysisDetail `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -4945,7 +4958,7 @@ func (r *DescribeMNGAccessAnalysisLineChartRequest) FromJsonString(s string) err
 
 // Predefined struct for user
 type DescribeMNGAccessAnalysisLineChartResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*ReportDataResult `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -5038,7 +5051,7 @@ func (r *DescribeMNGAccessAnalysisOverviewRequest) FromJsonString(s string) erro
 
 // Predefined struct for user
 type DescribeMNGAccessAnalysisOverviewResponseParams struct {
-	// Data display at the top of the page.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data *AccessAnalysisOverview `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -5124,7 +5137,7 @@ func (r *DescribeMNGActiveUserRealTimeStatisticsRequest) FromJsonString(s string
 
 // Predefined struct for user
 type DescribeMNGActiveUserRealTimeStatisticsResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*ReportDataResult `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -5217,7 +5230,7 @@ func (r *DescribeMNGAdvertisingDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNGAdvertisingDetailResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*OverviewDetail `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -5310,7 +5323,7 @@ func (r *DescribeMNGAdvertisingLineChartRequest) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeMNGAdvertisingLineChartResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data *AdTrendChart `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -5403,7 +5416,7 @@ func (r *DescribeMNGAdvertisingOverviewRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNGAdvertisingOverviewResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data *AnalysisAdvertOverview `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -5621,6 +5634,49 @@ func (r *DescribeMNGAppSecretResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DescribeMNGAppSecretResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMNGAuditDetailAppAuditInfo struct {
+	// <p>Approval number.</p>
+	AuditNo *string `json:"AuditNo,omitnil,omitempty" name:"AuditNo"`
+
+	// <p>Superapp ID.</p>
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
+
+	// <p>Superapp name.</p>
+	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
+
+	// <p>Superapp icon.</p>
+	ApplicationLogo *string `json:"ApplicationLogo,omitnil,omitempty" name:"ApplicationLogo"`
+
+	// <p>Approver.</p>
+	AuditUser *string `json:"AuditUser,omitnil,omitempty" name:"AuditUser"`
+
+	// <p>Approval time.</p>
+	AuditTime *string `json:"AuditTime,omitnil,omitempty" name:"AuditTime"`
+
+	// <p>Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
+	AuditStatus *int64 `json:"AuditStatus,omitnil,omitempty" name:"AuditStatus"`
+
+	// <p>Approval note.</p>
+	AuditNote *string `json:"AuditNote,omitnil,omitempty" name:"AuditNote"`
+
+	// <p>Team ID.</p>
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// <p>Team name.</p>
+	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
+}
+
+type DescribeMNGAuditListAppInfoResp struct {
+	// <p>Superapp ID.</p>
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
+
+	// <p>Superapp icon</p>
+	ApplicationIcon *string `json:"ApplicationIcon,omitnil,omitempty" name:"ApplicationIcon"`
+
+	// <p>Superapp name.</p>
+	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
 }
 
 // Predefined struct for user
@@ -5970,7 +6026,7 @@ func (r *DescribeMNGMAUDataDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNGMAUDataDetailResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*MAUDetail `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -6056,7 +6112,7 @@ func (r *DescribeMNGMAULineChartRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNGMAULineChartResponseParams struct {
-	// Data display at the top of the page.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*MNGMAULineChartData `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -6156,7 +6212,7 @@ func (r *DescribeMNGMAUMonthlyComparisonMetricCardRequest) FromJsonString(s stri
 
 // Predefined struct for user
 type DescribeMNGMAUMonthlyComparisonMetricCardResponseParams struct {
-	// Data display at the top of the page.
+	// Response data.
 	Data *MAUIndicatorCard `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6364,7 +6420,7 @@ func (r *DescribeMNGPaymentLineChartRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNGPaymentLineChartResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*ReportDataResult `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -6457,7 +6513,7 @@ func (r *DescribeMNGPaymentOverviewRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNGPaymentOverviewResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data *MNGPaymentOverview `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -6550,7 +6606,7 @@ func (r *DescribeMNGPaymentReportDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNGPaymentReportDetailResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*MNGPaymentOverview `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -6643,7 +6699,7 @@ func (r *DescribeMNGPaymentRetentionAnalysisRequest) FromJsonString(s string) er
 
 // Predefined struct for user
 type DescribeMNGPaymentRetentionAnalysisResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*PaymentActiveRetention `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -6961,7 +7017,7 @@ func (r *DescribeMNGRetentionDataRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNGRetentionDataResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*RetentionData `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -7697,6 +7753,271 @@ func (r *DescribeMNGSubscribeMessageTemplateResponse) FromJsonString(s string) e
 }
 
 // Predefined struct for user
+type DescribeMNGVersionAuditDetailRequestParams struct {
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Approval number.</p>
+	AuditNo *string `json:"AuditNo,omitnil,omitempty" name:"AuditNo"`
+}
+
+type DescribeMNGVersionAuditDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Approval number.</p>
+	AuditNo *string `json:"AuditNo,omitnil,omitempty" name:"AuditNo"`
+}
+
+func (r *DescribeMNGVersionAuditDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMNGVersionAuditDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PlatformId")
+	delete(f, "AuditNo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMNGVersionAuditDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMNGVersionAuditDetailResp struct {
+	// <p>Approval number.</p>
+	AuditNo *string `json:"AuditNo,omitnil,omitempty" name:"AuditNo"`
+
+	// <p>Mini program or mini game appid.</p>
+	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
+
+	// <p>Mini program or mini game name.</p>
+	MNPName *string `json:"MNPName,omitnil,omitempty" name:"MNPName"`
+
+	// <p>Mini program icon.</p>
+	MNPIcon *string `json:"MNPIcon,omitnil,omitempty" name:"MNPIcon"`
+
+	// <p>Mini program category.</p>
+	MNPType *string `json:"MNPType,omitnil,omitempty" name:"MNPType"`
+
+	// <p>Mini program introduction.</p>
+	MNPIntro *string `json:"MNPIntro,omitnil,omitempty" name:"MNPIntro"`
+
+	// <p>Mini program version.</p>
+	MNPVersion *string `json:"MNPVersion,omitnil,omitempty" name:"MNPVersion"`
+
+	// <p>Mini program version introduction.</p>
+	MNPVersionIntro *string `json:"MNPVersionIntro,omitnil,omitempty" name:"MNPVersionIntro"`
+
+	// <p>Applicant.</p>
+	ApplyUser *string `json:"ApplyUser,omitnil,omitempty" name:"ApplyUser"`
+
+	// <p>Application time.</p>
+	ApplyTime *string `json:"ApplyTime,omitnil,omitempty" name:"ApplyTime"`
+
+	// <p>Approver.</p>
+	AuditUser *string `json:"AuditUser,omitnil,omitempty" name:"AuditUser"`
+
+	// <p>Creation time.</p>
+	AuditTime *string `json:"AuditTime,omitnil,omitempty" name:"AuditTime"`
+
+	// <p>Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
+	AuditStatus *int64 `json:"AuditStatus,omitnil,omitempty" name:"AuditStatus"`
+
+	// <p>Number of associated superapps.</p>
+	MNPRelAppCount *int64 `json:"MNPRelAppCount,omitnil,omitempty" name:"MNPRelAppCount"`
+
+	// <p>Information encoded in the mini program QR code.</p>
+	QRCodeContent *string `json:"QRCodeContent,omitnil,omitempty" name:"QRCodeContent"`
+
+	// <p>Approval note.</p>
+	AuditNote *string `json:"AuditNote,omitnil,omitempty" name:"AuditNote"`
+
+	// <p>Mini program version ID.</p>
+	MNPVersionId *int64 `json:"MNPVersionId,omitnil,omitempty" name:"MNPVersionId"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItem `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
+
+	// <p>Superapp approval information.</p>
+	AppAuditList []*DescribeMNGAuditDetailAppAuditInfo `json:"AppAuditList,omitnil,omitempty" name:"AppAuditList"`
+}
+
+// Predefined struct for user
+type DescribeMNGVersionAuditDetailResponseParams struct {
+	// <p>Response data.</p>
+	Data *DescribeMNGVersionAuditDetailResp `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMNGVersionAuditDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMNGVersionAuditDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeMNGVersionAuditDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMNGVersionAuditDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMNGVersionAuditInfoResp struct {
+	// <p>Approval number.</p>
+	AuditNo *string `json:"AuditNo,omitnil,omitempty" name:"AuditNo"`
+
+	// <p>Mini program appid.</p>
+	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
+
+	// <p>Mini program name.</p>
+	MNPName *string `json:"MNPName,omitnil,omitempty" name:"MNPName"`
+
+	// <p>Mini program icon.</p>
+	MNPIcon *string `json:"MNPIcon,omitnil,omitempty" name:"MNPIcon"`
+
+	// <p>Mini program category.</p>
+	MNPType *string `json:"MNPType,omitnil,omitempty" name:"MNPType"`
+
+	// <p>Introduction.</p>
+	MNPIntro *string `json:"MNPIntro,omitnil,omitempty" name:"MNPIntro"`
+
+	// <p>Mini program version.</p>
+	MNPVersion *string `json:"MNPVersion,omitnil,omitempty" name:"MNPVersion"`
+
+	// <p>Version description.</p>
+	MNPVersionIntro *string `json:"MNPVersionIntro,omitnil,omitempty" name:"MNPVersionIntro"`
+
+	// <p>Applicant.</p>
+	ApplyUser *string `json:"ApplyUser,omitnil,omitempty" name:"ApplyUser"`
+
+	// <p>Application time.</p>
+	ApplyTime *string `json:"ApplyTime,omitnil,omitempty" name:"ApplyTime"`
+
+	// <p>Approver.</p>
+	AuditUser *string `json:"AuditUser,omitnil,omitempty" name:"AuditUser"`
+
+	// <p>Approval time.</p>
+	AuditTime *string `json:"AuditTime,omitnil,omitempty" name:"AuditTime"`
+
+	// <p>Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
+	AuditStatus *int64 `json:"AuditStatus,omitnil,omitempty" name:"AuditStatus"`
+
+	// <p>Number of associated superapps.</p>
+	MNPRelAppCount *int64 `json:"MNPRelAppCount,omitnil,omitempty" name:"MNPRelAppCount"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItem `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
+
+	// <p>Superapp approval information.</p>
+	AuditAppList []*DescribeMNGAuditListAppInfoResp `json:"AuditAppList,omitnil,omitempty" name:"AuditAppList"`
+
+	// <p>Mini program version ID.</p>
+	MNPVersionId *int64 `json:"MNPVersionId,omitnil,omitempty" name:"MNPVersionId"`
+
+	// <p>Whether it is an auto approval. Valid values: 0 (No), 1 (Yes).</p>
+	IsAutoAudit *int64 `json:"IsAutoAudit,omitnil,omitempty" name:"IsAutoAudit"`
+}
+
+// Predefined struct for user
+type DescribeMNGVersionAuditListRequestParams struct {
+	// <p>Pagination offset.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Pagination count</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini game appid.</p>
+	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
+}
+
+type DescribeMNGVersionAuditListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Pagination offset.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Pagination count</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini game appid.</p>
+	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
+}
+
+func (r *DescribeMNGVersionAuditListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMNGVersionAuditListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "PlatformId")
+	delete(f, "MNPId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMNGVersionAuditListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMNGVersionAuditListResp struct {
+	// <p>Total number of entries.</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>List data.</p>
+	DataList []*DescribeMNGVersionAuditInfoResp `json:"DataList,omitnil,omitempty" name:"DataList"`
+}
+
+// Predefined struct for user
+type DescribeMNGVersionAuditListResponseParams struct {
+	// <p>Response data.</p>
+	Data *DescribeMNGVersionAuditListResp `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMNGVersionAuditListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMNGVersionAuditListResponseParams `json:"Response"`
+}
+
+func (r *DescribeMNGVersionAuditListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMNGVersionAuditListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeMNGVersionRequestParams struct {
 	// <p>Task ID returned by the CreateMNPVersion API.</p>
 	BusinessId *string `json:"BusinessId,omitnil,omitempty" name:"BusinessId"`
@@ -7862,7 +8183,7 @@ func (r *DescribeMNPAccessAnalysisOverviewRequest) FromJsonString(s string) erro
 
 // Predefined struct for user
 type DescribeMNPAccessAnalysisOverviewResponseParams struct {
-	// Data display at the top of the page.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data *AccessAnalysisOverview `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -7950,7 +8271,7 @@ func (r *DescribeMNPActiveUserRealTimeStatisticsRequest) FromJsonString(s string
 
 // Predefined struct for user
 type DescribeMNPActiveUserRealTimeStatisticsResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*ReportDataResult `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -8043,7 +8364,7 @@ func (r *DescribeMNPAdvertisingDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNPAdvertisingDetailResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*MAUDetailData `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -8371,6 +8692,49 @@ func (r *DescribeMNPApprovalListResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DescribeMNPApprovalListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMNPAuditDetailAppAuditInfo struct {
+	// <p>Approval number.</p>
+	AuditNo *string `json:"AuditNo,omitnil,omitempty" name:"AuditNo"`
+
+	// <p>Superapp ID.</p>
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
+
+	// <p>Superapp name.</p>
+	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
+
+	// <p>Superapp icon.</p>
+	ApplicationLogo *string `json:"ApplicationLogo,omitnil,omitempty" name:"ApplicationLogo"`
+
+	// <p>Approver.</p>
+	AuditUser *string `json:"AuditUser,omitnil,omitempty" name:"AuditUser"`
+
+	// <p>Creation time.</p>
+	AuditTime *string `json:"AuditTime,omitnil,omitempty" name:"AuditTime"`
+
+	// <p>Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
+	AuditStatus *int64 `json:"AuditStatus,omitnil,omitempty" name:"AuditStatus"`
+
+	// <p>Approval note.</p>
+	AuditNote *string `json:"AuditNote,omitnil,omitempty" name:"AuditNote"`
+
+	// <p>Team ID.</p>
+	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
+
+	// <p>Team name.</p>
+	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
+}
+
+type DescribeMNPAuditListAppInfoResp struct {
+	// <p>Superapp ID.</p>
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
+
+	// <p>Superapp icon</p>
+	ApplicationIcon *string `json:"ApplicationIcon,omitnil,omitempty" name:"ApplicationIcon"`
+
+	// <p>Superapp name.</p>
+	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
 }
 
 // Predefined struct for user
@@ -8713,7 +9077,7 @@ func (r *DescribeMNPMAUDataDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNPMAUDataDetailResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*MAUDetail `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -8799,7 +9163,7 @@ func (r *DescribeMNPMAULineChartRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNPMAULineChartResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*MAUChartData `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -8899,7 +9263,7 @@ func (r *DescribeMNPMAUMetricCardRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNPMAUMetricCardResponseParams struct {
-	// Data display at the top of the page.
+	// Response data.
 	Data *MAUIndicatorCard `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -9106,7 +9470,7 @@ func (r *DescribeMNPPageAnalysisDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNPPageAnalysisDetailResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*VisitData `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -9433,7 +9797,7 @@ func (r *DescribeMNPReportDataLineChartRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNPReportDataLineChartResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*ReportDataResult `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -9526,7 +9890,7 @@ func (r *DescribeMNPReportDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNPReportDetailResponseParams struct {
-	// Data display at the top of the page.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*AccessAnalysisDetail `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -9683,7 +10047,7 @@ func (r *DescribeMNPRetentionDataRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMNPRetentionDataResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*RetentionData `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -10471,6 +10835,271 @@ type DescribeMNPTeamMerchantInfoRes struct {
 }
 
 // Predefined struct for user
+type DescribeMNPVersionAuditDetailRequestParams struct {
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Approval number.</p>
+	AuditNo *string `json:"AuditNo,omitnil,omitempty" name:"AuditNo"`
+}
+
+type DescribeMNPVersionAuditDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Approval number.</p>
+	AuditNo *string `json:"AuditNo,omitnil,omitempty" name:"AuditNo"`
+}
+
+func (r *DescribeMNPVersionAuditDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMNPVersionAuditDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PlatformId")
+	delete(f, "AuditNo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMNPVersionAuditDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMNPVersionAuditDetailResp struct {
+	// <p>Approval number.</p>
+	AuditNo *string `json:"AuditNo,omitnil,omitempty" name:"AuditNo"`
+
+	// <p>Mini program or mini game appid.</p>
+	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
+
+	// <p>Mini program or mini game name.</p>
+	MNPName *string `json:"MNPName,omitnil,omitempty" name:"MNPName"`
+
+	// <p>Mini program icon.</p>
+	MNPIcon *string `json:"MNPIcon,omitnil,omitempty" name:"MNPIcon"`
+
+	// <p>Mini program category.</p>
+	MNPType *string `json:"MNPType,omitnil,omitempty" name:"MNPType"`
+
+	// <p>Mini program introduction.</p>
+	MNPIntro *string `json:"MNPIntro,omitnil,omitempty" name:"MNPIntro"`
+
+	// <p>Mini program version.</p>
+	MNPVersion *string `json:"MNPVersion,omitnil,omitempty" name:"MNPVersion"`
+
+	// <p>Mini program version introduction.</p>
+	MNPVersionIntro *string `json:"MNPVersionIntro,omitnil,omitempty" name:"MNPVersionIntro"`
+
+	// <p>Applicant.</p>
+	ApplyUser *string `json:"ApplyUser,omitnil,omitempty" name:"ApplyUser"`
+
+	// <p>Application time.</p>
+	ApplyTime *string `json:"ApplyTime,omitnil,omitempty" name:"ApplyTime"`
+
+	// <p>Approver.</p>
+	AuditUser *string `json:"AuditUser,omitnil,omitempty" name:"AuditUser"`
+
+	// <p>Approval time.</p>
+	AuditTime *string `json:"AuditTime,omitnil,omitempty" name:"AuditTime"`
+
+	// <p>Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
+	AuditStatus *int64 `json:"AuditStatus,omitnil,omitempty" name:"AuditStatus"`
+
+	// <p>Number of associated superapps.</p>
+	MNPRelAppCount *int64 `json:"MNPRelAppCount,omitnil,omitempty" name:"MNPRelAppCount"`
+
+	// <p>Information encoded in the mini program QR code.</p>
+	QRCodeContent *string `json:"QRCodeContent,omitnil,omitempty" name:"QRCodeContent"`
+
+	// <p>Approval note.</p>
+	AuditNote *string `json:"AuditNote,omitnil,omitempty" name:"AuditNote"`
+
+	// <p>Mini program version ID.</p>
+	MNPVersionId *int64 `json:"MNPVersionId,omitnil,omitempty" name:"MNPVersionId"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItem `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
+
+	// <p>Superapp approval information.</p>
+	AppAuditList []*DescribeMNPAuditDetailAppAuditInfo `json:"AppAuditList,omitnil,omitempty" name:"AppAuditList"`
+}
+
+// Predefined struct for user
+type DescribeMNPVersionAuditDetailResponseParams struct {
+	// <p>Response data.</p>
+	Data *DescribeMNPVersionAuditDetailResp `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMNPVersionAuditDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMNPVersionAuditDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeMNPVersionAuditDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMNPVersionAuditDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMNPVersionAuditInfoResp struct {
+	// <p>Approval number.</p>
+	AuditNo *string `json:"AuditNo,omitnil,omitempty" name:"AuditNo"`
+
+	// <p>Mini program appid.</p>
+	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
+
+	// <p>Mini program name.</p>
+	MNPName *string `json:"MNPName,omitnil,omitempty" name:"MNPName"`
+
+	// <p>Mini program icon.</p>
+	MNPIcon *string `json:"MNPIcon,omitnil,omitempty" name:"MNPIcon"`
+
+	// <p>Mini program category.</p>
+	MNPType *string `json:"MNPType,omitnil,omitempty" name:"MNPType"`
+
+	// <p>Introduction.</p>
+	MNPIntro *string `json:"MNPIntro,omitnil,omitempty" name:"MNPIntro"`
+
+	// <p>Mini program version.</p>
+	MNPVersion *string `json:"MNPVersion,omitnil,omitempty" name:"MNPVersion"`
+
+	// <p>Version description.</p>
+	MNPVersionIntro *string `json:"MNPVersionIntro,omitnil,omitempty" name:"MNPVersionIntro"`
+
+	// <p>Applicant.</p>
+	ApplyUser *string `json:"ApplyUser,omitnil,omitempty" name:"ApplyUser"`
+
+	// <p>Application time.</p>
+	ApplyTime *string `json:"ApplyTime,omitnil,omitempty" name:"ApplyTime"`
+
+	// <p>Approver.</p>
+	AuditUser *string `json:"AuditUser,omitnil,omitempty" name:"AuditUser"`
+
+	// <p>Approval time.</p>
+	AuditTime *string `json:"AuditTime,omitnil,omitempty" name:"AuditTime"`
+
+	// <p>Approval status. Valid values: 0: Pending; 1: Processing; 2: Rejected; 3: Approved; 4: Cancelled.</p>
+	AuditStatus *int64 `json:"AuditStatus,omitnil,omitempty" name:"AuditStatus"`
+
+	// <p>Number of associated superapps.</p>
+	MNPRelAppCount *int64 `json:"MNPRelAppCount,omitnil,omitempty" name:"MNPRelAppCount"`
+
+	// <p>Age rating information.</p>
+	AgeRatings []*AgeRatingItem `json:"AgeRatings,omitnil,omitempty" name:"AgeRatings"`
+
+	// <p>Superapp approval information.</p>
+	AuditAppList []*DescribeMNPAuditListAppInfoResp `json:"AuditAppList,omitnil,omitempty" name:"AuditAppList"`
+
+	// <p>Mini program version ID.</p>
+	MNPVersionId *int64 `json:"MNPVersionId,omitnil,omitempty" name:"MNPVersionId"`
+
+	// <p>Whether it is an auto approval. Valid values: 0 (No), 1 (Yes).</p>
+	IsAutoAudit *int64 `json:"IsAutoAudit,omitnil,omitempty" name:"IsAutoAudit"`
+}
+
+// Predefined struct for user
+type DescribeMNPVersionAuditListRequestParams struct {
+	// <p>Pagination offset.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Pagination count</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini program appid.</p>
+	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
+}
+
+type DescribeMNPVersionAuditListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Pagination offset.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Pagination count</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Platform ID.</p>
+	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
+
+	// <p>Mini program appid.</p>
+	MNPId *string `json:"MNPId,omitnil,omitempty" name:"MNPId"`
+}
+
+func (r *DescribeMNPVersionAuditListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMNPVersionAuditListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "PlatformId")
+	delete(f, "MNPId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMNPVersionAuditListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DescribeMNPVersionAuditListResp struct {
+	// <p>Total number of entries.</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>List data.</p>
+	DataList []*DescribeMNPVersionAuditInfoResp `json:"DataList,omitnil,omitempty" name:"DataList"`
+}
+
+// Predefined struct for user
+type DescribeMNPVersionAuditListResponseParams struct {
+	// <p>Response data.</p>
+	Data *DescribeMNPVersionAuditListResp `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMNPVersionAuditListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMNPVersionAuditListResponseParams `json:"Response"`
+}
+
+func (r *DescribeMNPVersionAuditListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMNPVersionAuditListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeMNPVersionRequestParams struct {
 	// <p>Task ID returned by the CreateMNPVersion API.</p>
 	BusinessId *string `json:"BusinessId,omitnil,omitempty" name:"BusinessId"`
@@ -10695,7 +11324,7 @@ func (r *DescribePaymentDataDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePaymentDataDetailResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*PaymentDetail `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -10792,7 +11421,7 @@ func (r *DescribePaymentDataLineChartRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePaymentDataLineChartResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*ReportDataResult `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -10885,7 +11514,7 @@ func (r *DescribePaymentDataOverviewRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePaymentDataOverviewResponseParams struct {
-	// Data display.
+	// Response data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data *MNPPaymentOverview `json:"Data,omitnil,omitempty" name:"Data"`
 
@@ -11132,106 +11761,112 @@ type DescribeSubscribeMessageTemplateLibraryResp struct {
 }
 
 type DescribeTeamDetailResp struct {
-	// Team name.
+	// <p>Team name.</p>
 	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
 
-	// Team role type. Valid values: 1: Mini program team; 2: Superapp team.
+	// <p>Team role type. Valid values: 1: Mini program team; 2: Superapp team.</p>
 	TeamRoleType *int64 `json:"TeamRoleType,omitnil,omitempty" name:"TeamRoleType"`
 
-	// Admin account.
+	// <p>Administrator account.</p>
 	AdminUserAccount *string `json:"AdminUserAccount,omitnil,omitempty" name:"AdminUserAccount"`
 
-	// Creator.
+	// <p>Creator.</p>
 	CreateUser *string `json:"CreateUser,omitnil,omitempty" name:"CreateUser"`
 
-	// Creation time.
+	// <p>Creation time.</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Number of team members.
+	// <p>Number of team members.</p>
 	MemberCount *int64 `json:"MemberCount,omitnil,omitempty" name:"MemberCount"`
 
-	// Number of bound mini program teams.
+	// <p>Number of bound mini program teams.</p>
 	BindMiniTeamCount *int64 `json:"BindMiniTeamCount,omitnil,omitempty" name:"BindMiniTeamCount"`
 
-	// Name of the bound team.
+	// <p>Team name.</p>
 	BindTeamName *string `json:"BindTeamName,omitnil,omitempty" name:"BindTeamName"`
 
-	// Team registration link.
+	// <p>Team registration link.</p>
 	RegisterLink *string `json:"RegisterLink,omitnil,omitempty" name:"RegisterLink"`
 
-	// Superapp name. Only returned for mini program teams.
+	// <p>Superapp name. Only returned for querying details of mini program teams.</p>
 	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
 
-	// Team expiration time. 0 indicates no expiration. 
+	// <p>Team expiration time. 0 indicates no expiration.</p>
 	ExpireTime *int64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Team status. Valid values: 1: Active; 2: Disabled; 3: Expired. 
+	// <p>Team status. Valid values: 1: Active; 2: Disabled; 3: Expired.</p>
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Administrator name.</p>
+	AdminUserName *string `json:"AdminUserName,omitnil,omitempty" name:"AdminUserName"`
 }
 
 type DescribeTeamListInfoResp struct {
-	// Team ID.
+	// <p>Team ID.</p>
 	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
 
-	// Team name.
+	// <p>Team name.</p>
 	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
 
-	// Admin user ID.
+	// <p>Admin user ID.</p>
 	AdminUserId *string `json:"AdminUserId,omitnil,omitempty" name:"AdminUserId"`
 
-	// Admin account.
+	// <p>Admin account.</p>
 	AdminUserAccount *string `json:"AdminUserAccount,omitnil,omitempty" name:"AdminUserAccount"`
 
-	// Admin username.
+	// <p>Admin username.</p>
 	AdminUserName *string `json:"AdminUserName,omitnil,omitempty" name:"AdminUserName"`
 
-	// Number of team members.
+	// <p>Number of team members.</p>
 	MemberCount *int64 `json:"MemberCount,omitnil,omitempty" name:"MemberCount"`
 
-	// Team registration link.
+	// <p>Team registration link.</p>
 	RegisterLink *string `json:"RegisterLink,omitnil,omitempty" name:"RegisterLink"`
 
-	// Team role types. 
+	// <p>Team role types.</p>
 	TeamRoleTypeList []*int64 `json:"TeamRoleTypeList,omitnil,omitempty" name:"TeamRoleTypeList"`
 
-	// Associated team ID.
+	// <p>Associated team ID.</p>
 	RelatedTeamId *int64 `json:"RelatedTeamId,omitnil,omitempty" name:"RelatedTeamId"`
 
-	// Team expiration time. 0 indicates no expiration.
+	// <p>Team expiration time. 0 indicates no expiration.</p>
 	ExpireTime *int64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// Team status. Valid values: 1: Active; 2: Disabled; 3: Expired. 
+	// <p>Team status. Valid values: 1: Active; 2: Disabled; 3: Expired.</p>
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Information of multiple team admin users.</p>
+	AdminUsers []*TeamAdminUserInfo `json:"AdminUsers,omitnil,omitempty" name:"AdminUsers"`
 }
 
 // Predefined struct for user
 type DescribeTeamListRequestParams struct {
-	// Pagination offset.
+	// <p>Pagination offset.</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of entries per page.
+	// <p>Pagination count.</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Platform ID.
+	// <p>Platform ID.</p>
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 
-	// Search keyword (team name).
+	// <p>Team name.</p>
 	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
 }
 
 type DescribeTeamListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Pagination offset.
+	// <p>Pagination offset.</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of entries per page.
+	// <p>Pagination count.</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Platform ID.
+	// <p>Platform ID.</p>
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 
-	// Search keyword (team name).
+	// <p>Team name.</p>
 	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
 }
 
@@ -11259,7 +11894,7 @@ func (r *DescribeTeamListRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTeamListResponseParams struct {
-	// Response data.
+	// <p>Response data.</p>
 	Data *DescribeTeamPageResp `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -11418,20 +12053,20 @@ type DescribeTeamPageResp struct {
 
 // Predefined struct for user
 type DescribeTeamRequestParams struct {
-	// Team ID.
+	// Team ID
 	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
 
-	// Platform ID.
+	// Platform ID
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 }
 
 type DescribeTeamRequest struct {
 	*tchttp.BaseRequest
 	
-	// Team ID.
+	// Team ID
 	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
 
-	// Platform ID.
+	// Platform ID
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 }
 
@@ -13201,33 +13836,39 @@ func (r *ModifyTeamMemberResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyTeamRequestParams struct {
-	// Team ID.
+	// <p>Team ID.</p>
 	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
 
-	// Team name.
+	// <p>Team name.</p>
 	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
 
-	// Platform ID.
+	// <p>Platform ID.</p>
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 
-	// Team administrator.
+	// <p>Team admin.</p>
 	AdminUserId *string `json:"AdminUserId,omitnil,omitempty" name:"AdminUserId"`
+
+	// <p>Team admin user IDs.</p>
+	AdminUserIds []*string `json:"AdminUserIds,omitnil,omitempty" name:"AdminUserIds"`
 }
 
 type ModifyTeamRequest struct {
 	*tchttp.BaseRequest
 	
-	// Team ID.
+	// <p>Team ID.</p>
 	TeamId *string `json:"TeamId,omitnil,omitempty" name:"TeamId"`
 
-	// Team name.
+	// <p>Team name.</p>
 	TeamName *string `json:"TeamName,omitnil,omitempty" name:"TeamName"`
 
-	// Platform ID.
+	// <p>Platform ID.</p>
 	PlatformId *string `json:"PlatformId,omitnil,omitempty" name:"PlatformId"`
 
-	// Team administrator.
+	// <p>Team admin.</p>
 	AdminUserId *string `json:"AdminUserId,omitnil,omitempty" name:"AdminUserId"`
+
+	// <p>Team admin user IDs.</p>
+	AdminUserIds []*string `json:"AdminUserIds,omitnil,omitempty" name:"AdminUserIds"`
 }
 
 func (r *ModifyTeamRequest) ToJsonString() string {
@@ -13246,6 +13887,7 @@ func (r *ModifyTeamRequest) FromJsonString(s string) error {
 	delete(f, "TeamName")
 	delete(f, "PlatformId")
 	delete(f, "AdminUserId")
+	delete(f, "AdminUserIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyTeamRequest has unknown keys!", "")
 	}
@@ -13254,7 +13896,7 @@ func (r *ModifyTeamRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyTeamResponseParams struct {
-	// Response data.
+	// <p>Response data.</p>
 	Data *BooleanInfo `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -14134,7 +14776,7 @@ func (r *RequestPaymentMerchantBindingRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type RequestPaymentMerchantBindingResponseParams struct {
-	// <p>Response parameters structure for the application of a mini program team to bind a merchant ID.</p>
+	// <p>Response parameters structure for requesting payment merchant binding by a mini program team.</p>
 	Data *MerchantBindApprovalResp `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -14537,6 +15179,17 @@ type StringData struct {
 type SubscribeMessageTemplateLibraryKeywordI18nInfoResp struct {
 	// <p>Multilanguage list.</p>
 	I18nList []*I18nItem `json:"I18nList,omitnil,omitempty" name:"I18nList"`
+}
+
+type TeamAdminUserInfo struct {
+	// <p>Admin user ID.</p>
+	AdminUserId *string `json:"AdminUserId,omitnil,omitempty" name:"AdminUserId"`
+
+	// <p>Admin user account.</p>
+	AdminUserAccount *string `json:"AdminUserAccount,omitnil,omitempty" name:"AdminUserAccount"`
+
+	// <p>Admin username.</p>
+	AdminUserName *string `json:"AdminUserName,omitnil,omitempty" name:"AdminUserName"`
 }
 
 // Predefined struct for user

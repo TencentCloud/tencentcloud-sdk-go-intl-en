@@ -533,6 +533,90 @@ func (c *Client) HKIDCardOCRWithContext(ctx context.Context, request *HKIDCardOC
     return
 }
 
+func NewHmtResidentPermitOCRRequest() (request *HmtResidentPermitOCRRequest) {
+    request = &HmtResidentPermitOCRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "HmtResidentPermitOCR")
+    
+    
+    return
+}
+
+func NewHmtResidentPermitOCRResponse() (response *HmtResidentPermitOCRResponse) {
+    response = &HmtResidentPermitOCRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// HmtResidentPermitOCR
+// This API recognizes the Residence Permit for Hong Kong, Macao, and Taiwan, China Residents. Its OCR feature supports content detection and recognition of all fields on both sides, including name, sex, date of birth, address, identity card number, issuing authority, validity period, number of issuances, and travel permit number (a key field). It can be applied to information recognition scenarios for Residence Permit for Hong Kong, Macao, and Taiwan, China Residents, such as bank account opening and user registration. 
+//
+// 
+//
+// Default API request rate limit: 20 requests/second.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
+//  FAILEDOPERATION_IMAGENOTEXT = "FailedOperation.ImageNoText"
+//  FAILEDOPERATION_NOTAPPOINTCARD = "FailedOperation.NotAppointCard"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) HmtResidentPermitOCR(request *HmtResidentPermitOCRRequest) (response *HmtResidentPermitOCRResponse, err error) {
+    return c.HmtResidentPermitOCRWithContext(context.Background(), request)
+}
+
+// HmtResidentPermitOCR
+// This API recognizes the Residence Permit for Hong Kong, Macao, and Taiwan, China Residents. Its OCR feature supports content detection and recognition of all fields on both sides, including name, sex, date of birth, address, identity card number, issuing authority, validity period, number of issuances, and travel permit number (a key field). It can be applied to information recognition scenarios for Residence Permit for Hong Kong, Macao, and Taiwan, China Residents, such as bank account opening and user registration. 
+//
+// 
+//
+// Default API request rate limit: 20 requests/second.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
+//  FAILEDOPERATION_IMAGENOTEXT = "FailedOperation.ImageNoText"
+//  FAILEDOPERATION_NOTAPPOINTCARD = "FailedOperation.NotAppointCard"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) HmtResidentPermitOCRWithContext(ctx context.Context, request *HmtResidentPermitOCRRequest) (response *HmtResidentPermitOCRResponse, err error) {
+    if request == nil {
+        request = NewHmtResidentPermitOCRRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "HmtResidentPermitOCR")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("HmtResidentPermitOCR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewHmtResidentPermitOCRResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewMLIDCardOCRRequest() (request *MLIDCardOCRRequest) {
     request = &MLIDCardOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2050,6 +2134,7 @@ func NewRecognizeThaiIDCardOCRResponse() (response *RecognizeThaiIDCardOCRRespon
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 //  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_IDCARDTOOSMALL = "FailedOperation.IdCardTooSmall"
 //  FAILEDOPERATION_IMAGEBLUR = "FailedOperation.ImageBlur"
 //  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
 //  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
@@ -2074,6 +2159,7 @@ func (c *Client) RecognizeThaiIDCardOCR(request *RecognizeThaiIDCardOCRRequest) 
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 //  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_IDCARDTOOSMALL = "FailedOperation.IdCardTooSmall"
 //  FAILEDOPERATION_IMAGEBLUR = "FailedOperation.ImageBlur"
 //  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
 //  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
