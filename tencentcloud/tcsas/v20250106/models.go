@@ -10832,6 +10832,9 @@ type DescribeMNPTeamMerchantInfoRes struct {
 
 	// <p>Merchant name.</p>
 	MerchantName *string `json:"MerchantName,omitnil,omitempty" name:"MerchantName"`
+
+	// <p>Payment currency.</p>
+	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
 }
 
 // Predefined struct for user

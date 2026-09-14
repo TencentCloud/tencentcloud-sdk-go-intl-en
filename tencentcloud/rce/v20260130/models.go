@@ -324,6 +324,144 @@ type AssessEnvironmentRiskRsp struct {
 	Environment *Environment `json:"Environment,omitnil,omitempty" name:"Environment"`
 }
 
+// Predefined struct for user
+type AssessRiskRequestParams struct {
+	// <p>Event code. Used to specify the scenario node for business access.</p><p>Standard events under the account protection product include:</p><ul><li> login: Log in<p></p></li> <li>register: Register </li><li>sms: SMS </li><li>logout: Log out </li><li>modify_account: Modify account </li><li>modify_password: Modify password </li><li>security_verification: Security verification</li></ul><p>Standard events under the payment protection product include:</p><ul><li>create_order: Create an order </li><li>transaction: Transaction</li><li>charge_back: Chargeback</li></ul><p>Standard events under the promotion protection product include:</p><ul><li>add_promotion: Participate in promotions</li><li>redeem: Redeem a prize </li><li>withdraw: Withdraw</li><li>cust_event: Custom event, cust_xxx </li><li>scan_code: Scan a code </li><li>lucky_draw: Lucky draw </li><li>task: Complete a task </li><li>invitation: Invitation </li><li>claim_red_packet: Receive a red packet </li><li>browse: Browse</li></ul><p>Custom events can be evaluated for risk based on an agreement with RCE</p>
+	EventCode *string `json:"EventCode,omitnil,omitempty" name:"EventCode"`
+
+	// <p>The time when the event occurred</p><p>Parameter format: Millisecond-level time with UTC time zone compliant with the ISO 8601 standard</p>
+	EventTime *string `json:"EventTime,omitnil,omitempty" name:"EventTime"`
+
+	// <p>The user's current session ID used to associate with the actions before and after logging in. If UserId is not passed, SessionId is required. If missing, an empty string can be filled.</p>
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// <p>Device fingerprint token, obtained after integration of the device fingerprint SDK into your website or application</p>
+	DeviceToken *string `json:"DeviceToken,omitnil,omitempty" name:"DeviceToken"`
+
+	// <p>Client IP address (IPv4 or IPv6)</p>
+	UserIp *string `json:"UserIp,omitnil,omitempty" name:"UserIp"`
+
+	// <p>Event details. The event information is imported based on the event code you input.</p>
+	EventDetail *EventDetail `json:"EventDetail,omitnil,omitempty" name:"EventDetail"`
+
+	// <p>The user's account ID in your system</p>
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// <p>Email of the user</p>
+	UserEmail *string `json:"UserEmail,omitnil,omitempty" name:"UserEmail"`
+
+	// <p>Phone number of the user.</p><p>Parameter format: Complies with the E.164 standard format, which includes "+", region code, and number</p>
+	UserPhone *string `json:"UserPhone,omitnil,omitempty" name:"UserPhone"`
+
+	// <p>The details of the browser. If you've already integrated our device SDK, this field is not required</p>
+	Browser *Browser `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// <p>The details of the app, os and device.If you've already integrated our device SDK, this field is not required</p>
+	App *App `json:"App,omitnil,omitempty" name:"App"`
+}
+
+type AssessRiskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Event code. Used to specify the scenario node for business access.</p><p>Standard events under the account protection product include:</p><ul><li> login: Log in<p></p></li> <li>register: Register </li><li>sms: SMS </li><li>logout: Log out </li><li>modify_account: Modify account </li><li>modify_password: Modify password </li><li>security_verification: Security verification</li></ul><p>Standard events under the payment protection product include:</p><ul><li>create_order: Create an order </li><li>transaction: Transaction</li><li>charge_back: Chargeback</li></ul><p>Standard events under the promotion protection product include:</p><ul><li>add_promotion: Participate in promotions</li><li>redeem: Redeem a prize </li><li>withdraw: Withdraw</li><li>cust_event: Custom event, cust_xxx </li><li>scan_code: Scan a code </li><li>lucky_draw: Lucky draw </li><li>task: Complete a task </li><li>invitation: Invitation </li><li>claim_red_packet: Receive a red packet </li><li>browse: Browse</li></ul><p>Custom events can be evaluated for risk based on an agreement with RCE</p>
+	EventCode *string `json:"EventCode,omitnil,omitempty" name:"EventCode"`
+
+	// <p>The time when the event occurred</p><p>Parameter format: Millisecond-level time with UTC time zone compliant with the ISO 8601 standard</p>
+	EventTime *string `json:"EventTime,omitnil,omitempty" name:"EventTime"`
+
+	// <p>The user's current session ID used to associate with the actions before and after logging in. If UserId is not passed, SessionId is required. If missing, an empty string can be filled.</p>
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// <p>Device fingerprint token, obtained after integration of the device fingerprint SDK into your website or application</p>
+	DeviceToken *string `json:"DeviceToken,omitnil,omitempty" name:"DeviceToken"`
+
+	// <p>Client IP address (IPv4 or IPv6)</p>
+	UserIp *string `json:"UserIp,omitnil,omitempty" name:"UserIp"`
+
+	// <p>Event details. The event information is imported based on the event code you input.</p>
+	EventDetail *EventDetail `json:"EventDetail,omitnil,omitempty" name:"EventDetail"`
+
+	// <p>The user's account ID in your system</p>
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// <p>Email of the user</p>
+	UserEmail *string `json:"UserEmail,omitnil,omitempty" name:"UserEmail"`
+
+	// <p>Phone number of the user.</p><p>Parameter format: Complies with the E.164 standard format, which includes "+", region code, and number</p>
+	UserPhone *string `json:"UserPhone,omitnil,omitempty" name:"UserPhone"`
+
+	// <p>The details of the browser. If you've already integrated our device SDK, this field is not required</p>
+	Browser *Browser `json:"Browser,omitnil,omitempty" name:"Browser"`
+
+	// <p>The details of the app, os and device.If you've already integrated our device SDK, this field is not required</p>
+	App *App `json:"App,omitnil,omitempty" name:"App"`
+}
+
+func (r *AssessRiskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssessRiskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "EventCode")
+	delete(f, "EventTime")
+	delete(f, "SessionId")
+	delete(f, "DeviceToken")
+	delete(f, "UserIp")
+	delete(f, "EventDetail")
+	delete(f, "UserId")
+	delete(f, "UserEmail")
+	delete(f, "UserPhone")
+	delete(f, "Browser")
+	delete(f, "App")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssessRiskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AssessRiskResponseParams struct {
+	// <p>The results of AssessRisk</p>
+	Data *AssessRiskRsp `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type AssessRiskResponse struct {
+	*tchttp.BaseResponse
+	Response *AssessRiskResponseParams `json:"Response"`
+}
+
+func (r *AssessRiskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssessRiskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type AssessRiskRsp struct {
+	// <p>Decision information</p>
+	Decision *Decision `json:"Decision,omitnil,omitempty" name:"Decision"`
+
+	// <p>Risk score, a scoring result calculated based on the product services you have enabled</p>
+	Score *Score `json:"Score,omitnil,omitempty" name:"Score"`
+
+	// <p>Extended information</p>
+	ExtraInfo []*Cust `json:"ExtraInfo,omitnil,omitempty" name:"ExtraInfo"`
+}
+
 type Billing struct {
 	// <p>The billing address associated with this user</p>
 	Address *Address `json:"Address,omitnil,omitempty" name:"Address"`
@@ -1299,6 +1437,14 @@ type ScanCodeEvent struct {
 
 	// <p>The custom parameters agreed with RCE. An array of objects in K:V format. e.g.[{"Key": "ApproverName", "Value": "bob"},{"Key":"ApproverPhone","Value": "+86131****5678"}]</p>
 	Cust []*Cust `json:"Cust,omitnil,omitempty" name:"Cust"`
+}
+
+type Score struct {
+	// <p>Risk score. Range: 1–1000. The higher the score indicates the higher risk</p>
+	RiskScore *int64 `json:"RiskScore,omitnil,omitempty" name:"RiskScore"`
+
+	// <p>Risk label</p>
+	RiskLabels []*RiskLabel `json:"RiskLabels,omitnil,omitempty" name:"RiskLabels"`
 }
 
 type SecurityVerificationEvent struct {

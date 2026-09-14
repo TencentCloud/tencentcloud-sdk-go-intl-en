@@ -111,6 +111,68 @@ func (c *Client) BatchProcessMediaWithContext(ctx context.Context, request *Batc
     return
 }
 
+func NewChangeVoiceRequest() (request *ChangeVoiceRequest) {
+    request = &ChangeVoiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "ChangeVoice")
+    
+    
+    return
+}
+
+func NewChangeVoiceResponse() (response *ChangeVoiceResponse) {
+    response = &ChangeVoiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ChangeVoice
+// Synchronize tone conversion to convert the input audio into the specified timbre based on the input audio and specified timbre.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+func (c *Client) ChangeVoice(request *ChangeVoiceRequest) (response *ChangeVoiceResponse, err error) {
+    return c.ChangeVoiceWithContext(context.Background(), request)
+}
+
+// ChangeVoice
+// Synchronize tone conversion to convert the input audio into the specified timbre based on the input audio and specified timbre.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+func (c *Client) ChangeVoiceWithContext(ctx context.Context, request *ChangeVoiceRequest) (response *ChangeVoiceResponse, err error) {
+    if request == nil {
+        request = NewChangeVoiceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "ChangeVoice")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ChangeVoice require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewChangeVoiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCloneViralRequest() (request *CloneViralRequest) {
     request = &CloneViralRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1011,7 +1073,7 @@ func NewCreateDocToVideoTaskResponse() (response *CreateDocToVideoTaskResponse) 
 }
 
 // CreateDocToVideoTask
-// This API is used to create an AIGC documentation generation video task.
+// Creates an AIGC document-to-video task.
 //
 // This API is used to query tasks.
 //
@@ -1025,7 +1087,7 @@ func (c *Client) CreateDocToVideoTask(request *CreateDocToVideoTaskRequest) (res
 }
 
 // CreateDocToVideoTask
-// This API is used to create an AIGC documentation generation video task.
+// Creates an AIGC document-to-video task.
 //
 // This API is used to query tasks.
 //
@@ -7231,6 +7293,80 @@ func (c *Client) ModifyContentReviewTemplateWithContext(ctx context.Context, req
     return
 }
 
+func NewModifyDocToVideoTaskStatusRequest() (request *ModifyDocToVideoTaskStatusRequest) {
+    request = &ModifyDocToVideoTaskStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "ModifyDocToVideoTaskStatus")
+    
+    
+    return
+}
+
+func NewModifyDocToVideoTaskStatusResponse() (response *ModifyDocToVideoTaskStatusResponse) {
+    response = &ModifyDocToVideoTaskStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDocToVideoTaskStatus
+// Modify the status of an AIGC document-to-video task.
+//
+// 
+//
+// Contains two actions: confirm and regenerate.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_BLOCKCONFIDENCE = "InvalidParameterValue.BlockConfidence"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_LABELSET = "InvalidParameterValue.LabelSet"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REVIEWCONFIDENCE = "InvalidParameterValue.ReviewConfidence"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyDocToVideoTaskStatus(request *ModifyDocToVideoTaskStatusRequest) (response *ModifyDocToVideoTaskStatusResponse, err error) {
+    return c.ModifyDocToVideoTaskStatusWithContext(context.Background(), request)
+}
+
+// ModifyDocToVideoTaskStatus
+// Modify the status of an AIGC document-to-video task.
+//
+// 
+//
+// Contains two actions: confirm and regenerate.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_BLOCKCONFIDENCE = "InvalidParameterValue.BlockConfidence"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_LABELSET = "InvalidParameterValue.LabelSet"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REVIEWCONFIDENCE = "InvalidParameterValue.ReviewConfidence"
+//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyDocToVideoTaskStatusWithContext(ctx context.Context, request *ModifyDocToVideoTaskStatusRequest) (response *ModifyDocToVideoTaskStatusResponse, err error) {
+    if request == nil {
+        request = NewModifyDocToVideoTaskStatusRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mps", APIVersion, "ModifyDocToVideoTaskStatus")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDocToVideoTaskStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDocToVideoTaskStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyImageSpriteTemplateRequest() (request *ModifyImageSpriteTemplateRequest) {
     request = &ModifyImageSpriteTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8513,29 +8649,29 @@ func NewProcessMediaResponse() (response *ProcessMediaResponse) {
 }
 
 // ProcessMedia
-// This API is used to initiate a processing task for video URLs or media files in Cloud Object Storage (COS). Features include:
+// This API is used to initiate a processing task for URL video links or media files in COS. Features include:
 //
-// - Audio/Video transcoding (such as standard transcoding, top speed codec (TSC) transcoding, audio/video enhancement, visible watermark addition, and digital watermark addition).
+// - Audio/Video transcoding (such as standard transcoding, Top Speed Codec (TSC) transcoding, audio/video enhancement, visible watermark addition, and digital watermark addition).
 //
 // - Adaptive bitrate streaming conversion for audios/videos.
 //
 // - Video-to-GIF conversion.
 //
-// - Time point screenshot of videos.
+// - Screenshot taking at specified time points.
 //
 // - Sampled screenshot of videos.
 //
 // - Image sprite of video screenshots.
 //
-// - Media quality inspection (such as media format diagnosis, audio/video content detection, and scoring without reference, where audio/video content detection mainly covers jitter, blur, low light, overexposure, screen glitches, noise, mosaic, QR code, and other issues).
+// - Media quality inspection (such as media format diagnosis, audio/video content detection, and no-reference scoring, where audio/video content detection mainly covers jitter, blur, low light, overexposure, screen glitches, noise, mosaic, QR code, and other issues).
 //
 // - Smart subtitle (such as subtitle generation and translation).
 //
 // - Smart erasing (such as watermark removal, subtitle removal, and privacy protection).
 //
-// - Smart content moderation (such as pornography detection and sensitive information detection).
+// - Intelligent content moderation (such as pornography detection and sensitive information detection).
 //
-// - Smart content analysis (such as tags, classifications, covers, frame tags, video splitting, highlights, opening and ending clips, and marking points for games).
+// -.
 //
 // - Smart content recognition (such as human faces, full texts, text keywords, full speech, speech keywords, speech translation, and object recognition).
 //
@@ -8552,29 +8688,29 @@ func (c *Client) ProcessMedia(request *ProcessMediaRequest) (response *ProcessMe
 }
 
 // ProcessMedia
-// This API is used to initiate a processing task for video URLs or media files in Cloud Object Storage (COS). Features include:
+// This API is used to initiate a processing task for URL video links or media files in COS. Features include:
 //
-// - Audio/Video transcoding (such as standard transcoding, top speed codec (TSC) transcoding, audio/video enhancement, visible watermark addition, and digital watermark addition).
+// - Audio/Video transcoding (such as standard transcoding, Top Speed Codec (TSC) transcoding, audio/video enhancement, visible watermark addition, and digital watermark addition).
 //
 // - Adaptive bitrate streaming conversion for audios/videos.
 //
 // - Video-to-GIF conversion.
 //
-// - Time point screenshot of videos.
+// - Screenshot taking at specified time points.
 //
 // - Sampled screenshot of videos.
 //
 // - Image sprite of video screenshots.
 //
-// - Media quality inspection (such as media format diagnosis, audio/video content detection, and scoring without reference, where audio/video content detection mainly covers jitter, blur, low light, overexposure, screen glitches, noise, mosaic, QR code, and other issues).
+// - Media quality inspection (such as media format diagnosis, audio/video content detection, and no-reference scoring, where audio/video content detection mainly covers jitter, blur, low light, overexposure, screen glitches, noise, mosaic, QR code, and other issues).
 //
 // - Smart subtitle (such as subtitle generation and translation).
 //
 // - Smart erasing (such as watermark removal, subtitle removal, and privacy protection).
 //
-// - Smart content moderation (such as pornography detection and sensitive information detection).
+// - Intelligent content moderation (such as pornography detection and sensitive information detection).
 //
-// - Smart content analysis (such as tags, classifications, covers, frame tags, video splitting, highlights, opening and ending clips, and marking points for games).
+// -.
 //
 // - Smart content recognition (such as human faces, full texts, text keywords, full speech, speech keywords, speech translation, and object recognition).
 //
