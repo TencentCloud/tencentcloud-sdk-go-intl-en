@@ -2413,6 +2413,275 @@ func (r *GetLivenessResultResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type GetNFCResultRequestParams struct {
+	// Unique ID returned by the frontend NFC SDK
+	NFCToken *string `json:"NFCToken,omitnil,omitempty" name:"NFCToken"`
+
+	// Identity card number / passport number / Hong Kong, China and Macao, China travel permit
+	IdNum *string `json:"IdNum,omitnil,omitempty" name:"IdNum"`
+
+	// Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Base64 value of the portrait photo
+	Picture *string `json:"Picture,omitnil,omitempty" name:"Picture"`
+
+	// Date of birth (format: YYYYMMDD)
+	BirthDate *string `json:"BirthDate,omitnil,omitempty" name:"BirthDate"`
+
+	// Validity start time of the document (format: YYYYMMDD)
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// Document validity end time (format: YYYYMMDD)
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Address
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
+
+	// Ethnicity
+	Nation *string `json:"Nation,omitnil,omitempty" name:"Nation"`
+
+	// Sex
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
+
+	// English name
+	EnName *string `json:"EnName,omitnil,omitempty" name:"EnName"`
+
+	// Issuing authority
+	SigningOrganization *string `json:"SigningOrganization,omitnil,omitempty" name:"SigningOrganization"`
+
+	// Nationality
+	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
+
+	// Country code
+	CountryCode *string `json:"CountryCode,omitnil,omitempty" name:"CountryCode"`
+
+	// Machine-readable code of the passport
+	MachineReadCode *string `json:"MachineReadCode,omitnil,omitempty" name:"MachineReadCode"`
+}
+
+type GetNFCResultRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique ID returned by the frontend NFC SDK
+	NFCToken *string `json:"NFCToken,omitnil,omitempty" name:"NFCToken"`
+
+	// Identity card number / passport number / Hong Kong, China and Macao, China travel permit
+	IdNum *string `json:"IdNum,omitnil,omitempty" name:"IdNum"`
+
+	// Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Base64 value of the portrait photo
+	Picture *string `json:"Picture,omitnil,omitempty" name:"Picture"`
+
+	// Date of birth (format: YYYYMMDD)
+	BirthDate *string `json:"BirthDate,omitnil,omitempty" name:"BirthDate"`
+
+	// Validity start time of the document (format: YYYYMMDD)
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// Document validity end time (format: YYYYMMDD)
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Address
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
+
+	// Ethnicity
+	Nation *string `json:"Nation,omitnil,omitempty" name:"Nation"`
+
+	// Sex
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
+
+	// English name
+	EnName *string `json:"EnName,omitnil,omitempty" name:"EnName"`
+
+	// Issuing authority
+	SigningOrganization *string `json:"SigningOrganization,omitnil,omitempty" name:"SigningOrganization"`
+
+	// Nationality
+	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
+
+	// Country code
+	CountryCode *string `json:"CountryCode,omitnil,omitempty" name:"CountryCode"`
+
+	// Machine-readable code of the passport
+	MachineReadCode *string `json:"MachineReadCode,omitnil,omitempty" name:"MachineReadCode"`
+}
+
+func (r *GetNFCResultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetNFCResultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "NFCToken")
+	delete(f, "IdNum")
+	delete(f, "Name")
+	delete(f, "Picture")
+	delete(f, "BirthDate")
+	delete(f, "BeginTime")
+	delete(f, "EndTime")
+	delete(f, "Address")
+	delete(f, "Nation")
+	delete(f, "Sex")
+	delete(f, "EnName")
+	delete(f, "SigningOrganization")
+	delete(f, "Nationality")
+	delete(f, "CountryCode")
+	delete(f, "MachineReadCode")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetNFCResultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetNFCResultResponseParams struct {
+	// Billing result code. Each successful NFC read is billed once. Permissible range: 
+	// 
+	// 0: Read successful, billed. 
+	// -1: Read failed, not billed.
+	ChargeCode *string `json:"ChargeCode,omitnil,omitempty" name:"ChargeCode"`
+
+	// Document type. Value range: 
+	// 
+	// 01: ID card. 
+	// 02: Chinese passport. 
+	// 03: Hong Kong, China and Macao, China travel permit. 
+	// 99: Other document. 
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	IdType *string `json:"IdType,omitnil,omitempty" name:"IdType"`
+
+	// Document verification result. The items for NFC verification are as follows:
+	// {"result_issuer ":"Issuer certificate legitimacy verification result ","result_paper":"Document security object legitimacy verification result ","result_data" :"Data tampering prevention verification result ","result_chip" :"Document chip replication prevention verification result"} 
+	// Value range: 0: verification passed 1: verification failed 2: unverified 3: partially passed 
+	// When all four verification results are 0, the document is genuine.
+	CheckMRTD *string `json:"CheckMRTD,omitnil,omitempty" name:"CheckMRTD"`
+
+	// Comparison result of the passed-in identity card number, passport number, or Hong Kong, China and Macao, China travel permit with the identity card number recognized by NFC. 
+	// 
+	// 0: Consistent 
+	// -1: Not the same 
+	// -2: NFC recognition failed, unable to compare
+	IdNumCompareResult *string `json:"IdNumCompareResult,omitnil,omitempty" name:"IdNumCompareResult"`
+
+	// Comparison result of the passed-in name and the name recognized by NFC.
+	// 0: Consistent
+	// -1: Not the same
+	// -2: NFC recognition failed, unable to compare
+	NameCompareResult *string `json:"NameCompareResult,omitnil,omitempty" name:"NameCompareResult"`
+
+	// Similarity score between the passed-in face image and the portrait photo recognized by NFC.
+	// - Value range: [0.00, 100.00].
+	// - It is recommended to determine the same person when the similarity is equal to or greater than 70. Customers can also self-adjust the threshold based on specific scenarios (with a threshold of 70, the false pass rate is one in a thousand; with a threshold of 80, the false pass rate is one in ten thousand).
+	PictureCompareSim *float64 `json:"PictureCompareSim,omitnil,omitempty" name:"PictureCompareSim"`
+
+	// Comparison result of the passed-in face image and the portrait photo recognized by NFC. 
+	// 
+	// 0: Same person (similarity equal to or greater than 70 points) 
+	// 1: Not the same person (similarity less than 70 points) 
+	// 2: Comparison failed (the input image quality is too low) 
+	// 3: Comparison failed (the input image contains no human face, an incomplete face, or multiple faces) 
+	// 4: Comparison failed (input image too large or too small) 
+	// 5: Comparison failed (NFC cannot read the portrait photo) 
+	// 6: Comparison failed (no input image data) 
+	// 7: Comparison failed (other reason)
+	PictureCompareResult *string `json:"PictureCompareResult,omitnil,omitempty" name:"PictureCompareResult"`
+
+	// Comparison result of the passed-in date of birth and the date of birth recognized by NFC. 
+	// 0: Consistent 
+	// -1: Not the same 
+	// -2: NFC recognition failed, unable to compare
+	BirthDateCompareResult *string `json:"BirthDateCompareResult,omitnil,omitempty" name:"BirthDateCompareResult"`
+
+	// Comparison result of the passed-in validity start time and the validity start time recognized by NFC. 
+	// 0: Consistent 
+	// -1: Not the same 
+	// -2: NFC recognition failed, unable to compare
+	BeginTimeCompareResult *string `json:"BeginTimeCompareResult,omitnil,omitempty" name:"BeginTimeCompareResult"`
+
+	// Comparison result of the passed-in validity end time and the validity end time recognized by NFC. 
+	// 0: Consistent 
+	// -1: Not the same 
+	// -2: NFC recognition failed, unable to compare
+	EndTimeCompareResult *string `json:"EndTimeCompareResult,omitnil,omitempty" name:"EndTimeCompareResult"`
+
+	// Comparison result of the passed-in address and the address recognized by NFC. 
+	// 0: Consistent 
+	// -1: Not the same 
+	// -2: NFC recognition failed, unable to compare
+	AddressCompareResult *string `json:"AddressCompareResult,omitnil,omitempty" name:"AddressCompareResult"`
+
+	// Comparison result of the passed-in ethnicity and the ethnicity recognized by NFC. 
+	// 0: Consistent 
+	// -1: Not the same 
+	// -2: NFC recognition failed, unable to compare
+	NationCompareResult *string `json:"NationCompareResult,omitnil,omitempty" name:"NationCompareResult"`
+
+	// Comparison result of the passed-in sex and the sex recognized by NFC. 
+	// 0: Consistent 
+	// -1: Not the same 
+	// -2: NFC recognition failed, unable to compare
+	SexCompareResult *string `json:"SexCompareResult,omitnil,omitempty" name:"SexCompareResult"`
+
+	// Comparison result of the passed-in English name and the English name recognized by NFC. 
+	// 0: Consistent 
+	// -1: Not the same 
+	// -2: NFC recognition failed, unable to compare
+	EnNameCompareResult *string `json:"EnNameCompareResult,omitnil,omitempty" name:"EnNameCompareResult"`
+
+	// Comparison result of the passed-in issuing authority and the issuing authority recognized by NFC. 
+	// 0: Consistent 
+	// -1: Not the same 
+	// -2: NFC recognition failed, unable to compare
+	SigningOrganizationCompareResult *string `json:"SigningOrganizationCompareResult,omitnil,omitempty" name:"SigningOrganizationCompareResult"`
+
+	// Comparison result of the passed-in nationality and the nationality recognized by NFC. 
+	// 0: Consistent 
+	// -1: Not the same 
+	// -2: NFC recognition failed, unable to compare
+	NationalityCompareResult *string `json:"NationalityCompareResult,omitnil,omitempty" name:"NationalityCompareResult"`
+
+	// Comparison result of the passed-in country code and the country code recognized by NFC. 
+	// 0: Consistent 
+	// -1: Not the same 
+	// -2: NFC recognition failed, unable to compare
+	CountryCodeCompareResult *string `json:"CountryCodeCompareResult,omitnil,omitempty" name:"CountryCodeCompareResult"`
+
+	// Comparison result of the passed-in machine-readable code and the machine-readable code recognized by NFC. 
+	// 0: Consistent 
+	// -1: Not the same 
+	// -2: NFC recognition failed, unable to compare
+	MachineReadCodeCompareResult *string `json:"MachineReadCodeCompareResult,omitnil,omitempty" name:"MachineReadCodeCompareResult"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type GetNFCResultResponse struct {
+	*tchttp.BaseResponse
+	Response *GetNFCResultResponseParams `json:"Response"`
+}
+
+func (r *GetNFCResultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetNFCResultResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type GetNFCTokenRequestParams struct {
 
 }
@@ -2625,135 +2894,6 @@ func (r *GetWebVerificationResultIntlResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *GetWebVerificationResultIntlResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type GetWxNFCResultRequestParams struct {
-	// <p>Unique identifier ID returned by the frontend NFC SDK</p>
-	NFCToken *string `json:"NFCToken,omitnil,omitempty" name:"NFCToken"`
-}
-
-type GetWxNFCResultRequest struct {
-	*tchttp.BaseRequest
-	
-	// <p>Unique identifier ID returned by the frontend NFC SDK</p>
-	NFCToken *string `json:"NFCToken,omitnil,omitempty" name:"NFCToken"`
-}
-
-func (r *GetWxNFCResultRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *GetWxNFCResultRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "NFCToken")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetWxNFCResultRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type GetWxNFCResultResponseParams struct {
-	// <p>NFC billing result code. Each successful NFC read is billed once (duplicate billing does not occur for repeated pull of the same NFC request). Permissible range of billing result codes:<br>  0: Read successful, billed<br>-1: Read fail, free of charge</p>
-	ResultCode *string `json:"ResultCode,omitnil,omitempty" name:"ResultCode"`
-
-	// <p>Identity card number</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdNum *string `json:"IdNum,omitnil,omitempty" name:"IdNum"`
-
-	// <p>name</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
-
-	// <p>Portrait photo in the document</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Picture *string `json:"Picture,omitnil,omitempty" name:"Picture"`
-
-	// <p>Front photo of the identity document (portrait side)</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdCardFrontImg *string `json:"IdCardFrontImg,omitnil,omitempty" name:"IdCardFrontImg"`
-
-	// <p>Photo of the back of an identity document (national emblem side)</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdCardBackImg *string `json:"IdCardBackImg,omitnil,omitempty" name:"IdCardBackImg"`
-
-	// <p>Date of birth</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	BirthDate *string `json:"BirthDate,omitnil,omitempty" name:"BirthDate"`
-
-	// <p>Validity start time</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
-
-	// <p>Validity end time</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
-
-	// <p>Address</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
-
-	// <p>Ethnicity</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Nation *string `json:"Nation,omitnil,omitempty" name:"Nation"`
-
-	// <p>Gender</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
-
-	// <p>Document type</p><p>Enumeration value:</p><ul><li>01: ID card</li><li>03: Chinese passport</li><li>06: Hong Kong and Macau travel permit</li><li>07: Taiwan travel permit</li><li>08: Foreign passport</li><li>13: Permanent residence permit for foreigners</li><li>14: Residence Permit for Hong Kong (China), Macao (China), and Taiwan (China) residents</li><li>15: Return Home Permit</li><li>16: Travel permit for Chinese mainland residents to Taiwan (China)</li><li>99: Other documents</li></ul>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	IdType *string `json:"IdType,omitnil,omitempty" name:"IdType"`
-
-	// <p>English name</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	EnName *string `json:"EnName,omitnil,omitempty" name:"EnName"`
-
-	// <p>Issuing authority</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	SigningOrganization *string `json:"SigningOrganization,omitnil,omitempty" name:"SigningOrganization"`
-
-	// <p>Residence Permit for residents of Hong Kong (China), Macao (China) and Taiwan (China), passport number</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	OtherIdNum *string `json:"OtherIdNum,omitnil,omitempty" name:"OtherIdNum"`
-
-	// <p>Travel document nationality</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
-
-	// <p>Characters 29 to 42 in the second line of the machine-readable zone of the travel document</p>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	PersonalNumber *string `json:"PersonalNumber,omitnil,omitempty" name:"PersonalNumber"`
-
-	// <p>Verification result of the document</p><ul><li>JSON format as follows: {"result_issuer":"issuer certificate legitimacy verification result","result_paper":"Document security object legitimacy verification result","result_data":"data tampering prevention verification result","result_chip":"chip replication prevention verification result"}. - Value ranges from 0 to 3: 0: verified, 1: verification failed, 2: unverified, 3: partially passed. When all four verification results are 0, it means the document is genuine.</li></ul>
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	CheckMRTD *string `json:"CheckMRTD,omitnil,omitempty" name:"CheckMRTD"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type GetWxNFCResultResponse struct {
-	*tchttp.BaseResponse
-	Response *GetWxNFCResultResponseParams `json:"Response"`
-}
-
-func (r *GetWxNFCResultResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *GetWxNFCResultResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3050,97 +3190,6 @@ func (r *IdCardVerificationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *IdCardVerificationResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ImageRecognitionRequestParams struct {
-	// <p>Identity card number</p>
-	IdCard *string `json:"IdCard,omitnil,omitempty" name:"IdCard"`
-
-	// <p>Name. For Chinese, please use UTF-8 encode.</p>
-	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
-
-	// <p>Image for face comparison, the Base64 value of the image.<br>The size of the Base64-encoded image data should be no more than 3M. Only jpg and png formats are supported.<br>Please use the standard Base64 encoding type (with = padding). Refer to RFC4648 for the coding specification.</p>
-	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
-
-	// <p>This parameter is not required for this API.</p>
-	Optional *string `json:"Optional,omitnil,omitempty" name:"Optional"`
-
-	// <p>Sensitive data encryption information. Users with encryption requirements for incoming information (name, identity card number) can use this parameter. For details, please click the left-side link.</p>
-	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
-}
-
-type ImageRecognitionRequest struct {
-	*tchttp.BaseRequest
-	
-	// <p>Identity card number</p>
-	IdCard *string `json:"IdCard,omitnil,omitempty" name:"IdCard"`
-
-	// <p>Name. For Chinese, please use UTF-8 encode.</p>
-	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
-
-	// <p>Image for face comparison, the Base64 value of the image.<br>The size of the Base64-encoded image data should be no more than 3M. Only jpg and png formats are supported.<br>Please use the standard Base64 encoding type (with = padding). Refer to RFC4648 for the coding specification.</p>
-	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
-
-	// <p>This parameter is not required for this API.</p>
-	Optional *string `json:"Optional,omitnil,omitempty" name:"Optional"`
-
-	// <p>Sensitive data encryption information. Users with encryption requirements for incoming information (name, identity card number) can use this parameter. For details, please click the left-side link.</p>
-	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
-}
-
-func (r *ImageRecognitionRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ImageRecognitionRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "IdCard")
-	delete(f, "Name")
-	delete(f, "ImageBase64")
-	delete(f, "Optional")
-	delete(f, "Encryption")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ImageRecognitionRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ImageRecognitionResponseParams struct {
-	// <p>Similarity, value ranges from 0.00 to 100.00. Recommend judging as the same person when similarity is at least 70. Threshold can be self-adjusted based on specific scenarios (pass rate for false matches is one in a thousand at threshold 70, and one in ten thousand at threshold 80).</p>
-	Sim *float64 `json:"Sim,omitnil,omitempty" name:"Sim"`
-
-	// <p>Business error code. Successfully returns Success in successful case. For error conditions, refer to the FailedOperation part in the error code list below.</p>
-	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
-
-	// <p>Business result description.</p>
-	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type ImageRecognitionResponse struct {
-	*tchttp.BaseResponse
-	Response *ImageRecognitionResponseParams `json:"Response"`
-}
-
-func (r *ImageRecognitionResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ImageRecognitionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

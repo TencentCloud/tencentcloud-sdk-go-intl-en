@@ -206,10 +206,10 @@ type AdBreakSetting struct {
 	// L-type compression recovery configuration
 	LSqueezeSetting *LSqueezeSetting `json:"LSqueezeSetting,omitnil,omitempty" name:"LSqueezeSetting"`
 
-
+	// Picture in picture configuration
 	PipSetting *PipSetting `json:"PipSetting,omitnil,omitempty" name:"PipSetting"`
 
-
+	// Circular setting
 	BorderFrameSetting *BorderFrameSetting `json:"BorderFrameSetting,omitnil,omitempty" name:"BorderFrameSetting"`
 }
 
@@ -371,10 +371,10 @@ type AudioTrackInfo struct {
 }
 
 type BorderFrameSetting struct {
-
+	// Live streaming source layout configuration
 	LiveSourceLayout *SourceLayout `json:"LiveSourceLayout,omitnil,omitempty" name:"LiveSourceLayout"`
 
-
+	// Background image URL, starting with http/https and ending in jpg/jpeg/png, (only required for UPLOAD_CREATIVES)
 	BackgroundImgUrl *string `json:"BackgroundImgUrl,omitnil,omitempty" name:"BackgroundImgUrl"`
 }
 
@@ -3423,7 +3423,7 @@ type ModifyStreamLiveWatermarkRequestParams struct {
 	// Watermark text settings. This parameter is valid if `Type` is `TEXT`.
 	TextSettings *CreateTextSettings `json:"TextSettings,omitnil,omitempty" name:"TextSettings"`
 
-
+	// AB watermark configuration.
 	AbWatermarkSettings *AbWatermarkSettingsReq `json:"AbWatermarkSettings,omitnil,omitempty" name:"AbWatermarkSettings"`
 }
 
@@ -3442,6 +3442,7 @@ type ModifyStreamLiveWatermarkRequest struct {
 	// Watermark text settings. This parameter is valid if `Type` is `TEXT`.
 	TextSettings *CreateTextSettings `json:"TextSettings,omitnil,omitempty" name:"TextSettings"`
 
+	// AB watermark configuration.
 	AbWatermarkSettings *AbWatermarkSettingsReq `json:"AbWatermarkSettings,omitnil,omitempty" name:"AbWatermarkSettings"`
 }
 
@@ -3543,19 +3544,19 @@ type OutputsStatistics struct {
 }
 
 type PipSetting struct {
-
+	// Audio selection: LIVE_SOURCE or AD_SOURCE
 	AudioSelection *string `json:"AudioSelection,omitnil,omitempty" name:"AudioSelection"`
 
-
+	// Live streaming source layout configuration
 	LiveSourceLayout *SourceLayout `json:"LiveSourceLayout,omitnil,omitempty" name:"LiveSourceLayout"`
 
-
+	// Advertisement source layout configuration
 	AdSourceLayout *SourceLayout `json:"AdSourceLayout,omitnil,omitempty" name:"AdSourceLayout"`
 
-
+	// Background image URL, starting with http/https and ending in jpg/jpeg/png (only required for UPLOAD_CREATIVES)
 	BackgroundImgUrl *string `json:"BackgroundImgUrl,omitnil,omitempty" name:"BackgroundImgUrl"`
 
-
+	// Advertisement video URL, starting with http/https and ending in mp4 (only required for UPLOAD_CREATIVES)
 	AdSourceUrl *string `json:"AdSourceUrl,omitnil,omitempty" name:"AdSourceUrl"`
 }
 
@@ -3828,13 +3829,13 @@ type SegmentationDescriptorRespInfo struct {
 }
 
 type SourceLayout struct {
-
+	// Left margin offset percentage, picture in picture range 0-99, left offset+right offset<100; Return range 0-50, left offset+right offset<100
 	LeftOffset *uint64 `json:"LeftOffset,omitnil,omitempty" name:"LeftOffset"`
 
-
+	// The offset percentage of the right margin, picture in picture range 0-99, left offset+right offset<100; Return range 0-50, left offset+right offset<100
 	RightOffset *uint64 `json:"RightOffset,omitnil,omitempty" name:"RightOffset"`
 
-
+	// Offset percentage of bottom margin, range 0-50
 	BottomOffset *uint64 `json:"BottomOffset,omitnil,omitempty" name:"BottomOffset"`
 }
 

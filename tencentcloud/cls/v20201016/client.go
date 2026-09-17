@@ -785,6 +785,80 @@ func (c *Client) CreateAlarmShieldWithContext(ctx context.Context, request *Crea
     return
 }
 
+func NewCreateCLSDeliverTaskRequest() (request *CreateCLSDeliverTaskRequest) {
+    request = &CreateCLSDeliverTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateCLSDeliverTask")
+    
+    
+    return
+}
+
+func NewCreateCLSDeliverTaskResponse() (response *CreateCLSDeliverTaskResponse) {
+    response = &CreateCLSDeliverTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateCLSDeliverTask
+// Create a CLS shipping task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateCLSDeliverTask(request *CreateCLSDeliverTaskRequest) (response *CreateCLSDeliverTaskResponse, err error) {
+    return c.CreateCLSDeliverTaskWithContext(context.Background(), request)
+}
+
+// CreateCLSDeliverTask
+// Create a CLS shipping task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateCLSDeliverTaskWithContext(ctx context.Context, request *CreateCLSDeliverTaskRequest) (response *CreateCLSDeliverTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateCLSDeliverTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "CreateCLSDeliverTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCLSDeliverTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCLSDeliverTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCloudProductLogCollectionRequest() (request *CreateCloudProductLogCollectionRequest) {
     request = &CreateCloudProductLogCollectionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3365,6 +3439,76 @@ func (c *Client) DeleteAlarmShieldWithContext(ctx context.Context, request *Dele
     return
 }
 
+func NewDeleteCLSDeliverTaskRequest() (request *DeleteCLSDeliverTaskRequest) {
+    request = &DeleteCLSDeliverTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteCLSDeliverTask")
+    
+    
+    return
+}
+
+func NewDeleteCLSDeliverTaskResponse() (response *DeleteCLSDeliverTaskResponse) {
+    response = &DeleteCLSDeliverTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteCLSDeliverTask
+// Delete a CLS shipping task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DeleteCLSDeliverTask(request *DeleteCLSDeliverTaskRequest) (response *DeleteCLSDeliverTaskResponse, err error) {
+    return c.DeleteCLSDeliverTaskWithContext(context.Background(), request)
+}
+
+// DeleteCLSDeliverTask
+// Delete a CLS shipping task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DeleteCLSDeliverTaskWithContext(ctx context.Context, request *DeleteCLSDeliverTaskRequest) (response *DeleteCLSDeliverTaskResponse, err error) {
+    if request == nil {
+        request = NewDeleteCLSDeliverTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DeleteCLSDeliverTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCLSDeliverTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCLSDeliverTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteCloudProductLogCollectionRequest() (request *DeleteCloudProductLogCollectionRequest) {
     request = &DeleteCloudProductLogCollectionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5923,6 +6067,76 @@ func (c *Client) DescribeAlertRecordHistoryWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDescribeAlertRecordHistoryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCLSDeliverTasksRequest() (request *DescribeCLSDeliverTasksRequest) {
+    request = &DescribeCLSDeliverTasksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeCLSDeliverTasks")
+    
+    
+    return
+}
+
+func NewDescribeCLSDeliverTasksResponse() (response *DescribeCLSDeliverTasksResponse) {
+    response = &DescribeCLSDeliverTasksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCLSDeliverTasks
+// This API is used to get the CLS delivery task list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_RECORDNOTEXIST = "ResourceNotFound.RecordNotExist"
+func (c *Client) DescribeCLSDeliverTasks(request *DescribeCLSDeliverTasksRequest) (response *DescribeCLSDeliverTasksResponse, err error) {
+    return c.DescribeCLSDeliverTasksWithContext(context.Background(), request)
+}
+
+// DescribeCLSDeliverTasks
+// This API is used to get the CLS delivery task list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_RECORDNOTEXIST = "ResourceNotFound.RecordNotExist"
+func (c *Client) DescribeCLSDeliverTasksWithContext(ctx context.Context, request *DescribeCLSDeliverTasksRequest) (response *DescribeCLSDeliverTasksResponse, err error) {
+    if request == nil {
+        request = NewDescribeCLSDeliverTasksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "DescribeCLSDeliverTasks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCLSDeliverTasks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCLSDeliverTasksResponse()
     err = c.Send(request, response)
     return
 }
@@ -10359,6 +10573,80 @@ func (c *Client) ModifyAlarmShieldWithContext(ctx context.Context, request *Modi
     request.SetContext(ctx)
     
     response = NewModifyAlarmShieldResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyCLSDeliverTaskRequest() (request *ModifyCLSDeliverTaskRequest) {
+    request = &ModifyCLSDeliverTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyCLSDeliverTask")
+    
+    
+    return
+}
+
+func NewModifyCLSDeliverTaskResponse() (response *ModifyCLSDeliverTaskResponse) {
+    response = &ModifyCLSDeliverTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyCLSDeliverTask
+// Modify a CLS shipping task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyCLSDeliverTask(request *ModifyCLSDeliverTaskRequest) (response *ModifyCLSDeliverTaskResponse, err error) {
+    return c.ModifyCLSDeliverTaskWithContext(context.Background(), request)
+}
+
+// ModifyCLSDeliverTask
+// Modify a CLS shipping task
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_LOGSETNOTEXIST = "ResourceNotFound.LogsetNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyCLSDeliverTaskWithContext(ctx context.Context, request *ModifyCLSDeliverTaskRequest) (response *ModifyCLSDeliverTaskResponse, err error) {
+    if request == nil {
+        request = NewModifyCLSDeliverTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cls", APIVersion, "ModifyCLSDeliverTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCLSDeliverTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCLSDeliverTaskResponse()
     err = c.Send(request, response)
     return
 }

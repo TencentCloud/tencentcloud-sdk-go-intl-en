@@ -109,4 +109,7 @@ const (
 
 	// UnsupportedOperation.InvalidInstanceState
 	UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+
+	// UnsupportedOperation.LegacyCompatBatchMixed
+	UNSUPPORTEDOPERATION_LEGACYCOMPATBATCHMIXED = "UnsupportedOperation.LegacyCompatBatchMixed"
 )

@@ -1985,6 +1985,60 @@ func (c *Client) CheckAssistantCidrWithContext(ctx context.Context, request *Che
     return
 }
 
+func NewCheckGatewayFlowMonitorRequest() (request *CheckGatewayFlowMonitorRequest) {
+    request = &CheckGatewayFlowMonitorRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "CheckGatewayFlowMonitor")
+    
+    
+    return
+}
+
+func NewCheckGatewayFlowMonitorResponse() (response *CheckGatewayFlowMonitorResponse) {
+    response = &CheckGatewayFlowMonitorResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CheckGatewayFlowMonitor
+// This API is used to query whether the gateway traffic monitoring is enabled.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+func (c *Client) CheckGatewayFlowMonitor(request *CheckGatewayFlowMonitorRequest) (response *CheckGatewayFlowMonitorResponse, err error) {
+    return c.CheckGatewayFlowMonitorWithContext(context.Background(), request)
+}
+
+// CheckGatewayFlowMonitor
+// This API is used to query whether the gateway traffic monitoring is enabled.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDSTATE = "UnsupportedOperation.InvalidState"
+func (c *Client) CheckGatewayFlowMonitorWithContext(ctx context.Context, request *CheckGatewayFlowMonitorRequest) (response *CheckGatewayFlowMonitorResponse, err error) {
+    if request == nil {
+        request = NewCheckGatewayFlowMonitorRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vpc", APIVersion, "CheckGatewayFlowMonitor")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckGatewayFlowMonitor require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCheckGatewayFlowMonitorResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCheckNetDetectStateRequest() (request *CheckNetDetectStateRequest) {
     request = &CheckNetDetectStateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6901,13 +6955,20 @@ func NewDeleteNatGatewayResponse() (response *DeleteNatGatewayResponse) {
 // DeleteNatGateway
 // This API is used to delete a NAT gateway.
 //
-// When a NAT gateway is deleted, all routes containing this gateway are deleted automatically, and the elastic IP is unbound.
+// When a NAT gateway is deleted, all routes containing this gateway are deleted automatically, and associated EIPs are unbound.When deleting a NAT gateway, you need to unbind the associated EIPs. Therefore, the caller must have CAM permissions for vpc:DisassociateAddress and vpc:ModifyAddressesBandwidth.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINUSE_NATUSEDBYCFW = "ResourceInUse.NatUsedByCFW"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_DELETIONPROTECTIONENABLED = "UnsupportedOperation.DeletionProtectionEnabled"
 //  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+//  UNSUPPORTEDOPERATION_NATGATEWAYHAVEHIGHTRAFFIC = "UnsupportedOperation.NatGatewayHaveHighTraffic"
+//  UNSUPPORTEDOPERATION_NATGATEWAYHAVEROUTE = "UnsupportedOperation.NatGatewayHaveRoute"
+//  UNSUPPORTEDOPERATION_NATGATEWAYHAVEROUTEANDHIGHTRAFFIC = "UnsupportedOperation.NatGatewayHaveRouteAndHighTraffic"
+//  UNSUPPORTEDOPERATION_NATGATEWAYHAVETRAFFICMIRROR = "UnsupportedOperation.NatGatewayHaveTrafficMirror"
+//  UNSUPPORTEDOPERATION_TRAFFICVALIDATIONFAILED = "UnsupportedOperation.TrafficValidationFailed"
 func (c *Client) DeleteNatGateway(request *DeleteNatGatewayRequest) (response *DeleteNatGatewayResponse, err error) {
     return c.DeleteNatGatewayWithContext(context.Background(), request)
 }
@@ -6915,13 +6976,20 @@ func (c *Client) DeleteNatGateway(request *DeleteNatGatewayRequest) (response *D
 // DeleteNatGateway
 // This API is used to delete a NAT gateway.
 //
-// When a NAT gateway is deleted, all routes containing this gateway are deleted automatically, and the elastic IP is unbound.
+// When a NAT gateway is deleted, all routes containing this gateway are deleted automatically, and associated EIPs are unbound.When deleting a NAT gateway, you need to unbind the associated EIPs. Therefore, the caller must have CAM permissions for vpc:DisassociateAddress and vpc:ModifyAddressesBandwidth.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINUSE_NATUSEDBYCFW = "ResourceInUse.NatUsedByCFW"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_DELETIONPROTECTIONENABLED = "UnsupportedOperation.DeletionProtectionEnabled"
 //  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+//  UNSUPPORTEDOPERATION_NATGATEWAYHAVEHIGHTRAFFIC = "UnsupportedOperation.NatGatewayHaveHighTraffic"
+//  UNSUPPORTEDOPERATION_NATGATEWAYHAVEROUTE = "UnsupportedOperation.NatGatewayHaveRoute"
+//  UNSUPPORTEDOPERATION_NATGATEWAYHAVEROUTEANDHIGHTRAFFIC = "UnsupportedOperation.NatGatewayHaveRouteAndHighTraffic"
+//  UNSUPPORTEDOPERATION_NATGATEWAYHAVETRAFFICMIRROR = "UnsupportedOperation.NatGatewayHaveTrafficMirror"
+//  UNSUPPORTEDOPERATION_TRAFFICVALIDATIONFAILED = "UnsupportedOperation.TrafficValidationFailed"
 func (c *Client) DeleteNatGatewayWithContext(ctx context.Context, request *DeleteNatGatewayRequest) (response *DeleteNatGatewayResponse, err error) {
     if request == nil {
         request = NewDeleteNatGatewayRequest()
@@ -10591,6 +10659,74 @@ func (c *Client) DescribeNatGatewayDirectConnectGatewayRouteWithContext(ctx cont
     return
 }
 
+func NewDescribeNatGatewayFlowMonitorDetailRequest() (request *DescribeNatGatewayFlowMonitorDetailRequest) {
+    request = &DescribeNatGatewayFlowMonitorDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeNatGatewayFlowMonitorDetail")
+    
+    
+    return
+}
+
+func NewDescribeNatGatewayFlowMonitorDetailResponse() (response *DescribeNatGatewayFlowMonitorDetailResponse) {
+    response = &DescribeNatGatewayFlowMonitorDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeNatGatewayFlowMonitorDetail
+// This API is used to query the traffic monitoring details of a NAT gateway.
+//
+// 
+//
+// - You can only use this API to query a single gateway instance. The input parameter `NatGatewayId` supports at most one value, and it must be passed.- If the gateway has traffic, but no data is returned when this API is called, please check whether gateway traffic monitoring is enabled in the corresponding gateway details page in the console.
+//
+// error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeNatGatewayFlowMonitorDetail(request *DescribeNatGatewayFlowMonitorDetailRequest) (response *DescribeNatGatewayFlowMonitorDetailResponse, err error) {
+    return c.DescribeNatGatewayFlowMonitorDetailWithContext(context.Background(), request)
+}
+
+// DescribeNatGatewayFlowMonitorDetail
+// This API is used to query the traffic monitoring details of a NAT gateway.
+//
+// 
+//
+// - You can only use this API to query a single gateway instance. The input parameter `NatGatewayId` supports at most one value, and it must be passed.- If the gateway has traffic, but no data is returned when this API is called, please check whether gateway traffic monitoring is enabled in the corresponding gateway details page in the console.
+//
+// error code that may be returned:
+//  INTERNALERROR_MODULEERROR = "InternalError.ModuleError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeNatGatewayFlowMonitorDetailWithContext(ctx context.Context, request *DescribeNatGatewayFlowMonitorDetailRequest) (response *DescribeNatGatewayFlowMonitorDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeNatGatewayFlowMonitorDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vpc", APIVersion, "DescribeNatGatewayFlowMonitorDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeNatGatewayFlowMonitorDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeNatGatewayFlowMonitorDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeNatGatewaySourceIpTranslationNatRulesRequest() (request *DescribeNatGatewaySourceIpTranslationNatRulesRequest) {
     request = &DescribeNatGatewaySourceIpTranslationNatRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -10655,6 +10791,74 @@ func (c *Client) DescribeNatGatewaySourceIpTranslationNatRulesWithContext(ctx co
     request.SetContext(ctx)
     
     response = NewDescribeNatGatewaySourceIpTranslationNatRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeNatGatewayZonesRequest() (request *DescribeNatGatewayZonesRequest) {
+    request = &DescribeNatGatewayZonesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeNatGatewayZones")
+    
+    
+    return
+}
+
+func NewDescribeNatGatewayZonesResponse() (response *DescribeNatGatewayZonesResponse) {
+    response = &DescribeNatGatewayZonesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeNatGatewayZones
+// This API is used to query the information of saleable availability zones (AZs) for NAT gateways.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeNatGatewayZones(request *DescribeNatGatewayZonesRequest) (response *DescribeNatGatewayZonesResponse, err error) {
+    return c.DescribeNatGatewayZonesWithContext(context.Background(), request)
+}
+
+// DescribeNatGatewayZones
+// This API is used to query the information of saleable availability zones (AZs) for NAT gateways.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FILTERINVALIDKEY = "InvalidParameter.FilterInvalidKey"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeNatGatewayZonesWithContext(ctx context.Context, request *DescribeNatGatewayZonesRequest) (response *DescribeNatGatewayZonesResponse, err error) {
+    if request == nil {
+        request = NewDescribeNatGatewayZonesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vpc", APIVersion, "DescribeNatGatewayZones")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeNatGatewayZones require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeNatGatewayZonesResponse()
     err = c.Send(request, response)
     return
 }
@@ -18489,7 +18693,7 @@ func NewRefreshDirectConnectGatewayRouteToNatGatewayResponse() (response *Refres
 }
 
 // RefreshDirectConnectGatewayRouteToNatGateway
-// This API is used to refresh the route between a NAT gateway and  Direct Connect and update the associated route table.
+// This API is used to refresh the route between a NAT gateway and Direct Connect and update the associated route table.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -18501,7 +18705,7 @@ func (c *Client) RefreshDirectConnectGatewayRouteToNatGateway(request *RefreshDi
 }
 
 // RefreshDirectConnectGatewayRouteToNatGateway
-// This API is used to refresh the route between a NAT gateway and  Direct Connect and update the associated route table.
+// This API is used to refresh the route between a NAT gateway and Direct Connect and update the associated route table.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

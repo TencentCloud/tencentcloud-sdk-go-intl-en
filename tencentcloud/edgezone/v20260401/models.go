@@ -147,62 +147,78 @@ func (r *CreateEdgeNodeServiceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateInstancesRequestParams struct {
-	// Availability zone code, such as ap-guangzhou-1.
+	// <p>Availability zone code, such as ap-guangzhou-1.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Model specifications, such as BMS5.MEDIUM8.
+	// <p>Model specifications, such as BMS5.MEDIUM8.</p>
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Instance name.
-	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
-
-	// Private network instance ID in the format of net-xxx.
+	// <p>Private network instance ID in the format of net-xxx.</p>
 	PrivateNetworkId *string `json:"PrivateNetworkId,omitnil,omitempty" name:"PrivateNetworkId"`
 
-	// Public network instance ID, in the format of net-xxx.
+	// <p>Public network instance ID, in the format of net-xxx.</p>
 	PublicNetworkId *string `json:"PublicNetworkId,omitnil,omitempty" name:"PublicNetworkId"`
 
-	// Image ID, for example img-centos-7.9.
+	// <p>Instance name.</p>
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// <p>Image ID, for example img-centos-7.9.</p>
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
-	// Specify the quantity. Default is 1. Maximum is 50.
+	// <p>Specify the quantity. Default is 1. Maximum is 50.</p>
 	InstanceCount *uint64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
-	// Image version number. Only public images have the concept of version.
+	// <p>Login password. Either it or SSHKey is required.</p>
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// <p>Public key string of the SSH key. Either this parameter or Password must be specified.</p>
+	SSHKey *string `json:"SSHKey,omitnil,omitempty" name:"SSHKey"`
+
+	// <p>Image version number. Only public images have the concept of version.</p>
+	//
+	// Deprecated: VersionNumber is deprecated.
 	VersionNumber *string `json:"VersionNumber,omitnil,omitempty" name:"VersionNumber"`
 
-	// Whether to enable public IPv6, default false. Enabled, the system will allocate an additional IPv6 address after assigning an IPv4 address.
+	// <p>Whether to enable public IPv6, default false. Enabled, the system will allocate an additional IPv6 address after assigning an IPv4 address.</p>
+	//
+	// Deprecated: EnableIpv6 is deprecated.
 	EnableIpv6 *bool `json:"EnableIpv6,omitnil,omitempty" name:"EnableIpv6"`
 }
 
 type CreateInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Availability zone code, such as ap-guangzhou-1.
+	// <p>Availability zone code, such as ap-guangzhou-1.</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Model specifications, such as BMS5.MEDIUM8.
+	// <p>Model specifications, such as BMS5.MEDIUM8.</p>
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Instance name.
-	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
-
-	// Private network instance ID in the format of net-xxx.
+	// <p>Private network instance ID in the format of net-xxx.</p>
 	PrivateNetworkId *string `json:"PrivateNetworkId,omitnil,omitempty" name:"PrivateNetworkId"`
 
-	// Public network instance ID, in the format of net-xxx.
+	// <p>Public network instance ID, in the format of net-xxx.</p>
 	PublicNetworkId *string `json:"PublicNetworkId,omitnil,omitempty" name:"PublicNetworkId"`
 
-	// Image ID, for example img-centos-7.9.
+	// <p>Instance name.</p>
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// <p>Image ID, for example img-centos-7.9.</p>
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
-	// Specify the quantity. Default is 1. Maximum is 50.
+	// <p>Specify the quantity. Default is 1. Maximum is 50.</p>
 	InstanceCount *uint64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
-	// Image version number. Only public images have the concept of version.
+	// <p>Login password. Either it or SSHKey is required.</p>
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// <p>Public key string of the SSH key. Either this parameter or Password must be specified.</p>
+	SSHKey *string `json:"SSHKey,omitnil,omitempty" name:"SSHKey"`
+
+	// <p>Image version number. Only public images have the concept of version.</p>
 	VersionNumber *string `json:"VersionNumber,omitnil,omitempty" name:"VersionNumber"`
 
-	// Whether to enable public IPv6, default false. Enabled, the system will allocate an additional IPv6 address after assigning an IPv4 address.
+	// <p>Whether to enable public IPv6, default false. Enabled, the system will allocate an additional IPv6 address after assigning an IPv4 address.</p>
 	EnableIpv6 *bool `json:"EnableIpv6,omitnil,omitempty" name:"EnableIpv6"`
 }
 
@@ -220,11 +236,13 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Zone")
 	delete(f, "InstanceType")
-	delete(f, "InstanceName")
 	delete(f, "PrivateNetworkId")
 	delete(f, "PublicNetworkId")
+	delete(f, "InstanceName")
 	delete(f, "ImageId")
 	delete(f, "InstanceCount")
+	delete(f, "Password")
+	delete(f, "SSHKey")
 	delete(f, "VersionNumber")
 	delete(f, "EnableIpv6")
 	if len(f) > 0 {
@@ -235,10 +253,10 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateInstancesResponseParams struct {
-	// List of successfully created instance IDs.
+	// <p>List of successfully created instance IDs.</p>
 	InstanceIdSet []*string `json:"InstanceIdSet,omitnil,omitempty" name:"InstanceIdSet"`
 
-	// Count of failed instances. This field is returned only when partially failed, not returned when all successful.
+	// <p>Count of failed instances. This field is returned only when partially failed, not returned when all successful.</p>
 	FailedCount *uint64 `json:"FailedCount,omitnil,omitempty" name:"FailedCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -536,6 +554,12 @@ func (r *DeletePublicNetworkInstanceResponse) FromJsonString(s string) error {
 type DescribeInstanceTypesRequestParams struct {
 	// Availability zone code, such as ap-guangzhou-1. If not passed, return models under the account in all AZs.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Pagination size. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeInstanceTypesRequest struct {
@@ -543,6 +567,12 @@ type DescribeInstanceTypesRequest struct {
 	
 	// Availability zone code, such as ap-guangzhou-1. If not passed, return models under the account in all AZs.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Pagination offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Pagination size. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeInstanceTypesRequest) ToJsonString() string {
@@ -558,6 +588,8 @@ func (r *DescribeInstanceTypesRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Zone")
+	delete(f, "Offset")
+	delete(f, "Limit")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceTypesRequest has unknown keys!", "")
 	}
@@ -594,50 +626,62 @@ func (r *DescribeInstanceTypesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstancesRequestParams struct {
-	// Instance ID list for filtering by instance ID
+	// <p>Instance ID list for filtering by instance ID</p>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Instance name, supports fuzzy matching
+	// <p>Instance name, supports fuzzy matching.</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Availability zone code for filtering instances in the specified availability zone
+	// <p>Availability zone code for filtering instances in the specified availability zone</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Instance status list for status filtering. Available values: allocating, running, isolating, isolated, terminating, error.
+	// <p>Instance status list for status filtering. Available values: allocating, running, isolating, isolated, terminating, error.</p>
 	InstanceStatus []*string `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
 
-	// Public IPv4 address list, used for filtering instances by public IP address
+	// <p>Public network ID.</p>
+	PublicNetworkId *string `json:"PublicNetworkId,omitnil,omitempty" name:"PublicNetworkId"`
+
+	// <p>VPC ID.</p>
+	PrivateNetworkId *string `json:"PrivateNetworkId,omitnil,omitempty" name:"PrivateNetworkId"`
+
+	// <p>Public IPv4 address list, used for filtering instances by public IP address</p>
 	PublicIps []*string `json:"PublicIps,omitnil,omitempty" name:"PublicIps"`
 
-	// Offset. Default value: 0
+	// <p>Offset. Default value: 0.</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned results. Default 20. Maximum 100.
+	// <p>Number of returned results. Default 20. Maximum 100.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID list for filtering by instance ID
+	// <p>Instance ID list for filtering by instance ID</p>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Instance name, supports fuzzy matching
+	// <p>Instance name, supports fuzzy matching.</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Availability zone code for filtering instances in the specified availability zone
+	// <p>Availability zone code for filtering instances in the specified availability zone</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Instance status list for status filtering. Available values: allocating, running, isolating, isolated, terminating, error.
+	// <p>Instance status list for status filtering. Available values: allocating, running, isolating, isolated, terminating, error.</p>
 	InstanceStatus []*string `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
 
-	// Public IPv4 address list, used for filtering instances by public IP address
+	// <p>Public network ID.</p>
+	PublicNetworkId *string `json:"PublicNetworkId,omitnil,omitempty" name:"PublicNetworkId"`
+
+	// <p>VPC ID.</p>
+	PrivateNetworkId *string `json:"PrivateNetworkId,omitnil,omitempty" name:"PrivateNetworkId"`
+
+	// <p>Public IPv4 address list, used for filtering instances by public IP address</p>
 	PublicIps []*string `json:"PublicIps,omitnil,omitempty" name:"PublicIps"`
 
-	// Offset. Default value: 0
+	// <p>Offset. Default value: 0.</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned results. Default 20. Maximum 100.
+	// <p>Number of returned results. Default 20. Maximum 100.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -657,6 +701,8 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 	delete(f, "InstanceName")
 	delete(f, "Zone")
 	delete(f, "InstanceStatus")
+	delete(f, "PublicNetworkId")
+	delete(f, "PrivateNetworkId")
 	delete(f, "PublicIps")
 	delete(f, "Offset")
 	delete(f, "Limit")
@@ -668,10 +714,10 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstancesResponseParams struct {
-	// Instance detail list
+	// <p>Instance detail list</p>
 	InstanceSet []*Instance `json:"InstanceSet,omitnil,omitempty" name:"InstanceSet"`
 
-	// Number of Eligible Instances
+	// <p>Number of eligible instances.</p>
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1095,10 +1141,10 @@ func (r *DescribeZonesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeZonesResponseParams struct {
-	// Availability zone list of all regions.
+	// <p>AZ list of all regions.</p>
 	ZoneSet []*ZoneInfo `json:"ZoneSet,omitnil,omitempty" name:"ZoneSet"`
 
-	// Total number of availability zones.
+	// <p>Total number of availability zones.</p>
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1133,53 +1179,73 @@ type FailedInstance struct {
 }
 
 type Instance struct {
-	// Instance ID.
+	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name.
+	// <p>Instance name.</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Bound Physical Machine ID
+	// <p>Bound Physical Machine ID</p>
 	MachineId *string `json:"MachineId,omitnil,omitempty" name:"MachineId"`
 
-	// Model specifications
+	// <p>Model specifications</p>
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-	// Availability zone code
+	// <p>Availability zone code</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Image ID
+	// <p>Image ID.</p>
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
-	// Image version number
+	// <p>Image version number</p>
+	//
+	// Deprecated: VersionNumber is deprecated.
 	VersionNumber *string `json:"VersionNumber,omitnil,omitempty" name:"VersionNumber"`
 
-	// Instance status, value range: allocating, running, isolating, isolated, terminating, error.
+	// <p>Instance status, value range: allocating, running, isolating, isolated, terminating, error.</p>
 	InstanceStatus *string `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
 
-	// Operation status: normal, starting, stopping, stopped, rebooting.
+	// <p>Operation status: normal, starting, stopping, stopped, rebooting.</p>
 	OperateStatus *string `json:"OperateStatus,omitnil,omitempty" name:"OperateStatus"`
 
-	// VPC ID
+	// <p>VPC ID.</p>
 	PrivateNetworkId *string `json:"PrivateNetworkId,omitnil,omitempty" name:"PrivateNetworkId"`
 
-	// private IPv4 address
+	// <p>Private IPv4 address</p>
 	PrivateIp *string `json:"PrivateIp,omitnil,omitempty" name:"PrivateIp"`
 
-	// private IPv6 address
+	// <p>Private IPv6 address</p>
 	PrivateIpV6 *string `json:"PrivateIpV6,omitnil,omitempty" name:"PrivateIpV6"`
 
-	// Public network ID
+	// <p>Public network ID.</p>
 	PublicNetworkId *string `json:"PublicNetworkId,omitnil,omitempty" name:"PublicNetworkId"`
 
-	// Public IPv4 address
+	// <p>Public IPv4 address</p>
 	PublicIp *string `json:"PublicIp,omitnil,omitempty" name:"PublicIp"`
 
-	// Public IPv6 address
+	// <p>Public IPv6 address</p>
 	PublicIpV6 *string `json:"PublicIpV6,omitnil,omitempty" name:"PublicIpV6"`
 
-	// Creation time, expressed according to the ISO8601 standard and using the UTC time. The format is YYYY-MM-DDThh:mm:ssZ.
+	// <p>File System Type</p>
+	FileSystemType *string `json:"FileSystemType,omitnil,omitempty" name:"FileSystemType"`
+
+	// <p>Creation time, in the ISO 8601 standard format, using UTC time. Format: YYYY-MM-DDThh:mm:ssZ.</p>
 	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
+
+	// <p>Instance family flag</p>
+	InstanceFamily *string `json:"InstanceFamily,omitnil,omitempty" name:"InstanceFamily"`
+
+	// <p>Model Family Name</p>
+	InstanceFamilyName *string `json:"InstanceFamilyName,omitnil,omitempty" name:"InstanceFamilyName"`
+
+	// <p>CPU Model</p>
+	CpuType *string `json:"CpuType,omitnil,omitempty" name:"CpuType"`
+
+	// <p>CPU cores.</p>
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
+
+	// <p>Memory size.</p>
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 }
 
 type InstanceTypeQuota struct {
@@ -1191,6 +1257,9 @@ type InstanceTypeQuota struct {
 
 	// Model family.
 	InstanceFamily *string `json:"InstanceFamily,omitnil,omitempty" name:"InstanceFamily"`
+
+	// Model family name
+	InstanceFamilyName *string `json:"InstanceFamilyName,omitnil,omitempty" name:"InstanceFamilyName"`
 
 	// Number of CPU cores.
 	CpuCores *int64 `json:"CpuCores,omitnil,omitempty" name:"CpuCores"`
@@ -1219,6 +1288,15 @@ type InstanceTypeQuota struct {
 	// Number of data disks.
 	DataDiskCount *uint64 `json:"DataDiskCount,omitnil,omitempty" name:"DataDiskCount"`
 
+	// Second set of data disk types
+	SecondaryDataDiskType *string `json:"SecondaryDataDiskType,omitnil,omitempty" name:"SecondaryDataDiskType"`
+
+	// Data disk size of the second group (GB)
+	SecondaryDataDiskSize *int64 `json:"SecondaryDataDiskSize,omitnil,omitempty" name:"SecondaryDataDiskSize"`
+
+	// Number of data disks in the second set
+	SecondaryDataDiskCount *int64 `json:"SecondaryDataDiskCount,omitnil,omitempty" name:"SecondaryDataDiskCount"`
+
 	// Disk description string (backward compatibility).
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
@@ -1228,7 +1306,7 @@ type InstanceTypeQuota struct {
 	// GPU type. Empty string if no GPU is available.
 	GpuType *string `json:"GpuType,omitnil,omitempty" name:"GpuType"`
 
-	// Quota quantity. 0 indicates no restriction.
+	// Quota quantity
 	Quota *uint64 `json:"Quota,omitnil,omitempty" name:"Quota"`
 }
 
@@ -1264,9 +1342,13 @@ type ModifyInstanceAttributeRequestParams struct {
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// New public IP address (select from available IP addresses of the public network instance bound to the instance). Provide at least one of this or InstanceName.
+	//
+	// Deprecated: NewPublicIp is deprecated.
 	NewPublicIp *string `json:"NewPublicIp,omitnil,omitempty" name:"NewPublicIp"`
 
 	// IP type, ipv4 or ipv6. Default is ipv4. Valid only when NewPublicIp is specified.
+	//
+	// Deprecated: IpType is deprecated.
 	IpType *string `json:"IpType,omitnil,omitempty" name:"IpType"`
 }
 
@@ -1612,14 +1694,14 @@ type SwitchData struct {
 
 // Predefined struct for user
 type TerminateInstancesRequestParams struct {
-	// Instance ID list. Maximum number of IDs: 100.
+	// <p>Instance ID list. Maximum number of IDs: 100.</p>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type TerminateInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID list. Maximum number of IDs: 100.
+	// <p>Instance ID list. Maximum number of IDs: 100.</p>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
@@ -1644,11 +1726,10 @@ func (r *TerminateInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type TerminateInstancesResponseParams struct {
-	// List of instance IDs successfully terminated.
+	// <p>List of instance IDs successfully terminated.</p>
 	InstanceIdSet []*string `json:"InstanceIdSet,omitnil,omitempty" name:"InstanceIdSet"`
 
-	// List of instances with termination failed (returned when partially successful).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>List of instances with termination failed (returned when partially successful).</p>
 	FailedInstanceSet []*FailedInstance `json:"FailedInstanceSet,omitnil,omitempty" name:"FailedInstanceSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1687,9 +1768,9 @@ type ZoneInfo struct {
 	// Region code.
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Area code
+	// Area code.
 	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
 
-	// Zone Name
+	// Region name.
 	LocationName *string `json:"LocationName,omitnil,omitempty" name:"LocationName"`
 }

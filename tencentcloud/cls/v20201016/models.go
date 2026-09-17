@@ -649,6 +649,47 @@ type BaseMetricCollectConfig struct {
 	Configs []*MetricCollectConfig `json:"Configs,omitnil,omitempty" name:"Configs"`
 }
 
+type CLSDeliverTaskInfo struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Task name</p>
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
+
+	// <p>Main account id</p>
+	Uin *uint64 `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// <p>Source topic information</p>
+	SourceTopicConfig *SourceTopicConfig `json:"SourceTopicConfig,omitnil,omitempty" name:"SourceTopicConfig"`
+
+	// <p>Target topic information</p>
+	TargetTopicConfig *TargetTopicConfig `json:"TargetTopicConfig,omitnil,omitempty" name:"TargetTopicConfig"`
+
+	// <p>Shipping Rule</p>
+	DeliverRule *DeliverRule `json:"DeliverRule,omitnil,omitempty" name:"DeliverRule"`
+
+	// <p>Compliance guarantee</p>
+	Compliance *uint64 `json:"Compliance,omitnil,omitempty" name:"Compliance"`
+
+	// <p>Task status.</p><p>Enumeration values: </p><ul><li>0: Running, </li><li>1: Paused, </li><li>2: Completed, </li><li>3: Exception.</li></ul>
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Status.</p><p>Enumeration values: </p><ul><li>0: Running, </li><li>1: Suspended.</li></ul>
+	Enable *uint64 `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// <p>Task progress percentage</p>
+	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// <p>Whether delivery service log is enabled.</p><p>Enumeration values:</p><ul><li>1: Disabled</li><li>2: Enabled</li></ul>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+
+	// <p>Creation time.</p><p>Unit: unix second-level timestamp</p>
+	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Update time</p><p>Unit: unix second-level timestamp</p>
+	UpdateTime *uint64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
 type CallBackInfo struct {
 	// Callback Body.
 	// Place various alarm variables in the request content. For details, see the help documentation (https://www.tencentcloud.com/document/product/614/74718?from_cn_redirect=1).
@@ -2022,6 +2063,98 @@ func (r *CreateAlarmShieldResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateAlarmShieldResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCLSDeliverTaskRequestParams struct {
+	// <p>Task name</p><p>Parameter format: <code>^[a-zA-Z0-9_-]{1,64}$</code></p>
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
+
+	// <p>Source topic information</p>
+	SourceTopicConfig *SourceTopicConfig `json:"SourceTopicConfig,omitnil,omitempty" name:"SourceTopicConfig"`
+
+	// <p>Target topic information</p>
+	TargetTopicConfig *TargetTopicConfig `json:"TargetTopicConfig,omitnil,omitempty" name:"TargetTopicConfig"`
+
+	// <p>Shipping Rule</p>
+	DeliverRule *DeliverRule `json:"DeliverRule,omitnil,omitempty" name:"DeliverRule"`
+
+	// <p>Compliance commitment.</p><p>Enumeration values:</p><ul><li>1: Agree to the cross-border data transmission clause</li></ul>
+	Compliance *uint64 `json:"Compliance,omitnil,omitempty" name:"Compliance"`
+
+	// <p>Whether to enable delivery service log.</p><p>Enumeration values:</p><ul><li>1: Disabled</li><li>2: Enabled</li></ul><p>Default value: 2</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+type CreateCLSDeliverTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Task name</p><p>Parameter format: <code>^[a-zA-Z0-9_-]{1,64}$</code></p>
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
+
+	// <p>Source topic information</p>
+	SourceTopicConfig *SourceTopicConfig `json:"SourceTopicConfig,omitnil,omitempty" name:"SourceTopicConfig"`
+
+	// <p>Target topic information</p>
+	TargetTopicConfig *TargetTopicConfig `json:"TargetTopicConfig,omitnil,omitempty" name:"TargetTopicConfig"`
+
+	// <p>Shipping Rule</p>
+	DeliverRule *DeliverRule `json:"DeliverRule,omitnil,omitempty" name:"DeliverRule"`
+
+	// <p>Compliance commitment.</p><p>Enumeration values:</p><ul><li>1: Agree to the cross-border data transmission clause</li></ul>
+	Compliance *uint64 `json:"Compliance,omitnil,omitempty" name:"Compliance"`
+
+	// <p>Whether to enable delivery service log.</p><p>Enumeration values:</p><ul><li>1: Disabled</li><li>2: Enabled</li></ul><p>Default value: 2</p>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+func (r *CreateCLSDeliverTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCLSDeliverTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskName")
+	delete(f, "SourceTopicConfig")
+	delete(f, "TargetTopicConfig")
+	delete(f, "DeliverRule")
+	delete(f, "Compliance")
+	delete(f, "HasServicesLog")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCLSDeliverTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateCLSDeliverTaskResponseParams struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateCLSDeliverTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateCLSDeliverTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateCLSDeliverTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateCLSDeliverTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6388,6 +6521,60 @@ func (r *DeleteAlarmShieldResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteCLSDeliverTaskRequestParams struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DeleteCLSDeliverTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DeleteCLSDeliverTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCLSDeliverTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCLSDeliverTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteCLSDeliverTaskResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteCLSDeliverTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteCLSDeliverTaskResponseParams `json:"Response"`
+}
+
+func (r *DeleteCLSDeliverTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteCLSDeliverTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteCloudProductLogCollectionRequestParams struct {
 	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -8330,6 +8517,11 @@ type DeliverConfig struct {
 	Scope *uint64 `json:"Scope,omitnil,omitempty" name:"Scope"`
 }
 
+type DeliverRule struct {
+	// <p>Data delivery range.</p><p>Enumeration values:</p><ul><li>1: History + newly added data</li><li>2: Custom time range</li><li>3: New additions only</li></ul><p>This time, only 3 newly added data is supported. Subsequent support: 2 custom time range and 1 history + newly added data</p>
+	DataScope *uint64 `json:"DataScope,omitnil,omitempty" name:"DataScope"`
+}
+
 type Delta struct {
 	// <p>Role</p><p>Enumeration value:</p><ul><li>user: User</li><li>assistant: AI assistant</li></ul>
 	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
@@ -8787,6 +8979,80 @@ func (r *DescribeAlertRecordHistoryResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAlertRecordHistoryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCLSDeliverTasksRequestParams struct {
+	// <ul><li>taskId Filter by task id. Type: String. Required: No.  </li><li>taskName Filter by task name. Type: String. Required: No.  </li><li>sourceLogsetId Filter by source logset. Type: String. Required: No.  </li><li>targetLogsetId Filter by destination log set. Type: String. Required: No.<br>The maximum number of Filters per request is 10, and the maximum number of Filter.Values is 10.</li></ul>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of entries per page. Default value: 20. Maximum value: 100.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeCLSDeliverTasksRequest struct {
+	*tchttp.BaseRequest
+	
+	// <ul><li>taskId Filter by task id. Type: String. Required: No.  </li><li>taskName Filter by task name. Type: String. Required: No.  </li><li>sourceLogsetId Filter by source logset. Type: String. Required: No.  </li><li>targetLogsetId Filter by destination log set. Type: String. Required: No.<br>The maximum number of Filters per request is 10, and the maximum number of Filter.Values is 10.</li></ul>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of entries per page. Default value: 20. Maximum value: 100.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeCLSDeliverTasksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCLSDeliverTasksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCLSDeliverTasksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCLSDeliverTasksResponseParams struct {
+	// <p>Delivery task information list</p>
+	Infos []*CLSDeliverTaskInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// <p>Total number of qualified tasks.</p>
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCLSDeliverTasksResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCLSDeliverTasksResponseParams `json:"Response"`
+}
+
+func (r *DescribeCLSDeliverTasksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCLSDeliverTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -15879,6 +16145,102 @@ func (r *ModifyAlarmShieldResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyCLSDeliverTaskRequestParams struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Task name</p><p>Parameter format: <code>^[a-zA-Z0-9_-]{1,64}$</code></p>
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
+
+	// <p>Source topic information</p>
+	SourceTopicConfig *SourceTopicConfig `json:"SourceTopicConfig,omitnil,omitempty" name:"SourceTopicConfig"`
+
+	// <p>Target topic information</p>
+	TargetTopicConfig *TargetTopicConfig `json:"TargetTopicConfig,omitnil,omitempty" name:"TargetTopicConfig"`
+
+	// <p>Shipping Rule</p>
+	DeliverRule *DeliverRule `json:"DeliverRule,omitnil,omitempty" name:"DeliverRule"`
+
+	// <p>Status.</p><p>Enumeration values: </p><ul><li>0: Running, </li><li>1: Suspension.</li></ul>
+	Enable *uint64 `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// <p>Whether delivery service log is enabled.</p><p>Enumeration values:</p><ul><li>1: Disabled</li><li>2: Enabled</li></ul>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+type ModifyCLSDeliverTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Task name</p><p>Parameter format: <code>^[a-zA-Z0-9_-]{1,64}$</code></p>
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
+
+	// <p>Source topic information</p>
+	SourceTopicConfig *SourceTopicConfig `json:"SourceTopicConfig,omitnil,omitempty" name:"SourceTopicConfig"`
+
+	// <p>Target topic information</p>
+	TargetTopicConfig *TargetTopicConfig `json:"TargetTopicConfig,omitnil,omitempty" name:"TargetTopicConfig"`
+
+	// <p>Shipping Rule</p>
+	DeliverRule *DeliverRule `json:"DeliverRule,omitnil,omitempty" name:"DeliverRule"`
+
+	// <p>Status.</p><p>Enumeration values: </p><ul><li>0: Running, </li><li>1: Suspension.</li></ul>
+	Enable *uint64 `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// <p>Whether delivery service log is enabled.</p><p>Enumeration values:</p><ul><li>1: Disabled</li><li>2: Enabled</li></ul>
+	HasServicesLog *uint64 `json:"HasServicesLog,omitnil,omitempty" name:"HasServicesLog"`
+}
+
+func (r *ModifyCLSDeliverTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCLSDeliverTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	delete(f, "TaskName")
+	delete(f, "SourceTopicConfig")
+	delete(f, "TargetTopicConfig")
+	delete(f, "DeliverRule")
+	delete(f, "Enable")
+	delete(f, "HasServicesLog")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCLSDeliverTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCLSDeliverTaskResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyCLSDeliverTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCLSDeliverTaskResponseParams `json:"Response"`
+}
+
+func (r *ModifyCLSDeliverTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCLSDeliverTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyCloudProductLogCollectionRequestParams struct {
 	// <p>Instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -21502,6 +21864,22 @@ type ShipperTaskInfo struct {
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 }
 
+type SourceTopicConfig struct {
+	// <p>Log topic filtering method.</p><p>Enumeration values:</p><ul><li>1: Static selection</li></ul>
+	TopicFilterType *uint64 `json:"TopicFilterType,omitnil,omitempty" name:"TopicFilterType"`
+
+	// <p>Source logset id</p>
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// <p>Source log topic list</p><p>Required when TopicFilterType=1</p>
+	Topics []*SourceTopicInfo `json:"Topics,omitnil,omitempty" name:"Topics"`
+}
+
+type SourceTopicInfo struct {
+	// <p>Log topic id.</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+}
+
 // Predefined struct for user
 type SplitPartitionRequestParams struct {
 	// Log topic ID
@@ -21646,6 +22024,26 @@ type Tag struct {
 
 	// Tag value.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type TargetTopicConfig struct {
+	// <p>Target account type.</p><p>Enumeration values:</p><ul><li>1: Current root account</li><li>2: Other root account</li></ul>
+	AccountType *uint64 `json:"AccountType,omitnil,omitempty" name:"AccountType"`
+
+	// <p>Target region</p><p>Parameter format: ap-guangzhou</p>
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// <p>Target logset id</p>
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
+
+	// <p>Target log topic id.</p>
+	TopicId *string `json:"TopicId,omitnil,omitempty" name:"TopicId"`
+
+	// <p>Role ARN</p><p>Required when AccountType=2</p>
+	RoleArn *string `json:"RoleArn,omitnil,omitempty" name:"RoleArn"`
+
+	// <p>External ID</p><p>Required when AccountType=2</p>
+	ExternalId *string `json:"ExternalId,omitnil,omitempty" name:"ExternalId"`
 }
 
 type ToolCall struct {

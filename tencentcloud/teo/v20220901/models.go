@@ -5029,92 +5029,98 @@ func (r *CreatePurgeTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateRealtimeLogDeliveryTaskRequestParams struct {
-	// Zone ID.
+	// <p>Site ID.</p>
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Data shipping area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding the Chinese mainland).</li></ul>
+	// <p>Data shipping area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding the Chinese mainland).</li></ul></p>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
-	// Data delivery type. Available values: <ul><li>domain: site acceleration log;</li><li>application: four-layer proxy logs;</li><li>function: edge function logs;</li><li>web-rateLiming: rate limit and CC attack defense log;</li><li>web-attack: managed rule log;</li><li>web-rule: custom rule logs;</li><li>web-bot: bot management log.</li></ul>
+	// <p>Data delivery type. Available values:</p><ul><li>l7-access-logs: Layer 7 Access Logs;</li><li>application: Layer 4 Proxy Logs;</li><li>function: Function Logs;</li><li>web-attack: Managed Rule Logs.</li></ul><p>The following types of logs are merged into l7-access-logs and no longer support adding:</p><ul><li>domain: Site Acceleration Logs;</li><li>web-rateLiming: Rate Limit and CC Attack Defense Logs;</li><li>web-rule: Custom Rule Logs;</li><li>web-bot: Bot Management Logs.</li></ul>
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
-	// Name of a real-time log delivery task, which can contain up to 200 characters, including digits, English letters, hyphens (-) and underscores (_).
+	// <p>Name of a real-time log delivery task, which can contain up to 200 characters, including digits, English letters, hyphens (-) and underscores (_).</p>
 	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
 
-	// Type of a real-time log shipping task. Valid values:<ul><li>cls: push to Tencent Cloud CLS;</li><li>custom_endpoint: push to a custom HTTP(S) address;</li><li>s3: push to an AWS S3-compatible bucket address;</li><li>log_analysis: push to EdgeOne log analytics. Only supported when LogType = domain or web-attack.</li></ul>
+	// <p>Type of a real-time log shipping task. Valid values:<ul><li>cls: push to Tencent Cloud CLS;</li><li>custom_endpoint: push to a custom HTTP(S) address;</li><li>s3: push to an AWS S3-compatible bucket address;</li><li>log_analysis: push to EdgeOne log analytics. This is supported only when LogType = l7-access-logs or web-attack.</li></ul></p>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// List of entities corresponding to the real-time log delivery task. Example values are as follows: <ul><li>Layer 7 domain: domain.example.com</li><li>L4 proxy instance: sid-2s69eb5wcms7</li><li>Cloud function instance: test-zone-2mxigizoh9l9-1257626257</li></ul>
+	// <p>List of entities corresponding to real-time log delivery tasks. Example values:</p><ul><li>Layer 7 domain: domain.example.com</li><li>Layer 4 proxy instance: sid-2s69eb5wcms7</li><li>Edge function instance: test-zone-2mxigizoh9l9-1257626257</li></ul><p>For reference: <a href="https://www.tencentcloud.com/document/api/1552/103413?from_cn_redirect=1">DescribeL4Proxy</a></p>
 	EntityList []*string `json:"EntityList,omitnil,omitempty" name:"EntityList"`
 
-	// Predefined fields for delivery. Value reference: <ul><li>[Site acceleration log (Layer 7 Access Logs)](https://www.tencentcloud.com/document/product/1552/105791?from_cn_redirect=1)</li><li>[Four-layer proxy logs](https://www.tencentcloud.com/document/product/1552/105792?from_cn_redirect=1)</li><li>[Edge Function logs](https://www.tencentcloud.com/document/product/1552/115585?from_cn_redirect=1)</li></ul>
+	// <p>Predefined fields for delivery. For reference: <ul><li><a href="https://www.tencentcloud.com/document/product/1552/105791?from_cn_redirect=1">Layer 7 Access Logs (site acceleration log)</a></li><li><a href="https://www.tencentcloud.com/document/product/1552/105792?from_cn_redirect=1">four-layer proxy logs</a></li><li><a href="https://www.tencentcloud.com/document/product/1552/115585?from_cn_redirect=1">edge function logs</a></li></ul></p><p>For reference: DescribeLogFields</p>
 	Fields []*string `json:"Fields,omitnil,omitempty" name:"Fields"`
 
-	// The list of custom fields for log delivery, which supports extracting specified content from HTTP request headers, response headers, cookies, and request bodies. Custom field names must be unique. The number of custom fields cannot exceed a maximum of 200. A single real-time log delivery task can configure up to 5 custom fields of the request body type. Currently, only site acceleration logs (`LogType`=`domain`) support custom fields.
+	// <p>Custom fields for delivery support extracting specified content from HTTP request headers, response headers, cookies, and request bodies.<br>Custom field name must be unique. Only Layer 7 access logs (LogType= l7-access-logs or domain) support adding custom fields.<br>The count of custom fields allowed to be configured has a quota limit. If the quota is insufficient, please contact us (https://www.tencentcloud.com/contact-us).</p>
 	CustomFields []*CustomField `json:"CustomFields,omitnil,omitempty" name:"CustomFields"`
 
-	// Filter criteria of log delivery. If this parameter is not specified, all logs will be delivered.
+	// <p>The list of custom expression fields for submission can be used to implement personalized real-time log content push through custom log push field names and value expressions. For usage details, refer to [Custom Log Field Expressions]().<br>Only Layer 7 Access Logs (LogType= l7-access-logs or domain) support  adding custom fields.<br>There is a quota limit on the count of custom fields that can be configured. If the quota is insufficient, please [contact us](https://www.tencentcloud.com/contact-us).<br>**Note**: If a field named in CustomExpressionFields has the same name as a field in Fields and CustomFields, the value in CustomExpressionFields takes precedence.</p>
+	CustomExpressionFields []*CustomExpressionField `json:"CustomExpressionFields,omitnil,omitempty" name:"CustomExpressionFields"`
+
+	// <p>Filter criteria of log shipping. If this parameter is not input, all logs will be shipped.</p>
 	DeliveryConditions []*DeliveryCondition `json:"DeliveryConditions,omitnil,omitempty" name:"DeliveryConditions"`
 
-	// Sampling ratio in permille. Value range: 1-1000. For example, 605 indicates a sampling ratio of 60.5%. If this parameter is not specified, the sampling ratio is 100%.
+	// <p>Sampling ratio in permille. Value range: 1-1000. For example, 605 indicates a sampling ratio of 60.5%. If this parameter is not input, the sampling ratio is 100%.</p>
 	Sample *uint64 `json:"Sample,omitnil,omitempty" name:"Sample"`
 
-	// Output format for log delivery. If left empty, the default format is used. The default format logic is as follows:<ul><li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, each JSON object represents a log entry;</li><li>When TaskType is 's3', the default format is JSON Lines;</li></ul>Particularly, when TaskType is 'cls' or 'log_analysis', the only allowed value for LogFormat.FormatType is 'json', and other parameters in LogFormat will be ignored. It is recommended not to transfer LogFormat.
+	// <p>Output format for log delivery. For usage details, see <a href="https://www.tencentcloud.com/document/product/1552/110448?from_cn_redirect=1">Custom Log Output Format</a>. If left blank, the default format applies. The default format logic is as follows:<ul><li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, each JSON object represents a log entry;</li><li>When TaskType is 's3', the default format is JSON Lines;</li></ul>Particularly, when TaskType is 'cls' or 'log_analysis', the only allowed value for LogFormat.FormatType is 'json', and other parameters in LogFormat will be ignored. It is recommended not to transfer LogFormat.</p>
 	LogFormat *LogFormat `json:"LogFormat,omitnil,omitempty" name:"LogFormat"`
 
-	// Configuration information of CLS. This parameter is required when `TaskType` is `cls`.
+	// <p>Configuration information of CLS. This parameter is required when TaskType is cls.</p>
 	CLS *CLSTopic `json:"CLS,omitnil,omitempty" name:"CLS"`
 
-	// Configuration information of the custom HTTP endpoint. This parameter is required when `TaskType` is `custom_endpoint`.
+	// <p>Configuration information of the custom HTTP service. This parameter is required when TaskType is custom_endpoint.</p>
 	CustomEndpoint *CustomEndpoint `json:"CustomEndpoint,omitnil,omitempty" name:"CustomEndpoint"`
 
-	// Configuration information of the AWS S3-compatible bucket. This parameter is required when `TaskType` is `s3`.
+	// <p>Configuration information of the AWS S3-compatible bucket. This parameter is required when TaskType is s3.</p>
 	S3 *S3 `json:"S3,omitnil,omitempty" name:"S3"`
 }
 
 type CreateRealtimeLogDeliveryTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// Zone ID.
+	// <p>Site ID.</p>
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Data shipping area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding the Chinese mainland).</li></ul>
+	// <p>Data shipping area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding the Chinese mainland).</li></ul></p>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
-	// Data delivery type. Available values: <ul><li>domain: site acceleration log;</li><li>application: four-layer proxy logs;</li><li>function: edge function logs;</li><li>web-rateLiming: rate limit and CC attack defense log;</li><li>web-attack: managed rule log;</li><li>web-rule: custom rule logs;</li><li>web-bot: bot management log.</li></ul>
+	// <p>Data delivery type. Available values:</p><ul><li>l7-access-logs: Layer 7 Access Logs;</li><li>application: Layer 4 Proxy Logs;</li><li>function: Function Logs;</li><li>web-attack: Managed Rule Logs.</li></ul><p>The following types of logs are merged into l7-access-logs and no longer support adding:</p><ul><li>domain: Site Acceleration Logs;</li><li>web-rateLiming: Rate Limit and CC Attack Defense Logs;</li><li>web-rule: Custom Rule Logs;</li><li>web-bot: Bot Management Logs.</li></ul>
 	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
 
-	// Name of a real-time log delivery task, which can contain up to 200 characters, including digits, English letters, hyphens (-) and underscores (_).
+	// <p>Name of a real-time log delivery task, which can contain up to 200 characters, including digits, English letters, hyphens (-) and underscores (_).</p>
 	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
 
-	// Type of a real-time log shipping task. Valid values:<ul><li>cls: push to Tencent Cloud CLS;</li><li>custom_endpoint: push to a custom HTTP(S) address;</li><li>s3: push to an AWS S3-compatible bucket address;</li><li>log_analysis: push to EdgeOne log analytics. Only supported when LogType = domain or web-attack.</li></ul>
+	// <p>Type of a real-time log shipping task. Valid values:<ul><li>cls: push to Tencent Cloud CLS;</li><li>custom_endpoint: push to a custom HTTP(S) address;</li><li>s3: push to an AWS S3-compatible bucket address;</li><li>log_analysis: push to EdgeOne log analytics. This is supported only when LogType = l7-access-logs or web-attack.</li></ul></p>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// List of entities corresponding to the real-time log delivery task. Example values are as follows: <ul><li>Layer 7 domain: domain.example.com</li><li>L4 proxy instance: sid-2s69eb5wcms7</li><li>Cloud function instance: test-zone-2mxigizoh9l9-1257626257</li></ul>
+	// <p>List of entities corresponding to real-time log delivery tasks. Example values:</p><ul><li>Layer 7 domain: domain.example.com</li><li>Layer 4 proxy instance: sid-2s69eb5wcms7</li><li>Edge function instance: test-zone-2mxigizoh9l9-1257626257</li></ul><p>For reference: <a href="https://www.tencentcloud.com/document/api/1552/103413?from_cn_redirect=1">DescribeL4Proxy</a></p>
 	EntityList []*string `json:"EntityList,omitnil,omitempty" name:"EntityList"`
 
-	// Predefined fields for delivery. Value reference: <ul><li>[Site acceleration log (Layer 7 Access Logs)](https://www.tencentcloud.com/document/product/1552/105791?from_cn_redirect=1)</li><li>[Four-layer proxy logs](https://www.tencentcloud.com/document/product/1552/105792?from_cn_redirect=1)</li><li>[Edge Function logs](https://www.tencentcloud.com/document/product/1552/115585?from_cn_redirect=1)</li></ul>
+	// <p>Predefined fields for delivery. For reference: <ul><li><a href="https://www.tencentcloud.com/document/product/1552/105791?from_cn_redirect=1">Layer 7 Access Logs (site acceleration log)</a></li><li><a href="https://www.tencentcloud.com/document/product/1552/105792?from_cn_redirect=1">four-layer proxy logs</a></li><li><a href="https://www.tencentcloud.com/document/product/1552/115585?from_cn_redirect=1">edge function logs</a></li></ul></p><p>For reference: DescribeLogFields</p>
 	Fields []*string `json:"Fields,omitnil,omitempty" name:"Fields"`
 
-	// The list of custom fields for log delivery, which supports extracting specified content from HTTP request headers, response headers, cookies, and request bodies. Custom field names must be unique. The number of custom fields cannot exceed a maximum of 200. A single real-time log delivery task can configure up to 5 custom fields of the request body type. Currently, only site acceleration logs (`LogType`=`domain`) support custom fields.
+	// <p>Custom fields for delivery support extracting specified content from HTTP request headers, response headers, cookies, and request bodies.<br>Custom field name must be unique. Only Layer 7 access logs (LogType= l7-access-logs or domain) support adding custom fields.<br>The count of custom fields allowed to be configured has a quota limit. If the quota is insufficient, please contact us (https://www.tencentcloud.com/contact-us).</p>
 	CustomFields []*CustomField `json:"CustomFields,omitnil,omitempty" name:"CustomFields"`
 
-	// Filter criteria of log delivery. If this parameter is not specified, all logs will be delivered.
+	// <p>The list of custom expression fields for submission can be used to implement personalized real-time log content push through custom log push field names and value expressions. For usage details, refer to [Custom Log Field Expressions]().<br>Only Layer 7 Access Logs (LogType= l7-access-logs or domain) support  adding custom fields.<br>There is a quota limit on the count of custom fields that can be configured. If the quota is insufficient, please [contact us](https://www.tencentcloud.com/contact-us).<br>**Note**: If a field named in CustomExpressionFields has the same name as a field in Fields and CustomFields, the value in CustomExpressionFields takes precedence.</p>
+	CustomExpressionFields []*CustomExpressionField `json:"CustomExpressionFields,omitnil,omitempty" name:"CustomExpressionFields"`
+
+	// <p>Filter criteria of log shipping. If this parameter is not input, all logs will be shipped.</p>
 	DeliveryConditions []*DeliveryCondition `json:"DeliveryConditions,omitnil,omitempty" name:"DeliveryConditions"`
 
-	// Sampling ratio in permille. Value range: 1-1000. For example, 605 indicates a sampling ratio of 60.5%. If this parameter is not specified, the sampling ratio is 100%.
+	// <p>Sampling ratio in permille. Value range: 1-1000. For example, 605 indicates a sampling ratio of 60.5%. If this parameter is not input, the sampling ratio is 100%.</p>
 	Sample *uint64 `json:"Sample,omitnil,omitempty" name:"Sample"`
 
-	// Output format for log delivery. If left empty, the default format is used. The default format logic is as follows:<ul><li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, each JSON object represents a log entry;</li><li>When TaskType is 's3', the default format is JSON Lines;</li></ul>Particularly, when TaskType is 'cls' or 'log_analysis', the only allowed value for LogFormat.FormatType is 'json', and other parameters in LogFormat will be ignored. It is recommended not to transfer LogFormat.
+	// <p>Output format for log delivery. For usage details, see <a href="https://www.tencentcloud.com/document/product/1552/110448?from_cn_redirect=1">Custom Log Output Format</a>. If left blank, the default format applies. The default format logic is as follows:<ul><li>When TaskType is 'custom_endpoint', the default format is an array of JSON objects, each JSON object represents a log entry;</li><li>When TaskType is 's3', the default format is JSON Lines;</li></ul>Particularly, when TaskType is 'cls' or 'log_analysis', the only allowed value for LogFormat.FormatType is 'json', and other parameters in LogFormat will be ignored. It is recommended not to transfer LogFormat.</p>
 	LogFormat *LogFormat `json:"LogFormat,omitnil,omitempty" name:"LogFormat"`
 
-	// Configuration information of CLS. This parameter is required when `TaskType` is `cls`.
+	// <p>Configuration information of CLS. This parameter is required when TaskType is cls.</p>
 	CLS *CLSTopic `json:"CLS,omitnil,omitempty" name:"CLS"`
 
-	// Configuration information of the custom HTTP endpoint. This parameter is required when `TaskType` is `custom_endpoint`.
+	// <p>Configuration information of the custom HTTP service. This parameter is required when TaskType is custom_endpoint.</p>
 	CustomEndpoint *CustomEndpoint `json:"CustomEndpoint,omitnil,omitempty" name:"CustomEndpoint"`
 
-	// Configuration information of the AWS S3-compatible bucket. This parameter is required when `TaskType` is `s3`.
+	// <p>Configuration information of the AWS S3-compatible bucket. This parameter is required when TaskType is s3.</p>
 	S3 *S3 `json:"S3,omitnil,omitempty" name:"S3"`
 }
 
@@ -5138,6 +5144,7 @@ func (r *CreateRealtimeLogDeliveryTaskRequest) FromJsonString(s string) error {
 	delete(f, "EntityList")
 	delete(f, "Fields")
 	delete(f, "CustomFields")
+	delete(f, "CustomExpressionFields")
 	delete(f, "DeliveryConditions")
 	delete(f, "Sample")
 	delete(f, "LogFormat")
@@ -5152,7 +5159,7 @@ func (r *CreateRealtimeLogDeliveryTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateRealtimeLogDeliveryTaskResponseParams struct {
-	// ID of the successfully created task.
+	// <p>ID of the successfully created task.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5941,6 +5948,17 @@ type CustomErrorPage struct {
 
 	// Custom error page reference.
 	References []*ErrorPageReference `json:"References,omitnil,omitempty" name:"References"`
+}
+
+type CustomExpressionField struct {
+	// <p>Custom log field name. Enter 1-100 characters. Allowed characters are letters, digits, and _. It must start with a letter. This name must be unique.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>The value expression of a custom log field. The maximum length of the expression is 4KB. For syntax explanation, see <a href="">Custom Log Field Expression</a>.</p>
+	Expression *string `json:"Expression,omitnil,omitempty" name:"Expression"`
+
+	// <p>Whether to deliver this field. If left blank, it means not to deliver this field.</p>
+	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 }
 
 type CustomField struct {
@@ -17972,33 +17990,28 @@ type LoadBalancer struct {
 }
 
 type LogFormat struct {
-	// Predefined output format for log shipping. Valid values:
-	// <li>json: Use JSON Lines as the predefined log output format. In each log entry, fields are displayed as key-value pairs.</li>
-	// <li>csv: Use the predefined log output format csv, where each log entry only is presented as field values only, excluding field names. </li>
+	// <p>Log output format. Valid values:</p><ul><li>json: Use the predefined log output format JSON Lines, where each log entry is presented as key-value pairs;</li><li>csv: Use the predefined log output format CSV, where each log entry presents only field values, not field names.</li><li>template: Use a user-customized output template. Each log entry supports custom layout and concatenation based on the custom template, in conjunction with the RecordTemplate field.</li></ul>
 	FormatType *string `json:"FormatType,omitnil,omitempty" name:"FormatType"`
 
-	// A string added before each log delivery batch. Each log delivery batch may contain multiple log records.
+	// <p>A string added before each log delivery batch. Each log delivery batch may contain multiple log records.</p>
 	BatchPrefix *string `json:"BatchPrefix,omitnil,omitempty" name:"BatchPrefix"`
 
-	// A string appended after each log delivery batch.
+	// <p>A string appended after each log delivery batch.</p>
 	BatchSuffix *string `json:"BatchSuffix,omitnil,omitempty" name:"BatchSuffix"`
 
-	// A string added before each log record.
+	// <p>Log prefix, a string added before each log record.</p>
 	RecordPrefix *string `json:"RecordPrefix,omitnil,omitempty" name:"RecordPrefix"`
 
-	// A string appended after each log record.
+	// <p>Single-line log suffix, a string appended after each log record.</p>
 	RecordSuffix *string `json:"RecordSuffix,omitnil,omitempty" name:"RecordSuffix"`
 
-	// A string inserted between log records as a separator. Valid values:
-	// <li>\n: line break;</li>
-	// <li>\t: tab character;</li>
-	// <li>,: Half-width comma. </li>
+	// <p>Log separator, a string inserted between log records as a separator. Valid values:</p><ul><li>\n: line break;</li><li>\t: tab character;</li><li>,: half-width comma.</li></ul>
 	RecordDelimiter *string `json:"RecordDelimiter,omitnil,omitempty" name:"RecordDelimiter"`
 
-	// A string inserted between fields as a separator within a single log record. Valid values:
-	// <li>\t: tab character;</li>
-	// <li>,: half-width comma;</li>
-	// <li>;: Half-width semicolon. </li>
+	// <p>Log template, output template for a single log, length limited to 4KB, takes effect only when FormatType = template. Supports custom layout and concatenation of configured push fields according to the template.</p>
+	RecordTemplate *string `json:"RecordTemplate,omitnil,omitempty" name:"RecordTemplate"`
+
+	// <p>Field separator, a string inserted between fields within a single log record as a separator. It takes effect only when FormatType = csv. Valid values:</p><ul><li>\t: tab character;</li><li>,: half-width comma;</li><li>;: half-width semicolon.</li></ul>
 	FieldDelimiter *string `json:"FieldDelimiter,omitnil,omitempty" name:"FieldDelimiter"`
 }
 
