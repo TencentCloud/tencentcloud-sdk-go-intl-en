@@ -733,6 +733,72 @@ func (c *Client) CompareFaceLivenessWithContext(ctx context.Context, request *Co
     return
 }
 
+func NewCreateEKYCWebhookRequest() (request *CreateEKYCWebhookRequest) {
+    request = &CreateEKYCWebhookRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "CreateEKYCWebhook")
+    
+    
+    return
+}
+
+func NewCreateEKYCWebhookResponse() (response *CreateEKYCWebhookResponse) {
+    response = &CreateEKYCWebhookResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateEKYCWebhook
+// This API is used to create an EKYC Webhook configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+//  FAILEDOPERATION_AMLWEBHOOKDUPLICATE = "FailedOperation.AMLWebhookDuplicate"
+//  FAILEDOPERATION_EKYCWEBHOOKDUPLICATE = "FailedOperation.EKYCWebhookDuplicate"
+//  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
+//  INVALIDPARAMETERVALUE_EKYCFIELDVALIDATION = "InvalidParameterValue.EKYCFieldValidation"
+//  INVALIDPARAMETERVALUE_MISSINGSCENE = "InvalidParameterValue.MissingScene"
+//  INVALIDPARAMETERVALUE_MISSINGWEBHOOKNAME = "InvalidParameterValue.MissingWebhookName"
+//  INVALIDPARAMETERVALUE_WEBHOOKURL = "InvalidParameterValue.WebhookURL"
+func (c *Client) CreateEKYCWebhook(request *CreateEKYCWebhookRequest) (response *CreateEKYCWebhookResponse, err error) {
+    return c.CreateEKYCWebhookWithContext(context.Background(), request)
+}
+
+// CreateEKYCWebhook
+// This API is used to create an EKYC Webhook configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+//  FAILEDOPERATION_AMLWEBHOOKDUPLICATE = "FailedOperation.AMLWebhookDuplicate"
+//  FAILEDOPERATION_EKYCWEBHOOKDUPLICATE = "FailedOperation.EKYCWebhookDuplicate"
+//  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
+//  INVALIDPARAMETERVALUE_EKYCFIELDVALIDATION = "InvalidParameterValue.EKYCFieldValidation"
+//  INVALIDPARAMETERVALUE_MISSINGSCENE = "InvalidParameterValue.MissingScene"
+//  INVALIDPARAMETERVALUE_MISSINGWEBHOOKNAME = "InvalidParameterValue.MissingWebhookName"
+//  INVALIDPARAMETERVALUE_WEBHOOKURL = "InvalidParameterValue.WebhookURL"
+func (c *Client) CreateEKYCWebhookWithContext(ctx context.Context, request *CreateEKYCWebhookRequest) (response *CreateEKYCWebhookResponse, err error) {
+    if request == nil {
+        request = NewCreateEKYCWebhookRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "CreateEKYCWebhook")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateEKYCWebhook require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateEKYCWebhookResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateUploadUrlRequest() (request *CreateUploadUrlRequest) {
     request = &CreateUploadUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -787,6 +853,60 @@ func (c *Client) CreateUploadUrlWithContext(ctx context.Context, request *Create
     request.SetContext(ctx)
     
     response = NewCreateUploadUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteEKYCWebhookRequest() (request *DeleteEKYCWebhookRequest) {
+    request = &DeleteEKYCWebhookRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "DeleteEKYCWebhook")
+    
+    
+    return
+}
+
+func NewDeleteEKYCWebhookResponse() (response *DeleteEKYCWebhookResponse) {
+    response = &DeleteEKYCWebhookResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteEKYCWebhook
+// This API deletes the Webhook configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+//  RESOURCENOTFOUND_AMLWEBHOOKCONFIG = "ResourceNotFound.AMLWebhookConfig"
+func (c *Client) DeleteEKYCWebhook(request *DeleteEKYCWebhookRequest) (response *DeleteEKYCWebhookResponse, err error) {
+    return c.DeleteEKYCWebhookWithContext(context.Background(), request)
+}
+
+// DeleteEKYCWebhook
+// This API deletes the Webhook configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+//  RESOURCENOTFOUND_AMLWEBHOOKCONFIG = "ResourceNotFound.AMLWebhookConfig"
+func (c *Client) DeleteEKYCWebhookWithContext(ctx context.Context, request *DeleteEKYCWebhookRequest) (response *DeleteEKYCWebhookResponse, err error) {
+    if request == nil {
+        request = NewDeleteEKYCWebhookRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "DeleteEKYCWebhook")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteEKYCWebhook require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteEKYCWebhookResponse()
     err = c.Send(request, response)
     return
 }
@@ -1025,6 +1145,72 @@ func (c *Client) GenerateReflectSequenceWithContext(ctx context.Context, request
     return
 }
 
+func NewGetAMLScreeningResultRequest() (request *GetAMLScreeningResultRequest) {
+    request = &GetAMLScreeningResultRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "GetAMLScreeningResult")
+    
+    
+    return
+}
+
+func NewGetAMLScreeningResultResponse() (response *GetAMLScreeningResultResponse) {
+    response = &GetAMLScreeningResultResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetAMLScreeningResult
+// Queries the AML name list screening result.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+//  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
+//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
+//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
+//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
+//  FAILEDOPERATION_CUSTOMERNOTFOUND = "FailedOperation.CustomerNotFound"
+//  INVALIDPARAMETERVALUE_MISSINGUNIQUECUSTOMERID = "InvalidParameterValue.MissingUniqueCustomerID"
+//  RESOURCENOTFOUND_AMLCUSTOMER = "ResourceNotFound.AMLCustomer"
+func (c *Client) GetAMLScreeningResult(request *GetAMLScreeningResultRequest) (response *GetAMLScreeningResultResponse, err error) {
+    return c.GetAMLScreeningResultWithContext(context.Background(), request)
+}
+
+// GetAMLScreeningResult
+// Queries the AML name list screening result.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+//  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
+//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
+//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
+//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
+//  FAILEDOPERATION_CUSTOMERNOTFOUND = "FailedOperation.CustomerNotFound"
+//  INVALIDPARAMETERVALUE_MISSINGUNIQUECUSTOMERID = "InvalidParameterValue.MissingUniqueCustomerID"
+//  RESOURCENOTFOUND_AMLCUSTOMER = "ResourceNotFound.AMLCustomer"
+func (c *Client) GetAMLScreeningResultWithContext(ctx context.Context, request *GetAMLScreeningResultRequest) (response *GetAMLScreeningResultResponse, err error) {
+    if request == nil {
+        request = NewGetAMLScreeningResultRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "GetAMLScreeningResult")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetAMLScreeningResult require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetAMLScreeningResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetFaceIdResultIntlRequest() (request *GetFaceIdResultIntlRequest) {
     request = &GetFaceIdResultIntlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1215,17 +1401,17 @@ func NewGetNFCResultResponse() (response *GetNFCResultResponse) {
 }
 
 // GetNFCResult
-// This API verifies NFC data. Pass in the NFCToken returned by the SDK, the document fields to be verified, and the portrait photo. The service automatically compares the information to verify with the decrypted document NFC data and outputs the verification result. The NFCToken generated by the SDK is valid for 1 hour. The service is billed per query. 
+// This API verifies NFC data. Pass in the NFCToken returned by the SDK, along with the document fields and portrait photo to be verified.The service automatically compares the information to verify with the decrypted document NFC data and outputs the verification result. The NFCToken generated by the SDK is valid for 10 minutes. The service is billed per query. 
 //
-// The service currently supports NFC recognition and verification of the following fields and portrait photos on Chinese mainland second-generation resident identity cards, exit-entry permits for travelling to and from Hong Kong, China and Macao, China, and Chinese resident passports: 
+// The service currently supports NFC recognition and verification of the following fields and portrait photos on Chinese mainland second-generation resident identity cards, exit-entry permits for traveling to and from Hong Kong and Macao, and international passports with an NFC chip: 
 //
 // 
 //
 // -Chinese mainland second-generation resident identity card: identity card number, name, sex, ethnicity, date of birth, address, issuing authority, validity start time, validity end time, portrait photo 
 //
-// -Exit-Entry Permit for Travelling to and from Hong Kong, China and Macao, China: ID number, name, sex, English name, issuing place, issuing authority, validity end time, date of birth, portrait photo, machine-readable code 
+// -Exit-Entry Permit for Traveling to and from Hong Kong and Macao: ID number, name, sex, English name, issuing place, issuing authority, validity end time, date of birth, portrait photo, machine-readable code 
 //
-// -Chinese resident passport: passport number, Chinese name, English name, nationality, sex, country or region code, validity start time, validity end time, date of birth, birth place, issuing place, issuing authority, portrait photo, machine-readable code
+// -International passports with an NFC chip: passport number, name, nationality, sex, country or region code, validity start time, validity end time, date of birth, birth place, issuing place, issuing authority, portrait photo, machine-readable code
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPARELOWSIMILARITY = "FailedOperation.CompareLowSimilarity"
@@ -1245,17 +1431,17 @@ func (c *Client) GetNFCResult(request *GetNFCResultRequest) (response *GetNFCRes
 }
 
 // GetNFCResult
-// This API verifies NFC data. Pass in the NFCToken returned by the SDK, the document fields to be verified, and the portrait photo. The service automatically compares the information to verify with the decrypted document NFC data and outputs the verification result. The NFCToken generated by the SDK is valid for 1 hour. The service is billed per query. 
+// This API verifies NFC data. Pass in the NFCToken returned by the SDK, along with the document fields and portrait photo to be verified.The service automatically compares the information to verify with the decrypted document NFC data and outputs the verification result. The NFCToken generated by the SDK is valid for 10 minutes. The service is billed per query. 
 //
-// The service currently supports NFC recognition and verification of the following fields and portrait photos on Chinese mainland second-generation resident identity cards, exit-entry permits for travelling to and from Hong Kong, China and Macao, China, and Chinese resident passports: 
+// The service currently supports NFC recognition and verification of the following fields and portrait photos on Chinese mainland second-generation resident identity cards, exit-entry permits for traveling to and from Hong Kong and Macao, and international passports with an NFC chip: 
 //
 // 
 //
 // -Chinese mainland second-generation resident identity card: identity card number, name, sex, ethnicity, date of birth, address, issuing authority, validity start time, validity end time, portrait photo 
 //
-// -Exit-Entry Permit for Travelling to and from Hong Kong, China and Macao, China: ID number, name, sex, English name, issuing place, issuing authority, validity end time, date of birth, portrait photo, machine-readable code 
+// -Exit-Entry Permit for Traveling to and from Hong Kong and Macao: ID number, name, sex, English name, issuing place, issuing authority, validity end time, date of birth, portrait photo, machine-readable code 
 //
-// -Chinese resident passport: passport number, Chinese name, English name, nationality, sex, country or region code, validity start time, validity end time, date of birth, birth place, issuing place, issuing authority, portrait photo, machine-readable code
+// -International passports with an NFC chip: passport number, name, nationality, sex, country or region code, validity start time, validity end time, date of birth, birth place, issuing place, issuing authority, portrait photo, machine-readable code
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPARELOWSIMILARITY = "FailedOperation.CompareLowSimilarity"
@@ -1307,7 +1493,15 @@ func NewGetNFCTokenResponse() (response *GetNFCTokenResponse) {
 }
 
 // GetNFCToken
-// NFC verification service, obtain Token information for the NFC identify request.This API supports NFC recognition and verification of ID cards (second-generation resident identity card, Residence Permit for Hong Kong (China) and Macao (China), Residence Permit for Taiwan (China), Permanent Residence Permit for Foreigners) as well as travel documents (exit-entry permit for travelling to and from Hong Kong (China) and Macao (China), Taiwan travel permit, Mainland Travel Permit for Taiwan Residents, Return Home Permit).
+// NFC verification service: obtain Token information (valid for 10 minutes) for the NFC identify request. This API supports NFC recognition and verification of the following documents:
+//
+// 
+//
+// -Chinese mainland second-generation resident identity card
+//
+// -Exit-Entry Permit for Traveling to and from Hong Kong and Macao
+//
+// -International passports with an NFC chip
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1318,7 +1512,15 @@ func (c *Client) GetNFCToken(request *GetNFCTokenRequest) (response *GetNFCToken
 }
 
 // GetNFCToken
-// NFC verification service, obtain Token information for the NFC identify request.This API supports NFC recognition and verification of ID cards (second-generation resident identity card, Residence Permit for Hong Kong (China) and Macao (China), Residence Permit for Taiwan (China), Permanent Residence Permit for Foreigners) as well as travel documents (exit-entry permit for travelling to and from Hong Kong (China) and Macao (China), Taiwan travel permit, Mainland Travel Permit for Taiwan Residents, Return Home Permit).
+// NFC verification service: obtain Token information (valid for 10 minutes) for the NFC identify request. This API supports NFC recognition and verification of the following documents:
+//
+// 
+//
+// -Chinese mainland second-generation resident identity card
+//
+// -Exit-Entry Permit for Traveling to and from Hong Kong and Macao
+//
+// -International passports with an NFC chip
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1415,7 +1617,7 @@ func NewGetWebVerificationResultIntlResponse() (response *GetWebVerificationResu
 }
 
 // GetWebVerificationResultIntl
-// This API is used to get the verification result with the corresponding BizToken after the web-based verification is completed. The token is valid for three days (259,200s) after issuance and can be called multiple times.
+// After completing the Web verification process, call this API with the verification token (BizToken) to query the verification result info. The BizToken is valid within three days (259,200 seconds) after application and can be called multiple times.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1429,7 +1631,7 @@ func (c *Client) GetWebVerificationResultIntl(request *GetWebVerificationResultI
 }
 
 // GetWebVerificationResultIntl
-// This API is used to get the verification result with the corresponding BizToken after the web-based verification is completed. The token is valid for three days (259,200s) after issuance and can be called multiple times.
+// After completing the Web verification process, call this API with the verification token (BizToken) to query the verification result info. The BizToken is valid within three days (259,200 seconds) after application and can be called multiple times.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1709,6 +1911,56 @@ func (c *Client) ImageRecognitionV2WithContext(ctx context.Context, request *Ima
     request.SetContext(ctx)
     
     response = NewImageRecognitionV2Response()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListEKYCWebhooksRequest() (request *ListEKYCWebhooksRequest) {
+    request = &ListEKYCWebhooksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "ListEKYCWebhooks")
+    
+    
+    return
+}
+
+func NewListEKYCWebhooksResponse() (response *ListEKYCWebhooksResponse) {
+    response = &ListEKYCWebhooksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListEKYCWebhooks
+// This API queries the list of Webhook configurations.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+func (c *Client) ListEKYCWebhooks(request *ListEKYCWebhooksRequest) (response *ListEKYCWebhooksResponse, err error) {
+    return c.ListEKYCWebhooksWithContext(context.Background(), request)
+}
+
+// ListEKYCWebhooks
+// This API queries the list of Webhook configurations.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+func (c *Client) ListEKYCWebhooksWithContext(ctx context.Context, request *ListEKYCWebhooksRequest) (response *ListEKYCWebhooksResponse, err error) {
+    if request == nil {
+        request = NewListEKYCWebhooksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "ListEKYCWebhooks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListEKYCWebhooks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListEKYCWebhooksResponse()
     err = c.Send(request, response)
     return
 }
@@ -2077,6 +2329,298 @@ func (c *Client) PhoneVerificationWithContext(ctx context.Context, request *Phon
     request.SetContext(ctx)
     
     response = NewPhoneVerificationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRunAMLNameScreeningRequest() (request *RunAMLNameScreeningRequest) {
+    request = &RunAMLNameScreeningRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "RunAMLNameScreening")
+    
+    
+    return
+}
+
+func NewRunAMLNameScreeningResponse() (response *RunAMLNameScreeningResponse) {
+    response = &RunAMLNameScreeningResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RunAMLNameScreening
+// AML name list screening
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+//  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
+//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
+//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
+//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
+//  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
+//  INVALIDPARAMETERVALUE_ENTITYTYPE = "InvalidParameterValue.EntityType"
+//  INVALIDPARAMETERVALUE_ENTITYTYPEMISMATCH = "InvalidParameterValue.EntityTypeMismatch"
+//  INVALIDPARAMETERVALUE_MISSINGCOMPANY = "InvalidParameterValue.MissingCompany"
+//  INVALIDPARAMETERVALUE_MISSINGCOMPANYNAME = "InvalidParameterValue.MissingCompanyName"
+//  INVALIDPARAMETERVALUE_MISSINGPERSON = "InvalidParameterValue.MissingPerson"
+//  INVALIDPARAMETERVALUE_MISSINGPERSONNAME = "InvalidParameterValue.MissingPersonName"
+//  INVALIDPARAMETERVALUE_MISSINGPERSONORCOMPANY = "InvalidParameterValue.MissingPersonOrCompany"
+//  INVALIDPARAMETERVALUE_MISSINGUNIQUECUSTOMERID = "InvalidParameterValue.MissingUniqueCustomerID"
+//  INVALIDPARAMETERVALUE_ONGOINGSCREENINGMISMATCH = "InvalidParameterValue.OngoingScreeningMismatch"
+//  INVALIDPARAMETERVALUE_PERSONNAMECONFLICT = "InvalidParameterValue.PersonNameConflict"
+func (c *Client) RunAMLNameScreening(request *RunAMLNameScreeningRequest) (response *RunAMLNameScreeningResponse, err error) {
+    return c.RunAMLNameScreeningWithContext(context.Background(), request)
+}
+
+// RunAMLNameScreening
+// AML name list screening
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+//  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
+//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
+//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
+//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
+//  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
+//  INVALIDPARAMETERVALUE_ENTITYTYPE = "InvalidParameterValue.EntityType"
+//  INVALIDPARAMETERVALUE_ENTITYTYPEMISMATCH = "InvalidParameterValue.EntityTypeMismatch"
+//  INVALIDPARAMETERVALUE_MISSINGCOMPANY = "InvalidParameterValue.MissingCompany"
+//  INVALIDPARAMETERVALUE_MISSINGCOMPANYNAME = "InvalidParameterValue.MissingCompanyName"
+//  INVALIDPARAMETERVALUE_MISSINGPERSON = "InvalidParameterValue.MissingPerson"
+//  INVALIDPARAMETERVALUE_MISSINGPERSONNAME = "InvalidParameterValue.MissingPersonName"
+//  INVALIDPARAMETERVALUE_MISSINGPERSONORCOMPANY = "InvalidParameterValue.MissingPersonOrCompany"
+//  INVALIDPARAMETERVALUE_MISSINGUNIQUECUSTOMERID = "InvalidParameterValue.MissingUniqueCustomerID"
+//  INVALIDPARAMETERVALUE_ONGOINGSCREENINGMISMATCH = "InvalidParameterValue.OngoingScreeningMismatch"
+//  INVALIDPARAMETERVALUE_PERSONNAMECONFLICT = "InvalidParameterValue.PersonNameConflict"
+func (c *Client) RunAMLNameScreeningWithContext(ctx context.Context, request *RunAMLNameScreeningRequest) (response *RunAMLNameScreeningResponse, err error) {
+    if request == nil {
+        request = NewRunAMLNameScreeningRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "RunAMLNameScreening")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RunAMLNameScreening require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRunAMLNameScreeningResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateAMLCustomerProfileRequest() (request *UpdateAMLCustomerProfileRequest) {
+    request = &UpdateAMLCustomerProfileRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "UpdateAMLCustomerProfile")
+    
+    
+    return
+}
+
+func NewUpdateAMLCustomerProfileResponse() (response *UpdateAMLCustomerProfileResponse) {
+    response = &UpdateAMLCustomerProfileResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateAMLCustomerProfile
+// AML name list screening
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+//  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
+//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
+//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
+//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
+//  FAILEDOPERATION_CUSTOMERNOTFOUND = "FailedOperation.CustomerNotFound"
+//  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
+//  INVALIDPARAMETERVALUE_ENTITYTYPE = "InvalidParameterValue.EntityType"
+//  INVALIDPARAMETERVALUE_ENTITYTYPEMISMATCH = "InvalidParameterValue.EntityTypeMismatch"
+//  INVALIDPARAMETERVALUE_MISSINGCOMPANY = "InvalidParameterValue.MissingCompany"
+//  INVALIDPARAMETERVALUE_MISSINGCOMPANYNAME = "InvalidParameterValue.MissingCompanyName"
+//  INVALIDPARAMETERVALUE_MISSINGPERSON = "InvalidParameterValue.MissingPerson"
+//  INVALIDPARAMETERVALUE_MISSINGPERSONNAME = "InvalidParameterValue.MissingPersonName"
+//  INVALIDPARAMETERVALUE_MISSINGUNIQUECUSTOMERID = "InvalidParameterValue.MissingUniqueCustomerID"
+//  INVALIDPARAMETERVALUE_PERSONNAMECONFLICT = "InvalidParameterValue.PersonNameConflict"
+func (c *Client) UpdateAMLCustomerProfile(request *UpdateAMLCustomerProfileRequest) (response *UpdateAMLCustomerProfileResponse, err error) {
+    return c.UpdateAMLCustomerProfileWithContext(context.Background(), request)
+}
+
+// UpdateAMLCustomerProfile
+// AML name list screening
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+//  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
+//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
+//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
+//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
+//  FAILEDOPERATION_CUSTOMERNOTFOUND = "FailedOperation.CustomerNotFound"
+//  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
+//  INVALIDPARAMETERVALUE_ENTITYTYPE = "InvalidParameterValue.EntityType"
+//  INVALIDPARAMETERVALUE_ENTITYTYPEMISMATCH = "InvalidParameterValue.EntityTypeMismatch"
+//  INVALIDPARAMETERVALUE_MISSINGCOMPANY = "InvalidParameterValue.MissingCompany"
+//  INVALIDPARAMETERVALUE_MISSINGCOMPANYNAME = "InvalidParameterValue.MissingCompanyName"
+//  INVALIDPARAMETERVALUE_MISSINGPERSON = "InvalidParameterValue.MissingPerson"
+//  INVALIDPARAMETERVALUE_MISSINGPERSONNAME = "InvalidParameterValue.MissingPersonName"
+//  INVALIDPARAMETERVALUE_MISSINGUNIQUECUSTOMERID = "InvalidParameterValue.MissingUniqueCustomerID"
+//  INVALIDPARAMETERVALUE_PERSONNAMECONFLICT = "InvalidParameterValue.PersonNameConflict"
+func (c *Client) UpdateAMLCustomerProfileWithContext(ctx context.Context, request *UpdateAMLCustomerProfileRequest) (response *UpdateAMLCustomerProfileResponse, err error) {
+    if request == nil {
+        request = NewUpdateAMLCustomerProfileRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "UpdateAMLCustomerProfile")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateAMLCustomerProfile require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateAMLCustomerProfileResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateAMLOngoingScreeningStatusRequest() (request *UpdateAMLOngoingScreeningStatusRequest) {
+    request = &UpdateAMLOngoingScreeningStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "UpdateAMLOngoingScreeningStatus")
+    
+    
+    return
+}
+
+func NewUpdateAMLOngoingScreeningStatusResponse() (response *UpdateAMLOngoingScreeningStatusResponse) {
+    response = &UpdateAMLOngoingScreeningStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateAMLOngoingScreeningStatus
+// Changes the status of continuous name list screening.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+//  FAILEDOPERATION_AMLONGOINGSCREENINGALREADYENABLED = "FailedOperation.AMLOngoingScreeningAlreadyEnabled"
+//  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
+//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
+//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
+//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
+//  FAILEDOPERATION_CUSTOMERNOTFOUND = "FailedOperation.CustomerNotFound"
+//  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
+//  INVALIDPARAMETERVALUE_MISSINGUNIQUECUSTOMERID = "InvalidParameterValue.MissingUniqueCustomerID"
+//  RESOURCENOTFOUND_AMLCUSTOMER = "ResourceNotFound.AMLCustomer"
+func (c *Client) UpdateAMLOngoingScreeningStatus(request *UpdateAMLOngoingScreeningStatusRequest) (response *UpdateAMLOngoingScreeningStatusResponse, err error) {
+    return c.UpdateAMLOngoingScreeningStatusWithContext(context.Background(), request)
+}
+
+// UpdateAMLOngoingScreeningStatus
+// Changes the status of continuous name list screening.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+//  FAILEDOPERATION_AMLONGOINGSCREENINGALREADYENABLED = "FailedOperation.AMLOngoingScreeningAlreadyEnabled"
+//  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
+//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
+//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
+//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
+//  FAILEDOPERATION_CUSTOMERNOTFOUND = "FailedOperation.CustomerNotFound"
+//  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
+//  INVALIDPARAMETERVALUE_MISSINGUNIQUECUSTOMERID = "InvalidParameterValue.MissingUniqueCustomerID"
+//  RESOURCENOTFOUND_AMLCUSTOMER = "ResourceNotFound.AMLCustomer"
+func (c *Client) UpdateAMLOngoingScreeningStatusWithContext(ctx context.Context, request *UpdateAMLOngoingScreeningStatusRequest) (response *UpdateAMLOngoingScreeningStatusResponse, err error) {
+    if request == nil {
+        request = NewUpdateAMLOngoingScreeningStatusRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "UpdateAMLOngoingScreeningStatus")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateAMLOngoingScreeningStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateAMLOngoingScreeningStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateEKYCWebhookRequest() (request *UpdateEKYCWebhookRequest) {
+    request = &UpdateEKYCWebhookRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "UpdateEKYCWebhook")
+    
+    
+    return
+}
+
+func NewUpdateEKYCWebhookResponse() (response *UpdateEKYCWebhookResponse) {
+    response = &UpdateEKYCWebhookResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateEKYCWebhook
+// This API updates the Webhook configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+//  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
+//  INVALIDPARAMETERVALUE_EKYCFIELDVALIDATION = "InvalidParameterValue.EKYCFieldValidation"
+//  INVALIDPARAMETERVALUE_MISSINGWEBHOOKNAME = "InvalidParameterValue.MissingWebhookName"
+//  INVALIDPARAMETERVALUE_WEBHOOKURL = "InvalidParameterValue.WebhookURL"
+//  RESOURCENOTFOUND_AMLWEBHOOKCONFIG = "ResourceNotFound.AMLWebhookConfig"
+//  RESOURCENOTFOUND_EKYCWEBHOOKCONFIG = "ResourceNotFound.EKYCWebhookConfig"
+func (c *Client) UpdateEKYCWebhook(request *UpdateEKYCWebhookRequest) (response *UpdateEKYCWebhookResponse, err error) {
+    return c.UpdateEKYCWebhookWithContext(context.Background(), request)
+}
+
+// UpdateEKYCWebhook
+// This API updates the Webhook configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
+//  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
+//  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
+//  INVALIDPARAMETERVALUE_EKYCFIELDVALIDATION = "InvalidParameterValue.EKYCFieldValidation"
+//  INVALIDPARAMETERVALUE_MISSINGWEBHOOKNAME = "InvalidParameterValue.MissingWebhookName"
+//  INVALIDPARAMETERVALUE_WEBHOOKURL = "InvalidParameterValue.WebhookURL"
+//  RESOURCENOTFOUND_AMLWEBHOOKCONFIG = "ResourceNotFound.AMLWebhookConfig"
+//  RESOURCENOTFOUND_EKYCWEBHOOKCONFIG = "ResourceNotFound.EKYCWebhookConfig"
+func (c *Client) UpdateEKYCWebhookWithContext(ctx context.Context, request *UpdateEKYCWebhookRequest) (response *UpdateEKYCWebhookResponse, err error) {
+    if request == nil {
+        request = NewUpdateEKYCWebhookRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "faceid", APIVersion, "UpdateEKYCWebhook")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateEKYCWebhook require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateEKYCWebhookResponse()
     err = c.Send(request, response)
     return
 }

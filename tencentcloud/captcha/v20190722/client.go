@@ -295,7 +295,7 @@ func NewDescribeCaptchaResultResponse() (response *DescribeCaptchaResultResponse
 }
 
 // DescribeCaptchaResult
-// This API is used to query the result of CAPTCHA ticket verification (web and app).
+// This API is used to check the ticket results of verification codes for Web and APP.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -307,7 +307,7 @@ func (c *Client) DescribeCaptchaResult(request *DescribeCaptchaResultRequest) (r
 }
 
 // DescribeCaptchaResult
-// This API is used to query the result of CAPTCHA ticket verification (web and app).
+// This API is used to check the ticket results of verification codes for Web and APP.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

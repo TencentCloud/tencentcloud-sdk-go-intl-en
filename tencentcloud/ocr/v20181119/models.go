@@ -526,6 +526,12 @@ type ExtractDocMultiRequestParams struct {
 	// When cn, the added key is chinese.  
 	// When set to en, the added key is english.
 	OutputLanguage *string `json:"OutputLanguage,omitnil,omitempty" name:"OutputLanguage"`
+
+	// Custom extraction field configuration, specify the custom extracted field name, field type and field prompt.
+	NewItemNames []*ItemNames `json:"NewItemNames,omitnil,omitempty" name:"NewItemNames"`
+
+	// The algorithm model version used by the multimodal document extraction recognition service. Valid values are '1.0' and '2.0'. Starting from July 20, 2026, the default is '2.0'. Accounts using this interface before that date default to '1.0' when the parameter is omitted. Accounts activated after July 20, 2026 only support '2.0'. Different versions adopt different extraction algorithms; the new version delivers better overall recognition result, and '2.0' is recommended.
+	MultiModelVersion *string `json:"MultiModelVersion,omitnil,omitempty" name:"MultiModelVersion"`
 }
 
 type ExtractDocMultiRequest struct {
@@ -587,6 +593,12 @@ type ExtractDocMultiRequest struct {
 	// When cn, the added key is chinese.  
 	// When set to en, the added key is english.
 	OutputLanguage *string `json:"OutputLanguage,omitnil,omitempty" name:"OutputLanguage"`
+
+	// Custom extraction field configuration, specify the custom extracted field name, field type and field prompt.
+	NewItemNames []*ItemNames `json:"NewItemNames,omitnil,omitempty" name:"NewItemNames"`
+
+	// The algorithm model version used by the multimodal document extraction recognition service. Valid values are '1.0' and '2.0'. Starting from July 20, 2026, the default is '2.0'. Accounts using this interface before that date default to '1.0' when the parameter is omitted. Accounts activated after July 20, 2026 only support '2.0'. Different versions adopt different extraction algorithms; the new version delivers better overall recognition result, and '2.0' is recommended.
+	MultiModelVersion *string `json:"MultiModelVersion,omitnil,omitempty" name:"MultiModelVersion"`
 }
 
 func (r *ExtractDocMultiRequest) ToJsonString() string {
@@ -612,6 +624,8 @@ func (r *ExtractDocMultiRequest) FromJsonString(s string) error {
 	delete(f, "OutputParentKey")
 	delete(f, "ConfigAdvanced")
 	delete(f, "OutputLanguage")
+	delete(f, "NewItemNames")
+	delete(f, "MultiModelVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ExtractDocMultiRequest has unknown keys!", "")
 	}
@@ -1503,6 +1517,23 @@ type ItemInfo struct {
 	// The value information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Value *Value `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type ItemNames struct {
+
+	KeyName *string `json:"KeyName,omitnil,omitempty" name:"KeyName"`
+
+
+	KeyType *int64 `json:"KeyType,omitnil,omitempty" name:"KeyType"`
+
+
+	KeyPrompt *string `json:"KeyPrompt,omitnil,omitempty" name:"KeyPrompt"`
+
+
+	KeyExpectedValue *string `json:"KeyExpectedValue,omitnil,omitempty" name:"KeyExpectedValue"`
+
+
+	KeyAuditPrompt *string `json:"KeyAuditPrompt,omitnil,omitempty" name:"KeyAuditPrompt"`
 }
 
 type Key struct {
@@ -4595,13 +4626,13 @@ type Value struct {
 type VinOCRRequestParams struct {
 	// The Base64-encoded value of the image.
 	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
-	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 10 MB. The download time of the image cannot exceed 3s.
 	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
 	// The URL of the image.
 	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
-	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 10 MB. The download time of the image cannot exceed 3s.
 	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
 	// The download speed and stability of non-Tencent Cloud URLs may be low.
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
@@ -4612,13 +4643,13 @@ type VinOCRRequest struct {
 	
 	// The Base64-encoded value of the image.
 	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
-	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 10 MB. The download time of the image cannot exceed 3s.
 	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
 	// The URL of the image.
 	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
-	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 10 MB. The download time of the image cannot exceed 3s.
 	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
 	// The download speed and stability of non-Tencent Cloud URLs may be low.
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
