@@ -1842,7 +1842,7 @@ func (r *DeleteEKYCWebhookResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DetectAIFakeFacesRequestParams struct {
-	// <p>Import the face image or facial video to be detected (currently only single face detection is supported) in base64 encoding. If your scenario involves both video and image, we recommend using video for detection. For better detection results, please note the following input data limits and suggestions:</p><ul><li><p>base64 value of the image:<br>Recommend an overall image resolution of 480x640, with the face size no less than 100x100, captured by the mobile front camera.<br>The size of the base64-encoded image data should not exceed 3M, with a maximum of 10M. Only jpg and png formats are supported.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li><li><p>base64 value of the video:<br>The size after base64 encoding should be within 8M, with a maximum of 10M. Supported formats include mp4, avi, and flv, captured by the mobile front camera.<br>Video duration is recommended to be 2–5s, with a maximum of 20s.<br>Video resolution is recommended at 480x640 (maximum support for 720p), with a frame rate between 25fps and 30fps.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li></ul><p>If you do not use Encryption for secure transmission, this field is a required parameter.</p>
+	// <p>Import the face image or facial video to be detected (currently only single face detection is supported) in base64 encoding. If your scenario involves both video and image, we recommend using video for detection. For better detection results, please note the following input data limits and suggestions:</p><ul><li><p>base64 value of the image:<br>Recommend an overall image resolution of 480x640, with the face size no less than 100x100, captured by the mobile front camera.<br>The size of the base64-encoded image data is recommended not to exceed 3M, with a maximum of 10M. Only jpg and png formats are supported.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li><li><p>base64 value of the video:<br>The size after base64 encoding is recommended to be within 8M, with a maximum of 10M. Supported formats include mp4, avi,flv,and mov, captured by the mobile front camera.<br>Video duration is recommended to be 2-5s, with a maximum of 20s.<br>Video resolution is recommended at 480x640 (maximum support for 720p), with a frame rate between 25fps and 30fps.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li></ul><p>If you do not use Encryption for secure transmission, this field is a required parameter.</p>
 	FaceInput *string `json:"FaceInput,omitnil,omitempty" name:"FaceInput"`
 
 	// <p>Passed in type.</p><ul><li>Value ranges from 1 to 2:<br>1: Passed in image type.<br>2: Passed in video type.<br>Other: Return error code InvalidParameter.</li></ul><p>If you do not use Encryption for encrypting transmission, this field is mandatory.</p>
@@ -1858,7 +1858,7 @@ type DetectAIFakeFacesRequestParams struct {
 type DetectAIFakeFacesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Import the face image or facial video to be detected (currently only single face detection is supported) in base64 encoding. If your scenario involves both video and image, we recommend using video for detection. For better detection results, please note the following input data limits and suggestions:</p><ul><li><p>base64 value of the image:<br>Recommend an overall image resolution of 480x640, with the face size no less than 100x100, captured by the mobile front camera.<br>The size of the base64-encoded image data should not exceed 3M, with a maximum of 10M. Only jpg and png formats are supported.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li><li><p>base64 value of the video:<br>The size after base64 encoding should be within 8M, with a maximum of 10M. Supported formats include mp4, avi, and flv, captured by the mobile front camera.<br>Video duration is recommended to be 2–5s, with a maximum of 20s.<br>Video resolution is recommended at 480x640 (maximum support for 720p), with a frame rate between 25fps and 30fps.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li></ul><p>If you do not use Encryption for secure transmission, this field is a required parameter.</p>
+	// <p>Import the face image or facial video to be detected (currently only single face detection is supported) in base64 encoding. If your scenario involves both video and image, we recommend using video for detection. For better detection results, please note the following input data limits and suggestions:</p><ul><li><p>base64 value of the image:<br>Recommend an overall image resolution of 480x640, with the face size no less than 100x100, captured by the mobile front camera.<br>The size of the base64-encoded image data is recommended not to exceed 3M, with a maximum of 10M. Only jpg and png formats are supported.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li><li><p>base64 value of the video:<br>The size after base64 encoding is recommended to be within 8M, with a maximum of 10M. Supported formats include mp4, avi,flv,and mov, captured by the mobile front camera.<br>Video duration is recommended to be 2-5s, with a maximum of 20s.<br>Video resolution is recommended at 480x640 (maximum support for 720p), with a frame rate between 25fps and 30fps.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li></ul><p>If you do not use Encryption for secure transmission, this field is a required parameter.</p>
 	FaceInput *string `json:"FaceInput,omitnil,omitempty" name:"FaceInput"`
 
 	// <p>Passed in type.</p><ul><li>Value ranges from 1 to 2:<br>1: Passed in image type.<br>2: Passed in video type.<br>Other: Return error code InvalidParameter.</li></ul><p>If you do not use Encryption for encrypting transmission, this field is mandatory.</p>
@@ -4975,22 +4975,20 @@ func (r *UpdateAMLCustomerProfileResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdateAMLOngoingScreeningStatusRequestParams struct {
-	// End user's unique identifier in the customer system, up to 256 characters.
+	// <p>Unique identifier of the end user in the customer system, up to 256 characters.</p>
 	UniqueCustomerID *string `json:"UniqueCustomerID,omitnil,omitempty" name:"UniqueCustomerID"`
 
-	// Whether continuous monitoring screening is enabled. 
-	// Default value: false.
+	// <p>Whether to enable continuous monitoring and screening. Default value: false</p><p>Default value: false</p>
 	EnableOngoingScreening *bool `json:"EnableOngoingScreening,omitnil,omitempty" name:"EnableOngoingScreening"`
 }
 
 type UpdateAMLOngoingScreeningStatusRequest struct {
 	*tchttp.BaseRequest
 	
-	// End user's unique identifier in the customer system, up to 256 characters.
+	// <p>Unique identifier of the end user in the customer system, up to 256 characters.</p>
 	UniqueCustomerID *string `json:"UniqueCustomerID,omitnil,omitempty" name:"UniqueCustomerID"`
 
-	// Whether continuous monitoring screening is enabled. 
-	// Default value: false.
+	// <p>Whether to enable continuous monitoring and screening. Default value: false</p><p>Default value: false</p>
 	EnableOngoingScreening *bool `json:"EnableOngoingScreening,omitnil,omitempty" name:"EnableOngoingScreening"`
 }
 
@@ -5019,10 +5017,10 @@ type UpdateAMLOngoingScreeningStatusResponseParams struct {
 	// <p>Unique identifier of the end user in the customer system</p>
 	UniqueCustomerID *string `json:"UniqueCustomerID,omitnil,omitempty" name:"UniqueCustomerID"`
 
-	// Whether continuous monitoring screening is enabled
+	// <p>Whether continuous monitoring screening is enabled</p>
 	EnableOngoingScreening *bool `json:"EnableOngoingScreening,omitnil,omitempty" name:"EnableOngoingScreening"`
 
-	// <p>Description of results returned</p>
+	// <p>Return result description</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// <p>Returned results</p>

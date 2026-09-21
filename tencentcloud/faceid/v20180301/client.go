@@ -2511,7 +2511,7 @@ func NewUpdateAMLOngoingScreeningStatusResponse() (response *UpdateAMLOngoingScr
 }
 
 // UpdateAMLOngoingScreeningStatus
-// Changes the status of continuous name list screening.
+// Continuous name list screening status change
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
@@ -2530,7 +2530,7 @@ func (c *Client) UpdateAMLOngoingScreeningStatus(request *UpdateAMLOngoingScreen
 }
 
 // UpdateAMLOngoingScreeningStatus
-// Changes the status of continuous name list screening.
+// Continuous name list screening status change
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
