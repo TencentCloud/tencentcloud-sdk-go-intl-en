@@ -32,15 +32,6 @@ const (
 	// Ongoing screening setup is incomplete. Please retry the screening request or contact support if the issue persists.
 	FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
 
-	// AML provider service error.
-	FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
-
-	// AML provider service timeout.
-	FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
-
-	// Failed to obtain AML provider access token.
-	FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
-
 	// A webhook for this scene already exists.
 	FAILEDOPERATION_AMLWEBHOOKDUPLICATE = "FailedOperation.AMLWebhookDuplicate"
 
@@ -364,9 +355,6 @@ const (
 
 	// Number of requests exceeds the frequency limit.
 	REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-
-	// Customer mapping not found for the given identifier.
-	RESOURCENOTFOUND_AMLCUSTOMER = "ResourceNotFound.AMLCustomer"
 
 	// Webhook configuration not found.
 	RESOURCENOTFOUND_AMLWEBHOOKCONFIG = "ResourceNotFound.AMLWebhookConfig"

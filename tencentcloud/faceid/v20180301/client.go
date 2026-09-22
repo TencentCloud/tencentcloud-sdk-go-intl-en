@@ -692,7 +692,6 @@ func NewCompareFaceLivenessResponse() (response *CompareFaceLivenessResponse) {
 // This interface supports judgment of real person and photo comparison to verify the user's identity online. By passing the video and photo into the interface, it will first judge whether the person in the video is real. If yes, it judges whether the person in the video is the same one as the uploaded photo and returns authentication result.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_COMPRESSVIDEOERROR = "FailedOperation.CompressVideoError"
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -708,7 +707,6 @@ func (c *Client) CompareFaceLiveness(request *CompareFaceLivenessRequest) (respo
 // This interface supports judgment of real person and photo comparison to verify the user's identity online. By passing the video and photo into the interface, it will first judge whether the person in the video is real. If yes, it judges whether the person in the video is the same one as the uploaded photo and returns authentication result.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_COMPRESSVIDEOERROR = "FailedOperation.CompressVideoError"
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1168,15 +1166,10 @@ func NewGetAMLScreeningResultResponse() (response *GetAMLScreeningResultResponse
 // Queries the AML name list screening result.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
 //  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
-//  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
-//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
-//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
-//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
 //  FAILEDOPERATION_CUSTOMERNOTFOUND = "FailedOperation.CustomerNotFound"
+//  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
 //  INVALIDPARAMETERVALUE_MISSINGUNIQUECUSTOMERID = "InvalidParameterValue.MissingUniqueCustomerID"
-//  RESOURCENOTFOUND_AMLCUSTOMER = "ResourceNotFound.AMLCustomer"
 func (c *Client) GetAMLScreeningResult(request *GetAMLScreeningResultRequest) (response *GetAMLScreeningResultResponse, err error) {
     return c.GetAMLScreeningResultWithContext(context.Background(), request)
 }
@@ -1185,15 +1178,10 @@ func (c *Client) GetAMLScreeningResult(request *GetAMLScreeningResultRequest) (r
 // Queries the AML name list screening result.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
 //  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
-//  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
-//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
-//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
-//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
 //  FAILEDOPERATION_CUSTOMERNOTFOUND = "FailedOperation.CustomerNotFound"
+//  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
 //  INVALIDPARAMETERVALUE_MISSINGUNIQUECUSTOMERID = "InvalidParameterValue.MissingUniqueCustomerID"
-//  RESOURCENOTFOUND_AMLCUSTOMER = "ResourceNotFound.AMLCustomer"
 func (c *Client) GetAMLScreeningResultWithContext(ctx context.Context, request *GetAMLScreeningResultRequest) (response *GetAMLScreeningResultResponse, err error) {
     if request == nil {
         request = NewGetAMLScreeningResultRequest()
@@ -1846,7 +1834,6 @@ func NewImageRecognitionV2Response() (response *ImageRecognitionV2Response) {
 //  FAILEDOPERATION_IDPHOTOPOORQUALITY = "FailedOperation.IdPhotoPoorQuality"
 //  FAILEDOPERATION_IDPHOTOSYSTEMNOANSWER = "FailedOperation.IdPhotoSystemNoanswer"
 //  FAILEDOPERATION_IDENTITYAUTHLIMITEXCEEDED = "FailedOperation.IdentityAuthLimitExceeded"
-//  FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
 //  FAILEDOPERATION_LIFEPHOTODETECTFAKE = "FailedOperation.LifePhotoDetectFake"
 //  FAILEDOPERATION_LIFEPHOTODETECTNOFACES = "FailedOperation.LifePhotoDetectNoFaces"
 //  FAILEDOPERATION_LIFEPHOTOPOORQUALITY = "FailedOperation.LifePhotoPoorQuality"
@@ -1882,7 +1869,6 @@ func (c *Client) ImageRecognitionV2(request *ImageRecognitionV2Request) (respons
 //  FAILEDOPERATION_IDPHOTOPOORQUALITY = "FailedOperation.IdPhotoPoorQuality"
 //  FAILEDOPERATION_IDPHOTOSYSTEMNOANSWER = "FailedOperation.IdPhotoSystemNoanswer"
 //  FAILEDOPERATION_IDENTITYAUTHLIMITEXCEEDED = "FailedOperation.IdentityAuthLimitExceeded"
-//  FAILEDOPERATION_LIFEPHOTODETECTFACES = "FailedOperation.LifePhotoDetectFaces"
 //  FAILEDOPERATION_LIFEPHOTODETECTFAKE = "FailedOperation.LifePhotoDetectFake"
 //  FAILEDOPERATION_LIFEPHOTODETECTNOFACES = "FailedOperation.LifePhotoDetectNoFaces"
 //  FAILEDOPERATION_LIFEPHOTOPOORQUALITY = "FailedOperation.LifePhotoPoorQuality"
@@ -2358,15 +2344,10 @@ func NewRunAMLNameScreeningResponse() (response *RunAMLNameScreeningResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
 //  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
-//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
-//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
-//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
 //  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
 //  INVALIDPARAMETERVALUE_ENTITYTYPE = "InvalidParameterValue.EntityType"
 //  INVALIDPARAMETERVALUE_ENTITYTYPEMISMATCH = "InvalidParameterValue.EntityTypeMismatch"
-//  INVALIDPARAMETERVALUE_MISSINGCOMPANY = "InvalidParameterValue.MissingCompany"
 //  INVALIDPARAMETERVALUE_MISSINGCOMPANYNAME = "InvalidParameterValue.MissingCompanyName"
-//  INVALIDPARAMETERVALUE_MISSINGPERSON = "InvalidParameterValue.MissingPerson"
 //  INVALIDPARAMETERVALUE_MISSINGPERSONNAME = "InvalidParameterValue.MissingPersonName"
 //  INVALIDPARAMETERVALUE_MISSINGPERSONORCOMPANY = "InvalidParameterValue.MissingPersonOrCompany"
 //  INVALIDPARAMETERVALUE_MISSINGUNIQUECUSTOMERID = "InvalidParameterValue.MissingUniqueCustomerID"
@@ -2382,15 +2363,10 @@ func (c *Client) RunAMLNameScreening(request *RunAMLNameScreeningRequest) (respo
 // error code that may be returned:
 //  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
 //  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
-//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
-//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
-//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
 //  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
 //  INVALIDPARAMETERVALUE_ENTITYTYPE = "InvalidParameterValue.EntityType"
 //  INVALIDPARAMETERVALUE_ENTITYTYPEMISMATCH = "InvalidParameterValue.EntityTypeMismatch"
-//  INVALIDPARAMETERVALUE_MISSINGCOMPANY = "InvalidParameterValue.MissingCompany"
 //  INVALIDPARAMETERVALUE_MISSINGCOMPANYNAME = "InvalidParameterValue.MissingCompanyName"
-//  INVALIDPARAMETERVALUE_MISSINGPERSON = "InvalidParameterValue.MissingPerson"
 //  INVALIDPARAMETERVALUE_MISSINGPERSONNAME = "InvalidParameterValue.MissingPersonName"
 //  INVALIDPARAMETERVALUE_MISSINGPERSONORCOMPANY = "InvalidParameterValue.MissingPersonOrCompany"
 //  INVALIDPARAMETERVALUE_MISSINGUNIQUECUSTOMERID = "InvalidParameterValue.MissingUniqueCustomerID"
@@ -2437,10 +2413,6 @@ func NewUpdateAMLCustomerProfileResponse() (response *UpdateAMLCustomerProfileRe
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
-//  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
-//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
-//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
-//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
 //  FAILEDOPERATION_CUSTOMERNOTFOUND = "FailedOperation.CustomerNotFound"
 //  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
 //  INVALIDPARAMETERVALUE_ENTITYTYPE = "InvalidParameterValue.EntityType"
@@ -2460,10 +2432,6 @@ func (c *Client) UpdateAMLCustomerProfile(request *UpdateAMLCustomerProfileReque
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
-//  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
-//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
-//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
-//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
 //  FAILEDOPERATION_CUSTOMERNOTFOUND = "FailedOperation.CustomerNotFound"
 //  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
 //  INVALIDPARAMETERVALUE_ENTITYTYPE = "InvalidParameterValue.EntityType"
@@ -2514,17 +2482,12 @@ func NewUpdateAMLOngoingScreeningStatusResponse() (response *UpdateAMLOngoingScr
 // Continuous name list screening status change
 //
 // error code that may be returned:
-//  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
 //  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
 //  FAILEDOPERATION_AMLONGOINGSCREENINGALREADYENABLED = "FailedOperation.AMLOngoingScreeningAlreadyEnabled"
 //  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
-//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
-//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
-//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
 //  FAILEDOPERATION_CUSTOMERNOTFOUND = "FailedOperation.CustomerNotFound"
 //  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
 //  INVALIDPARAMETERVALUE_MISSINGUNIQUECUSTOMERID = "InvalidParameterValue.MissingUniqueCustomerID"
-//  RESOURCENOTFOUND_AMLCUSTOMER = "ResourceNotFound.AMLCustomer"
 func (c *Client) UpdateAMLOngoingScreeningStatus(request *UpdateAMLOngoingScreeningStatusRequest) (response *UpdateAMLOngoingScreeningStatusResponse, err error) {
     return c.UpdateAMLOngoingScreeningStatusWithContext(context.Background(), request)
 }
@@ -2533,17 +2496,12 @@ func (c *Client) UpdateAMLOngoingScreeningStatus(request *UpdateAMLOngoingScreen
 // Continuous name list screening status change
 //
 // error code that may be returned:
-//  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
 //  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
 //  FAILEDOPERATION_AMLONGOINGSCREENINGALREADYENABLED = "FailedOperation.AMLOngoingScreeningAlreadyEnabled"
 //  FAILEDOPERATION_AMLONGOINGSCREENINGSETUPINCOMPLETE = "FailedOperation.AMLOngoingScreeningSetupIncomplete"
-//  FAILEDOPERATION_AMLPROVIDERERROR = "FailedOperation.AMLProviderError"
-//  FAILEDOPERATION_AMLPROVIDERTIMEOUT = "FailedOperation.AMLProviderTimeout"
-//  FAILEDOPERATION_AMLTOKENERROR = "FailedOperation.AMLTokenError"
 //  FAILEDOPERATION_CUSTOMERNOTFOUND = "FailedOperation.CustomerNotFound"
 //  INVALIDPARAMETERVALUE_AMLFIELDVALIDATION = "InvalidParameterValue.AMLFieldValidation"
 //  INVALIDPARAMETERVALUE_MISSINGUNIQUECUSTOMERID = "InvalidParameterValue.MissingUniqueCustomerID"
-//  RESOURCENOTFOUND_AMLCUSTOMER = "ResourceNotFound.AMLCustomer"
 func (c *Client) UpdateAMLOngoingScreeningStatusWithContext(ctx context.Context, request *UpdateAMLOngoingScreeningStatusRequest) (response *UpdateAMLOngoingScreeningStatusResponse, err error) {
     if request == nil {
         request = NewUpdateAMLOngoingScreeningStatusRequest()
@@ -2581,7 +2539,7 @@ func NewUpdateEKYCWebhookResponse() (response *UpdateEKYCWebhookResponse) {
 }
 
 // UpdateEKYCWebhook
-// This API updates the Webhook configuration.
+// This API is used to update Webhook configurations.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
@@ -2597,7 +2555,7 @@ func (c *Client) UpdateEKYCWebhook(request *UpdateEKYCWebhookRequest) (response 
 }
 
 // UpdateEKYCWebhook
-// This API updates the Webhook configuration.
+// This API is used to update Webhook configurations.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AMLDBERROR = "FailedOperation.AMLDBError"
