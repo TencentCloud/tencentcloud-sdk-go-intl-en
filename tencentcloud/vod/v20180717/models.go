@@ -2274,31 +2274,31 @@ type AigcHunyuan3DTaskOutputFileInfo struct {
 }
 
 type AigcImageOutputConfig struct {
-	// <p>Storage mode</p><p>Enumeration values:</p><ul><li>Temporary: temporary storage. The generated video file will not be stored in VOD. You can obtain a temporary access URL in the event notification, valid for 7 days.</li><li>Permanent: permanent storage. The generated video file will be stored in VOD. You can obtain the FileId in the event notification.</li></ul><p>Default value: Temporary</p>
+	// <p>Storage mode</p><p>Enumeration values:</p><ul><li>Temporary: temporary storage. The generated video file will not be stored in VOD. A temporary access URL can be obtained in the event notification, with a valid period of 7 days.</li><li>Permanent: retained permanently. The generated video file will be stored in VOD. The FileId can be obtained in the event notification.</li></ul><p>Default value: Temporary</p>
 	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
 
-	// <p>Output filename, up to 64 characters. By default, the system generates the filename.</p>
+	// <p>Output filename, up to 64 characters. By default, the system assigns the generated filename.</p>
 	MediaName *string `json:"MediaName,omitnil,omitempty" name:"MediaName"`
 
-	// <p>Category ID, used to categorize and manage media. You can create a category through the <a href="https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1">Create Category</a> API to obtain the category ID.</p><li>Default value: 0, indicating other categories.</li>
+	// <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID through the <a href="https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1">Create Category</a> API.</p><li>Default value: 0, indicating other categories.</li>
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// <p>Expiry date of the output file. The file will be deleted after this time. It never expires by default. Format according to the ISO 8601 standard. For details, see <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
+	// <p>Expiry date of the output file. The file will be deleted after this time. It never expires by default. The format follows the ISO 8601 standard. For details, see <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// <p>Resolution of the generated image. Available values for each model:</p><ul><li>OG: 1K, 2K, 4K. Default: 1K.</li><li>GG 2.5: 1K, 2K, 4K. Default: 1K.</li><li>GG 3.0: 1K, 2K, 4K. Default: 1K.</li><li>GG 3.1: 720P, 1K, 2K, 4K. Default: 1K.</li><li>Kling 2.1: 1k, 2k. Default: 1k.</li><li>Kling 3.0: 1k, 2k. Default: 1k.</li><li>Kling 3.0-Omni: 1k, 2k, 4k. Default: 1k.</li><li>Kling O1: 1k, 2k, 4k. Default: 1k.</li><li>SI 4.0: 1K, 2K, 4K. Default: 1K.</li><li>SI 4.5: 2K, 4K. Default: 2K.</li><li>SI 5.0-lite: 2K, 3K. Default: 2K.</li><li>Vidu q2: 1080p, 2K, 4K. Default: 1080p.</li><li>Hunyuan 3.0: This field is not currently supported. You can set the resolution through the <code>ExtInfo</code> field.</li><li>Qwen 0925: This field is not currently supported. You can set the resolution through the <code>ExtInfo</code> field.</li></ul>
 	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 
-	// <p>Specify the aspect ratio of the generated image.</p><ul><li>OG: 1:1, 3:2, 2:3, 3:4, 4:3, 16:9, 9:16, 21:9, 9:21;</li><li>GG 2.5: 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9;</li><li>GG 3.0: 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9;</li><li>GG 3.1: 1:1, 1:4, 1:8, 2:3, 3:2, 3:4, 4:1, 4:3, 4:5, 5:4, 8:1, 9:16, 16:9, 21:9;</li><li>Kling 2.1: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9;</li><li>Kling 3.0: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9;</li><li>Kling 3.0-Omni: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto;</li><li>Kling O1: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto;</li><li>Vidu q2: 16:9, 9:16, 1:1, 3:4, 4:3, 21:9, 2:3, 3:2;</li><li>SI 4.0: <strong>does not support</strong> this parameter. You can specify 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9 via prompt;</li><li>SI 4.5: <strong>does not support</strong> this parameter. You can specify 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9 via prompt;</li><li>SI 5.0-lite: <strong>does not support</strong> this parameter. You can specify 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9 via prompt;</li><li>Hunyuan 3.0: not supported;</li><li>Qwen 2.0: not supported;</li><li>Qwen 0925: not supported;</li></ul>
+	// <p>Specify the aspect ratio of the generated image.</p><ul><li>OG: 1:1, 3:2, 2:3, 3:4, 4:3, 16:9, 9:16, 21:9, 9:21;</li><li>GG 2.5: 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9;</li><li>GG 3.0: 1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9;</li><li>GG 3.1: 1:1, 1:4, 1:8, 2:3, 3:2, 3:4, 4:1, 4:3, 4:5, 5:4, 8:1, 9:16, 16:9, 21:9;</li><li>Kling 2.1: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9;</li><li>Kling 3.0: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9;</li><li>Kling 3.0-Omni: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto;</li><li>Kling O1: 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto;</li><li>Vidu q2: 16:9, 9:16, 1:1, 3:4, 4:3, 21:9, 2:3, 3:2;</li><li>SI 4.0: <strong>does not support</strong> this parameter. You can specify 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9 via prompt;</li><li>SI 4.5: <strong>does not support</strong> this parameter. You can specify 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9 via prompt;</li><li>SI 5.0-lite: <strong>does not support</strong> this parameter. You can specify 16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9 via prompt;</li><li>Hunyuan 3.0: unsupported;</li><li>Qwen 2.0: unsupported;</li><li>Qwen 0925: unsupported;</li></ul>
 	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
 
-	// <p>Whether to allow generation of people or human faces. Valid values: <li>AllowAdult: Allow generation of adults;</li> <li>Disallowed: Forbid people or human faces in images;</li></p>
+	// <p>Whether to allow generation of people or human faces. Valid values: <li>AllowAdult: allow generation of adults;</li> <li>Disallowed: forbid people or human faces in images;</li></p>
 	PersonGeneration *string `json:"PersonGeneration,omitnil,omitempty" name:"PersonGeneration"`
 
-	// <p>Whether compliance check is enabled for the input content. Valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li></p>
+	// <p>Whether to enable compliance check on the input content. Valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li></p>
 	InputComplianceCheck *string `json:"InputComplianceCheck,omitnil,omitempty" name:"InputComplianceCheck"`
 
-	// <p>Whether compliance check is enabled for output content. Valid values: <li>Enabled: enabled;</li> <li>Disabled: disabled;</li></p>
+	// <p>Whether to enable compliance check on output content. Valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li></p>
 	OutputComplianceCheck *string `json:"OutputComplianceCheck,omitnil,omitempty" name:"OutputComplianceCheck"`
 
 	// <p>Number of images generated. Available values for each model:</p><ul><li>Kling: value range 1-9;</li><li>OG: value range 1-8;</li></ul><p><strong>Not effective for other models.</strong></p>
@@ -2393,16 +2393,16 @@ type AigcImageTaskInput struct {
 }
 
 type AigcImageTaskInputFileInfo struct {
-	// <p>Input file type. Valid values: <li>File: on-demand media file;</li> <li>Url: accessible URL;</li> <li>Base64: Base64 string of an image or transcoded video;</li></p>
+	// <p>Input file type. Valid values: <li>File: on-demand media file;</li> <li>Url: accessible URL;</li> <li>Base64: Base64 string of an image or video for transcoding;</li></p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// <p>Media file ID of the image file, which is the globally unique identifier of the file in VOD, assigned by the VOD backend after successful upload. You can obtain this field in the <a href="https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when Type is File.<br>Description:</p><ol><li>Images less than 7M are recommended.</li><li>Image format values: jpeg, jpg, png, webp.</li></ol>
+	// <p>Media file ID of the image file, which is the globally unique identifier of the file on VOD, assigned by the VOD backend after successful upload. You can obtain this field in the <a href="https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1">video upload completion event notification</a> or the <a href="https://console.cloud.tencent.com/vod/media">VOD console</a>. This parameter is valid when Type is File.<br>Description:</p><ol><li>Images less than 7M are recommended.</li><li>Image format values: jpeg, jpg, png, webp.</li></ol>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
 	// <p>Accessible file URL. This parameter is valid when Type is Url.<br>Description:</p><ol><li>An image less than 7M is recommended.</li><li>Image format values: jpeg, jpg, png, webp.</li></ol>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// <p>Accessible file Base64. This parameter is valid when Type is Base64. Details:</p><ol><li>The total size of all files must not exceed 7 MB to avoid exceeding the 10 MB upper limit of message size for cloud APIs after conversion to Base64;</li><li>Image formats should be: jpeg, jpg, png, webp;</li><li>Do not include prefixes such as data:image/jpeg;base64,.</li></ol>
+	// <p>Accessible file Base64. This parameter is valid when Type is Base64. Details:</p><ol><li>The total size of all files must not exceed 7 MB to avoid exceeding the 10 MB upper limit of message size for cloud APIs after conversion to Base64;</li><li>Image format should be: jpeg, jpg, png, webp;</li><li>Do not include prefixes such as data:image/jpeg;base64,.</li></ol>
 	Base64 *string `json:"Base64,omitnil,omitempty" name:"Base64"`
 
 	// <p>Description of the input image, used to help the model understand the image. Only valid for GEM 2.5 and GEM 3.0.</p>
@@ -2958,7 +2958,7 @@ type ApplyUploadRequestParams struct {
 	// <p>Media type. For available values, see <a href="https://www.tencentcloud.com/document/product/266/9760?from_cn_redirect=1#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B">upload capability summary</a>.</p>
 	MediaType *string `json:"MediaType,omitnil,omitempty" name:"MediaType"`
 
-	// <p><b>Video-on-Demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate VOD services on or after December 25, 2023, this field must be set to the application ID when accessing resources in VOD applications, whether the default application or a newly created application.</b></p>
+	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate VOD services after December 25, 2023, this field must be filled in with the app ID when accessing resources in VOD applications (whether the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <p>Media name.</p>
@@ -2967,16 +2967,16 @@ type ApplyUploadRequestParams struct {
 	// <p>Cover Type. For available values, see <a href="https://www.tencentcloud.com/document/product/266/9760?from_cn_redirect=1#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B">upload capability summary</a>.</p>
 	CoverType *string `json:"CoverType,omitnil,omitempty" name:"CoverType"`
 
-	// <p>Subsequent media task processing operations, i.e., automatic task initiation after media upload is completed. The parameter value is the task flow template name. VOD supports <a href="https://www.tencentcloud.com/document/product/266/33819?from_cn_redirect=1">creating a task flow template</a> and naming the template.</p>
+	// <p>Subsequent media task processing operations, which can automatically initiate task flow operations after media upload is completed. The parameter value is the task flow template name. VOD supports <a href="https://www.tencentcloud.com/document/product/266/33819?from_cn_redirect=1">creating a task flow template</a> and naming the template.</p>
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
 	// <p>Media file expiry time, format according to the ISO 8601 standard representation. For details, see <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// <p>Specify the upload park. This is applicable only to the user with special requirements for the upload target region.</p>
+	// <p>Designated upload park, applicable only to users with special requirements for the upload target region.</p>
 	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
 
-	// <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID through the <a href="https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1">Create Category</a> API.</p><li>Default value: 0, indicating other categories.</li>
+	// <p>Category ID, used to categorize and manage media. You can create a category through the <a href="https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1">Create Category</a> API to obtain the category ID.</p><li>Default value: 0, indicating other categories.</li>
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
 	// <p>Source context. This is used to pass user request information. The <a href="https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1">upload completion callback</a> returns the value of this field. The maximum length is 250 characters.</p>
@@ -2998,7 +2998,7 @@ type ApplyUploadRequest struct {
 	// <p>Media type. For available values, see <a href="https://www.tencentcloud.com/document/product/266/9760?from_cn_redirect=1#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B">upload capability summary</a>.</p>
 	MediaType *string `json:"MediaType,omitnil,omitempty" name:"MediaType"`
 
-	// <p><b>Video-on-Demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate VOD services on or after December 25, 2023, this field must be set to the application ID when accessing resources in VOD applications, whether the default application or a newly created application.</b></p>
+	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate VOD services after December 25, 2023, this field must be filled in with the app ID when accessing resources in VOD applications (whether the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <p>Media name.</p>
@@ -3007,16 +3007,16 @@ type ApplyUploadRequest struct {
 	// <p>Cover Type. For available values, see <a href="https://www.tencentcloud.com/document/product/266/9760?from_cn_redirect=1#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B">upload capability summary</a>.</p>
 	CoverType *string `json:"CoverType,omitnil,omitempty" name:"CoverType"`
 
-	// <p>Subsequent media task processing operations, i.e., automatic task initiation after media upload is completed. The parameter value is the task flow template name. VOD supports <a href="https://www.tencentcloud.com/document/product/266/33819?from_cn_redirect=1">creating a task flow template</a> and naming the template.</p>
+	// <p>Subsequent media task processing operations, which can automatically initiate task flow operations after media upload is completed. The parameter value is the task flow template name. VOD supports <a href="https://www.tencentcloud.com/document/product/266/33819?from_cn_redirect=1">creating a task flow template</a> and naming the template.</p>
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
 	// <p>Media file expiry time, format according to the ISO 8601 standard representation. For details, see <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
-	// <p>Specify the upload park. This is applicable only to the user with special requirements for the upload target region.</p>
+	// <p>Designated upload park, applicable only to users with special requirements for the upload target region.</p>
 	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
 
-	// <p>Category ID, used to categorize and manage media. You can create a category and obtain the category ID through the <a href="https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1">Create Category</a> API.</p><li>Default value: 0, indicating other categories.</li>
+	// <p>Category ID, used to categorize and manage media. You can create a category through the <a href="https://www.tencentcloud.com/document/product/266/7812?from_cn_redirect=1">Create Category</a> API to obtain the category ID.</p><li>Default value: 0, indicating other categories.</li>
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
 	// <p>Source context. This is used to pass user request information. The <a href="https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1">upload completion callback</a> returns the value of this field. The maximum length is 250 characters.</p>
@@ -3064,16 +3064,16 @@ func (r *ApplyUploadRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ApplyUploadResponseParams struct {
-	// <p>Bucket, used as the bucket_name for uploading API URL.</p>
+	// <p>Bucket, the bucket_name for uploading API URL.</p>
 	StorageBucket *string `json:"StorageBucket,omitnil,omitempty" name:"StorageBucket"`
 
 	// <p>Storage campus, used for the Region of the upload API Host.</p>
 	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
 
-	// <p>VOD session, used for confirmation of the upload API parameter VodSessionKey.</p>
+	// <p>VOD session, used for the VodSessionKey parameter of the confirm upload API.</p>
 	VodSessionKey *string `json:"VodSessionKey,omitnil,omitempty" name:"VodSessionKey"`
 
-	// <p>Media storage path, the object Key for uploading and storing media through the API.</p>
+	// <p>Media storage path, the object Key for uploading and storing media via the API.</p>
 	MediaStoragePath *string `json:"MediaStoragePath,omitnil,omitempty" name:"MediaStoragePath"`
 
 	// <p>Cover storage path, the object Key for uploading and storing the cover via the API.</p>
@@ -6541,10 +6541,10 @@ func (r *CreateAigcHunyuan3DTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAigcImageTaskRequestParams struct {
-	// <p><b>On-demand <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications, whether in the default application or a newly created application.</b></p>
+	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services from December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// <p>Model name. Parameter values:</p><li>OG</li><li>GG</li><li>Hunyuan</li><li>Vidu</li><li>Kling</li>
+	// <p>Model name. Parameter Value:</p><li>OG</li><li>GG</li><li>Hunyuan</li><li>Vidu</li><li>Kling</li>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
 	// <p>Model version. Value:</p><li>When ModelName is OG, optional values: image2_low, image2_medium, image2_high;</li><li>When ModelName is GG, optional values: 2.5, 3.0, 3.1, 3.1-lite;</li><li>When ModelName is Hunyuan, optional values: 3.0, 3d_2.0, 3.5-preview;</li><li>When ModelName is Vidu, optional values: q2;</li><li>When ModelName is Kling, optional values: 2.1, 3.0, 3.0-Omni, O1, scene;</li><li>When ModelName is Mingmou, optional values: 1.0;</li>
@@ -6562,7 +6562,7 @@ type CreateAigcImageTaskRequestParams struct {
 	// <p>Whether to optimize Prompt content automatically. When Enabled, the passed in Prompt content will be optimized automatically to enhance generation quality. Valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li></p>
 	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-	// <p>Configuration of the output media file of the image generation task.</p>
+	// <p>Output media file configuration for an image generation task.</p>
 	OutputConfig *AigcImageOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
 
 	// <p>Input region information. Available values:</p><ul><li>Mainland: Chinese mainland;</li><li>Oversea: overseas;</li><li>OverseaUSWest: overseas - western United States;</li></ul>
@@ -6577,23 +6577,23 @@ type CreateAigcImageTaskRequestParams struct {
 	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// <p>Source context. This is used to pass user request information. The audio and video quality revival complete callback returns the value of this field. The maximum length is 1000 characters.</p>
+	// <p>Source context. This is used to pass user request information. The audio and video quality revival completion callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
 	// <p>Task priority. The higher the value, the higher the priority. The value range is from -10 to 10. If this is not specified, the default value is 0.</p>
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// <p>Reserved field for special usage.</p><ul><li><p>Hunyuan 3.0</p><ul><li>Supports free resolution width and height settings. Both width and height are within the pixel range of [512, 2048], and the product of width and height must be ≤ 1024x1024 pixels. Example: <code>{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1024\&quot;}&quot;}</code></li></ul></li><li><p>OG</p><ul><li>Supports free resolution width and height settings:<ul><li>The calculated pixel size must be divisible by 16.</li><li>The total pixel count must be at least 655,360 and should not exceed 8,294,400.</li><li>Example: <code>{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1024\&quot;}&quot;}</code></li></ul></li><li>Supports setting a transparent layer:<ul><li>Example: <code>{&quot;AdditionalParameters&quot;: &quot;{\&quot;background\&quot;:\&quot;transparent\&quot;}&quot;}</code></li></ul></li></ul></li><li><p>Kling</p><ul><li>Supports setting image expansion parameters. Example: <code>{&quot;AdditionalParameters&quot;:&quot;{\&quot;down_expansion_ratio\&quot;:0.2,\&quot;left_expansion_ratio\&quot;:0.3,\&quot;right_expansion_ratio\&quot;:0.4,\&quot;up_expansion_ratio\&quot;:0.1}}</code><ul><li>Common constraints:<ul><li>Value range: [0, 2];</li><li>The overall area of the new image should not exceed 3 times that of the original image;</li><li>Forward prompt content can be imported through the <code>Prompt</code> field.</li><li>Example description:<ul><li>up_expansion_ratio: The upward expansion range, calculated as a multiple of the original image height. If the original image height is 20 and the parameter value is 0.1, the distance from the top edge of the original image to the top edge of the new image is 20 × 0.1 = 2. This region is the expansion range.</li><li>down_expansion_ratio: The downward expansion range, calculated as a multiple of the original image height. If the original image height is 20 and the parameter value is 0.2, the distance from the bottom edge of the original image to the bottom edge of the new image is 20 × 0.2 = 4. This region is the expansion range.</li><li>left_expansion_ratio: The leftward expansion range, calculated as a multiple of the original image width. If the original image width is 30 and the parameter value is 0.3, the distance from the left edge of the original image to the left edge of the new image is 30 × 0.3 = 9. This region is the expansion range.</li><li>right_expansion_ratio: The rightward expansion range, calculated as a multiple of the original image width. If the original image width is 30 and the parameter value is 0.4, the distance from the right edge of the original image to the right edge of the new image is 30 × 0.4 = 12. This region is the expansion range.</li></ul></li></ul></li></ul></li></ul></li></ul>
+	// <p>Reserved field for special usage.</p><ul><li><p>Hunyuan 3.0</p><ul><li>Support setting resolution width and height freely. Both width and height are in the range of [512, 2048] pixels, and the product of width and height <= 1024x1024 pixels. Example: <code>{"AdditionalParameters": "{\"size\":\"728x1024\"}"}</code></li></ul></li><li><p>OG</p><ul><li>Support setting resolution width and height freely:<ul><li>Calculate the pixel size, which must be divisible by 16</li><li>The total pixels must be at least 655,360 and should not exceed 8,294,400</li><li>Example: <code>{"AdditionalParameters": "{\"size\":\"728x1024\"}"}</code></li></ul></li><li>Support setting a transparent layer:<ul><li>Example: <code>{"AdditionalParameters": "{\"background\":\"transparent\"}"}</code></li></ul></li></ul></li><li><p>Kling</p><ul><li>Support setting expansion parameters. Example: <code>{"AdditionalParameters":"{\"down_expansion_ratio\":0.2,\"left_expansion_ratio\":0.3,\"right_expansion_ratio\":0.4,\"up_expansion_ratio\":0.1}}</code><ul><li>Common constraints:<ul><li>Value range: [0, 2];</li><li>The overall area of the new image should not exceed 3 times that of the original image;</li><li>Forward Prompt content can be input through the <code>Prompt</code> field.</li><li>Example description:<ul><li>up_expansion_ratio: expand upward, calculated based on a multiple of the original image height. If the original image height is 20 and the parameter value is 0.1, the distance from the top edge of the original image to the top edge of the new image is 20 x 0.1 = 2. This region is the expansion range.</li><li>down_expansion_ratio: expand downward, calculated based on a multiple of the original image height. If the original image height is 20 and the parameter value is 0.2, the distance from the bottom edge of the original image to the bottom edge of the new image is 20 x 0.2 = 4. This region is the expansion range.</li><li>left_expansion_ratio: expand to the left, calculated based on a multiple of the original image width. If the original image width is 30 and the parameter value is 0.3, the distance from the left edge of the original image to the left edge of the new image is 30 x 0.3 = 9. This region is the expansion range.</li><li>right_expansion_ratio: expand to the right, calculated based on a multiple of the original image width. If the original image width is 30 and the parameter value is 0.4, the distance from the right edge of the original image to the right edge of the new image is 30 x 0.4 = 12. This region is the expansion range.</li></ul></li></ul></li></ul></li></ul></li></ul>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 type CreateAigcImageTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p><b>On-demand <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications, whether in the default application or a newly created application.</b></p>
+	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services from December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// <p>Model name. Parameter values:</p><li>OG</li><li>GG</li><li>Hunyuan</li><li>Vidu</li><li>Kling</li>
+	// <p>Model name. Parameter Value:</p><li>OG</li><li>GG</li><li>Hunyuan</li><li>Vidu</li><li>Kling</li>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
 	// <p>Model version. Value:</p><li>When ModelName is OG, optional values: image2_low, image2_medium, image2_high;</li><li>When ModelName is GG, optional values: 2.5, 3.0, 3.1, 3.1-lite;</li><li>When ModelName is Hunyuan, optional values: 3.0, 3d_2.0, 3.5-preview;</li><li>When ModelName is Vidu, optional values: q2;</li><li>When ModelName is Kling, optional values: 2.1, 3.0, 3.0-Omni, O1, scene;</li><li>When ModelName is Mingmou, optional values: 1.0;</li>
@@ -6611,7 +6611,7 @@ type CreateAigcImageTaskRequest struct {
 	// <p>Whether to optimize Prompt content automatically. When Enabled, the passed in Prompt content will be optimized automatically to enhance generation quality. Valid values: <li>Enabled: enable;</li> <li>Disabled: disable;</li></p>
 	EnhancePrompt *string `json:"EnhancePrompt,omitnil,omitempty" name:"EnhancePrompt"`
 
-	// <p>Configuration of the output media file of the image generation task.</p>
+	// <p>Output media file configuration for an image generation task.</p>
 	OutputConfig *AigcImageOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
 
 	// <p>Input region information. Available values:</p><ul><li>Mainland: Chinese mainland;</li><li>Oversea: overseas;</li><li>OverseaUSWest: overseas - western United States;</li></ul>
@@ -6626,13 +6626,13 @@ type CreateAigcImageTaskRequest struct {
 	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past three days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// <p>Source context. This is used to pass user request information. The audio and video quality revival complete callback returns the value of this field. The maximum length is 1000 characters.</p>
+	// <p>Source context. This is used to pass user request information. The audio and video quality revival completion callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
 	// <p>Task priority. The higher the value, the higher the priority. The value range is from -10 to 10. If this is not specified, the default value is 0.</p>
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// <p>Reserved field for special usage.</p><ul><li><p>Hunyuan 3.0</p><ul><li>Supports free resolution width and height settings. Both width and height are within the pixel range of [512, 2048], and the product of width and height must be ≤ 1024x1024 pixels. Example: <code>{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1024\&quot;}&quot;}</code></li></ul></li><li><p>OG</p><ul><li>Supports free resolution width and height settings:<ul><li>The calculated pixel size must be divisible by 16.</li><li>The total pixel count must be at least 655,360 and should not exceed 8,294,400.</li><li>Example: <code>{&quot;AdditionalParameters&quot;: &quot;{\&quot;size\&quot;:\&quot;728x1024\&quot;}&quot;}</code></li></ul></li><li>Supports setting a transparent layer:<ul><li>Example: <code>{&quot;AdditionalParameters&quot;: &quot;{\&quot;background\&quot;:\&quot;transparent\&quot;}&quot;}</code></li></ul></li></ul></li><li><p>Kling</p><ul><li>Supports setting image expansion parameters. Example: <code>{&quot;AdditionalParameters&quot;:&quot;{\&quot;down_expansion_ratio\&quot;:0.2,\&quot;left_expansion_ratio\&quot;:0.3,\&quot;right_expansion_ratio\&quot;:0.4,\&quot;up_expansion_ratio\&quot;:0.1}}</code><ul><li>Common constraints:<ul><li>Value range: [0, 2];</li><li>The overall area of the new image should not exceed 3 times that of the original image;</li><li>Forward prompt content can be imported through the <code>Prompt</code> field.</li><li>Example description:<ul><li>up_expansion_ratio: The upward expansion range, calculated as a multiple of the original image height. If the original image height is 20 and the parameter value is 0.1, the distance from the top edge of the original image to the top edge of the new image is 20 × 0.1 = 2. This region is the expansion range.</li><li>down_expansion_ratio: The downward expansion range, calculated as a multiple of the original image height. If the original image height is 20 and the parameter value is 0.2, the distance from the bottom edge of the original image to the bottom edge of the new image is 20 × 0.2 = 4. This region is the expansion range.</li><li>left_expansion_ratio: The leftward expansion range, calculated as a multiple of the original image width. If the original image width is 30 and the parameter value is 0.3, the distance from the left edge of the original image to the left edge of the new image is 30 × 0.3 = 9. This region is the expansion range.</li><li>right_expansion_ratio: The rightward expansion range, calculated as a multiple of the original image width. If the original image width is 30 and the parameter value is 0.4, the distance from the right edge of the original image to the right edge of the new image is 30 × 0.4 = 12. This region is the expansion range.</li></ul></li></ul></li></ul></li></ul></li></ul>
+	// <p>Reserved field for special usage.</p><ul><li><p>Hunyuan 3.0</p><ul><li>Support setting resolution width and height freely. Both width and height are in the range of [512, 2048] pixels, and the product of width and height <= 1024x1024 pixels. Example: <code>{"AdditionalParameters": "{\"size\":\"728x1024\"}"}</code></li></ul></li><li><p>OG</p><ul><li>Support setting resolution width and height freely:<ul><li>Calculate the pixel size, which must be divisible by 16</li><li>The total pixels must be at least 655,360 and should not exceed 8,294,400</li><li>Example: <code>{"AdditionalParameters": "{\"size\":\"728x1024\"}"}</code></li></ul></li><li>Support setting a transparent layer:<ul><li>Example: <code>{"AdditionalParameters": "{\"background\":\"transparent\"}"}</code></li></ul></li></ul></li><li><p>Kling</p><ul><li>Support setting expansion parameters. Example: <code>{"AdditionalParameters":"{\"down_expansion_ratio\":0.2,\"left_expansion_ratio\":0.3,\"right_expansion_ratio\":0.4,\"up_expansion_ratio\":0.1}}</code><ul><li>Common constraints:<ul><li>Value range: [0, 2];</li><li>The overall area of the new image should not exceed 3 times that of the original image;</li><li>Forward Prompt content can be input through the <code>Prompt</code> field.</li><li>Example description:<ul><li>up_expansion_ratio: expand upward, calculated based on a multiple of the original image height. If the original image height is 20 and the parameter value is 0.1, the distance from the top edge of the original image to the top edge of the new image is 20 x 0.1 = 2. This region is the expansion range.</li><li>down_expansion_ratio: expand downward, calculated based on a multiple of the original image height. If the original image height is 20 and the parameter value is 0.2, the distance from the bottom edge of the original image to the bottom edge of the new image is 20 x 0.2 = 4. This region is the expansion range.</li><li>left_expansion_ratio: expand to the left, calculated based on a multiple of the original image width. If the original image width is 30 and the parameter value is 0.3, the distance from the left edge of the original image to the left edge of the new image is 30 x 0.3 = 9. This region is the expansion range.</li><li>right_expansion_ratio: expand to the right, calculated based on a multiple of the original image width. If the original image width is 30 and the parameter value is 0.4, the distance from the right edge of the original image to the right edge of the new image is 30 x 0.4 = 12. This region is the expansion range.</li></ul></li></ul></li></ul></li></ul></li></ul>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
@@ -10573,17 +10573,17 @@ type CreateVodDomainRequestParams struct {
 	// Domain name for on-demand acceleration. Note: Filling in wildcard domains is not supported.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// <b>ID of the on-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1). For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b>
+	// <b>VOD [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD from December 25, 2023, this field must be filled in with the app ID when accessing resources in VOD applications (whether the default application or a newly created application).</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Regions where CDN acceleration needs to be enabled:
 	// <li>Chinese Mainland: within the Chinese mainland (excluding Hong Kong (China), Macao (China), and Taiwan (China)).</li>
 	// <li>Outside Chinese Mainland: outside the Chinese mainland.</li>
 	// <li>Global: around the world.</li>
-	// If AccelerateArea is not set, VOD will automatically activate CDN acceleration within or outside the Chinese mainland based on the user's regional information in Tencent Cloud Settings. To enable CDN acceleration within the Chinese mainland, the domain must be [ICP filed](https://www.tencentcloud.com/document/product/243/18905?from_cn_redirect=1) first.
+	// If AccelerateArea is not set, VOD will automatically activate CDN acceleration within or outside the Chinese mainland based on the regional information configured by the user in Tencent Cloud Settings. 
 	AccelerateArea *string `json:"AccelerateArea,omitnil,omitempty" name:"AccelerateArea"`
 
-	// Domain type. Valid values: <li>VOD: domain name used to distribute VOD products</li> <li>EdgeOne: domain name used to distribute EdgeOne products</li> If not specified, the default value is VOD.
+	// Domain type. Valid values: <li>VOD: domain name for distribution using the VOD product.</li> <li>EdgeOne: domain name for distribution using the EdgeOne product.</li> If not specified, the default value is VOD.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -10593,17 +10593,17 @@ type CreateVodDomainRequest struct {
 	// Domain name for on-demand acceleration. Note: Filling in wildcard domains is not supported.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// <b>ID of the on-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1). For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b>
+	// <b>VOD [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1) ID. For customers who activate VOD from December 25, 2023, this field must be filled in with the app ID when accessing resources in VOD applications (whether the default application or a newly created application).</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// Regions where CDN acceleration needs to be enabled:
 	// <li>Chinese Mainland: within the Chinese mainland (excluding Hong Kong (China), Macao (China), and Taiwan (China)).</li>
 	// <li>Outside Chinese Mainland: outside the Chinese mainland.</li>
 	// <li>Global: around the world.</li>
-	// If AccelerateArea is not set, VOD will automatically activate CDN acceleration within or outside the Chinese mainland based on the user's regional information in Tencent Cloud Settings. To enable CDN acceleration within the Chinese mainland, the domain must be [ICP filed](https://www.tencentcloud.com/document/product/243/18905?from_cn_redirect=1) first.
+	// If AccelerateArea is not set, VOD will automatically activate CDN acceleration within or outside the Chinese mainland based on the regional information configured by the user in Tencent Cloud Settings. 
 	AccelerateArea *string `json:"AccelerateArea,omitnil,omitempty" name:"AccelerateArea"`
 
-	// Domain type. Valid values: <li>VOD: domain name used to distribute VOD products</li> <li>EdgeOne: domain name used to distribute EdgeOne products</li> If not specified, the default value is VOD.
+	// Domain type. Valid values: <li>VOD: domain name for distribution using the VOD product.</li> <li>EdgeOne: domain name for distribution using the EdgeOne product.</li> If not specified, the default value is VOD.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -19348,12 +19348,12 @@ type DrmStreamingsInfoForUpdate struct {
 }
 
 type DynamicRangeInfo struct {
-	// Dynamic range info of the frame. Valid values:
-	// <li>SDR: Standard Dynamic Range</li>
+	// Frame dynamic range information. Valid values:
+	// <li>SDR: Standard Dynamic Range;</li>
 	// <li>HDR: High Dynamic Range.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// High dynamic range type. Valid when Type is HDR. Currently supported valid values:
+	// High dynamic range type. Valid when Type is HDR. Currently supports the following valid values:
 	// <li>hdr10: refers to the hdr10 standard;</li>
 	// <li>hlg: refers to the hlg standard.</li>
 	HDRType *string `json:"HDRType,omitnil,omitempty" name:"HDRType"`
@@ -20438,43 +20438,52 @@ type ExtractCopyRightWatermarkTaskOutput struct {
 
 // Predefined struct for user
 type ExtractTraceWatermarkRequestParams struct {
-
+	// URL of the media requiring watermark extraction.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-
+	// Media file ID. Original media file ID corresponding to the Url.
+	// <li><font color=red>Note</font>: This field is required.</li>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-
+	// <b>ID of the on-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1). For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-
+	// Source context identifier, used to pass through user request information. This field will be returned in the ExtractTraceWatermarkComplete callback and task flow status change callback. It can contain up to 1000 characters.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-
+	// Identification Code for Task Deduplication. If there has been a request with the same identification code within the past 3 days, an error will be returned for the current request. The maximum length is 50 characters. Leaving it blank or using an empty string indicates no deduplication.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-
+	// Task Priority. The higher the value, the higher the priority. The value range is from -10 to 10. If left blank, the default value is 0.
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-
+	// Reserved field, used for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 type ExtractTraceWatermarkRequest struct {
 	*tchttp.BaseRequest
 	
+	// URL of the media requiring watermark extraction.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
+	// Media file ID. Original media file ID corresponding to the Url.
+	// <li><font color=red>Note</font>: This field is required.</li>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
+	// <b>ID of the on-demand [application](https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1). For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
+	// Source context identifier, used to pass through user request information. This field will be returned in the ExtractTraceWatermarkComplete callback and task flow status change callback. It can contain up to 1000 characters.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
+	// Identification Code for Task Deduplication. If there has been a request with the same identification code within the past 3 days, an error will be returned for the current request. The maximum length is 50 characters. Leaving it blank or using an empty string indicates no deduplication.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
+	// Task Priority. The higher the value, the higher the priority. The value range is from -10 to 10. If left blank, the default value is 0.
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
+	// Reserved field, used for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
@@ -20505,7 +20514,7 @@ func (r *ExtractTraceWatermarkRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ExtractTraceWatermarkResponseParams struct {
-
+	// Task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -22161,7 +22170,7 @@ func (r *ListFilesResponse) FromJsonString(s string) error {
 }
 
 type LiveRealTimeClipMediaSegmentInfo struct {
-	// Segment start time. For the format, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
+	// Segment start time. See [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I) for the format.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Segment end time. For the format, see [ISO date format description](https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I).
@@ -22179,19 +22188,19 @@ type LiveRealTimeClipRequestParams struct {
 	// <p>End time of stream clipping. For the format, see <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate VOD services on or after December 25, 2023, when accessing resources in VOD applications (whether the default application or a newly created application), this field must be filled in with the application ID.</b></p>
+	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services from December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// <p>Whether solidified. 0: non-permanent, 1: solidified. Default: non-permanent.</p>
+	// <p>Whether solidified. 0: non-permanent, 1: solidified. Default non-permanent.</p>
 	IsPersistence *int64 `json:"IsPersistence,omitnil,omitempty" name:"IsPersistence"`
 
-	// <p>Video storage expiry time after editing solidification. Format reference: <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>. Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding results, sprites, etc.) will be permanently deleted. Valid only when IsPersistence is 1. By default, videos solidified by editing never expire.</p>
+	// <p>Video storage expiry time after editing solidification. Format reference: <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>. Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding results, sprites, etc.) will be permanently deleted. Valid only when IsPersistence is 1. By default, videos solidified through editing never expire.</p>
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// <p>Post-editing Solidified Video On-demand Task Flow Processing. For details, see <a href="https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1">upload specified task flow</a>. Valid only when IsPersistence is 1.</p>
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// <p>Category ID, used to categorize and manage media. You can call the <a href="https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1">create category</a> API to create a category and obtain the category ID.</p><li>Default value: 0, indicating other categories.</li>Valid only when IsPersistence is 1.
+	// <p>Category ID, used to categorize and manage media. You can create a category via the <a href="https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1">Create Category</a> API to obtain the category ID.</p><li>Default value: 0, indicating other categories.</li>Valid only when IsPersistence is 1.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
 	// <p>Source context. This is used to pass user request information. The <a href="https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1">upload completion callback</a> returns the value of this field. The maximum length is 250 characters. Valid only when IsPersistence is 1.</p>
@@ -22203,7 +22212,7 @@ type LiveRealTimeClipRequestParams struct {
 	// <p>Whether to return edited video metadata. 0: not required, 1: required. By default, does not need.</p>
 	MetaDataRequired *uint64 `json:"MetaDataRequired,omitnil,omitempty" name:"MetaDataRequired"`
 
-	// <p>The domain name added in VOD for time shift playback must already be <a href="https://www.tencentcloud.com/document/product/266/52220?from_cn_redirect=1#.E6.AD.A5.E9.AA.A43.EF.BC.9A.E5.85.B3.E8.81.94.E5.BD.95.E5.88.B6.E6.A8.A1.E6.9D.BF.3Ca-id.3D.22step3.22.3E.3C.2Fa.3E">associated with a recording template and enabled for time-shift service</a> in Cloud Streaming Services. <strong>If the first call of this interface is after 2021-01-01T00:00:00Z, this field is required.</strong></p>
+	// <p>The domain name added in VOD for time shift playback must be <a href="https://www.tencentcloud.com/document/product/266/52220?from_cn_redirect=1#.E6.AD.A5.E9.AA.A43.EF.BC.9A.E5.85.B3.E8.81.94.E5.BD.95.E5.88.B6.E6.A8.A1.E6.9D.BF.3Ca-id.3D.22step3.22.3E.3C.2Fa.3E">bound to a recording template and enabled for time-shift service</a> in cloud streaming. <strong>If the first call of this interface is after 2021-01-01T00:00:00Z, this field is required.</strong></p>
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// <p>Live stream information for editing:</p><li>Edit the original stream by default.</li><li>If the Type specified in StreamInfo is Transcoding, edit the live streaming transcoding stream corresponding to TemplateId.</li>
@@ -22225,19 +22234,19 @@ type LiveRealTimeClipRequest struct {
 	// <p>End time of stream clipping. For the format, see <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format description</a>.</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate VOD services on or after December 25, 2023, when accessing resources in VOD applications (whether the default application or a newly created application), this field must be filled in with the application ID.</b></p>
+	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services from December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// <p>Whether solidified. 0: non-permanent, 1: solidified. Default: non-permanent.</p>
+	// <p>Whether solidified. 0: non-permanent, 1: solidified. Default non-permanent.</p>
 	IsPersistence *int64 `json:"IsPersistence,omitnil,omitempty" name:"IsPersistence"`
 
-	// <p>Video storage expiry time after editing solidification. Format reference: <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>. Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding results, sprites, etc.) will be permanently deleted. Valid only when IsPersistence is 1. By default, videos solidified by editing never expire.</p>
+	// <p>Video storage expiry time after editing solidification. Format reference: <a href="https://www.tencentcloud.com/document/product/266/11732?from_cn_redirect=1#I">ISO date format</a>. Enter "9999-12-31T23:59:59Z" to indicate the video never expires. After expiry, the media file and its related resources (transcoding results, sprites, etc.) will be permanently deleted. Valid only when IsPersistence is 1. By default, videos solidified through editing never expire.</p>
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// <p>Post-editing Solidified Video On-demand Task Flow Processing. For details, see <a href="https://www.tencentcloud.com/document/product/266/9759?from_cn_redirect=1">upload specified task flow</a>. Valid only when IsPersistence is 1.</p>
 	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
-	// <p>Category ID, used to categorize and manage media. You can call the <a href="https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1">create category</a> API to create a category and obtain the category ID.</p><li>Default value: 0, indicating other categories.</li>Valid only when IsPersistence is 1.
+	// <p>Category ID, used to categorize and manage media. You can create a category via the <a href="https://www.tencentcloud.com/document/product/266/31772?from_cn_redirect=1">Create Category</a> API to obtain the category ID.</p><li>Default value: 0, indicating other categories.</li>Valid only when IsPersistence is 1.
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
 	// <p>Source context. This is used to pass user request information. The <a href="https://www.tencentcloud.com/document/product/266/7830?from_cn_redirect=1">upload completion callback</a> returns the value of this field. The maximum length is 250 characters. Valid only when IsPersistence is 1.</p>
@@ -22249,7 +22258,7 @@ type LiveRealTimeClipRequest struct {
 	// <p>Whether to return edited video metadata. 0: not required, 1: required. By default, does not need.</p>
 	MetaDataRequired *uint64 `json:"MetaDataRequired,omitnil,omitempty" name:"MetaDataRequired"`
 
-	// <p>The domain name added in VOD for time shift playback must already be <a href="https://www.tencentcloud.com/document/product/266/52220?from_cn_redirect=1#.E6.AD.A5.E9.AA.A43.EF.BC.9A.E5.85.B3.E8.81.94.E5.BD.95.E5.88.B6.E6.A8.A1.E6.9D.BF.3Ca-id.3D.22step3.22.3E.3C.2Fa.3E">associated with a recording template and enabled for time-shift service</a> in Cloud Streaming Services. <strong>If the first call of this interface is after 2021-01-01T00:00:00Z, this field is required.</strong></p>
+	// <p>The domain name added in VOD for time shift playback must be <a href="https://www.tencentcloud.com/document/product/266/52220?from_cn_redirect=1#.E6.AD.A5.E9.AA.A43.EF.BC.9A.E5.85.B3.E8.81.94.E5.BD.95.E5.88.B6.E6.A8.A1.E6.9D.BF.3Ca-id.3D.22step3.22.3E.3C.2Fa.3E">bound to a recording template and enabled for time-shift service</a> in cloud streaming. <strong>If the first call of this interface is after 2021-01-01T00:00:00Z, this field is required.</strong></p>
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// <p>Live stream information for editing:</p><li>Edit the original stream by default.</li><li>If the Type specified in StreamInfo is Transcoding, edit the live streaming transcoding stream corresponding to TemplateId.</li>
@@ -23350,10 +23359,10 @@ type MediaAnimatedGraphicsItem struct {
 }
 
 type MediaAudioStreamItem struct {
-	// <p>Bitrate of the audio stream. Unit: bps.</p>
+	// <p>Audio stream bitrate, in bps.</p>
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// <p>Sampling rate of the audio stream. Unit: hz.</p>
+	// <p>Sampling rate of the audio stream, unit: hz.</p>
 	SamplingRate *int64 `json:"SamplingRate,omitnil,omitempty" name:"SamplingRate"`
 
 	// <p>Audio stream encoding format, for example, aac.</p>
@@ -23715,22 +23724,22 @@ type MediaMetaData struct {
 	// Size of the uploaded media file (for HLS videos, the size is the sum of the m3u8 and ts file sizes), unit: byte.
 	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
-	// Container type, for example, m4a and mp4.
+	// Container type, such as m4a, mp4.
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
-	// Sum of the mean video stream bitrate and mean audio stream bitrate, in bps.
+	// Sum of the average video stream bitrate and average audio stream bitrate, in bps.
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// Maximum height of the video stream. Unit: px.
+	// Maximum value of the video stream height in px.
 	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// Maximum video stream width in px.
+	// Maximum value of the video stream width in px.
 	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// Video duration, in seconds.
+	// Video duration, unit: seconds.
 	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
-	// Selection angle during video shooting. Measurement unit: degree.
+	// Selection angle during video shooting. Unit: degree.
 	Rotate *int64 `json:"Rotate,omitnil,omitempty" name:"Rotate"`
 
 	// Video stream information.
@@ -23739,10 +23748,10 @@ type MediaMetaData struct {
 	// Audio stream information.
 	AudioStreamSet []*MediaAudioStreamItem `json:"AudioStreamSet,omitnil,omitempty" name:"AudioStreamSet"`
 
-	// Video duration, in seconds.
+	// Video duration, unit: seconds.
 	VideoDuration *float64 `json:"VideoDuration,omitnil,omitempty" name:"VideoDuration"`
 
-	// Audio duration in seconds.
+	// Audio duration, in seconds.
 	AudioDuration *float64 `json:"AudioDuration,omitnil,omitempty" name:"AudioDuration"`
 
 	// Md5 value of the media file.
@@ -24337,22 +24346,22 @@ type MediaVideoStreamItem struct {
 	// Bitrate of the video stream. Unit: bps.
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// Height of the video stream. Unit: px.
+	// Height of the video stream in px.
 	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// Video stream width. Unit: px.
+	// Video stream width in px.
 	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// Video stream encoding format, for example h264.
+	// Video stream encoding format, for example, h264.
 	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
 
 	// Frame rate. Unit: hz.
 	Fps *int64 `json:"Fps,omitnil,omitempty" name:"Fps"`
 
-	// Encoding tag, valid only when Codec is hevc.
+	// Encoding tag. Valid only when Codec is hevc.
 	CodecTag *string `json:"CodecTag,omitnil,omitempty" name:"CodecTag"`
 
-	// Dynamic range information of the frame.
+	// Visual dynamic range information.
 	// <li><font color=red>Note</font>: This field is valid for transcoded files processed after 2023-01-10T00:00:00Z.</li>
 	DynamicRangeInfo *DynamicRangeInfo `json:"DynamicRangeInfo,omitnil,omitempty" name:"DynamicRangeInfo"`
 }
@@ -27908,13 +27917,13 @@ type ModifyVodDomainAccelerateConfigRequestParams struct {
 	// <p>Domains requiring acceleration configuration.</p>
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// <p>Region. Available values:</p><li>Chinese Mainland: within the Chinese mainland (excluding Hong Kong (China), Macao (China), and Taiwan (China)).</li><li>Outside Chinese Mainland: outside the Chinese mainland.</li><li>Global: global.</li>
+	// <p>Region. Available values:</p><li>Chinese Mainland: within the Chinese mainland (excluding Hong Kong (China), Macao (China), and Taiwan (China)).</li><li>Outside Chinese Mainland: outside the Chinese mainland.</li><li>Global: around the world.</li>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
-	// <p>Enable or disable domain name acceleration for the selected region. Available values:</p><li>Enabled: Enable.</li><li>Disabled: Disable.</li>To enable acceleration for domains within the Chinese mainland, you must first [register the domain name](https://www.tencentcloud.com/document/product/243/18905?from_cn_redirect=1).
+	// <p>Enable or disable domain name acceleration for the selected region. Available values:</p><li>Enabled: Enable.</li><li>Disabled: Disable.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate VOD services from December 25, 2023, if they access resources in VOD applications (whether the default application or a newly created application), they must fill in this field with the application ID.</b></p>
+	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services after December 25, 2023, this field must be filled in as the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -27924,13 +27933,13 @@ type ModifyVodDomainAccelerateConfigRequest struct {
 	// <p>Domains requiring acceleration configuration.</p>
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// <p>Region. Available values:</p><li>Chinese Mainland: within the Chinese mainland (excluding Hong Kong (China), Macao (China), and Taiwan (China)).</li><li>Outside Chinese Mainland: outside the Chinese mainland.</li><li>Global: global.</li>
+	// <p>Region. Available values:</p><li>Chinese Mainland: within the Chinese mainland (excluding Hong Kong (China), Macao (China), and Taiwan (China)).</li><li>Outside Chinese Mainland: outside the Chinese mainland.</li><li>Global: around the world.</li>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
-	// <p>Enable or disable domain name acceleration for the selected region. Available values:</p><li>Enabled: Enable.</li><li>Disabled: Disable.</li>To enable acceleration for domains within the Chinese mainland, you must first [register the domain name](https://www.tencentcloud.com/document/product/243/18905?from_cn_redirect=1).
+	// <p>Enable or disable domain name acceleration for the selected region. Available values:</p><li>Enabled: Enable.</li><li>Disabled: Disable.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate VOD services from December 25, 2023, if they access resources in VOD applications (whether the default application or a newly created application), they must fill in this field with the application ID.</b></p>
+	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services after December 25, 2023, this field must be filled in as the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 

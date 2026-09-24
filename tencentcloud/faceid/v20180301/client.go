@@ -1163,7 +1163,7 @@ func NewGetAMLScreeningResultResponse() (response *GetAMLScreeningResultResponse
 }
 
 // GetAMLScreeningResult
-// Queries the AML name list screening result.
+// Status change of continuous name list screening
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
@@ -1175,7 +1175,7 @@ func (c *Client) GetAMLScreeningResult(request *GetAMLScreeningResultRequest) (r
 }
 
 // GetAMLScreeningResult
-// Queries the AML name list screening result.
+// Status change of continuous name list screening
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
@@ -2339,7 +2339,7 @@ func NewRunAMLNameScreeningResponse() (response *RunAMLNameScreeningResponse) {
 }
 
 // RunAMLNameScreening
-// AML name list screening
+// AML list screening
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
@@ -2358,7 +2358,7 @@ func (c *Client) RunAMLNameScreening(request *RunAMLNameScreeningRequest) (respo
 }
 
 // RunAMLNameScreening
-// AML name list screening
+// AML list screening
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
@@ -2409,7 +2409,7 @@ func NewUpdateAMLCustomerProfileResponse() (response *UpdateAMLCustomerProfileRe
 }
 
 // UpdateAMLCustomerProfile
-// AML name list screening
+// AML list screening
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
@@ -2428,7 +2428,7 @@ func (c *Client) UpdateAMLCustomerProfile(request *UpdateAMLCustomerProfileReque
 }
 
 // UpdateAMLCustomerProfile
-// AML name list screening
+// AML list screening
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AMLINTERNALERROR = "FailedOperation.AMLInternalError"
