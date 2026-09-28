@@ -201,7 +201,7 @@ func NewAssessEnvironmentRiskResponse() (response *AssessEnvironmentRiskResponse
 }
 
 // AssessEnvironmentRisk
-// Environment Risk Assessment
+// Performs risk identification based on the client IP provided as input. Provides environmental risk assessment (including risk level and risk labels), along with IP geolocation and network information.
 //
 // error code that may be returned:
 //  INTERNALERROR_SYSTEMEXCEPTION = "InternalError.SystemException"
@@ -219,7 +219,7 @@ func (c *Client) AssessEnvironmentRisk(request *AssessEnvironmentRiskRequest) (r
 }
 
 // AssessEnvironmentRisk
-// Environment Risk Assessment
+// Performs risk identification based on the client IP provided as input. Provides environmental risk assessment (including risk level and risk labels), along with IP geolocation and network information.
 //
 // error code that may be returned:
 //  INTERNALERROR_SYSTEMEXCEPTION = "InternalError.SystemException"

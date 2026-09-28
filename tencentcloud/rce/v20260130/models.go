@@ -671,7 +671,7 @@ type DataScore struct {
 	// <p>Risk label</p>
 	RiskLabels []*RiskLabel `json:"RiskLabels,omitnil,omitempty" name:"RiskLabels"`
 
-	// <p>Comprehensive risk score.</p><p>Value ranges from 1 to 1000.</p><p>The larger the value, the larger the risk.</p>
+	// <p>Comprehensive risk score.</p><p>Value ranges from 1 to 1000.</p><p>The larger the value, the higher the risk.</p>
 	RiskScore *int64 `json:"RiskScore,omitnil,omitempty" name:"RiskScore"`
 }
 
