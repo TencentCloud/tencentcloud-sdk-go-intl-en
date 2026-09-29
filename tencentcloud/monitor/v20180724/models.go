@@ -688,57 +688,6 @@ type CLSNotice struct {
 }
 
 // Predefined struct for user
-type CheckIsPrometheusNewUserRequestParams struct {
-
-}
-
-type CheckIsPrometheusNewUserRequest struct {
-	*tchttp.BaseRequest
-	
-}
-
-func (r *CheckIsPrometheusNewUserRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CheckIsPrometheusNewUserRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CheckIsPrometheusNewUserRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CheckIsPrometheusNewUserResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type CheckIsPrometheusNewUserResponse struct {
-	*tchttp.BaseResponse
-	Response *CheckIsPrometheusNewUserResponseParams `json:"Response"`
-}
-
-func (r *CheckIsPrometheusNewUserResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CheckIsPrometheusNewUserResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type CleanGrafanaInstanceRequestParams struct {
 	// TCMG instance ID, such as “grafana-abcdefgh”.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -2879,99 +2828,6 @@ func (r *CreateSSOAccountResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateSSOAccountResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateServiceDiscoveryRequestParams struct {
-	// Prometheus instance ID
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
-
-	// <li>TKE: ID of the integrated TKE cluster</li>
-	KubeClusterId *string `json:"KubeClusterId,omitnil,omitempty" name:"KubeClusterId"`
-
-	// Kubernetes cluster type:
-	// <li> 1 = TKE </li>
-	KubeType *int64 `json:"KubeType,omitnil,omitempty" name:"KubeType"`
-
-	// Scrape configuration type. Valid values:
-	// <li> 1 = ServiceMonitor</li>
-	// <li> 2 = PodMonitor</li>
-	// <li> 3 = JobMonitor</li>
-	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
-
-	// Scrape configuration information
-	Yaml *string `json:"Yaml,omitnil,omitempty" name:"Yaml"`
-}
-
-type CreateServiceDiscoveryRequest struct {
-	*tchttp.BaseRequest
-	
-	// Prometheus instance ID
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
-
-	// <li>TKE: ID of the integrated TKE cluster</li>
-	KubeClusterId *string `json:"KubeClusterId,omitnil,omitempty" name:"KubeClusterId"`
-
-	// Kubernetes cluster type:
-	// <li> 1 = TKE </li>
-	KubeType *int64 `json:"KubeType,omitnil,omitempty" name:"KubeType"`
-
-	// Scrape configuration type. Valid values:
-	// <li> 1 = ServiceMonitor</li>
-	// <li> 2 = PodMonitor</li>
-	// <li> 3 = JobMonitor</li>
-	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
-
-	// Scrape configuration information
-	Yaml *string `json:"Yaml,omitnil,omitempty" name:"Yaml"`
-}
-
-func (r *CreateServiceDiscoveryRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateServiceDiscoveryRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceId")
-	delete(f, "KubeClusterId")
-	delete(f, "KubeType")
-	delete(f, "Type")
-	delete(f, "Yaml")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateServiceDiscoveryRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateServiceDiscoveryResponseParams struct {
-	// The scrape configuration information returned after successful creation
-	ServiceDiscovery *ServiceDiscoveryItem `json:"ServiceDiscovery,omitnil,omitempty" name:"ServiceDiscovery"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type CreateServiceDiscoveryResponse struct {
-	*tchttp.BaseResponse
-	Response *CreateServiceDiscoveryResponseParams `json:"Response"`
-}
-
-func (r *CreateServiceDiscoveryResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateServiceDiscoveryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9304,85 +9160,6 @@ func (r *DescribePrometheusInstancesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type DescribePrometheusRecordRuleYamlRequestParams struct {
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
-
-	// Page offset
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Number of results per page
-	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Filter. Valid values:
-	// `Name`: Name
-	// `Values`: List of target names
-	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
-}
-
-type DescribePrometheusRecordRuleYamlRequest struct {
-	*tchttp.BaseRequest
-	
-	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
-
-	// Page offset
-	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Number of results per page
-	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-
-	// Filter. Valid values:
-	// `Name`: Name
-	// `Values`: List of target names
-	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
-}
-
-func (r *DescribePrometheusRecordRuleYamlRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribePrometheusRecordRuleYamlRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceId")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "Filters")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePrometheusRecordRuleYamlRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribePrometheusRecordRuleYamlResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DescribePrometheusRecordRuleYamlResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribePrometheusRecordRuleYamlResponseParams `json:"Response"`
-}
-
-func (r *DescribePrometheusRecordRuleYamlResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribePrometheusRecordRuleYamlResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type DescribePrometheusRecordRulesRequestParams struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -10010,80 +9787,6 @@ func (r *DescribeSSOAccountResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeSSOAccountResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeServiceDiscoveryRequestParams struct {
-	// Prometheus instance ID
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
-
-	// <li>TKE: ID of the integrated TKE cluster</li>
-	KubeClusterId *string `json:"KubeClusterId,omitnil,omitempty" name:"KubeClusterId"`
-
-	// Kubernetes cluster type:
-	// <li> 1 = TKE </li>
-	KubeType *int64 `json:"KubeType,omitnil,omitempty" name:"KubeType"`
-}
-
-type DescribeServiceDiscoveryRequest struct {
-	*tchttp.BaseRequest
-	
-	// Prometheus instance ID
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
-
-	// <li>TKE: ID of the integrated TKE cluster</li>
-	KubeClusterId *string `json:"KubeClusterId,omitnil,omitempty" name:"KubeClusterId"`
-
-	// Kubernetes cluster type:
-	// <li> 1 = TKE </li>
-	KubeType *int64 `json:"KubeType,omitnil,omitempty" name:"KubeType"`
-}
-
-func (r *DescribeServiceDiscoveryRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeServiceDiscoveryRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InstanceId")
-	delete(f, "KubeClusterId")
-	delete(f, "KubeType")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeServiceDiscoveryRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeServiceDiscoveryResponseParams struct {
-	// List of returned scrape configurations
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	ServiceDiscoverySet []*ServiceDiscoveryItem `json:"ServiceDiscoverySet,omitnil,omitempty" name:"ServiceDiscoverySet"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DescribeServiceDiscoveryResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeServiceDiscoveryResponseParams `json:"Response"`
-}
-
-func (r *DescribeServiceDiscoveryResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeServiceDiscoveryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -12361,31 +12064,32 @@ func (r *ModifyPrometheusGlobalNotificationResponse) FromJsonString(s string) er
 
 // Predefined struct for user
 type ModifyPrometheusInstanceAttributesRequestParams struct {
-	// Instance ID
+	// <p>Instance ID</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name
+	// <p>Instance name.</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Storage period. Valid values: 15, 30, 45. This parameter is not applicable to yearly/monthly subscribed instances.
+	// <p>Data retention period (in days). The limit value is one of 15, 30, 45, 90, 180, 365, 730</p>
 	DataRetentionTime *int64 `json:"DataRetentionTime,omitnil,omitempty" name:"DataRetentionTime"`
 
-
+	// <p>Flag for special attributes of a prom instance</p><p>Archive storage duration (days):<br>key: LongTermStorageRetentionTime<br>value: 60-730</p>
 	InstanceAttributes []*PrometheusRuleKV `json:"InstanceAttributes,omitnil,omitempty" name:"InstanceAttributes"`
 }
 
 type ModifyPrometheusInstanceAttributesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID
+	// <p>Instance ID</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance name
+	// <p>Instance name.</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Storage period. Valid values: 15, 30, 45. This parameter is not applicable to yearly/monthly subscribed instances.
+	// <p>Data retention period (in days). The limit value is one of 15, 30, 45, 90, 180, 365, 730</p>
 	DataRetentionTime *int64 `json:"DataRetentionTime,omitnil,omitempty" name:"DataRetentionTime"`
 
+	// <p>Flag for special attributes of a prom instance</p><p>Archive storage duration (days):<br>key: LongTermStorageRetentionTime<br>value: 60-730</p>
 	InstanceAttributes []*PrometheusRuleKV `json:"InstanceAttributes,omitnil,omitempty" name:"InstanceAttributes"`
 }
 
@@ -13501,10 +13205,10 @@ type PrometheusRecordRuleYamlItem struct {
 }
 
 type PrometheusRuleKV struct {
-	// Key
+	// <p>Key</p>
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// Value
+	// <p>Value.</p>
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
@@ -14004,100 +13708,6 @@ func (r *RunPrometheusInstanceResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *RunPrometheusInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type SendCustomAlarmMsgRequestParams struct {
-	// API component name. The value for the current API is monitor.
-	Module *string `json:"Module,omitnil,omitempty" name:"Module"`
-
-	// Message policy ID, which is configured on the custom message page.
-	PolicyId *string `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
-
-	// Custom message content that a user wants to send.
-	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
-}
-
-type SendCustomAlarmMsgRequest struct {
-	*tchttp.BaseRequest
-	
-	// API component name. The value for the current API is monitor.
-	Module *string `json:"Module,omitnil,omitempty" name:"Module"`
-
-	// Message policy ID, which is configured on the custom message page.
-	PolicyId *string `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
-
-	// Custom message content that a user wants to send.
-	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
-}
-
-func (r *SendCustomAlarmMsgRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *SendCustomAlarmMsgRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Module")
-	delete(f, "PolicyId")
-	delete(f, "Msg")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SendCustomAlarmMsgRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type SendCustomAlarmMsgResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type SendCustomAlarmMsgResponse struct {
-	*tchttp.BaseResponse
-	Response *SendCustomAlarmMsgResponseParams `json:"Response"`
-}
-
-func (r *SendCustomAlarmMsgResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *SendCustomAlarmMsgResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type ServiceDiscoveryItem struct {
-	// Scrape configuration name
-	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
-
-	// Namespace of the scrape configuration
-	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
-
-	// Scrape configuration type: ServiceMonitor/PodMonitor
-	Kind *string `json:"Kind,omitnil,omitempty" name:"Kind"`
-
-	// Namespace selection method
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	NamespaceSelector *string `json:"NamespaceSelector,omitnil,omitempty" name:"NamespaceSelector"`
-
-	// Label selection method
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Selector *string `json:"Selector,omitnil,omitempty" name:"Selector"`
-
-	// `Endpoints` information (PodMonitor does not have this parameter)
-	Endpoints *string `json:"Endpoints,omitnil,omitempty" name:"Endpoints"`
-
-	// Scrape configuration information
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	Yaml *string `json:"Yaml,omitnil,omitempty" name:"Yaml"`
 }
 
 // Predefined struct for user

@@ -405,7 +405,7 @@ func NewCreateLoadBalancerResponse() (response *CreateLoadBalancerResponse) {
 }
 
 // CreateLoadBalancer
-// **CreateLoadBalancer** is an async API. The system returns an instance ID, but the application CLB instance is not created successfully yet, and the creation task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/api/1822/133711) to query the creation status of the application CLB instance.
+// **CreateLoadBalancer** is an async API. The system returns an instance ID, but the application CLB instance is not created successfully yet, and the creation task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/product/1311/84267) to query the creation status of the application CLB instance.
 //
 // - When an application CLB instance is in the **Provisioning** status, it means the application CLB instance is being created.
 //
@@ -421,7 +421,7 @@ func (c *Client) CreateLoadBalancer(request *CreateLoadBalancerRequest) (respons
 }
 
 // CreateLoadBalancer
-// **CreateLoadBalancer** is an async API. The system returns an instance ID, but the application CLB instance is not created successfully yet, and the creation task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/api/1822/133711) to query the creation status of the application CLB instance.
+// **CreateLoadBalancer** is an async API. The system returns an instance ID, but the application CLB instance is not created successfully yet, and the creation task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/product/1311/84267) to query the creation status of the application CLB instance.
 //
 // - When an application CLB instance is in the **Provisioning** status, it means the application CLB instance is being created.
 //
@@ -911,7 +911,7 @@ func NewDeleteLoadBalancersResponse() (response *DeleteLoadBalancersResponse) {
 }
 
 // DeleteLoadBalancers
-// The **DeleteLoadBalancers** API is an async API. The system returns a request ID, but the application CLB instance is not yet deleted successfully. The deletion task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/api/1822/133711) to query the deletion status of the application CLB instance.
+// The **DeleteLoadBalancers** API is an async API. The system returns a request ID, but the application CLB instance is not yet deleted successfully. The deletion task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/product/1311/84267) to query the deletion status of the application CLB instance.
 //
 // - When an application CLB instance is in the **Deleting** status, it means the application CLB instance is being deleted.
 //
@@ -925,7 +925,7 @@ func (c *Client) DeleteLoadBalancers(request *DeleteLoadBalancersRequest) (respo
 }
 
 // DeleteLoadBalancers
-// The **DeleteLoadBalancers** API is an async API. The system returns a request ID, but the application CLB instance is not yet deleted successfully. The deletion task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/api/1822/133711) to query the deletion status of the application CLB instance.
+// The **DeleteLoadBalancers** API is an async API. The system returns a request ID, but the application CLB instance is not yet deleted successfully. The deletion task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/product/1311/84267) to query the deletion status of the application CLB instance.
 //
 // - When an application CLB instance is in the **Deleting** status, it means the application CLB instance is being deleted.
 //
@@ -3063,7 +3063,7 @@ func NewModifyLoadBalancerAttributesResponse() (response *ModifyLoadBalancerAttr
 }
 
 // ModifyLoadBalancerAttributes
-// The **ModifyLoadBalancerAttributes** API is an async API. It returns a request ID, but the application CLB instance attribute has not been modified yet. The modifying task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/api/1822/133711) to query the modification status of the application CLB instance attribute.
+// The **ModifyLoadBalancerAttributes** API is an async API. It returns a request ID, but the application CLB instance attribute has not been modified yet. The modifying task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/product/1311/84267) to query the modification status of the application CLB instance attribute.
 //
 // -When the application CLB instance attribute is in the **Configuring** status, it means the application CLB instance attribute is being modified.
 //
@@ -3091,7 +3091,7 @@ func (c *Client) ModifyLoadBalancerAttributes(request *ModifyLoadBalancerAttribu
 }
 
 // ModifyLoadBalancerAttributes
-// The **ModifyLoadBalancerAttributes** API is an async API. It returns a request ID, but the application CLB instance attribute has not been modified yet. The modifying task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/api/1822/133711) to query the modification status of the application CLB instance attribute.
+// The **ModifyLoadBalancerAttributes** API is an async API. It returns a request ID, but the application CLB instance attribute has not been modified yet. The modifying task is still in progress in the system backend. You can call [DescribeLoadBalancerDetail](https://www.tencentcloud.com/document/product/1311/84267) to query the modification status of the application CLB instance attribute.
 //
 // -When the application CLB instance attribute is in the **Configuring** status, it means the application CLB instance attribute is being modified.
 //

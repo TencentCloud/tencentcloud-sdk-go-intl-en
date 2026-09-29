@@ -149,66 +149,6 @@ func (c *Client) BindingPolicyObjectWithContext(ctx context.Context, request *Bi
     return
 }
 
-func NewCheckIsPrometheusNewUserRequest() (request *CheckIsPrometheusNewUserRequest) {
-    request = &CheckIsPrometheusNewUserRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("monitor", APIVersion, "CheckIsPrometheusNewUser")
-    
-    
-    return
-}
-
-func NewCheckIsPrometheusNewUserResponse() (response *CheckIsPrometheusNewUserResponse) {
-    response = &CheckIsPrometheusNewUserResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// CheckIsPrometheusNewUser
-// This API is used to determine whether the user is new to TMP, that is, whether the user has never created a TMP instance in any region.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DB = "InternalError.Db"
-//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
-func (c *Client) CheckIsPrometheusNewUser(request *CheckIsPrometheusNewUserRequest) (response *CheckIsPrometheusNewUserResponse, err error) {
-    return c.CheckIsPrometheusNewUserWithContext(context.Background(), request)
-}
-
-// CheckIsPrometheusNewUser
-// This API is used to determine whether the user is new to TMP, that is, whether the user has never created a TMP instance in any region.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DB = "InternalError.Db"
-//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
-func (c *Client) CheckIsPrometheusNewUserWithContext(ctx context.Context, request *CheckIsPrometheusNewUserRequest) (response *CheckIsPrometheusNewUserResponse, err error) {
-    if request == nil {
-        request = NewCheckIsPrometheusNewUserRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "CheckIsPrometheusNewUser")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CheckIsPrometheusNewUser require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCheckIsPrometheusNewUserResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewCleanGrafanaInstanceRequest() (request *CleanGrafanaInstanceRequest) {
     request = &CleanGrafanaInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1004,6 +944,7 @@ func NewCreatePrometheusAlertPolicyResponse() (response *CreatePrometheusAlertPo
 // This API is used to create an alerting rule.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
 //  FAILEDOPERATION_DB = "FailedOperation.Db"
 //  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
@@ -1024,6 +965,7 @@ func (c *Client) CreatePrometheusAlertPolicy(request *CreatePrometheusAlertPolic
 // This API is used to create an alerting rule.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
 //  FAILEDOPERATION_DB = "FailedOperation.Db"
 //  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
@@ -1216,6 +1158,7 @@ func NewCreatePrometheusGlobalNotificationResponse() (response *CreatePrometheus
 // This API is used to create a global alert notification channel.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) CreatePrometheusGlobalNotification(request *CreatePrometheusGlobalNotificationRequest) (response *CreatePrometheusGlobalNotificationResponse, err error) {
@@ -1226,6 +1169,7 @@ func (c *Client) CreatePrometheusGlobalNotification(request *CreatePrometheusGlo
 // This API is used to create a global alert notification channel.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) CreatePrometheusGlobalNotificationWithContext(ctx context.Context, request *CreatePrometheusGlobalNotificationRequest) (response *CreatePrometheusGlobalNotificationResponse, err error) {
@@ -1612,18 +1556,7 @@ func NewCreateSSOAccountResponse() (response *CreateSSOAccountResponse) {
 // This API is used to authorize a Grafana instance to another Tencent Cloud user.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
-//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
-//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
-//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
-//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
-//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
-//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
-//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) CreateSSOAccount(request *CreateSSOAccountRequest) (response *CreateSSOAccountResponse, err error) {
     return c.CreateSSOAccountWithContext(context.Background(), request)
 }
@@ -1632,18 +1565,7 @@ func (c *Client) CreateSSOAccount(request *CreateSSOAccountRequest) (response *C
 // This API is used to authorize a Grafana instance to another Tencent Cloud user.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
-//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
-//  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
-//  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
-//  FAILEDOPERATION_DBRECORDUPDATEFAILED = "FailedOperation.DbRecordUpdateFailed"
-//  FAILEDOPERATION_GENERATEINSTANCEIDFAILED = "FailedOperation.GenerateInstanceIDFailed"
-//  FAILEDOPERATION_RESOURCEEXIST = "FailedOperation.ResourceExist"
-//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) CreateSSOAccountWithContext(ctx context.Context, request *CreateSSOAccountRequest) (response *CreateSSOAccountResponse, err error) {
     if request == nil {
         request = NewCreateSSOAccountRequest()
@@ -1657,84 +1579,6 @@ func (c *Client) CreateSSOAccountWithContext(ctx context.Context, request *Creat
     request.SetContext(ctx)
     
     response = NewCreateSSOAccountResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewCreateServiceDiscoveryRequest() (request *CreateServiceDiscoveryRequest) {
-    request = &CreateServiceDiscoveryRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("monitor", APIVersion, "CreateServiceDiscovery")
-    
-    
-    return
-}
-
-func NewCreateServiceDiscoveryResponse() (response *CreateServiceDiscoveryResponse) {
-    response = &CreateServiceDiscoveryResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// CreateServiceDiscovery
-// This API is used to create a Prometheus scrape configuration in TKE.
-//
-// <p>Note: The prerequisite is that the corresponding TKE service has been integrated through the Prometheus console. For more information, see
-//
-// <a href="https://intl.cloud.tencent.com/document/product/248/48859?from_cn_redirect=1" target="_blank">Agent Management</a>.</p>
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_ACCESSSTSFAIL = "FailedOperation.AccessSTSFail"
-//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
-//  FAILEDOPERATION_AGENTVERSIONNOTSUPPORTED = "FailedOperation.AgentVersionNotSupported"
-//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
-//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
-//  FAILEDOPERATION_TKECLIENTAUTHFAIL = "FailedOperation.TKEClientAuthFail"
-//  FAILEDOPERATION_TKEENDPOINTSTATUSERROR = "FailedOperation.TKEEndpointStatusError"
-//  FAILEDOPERATION_TKERESOURCECONFLICT = "FailedOperation.TKEResourceConflict"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-func (c *Client) CreateServiceDiscovery(request *CreateServiceDiscoveryRequest) (response *CreateServiceDiscoveryResponse, err error) {
-    return c.CreateServiceDiscoveryWithContext(context.Background(), request)
-}
-
-// CreateServiceDiscovery
-// This API is used to create a Prometheus scrape configuration in TKE.
-//
-// <p>Note: The prerequisite is that the corresponding TKE service has been integrated through the Prometheus console. For more information, see
-//
-// <a href="https://intl.cloud.tencent.com/document/product/248/48859?from_cn_redirect=1" target="_blank">Agent Management</a>.</p>
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_ACCESSSTSFAIL = "FailedOperation.AccessSTSFail"
-//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
-//  FAILEDOPERATION_AGENTVERSIONNOTSUPPORTED = "FailedOperation.AgentVersionNotSupported"
-//  FAILEDOPERATION_BADYAMLFORMAT = "FailedOperation.BadYamlFormat"
-//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
-//  FAILEDOPERATION_TKECLIENTAUTHFAIL = "FailedOperation.TKEClientAuthFail"
-//  FAILEDOPERATION_TKEENDPOINTSTATUSERROR = "FailedOperation.TKEEndpointStatusError"
-//  FAILEDOPERATION_TKERESOURCECONFLICT = "FailedOperation.TKEResourceConflict"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-func (c *Client) CreateServiceDiscoveryWithContext(ctx context.Context, request *CreateServiceDiscoveryRequest) (response *CreateServiceDiscoveryResponse, err error) {
-    if request == nil {
-        request = NewCreateServiceDiscoveryRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "CreateServiceDiscovery")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateServiceDiscovery require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateServiceDiscoveryResponse()
     err = c.Send(request, response)
     return
 }
@@ -1961,6 +1805,7 @@ func NewDeleteExporterIntegrationResponse() (response *DeleteExporterIntegration
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
+//  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
 //  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
 //  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
 //  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
@@ -1983,6 +1828,7 @@ func (c *Client) DeleteExporterIntegration(request *DeleteExporterIntegrationReq
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
+//  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
 //  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
 //  FAILEDOPERATION_DBRECORDCREATEFAILED = "FailedOperation.DbRecordCreateFailed"
 //  FAILEDOPERATION_DBRECORDDELETEFAILED = "FailedOperation.DbRecordDeleteFailed"
@@ -2494,6 +2340,7 @@ func NewDeletePrometheusClusterAgentResponse() (response *DeletePrometheusCluste
 // This API is used to disassociate a TMP instance from a cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
 //  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
@@ -2514,6 +2361,7 @@ func (c *Client) DeletePrometheusClusterAgent(request *DeletePrometheusClusterAg
 // This API is used to disassociate a TMP instance from a cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
 //  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
@@ -2762,11 +2610,13 @@ func NewDeletePrometheusTempResponse() (response *DeletePrometheusTempResponse) 
 // This API is used to delete a TMP template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeletePrometheusTemp(request *DeletePrometheusTempRequest) (response *DeletePrometheusTempResponse, err error) {
     return c.DeletePrometheusTempWithContext(context.Background(), request)
 }
@@ -2775,11 +2625,13 @@ func (c *Client) DeletePrometheusTemp(request *DeletePrometheusTempRequest) (res
 // This API is used to delete a TMP template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_RESOURCENOTFOUND = "InvalidParameter.ResourceNotFound"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeletePrometheusTempWithContext(ctx context.Context, request *DeletePrometheusTempRequest) (response *DeletePrometheusTempResponse, err error) {
     if request == nil {
         request = NewDeletePrometheusTempRequest()
@@ -5728,13 +5580,17 @@ func NewDescribePrometheusGlobalConfigResponse() (response *DescribePrometheusGl
 // This API is used to get the instance-level scrape configurations.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DescribePrometheusGlobalConfig(request *DescribePrometheusGlobalConfigRequest) (response *DescribePrometheusGlobalConfigResponse, err error) {
     return c.DescribePrometheusGlobalConfigWithContext(context.Background(), request)
@@ -5744,13 +5600,17 @@ func (c *Client) DescribePrometheusGlobalConfig(request *DescribePrometheusGloba
 // This API is used to get the instance-level scrape configurations.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DescribePrometheusGlobalConfigWithContext(ctx context.Context, request *DescribePrometheusGlobalConfigRequest) (response *DescribePrometheusGlobalConfigResponse, err error) {
     if request == nil {
@@ -5925,6 +5785,7 @@ func NewDescribePrometheusInstanceInitStatusResponse() (response *DescribePromet
 //  INTERNALERROR_TASKNOTFOUND = "InternalError.TaskNotFound"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DescribePrometheusInstanceInitStatus(request *DescribePrometheusInstanceInitStatusRequest) (response *DescribePrometheusInstanceInitStatusResponse, err error) {
     return c.DescribePrometheusInstanceInitStatusWithContext(context.Background(), request)
 }
@@ -5942,6 +5803,7 @@ func (c *Client) DescribePrometheusInstanceInitStatus(request *DescribePrometheu
 //  INTERNALERROR_TASKNOTFOUND = "InternalError.TaskNotFound"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DescribePrometheusInstanceInitStatusWithContext(ctx context.Context, request *DescribePrometheusInstanceInitStatusRequest) (response *DescribePrometheusInstanceInitStatusResponse, err error) {
     if request == nil {
         request = NewDescribePrometheusInstanceInitStatusRequest()
@@ -6177,78 +6039,6 @@ func (c *Client) DescribePrometheusInstancesOverviewWithContext(ctx context.Cont
     return
 }
 
-func NewDescribePrometheusRecordRuleYamlRequest() (request *DescribePrometheusRecordRuleYamlRequest) {
-    request = &DescribePrometheusRecordRuleYamlRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("monitor", APIVersion, "DescribePrometheusRecordRuleYaml")
-    
-    
-    return
-}
-
-func NewDescribePrometheusRecordRuleYamlResponse() (response *DescribePrometheusRecordRuleYamlResponse) {
-    response = &DescribePrometheusRecordRuleYamlResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribePrometheusRecordRuleYaml
-// This API is used to get the YAML list of Prometheus recording rules.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
-//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
-//  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
-//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
-//  INTERNALERROR_PARAM = "InternalError.Param"
-//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
-//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
-//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
-func (c *Client) DescribePrometheusRecordRuleYaml(request *DescribePrometheusRecordRuleYamlRequest) (response *DescribePrometheusRecordRuleYamlResponse, err error) {
-    return c.DescribePrometheusRecordRuleYamlWithContext(context.Background(), request)
-}
-
-// DescribePrometheusRecordRuleYaml
-// This API is used to get the YAML list of Prometheus recording rules.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
-//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
-//  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
-//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
-//  INTERNALERROR_PARAM = "InternalError.Param"
-//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
-//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
-//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
-func (c *Client) DescribePrometheusRecordRuleYamlWithContext(ctx context.Context, request *DescribePrometheusRecordRuleYamlRequest) (response *DescribePrometheusRecordRuleYamlResponse, err error) {
-    if request == nil {
-        request = NewDescribePrometheusRecordRuleYamlRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "DescribePrometheusRecordRuleYaml")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribePrometheusRecordRuleYaml require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribePrometheusRecordRuleYamlResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribePrometheusRecordRulesRequest() (request *DescribePrometheusRecordRulesRequest) {
     request = &DescribePrometheusRecordRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6275,6 +6065,7 @@ func NewDescribePrometheusRecordRulesResponse() (response *DescribePrometheusRec
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
@@ -6295,6 +6086,7 @@ func (c *Client) DescribePrometheusRecordRules(request *DescribePrometheusRecord
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECLIENTCONF = "FailedOperation.KubeClientConf"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
@@ -6414,13 +6206,16 @@ func NewDescribePrometheusTargetsTMPResponse() (response *DescribePrometheusTarg
 // This API is used to get the targets information.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DescribePrometheusTargetsTMP(request *DescribePrometheusTargetsTMPRequest) (response *DescribePrometheusTargetsTMPResponse, err error) {
@@ -6431,13 +6226,16 @@ func (c *Client) DescribePrometheusTargetsTMP(request *DescribePrometheusTargets
 // This API is used to get the targets information.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CLUSTERNOTFOUND = "InvalidParameter.ClusterNotFound"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
 //  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) DescribePrometheusTargetsTMPWithContext(ctx context.Context, request *DescribePrometheusTargetsTMPRequest) (response *DescribePrometheusTargetsTMPResponse, err error) {
@@ -6604,6 +6402,7 @@ func NewDescribePrometheusZonesResponse() (response *DescribePrometheusZonesResp
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_REGIONUNAVAILABLE = "FailedOperation.RegionUnavailable"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribePrometheusZones(request *DescribePrometheusZonesRequest) (response *DescribePrometheusZonesResponse, err error) {
@@ -6616,6 +6415,7 @@ func (c *Client) DescribePrometheusZones(request *DescribePrometheusZonesRequest
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
+//  FAILEDOPERATION_REGIONUNAVAILABLE = "FailedOperation.RegionUnavailable"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 func (c *Client) DescribePrometheusZonesWithContext(ctx context.Context, request *DescribePrometheusZonesRequest) (response *DescribePrometheusZonesResponse, err error) {
@@ -6751,80 +6551,6 @@ func (c *Client) DescribeSSOAccountWithContext(ctx context.Context, request *Des
     request.SetContext(ctx)
     
     response = NewDescribeSSOAccountResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeServiceDiscoveryRequest() (request *DescribeServiceDiscoveryRequest) {
-    request = &DescribeServiceDiscoveryRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("monitor", APIVersion, "DescribeServiceDiscovery")
-    
-    
-    return
-}
-
-func NewDescribeServiceDiscoveryResponse() (response *DescribeServiceDiscoveryResponse) {
-    response = &DescribeServiceDiscoveryResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeServiceDiscovery
-// This API is used to list Prometheus scrape configurations in TKE.
-//
-// <p>Note: The prerequisite is that the corresponding TKE service has been integrated through the Prometheus console. For more information, see
-//
-// <a href="https://intl.cloud.tencent.com/document/product/248/48859?from_cn_redirect=1" target="_blank">Agent Management</a>.</p>
-//
-// error code that may be returned:
-//  FAILEDOPERATION_ACCESSSTSFAIL = "FailedOperation.AccessSTSFail"
-//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
-//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
-//  FAILEDOPERATION_INSTANCENOTRUNNING = "FailedOperation.InstanceNotRunning"
-//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
-//  FAILEDOPERATION_TKEENDPOINTSTATUSERROR = "FailedOperation.TKEEndpointStatusError"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeServiceDiscovery(request *DescribeServiceDiscoveryRequest) (response *DescribeServiceDiscoveryResponse, err error) {
-    return c.DescribeServiceDiscoveryWithContext(context.Background(), request)
-}
-
-// DescribeServiceDiscovery
-// This API is used to list Prometheus scrape configurations in TKE.
-//
-// <p>Note: The prerequisite is that the corresponding TKE service has been integrated through the Prometheus console. For more information, see
-//
-// <a href="https://intl.cloud.tencent.com/document/product/248/48859?from_cn_redirect=1" target="_blank">Agent Management</a>.</p>
-//
-// error code that may be returned:
-//  FAILEDOPERATION_ACCESSSTSFAIL = "FailedOperation.AccessSTSFail"
-//  FAILEDOPERATION_ACCESSTKEFAIL = "FailedOperation.AccessTKEFail"
-//  FAILEDOPERATION_DBQUERYFAILED = "FailedOperation.DbQueryFailed"
-//  FAILEDOPERATION_INSTANCENOTRUNNING = "FailedOperation.InstanceNotRunning"
-//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
-//  FAILEDOPERATION_TKEENDPOINTSTATUSERROR = "FailedOperation.TKEEndpointStatusError"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-func (c *Client) DescribeServiceDiscoveryWithContext(ctx context.Context, request *DescribeServiceDiscoveryRequest) (response *DescribeServiceDiscoveryResponse, err error) {
-    if request == nil {
-        request = NewDescribeServiceDiscoveryRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "DescribeServiceDiscovery")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeServiceDiscovery require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeServiceDiscoveryResponse()
     err = c.Send(request, response)
     return
 }
@@ -8130,6 +7856,7 @@ func NewModifyPrometheusAgentExternalLabelsResponse() (response *ModifyPrometheu
 // This API is used to modify the external labels of the associated cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
@@ -8146,6 +7873,7 @@ func (c *Client) ModifyPrometheusAgentExternalLabels(request *ModifyPrometheusAg
 // This API is used to modify the external labels of the associated cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
@@ -8197,12 +7925,14 @@ func NewModifyPrometheusAlertPolicyResponse() (response *ModifyPrometheusAlertPo
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) ModifyPrometheusAlertPolicy(request *ModifyPrometheusAlertPolicyRequest) (response *ModifyPrometheusAlertPolicyResponse, err error) {
     return c.ModifyPrometheusAlertPolicyWithContext(context.Background(), request)
 }
@@ -8214,12 +7944,14 @@ func (c *Client) ModifyPrometheusAlertPolicy(request *ModifyPrometheusAlertPolic
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
 //  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_PARAM = "InternalError.Param"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  INVALIDPARAMETER_PROMINSTANCENOTFOUND = "InvalidParameter.PromInstanceNotFound"
 func (c *Client) ModifyPrometheusAlertPolicyWithContext(ctx context.Context, request *ModifyPrometheusAlertPolicyRequest) (response *ModifyPrometheusAlertPolicyResponse, err error) {
     if request == nil {
         request = NewModifyPrometheusAlertPolicyRequest()
@@ -8331,6 +8063,7 @@ func NewModifyPrometheusGlobalNotificationResponse() (response *ModifyPrometheus
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
@@ -8344,6 +8077,7 @@ func (c *Client) ModifyPrometheusGlobalNotification(request *ModifyPrometheusGlo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 //  INVALIDPARAMETER_PROMCLUSTERNOTFOUND = "InvalidParameter.PromClusterNotFound"
@@ -8841,72 +8575,6 @@ func (c *Client) RunPrometheusInstanceWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewRunPrometheusInstanceResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewSendCustomAlarmMsgRequest() (request *SendCustomAlarmMsgRequest) {
-    request = &SendCustomAlarmMsgRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("monitor", APIVersion, "SendCustomAlarmMsg")
-    
-    
-    return
-}
-
-func NewSendCustomAlarmMsgResponse() (response *SendCustomAlarmMsgResponse) {
-    response = &SendCustomAlarmMsgResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// SendCustomAlarmMsg
-// This API is used to send a custom alarm notification.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
-//  INVALIDPARAMETER_INVALIDPARAMETERPARAM = "InvalidParameter.InvalidParameterParam"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) SendCustomAlarmMsg(request *SendCustomAlarmMsgRequest) (response *SendCustomAlarmMsgResponse, err error) {
-    return c.SendCustomAlarmMsgWithContext(context.Background(), request)
-}
-
-// SendCustomAlarmMsg
-// This API is used to send a custom alarm notification.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
-//  INVALIDPARAMETER_INVALIDPARAMETERPARAM = "InvalidParameter.InvalidParameterParam"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) SendCustomAlarmMsgWithContext(ctx context.Context, request *SendCustomAlarmMsgRequest) (response *SendCustomAlarmMsgResponse, err error) {
-    if request == nil {
-        request = NewSendCustomAlarmMsgRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "monitor", APIVersion, "SendCustomAlarmMsg")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("SendCustomAlarmMsg require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewSendCustomAlarmMsgResponse()
     err = c.Send(request, response)
     return
 }
@@ -9487,6 +9155,7 @@ func NewUninstallGrafanaPluginsResponse() (response *UninstallGrafanaPluginsResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
 func (c *Client) UninstallGrafanaPlugins(request *UninstallGrafanaPluginsRequest) (response *UninstallGrafanaPluginsResponse, err error) {
     return c.UninstallGrafanaPluginsWithContext(context.Background(), request)
 }
@@ -9496,6 +9165,7 @@ func (c *Client) UninstallGrafanaPlugins(request *UninstallGrafanaPluginsRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCENOTFOUND = "FailedOperation.ResourceNotFound"
 func (c *Client) UninstallGrafanaPluginsWithContext(ctx context.Context, request *UninstallGrafanaPluginsRequest) (response *UninstallGrafanaPluginsResponse, err error) {
     if request == nil {
         request = NewUninstallGrafanaPluginsRequest()
