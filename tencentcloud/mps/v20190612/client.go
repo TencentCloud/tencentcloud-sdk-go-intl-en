@@ -7320,15 +7320,9 @@ func NewModifyDocToVideoTaskStatusResponse() (response *ModifyDocToVideoTaskStat
 // Contains two actions: confirm and regenerate.
 //
 // error code that may be returned:
-//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_BLOCKCONFIDENCE = "InvalidParameterValue.BlockConfidence"
-//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
-//  INVALIDPARAMETERVALUE_LABELSET = "InvalidParameterValue.LabelSet"
-//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
-//  INVALIDPARAMETERVALUE_REVIEWCONFIDENCE = "InvalidParameterValue.ReviewConfidence"
-//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
-//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
 func (c *Client) ModifyDocToVideoTaskStatus(request *ModifyDocToVideoTaskStatusRequest) (response *ModifyDocToVideoTaskStatusResponse, err error) {
     return c.ModifyDocToVideoTaskStatusWithContext(context.Background(), request)
 }
@@ -7341,15 +7335,9 @@ func (c *Client) ModifyDocToVideoTaskStatus(request *ModifyDocToVideoTaskStatusR
 // Contains two actions: confirm and regenerate.
 //
 // error code that may be returned:
-//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_BLOCKCONFIDENCE = "InvalidParameterValue.BlockConfidence"
-//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
-//  INVALIDPARAMETERVALUE_LABELSET = "InvalidParameterValue.LabelSet"
-//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
-//  INVALIDPARAMETERVALUE_REVIEWCONFIDENCE = "InvalidParameterValue.ReviewConfidence"
-//  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
-//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TASKNOTFOUND = "ResourceNotFound.TaskNotFound"
 func (c *Client) ModifyDocToVideoTaskStatusWithContext(ctx context.Context, request *ModifyDocToVideoTaskStatusRequest) (response *ModifyDocToVideoTaskStatusResponse, err error) {
     if request == nil {
         request = NewModifyDocToVideoTaskStatusRequest()
