@@ -65,7 +65,7 @@ func NewAddMetricScaleStrategyResponse() (response *AddMetricScaleStrategyRespon
 }
 
 // AddMetricScaleStrategy
-// This API is used to add scaling rules by load and time.
+// This API is used to add an automatic scaling rule by load and time.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_MORESTRATEGYNOTALLOWED = "FailedOperation.MoreStrategyNotAllowed"
@@ -88,7 +88,7 @@ func (c *Client) AddMetricScaleStrategy(request *AddMetricScaleStrategyRequest) 
 }
 
 // AddMetricScaleStrategy
-// This API is used to add scaling rules by load and time.
+// This API is used to add an automatic scaling rule by load and time.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_MORESTRATEGYNOTALLOWED = "FailedOperation.MoreStrategyNotAllowed"
@@ -143,7 +143,7 @@ func NewAddNodeResourceConfigResponse() (response *AddNodeResourceConfigResponse
 }
 
 // AddNodeResourceConfig
-// This API is used to add node specifications of the current cluster.
+// This API is used to add node specifications for the current cluster.
 //
 // error code that may be returned:
 //  INTERNALERROR_ACCOUNTCGWERROR = "InternalError.AccountCgwError"
@@ -174,7 +174,7 @@ func (c *Client) AddNodeResourceConfig(request *AddNodeResourceConfigRequest) (r
 }
 
 // AddNodeResourceConfig
-// This API is used to add node specifications of the current cluster.
+// This API is used to add node specifications for the current cluster.
 //
 // error code that may be returned:
 //  INTERNALERROR_ACCOUNTCGWERROR = "InternalError.AccountCgwError"
@@ -237,9 +237,9 @@ func NewAddUsersForUserManagerResponse() (response *AddUsersForUserManagerRespon
 }
 
 // AddUsersForUserManager
-// This API is available for clusters with OpenLDAP components configured.
+// This API is used for clusters with the OpenLDAP component installed.
 //
-// This API is used to add user lists (user management).
+// This API is used to add a user list (user management).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -255,9 +255,9 @@ func (c *Client) AddUsersForUserManager(request *AddUsersForUserManagerRequest) 
 }
 
 // AddUsersForUserManager
-// This API is available for clusters with OpenLDAP components configured.
+// This API is used for clusters with the OpenLDAP component installed.
 //
-// This API is used to add user lists (user management).
+// This API is used to add a user list (user management).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -305,7 +305,7 @@ func NewAttachDisksResponse() (response *AttachDisksResponse) {
 }
 
 // AttachDisks
-// This API is used to mount cloud disks.
+// This API is used to mount a cloud disk.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
@@ -315,7 +315,7 @@ func (c *Client) AttachDisks(request *AttachDisksRequest) (response *AttachDisks
 }
 
 // AttachDisks
-// This API is used to mount cloud disks.
+// This API is used to mount a cloud disk.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
@@ -357,7 +357,7 @@ func NewConvertPreToPostClusterResponse() (response *ConvertPreToPostClusterResp
 }
 
 // ConvertPreToPostCluster
-// This API is used to convert a monthly subscription cluster to a pay-as-you-go cluster (excluding cdb).
+// This API is used to convert a monthly subscription cluster to a pay-as-you-go cluster (excluding CDB).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -368,7 +368,7 @@ func (c *Client) ConvertPreToPostCluster(request *ConvertPreToPostClusterRequest
 }
 
 // ConvertPreToPostCluster
-// This API is used to convert a monthly subscription cluster to a pay-as-you-go cluster (excluding cdb).
+// This API is used to convert a monthly subscription cluster to a pay-as-you-go cluster (excluding CDB).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -411,7 +411,7 @@ func NewCreateClusterResponse() (response *CreateClusterResponse) {
 }
 
 // CreateCluster
-// This API is used to create an EMR cluster instance.
+// This API is used to create an EMR cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -449,7 +449,7 @@ func (c *Client) CreateCluster(request *CreateClusterRequest) (response *CreateC
 }
 
 // CreateCluster
-// This API is used to create an EMR cluster instance.
+// This API is used to create an EMR cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -499,6 +499,60 @@ func (c *Client) CreateClusterWithContext(ctx context.Context, request *CreateCl
     return
 }
 
+func NewCreateDynamicInstanceRequest() (request *CreateDynamicInstanceRequest) {
+    request = &CreateDynamicInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "CreateDynamicInstance")
+    
+    
+    return
+}
+
+func NewCreateDynamicInstanceResponse() (response *CreateDynamicInstanceResponse) {
+    response = &CreateDynamicInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDynamicInstance
+// This API is used to create a DynamicInstance in a containerized EMR on TKE cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDDYNAMICINSTANCETYPE = "InvalidParameter.InvalidDynamicInstanceType"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) CreateDynamicInstance(request *CreateDynamicInstanceRequest) (response *CreateDynamicInstanceResponse, err error) {
+    return c.CreateDynamicInstanceWithContext(context.Background(), request)
+}
+
+// CreateDynamicInstance
+// This API is used to create a DynamicInstance in a containerized EMR on TKE cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDDYNAMICINSTANCETYPE = "InvalidParameter.InvalidDynamicInstanceType"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) CreateDynamicInstanceWithContext(ctx context.Context, request *CreateDynamicInstanceRequest) (response *CreateDynamicInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateDynamicInstanceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "emr", APIVersion, "CreateDynamicInstance")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDynamicInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDynamicInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateGroupsSTDRequest() (request *CreateGroupsSTDRequest) {
     request = &CreateGroupsSTDRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -519,77 +573,23 @@ func NewCreateGroupsSTDResponse() (response *CreateGroupsSTDResponse) {
 }
 
 // CreateGroupsSTD
-// This API is used to create user groups in batches under User Management.
+// This API is used to create user groups in batches in user management.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_GETCVMSERVERFAILED = "FailedOperation.GetCvmServerFailed"
-//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
-//  INTERNALERROR_CVMERROR = "InternalError.CvmError"
-//  INTERNALERROR_TRADECGWERROR = "InternalError.TradeCgwError"
-//  INVALIDPARAMETER_HALESSMASTERCOUNT = "InvalidParameter.HALessMasterCount"
-//  INVALIDPARAMETER_INCORRECTMASTERCOUNT = "InvalidParameter.IncorrectMasterCount"
-//  INVALIDPARAMETER_INVALIDALLNODERESOURCESPEC = "InvalidParameter.InvalidAllNodeResourceSpec"
-//  INVALIDPARAMETER_INVALIDCOMPONENT = "InvalidParameter.InvalidComponent"
-//  INVALIDPARAMETER_INVALIDCORECOUNT = "InvalidParameter.InvalidCoreCount"
-//  INVALIDPARAMETER_INVALIDCOREDISKTYPE = "InvalidParameter.InvalidCoreDiskType"
-//  INVALIDPARAMETER_INVALIDCOSBUCKET = "InvalidParameter.InvalidCosBucket"
-//  INVALIDPARAMETER_INVALIDDEPENDSERVICEANDENABLEKERBEROSCONFLICT = "InvalidParameter.InvalidDependServiceAndEnableKerberosConflict"
-//  INVALIDPARAMETER_INVALIDDISKNUM = "InvalidParameter.InvalidDiskNum"
-//  INVALIDPARAMETER_INVALIDINSTANCECHARGETYPE = "InvalidParameter.InvalidInstanceChargeType"
-//  INVALIDPARAMETER_INVALIDINSTANCETYPE = "InvalidParameter.InvalidInstanceType"
-//  INVALIDPARAMETER_INVALIDLOADBALANCER = "InvalidParameter.InvalidLoadBalancer"
-//  INVALIDPARAMETER_INVALIDMASTERDISKTYPE = "InvalidParameter.InvalidMasterDiskType"
-//  INVALIDPARAMETER_INVALIDMETATYPE = "InvalidParameter.InvalidMetaType"
-//  INVALIDPARAMETER_INVALIDPASSWORD = "InvalidParameter.InvalidPassword"
-//  INVALIDPARAMETER_INVALIDPRODUCTVERSION = "InvalidParameter.InvalidProductVersion"
-//  INVALIDPARAMETER_INVALIDRENEWFLAG = "InvalidParameter.InvalidRenewFlag"
-//  INVALIDPARAMETER_INVALIDRESOURCESPEC = "InvalidParameter.InvalidResourceSpec"
-//  INVALIDPARAMETER_INVALIDSCRIPTBOOTSTRAPACTIONCONFIG = "InvalidParameter.InvalidScriptBootstrapActionConfig"
-//  INVALIDPARAMETER_INVALIDSOFTINFO = "InvalidParameter.InvalidSoftInfo"
-//  INVALIDPARAMETER_INVALIDZONE = "InvalidParameter.InvalidZone"
-//  INVALIDPARAMETER_KERBEROSSUPPORT = "InvalidParameter.KerberosSupport"
-//  RESOURCEINSUFFICIENT_INSTANCEINSUFFICIENT = "ResourceInsufficient.InstanceInsufficient"
-//  RESOURCENOTFOUND_SUBNETNOTFOUND = "ResourceNotFound.SubnetNotFound"
-//  RESOURCESSOLDOUT_CVMSOLDOUT = "ResourcesSoldOut.CvmSoldOut"
+//  INVALIDPARAMETER_INVALIDDYNAMICINSTANCETYPE = "InvalidParameter.InvalidDynamicInstanceType"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 func (c *Client) CreateGroupsSTD(request *CreateGroupsSTDRequest) (response *CreateGroupsSTDResponse, err error) {
     return c.CreateGroupsSTDWithContext(context.Background(), request)
 }
 
 // CreateGroupsSTD
-// This API is used to create user groups in batches under User Management.
+// This API is used to create user groups in batches in user management.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_GETCVMSERVERFAILED = "FailedOperation.GetCvmServerFailed"
-//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
-//  INTERNALERROR_CVMERROR = "InternalError.CvmError"
-//  INTERNALERROR_TRADECGWERROR = "InternalError.TradeCgwError"
-//  INVALIDPARAMETER_HALESSMASTERCOUNT = "InvalidParameter.HALessMasterCount"
-//  INVALIDPARAMETER_INCORRECTMASTERCOUNT = "InvalidParameter.IncorrectMasterCount"
-//  INVALIDPARAMETER_INVALIDALLNODERESOURCESPEC = "InvalidParameter.InvalidAllNodeResourceSpec"
-//  INVALIDPARAMETER_INVALIDCOMPONENT = "InvalidParameter.InvalidComponent"
-//  INVALIDPARAMETER_INVALIDCORECOUNT = "InvalidParameter.InvalidCoreCount"
-//  INVALIDPARAMETER_INVALIDCOREDISKTYPE = "InvalidParameter.InvalidCoreDiskType"
-//  INVALIDPARAMETER_INVALIDCOSBUCKET = "InvalidParameter.InvalidCosBucket"
-//  INVALIDPARAMETER_INVALIDDEPENDSERVICEANDENABLEKERBEROSCONFLICT = "InvalidParameter.InvalidDependServiceAndEnableKerberosConflict"
-//  INVALIDPARAMETER_INVALIDDISKNUM = "InvalidParameter.InvalidDiskNum"
-//  INVALIDPARAMETER_INVALIDINSTANCECHARGETYPE = "InvalidParameter.InvalidInstanceChargeType"
-//  INVALIDPARAMETER_INVALIDINSTANCETYPE = "InvalidParameter.InvalidInstanceType"
-//  INVALIDPARAMETER_INVALIDLOADBALANCER = "InvalidParameter.InvalidLoadBalancer"
-//  INVALIDPARAMETER_INVALIDMASTERDISKTYPE = "InvalidParameter.InvalidMasterDiskType"
-//  INVALIDPARAMETER_INVALIDMETATYPE = "InvalidParameter.InvalidMetaType"
-//  INVALIDPARAMETER_INVALIDPASSWORD = "InvalidParameter.InvalidPassword"
-//  INVALIDPARAMETER_INVALIDPRODUCTVERSION = "InvalidParameter.InvalidProductVersion"
-//  INVALIDPARAMETER_INVALIDRENEWFLAG = "InvalidParameter.InvalidRenewFlag"
-//  INVALIDPARAMETER_INVALIDRESOURCESPEC = "InvalidParameter.InvalidResourceSpec"
-//  INVALIDPARAMETER_INVALIDSCRIPTBOOTSTRAPACTIONCONFIG = "InvalidParameter.InvalidScriptBootstrapActionConfig"
-//  INVALIDPARAMETER_INVALIDSOFTINFO = "InvalidParameter.InvalidSoftInfo"
-//  INVALIDPARAMETER_INVALIDZONE = "InvalidParameter.InvalidZone"
-//  INVALIDPARAMETER_KERBEROSSUPPORT = "InvalidParameter.KerberosSupport"
-//  RESOURCEINSUFFICIENT_INSTANCEINSUFFICIENT = "ResourceInsufficient.InstanceInsufficient"
-//  RESOURCENOTFOUND_SUBNETNOTFOUND = "ResourceNotFound.SubnetNotFound"
-//  RESOURCESSOLDOUT_CVMSOLDOUT = "ResourcesSoldOut.CvmSoldOut"
+//  INVALIDPARAMETER_INVALIDDYNAMICINSTANCETYPE = "InvalidParameter.InvalidDynamicInstanceType"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
 func (c *Client) CreateGroupsSTDWithContext(ctx context.Context, request *CreateGroupsSTDRequest) (response *CreateGroupsSTDResponse, err error) {
     if request == nil {
         request = NewCreateGroupsSTDRequest()
@@ -627,7 +627,7 @@ func NewCreateInstanceResponse() (response *CreateInstanceResponse) {
 }
 
 // CreateInstance
-// This API is used to create an EMR cluster instance.
+// This API is used to create an EMR cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -714,7 +714,7 @@ func (c *Client) CreateInstance(request *CreateInstanceRequest) (response *Creat
 }
 
 // CreateInstance
-// This API is used to create an EMR cluster instance.
+// This API is used to create an EMR cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -833,7 +833,9 @@ func NewCreateSLInstanceResponse() (response *CreateSLInstanceResponse) {
 }
 
 // CreateSLInstance
-// This API is used to create a Serverless HBase instance.- If the API call is successful, a Serverless HBase instance will be created. If the instance creation request is successful, the InstanceId of the created instance and the RequestID of the request will be returned.- This is an asynchronous API. The operation is not completed immediately when the API call returns. The instance operation result can be viewed by calling DescribeInstancesList to view the StatusDesc status of the current instance.
+// This API is used to create a Serverless instance, for example, HBase, StarRocks, and TCBase instances.- This API is successfully called, and a Serverless instance is created. If the instance creation request succeeds, InstanceId of the instance and RequestID of the request are returned.
+//
+// - This is an asynchronous API. The operation is not completed immediately when the API call returns. The instance operation result can be viewed by calling the DescribeInstancesList API, and the StatusDesc field for the current instance can be returned.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -860,7 +862,9 @@ func (c *Client) CreateSLInstance(request *CreateSLInstanceRequest) (response *C
 }
 
 // CreateSLInstance
-// This API is used to create a Serverless HBase instance.- If the API call is successful, a Serverless HBase instance will be created. If the instance creation request is successful, the InstanceId of the created instance and the RequestID of the request will be returned.- This is an asynchronous API. The operation is not completed immediately when the API call returns. The instance operation result can be viewed by calling DescribeInstancesList to view the StatusDesc status of the current instance.
+// This API is used to create a Serverless instance, for example, HBase, StarRocks, and TCBase instances.- This API is successfully called, and a Serverless instance is created. If the instance creation request succeeds, InstanceId of the instance and RequestID of the request are returned.
+//
+// - This is an asynchronous API. The operation is not completed immediately when the API call returns. The instance operation result can be viewed by calling the DescribeInstancesList API, and the StatusDesc field for the current instance can be returned.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -919,7 +923,7 @@ func NewDeleteAutoScaleStrategyResponse() (response *DeleteAutoScaleStrategyResp
 }
 
 // DeleteAutoScaleStrategy
-// This API is used to delete automatic scaling rules. Nodes scaled based on these rules are destroyed in the background.
+// This API is used to delete an automatic scaling rule. Nodes scaled based on this rule are terminated in the backend.
 //
 // error code that may be returned:
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
@@ -931,7 +935,7 @@ func (c *Client) DeleteAutoScaleStrategy(request *DeleteAutoScaleStrategyRequest
 }
 
 // DeleteAutoScaleStrategy
-// This API is used to delete automatic scaling rules. Nodes scaled based on these rules are destroyed in the background.
+// This API is used to delete an automatic scaling rule. Nodes scaled based on this rule are terminated in the backend.
 //
 // error code that may be returned:
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
@@ -1031,7 +1035,7 @@ func NewDeleteNodeResourceConfigResponse() (response *DeleteNodeResourceConfigRe
 }
 
 // DeleteNodeResourceConfig
-// This API is used to delete the node specifications of the current cluster.
+// This API is used to delete node specifications of the current cluster.
 //
 // error code that may be returned:
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
@@ -1042,7 +1046,7 @@ func (c *Client) DeleteNodeResourceConfig(request *DeleteNodeResourceConfigReque
 }
 
 // DeleteNodeResourceConfig
-// This API is used to delete the node specifications of the current cluster.
+// This API is used to delete node specifications of the current cluster.
 //
 // error code that may be returned:
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
@@ -1085,7 +1089,7 @@ func NewDeployYarnConfResponse() (response *DeployYarnConfResponse) {
 }
 
 // DeployYarnConf
-// This API is used to bring the configuration into effect in YARN resource scheduling after deployment.
+// This API is used to bring the deployment into effect in YARN resource scheduling.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1100,7 +1104,7 @@ func (c *Client) DeployYarnConf(request *DeployYarnConfRequest) (response *Deplo
 }
 
 // DeployYarnConf
-// This API is used to bring the configuration into effect in YARN resource scheduling after deployment.
+// This API is used to bring the deployment into effect in YARN resource scheduling.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1147,7 +1151,7 @@ func NewDescribeAutoScaleGroupGlobalConfResponse() (response *DescribeAutoScaleG
 }
 
 // DescribeAutoScaleGroupGlobalConf
-// This API is used to access the global configuration of automatic scaling.
+// This API is used to obtain the global configuration of auto scaling.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1159,7 +1163,7 @@ func (c *Client) DescribeAutoScaleGroupGlobalConf(request *DescribeAutoScaleGrou
 }
 
 // DescribeAutoScaleGroupGlobalConf
-// This API is used to access the global configuration of automatic scaling.
+// This API is used to obtain the global configuration of auto scaling.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1203,7 +1207,7 @@ func NewDescribeAutoScaleRecordsResponse() (response *DescribeAutoScaleRecordsRe
 }
 
 // DescribeAutoScaleRecords
-// This API is used to inquiry detailed records of cluster autoscaling.
+// This API is used to obtain the detailed automatic scaling records of a cluster.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_INVALIDFILTERKEY = "InvalidParameter.InvalidFilterKey"
@@ -1214,7 +1218,7 @@ func (c *Client) DescribeAutoScaleRecords(request *DescribeAutoScaleRecordsReque
 }
 
 // DescribeAutoScaleRecords
-// This API is used to inquiry detailed records of cluster autoscaling.
+// This API is used to obtain the detailed automatic scaling records of a cluster.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_INVALIDFILTERKEY = "InvalidParameter.InvalidFilterKey"
@@ -1257,7 +1261,7 @@ func NewDescribeAutoScaleStrategiesResponse() (response *DescribeAutoScaleStrate
 }
 
 // DescribeAutoScaleStrategies
-// This API is used to access automatic scaling rules.
+// This API is used to obtain an automatic scaling rule.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1270,7 +1274,7 @@ func (c *Client) DescribeAutoScaleStrategies(request *DescribeAutoScaleStrategie
 }
 
 // DescribeAutoScaleStrategies
-// This API is used to access automatic scaling rules.
+// This API is used to obtain an automatic scaling rule.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1295,6 +1299,66 @@ func (c *Client) DescribeAutoScaleStrategiesWithContext(ctx context.Context, req
     return
 }
 
+func NewDescribeBootScriptRequest() (request *DescribeBootScriptRequest) {
+    request = &DescribeBootScriptRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "DescribeBootScript")
+    
+    
+    return
+}
+
+func NewDescribeBootScriptResponse() (response *DescribeBootScriptResponse) {
+    response = &DescribeBootScriptResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBootScript
+// This API is used to obtain a bootstrap script.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INVALIDPARAMETER_INVALIDCOSFILEURI = "InvalidParameter.InvalidCosFileURI"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_CHECKCAMAUTH = "UnauthorizedOperation.CheckCamAuth"
+//  UNSUPPORTEDOPERATION_SERVICENOTSUPPORT = "UnsupportedOperation.ServiceNotSupport"
+func (c *Client) DescribeBootScript(request *DescribeBootScriptRequest) (response *DescribeBootScriptResponse, err error) {
+    return c.DescribeBootScriptWithContext(context.Background(), request)
+}
+
+// DescribeBootScript
+// This API is used to obtain a bootstrap script.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INVALIDPARAMETER_INVALIDCOSFILEURI = "InvalidParameter.InvalidCosFileURI"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_CHECKCAMAUTH = "UnauthorizedOperation.CheckCamAuth"
+//  UNSUPPORTEDOPERATION_SERVICENOTSUPPORT = "UnsupportedOperation.ServiceNotSupport"
+func (c *Client) DescribeBootScriptWithContext(ctx context.Context, request *DescribeBootScriptRequest) (response *DescribeBootScriptResponse, err error) {
+    if request == nil {
+        request = NewDescribeBootScriptRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "emr", APIVersion, "DescribeBootScript")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBootScript require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBootScriptResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeClusterFlowStatusDetailRequest() (request *DescribeClusterFlowStatusDetailRequest) {
     request = &DescribeClusterFlowStatusDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1315,7 +1379,7 @@ func NewDescribeClusterFlowStatusDetailResponse() (response *DescribeClusterFlow
 }
 
 // DescribeClusterFlowStatusDetail
-// This API is used to query the EMR task running details status.
+// This API is used to query the running status details of an EMR cluster task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1331,7 +1395,7 @@ func (c *Client) DescribeClusterFlowStatusDetail(request *DescribeClusterFlowSta
 }
 
 // DescribeClusterFlowStatusDetail
-// This API is used to query the EMR task running details status.
+// This API is used to query the running status details of an EMR cluster task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1379,7 +1443,7 @@ func NewDescribeClusterNodesResponse() (response *DescribeClusterNodesResponse) 
 }
 
 // DescribeClusterNodes
-// This API is used to query the information of nodes in a cluster.
+// This API is used to query information of a cluster node.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1415,7 +1479,7 @@ func (c *Client) DescribeClusterNodes(request *DescribeClusterNodesRequest) (res
 }
 
 // DescribeClusterNodes
-// This API is used to query the information of nodes in a cluster.
+// This API is used to query information of a cluster node.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1515,6 +1579,162 @@ func (c *Client) DescribeDAGInfoWithContext(ctx context.Context, request *Descri
     return
 }
 
+func NewDescribeDynamicInstanceDetailRequest() (request *DescribeDynamicInstanceDetailRequest) {
+    request = &DescribeDynamicInstanceDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "DescribeDynamicInstanceDetail")
+    
+    
+    return
+}
+
+func NewDescribeDynamicInstanceDetailResponse() (response *DescribeDynamicInstanceDetailResponse) {
+    response = &DescribeDynamicInstanceDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDynamicInstanceDetail
+// This API is used to describe the details of a DynamicInstance in an EMR on TKE cluster.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
+//  UNAUTHORIZEDOPERATION_APPIDMISMATCHED = "UnauthorizedOperation.AppIdMismatched"
+func (c *Client) DescribeDynamicInstanceDetail(request *DescribeDynamicInstanceDetailRequest) (response *DescribeDynamicInstanceDetailResponse, err error) {
+    return c.DescribeDynamicInstanceDetailWithContext(context.Background(), request)
+}
+
+// DescribeDynamicInstanceDetail
+// This API is used to describe the details of a DynamicInstance in an EMR on TKE cluster.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
+//  UNAUTHORIZEDOPERATION_APPIDMISMATCHED = "UnauthorizedOperation.AppIdMismatched"
+func (c *Client) DescribeDynamicInstanceDetailWithContext(ctx context.Context, request *DescribeDynamicInstanceDetailRequest) (response *DescribeDynamicInstanceDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeDynamicInstanceDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "emr", APIVersion, "DescribeDynamicInstanceDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDynamicInstanceDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDynamicInstanceDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDynamicInstanceListRequest() (request *DescribeDynamicInstanceListRequest) {
+    request = &DescribeDynamicInstanceListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "DescribeDynamicInstanceList")
+    
+    
+    return
+}
+
+func NewDescribeDynamicInstanceListResponse() (response *DescribeDynamicInstanceListResponse) {
+    response = &DescribeDynamicInstanceListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDynamicInstanceList
+// This API is used to describe the DynamicInstance list of an EMR on TKE cluster.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
+//  UNAUTHORIZEDOPERATION_APPIDMISMATCHED = "UnauthorizedOperation.AppIdMismatched"
+func (c *Client) DescribeDynamicInstanceList(request *DescribeDynamicInstanceListRequest) (response *DescribeDynamicInstanceListResponse, err error) {
+    return c.DescribeDynamicInstanceListWithContext(context.Background(), request)
+}
+
+// DescribeDynamicInstanceList
+// This API is used to describe the DynamicInstance list of an EMR on TKE cluster.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
+//  UNAUTHORIZEDOPERATION_APPIDMISMATCHED = "UnauthorizedOperation.AppIdMismatched"
+func (c *Client) DescribeDynamicInstanceListWithContext(ctx context.Context, request *DescribeDynamicInstanceListRequest) (response *DescribeDynamicInstanceListResponse, err error) {
+    if request == nil {
+        request = NewDescribeDynamicInstanceListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "emr", APIVersion, "DescribeDynamicInstanceList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDynamicInstanceList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDynamicInstanceListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeEMREventListRequest() (request *DescribeEMREventListRequest) {
+    request = &DescribeEMREventListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "DescribeEMREventList")
+    
+    
+    return
+}
+
+func NewDescribeEMREventListResponse() (response *DescribeEMREventListResponse) {
+    response = &DescribeEMREventListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeEMREventList
+// This API is used to query EMR event monitoring data.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
+//  UNAUTHORIZEDOPERATION_APPIDMISMATCHED = "UnauthorizedOperation.AppIdMismatched"
+func (c *Client) DescribeEMREventList(request *DescribeEMREventListRequest) (response *DescribeEMREventListResponse, err error) {
+    return c.DescribeEMREventListWithContext(context.Background(), request)
+}
+
+// DescribeEMREventList
+// This API is used to query EMR event monitoring data.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
+//  UNAUTHORIZEDOPERATION_APPIDMISMATCHED = "UnauthorizedOperation.AppIdMismatched"
+func (c *Client) DescribeEMREventListWithContext(ctx context.Context, request *DescribeEMREventListRequest) (response *DescribeEMREventListResponse, err error) {
+    if request == nil {
+        request = NewDescribeEMREventListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "emr", APIVersion, "DescribeEMREventList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEMREventList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeEMREventListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeEmrApplicationStaticsRequest() (request *DescribeEmrApplicationStaticsRequest) {
     request = &DescribeEmrApplicationStaticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1535,7 +1755,7 @@ func NewDescribeEmrApplicationStaticsResponse() (response *DescribeEmrApplicatio
 }
 
 // DescribeEmrApplicationStatics
-// This API is used to query the YARN application statistics API.
+// This API is used to query the YARN task statistics information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1546,7 +1766,7 @@ func (c *Client) DescribeEmrApplicationStatics(request *DescribeEmrApplicationSt
 }
 
 // DescribeEmrApplicationStatics
-// This API is used to query the YARN application statistics API.
+// This API is used to query the YARN task statistics information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1589,7 +1809,7 @@ func NewDescribeEmrOverviewMetricsResponse() (response *DescribeEmrOverviewMetri
 }
 
 // DescribeEmrOverviewMetrics
-// This API is used to query the metric data on the monitoring overview page.
+// This API is used to query metric data on the monitoring overview page.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
@@ -1600,7 +1820,7 @@ func (c *Client) DescribeEmrOverviewMetrics(request *DescribeEmrOverviewMetricsR
 }
 
 // DescribeEmrOverviewMetrics
-// This API is used to query the metric data on the monitoring overview page.
+// This API is used to query metric data on the monitoring overview page.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
@@ -1619,6 +1839,70 @@ func (c *Client) DescribeEmrOverviewMetricsWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDescribeEmrOverviewMetricsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeExportConfsRequest() (request *DescribeExportConfsRequest) {
+    request = &DescribeExportConfsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "DescribeExportConfs")
+    
+    
+    return
+}
+
+func NewDescribeExportConfsResponse() (response *DescribeExportConfsResponse) {
+    response = &DescribeExportConfsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeExportConfs
+// This API is used to query the export configuration.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_WOODSERVERERROR = "InternalError.WoodServerError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
+//  INVALIDPARAMETER_INVALIDDOWNLOADOBJ = "InvalidParameter.InvalidDownloadObj"
+//  RESOURCEINUSE_INSTANCEINPROCESS = "ResourceInUse.InstanceInProcess"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) DescribeExportConfs(request *DescribeExportConfsRequest) (response *DescribeExportConfsResponse, err error) {
+    return c.DescribeExportConfsWithContext(context.Background(), request)
+}
+
+// DescribeExportConfs
+// This API is used to query the export configuration.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_WOODSERVERERROR = "InternalError.WoodServerError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
+//  INVALIDPARAMETER_INVALIDDOWNLOADOBJ = "InvalidParameter.InvalidDownloadObj"
+//  RESOURCEINUSE_INSTANCEINPROCESS = "ResourceInUse.InstanceInProcess"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) DescribeExportConfsWithContext(ctx context.Context, request *DescribeExportConfsRequest) (response *DescribeExportConfsResponse, err error) {
+    if request == nil {
+        request = NewDescribeExportConfsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "emr", APIVersion, "DescribeExportConfs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeExportConfs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeExportConfsResponse()
     err = c.Send(request, response)
     return
 }
@@ -1643,7 +1927,7 @@ func NewDescribeGlobalConfigResponse() (response *DescribeGlobalConfigResponse) 
 }
 
 // DescribeGlobalConfig
-// This API is used to query the global configurations of YARN Resource Scheduling.
+// This API is used to query the global configuration of YARN resource scheduling.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1657,7 +1941,7 @@ func (c *Client) DescribeGlobalConfig(request *DescribeGlobalConfigRequest) (res
 }
 
 // DescribeGlobalConfig
-// This API is used to query the global configurations of YARN Resource Scheduling.
+// This API is used to query the global configuration of YARN resource scheduling.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1763,7 +2047,7 @@ func NewDescribeHBaseTableOverviewResponse() (response *DescribeHBaseTableOvervi
 }
 
 // DescribeHBaseTableOverview
-// This API is used to access the overview of HBase table-level monitoring data.
+// This API is used to obtain an overview of HBase table-level monitoring data.
 //
 // error code that may be returned:
 //  INTERNALERROR_DOOPENTSDBREQUESTEXCEPTION = "InternalError.DoOpenTSDBRequestException"
@@ -1775,7 +2059,7 @@ func (c *Client) DescribeHBaseTableOverview(request *DescribeHBaseTableOverviewR
 }
 
 // DescribeHBaseTableOverview
-// This API is used to access the overview of HBase table-level monitoring data.
+// This API is used to obtain an overview of HBase table-level monitoring data.
 //
 // error code that may be returned:
 //  INTERNALERROR_DOOPENTSDBREQUESTEXCEPTION = "InternalError.DoOpenTSDBRequestException"
@@ -1795,6 +2079,118 @@ func (c *Client) DescribeHBaseTableOverviewWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDescribeHBaseTableOverviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeHBaseTableRequestMetricRequest() (request *DescribeHBaseTableRequestMetricRequest) {
+    request = &DescribeHBaseTableRequestMetricRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "DescribeHBaseTableRequestMetric")
+    
+    
+    return
+}
+
+func NewDescribeHBaseTableRequestMetricResponse() (response *DescribeHBaseTableRequestMetricResponse) {
+    response = &DescribeHBaseTableRequestMetricResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeHBaseTableRequestMetric
+// This API is used to obtain the read/write rate at the HBase table level.
+//
+// error code that may be returned:
+//  INTERNALERROR_DOOPENTSDBREQUESTEXCEPTION = "InternalError.DoOpenTSDBRequestException"
+//  INTERNALERROR_OPENTSDBHTTPRETURNCODENOTOK = "InternalError.OpenTSDBHttpReturnCodeNotOK"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) DescribeHBaseTableRequestMetric(request *DescribeHBaseTableRequestMetricRequest) (response *DescribeHBaseTableRequestMetricResponse, err error) {
+    return c.DescribeHBaseTableRequestMetricWithContext(context.Background(), request)
+}
+
+// DescribeHBaseTableRequestMetric
+// This API is used to obtain the read/write rate at the HBase table level.
+//
+// error code that may be returned:
+//  INTERNALERROR_DOOPENTSDBREQUESTEXCEPTION = "InternalError.DoOpenTSDBRequestException"
+//  INTERNALERROR_OPENTSDBHTTPRETURNCODENOTOK = "InternalError.OpenTSDBHttpReturnCodeNotOK"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) DescribeHBaseTableRequestMetricWithContext(ctx context.Context, request *DescribeHBaseTableRequestMetricRequest) (response *DescribeHBaseTableRequestMetricResponse, err error) {
+    if request == nil {
+        request = NewDescribeHBaseTableRequestMetricRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "emr", APIVersion, "DescribeHBaseTableRequestMetric")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeHBaseTableRequestMetric require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeHBaseTableRequestMetricResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeHBaseTableStoreSizeMetricRequest() (request *DescribeHBaseTableStoreSizeMetricRequest) {
+    request = &DescribeHBaseTableStoreSizeMetricRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "DescribeHBaseTableStoreSizeMetric")
+    
+    
+    return
+}
+
+func NewDescribeHBaseTableStoreSizeMetricResponse() (response *DescribeHBaseTableStoreSizeMetricResponse) {
+    response = &DescribeHBaseTableStoreSizeMetricResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeHBaseTableStoreSizeMetric
+// This API is used to query the StoreSize monitoring metric data at the HBase table level.
+//
+// error code that may be returned:
+//  INTERNALERROR_DOOPENTSDBREQUESTEXCEPTION = "InternalError.DoOpenTSDBRequestException"
+//  INTERNALERROR_OPENTSDBHTTPRETURNCODENOTOK = "InternalError.OpenTSDBHttpReturnCodeNotOK"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) DescribeHBaseTableStoreSizeMetric(request *DescribeHBaseTableStoreSizeMetricRequest) (response *DescribeHBaseTableStoreSizeMetricResponse, err error) {
+    return c.DescribeHBaseTableStoreSizeMetricWithContext(context.Background(), request)
+}
+
+// DescribeHBaseTableStoreSizeMetric
+// This API is used to query the StoreSize monitoring metric data at the HBase table level.
+//
+// error code that may be returned:
+//  INTERNALERROR_DOOPENTSDBREQUESTEXCEPTION = "InternalError.DoOpenTSDBRequestException"
+//  INTERNALERROR_OPENTSDBHTTPRETURNCODENOTOK = "InternalError.OpenTSDBHttpReturnCodeNotOK"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) DescribeHBaseTableStoreSizeMetricWithContext(ctx context.Context, request *DescribeHBaseTableStoreSizeMetricRequest) (response *DescribeHBaseTableStoreSizeMetricResponse, err error) {
+    if request == nil {
+        request = NewDescribeHBaseTableStoreSizeMetricRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "emr", APIVersion, "DescribeHBaseTableStoreSizeMetric")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeHBaseTableStoreSizeMetric require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeHBaseTableStoreSizeMetricResponse()
     err = c.Send(request, response)
     return
 }
@@ -1819,7 +2215,7 @@ func NewDescribeHDFSStorageInfoResponse() (response *DescribeHDFSStorageInfoResp
 }
 
 // DescribeHDFSStorageInfo
-// This API is used to query information of file(s) stored in HDFS.
+// This API is used to query information of files stored in HDFS.
 //
 // error code that may be returned:
 //  INTERNALERROR_DOOPENTSDBREQUESTEXCEPTION = "InternalError.DoOpenTSDBRequestException"
@@ -1831,7 +2227,7 @@ func (c *Client) DescribeHDFSStorageInfo(request *DescribeHDFSStorageInfoRequest
 }
 
 // DescribeHDFSStorageInfo
-// This API is used to query information of file(s) stored in HDFS.
+// This API is used to query information of files stored in HDFS.
 //
 // error code that may be returned:
 //  INTERNALERROR_DOOPENTSDBREQUESTEXCEPTION = "InternalError.DoOpenTSDBRequestException"
@@ -1875,7 +2271,7 @@ func NewDescribeHiveQueriesResponse() (response *DescribeHiveQueriesResponse) {
 }
 
 // DescribeHiveQueries
-// This API is used to inquiry Hive query data.
+// This API is used to obtain Hive query information.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBQUERYEXCEPTION = "InternalError.DBQueryException"
@@ -1887,7 +2283,7 @@ func (c *Client) DescribeHiveQueries(request *DescribeHiveQueriesRequest) (respo
 }
 
 // DescribeHiveQueries
-// This API is used to inquiry Hive query data.
+// This API is used to obtain Hive query information.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBQUERYEXCEPTION = "InternalError.DBQueryException"
@@ -2015,6 +2411,64 @@ func (c *Client) DescribeInspectionTaskResultWithContext(ctx context.Context, re
     return
 }
 
+func NewDescribeInstanceOplogRequest() (request *DescribeInstanceOplogRequest) {
+    request = &DescribeInstanceOplogRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "DescribeInstanceOplog")
+    
+    
+    return
+}
+
+func NewDescribeInstanceOplogResponse() (response *DescribeInstanceOplogResponse) {
+    response = &DescribeInstanceOplogResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInstanceOplog
+// This API is used to obtain the instance operation logs.
+//
+// error code that may be returned:
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDRESOURCEID = "InvalidParameter.InvalidResourceId"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_CHECKCAMAUTH = "UnauthorizedOperation.CheckCamAuth"
+func (c *Client) DescribeInstanceOplog(request *DescribeInstanceOplogRequest) (response *DescribeInstanceOplogResponse, err error) {
+    return c.DescribeInstanceOplogWithContext(context.Background(), request)
+}
+
+// DescribeInstanceOplog
+// This API is used to obtain the instance operation logs.
+//
+// error code that may be returned:
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDRESOURCEID = "InvalidParameter.InvalidResourceId"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_CHECKCAMAUTH = "UnauthorizedOperation.CheckCamAuth"
+func (c *Client) DescribeInstanceOplogWithContext(ctx context.Context, request *DescribeInstanceOplogRequest) (response *DescribeInstanceOplogResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceOplogRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "emr", APIVersion, "DescribeInstanceOplog")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceOplog require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceOplogResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
     request = &DescribeInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2035,7 +2489,7 @@ func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
 }
 
 // DescribeInstances
-// This API is used to query the information of instances in a cluster.
+// This API is used to query cluster information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2074,7 +2528,7 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response 
 }
 
 // DescribeInstances
-// This API is used to query the information of instances in a cluster.
+// This API is used to query cluster information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2251,7 +2705,7 @@ func NewDescribeKyuubiQueryInfoResponse() (response *DescribeKyuubiQueryInfoResp
 }
 
 // DescribeKyuubiQueryInfo
-// This API is used to query Kyuubi query information.
+// This API is used to obtain Kyuubi query information.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
@@ -2261,7 +2715,7 @@ func (c *Client) DescribeKyuubiQueryInfo(request *DescribeKyuubiQueryInfoRequest
 }
 
 // DescribeKyuubiQueryInfo
-// This API is used to query Kyuubi query information.
+// This API is used to obtain Kyuubi query information.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
@@ -2279,6 +2733,58 @@ func (c *Client) DescribeKyuubiQueryInfoWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeKyuubiQueryInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMetaDBInfoRequest() (request *DescribeMetaDBInfoRequest) {
+    request = &DescribeMetaDBInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "DescribeMetaDBInfo")
+    
+    
+    return
+}
+
+func NewDescribeMetaDBInfoResponse() (response *DescribeMetaDBInfoResponse) {
+    response = &DescribeMetaDBInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMetaDBInfo
+// This API is used to obtain cluster MetaDB data.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  UNAUTHORIZEDOPERATION_APPIDMISMATCHED = "UnauthorizedOperation.AppIdMismatched"
+func (c *Client) DescribeMetaDBInfo(request *DescribeMetaDBInfoRequest) (response *DescribeMetaDBInfoResponse, err error) {
+    return c.DescribeMetaDBInfoWithContext(context.Background(), request)
+}
+
+// DescribeMetaDBInfo
+// This API is used to obtain cluster MetaDB data.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  UNAUTHORIZEDOPERATION_APPIDMISMATCHED = "UnauthorizedOperation.AppIdMismatched"
+func (c *Client) DescribeMetaDBInfoWithContext(ctx context.Context, request *DescribeMetaDBInfoRequest) (response *DescribeMetaDBInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeMetaDBInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "emr", APIVersion, "DescribeMetaDBInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMetaDBInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMetaDBInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -2303,7 +2809,7 @@ func NewDescribeNodeDataDisksResponse() (response *DescribeNodeDataDisksResponse
 }
 
 // DescribeNodeDataDisks
-// This API is used to query data disk information of nodes.
+// This API is used to query data disk information of a node.
 //
 // error code that may be returned:
 //  INTERNALERROR_CBSERROR = "InternalError.CbsError"
@@ -2313,7 +2819,7 @@ func (c *Client) DescribeNodeDataDisks(request *DescribeNodeDataDisksRequest) (r
 }
 
 // DescribeNodeDataDisks
-// This API is used to query data disk information of nodes.
+// This API is used to query data disk information of a node.
 //
 // error code that may be returned:
 //  INTERNALERROR_CBSERROR = "InternalError.CbsError"
@@ -2577,7 +3083,7 @@ func NewDescribeResourceScheduleResponse() (response *DescribeResourceScheduleRe
 }
 
 // DescribeResourceSchedule
-// This API is used to query YARN resource scheduling information. It has been deprecated. You can use the DescribeYarnQueue API to query queue information.
+// This API is used to query YARN resource scheduling information. It has been deprecated. Please use `DescribeYarnQueue` to query queue information.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2591,7 +3097,7 @@ func (c *Client) DescribeResourceSchedule(request *DescribeResourceScheduleReque
 }
 
 // DescribeResourceSchedule
-// This API is used to query YARN resource scheduling information. It has been deprecated. You can use the DescribeYarnQueue API to query queue information.
+// This API is used to query YARN resource scheduling information. It has been deprecated. Please use `DescribeYarnQueue` to query queue information.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2637,7 +3143,7 @@ func NewDescribeResourceScheduleDiffDetailResponse() (response *DescribeResource
 }
 
 // DescribeResourceScheduleDiffDetail
-// This API is used to query change details in YARN resource scheduling.
+// This API is used to query the change details of YARN resource scheduling.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2651,7 +3157,7 @@ func (c *Client) DescribeResourceScheduleDiffDetail(request *DescribeResourceSch
 }
 
 // DescribeResourceScheduleDiffDetail
-// This API is used to query change details in YARN resource scheduling.
+// This API is used to query the change details of YARN resource scheduling.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2697,7 +3203,7 @@ func NewDescribeSLInstanceResponse() (response *DescribeSLInstanceResponse) {
 }
 
 // DescribeSLInstance
-// This API is used to query the basic information of Serverless HBase instances.
+// This API is used to query basic information of a Serverless HBase instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2719,7 +3225,7 @@ func (c *Client) DescribeSLInstance(request *DescribeSLInstanceRequest) (respons
 }
 
 // DescribeSLInstance
-// This API is used to query the basic information of Serverless HBase instances.
+// This API is used to query basic information of a Serverless HBase instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2773,7 +3279,7 @@ func NewDescribeSLInstanceListResponse() (response *DescribeSLInstanceListRespon
 }
 
 // DescribeSLInstanceList
-// This API is used to query the detailed information of the Serverless HBase instance list.
+// This API is used to query detailed information of the Serverless HBase instance list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2850,7 +3356,7 @@ func (c *Client) DescribeSLInstanceList(request *DescribeSLInstanceListRequest) 
 }
 
 // DescribeSLInstanceList
-// This API is used to query the detailed information of the Serverless HBase instance list.
+// This API is used to query detailed information of the Serverless HBase instance list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3243,7 +3749,7 @@ func NewDescribeSparkApplicationsResponse() (response *DescribeSparkApplications
 }
 
 // DescribeSparkApplications
-// This API is used to obtain a Spark application list.
+// This API is used to obtain the Spark application list.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
@@ -3253,7 +3759,7 @@ func (c *Client) DescribeSparkApplications(request *DescribeSparkApplicationsReq
 }
 
 // DescribeSparkApplications
-// This API is used to obtain a Spark application list.
+// This API is used to obtain the Spark application list.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
@@ -3295,7 +3801,7 @@ func NewDescribeSparkQueriesResponse() (response *DescribeSparkQueriesResponse) 
 }
 
 // DescribeSparkQueries
-// This API is used to query the Spark query information list.
+// This API is used to obtain the Spark query information list.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
@@ -3305,7 +3811,7 @@ func (c *Client) DescribeSparkQueries(request *DescribeSparkQueriesRequest) (res
 }
 
 // DescribeSparkQueries
-// This API is used to query the Spark query information list.
+// This API is used to obtain the Spark query information list.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
@@ -3347,7 +3853,7 @@ func NewDescribeStarRocksQueryInfoResponse() (response *DescribeStarRocksQueryIn
 }
 
 // DescribeStarRocksQueryInfo
-// This API is used to query StarRocks information.
+// This API is used to obtain StarRocks query information.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
@@ -3357,7 +3863,7 @@ func (c *Client) DescribeStarRocksQueryInfo(request *DescribeStarRocksQueryInfoR
 }
 
 // DescribeStarRocksQueryInfo
-// This API is used to query StarRocks information.
+// This API is used to obtain StarRocks query information.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
@@ -3399,7 +3905,7 @@ func NewDescribeTrinoQueryInfoResponse() (response *DescribeTrinoQueryInfoRespon
 }
 
 // DescribeTrinoQueryInfo
-// This API is used to query Trino(PrestoSQL) query information.
+// This API is used to obtain Trino (PrestoSQL) query information.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
@@ -3409,7 +3915,7 @@ func (c *Client) DescribeTrinoQueryInfo(request *DescribeTrinoQueryInfoRequest) 
 }
 
 // DescribeTrinoQueryInfo
-// This API is used to query Trino(PrestoSQL) query information.
+// This API is used to obtain Trino (PrestoSQL) query information.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
@@ -3451,9 +3957,9 @@ func NewDescribeUsersForUserManagerResponse() (response *DescribeUsersForUserMan
 }
 
 // DescribeUsersForUserManager
-// This API is available for clusters with OpenLDAP components configured.
+// This API is used for clusters with the OpenLDAP component installed.
 //
-// This API is used to export users in batches. For a Kerberos cluster, set `NeedKeytabInfo` to `true` to obtain the download link of the Keytab file. If `SupportDownLoadKeyTab` is `true`, but `DownLoadKeyTabUrl` is null, the Keytab file is not ready yet (being generated) in the backend.
+// This API is used to export users in batches. For a Kerberos cluster, if the keytab file download link is required, set NeedKeytabInfo to true. Note: If SupportDownLoadKeyTab is set to true but DownLoadKeyTabUrl is an empty string, the keytab file is not ready (being generated).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -3466,9 +3972,9 @@ func (c *Client) DescribeUsersForUserManager(request *DescribeUsersForUserManage
 }
 
 // DescribeUsersForUserManager
-// This API is available for clusters with OpenLDAP components configured.
+// This API is used for clusters with the OpenLDAP component installed.
 //
-// This API is used to export users in batches. For a Kerberos cluster, set `NeedKeytabInfo` to `true` to obtain the download link of the Keytab file. If `SupportDownLoadKeyTab` is `true`, but `DownLoadKeyTabUrl` is null, the Keytab file is not ready yet (being generated) in the backend.
+// This API is used to export users in batches. For a Kerberos cluster, if the keytab file download link is required, set NeedKeytabInfo to true. Note: If SupportDownLoadKeyTab is set to true but DownLoadKeyTabUrl is an empty string, the keytab file is not ready (being generated).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -3569,7 +4075,7 @@ func NewDescribeYarnScheduleHistoryResponse() (response *DescribeYarnScheduleHis
 }
 
 // DescribeYarnScheduleHistory
-// This API is used to view the YARN resource scheduling history. It has been deprecated. You can use the Process Center to view the history records.
+// This API is used to view the YARN resource scheduling history. It has been deprecated. Please use Task Center to view the history records.
 //
 // error code that may be returned:
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
@@ -3578,7 +4084,7 @@ func (c *Client) DescribeYarnScheduleHistory(request *DescribeYarnScheduleHistor
 }
 
 // DescribeYarnScheduleHistory
-// This API is used to view the YARN resource scheduling history. It has been deprecated. You can use the Process Center to view the history records.
+// This API is used to view the YARN resource scheduling history. It has been deprecated. Please use Task Center to view the history records.
 //
 // error code that may be returned:
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
@@ -3619,7 +4125,7 @@ func NewInquiryPriceCreateInstanceResponse() (response *InquiryPriceCreateInstan
 }
 
 // InquiryPriceCreateInstance
-// This API is used to query price of instance creation.
+// This API is used to inquire the price for instance creation.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3671,7 +4177,7 @@ func (c *Client) InquiryPriceCreateInstance(request *InquiryPriceCreateInstanceR
 }
 
 // InquiryPriceCreateInstance
-// This API is used to query price of instance creation.
+// This API is used to inquire the price for instance creation.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3755,7 +4261,7 @@ func NewInquiryPriceRenewInstanceResponse() (response *InquiryPriceRenewInstance
 }
 
 // InquiryPriceRenewInstance
-// This API is used to query the price for renewal.
+// This API is used to inquire the price for renewal.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_GETCVMSERVERFAILED = "FailedOperation.GetCvmServerFailed"
@@ -3792,7 +4298,7 @@ func (c *Client) InquiryPriceRenewInstance(request *InquiryPriceRenewInstanceReq
 }
 
 // InquiryPriceRenewInstance
-// This API is used to query the price for renewal.
+// This API is used to inquire the price for renewal.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_GETCVMSERVERFAILED = "FailedOperation.GetCvmServerFailed"
@@ -3861,7 +4367,7 @@ func NewInquiryPriceScaleOutInstanceResponse() (response *InquiryPriceScaleOutIn
 }
 
 // InquiryPriceScaleOutInstance
-// This API is used to query price of scale-out.
+// This API is used to inquire the price for a scale-out.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3902,7 +4408,7 @@ func (c *Client) InquiryPriceScaleOutInstance(request *InquiryPriceScaleOutInsta
 }
 
 // InquiryPriceScaleOutInstance
-// This API is used to query price of scale-out.
+// This API is used to inquire the price for a scale-out.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3975,7 +4481,7 @@ func NewInquiryPriceUpdateInstanceResponse() (response *InquiryPriceUpdateInstan
 }
 
 // InquiryPriceUpdateInstance
-// This API is used to query price of scaling.
+// This API is used to inquire the price for the configuration change.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_GETTRADESERVERFAILED = "FailedOperation.GetTradeServerFailed"
@@ -4012,7 +4518,7 @@ func (c *Client) InquiryPriceUpdateInstance(request *InquiryPriceUpdateInstanceR
 }
 
 // InquiryPriceUpdateInstance
-// This API is used to query price of scaling.
+// This API is used to inquire the price for the configuration change.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_GETTRADESERVERFAILED = "FailedOperation.GetTradeServerFailed"
@@ -4061,6 +4567,202 @@ func (c *Client) InquiryPriceUpdateInstanceWithContext(ctx context.Context, requ
     return
 }
 
+func NewInstallSoftwareRequest() (request *InstallSoftwareRequest) {
+    request = &InstallSoftwareRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "InstallSoftware")
+    
+    
+    return
+}
+
+func NewInstallSoftwareResponse() (response *InstallSoftwareResponse) {
+    response = &InstallSoftwareResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// InstallSoftware
+// This API is used to install a component. For components dependent on the MetaDB, a CDB order may be required. The components that can be installed on the current cluster and the components that might require a CDB order can be viewed via InstallSoftWareInfo.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INSUFFICIENTACCOUNTBALANCE = "FailedOperation.InsufficientAccountBalance"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCOUNTCGWERROR = "InternalError.AccountCgwError"
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INTERNALERROR_CAMERROR = "InternalError.CamError"
+//  INTERNALERROR_CBSCGWERROR = "InternalError.CbsCgwError"
+//  INTERNALERROR_CBSERROR = "InternalError.CbsError"
+//  INTERNALERROR_CDBCGWERROR = "InternalError.CdbCgwError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_CHECKQUOTAERR = "InternalError.CheckQuotaErr"
+//  INTERNALERROR_CONFIGCGWERROR = "InternalError.ConfigCgwError"
+//  INTERNALERROR_CVMERROR = "InternalError.CvmError"
+//  INTERNALERROR_KMSERROR = "InternalError.KmsError"
+//  INTERNALERROR_PROJECTCGWERROR = "InternalError.ProjectCgwError"
+//  INTERNALERROR_SGERROR = "InternalError.SgError"
+//  INTERNALERROR_TAGERROR = "InternalError.TagError"
+//  INTERNALERROR_TRADECGWERROR = "InternalError.TradeCgwError"
+//  INTERNALERROR_VPCCGWERROR = "InternalError.VpcCgwError"
+//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
+//  INTERNALERROR_WOODSERVERERROR = "InternalError.WoodServerError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDCLASSIFICATION = "InvalidParameter.InvalidClassification"
+//  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
+//  INVALIDPARAMETER_INVALIDCONFIGTYPE = "InvalidParameter.InvalidConfigType"
+//  INVALIDPARAMETER_INVALIDCORECOUNT = "InvalidParameter.InvalidCoreCount"
+//  INVALIDPARAMETER_INVALIDCOSFILEURI = "InvalidParameter.InvalidCosFileURI"
+//  INVALIDPARAMETER_INVALIDCOUNT = "InvalidParameter.InvalidCount"
+//  INVALIDPARAMETER_INVALIDCOUNTNUM = "InvalidParameter.InvalidCountNum"
+//  INVALIDPARAMETER_INVALIDDOWNLOADOBJ = "InvalidParameter.InvalidDownloadObj"
+//  INVALIDPARAMETER_INVALIDEXPORTCONFCONTEXTS = "InvalidParameter.InvalidExportConfContexts"
+//  INVALIDPARAMETER_INVALIDEXTENDFIELD = "InvalidParameter.InvalidExtendField"
+//  INVALIDPARAMETER_INVALIDEXTENDNAMESERVICE = "InvalidParameter.InvalidExtendNameService"
+//  INVALIDPARAMETER_INVALIDFILEPATH = "InvalidParameter.InvalidFilePath"
+//  INVALIDPARAMETER_INVALIDIPLIST = "InvalidParameter.InvalidIpList"
+//  INVALIDPARAMETER_INVALIDJOBFLOW = "InvalidParameter.InvalidJobFlow"
+//  INVALIDPARAMETER_INVALIDMETATYPE = "InvalidParameter.InvalidMetaType"
+//  INVALIDPARAMETER_INVALIDMODIFYSPEC = "InvalidParameter.InvalidModifySpec"
+//  INVALIDPARAMETER_INVALIDNODETYPE = "InvalidParameter.InvalidNodeType"
+//  INVALIDPARAMETER_INVALIDPARAMTERINVALIDSOFTINFO = "InvalidParameter.InvalidParamterInvalidSoftInfo"
+//  INVALIDPARAMETER_INVALIDPASSWORD = "InvalidParameter.InvalidPassword"
+//  INVALIDPARAMETER_INVALIDPAYMODE = "InvalidParameter.InvalidPaymode"
+//  INVALIDPARAMETER_INVALIDPODNUM = "InvalidParameter.InvalidPodNum"
+//  INVALIDPARAMETER_INVALIDREGION = "InvalidParameter.InvalidRegion"
+//  INVALIDPARAMETER_INVALIDRESTYPE = "InvalidParameter.InvalidResType"
+//  INVALIDPARAMETER_INVALIDRESOURCEID = "InvalidParameter.InvalidResourceId"
+//  INVALIDPARAMETER_INVALIDROUTERCOUNT = "InvalidParameter.InvalidRouterCount"
+//  INVALIDPARAMETER_INVALIDSERVICENAME = "InvalidParameter.InvalidServiceName"
+//  INVALIDPARAMETER_INVALIDSOFTDEPLOYINFO = "InvalidParameter.InvalidSoftDeployInfo"
+//  INVALIDPARAMETER_INVALIDSOFTINFO = "InvalidParameter.InvalidSoftInfo"
+//  INVALIDPARAMETER_INVALIDSOFTWARENAME = "InvalidParameter.InvalidSoftWareName"
+//  INVALIDPARAMETER_INVALIDSOFTWAREVERSION = "InvalidParameter.InvalidSoftWareVersion"
+//  INVALIDPARAMETER_INVALIDTASKCOUNT = "InvalidParameter.InvalidTaskCount"
+//  INVALIDPARAMETER_INVALIDTIMESPAN = "InvalidParameter.InvalidTimeSpan"
+//  INVALIDPARAMETER_INVALIDTIMEUNIT = "InvalidParameter.InvalidTimeUnit"
+//  INVALIDPARAMETER_INVALIDUNIFYMETA = "InvalidParameter.InvalidUnifyMeta"
+//  INVALIDPARAMETER_INVALIDWRITEFILE = "InvalidParameter.InvalidWriteFile"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_PODCPULIMITEXCEEDEDAVAILABLECPU = "LimitExceeded.PodCpuLimitExceededAvailableCpu"
+//  LIMITEXCEEDED_PODCPULIMITEXCEEDEDNODEAVAILABLECPU = "LimitExceeded.PodCpuLimitExceededNodeAvailableCpu"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE_INSTANCEINPROCESS = "ResourceInUse.InstanceInProcess"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCENOTFOUND_METRICSMETANOTFOUND = "ResourceNotFound.MetricsMetaNotFound"
+//  RESOURCENOTFOUND_OPTIONALSPECFOUND = "ResourceNotFound.OptionalSpecFound"
+//  RESOURCENOTFOUND_SERVICECONFNOTFOUND = "ResourceNotFound.ServiceConfNotFound"
+//  RESOURCENOTFOUND_SERVICEGROUPNOTFOUND = "ResourceNotFound.ServiceGroupNotFound"
+//  RESOURCENOTFOUND_SERVICENODENOTFOUND = "ResourceNotFound.ServiceNodeNotFound"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION_CHECKCAMAUTH = "UnauthorizedOperation.CheckCamAuth"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) InstallSoftware(request *InstallSoftwareRequest) (response *InstallSoftwareResponse, err error) {
+    return c.InstallSoftwareWithContext(context.Background(), request)
+}
+
+// InstallSoftware
+// This API is used to install a component. For components dependent on the MetaDB, a CDB order may be required. The components that can be installed on the current cluster and the components that might require a CDB order can be viewed via InstallSoftWareInfo.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INSUFFICIENTACCOUNTBALANCE = "FailedOperation.InsufficientAccountBalance"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCOUNTCGWERROR = "InternalError.AccountCgwError"
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INTERNALERROR_CAMERROR = "InternalError.CamError"
+//  INTERNALERROR_CBSCGWERROR = "InternalError.CbsCgwError"
+//  INTERNALERROR_CBSERROR = "InternalError.CbsError"
+//  INTERNALERROR_CDBCGWERROR = "InternalError.CdbCgwError"
+//  INTERNALERROR_CDBERROR = "InternalError.CdbError"
+//  INTERNALERROR_CHECKQUOTAERR = "InternalError.CheckQuotaErr"
+//  INTERNALERROR_CONFIGCGWERROR = "InternalError.ConfigCgwError"
+//  INTERNALERROR_CVMERROR = "InternalError.CvmError"
+//  INTERNALERROR_KMSERROR = "InternalError.KmsError"
+//  INTERNALERROR_PROJECTCGWERROR = "InternalError.ProjectCgwError"
+//  INTERNALERROR_SGERROR = "InternalError.SgError"
+//  INTERNALERROR_TAGERROR = "InternalError.TagError"
+//  INTERNALERROR_TRADECGWERROR = "InternalError.TradeCgwError"
+//  INTERNALERROR_VPCCGWERROR = "InternalError.VpcCgwError"
+//  INTERNALERROR_VPCERROR = "InternalError.VpcError"
+//  INTERNALERROR_WOODSERVERERROR = "InternalError.WoodServerError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDAPPID = "InvalidParameter.InvalidAppId"
+//  INVALIDPARAMETER_INVALIDCLASSIFICATION = "InvalidParameter.InvalidClassification"
+//  INVALIDPARAMETER_INVALIDCLUSTERID = "InvalidParameter.InvalidClusterId"
+//  INVALIDPARAMETER_INVALIDCONFIGTYPE = "InvalidParameter.InvalidConfigType"
+//  INVALIDPARAMETER_INVALIDCORECOUNT = "InvalidParameter.InvalidCoreCount"
+//  INVALIDPARAMETER_INVALIDCOSFILEURI = "InvalidParameter.InvalidCosFileURI"
+//  INVALIDPARAMETER_INVALIDCOUNT = "InvalidParameter.InvalidCount"
+//  INVALIDPARAMETER_INVALIDCOUNTNUM = "InvalidParameter.InvalidCountNum"
+//  INVALIDPARAMETER_INVALIDDOWNLOADOBJ = "InvalidParameter.InvalidDownloadObj"
+//  INVALIDPARAMETER_INVALIDEXPORTCONFCONTEXTS = "InvalidParameter.InvalidExportConfContexts"
+//  INVALIDPARAMETER_INVALIDEXTENDFIELD = "InvalidParameter.InvalidExtendField"
+//  INVALIDPARAMETER_INVALIDEXTENDNAMESERVICE = "InvalidParameter.InvalidExtendNameService"
+//  INVALIDPARAMETER_INVALIDFILEPATH = "InvalidParameter.InvalidFilePath"
+//  INVALIDPARAMETER_INVALIDIPLIST = "InvalidParameter.InvalidIpList"
+//  INVALIDPARAMETER_INVALIDJOBFLOW = "InvalidParameter.InvalidJobFlow"
+//  INVALIDPARAMETER_INVALIDMETATYPE = "InvalidParameter.InvalidMetaType"
+//  INVALIDPARAMETER_INVALIDMODIFYSPEC = "InvalidParameter.InvalidModifySpec"
+//  INVALIDPARAMETER_INVALIDNODETYPE = "InvalidParameter.InvalidNodeType"
+//  INVALIDPARAMETER_INVALIDPARAMTERINVALIDSOFTINFO = "InvalidParameter.InvalidParamterInvalidSoftInfo"
+//  INVALIDPARAMETER_INVALIDPASSWORD = "InvalidParameter.InvalidPassword"
+//  INVALIDPARAMETER_INVALIDPAYMODE = "InvalidParameter.InvalidPaymode"
+//  INVALIDPARAMETER_INVALIDPODNUM = "InvalidParameter.InvalidPodNum"
+//  INVALIDPARAMETER_INVALIDREGION = "InvalidParameter.InvalidRegion"
+//  INVALIDPARAMETER_INVALIDRESTYPE = "InvalidParameter.InvalidResType"
+//  INVALIDPARAMETER_INVALIDRESOURCEID = "InvalidParameter.InvalidResourceId"
+//  INVALIDPARAMETER_INVALIDROUTERCOUNT = "InvalidParameter.InvalidRouterCount"
+//  INVALIDPARAMETER_INVALIDSERVICENAME = "InvalidParameter.InvalidServiceName"
+//  INVALIDPARAMETER_INVALIDSOFTDEPLOYINFO = "InvalidParameter.InvalidSoftDeployInfo"
+//  INVALIDPARAMETER_INVALIDSOFTINFO = "InvalidParameter.InvalidSoftInfo"
+//  INVALIDPARAMETER_INVALIDSOFTWARENAME = "InvalidParameter.InvalidSoftWareName"
+//  INVALIDPARAMETER_INVALIDSOFTWAREVERSION = "InvalidParameter.InvalidSoftWareVersion"
+//  INVALIDPARAMETER_INVALIDTASKCOUNT = "InvalidParameter.InvalidTaskCount"
+//  INVALIDPARAMETER_INVALIDTIMESPAN = "InvalidParameter.InvalidTimeSpan"
+//  INVALIDPARAMETER_INVALIDTIMEUNIT = "InvalidParameter.InvalidTimeUnit"
+//  INVALIDPARAMETER_INVALIDUNIFYMETA = "InvalidParameter.InvalidUnifyMeta"
+//  INVALIDPARAMETER_INVALIDWRITEFILE = "InvalidParameter.InvalidWriteFile"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_PODCPULIMITEXCEEDEDAVAILABLECPU = "LimitExceeded.PodCpuLimitExceededAvailableCpu"
+//  LIMITEXCEEDED_PODCPULIMITEXCEEDEDNODEAVAILABLECPU = "LimitExceeded.PodCpuLimitExceededNodeAvailableCpu"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE_INSTANCEINPROCESS = "ResourceInUse.InstanceInProcess"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCENOTFOUND_METRICSMETANOTFOUND = "ResourceNotFound.MetricsMetaNotFound"
+//  RESOURCENOTFOUND_OPTIONALSPECFOUND = "ResourceNotFound.OptionalSpecFound"
+//  RESOURCENOTFOUND_SERVICECONFNOTFOUND = "ResourceNotFound.ServiceConfNotFound"
+//  RESOURCENOTFOUND_SERVICEGROUPNOTFOUND = "ResourceNotFound.ServiceGroupNotFound"
+//  RESOURCENOTFOUND_SERVICENODENOTFOUND = "ResourceNotFound.ServiceNodeNotFound"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION_CHECKCAMAUTH = "UnauthorizedOperation.CheckCamAuth"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) InstallSoftwareWithContext(ctx context.Context, request *InstallSoftwareRequest) (response *InstallSoftwareResponse, err error) {
+    if request == nil {
+        request = NewInstallSoftwareRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "emr", APIVersion, "InstallSoftware")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InstallSoftware require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInstallSoftwareResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAutoRenewFlagRequest() (request *ModifyAutoRenewFlagRequest) {
     request = &ModifyAutoRenewFlagRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4081,9 +4783,9 @@ func NewModifyAutoRenewFlagResponse() (response *ModifyAutoRenewFlagResponse) {
 }
 
 // ModifyAutoRenewFlag
-// This API is used to introduce the prerequisite prepaid clusters.
+// This API is used to introduce the prerequisites for a prepaid cluster.
 //
-// This API is used to enable or disable automatic renewal at the resource level.
+// This API is used to enable or disable auto-renewal at the resource level.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4094,9 +4796,9 @@ func (c *Client) ModifyAutoRenewFlag(request *ModifyAutoRenewFlagRequest) (respo
 }
 
 // ModifyAutoRenewFlag
-// This API is used to introduce the prerequisite prepaid clusters.
+// This API is used to introduce the prerequisites for a prepaid cluster.
 //
-// This API is used to enable or disable automatic renewal at the resource level.
+// This API is used to enable or disable auto-renewal at the resource level.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4139,7 +4841,7 @@ func NewModifyAutoScaleStrategyResponse() (response *ModifyAutoScaleStrategyResp
 }
 
 // ModifyAutoScaleStrategy
-// This API is used to modify automatic scaling rules.
+// This API is used to modify an automatic scaling rule.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4159,7 +4861,7 @@ func (c *Client) ModifyAutoScaleStrategy(request *ModifyAutoScaleStrategyRequest
 }
 
 // ModifyAutoScaleStrategy
-// This API is used to modify automatic scaling rules.
+// This API is used to modify an automatic scaling rule.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4191,6 +4893,124 @@ func (c *Client) ModifyAutoScaleStrategyWithContext(ctx context.Context, request
     return
 }
 
+func NewModifyBootScriptRequest() (request *ModifyBootScriptRequest) {
+    request = &ModifyBootScriptRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "ModifyBootScript")
+    
+    
+    return
+}
+
+func NewModifyBootScriptResponse() (response *ModifyBootScriptResponse) {
+    response = &ModifyBootScriptResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyBootScript
+// This API is used to modify a bootstrap script.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INTERNALERROR_CAMERROR = "InternalError.CamError"
+//  INTERNALERROR_CVMERROR = "InternalError.CvmError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_CHECKCAMAUTH = "UnauthorizedOperation.CheckCamAuth"
+func (c *Client) ModifyBootScript(request *ModifyBootScriptRequest) (response *ModifyBootScriptResponse, err error) {
+    return c.ModifyBootScriptWithContext(context.Background(), request)
+}
+
+// ModifyBootScript
+// This API is used to modify a bootstrap script.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  INTERNALERROR_CAMERROR = "InternalError.CamError"
+//  INTERNALERROR_CVMERROR = "InternalError.CvmError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_CHECKCAMAUTH = "UnauthorizedOperation.CheckCamAuth"
+func (c *Client) ModifyBootScriptWithContext(ctx context.Context, request *ModifyBootScriptRequest) (response *ModifyBootScriptResponse, err error) {
+    if request == nil {
+        request = NewModifyBootScriptRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "emr", APIVersion, "ModifyBootScript")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyBootScript require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyBootScriptResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDynamicInstanceRequest() (request *ModifyDynamicInstanceRequest) {
+    request = &ModifyDynamicInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "ModifyDynamicInstance")
+    
+    
+    return
+}
+
+func NewModifyDynamicInstanceResponse() (response *ModifyDynamicInstanceResponse) {
+    response = &ModifyDynamicInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDynamicInstance
+// This API is used to update a DynamicInstance in a containerized EMR on TKE cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDDYNAMICINSTANCETYPE = "InvalidParameter.InvalidDynamicInstanceType"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) ModifyDynamicInstance(request *ModifyDynamicInstanceRequest) (response *ModifyDynamicInstanceResponse, err error) {
+    return c.ModifyDynamicInstanceWithContext(context.Background(), request)
+}
+
+// ModifyDynamicInstance
+// This API is used to update a DynamicInstance in a containerized EMR on TKE cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDDYNAMICINSTANCETYPE = "InvalidParameter.InvalidDynamicInstanceType"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) ModifyDynamicInstanceWithContext(ctx context.Context, request *ModifyDynamicInstanceRequest) (response *ModifyDynamicInstanceResponse, err error) {
+    if request == nil {
+        request = NewModifyDynamicInstanceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "emr", APIVersion, "ModifyDynamicInstance")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDynamicInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDynamicInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyGlobalConfigRequest() (request *ModifyGlobalConfigRequest) {
     request = &ModifyGlobalConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4211,7 +5031,7 @@ func NewModifyGlobalConfigResponse() (response *ModifyGlobalConfigResponse) {
 }
 
 // ModifyGlobalConfig
-// This API is used to modify the global configuration of YARN Resource Scheduling.
+// This API is used to modify the global configuration of YARN resource scheduling.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -4225,7 +5045,7 @@ func (c *Client) ModifyGlobalConfig(request *ModifyGlobalConfigRequest) (respons
 }
 
 // ModifyGlobalConfig
-// This API is used to modify the global configuration of YARN Resource Scheduling.
+// This API is used to modify the global configuration of YARN resource scheduling.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -4271,7 +5091,7 @@ func NewModifyInspectionSettingsResponse() (response *ModifyInspectionSettingsRe
 }
 
 // ModifyInspectionSettings
-// This API is used to set inspection task configurations.
+// This API is used to set the inspection task configuration.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4280,7 +5100,7 @@ func (c *Client) ModifyInspectionSettings(request *ModifyInspectionSettingsReque
 }
 
 // ModifyInspectionSettings
-// This API is used to set inspection task configurations.
+// This API is used to set the inspection task configuration.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4321,7 +5141,7 @@ func NewModifyInstanceBasicResponse() (response *ModifyInstanceBasicResponse) {
 }
 
 // ModifyInstanceBasic
-// This API is used to modify a cluster name.
+// This API is used to modify the cluster name.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -4335,7 +5155,7 @@ func (c *Client) ModifyInstanceBasic(request *ModifyInstanceBasicRequest) (respo
 }
 
 // ModifyInstanceBasic
-// This API is used to modify a cluster name.
+// This API is used to modify the cluster name.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -4381,7 +5201,7 @@ func NewModifyResourceResponse() (response *ModifyResourceResponse) {
 }
 
 // ModifyResource
-// This API is used to resize an instance.
+// This API is used to change the instance configuration.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DUPLICATEORDERNOTALLOWED = "FailedOperation.DuplicateOrderNotAllowed"
@@ -4416,7 +5236,7 @@ func (c *Client) ModifyResource(request *ModifyResourceRequest) (response *Modif
 }
 
 // ModifyResource
-// This API is used to resize an instance.
+// This API is used to change the instance configuration.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DUPLICATEORDERNOTALLOWED = "FailedOperation.DuplicateOrderNotAllowed"
@@ -4553,7 +5373,7 @@ func NewModifyResourceSchedulerResponse() (response *ModifyResourceSchedulerResp
 }
 
 // ModifyResourceScheduler
-// This API is used to modify a YARN resource scheduler. After the modification, you can click Deploy to bring it into effect.
+// This API is used to modify a YARN resource scheduler. After the modification, click Deploy to make the modification take effect.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -4565,7 +5385,7 @@ func (c *Client) ModifyResourceScheduler(request *ModifyResourceSchedulerRequest
 }
 
 // ModifyResourceScheduler
-// This API is used to modify a YARN resource scheduler. After the modification, you can click Deploy to bring it into effect.
+// This API is used to modify a YARN resource scheduler. After the modification, click Deploy to make the modification take effect.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -4609,7 +5429,7 @@ func NewModifyResourcesTagsResponse() (response *ModifyResourcesTagsResponse) {
 }
 
 // ModifyResourcesTags
-// This API is used to forcibly modify tags.
+// This API is used to forcibly modify a tag.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -4621,7 +5441,7 @@ func (c *Client) ModifyResourcesTags(request *ModifyResourcesTagsRequest) (respo
 }
 
 // ModifyResourcesTags
-// This API is used to forcibly modify tags.
+// This API is used to forcibly modify a tag.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -4665,7 +5485,11 @@ func NewModifySLInstanceResponse() (response *ModifySLInstanceResponse) {
 }
 
 // ModifySLInstance
-// This API is used to resize a Serverless HBase instance.- If the API call is successful, a Serverless HBase instance will be created. If the instance creation request is successful, the RequestID of the request will be returned.- This is an asynchronous API. The operation is not completed immediately when the API call returns. The instance operation result can be viewed by calling DescribeInstancesList to view the StatusDesc status of the current instance.
+// This API is used to change the configuration of a Serverless HBase instance.
+//
+// - This API is successfully called, and a Serverless HBase instance is created. If the instance creation request succeeds, RequestID of the request is returned.
+//
+// - This is an asynchronous API. The operation is not completed immediately when the API call returns. The instance operation result can be viewed by calling the DescribeInstancesList API, and the StatusDesc field for the current instance can be returned.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4689,7 +5513,11 @@ func (c *Client) ModifySLInstance(request *ModifySLInstanceRequest) (response *M
 }
 
 // ModifySLInstance
-// This API is used to resize a Serverless HBase instance.- If the API call is successful, a Serverless HBase instance will be created. If the instance creation request is successful, the RequestID of the request will be returned.- This is an asynchronous API. The operation is not completed immediately when the API call returns. The instance operation result can be viewed by calling DescribeInstancesList to view the StatusDesc status of the current instance.
+// This API is used to change the configuration of a Serverless HBase instance.
+//
+// - This API is successfully called, and a Serverless HBase instance is created. If the instance creation request succeeds, RequestID of the request is returned.
+//
+// - This is an asynchronous API. The operation is not completed immediately when the API call returns. The instance operation result can be viewed by calling the DescribeInstancesList API, and the StatusDesc field for the current instance can be returned.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4745,7 +5573,7 @@ func NewModifySLInstanceBasicResponse() (response *ModifySLInstanceBasicResponse
 }
 
 // ModifySLInstanceBasic
-// This API is used to modify the Serverless HBase instance name.
+// This API is used to modify the Serverless HBase instance name.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -4759,7 +5587,7 @@ func (c *Client) ModifySLInstanceBasic(request *ModifySLInstanceBasicRequest) (r
 }
 
 // ModifySLInstanceBasic
-// This API is used to modify the Serverless HBase instance name.
+// This API is used to modify the Serverless HBase instance name.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -4785,6 +5613,66 @@ func (c *Client) ModifySLInstanceBasicWithContext(ctx context.Context, request *
     return
 }
 
+func NewModifyServiceParamsByExportConfsRequest() (request *ModifyServiceParamsByExportConfsRequest) {
+    request = &ModifyServiceParamsByExportConfsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "ModifyServiceParamsByExportConfs")
+    
+    
+    return
+}
+
+func NewModifyServiceParamsByExportConfsResponse() (response *ModifyServiceParamsByExportConfsResponse) {
+    response = &ModifyServiceParamsByExportConfsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyServiceParamsByExportConfs
+// Configuration import and delivery
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_CHECKCAMAUTH = "UnauthorizedOperation.CheckCamAuth"
+func (c *Client) ModifyServiceParamsByExportConfs(request *ModifyServiceParamsByExportConfsRequest) (response *ModifyServiceParamsByExportConfsResponse, err error) {
+    return c.ModifyServiceParamsByExportConfsWithContext(context.Background(), request)
+}
+
+// ModifyServiceParamsByExportConfs
+// Configuration import and delivery
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_CHECKCAMAUTH = "UnauthorizedOperation.CheckCamAuth"
+func (c *Client) ModifyServiceParamsByExportConfsWithContext(ctx context.Context, request *ModifyServiceParamsByExportConfsRequest) (response *ModifyServiceParamsByExportConfsResponse, err error) {
+    if request == nil {
+        request = NewModifyServiceParamsByExportConfsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "emr", APIVersion, "ModifyServiceParamsByExportConfs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyServiceParamsByExportConfs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyServiceParamsByExportConfsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyUserGroupRequest() (request *ModifyUserGroupRequest) {
     request = &ModifyUserGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4805,7 +5693,7 @@ func NewModifyUserGroupResponse() (response *ModifyUserGroupResponse) {
 }
 
 // ModifyUserGroup
-// This API is used to modify user groups under User Management.
+// This API is used to modify a user group in user management.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4819,7 +5707,7 @@ func (c *Client) ModifyUserGroup(request *ModifyUserGroupRequest) (response *Mod
 }
 
 // ModifyUserGroup
-// This API is used to modify user groups under User Management.
+// This API is used to modify a user group in user management.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4865,7 +5753,7 @@ func NewModifyUserManagerPwdResponse() (response *ModifyUserManagerPwdResponse) 
 }
 
 // ModifyUserManagerPwd
-// This API is used to change user password (user management).
+// This API is used to modify a user password (user management).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -4878,7 +5766,7 @@ func (c *Client) ModifyUserManagerPwd(request *ModifyUserManagerPwdRequest) (res
 }
 
 // ModifyUserManagerPwd
-// This API is used to change user password (user management).
+// This API is used to modify a user password (user management).
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -4923,7 +5811,7 @@ func NewModifyUsersOfGroupSTDResponse() (response *ModifyUsersOfGroupSTDResponse
 }
 
 // ModifyUsersOfGroupSTD
-// This API is used to change the user information of user groups.
+// This API is used to change user information in a user group.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -4936,7 +5824,7 @@ func (c *Client) ModifyUsersOfGroupSTD(request *ModifyUsersOfGroupSTDRequest) (r
 }
 
 // ModifyUsersOfGroupSTD
-// This API is used to change the user information of user groups.
+// This API is used to change user information in a user group.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -5163,7 +6051,7 @@ func NewResizeDataDisksResponse() (response *ResizeDataDisksResponse) {
 }
 
 // ResizeDataDisks
-// This API is used to scale out the cloud data disk.
+// This API is used to scale out cloud data disks.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_INVALIDDISKSIZE = "InvalidParameter.InvalidDiskSize"
@@ -5174,7 +6062,7 @@ func (c *Client) ResizeDataDisks(request *ResizeDataDisksRequest) (response *Res
 }
 
 // ResizeDataDisks
-// This API is used to scale out the cloud data disk.
+// This API is used to scale out cloud data disks.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_INVALIDDISKSIZE = "InvalidParameter.InvalidDiskSize"
@@ -5217,7 +6105,7 @@ func NewScaleOutClusterResponse() (response *ScaleOutClusterResponse) {
 }
 
 // ScaleOutCluster
-// This API is used to scale out a cluster.
+// This API is used to scale out cluster nodes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5236,7 +6124,7 @@ func (c *Client) ScaleOutCluster(request *ScaleOutClusterRequest) (response *Sca
 }
 
 // ScaleOutCluster
-// This API is used to scale out a cluster.
+// This API is used to scale out cluster nodes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5287,7 +6175,7 @@ func NewScaleOutInstanceResponse() (response *ScaleOutInstanceResponse) {
 }
 
 // ScaleOutInstance
-// This API is used to scale out instances.
+// This API is used to scale out nodes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5355,7 +6243,7 @@ func (c *Client) ScaleOutInstance(request *ScaleOutInstanceRequest) (response *S
 }
 
 // ScaleOutInstance
-// This API is used to scale out instances.
+// This API is used to scale out nodes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5455,7 +6343,7 @@ func NewSetNodeResourceConfigDefaultResponse() (response *SetNodeResourceConfigD
 }
 
 // SetNodeResourceConfigDefault
-// This API is used to set specifications for a node in the current cluster to default or not.
+// This API is used to set specifications of a node in the current cluster as the default or cancel the default setting.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -5468,7 +6356,7 @@ func (c *Client) SetNodeResourceConfigDefault(request *SetNodeResourceConfigDefa
 }
 
 // SetNodeResourceConfigDefault
-// This API is used to set specifications for a node in the current cluster to default or not.
+// This API is used to set specifications of a node in the current cluster as the default or cancel the default setting.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -5513,7 +6401,7 @@ func NewStartStopServiceOrMonitorResponse() (response *StartStopServiceOrMonitor
 }
 
 // StartStopServiceOrMonitor
-// This API is used to start, stop, or restart services.
+// This API is used to execute operations such as starting, stopping, and restarting a service.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5530,7 +6418,7 @@ func (c *Client) StartStopServiceOrMonitor(request *StartStopServiceOrMonitorReq
 }
 
 // StartStopServiceOrMonitor
-// This API is used to start, stop, or restart services.
+// This API is used to execute operations such as starting, stopping, and restarting a service.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5579,7 +6467,7 @@ func NewTerminateClusterNodesResponse() (response *TerminateClusterNodesResponse
 }
 
 // TerminateClusterNodes
-// This API is used to terminate cluster nodes.
+// This API is used to terminate a cluster node.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_INVALIDNODEFLAG = "InvalidParameter.InvalidNodeFlag"
@@ -5592,7 +6480,7 @@ func (c *Client) TerminateClusterNodes(request *TerminateClusterNodesRequest) (r
 }
 
 // TerminateClusterNodes
-// This API is used to terminate cluster nodes.
+// This API is used to terminate a cluster node.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_INVALIDNODEFLAG = "InvalidParameter.InvalidNodeFlag"
@@ -5617,6 +6505,60 @@ func (c *Client) TerminateClusterNodesWithContext(ctx context.Context, request *
     return
 }
 
+func NewTerminateDynamicInstancesRequest() (request *TerminateDynamicInstancesRequest) {
+    request = &TerminateDynamicInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("emr", APIVersion, "TerminateDynamicInstances")
+    
+    
+    return
+}
+
+func NewTerminateDynamicInstancesResponse() (response *TerminateDynamicInstancesResponse) {
+    response = &TerminateDynamicInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// TerminateDynamicInstances
+// This API is used to terminate a DynamicInstance in a containerized EMR on TKE cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDDYNAMICINSTANCETYPE = "InvalidParameter.InvalidDynamicInstanceType"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) TerminateDynamicInstances(request *TerminateDynamicInstancesRequest) (response *TerminateDynamicInstancesResponse, err error) {
+    return c.TerminateDynamicInstancesWithContext(context.Background(), request)
+}
+
+// TerminateDynamicInstances
+// This API is used to terminate a DynamicInstance in a containerized EMR on TKE cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER_INVALIDDYNAMICINSTANCETYPE = "InvalidParameter.InvalidDynamicInstanceType"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) TerminateDynamicInstancesWithContext(ctx context.Context, request *TerminateDynamicInstancesRequest) (response *TerminateDynamicInstancesResponse, err error) {
+    if request == nil {
+        request = NewTerminateDynamicInstancesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "emr", APIVersion, "TerminateDynamicInstances")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TerminateDynamicInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewTerminateDynamicInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewTerminateInstanceRequest() (request *TerminateInstanceRequest) {
     request = &TerminateInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5637,10 +6579,11 @@ func NewTerminateInstanceResponse() (response *TerminateInstanceResponse) {
 }
 
 // TerminateInstance
-// This API is used to terminate EMR instances. It is only supported in the official paid edition of EMR.
+// This API is used to terminate an EMR instance. It is supported only for the officially billed version of EMR.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NAMESPACEHASUSERCUSTOMPODS = "FailedOperation.NamespaceHasUserCustomPods"
 //  FAILEDOPERATION_REFUNDCVMFAILED = "FailedOperation.RefundCvmFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
@@ -5659,10 +6602,11 @@ func (c *Client) TerminateInstance(request *TerminateInstanceRequest) (response 
 }
 
 // TerminateInstance
-// This API is used to terminate EMR instances. It is only supported in the official paid edition of EMR.
+// This API is used to terminate an EMR instance. It is supported only for the officially billed version of EMR.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NAMESPACEHASUSERCUSTOMPODS = "FailedOperation.NamespaceHasUserCustomPods"
 //  FAILEDOPERATION_REFUNDCVMFAILED = "FailedOperation.RefundCvmFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMCGWERROR = "InternalError.CamCgwError"
@@ -5713,7 +6657,7 @@ func NewTerminateSLInstanceResponse() (response *TerminateSLInstanceResponse) {
 }
 
 // TerminateSLInstance
-// This API is used to terminate a Serverless HBase instance.
+// This API is used to terminate a Serverless HBase instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5736,7 +6680,7 @@ func (c *Client) TerminateSLInstance(request *TerminateSLInstanceRequest) (respo
 }
 
 // TerminateSLInstance
-// This API is used to terminate a Serverless HBase instance.
+// This API is used to terminate a Serverless HBase instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5791,7 +6735,7 @@ func NewTerminateTasksResponse() (response *TerminateTasksResponse) {
 }
 
 // TerminateTasks
-// This API is used to terminate a task node.
+// This API is used to scale in Task nodes.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -5828,7 +6772,7 @@ func (c *Client) TerminateTasks(request *TerminateTasksRequest) (response *Termi
 }
 
 // TerminateTasks
-// This API is used to terminate a task node.
+// This API is used to scale in Task nodes.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

@@ -109,6 +109,68 @@ func (c *Client) AddLoginWhiteListsWithContext(ctx context.Context, request *Add
     return
 }
 
+func NewAddVulIgnoreRuleRequest() (request *AddVulIgnoreRuleRequest) {
+    request = &AddVulIgnoreRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "AddVulIgnoreRule")
+    
+    
+    return
+}
+
+func NewAddVulIgnoreRuleResponse() (response *AddVulIgnoreRuleResponse) {
+    response = &AddVulIgnoreRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddVulIgnoreRule
+// This API is used to add vulnerability ignore rules.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) AddVulIgnoreRule(request *AddVulIgnoreRuleRequest) (response *AddVulIgnoreRuleResponse, err error) {
+    return c.AddVulIgnoreRuleWithContext(context.Background(), request)
+}
+
+// AddVulIgnoreRule
+// This API is used to add vulnerability ignore rules.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) AddVulIgnoreRuleWithContext(ctx context.Context, request *AddVulIgnoreRuleRequest) (response *AddVulIgnoreRuleResponse, err error) {
+    if request == nil {
+        request = NewAddVulIgnoreRuleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "AddVulIgnoreRule")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddVulIgnoreRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddVulIgnoreRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewChangeRuleEventsIgnoreStatusRequest() (request *ChangeRuleEventsIgnoreStatusRequest) {
     request = &ChangeRuleEventsIgnoreStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1179,6 +1241,66 @@ func (c *Client) CreateNetAttackWhiteListWithContext(ctx context.Context, reques
     return
 }
 
+func NewCreateProtectServerRequest() (request *CreateProtectServerRequest) {
+    request = &CreateProtectServerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "CreateProtectServer")
+    
+    
+    return
+}
+
+func NewCreateProtectServerResponse() (response *CreateProtectServerResponse) {
+    response = &CreateProtectServerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateProtectServer
+// Adding a Website Protection Server
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CreateProtectServer(request *CreateProtectServerRequest) (response *CreateProtectServerResponse, err error) {
+    return c.CreateProtectServerWithContext(context.Background(), request)
+}
+
+// CreateProtectServer
+// Adding a Website Protection Server
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CreateProtectServerWithContext(ctx context.Context, request *CreateProtectServerRequest) (response *CreateProtectServerResponse, err error) {
+    if request == nil {
+        request = NewCreateProtectServerRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "CreateProtectServer")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateProtectServer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateProtectServerResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateRansomDefenseStrategyRequest() (request *CreateRansomDefenseStrategyRequest) {
     request = &CreateRansomDefenseStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1733,6 +1855,110 @@ func (c *Client) DeleteBaselinePolicyWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDeleteBaselineRuleRequest() (request *DeleteBaselineRuleRequest) {
+    request = &DeleteBaselineRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DeleteBaselineRule")
+    
+    
+    return
+}
+
+func NewDeleteBaselineRuleResponse() (response *DeleteBaselineRuleResponse) {
+    response = &DeleteBaselineRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteBaselineRule
+// Delete a baseline rule
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+func (c *Client) DeleteBaselineRule(request *DeleteBaselineRuleRequest) (response *DeleteBaselineRuleResponse, err error) {
+    return c.DeleteBaselineRuleWithContext(context.Background(), request)
+}
+
+// DeleteBaselineRule
+// Delete a baseline rule
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+func (c *Client) DeleteBaselineRuleWithContext(ctx context.Context, request *DeleteBaselineRuleRequest) (response *DeleteBaselineRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteBaselineRuleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DeleteBaselineRule")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteBaselineRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteBaselineRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteBaselineRuleIgnoreRequest() (request *DeleteBaselineRuleIgnoreRequest) {
+    request = &DeleteBaselineRuleIgnoreRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DeleteBaselineRuleIgnore")
+    
+    
+    return
+}
+
+func NewDeleteBaselineRuleIgnoreResponse() (response *DeleteBaselineRuleIgnoreResponse) {
+    response = &DeleteBaselineRuleIgnoreResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteBaselineRuleIgnore
+// Delete baseline ignore rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteBaselineRuleIgnore(request *DeleteBaselineRuleIgnoreRequest) (response *DeleteBaselineRuleIgnoreResponse, err error) {
+    return c.DeleteBaselineRuleIgnoreWithContext(context.Background(), request)
+}
+
+// DeleteBaselineRuleIgnore
+// Delete baseline ignore rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteBaselineRuleIgnoreWithContext(ctx context.Context, request *DeleteBaselineRuleIgnoreRequest) (response *DeleteBaselineRuleIgnoreResponse, err error) {
+    if request == nil {
+        request = NewDeleteBaselineRuleIgnoreRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DeleteBaselineRuleIgnore")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteBaselineRuleIgnore require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteBaselineRuleIgnoreResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteBaselineStrategyRequest() (request *DeleteBaselineStrategyRequest) {
     request = &DeleteBaselineStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1791,6 +2017,58 @@ func (c *Client) DeleteBaselineStrategyWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDeleteBaselineStrategyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteBaselineWeakPasswordRequest() (request *DeleteBaselineWeakPasswordRequest) {
+    request = &DeleteBaselineWeakPasswordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DeleteBaselineWeakPassword")
+    
+    
+    return
+}
+
+func NewDeleteBaselineWeakPasswordResponse() (response *DeleteBaselineWeakPasswordResponse) {
+    response = &DeleteBaselineWeakPasswordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteBaselineWeakPassword
+// Delete baseline weak passwords
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteBaselineWeakPassword(request *DeleteBaselineWeakPasswordRequest) (response *DeleteBaselineWeakPasswordResponse, err error) {
+    return c.DeleteBaselineWeakPasswordWithContext(context.Background(), request)
+}
+
+// DeleteBaselineWeakPassword
+// Delete baseline weak passwords
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteBaselineWeakPasswordWithContext(ctx context.Context, request *DeleteBaselineWeakPasswordRequest) (response *DeleteBaselineWeakPasswordResponse, err error) {
+    if request == nil {
+        request = NewDeleteBaselineWeakPasswordRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DeleteBaselineWeakPassword")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteBaselineWeakPassword require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteBaselineWeakPasswordResponse()
     err = c.Send(request, response)
     return
 }
@@ -3089,6 +3367,74 @@ func (c *Client) DeletePrivilegeRulesWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDeleteProtectDirRequest() (request *DeleteProtectDirRequest) {
+    request = &DeleteProtectDirRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DeleteProtectDir")
+    
+    
+    return
+}
+
+func NewDeleteProtectDirResponse() (response *DeleteProtectDirResponse) {
+    response = &DeleteProtectDirResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteProtectDir
+// Delete a website protection
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DeleteProtectDir(request *DeleteProtectDirRequest) (response *DeleteProtectDirResponse, err error) {
+    return c.DeleteProtectDirWithContext(context.Background(), request)
+}
+
+// DeleteProtectDir
+// Delete a website protection
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DeleteProtectDirWithContext(ctx context.Context, request *DeleteProtectDirRequest) (response *DeleteProtectDirResponse, err error) {
+    if request == nil {
+        request = NewDeleteProtectDirRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DeleteProtectDir")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteProtectDir require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteProtectDirResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteRaspRulesRequest() (request *DeleteRaspRulesRequest) {
     request = &DeleteRaspRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3755,6 +4101,66 @@ func (c *Client) DeleteWebHookRuleWithContext(ctx context.Context, request *Dele
     request.SetContext(ctx)
     
     response = NewDeleteWebHookRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteWebPageEventLogRequest() (request *DeleteWebPageEventLogRequest) {
+    request = &DeleteWebPageEventLogRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DeleteWebPageEventLog")
+    
+    
+    return
+}
+
+func NewDeleteWebPageEventLogResponse() (response *DeleteWebPageEventLogResponse) {
+    response = &DeleteWebPageEventLogResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteWebPageEventLog
+// Delete website tamper-proof event records
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DeleteWebPageEventLog(request *DeleteWebPageEventLogRequest) (response *DeleteWebPageEventLogResponse, err error) {
+    return c.DeleteWebPageEventLogWithContext(context.Background(), request)
+}
+
+// DeleteWebPageEventLog
+// Delete website tamper-proof event records
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DeleteWebPageEventLogWithContext(ctx context.Context, request *DeleteWebPageEventLogRequest) (response *DeleteWebPageEventLogResponse, err error) {
+    if request == nil {
+        request = NewDeleteWebPageEventLogRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DeleteWebPageEventLog")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteWebPageEventLog require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteWebPageEventLogResponse()
     err = c.Send(request, response)
     return
 }
@@ -7417,6 +7823,68 @@ func (c *Client) DescribeBanWhiteListWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeBaselineAnalysisDataRequest() (request *DescribeBaselineAnalysisDataRequest) {
+    request = &DescribeBaselineAnalysisDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeBaselineAnalysisData")
+    
+    
+    return
+}
+
+func NewDescribeBaselineAnalysisDataResponse() (response *DescribeBaselineAnalysisDataResponse) {
+    response = &DescribeBaselineAnalysisDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBaselineAnalysisData
+// This example shows you how to query the baseline policy overview statistics based on baseline policy IDs.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeBaselineAnalysisData(request *DescribeBaselineAnalysisDataRequest) (response *DescribeBaselineAnalysisDataResponse, err error) {
+    return c.DescribeBaselineAnalysisDataWithContext(context.Background(), request)
+}
+
+// DescribeBaselineAnalysisData
+// This example shows you how to query the baseline policy overview statistics based on baseline policy IDs.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeBaselineAnalysisDataWithContext(ctx context.Context, request *DescribeBaselineAnalysisDataRequest) (response *DescribeBaselineAnalysisDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaselineAnalysisDataRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeBaselineAnalysisData")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaselineAnalysisData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaselineAnalysisDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBaselineBasicInfoRequest() (request *DescribeBaselineBasicInfoRequest) {
     request = &DescribeBaselineBasicInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7587,6 +8055,166 @@ func (c *Client) DescribeBaselineDetailWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeBaselineDetectListRequest() (request *DescribeBaselineDetectListRequest) {
+    request = &DescribeBaselineDetectListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeBaselineDetectList")
+    
+    
+    return
+}
+
+func NewDescribeBaselineDetectListResponse() (response *DescribeBaselineDetectListResponse) {
+    response = &DescribeBaselineDetectListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBaselineDetectList
+// Retrieve baseline detection detail records
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineDetectList(request *DescribeBaselineDetectListRequest) (response *DescribeBaselineDetectListResponse, err error) {
+    return c.DescribeBaselineDetectListWithContext(context.Background(), request)
+}
+
+// DescribeBaselineDetectList
+// Retrieve baseline detection detail records
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineDetectListWithContext(ctx context.Context, request *DescribeBaselineDetectListRequest) (response *DescribeBaselineDetectListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaselineDetectListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeBaselineDetectList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaselineDetectList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaselineDetectListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBaselineDetectOverviewRequest() (request *DescribeBaselineDetectOverviewRequest) {
+    request = &DescribeBaselineDetectOverviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeBaselineDetectOverview")
+    
+    
+    return
+}
+
+func NewDescribeBaselineDetectOverviewResponse() (response *DescribeBaselineDetectOverviewResponse) {
+    response = &DescribeBaselineDetectOverviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBaselineDetectOverview
+// Obtain baseline detection overview
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineDetectOverview(request *DescribeBaselineDetectOverviewRequest) (response *DescribeBaselineDetectOverviewResponse, err error) {
+    return c.DescribeBaselineDetectOverviewWithContext(context.Background(), request)
+}
+
+// DescribeBaselineDetectOverview
+// Obtain baseline detection overview
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineDetectOverviewWithContext(ctx context.Context, request *DescribeBaselineDetectOverviewRequest) (response *DescribeBaselineDetectOverviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaselineDetectOverviewRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeBaselineDetectOverview")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaselineDetectOverview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaselineDetectOverviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBaselineDownloadListRequest() (request *DescribeBaselineDownloadListRequest) {
+    request = &DescribeBaselineDownloadListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeBaselineDownloadList")
+    
+    
+    return
+}
+
+func NewDescribeBaselineDownloadListResponse() (response *DescribeBaselineDownloadListResponse) {
+    response = &DescribeBaselineDownloadListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBaselineDownloadList
+// This API is used to obtain the baseline download list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineDownloadList(request *DescribeBaselineDownloadListRequest) (response *DescribeBaselineDownloadListResponse, err error) {
+    return c.DescribeBaselineDownloadListWithContext(context.Background(), request)
+}
+
+// DescribeBaselineDownloadList
+// This API is used to obtain the baseline download list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineDownloadListWithContext(ctx context.Context, request *DescribeBaselineDownloadListRequest) (response *DescribeBaselineDownloadListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaselineDownloadListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeBaselineDownloadList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaselineDownloadList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaselineDownloadListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBaselineEffectHostListRequest() (request *DescribeBaselineEffectHostListRequest) {
     request = &DescribeBaselineEffectHostListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7649,6 +8277,58 @@ func (c *Client) DescribeBaselineEffectHostListWithContext(ctx context.Context, 
     return
 }
 
+func NewDescribeBaselineFixListRequest() (request *DescribeBaselineFixListRequest) {
+    request = &DescribeBaselineFixListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeBaselineFixList")
+    
+    
+    return
+}
+
+func NewDescribeBaselineFixListResponse() (response *DescribeBaselineFixListResponse) {
+    response = &DescribeBaselineFixListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBaselineFixList
+// Query the baseline fix list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineFixList(request *DescribeBaselineFixListRequest) (response *DescribeBaselineFixListResponse, err error) {
+    return c.DescribeBaselineFixListWithContext(context.Background(), request)
+}
+
+// DescribeBaselineFixList
+// Query the baseline fix list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineFixListWithContext(ctx context.Context, request *DescribeBaselineFixListRequest) (response *DescribeBaselineFixListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaselineFixListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeBaselineFixList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaselineFixList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaselineFixListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBaselineHostDetectListRequest() (request *DescribeBaselineHostDetectListRequest) {
     request = &DescribeBaselineHostDetectListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7699,6 +8379,114 @@ func (c *Client) DescribeBaselineHostDetectListWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewDescribeBaselineHostDetectListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBaselineHostIgnoreListRequest() (request *DescribeBaselineHostIgnoreListRequest) {
+    request = &DescribeBaselineHostIgnoreListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeBaselineHostIgnoreList")
+    
+    
+    return
+}
+
+func NewDescribeBaselineHostIgnoreListResponse() (response *DescribeBaselineHostIgnoreListResponse) {
+    response = &DescribeBaselineHostIgnoreListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBaselineHostIgnoreList
+// Retrieve the host list of ignore rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineHostIgnoreList(request *DescribeBaselineHostIgnoreListRequest) (response *DescribeBaselineHostIgnoreListResponse, err error) {
+    return c.DescribeBaselineHostIgnoreListWithContext(context.Background(), request)
+}
+
+// DescribeBaselineHostIgnoreList
+// Retrieve the host list of ignore rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineHostIgnoreListWithContext(ctx context.Context, request *DescribeBaselineHostIgnoreListRequest) (response *DescribeBaselineHostIgnoreListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaselineHostIgnoreListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeBaselineHostIgnoreList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaselineHostIgnoreList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaselineHostIgnoreListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBaselineHostRiskTopRequest() (request *DescribeBaselineHostRiskTopRequest) {
+    request = &DescribeBaselineHostRiskTopRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeBaselineHostRiskTop")
+    
+    
+    return
+}
+
+func NewDescribeBaselineHostRiskTopResponse() (response *DescribeBaselineHostRiskTopResponse) {
+    response = &DescribeBaselineHostRiskTopResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBaselineHostRiskTop
+// This API is used to obtain the TOP 5 server risks in the baseline.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineHostRiskTop(request *DescribeBaselineHostRiskTopRequest) (response *DescribeBaselineHostRiskTopResponse, err error) {
+    return c.DescribeBaselineHostRiskTopWithContext(context.Background(), request)
+}
+
+// DescribeBaselineHostRiskTop
+// This API is used to obtain the TOP 5 server risks in the baseline.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineHostRiskTopWithContext(ctx context.Context, request *DescribeBaselineHostRiskTopRequest) (response *DescribeBaselineHostRiskTopResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaselineHostRiskTopRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeBaselineHostRiskTop")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaselineHostRiskTop require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaselineHostRiskTopResponse()
     err = c.Send(request, response)
     return
 }
@@ -7819,6 +8607,112 @@ func (c *Client) DescribeBaselineItemDetectListWithContext(ctx context.Context, 
     return
 }
 
+func NewDescribeBaselineItemIgnoreListRequest() (request *DescribeBaselineItemIgnoreListRequest) {
+    request = &DescribeBaselineItemIgnoreListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeBaselineItemIgnoreList")
+    
+    
+    return
+}
+
+func NewDescribeBaselineItemIgnoreListResponse() (response *DescribeBaselineItemIgnoreListResponse) {
+    response = &DescribeBaselineItemIgnoreListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBaselineItemIgnoreList
+// This API is used to search the ignorable rule item list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineItemIgnoreList(request *DescribeBaselineItemIgnoreListRequest) (response *DescribeBaselineItemIgnoreListResponse, err error) {
+    return c.DescribeBaselineItemIgnoreListWithContext(context.Background(), request)
+}
+
+// DescribeBaselineItemIgnoreList
+// This API is used to search the ignorable rule item list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineItemIgnoreListWithContext(ctx context.Context, request *DescribeBaselineItemIgnoreListRequest) (response *DescribeBaselineItemIgnoreListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaselineItemIgnoreListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeBaselineItemIgnoreList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaselineItemIgnoreList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaselineItemIgnoreListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBaselineItemInfoRequest() (request *DescribeBaselineItemInfoRequest) {
+    request = &DescribeBaselineItemInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeBaselineItemInfo")
+    
+    
+    return
+}
+
+func NewDescribeBaselineItemInfoResponse() (response *DescribeBaselineItemInfoResponse) {
+    response = &DescribeBaselineItemInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBaselineItemInfo
+// Obtain Baseline Detection Item Information
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineItemInfo(request *DescribeBaselineItemInfoRequest) (response *DescribeBaselineItemInfoResponse, err error) {
+    return c.DescribeBaselineItemInfoWithContext(context.Background(), request)
+}
+
+// DescribeBaselineItemInfo
+// Obtain Baseline Detection Item Information
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineItemInfoWithContext(ctx context.Context, request *DescribeBaselineItemInfoRequest) (response *DescribeBaselineItemInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaselineItemInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeBaselineItemInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaselineItemInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaselineItemInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBaselineItemListRequest() (request *DescribeBaselineItemListRequest) {
     request = &DescribeBaselineItemListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7869,6 +8763,60 @@ func (c *Client) DescribeBaselineItemListWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribeBaselineItemListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBaselineItemRiskTopRequest() (request *DescribeBaselineItemRiskTopRequest) {
+    request = &DescribeBaselineItemRiskTopRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeBaselineItemRiskTop")
+    
+    
+    return
+}
+
+func NewDescribeBaselineItemRiskTopResponse() (response *DescribeBaselineItemRiskTopResponse) {
+    response = &DescribeBaselineItemRiskTopResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBaselineItemRiskTop
+// Query the TOP 5 baseline detection items.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineItemRiskTop(request *DescribeBaselineItemRiskTopRequest) (response *DescribeBaselineItemRiskTopResponse, err error) {
+    return c.DescribeBaselineItemRiskTopWithContext(context.Background(), request)
+}
+
+// DescribeBaselineItemRiskTop
+// Query the TOP 5 baseline detection items.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineItemRiskTopWithContext(ctx context.Context, request *DescribeBaselineItemRiskTopRequest) (response *DescribeBaselineItemRiskTopResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaselineItemRiskTopRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeBaselineItemRiskTop")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaselineItemRiskTop require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaselineItemRiskTopResponse()
     err = c.Send(request, response)
     return
 }
@@ -8045,6 +8993,216 @@ func (c *Client) DescribeBaselineRuleWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDescribeBaselineRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBaselineRuleCategoryListRequest() (request *DescribeBaselineRuleCategoryListRequest) {
+    request = &DescribeBaselineRuleCategoryListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeBaselineRuleCategoryList")
+    
+    
+    return
+}
+
+func NewDescribeBaselineRuleCategoryListResponse() (response *DescribeBaselineRuleCategoryListResponse) {
+    response = &DescribeBaselineRuleCategoryListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBaselineRuleCategoryList
+// Obtain Baseline Classification List
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeBaselineRuleCategoryList(request *DescribeBaselineRuleCategoryListRequest) (response *DescribeBaselineRuleCategoryListResponse, err error) {
+    return c.DescribeBaselineRuleCategoryListWithContext(context.Background(), request)
+}
+
+// DescribeBaselineRuleCategoryList
+// Obtain Baseline Classification List
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeBaselineRuleCategoryListWithContext(ctx context.Context, request *DescribeBaselineRuleCategoryListRequest) (response *DescribeBaselineRuleCategoryListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaselineRuleCategoryListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeBaselineRuleCategoryList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaselineRuleCategoryList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaselineRuleCategoryListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBaselineRuleDetectListRequest() (request *DescribeBaselineRuleDetectListRequest) {
+    request = &DescribeBaselineRuleDetectListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeBaselineRuleDetectList")
+    
+    
+    return
+}
+
+func NewDescribeBaselineRuleDetectListResponse() (response *DescribeBaselineRuleDetectListResponse) {
+    response = &DescribeBaselineRuleDetectListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBaselineRuleDetectList
+// This API is used to obtain the baseline rule detection list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineRuleDetectList(request *DescribeBaselineRuleDetectListRequest) (response *DescribeBaselineRuleDetectListResponse, err error) {
+    return c.DescribeBaselineRuleDetectListWithContext(context.Background(), request)
+}
+
+// DescribeBaselineRuleDetectList
+// This API is used to obtain the baseline rule detection list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineRuleDetectListWithContext(ctx context.Context, request *DescribeBaselineRuleDetectListRequest) (response *DescribeBaselineRuleDetectListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaselineRuleDetectListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeBaselineRuleDetectList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaselineRuleDetectList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaselineRuleDetectListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBaselineRuleIgnoreListRequest() (request *DescribeBaselineRuleIgnoreListRequest) {
+    request = &DescribeBaselineRuleIgnoreListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeBaselineRuleIgnoreList")
+    
+    
+    return
+}
+
+func NewDescribeBaselineRuleIgnoreListResponse() (response *DescribeBaselineRuleIgnoreListResponse) {
+    response = &DescribeBaselineRuleIgnoreListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBaselineRuleIgnoreList
+// Get the baseline ignore rule list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineRuleIgnoreList(request *DescribeBaselineRuleIgnoreListRequest) (response *DescribeBaselineRuleIgnoreListResponse, err error) {
+    return c.DescribeBaselineRuleIgnoreListWithContext(context.Background(), request)
+}
+
+// DescribeBaselineRuleIgnoreList
+// Get the baseline ignore rule list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineRuleIgnoreListWithContext(ctx context.Context, request *DescribeBaselineRuleIgnoreListRequest) (response *DescribeBaselineRuleIgnoreListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaselineRuleIgnoreListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeBaselineRuleIgnoreList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaselineRuleIgnoreList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaselineRuleIgnoreListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBaselineRuleListRequest() (request *DescribeBaselineRuleListRequest) {
+    request = &DescribeBaselineRuleListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeBaselineRuleList")
+    
+    
+    return
+}
+
+func NewDescribeBaselineRuleListResponse() (response *DescribeBaselineRuleListResponse) {
+    response = &DescribeBaselineRuleListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBaselineRuleList
+// Obtain Baseline Rule List
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineRuleList(request *DescribeBaselineRuleListRequest) (response *DescribeBaselineRuleListResponse, err error) {
+    return c.DescribeBaselineRuleListWithContext(context.Background(), request)
+}
+
+// DescribeBaselineRuleList
+// Obtain Baseline Rule List
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBaselineRuleListWithContext(ctx context.Context, request *DescribeBaselineRuleListRequest) (response *DescribeBaselineRuleListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaselineRuleListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeBaselineRuleList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaselineRuleList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaselineRuleListResponse()
     err = c.Send(request, response)
     return
 }
@@ -10325,6 +11483,66 @@ func (c *Client) DescribeIgnoreRuleEffectHostListWithContext(ctx context.Context
     return
 }
 
+func NewDescribeImportMachineInfoRequest() (request *DescribeImportMachineInfoRequest) {
+    request = &DescribeImportMachineInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeImportMachineInfo")
+    
+    
+    return
+}
+
+func NewDescribeImportMachineInfoResponse() (response *DescribeImportMachineInfoResponse) {
+    response = &DescribeImportMachineInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeImportMachineInfo
+// Querying the Machine Information Imported in Batches
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeImportMachineInfo(request *DescribeImportMachineInfoRequest) (response *DescribeImportMachineInfoResponse, err error) {
+    return c.DescribeImportMachineInfoWithContext(context.Background(), request)
+}
+
+// DescribeImportMachineInfo
+// Querying the Machine Information Imported in Batches
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeImportMachineInfoWithContext(ctx context.Context, request *DescribeImportMachineInfoRequest) (response *DescribeImportMachineInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeImportMachineInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeImportMachineInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImportMachineInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImportMachineInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInjectRiskyServiceSwitchRequest() (request *DescribeInjectRiskyServiceSwitchRequest) {
     request = &DescribeInjectRiskyServiceSwitchRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -12085,6 +13303,70 @@ func (c *Client) DescribeMachineLicenseDetailWithContext(ctx context.Context, re
     return
 }
 
+func NewDescribeMachineListRequest() (request *DescribeMachineListRequest) {
+    request = &DescribeMachineListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeMachineList")
+    
+    
+    return
+}
+
+func NewDescribeMachineListResponse() (response *DescribeMachineListResponse) {
+    response = &DescribeMachineListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMachineList
+// This API is used to get the regional host list for web tamper protection.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APISERVERFAIL = "FailedOperation.APIServerFail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeMachineList(request *DescribeMachineListRequest) (response *DescribeMachineListResponse, err error) {
+    return c.DescribeMachineListWithContext(context.Background(), request)
+}
+
+// DescribeMachineList
+// This API is used to get the regional host list for web tamper protection.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APISERVERFAIL = "FailedOperation.APIServerFail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeMachineListWithContext(ctx context.Context, request *DescribeMachineListRequest) (response *DescribeMachineListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMachineListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeMachineList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMachineList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMachineListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMachineOsListRequest() (request *DescribeMachineOsListRequest) {
     request = &DescribeMachineOsListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -13551,6 +14833,72 @@ func (c *Client) DescribePrivilegeEventInfoWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribePrivilegeEventsRequest() (request *DescribePrivilegeEventsRequest) {
+    request = &DescribePrivilegeEventsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribePrivilegeEvents")
+    
+    
+    return
+}
+
+func NewDescribePrivilegeEventsResponse() (response *DescribePrivilegeEventsResponse) {
+    response = &DescribePrivilegeEventsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribePrivilegeEvents
+// This example shows you how to obtain the list of local privilege escalation events.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribePrivilegeEvents(request *DescribePrivilegeEventsRequest) (response *DescribePrivilegeEventsResponse, err error) {
+    return c.DescribePrivilegeEventsWithContext(context.Background(), request)
+}
+
+// DescribePrivilegeEvents
+// This example shows you how to obtain the list of local privilege escalation events.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribePrivilegeEventsWithContext(ctx context.Context, request *DescribePrivilegeEventsRequest) (response *DescribePrivilegeEventsResponse, err error) {
+    if request == nil {
+        request = NewDescribePrivilegeEventsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribePrivilegeEvents")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrivilegeEvents require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrivilegeEventsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribePrivilegeRulesRequest() (request *DescribePrivilegeRulesRequest) {
     request = &DescribePrivilegeRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -13845,6 +15193,124 @@ func (c *Client) DescribeProductStatusWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeProductStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeProtectDirListRequest() (request *DescribeProtectDirListRequest) {
+    request = &DescribeProtectDirListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeProtectDirList")
+    
+    
+    return
+}
+
+func NewDescribeProtectDirListResponse() (response *DescribeProtectDirListResponse) {
+    response = &DescribeProtectDirListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeProtectDirList
+// Web tamper-proof protection directory listing
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeProtectDirList(request *DescribeProtectDirListRequest) (response *DescribeProtectDirListResponse, err error) {
+    return c.DescribeProtectDirListWithContext(context.Background(), request)
+}
+
+// DescribeProtectDirList
+// Web tamper-proof protection directory listing
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeProtectDirListWithContext(ctx context.Context, request *DescribeProtectDirListRequest) (response *DescribeProtectDirListResponse, err error) {
+    if request == nil {
+        request = NewDescribeProtectDirListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeProtectDirList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProtectDirList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeProtectDirListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeProtectDirRelatedServerRequest() (request *DescribeProtectDirRelatedServerRequest) {
+    request = &DescribeProtectDirRelatedServerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeProtectDirRelatedServer")
+    
+    
+    return
+}
+
+func NewDescribeProtectDirRelatedServerResponse() (response *DescribeProtectDirRelatedServerResponse) {
+    response = &DescribeProtectDirRelatedServerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeProtectDirRelatedServer
+// Query the server list information associated with the protection directory.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeProtectDirRelatedServer(request *DescribeProtectDirRelatedServerRequest) (response *DescribeProtectDirRelatedServerResponse, err error) {
+    return c.DescribeProtectDirRelatedServerWithContext(context.Background(), request)
+}
+
+// DescribeProtectDirRelatedServer
+// Query the server list information associated with the protection directory.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeProtectDirRelatedServerWithContext(ctx context.Context, request *DescribeProtectDirRelatedServerRequest) (response *DescribeProtectDirRelatedServerResponse, err error) {
+    if request == nil {
+        request = NewDescribeProtectDirRelatedServerRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeProtectDirRelatedServer")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProtectDirRelatedServer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeProtectDirRelatedServerResponse()
     err = c.Send(request, response)
     return
 }
@@ -17559,6 +19025,62 @@ func (c *Client) DescribeSecurityTrendsWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeServerRelatedDirInfoRequest() (request *DescribeServerRelatedDirInfoRequest) {
+    request = &DescribeServerRelatedDirInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeServerRelatedDirInfo")
+    
+    
+    return
+}
+
+func NewDescribeServerRelatedDirInfoResponse() (response *DescribeServerRelatedDirInfoResponse) {
+    response = &DescribeServerRelatedDirInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeServerRelatedDirInfo
+// Querying the Details of a Directory Associated with a Service Zone
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeServerRelatedDirInfo(request *DescribeServerRelatedDirInfoRequest) (response *DescribeServerRelatedDirInfoResponse, err error) {
+    return c.DescribeServerRelatedDirInfoWithContext(context.Background(), request)
+}
+
+// DescribeServerRelatedDirInfo
+// Querying the Details of a Directory Associated with a Service Zone
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeServerRelatedDirInfoWithContext(ctx context.Context, request *DescribeServerRelatedDirInfoRequest) (response *DescribeServerRelatedDirInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeServerRelatedDirInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeServerRelatedDirInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeServerRelatedDirInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeServerRelatedDirInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeServersAndRiskAndFirstInfoRequest() (request *DescribeServersAndRiskAndFirstInfoRequest) {
     request = &DescribeServersAndRiskAndFirstInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -20255,6 +21777,214 @@ func (c *Client) DescribeWebHookRulesWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeWebPageEventListRequest() (request *DescribeWebPageEventListRequest) {
+    request = &DescribeWebPageEventListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeWebPageEventList")
+    
+    
+    return
+}
+
+func NewDescribeWebPageEventListResponse() (response *DescribeWebPageEventListResponse) {
+    response = &DescribeWebPageEventListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeWebPageEventList
+// Querying the List of Tampering Events
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeWebPageEventList(request *DescribeWebPageEventListRequest) (response *DescribeWebPageEventListResponse, err error) {
+    return c.DescribeWebPageEventListWithContext(context.Background(), request)
+}
+
+// DescribeWebPageEventList
+// Querying the List of Tampering Events
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeWebPageEventListWithContext(ctx context.Context, request *DescribeWebPageEventListRequest) (response *DescribeWebPageEventListResponse, err error) {
+    if request == nil {
+        request = NewDescribeWebPageEventListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeWebPageEventList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWebPageEventList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeWebPageEventListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeWebPageGeneralizeRequest() (request *DescribeWebPageGeneralizeRequest) {
+    request = &DescribeWebPageGeneralizeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeWebPageGeneralize")
+    
+    
+    return
+}
+
+func NewDescribeWebPageGeneralizeResponse() (response *DescribeWebPageGeneralizeResponse) {
+    response = &DescribeWebPageGeneralizeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeWebPageGeneralize
+// Query website tamper-proof overview information
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeWebPageGeneralize(request *DescribeWebPageGeneralizeRequest) (response *DescribeWebPageGeneralizeResponse, err error) {
+    return c.DescribeWebPageGeneralizeWithContext(context.Background(), request)
+}
+
+// DescribeWebPageGeneralize
+// Query website tamper-proof overview information
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeWebPageGeneralizeWithContext(ctx context.Context, request *DescribeWebPageGeneralizeRequest) (response *DescribeWebPageGeneralizeResponse, err error) {
+    if request == nil {
+        request = NewDescribeWebPageGeneralizeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeWebPageGeneralize")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWebPageGeneralize require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeWebPageGeneralizeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeWebPageProtectStatRequest() (request *DescribeWebPageProtectStatRequest) {
+    request = &DescribeWebPageProtectStatRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeWebPageProtectStat")
+    
+    
+    return
+}
+
+func NewDescribeWebPageProtectStatResponse() (response *DescribeWebPageProtectStatResponse) {
+    response = &DescribeWebPageProtectStatResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeWebPageProtectStat
+// Querying real-time protection information for website anti-tampering
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeWebPageProtectStat(request *DescribeWebPageProtectStatRequest) (response *DescribeWebPageProtectStatResponse, err error) {
+    return c.DescribeWebPageProtectStatWithContext(context.Background(), request)
+}
+
+// DescribeWebPageProtectStat
+// Querying real-time protection information for website anti-tampering
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeWebPageProtectStatWithContext(ctx context.Context, request *DescribeWebPageProtectStatRequest) (response *DescribeWebPageProtectStatResponse, err error) {
+    if request == nil {
+        request = NewDescribeWebPageProtectStatRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeWebPageProtectStat")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWebPageProtectStat require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeWebPageProtectStatResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeWebPageServiceInfoRequest() (request *DescribeWebPageServiceInfoRequest) {
+    request = &DescribeWebPageServiceInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "DescribeWebPageServiceInfo")
+    
+    
+    return
+}
+
+func NewDescribeWebPageServiceInfoResponse() (response *DescribeWebPageServiceInfoResponse) {
+    response = &DescribeWebPageServiceInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeWebPageServiceInfo
+// Website Tamper Protection - Query webpage tamper protection server purchase information and server information
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeWebPageServiceInfo(request *DescribeWebPageServiceInfoRequest) (response *DescribeWebPageServiceInfoResponse, err error) {
+    return c.DescribeWebPageServiceInfoWithContext(context.Background(), request)
+}
+
+// DescribeWebPageServiceInfo
+// Website Tamper Protection - Query webpage tamper protection server purchase information and server information
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeWebPageServiceInfoWithContext(ctx context.Context, request *DescribeWebPageServiceInfoRequest) (response *DescribeWebPageServiceInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeWebPageServiceInfoRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "DescribeWebPageServiceInfo")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWebPageServiceInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeWebPageServiceInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeWindowsPatchListRequest() (request *DescribeWindowsPatchListRequest) {
     request = &DescribeWindowsPatchListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -22077,6 +23807,58 @@ func (c *Client) ExportBaselineItemDetectListWithContext(ctx context.Context, re
     return
 }
 
+func NewExportBaselineItemListRequest() (request *ExportBaselineItemListRequest) {
+    request = &ExportBaselineItemListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ExportBaselineItemList")
+    
+    
+    return
+}
+
+func NewExportBaselineItemListResponse() (response *ExportBaselineItemListResponse) {
+    response = &ExportBaselineItemListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExportBaselineItemList
+// Export Detection Item Result List
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ExportBaselineItemList(request *ExportBaselineItemListRequest) (response *ExportBaselineItemListResponse, err error) {
+    return c.ExportBaselineItemListWithContext(context.Background(), request)
+}
+
+// ExportBaselineItemList
+// Export Detection Item Result List
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ExportBaselineItemListWithContext(ctx context.Context, request *ExportBaselineItemListRequest) (response *ExportBaselineItemListResponse, err error) {
+    if request == nil {
+        request = NewExportBaselineItemListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ExportBaselineItemList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportBaselineItemList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExportBaselineItemListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewExportBaselineListRequest() (request *ExportBaselineListRequest) {
     request = &ExportBaselineListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -22135,6 +23917,110 @@ func (c *Client) ExportBaselineListWithContext(ctx context.Context, request *Exp
     request.SetContext(ctx)
     
     response = NewExportBaselineListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewExportBaselineRuleDetectListRequest() (request *ExportBaselineRuleDetectListRequest) {
+    request = &ExportBaselineRuleDetectListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ExportBaselineRuleDetectList")
+    
+    
+    return
+}
+
+func NewExportBaselineRuleDetectListResponse() (response *ExportBaselineRuleDetectListResponse) {
+    response = &ExportBaselineRuleDetectListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExportBaselineRuleDetectList
+// This API is used to export baseline detection rules.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ExportBaselineRuleDetectList(request *ExportBaselineRuleDetectListRequest) (response *ExportBaselineRuleDetectListResponse, err error) {
+    return c.ExportBaselineRuleDetectListWithContext(context.Background(), request)
+}
+
+// ExportBaselineRuleDetectList
+// This API is used to export baseline detection rules.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ExportBaselineRuleDetectListWithContext(ctx context.Context, request *ExportBaselineRuleDetectListRequest) (response *ExportBaselineRuleDetectListResponse, err error) {
+    if request == nil {
+        request = NewExportBaselineRuleDetectListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ExportBaselineRuleDetectList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportBaselineRuleDetectList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExportBaselineRuleDetectListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewExportBaselineWeakPasswordListRequest() (request *ExportBaselineWeakPasswordListRequest) {
+    request = &ExportBaselineWeakPasswordListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ExportBaselineWeakPasswordList")
+    
+    
+    return
+}
+
+func NewExportBaselineWeakPasswordListResponse() (response *ExportBaselineWeakPasswordListResponse) {
+    response = &ExportBaselineWeakPasswordListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExportBaselineWeakPasswordList
+// Export the list of weak password configurations.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ExportBaselineWeakPasswordList(request *ExportBaselineWeakPasswordListRequest) (response *ExportBaselineWeakPasswordListResponse, err error) {
+    return c.ExportBaselineWeakPasswordListWithContext(context.Background(), request)
+}
+
+// ExportBaselineWeakPasswordList
+// Export the list of weak password configurations.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ExportBaselineWeakPasswordListWithContext(ctx context.Context, request *ExportBaselineWeakPasswordListRequest) (response *ExportBaselineWeakPasswordListResponse, err error) {
+    if request == nil {
+        request = NewExportBaselineWeakPasswordListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ExportBaselineWeakPasswordList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportBaselineWeakPasswordList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExportBaselineWeakPasswordListResponse()
     err = c.Send(request, response)
     return
 }
@@ -23073,6 +24959,68 @@ func (c *Client) ExportPrivilegeEventsWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewExportPrivilegeEventsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewExportProtectDirListRequest() (request *ExportProtectDirListRequest) {
+    request = &ExportProtectDirListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ExportProtectDirList")
+    
+    
+    return
+}
+
+func NewExportProtectDirListResponse() (response *ExportProtectDirListResponse) {
+    response = &ExportProtectDirListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExportProtectDirList
+// Export the web tamper-proof protection directory list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ExportProtectDirList(request *ExportProtectDirListRequest) (response *ExportProtectDirListResponse, err error) {
+    return c.ExportProtectDirListWithContext(context.Background(), request)
+}
+
+// ExportProtectDirList
+// Export the web tamper-proof protection directory list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ExportProtectDirListWithContext(ctx context.Context, request *ExportProtectDirListRequest) (response *ExportProtectDirListResponse, err error) {
+    if request == nil {
+        request = NewExportProtectDirListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ExportProtectDirList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportProtectDirList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExportProtectDirListResponse()
     err = c.Send(request, response)
     return
 }
@@ -24243,6 +26191,64 @@ func (c *Client) ExportVulListWithContext(ctx context.Context, request *ExportVu
     return
 }
 
+func NewExportWebPageEventListRequest() (request *ExportWebPageEventListRequest) {
+    request = &ExportWebPageEventListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ExportWebPageEventList")
+    
+    
+    return
+}
+
+func NewExportWebPageEventListResponse() (response *ExportWebPageEventListResponse) {
+    response = &ExportWebPageEventListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExportWebPageEventList
+// This API is used to export the tamper event list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ExportWebPageEventList(request *ExportWebPageEventListRequest) (response *ExportWebPageEventListResponse, err error) {
+    return c.ExportWebPageEventListWithContext(context.Background(), request)
+}
+
+// ExportWebPageEventList
+// This API is used to export the tamper event list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ExportWebPageEventListWithContext(ctx context.Context, request *ExportWebPageEventListRequest) (response *ExportWebPageEventListResponse, err error) {
+    if request == nil {
+        request = NewExportWebPageEventListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ExportWebPageEventList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportWebPageEventList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExportWebPageEventListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewExportWindowsPatchListRequest() (request *ExportWindowsPatchListRequest) {
     request = &ExportWindowsPatchListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -24297,6 +26303,60 @@ func (c *Client) ExportWindowsPatchListWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewExportWindowsPatchListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewFixBaselineDetectRequest() (request *FixBaselineDetectRequest) {
+    request = &FixBaselineDetectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "FixBaselineDetect")
+    
+    
+    return
+}
+
+func NewFixBaselineDetectResponse() (response *FixBaselineDetectResponse) {
+    response = &FixBaselineDetectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// FixBaselineDetect
+// This API is used to fix baseline detection.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) FixBaselineDetect(request *FixBaselineDetectRequest) (response *FixBaselineDetectResponse, err error) {
+    return c.FixBaselineDetectWithContext(context.Background(), request)
+}
+
+// FixBaselineDetect
+// This API is used to fix baseline detection.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) FixBaselineDetectWithContext(ctx context.Context, request *FixBaselineDetectRequest) (response *FixBaselineDetectResponse, err error) {
+    if request == nil {
+        request = NewFixBaselineDetectRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "FixBaselineDetect")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("FixBaselineDetect require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewFixBaselineDetectResponse()
     err = c.Send(request, response)
     return
 }
@@ -24699,6 +26759,218 @@ func (c *Client) ModifyBaselinePolicyWithContext(ctx context.Context, request *M
     request.SetContext(ctx)
     
     response = NewModifyBaselinePolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyBaselinePolicyStateRequest() (request *ModifyBaselinePolicyStateRequest) {
+    request = &ModifyBaselinePolicyStateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ModifyBaselinePolicyState")
+    
+    
+    return
+}
+
+func NewModifyBaselinePolicyStateResponse() (response *ModifyBaselinePolicyStateResponse) {
+    response = &ModifyBaselinePolicyStateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyBaselinePolicyState
+// This API is used to change the baseline policy status.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ModifyBaselinePolicyState(request *ModifyBaselinePolicyStateRequest) (response *ModifyBaselinePolicyStateResponse, err error) {
+    return c.ModifyBaselinePolicyStateWithContext(context.Background(), request)
+}
+
+// ModifyBaselinePolicyState
+// This API is used to change the baseline policy status.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ModifyBaselinePolicyStateWithContext(ctx context.Context, request *ModifyBaselinePolicyStateRequest) (response *ModifyBaselinePolicyStateResponse, err error) {
+    if request == nil {
+        request = NewModifyBaselinePolicyStateRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ModifyBaselinePolicyState")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyBaselinePolicyState require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyBaselinePolicyStateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyBaselineRuleRequest() (request *ModifyBaselineRuleRequest) {
+    request = &ModifyBaselineRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ModifyBaselineRule")
+    
+    
+    return
+}
+
+func NewModifyBaselineRuleResponse() (response *ModifyBaselineRuleResponse) {
+    response = &ModifyBaselineRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyBaselineRule
+// Make a change to a baseline detection rule
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ModifyBaselineRule(request *ModifyBaselineRuleRequest) (response *ModifyBaselineRuleResponse, err error) {
+    return c.ModifyBaselineRuleWithContext(context.Background(), request)
+}
+
+// ModifyBaselineRule
+// Make a change to a baseline detection rule
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ModifyBaselineRuleWithContext(ctx context.Context, request *ModifyBaselineRuleRequest) (response *ModifyBaselineRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyBaselineRuleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ModifyBaselineRule")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyBaselineRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyBaselineRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyBaselineRuleIgnoreRequest() (request *ModifyBaselineRuleIgnoreRequest) {
+    request = &ModifyBaselineRuleIgnoreRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ModifyBaselineRuleIgnore")
+    
+    
+    return
+}
+
+func NewModifyBaselineRuleIgnoreResponse() (response *ModifyBaselineRuleIgnoreResponse) {
+    response = &ModifyBaselineRuleIgnoreResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyBaselineRuleIgnore
+// Make a change to the baseline ignore rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ModifyBaselineRuleIgnore(request *ModifyBaselineRuleIgnoreRequest) (response *ModifyBaselineRuleIgnoreResponse, err error) {
+    return c.ModifyBaselineRuleIgnoreWithContext(context.Background(), request)
+}
+
+// ModifyBaselineRuleIgnore
+// Make a change to the baseline ignore rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ModifyBaselineRuleIgnoreWithContext(ctx context.Context, request *ModifyBaselineRuleIgnoreRequest) (response *ModifyBaselineRuleIgnoreResponse, err error) {
+    if request == nil {
+        request = NewModifyBaselineRuleIgnoreRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ModifyBaselineRuleIgnore")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyBaselineRuleIgnore require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyBaselineRuleIgnoreResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyBaselineWeakPasswordRequest() (request *ModifyBaselineWeakPasswordRequest) {
+    request = &ModifyBaselineWeakPasswordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ModifyBaselineWeakPassword")
+    
+    
+    return
+}
+
+func NewModifyBaselineWeakPasswordResponse() (response *ModifyBaselineWeakPasswordResponse) {
+    response = &ModifyBaselineWeakPasswordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyBaselineWeakPassword
+// Change or add a weak password
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ModifyBaselineWeakPassword(request *ModifyBaselineWeakPasswordRequest) (response *ModifyBaselineWeakPasswordResponse, err error) {
+    return c.ModifyBaselineWeakPasswordWithContext(context.Background(), request)
+}
+
+// ModifyBaselineWeakPassword
+// Change or add a weak password
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ModifyBaselineWeakPasswordWithContext(ctx context.Context, request *ModifyBaselineWeakPasswordRequest) (response *ModifyBaselineWeakPasswordResponse, err error) {
+    if request == nil {
+        request = NewModifyBaselineWeakPasswordRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ModifyBaselineWeakPassword")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyBaselineWeakPassword require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyBaselineWeakPasswordResponse()
     err = c.Send(request, response)
     return
 }
@@ -25397,6 +27669,68 @@ func (c *Client) ModifyLicenseOrderWithContext(ctx context.Context, request *Mod
     return
 }
 
+func NewModifyLicenseUnBindsRequest() (request *ModifyLicenseUnBindsRequest) {
+    request = &ModifyLicenseUnBindsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ModifyLicenseUnBinds")
+    
+    
+    return
+}
+
+func NewModifyLicenseUnBindsResponse() (response *ModifyLicenseUnBindsResponse) {
+    response = &ModifyLicenseUnBindsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyLicenseUnBinds
+// This API is used to unbind machines from an authorization in batches.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyLicenseUnBinds(request *ModifyLicenseUnBindsRequest) (response *ModifyLicenseUnBindsResponse, err error) {
+    return c.ModifyLicenseUnBindsWithContext(context.Background(), request)
+}
+
+// ModifyLicenseUnBinds
+// This API is used to unbind machines from an authorization in batches.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyLicenseUnBindsWithContext(ctx context.Context, request *ModifyLicenseUnBindsRequest) (response *ModifyLicenseUnBindsResponse, err error) {
+    if request == nil {
+        request = NewModifyLicenseUnBindsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ModifyLicenseUnBinds")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLicenseUnBinds require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyLicenseUnBindsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyLogKafkaAccessRequest() (request *ModifyLogKafkaAccessRequest) {
     request = &ModifyLogKafkaAccessRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -25420,6 +27754,12 @@ func NewModifyLogKafkaAccessResponse() (response *ModifyLogKafkaAccessResponse) 
 // This API is used to add or modify the access configuration of logs shipped to Kafka.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyLogKafkaAccess(request *ModifyLogKafkaAccessRequest) (response *ModifyLogKafkaAccessResponse, err error) {
     return c.ModifyLogKafkaAccessWithContext(context.Background(), request)
@@ -25429,6 +27769,12 @@ func (c *Client) ModifyLogKafkaAccess(request *ModifyLogKafkaAccessRequest) (res
 // This API is used to add or modify the access configuration of logs shipped to Kafka.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyLogKafkaAccessWithContext(ctx context.Context, request *ModifyLogKafkaAccessRequest) (response *ModifyLogKafkaAccessResponse, err error) {
     if request == nil {
@@ -25470,6 +27816,12 @@ func NewModifyLogKafkaDeliverTypeResponse() (response *ModifyLogKafkaDeliverType
 // This API is used to modify the shipping configuration and switch of the specified log category.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyLogKafkaDeliverType(request *ModifyLogKafkaDeliverTypeRequest) (response *ModifyLogKafkaDeliverTypeResponse, err error) {
     return c.ModifyLogKafkaDeliverTypeWithContext(context.Background(), request)
@@ -25479,6 +27831,12 @@ func (c *Client) ModifyLogKafkaDeliverType(request *ModifyLogKafkaDeliverTypeReq
 // This API is used to modify the shipping configuration and switch of the specified log category.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyLogKafkaDeliverTypeWithContext(ctx context.Context, request *ModifyLogKafkaDeliverTypeRequest) (response *ModifyLogKafkaDeliverTypeResponse, err error) {
     if request == nil {
@@ -25520,6 +27878,12 @@ func NewModifyLogKafkaStateResponse() (response *ModifyLogKafkaStateResponse) {
 // This API is used to modify the information of log shipping statuses.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyLogKafkaState(request *ModifyLogKafkaStateRequest) (response *ModifyLogKafkaStateResponse, err error) {
     return c.ModifyLogKafkaStateWithContext(context.Background(), request)
@@ -25529,6 +27893,12 @@ func (c *Client) ModifyLogKafkaState(request *ModifyLogKafkaStateRequest) (respo
 // This API is used to modify the information of log shipping statuses.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyLogKafkaStateWithContext(ctx context.Context, request *ModifyLogKafkaStateRequest) (response *ModifyLogKafkaStateResponse, err error) {
     if request == nil {
@@ -25769,6 +28139,66 @@ func (c *Client) ModifyMachineAutoClearConfigWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewModifyMachineAutoClearConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyMachineRemarkRequest() (request *ModifyMachineRemarkRequest) {
+    request = &ModifyMachineRemarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ModifyMachineRemark")
+    
+    
+    return
+}
+
+func NewModifyMachineRemarkResponse() (response *ModifyMachineRemarkResponse) {
+    response = &ModifyMachineRemarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyMachineRemark
+// Modify Host Remark Information
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyMachineRemark(request *ModifyMachineRemarkRequest) (response *ModifyMachineRemarkResponse, err error) {
+    return c.ModifyMachineRemarkWithContext(context.Background(), request)
+}
+
+// ModifyMachineRemark
+// Modify Host Remark Information
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyMachineRemarkWithContext(ctx context.Context, request *ModifyMachineRemarkRequest) (response *ModifyMachineRemarkResponse, err error) {
+    if request == nil {
+        request = NewModifyMachineRemarkRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ModifyMachineRemark")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMachineRemark require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyMachineRemarkResponse()
     err = c.Send(request, response)
     return
 }
@@ -26057,6 +28487,66 @@ func (c *Client) ModifyNetAttackWhiteListWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewModifyNetAttackWhiteListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyOrderAttributeRequest() (request *ModifyOrderAttributeRequest) {
+    request = &ModifyOrderAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ModifyOrderAttribute")
+    
+    
+    return
+}
+
+func NewModifyOrderAttributeResponse() (response *ModifyOrderAttributeResponse) {
+    response = &ModifyOrderAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyOrderAttribute
+// Edit order attributes
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyOrderAttribute(request *ModifyOrderAttributeRequest) (response *ModifyOrderAttributeResponse, err error) {
+    return c.ModifyOrderAttributeWithContext(context.Background(), request)
+}
+
+// ModifyOrderAttribute
+// Edit order attributes
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyOrderAttributeWithContext(ctx context.Context, request *ModifyOrderAttributeRequest) (response *ModifyOrderAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyOrderAttributeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ModifyOrderAttribute")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyOrderAttribute require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyOrderAttributeResponse()
     err = c.Send(request, response)
     return
 }
@@ -27185,6 +29675,144 @@ func (c *Client) ModifyWebHookRuleStatusWithContext(ctx context.Context, request
     return
 }
 
+func NewModifyWebPageProtectDirRequest() (request *ModifyWebPageProtectDirRequest) {
+    request = &ModifyWebPageProtectDirRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ModifyWebPageProtectDir")
+    
+    
+    return
+}
+
+func NewModifyWebPageProtectDirResponse() (response *ModifyWebPageProtectDirResponse) {
+    response = &ModifyWebPageProtectDirResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyWebPageProtectDir
+// Creating or Modifying a Website Protection Directory
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_APISERVERFAIL = "FailedOperation.APIServerFail"
+//  FAILEDOPERATION_AGENTOFFLINE = "FailedOperation.AgentOffline"
+//  FAILEDOPERATION_LICENSEEXCEEDED = "FailedOperation.LicenseExceeded"
+//  FAILEDOPERATION_PROTECTSTARTFAIL = "FailedOperation.ProtectStartFail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) ModifyWebPageProtectDir(request *ModifyWebPageProtectDirRequest) (response *ModifyWebPageProtectDirResponse, err error) {
+    return c.ModifyWebPageProtectDirWithContext(context.Background(), request)
+}
+
+// ModifyWebPageProtectDir
+// Creating or Modifying a Website Protection Directory
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_APISERVERFAIL = "FailedOperation.APIServerFail"
+//  FAILEDOPERATION_AGENTOFFLINE = "FailedOperation.AgentOffline"
+//  FAILEDOPERATION_LICENSEEXCEEDED = "FailedOperation.LicenseExceeded"
+//  FAILEDOPERATION_PROTECTSTARTFAIL = "FailedOperation.ProtectStartFail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) ModifyWebPageProtectDirWithContext(ctx context.Context, request *ModifyWebPageProtectDirRequest) (response *ModifyWebPageProtectDirResponse, err error) {
+    if request == nil {
+        request = NewModifyWebPageProtectDirRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ModifyWebPageProtectDir")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyWebPageProtectDir require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyWebPageProtectDirResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyWebPageProtectSettingRequest() (request *ModifyWebPageProtectSettingRequest) {
+    request = &ModifyWebPageProtectSettingRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ModifyWebPageProtectSetting")
+    
+    
+    return
+}
+
+func NewModifyWebPageProtectSettingResponse() (response *ModifyWebPageProtectSettingResponse) {
+    response = &ModifyWebPageProtectSettingResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyWebPageProtectSetting
+// Modifying Website Protection Settings
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyWebPageProtectSetting(request *ModifyWebPageProtectSettingRequest) (response *ModifyWebPageProtectSettingResponse, err error) {
+    return c.ModifyWebPageProtectSettingWithContext(context.Background(), request)
+}
+
+// ModifyWebPageProtectSetting
+// Modifying Website Protection Settings
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyWebPageProtectSettingWithContext(ctx context.Context, request *ModifyWebPageProtectSettingRequest) (response *ModifyWebPageProtectSettingResponse, err error) {
+    if request == nil {
+        request = NewModifyWebPageProtectSettingRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ModifyWebPageProtectSetting")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyWebPageProtectSetting require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyWebPageProtectSettingResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyWebPageProtectSwitchRequest() (request *ModifyWebPageProtectSwitchRequest) {
     request = &ModifyWebPageProtectSwitchRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -27687,6 +30315,74 @@ func (c *Client) RetryVulFixWithContext(ctx context.Context, request *RetryVulFi
     request.SetContext(ctx)
     
     response = NewRetryVulFixResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewScanAssetRequest() (request *ScanAssetRequest) {
+    request = &ScanAssetRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cwp", APIVersion, "ScanAsset")
+    
+    
+    return
+}
+
+func NewScanAssetResponse() (response *ScanAssetResponse) {
+    response = &ScanAssetResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ScanAsset
+// Initiate asset fingerprinting scan
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOPROFESSIONHOST = "FailedOperation.NoProfessionHost"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_MAINDBFAIL = "InternalError.MainDBFail"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ScanAsset(request *ScanAssetRequest) (response *ScanAssetResponse, err error) {
+    return c.ScanAssetWithContext(context.Background(), request)
+}
+
+// ScanAsset
+// Initiate asset fingerprinting scan
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOPROFESSIONHOST = "FailedOperation.NoProfessionHost"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_MAINDBFAIL = "InternalError.MainDBFail"
+//  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ScanAssetWithContext(ctx context.Context, request *ScanAssetRequest) (response *ScanAssetResponse, err error) {
+    if request == nil {
+        request = NewScanAssetRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cwp", APIVersion, "ScanAsset")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ScanAsset require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewScanAssetResponse()
     err = c.Send(request, response)
     return
 }

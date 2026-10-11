@@ -227,8 +227,23 @@ type ApplySdkVerificationTokenRequestParams struct {
 	//  </p><p>Enumeration values:</p><ul><li>true: Album photo upload for verification enabled</li><li>false: Album photo upload for verification disabled</li></ul><p>Default value: false</p>
 	AllowUploadPhoto *bool `json:"AllowUploadPhoto,omitnil,omitempty" name:"AllowUploadPhoto"`
 
-	// <p>Whether to enable Bank of Thailand-specific background detection.<br>This parameter requires whitelist activation; please contact us to request access before it can take effect.</p><p>Default value: false</p>
+	// <p>Whether to enable Bank of Thailand-specific background detection.<br>This parameter requires whitelist activation; please contact us to request access before it can take effect.</p><p>Default value: false
 	EnableBotBgDetection *bool `json:"EnableBotBgDetection,omitnil,omitempty" name:"EnableBotBgDetection"`
+
+	// OCR Auto Capture Mode Timeout (ms)
+	// Value Range: [5000, 180000]
+	// Default Value: 20000
+	// Values less than 5000 will be clamped to 5000; values greater than 180000 will be clamped to 180000
+	OcrAutoDetectTimeout *int64 `json:"OcrAutoDetectTimeout,omitnil,omitempty" name:"OcrAutoDetectTimeout"`
+
+	// OCR Capture Mode
+	// Enum Values:
+	// <li>OCR_DETECT_MANUAL: Manual capture mode. Recognition starts after the user taps to take a photo.</li>
+	// <li>OCR_DETECT_AUTO_MANUAL: Auto recognition mode. The system performs automatic recognition; fallback to manual photo capture is available upon recognition timeout.</li>
+	// <li>OCR_DETECT_AUTO: Auto-only recognition mode. The system performs automatic recognition; no fallback to manual photo capture upon recognition timeout.</li>
+	// <li>OCR_DETECT_AUTO_MULTI: Multi-shot auto-only recognition mode. The system automatically captures multiple document images with flash enabled.
+	// Default Value: OCR_DETECT_AUTO_MANUAL
+	OcrModeType *string `json:"OcrModeType,omitnil,omitempty" name:"OcrModeType"`
 }
 
 type ApplySdkVerificationTokenRequest struct {
@@ -338,8 +353,23 @@ type ApplySdkVerificationTokenRequest struct {
 	//  </p><p>Enumeration values:</p><ul><li>true: Album photo upload for verification enabled</li><li>false: Album photo upload for verification disabled</li></ul><p>Default value: false</p>
 	AllowUploadPhoto *bool `json:"AllowUploadPhoto,omitnil,omitempty" name:"AllowUploadPhoto"`
 
-	// <p>Whether to enable Bank of Thailand-specific background detection.<br>This parameter requires whitelist activation; please contact us to request access before it can take effect.</p><p>Default value: false</p>
+	// <p>Whether to enable Bank of Thailand-specific background detection.<br>This parameter requires whitelist activation; please contact us to request access before it can take effect.</p><p>Default value: false
 	EnableBotBgDetection *bool `json:"EnableBotBgDetection,omitnil,omitempty" name:"EnableBotBgDetection"`
+
+	// OCR Auto Capture Mode Timeout (ms)
+	// Value Range: [5000, 180000]
+	// Default Value: 20000
+	// Values less than 5000 will be clamped to 5000; values greater than 180000 will be clamped to 180000
+	OcrAutoDetectTimeout *int64 `json:"OcrAutoDetectTimeout,omitnil,omitempty" name:"OcrAutoDetectTimeout"`
+
+	// OCR Capture Mode
+	// Enum Values:
+	// <li>OCR_DETECT_MANUAL: Manual capture mode. Recognition starts after the user taps to take a photo.</li>
+	// <li>OCR_DETECT_AUTO_MANUAL: Auto recognition mode. The system performs automatic recognition; fallback to manual photo capture is available upon recognition timeout.</li>
+	// <li>OCR_DETECT_AUTO: Auto-only recognition mode. The system performs automatic recognition; no fallback to manual photo capture upon recognition timeout.</li>
+	// <li>OCR_DETECT_AUTO_MULTI: Multi-shot auto-only recognition mode. The system automatically captures multiple document images with flash enabled.
+	// Default Value: OCR_DETECT_AUTO_MANUAL
+	OcrModeType *string `json:"OcrModeType,omitnil,omitempty" name:"OcrModeType"`
 }
 
 func (r *ApplySdkVerificationTokenRequest) ToJsonString() string {
@@ -376,6 +406,8 @@ func (r *ApplySdkVerificationTokenRequest) FromJsonString(s string) error {
 	delete(f, "HideProgressBar")
 	delete(f, "AllowUploadPhoto")
 	delete(f, "EnableBotBgDetection")
+	delete(f, "OcrAutoDetectTimeout")
+	delete(f, "OcrModeType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplySdkVerificationTokenRequest has unknown keys!", "")
 	}

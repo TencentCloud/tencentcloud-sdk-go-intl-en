@@ -602,7 +602,6 @@ func NewCreateLiveCallbackRuleResponse() (response *CreateLiveCallbackRuleRespon
 //  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CONFNOTFOUND = "InvalidParameter.ConfNotFound"
-//  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
@@ -624,7 +623,6 @@ func (c *Client) CreateLiveCallbackRule(request *CreateLiveCallbackRuleRequest) 
 //  INTERNALERROR_CONFNOTFOUND = "InternalError.ConfNotFound"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CONFNOTFOUND = "InvalidParameter.ConfNotFound"
-//  INVALIDPARAMETER_DOMAINFORMATERROR = "InvalidParameter.DomainFormatError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
@@ -4663,82 +4661,6 @@ func (c *Client) DescribeLiveDomainsWithContext(ctx context.Context, request *De
     return
 }
 
-func NewDescribeLiveForbidStreamListRequest() (request *DescribeLiveForbidStreamListRequest) {
-    request = &DescribeLiveForbidStreamListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("live", APIVersion, "DescribeLiveForbidStreamList")
-    
-    
-    return
-}
-
-func NewDescribeLiveForbidStreamListResponse() (response *DescribeLiveForbidStreamListResponse) {
-    response = &DescribeLiveForbidStreamListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeLiveForbidStreamList
-// This API is used to get the list of disabled streams.
-//
-// 
-//
-// Note: this API is used for query only and should not be relied too much upon in important business scenarios.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
-//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
-//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
-//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
-//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
-func (c *Client) DescribeLiveForbidStreamList(request *DescribeLiveForbidStreamListRequest) (response *DescribeLiveForbidStreamListResponse, err error) {
-    return c.DescribeLiveForbidStreamListWithContext(context.Background(), request)
-}
-
-// DescribeLiveForbidStreamList
-// This API is used to get the list of disabled streams.
-//
-// 
-//
-// Note: this API is used for query only and should not be relied too much upon in important business scenarios.
-//
-// error code that may be returned:
-//  FAILEDOPERATION_CALLOTHERSVRFAILED = "FailedOperation.CallOtherSvrFailed"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
-//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
-//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
-//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
-//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
-func (c *Client) DescribeLiveForbidStreamListWithContext(ctx context.Context, request *DescribeLiveForbidStreamListRequest) (response *DescribeLiveForbidStreamListResponse, err error) {
-    if request == nil {
-        request = NewDescribeLiveForbidStreamListRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeLiveForbidStreamList")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeLiveForbidStreamList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeLiveForbidStreamListResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeLivePlayAuthKeyRequest() (request *DescribeLivePlayAuthKeyRequest) {
     request = &DescribeLivePlayAuthKeyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6733,6 +6655,56 @@ func (c *Client) DescribeLiveWatermarksWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeLiveWatermarksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeOriginWhiteIpListRequest() (request *DescribeOriginWhiteIpListRequest) {
+    request = &DescribeOriginWhiteIpListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("live", APIVersion, "DescribeOriginWhiteIpList")
+    
+    
+    return
+}
+
+func NewDescribeOriginWhiteIpListResponse() (response *DescribeOriginWhiteIpListResponse) {
+    response = &DescribeOriginWhiteIpListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeOriginWhiteIpList
+// This API is used to obtain the pull stream IP whitelist list of the origin server.
+//
+// error code that may be returned:
+//  INTERNALERROR_DOMAINNOTEXIST = "InternalError.DomainNotExist"
+func (c *Client) DescribeOriginWhiteIpList(request *DescribeOriginWhiteIpListRequest) (response *DescribeOriginWhiteIpListResponse, err error) {
+    return c.DescribeOriginWhiteIpListWithContext(context.Background(), request)
+}
+
+// DescribeOriginWhiteIpList
+// This API is used to obtain the pull stream IP whitelist list of the origin server.
+//
+// error code that may be returned:
+//  INTERNALERROR_DOMAINNOTEXIST = "InternalError.DomainNotExist"
+func (c *Client) DescribeOriginWhiteIpListWithContext(ctx context.Context, request *DescribeOriginWhiteIpListRequest) (response *DescribeOriginWhiteIpListResponse, err error) {
+    if request == nil {
+        request = NewDescribeOriginWhiteIpListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "DescribeOriginWhiteIpList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOriginWhiteIpList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeOriginWhiteIpListResponse()
     err = c.Send(request, response)
     return
 }
