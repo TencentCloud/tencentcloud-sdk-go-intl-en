@@ -43539,7 +43539,7 @@ type ModifyWebPageProtectDirRequestParams struct {
 	// Website protection directory address
 	ProtectDirAddr *string `json:"ProtectDirAddr,omitnil,omitempty" name:"ProtectDirAddr"`
 
-	// Website protection directory name
+	// Name of the website protection directory
 	ProtectDirName *string `json:"ProtectDirName,omitnil,omitempty" name:"ProtectDirName"`
 
 	// Protected file types, separated by semicolons
@@ -43555,7 +43555,7 @@ type ModifyWebPageProtectDirRequest struct {
 	// Website protection directory address
 	ProtectDirAddr *string `json:"ProtectDirAddr,omitnil,omitempty" name:"ProtectDirAddr"`
 
-	// Website protection directory name
+	// Name of the website protection directory
 	ProtectDirName *string `json:"ProtectDirName,omitnil,omitempty" name:"ProtectDirName"`
 
 	// Protected file types, separated by semicolons
@@ -44411,13 +44411,13 @@ type ProtectEventLists struct {
 }
 
 type ProtectHostConfig struct {
-
+	// Unique host ID.
 	Quuid *string `json:"Quuid,omitnil,omitempty" name:"Quuid"`
 
-
+	// Protection switch: 0 - off; 1 - on
 	ProtectSwitch *uint64 `json:"ProtectSwitch,omitnil,omitempty" name:"ProtectSwitch"`
 
-
+	// Auto recovery switch. 0: disabled. 1: enabled.
 	AutoRecovery *uint64 `json:"AutoRecovery,omitnil,omitempty" name:"AutoRecovery"`
 }
 

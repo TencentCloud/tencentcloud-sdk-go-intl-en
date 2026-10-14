@@ -764,37 +764,37 @@ func (r *AddAndPublishNetworkFirewallPolicyYamlDetailResponse) FromJsonString(s 
 
 // Predefined struct for user
 type AddAssetImageRegistryRegistryDetailRequestParams struct {
-	// Repository name
+	// Repository Name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Username
+	// Username.
 	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
-	// Password
+	// Password.
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// Repository URL
+	// Warehouse url
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Repository type. Valid values: harbor, quay, jfrog, aws, azure, and other-tcr.
 	RegistryType *string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
-	// Network type, which can be `public` (public network).
+	// Network type. List: public
 	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
-	// Repository version
+	// Warehouse version
 	RegistryVersion *string `json:"RegistryVersion,omitnil,omitempty" name:"RegistryVersion"`
 
-	// Region. Default value: `default`.
+	// Region, list: default.
 	RegistryRegion *string `json:"RegistryRegion,omitnil,omitempty" name:"RegistryRegion"`
 
 	// Speed limit
 	SpeedLimit *int64 `json:"SpeedLimit,omitnil,omitempty" name:"SpeedLimit"`
 
-	// Valid values: `0` (secure mode with certificate verification, which is the default value); `1` (unsecure mode that skips certificate verification).
+	// 0: Secure Mode (Certificate Verification) (Default); 1: Insecure Mode (Skip Certificate Verification)
 	Insecure *uint64 `json:"Insecure,omitnil,omitempty" name:"Insecure"`
 
-
+	// Record ID of Connectivity Check
 	ConnDetectConfig []*ConnDetectConfig `json:"ConnDetectConfig,omitnil,omitempty" name:"ConnDetectConfig"`
 
 	// Whether authorization and scanning are performed automatically. For full synchronization, only images of the latest version are involved. For incremental synchronization, all new images are involved.
@@ -816,36 +816,37 @@ type AddAssetImageRegistryRegistryDetailRequestParams struct {
 type AddAssetImageRegistryRegistryDetailRequest struct {
 	*tchttp.BaseRequest
 	
-	// Repository name
+	// Repository Name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Username
+	// Username.
 	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
-	// Password
+	// Password.
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// Repository URL
+	// Warehouse url
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Repository type. Valid values: harbor, quay, jfrog, aws, azure, and other-tcr.
 	RegistryType *string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
-	// Network type, which can be `public` (public network).
+	// Network type. List: public
 	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
-	// Repository version
+	// Warehouse version
 	RegistryVersion *string `json:"RegistryVersion,omitnil,omitempty" name:"RegistryVersion"`
 
-	// Region. Default value: `default`.
+	// Region, list: default.
 	RegistryRegion *string `json:"RegistryRegion,omitnil,omitempty" name:"RegistryRegion"`
 
 	// Speed limit
 	SpeedLimit *int64 `json:"SpeedLimit,omitnil,omitempty" name:"SpeedLimit"`
 
-	// Valid values: `0` (secure mode with certificate verification, which is the default value); `1` (unsecure mode that skips certificate verification).
+	// 0: Secure Mode (Certificate Verification) (Default); 1: Insecure Mode (Skip Certificate Verification)
 	Insecure *uint64 `json:"Insecure,omitnil,omitempty" name:"Insecure"`
 
+	// Record ID of Connectivity Check
 	ConnDetectConfig []*ConnDetectConfig `json:"ConnDetectConfig,omitnil,omitempty" name:"ConnDetectConfig"`
 
 	// Whether authorization and scanning are performed automatically. For full synchronization, only images of the latest version are involved. For incremental synchronization, all new images are involved.
@@ -900,10 +901,10 @@ func (r *AddAssetImageRegistryRegistryDetailRequest) FromJsonString(s string) er
 
 // Predefined struct for user
 type AddAssetImageRegistryRegistryDetailResponseParams struct {
-	// Connection error message
+	// Connection error information
 	HealthCheckErr *string `json:"HealthCheckErr,omitnil,omitempty" name:"HealthCheckErr"`
 
-	// Error message of the name
+	// Incorrect name message
 	NameRepeatErr *string `json:"NameRepeatErr,omitnil,omitempty" name:"NameRepeatErr"`
 
 	// Repository unique id
@@ -2106,7 +2107,7 @@ type AssetClusterListItem struct {
 }
 
 type AssetFilters struct {
-	// Filter name
+	// Name of the filter key
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// One or more filter values
@@ -3241,10 +3242,10 @@ func (r *ConfirmNetworkFirewallPolicyResponse) FromJsonString(s string) error {
 }
 
 type ConnDetectConfig struct {
-
+	// Host QUUID
 	Quuid *string `json:"Quuid,omitnil,omitempty" name:"Quuid"`
 
-
+	// Host UUID
 	Uuid *string `json:"Uuid,omitnil,omitempty" name:"Uuid"`
 }
 
@@ -3564,70 +3565,76 @@ func (r *CreateAccessControlsRuleExportJobResponse) FromJsonString(s string) err
 
 // Predefined struct for user
 type CreateAssetImageRegistryScanTaskOneKeyRequestParams struct {
-	// Whether to scan all images
+	// Scan All Images (Deprecated)
 	//
 	// Deprecated: All is deprecated.
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// List of scanned images
+	// Scanned Image List
 	Images []*ImageInfo `json:"Images,omitnil,omitempty" name:"Images"`
 
-	// Array of scan types
+	// Type Array for scanning
 	ScanType []*string `json:"ScanType,omitnil,omitempty" name:"ScanType"`
 
-	// List of IDs of scanned images
+	// Scanned Image List ID
 	Id []*uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// List of image IDs excluded from scanning.
 	ExcludeIDs []*uint64 `json:"ExcludeIDs,omitnil,omitempty" name:"ExcludeIDs"`
 
-
+	// Whether the Latest Image
 	IsLatest *bool `json:"IsLatest,omitnil,omitempty" name:"IsLatest"`
 
-
+	// Scan Scope. 0: All Images; 1: Custom Images; 2: Recommended Scan Images
 	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
 
-
+	// Repository type
 	RegistryType []*string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
-
+	// Namespace
 	Namespace []*string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-
+	// Whether There Are Running Containers
 	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
 
-
+	// Task Timeout Duration Unit (s)
 	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 }
 
 type CreateAssetImageRegistryScanTaskOneKeyRequest struct {
 	*tchttp.BaseRequest
 	
-	// Whether to scan all images
+	// Scan All Images (Deprecated)
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// List of scanned images
+	// Scanned Image List
 	Images []*ImageInfo `json:"Images,omitnil,omitempty" name:"Images"`
 
-	// Array of scan types
+	// Type Array for scanning
 	ScanType []*string `json:"ScanType,omitnil,omitempty" name:"ScanType"`
 
-	// List of IDs of scanned images
+	// Scanned Image List ID
 	Id []*uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// List of image IDs excluded from scanning.
 	ExcludeIDs []*uint64 `json:"ExcludeIDs,omitnil,omitempty" name:"ExcludeIDs"`
 
+	// Whether the Latest Image
 	IsLatest *bool `json:"IsLatest,omitnil,omitempty" name:"IsLatest"`
 
+	// Scan Scope. 0: All Images; 1: Custom Images; 2: Recommended Scan Images
 	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
 
+	// Repository type
 	RegistryType []*string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
+	// Namespace
 	Namespace []*string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
+	// Whether There Are Running Containers
 	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
 
+	// Task Timeout Duration Unit (s)
 	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 }
 
@@ -3662,7 +3669,7 @@ func (r *CreateAssetImageRegistryScanTaskOneKeyRequest) FromJsonString(s string)
 
 // Predefined struct for user
 type CreateAssetImageRegistryScanTaskOneKeyResponseParams struct {
-	// The task id 
+	// Scan Task ID
 	TaskID *uint64 `json:"TaskID,omitnil,omitempty" name:"TaskID"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -10112,14 +10119,14 @@ func (r *DescribeAssetDBServiceListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAssetHostDetailRequestParams struct {
-	// Server ID
+	// Host ID
 	HostId *string `json:"HostId,omitnil,omitempty" name:"HostId"`
 }
 
 type DescribeAssetHostDetailRequest struct {
 	*tchttp.BaseRequest
 	
-	// Server ID
+	// Host ID
 	HostId *string `json:"HostId,omitnil,omitempty" name:"HostId"`
 }
 
@@ -10144,22 +10151,22 @@ func (r *DescribeAssetHostDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAssetHostDetailResponseParams struct {
-	// TCSS UUID
+	// Container Security UUID
 	UUID *string `json:"UUID,omitnil,omitempty" name:"UUID"`
 
-	// Update time
+	// Update time.
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Server name
+	// Host name
 	HostName *string `json:"HostName,omitnil,omitempty" name:"HostName"`
 
-	// Server group
+	// Host grouping
 	Group *string `json:"Group,omitnil,omitempty" name:"Group"`
 
-	// Server IP
+	// Host IP address
 	HostIP *string `json:"HostIP,omitnil,omitempty" name:"HostIP"`
 
-	// OS
+	// Operating system.
 	OsName *string `json:"OsName,omitnil,omitempty" name:"OsName"`
 
 	// Agent version
@@ -10168,67 +10175,67 @@ type DescribeAssetHostDetailResponseParams struct {
 	// Kernel version
 	KernelVersion *string `json:"KernelVersion,omitnil,omitempty" name:"KernelVersion"`
 
-	// Docker version
+	// docker version
 	DockerVersion *string `json:"DockerVersion,omitnil,omitempty" name:"DockerVersion"`
 
-	// Docker API version
+	// docker api version
 	DockerAPIVersion *string `json:"DockerAPIVersion,omitnil,omitempty" name:"DockerAPIVersion"`
 
-	// Docker version for Go
+	// docker go version
 	DockerGoVersion *string `json:"DockerGoVersion,omitnil,omitempty" name:"DockerGoVersion"`
 
-	// Docker file system type
+	// docker file system type
 	DockerFileSystemDriver *string `json:"DockerFileSystemDriver,omitnil,omitempty" name:"DockerFileSystemDriver"`
 
-	// Docker root directory
+	// docker root directory
 	DockerRootDir *string `json:"DockerRootDir,omitnil,omitempty" name:"DockerRootDir"`
 
-	// Number of images
+	// Image count
 	ImageCnt *uint64 `json:"ImageCnt,omitnil,omitempty" name:"ImageCnt"`
 
 	// Number of containers
 	ContainerCnt *uint64 `json:"ContainerCnt,omitnil,omitempty" name:"ContainerCnt"`
 
-	// K8s IP
+	// k8s IP
 	K8sMasterIP *string `json:"K8sMasterIP,omitnil,omitempty" name:"K8sMasterIP"`
 
-	// K8s version
+	// k8s version
 	K8sVersion *string `json:"K8sVersion,omitnil,omitempty" name:"K8sVersion"`
 
 	// kube proxy
 	KubeProxyVersion *string `json:"KubeProxyVersion,omitnil,omitempty" name:"KubeProxyVersion"`
 
-	// Valid values: `UNINSTALL` (not installed); `OFFLINE` (offline); `ONLINE` (defended).
+	// "UNINSTALL": Not Installed; "OFFLINE": Offline; "ONLINE": Protected
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Whether it is Containerd
+	// Is Containerd
 	IsContainerd *bool `json:"IsContainerd,omitnil,omitempty" name:"IsContainerd"`
 
-	// Server source. Valid values: `TENCENTCLOUD` (Tencent Cloud instance); `OTHERCLOUD` (non-Tencent Cloud instance).
+	// Host Source. "TENCENTCLOUD": "Tencent Cloud Servers"; "OTHERCLOUD": "Non-Tencent Cloud Servers"
 	MachineType *string `json:"MachineType,omitnil,omitempty" name:"MachineType"`
 
-	// Public IP
+	// Public IP address
 	PublicIp *string `json:"PublicIp,omitnil,omitempty" name:"PublicIp"`
 
-	// Server instance ID
+	// Host instance ID
 	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
-	// Region ID
+	// Region ID.
 	RegionID *int64 `json:"RegionID,omitnil,omitempty" name:"RegionID"`
 
-	// Project
+	// Associated project
 	Project *ProjectInfo `json:"Project,omitnil,omitempty" name:"Project"`
 
-	// Tags
+	// Tag.
 	Tags []*TagInfo `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-
+	// Cluster ID
 	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
 
-
+	// Cluster name.
 	ClusterName *string `json:"ClusterName,omitnil,omitempty" name:"ClusterName"`
 
-
+	// Cluster Access Status
 	ClusterAccessedStatus *string `json:"ClusterAccessedStatus,omitnil,omitempty" name:"ClusterAccessedStatus"`
 
 	// Asset synchronization time.
@@ -11663,13 +11670,14 @@ func (r *DescribeAssetImageRegistryScanStatusOneKeyResponse) FromJsonString(s st
 
 // Predefined struct for user
 type DescribeAssetImageRegistrySummaryRequestParams struct {
-
+	// Filter fields
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeAssetImageRegistrySummaryRequest struct {
 	*tchttp.BaseRequest
 	
+	// Filter fields
 	Filters []*AssetFilters `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -13311,13 +13319,16 @@ func (r *DescribeAssetSyncLastTimeRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAssetSyncLastTimeResponseParams struct {
-	// Last asset sync time
+	// Last Synchronization Time of Assets
 	AssetSyncLastTime *string `json:"AssetSyncLastTime,omitnil,omitempty" name:"AssetSyncLastTime"`
 
-
+	// Task status.
+	// PENDING: pending.
+	// PROCESSING: Processing
+	// PROCESSED: Completed
 	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
-
+	// Task Progress (Percentage)
 	TaskProcess *int64 `json:"TaskProcess,omitnil,omitempty" name:"TaskProcess"`
 
 	// Number of failed hosts.
@@ -15813,34 +15824,34 @@ func (r *DescribeImageAuthorizedInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeImageAuthorizedInfoResponseParams struct {
-	// Total number of valid image licenses
+	// Total number of effective image licenses.
 	TotalAuthorizedCnt *uint64 `json:"TotalAuthorizedCnt,omitnil,omitempty" name:"TotalAuthorizedCnt"`
 
-	// Number of used image licenses
+	// Used image licenses
 	UsedAuthorizedCnt *uint64 `json:"UsedAuthorizedCnt,omitnil,omitempty" name:"UsedAuthorizedCnt"`
 
-	// Number of images with scan enabled
+	// Scan image count enabled
 	ScannedImageCnt *uint64 `json:"ScannedImageCnt,omitnil,omitempty" name:"ScannedImageCnt"`
 
-	// Number of images with scan not enabled
+	// Scan image count when not enabled
 	NotScannedImageCnt *uint64 `json:"NotScannedImageCnt,omitnil,omitempty" name:"NotScannedImageCnt"`
 
-	// Number of local images with scan not enabled
+	// Number of Local Images with Scans Not Enabled
 	NotScannedLocalImageCnt *uint64 `json:"NotScannedLocalImageCnt,omitnil,omitempty" name:"NotScannedLocalImageCnt"`
 
-
+	// Number of licensed trial images.
 	TrialAuthorizedCnt *uint64 `json:"TrialAuthorizedCnt,omitnil,omitempty" name:"TrialAuthorizedCnt"`
 
-
+	// Number of licensed trial images that have been used.
 	UsedTrialAuthorizedCnt *uint64 `json:"UsedTrialAuthorizedCnt,omitnil,omitempty" name:"UsedTrialAuthorizedCnt"`
 
-
+	// Number of purchased image authorizations
 	PurchasedAuthorizedCnt *uint64 `json:"PurchasedAuthorizedCnt,omitnil,omitempty" name:"PurchasedAuthorizedCnt"`
 
-
+	// Number of purchased licensed images that have been used.
 	UsedPurchasedAuthorizedCnt *uint64 `json:"UsedPurchasedAuthorizedCnt,omitnil,omitempty" name:"UsedPurchasedAuthorizedCnt"`
 
-
+	// Whether the free image licenses can be collected.
 	CanApplyFreeImageAuthorize *bool `json:"CanApplyFreeImageAuthorize,omitnil,omitempty" name:"CanApplyFreeImageAuthorize"`
 
 	// Image scanning billing information.
@@ -15995,7 +16006,7 @@ func (r *DescribeImageAutoAuthorizedRuleRequest) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeImageAutoAuthorizedRuleResponseParams struct {
-	// Whether the rule takes effect. Valid values: `0` (no); `1` (yes).
+	// Whether the Rule Is Effective. 0: Not Effective; 1: Effective
 	IsEnabled *int64 `json:"IsEnabled,omitnil,omitempty" name:"IsEnabled"`
 
 	// Authorization Scope Category. MANUAL: Selected Host Nodes; ALL: All Images
@@ -16010,10 +16021,10 @@ type DescribeImageAutoAuthorizedRuleResponseParams struct {
 	// Rule ID. Set it to 0 when it is not configured.
 	RuleId *int64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
-
+	// Auto-Scan Switch. 0: Off; 1: On
 	AutoScanEnabled *int64 `json:"AutoScanEnabled,omitnil,omitempty" name:"AutoScanEnabled"`
 
-
+	// Auto-Scan Range
 	ScanType []*string `json:"ScanType,omitnil,omitempty" name:"ScanType"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -19304,69 +19315,71 @@ func (r *DescribePurchaseStateInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePurchaseStateInfoResponseParams struct {
-	// Valid values: `0` (available for trial and purchase); `1` (available for purchase only after failed trial review or trial expiration); `2` (trial effective); `3` (Pro Edition effective); `4` (Pro Edition expired).
+	// <p>0: available for trial application and purchase; 1: purchase only (including failed trial review and expired trial); 2: trial active; 3: Pro Edition active; 4: Pro Edition expired</p>
 	State *int64 `json:"State,omitnil,omitempty" name:"State"`
 
-
+	// <p>Total resource cores = total protected cores + unprotected cores</p>
 	AllCoresCnt *uint64 `json:"AllCoresCnt,omitnil,omitempty" name:"AllCoresCnt"`
 
-	// Total number of protected cores. It is the sum of the number of purchased cores, the number of free trial cores, and the number of elastic billing cores.
+	// <p>Total protected cores = purchased cores + trial granted cores + elastic billing cores</p>
 	CoresCnt *uint64 `json:"CoresCnt,omitnil,omitempty" name:"CoresCnt"`
 
-
+	// <p>Unprotected cores (number of resource cores with protection not enabled)</p>
 	UndefendCoresCnt *uint64 `json:"UndefendCoresCnt,omitnil,omitempty" name:"UndefendCoresCnt"`
 
-	// Number of purchased cores
+	// <p>Number of purchased cores</p>
 	AuthorizedCoresCnt *uint64 `json:"AuthorizedCoresCnt,omitnil,omitempty" name:"AuthorizedCoresCnt"`
 
-	// Number of free trial cores for Pro Edition.
+	// <p>Trial giveaway of Pro Edition cores</p>
 	GivenAuthorizedCoresCnt *int64 `json:"GivenAuthorizedCoresCnt,omitnil,omitempty" name:"GivenAuthorizedCoresCnt"`
 
-
+	// <p>Current number of elastic billing cores</p>
 	CurrentFlexibleCoresCnt *uint64 `json:"CurrentFlexibleCoresCnt,omitnil,omitempty" name:"CurrentFlexibleCoresCnt"`
 
-	// Image count
+	// <p>Number of images.</p>
 	ImageCnt *uint64 `json:"ImageCnt,omitnil,omitempty" name:"ImageCnt"`
 
-	// Number of licensed images
+	// <p>Number of licensed images</p>
 	AuthorizedImageCnt *uint64 `json:"AuthorizedImageCnt,omitnil,omitempty" name:"AuthorizedImageCnt"`
 
-	// Expiration time
+	// <p>Expiration time.</p>
 	ExpirationTime *string `json:"ExpirationTime,omitnil,omitempty" name:"ExpirationTime"`
 
-	// Number of purchased image licenses
+	// <p>Number of purchased image licenses</p>
 	PurchasedAuthorizedCnt *uint64 `json:"PurchasedAuthorizedCnt,omitnil,omitempty" name:"PurchasedAuthorizedCnt"`
 
-	// 0 indicates the default status (it has not been set by the user, namely the initial status); 1 indicates automatic renewal; 2 indicates explicit non-automatic renewal (it has been set by the user).
+	// <p>0 indicates the default state (not set by the user, i.e., the initial state), 1 indicates auto-renewal, and 2 indicates explicitly no auto-renewal (set by the user).</p>
 	AutomaticRenewal *int64 `json:"AutomaticRenewal,omitnil,omitempty" name:"AutomaticRenewal"`
 
-	// Complimentary image licenses during the trial period may expire.
+	// <p>Complimentary image licenses during the trial period may expire.</p>
 	GivenAuthorizedCnt *uint64 `json:"GivenAuthorizedCnt,omitnil,omitempty" name:"GivenAuthorizedCnt"`
 
-	// Start time.
+	// <p>Start time</p>
 	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
-	// Substatus (specific meaning depending on the State field)
-	// Valid values when State is 4: ISOLATE, TERMINATED.
+	// <p>Sub-status (specific meaning depending on the State field)<br>When State is 4, valid values: ISOLATE (isolated) DESTROED (terminated)</p>
 	SubState *string `json:"SubState,omitnil,omitempty" name:"SubState"`
 
-	// Billing key.
+	// <p>Billing key</p>
 	InquireKey *string `json:"InquireKey,omitnil,omitempty" name:"InquireKey"`
 
-
+	// <p>Protection policy</p>
 	DefendPolicy *string `json:"DefendPolicy,omitnil,omitempty" name:"DefendPolicy"`
 
-
+	// <p>Upper limit of elastic billing cores</p>
 	FlexibleCoresLimit *uint64 `json:"FlexibleCoresLimit,omitnil,omitempty" name:"FlexibleCoresLimit"`
 
-
+	// <p>Number of cores in the protected cluster</p>
 	DefendClusterCoresCnt *uint64 `json:"DefendClusterCoresCnt,omitnil,omitempty" name:"DefendClusterCoresCnt"`
 
-
+	// <p>Protected host cores</p>
 	DefendHostCoresCnt *uint64 `json:"DefendHostCoresCnt,omitnil,omitempty" name:"DefendHostCoresCnt"`
 
-	// Number of trial cores for Pro Edition.
+	// <p>Number of cores of the Pro Edition for trial use</p>
 	TrialCoresCnt *uint64 `json:"TrialCoresCnt,omitnil,omitempty" name:"TrialCoresCnt"`
+
+	// <p>Number of machines with zero protection containers.</p>
+	NoContainerCoresCnt *uint64 `json:"NoContainerCoresCnt,omitnil,omitempty" name:"NoContainerCoresCnt"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -26605,22 +26618,22 @@ type ImageHost struct {
 }
 
 type ImageInfo struct {
-	// Instance name
+	// Instance name.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Namespace
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Image name
+	// Image name.
 	ImageName *string `json:"ImageName,omitnil,omitempty" name:"ImageName"`
 
 	// Image tag
 	ImageTag *string `json:"ImageTag,omitnil,omitempty" name:"ImageTag"`
 
-	// Forced scan
+	// Force scan
 	Force *string `json:"Force,omitnil,omitempty" name:"Force"`
 
-	// Image ID
+	// Image id
 	ImageDigest *string `json:"ImageDigest,omitnil,omitempty" name:"ImageDigest"`
 
 	// Repository type
@@ -26629,7 +26642,7 @@ type ImageInfo struct {
 	// Image repository address
 	ImageRepoAddress *string `json:"ImageRepoAddress,omitnil,omitempty" name:"ImageRepoAddress"`
 
-	// Instance ID
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
@@ -26933,10 +26946,10 @@ type ImageRiskTendencyInfo struct {
 }
 
 type ImageScanInquireInfo struct {
-	// Billing item
+	// Billing item.
 	InquireKey *string `json:"InquireKey,omitnil,omitempty" name:"InquireKey"`
 
-	// Total Capacity
+	// Total capacity
 	Capcity *uint64 `json:"Capcity,omitnil,omitempty" name:"Capcity"`
 
 	// Used amount
@@ -26945,12 +26958,12 @@ type ImageScanInquireInfo struct {
 	// Start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time
+	// End time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Billing status
-	// Pending purchase
-	// Normal: Normal.
+	// Pending: To be purchased
+	// Normal: normal.
 	// Isolate
 	PurchaseStatus *string `json:"PurchaseStatus,omitnil,omitempty" name:"PurchaseStatus"`
 
@@ -30868,10 +30881,10 @@ type ProcessInfo struct {
 }
 
 type ProjectInfo struct {
-	// Project name
+	// Project name.
 	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
 
-	// Project ID
+	// Project ID.
 	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
 }
 
@@ -32640,10 +32653,10 @@ func (r *SyncAssetImageRegistryAssetResponse) FromJsonString(s string) error {
 }
 
 type TagInfo struct {
-	// Tag key
+	// Tag key.
 	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
 
-	// Tag value
+	// Tag value.
 	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
 }
 
@@ -33091,13 +33104,13 @@ type UpdateImageRegistryTimingScanTaskRequestParams struct {
 	// Scheduled scan switch
 	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Scheduled scan time
+	// The time for scheduled scan
 	ScanTime *string `json:"ScanTime,omitnil,omitempty" name:"ScanTime"`
 
-	// Array of the scanned trojan types
+	// Array of Trojan horse types to scan
 	ScanType []*string `json:"ScanType,omitnil,omitempty" name:"ScanType"`
 
-	// Scanned image
+	// Scan image
 	Images []*ImageInfo `json:"Images,omitnil,omitempty" name:"Images"`
 
 	// Whether to scan all
@@ -33105,26 +33118,29 @@ type UpdateImageRegistryTimingScanTaskRequestParams struct {
 	// Deprecated: All is deprecated.
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// ID of the image to be scanned
+	// Scan Image ID
 	Id []*uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Whether to scan for the latest version
+	// Whether to Scan the Latest Version
 	Latest *bool `json:"Latest,omitnil,omitempty" name:"Latest"`
 
-
+	// Whether There Are Running Containers
 	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
 
-
+	// Scan end time
 	ScanEndTime *string `json:"ScanEndTime,omitnil,omitempty" name:"ScanEndTime"`
 
-
+	// Scan Scope. 0: All Images; 1: Custom Images; 2: Recommended Scan Images
 	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
 
-
+	// Repository Type: tcr, ccr, harbor
 	RegistryType []*string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
-
+	// Namespace
 	Namespace []*string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// IDs of excluded image assets.
+	ExcludeImageAssetIds []*uint64 `json:"ExcludeImageAssetIds,omitnil,omitempty" name:"ExcludeImageAssetIds"`
 }
 
 type UpdateImageRegistryTimingScanTaskRequest struct {
@@ -33136,33 +33152,41 @@ type UpdateImageRegistryTimingScanTaskRequest struct {
 	// Scheduled scan switch
 	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Scheduled scan time
+	// The time for scheduled scan
 	ScanTime *string `json:"ScanTime,omitnil,omitempty" name:"ScanTime"`
 
-	// Array of the scanned trojan types
+	// Array of Trojan horse types to scan
 	ScanType []*string `json:"ScanType,omitnil,omitempty" name:"ScanType"`
 
-	// Scanned image
+	// Scan image
 	Images []*ImageInfo `json:"Images,omitnil,omitempty" name:"Images"`
 
 	// Whether to scan all
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// ID of the image to be scanned
+	// Scan Image ID
 	Id []*uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Whether to scan for the latest version
+	// Whether to Scan the Latest Version
 	Latest *bool `json:"Latest,omitnil,omitempty" name:"Latest"`
 
+	// Whether There Are Running Containers
 	ContainerRunning *bool `json:"ContainerRunning,omitnil,omitempty" name:"ContainerRunning"`
 
+	// Scan end time
 	ScanEndTime *string `json:"ScanEndTime,omitnil,omitempty" name:"ScanEndTime"`
 
+	// Scan Scope. 0: All Images; 1: Custom Images; 2: Recommended Scan Images
 	ScanScope *uint64 `json:"ScanScope,omitnil,omitempty" name:"ScanScope"`
 
+	// Repository Type: tcr, ccr, harbor
 	RegistryType []*string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
+	// Namespace
 	Namespace []*string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// IDs of excluded image assets.
+	ExcludeImageAssetIds []*uint64 `json:"ExcludeImageAssetIds,omitnil,omitempty" name:"ExcludeImageAssetIds"`
 }
 
 func (r *UpdateImageRegistryTimingScanTaskRequest) ToJsonString() string {
@@ -33190,6 +33214,7 @@ func (r *UpdateImageRegistryTimingScanTaskRequest) FromJsonString(s string) erro
 	delete(f, "ScanScope")
 	delete(f, "RegistryType")
 	delete(f, "Namespace")
+	delete(f, "ExcludeImageAssetIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateImageRegistryTimingScanTaskRequest has unknown keys!", "")
 	}

@@ -129,7 +129,7 @@ func NewCreateIndexResponse() (response *CreateIndexResponse) {
 }
 
 // CreateIndex
-// This API is used to create indices.
+// Create an index
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -146,7 +146,7 @@ func (c *Client) CreateIndex(request *CreateIndexRequest) (response *CreateIndex
 }
 
 // CreateIndex
-// This API is used to create indices.
+// Create an index
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -195,7 +195,7 @@ func NewCreateInstanceResponse() (response *CreateInstanceResponse) {
 }
 
 // CreateInstance
-// This API is used to create an ES cluster instance with the specified specification.
+// Create an ES cluster instance with the specified specification.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHCREATEINSTANCE = "AuthFailure.UnAuthCreateInstance"
@@ -250,7 +250,7 @@ func (c *Client) CreateInstance(request *CreateInstanceRequest) (response *Creat
 }
 
 // CreateInstance
-// This API is used to create an ES cluster instance with the specified specification.
+// Create an ES cluster instance with the specified specification.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHCREATEINSTANCE = "AuthFailure.UnAuthCreateInstance"
@@ -395,7 +395,7 @@ func NewDeleteIndexResponse() (response *DeleteIndexResponse) {
 }
 
 // DeleteIndex
-// This API is used to delete indices.
+// Delete an index
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -410,7 +410,7 @@ func (c *Client) DeleteIndex(request *DeleteIndexRequest) (response *DeleteIndex
 }
 
 // DeleteIndex
-// This API is used to delete indices.
+// Delete an index
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -457,7 +457,7 @@ func NewDeleteInstanceResponse() (response *DeleteInstanceResponse) {
 }
 
 // DeleteInstance
-// This API is used to terminate a cluster instance. 
+// Terminate cluster instances
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -477,7 +477,7 @@ func (c *Client) DeleteInstance(request *DeleteInstanceRequest) (response *Delet
 }
 
 // DeleteInstance
-// This API is used to terminate a cluster instance. 
+// Terminate cluster instances
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -649,7 +649,7 @@ func NewDescribeIndexMetaResponse() (response *DescribeIndexMetaResponse) {
 }
 
 // DescribeIndexMeta
-// This API is used to obtain index metadata.
+// This API is used to retrieve index metadata.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -665,7 +665,7 @@ func (c *Client) DescribeIndexMeta(request *DescribeIndexMetaRequest) (response 
 }
 
 // DescribeIndexMeta
-// This API is used to obtain index metadata.
+// This API is used to retrieve index metadata.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -713,7 +713,7 @@ func NewDescribeInstanceLogsResponse() (response *DescribeInstanceLogsResponse) 
 }
 
 // DescribeInstanceLogs
-// This API is used to query the eligible ES cluster logs in the current region.
+// Query the logs of eligible ES clusters in that region for the user.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeOut"
@@ -736,7 +736,7 @@ func (c *Client) DescribeInstanceLogs(request *DescribeInstanceLogsRequest) (res
 }
 
 // DescribeInstanceLogs
-// This API is used to query the eligible ES cluster logs in the current region.
+// Query the logs of eligible ES clusters in that region for the user.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REQUESTTIMEOUT = "FailedOperation.RequestTimeOut"
@@ -791,7 +791,7 @@ func NewDescribeInstanceOperationsResponse() (response *DescribeInstanceOperatio
 }
 
 // DescribeInstanceOperations
-// This API is used to query the operation history of an instance by specified criteria.
+// Query the operation records of an instance under specified conditions.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -805,7 +805,7 @@ func (c *Client) DescribeInstanceOperations(request *DescribeInstanceOperationsR
 }
 
 // DescribeInstanceOperations
-// This API is used to query the operation history of an instance by specified criteria.
+// Query the operation records of an instance under specified conditions.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -851,7 +851,7 @@ func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
 }
 
 // DescribeInstances
-// This API is used to query all eligible instances in the current region under the current account.
+// Query all instances meeting conditions for the user in that region
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHDESCRIBEINSTANCES = "AuthFailure.UnAuthDescribeInstances"
@@ -877,7 +877,7 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response 
 }
 
 // DescribeInstances
-// This API is used to query all eligible instances in the current region under the current account.
+// Query all instances meeting conditions for the user in that region
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHDESCRIBEINSTANCES = "AuthFailure.UnAuthDescribeInstances"
@@ -935,7 +935,7 @@ func NewDescribeViewsResponse() (response *DescribeViewsResponse) {
 }
 
 // DescribeViews
-// This API is used to query view data from three dimensions: cluster, node, and Kibana.
+// Query view data of a cluster, including cluster-level, node, and Kibana dimensions.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHCREATEINSTANCE = "AuthFailure.UnAuthCreateInstance"
@@ -952,7 +952,7 @@ func (c *Client) DescribeViews(request *DescribeViewsRequest) (response *Describ
 }
 
 // DescribeViews
-// This API is used to query view data from three dimensions: cluster, node, and Kibana.
+// Query view data of a cluster, including cluster-level, node, and Kibana dimensions.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHCREATEINSTANCE = "AuthFailure.UnAuthCreateInstance"
@@ -1001,7 +1001,7 @@ func NewGetRequestTargetNodeTypesResponse() (response *GetRequestTargetNodeTypes
 }
 
 // GetRequestTargetNodeTypes
-// This API is used to get the node types used to receive client requests.
+// Get the node type that receives client requests.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1015,7 +1015,7 @@ func (c *Client) GetRequestTargetNodeTypes(request *GetRequestTargetNodeTypesReq
 }
 
 // GetRequestTargetNodeTypes
-// This API is used to get the node types used to receive client requests.
+// Get the node type that receives client requests.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1189,7 +1189,7 @@ func NewRestartInstanceResponse() (response *RestartInstanceResponse) {
 }
 
 // RestartInstance
-// This API is used to restart an ES cluster instance (for operations such as system update). 
+// Restart ES cluster instances for system version update.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
@@ -1213,7 +1213,7 @@ func (c *Client) RestartInstance(request *RestartInstanceRequest) (response *Res
 }
 
 // RestartInstance
-// This API is used to restart an ES cluster instance (for operations such as system update). 
+// Restart ES cluster instances for system version update.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
@@ -1269,7 +1269,7 @@ func NewRestartKibanaResponse() (response *RestartKibanaResponse) {
 }
 
 // RestartKibana
-// This API is used to restart Kibana. 
+// Restart Kibana
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1284,7 +1284,7 @@ func (c *Client) RestartKibana(request *RestartKibanaRequest) (response *Restart
 }
 
 // RestartKibana
-// This API is used to restart Kibana. 
+// Restart Kibana
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1331,7 +1331,7 @@ func NewRestartNodesResponse() (response *RestartNodesResponse) {
 }
 
 // RestartNodes
-// This API is used to restart cluster nodes.
+// Used to restart cluster nodes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
@@ -1360,7 +1360,7 @@ func (c *Client) RestartNodes(request *RestartNodesRequest) (response *RestartNo
 }
 
 // RestartNodes
-// This API is used to restart cluster nodes.
+// Used to restart cluster nodes.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
@@ -1421,7 +1421,7 @@ func NewUpdateDictionariesResponse() (response *UpdateDictionariesResponse) {
 }
 
 // UpdateDictionaries
-// This API is used to update ES cluster dictionaries.
+// Update the ES cluster dictionary
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ESDICTIONARYINFOERROR = "FailedOperation.EsDictionaryInfoError"
@@ -1446,7 +1446,7 @@ func (c *Client) UpdateDictionaries(request *UpdateDictionariesRequest) (respons
 }
 
 // UpdateDictionaries
-// This API is used to update ES cluster dictionaries.
+// Update the ES cluster dictionary
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ESDICTIONARYINFOERROR = "FailedOperation.EsDictionaryInfoError"
@@ -1503,7 +1503,7 @@ func NewUpdateIndexResponse() (response *UpdateIndexResponse) {
 }
 
 // UpdateIndex
-// This API is used to update indices.
+// Updates an index
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1521,7 +1521,7 @@ func (c *Client) UpdateIndex(request *UpdateIndexRequest) (response *UpdateIndex
 }
 
 // UpdateIndex
-// This API is used to update indices.
+// Updates an index
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1571,21 +1571,21 @@ func NewUpdateInstanceResponse() (response *UpdateInstanceResponse) {
 }
 
 // UpdateInstance
-// This API is used for operations such as modifying node specification, renaming an instance, modifying configuration, resetting password, and setting Kibana blocklist/allowlist. `InstanceId` is required, while `ForceRestart` is optional. Other parameters or parameter combinations and their meanings are as follows:
+// Perform operations on the cluster, such as node specification change, instance name modification, configuration modification, password resetting, and Kibana blocklist/allowlist addition. InstanceId is a required parameter, while ForceRestart is optional. The remaining parameter combinations and their meanings are as follows:
 //
-// - InstanceName: renames an instance (only for instance identification)
+// - InstanceName: Modify the instance name (only used to identify the instance)
 //
-// - NodeInfoList: modifies node configuration (horizontally scaling nodes, vertically scaling nodes, adding primary nodes, adding cold nodes, etc.)
+// -NodeInfoList: Modify node configuration (horizontally scale nodes, vertically scale nodes, add primary nodes, add cold nodes, etc.)
 //
-// - EsConfig: modifies cluster configuration
+// -EsConfig: modify cluster configuration
 //
-// - Password: changes the password of the default user "elastic"
+// -Password: Modify the password of the default user elastic
 //
-// - EsAcl: modifies the ACL
+// -EsAcl: Modify an ACL
 //
-// - CosBackUp: sets auto-backup to COS for a cluster
+// -CosBackUp: Set cluster COS auto backup information
 //
-// Only one of the parameters or parameter combinations above can be passed in at a time, while passing fewer or more ones will cause the request to fail.
+// Only one of the above parameters can be passed. Passing more or fewer will cause request failure.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1674,21 +1674,21 @@ func (c *Client) UpdateInstance(request *UpdateInstanceRequest) (response *Updat
 }
 
 // UpdateInstance
-// This API is used for operations such as modifying node specification, renaming an instance, modifying configuration, resetting password, and setting Kibana blocklist/allowlist. `InstanceId` is required, while `ForceRestart` is optional. Other parameters or parameter combinations and their meanings are as follows:
+// Perform operations on the cluster, such as node specification change, instance name modification, configuration modification, password resetting, and Kibana blocklist/allowlist addition. InstanceId is a required parameter, while ForceRestart is optional. The remaining parameter combinations and their meanings are as follows:
 //
-// - InstanceName: renames an instance (only for instance identification)
+// - InstanceName: Modify the instance name (only used to identify the instance)
 //
-// - NodeInfoList: modifies node configuration (horizontally scaling nodes, vertically scaling nodes, adding primary nodes, adding cold nodes, etc.)
+// -NodeInfoList: Modify node configuration (horizontally scale nodes, vertically scale nodes, add primary nodes, add cold nodes, etc.)
 //
-// - EsConfig: modifies cluster configuration
+// -EsConfig: modify cluster configuration
 //
-// - Password: changes the password of the default user "elastic"
+// -Password: Modify the password of the default user elastic
 //
-// - EsAcl: modifies the ACL
+// -EsAcl: Modify an ACL
 //
-// - CosBackUp: sets auto-backup to COS for a cluster
+// -CosBackUp: Set cluster COS auto backup information
 //
-// Only one of the parameters or parameter combinations above can be passed in at a time, while passing fewer or more ones will cause the request to fail.
+// Only one of the above parameters can be passed. Passing more or fewer will cause request failure.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1809,7 +1809,7 @@ func NewUpdatePluginsResponse() (response *UpdatePluginsResponse) {
 }
 
 // UpdatePlugins
-// This API is used to change the list of plugins.
+// Update the plug-in list
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FILENAMEERROR = "FailedOperation.FileNameError"
@@ -1836,7 +1836,7 @@ func (c *Client) UpdatePlugins(request *UpdatePluginsRequest) (response *UpdateP
 }
 
 // UpdatePlugins
-// This API is used to change the list of plugins.
+// Update the plug-in list
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FILENAMEERROR = "FailedOperation.FileNameError"
@@ -1895,7 +1895,7 @@ func NewUpdateRequestTargetNodeTypesResponse() (response *UpdateRequestTargetNod
 }
 
 // UpdateRequestTargetNodeTypes
-// This API is used to update the node types used to receive client requests.
+// This API is used to update the node type that receives client requests.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1911,7 +1911,7 @@ func (c *Client) UpdateRequestTargetNodeTypes(request *UpdateRequestTargetNodeTy
 }
 
 // UpdateRequestTargetNodeTypes
-// This API is used to update the node types used to receive client requests.
+// This API is used to update the node type that receives client requests.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1959,7 +1959,7 @@ func NewUpgradeInstanceResponse() (response *UpgradeInstanceResponse) {
 }
 
 // UpgradeInstance
-// This API is used to upgrade ES cluster version
+// Upgrades the edition of an ES cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
@@ -1993,7 +1993,7 @@ func (c *Client) UpgradeInstance(request *UpgradeInstanceRequest) (response *Upg
 }
 
 // UpgradeInstance
-// This API is used to upgrade ES cluster version
+// Upgrades the edition of an ES cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ERRORCLUSTERSTATE = "FailedOperation.ErrorClusterState"
@@ -2059,7 +2059,7 @@ func NewUpgradeLicenseResponse() (response *UpgradeLicenseResponse) {
 }
 
 // UpgradeLicense
-// This API is used to upgrade ES X-Pack.
+// Upgrade ES commercial features
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ESDICTIONARYINFOERROR = "FailedOperation.EsDictionaryInfoError"
@@ -2113,7 +2113,7 @@ func (c *Client) UpgradeLicense(request *UpgradeLicenseRequest) (response *Upgra
 }
 
 // UpgradeLicense
-// This API is used to upgrade ES X-Pack.
+// Upgrade ES commercial features
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ESDICTIONARYINFOERROR = "FailedOperation.EsDictionaryInfoError"

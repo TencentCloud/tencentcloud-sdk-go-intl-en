@@ -227,6 +227,64 @@ func (c *Client) CreateStreamLinkOutputInfoWithContext(ctx context.Context, requ
     return
 }
 
+func NewCreateStreamLinkSecurityGroupRequest() (request *CreateStreamLinkSecurityGroupRequest) {
+    request = &CreateStreamLinkSecurityGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdc", APIVersion, "CreateStreamLinkSecurityGroup")
+    
+    
+    return
+}
+
+func NewCreateStreamLinkSecurityGroupResponse() (response *CreateStreamLinkSecurityGroupResponse) {
+    response = &CreateStreamLinkSecurityGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateStreamLinkSecurityGroup
+// Create security group.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_WHITELIST = "InvalidParameter.Whitelist"
+func (c *Client) CreateStreamLinkSecurityGroup(request *CreateStreamLinkSecurityGroupRequest) (response *CreateStreamLinkSecurityGroupResponse, err error) {
+    return c.CreateStreamLinkSecurityGroupWithContext(context.Background(), request)
+}
+
+// CreateStreamLinkSecurityGroup
+// Create security group.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_WHITELIST = "InvalidParameter.Whitelist"
+func (c *Client) CreateStreamLinkSecurityGroupWithContext(ctx context.Context, request *CreateStreamLinkSecurityGroupRequest) (response *CreateStreamLinkSecurityGroupResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamLinkSecurityGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mdc", APIVersion, "CreateStreamLinkSecurityGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamLinkSecurityGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateStreamLinkSecurityGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteStreamLinkFlowRequest() (request *DeleteStreamLinkFlowRequest) {
     request = &DeleteStreamLinkFlowRequest{
         BaseRequest: &tchttp.BaseRequest{},

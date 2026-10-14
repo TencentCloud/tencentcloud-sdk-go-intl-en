@@ -115,6 +115,64 @@ func (c *Client) ApplyCardVerificationExternalWithContext(ctx context.Context, r
     return
 }
 
+func NewApplyOcrTokenRequest() (request *ApplyOcrTokenRequest) {
+    request = &ApplyOcrTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "ApplyOcrToken")
+    
+    
+    return
+}
+
+func NewApplyOcrTokenResponse() (response *ApplyOcrTokenResponse) {
+    response = &ApplyOcrTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ApplyOcrToken
+// This API retrieves a token before each call to the OCR SDK verification service. Save the token to initiate the verification process and retrieve the verification result after the process completes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDCARD = "InvalidParameterValue.UnsupportedCard"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) ApplyOcrToken(request *ApplyOcrTokenRequest) (response *ApplyOcrTokenResponse, err error) {
+    return c.ApplyOcrTokenWithContext(context.Background(), request)
+}
+
+// ApplyOcrToken
+// This API retrieves a token before each call to the OCR SDK verification service. Save the token to initiate the verification process and retrieve the verification result after the process completes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDCARD = "InvalidParameterValue.UnsupportedCard"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) ApplyOcrTokenWithContext(ctx context.Context, request *ApplyOcrTokenRequest) (response *ApplyOcrTokenResponse, err error) {
+    if request == nil {
+        request = NewApplyOcrTokenRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "ApplyOcrToken")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ApplyOcrToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewApplyOcrTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewExtractDocMultiRequest() (request *ExtractDocMultiRequest) {
     request = &ExtractDocMultiRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -457,6 +515,84 @@ func (c *Client) GetCardVerificationExternalResultWithContext(ctx context.Contex
     request.SetContext(ctx)
     
     response = NewGetCardVerificationExternalResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetOcrVerificationResultRequest() (request *GetOcrVerificationResultRequest) {
+    request = &GetOcrVerificationResultRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "GetOcrVerificationResult")
+    
+    
+    return
+}
+
+func NewGetOcrVerificationResultResponse() (response *GetOcrVerificationResultResponse) {
+    response = &GetOcrVerificationResultResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetOcrVerificationResult
+// This API retrieves the SDK verification result.
+//
+// error code that may be returned:
+//  AUTHFAILURE_SIGNATUREEXPIRE = "AuthFailure.SignatureExpire"
+//  FAILEDOPERATION_FIELDEXCEPTION = "FailedOperation.FieldException"
+//  FAILEDOPERATION_IMAGENOIDCARD = "FailedOperation.ImageNoIdCard"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
+//  FAILEDOPERATION_NOHKIDCARD = "FailedOperation.NoHKIDCard"
+//  FAILEDOPERATION_NOPASSPORT = "FailedOperation.NoPassport"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  FAILEDOPERATION_WARNINGSERVICEFAILED = "FailedOperation.WarningServiceFailed"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) GetOcrVerificationResult(request *GetOcrVerificationResultRequest) (response *GetOcrVerificationResultResponse, err error) {
+    return c.GetOcrVerificationResultWithContext(context.Background(), request)
+}
+
+// GetOcrVerificationResult
+// This API retrieves the SDK verification result.
+//
+// error code that may be returned:
+//  AUTHFAILURE_SIGNATUREEXPIRE = "AuthFailure.SignatureExpire"
+//  FAILEDOPERATION_FIELDEXCEPTION = "FailedOperation.FieldException"
+//  FAILEDOPERATION_IMAGENOIDCARD = "FailedOperation.ImageNoIdCard"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
+//  FAILEDOPERATION_NOHKIDCARD = "FailedOperation.NoHKIDCard"
+//  FAILEDOPERATION_NOPASSPORT = "FailedOperation.NoPassport"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  FAILEDOPERATION_WARNINGSERVICEFAILED = "FailedOperation.WarningServiceFailed"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) GetOcrVerificationResultWithContext(ctx context.Context, request *GetOcrVerificationResultRequest) (response *GetOcrVerificationResultResponse, err error) {
+    if request == nil {
+        request = NewGetOcrVerificationResultRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "GetOcrVerificationResult")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetOcrVerificationResult require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetOcrVerificationResultResponse()
     err = c.Send(request, response)
     return
 }
@@ -2125,6 +2261,10 @@ func NewRecognizeThaiIDCardOCRResponse() (response *RecognizeThaiIDCardOCRRespon
 }
 
 // RecognizeThaiIDCardOCR
+// Domain name for API request: ocr.intl.tencentcloudapi.com.
+//
+// 
+//
 // This API is used to recognize the fields on a Thai identity card, including name in Thai, name in English, address, date of birth, identification number, date of issue, and date of expiry.
 //
 // 
@@ -2150,6 +2290,10 @@ func (c *Client) RecognizeThaiIDCardOCR(request *RecognizeThaiIDCardOCRRequest) 
 }
 
 // RecognizeThaiIDCardOCR
+// Domain name for API request: ocr.intl.tencentcloudapi.com.
+//
+// 
+//
 // This API is used to recognize the fields on a Thai identity card, including name in Thai, name in English, address, date of birth, identification number, date of issue, and date of expiry.
 //
 // 

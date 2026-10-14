@@ -56,32 +56,108 @@ type AIAnalysisTemplateItem struct {
 }
 
 type AIDubbingTaskInput struct {
-	// <p>AI Dubbing template id.</p>
+	// <p>AI dubbing template id.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// <p>Custom AI dubbing parameter. It takes effect when Definition is set to 0. This parameter is used in highly customized scenarios. We recommend that you use Definition to specify dubbing parameters.</p>
 	RawParameter *RawAIDubbingParameter `json:"RawParameter,omitnil,omitempty" name:"RawParameter"`
 
-	// <p>AI Dubbing custom parameters. Valid when Definition is not filled with 0. When some dubbing parameters in this structure are filled in, the filled parameters will be used to override the parameters in the AI Dubbing template. This parameter is used for highly customized scenarios. We recommend you use only Definition to specify dubbing parameters.</p>
+	// <p>Custom parameters for AI dubbing. Valid when Definition is not 0. If you fill in some dubbing parameters in this structure, the filled parameters will be used to override the parameters in the AI dubbing template. This parameter is used for highly customized scenarios. We recommend you use only Definition to specify dubbing parameters.</p>
 	OverrideParameter *OverrideAIDubbingParameter `json:"OverrideParameter,omitnil,omitempty" name:"OverrideParameter"`
 
-	// <p>Target storage for the file. If this is not specified, it inherits the value from the upper-level OutputStorage.</p>
+	// <p>Target storage for the file. If not specified, it inherits the upper-level OutputStorage value.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// <p>External source subtitle file information.</p>
 	SrcSubtitleInfo *MediaInputInfo `json:"SrcSubtitleInfo,omitnil,omitempty" name:"SrcSubtitleInfo"`
 
-	// <p>External subtitle file information, translated subtitles.</p>
+	// <p>External subtitle file info, translated subtitles.</p>
 	DstSubtitleInfos []*DstSubtitleInput `json:"DstSubtitleInfos,omitnil,omitempty" name:"DstSubtitleInfos"`
 
 	// <p>Output path of the file, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">File Name Variable Description</a>.<br>Relative path example:</p><li>File name_{variable name}.{format}</li><li>File name.{format}</li>Absolute path example:<li>/custom path/file name_{variable name}.{format}</li><p><strong>Note</strong>: The <code>BatchProcessMedia</code> API is currently not supported.</p>
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 
-	// <p>Additional parameters for AI Dubbing, serialized json string.</p>
+	// <p>AI dubbing extension parameter, serialized json string.</p>
 	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 
-	// <p>ID of the associated drama series.<br>Note: This value takes effect when dubbing mode is intelligent dubbing by role.</p>
+	// <p>Associated drama series ID.<br>Note: This value takes effect when the dubbing mode is intelligent dubbing by role.</p>
 	DramaId *string `json:"DramaId,omitnil,omitempty" name:"DramaId"`
+}
+
+type AIDubbingTaskOutput struct {
+	// <p>Path of subtitle file extracted from video.</p>
+	OriginSubtitlePath *string `json:"OriginSubtitlePath,omitnil,omitempty" name:"OriginSubtitlePath"`
+
+	// <p>Path of a subtitle translation file extracted from a video.</p>
+	TranslateSubtitlePath *string `json:"TranslateSubtitlePath,omitnil,omitempty" name:"TranslateSubtitlePath"`
+
+	// <p>File URL of the video after voice type cloning</p>
+	VoiceClonedVideo *string `json:"VoiceClonedVideo,omitnil,omitempty" name:"VoiceClonedVideo"`
+
+	// <p>File address of the voice type clone annotation</p>
+	VoiceClonedMarkFile *string `json:"VoiceClonedMarkFile,omitnil,omitempty" name:"VoiceClonedMarkFile"`
+
+	// <p>Video output path.</p>
+	VideoPath *string `json:"VideoPath,omitnil,omitempty" name:"VideoPath"`
+
+	// <p>FileId of the subtitle file extracted from video.</p>
+	OriginSubtitleFileId *string `json:"OriginSubtitleFileId,omitnil,omitempty" name:"OriginSubtitleFileId"`
+
+	// <p>FileId of a subtitle translation file extracted from a video.</p>
+	TranslateSubtitleFileId *string `json:"TranslateSubtitleFileId,omitnil,omitempty" name:"TranslateSubtitleFileId"`
+
+	// <p>Tag file path.</p>
+	SpeakerPath *string `json:"SpeakerPath,omitnil,omitempty" name:"SpeakerPath"`
+
+	// <p>Fileid of the tag file.</p>
+	SpeakerFileId *string `json:"SpeakerFileId,omitnil,omitempty" name:"SpeakerFileId"`
+
+	// <p>FileId of the video output after removal.</p>
+	EraseVideoFileId *string `json:"EraseVideoFileId,omitnil,omitempty" name:"EraseVideoFileId"`
+
+	// <p>Erase video output path.</p>
+	EraseVideoPath *string `json:"EraseVideoPath,omitnil,omitempty" name:"EraseVideoPath"`
+
+	// <p>Dubbed audio file path of the translation.</p>
+	DstAudioPath *string `json:"DstAudioPath,omitnil,omitempty" name:"DstAudioPath"`
+
+	// <p>FileId of the audio file for the translated dubbing.</p>
+	DstAudioFileId *string `json:"DstAudioFileId,omitnil,omitempty" name:"DstAudioFileId"`
+
+	// <p>Voice cloning editing information</p><p>Editing information for secondary modifications of voice cloning</p>
+	DubbingEditInfoUrl *string `json:"DubbingEditInfoUrl,omitnil,omitempty" name:"DubbingEditInfoUrl"`
+
+	// <p>Subtitle position after removal. <strong>Note</strong>: only applicable to subtitle extraction when return of subtitle position is enabled.</p>
+	SubtitlePos *SubtitlePosition `json:"SubtitlePos,omitnil,omitempty" name:"SubtitlePos"`
+
+	// <p>Storage location of the output file of the AI dubbing task.</p>
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+}
+
+type AIDubbingTaskResult struct {
+	// <p>Task status. Valid values are PROCESSING, SUCCESS, and FAIL.</p>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of <a href="https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81">MPS error codes</a>.</p>
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+	// <p>Error message.</p>
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// <p>AI dubbing task input.</p>
+	Input *AIDubbingTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// <p>AI dubbing task output.</p>
+	Output *AIDubbingTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// <p>Task progress.</p>
+	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// <p>Starting time of task execution, in ISO date and time format.</p>
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
+
+	// <p>Completion time of task execution, in ISO date format.</p>
+	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
 type AIRecognitionTemplateItem struct {
@@ -190,71 +266,62 @@ type ActivityPara struct {
 }
 
 type ActivityResItem struct {
-
+	// <p>Transcoding task output</p>
 	TranscodeTask *MediaProcessTaskTranscodeResult `json:"TranscodeTask,omitnil,omitempty" name:"TranscodeTask"`
 
-
+	// <p>Output of rotating image tasks</p>
 	AnimatedGraphicTask *MediaProcessTaskAnimatedGraphicResult `json:"AnimatedGraphicTask,omitnil,omitempty" name:"AnimatedGraphicTask"`
 
-
+	// <p>Time point screenshot task output</p>
 	SnapshotByTimeOffsetTask *MediaProcessTaskSnapshotByTimeOffsetResult `json:"SnapshotByTimeOffsetTask,omitnil,omitempty" name:"SnapshotByTimeOffsetTask"`
 
-
+	// <p>Output of sampling screenshot task</p>
 	SampleSnapshotTask *MediaProcessTaskSampleSnapshotResult `json:"SampleSnapshotTask,omitnil,omitempty" name:"SampleSnapshotTask"`
 
-
+	// <p>Image sprite output</p>
 	ImageSpriteTask *MediaProcessTaskImageSpriteResult `json:"ImageSpriteTask,omitnil,omitempty" name:"ImageSpriteTask"`
 
-
+	// <p>Adaptive bitrate streaming task output</p>
 	AdaptiveDynamicStreamingTask *MediaProcessTaskAdaptiveDynamicStreamingResult `json:"AdaptiveDynamicStreamingTask,omitnil,omitempty" name:"AdaptiveDynamicStreamingTask"`
 
-
+	// <p>Identification task output</p>
 	RecognitionTask *ScheduleRecognitionTaskResult `json:"RecognitionTask,omitnil,omitempty" name:"RecognitionTask"`
 
-
+	// <p>Review task output</p>
 	ReviewTask *ScheduleReviewTaskResult `json:"ReviewTask,omitnil,omitempty" name:"ReviewTask"`
 
-
+	// <p>Analysis task output</p>
 	AnalysisTask *ScheduleAnalysisTaskResult `json:"AnalysisTask,omitnil,omitempty" name:"AnalysisTask"`
 
-
+	// <p>Media quality inspection task output</p>
 	QualityControlTask *ScheduleQualityControlTaskResult `json:"QualityControlTask,omitnil,omitempty" name:"QualityControlTask"`
 
-
+	// <p>Conditional judgment task output</p>
 	ExecRuleTask *ScheduleExecRuleTaskResult `json:"ExecRuleTask,omitnil,omitempty" name:"ExecRuleTask"`
 
-
+	// <p>Smart subtitle task output</p>
 	SmartSubtitlesTask *ScheduleSmartSubtitleTaskResult `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
 
-
+	// <p>Output of the intelligent erasure task</p>
 	SmartEraseTask *SmartEraseTaskResult `json:"SmartEraseTask,omitnil,omitempty" name:"SmartEraseTask"`
+
+	// <p>AI dubbing task output.</p>
+	AIDubbingTask *AIDubbingTaskResult `json:"AIDubbingTask,omitnil,omitempty" name:"AIDubbingTask"`
 }
 
 type ActivityResult struct {
-	// Atomic task type.
-	// <li>Transcode: transcoding.</li>
-	// <li>SampleSnapshot: sampled screenshot taking.</li>
-	// <li>AnimatedGraphics: Animated image.</li>
-	// <li>SnapshotByTimeOffset: time point screenshot taking.</li>
-	// <li>ImageSprites: sprite sheet.</li>
-	// <li>AdaptiveDynamicStreaming: adaptive bitrate streaming.</li>
-	// <li>AiContentReview: content moderation.</li>
-	// <li>AIRecognition: intelligent recognition.</li>
-	// <li>AIAnalysis: AI analysis.</li>
-	// <li>AiQualityControl: media quality inspection</li>
-	// <Li>SmartSubtitles: smart subtitle</li>
-	// <li>SmartErase: intelligent removal.</li>
+	// <p>Atomic task type.</p><li>Transcode: Transcoding.</li><li>SampleSnapshot: Sampled screenshot.</li><li>AnimatedGraphics: Animated image.</li><li>SnapshotByTimeOffset: Time point screenshot.</li><li>ImageSprites: Sprite sheet.</li><li>AdaptiveDynamicStreaming: Adaptive bitrate stream.</li><li>AiContentReview: Content review.</li><li>AIRecognition: Intelligent recognition.</li><li>AIAnalysis: Intelligent analysis.</li><li>AiQualityControl: Media quality inspection.</li><li>SmartSubtitles: Smart subtitle.</li><li>SmartErase: Smart erasing.</li><li>Dubbing: AI dubbing.</li>
 	ActivityType *string `json:"ActivityType,omitnil,omitempty" name:"ActivityType"`
 
-	// Atomic task output.
+	// <p>Output of the atomic task.</p>
 	ActivityResItem *ActivityResItem `json:"ActivityResItem,omitnil,omitempty" name:"ActivityResItem"`
 }
 
 type AdaptiveDynamicStreamingInfoItem struct {
-	// Adaptive bitrate streaming specification.
+	// Adaptive bitstreaming specification.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Packaging format, which may be two kinds: HLS and MPEG-DASH.
+	// Packaging format. Possible values: HLS and MPEG-DASH.
 	Package *string `json:"Package,omitnil,omitempty" name:"Package"`
 
 	// Playback path.
@@ -271,10 +338,10 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// <p>Watermark list. Up to 10 image or text watermarks are supported.</p>
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitnil,omitempty" name:"WatermarkSet"`
 
-
+	// <p>Digital watermark parameter.</p>
 	BlindWatermark *BlindWatermarkInput `json:"BlindWatermark,omitnil,omitempty" name:"BlindWatermark"`
 
-
+	// <p>Target storage for files after adaptive bitrate streaming. If this is not specified, the upper-level OutputStorage value is used.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// <p>Output path for the manifest file after adaptive bitrate streaming, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">Filename Variables</a>.<br>Relative path example:</p><li>Filename_{variable name}.{format}</li><li>Filename.{format}</li>Absolute path example:<li>/custom path/Filename_{variable name}.{format}</li>If this is not specified, the default relative path is {inputName}_adaptiveDynamicStreaming_{definition}.{format}.
@@ -286,22 +353,22 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// <p>Output path for segment files after adaptive bitrate streaming (HLS only), which can only be a relative path. If this is not specified, the default relative path is <code>{inputName}_adaptiveDynamicStreaming_{definition}_{subStreamNumber}_{segmentNumber}.{format}</code>.</p>
 	SegmentObjectName *string `json:"SegmentObjectName,omitnil,omitempty" name:"SegmentObjectName"`
 
-
+	// <p>External subtitle feature. Specifies the subtitle file to be inserted.</p>
 	AddOnSubtitles []*AddOnSubtitle `json:"AddOnSubtitles,omitnil,omitempty" name:"AddOnSubtitles"`
 
-
+	// <p>Drm information.</p>
 	DrmInfo *DrmInfo `json:"DrmInfo,omitnil,omitempty" name:"DrmInfo"`
 
 	// <p>Adaptive bitrate streaming template type. Valid values:<br>Common: audio and video.<br>PureAudio: audio only.</p>
 	DefinitionType *string `json:"DefinitionType,omitnil,omitempty" name:"DefinitionType"`
 
-
+	// <p>Hard subtitle (burned-in subtitle) feature. Specifies the subtitle source, font size, location, and other subtitle parameters.</p>
 	SubtitleTemplate *SubtitleTemplate `json:"SubtitleTemplate,omitnil,omitempty" name:"SubtitleTemplate"`
 
 	// <p>Extended transcoding parameter field.</p>
 	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 
-
+	// <p>Set the frame at the specified pts time as a key frame and segment it. Unit: milliseconds (a relative deviation of &lt;=1ms is allowed). When gop and segment duration are specified simultaneously, they will work together. Note that RawPts needs to be enabled, keep the frame rate following the source, and ensure the passed-in pts time has a corresponding frame in the source.</p>
 	KeyPTSList []*int64 `json:"KeyPTSList,omitnil,omitempty" name:"KeyPTSList"`
 
 	// <p>External audio feature. Specifies the audio files to be inserted.</p>
@@ -375,15 +442,16 @@ type AdaptiveStreamTemplate struct {
 
 	// Whether to remove the audio stream. Value range:
 	// <li>`0`: no,</li>
-	// <li>1: yes.</li>
+	// <li>1: Yes.</li>
 	RemoveAudio *uint64 `json:"RemoveAudio,omitnil,omitempty" name:"RemoveAudio"`
 
 	// Whether to remove the video stream. Value range:
 	// <li>`0`: no,</li>
-	// <li>1: yes.</li>
+	// <li>1: Yes.</li>
 	RemoveVideo *uint64 `json:"RemoveVideo,omitnil,omitempty" name:"RemoveVideo"`
 
-
+	// Audio parameter information list.
+	// Note: This parameter is used only when audio tracks are merged in self-adaptive transcoding. The maximum length of the parameter array is 64.
 	AudioList []*AudioTemplateInfo `json:"AudioList,omitnil,omitempty" name:"AudioList"`
 }
 
@@ -402,13 +470,13 @@ type AddOnAudio struct {
 }
 
 type AddOnSubtitle struct {
-
+	// <p>Insertion method. Valid values:</p><li>subtitle-stream: Inserts a subtitle track.</li><li>close-caption-708: Encodes CEA-708 subtitles into SEI frames.</li><li>close-caption-608: Encodes CEA-608 subtitles into SEI frames.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// <p>Subtitle file.</p>
 	Subtitle *MediaInputInfo `json:"Subtitle,omitnil,omitempty" name:"Subtitle"`
 
-
+	// <p>Subtitle name.<br>Note: Only Chinese characters, letters, digits, spaces, underscores (_), hyphens (-), periods (.), and brackets are supported. The length cannot exceed 64 characters.</p>
 	SubtitleName *string `json:"SubtitleName,omitnil,omitempty" name:"SubtitleName"`
 
 	// <p>Subtitle language, such as eng.</p>
@@ -423,105 +491,96 @@ type AddOnSubtitle struct {
 
 type AdvancedSuperResolutionConfig struct {
 	// Capability configuration switch. Valid values:
-	// <li>ON: enabled.</li>
-	// <li>OFF: disabled.</li>
+	// <li>ON: enabled;</li>
+	// <li>OFF: disabled</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Type, available values:
-	// <li>standard: Common super-resolution</li>
-	// <li>super: Advanced super-resolution.
-	// <li>ultra: Advanced super-resolution ultra edition.</li>
+	// Type. Valid values:
+	// <li>standard: common super resolution</li>
+	// <li>super: advanced super-resolution super version.</li>
+	// <li>ultra: Advanced super resolution ultra version.</li>
 	// Default value: standard.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Image output mode. The default value is percent.
-	// <li>aspect: Obtain a larger rectangle with specified width and height through super-resolution.</li>
+	// <li>aspect: obtain a larger rectangle with specified width and height through super-resolution.</li>
 	// <li>fixed: obtain images of fixed width and height through super-resolution, with forced scaling supported.</li>
-	// <li>percent: Super-resolution magnification factor, which can be a decimal.</li>
+	// <li>percent: magnification factor of super-resolution, which can be a decimal.</li>
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
-	// Super-resolution multiplication rate, can be a decimal.
-	// Note: Used when Mode equals percent.
+	// Super resolution multiplication rate, which can be a decimal.
+	// Note: Used when Mode is equal to percent.
 	Percent *float64 `json:"Percent,omitnil,omitempty" name:"Percent"`
 
-	// Image width must not exceed 4096.
-	// Note: When Mode equals aspect or fixed, preferentially use this configuration.
+	// Target image width. Cannot exceed 4096.
+	// Note: When Mode is equal to aspect or fixed, preferentially use this configuration.
 	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// Target image height must not exceed 4096.
-	// Note: When Mode equals aspect or fixed, preferentially use this configuration.
+	// Target image height. Must not exceed 4096.
+	// Note: When Mode is equal to aspect or fixed, preferentially use this configuration.
 	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// The long side length of the target image must not exceed 4096.
-	// Note: This configuration is used when Mode equals aspect or fixed and the Width and Height fields are unconfigured.
+	// Long side length of the target image. Must not exceed 4096.
+	// Note: This configuration is used when Mode is equal to aspect or fixed, and Width and Height fields are not configured.
 	LongSide *int64 `json:"LongSide,omitnil,omitempty" name:"LongSide"`
 
-	// The short side length of the target image must not exceed 4096.
-	// Note: This configuration is used when Mode equals aspect or fixed and the Width and Height fields are unconfigured.
+	// Short side length of the target image. Must not exceed 4096.
+	// Note: This configuration is used when Mode is equal to aspect or fixed, and Width and Height fields are not configured.
 	ShortSide *int64 `json:"ShortSide,omitnil,omitempty" name:"ShortSide"`
 }
 
 type AiAnalysisResult struct {
-	// Task type. Valid values:
-	// <li>Classification: intelligent classification.</li>
-	// <li>Cover: intelligent cover</li>
-	// <li>Tag: intelligent tagging.</li>
-	// <li>FrameTag: intelligent frame tagging.</li>
-	// <li>Highlight: Intelligent Highlights</li>
-	// <li>DeLogo: intelligent removal.</li>
-	// <li>Description: large model summarization.</li>
-	// <li>Dubbing: Intelligent Dubbing</li>
-	// <li>VideoRemake: Video deduplication</li>
-	// <li>VideoComprehension: video (audio) recognition.</li>
-	// <li>Cutout: Video matting</li>
-	// <li>Reel: intelligent video editing.</li>
+	// <p>Task type. Valid values:</p><li>Classification: intelligent classification</li><li>Cover: intelligent cover</li><li>Tag: intelligent tag</li><li>FrameTag: intelligent frame tagging</li><li>Highlight: intelligent highlights</li><li>DeLogo: smart erasing</li><li>Description: LLM summarization</li><li>Dubbing: intelligent dubbing</li><li>VideoRemake: video deduplication</li><li>VideoComprehension: video (audio) understanding</li><li>Cutout: video matting</li><li>Reel: intelligent video creation</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// <p>Query result of the video content analysis intelligent categorization task. Valid when the task type is Classification.</p>
 	ClassificationTask *AiAnalysisTaskClassificationResult `json:"ClassificationTask,omitnil,omitempty" name:"ClassificationTask"`
 
-
+	// <p>Query result of the video content analysis Intelligent Cover Task. Valid when the task type is Cover.</p>
 	CoverTask *AiAnalysisTaskCoverResult `json:"CoverTask,omitnil,omitempty" name:"CoverTask"`
 
-
+	// <p>Query result of the video content analysis intelligent tag task. Valid when the task type is Tag.</p>
 	TagTask *AiAnalysisTaskTagResult `json:"TagTask,omitnil,omitempty" name:"TagTask"`
 
-
+	// <p>Query result of the intelligent frame tagging task for video content analysis. Valid when the task type is FrameTag.</p>
 	FrameTagTask *AiAnalysisTaskFrameTagResult `json:"FrameTagTask,omitnil,omitempty" name:"FrameTagTask"`
 
-
+	// <p>Query result of the video content analysis highlight task. Valid when the task type is Highlight.</p>
 	HighlightTask *AiAnalysisTaskHighlightResult `json:"HighlightTask,omitnil,omitempty" name:"HighlightTask"`
 
-
+	// <p>Query result of the video content analysis smart erasing task. Valid when the task type is DeLogo.</p>
 	DeLogoTask *AiAnalysisTaskDelLogoResult `json:"DeLogoTask,omitnil,omitempty" name:"DeLogoTask"`
 
-
+	// <p>The query result of a splitting task for video analysis, which is valid when the task type is SegmentRecognition.</p>
 	SegmentTask *AiAnalysisTaskSegmentResult `json:"SegmentTask,omitnil,omitempty" name:"SegmentTask"`
 
-
+	// <p>The query result of an opening and closing segments recognition task for video analysis, which is valid when the task type is HeadTailRecognition.</p>
 	HeadTailTask *AiAnalysisTaskHeadTailResult `json:"HeadTailTask,omitnil,omitempty" name:"HeadTailTask"`
 
-
+	// <p>The query result of a video content analysis summary task, valid when the task type is Description.</p>
 	DescriptionTask *AiAnalysisTaskDescriptionResult `json:"DescriptionTask,omitnil,omitempty" name:"DescriptionTask"`
 
-
+	// <p>The query result of a landscape-to-portrait task for video content analysis, which is valid when the task type is HorizontalToVertical.</p>
 	HorizontalToVerticalTask *AiAnalysisTaskHorizontalToVerticalResult `json:"HorizontalToVerticalTask,omitnil,omitempty" name:"HorizontalToVerticalTask"`
 
-
+	// <p>Query result of the video content analysis dubbing task. Valid when the task type is Dubbing.</p>
 	DubbingTask *AiAnalysisTaskDubbingResult `json:"DubbingTask,omitnil,omitempty" name:"DubbingTask"`
 
-
+	// <p>The query result of a deduplication task for video content analysis, which is valid when the task type is VideoRemake.</p>
 	VideoRemakeTask *AiAnalysisTaskVideoRemakeResult `json:"VideoRemakeTask,omitnil,omitempty" name:"VideoRemakeTask"`
 
-
+	// <p>Query result of the video (audio) understanding task. This parameter is valid when the task type is VideoComprehension.</p>
 	VideoComprehensionTask *AiAnalysisTaskVideoComprehensionResult `json:"VideoComprehensionTask,omitnil,omitempty" name:"VideoComprehensionTask"`
 
-
+	// <p>Query result of the video content analysis intelligent image masking task. Valid when the task type is Cutout.</p>
 	CutoutTask *AiAnalysisTaskCutoutResult `json:"CutoutTask,omitnil,omitempty" name:"CutoutTask"`
 
-
+	// <p>Query result of the video content analysis AI narration and video re-creation task. Valid when the task type is Reel.</p>
 	ReelTask *AiAnalysisTaskReelResult `json:"ReelTask,omitnil,omitempty" name:"ReelTask"`
+
+	// <p>Query result of the intelligent analysis common task. Valid when the task type is Generic.</p>
+	GenericTask *AiAnalysisTaskGenericResult `json:"GenericTask,omitnil,omitempty" name:"GenericTask"`
 }
 
 type AiAnalysisTaskClassificationInput struct {
@@ -538,22 +597,22 @@ type AiAnalysisTaskClassificationOutput struct {
 }
 
 type AiAnalysisTaskClassificationResult struct {
-	// Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
+	// <p>Task status. Valid values are PROCESSING, SUCCESS, and FAIL.</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// <p>Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of <a href="https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81">MPS error codes</a>.</p>
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
+	// <p>Error code. 0 indicates success, and other values indicate failure. (This field is not recommended. Use the new error code field ErrCodeExt instead.)</p>
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// Error message.
+	// <p>Error message.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Intelligent classification task input.
+	// <p>Intelligent categorization task input.</p>
 	Input *AiAnalysisTaskClassificationInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// <p>Intelligent categorization task output.</p>
 	Output *AiAnalysisTaskClassificationOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -566,30 +625,30 @@ type AiAnalysisTaskCoverInput struct {
 }
 
 type AiAnalysisTaskCoverOutput struct {
-	// Intelligent cover list.
+	// List of smart covers.
 	CoverSet []*MediaAiAnalysisCoverItem `json:"CoverSet,omitnil,omitempty" name:"CoverSet"`
 
-	// Intelligent cover storage location.
+	// Storage location of the intelligent cover.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 }
 
 type AiAnalysisTaskCoverResult struct {
-	// Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
+	// <p>Task status. Valid values are PROCESSING, SUCCESS, and FAIL.</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// <p>Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of <a href="https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81">MPS error codes</a>.</p>
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
+	// <p>Error code. 0 indicates success, and other values indicate failure. (This field is not recommended. Use the new error code field ErrCodeExt instead.)</p>
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// Error message.
+	// <p>Error message.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Input of the intelligent cover task.
+	// <p>Intelligent Cover Task input.</p>
 	Input *AiAnalysisTaskCoverInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// <p>Output of the intelligent cover task.</p>
 	Output *AiAnalysisTaskCoverOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -622,7 +681,7 @@ type AiAnalysisTaskCutoutResult struct {
 	// Input of the video matting task.
 	Input *AiAnalysisTaskCutoutInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of the video matting task.
 	Output *AiAnalysisTaskCutoutOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Task progress
@@ -656,13 +715,13 @@ type AiAnalysisTaskDelLogoOutput struct {
 	// <p>Path of a subtitle translation file extracted from a video.</p>
 	TranslateSubtitlePath *string `json:"TranslateSubtitlePath,omitnil,omitempty" name:"TranslateSubtitlePath"`
 
-
+	// <p>Subtitle position after removal. <strong>Note</strong>: only applicable to subtitle extraction when return of subtitle position is enabled.</p>
 	SubtitlePos *SubtitlePosition `json:"SubtitlePos,omitnil,omitempty" name:"SubtitlePos"`
 
-
+	// <p>File URL of the video after voice type cloning</p>
 	VoiceClonedVideo *string `json:"VoiceClonedVideo,omitnil,omitempty" name:"VoiceClonedVideo"`
 
-
+	// <p>File address of the voice type clone annotation</p>
 	VoiceClonedMarkFile *string `json:"VoiceClonedMarkFile,omitnil,omitempty" name:"VoiceClonedMarkFile"`
 
 	// <p>Result path of a video for removal only</p>
@@ -694,7 +753,7 @@ type AiAnalysisTaskDelLogoResult struct {
 	// Intelligent removal task input.
 	Input *AiAnalysisTaskDelLogoInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of intelligent erasure task.
 	Output *AiAnalysisTaskDelLogoOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -724,7 +783,7 @@ type AiAnalysisTaskDescriptionResult struct {
 	// Intelligent description task input.
 	Input *AiAnalysisTaskDescriptionInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Intelligent description task output.
 	Output *AiAnalysisTaskDescriptionOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -769,10 +828,10 @@ type AiAnalysisTaskDubbingResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Intelligent dubbing task input.
+	// Intelligent captioning task input.
 	Input *AiAnalysisTaskDubbingInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Intelligent captioning task output.
 	Output *AiAnalysisTaskDubbingOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -785,28 +844,61 @@ type AiAnalysisTaskFrameTagInput struct {
 }
 
 type AiAnalysisTaskFrameTagOutput struct {
-	// Video frame tagging list.
+	// Frame-specific tag list of the video.
 	SegmentSet []*MediaAiAnalysisFrameTagSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 }
 
 type AiAnalysisTaskFrameTagResult struct {
-	// Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
+	// <p>Task status. Valid values are PROCESSING, SUCCESS, and FAIL.</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// <p>Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of <a href="https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81">MPS error codes</a>.</p>
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
+	// <p>Error code. 0 indicates success, and other values indicate failure. (This field is not recommended. Use the new error code field ErrCodeExt instead.)</p>
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// Error message.
+	// <p>Error message.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Intelligent frame tagging task input.
+	// <p>Intelligent frame-specific tagging task input.</p>
 	Input *AiAnalysisTaskFrameTagInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// <p>Output of the intelligent frame-by-frame tagging task.</p>
 	Output *AiAnalysisTaskFrameTagOutput `json:"Output,omitnil,omitempty" name:"Output"`
+}
+
+type AiAnalysisTaskGenericInput struct {
+	// <p>ID of the intelligent analysis template.</p>
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// <p>Extended parameter.</p>
+	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
+}
+
+type AiAnalysisTaskGenericOutput struct {
+	// <p>Storage location.</p>
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+
+	// <p>Task result.</p>
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+}
+
+type AiAnalysisTaskGenericResult struct {
+	// <p>Task status. Valid values are PROCESSING, SUCCESS, and FAIL.</p><p>Enumeration values: </p><ul><li>PROCESSING: Processing</li><li>SUCCESS: Success</li><li>FAIL: Failure</li></ul>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Error code. 0: Successful. Other values: Failed.</p>
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// <p>Error message.</p>
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// <p>Intelligent analysis task input.</p>
+	Input *AiAnalysisTaskGenericInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// <p>Intelligent analysis task output.</p>
+	Output *AiAnalysisTaskGenericOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
 type AiAnalysisTaskHeadTailInput struct {
@@ -818,10 +910,10 @@ type AiAnalysisTaskHeadTailInput struct {
 }
 
 type AiAnalysisTaskHeadTailOutput struct {
-
+	// Opening pts.
 	HeadTimeOffset *float64 `json:"HeadTimeOffset,omitnil,omitempty" name:"HeadTimeOffset"`
 
-
+	// Outro pts.
 	TailTimeOffset *float64 `json:"TailTimeOffset,omitnil,omitempty" name:"TailTimeOffset"`
 }
 
@@ -838,7 +930,7 @@ type AiAnalysisTaskHeadTailResult struct {
 	// Opening and closing segments recognition task input.
 	Input *AiAnalysisTaskHeadTailInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of the opening and closing credits task.
 	Output *AiAnalysisTaskHeadTailOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -854,7 +946,7 @@ type AiAnalysisTaskHighlightOutput struct {
 	// Intelligent video highlight list.
 	HighlightSet []*MediaAiAnalysisHighlightItem `json:"HighlightSet,omitnil,omitempty" name:"HighlightSet"`
 
-
+	// Storage location of highlights.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 }
 
@@ -871,12 +963,12 @@ type AiAnalysisTaskHighlightResult struct {
 	// Input of the intelligent highlight task.
 	Input *AiAnalysisTaskHighlightInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of the intelligent highlight task.
 	Output *AiAnalysisTaskHighlightOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
 type AiAnalysisTaskHorizontalToVerticalInput struct {
-
+	// <p>ID of the horizontal-to-vertical video transformation template.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// <p>Extended parameter.</p>
@@ -884,30 +976,30 @@ type AiAnalysisTaskHorizontalToVerticalInput struct {
 }
 
 type AiAnalysisTaskHorizontalToVerticalOutput struct {
-
+	// Intelligent landscape-to-portrait video list.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-
+	// Storage location of intelligent landscape-to-portrait videos.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-
+	// Confidence degree.	
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 }
 
 type AiAnalysisTaskHorizontalToVerticalResult struct {
-
+	// Task status. Valid values are `PROCESSING`, `SUCCESS`, and `FAIL`.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// Error code. 0: successful; other values: failed.
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-
+	// Error message
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-
+	// Intelligent horizontal-to-vertical task input.
 	Input *AiAnalysisTaskHorizontalToVerticalInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Intelligent horizontal-to-vertical task output.
 	Output *AiAnalysisTaskHorizontalToVerticalOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -915,7 +1007,12 @@ type AiAnalysisTaskInput struct {
 	// Video content analysis template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-
+	// Extended parameter, whose value is a serialized json string.
+	// Note: This parameter is used to meet customization requirements. References:
+	// [Smart Erase Tutorial]: https://www.tencentcloud.com/document/product/862/101530?from_cn_redirect=1
+	// [Video Splitting (Long Videos to Short Videos) Tutorial](https://www.tencentcloud.com/document/product/862/112098?from_cn_redirect=1)
+	// [Intelligent Highlights Tutorial](https://www.tencentcloud.com/document/product/862/107280?from_cn_redirect=1)
+	// [Horizontal-to-Vertical Video Transformation](https://www.tencentcloud.com/document/product/862/112112?from_cn_redirect=1)
 	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
@@ -928,20 +1025,20 @@ type AiAnalysisTaskReelInput struct {
 }
 
 type AiAnalysisTaskReelOutput struct {
-	// Path of the commentated video.
+	// Path of the commentary video.
 	VideoPath *string `json:"VideoPath,omitnil,omitempty" name:"VideoPath"`
 
-	// Path list of the commentated video.
+	// List of commentated video paths.
 	// 
 	// **Note**:
-	// 1. When returning a file, `VideoPath` returns a file path, and `VideoPaths` is likewise populated with an element of the same path.
-	// 2. When multiple files are returned, `VideoPath` returns an empty string, and `VideoPaths` returns a file path list.
+	// 1. When a file is returned, `VideoPath` returns a file path, and `VideoPaths` also fills an element with the same path.
+	// 2. When multiple files are returned, `VideoPath` returns an empty string, and `VideoPaths` returns the file path list.
 	VideoPaths []*string `json:"VideoPaths,omitnil,omitempty" name:"VideoPaths"`
 
-	// Script file path
+	// Script file path.
 	ScriptPath *string `json:"ScriptPath,omitnil,omitempty" name:"ScriptPath"`
 
-	// Storage location of the commentated video.
+	// Storage location of the commentary video.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 }
 
@@ -955,22 +1052,22 @@ type AiAnalysisTaskReelResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// AI narration and video re-creation task input.
+	// Task input for AI narration and video re-creation.
 	Input *AiAnalysisTaskReelInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Task output for AI narration and video re-creation.
 	Output *AiAnalysisTaskReelOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-
+	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of Media Processing Service (MPS) error codes.
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
-
+	// Task progress.
 	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-
+	// Starting time of task execution, in ISO date and time format.
 	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
 
-
+	// Task completion time, in ISO date and time format.
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
@@ -986,7 +1083,7 @@ type AiAnalysisTaskSegmentOutput struct {
 	// Intelligent splitting sub-segment list.
 	SegmentSet []*SegmentRecognitionItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
-
+	// Video summary, used for offline scenarios.
 	Abstract *string `json:"Abstract,omitnil,omitempty" name:"Abstract"`
 }
 
@@ -1003,7 +1100,7 @@ type AiAnalysisTaskSegmentResult struct {
 	// Splitting task input.
 	Input *AiAnalysisTaskSegmentInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Splitting task output.
 	Output *AiAnalysisTaskSegmentOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -1016,7 +1113,7 @@ type AiAnalysisTaskTagInput struct {
 }
 
 type AiAnalysisTaskTagOutput struct {
-	// Video intelligent tag list.
+	// Intelligent video tag list.
 	TagSet []*MediaAiAnalysisTagItem `json:"TagSet,omitnil,omitempty" name:"TagSet"`
 }
 
@@ -1036,7 +1133,7 @@ type AiAnalysisTaskTagResult struct {
 	// Intelligent tag task input.
 	Input *AiAnalysisTaskTagInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Intelligent tag task output.
 	Output *AiAnalysisTaskTagOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -1052,10 +1149,10 @@ type AiAnalysisTaskVideoComprehensionOutput struct {
 	// Details of the video (audio) recognition output content.
 	VideoComprehensionAnalysisResult *string `json:"VideoComprehensionAnalysisResult,omitnil,omitempty" name:"VideoComprehensionAnalysisResult"`
 
-	// Video (Audio) understanding extended information
+	// Extended information for video (audio) understanding.
 	VideoComprehensionExtInfo *string `json:"VideoComprehensionExtInfo,omitnil,omitempty" name:"VideoComprehensionExtInfo"`
 
-	// Video shot understanding result
+	// Video storyboard understanding result
 	VideoComprehensionResultList []*VideoComprehensionResultItem `json:"VideoComprehensionResultList,omitnil,omitempty" name:"VideoComprehensionResultList"`
 }
 
@@ -1072,7 +1169,7 @@ type AiAnalysisTaskVideoComprehensionResult struct {
 	// Input file for video (audio) recognition.
 	Input *AiAnalysisTaskVideoComprehensionInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output file for video (audio) recognition.
 	Output *AiAnalysisTaskVideoComprehensionOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Error code. A null string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of MPS error codes.
@@ -1097,10 +1194,10 @@ type AiAnalysisTaskVideoRemakeInput struct {
 }
 
 type AiAnalysisTaskVideoRemakeOutput struct {
-	// File path for intelligent video deduplication
+	// File path for intelligent video deduplication.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-	// Storage location of intelligent video deduplication
+	// Storage location of intelligent video deduplication.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 }
 
@@ -1114,61 +1211,75 @@ type AiAnalysisTaskVideoRemakeResult struct {
 	// Error message
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Task input for deduplication
+	// Input of the deduplication task.
 	Input *AiAnalysisTaskVideoRemakeInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of the deduplication task.
 	Output *AiAnalysisTaskVideoRemakeOutput `json:"Output,omitnil,omitempty" name:"Output"`
+}
+
+type AiComposeConfig struct {
+	// <p>Capability configuration switch.</p><li>ON: Enable (default value);</li><li>OFF: Disable.</li>
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// <p>Compose model. Available values: compose-1.0-lite (default value, can be omitted).</p>
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// <p>Canvas definition. Can be omitted: if omitted, the natural size of the layer with the minimum ZIndex (bottom layer) is used.</p>
+	Canvas *ImageComposeCanvas `json:"Canvas,omitnil,omitempty" name:"Canvas"`
+
+	// <p>Layer list, the unique source of layers. At least 1 layer and up to 20 layers.</p>
+	Layers []*ImageComposeLayer `json:"Layers,omitnil,omitempty" name:"Layers"`
 }
 
 type AiContentReviewResult struct {
 	// Task type. Valid values:
-	// <li>Porn: porn detection.</li>
-	// <li>Terrorism: sensitive image.</li>
-	// <li>Political: sensitive image.</li>
-	// <li>Porn.Asr: Pornography detection in ASR text</li>
-	// <li>Porn.Ocr: Pornography detection in OCR text</li>
-	// <li>Political.Asr: ASR text sensitivity</li>
+	// <li>Porn: image porn detection.</li>
+	// <li>Terrorism: sensitive image</li>
+	// <li>Political: sensitive image</li>
+	// <li>Porn.Asr: ASR text-based porn detection</li>
+	// <li>Porn.Ocr: OCR text-based porn detection</li>
+	// <li>Political.Asr: ASR text sensitive</li>
 	// <li>Political.Ocr: OCR text sensitivity</li>
 	// <li>Terrorism.Ocr: OCR text sensitivity</li>
 	// <li>Prohibited.Asr: ASR text prohibited information recognition</li>
 	// <li>Prohibited.Ocr: OCR text prohibited information recognition</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Sampling frequency, i.e., the number of frames captured per second for video review.
+	// Sampling frequency, i.e., the number of frames captured per second from the video for review.
 	SampleRate *float64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
 
-	// Video duration for review, in seconds.
+	// Video duration reviewed, in seconds.
 	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
-
+	// Query result of the intelligent porn detection in image task for video content review. Valid when the task type is Porn.
 	PornTask *AiReviewTaskPornResult `json:"PornTask,omitnil,omitempty" name:"PornTask"`
 
-
+	// Query result of sensitive tasks for intelligent screen in video content review. Valid when the task type is `Terrorism`.
 	TerrorismTask *AiReviewTaskTerrorismResult `json:"TerrorismTask,omitnil,omitempty" name:"TerrorismTask"`
 
-
+	// Query result of sensitive tasks for intelligent screen in video content review. Valid when the task type is Political.
 	PoliticalTask *AiReviewTaskPoliticalResult `json:"PoliticalTask,omitnil,omitempty" name:"PoliticalTask"`
 
-
+	// Query result of the ASR text pornography detection task for video content review. Valid when TaskType is Porn.Asr.
 	PornAsrTask *AiReviewTaskPornAsrResult `json:"PornAsrTask,omitnil,omitempty" name:"PornAsrTask"`
 
-
+	// Query result of the OCR text pornography detection task for video content review. Valid when the task type is Porn.Ocr.
 	PornOcrTask *AiReviewTaskPornOcrResult `json:"PornOcrTask,omitnil,omitempty" name:"PornOcrTask"`
 
-
+	// Query result of the sensitive task for ASR text in video content review. Valid when the task type is Political.Asr.
 	PoliticalAsrTask *AiReviewTaskPoliticalAsrResult `json:"PoliticalAsrTask,omitnil,omitempty" name:"PoliticalAsrTask"`
 
-
+	// Query result of sensitive tasks for OCR text in video content review. Valid when the task type is Political.Ocr.
 	PoliticalOcrTask *AiReviewTaskPoliticalOcrResult `json:"PoliticalOcrTask,omitnil,omitempty" name:"PoliticalOcrTask"`
 
-
+	// Query result of the OCR text sensitive task for video content review. Valid when the task type is Terrorism.Ocr.
 	TerrorismOcrTask *AiReviewTaskTerrorismOcrResult `json:"TerrorismOcrTask,omitnil,omitempty" name:"TerrorismOcrTask"`
 
-
+	// Query result of the ASR text prohibited content detection task for video content review. Valid when TaskType is Prohibited.Asr.
 	ProhibitedAsrTask *AiReviewTaskProhibitedAsrResult `json:"ProhibitedAsrTask,omitnil,omitempty" name:"ProhibitedAsrTask"`
 
-
+	// Query result of the OCR text prohibited content detection task for video content review. Valid when the task type is Prohibited.Ocr.
 	ProhibitedOcrTask *AiReviewTaskProhibitedOcrResult `json:"ProhibitedOcrTask,omitnil,omitempty" name:"ProhibitedOcrTask"`
 }
 
@@ -1178,16 +1289,30 @@ type AiContentReviewTaskInput struct {
 }
 
 type AiCutoutConfig struct {
-	// <p>Capability configuration switch, available values: ON: Enable; OFF: Disable. Default value: ON.</p>
+	// <p>Capability configuration switch. Available values: ON: Enable; OFF: Disable. Default value: ON.</p>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// <p>Target type: "foreground" (default) / "pattern"</p>
+	// <p>Matting target type: "foreground" (default) / "pattern"</p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// <p>Pattern matting configuration. This parameter is valid only when Type is pattern.</p>
+	// <p>Pattern cutout configuration. This parameter is valid only when Type is pattern.</p>
 	PatternConfig *PatternConfig `json:"PatternConfig,omitnil,omitempty" name:"PatternConfig"`
 
-	// <p>Cutout model selection, optional.</p><p>Enumeration value:</p><ul><li>auto: Automatically choose appropriate model</li><li>WAND-cutout-1.0-lite: Standard version, fastest speed</li><li>WAND-cutout-2.0-lite: Enhanced, fastest speed</li><li>WAND-cutout-2.0-flash: Enhanced, quality-speed balance</li></ul>
+	// <p>Matting model selection.</p><p>Enumeration values:</p><ul><li>cutout-1.0-lite: basic version, fastest speed</li><li>cutout-1.0-flash: standard version, quality-speed balance</li></ul>
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+}
+
+type AiDecomposeConfig struct {
+	// <p>Capability configuration switch.</p><p>Enumeration values: </p><ul><li>ON: Enable the layer separation feature.</li><li>OFF: Disable the layer separation feature.</li></ul><p>Default value: ON</p>
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// <p>Expected number of layers.</p><p>Value range: [2, 17]</p>
+	Layers *int64 `json:"Layers,omitnil,omitempty" name:"Layers"`
+
+	// <p>Prompt content.</p>
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// <p>Model name.</p><p>Enumeration value:</p><ul><li>decompose-1.0-flash: 1.0 version flash model.</li></ul>
 	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
 }
 
@@ -1206,16 +1331,16 @@ type AiDramaInput struct {
 }
 
 type AiExpansionConfig struct {
-	// <p>Capability configuration switch, available values: ON: Enable; OFF: Disable. Default value: ON.</p>
+	// <p>Capability configuration switch. Available values: ON: Enable; OFF: Disable. Default value: ON.</p>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// <p>Target ratio, for example "16:9"</p>
+	// <p>Target ratio, for example, "16:9"</p>
 	AspectRatio *string `json:"AspectRatio,omitnil,omitempty" name:"AspectRatio"`
 
-	// <p>Target width (pixel)</p><p>Value ranges from 0 to 2048.</p>
+	// <p>Target width (pixel)</p><p>Value range: [0, 2048]</p>
 	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// <p>Target height (pixel)</p><p>Value ranges from 0 to 2048.</p>
+	// <p>Target height (pixel)</p><p>Value range: [0, 2048]</p>
 	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 }
 
@@ -1228,7 +1353,7 @@ type AiFissionInput struct {
 }
 
 type AiParagraphInfo struct {
-
+	// Segment summary.
 	Summary *string `json:"Summary,omitnil,omitempty" name:"Summary"`
 
 	// Segment title.
@@ -1237,10 +1362,10 @@ type AiParagraphInfo struct {
 	// Segment keyword.
 	Keywords []*string `json:"Keywords,omitnil,omitempty" name:"Keywords"`
 
-
+	// Starting time point of the segment, in seconds.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-
+	// End time point of the segment, in seconds.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 }
 
@@ -1266,15 +1391,20 @@ type AiPosterSuiteConfig struct {
 	// <p>User-defined variable.</p>
 	CustomVariables []*CustomVariable `json:"CustomVariables,omitnil,omitempty" name:"CustomVariables"`
 
-	// <p>Model name.</p><p>Enumeration value:</p><ul><li>WAND-suite-1.0-flash: WAND-suite-1.0-flash.</li></ul>
+	// <p>Model name.</p><p>Enumeration value:</p><ul><li>suite-1.0-flash: suite-1.0-flash.</li></ul>
 	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
 }
 
 type AiQualityControlTaskInput struct {
-
+	// Media quality inspection template ID.
+	// You can directly use a preset template or customize a template in the console. The preset templates are as follows:
+	// - 10: Enable all quality inspection items.
+	// - 20: Only enable quality inspection items corresponding to format diagnosis.
+	// - 30: Only enable quality inspection items corresponding to no-reference scoring.
+	// - 40: Only enable quality inspection items corresponding to screen quality.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-
+	// Channel expansion parameter, json serialized string.
 	ChannelExtPara *string `json:"ChannelExtPara,omitnil,omitempty" name:"ChannelExtPara"`
 }
 
@@ -1288,25 +1418,34 @@ type AiRecognitionResult struct {
 	// <li>TransTextRecognition: speech translation</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Face recognition result, which is valid when Type is 
+	// Valid for FaceRecognition.
 	FaceTask *AiRecognitionTaskFaceResult `json:"FaceTask,omitnil,omitempty" name:"FaceTask"`
 
-
+	// Speech keyword recognition result, which is valid when Type is
+	// Valid when set to AsrWordsRecognition.
 	AsrWordsTask *AiRecognitionTaskAsrWordsResult `json:"AsrWordsTask,omitnil,omitempty" name:"AsrWordsTask"`
 
-
+	// Full speech recognition result. When Type is
+	// Valid when AsrFullTextRecognition is used.
 	AsrFullTextTask *AiRecognitionTaskAsrFullTextResult `json:"AsrFullTextTask,omitnil,omitempty" name:"AsrFullTextTask"`
 
-
+	// Text keyword recognition result. When Type is
+	// Valid when set to OcrWordsRecognition.
 	OcrWordsTask *AiRecognitionTaskOcrWordsResult `json:"OcrWordsTask,omitnil,omitempty" name:"OcrWordsTask"`
 
-
+	// Full text recognition result. When Type is
+	// Valid when OcrFullTextRecognition is used.
 	OcrFullTextTask *AiRecognitionTaskOcrFullTextResult `json:"OcrFullTextTask,omitnil,omitempty" name:"OcrFullTextTask"`
 
-
+	// Translation result. When Type is
+	// 
+	// Valid when set to TransTextRecognition.
 	TransTextTask *AiRecognitionTaskTransTextResult `json:"TransTextTask,omitnil,omitempty" name:"TransTextTask"`
 
-
+	// Object recognition result, which is valid when Type is
+	// 
+	// Valid for ObjectRecognition.
 	ObjectTask *AiRecognitionTaskObjectResult `json:"ObjectTask,omitnil,omitempty" name:"ObjectTask"`
 }
 
@@ -1326,20 +1465,20 @@ type AiRecognitionTaskAsrFullTextResult struct {
 	// Input information on the full speech recognition task.
 	Input *AiRecognitionTaskAsrFullTextResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output information on the full speech recognition task.
 	Output *AiRecognitionTaskAsrFullTextResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-
+	// Task progress.
 	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 }
 
 type AiRecognitionTaskAsrFullTextResultInput struct {
-	// Full speech identification template ID.
+	// Full speech recognition template ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 
 type AiRecognitionTaskAsrFullTextResultOutput struct {
-	// Full speech recognition segment list.
+	// List of segments for full speech recognition.
 	SegmentSet []*AiRecognitionTaskAsrFullTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
 	// Subtitle file path.
@@ -1381,10 +1520,10 @@ type AiRecognitionTaskAsrWordsResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Input for the speech keyword recognition task.
+	// Input information on the speech keyword recognition task.
 	Input *AiRecognitionTaskAsrWordsResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output information on the speech keyword recognition task.
 	Output *AiRecognitionTaskAsrWordsResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -1397,12 +1536,12 @@ type AiRecognitionTaskAsrWordsResultItem struct {
 	// Speech keyword.
 	Word *string `json:"Word,omitnil,omitempty" name:"Word"`
 
-	// List of segments for the time when speech keywords occur.
+	// List of time segments where the speech keyword appears.
 	SegmentSet []*AiRecognitionTaskAsrWordsSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 }
 
 type AiRecognitionTaskAsrWordsResultOutput struct {
-	// Speech keyword recognition result set.
+	// Result set of speech keyword recognition.
 	ResultSet []*AiRecognitionTaskAsrWordsResultItem `json:"ResultSet,omitnil,omitempty" name:"ResultSet"`
 }
 
@@ -1430,23 +1569,23 @@ type AiRecognitionTaskFaceResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Face Recognition task input.
+	// Face recognition task input information.
 	Input *AiRecognitionTaskFaceResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output information of the face recognition task.
 	Output *AiRecognitionTaskFaceResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
 type AiRecognitionTaskFaceResultInput struct {
-	// Face Recognition template ID.
+	// Face recognition template ID.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 
 type AiRecognitionTaskFaceResultItem struct {
-	// Unique identification ID of the figure.
+	// Unique identification ID of the person.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Figure library type, indicates which figure library the recognized figure comes from.
+	// Person library type. It indicates the person library that a recognized figure comes from.
 	// <li>Default: default figure library;</li>
 	// <li>UserDefine: user-defined character library.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
@@ -1454,27 +1593,27 @@ type AiRecognitionTaskFaceResultItem struct {
 	// Figure name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Result set of segments that contain people.
+	// Result set of segments where the person appears.
 	SegmentSet []*AiRecognitionTaskFaceSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
-	// Gender
-	// <li>Male: man</li>
+	// Person gender:
+	// <li>Male: man;</li>
 	// <li>Female: woman.</li>
 	Gender *string `json:"Gender,omitnil,omitempty" name:"Gender"`
 
-	// Date of birth of a person.
+	// Date of birth of the person.
 	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 
-	// Occupation or position.
+	// Person's occupation or position.
 	Profession *string `json:"Profession,omitnil,omitempty" name:"Profession"`
 
-	// Graduation institution of the person.
+	// University of the person
 	SchoolOfGraduation *string `json:"SchoolOfGraduation,omitnil,omitempty" name:"SchoolOfGraduation"`
 
-	// Figure description.
+	// Figure introduction.
 	Abstract *string `json:"Abstract,omitnil,omitempty" name:"Abstract"`
 
-	// Birthplace or place of origin of a person.
+	// Birthplace or place of origin of the person.
 	PlaceOfBirth *string `json:"PlaceOfBirth,omitnil,omitempty" name:"PlaceOfBirth"`
 
 	// Person type:
@@ -1483,11 +1622,11 @@ type AiRecognitionTaskFaceResultItem struct {
 	PersonType *string `json:"PersonType,omitnil,omitempty" name:"PersonType"`
 
 	// Sensitivity labeling:
-	// <li>NORMAL: Normal;</li>
+	// <li>Normal: The status is normal;</li>
 	// <li>Sensitive: sensitive.</li>
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-	// Screenshot link
+	// Screenshot link.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
@@ -1531,7 +1670,7 @@ type AiRecognitionTaskObjectResult struct {
 	// Object recognition task input.
 	Input *AiRecognitionTaskObjectResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Object recognition task output information.
 	Output *AiRecognitionTaskObjectResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -1583,7 +1722,7 @@ type AiRecognitionTaskOcrFullTextResult struct {
 	// Input information on the full text recognition task.
 	Input *AiRecognitionTaskOcrFullTextResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output information on the full text recognition task.
 	Output *AiRecognitionTaskOcrFullTextResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -1632,10 +1771,10 @@ type AiRecognitionTaskOcrWordsResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Text keyword recognition task input.
+	// Input information for the text keyword recognition task.
 	Input *AiRecognitionTaskOcrWordsResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output message of the text keyword recognition task.
 	Output *AiRecognitionTaskOcrWordsResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -1687,10 +1826,10 @@ type AiRecognitionTaskTransTextResult struct {
 	// Translation task input information.
 	Input *AiRecognitionTaskTransTextResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Translation task output information.
 	Output *AiRecognitionTaskTransTextResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-
+	// Task progress.
 	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 }
 
@@ -1700,10 +1839,10 @@ type AiRecognitionTaskTransTextResultInput struct {
 }
 
 type AiRecognitionTaskTransTextResultOutput struct {
-	// Translate segments.
+	// <p>List of segments for translation.</p>
 	SegmentSet []*AiRecognitionTaskTransTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
-	// Subtitle file path.
+	// <p>Subtitle file URL.</p>
 	SubtitlePath *string `json:"SubtitlePath,omitnil,omitempty" name:"SubtitlePath"`
 }
 
@@ -1731,7 +1870,7 @@ type AiRestorationConfig struct {
 	// <p>Capability configuration switch</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// <p>Strength type</p><p>Enumeration values: </p><ul><li>weak: Weak</li><li>normal: Medium</li><li>strong: Strong</li></ul><p>Default value: normal</p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -1741,16 +1880,16 @@ type AiReviewPoliticalAsrTaskInput struct {
 }
 
 type AiReviewPoliticalAsrTaskOutput struct {
-	// Asr text sensitivity scoring, with a score ranging from 0 to -100.
+	// Sensitive score of the Asr text. Value range: 0–100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Asr text sensitive result recommendation, value ranges from...to...
+	// Sensitive result suggestions for Asr text. Value range:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Video segment list with Asr text suspected of sensitivity.
+	// List of video segments with sensitive Asr text.
 	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 }
 
@@ -1760,16 +1899,16 @@ type AiReviewPoliticalOcrTaskInput struct {
 }
 
 type AiReviewPoliticalOcrTaskOutput struct {
-	// Ocr text sensitivity score, ranging from 0 to 100.
+	// Sensitive score of the Ocr text. Value range: 0–100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Ocr text sensitive result recommendation, value ranges from...to...
+	// Sensitive result suggestions for Ocr text. Value range:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Video segment list with suspect Ocr text sensitivity.
+	// List of video segments with sensitive Ocr text.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 }
 
@@ -1779,19 +1918,19 @@ type AiReviewPoliticalTaskInput struct {
 }
 
 type AiReviewPoliticalTaskOutput struct {
-	// Video sensitive content score, ranging from 0 to 100.
+	// Sensitive score of the video. The score ranges from 0 to 100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Result Suggestions for sensitive content, value ranges from...to...
+	// Sensitive result suggestion. Value range:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Video sensitive content result tag. The mapping between the LabelSet parameter in the content moderation template's visual sensitive content task control parameter (https://www.tencentcloud.com/document/api/862/37615?from_cn_redirect=1#AiReviewPoliticalTaskOutput) and the parameter value range of this parameter:
+	// Video sensitive information tag. Mapping between the LabelSet parameter in the frame sensitive information task control parameter (https://www.tencentcloud.com/document/api/862/37615?from_cn_redirect=1#AiReviewPoliticalTaskOutput) of the content review template and the value range of this parameter:
 	// violation_photo:
 	// <li>violation_photo: violation icon.</li>
-	// Other (i.e., politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
+	// Other (politician/entertainment/sport/entrepreneur/scholar/celebrity/military):
 	// <li>politician: sensitive person.</li>
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
 
@@ -1800,66 +1939,66 @@ type AiReviewPoliticalTaskOutput struct {
 }
 
 type AiReviewPornAsrTaskInput struct {
-	// Pornography detection template ID.
+	// Porn detection template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 
 type AiReviewPornAsrTaskOutput struct {
-	// Asr text porn score, ranging from 0 to 100.
+	// Porn score of the Asr text. The score ranges from 0 to 100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Asr text pornographic result suggestion, value ranges from...to...
+	// Asr text porn detection result suggestion. Value ranges from pass to review to block.
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Video segment list with suspect Asr text pornographic information.
+	// List of video segments whose Asr text is suspected of involving pornography.
 	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewPornOcrTaskInput struct {
-	// Template ID for porn detection.
+	// Porn detection template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 
 type AiReviewPornOcrTaskOutput struct {
-	// Ocr text involves pornographic content scoring, with a score ranging from 0 to 100.
+	// Ocr text porn score. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Result Suggestions for Ocr text pornographic content, value ranges from...to...
+	// Suggestion for the porn detection result of Ocr text. Value range:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Video segment list with suspect Ocr text pornographic information.
+	// List of video segments where the Ocr text is suspected of containing pornographic content.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 }
 
 type AiReviewPornTaskInput struct {
-
+	// Porn detection template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 
 type AiReviewPornTaskOutput struct {
-	// Video porn detection score, ranging from 0 to 100.
+	// Porn information detection score in a video. The score ranges from 0 to 100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Pornographic result recommendation, value ranges from...to...
+	// Pornographic result suggestion. Value range:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Video pornographic result tag, value ranges from...to...
+	// Porn information detection result tag. Value range:
 	// <li>porn: pornography.</li>
 	// <li>sexy: sexy.</li>
-	// <li>vulgar: vulgarity.</li>
+	// <li>vulgar: vulgar.</li>
 	// <li>intimacy: intimate behavior.</li>
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
 
-	// List of video segments suspected of containing pornographic content.
+	// List of video segments suspected of pornography.
 	SegmentSet []*MediaContentReviewSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 }
 
@@ -1869,16 +2008,16 @@ type AiReviewProhibitedAsrTaskInput struct {
 }
 
 type AiReviewProhibitedAsrTaskOutput struct {
-	// Asr text involves prohibited content scoring, with a score ranging from 0 to 100.
+	// Asr text violation score. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Asr text prohibited result suggestion, value ranges from...to...
+	// Asr text violation result suggestion. Value range:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Video segment list with Asr text suspected of prohibition violations.
+	// List of video segments where the Asr text is suspected of prohibition violations.
 	SegmentSet []*MediaContentReviewAsrTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 }
 
@@ -1888,16 +2027,16 @@ type AiReviewProhibitedOcrTaskInput struct {
 }
 
 type AiReviewProhibitedOcrTaskOutput struct {
-	// Ocr text involves prohibited content scoring, with a score ranging from 0 to 100.
+	// Prohibited content score of the Ocr text. Value range: 0–100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Ocr text prohibited content result suggestion, value ranges from...to...
+	// Ocr text violation result suggestion. Value range:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Video segment list with Ocr text suspected of prohibition violations.
+	// List of video segments with Ocr text suspected of prohibition violations.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 }
 
@@ -1914,10 +2053,10 @@ type AiReviewTaskPoliticalAsrResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Content review Asr text sensitivity task input.
+	// Input of the sensitive Asr text task in content review.
 	Input *AiReviewPoliticalAsrTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of the Asr text sensitive task in content review.
 	Output *AiReviewPoliticalAsrTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -1934,10 +2073,10 @@ type AiReviewTaskPoliticalOcrResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Content review Ocr text sensitivity task input.
+	// Input of the sensitive Ocr text task in content review.
 	Input *AiReviewPoliticalOcrTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Content review Ocr text sensitivity task output.
 	Output *AiReviewPoliticalOcrTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -1954,10 +2093,10 @@ type AiReviewTaskPoliticalResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Content review sensitive task input.
+	// Sensitive task input for content review.
 	Input *AiReviewPoliticalTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of sensitive tasks in content review.
 	Output *AiReviewPoliticalTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -1974,10 +2113,10 @@ type AiReviewTaskPornAsrResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Content review Asr text pornography detection task input.
+	// Input for the Asr text pornography detection task in content review.
 	Input *AiReviewPornAsrTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Content review Asr text porn detection task output.
 	Output *AiReviewPornAsrTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -1994,10 +2133,10 @@ type AiReviewTaskPornOcrResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Content review Ocr text pornography detection task input.
+	// Task input for porn detection in Ocr text during content review.
 	Input *AiReviewPornOcrTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of the Ocr text pornography detection task for content review.
 	Output *AiReviewPornOcrTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -2014,10 +2153,10 @@ type AiReviewTaskPornResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Content review porn task input.
+	// Input for the content review pornography detection task.
 	Input *AiReviewPornTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Pornography detection task output of content review.
 	Output *AiReviewPornTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -2034,10 +2173,10 @@ type AiReviewTaskProhibitedAsrResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Content review Asr text prohibited task input.
+	// Input of the prohibited task for content review of Asr text.
 	Input *AiReviewProhibitedAsrTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of the prohibited task for content review of Asr text.
 	Output *AiReviewProhibitedAsrTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -2054,10 +2193,10 @@ type AiReviewTaskProhibitedOcrResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Content review Ocr text prohibited task input.
+	// Input of the prohibited Ocr text task in content review.
 	Input *AiReviewProhibitedOcrTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Content review Ocr text prohibited information recognition task output.
 	Output *AiReviewProhibitedOcrTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -2074,10 +2213,10 @@ type AiReviewTaskTerrorismOcrResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Content review Ocr text sensitivity task input.
+	// Content review Ocr text sensitive task input.
 	Input *AiReviewTerrorismOcrTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Content review Ocr text sensitive task output.
 	Output *AiReviewTerrorismOcrTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -2094,10 +2233,10 @@ type AiReviewTaskTerrorismResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Content review sensitive task input.
+	// Sensitive task input for content review.
 	Input *AiReviewTerrorismTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of sensitive tasks in content review.
 	Output *AiReviewTerrorismTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -2107,16 +2246,16 @@ type AiReviewTerrorismOcrTaskInput struct {
 }
 
 type AiReviewTerrorismOcrTaskOutput struct {
-	// Ocr text sensitive content score, ranging from 0 to III.
+	// Sensitive score of the Ocr text. The score ranges from 0 to 100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Ocr text sensitive result suggestion, value ranges from...to...
+	// Sensitive data detection result suggestion for Ocr text. Value range:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// List of video segments suspected of containing sensitive content in Ocr text.
+	// List of video segments whose Ocr text is suspected of containing sensitive content.
 	SegmentSet []*MediaContentReviewOcrTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 }
 
@@ -2126,25 +2265,25 @@ type AiReviewTerrorismTaskInput struct {
 }
 
 type AiReviewTerrorismTaskOutput struct {
-	// Video sensitive content score, ranging from 0 to 100.
+	// Sensitive score of the video. The score ranges from 0 to 100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Result Suggestions for sensitive content, value ranges from...to...
+	// Sensitive result suggestion. Value range:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Video sensitive content detection result tag, permissible range:
+	// Video moderation result tag. Value range:
 	// <li>guns: weapons and firearms.</li>
 	// <li>crowd: crowd gathering.</li>
 	// <li>police: police force.</li>
 	// <li>bloody: graphic violence.</li>
 	// <li>banners: sensitive flags.</li>
-	// <li>militant: militant.</li>
+	// <li>militant: militants.</li>
 	// <li>explosion: explosions and fires.</li>
 	// <li>terrorists: sensitive persons.</li>
-	// <li>scenario: Sensitive content.</li>
+	// <li>scenario: sensitive content.</li>
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
 
 	// List of video segments suspected of containing sensitive content.
@@ -2248,10 +2387,10 @@ type AiSampleWordInfo struct {
 }
 
 type AiStoryboardConfig struct {
-	// <p>Capability configuration switch, available values: ON: Enable; OFF: Disable. Default value: ON.</p>
+	// <p>Capability configuration switch. Available values: ON: Enable; OFF: Disable. Default value: ON.</p>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// <p>Specify the serial number of the storyboard to extract. Counting begins from 0. If not specified, return all storyboards.</p>
+	// <p>Specify the serial number of the storyboard image to extract. Counting begins from 0. If not specified, return all storyboard images.</p>
 	ProcessIndex *int64 `json:"ProcessIndex,omitnil,omitempty" name:"ProcessIndex"`
 }
 
@@ -2328,10 +2467,10 @@ type AigcTaskListItem struct {
 	// <p>Task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// <p>Task type</p><p>Enumeration value:</p><ul><li>VideoRedraw: Video redraw task</li><li>AIDrama: AI drama task</li></ul>
+	// <p>Task type</p><p>Enumeration values:</p><ul><li>VideoRedraw: Video redraw task</li><li>AIDrama: AI drama task</li></ul>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// <p>Task status</p><p>Enumeration values:</p><ul><li>PENDING: Task waiting for scheduling</li><li>RUNNING: Task running</li><li>FINISHED: Task executed successfully</li><li>STOP: Task termination</li><li>FAILED: Task failure</li><li>TIMEOUT: Task timeout</li></ul>
+	// <p>Task status</p><p>Enumeration values: </p><ul><li>PENDING: Task waiting for scheduling</li><li>RUNNING: Task running</li><li>FINISHED: Task executed successfully</li><li>STOP: Task termination</li><li>FAILED: Task failure</li><li>TIMEOUT: Task timeout</li></ul>
 	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
 	// <p>Task creation time</p>
@@ -2352,14 +2491,20 @@ type AigcTaskListItem struct {
 	// <p>Task execution error message</p>
 	TaskResultMsg *string `json:"TaskResultMsg,omitnil,omitempty" name:"TaskResultMsg"`
 
-	// <p>Output video resolution</p>
+	// <p>Resolution of the output video</p>
 	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 
 	// <p>Aspect ratio of the output video</p>
 	Ratio *string `json:"Ratio,omitnil,omitempty" name:"Ratio"`
 
-	// <p>Task request package</p>
+	// <p>Task request packet</p>
 	RequestBody *string `json:"RequestBody,omitnil,omitempty" name:"RequestBody"`
+
+	// <p>Other task information.</p>
+	TaskInfo *string `json:"TaskInfo,omitnil,omitempty" name:"TaskInfo"`
+
+	// <p>Task sub-status.</p>
+	Stage *string `json:"Stage,omitnil,omitempty" name:"Stage"`
 }
 
 type AigcVideoExtraParam struct {
@@ -2435,7 +2580,7 @@ type AnimatedGraphicTaskInput struct {
 	// <p>End time of the GIF in the video, in seconds.</p>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-
+	// <p>Target storage for the file after animated image conversion. If not specified, it inherits the upper-level OutputStorage value.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// <p>Output path of the file after GIF conversion, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">File Name Variable Description</a>.<br>Relative path example:</p><li>File name_{variable name}.{format}</li><li>File name.{format}</li>Absolute path example:<li>/custom path/file name_{variable name}.{format}</li>If this is not specified, the default relative path is <code>{inputName}_animatedGraphic_{definition}.{format}</code>.
@@ -2501,11 +2646,14 @@ type AnimatedGraphicsTemplate struct {
 type ArtifactRepairConfig struct {
 	// Capability configuration switch. Valid values:
 	// <li>ON: enabled;</li>
-	// <li>OFF: disabled.</li>
+	// <li>OFF: disabled</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// Type. Valid values:
+	// <li>weak</li>
+	// <li>strong</li>
+	// Default value: weak.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -2538,10 +2686,10 @@ type AsrFullTextConfigureInfoForUpdate struct {
 }
 
 type AsrHotWordsConfigure struct {
-
+	// Hotword switch.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// Hotword lexicon ID
 	LibraryId *string `json:"LibraryId,omitnil,omitempty" name:"LibraryId"`
 }
 
@@ -2608,43 +2756,60 @@ type AudioBeautifyConfig struct {
 	// <p>Capability configuration switch. Available values: </p><li>ON: Enable;</li><li>OFF: Disable.</li>Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// <p>Type. Multiple selections allowed. Available values:</p><li>declick: noise removal</li><li>deesser: de-ess</li>Default value: declick.
+	// <p>Type, multiple selections allowed. Available values:</p><li>declick: noise removal</li><li>deesser: de-ess</li>Default value: declick.
 	Types []*string `json:"Types,omitnil,omitempty" name:"Types"`
 }
 
 type AudioDenoiseConfig struct {
 	// Capability configuration switch. Valid values:
 	// <li>ON: enabled;</li>
-	// <li>OFF: disabled.</li>
+	// <li>OFF: disabled</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type AudioEnhanceConfig struct {
-
+	// <p>Audio noise reduction configuration.</p>
 	Denoise *AudioDenoiseConfig `json:"Denoise,omitnil,omitempty" name:"Denoise"`
 
-
+	// <p>Audio separation configuration.</p>
 	Separate *AudioSeparateConfig `json:"Separate,omitnil,omitempty" name:"Separate"`
 
-
+	// <p>Volume equalization configuration.</p>
 	VolumeBalance *VolumeBalanceConfig `json:"VolumeBalance,omitnil,omitempty" name:"VolumeBalance"`
 
-
+	// <p>Audio beautification configurations.</p>
 	Beautify *AudioBeautifyConfig `json:"Beautify,omitnil,omitempty" name:"Beautify"`
+
+	// <p>Audio enhancement edit.</p>
+	AudioEnhanceEdit *AudioEnhanceEditConfig `json:"AudioEnhanceEdit,omitnil,omitempty" name:"AudioEnhanceEdit"`
+}
+
+type AudioEnhanceEditConfig struct {
+	// <p>Capability configuration switch</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p>
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// <p>Audio editing type</p><p>Enumeration values:</p><ul><li>restore: Repair</li></ul><p>When enabled, you must explicitly specify the enumeration value</p>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type AudioSeparateConfig struct {
-	// Capability configuration switch. Available values:
+	// Capability configuration switch. Valid values:
 	// <li>ON: enabled;</li>
 	// <li>OFF: disabled</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// Scenario type. Valid values:
+	// <li>normal: voice and background audio scenario</li>
+	// <li>music: singing accompaniment scenario</li>
+	// Default value: normal.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Output audio track. Available values:
+	// <li>vocal: output voice.</li>
+	// <li>background: output background sound when the scenario is normal, and output accompaniment when the scenario is music</li>
+	// Default value: vocal.
 	Track *string `json:"Track,omitnil,omitempty" name:"Track"`
 }
 
@@ -2661,7 +2826,7 @@ type AudioTemplateInfo struct {
 	// <p>Audio channel mode. Valid values:</p><li>0: The number of audio channels follows that of the source.</li><li>1: Single channel.</li><li>2: Two channels.</li><li>6: 5.1 channels.</li>When the media container format is an audio format (mp3), the number of audio channels cannot be set to 5.1.<p>Default value: 2.<br>Note: If you set the audio channel to follow that of the source and the audio encoding format does not support the current audio channel, the transcoding task may fail.</p>
 	AudioChannel *int64 `json:"AudioChannel,omitnil,omitempty" name:"AudioChannel"`
 
-
+	// <p>Audio track merging information.<br>Note: This field only takes effect for adaptive transcoding.</p>
 	TrackChannelInfo *AudioTrackChannelInfo `json:"TrackChannelInfo,omitnil,omitempty" name:"TrackChannelInfo"`
 
 	// <p>Audio track language, such as chi or eng. Note: (1) This follows the ISO 639-2 standard. (2) This applies only to adaptive bitrate streaming templates. (3) The value "source" means that the source language is used.</p>
@@ -2675,30 +2840,37 @@ type AudioTemplateInfo struct {
 }
 
 type AudioTemplateInfoForUpdate struct {
-
+	// <p>Audio stream encoding format.<br>When audio transcoding is not needed, the valid value is:</p><li>copy.</li>When the outer parameter Container is mp3, the valid value is:<li>mp3.</li>When the outer parameter Container is ogg or flac, the valid value is:<li>flac.</li>When the outer parameter Container is m4a, the valid values are:<li>aac;</li><li>ac3.</li>When the outer parameter Container is mp4 or flv, the valid values are:<li>aac: suitable for mp4.</li><li>mp3: suitable for flv.</li><li>mp2.</li>When the outer parameter Container is hls, the valid values are:<li>aac.</li><li>mp3.</li>When the outer parameter Container is wav, the valid values are:<li>pcm16 and pcm24.</li>
 	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
 
-
+	// <p>Audio stream bitrate, in kbps. Value range: 0 and [26, 256]. When the value is 0, it means the audio bitrate remains consistent with that of the original audio.</p>
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-
+	// <p>Audio stream sampling rate. Different sampling rate options are provided for different encoding standards. Enter 0 to use the source audio sampling rate.<br>For details, see <a href="https://www.tencentcloud.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53">Audio Sampling Rate Range</a>.<br>Unit: Hz.<br>Note: Ensure the source audio stream sampling rate is within the supported range. Otherwise, transcoding may fail.</p>
 	SampleRate *uint64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
 
-
+	// <p>Audio channel mode. Valid values:</p><li>0: The number of audio channels follows that of the source.</li><li>1: Single channel.</li><li>2: Two channels.</li><li>6: 5.1 channels.</li>When the media container format is an audio format (mp3), the number of audio channels cannot be set to 5.1.<p>Default value: 2.<br>Note: If you set the audio channel to follow that of the source and the audio encoding format does not support the current audio channel, the transcoding task may fail.</p>
 	AudioChannel *int64 `json:"AudioChannel,omitnil,omitempty" name:"AudioChannel"`
 
-
+	// <p>Specifies the retained audio tracks for output. All source tracks are retained by default.</p>
 	StreamSelects []*int64 `json:"StreamSelects,omitnil,omitempty" name:"StreamSelects"`
 }
 
 type AudioTrackChannelInfo struct {
-
+	// Whether to enable audio mixing. Available values:
+	// 0: audio mixing disabled
+	// 1: Whether to enable audio mixing
+	// Default value: 0
 	ChannelsRemix *int64 `json:"ChannelsRemix,omitnil,omitempty" name:"ChannelsRemix"`
 
-
+	// Merge audio track input type. Available values:
+	// track: indicates usage of the audio track id.
+	// track_channel: indicates usage of the audio track id and sound channel id.
+	// Default value: track.
+	// Note: If the original video is multichannel, recommend using track_channel.
 	SelectType *string `json:"SelectType,omitnil,omitempty" name:"SelectType"`
 
-
+	// Audio track information.
 	InputTrackInfo []*TrackInfo `json:"InputTrackInfo,omitnil,omitempty" name:"InputTrackInfo"`
 }
 
@@ -2727,16 +2899,16 @@ type AwsS3FileUploadTrigger struct {
 }
 
 type AwsSQS struct {
-
+	// SQS queue area.
 	SQSRegion *string `json:"SQSRegion,omitnil,omitempty" name:"SQSRegion"`
 
-
+	// SQS queue name.
 	SQSQueueName *string `json:"SQSQueueName,omitnil,omitempty" name:"SQSQueueName"`
 
-
+	// id for read-write access to SQS.
 	S3SecretId *string `json:"S3SecretId,omitnil,omitempty" name:"S3SecretId"`
 
-
+	// key for read-write access to SQS.
 	S3SecretKey *string `json:"S3SecretKey,omitnil,omitempty" name:"S3SecretKey"`
 }
 
@@ -2861,21 +3033,21 @@ func (r *BatchProcessMediaResponse) FromJsonString(s string) error {
 }
 
 type BatchSmartSubtitlesResult struct {
-
+	// Input information for smart subtitle tasks.
 	Input *SmartSubtitleTaskResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output information for smart subtitle tasks.
 	Outputs []*SmartSubtitleTaskBatchOutput `json:"Outputs,omitnil,omitempty" name:"Outputs"`
 }
 
 type BatchSubTaskResult struct {
-
+	// Input information for a batch task.
 	InputInfos []*MediaInputInfo `json:"InputInfos,omitnil,omitempty" name:"InputInfos"`
 
-
+	// Metadata of the original video.
 	Metadatas []*MediaMetaData `json:"Metadatas,omitnil,omitempty" name:"Metadatas"`
 
-
+	// Execution result of the smart subtitle task.
 	SmartSubtitlesTaskResult *BatchSmartSubtitlesResult `json:"SmartSubtitlesTaskResult,omitnil,omitempty" name:"SmartSubtitlesTaskResult"`
 }
 
@@ -3167,48 +3339,56 @@ func (r *CloneViralResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CloneVoiceRequestParams struct {
-
+	// <p>Clone audio base64 code</p>
 	AudioData *string `json:"AudioData,omitnil,omitempty" name:"AudioData"`
 
-
+	// <p>Cloning audio URL. Valid when AudioData is empty.</p>
 	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
 
-
+	// <p>Cloning audio language. The default language is Chinese. Supported languages are the same as those for TextLang in text to speech.</p>
 	AudioLang *string `json:"AudioLang,omitnil,omitempty" name:"AudioLang"`
 
-
+	// <p>Voice attribute. Use timbre for querying and matching.</p>
 	VoiceProfile *VoiceProfile `json:"VoiceProfile,omitnil,omitempty" name:"VoiceProfile"`
 
-
+	// <p>Trial text</p>
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
-
+	// <p>Language of the trial text. By default, it is automatically detected if left blank. The currently supported languages are the same as those for TTS.</p>
 	TextLang *string `json:"TextLang,omitnil,omitempty" name:"TextLang"`
 
-
+	// <p>Output parameters. You can specify the output audio format, etc. The default output audio format is base64.</p>
 	Output *SyncDubbingOutputOption `json:"Output,omitnil,omitempty" name:"Output"`
 
-
+	// <p>Extended parameters in the format of a JSON string.</p>
 	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
 }
 
 type CloneVoiceRequest struct {
 	*tchttp.BaseRequest
 	
+	// <p>Clone audio base64 code</p>
 	AudioData *string `json:"AudioData,omitnil,omitempty" name:"AudioData"`
 
+	// <p>Cloning audio URL. Valid when AudioData is empty.</p>
 	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
 
+	// <p>Cloning audio language. The default language is Chinese. Supported languages are the same as those for TextLang in text to speech.</p>
 	AudioLang *string `json:"AudioLang,omitnil,omitempty" name:"AudioLang"`
 
+	// <p>Voice attribute. Use timbre for querying and matching.</p>
 	VoiceProfile *VoiceProfile `json:"VoiceProfile,omitnil,omitempty" name:"VoiceProfile"`
 
+	// <p>Trial text</p>
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
+	// <p>Language of the trial text. By default, it is automatically detected if left blank. The currently supported languages are the same as those for TTS.</p>
 	TextLang *string `json:"TextLang,omitnil,omitempty" name:"TextLang"`
 
+	// <p>Output parameters. You can specify the output audio format, etc. The default output audio format is base64.</p>
 	Output *SyncDubbingOutputOption `json:"Output,omitnil,omitempty" name:"Output"`
 
+	// <p>Extended parameters in the format of a JSON string.</p>
 	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
 }
 
@@ -3240,19 +3420,19 @@ func (r *CloneVoiceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CloneVoiceResponseParams struct {
-
+	// <p>Error code. 0 is returned if the request is successful.</p>
 	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
 
-
+	// <p>Error message. success is returned if the request is successful.</p>
 	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
-
+	// <p>ID of the cloned generated voice type</p>
 	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
 
-
+	// <p>base64-encoded synthetic audio</p>
 	AudioData *string `json:"AudioData,omitnil,omitempty" name:"AudioData"`
 
-
+	// <p>Synthetic audio Url, valid for 24 hours</p>
 	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
 
 	// <p>Extended information, json string</p>
@@ -3279,13 +3459,17 @@ func (r *CloneVoiceResponse) FromJsonString(s string) error {
 }
 
 type ColorEnhanceConfig struct {
-	// Capability configuration switch. Available values:
+	// Capability configuration switch. Valid values:
 	// <li>ON: enabled;</li>
 	// <li>OFF: disabled</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// Type. Valid values:
+	// <li>weak</li>
+	// <li>normal</li>
+	// <li>strong</li>
+	// Default value: weak.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -3729,19 +3913,79 @@ type ComposeVideoStream struct {
 }
 
 type ContainerDiagnoseResultItem struct {
-
+	// Diagnosed exception category. Valid values:
+	// DecodeParamException: decoding parameter exception
+	// TimeStampException: timestamp exception.
+	// FrameException: frame rate exception.
+	// StreamStatusException: stream status exception.
+	// StreamInfo: stream information exception.
+	// StreamAbnormalCharacteristics: stream characteristics exception.
+	// DecodeException: decoding exception.
+	// HLSRequirements: HLS format exception
 	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
 
-
+	// Diagnosed specific exception type. Valid values:
+	// 
+	// VideoResolutionChanged: video resolution change.
+	// AudioSampleRateChanged: audio sample rate change.
+	// AudioChannelsChanged: audio channels changed
+	// ParameterSetsChanged: stream parameter set information change.
+	// DarOrSarInvalid: video aspect ratio exception.
+	// TimestampFallback: DTS timestamp fallback
+	// DtsJitter: DTS jitter too high.
+	// PtsJitter: PTS jitter too high.
+	// AACDurationDeviation: improper AAC frame timestamp interval.
+	// AudioDroppingFrames: Audio frame dropping
+	// VideoDroppingFrames: video frame dropping.
+	// AVTimestampInterleave: improper audio-video interleaving.
+	// PtsLessThanDts: The pts of the media stream is less than dts.
+	// ReceiveFpsJitter: excessive network received frame rate jitter
+	// ReceiveFpsTooSmall: network received video frame rate too small.
+	// FpsJitter: Excessive stream frame rate jitter calculated by PTS.
+	// StreamOpenFailed: stream open failure.
+	// StreamEnd: stream end.
+	// StreamParseFailed: stream parsing failure.
+	// VideoFirstFrameNotIdr: first frame not an IDR frame.
+	// StreamNALUError: NALU Start Code Error
+	// TsStreamNoAud: The H26x stream of MPEG-TS misses AUD NALU.
+	// AudioStreamLack: no audio stream.
+	// VideoStreamLack: no video stream.
+	// LackAudioRecover: missing audio stream recovery.
+	// LackVideoRecover: missing video stream recovery.
+	// VideoBitrateOutofRange: video stream bitrate (kbps) out of range.
+	// AudioBitrateOutofRange: audio stream bitrate (kbps) out of range.
+	// VideoDecodeFailed: video decoding error.
+	// AudioDecodeFailed: audio decoding error.
+	// AudioOutOfPhase: opposite phase in dual-channel audio.
+	// VideoDuplicatedFrame: duplicate frames in video streams.
+	// AudioDuplicatedFrame: duplicate frames in audio streams.
+	// VideoRotation: video rotation.
+	// TsMultiPrograms: MPEG2-TS stream has multiple programs
+	// Mp4InvalidCodecFourcc: The codec fourcc in MP4 does not meet Apple HLS requirements.
+	// HLSBadM3u8Format: invalid M3U8 file.
+	// HLSInvalidMasterM3u8: invalid main M3U8 file.
+	// HLSInvalidMediaM3u8: invalid media M3U8 file.
+	// HLSMasterM3u8Recommended: parameters recommended by standards missing in main M3U8.
+	// HLSMediaM3u8Recommended: parameters recommended by standards missing in media M3U8.
+	// HLSMediaM3u8DiscontinuityExist: EXT-X-DISCONTINUITY in media M3U8.
+	// HLSMediaSegmentsStreamNumChange: changed number of streams in segments.
+	// HLSMediaSegmentsPTSJitterDeviation: PTS jumps between slices without EXT-X-DISCONTINUITY.
+	// HLSMediaSegmentsDTSJitterDeviation: DTS jumps between segments with no EXT-X-DISCONTINUITY
+	// TimecodeTrackExist: MP4 has a tmcd track
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Diagnosed exception level. Valid values:
+	// Fatal: affecting subsequent playback and parsing.
+	// Error: may affect playback.
+	// Warning: potential risk, which may not necessarily affect playback.
+	// Notice: Important stream information
+	// Info: general stream information.
 	SeverityLevel *string `json:"SeverityLevel,omitnil,omitempty" name:"SeverityLevel"`
 
-
+	// Timestamp of warning, format such as "2022-12-25T13:14:16Z"
 	DateTimeSet []*string `json:"DateTimeSet,omitnil,omitempty" name:"DateTimeSet"`
 
-
+	// Timestamp.
 	TimestampSet []*float64 `json:"TimestampSet,omitnil,omitempty" name:"TimestampSet"`
 }
 
@@ -3817,21 +4061,21 @@ type CosFileUploadTrigger struct {
 }
 
 type CosInputInfo struct {
-	// Name of the COS Bucket where the media processing object file resides, for example, TopRankVideo-125xxx88.
+	// Name of the COS Bucket where the media processing object file is located, for example, TopRankVideo-125xxx88.
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
-	// Region of the COS Bucket where the media processing object file resides, for example, ap-chongqing.
+	// Park where the COS Bucket of the media processing object file is located, for example, ap-chongqing.
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Input path of the media processing object file, for example `/movie/201907/WildAnimal.mov`.
+	// Input path of the MPS object file, for example `/movie/201907/WildAnimal.mov`.
 	Object *string `json:"Object,omitnil,omitempty" name:"Object"`
 }
 
 type CosOutputStorage struct {
-	// Target Bucket name for the output files generated by media processing, for example, TopRankVideo-125xxx88. If left empty, the upper-level Bucket is inherited.
+	// Target Bucket name for output files generated by media processing, for example, TopRankVideo-125xxx88. If left empty, it is inheritable from the upper layer.
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
-	// Park of the target Bucket for outputting media processing generated files, for example, ap-chongqing. If left empty, it is inheritable from the upper layer.
+	// Park of the target Bucket for output files generated by MPS, for example, ap-chongqing. If left empty, it inherits the upper layer.
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 }
 
@@ -8745,26 +8989,26 @@ func (r *DescribeAigcImageTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAigcTaskListRequestParams struct {
-	// <p>Query page started</p>
+	// <p>Start query page</p>
 	PageNum *int64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
-	// <p>How many data to get on the current page</p>
+	// <p>How many data entries to retrieve on the current page</p>
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// <p>Query filter criteria</p>
+	// <p>Query filter conditions.</p>
 	QueryTaskFilter *QueryTaskFilter `json:"QueryTaskFilter,omitnil,omitempty" name:"QueryTaskFilter"`
 }
 
 type DescribeAigcTaskListRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Query page started</p>
+	// <p>Start query page</p>
 	PageNum *int64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
-	// <p>How many data to get on the current page</p>
+	// <p>How many data entries to retrieve on the current page</p>
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// <p>Query filter criteria</p>
+	// <p>Query filter conditions.</p>
 	QueryTaskFilter *QueryTaskFilter `json:"QueryTaskFilter,omitnil,omitempty" name:"QueryTaskFilter"`
 }
 
@@ -8794,13 +9038,13 @@ type DescribeAigcTaskListResponseParams struct {
 	// <p>Total return count of the current task</p>
 	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
-	// <p>Query page started</p>
+	// <p>Start query page</p>
 	PageNum *int64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// <p>Number of data entries to retrieve on the current page</p>
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// <p>Task detail data</p>
+	// <p>Task detail data.</p>
 	Tasks []*AigcTaskListItem `json:"Tasks,omitnil,omitempty" name:"Tasks"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -8825,13 +9069,14 @@ func (r *DescribeAigcTaskListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAigcTaskStatusRequestParams struct {
-
+	// <p>Task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type DescribeAigcTaskStatusRequest struct {
 	*tchttp.BaseRequest
 	
+	// <p>Task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
@@ -8856,37 +9101,37 @@ func (r *DescribeAigcTaskStatusRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAigcTaskStatusResponseParams struct {
-
+	// <p>Task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-
+	// <p>Task status description</p><p>Enumeration values: </p><ul><li>PENDING: Task waiting for scheduling</li><li>RUNNING: Task running</li><li>FINISHED: Task executed successfully</li><li>STOP: Task termination</li><li>FAILED: Task failure</li><li>TIMEOUT: Task timeout</li></ul>
 	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
-
+	// <p>Output url</p>
 	OutputUrl *string `json:"OutputUrl,omitnil,omitempty" name:"OutputUrl"`
 
-
+	// <p>Task creation time</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-
+	// <p>Task scheduling time</p>
 	ScheduledTime *string `json:"ScheduledTime,omitnil,omitempty" name:"ScheduledTime"`
 
-
+	// <p>Task completion time</p>
 	FinishedTime *string `json:"FinishedTime,omitnil,omitempty" name:"FinishedTime"`
 
-
+	// <p>Task error code</p>
 	TaskResultCode *int64 `json:"TaskResultCode,omitnil,omitempty" name:"TaskResultCode"`
 
-
+	// <p>Task returned error message</p>
 	TaskResultMsg *string `json:"TaskResultMsg,omitnil,omitempty" name:"TaskResultMsg"`
 
-
+	// <p>Request structure</p>
 	RequestBody *string `json:"RequestBody,omitnil,omitempty" name:"RequestBody"`
 
-
+	// <p>Task type</p>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-	// <p>Other job information</p>
+	// <p>Other task information</p>
 	TaskInfo *string `json:"TaskInfo,omitnil,omitempty" name:"TaskInfo"`
 
 	// <p>Task sub-status</p>
@@ -9681,13 +9926,14 @@ func (r *DescribeContentReviewTemplatesResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeDesignTaskRequestParams struct {
-
+	// <p>Task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type DescribeDesignTaskRequest struct {
 	*tchttp.BaseRequest
 	
+	// <p>Task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
@@ -9715,19 +9961,19 @@ type DescribeDesignTaskResponseParams struct {
 	// <p>Error code. 0 is returned if the request is successful, and 100 is returned if it is being processed.</p>
 	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
 
-
+	// <p>Error message. success is returned if the request is successful.</p>
 	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
-
+	// <p>Task status.</p><p>Enumeration values: </p><ul><li>success: Success, </li><li>fail: Failure, </li><li>processing: Processing.</li></ul>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// <p>Voice type id</p>
 	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
 
-
+	// <p>Audition audio URL.</p>
 	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
 
-
+	// <p>Extended information.</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -9876,10 +10122,10 @@ func (r *DescribeImageTaskDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeImageTaskDetailResponseParams struct {
-
+	// <p>Task type. Valid value: </p><li>WorkflowTask: Workflow processing task.</li>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
-
+	// <p>Task status. Valid values: </p><li>WAITING: Waiting; </li><li>PROCESSING: Processing; </li><li>FINISH: Completed.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// <p>Error code for task failures.</p>
@@ -9891,13 +10137,13 @@ type DescribeImageTaskDetailResponseParams struct {
 	// <p>Task exception message.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-
+	// <p>Execution status and result of the image processing task.</p>
 	ImageProcessTaskResultSet []*ImageProcessTaskResult `json:"ImageProcessTaskResultSet,omitnil,omitempty" name:"ImageProcessTaskResultSet"`
 
-
+	// <p>Task creation time, in <a href="https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52">ISO date and time format</a>.</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-
+	// <p>Task completion time, in <a href="https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52">ISO date and time format</a>.</p>
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 
 	// <p>Unique template identifier.</p>
@@ -9931,38 +10177,44 @@ func (r *DescribeImageTaskDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeImageTasksRequestParams struct {
-
+	// <p>Task status filter condition.</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// <p>Number of returned records.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-
+	// <p>Scrolling identifier which is used for pulling in batches. If a single request cannot pull all the data entries, the API will return `ScrollToken`, and if the next request carries it, the next pull will start from the next entry.</p>
 	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
 
-
+	// <p>Task start time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-
+	// <p>Task end time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-
+	// <p>Filter subtask status.</p>
 	SubTaskHasFailed *bool `json:"SubTaskHasFailed,omitnil,omitempty" name:"SubTaskHasFailed"`
 }
 
 type DescribeImageTasksRequest struct {
 	*tchttp.BaseRequest
 	
+	// <p>Task status filter condition.</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
+	// <p>Number of returned records.</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
+	// <p>Scrolling identifier which is used for pulling in batches. If a single request cannot pull all the data entries, the API will return `ScrollToken`, and if the next request carries it, the next pull will start from the next entry.</p>
 	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
 
+	// <p>Task start time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
+	// <p>Task end time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
+	// <p>Filter subtask status.</p>
 	SubTaskHasFailed *bool `json:"SubTaskHasFailed,omitnil,omitempty" name:"SubTaskHasFailed"`
 }
 
@@ -9992,13 +10244,13 @@ func (r *DescribeImageTasksRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeImageTasksResponseParams struct {
-
+	// <p>Total number of records that meet filter conditions.</p><p>Unit: entries</p>
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-
+	// <p>Scrolling identifier. If a request does not return all the data entries, this field indicates the ID of the next entry. If this field is an empty string, there is no more data.</p>
 	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
 
-
+	// <p>Image task summary list.</p>
 	TaskSet []*ImageTaskInfo `json:"TaskSet,omitnil,omitempty" name:"TaskSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -12354,34 +12606,107 @@ func (r *DetectVideoWatermarkResponse) FromJsonString(s string) error {
 }
 
 type DiagnoseResult struct {
-
+	// Diagnosed exception category. Valid values:
+	// DecodeParamException: decoding parameter exception.
+	// TimeStampException: timestamp exception.
+	// FrameException: frame rate exception.
+	// StreamStatusException: stream status exception.
+	// StreamInfo: Stream information exception
+	// StreamAbnormalCharacteristics: stream characteristic exception.
+	// DecodeException: decoding exception.
+	// HLSRequirements: HLS format exception.
 	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
 
-
+	// Diagnosed specific exception type. Valid values:
+	// 
+	// VideoResolutionChanged: video resolution change.
+	// AudioSampleRateChanged: audio sample rate change.
+	// AudioChannelsChanged: audio channels changed
+	// ParameterSetsChanged: stream parameter set information change.
+	// DarOrSarInvalid: video aspect ratio exception.
+	// TimestampFallback: DTS timestamp fallback
+	// DtsJitter: DTS jitter too high.
+	// PtsJitter: PTS jitter too high.
+	// AACDurationDeviation: improper AAC frame timestamp interval.
+	// AudioDroppingFrames: audio frame dropping.
+	// VideoDroppingFrames: video frame dropping.
+	// AVTimestampInterleave: improper audio-video interleaving.
+	// PtsLessThanDts: The pts of the media stream is less than dts.
+	// ReceiveFpsJitter: excessive network received frame rate jitter.
+	// ReceiveFpsTooSmall: network received video frame rate too small.
+	// FpsJitter: Excessive stream frame rate jitter calculated by PTS.
+	// StreamOpenFailed: stream open failure.
+	// StreamEnd: stream end.
+	// StreamParseFailed: stream parsing failure.
+	// VideoFirstFrameNotIdr: first frame not an IDR frame.
+	// StreamNALUError: NALU start code error.
+	// TsStreamNoAud: The H26x stream of MPEG-TS misses AUD NALU
+	// AudioStreamLack: no audio stream.
+	// VideoStreamLack: no video stream.
+	// LackAudioRecover: missing audio stream recovery.
+	// LackVideoRecover: missing video stream recovery.
+	// VideoBitrateOutofRange: video stream bitrate (kbps) out of range.
+	// AudioBitrateOutofRange: audio stream bitrate (kbps) out of range.
+	// VideoDecodeFailed: video decoding error.
+	// AudioDecodeFailed: audio decoding error.
+	// AudioOutOfPhase: opposite phase in dual-channel audio.
+	// VideoDuplicatedFrame: duplicate frames in video streams.
+	// AudioDuplicatedFrame: duplicate frames in audio streams.
+	// VideoRotation: video rotation.
+	// TsMultiPrograms: MPEG2-TS stream has multiple programs
+	// Mp4InvalidCodecFourcc: The codec fourcc in MP4 does not meet Apple HLS requirements
+	// HLSBadM3u8Format: invalid M3U8 file.
+	// HLSInvalidMasterM3u8: invalid main M3U8 file.
+	// HLSInvalidMediaM3u8: invalid media M3U8 file.
+	// HLSMasterM3u8Recommended: parameters recommended by standards missing in main M3U8.
+	// HLSMediaM3u8Recommended: parameters recommended by standards missing in media M3U8.
+	// HLSMediaM3u8DiscontinuityExist: EXT-X-DISCONTINUITY in media M3U8.
+	// HLSMediaSegmentsStreamNumChange: changed number of streams in segments.
+	// HLSMediaSegmentsPTSJitterDeviation: PTS jumps between slices without EXT-X-DISCONTINUITY.
+	// HLSMediaSegmentsDTSJitterDeviation: DTS jumps between segments without EXT-X-DISCONTINUITY.
+	// TimecodeTrackExist: MP4 has a tmcd track
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// PTS timestamp when the anomaly is diagnosed.
 	Timestamp *float64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
 
-
+	// Exception description from diagnosis.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-
+	// Diagnose the abnormal UTC+8 time in ISO date format.
 	DateTime *string `json:"DateTime,omitnil,omitempty" name:"DateTime"`
 
-
+	// Diagnosed exception level. Valid values:
+	// Fatal: affecting subsequent playback and parsing.
+	// Error: may affect playback.
+	// Warning: potential risk, which may not necessarily affect playback.
+	// Notice: Important stream information
+	// Info: general stream information.
 	SeverityLevel *string `json:"SeverityLevel,omitnil,omitempty" name:"SeverityLevel"`
 }
 
 type DiffusionEnhanceConfig struct {
 	// Capability configuration switch. Valid values:
 	// 
-	// ON: enabled.
+	// ON: enabled
 	// OFF: disabled.
 	// Default value: OFF.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
+	// Strength type. Available values:
+	// 
+	// weak
+	// normal
+	// strong
+	// Default value: normal.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
 
+type DiffusionEnhanceV2Config struct {
+	// <p>Capability configuration switch</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p>
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// <p>Strength type</p><p>Enumeration values: </p><ul><li>weak: Weak</li><li>normal: Medium</li><li>strong: Strong</li></ul>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -12576,7 +12901,7 @@ type DrmInfo struct {
 	// Encryption type.
 	// 
 	// - simpleaes
-	// Can only be used for HLS. Format support: ts and mp4.
+	// Can only be used for HLS. Format support: ts and mp4
 	// Only slice mode can be used. singlefile mode cannot be used.
 	// 
 	// - fairplay:
@@ -12595,15 +12920,15 @@ type DrmInfo struct {
 	// 
 	// - widevine+fairplay,playready+fairplay,widevine+playready+fairplay:
 	// Can only be used for HLS. The segment format can only be mp4.
-	// Slice mode or singlefile mode can be used.
+	// Slice mode or single-file mode can be used.
 	// 
 	// - widevine+playready:
 	// Applicable to HLS and MPEG-DASH. The segment format can only be mp4.
 	// For HLS format, you can use the slicing mode or singlefile mode.
-	// For MPEG-DASH, only singlefile mode can be used.
+	// For MPEG-DASH, only can be used in singlefile mode.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// SimpleAes encryption information.
 	SimpleAesDrm *SimpleAesDrm `json:"SimpleAesDrm,omitnil,omitempty" name:"SimpleAesDrm"`
 
 	// Information about FairPlay, WideVine, and PlayReady encryption.
@@ -12611,7 +12936,7 @@ type DrmInfo struct {
 }
 
 type DstSubtitleInput struct {
-	// <p>External translation subtitle information.</p>
+	// <p>External translated subtitle info.</p>
 	DstSubtitleInfo *MediaInputInfo `json:"DstSubtitleInfo,omitnil,omitempty" name:"DstSubtitleInfo"`
 }
 
@@ -12622,7 +12947,7 @@ type DubbingConfig struct {
 	// <p>Background sound volume, range: 0-100</p><p>Default value: 80</p>
 	BackgroundVolume *int64 `json:"BackgroundVolume,omitnil,omitempty" name:"BackgroundVolume"`
 
-	// <p>Secondary fine-tuning switch. Available values: <br>ON: enable secondary fine-tuning; <br>OFF: disable secondary fine-tuning;</p><p>Default value: OFF</p><p>It can be set to ON only for RoleBasedSmartDubbing.</p>
+	// <p>Secondary fine-tuning switch. Available values: <br>ON: Enable secondary fine-tuning; <br>OFF: Disable secondary fine-tuning;</p><p>Default value: OFF</p><p>It can be set to ON only for RoleBasedSmartDubbing.</p>
 	SecondaryTuning *string `json:"SecondaryTuning,omitnil,omitempty" name:"SecondaryTuning"`
 
 	// <p>Specify voice tone</p><p>Valid only for SingleVoice and required for Create</p>
@@ -12633,7 +12958,7 @@ type DubbingConfig struct {
 }
 
 type DubbingEmbedSubtitleConfig struct {
-	// <p>id of the suppressed subtitles.</p>
+	// <p>Subtitle suppression id.</p>
 	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
 
 	// <p>Continue to use the original subtitle position.</p><p>Default value: 1</p>
@@ -12644,33 +12969,33 @@ type DubbingEmbedSubtitleConfig struct {
 }
 
 type DubbingOutputConfig struct {
-	// <p>Output method</p><p>Enumeration values:</p><ul><li>FinalVideoOnly: default, final video only</li><li>AudioAndSubtitle: translation audio + translation subtitle</li><li>Custom: customization</li></ul><p>Default value: FinalVideoOnly</p><p>No translation audio and subtitle are returned when using external subtitles</p>
+	// <p>Output method</p><p>Enumeration values:</p><ul><li>FinalVideoOnly: default, final video only</li><li>AudioAndSubtitle: translated audio + translated subtitles</li><li>Custom: custom</li></ul><p>Default value: FinalVideoOnly</p><p>No translated audio + subtitles are returned when external subtitles are used</p>
 	OutputMode *string `json:"OutputMode,omitnil,omitempty" name:"OutputMode"`
 
 	// <p>Output video switch</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: ON</p><p>Only takes effect in Custom mode</p>
 	OutputFinalVideo *string `json:"OutputFinalVideo,omitnil,omitempty" name:"OutputFinalVideo"`
 
-	// <p>Switch to output subtitle files (contains both original voice subtitles and target language subtitles)</p><p>Enumeration values:</p><ul><li>ON: enable</li><li>OFF: disable</li></ul><p>Default value: OFF</p>
+	// <p>Switch for output subtitle files (contains both original voice subtitles and target language subtitles)</p><p>Enumeration values:</p><ul><li>ON: turn on</li><li>OFF: turn off</li></ul><p>Default value: OFF</p>
 	OutputSubtitle *string `json:"OutputSubtitle,omitnil,omitempty" name:"OutputSubtitle"`
 
-	// <p>Audio switch for output translation dubbing</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p><p>Only takes effect in Custom mode</p>
+	// <p>Output translation dubbing audio switch</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p><p>Only takes effect in Custom mode</p>
 	OutputDstAudio *string `json:"OutputDstAudio,omitnil,omitempty" name:"OutputDstAudio"`
 
-	// <p>Subtitle suppression configuration message.</p>
+	// <p>Suppression subtitle configuration message.</p>
 	EmbedSubtitleConfig *DubbingEmbedSubtitleConfig `json:"EmbedSubtitleConfig,omitnil,omitempty" name:"EmbedSubtitleConfig"`
 }
 
 type DubbingSubtitleConfig struct {
-	// <p>Subtitle source.</p><p>Enumeration values:</p><ul><li>OCR: OCR text recognition, recognizes text in video frames.</li><li>ASR: ASR speech recognition, recognizes voice dialogue in videos.</li><li>External: External subtitle file, provide the URL of the original/translated subtitles.</li></ul>
+	// <p>Subtitle source.</p><p>Enumeration values:</p><ul><li>OCR: OCR text recognition, recognizes text in video footage.</li><li>ASR: ASR speech recognition, recognizes voice dialogue in videos.</li><li>External: External subtitle file, provided by original/translated subtitle URL.</li></ul>
 	SubtitleSource *string `json:"SubtitleSource,omitnil,omitempty" name:"SubtitleSource"`
 
-	// <p>Use ASR to assist OCR.</p><p>Enumeration values:</p><ul><li>ON: Enable the use of ASR to assist OCR.</li><li>OFF: Disable the use of ASR to assist OCR.</li></ul><p>Default value: OFF</p><p>Can be set to ON only when SubtitleSource=OCR</p>
+	// <p>Use ASR to assist OCR.</p><p>Enumeration values:</p><ul><li>ON: Enable ASR to assist OCR.</li><li>OFF: Disable ASR to assist OCR.</li></ul><p>Default value: OFF</p><p>Can be set to ON only when SubtitleSource is OCR</p>
 	AsrAssistOcr *string `json:"AsrAssistOcr,omitnil,omitempty" name:"AsrAssistOcr"`
 
-	// <p>Erase the original subtitle.</p><p>Enumeration values:</p><ul><li>ON: Erase the original subtitle.</li><li>OFF: Retain the original subtitle.</li></ul><p>Default value: OFF</p><p>Cannot be set to ON when SubtitleSource=External</p>
+	// <p>Erase the original subtitle.</p><p>Enumeration values:</p><ul><li>ON: Erase the original subtitle.</li><li>OFF: Keep the original subtitle.</li></ul><p>Default value: OFF</p><p>Cannot be set to ON when SubtitleSource=External</p>
 	EraseOriginalSubtitle *string `json:"EraseOriginalSubtitle,omitnil,omitempty" name:"EraseOriginalSubtitle"`
 
-	// <p>Subtitle location information.</p>
+	// <p>Subtitle position information.</p>
 	SelectingSubtitleAreasConfig *SelectingSubtitleAreasConfig `json:"SelectingSubtitleAreasConfig,omitnil,omitempty" name:"SelectingSubtitleAreasConfig"`
 }
 
@@ -12681,21 +13006,23 @@ type DubbingTranslateConfig struct {
 	// <p>Target language of the translation.</p>
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
 
-	// <p>Intelligent translation simplification.</p><p>Enumeration values: </p><ul><li>ON: Turn on intelligent translation simplification.</li><li>OFF: Turn off intelligent translation simplification.</li></ul><p>Default value: OFF</p>
+	// <p>Intelligent translation simplification.</p><p>Enumeration values: </p><ul><li>ON: Enable intelligent translation simplification.</li><li>OFF: Disable intelligent translation simplification.</li></ul><p>Default value: OFF</p>
 	SimplifyTranslation *string `json:"SimplifyTranslation,omitnil,omitempty" name:"SimplifyTranslation"`
 }
 
 type EditMediaFileInfo struct {
-	// Input video information.
+	// Video input information.
 	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
 
-	// [Edit] task takes effect, video editing start time offset, measurement unit: second.
+	// [Edit] task takes effect. Start time offset for video editing, in seconds.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// [Edit] task takes effect, video editing end time offset, measurement unit: second.
+	// [Edit] task takes effect. End time offset of video editing. Measurement unit: second.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-
+	// [Compose] task required, used for media in track elements to associate source material ID.
+	// 
+	// Note: It can include letters (case insensitive), digits, -, and _, up to 32 characters.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
@@ -12842,17 +13169,17 @@ type EditMediaTask struct {
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Error code.
-	// <li>0: Success;</li>
-	// <li>Additional values: fail.</li>
+	// <li>0: success;</li>
+	// <li>Other values: Failed.</li>
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Input for video editing tasks.
+	// Input for a video editing task.
 	Input *EditMediaTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of the video editing task.
 	Output *EditMediaTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -12868,7 +13195,7 @@ type EditMediaTaskOutput struct {
 	// Path of the edited video file.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-
+	// Metadata of the edited video file.
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 }
 
@@ -13068,24 +13395,24 @@ func (r *EnableWorkflowResponse) FromJsonString(s string) error {
 }
 
 type EnhanceConfig struct {
-
+	// Video enhancement configuration.
 	VideoEnhance *VideoEnhanceConfig `json:"VideoEnhance,omitnil,omitempty" name:"VideoEnhance"`
 
-
+	// Audio enhancement configuration.
 	AudioEnhance *AudioEnhanceConfig `json:"AudioEnhance,omitnil,omitempty" name:"AudioEnhance"`
 }
 
 type EraseArea struct {
-	// <p>Top-left X-axis coordinate of the area.<br>For example, when Unit is 1, meaning percentage is used, 0.05 indicates the horizontal distance from the top-left corner of the area to the top-left corner of the entire frame is 5% of the frame width.</p>
+	// <p>Top-left X-axis coordinate of the region.<br>For example, when Unit is 1, meaning usage percentage, 0.05 indicates the horizontal distance from the top-left corner of the region to the top-left corner of the entire frame is 5% of the frame width.</p>
 	LeftTopX *float64 `json:"LeftTopX,omitnil,omitempty" name:"LeftTopX"`
 
-	// <p>Y-coordinate of the upper left corner of the region.<br>For example, when Unit is 1, meaning usage percentage, 0.1 indicates the vertical distance from the upper left corner of the region to the upper left corner of the entire frame is 10% of the screen height.</p>
+	// <p>Y-coordinate of the upper left corner of the region.<br>For example, when Unit is 1, i.e., using percentage as the measurement unit, 0.1 means the vertical distance from the upper left corner of the region to the upper left corner of the entire frame is 10% of the screen height.</p>
 	LeftTopY *float64 `json:"LeftTopY,omitnil,omitempty" name:"LeftTopY"`
 
-	// <p>X-coordinate of the bottom-right corner of the region.<br>For example, when Unit is 1, meaning percentage is used, 0.75 indicates the horizontal distance from the bottom-right corner of the region to the top-left corner of the entire frame is 75% of the frame width.</p>
+	// <p>X-coordinate of the region's bottom-right corner.<br>For example, when Unit is 1 (percentage), 0.75 means the horizontal distance from the bottom-right corner of the region to the upper left corner of the entire frame is 75% of the frame width.</p>
 	RightBottomX *float64 `json:"RightBottomX,omitnil,omitempty" name:"RightBottomX"`
 
-	// <p>Y-coordinate of the region's bottom-right corner.<br>For example, when Unit is 1 (percentage), 0.9 means the vertical distance from the bottom-right corner of the region to the top-left corner of the entire frame is 90% of the screen height.</p>
+	// <p>Y-axis coordinate of the bottom-right corner of the region.<br>For example, when Unit is 1 (usage percentage), 0.9 means the vertical distance from the bottom-right corner of the region to the top-left corner of the entire frame is 90% of the screen height.</p>
 	RightBottomY *float64 `json:"RightBottomY,omitnil,omitempty" name:"RightBottomY"`
 
 	// <p>Coordinate unit</p><ul><li>1 Percentage</li><li>2 Pixel value</li></ul>
@@ -13093,13 +13420,13 @@ type EraseArea struct {
 }
 
 type EraseTimeArea struct {
-
+	// Start time in milliseconds.
 	BeginMs *uint64 `json:"BeginMs,omitnil,omitempty" name:"BeginMs"`
 
-
+	// End time in ms.
 	EndMs *uint64 `json:"EndMs,omitnil,omitempty" name:"EndMs"`
 
-
+	// List of regions removed within the period
 	Areas []*EraseArea `json:"Areas,omitnil,omitempty" name:"Areas"`
 }
 
@@ -13109,7 +13436,7 @@ type ExecRuleTaskData struct {
 }
 
 type ExecRulesTask struct {
-
+	// Conditional judgment information.
 	Rules []*Rules `json:"Rules,omitnil,omitempty" name:"Rules"`
 }
 
@@ -13266,7 +13593,7 @@ type ExtractBlindWatermarkTask struct {
 	// Media processing task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Task flow status. Valid values:
+	// Task stream status. Valid values:
 	// <li>WAITING: waiting.</li>
 	// <li>PROCESSING: Processing;</li>
 	// <li>FINISH: completed</li>
@@ -13278,24 +13605,24 @@ type ExtractBlindWatermarkTask struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Target file info of Media Processing Service.
+	// Information of the media processing target file.
 	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
 
 	// Digital watermark type. Valid values: <li>blind-basic: basic copyright digital watermark;</li> <li>blind-ab: ab copyright digital watermark.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Tag whether a watermark is detected. If this parameter is true, the Result field will return the watermark extraction Result. If this parameter is false, the Result field will not return it.
+	// Whether a watermark is detected. If this parameter is true, the Result field will return the watermark extraction Result. If this parameter is false, the Result field will not return.
 	IsDetected *bool `json:"IsDetected,omitnil,omitempty" name:"IsDetected"`
 
-	// Watermark content fetched. Field will not be returned if no digital watermark is detected.
+	// Fetched digital watermark content. This field will not be returned if no watermark is detected.
 	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// Extract digital watermark configuration.
+	// Configuration of digital watermark extraction.
 	ExtractBlindWatermarkConfig *ExtractBlindWatermarkTaskConfig `json:"ExtractBlindWatermarkConfig,omitnil,omitempty" name:"ExtractBlindWatermarkConfig"`
 }
 
 type ExtractBlindWatermarkTaskConfig struct {
-	// Valid when the digital watermark type is blind-abseq, used to specify the segment duration of the input video. Unit: ms.
+	// Valid when the digital watermark extraction type is blind-abseq. Used to specify the segment duration of the input video. Unit: ms.
 	// If left empty, the default segment duration is 5 seconds.
 	SegmentDuration *int64 `json:"SegmentDuration,omitnil,omitempty" name:"SegmentDuration"`
 }
@@ -13354,13 +13681,13 @@ type FaceConfigureInfoForUpdate struct {
 }
 
 type FaceEnhanceConfig struct {
-	// Whether to enable the feature. Valid values:
-	// <li>ON</li>
-	// <li>OFF</li>
+	// Capability configuration switch. Valid values:
+	// <li>ON: enabled;</li>
+	// <li>OFF: disabled.</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Intensity, value ranges from 0.0 to 1.0.
+	// Strength. Value range: 0.0 to 1.0.
 	// Default: 0.0.
 	Intensity *float64 `json:"Intensity,omitnil,omitempty" name:"Intensity"`
 }
@@ -13407,26 +13734,28 @@ type FissionTaskInfo struct {
 
 type FrameRateConfig struct {
 	// Capability configuration switch. Valid values:
-	// <li>ON: enabled</li>
-	// <li>OFF: disabled.</li>
+	// <li>ON: enabled;</li>
+	// <li>OFF: disabled</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// Frame rate. Value ranges from 0 to 100. Measurement unit: Hz.
+	// Default value: 0.
+	// Note: For transcoding, this parameter overrides the internal Fps in VideoTemplate.
 	Fps *uint64 `json:"Fps,omitnil,omitempty" name:"Fps"`
 }
 
 type FrameRateWithDenConfig struct {
 	// Capability configuration switch. Valid values:
-	// <li>ON: enabled</li>
-	// <li>OFF: disabled</li>
+	// <li>ON: enabled;</li>
+	// <li>OFF: disabled.</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// Frame rate numerator. Value range: non-negative number, which should be less than 120 when divided by the denominator, and in the unit of Hz. The default value is 0. Note: For transcoding, this parameter will overwrite the Fps in the VideoTemplate.
 	FpsNum *int64 `json:"FpsNum,omitnil,omitempty" name:"FpsNum"`
 
-
+	// Frame rate denominator. Value range: numbers equal to or greater than 1. The default value is 1. Note: For transcoding, this parameter will override the FpsDenominator in the VideoTemplate.
 	FpsDen *int64 `json:"FpsDen,omitnil,omitempty" name:"FpsDen"`
 }
 
@@ -13462,20 +13791,25 @@ type HLSConfigureInfo struct {
 
 type HdrConfig struct {
 	// Capability configuration switch. Valid values:
-	// <li>ON: enabled;</li>
-	// <li>OFF: disabled</li>
+	// <li>ON: enabled</li>
+	// <li>OFF: disabled.</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// Type. Valid values:
+	// <li>HDR10</li>
+	// <li>HLG</li>
+	// Default Value: HDR10.
+	// Note: The video encoding method should be h264 or h265.
+	// Note: The video encoding bit depth is 10.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type HeadTailParameter struct {
-
+	// List of opening scenes.
 	HeadSet []*MediaInputInfo `json:"HeadSet,omitnil,omitempty" name:"HeadSet"`
 
-
+	// Ending list.
 	TailSet []*MediaInputInfo `json:"TailSet,omitnil,omitempty" name:"TailSet"`
 }
 
@@ -13486,10 +13820,10 @@ type HighlightSegmentItem struct {
 	// Segment start time offset.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// End time offset of the recording clip.
+	// End time offset of a recording clip.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-
+	// Segment tag.
 	SegmentTags []*string `json:"SegmentTags,omitnil,omitempty" name:"SegmentTags"`
 
 	// The start time of a live streaming segment, in the ISO date format.	
@@ -13506,17 +13840,17 @@ type HighlightSegmentItem struct {
 }
 
 type ImageAreaBoxInfo struct {
-	// Type of the box selection area in the image. Valid values:
+	// Type of the box selection area in the image. Available values:
 	// <li>logo: icon.</li>
 	// <li>Text: text.</li>
 	// Default value: logo.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Coordinates (pixel-level) of the box selection area in the image, in the format of [x1, y1, x2, y2]. It indicates the coordinates of the top left corner and the bottom right corner. Note: The maximum value of this field is 4096.
-	// For example, [101, 85, 111, —].
+	// For example, [101, 85, 111, 95].
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil,omitempty" name:"AreaCoordSet"`
 
-	// Coordinates of the box selection area in the image, in the format of [x1, y1, x2, y2]. It indicates the coordinates of the top left corner and the bottom right corner. This parameter is valid only when AreaCoordSet is not specified. When it indicates the pixel, the maximum value of this field is 4096.
+	// Coordinates of the box selection area in the image, in the format of [x1, y1, x2, y2]. It indicates the coordinates of the top-left corner and the bottom-right corner. This field is valid only when AreaCoordSet is not specified. When it represents pixels, the maximum value of this field is 4096.
 	// - [0.1, 0.1, 0.3, 0.3]: indicates the ratio (values are less than 1).
 	// - [50, 50, 350, 280]: indicates the pixel (values are greater than or equal to 1).
 	BoundingBox []*float64 `json:"BoundingBox,omitnil,omitempty" name:"BoundingBox"`
@@ -13525,14 +13859,39 @@ type ImageAreaBoxInfo struct {
 	BoundingBoxUnitType *uint64 `json:"BoundingBoxUnitType,omitnil,omitempty" name:"BoundingBoxUnitType"`
 }
 
+type ImageComposeCanvas struct {
+	// <p>Canvas width, value ranges from 1 to 10240. Set both this and Height at the same time.</p>
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
+
+	// <p>Canvas height, in the range of [1, 10240]. Set it simultaneously with Width.</p>
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
+
+	// <p>Canvas background color, unified as an 8-digit hexadecimal #RRGGBBAA (including alpha), used as the canvas background color. Default #00000000 (fully transparent). Example: #FFFFFFFF opaque white, #FFFFFF80 semi-transparent white.</p><p>When the output format does not support transparent channel (such as JPEG), transparent areas are collapsed according to the RGB of this background color. The default value will get a black background. If a white background is required, explicitly pass #FFFFFFFF.</p>
+	Background *string `json:"Background,omitnil,omitempty" name:"Background"`
+}
+
+type ImageComposeLayer struct {
+	// <p>Layer stacking sequence, required. It cannot be repeated in the same request. The larger the value, the higher the layer (it is recommended to start consecutive numbering from 0).</p>
+	ZIndex *int64 `json:"ZIndex,omitnil,omitempty" name:"ZIndex"`
+
+	// <p>Layer source, required. Supports URL / COS / AWS-S3 / VOD.</p>
+	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// <p>The position and size of the layer in the canvas. Required. An array of length 4 [X1, Y1, X2, Y2]: coordinates of the top-left and bottom-right corners. X2 > X1 and Y2 > Y1 are required.</p><p>Two semantics (aligned with the BoundingBox of the image removal capability):</p><ul><li>Pixel: coordinate values in the range of [-10240, 10240]. Negative values or values beyond the canvas are allowed (the excess part is cropped).</li><li>Ratio: each value ∈ [-1, 1], converted based on the canvas width and height (x multiplied by canvas width, y multiplied by canvas height).</li></ul><p>The layer is scaled to fill this rectangle. Any part beyond the canvas is cropped, and the output size is always equal to the canvas size.</p>
+	BoundingBox []*float64 `json:"BoundingBox,omitnil,omitempty" name:"BoundingBox"`
+
+	// <p>Coordinate unit, aligned with the image removal capacity. Values:</p><ul><li>0: automatic judgment (default value if not passed);</li><li>1: ratio;</li><li>2: pixel.</li></ul><p>Automatic judgment rules: if all four values are greater than 1, they are interpreted as pixels; if all are not greater than 1, they are interpreted as ratios. Mixed values will return InvalidParameter. It is recommended to always explicitly specify.</p>
+	BoundingBoxUnitType *uint64 `json:"BoundingBoxUnitType,omitnil,omitempty" name:"BoundingBoxUnitType"`
+}
+
 type ImageDenoiseConfig struct {
-	// Capability configuration enabling status. Valid values:
-	// <li>ON: enabled.</li>
-	// <li>OFF: disabled.</li>
+	// Capability configuration switch. Available values:
+	// <li>ON: enabled</li>
+	// <li>OFF: disabled</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Type, available values:
+	// Type. Valid values:
 	// <li>weak</li>
 	// <li>strong</li>
 	// Default value: weak.
@@ -13579,22 +13938,24 @@ type ImageEraseConfig struct {
 }
 
 type ImageEraseLogoConfig struct {
-	// Capability configuration switch. Valid values:
-	// <li>ON: enabled;</li>
-	// <li>OFF: disabled.</li>
-	// Default value: ON.
+	// <p>Capability configuration switch. Available values: </p><li>ON: Enable;</li><li>OFF: Disable.</li>Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Multiple box selection areas that need to be erased, with a maximum of 16 areas available.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Multiple box selection regions to erase, with up to 16 regions enabled.<br>Note: This field may return null, indicating that no valid value can be obtained.</p>
 	ImageAreaBoxes []*ImageAreaBoxInfo `json:"ImageAreaBoxes,omitnil,omitempty" name:"ImageAreaBoxes"`
+
+	// <p>Watermark removal capacity gear selection. Available values:</p><p>Enumeration values:</p><ul><li>low: quick removal gear</li><li>mid: balanced removal effect and speed gear</li><li>high: advanced removal effect gear</li></ul><p>Note: Select the corresponding removal gear based on the complexity of the removal scenario.</p>
+	EraseStrength *string `json:"EraseStrength,omitnil,omitempty" name:"EraseStrength"`
+
+	// <p>When erasing image watermarks, select a specific watermark type. Available values:</p><p>Enumeration values:</p><ul><li>corner_watermark: Erase a normal fixed-location watermark</li><li>tiled_watermark: Erase a tile watermark across the entire image</li><li>auto_detect_type: Automatically identify the watermark type and erase it</li><li>selected_watermark: Skip automatic removal and perform watermark removal at a specified position</li></ul>
+	WatermarkType *string `json:"WatermarkType,omitnil,omitempty" name:"WatermarkType"`
 }
 
 type ImageProcessTaskOutput struct {
-
+	// <p>Path of the output file.</p>
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-
+	// <p>Storage location of the output file.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// <p>Processing result of the image-to-text task.</p>
@@ -13605,30 +13966,39 @@ type ImageProcessTaskOutput struct {
 }
 
 type ImageProcessTaskResult struct {
-
+	// Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
 	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
 
-
+	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-
+	// Transcoding task output.
 	Output *ImageProcessTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-
+	// Transcoding progress, with a value range of [0-100].
 	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 }
 
+type ImageQualityConfig struct {
+	// <p>Image quality assessment dimensions</p><p>Enumeration values:</p><ul><li>Brightness: Brightness assessment</li><li>Contrast: Contrast assessment</li><li>Sharpness: Clarity assessment</li><li>IQA: Comprehensive quality assessment</li></ul>
+	Attributes []*string `json:"Attributes,omitnil,omitempty" name:"Attributes"`
+}
+
 type ImageQualityEnhanceConfig struct {
-	// Capability configuration switch. Available values:
-	// <li>ON: enabled;</li>
+	// Capability configuration switch. Valid values:
+	// <li>ON: enabled</li>
 	// <li>OFF: disabled</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// Type. Valid values:
+	// <li>weak</li>
+	// <li>normal</li>
+	// <li>strong</li>
+	// Default value: weak.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -13636,7 +14006,7 @@ type ImageSpriteTaskInput struct {
 	// <p>Sprite screenshot template ID.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-
+	// <p>Target storage for the file after the sprite screenshot is taken. If this is not specified, it inherits the value from the upper-level OutputStorage.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// <p>Output path of the sprite screenshot image file after the sprite screenshot is taken, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">File Name Variable Description</a>.<br>Relative path example:</p><li>File name_{variable name}.{format}</li><li>File name.{format}</li>Absolute path example:<li>/custom path/file name_{variable name}.{format}</li>If this is not specified, the default relative path is <code>{inputName}_imageSprite_{definition}_{number}.{format}</code>.
@@ -13645,7 +14015,7 @@ type ImageSpriteTaskInput struct {
 	// <p>Output path of the Web VTT file after the sprite screenshot is taken, which can only be a relative path. If this is not specified, the default relative path is <code>{inputName}_imageSprite_{definition}.{format}</code>.</p>
 	WebVttObjectName *string `json:"WebVttObjectName,omitnil,omitempty" name:"WebVttObjectName"`
 
-
+	// <p>Rule of the <code>{number}</code> variable in the output path after the sprite screenshot is taken.</p>
 	ObjectNumberFormat *NumberFormat `json:"ObjectNumberFormat,omitnil,omitempty" name:"ObjectNumberFormat"`
 
 	// <p>Extended parameter.</p>
@@ -13708,25 +14078,25 @@ type ImageSpriteTemplate struct {
 }
 
 type ImageTaskInfo struct {
-
+	// <p>TaskId of the image processing task.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-
+	// <p>Task status.</p><p>Enumeration values: </p><ul><li>FINISH: Task completion</li><li>PROCESSING: Task processing</li></ul>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// <p>Input file.</p>
 	Input *string `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// <p>Creation time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-
+	// <p>Processing start time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
 	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
 
-
+	// <p>End time.</p><p>Parameter format: YYYY-MM-DDThh:mm:ssZ</p>
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 
-
+	// <p>Subtask failure identifier.</p>
 	SubTaskHasFailed *bool `json:"SubTaskHasFailed,omitnil,omitempty" name:"SubTaskHasFailed"`
 }
 
@@ -13743,17 +14113,26 @@ type ImageTaskInput struct {
 	// <p>AI image set configuration.</p>
 	AiPosterSuiteConfig *AiPosterSuiteConfig `json:"AiPosterSuiteConfig,omitnil,omitempty" name:"AiPosterSuiteConfig"`
 
-	// <p>Ai image cutout configuration</p>
+	// <p>Ai cutout configuration</p>
 	AiCutoutConfig *AiCutoutConfig `json:"AiCutoutConfig,omitnil,omitempty" name:"AiCutoutConfig"`
 
-	// <p>Ai Image Expansion Configuration</p>
+	// <p>Ai outpainting configuration</p>
 	AiExpansionConfig *AiExpansionConfig `json:"AiExpansionConfig,omitnil,omitempty" name:"AiExpansionConfig"`
 
 	// <p>Ai storyboard deconstruction configuration</p>
 	AiStoryboardConfig *AiStoryboardConfig `json:"AiStoryboardConfig,omitnil,omitempty" name:"AiStoryboardConfig"`
 
-	// <p>Image understanding configuration.</p>
+	// <p>Image understanding configuration</p>
 	UnderstandImageConfig *UnderstandImageConfig `json:"UnderstandImageConfig,omitnil,omitempty" name:"UnderstandImageConfig"`
+
+	// <p>Image quality assessment configuration</p>
+	ImageQualityConfig *ImageQualityConfig `json:"ImageQualityConfig,omitnil,omitempty" name:"ImageQualityConfig"`
+
+	// <p>Layer fusion configuration.</p>
+	AiComposeConfig *AiComposeConfig `json:"AiComposeConfig,omitnil,omitempty" name:"AiComposeConfig"`
+
+	// <p>Layer separation configuration.</p>
+	AiDecomposeConfig *AiDecomposeConfig `json:"AiDecomposeConfig,omitnil,omitempty" name:"AiDecomposeConfig"`
 }
 
 type ImageWatermarkInput struct {
@@ -13897,7 +14276,7 @@ type LiveActivityResult struct {
 }
 
 type LiveAiAnalysisDescriptionItem struct {
-
+	// Segmentation result.
 	Paragraphs []*LiveAiParagraphInfo `json:"Paragraphs,omitnil,omitempty" name:"Paragraphs"`
 }
 
@@ -13925,19 +14304,19 @@ type LiveAiParagraphInfo struct {
 }
 
 type LiveRecordFile struct {
-
+	// Live recording file URL
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-
+	// Live recording file size
 	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
-
+	// Recording file duration of live stream
 	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
-
+	// Start time of the live streaming recording file in [ISO date format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-
+	// End time of the live streaming recording file in [ISO date format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
@@ -14055,38 +14434,41 @@ type LiveSmartSubtitleResult struct {
 	// Recognized text.
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
-	// Start PTS time of a translated recording clip, in seconds.
+	// Start PTS time of a translated segment, in seconds.
 	StartPTSTime *float64 `json:"StartPTSTime,omitnil,omitempty" name:"StartPTSTime"`
 
-	// End PTS time of a translated recording clip, in seconds.
+	// End PTS time of a translated segment, in seconds.
 	EndPTSTime *float64 `json:"EndPTSTime,omitnil,omitempty" name:"EndPTSTime"`
 
 	// Translated text.
 	Trans *string `json:"Trans,omitnil,omitempty" name:"Trans"`
 
-
+	// Translation start UTC time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-
+	// UTC time when translation is completed.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-
+	// Steady-state tag.
 	SteadyState *bool `json:"SteadyState,omitnil,omitempty" name:"SteadyState"`
 
-
+	// UserId for real-time translation over websocket and trtc
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 }
 
 type LiveSmartSubtitlesTaskInput struct {
-
+	// Smart subtitle template ID.	
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-
+	// User extension field, which does not need to be filled in for general scenarios.
 	UserExtPara *string `json:"UserExtPara,omitnil,omitempty" name:"UserExtPara"`
 }
 
 type LiveStreamAiAnalysisResultInfo struct {
-
+	// Live stream analysis subtask result. Supports:
+	// <li>Live streaming video splitting.</li>
+	// <li>Live streaming highlight.</li>
+	// <li>Live streaming summary.</li>
 	ResultSet []*LiveStreamAiAnalysisResultItem `json:"ResultSet,omitnil,omitempty" name:"ResultSet"`
 }
 
@@ -14097,10 +14479,11 @@ type LiveStreamAiAnalysisResultItem struct {
 	// <li>Description: summary.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Split result. When `Type` is
+	// Valid for SegmentRecognition.
 	SegmentResultSet []*SegmentRecognitionItem `json:"SegmentResultSet,omitnil,omitempty" name:"SegmentResultSet"`
 
-
+	// Highlight result. This field is valid when Type is set to Highlight.
 	HighlightResultSet []*MediaAiAnalysisHighlightItem `json:"HighlightResultSet,omitnil,omitempty" name:"HighlightResultSet"`
 
 	// Summary result. It is valid when Type is Description.
@@ -14108,20 +14491,20 @@ type LiveStreamAiAnalysisResultItem struct {
 }
 
 type LiveStreamAiQualityControlResultInfo struct {
-
+	// Content quality inspection result list.
 	//
 	// Deprecated: QualityControlResults is deprecated.
 	QualityControlResults []*QualityControlResult `json:"QualityControlResults,omitnil,omitempty" name:"QualityControlResults"`
 
-
+	// Format diagnostic result list.
 	//
 	// Deprecated: DiagnoseResults is deprecated.
 	DiagnoseResults []*DiagnoseResult `json:"DiagnoseResults,omitnil,omitempty" name:"DiagnoseResults"`
 
-
+	// Content quality inspection result list.
 	QualityControlResultSet []*QualityControlResult `json:"QualityControlResultSet,omitnil,omitempty" name:"QualityControlResultSet"`
 
-
+	// Format diagnostic result list.
 	DiagnoseResultSet []*DiagnoseResult `json:"DiagnoseResultSet,omitnil,omitempty" name:"DiagnoseResultSet"`
 }
 
@@ -14143,23 +14526,23 @@ type LiveStreamAiRecognitionResultItem struct {
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Face recognition result, which is valid when Type is
-	// FaceRecognition is valid at that time.
+	// Valid for FaceRecognition.
 	FaceRecognitionResultSet []*LiveStreamFaceRecognitionResult `json:"FaceRecognitionResultSet,omitnil,omitempty" name:"FaceRecognitionResultSet"`
 
 	// Speech keyword recognition result. When Type is
-	// AsrWordsRecognition.
+	// Valid when AsrWordsRecognition is used.
 	AsrWordsRecognitionResultSet []*LiveStreamAsrWordsRecognitionResult `json:"AsrWordsRecognitionResultSet,omitnil,omitempty" name:"AsrWordsRecognitionResultSet"`
 
 	// Text keyword recognition result. When Type is
-	// OcrWordsRecognition.
+	// Valid for OcrWordsRecognition.
 	OcrWordsRecognitionResultSet []*LiveStreamOcrWordsRecognitionResult `json:"OcrWordsRecognitionResultSet,omitnil,omitempty" name:"OcrWordsRecognitionResultSet"`
 
 	// Full speech recognition result. When Type is
-	// AsrFullTextRecognition.
+	// Valid when AsrFullTextRecognition is used.
 	AsrFullTextRecognitionResultSet []*LiveStreamAsrFullTextRecognitionResult `json:"AsrFullTextRecognitionResultSet,omitnil,omitempty" name:"AsrFullTextRecognitionResultSet"`
 
-	// Full text recognition result, when Type is
-	// OcrFullTextRecognition.
+	// Full text recognition result. This parameter is returned only when `Type` is set to
+	// Valid for OcrFullTextRecognition.
 	OcrFullTextRecognitionResultSet []*LiveStreamOcrFullTextRecognitionResult `json:"OcrFullTextRecognitionResultSet,omitnil,omitempty" name:"OcrFullTextRecognitionResultSet"`
 
 	// Translation result. Valid when Type is TransTextRecognition.
@@ -14168,12 +14551,12 @@ type LiveStreamAiRecognitionResultItem struct {
 	// Object recognition result, which is valid when Type is ObjectRecognition.
 	ObjectRecognitionResultSet []*LiveStreamObjectRecognitionResult `json:"ObjectRecognitionResultSet,omitnil,omitempty" name:"ObjectRecognitionResultSet"`
 
-
+	// Marking point result. Valid when Type is TagRecognition.
 	TagRecognitionResultSet []*LiveStreamTagRecognitionResult `json:"TagRecognitionResultSet,omitnil,omitempty" name:"TagRecognitionResultSet"`
 }
 
 type LiveStreamAiReviewImagePoliticalResult struct {
-	// Start PTS time of a suspected segment, in seconds.
+	// Starting PTS time of a suspected segment, in seconds.
 	StartPtsTime *float64 `json:"StartPtsTime,omitnil,omitempty" name:"StartPtsTime"`
 
 	// End PTS time of a suspected segment, in seconds.
@@ -14182,28 +14565,28 @@ type LiveStreamAiReviewImagePoliticalResult struct {
 	// Sensitive score of the suspected segment.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Result suggestion for suspected segment porn detection, permissible range:
+	// Pornographic result advice for the suspected segment. Value range:
 	// <li>pass</li>
 	// <li>review</li>
 	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Video sensitive result tag, value ranges from...to...
+	// Video sensitive result tag. Value range:
 	// <li>politician: sensitive person.</li>
 	// <li>violation_photo: violation icon.</li>
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
 
-	// Sensitive person, violative icon name.
+	// Sensitive person and violative icon name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Area coordinates (pixel-level) where sensitive persons or violation icons appear. Format: [x1, y1, x2, y2], which indicates the coordinates of the top-left corner and the bottom-right corner.
+	// Zone coordinates (pixel-level) where sensitive persons or violation icons appear. Format: [x1, y1, x2, y2], which indicates the coordinates of the top-left corner and the bottom-right corner.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil,omitempty" name:"AreaCoordSet"`
 
-	// Suspected image URL (Images are not retained permanently upon arrival)
-	// The image will be deleted after the PicUrlExpireTime time point.
+	// Suspected image URL (images are not retained permanently and will reach
+	// Images will be deleted after the PicUrlExpireTime time point).
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Expiration time of the suspected image URL, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Expiration time of the suspected image URL in ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitnil,omitempty" name:"PicUrlExpireTime"`
 }
 
@@ -14214,62 +14597,62 @@ type LiveStreamAiReviewImagePornResult struct {
 	// End PTS time of a suspected segment, in seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitnil,omitempty" name:"EndPtsTime"`
 
-	// Suspected segment porn score.
+	// Pornography score of the suspected segment.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Pornographic result suggestion for suspected segment, value ranges from...to...
+	// Porn detection result suggestion for the suspected segment. Pass in the range of [min,max].
 	// <li>pass</li>
 	// <li>review</li>
 	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Pornographic result tag for video, value ranges from...to...
+	// Pornographic result tag of the video. Value range:
 	// <li>porn: pornography.</li>
 	// <li>sexy: sexy.</li>
-	// <li>vulgar: vulgarity.</li>
+	// <li>vulgar: vulgar.</li>
 	// <li>intimacy: intimate behavior.</li>
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
 
-	// Suspected image URL (Images are not retained permanently upon arrival)
-	// The image will be deleted after the PicUrlExpireTime time point.
+	// Suspected image URL (images are not retained permanently and will be deleted upon reaching
+	// Images will be deleted after the PicUrlExpireTime time point).
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Expiration time of the suspected image URL, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Expiration time of the suspected image URL, using the [ISO date format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitnil,omitempty" name:"PicUrlExpireTime"`
 }
 
 type LiveStreamAiReviewImageTerrorismResult struct {
-	// Start PTS time of a suspected segment, in seconds.
+	// Starting PTS time of a suspected segment, in seconds.
 	StartPtsTime *float64 `json:"StartPtsTime,omitnil,omitempty" name:"StartPtsTime"`
 
 	// End PTS time of a suspected segment, in seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitnil,omitempty" name:"EndPtsTime"`
 
-	// Suspected segment sensitivity score.
+	// Sensitivity score of the suspected segment.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Suspected segment sensitive result suggestion, permissible range:
+	// Suspected segment sensitive result suggestion. Value range:
 	// <li>pass</li>
 	// <li>review</li>
 	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Video sensitive content result tag, value ranges from...to...
+	// Sensitive result tag of the video. Value range:
 	// <li>guns: weapons and firearms.</li>
 	// <li>crowd: crowd gathering.</li>
 	// <li>police: police force.</li>
 	// <li>bloody: graphic violence.</li>
 	// <li>banners: sensitive flags.</li>
-	// <li>militant: militant.</li>
+	// <li>militant: militants.</li>
 	// <li>explosion: explosions and fires.</li>
 	// <li>terrorists: sensitive persons.</li>
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
 
-	// Suspected image URL (Images are not retained permanently upon arrival)
-	// The image will be deleted after the PicUrlExpireTime time point.
+	// Suspected image URL (images are not retained permanently and will be deleted upon reaching
+	// Images will be deleted after the PicUrlExpireTime time point).
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Expiration time of the suspected image URL, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Expiration time of the suspected image URL, using the [ISO date format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitnil,omitempty" name:"PicUrlExpireTime"`
 }
 
@@ -14279,23 +14662,23 @@ type LiveStreamAiReviewResultInfo struct {
 }
 
 type LiveStreamAiReviewResultItem struct {
-	// Review result type. Valid values:
-	// <li>ImagePorn: image porn detection.</li>
-	// <li>ImageTerrorism: image terrorism.</li>
-	// <li>ImagePolitical: image political sensitivity.</li>
-	// <li>VoicePorn: sound rule violation.</li>
+	// Type of the review result. Valid values:
+	// <li>ImagePorn: image moderation.</li>
+	// <li>ImageTerrorism: image involving sensitive content.</li>
+	// <li>ImagePolitical: politically sensitive image.</li>
+	// <li>VoicePorn: sound violation.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Image porn detection result, valid when Type is ImagePorn.
+	// Result of porn detection on the image. Valid when Type is ImagePorn.
 	ImagePornResultSet []*LiveStreamAiReviewImagePornResult `json:"ImagePornResultSet,omitnil,omitempty" name:"ImagePornResultSet"`
 
-	// Result of image terrorism detection, valid when Type is ImageTerrorism.
+	// Image moderation result. Valid when Type is ImageTerrorism.
 	ImageTerrorismResultSet []*LiveStreamAiReviewImageTerrorismResult `json:"ImageTerrorismResultSet,omitnil,omitempty" name:"ImageTerrorismResultSet"`
 
-	// The result of image sensitivity, valid when Type is ImagePolitical.
+	// Image moderation result. Valid when Type is ImagePolitical.
 	ImagePoliticalResultSet []*LiveStreamAiReviewImagePoliticalResult `json:"ImagePoliticalResultSet,omitnil,omitempty" name:"ImagePoliticalResultSet"`
 
-	// Result of sound rule violation, valid when Type is VoicePorn.
+	// Result of sound rule violation. Valid when `Type` is `VoicePorn`.
 	VoicePornResultSet []*LiveStreamAiReviewVoicePornResult `json:"VoicePornResultSet,omitnil,omitempty" name:"VoicePornResultSet"`
 }
 
@@ -14306,22 +14689,22 @@ type LiveStreamAiReviewVoicePornResult struct {
 	// End PTS time of a suspected segment, in seconds.
 	EndPtsTime *float64 `json:"EndPtsTime,omitnil,omitempty" name:"EndPtsTime"`
 
-	// Suspected segment porn score.
+	// Porn score of the suspected segment.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Pornographic result suggestion for suspected segment, value ranges from...to...
+	// Porn detection result suggestion for the suspected segment. Value range:
 	// <li>pass</li>
 	// <li>review</li>
 	// <li>block</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Video porn detection result tag, value ranges from...to...
-	// <li>sexual_moan: Moan.</li>
+	// Porn information detection result tag. Value range:
+	// <li>sexual_moan: moan.</li>
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
 }
 
 type LiveStreamAiSmartSubtitleResultInfo struct {
-	// Live stream smart subtitle task result list.
+	// List of live stream smart subtitle task results.
 	SmartSubtitleResult []*LiveSmartSubtitleResult `json:"SmartSubtitleResult,omitnil,omitempty" name:"SmartSubtitleResult"`
 }
 
@@ -14338,16 +14721,16 @@ type LiveStreamAsrFullTextRecognitionResult struct {
 	// Confidence of a recognized segment. Value range: 0-100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-
+	// Recognition start UTC time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-
+	// UTC time when recognition is completed.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-
+	// Steady-state tag.
 	SteadyState *bool `json:"SteadyState,omitnil,omitempty" name:"SteadyState"`
 
-
+	// UserId of the websocket and trtc recognition result
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 }
 
@@ -14366,14 +14749,14 @@ type LiveStreamAsrWordsRecognitionResult struct {
 }
 
 type LiveStreamFaceRecognitionResult struct {
-	// Unique identification ID of a figure.
+	// Unique identification ID of a person.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Figure name.
+	// Character name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Figure library type, which indicates which figure library the recognized figure comes from.
-	// <li>Default: Default figure library;</li><li>UserDefine: User-defined character library.</li>
+	// Library type of the figure, indicating which figure library the recognized figure comes from:
+	// <li>Default: default figure library;</li><li>UserDefine: user-defined character library.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Start PTS time of a recognized segment, in seconds.
@@ -14405,7 +14788,7 @@ type LiveStreamObjectRecognitionResult struct {
 	// Zone coordinates of the recognition result. An array contains four elements: [x1, y1, x2, y2], representing the horizontal and vertical coordinates of the top-left and bottom-right corners, respectively.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil,omitempty" name:"AreaCoordSet"`
 
-
+	// Screenshot link.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
@@ -14445,8 +14828,8 @@ type LiveStreamOcrWordsRecognitionResult struct {
 
 type LiveStreamProcessErrorInfo struct {
 	// Error code.
-	// <li>0 means no error.</li>
-	// <li>Non-zero means error. Refer to the error information in Message.</li>
+	// <li>0: no error;</li>
+	// <li>Non-zero indicates an error. Refer to Message for error information.</li>
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
 	// Error message.
@@ -14473,15 +14856,17 @@ type LiveStreamProcessTask struct {
 }
 
 type LiveStreamRecordResultInfo struct {
-
+	// Whether recording ends.
+	// 0: Recording does not end, returning a single file.
+	// 1: Recording ends, returning all recording files.
 	RecordOver *uint64 `json:"RecordOver,omitnil,omitempty" name:"RecordOver"`
 
-
+	// File list.
 	FileResults []*LiveRecordFile `json:"FileResults,omitnil,omitempty" name:"FileResults"`
 }
 
 type LiveStreamTagRecognitionResult struct {
-	// Timestamp events.
+	// Timestamp event.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Start PTS time of a recognized segment, in seconds.
@@ -14495,25 +14880,29 @@ type LiveStreamTagRecognitionResult struct {
 }
 
 type LiveStreamTaskNotifyConfig struct {
-
+	// Notification type:
+	// TDMQ-CMQ: message queue.
+	// "URL": When a URL is specified, the HTTP callback is pushed to the address specified by NotifyUrl. The callback protocol is http+json. The content of the packet body is the same as the output parameters of the [ParseLiveStreamProcessNotification API](https://www.tencentcloud.com/document/product/862/39229?from_cn_redirect=1).
+	// 
+	// <Font color="red"> Note: if it is unspecified or left blank, no callback will be sent. To send a callback, fill in the corresponding type value. </font>
 	NotifyType *string `json:"NotifyType,omitnil,omitempty" name:"NotifyType"`
 
-
+	// HTTP callback URL. This is required if NotifyType is URL.
 	NotifyUrl *string `json:"NotifyUrl,omitnil,omitempty" name:"NotifyUrl"`
 
-
+	// Queue and Topic models are provided.
 	CmqModel *string `json:"CmqModel,omitnil,omitempty" name:"CmqModel"`
 
-
+	// Region when NotifyType is set to TDMQ-CMQ. For example, sh or bj.
 	CmqRegion *string `json:"CmqRegion,omitnil,omitempty" name:"CmqRegion"`
 
-
+	// This field is valid when the model is Queue. It indicates the name of the TDMQ for CMQ queue for receiving event notifications.
 	QueueName *string `json:"QueueName,omitnil,omitempty" name:"QueueName"`
 
-
+	// This field is valid when the model is Topic. It indicates the name of the TDMQ for CMQ topic for receiving event notifications.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-
+	// Key used to generate a callback signature.
 	NotifyKey *string `json:"NotifyKey,omitnil,omitempty" name:"NotifyKey"`
 }
 
@@ -14521,7 +14910,7 @@ type LiveStreamTransTextRecognitionResult struct {
 	// Recognized text.
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
-	// Start PTS time of a translated fragment, in seconds.
+	// Start PTS time of a translated segment, in seconds.
 	StartPtsTime *float64 `json:"StartPtsTime,omitnil,omitempty" name:"StartPtsTime"`
 
 	// End PTS time of a translated segment, in seconds.
@@ -14533,27 +14922,29 @@ type LiveStreamTransTextRecognitionResult struct {
 	// Translated text.
 	Trans *string `json:"Trans,omitnil,omitempty" name:"Trans"`
 
-
+	// Translation start UTC time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-
+	// UTC time when translation is completed.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-
+	// Steady-state tag.
 	SteadyState *bool `json:"SteadyState,omitnil,omitempty" name:"SteadyState"`
 
-
+	// UserId for real-time translation over websocket and trtc
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 }
 
 type LowLightEnhanceConfig struct {
 	// Capability configuration switch. Valid values:
-	// <li>ON: enabled</li>
+	// <li>ON: enabled;</li>
 	// <li>OFF: disabled</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// Type. Valid values:
+	// <li>normal</li>
+	// Default value: normal.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -14637,7 +15028,7 @@ type MediaAiAnalysisClassificationItem struct {
 	// Category name for intelligent classification.
 	Classification *string `json:"Classification,omitnil,omitempty" name:"Classification"`
 
-	// Reliability of intelligent classification, with a value range from 0 to 100.
+	// Confidence of the intelligent categorization, with a value range from 0 to 100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 }
 
@@ -14645,7 +15036,7 @@ type MediaAiAnalysisCoverItem struct {
 	// Intelligent cover storage path.
 	CoverPath *string `json:"CoverPath,omitnil,omitempty" name:"CoverPath"`
 
-	// Reliability of the intelligent cover, with a value range from 0 to -100.
+	// Confidence of the intelligent cover, with a value range from 0 to 100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 }
 
@@ -14662,10 +15053,10 @@ type MediaAiAnalysisDescriptionItem struct {
 	// Intelligent description keywords.
 	Keywords []*string `json:"Keywords,omitnil,omitempty" name:"Keywords"`
 
-
+	// Segmentation result.
 	Paragraphs []*AiParagraphInfo `json:"Paragraphs,omitnil,omitempty" name:"Paragraphs"`
 
-
+	// Address of the mind map of a summary task.
 	MindMapUrl *string `json:"MindMapUrl,omitnil,omitempty" name:"MindMapUrl"`
 
 	// Path of the mind map of a summary task.
@@ -14679,25 +15070,25 @@ type MediaAiAnalysisDescriptionItem struct {
 }
 
 type MediaAiAnalysisFrameTagItem struct {
-	// Tag name by frame.
+	// Frame-specific tag name.
 	Tag *string `json:"Tag,omitnil,omitempty" name:"Tag"`
 
-	// Classification list by frame tag name. CategorySet.N indicates the (N+1)th level classification.
-	// For example, when the Tag is "tower", CategorySet contains two elements: CategorySet.0 is "scenario" and CategorySet.1 is "building", which means the frame Tag is "tower", the first-level category is "scenario", and the second-level category is "building".
+	// Classification list by frame tag name. CategorySet.N refers to the (N+1)-level category.
+	// For example, when Tag is "tower", CategorySet contains two elements: CategorySet.0 is "scenario" and CategorySet.1 is "building", which means the frame tag is "tower", the level-1 category is "scenario", and the level-2 category is "building".
 	CategorySet []*string `json:"CategorySet,omitnil,omitempty" name:"CategorySet"`
 
-	// Reliability of frame tagging, with a value range from 0 to -100.
+	// Confidence of frame tagging, with a value range from 0 to 100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 }
 
 type MediaAiAnalysisFrameTagSegmentItem struct {
-	// Offset time starting from frame tagging.
+	// Time offset starting from the frame tag.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// Offset time for frame tagging completion.
+	// Offset time for frame tagging to end.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// Tag list within the time segment.
+	// Tag list in the time segment.
 	TagSet []*MediaAiAnalysisFrameTagItem `json:"TagSet,omitnil,omitempty" name:"TagSet"`
 }
 
@@ -14708,7 +15099,7 @@ type MediaAiAnalysisHighlightItem struct {
 	// Intelligent highlight cover address.
 	CovImgPath *string `json:"CovImgPath,omitnil,omitempty" name:"CovImgPath"`
 
-	// Reliability of the intelligent highlights, with a value range from 0 to 100.
+	// Confidence of the intelligent highlights, with a value range from 0 to 100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
 	// Intelligent highlight duration.
@@ -14717,10 +15108,10 @@ type MediaAiAnalysisHighlightItem struct {
 	// Intelligent highlight sub-clip list.
 	SegmentSet []*HighlightSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
-
+	// Intelligent highlight address.
 	HighlightUrl *string `json:"HighlightUrl,omitnil,omitempty" name:"HighlightUrl"`
 
-
+	// Intelligent highlight cover address.
 	CovImgUrl *string `json:"CovImgUrl,omitnil,omitempty" name:"CovImgUrl"`
 }
 
@@ -14728,7 +15119,7 @@ type MediaAiAnalysisTagItem struct {
 	// Tag name.
 	Tag *string `json:"Tag,omitnil,omitempty" name:"Tag"`
 
-	// Reliability of the tag, with a value range from 0 to -100.
+	// Confidence of the tag, with a value range from 0 to 100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
 	// Varies based on different types.
@@ -14742,22 +15133,22 @@ type MediaAnimatedGraphicsItem struct {
 	// File path of the animated image.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-	// Rotating image template ID. Please refer to the [Rotating Image Template](https://www.tencentcloud.com/document/product/862/77168?from_cn_redirect=1#.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF.5B.5D(id.3Amove)).
+	// ID of the rotating image template. See [video-to-animated image conversion parameter template](https://www.tencentcloud.com/document/product/862/77168?from_cn_redirect=1#.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF.5B.5D(id.3Amove)).
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Animated image file format, for example gif.
+	// Animated image file format, for example, gif.
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
-	// Height of the animated image, measurement unit: px.
+	// Height of the animated image. Measurement unit: px.
 	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// Width of the animated image, measurement unit: px.
+	// Width of the animated image in px.
 	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// Animated image bitrate. Measurement unit: bps.
+	// Animated image bitrate. Unit: bps.
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// Animated image size, unit: byte.
+	// Animation size. Unit: byte.
 	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
 	// md5 value of the animated image.
@@ -14780,13 +15171,13 @@ type MediaAudioStreamItem struct {
 	// Audio stream encoding format, for example, aac.
 	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
 
-
+	// Number of audio channels, for example, 2.
 	Channel *int64 `json:"Channel,omitnil,omitempty" name:"Channel"`
 
-
+	// Audio Codecs.
 	Codecs *string `json:"Codecs,omitnil,omitempty" name:"Codecs"`
 
-
+	// Audio loudness.
 	Loudness *float64 `json:"Loudness,omitnil,omitempty" name:"Loudness"`
 }
 
@@ -14800,13 +15191,13 @@ type MediaContentReviewAsrTextSegmentItem struct {
 	// Confidence degree of the suspected segment.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Review result suggestion for suspected segment, value ranges from...to...
+	// Suggested review result for the suspected segment. Value range:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Suspicious keyword list.
+	// List of suspicious keywords.
 	KeywordSet []*string `json:"KeywordSet,omitnil,omitempty" name:"KeywordSet"`
 }
 
@@ -14820,23 +15211,23 @@ type MediaContentReviewOcrTextSegmentItem struct {
 	// Confidence degree of the suspected segment.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Result Suggestions for suspected segment review, value ranges from...to...
+	// Suggested review result for the suspected segment. Value range:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Suspicious keyword list.
+	// List of suspicious keywords.
 	KeywordSet []*string `json:"KeywordSet,omitnil,omitempty" name:"KeywordSet"`
 
-	// Area coordinates of suspected text occurrence (pixel-level), [x1, y1, x2, y2], i.e., coordinates of the top-left corner and bottom-right corner.
+	// Coordinates of the area where suspected text appears (pixel-level), [x1, y1, x2, y2], i.e. coordinates of the top-left corner and bottom-right corner.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil,omitempty" name:"AreaCoordSet"`
 
-	// Suspected image URL (Images are not retained permanently, reaching
-	// The image will be deleted after the PicUrlExpireTime time point.
+	// Suspected image URL (images are not retained permanently and will reach
+	// Images will be deleted after the PicUrlExpireTime time point).
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Expiration time of the suspected image URL, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Expiration time of the suspected image URL in ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitnil,omitempty" name:"PicUrlExpireTime"`
 }
 
@@ -14847,29 +15238,29 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	// End time offset of a suspected segment, in seconds.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// Suspected segment sensitivity score.
+	// Sensitivity score of the suspected segment.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Suspected segment sensitive result suggestion, value ranges from...to...
+	// Sensitivity result suggestion for the suspected segment. Value range:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Sensitive person, violative icon name.
+	// Sensitive person and violative icon name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Suspected segment sensitive result Tag. The mapping between the LabelSet parameter in the content moderation template [visual sensitive task control parameter](https://www.tencentcloud.com/document/api/862/37615?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) and the parameter value range of this parameter:
+	// Suspected segment moderation result tag. Mapping between the LabelSet parameter in the moderation template frame moderation task control parameter (https://www.tencentcloud.com/document/api/862/37615?from_cn_redirect=1#PoliticalImgReviewTemplateInfo) and the value range of this parameter:
 	// violation_photo:
 	// <li>violation_photo: violation icon.</li>
 	// politician:
-	// <li>nation_politician: State leaders;</li>
+	// <li>nation_politician: State leaders.</li>
 	// <li>province_politician: provincial and ministerial leaders;</li>
 	// <li>bureau_politician: bureau-level official;</li>
 	// <li>county_politician: county-level official;</li>
 	// <li>rural_politician: township-level official;</li>
 	// <li>sensitive_politician: sensitive person.</li>
-	// <li>foreign_politician: state leaders of other countries.</li>
+	// <li>foreign_politician: State leaders of other countries.</li>
 	// entertainment:
 	// <li>sensitive_entertainment: sensitive entertainment figure.</li>
 	// sport:
@@ -14877,7 +15268,7 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	// entrepreneur:
 	// <li>sensitive_entrepreneur: sensitive entrepreneur.</li>
 	// scholar:
-	// <li>sensitive_scholar: Sensitive educational scholars.</li>
+	// <li>sensitive_scholar: Sensitive educational scholar.</li>
 	// celebrity:
 	// <li>sensitive_celebrity: sensitive celebrity.</li>
 	// <li>historical_celebrity: historical celebrity.</li>
@@ -14885,14 +15276,14 @@ type MediaContentReviewPoliticalSegmentItem struct {
 	// <li>sensitive_military: sensitive military figure.</li>
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
 
-	// Suspected image URL (Images are not retained permanently upon arrival)
-	// The image will be deleted after the PicUrlExpireTime time point.
+	// Suspected image URL (images are not retained permanently and will be deleted upon reaching
+	// Images will be deleted after the PicUrlExpireTime time point).
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Area coordinates of sensitive person and violation icon occurrence (pixel-level), [x1, y1, x2, y2], i.e., coordinates of the top-left corner and coordinate of the bottom-right corner.
+	// Zone coordinates where sensitive persons and violation icons appear (pixel-level), [x1, y1, x2, y2], i.e. coordinates of the top-left corner and bottom-right corner.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil,omitempty" name:"AreaCoordSet"`
 
-	// Expiration time of the suspected image URL, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Expiration time of the suspected image URL in ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitnil,omitempty" name:"PicUrlExpireTime"`
 }
 
@@ -14903,43 +15294,43 @@ type MediaContentReviewSegmentItem struct {
 	// End time offset of a suspected segment, in seconds.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// Suspected segment porn score.
+	// Porn score of the suspected segment.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
 	// Tag of the pornographic result for the suspected segment.
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
 
-	// Pornographic result suggestion for suspected segment, value ranges from...to...
+	// Porn detection result suggestion for the suspected segment. Value range:
 	// <li>pass.</li>
 	// <li>review.</li>
 	// <li>block.</li>
 	Suggestion *string `json:"Suggestion,omitnil,omitempty" name:"Suggestion"`
 
-	// Suspected image URL (Images are not retained permanently upon arrival)
-	// The image will be deleted after the PicUrlExpireTime time point.
+	// Suspected image URL (images are not retained permanently and will reach
+	// Images will be deleted after the PicUrlExpireTime time point).
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-	// Expiration time of the suspected image URL, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Expiration time of the suspected image URL, in [ISO date format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	PicUrlExpireTime *string `json:"PicUrlExpireTime,omitnil,omitempty" name:"PicUrlExpireTime"`
 }
 
 type MediaImageSpriteItem struct {
-	// Sprite sheet specification, please refer to the [Sprite Sheet Parameter Template](https://www.tencentcloud.com/document/product/266/33480?from_cn_redirect=1#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// Sprite screenshot specification. See [sprite sheet parameter template](https://www.tencentcloud.com/document/product/266/33480?from_cn_redirect=1#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Height of small images in sprite sheet.
+	// Height of small images in sprite image.
 	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// Width of small images in sprite sheet.
+	// Width of a small image in the sprite sheet.
 	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// Number of small images in each sprite sheet.
+	// Number of small images in each sprite image.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Path of each sprite sheet.
 	ImagePathSet []*string `json:"ImagePathSet,omitnil,omitempty" name:"ImagePathSet"`
 
-
+	// Path of the WebVtt file that describes the temporal relationship between sprite sub-images and their positions. The WebVtt file indicates the time point corresponding to each sprite sub-image and its coordinate position in the sprite sheet. It is generally used by the player to implement preview.
 	WebVttPath *string `json:"WebVttPath,omitnil,omitempty" name:"WebVttPath"`
 
 	// Storage location of the sprite sheet file.
@@ -14948,27 +15339,27 @@ type MediaImageSpriteItem struct {
 
 type MediaInputInfo struct {
 	// Type of the input source object. Supported values:
-	// <li>COS: COS origin</li>
+	// <li> COS: COS origin</li>
 	// <li> URL: URL source</li>
 	// <li> AWS-S3: AWS source, currently only support transcoding task </li>
 	// <li> VOD: VOD Pro Edition </li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Required when `Type` is `COS`. It represents the COS object information for media processing.
+	// Required when Type is COS. It refers to the COS object information for media processing.
 	CosInputInfo *CosInputInfo `json:"CosInputInfo,omitnil,omitempty" name:"CosInputInfo"`
 
-
+	// Valid when Type is URL. This item is required and refers to media processing URL object information.
 	UrlInputInfo *UrlInputInfo `json:"UrlInputInfo,omitnil,omitempty" name:"UrlInputInfo"`
 
-
+	// Valid when Type is AWS-S3. This item is required and refers to the AWS S3 object information for media processing.
 	S3InputInfo *S3InputInfo `json:"S3InputInfo,omitnil,omitempty" name:"S3InputInfo"`
 
-
+	// Required when `Type` is `VOD`. It represents the object information of MPS on-demand pro edition.
 	VODInputInfo *VODInputInfo `json:"VODInputInfo,omitnil,omitempty" name:"VODInputInfo"`
 }
 
 type MediaMetaData struct {
-	// Size of the uploaded media file (for HLS videos, the size is the total of the m3u8 and ts file sizes), unit: byte.
+	// Size of the uploaded media file (for HLS videos, the size is the sum of the m3u8 and ts file sizes), unit: byte.
 	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
 	// Container type, for example, m4a and mp4.
@@ -14977,7 +15368,7 @@ type MediaMetaData struct {
 	// Sum of the average video stream bitrate and average audio stream bitrate. Unit: bps.
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// Maximum height of a video stream. Unit: px.
+	// Maximum height of the video stream. Measurement unit: px.
 	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
 	// Maximum video stream width in px.
@@ -14986,7 +15377,7 @@ type MediaMetaData struct {
 	// Video duration, unit: seconds.
 	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
-	// Selection angle during video shooting. Unit: degree.
+	// Selection angle during video shooting. Measurement unit: degree.
 	Rotate *int64 `json:"Rotate,omitnil,omitempty" name:"Rotate"`
 
 	// Video stream information.
@@ -15003,54 +15394,54 @@ type MediaMetaData struct {
 }
 
 type MediaProcessTaskAdaptiveDynamicStreamingResult struct {
-	// Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
+	// <p>Task status. Valid values are PROCESSING, SUCCESS, and FAIL.</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// <p>Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of <a href="https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81">MPS error codes</a>.</p>
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
+	// <p>Error code. 0 indicates success, and other values indicate failure. (This field is not recommended. Use the new error code field ErrCodeExt instead.)</p>
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// Error message.
+	// <p>Error message.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Input for the video to adaptive streaming task.
+	// <p>Input for a video to adaptive streaming task.</p>
 	Input *AdaptiveDynamicStreamingTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// <p>Output of a video to adaptive streaming task.</p>
 	Output *AdaptiveDynamicStreamingInfoItem `json:"Output,omitnil,omitempty" name:"Output"`
 
-
+	// <p>Starting time of task execution, in <a href="https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52">ISO date and time format</a>.</p>
 	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
 
-
+	// <p>Task completion time, in <a href="https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52">ISO date and time format</a>.</p>
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
 type MediaProcessTaskAnimatedGraphicResult struct {
-	// Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
+	// <p>Task status. Valid values are PROCESSING, SUCCESS, and FAIL.</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// <p>Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of <a href="https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81">MPS error codes</a>.</p>
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
+	// <p>Error code. 0 indicates success, and other values indicate failure. (This field is not recommended. Use the new error code field ErrCodeExt instead.)</p>
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// Error message.
+	// <p>Error message.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Input of the animated image task.
+	// <p>Input of the animated image task.</p>
 	Input *AnimatedGraphicTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// <p>Rotating image task output.</p>
 	Output *MediaAnimatedGraphicsItem `json:"Output,omitnil,omitempty" name:"Output"`
 
-
+	// <p>Starting time of task execution, in <a href="https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52">ISO date and time format</a>.</p>
 	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
 
-
+	// <p>Task completion time, in <a href="https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52">ISO date and time format</a>.</p>
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
@@ -15070,7 +15461,7 @@ type MediaProcessTaskImageSpriteResult struct {
 	// Input of the image sprite task for videos.
 	Input *ImageSpriteTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of the image sprite task for videos.
 	Output *MediaImageSpriteItem `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Task execution start time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
@@ -15102,31 +15493,31 @@ type MediaProcessTaskInput struct {
 
 type MediaProcessTaskResult struct {
 	// Task type. Valid values:
-	// <li>Transcode: Transcode</li>
-	// <li>AnimatedGraphics: Animated image</li>
+	// <li>Transcode: transcode</li>
+	// <li>AnimatedGraphics: animated image</li>
 	// <li>SnapshotByTimeOffset: time point screenshot.</li>
 	// <li>SampleSnapshot: sampled screenshot.</li>
-	// <li>ImageSprites: sprite sheet</li>
-	// <li>CoverBySnapshot: screencapturing for cover image.</li>
-	// <li>AdaptiveDynamicStreaming: adaptive bitrate streaming.</li>
+	// <li>ImageSprites: sprite sheets.</li>
+	// <li>CoverBySnapshot: screencapturing for cover image</li>
+	// <li>AdaptiveDynamicStreaming: adaptive bitrate streaming</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Query result of video transcoding tasks. Valid when the task type is `Transcode`.
 	TranscodeTask *MediaProcessTaskTranscodeResult `json:"TranscodeTask,omitnil,omitempty" name:"TranscodeTask"`
 
-
+	// Query result of a video-to-GIF task. Valid when the task type is AnimatedGraphics.
 	AnimatedGraphicTask *MediaProcessTaskAnimatedGraphicResult `json:"AnimatedGraphicTask,omitnil,omitempty" name:"AnimatedGraphicTask"`
 
-
+	// Query result of a time point screencapturing task for a video. Valid when the task type is `SnapshotByTimeOffset`.
 	SnapshotByTimeOffsetTask *MediaProcessTaskSnapshotByTimeOffsetResult `json:"SnapshotByTimeOffsetTask,omitnil,omitempty" name:"SnapshotByTimeOffsetTask"`
 
-
+	// Query result of the video sampling screenshot task. Valid when the task type is `SampleSnapshot`.
 	SampleSnapshotTask *MediaProcessTaskSampleSnapshotResult `json:"SampleSnapshotTask,omitnil,omitempty" name:"SampleSnapshotTask"`
 
-
+	// Query result of the image sprite task for video. Valid when the task type is ImageSprite.
 	ImageSpriteTask *MediaProcessTaskImageSpriteResult `json:"ImageSpriteTask,omitnil,omitempty" name:"ImageSpriteTask"`
 
-
+	// Query result of adaptive bitrate streaming tasks. Valid when the task type is AdaptiveDynamicStreaming.
 	AdaptiveDynamicStreamingTask *MediaProcessTaskAdaptiveDynamicStreamingResult `json:"AdaptiveDynamicStreamingTask,omitnil,omitempty" name:"AdaptiveDynamicStreamingTask"`
 }
 
@@ -15143,10 +15534,10 @@ type MediaProcessTaskSampleSnapshotResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Input for the sampling screenshot task on a video.
+	// Input of the sampling screenshot task for videos.
 	Input *SampleSnapshotTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of the sampling screenshot task for videos.
 	Output *MediaSampleSnapshotItem `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Task execution start time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
@@ -15169,10 +15560,10 @@ type MediaProcessTaskSnapshotByTimeOffsetResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Task input for screenshot taking at specified time points.
+	// Input of the time point screenshot task for videos.
 	Input *SnapshotByTimeOffsetTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of the time point screenshot task for videos.
 	Output *MediaSnapshotByTimeOffsetItem `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Task execution start time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
@@ -15198,7 +15589,7 @@ type MediaProcessTaskTranscodeResult struct {
 	// Input of the transcoding task.
 	Input *TranscodeTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Transcoding task output.
 	Output *MediaTranscodeItem `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Transcoding progress, with a value range of [0-100].
@@ -15206,100 +15597,113 @@ type MediaProcessTaskTranscodeResult struct {
 }
 
 type MediaSampleSnapshotItem struct {
-	// Sampled screenshot specification ID. Please refer to the sampling screenshot parameter template (https://www.tencentcloud.com/document/product/266/33480?from_cn_redirect=1#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// <p>Sampled screenshot specification ID. Please refer to <a href="https://www.tencentcloud.com/document/product/266/33480?from_cn_redirect=1#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF">sampling screenshot parameter template</a>.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Sampling method, Valid value:
-	// <li>Percent: interval sampling based on percentage.</li>
-	// <li>Time: sampling based on time interval.</li>
+	// <p>Sampling method, valid value:</p><li>Percent: Sampling based on percentage interval.</li><li>Time: Sampling based on time interval.</li>
 	SampleType *string `json:"SampleType,omitnil,omitempty" name:"SampleType"`
 
-	// Sampling interval
-	// <li>When SampleType is Percent, this value indicates how many percentage points per image.</li>
-	// <li>When SampleType is Time, this value indicates how many time intervals per image, in seconds. The first image is the first video frame.</li>
+	// <p>Sampling interval</p><li>When SampleType is Percent, this value indicates the percentage of images.</li><li>When SampleType is Time, this value indicates the time interval for each image, in seconds. The first image is always the first video frame.</li>
 	Interval *int64 `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Storage location of a file after screenshot.
+	// <p>Storage location of a file after screenshot.</p>
 	Storage *TaskOutputStorage `json:"Storage,omitnil,omitempty" name:"Storage"`
 
-	// List of generated screenshot paths.
+	// <p>List of generated screenshot paths.</p>
 	ImagePathSet []*string `json:"ImagePathSet,omitnil,omitempty" name:"ImagePathSet"`
 
-	// If a screenshot is watermarked, the watermark template ID list.
+	// <p>List of template IDs of watermarked screenshots.</p>
 	WaterMarkDefinition []*int64 `json:"WaterMarkDefinition,omitnil,omitempty" name:"WaterMarkDefinition"`
 }
 
 type MediaSnapshotByTimeOffsetItem struct {
-	// Specification for SnapshotByTimeOffset, please refer to the [SnapshotByTimeOffset parameter template](https://www.tencentcloud.com/document/product/266/33480?from_cn_redirect=1#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// SnapshotByTimeOffset specification. See SnapshotByTimeOffset parameter template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// A screenshot information set of the same specification, each element represents a screenshot.
+	// Screenshot information set of the same specification, where each element represents a screenshot.
 	PicInfoSet []*MediaSnapshotByTimePicInfoItem `json:"PicInfoSet,omitnil,omitempty" name:"PicInfoSet"`
 
-	// Storage location of the SnapshotByTimeOffset file.
+	// Storage location of the time point screenshot file.
 	Storage *TaskOutputStorage `json:"Storage,omitnil,omitempty" name:"Storage"`
 }
 
 type MediaSnapshotByTimePicInfoItem struct {
-	// The screenshot corresponds to the time offset in the video file, expressed in seconds.
+	// Time offset of this screenshot in the video file, in seconds.
 	TimeOffset *float64 `json:"TimeOffset,omitnil,omitempty" name:"TimeOffset"`
 
 	// Path of the screenshot.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-	// If a screenshot is watermarked, list of template IDs used for watermarking.
+	// List of template IDs for watermarking if the screenshot is watermarked.
 	WaterMarkDefinition []*int64 `json:"WaterMarkDefinition,omitnil,omitempty" name:"WaterMarkDefinition"`
 }
 
 type MediaTranscodeItem struct {
-	// Target storage of the transcoded file.
+	// <p>Target storage for the transcoded file.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Video file path after transcoding.
+	// <p>Transcoded video file path.</p>
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-	// Transcoding specification ID. Please refer to the transcoding parameter template (https://www.tencentcloud.com/document/product/862/37042?from_cn_redirect=1).
+	// <p>Transcoding specification ID. Please refer to <a href="https://www.tencentcloud.com/document/product/862/37042?from_cn_redirect=1">transcoding parameter template</a>.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Sum of the average video stream bitrate and the average audio stream bit rate. Measurement unit: bps.
+	// <p>Sum of the mean video stream bitrate and the mean audio stream bitrate. Unit: bps.</p>
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// Maximum value of video stream height, measurement unit: px.
+	// <p>Maximum height of the video stream. Unit: px.</p>
 	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// Maximum value of the video stream width in px.
+	// <p>Maximum video stream width. Unit: px.</p>
 	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// Total size of media files (when the video is HLS, the size is the sum of m3u8 and ts file sizes), measurement unit: byte.
+	// <p>Total size of media files (for HLS videos, the size is the sum of m3u8 and ts file sizes), unit: byte.</p>
 	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
-	// Video duration, in seconds.
+	// <p>Video duration, in seconds.</p>
 	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
-	// Container type, such as m4a and mp4.
+	// <p>Container type, for example, m4a, mp4.</p>
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
-	// md5 value of the video.
+	// <p>md5 value of the video.</p>
 	Md5 *string `json:"Md5,omitnil,omitempty" name:"Md5"`
 
-	// Audio stream information.
+	// <p>Audio stream information.</p>
 	AudioStreamSet []*MediaAudioStreamItem `json:"AudioStreamSet,omitnil,omitempty" name:"AudioStreamSet"`
 
-	// Video stream information.
+	// <p>Video stream information.</p>
 	VideoStreamSet []*MediaVideoStreamItem `json:"VideoStreamSet,omitnil,omitempty" name:"VideoStreamSet"`
 
-
+	// <p>Video transcoding enhancement item descriptions and explanations</p><li>hdr: HDR configuration</li><li>wd_fps: Frame interpolation frame rate configuration</li><li>video_super_resolution: Super-resolution configuration</li><li>repair: Comprehensive enhancement configuration</li><li>denoise: Video noise reduction configuration</li><li>color_enhance: Color enhancement configuration</li><li>scratch: Scratches removal configuration</li><li>artifact: Artifacts removal (burrs) configuration</li><li>sharp: Detail enhancement configuration</li><li>low_light: Low-light enhancement configuration</li><li>face_enhance: Face enhancement configuration</li>
 	CallBackExtInfo *string `json:"CallBackExtInfo,omitnil,omitempty" name:"CallBackExtInfo"`
+
+	// <p>MediaTranscodeItem</p>
+	Usage *MediaUsageItem `json:"Usage,omitnil,omitempty" name:"Usage"`
+}
+
+type MediaUsageItem struct {
+	// <p>Number of input images</p><p>Unit: count</p>
+	InputImageCount *int64 `json:"InputImageCount,omitnil,omitempty" name:"InputImageCount"`
+
+	// <p>Input seconds</p><p>Unit: seconds</p>
+	InputSeconds *int64 `json:"InputSeconds,omitnil,omitempty" name:"InputSeconds"`
+
+	// <p>Output seconds</p><p>Measurement unit: seconds</p>
+	OutputSeconds *int64 `json:"OutputSeconds,omitnil,omitempty" name:"OutputSeconds"`
+
+	// <p>Total number of seconds</p><p>Unit: seconds</p>
+	TotalSeconds *int64 `json:"TotalSeconds,omitnil,omitempty" name:"TotalSeconds"`
 }
 
 type MediaVideoStreamItem struct {
 	// Bitrate of the video stream. Unit: bps.
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// Height of a video stream. Unit: px.
+	// Height of the video stream. Unit: px.
 	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// Video stream width in px.
+	// Video stream width. Unit: px.
 	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Video stream encoding format, for example, h264.
@@ -15308,25 +15712,25 @@ type MediaVideoStreamItem struct {
 	// Frame rate. Measurement unit: hz.
 	Fps *int64 `json:"Fps,omitnil,omitempty" name:"Fps"`
 
-
+	// Colorspace.
 	ColorPrimaries *string `json:"ColorPrimaries,omitnil,omitempty" name:"ColorPrimaries"`
 
-
+	// Colorspace.
 	ColorSpace *string `json:"ColorSpace,omitnil,omitempty" name:"ColorSpace"`
 
-
+	// Colorspace.
 	ColorTransfer *string `json:"ColorTransfer,omitnil,omitempty" name:"ColorTransfer"`
 
-
+	// HDR type.
 	HdrType *string `json:"HdrType,omitnil,omitempty" name:"HdrType"`
 
-
+	// Video Codecs.
 	Codecs *string `json:"Codecs,omitnil,omitempty" name:"Codecs"`
 
-
+	// Numerator of the frame rate.
 	FpsNumerator *int64 `json:"FpsNumerator,omitnil,omitempty" name:"FpsNumerator"`
 
-
+	// Denominator of the frame rate.
 	FpsDenominator *int64 `json:"FpsDenominator,omitnil,omitempty" name:"FpsDenominator"`
 }
 
@@ -17705,25 +18109,25 @@ func (r *ModifyWordSampleResponse) FromJsonString(s string) error {
 }
 
 type MosaicInput struct {
-	// <p>Origin position. Currently, only the following is supported:</p><li>TopLeft: indicates that the coordinate origin is at the top left corner of the video image and the mosaic origin is at the top left corner of the image or text.</li>Default value: TopLeft.
+	// <p>Origin position. Currently, only the following is supported:</p><li>TopLeft: indicates that the coordinate origin is at the top-left corner of the video image and the mosaic origin is at the top-left corner of the image or text.</li>Default value: TopLeft.
 	CoordinateOrigin *string `json:"CoordinateOrigin,omitnil,omitempty" name:"CoordinateOrigin"`
 
-	// <p>Horizontal position of the mosaic origin relative to the origin of coordinates of the video image. Supports two formats: % and px:</p><li>If a string ends with %, the mosaic XPos is a specified percentage of the video width. For example, 10% means XPos is 10% of the video width;</li><li>If a string ends with px, the mosaic XPos is a specified pixel. For example, 100px means XPos is 100 pixels.</li>Default value: 0px.
+	// <p>Horizontal position of the mosaic origin relative to the origin of coordinates of the video image. Supports two formats: % and px:</p><li>If a string ends with %, the mosaic XPos is a specified percentage of the video width. For example, 10% means the XPos is 10% of the video width.</li><li>If a string ends with px, the mosaic XPos is a specified pixel. For example, 100px means the XPos is 100 pixels.</li>Default value: 0px.
 	XPos *string `json:"XPos,omitnil,omitempty" name:"XPos"`
 
 	// <p>Vertical position of the mosaic origin relative to the origin of coordinates of the video image. Supports two formats: % and px:</p><li>If a string ends with %, the mosaic YPos is the specified percentage of the video height. For example, 10% means YPos is 10% of the video height.</li><li>If a string ends with px, the mosaic YPos is the specified pixel. For example, 100px means YPos is 100 pixels.</li>Default value: 0px.
 	YPos *string `json:"YPos,omitnil,omitempty" name:"YPos"`
 
-	// <p>Mosaic width. Supports two formats: % and px:</p><li>If a string ends with %, it indicates that the mosaic `Width` is a percentage of a video's width. For example, `10%` means that `Width` is 10% of a video's width.</li><li>If a string ends with px, it indicates that the mosaic `Width` is in pixels. For example, `100px` means that `Width` is 100 pixels.</li>Default value: 10%.
+	// <p>Width of the mosaic. Supports two formats: % and px:</p><li>If a string ends with %, it indicates that the mosaic `Width` is a percentage of a video's width. For example, `10%` means that `Width` is 10% of a video's width.</li><li>If a string ends with px, it indicates that the unit of the mosaic `Width` is pixel. For example, `100px` means that `Width` is 100 pixels.</li>Default value: 10%.
 	Width *string `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// <p>Height of a mosaic. Two formats are supported: % and px.</p><li>If a string ends with %, it indicates that the `Height` of a mosaic is a percentage of a video's height. For example, `10%` means that `Height` is 10% of a video's height.</li><li>If a string ends with px, it indicates that the `Height` of a mosaic is in pixels. For example, `100px` means that `Height` is 100 pixels.</li>Default value: 10%.
+	// <p>Mosaic height. Supports two formats: % and px:</p><li>If a string ends with %, it indicates that the `Height` of a mosaic is a percentage of a video's height. For example, `10%` means that `Height` is 10% of a video's height.</li><li>If a string ends with px, it indicates that the `Height` unit of a mosaic is pixel. For example, `100px` means that `Height` is 100 pixels.</li>Default value: 10%.
 	Height *string `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// <p>Start time offset of mosaic, in seconds. If not specified or set to 0, the mosaic appears when the frame appears.</p><li>If not specified or set to 0, the mosaic appears from the start of the frame;</li><li>If the value is greater than 0 (assuming n), the mosaic appears at the nth second from the start of the frame;</li><li>If the value is less than 0 (assuming -n), the mosaic appears n seconds before the end of the frame.</li>
+	// <p>Start time offset of mosaic, in seconds. Leave empty or enter 0 to make the mosaic appear when the frame appears.</p><li>Leave empty or enter 0 to make the mosaic appear at the start of the frame;</li><li>If the value is greater than 0 (assuming n), the mosaic appears at the nth second after the frame starts;</li><li>If the value is less than 0 (assuming -n), the mosaic appears n seconds before the end of the frame.</li>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// <p>End time offset of mosaic, in seconds.</p><li>If not specified or set to 0, the mosaic lasts until the end of a video;</li><li>If the value is greater than 0 (assuming n), the mosaic disappears at second n;</li><li>If the value is less than 0 (assuming -n), the mosaic disappears n seconds before the end of a video.</li>
+	// <p>End time offset of the mosaic, in seconds.</p><li>If not specified or set to 0, the mosaic lasts until the end of a video;</li><li>If the value is greater than 0 (assuming n), the mosaic disappears at second n;</li><li>If the value is less than 0 (assuming -n), the mosaic disappears n seconds before the end of a video.</li>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 }
 
@@ -17731,7 +18135,7 @@ type NumberFormat struct {
 	// The starting value of the `{number}` variable. Default value: 0.
 	InitialValue *uint64 `json:"InitialValue,omitnil,omitempty" name:"InitialValue"`
 
-	// The growth step length of the `{number}` variable, with a default value of 1.
+	// The increase step length of the `{number}` variable. Default value: 1.
 	Increment *uint64 `json:"Increment,omitnil,omitempty" name:"Increment"`
 
 	// Minimum length of the `{number}` variable. Placeholder is used if the length is not sufficient. Default value: 1.
@@ -17787,24 +18191,24 @@ type OverrideAIDubbingParameter struct {
 	// <p>Dubbing configuration message.</p>
 	DubbingConfig *DubbingConfig `json:"DubbingConfig,omitnil,omitempty" name:"DubbingConfig"`
 
-	// <p>Output configuration information.</p>
+	// <p>Outputs configuration message.</p>
 	OutputConfig *DubbingOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
 }
 
 type OverrideEraseParameter struct {
-
+	// <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
 	EraseType *string `json:"EraseType,omitnil,omitempty" name:"EraseType"`
 
-
+	// <p>Subtitle erasing configuration;<br>This field is required when the value of EraseType is set to subtitle.</p>
 	EraseSubtitleConfig *UpdateSmartEraseSubtitleConfig `json:"EraseSubtitleConfig,omitnil,omitempty" name:"EraseSubtitleConfig"`
 
-
+	// <p>Watermark erasing configuration.<br>This field is required when the value of EraseType is set to watermark.</p>
 	EraseWatermarkConfig *UpdateSmartEraseWatermarkConfig `json:"EraseWatermarkConfig,omitnil,omitempty" name:"EraseWatermarkConfig"`
 
-
+	// <p>Privacy protection configuration.<br>This field is required when the value of EraseType is privacy.</p>
 	ErasePrivacyConfig *UpdateSmartErasePrivacyConfig `json:"ErasePrivacyConfig,omitnil,omitempty" name:"ErasePrivacyConfig"`
 
-
+	// <p>id of the subtitle removal suppression template.</p>
 	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
 }
 
@@ -17813,12 +18217,12 @@ type OverrideTranscodeParameter struct {
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
 	// Indicates whether to remove video data. Parameter value:
-	// <li>`0`: retention;</li>
+	// <li>0: retention</li>
 	// <li>1: Remove.</li>
 	RemoveVideo *uint64 `json:"RemoveVideo,omitnil,omitempty" name:"RemoveVideo"`
 
 	// Indicates whether to remove audio data. Parameter value:
-	// <li>`0`: retention;</li>
+	// <li>0: retention</li>
 	// <li>1: Remove.</li>
 	RemoveAudio *uint64 `json:"RemoveAudio,omitnil,omitempty" name:"RemoveAudio"`
 
@@ -17828,7 +18232,7 @@ type OverrideTranscodeParameter struct {
 	// Audio stream configuration parameters.
 	AudioTemplate *AudioTemplateInfoForUpdate `json:"AudioTemplate,omitnil,omitempty" name:"AudioTemplate"`
 
-
+	// Top Speed Codec transcoding parameters.
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
 
 	// Subtitle stream configuration parameters.
@@ -17846,14 +18250,14 @@ type OverrideTranscodeParameter struct {
 
 // Predefined struct for user
 type ParseLiveStreamProcessNotificationRequestParams struct {
-	// Event notification content for live streams obtained from CMQ.
+	// Content of the live stream event notification obtained from CMQ.
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 }
 
 type ParseLiveStreamProcessNotificationRequest struct {
 	*tchttp.BaseRequest
 	
-	// Event notification content for live streams obtained from CMQ.
+	// Content of the live stream event notification obtained from CMQ.
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 }
 
@@ -17888,28 +18292,28 @@ type ParseLiveStreamProcessNotificationResponseParams struct {
 	// <li>ProcessEof: end of live stream processing.</li>
 	NotificationType *string `json:"NotificationType,omitnil,omitempty" name:"NotificationType"`
 
-	// Task ID for video processing.
+	// Video processing task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-
+	// Error information of live stream processing. Valid when NotificationType is ProcessEof.
 	ProcessEofInfo *LiveStreamProcessErrorInfo `json:"ProcessEofInfo,omitnil,omitempty" name:"ProcessEofInfo"`
 
-
+	// Content moderation result. Valid when NotificationType is AiReviewResult.
 	AiReviewResultInfo *LiveStreamAiReviewResultInfo `json:"AiReviewResultInfo,omitnil,omitempty" name:"AiReviewResultInfo"`
 
-
+	// Content recognition result. Valid when NotificationType is AiRecognitionResult.
 	AiRecognitionResultInfo *LiveStreamAiRecognitionResultInfo `json:"AiRecognitionResultInfo,omitnil,omitempty" name:"AiRecognitionResultInfo"`
 
-
+	// Content analysis result. Valid when NotificationType is AiAnalysisResult.
 	AiAnalysisResultInfo *LiveStreamAiAnalysisResultInfo `json:"AiAnalysisResultInfo,omitnil,omitempty" name:"AiAnalysisResultInfo"`
 
-
+	// Media quality inspection result. Valid when NotificationType is AiQualityControlResult.
 	AiQualityControlResultInfo *LiveStreamAiQualityControlResultInfo `json:"AiQualityControlResultInfo,omitnil,omitempty" name:"AiQualityControlResultInfo"`
 
-
+	// Live streaming result is valid when NotificationType is LiveRecordResult.
 	LiveRecordResultInfo *LiveStreamRecordResultInfo `json:"LiveRecordResultInfo,omitnil,omitempty" name:"LiveRecordResultInfo"`
 
-	// Smart subtitle result, valid when NotificationType is AiSmartSubtitleResult.
+	// Smart subtitle result. Valid when NotificationType is AiSmartSubtitleResult.
 	AiSmartSubtitleResultInfo *LiveStreamAiSmartSubtitleResultInfo `json:"AiSmartSubtitleResultInfo,omitnil,omitempty" name:"AiSmartSubtitleResultInfo"`
 
 	// An identifier for deduplication. If there has been a request with the same identifier within the past seven days, an error will be returned for the current request. The maximum length is 50 characters. Leaving it blank or using a null string indicates no deduplication is required.
@@ -17918,7 +18322,7 @@ type ParseLiveStreamProcessNotificationResponseParams struct {
 	// Source context, which is used to pass through user request information. The callback for task flow status changes will return the value of this field. The maximum length is 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// -Expiration time, the UNIX timestamp for event notification signature expiration. Notifications from Media Processing Service (MPS) have a default expiration time of 10 minutes. If the time specified by the Timestamp value in a notification has expired, the notification can be deemed invalid, which helps prevent network replay attacks. The Timestamp format is a decimal UNIX timestamp, representing the seconds elapsed since midnight on January 1, 1970 (UTC/GMT).
+	// - Expiration time: the UNIX Timestamp when the event notification signature expires. - Message notifications from media processing expire after 10 minutes by default. If the time specified by the Timestamp value in a message notification has expired, the notification is deemed invalid, which prevents network replay attacks. - Timestamp is in decimal UNIX Timestamp format, which is the seconds elapsed since January 1, 1970 (UTC/GMT midnight).
 	Timestamp *int64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
 
 	// Event notification security signature. Sign = MD5 (Timestamp + NotifyKey). Note: Media Processing Service concatenates Timestamp and NotifyKey from TaskNotifyConfig as a string and calculates the Sign value through MD5. This value is included in the notification message. Your backend server can verify whether the Sign is correct using the same algorithm, to confirm whether the message is indeed from the Media Processing Service backend.
@@ -17981,13 +18385,13 @@ type ParseNotificationResponseParams struct {
 	// Supported event types. Currently, the valid values include:
 	// <li>WorkflowTask: video workflow processing task.</li>
 	// <li>EditMediaTask: video editing task.</li>
-	// <li>ScheduleTask: Orchestration task.</li>
+	// <li>ScheduleTask: orchestration task.</li>
 	EventType *string `json:"EventType,omitnil,omitempty" name:"EventType"`
 
-
+	// Video processing task information. This field has a value only when EventType is WorkflowTask.
 	WorkflowTaskEvent *WorkflowTask `json:"WorkflowTaskEvent,omitnil,omitempty" name:"WorkflowTaskEvent"`
 
-
+	// Video editing task information. This field has a value only when EventType is EditMediaTask.
 	EditMediaTaskEvent *EditMediaTask `json:"EditMediaTaskEvent,omitnil,omitempty" name:"EditMediaTaskEvent"`
 
 	// An identifier for deduplication. If there has been a request with the same identifier within the past seven days, an error will be returned for the current request. The maximum length is 50 characters. Leaving it blank or using a null string indicates no deduplication is required.
@@ -17996,21 +18400,21 @@ type ParseNotificationResponseParams struct {
 	// Source context, which is used to pass through user request information. The callback for task flow status changes will return the value of this field. The maximum length is 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-
+	// Orchestration task information. This field has a value only when EventType is ScheduleTask.
 	ScheduleTaskEvent *ScheduleTask `json:"ScheduleTaskEvent,omitnil,omitempty" name:"ScheduleTaskEvent"`
 
-	// -Expiration time, event notification signature expiration UNIX timestamp.
-	// -The default expiration time for notifications from Media Processing Service (MPS) is 10 minutes. If the time specified by the Timestamp value in a message notification has expired, the notification can be deemed invalid, which helps prevent network replay attacks.
-	// -Timestamp is in decimal UNIX Timestamp format, which is the seconds elapsed since midnight (UTC/GMT) on January 1, 1970.
+	// -Expiration time. The event notification signature expires at this UNIX timestamp.
+	// -The default expiration time for notifications from Media Processing Service (MPS) is 10 minutes. If the time specified by the Timestamp value in a notification has expired, the notification can be deemed invalid, which can prevent network replay attacks.
+	// -Timestamp is in decimal UNIX timestamp format, i.e., the seconds elapsed since January 1, 1970 (UTC/GMT midnight).
 	Timestamp *int64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
 
 	// Event notification security signature. Sign = MD5 (Timestamp + NotifyKey). Note: Media Processing Service concatenates Timestamp and NotifyKey from TaskNotifyConfig as a string and calculates the Sign value through MD5. This value is included in the notification message. Your backend server can verify whether the Sign is correct using the same algorithm, to confirm whether the message is indeed from the Media Processing Service backend.
 	Sign *string `json:"Sign,omitnil,omitempty" name:"Sign"`
 
-
+	// Batch operation information. This field has a value only when EventType is BatchTask.
 	BatchTaskEvent *BatchSubTaskResult `json:"BatchTaskEvent,omitnil,omitempty" name:"BatchTaskEvent"`
 
-
+	// Information about the digital watermark extraction task. This field has a value only when EventType is ExtractBlindWatermark.
 	ExtractBlindWatermarkTask *ExtractBlindWatermarkTask `json:"ExtractBlindWatermarkTask,omitnil,omitempty" name:"ExtractBlindWatermarkTask"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -18034,19 +18438,19 @@ func (r *ParseNotificationResponse) FromJsonString(s string) error {
 }
 
 type PatternConfig struct {
-	// <p>Transparency threshold</p><p>Value ranges from 0 to 255.</p><p>Default value: 30</p>
+	// <p>Transparency threshold</p><p>Value range: [0, 255]</p><p>Default value: 30</p>
 	TransparencyThreshold *int64 `json:"TransparencyThreshold,omitnil,omitempty" name:"TransparencyThreshold"`
 
-	// <p>Opaque threshold must be greater than TransparencyThreshold.</p><p>Value ranges from 0 to 255.</p><p>Default value: 127.</p>
+	// <p>Opaque threshold, must be greater than TransparencyThreshold</p><p>Value range: [0, 255]</p><p>Default value: 127</p>
 	OpaqueThreshold *int64 `json:"OpaqueThreshold,omitnil,omitempty" name:"OpaqueThreshold"`
 
-	// <p>Edge sampling steps, default 5.</p><p>Value ranges from 1 to 10.</p>
+	// <p>Edge sampling steps. Default value: 5</p><p>Value range: [1, 10]</p>
 	EdgeSamplingStep *int64 `json:"EdgeSamplingStep,omitnil,omitempty" name:"EdgeSamplingStep"`
 
-	// <p>Edge expansion steps. Default: 5</p>
+	// <p>Edge expansion steps. Default value: 5</p>
 	EdgeExpansionStep *int64 `json:"EdgeExpansionStep,omitnil,omitempty" name:"EdgeExpansionStep"`
 
-	// <p>Edge fusion strength, default 0.5</p><p>Value ranges from 0 to 1.0</p>
+	// <p>Edge fusion strength, default 0.5</p><p>Value range: [0, 1.0]</p>
 	EdgeBlendingIntensity *float64 `json:"EdgeBlendingIntensity,omitnil,omitempty" name:"EdgeBlendingIntensity"`
 }
 
@@ -18301,13 +18705,13 @@ type ProcessImageRequestParams struct {
 	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
 
 	// Output path, which can be a relative or absolute path.
-	// To define the output path, the path must end with `.{format}`. For variable names, please refer to the Filename Variable Explanation (https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1).
+	// To define the output path, it must end with `.{format}`. For variable names, please refer to [Filename Variable Explanation](https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1).
 	// Relative path example:
-	// <li>Filename_{Variable name}.{format}</li>
-	// <li>Filename.{format}</li>
+	// <li>Filename_{Variable name}.{format}.</li>
+	// <li>Filename.{format}.</li>
 	// Absolute path example:
 	// <li>/Custom path/Filename_{Variable name}.{format}</li>
-	// If not filled in, default relative path: {inputName}.{format}.
+	// If not filled in, the default relative path is: {inputName}.{format}.
 	OutputPath *string `json:"OutputPath,omitnil,omitempty" name:"OutputPath"`
 
 	// Unique identifier of the image processing template.
@@ -18337,13 +18741,13 @@ type ProcessImageRequest struct {
 	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
 
 	// Output path, which can be a relative or absolute path.
-	// To define the output path, the path must end with `.{format}`. For variable names, please refer to the Filename Variable Explanation (https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1).
+	// To define the output path, it must end with `.{format}`. For variable names, please refer to [Filename Variable Explanation](https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1).
 	// Relative path example:
-	// <li>Filename_{Variable name}.{format}</li>
-	// <li>Filename.{format}</li>
+	// <li>Filename_{Variable name}.{format}.</li>
+	// <li>Filename.{format}.</li>
 	// Absolute path example:
 	// <li>/Custom path/Filename_{Variable name}.{format}</li>
-	// If not filled in, default relative path: {inputName}.{format}.
+	// If not filled in, the default relative path is: {inputName}.{format}.
 	OutputPath *string `json:"OutputPath,omitnil,omitempty" name:"OutputPath"`
 
 	// Unique identifier of the image processing template.
@@ -18436,74 +18840,86 @@ type ProcessImageTemplate struct {
 
 // Predefined struct for user
 type ProcessLiveStreamRequestParams struct {
-	// <p>Live stream URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room number ID<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID<br><code>&lt;userid&gt;</code> is the user ID for the service to enter the room, which can distinguish who is the robot<br><code>&lt;usersig&gt;</code> is the TRTC user signature</p><p>webrtc supports LEB live streams. For address retrieval, please <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">refer</a></p><p>For srt supported addresses, please <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a></p>
+	// <p>Live streaming URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the room number ID of trtc<br><code>&lt;sdkappid&gt;</code> is the SDK app ID of trtc<br><code>&lt;userid&gt;</code> is the user ID for the service to enter a room, which can be used to identify the robot<br><code>&lt;usersig&gt;</code> is the signature of the trtc user</p><p>webrtc supports LEB live streams. For address retrieval, please <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">refer</a></p><p>For supported srt addresses, please <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a></p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-
+	// <p>Event notification information of the task. This is used to specify the live stream processing result.</p>
 	TaskNotifyConfig *LiveStreamTaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
 
-
+	// <p>Target storage for the output file of the live stream processing task. This parameter is required if the processing task has an output file.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-
+	// <p>Target output directory for the file generated by the live stream processing task, such as <code>/movie/201909/</code>. If this is not specified, the default directory is <code>/</code>.</p>
 	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
 
-
+	// <p>Parameters for the video content review task.</p>
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitnil,omitempty" name:"AiContentReviewTask"`
 
-
+	// <p>Parameters for the video content recognition task.</p>
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil,omitempty" name:"AiRecognitionTask"`
 
-
+	// <p>Parameters for the video content analysis task.</p>
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil,omitempty" name:"AiAnalysisTask"`
 
-
+	// <p>Parameters for the media quality inspection task.</p>
 	AiQualityControlTask *AiQualityControlTaskInput `json:"AiQualityControlTask,omitnil,omitempty" name:"AiQualityControlTask"`
 
-
+	// <p>Parameters for the smart subtitle task.</p>
 	SmartSubtitlesTask *LiveSmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
 
-
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-
+	// <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-
+	// <p>Live streaming orchestration ID.<br>Note 1: For the OutputStorage and OutputDir parameters:</p><li>If OutputStorage and OutputDir are configured in the subtask node of service orchestration, the output configured in the subtask node serves as the subtask output.</li><li>If OutputStorage and OutputDir are not configured in the subtask node of service orchestration and ProcessLiveStream has output, the default output of the original orchestration is overridden.</li>Note 2: For the TaskNotifyConfig parameter, if it has been configured in the task creation API (ProcessLiveStream), the default callback of the original orchestration is overridden.
 	ScheduleId *int64 `json:"ScheduleId,omitnil,omitempty" name:"ScheduleId"`
 
-
+	// <p>Resource ID. The resource needs to be enabled. The default value is the account's primary resource ID.</p>
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 }
 
 type ProcessLiveStreamRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Live stream URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the TRTC room number ID<br><code>&lt;sdkappid&gt;</code> is the TRTC SDK app ID<br><code>&lt;userid&gt;</code> is the user ID for the service to enter the room, which can distinguish who is the robot<br><code>&lt;usersig&gt;</code> is the TRTC user signature</p><p>webrtc supports LEB live streams. For address retrieval, please <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">refer</a></p><p>For srt supported addresses, please <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a></p>
+	// <p>Live streaming URL (must be a live streaming address, supporting rtmp, hls, flv, trtc, webrtc, srt, etc.).<br>The trtc address is as follows:<br> trtc://trtc.rtc.qq.com/mps/<code>&lt;roomid&gt;</code>?sdkappid=<code>&lt;sdkappid&gt;</code>&amp;userid=<code>&lt;userid&gt;</code>&amp;usersig=<code>&lt;usersig&gt;</code><br><code>&lt;roomid&gt;</code> is the room number ID of trtc<br><code>&lt;sdkappid&gt;</code> is the SDK app ID of trtc<br><code>&lt;userid&gt;</code> is the user ID for the service to enter a room, which can be used to identify the robot<br><code>&lt;usersig&gt;</code> is the signature of the trtc user</p><p>webrtc supports LEB live streams. For address retrieval, please <a href="https://www.tencentcloud.com/document/product/267/32720?from_cn_redirect=1">refer</a></p><p>For supported srt addresses, please <a href="https://ffmpeg.org/ffmpeg-protocols.html#srt">refer</a></p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
+	// <p>Event notification information of the task. This is used to specify the live stream processing result.</p>
 	TaskNotifyConfig *LiveStreamTaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
 
+	// <p>Target storage for the output file of the live stream processing task. This parameter is required if the processing task has an output file.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
+	// <p>Target output directory for the file generated by the live stream processing task, such as <code>/movie/201909/</code>. If this is not specified, the default directory is <code>/</code>.</p>
 	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
 
+	// <p>Parameters for the video content review task.</p>
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitnil,omitempty" name:"AiContentReviewTask"`
 
+	// <p>Parameters for the video content recognition task.</p>
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil,omitempty" name:"AiRecognitionTask"`
 
+	// <p>Parameters for the video content analysis task.</p>
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil,omitempty" name:"AiAnalysisTask"`
 
+	// <p>Parameters for the media quality inspection task.</p>
 	AiQualityControlTask *AiQualityControlTaskInput `json:"AiQualityControlTask,omitnil,omitempty" name:"AiQualityControlTask"`
 
+	// <p>Parameters for the smart subtitle task.</p>
 	SmartSubtitlesTask *LiveSmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
 
+	// <p>Identifier for deduplication. If a request with the same identifier has been sent within the past seven days, an error is returned for the current request. The maximum length is 50 characters. If this is not specified or left empty, deduplication is not performed.</p>
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
+	// <p>Source context. This is used to pass user request information. The task status change callback returns the value of this field. The maximum length is 1000 characters.</p>
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
+	// <p>Live streaming orchestration ID.<br>Note 1: For the OutputStorage and OutputDir parameters:</p><li>If OutputStorage and OutputDir are configured in the subtask node of service orchestration, the output configured in the subtask node serves as the subtask output.</li><li>If OutputStorage and OutputDir are not configured in the subtask node of service orchestration and ProcessLiveStream has output, the default output of the original orchestration is overridden.</li>Note 2: For the TaskNotifyConfig parameter, if it has been configured in the task creation API (ProcessLiveStream), the default callback of the original orchestration is overridden.
 	ScheduleId *int64 `json:"ScheduleId,omitnil,omitempty" name:"ScheduleId"`
 
+	// <p>Resource ID. The resource needs to be enabled. The default value is the account's primary resource ID.</p>
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 }
 
@@ -18540,7 +18956,7 @@ func (r *ProcessLiveStreamRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ProcessLiveStreamResponseParams struct {
-
+	// <p>Task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -18863,7 +19279,7 @@ type PureSubtitleTransResult struct {
 	// Translation task input information.
 	Input *SmartSubtitleTaskResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Translation output result of pure subtitle files.
 	Output *PureSubtitleTransResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Task progress.
@@ -18871,7 +19287,7 @@ type PureSubtitleTransResult struct {
 }
 
 type PureSubtitleTransResultOutput struct {
-
+	// Storage location of the subtitle file.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// Result set of multilingual translation.
@@ -18905,16 +19321,16 @@ type QualityControlData struct {
 }
 
 type QualityControlItem struct {
-
+	// Confidence, with a value range from 0 to 100.
 	Confidence *int64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Start time of occurrence, in seconds.
+	// Start timestamp of the occurrence, in seconds.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
 	// End timestamp of the occurrence, in seconds.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-
+	// Area coordinates (px), i.e. coordinates of the top-left corner and coordinate of the bottom-right corner.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil,omitempty" name:"AreaCoordSet"`
 }
 
@@ -19009,18 +19425,18 @@ type QualityControlResult struct {
 	// LowLighting: low light.
 	// HighLighting: overexposure.
 	// CrashScreen: screen glitch.
-	// BlackWhiteEdge: Black and white edges
+	// BlackWhiteEdge: black and white edge
 	// SolidColorScreen: solid color screen.
 	// Noise: noise.
-	// Mosaic: Mosaic
+	// Mosaic: mosaic.
 	// QRCode: QR code.
-	// AppletCode: Mini program code.
+	// AppletCode: mini program code
 	// BarCode: barcode.
 	// LowVoice: bass.
-	// HighVoice: high voice detection.
+	// HighVoice: high voice.
 	// NoVoice: mute.
-	// LowEvaluation: The video no-reference score (MOS) is below the threshold.
-	// AudioEvaluation: The audio no-reference scoring (MOS) is below the threshold.
+	// LowEvaluation: The no-reference score (MOS) of the video is below the threshold.
+	// AudioEvaluation: Audio no-reference scoring (MOS) is below the threshold.
 	// AudioNoise: Audio noise.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
@@ -19230,7 +19646,7 @@ type QueryTaskFilter struct {
 	// <p>Task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// <p>Task type</p>
+	// <p>Task type</p><p>Enumeration values:</p><ul><li>RedrawVideo: Video redraw</li><li>AIDrama: AI drama</li><li>DocGenVideo: Document to video</li><li>FissionVideo: Video fission</li></ul>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
 	// <p>Task status.</p>
@@ -19241,103 +19657,112 @@ type QueryTaskFilter struct {
 
 	// <p>Aspect ratio.</p>
 	Ratio *string `json:"Ratio,omitnil,omitempty" name:"Ratio"`
+
+	// <p>Task execution mode</p><p>Enumeration values:</p><ul><li>auto: Direct generation</li><li>phased: Generate after confirmation</li></ul>
+	ExecuteMode *string `json:"ExecuteMode,omitnil,omitempty" name:"ExecuteMode"`
+
+	// <p>Fission task video type filter: ugc, talk, display, unboxing, reaction</p><p>Enumeration values:</p><ul><li>ugc: UGC recommendation</li><li>talk: Product talk-over</li><li>display: Product display</li><li>unboxing: Unboxing sharing</li><li>reaction: Reaction display</li></ul>
+	VideoType *string `json:"VideoType,omitnil,omitempty" name:"VideoType"`
+
+	// <p>Model type</p><p>Enumeration values:</p><ul><li>standard: standard version</li><li>flagship: advanced edition</li></ul>
+	ModelTier *string `json:"ModelTier,omitnil,omitempty" name:"ModelTier"`
 }
 
 type RawAIDubbingParameter struct {
 	// <p>Translation configuration message.</p>
 	TranslateConfig *DubbingTranslateConfig `json:"TranslateConfig,omitnil,omitempty" name:"TranslateConfig"`
 
-	// <p>Subtitle configuration information.</p>
+	// <p>Subtitle configuration message.</p>
 	SubtitleConfig *DubbingSubtitleConfig `json:"SubtitleConfig,omitnil,omitempty" name:"SubtitleConfig"`
 
 	// <p>Dubbing configuration message.</p>
 	DubbingConfig *DubbingConfig `json:"DubbingConfig,omitnil,omitempty" name:"DubbingConfig"`
 
-	// <p>Output configuration message.</p>
+	// <p>Outputs configuration message.</p>
 	OutputConfig *DubbingOutputConfig `json:"OutputConfig,omitnil,omitempty" name:"OutputConfig"`
 }
 
 type RawImageWatermarkInput struct {
-	// Input content of the watermark image. jpeg and png image formats are supported.
+	// Input content of the watermark image. Supports jpeg and png image formats.
 	ImageContent *MediaInputInfo `json:"ImageContent,omitnil,omitempty" name:"ImageContent"`
 
 	// Width of a watermark, supporting two formats: % and px.
 	// <li>If a string ends with %, it indicates that the `Width` of a watermark is a percentage of a video's width. For example, `10%` means that `Width` is 10% of a video's width.</li>
-	// <li>If a string ends with px, it means the watermark Width is in pixels. For example, 100px means the Width is 100 pixels.</li>
+	// <li>If a string ends with px, Width is in pixels. For example, 100px means Width is 100 pixels.</li>
 	// Default value: 10%.
 	Width *string `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// Height of a watermark. Supports two formats: % and px.
+	// Height of a watermark, supporting two formats: % and px.
 	// <li>If a string ends with %, it indicates that the `Height` of a watermark is a percentage of a video's height. For example, `10%` means that `Height` is 10% of a video's height.</li>
 	// <li>If a string ends with px, it means the watermark Height is in pixels. For example, 100px means the Height is 100 pixels.</li>
 	// Default value: 0px, which means Height is scaled according to the aspect ratio of the raw watermark image.
 	Height *string `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// Watermark repeat type. Usage scenario: the watermark is a dynamic image. Value range:
-	// <li>once: The dynamic watermark will no longer appear after it has finished playing;</li>
-	// <li>repeat_last_frame: Stay on the last frame after the watermark finished playing;</li>
-	// <li>repeat: Watermark loops until the video ends (default value).</li>
+	// Watermark repeat type. Usage scenario: The watermark is a dynamic image. Value range:
+	// <li>once: The dynamic watermark no longer appears after it is finished playing;</li>
+	// <li>repeat_last_frame: after the watermark finishes playing, stay on the last frame;</li>
+	// <li>repeat: watermark loops until the video ends (default value).</li>
 	RepeatType *string `json:"RepeatType,omitnil,omitempty" name:"RepeatType"`
 }
 
 type RawSmartEraseParameter struct {
-
+	// <p>Removal Type</p><ul><li>subtitle removal</li><li>watermark removal</li><li>privacy protection</li></ul>
 	EraseType *string `json:"EraseType,omitnil,omitempty" name:"EraseType"`
 
-
+	// <p>Subtitle erasing configuration;<br>This field is required when the value of EraseType is set to subtitle.</p>
 	EraseSubtitleConfig *SmartEraseSubtitleConfig `json:"EraseSubtitleConfig,omitnil,omitempty" name:"EraseSubtitleConfig"`
 
-
+	// <p>Watermark erasing configuration.<br>This field is required when the value of EraseType is set to watermark.</p>
 	EraseWatermarkConfig *SmartEraseWatermarkConfig `json:"EraseWatermarkConfig,omitnil,omitempty" name:"EraseWatermarkConfig"`
 
-
+	// <p>Privacy protection configuration.<br>This field is required when the value of EraseType is privacy.</p>
 	ErasePrivacyConfig *SmartErasePrivacyConfig `json:"ErasePrivacyConfig,omitnil,omitempty" name:"ErasePrivacyConfig"`
 
-
+	// <p>id of the subtitle removal suppression template.</p>
 	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
 
-
+	// <p>Suppression configuration, enabled by default, moves subtitles back to the original subtitle position.</p>
 	UseOriginalPos *int64 `json:"UseOriginalPos,omitnil,omitempty" name:"UseOriginalPos"`
 
-
+	// <p>Suppression configuration, enabled by default. When enabled, use the original subtitle font size.</p>
 	UseOriginalSize *int64 `json:"UseOriginalSize,omitnil,omitempty" name:"UseOriginalSize"`
 }
 
 type RawSmartSubtitleParameter struct {
-
+	// <p>Smart subtitle language type.<br>0: source language.<br>1: target language.<br>2: source language and target language.<br>Only 0 is supported when TranslateSwitch is OFF.<br>Only 1 or 2 is supported when TranslateSwitch is ON.</p>
 	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
 
-
+	// <p>Smart subtitling video source language<br>OCR recognition supports the following languages:<br><code>zh_en</code>: Chinese-English<br><code>multi</code>: Other<br>ASR recognition and pure caption translation currently support the following languages:<br><code>auto</code>: Auto-identification<br><code>zh</code>: Simplified Chinese<br><code>en</code>: English<br><code>ja</code>: Japanese<br><code>ko</code>: Korean<br><code>zh-PY</code>: Chinese-English-Cantonese<br><code>zh_medical</code>: Chinese health care<br><code>vi</code>: Vietnamese<br><code>ms</code>: Malay<br><code>id</code>: Indonesian<br><code>fil</code>: Filipino<br><code>th</code>: Thai<br><code>pt</code>: Portuguese<br><code>tr</code>: Turkish<br><code>ar</code>: Arabic<br><code>es</code>: Spanish<br><code>hi</code>: Hindi<br><code>fr</code>: French<br><code>de</code>: German<br><code>it</code>: Italian<br><code>zh_dialect</code>: Chinese dialect<br><code>zh_en</code>: Chinese-English<br><code>yue</code>: Cantonese<br><code>ru</code>: Russian<br><code>prime_zh</code>: Chinese-English dialect<br><code>af-ZA</code>: Afrikaans (South Africa)<br><code>sq-AL</code>: Albanian (Albania)<br><code>am-ET</code>: Amharic (Ethiopia)<br><code>ar-DZ</code>: Arabic (Algeria)<br><code>ar-BH</code>: Arabic (Bahrain)<br><code>ar-EG</code>: Arabic (Egypt)<br><code>ar-IQ</code>: Arabic (Iraq)<br><code>ar-IL</code>: Arabic (Israel)<br><code>ar-JO</code>: Arabic (Jordan)<br><code>ar-KW</code>: Arabic (Kuwait)<br><code>ar-LB</code>: Arabic (Lebanon)<br><code>ar-MR</code>: Arabic (Mauritania)<br><code>ar-MA</code>: Arabic (Morocco)<br><code>ar-OM</code>: Arabic (Oman)<br><code>ar-QA</code>: Arabic (Qatar)<br><code>ar-SA</code>: Arabic (Saudi Arabia)<br><code>ar-PS</code>: Arabic (State of Palestine)<br><code>ar-SY</code>: Arabic (Syria)<br><code>ar-TN</code>: Arabic (Tunisia)<br><code>ar-AE</code>: Arabic (United Arab Emirates)<br><code>ar-YE</code>: Arabic (Yemen)<br><code>hy-AM</code>: Armenian (Armenia)<br><code>az-AZ</code>: Azerbaijani (Azerbaijan)<br><code>eu-ES</code>: Basque (Spain)<br><code>bn-BD</code>: Bengali (Bangladesh)<br><code>bn-IN</code>: Bengali (India)<br><code>bs-BA</code>: Bosnian (Bosnia and Herzegovina)<br><code>bg-BG</code>: Bulgarian (Bulgaria)<br><code>my-MM</code>: Burmese (Myanmar)<br><code>ca-ES</code>: Catalan (Spain)<br><code>hr-HR</code>: Croatian (Croatia)<br><code>cs-CZ</code>: Czech (Czech Republic)<br><code>da-DK</code>: Danish (Denmark)<br><code>nl-BE</code>: Dutch (Belgium)<br><code>nl-NL</code>: Dutch (Netherlands)<br><code>en-AU</code>: English (Australia)<br><code>en-CA</code>: English (Canada)<br><code>en-GH</code>: English (Ghana)<br><code>en-HK</code>: English (Hong Kong (China))<br><code>en-IN</code>: English (India)<br><code>en-IE</code>: English (Ireland)<br><code>en-KE</code>: English (Kenya)<br><code>en-NZ</code>: English (New Zealand)<br><code>en-NG</code>: English (Nigeria)<br><code>en-PK</code>: English (Pakistan)<br><code>en-PH</code>: English (Philippines)<br><code>en-SG</code>: English (Singapore)<br><code>en-ZA</code>: English (South Africa)<br><code>en-TZ</code>: English (Tanzania)<br><code>en-GB</code>: English (UK)<br><code>en-US</code>: English (United States)<br><code>et-EE</code>: Estonian (Estonia)<br><code>fil-PH</code>: Filipino (Philippines)<br><code>fi-FI</code>: Finnish (Finland)<br><code>fr-BE</code>: French (Belgium)<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fr-CH</code>: French (Switzerland)<br><code>gl-ES</code>: Galician (Spain)<br><code>ka-GE</code>: Georgian (Georgia)<br><code>el-GR</code>: Greek (Greece)<br><code>gu-IN</code>: Gujarati (India)<br><code>iw-IL</code>: Hebrew (Israel)<br><code>hi-IN</code>: Hindi (India)<br><code>hu-HU</code>: Hungarian (Hungary)<br><code>is-IS</code>: Icelandic (Iceland)<br><code>id-ID</code>: Indonesian (Indonesia)<br><code>it-IT</code>: Italian (Italy)<br><code>it-CH</code>: Italian (Switzerland)<br><code>ja-JP</code>: Japanese (Japan)<br><code>jv-ID</code>: Javanese (Indonesia)<br><code>kn-IN</code>: Kannada (India)<br><code>kk-KZ</code>: Kazakh (Kazakhstan)<br><code>km-KH</code>: Khmer (Cambodia)<br><code>rw-RW</code>: Kinyarwanda (Rwanda)<br><code>ko-KR</code>: Korean (South Korea)<br><code>lo-LA</code>: Lao (Laos)<br><code>lv-LV</code>: Latvian (Latvia)<br><code>lt-LT</code>: Lithuanian (Lithuania)<br><code>mk-MK</code>: Macedonian (North Macedonia)<br><code>ms-MY</code>: Malay (Malaysia)<br><code>ml-IN</code>: Malayalam (India)<br><code>mr-IN</code>: Marathi (India)<br><code>mn-MN</code>: Mongolian (Mongolia)<br><code>ne-NP</code>: Nepali (Nepal)<br><code>no-NO</code>: Norwegian Bokmål (Norway)<br><code>fa-IR</code>: Persian (Iran)<br><code>pl-PL</code>: Polish (Poland)<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>ro-RO</code>: Romanian (Romania)<br><code>ru-RU</code>: Russian (Russia)<br><code>sr-RS</code>: Serbian (Serbia)<br><code>si-LK</code>: Sinhalese (Sri Lanka)<br><code>sk-SK</code>: Slovak (Slovakia)<br><code>sl-SI</code>: Slovenian (Slovenia)<br><code>st-ZA</code>: Southern Sotho (South Africa)<br><code>es-AR</code>: Spanish (Argentina)<br><code>es-BO</code>: Spanish (Bolivia)<br><code>es-CL</code>: Spanish (Chile)<br><code>es-CO</code>: Spanish (Colombia)<br><code>es-CR</code>: Spanish (Costa Rica)<br><code>es-DO</code>: Spanish (Dominican Republic)<br><code>es-EC</code>: Spanish (Ecuador)<br><code>es-SV</code>: Spanish (El Salvador)<br><code>es-GT</code>: Spanish (Guatemala)<br><code>es-HN</code>: Spanish (Honduras)<br><code>es-MX</code>: Spanish (Mexico)<br><code>es-NI</code>: Spanish (Nicaragua)<br><code>es-PA</code>: Spanish (Panama)<br><code>es-PY</code>: Spanish (Paraguay)<br><code>es-PE</code>: Spanish (Peru)<br><code>es-PR</code>: Spanish (Puerto Rico)<br><code>es-ES</code>: Spanish (Spain)<br><code>es-US</code>: Spanish (United States)<br><code>es-UY</code>: Spanish (Uruguay)<br><code>es-VE</code>: Spanish (Venezuela)<br><code>su-ID</code>: Sundanese (Indonesia)<br><code>sw-KE</code>: Swahili (Kenya)<br><code>sw-TZ</code>: Swahili (Tanzania)<br><code>sv-SE</code>: Swedish (Sweden)<br><code>ta-IN</code>: Tamil (India)<br><code>ta-MY</code>: Tamil (Malaysia)<br><code>ta-SG</code>: Tamil (Singapore)<br><code>ta-LK</code>: Tamil (Sri Lanka)<br><code>te-IN</code>: Telugu (India)<br><code>th-TH</code>: Thai (Thailand)<br><code>ts-ZA</code>: Tsonga (South Africa)<br><code>tr-TR</code>: Turkish (Türkiye)<br><code>uk-UA</code>: Ukrainian (Ukraine)<br><code>ur-IN</code>: Urdu (India)<br><code>ur-PK</code>: Urdu (Pakistan)<br><code>uz-UZ</code>: Uzbek (Uzbekistan)<br><code>ve-ZA</code>: Venda (South Africa)<code>vi-VN</code>: Vietnamese (Vietnam)<br><code>xh-ZA</code>: Xhosa (South Africa)<br><code>zu-ZA</code>: Zulu (South Africa)</p>
 	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
 
-
+	// <p>Smart subtitle file format:</p><ul><li>For ASR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li><li>Blank or fill in the blank: no subtitle file generated</li></ul></li><li>For pure caption translation processing type:<ul><li>original: consistent with the source file</li><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li><li>For OCR recognition translation processing type:<ul><li>vtt: WebVTT format subtitle</li><li>srt: SRT format subtitle</li></ul></li></ul><p><strong>Note</strong>:</p><ul><li>For ASR recognition method, passing blank or unspecified is not allowed when translating at least 2 languages.</li><li>For pure caption translation and OCR recognition translation methods, passing blank or unspecified is not allowed.</li><li>For OCR type tasks, passing blank or unspecified is allowed when suppression is enabled.</li></ul>
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
-
+	// <p>Subtitle translation switch<br><code>ON</code>: Enable translation<br><code>OFF</code>: Disable translation</p><p><strong>Note</strong>: For pure subtitle translation mode, the default value is enabled if the field is unspecified. The field cannot be left blank or set to <code>OFF</code>.</p>
 	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
 
-
+	// <p>Subtitle target language<br>Take effect when TranslateSwitch is ON. Translation language list:<br><code>ab</code>: Abkhaz<br><code>ace</code>: Acehnese<br><code>ach</code>: Acholi<br><code>af</code>: Afrikaans<br><code>ak</code>: Akan<br><code>am</code>: Amharic<br><code>ar</code>: Arabic<br><code>as</code>: Assamese<br><code>ay</code>: Aymara<br><code>az</code>: Azerbaijani<br><code>ba</code>: Bashkir<br><code>ban</code>: Balinese<br><code>bbc</code>: Batak Toba<br><code>bem</code>: Bemba<br><code>bew</code>: Betawi<br><code>bg</code>: Bulgarian<br><code>bho</code>: Bhojpuri<br><code>bik</code>: Bikol<br><code>bm</code>: Bambara<br><code>bn</code>: Bengali<br><code>br</code>: Breton<br><code>bs</code>: Bosnian<br><code>btx</code>: Batak Karo<br><code>bts</code>: Batak Simalungun<br><code>bua</code>: Buryat<br><code>ca</code>: Catalan<br><code>ceb</code>: Cebuano<br><code>cgg</code>: Kiga<br><code>chm</code>: Meadow Mari<br><code>ckb</code>: Kurdish (Sorani)<br><code>cnh</code>: Hakha Chin<br><code>co</code>: Corsican<br><code>crh</code>: Crimean Tatar<br><code>crs</code>: Seychellois Creole<br><code>cs</code>: Czech<br><code>cv</code>: Chuvash<br><code>cy</code>: Welsh<br><code>da</code>: Danish<br><code>de</code>: German<br><code>din</code>: Dinka<br><code>doi</code>: Dogri<br><code>dov</code>: Dombe<br><code>dv</code>: Dhivehi<br><code>dz</code>: Dzongkha<br><code>ee</code>: Ewe<br><code>el</code>: Greek<br><code>en</code>: English<br><code>eo</code>: Esperanto<br><code>es</code>: Spanish<br><code>et</code>: Estonian<br><code>eu</code>: Basque<br><code>fa</code>: Persian<br><code>ff</code>: Fula<br><code>fi</code>: Finnish<br><code>fil</code>: Filipino (Tagalog)<br><code>fj</code>: Fijian<br><code>fr</code>: French<br><code>fr-CA</code>: French (Canada)<br><code>fr-FR</code>: French (France)<br><code>fy</code>: Frisian<br><code>ga</code>: Irish<br><code>gaa</code>: Ga Language<br><code>gd</code>: Scottish Gaelic<br><code>gl</code>: Galician<br><code>gn</code>: Guarani<br><code>gom</code>: Konkani<br><code>gu</code>: Gujarati<br><code>gv</code>: Manx<br><code>ha</code>: Hausa<br><code>haw</code>: Hawaiian<br><code>he</code>: Hebrew<br><code>hi</code>: Hindi<br><code>hil</code>: Hiligaynon<br><code>hmn</code>: Hmong<br><code>hr</code>: Croatian<br><code>hrx</code>: Hunsrik<br><code>ht</code>: Haitian Creole<br><code>hu</code>: Hungarian<br><code>hy</code>: Armenian<br><code>id</code>: Indonesian<br><code>ig</code>: Igbo<br><code>ilo</code>: Ilocano<br><code>is</code>: Icelandic<br><code>it</code>: Italian<br><code>iw</code>: Hebrew<br><code>ja</code>: Japanese<br><code>jv</code>: Javanese<br><code>ka</code>: Georgian<br><code>kk</code>: Kazakh<br><code>km</code>: Khmer<br><code>kn</code>: Kannada<br><code>ko</code>: Korean<br><code>kri</code>: Krio<br><code>ku</code>: Kurdish (Kurmanji)<br><code>ktu</code>: Kituba<br><code>ky</code>: Kyrgyz<br><code>la</code>: Latin<br><code>lb</code>: Luxembourgish<br><code>lg</code>: Ganda (Luganda)<br><code>li</code>: Limburgish<br><code>lij</code>: Ligurian<br><code>lmo</code>: Lombard<br><code>ln</code>: Lingala<br><code>lo</code>: Lao<br><code>lt</code>: Lithuanian<br><code>ltg</code>: Latgalian<br><code>luo</code>: Luo<br><code>lus</code>: Mizo<br><code>lv</code>: Latvian<br><code>mai</code>: Maithili<br><code>mak</code>: Makassar<br><code>mg</code>: Malagasy<br><code>mi</code>: Maori<br><code>min</code>: Minangkabau<br><code>mk</code>: Macedonian<br><code>ml</code>: Malayalam<br><code>mn</code>: Mongolian<br><code>mr</code>: Marathi<br><code>ms</code>: Malay<br><code>mt</code>: Maltese<br><code>my</code>: Burmese<br><code>ne</code>: Nepali<br><code>new</code>: Newari<br><code>nl</code>: Dutch<br><code>no</code>: Norwegian<br><code>nr</code>: Southern Ndebele<br><code>nso</code>: Northern Sotho (Sepedi)<br><code>nus</code>: Nuer<br><code>ny</code>: Chichewa (Nyanja)<br><code>oc</code>: Occitan<br><code>om</code>: Oromo<br><code>or</code>: Odia<br><code>pa</code>: Punjabi<br><code>pag</code>: Pangasinan<br><code>pam</code>: Kapampangan<br><code>pap</code>: Papiamento<br><code>pl</code>: Polish<br><code>ps</code>: Pashto<br><code>pt</code>: Portuguese<br><code>pt-BR</code>: Portuguese (Brazil)<br><code>pt-PT</code>: Portuguese (Portugal)<br><code>qu</code>: Quechua<br><code>ro</code>: Romanian<br><code>rom</code>: Romani<br><code>rn</code>: Rundi<br><code>ru</code>: Russian<br><code>rw</code>: Kinyarwanda<br><code>sa</code>: Sanskrit<br><code>scn</code>: Sicilian<br><code>sd</code>: Sindhi<br><code>sg</code>: Sango<br><code>shn</code>: Shan<br><code>si</code>: Sinhalese<br><code>sk</code>: Slovak<br><code>sl</code>: Slovenian<br><code>sm</code>: Samoan<br><code>sn</code>: Shona<br><code>so</code>: Somali<br><code>sq</code>: Albanian<br><code>sr</code>: Serbian<br><code>ss</code>: Swati<br><code>st</code>: Sesotho<br><code>su</code>: Sundanese<br><code>sv</code>: Swedish<br><code>sw</code>: Swahili<br><code>szl</code>: Silesian<br><code>ta</code>: Tamil<br><code>te</code>: Telugu<br><code>tet</code>: Tetum<br><code>tg</code>: Tajik<br><code>th</code>: Thai<br><code>ti</code>: Tigrinya<br><code>tk</code>: Turkmen<br><code>tn</code>: Tswana<br><code>tr</code>: Turkish<br><code>ts</code>: Tsonga<br><code>tt</code>: Tatar<br><code>ug</code>: Uyghur<br><code>uk</code>: Ukrainian<br><code>ur</code>: Urdu<br><code>uz</code>: Uzbek<br><code>vi</code>: Vietnamese<br><code>xh</code>: Xhosa<br><code>yi</code>: Yiddish<br><code>yo</code>: Yoruba<br><code>yua</code>: Yucatec Maya<br><code>yue</code>: Cantonese<br><code>zh</code>: Simplified Chinese<br><code>zh-TW</code>: Traditional Chinese<br><code>zu</code>: Zulu</p><p><strong>Note</strong>: Use the multilingual method. <code>/</code> to separate, such as <code>en/ja</code>, which indicates English and Japanese.</p>
 	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
 
-
+	// <p>ASR hot word lexicon parameter</p>
 	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
 
-
+	// <p>Custom parameter</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 
-
+	// <p>Subtitle processing type:</p><ul><li>0: ASR recognition subtitle</li><li>1: Pure caption translation</li><li>2: OCR recognition subtitle</li></ul><p><strong>Note</strong>: The default type is ASR recognition subtitle if the field is unspecified.</p>
 	ProcessType *uint64 `json:"ProcessType,omitnil,omitempty" name:"ProcessType"`
 
-
+	// <p>Area configurations for the subtitle OCR extraction box</p>
 	SelectingSubtitleAreasConfig *SelectingSubtitleAreasConfig `json:"SelectingSubtitleAreasConfig,omitnil,omitempty" name:"SelectingSubtitleAreasConfig"`
 
-
+	// <p>Suppression Template id. Only allowed to fill in when ProcessType is 0 or 2 (task type is ASR or OCR).</p>
 	SubtitleEmbedId *int64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
 
-
+	// <p>Speaker identification mode. Valid values:<br>0: Speaker identification is disabled.<br>1: Speaker identification is enabled.<br>Default value: 0.</p>
 	SpeakerMode *int64 `json:"SpeakerMode,omitnil,omitempty" name:"SpeakerMode"`
 
-
+	// <p>Indicates whether to output the identified speaker to the subtitle file. Valid values:<br>0: The speaker is not output to the subtitle file.<br>1: The speaker is output to the VTT subtitle file.<br>Note: To use this parameter, the value of SpeakerMode cannot be 0.<br>Default value: 0.</p>
 	SpeakerLabel *int64 `json:"SpeakerLabel,omitnil,omitempty" name:"SpeakerLabel"`
 }
 
@@ -19346,13 +19771,13 @@ type RawTranscodeParameter struct {
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
 	// Indicates whether to remove video data. Parameter value:
-	// <li>`0`: retention;</li>
+	// <li>0: retention</li>
 	// <li>1: Remove.</li>
 	// Default value: 0.
 	RemoveVideo *int64 `json:"RemoveVideo,omitnil,omitempty" name:"RemoveVideo"`
 
-	// Whether to remove audio data. Parameter Value:
-	// <li>`0`: retention;</li>
+	// Whether to remove audio data. Parameter value:
+	// <li>0: retention</li>
 	// <li>1: Remove.</li>
 	// Default value: 0.
 	RemoveAudio *int64 `json:"RemoveAudio,omitnil,omitempty" name:"RemoveAudio"`
@@ -19363,16 +19788,16 @@ type RawTranscodeParameter struct {
 	// Audio stream configuration parameters. This field is required when RemoveAudio is 0.
 	AudioTemplate *AudioTemplateInfo `json:"AudioTemplate,omitnil,omitempty" name:"AudioTemplate"`
 
-	// TSC transcoding parameters.
+	// Top Speed Codec transcoding parameters.
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
 
 	// Additional parameter, which is a serialized JSON string.
 	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 
-
+	// Audio/Video enhancement configuration.
 	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
 
-
+	// Subtitle parameters.
 	SubtitleTemplate *SubtitleTemplate `json:"SubtitleTemplate,omitnil,omitempty" name:"SubtitleTemplate"`
 }
 
@@ -19384,12 +19809,12 @@ type RawWatermarkParameter struct {
 	// Origin position. Valid values:
 	// <li>TopLeft: indicates that the coordinate origin is at the top left corner of the video image and the watermark origin is at the top left corner of the image or text.</li>
 	// <li>TopRight: indicates that the coordinate origin is at the top right corner of the video image and the watermark origin is at the top right corner of the image or text.</li>
-	// <li>BottomLeft: indicates that the coordinate origin is at the bottom-left corner of the video image and the watermark origin is at the bottom-left corner of the image or text.</li>
+	// <li>BottomLeft: indicates that the coordinate origin is at the bottom left corner of the video image and the watermark origin is at the bottom left corner of the image or text.</li>
 	// <li>BottomRight: indicates that the coordinate origin is at the bottom right corner of the video image and the watermark origin is at the bottom right corner of the image or text.</li>
 	// Default value: TopLeft.
 	CoordinateOrigin *string `json:"CoordinateOrigin,omitnil,omitempty" name:"CoordinateOrigin"`
 
-	// Horizontal position of the watermark origin from the origin of coordinates of the video image. Supports % and px formats.
+	// Horizontal position of the watermark origin relative to the origin of coordinates of the video image. Supports two formats: % and px.
 	// <li>If a string ends with %, it indicates that the `XPos` of a watermark is a specified percentage of a video's width. For example, `10%` means that `XPos` is 10% of a video's width.</li>
 	// <li>If a string ends with px, it means the watermark XPos is specified in pixels. For example, 100px means XPos is 100 pixels.</li>
 	// Default value: 0px.
@@ -19401,7 +19826,7 @@ type RawWatermarkParameter struct {
 	// Default value: 0px.
 	YPos *string `json:"YPos,omitnil,omitempty" name:"YPos"`
 
-	// Image watermark template. This field is required when Type is image, and invalid when Type is text.
+	// Image watermark template. This field is required when Type is image. This field is invalid when Type is text.
 	ImageTemplate *RawImageWatermarkInput `json:"ImageTemplate,omitnil,omitempty" name:"ImageTemplate"`
 }
 
@@ -19823,55 +20248,60 @@ func (r *ResetWorkflowResponse) FromJsonString(s string) error {
 }
 
 type RuleConditionItem struct {
-
+	// Key of the quality inspection item condition.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-
+	// Value corresponding to the condition.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type Rules struct {
-
+	// Judgment condition id
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-
+	// Judgment condition configuration
 	Conditions []*RuleConditionItem `json:"Conditions,omitnil,omitempty" name:"Conditions"`
 
-
+	// Logical operator for the list of conditions. Valid values:
+	// 
+	// - &&: logical AND
+	// - ||: logical OR
 	Linker *string `json:"Linker,omitnil,omitempty" name:"Linker"`
 
-
+	// Indexes of the nodes to execute if the judgment conditions are met.
 	RearDriveIndexs []*int64 `json:"RearDriveIndexs,omitnil,omitempty" name:"RearDriveIndexs"`
 }
 
 type S3InputInfo struct {
-	// S3 bucket。
+	// S3 bucket.
 	S3Bucket *string `json:"S3Bucket,omitnil,omitempty" name:"S3Bucket"`
 
-
+	// Region of the S3 bucket. Currently supports:  
+	// us-east-1  
+	// eu-west-3
 	S3Region *string `json:"S3Region,omitnil,omitempty" name:"S3Region"`
 
-
+	// Media resource path in the S3 bucket.
 	S3Object *string `json:"S3Object,omitnil,omitempty" name:"S3Object"`
 
-
+	// AWS private network access key id for media content.
 	S3SecretId *string `json:"S3SecretId,omitnil,omitempty" name:"S3SecretId"`
 
-
+	// key for accessing media content over the AWS private network.
 	S3SecretKey *string `json:"S3SecretKey,omitnil,omitempty" name:"S3SecretKey"`
 }
 
 type S3OutputStorage struct {
-	// S3 bucket。
+	// S3 bucket.
 	S3Bucket *string `json:"S3Bucket,omitnil,omitempty" name:"S3Bucket"`
 
-
+	// Region of the S3 bucket.
 	S3Region *string `json:"S3Region,omitnil,omitempty" name:"S3Region"`
 
-
+	// AWS private network upload key id for media content.
 	S3SecretId *string `json:"S3SecretId,omitnil,omitempty" name:"S3SecretId"`
 
-
+	// key for uploading media content over the AWS private network.
 	S3SecretKey *string `json:"S3SecretKey,omitnil,omitempty" name:"S3SecretKey"`
 }
 
@@ -19882,13 +20312,13 @@ type SampleSnapshotTaskInput struct {
 	// <p>Watermark list. Up to 10 image or text watermarks are supported.</p>
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitnil,omitempty" name:"WatermarkSet"`
 
-
+	// <p>Target storage for the file after the sampled screenshot is taken. If this is not specified, it inherits the value from the upper-level OutputStorage.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// <p>Output path of the image file after the sampled screenshot is taken, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">File Name Variable Description</a>.<br>Relative path example:</p><li>File name_{variable name}.{format}</li><li>File name.{format}</li>Absolute path example:<li>/custom path/file name_{variable name}.{format}</li>If this is not specified, the default relative path is <code>{inputName}_sampleSnapshot_{definition}_{number}.{format}</code>.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 
-
+	// <p>Rule of the <code>{number}</code> variable in the output path after the sampled screenshot is taken.</p>
 	ObjectNumberFormat *NumberFormat `json:"ObjectNumberFormat,omitnil,omitempty" name:"ObjectNumberFormat"`
 
 	// <p>Extended parameter.</p>
@@ -19969,7 +20399,7 @@ type ScheduleAnalysisTaskResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Analyze the input of the task.
+	// Input of the analysis task.
 	Input *AiAnalysisTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
 	// Analysis task output.
@@ -19995,7 +20425,7 @@ type ScheduleExecRuleTaskResult struct {
 	// Input of the conditional judgment task.
 	Input *ExecRulesTask `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of the conditional judgment task.
 	Output *ExecRuleTaskData `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -20015,7 +20445,7 @@ type ScheduleQualityControlTaskResult struct {
 	// Media quality inspection task input.
 	Input *AiQualityControlTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of a media quality inspection task.
 	Output *QualityControlData `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Task execution progress.
@@ -20035,10 +20465,10 @@ type ScheduleRecognitionTaskResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Recognition task input.
+	// Input of the recognition task.
 	Input *AiRecognitionTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Recognition task output.
+	// Output of the identification task.
 	Output []*AiRecognitionResult `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Task execution start time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
@@ -20049,28 +20479,28 @@ type ScheduleRecognitionTaskResult struct {
 }
 
 type ScheduleReviewTaskResult struct {
-	// Task status. Valid values are PROCESSING, SUCCESS, and FAIL.
+	// <p>Task status. Valid values are PROCESSING, SUCCESS, and FAIL.</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	// <p>Error code. An empty string indicates that the task is successful, while other values indicate that the task has failed. For valid values, see the list of <a href="https://www.tencentcloud.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81">MPS error codes</a>.</p>
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
-	// Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
+	// <p>Error code. 0 indicates success, and other values indicate failure. (This field is not recommended. Use the new error code field ErrCodeExt instead.)</p>
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// Error message.
+	// <p>Error message.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Review task input.
+	// <p>Input of the review task.</p>
 	Input *AiContentReviewTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// <p>Output of the moderation task.</p>
 	Output []*AiContentReviewResult `json:"Output,omitnil,omitempty" name:"Output"`
 
-
+	// <p>Starting time of task execution, in <a href="https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52">ISO date and time format</a>.</p>
 	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
 
-
+	// <p>Task completion time, in <a href="https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52">ISO date and time format</a>.</p>
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
@@ -20087,10 +20517,10 @@ type ScheduleSmartSubtitleTaskResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Recognition task input.
+	// Input of the recognition task.
 	Input *SmartSubtitlesTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Recognition task output.
+	// Output of the identification task.
 	Output []*SmartSubtitlesResult `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Task execution start time in [ISO date and time format](https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
@@ -20104,7 +20534,7 @@ type ScheduleTask struct {
 	// Orchestration task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Task flow status. Valid values:
+	// Task stream status. Valid values:
 	// <li>PROCESSING: Processing;</li>
 	// <li>FINISH: completed</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
@@ -20115,13 +20545,13 @@ type ScheduleTask struct {
 	// The corresponding exception message is returned in case of a source exception. If no source exception occurs, use the message of each specific task.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-
+	// Information about the target file for media processing.
 	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
 
-
+	// Metadata of the original video.
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 
-
+	// Output of the orchestration task.
 	ActivityResultSet []*ActivityResult `json:"ActivityResultSet,omitnil,omitempty" name:"ActivityResultSet"`
 }
 
@@ -20179,13 +20609,14 @@ type SchedulesInfo struct {
 }
 
 type ScratchRepairConfig struct {
-	// Capability configuration switch. Valid values:
+	// Capability configuration switch. Available values:
 	// <li>ON: enabled</li>
-	// <li>OFF: disabled</li>
+	// <li>OFF: disabled.</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// Strength. Value range: 0.0 to 1.0.
+	// Default: 0.0.
 	Intensity *float64 `json:"Intensity,omitnil,omitempty" name:"Intensity"`
 }
 
@@ -20215,16 +20646,16 @@ type SegmentRecognitionItem struct {
 	// Confidence degree.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
-	// Start time offset of a recording clip.
+	// Start time offset of the segment.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// End time offset of the recording clip.
+	// Segment end time offset.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-	// Split segment URL.
+	// Segment URL.
 	SegmentUrl *string `json:"SegmentUrl,omitnil,omitempty" name:"SegmentUrl"`
 
-	// Segment cover.
+	// Split clip cover.
 	CovImgUrl *string `json:"CovImgUrl,omitnil,omitempty" name:"CovImgUrl"`
 
 	// Segment title.
@@ -20242,115 +20673,131 @@ type SegmentRecognitionItem struct {
 	// The end time of a live streaming segment, in the ISO date format.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Specify the figure ID.
+	// Specify the person ID.
 	PersonId *string `json:"PersonId,omitnil,omitempty" name:"PersonId"`
 }
 
 type SegmentSpecificInfo struct {
-
+	// Switch for segment duration at startup. Optional values:
+	// on: enable
+	// off: Turn off the switch
+	// Default value: off
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// Segment duration at startup. Unit: second
 	FragmentTime *int64 `json:"FragmentTime,omitnil,omitempty" name:"FragmentTime"`
 
-
+	// Number of effective segments, indicating the first FragmentEndNum segments with FragmentTime. Value range: >=1
 	FragmentEndNum *int64 `json:"FragmentEndNum,omitnil,omitempty" name:"FragmentEndNum"`
 }
 
 type SelectingSubtitleAreasConfig struct {
-
+	// Automatically select a custom region.
+	// For the selected areas, the AI model is used to automatically detect and extract the target content.
 	AutoAreas []*EraseArea `json:"AutoAreas,omitnil,omitempty" name:"AutoAreas"`
 
-
+	// Width of the sample video or image, in pixels.
 	SampleWidth *uint64 `json:"SampleWidth,omitnil,omitempty" name:"SampleWidth"`
 
-
+	// Height of the sample video or image, in pixels.
 	SampleHeight *uint64 `json:"SampleHeight,omitnil,omitempty" name:"SampleHeight"`
 }
 
 type SharpEnhanceConfig struct {
-	// Whether to enable the feature. Valid values:
-	// <li>ON</li>
-	// <li>OFF</li>
+	// Capability configuration switch. Valid values:
+	// <li>ON: enabled;</li>
+	// <li>OFF: disabled</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Strength, value ranges from 0.0 to 1.0.
+	// Strength. Value range: 0.0 to 1.0.
 	// Default: 0.0.
 	Intensity *float64 `json:"Intensity,omitnil,omitempty" name:"Intensity"`
 }
 
 type SimpleAesDrm struct {
-
+	// Request decryption key uri address.
 	Uri *string `json:"Uri,omitnil,omitempty" name:"Uri"`
 
-
+	// Encryption key (32-byte hexadecimal string).
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-
+	// Encryption initialization vector (32-byte hexadecimal string).
 	Vector *string `json:"Vector,omitnil,omitempty" name:"Vector"`
 }
 
 type SmartErasePrivacyConfig struct {
-
+	// Erasing method of privacy protection.
+	// - Blur: blur.
+	// - mosaic
 	PrivacyModel *string `json:"PrivacyModel,omitnil,omitempty" name:"PrivacyModel"`
 
-
+	// Privacy protection target. (When API Explorer is used, it is not required to specify an array. Add the corresponding items and enter the corresponding values.)
+	// - face Human face
+	// - plate: license plate.
 	PrivacyTargets []*string `json:"PrivacyTargets,omitnil,omitempty" name:"PrivacyTargets"`
 }
 
 type SmartEraseSubtitleConfig struct {
-
+	// <p>Subtitle erasure method.<br><strong>Automatic erasing:</strong> Video subtitles are automatically recognized using an AI model and are erased without traces to generate a new video. However, missed or incorrect erasing may occur due to image interference and special subtitle styles. In this case, you can specify the erasing area.<br>When using automatic erasing, if you do not specify AutoAreas, the default region (lower middle part of the frame) will be erased automatically. If AutoAreas is specified, the designated region will be erased instead.<br><strong>Specified area erasure:</strong> If your subtitle position is fixed, it is recommended to directly specify the erasure area to minimize missed erasures.<br>When choosing specified area erasure, please input at least one designated region in CustomAreas.</p><ul><li>auto: Automatic erasing</li><li>custom: Specified area erasure</li></ul>
 	SubtitleEraseMethod *string `json:"SubtitleEraseMethod,omitnil,omitempty" name:"SubtitleEraseMethod"`
 
-
+	// <p>Subtitle erasure model.<br><strong>Standard version (recommended):</strong> If your subtitles have a standard style, it is usually recommended to select this version for better effectiveness in seamless detail removal.<br><strong>Area edition:</strong> If the subtitles have special styles, such as calligraphy, shadow, or motion effects, you are recommended to select this edition to ensure a larger erasing area. However, the erasing effect in the details is not as good as the standard edition.</p><ul><li>standard Standard model</li><li>area Regional model</li></ul>
 	SubtitleModel *string `json:"SubtitleModel,omitnil,omitempty" name:"SubtitleModel"`
 
-
+	// <p>Whether OCR subtitle extraction is enabled. The default value is OFF.<br>OCR subtitle extraction is supported if and only if SubtitleEraseMethod is set to auto. When enabled, it identifies the text region that appears most persistently and stably within the automatic erasing area as the subtitle area. The text within the subtitle area is extracted and erased.</p><ul><li>ON Enable</li><li>OFF Disable</li></ul>
 	OcrSwitch *string `json:"OcrSwitch,omitnil,omitempty" name:"OcrSwitch"`
 
-
+	// <p>Subtitle language, used to guide OCR recognition, default value is zh_en. This parameter is valid only when OcrSwitch is "ON".</p><ul><li>zh_en Chinese and English</li><li>multi other<br>The following languages are supported for recognition:<br>Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, Hindi, Arabic, Bengali, Gujarati, Kannada, Malayalam, Tamil, Telugu, Slovenian, Polish, Catalan, Bosnia, Czech, Estonian, Croatian, Punjabi, Marathi, Azerbaijan, Indonesian, Luxembourg, Lithuanian, Latvian, Malta, Slovak, Turkish, Kazakh, Greek, Irish, Belarus, Khmer, Tagalog, Pashto, Persian, Tajikistan</li></ul>
 	SubtitleLang *string `json:"SubtitleLang,omitnil,omitempty" name:"SubtitleLang"`
 
-
+	// <p>Subtitle file format. Default value is vtt. This parameter is valid only when OcrSwitch takes value "ON".</p><ul><li>srt srt format</li><li>vtt WebVTT format</li><li>When SubtitleEmbedId is filled, it can take value empty string, which means no subtitle file is output.</li></ul>
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
-
+	// <p>Whether to enable subtitle translation. The default value is OFF. This parameter is valid only when OcrSwitch is set to "ON".</p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul>
 	TransSwitch *string `json:"TransSwitch,omitnil,omitempty" name:"TransSwitch"`
 
-
+	// <p>The target language for subtitle translation defaults to en. This parameter is valid only when TransSwitch is set to "ON".<br>The following languages are currently supported:<br>zh: Simplified Chinese<br>en: English<br>ja: Japanese<br>ko: Korean<br>fr: French<br>es: Spanish<br>it: Italian<br>de: German<br>tr: Turkish<br>ru: Russian<br>pt: Portuguese<br>vi: Vietnamese<br>id: Indonesian<br>ms: Malay<br>th: Thai<br>ar: Arabic<br>hi: Hindi</p>
 	TransDstLang *string `json:"TransDstLang,omitnil,omitempty" name:"TransDstLang"`
 
-
+	// <p>Automatically erase custom regions.<br>For selected regions, use the AI model to automatically detect and erase existing targets.<br>Note: When the erase method is set to custom, this parameter will not take effect. To modify the template, input [] for region cleanup. If not provided, the template region information remains unchanged.</p>
 	AutoAreas []*EraseArea `json:"AutoAreas,omitnil,omitempty" name:"AutoAreas"`
 
-
+	// <p>Designate the removal of custom regions.<br>For specified regions, directly perform erasure without detection and recognition within a selected time range.<br>Note: When modifying the template, import [] to clear regions. The template region information remains unchanged if not imported.</p>
 	CustomAreas []*EraseTimeArea `json:"CustomAreas,omitnil,omitempty" name:"CustomAreas"`
 
-
+	// <p>Subtitle suppression template id. Only allowed to fill in when OCR translation is enabled.</p>
 	SubtitleEmbedId *uint64 `json:"SubtitleEmbedId,omitnil,omitempty" name:"SubtitleEmbedId"`
 
-
+	// <p>Suppression configuration, enabled by default, compresses subtitles back to their original position. It can be filled only when OCR translation is turned on. A value of 0 indicates disabled suppression.</p>
 	UseOriginalPos *int64 `json:"UseOriginalPos,omitnil,omitempty" name:"UseOriginalPos"`
 
-
+	// <p>Suppression configuration, enabled by default. After being turned on, the original subtitle font size is used. It can only be filled when OCR translation is enabled. Setting it to 0 means non-use of the original font size.</p>
 	UseOriginalSize *int64 `json:"UseOriginalSize,omitnil,omitempty" name:"UseOriginalSize"`
 }
 
 type SmartEraseTaskInput struct {
-
+	// Smart erasing template id.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-
+	// Custom parameter for smart erasing. Valid when Definition is set to 0. This parameter is used for highly customized scenarios. We recommend you prioritize using Definition to specify smart erasing parameters.
 	RawParameter *RawSmartEraseParameter `json:"RawParameter,omitnil,omitempty" name:"RawParameter"`
 
-
+	// Custom parameters for smart erasing. When the value of Definition is not 0, this parameter is valid. When certain erasing parameters in this structure are specified, the specified parameters will be used to overwrite those in the smart erasing template. This parameter is used in highly customized scenarios. It is recommended to use only Definition to specify smart erasing parameters.
 	OverrideParameter *OverrideEraseParameter `json:"OverrideParameter,omitnil,omitempty" name:"OverrideParameter"`
 
-
+	// Target storage for files. If left blank, it inherits the upper-level OutputStorage value.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-
+	// Output path of the file, which can be a relative or absolute path.
+	// To define the output path, it must end with `.{format}`. For variable names, please refer to [Filename Variable Explanation](https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1).
+	// Relative path example:
+	// <li>Filename_{Variable name}.{format}.</li>
+	// <li>Filename.{format}.</li>
+	// Absolute path example:
+	// <li>/Custom path/Filename_{Variable name}.{format}</li>
+	// 
+	// **Note**: The `BatchProcessMedia` API is currently not supported.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 }
 
@@ -20364,10 +20811,10 @@ type SmartEraseTaskResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-
+	// Intelligent removal input.
 	Input *SmartEraseTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output of the intelligent erasure task.
 	Output *AiAnalysisTaskDelLogoOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Task progress.	
@@ -20424,16 +20871,31 @@ type SmartEraseTemplateItem struct {
 }
 
 type SmartEraseWatermarkConfig struct {
-
+	// Watermark erasing method.
+	// **Automatic erasing: ** Video watermarks are automatically recognized using an AI model and are erased to generate a new video. It applies to dynamic watermarks.
+	// When automatic erasing is used, if AutoAreas is not specified, the full-screen video image area will be erased automatically. If AutoAreas is specified, the specified area will be erased automatically.
+	// **Specified area erasure:** For static watermarks in fixed positions, we recommend you directly specify the erasure area.
+	// When you choose specified area erasure, import at least one specified region.
+	// 
+	// - auto: automatic erasing.
+	// - custom: specified area erasing.
 	WatermarkEraseMethod *string `json:"WatermarkEraseMethod,omitnil,omitempty" name:"WatermarkEraseMethod"`
 
-
+	// Watermark erasing model.
+	// Basic Edition: provide average effects and high cost performance. It applies to animations or videos with clean backgrounds.
+	// Advanced Edition: provide better effects. It applies to reality-style videos, such as short dramas.
+	// - basic: Basic Edition.
+	// - advanced: Advanced Edition.
 	WatermarkModel *string `json:"WatermarkModel,omitnil,omitempty" name:"WatermarkModel"`
 
-
+	// Custom area for automatic erasing.
+	// For the specified area, AI models are used to automatically detect and erase the target objects.
+	// Note: When the erasing method is set to custom, this parameter is invalid. When a template is modified, input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
 	AutoAreas []*EraseArea `json:"AutoAreas,omitnil,omitempty" name:"AutoAreas"`
 
-
+	// Specify a custom region for erasure.
+	// For the specified area, erase the target objects directly without detection and recognition within a selected time period.
+	// Note: When a template is modified, input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
 	CustomAreas []*EraseTimeArea `json:"CustomAreas,omitnil,omitempty" name:"CustomAreas"`
 }
 
@@ -20450,18 +20912,18 @@ type SmartSubtitleTaskAsrFullTextResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-
+	// Input information on the full speech recognition task.
 	Input *SmartSubtitleTaskResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output information on the full speech recognition task.
 	Output *SmartSubtitleTaskAsrFullTextResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-
+	// Task progress.
 	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 }
 
 type SmartSubtitleTaskAsrFullTextResultOutput struct {
-
+	// <p>List of segments for full speech recognition.</p>
 	SegmentSet []*SmartSubtitleTaskAsrFullTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
 	// <p>Subtitle file path</p>
@@ -20490,7 +20952,7 @@ type SmartSubtitleTaskAsrFullTextSegmentItem struct {
 	// <p>Recognized text.</p>
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
-
+	// <p>Word timestamp information.</p>
 	Wordlist []*WordResult `json:"Wordlist,omitnil,omitempty" name:"Wordlist"`
 
 	// <p>Speaker ID (if speaker recognition is enabled).</p>
@@ -20510,10 +20972,10 @@ type SmartSubtitleTaskBatchOutput struct {
 	// <p>Error message.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-
+	// <p>Translation task output information.</p>
 	TransTextTask *SmartSubtitleTaskTransTextResultOutput `json:"TransTextTask,omitnil,omitempty" name:"TransTextTask"`
 
-
+	// <p>Full speech recognition task output information.</p>
 	AsrFullTextTask *SmartSubtitleTaskAsrFullTextResultOutput `json:"AsrFullTextTask,omitnil,omitempty" name:"AsrFullTextTask"`
 }
 
@@ -20530,13 +20992,13 @@ type SmartSubtitleTaskFullTextResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-
+	// Input information for smart subtitle tasks.
 	Input *SmartSubtitleTaskResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Smart subtitle task output information.
 	Output *SmartSubtitleTaskTextResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-
+	// Task progress.
 	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 }
 
@@ -20564,7 +21026,7 @@ type SmartSubtitleTaskResultInput struct {
 	// <p>Smart subtitle template ID.</p>
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-
+	// <p>Custom smart subtitle parameter. It takes effect when Definition is set to 0.<br>This parameter is used in highly customized scenarios. We recommend that you use Definition to specify smart subtitle parameters.</p>
 	RawParameter *RawSmartSubtitleParameter `json:"RawParameter,omitnil,omitempty" name:"RawParameter"`
 
 	// <p>Extended parameter.</p>
@@ -20572,16 +21034,16 @@ type SmartSubtitleTaskResultInput struct {
 }
 
 type SmartSubtitleTaskTextResultOutput struct {
-
+	// <p>List of segments for smart subtitle recognition.</p>
 	SegmentSet []*SmartSubtitleTaskFullTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
-
+	// <p>Subtitle recognition result</p>
 	RecognizeSubtitleResult []*SubtitleResult `json:"RecognizeSubtitleResult,omitnil,omitempty" name:"RecognizeSubtitleResult"`
 
-
+	// <p>Translated subtitles</p>
 	TransSubtitleResult []*SubtitleResult `json:"TransSubtitleResult,omitnil,omitempty" name:"TransSubtitleResult"`
 
-
+	// <p>Storage location of the subtitle file</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 }
 
@@ -20598,18 +21060,18 @@ type SmartSubtitleTaskTransTextResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-
+	// Translation task input information.
 	Input *SmartSubtitleTaskResultInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Translation task output information.
 	Output *SmartSubtitleTaskTransTextResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
 
-
+	// Task progress.
 	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 }
 
 type SmartSubtitleTaskTransTextResultOutput struct {
-
+	// <p>List of segments for translation.</p>
 	SegmentSet []*SmartSubtitleTaskTransTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
 	// <p>Subtitle file URL.</p>
@@ -20641,7 +21103,7 @@ type SmartSubtitleTaskTransTextSegmentItem struct {
 	// <p>Translated text.</p>
 	Trans *string `json:"Trans,omitnil,omitempty" name:"Trans"`
 
-
+	// <p>Word timestamp information.</p>
 	Wordlist []*WordResult `json:"Wordlist,omitnil,omitempty" name:"Wordlist"`
 
 	// <p>Speaker ID (if speaker recognition is enabled).</p>
@@ -20719,39 +21181,54 @@ type SmartSubtitleTemplateItem struct {
 
 type SmartSubtitlesResult struct {
 	// Task type. Valid values:
-	// - AsrFullTextRecognition: full speech recognition
-	// - TransTextRecognition: speech translation
+	// - AsrFullTextRecognition: full speech recognition.
+	// - TransTextRecognition: speech translation.
 	// - PureSubtitleTrans: pure subtitle translation.
 	// - OcrFullTextRecognition: text-based subtitle extraction.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Full speech recognition result. When Type is
+	// Valid when AsrFullTextRecognition is set.
 	AsrFullTextTask *SmartSubtitleTaskAsrFullTextResult `json:"AsrFullTextTask,omitnil,omitempty" name:"AsrFullTextTask"`
 
-
+	// Translation result. When Type is
+	// 
+	// Valid when set to TransTextRecognition.
 	TransTextTask *SmartSubtitleTaskTransTextResult `json:"TransTextTask,omitnil,omitempty" name:"TransTextTask"`
 
-
+	// The translation result of the pure subtitle file is returned when the translation type is PureSubtitleTrans.
 	PureSubtitleTransTask *PureSubtitleTransResult `json:"PureSubtitleTransTask,omitnil,omitempty" name:"PureSubtitleTransTask"`
 
-
+	// Text-based subtitle extraction result. This field is valid when the value of Type is
+	// Valid when OcrFullTextRecognition is set.
 	OcrFullTextTask *SmartSubtitleTaskFullTextResult `json:"OcrFullTextTask,omitnil,omitempty" name:"OcrFullTextTask"`
 }
 
 type SmartSubtitlesTaskInput struct {
-
+	// Smart subtitle template ID.	
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-
+	// User extension field, which does not need to be filled in for general scenarios.
 	UserExtPara *string `json:"UserExtPara,omitnil,omitempty" name:"UserExtPara"`
 
-
+	// Custom smart subtitle parameter. It takes effect when Definition is set to 0. This parameter is used in high customization scenarios. It is recommended that you preferentially use Definition to specify smart subtitle parameters.	
 	RawParameter *RawSmartSubtitleParameter `json:"RawParameter,omitnil,omitempty" name:"RawParameter"`
 
-
+	// Target storage of media processing output files. If not specified, inherits the storage location in InputInfo. 
+	// **Note**: This parameter is required when InputInfo.Type is set to URL.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-
+	// Output path of the generated subtitle file, which can be a relative or absolute path.
+	// To define the output path, the path must end with `.{format}`. For variable names, please refer to [Filename Variable Explanation](https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1).
+	// 
+	// Relative path example:
+	// - File name_{variable name}.{format}.
+	// -File name.{format}
+	// 
+	// Absolute path example:
+	// -/Custom path/File name_{variable name}.{format}.
+	// 
+	// If this field is left unspecified, the default value is the relative path in the following format: {inputName}_smartsubtitle_{definition}.{format}.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 }
 
@@ -20768,13 +21245,13 @@ type SnapshotByTimeOffsetTaskInput struct {
 	// <p>Watermark list. Up to 10 image or text watermarks are supported.</p>
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitnil,omitempty" name:"WatermarkSet"`
 
-
+	// <p>Target storage for the file after the time point screenshot is taken. If this is not specified, it inherits the value from the upper-level OutputStorage.</p>
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// <p>Output path of the image file after the time point screenshot is taken, which can be a relative or absolute path.<br>To define the output path, the path must end with <code>.{format}</code>. For variable names, see <a href="https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1">File Name Variable Description</a>.<br>Relative path example:</p><li>File name_{variable name}.{format}</li><li>File name.{format}</li>Absolute path example:<li>/custom path/file name_{variable name}.{format}</li>If this is not specified, the default relative path is <code>{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}</code>.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 
-
+	// <p>Rule of the <code>{number}</code> variable in the output path after the time point screenshot is taken.</p>
 	ObjectNumberFormat *NumberFormat `json:"ObjectNumberFormat,omitnil,omitempty" name:"ObjectNumberFormat"`
 
 	// <p>Extended parameter.</p>
@@ -20865,7 +21342,7 @@ type SpecificationDataItem struct {
 }
 
 type SpekeDrm struct {
-	// Resource tagging. The field content is user-customized;
+	// Resource tag. The field content is user-customized;
 	// Supports 1 to 128 characters consisting of digits, letters, underscores (_), and hyphens (-).
 	// This field corresponds to the cid field in the Speke request.
 	// Note: Different DRM vendors have different restrictions on this field (for example, SDMC Technology Co., Ltd. does not support this field containing underscores). For specific rules, check with the vendors.
@@ -20873,7 +21350,7 @@ type SpekeDrm struct {
 
 	// DRM manufacturer access address. This field content is obtained from the DRM manufacturer.
 	// 
-	// Note: Different DRM manufacturers have different limits on the number of substreams. For example, PallyCon limits the number to 5 substreams, while DRMtoday supports stream encryption for a maximum of 9 substreams.
+	// Note: Different DRM manufacturers have different limits on the number of substreams. For example, PallyCon cannot exceed 5 substreams, while DRMtoday supports stream encryption for a maximum of 9 substreams.
 	KeyServerUrl *string `json:"KeyServerUrl,omitnil,omitempty" name:"KeyServerUrl"`
 
 	// Encryption initialization vector (32-byte hexadecimal string). This field content is user-customized.
@@ -20881,7 +21358,7 @@ type SpekeDrm struct {
 
 	// Encryption method. Valid values:
 	// cbcs: PlayReady, Widevine, FairPlay, WideVine+FairPlay, Widevine+Playready, Playready+Fairplay, Widevine+Playready+Fairplay are supported.
-	// cenc: PlayReady, Widevine, and Widevine+PlayReady are supported.
+	// cenc: PlayReady, Widevine, and Widevine+Playready are supported.
 	// 
 	// If it is left unspecified:
 	// Use cbcs for FairPlay by default.
@@ -20890,9 +21367,9 @@ type SpekeDrm struct {
 	// Use cenc for Widevine+PlayReady by default.
 	EncryptionMethod *string `json:"EncryptionMethod,omitnil,omitempty" name:"EncryptionMethod"`
 
-	// Substream encryption rule. Default value: preset0.
+	// Encryption rule for substreams. Default value: preset 0
 	// preset 0: use the same key to encrypt all substreams;
-	// preset1: use different keys for each substream
+	// preset1: use different keys for each substream;
 	EncryptionPreset *string `json:"EncryptionPreset,omitnil,omitempty" name:"EncryptionPreset"`
 }
 
@@ -21245,52 +21722,123 @@ type SubtitleShadowConfig struct {
 }
 
 type SubtitleTemplate struct {
-
+	// Subtitle file URL to be suppressed into the video.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-
+	// Specifies the subtitle track for embedding subtitles into the video. The Streamindex value starts from 0, where 0 indicates usage of the first subtitle track in the source video. If Path is specified, use Path preferentially. Either Path or Streamindex should be specified.
+	// 
+	// -Note: StreamIndex must match the subtitle track index in the source file. For example, if the subtitle track in the source file is stream#0:3, StreamIndex should be 3. Otherwise, task processing may fail.
+	// 
 	StreamIndex *int64 `json:"StreamIndex,omitnil,omitempty" name:"StreamIndex"`
 
-
+	// Input information on the subtitle file to be embedded into the video. Currently, only subtitle files stored in COS are supported.
 	SubtitleFileInput *MediaInputInfo `json:"SubtitleFileInput,omitnil,omitempty" name:"SubtitleFileInput"`
 
-	// Input information for the subtitle font file to be suppressed. Currently only support url and cos. If both are filled, url takes precedence over cos. If FontFileInput is filled, FontFileInput takes precedence over FontType.
+	// Input information for suppressing subtitle font files. Currently only support url and cos. If both are filled, url takes precedence over cos. If FontFileInput is filled, FontFileInput takes precedence over FontType.
 	FontFileInput *MediaInputInfo `json:"FontFileInput,omitnil,omitempty" name:"FontFileInput"`
 
-
+	// Font type. Valid values:
+	// <li>hei.ttf: SimHei</li>
+	// <li>song.ttf: SimSun.</li>
+	// <li>kai.ttf (recommend) or simkai.ttf: KaiTi.</li>
+	// <li>msyh.ttf: Microsoft YaHei.</li>
+	// <li>msyhbd.ttf: Microsoft YaHei Bold.</li>
+	// <li>hkjgt.ttf: DynaFont King Gothic.</li>
+	// <li>dhttx.ttf: DianHei Extra Light.</li>
+	// <li>xqgdzt.ttf: XiQue GuZiDian.</li>
+	// <li>qpcyt.ttf: Smart Splice Super Round Body</li>
+	// <li>arial.ttf: English only.</li>
+	// <li>dinalternate.ttf:DIN Alternate Bold</li>
+	// <li>helveticalt.ttf:Helvetica</li>
+	// <li>helveticains.ttf:Helvetica Inserat</li>
+	// <li>trajanpro.ttf:TrajanPro-Bold</li>
+	// <li>korean.ttf: Korean.</li>
+	// <li>japanese.ttf: Japanese.</li>
+	// <li>thai.ttf: Thai.</li>
+	// <li>roboto.ttf:Roboto</li>
+	// <li>notosans.ttf:NotoSans</li>
+	// <li>notosansthai.ttf: Thai NotoSansThai</li>
+	// <li>sarabun.ttf: Thai Sarabun</li>
+	// <li>kanit.ttf: Thai Kanit</li>
+	// <li>charmonman.ttf: Thai Charmonman.</li>
+	// <li>notonaskharabic.ttf: Arabic NotoNaskhArabic.</li>
+	// <li>notosansdevanagari.ttf: NotoSansDevanagari for India.</li>
+	// <li>notosanstc.ttf: Cantonese Source Han Sans NotoSansTC</li>
+	// <li>notosanskr.ttf: Korean NotoSansKR.</li>
+	// <li>gothica1.ttf: Korean GothicA1.</li>
+	// <li>nanummyeongjo.ttf: Korean NanumMyeongjo.</li>
+	// <li>notosansjp.ttf: Japanese NotoSansJP.</li>
+	// <li>notoserifjp.ttf: Japanese NotoSerifJP.</li>
+	// <li>shipporimincho.ttf: Japanese ShipporiMincho.</li>
+	// Default value: hei.ttf.
+	// <br>Note:
+	// <li>kai.ttf is recommended for SimKai.</li>
+	// <li>FontFileInput takes precedence when specified.</li>
 	FontType *string `json:"FontType,omitnil,omitempty" name:"FontType"`
 
-
+	// Font size. If not specified, the font size of the subtitle file applies. Pixel and percentage formats are supported:
+	// 
+	// - Pixel: Npx. Value range of N: (0,4096].
+	// - Percentage: N%. Value range of N: (0,100]. For example, 10% means the subtitle font size is 10% of the source video height.
+	// 
+	// The default size is 5% of the source video height if this parameter is not specified or the font size is not configured in the subtitle file.
 	FontSize *string `json:"FontSize,omitnil,omitempty" name:"FontSize"`
 
-
+	// Font color. Format: 0xRRGGBB. Default value: 0xFFFFFF (white).
 	FontColor *string `json:"FontColor,omitnil,omitempty" name:"FontColor"`
 
-
+	// Text opacity, value ranges from 0 to 1.
+	// <li>0: completely transparent.</li>
+	// <li>1: completely opaque.</li>
+	// Default value: 1.
 	FontAlpha *float64 `json:"FontAlpha,omitnil,omitempty" name:"FontAlpha"`
 
-
+	// Subtitle y-axis coordinate position. If you specify this parameter, the built-in coordinates of the subtitle file are ignored. Pixel and percentage formats are supported.
+	// 
+	// - Pixel: Npx. Value range of N: [0,4096].
+	// -Percentage: N%, N range: [0,100]. For example, 10% means the subtitle y-coordinate = 10% * source video height.
+	// 
+	// Default value: 4% of the source video height.
+	// Note: The origin of the coordinate axes is at the bottom of the central axis of the source video, and the subtitle reference position is at the bottom of the central axis of the subtitles, as shown in the figure below.
+	// ![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png)
 	YPos *string `json:"YPos,omitnil,omitempty" name:"YPos"`
 
-
+	// y-axis coordinate position of the subtitle background base plate. Supports pixel and percentage formats.
+	// 
+	// - Pixel: Npx. Value range of N: [0,4096].
+	// -Percentage: N%, N range: [0,100]. For example, 10% means the y-coordinate of the subtitle background base plate = 10% * source video height.
+	// 
+	// If this parameter is not specified, the subtitle background base plate is disabled.
+	// Note: The origin of the coordinate axes is at the bottom of the central axis of the source video, and the reference position of the subtitle background base plate is at the bottom of its central axis, as shown in the figure below.
+	// ![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png)
 	BoardY *string `json:"BoardY,omitnil,omitempty" name:"BoardY"`
 
-
+	// Base plate width. The value should be a positive integer.
+	// - Value range for pixels: [0,4096].
+	// - Value range for percentages: [0, 100].
+	// If background is enabled and this parameter is not specified, the default width is 90% of the source video width.
 	BoardWidth *int64 `json:"BoardWidth,omitnil,omitempty" name:"BoardWidth"`
 
-
+	// Height of the base plate. Positive integer.
+	// - Value range for pixels: [0,4096].
+	// - Value range for percentages: [0, 100].
+	// If background is enabled and this parameter is not specified, the default height is 15% of the source video height.
 	BoardHeight *int64 `json:"BoardHeight,omitnil,omitempty" name:"BoardHeight"`
 
-
+	// Board color. Format: 0xRRGGBB.
+	// Default value: 0x000000 (black).
 	BoardColor *string `json:"BoardColor,omitnil,omitempty" name:"BoardColor"`
 
-
+	// Subtitle background transparency. Value range: [0, 1].
+	// <li>0: completely transparent.</li>
+	// <li>1: completely opaque.</li>
+	// Default value: 0.8.
 	BoardAlpha *float64 `json:"BoardAlpha,omitnil,omitempty" name:"BoardAlpha"`
 
 	// Stroke width. The value should be a floating-point number.
 	// - Value range for pixels: [0, 1000].
 	// - Value range for percentages: [0, 100].
-	// 0.3% of the source video height by default if left blank.
+	// If this is not specified, the default width is 0.3% of the source video height.
 	OutlineWidth *float64 `json:"OutlineWidth,omitnil,omitempty" name:"OutlineWidth"`
 
 	// Border color. 6-digit hexadecimal RGB. Black by default if left blank.
@@ -21302,13 +21850,13 @@ type SubtitleTemplate struct {
 	// Shadow width. Floating-point number.
 	// - Value range for pixels: [0, 1000].
 	// - Value range for percentages: [0, 100].
-	// No shading by default if left blank.
+	// If this is not specified, no shadow is applied by default.
 	ShadowWidth *float64 `json:"ShadowWidth,omitnil,omitempty" name:"ShadowWidth"`
 
-	// Shadow color. 6-bit base RGB. Black by default if left blank (when shadow has set).
+	// Shadow color. 6-bit base-16 RGB. Black by default if left blank (when shadow has been set).
 	ShadowColor *string `json:"ShadowColor,omitnil,omitempty" name:"ShadowColor"`
 
-	// Shadow transparency. The value should be a positive floating-point number in the range of (0, 1]. If this is not specified, the default value is 1, which means completely opaque (with shadow configured).
+	// Shadow transparency. The value should be a positive floating-point number in the range of (0, 1]. If not specified, the default value is 1, which means completely opaque (with shadow configured).
 	ShadowAlpha *float64 `json:"ShadowAlpha,omitnil,omitempty" name:"ShadowAlpha"`
 
 	// Line spacing. The value should be a positive integer.
@@ -21331,7 +21879,7 @@ type SubtitleTemplate struct {
 	// Default value is 0. If this is set to 1, the value of ShadowWidth is a percentage based on the video height.
 	ShadowWidthUnit *int64 `json:"ShadowWidthUnit,omitnil,omitempty" name:"ShadowWidthUnit"`
 
-	// Default value: 0. If this is set to 1, the value of LineSpacing is a percentage based on the video height.
+	// Default value is 0. If this is set to 1, the value of LineSpacing is a percentage based on the video height.
 	LineSpacingUnit *int64 `json:"LineSpacingUnit,omitnil,omitempty" name:"LineSpacingUnit"`
 }
 
@@ -21356,16 +21904,21 @@ type SubtitleTransResultItem struct {
 }
 
 type SuperResolutionConfig struct {
-	// Capability configuration switch. Available values:
-	// <li>ON: enabled;</li>
+	// Capability configuration switch. Valid values:
+	// <li>ON: enabled</li>
 	// <li>OFF: disabled</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// Type. Valid values:
+	// <li>lq: super resolution for low resolution videos with considerable noise;</li>
+	// <li>hq: For high resolution video super-resolution.</li>
+	// Default value: lq.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Upscaling multiple. Available values:
+	// <li>2: currently only support 2x super resolution.</li>
+	// Default value: 2.
 	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 }
 
@@ -21418,7 +21971,7 @@ type SvgWatermarkInputForUpdate struct {
 }
 
 type SyncDubbingOutputOption struct {
-
+	// <p>Output type of the synthesis result. </p><p>Enumeration values: </p><ul><li>data: Audio base64 encoding, </li><li>url: Audio URL, valid for 24 hours.</li></ul>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -21525,13 +22078,13 @@ type SyncDubbingResponseParams struct {
 	// <p>Error message. success is returned if the request is successful.</p>
 	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
-
+	// <p>base64-encoded synthetic audio in wav format.</p>
 	AudioData *string `json:"AudioData,omitnil,omitempty" name:"AudioData"`
 
 	// <p>Synthetic audio URL. It is valid for 24 hours.</p>
 	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
 
-
+	// <p>Id of the cloned voice type.</p>
 	VoiceId *string `json:"VoiceId,omitnil,omitempty" name:"VoiceId"`
 
 	// <p>Extended information in the format of a JSON string. </p><p>duration: Duration of the resulting audio, in seconds.</p>
@@ -21558,22 +22111,25 @@ func (r *SyncDubbingResponse) FromJsonString(s string) error {
 }
 
 type TEHDConfig struct {
-	// Top speed Codec type. Available values:
-	// <li>TEHD-100: top speed codec-100 (video top speed codec).</li>
-	// <li>TEHD-200: top speed codec-200 (audio top speed codec).</li>
-	// If not specified, top speed Codec is not enabled.
+	// TSC type. Available values:
+	// <li>TEHD-100: TSC-100 (video top speed codec).</li>
+	// <li>TEHD-200: Top Speed Codec-200 (audio top speed codec).</li>
+	// If not specified, Top Speed Codec is not enabled.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Maximum video bitrate. Valid when Type is set to top speed Codec.
-	// If this is not specified or is set to 0, no upper limit is set for the video bitrate.
+	// Maximum video bitrate. Valid when Type is set to Top Speed Codec.
+	// If this parameter is not specified or is set to 0, no upper limit is set for the video bitrate.
 	MaxVideoBitrate *int64 `json:"MaxVideoBitrate,omitnil,omitempty" name:"MaxVideoBitrate"`
 }
 
 type TEHDConfigForUpdate struct {
-
+	// Top Speed Codec type. Available values:
+	// <li>TEHD-100: Top Speed Codec-100 (video top speed codec).</li>
+	// <li>TEHD-200: Top Speed Codec-200 (audio TSC).</li>
+	// Leave it blank to indicate no modification.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Maximum video bitrate. If this parameter is left empty, no modification is made.
 	MaxVideoBitrate *int64 `json:"MaxVideoBitrate,omitnil,omitempty" name:"MaxVideoBitrate"`
 }
 
@@ -21613,7 +22169,7 @@ type TaskNotifyConfig struct {
 	// <p>This field takes effect if the model is Queue. It indicates the queue name of the CMQ or TDMQ for CMQ for receiving event notifications.</p>
 	QueueName *string `json:"QueueName,omitnil,omitempty" name:"QueueName"`
 
-
+	// <p>AWS SQS callback. This is required if NotifyType is AWS-SQS.</p>
 	AwsSQS *AwsSQS `json:"AwsSQS,omitnil,omitempty" name:"AwsSQS"`
 
 	// <p>Key used to generate the callback signature.</p>
@@ -21621,19 +22177,19 @@ type TaskNotifyConfig struct {
 }
 
 type TaskOutputStorage struct {
-	// Type of the media processing output object storage location. Supported values:
+	// Type of the storage location for MPS output objects. Supported values:
 	// <li>COS: COS storage</li>
-	// <li>AWS-S3: AWS storage, suitable for AWS tasks only and requires the same region</li>
+	// <li>AWS-S3: AWS storage, only suitable for AWS tasks and requires the same region</li>
 	// <li> VOD: VOD Pro Edition </li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Required when `Type` is `COS`. It refers to the COS output location for media processing.
 	CosOutputStorage *CosOutputStorage `json:"CosOutputStorage,omitnil,omitempty" name:"CosOutputStorage"`
 
-
+	// Valid when Type is AWS-S3. Required. Indicates the AWS S3 output location for media processing.
 	S3OutputStorage *S3OutputStorage `json:"S3OutputStorage,omitnil,omitempty" name:"S3OutputStorage"`
 
-
+	// Valid when Type is VOD. This item is required and indicates the output location of MPS VOD Pro Edition.
 	VODOutputStorage *VODOutputStorage `json:"VODOutputStorage,omitnil,omitempty" name:"VODOutputStorage"`
 }
 
@@ -22218,10 +22774,19 @@ type TokensUsage struct {
 }
 
 type TrackInfo struct {
-
+	// Audio track and number of sound channels. Description:
+	// When SelectType is track, this value is an integer, for example: 1;
+	// When SelectType is track_channel, this value is a decimal, for example: 1.0;
+	// Default value: 1.0.
+	// Note: The integer part represents the audio track serial number, and the decimal part represents the sound channel. The audio track serial number is the stream index of the audio track, and supports input of 0 and positive integers. The decimal part supports up to 2 decimal places and only supports 0-63. However, if Codec is aac/eac3/ac3, the decimal part only supports 0-15. For example: For an audio track with stream index 1, 1.0 represents the first sound channel of this audio track, and 1.1 represents the second sound channel of this audio track.
 	TrackNum *string `json:"TrackNum,omitnil,omitempty" name:"TrackNum"`
 
-
+	// Sound channel volume. Description:
+	// When the value of AudioChannel is 1, the length of this array is 1, for example: [6];
+	// When the value of AudioChannel is 2, the length of this array is 2, for example: [0,6];
+	// When the value of AudioChannel is 6, the length of this array is greater than 2 and less than 16, for example: [-60,0,0,6].
+	// Value range: [-60, 6]. -60 means mute, 0 means keep the original volume, and 6 means double the original volume. Default value: -60.
+	// Note: Supports 3 decimal places.
 	ChannelVolume []*float64 `json:"ChannelVolume,omitnil,omitempty" name:"ChannelVolume"`
 }
 
@@ -22233,50 +22798,52 @@ type TranscodeTaskInput struct {
 	// This parameter is used in high customization scenarios. It is recommended that you preferentially use Definition to specify transcoding parameters.
 	RawParameter *RawTranscodeParameter `json:"RawParameter,omitnil,omitempty" name:"RawParameter"`
 
-
+	// Custom video transcoding parameter. It takes effect when Definition is not set to 0.
+	// When some transcoding parameters in this structure are filled in, the filled parameters will be used to override the parameters in the transcoding template.
+	// This parameter is used in high customization scenarios. It is recommended that you use only Definition to specify transcoding parameters.
 	OverrideParameter *OverrideTranscodeParameter `json:"OverrideParameter,omitnil,omitempty" name:"OverrideParameter"`
 
 	// Watermark list. Multiple image or text watermarks up to a maximum of 10 are supported.
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitnil,omitempty" name:"WatermarkSet"`
 
-
+	// Digital watermark parameter.
 	BlindWatermark *BlindWatermarkInput `json:"BlindWatermark,omitnil,omitempty" name:"BlindWatermark"`
 
-	// Mosaic list. A maximum of 10 images is supported.
+	// Mosaic list. Up to 10 images supported.
 	MosaicSet []*MosaicInput `json:"MosaicSet,omitnil,omitempty" name:"MosaicSet"`
 
 	// Start time offset of the transcoded video, in seconds.
-	// <li>If this parameter is not specified or is set to 0, the transcoded video starts from the start position of the original video;</li>
+	// <li>Leave this parameter empty or set it to 0: transcoding starts from the start of the original video;</li>
 	// <li>When the value is greater than 0 (assuming n), it means the transcoded video starts from the nth second of the original video;</li>
-	// <li>When the value is less than 0 (assuming -n), it means the transcoded video starts n seconds before the end of the original video.</li>
+	// <li>When the value is less than 0 (assuming -n), it means the transcoded video starts from the position n seconds before the end of the original video.</li>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
 	// End time offset of the transcoded video, in seconds.
 	// <li>If not set or set to 0, the transcoded video will last until the end of the original video.</li>
-	// <li>When the value is greater than 0 (assuming n), it means the transcoded video ends at the nth second of the original video.</li>
-	// <li>When the value is less than 0 (assuming -n), it means the transcoded video lasts until n seconds before the end of the original video.</li>
+	// <li>When the value is greater than 0 (assuming n), it means the transcoded video lasts until the nth second of the original video and then ends;</li>
+	// <li>When the value is less than 0 (assuming -n), it means the transcoded video lasts until n seconds before the original video ends.</li>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-
+	// Target storage for transcoded files. If left blank, it inherits the upper-level OutputStorage value.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// Output path of the main file after transcoding, which can be a relative or absolute path.
 	// To define the output path, the path must end with `.{format}`. For variable names, please refer to [Filename Variable Explanation](https://www.tencentcloud.com/document/product/862/37039?from_cn_redirect=1).
 	// Relative path example:
-	// <li>Filename_{Variable name}.{format}</li>
+	// <li>Filename_{Variable name}.{format}.</li>
 	// <li>Filename.{format}.</li>
 	// Absolute path example:
 	// <li>/Custom path/Filename_{Variable name}.{format}</li>
-	// If left empty, the default relative path is `{inputName}_transcode_{definition}.{format}`.
+	// If not filled in, default relative path: `{inputName}_transcode_{definition}.{format}`.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 
-	// Output path for segment files after transcoding (the path of TS files when transcoding to HLS), which can only be a relative path. If left empty, it defaults to `{inputName}_transcode_{definition}_{number}.{format}`.
+	// Output path for segment files after transcoding (the path of TS files when transcoding to HLS), which can only be a relative path. If left empty, it defaults to: `{inputName}_transcode_{definition}_{number}.{format}`.
 	SegmentObjectName *string `json:"SegmentObjectName,omitnil,omitempty" name:"SegmentObjectName"`
 
-
+	// Rule of the `{number}` variable in the output path after transcoding.
 	ObjectNumberFormat *NumberFormat `json:"ObjectNumberFormat,omitnil,omitempty" name:"ObjectNumberFormat"`
 
-
+	// Opening and ending content parameters.
 	HeadTailParameter *HeadTailParameter `json:"HeadTailParameter,omitnil,omitempty" name:"HeadTailParameter"`
 }
 
@@ -22376,11 +22943,14 @@ type TranslateConfigureInfoForUpdate struct {
 }
 
 type UnderstandImageConfig struct {
-	// <p>Image understanding model</p><p>Enumeration value:</p><ul><li>WAND-understand-1.0-lite: Lightweight understanding model</li><li>WAND-understand-1.0-flash: Quality-speed balanced understanding model</li><li>WAND-understand-1.0-pro: High-quality understanding model</li></ul>
+	// <p>Image understanding model</p><p>Enumeration values:</p><ul><li>understand-1.0-lite: Lightweight understanding model</li><li>understand-1.0-flash: Quality-speed balanced understanding model</li><li>understand-1.0-pro: High-quality understanding model</li></ul>
 	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
 
-	// <p>Image understanding directive</p>
+	// <p>Image understanding instruction</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// <p>Image understanding model parameters, of JSON string type.</p>
+	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 }
 
 // Predefined struct for user
@@ -22466,53 +23036,116 @@ func (r *UpdateProjectResponse) FromJsonString(s string) error {
 }
 
 type UpdateSmartErasePrivacyConfig struct {
-
+	// Erasing method of privacy protection.
+	// - Blur: blur.
+	// - mosaic
 	PrivacyModel *string `json:"PrivacyModel,omitnil,omitempty" name:"PrivacyModel"`
 
-
+	// Privacy protection target. (When API Explorer is used, it is not required to specify an array. Add the corresponding items and enter the corresponding values.)
+	// - face: human face.
+	// - plate: license plate.
 	PrivacyTargets []*string `json:"PrivacyTargets,omitnil,omitempty" name:"PrivacyTargets"`
 }
 
 type UpdateSmartEraseSubtitleConfig struct {
-
+	// Subtitle erasing method.
+	// **Automatic erasing:** Video subtitles are automatically recognized using an AI model and are erased without traces to generate a new video. However, missed or incorrect erasing may occur due to image interference and special subtitle styles. In this case, you can specify the erasing area.
+	// When automatic erasing is used, if AutoAreas is not specified, the default area (lower middle part of the image) will be erased automatically. If AutoAreas is specified, the specified area will be erased automatically.
+	// **Specified area erasing:** If the subtitle position is relatively fixed, you are recommended to specify the erasing area directly to minimize missed erasing.
+	// When you choose specified area erasing, specify at least one area for CustomAreas.
+	// - auto: automatic erasing.
+	// - custom: specified area erasing.
 	SubtitleEraseMethod *string `json:"SubtitleEraseMethod,omitnil,omitempty" name:"SubtitleEraseMethod"`
 
-
+	// Subtitle erasing model.
+	// **Standard edition (recommended):** For standard subtitle styles, you are recommended to select this edition to ensure better traceless effects in the details.
+	// **Area edition:** If the subtitles have special styles, such as calligraphy, shadow, or motion effects, you are recommended to select this edition to ensure a larger erasing area. However, the erasing effect in the details is not as good as the standard edition.
+	// - standard: standard edition.
+	// - area: area edition.
 	SubtitleModel *string `json:"SubtitleModel,omitnil,omitempty" name:"SubtitleModel"`
 
-
+	// Whether to enable OCR subtitle extraction. The default value is OFF.
+	// OCR subtitle extraction is supported if and only if SubtitleEraseMethod is set to auto. When enabled, it identifies the text region that appears most persistently and stably within the automatic erasing area as the subtitle area. The text within the subtitle area is extracted and erased.
+	// - ON: enabled.
+	// -OFF: disabled.
 	OcrSwitch *string `json:"OcrSwitch,omitnil,omitempty" name:"OcrSwitch"`
 
-
+	// Subtitle language, used for OCR recognition. Default value: zh_en. This parameter is valid only when OcrSwitch is ON.
+	// - zh_en: Chinese and English.
+	// - `multi`: others.
+	// The following are other languages supported for recognition:
+	// Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, Hindi, Arabic, Bengali (India), Gujarati (India), Kannada (India), Malayalam (India), Tamil (India), Telugu (India), Slovenian, Polish, Catalan, Bosnian, Czech, Estonian, Croatian, Punjabi, Marathi, Azerbaijani, Indonesian, Luxembourgish, Lithuanian, Latvian, Maltese, Slovak, Turkish, Kazakh, Greek, Irish, Belarusian, Khmer, Tagalog, Pashto, Persian, Tajik
+	// 
 	SubtitleLang *string `json:"SubtitleLang,omitnil,omitempty" name:"SubtitleLang"`
 
-
+	// Subtitle file format. Default value: vtt. This parameter is valid only when OcrSwitch is set to ON.
+	// -srt format
+	// - vtt: WebVTT format.
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
-
+	// Whether to enable subtitle translation. Default value: OFF. This parameter is valid only when OcrSwitch is ON.
+	// - ON: enabled.
+	// -OFF: disabled.
 	TransSwitch *string `json:"TransSwitch,omitnil,omitempty" name:"TransSwitch"`
 
-
+	// Subtitle translation target language. Default value: en. This parameter is valid only when TransSwitch is set to "ON".
+	// Supported languages:
+	// zh: Simplified Chinese
+	// English
+	// ja: Japanese
+	// ko: Korean
+	// fr: French
+	// es: Spanish
+	// it: Italian
+	// de: German
+	// tr: Turkish
+	// ru: Russian
+	// pt: Portuguese
+	// vi: Vietnamese
+	// id: Indonesian
+	// ms: Malay
+	// th: Thai
+	// ar: Arabic
+	// hi: Hindi
 	TransDstLang *string `json:"TransDstLang,omitnil,omitempty" name:"TransDstLang"`
 
-
+	// Custom area for automatic erasing.
+	// For the specified area, AI models are used to automatically detect and erase the target objects.
+	// Note: When the erasing method is set to custom, this parameter is invalid. When a template is modified, input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
 	AutoAreas []*EraseArea `json:"AutoAreas,omitnil,omitempty" name:"AutoAreas"`
 
-
+	// Specify a custom region for erasure.
+	// For the specified area, erase the target objects directly without detection and recognition within a selected time period.
+	// Note: When a template is modified, input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
 	CustomAreas []*EraseTimeArea `json:"CustomAreas,omitnil,omitempty" name:"CustomAreas"`
 }
 
 type UpdateSmartEraseWatermarkConfig struct {
-
+	// Watermark erasing method.
+	// **Automatic erasing: ** Video watermarks are automatically recognized using an AI model and are erased to generate a new video. It applies to dynamic watermarks.
+	// When automatic erasing is used, if AutoAreas is not specified, the full-screen video image area will be erased automatically. If AutoAreas is specified, the specified area will be erased automatically.
+	// **Specified area erasure:** For static watermarks with fixed positions, we recommend you directly specify the erasure area.
+	// If you choose specified area erasure, input at least one specified region.
+	// 
+	// - auto: automatic erasing.
+	// - custom: specified area erasing.
 	WatermarkEraseMethod *string `json:"WatermarkEraseMethod,omitnil,omitempty" name:"WatermarkEraseMethod"`
 
-
+	// Watermark erasing model.
+	// Basic Edition: provide average effects and high cost performance. It applies to animations or videos with clean backgrounds.
+	// Advanced Edition: provide better effects. It applies to reality-style videos, such as short dramas.
+	// - basic: Basic Edition.
+	// - advanced: Advanced Edition.
 	WatermarkModel *string `json:"WatermarkModel,omitnil,omitempty" name:"WatermarkModel"`
 
-
+	// Custom area for automatic erasing.
+	// For the specified area, AI models are used to automatically detect and erase the target objects.
+	// Note: When the erasing method is set to custom, this parameter is invalid. Input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
 	AutoAreas []*EraseArea `json:"AutoAreas,omitnil,omitempty" name:"AutoAreas"`
 
-
+	// Specify a custom region for erasure.
+	// For the specified area, erase the target objects directly without detection and recognition within a selected time period.
+	// Note: Input [] for the erasing area; if this parameter is unspecified, the template area information will remain unchanged.
 	CustomAreas []*EraseTimeArea `json:"CustomAreas,omitnil,omitempty" name:"CustomAreas"`
 }
 
@@ -22594,7 +23227,7 @@ func (r *UpdateVoiceResponse) FromJsonString(s string) error {
 }
 
 type UrlInputInfo struct {
-	// Video URL.
+	// URL of the video.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
@@ -22726,64 +23359,67 @@ type UserDefineOcrTextReviewTemplateInfoForUpdate struct {
 }
 
 type VODInputInfo struct {
-
+	// <p><em>Bucket ID</em> where the media processing object file resides</p>
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
-
+	// <p>Region of the Bucket where the media processing object file resides</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-
+	// <p>Input path of the media processing object file</p>
 	Object *string `json:"Object,omitnil,omitempty" name:"Object"`
 
-
+	// <p>VOD application ID.</p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-
+	// <p>Whether to use VOD Standard Edition.<br>Attention: If left empty, VOD Pro Edition is used.</p><p>Enumeration values: </p><ul><li>Use VOD Pro Edition</li><li>Use VOD Standard Edition, allowing tasks to be initiated with FileId</li></ul><p>Default value: 0</p>
 	VodBasic *int64 `json:"VodBasic,omitnil,omitempty" name:"VodBasic"`
 
-
+	// <p>VOD Standard Edition FileId</p>
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 }
 
 type VODOutputStorage struct {
-
+	// <p>Target <em>Bucket ID</em> for the output file generated by media processing</p>
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
-
+	// <p>Region of the target Bucket for the output file generated by media processing</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-
+	// <p>VOD application ID</p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-
+	// <p>Whether to use VOD Standard Edition.<br>Attention: If left empty, VOD Pro Edition is used.</p><p>Enumeration values: </p><ul><li>0: Do not use VOD Standard Edition</li><li>1: Use VOD Standard Edition</li></ul>
 	VodBasic *int64 `json:"VodBasic,omitnil,omitempty" name:"VodBasic"`
 }
 
 type VideoComprehensionResultItem struct {
-	// Segment start time (unit: seconds)
+	// Start time of the storyboard segment, in seconds.
 	StartTime *float64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Segment end time (unit: seconds)
+	// Segment end time (unit: second)
 	EndTime *float64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Storyboard clip title
+	// Segment title.
 	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
 
-	// Segment information description
+	// Description of the storyboard segment information
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Storyboard clip keywords
+	// Segment keywords.
 	Keywords []*string `json:"Keywords,omitnil,omitempty" name:"Keywords"`
 }
 
 type VideoDenoiseConfig struct {
-	// Capability configuration switch. Valid values:
+	// Capability configuration switch. Available values:
 	// <li>ON: enabled;</li>
 	// <li>OFF: disabled</li>
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// Type. Valid values:
+	// <li>weak</li>
+	// <li>strong</li>
+	// Default value: weak.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -22799,44 +23435,47 @@ type VideoDramaCosInfo struct {
 }
 
 type VideoEnhanceConfig struct {
-
+	// <p>Frame rate configuration (old) for the frame interpolation. New users are recommended to use FrameRateWithDen for configuring the frame rate of frame interpolation, which supports fractions and provides better results. Note that FrameRate and FrameRateWithDen are mutually exclusive; configuring both simultaneously may cause task failures. The configuration does not take effect if the source frame rate is greater than or equal to the target frame rate.</p>
 	FrameRate *FrameRateConfig `json:"FrameRate,omitnil,omitempty" name:"FrameRate"`
 
-
+	// <p>Super-resolution configuration. The video is not processed when the source resolution is higher than the target resolution. Note that it cannot be enabled simultaneously with LLM enhancement.</p>
 	SuperResolution *SuperResolutionConfig `json:"SuperResolution,omitnil,omitempty" name:"SuperResolution"`
 
-
+	// <p>HDR configuration.</p>
 	Hdr *HdrConfig `json:"Hdr,omitnil,omitempty" name:"Hdr"`
 
-
+	// <p>Video noise reduction configuration. Note that it cannot be enabled simultaneously with LLM enhancement.</p>
 	Denoise *VideoDenoiseConfig `json:"Denoise,omitnil,omitempty" name:"Denoise"`
 
-
+	// <p>Comprehensive enhancement configuration. Note that only one of the three items, large model, comprehensive enhancement, and artifacts removal, can be configured.</p>
 	ImageQualityEnhance *ImageQualityEnhanceConfig `json:"ImageQualityEnhance,omitnil,omitempty" name:"ImageQualityEnhance"`
 
-
+	// <p>Color enhancement configuration.</p>
 	ColorEnhance *ColorEnhanceConfig `json:"ColorEnhance,omitnil,omitempty" name:"ColorEnhance"`
 
-
+	// <p>Low-light enhancement configuration.</p>
 	LowLightEnhance *LowLightEnhanceConfig `json:"LowLightEnhance,omitnil,omitempty" name:"LowLightEnhance"`
 
-
+	// <p>Scratch removal configuration.</p>
 	ScratchRepair *ScratchRepairConfig `json:"ScratchRepair,omitnil,omitempty" name:"ScratchRepair"`
 
-
+	// <p>Artifacts removal configuration. Note that only one of the three items, large model, comprehensive enhancement, and artifacts removal, can be configured.</p>
 	ArtifactRepair *ArtifactRepairConfig `json:"ArtifactRepair,omitnil,omitempty" name:"ArtifactRepair"`
 
-
+	// <p>Enhancement scenario configuration. Available values:</p><li>common: general enhancement parameters, basic optimization parameters suitable for various video types, improving overall video quality.</li><li>AIGC: overall resolution enhancement, using AI technology to improve the overall video resolution and enhance image clarity.</li><li>short_play (mini-drama & AI virtual human drama): enhances face and subtitle details, highlights facial expression details and subtitle clarity, improving the viewing experience.</li><li>AI_comic (AI comic drama): enhances comic-style image details.</li><li>short_video: optimizes complex and diverse video quality issues, optimizes video quality for complex short video scenarios, and resolves various visual issues.</li><li>game (game video): repairs motion blur and enhances details, focusing on enhancing the clarity of game details, restoring motion blur areas, and making the game screen content clearer and richer.</li><li>HD_movie_series (UHD TV shows and movies): obtains UHD smooth effects, generates 4K 60fps HDR UHD standard videos for broadcasting/OTT UHD video demands. Supports broadcasting scenario format standards.</li><li>LQ_material (low-quality material/classic film restoration): overall resolution enhancement, specially optimized for issues in old videos such as insufficient resolution, blur distortion, scratch damage, and color temperature due to their age.</li><li>lecture (live show/e-commerce/conference/lecture): beautifies and enhances face effects, specially optimized for face region, noise reduction, and burr processing in scenarios where people explain, such as live shows/e-commerce/conferences/lectures.</li><li>An empty string indicates non-use of enhancement scenarios.</li>
 	EnhanceSceneType *string `json:"EnhanceSceneType,omitnil,omitempty" name:"EnhanceSceneType"`
 
-
+	// <p>Large model enhancement configuration. Note that only one of the three items, large model, comprehensive enhancement, and artifacts removal, can be configured. It cannot be enabled simultaneously with super resolution and noise reduction.</p>
 	DiffusionEnhance *DiffusionEnhanceConfig `json:"DiffusionEnhance,omitnil,omitempty" name:"DiffusionEnhance"`
 
-
+	// <p>New frame interpolation frame rate configuration, supporting fractions. Note that you can only choose one between this and FrameRate. The capacity will not take effect when the source frame rate is equal to or greater than the target frame rate.</p>
 	FrameRateWithDen *FrameRateWithDenConfig `json:"FrameRateWithDen,omitnil,omitempty" name:"FrameRateWithDen"`
 
-
+	// <p>Large model repair configuration. Note that at most one of large model, comprehensive enhancement, and jitter removal can be configured. It cannot be enabled simultaneously with super resolution or noise reduction.</p>
 	AiRestoration *AiRestorationConfig `json:"AiRestoration,omitnil,omitempty" name:"AiRestoration"`
+
+	// <p>Configuration of the large model enhancement pro edition. Note that at most one of the large model, comprehensive enhancement, and artifacts removal can be configured. It cannot intersect with super resolution and noise reduction.</p>
+	DiffusionEnhanceV2 *DiffusionEnhanceV2Config `json:"DiffusionEnhanceV2,omitnil,omitempty" name:"DiffusionEnhanceV2"`
 }
 
 type VideoRedrawCosInfo struct {
@@ -22872,7 +23511,7 @@ type VideoTemplateInfo struct {
 	// <li>dnxhd: DNxHD encoding.</li>
 	// <li>mv-hevc: MV-HEVC encoding.</li>
 	// 
-	// Note: av1 encoding container currently only supports mp4, webm, and mkv.
+	// Note: av1 encoding containers currently only support mp4, webm, and mkv.
 	// Note: H.266 encoding containers currently only support mp4, hls, ts, and mov.
 	// Note: VP8 and VP9 encoding containers currently only support webm and mkv.
 	// Note: MPEG2 and dnxhd encoding containers currently only support mxf.
@@ -22885,7 +23524,7 @@ type VideoTemplateInfo struct {
 	// If the value is 0, the frame rate will be the same as that of the source video.
 	Fps *int64 `json:"Fps,omitnil,omitempty" name:"Fps"`
 
-	// Bitrate of the video stream. Value range: 0 and [128, 100000]. Unit: kbps.
+	// Video stream bitrate, in kbps. Value range: 0 and [128, 100000].
 	// If the value is 0, the bitrate of the video will be the same as that of the source video.
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
@@ -22905,7 +23544,7 @@ type VideoTemplateInfo struct {
 	// Note: If Codec is set to MV-HEVC, the maximum value can be 7680.
 	Width *uint64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// Maximum value of the video stream height (or short side). Value range: 0 and [128, 4096]. Unit: px.
+	// Maximum height (or short side) of the video stream. Value range: 0 and [128, 4096]. Unit: px.
 	// <li>If both Width and Height are 0, the resolution is the same as the source.</li>
 	// <li>If Width is 0 but Height is not 0, the width will be proportionally scaled.</li>
 	// <li>If Width is not 0 but Height is 0, the height will be proportionally scaled.</li>
@@ -22918,7 +23557,10 @@ type VideoTemplateInfo struct {
 	// If this parameter is 0 or left blank, the system will automatically set the GOP length.
 	Gop *uint64 `json:"Gop,omitnil,omitempty" name:"Gop"`
 
-
+	// Gop value unit. Value range:
+	// frame: indicates frame
+	// second: indicates second
+	// Default value: frame
 	GopUnit *string `json:"GopUnit,omitnil,omitempty" name:"GopUnit"`
 
 	// Filling method, when video stream configuration width and height parameters are inconsistent with the aspect ratio of the original video, the processing method for transcoding is "padding". Optional filling modes:
@@ -22930,144 +23572,299 @@ type VideoTemplateInfo struct {
 	// Default value: black.
 	FillType *string `json:"FillType,omitnil,omitempty" name:"FillType"`
 
-
+	// Control factor for constant video bitrate. Value range: [0, 51]. If not specified, it means "auto". If there are no special requirements, it is advisable not to specify this parameter.
+	// If Mode is set to VBR and Vcrf is configured, MPS processes video in VBR mode, taking into account both Vcrf and Bitrate parameter settings to balance video quality, bitrate, transcoding efficiency, and file size.
+	// When Mode is set to CRF, the Bitrate setting will become invalid, and encoding will be performed based on the Vcrf value.
+	// If Mode is set to ABR or CBR, the Vcrf value does not need to be configured.
 	Vcrf *uint64 `json:"Vcrf,omitnil,omitempty" name:"Vcrf"`
 
-
+	// Average segment duration. Value range: (0-10], unit: second.
+	// If not specified, it means auto. The appropriate segment duration will be automatically selected based on video features such as GOP.
 	HlsTime *uint64 `json:"HlsTime,omitnil,omitempty" name:"HlsTime"`
 
-
+	// hls fragment type. Available values:
+	// <li>0: HLS+TS segment.</li>
+	// <li>2:HLS+TS byte range</li>
+	// <li>7: HLS+MP4 segment.</li>
+	// <li>5:HLS+MP4 byte range</li>
+	// Default value: 0
+	// Note: This field is used for ordinary/TSC transcoding settings and does not take effect for adaptive bitrate streams. To configure the shard type for an adaptive bitrate stream, use the outer field.
 	SegmentType *int64 `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
 
-
+	// Denominator of the frame rate.
+	// Note: The value must be greater than 0.
 	FpsDenominator *int64 `json:"FpsDenominator,omitnil,omitempty" name:"FpsDenominator"`
 
-
+	// 3D video splicing mode. It takes effect only for mv-hevc and 3D videos. Available values:
+	// <li>side_by_side: left-right layout arrangement of the original video content.</li>
+	// <li>top_bottom: top-bottom layout arrangement of the original video content.</li>
+	// Billing will be based on the segmented resolution size to report usage and charges.
+	// Default value: side_by_side.
 	Stereo3dType *string `json:"Stereo3dType,omitnil,omitempty" name:"Stereo3dType"`
 
-
+	// Profile, suitable for different scenarios.
+	// baseline: It only supports I/P-frames and non-interlaced scenarios, and is suitable for scenarios such as video calls and mobile videos.
+	// Main: Mainstream Profile, provides I-frames, P-frames, and B-frames, and supports both interlaced and non-interlaced modes. It is mainly used in mainstream audio and video consumption products such as video players and streaming media transmission devices.
+	// high: Highest encoding level. It adds 8X8 prediction to Main Profile and supports custom quantization. It is widely used in Blu-ray storage, HDTV, and other scenarios.
+	// default: automatic filling along with the original video.    
+	// 
+	// This configuration appears only when the encoding standard is set to H264. baseline/main/high is supported. Default value: default
 	VideoProfile *string `json:"VideoProfile,omitnil,omitempty" name:"VideoProfile"`
 
-
+	// Encoder level. Default value: auto ("")
+	// If the encoding standard is set to H264, the following options are supported: "", 1, 1.1, 1.2, 1.3, 2, 2.1, 2.2, 3, 3.1, 3.2, 4, 4.1, 4.2, 5, and 5.1.
+	// If the encoding standard is set to H265, the following options are supported: "", 1, 2, 2.1, 3, 3.1, 4, 4.1, 5, 5.1, 5.2, 6, 6.1, 6.2, and 8.5.
 	VideoLevel *string `json:"VideoLevel,omitnil,omitempty" name:"VideoLevel"`
 
-
+	// Number of B-frames between reference frames. The default is auto, and a range of 0 - 16 is supported.
+	// Note: Leaving it blank means using the auto option.
 	Bframes *int64 `json:"Bframes,omitnil,omitempty" name:"Bframes"`
 
-
+	// Bitrate control mode. Available values:
+	// VBR (Variable Bit Rate): adjust the output bitrate based on the complexity of the video image to ensure higher image quality. It is suitable for storage scenarios and applications with high image quality requirements.
+	// ABR (Average Bit Rate): Try to keep the average bitrate of the output video stable as much as possible, but allow short-term bitrate fluctuation. It is suitable for scenarios where the overall bitrate needs to be minimized while maintaining a certain image quality.
+	// CBR (Constant Bit Rate): maintains a constant output bitrate during video encoding, regardless of image complexity changes. It is suitable for scenarios with strict network bandwidth requirements, such as live streaming.
+	// VCRF (Constant Rate Factor): A constant quality factor. It controls video quality by setting a quality factor to achieve constant quality encoding of videos. The bitrate is automatically adjusted based on content complexity, making it suitable for scenarios where maintaining a certain quality is desired.
+	// VBR is selected by default.
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
-
+	// Display aspect ratio. Optional values: [1:1, 2:1, default]
+	// Default value: default
 	Sar *string `json:"Sar,omitnil,omitempty" name:"Sar"`
 
-
+	// Adaptive I-frame decision. When it is enabled, Media Processing Service will automatically identify transition points between different scenarios in the video (usually they are visually distinct frames, such as those of switching from one shot to another) and adaptively insert keyframes (I-frames) at these points to improve the random accessibility and encoding efficiency of the video. Available values:
+	// 0: Disable adaptive I-frame decision 
+	// 1: Enable the adaptive I-frame decision
+	// Default value: 0
 	NoScenecut *int64 `json:"NoScenecut,omitnil,omitempty" name:"NoScenecut"`
 
-
+	// Bit: 8/10 is supported. Default value: 8
 	BitDepth *int64 `json:"BitDepth,omitnil,omitempty" name:"BitDepth"`
 
-
+	// Preserve original timestamp. Optional values:
+	// 0: Disabled
+	// 1: Indicates open
+	// Default value: Disabled
 	RawPts *int64 `json:"RawPts,omitnil,omitempty" name:"RawPts"`
 
-
+	// Proportional compression bitrate. When enabled, the output video's bitrate is adjusted according to the proportion. After the compression ratio is entered, the system automatically calculates the target output bitrate based on the source video bitrate. Compression ratio range: 0-100
+	// Leaving this value blank means it is not enabled by default.
 	Compress *int64 `json:"Compress,omitnil,omitempty" name:"Compress"`
 
-
+	// Segment duration at startup
 	SegmentSpecificInfo *SegmentSpecificInfo `json:"SegmentSpecificInfo,omitnil,omitempty" name:"SegmentSpecificInfo"`
 
-
+	// Whether to enable scenario-based settings for the template 
+	// 0: disable 
+	// 1: enable 
+	// Default value: 0	
+	// Note: The values of the SceneType and CompressType fields are effective only when the value of this field is 1.
 	ScenarioBased *int64 `json:"ScenarioBased,omitnil,omitempty" name:"ScenarioBased"`
 
-
+	// Video scenario. Optional values: 
+	// normal: General transcoding scenario: General transcoding and compression scenario.
+	// pgc: PGC HD TV shows and movies: At the time of compression, focus is placed on the viewing experience of TV shows and movies and ROI encoding is performed according to their characteristics, while high-quality contents of videos and audio are retained. 
+	// materials_video: HD materials: Scenario involving material resources, where requirements for image quality are extremely high and there are many transparent images, with almost no visual loss during compression. 
+	// ugc: UGC content: It is suitable for a wide range of UGC/short video scenarios, with an optimized encoding bitrate for short video characteristics, improved image quality, and enhanced business QOS/QOE metrics. 
+	// e-commerce_video: Fashion show/e-commerce: During compression, emphasis is placed on detail clarity and ROI enhancement, with a particular focus on maintaining the image quality of the face region. 
+	// educational_video: Education: At the time of compression, emphasis is placed on the clarity and readability of text and images to help students better understand the content, ensuring that the teaching content is clearly conveyed. 
+	// Default value: normal.
+	// Note: To use this value, the value of ScenarioBased must be 1. Otherwise, this value does not take effect.
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
 
-
+	// Transcoding policy. Optional values: 
+	// ultra_compress: Extreme compression: Compared to standard compression, this policy can maximize bitrate compression while ensuring a certain level of image quality, thus greatly saving bandwidth and storage costs. 
+	// standard_compress: Comprehensively optimal: The compression ratio and image quality are balanced, and files are compressed as much as possible without a noticeable reduction in subjective image quality. Only audio and video TSC transcoding fees are charged for this policy. 
+	// high_compress: Bitrate priority: Priority is given to reducing file size, which may result in certain image quality loss. Only audio and video TSC transcoding fees are charged for this policy. 
+	// low_compress: Image quality priority: Priority is given to ensuring image quality, and the size of compressed files may be relatively large. Only audio and video TSC transcoding fees are charged for this policy. 
+	// Default value: standard_compress. 
+	// Note: The ultra_compress policy is not recommended for use if you need to watch videos on TV. The billing standard for the ultra_compress policy is TSC transcoding + audio/video enhancement-artifacts removal.
+	// Note: To use this value, the value of ScenarioBased must be 1. Otherwise, this value does not take effect.
 	CompressType *string `json:"CompressType,omitnil,omitempty" name:"CompressType"`
 }
 
 type VideoTemplateInfoForUpdate struct {
-
+	// Encoding format for video streams. Optional values:
+	// <li>h264: H.264 encoding.</li>
+	// <li>h265: H.265 encoding.</li>
+	// <li>h266: H.266 encoding.</li>
+	// <li>av1: AOMedia Video 1 encoding</li>
+	// <li>vp8: VP8 encoding.</li>
+	// <li>vp9: VP9 encoding.</li>
+	// <li>mpeg2: MPEG2 encoding.</li>
+	// <li>dnxhd: DNxHD encoding.</li>
+	// <li>mv-hevc: MV-HEVC encoding.</li>
+	// 
+	// Note: The av1 encoding container currently only supports mp4, webm, and mkv.
+	// Note: H.266 encoding containers currently only support mp4, hls, ts, and mov.
+	// Note: VP8 and VP9 encoding containers currently only support webm and mkv.
+	// Note: MPEG2 and dnxhd encoding containers currently only support mxf.
+	// Note: The MV-HEVC codec currently only supports mp4, hls, and mov. Among them, the HLS format only supports the MP4 segmented format and requires the input source to be a panoramic video (with multiple views).
 	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
 
-
+	// Video frame rate. Value range:
+	// When FpsDenominator is empty, the range is [0, 120], in Hz.
+	// When FpsDenominator is not empty, the Fps/FpsDenominator range is [0, 120].
+	// If the value is 0, the frame rate will be the same as that of the source video.
 	Fps *int64 `json:"Fps,omitnil,omitempty" name:"Fps"`
 
-
+	// Bitrate of video stream. Value range: 0 and [128, 100000]. Unit: kbps.
+	// If the value is 0, the bitrate of the video will be the same as that of the source video.
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-
+	// Resolution adaptation, available values:
+	// <li>open: turn on. At this point, Width represents the long side of the video, and Height indicates the short side of the video;</li>
+	// <li>close: close. At this point, Width represents the width of the video, and Height indicates the height of the video.</li>
+	// Note: In self-adaptation mode, Width cannot be less than Height.
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitnil,omitempty" name:"ResolutionAdaptive"`
 
-
+	// Maximum value of the video stream width (or long edge) in px. Value range: 0 and [128, 4096].
+	// <li>If both Width and Height are 0, the resolution is the same as the source.</li>
+	// <li>If Width is 0 but Height is not 0, the width will be proportionally scaled.</li>
+	// <li>If Width is not 0 but Height is 0, the height will be proportionally scaled.</li>
+	// <li>If both Width and Height are not 0, the resolution is as specified by the user.</li>
+	// Note: If Codec is set to MV-HEVC, the maximum value can be 7680.
 	Width *uint64 `json:"Width,omitnil,omitempty" name:"Width"`
 
-
+	// Maximum value of the video stream height (or short side). Value range: 0 and [128, 4096]. Unit: px.
+	// Note: If Codec is set to MV-HEVC, the maximum value can be 7680.
 	Height *uint64 `json:"Height,omitnil,omitempty" name:"Height"`
 
-
+	// Interval between I-frames (keyframes), which can be customized in frames or seconds. GOP value range: 0 and [1, 100000].
+	// When set to 0, the system will automatically set the gop length.
 	Gop *uint64 `json:"Gop,omitnil,omitempty" name:"Gop"`
 
-
+	// Gop value unit. Value range: 
+	// frame: indicates frame 
+	// second: indicates second
+	// Default value: frame
 	GopUnit *string `json:"GopUnit,omitnil,omitempty" name:"GopUnit"`
 
-
+	// Filling method, when video stream configuration width and height parameters are inconsistent with the aspect ratio of the original video, the processing method for transcoding is "padding". Optional filling modes:
+	// <li> stretch: Stretch each frame to fill the entire screen, possibly causing the transcoded video to be "squashed" or "stretched";</li>
+	// <li>black: Keep black, maintain video aspect ratio, edges filled with black.</li>
+	// <li>White: Leave blank, maintain video aspect ratio, edge remainder filled with white.</li>
+	// <li>gauss: Gaussian blur, maintain video aspect ratio, and use Gaussian blur filling for the rest of the edges.</li>
+	// <li>smarttailor: intelligent cropping: smartly select video images to ensure proportional image cropping.</li>
+	// Default value: black.
 	FillType *string `json:"FillType,omitnil,omitempty" name:"FillType"`
 
-
+	// Control factor for constant video bitrate. Value range: [0, 51]. If not specified, it means "auto". If there are no special requirements, it is advisable not to specify this parameter.
+	// If Mode is set to VBR and Vcrf is configured, MPS processes video in VBR mode, taking into account both Vcrf and Bitrate parameter settings to balance video quality, bitrate, transcoding efficiency, and file size.
+	// If Mode is set to CRF, the Bitrate setting will become invalid, and encoding will be performed based on the Vcrf value.
+	// When Mode is set to ABR or CBR, the Vcrf value does not need to be configured.
+	// Note: To change it to automatic, fill in 100.
 	Vcrf *uint64 `json:"Vcrf,omitnil,omitempty" name:"Vcrf"`
 
-
+	// Content adaptive encoding. Available values:
+	// <li>0: disable</li>
+	// <li>1: Turn on</li>
+	// Default value: 0. When this parameter is enabled, multiple streams with different resolutions and bitrates will be generated automatically. The width and height in VideoTemplate are the maximum resolution among the multiple streams, the bitrate in VideoTemplate is the highest bitrate among the multiple streams, and the vcrf in VideoTemplate is the highest quality among the multiple streams. When resolution, bitrate, and vcrf are not set, the highest resolution generated by the ContentAdaptStream parameter is the resolution of the video source, and the video quality is close to a vmaf score of 95. To enable this parameter or learn about billing details, contact your Tencent Cloud business.
 	ContentAdaptStream *uint64 `json:"ContentAdaptStream,omitnil,omitempty" name:"ContentAdaptStream"`
 
-
+	// Average segment duration. Value range: (0-10], unit: second
+	// Default value: 10
+	// Note: It is used only in the HLS format.
 	HlsTime *uint64 `json:"HlsTime,omitnil,omitempty" name:"HlsTime"`
 
-
+	// hls fragment type. Available values:
+	// <li>0: HLS+TS segment.</li>
+	// <li>2:HLS+TS byte range</li>
+	// <li>7: HLS+MP4 segment.</li>
+	// <li>5:HLS+MP4 byte range</li>
+	// Default value: 0
+	// Note: This field is used for ordinary/TSC transcoding settings and does not take effect for adaptive bitrate streams. To configure the sharding type for adaptive bitrate streams, use the outer field.
 	SegmentType *int64 `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
 
-
+	// Denominator of the frame rate.
+	// Note: The value must be greater than 0.
 	FpsDenominator *int64 `json:"FpsDenominator,omitnil,omitempty" name:"FpsDenominator"`
 
-
+	// 3D video splicing mode. It takes effect only for mv-hevc and 3D videos. Available values:
+	// <li>side_by_side: left-right layout arrangement of the original video content.</li>
+	// <li>top_bottom: top-bottom layout arrangement of the original video content.</li>
+	// Billing will be based on the segmented resolution dimensions to report usage and fees.
+	// Default value: side_by_side
 	Stereo3dType *string `json:"Stereo3dType,omitnil,omitempty" name:"Stereo3dType"`
 
-
+	// Profile, suitable for different scenarios. 
+	// baseline: It only supports I/P-frames and non-interlaced scenarios, and is suitable for scenarios such as video calls and mobile videos. 
+	// Main Profile, which provides I-frames, P-frames, and B-frames, and supports both interlaced and non-interlaced modes. It is mainly used in mainstream audio and video consumption products such as video players and streaming media transmission devices. 
+	// high: Highest encoding level. It adds 8X8 prediction to Main Profile and supports custom quantification. It is widely used in Blu-ray storage and HDTV scenarios.
+	// default: automatic filling along with the original video
+	// 
+	// This configuration appears only when the encoding standard is set to H264. Default value: default
 	VideoProfile *string `json:"VideoProfile,omitnil,omitempty" name:"VideoProfile"`
 
-
+	// Encoder level. Default value: auto ("")
+	// If the encoding standard is set to H264, the following options are supported: "", 1, 1.1, 1.2, 1.3, 2, 2.1, 2.2, 3, 3.1, 3.2, 4, 4.1, 4.2, 5, and 5.1. 
+	// If the encoding standard is set to H265, the following options are supported: "", 1, 2, 2.1, 3, 3.1, 4, 4.1, 5, 5.1, 5.2, 6, 6.1, 6.2, and 8.5.
 	VideoLevel *string `json:"VideoLevel,omitnil,omitempty" name:"VideoLevel"`
 
-
+	// Maximum number of consecutive B-frames. The default is auto, and 0 - 16 and -1 are supported.
+	// Note:
+	// -1 indicates auto.	
 	Bframes *int64 `json:"Bframes,omitnil,omitempty" name:"Bframes"`
 
-
+	// Bitrate control mode. Available values: 
+	// VBR (Variable Bit Rate): A dynamic bitrate that adjusts the output bitrate based on the complexity of the video image to ensure higher image quality. It is suitable for storage scenarios and applications with high image quality requirements. 
+	// ABR (Average Bit Rate): It tries to stabilize the average bitrate of the output video as much as possible, but allows short-term bitrate fluctuation. It is suitable for scenarios where the overall bitrate needs to be minimized while maintaining a certain image quality. 
+	// CBR (Constant Bit Rate): The output bitrate remains constant during video encoding, regardless of image complexity changes. It is suitable for scenarios with strict network bandwidth requirements, such as live streaming. 
+	// VCRF (Constant Rate Factor): A constant quality factor. It controls video quality by setting a Quality Factor to achieve constant quality encoding of videos. Bitrate adjustment based on content complexity makes it suitable for scenarios where maintaining a certain quality is desired. 
+	// VBR is selected by default.
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
-
+	// Display aspect ratio. Optional values: [1:1, 2:1, default]
+	// Default value: default
 	Sar *string `json:"Sar,omitnil,omitempty" name:"Sar"`
 
-
+	// Adaptive I-frame decision. When it is enabled, Media Processing Service will automatically identify transition points between different scenarios in the video (usually they are visually distinct frames, such as those of switching from one shot to another) and adaptively insert keyframes (I-frames) at these points to improve the random accessibility and encoding efficiency of the video. Available values: 
+	// 0: Disable adaptive I-frame decision 
+	// 1: Enable the adaptive I-frame decision 
+	// Default value: 0	
 	NoScenecut *int64 `json:"NoScenecut,omitnil,omitempty" name:"NoScenecut"`
 
-
+	// Bit: 8/10 is supported. Default value: 8	
 	BitDepth *int64 `json:"BitDepth,omitnil,omitempty" name:"BitDepth"`
 
-
+	// Preserve original timestamp. Available values: 
+	// 0: Disabled 
+	// 1: Enabled 
+	// Default value: Disabled	
 	RawPts *int64 `json:"RawPts,omitnil,omitempty" name:"RawPts"`
 
-
+	// Proportional compression bitrate. When it is enabled, the bitrate of the output video will be adjusted according to the proportion. After the compression ratio is entered, the system will automatically calculate the target output bitrate based on the source video bitrate. Compression ratio range: 0-100, optional values: [0-100] and -1. 
+	// Note: -1 indicates auto.	
 	Compress *int64 `json:"Compress,omitnil,omitempty" name:"Compress"`
 
-
+	// Segment duration at startup
 	SegmentSpecificInfo *SegmentSpecificInfo `json:"SegmentSpecificInfo,omitnil,omitempty" name:"SegmentSpecificInfo"`
 
-
+	// Whether to enable scenario-based settings for the template 
+	// 0: disable 
+	// 1: enable 
+	// Default value: 0	
+	// Note: The values of SceneType and CompressType take effect only when this field is set to 1.
 	ScenarioBased *int64 `json:"ScenarioBased,omitnil,omitempty" name:"ScenarioBased"`
 
-
+	// Video scenario. Optional values: 
+	// normal: General transcoding scenario: general transcoding and compression scenario. pgc: PGC HD TV shows and movies: At the time of compression, focus is placed on the viewing experience of TV shows and movies and ROI encoding is performed according to their characteristics, while high-quality video and audio content is retained. 
+	// materials_video: HD materials: Scenario involving material resources, where requirements for image quality are extremely high and there are many transparent images, with almost no visual loss during compression. 
+	// ugc: UGC content: It is suitable for a wide range of UGC/short video scenarios, with an optimized encoding bitrate for short video characteristics, improved image quality, and enhanced business QOS/QOE metrics. 
+	// e-commerce_video: Fashion show/e-commerce: During compression, emphasis is placed on detail clarity and ROI enhancement, with a particular focus on maintaining the image quality of the face region. 
+	// educational_video: Education: At the time of compression, emphasis is placed on the clarity and readability of text and images to help students better understand the content, ensuring that the teaching content is clearly conveyed.
+	// Default value: normal.
+	// Note: To use this value, the value of ScenarioBased must be 1. Otherwise, this value does not take effect.
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
 
-
+	// Transcoding policy. Optional values: 
+	// ultra_compress: Ultimate compression: Compared to standard compression, this policy can maximize bitrate compression while ensuring a certain level of image quality, thus greatly saving bandwidth and storage costs. 
+	// standard_compress: Comprehensively optimal: The compression ratio and image quality are balanced, and files are compressed as much as possible without a noticeable reduction in subjective image quality. Only audio and video TSC transcoding fees are charged for this policy. 
+	// high_compress: Bitrate priority: Priority is given to reducing file size, which may result in certain image quality loss. Only audio and video TSC transcoding fees are charged for this policy. 
+	// low_compress: Image quality priority: Priority is given to ensuring image quality, and the size of compressed files may be relatively large. Only audio and video TSC transcoding fees are charged for this policy. 
+	// Default value: standard_compress. 
+	// Note: The ultra_compress policy is not recommended for use if you need to watch videos on TV. The billing standard for the ultra_compress policy is TSC transcoding + audio/video enhancement-artifacts removal.
+	// Note: To use this value, the value of ScenarioBased must be 1. Otherwise, this value does not take effect.
 	CompressType *string `json:"CompressType,omitnil,omitempty" name:"CompressType"`
 }
 
@@ -23115,25 +23912,25 @@ type VoiceInfo struct {
 }
 
 type VoiceProfile struct {
-
+	// <p>Voice name.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// <p>Voice description.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-
+	// <p>Gender.</p><p>Enumeration values:</p><ul><li>male: male</li><li>female: female</li><li>unknown: unknown</li></ul>
 	Gender *string `json:"Gender,omitnil,omitempty" name:"Gender"`
 
-
+	// <p>Age.</p><p>Enumeration values:</p><ul><li>child: child</li><li>teenager: teenager</li><li>youth: youth</li><li>middle_aged: middle-aged</li><li>senior: senior</li><li>unknown: unknown</li></ul>
 	Age *string `json:"Age,omitnil,omitempty" name:"Age"`
 
-
+	// <p>Language. Supported languages:<br>zh Chinese<br>en English<br>ja Japanese<br>de German<br>fr French<br>ko Korean<br>ru Russian<br>uk Ukrainian<br>pt Portuguese<br>it Italian<br>es Spanish<br>id Indonesian<br>nl Dutch<br>tr Turkish<br>fil Filipino<br>ms Malay<br>el Greek<br>fi Finnish<br>hr Croatian<br>sk Slovak<br>pl Polish<br>sv Swedish<br>hi Hindi<br>bg Bulgarian<br>ro Romanian<br>ar Arabic<br>cs Czech<br>da Danish<br>ta Tamil<br>hun Hungarian<br>vi Vietnamese<br>no Norwegian<br>yue Cantonese<br>th Thai<br>he Hebrew<br>ca Catalan<br>nn Nynorsk<br>af Afrikaans<br>fa Persian<br>sl Slovenian</p>
 	Languages []*string `json:"Languages,omitnil,omitempty" name:"Languages"`
 
-
+	// <p>Tag.</p>
 	Labels []*string `json:"Labels,omitnil,omitempty" name:"Labels"`
 
-
+	// <p>Scenario.</p>
 	Scenes []*string `json:"Scenes,omitnil,omitempty" name:"Scenes"`
 }
 
@@ -23170,7 +23967,10 @@ type VolumeBalanceConfig struct {
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-
+	// Type. Valid values:
+	// <li>loudNorm: loudness normalization</li>
+	// <li>gainControl: reduce abrupt change</li>
+	// Default value: loudNorm.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -23178,19 +23978,19 @@ type WatermarkInput struct {
 	// <p>Watermark template ID.</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <p>Watermark custom parameter, valid when Definition is set to 0.<br>This parameter is used for highly customized scenarios. We recommend you prioritize using Definition to specify watermark parameters.<br>Watermark custom parameters are not supported for screenshot watermarking.</p>
+	// <p>Watermark custom parameter, valid when Definition is set to 0.<br>This parameter is used for highly custom scenarios. We recommend you prioritize using Definition to specify watermark parameters.<br>Watermark custom parameters do not support watermarking screenshots.</p>
 	RawParameter *RawWatermarkParameter `json:"RawParameter,omitnil,omitempty" name:"RawParameter"`
 
-	// <p>Text content, length not exceeding 100 characters. Fill in only when the watermark type is text watermark.<br>Text watermark does not support screenshot watermarking.</p>
+	// <p>Text content, not exceeding 100 characters in length. Fill in only when the watermark type is text watermark.<br>Text watermark does not support screenshot watermarking.</p>
 	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
 
 	// <p>SVG content. Length not exceeding 2000000 characters. Fill in only when the watermark type is SVG watermark.<br>SVG watermark does not support screenshot watermarking.</p>
 	SvgContent *string `json:"SvgContent,omitnil,omitempty" name:"SvgContent"`
 
-	// <p>Start time offset of a watermark, in seconds. If not set or set to 0, a watermark starts appearing when a video starts.</p><li>If not set or set to 0, a watermark starts appearing when a video starts;</li><li>If the value is greater than 0 (assuming n), the watermark appears at second n after the video starts;</li><li>If the value is less than 0 (assuming -n), the watermark appears n seconds before the end of the video.</li>Note: Only used for video scenes. Screenshots do not support it.
+	// <p>Start time offset of a watermark, in seconds. If not set or set to 0, a watermark starts appearing when a video starts.</p><li>If not set or set to 0, a watermark starts appearing when a video starts;</li><li>If the value is greater than 0 (assuming n), a watermark appears at second n after a video starts;</li><li>If the value is less than 0 (assuming -n), a watermark appears n seconds before the end of a video.</li>Note: This parameter only applies to video scenes. Screenshots do not support it.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// <p>End time offset of a watermark, in seconds.</p><li>Leave empty or set to 0: the watermark lasts until the end of the video.</li><li>Value greater than 0 (assuming n): the watermark disappears at second n.</li><li>Value smaller than 0 (assuming -n): the watermark disappears n seconds before the end of the video.</li>Note: Only used for video scenes. Screenshot is not supported.
+	// <p>End time offset of a watermark. Unit: second.</p><li>If not specified or set to 0, the watermark lasts until the end of the video.</li><li>If the value is greater than 0 (assuming n), the watermark disappears at second n.</li><li>If the value is less than 0 (assuming -n), the watermark disappears n seconds before the end of the video.</li>Note: Only used for video scenes. Screenshots do not support it.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 }
 
@@ -23311,46 +24111,47 @@ type WorkflowInfo struct {
 }
 
 type WorkflowTask struct {
-	// Media processing task ID.
+	// <p>Media processing task ID.</p>
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Task flow status. Valid values:
-	// <li>PROCESSING: Processing;</li>
-	// <li>FINISH: completed</li>
+	// <p>Task flow status. Valid values: </p><li>PROCESSING: Processing; </li><li>FINISH: Completed.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// An error code other than 0 is returned in case of a source exception. Use the error code of the specific task when a value of 0 is returned.
+	// <p>Returns a non-zero error code when a source error occurs. If 0 is returned, use the ErrCode of each specific task.</p>
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
-	// The corresponding exception message is returned in case of a source exception. If no source exception occurs, use the message of each specific task.
+	// <p>Returns the corresponding error Message when a source error occurs. Otherwise, use the Message of each specific task.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-
+	// <p>Target file information of media processing.</p>
 	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
 
-
+	// <p>Metadata of the original video.</p>
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 
-	// Execution status and results of a Media Processing Service task.
+	// <p>Execution status and result of the media processing task.</p>
 	MediaProcessResultSet []*MediaProcessTaskResult `json:"MediaProcessResultSet,omitnil,omitempty" name:"MediaProcessResultSet"`
 
-	// Execution status and results of a video content review task.
+	// <p>Execution status and results of the video content review task.</p>
 	AiContentReviewResultSet []*AiContentReviewResult `json:"AiContentReviewResultSet,omitnil,omitempty" name:"AiContentReviewResultSet"`
 
-	// Execution status and results of a video content analysis task.
+	// <p>Execution status and results of the video content analysis task.</p>
 	AiAnalysisResultSet []*AiAnalysisResult `json:"AiAnalysisResultSet,omitnil,omitempty" name:"AiAnalysisResultSet"`
 
-	// Task execution status and results of the video content recognition task.
+	// <p>Execution status and results of the video content recognition task.</p>
 	AiRecognitionResultSet []*AiRecognitionResult `json:"AiRecognitionResultSet,omitnil,omitempty" name:"AiRecognitionResultSet"`
 
-
+	// <p>Execution status and results of a media quality inspection task.</p>
 	AiQualityControlTaskResult *ScheduleQualityControlTaskResult `json:"AiQualityControlTaskResult,omitnil,omitempty" name:"AiQualityControlTaskResult"`
 
-
+	// <p>Execution result of the smart subtitle task</p>
 	SmartSubtitlesTaskResult []*SmartSubtitlesResult `json:"SmartSubtitlesTaskResult,omitnil,omitempty" name:"SmartSubtitlesTaskResult"`
 
-
+	// <p>Outcome of the intelligent erasure task</p>
 	SmartEraseTaskResult *SmartEraseTaskResult `json:"SmartEraseTaskResult,omitnil,omitempty" name:"SmartEraseTaskResult"`
+
+	// <p>Outcome of the AI dubbing task.</p>
+	AiDubbingTaskResult *AIDubbingTaskResult `json:"AiDubbingTaskResult,omitnil,omitempty" name:"AiDubbingTaskResult"`
 }
 
 type WorkflowTrigger struct {

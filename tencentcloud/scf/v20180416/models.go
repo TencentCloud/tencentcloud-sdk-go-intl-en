@@ -84,7 +84,7 @@ type AsyncTriggerConfig struct {
 }
 
 type CfsConfig struct {
-	// File system information list
+	// List of file system information
 	CfsInsList []*CfsInsInfo `json:"CfsInsList,omitnil,omitempty" name:"CfsInsList"`
 }
 
@@ -92,31 +92,31 @@ type CfsInsInfo struct {
 	// User ID
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
-	// User group ID
+	// User group id.
 	UserGroupId *string `json:"UserGroupId,omitnil,omitempty" name:"UserGroupId"`
 
-	// CFS instance ID
+	// File system instance id
 	CfsId *string `json:"CfsId,omitnil,omitempty" name:"CfsId"`
 
-	// File system mount target ID
+	// File system mount point id
 	MountInsId *string `json:"MountInsId,omitnil,omitempty" name:"MountInsId"`
 
-	// Local mount target
+	// Local mount point
 	LocalMountDir *string `json:"LocalMountDir,omitnil,omitempty" name:"LocalMountDir"`
 
-	// Remote mount target
+	// Remote mount point.
 	RemoteMountDir *string `json:"RemoteMountDir,omitnil,omitempty" name:"RemoteMountDir"`
 
-	// File system IP, which is not required when you configure CFS.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// File system ip. No need to specify when configuring cfs.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IpAddress *string `json:"IpAddress,omitnil,omitempty" name:"IpAddress"`
 
-	// VPC ID of file system, which is not required when you configure CFS.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// VPC id where the file system is located. Not required when configuring cfs.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MountVpcId *string `json:"MountVpcId,omitnil,omitempty" name:"MountVpcId"`
 
-	// VPC subnet ID of file system, which is not required when you configure CFS.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Subnet id of the private network where the file system resides. Not required when configuring cfs.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MountSubnetId *string `json:"MountSubnetId,omitnil,omitempty" name:"MountSubnetId"`
 }
 
@@ -377,7 +377,7 @@ type CreateNamespaceRequestParams struct {
 	// Namespace description
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-
+	// Resource pool configuration
 	ResourceEnv *NamespaceResourceEnv `json:"ResourceEnv,omitnil,omitempty" name:"ResourceEnv"`
 }
 
@@ -390,6 +390,7 @@ type CreateNamespaceRequest struct {
 	// Namespace description
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
+	// Resource pool configuration
 	ResourceEnv *NamespaceResourceEnv `json:"ResourceEnv,omitnil,omitempty" name:"ResourceEnv"`
 }
 
@@ -438,66 +439,62 @@ func (r *CreateNamespaceResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateTriggerRequestParams struct {
-	// Name of the function bound to the new trigger
+	// Function name bound to the created trigger
 	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
 
-	// Name of a new trigger. For a timer trigger, the name can contain up to 100 letters, digits, dashes, and underscores; for a COS trigger, it should be an access domain name of the corresponding COS bucket applicable to the XML API (e.g., 5401-5ff414-12345.cos.ap-shanghai.myqcloud.com); for other triggers, please see the descriptions of parameters bound to the specific trigger.
+	// Name of the trigger to create. If it is a scheduled trigger, the name supports English letters, digits, hyphens, and underscores, up to 100 characters. If it is a COS trigger, it must be the access domain of the corresponding COS storage bucket suitable for the XML API (for example, 5401-5ff414-12345.cos.ap-shanghai.myqcloud.com). For other triggers, see the parameter description of the specific trigger binding.
 	TriggerName *string `json:"TriggerName,omitnil,omitempty" name:"TriggerName"`
 
-	// Type of trigger. Values: `cos`, `cmq`, `timer`, `ckafka`, `http`. 
-	// To create Function URL please refer to [Creating a Function URL](https://www.tencentcloud.com/document/product/583/69492?lang=en&pg=)
-	// To create a CLS trigger, please refer to [Create Deliver CloudFunction (SCF)](https://www.tencentcloud.com/zh/document/product/614/59903).
+	// Trigger type. Currently supports cos, cls, timer, ckafka, and http types. To create a function URL, please use the http type. See [Creating a Function URL](https://www.tencentcloud.com/document/product/583/100227?from_cn_redirect=1#33bbbda4-9131-48a6-ac37-ac62ffe01424). To create a cls trigger, see CLS Creating Delivery SCF Task.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// For parameters of triggers, see [Trigger Description](https://intl.cloud.tencent.com/document/product/583/39901?from_cn_redirect=1)
+	// Parameters corresponding to the trigger. For details, see [Trigger Description](https://www.tencentcloud.com/document/product/583/39901?from_cn_redirect=1).
 	TriggerDesc *string `json:"TriggerDesc,omitnil,omitempty" name:"TriggerDesc"`
 
-	// Function namespace
+	// Namespace of the function
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Function version. It defaults to `$LATEST`. It's recommended to use [$DEFAULT](https://www.tencentcloud.com/document/product/583/37458?lang=en&pg=) for canary release.
+	// Version or alias that the trigger takes effect on. It is recommended to fill in $DEFAULT for future grayscale release. Default value: $LATEST.
 	Qualifier *string `json:"Qualifier,omitnil,omitempty" name:"Qualifier"`
 
-	// Initial enabling status of the trigger. `OPEN` indicates enabled, and `CLOSE` indicates disabled.
+	// Initial status of the trigger. OPEN means enabling, and CLOSE means disabling.
 	Enable *string `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Custom argument, supporting only the timer trigger.
+	// User-defined parameter. Only timer triggers are supported.
 	CustomArgument *string `json:"CustomArgument,omitnil,omitempty" name:"CustomArgument"`
 
-	// Trigger description
+	// Trigger description.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 type CreateTriggerRequest struct {
 	*tchttp.BaseRequest
 	
-	// Name of the function bound to the new trigger
+	// Function name bound to the created trigger
 	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
 
-	// Name of a new trigger. For a timer trigger, the name can contain up to 100 letters, digits, dashes, and underscores; for a COS trigger, it should be an access domain name of the corresponding COS bucket applicable to the XML API (e.g., 5401-5ff414-12345.cos.ap-shanghai.myqcloud.com); for other triggers, please see the descriptions of parameters bound to the specific trigger.
+	// Name of the trigger to create. If it is a scheduled trigger, the name supports English letters, digits, hyphens, and underscores, up to 100 characters. If it is a COS trigger, it must be the access domain of the corresponding COS storage bucket suitable for the XML API (for example, 5401-5ff414-12345.cos.ap-shanghai.myqcloud.com). For other triggers, see the parameter description of the specific trigger binding.
 	TriggerName *string `json:"TriggerName,omitnil,omitempty" name:"TriggerName"`
 
-	// Type of trigger. Values: `cos`, `cmq`, `timer`, `ckafka`, `http`. 
-	// To create Function URL please refer to [Creating a Function URL](https://www.tencentcloud.com/document/product/583/69492?lang=en&pg=)
-	// To create a CLS trigger, please refer to [Create Deliver CloudFunction (SCF)](https://www.tencentcloud.com/zh/document/product/614/59903).
+	// Trigger type. Currently supports cos, cls, timer, ckafka, and http types. To create a function URL, please use the http type. See [Creating a Function URL](https://www.tencentcloud.com/document/product/583/100227?from_cn_redirect=1#33bbbda4-9131-48a6-ac37-ac62ffe01424). To create a cls trigger, see CLS Creating Delivery SCF Task.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// For parameters of triggers, see [Trigger Description](https://intl.cloud.tencent.com/document/product/583/39901?from_cn_redirect=1)
+	// Parameters corresponding to the trigger. For details, see [Trigger Description](https://www.tencentcloud.com/document/product/583/39901?from_cn_redirect=1).
 	TriggerDesc *string `json:"TriggerDesc,omitnil,omitempty" name:"TriggerDesc"`
 
-	// Function namespace
+	// Namespace of the function
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Function version. It defaults to `$LATEST`. It's recommended to use [$DEFAULT](https://www.tencentcloud.com/document/product/583/37458?lang=en&pg=) for canary release.
+	// Version or alias that the trigger takes effect on. It is recommended to fill in $DEFAULT for future grayscale release. Default value: $LATEST.
 	Qualifier *string `json:"Qualifier,omitnil,omitempty" name:"Qualifier"`
 
-	// Initial enabling status of the trigger. `OPEN` indicates enabled, and `CLOSE` indicates disabled.
+	// Initial status of the trigger. OPEN means enabling, and CLOSE means disabling.
 	Enable *string `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Custom argument, supporting only the timer trigger.
+	// User-defined parameter. Only timer triggers are supported.
 	CustomArgument *string `json:"CustomArgument,omitnil,omitempty" name:"CustomArgument"`
 
-	// Trigger description
+	// Trigger description.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
@@ -530,7 +527,7 @@ func (r *CreateTriggerRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateTriggerResponseParams struct {
-	// Trigger information
+	// Trigger information.
 	TriggerInfo *Trigger `json:"TriggerInfo,omitnil,omitempty" name:"TriggerInfo"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -560,7 +557,7 @@ type DeadLetterConfig struct {
 	// Dead letter queue name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Tag form of a dead letter queue topic mode
+	// Tag format of the DLQ topic model
 	FilterType *string `json:"FilterType,omitnil,omitempty" name:"FilterType"`
 }
 
@@ -949,19 +946,19 @@ type DeleteTriggerRequestParams struct {
 	// Function name
 	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
 
-	// Name of the trigger to be deleted
+	// Trigger name to delete
 	TriggerName *string `json:"TriggerName,omitnil,omitempty" name:"TriggerName"`
 
-	// Type of the trigger to be deleted. Currently, COS, CMQ, timer, and ckafka triggers are supported.
+	// Trigger type to delete. Currently only `timer`, `ckafka`, `apigw`, `cls`, `cos`, `cmq`, and `http` are supported.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Function namespace
+	// Namespace of the function
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// This field is required if a COS trigger is to be deleted. It stores the data {"event":"cos:ObjectCreated:*"} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+	// If the trigger type to delete is COS trigger, this field must be specified, storing data in JSON format {"event":"cos:ObjectCreated:*"}. The data content is in the same format as this field in the SetTrigger API. If the trigger type to delete is scheduled trigger or CMQ trigger, this field can be unspecified.
 	TriggerDesc *string `json:"TriggerDesc,omitnil,omitempty" name:"TriggerDesc"`
 
-	// Function version. It defaults to `$LATEST`. It's recommended to use `[$DEFAULT](https://www.tencentcloud.com/document/product/583/37458#glossary)` for canary release.
+	// The version or alias that the trigger to be deleted actually points to. Default value: $LATEST.
 	Qualifier *string `json:"Qualifier,omitnil,omitempty" name:"Qualifier"`
 }
 
@@ -971,19 +968,19 @@ type DeleteTriggerRequest struct {
 	// Function name
 	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
 
-	// Name of the trigger to be deleted
+	// Trigger name to delete
 	TriggerName *string `json:"TriggerName,omitnil,omitempty" name:"TriggerName"`
 
-	// Type of the trigger to be deleted. Currently, COS, CMQ, timer, and ckafka triggers are supported.
+	// Trigger type to delete. Currently only `timer`, `ckafka`, `apigw`, `cls`, `cos`, `cmq`, and `http` are supported.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Function namespace
+	// Namespace of the function
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// This field is required if a COS trigger is to be deleted. It stores the data {"event":"cos:ObjectCreated:*"} in the JSON format. The data content of this field is in the same format as that of SetTrigger. This field is optional if a scheduled trigger or CMQ trigger is to be deleted.
+	// If the trigger type to delete is COS trigger, this field must be specified, storing data in JSON format {"event":"cos:ObjectCreated:*"}. The data content is in the same format as this field in the SetTrigger API. If the trigger type to delete is scheduled trigger or CMQ trigger, this field can be unspecified.
 	TriggerDesc *string `json:"TriggerDesc,omitnil,omitempty" name:"TriggerDesc"`
 
-	// Function version. It defaults to `$LATEST`. It's recommended to use `[$DEFAULT](https://www.tencentcloud.com/document/product/583/37458#glossary)` for canary release.
+	// The version or alias that the trigger to be deleted actually points to. Default value: $LATEST.
 	Qualifier *string `json:"Qualifier,omitnil,omitempty" name:"Qualifier"`
 }
 
@@ -1034,7 +1031,7 @@ func (r *DeleteTriggerResponse) FromJsonString(s string) error {
 }
 
 type EipConfigIn struct {
-	// Status of the EIP. Values: ['ENABLE','DISABLE']
+	// Eip status. Valid values: `ENABLE` and `DISABLE`
 	EipStatus *string `json:"EipStatus,omitnil,omitempty" name:"EipStatus"`
 }
 
@@ -1108,37 +1105,37 @@ type Function struct {
 }
 
 type FunctionLog struct {
-	// Function name
+	// Function name.
 	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
 
-	// Return value after the function is executed
+	// Returned value after function execution
 	RetMsg *string `json:"RetMsg,omitnil,omitempty" name:"RetMsg"`
 
-	// RequestId corresponding to the executed function
+	// requestId for executing the function
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 
-	// Start time of the function execution
+	// Time point when the function starts execution
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Function execution result. `0` indicates successful execution and other values indicate failure.
+	// Function execution result. 0 indicates successful execution, 2 indicates the function is running, 3 indicates an execution interrupt, and other values indicate failure.
 	RetCode *int64 `json:"RetCode,omitnil,omitempty" name:"RetCode"`
 
-	// It specifies whether the function invocation is finished. `1` indicates execution completion and other values indicate that exceptions occurred during the invocation.
+	// Whether the function call ends. If so, 1 means execution ended, and additional values indicate a call exception.
 	InvokeFinished *int64 `json:"InvokeFinished,omitnil,omitempty" name:"InvokeFinished"`
 
-	// Duration of the function execution. The unit is millisecond (ms).
+	// Function execution duration in milliseconds.
 	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
-	// Function billing duration. The unit is millisecond (ms). The value is rounded up to a multiple of 100 ms.
+	// Billing duration of a function. It is rounded up to the nearest 100 ms based on the duration, in ms.
 	BillDuration *int64 `json:"BillDuration,omitnil,omitempty" name:"BillDuration"`
 
-	// Actual memory size used during the function execution. The unit is byte.
+	// Memory size actually consumed during function execution, in bytes.
 	MemUsage *int64 `json:"MemUsage,omitnil,omitempty" name:"MemUsage"`
 
-	// Function execution logs
+	// Log output during function execution
 	Log *string `json:"Log,omitnil,omitempty" name:"Log"`
 
-	// Log level
+	// Log level.
 	//
 	// Deprecated: Level is deprecated.
 	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
@@ -1148,7 +1145,7 @@ type FunctionLog struct {
 	// Deprecated: Source is deprecated.
 	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
 
-	// Number of retries
+	// Number of retries.
 	RetryNum *uint64 `json:"RetryNum,omitnil,omitempty" name:"RetryNum"`
 }
 
@@ -1524,41 +1521,41 @@ func (r *GetFunctionEventInvokeConfigResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetFunctionLogsRequestParams struct {
 	// Function name.
-	// - To ensure the compatibility of the [`GetFunctionLogs`](https://intl.cloud.tencent.com/document/product/583/18583) API, the input parameter `FunctionName` is optional, but we recommend you enter it; otherwise, log acquisition may fail.
-	// - After the function is connected to CLS, we recommend you use the [related CLS API](https://intl.cloud.tencent.com/document/product/614/16875) to get the best log retrieval experience.
+	// -To ensure compatibility of the [retrieve function execution log](https://www.tencentcloud.com/document/product/583/18583?from_cn_redirect=1) API `GetFunctionLogs`, the input parameter `FunctionName` remains an optional field, but it is recommended to fill in this parameter. Otherwise, log acquisition failure may occur.
+	// - After associating a function with CLS, it is recommended to use the relevant CLS APIs (https://www.tencentcloud.com/document/product/614/16875?from_cn_redirect=1) to get the best log retrieval experience.
 	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
 
-	// Data offset. The addition of `Offset` and `Limit` cannot exceed 10,000.
+	// Offset of the data. Offset + Limit cannot be greater than 10000.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Length of the return data. The addition of `Offset` and `Limit` cannot exceed 10,000.
+	// Length of the returned data. Offset + Limit cannot be greater than 10000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// It specifies whether to sort the logs in an ascending or descending order. The value is `desc` or `asc`.
+	// Whether to sort logs in descending or ascending order. Available values: `desc` and `asc`.
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// It specifies the sorting order of the logs based on a specified field, such as `function_name`, `duration`, `mem_usage`, and `start_time`.
+	// Sort logs by a certain field. The following fields are supported: function_name, duration, mem_usage, start_time
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Log filter used to identify whether to return logs of successful or failed requests. `filter.RetCode=not0` indicates that only the logs of failed requests will be returned. `filter.RetCode=is0` indicates that only the logs of successful requests will be returned. If this parameter is left blank, all logs will be returned. 
+	// Log filter criteria. It can be used to distinguish correct and error logs. filter.RetCode=not0 means only return error logs, filter.RetCode=is0 means only return correct logs. If not passed, all logs are returned.
 	Filter *LogFilter `json:"Filter,omitnil,omitempty" name:"Filter"`
 
-	// Function namespace
+	// Namespace of the function
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
 	// Function version
 	Qualifier *string `json:"Qualifier,omitnil,omitempty" name:"Qualifier"`
 
-	// RequestId corresponding to the executed function
+	// Request ID for executing the function
 	FunctionRequestId *string `json:"FunctionRequestId,omitnil,omitempty" name:"FunctionRequestId"`
 
-	// Query date, for example, 2017-05-16 20:00:00. The date must be within one day of the end time.
+	// Specific date of the query, for example: 2017-05-16 20:00:00. It must differ from endtime by no more than one day.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Query date, for example, 2017-05-16 20:59:59. The date must be within one day of the start time.
+	// Specific date of the query, for example: 2017-05-16 20:59:59. It must differ from startTime by no more than one day.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// This field is disused.
+	// This field is offline.
 	SearchContext *LogSearchContext `json:"SearchContext,omitnil,omitempty" name:"SearchContext"`
 }
 
@@ -1566,41 +1563,41 @@ type GetFunctionLogsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Function name.
-	// - To ensure the compatibility of the [`GetFunctionLogs`](https://intl.cloud.tencent.com/document/product/583/18583) API, the input parameter `FunctionName` is optional, but we recommend you enter it; otherwise, log acquisition may fail.
-	// - After the function is connected to CLS, we recommend you use the [related CLS API](https://intl.cloud.tencent.com/document/product/614/16875) to get the best log retrieval experience.
+	// -To ensure compatibility of the [retrieve function execution log](https://www.tencentcloud.com/document/product/583/18583?from_cn_redirect=1) API `GetFunctionLogs`, the input parameter `FunctionName` remains an optional field, but it is recommended to fill in this parameter. Otherwise, log acquisition failure may occur.
+	// - After associating a function with CLS, it is recommended to use the relevant CLS APIs (https://www.tencentcloud.com/document/product/614/16875?from_cn_redirect=1) to get the best log retrieval experience.
 	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
 
-	// Data offset. The addition of `Offset` and `Limit` cannot exceed 10,000.
+	// Offset of the data. Offset + Limit cannot be greater than 10000.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Length of the return data. The addition of `Offset` and `Limit` cannot exceed 10,000.
+	// Length of the returned data. Offset + Limit cannot be greater than 10000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// It specifies whether to sort the logs in an ascending or descending order. The value is `desc` or `asc`.
+	// Whether to sort logs in descending or ascending order. Available values: `desc` and `asc`.
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// It specifies the sorting order of the logs based on a specified field, such as `function_name`, `duration`, `mem_usage`, and `start_time`.
+	// Sort logs by a certain field. The following fields are supported: function_name, duration, mem_usage, start_time
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-	// Log filter used to identify whether to return logs of successful or failed requests. `filter.RetCode=not0` indicates that only the logs of failed requests will be returned. `filter.RetCode=is0` indicates that only the logs of successful requests will be returned. If this parameter is left blank, all logs will be returned. 
+	// Log filter criteria. It can be used to distinguish correct and error logs. filter.RetCode=not0 means only return error logs, filter.RetCode=is0 means only return correct logs. If not passed, all logs are returned.
 	Filter *LogFilter `json:"Filter,omitnil,omitempty" name:"Filter"`
 
-	// Function namespace
+	// Namespace of the function
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
 	// Function version
 	Qualifier *string `json:"Qualifier,omitnil,omitempty" name:"Qualifier"`
 
-	// RequestId corresponding to the executed function
+	// Request ID for executing the function
 	FunctionRequestId *string `json:"FunctionRequestId,omitnil,omitempty" name:"FunctionRequestId"`
 
-	// Query date, for example, 2017-05-16 20:00:00. The date must be within one day of the end time.
+	// Specific date of the query, for example: 2017-05-16 20:00:00. It must differ from endtime by no more than one day.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Query date, for example, 2017-05-16 20:59:59. The date must be within one day of the start time.
+	// Specific date of the query, for example: 2017-05-16 20:59:59. It must differ from startTime by no more than one day.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// This field is disused.
+	// This field is offline.
 	SearchContext *LogSearchContext `json:"SearchContext,omitnil,omitempty" name:"SearchContext"`
 }
 
@@ -1642,7 +1639,7 @@ type GetFunctionLogsResponseParams struct {
 	// Function log information
 	Data []*FunctionLog `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// This field is disused.
+	// This field is offline.
 	SearchContext *LogSearchContext `json:"SearchContext,omitnil,omitempty" name:"SearchContext"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2017,6 +2014,33 @@ type ImageConfig struct {
 	ImagePort *int64 `json:"ImagePort,omitnil,omitempty" name:"ImagePort"`
 }
 
+type InstanceConcurrencyConfig struct {
+	// Whether intelligent dynamic concurrency is enabled. If set to `FALSE`, static concurrency is used. If set to `''`, the multi-concurrency configuration is canceled.
+	DynamicEnabled *string `json:"DynamicEnabled,omitnil,omitempty" name:"DynamicEnabled"`
+
+	// Maximum number of concurrent requests per instance. Value range: [1,100]
+	MaxConcurrency *uint64 `json:"MaxConcurrency,omitnil,omitempty" name:"MaxConcurrency"`
+
+	// Safety isolation switch
+	InstanceIsolationEnabled *string `json:"InstanceIsolationEnabled,omitnil,omitempty" name:"InstanceIsolationEnabled"`
+
+	// Session-Based or Request-Based. Choose one.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Dynamic concurrency parameter
+	MixNodeConfig []*MixNodeConfig `json:"MixNodeConfig,omitnil,omitempty" name:"MixNodeConfig"`
+
+	// Session configuration parameters
+	SessionConfig *SessionConfig `json:"SessionConfig,omitnil,omitempty" name:"SessionConfig"`
+}
+
+type IntranetConfigIn struct {
+	// Whether a fixed private IP address is enabled
+	// ENABLE: enable
+	// DISABLE means not enabled.
+	IpFixed *string `json:"IpFixed,omitnil,omitempty" name:"IpFixed"`
+}
+
 // Predefined struct for user
 type InvokeFunctionRequestParams struct {
 	// Function name
@@ -2209,27 +2233,27 @@ func (r *InvokeResponse) FromJsonString(s string) error {
 }
 
 type K8SLabel struct {
-
+	// Name of the label
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-
+	// Value of the label
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type K8SToleration struct {
-
+	// Matched taint name
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-
+	// Match mode. Default value: Equal.
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
-
+	// Execution policy
 	Effect *string `json:"Effect,omitnil,omitempty" name:"Effect"`
 
-
+	// Taint value to match. Required when Operator is Equal.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 
-
+	// How long a Pod can still run on a node when the taint is not tolerated
 	TolerationSeconds *uint64 `json:"TolerationSeconds,omitnil,omitempty" name:"TolerationSeconds"`
 }
 
@@ -2264,10 +2288,10 @@ type LayerVersionInfo struct {
 }
 
 type LayerVersionSimple struct {
-	// Name of the layer to bind. Leave it blank if you want to unbind layers
+	// Name of the bound layer. Pass an empty string to unbind the layer.
 	LayerName *string `json:"LayerName,omitnil,omitempty" name:"LayerName"`
 
-	// Version ID f the layer to bind/unbind. If the layer version to unbind is the only layer version of the function version, enter `0`.
+	// Bind or unbind a layer version. To unbind the last layer version associated with a function version, set LayerVersion to 0.
 	LayerVersion *int64 `json:"LayerVersion,omitnil,omitempty" name:"LayerVersion"`
 }
 
@@ -3060,13 +3084,13 @@ func (r *ListVersionByFunctionResponse) FromJsonString(s string) error {
 }
 
 type LogFilter struct {
-	// Values of `filter.RetCode` include:
-	// not0, indicating that only logs of failed execution will be returned.
-	// is0, indicating that only logs of successful execution will be returned.
-	// TimeLimitExceeded, indicating that logs of function invocations which timed out will be returned.
-	// ResourceLimitExceeded, indicating that logs of function invocations during which resources exceeded the upper limit will be returned.
-	// UserCodeException, indicating that logs of function invocations during which a user code error occurred will be returned.
-	// Blank, indicating that all logs will be returned.
+	// Valid values of filter.RetCode:
+	// not0 means only error logs are returned.
+	// is0 means only return correct logs.
+	// TimeLimitExceeded returns the logs of function call timed out.
+	// ResourceLimitExceeded returns the logs of resource limit exceeded during function calls.
+	// UserCodeException returns the logs of user code errors in function calls.
+	// If there is no input, all logs are returned.
 	RetCode *string `json:"RetCode,omitnil,omitempty" name:"RetCode"`
 }
 
@@ -3074,14 +3098,22 @@ type LogSearchContext struct {
 	// Offset.
 	Offset *string `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Log record number
+	// Number of logs.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Log keyword
 	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
 
-	// Log type. The value is `Application` (default) or `Platform`.
+	// Log type. Valid values: `Application`, `Platform`. Default value: `Application`.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+type MixNodeConfig struct {
+	// GPU model name
+	NodeSpec *string `json:"NodeSpec,omitnil,omitempty" name:"NodeSpec"`
+
+	// Number of concurrencies
+	Num *uint64 `json:"Num,omitnil,omitempty" name:"Num"`
 }
 
 type Namespace struct {
@@ -3135,36 +3167,39 @@ type NamespaceLimit struct {
 }
 
 type NamespaceResourceEnv struct {
-
+	// Resource pool based on a TKE cluster
 	TKE *NamespaceResourceEnvTKE `json:"TKE,omitnil,omitempty" name:"TKE"`
 
-
+	// Namespace of the near-offline computing type
 	OFFLINE *bool `json:"OFFLINE,omitnil,omitempty" name:"OFFLINE"`
 }
 
 type NamespaceResourceEnvTKE struct {
-
+	// Cluster ID
 	ClusterID *string `json:"ClusterID,omitnil,omitempty" name:"ClusterID"`
 
-
+	// Subnet ID.
 	SubnetID *string `json:"SubnetID,omitnil,omitempty" name:"SubnetID"`
 
-
+	// Namespace
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-
+	// Data storage address
 	DataPath *string `json:"DataPath,omitnil,omitempty" name:"DataPath"`
 
-
+	// node selector
 	NodeSelector []*K8SLabel `json:"NodeSelector,omitnil,omitempty" name:"NodeSelector"`
 
-
+	// Taint and toleration
 	Tolerations []*K8SToleration `json:"Tolerations,omitnil,omitempty" name:"Tolerations"`
 
-
+	// Starting node port number occupied by the scf component
 	Port *uint64 `json:"Port,omitnil,omitempty" name:"Port"`
 
-
+	// pod patch content in yaml format, for example
+	// metadata:
+	//   labels:
+	//     key: value
 	PodTemplatePatch *string `json:"PodTemplatePatch,omitnil,omitempty" name:"PodTemplatePatch"`
 }
 
@@ -3192,16 +3227,15 @@ type NamespaceUsage struct {
 }
 
 type ProtocolParams struct {
-	// Parameters of WebSockets protocol
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Supported parameters of the WebSockets protocol
 	WSParams *WSParams `json:"WSParams,omitnil,omitempty" name:"WSParams"`
 }
 
 type PublicNetConfigIn struct {
-	// Whether to enable public network access. Valid values: ['DISABLE', 'ENABLE']
+	// Whether to enable public network access. Valid values: DISABLE, ENABLE.
 	PublicNetStatus *string `json:"PublicNetStatus,omitnil,omitempty" name:"PublicNetStatus"`
 
-	// EIP configuration
+	// Eip configuration
 	EipConfig *EipConfigIn `json:"EipConfig,omitnil,omitempty" name:"EipConfig"`
 }
 
@@ -3705,6 +3739,29 @@ type SearchKey struct {
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
+type SessionConfig struct {
+	// session source. Valid values: 'HEADER', 'COOKIE', 'QUERY_STRING'
+	SessionSource *string `json:"SessionSource,omitnil,omitempty" name:"SessionSource"`
+
+	// session name. It must start with a letter. Other characters can consist of digits, letters, underscores, and hyphens. Length: 5-40 characters.
+	SessionName *string `json:"SessionName,omitnil,omitempty" name:"SessionName"`
+
+	// Maximum concurrent sessions
+	MaximumConcurrencySessionPerInstance *uint64 `json:"MaximumConcurrencySessionPerInstance,omitnil,omitempty" name:"MaximumConcurrencySessionPerInstance"`
+
+	// Lifecycle
+	MaximumTTLInSeconds *uint64 `json:"MaximumTTLInSeconds,omitnil,omitempty" name:"MaximumTTLInSeconds"`
+
+	// Idle duration
+	MaximumIdleTimeInSeconds *uint64 `json:"MaximumIdleTimeInSeconds,omitnil,omitempty" name:"MaximumIdleTimeInSeconds"`
+
+	// Path information corresponding to the session
+	SessionPath *string `json:"SessionPath,omitnil,omitempty" name:"SessionPath"`
+
+	// Automatically destroy FATAL and auto-pause PAUSE. This only occurs when security isolation is started.
+	IdleTimeoutStrategy *string `json:"IdleTimeoutStrategy,omitnil,omitempty" name:"IdleTimeoutStrategy"`
+}
+
 type StatusReason struct {
 	// Error code
 	ErrorCode *string `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
@@ -3805,49 +3862,49 @@ type TimeInterval struct {
 }
 
 type Trigger struct {
-	// Latest modification time of the trigger
+	// Last modification time of the trigger
 	ModTime *string `json:"ModTime,omitnil,omitempty" name:"ModTime"`
 
 	// Trigger type
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Detailed trigger configuration
+	// Trigger detailed configuration
 	TriggerDesc *string `json:"TriggerDesc,omitnil,omitempty" name:"TriggerDesc"`
 
-	// Trigger name
+	// Trigger name.
 	TriggerName *string `json:"TriggerName,omitnil,omitempty" name:"TriggerName"`
 
-	// Creation time of the trigger
+	// Trigger creation time
 	AddTime *string `json:"AddTime,omitnil,omitempty" name:"AddTime"`
 
-	// Enabling switch
+	// Enable switch
 	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 
-	// Custom parameter
+	// Customer custom parameter
 	CustomArgument *string `json:"CustomArgument,omitnil,omitempty" name:"CustomArgument"`
 
 	// Trigger status
 	AvailableStatus *string `json:"AvailableStatus,omitnil,omitempty" name:"AvailableStatus"`
 
-	// Minimum resource ID of trigger
+	// Minimum resource ID of the trigger
 	//
 	// Deprecated: ResourceId is deprecated.
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
-	// Trigger-Function binding status
+	// Binding status of the trigger and SCF
 	//
 	// Deprecated: BindStatus is deprecated.
 	BindStatus *string `json:"BindStatus,omitnil,omitempty" name:"BindStatus"`
 
-	// Trigger type. Two-way means that the trigger can be manipulated in both consoles, while one-way means that the trigger can be created only in the SCF Console
+	// Trigger type. Two-way means both the left and right consoles can operate. One-way means only the SCF console can create.
 	//
 	// Deprecated: TriggerAttribute is deprecated.
 	TriggerAttribute *string `json:"TriggerAttribute,omitnil,omitempty" name:"TriggerAttribute"`
 
-	// The alias or version bound with the trigger
+	// Alias name or version bound to the trigger
 	Qualifier *string `json:"Qualifier,omitnil,omitempty" name:"Qualifier"`
 
-	// Trigger description
+	// Trigger description.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
@@ -4179,129 +4236,155 @@ func (r *UpdateFunctionCodeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdateFunctionConfigurationRequestParams struct {
-	// Name of the function to be modified
+	// The function name to be modified
 	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
 
-	// Function description. It can contain up to 1,000 characters, including letters, digits, spaces, commas (,), periods (.), and Chinese characters.
+	// Function description. Supports up to 1,000 English letters, digits, spaces, commas, and periods. Chinese is supported.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128-3,072 MB in increments of 128 MB.
+	// Memory size of the function runtime. Default value: 128 MB. Selectable range: 64 MB, or 128 MB to 3072 MB in 128 MB increments.
 	MemorySize *int64 `json:"MemorySize,omitnil,omitempty" name:"MemorySize"`
 
-	// Maximum execution duration of function in seconds. Value range: 1-900 seconds. Default value: 3 seconds
+	// Maximum execution time of the function, in seconds. Value range: 1-900 seconds. Default value: 3 seconds.
 	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
-	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Go1, Java8, CustomRuntime
+	// Runtime environment. It is specified upon creation and currently does not support modification.
 	Runtime *string `json:"Runtime,omitnil,omitempty" name:"Runtime"`
 
-	// Function environment variable
+	// Environment variable of the function
 	Environment *Environment `json:"Environment,omitnil,omitempty" name:"Environment"`
 
-	// Function namespace
+	// Namespace of the function
+	// Default value: default
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Function VPC configuration
+	// VPC configuration of the function
 	VpcConfig *VpcConfig `json:"VpcConfig,omitnil,omitempty" name:"VpcConfig"`
 
-	// Role bound to the function
+	// Role bound to a function
 	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
 
-	// Specifies whether to [install dependency online](https://intl.cloud.tencent.com/document/product/583/37920?from_cn_redirect=1). `TRUE`: yes. Default to `FALSE`. It is only available for Node.js functions.
+	// [Install dependency online](https://www.tencentcloud.com/document/product/583/37920?from_cn_redirect=1). TRUE indicates installation. Default value: FALSE. Only supported for Node.js functions.
 	InstallDependency *string `json:"InstallDependency,omitnil,omitempty" name:"InstallDependency"`
 
-	// CLS logset ID to which logs are shipped
+	// ID of the cls Log Set for log delivery
 	ClsLogsetId *string `json:"ClsLogsetId,omitnil,omitempty" name:"ClsLogsetId"`
 
-	// CLS Topic ID to which logs are shipped
+	// cls Topic ID for log delivery
 	ClsTopicId *string `json:"ClsTopicId,omitnil,omitempty" name:"ClsTopicId"`
 
-	// It specifies whether to synchronously publish a new version during the update. The default value is `FALSE`, indicating not to publish a new version
+	// Whether to release a new version synchronously when updating. Default value: FALSE, which means no new version is released.
 	Publish *string `json:"Publish,omitnil,omitempty" name:"Publish"`
 
-	// Whether to enable L5 access. TRUE: enable; FALSE: not enable
+	// Whether L5 access capability is enabled. TRUE to enable, FALSE to shutdown.
 	L5Enable *string `json:"L5Enable,omitnil,omitempty" name:"L5Enable"`
 
-	// List of layer versions that bound with the function. Files with the same name will be overridden by the bound layer versions according to the ascending order in the list. 
+	// List of layer versions to associate with the function. The layer versions overwrite each other sequentially in the order in the list.
 	Layers []*LayerVersionSimple `json:"Layers,omitnil,omitempty" name:"Layers"`
 
-	// Information of a dead letter queue associated with a function
+	// Dead letter queue information associated with the function
 	DeadLetterConfig *DeadLetterConfig `json:"DeadLetterConfig,omitnil,omitempty" name:"DeadLetterConfig"`
 
 	// Public network access configuration
 	PublicNetConfig *PublicNetConfigIn `json:"PublicNetConfig,omitnil,omitempty" name:"PublicNetConfig"`
 
-	// File system configuration input parameter, which is used for the function to bind the CFS file system
+	// File system configuration parameters for binding a CFS file system in SCF
 	CfsConfig *CfsConfig `json:"CfsConfig,omitnil,omitempty" name:"CfsConfig"`
 
-	// The function initialization timeout period
+	// Function initialization timeout period
 	InitTimeout *int64 `json:"InitTimeout,omitnil,omitempty" name:"InitTimeout"`
 
-	// Parameters of the specified protocol
+	// Configure ProtocolType access protocol for an HTTP function. Parameters configurable for the current protocol.
 	ProtocolParams *ProtocolParams `json:"ProtocolParams,omitnil,omitempty" name:"ProtocolParams"`
+
+	// Single-instance multi-concurrency configuration. Supports only Web functions.
+	InstanceConcurrencyConfig *InstanceConcurrencyConfig `json:"InstanceConcurrencyConfig,omitnil,omitempty" name:"InstanceConcurrencyConfig"`
+
+	// Whether the Dns caching capability is enabled. Supports only the EVENT function. Defaults to FALSE. TRUE to enable, FALSE to shutdown.
+	DnsCache *string `json:"DnsCache,omitnil,omitempty" name:"DnsCache"`
+
+	// Private network access configuration
+	IntranetConfig *IntranetConfigIn `json:"IntranetConfig,omitnil,omitempty" name:"IntranetConfig"`
+
+	// Ignorable system log reporting
+	IgnoreSysLog *bool `json:"IgnoreSysLog,omitnil,omitempty" name:"IgnoreSysLog"`
 }
 
 type UpdateFunctionConfigurationRequest struct {
 	*tchttp.BaseRequest
 	
-	// Name of the function to be modified
+	// The function name to be modified
 	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
 
-	// Function description. It can contain up to 1,000 characters, including letters, digits, spaces, commas (,), periods (.), and Chinese characters.
+	// Function description. Supports up to 1,000 English letters, digits, spaces, commas, and periods. Chinese is supported.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Memory size available for function during execution. Default value: 128 MB. Value range: 64 or 128-3,072 MB in increments of 128 MB.
+	// Memory size of the function runtime. Default value: 128 MB. Selectable range: 64 MB, or 128 MB to 3072 MB in 128 MB increments.
 	MemorySize *int64 `json:"MemorySize,omitnil,omitempty" name:"MemorySize"`
 
-	// Maximum execution duration of function in seconds. Value range: 1-900 seconds. Default value: 3 seconds
+	// Maximum execution time of the function, in seconds. Value range: 1-900 seconds. Default value: 3 seconds.
 	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
-	// Function runtime environment. Valid values: Python2.7, Python3.6, Nodejs6.10, Nodejs8.9, Nodejs10.15, Nodejs12.16, PHP5, PHP7, Go1, Java8, CustomRuntime
+	// Runtime environment. It is specified upon creation and currently does not support modification.
 	Runtime *string `json:"Runtime,omitnil,omitempty" name:"Runtime"`
 
-	// Function environment variable
+	// Environment variable of the function
 	Environment *Environment `json:"Environment,omitnil,omitempty" name:"Environment"`
 
-	// Function namespace
+	// Namespace of the function
+	// Default value: default
 	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
-	// Function VPC configuration
+	// VPC configuration of the function
 	VpcConfig *VpcConfig `json:"VpcConfig,omitnil,omitempty" name:"VpcConfig"`
 
-	// Role bound to the function
+	// Role bound to a function
 	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
 
-	// Specifies whether to [install dependency online](https://intl.cloud.tencent.com/document/product/583/37920?from_cn_redirect=1). `TRUE`: yes. Default to `FALSE`. It is only available for Node.js functions.
+	// [Install dependency online](https://www.tencentcloud.com/document/product/583/37920?from_cn_redirect=1). TRUE indicates installation. Default value: FALSE. Only supported for Node.js functions.
 	InstallDependency *string `json:"InstallDependency,omitnil,omitempty" name:"InstallDependency"`
 
-	// CLS logset ID to which logs are shipped
+	// ID of the cls Log Set for log delivery
 	ClsLogsetId *string `json:"ClsLogsetId,omitnil,omitempty" name:"ClsLogsetId"`
 
-	// CLS Topic ID to which logs are shipped
+	// cls Topic ID for log delivery
 	ClsTopicId *string `json:"ClsTopicId,omitnil,omitempty" name:"ClsTopicId"`
 
-	// It specifies whether to synchronously publish a new version during the update. The default value is `FALSE`, indicating not to publish a new version
+	// Whether to release a new version synchronously when updating. Default value: FALSE, which means no new version is released.
 	Publish *string `json:"Publish,omitnil,omitempty" name:"Publish"`
 
-	// Whether to enable L5 access. TRUE: enable; FALSE: not enable
+	// Whether L5 access capability is enabled. TRUE to enable, FALSE to shutdown.
 	L5Enable *string `json:"L5Enable,omitnil,omitempty" name:"L5Enable"`
 
-	// List of layer versions that bound with the function. Files with the same name will be overridden by the bound layer versions according to the ascending order in the list. 
+	// List of layer versions to associate with the function. The layer versions overwrite each other sequentially in the order in the list.
 	Layers []*LayerVersionSimple `json:"Layers,omitnil,omitempty" name:"Layers"`
 
-	// Information of a dead letter queue associated with a function
+	// Dead letter queue information associated with the function
 	DeadLetterConfig *DeadLetterConfig `json:"DeadLetterConfig,omitnil,omitempty" name:"DeadLetterConfig"`
 
 	// Public network access configuration
 	PublicNetConfig *PublicNetConfigIn `json:"PublicNetConfig,omitnil,omitempty" name:"PublicNetConfig"`
 
-	// File system configuration input parameter, which is used for the function to bind the CFS file system
+	// File system configuration parameters for binding a CFS file system in SCF
 	CfsConfig *CfsConfig `json:"CfsConfig,omitnil,omitempty" name:"CfsConfig"`
 
-	// The function initialization timeout period
+	// Function initialization timeout period
 	InitTimeout *int64 `json:"InitTimeout,omitnil,omitempty" name:"InitTimeout"`
 
-	// Parameters of the specified protocol
+	// Configure ProtocolType access protocol for an HTTP function. Parameters configurable for the current protocol.
 	ProtocolParams *ProtocolParams `json:"ProtocolParams,omitnil,omitempty" name:"ProtocolParams"`
+
+	// Single-instance multi-concurrency configuration. Supports only Web functions.
+	InstanceConcurrencyConfig *InstanceConcurrencyConfig `json:"InstanceConcurrencyConfig,omitnil,omitempty" name:"InstanceConcurrencyConfig"`
+
+	// Whether the Dns caching capability is enabled. Supports only the EVENT function. Defaults to FALSE. TRUE to enable, FALSE to shutdown.
+	DnsCache *string `json:"DnsCache,omitnil,omitempty" name:"DnsCache"`
+
+	// Private network access configuration
+	IntranetConfig *IntranetConfigIn `json:"IntranetConfig,omitnil,omitempty" name:"IntranetConfig"`
+
+	// Ignorable system log reporting
+	IgnoreSysLog *bool `json:"IgnoreSysLog,omitnil,omitempty" name:"IgnoreSysLog"`
 }
 
 func (r *UpdateFunctionConfigurationRequest) ToJsonString() string {
@@ -4336,6 +4419,10 @@ func (r *UpdateFunctionConfigurationRequest) FromJsonString(s string) error {
 	delete(f, "CfsConfig")
 	delete(f, "InitTimeout")
 	delete(f, "ProtocolParams")
+	delete(f, "InstanceConcurrencyConfig")
+	delete(f, "DnsCache")
+	delete(f, "IntranetConfig")
+	delete(f, "IgnoreSysLog")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateFunctionConfigurationRequest has unknown keys!", "")
 	}
@@ -4607,10 +4694,10 @@ type UsageInfo struct {
 }
 
 type Variable struct {
-	// Variable name
+	// Variable name. Cannot be empty.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// Variable value
+	// Variable value. Cannot be empty.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
@@ -4665,15 +4752,14 @@ type VersionWeight struct {
 }
 
 type VpcConfig struct {
-	// VPC ID
+	// Id of the private network
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Subnet ID
+	// Subnet Id
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 }
 
 type WSParams struct {
-	// Idle timeout period in seconds. Default: 15; range: 1 to 1800
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Idle timeout in seconds. Default value: 15s. Configurable range: 1-1800s.
 	IdleTimeOut *uint64 `json:"IdleTimeOut,omitnil,omitempty" name:"IdleTimeOut"`
 }

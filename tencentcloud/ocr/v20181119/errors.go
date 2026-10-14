@@ -17,13 +17,16 @@ package v20181119
 const (
 	// error codes for specific actions
 
+	// Token expired
+	AUTHFAILURE_SIGNATUREEXPIRE = "AuthFailure.SignatureExpire"
+
 	// The CardSide type of the ID card is incorrect.
 	FAILEDOPERATION_CARDSIDEERROR = "FailedOperation.CardSideError"
 
-	// Failed to download the file.
+	// File download failed.
 	FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 
-	// The image is empty.
+	// Image content is empty.
 	FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
 
 	// Recognition by the engine timed out.
@@ -44,10 +47,10 @@ const (
 	// The image is blurry.
 	FAILEDOPERATION_IMAGEBLUR = "FailedOperation.ImageBlur"
 
-	// Failed to decode the image.
+	// Image decoding failed.
 	FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
 
-	// No ID card is detected in the image.
+	// No second-generation resident identity card or temporary ID card is detected in the image.
 	FAILEDOPERATION_IMAGENOIDCARD = "FailedOperation.ImageNoIdCard"
 
 	// Image is not of the specified card category.
@@ -74,7 +77,7 @@ const (
 	// Multiple cards of the same side are detected in the image. Please upload an image with a single side or one front and one back side.
 	FAILEDOPERATION_MULTICARDERROR = "FailedOperation.MultiCardError"
 
-	// Not a Hong Kong identity card.
+	// Not a Hong Kong, China ID card.
 	FAILEDOPERATION_NOHKIDCARD = "FailedOperation.NoHKIDCard"
 
 	// The image does not contain a Malaysian ID card.
@@ -86,7 +89,7 @@ const (
 	// Not the specified document.
 	FAILEDOPERATION_NOTAPPOINTCARD = "FailedOperation.NotAppointCard"
 
-	// OCR recognition failed. This error may be caused by unstable network connections, service anomalies, or other issues.
+	// OCR recognition failed.
 	FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 
 	// Failed to parse the PDF file. The file may be corrupted, encrypted or contains unsupported content.
@@ -116,7 +119,10 @@ const (
 	// Incorrect parameter value.
 	INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
 
-	// The file size exceeds the limit.
+	// Unsupported identity document type
+	INVALIDPARAMETERVALUE_UNSUPPORTEDCARD = "InvalidParameterValue.UnsupportedCard"
+
+	// File content too large.
 	LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
 
 	// Image file download failed.

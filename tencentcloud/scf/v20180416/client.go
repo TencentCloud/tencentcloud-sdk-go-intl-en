@@ -195,6 +195,7 @@ func NewCreateAliasResponse() (response *CreateAliasResponse) {
 //  INVALIDPARAMETERVALUE_ADDITIONALVERSIONWEIGHTS = "InvalidParameterValue.AdditionalVersionWeights"
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_ROUTINGCONFIG = "InvalidParameterValue.RoutingConfig"
 //  LIMITEXCEEDED_ALIAS = "LimitExceeded.Alias"
 //  RESOURCEINUSE = "ResourceInUse"
@@ -220,6 +221,7 @@ func (c *Client) CreateAlias(request *CreateAliasRequest) (response *CreateAlias
 //  INVALIDPARAMETERVALUE_ADDITIONALVERSIONWEIGHTS = "InvalidParameterValue.AdditionalVersionWeights"
 //  INVALIDPARAMETERVALUE_DESCRIPTION = "InvalidParameterValue.Description"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_ROUTINGCONFIG = "InvalidParameterValue.RoutingConfig"
 //  LIMITEXCEEDED_ALIAS = "LimitExceeded.Alias"
 //  RESOURCEINUSE = "ResourceInUse"
@@ -265,7 +267,7 @@ func NewCreateNamespaceResponse() (response *CreateNamespaceResponse) {
 }
 
 // CreateNamespace
-// This API is used to create a namespace based on the input parameters.
+// This API is used to create a namespace based on the passed parameters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATENAMESPACE = "FailedOperation.CreateNamespace"
@@ -288,7 +290,7 @@ func (c *Client) CreateNamespace(request *CreateNamespaceRequest) (response *Cre
 }
 
 // CreateNamespace
-// This API is used to create a namespace based on the input parameters.
+// This API is used to create a namespace based on the passed parameters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATENAMESPACE = "FailedOperation.CreateNamespace"
@@ -343,7 +345,7 @@ func NewCreateTriggerResponse() (response *CreateTriggerResponse) {
 }
 
 // CreateTrigger
-// This API is used to create a trigger based on the input parameters.
+// This API is used to set up alarms for the new trigger mode based on parameters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -406,7 +408,7 @@ func (c *Client) CreateTrigger(request *CreateTriggerRequest) (response *CreateT
 }
 
 // CreateTrigger
-// This API is used to create a trigger based on the input parameters.
+// This API is used to set up alarms for the new trigger mode based on parameters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -913,7 +915,7 @@ func NewDeleteTriggerResponse() (response *DeleteTriggerResponse) {
 }
 
 // DeleteTrigger
-// This API is used to delete an existing trigger based on the input parameters.
+// This API is used to delete existing trigger modes based on parameters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -949,7 +951,7 @@ func (c *Client) DeleteTrigger(request *DeleteTriggerRequest) (response *DeleteT
 }
 
 // DeleteTrigger
-// This API is used to delete an existing trigger based on the input parameters.
+// This API is used to delete existing trigger modes based on parameters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1022,6 +1024,7 @@ func NewGetAccountResponse() (response *GetAccountResponse) {
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_STAMP = "InvalidParameterValue.Stamp"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) GetAccount(request *GetAccountRequest) (response *GetAccountResponse, err error) {
     return c.GetAccountWithContext(context.Background(), request)
 }
@@ -1032,6 +1035,7 @@ func (c *Client) GetAccount(request *GetAccountRequest) (response *GetAccountRes
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_STAMP = "InvalidParameterValue.Stamp"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) GetAccountWithContext(ctx context.Context, request *GetAccountRequest) (response *GetAccountResponse, err error) {
     if request == nil {
         request = NewGetAccountRequest()
@@ -1357,7 +1361,7 @@ func NewGetFunctionLogsResponse() (response *GetFunctionLogsResponse) {
 }
 
 // GetFunctionLogs
-// This API returns function running logs according to the specified conditions. Note that this API has been disused. You can use [GetRequestStatus](https://intl.cloud.tencent.com/document/product/583/65348?from_cn_redirect=1) instead. See also [Retrieving Logs](https://intl.cloud.tencent.com/document/product/583/52637?from_cn_redirect=1).
+// This API returns function running logs based on the specified log query conditions. This API is offline. To query the returned information of function request running, please use [GetRequestStatus](https://www.tencentcloud.com/document/product/583/65348?from_cn_redirect=1). To query function running logs, see [Log Search Guide](https://www.tencentcloud.com/document/product/583/52637?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1394,7 +1398,7 @@ func (c *Client) GetFunctionLogs(request *GetFunctionLogsRequest) (response *Get
 }
 
 // GetFunctionLogs
-// This API returns function running logs according to the specified conditions. Note that this API has been disused. You can use [GetRequestStatus](https://intl.cloud.tencent.com/document/product/583/65348?from_cn_redirect=1) instead. See also [Retrieving Logs](https://intl.cloud.tencent.com/document/product/583/52637?from_cn_redirect=1).
+// This API returns function running logs based on the specified log query conditions. This API is offline. To query the returned information of function request running, please use [GetRequestStatus](https://www.tencentcloud.com/document/product/583/65348?from_cn_redirect=1). To query function running logs, see [Log Search Guide](https://www.tencentcloud.com/document/product/583/52637?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1593,13 +1597,13 @@ func NewGetRequestStatusResponse() (response *GetRequestStatusResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
 //  FAILEDOPERATION_TOPICNOTEXIST = "FailedOperation.TopicNotExist"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_SYSTEM = "InternalError.System"
 //  INVALIDPARAMETER_CLS = "InvalidParameter.Cls"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DATETIME = "InvalidParameterValue.DateTime"
-//  INVALIDPARAMETERVALUE_FUNCTION = "InvalidParameterValue.Function"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
 //  INVALIDPARAMETERVALUE_FUNCTIONREQUESTID = "InvalidParameterValue.FunctionRequestId"
 //  INVALIDPARAMETERVALUE_RETCODE = "InvalidParameterValue.RetCode"
@@ -1618,13 +1622,13 @@ func (c *Client) GetRequestStatus(request *GetRequestStatusRequest) (response *G
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
 //  FAILEDOPERATION_TOPICNOTEXIST = "FailedOperation.TopicNotExist"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_SYSTEM = "InternalError.System"
 //  INVALIDPARAMETER_CLS = "InvalidParameter.Cls"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_DATETIME = "InvalidParameterValue.DateTime"
-//  INVALIDPARAMETERVALUE_FUNCTION = "InvalidParameterValue.Function"
 //  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
 //  INVALIDPARAMETERVALUE_FUNCTIONREQUESTID = "InvalidParameterValue.FunctionRequestId"
 //  INVALIDPARAMETERVALUE_RETCODE = "InvalidParameterValue.RetCode"
@@ -2411,6 +2415,7 @@ func NewPublishLayerVersionResponse() (response *PublishLayerVersionResponse) {
 //  RESOURCEINUSE = "ResourceInUse"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNAUTHORIZEDOPERATION_NOTMC = "UnauthorizedOperation.NotMC"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_COS = "UnsupportedOperation.Cos"
 func (c *Client) PublishLayerVersion(request *PublishLayerVersionRequest) (response *PublishLayerVersionResponse, err error) {
     return c.PublishLayerVersionWithContext(context.Background(), request)
@@ -2441,6 +2446,7 @@ func (c *Client) PublishLayerVersion(request *PublishLayerVersionRequest) (respo
 //  RESOURCEINUSE = "ResourceInUse"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNAUTHORIZEDOPERATION_NOTMC = "UnauthorizedOperation.NotMC"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_COS = "UnsupportedOperation.Cos"
 func (c *Client) PublishLayerVersionWithContext(ctx context.Context, request *PublishLayerVersionRequest) (response *PublishLayerVersionResponse, err error) {
     if request == nil {
@@ -2905,6 +2911,7 @@ func NewUpdateAliasResponse() (response *UpdateAliasResponse) {
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_ROUTINGCONFIG = "InvalidParameterValue.RoutingConfig"
+//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND_ALIAS = "ResourceNotFound.Alias"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
@@ -2930,6 +2937,7 @@ func (c *Client) UpdateAlias(request *UpdateAliasRequest) (response *UpdateAlias
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
 //  INVALIDPARAMETERVALUE_NAMESPACE = "InvalidParameterValue.Namespace"
 //  INVALIDPARAMETERVALUE_ROUTINGCONFIG = "InvalidParameterValue.RoutingConfig"
+//  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCENOTFOUND_ALIAS = "ResourceNotFound.Alias"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
@@ -3011,6 +3019,7 @@ func NewUpdateFunctionCodeResponse() (response *UpdateFunctionCodeResponse) {
 //  INVALIDPARAMETERVALUE_TEMPCOSOBJECTNAME = "InvalidParameterValue.TempCosObjectName"
 //  INVALIDPARAMETERVALUE_ZIPFILE = "InvalidParameterValue.ZipFile"
 //  INVALIDPARAMETERVALUE_ZIPFILEBASE64BINASCIIERROR = "InvalidParameterValue.ZipFileBase64BinasciiError"
+//  LIMITEXCEEDED_CONTAINERIMAGEACCELERATE = "LimitExceeded.ContainerImageAccelerate"
 //  LIMITEXCEEDED_CONTAINERIMAGEACCELERATEQUOTA = "LimitExceeded.ContainerImageAccelerateQuota"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
@@ -3063,6 +3072,7 @@ func (c *Client) UpdateFunctionCode(request *UpdateFunctionCodeRequest) (respons
 //  INVALIDPARAMETERVALUE_TEMPCOSOBJECTNAME = "InvalidParameterValue.TempCosObjectName"
 //  INVALIDPARAMETERVALUE_ZIPFILE = "InvalidParameterValue.ZipFile"
 //  INVALIDPARAMETERVALUE_ZIPFILEBASE64BINASCIIERROR = "InvalidParameterValue.ZipFileBase64BinasciiError"
+//  LIMITEXCEEDED_CONTAINERIMAGEACCELERATE = "LimitExceeded.ContainerImageAccelerate"
 //  LIMITEXCEEDED_CONTAINERIMAGEACCELERATEQUOTA = "LimitExceeded.ContainerImageAccelerateQuota"
 //  RESOURCENOTFOUND_FUNCTION = "ResourceNotFound.Function"
 //  RESOURCENOTFOUND_FUNCTIONNAME = "ResourceNotFound.FunctionName"
@@ -3109,7 +3119,7 @@ func NewUpdateFunctionConfigurationResponse() (response *UpdateFunctionConfigura
 }
 
 // UpdateFunctionConfiguration
-// This API is used to update the function configuration based on the input parameters.
+// This API is used to update function configurations based on input parameters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3234,7 +3244,7 @@ func (c *Client) UpdateFunctionConfiguration(request *UpdateFunctionConfiguratio
 }
 
 // UpdateFunctionConfiguration
-// This API is used to update the function configuration based on the input parameters.
+// This API is used to update function configurations based on input parameters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

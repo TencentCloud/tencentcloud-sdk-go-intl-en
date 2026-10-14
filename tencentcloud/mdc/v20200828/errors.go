@@ -82,4 +82,7 @@ const (
 
 	// Invalid `Type`.
 	INVALIDPARAMETER_TYPE = "InvalidParameter.Type"
+
+	// InvalidParameter.Whitelist
+	INVALIDPARAMETER_WHITELIST = "InvalidParameter.Whitelist"
 )

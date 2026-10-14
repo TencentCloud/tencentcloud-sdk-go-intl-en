@@ -103,14 +103,26 @@ type ArchiveLogModel struct {
 }
 
 type AutoScalingConfig struct {
-
+	// <p>Minimum value</p>
 	RangeMin *float64 `json:"RangeMin,omitnil,omitempty" name:"RangeMin"`
 
-
+	// <p>Maximum value</p>
 	RangeMax *float64 `json:"RangeMax,omitnil,omitempty" name:"RangeMax"`
 
-
+	// <p>Resource type corresponding to the returned range parameter</p><p>Enumeration values:</p><ul><li>cpu: Returns the CPU adjustment return limit. When no mem limit exists, it represents ccu.</li><li>nodecount: Returns the limit range of the number of nodes for horizontal scaling.</li><li>datadisk: Returns the capacity limit range for disk scale-out.</li></ul>
 	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
+
+	// <p>Whether upgrade is allowed</p>
+	ScaleUpEnabled *bool `json:"ScaleUpEnabled,omitnil,omitempty" name:"ScaleUpEnabled"`
+
+	// <p>Whether to allow downgrade</p>
+	ScaleDownEnabled *bool `json:"ScaleDownEnabled,omitnil,omitempty" name:"ScaleDownEnabled"`
+
+	// <p>Trigger threshold (%)</p>
+	ThresholdPercent *int64 `json:"ThresholdPercent,omitnil,omitempty" name:"ThresholdPercent"`
+
+	// <p>Configuration change step length</p>
+	Step *float64 `json:"Step,omitnil,omitempty" name:"Step"`
 }
 
 type BackupMethodStatisticsModel struct {
@@ -854,22 +866,22 @@ type CreateDBInstancesRequestParams struct {
 	// <p>Compatible mode, enum:MySQL,HBase</p>
 	SQLMode *string `json:"SQLMode,omitnil,omitempty" name:"SQLMode"`
 
-
+	// <p>ccu configuration change of the SVLS instance</p><p>Input limit: This parameter no longer takes effect when AutoScaleConfigs is also input</p>
 	AutoScaleConfig *AutoScalingConfig `json:"AutoScaleConfig,omitnil,omitempty" name:"AutoScaleConfig"`
 
-	// <p>Security group binding list</p>
+	// <p>List of bound security groups</p>
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// <p>root userName. It defaults to dbaadmin in the current version, and the passed value will be reset to dbaadmin</p>
+	// <p>root userName. The current version defaults to dbaadmin, and the passed value will reset to dbaadmin.</p>
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// <p>dbaadmin password</p>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// <p>Whether transparent encryption is enabled. 0: not enabled. 1: enabled</p>
+	// <p>Whether to enable transparent encryption. 0: disable, 1: enable</p>
 	EncryptionEnable *int64 `json:"EncryptionEnable,omitnil,omitempty" name:"EncryptionEnable"`
 
-
+	// <p>Relevant restrictions on automatic configuration adjustment for SVLS instances</p><p>Input parameter restriction: The AutoScaleConfig parameter will no longer take effect when passed in</p>
 	AutoScaleConfigs []*AutoScalingConfig `json:"AutoScaleConfigs,omitnil,omitempty" name:"AutoScaleConfigs"`
 }
 
@@ -963,20 +975,22 @@ type CreateDBInstancesRequest struct {
 	// <p>Compatible mode, enum:MySQL,HBase</p>
 	SQLMode *string `json:"SQLMode,omitnil,omitempty" name:"SQLMode"`
 
+	// <p>ccu configuration change of the SVLS instance</p><p>Input limit: This parameter no longer takes effect when AutoScaleConfigs is also input</p>
 	AutoScaleConfig *AutoScalingConfig `json:"AutoScaleConfig,omitnil,omitempty" name:"AutoScaleConfig"`
 
-	// <p>Security group binding list</p>
+	// <p>List of bound security groups</p>
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// <p>root userName. It defaults to dbaadmin in the current version, and the passed value will be reset to dbaadmin</p>
+	// <p>root userName. The current version defaults to dbaadmin, and the passed value will reset to dbaadmin.</p>
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// <p>dbaadmin password</p>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// <p>Whether transparent encryption is enabled. 0: not enabled. 1: enabled</p>
+	// <p>Whether to enable transparent encryption. 0: disable, 1: enable</p>
 	EncryptionEnable *int64 `json:"EncryptionEnable,omitnil,omitempty" name:"EncryptionEnable"`
 
+	// <p>Relevant restrictions on automatic configuration adjustment for SVLS instances</p><p>Input parameter restriction: The AutoScaleConfig parameter will no longer take effect when passed in</p>
 	AutoScaleConfigs []*AutoScalingConfig `json:"AutoScaleConfigs,omitnil,omitempty" name:"AutoScaleConfigs"`
 }
 
@@ -1917,22 +1931,22 @@ type DescribeDBInstanceDetailResponseParams struct {
 	// <p>Payment mode, 0 pay-as-you-go, 1 prepaid</p>
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-
+	// <p>Expiration time.</p>
 	ExpireAt *string `json:"ExpireAt,omitnil,omitempty" name:"ExpireAt"`
 
-
+	// <p>Isolation time</p>
 	IsolatedAt *string `json:"IsolatedAt,omitnil,omitempty" name:"IsolatedAt"`
 
-
+	// <p>Instance Architecture Type, separate: decoupled architecture; hybrid: peer-to-peer architecture</p>
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-
+	// <p>Disk Type, CLOUD_HSSD enhanced SSD, CLOUD_TCS local SSD disk</p>
 	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
 
 	// <p>List of instance node availability zones. Zones[0] refers to the primary AZ</p>
 	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 
-
+	// <p>Disk usage of the largest node</p>
 	DiskUsage *int64 `json:"DiskUsage,omitnil,omitempty" name:"DiskUsage"`
 
 	// <p>Whether binlog is enabled</p>
@@ -2019,10 +2033,10 @@ type DescribeDBInstanceDetailResponseParams struct {
 	// <p>Whether transparent encryption is enabled. 0: not enabled; 1: enabled</p>
 	EncryptionEnable *int64 `json:"EncryptionEnable,omitnil,omitempty" name:"EncryptionEnable"`
 
-	// <p>Real use kms region for subsequent call to kms service</p>
+	// <p>Real use kms region for subsequent calls to the kms service</p>
 	EncryptionKmsRegion *string `json:"EncryptionKmsRegion,omitnil,omitempty" name:"EncryptionKmsRegion"`
 
-
+	// <p>serverless automatic configuration adjustment configuration</p>
 	AutoScaleConfigs []*AutoScalingConfig `json:"AutoScaleConfigs,omitnil,omitempty" name:"AutoScaleConfigs"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2059,10 +2073,10 @@ type DescribeDBInstancesRequestParams struct {
 	// <p>Specified query engine type</p><p>Enumeration value:</p><ul><li>libra: column storage engine</li></ul>
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 
-
+	// <p>Query By Field, supporting StorageNodeNum/CreateTime/CreateVersion</p>
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
-
+	// <p>Sorting order</p><p>Enumeration values:</p><ul><li>ASC: ascending</li><li>DESC: descending</li></ul><p>Default value: DESC</p>
 	OrderDirection *string `json:"OrderDirection,omitnil,omitempty" name:"OrderDirection"`
 }
 
@@ -2081,8 +2095,10 @@ type DescribeDBInstancesRequest struct {
 	// <p>Specified query engine type</p><p>Enumeration value:</p><ul><li>libra: column storage engine</li></ul>
 	EngineType *string `json:"EngineType,omitnil,omitempty" name:"EngineType"`
 
+	// <p>Query By Field, supporting StorageNodeNum/CreateTime/CreateVersion</p>
 	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
+	// <p>Sorting order</p><p>Enumeration values:</p><ul><li>ASC: ascending</li><li>DESC: descending</li></ul><p>Default value: DESC</p>
 	OrderDirection *string `json:"OrderDirection,omitnil,omitempty" name:"OrderDirection"`
 }
 
@@ -2115,7 +2131,7 @@ type DescribeDBInstancesResponseParams struct {
 	// <p>Return to instance list information</p>
 	Instances []*InstanceInfo `json:"Instances,omitnil,omitempty" name:"Instances"`
 
-	// <p>Total number of items that meet the conditions.</p>
+	// <p>Total number of items that meet the conditions</p>
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3646,6 +3662,9 @@ type DescribeSpecsRequestParams struct {
 
 	// <p>Exclusive instance</p>
 	IsExclusiveInstance *int64 `json:"IsExclusiveInstance,omitnil,omitempty" name:"IsExclusiveInstance"`
+
+	// <p>Availability zone combination list</p>
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 }
 
 type DescribeSpecsRequest struct {
@@ -3656,6 +3675,9 @@ type DescribeSpecsRequest struct {
 
 	// <p>Exclusive instance</p>
 	IsExclusiveInstance *int64 `json:"IsExclusiveInstance,omitnil,omitempty" name:"IsExclusiveInstance"`
+
+	// <p>Availability zone combination list</p>
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 }
 
 func (r *DescribeSpecsRequest) ToJsonString() string {
@@ -3672,6 +3694,7 @@ func (r *DescribeSpecsRequest) FromJsonString(s string) error {
 	}
 	delete(f, "FullReplications")
 	delete(f, "IsExclusiveInstance")
+	delete(f, "Zones")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSpecsRequest has unknown keys!", "")
 	}
@@ -3680,13 +3703,13 @@ func (r *DescribeSpecsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSpecsResponseParams struct {
-
+	// <p>Purchasable specification list of peer nodes</p>
 	HybridNodeSpecs []*StorageNodeSpec `json:"HybridNodeSpecs,omitnil,omitempty" name:"HybridNodeSpecs"`
 
 	// <p>Purchasable specification list of svls nodes</p>
 	ServerlessCcuSpec []*ServerlessCcu `json:"ServerlessCcuSpec,omitnil,omitempty" name:"ServerlessCcuSpec"`
 
-
+	// <p>serverless node quantity configuration</p>
 	ServerlessNodeNumSpec *ServerlessNodeNumSpec `json:"ServerlessNodeNumSpec,omitnil,omitempty" name:"ServerlessNodeNumSpec"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4150,10 +4173,10 @@ type InstanceInfo struct {
 	// <p>Region</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-
+	// <p>Create an instance version</p>
 	CreateVersion *string `json:"CreateVersion,omitnil,omitempty" name:"CreateVersion"`
 
-
+	// <p>Initialize instance parameters</p>
 	InitParams []*InstanceParam `json:"InitParams,omitnil,omitempty" name:"InitParams"`
 
 	// <p>Instance status: creating, created, initializing, running, modifying, isolating, isolated, destroying, destroyed</p>
@@ -4165,10 +4188,10 @@ type InstanceInfo struct {
 	// <p>Number of storage nodes</p>
 	StorageNodeNum *int64 `json:"StorageNodeNum,omitnil,omitempty" name:"StorageNodeNum"`
 
-
+	// <p>Instance tag information.</p>
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
-
+	// <p>Instance name</p>
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// <p>cpu cores of the computing node</p>
@@ -4205,50 +4228,50 @@ type InstanceInfo struct {
 	// <p>Status description in Chinese of the instance</p>
 	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
 
-
+	// <p>CPU cores of the control node</p>
 	//
 	// Deprecated: MCCpu is deprecated.
 	MCCpu *int64 `json:"MCCpu,omitnil,omitempty" name:"MCCpu"`
 
-
+	// <p>CPU size of the control node</p>
 	//
 	// Deprecated: MCMem is deprecated.
 	MCMem *int64 `json:"MCMem,omitnil,omitempty" name:"MCMem"`
 
-
+	// <p>CPU cores of the computing node</p>
 	//
 	// Deprecated: ComputerNodeCpu is deprecated.
 	ComputerNodeCpu *int64 `json:"ComputerNodeCpu,omitnil,omitempty" name:"ComputerNodeCpu"`
 
-
+	// <p>Compute node memory size</p>
 	//
 	// Deprecated: ComputerNodeMem is deprecated.
 	ComputerNodeMem *int64 `json:"ComputerNodeMem,omitnil,omitempty" name:"ComputerNodeMem"`
 
-
+	// <p>CPU cores of the storage node</p>
 	StorageNodeCpu *int64 `json:"StorageNodeCpu,omitnil,omitempty" name:"StorageNodeCpu"`
 
-
+	// <p>Storage node memory size</p>
 	StorageNodeMem *int64 `json:"StorageNodeMem,omitnil,omitempty" name:"StorageNodeMem"`
 
-
+	// <p>Number of control nodes</p>
 	//
 	// Deprecated: MCNum is deprecated.
 	MCNum *int64 `json:"MCNum,omitnil,omitempty" name:"MCNum"`
 
-
+	// <p>Renewal flag</p>
 	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
 	// <p>Payment mode, 0 pay-as-you-go; 1 annual/monthly subscription</p>
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-
+	// <p>User tag, inner: internal user; external: external user</p>
 	AccountTag *string `json:"AccountTag,omitnil,omitempty" name:"AccountTag"`
 
-
+	// <p>Instance Architecture Type, separate: decoupled architecture; hyper: peer-to-peer architecture</p>
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-
+	// <p>Disk Type, CLOUD_HSSD enhanced SSD, CLOUD_TCS local SSD disk</p>
 	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
 
 	// <p>&quot;0000-00-00 00:00:00&quot;</p>
@@ -4269,19 +4292,19 @@ type InstanceInfo struct {
 	// <p>Number of replicas</p>
 	FullReplications *int64 `json:"FullReplications,omitnil,omitempty" name:"FullReplications"`
 
-
+	// <p>Account information</p>
 	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
-
+	// <p>Account information</p>
 	SubAccountUin *string `json:"SubAccountUin,omitnil,omitempty" name:"SubAccountUin"`
 
-
+	// <p>Account information</p>
 	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
 
-
+	// <p>AZ information</p>
 	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 
-
+	// <p>Instance node</p>
 	Nodes []*InstanceNode `json:"Nodes,omitnil,omitempty" name:"Nodes"`
 
 	// <p>Whether binlog is on</p>
@@ -4302,13 +4325,13 @@ type InstanceInfo struct {
 	// Deprecated: CdcNodeNum is deprecated.
 	CdcNodeNum *int64 `json:"CdcNodeNum,omitnil,omitempty" name:"CdcNodeNum"`
 
-
+	// <p>az mode. 1: Single az 2: Multi-az non-primary az mode 3: Multi-az primary az mode</p>
 	AZMode *int64 `json:"AZMode,omitnil,omitempty" name:"AZMode"`
 
-
+	// <p>Disaster recovery flag. 1: No disaster recovery relationship; 2: Primary instance for disaster recovery; 3: Disaster Recovery Standby Instance</p>
 	StandbyFlag *int64 `json:"StandbyFlag,omitnil,omitempty" name:"StandbyFlag"`
 
-
+	// <p>Number of connected standby instances (Valid only when StandbyFlag == 2)</p>
 	StandbySecondaryNum *int64 `json:"StandbySecondaryNum,omitnil,omitempty" name:"StandbySecondaryNum"`
 
 	// <p>cpu cores of the columnar node</p>
@@ -4355,87 +4378,87 @@ type InstanceInfo struct {
 	// <p>Analysis engine instance information</p>
 	AnalysisInstanceInfo *AnalysisInstanceInfo `json:"AnalysisInstanceInfo,omitnil,omitempty" name:"AnalysisInstanceInfo"`
 
-
+	// <p>Multiple automatic configuration adjustment configurations of the instance, including ccu and nodecount values</p>
 	AutoScaleConfigs []*AutoScalingConfig `json:"AutoScaleConfigs,omitnil,omitempty" name:"AutoScaleConfigs"`
 }
 
 type InstanceNode struct {
-
+	// Primary key
 	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
-
+	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Node Id
 	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
 
-
+	// Instance Ip
 	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
-
+	// Instance EniIp
 	EniIp *string `json:"EniIp,omitnil,omitempty" name:"EniIp"`
 
-
+	// Instance Port
 	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
-
+	// Instance SpecCode
 	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
 
-
+	// Instance NodeName
 	NodeName *string `json:"NodeName,omitnil,omitempty" name:"NodeName"`
 
-
+	// Instance Cpu
 	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
-
+	// Instance memory
 	Mem *int64 `json:"Mem,omitnil,omitempty" name:"Mem"`
 
-
+	// Instance Disk
 	Disk *int64 `json:"Disk,omitnil,omitempty" name:"Disk"`
 
-
+	// Instance type
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Instance status
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-
+	// Instance version
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
-
+	// Instance region
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-
+	// Instance LocalDNS
 	LocalDNS *string `json:"LocalDNS,omitnil,omitempty" name:"LocalDNS"`
 
-
+	// Instance Region
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-
+	// Instance log disk
 	LogDisk *int64 `json:"LogDisk,omitnil,omitempty" name:"LogDisk"`
 
-
+	// Instance data disk
 	DataDisk *int64 `json:"DataDisk,omitnil,omitempty" name:"DataDisk"`
 
-
+	// Instance Zone ID
 	ZoneID *string `json:"ZoneID,omitnil,omitempty" name:"ZoneID"`
 
-
+	// Instance SpecName
 	SpecName *string `json:"SpecName,omitnil,omitempty" name:"SpecName"`
 
-
+	// Instance Replicas
 	Replicas *int64 `json:"Replicas,omitnil,omitempty" name:"Replicas"`
 
-
+	// Instance Shards
 	Shards *int64 `json:"Shards,omitnil,omitempty" name:"Shards"`
 
-
+	// Instance data replica
 	DataReplicas *int64 `json:"DataReplicas,omitnil,omitempty" name:"DataReplicas"`
 
-
+	// Instance initialization parameter
 	Params *string `json:"Params,omitnil,omitempty" name:"Params"`
 
-
+	// Storage medium, CLOUD_PREMIUM: Premium Cloud Disk, CLOUD_SSD: SSD cloud disk, CLOUD_HSSD: HSSD cloud disk
 	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
 }
 
@@ -5393,22 +5416,22 @@ func (r *ModifyUserPrivilegesResponse) FromJsonString(s string) error {
 }
 
 type NodeInfo struct {
-
+	// <p>Node IP information</p>
 	IP *string `json:"IP,omitnil,omitempty" name:"IP"`
 
-
+	// <p>Node types, such as sqlengine, tdstore, mc</p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// <p>Unique identifier of the node</p>
 	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
 
-
+	// <p>Node port information</p>
 	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
-
+	// <p>Availability zone of the node</p>
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-
+	// <p>Machine ip of the node</p>
 	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// <p>Node log service information</p>
@@ -5720,10 +5743,10 @@ type ServerlessCcu struct {
 }
 
 type ServerlessNodeNumSpec struct {
-
+	// <p>Minimum number of nodes.</p>
 	MinNodeNum *int64 `json:"MinNodeNum,omitnil,omitempty" name:"MinNodeNum"`
 
-
+	// <p>Maximum number of nodes.</p>
 	MaxNodeNum *int64 `json:"MaxNodeNum,omitnil,omitempty" name:"MaxNodeNum"`
 }
 
@@ -5870,7 +5893,7 @@ type StandbyDBInstanceRelation struct {
 }
 
 type StorageNodeSpec struct {
-
+	// <p>Specification code</p>
 	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
 
 	// <p>CPU cores of the storage node</p>
@@ -5891,10 +5914,10 @@ type StorageNodeSpec struct {
 	// <p>Node disk size minimum</p>
 	StorageNodeMinDisk *int64 `json:"StorageNodeMinDisk,omitnil,omitempty" name:"StorageNodeMinDisk"`
 
-
+	// <p>Disk Type, CLOUD_HSSD enhanced SSD, CLOUD_TCS local SSD disk</p>
 	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
 
-
+	// <p>Default disk size of storage node for frontend display</p>
 	StorageNodeDefaultDisk *int64 `json:"StorageNodeDefaultDisk,omitnil,omitempty" name:"StorageNodeDefaultDisk"`
 
 	// <p>Specification support billing mode list</p>

@@ -21,52 +21,40 @@ import (
 )
 
 type AddressInfo struct {
-	// Country.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Country</p>
 	Country *string `json:"Country,omitnil,omitempty" name:"Country"`
 
-	// Postal code.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Postal code</p>
 	PostalCode *string `json:"PostalCode,omitnil,omitempty" name:"PostalCode"`
 
-	// Sub-region or state/province.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Sub-region</p>
 	Subdivision *string `json:"Subdivision,omitnil,omitempty" name:"Subdivision"`
 
-	// District or county.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>District</p>
 	District *string `json:"District,omitnil,omitempty" name:"District"`
 
-	// City name.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>City</p>
 	City *string `json:"City,omitnil,omitempty" name:"City"`
 
-	// Subdistrict or township.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Sub-district office</p>
 	Subdistrict *string `json:"Subdistrict,omitnil,omitempty" name:"Subdistrict"`
 
-	// Formatted complete address.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Complete address</p>
 	FormattedAddress *string `json:"FormattedAddress,omitnil,omitempty" name:"FormattedAddress"`
 
-	// First line of the address bar.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>First line of the address bar</p>
 	LineOne *string `json:"LineOne,omitnil,omitempty" name:"LineOne"`
 
-	// Second line of the address bar.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Second line of the address bar</p>
 	LineTwo *string `json:"LineTwo,omitnil,omitempty" name:"LineTwo"`
 
-	// Specifies the third line of the address bar.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Third line of the address bar</p>
 	LineThree *string `json:"LineThree,omitnil,omitempty" name:"LineThree"`
 
-	// Specifies the fourth line of the address bar.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Fourth line of the address bar</p>
 	LineFour *string `json:"LineFour,omitnil,omitempty" name:"LineFour"`
 
-	// Specifies the fifth line of the address bar.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Fifth line of the address bar</p>
 	LineFive *string `json:"LineFive,omitnil,omitempty" name:"LineFive"`
 }
 
@@ -225,6 +213,157 @@ func (r *ApplyCardVerificationExternalResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ApplyCardVerificationExternalResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ApplyOcrTokenRequestParams struct {
+	// Country code. ISO 3166-1 Alpha-3 country/region code standard.
+	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
+
+	// Supported countries/regions and document types:
+	// 
+	// Mainland China: ID_CARD, PERMIT
+	// Hong Kong: ID_CARD
+	// Macao: ID_CARD
+	// Hong Kong/Macao/Taiwan: MAINLAND_PERMIT, HMT_RESIDENT_PERMIT
+	// Thailand: ID_CARD, THA_PINK_CARD
+	// Indonesia: ID_CARD
+	// Malaysia: ID_CARD
+	// Singapore: ID_CARD
+	// Philippines: PHL_UMID, PHL_VOTE_ID, PHL_TIN_ID, PHL_SSS_ID, DRIVING_LICENSE
+	// Any country/region: PASSPORT
+	CardType *string `json:"CardType,omitnil,omitempty" name:"CardType"`
+
+	// SDK-generated device-related encryption configuration information.
+	EncryptedConfig *string `json:"EncryptedConfig,omitnil,omitempty" name:"EncryptedConfig"`
+
+	// <p>Whether to extract the portrait image from the document. false by default</p><p>Default value: false</p>
+	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
+
+	// <p>Maximum number of token retries</p><p>Value range: [1, 5]</p><p>Default value: 3</p>
+	RetryLimit *int64 `json:"RetryLimit,omitnil,omitempty" name:"RetryLimit"`
+
+	// <p>SDK capture mode</p><p>Enumeration values:</p><ul><li>OCR_DETECT_MANUAL: Photo recognition mode. The system performs recognition after you tap to take a photo.</li><li>OCR_DETECT_AUTO_MANUAL: Automatic recognition mode. The system recognizes automatically, and you can switch to photo recognition after a recognition timeout.</li><li>OCR_DETECT_AUTO: Pure automatic recognition mode. The system recognizes automatically, and you cannot switch to photo recognition after a recognition timeout.</li><li>OCR_DETECT_AUTO_MULTI: Pure automatic recognition mode (multiple images). The system turns on the flash and automatically collects multiple document photos.</li></ul><p>Default value: OCR_DETECT_AUTO_MANUAL</p>
+	OcrModeType *string `json:"OcrModeType,omitnil,omitempty" name:"OcrModeType"`
+
+	// <p>Whether to allow uploading gallery images for recognition.</p><p>Default value: true</p>
+	AllowUploadPhoto *bool `json:"AllowUploadPhoto,omitnil,omitempty" name:"AllowUploadPhoto"`
+
+	// <p>Whether to enable ID card photo cropping (remove extra edges outside the document and automatically correct the shooting angle). It is false by default and only applicable to Mainland ID cards.</p><p>Default value: false</p>
+	CropIdCard *bool `json:"CropIdCard,omitnil,omitempty" name:"CropIdCard"`
+
+	// <p>SDK-supported recognition version mode</p><p>Enumeration values:</p><ul><li>BASIC: Basic version</li><li>ENHANCED: Enhanced version</li></ul><p>Default value: BASIC</p>
+	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
+
+	// OCR automatic capture mode timeout (ms).
+	// Value range: [5000, 180000].
+	// Default value: 20000.
+	// If the value is below 5000, it is set to 5000; if above 180000, it is set to 180000.
+	OcrAutoDetectTimeout *int64 `json:"OcrAutoDetectTimeout,omitnil,omitempty" name:"OcrAutoDetectTimeout"`
+}
+
+type ApplyOcrTokenRequest struct {
+	*tchttp.BaseRequest
+	
+	// Country code. ISO 3166-1 Alpha-3 country/region code standard.
+	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
+
+	// Supported countries/regions and document types:
+	// 
+	// Mainland China: ID_CARD, PERMIT
+	// Hong Kong: ID_CARD
+	// Macao: ID_CARD
+	// Hong Kong/Macao/Taiwan: MAINLAND_PERMIT, HMT_RESIDENT_PERMIT
+	// Thailand: ID_CARD, THA_PINK_CARD
+	// Indonesia: ID_CARD
+	// Malaysia: ID_CARD
+	// Singapore: ID_CARD
+	// Philippines: PHL_UMID, PHL_VOTE_ID, PHL_TIN_ID, PHL_SSS_ID, DRIVING_LICENSE
+	// Any country/region: PASSPORT
+	CardType *string `json:"CardType,omitnil,omitempty" name:"CardType"`
+
+	// SDK-generated device-related encryption configuration information.
+	EncryptedConfig *string `json:"EncryptedConfig,omitnil,omitempty" name:"EncryptedConfig"`
+
+	// <p>Whether to extract the portrait image from the document. false by default</p><p>Default value: false</p>
+	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
+
+	// <p>Maximum number of token retries</p><p>Value range: [1, 5]</p><p>Default value: 3</p>
+	RetryLimit *int64 `json:"RetryLimit,omitnil,omitempty" name:"RetryLimit"`
+
+	// <p>SDK capture mode</p><p>Enumeration values:</p><ul><li>OCR_DETECT_MANUAL: Photo recognition mode. The system performs recognition after you tap to take a photo.</li><li>OCR_DETECT_AUTO_MANUAL: Automatic recognition mode. The system recognizes automatically, and you can switch to photo recognition after a recognition timeout.</li><li>OCR_DETECT_AUTO: Pure automatic recognition mode. The system recognizes automatically, and you cannot switch to photo recognition after a recognition timeout.</li><li>OCR_DETECT_AUTO_MULTI: Pure automatic recognition mode (multiple images). The system turns on the flash and automatically collects multiple document photos.</li></ul><p>Default value: OCR_DETECT_AUTO_MANUAL</p>
+	OcrModeType *string `json:"OcrModeType,omitnil,omitempty" name:"OcrModeType"`
+
+	// <p>Whether to allow uploading gallery images for recognition.</p><p>Default value: true</p>
+	AllowUploadPhoto *bool `json:"AllowUploadPhoto,omitnil,omitempty" name:"AllowUploadPhoto"`
+
+	// <p>Whether to enable ID card photo cropping (remove extra edges outside the document and automatically correct the shooting angle). It is false by default and only applicable to Mainland ID cards.</p><p>Default value: false</p>
+	CropIdCard *bool `json:"CropIdCard,omitnil,omitempty" name:"CropIdCard"`
+
+	// <p>SDK-supported recognition version mode</p><p>Enumeration values:</p><ul><li>BASIC: Basic version</li><li>ENHANCED: Enhanced version</li></ul><p>Default value: BASIC</p>
+	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
+
+	// OCR automatic capture mode timeout (ms).
+	// Value range: [5000, 180000].
+	// Default value: 20000.
+	// If the value is below 5000, it is set to 5000; if above 180000, it is set to 180000.
+	OcrAutoDetectTimeout *int64 `json:"OcrAutoDetectTimeout,omitnil,omitempty" name:"OcrAutoDetectTimeout"`
+}
+
+func (r *ApplyOcrTokenRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApplyOcrTokenRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Nationality")
+	delete(f, "CardType")
+	delete(f, "EncryptedConfig")
+	delete(f, "ReturnHeadImage")
+	delete(f, "RetryLimit")
+	delete(f, "OcrModeType")
+	delete(f, "AllowUploadPhoto")
+	delete(f, "CropIdCard")
+	delete(f, "SdkVersion")
+	delete(f, "OcrAutoDetectTimeout")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplyOcrTokenRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ApplyOcrTokenResponseParams struct {
+	// Token that identifies an SDK verification process. It is valid for 10 minutes. After the process completes, use this token to obtain the verification result information.
+	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
+
+	// Encryption configuration generated on the server side.
+	EncryptedConfig *string `json:"EncryptedConfig,omitnil,omitempty" name:"EncryptedConfig"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ApplyOcrTokenResponse struct {
+	*tchttp.BaseResponse
+	Response *ApplyOcrTokenResponseParams `json:"Response"`
+}
+
+func (r *ApplyOcrTokenResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApplyOcrTokenResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -943,163 +1082,123 @@ func (r *GeneralBasicOCRResponse) FromJsonString(s string) error {
 }
 
 type GeneralCard struct {
-	// ID number.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>ID number</p>
 	LicenseNumber *string `json:"LicenseNumber,omitnil,omitempty" name:"LicenseNumber"`
 
-	// Personal number. 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Personal number, returned when the identity document type is passport</p>
 	PersonalNumber *string `json:"PersonalNumber,omitnil,omitempty" name:"PersonalNumber"`
 
-	// Full name on the document.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Name</p>
 	FullName *string `json:"FullName,omitnil,omitempty" name:"FullName"`
 
-	// Full name in local language.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Localized name</p>
 	FullNameLocal *string `json:"FullNameLocal,omitnil,omitempty" name:"FullNameLocal"`
 
-	// First name or given name.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Name</p>
 	FirstName *string `json:"FirstName,omitnil,omitempty" name:"FirstName"`
 
-	// First name in local language.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Localized name</p>
 	FirstNameLocal *string `json:"FirstNameLocal,omitnil,omitempty" name:"FirstNameLocal"`
 
-	// Middle name.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Middle name</p>
 	MiddleName *string `json:"MiddleName,omitnil,omitempty" name:"MiddleName"`
 
-	// Middle name in local language.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Localized middle name</p>
 	MiddleNameLocal *string `json:"MiddleNameLocal,omitnil,omitempty" name:"MiddleNameLocal"`
 
-	// Last name or surname.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Last name</p>
 	LastName *string `json:"LastName,omitnil,omitempty" name:"LastName"`
 
-	// Last name in local language.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Localized last name</p>
 	LastNameLocal *string `json:"LastNameLocal,omitnil,omitempty" name:"LastNameLocal"`
 
-	// Gender on the document.
-	// - M: man.
-	// - F: woman.
-	// - X: other gender identity.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Gender on the document</p><ul><li>M: man</li><li>F: woman</li><li>X: other gender identity</li></ul>
 	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
 
-	// Date of birth.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Date of birth</p>
 	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 
-	// Birth place.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Birth place</p>
 	BirthPlace *string `json:"BirthPlace,omitnil,omitempty" name:"BirthPlace"`
 
-	// Issue date.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Issue date, in YYYY-MM-DD format</p>
 	IssuedDate *string `json:"IssuedDate,omitnil,omitempty" name:"IssuedDate"`
 
-	// Issuing authority.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Issuing authority</p>
 	IssuedAuthority *string `json:"IssuedAuthority,omitnil,omitempty" name:"IssuedAuthority"`
 
-	// Place of issue.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Place where the specified file is issued</p>
 	IssuedPlace *string `json:"IssuedPlace,omitnil,omitempty" name:"IssuedPlace"`
 
-	// Issuing country.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Issuing country</p>
 	IssuedCountry *string `json:"IssuedCountry,omitnil,omitempty" name:"IssuedCountry"`
 
-	// Country code of issue, ISO Alpha-3 format.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Country code of the country that issued the file, ISO ALPHA-3 country/region code</p>
 	IssuedCountryCode *string `json:"IssuedCountryCode,omitnil,omitempty" name:"IssuedCountryCode"`
 
-	// Expiry date.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Expiration date, in YYYY-MM-DD format</p>
 	ExpirationDate *string `json:"ExpirationDate,omitnil,omitempty" name:"ExpirationDate"`
 
-	// First line of the Machine Readable Zone (MRZ).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Content of the single-line machine-readable zone (MRZ) on the document. The number represents the order in which the line appears in the MRZ</p>
 	MRZLine1 *string `json:"MRZLine1,omitnil,omitempty" name:"MRZLine1"`
 
-	// Second line of the Machine Readable Zone (MRZ).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Content of the single-line machine-readable zone (MRZ) on the document. The number represents the line count in the order of the MRZ</p>
 	MRZLine2 *string `json:"MRZLine2,omitnil,omitempty" name:"MRZLine2"`
 
-	// Document nationality, following ISO 3166 country coding specification.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Document nationality, returned following the ISO 3166 country coding specification</p>
 	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
-	// Address information on the document.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Address information on the document</p>
 	Address *AddressInfo `json:"Address,omitnil,omitempty" name:"Address"`
 
-	// Religion (if displayed on the document).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Religious belief</p>
 	Religion *string `json:"Religion,omitnil,omitempty" name:"Religion"`
 
-	// Type of document.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Document type</p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Blood type.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Blood type</p>
 	BloodType *string `json:"BloodType,omitnil,omitempty" name:"BloodType"`
 
-	// Height.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Height</p>
 	Height *string `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// Weight.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Weight</p>
 	Weight *string `json:"Weight,omitnil,omitempty" name:"Weight"`
 
-	// Vehicle class authorized on the driver license (e.g., A, B, C).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Driver's license vehicle type (for example, A/B/C)</p>
 	VehicleClass *string `json:"VehicleClass,omitnil,omitempty" name:"VehicleClass"`
 
-	// Restrictions on the driver license.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Driver's license restriction condition</p>
 	Restrictions *string `json:"Restrictions,omitnil,omitempty" name:"Restrictions"`
 
-	// Endorsements or additional records on the driver license.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Driver's license extra records</p>
 	Endorsement *string `json:"Endorsement,omitnil,omitempty" name:"Endorsement"`
 
-	// Supplementary fields (varies by document type).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Additional field</p>
 	Others *string `json:"Others,omitnil,omitempty" name:"Others"`
 
-	// First line of the passport MRZ (Machine Readable Zone).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>MRZ line 1 of the passport</p>
 	//
 	// Deprecated: PassportCodeFirst is deprecated.
 	PassportCodeFirst *string `json:"PassportCodeFirst,omitnil,omitempty" name:"PassportCodeFirst"`
 
-	// Second line of the passport MRZ (Machine Readable Zone).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>MRZ line 2 of the passport</p>
 	//
 	// Deprecated: PassportCodeSecond is deprecated.
 	PassportCodeSecond *string `json:"PassportCodeSecond,omitnil,omitempty" name:"PassportCodeSecond"`
 
-	// Expiry date.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Validity date, in YYYY-MM-DD format</p>
 	//
 	// Deprecated: DueDate is deprecated.
 	DueDate *string `json:"DueDate,omitnil,omitempty" name:"DueDate"`
 
-	// Age. 0 means no valid info.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Age. 0 means no valid info is obtained</p>
 	//
 	// Deprecated: Age is deprecated.
 	Age *string `json:"Age,omitnil,omitempty" name:"Age"`
 
-	// Registration number.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Registration number</p>
 	//
 	// Deprecated: RegistrationNumber is deprecated.
 	RegistrationNumber *string `json:"RegistrationNumber,omitnil,omitempty" name:"RegistrationNumber"`
@@ -1196,6 +1295,108 @@ func (r *GetCardVerificationExternalResultResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *GetCardVerificationExternalResultResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetOcrVerificationResultRequestParams struct {
+	// Token that identifies an SDK verification process. It is valid for 10 minutes. After the process completes, use this token to obtain the verification result information.
+	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
+}
+
+type GetOcrVerificationResultRequest struct {
+	*tchttp.BaseRequest
+	
+	// Token that identifies an SDK verification process. It is valid for 10 minutes. After the process completes, use this token to obtain the verification result information.
+	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
+}
+
+func (r *GetOcrVerificationResultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetOcrVerificationResultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkToken")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetOcrVerificationResultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetOcrVerificationResultResponseParams struct {
+	// <p>Indicates the completion status of an SDK verification process.</p><p>Enumeration values: </p><ul><li>PROCESSING: PROCESSING.</li><li>COMPLETE: Completed.</li></ul>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Front image of the card.
+	CardImage *string `json:"CardImage,omitnil,omitempty" name:"CardImage"`
+
+	// Back image of the card.
+	CardImageBack *string `json:"CardImageBack,omitnil,omitempty" name:"CardImageBack"`
+
+	// Portrait image on the front of the card.
+	HeadImage *string `json:"HeadImage,omitnil,omitempty" name:"HeadImage"`
+
+	// Result code of this verification.
+	ResultCode *string `json:"ResultCode,omitnil,omitempty" name:"ResultCode"`
+
+	// Indicates the risk level of the device from which the current request is sent. There are four levels:
+	// 1 - Safe.
+	// 2 - Low risk.
+	// 3 - Medium risk.
+	// 4 - High risk.
+	// Empty - The risk level is not obtained.
+	// Returned only in the enhanced version. Empty by default.
+	DeviceInfoLevel *string `json:"DeviceInfoLevel,omitnil,omitempty" name:"DeviceInfoLevel"`
+
+	// Card recognition result. The latest result is taken as the valid one.
+	CardInfo *GeneralCard `json:"CardInfo,omitnil,omitempty" name:"CardInfo"`
+
+	// Recognition result on the back of the card.
+	BackCardInfo *GeneralCard `json:"BackCardInfo,omitnil,omitempty" name:"BackCardInfo"`
+
+	// Authenticity check. Valid values:
+	// 0: Unable to determine (caused by blur, incompleteness, glare, or low brightness).
+	// 1: Fake.
+	// 2: Genuine.
+	// Only effective for Hong Kong, China ID card recognition. This field is gradually being phased out.
+	FakeDetectResult *int64 `json:"FakeDetectResult,omitnil,omitempty" name:"FakeDetectResult"`
+
+	// Card Warning Information
+	// 
+	// -9101 Alarm for covered certificate
+	// -9102 Alarm for photocopied certificate
+	// -9103 Alarm for photographed certificate
+	// -9104 Alarm for tamper certificate
+	// -9107 Alarm for reflective certificate
+	// -9108 Alarm for blurry certificate 
+	// -9109 This capability is not enabled. Please contact customer support to activate the alert service.
+	WarnCardInfos []*int64 `json:"WarnCardInfos,omitnil,omitempty" name:"WarnCardInfos"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type GetOcrVerificationResultResponse struct {
+	*tchttp.BaseResponse
+	Response *GetOcrVerificationResultResponseParams `json:"Response"`
+}
+
+func (r *GetOcrVerificationResultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetOcrVerificationResultResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3583,7 +3784,7 @@ func (r *RecognizePhilippinesDrivingLicenseOCRRequest) FromJsonString(s string) 
 
 // Predefined struct for user
 type RecognizePhilippinesDrivingLicenseOCRResponseParams struct {
-	// The Base64-encoded identity photo.
+	// Base64 encoded result of portrait photo.
 	HeadPortrait *TextDetectionResult `json:"HeadPortrait,omitnil,omitempty" name:"HeadPortrait"`
 
 	// Full name of the license holder.
@@ -3601,7 +3802,7 @@ type RecognizePhilippinesDrivingLicenseOCRResponseParams struct {
 	// Nationality of the license holder.
 	Nationality *TextDetectionResult `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
-	// Gender
+	// Gender.
 	Sex *TextDetectionResult `json:"Sex,omitnil,omitempty" name:"Sex"`
 
 	// Address of the license holder.
@@ -3618,6 +3819,27 @@ type RecognizePhilippinesDrivingLicenseOCRResponseParams struct {
 
 	// Date of birth of the license holder.
 	Birthday *TextDetectionResult `json:"Birthday,omitnil,omitempty" name:"Birthday"`
+
+	// Blood type of the  license holder.
+	BloodType *TextDetectionResult `json:"BloodType,omitnil,omitempty" name:"BloodType"`
+
+	// Height of the license holder, in metres as printed on the card (e.g. 1.69).
+	Height *TextDetectionResult `json:"Height,omitnil,omitempty" name:"Height"`
+
+	// Weight of the license holder, in kilograms (e.g. 65).
+	Weight *TextDetectionResult `json:"Weight,omitnil,omitempty" name:"Weight"`
+
+	// Eye color of the license holder (e.g. BLACK).
+	EyeColor *TextDetectionResult `json:"EyeColor,omitnil,omitempty" name:"EyeColor"`
+
+	// Driver's license codes indicating the vehicle categories the license holder is authorized to operate (e.g. A, A1, B, B1, B2, C, D, BE, CE).
+	DLCodes *TextDetectionResult `json:"DLCodes,omitnil,omitempty" name:"DLCodes"`
+
+	// Restrictions that limit the license holder's driving privileges, such as transmission type (AT / MT) or vehicle-class limits.
+	Restrictions *TextDetectionResult `json:"Restrictions,omitnil,omitempty" name:"Restrictions"`
+
+	// Driving conditions of the license holder (e.g. A = must wear glasses, D = daytime driving only).
+	Conditions *TextDetectionResult `json:"Conditions,omitnil,omitempty" name:"Conditions"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -3641,7 +3863,7 @@ func (r *RecognizePhilippinesDrivingLicenseOCRResponse) FromJsonString(s string)
 
 // Predefined struct for user
 type RecognizePhilippinesSssIDOCRRequestParams struct {
-	// Whether to return the identity photo.
+	// Whether to return the portrait photo.
 	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
 
 	// The Base64-encoded value of an image.
@@ -3661,7 +3883,7 @@ type RecognizePhilippinesSssIDOCRRequestParams struct {
 type RecognizePhilippinesSssIDOCRRequest struct {
 	*tchttp.BaseRequest
 	
-	// Whether to return the identity photo.
+	// Whether to return the portrait photo.
 	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
 
 	// The Base64-encoded value of an image.
@@ -3701,7 +3923,7 @@ func (r *RecognizePhilippinesSssIDOCRRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type RecognizePhilippinesSssIDOCRResponseParams struct {
-	// The Base64-encoded identity photo.
+	// Base64 encoded result of portrait photo.
 	HeadPortrait *TextDetectionResult `json:"HeadPortrait,omitnil,omitempty" name:"HeadPortrait"`
 
 	// The license number (SSSID number).
@@ -3712,6 +3934,15 @@ type RecognizePhilippinesSssIDOCRResponseParams struct {
 
 	// The date of birth.
 	Birthday *TextDetectionResult `json:"Birthday,omitnil,omitempty" name:"Birthday"`
+
+	// First name (given name) of the cardholder.
+	GivenName *TextDetectionResult `json:"GivenName,omitnil,omitempty" name:"GivenName"`
+
+	// Family name (surname) of the cardholder.
+	Surname *TextDetectionResult `json:"Surname,omitnil,omitempty" name:"Surname"`
+
+	// Middle name of the cardholder.
+	MiddleName *TextDetectionResult `json:"MiddleName,omitnil,omitempty" name:"MiddleName"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -3795,13 +4026,13 @@ func (r *RecognizePhilippinesTinIDOCRRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type RecognizePhilippinesTinIDOCRResponseParams struct {
-	// The Base64-encoded identity photo.
+	// Base64 encoded result of portrait photo.
 	HeadPortrait *TextDetectionResult `json:"HeadPortrait,omitnil,omitempty" name:"HeadPortrait"`
 
 	// The tax identification number (TIN).
 	LicenseNumber *TextDetectionResult `json:"LicenseNumber,omitnil,omitempty" name:"LicenseNumber"`
 
-	// The full name.
+	// Full name of the taxpayer.
 	FullName *TextDetectionResult `json:"FullName,omitnil,omitempty" name:"FullName"`
 
 	// The address.
@@ -3812,6 +4043,18 @@ type RecognizePhilippinesTinIDOCRResponseParams struct {
 
 	// The issue date.
 	IssueDate *TextDetectionResult `json:"IssueDate,omitnil,omitempty" name:"IssueDate"`
+
+	// Given name of the taxpayer.
+	GivenName *TextDetectionResult `json:"GivenName,omitnil,omitempty" name:"GivenName"`
+
+	// Last name of the taxpayer.
+	LastName *TextDetectionResult `json:"LastName,omitnil,omitempty" name:"LastName"`
+
+	// Middle name of the taxpayer.
+	MiddleName *TextDetectionResult `json:"MiddleName,omitnil,omitempty" name:"MiddleName"`
+
+	// Revenue district office where the taxpayer is registered.
+	RDO *TextDetectionResult `json:"RDO,omitnil,omitempty" name:"RDO"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -3941,7 +4184,7 @@ func (r *RecognizePhilippinesUMIDOCRResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type RecognizePhilippinesVoteIDOCRRequestParams struct {
-	// Whether to return the identity photo.
+	// Whether to return the portrait photo.
 	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
 
 	// The Base64-encoded value of an image.
@@ -3961,7 +4204,7 @@ type RecognizePhilippinesVoteIDOCRRequestParams struct {
 type RecognizePhilippinesVoteIDOCRRequest struct {
 	*tchttp.BaseRequest
 	
-	// Whether to return the identity photo.
+	// Whether to return the portrait photo.
 	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
 
 	// The Base64-encoded value of an image.
@@ -4001,7 +4244,7 @@ func (r *RecognizePhilippinesVoteIDOCRRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type RecognizePhilippinesVoteIDOCRResponseParams struct {
-	// The Base64-encoded identity photo.
+	// Base64 encoded result of portrait photo.
 	HeadPortrait *TextDetectionResult `json:"HeadPortrait,omitnil,omitempty" name:"HeadPortrait"`
 
 	// The voter's identification number (VIN).
@@ -4013,7 +4256,7 @@ type RecognizePhilippinesVoteIDOCRResponseParams struct {
 	// The first name.
 	FirstName *TextDetectionResult `json:"FirstName,omitnil,omitempty" name:"FirstName"`
 
-
+	// The middle name.
 	MiddleName *TextDetectionResult `json:"MiddleName,omitnil,omitempty" name:"MiddleName"`
 
 	// The date of birth.
@@ -4172,7 +4415,7 @@ func (r *RecognizeSingaporeIDCardOCRResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type RecognizeThaiIDCardOCRRequestParams struct {
 	// The Base64-encoded value of an image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
-	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, `ImageUrl` is used.
+	// Either ImageUrl or ImageBase64 of the image must be provided. If both are provided, ImageUrl is used.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
 	// Base64 value of the image on the back of the card. Supported image formats: PNG, JPG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download takes no more than 3 seconds. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
@@ -4185,8 +4428,8 @@ type RecognizeThaiIDCardOCRRequestParams struct {
 	// The URL address of the image on the back of the card. Supported image formats: PNG, JPG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download takes no more than 3 seconds. Storing images in Tencent Cloud URLs can ensure higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The URL speed and stability of non-Tencent cloud storage may be affected to a certain extent.
 	BackImageUrl *string `json:"BackImageUrl,omitnil,omitempty" name:"BackImageUrl"`
 
-	// Whether to crop the profile photo. The default value is `false`, meaning not to return the Base64-encoded value of the profile photo on the Thai identity card.
-	// When this parameter is set to `true`, the Base64-encoded value of the profile photo on the Thai identity card after rotation correction is returned.
+	// Whether to crop the profile photo. The default value is false, meaning not to return the Base64-encoded value of the profile photo on the Thai identity card.
+	// When this parameter is set to true, the Base64-encoded value of the profile photo on the Thai identity card after rotation correction is returned.
 	CropPortrait *bool `json:"CropPortrait,omitnil,omitempty" name:"CropPortrait"`
 }
 
@@ -4194,7 +4437,7 @@ type RecognizeThaiIDCardOCRRequest struct {
 	*tchttp.BaseRequest
 	
 	// The Base64-encoded value of an image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
-	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, `ImageUrl` is used.
+	// Either ImageUrl or ImageBase64 of the image must be provided. If both are provided, ImageUrl is used.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
 	// Base64 value of the image on the back of the card. Supported image formats: PNG, JPG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download takes no more than 3 seconds. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
@@ -4207,8 +4450,8 @@ type RecognizeThaiIDCardOCRRequest struct {
 	// The URL address of the image on the back of the card. Supported image formats: PNG, JPG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download takes no more than 3 seconds. Storing images in Tencent Cloud URLs can ensure higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The URL speed and stability of non-Tencent cloud storage may be affected to a certain extent.
 	BackImageUrl *string `json:"BackImageUrl,omitnil,omitempty" name:"BackImageUrl"`
 
-	// Whether to crop the profile photo. The default value is `false`, meaning not to return the Base64-encoded value of the profile photo on the Thai identity card.
-	// When this parameter is set to `true`, the Base64-encoded value of the profile photo on the Thai identity card after rotation correction is returned.
+	// Whether to crop the profile photo. The default value is false, meaning not to return the Base64-encoded value of the profile photo on the Thai identity card.
+	// When this parameter is set to true, the Base64-encoded value of the profile photo on the Thai identity card after rotation correction is returned.
 	CropPortrait *bool `json:"CropPortrait,omitnil,omitempty" name:"CropPortrait"`
 }
 
@@ -4276,7 +4519,7 @@ type RecognizeThaiIDCardOCRResponseParams struct {
 	// Address
 	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 
-	// Laser ID on the back of the card.
+	// Laser ID on the back of the card
 	LaserID *string `json:"LaserID,omitnil,omitempty" name:"LaserID"`
 
 	// Identity photo
@@ -4289,11 +4532,11 @@ type RecognizeThaiIDCardOCRResponseParams struct {
 	// -9103 Alarm for photographed certificate
 	// -9104 Alarm for tamper certificate
 	// -9107 Alarm for reflective certificate
-	// -9108 Alarm for blurry certificate 
+	// -9108 Alarm for blurry certificate
 	// -9109 This capability is not enabled. Please contact customer support to activate the alert service
 	WarnCardInfos []*int64 `json:"WarnCardInfos,omitnil,omitempty" name:"WarnCardInfos"`
 
-	// This field is deprecated and will always return "1". Usage is not recommended.
+	// <p>This field is deprecated and will always return "1". It is not recommended for use.</p>
 	//
 	// Deprecated: AdvancedInfo is deprecated.
 	AdvancedInfo *string `json:"AdvancedInfo,omitnil,omitempty" name:"AdvancedInfo"`
@@ -4304,6 +4547,12 @@ type RecognizeThaiIDCardOCRResponseParams struct {
 	// The card information field complete or not
 	// true: complete; false: incomplete
 	IsComplete *bool `json:"IsComplete,omitnil,omitempty" name:"IsComplete"`
+
+	// First name in Thai
+	ThaiFirstName *string `json:"ThaiFirstName,omitnil,omitempty" name:"ThaiFirstName"`
+
+	// Last name in Thai
+	ThaiLastName *string `json:"ThaiLastName,omitnil,omitempty" name:"ThaiLastName"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`

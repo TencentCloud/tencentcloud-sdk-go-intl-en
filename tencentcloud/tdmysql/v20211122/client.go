@@ -2152,6 +2152,7 @@ func NewExpandInstanceResponse() (response *ExpandInstanceResponse) {
 //  FAILEDOPERATION_EXPANDINSTANCEERROR = "FailedOperation.ExpandInstanceError"
 //  LIMITEXCEEDED_OUTOFLIMITERROR = "LimitExceeded.OutOfLimitError"
 //  LIMITEXCEEDED_OUTOFSPECLIMITERROR = "LimitExceeded.OutOfSpecLimitError"
+//  OPERATIONDENIED_INSTANCEOPERATIONNOTALLOWEDERROR = "OperationDenied.InstanceOperationNotAllowedError"
 func (c *Client) ExpandInstance(request *ExpandInstanceRequest) (response *ExpandInstanceResponse, err error) {
     return c.ExpandInstanceWithContext(context.Background(), request)
 }
@@ -2166,6 +2167,7 @@ func (c *Client) ExpandInstance(request *ExpandInstanceRequest) (response *Expan
 //  FAILEDOPERATION_EXPANDINSTANCEERROR = "FailedOperation.ExpandInstanceError"
 //  LIMITEXCEEDED_OUTOFLIMITERROR = "LimitExceeded.OutOfLimitError"
 //  LIMITEXCEEDED_OUTOFSPECLIMITERROR = "LimitExceeded.OutOfSpecLimitError"
+//  OPERATIONDENIED_INSTANCEOPERATIONNOTALLOWEDERROR = "OperationDenied.InstanceOperationNotAllowedError"
 func (c *Client) ExpandInstanceWithContext(ctx context.Context, request *ExpandInstanceRequest) (response *ExpandInstanceResponse, err error) {
     if request == nil {
         request = NewExpandInstanceRequest()
@@ -3236,6 +3238,7 @@ func NewUpgradeInstanceResponse() (response *UpgradeInstanceResponse) {
 //  INVALIDPARAMETERVALUE_CHECKSPECERROR = "InvalidParameterValue.CheckSpecError"
 //  LIMITEXCEEDED_OUTOFSPECLIMITERROR = "LimitExceeded.OutOfSpecLimitError"
 //  OPERATIONDENIED_CHECKDECREASESPECERROR = "OperationDenied.CheckDecreaseSpecError"
+//  OPERATIONDENIED_INSTANCEOPERATIONNOTALLOWEDERROR = "OperationDenied.InstanceOperationNotAllowedError"
 //  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
 func (c *Client) UpgradeInstance(request *UpgradeInstanceRequest) (response *UpgradeInstanceResponse, err error) {
     return c.UpgradeInstanceWithContext(context.Background(), request)
@@ -3255,6 +3258,7 @@ func (c *Client) UpgradeInstance(request *UpgradeInstanceRequest) (response *Upg
 //  INVALIDPARAMETERVALUE_CHECKSPECERROR = "InvalidParameterValue.CheckSpecError"
 //  LIMITEXCEEDED_OUTOFSPECLIMITERROR = "LimitExceeded.OutOfSpecLimitError"
 //  OPERATIONDENIED_CHECKDECREASESPECERROR = "OperationDenied.CheckDecreaseSpecError"
+//  OPERATIONDENIED_INSTANCEOPERATIONNOTALLOWEDERROR = "OperationDenied.InstanceOperationNotAllowedError"
 //  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
 func (c *Client) UpgradeInstanceWithContext(ctx context.Context, request *UpgradeInstanceRequest) (response *UpgradeInstanceResponse, err error) {
     if request == nil {

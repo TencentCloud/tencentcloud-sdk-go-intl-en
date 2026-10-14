@@ -205,7 +205,7 @@ func NewAddAssetImageRegistryRegistryDetailResponse() (response *AddAssetImageRe
 }
 
 // AddAssetImageRegistryRegistryDetail
-// This API is used to add the details of an image repository.
+// This example shows you how to add details for an image repository.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -222,7 +222,7 @@ func (c *Client) AddAssetImageRegistryRegistryDetail(request *AddAssetImageRegis
 }
 
 // AddAssetImageRegistryRegistryDetail
-// This API is used to add the details of an image repository.
+// This example shows you how to add details for an image repository.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1669,7 +1669,7 @@ func NewCreateAssetImageRegistryScanTaskOneKeyResponse() (response *CreateAssetI
 }
 
 // CreateAssetImageRegistryScanTaskOneKey
-// This API is used to create a quick image scan task for an image repository.
+// Creating a Task to Scan Images in an Image Repository with One Click
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1680,7 +1680,7 @@ func (c *Client) CreateAssetImageRegistryScanTaskOneKey(request *CreateAssetImag
 }
 
 // CreateAssetImageRegistryScanTaskOneKey
-// This API is used to create a quick image scan task for an image repository.
+// Creating a Task to Scan Images in an Image Repository with One Click
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6533,7 +6533,7 @@ func NewDescribeAssetHostDetailResponse() (response *DescribeAssetHostDetailResp
 }
 
 // DescribeAssetHostDetail
-// This API is used to query the details of a server.
+// This example shows you how to query host details.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -6545,7 +6545,7 @@ func (c *Client) DescribeAssetHostDetail(request *DescribeAssetHostDetailRequest
 }
 
 // DescribeAssetHostDetail
-// This API is used to query the details of a server.
+// This example shows you how to query host details.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -7377,7 +7377,7 @@ func NewDescribeAssetImageRegistrySummaryResponse() (response *DescribeAssetImag
 }
 
 // DescribeAssetImageRegistrySummary
-// This API is used to query the image statistics of an image repository.
+// Querying the Image Statistics of an Image Repository
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -7387,7 +7387,7 @@ func (c *Client) DescribeAssetImageRegistrySummary(request *DescribeAssetImageRe
 }
 
 // DescribeAssetImageRegistrySummary
-// This API is used to query the image statistics of an image repository.
+// Querying the Image Statistics of an Image Repository
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -8373,7 +8373,7 @@ func NewDescribeAssetSyncLastTimeResponse() (response *DescribeAssetSyncLastTime
 }
 
 // DescribeAssetSyncLastTime
-// This API is used to query the last asset sync time.
+// Query the latest time for asset synchronization.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -8387,7 +8387,7 @@ func (c *Client) DescribeAssetSyncLastTime(request *DescribeAssetSyncLastTimeReq
 }
 
 // DescribeAssetSyncLastTime
-// This API is used to query the last asset sync time.
+// Query the latest time for asset synchronization.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -10187,7 +10187,7 @@ func NewDescribeImageAuthorizedInfoResponse() (response *DescribeImageAuthorized
 }
 
 // DescribeImageAuthorizedInfo
-// This API is used to query the image licensing information.
+// This API is used to query image authorization info.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -10197,7 +10197,7 @@ func (c *Client) DescribeImageAuthorizedInfo(request *DescribeImageAuthorizedInf
 }
 
 // DescribeImageAuthorizedInfo
-// This API is used to query the image licensing information.
+// This API is used to query image authorization info.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -10303,7 +10303,7 @@ func NewDescribeImageAutoAuthorizedRuleResponse() (response *DescribeImageAutoAu
 }
 
 // DescribeImageAutoAuthorizedRule
-// This API is used to query an automatic licensing rule for local images.
+// Query local image auto-authorization rules.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -10317,7 +10317,7 @@ func (c *Client) DescribeImageAutoAuthorizedRule(request *DescribeImageAutoAutho
 }
 
 // DescribeImageAutoAuthorizedRule
-// This API is used to query an automatic licensing rule for local images.
+// Query local image auto-authorization rules.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -12811,7 +12811,7 @@ func NewDescribePurchaseStateInfoResponse() (response *DescribePurchaseStateInfo
 }
 
 // DescribePurchaseStateInfo
-// This API is used to check whether TCSS is purchased.
+// This API is used to query the purchase information on the container security service.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -12823,7 +12823,7 @@ func (c *Client) DescribePurchaseStateInfo(request *DescribePurchaseStateInfoReq
 }
 
 // DescribePurchaseStateInfo
-// This API is used to check whether TCSS is purchased.
+// This API is used to query the purchase information on the container security service.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -20927,7 +20927,7 @@ func NewUpdateImageRegistryTimingScanTaskResponse() (response *UpdateImageRegist
 }
 
 // UpdateImageRegistryTimingScanTask
-// This API is used to update a scheduled task for an image repository.
+// Update scheduled tasks in the mirror repository
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -20937,7 +20937,7 @@ func (c *Client) UpdateImageRegistryTimingScanTask(request *UpdateImageRegistryT
 }
 
 // UpdateImageRegistryTimingScanTask
-// This API is used to update a scheduled task for an image repository.
+// Update scheduled tasks in the mirror repository
 //
 // error code that may be returned:
 //  INVALIDPARAMETER = "InvalidParameter"

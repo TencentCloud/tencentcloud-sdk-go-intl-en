@@ -21,30 +21,30 @@ import (
 )
 
 type AICallConfig struct {
-
+	// Enable the voice interaction feature
 	EnableVoiceInteract *bool `json:"EnableVoiceInteract,omitnil,omitempty" name:"EnableVoiceInteract"`
 
-
+	// Enable voice call
 	EnableVoiceCall *bool `json:"EnableVoiceCall,omitnil,omitempty" name:"EnableVoiceCall"`
 
-
+	// Enable digital human
 	EnableDigitalHuman *bool `json:"EnableDigitalHuman,omitnil,omitempty" name:"EnableDigitalHuman"`
 
-
+	// Voice type configuration
 	Voice *VoiceConfig `json:"Voice,omitnil,omitempty" name:"Voice"`
 
-
+	// Digital human configuration
 	DigitalHuman *DigitalHumanConfig `json:"DigitalHuman,omitnil,omitempty" name:"DigitalHuman"`
 }
 
 type AgentDebugInfo struct {
-
+	// Input information of the tool and large model, json
 	Input *string `json:"Input,omitnil,omitempty" name:"Input"`
 
-
+	// Output information of tools and large models, in json format
 	Output *string `json:"Output,omitnil,omitempty" name:"Output"`
 
-
+	// Model name.
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 }
 
@@ -151,13 +151,13 @@ type AgentReference struct {
 }
 
 type AgentTask struct {
-
+	// <p>Task serial number</p>
 	Index *int64 `json:"Index,omitnil,omitempty" name:"Index"`
 
-
+	// <p>Task content</p>
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
-
+	// <p>Task status.</p>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
@@ -632,75 +632,84 @@ type ClassifyLabel struct {
 }
 
 type Content struct {
-
+	// <p>Message content type<br>text: text<br>image: image<br>file: file<br>option_cards: tabs<br>custom_params: custom business parameters<br>sandbox: cloud desktop<br>custom_variables: custom input parameters<br>web_search: web search content<br>file_collection: file collection information<br>widget: widget info<br>widget_action: client-side widget action information</p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// <p>Text content</p>
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
-
+	// <p>Reference info.</p>
 	QuoteInfos []*QuoteInfo `json:"QuoteInfos,omitnil,omitempty" name:"QuoteInfos"`
 
-
+	// <p>Reference information</p>
 	References []*ContentReference `json:"References,omitnil,omitempty" name:"References"`
 
-
+	// <p>Image information.</p>
 	Image *ImageInfoContent `json:"Image,omitnil,omitempty" name:"Image"`
 
-
+	// <p>File information</p>
 	File *FileInfoContent `json:"File,omitnil,omitempty" name:"File"`
 
-
+	// <p>Tab info.</p>
 	OptionCards []*string `json:"OptionCards,omitnil,omitempty" name:"OptionCards"`
 
-
+	// <p>User-customized business parameter information.</p>
 	CustomParams []*string `json:"CustomParams,omitnil,omitempty" name:"CustomParams"`
 
-
+	// <p>Custom Variable</p>
 	CustomVariables []*string `json:"CustomVariables,omitnil,omitempty" name:"CustomVariables"`
 
-
+	// <p>Sandbox information</p>
 	Sandbox *SandboxContent `json:"Sandbox,omitnil,omitempty" name:"Sandbox"`
 
-
+	// <p>Web page search content</p>
 	WebSearch *WebSearchContent `json:"WebSearch,omitnil,omitempty" name:"WebSearch"`
 
-
+	// <p>File information collection</p>
 	FileCollection *FileCollection `json:"FileCollection,omitnil,omitempty" name:"FileCollection"`
 
-
+	// <p>Widget information.</p>
 	Widget *Widget `json:"Widget,omitnil,omitempty" name:"Widget"`
 
-
+	// <p>Widget action information</p>
 	WidgetAction *WidgetAction `json:"WidgetAction,omitnil,omitempty" name:"WidgetAction"`
 
-
+	// <p>Task List</p>
 	Tasks []*AgentTask `json:"Tasks,omitnil,omitempty" name:"Tasks"`
 
-
+	// <p>Questionnaire information</p>
 	Questionnaire *Questionnaire `json:"Questionnaire,omitnil,omitempty" name:"Questionnaire"`
 
-
+	// <p>Tab mode</p>
 	OptionMode *int64 `json:"OptionMode,omitnil,omitempty" name:"OptionMode"`
+
+	// <p>MCP APP information returned</p>
+	McpApp *ConversationMcpApp `json:"McpApp,omitnil,omitempty" name:"McpApp"`
+
+	// <p>Application or workflow resource product</p>
+	Resource *ConversationResourceArtifact `json:"Resource,omitnil,omitempty" name:"Resource"`
 }
 
 type ContentReference struct {
-
+	// Source index ID
 	Index *int64 `json:"Index,omitnil,omitempty" name:"Index"`
 
-
+	// Reference source name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// Reference source type
+	// 1: QA
+	// 2: Document fragment
+	// 4: Online retrieved content
 	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// Document fragment reference
 	DocRefer *DocReference `json:"DocRefer,omitnil,omitempty" name:"DocRefer"`
 
-
+	// QA reference
 	QaRefer *QaReference `json:"QaRefer,omitnil,omitempty" name:"QaRefer"`
 
-
+	// Reference information for online retrieval content
 	WebSearchRefer *WebSearchReference `json:"WebSearchRefer,omitnil,omitempty" name:"WebSearchRefer"`
 }
 
@@ -725,6 +734,62 @@ type Context struct {
 
 	// Response method, 15: clarification confirmation response.
 	ReplyMethod *uint64 `json:"ReplyMethod,omitnil,omitempty" name:"ReplyMethod"`
+}
+
+type ConversationAppArtifact struct {
+
+	AppAvatar *string `json:"AppAvatar,omitnil,omitempty" name:"AppAvatar"`
+
+
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+
+	AppPattern *int64 `json:"AppPattern,omitnil,omitempty" name:"AppPattern"`
+
+
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+}
+
+type ConversationMcpApp struct {
+
+	PluginId *string `json:"PluginId,omitnil,omitempty" name:"PluginId"`
+
+
+	ResourceUri *string `json:"ResourceUri,omitnil,omitempty" name:"ResourceUri"`
+
+
+	ThreadId *string `json:"ThreadId,omitnil,omitempty" name:"ThreadId"`
+
+
+	ToolResult *string `json:"ToolResult,omitnil,omitempty" name:"ToolResult"`
+}
+
+type ConversationResourceArtifact struct {
+
+	App *ConversationAppArtifact `json:"App,omitnil,omitempty" name:"App"`
+
+
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+
+	Workflow *ConversationWorkflowArtifact `json:"Workflow,omitnil,omitempty" name:"Workflow"`
+}
+
+type ConversationWorkflowArtifact struct {
+
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+
+	WorkflowId *string `json:"WorkflowId,omitnil,omitempty" name:"WorkflowId"`
 }
 
 // Predefined struct for user
@@ -3737,44 +3802,44 @@ func (r *DescribeUnsatisfiedReplyContextResponse) FromJsonString(s string) error
 }
 
 type DigitalHumanConfig struct {
-
+	// Digital human asset key
 	AssetKey *string `json:"AssetKey,omitnil,omitempty" name:"AssetKey"`
 
-
+	// Digital human name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// image
 	Avatar *string `json:"Avatar,omitnil,omitempty" name:"Avatar"`
 
-
+	// Preview image
 	PreviewUrl *string `json:"PreviewUrl,omitnil,omitempty" name:"PreviewUrl"`
 }
 
 type DocFilterFlag struct {
-
+	// Identifier bit
 	Flag *string `json:"Flag,omitnil,omitempty" name:"Flag"`
 
-
+	// Identifier value
 	Value *bool `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type DocReference struct {
+	// <p>Document business ID</p>
+	DocBizId *string `json:"DocBizId,omitnil,omitempty" name:"DocBizId"`
 
-	DocBizId *uint64 `json:"DocBizId,omitnil,omitempty" name:"DocBizId"`
+	// <p>Document fragment reference ID</p>
+	ReferBizId *string `json:"ReferBizId,omitnil,omitempty" name:"ReferBizId"`
 
-
-	ReferBizId *uint64 `json:"ReferBizId,omitnil,omitempty" name:"ReferBizId"`
-
-
+	// <p>Document name</p>
 	DocName *string `json:"DocName,omitnil,omitempty" name:"DocName"`
 
+	// <p>Business ID of the knowledge base where the document resides</p>
+	KnowledgeBizId *string `json:"KnowledgeBizId,omitnil,omitempty" name:"KnowledgeBizId"`
 
-	KnowledgeBizId *uint64 `json:"KnowledgeBizId,omitnil,omitempty" name:"KnowledgeBizId"`
-
-
+	// <p>Name of the knowledge base where the document resides</p>
 	KnowledgeName *string `json:"KnowledgeName,omitnil,omitempty" name:"KnowledgeName"`
 
-
+	// <p>Document Access Address</p>
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
@@ -3811,10 +3876,10 @@ type DocSegment struct {
 }
 
 type DuplicateFileHandle struct {
-
+	// Document repetition judgment method. 1: Judge whether to repeat by document content, that is, the cos_hash field.
 	CheckType *uint64 `json:"CheckType,omitnil,omitempty" name:"CheckType"`
 
-
+	// Duplicate document processing method. 1: return an error. 2: skip and return the business ID of the duplicate document.
 	HandleType *uint64 `json:"HandleType,omitnil,omitempty" name:"HandleType"`
 }
 
@@ -4054,15 +4119,15 @@ func (r *ExportUnsatisfiedReplyResponse) FromJsonString(s string) error {
 }
 
 type ExtraInfo struct {
-
+	// ECharts information
 	EChartsInfo []*string `json:"EChartsInfo,omitnil,omitempty" name:"EChartsInfo"`
 }
 
 type FileCollection struct {
-
+	// Maximum number of files to be uploaded
 	MaxFileCount *int64 `json:"MaxFileCount,omitnil,omitempty" name:"MaxFileCount"`
 
-
+	// Supported upload file types
 	SupportedFileTypes []*string `json:"SupportedFileTypes,omitnil,omitempty" name:"SupportedFileTypes"`
 }
 
@@ -4087,35 +4152,46 @@ type FileInfo struct {
 }
 
 type FileInfoContent struct {
-
+	// <p>DocBizId returned by the real-time document parsing API</p>
 	//
 	// Deprecated: DocBizId is deprecated.
 	DocBizId *string `json:"DocBizId,omitnil,omitempty" name:"DocBizId"`
 
-
+	// <p>File name.</p>
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
-
+	// <p>File type</p>
 	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
 
-
+	// <p>File size in bytes</p>
 	FileSize *string `json:"FileSize,omitnil,omitempty" name:"FileSize"`
 
-
+	// <p>File URL</p>
 	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
 
-
+	// <p>doc_id returned by the real-time document parsing API.</p>
 	DocId *string `json:"DocId,omitnil,omitempty" name:"DocId"`
 
-
+	// <p>File creation time</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Local path of the file in the sandbox</p>
+	LocalPath *string `json:"LocalPath,omitnil,omitempty" name:"LocalPath"`
+
+	// <p>File moderation status</p><p>Enumeration values:</p><ul><li>1: under review</li><li>2: pass review</li><li>3: fail review</li></ul>
+	AuditStatus *uint64 `json:"AuditStatus,omitnil,omitempty" name:"AuditStatus"`
 }
 
 type FilterItem struct {
-
+	// Filter the content.
+	// For example, you can use "AuditStatus" to filter by review status.
 	FilterKey *string `json:"FilterKey,omitnil,omitempty" name:"FilterKey"`
 
-
+	// Filtering criteria.
+	// For example, for the filter content "AuditStatus", use the following filtering conditions:
+	// "ContentFailed": "Content review failed"
+	// "PictureFailed": "Image review failed",
+	// "ContentAndPictureFailed": "Image and content review failed",
 	FilterValue []*string `json:"FilterValue,omitnil,omitempty" name:"FilterValue"`
 }
 
@@ -5174,10 +5250,10 @@ type ImageInfoContent struct {
 }
 
 type IntentAchievement struct {
-
+	// Intent attainment method. `qa`: QA reply, `doc`: document reply, `workflow`: workflow reply, `llm`: large model reply.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-
+	// Description of the method to attain the intent
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 }
 
@@ -8539,60 +8615,60 @@ type QAQuery struct {
 }
 
 type QaReference struct {
+	// <p>QA business ID</p>
+	QaBizId *string `json:"QaBizId,omitnil,omitempty" name:"QaBizId"`
 
-	QaBizId *uint64 `json:"QaBizId,omitnil,omitempty" name:"QaBizId"`
+	// <p>Document fragment reference ID</p>
+	ReferBizId *string `json:"ReferBizId,omitnil,omitempty" name:"ReferBizId"`
 
+	// <p>Business ID of the knowledge base where the QA resides</p>
+	KnowledgeBizId *string `json:"KnowledgeBizId,omitnil,omitempty" name:"KnowledgeBizId"`
 
-	ReferBizId *uint64 `json:"ReferBizId,omitnil,omitempty" name:"ReferBizId"`
-
-
-	KnowledgeBizId *uint64 `json:"KnowledgeBizId,omitnil,omitempty" name:"KnowledgeBizId"`
-
-
+	// <p>Name of the knowledge base where the QA resides</p>
 	KnowledgeName *string `json:"KnowledgeName,omitnil,omitempty" name:"KnowledgeName"`
 }
 
 type QuestionOption struct {
-
+	// <p>Tag of the option</p>
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
 
-
+	// <p>Description of the option.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 type Questionnaire struct {
-
+	// <p>Questionnaire title</p>
 	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
 
-
+	// <p>Question list of the questionnaire</p>
 	Questions []*QuestionnaireQuestion `json:"Questions,omitnil,omitempty" name:"Questions"`
 
-
+	// <p>List of answers to the questionnaire</p>
 	Answers []*QuestionnaireQuestionAnswer `json:"Answers,omitnil,omitempty" name:"Answers"`
 }
 
 type QuestionnaireQuestion struct {
-
+	// <p>Serial number of the issue</p>
 	Index *int64 `json:"Index,omitnil,omitempty" name:"Index"`
 
-
+	// <p>Content of the issue</p>
 	Question *string `json:"Question,omitnil,omitempty" name:"Question"`
 
-
+	// <p>Problem type</p>
 	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
-
+	// <p>Required or optional</p>
 	Required *bool `json:"Required,omitnil,omitempty" name:"Required"`
 
-
+	// <p>Options for the question</p>
 	Options []*QuestionOption `json:"Options,omitnil,omitempty" name:"Options"`
 }
 
 type QuestionnaireQuestionAnswer struct {
-
+	// <p>Issue.</p>
 	Question *string `json:"Question,omitnil,omitempty" name:"Question"`
 
-
+	// <p>Selected answer tag.</p>
 	SelectedLabels []*string `json:"SelectedLabels,omitnil,omitempty" name:"SelectedLabels"`
 }
 
@@ -9127,13 +9203,13 @@ type RunNodeInfo struct {
 }
 
 type SandboxContent struct {
-
+	// URL address of the sandbox
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
-
+	// URL address for opening the sandbox through a browser
 	DisplayUrl *string `json:"DisplayUrl,omitnil,omitempty" name:"DisplayUrl"`
 
-
+	// Sandbox output content
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 }
 
@@ -9766,7 +9842,7 @@ type UnsatisfiedReply struct {
 }
 
 type UpdatePeriodInfo struct {
-
+	// Document update frequency type: 0 does not update. -H 1-hour granularity. Currently only support 24 (1 day), 72 (3 days), and 168 (7 days). Only valid for the Tencent document type when source=2.
 	UpdatePeriodH *uint64 `json:"UpdatePeriodH,omitnil,omitempty" name:"UpdatePeriodH"`
 }
 
@@ -9977,60 +10053,60 @@ func (r *VerifyQAResponse) FromJsonString(s string) error {
 }
 
 type VoiceConfig struct {
-
+	// Public cloud timbre id
 	VoiceType *uint64 `json:"VoiceType,omitnil,omitempty" name:"VoiceType"`
 
-
+	// Timbre key
 	TimbreKey *string `json:"TimbreKey,omitnil,omitempty" name:"TimbreKey"`
 
-
+	// Timbre name.
 	VoiceName *string `json:"VoiceName,omitnil,omitempty" name:"VoiceName"`
 }
 
 type WebSearchContent struct {
-
+	// Web search result, a string in json format
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 }
 
 type WebSearchReference struct {
-
+	// Webpage URL
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
 type Widget struct {
-
+	// Widget configuration ID
 	WidgetId *string `json:"WidgetId,omitnil,omitempty" name:"WidgetId"`
 
-
+	// Widget instance ID
 	WidgetRunId *string `json:"WidgetRunId,omitnil,omitempty" name:"WidgetRunId"`
 
-
+	// Widget display data
 	View *string `json:"View,omitnil,omitempty" name:"View"`
 
-
+	// Widget status information
 	State *string `json:"State,omitnil,omitempty" name:"State"`
 
-
+	// Widget position
 	Position *int64 `json:"Position,omitnil,omitempty" name:"Position"`
 
-
+	// Base64-encoded Widget information.
 	EncodedWidget *string `json:"EncodedWidget,omitnil,omitempty" name:"EncodedWidget"`
 
-
+	// payload of the user's last submission
 	Payload *string `json:"Payload,omitnil,omitempty" name:"Payload"`
 }
 
 type WidgetAction struct {
-
+	// Widget configuration ID
 	WidgetId *string `json:"WidgetId,omitnil,omitempty" name:"WidgetId"`
 
-
+	// Widget instance ID
 	WidgetRunId *string `json:"WidgetRunId,omitnil,omitempty" name:"WidgetRunId"`
 
-
+	// Widget action
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-
+	// Data submitted by the Widget action
 	Payload *string `json:"Payload,omitnil,omitempty" name:"Payload"`
 }
 
@@ -10058,28 +10134,28 @@ type WorkFlowSummary struct {
 }
 
 type WorkflowInfo struct {
-
+	// <p>Workflow ID</p>
 	WorkflowId *string `json:"WorkflowId,omitnil,omitempty" name:"WorkflowId"`
 
-
+	// <p>Workflow name.</p>
 	WorkflowName *string `json:"WorkflowName,omitnil,omitempty" name:"WorkflowName"`
 
-
+	// <p>Workflow run ID</p>
 	WorkflowRunId *string `json:"WorkflowRunId,omitnil,omitempty" name:"WorkflowRunId"`
 
-
+	// <p>Tab</p>
 	OptionCards []*string `json:"OptionCards,omitnil,omitempty" name:"OptionCards"`
 
-
+	// <p>Output result of multiple bubbles</p>
 	Outputs []*string `json:"Outputs,omitnil,omitempty" name:"Outputs"`
 
-
+	// <p>Workflow release time, unix timestamp.</p>
 	WorkflowReleaseTime *string `json:"WorkflowReleaseTime,omitnil,omitempty" name:"WorkflowReleaseTime"`
 
-
+	// <p>Workflow multi-bubble output</p>
 	Contents []*Content `json:"Contents,omitnil,omitempty" name:"Contents"`
 
-
+	// <p>Flag indicating whether the tab is single-selection or dual-selection</p><p>Enumeration values:</p><ul><li>0: single selection</li><li>1: multiple selection</li></ul>
 	OptionMode *int64 `json:"OptionMode,omitnil,omitempty" name:"OptionMode"`
 }
 

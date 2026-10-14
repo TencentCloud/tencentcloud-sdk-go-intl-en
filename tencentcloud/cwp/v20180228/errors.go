@@ -26,7 +26,7 @@ const (
 	// Operation failed.
 	FAILEDOPERATION = "FailedOperation"
 
-	// 
+	// Failed to invoke the API service.
 	FAILEDOPERATION_APISERVERFAIL = "FailedOperation.APIServerFail"
 
 	// The client is offline.
