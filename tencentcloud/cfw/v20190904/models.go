@@ -60,246 +60,6 @@ type AcListsData struct {
 }
 
 // Predefined struct for user
-type AddAcRuleRequestParams struct {
-	// -1: lowest priority; 1: highest priority
-	OrderIndex *string `json:"OrderIndex,omitnil,omitempty" name:"OrderIndex"`
-
-	// The action that Cloud Firewall performs on the traffic. Valid values:
-	// accept: allow
-	// drop: deny
-	// log: observe
-	RuleAction *string `json:"RuleAction,omitnil,omitempty" name:"RuleAction"`
-
-	// The traffic direction for access control rules. Valid values:
-	// in: incoming traffic access control
-	// out: outgoing traffic access control
-	Direction *string `json:"Direction,omitnil,omitempty" name:"Direction"`
-
-	// The description of access control rules.
-	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
-
-	// The type of source address in access control rules. Valid values:
-	// net: source IP or range (IP or CIDR)
-	// location: source region
-	// template: CFW address template
-	// instance: instance ID
-	// vendor: Cloud vendor
-	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
-
-	// The source address in the access control policy. 
-	// When `SourceType` is `net`, `SourceContent` is the source IP or CIDR block.
-	// For example: 1.1.1.0/24
-	// 
-	// When `SourceType` is `template`, `SourceContent` must be the source address template ID.
-	// 
-	// When `SourceType` is `location`, `SourceContent` is the source region. 
-	// For example, ["BJ11", "ZB"]
-	// 
-	// When `SourceType` is `instance`, `SourceContent` is the public IP of the instance.
-	// For example, ins-xxxxx
-	// 
-	// When `SourceType` is `vendor`, `SourceContent` is the cloud service provider.
-	// Values: `aws`, `huawei`, `tencent`, `aliyun`, `azure` and `all`. 
-	SourceContent *string `json:"SourceContent,omitnil,omitempty" name:"SourceContent"`
-
-	// The type of destination address in access control rules. Valid values:
-	// net: destination IP or range (IP or CIDR)
-	// location: source region
-	// template: CFW address template
-	// instance: instance ID
-	// vendor: Cloud vendor
-	// domain: Domain name or IP.
-	DestType *string `json:"DestType,omitnil,omitempty" name:"DestType"`
-
-	// The destination address in the access control policy. 
-	// When `DestType` is `net`, `DestContent` is the destination IP or CIDR block.
-	// For example: 1.1.1.0/24
-	// 
-	// When `DestType` is `template`, `DestContent` is the destination address template ID.
-	// 
-	// When `DestType` is `location`, `DestContent` is the destination region. 
-	// For example, ["BJ11", "ZB"]
-	// 
-	// When `DestType` is `instance`, `DestContent` is the public IP of the instance.
-	// For example, ins-xxxxx
-	// 
-	// When `DestType` is `domain`, `DestContent` is the domain name associated with the instance.
-	// For example, *.qq.com
-	// 
-	// When `DestType`, `DestContent` is the selected cloud service provider.
-	// Values: `aws`, `huawei`, `tencent`, `aliyun`, `azure` and `all`. 
-	DestContent *string `json:"DestContent,omitnil,omitempty" name:"DestContent"`
-
-	// The port to apply access control rules. Valid values:
-	// -1/-1: all ports
-	// 80,443: 80 or 443
-	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
-
-	// The protocol type of traffic in access control rules. Valid value: TCP. Only TCP is supported for edge firewall rules. If this parameter is not specified, it defaults to TCP.
-	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
-
-	// The Layer 7 protocol. Valid values:
-	// HTTP/HTTPS
-	// TLS/SSL
-	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
-
-	// Indicates whether to enable the rules. Default: enable. Valid values:
-	// true: enable; false: disable
-	Enable *string `json:"Enable,omitnil,omitempty" name:"Enable"`
-}
-
-type AddAcRuleRequest struct {
-	*tchttp.BaseRequest
-	
-	// -1: lowest priority; 1: highest priority
-	OrderIndex *string `json:"OrderIndex,omitnil,omitempty" name:"OrderIndex"`
-
-	// The action that Cloud Firewall performs on the traffic. Valid values:
-	// accept: allow
-	// drop: deny
-	// log: observe
-	RuleAction *string `json:"RuleAction,omitnil,omitempty" name:"RuleAction"`
-
-	// The traffic direction for access control rules. Valid values:
-	// in: incoming traffic access control
-	// out: outgoing traffic access control
-	Direction *string `json:"Direction,omitnil,omitempty" name:"Direction"`
-
-	// The description of access control rules.
-	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
-
-	// The type of source address in access control rules. Valid values:
-	// net: source IP or range (IP or CIDR)
-	// location: source region
-	// template: CFW address template
-	// instance: instance ID
-	// vendor: Cloud vendor
-	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
-
-	// The source address in the access control policy. 
-	// When `SourceType` is `net`, `SourceContent` is the source IP or CIDR block.
-	// For example: 1.1.1.0/24
-	// 
-	// When `SourceType` is `template`, `SourceContent` must be the source address template ID.
-	// 
-	// When `SourceType` is `location`, `SourceContent` is the source region. 
-	// For example, ["BJ11", "ZB"]
-	// 
-	// When `SourceType` is `instance`, `SourceContent` is the public IP of the instance.
-	// For example, ins-xxxxx
-	// 
-	// When `SourceType` is `vendor`, `SourceContent` is the cloud service provider.
-	// Values: `aws`, `huawei`, `tencent`, `aliyun`, `azure` and `all`. 
-	SourceContent *string `json:"SourceContent,omitnil,omitempty" name:"SourceContent"`
-
-	// The type of destination address in access control rules. Valid values:
-	// net: destination IP or range (IP or CIDR)
-	// location: source region
-	// template: CFW address template
-	// instance: instance ID
-	// vendor: Cloud vendor
-	// domain: Domain name or IP.
-	DestType *string `json:"DestType,omitnil,omitempty" name:"DestType"`
-
-	// The destination address in the access control policy. 
-	// When `DestType` is `net`, `DestContent` is the destination IP or CIDR block.
-	// For example: 1.1.1.0/24
-	// 
-	// When `DestType` is `template`, `DestContent` is the destination address template ID.
-	// 
-	// When `DestType` is `location`, `DestContent` is the destination region. 
-	// For example, ["BJ11", "ZB"]
-	// 
-	// When `DestType` is `instance`, `DestContent` is the public IP of the instance.
-	// For example, ins-xxxxx
-	// 
-	// When `DestType` is `domain`, `DestContent` is the domain name associated with the instance.
-	// For example, *.qq.com
-	// 
-	// When `DestType`, `DestContent` is the selected cloud service provider.
-	// Values: `aws`, `huawei`, `tencent`, `aliyun`, `azure` and `all`. 
-	DestContent *string `json:"DestContent,omitnil,omitempty" name:"DestContent"`
-
-	// The port to apply access control rules. Valid values:
-	// -1/-1: all ports
-	// 80,443: 80 or 443
-	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
-
-	// The protocol type of traffic in access control rules. Valid value: TCP. Only TCP is supported for edge firewall rules. If this parameter is not specified, it defaults to TCP.
-	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
-
-	// The Layer 7 protocol. Valid values:
-	// HTTP/HTTPS
-	// TLS/SSL
-	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
-
-	// Indicates whether to enable the rules. Default: enable. Valid values:
-	// true: enable; false: disable
-	Enable *string `json:"Enable,omitnil,omitempty" name:"Enable"`
-}
-
-func (r *AddAcRuleRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *AddAcRuleRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "OrderIndex")
-	delete(f, "RuleAction")
-	delete(f, "Direction")
-	delete(f, "Description")
-	delete(f, "SourceType")
-	delete(f, "SourceContent")
-	delete(f, "DestType")
-	delete(f, "DestContent")
-	delete(f, "Port")
-	delete(f, "Protocol")
-	delete(f, "ApplicationName")
-	delete(f, "Enable")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddAcRuleRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type AddAcRuleResponseParams struct {
-	// UUID of the new rule
-	RuleUuid *int64 `json:"RuleUuid,omitnil,omitempty" name:"RuleUuid"`
-
-	// 0: operation successful; -1: operation failed
-	ReturnCode *int64 `json:"ReturnCode,omitnil,omitempty" name:"ReturnCode"`
-
-	// success: operation successful; failed: operation failed
-	ReturnMsg *string `json:"ReturnMsg,omitnil,omitempty" name:"ReturnMsg"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type AddAcRuleResponse struct {
-	*tchttp.BaseResponse
-	Response *AddAcRuleResponseParams `json:"Response"`
-}
-
-func (r *AddAcRuleResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *AddAcRuleResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type AddAclRuleRequestParams struct {
 	// The list of Internet boundary rules to be added cannot be empty. Each rule must meet the requirements for direction, source and target, action, scope, protocol port, and template restrictions. The entire request must also comply with rule quota and effective rule count limitations. Account-related values must come from read-only queries: for address templates, call DescribeAddressTemplateList, filter the request with TemplateType=1 or 5, and confirm that the returned Data[].Type is 1 or 5. Write Data[].Uuid (with the mb_ prefix) to the corresponding Content, and do not use Data[].TemplateId (with the ip-/dm- prefix). For protocol port templates, filter the request with TemplateType=6, and write Data[].TemplateId (with the pp- prefix) to ParamTemplateId. For asset instances, call DescribeCfwAssets, parse the returned results, and use assets[].instance_id. For asset groups, call DescribeResourceGroupNew, pass QueryType=resource, GroupId="0", ShowType=all, parse the returned results, and use GroupId. For resource tags, pass QueryType=tag, skip the "all assets" root node, and construct JSON using the first-level node GroupName as the Key and the selected second-level sub-node GroupName as the Value, without writing GroupId. For regions, call DescribeAclRegInfo: for Scope=serial, pass FwType=["SERIAL"]; for Scope=side, pass FwType=["BYPASS"]; for Scope=all, pass both items simultaneously, and use Data[].RegionCode. Do not use display names or manually concatenate values. The range for overwrite import is determined solely by the Direction of the first rule.
 	Rules []*CreateRuleItem `json:"Rules,omitnil,omitempty" name:"Rules"`
@@ -679,39 +439,29 @@ type CommonFilter struct {
 	// Search key.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Search values.
-	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
-
-	// Enum of integers that represent relations between Name and Values.
+	// Enumeration type, representing the matching relationship between Name and Values.
 	// enum FilterOperatorType {
-	//     // Invalid
-	//     FILTER_OPERATOR_TYPE_INVALID = 0;
-	//     // Equal to
+	// equal
 	//     FILTER_OPERATOR_TYPE_EQUAL = 1;
-	//     // Greater than
+	// Above
 	//     FILTER_OPERATOR_TYPE_GREATER = 2;
-	//     // Less than
+	// less than
 	//     FILTER_OPERATOR_TYPE_LESS = 3;
-	//     // Greater than or equal to
+	// >=
 	//     FILTER_OPERATOR_TYPE_GREATER_EQ = 4;
-	//     // Less than or equal to
+	// <=
 	//     FILTER_OPERATOR_TYPE_LESS_EQ = 5;
-	//     // Not equal to
+	// neq
 	//     FILTER_OPERATOR_TYPE_NO_EQ = 6;
-	//     // In (contained in the array)
-	//     FILTER_OPERATOR_TYPE_IN = 7;
-	//     // Not in
+	//     //not in
 	//     FILTER_OPERATOR_TYPE_NOT_IN = 8;
-	//     // Fuzzily matched
+	// Fuzzy matching
 	//     FILTER_OPERATOR_TYPE_FUZZINESS = 9;
-	//     // Existing
-	//     FILTER_OPERATOR_TYPE_EXIST = 10;
-	//     // Not existing
-	//     FILTER_OPERATOR_TYPE_NOT_EXIST = 11;
-	//     // Regular
-	//     FILTER_OPERATOR_TYPE_REGULAR = 12;
 	// }
 	OperatorType *int64 `json:"OperatorType,omitnil,omitempty" name:"OperatorType"`
+
+	// Search values, with an OR relationship between each search value.
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
 // Predefined struct for user
@@ -1314,81 +1064,6 @@ func (r *DeleteAcRuleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type DeleteAllAccessControlRuleRequestParams struct {
-	// Direction. 0: outbound; 1: inbound. 0 by default
-	Direction *uint64 `json:"Direction,omitnil,omitempty" name:"Direction"`
-
-	// Deletes all the access control rules for inter-VPC firewall toggles associated with the EdgeId. It is empty by default. Enter either EdgeId or Area.
-	EdgeId *string `json:"EdgeId,omitnil,omitempty" name:"EdgeId"`
-
-	// Deletes all the access control rules for NAT firewalls of this region. It is empty by default. Enter either EdgeId or Area.
-	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
-}
-
-type DeleteAllAccessControlRuleRequest struct {
-	*tchttp.BaseRequest
-	
-	// Direction. 0: outbound; 1: inbound. 0 by default
-	Direction *uint64 `json:"Direction,omitnil,omitempty" name:"Direction"`
-
-	// Deletes all the access control rules for inter-VPC firewall toggles associated with the EdgeId. It is empty by default. Enter either EdgeId or Area.
-	EdgeId *string `json:"EdgeId,omitnil,omitempty" name:"EdgeId"`
-
-	// Deletes all the access control rules for NAT firewalls of this region. It is empty by default. Enter either EdgeId or Area.
-	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
-}
-
-func (r *DeleteAllAccessControlRuleRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteAllAccessControlRuleRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Direction")
-	delete(f, "EdgeId")
-	delete(f, "Area")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAllAccessControlRuleRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DeleteAllAccessControlRuleResponseParams struct {
-	// Status of the task. `0`: Modified successfully; Others: Modification failed
-	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
-
-	// Number of access control rules deleted.
-	// Note: This field may return `null`, indicating that no valid value was found.
-	Info *int64 `json:"Info,omitnil,omitempty" name:"Info"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DeleteAllAccessControlRuleResponse struct {
-	*tchttp.BaseResponse
-	Response *DeleteAllAccessControlRuleResponseParams `json:"Response"`
-}
-
-func (r *DeleteAllAccessControlRuleResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteAllAccessControlRuleResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type DeleteResourceGroupRequestParams struct {
 	// Group ID
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
@@ -1521,57 +1196,6 @@ func (r *DeleteSecurityGroupRuleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteSecurityGroupRuleResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DeleteVpcInstanceRequestParams struct {
-
-}
-
-type DeleteVpcInstanceRequest struct {
-	*tchttp.BaseRequest
-	
-}
-
-func (r *DeleteVpcInstanceRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteVpcInstanceRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteVpcInstanceRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DeleteVpcInstanceResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DeleteVpcInstanceResponse struct {
-	*tchttp.BaseResponse
-	Response *DeleteVpcInstanceResponseParams `json:"Response"`
-}
-
-func (r *DeleteVpcInstanceResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteVpcInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4214,6 +3838,132 @@ func (r *DescribeVpcAcRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeVpcFwIpStatRequestParams struct {
+	// <p>Entries per page</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Offset value</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Firewall group ID</p>
+	FwGroupId *string `json:"FwGroupId,omitnil,omitempty" name:"FwGroupId"`
+
+	// <p>Instance id of the firewall</p>
+	FwInsId *string `json:"FwInsId,omitnil,omitempty" name:"FwInsId"`
+
+	// <p>Selected time interval 1: within an hour, 2: 24 hours, 3: 7 days, 4: 1 month</p>
+	TimeType *int64 `json:"TimeType,omitnil,omitempty" name:"TimeType"`
+
+	// <p>Filter condition composite</p>
+	Filters []*CommonFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Start time of retrieval. Can be omitted.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time of retrieval. Can be omitted.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>desc: descending order; asc: ascending order. Sort by the value of the By field. If any parameters are loaded, by must have a value.</p>
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// <p>Fields used for sorting</p>
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+type DescribeVpcFwIpStatRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Entries per page</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Offset value</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Firewall group ID</p>
+	FwGroupId *string `json:"FwGroupId,omitnil,omitempty" name:"FwGroupId"`
+
+	// <p>Instance id of the firewall</p>
+	FwInsId *string `json:"FwInsId,omitnil,omitempty" name:"FwInsId"`
+
+	// <p>Selected time interval 1: within an hour, 2: 24 hours, 3: 7 days, 4: 1 month</p>
+	TimeType *int64 `json:"TimeType,omitnil,omitempty" name:"TimeType"`
+
+	// <p>Filter condition composite</p>
+	Filters []*CommonFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Start time of retrieval. Can be omitted.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time of retrieval. Can be omitted.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>desc: descending order; asc: ascending order. Sort by the value of the By field. If any parameters are loaded, by must have a value.</p>
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// <p>Fields used for sorting</p>
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+func (r *DescribeVpcFwIpStatRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVpcFwIpStatRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "FwGroupId")
+	delete(f, "FwInsId")
+	delete(f, "TimeType")
+	delete(f, "Filters")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Order")
+	delete(f, "By")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVpcFwIpStatRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVpcFwIpStatResponseParams struct {
+	// <p>Peak bandwidth statistics list for a single cvm</p>
+	Data []*FwGroupIpFlowStat `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// <p>Total number of lines</p>
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// <p>Asynchronously query status. 1 indicates query execution in progress, and 0 indicates query stopped.</p>
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeVpcFwIpStatResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeVpcFwIpStatResponseParams `json:"Response"`
+}
+
+func (r *DescribeVpcFwIpStatResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVpcFwIpStatResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DnsVpcSwitch struct {
 	// VPC ID
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
@@ -4299,6 +4049,38 @@ type FwCidrInfo struct {
 
 	// The IP segment used by other firewalls. Specify this if you want to assign a dedicated segment for the firewall.
 	ComFwCidr *string `json:"ComFwCidr,omitnil,omitempty" name:"ComFwCidr"`
+}
+
+type FwGroupIpFlowStat struct {
+	// IP
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Instance name.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// VPCID
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// VPC name
+	VpcName *string `json:"VpcName,omitnil,omitempty" name:"VpcName"`
+
+	// Peak traffic
+	FlowMax *int64 `json:"FlowMax,omitnil,omitempty" name:"FlowMax"`
+
+	// Average bandwidth
+	FlowAvg *float64 `json:"FlowAvg,omitnil,omitempty" name:"FlowAvg"`
+
+	// Rate limiting status
+	TcRuleStatus *int64 `json:"TcRuleStatus,omitnil,omitempty" name:"TcRuleStatus"`
+
+	// Firewall ID.
+	FwInsId *string `json:"FwInsId,omitnil,omitempty" name:"FwInsId"`
+
+	// 0 IPV4 , 1 IPV6
+	IpVersion *int64 `json:"IpVersion,omitnil,omitempty" name:"IpVersion"`
 }
 
 type FwVpcCidr struct {
@@ -4661,67 +4443,6 @@ func (r *ModifyAllRuleStatusResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyAllRuleStatusResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyAllVPCSwitchStatusRequestParams struct {
-	// Status. 0: off; 1: on
-	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
-
-	// ID of the selected firewall toggle
-	FireWallVpcIds []*string `json:"FireWallVpcIds,omitnil,omitempty" name:"FireWallVpcIds"`
-}
-
-type ModifyAllVPCSwitchStatusRequest struct {
-	*tchttp.BaseRequest
-	
-	// Status. 0: off; 1: on
-	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
-
-	// ID of the selected firewall toggle
-	FireWallVpcIds []*string `json:"FireWallVpcIds,omitnil,omitempty" name:"FireWallVpcIds"`
-}
-
-func (r *ModifyAllVPCSwitchStatusRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyAllVPCSwitchStatusRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Status")
-	delete(f, "FireWallVpcIds")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAllVPCSwitchStatusRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyAllVPCSwitchStatusResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type ModifyAllVPCSwitchStatusResponse struct {
-	*tchttp.BaseResponse
-	Response *ModifyAllVPCSwitchStatusResponseParams `json:"Response"`
-}
-
-func (r *ModifyAllVPCSwitchStatusResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyAllVPCSwitchStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5450,74 +5171,6 @@ func (r *ModifyNatSequenceRulesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyNatSequenceRulesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyPublicIPSwitchStatusRequestParams struct {
-	// Public IP
-	FireWallPublicIP *string `json:"FireWallPublicIP,omitnil,omitempty" name:"FireWallPublicIP"`
-
-	// Status value. 0: off; 1: on
-	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
-}
-
-type ModifyPublicIPSwitchStatusRequest struct {
-	*tchttp.BaseRequest
-	
-	// Public IP
-	FireWallPublicIP *string `json:"FireWallPublicIP,omitnil,omitempty" name:"FireWallPublicIP"`
-
-	// Status value. 0: off; 1: on
-	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
-}
-
-func (r *ModifyPublicIPSwitchStatusRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyPublicIPSwitchStatusRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "FireWallPublicIP")
-	delete(f, "Status")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyPublicIPSwitchStatusRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyPublicIPSwitchStatusResponseParams struct {
-	// Return message
-	// Note: This field may return `null`, indicating that no valid value was found.
-	ReturnMsg *string `json:"ReturnMsg,omitnil,omitempty" name:"ReturnMsg"`
-
-	// Error code. 0: success; non-0: failed
-	ReturnCode *int64 `json:"ReturnCode,omitnil,omitempty" name:"ReturnCode"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type ModifyPublicIPSwitchStatusResponse struct {
-	*tchttp.BaseResponse
-	Response *ModifyPublicIPSwitchStatusResponseParams `json:"Response"`
-}
-
-func (r *ModifyPublicIPSwitchStatusResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyPublicIPSwitchStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

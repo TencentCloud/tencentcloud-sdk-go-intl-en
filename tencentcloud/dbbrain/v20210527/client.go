@@ -1149,6 +1149,118 @@ func (c *Client) DescribeAuditInstanceListWithContext(ctx context.Context, reque
     return
 }
 
+func NewDescribeDBAuditLogsRequest() (request *DescribeDBAuditLogsRequest) {
+    request = &DescribeDBAuditLogsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeDBAuditLogs")
+    
+    
+    return
+}
+
+func NewDescribeDBAuditLogsResponse() (response *DescribeDBAuditLogsResponse) {
+    response = &DescribeDBAuditLogsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDBAuditLogs
+// Queries the audit log details of a specified instance within a time window, support by SQL type, execution time, error code, keyword, and other multi-condition filtering. Currently only support dcdb and mariadb products (cdb and cynosdb have been migrated to the central platform). Note that Filter.MultiSql and Filter.ExcludeMultiSql need to be transmitted as a JSON string in the form of a two-dimensional array, for example, [["a","b"]] means (a OR b), and the server will automatically parse it.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUDITNOTOPENED = "FailedOperation.AuditNotOpened"
+//  FAILEDOPERATION_PAASAUDITNOTOPENED = "FailedOperation.PaasAuditNotOpened"
+//  FAILEDOPERATION_SEGMENTLOADING = "FailedOperation.SegmentLoading"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERCOMBINATION = "InvalidParameterCombination"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  REGIONERROR = "RegionError"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_HASDUPLICATEDTASK = "UnsupportedOperation.HasDuplicatedTask"
+func (c *Client) DescribeDBAuditLogs(request *DescribeDBAuditLogsRequest) (response *DescribeDBAuditLogsResponse, err error) {
+    return c.DescribeDBAuditLogsWithContext(context.Background(), request)
+}
+
+// DescribeDBAuditLogs
+// Queries the audit log details of a specified instance within a time window, support by SQL type, execution time, error code, keyword, and other multi-condition filtering. Currently only support dcdb and mariadb products (cdb and cynosdb have been migrated to the central platform). Note that Filter.MultiSql and Filter.ExcludeMultiSql need to be transmitted as a JSON string in the form of a two-dimensional array, for example, [["a","b"]] means (a OR b), and the server will automatically parse it.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUDITNOTOPENED = "FailedOperation.AuditNotOpened"
+//  FAILEDOPERATION_PAASAUDITNOTOPENED = "FailedOperation.PaasAuditNotOpened"
+//  FAILEDOPERATION_SEGMENTLOADING = "FailedOperation.SegmentLoading"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERCOMBINATION = "InvalidParameterCombination"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  REGIONERROR = "RegionError"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_HASDUPLICATEDTASK = "UnsupportedOperation.HasDuplicatedTask"
+func (c *Client) DescribeDBAuditLogsWithContext(ctx context.Context, request *DescribeDBAuditLogsRequest) (response *DescribeDBAuditLogsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBAuditLogsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "dbbrain", APIVersion, "DescribeDBAuditLogs")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBAuditLogs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBAuditLogsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBDiagEventRequest() (request *DescribeDBDiagEventRequest) {
     request = &DescribeDBDiagEventRequest{
         BaseRequest: &tchttp.BaseRequest{},

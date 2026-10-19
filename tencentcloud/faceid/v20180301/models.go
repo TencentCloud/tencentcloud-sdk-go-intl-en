@@ -161,15 +161,14 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// Deprecated: NeedVerifyIdCard is deprecated.
 	NeedVerifyIdCard *bool `json:"NeedVerifyIdCard,omitnil,omitempty" name:"NeedVerifyIdCard"`
 
-	// Whether to forbid the modification of the OCR result by users. Default value: `false` (modification allowed). (Currently, this parameter is not applied.)
+	// Whether to forbid the modification of the OCR result by users. Default value: `false` (modification allowed). 
 	DisableChangeOcrResult *bool `json:"DisableChangeOcrResult,omitnil,omitempty" name:"DisableChangeOcrResult"`
 
 	// Whether to disable the OCR warnings. Default value: `false` (not disable), where OCR warnings are enabled and the OCR result will not be returned if there is a warning.
-	// This feature applies only to Hong Kong (China) identity cards, Malaysian identity cards, and passports.
 	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitnil,omitempty" name:"DisableCheckOcrWarnings"`
 
 	// Customize which alarm codes to block. If left blank, all alarm codes will be blocked by default.
-	// Optional alarm codes are: -9101 (occlusion or incomplete border), -9102 (photocopying), -9103 (screen capture by camera), -9104 (image editing/PS modification), -9107 (glare/reflection), -9108 (blurriness), -9901 (other alarms).
+	// Optional alarm codes are: -9101 (occlusion or incomplete border), -9102 (photocopying), -9103 (screen capture by camera), -9104 (image editing/PS modification), -9107 (glare/reflection), -9108 (blurriness), -8101 (information format check),-8102(information consistency check).
 	SelectedWarningCodes []*int64 `json:"SelectedWarningCodes,omitnil,omitempty" name:"SelectedWarningCodes"`
 
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
@@ -287,15 +286,14 @@ type ApplySdkVerificationTokenRequest struct {
 	// Whether ID card authentication is required. If not, only document OCR will be performed. Currently, authentication is available only when the value of `IdCardType` is `HK`.
 	NeedVerifyIdCard *bool `json:"NeedVerifyIdCard,omitnil,omitempty" name:"NeedVerifyIdCard"`
 
-	// Whether to forbid the modification of the OCR result by users. Default value: `false` (modification allowed). (Currently, this parameter is not applied.)
+	// Whether to forbid the modification of the OCR result by users. Default value: `false` (modification allowed). 
 	DisableChangeOcrResult *bool `json:"DisableChangeOcrResult,omitnil,omitempty" name:"DisableChangeOcrResult"`
 
 	// Whether to disable the OCR warnings. Default value: `false` (not disable), where OCR warnings are enabled and the OCR result will not be returned if there is a warning.
-	// This feature applies only to Hong Kong (China) identity cards, Malaysian identity cards, and passports.
 	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitnil,omitempty" name:"DisableCheckOcrWarnings"`
 
 	// Customize which alarm codes to block. If left blank, all alarm codes will be blocked by default.
-	// Optional alarm codes are: -9101 (occlusion or incomplete border), -9102 (photocopying), -9103 (screen capture by camera), -9104 (image editing/PS modification), -9107 (glare/reflection), -9108 (blurriness), -9901 (other alarms).
+	// Optional alarm codes are: -9101 (occlusion or incomplete border), -9102 (photocopying), -9103 (screen capture by camera), -9104 (image editing/PS modification), -9107 (glare/reflection), -9108 (blurriness), -8101 (information format check),-8102(information consistency check).
 	SelectedWarningCodes []*int64 `json:"SelectedWarningCodes,omitnil,omitempty" name:"SelectedWarningCodes"`
 
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.

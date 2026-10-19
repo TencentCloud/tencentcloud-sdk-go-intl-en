@@ -1018,6 +1018,118 @@ type AuditInstanceInfo struct {
 	TagList []*Tag `json:"TagList,omitnil,omitempty" name:"TagList"`
 }
 
+type AuditLog struct {
+	// Number of affected rows.
+	AffectRows *int64 `json:"AffectRows,omitnil,omitempty" name:"AffectRows"`
+
+	// Error code.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// SQL type.
+	SqlType *string `json:"SqlType,omitnil,omitempty" name:"SqlType"`
+
+	// Table name.
+	TableName *string `json:"TableName,omitnil,omitempty" name:"TableName"`
+
+	// Instance name.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Audit policy name.
+	PolicyName *string `json:"PolicyName,omitnil,omitempty" name:"PolicyName"`
+
+	// Database name.
+	DBName *string `json:"DBName,omitnil,omitempty" name:"DBName"`
+
+	// SQL statement.
+	Sql *string `json:"Sql,omitnil,omitempty" name:"Sql"`
+
+	// Client address.
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// Username.
+	User *string `json:"User,omitnil,omitempty" name:"User"`
+
+	// Execution time, in microseconds.
+	ExecTime *int64 `json:"ExecTime,omitnil,omitempty" name:"ExecTime"`
+
+	// Time.
+	Timestamp *string `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
+
+	// Number of rows returned.
+	SentRows *int64 `json:"SentRows,omitnil,omitempty" name:"SentRows"`
+
+	// Execution thread ID.
+	ThreadId *int64 `json:"ThreadId,omitnil,omitempty" name:"ThreadId"`
+
+	// Number of scanned rows.
+	CheckRows *int64 `json:"CheckRows,omitnil,omitempty" name:"CheckRows"`
+
+	// cpu execution time, in microseconds.
+	CpuTime *float64 `json:"CpuTime,omitnil,omitempty" name:"CpuTime"`
+
+	// IO wait time, in microseconds.
+	IoWaitTime *int64 `json:"IoWaitTime,omitnil,omitempty" name:"IoWaitTime"`
+
+	// Lock waiting time in microseconds.
+	LockWaitTime *int64 `json:"LockWaitTime,omitnil,omitempty" name:"LockWaitTime"`
+
+	// Transaction continuous waiting time, in µs.
+	TrxLivingTime *int64 `json:"TrxLivingTime,omitnil,omitempty" name:"TrxLivingTime"`
+
+	// Start time. Together with timestamp, it forms a nanosecond-precision time.
+	NsTime *int64 `json:"NsTime,omitnil,omitempty" name:"NsTime"`
+
+	// Basic information of the log hit rule template
+	TemplateInfo []*LogRuleTemplateInfo `json:"TemplateInfo,omitnil,omitempty" name:"TemplateInfo"`
+
+	// Transaction ID
+	TrxId *int64 `json:"TrxId,omitnil,omitempty" name:"TrxId"`
+
+	// Client port.
+	ClientPort *int64 `json:"ClientPort,omitnil,omitempty" name:"ClientPort"`
+}
+
+type AuditLogFilter struct {
+	// Client address.
+	Host []*string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// Username.
+	User []*string `json:"User,omitnil,omitempty" name:"User"`
+
+	// Database name.
+	DBName []*string `json:"DBName,omitnil,omitempty" name:"DBName"`
+
+	// Table name.
+	TableName []*string `json:"TableName,omitnil,omitempty" name:"TableName"`
+
+	// Audit policy name.
+	PolicyName []*string `json:"PolicyName,omitnil,omitempty" name:"PolicyName"`
+
+	// SQL statement. Fuzzy matching supported.
+	Sql *string `json:"Sql,omitnil,omitempty" name:"Sql"`
+
+	// SQL type. Currently supports: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "ALTER", "SET", "REPLACE", "EXECUTE".
+	SqlType *string `json:"SqlType,omitnil,omitempty" name:"SqlType"`
+
+	// Execution time. Unit: ms. Filter audit logs with an execution time more than this value.
+	ExecTime *int64 `json:"ExecTime,omitnil,omitempty" name:"ExecTime"`
+
+	// Number of affected rows. Filter audit logs where the number of affected rows is more than this value.
+	AffectRows *int64 `json:"AffectRows,omitnil,omitempty" name:"AffectRows"`
+
+	// SQL type. Supports simultaneous query of multiple types. Currently supports: "SELECT", "INSERT", "UPDATE", "DELETE", "CREATE", "DROP", "ALTER", "SET", "REPLACE", "EXECUTE".
+	SqlTypes []*string `json:"SqlTypes,omitnil,omitempty" name:"SqlTypes"`
+
+	// SQL statement. Supports transmission of multiple sql statements.
+	Sqls []*string `json:"Sqls,omitnil,omitempty" name:"Sqls"`
+
+	// Number of rows returned.
+	SentRows *uint64 `json:"SentRows,omitnil,omitempty" name:"SentRows"`
+
+	// Thread ID.
+	ThreadId []*string `json:"ThreadId,omitnil,omitempty" name:"ThreadId"`
+}
+
 type AuditRuleFilters struct {
 	// A single audit rule.
 	RuleFilters []*RuleFilters `json:"RuleFilters,omitnil,omitempty" name:"RuleFilters"`
@@ -6283,6 +6395,132 @@ func (r *DescribeAuditInstanceListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAuditInstanceListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditLogsRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Start time in the format of "2017-07-12 10:29:20".
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time in the format: "2017-07-12 10:29:20".
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Sort order. Supported values: "ASC" - Ascending order, "DESC" - Descending order.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field. Supported values include:
+	// timestamp
+	// "affectRows" - Number of affected rows
+	// "execTime" - Execution time.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Deprecated.
+	//
+	// Deprecated: Filter is deprecated.
+	Filter *AuditLogFilter `json:"Filter,omitnil,omitempty" name:"Filter"`
+
+	// Pagination parameter. Number of data entries returned per request. Default value: 100. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset.
+	// Description: The sum of Limit and Offset must be less than or equal to 65536.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Filter criteria. Multiple values have an AND relationship.
+	LogFilter []*InstanceAuditLogFilter `json:"LogFilter,omitnil,omitempty" name:"LogFilter"`
+}
+
+type DescribeAuditLogsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Start time in the format of "2017-07-12 10:29:20".
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time in the format: "2017-07-12 10:29:20".
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Sort order. Supported values: "ASC" - Ascending order, "DESC" - Descending order.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// Sorting field. Supported values include:
+	// timestamp
+	// "affectRows" - Number of affected rows
+	// "execTime" - Execution time.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Deprecated.
+	Filter *AuditLogFilter `json:"Filter,omitnil,omitempty" name:"Filter"`
+
+	// Pagination parameter. Number of data entries returned per request. Default value: 100. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset.
+	// Description: The sum of Limit and Offset must be less than or equal to 65536.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Filter criteria. Multiple values have an AND relationship.
+	LogFilter []*InstanceAuditLogFilter `json:"LogFilter,omitnil,omitempty" name:"LogFilter"`
+}
+
+func (r *DescribeAuditLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditLogsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Order")
+	delete(f, "OrderBy")
+	delete(f, "Filter")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "LogFilter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAuditLogsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditLogsResponseParams struct {
+	// Number of eligible audit log entries.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Audit log details.
+	Items []*AuditLog `json:"Items,omitnil,omitempty" name:"Items"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAuditLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAuditLogsResponseParams `json:"Response"`
+}
+
+func (r *DescribeAuditLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditLogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -13986,6 +14224,32 @@ type InstanceAbility struct {
 	NonsupportForceRestartReason *string `json:"NonsupportForceRestartReason,omitnil,omitempty" name:"NonsupportForceRestartReason"`
 }
 
+type InstanceAuditLogFilter struct {
+	// Filter item. Currently supports the following search criteria:
+	// 
+	// Includes, excludes, includes (segment dimension), excludes (segment dimension): sql - SQL detail; alarmLevel - alarm level; ruleTemplateId - rule template id
+	// 
+	// Equal to, not equal to, contains, does not contain: host - client IP address; user - userName; dbName - database name;
+	// 
+	// Equal, not equal to: sqlType - SQL type; errCode - error code; threadId - thread ID.
+	// 
+	// Range search (time type is unified to µs): execTime - execution time; lockWaitTime - execution time; ioWaitTime - IO wait time; trxLivingTime - transaction duration; cpuTime - CPU time; checkRows - scanned rows; affectRows - number of affected rows; sentRows - rows returned.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter criteria. The following conditions are supported:
+	// WINC-Contains (segment dimension)
+	// WEXC - Excluding (segment dimension)
+	// INC - included
+	// EXC - Excluding
+	// EQS - equal to
+	// NEQ - not equal to
+	// RA - Range.
+	Compare *string `json:"Compare,omitnil,omitempty" name:"Compare"`
+
+	// Filtered value. In reverse query, multiple values have an AND relationship. In forward query, multiple values have an OR relationship.
+	Value []*string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
 type InstanceAuditRule struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -15053,6 +15317,20 @@ type LogFilter struct {
 
 	// Filtered value. For reverse query, multiple values have an AND relationship. For forward query, multiple values have an OR relationship.
 	Value []*string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type LogRuleTemplateInfo struct {
+	// Template ID.
+	RuleTemplateId *string `json:"RuleTemplateId,omitnil,omitempty" name:"RuleTemplateId"`
+
+	// Rule template name.
+	RuleTemplateName *string `json:"RuleTemplateName,omitnil,omitempty" name:"RuleTemplateName"`
+
+	// Alarm level. Valid values: 1 - Low risk, 2 - Medium risk, 3 - High risk.
+	AlarmLevel *string `json:"AlarmLevel,omitnil,omitempty" name:"AlarmLevel"`
+
+	// Rule template change status. Valid values: 0 - unchanged, 1 - changed, 2 - deleted.
+	RuleTemplateStatus *int64 `json:"RuleTemplateStatus,omitnil,omitempty" name:"RuleTemplateStatus"`
 }
 
 type LogicBackupConfigInfo struct {

@@ -661,6 +661,60 @@ func (c *Client) DeleteL3ConnWithContext(ctx context.Context, request *DeleteL3C
     return
 }
 
+func NewDescribeAccessPointListRequest() (request *DescribeAccessPointListRequest) {
+    request = &DescribeAccessPointListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mna", APIVersion, "DescribeAccessPointList")
+    
+    
+    return
+}
+
+func NewDescribeAccessPointListResponse() (response *DescribeAccessPointListResponse) {
+    response = &DescribeAccessPointListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAccessPointList
+// This API is used to query the access point list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeAccessPointList(request *DescribeAccessPointListRequest) (response *DescribeAccessPointListResponse, err error) {
+    return c.DescribeAccessPointListWithContext(context.Background(), request)
+}
+
+// DescribeAccessPointList
+// This API is used to query the access point list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeAccessPointListWithContext(ctx context.Context, request *DescribeAccessPointListRequest) (response *DescribeAccessPointListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAccessPointListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mna", APIVersion, "DescribeAccessPointList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAccessPointList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAccessPointListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAccessRegionsRequest() (request *DescribeAccessRegionsRequest) {
     request = &DescribeAccessRegionsRequest{
         BaseRequest: &tchttp.BaseRequest{},

@@ -45,90 +45,6 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
-func NewAddAcRuleRequest() (request *AddAcRuleRequest) {
-    request = &AddAcRuleRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cfw", APIVersion, "AddAcRule")
-    
-    
-    return
-}
-
-func NewAddAcRuleResponse() (response *AddAcRuleResponse) {
-    response = &AddAcRuleResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// AddAcRule
-// This API is used to add edge firewall rules.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) AddAcRule(request *AddAcRuleRequest) (response *AddAcRuleResponse, err error) {
-    return c.AddAcRuleWithContext(context.Background(), request)
-}
-
-// AddAcRule
-// This API is used to add edge firewall rules.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) AddAcRuleWithContext(ctx context.Context, request *AddAcRuleRequest) (response *AddAcRuleResponse, err error) {
-    if request == nil {
-        request = NewAddAcRuleRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cfw", APIVersion, "AddAcRule")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("AddAcRule require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewAddAcRuleResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewAddAclRuleRequest() (request *AddAclRuleRequest) {
     request = &AddAclRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -697,62 +613,6 @@ func (c *Client) DeleteAcRuleWithContext(ctx context.Context, request *DeleteAcR
     return
 }
 
-func NewDeleteAllAccessControlRuleRequest() (request *DeleteAllAccessControlRuleRequest) {
-    request = &DeleteAllAccessControlRuleRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cfw", APIVersion, "DeleteAllAccessControlRule")
-    
-    
-    return
-}
-
-func NewDeleteAllAccessControlRuleResponse() (response *DeleteAllAccessControlRuleResponse) {
-    response = &DeleteAllAccessControlRuleResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DeleteAllAccessControlRule
-// This API is used to delete all rules.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-func (c *Client) DeleteAllAccessControlRule(request *DeleteAllAccessControlRuleRequest) (response *DeleteAllAccessControlRuleResponse, err error) {
-    return c.DeleteAllAccessControlRuleWithContext(context.Background(), request)
-}
-
-// DeleteAllAccessControlRule
-// This API is used to delete all rules.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-func (c *Client) DeleteAllAccessControlRuleWithContext(ctx context.Context, request *DeleteAllAccessControlRuleRequest) (response *DeleteAllAccessControlRuleResponse, err error) {
-    if request == nil {
-        request = NewDeleteAllAccessControlRuleRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cfw", APIVersion, "DeleteAllAccessControlRule")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteAllAccessControlRule require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteAllAccessControlRuleResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDeleteResourceGroupRequest() (request *DeleteResourceGroupRequest) {
     request = &DeleteResourceGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -887,60 +747,6 @@ func (c *Client) DeleteSecurityGroupRuleWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDeleteSecurityGroupRuleResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDeleteVpcInstanceRequest() (request *DeleteVpcInstanceRequest) {
-    request = &DeleteVpcInstanceRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cfw", APIVersion, "DeleteVpcInstance")
-    
-    
-    return
-}
-
-func NewDeleteVpcInstanceResponse() (response *DeleteVpcInstanceResponse) {
-    response = &DeleteVpcInstanceResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DeleteVpcInstance
-// This API is used to delete firewall instance.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  LIMITEXCEEDED = "LimitExceeded"
-func (c *Client) DeleteVpcInstance(request *DeleteVpcInstanceRequest) (response *DeleteVpcInstanceResponse, err error) {
-    return c.DeleteVpcInstanceWithContext(context.Background(), request)
-}
-
-// DeleteVpcInstance
-// This API is used to delete firewall instance.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  LIMITEXCEEDED = "LimitExceeded"
-func (c *Client) DeleteVpcInstanceWithContext(ctx context.Context, request *DeleteVpcInstanceRequest) (response *DeleteVpcInstanceResponse, err error) {
-    if request == nil {
-        request = NewDeleteVpcInstanceRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cfw", APIVersion, "DeleteVpcInstance")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DeleteVpcInstance require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDeleteVpcInstanceResponse()
     err = c.Send(request, response)
     return
 }
@@ -2805,6 +2611,90 @@ func (c *Client) DescribeVpcAcRuleWithContext(ctx context.Context, request *Desc
     return
 }
 
+func NewDescribeVpcFwIpStatRequest() (request *DescribeVpcFwIpStatRequest) {
+    request = &DescribeVpcFwIpStatRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfw", APIVersion, "DescribeVpcFwIpStat")
+    
+    
+    return
+}
+
+func NewDescribeVpcFwIpStatResponse() (response *DescribeVpcFwIpStatResponse) {
+    response = &DescribeVpcFwIpStatResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeVpcFwIpStat
+// This API is used to query the traffic statistics under VPC firewalls at the single IP granularity.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeVpcFwIpStat(request *DescribeVpcFwIpStatRequest) (response *DescribeVpcFwIpStatResponse, err error) {
+    return c.DescribeVpcFwIpStatWithContext(context.Background(), request)
+}
+
+// DescribeVpcFwIpStat
+// This API is used to query the traffic statistics under VPC firewalls at the single IP granularity.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeVpcFwIpStatWithContext(ctx context.Context, request *DescribeVpcFwIpStatRequest) (response *DescribeVpcFwIpStatResponse, err error) {
+    if request == nil {
+        request = NewDescribeVpcFwIpStatRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cfw", APIVersion, "DescribeVpcFwIpStat")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVpcFwIpStat require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeVpcFwIpStatResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewExpandCfwVerticalRequest() (request *ExpandCfwVerticalRequest) {
     request = &ExpandCfwVerticalRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3051,60 +2941,6 @@ func (c *Client) ModifyAllRuleStatusWithContext(ctx context.Context, request *Mo
     request.SetContext(ctx)
     
     response = NewModifyAllRuleStatusResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyAllVPCSwitchStatusRequest() (request *ModifyAllVPCSwitchStatusRequest) {
-    request = &ModifyAllVPCSwitchStatusRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cfw", APIVersion, "ModifyAllVPCSwitchStatus")
-    
-    
-    return
-}
-
-func NewModifyAllVPCSwitchStatusResponse() (response *ModifyAllVPCSwitchStatusResponse) {
-    response = &ModifyAllVPCSwitchStatusResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// ModifyAllVPCSwitchStatus
-// This API is used to enable or disable one or multiple VPC firewalls.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  LIMITEXCEEDED = "LimitExceeded"
-func (c *Client) ModifyAllVPCSwitchStatus(request *ModifyAllVPCSwitchStatusRequest) (response *ModifyAllVPCSwitchStatusResponse, err error) {
-    return c.ModifyAllVPCSwitchStatusWithContext(context.Background(), request)
-}
-
-// ModifyAllVPCSwitchStatus
-// This API is used to enable or disable one or multiple VPC firewalls.
-//
-// error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  LIMITEXCEEDED = "LimitExceeded"
-func (c *Client) ModifyAllVPCSwitchStatusWithContext(ctx context.Context, request *ModifyAllVPCSwitchStatusRequest) (response *ModifyAllVPCSwitchStatusResponse, err error) {
-    if request == nil {
-        request = NewModifyAllVPCSwitchStatusRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cfw", APIVersion, "ModifyAllVPCSwitchStatus")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyAllVPCSwitchStatus require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyAllVPCSwitchStatusResponse()
     err = c.Send(request, response)
     return
 }
@@ -3811,60 +3647,6 @@ func (c *Client) ModifyNatSequenceRulesWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewModifyNatSequenceRulesResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewModifyPublicIPSwitchStatusRequest() (request *ModifyPublicIPSwitchStatusRequest) {
-    request = &ModifyPublicIPSwitchStatusRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cfw", APIVersion, "ModifyPublicIPSwitchStatus")
-    
-    
-    return
-}
-
-func NewModifyPublicIPSwitchStatusResponse() (response *ModifyPublicIPSwitchStatusResponse) {
-    response = &ModifyPublicIPSwitchStatusResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// ModifyPublicIPSwitchStatus
-// This API is used to enable or disable an edge firewall.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETER = "InvalidParameter"
-func (c *Client) ModifyPublicIPSwitchStatus(request *ModifyPublicIPSwitchStatusRequest) (response *ModifyPublicIPSwitchStatusResponse, err error) {
-    return c.ModifyPublicIPSwitchStatusWithContext(context.Background(), request)
-}
-
-// ModifyPublicIPSwitchStatus
-// This API is used to enable or disable an edge firewall.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  FAILEDOPERATION = "FailedOperation"
-//  INVALIDPARAMETER = "InvalidParameter"
-func (c *Client) ModifyPublicIPSwitchStatusWithContext(ctx context.Context, request *ModifyPublicIPSwitchStatusRequest) (response *ModifyPublicIPSwitchStatusResponse, err error) {
-    if request == nil {
-        request = NewModifyPublicIPSwitchStatusRequest()
-    }
-    c.InitBaseRequest(&request.BaseRequest, "cfw", APIVersion, "ModifyPublicIPSwitchStatus")
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("ModifyPublicIPSwitchStatus require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewModifyPublicIPSwitchStatusResponse()
     err = c.Send(request, response)
     return
 }

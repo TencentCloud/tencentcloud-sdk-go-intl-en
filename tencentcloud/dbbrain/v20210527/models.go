@@ -91,6 +91,95 @@ func (r *AddUserContactResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AuditDBLogItem struct {
+	// <p>Time point of SQL execution (format string, yyyy-MM-dd HH:mm:ss).</p>
+	Timestamp *string `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
+
+	// <p>Cluster ID.</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Number of affected rows.</p>
+	AffectRows *int64 `json:"AffectRows,omitnil,omitempty" name:"AffectRows"`
+
+	// <p>Number of scanned rows.</p>
+	CheckRows *int64 `json:"CheckRows,omitnil,omitempty" name:"CheckRows"`
+
+	// <p>CPU time (µs).</p>
+	CpuTime *int64 `json:"CpuTime,omitnil,omitempty" name:"CpuTime"`
+
+	// <p>Backend Set Host (source field dbHost).</p>
+	SetHost *string `json:"SetHost,omitnil,omitempty" name:"SetHost"`
+
+	// <p>Database name where the SQL is executed.</p>
+	DBName *string `json:"DBName,omitnil,omitempty" name:"DBName"`
+
+	// <p>Error code returned by SQL execution. 0 indicates success.</p>
+	ErrCode *string `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// <p>SQL execution time (µs).</p>
+	ExecTime *int64 `json:"ExecTime,omitnil,omitempty" name:"ExecTime"`
+
+	// <p>Client source IP.</p>
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// <p>Set Name (source field instanceId).</p>
+	SetName *string `json:"SetName,omitnil,omitempty" name:"SetName"`
+
+	// <p>IO wait time (µs).</p>
+	IoWaitTime *int64 `json:"IoWaitTime,omitnil,omitempty" name:"IoWaitTime"`
+
+	// <p>Lock waiting time (µs).</p>
+	LockWaitTime *int64 `json:"LockWaitTime,omitnil,omitempty" name:"LockWaitTime"`
+
+	// <p>SQL start time (nanosecond timestamp).</p>
+	SqlStartTimeNs *int64 `json:"SqlStartTimeNs,omitnil,omitempty" name:"SqlStartTimeNs"`
+
+	// <p>Query ID (used for join queries).</p>
+	QueryId *string `json:"QueryId,omitnil,omitempty" name:"QueryId"`
+
+	// <p>Serial number for queries (serial number of SQL in the same transaction).</p>
+	QueryNo *int64 `json:"QueryNo,omitnil,omitempty" name:"QueryNo"`
+
+	// <p>Number of rows returned (rows in the scanning result set).</p>
+	SentRows *int64 `json:"SentRows,omitnil,omitempty" name:"SentRows"`
+
+	// <p>Original executed SQL statement.</p>
+	Sql *string `json:"Sql,omitnil,omitempty" name:"Sql"`
+
+	// <p>SQL Template ID.</p>
+	SqlTemplateId *string `json:"SqlTemplateId,omitnil,omitempty" name:"SqlTemplateId"`
+
+	// <p>SQL type (for example, Select, Insert, Update, Delete).</p>
+	SqlType *string `json:"SqlType,omitnil,omitempty" name:"SqlType"`
+
+	// <p>Tables involved.</p>
+	Tables *string `json:"Tables,omitnil,omitempty" name:"Tables"`
+
+	// <p>Thread ID.</p>
+	ThreadId *string `json:"ThreadId,omitnil,omitempty" name:"ThreadId"`
+
+	// <p>SQL start time (millisecond-level timestamp).</p>
+	SqlStartTime *int64 `json:"SqlStartTime,omitnil,omitempty" name:"SqlStartTime"`
+
+	// <p>Transaction time to live (µs).</p>
+	TrxLivingTime *int64 `json:"TrxLivingTime,omitnil,omitempty" name:"TrxLivingTime"`
+
+	// <p>Database username that executes the SQL.</p>
+	User *string `json:"User,omitnil,omitempty" name:"User"`
+
+	// <p>Transaction ID.</p>
+	TrxId *string `json:"TrxId,omitnil,omitempty" name:"TrxId"`
+
+	// <p>Internal XID.</p>
+	InternalXId *string `json:"InternalXId,omitnil,omitempty" name:"InternalXId"`
+
+	// <p>Business code (extracted from i/o/p and other KV in business-side SQL annotations).</p>
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// <p>Gateway circulation duration (ms). It is returned only when LogType=All after gateway log association. When LogType=DB, this field is not delivered.</p>
+	FlowTime *int64 `json:"FlowTime,omitnil,omitempty" name:"FlowTime"`
+}
+
 type AuditInstance struct {
 	// Audit status. Valid values: `ON` (Enabled), `OFF` (Not enabled).
 	AuditStatus *string `json:"AuditStatus,omitnil,omitempty" name:"AuditStatus"`
@@ -155,6 +244,169 @@ type AuditInstanceInfo struct {
 
 	// Resource tags
 	ResourceTags []*string `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
+}
+
+type AuditLogQueryFilter struct {
+	// <p>SQL type list, with values such as SELECT, INSERT, UPDATE, and DELETE.</p>
+	SqlType []*string `json:"SqlType,omitnil,omitempty" name:"SqlType"`
+
+	// <p>Execution duration range (ms), an array of length 2: [minimum value, maximum value].</p>
+	ExecTime []*int64 `json:"ExecTime,omitnil,omitempty" name:"ExecTime"`
+
+	// <p>IO waiting duration range (ms), an array with a length of 2.</p>
+	IoWaitTime []*int64 `json:"IoWaitTime,omitnil,omitempty" name:"IoWaitTime"`
+
+	// <p>CPU duration range (ms), an array of length 2.</p>
+	CpuTime []*int64 `json:"CpuTime,omitnil,omitempty" name:"CpuTime"`
+
+	// <p>Lock wait time range (ms), an array with a length of 2.</p>
+	LockWaitTime []*int64 `json:"LockWaitTime,omitnil,omitempty" name:"LockWaitTime"`
+
+	// <p>SQL execution error code. For example, 0 indicates success.</p>
+	ErrCode *string `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// <p>Error message.</p>
+	ErrInfo *string `json:"ErrInfo,omitnil,omitempty" name:"ErrInfo"`
+
+	// <p>Database name list.</p>
+	DBName []*string `json:"DBName,omitnil,omitempty" name:"DBName"`
+
+	// <p>Username list.</p>
+	User []*string `json:"User,omitnil,omitempty" name:"User"`
+
+	// <p>Source IP list.</p>
+	Host []*string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// <p>List of thread IDs.</p>
+	ThreadId []*string `json:"ThreadId,omitnil,omitempty" name:"ThreadId"`
+
+	// <p>List of proxy node hosts.</p>
+	ProxyHostList []*string `json:"ProxyHostList,omitnil,omitempty" name:"ProxyHostList"`
+
+	// <p>Backend Set Host list.</p>
+	SetHostList []*string `json:"SetHostList,omitnil,omitempty" name:"SetHostList"`
+
+	// <p>Backend Set ID list.</p>
+	SetIdList []*string `json:"SetIdList,omitnil,omitempty" name:"SetIdList"`
+
+	// <p>Multiple SQL keyword conditions, JSON string, internally a two-dimensional array: level 1 is AND, the second level is OR. Note that the cloud API platform does not support two-dimensional arrays. Here, a string is used to carry it, and the server automatically parses it.</p>
+	MultiSql *string `json:"MultiSql,omitnil,omitempty" name:"MultiSql"`
+
+	// <p>Excluded multiple SQL keyword conditions, JSON string, with the same structure as MultiSql.</p>
+	ExcludeMultiSql *string `json:"ExcludeMultiSql,omitnil,omitempty" name:"ExcludeMultiSql"`
+
+	// <p>SQL Template ID.</p>
+	SqlTemplateId *string `json:"SqlTemplateId,omitnil,omitempty" name:"SqlTemplateId"`
+
+	// <p>SQL start time, for example: 2026-10-10 11:05:06.002211</p><p>Parameter format: YYYY-MM-DD hh:mm:ss.SSSSSS</p>
+	SqlStartTime *string `json:"SqlStartTime,omitnil,omitempty" name:"SqlStartTime"`
+
+	// <p>Query ID, used for join queries (required when LogType=All).</p>
+	QueryId *string `json:"QueryId,omitnil,omitempty" name:"QueryId"`
+}
+
+type AuditProxyLogItem struct {
+	// <p>Time point of SQL execution (format string, yyyy-MM-dd HH:mm:ss).</p>
+	Timestamp *string `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
+
+	// <p>Cluster ID (dcdb/mariadb cluster identifier, same as InstanceId).</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+
+	// <p>Number of affected rows.</p>
+	AffectRows *int64 `json:"AffectRows,omitnil,omitempty" name:"AffectRows"`
+
+	// <p>Whether to autocommit. 1 means enabling, and 0 means disabling.</p>
+	Autocommit *string `json:"Autocommit,omitnil,omitempty" name:"Autocommit"`
+
+	// <p>MySQL network protocol command types (such as COM_QUERY and COM_CONNECT).</p>
+	ComType *string `json:"ComType,omitnil,omitempty" name:"ComType"`
+
+	// <p>Duration of creating a connection.</p>
+	ConnTc *int64 `json:"ConnTc,omitnil,omitempty" name:"ConnTc"`
+
+	// <p>Backend DB instance address (multiple entries are separated by commas).</p>
+	DBHost *string `json:"DBHost,omitnil,omitempty" name:"DBHost"`
+
+	// <p>Database name where the SQL is executed.</p>
+	DBName *string `json:"DBName,omitnil,omitempty" name:"DBName"`
+
+	// <p>Error code returned by SQL execution. 0 indicates success.</p>
+	ErrCode *string `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// <p>Error message.</p>
+	ErrInfo *string `json:"ErrInfo,omitnil,omitempty" name:"ErrInfo"`
+
+	// <p>SQL execution time (µs).</p>
+	ExecTime *int64 `json:"ExecTime,omitnil,omitempty" name:"ExecTime"`
+
+	// <p>Number of connections still occupied after request ends (typically 0 for non-transaction requests).</p>
+	HoldConns *string `json:"HoldConns,omitnil,omitempty" name:"HoldConns"`
+
+	// <p>Client source IP.</p>
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// <p>Whether to enable global consistency read (0: no, 1: yes).</p>
+	Mc *string `json:"Mc,omitnil,omitempty" name:"Mc"`
+
+	// <p>SQL start time (microsecond portion in microsecond precision).</p>
+	SqlStartTimeUs *int64 `json:"SqlStartTimeUs,omitnil,omitempty" name:"SqlStartTimeUs"`
+
+	// <p>Number of connections created in the current request.</p>
+	NewConnNum *int64 `json:"NewConnNum,omitnil,omitempty" name:"NewConnNum"`
+
+	// <p>Proxy node address.</p>
+	ProxyHost *string `json:"ProxyHost,omitnil,omitempty" name:"ProxyHost"`
+
+	// <p>Proxy ID.</p>
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
+
+	// <p>Query ID (used for join queries).</p>
+	QueryId *string `json:"QueryId,omitnil,omitempty" name:"QueryId"`
+
+	// <p>Number of rows returned (rows in the scanning result set).</p>
+	SentRows *int64 `json:"SentRows,omitnil,omitempty" name:"SentRows"`
+
+	// <p>Whether it is a query rewritten by Proxy: 0 original query, 1 rewritten query.</p>
+	Splited *int64 `json:"Splited,omitnil,omitempty" name:"Splited"`
+
+	// <p>Original executed SQL statement.</p>
+	Sql *string `json:"Sql,omitnil,omitempty" name:"Sql"`
+
+	// <p>SQL template.</p>
+	SqlTemplate *string `json:"SqlTemplate,omitnil,omitempty" name:"SqlTemplate"`
+
+	// <p>SQL Template ID.</p>
+	SqlTemplateId *string `json:"SqlTemplateId,omitnil,omitempty" name:"SqlTemplateId"`
+
+	// <p>SQL type (for example, Select, Insert, Create, Login, Set).</p>
+	SqlType *string `json:"SqlType,omitnil,omitempty" name:"SqlType"`
+
+	// <p>Tables involved (separated by commas for multiple tables).</p>
+	Tables *string `json:"Tables,omitnil,omitempty" name:"Tables"`
+
+	// <p>Thread ID.</p>
+	ThreadId *string `json:"ThreadId,omitnil,omitempty" name:"ThreadId"`
+
+	// <p>SQL start time (millisecond-level timestamp).</p>
+	SqlStartTime *int64 `json:"SqlStartTime,omitnil,omitempty" name:"SqlStartTime"`
+
+	// <p>Database username that executes the SQL.</p>
+	User *string `json:"User,omitnil,omitempty" name:"User"`
+
+	// <p>HostPort of the client connection.</p>
+	HostPort *string `json:"HostPort,omitnil,omitempty" name:"HostPort"`
+
+	// <p>Proxy Node processing thread ID.</p>
+	ProxyThread *string `json:"ProxyThread,omitnil,omitempty" name:"ProxyThread"`
+
+	// <p>Number of backend DB hosts.</p>
+	DbHostNum *string `json:"DbHostNum,omitnil,omitempty" name:"DbHostNum"`
+
+	// <p>Business code (extracted from i/o/p and other KV in business-side SQL annotations).</p>
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// <p>Business tag (completed post based on the business code).</p>
+	BusinessTag *string `json:"BusinessTag,omitnil,omitempty" name:"BusinessTag"`
 }
 
 // Predefined struct for user
@@ -1294,6 +1546,149 @@ func (r *DescribeAuditInstanceListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAuditInstanceListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBAuditLogsRequestParams struct {
+	// <p>Service product type. Currently, Cloud API only supports: dcdb, mariadb (cdb and cynosdb have been migrated to the central platform).</p>
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
+
+	// <p>Start time, format yyyy-MM-dd HH:mm:ss.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time, format: yyyy-MM-dd HH:mm:ss.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Instance ID, required. In dcdb and mariadb scenarios, query audit logs by instance dimension.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Log type: Proxy log, DB database log, All.</p>
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// <p>Sorting field. Default: Timestamp.</p>
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// <p>Sorting method: ASC for ascending order, DESC for descending order. Default: DESC.</p>
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// <p>Offset. Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of returned results. Default: 20. Maximum: 100.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>SQL start time (millisecond-level timestamp), used when performing a join query by QueryId.</p>
+	SqlStartTime *int64 `json:"SqlStartTime,omitnil,omitempty" name:"SqlStartTime"`
+
+	// <p>A collection of query filter criteria for audit logs.</p>
+	Filter *AuditLogQueryFilter `json:"Filter,omitnil,omitempty" name:"Filter"`
+
+	// <p>Cluster ID. Query audit logs for the dcdb product at the cluster level</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+}
+
+type DescribeDBAuditLogsRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Service product type. Currently, Cloud API only supports: dcdb, mariadb (cdb and cynosdb have been migrated to the central platform).</p>
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
+
+	// <p>Start time, format yyyy-MM-dd HH:mm:ss.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time, format: yyyy-MM-dd HH:mm:ss.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Instance ID, required. In dcdb and mariadb scenarios, query audit logs by instance dimension.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Log type: Proxy log, DB database log, All.</p>
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// <p>Sorting field. Default: Timestamp.</p>
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// <p>Sorting method: ASC for ascending order, DESC for descending order. Default: DESC.</p>
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// <p>Offset. Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of returned results. Default: 20. Maximum: 100.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>SQL start time (millisecond-level timestamp), used when performing a join query by QueryId.</p>
+	SqlStartTime *int64 `json:"SqlStartTime,omitnil,omitempty" name:"SqlStartTime"`
+
+	// <p>A collection of query filter criteria for audit logs.</p>
+	Filter *AuditLogQueryFilter `json:"Filter,omitnil,omitempty" name:"Filter"`
+
+	// <p>Cluster ID. Query audit logs for the dcdb product at the cluster level</p>
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
+}
+
+func (r *DescribeDBAuditLogsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBAuditLogsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Product")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "InstanceId")
+	delete(f, "LogType")
+	delete(f, "SortBy")
+	delete(f, "OrderBy")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "SqlStartTime")
+	delete(f, "Filter")
+	delete(f, "ClusterId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBAuditLogsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBAuditLogsResponseParams struct {
+	// <p>Total number of eligible entries.</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>Number of records after filtering.</p>
+	FilteredRecords *int64 `json:"FilteredRecords,omitnil,omitempty" name:"FilteredRecords"`
+
+	// <p>Proxy layer audit log list. Returned when LogType=Proxy or All. For field structure, see AuditProxyLogItem.</p>
+	ProxyLogs []*AuditProxyLogItem `json:"ProxyLogs,omitnil,omitempty" name:"ProxyLogs"`
+
+	// <p>DB layer audit log list. Returned when LogType is DB or All. For the field structure, see AuditDBLogItem.</p>
+	DBLogs []*AuditDBLogItem `json:"DBLogs,omitnil,omitempty" name:"DBLogs"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDBAuditLogsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBAuditLogsResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBAuditLogsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBAuditLogsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
