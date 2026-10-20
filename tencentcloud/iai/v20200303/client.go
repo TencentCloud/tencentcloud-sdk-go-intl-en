@@ -2329,6 +2329,7 @@ func NewDetectFaceAttributesResponse() (response *DetectFaceAttributesResponse) 
 //  RESOURCEUNAVAILABLE_DELIVERING = "ResourceUnavailable.Delivering"
 //  RESOURCEUNAVAILABLE_FREEZE = "ResourceUnavailable.Freeze"
 //  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_LOWBALANCE = "ResourceUnavailable.LowBalance"
 //  RESOURCEUNAVAILABLE_NOTEXIST = "ResourceUnavailable.NotExist"
 //  RESOURCEUNAVAILABLE_RECOVER = "ResourceUnavailable.Recover"
 //  RESOURCEUNAVAILABLE_STOPUSING = "ResourceUnavailable.StopUsing"
@@ -2406,6 +2407,7 @@ func (c *Client) DetectFaceAttributes(request *DetectFaceAttributesRequest) (res
 //  RESOURCEUNAVAILABLE_DELIVERING = "ResourceUnavailable.Delivering"
 //  RESOURCEUNAVAILABLE_FREEZE = "ResourceUnavailable.Freeze"
 //  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_LOWBALANCE = "ResourceUnavailable.LowBalance"
 //  RESOURCEUNAVAILABLE_NOTEXIST = "ResourceUnavailable.NotExist"
 //  RESOURCEUNAVAILABLE_RECOVER = "ResourceUnavailable.Recover"
 //  RESOURCEUNAVAILABLE_STOPUSING = "ResourceUnavailable.StopUsing"
@@ -2677,15 +2679,15 @@ func NewDetectLiveFaceAccurateResponse() (response *DetectLiveFaceAccurateRespon
 }
 
 // DetectLiveFaceAccurate
-// This API is used to detect the liveness of faces in images uploaded by users and determine whether these images are photographed.
+// This API is used to perform anti-rephotograph liveness detection on user-uploaded static images to determine whether they are rephotographs.
 //
 // 
 //
-// Compared with normal Image-based Liveness Detection services, this API enhances the defense capability against attacks from HD screens, printed photos, and 3D masks, as well as improves attack blocking four to five times the competing products, while maintaining high accuracy. It also supports face verification in different use cases, and satisfies the image-based liveness detection needs on mobile or PCs, making it ideal for liveness detection applications in various industries.
+// Compared with existing static liveness detection services, the high-precision version enhances defense against attacks such as HD screens, cropped paper, and 3D masks while maintaining a high real person pass rate. Its attack interception rate is about 4-5 times that of similar types of products in the industry. It also supports face verification in different use cases, meets image-based liveness detection requirements for various scenarios on mobile and PC, and is applicable to different liveness detection applications across industries.
 //
 // 
 //
-// Pay-as-you-go billing officially started for this API at 00:00, August 1, 2022. For more information, see [Billing Overview](https://intl.cloud.tencent.com/document/product/867/17640?from_cn_redirect=1).
+// The face static liveness detection (high-precision version) API officially starts billing from 00:00 on August 1, 2022, using the postpaid pay-as-you-go billing mode. For details, see Billing Overview (https://www.tencentcloud.com/document/product/867/17640?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CONFLICTOPERATION = "FailedOperation.ConflictOperation"
@@ -2766,15 +2768,15 @@ func (c *Client) DetectLiveFaceAccurate(request *DetectLiveFaceAccurateRequest) 
 }
 
 // DetectLiveFaceAccurate
-// This API is used to detect the liveness of faces in images uploaded by users and determine whether these images are photographed.
+// This API is used to perform anti-rephotograph liveness detection on user-uploaded static images to determine whether they are rephotographs.
 //
 // 
 //
-// Compared with normal Image-based Liveness Detection services, this API enhances the defense capability against attacks from HD screens, printed photos, and 3D masks, as well as improves attack blocking four to five times the competing products, while maintaining high accuracy. It also supports face verification in different use cases, and satisfies the image-based liveness detection needs on mobile or PCs, making it ideal for liveness detection applications in various industries.
+// Compared with existing static liveness detection services, the high-precision version enhances defense against attacks such as HD screens, cropped paper, and 3D masks while maintaining a high real person pass rate. Its attack interception rate is about 4-5 times that of similar types of products in the industry. It also supports face verification in different use cases, meets image-based liveness detection requirements for various scenarios on mobile and PC, and is applicable to different liveness detection applications across industries.
 //
 // 
 //
-// Pay-as-you-go billing officially started for this API at 00:00, August 1, 2022. For more information, see [Billing Overview](https://intl.cloud.tencent.com/document/product/867/17640?from_cn_redirect=1).
+// The face static liveness detection (high-precision version) API officially starts billing from 00:00 on August 1, 2022, using the postpaid pay-as-you-go billing mode. For details, see Billing Overview (https://www.tencentcloud.com/document/product/867/17640?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CONFLICTOPERATION = "FailedOperation.ConflictOperation"
@@ -4756,6 +4758,7 @@ func NewSearchPersonsResponse() (response *SearchPersonsResponse) {
 //  INVALIDPARAMETERVALUE_FACEMATCHTHRESHOLDILLEGAL = "InvalidParameterValue.FaceMatchThresholdIllegal"
 //  INVALIDPARAMETERVALUE_GROUPIDILLEGAL = "InvalidParameterValue.GroupIdIllegal"
 //  INVALIDPARAMETERVALUE_GROUPIDNOTEXIST = "InvalidParameterValue.GroupIdNotExist"
+//  INVALIDPARAMETERVALUE_GROUPIDTOOLONG = "InvalidParameterValue.GroupIdTooLong"
 //  INVALIDPARAMETERVALUE_GROUPIDSEXCEED = "InvalidParameterValue.GroupIdsExceed"
 //  INVALIDPARAMETERVALUE_IMAGEEMPTY = "InvalidParameterValue.ImageEmpty"
 //  INVALIDPARAMETERVALUE_IMAGEEMPTYERROR = "InvalidParameterValue.ImageEmptyError"
@@ -4824,6 +4827,7 @@ func (c *Client) SearchPersons(request *SearchPersonsRequest) (response *SearchP
 //  INVALIDPARAMETERVALUE_FACEMATCHTHRESHOLDILLEGAL = "InvalidParameterValue.FaceMatchThresholdIllegal"
 //  INVALIDPARAMETERVALUE_GROUPIDILLEGAL = "InvalidParameterValue.GroupIdIllegal"
 //  INVALIDPARAMETERVALUE_GROUPIDNOTEXIST = "InvalidParameterValue.GroupIdNotExist"
+//  INVALIDPARAMETERVALUE_GROUPIDTOOLONG = "InvalidParameterValue.GroupIdTooLong"
 //  INVALIDPARAMETERVALUE_GROUPIDSEXCEED = "InvalidParameterValue.GroupIdsExceed"
 //  INVALIDPARAMETERVALUE_IMAGEEMPTY = "InvalidParameterValue.ImageEmpty"
 //  INVALIDPARAMETERVALUE_IMAGEEMPTYERROR = "InvalidParameterValue.ImageEmptyError"
