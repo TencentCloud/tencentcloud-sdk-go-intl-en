@@ -242,6 +242,18 @@ import "crypto/tls"
 
 **Warning: Understand risks before disabling certificate verification.**
 
+## CommonClient Large Number Handling
+
+By default, CommonClient parses data into interface{}, and the JSON library allocates the float type for numeric types by default, causing large numbers to overflow.
+
+To address this, we provide a fix. You can enable it by adding a Build Tag at build time:
+
+```bash
+go build -tags tencentcloud_common_number_precision
+```
+
+CommonClient usage is the same before and after enabling it; no changes are needed to be compatible with the new version
+
 # Features
 
 ## Credential Management
