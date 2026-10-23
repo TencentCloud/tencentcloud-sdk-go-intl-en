@@ -168,25 +168,19 @@ type AccelerationDomainCertificate struct {
 }
 
 type AccessURLRedirectParameters struct {
-	// Status code. valid values: 301, 302, 303, 307, 308.
+	// <p>Status code, value is one of 301, 302, 303, 307, 308.</p>
 	StatusCode *int64 `json:"StatusCode,omitnil,omitempty" name:"StatusCode"`
 
-	// Target request protocol. valid values:.
-	// <Li>Http: target request protocol http;</li>.
-	// <Li>Https: target request protocol https;</li>.
-	// <Li>Follow: follow the request.</li>.
+	// <p>Target request protocol.</p><p>Enumeration values:</p><ul><li>http: The target request protocol is HTTP.</li><li>https: The target request protocol is HTTPS.</li><li>follow: Follow request.</li></ul>
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-	// Target hostname.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Target HostName.</p>
 	HostName *HostName `json:"HostName,omitnil,omitempty" name:"HostName"`
 
-	// Target path.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Target path.</p>
 	URLPath *URLPath `json:"URLPath,omitnil,omitempty" name:"URLPath"`
 
-	// Carry query parameters.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Query string.</p>
 	QueryString *AccessURLRedirectQueryString `json:"QueryString,omitnil,omitempty" name:"QueryString"`
 }
 
@@ -391,6 +385,11 @@ type AdvancedFilter struct {
 
 	// Whether to enable fuzzy query.
 	Fuzzy *bool `json:"Fuzzy,omitnil,omitempty" name:"Fuzzy"`
+}
+
+type AdvancedOriginRoutingParameters struct {
+	// <p>Origin optimization direction. Valid values:</p><li>MainlandChinaAndGlobalAdaptive: Self adaptive. The domain name must enable "smart acceleration" simultaneously to take effect. EdgeOne will automatically match the optimal origin-pull optimization direction based on the actual geographic location of the client and origin server, without the need to manually specify. For example, if www.example.com enables "advanced origin optimization" but "smart acceleration" is turned off or only partial match conditions are enabled, "advanced origin optimization" will not be effective.</li>
+	Direction *string `json:"Direction,omitnil,omitempty" name:"Direction"`
 }
 
 type AiRule struct {
@@ -1563,8 +1562,7 @@ type CacheKeyParameters struct {
 	// <Li>Off: disable.</li> note: at least one of fullurlcache, ignorecase, header, scheme, or cookie must be configured. this field and querystring.switch must be set simultaneously, but cannot both be on.
 	FullURLCache *string `json:"FullURLCache,omitnil,omitempty" name:"FullURLCache"`
 
-	// Configuration parameter for retaining the query string. this field and fullurlcache must be set simultaneously, but cannot both be on.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// Query string retention configuration parameter. This field and FullURLCache must be set both at the same time, but cannot both be on.
 	QueryString *CacheKeyQueryString `json:"QueryString,omitnil,omitempty" name:"QueryString"`
 
 	// Switch for ignoring case. values:.
@@ -1573,8 +1571,7 @@ type CacheKeyParameters struct {
 	// <Li>Off: disable.</li> note: at least one of fullurlcache, ignorecase, header, scheme, or cookie must be configured.
 	IgnoreCase *string `json:"IgnoreCase,omitnil,omitempty" name:"IgnoreCase"`
 
-	// HTTP request header configuration parameters. at least one of the following configurations must be set: fullurlcache, ignorecase, header, scheme, cookie.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// HTTP request header configuration parameter. Set at least one configuration among FullURLCache, IgnoreCase, Header, Scheme, and Cookie.
 	Header *CacheKeyHeader `json:"Header,omitnil,omitempty" name:"Header"`
 
 	// Request protocol switch. valid values:.
@@ -1583,8 +1580,7 @@ type CacheKeyParameters struct {
 	// <Li>Off: disable.</li> note: at least one of fullurlcache, ignorecase, header, scheme, or cookie must be configured.
 	Scheme *string `json:"Scheme,omitnil,omitempty" name:"Scheme"`
 
-	// Cookie configuration parameters. at least one of the following configurations must be set: fullurlcache, ignorecase, header, scheme, cookie.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// Cookie configuration parameters. Set at least one configuration among FullURLCache, IgnoreCase, Header, Scheme, and Cookie.
 	Cookie *CacheKeyCookie `json:"Cookie,omitnil,omitempty" name:"Cookie"`
 }
 
@@ -1605,16 +1601,13 @@ type CacheKeyQueryString struct {
 }
 
 type CacheParameters struct {
-	// Cache follows origin server. if not specified, this configuration is not set. only one of followorigin, nocache, or customtime can have switch set to on.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// Cache follows the origin site. Leave unset means this configuration is not set. FollowOrigin, NoCache, and CustomTime can only be configured with one Switch set to on.
 	FollowOrigin *FollowOrigin `json:"FollowOrigin,omitnil,omitempty" name:"FollowOrigin"`
 
-	// No cache. if not specified, this configuration is not set. only one of followorigin, nocache, or customtime can have switch set to on.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// No cache. Leave unset means not setting this configuration. Only one Switch among FollowOrigin, NoCache, and CustomTime can be configured as on.
 	NoCache *NoCache `json:"NoCache,omitnil,omitempty" name:"NoCache"`
 
-	// Custom cache time. if not specified, this configuration is not set. only one of followorigin, nocache, or customtime can have switch set to on.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// Custom cache time. Leave unset means this configuration is not set. Only one of FollowOrigin, NoCache, and CustomTime can be configured with the Switch set to on.
 	CustomTime *CustomTime `json:"CustomTime,omitnil,omitempty" name:"CustomTime"`
 }
 
@@ -1676,13 +1669,13 @@ type CertificateInfo struct {
 }
 
 type ChallengeActionParameters struct {
-	// Safe execution challenge actions. valid values: <li> InterstitialChallenge: interstitial challenge;</li> <li> InlineChallenge: embedded challenge;</li> <li> JSChallenge: JavaScript challenge;</li> <li> ManagedChallenge: managed challenge.</li>.
+	// <p>Specific challenge action for safe execution.</p><p>Enumeration values:</p><ul><li>InterstitialChallenge: interstitial challenge;</li><li>InlineChallenge: embedded challenge (SDK challenge);</li><li>ManagedChallenge: managed challenge. Applicable only to HTML web pages directly accessed by users through a browser. Verification cannot be completed in scenarios such as API interfaces, XHR/AJAX async requests within web pages, mobile apps, and command line tools. Do not configure it;</li><li>JSChallenge: JavaScript challenge. Applicable only to HTML web pages directly accessed by users through a browser. Verification cannot be completed in scenarios such as API interfaces, XHR/AJAX async requests within web pages, mobile apps, and command line tools. Do not configure it.</li></ul>
 	ChallengeOption *string `json:"ChallengeOption,omitnil,omitempty" name:"ChallengeOption"`
 
-	// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: <li>s: second, value ranges from 1 to 60;</li><li>m: minute, value ranges from 1 to 60;</li><li>h: hour, value ranges from 1 to 24.</li>.
+	// <p>Time interval for repeating the challenge. This field is required when ChallengeOption is InterstitialChallenge/InlineChallenge. Default value: 300s. Supported units: <li>s: second, value ranges from 1 to 60;</li><li>m: minute, value ranges from 1 to 60;</li><li>h: hour, value ranges from 1 to 24.</li></p>
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+	// <p>Client authentication method ID. This field is required when Name is InterstitialChallenge/InlineChallenge.</p>
 	AttesterId *string `json:"AttesterId,omitnil,omitempty" name:"AttesterId"`
 }
 
@@ -1867,39 +1860,34 @@ type ClientAttestationRules struct {
 }
 
 type ClientAttester struct {
-	// Authentication option ID.
+	// <p>Option ID for certification.</p>
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Specifies the authentication option name.
+	// <p>Option name for authentication.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Authentication rule type. only returned in the response. valid values:.
-	// <li>PRESET: system PRESET rule. only AttesterDuration can be modified.</li>.
-	// <Li>CUSTOM: user-defined rules.</li>.
+	// <p>Authentication rule type. Returned only in the response. Valid values:</p><li>PRESET: System preset rule. Only AttesterDuration can be modified.</li><li>CUSTOM: User-defined rule.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Authentication method. Valid values:
-	// <li>TC-RCE: Authentication with RCE risk identification;</li>
-	// <li>TC-CAPTCHA: Authentication using Tianyu verification code;</li>
-	// <li>TC-EO-CAPTCHA: Use EdgeOne CAPTCHA for authentication.</li>
+	// <p>Authentication method. Valid values:</p><li>TC-RCE: Use risk identification RCE for authentication;</li><li>TC-CAPTCHA: Use Tianyu verification code for authentication;</li><li>TC-EO-CAPTCHA: Use EdgeOne human-machine verification for authentication.</li>
 	AttesterSource *string `json:"AttesterSource,omitnil,omitempty" name:"AttesterSource"`
 
-	// Validity time of the authentication. defaults to 60s. supported measurement units:.
-	// <Li>S: specifies seconds. value range: 60–43200.</li>.
-	// <Li>M: specifies minutes. value range: 1–720.</li>.
-	// <Li>H. specifies the hour. value range: 1–12.</li>.
+	// <p>Authentication validity time. Default value is 60s. Supported measurement units:</p><li>s: second, value ranges from 60 to 43200.</li><li>m: minute, value ranges from 1 to 720.</li><li>h: hour, value ranges from 1 to 12.</li>
 	AttesterDuration *string `json:"AttesterDuration,omitnil,omitempty" name:"AttesterDuration"`
 
-	// TC-RCE authentication configuration message.
-	// <li>Specifies the required field when the AttesterSource parameter value is TC-RCE.</li>.
+	// <p>Whether to enable the usage limit for attestation results. </p><p>Valid values:</p><ul><li>on: Enabled</li><li>off: Disabled</li></ul><p>Default value: off</p>
+	UsageLimit *string `json:"UsageLimit,omitnil,omitempty" name:"UsageLimit"`
+
+	// <p>Whether to enable the usage limit for attestation results. </p><p>Valid values:</p><ul><li>on: Enabled</li><li>off: Disabled</li></ul><p>Default value: off</p>
+	MaxUsageCount *int64 `json:"MaxUsageCount,omitnil,omitempty" name:"MaxUsageCount"`
+
+	// <p>Configuration message for TC-RCE certification.</p><li>This field is required when the AttesterSource parameter value is TC-RCE.</li>
 	TCRCEOption *TCRCEOption `json:"TCRCEOption,omitnil,omitempty" name:"TCRCEOption"`
 
-	// Specifies the configuration message for TC-CAPTCHA certification.
-	// <li>Specifies the required field when the AttesterSource parameter value is TC-CAPTCHA.</li>.
+	// <p>Configuration message for TC-CAPTCHA certification.</p><li>This field is required when the AttesterSource parameter value is TC-CAPTCHA.</li>
 	TCCaptchaOption *TCCaptchaOption `json:"TCCaptchaOption,omitnil,omitempty" name:"TCCaptchaOption"`
 
-	// Configuration message of TC-EO-CAPTCHA authentication.
-	// <li>This field is required when the AttesterSource parameter value is TC-EO-CAPTCHA.</li>
+	// <p>Configuration message for TC-EO-CAPTCHA certification.</p><li>This field is required when the AttesterSource parameter value is TC-EO-CAPTCHA.</li>
 	TCEOCaptchaOption *TCEOCaptchaOption `json:"TCEOCaptchaOption,omitnil,omitempty" name:"TCEOCaptchaOption"`
 }
 
@@ -2051,28 +2039,28 @@ type CompressionParameters struct {
 }
 
 type ConfigGroupVersionInfo struct {
-	// Version ID.
+	// <p>Configuration group version ID, a unique resource ID allocated by EdgeOne when creating a configuration group version.</p><p>Parameter format: ver-2kplomhisdcb</p><p>For reference:</p><ul><li><a href="https://www.tencentcloud.com/document/api/1552/101867?from_cn_redirect=1">CreateConfigGroupVersion</a> return value <code>VersionId</code></li><li><a href="https://www.tencentcloud.com/document/api/1552/101864?from_cn_redirect=1">DescribeConfigGroupVersions</a> return value <code>ConfigGroupVersionInfos</code></li></ul>
 	VersionId *string `json:"VersionId,omitnil,omitempty" name:"VersionId"`
 
-	// Version No.
+	// <p>Configuration group version number. This parameter only shows the version. Each time a new version of the configuration group is created, the version number increments by one. The initial version number is "0".</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/1552/101864?from_cn_redirect=1">DescribeConfigGroupVersions</a> return value <code>ConfigGroupVersionInfos</code></p>
 	VersionNumber *string `json:"VersionNumber,omitnil,omitempty" name:"VersionNumber"`
 
-	// Configuraration group ID.
-	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+	// <p>Version ID of the source version on which the configuration group version is based. When creating a configuration group version, designate the source version ID. The new version will be created as a derivative based on the configuration of that source version.</p><p>Parameter format: ver-2kplomhisdcb</p><p>Value for reference:</p><ul><li><a href="https://www.tencentcloud.com/document/api/1552/101867?from_cn_redirect=1">CreateConfigGroupVersion</a> return value <code>VersionId</code></li><li><a href="https://www.tencentcloud.com/document/api/1552/101864?from_cn_redirect=1">DescribeConfigGroupVersions</a> return value <code>ConfigGroupVersionInfos</code></li></ul>
+	SourceVersion *string `json:"SourceVersion,omitnil,omitempty" name:"SourceVersion"`
 
-	// Configuration group type. Optional options are as follows: <li>l7_acceleration: layer-7 acceleration configuration group;</li><li>edge_functions: edge function configuration group;</li><li>web_security: web protection configuration group.</li>
+	// <p>Configuration group type to which the version belongs.</p><p>Enumeration value:</p><ul><li>l7_acceleration: Layer-7 acceleration configuration group</li><li>edge_functions: Edge function configuration group</li><li>web_security: Web protection configuration group</li></ul>
 	GroupType *string `json:"GroupType,omitnil,omitempty" name:"GroupType"`
 
-	// Version description.
+	// <p>Configuration group ID for version ownership.</p><p>Parameter format: cg-2kplomhisdcb</p>
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// <p>Version description.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Version status. Valid values: 
-	// <li>creating: Being created.</li>
-	// <li>inactive: Not effective.</li>
-	// <li>active: Effective. </li>
+	// <p>Version effective status.</p><p>Enumeration value:</p><ul><li>creating: Version creation in progress</li><li>inactive: Version not in effect</li><li>active: Version in effect</li></ul>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
+	// <p>Version creation time, which adopts Coordinated Universal Time (UTC) and follows the date and time format of the ISO 8601 standard.</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 }
 
@@ -2823,33 +2811,39 @@ func (r *CreateCLSIndexResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateConfigGroupVersionRequestParams struct {
-	// Zone ID.
+	// <p>Site ID.</p>
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// GroupId of the version to be created.
+	// <p>Configuration group ID for the new version. You can obtain the complete environment information through the DescribeEnvironments interface. The environment information contains the configuration group ID for each configuration group type.</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/1552/101862?from_cn_redirect=1">DescribeEnvironments</a> return value <code>EnvInfos</code></p>
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
-	// Configuration content to be imported. It is required to be in JSON format and encoded in UTF-8. Please refer to the example below for the configuration file content.
+	// <p>Configuration content to be imported. Use JSON format and encode in UTF-8 mode. Refer to the example below and the <a href="https://www.tencentcloud.com/document/product/1552/125342?from_cn_redirect=1">configuration group syntax explanation</a> for the configuration file content.</p>
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// Version description. The maximum length allowed is 50 characters. This field can be used to provide details about the application scenarios of this version.
+	// <p>Version description, enter a maximum length of 50 characters, can be used to fill in the usage scenario of this version.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>Source version ID on which the new version is based. The new version will be created as a derivative based on the configuration of this source version. This field is optional. If not provided, it defaults to the version currently taking effect in the production environment as the source version.</p><p>For reference:</p><ul><li><a href="https://www.tencentcloud.com/document/api/1552/101867?from_cn_redirect=1">CreateConfigGroupVersion</a> return value <code>VersionId</code></li><li><a href="https://www.tencentcloud.com/document/api/1552/101864?from_cn_redirect=1">DescribeConfigGroupVersions</a> return value <code>ConfigGroupVersionInfos</code></li></ul>
+	SourceVersion *string `json:"SourceVersion,omitnil,omitempty" name:"SourceVersion"`
 }
 
 type CreateConfigGroupVersionRequest struct {
 	*tchttp.BaseRequest
 	
-	// Zone ID.
+	// <p>Site ID.</p>
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// GroupId of the version to be created.
+	// <p>Configuration group ID for the new version. You can obtain the complete environment information through the DescribeEnvironments interface. The environment information contains the configuration group ID for each configuration group type.</p><p>For reference: <a href="https://www.tencentcloud.com/document/api/1552/101862?from_cn_redirect=1">DescribeEnvironments</a> return value <code>EnvInfos</code></p>
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
-	// Configuration content to be imported. It is required to be in JSON format and encoded in UTF-8. Please refer to the example below for the configuration file content.
+	// <p>Configuration content to be imported. Use JSON format and encode in UTF-8 mode. Refer to the example below and the <a href="https://www.tencentcloud.com/document/product/1552/125342?from_cn_redirect=1">configuration group syntax explanation</a> for the configuration file content.</p>
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// Version description. The maximum length allowed is 50 characters. This field can be used to provide details about the application scenarios of this version.
+	// <p>Version description, enter a maximum length of 50 characters, can be used to fill in the usage scenario of this version.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>Source version ID on which the new version is based. The new version will be created as a derivative based on the configuration of this source version. This field is optional. If not provided, it defaults to the version currently taking effect in the production environment as the source version.</p><p>For reference:</p><ul><li><a href="https://www.tencentcloud.com/document/api/1552/101867?from_cn_redirect=1">CreateConfigGroupVersion</a> return value <code>VersionId</code></li><li><a href="https://www.tencentcloud.com/document/api/1552/101864?from_cn_redirect=1">DescribeConfigGroupVersions</a> return value <code>ConfigGroupVersionInfos</code></li></ul>
+	SourceVersion *string `json:"SourceVersion,omitnil,omitempty" name:"SourceVersion"`
 }
 
 func (r *CreateConfigGroupVersionRequest) ToJsonString() string {
@@ -2868,6 +2862,7 @@ func (r *CreateConfigGroupVersionRequest) FromJsonString(s string) error {
 	delete(f, "GroupId")
 	delete(f, "Content")
 	delete(f, "Description")
+	delete(f, "SourceVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateConfigGroupVersionRequest has unknown keys!", "")
 	}
@@ -2876,7 +2871,7 @@ func (r *CreateConfigGroupVersionRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateConfigGroupVersionResponseParams struct {
-	// Version ID.
+	// <p>Version ID.</p>
 	VersionId *string `json:"VersionId,omitnil,omitempty" name:"VersionId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5905,6 +5900,48 @@ type CurrentOriginACL struct {
 	IsPlaned *string `json:"IsPlaned,omitnil,omitempty" name:"IsPlaned"`
 }
 
+type CustomAction struct {
+	// <p>ID of the custom configuration item.</p><p>You can obtain it through the returned value CustomActionSet[].ActionId of the DescribeAvailableCustomActionsForRuleEngine API.</p>
+	ActionId *string `json:"ActionId,omitnil,omitempty" name:"ActionId"`
+
+	// <p>Parameter values of each parameter field under this custom configuration.</p><p>You can obtain them through the API return value CustomActionSet[].Parameters of DescribeAvailableCustomActionsForRuleEngine.</p>
+	Parameters []*CustomActionParameter `json:"Parameters,omitnil,omitempty" name:"Parameters"`
+}
+
+type CustomActionParameter struct {
+	// <p>Field Name of each parameter under custom configuration.</p><p>You can get it through the API return value CustomActionSet[].Parameters[].Name of DescribeAvailableCustomActionsForRuleEngine, such as "Seconds", "Ports", "StatusCode".</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Data type of each parameter field value under custom configuration.</p><p>Enumeration value:</p><ul><li>String: string type.</li><li>Integer: integer type.</li><li>Float: floating-point type.</li><li>Boolean: boolean type.</li><li>ArrayOfString: string array type.</li><li>ArrayOfInteger: integer array type.</li><li>ArrayOfFloat: floating-point number array type.</li></ul><p>It can be obtained through the API return value CustomActionSet[].Parameters[].Type of DescribeAvailableCustomActionsForRuleEngine.</p>
+	ValueType *string `json:"ValueType,omitnil,omitempty" name:"ValueType"`
+
+	// <p>Parameter value of string type. This parameter is required when ValueType is String.</p><p>You can get the default value, measurement unit, limit and other details of the parameter value through the CustomActionSet[].Parameters in the API return value of DescribeAvailableCustomActionsForRuleEngine.</p>
+	StringValue *string `json:"StringValue,omitnil,omitempty" name:"StringValue"`
+
+	// <p>Integer type parameter value. This parameter is required when ValueType is Integer.</p><p>You can get the default value, measurement unit, limit, and other details of the parameter value through the CustomActionSet[].Parameters field in the API return value of DescribeAvailableCustomActionsForRuleEngine.</p>
+	IntegerValue *int64 `json:"IntegerValue,omitnil,omitempty" name:"IntegerValue"`
+
+	// <p>Floating-point type parameter value. This parameter is required when ValueType is Float.</p><p>You can get the default value, measurement unit, limitation, and other details of the parameter value through the CustomActionSet[].Parameters field in the API return value of DescribeAvailableCustomActionsForRuleEngine.</p>
+	FloatValue *float64 `json:"FloatValue,omitnil,omitempty" name:"FloatValue"`
+
+	// <p>Boolean type parameter value. This parameter is required when ValueType is Boolean.</p><p>You can get the default value, measurement unit, limitation, and other details of the parameter value through the CustomActionSet[].Parameters in the API return value of DescribeAvailableCustomActionsForRuleEngine.</p>
+	BooleanValue *bool `json:"BooleanValue,omitnil,omitempty" name:"BooleanValue"`
+
+	// <p>String array type parameter value. This parameter is required when ValueType is ArrayOfString.</p><p>You can get the default value, measurement unit, and limitation of the parameter value through the API return value CustomActionSet[].Parameters of the DescribeAvailableCustomActionsForRuleEngine API.</p>
+	StringArrayValue []*string `json:"StringArrayValue,omitnil,omitempty" name:"StringArrayValue"`
+
+	// <p>Array type parameter value of integer. This parameter is required when ValueType is ArrayOfInteger.</p><p>You can get the default value, measurement unit, limit, and other details of the parameter value through the API return value CustomActionSet[].Parameters of the DescribeAvailableCustomActionsForRuleEngine API.</p>
+	IntegerArrayValue []*int64 `json:"IntegerArrayValue,omitnil,omitempty" name:"IntegerArrayValue"`
+
+	// <p>Floating-point number array type parameter value. This parameter is required when ValueType is ArrayOfFloat.</p><p>You can get the default value, measurement unit, limitation, and other descriptions of the parameter value through the CustomActionSet[].Parameters field in the API return value of DescribeAvailableCustomActionsForRuleEngine.</p>
+	FloatArrayValue []*float64 `json:"FloatArrayValue,omitnil,omitempty" name:"FloatArrayValue"`
+}
+
+type CustomActionParameters struct {
+	// <p>Custom configuration list that needs to be configured.</p>
+	CustomActions []*CustomAction `json:"CustomActions,omitnil,omitempty" name:"CustomActions"`
+}
+
 type CustomEndpoint struct {
 	// Address of the custom HTTP API for real-time log shipping. Currently, only HTTP and HTTPS protocols are supported.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
@@ -5979,25 +6016,25 @@ type CustomField struct {
 }
 
 type CustomRule struct {
-	// The custom rule name.
+	// <p>Custom rule name.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// The specific content of custom rules must comply with expression grammar. For detailed specifications, please refer to the product document (https://www.tencentcloud.com/document/product/1552/125343?from_cn_redirect=1).
+	// <p>The specific content of a custom rule must comply with the expression syntax. For detailed specifications, refer to the <a href="https://www.tencentcloud.com/document/product/1552/125343?from_cn_redirect=1">product document</a>.</p>
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
-	// The handling action of custom rules. The value range of SecurityAction.Name is as follows:<ul><li>Deny: blocking;</li><li>Monitor: observation;</li><li>ReturnCustomPage: use specified page to block;</li><li>Redirect: redirect to URL;</li><li>BlockIP: IP blocking;</li><li>JSChallenge: JavaScript challenge;</li><li>ManagedChallenge: managed challenge;</li><li>Allow: allowing.</li></ul>
+	// <p>Handling action of the custom rule. SecurityAction.Name value range is as follows:</p><ul><li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li><li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li><li>Monitor: observe;</li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li><li>Redirect: redirect to a URL.</li></ul>
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 
-	// Whether the custom rule is enabled. Valid values: <ul><li>on: enable</li><li>off: disable</li></ul>
+	// <p>Whether the custom rule is enabled. Valid values: <ul><li>on: enabled;</li><li>off: disabled.</li></ul></p>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// ID of the custom rule. Different rule configuration operations are supported by rule ID:<ul><li>Add a new rule: The ID is empty or the ID parameter is not specified.</li><li>Modify an existing rule: Specify the rule ID that needs to be updated or modified.</li><li>Delete an existing rule: Existing rules not included in the Rules list in the CustomRules parameter will be deleted.</li></ul>
+	// <p>ID of the custom rule. The rule ID supports different rule configuration operations: <ul><li>Add a new rule: leave the ID empty or do not specify the ID parameter;</li><li>Modify an existing rule: specify the rule ID that needs to be updated/modified;</li><li>Delete an existing rule: existing rules not included in the Rules list in the CustomRules parameter will be deleted.</li></ul></p>
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Type of custom rule. Valid values: <ul><li>BasicAccessRule: basic access control;</li><li>PreciseMatchRule: exact matching rule;</li><li>ManagedAccessRule: expert customized rule, only supported in output parameters.</li></ul>Description: When RuleType is not specified, it defaults to `PreciseMatchRule`.
+	// <p>Type of the custom rule. Valid values: <ul><li>BasicAccessRule: basic access control;</li><li>PreciseMatchRule: exact matching rule;</li><li>ManagedAccessRule: expert customized rule, supported only for output parameters.</li></ul>Note: If RuleType is not specified, it defaults to <code>PreciseMatchRule</code>.</p>
 	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
 
-	// Priority of custom rules, ranging from 0 to 100, defaults to 0, and only supports exact matching rules (`PreciseMatchRule`).
+	// <p>Priority of custom rules. Value range: 0-100. Default value: 0. Only exact matching rules (<code>PreciseMatchRule</code>) are supported.</p>
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 }
 
@@ -6021,6 +6058,52 @@ type CustomTime struct {
 
 	// Custom cache time value, unit: seconds. value range: 0-315360000.<br>note: this field is required when switch is on; when switch is off, this field is not required and will not take effect if filled.
 	CacheTime *int64 `json:"CacheTime,omitnil,omitempty" name:"CacheTime"`
+}
+
+type CustomVariable struct {
+	// <p>Variable name. You need to fill in the complete prefix: user.zone.* refers to a site-level custom variable, and user.rule.* refers to a rule-level custom variable. The custom part after the prefix supports only uppercase and lowercase letters, digits, and underscores. Variable names are case-sensitive and cannot exceed 50 characters in length. Once a variable is created successfully, its name cannot be modified.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Initial value of the variable. Supports the use of constant strings, variables, and formulas. Length cannot exceed 255 characters.</p>
+	InitialValue *string `json:"InitialValue,omitnil,omitempty" name:"InitialValue"`
+
+	// <p>Variable description. Length limited to no more than 60 characters.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+type CustomVariableOperation struct {
+	// <p>Sub-rule branch. This list currently only supports filling in one rule; additional entries are invalid.</p>
+	Branches []*CustomVariableOperationRuleBranch `json:"Branches,omitnil,omitempty" name:"Branches"`
+
+	// <p>Rule note. Multiple notes can be filled.</p>
+	Description []*string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+type CustomVariableOperationRuleAction struct {
+	// <p>Operation name. The name should correspond to the parameter structure. For example, if Name=Set, SetParameters is required. Currently only support filling in Set.</p><li>Set: custom variable settings;</li>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Custom Variable parameter settings. If there are multiple operations in this parameter, they are executed in sequence according to the array order. When the value of Name is Set, this parameter is required.</p>
+	SetParameters *SetParameters `json:"SetParameters,omitnil,omitempty" name:"SetParameters"`
+}
+
+type CustomVariableOperationRuleBranch struct {
+	// <p><a href="https://www.tencentcloud.com/document/product/1552/90438?from_cn_redirect=1#33f65828-c6c6-4b66-a011-25a20b548d5d">Match condition</a>.</p>
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
+
+	// <p><a href="https://www.tencentcloud.com/document/product/1552/90438?from_cn_redirect=1#c7bd7e02-9247-4a72-b0e4-11c27cadb198">Operate</a>.<br>Note: Actions and SubRules cannot be empty at the same time.</p>
+	Actions []*CustomVariableOperationRuleAction `json:"Actions,omitnil,omitempty" name:"Actions"`
+
+	// <p>Sub-rule list. If there are multiple rules in the list, they are executed in order from top to bottom.<br>Note: SubRules and Actions cannot be empty at the same time. Currently only support filling one level of SubRules.</p>
+	SubRules []*CustomVariableOperationSubRule `json:"SubRules,omitnil,omitempty" name:"SubRules"`
+}
+
+type CustomVariableOperationSubRule struct {
+	// <p>Sub-rule branch</p>
+	Branches []*CustomVariableOperationRuleBranch `json:"Branches,omitnil,omitempty" name:"Branches"`
+
+	// <p>Rule note.</p>
+	Description []*string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 type CustomizedHeader struct {
@@ -8469,6 +8552,101 @@ func (r *DescribeApplicationProxiesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeApplicationProxiesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAvailableCustomActionsForRuleEngineRequestParams struct {
+	// <p>Zone ID.</p>
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// <p>Filter criteria. Multiple conditions have an AND relationship. The maximum number of Filters.Values is 20. If this parameter is left empty, return all available rule engine custom configurations under the current site. Detailed filter criteria:</p><li>action-id: Filter by the unique identification ID of the custom configuration.</li><li>name: Filter by the name of the custom configuration.</a></li>Fuzzy query only supports filtering fields named <code>name</code>.<p></p>
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Paginated query limit.</p><p>Value ranges from 0 to 1000.</p><p>Default value: 20.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Paging offset.</p><p>Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Sorting field. Valid values:</p><li>action-id: Sort by custom configuration unique identification ID.</li><li>create-time: Sort by custom configuration creation time.</li>Default value: <code>action-id</code>.<p></p>
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// <p>Sorting method. Valid values:</p><li>asc: ascending sort;</li><li>desc: sort in descending order.</li>Default value: desc.<p></p>
+	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
+}
+
+type DescribeAvailableCustomActionsForRuleEngineRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Zone ID.</p>
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// <p>Filter criteria. Multiple conditions have an AND relationship. The maximum number of Filters.Values is 20. If this parameter is left empty, return all available rule engine custom configurations under the current site. Detailed filter criteria:</p><li>action-id: Filter by the unique identification ID of the custom configuration.</li><li>name: Filter by the name of the custom configuration.</a></li>Fuzzy query only supports filtering fields named <code>name</code>.<p></p>
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Paginated query limit.</p><p>Value ranges from 0 to 1000.</p><p>Default value: 20.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Paging offset.</p><p>Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Sorting field. Valid values:</p><li>action-id: Sort by custom configuration unique identification ID.</li><li>create-time: Sort by custom configuration creation time.</li>Default value: <code>action-id</code>.<p></p>
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// <p>Sorting method. Valid values:</p><li>asc: ascending sort;</li><li>desc: sort in descending order.</li>Default value: desc.<p></p>
+	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
+}
+
+func (r *DescribeAvailableCustomActionsForRuleEngineRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAvailableCustomActionsForRuleEngineRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "SortBy")
+	delete(f, "SortOrder")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAvailableCustomActionsForRuleEngineRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAvailableCustomActionsForRuleEngineResponseParams struct {
+	// <p>Total number of eligible rule engine custom configurations.</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>List of eligible rule engine custom configurations.</p>
+	CustomActionSet []*RuleEngineCustomAction `json:"CustomActionSet,omitnil,omitempty" name:"CustomActionSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAvailableCustomActionsForRuleEngineResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAvailableCustomActionsForRuleEngineResponseParams `json:"Response"`
+}
+
+func (r *DescribeAvailableCustomActionsForRuleEngineResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAvailableCustomActionsForRuleEngineResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -11670,6 +11848,217 @@ func (r *DescribeLoadBalancerListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeLoadBalancerListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLogAnalysisDetailRequestParams struct {
+	// <p>Site ID.</p>
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// <p>Data service area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding Mainland China).</li></ul>Note: If the site service area is "global availability zone", you need to query the data of mainland and overseas separately to obtain all data.</p>
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// <p>Start time, example value: 2020-04 29T00:00:00Z. The maximum span supported for query start time to this day varies by package version. For more details, see <a href="https://www.tencentcloud.com/document/product/1552/94165?from_cn_redirect=1#45435466-9103-4ff6-be22-e31717044fb2">Package Selection Comparison</a>.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time, example value: 2020-04-30T00:00:00Z. The maximum duration from the start time to the end time per request is 31 days.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Log type. Available values: <ul><li> l7-access-logs: Layer 7 Access Logs;</li><li>web-attack: Managed Rule Logs.</li></ul>Defaults to l7-access-logs.</p>
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// <p><a href="https://www.tencentcloud.com/document/product/1552/124662?from_cn_redirect=1">Log match condition</a>. Maximum length 12KB.</p>
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
+
+	// <p>Paginated query limit. Default value: 20, maximum value: 100.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Paginated query offset, defaults to 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Whether raw logs are returned in time sequence. Available values: <ul><li>asc: ascending order;</li><li>desc: descending order.</li></ul> Default is desc.</p>
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+}
+
+type DescribeLogAnalysisDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Site ID.</p>
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// <p>Data service area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding Mainland China).</li></ul>Note: If the site service area is "global availability zone", you need to query the data of mainland and overseas separately to obtain all data.</p>
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// <p>Start time, example value: 2020-04 29T00:00:00Z. The maximum span supported for query start time to this day varies by package version. For more details, see <a href="https://www.tencentcloud.com/document/product/1552/94165?from_cn_redirect=1#45435466-9103-4ff6-be22-e31717044fb2">Package Selection Comparison</a>.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time, example value: 2020-04-30T00:00:00Z. The maximum duration from the start time to the end time per request is 31 days.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Log type. Available values: <ul><li> l7-access-logs: Layer 7 Access Logs;</li><li>web-attack: Managed Rule Logs.</li></ul>Defaults to l7-access-logs.</p>
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// <p><a href="https://www.tencentcloud.com/document/product/1552/124662?from_cn_redirect=1">Log match condition</a>. Maximum length 12KB.</p>
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
+
+	// <p>Paginated query limit. Default value: 20, maximum value: 100.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Paginated query offset, defaults to 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Whether raw logs are returned in time sequence. Available values: <ul><li>asc: ascending order;</li><li>desc: descending order.</li></ul> Default is desc.</p>
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+}
+
+func (r *DescribeLogAnalysisDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLogAnalysisDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Area")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "LogType")
+	delete(f, "Condition")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Sort")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLogAnalysisDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLogAnalysisDetailResponseParams struct {
+	// <p>Log details list that meets the log match condition.</p>
+	LogDetail []*LogItem `json:"LogDetail,omitnil,omitempty" name:"LogDetail"`
+
+	// <p>Total number of logs that meet the match condition.</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeLogAnalysisDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLogAnalysisDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeLogAnalysisDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLogAnalysisDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLogAnalysisDownloadTasksRequestParams struct {
+	// <p>Site ID.</p>
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// <p>Data service area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding Mainland China).</li></ul> Note: If the site service area is "global availability zone", you need to query the data of mainland and overseas separately to obtain all data.</p>
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// <p>Log type. Available values: <ul><li> l7-access-logs: Layer 7 Access Logs;</li><li>web-attack: Managed Rule Logs.</li></ul>Defaults to l7-access-logs.</p>
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// <p>Filtering Conditions. The maximum number of Filters.Values is 20. Detailed filter criteria are as follows:<ul><li>task-id: Filter by log download task id. For optional Values, refer to the TaskId returned by the CreateLogAnalysisDownloadTask api.</li></ul></p><p>For reference: CreateLogAnalysisDownloadTask</p>
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Paginated query limit. Default value: 20, maximum value: 100.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Paginated query offset, defaults to 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeLogAnalysisDownloadTasksRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Site ID.</p>
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// <p>Data service area. Available values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding Mainland China).</li></ul> Note: If the site service area is "global availability zone", you need to query the data of mainland and overseas separately to obtain all data.</p>
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// <p>Log type. Available values: <ul><li> l7-access-logs: Layer 7 Access Logs;</li><li>web-attack: Managed Rule Logs.</li></ul>Defaults to l7-access-logs.</p>
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// <p>Filtering Conditions. The maximum number of Filters.Values is 20. Detailed filter criteria are as follows:<ul><li>task-id: Filter by log download task id. For optional Values, refer to the TaskId returned by the CreateLogAnalysisDownloadTask api.</li></ul></p><p>For reference: CreateLogAnalysisDownloadTask</p>
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Paginated query limit. Default value: 20, maximum value: 100.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Paginated query offset, defaults to 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeLogAnalysisDownloadTasksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLogAnalysisDownloadTasksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Area")
+	delete(f, "LogType")
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLogAnalysisDownloadTasksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLogAnalysisDownloadTasksResponseParams struct {
+	// <p>Total number of entries for the log analysis download task that meets the match condition.</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>Download task list for log analysis that meets the log match condition.</p>
+	Tasks []*LogAnalysisDownloadTask `json:"Tasks,omitnil,omitempty" name:"Tasks"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeLogAnalysisDownloadTasksResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLogAnalysisDownloadTasksResponseParams `json:"Response"`
+}
+
+func (r *DescribeLogAnalysisDownloadTasksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLogAnalysisDownloadTasksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -14909,6 +15298,66 @@ func (r *DescribeZoneConfigImportResultResponse) FromJsonString(s string) error 
 }
 
 // Predefined struct for user
+type DescribeZoneCustomVariablesRequestParams struct {
+	// <p>Site ID.</p>
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+type DescribeZoneCustomVariablesRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Site ID.</p>
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+func (r *DescribeZoneCustomVariablesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeZoneCustomVariablesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeZoneCustomVariablesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeZoneCustomVariablesResponseParams struct {
+	// <p>List of site-level custom variables.</p>
+	CustomVariables []*CustomVariable `json:"CustomVariables,omitnil,omitempty" name:"CustomVariables"`
+
+	// <p>Site-level custom variable calculation rules.</p>
+	CustomVariableOperations []*CustomVariableOperation `json:"CustomVariableOperations,omitnil,omitempty" name:"CustomVariableOperations"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeZoneCustomVariablesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeZoneCustomVariablesResponseParams `json:"Response"`
+}
+
+func (r *DescribeZoneCustomVariablesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeZoneCustomVariablesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeZoneSettingRequestParams struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -16105,7 +16554,6 @@ type ErrorPage struct {
 
 type ErrorPageParameters struct {
 	// Custom error page configuration list.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
 	ErrorPageParams []*ErrorPage `json:"ErrorPageParams,omitnil,omitempty" name:"ErrorPageParams"`
 }
 
@@ -16665,7 +17113,7 @@ type HTTPResponseParameters struct {
 }
 
 type HTTPUpstreamTimeoutParameters struct {
-	// HTTP response timeout in seconds. value range: 5–600.
+	// <p>HTTP response timeout.</p><p>Value range: [5, 600]</p><p>Unit: seconds</p><p>Default value: 15</p>
 	ResponseTimeout *int64 `json:"ResponseTimeout,omitnil,omitempty" name:"ResponseTimeout"`
 }
 
@@ -17989,6 +18437,47 @@ type LoadBalancer struct {
 	References []*OriginGroupReference `json:"References,omitnil,omitempty" name:"References"`
 }
 
+type LogAnalysisDownloadTask struct {
+	// <p>Task ID.</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Site ID.</p>
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// <p>Data ownership region. Valid values:<ul><li>mainland: within the Chinese mainland;</li><li>overseas: global (excluding the Chinese mainland).</li></ul></p>
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+
+	// <p>Start time, example value: 2020-04-29T00:00:00Z.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>End time. Example value: 2020-04-30T00:00:00Z.</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Log type. Valid values: <ul><li> l7-access-logs: Layer 7 Access Logs;</li><li>web-attack: Managed rule log.</li></ul></p>
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// <p><a href="https://www.tencentcloud.com/document/product/1552/124662?from_cn_redirect=1">Log match condition</a>. Maximum length 12KB.</p>
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
+
+	// <p>File format, valid values:</p><ul><li>csv.</li></ul>
+	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
+
+	// <p>Whether raw logs are returned in time sequence. Valid values: <ul><li>asc: ascending order;</li><li>desc: descending order.</li></ul></p>
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// <p>Task status, valid values: <ul><li>loading: being processed, waiting to generate download link;</li><li> failed: processing failure, current task cannot be downloaded;</li><li>completed: packaging completed, ready for download.</li></ul></p>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Task creation time. After successful task creation, the retention period is 3 days.</p>
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Download link, only returned when Status = completed.</p>
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// <p>Task expiration time. After expiry, the download address will be unavailable. Please obtain a new download address through this API.</p>
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+}
+
 type LogFormat struct {
 	// <p>Log output format. Valid values:</p><ul><li>json: Use the predefined log output format JSON Lines, where each log entry is presented as key-value pairs;</li><li>csv: Use the predefined log output format CSV, where each log entry presents only field values, not field names.</li><li>template: Use a user-customized output template. Each log entry supports custom layout and concatenation based on the custom template, in conjunction with the RecordTemplate field.</li></ul>
 	FormatType *string `json:"FormatType,omitnil,omitempty" name:"FormatType"`
@@ -18013,6 +18502,14 @@ type LogFormat struct {
 
 	// <p>Field separator, a string inserted between fields within a single log record as a separator. It takes effect only when FormatType = csv. Valid values:</p><ul><li>\t: tab character;</li><li>,: half-width comma;</li><li>;: half-width semicolon.</li></ul>
 	FieldDelimiter *string `json:"FieldDelimiter,omitnil,omitempty" name:"FieldDelimiter"`
+}
+
+type LogItem struct {
+	// Log generation time point, using unix millisecond-level timestamp.
+	Timestamp *int64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
+
+	// Specific contents of the log, using JSON String Format.
+	LogJson *string `json:"LogJson,omitnil,omitempty" name:"LogJson"`
 }
 
 type ManagedRuleAction struct {
@@ -21056,8 +21553,7 @@ type ModifyOriginParameters struct {
 	// <li>off: disable private authentication.</li>.
 	PrivateAccess *string `json:"PrivateAccess,omitnil,omitempty" name:"PrivateAccess"`
 
-	// Private authentication parameter. this parameter is valid only when origintype = awss3 and privateaccess = on.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// Private authentication parameter. This parameter is valid only when OriginType = AWSS3 and PrivateAccess = on.
 	PrivateParameters *OriginPrivateParameters `json:"PrivateParameters,omitnil,omitempty" name:"PrivateParameters"`
 }
 
@@ -21358,14 +21854,12 @@ func (r *ModifyRealtimeLogDeliveryTaskResponse) FromJsonString(s string) error {
 }
 
 type ModifyRequestHeaderParameters struct {
-	// List of http header setting rules.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// HTTP header setting rule list.
 	HeaderActions []*HeaderAction `json:"HeaderActions,omitnil,omitempty" name:"HeaderActions"`
 }
 
 type ModifyResponseHeaderParameters struct {
-	// HTTP origin-pull header rules list.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// HTTP origin header rule list.
 	HeaderActions []*HeaderAction `json:"HeaderActions,omitnil,omitempty" name:"HeaderActions"`
 }
 
@@ -22015,6 +22509,74 @@ func (r *ModifyWebSecurityTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyWebSecurityTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyZoneCustomVariablesRequestParams struct {
+	// <p>Site ID.</p>
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// <p>List of site-level custom variables. CustomVariable.Name must use user.zone. as a prefix. Variables are initialized sequentially in array order. InitialValue can only reference variables before the current variable. It does not support referencing the current variable itself or variables after it.</p>
+	CustomVariables []*CustomVariable `json:"CustomVariables,omitnil,omitempty" name:"CustomVariables"`
+
+	// <p>Site-level custom variable calculation rules. The calculation supports references to defined site-level custom variables. This list currently only supports filling in one rule; additional entries are invalid.</p>
+	CustomVariableOperations []*CustomVariableOperation `json:"CustomVariableOperations,omitnil,omitempty" name:"CustomVariableOperations"`
+}
+
+type ModifyZoneCustomVariablesRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Site ID.</p>
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// <p>List of site-level custom variables. CustomVariable.Name must use user.zone. as a prefix. Variables are initialized sequentially in array order. InitialValue can only reference variables before the current variable. It does not support referencing the current variable itself or variables after it.</p>
+	CustomVariables []*CustomVariable `json:"CustomVariables,omitnil,omitempty" name:"CustomVariables"`
+
+	// <p>Site-level custom variable calculation rules. The calculation supports references to defined site-level custom variables. This list currently only supports filling in one rule; additional entries are invalid.</p>
+	CustomVariableOperations []*CustomVariableOperation `json:"CustomVariableOperations,omitnil,omitempty" name:"CustomVariableOperations"`
+}
+
+func (r *ModifyZoneCustomVariablesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyZoneCustomVariablesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "CustomVariables")
+	delete(f, "CustomVariableOperations")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyZoneCustomVariablesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyZoneCustomVariablesResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyZoneCustomVariablesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyZoneCustomVariablesResponseParams `json:"Response"`
+}
+
+func (r *ModifyZoneCustomVariablesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyZoneCustomVariablesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -24107,206 +24669,201 @@ type RuleCondition struct {
 }
 
 type RuleEngineAction struct {
-	// Operation name. The name must correspond to the parameter structure. For example, if Name=Cache, CacheParameters is required.
-	// <li>Cache: Node caching TTL;</li>
-	// <li>CacheKey: custom Cache Key;</li>
-	// <li>CachePrefresh: cache pre-refresh;</li>
-	// <li>AccessURLRedirect: URL redirection;</li>
-	// <li>UpstreamURLRewrite: origin-pull URL rewrite;</li>
-	// <li>QUIC:QUIC;</li>
-	// <li>WebSocket:WebSocket;</li>
-	// <li>Authentication: Token authentication;</li>
-	// <li>MaxAge: Browser cache TTL;</li>
-	// <li>StatusCodeCache: Status code cache TTL;</li>
-	// <li>OfflineCache: Offline cache;</li>
-	// <li>SmartRouting: Smart acceleration;</li>
-	// <li>RangeOriginPull: Range-based origin pull;</li>
-	// <li>UpstreamHTTP2: HTTP/2 origin pull;</li>
-	// <li>HostHeader: Host header rewrite;</li>
-	// <li>ForceRedirectHTTPS: Forced HTTPS redirect configuration for access protocol.</li>
-	// <li>HTTPS origin pull (OriginPullProtocol);</li>
-	// <li>Compression: Intelligent compression configuration;</li>
-	// <li>HSTS:HSTS;</li>
-	// <li>ClientIPHeader: Header information configuration that stores the client request IP.</li>
-	// <li>OCSPStapling: OCSP stapling;</li>
-	// <li>HTTP2: HTTP/2 integration;</li>
-	// <li>PostMaxSize: Maximum limit for file streaming transmission in POST requests.</li>
-	// <li>ClientIPCountry: Carry regional information of the client IP during origin pull.</li>
-	// <li>UpstreamFollowRedirect: Parameter configuration for redirection during origin pull;</li>
-	// <li>UpstreamRequest: Origin-pull request parameter;</li>
-	// <li>Shield: Origin server uninstallation.</li>
-	// <li>TLSConfig: SSL/TLS security;</li>
-	// <li>ModifyOrigin: Modify origin server;</li>
-	// <li>SiteFailover: origin server failure failover;</li>
-	// <li>HTTPUpstreamTimeout: Layer-7 origin-pull timeout configuration.</li>
-	// <li>HTTP response: HTTP response;</li>
-	// <li>ErrorPage: Custom error page;</li>
-	// <li>ModifyResponseHeader: Modify the HTTP node response header;</li>
-	// <li>ModifyRequestHeader: Modify the request header of an HTTP node;</li>
-	// <li>ResponseSpeedLimit: Download speed limit for a single connection;</li>
-	// <li>SetContentIdentifier: Set the content identifier.</li>
-	// <li>Vary: Vary feature configuration;</li>
-	// <li>ContentCompression: Content compression configuration;</li>
-	// <li>OriginAuthentication: Origin authentication configuration.</li>
+	// <p>Operation name. The name must correspond to the parameters structure. For example, if Name=Cache, then CacheParameters is required.<li>Cache: Node cache TTL;</li><li>CacheKey: Custom Cache Key;</li><li>CachePrefresh: Cache pre-refresh;</li><li>AccessURLRedirect: Access URL redirection;</li><li>UpstreamURLRewrite: Origin-pull URL rewrite;</li><li>QUIC: QUIC;</li><li>WebSocket: WebSocket;</li><li>Authentication: Token authentication;</li><li>MaxAge: Browser cache TTL;</li><li>StatusCodeCache: Status code cache TTL;</li><li>OfflineCache: Offline cache;</li><li>SmartRouting: Smart acceleration;</li><li>AdvancedOriginRouting: Advanced origin optimization;</li><li>RangeOriginPull: Range-based origin pull;</li><li>UpstreamHTTP2: HTTP2 origin-pull;</li><li>HostHeader: Host header rewrite;</li><li>ForceRedirectHTTPS: Forced HTTPS redirect configuration;</li><li>OriginPullProtocol: Origin-pull HTTPS;</li><li>Compression: Intelligent compression configuration;</li><li>HSTS: HSTS;</li><li>ClientIPHeader: Configuration for storing client IP address in the header;</li><li>OCSPStapling: OCSP stapling;</li><li>HTTP2: HTTP2 integration;</li><li>PostMaxSize: Maximum limit configuration for POST request upload file streaming transmission;</li><li>ClientIPCountry: Carrying regional information of the client IP during origin-pull;</li><li>UpstreamFollowRedirect: Upstream follow redirect parameter configuration;</li><li>UpstreamRequest: Origin-pull request parameters;</li><li>Shield: Origin server uninstallation configuration;</li><li>TLSConfig: SSL/TLS security;</li><li>ModifyOrigin: Modify origin server;</li><li>SiteFailover: Origin server fault migration;</li><li>HTTPUpstreamTimeout: Layer-7 origin-pull timeout configuration;</li><li>HttpResponse: HTTP response;</li><li>ErrorPage: Custom error page;</li><li>ModifyResponseHeader: Modify HTTP node response header;</li><li>ModifyRequestHeader: Modify HTTP node request header;</li><li>ResponseSpeedLimit: Single connection download speed limit;</li><li>SetContentIdentifier: Set content identifier;</li><li>Vary: Vary feature configuration;</li><li>ContentCompression: Content compression configuration;</li><li>OriginAuthentication: Origin-pull authentication configuration;</li><li>CustomAction: Custom configuration.</li></p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Node cache ttl configuration parameter. when name is cache, this parameter is required.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Node cache TTL configuration parameter. This parameter is required when the Name value is Cache.</p>
 	CacheParameters *CacheParameters `json:"CacheParameters,omitnil,omitempty" name:"CacheParameters"`
 
-	// Custom cache key configuration parameter. when name is cachekey, this parameter is required.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Custom Cache Key configuration parameter. When Name value is CacheKey, this parameter is required.
 	CacheKeyParameters *CacheKeyParameters `json:"CacheKeyParameters,omitnil,omitempty" name:"CacheKeyParameters"`
 
-	// The cache prefresh configuration parameter. this parameter is required when `name` is `cacheprefresh`.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Cache pre-refresh configuration parameter. This parameter is required when the Name value is CachePrefresh.</p>
 	CachePrefreshParameters *CachePrefreshParameters `json:"CachePrefreshParameters,omitnil,omitempty" name:"CachePrefreshParameters"`
 
-	// The access url redirection configuration parameter. this parameter is required when `name` is `accessurlredirect`.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Access URL redirection configuration parameter. This parameter is required when the Name value is AccessURLRedirect.</p>
 	AccessURLRedirectParameters *AccessURLRedirectParameters `json:"AccessURLRedirectParameters,omitnil,omitempty" name:"AccessURLRedirectParameters"`
 
-	// The origin-pull url rewrite configuration parameter. this parameter is required when `name` is `upstreamurlrewrite`.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Origin-pull URL rewrite configuration parameter. This parameter is required when the value of Name is UpstreamURLRewrite.</p>
 	UpstreamURLRewriteParameters *UpstreamURLRewriteParameters `json:"UpstreamURLRewriteParameters,omitnil,omitempty" name:"UpstreamURLRewriteParameters"`
 
-	// The quic configuration parameter. this parameter is required when `name` is `quic`.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>QUIC configuration parameter. This parameter is required when the Name value is QUIC.</p>
 	QUICParameters *QUICParameters `json:"QUICParameters,omitnil,omitempty" name:"QUICParameters"`
 
-	// The websocket configuration parameter. this parameter is required when `name` is `websocket`.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>WebSocket configuration parameter. This parameter is required when the Name value is WebSocket.</p>
 	WebSocketParameters *WebSocketParameters `json:"WebSocketParameters,omitnil,omitempty" name:"WebSocketParameters"`
 
-	// Token authentication configuration parameter. this parameter is required when `name` is `authentication`.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Token authentication configuration parameter. This parameter is required when the Name value is Authentication.</p>
 	AuthenticationParameters *AuthenticationParameters `json:"AuthenticationParameters,omitnil,omitempty" name:"AuthenticationParameters"`
 
-	// Browser cache ttl configuration parameter. this parameter is required when `name` is `maxage`.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Browser cache TTL configuration parameter. This parameter is required when the value of Name is MaxAge.</p>
 	MaxAgeParameters *MaxAgeParameters `json:"MaxAgeParameters,omitnil,omitempty" name:"MaxAgeParameters"`
 
-	// Status code cache ttl configuration parameter. this parameter is required when `name` is `statuscodecache`.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Status code cache TTL configuration parameter. This parameter is required when the Name value is StatusCodeCache.</p>
 	StatusCodeCacheParameters *StatusCodeCacheParameters `json:"StatusCodeCacheParameters,omitnil,omitempty" name:"StatusCodeCacheParameters"`
 
-	// Offline cache configuration parameter. this parameter is required when `name` is `offlinecache`.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Offline cache configuration parameter. This parameter is required when the Name value is OfflineCache.</p>
 	OfflineCacheParameters *OfflineCacheParameters `json:"OfflineCacheParameters,omitnil,omitempty" name:"OfflineCacheParameters"`
 
-	// Smart acceleration configuration parameter. this parameter is required when `name` is `smartrouting`.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Smart acceleration configuration parameter. This parameter is required when the Name value is SmartRouting.</p>
 	SmartRoutingParameters *SmartRoutingParameters `json:"SmartRoutingParameters,omitnil,omitempty" name:"SmartRoutingParameters"`
 
-	// Shard source retrieval configuration parameter. this parameter is required when name is set to rangeoriginpull.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Advanced origin optimization configuration parameter. This parameter is required when the Name value is AdvancedOriginRouting.</p>
+	AdvancedOriginRoutingParameters *AdvancedOriginRoutingParameters `json:"AdvancedOriginRoutingParameters,omitnil,omitempty" name:"AdvancedOriginRoutingParameters"`
+
+	// <p>Configuration parameter for range-based origin pull. This parameter is required when the value of Name is RangeOriginPull.</p>
 	RangeOriginPullParameters *RangeOriginPullParameters `json:"RangeOriginPullParameters,omitnil,omitempty" name:"RangeOriginPullParameters"`
 
-	// HTTP2 origin-pull configuration parameter. this parameter is required when name is set to upstreamhttp2.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>HTTP2 origin configuration parameter. This parameter is required when the Name value is UpstreamHTTP2.</p>
 	UpstreamHTTP2Parameters *UpstreamHTTP2Parameters `json:"UpstreamHTTP2Parameters,omitnil,omitempty" name:"UpstreamHTTP2Parameters"`
 
-	// Host header rewrite configuration parameter. this parameter is required when name is set to hostheader.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Host header rewrite configuration parameter. When the Name value is HostHeader, this parameter is required.</p>
 	HostHeaderParameters *HostHeaderParameters `json:"HostHeaderParameters,omitnil,omitempty" name:"HostHeaderParameters"`
 
-	// Force https redirect configuration parameter. this parameter is required when the name is set to forceredirecthttps.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Forced HTTPS redirect configuration for the access protocol. This parameter is required when the Name value is ForceRedirectHTTPS.</p>
 	ForceRedirectHTTPSParameters *ForceRedirectHTTPSParameters `json:"ForceRedirectHTTPSParameters,omitnil,omitempty" name:"ForceRedirectHTTPSParameters"`
 
-	// HTTPS configuration for origin-pull. this parameter is required when the Name value is OriginPullProtocol.
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// <p>Origin HTTPS configuration parameter. This parameter is required when the Name value is OriginPullProtocol.</p>
 	OriginPullProtocolParameters *OriginPullProtocolParameters `json:"OriginPullProtocolParameters,omitnil,omitempty" name:"OriginPullProtocolParameters"`
 
-	// Intelligent compression configuration. this parameter is required when name is set to compression.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Intelligent compression configuration. This parameter is required when the Name value is Compression.</p>
 	CompressionParameters *CompressionParameters `json:"CompressionParameters,omitnil,omitempty" name:"CompressionParameters"`
 
-	// HSTS configuration parameter. this parameter is required when name is hsts.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>HSTS configuration parameter. When the Name value is HSTS, this parameter is required.</p>
 	HSTSParameters *HSTSParameters `json:"HSTSParameters,omitnil,omitempty" name:"HSTSParameters"`
 
-	// Client ip header configuration for storing client request ip information. this parameter is required when name is clientipheader.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Configuration header information for storing client request IP. When the Name value is ClientIPHeader, this parameter is required.</p>
 	ClientIPHeaderParameters *ClientIPHeaderParameters `json:"ClientIPHeaderParameters,omitnil,omitempty" name:"ClientIPHeaderParameters"`
 
-	// OCSP stapling configuration parameter. this parameter is required when the name is set to ocspstapling.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>OCSP stapling configuration parameter. This parameter is required when Name value is OCSPStapling.</p>
 	OCSPStaplingParameters *OCSPStaplingParameters `json:"OCSPStaplingParameters,omitnil,omitempty" name:"OCSPStaplingParameters"`
 
-	// HTTP2 access configuration parameter. this parameter is required when name is http2.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>HTTP2 integration configuration parameter. This parameter is required when the Name value is HTTP2.</p>
 	HTTP2Parameters *HTTP2Parameters `json:"HTTP2Parameters,omitnil,omitempty" name:"HTTP2Parameters"`
 
-	// Maximum size configuration for file streaming upload via a post request. this parameter is required when name is postmaxsize.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Maximum limit configuration for file streaming transmission in POST request upload. When the Name value is PostMaxSize, this parameter is required.</p>
 	PostMaxSizeParameters *PostMaxSizeParameters `json:"PostMaxSizeParameters,omitnil,omitempty" name:"PostMaxSizeParameters"`
 
-	// Configuration parameter for carrying the region information of the client ip during origin-pull. this parameter is required when the name is set to clientipcountry.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Configuration parameter for carrying client IP regional information during origin pull. When the Name value is ClientIPCountry, this parameter is required.</p>
 	ClientIPCountryParameters *ClientIPCountryParameters `json:"ClientIPCountryParameters,omitnil,omitempty" name:"ClientIPCountryParameters"`
 
-	// Configuration parameter for following redirects during origin-pull. this parameter is required when the name is set to upstreamfollowredirect.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Origin-pull follow redirect parameter configuration. This parameter is required when the Name value is UpstreamFollowRedirect.</p>
 	UpstreamFollowRedirectParameters *UpstreamFollowRedirectParameters `json:"UpstreamFollowRedirectParameters,omitnil,omitempty" name:"UpstreamFollowRedirectParameters"`
 
-	// Configuration parameter for origin-pull request. this parameter is required when the name is set to upstreamrequest.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Origin-pull request parameter configuration parameter. This parameter is required when the Name value is UpstreamRequest.</p>
 	UpstreamRequestParameters *UpstreamRequestParameters `json:"UpstreamRequestParameters,omitnil,omitempty" name:"UpstreamRequestParameters"`
 
-	// Origin server uninstallation config. When the Name value is Shield, this parameter is required.
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// <p>Origin server uninstallation configuration parameter. This parameter is required when the Name value is Shield.</p>
 	ShieldParameters *ShieldParameters `json:"ShieldParameters,omitnil,omitempty" name:"ShieldParameters"`
 
-	// SSL/TLS security configuration parameter. this parameter is required when the name is set to tlsconfig.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>SSL/TLS security configuration parameter. This parameter is required when the Name value is TLSConfig.</p>
 	TLSConfigParameters *TLSConfigParameters `json:"TLSConfigParameters,omitnil,omitempty" name:"TLSConfigParameters"`
 
-	// Configuration parameter for modifying the origin server. this parameter is required when the name is set to modifyorigin.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Modify origin server configuration parameter. When the Name value is ModifyOrigin, this parameter is required.</p>
 	ModifyOriginParameters *ModifyOriginParameters `json:"ModifyOriginParameters,omitnil,omitempty" name:"ModifyOriginParameters"`
 
-	// Origin server failure failover configuration parameter. This parameter is required when the Name value is SiteFailover.
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// <p>Source site fault migration config. When the Name value is SiteFailover, this parameter is required.</p>
 	SiteFailoverParameters *SiteFailoverParameters `json:"SiteFailoverParameters,omitnil,omitempty" name:"SiteFailoverParameters"`
 
-	// Configuration of layer 7 origin timeout. this parameter is required when name is httpupstreamtimeout.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Layer 7 origin pull timeout configuration. This parameter is required when the Name value is HTTPUpstreamTimeout.</p>
 	HTTPUpstreamTimeoutParameters *HTTPUpstreamTimeoutParameters `json:"HTTPUpstreamTimeoutParameters,omitnil,omitempty" name:"HTTPUpstreamTimeoutParameters"`
 
-	// HTTP response configuration parameters. this parameter is required when name is httpresponse.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>HTTP response configuration parameter. This parameter is required when the Name value is HttpResponse.</p>
 	HttpResponseParameters *HTTPResponseParameters `json:"HttpResponseParameters,omitnil,omitempty" name:"HttpResponseParameters"`
 
-	// Custom error page configuration parameters. this parameter is required when name is errorpage.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Custom error page configuration parameter. This parameter is required when the value of Name is ErrorPage.</p>
 	ErrorPageParameters *ErrorPageParameters `json:"ErrorPageParameters,omitnil,omitempty" name:"ErrorPageParameters"`
 
-	// Modify http node response header configuration parameters. this parameter is required when name is modifyresponseheader.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Modify the HTTP node response header configuration parameter. This parameter is required when the Name value is ModifyResponseHeader.</p>
 	ModifyResponseHeaderParameters *ModifyResponseHeaderParameters `json:"ModifyResponseHeaderParameters,omitnil,omitempty" name:"ModifyResponseHeaderParameters"`
 
-	// Modify http node request header configuration parameters. this parameter is required when name is modifyrequestheader.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Modify the request header configuration parameter of the HTTP node. This parameter is required when the Name value is ModifyRequestHeader.</p>
 	ModifyRequestHeaderParameters *ModifyRequestHeaderParameters `json:"ModifyRequestHeaderParameters,omitnil,omitempty" name:"ModifyRequestHeaderParameters"`
 
-	// Single connection download speed limit configuration parameter. this parameter is required when name is responsespeedlimit.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// <p>Single connection download speed limit configuration parameter. This parameter is required when the Name value is ResponseSpeedLimit.</p>
 	ResponseSpeedLimitParameters *ResponseSpeedLimitParameters `json:"ResponseSpeedLimitParameters,omitnil,omitempty" name:"ResponseSpeedLimitParameters"`
 
-	// Specifies the content identification configuration parameter. this parameter is required when the Name value is SetContentIdentifier.
-	// 
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// <p>Content identification configuration parameter. This parameter is required when the Name value is SetContentIdentifier.</p>
 	SetContentIdentifierParameters *SetContentIdentifierParameters `json:"SetContentIdentifierParameters,omitnil,omitempty" name:"SetContentIdentifierParameters"`
 
-	// Vary feature configuration parameter. when Name value is Vary, this parameter is required.
+	// <p>Vary feature configuration parameter. This parameter is required when the Name value is Vary.</p>
 	VaryParameters *VaryParameters `json:"VaryParameters,omitnil,omitempty" name:"VaryParameters"`
 
-	// The content compression configuration parameter is required when Name value is ContentCompression. this parameter is an allowlist feature. if needed, contact tencent cloud engineers.
+	// <p>Content compression configuration parameter. When the Name value is ContentCompression, this parameter is required. This parameter is an allowlist feature. If needed, contact Tencent Cloud Engineers.</p>
 	ContentCompressionParameters *ContentCompressionParameters `json:"ContentCompressionParameters,omitnil,omitempty" name:"ContentCompressionParameters"`
 
-	// The origin authentication configuration parameter. this parameter is required when the Name value is OriginAuthentication. this parameter is the allowlist feature. if needed, contact tencent cloud engineers.
+	// <p>Origin authentication configuration parameter. This parameter is required when Name value is OriginAuthentication. This parameter is an allowlist feature. If needed, contact Tencent Cloud Engineers.</p>
 	OriginAuthenticationParameters *OriginAuthenticationParameters `json:"OriginAuthenticationParameters,omitnil,omitempty" name:"OriginAuthenticationParameters"`
+
+	// <p>Custom configuration operation parameter. This parameter is required when the Name value is CustomAction.</p><p>You can obtain the list of currently supported custom configuration items through the CustomActionSet returned value of the DescribeAvailableCustomActionsForRuleEngine API.</p>
+	CustomActionParameters *CustomActionParameters `json:"CustomActionParameters,omitnil,omitempty" name:"CustomActionParameters"`
+}
+
+type RuleEngineCustomAction struct {
+	// <p>Unique ID of the custom configuration.</p>
+	ActionId *string `json:"ActionId,omitnil,omitempty" name:"ActionId"`
+
+	// <p>Custom configuration name.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Custom configuration description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>Custom configuration parameter definition list.</p>
+	Parameters []*RuleEngineCustomActionParameterSchema `json:"Parameters,omitnil,omitempty" name:"Parameters"`
+
+	// <p>Match conditions supported by custom configuration.</p><p>For supported match conditions, refer to the official documentation <a href="https://www.tencentcloud.com/document/product/1552/125344?from_cn_redirect=1">General Reference - Configuration Syntax - Variables</a>.</p>
+	SupportedConditions []*string `json:"SupportedConditions,omitnil,omitempty" name:"SupportedConditions"`
+}
+
+type RuleEngineCustomActionParameterSchema struct {
+	// <p>Parameter field name.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Parameter field data type. Valid values: <li>Boolean: boolean;</li><li>Integer: integer;</li><li>Float: floating-point;</li><li>String: string;</li><li>ArrayOfInteger: integer array;</li><li>ArrayOfFloat: floating-point array;</li><li>ArrayOfString: array of strings.</li></p>
+	ValueType *string `json:"ValueType,omitnil,omitempty" name:"ValueType"`
+
+	// <p>Parameter field description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>Field default value of the parameter.</p>
+	Default *string `json:"Default,omitnil,omitempty" name:"Default"`
+
+	// <p>Parameter field unit.</p>
+	Unit *string `json:"Unit,omitnil,omitempty" name:"Unit"`
+
+	// <p>Whether the parameter field is required or not.</p><p>Default value: false</p><p>If filled, it is applicable to ALL parameter field type verification; if left blank, no verification.</p>
+	Required *bool `json:"Required,omitnil,omitempty" name:"Required"`
+
+	// <p>Minimum value of the parameter field.</p><p>If filled, it is used to validate the value for integer, floating-point number, integer array, and floating-point number array type parameters; if left blank, there is no verification.</p>
+	MinValue *float64 `json:"MinValue,omitnil,omitempty" name:"MinValue"`
+
+	// <p>Maximum value of the parameter field.</p><p>If filled, it is used for value verification of type parameters for integers, floating-point numbers, integer arrays, and floating-point number arrays. If left blank, there is no verification.</p>
+	MaxValue *float64 `json:"MaxValue,omitnil,omitempty" name:"MaxValue"`
+
+	// <p>Minimum length of the parameter field.</p><p>If filled, it is used for value verification of string and string array type parameters. If not filled, there is no verification.</p>
+	MinLength *int64 `json:"MinLength,omitnil,omitempty" name:"MinLength"`
+
+	// <p>Maximum length of the parameter field.</p><p>If filled, it is used for value verification for strings and array of strings type parameters; if left blank, no verification.</p>
+	MaxLength *int64 `json:"MaxLength,omitnil,omitempty" name:"MaxLength"`
+
+	// <p>Minimum item count of the parameter field.</p><p>If filled, it is applicable to value verification for various array type parameters; if left blank, there is no verification.</p>
+	MinItems *int64 `json:"MinItems,omitnil,omitempty" name:"MinItems"`
+
+	// <p>Maximum item count of the parameter field.</p><p>If filled, it is applicable to value verification for various array type parameters. If left blank, there is no verification.</p>
+	MaxItems *int64 `json:"MaxItems,omitnil,omitempty" name:"MaxItems"`
+
+	// <p>Whether the parameter field item is unique.</p><p>Default value: false</p><p>If filled, it is applicable to various array type parameter value verification; if left blank, no verification.</p>
+	UniqueItems *bool `json:"UniqueItems,omitnil,omitempty" name:"UniqueItems"`
+
+	// <p>Allowed format of the parameter field.</p><p>If filled, verification of string or string array content is required. If not filled, there is no verification.</p>
+	AllowedPattern *string `json:"AllowedPattern,omitnil,omitempty" name:"AllowedPattern"`
+
+	// <p>Allowed values of the parameter field. If empty, there is no verification.</p><p>If this parameter is filled, it indicates that the corresponding parameter is an enum and only allows values from this parameter array; if left blank, there is no verification.</p>
+	AllowedValues []*string `json:"AllowedValues,omitnil,omitempty" name:"AllowedValues"`
+
+	// <p>Minimum step size of the parameter field.</p><p>If filled, it is suitable for value verification of floating-point and floating-point array type parameters. If not filled, there is no verification.</p>
+	MultipleOf *string `json:"MultipleOf,omitnil,omitempty" name:"MultipleOf"`
 }
 
 type RuleEngineItem struct {
@@ -24526,36 +25083,25 @@ type SecEntryValue struct {
 }
 
 type SecurityAction struct {
-	// Specifies the specific actions for safe execution. valid values:.
-	// <Li>Deny. specifies to block requests from accessing site resources.</li>.
-	// <Li>Monitor: observation, only record logs.</li>.
-	// <li>Redirect: Redirect to URL.</li>.
-	// <Li>Disabled: specifies that the rule is not enabled.</li>.
-	// <Li>Allow: specifies whether to allow access with delayed processing of requests.</li>.
-	// <Li>Challenge: specifies the challenge content to respond to.</li>.
-	// <Li>Trans: pass and allow requests to directly access site resources.</li>.
-	// <Li>BlockIP: to be deprecated. ip block.</li>.
-	// <Li>ReturnCustomPage: to be deprecated. use specified page for interception.</li>.
-	// <li>JSChallenge: to be deprecated, JavaScript challenge;</li>.
-	// <Li>ManagedChallenge: to be deprecated. managed challenge.</li>.
+	// <p>Specific actions for safe execution. Valid values:</p><ul><li>Deny: block, prevent requests from accessing site resources;</li><li>Monitor: observe, only record logs;</li><li>Redirect: redirect to URL;</li><li>Disabled: not enabled, do not enable the specified rule;</li><li>Allow: pass, skip the remaining rules of the current security module. Delay response when the AllowActionParameters parameter is configured;</li><li>Challenge: challenge, respond with challenge content;</li><li>BlockIP: to be deprecated, IP blocking;</li><li>ReturnCustomPage: to be deprecated, use a specified page for interception;</li><li>JSChallenge: to be deprecated, JavaScript challenge;</li><li>ManagedChallenge: to be deprecated, managed challenge.</li></ul>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Additional parameters when Name is Deny.
+	// <p>Additional parameter when Name is Deny.</p>
 	DenyActionParameters *DenyActionParameters `json:"DenyActionParameters,omitnil,omitempty" name:"DenyActionParameters"`
 
-	// Additional parameter when Name is Redirect.
+	// <p>Additional parameter when Name is Redirect.</p>
 	RedirectActionParameters *RedirectActionParameters `json:"RedirectActionParameters,omitnil,omitempty" name:"RedirectActionParameters"`
 
-	// Additional parameters when Name is Allow.
+	// <p>Additional parameter when Name is Allow.</p>
 	AllowActionParameters *AllowActionParameters `json:"AllowActionParameters,omitnil,omitempty" name:"AllowActionParameters"`
 
-	// Additional parameter when Name is Challenge.
+	// <p>Additional parameter when Name is Challenge.</p>
 	ChallengeActionParameters *ChallengeActionParameters `json:"ChallengeActionParameters,omitnil,omitempty" name:"ChallengeActionParameters"`
 
-	// To be deprecated, additional parameter when Name is BlockIP.
+	// <p>To be deprecated. Additional parameter when Name is BlockIP.</p>
 	BlockIPActionParameters *BlockIPActionParameters `json:"BlockIPActionParameters,omitnil,omitempty" name:"BlockIPActionParameters"`
 
-	// To be deprecated, additional parameter when Name is ReturnCustomPage.
+	// <p>To be deprecated. An additional parameter when Name is ReturnCustomPage.</p>
 	ReturnCustomPageActionParameters *ReturnCustomPageActionParameters `json:"ReturnCustomPageActionParameters,omitnil,omitempty" name:"ReturnCustomPageActionParameters"`
 }
 
@@ -24702,6 +25248,14 @@ type SessionRateControl struct {
 type SetContentIdentifierParameters struct {
 	// Content identifier id.
 	ContentIdentifier *string `json:"ContentIdentifier,omitnil,omitempty" name:"ContentIdentifier"`
+}
+
+type SetParameters struct {
+	// <p>Specify the custom variable name. A custom variable must be defined before it can be used in operations.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Assign value to a Custom Variable. Supports the use of constant strings, variables, and formulas. Chinese characters are not allowed. Length cannot exceed 1000 characters.</p>
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type SharedCNAMEInfo struct {
@@ -24945,8 +25499,7 @@ type StatusCodeCacheParam struct {
 }
 
 type StatusCodeCacheParameters struct {
-	// Status code cache ttl.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// Status code cache TTL.
 	StatusCodeCacheParams []*StatusCodeCacheParam `json:"StatusCodeCacheParams,omitnil,omitempty" name:"StatusCodeCacheParams"`
 }
 
@@ -25008,8 +25561,11 @@ type TCCaptchaOption struct {
 }
 
 type TCEOCaptchaOption struct {
-	// EdgeOne human-machine verification mode. Valid values:<li>Invisible: invisible verification;</li><li>Adaptive: self adaptive interactive verification.</li>
+	// <p>Browser-side WebView human-machine verification interaction mode.</p><p>Enumeration values:</p><ul><li>Invisible: invisible verification</li><li>Adaptive: self adaptive interactive verification</li></ul><p>Default value: Invisible</p>
 	CaptchaMode *string `json:"CaptchaMode,omitnil,omitempty" name:"CaptchaMode"`
+
+	// <p>Human-machine verification interaction mode for native apps on mobile terminals.</p><p>Enumeration values:</p><ul><li>Invisible: Invisible verification</li><li>Visible: interactive verification</li></ul><p>Default value: Invisible</p>
+	MobileCaptchaMode *string `json:"MobileCaptchaMode,omitnil,omitempty" name:"MobileCaptchaMode"`
 }
 
 type TCRCEOption struct {
@@ -25305,12 +25861,10 @@ type UpstreamRequestCookie struct {
 }
 
 type UpstreamRequestParameters struct {
-	// Query string configuration. optional. if not provided, it will not be configured.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// Query string configuration. Optional configuration, leave blank for no configuration.
 	QueryString *UpstreamRequestQueryString `json:"QueryString,omitnil,omitempty" name:"QueryString"`
 
-	// Cookie configuration. optional. if not provided, it will not be configured.
-	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	// Cookie configuration. Optional configuration. Leave it blank for no configuration.
 	Cookie *UpstreamRequestCookie `json:"Cookie,omitnil,omitempty" name:"Cookie"`
 }
 

@@ -65,7 +65,7 @@ func NewActivateInstanceResponse() (response *ActivateInstanceResponse) {
 }
 
 // ActivateInstance
-// This interface (ActivateInstance) restores access to isolated instances.
+// This API is used to restore access to isolated instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -85,7 +85,7 @@ func (c *Client) ActivateInstance(request *ActivateInstanceRequest) (response *A
 }
 
 // ActivateInstance
-// This interface (ActivateInstance) restores access to isolated instances.
+// This API is used to restore access to isolated instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -273,7 +273,7 @@ func NewAddClusterSlaveZoneResponse() (response *AddClusterSlaveZoneResponse) {
 }
 
 // AddClusterSlaveZone
-// This interface (AddClusterSlaveZone) is used to enable multi-az deployment for a cluster.
+// This API is used to enable multi-AZ deployment for a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -288,7 +288,7 @@ func (c *Client) AddClusterSlaveZone(request *AddClusterSlaveZoneRequest) (respo
 }
 
 // AddClusterSlaveZone
-// This interface (AddClusterSlaveZone) is used to enable multi-az deployment for a cluster.
+// This API is used to enable multi-AZ deployment for a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -519,7 +519,7 @@ func NewAddServerlessRoInstancesResponse() (response *AddServerlessRoInstancesRe
 }
 
 // AddServerlessRoInstances
-// Add a read-only instance to the serverless cluster
+// Add a read-only instance to a serverless cluster
 //
 // error code that may be returned:
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
@@ -528,7 +528,7 @@ func (c *Client) AddServerlessRoInstances(request *AddServerlessRoInstancesReque
 }
 
 // AddServerlessRoInstances
-// Add a read-only instance to the serverless cluster
+// Add a read-only instance to a serverless cluster
 //
 // error code that may be returned:
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
@@ -697,7 +697,7 @@ func NewCalculateBackupSaveSecExpiresResponse() (response *CalculateBackupSaveSe
 }
 
 // CalculateBackupSaveSecExpires
-// Calculate the backup file list that will expire and be deleted after modifying the backup retention period
+// Calculate the backup file list that will expire and be deleted after the backup retention period is modified.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_BINDSOURCEPACKAGEERROR = "FailedOperation.BindSourcePackageError"
@@ -714,7 +714,7 @@ func (c *Client) CalculateBackupSaveSecExpires(request *CalculateBackupSaveSecEx
 }
 
 // CalculateBackupSaveSecExpires
-// Calculate the backup file list that will expire and be deleted after modifying the backup retention period
+// Calculate the backup file list that will expire and be deleted after the backup retention period is modified.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_BINDSOURCEPACKAGEERROR = "FailedOperation.BindSourcePackageError"
@@ -739,6 +739,58 @@ func (c *Client) CalculateBackupSaveSecExpiresWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewCalculateBackupSaveSecExpiresResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCancelTaskRequest() (request *CancelTaskRequest) {
+    request = &CancelTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "CancelTask")
+    
+    
+    return
+}
+
+func NewCancelTaskResponse() (response *CancelTaskResponse) {
+    response = &CancelTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CancelTask
+// Cancel to be executed tasks
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CancelTask(request *CancelTaskRequest) (response *CancelTaskResponse, err error) {
+    return c.CancelTaskWithContext(context.Background(), request)
+}
+
+// CancelTask
+// Cancel to be executed tasks
+//
+// error code that may be returned:
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) CancelTaskWithContext(ctx context.Context, request *CancelTaskRequest) (response *CancelTaskResponse, err error) {
+    if request == nil {
+        request = NewCancelTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "CancelTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CancelTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCancelTaskResponse()
     err = c.Send(request, response)
     return
 }
@@ -855,7 +907,7 @@ func NewCheckTransferClusterZoneResponse() (response *CheckTransferClusterZoneRe
 }
 
 // CheckTransferClusterZone
-// This API is used to check if it is possible to trigger cross-AZ migration.
+// This API is used to check whether cross-AZ migration can be initiated.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -885,7 +937,7 @@ func (c *Client) CheckTransferClusterZone(request *CheckTransferClusterZoneReque
 }
 
 // CheckTransferClusterZone
-// This API is used to check if it is possible to trigger cross-AZ migration.
+// This API is used to check whether cross-AZ migration can be initiated.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -947,7 +999,7 @@ func NewCloseAuditServiceResponse() (response *CloseAuditServiceResponse) {
 }
 
 // CloseAuditService
-// This API is used to close the database audit service for TDSQL-C MySQL instances.
+// This API is used to close the database audit service for a TDSQL-C MySQL instance.
 //
 // error code that may be returned:
 //  INTERNALERROR_LISTINSTANCESERROR = "InternalError.ListInstancesError"
@@ -957,7 +1009,7 @@ func (c *Client) CloseAuditService(request *CloseAuditServiceRequest) (response 
 }
 
 // CloseAuditService
-// This API is used to close the database audit service for TDSQL-C MySQL instances.
+// This API is used to close the database audit service for a TDSQL-C MySQL instance.
 //
 // error code that may be returned:
 //  INTERNALERROR_LISTINSTANCESERROR = "InternalError.ListInstancesError"
@@ -999,7 +1051,7 @@ func NewCloseClusterPasswordComplexityResponse() (response *CloseClusterPassword
 }
 
 // CloseClusterPasswordComplexity
-// This API is used to close cluster password complexity.
+// This API is used to disable password complexity for a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -1013,7 +1065,7 @@ func (c *Client) CloseClusterPasswordComplexity(request *CloseClusterPasswordCom
 }
 
 // CloseClusterPasswordComplexity
-// This API is used to close cluster password complexity.
+// This API is used to disable password complexity for a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -1059,7 +1111,7 @@ func NewCloseProxyResponse() (response *CloseProxyResponse) {
 }
 
 // CloseProxy
-// This API is used to close the database proxy service of a cluster.
+// This API is used to shut down the database proxy service of a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1076,7 +1128,7 @@ func (c *Client) CloseProxy(request *CloseProxyRequest) (response *CloseProxyRes
 }
 
 // CloseProxy
-// This API is used to close the database proxy service of a cluster.
+// This API is used to shut down the database proxy service of a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1191,7 +1243,7 @@ func NewCloseSSLResponse() (response *CloseSSLResponse) {
 }
 
 // CloseSSL
-// This API is used to disable SSL encryption.
+// Disable SSL encryption
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -1212,7 +1264,7 @@ func (c *Client) CloseSSL(request *CloseSSLRequest) (response *CloseSSLResponse,
 }
 
 // CloseSSL
-// This API is used to disable SSL encryption.
+// Disable SSL encryption
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -1265,7 +1317,7 @@ func NewCloseWanResponse() (response *CloseWanResponse) {
 }
 
 // CloseWan
-// This interface (CloseWan) is used to disable public network.
+// This API is used to disable public network.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -1284,7 +1336,7 @@ func (c *Client) CloseWan(request *CloseWanRequest) (response *CloseWanResponse,
 }
 
 // CloseWan
-// This interface (CloseWan) is used to disable public network.
+// This API is used to disable public network.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -1335,7 +1387,7 @@ func NewCopyBackupToVaultResponse() (response *CopyBackupToVaultResponse) {
 }
 
 // CopyBackupToVault
-// Copy backup files to the designated safe
+// Copy the backup file to the designated backup safe.
 //
 // error code that may be returned:
 //  OPERATIONDENIED_BACKUPVAULTTASKCONFLICTERROR = "OperationDenied.BackupVaultTaskConflictError"
@@ -1344,7 +1396,7 @@ func (c *Client) CopyBackupToVault(request *CopyBackupToVaultRequest) (response 
 }
 
 // CopyBackupToVault
-// Copy backup files to the designated safe
+// Copy the backup file to the designated backup safe.
 //
 // error code that may be returned:
 //  OPERATIONDENIED_BACKUPVAULTTASKCONFLICTERROR = "OperationDenied.BackupVaultTaskConflictError"
@@ -1569,7 +1621,7 @@ func NewCreateAuditRuleTemplateResponse() (response *CreateAuditRuleTemplateResp
 }
 
 // CreateAuditRuleTemplate
-// This API is used to create audit rule templates.
+// This API is used to create an audit rule template.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
@@ -1579,7 +1631,7 @@ func (c *Client) CreateAuditRuleTemplate(request *CreateAuditRuleTemplateRequest
 }
 
 // CreateAuditRuleTemplate
-// This API is used to create audit rule templates.
+// This API is used to create an audit rule template.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
@@ -1807,7 +1859,7 @@ func NewCreateClustersResponse() (response *CreateClustersResponse) {
 }
 
 // CreateClusters
-// This API is used to purchase new clusters.
+// This API is used to create a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDER = "FailedOperation.CreateOrder"
@@ -1844,7 +1896,7 @@ func (c *Client) CreateClusters(request *CreateClustersRequest) (response *Creat
 }
 
 // CreateClusters
-// This API is used to purchase new clusters.
+// This API is used to create a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDER = "FailedOperation.CreateOrder"
@@ -1913,7 +1965,7 @@ func NewCreateIntegrateClusterResponse() (response *CreateIntegrateClusterRespon
 }
 
 // CreateIntegrateCluster
-// This API is used to create a newly purchased cluster.
+// This API is used to purchase a new cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDER = "FailedOperation.CreateOrder"
@@ -1946,7 +1998,7 @@ func (c *Client) CreateIntegrateCluster(request *CreateIntegrateClusterRequest) 
 }
 
 // CreateIntegrateCluster
-// This API is used to create a newly purchased cluster.
+// This API is used to purchase a new cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDER = "FailedOperation.CreateOrder"
@@ -2243,7 +2295,7 @@ func NewCreateParamTemplateResponse() (response *CreateParamTemplateResponse) {
 }
 
 // CreateParamTemplate
-// This API is used to create parameter templates.
+// This API is used to create a parameter template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -2256,7 +2308,7 @@ func (c *Client) CreateParamTemplate(request *CreateParamTemplateRequest) (respo
 }
 
 // CreateParamTemplate
-// This API is used to create parameter templates.
+// This API is used to create a parameter template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -2301,7 +2353,7 @@ func NewCreateProxyResponse() (response *CreateProxyResponse) {
 }
 
 // CreateProxy
-// This API is used to enable the database proxy of a cluster.
+// This API is used to enable the database proxy for a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2318,7 +2370,7 @@ func (c *Client) CreateProxy(request *CreateProxyRequest) (response *CreateProxy
 }
 
 // CreateProxy
-// This API is used to enable the database proxy of a cluster.
+// This API is used to enable the database proxy for a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2437,7 +2489,7 @@ func NewCreateResourcePackageResponse() (response *CreateResourcePackageResponse
 }
 
 // CreateResourcePackage
-// This API is used to purchase new resource packets.
+// This API is used to create a resource package.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATESOURCEPACKAGEERROR = "FailedOperation.CreateSourcePackageError"
@@ -2451,7 +2503,7 @@ func (c *Client) CreateResourcePackage(request *CreateResourcePackageRequest) (r
 }
 
 // CreateResourcePackage
-// This API is used to purchase new resource packets.
+// This API is used to create a resource package.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATESOURCEPACKAGEERROR = "FailedOperation.CreateSourcePackageError"
@@ -2497,7 +2549,7 @@ func NewCreateVaultResponse() (response *CreateVaultResponse) {
 }
 
 // CreateVault
-// Create a backup safe
+// This API is used to create a backup vault.
 //
 // error code that may be returned:
 //  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
@@ -2506,7 +2558,7 @@ func (c *Client) CreateVault(request *CreateVaultRequest) (response *CreateVault
 }
 
 // CreateVault
-// Create a backup safe
+// This API is used to create a backup vault.
 //
 // error code that may be returned:
 //  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
@@ -2671,7 +2723,7 @@ func NewDeleteBackupResponse() (response *DeleteBackupResponse) {
 }
 
 // DeleteBackup
-// This API is used to delete manual backups for a cluster. Automatic backups cannot be deleted.
+// This API is used to delete a manual backup for a cluster. Auto-backups cannot be deleted.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -2687,7 +2739,7 @@ func (c *Client) DeleteBackup(request *DeleteBackupRequest) (response *DeleteBac
 }
 
 // DeleteBackup
-// This API is used to delete manual backups for a cluster. Automatic backups cannot be deleted.
+// This API is used to delete a manual backup for a cluster. Auto-backups cannot be deleted.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -2735,7 +2787,7 @@ func NewDeleteBackupVaultResponse() (response *DeleteBackupVaultResponse) {
 }
 
 // DeleteBackupVault
-// Delete specified backup files from the safe
+// Delete the specified backup file from the backup safe.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -2751,7 +2803,7 @@ func (c *Client) DeleteBackupVault(request *DeleteBackupVaultRequest) (response 
 }
 
 // DeleteBackupVault
-// Delete specified backup files from the safe
+// Delete the specified backup file from the backup safe.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -2849,7 +2901,7 @@ func NewDeleteClusterDatabaseResponse() (response *DeleteClusterDatabaseResponse
 }
 
 // DeleteClusterDatabase
-// This interface is used to delete a database.
+// This API is used to delete a database.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -2862,7 +2914,7 @@ func (c *Client) DeleteClusterDatabase(request *DeleteClusterDatabaseRequest) (r
 }
 
 // DeleteClusterDatabase
-// This interface is used to delete a database.
+// This API is used to delete a database.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -2907,7 +2959,7 @@ func NewDeleteClusterSaveBackupResponse() (response *DeleteClusterSaveBackupResp
 }
 
 // DeleteClusterSaveBackup
-// This API is used to delete residual backups for cluster deletion.
+// This API is used to delete residual backups for a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -2923,7 +2975,7 @@ func (c *Client) DeleteClusterSaveBackup(request *DeleteClusterSaveBackupRequest
 }
 
 // DeleteClusterSaveBackup
-// This API is used to delete residual backups for cluster deletion.
+// This API is used to delete residual backups for a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -3113,7 +3165,7 @@ func NewDeleteParamTemplateResponse() (response *DeleteParamTemplateResponse) {
 }
 
 // DeleteParamTemplate
-// This API is used to delete a parameter template.
+// This API is used to delete a user-created parameter template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -3123,7 +3175,7 @@ func (c *Client) DeleteParamTemplate(request *DeleteParamTemplateRequest) (respo
 }
 
 // DeleteParamTemplate
-// This API is used to delete a parameter template.
+// This API is used to delete a user-created parameter template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -3217,7 +3269,7 @@ func NewDescribeAccountPrivilegesResponse() (response *DescribeAccountPrivileges
 }
 
 // DescribeAccountPrivileges
-// This API is used to query account privileges.
+// This API is used to query the permissions of an account.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -3261,7 +3313,7 @@ func (c *Client) DescribeAccountPrivileges(request *DescribeAccountPrivilegesReq
 }
 
 // DescribeAccountPrivileges
-// This API is used to query account privileges.
+// This API is used to query the permissions of an account.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -3521,7 +3573,7 @@ func NewDescribeAuditRuleTemplatesResponse() (response *DescribeAuditRuleTemplat
 }
 
 // DescribeAuditRuleTemplates
-// This API is used to query audit rule template information.
+// This API is used to query the information of audit rule templates.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -3536,7 +3588,7 @@ func (c *Client) DescribeAuditRuleTemplates(request *DescribeAuditRuleTemplatesR
 }
 
 // DescribeAuditRuleTemplates
-// This API is used to query audit rule template information.
+// This API is used to query the information of audit rule templates.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -3583,7 +3635,7 @@ func NewDescribeAuditRuleWithInstanceIdsResponse() (response *DescribeAuditRuleW
 }
 
 // DescribeAuditRuleWithInstanceIds
-// This API is used to obtain the audit rules of the instance.
+// This API is used to obtain audit rules of the instance.
 //
 // error code that may be returned:
 //  INTERNALERROR_LISTINSTANCESERROR = "InternalError.ListInstancesError"
@@ -3593,7 +3645,7 @@ func (c *Client) DescribeAuditRuleWithInstanceIds(request *DescribeAuditRuleWith
 }
 
 // DescribeAuditRuleWithInstanceIds
-// This API is used to obtain the audit rules of the instance.
+// This API is used to obtain audit rules of the instance.
 //
 // error code that may be returned:
 //  INTERNALERROR_LISTINSTANCESERROR = "InternalError.ListInstancesError"
@@ -3635,7 +3687,7 @@ func NewDescribeBackupConfigResponse() (response *DescribeBackupConfigResponse) 
 }
 
 // DescribeBackupConfig
-// This API is used to obtain the backup configuration information of a specified cluster, including the full backup time period and the backup file retention time.
+// This API is used to obtain the backup configuration information of a specified cluster, including the full backup time period and backup file retention time.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -3651,7 +3703,7 @@ func (c *Client) DescribeBackupConfig(request *DescribeBackupConfigRequest) (res
 }
 
 // DescribeBackupConfig
-// This API is used to obtain the backup configuration information of a specified cluster, including the full backup time period and the backup file retention time.
+// This API is used to obtain the backup configuration information of a specified cluster, including the full backup time period and backup file retention time.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -3699,7 +3751,7 @@ func NewDescribeBackupDownloadRestrictionResponse() (response *DescribeBackupDow
 }
 
 // DescribeBackupDownloadRestriction
-// This API is used to query the download source limit of the default backup configured by the user in the current region.
+// This API is used to query the default backup download access restrictions configured by the user in the current region.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -3720,7 +3772,7 @@ func (c *Client) DescribeBackupDownloadRestriction(request *DescribeBackupDownlo
 }
 
 // DescribeBackupDownloadRestriction
-// This API is used to query the download source limit of the default backup configured by the user in the current region.
+// This API is used to query the default backup download access restrictions configured by the user in the current region.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -3773,7 +3825,7 @@ func NewDescribeBackupDownloadUrlResponse() (response *DescribeBackupDownloadUrl
 }
 
 // DescribeBackupDownloadUrl
-// This API is used to query the download link of cluster backup files.
+// This API is used to query the download URL of cluster backup files.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -3785,7 +3837,7 @@ func (c *Client) DescribeBackupDownloadUrl(request *DescribeBackupDownloadUrlReq
 }
 
 // DescribeBackupDownloadUrl
-// This API is used to query the download link of cluster backup files.
+// This API is used to query the download URL of cluster backup files.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -3829,7 +3881,7 @@ func NewDescribeBackupDownloadUserRestrictionResponse() (response *DescribeBacku
 }
 
 // DescribeBackupDownloadUserRestriction
-// This API is used to query the default backup download access restrictions of user-level settings in the current region.
+// This API is used to query the default backup download access restrictions for user-level settings in the current region.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -3850,7 +3902,7 @@ func (c *Client) DescribeBackupDownloadUserRestriction(request *DescribeBackupDo
 }
 
 // DescribeBackupDownloadUserRestriction
-// This API is used to query the default backup download access restrictions of user-level settings in the current region.
+// This API is used to query the default backup download access restrictions for user-level settings in the current region.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -4113,7 +4165,7 @@ func NewDescribeBinlogConfigResponse() (response *DescribeBinlogConfigResponse) 
 }
 
 // DescribeBinlogConfig
-// This API is used to query binlog configurations.
+// This API is used to query the binlog configuration.
 //
 // error code that may be returned:
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
@@ -4122,7 +4174,7 @@ func (c *Client) DescribeBinlogConfig(request *DescribeBinlogConfigRequest) (res
 }
 
 // DescribeBinlogConfig
-// This API is used to query binlog configurations.
+// This API is used to query the binlog configuration.
 //
 // error code that may be returned:
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
@@ -4163,7 +4215,7 @@ func NewDescribeBinlogDownloadUrlResponse() (response *DescribeBinlogDownloadUrl
 }
 
 // DescribeBinlogDownloadUrl
-// This API is used to query the download address of Binlog.
+// This API is used to query the download URL of a Binlog.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -4176,7 +4228,7 @@ func (c *Client) DescribeBinlogDownloadUrl(request *DescribeBinlogDownloadUrlReq
 }
 
 // DescribeBinlogDownloadUrl
-// This API is used to query the download address of Binlog.
+// This API is used to query the download URL of a Binlog.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -4221,7 +4273,7 @@ func NewDescribeBinlogListByVaultResponse() (response *DescribeBinlogListByVault
 }
 
 // DescribeBinlogListByVault
-// Query binlog backups in the insurance box
+// Queries binlog backups in a vault
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -4234,7 +4286,7 @@ func (c *Client) DescribeBinlogListByVault(request *DescribeBinlogListByVaultReq
 }
 
 // DescribeBinlogListByVault
-// Query binlog backups in the insurance box
+// Queries binlog backups in a vault
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -4279,7 +4331,7 @@ func NewDescribeBinlogSaveDaysResponse() (response *DescribeBinlogSaveDaysRespon
 }
 
 // DescribeBinlogSaveDays
-// This API is used to query the binlog retention period of a cluster in days.
+// This API is used to query the Binlog retention days of a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -4294,7 +4346,7 @@ func (c *Client) DescribeBinlogSaveDays(request *DescribeBinlogSaveDaysRequest) 
 }
 
 // DescribeBinlogSaveDays
-// This API is used to query the binlog retention period of a cluster in days.
+// This API is used to query the Binlog retention days of a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -4341,7 +4393,7 @@ func NewDescribeBinlogsResponse() (response *DescribeBinlogsResponse) {
 }
 
 // DescribeBinlogs
-// This interface (DescribeBinlogs) queries the cluster binlog list.
+// This API is used to query the Binlog list of a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -4352,7 +4404,7 @@ func (c *Client) DescribeBinlogs(request *DescribeBinlogsRequest) (response *Des
 }
 
 // DescribeBinlogs
-// This interface (DescribeBinlogs) queries the cluster binlog list.
+// This API is used to query the Binlog list of a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -4395,7 +4447,7 @@ func NewDescribeChangedParamsAfterUpgradeResponse() (response *DescribeChangedPa
 }
 
 // DescribeChangedParamsAfterUpgrade
-// this interface is used for querying parameter comparison after specification adjustment.
+// This API is used to query the parameter comparison for scaling.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -4414,7 +4466,7 @@ func (c *Client) DescribeChangedParamsAfterUpgrade(request *DescribeChangedParam
 }
 
 // DescribeChangedParamsAfterUpgrade
-// this interface is used for querying parameter comparison after specification adjustment.
+// This API is used to query the parameter comparison for scaling.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -4465,7 +4517,7 @@ func NewDescribeClusterDatabaseTablesResponse() (response *DescribeClusterDataba
 }
 
 // DescribeClusterDatabaseTables
-// This API is used to access the table list.
+// Access the table list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -4507,7 +4559,7 @@ func (c *Client) DescribeClusterDatabaseTables(request *DescribeClusterDatabaseT
 }
 
 // DescribeClusterDatabaseTables
-// This API is used to access the table list.
+// Access the table list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -4581,7 +4633,7 @@ func NewDescribeClusterDatabasesResponse() (response *DescribeClusterDatabasesRe
 }
 
 // DescribeClusterDatabases
-// This API is used to obtain cluster database list.
+// This API is used to obtain the cluster database list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -4623,7 +4675,7 @@ func (c *Client) DescribeClusterDatabases(request *DescribeClusterDatabasesReque
 }
 
 // DescribeClusterDatabases
-// This API is used to obtain cluster database list.
+// This API is used to obtain the cluster database list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -4775,7 +4827,7 @@ func NewDescribeClusterDetailDatabasesResponse() (response *DescribeClusterDetai
 }
 
 // DescribeClusterDetailDatabases
-// This API is used to query database list.
+// This API is used to query the database list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -4791,7 +4843,7 @@ func (c *Client) DescribeClusterDetailDatabases(request *DescribeClusterDetailDa
 }
 
 // DescribeClusterDetailDatabases
-// This API is used to query database list.
+// This API is used to query the database list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -4839,7 +4891,7 @@ func NewDescribeClusterInstanceGroupsResponse() (response *DescribeClusterInstan
 }
 
 // DescribeClusterInstanceGroups
-// This API is used to query instance group info.
+// This API is used to query instance group information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -4854,7 +4906,7 @@ func (c *Client) DescribeClusterInstanceGroups(request *DescribeClusterInstanceG
 }
 
 // DescribeClusterInstanceGroups
-// This API is used to query instance group info.
+// This API is used to query instance group information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -4901,7 +4953,7 @@ func NewDescribeClusterInstanceGrpsResponse() (response *DescribeClusterInstance
 }
 
 // DescribeClusterInstanceGrps
-// This API is used to query instance groups.
+// This API is used to query instance group information. This API is deprecated. DescribeClusterInstanceGroups is recommended.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -4916,7 +4968,7 @@ func (c *Client) DescribeClusterInstanceGrps(request *DescribeClusterInstanceGrp
 }
 
 // DescribeClusterInstanceGrps
-// This API is used to query instance groups.
+// This API is used to query instance group information. This API is deprecated. DescribeClusterInstanceGroups is recommended.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -5033,7 +5085,7 @@ func NewDescribeClusterPasswordComplexityResponse() (response *DescribeClusterPa
 }
 
 // DescribeClusterPasswordComplexity
-// This API is used to view the cluster password complexity details.
+// This API is used to view the password complexity details of a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_GETOSSINFOERROR = "FailedOperation.GetOssInfoError"
@@ -5051,7 +5103,7 @@ func (c *Client) DescribeClusterPasswordComplexity(request *DescribeClusterPassw
 }
 
 // DescribeClusterPasswordComplexity
-// This API is used to view the cluster password complexity details.
+// This API is used to view the password complexity details of a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_GETOSSINFOERROR = "FailedOperation.GetOssInfoError"
@@ -5247,7 +5299,7 @@ func NewDescribeClusterTransparentEncryptInfoResponse() (response *DescribeClust
 }
 
 // DescribeClusterTransparentEncryptInfo
-// This API is used to query cluster transparent encryption information.
+// Queries cluster transparent encryption information
 //
 // error code that may be returned:
 //  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
@@ -5256,7 +5308,7 @@ func (c *Client) DescribeClusterTransparentEncryptInfo(request *DescribeClusterT
 }
 
 // DescribeClusterTransparentEncryptInfo
-// This API is used to query cluster transparent encryption information.
+// Queries cluster transparent encryption information
 //
 // error code that may be returned:
 //  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
@@ -5799,7 +5851,7 @@ func NewDescribeInstanceSpecsResponse() (response *DescribeInstanceSpecsResponse
 }
 
 // DescribeInstanceSpecs
-// This interface (DescribeInstanceSpecs) is used to query the instance specifications available for purchase on the query purchase page.
+// This API is used to query the instance specifications available for purchase on the purchase page.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -5813,7 +5865,7 @@ func (c *Client) DescribeInstanceSpecs(request *DescribeInstanceSpecsRequest) (r
 }
 
 // DescribeInstanceSpecs
-// This interface (DescribeInstanceSpecs) is used to query the instance specifications available for purchase on the query purchase page.
+// This API is used to query the instance specifications available for purchase on the purchase page.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -5859,7 +5911,7 @@ func NewDescribeInstanceSpecsByOperationTypeResponse() (response *DescribeInstan
 }
 
 // DescribeInstanceSpecsByOperationType
-// Query instance specifications based on operation type
+// Query instance specifications according to the operation type.
 //
 // error code that may be returned:
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
@@ -5872,7 +5924,7 @@ func (c *Client) DescribeInstanceSpecsByOperationType(request *DescribeInstanceS
 }
 
 // DescribeInstanceSpecsByOperationType
-// Query instance specifications based on operation type
+// Query instance specifications according to the operation type.
 //
 // error code that may be returned:
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
@@ -5917,7 +5969,7 @@ func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
 }
 
 // DescribeInstances
-// This API is used to query the list of instances.
+// This API is used to query the instance list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
@@ -5938,7 +5990,7 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response 
 }
 
 // DescribeInstances
-// This API is used to query the list of instances.
+// This API is used to query the instance list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
@@ -6123,7 +6175,7 @@ func NewDescribeIsolatedInstancesResponse() (response *DescribeIsolatedInstances
 }
 
 // DescribeIsolatedInstances
-// This interface is used for querying the recycle bin instance list.
+// This API is used to query the recycle bin instance list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
@@ -6140,7 +6192,7 @@ func (c *Client) DescribeIsolatedInstances(request *DescribeIsolatedInstancesReq
 }
 
 // DescribeIsolatedInstances
-// This interface is used for querying the recycle bin instance list.
+// This API is used to query the recycle bin instance list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
@@ -6491,7 +6543,7 @@ func NewDescribeLibraDBClusterAutoMapRuleResponse() (response *DescribeLibraDBCl
 }
 
 // DescribeLibraDBClusterAutoMapRule
-// This API is used to view the advanced mapping rule of the analysis cluster.
+// This API is used to view advanced mapping rules for an analysis cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -6508,7 +6560,7 @@ func (c *Client) DescribeLibraDBClusterAutoMapRule(request *DescribeLibraDBClust
 }
 
 // DescribeLibraDBClusterAutoMapRule
-// This API is used to view the advanced mapping rule of the analysis cluster.
+// This API is used to view advanced mapping rules for an analysis cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -6557,7 +6609,7 @@ func NewDescribeLibraDBClusterDetailResponse() (response *DescribeLibraDBCluster
 }
 
 // DescribeLibraDBClusterDetail
-// Query TDSQL-C analysis cluster information
+// Queries TDSQL-C analysis cluster information
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
@@ -6580,7 +6632,7 @@ func (c *Client) DescribeLibraDBClusterDetail(request *DescribeLibraDBClusterDet
 }
 
 // DescribeLibraDBClusterDetail
-// Query TDSQL-C analysis cluster information
+// Queries TDSQL-C analysis cluster information
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
@@ -6635,7 +6687,7 @@ func NewDescribeLibraDBClusterTableMappingResponse() (response *DescribeLibraDBC
 }
 
 // DescribeLibraDBClusterTableMapping
-// This API is used to view the database/table mapping relationship of an analysis cluster.
+// This API is used to view the mapping relationship between databases and tables in an analysis cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
@@ -6658,7 +6710,7 @@ func (c *Client) DescribeLibraDBClusterTableMapping(request *DescribeLibraDBClus
 }
 
 // DescribeLibraDBClusterTableMapping
-// This API is used to view the database/table mapping relationship of an analysis cluster.
+// This API is used to view the mapping relationship between databases and tables in an analysis cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
@@ -6713,7 +6765,7 @@ func NewDescribeLibraDBClustersResponse() (response *DescribeLibraDBClustersResp
 }
 
 // DescribeLibraDBClusters
-// Query the analysis cluster list
+// This API is used to query the list of analysis clusters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
@@ -6731,7 +6783,7 @@ func (c *Client) DescribeLibraDBClusters(request *DescribeLibraDBClustersRequest
 }
 
 // DescribeLibraDBClusters
-// Query the analysis cluster list
+// This API is used to query the list of analysis clusters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
@@ -6781,7 +6833,7 @@ func NewDescribeLibraDBDataSourceResponse() (response *DescribeLibraDBDataSource
 }
 
 // DescribeLibraDBDataSource
-// This API is used to query the source instance information of an analysis cluster.
+// This API is used to query source instance information of the analysis cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
@@ -6799,7 +6851,7 @@ func (c *Client) DescribeLibraDBDataSource(request *DescribeLibraDBDataSourceReq
 }
 
 // DescribeLibraDBDataSource
-// This API is used to query the source instance information of an analysis cluster.
+// This API is used to query source instance information of the analysis cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
@@ -6849,7 +6901,7 @@ func NewDescribeLibraDBForwardConfigResponse() (response *DescribeLibraDBForward
 }
 
 // DescribeLibraDBForwardConfig
-// This API is used to query the analysis engine forwarding parameters.
+// This API is used to query the forwarding parameters of the analysis engine.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
@@ -6867,7 +6919,7 @@ func (c *Client) DescribeLibraDBForwardConfig(request *DescribeLibraDBForwardCon
 }
 
 // DescribeLibraDBForwardConfig
-// This API is used to query the analysis engine forwarding parameters.
+// This API is used to query the forwarding parameters of the analysis engine.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
@@ -6989,7 +7041,7 @@ func NewDescribeLibraDBInstanceSpecsResponse() (response *DescribeLibraDBInstanc
 }
 
 // DescribeLibraDBInstanceSpecs
-// This API is used to query the specification list of the read-only analysis engine supported in the region.
+// This API is used to query the specification information list supported for read-only analysis engines in the region.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -7009,7 +7061,7 @@ func (c *Client) DescribeLibraDBInstanceSpecs(request *DescribeLibraDBInstanceSp
 }
 
 // DescribeLibraDBInstanceSpecs
-// This API is used to query the specification list of the read-only analysis engine supported in the region.
+// This API is used to query the specification information list supported for read-only analysis engines in the region.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -7061,7 +7113,7 @@ func NewDescribeLibraDBSlowLogsResponse() (response *DescribeLibraDBSlowLogsResp
 }
 
 // DescribeLibraDBSlowLogs
-// This API is used to query slow SQL details in the read-only analysis engine.
+// This API is used to query slow SQL details of the read-only analysis engine.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -7074,7 +7126,7 @@ func (c *Client) DescribeLibraDBSlowLogs(request *DescribeLibraDBSlowLogsRequest
 }
 
 // DescribeLibraDBSlowLogs
-// This API is used to query slow SQL details in the read-only analysis engine.
+// This API is used to query slow SQL details of the read-only analysis engine.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -7119,7 +7171,7 @@ func NewDescribeLibraDBVersionResponse() (response *DescribeLibraDBVersionRespon
 }
 
 // DescribeLibraDBVersion
-// Query the list of supported versions for the read-only analysis engine
+// This API is used to query the list of supported versions for the read-only analysis engine.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -7132,7 +7184,7 @@ func (c *Client) DescribeLibraDBVersion(request *DescribeLibraDBVersionRequest) 
 }
 
 // DescribeLibraDBVersion
-// Query the list of supported versions for the read-only analysis engine
+// This API is used to query the list of supported versions for the read-only analysis engine.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -7177,7 +7229,7 @@ func NewDescribeMaintainPeriodResponse() (response *DescribeMaintainPeriodRespon
 }
 
 // DescribeMaintainPeriod
-// This interface (DescribeMaintainPeriod) is used to query the instance maintenance window.
+// This API is used to query instance maintenance window.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -7192,7 +7244,7 @@ func (c *Client) DescribeMaintainPeriod(request *DescribeMaintainPeriodRequest) 
 }
 
 // DescribeMaintainPeriod
-// This interface (DescribeMaintainPeriod) is used to query the instance maintenance window.
+// This API is used to query instance maintenance window.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -7293,7 +7345,7 @@ func NewDescribeParamTemplatesResponse() (response *DescribeParamTemplatesRespon
 }
 
 // DescribeParamTemplates
-// This API is used to query all parameter template information under the user-specified product.
+// This API is used to query all parameter template information under a user-specified product.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -7303,7 +7355,7 @@ func (c *Client) DescribeParamTemplates(request *DescribeParamTemplatesRequest) 
 }
 
 // DescribeParamTemplates
-// This API is used to query all parameter template information under the user-specified product.
+// This API is used to query all parameter template information under a user-specified product.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -7401,7 +7453,7 @@ func NewDescribeProxiesResponse() (response *DescribeProxiesResponse) {
 }
 
 // DescribeProxies
-// This API is used to query agent list.
+// This API is used to query the database proxy list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
@@ -7418,7 +7470,7 @@ func (c *Client) DescribeProxies(request *DescribeProxiesRequest) (response *Des
 }
 
 // DescribeProxies
-// This API is used to query agent list.
+// This API is used to query the database proxy list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMCHECKRESOURCEERROR = "FailedOperation.CamCheckResourceError"
@@ -7467,7 +7519,7 @@ func NewDescribeProxyNodesResponse() (response *DescribeProxyNodesResponse) {
 }
 
 // DescribeProxyNodes
-// This API is used to query the list of proxy nodes.
+// This API is used to query the proxy node list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -7478,7 +7530,7 @@ func (c *Client) DescribeProxyNodes(request *DescribeProxyNodesRequest) (respons
 }
 
 // DescribeProxyNodes
-// This API is used to query the list of proxy nodes.
+// This API is used to query the proxy node list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -7553,6 +7605,58 @@ func (c *Client) DescribeProxySpecsWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeProxyZoneStocksRequest() (request *DescribeProxyZoneStocksRequest) {
+    request = &DescribeProxyZoneStocksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cynosdb", APIVersion, "DescribeProxyZoneStocks")
+    
+    
+    return
+}
+
+func NewDescribeProxyZoneStocksResponse() (response *DescribeProxyZoneStocksResponse) {
+    response = &DescribeProxyZoneStocksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeProxyZoneStocks
+// This API is used to query regional inventory for database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+func (c *Client) DescribeProxyZoneStocks(request *DescribeProxyZoneStocksRequest) (response *DescribeProxyZoneStocksResponse, err error) {
+    return c.DescribeProxyZoneStocksWithContext(context.Background(), request)
+}
+
+// DescribeProxyZoneStocks
+// This API is used to query regional inventory for database proxy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+func (c *Client) DescribeProxyZoneStocksWithContext(ctx context.Context, request *DescribeProxyZoneStocksRequest) (response *DescribeProxyZoneStocksResponse, err error) {
+    if request == nil {
+        request = NewDescribeProxyZoneStocksRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cynosdb", APIVersion, "DescribeProxyZoneStocks")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeProxyZoneStocks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeProxyZoneStocksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRedoLogListByVaultRequest() (request *DescribeRedoLogListByVaultRequest) {
     request = &DescribeRedoLogListByVaultRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7576,8 +7680,8 @@ func NewDescribeRedoLogListByVaultResponse() (response *DescribeRedoLogListByVau
 // Query RedoLog backups
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
 func (c *Client) DescribeRedoLogListByVault(request *DescribeRedoLogListByVaultRequest) (response *DescribeRedoLogListByVaultResponse, err error) {
     return c.DescribeRedoLogListByVaultWithContext(context.Background(), request)
 }
@@ -7586,8 +7690,8 @@ func (c *Client) DescribeRedoLogListByVault(request *DescribeRedoLogListByVaultR
 // Query RedoLog backups
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
 func (c *Client) DescribeRedoLogListByVaultWithContext(ctx context.Context, request *DescribeRedoLogListByVaultRequest) (response *DescribeRedoLogListByVaultResponse, err error) {
     if request == nil {
         request = NewDescribeRedoLogListByVaultRequest()
@@ -7755,7 +7859,7 @@ func NewDescribeResourcePackageListResponse() (response *DescribeResourcePackage
 }
 
 // DescribeResourcePackageList
-// This API is used to query resource package list.
+// This API is used to query the resource package list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -7769,7 +7873,7 @@ func (c *Client) DescribeResourcePackageList(request *DescribeResourcePackageLis
 }
 
 // DescribeResourcePackageList
-// This API is used to query resource package list.
+// This API is used to query the resource package list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -7871,7 +7975,7 @@ func NewDescribeResourcesByDealNameResponse() (response *DescribeResourcesByDeal
 }
 
 // DescribeResourcesByDealName
-// This interface (DescribeResourcesByDealName) is used to query order-associated instances.
+// This API is used to query order associated instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -7887,7 +7991,7 @@ func (c *Client) DescribeResourcesByDealName(request *DescribeResourcesByDealNam
 }
 
 // DescribeResourcesByDealName
-// This interface (DescribeResourcesByDealName) is used to query order-associated instances.
+// This API is used to query order associated instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8001,7 +8105,7 @@ func NewDescribeSQLExecutionPlanResponse() (response *DescribeSQLExecutionPlanRe
 }
 
 // DescribeSQLExecutionPlan
-// This API is used to query the execution plan details.
+// This API is used to query the details of a query execution plan.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -8017,7 +8121,7 @@ func (c *Client) DescribeSQLExecutionPlan(request *DescribeSQLExecutionPlanReque
 }
 
 // DescribeSQLExecutionPlan
-// This API is used to query the execution plan details.
+// This API is used to query the details of a query execution plan.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -8139,7 +8243,7 @@ func NewDescribeServerlessInstanceSpecsResponse() (response *DescribeServerlessI
 }
 
 // DescribeServerlessInstanceSpecs
-// This API is used to query available specifications of Serverless instances.
+// Query the available specifications of a Serverless instance
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -8153,7 +8257,7 @@ func (c *Client) DescribeServerlessInstanceSpecs(request *DescribeServerlessInst
 }
 
 // DescribeServerlessInstanceSpecs
-// This API is used to query available specifications of Serverless instances.
+// Query the available specifications of a Serverless instance
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -8199,7 +8303,7 @@ func NewDescribeServerlessStrategyResponse() (response *DescribeServerlessStrate
 }
 
 // DescribeServerlessStrategy
-// This API is used to query serverless policies.
+// Queries a serverless policy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8213,7 +8317,7 @@ func (c *Client) DescribeServerlessStrategy(request *DescribeServerlessStrategyR
 }
 
 // DescribeServerlessStrategy
-// This API is used to query serverless policies.
+// Queries a serverless policy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8259,7 +8363,7 @@ func NewDescribeSlaveZonesResponse() (response *DescribeSlaveZonesResponse) {
 }
 
 // DescribeSlaveZones
-// This API is used to query from availability zones.
+// Query the secondary AZ
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8270,7 +8374,7 @@ func (c *Client) DescribeSlaveZones(request *DescribeSlaveZonesRequest) (respons
 }
 
 // DescribeSlaveZones
-// This API is used to query from availability zones.
+// Query the secondary AZ
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8377,7 +8481,7 @@ func NewDescribeTasksResponse() (response *DescribeTasksResponse) {
 }
 
 // DescribeTasks
-// This API is used to query task lists.
+// This API is used to query the task list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8390,7 +8494,7 @@ func (c *Client) DescribeTasks(request *DescribeTasksRequest) (response *Describ
 }
 
 // DescribeTasks
-// This API is used to query task lists.
+// This API is used to query the task list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8435,7 +8539,7 @@ func NewDescribeVaultBackupClusterInfoResponse() (response *DescribeVaultBackupC
 }
 
 // DescribeVaultBackupClusterInfo
-// Query the cluster information list associated with the backup safe
+// This API is used to query the cluster information list associated with a backup safe.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8448,7 +8552,7 @@ func (c *Client) DescribeVaultBackupClusterInfo(request *DescribeVaultBackupClus
 }
 
 // DescribeVaultBackupClusterInfo
-// Query the cluster information list associated with the backup safe
+// This API is used to query the cluster information list associated with a backup safe.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8493,7 +8597,7 @@ func NewDescribeVaultsResponse() (response *DescribeVaultsResponse) {
 }
 
 // DescribeVaults
-// Query backup safe list, support page, filter and sort.
+// Queries the backup vault list, supporting pagination, filtering, and sorting.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8506,7 +8610,7 @@ func (c *Client) DescribeVaults(request *DescribeVaultsRequest) (response *Descr
 }
 
 // DescribeVaults
-// Query backup safe list, support page, filter and sort.
+// Queries the backup vault list, supporting pagination, filtering, and sorting.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8551,7 +8655,7 @@ func NewDescribeZonesResponse() (response *DescribeZonesResponse) {
 }
 
 // DescribeZones
-// This API is used to query marketable regional availability zone information.
+// This API is used to query the information of marketable regional availability zones.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8563,7 +8667,7 @@ func (c *Client) DescribeZones(request *DescribeZonesRequest) (response *Describ
 }
 
 // DescribeZones
-// This API is used to query marketable regional availability zone information.
+// This API is used to query the information of marketable regional availability zones.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8735,7 +8839,7 @@ func NewExportInstanceErrorLogsResponse() (response *ExportInstanceErrorLogsResp
 }
 
 // ExportInstanceErrorLogs
-// This API is used to export the error logs of an instance.
+// This API is used to export instance error logs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -8746,7 +8850,7 @@ func (c *Client) ExportInstanceErrorLogs(request *ExportInstanceErrorLogsRequest
 }
 
 // ExportInstanceErrorLogs
-// This API is used to export the error logs of an instance.
+// This API is used to export instance error logs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -8789,7 +8893,7 @@ func NewExportInstanceSlowQueriesResponse() (response *ExportInstanceSlowQueries
 }
 
 // ExportInstanceSlowQueries
-// This API is used to export instance slow logs.
+// This API is used to export slow logs of an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -8800,7 +8904,7 @@ func (c *Client) ExportInstanceSlowQueries(request *ExportInstanceSlowQueriesReq
 }
 
 // ExportInstanceSlowQueries
-// This API is used to export instance slow logs.
+// This API is used to export slow logs of an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -8843,7 +8947,7 @@ func NewExportResourcePackageDeductDetailsResponse() (response *ExportResourcePa
 }
 
 // ExportResourcePackageDeductDetails
-// This API is used to export the usage details of a resource package.
+// Export resource package usage details
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8859,7 +8963,7 @@ func (c *Client) ExportResourcePackageDeductDetails(request *ExportResourcePacka
 }
 
 // ExportResourcePackageDeductDetails
-// This API is used to export the usage details of a resource package.
+// Export resource package usage details
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8907,7 +9011,7 @@ func NewGrantAccountPrivilegesResponse() (response *GrantAccountPrivilegesRespon
 }
 
 // GrantAccountPrivileges
-// This API is used to grant permissions to authorized accounts in batch.
+// This API is used to grant account permissions in batches.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -8952,7 +9056,7 @@ func (c *Client) GrantAccountPrivileges(request *GrantAccountPrivilegesRequest) 
 }
 
 // GrantAccountPrivileges
-// This API is used to grant permissions to authorized accounts in batch.
+// This API is used to grant account permissions in batches.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -9029,7 +9133,7 @@ func NewInquirePriceCreateResponse() (response *InquirePriceCreateResponse) {
 }
 
 // InquirePriceCreate
-// This interface (InquirePriceCreate) is used for price inquiry of newly purchased clusters.
+// This API is used to query the price of a newly purchased cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -9042,7 +9146,7 @@ func (c *Client) InquirePriceCreate(request *InquirePriceCreateRequest) (respons
 }
 
 // InquirePriceCreate
-// This interface (InquirePriceCreate) is used for price inquiry of newly purchased clusters.
+// This API is used to query the price of a newly purchased cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -9087,7 +9191,7 @@ func NewInquirePriceModifyResponse() (response *InquirePriceModifyResponse) {
 }
 
 // InquirePriceModify
-// This API is used to query the price for modifying the specifications of a prepaid cluster.
+// Inquires about the price of changing the configuration of a prepaid cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -9100,7 +9204,7 @@ func (c *Client) InquirePriceModify(request *InquirePriceModifyRequest) (respons
 }
 
 // InquirePriceModify
-// This API is used to query the price for modifying the specifications of a prepaid cluster.
+// Inquires about the price of changing the configuration of a prepaid cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -9145,7 +9249,7 @@ func NewInquirePriceMultiSpecResponse() (response *InquirePriceMultiSpecResponse
 }
 
 // InquirePriceMultiSpec
-// This API is used to inquire prices in batch.
+// This API is used to batch inquire prices.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -9159,7 +9263,7 @@ func (c *Client) InquirePriceMultiSpec(request *InquirePriceMultiSpecRequest) (r
 }
 
 // InquirePriceMultiSpec
-// This API is used to inquire prices in batch.
+// This API is used to batch inquire prices.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -9271,7 +9375,7 @@ func NewIsolateClusterResponse() (response *IsolateClusterResponse) {
 }
 
 // IsolateCluster
-// This interface (IsolateCluster) is used to isolate a cluster.
+// This API is used to isolate a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -9292,7 +9396,7 @@ func (c *Client) IsolateCluster(request *IsolateClusterRequest) (response *Isola
 }
 
 // IsolateCluster
-// This interface (IsolateCluster) is used to isolate a cluster.
+// This API is used to isolate a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -9419,7 +9523,7 @@ func NewIsolateLibraDBClusterResponse() (response *IsolateLibraDBClusterResponse
 }
 
 // IsolateLibraDBCluster
-// Isolating a TDSQL-C Analysis Cluster
+// Isolate a TDSQL-C analysis cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -9440,7 +9544,7 @@ func (c *Client) IsolateLibraDBCluster(request *IsolateLibraDBClusterRequest) (r
 }
 
 // IsolateLibraDBCluster
-// Isolating a TDSQL-C Analysis Cluster
+// Isolate a TDSQL-C analysis cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -9493,7 +9597,7 @@ func NewIsolateLibraDBInstanceResponse() (response *IsolateLibraDBInstanceRespon
 }
 
 // IsolateLibraDBInstance
-// This API is used to isolate read-only analysis engine instances.
+// This API is used to isolate a read-only analysis engine instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -9513,7 +9617,7 @@ func (c *Client) IsolateLibraDBInstance(request *IsolateLibraDBInstanceRequest) 
 }
 
 // IsolateLibraDBInstance
-// This API is used to isolate read-only analysis engine instances.
+// This API is used to isolate a read-only analysis engine instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -9565,7 +9669,7 @@ func NewModifyAccountDescriptionResponse() (response *ModifyAccountDescriptionRe
 }
 
 // ModifyAccountDescription
-// This API is used to modify the descriptions of a database account.
+// This API is used to modify database account description information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -9582,7 +9686,7 @@ func (c *Client) ModifyAccountDescription(request *ModifyAccountDescriptionReque
 }
 
 // ModifyAccountDescription
-// This API is used to modify the descriptions of a database account.
+// This API is used to modify database account description information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -9631,7 +9735,7 @@ func NewModifyAccountHostResponse() (response *ModifyAccountHostResponse) {
 }
 
 // ModifyAccountHost
-// This API is used to modify account hosts.
+// This API is used to modify the account host.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -9674,7 +9778,7 @@ func (c *Client) ModifyAccountHost(request *ModifyAccountHostRequest) (response 
 }
 
 // ModifyAccountHost
-// This API is used to modify account hosts.
+// This API is used to modify the account host.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -9749,7 +9853,7 @@ func NewModifyAccountPrivilegesResponse() (response *ModifyAccountPrivilegesResp
 }
 
 // ModifyAccountPrivileges
-// This API is used to modify account database and table permissions.
+// This API is used to modify account database/table permissions.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -9793,7 +9897,7 @@ func (c *Client) ModifyAccountPrivileges(request *ModifyAccountPrivilegesRequest
 }
 
 // ModifyAccountPrivileges
-// This API is used to modify account database and table permissions.
+// This API is used to modify account database/table permissions.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -9869,7 +9973,7 @@ func NewModifyAuditRuleTemplatesResponse() (response *ModifyAuditRuleTemplatesRe
 }
 
 // ModifyAuditRuleTemplates
-// This API is used to modify audit rule templates.
+// This API is used to modify an audit rule template.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -9880,7 +9984,7 @@ func (c *Client) ModifyAuditRuleTemplates(request *ModifyAuditRuleTemplatesReque
 }
 
 // ModifyAuditRuleTemplates
-// This API is used to modify audit rule templates.
+// This API is used to modify an audit rule template.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
@@ -9923,7 +10027,7 @@ func NewModifyAuditServiceResponse() (response *ModifyAuditServiceResponse) {
 }
 
 // ModifyAuditService
-// This API is used to modify the audit configurations of an instance, such as audit log retention period and audit rule.
+// This API is used to modify the audit log retention period, audit rules, and other service settings of CDB.
 //
 // error code that may be returned:
 //  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
@@ -9936,7 +10040,7 @@ func (c *Client) ModifyAuditService(request *ModifyAuditServiceRequest) (respons
 }
 
 // ModifyAuditService
-// This API is used to modify the audit configurations of an instance, such as audit log retention period and audit rule.
+// This API is used to modify the audit log retention period, audit rules, and other service settings of CDB.
 //
 // error code that may be returned:
 //  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
@@ -10045,7 +10149,7 @@ func NewModifyBackupDownloadRestrictionResponse() (response *ModifyBackupDownloa
 }
 
 // ModifyBackupDownloadRestriction
-// This API is used to modify the download source limit of the backup file for the user in the current region. It can be configured to allow downloads from both private and public networks, only the private network, or a designated vpc or ip within the private network.
+// This API is used to modify the backup file download access restrictions for users in the current region. It can be set to allow downloads from both private and public networks, only private networks, or designated VPCs and IPs within the private network.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -10066,7 +10170,7 @@ func (c *Client) ModifyBackupDownloadRestriction(request *ModifyBackupDownloadRe
 }
 
 // ModifyBackupDownloadRestriction
-// This API is used to modify the download source limit of the backup file for the user in the current region. It can be configured to allow downloads from both private and public networks, only the private network, or a designated vpc or ip within the private network.
+// This API is used to modify the backup file download access restrictions for users in the current region. It can be set to allow downloads from both private and public networks, only private networks, or designated VPCs and IPs within the private network.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -10119,7 +10223,7 @@ func NewModifyBackupDownloadUserRestrictionResponse() (response *ModifyBackupDow
 }
 
 // ModifyBackupDownloadUserRestriction
-// This API is used to modify the download source restrictions for backup files in the user's current region. It can be configured to allow downloads from both private and public networks, only from a private network, or from a designated vpc or ip within the private network.
+// This API is used to modify the download source limits for backup files of a user in the current region. It can be set to allow downloads from both private and public networks, only from a private network, or from designated VPCs and IPs within a private network.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -10140,7 +10244,7 @@ func (c *Client) ModifyBackupDownloadUserRestriction(request *ModifyBackupDownlo
 }
 
 // ModifyBackupDownloadUserRestriction
-// This API is used to modify the download source restrictions for backup files in the user's current region. It can be configured to allow downloads from both private and public networks, only from a private network, or from a designated vpc or ip within the private network.
+// This API is used to modify the download source limits for backup files of a user in the current region. It can be set to allow downloads from both private and public networks, only from a private network, or from designated VPCs and IPs within a private network.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -10193,7 +10297,7 @@ func NewModifyBackupNameResponse() (response *ModifyBackupNameResponse) {
 }
 
 // ModifyBackupName
-// This API is used to rename a backup file.
+// This API is used to modify the backup file remark name.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -10204,7 +10308,7 @@ func (c *Client) ModifyBackupName(request *ModifyBackupNameRequest) (response *M
 }
 
 // ModifyBackupName
-// This API is used to rename a backup file.
+// This API is used to modify the backup file remark name.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -10247,7 +10351,7 @@ func NewModifyBinlogConfigResponse() (response *ModifyBinlogConfigResponse) {
 }
 
 // ModifyBinlogConfig
-// This API is used to modify Binlog configuration.
+// This API is used to modify the Binlog configuration.
 //
 // error code that may be returned:
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
@@ -10257,7 +10361,7 @@ func (c *Client) ModifyBinlogConfig(request *ModifyBinlogConfigRequest) (respons
 }
 
 // ModifyBinlogConfig
-// This API is used to modify Binlog configuration.
+// This API is used to modify the Binlog configuration.
 //
 // error code that may be returned:
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
@@ -10299,7 +10403,7 @@ func NewModifyBinlogSaveDaysResponse() (response *ModifyBinlogSaveDaysResponse) 
 }
 
 // ModifyBinlogSaveDays
-// This API is used to modify the binlog retention period in days.
+// This API is used to modify the retention days of cluster binlogs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -10311,7 +10415,7 @@ func (c *Client) ModifyBinlogSaveDays(request *ModifyBinlogSaveDaysRequest) (res
 }
 
 // ModifyBinlogSaveDays
-// This API is used to modify the binlog retention period in days.
+// This API is used to modify the retention days of cluster binlogs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -10355,7 +10459,7 @@ func NewModifyClusterBinlogRedoLogAutoCopyVaultResponse() (response *ModifyClust
 }
 
 // ModifyClusterBinlogRedoLogAutoCopyVault
-// This API is used to modify cluster configuration to automatically copy Binlog and RedoLog to safe.
+// Modify the configuration for automatically copying cluster Binlog and RedoLog to the safe.
 //
 // error code that may be returned:
 //  OPERATIONDENIED_BACKUPVAULTTASKCONFLICTERROR = "OperationDenied.BackupVaultTaskConflictError"
@@ -10364,7 +10468,7 @@ func (c *Client) ModifyClusterBinlogRedoLogAutoCopyVault(request *ModifyClusterB
 }
 
 // ModifyClusterBinlogRedoLogAutoCopyVault
-// This API is used to modify cluster configuration to automatically copy Binlog and RedoLog to safe.
+// Modify the configuration for automatically copying cluster Binlog and RedoLog to the safe.
 //
 // error code that may be returned:
 //  OPERATIONDENIED_BACKUPVAULTTASKCONFLICTERROR = "OperationDenied.BackupVaultTaskConflictError"
@@ -10405,7 +10509,7 @@ func NewModifyClusterDatabaseResponse() (response *ModifyClusterDatabaseResponse
 }
 
 // ModifyClusterDatabase
-// This API is used to modify account authorization of a database.
+// This API is used to modify account authorization for a database.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -10417,7 +10521,7 @@ func (c *Client) ModifyClusterDatabase(request *ModifyClusterDatabaseRequest) (r
 }
 
 // ModifyClusterDatabase
-// This API is used to modify account authorization of a database.
+// This API is used to modify account authorization for a database.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -10461,7 +10565,7 @@ func NewModifyClusterGlobalEncryptionResponse() (response *ModifyClusterGlobalEn
 }
 
 // ModifyClusterGlobalEncryption
-// Enable global encryption
+// Toggle global encryption
 //
 // error code that may be returned:
 //  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
@@ -10470,7 +10574,7 @@ func (c *Client) ModifyClusterGlobalEncryption(request *ModifyClusterGlobalEncry
 }
 
 // ModifyClusterGlobalEncryption
-// Enable global encryption
+// Toggle global encryption
 //
 // error code that may be returned:
 //  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnauthorized"
@@ -10833,7 +10937,7 @@ func NewModifyClusterSlaveZoneResponse() (response *ModifyClusterSlaveZoneRespon
 }
 
 // ModifyClusterSlaveZone
-// This API is used to modify the slave availability zone of a cluster.
+// This API is used to modify the replica AZ of a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -10847,7 +10951,7 @@ func (c *Client) ModifyClusterSlaveZone(request *ModifyClusterSlaveZoneRequest) 
 }
 
 // ModifyClusterSlaveZone
-// This API is used to modify the slave availability zone of a cluster.
+// This API is used to modify the replica AZ of a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -11017,7 +11121,7 @@ func NewModifyInstanceParamResponse() (response *ModifyInstanceParamResponse) {
 }
 
 // ModifyInstanceParam
-// This API is used to modify the instance parameters.
+// This API is used to modify instance parameters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
@@ -11033,7 +11137,7 @@ func (c *Client) ModifyInstanceParam(request *ModifyInstanceParamRequest) (respo
 }
 
 // ModifyInstanceParam
-// This API is used to modify the instance parameters.
+// This API is used to modify instance parameters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
@@ -11081,7 +11185,7 @@ func NewModifyInstanceUpgradeLimitDaysResponse() (response *ModifyInstanceUpgrad
 }
 
 // ModifyInstanceUpgradeLimitDays
-// This API is used to modify the time limit for upgrading the kernel minor version of an instance.
+// This API is used to modify the upgrade time limit for the kernel minor version of an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -11092,7 +11196,7 @@ func (c *Client) ModifyInstanceUpgradeLimitDays(request *ModifyInstanceUpgradeLi
 }
 
 // ModifyInstanceUpgradeLimitDays
-// This API is used to modify the time limit for upgrading the kernel minor version of an instance.
+// This API is used to modify the upgrade time limit for the kernel minor version of an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -11135,7 +11239,7 @@ func NewModifyLibraDBClusterAccountDescriptionResponse() (response *ModifyLibraD
 }
 
 // ModifyLibraDBClusterAccountDescription
-// This API is used to modify the description of a cluster account.
+// This API is used to modify the account description of an analysis cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -11146,7 +11250,7 @@ func (c *Client) ModifyLibraDBClusterAccountDescription(request *ModifyLibraDBCl
 }
 
 // ModifyLibraDBClusterAccountDescription
-// This API is used to modify the description of a cluster account.
+// This API is used to modify the account description of an analysis cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -11189,7 +11293,7 @@ func NewModifyLibraDBClusterAccountHostResponse() (response *ModifyLibraDBCluste
 }
 
 // ModifyLibraDBClusterAccountHost
-// This API is used to modify the log in to the host information of a cluster account.
+// This API is used to modify the login host info of an analysis cluster account.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -11200,7 +11304,7 @@ func (c *Client) ModifyLibraDBClusterAccountHost(request *ModifyLibraDBClusterAc
 }
 
 // ModifyLibraDBClusterAccountHost
-// This API is used to modify the log in to the host information of a cluster account.
+// This API is used to modify the login host info of an analysis cluster account.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -11243,7 +11347,7 @@ func NewModifyLibraDBClusterAccountPrivilegeResponse() (response *ModifyLibraDBC
 }
 
 // ModifyLibraDBClusterAccountPrivilege
-// This API is used to modify the permission of a cluster account for analytics.
+// This API is used to modify account permissions of an analysis cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -11287,7 +11391,7 @@ func (c *Client) ModifyLibraDBClusterAccountPrivilege(request *ModifyLibraDBClus
 }
 
 // ModifyLibraDBClusterAccountPrivilege
-// This API is used to modify the permission of a cluster account for analytics.
+// This API is used to modify account permissions of an analysis cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -11363,7 +11467,7 @@ func NewModifyLibraDBClusterDataSourceResponse() (response *ModifyLibraDBCluster
 }
 
 // ModifyLibraDBClusterDataSource
-// This API is used to modify the TDSQL-C analytical cluster data source.
+// This API is used to modify the data source of a TDSQL-C analytical cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -11407,7 +11511,7 @@ func (c *Client) ModifyLibraDBClusterDataSource(request *ModifyLibraDBClusterDat
 }
 
 // ModifyLibraDBClusterDataSource
-// This API is used to modify the TDSQL-C analytical cluster data source.
+// This API is used to modify the data source of a TDSQL-C analytical cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -11483,7 +11587,7 @@ func NewModifyLibraDBClusterNameResponse() (response *ModifyLibraDBClusterNameRe
 }
 
 // ModifyLibraDBClusterName
-// This API is used to modify the name of an analysis cluster.
+// Modify the analytical cluster name
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -11498,7 +11602,7 @@ func (c *Client) ModifyLibraDBClusterName(request *ModifyLibraDBClusterNameReque
 }
 
 // ModifyLibraDBClusterName
-// This API is used to modify the name of an analysis cluster.
+// Modify the analytical cluster name
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -11545,7 +11649,7 @@ func NewModifyLibraDBClusterProjectResponse() (response *ModifyLibraDBClusterPro
 }
 
 // ModifyLibraDBClusterProject
-// This API is used to modify the project ID of an analysis cluster.
+// Modifies the project ID of an analysis cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -11558,7 +11662,7 @@ func (c *Client) ModifyLibraDBClusterProject(request *ModifyLibraDBClusterProjec
 }
 
 // ModifyLibraDBClusterProject
-// This API is used to modify the project ID of an analysis cluster.
+// Modifies the project ID of an analysis cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -11603,7 +11707,7 @@ func NewModifyLibraDBClusterReplicationObjectResponse() (response *ModifyLibraDB
 }
 
 // ModifyLibraDBClusterReplicationObject
-// This API is used to modify the sync object of an analysis cluster.
+// This API is used to modify the sync objects of an analysis cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -11616,7 +11720,7 @@ func (c *Client) ModifyLibraDBClusterReplicationObject(request *ModifyLibraDBClu
 }
 
 // ModifyLibraDBClusterReplicationObject
-// This API is used to modify the sync object of an analysis cluster.
+// This API is used to modify the sync objects of an analysis cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -11661,7 +11765,7 @@ func NewModifyLibraDBForwardConfigResponse() (response *ModifyLibraDBForwardConf
 }
 
 // ModifyLibraDBForwardConfig
-// This API is used to modify the automatic forwarding parameter of a read-only analysis instance.
+// This API is used to modify the automatic forwarding parameters of a read-only analysis instance.
 //
 // error code that may be returned:
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
@@ -11672,7 +11776,7 @@ func (c *Client) ModifyLibraDBForwardConfig(request *ModifyLibraDBForwardConfigR
 }
 
 // ModifyLibraDBForwardConfig
-// This API is used to modify the automatic forwarding parameter of a read-only analysis instance.
+// This API is used to modify the automatic forwarding parameters of a read-only analysis instance.
 //
 // error code that may be returned:
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
@@ -11715,7 +11819,7 @@ func NewModifyMaintainPeriodConfigResponse() (response *ModifyMaintainPeriodConf
 }
 
 // ModifyMaintainPeriodConfig
-// This API is used to modify maintenance time configuration.
+// This API is used to modify the maintenance time configuration.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -11728,7 +11832,7 @@ func (c *Client) ModifyMaintainPeriodConfig(request *ModifyMaintainPeriodConfigR
 }
 
 // ModifyMaintainPeriodConfig
-// This API is used to modify maintenance time configuration.
+// This API is used to modify the maintenance time configuration.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -11773,7 +11877,7 @@ func NewModifyParamTemplateResponse() (response *ModifyParamTemplateResponse) {
 }
 
 // ModifyParamTemplate
-// This API is used to modify a parameter template.
+// This API is used to modify user parameter templates.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -11785,7 +11889,7 @@ func (c *Client) ModifyParamTemplate(request *ModifyParamTemplateRequest) (respo
 }
 
 // ModifyParamTemplate
-// This API is used to modify a parameter template.
+// This API is used to modify user parameter templates.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
@@ -11892,6 +11996,7 @@ func NewModifyProxyRwSplitResponse() (response *ModifyProxyRwSplitResponse) {
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  FAILEDOPERATION_PROXYGROUPRWSPLITNOROINSTANCEERROR = "FailedOperation.ProxyGroupRwSplitNoRoInstanceError"
 //  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
@@ -11910,6 +12015,7 @@ func (c *Client) ModifyProxyRwSplit(request *ModifyProxyRwSplitRequest) (respons
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
 //  FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
+//  FAILEDOPERATION_PROXYGROUPRWSPLITNOROINSTANCEERROR = "FailedOperation.ProxyGroupRwSplitNoRoInstanceError"
 //  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
@@ -11953,7 +12059,7 @@ func NewModifyResourcePackageClustersResponse() (response *ModifyResourcePackage
 }
 
 // ModifyResourcePackageClusters
-// This API is used to modify the binding relationship between resource packages and clusters.
+// This API is used to modify the binding relationship between a resource package and clusters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_BINDSOURCEPACKAGEERROR = "FailedOperation.BindSourcePackageError"
@@ -11970,7 +12076,7 @@ func (c *Client) ModifyResourcePackageClusters(request *ModifyResourcePackageClu
 }
 
 // ModifyResourcePackageClusters
-// This API is used to modify the binding relationship between resource packages and clusters.
+// This API is used to modify the binding relationship between a resource package and clusters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_BINDSOURCEPACKAGEERROR = "FailedOperation.BindSourcePackageError"
@@ -12085,7 +12191,7 @@ func NewModifyResourcePackagesDeductionPriorityResponse() (response *ModifyResou
 }
 
 // ModifyResourcePackagesDeductionPriority
-// This API is used to modify the deduction priority of the bound resource package.
+// Modify the deduction priority of bound resource packages.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -12101,7 +12207,7 @@ func (c *Client) ModifyResourcePackagesDeductionPriority(request *ModifyResource
 }
 
 // ModifyResourcePackagesDeductionPriority
-// This API is used to modify the deduction priority of the bound resource package.
+// Modify the deduction priority of bound resource packages.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -12149,7 +12255,7 @@ func NewModifyServerlessStrategyResponse() (response *ModifyServerlessStrategyRe
 }
 
 // ModifyServerlessStrategy
-// This API is used to modify the serverless policy.
+// Modify a serverless policy
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -12170,7 +12276,7 @@ func (c *Client) ModifyServerlessStrategy(request *ModifyServerlessStrategyReque
 }
 
 // ModifyServerlessStrategy
-// This API is used to modify the serverless policy.
+// Modify a serverless policy
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -12223,7 +12329,7 @@ func NewModifySnapBackupCrossRegionConfigResponse() (response *ModifySnapBackupC
 }
 
 // ModifySnapBackupCrossRegionConfig
-// This API is used to modify the snapshot backup cross-region configuration of a specified cluster.
+// This API is used to modify the cross-region configuration for snapshot backup of a specified cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CYNOSDBMYSQLSETBACKUPSTRATEGY = "FailedOperation.CynosdbMysqlSetBackupStrategy"
@@ -12239,7 +12345,7 @@ func (c *Client) ModifySnapBackupCrossRegionConfig(request *ModifySnapBackupCros
 }
 
 // ModifySnapBackupCrossRegionConfig
-// This API is used to modify the snapshot backup cross-region configuration of a specified cluster.
+// This API is used to modify the cross-region configuration for snapshot backup of a specified cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CYNOSDBMYSQLSETBACKUPSTRATEGY = "FailedOperation.CynosdbMysqlSetBackupStrategy"
@@ -12287,7 +12393,7 @@ func NewModifyVaultResponse() (response *ModifyVaultResponse) {
 }
 
 // ModifyVault
-// Modify backup safe configuration, including the name, description, retention duration, encryption key, lock time.
+// Modify the configuration of a backup safe, including the name, description, retention duration, encryption key, and lock time.
 //
 // error code that may be returned:
 //  OPERATIONDENIED_BACKUPVAULTTASKCONFLICTERROR = "OperationDenied.BackupVaultTaskConflictError"
@@ -12297,7 +12403,7 @@ func (c *Client) ModifyVault(request *ModifyVaultRequest) (response *ModifyVault
 }
 
 // ModifyVault
-// Modify backup safe configuration, including the name, description, retention duration, encryption key, lock time.
+// Modify the configuration of a backup safe, including the name, description, retention duration, encryption key, and lock time.
 //
 // error code that may be returned:
 //  OPERATIONDENIED_BACKUPVAULTTASKCONFLICTERROR = "OperationDenied.BackupVaultTaskConflictError"
@@ -12403,7 +12509,7 @@ func NewOfflineClusterResponse() (response *OfflineClusterResponse) {
 }
 
 // OfflineCluster
-// This interface (OfflineCluster) is used to terminate clusters.
+// This API is used to terminate clusters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
@@ -12420,7 +12526,7 @@ func (c *Client) OfflineCluster(request *OfflineClusterRequest) (response *Offli
 }
 
 // OfflineCluster
-// This interface (OfflineCluster) is used to terminate clusters.
+// This API is used to terminate clusters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
@@ -12469,7 +12575,7 @@ func NewOfflineInstanceResponse() (response *OfflineInstanceResponse) {
 }
 
 // OfflineInstance
-// This interface (OfflineInstance) is used to terminate an instance.
+// This API is used to destroy an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -12488,7 +12594,7 @@ func (c *Client) OfflineInstance(request *OfflineInstanceRequest) (response *Off
 }
 
 // OfflineInstance
-// This interface (OfflineInstance) is used to terminate an instance.
+// This API is used to destroy an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -12539,7 +12645,7 @@ func NewOfflineLibraDBClusterResponse() (response *OfflineLibraDBClusterResponse
 }
 
 // OfflineLibraDBCluster
-// Decommission an analysis cluster
+// This API is used to decommission an analysis cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
@@ -12556,7 +12662,7 @@ func (c *Client) OfflineLibraDBCluster(request *OfflineLibraDBClusterRequest) (r
 }
 
 // OfflineLibraDBCluster
-// Decommission an analysis cluster
+// This API is used to decommission an analysis cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
@@ -12677,7 +12783,7 @@ func NewOpenAIOptimizerResponse() (response *OpenAIOptimizerResponse) {
 }
 
 // OpenAIOptimizer
-// This API is used to start the optimizer switch of an instance.
+// This API is used to enable the AI optimizer switch for an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
@@ -12694,7 +12800,7 @@ func (c *Client) OpenAIOptimizer(request *OpenAIOptimizerRequest) (response *Ope
 }
 
 // OpenAIOptimizer
-// This API is used to start the optimizer switch of an instance.
+// This API is used to enable the AI optimizer switch for an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
@@ -12743,7 +12849,7 @@ func NewOpenAuditServiceResponse() (response *OpenAuditServiceResponse) {
 }
 
 // OpenAuditService
-// This API is used to enable database audit service for an instance.
+// This API is used to enable the database audit service for an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEAUDITFAILERROR = "FailedOperation.CreateAuditFailError"
@@ -12758,7 +12864,7 @@ func (c *Client) OpenAuditService(request *OpenAuditServiceRequest) (response *O
 }
 
 // OpenAuditService
-// This API is used to enable database audit service for an instance.
+// This API is used to enable the database audit service for an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEAUDITFAILERROR = "FailedOperation.CreateAuditFailError"
@@ -12933,7 +13039,7 @@ func NewOpenClusterTransparentEncryptResponse() (response *OpenClusterTransparen
 }
 
 // OpenClusterTransparentEncrypt
-// Enable transparent data encryption for the cluster.
+// Enable transparent encryption for the cluster.
 //
 // error code that may be returned:
 //  INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
@@ -12943,7 +13049,7 @@ func (c *Client) OpenClusterTransparentEncrypt(request *OpenClusterTransparentEn
 }
 
 // OpenClusterTransparentEncrypt
-// Enable transparent data encryption for the cluster.
+// Enable transparent encryption for the cluster.
 //
 // error code that may be returned:
 //  INTERNALERROR_GETROLEERROR = "InternalError.GetRoleError"
@@ -12985,7 +13091,7 @@ func NewOpenReadOnlyInstanceExclusiveAccessResponse() (response *OpenReadOnlyIns
 }
 
 // OpenReadOnlyInstanceExclusiveAccess
-// This interface (OpenReadOnlyInstanceExclusiveAccess) is used to enable the dedicated access access group for a read-only instance.
+// This API is used to enable dedicated access groups for read-only instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -12999,7 +13105,7 @@ func (c *Client) OpenReadOnlyInstanceExclusiveAccess(request *OpenReadOnlyInstan
 }
 
 // OpenReadOnlyInstanceExclusiveAccess
-// This interface (OpenReadOnlyInstanceExclusiveAccess) is used to enable the dedicated access access group for a read-only instance.
+// This API is used to enable dedicated access groups for read-only instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -13045,7 +13151,7 @@ func NewOpenWanResponse() (response *OpenWanResponse) {
 }
 
 // OpenWan
-// This interface (OpenWan) is used to enable external network.
+// This API is used to enable public network access.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -13064,7 +13170,7 @@ func (c *Client) OpenWan(request *OpenWanRequest) (response *OpenWanResponse, er
 }
 
 // OpenWan
-// This interface (OpenWan) is used to enable external network.
+// This API is used to enable public network access.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -13235,7 +13341,7 @@ func NewReloadBalanceProxyNodeResponse() (response *ReloadBalanceProxyNodeRespon
 }
 
 // ReloadBalanceProxyNode
-// This API is used to reload the database proxy of Cloud Load Balancer.
+// This API is used to load balance database proxy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -13247,7 +13353,7 @@ func (c *Client) ReloadBalanceProxyNode(request *ReloadBalanceProxyNodeRequest) 
 }
 
 // ReloadBalanceProxyNode
-// This API is used to reload the database proxy of Cloud Load Balancer.
+// This API is used to load balance database proxy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -13351,7 +13457,7 @@ func NewRenewClustersResponse() (response *RenewClustersResponse) {
 }
 
 // RenewClusters
-// This API is used to renew the cluster.
+// Renew a cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -13372,7 +13478,7 @@ func (c *Client) RenewClusters(request *RenewClustersRequest) (response *RenewCl
 }
 
 // RenewClusters
-// This API is used to renew the cluster.
+// Renew a cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -13425,7 +13531,7 @@ func NewRenewLibraDBClustersResponse() (response *RenewLibraDBClustersResponse) 
 }
 
 // RenewLibraDBClusters
-// Renew an analysis cluster
+// Renews an analysis cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -13446,7 +13552,7 @@ func (c *Client) RenewLibraDBClusters(request *RenewLibraDBClustersRequest) (res
 }
 
 // RenewLibraDBClusters
-// Renew an analysis cluster
+// Renews an analysis cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -13499,7 +13605,7 @@ func NewReplayInstanceAuditLogResponse() (response *ReplayInstanceAuditLogRespon
 }
 
 // ReplayInstanceAuditLog
-// This API is used to replay instance audit logs.
+// Replay instance audit logs
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -13515,7 +13621,7 @@ func (c *Client) ReplayInstanceAuditLog(request *ReplayInstanceAuditLogRequest) 
 }
 
 // ReplayInstanceAuditLog
-// This API is used to replay instance audit logs.
+// Replay instance audit logs
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -13563,7 +13669,7 @@ func NewResetAccountPasswordResponse() (response *ResetAccountPasswordResponse) 
 }
 
 // ResetAccountPassword
-// This API is used to modify the database account password.
+// This API is used to modify database account passwords.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -13587,7 +13693,7 @@ func (c *Client) ResetAccountPassword(request *ResetAccountPasswordRequest) (res
 }
 
 // ResetAccountPassword
-// This API is used to modify the database account password.
+// This API is used to modify database account passwords.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -13643,7 +13749,7 @@ func NewResetLibraDBClusterAccountPasswordResponse() (response *ResetLibraDBClus
 }
 
 // ResetLibraDBClusterAccountPassword
-// Modify the cluster account password for analytics
+// Modifies the account password of an analysis cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -13667,7 +13773,7 @@ func (c *Client) ResetLibraDBClusterAccountPassword(request *ResetLibraDBCluster
 }
 
 // ResetLibraDBClusterAccountPassword
-// Modify the cluster account password for analytics
+// Modifies the account password of an analysis cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -13963,7 +14069,7 @@ func NewResumeServerlessResponse() (response *ResumeServerlessResponse) {
 }
 
 // ResumeServerless
-// This API is used to restore a serverless cluster.
+// This API is used to resume a serverless cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -13982,7 +14088,7 @@ func (c *Client) ResumeServerless(request *ResumeServerlessRequest) (response *R
 }
 
 // ResumeServerless
-// This API is used to restore a serverless cluster.
+// This API is used to resume a serverless cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -14033,7 +14139,7 @@ func NewRollBackClusterResponse() (response *RollBackClusterResponse) {
 }
 
 // RollBackCluster
-// This API is used to perform cluster rollback.
+// This API is used to roll back a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
@@ -14050,7 +14156,7 @@ func (c *Client) RollBackCluster(request *RollBackClusterRequest) (response *Rol
 }
 
 // RollBackCluster
-// This API is used to perform cluster rollback.
+// This API is used to roll back a cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
@@ -14197,7 +14303,7 @@ func NewSearchClusterDatabasesResponse() (response *SearchClusterDatabasesRespon
 }
 
 // SearchClusterDatabases
-// This API is used to search cluster database lists.
+// This API is used to search the cluster database list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -14209,7 +14315,7 @@ func (c *Client) SearchClusterDatabases(request *SearchClusterDatabasesRequest) 
 }
 
 // SearchClusterDatabases
-// This API is used to search cluster database lists.
+// This API is used to search the cluster database list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -14253,7 +14359,7 @@ func NewSearchClusterTablesResponse() (response *SearchClusterTablesResponse) {
 }
 
 // SearchClusterTables
-// This API is used to search cluster data table lists.
+// This API is used to search the cluster data table list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -14265,7 +14371,7 @@ func (c *Client) SearchClusterTables(request *SearchClusterTablesRequest) (respo
 }
 
 // SearchClusterTables
-// This API is used to search cluster data table lists.
+// This API is used to search the cluster data table list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -14309,7 +14415,7 @@ func NewSetLibraDBClusterRenewFlagResponse() (response *SetLibraDBClusterRenewFl
 }
 
 // SetLibraDBClusterRenewFlag
-// Set whether to renew the TDSQL-C analysis cluster
+// Set whether to renew a TDSQL-C analysis cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -14333,7 +14439,7 @@ func (c *Client) SetLibraDBClusterRenewFlag(request *SetLibraDBClusterRenewFlagR
 }
 
 // SetLibraDBClusterRenewFlag
-// Set whether to renew the TDSQL-C analysis cluster
+// Set whether to renew a TDSQL-C analysis cluster
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -14469,7 +14575,7 @@ func NewStartCLSDeliveryResponse() (response *StartCLSDeliveryResponse) {
 }
 
 // StartCLSDelivery
-// This interface (StartCLSDelivery) is used to enable log delivery functionality.
+// This API is used to enable log delivery.
 //
 // error code that may be returned:
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
@@ -14479,7 +14585,7 @@ func (c *Client) StartCLSDelivery(request *StartCLSDeliveryRequest) (response *S
 }
 
 // StartCLSDelivery
-// This interface (StartCLSDelivery) is used to enable log delivery functionality.
+// This API is used to enable log delivery.
 //
 // error code that may be returned:
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
@@ -14521,7 +14627,7 @@ func NewStopCLSDeliveryResponse() (response *StopCLSDeliveryResponse) {
 }
 
 // StopCLSDelivery
-// This API is used to stop the log delivery feature.
+// This API is used to disable the log delivery feature.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -14531,7 +14637,7 @@ func (c *Client) StopCLSDelivery(request *StopCLSDeliveryRequest) (response *Sto
 }
 
 // StopCLSDelivery
-// This API is used to stop the log delivery feature.
+// This API is used to disable the log delivery feature.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -14703,7 +14809,7 @@ func NewSwitchProxyVpcResponse() (response *SwitchProxyVpcResponse) {
 }
 
 // SwitchProxyVpc
-// This API is used to replace the vpc of the database proxy.
+// This API is used to replace the vpc of a database proxy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CHECKVPCANDSUBNETERROR = "FailedOperation.CheckVpcAndSubnetError"
@@ -14722,7 +14828,7 @@ func (c *Client) SwitchProxyVpc(request *SwitchProxyVpcRequest) (response *Switc
 }
 
 // SwitchProxyVpc
-// This API is used to replace the vpc of the database proxy.
+// This API is used to replace the vpc of a database proxy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CHECKVPCANDSUBNETERROR = "FailedOperation.CheckVpcAndSubnetError"
@@ -14773,7 +14879,7 @@ func NewTransferClusterPrepayToPostpayResponse() (response *TransferClusterPrepa
 }
 
 // TransferClusterPrepayToPostpay
-// This API is used to convert a Prepaid Cluster to a postpaid cluster.
+// This API is used to convert a prepaid cluster to a postpaid cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_BATCHGETINSTANCEERROR = "FailedOperation.BatchGetInstanceError"
@@ -14785,7 +14891,7 @@ func (c *Client) TransferClusterPrepayToPostpay(request *TransferClusterPrepayTo
 }
 
 // TransferClusterPrepayToPostpay
-// This API is used to convert a Prepaid Cluster to a postpaid cluster.
+// This API is used to convert a prepaid cluster to a postpaid cluster.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_BATCHGETINSTANCEERROR = "FailedOperation.BatchGetInstanceError"
@@ -14829,7 +14935,7 @@ func NewTransferClusterZoneResponse() (response *TransferClusterZoneResponse) {
 }
 
 // TransferClusterZone
-// This API is used to trigger cross-AZ migration.
+// This API is used to initiate cross-AZ migration.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_BATCHGETINSTANCEERROR = "FailedOperation.BatchGetInstanceError"
@@ -14841,7 +14947,7 @@ func (c *Client) TransferClusterZone(request *TransferClusterZoneRequest) (respo
 }
 
 // TransferClusterZone
-// This API is used to trigger cross-AZ migration.
+// This API is used to initiate cross-AZ migration.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_BATCHGETINSTANCEERROR = "FailedOperation.BatchGetInstanceError"
@@ -15003,7 +15109,7 @@ func NewUpgradeClusterVersionResponse() (response *UpgradeClusterVersionResponse
 }
 
 // UpgradeClusterVersion
-// This interface (UpgradeClusterVersion) is used to update the kernel minor version.
+// This API is used to update the kernel minor version.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
@@ -15047,7 +15153,7 @@ func (c *Client) UpgradeClusterVersion(request *UpgradeClusterVersionRequest) (r
 }
 
 // UpgradeClusterVersion
-// This interface (UpgradeClusterVersion) is used to update the kernel minor version.
+// This API is used to update the kernel minor version.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
@@ -15123,7 +15229,7 @@ func NewUpgradeInstanceResponse() (response *UpgradeInstanceResponse) {
 }
 
 // UpgradeInstance
-// This interface (UpgradeInstance) is used to upgrade instances.
+// This API is used to upgrade or downgrade the configuration of an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDER = "FailedOperation.CreateOrder"
@@ -15146,7 +15252,7 @@ func (c *Client) UpgradeInstance(request *UpgradeInstanceRequest) (response *Upg
 }
 
 // UpgradeInstance
-// This interface (UpgradeInstance) is used to upgrade instances.
+// This API is used to upgrade or downgrade the configuration of an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEORDER = "FailedOperation.CreateOrder"
@@ -15201,7 +15307,7 @@ func NewUpgradeProxyResponse() (response *UpgradeProxyResponse) {
 }
 
 // UpgradeProxy
-// This API is used to upgrade database proxy configuration.
+// This API is used to upgrade the database proxy configuration.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -15222,7 +15328,7 @@ func (c *Client) UpgradeProxy(request *UpgradeProxyRequest) (response *UpgradePr
 }
 
 // UpgradeProxy
-// This API is used to upgrade database proxy configuration.
+// This API is used to upgrade the database proxy configuration.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
