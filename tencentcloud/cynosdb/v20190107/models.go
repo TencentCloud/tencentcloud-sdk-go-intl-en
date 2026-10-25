@@ -518,7 +518,7 @@ type AddInstancesResponseParams struct {
 	// <p>Freeze transaction. One frozen flow is activated at a time.</p>
 	TranId *string `json:"TranId,omitnil,omitempty" name:"TranId"`
 
-	// <p>Order number of the payment. Description: We recommend you use the <a href="https://www.tencentcloud.com/document/product/1003/52131?from_cn_redirect=1">DescribeResourcesByDealName</a> API to query order associated instances.</p>
+	// <p>Order number of the payment. Description: We recommend you use the <a href="https://www.tencentcloud.com/document/product/1003/52131?from_cn_redirect=1">DescribeResourcesByDealName</a> API to query the instances associated with the order.</p>
 	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
 
 	// <p>Delivery resource id list.</p>
@@ -929,8 +929,8 @@ type Addr struct {
 
 // Predefined struct for user
 type AssociateSecurityGroupsRequestParams struct {
-	// Array of instance group IDs, starting with the cynosdbmysql-grp- prefix or the TKE cluster ID.
-	// Description: To get the instance group ID of a cluster, perform [Query cluster instance group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
+	// Array of instance group IDs, starting with the cynosdbmysql-grp- prefix or cluster ID.
+	// Description: To get the instance group ID of a cluster, call [Query cluster instance group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Security group ID list to modify, which is an array of one or more security group IDs.
@@ -945,8 +945,8 @@ type AssociateSecurityGroupsRequestParams struct {
 type AssociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Array of instance group IDs, starting with the cynosdbmysql-grp- prefix or the TKE cluster ID.
-	// Description: To get the instance group ID of a cluster, perform [Query cluster instance group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
+	// Array of instance group IDs, starting with the cynosdbmysql-grp- prefix or cluster ID.
+	// Description: To get the instance group ID of a cluster, call [Query cluster instance group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Security group ID list to modify, which is an array of one or more security group IDs.
@@ -13361,7 +13361,7 @@ func (r *DescribeZonesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DisassociateSecurityGroupsRequestParams struct {
 	// Array of instance group IDs, starting with the cynosdbmysql-grp- prefix or cluster ID.
-	// Description: To get the instance group ID of a cluster, perform [Query Cluster Instance Group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
+	// Description: To get the instance group ID of a cluster, perform [Query cluster instance group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Security group ID list to modify, which is an array of one or more security group IDs.
@@ -13378,7 +13378,7 @@ type DisassociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Array of instance group IDs, starting with the cynosdbmysql-grp- prefix or cluster ID.
-	// Description: To get the instance group ID of a cluster, perform [Query Cluster Instance Group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
+	// Description: To get the instance group ID of a cluster, perform [Query cluster instance group](https://www.tencentcloud.com/document/product/1003/103934?from_cn_redirect=1).
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Security group ID list to modify, which is an array of one or more security group IDs.
@@ -18486,7 +18486,7 @@ type ModifyProxyRwSplitRequestParams struct {
 	// <p>Consistency type; "eventual"-final consistency, "session"-session consistency, "global"-global consistency</p>
 	ConsistencyType *string `json:"ConsistencyType,omitnil,omitempty" name:"ConsistencyType"`
 
-	// <p>Consistency timeout.<br>Value range: 0–1000000 (µs). Setting it to 0 means that if a read-only instance has a delay, causing the consistency policy to fail, the request will wait indefinitely.</p>
+	// <p>Consistency timeout. Value range: 0–1000000 (ms). If set to 0, requests will wait indefinitely when a read-only instance has a delay that causes the consistency policy to fail.</p>
 	ConsistencyTimeOut *string `json:"ConsistencyTimeOut,omitnil,omitempty" name:"ConsistencyTimeOut"`
 
 	// <p>Read-write weight allocation mode; system auto-assignment: "system", custom: "custom"</p>
@@ -18547,7 +18547,7 @@ type ModifyProxyRwSplitRequest struct {
 	// <p>Consistency type; "eventual"-final consistency, "session"-session consistency, "global"-global consistency</p>
 	ConsistencyType *string `json:"ConsistencyType,omitnil,omitempty" name:"ConsistencyType"`
 
-	// <p>Consistency timeout.<br>Value range: 0–1000000 (µs). Setting it to 0 means that if a read-only instance has a delay, causing the consistency policy to fail, the request will wait indefinitely.</p>
+	// <p>Consistency timeout. Value range: 0–1000000 (ms). If set to 0, requests will wait indefinitely when a read-only instance has a delay that causes the consistency policy to fail.</p>
 	ConsistencyTimeOut *string `json:"ConsistencyTimeOut,omitnil,omitempty" name:"ConsistencyTimeOut"`
 
 	// <p>Read-write weight allocation mode; system auto-assignment: "system", custom: "custom"</p>
@@ -20070,16 +20070,16 @@ func (r *OpenClusterTransparentEncryptResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type OpenReadOnlyInstanceExclusiveAccessRequestParams struct {
-	// Please use [cluster information description](https://www.tencentcloud.com/document/api/1003/48086?from_cn_redirect=1) to get the clusterId.
+	// Please use [Cluster information description](https://www.tencentcloud.com/document/api/1003/48086?from_cn_redirect=1) to get the clusterId.
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// Please use [Cluster information description](https://www.tencentcloud.com/document/api/1003/48086?from_cn_redirect=1) to get the instanceId.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Specified vpc ID. Please use [query the vpc list](https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1) to get the vpc ID.
+	// Designated vpc ID. Please use [query the vpc list](https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1) to get the vpc ID.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Designated subnet ID. If vpc ID is set up, SubnetId is required. Please use [query subnet list](https://www.tencentcloud.com/document/api/215/15784?from_cn_redirect=1) to get SubnetId.
+	// Designated subnet ID. If vpc ID is set up, SubnetId is required. Please use query subnet list (https://www.tencentcloud.com/document/api/215/15784?from_cn_redirect=1) to get SubnetId.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// User-defined port.
@@ -20092,16 +20092,16 @@ type OpenReadOnlyInstanceExclusiveAccessRequestParams struct {
 type OpenReadOnlyInstanceExclusiveAccessRequest struct {
 	*tchttp.BaseRequest
 	
-	// Please use [cluster information description](https://www.tencentcloud.com/document/api/1003/48086?from_cn_redirect=1) to get the clusterId.
+	// Please use [Cluster information description](https://www.tencentcloud.com/document/api/1003/48086?from_cn_redirect=1) to get the clusterId.
 	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// Please use [Cluster information description](https://www.tencentcloud.com/document/api/1003/48086?from_cn_redirect=1) to get the instanceId.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Specified vpc ID. Please use [query the vpc list](https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1) to get the vpc ID.
+	// Designated vpc ID. Please use [query the vpc list](https://www.tencentcloud.com/document/api/215/15778?from_cn_redirect=1) to get the vpc ID.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Designated subnet ID. If vpc ID is set up, SubnetId is required. Please use [query subnet list](https://www.tencentcloud.com/document/api/215/15784?from_cn_redirect=1) to get SubnetId.
+	// Designated subnet ID. If vpc ID is set up, SubnetId is required. Please use query subnet list (https://www.tencentcloud.com/document/api/215/15784?from_cn_redirect=1) to get SubnetId.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// User-defined port.
