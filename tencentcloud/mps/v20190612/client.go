@@ -5965,7 +5965,7 @@ func NewDescribeWorkflowsResponse() (response *DescribeWorkflowsResponse) {
 }
 
 // DescribeWorkflows
-// This API is used to get the list of workflow details by workflow ID.
+// Based on the workflow ID, get the workflow details list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -5976,7 +5976,7 @@ func (c *Client) DescribeWorkflows(request *DescribeWorkflowsRequest) (response 
 }
 
 // DescribeWorkflows
-// This API is used to get the list of workflow details by workflow ID.
+// Based on the workflow ID, get the workflow details list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -8996,10 +8996,7 @@ func NewSubmitHunyuan3DTaskResponse() (response *SubmitHunyuan3DTaskResponse) {
 // Submit creation of a Hunyuan 3D task.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  INVALIDPARAMETER_NOINPUTSPECIFIED = "InvalidParameter.NoInputSpecified"
 func (c *Client) SubmitHunyuan3DTask(request *SubmitHunyuan3DTaskRequest) (response *SubmitHunyuan3DTaskResponse, err error) {
     return c.SubmitHunyuan3DTaskWithContext(context.Background(), request)
 }
@@ -9008,10 +9005,7 @@ func (c *Client) SubmitHunyuan3DTask(request *SubmitHunyuan3DTaskRequest) (respo
 // Submit creation of a Hunyuan 3D task.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  INVALIDPARAMETER_NOINPUTSPECIFIED = "InvalidParameter.NoInputSpecified"
 func (c *Client) SubmitHunyuan3DTaskWithContext(ctx context.Context, request *SubmitHunyuan3DTaskRequest) (response *SubmitHunyuan3DTaskResponse, err error) {
     if request == nil {
         request = NewSubmitHunyuan3DTaskRequest()
@@ -9052,10 +9046,7 @@ func NewSyncDubbingResponse() (response *SyncDubbingResponse) {
 // This API is used to return the cloned voice ID or synthetic audio result. The default maximum number of cloned or designed voices is 100.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  INVALIDPARAMETER_NOINPUTSPECIFIED = "InvalidParameter.NoInputSpecified"
 func (c *Client) SyncDubbing(request *SyncDubbingRequest) (response *SyncDubbingResponse, err error) {
     return c.SyncDubbingWithContext(context.Background(), request)
 }
@@ -9064,10 +9055,7 @@ func (c *Client) SyncDubbing(request *SyncDubbingRequest) (response *SyncDubbing
 // This API is used to return the cloned voice ID or synthetic audio result. The default maximum number of cloned or designed voices is 100.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  INVALIDPARAMETER_NOINPUTSPECIFIED = "InvalidParameter.NoInputSpecified"
 func (c *Client) SyncDubbingWithContext(ctx context.Context, request *SyncDubbingRequest) (response *SyncDubbingResponse, err error) {
     if request == nil {
         request = NewSyncDubbingRequest()
@@ -9108,10 +9096,7 @@ func NewTextToSpeechResponse() (response *TextToSpeechResponse) {
 // This API is used to generate speech synchronously based on input text and specified voice tone.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  INVALIDPARAMETER_NOINPUTSPECIFIED = "InvalidParameter.NoInputSpecified"
 func (c *Client) TextToSpeech(request *TextToSpeechRequest) (response *TextToSpeechResponse, err error) {
     return c.TextToSpeechWithContext(context.Background(), request)
 }
@@ -9120,10 +9105,7 @@ func (c *Client) TextToSpeech(request *TextToSpeechRequest) (response *TextToSpe
 // This API is used to generate speech synchronously based on input text and specified voice tone.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  INVALIDPARAMETER_NOINPUTSPECIFIED = "InvalidParameter.NoInputSpecified"
 func (c *Client) TextToSpeechWithContext(ctx context.Context, request *TextToSpeechRequest) (response *TextToSpeechResponse, err error) {
     if request == nil {
         request = NewTextToSpeechRequest()
@@ -9164,10 +9146,7 @@ func NewTextToSpeechAsyncResponse() (response *TextToSpeechAsyncResponse) {
 // This API is used to convert text to speech asynchronously and supports long text to speech.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  INVALIDPARAMETER_NOINPUTSPECIFIED = "InvalidParameter.NoInputSpecified"
 func (c *Client) TextToSpeechAsync(request *TextToSpeechAsyncRequest) (response *TextToSpeechAsyncResponse, err error) {
     return c.TextToSpeechAsyncWithContext(context.Background(), request)
 }
@@ -9176,10 +9155,7 @@ func (c *Client) TextToSpeechAsync(request *TextToSpeechAsyncRequest) (response 
 // This API is used to convert text to speech asynchronously and supports long text to speech.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  INVALIDPARAMETER_NOINPUTSPECIFIED = "InvalidParameter.NoInputSpecified"
 func (c *Client) TextToSpeechAsyncWithContext(ctx context.Context, request *TextToSpeechAsyncRequest) (response *TextToSpeechAsyncResponse, err error) {
     if request == nil {
         request = NewTextToSpeechAsyncRequest()

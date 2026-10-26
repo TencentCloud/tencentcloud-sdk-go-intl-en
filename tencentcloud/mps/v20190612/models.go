@@ -2397,6 +2397,9 @@ type AiStoryboardConfig struct {
 type AigcAudioExtraParam struct {
 
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+
+	OutputAudioFormat *string `json:"OutputAudioFormat,omitnil,omitempty" name:"OutputAudioFormat"`
 }
 
 type AigcAudioOutputAudioInfo struct {
@@ -2778,7 +2781,7 @@ type AudioEnhanceConfig struct {
 	// <p>Volume equalization configuration.</p>
 	VolumeBalance *VolumeBalanceConfig `json:"VolumeBalance,omitnil,omitempty" name:"VolumeBalance"`
 
-	// <p>Audio beautification configurations.</p>
+	// <p>Audio improvement configuration.</p>
 	Beautify *AudioBeautifyConfig `json:"Beautify,omitnil,omitempty" name:"Beautify"`
 
 	// <p>Audio enhancement edit.</p>
@@ -2786,10 +2789,10 @@ type AudioEnhanceConfig struct {
 }
 
 type AudioEnhanceEditConfig struct {
-	// <p>Capability configuration switch</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p>
+	// <p>Capability configuration switch</p><p>Enumeration values:</p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// <p>Audio editing type</p><p>Enumeration values:</p><ul><li>restore: Repair</li></ul><p>When enabled, you must explicitly specify the enumeration value</p>
+	// <p>Types of audio editing</p><p>Enumeration values:</p><ul><li>restore: Repair</li></ul><p>When enabled, you must explicitly specify an enumeration value</p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -2878,7 +2881,8 @@ type AwsS3FileUploadTrigger struct {
 	// The AWS S3 bucket bound to the scheme.
 	S3Bucket *string `json:"S3Bucket,omitnil,omitempty" name:"S3Bucket"`
 
-	// The region of the AWS S3 bucket.
+	// The region of the AWS S3 bucket.  us-east-1  
+	// eu-west-3
 	S3Region *string `json:"S3Region,omitnil,omitempty" name:"S3Region"`
 
 	// The bucket directory bound. It must be an absolute path that starts and ends with `/`, such as `/movie/201907/`. If you do not specify this, the root directory will be bound.	
@@ -4035,25 +4039,27 @@ type ContentReviewTemplateItem struct {
 }
 
 type CosFileUploadTrigger struct {
-	// Name of the COS bucket bound to a workflow, such as `TopRankVideo-125xxx88`.
+	// Name of the COS Bucket bound to the workflow, for example, TopRankVideo-125xxx88.
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
 	// Region of the COS bucket bound to a workflow, such as `ap-chongiqng`.
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Input path directory bound to a workflow, such as `/movie/201907/`. If this parameter is left empty, the `/` root directory will be used.
+	// The bucket directory bound to a workflow. It must be an absolute path that starts and ends with `/`, such as `/movie/201907/`. If you do not specify this, the root directory will be bound.
 	Dir *string `json:"Dir,omitnil,omitempty" name:"Dir"`
 
 	// All supported formats are as follows:
+	// 
 	// - Video file extension. The following 15 options are supported:
-	// `.mp4`, `.avi`, `.mov`, `.wmv`, `.flv`, `.mkv`, `.mpg`, `.mpeg`, `.rm`, `.rmvb`, `.asf`, `.3gp`, `.webm`, `.ts`, and `.m4v`.
+	// `.mp4`, `.avi`, `.mov`, `.wmv`, `.flv`, `.mkv`, `.mpg`, `.mpeg`, `.rm`, `.rmvb`, `.asf`, `.3gp`, `.webm`, `.ts`, `.m4v`
+	// 
 	// - Audio file extension. The following 7 options are supported:
-	// `.mp3`, `.wav`, `.aac`, `.flac`, `.ogg`, `.m4a`, and `.amr`.
+	// `.mp3`, `.wav`, `.aac`, `.flac`, `.ogg`, `.m4a`, `.amr`
+	// 
 	// - Subtitle file extension. The following 2 options are supported:
-	// `.vtt` and `.srt`.
-	// - `*`: any file format is supported.
-	// - Unspecified or input an empty list: the system supports the following preset file formats: video (`.mp4`, `.ts`, `.flv`, `.wmv`, `.asf`, `.rm`, `.rmvb`, `.mpg`, `.mpeg`, `.3gp`, `.mov`, `.webm`, `.mkv`, `.avi`, and `.m4v`); audio (`.mp3`, `.m4a`, `.flac`, `.ogg`, `.wav`, `.amr`, and `.aac`); subtitle (`.vtt` and `.srt`).
-	// **Note**:
+	// `.vtt`, `.srt`
+	// 
+	// - `*`: any file format is supported.- Unspecified or input an empty list: the system supports the following preset file formats: video (`.mp4`, `.ts`, `.flv`, `.wmv`, `.asf`, `.rm`, `.rmvb`, `.mpg`, `.mpeg`, `.3gp`, `.mov`, `.webm`, `.mkv`, `.avi`, and `.m4v`); audio (`.mp3`, `.m4a`, `.flac`, `.ogg`, `.wav`, `.amr`, and `.aac`); subtitle (`.vtt` and `.srt`).**Note**:
 	// 1. If the input format list includes `*`, it indicates that any file format is supported.
 	// 2. File extensions can be provided with or without `.`, such as `.mp4` or `mp4`, both are supported.
 	// 3. Custom file extensions should consist of digits, letters, and characters, and have a length between 1 and 64 characters.
@@ -4577,7 +4583,7 @@ type CreateAigcAudioTaskRequestParams struct {
 	// <p>Model name. Supported models for music generation: GL, MiniMaxMusic, EL, and Mureka.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// <p>Specifies the model version. By default, the system uses the supported stable version of the model. Supported versions for GL: 3.0-clip and 3.0-pro. Supported versions for MiniMaxMusic: 2.0, 2.5, 2.6, and 3.0. Supported versions for EL: compose_v2 and sound_t2s_v2. Supported versions for Mureka: song_8, song_9, song_9.5, instrumental_8, instrumental_9, and instrumental_9.5.</p>
+	// <p>Specifies the model version. By default, the system uses the supported stable version of the model.<br>Supported versions for GL: 3.0-clip and 3.0-pro.<br>Supported versions for MiniMaxMusic: 2.0, 2.5, 2.6, and 3.0.<br>Supported versions for EL: compose_v2 and sound_t2s_v2.<br>Supported versions for Mureka: song_8, song_9, song_9.5, instrumental_8, instrumental_9, and instrumental_9.5.</p>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
 
@@ -4598,7 +4604,7 @@ type CreateAigcAudioTaskRequestParams struct {
 
 	ExtraParameters *AigcAudioExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
 
-	// <p>Used to pass in some special scene parameters required by the model, serialized into strings in Json format. <br>Example MinimaxMusic model When lyrics are passed in:<br> {"lyric":{"ponies are running happily, flowers are blooming"}}</p><ol><li>MiniMaxMusic raw pure music parameters use example:&quot; AdditionalParameters&quot;:&quot; {"is_instrumental":true}&quot;. <br>Supported transparent transmission parameters are: lyrics, is_instrumental, aigc_watermark, sample_rate, bitrate. </li><li>EL Health Music supports transparent transmission parameters:<br> PromptInfluence, WithTimestamps, CompositionPlan, ForceInstrumental and other parameters. </li></ol>
+	// <p>This is used to specify special scenario parameters required by the model, in the format of a serialized JSON string.<br>Example to specify lyrics for the MinimaxMusic model:<br>{"lyric":{"The pony is running with joy. The flowers are blooming."}}</p><ol><li>Example for MiniMaxMusic instrumental music: &quot;AdditionalParameters&quot;:&quot;{"is_instrumental":true}&quot;。<br>Supported pass-through parameters: lyrics, is_instrumental, aigc_watermark, sample_rate, bitrate.</li><li>Pass-through parameters supported for EL music generation:<br>PromptInfluence, WithTimestamps, CompositionPlan, ForceInstrumental and other parameters.</li><li>Pass-through parameters supported by the Mureka model:<br>n: Specifies the number of output audio files.<br>Non-instrumental version supports: lyrics, gender, reference_id, melody_id.<br>Instrumental version supports: instrumental_id.</li></ol>
 	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
 
 
@@ -4611,7 +4617,7 @@ type CreateAigcAudioTaskRequest struct {
 	// <p>Model name. Supported models for music generation: GL, MiniMaxMusic, EL, and Mureka.</p>
 	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
-	// <p>Specifies the model version. By default, the system uses the supported stable version of the model. Supported versions for GL: 3.0-clip and 3.0-pro. Supported versions for MiniMaxMusic: 2.0, 2.5, 2.6, and 3.0. Supported versions for EL: compose_v2 and sound_t2s_v2. Supported versions for Mureka: song_8, song_9, song_9.5, instrumental_8, instrumental_9, and instrumental_9.5.</p>
+	// <p>Specifies the model version. By default, the system uses the supported stable version of the model.<br>Supported versions for GL: 3.0-clip and 3.0-pro.<br>Supported versions for MiniMaxMusic: 2.0, 2.5, 2.6, and 3.0.<br>Supported versions for EL: compose_v2 and sound_t2s_v2.<br>Supported versions for Mureka: song_8, song_9, song_9.5, instrumental_8, instrumental_9, and instrumental_9.5.</p>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
 
 	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
@@ -4629,7 +4635,7 @@ type CreateAigcAudioTaskRequest struct {
 
 	ExtraParameters *AigcAudioExtraParam `json:"ExtraParameters,omitnil,omitempty" name:"ExtraParameters"`
 
-	// <p>Used to pass in some special scene parameters required by the model, serialized into strings in Json format. <br>Example MinimaxMusic model When lyrics are passed in:<br> {"lyric":{"ponies are running happily, flowers are blooming"}}</p><ol><li>MiniMaxMusic raw pure music parameters use example:&quot; AdditionalParameters&quot;:&quot; {"is_instrumental":true}&quot;. <br>Supported transparent transmission parameters are: lyrics, is_instrumental, aigc_watermark, sample_rate, bitrate. </li><li>EL Health Music supports transparent transmission parameters:<br> PromptInfluence, WithTimestamps, CompositionPlan, ForceInstrumental and other parameters. </li></ol>
+	// <p>This is used to specify special scenario parameters required by the model, in the format of a serialized JSON string.<br>Example to specify lyrics for the MinimaxMusic model:<br>{"lyric":{"The pony is running with joy. The flowers are blooming."}}</p><ol><li>Example for MiniMaxMusic instrumental music: &quot;AdditionalParameters&quot;:&quot;{"is_instrumental":true}&quot;。<br>Supported pass-through parameters: lyrics, is_instrumental, aigc_watermark, sample_rate, bitrate.</li><li>Pass-through parameters supported for EL music generation:<br>PromptInfluence, WithTimestamps, CompositionPlan, ForceInstrumental and other parameters.</li><li>Pass-through parameters supported by the Mureka model:<br>n: Specifies the number of output audio files.<br>Non-instrumental version supports: lyrics, gender, reference_id, melody_id.<br>Instrumental version supports: instrumental_id.</li></ol>
 	AdditionalParameters *string `json:"AdditionalParameters,omitnil,omitempty" name:"AdditionalParameters"`
 
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
@@ -8465,14 +8471,14 @@ func (r *DeleteWatermarkTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteWordSamplesRequestParams struct {
-	// Keyword, array length limit: 100 words.
+	// <p>Keyword. Array length limit: 100 words.</p>
 	Keywords []*string `json:"Keywords,omitnil,omitempty" name:"Keywords"`
 }
 
 type DeleteWordSamplesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Keyword, array length limit: 100 words.
+	// <p>Keyword. Array length limit: 100 words.</p>
 	Keywords []*string `json:"Keywords,omitnil,omitempty" name:"Keywords"`
 }
 
@@ -11984,6 +11990,12 @@ type DescribeVoicesRequestParams struct {
 	// <p>Scenario.</p>
 	Scenes []*string `json:"Scenes,omitnil,omitempty" name:"Scenes"`
 
+	// <p>Pagination query page number. Value range: starts from 1. Default value: 1.</p>
+	PageNum *int64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// <p>Page size. If left blank, all data meeting conditions will be returned by default.</p>
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
 	// <p>Extended parameters in the format of a JSON string. </p><p>Other filter criteria:
 	// voiceName (String): Voice name, fuzzy matching. labels (Array of String): Tags. Matches voices that contain these tags.</p>
 	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
@@ -12019,6 +12031,12 @@ type DescribeVoicesRequest struct {
 	// <p>Scenario.</p>
 	Scenes []*string `json:"Scenes,omitnil,omitempty" name:"Scenes"`
 
+	// <p>Pagination query page number. Value range: starts from 1. Default value: 1.</p>
+	PageNum *int64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// <p>Page size. If left blank, all data meeting conditions will be returned by default.</p>
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
 	// <p>Extended parameters in the format of a JSON string. </p><p>Other filter criteria:
 	// voiceName (String): Voice name, fuzzy matching. labels (Array of String): Tags. Matches voices that contain these tags.</p>
 	ExtParam *string `json:"ExtParam,omitnil,omitempty" name:"ExtParam"`
@@ -12045,6 +12063,8 @@ func (r *DescribeVoicesRequest) FromJsonString(s string) error {
 	delete(f, "Languages")
 	delete(f, "Labels")
 	delete(f, "Scenes")
+	delete(f, "PageNum")
+	delete(f, "PageSize")
 	delete(f, "ExtParam")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVoicesRequest has unknown keys!", "")
@@ -12289,38 +12309,32 @@ func (r *DescribeWordSamplesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeWorkflowsRequestParams struct {
-	// Workflow ID filter. Array length limit: 100.
+	// <p>Workflow ID filter condition, with an array length limit of 100.</p>
 	WorkflowIds []*int64 `json:"WorkflowIds,omitnil,omitempty" name:"WorkflowIds"`
 
-	// Workflow status. Valid values:
-	// <li>Enabled: Enabled,</li>
-	// <li>Disabled: Disabled.</li>
-	// If this parameter is left empty, the workflow status will not be distinguished.
+	// <p>Workflow status. Value range:</p><li>Enabled: on,</li><li>Disabled: off.</li>If this parameter is not specified, workflow status is not distinguished.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Paging offset. Default value: 0.
+	// <p>Paging offset. Default value: 0.</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned entries. Default value: 10. Maximum value: 100.
+	// <p>Number of returned entries. Default value: 10. Maximum value: 100.</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeWorkflowsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Workflow ID filter. Array length limit: 100.
+	// <p>Workflow ID filter condition, with an array length limit of 100.</p>
 	WorkflowIds []*int64 `json:"WorkflowIds,omitnil,omitempty" name:"WorkflowIds"`
 
-	// Workflow status. Valid values:
-	// <li>Enabled: Enabled,</li>
-	// <li>Disabled: Disabled.</li>
-	// If this parameter is left empty, the workflow status will not be distinguished.
+	// <p>Workflow status. Value range:</p><li>Enabled: on,</li><li>Disabled: off.</li>If this parameter is not specified, workflow status is not distinguished.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Paging offset. Default value: 0.
+	// <p>Paging offset. Default value: 0.</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned entries. Default value: 10. Maximum value: 100.
+	// <p>Number of returned entries. Default value: 10. Maximum value: 100.</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -12348,10 +12362,10 @@ func (r *DescribeWorkflowsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeWorkflowsResponseParams struct {
-	// Number of eligible entries.
+	// <p>Total number of records that meet filter conditions.</p>
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Workflow information array.
+	// <p>Workflow information array.</p>
 	WorkflowInfoSet []*WorkflowInfo `json:"WorkflowInfoSet,omitnil,omitempty" name:"WorkflowInfoSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -12703,10 +12717,10 @@ type DiffusionEnhanceConfig struct {
 }
 
 type DiffusionEnhanceV2Config struct {
-	// <p>Capability configuration switch</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p>
+	// <p>Capability configuration switch</p><p>Enumeration values:</p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul><p>Default value: OFF</p>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// <p>Strength type</p><p>Enumeration values: </p><ul><li>weak: Weak</li><li>normal: Medium</li><li>strong: Strong</li></ul>
+	// <p>Strength type</p><p>Enumeration values:</p><ul><li>weak: Weak</li><li>normal: Medium</li><li>strong: Strong</li></ul>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -12841,11 +12855,11 @@ type DocToVideoInput struct {
 	// <p>Prompt information for video generation.</p><p>Prompt length limit: 2,000 characters.</p>
 	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
 
-	// <p>Document-to-video model name</p><p>Default value: Wand</p>
-	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
-
-	// <p>Document-to-video model version number</p><p>Default value: 1.0</p>
+	// <p>Document-to-video model version number</p><p>Enumeration values:</p><ul><li>1.0: 1.0</li><li>1.0-lite: 1.0-lite</li></ul><p>Default value: 1.0</p>
 	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+
+	// <p>Documentation generation video model name</p><p>Enumeration values:</p><ul><li>WAND: WAND</li></ul><p>Default value: WAND</p>
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
 
 	// <p>Aspect ratio of the generated video.</p><p>Enumeration values: </p><ul><li>16:9: 16:9</li><li>9:16: 9:16</li><li>1:1: 1:1</li></ul><p>Default value: 16:9</p>
 	Ratio *string `json:"Ratio,omitnil,omitempty" name:"Ratio"`
@@ -19541,6 +19555,36 @@ type QueryHunyuan3DTaskResponseParams struct {
 	// <p>Only has a value when Status=DONE. List of output files</p>
 	ResultFile3Ds []*File3D `json:"ResultFile3Ds,omitnil,omitempty" name:"ResultFile3Ds"`
 
+	// <p>Task ID</p>
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// <p>Task type</p><p>Enumeration values:</p><ul><li>text_to_3d: Text to 3D</li><li>image_to_3d: Image to 3D</li><li>multiview_to_3d: Multi-view to 3D</li><li>mesh_to_texture: Mesh to texture</li><li>mesh_to_geometry: Mesh to geometry</li></ul>
+	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// <p>Input prompt</p>
+	Prompt *string `json:"Prompt,omitnil,omitempty" name:"Prompt"`
+
+	// <p>Image URL input in image-to-3D scenarios</p>
+	RefImage *string `json:"RefImage,omitnil,omitempty" name:"RefImage"`
+
+	// <p>Image information input in multi-image to 3D scenarios</p>
+	MultiViewImages []*ViewImage `json:"MultiViewImages,omitnil,omitempty" name:"MultiViewImages"`
+
+	// <p>Task creation time</p>
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Task update time</p>
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// <p>The target face count for the submitted task</p>
+	FaceCount *uint64 `json:"FaceCount,omitnil,omitempty" name:"FaceCount"`
+
+	// <p>Generation type</p><p>Enumeration values:</p><ul><li>Normal: Generate a complete 3D asset (geometry + texture)</li><li>Geometry: Generate only geometry (no texture, faster output speed)</li><li>Texture: Generate only texture (MeshUrl is required)</li></ul><p>Default value: Normal</p>
+	GenerateType *string `json:"GenerateType,omitnil,omitempty" name:"GenerateType"`
+
+	// <p>Task position in the queue; the smaller the value, the higher the priority.</p>
+	QueuePosition *int64 `json:"QueuePosition,omitnil,omitempty" name:"QueuePosition"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -21407,6 +21451,9 @@ type SubmitHunyuan3DTaskRequestParams struct {
 
 	// <p>Style control words</p>
 	Style *string `json:"Style,omitnil,omitempty" name:"Style"`
+
+	// <p>COS bucket that the customer applies to create</p>
+	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
 }
 
 type SubmitHunyuan3DTaskRequest struct {
@@ -21444,6 +21491,9 @@ type SubmitHunyuan3DTaskRequest struct {
 
 	// <p>Style control words</p>
 	Style *string `json:"Style,omitnil,omitempty" name:"Style"`
+
+	// <p>COS bucket that the customer applies to create</p>
+	StoreCosParam *AigcStoreCosParam `json:"StoreCosParam,omitnil,omitempty" name:"StoreCosParam"`
 }
 
 func (r *SubmitHunyuan3DTaskRequest) ToJsonString() string {
@@ -21469,6 +21519,7 @@ func (r *SubmitHunyuan3DTaskRequest) FromJsonString(s string) error {
 	delete(f, "ResultFormat")
 	delete(f, "Seed")
 	delete(f, "Style")
+	delete(f, "StoreCosParam")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SubmitHunyuan3DTaskRequest has unknown keys!", "")
 	}
@@ -23474,7 +23525,7 @@ type VideoEnhanceConfig struct {
 	// <p>Large model repair configuration. Note that at most one of large model, comprehensive enhancement, and jitter removal can be configured. It cannot be enabled simultaneously with super resolution or noise reduction.</p>
 	AiRestoration *AiRestorationConfig `json:"AiRestoration,omitnil,omitempty" name:"AiRestoration"`
 
-	// <p>Configuration of the large model enhancement pro edition. Note that at most one of the large model, comprehensive enhancement, and artifacts removal can be configured. It cannot intersect with super resolution and noise reduction.</p>
+	// <p>LLM enhancement professional edition configuration. Note that only one of the three items, LLM enhancement, comprehensive enhancement, and artifacts removal, can be configured. It cannot be enabled simultaneously with super-resolution and noise reduction.</p>
 	DiffusionEnhanceV2 *DiffusionEnhanceV2Config `json:"DiffusionEnhanceV2,omitnil,omitempty" name:"DiffusionEnhanceV2"`
 }
 
@@ -24067,46 +24118,41 @@ type WorkflowInfo struct {
 	WorkflowName *string `json:"WorkflowName,omitnil,omitempty" name:"WorkflowName"`
 
 	// Workflow status. Valid values:
-	// <li>Enabled: Enabled,</li>
+	// <li>Enabled: on</li>
 	// <li>Disabled: Disabled.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Input rule bound to a workflow. If an uploaded video hits the rule for the object, the workflow will be triggered.
+	// The input rule bound to the workflow triggers the workflow when an uploaded video hits the rule for the object.
 	Trigger *WorkflowTrigger `json:"Trigger,omitnil,omitempty" name:"Trigger"`
 
-	// The location to save the media processing output file.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// The media processing parameters to use.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitnil,omitempty" name:"MediaProcessTask"`
 
-	// Type parameter of a video content audit task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitnil,omitempty" name:"AiContentReviewTask"`
 
-	// Video content analysis task parameter.
+
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil,omitempty" name:"AiAnalysisTask"`
 
-	// Type parameter of a video content recognition task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil,omitempty" name:"AiRecognitionTask"`
 
-	// Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
 
-	// Task flow priority. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
+	// Priority of the task flow. The higher the value, the higher the priority. The value range is from -10 to 10. If left blank, the default value is 0.
 	TaskPriority *int64 `json:"TaskPriority,omitnil,omitempty" name:"TaskPriority"`
 
-	// The directory to save the media processing output file, such as `/movie/201907/`.
+	// Storage directory for the output file, such as `/movie/201907/`.
 	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
 
-	// Creation time of a workflow in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Workflow creation time, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Last modified time of a workflow in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// Last modification time of the workflow, using the ISO date format (https://www.tencentcloud.com/document/product/862/37710?from_cn_redirect=1#52).
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
