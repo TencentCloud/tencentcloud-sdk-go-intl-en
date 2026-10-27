@@ -1,9 +1,10 @@
 package common
 
 import (
+	"testing"
+
 	tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
 	"github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
-	"testing"
 )
 
 func TestCommonRequest_SetActionParameters(t *testing.T) {
