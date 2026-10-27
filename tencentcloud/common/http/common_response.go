@@ -1,6 +1,3 @@
-//go:build !tencentcloud_common_number_precision
-// +build !tencentcloud_common_number_precision
-
 package common
 
 import "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"

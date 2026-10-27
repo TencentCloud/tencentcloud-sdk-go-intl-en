@@ -1,11 +1,7 @@
-//go:build !tencentcloud_common_number_precision
-// +build !tencentcloud_common_number_precision
-
 package common
 
 import (
 	"fmt"
-
 	tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
 	"github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
