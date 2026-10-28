@@ -25621,43 +25621,43 @@ type Tag struct {
 }
 
 type Task struct {
-	// ID of the task.
+	// Task ID.
 	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// Resource.
 	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
 
-	// Type of the task.
+	// Task type.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Node cache purge method. valid values:.
-	// <li>invalidate: marks as expired. a back-to-origin validation is triggered upon user request, sending an HTTP conditional request with If-None-Match and If-Modified-Since headers. If the origin server responds with 200, the node will fetch new resources from the origin and update the cache; If the origin server responds with 304, the cache will not be updated;</li>.
-	// <Li>Delete: directly deletes the node's cache, triggering a resource fetch from the origin upon user request.</li>.
+	// Node cache purge method, with values:
+	// <li>invalidate: Marks as expired. A back-to-origin validation is triggered upon user request, sending an HTTP conditional request with If-None-Match and If-Modified-Since headers. If the origin server responds with 200, the node will fetch new resources from the origin and update the cache; if the origin server responds with 304, the cache will not be updated;</li>
+	// <li>delete: Directly deletes the node's cache, triggering a resource fetch from the origin upon user request.</li>
 	Method *string `json:"Method,omitnil,omitempty" name:"Method"`
 
-	// Status. valid values:.
-	// <li>processing: indicates the operation is in progress.</li>.
-	// <Li>Success: specifies the success status.</li>.
-	// <li>failed: indicates a failure.</li>.
-	// <Li>Timeout: specifies the timeout period.</li>.
-	// <Li>Canceled: canceled.</li>.
+	// Status. Valid values:
+	// <li>processing: Processing;</li>
+	// <li>success: Succeeded;</li>
+	// <li>failed: Failed;</li>
+	// <li>timeout: Timed out;</li>
+	// <li>canceled: Canceled.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Creation time of the task.
+	// Task creation time.
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Completion time of the task.
+	// Task completion time.
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
-	// Refresh and preheat failure type. valid values:.
-	// <li>taskFailed: specifies the task failure.</li>.
-	// <li>quotaExceeded: specifies the quota exceeded status.</li>.
-	// <li>downloadManifestFailed: specifies the file failed to download.</li>.
-	// <li>accessDenied: specifies access denied.</li>.
-	// <li>originPullFailed: specifies the origin-pull failure.</li>.
+	// Failure type of update and preheating. Valid values:
+	// <li>taskFailed: Task failure;</li>
+	// <li>quotaExceeded: quota exceeded;</li>
+	// <li>downloadManifestFailed: Failed to download the description file;</li>
+	// <li>accessDenied: access denied.</li>
+	// <li>originPullFailed: origin-pull failure.</li>
 	FailType *string `json:"FailType,omitnil,omitempty" name:"FailType"`
 
-	// Description of the reason for cache purge or warm cache failure.
+	// Failure reason description for cache purge and cache pre-warming.
 	FailMessage *string `json:"FailMessage,omitnil,omitempty" name:"FailMessage"`
 }
 
