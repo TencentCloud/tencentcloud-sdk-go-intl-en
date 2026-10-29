@@ -4419,6 +4419,12 @@ type OCRResult struct {
 
 	// <p>Base64 of the back image of the identity document</p>
 	CardBackImageBase64 *string `json:"CardBackImageBase64,omitnil,omitempty" name:"CardBackImageBase64"`
+
+	// Card verification status:
+	// PROCESSING: Verification is in progress.
+	// COMPLETED: Verification completed with no alerts.
+	// ABNORMAL: Verification completed with alerts raised.
+	CardResultStatus *string `json:"CardResultStatus,omitnil,omitempty" name:"CardResultStatus"`
 }
 
 type PakistanDrivingLicense struct {

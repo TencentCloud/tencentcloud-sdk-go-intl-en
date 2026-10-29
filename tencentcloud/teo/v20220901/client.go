@@ -6515,6 +6515,120 @@ func (c *Client) DescribeAvailableCustomActionsForRuleEngineWithContext(ctx cont
     return
 }
 
+func NewDescribeAvailableOriginACLFamilyRequest() (request *DescribeAvailableOriginACLFamilyRequest) {
+    request = &DescribeAvailableOriginACLFamilyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeAvailableOriginACLFamily")
+    
+    
+    return
+}
+
+func NewDescribeAvailableOriginACLFamilyResponse() (response *DescribeAvailableOriginACLFamilyResponse) {
+    response = &DescribeAvailableOriginACLFamilyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAvailableOriginACLFamily
+// This API is used to query detailed information about the origin protection IP range control domain, including the version number and specific IP range information.
+//
+// The main difference between standard control domain and streamlined control domain is the number of IP ranges provided. The latter has fewer IP ranges, but has some usage restrictions. For specific restrictions, consult the product. The format description is as follows:
+//
+// Standard control domain:
+//
+// <li>gaz: standard global control domain;</li>
+//
+// <li>mlc: Standard China control domain;</li>
+//
+// <li>emc: standard overseas (worldwide excluding China) control domain;</li>
+//
+// Streamline the control domain.
+//
+// <li>plat-gaz: simplified global control domain;</li>
+//
+// <li>plat-mlc: Simplified China control domain;</li>
+//
+// <li>plat-emc: Simplified overseas (global excluding China) control domain;</li>
+//
+// <li>plat-specific-gaz: custom edition global availability zone control domain;</li>
+//
+// <li>plat-specific-mlc: custom edition for controlling the Chinese mainland availability zone control domain;</li>
+//
+// <li>plat-specific-emc: custom edition control domain for availability zones worldwide (excluding Chinese mainland);</li>
+//
+// Abbreviation description:
+//
+// <li>gaz:Global AZ Availability Zone;</li>
+//
+// <li>mlc:mainlandChina;</li>
+//
+// <li>emc:Exclude mainlandChina.</li>
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+func (c *Client) DescribeAvailableOriginACLFamily(request *DescribeAvailableOriginACLFamilyRequest) (response *DescribeAvailableOriginACLFamilyResponse, err error) {
+    return c.DescribeAvailableOriginACLFamilyWithContext(context.Background(), request)
+}
+
+// DescribeAvailableOriginACLFamily
+// This API is used to query detailed information about the origin protection IP range control domain, including the version number and specific IP range information.
+//
+// The main difference between standard control domain and streamlined control domain is the number of IP ranges provided. The latter has fewer IP ranges, but has some usage restrictions. For specific restrictions, consult the product. The format description is as follows:
+//
+// Standard control domain:
+//
+// <li>gaz: standard global control domain;</li>
+//
+// <li>mlc: Standard China control domain;</li>
+//
+// <li>emc: standard overseas (worldwide excluding China) control domain;</li>
+//
+// Streamline the control domain.
+//
+// <li>plat-gaz: simplified global control domain;</li>
+//
+// <li>plat-mlc: Simplified China control domain;</li>
+//
+// <li>plat-emc: Simplified overseas (global excluding China) control domain;</li>
+//
+// <li>plat-specific-gaz: custom edition global availability zone control domain;</li>
+//
+// <li>plat-specific-mlc: custom edition for controlling the Chinese mainland availability zone control domain;</li>
+//
+// <li>plat-specific-emc: custom edition control domain for availability zones worldwide (excluding Chinese mainland);</li>
+//
+// Abbreviation description:
+//
+// <li>gaz:Global AZ Availability Zone;</li>
+//
+// <li>mlc:mainlandChina;</li>
+//
+// <li>emc:Exclude mainlandChina.</li>
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_ZONENOTFOUND = "InvalidParameterValue.ZoneNotFound"
+func (c *Client) DescribeAvailableOriginACLFamilyWithContext(ctx context.Context, request *DescribeAvailableOriginACLFamilyRequest) (response *DescribeAvailableOriginACLFamilyResponse, err error) {
+    if request == nil {
+        request = NewDescribeAvailableOriginACLFamilyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeAvailableOriginACLFamily")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAvailableOriginACLFamily require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAvailableOriginACLFamilyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAvailablePlansRequest() (request *DescribeAvailablePlansRequest) {
     request = &DescribeAvailablePlansRequest{
         BaseRequest: &tchttp.BaseRequest{},

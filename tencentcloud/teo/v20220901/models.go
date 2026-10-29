@@ -386,10 +386,10 @@ type AdaptiveFrequencyControl struct {
 }
 
 type Addresses struct {
-	// IPv4 subnet.
+	// IPv4 IP range list.
 	IPv4 []*string `json:"IPv4,omitnil,omitempty" name:"IPv4"`
 
-	// IPv6 subnet.
+	// IPv6 IP range list.
 	IPv6 []*string `json:"IPv6,omitnil,omitempty" name:"IPv6"`
 }
 
@@ -8671,6 +8671,87 @@ func (r *DescribeAvailableCustomActionsForRuleEngineResponse) FromJsonString(s s
 }
 
 // Predefined struct for user
+type DescribeAvailableOriginACLFamilyRequestParams struct {
+	// <p>Site ID.</p>
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// <p>Filter criteria. The maximum number of Filters.Values is 20. If this parameter is left empty, all available versions under the current site are returned. The IP range control domain of origin protection includes the standard control domain and the streamlined control domain. The main difference between the standard control domain and the streamlined control domain is the quantity difference of origin IP ranges provided. The latter has fewer IP ranges, however it is limited in use. Contact technical support if needed. Specific values are as follows:<br>Detailed filter criteria are as follows:<br>OriginACLFamily: filter by control domain;</p><li>gaz: standard global availability zone control domain;</li><li>mlc: standard Chinese mainland availability zone control domain;</li><li>emc: standard global (excluding Chinese mainland) availability zone control domain;</li><li>plat-gaz: streamlined global availability zone control domain;</li><li>plat-mlc: streamlined Chinese mainland availability zone control domain;</li><li>plat-emc: streamlined global (excluding Chinese mainland) availability zone control domain;</li><li>plat-specific-gaz: custom edition global availability zone control domain;</li><li>plat-specific-mlc: custom edition Chinese mainland availability zone control domain;</li><li>plat-specific-emc: custom edition global (excluding Chinese mainland) availability zone control domain.</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>The offset of paginated query. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number limit of paginated query. Default value: 20. Maximum value: 100.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeAvailableOriginACLFamilyRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Site ID.</p>
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// <p>Filter criteria. The maximum number of Filters.Values is 20. If this parameter is left empty, all available versions under the current site are returned. The IP range control domain of origin protection includes the standard control domain and the streamlined control domain. The main difference between the standard control domain and the streamlined control domain is the quantity difference of origin IP ranges provided. The latter has fewer IP ranges, however it is limited in use. Contact technical support if needed. Specific values are as follows:<br>Detailed filter criteria are as follows:<br>OriginACLFamily: filter by control domain;</p><li>gaz: standard global availability zone control domain;</li><li>mlc: standard Chinese mainland availability zone control domain;</li><li>emc: standard global (excluding Chinese mainland) availability zone control domain;</li><li>plat-gaz: streamlined global availability zone control domain;</li><li>plat-mlc: streamlined Chinese mainland availability zone control domain;</li><li>plat-emc: streamlined global (excluding Chinese mainland) availability zone control domain;</li><li>plat-specific-gaz: custom edition global availability zone control domain;</li><li>plat-specific-mlc: custom edition Chinese mainland availability zone control domain;</li><li>plat-specific-emc: custom edition global (excluding Chinese mainland) availability zone control domain.</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>The offset of paginated query. Default value: 0.</p>
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number limit of paginated query. Default value: 20. Maximum value: 100.</p>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeAvailableOriginACLFamilyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAvailableOriginACLFamilyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAvailableOriginACLFamilyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAvailableOriginACLFamilyResponseParams struct {
+	// <p>Total number of detailed information entries for origin protection IP ranges.</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>Detailed information list of origin-pull IP ranges.</p>
+	OriginACLFamilyInfos []*OriginACLFamilyInfo `json:"OriginACLFamilyInfos,omitnil,omitempty" name:"OriginACLFamilyInfos"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAvailableOriginACLFamilyResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAvailableOriginACLFamilyResponseParams `json:"Response"`
+}
+
+func (r *DescribeAvailableOriginACLFamilyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAvailableOriginACLFamilyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeAvailablePlansRequestParams struct {
 
 }
@@ -16825,7 +16906,7 @@ type Filter struct {
 	// Fields to be filtered.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Value of the filtered field.
+	// Filter value of the field.
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
@@ -23391,6 +23472,39 @@ type OriginACLEntity struct {
 	// - enable: enabled L7/L4 instances.
 	// - disable: disable L7/L4 instances.
 	OperationMode *string `json:"OperationMode,omitnil,omitempty" name:"OperationMode"`
+}
+
+type OriginACLFamilyInfo struct {
+	// Origin protection version number.
+	// Format description:
+	// Standard version.
+	// <li>gaz-xxxxx: global;</li>
+	// <li>mlc-xxxxx: China;</li>
+	// <li>emc-xxxxx: overseas (worldwide excluding China);</li>
+	// Simplified edition (platform-level version)
+	// <li>plat-gaz-xxxxxx: Simplified global edition;</li>
+	// <li>plat-mlc-xxxxxx: Simplified China version;</li>
+	// <li>plat-emc-xxxxxx: Simplified overseas (global excluding China) edition;</li>
+	// Abbreviation description:
+	// <li>gaz:Global AZ Availability Zone;</li>
+	// <li>mlc:mainlandChina;</li>
+	// <li>emc:Exclude mainlandChina.</li>
+	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
+
+	// Version effective time, which adopts Beijing time (UTC+8) and follows the date and time format of the ISO 8601 standard.
+	ActiveTime *string `json:"ActiveTime,omitnil,omitempty" name:"ActiveTime"`
+
+	// Origin-pull IP range details.	
+	EntireAddresses *Addresses `json:"EntireAddresses,omitnil,omitempty" name:"EntireAddresses"`
+
+	// Origin protection origin-pull ACL control domain. Parameter values are as follows:
+	// <li>gaz: standard global availability zone control domain;</li>
+	// <li>mlc: standard Chinese mainland availability zone control domain;</li>
+	// <li>emc: standard worldwide (excluding Chinese mainland) availability zone control domain;</li>
+	// <li>plat-gaz: simplified global availability zone control domain;</li>
+	// <li>plat-mlc: Simplified Chinese mainland availability zone control domain;</li>
+	// <li>plat-emc: Simplified global (excluding Chinese mainland) availability zone control domain;</li>
+	OriginACLFamily *string `json:"OriginACLFamily,omitnil,omitempty" name:"OriginACLFamily"`
 }
 
 type OriginACLInfo struct {
