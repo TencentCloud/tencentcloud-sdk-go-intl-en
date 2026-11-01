@@ -621,6 +621,114 @@ func (c *Client) CreateDBInstanceParamTplWithContext(ctx context.Context, reques
     return
 }
 
+func NewCreateInstanceRoleRequest() (request *CreateInstanceRoleRequest) {
+    request = &CreateInstanceRoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "CreateInstanceRole")
+    
+    
+    return
+}
+
+func NewCreateInstanceRoleResponse() (response *CreateInstanceRoleResponse) {
+    response = &CreateInstanceRoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateInstanceRole
+// Create a database role
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INNERCOMMONERROR = "InternalError.InnerCommonError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+func (c *Client) CreateInstanceRole(request *CreateInstanceRoleRequest) (response *CreateInstanceRoleResponse, err error) {
+    return c.CreateInstanceRoleWithContext(context.Background(), request)
+}
+
+// CreateInstanceRole
+// Create a database role
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INNERCOMMONERROR = "InternalError.InnerCommonError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+func (c *Client) CreateInstanceRoleWithContext(ctx context.Context, request *CreateInstanceRoleRequest) (response *CreateInstanceRoleResponse, err error) {
+    if request == nil {
+        request = NewCreateInstanceRoleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "CreateInstanceRole")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateInstanceRole require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateInstanceRoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateInstanceUserRequest() (request *CreateInstanceUserRequest) {
+    request = &CreateInstanceUserRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "CreateInstanceUser")
+    
+    
+    return
+}
+
+func NewCreateInstanceUserResponse() (response *CreateInstanceUserResponse) {
+    response = &CreateInstanceUserResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateInstanceUser
+// Create a database account
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) CreateInstanceUser(request *CreateInstanceUserRequest) (response *CreateInstanceUserResponse, err error) {
+    return c.CreateInstanceUserWithContext(context.Background(), request)
+}
+
+// CreateInstanceUser
+// Create a database account
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) CreateInstanceUserWithContext(ctx context.Context, request *CreateInstanceUserRequest) (response *CreateInstanceUserResponse, err error) {
+    if request == nil {
+        request = NewCreateInstanceUserRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "CreateInstanceUser")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateInstanceUser require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateInstanceUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateLogDownloadTaskRequest() (request *CreateLogDownloadTaskRequest) {
     request = &CreateLogDownloadTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -773,6 +881,114 @@ func (c *Client) DeleteDBBackupsWithContext(ctx context.Context, request *Delete
     request.SetContext(ctx)
     
     response = NewDeleteDBBackupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteInstanceRoleRequest() (request *DeleteInstanceRoleRequest) {
+    request = &DeleteInstanceRoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DeleteInstanceRole")
+    
+    
+    return
+}
+
+func NewDeleteInstanceRoleResponse() (response *DeleteInstanceRoleResponse) {
+    response = &DeleteInstanceRoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteInstanceRole
+// Delete role
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DeleteInstanceRole(request *DeleteInstanceRoleRequest) (response *DeleteInstanceRoleResponse, err error) {
+    return c.DeleteInstanceRoleWithContext(context.Background(), request)
+}
+
+// DeleteInstanceRole
+// Delete role
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DeleteInstanceRoleWithContext(ctx context.Context, request *DeleteInstanceRoleRequest) (response *DeleteInstanceRoleResponse, err error) {
+    if request == nil {
+        request = NewDeleteInstanceRoleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DeleteInstanceRole")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteInstanceRole require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteInstanceRoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteInstanceUserRequest() (request *DeleteInstanceUserRequest) {
+    request = &DeleteInstanceUserRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DeleteInstanceUser")
+    
+    
+    return
+}
+
+func NewDeleteInstanceUserResponse() (response *DeleteInstanceUserResponse) {
+    response = &DeleteInstanceUserResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteInstanceUser
+// This API is used to delete a database account.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DeleteInstanceUser(request *DeleteInstanceUserRequest) (response *DeleteInstanceUserResponse, err error) {
+    return c.DeleteInstanceUserWithContext(context.Background(), request)
+}
+
+// DeleteInstanceUser
+// This API is used to delete a database account.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DeleteInstanceUserWithContext(ctx context.Context, request *DeleteInstanceUserRequest) (response *DeleteInstanceUserResponse, err error) {
+    if request == nil {
+        request = NewDeleteInstanceUserRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DeleteInstanceUser")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteInstanceUser require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteInstanceUserResponse()
     err = c.Send(request, response)
     return
 }
@@ -1935,6 +2151,60 @@ func (c *Client) DescribeInstanceParamsWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeInstanceRolesRequest() (request *DescribeInstanceRolesRequest) {
+    request = &DescribeInstanceRolesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeInstanceRoles")
+    
+    
+    return
+}
+
+func NewDescribeInstanceRolesResponse() (response *DescribeInstanceRolesResponse) {
+    response = &DescribeInstanceRolesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInstanceRoles
+// Obtains the list of roles
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DescribeInstanceRoles(request *DescribeInstanceRolesRequest) (response *DescribeInstanceRolesResponse, err error) {
+    return c.DescribeInstanceRolesWithContext(context.Background(), request)
+}
+
+// DescribeInstanceRoles
+// Obtains the list of roles
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DescribeInstanceRolesWithContext(ctx context.Context, request *DescribeInstanceRolesRequest) (response *DescribeInstanceRolesResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceRolesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeInstanceRoles")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceRoles require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceRolesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstanceSSLRequest() (request *DescribeInstanceSSLRequest) {
     request = &DescribeInstanceSSLRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1991,6 +2261,60 @@ func (c *Client) DescribeInstanceSSLWithContext(ctx context.Context, request *De
     request.SetContext(ctx)
     
     response = NewDescribeInstanceSSLResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeInstanceUsersRequest() (request *DescribeInstanceUsersRequest) {
+    request = &DescribeInstanceUsersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeInstanceUsers")
+    
+    
+    return
+}
+
+func NewDescribeInstanceUsersResponse() (response *DescribeInstanceUsersResponse) {
+    response = &DescribeInstanceUsersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInstanceUsers
+// This API is used to obtain the list of accounts.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DescribeInstanceUsers(request *DescribeInstanceUsersRequest) (response *DescribeInstanceUsersResponse, err error) {
+    return c.DescribeInstanceUsersWithContext(context.Background(), request)
+}
+
+// DescribeInstanceUsers
+// This API is used to obtain the list of accounts.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) DescribeInstanceUsersWithContext(ctx context.Context, request *DescribeInstanceUsersRequest) (response *DescribeInstanceUsersResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceUsersRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "DescribeInstanceUsers")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceUsers require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceUsersResponse()
     err = c.Send(request, response)
     return
 }
@@ -4077,6 +4401,114 @@ func (c *Client) TerminateDBInstancesWithContext(ctx context.Context, request *T
     request.SetContext(ctx)
     
     response = NewTerminateDBInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateInstanceRoleRequest() (request *UpdateInstanceRoleRequest) {
+    request = &UpdateInstanceRoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "UpdateInstanceRole")
+    
+    
+    return
+}
+
+func NewUpdateInstanceRoleResponse() (response *UpdateInstanceRoleResponse) {
+    response = &UpdateInstanceRoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateInstanceRole
+// This API is used to update a database role.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) UpdateInstanceRole(request *UpdateInstanceRoleRequest) (response *UpdateInstanceRoleResponse, err error) {
+    return c.UpdateInstanceRoleWithContext(context.Background(), request)
+}
+
+// UpdateInstanceRole
+// This API is used to update a database role.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) UpdateInstanceRoleWithContext(ctx context.Context, request *UpdateInstanceRoleRequest) (response *UpdateInstanceRoleResponse, err error) {
+    if request == nil {
+        request = NewUpdateInstanceRoleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "UpdateInstanceRole")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateInstanceRole require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateInstanceRoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateInstanceUserRequest() (request *UpdateInstanceUserRequest) {
+    request = &UpdateInstanceUserRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "UpdateInstanceUser")
+    
+    
+    return
+}
+
+func NewUpdateInstanceUserResponse() (response *UpdateInstanceUserResponse) {
+    response = &UpdateInstanceUserResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateInstanceUser
+// Update database account
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) UpdateInstanceUser(request *UpdateInstanceUserRequest) (response *UpdateInstanceUserResponse, err error) {
+    return c.UpdateInstanceUserWithContext(context.Background(), request)
+}
+
+// UpdateInstanceUser
+// Update database account
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+func (c *Client) UpdateInstanceUserWithContext(ctx context.Context, request *UpdateInstanceUserRequest) (response *UpdateInstanceUserResponse, err error) {
+    if request == nil {
+        request = NewUpdateInstanceUserRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "mongodb", APIVersion, "UpdateInstanceUser")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateInstanceUser require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateInstanceUserResponse()
     err = c.Send(request, response)
     return
 }
