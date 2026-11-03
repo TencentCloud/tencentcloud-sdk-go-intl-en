@@ -24617,7 +24617,7 @@ func NewDescribeDspmIdentifyRuleTestResultResponse() (response *DescribeDspmIden
 }
 
 // DescribeDspmIdentifyRuleTestResult
-// This API is used to query verification results of dspm data identification data items.
+// Queries the verification result of a dspm data identification data item
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -24639,7 +24639,7 @@ func (c *Client) DescribeDspmIdentifyRuleTestResult(request *DescribeDspmIdentif
 }
 
 // DescribeDspmIdentifyRuleTestResult
-// This API is used to query verification results of dspm data identification data items.
+// Queries the verification result of a dspm data identification data item
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -44016,8 +44016,10 @@ func NewModifyEdrAlertIsolationResponse() (response *ModifyEdrAlertIsolationResp
 // EDR alert quarantine and recovery
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyEdrAlertIsolation(request *ModifyEdrAlertIsolationRequest) (response *ModifyEdrAlertIsolationResponse, err error) {
     return c.ModifyEdrAlertIsolationWithContext(context.Background(), request)
 }
@@ -44026,8 +44028,10 @@ func (c *Client) ModifyEdrAlertIsolation(request *ModifyEdrAlertIsolationRequest
 // EDR alert quarantine and recovery
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
 //  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyEdrAlertIsolationWithContext(ctx context.Context, request *ModifyEdrAlertIsolationRequest) (response *ModifyEdrAlertIsolationResponse, err error) {
     if request == nil {
         request = NewModifyEdrAlertIsolationRequest()

@@ -122,7 +122,7 @@ const (
 	// Region error.
 	REGIONERROR = "RegionError"
 
-	// Number of requests exceeds the frequency limit.
+	// The number of requests exceeds the frequency limit.
 	REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 
 	// The resource is occupied.
