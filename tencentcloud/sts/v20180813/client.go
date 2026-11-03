@@ -538,3 +538,77 @@ func (c *Client) GetFederationTokenWithContext(ctx context.Context, request *Get
     err = c.Send(request, response)
     return
 }
+
+func NewGetSessionTokenRequest() (request *GetSessionTokenRequest) {
+    request = &GetSessionTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sts", APIVersion, "GetSessionToken")
+    
+    
+    return
+}
+
+func NewGetSessionTokenResponse() (response *GetSessionTokenResponse) {
+    response = &GetSessionTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetSessionToken
+// Obtain the MFA temporary certificate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CHECKMFAERROR = "FailedOperation.CheckMFAError"
+//  FAILEDOPERATION_MFATYPENOTSUPPORTED = "FailedOperation.MFATypeNotSupported"
+//  FAILEDOPERATION_TEMPKEYNOTALLOWED = "FailedOperation.TempKeyNotAllowed"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ENCRYPTERROR = "InternalError.EncryptError"
+//  INTERNALERROR_GETSEEDTOKENERROR = "InternalError.GetSeedTokenError"
+//  INTERNALERROR_PBSERIALIZEERROR = "InternalError.PbSerializeError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_ACCOUNTNOTAVALIABLE = "InvalidParameter.AccountNotAvaliable"
+//  INVALIDPARAMETER_OVERTIMEERROR = "InvalidParameter.OverTimeError"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) GetSessionToken(request *GetSessionTokenRequest) (response *GetSessionTokenResponse, err error) {
+    return c.GetSessionTokenWithContext(context.Background(), request)
+}
+
+// GetSessionToken
+// Obtain the MFA temporary certificate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CHECKMFAERROR = "FailedOperation.CheckMFAError"
+//  FAILEDOPERATION_MFATYPENOTSUPPORTED = "FailedOperation.MFATypeNotSupported"
+//  FAILEDOPERATION_TEMPKEYNOTALLOWED = "FailedOperation.TempKeyNotAllowed"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ENCRYPTERROR = "InternalError.EncryptError"
+//  INTERNALERROR_GETSEEDTOKENERROR = "InternalError.GetSeedTokenError"
+//  INTERNALERROR_PBSERIALIZEERROR = "InternalError.PbSerializeError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_ACCOUNTNOTAVALIABLE = "InvalidParameter.AccountNotAvaliable"
+//  INVALIDPARAMETER_OVERTIMEERROR = "InvalidParameter.OverTimeError"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) GetSessionTokenWithContext(ctx context.Context, request *GetSessionTokenRequest) (response *GetSessionTokenResponse, err error) {
+    if request == nil {
+        request = NewGetSessionTokenRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "sts", APIVersion, "GetSessionToken")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetSessionToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetSessionTokenResponse()
+    err = c.Send(request, response)
+    return
+}

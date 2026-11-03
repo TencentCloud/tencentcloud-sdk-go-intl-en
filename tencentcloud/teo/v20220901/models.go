@@ -29,7 +29,7 @@ type AICrawlerDetection struct {
 	// Execution action of AI crawler detection. Required if Enabled is on. Name of SecurityAction only supports:
 	// <li>Deny: block;</li>
 	// <li>Monitor: observation;</li>
-	// <li>Allow: allow;</li>
+	// <li>Allow: Allow access;</li>
 	// <li>Challenge: Among them, ChallengeOption in ChallengeActionParameters only supports JSChallenge and ManagedChallenge.</li>
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 }
@@ -208,6 +208,20 @@ type AccessURLRedirectQueryString struct {
 	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
+type AccountProtectionSettings struct {
+	// <p>Account protection feature switch.</p><p>Enumeration values: </p><ul><li>on: Enable;</li><li>off: Disable.</li></ul><p>Default value: off.</p>
+	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// <p>Request target. Used to identify the business operation scenario the request belongs to.</p> <p>Enumeration values:</p> <ul> <li>ACCOUNT.CHANGE_PASSWORD: request to change the password when the original password is known;</li> <li>ACCOUNT.CHANGE_SECURITY_QUESTION: request to modify the account security question;</li> <li>ACCOUNT.CHECK_EXISTENCE: request to verify whether the account exists, commonly used for pre-verification after entering an email or phone number on the login or registration page;</li> <li>ACCOUNT.LOGIN: request to log in to an account;</li> <li>ACCOUNT.REGISTER: request to sign up for a new account;</li> <li>ACCOUNT.RESET_PASSWORD: request to reset the password, usually by verifying identity through email or SMS and then setting a new password;</li> <li>ACCOUNT.UPDATE: request to modify account association information, such as phone number, email, payment card number, shipping address, etc.;</li> <li>ASSET.CHECK_GIFTCARD_BALANCE: request to query the gift card balance by card number and other information;</li> <li>ASSET.CHECK_LOYALTY_POINTS: request to query the account point balance;</li> <li>ASSET.REDEEM_CODE: request to exchange rights and interests using a redemption code;</li> <li>BROWSE.QUERY: request for in-site search of products or services;</li> <li>PAYMENT.ADD_TO_CART: request to add merchandise to the shopping cart;</li> <li>PAYMENT.GET_METHODS: request to obtain the list of payment methods bound to the account;</li> <li>PAYMENT.MAKE_PAYMENT: request to submit a payment, settlement, or fund transfer.</li> </ul>
+	RequestPurpose *string `json:"RequestPurpose,omitnil,omitempty" name:"RequestPurpose"`
+
+	// <p>The location of the user identity in the request source, where key is replaced with the actual parameter name.</p><p>Valid values:</p><ul><li>http.request.cookies["key"]: Obtain the Cookie value named key from the Cookie;</li><li>http.request.headers["key"]: Obtain the header value named key from the request header;</li><li>http.request.uri.args["key"]: Obtain the parameter value named key from the URL query parameter.</li></ul>
+	UserIDSource *string `json:"UserIDSource,omitnil,omitempty" name:"UserIDSource"`
+
+	// <p>User Risk Level configuration.</p>
+	UserRiskProfile *UserRiskProfile `json:"UserRiskProfile,omitnil,omitempty" name:"UserRiskProfile"`
+}
+
 type AclCondition struct {
 	// Filters: 
 	// <li>`host`: Request domain name;</li>
@@ -372,16 +386,16 @@ type Action struct {
 }
 
 type AdaptiveFrequencyControl struct {
-	// Whether adaptive frequency control is enabled. valid values: <li>on: enable;</li> <li>off: disable.</li>.
+	// Whether adaptive frequency control is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// Rule ID of adaptive frequency control, returned as an output parameter.
+	// Rule ID of adaptive frequency control, returned only as an output parameter.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// The restriction level of adaptive frequency control. required when Enabled is on. valid values: <li>Loose: Loose</li><li>Moderate: Moderate</li><li>Strict: Strict</li>.
+	// The limitation level of adaptive frequency control. This field is required when Enabled is on. Valid values: <li>Loose: loose;</li><li>Moderate: moderate;</li><li>Strict: strict.</li>
 	Sensitivity *string `json:"Sensitivity,omitnil,omitempty" name:"Sensitivity"`
 
-	// The handling method of adaptive frequency control. this field is required when Enabled is on. valid values for SecurityAction Name: <li>Monitor: observation;</li> <li>Deny: block;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.</li>.
+	// Handling method of adaptive frequency control. This field is required when Enabled is on. Supported values for SecurityAction Name: <li>Monitor: monitor;</li><li>Deny: block;</li><li>Challenge: challenge. ChallengeActionParameters.Name only supports JSChallenge.</li>
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
@@ -543,10 +557,10 @@ type AliasDomain struct {
 }
 
 type AllowActionParameters struct {
-	// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: <li>s: seconds, value ranges from 0 to 5.</li>.
+	// Minimum delayed response time. When configured as 0s, it means no delay and direct response. Supported units: <li>s: second, value ranges from 0 to 5.</li>
 	MinDelayTime *string `json:"MinDelayTime,omitnil,omitempty" name:"MinDelayTime"`
 
-	// Maximum delayed response time. supported units: <li>s: seconds, value ranges from 5 to 10.</li>.
+	// Maximum delayed response time. Supported units: <li>s: seconds, value range: 5–10.</li>
 	MaxDelayTime *string `json:"MaxDelayTime,omitnil,omitempty" name:"MaxDelayTime"`
 }
 
@@ -823,30 +837,30 @@ type AuthenticationParameters struct {
 }
 
 type BandwidthAbuseDefense struct {
-	// Whether bandwidth abuse protection (applicable to chinese mainland only) is enabled. valid values: <li>on: enabled;</li> <li>off: disabled.</li>.
+	// Whether bandwidth abuse protection (only applicable to the Chinese mainland) is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// Rule ID of traffic anti-fraud, returned as an output parameter.
+	// Rule ID for bandwidth abuse protection. Returned as an output parameter only.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Bandwidth abuse protection (applicable to chinese mainland) handling method. required when Enabled is on. valid values for SecurityAction Name: <li>Monitor: observe;</li> <li>Deny: block;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.</li>.
+	// Handling method for bandwidth abuse protection (applicable to Chinese mainland only). This field is required when Enabled is on. Supported values for SecurityAction Name: <li>Monitor: monitor;</li><li>Deny: block;</li><li>Challenge: challenge. ChallengeActionParameters.Name only supports JSChallenge.</li>
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
 type BasicBotSettings struct {
-	// Client IP source IDC configuration, used for handling access requests from client ips in idcs (data centers). such source requests are not directly accessed by mobile terminals or browser-side.
+	// Source IDC configuration of the client IP, used for handling access requests from client IPs in IDCs (data centers). This type of source request is not directly accessed from a mobile terminal or browser side.
 	SourceIDC *SourceIDC `json:"SourceIDC,omitnil,omitempty" name:"SourceIDC"`
 
-	// Search engine crawler configuration, used to handle requests from search engine crawlers. the IP, User-Agent, or rDNS results of such requests match known search engine crawlers.
+	// Search engine crawler configuration, used for handling requests from search engine crawlers. The IP, User-Agent, or rDNS results of such requests match known search engine crawlers.
 	SearchEngineBots *SearchEngineBots `json:"SearchEngineBots,omitnil,omitempty" name:"SearchEngineBots"`
 
-	// Commercial or open-source tool UA feature configuration (original UA feature rule), used to handle access requests from known commercial or open-source tools. the User-Agent header of such requests complies with known commercial or open-source tool features.
+	// UA feature configuration for commercial or open-source tools (formerly UA feature rules), used for handling access requests from known commercial or open-source tools. The User-Agent header of such requests matches the features of known commercial or open-source tools.
 	KnownBotCategories *KnownBotCategories `json:"KnownBotCategories,omitnil,omitempty" name:"KnownBotCategories"`
 
-	// Threat intelligence database (originally client profile analysis) configuration, used for handling client ips with specific risk characteristics in recent access behavior.
+	// IP threat intelligence database (formerly client profile analysis) configuration, used for handling client IP addresses with specific risk characteristics in recent access behavior.
 	IPReputation *IPReputation `json:"IPReputation,omitnil,omitempty" name:"IPReputation"`
 
-	// Specifies the configuration for Bot intelligent analysis.
+	// Specific configuration for Bot intelligent analysis.
 	BotIntelligence *BotIntelligence `json:"BotIntelligence,omitnil,omitempty" name:"BotIntelligence"`
 }
 
@@ -1130,7 +1144,7 @@ func (r *BindZoneToPlanResponse) FromJsonString(s string) error {
 }
 
 type BlockIPActionParameters struct {
-	// Penalty duration for `BlockIP`. Units: <li>`s`: second, value range 1-120;</li> <li>`m`: minute, value range 1-120;</li> <li>`h`: hour, value range 1-48.</li>.
+	// Penalty duration for blocked IPs. Supported units: <li>s: second, value ranges from 1 to 120;</li><li>m: minute, value ranges from 1 to 120;</li><li>h: hour, value ranges from 1 to 48.</li>
 	Duration *string `json:"Duration,omitnil,omitempty" name:"Duration"`
 }
 
@@ -1175,16 +1189,16 @@ type BotExtendAction struct {
 }
 
 type BotIntelligence struct {
-	// Specifies the switch for Bot intelligent analysis configuration. valid values:.
+	// Specific configuration switch for Bot intelligent analysis. Valid values:
 	// 
-	// on: enabled.
-	// off: disabled.
+	// on: enable;
+	// off: Disable.
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// Rule ID of Bot intelligent analysis, returned as an output parameter.
+	// Rule ID of Bot intelligent analysis, returned only as an output parameter.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Based on client and request features, divides request sources into human requests, legitimate Bot requests, suspected Bot requests, and high-risk Bot requests, and provides request handling options.
+	// Based on the client and request features, divide the request source into human requests, valid Bot requests, suspected Bot requests, and high-risk Bot requests, and provide request handling options.
 	BotRatings *BotRatings `json:"BotRatings,omitnil,omitempty" name:"BotRatings"`
 }
 
@@ -1216,60 +1230,60 @@ type BotManagedRule struct {
 }
 
 type BotManagement struct {
-	// Whether Bot management is enabled. valid values: <li>on: enabled;</li><li>off: disabled.</li>.
+	// Whether Bot management is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// Bot management custom rule combines various crawlers and request behavior characteristics to accurately define bots and configure customized handling methods.
+	// Custom rule for Bot management combines various types of crawlers and request behavior characteristics to precisely define bots and configure customized handling methods.
 	CustomRules *BotManagementCustomRules `json:"CustomRules,omitnil,omitempty" name:"CustomRules"`
 
-	// Bot management basic configuration. takes effect on all domains associated with the policy. can be customized through CustomRules.
+	// Basic configuration of Bot management, which takes effect on all domains associated with the policy. It can be customized through CustomRules.
 	BasicBotSettings *BasicBotSettings `json:"BasicBotSettings,omitnil,omitempty" name:"BasicBotSettings"`
 
-	// Definition list of client authentication rules. this feature is in beta test. submit a ticket if you need to use it.
+	// Definition list of client authentication rules. This feature is in beta test. If needed, submit a ticket.
 	ClientAttestationRules *ClientAttestationRules `json:"ClientAttestationRules,omitnil,omitempty" name:"ClientAttestationRules"`
 
-	// Configures browser spoofing identification rules (formerly active feature detection rule). sets the response page range for JavaScript injection, browser check options, and handling method for non-browser clients.
+	// Configure browser spoofing identification rules (formerly active feature detection rules). Set the response page range for JavaScript injection, browser check options, and handling method for non-browser clients.
 	BrowserImpersonationDetection *BrowserImpersonationDetection `json:"BrowserImpersonationDetection,omitnil,omitempty" name:"BrowserImpersonationDetection"`
 }
 
 type BotManagementActionOverrides struct {
-	// Specific item under Bot rules used to rewrite the configuration content of this single rule. refer to the returned message from the DescribeBotManagedRules API for detailed information corresponding to Ids.
+	// Specific item under the Bot rule group, used to rewrite the configuration content of this individual rule item. For detailed information corresponding to the Ids, see the returned message of the DescribeBotManagedRules API.
 	Ids []*string `json:"Ids,omitnil,omitempty" name:"Ids"`
 
-	// Specifies the handling action for Bot rule items in Ids. valid values for the Name parameter in SecurityAction: <li>Deny: block;</li><li>Monitor: observe;</li><li>Disabled: Disabled, disable the specified rule;</li><li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li><li>Allow: pass (only for Bot basic feature management).</li>.
+	// Handling action for the Bot rule item specified in Ids. Supported values for SecurityAction Name: <li>Deny: block;</li><li>Monitor: observe;</li><li>Disabled: not enabled, disable the specified rule;</li><li>Challenge: challenge. ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li><li>Allow: allow (only for basic feature management of Bot).</li>
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
 type BotManagementCustomRule struct {
-	// The ID of a Bot custom rule. different rule configuration operations are supported by rule ID: <li><b>add</b> a new rule: leave the ID empty or do not specify the ID parameter.</li> <li><b>modify</b> an existing rule: specify the rule ID that needs to be updated/modified.</li> <li><b>delete</b> an existing rule: existing Rules not included in the Rules list under the BotManagementCustomRules parameter will be deleted.</li>.
+	// <p>ID of the bot custom rule.<br>Different rule configuration operations are supported via the rule ID:<br> <li> <b>Add</b> a new rule: leave the ID empty or do not specify the ID parameter;</li><li><b>Modify</b> an existing rule: specify the rule ID that needs to be updated/modified;</li><li><b>Delete</b> an existing rule: existing rules not included in the Rules list in the BotManagementCustomRules parameter will be deleted.</li></p>
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Specifies the name of the Bot custom rule.
+	// <p>Name of the Bot custom rule.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Whether the custom Bot rule is enabled. valid values: <li>on: enabled;</li><li>off: disabled.</li>.
+	// <p>Whether the custom Bot rule is enabled. Valid values: <li>on: enable;</li><li>off: disable.</li></p>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// Priority of custom Bot rules. value range: 1–100. default value is 50.
+	// <p>Priority of Bot custom rules, ranging from 1 to 100, with a default value of 50.</p>
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
-	// Specifies the specific content of the Bot custom rule, which must comply with expression grammar. for detailed specifications, refer to the product document.
+	// <p>For specific content of the Bot custom rule, it must comply with the expression grammar. For detailed specifications, see the product document.</p>
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
-	// The handling method for Bot custom rules. valid values: <li>Monitor: observation;</li><li>Deny: block, where DenyActionParameters.Name supports Deny and ReturnCustomPage;</li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge;</li><li>Redirect: Redirect to URL.</li>.
+	// <p>List of safe execution actions by weight assignment.</p>
 	Action []*SecurityWeightedAction `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
 type BotManagementCustomRules struct {
-	// List of Bot custom Rules. when using ModifySecurityPolicy to modify Web protection configuration: <br> <li> if Rules in SecurityPolicy.BotManagement.CustomRules is not specified or parameter length of Rules is zero: clear all Bot custom rule configurations.</li> <li> if CustomRules in SecurityPolicy.BotManagement parameters is unspecified: keep existing Bot custom rule configurations and do not modify them.</li>.
+	// List of Bot custom Rules. When using ModifySecurityPolicy to modify the Web protection configuration: <br> <li> If the Rules parameter in SecurityPolicy.BotManagement.CustomRules is not specified, or the Rules parameter length is zero: clear all Bot custom rule configurations.</li> <li> If the CustomRules parameter value is not specified in the SecurityPolicy.BotManagement parameters: keep the existing Bot custom rule configuration without modification.</li>
 	Rules []*BotManagementCustomRule `json:"Rules,omitnil,omitempty" name:"Rules"`
 }
 
 type BotManagementLite struct {
-	// Configuration of the human-machine verification page.
+	// Configuration of the CAPTCHA page.
 	CAPTCHAPageChallenge *CAPTCHAPageChallenge `json:"CAPTCHAPageChallenge,omitnil,omitempty" name:"CAPTCHAPageChallenge"`
 
-	// AI crawler detection configuration.
+	// Specific configuration for AI crawler detection.
 	AICrawlerDetection *AICrawlerDetection `json:"AICrawlerDetection,omitnil,omitempty" name:"AICrawlerDetection"`
 }
 
@@ -1296,33 +1310,33 @@ type BotPortraitRule struct {
 }
 
 type BotRatings struct {
-	// Execution action for malicious Bot requests. valid values for the Name parameter in SecurityAction: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>Allow: pass;</li> <li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>.
+	// Execution action for malicious Bot requests. Supported values for the Name parameter of SecurityAction: <li>Deny: Block;</li><li>Monitor: Observe;</li><li>Allow: Allow;</li><li>Challenge: Challenge. Among them, ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>
 	HighRiskBotRequestsAction *SecurityAction `json:"HighRiskBotRequestsAction,omitnil,omitempty" name:"HighRiskBotRequestsAction"`
 
-	// The execution action for suspected Bot requests. valid values for the Name parameter in SecurityAction: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>Allow: pass;</li> <li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>.
+	// Execution action for suspected Bot requests. Supported values for the Name parameter of SecurityAction: <li>Deny: Block;</li><li>Monitor: Observe;</li><li>Allow: Allow;</li><li>Challenge: Challenge. The ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>
 	LikelyBotRequestsAction *SecurityAction `json:"LikelyBotRequestsAction,omitnil,omitempty" name:"LikelyBotRequestsAction"`
 
-	// Execution action for friendly Bot request. SecurityAction Name parameter supports: <li>Deny: block;</li><li>Monitor: observe;</li><li>Allow: pass;</li><li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>.
+	// Execution action of friendly Bot requests. The Name parameter of SecurityAction supports the following values: <li>Deny: block;</li><li>Monitor: observe;</li><li>Allow: Allow;</li><li>Challenge: Challenge. The ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>
 	VerifiedBotRequestsAction *SecurityAction `json:"VerifiedBotRequestsAction,omitnil,omitempty" name:"VerifiedBotRequestsAction"`
 
-	// Execution action for a normal Bot request. valid values for the Name parameter in SecurityAction: <li>Allow: pass.</li>.
+	// Execution action for normal Bot requests. Valid values of SecurityAction Name: <li>Allow: Allow.</li>
 	HumanRequestsAction *SecurityAction `json:"HumanRequestsAction,omitnil,omitempty" name:"HumanRequestsAction"`
 }
 
 type BotSessionValidation struct {
-	// Whether to update Cookie and validate. valid values: <li>on: update Cookie and validate;</li> <li>off: verify only.</li>.
+	// Whether to update the Cookie and verify. Valid values: <li>on: update the Cookie and verify;</li><li>off: verify only.</li>
 	IssueNewBotSessionCookie *string `json:"IssueNewBotSessionCookie,omitnil,omitempty" name:"IssueNewBotSessionCookie"`
 
-	// Specifies the trigger threshold for updating and validating cookies. valid only when IssueNewBotSessionCookie is set to on.
+	// Update threshold for cookie update and validation. Valid only when IssueNewBotSessionCookie is on.
 	MaxNewSessionTriggerConfig *MaxNewSessionTriggerConfig `json:"MaxNewSessionTriggerConfig,omitnil,omitempty" name:"MaxNewSessionTriggerConfig"`
 
-	// Execution action when no Cookie is carried or the Cookie expired. valid values for the Name parameter in SecurityAction: <li>Deny: block, where Stall can be configured in DenyActionParameters;</li><li>Monitor: observe;</li><li>Allow: respond after wait, where MinDelayTime and MaxDelayTime must be configured in AllowActionParameters.</li>.
+	// Execution action without a Cookie or with an expired Cookie. Supported Name values for SecurityAction: <li>Deny: block. DenyActionParameters supports Stall configuration.</li><li>Monitor: observe.</li><li>Allow: respond after waiting. AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>
 	SessionExpiredAction *SecurityAction `json:"SessionExpiredAction,omitnil,omitempty" name:"SessionExpiredAction"`
 
-	// Execution action for invalid Cookie. valid values for the Name parameter in SecurityAction: <li>Deny: block, where the DenyActionParameters supports Stall configuration;</li><li>Monitor: observe;</li><li>Allow: respond after wait, where AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>.
+	// Execution action for invalid Cookie. The Name parameter of SecurityAction supports the following values: <li>Deny: block. DenyActionParameters supports the Stall configuration.</li><li>Monitor: observe.</li><li>Allow: respond after waiting. AllowActionParameters requires the MinDelayTime and MaxDelayTime configurations.</li>
 	SessionInvalidAction *SecurityAction `json:"SessionInvalidAction,omitnil,omitempty" name:"SessionInvalidAction"`
 
-	// Specifies the session rate and periodic feature verification configuration.
+	// Specific configuration for session rate and periodic feature verification.
 	SessionRateControl *SessionRateControl `json:"SessionRateControl,omitnil,omitempty" name:"SessionRateControl"`
 }
 
@@ -1389,37 +1403,37 @@ type BotUserRule struct {
 }
 
 type BrowserImpersonationDetection struct {
-	// List of browser spoofing identification Rules. when using ModifySecurityPolicy to modify Web protection configuration: <br> <li>if Rules parameter in SecurityPolicy.BotManagement.BrowserImpersonationDetection is not specified or parameter length is zero: clear all browser spoofing identification rule configurations.</li> <li>if BrowserImpersonationDetection parameter value is unspecified in SecurityPolicy.BotManagement parameters: keep existing browser spoofing identification rule configurations without modification.</li>.
+	// List of browser spoofing identification rules. When using ModifySecurityPolicy to modify Web protection configuration: <br> <li> If the Rules parameter in SecurityPolicy.BotManagement.BrowserImpersonationDetection is not specified, or the parameter length is zero: clear all browser spoofing identification rule configurations.</li> <li> If the BrowserImpersonationDetection parameter value is not specified in the SecurityPolicy.BotManagement parameter: keep the existing browser spoofing identification rule configuration without modification.</li>
 	Rules []*BrowserImpersonationDetectionRule `json:"Rules,omitnil,omitempty" name:"Rules"`
 }
 
 type BrowserImpersonationDetectionAction struct {
-	// Configures Cookie verification and session tracking.
+	// Cookie verification and session tracking configuration.
 	BotSessionValidation *BotSessionValidation `json:"BotSessionValidation,omitnil,omitempty" name:"BotSessionValidation"`
 
-	// Configures client behavior validation.
+	// Client behavior validation configuration.
 	ClientBehaviorDetection *ClientBehaviorDetection `json:"ClientBehaviorDetection,omitnil,omitempty" name:"ClientBehaviorDetection"`
 }
 
 type BrowserImpersonationDetectionRule struct {
-	// Browser spoofing identification rule ID. rule ID supports different rule configuration operations: <li> <b>add</b> a new rule: ID is empty or without specifying the ID parameter;</li> <li> <b>modify</b> an existing rule: specify the rule ID that needs to be updated/modified;</li> <li> <b>delete</b> an existing rule: existing Rules not included in the Rules list of the BrowserImpersonationDetection parameter will be deleted.</li>.
+	// ID of the browser spoofing identification rule.<br>You can perform different rule configuration operations by rule ID:<br> <li> <b>Add</b> a new rule: leave the ID empty or unspecified;</li><li><b>Modify</b> an existing rule: specify the rule ID that needs to be updated/modified;</li><li><b>Delete</b> an existing rule: existing rules not included in the Rules list in the BrowserImpersonationDetection parameter will be deleted.</li>
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Specifies the name of the browser spoofing identification rule.
+	// Name of the browser spoofing identification rule.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Whether browser spoofing detection is enabled. valid values: <li>on: enabled;</li><li>off: disabled.</li>.
+	// Whether to enable the browser forgery identification rule. Valid values: <li>on: enable;</li><li>off: disable.</li>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// Specifies the specific content of browser spoofing identification rules, which only support configuration of request Method (Method), request Path (Path), and request URL, and must comply with expression grammar. for detailed specifications, please refer to the product document.
+	// Specific content of the browser spoofing identification rule. It only supports the configuration of request Method, request Path, and request URL, which must comply with expression syntax. For detailed specifications, see the product document.
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
-	// Describes the handling method for browser spoofing identification rules, including Cookie verification, session tracking configuration, and client behavior validation configuration.
+	// Handling method for browser spoofing identification rules, including Cookie verification, session tracking configuration, and client behavior validation configuration.
 	Action *BrowserImpersonationDetectionAction `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
 type CAPTCHAPageChallenge struct {
-	// Whether the human-machine verification page is enabled. valid values: <li>on: enabled;</li> <li>off: disabled.</li>.
+	// Whether human-machine verification is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 }
 
@@ -1686,7 +1700,7 @@ type CertificateInfo struct {
 }
 
 type ChallengeActionParameters struct {
-	// <p>Specific challenge action for safe execution.</p><p>Enumeration values:</p><ul><li>InterstitialChallenge: interstitial challenge;</li><li>InlineChallenge: embedded challenge (SDK challenge);</li><li>ManagedChallenge: managed challenge. Applicable only to HTML web pages directly accessed by users through a browser. Verification cannot be completed in scenarios such as API interfaces, XHR/AJAX async requests within web pages, mobile apps, and command line tools. Do not configure it;</li><li>JSChallenge: JavaScript challenge. Applicable only to HTML web pages directly accessed by users through a browser. Verification cannot be completed in scenarios such as API interfaces, XHR/AJAX async requests within web pages, mobile apps, and command line tools. Do not configure it.</li></ul>
+	// <p>Specific challenge action for safe execution.</p><p>Enumeration values:</p><ul><li>InterstitialChallenge: Interstitial challenge;</li><li>InlineChallenge: Embedded challenge (SDK challenge);</li><li>ManagedChallenge: Managed challenge. Applicable only to HTML web pages directly accessed by users through a browser. API interfaces, XHR/AJAX asynchronous requests within web pages, mobile apps, command line tools, and other scenarios cannot complete the verification. Do not configure;</li><li>JSChallenge: JavaScript challenge. Applicable only to HTML web pages directly accessed by users through a browser. API interfaces, XHR/AJAX asynchronous requests within web pages, mobile apps, command line tools, and other scenarios cannot complete the verification. Do not configure.</li></ul>
 	ChallengeOption *string `json:"ChallengeOption,omitnil,omitempty" name:"ChallengeOption"`
 
 	// <p>Time interval for repeating the challenge. This field is required when ChallengeOption is InterstitialChallenge/InlineChallenge. Default value: 300s. Supported units: <li>s: second, value ranges from 1 to 60;</li><li>m: minute, value ranges from 1 to 60;</li><li>h: hour, value ranges from 1 to 24.</li></p>
@@ -1846,33 +1860,36 @@ type CheckRegionHealthStatus struct {
 }
 
 type ClientAttestationRule struct {
-	// Client authentication rule ID. supported rule configuration operations by rule ID: <li> <b>add</b> a new rule: leave the ID empty or do not specify the ID parameter.</li> <li> <b>modify</b> an existing rule: specify the rule ID that needs to be updated/modified.</li> <li> <b>delete</b> an existing rule: existing rules not included in the ClientAttestationRule list under BotManagement parameters will be deleted.</li>.
+	// <p>ID of the client authentication rule.<br>Different rule configuration operations are supported by rule ID:<br> <li> <b>Add</b> a new rule: leave ID empty or do not specify the ID parameter;</li><li> <b>Modify</b> an existing rule: specify the rule ID to be updated/modified;</li><li> <b>Delete</b> an existing rule: existing rules not included in the ClientAttestationRule list in the BotManagement parameter will be deleted.</li></p>
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Specifies the name of the client authentication rule.
+	// <p>Name of the client authentication rule.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Whether the rule is enabled. valid values: <li>`on`: enable</li> <li>`off`: disable</li>.
+	// <p>Whether the rule is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li></p>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// Priority of rules. a smaller value indicates higher priority execution. value range: 0-100. default value: 0.
+	// <p>Priority of rules. A smaller value indicates higher priority. Value range: 0-100. Default value: 0.</p>
 	Priority *uint64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
-	// The rule content must comply with expression grammar. for details, see the product document.
+	// <p>The specific content of the rule must comply with the expression syntax. For detailed specifications, see the product document.</p>
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
-	// Specifies the client authentication option ID.
+	// <p>Client authentication option ID.</p>
 	AttesterId *string `json:"AttesterId,omitnil,omitempty" name:"AttesterId"`
 
-	// Client device configuration. if the DeviceProfiles parameter value is not specified in the ClientAttestationRules parameter, keep the existing client device configuration and do not modify it.
+	// <p>Handling method when client authentication fails. SecurityAction.Name values are as follows:</p><ul><li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li><li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li><li>Monitor: observe;</li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge, ManagedChallenge, InterstitialChallenge, and InlineChallenge;</li><li>Redirect: redirect to a URL.</li></ul>
+	InvalidAttestationAction *SecurityAction `json:"InvalidAttestationAction,omitnil,omitempty" name:"InvalidAttestationAction"`
+
+	// <p>Client device configuration. If the DeviceProfiles parameter value is not specified in the ClientAttestationRules parameter: keep the existing client device configuration without modification.</p>
 	DeviceProfiles []*DeviceProfile `json:"DeviceProfiles,omitnil,omitempty" name:"DeviceProfiles"`
 
-	// Handling method for failed client authentication. valid values for SecurityAction Name: <li>Deny: block;</li> <li>Monitor: observation;</li> <li>Redirect: redirection;</li> <li>Challenge: Challenge.</li> default value: Monitor.
-	InvalidAttestationAction *SecurityAction `json:"InvalidAttestationAction,omitnil,omitempty" name:"InvalidAttestationAction"`
+	// <p>Account protection configuration.</p>
+	AccountProtectionSettings *AccountProtectionSettings `json:"AccountProtectionSettings,omitnil,omitempty" name:"AccountProtectionSettings"`
 }
 
 type ClientAttestationRules struct {
-	// List of client authentication. when using ModifySecurityPolicy to modify Web protection configuration: <li> if Rules in SecurityPolicy.BotManagement.ClientAttestationRules is not specified or the parameter length of Rules is zero: clear all client authentication rule configuration. </li> <li> if ClientAttestationRules in SecurityPolicy.BotManagement parameters is unspecified: keep existing client authentication rule configuration and do not modify. </li>.
+	// List of client authentication. When using ModifySecurityPolicy to modify Web protection configuration: <li> If the Rules parameter in SecurityPolicy.BotManagement.ClientAttestationRules is not specified, or the Rules parameter length is zero: clear all client authentication rule configurations.</li> <li> If the ClientAttestationRules parameter value is not specified in the SecurityPolicy.BotManagement parameter: keep the existing client authentication rule configuration without modification.</li>
 	Rules []*ClientAttestationRule `json:"Rules,omitnil,omitempty" name:"Rules"`
 }
 
@@ -1909,36 +1926,36 @@ type ClientAttester struct {
 }
 
 type ClientBehaviorDetection struct {
-	// Specifies the proof-of-work strength. valid values: <li>low: low;</li><li>medium: medium;</li><li>high: high.</li>.
+	// Proof-of-work strength. Valid values: <li>low: Low;</li><li>medium: Medium;</li><li>high: High.</li>
 	CryptoChallengeIntensity *string `json:"CryptoChallengeIntensity,omitnil,omitempty" name:"CryptoChallengeIntensity"`
 
-	// Specifies the execution mode for client behavior verification. valid values: <li>0ms: immediate execution;</li> <li>100ms: delay 100ms execution;</li> <li>200ms: delay 200ms execution;</li> <li>300ms: delay 300ms execution;</li> <li>400ms: delay 400ms execution;</li> <li>500ms: delay 500ms execution;</li> <li>600ms: delay 600ms execution;</li> <li>700ms: delay 700ms execution;</li> <li>800ms: delay 800ms execution;</li> <li>900ms: delay 900ms execution;</li> <li>1000ms: delay 1000ms execution.</li>.
+	// Execution mode of client behavior validation. Valid values: <li>0ms: immediately execute;</li><li>100ms: execute after a 100ms delay;</li><li>200ms: execute after a 200ms delay;</li><li>300ms: execute after a 300ms delay;</li><li>400ms: execute after a 400ms delay;</li><li>500ms: execute after a 500ms delay;</li><li>600ms: execute after a 600ms delay;</li><li>700ms: execute after a 700ms delay;</li><li>800ms: execute after an 800ms delay;</li><li>900ms: execute after a 900ms delay;</li><li>1000ms: execute after a 1000ms delay.</li>
 	CryptoChallengeDelayBefore *string `json:"CryptoChallengeDelayBefore,omitnil,omitempty" name:"CryptoChallengeDelayBefore"`
 
-	// Time window for trigger threshold statistics. valid values: <li>5s: within 5 seconds;</li><li>10s: within 10 seconds;</li><li>15s: within 15 seconds;</li><li>30s: within 30 seconds;</li><li>60s: within 60 seconds;</li><li>5m: within 5 minutes;</li><li>10m: within 10 minutes;</li><li>30m: within 30 minutes;</li><li>60m: within 60 minutes.</li>.
+	// Time window for trigger threshold statistics. Valid values: <li>5s: within 5 seconds;</li><li>10s: within 10 seconds;</li><li>15s: within 15 seconds;</li><li>30s: within 30 seconds;</li><li>60s: within 60 seconds;</li><li>5m: within 5 minutes;</li><li>10m: within 10 minutes;</li><li>30m: within 30 minutes;</li><li>60m: within 60 minutes.</li>
 	MaxChallengeCountInterval *string `json:"MaxChallengeCountInterval,omitnil,omitempty" name:"MaxChallengeCountInterval"`
 
-	// Trigger threshold cumulative count. value range: 1-100000000.
+	// Cumulative count of trigger threshold statistics. Value range: 1-100000000.
 	MaxChallengeCountThreshold *int64 `json:"MaxChallengeCountThreshold,omitnil,omitempty" name:"MaxChallengeCountThreshold"`
 
-	// Execution action when client-side javascript is not enabled (test not completed). valid values for SecurityAction Name: <li>Deny: block, where Stall configuration is supported in DenyActionParameters;</li><li>Monitor: observe;</li><li>Allow: respond after waiting, where MinDelayTime and MaxDelayTime configuration is required in AllowActionParameters.</li>.
+	// Execution action when client-side JavaScript is not enabled (test not completed). Supported values for SecurityAction Name: <li>Deny: block. DenyActionParameters supports Stall configuration;</li><li>Monitor: observe;</li><li>Allow: respond after waiting. AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>
 	ChallengeNotFinishedAction *SecurityAction `json:"ChallengeNotFinishedAction,omitnil,omitempty" name:"ChallengeNotFinishedAction"`
 
-	// The execution action for client-side detection timeout. valid values for the Name parameter in SecurityAction: <li>Deny: block, where Stall can be configured in DenyActionParameters;</li> <li>Monitor: observe;</li> <li>Allow: respond after wait, where MinDelayTime and MaxDelayTime must be configured in AllowActionParameters.</li>.
+	// Execution action for client-side detection timeout. Supported values of SecurityAction Name: <li>Deny: block, where DenyActionParameters supports Stall configuration;</li><li>Monitor: observe;</li><li>Allow: respond after waiting, where AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>
 	ChallengeTimeoutAction *SecurityAction `json:"ChallengeTimeoutAction,omitnil,omitempty" name:"ChallengeTimeoutAction"`
 
-	// The execution action of the Bot client. valid values for the Name parameter in SecurityAction: <li>Deny: block, where the Stall configuration is supported in DenyActionParameters;</li><li>Monitor: observation;</li><li>Allow: respond after wait, where MinDelayTime and MaxDelayTime configurations are required in AllowActionParameters.</li>.
+	// Execution action of the Bot client. Supported values of Name in SecurityAction: <li>Deny: block, where Stall configuration is supported in DenyActionParameters;</li><li>Monitor: observe;</li><li>Allow: respond after waiting, where MinDelayTime and MaxDelayTime configuration is required in AllowActionParameters.</li>
 	BotClientAction *SecurityAction `json:"BotClientAction,omitnil,omitempty" name:"BotClientAction"`
 }
 
 type ClientFiltering struct {
-	// Whether intelligent client filtering is enabled. valid values: <li>on: enable;</li> <li>off: disable.</li>.
+	// Whether intelligent client filtering is enabled. Valid values: <li>on: Enable;</li><li>off: Disable.</li>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// Rule ID of intelligent client filtering, returned as an output parameter.
+	// Rule ID of intelligent client filtering. Output only.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// The handling method of intelligent client filtering. when Enabled is on, this field is required. the Name parameter of SecurityAction supports: <li>Monitor: observation;</li> <li>Deny: block;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.</li>.
+	// Handling method for intelligent client filtering. This field is required when Enabled is on. Supported values for SecurityAction Name: <li>Monitor: observe;</li><li>Deny: block;</li><li>Challenge: challenge, where ChallengeActionParameters.Name only supports JSChallenge.</li>
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
@@ -6040,30 +6057,30 @@ type CustomField struct {
 }
 
 type CustomRule struct {
-	// <p>Custom rule name.</p>
+	// <p>Name of the custom rule.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <p>The specific content of a custom rule must comply with the expression syntax. For detailed specifications, refer to the <a href="https://www.tencentcloud.com/document/product/1552/125343?from_cn_redirect=1">product document</a>.</p>
+	// <p>The specific content of the custom rule must comply with the expression grammar. For detailed specifications, see the <a href="https://www.tencentcloud.com/document/product/1552/125343?from_cn_redirect=1">product document</a>.</p>
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
-	// <p>Handling action of the custom rule. SecurityAction.Name value range is as follows:</p><ul><li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li><li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li><li>Monitor: observe;</li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li><li>Redirect: redirect to a URL.</li></ul>
+	// <p>Handling action of the custom rule. SecurityAction.Name values are as follows:</p><ul><li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li><li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li><li>Monitor: observe;</li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li><li>Redirect: redirect to a URL.</li></ul>
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 
-	// <p>Whether the custom rule is enabled. Valid values: <ul><li>on: enabled;</li><li>off: disabled.</li></ul></p>
+	// <p>Whether the custom rule is enabled. Valid values: <ul><li>on: Enable;</li><li>off: Disable.</li></ul></p>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// <p>ID of the custom rule. The rule ID supports different rule configuration operations: <ul><li>Add a new rule: leave the ID empty or do not specify the ID parameter;</li><li>Modify an existing rule: specify the rule ID that needs to be updated/modified;</li><li>Delete an existing rule: existing rules not included in the Rules list in the CustomRules parameter will be deleted.</li></ul></p>
+	// <p>ID of the custom rule. You can perform different rule configuration operations by rule ID: <ul><li>Add a new rule: leave the ID empty or do not specify the ID parameter;</li><li>Modify an existing rule: specify the rule ID that needs to be updated/modified;</li><li>Delete an existing rule: existing rules not included in the Rules list in the CustomRules parameter will be deleted.</li></ul></p>
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// <p>Type of the custom rule. Valid values: <ul><li>BasicAccessRule: basic access control;</li><li>PreciseMatchRule: exact matching rule;</li><li>ManagedAccessRule: expert customized rule, supported only for output parameters.</li></ul>Note: If RuleType is not specified, it defaults to <code>PreciseMatchRule</code>.</p>
 	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
 
-	// <p>Priority of custom rules. Value range: 0-100. Default value: 0. Only exact matching rules (<code>PreciseMatchRule</code>) are supported.</p>
+	// <p>Priority of custom rules, ranging from 0 to 100, with a default value of 0. Only exact matching rules (<code>PreciseMatchRule</code>) are supported.</p>
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 }
 
 type CustomRules struct {
-	// The custom rule. <br>when modifying the Web protection configuration using ModifySecurityPolicy: <br> - if the Rules parameter is not specified or the parameter length of Rules is zero: clear all custom rule configurations. <br> - if the Rules parameter is not specified: keep the existing custom rule configuration without modification.
+	// Definition list of custom rules.<br>When using ModifySecurityPolicy to modify Web protection configuration: <br> - If the Rules parameter is not specified, or the parameter length of Rules is zero: clear ALL custom rule configurations.<br> - If the CustomRules parameter value is not specified in the SecurityPolicy parameter: keep the existing custom rule configuration and do not modify it.
 	Rules []*CustomRule `json:"Rules,omitnil,omitempty" name:"Rules"`
 }
 
@@ -6237,10 +6254,10 @@ type DNSPodDetail struct {
 }
 
 type DefaultDenySecurityActionParameters struct {
-	// The managed rule uses the default disposition action configuration. DenyActionParameters supported configuration parameters: <li>ReturnCustomPage: Whether to use a custom page.</li><li>ResponseCode: Status code of the custom page.</li><li>ErrorPageId: PageId of the custom page.</li>
+	// Default interception disposition action configuration for managed rules. Supported configuration parameters of DenyActionParameters: <li>ReturnCustomPage: whether to use a custom page.</li><li>ResponseCode: status code of the custom page.</li><li>ErrorPageId: PageId of the custom page.</li>
 	ManagedRules *DenyActionParameters `json:"ManagedRules,omitnil,omitempty" name:"ManagedRules"`
 
-	// Security protection rules other than managed rules (custom rule, rate limit, and Bot management function) default to disposition action configuration. DenyActionParameters supported configuration parameters: <li>ReturnCustomPage: Whether to use custom page.</li> <li>ResponseCode: Status code of custom pages.</li> <li>ErrorPageId: PageId of custom pages.</li>
+	// Security protection rules other than managed rules (custom rules, rate limit, and Bot management function) default interception disposition action configuration. Configuration parameters supported by DenyActionParameters: <li>ReturnCustomPage: whether to use a custom page.</li><li>ResponseCode: status code of the custom page.</li><li>ErrorPageId: PageId of the custom page.</li>
 	OtherModules *DenyActionParameters `json:"OtherModules,omitnil,omitempty" name:"OtherModules"`
 }
 
@@ -8145,40 +8162,34 @@ type DeliveryCondition struct {
 }
 
 type DenyActionParameters struct {
-	// Specifies whether to extend the ban on the source IP. valid values.
+	// Whether to extend the block on the source IP. Valid values:
 	// <li>`on`: Enable;</li>
-	// 
 	// <li>off: Disable.</li>
-	// 
-	// After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated.
-	// Note: this option cannot intersect with ReturnCustomPage or Stall.
+	// After enabled, the client IP that triggers the rule will be continuously blocked. When this option is enabled, the BlockIpDuration parameter must be specified simultaneously.
+	// Note: This option cannot intersect with ReturnCustomPage or Stall.
 	BlockIp *string `json:"BlockIp,omitnil,omitempty" name:"BlockIp"`
 
-	// The ban duration when BlockIP is on.
+	// IP ban duration when BlockIP is on.
 	BlockIpDuration *string `json:"BlockIpDuration,omitnil,omitempty" name:"BlockIpDuration"`
 
-	// Specifies whether to use a custom page. valid values:.
+	// Whether to use custom pages. Valid values:
 	// <li>`on`: Enable;</li>
-	// 
 	// <li>off: Disable.</li>
-	// 
-	// Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously.
-	// Note: this option cannot intersect with the BlockIp or Stall option.
+	// Enabled. Use custom page content to intercept (respond to) requests. When this option is enabled, you must specify the ResponseCode and ErrorPageId parameters simultaneously.
+	// Note: This option cannot intersect with BlockIp or Stall.
 	ReturnCustomPage *string `json:"ReturnCustomPage,omitnil,omitempty" name:"ReturnCustomPage"`
 
 	// Status code of the custom page.
 	ResponseCode *string `json:"ResponseCode,omitnil,omitempty" name:"ResponseCode"`
 
-	// Specifies the page id of the custom page.
+	// PageId of the custom page.
 	ErrorPageId *string `json:"ErrorPageId,omitnil,omitempty" name:"ErrorPageId"`
 
-	// Specifies whether to suspend the request source without processing. valid values:.
+	// Whether to suspend requests from the request source without processing. Valid values:
 	// <li>`on`: Enable;</li>
-	// 
 	// <li>off: Disable.</li>
-	// 
-	// Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources.
-	// Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+	// Enabled. It no longer responds to requests in the current connection session and does not actively disconnect. When used for crawler counteraction, it consumes client connection resources.
+	// Note: This option cannot intersect with BlockIp or ReturnCustomPage.
 	Stall *string `json:"Stall,omitnil,omitempty" name:"Stall"`
 }
 
@@ -12421,14 +12432,14 @@ func (r *DescribeMultiPathGatewayResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeMultiPathGatewaySecretKeyRequestParams struct {
-	// Zone ID.
+	// <p>Site ID.</p>
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 type DescribeMultiPathGatewaySecretKeyRequest struct {
 	*tchttp.BaseRequest
 	
-	// Zone ID.
+	// <p>Site ID.</p>
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
@@ -12453,7 +12464,7 @@ func (r *DescribeMultiPathGatewaySecretKeyRequest) FromJsonString(s string) erro
 
 // Predefined struct for user
 type DescribeMultiPathGatewaySecretKeyResponseParams struct {
-	// Access key.
+	// <p>Access key.</p>
 	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -15802,19 +15813,19 @@ type DetectLengthLimitRule struct {
 }
 
 type DeviceProfile struct {
-	// Client device type. Valid values: <li>iOS;</li> <li>Android;</li> <li>WebView;</li> <li>WeChatMiniProgram.</li>
+	// <p>Client device type. Valid values: <li>iOS;</li><li>Android;</li><li>WebView;</li><li>WeChatMiniProgram.</li></p>
 	ClientType *string `json:"ClientType,omitnil,omitempty" name:"ClientType"`
 
-	// The minimum value to determine a request as high-risk ranges from 1–99. the larger the value, the higher the request risk, and the closer it resembles a request initiated by a Bot client. the default value is 50, corresponding to high-risk for values 51–100.
+	// <p>Minimum risk score for high-risk requests. A request is considered high-risk when its score is equal to or greater than this value.</p><p>Value range: [2, 99]</p><p>Default value: 50</p>
 	HighRiskMinScore *uint64 `json:"HighRiskMinScore,omitnil,omitempty" name:"HighRiskMinScore"`
 
-	// Handling method for high-risk requests. valid values for SecurityAction Name: <li>Deny: block;</li> <li>Monitor: observation;</li> <li>Redirect: redirection;</li> <li>Challenge: Challenge.</li> default value: Monitor.
+	// <p>Handling method for high-risk requests. Supported values for the Name parameter of SecurityAction: <li>Deny: Block;</li><li>Monitor: Observe;</li><li>Redirect: Redirection;</li><li>Challenge: Challenge.</li>Default value: Monitor.</p>
 	HighRiskRequestAction *SecurityAction `json:"HighRiskRequestAction,omitnil,omitempty" name:"HighRiskRequestAction"`
 
-	// Specifies the minimum value to determine a request as medium-risk. value range: 1–99. the larger the value, the higher the request risk, resembling requests initiated by a Bot client. default value: 15, corresponding to medium-risk for values 16–50.
+	// <p>The minimum risk score for a medium-risk request. When the score is equal to or greater than this value and less than HighRiskMinScore, it is determined as medium-risk. When it is below this value, it is determined as low risk.</p><p>Value range: [1, 98]</p><p>Default value: 15</p>
 	MediumRiskMinScore *uint64 `json:"MediumRiskMinScore,omitnil,omitempty" name:"MediumRiskMinScore"`
 
-	// Handling method for medium-risk requests. SecurityAction Name parameter supports: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>Redirect: Redirect;</li> <li>Challenge: Challenge.</li> default value is Monitor.
+	// <p>Handling method for medium risk requests. Supported values for the Name of SecurityAction: <li>Deny: block;</li><li>Monitor: monitor;</li><li>Redirect: redirect;</li><li>Challenge: challenge.</li>Default value: Monitor.</p>
 	MediumRiskRequestAction *SecurityAction `json:"MediumRiskRequestAction,omitnil,omitempty" name:"MediumRiskRequestAction"`
 }
 
@@ -16764,39 +16775,42 @@ type ExceptUserRuleScope struct {
 }
 
 type ExceptionRule struct {
-	// The ID of the exception rule. different rule configuration operations are supported by rule ID: <li> <b>add</b> a new rule: leave the ID empty or do not specify the ID parameter.</li> <li> <b>modify</b> an existing rule: specify the rule ID that needs to be updated/modified.</li> <li> <b>delete</b> an existing rule: existing Rules not included in the Rules list under the ExceptionRules parameter will be deleted.</li>.
+	// ID of the exception rule.<br>Different rule configuration operations can be performed by rule ID:<br> <li> <b>Add</b> a new rule: leave the ID empty or do not specify the ID parameter;</li><li> <b>Modify</b> an existing rule: specify the rule ID to be updated/modified;</li><li> <b>Delete</b> an existing rule: existing rules not included in the Rules list in the ExceptionRules parameter will be deleted.</li>
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// The name of the exception rule.
+	// Name of the exception rule.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Describes the specific content of the exception rule, which must comply with the expression grammar. for details, please refer to the product document.
+	// Specific content of the exception rule must comply with the expression grammar. For detailed specifications, please refer to the product document.
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
-	// Exception rule execution options, valid values: <li>WebSecurityModules: designate the security protection module for the exception rule.</li> <li>ManagedRules: designate the managed rule.</li>.
+	// Exception rule execution options. Valid values: <li>WebSecurityModules: assigns the security protection module for the exception rule. Use in conjunction with WebSecurityModulesForException.</li><li>WebSecuritySubmodules: assigns the security protection submodule for the exception rule. Use in conjunction with WebSecuritySubmodulesForException.</li><li>ManagedRules: assigns the specific managed rule for the exception rule. Use in conjunction with ManagedRulesForException.</li><li>ManagedRuleGroups: assigns the managed rule group for the exception rule. Use in conjunction with ManagedRuleGroupsForException.</li>
 	SkipScope *string `json:"SkipScope,omitnil,omitempty" name:"SkipScope"`
 
-	// Skip the specific type of request. valid values: <li>SkipOnAllRequestFields: skip all requests;</li> <li>SkipOnSpecifiedRequestFields: skip specified request fields.</li> valid only when SkipScope is ManagedRules.
+	// Skip the specific type of request. Valid values: <li>SkipOnAllRequestFields: skip all requests;</li><li>SkipOnSpecifiedRequestFields: skip specified request fields.</li>Valid only when SkipScope is ManagedRules or ManagedRuleGroups.
 	SkipOption *string `json:"SkipOption,omitnil,omitempty" name:"SkipOption"`
 
-	// Specifies the security protection module for exception rules. valid only when SkipScope is WebSecurityModules. valid values: <li>websec-mod-managed-rules: managed rule.</li><li>websec-mod-rate-limiting: rate limit.</li><li>websec-mod-custom-rules: custom rule.</li><li>websec-mod-adaptive-control: adaptive frequency control, intelligent client filtering, slow attack protection, traffic theft protection.</li><li>websec-mod-bot: bot management.</li>.
+	// Security protection module for the exception rule. Valid only when SkipScope is WebSecurityModules. Valid values: <li>websec-mod-managed-rules: managed rule</li><li>websec-mod-rate-limiting: rate limit</li><li>websec-mod-custom-rules: custom rule</li><li>websec-mod-adaptive-control: adaptive frequency control, intelligent client filtering, slow attack protection, traffic theft protection</li><li>websec-mod-bot: bot management</li>
 	WebSecurityModulesForException []*string `json:"WebSecurityModulesForException,omitnil,omitempty" name:"WebSecurityModulesForException"`
 
-	// Specifies the managed rule for the exception rule. valid only when SkipScope is ManagedRules. cannot specify ManagedRuleGroupsForException at this time.
+	// Specifies the security protection submodule for the exception rule. Valid only when SkipScope is WebSecuritySubmodules. Valid values: <ul><li>ManagedRules module features: <ul><li>websec-mod-managed-rules/managed-rule-groups: rule set;</li><li>websec-mod-managed-rules/frequent-scanning-protection: high frequency scan protection;</li></ul></li><li>RateLimitingRules module features: <ul><li>websec-mod-rate-limiting-rules: rate limiting rule;</li></ul></li><li>CustomRules module features: <ul><li>websec-mod-custom-rules: custom rule;</li></ul></li><li>HttpDDoSProtection module features: <ul><li>websec-mod-HTTP-DDoS-protection/adaptive-frequency-control: adaptive frequency control;</li><li>websec-mod-HTTP-DDoS-protection/client-filtering: intelligent client filtering;</li><li>websec-mod-HTTP-DDoS-protection/bandwidth-abuse-defense: traffic fraud protection;</li></ul></li><li>BotManagement module features: <ul><li>websec-mod-Bot-management/basic-feature: basic feature management;</li><li>websec-mod-Bot-management/ip-reputation: client profile analysis;</li><li>websec-mod-Bot-management/Bot-intelligence: intelligent Bot analysis;</li><li>websec-mod-Bot-management/custom-rules: custom rule;</li><li>websec-mod-Bot-management/browser-impersonation-detection: proactive feature recognition;</li><li>websec-mod-Bot-management/client-attestation-rules: client authentication;</li></ul></li><li>BotManagementLite module features: <ul><li>websec-mod-Bot-management-lite/ai-crawler-detection: ai crawler disposal;</li><li>websec-mod-Bot-management-lite/captcha-page-challenge: captcha page challenge.</li></ul></li></ul>
+	WebSecuritySubmodulesForException []*string `json:"WebSecuritySubmodulesForException,omitnil,omitempty" name:"WebSecuritySubmodulesForException"`
+
+	// Specify the specific managed rule for the exception rule. This parameter is valid only when SkipScope is ManagedRules.
 	ManagedRulesForException []*string `json:"ManagedRulesForException,omitnil,omitempty" name:"ManagedRulesForException"`
 
-	// A managed rule group with designated exception rules is valid only when SkipScope is ManagedRules, and at this point you cannot specify ManagedRulesForException.
+	// Managed rule group with specified exception rules. This parameter is valid only when SkipScope is ManagedRuleGroups.
 	ManagedRuleGroupsForException []*string `json:"ManagedRuleGroupsForException,omitnil,omitempty" name:"ManagedRuleGroupsForException"`
 
-	// Specify exception rules to skip request fields. valid only when SkipScope is ManagedRules and SkipOption is SkipOnSpecifiedRequestFields.
+	// Configuration for specifying exception rules to skip specified request fields. This is valid only when SkipScope is ManagedRules or ManagedRuleGroups and SkipOption is SkipOnSpecifiedRequestFields.
 	RequestFieldsForException []*RequestFieldsForException `json:"RequestFieldsForException,omitnil,omitempty" name:"RequestFieldsForException"`
 
-	// Whether the exception rule is enabled. valid values: <li>`on`: enable</li> <li>`off`: disable</li>.
+	// Whether the exception rule is enabled. Valid values: <li>on: enabled</li><li>off: disabled</li>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 }
 
 type ExceptionRules struct {
-	// Definition list of exception Rules. when using ModifySecurityPolicy to modify Web protection configuration: <li>if the Rules parameter is not specified or the parameter length is zero: clear all exception rule configurations.</li><li>if the ExceptionRules parameter value is not specified in SecurityPolicy: keep existing exception rule configurations without modification.</li>.
+	// Definition list of exception Rules. When using ModifySecurityPolicy to modify Web protection configuration: <li>If the Rules parameter is not specified or its length is zero: clear all exception rule configurations.</li><li>If the ExceptionRules parameter value is not specified in the SecurityPolicy parameter: keep existing exception rule configurations without modification.</li>
 	Rules []*ExceptionRule `json:"Rules,omitnil,omitempty" name:"Rules"`
 }
 
@@ -16992,25 +17006,25 @@ type ForceRedirectHTTPSParameters struct {
 }
 
 type FrequentScanningProtection struct {
-	// Whether the high-frequency scan protection rule is enabled. valid values: <li>on: enable. the high-frequency scan protection rule takes effect.</li><li>off: disable. the high-frequency scan protection rule does not take effect.</li>.	
+	// Whether high-frequency scan protection is enabled. Valid values: <li>on: enabled, the high-frequency scan protection rule takes effect;</li><li>off: disabled, the high-frequency scan protection rule does not take effect.</li>	
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// Rule ID of high frequency scan protection, returned as an output parameter.
+	// Rule ID of high-frequency scan protection, returned only as an output parameter.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// The handling action for high-frequency scan protection. required when Enabled is on. valid values for SecurityAction Name: <li>Deny: block and respond with an interception page;</li> <li>Monitor: observe without processing requests, log security events in logs;</li> <li>JSChallenge: respond with a JavaScript challenge page.</li>.
+	// Handling action for high frequency scan protection. When Enabled is on, this field is required. The Name parameter of SecurityAction supports: <li>Deny: block and respond with an Interception page;</li><li>Monitor: observe, do not process request records, and log security events;</li><li>JSChallenge: javascript challenge and respond with a JavaScript challenge page.</li>
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 
-	// The match mode for request statistics. required when Enabled is on. valid values: <li>http.request.xff_header_ip: client ip (priority match xff header);</li><li>http.request.ip: client ip.</li>.
+	// Match mode for request statistics. This field is required when Enabled is on. Valid values: <li>http.request.xff_header_ip: client ip (priority match xff header);</li><li>http.request.ip: client ip.</li>
 	CountBy *string `json:"CountBy,omitnil,omitempty" name:"CountBy"`
 
-	// This parameter specifies the threshold for high-frequency scan protection, which is the intercept count of managed rules set to interception within the time range set by CountingPeriod. value range: 1 to 4294967294, for example 100. when exceeding this statistical value, subsequent requests will trigger the handling Action set by Action. required when Enabled is on.
+	// This parameter specifies the threshold for high-frequency scan protection, which is the total interception count when managed rules configured for interception are hit within the time range set by CountingPeriod. The value ranges from 1 to 4294967294, for example, 100. When this statistical value is exceeded, subsequent requests trigger the handling action set by Action. This field is required when Enabled is on.
 	BlockThreshold *int64 `json:"BlockThreshold,omitnil,omitempty" name:"BlockThreshold"`
 
-	// This parameter specifies the statistical time window for high-frequency scan protection, which is the time window for counting requests that hit managed rules configured as block. valid values: 5-1800. measurement unit: seconds (s) only, such as 5s. this field is required when Enabled is on.
+	// This parameter specifies the time window for high-frequency scan protection statistics, that is, the statistical time window for requests that hit managed rules configured for interception. Value range: 5-1800. The unit only supports seconds (s), for example, 5s. Required when Enabled is on.
 	CountingPeriod *string `json:"CountingPeriod,omitnil,omitempty" name:"CountingPeriod"`
 
-	// This parameter specifies the duration of the handling Action set by the high frequency scan protection Action parameter. value range: 60 to 86400. measurement unit: seconds (s) only, for example 60s. this field is required when Enabled is on.
+	// This parameter specifies the duration of the handling Action set by the high frequency scan protection Action parameter. The value ranges from 60 to 86400. The unit only supports seconds (s), for example, 60s. This field is required when Enabled is on.
 	ActionDuration *string `json:"ActionDuration,omitnil,omitempty" name:"ActionDuration"`
 }
 
@@ -17416,16 +17430,16 @@ type Hsts struct {
 }
 
 type HttpDDoSProtection struct {
-	// Specifies the specific configuration of adaptive frequency control.
+	// Specific configuration of adaptive frequency control.
 	AdaptiveFrequencyControl *AdaptiveFrequencyControl `json:"AdaptiveFrequencyControl,omitnil,omitempty" name:"AdaptiveFrequencyControl"`
 
-	// Specifies the intelligent client filter configuration.
+	// Specific configuration for intelligent client filtering.
 	ClientFiltering *ClientFiltering `json:"ClientFiltering,omitnil,omitempty" name:"ClientFiltering"`
 
-	// Specifies the specific configuration for bandwidth abuse protection.
+	// Bandwidth abuse protection configuration.
 	BandwidthAbuseDefense *BandwidthAbuseDefense `json:"BandwidthAbuseDefense,omitnil,omitempty" name:"BandwidthAbuseDefense"`
 
-	// Specifies the configuration of slow attack protection.
+	// Specific configuration of slow attack protection.
 	SlowAttackDefense *SlowAttackDefense `json:"SlowAttackDefense,omitnil,omitempty" name:"SlowAttackDefense"`
 }
 
@@ -17531,18 +17545,18 @@ type IPRegionInfo struct {
 }
 
 type IPReputation struct {
-	// IP intelligence library (formerly client profile analysis). valid values: <li>on: enable;</li> <li>off: disable.</li>.
+	// IP Intelligence Library (formerly client profile analysis). Valid values: <li>on: enable;</li><li>off: disable.</li>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// IP intelligence library (formerly client profile analysis) configuration content.
+	// Specific configuration content of the IP Intelligence Library (formerly client profile analysis).
 	IPReputationGroup *IPReputationGroup `json:"IPReputationGroup,omitnil,omitempty" name:"IPReputationGroup"`
 }
 
 type IPReputationGroup struct {
-	// Execution action of the IP intelligence library (formerly client profile analysis). SecurityAction Name parameter supports: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>Disabled: not enabled, disable specified rule;</li> <li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>.
+	// Execution action of the IP Intelligence Library (formerly client profile analysis). Supported values for SecurityAction Name: <li>Deny: block;</li><li>Monitor: observe;</li><li>Disabled: not enabled, disable the specified rule;</li><li>Challenge: challenge. ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.</li>
 	BaseAction *SecurityAction `json:"BaseAction,omitnil,omitempty" name:"BaseAction"`
 
-	// The specific configuration of the IP intelligence library (originally client profile analysis), used to override the default configuration in BaseAction. among them, the Ids in BotManagementActionOverrides can be filled with: <li>IPREP_WEB_AND_DDOS_ATTACKERS_LOW: network attack - general confidence;</li> <li>IPREP_WEB_AND_DDOS_ATTACKERS_MID: network attack - medium confidence;</li> <li>IPREP_WEB_AND_DDOS_ATTACKERS_HIGH: network attack - HIGH confidence;</li> <li>IPREP_PROXIES_AND_ANONYMIZERS_LOW: network proxy - general confidence;</li> <li>IPREP_PROXIES_AND_ANONYMIZERS_MID: network proxy - medium confidence;</li> <li>IPREP_PROXIES_AND_ANONYMIZERS_HIGH: network proxy - HIGH confidence;</li> <li>IPREP_SCANNING_TOOLS_LOW: scanner - general confidence;</li> <li>IPREP_SCANNING_TOOLS_MID: scanner - medium confidence;</li> <li>IPREP_SCANNING_TOOLS_HIGH: scanner - HIGH confidence;</li> <li>IPREP_ATO_ATTACKERS_LOW: account takeover attack - general confidence;</li> <li>IPREP_ATO_ATTACKERS_MID: account takeover attack - medium confidence;</li> <li>IPREP_ATO_ATTACKERS_HIGH: account takeover attack - HIGH confidence;</li> <li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_LOW: malicious BOT - general confidence;</li> <li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_MID: malicious BOT - medium confidence;</li> <li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_HIGH: malicious BOT - HIGH confidence.</li>.
+	// Specific configuration of the IP Intelligence Library (formerly client profile analysis), used to override the default configuration in BaseAction. The Ids of BotManagementActionOverrides can be filled with: <li>IPREP_WEB_AND_DDOS_ATTACKERS_LOW: network attack - general confidence;</li><li>IPREP_WEB_AND_DDOS_ATTACKERS_MID: network attack - medium confidence;</li><li>IPREP_WEB_AND_DDOS_ATTACKERS_HIGH: network attack - high confidence;</li><li>IPREP_PROXIES_AND_ANONYMIZERS_LOW: network proxy - general confidence;</li><li>IPREP_PROXIES_AND_ANONYMIZERS_MID: network proxy - medium confidence;</li><li>IPREP_PROXIES_AND_ANONYMIZERS_HIGH: network proxy - high confidence;</li><li>IPREP_SCANNING_TOOLS_LOW: scanner - general confidence;</li><li>IPREP_SCANNING_TOOLS_MID: scanner - medium confidence;</li><li>IPREP_SCANNING_TOOLS_HIGH: scanner - high confidence;</li><li>IPREP_ATO_ATTACKERS_LOW: account takeover attack - general confidence;</li><li>IPREP_ATO_ATTACKERS_MID: account takeover attack - medium confidence;</li><li>IPREP_ATO_ATTACKERS_HIGH: account takeover attack - high confidence;</li><li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_LOW: malicious bot - general confidence;</li><li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_MID: malicious bot - medium confidence;</li><li>IPREP_WEB_SCRAPERS_AND_TRAFFIC_BOTS_HIGH: malicious bot - high confidence.</li>
 	BotManagementActionOverrides []*BotManagementActionOverrides `json:"BotManagementActionOverrides,omitnil,omitempty" name:"BotManagementActionOverrides"`
 }
 
@@ -18292,10 +18306,10 @@ type KeyValuePair struct {
 }
 
 type KnownBotCategories struct {
-	// Handling method for access requests from known commercial tools or open-source tools. specifies the Name parameter value of SecurityAction: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>Disabled: not enabled, disable specified rule;</li> <li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li> <li>Allow: pass (to be deprecated).</li>.
+	// Handling method for access requests from known commercial or open-source tools. Supported values of SecurityAction Name: <li>Deny: Block;</li><li>Monitor: Observe;</li><li>Disabled: Not enabled, disable the specified rule;</li><li>Challenge: Challenge. Among them, ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li><li>Allow: Release (to be deprecated).</li>
 	BaseAction *SecurityAction `json:"BaseAction,omitnil,omitempty" name:"BaseAction"`
 
-	// Specifies the handling method for access requests from known commercial tools or open-source tools.
+	// Specify the handling method for access requests from known commercial or open-source tools.
 	BotManagementActionOverrides []*BotManagementActionOverrides `json:"BotManagementActionOverrides,omitnil,omitempty" name:"BotManagementActionOverrides"`
 }
 
@@ -18614,18 +18628,18 @@ type LogItem struct {
 }
 
 type ManagedRuleAction struct {
-	// Specific items under ManagedRuleGroup, used to rewrite the configuration of this individual rule item, refer to product documentation for details.	
+	// Specific item under the managed rule group, used for rewriting the configuration content of this individual rule. For details, refer to the product documentation.	
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
-	// Action for the managed rule item specified by RuleId, the SecurityAction Name parameter supports: <li>`Deny`: block and respond with an block page;</li> <li>`Monitor`: observe, do not process the request and record the security event in logs;</li> <li>`Disabled`: disabled, do not scan the request and skip this rule.</li>.
+	// Specifies the handling action for the managed rule item in RuleId. Supported values for SecurityAction Name: <li>Deny: Block. Responds with an interception page.</li><li>Monitor: Observe. Does not process the request but records security events in logs.</li><li>Disabled: Not enabled. Skips the rule without scanning requests.</li>
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
 type ManagedRuleAutoUpdate struct {
-	// Enable automatic update to the latest version or not. Values: <li>`on`: enabled</li> <li>`off`: disabled</li>.
+	// Whether automatic update to the latest version is enabled. Valid values: <li>on: enabled</li><li>off: disabled</li>
 	AutoUpdateToLatestVersion *string `json:"AutoUpdateToLatestVersion,omitnil,omitempty" name:"AutoUpdateToLatestVersion"`
 
-	// Current version, compliant with ISO 8601 standard format, such as 2023-12-21T12:00:32Z, empty by default, output parameter only.
+	// Currently used version in ISO 8601 format, for example, 2023-12-21T12:00:32Z. Empty by default. Output only.
 	RulesetVersion *string `json:"RulesetVersion,omitnil,omitempty" name:"RulesetVersion"`
 }
 
@@ -18633,7 +18647,7 @@ type ManagedRuleDetail struct {
 	// Managed rule Id.
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
-	// Protection level of managed rules. Values: <li>`low`: low risk, this rule has a relatively low risk and is applicable to very strict access scenarios, this level of rule may generate considerable false alarms.</li> <li>`medium`: medium risk, this means the risk of this rule is normal and is suitable for protection scenarios with stricter requirements.</li> <li>`high`: high risk, this indicates that the risk of this rule is relatively high and will not generate false alarms in most scenarios.</li> <li>`extreme`: ultra-high risk. this represents that the risk of this rule is extremely high and will not generate false alarms basically.</li>.
+	// Protection level of the managed rule. Valid values: <li>low: low risk. This rule has lower risk and is suitable for access scenarios in very strict control environments. Rules at this level may cause considerable false alarms;</li><li>medium: medium-risk. This rule has normal risk and is suitable for strict protection scenarios;</li><li>high: high-risk. This rule has relatively high risk and will not generate false alarms in most scenarios;</li><li>extreme: ultra-high risk. This rule has extremely high risk and basically will not generate false alarms;</li>
 	RiskLevel *string `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
 
 	// Rule description.
@@ -18647,50 +18661,53 @@ type ManagedRuleDetail struct {
 }
 
 type ManagedRuleGroup struct {
-	// Name of the managed rule group, if the configuration for the rule group is not specified, it will be processed by default, refer to product documentation for the specific value of GroupId.
+	// Group name of the managed rule. If no rule group is specified, the default configuration is used. For the specific value of GroupId, refer to the product documentation.
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
-	// Protection level of the managed rule group. Values: <li>`loose`: lenient, only contain ultra-high risk rules, at this point, Action parameter needs configured instead of RuleActions parameter;</li> <li>`normal`: normal, contain ultra-high risk and high-risk rules, at this point,Action parameter needs configured instead of RuleActions parameter;</li> <li>`strict`: strict, contains ultra-high risk, high-risk and medium-risk rules, at this point, Action parameter needs configured instead of RuleActions parameter;</li> <li>`extreme`: super strict, contains ultra-high risk, high-risk, medium-risk and low-risk rules, at this point, Action parameter needs configured instead of RuleActions parameter;</li> <li>`custom`: custom, refined strategy, configure the RuleActions parameter for each individual rule, at this point, the Action field is invalid, use RuleActions to configure the refined strategy for each individual rule.</li>.
+	// Protection level of the managed rule group. Valid values: <li>loose: Loose. It only contains ultra-high risk rules. At this point, Action is required and RuleActions is invalid.</li><li>normal: Normal. It contains ultra-high risk and high-risk rules. At this point, Action is required and RuleActions is invalid.</li><li>strict: Strict. It contains ultra-high risk, high-risk, and medium-risk rules. At this point, Action is required and RuleActions is invalid.</li><li>extreme: Ultra-strict. It contains ultra-high risk, high-risk, medium-risk, and low-risk rules. At this point, Action is required and RuleActions is invalid.</li><li>custom: Custom. Refined strategy. Configure the disposal method for each individual rule. At this point, the Action field is invalid. Use RuleActions to configure the refined strategy for individual rules.</li>	
 	SensitivityLevel *string `json:"SensitivityLevel,omitnil,omitempty" name:"SensitivityLevel"`
 
-	// Action for ManagedRuleGroup. the Name parameter value of SecurityAction supports: <li>`Deny`: block and respond with a block page;</li> <li>`Monitor`: observe, do not process requests and record security events in logs;</li> <li>`Disabled`: not enabled, do not scan requests and skip this rule.</li>.
+	// Handling action of the managed rule group. Supported values for SecurityAction Name: <li>Deny: Block. Respond with an interception page;</li><li>Monitor: Observe. Do not process requests, log security events in logs;</li><li>Disabled: Not activated. Do not scan requests, skip this rule.</li>
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 
-	// Specific configuration of rule items under the managed rule group, valid only when SensitivityLevel is custom.
+	// Specific configuration of rule items in the managed rule group. This configuration is effective only when SensitivityLevel is custom.
 	RuleActions []*ManagedRuleAction `json:"RuleActions,omitnil,omitempty" name:"RuleActions"`
 
-	// ManagedRuleGroup detailed information, output parameter only.
+	// Managed rule group information. This is an output-only parameter.	
 	MetaData *ManagedRuleGroupMeta `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 }
 
 type ManagedRuleGroupMeta struct {
-	// ManagedRuleGroup detailed information, output parameter only.
+	// Managed rule group description. For output usage only.
 	GroupDetail *string `json:"GroupDetail,omitnil,omitempty" name:"GroupDetail"`
 
-	// ManagedRuleGroup name, output parameter only.
+	// Managed rule group name. Output parameter only.
 	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 
-	// All sub-rules information under current ManagedRuleGroup, output parameter only.
+	// Rule information of all sub-rules in the current managed rule group. Output parameter only.
 	RuleDetails []*ManagedRuleDetail `json:"RuleDetails,omitnil,omitempty" name:"RuleDetails"`
 }
 
 type ManagedRules struct {
-	// The managed rule status. Values: <li>`on`: enabled, all managed rules take effect as configured;</li> <li>`off`: disabled, all managed rules do not take effect.</li>.
+	// <p>Whether managed rules are enabled. Valid values: <li>on: enabled. All managed rules take effect as configured.</li><li>off: disabled. No managed rules take effect.</li></p>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// Evaluation mode is enabled or not, it is valid only when the `Enabled` parameter is set to `on`. Values: <li>`on`: enabled, all managed rules take effect in `observe` mode.</li> <li>off: disabled, all managed rules take effect according to the specified configuration.</li>.
+	// <p>Whether evaluation mode is enabled. This parameter is valid only when the `Enabled` parameter is set to `on`. Valid values: <li>on: enabled. All managed rules take effect in observation mode.</li><li>off: disabled. All managed rules take effect as configured.</li></p>
 	DetectionOnly *string `json:"DetectionOnly,omitnil,omitempty" name:"DetectionOnly"`
 
-	// Managed rule semantic analysis is enabled or not, it is valid only when the `Enabled` parameter is `on`. Values: <li>`on`: enabled, perform semantic analysis  before processing requests;</li> <li>`off`: disabled, process requests directly without semantic analysis.</li> <br/>The default value is `off`.
+	// <p>Whether the deep analysis option for managed rules is enabled. This parameter is valid only when the `Enabled` parameter is set to `on`. Valid values: <li>on: enabled. Requests are processed after deep analysis.</li><li>off: disabled. Requests are processed directly without deep analysis.</li> <br>This parameter is to be deprecated. The switch for deep analysis rules is migrated to the `SemanticAnalysisRules.Enabled` parameter.</p>
 	SemanticAnalysis *string `json:"SemanticAnalysis,omitnil,omitempty" name:"SemanticAnalysis"`
 
-	// Managed rule automatic update option.
+	// <p>Deep analysis configuration option. Identifies malicious behaviors in requests (such as SQL injection and XSS attacks), and logs and blocks malicious requests.</p>
+	SemanticAnalysisRules *SemanticAnalysisRules `json:"SemanticAnalysisRules,omitnil,omitempty" name:"SemanticAnalysisRules"`
+
+	// <p>Auto-update option for managed rules.</p>
 	AutoUpdate *ManagedRuleAutoUpdate `json:"AutoUpdate,omitnil,omitempty" name:"AutoUpdate"`
 
-	// Configuration of the managed rule group. If this structure is passed as an empty array or the GroupId is not included in the array, it will be processed based by default.
+	// <p>Configuration of managed rule groups. If an empty array is passed for this structure or `GroupId` is not included in the list, the default processing method is used.</p>
 	ManagedRuleGroups []*ManagedRuleGroup `json:"ManagedRuleGroups,omitnil,omitempty" name:"ManagedRuleGroups"`
 
-	// High-Frequency scan protection configuration option. when a visitor's frequent requests hit the managed rule configured as block within a period of time, all requests from that visitor are blocked.
+	// <p>High-frequency scan protection configuration option. When a visitor's requests frequently trigger managed rules configured as block, all requests from this visitor are blocked for a period of time.</p>
 	FrequentScanningProtection *FrequentScanningProtection `json:"FrequentScanningProtection,omitnil,omitempty" name:"FrequentScanningProtection"`
 }
 
@@ -18716,21 +18733,21 @@ type MaxAgeParameters struct {
 }
 
 type MaxNewSessionTriggerConfig struct {
-	// Time window for trigger threshold statistics. valid values: <li>5s: within 5 seconds;</li><li>10s: within 10 seconds;</li><li>15s: within 15 seconds;</li><li>30s: within 30 seconds;</li><li>60s: within 60 seconds;</li><li>5m: within 5 minutes;</li><li>10m: within 10 minutes;</li><li>30m: within 30 minutes;</li><li>60m: within 60 minutes.</li>.
+	// Time window for trigger threshold statistics. Valid values: <li>5s: within 5 seconds;</li><li>10s: within 10 seconds;</li><li>15s: within 15 seconds;</li><li>30s: within 30 seconds;</li><li>60s: within 60 seconds;</li><li>5m: within 5 minutes;</li><li>10m: within 10 minutes;</li><li>30m: within 30 minutes;</li><li>60m: within 60 minutes.</li>
 	MaxNewSessionCountInterval *string `json:"MaxNewSessionCountInterval,omitnil,omitempty" name:"MaxNewSessionCountInterval"`
 
-	// Trigger threshold cumulative count. value range: 1-100000000.
+	// Cumulative count of trigger threshold statistics. Value range: 1-100000000.
 	MaxNewSessionCountThreshold *int64 `json:"MaxNewSessionCountThreshold,omitnil,omitempty" name:"MaxNewSessionCountThreshold"`
 }
 
 type MinimalRequestBodyTransferRate struct {
-	// Minimum body transfer rate threshold, the measurement unit is only supported in bps.
+	// Minimum body transfer rate threshold. The measurement unit only supports bps.
 	MinimalAvgTransferRateThreshold *string `json:"MinimalAvgTransferRateThreshold,omitnil,omitempty" name:"MinimalAvgTransferRateThreshold"`
 
-	// Minimum body transfer rate statistical time range, valid values: <li>10s: 10 seconds;</li> <li>30s: 30 seconds;</li> <li>60s: 60 seconds;</li> <li>120s: 120 seconds.</li>.
+	// Statistical time range for minimum body transfer rate. Valid values: <li>10s: 10 seconds;</li><li>30s: 30 seconds;</li><li>60s: 60 seconds;</li><li>120s: 120 seconds.</li>
 	CountingPeriod *string `json:"CountingPeriod,omitnil,omitempty" name:"CountingPeriod"`
 
-	// Specifies whether the minimum body transfer rate threshold is enabled. valid values: <li>on: enable;</li> <li>off: disable.</li>.
+	// Whether the minimum body transfer rate threshold is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 }
 
@@ -24318,42 +24335,42 @@ type RateLimitUserRule struct {
 }
 
 type RateLimitingRule struct {
-	// The ID of precise rate limiting. rule ID supports different rule configuration operations: <li><b>add</b> a new rule: leave the ID empty or do not specify the ID parameter.</li> <li><b>modify</b> an existing rule: specify the rule ID that needs to be updated/modified.</li> <li><b>delete</b> an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.</li>.
+	// <p>ID of the precise rate limiting rule.<br>Different rule configuration operations can be performed by rule ID:<br> <li> <b>Add</b> a new rule: leave ID empty or unspecified;</li><li><b>Modify</b> an existing rule: specify the rule ID that needs to be updated/modified;</li><li><b>Delete</b> an existing rule: existing rules not included in the Rules list in the RateLimitingRules parameter will be deleted.</li></p>
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Specifies the name of the precise rate limit.
+	// <p>Name of the precise rate limit.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// The specific content of precise rate limiting must comply with expression grammar. for detailed requirements, please refer to [the product document](https://www.tencentcloud.com/document/product/1552/125343?from_cn_redirect=1) .
+	// <p>The specific content of precise rate limiting must comply with expression syntax. For detailed specifications, see <a href="https://www.tencentcloud.com/document/product/1552/125343?from_cn_redirect=1">product document</a>.</p>
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
-	// Speed limit mode. Within the statistical time window CountingPeriod, the following speed limit modes can be configured for requests that meet the feature CountBy:<li>Block: Block access source. When the count exceeds the threshold MaxRequestThreshold, execute Action disposal for ALL subsequent requests that meet the feature within the ActionDuration. </li><li>Throttle: Only dispose excess requests. When the count exceeds the threshold MaxRequestThreshold, only execute Action disposal for requests that exceed the threshold, and stop disposal when the window ends. At this point, the ActionDuration parameter will be ignored.</li><br />Default value is Block.
+	// <p>Bandwidth limit mode. Within the statistical time window CountingPeriod, for requests that meet the CountBy feature, the following bandwidth limit modes can be configured: <li>Block: Block the access source. When the count exceeds the MaxRequestThreshold, execute the Action on all subsequent requests that meet the feature within the ActionDuration;</li><li>Throttle: Only handle excess requests. When the count exceeds the MaxRequestThreshold, execute the Action only on requests that exceed the threshold, and stop when the window ends. At this point, the ActionDuration parameter will be ignored.</li><br>Default value: Block.</p>
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
-	// The match mode of the rate threshold request feature. this field is required when Enabled is on.<br /><br />when there are multiple conditions, composite conditions are used to collect statistics. the maximum number of conditions cannot exceed 5. valid values:<br/><li><b>http.request.ip</b>: client ip;</li><li><b>http.request.xff_header_ip</b>: client ip (priority match xff header);</li><li><b>http.request.uri.path</b>: access path of the request;</li><li><b>http.request.cookies['session']</b>: Cookie named session, where session can be replaced with your own parameter;</li><li><b>http.request.headers['user-agent']</b>: http header named user-agent, where user-agent can be replaced with your own parameter;</li><li><b>http.request.ja3</b>: ja3 fingerprint of the request;</li><li><b>http.request.ja4</b>: ja4 fingerprint of the request;</li><li><b>http.request.uri.query['test']</b>: URL query parameter named test, where test can be replaced with your own parameter.</li>.
+	// <p>Match mode of the rate threshold request feature. Required when Enabled is on.<br><br>When there are multiple conditions, they will be combined for statistics and calculation. A maximum of 5 conditions is allowed. Valid values:<br><li><b>http.request.ip</b>: client IP;</li><li><b>http.request.xff_header_ip</b>: client IP (priority match XFF header);</li><li><b>http.request.uri.path</b>: access path of the request;</li><li><b>http.request.cookies[&#39;session&#39;]</b>: Cookie named session, where session can be replaced with your own parameter;</li><li><b>http.request.headers[&#39;user-agent&#39;]</b>: HTTP header named user-agent, where user-agent can be replaced with your own parameter;</li><li><b>http.request.ja3</b>: JA3 fingerprint of the request;</li><li><b>http.request.ja4</b>: JA4 fingerprint of the request;</li><li><b>http.request.uri.query[&#39;test&#39;]</b>: URL query parameter named test, where test can be replaced with your own parameter.</li></p>
 	CountBy []*string `json:"CountBy,omitnil,omitempty" name:"CountBy"`
 
-	// Precision rate limiting specifies the cumulative number of interceptions within the time range. value ranges from 1 to 100000.
+	// <p>Cumulative number of interceptions by precise rate limiting within the time range, with a value range of 1 to 100000.</p>
 	MaxRequestThreshold *int64 `json:"MaxRequestThreshold,omitnil,omitempty" name:"MaxRequestThreshold"`
 
-	// Specifies the time window for statistics. valid values: <li>1s: 1 second;</li><li>5s: 5 seconds;</li><li>10s: 10 seconds;</li><li>20s: 20 seconds;</li><li>30s: 30 seconds;</li><li>40s: 40 seconds;</li><li>50s: 50 seconds;</li><li>1m: 1 minute;</li><li>2m: 2 minutes;</li><li>5m: 5 minutes;</li><li>10m: 10 minutes;</li><li>1h: 1 hour.</li>.
+	// <p>Time window for statistics. Valid values: <li>1s: 1 second;</li><li>5s: 5 seconds;</li><li>10s: 10 seconds;</li><li>20s: 20 seconds;</li><li>30s: 30 seconds;</li><li>40s: 40 seconds;</li><li>50s: 50 seconds;</li><li>1m: 1 minute;</li><li>2m: 2 minutes;</li><li>5m: 5 minutes;</li><li>10m: 10 minutes;</li><li>1h: 1 hour.</li></p>
 	CountingPeriod *string `json:"CountingPeriod,omitnil,omitempty" name:"CountingPeriod"`
 
-	// Duration of the Action. Only the following units are supported: <li>s: second, value range 1-120;</li><li>m: minute, value range 1-120;</li><li>h: hour, value range 1-48;</li><li>d: day, value range 1-30.</li><br />This parameter will be ignored and will not take effect when Mode is Throttle.
+	// <p>Duration of the Action. Supported units: <li>s: seconds, value range: 1-120;</li><li>m: minutes, value range: 1-120;</li><li>h: hours, value range: 1-48;</li><li>d: days, value range: 1-30.</li><br>When Mode is Throttle, this parameter will be ignored and will not take effect.</p>
 	ActionDuration *string `json:"ActionDuration,omitnil,omitempty" name:"ActionDuration"`
 
-	// Precision rate limiting handling methods. valid values: <li>Monitor: Monitor;</li> <li>Deny: block, where DenyActionParameters.Name supports Deny and ReturnCustomPage;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge;</li> <li>Redirect: Redirect to URL;</li>.
+	// <p>Handling method for precise rate limiting. SecurityAction.Name value range is as follows:</p><ul><li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration;</li><li>Monitor: observe;</li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li><li>Redirect: redirect to a URL.</li></ul>
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 
-	// Precision rate limiting specifies the priority. value range is 0 to 100. default is 0.
+	// <p>Priority of precise rate limiting, ranging from 0 to 100, with a default value of 0.</p>
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
-	// Whether the precise rate limiting rule is enabled. valid values: <li>on: enabled;</li> <li>off: disabled.</li>.
+	// <p>Whether the precise rate limiting rule is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li></p>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 }
 
 type RateLimitingRules struct {
-	// Definition list of precise rate limiting. when using ModifySecurityPolicy to modify the Web protection configuration: <br> <li> if the Rules parameter is not specified or its length is zero: clear all precision rate limiting configurations.</li> <li> if the RateLimitingRules parameter value is unspecified in the SecurityPolicy parameter: retain the existing custom rule configuration without modification.</li>.
+	// Definition list of precise rate limiting. When using ModifySecurityPolicy to modify Web protection configuration: <br> <li> If the Rules parameter is not specified or its length is zero: clear all precise rate limiting configurations.</li> <li> If the RateLimitingRules parameter value is not specified in the SecurityPolicy parameter: keep the existing custom rule configuration without modification.</li>
 	Rules []*RateLimitingRule `json:"Rules,omitnil,omitempty" name:"Rules"`
 }
 
@@ -24569,35 +24586,35 @@ func (r *RenewPlanResponse) FromJsonString(s string) error {
 }
 
 type RequestBodyTransferTimeout struct {
-	// Body transfer timeout duration. valid values: 5-120. measurement unit: seconds (s) only.
+	// Body transfer timeout duration. Value range: 5–120. Unit: seconds (s) only.
 	IdleTimeout *string `json:"IdleTimeout,omitnil,omitempty" name:"IdleTimeout"`
 
-	// Whether body transfer timeout is enabled. valid values: <li>`on`: enable</li> <li>`off`: disable</li>.
+	// Whether body transfer timeout duration is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 }
 
 type RequestFieldsForException struct {
-	// Skip specific field. supported values:.
-	// <li>body.json: parameter content in json requests. at this point, Condition supports key and value, TargetField supports key and value, for example { "Scope": "body.json", "Condition": "", "TargetField": "key" }, which means all parameters in json requests skip WAF scan.</li>.
-	// <li style="margin-top:5px">cookie: cookie; at this point Condition supports key, value, TargetField supports key, value, for example { "Scope": "cookie", "Condition": "${key} in ['account-id'] and ${value} like ['prefix-*']", "TargetField": "value" }, which means the cookie parameter name equals account-id and the parameter value wildcard matches prefix-* to skip WAF scan;</li>.
-	// <li style="margin-top:5px">header: HTTP header parameters. at this point, Condition supports key and value, TargetField supports key and value, for example { "Scope": "header", "Condition": "${key} like ['x-auth-*']", "TargetField": "value" }, which means header parameter name wildcard match x-auth-* skips WAF scan.</li>.
-	// <li style="margin-top:5px">uri.query: URL encoding content/query parameter. at this point, Condition supports key and value, TargetField supports key and value. example: { "Scope": "uri.query", "Condition": "${key} in ['action'] and ${value} in ['upload', 'delete']", "TargetField": "value" }. indicates URL encoding content/query parameter name equal to action and parameter value equal to upload or delete skips WAF scan.</li>.
-	// <li style="margin-top:5px">uri: specifies the request path uri. at this point, Condition must be empty. TargetField supports query, path, fullpath, such as {"Scope": "uri", "Condition": "", "TargetField": "query"}, indicates the request path uri skips WAF scan for query parameters.</li>.
-	// <li style="margin-top:5px">body: request body content. at this point Condition must be empty, TargetField supports fullbody, multipart, such as { "Scope": "body", "Condition": "", "TargetField": "fullbody" }, which means the request body content skips WAF scan as a full request.</li>.
+	// Specific fields to skip. Supported values: <br/>
+	// <li>body.json: parameter content in JSON requests. At this point, Condition supports key and value, and TargetField supports key and value. For example, { "Scope": "body.json", "Condition": "", "TargetField": "key" } means ALL parameters in the JSON request content skip WAF scan.</li>
+	// <li style="margin-top:5px">cookie: Cookie; at this point, Condition supports key and value, and TargetField supports key and value, for example { "Scope": "cookie", "Condition": "${key} in ['account-id'] and ${value} like ['prefix-*']", "TargetField": "value" }, which means the cookie parameter name equals account-id and the parameter value wildcard matches prefix-* to skip WAF scan;</li>
+	// <li style="margin-top:5px">header: HTTP header parameters. At this point, Condition supports key and value, and TargetField supports key and value. For example, { "Scope": "header", "Condition": "${key} like ['x-auth-*']", "TargetField": "value" } means the header parameter name wildcard match x-auth-* skips WAF scan.</li>
+	// <li style="margin-top:5px">uri.query: URL-encoded content/query parameters. At this point, Condition supports key and value, and TargetField supports key and value. For example, { "Scope": "uri.query", "Condition": "${key} in ['action'] and ${value} in ['upload', 'delete']", "TargetField": "value" } means the parameter name of the URL-encoded content/query parameters is equal to action and the parameter value is equal to upload or delete, skip WAF scan;</li>
+	// <li style="margin-top:5px">uri: request path URI. At this point, Condition must be empty, and TargetField supports query, path, and fullpath. For example, { "Scope": "uri", "Condition": "", "TargetField": "query" } means only query parameters in the request path URI skip WAF scan.</li>
+	// <li style="margin-top:5px">body: request body content. At this point, Condition must be empty, and TargetField supports fullbody and multipart, for example { "Scope": "body",  "Condition": "", "TargetField": "fullbody" }, which means the request body content is the complete request body and skips WAF scan;</li>
 	Scope *string `json:"Scope,omitnil,omitempty" name:"Scope"`
 
-	// Skip specific field expression must comply with expression grammar.
-	// Condition supports expression configuration syntax: <li> write according to the matching conditional expression syntax of rules, with support for referencing key and value.</li> <li> supports in, like operators, and logical combination with and.</li>.
-	// For example: <li>${key} in ['x-trace-id']: the parameter name equals x-trace-id.</li> <li>${key} in ['x-trace-id'] and ${value} like ['Bearer *']: the parameter name equals x-trace-id and the parameter value wildcard matches Bearer *.</li>.
+	// Expression of the specific field to skip, which must comply with the expression grammar.<br />
+	// Condition supports expression configuration syntax: <li> Write the filter condition expression syntax based on the rule, with support for referencing key and value.</li><li> Support in and like operators, and logical combination with and.</li>
+	// For example: <li>${key} in ['x-trace-id']: The parameter name is equal to x-trace-id.</li><li>${key} in ['x-trace-id'] and ${value} like ['Bearer *']: The parameter name is equal to x-trace-id and the parameter value wildcard matches Bearer *.</li>
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
-	// The Scope parameter takes different values. the TargetField expression supports the following values:.
-	// <Li> body.json: supports key, value.</li>.
-	// <li>cookie: supports key and value.</li>.
-	// <li>header: supports key, value</li>.
-	// <Li> uri.query: supports key and value</li>.
-	// <li>uri. specifies path, query, or fullpath.</li>.
-	// <Li>Body: supports fullbody and multipart.</li>.
+	// When the Scope parameter takes different values, the supported values in the TargetField expression are as follows:
+	// <li> body.json: supports key and value</li>
+	// <li> cookie: supports key and value</li>
+	// <li> header: supports key and value</li>
+	// <li> uri.query: supports key and value</li>
+	// <li> uri: supports path, query, and fullpath</li>
+	// <li> body: supports fullbody and multipart</li>
 	TargetField *string `json:"TargetField,omitnil,omitempty" name:"TargetField"`
 }
 
@@ -24677,10 +24694,10 @@ type ResponseSpeedLimitParameters struct {
 }
 
 type ReturnCustomPageActionParameters struct {
-	// Response custom status code.
+	// status code.
 	ResponseCode *string `json:"ResponseCode,omitnil,omitempty" name:"ResponseCode"`
 
-	// Response custom page ID.
+	// ID of the custom page in the response.
 	ErrorPageId *string `json:"ErrorPageId,omitnil,omitempty" name:"ErrorPageId"`
 }
 
@@ -25190,10 +25207,10 @@ type S3 struct {
 }
 
 type SearchEngineBots struct {
-	// Specifies the action for requests from search engine crawlers. valid values for SecurityAction Name: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>Disabled: not enabled, disable specified rule;</li> <li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li> <li>Allow: pass (to be deprecated).</li>.
+	// Execution action for requests from search engine crawlers. Supported values of SecurityAction Name: <li>Deny: block;</li><li>Monitor: observe;</li><li>Disabled: not enabled, disable the specified rule;</li><li>Challenge: challenge. ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li><li>Allow: allow (to be deprecated).</li>
 	BaseAction *SecurityAction `json:"BaseAction,omitnil,omitempty" name:"BaseAction"`
 
-	// Specifies the handling method for search engine crawler requests.
+	// Specify the handling method for search engine crawler requests.
 	BotManagementActionOverrides []*BotManagementActionOverrides `json:"BotManagementActionOverrides,omitnil,omitempty" name:"BotManagementActionOverrides"`
 }
 
@@ -25223,7 +25240,7 @@ type SecEntryValue struct {
 }
 
 type SecurityAction struct {
-	// <p>Specific actions for safe execution. Valid values:</p><ul><li>Deny: block, prevent requests from accessing site resources;</li><li>Monitor: observe, only record logs;</li><li>Redirect: redirect to URL;</li><li>Disabled: not enabled, do not enable the specified rule;</li><li>Allow: pass, skip the remaining rules of the current security module. Delay response when the AllowActionParameters parameter is configured;</li><li>Challenge: challenge, respond with challenge content;</li><li>BlockIP: to be deprecated, IP blocking;</li><li>ReturnCustomPage: to be deprecated, use a specified page for interception;</li><li>JSChallenge: to be deprecated, JavaScript challenge;</li><li>ManagedChallenge: to be deprecated, managed challenge.</li></ul>
+	// <p>Specific actions for safe execution. Valid values:</p><ul><li>Deny: block, prevent requests from accessing site resources;</li><li>Monitor: observe, only record logs;</li><li>Redirect: redirect to URL;</li><li>Disabled: not enabled, disable the specified rule;</li><li>Allow: allow, skip the remaining rules of the current security module. Delay response when the AllowActionParameters parameter is configured;</li><li>Challenge: challenge, respond with challenge content;</li><li>BlockIP: to be deprecated, IP block;</li><li>ReturnCustomPage: to be deprecated, use a specified page for interception;</li><li>JSChallenge: to be deprecated, JavaScript challenge;</li><li>ManagedChallenge: to be deprecated, managed challenge.</li></ul>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// <p>Additional parameter when Name is Deny.</p>
@@ -25238,7 +25255,7 @@ type SecurityAction struct {
 	// <p>Additional parameter when Name is Challenge.</p>
 	ChallengeActionParameters *ChallengeActionParameters `json:"ChallengeActionParameters,omitnil,omitempty" name:"ChallengeActionParameters"`
 
-	// <p>To be deprecated. Additional parameter when Name is BlockIP.</p>
+	// <p>To be deprecated. An additional parameter when Name is BlockIP.</p>
 	BlockIPActionParameters *BlockIPActionParameters `json:"BlockIPActionParameters,omitnil,omitempty" name:"BlockIPActionParameters"`
 
 	// <p>To be deprecated. An additional parameter when Name is ReturnCustomPage.</p>
@@ -25280,32 +25297,44 @@ type SecurityConfig struct {
 	DetectLengthLimitConfig *DetectLengthLimitConfig `json:"DetectLengthLimitConfig,omitnil,omitempty" name:"DetectLengthLimitConfig"`
 }
 
+type SecurityHeadersToOrigin struct {
+	// <p>Configuration of origin request headers for Bot identification information. Valid values:<ul><li>`EO-Bot-Botnet-ID`: Identifier generated based on Bot request characteristics.</li></ul></p>
+	BotIdentificationHeaders []*string `json:"BotIdentificationHeaders,omitnil,omitempty" name:"BotIdentificationHeaders"`
+
+	// <p>Configuration of origin request headers for identification results from the Advanced Bot Management module. Valid values:<ul><li>`EO-Bot-Client-Attestation`: Advanced Bot Management - Authentication ticket verification result from the Client Attestation module;</li><li>`EO-Bot-Client-Risk`: Advanced Bot Management - Device risk assessment result from the Client Attestation module;</li><li>`EO-Bot-Intelligence`: Advanced Bot Management - Identification result from the Bot Intelligence Analysis module;</li><li>`EO-Bot-IP-Reputation`: Advanced Bot Management - Identification result from Client Reputation module;</li><li>`EO-Bot-Known-Tool`: Advanced Bot Management - Basic Feature Management - Identification result from the UA Feature Rule module;</li><li>`EO-Bot-Search-Engine`: Advanced Bot Management - Basic Feature Management - Identification result from the Search Engine Rule module;</li><li>`EO-Bot-Source-IDC`: Advanced Bot Management - Basic Feature Management - Identification result from the IDC Rule module;</li><li>`EO-Bot-User-Risk`: Advanced Bot Management - Account risk assessment result from the Client Attestation module.</li></ul></p>
+	BotManagementHeaders []*string `json:"BotManagementHeaders,omitnil,omitempty" name:"BotManagementHeaders"`
+
+	// <p>Configuration of origin request headers for client fingerprint information. Valid values:<ul><li>`EO-Bot-Fingerprint`: Client fingerprint information.</li></ul></p>
+	ClientFingerprintHeaders []*string `json:"ClientFingerprintHeaders,omitnil,omitempty" name:"ClientFingerprintHeaders"`
+}
+
 type SecurityPolicy struct {
-	// Custom rules. If the parameter is null or not filled, the configuration last set will be used by default.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Custom rule configuration.</p>
 	CustomRules *CustomRules `json:"CustomRules,omitnil,omitempty" name:"CustomRules"`
 
-	// Managed. If the parameter is null or not filled, the configuration last set will be used by default.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// <p>Managed rule configuration.</p>
 	ManagedRules *ManagedRules `json:"ManagedRules,omitnil,omitempty" name:"ManagedRules"`
 
-	// HTTP DDOS protection configuration.
+	// <p>HTTP DDoS protection configuration.</p>
 	HttpDDoSProtection *HttpDDoSProtection `json:"HttpDDoSProtection,omitnil,omitempty" name:"HttpDDoSProtection"`
 
-	// Configures the rate limiting rule.
+	// <p>Rate limiting rule configuration.</p>
 	RateLimitingRules *RateLimitingRules `json:"RateLimitingRules,omitnil,omitempty" name:"RateLimitingRules"`
 
-	// Exception rule configuration.
+	// <p>Exception rule configuration.</p>
 	ExceptionRules *ExceptionRules `json:"ExceptionRules,omitnil,omitempty" name:"ExceptionRules"`
 
-	// Bot management configuration.
+	// <p>Bot management configuration.</p>
 	BotManagement *BotManagement `json:"BotManagement,omitnil,omitempty" name:"BotManagement"`
 
-	// Basic Bot management configuration.
+	// <p>Basic Bot management configuration.</p>
 	BotManagementLite *BotManagementLite `json:"BotManagementLite,omitnil,omitempty" name:"BotManagementLite"`
 
-	// Default intercept action configuration.
+	// <p>Default block action configuration.</p>
 	DefaultDenySecurityActionParameters *DefaultDenySecurityActionParameters `json:"DefaultDenySecurityActionParameters,omitnil,omitempty" name:"DefaultDenySecurityActionParameters"`
+
+	// <p>Security headers to include in requests to the origin. After the configuration takes effect, request headers with the corresponding `keyname` will be sent to the origin.</p>
+	SecurityHeadersToOrigin *SecurityHeadersToOrigin `json:"SecurityHeadersToOrigin,omitnil,omitempty" name:"SecurityHeadersToOrigin"`
 }
 
 type SecurityPolicyTemplateInfo struct {
@@ -25338,11 +25367,22 @@ type SecurityType struct {
 }
 
 type SecurityWeightedAction struct {
-	// The handling method of the Bot custom rule. valid values: <li>Allow: pass, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li> <li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li> <li>Monitor: observation;</li> <li>Challenge: Challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li> <li>Redirect: Redirect to URL.</li>.
+	// Handling method of the Bot custom rule. Valid values: <li>Allow: Allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li><li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li><li>Monitor: Monitor;</li><li>Challenge: Challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li><li>Redirect: Redirect to a URL.</li>
 	SecurityAction *SecurityAction `json:"SecurityAction,omitnil,omitempty" name:"SecurityAction"`
 
-	// The Weight of the current SecurityAction, only supported between 10 and 100 and must be a multiple of 10. the total of all Weight parameters must equal 100.
+	// Weight of the current SecurityAction. Only multiples of 10 from 10 to 100 are supported. The sum of all Weight parameters must equal 100.
 	Weight *int64 `json:"Weight,omitnil,omitempty" name:"Weight"`
+}
+
+type SemanticAnalysisRules struct {
+
+	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+
+	RuleActions []*ManagedRuleAction `json:"RuleActions,omitnil,omitempty" name:"RuleActions"`
+
+
+	MetaData *ManagedRuleGroupMeta `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 }
 
 type ServerCertInfo struct {
@@ -25372,16 +25412,16 @@ type ServerCertInfo struct {
 }
 
 type SessionRateControl struct {
-	// Specifies whether session rate and periodic feature verification are enabled. valid values: <li>on: enable</li><li>off: disable</li>.
+	// Whether session rate and periodic feature verification are enabled. Valid values: <li>on: enable</li><li>off: disable</li>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// Session rate and periodic feature verification high-risk execution actions. SecurityAction Name valid values: <li>Deny: block, where Stall configuration is supported in DenyActionParameters;</li> <li>Monitor: observation;</li> <li>Allow: respond after wait, where MinDelayTime and MaxDelayTime configuration is required in AllowActionParameters.</li>.
+	// Session rate and periodic feature verification for high-risk executed actions. The Name parameter of SecurityAction supports the following values: <li>Deny: block, with Stall configuration supported in DenyActionParameters;</li><li>Monitor: observe;</li><li>Allow: respond after waiting, where AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>
 	HighRateSessionAction *SecurityAction `json:"HighRateSessionAction,omitnil,omitempty" name:"HighRateSessionAction"`
 
-	// Session rate and periodic feature verification medium-risk execution action. SecurityAction Name parameter supports: <li>Deny: block, where DenyActionParameters supports Stall configuration;</li><li>Monitor: observe;</li><li>Allow: respond after wait, where AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>.
+	// Execution action for medium-risk session rate and periodic feature verification. Supported values of SecurityAction Name: <li>Deny: block, where DenyActionParameters supports Stall configuration;</li><li>Monitor: observe;</li><li>Allow: respond after waiting, where AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>
 	MidRateSessionAction *SecurityAction `json:"MidRateSessionAction,omitnil,omitempty" name:"MidRateSessionAction"`
 
-	// Session rate and periodic feature verification low risk execution action. SecurityAction Name parameter supports: <li>Deny: block, where DenyActionParameters supports Stall configuration;</li><li>Monitor: observe;</li><li>Allow: respond after wait, where AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>.
+	// Session rate and periodic feature verification are low-risk execution actions. The Name parameter of SecurityAction supports: <li>Deny: block, where DenyActionParameters supports Stall configuration;</li><li>Monitor: observe;</li><li>Allow: wait then respond, where AllowActionParameters requires MinDelayTime and MaxDelayTime configuration.</li>
 	LowRateSessionAction *SecurityAction `json:"LowRateSessionAction,omitnil,omitempty" name:"LowRateSessionAction"`
 }
 
@@ -25530,19 +25570,19 @@ type SkipCondition struct {
 }
 
 type SlowAttackDefense struct {
-	// Whether slow attack protection is enabled. valid values: <li>on: enabled;</li> <li>off: disabled.</li>.
+	// Whether slow attack protection is enabled. Valid values: <li>on: enabled;</li><li>off: disabled.</li>
 	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
-	// Rule ID of slow attack protection, returned as an output parameter.
+	// Rule ID of slow attack protection, returned only as an output parameter.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Slow attack protection handling method. required when Enabled is on. valid values for SecurityAction Name: <li>Monitor: observation;</li> <li>Deny: block;</li>.
+	// Handling method for slow attack protection. This field is required when Enabled is on. Supported values for SecurityAction Name: <li>Monitor: observe;</li><li>Deny: block;</li>
 	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 
-	// The specific configuration of the minimum body transfer rate threshold is required when Enabled is on.
+	// Specific configuration of the minimum body transfer rate threshold. Required when Enabled is on.
 	MinimalRequestBodyTransferRate *MinimalRequestBodyTransferRate `json:"MinimalRequestBodyTransferRate,omitnil,omitempty" name:"MinimalRequestBodyTransferRate"`
 
-	// Specifies the specific configuration of body transfer timeout duration. required when Enabled is on.
+	// Specific configuration of the body transfer timeout duration. Required if Enabled is on.
 	RequestBodyTransferTimeout *RequestBodyTransferTimeout `json:"RequestBodyTransferTimeout,omitnil,omitempty" name:"RequestBodyTransferTimeout"`
 }
 
@@ -25596,10 +25636,10 @@ type SmartRoutingParameters struct {
 }
 
 type SourceIDC struct {
-	// Handling method for requests from the specified IDC. valid values for SecurityAction Name: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>Disabled: not enabled, disable specified rule;</li> <li>Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li> <li>Allow: pass (to be deprecated).</li>.
+	// Handling method for requests from a specified IDC. Supported values of the Name parameter of SecurityAction: <li>Deny: block;</li><li>Monitor: observe;</li><li>Disabled: not enabled, which disables the specified rule;</li><li>Challenge: challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge;</li><li>Allow: allow (to be deprecated).</li>
 	BaseAction *SecurityAction `json:"BaseAction,omitnil,omitempty" name:"BaseAction"`
 
-	// Specifies the handling method for the specified id request.
+	// Handling method for the request from the specified IDC.
 	BotManagementActionOverrides []*BotManagementActionOverrides `json:"BotManagementActionOverrides,omitnil,omitempty" name:"BotManagementActionOverrides"`
 }
 
@@ -26046,6 +26086,20 @@ type UpstreamURLRewriteParameters struct {
 
 	// Origin-Pull URL rewrite used for regex replacement to match the full path regular expression. should meet Google RE2 standard with length range 1–1024. this field is required when Action is regexReplace, otherwise not required.
 	Regex *string `json:"Regex,omitnil,omitempty" name:"Regex"`
+}
+
+type UserRiskProfile struct {
+	// <p>Minimum risk score for high-risk requests. A request is considered high-risk when its score is equal to or greater than this value.</p><p>Value range: [2, 99]</p><p>Default value: 50</p>
+	HighRiskMinScore *uint64 `json:"HighRiskMinScore,omitnil,omitempty" name:"HighRiskMinScore"`
+
+	// <p>Handling method for high-risk requests. Supported values for SecurityAction Name: <li>Deny: block;</li><li>Monitor: observe;</li><li>Redirect: redirect;</li><li>Challenge: challenge.</li>Default value: Monitor</p>
+	HighRiskRequestAction *SecurityAction `json:"HighRiskRequestAction,omitnil,omitempty" name:"HighRiskRequestAction"`
+
+	// <p>Minimum risk score for a medium-risk request. A score equal to or greater than this value and less than HighRiskMinScore is considered medium-risk; a score lower than this value is considered low risk.</p><p>Value range: [1, 98]</p><p>Default value: 15</p>
+	MediumRiskMinScore *uint64 `json:"MediumRiskMinScore,omitnil,omitempty" name:"MediumRiskMinScore"`
+
+	// <p>Handling method for medium-risk requests. Supported values for the Name parameter of SecurityAction: <li>Deny: block;</li><li>Monitor: observe;</li><li>Redirect: redirect;</li><li>Challenge: challenge.</li>Default value: Monitor</p>
+	MediumRiskRequestAction *SecurityAction `json:"MediumRiskRequestAction,omitnil,omitempty" name:"MediumRiskRequestAction"`
 }
 
 type VanityNameServers struct {
