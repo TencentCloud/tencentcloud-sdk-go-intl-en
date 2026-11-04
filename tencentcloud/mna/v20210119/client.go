@@ -2129,7 +2129,7 @@ func NewGetStatisticDataByNameResponse() (response *GetStatisticDataByNameRespon
 }
 
 // GetStatisticDataByName
-// Download traffic data on the usage statistics page
+// Download traffic data on the usage statistics page.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2143,7 +2143,7 @@ func (c *Client) GetStatisticDataByName(request *GetStatisticDataByNameRequest) 
 }
 
 // GetStatisticDataByName
-// Download traffic data on the usage statistics page
+// Download traffic data on the usage statistics page.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

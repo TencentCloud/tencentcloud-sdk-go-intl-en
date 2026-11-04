@@ -3134,66 +3134,62 @@ func (r *GetPublicKeyResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type GetStatisticDataByNameRequestParams struct {
-	// Device name. If not specified, pass "-1".
+	// <p>Device name. If no device is specified, you can pass "-1"</p>
 	DeviceName *string `json:"DeviceName,omitnil,omitempty" name:"DeviceName"`
 
-	// Start time of statistics (seconds).
+	// <p>Start time of statistics, unit: s</p>
 	BeginTime *int64 `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
-	// Statistics end time (s).
+	// <p>Statistics end time, unit: s</p>
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Aggregation granularity:
-	// Hourly statistics
-	// 2: Daily statistics
+	// <p>Time granularity</p><p>Enumeration values:</p><ul><li>1: hourly statistics</li><li>2: daily statistics</li><li>3: per minute</li><li>4: every 5 minutes</li></ul>
 	TimeGranularity *int64 `json:"TimeGranularity,omitnil,omitempty" name:"TimeGranularity"`
 
-	// Access region. Value ranges from 'MC' to 'AM'. MC=Chinese mainland AP=Asia Pacific EU=Europe AM=Americas. Leave it blank to represent all regions.
+	// <p>Access region. Value range: ['MC','AP','EU','AM'] MC=Chinese mainland AP=Asia Pacific EU=Europe AM=Americas. If not specified, it represents all regions.</p>
 	AccessRegion *string `json:"AccessRegion,omitnil,omitempty" name:"AccessRegion"`
 
-	// Gateway type. 0: public cloud gateway; 1: private gateway. Default is 0 if not specified.
+	// <p>Gateway type. 0: public cloud gateway; 1: private gateway. Defaults to 0 if not passed.</p>
 	GatewayType *int64 `json:"GatewayType,omitnil,omitempty" name:"GatewayType"`
 
-	// Device name list. Up to 10 devices. Used when downloading traffic volume of multiple devices. At this point, DeviceName can be "-1".
+	// <p>Device name list, up to 10 devices. Used when downloading traffic for multiple devices. At this point, DeviceName can be set to "-1"</p>
 	DeviceList []*string `json:"DeviceList,omitnil,omitempty" name:"DeviceList"`
 
-	// Device group ID. If not specified, do not pass it. Used when downloading data by grouping.
+	// <p>Device group ID. Do not pass it if no group is specified. Used when downloading data by group</p>
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
-	// Application ID. Leave blank if no designated application is specified. Used when downloading data by app.
+	// <p>Application ID. If not specified, leave it blank. Used when downloading data by application</p>
 	MpApplicationId *string `json:"MpApplicationId,omitnil,omitempty" name:"MpApplicationId"`
 }
 
 type GetStatisticDataByNameRequest struct {
 	*tchttp.BaseRequest
 	
-	// Device name. If not specified, pass "-1".
+	// <p>Device name. If no device is specified, you can pass "-1"</p>
 	DeviceName *string `json:"DeviceName,omitnil,omitempty" name:"DeviceName"`
 
-	// Start time of statistics (seconds).
+	// <p>Start time of statistics, unit: s</p>
 	BeginTime *int64 `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
-	// Statistics end time (s).
+	// <p>Statistics end time, unit: s</p>
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Aggregation granularity:
-	// Hourly statistics
-	// 2: Daily statistics
+	// <p>Time granularity</p><p>Enumeration values:</p><ul><li>1: hourly statistics</li><li>2: daily statistics</li><li>3: per minute</li><li>4: every 5 minutes</li></ul>
 	TimeGranularity *int64 `json:"TimeGranularity,omitnil,omitempty" name:"TimeGranularity"`
 
-	// Access region. Value ranges from 'MC' to 'AM'. MC=Chinese mainland AP=Asia Pacific EU=Europe AM=Americas. Leave it blank to represent all regions.
+	// <p>Access region. Value range: ['MC','AP','EU','AM'] MC=Chinese mainland AP=Asia Pacific EU=Europe AM=Americas. If not specified, it represents all regions.</p>
 	AccessRegion *string `json:"AccessRegion,omitnil,omitempty" name:"AccessRegion"`
 
-	// Gateway type. 0: public cloud gateway; 1: private gateway. Default is 0 if not specified.
+	// <p>Gateway type. 0: public cloud gateway; 1: private gateway. Defaults to 0 if not passed.</p>
 	GatewayType *int64 `json:"GatewayType,omitnil,omitempty" name:"GatewayType"`
 
-	// Device name list. Up to 10 devices. Used when downloading traffic volume of multiple devices. At this point, DeviceName can be "-1".
+	// <p>Device name list, up to 10 devices. Used when downloading traffic for multiple devices. At this point, DeviceName can be set to "-1"</p>
 	DeviceList []*string `json:"DeviceList,omitnil,omitempty" name:"DeviceList"`
 
-	// Device group ID. If not specified, do not pass it. Used when downloading data by grouping.
+	// <p>Device group ID. Do not pass it if no group is specified. Used when downloading data by group</p>
 	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
-	// Application ID. Leave blank if no designated application is specified. Used when downloading data by app.
+	// <p>Application ID. If not specified, leave it blank. Used when downloading data by application</p>
 	MpApplicationId *string `json:"MpApplicationId,omitnil,omitempty" name:"MpApplicationId"`
 }
 
@@ -3226,7 +3222,7 @@ func (r *GetStatisticDataByNameRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type GetStatisticDataByNameResponseParams struct {
-	// File address url
+	// <p>File address url</p>
 	FilePath *string `json:"FilePath,omitnil,omitempty" name:"FilePath"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.

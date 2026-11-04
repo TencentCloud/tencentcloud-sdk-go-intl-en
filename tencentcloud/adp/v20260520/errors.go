@@ -16,4 +16,19 @@ package v20260520
 
 const (
 	// error codes for specific actions
+
+	// Operation failed.
+	FAILEDOPERATION = "FailedOperation"
+
+	// Internal error.
+	INTERNALERROR = "InternalError"
+
+	// Parameter error.
+	INVALIDPARAMETER = "InvalidParameter"
+
+	// Parameters are missing.
+	MISSINGPARAMETER = "MissingParameter"
+
+	// The resource does not exist.
+	RESOURCENOTFOUND = "ResourceNotFound"
 )

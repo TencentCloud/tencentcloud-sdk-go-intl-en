@@ -80,7 +80,7 @@ const (
 	// 
 	INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 
-	// Incorrect parameter.
+	// Parameter error.
 	INVALIDPARAMETER = "InvalidParameter"
 
 	// `Action` field of policy document invalid.
@@ -157,6 +157,9 @@ const (
 
 	// The current role can only be operated by the organization admin. To modify it, contact the admin.
 	INVALIDPARAMETER_ORGANIZATIONROLEOPERATEERROR = "InvalidParameter.OrganizationRoleOperateError"
+
+	// Invalid pageToken.
+	INVALIDPARAMETER_PAGINATIONTOKENINVALID = "InvalidParameter.PaginationTokenInvalid"
 
 	// Invalid input parameter.
 	INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"

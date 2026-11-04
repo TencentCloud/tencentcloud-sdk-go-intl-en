@@ -381,7 +381,7 @@ func NewGeneralBasicOCRResponse() (response *GeneralBasicOCRResponse) {
 }
 
 // GeneralBasicOCR
-// This API is used to detect and recognize characters in an image in the following 20 languages: Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, and Arabic. Mixed characters in English and each supported language can be recognized together.
+// This API is used to detect and recognize characters in an image in the following 21 languages: Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, Hindi and Arabic. Mixed characters in English and each supported language can be recognized together.
 //
 // 
 //
@@ -414,7 +414,7 @@ func (c *Client) GeneralBasicOCR(request *GeneralBasicOCRRequest) (response *Gen
 }
 
 // GeneralBasicOCR
-// This API is used to detect and recognize characters in an image in the following 20 languages: Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, and Arabic. Mixed characters in English and each supported language can be recognized together.
+// This API is used to detect and recognize characters in an image in the following 21 languages: Chinese, English, Japanese, Korean, Spanish, French, German, Portuguese, Vietnamese, Malay, Russian, Italian, Dutch, Swedish, Finnish, Danish, Norwegian, Hungarian, Thai, Hindi and Arabic. Mixed characters in English and each supported language can be recognized together.
 //
 // 
 //
