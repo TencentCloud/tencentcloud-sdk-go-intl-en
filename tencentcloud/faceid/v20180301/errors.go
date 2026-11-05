@@ -263,7 +263,7 @@ const (
 	// Internal error.
 	INTERNALERROR = "InternalError"
 
-	// The lighting is too dim.
+	// The lighting is too dim.This error code is only returned by ReflectCompare and DetectReflectLivenessAndCompare.
 	INTERNALERROR_ACTIONLIGHTDARK = "InternalError.ActionLightDark"
 
 	// The lighting is too strong.
@@ -272,7 +272,7 @@ const (
 	// Failed to detect a full face.
 	INTERNALERROR_ACTIONNODETECTFACE = "InternalError.ActionNodetectFace"
 
-	// The similarity did not reach the passing standard.
+	// The similarity did not reach the passing standard.This error code is only returned by ReflectCompare and DetectReflectLivenessAndCompare.
 	INTERNALERROR_COMPARELOWSIMILARITY = "InternalError.CompareLowSimilarity"
 
 	// Encryption failed.

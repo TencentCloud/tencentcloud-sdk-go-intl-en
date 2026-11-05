@@ -83,6 +83,35 @@ type AccountInfo struct {
 	Avatar *string `json:"Avatar,omitnil,omitempty" name:"Avatar"`
 }
 
+type AddOnPackageInfo struct {
+	// <p>Total value-added packages</p>
+	AddOnTotal *float64 `json:"AddOnTotal,omitnil,omitempty" name:"AddOnTotal"`
+
+	// <p>Value-added package amount</p>
+	AddOnUsage *float64 `json:"AddOnUsage,omitnil,omitempty" name:"AddOnUsage"`
+
+	// <p>Total number of exclusive concurrencies</p>
+	ExclusiveConcurrency *uint64 `json:"ExclusiveConcurrency,omitnil,omitempty" name:"ExclusiveConcurrency"`
+
+	// <p>Resource pack status</p><p>Enumeration values:</p><ul><li>1: Available</li><li>2: Exhausted</li><li>3: Expired</li></ul>
+	ResourceStatus *uint64 `json:"ResourceStatus,omitnil,omitempty" name:"ResourceStatus"`
+
+	// <p>Exclusive concurrency status</p><p>Enumeration values:</p><ul><li>1: Available</li><li>3: Expired</li></ul>
+	ConcurrencyStatus *uint64 `json:"ConcurrencyStatus,omitnil,omitempty" name:"ConcurrencyStatus"`
+
+	// <p>Exclusive tpm</p>
+	ExclusiveTpm *uint64 `json:"ExclusiveTpm,omitnil,omitempty" name:"ExclusiveTpm"`
+
+	// <p>Exclusive tpm status</p><p>Enumeration values:</p><ul><li>1: Available</li><li>3: Expired</li></ul>
+	ExclusiveTpmStatus *uint64 `json:"ExclusiveTpmStatus,omitnil,omitempty" name:"ExclusiveTpmStatus"`
+
+	// <p>Exclusive computing unit</p>
+	ExclusiveComputeUnit *uint64 `json:"ExclusiveComputeUnit,omitnil,omitempty" name:"ExclusiveComputeUnit"`
+
+	// <p>Exclusive computing unit status</p><p>Enumeration values:</p><ul><li>1: Available</li><li>3: Expired</li><li>4: Terminated</li><li>5: Isolated</li><li>6: Not effective</li><li>7: Unavailable (when the package expires)</li></ul>
+	ExclusiveComputeUnitStatus *uint64 `json:"ExclusiveComputeUnitStatus,omitnil,omitempty" name:"ExclusiveComputeUnitStatus"`
+}
+
 type AgentAdvancedConfig struct {
 	// <p>Maximum reasoning round</p>
 	MaxReasoningRound *uint64 `json:"MaxReasoningRound,omitnil,omitempty" name:"MaxReasoningRound"`
@@ -1165,6 +1194,14 @@ type AppTriggerWorkflowExecuteConfig struct {
 	WorkflowName *string `json:"WorkflowName,omitnil,omitempty" name:"WorkflowName"`
 }
 
+type AppVariableValue struct {
+	// <p>Variable ID</p>
+	VariableId *string `json:"VariableId,omitnil,omitempty" name:"VariableId"`
+
+	// <p>Variable value</p>
+	VariableValue *string `json:"VariableValue,omitnil,omitempty" name:"VariableValue"`
+}
+
 type AppWebSearchConfig struct {
 	// API key
 	ApiKey *string `json:"ApiKey,omitnil,omitempty" name:"ApiKey"`
@@ -1225,6 +1262,14 @@ type AuditLog struct {
 
 	// <p>Unique ID for the operation.</p>
 	UniqueId *string `json:"UniqueId,omitnil,omitempty" name:"UniqueId"`
+}
+
+type AuditLogMetaField struct {
+	// <p>Operation log metadata key.</p>
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// <p>Name of the operation log metadata</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type AuthConfig struct {
@@ -1410,6 +1455,11 @@ type CamAuthConfig struct {
 
 	// <p>Whether CAM role authorization is supported.</p>
 	SupportRoleAuth *bool `json:"SupportRoleAuth,omitnil,omitempty" name:"SupportRoleAuth"`
+}
+
+type CategoryModifyFields struct {
+	// <p>Category name</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type CategoryPath struct {
@@ -1626,6 +1676,65 @@ type ConflictQASummary struct {
 	ConflictGroupId *string `json:"ConflictGroupId,omitnil,omitempty" name:"ConflictGroupId"`
 }
 
+type ConsumptionClassification struct {
+	// <p>Consumption scenario (such as reasoning/training/evaluation)</p>
+	ConsumptionScene *string `json:"ConsumptionScene,omitnil,omitempty" name:"ConsumptionScene"`
+
+	// <p>Consumption target (for example, specific model name/plug-in name/platform feature name)</p>
+	ConsumptionTarget *string `json:"ConsumptionTarget,omitnil,omitempty" name:"ConsumptionTarget"`
+
+	// <p>Consumption type. The set of values is defined by the business side (for example, model/plugin/platform)</p>
+	ConsumptionType *string `json:"ConsumptionType,omitnil,omitempty" name:"ConsumptionType"`
+
+	// <p>Package name</p>
+	PackageName *string `json:"PackageName,omitnil,omitempty" name:"PackageName"`
+}
+
+type ConsumptionDetail struct {
+	// <p>Consumption category (Type/Target/Scenario/Package)</p>
+	Classification *ConsumptionClassification `json:"Classification,omitnil,omitempty" name:"Classification"`
+
+	// <p>Consumption time, Unix seconds.</p>
+	EventTime *string `json:"EventTime,omitnil,omitempty" name:"EventTime"`
+
+	// <p>Amount source type</p><table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>METRIC_SOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>METRIC_SOURCE_TYPE_APP</td><td>1</td><td>Application development</td></tr><tr><td>METRIC_SOURCE_TYPE_KB</td><td>2</td><td>Knowledge base</td></tr><tr><td>METRIC_SOURCE_TYPE_WIDGET</td><td>3</td><td>Widget</td></tr><tr><td>METRIC_SOURCE_TYPE_OPEN_CLAW</td><td>4</td><td>ClawPro</td></tr><tr><td>METRIC_SOURCE_TYPE_KB_RECALL_TEST</td><td>5</td><td>Knowledge base recall test</td></tr><tr><td>METRIC_SOURCE_TYPE_WORKBENCH</td><td>6</td><td>Intelligent workbench</td></tr><tr><td>METRIC_SOURCE_TYPE_MODEL_API</td><td>7</td><td>Model API calls</td></tr></tbody></table>
+	MetricSourceType *int64 `json:"MetricSourceType,omitnil,omitempty" name:"MetricSourceType"`
+
+	// <p>Name.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Space name</p>
+	SpaceName *string `json:"SpaceName,omitnil,omitempty" name:"SpaceName"`
+
+	// <p>Consumed usage (numeric value/unit/PU consumption)</p>
+	Usage *ConsumptionUsage `json:"Usage,omitnil,omitempty" name:"Usage"`
+
+	// <p>Username</p>
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+}
+
+type ConsumptionUsage struct {
+	// <p>Consume PU</p>
+	ConsumptionPU *float64 `json:"ConsumptionPU,omitnil,omitempty" name:"ConsumptionPU"`
+
+	// <p>Amount value.</p>
+	Usage *float64 `json:"Usage,omitnil,omitempty" name:"Usage"`
+
+	// <p>Usage unit. Enumeration value: DosageUnit</p><table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>DOSAGE_UNIT_TOKEN</td><td>0</td><td>token (default)</td></tr><tr><td>DOSAGE_UNIT_PAGE_COUNT</td><td>1</td><td>page_count (page number)</td></tr><tr><td>DOSAGE_UNIT_TIMES</td><td>2</td><td>times (frequency)</td></tr><tr><td>DOSAGE_UNIT_SECOND</td><td>3</td><td>second</td></tr><tr><td>DOSAGE_UNIT_ITEM</td><td>4</td><td>item</td></tr><tr><td>DOSAGE_UNIT_SHEET</td><td>5</td><td>sheet</td></tr><tr><td>DOSAGE_UNIT_CHARACTER</td><td>6</td><td>character</td></tr><tr><td>DOSAGE_UNIT_GB</td><td>7</td><td>GB</td></tr><tr><td>DOSAGE_UNIT_NUMBER</td><td>8</td><td>number (count)</td></tr><tr><td>DOSAGE_UNIT_MILL_SECOND</td><td>9</td><td>mill_second (ms)</td></tr></tbody></table>
+	UsageUnit *int64 `json:"UsageUnit,omitnil,omitempty" name:"UsageUnit"`
+}
+
+type ContentFilter struct {
+	// <p>Minimum image height (pixel). Images with a height less than this value will be filtered; &lt;=0 means not enabled</p>
+	ImageMinHeight *int64 `json:"ImageMinHeight,omitnil,omitempty" name:"ImageMinHeight"`
+
+	// <p>Minimum image width (pixel). Images with a smaller width will be filtered; &lt;=0 means not enabled</p>
+	ImageMinWidth *int64 `json:"ImageMinWidth,omitnil,omitempty" name:"ImageMinWidth"`
+
+	// <p>Image name filter rule (multiple regular expressions separated by semicolons &#39;;&#39;, for example &#39;icon;notice;warning;info.*&#39;)</p>
+	ImageNamePatterns *string `json:"ImageNamePatterns,omitnil,omitempty" name:"ImageNamePatterns"`
+}
+
 type Conversation struct {
 	// <p>App ID</p>
 	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
@@ -1757,6 +1866,32 @@ type ConversationFileCollection struct {
 
 	// <p>Supported file type list</p>
 	SupportedFileTypes []*string `json:"SupportedFileTypes,omitnil,omitempty" name:"SupportedFileTypes"`
+}
+
+type ConversationFileInfo struct {
+	// <p>File creation time.</p>
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Document business ID</p>
+	DocId *string `json:"DocId,omitnil,omitempty" name:"DocId"`
+
+	// <p>File name.</p>
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+
+	// <p>File size</p>
+	FileSize *string `json:"FileSize,omitnil,omitempty" name:"FileSize"`
+
+	// <p>File type</p>
+	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
+
+	// <p>File download link.</p>
+	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
+
+	// <p>Original path of the file in the sandbox</p>
+	LocalPath *string `json:"LocalPath,omitnil,omitempty" name:"LocalPath"`
+
+	// <p>File moderation status</p><p>Enumeration values:</p><ul><li>1: under review</li><li>2: pass review</li><li>3: fail review</li></ul>
+	AuditStatus *uint64 `json:"AuditStatus,omitnil,omitempty" name:"AuditStatus"`
 }
 
 type ConversationMcpApp struct {
@@ -3855,6 +3990,14 @@ type DailySchedule struct {
 	TimeOfDay *string `json:"TimeOfDay,omitnil,omitempty" name:"TimeOfDay"`
 }
 
+type DeDuplicateStrategy struct {
+	// <p>Verification method: 1=determine whether they are identical based on document content<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>DUPLICATE_FILE_CHECK_TYPE_UNKNOWN</td><td>0</td><td>Unknown</td></tr><tr><td>DUPLICATE_FILE_CHECK_TYPE_COS_HASH</td><td>1</td><td>Determine whether they are identical based on document content (cos_hash)</td></tr></tbody></table></p>
+	CheckType *int64 `json:"CheckType,omitnil,omitempty" name:"CheckType"`
+
+	// <p>Processing method: 1=return an error, 2=skip and return the duplicate document ID<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>DUPLICATE_FILE_HANDLE_TYPE_UNKNOWN</td><td>0</td><td>Unknown</td></tr><tr><td>DUPLICATE_FILE_HANDLE_TYPE_RETURN_ERR</td><td>1</td><td>Return an error</td></tr><tr><td>DUPLICATE_FILE_HANDLE_TYPE_SKIP</td><td>2</td><td>Skip and return the duplicate document ID</td></tr></tbody></table></p>
+	HandleType *int64 `json:"HandleType,omitnil,omitempty" name:"HandleType"`
+}
+
 // Predefined struct for user
 type DeleteAgentRequestParams struct {
 	// <p>Application ID.</p>
@@ -5936,6 +6079,63 @@ func (r *DescribeAuditLogListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeAuditLogMetaRequestParams struct {
+
+}
+
+type DescribeAuditLogMetaRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeAuditLogMetaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditLogMetaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAuditLogMetaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditLogMetaResponseParams struct {
+	// <p>Operation type list</p>
+	Actions []*AuditLogMetaField `json:"Actions,omitnil,omitempty" name:"Actions"`
+
+	// <p>List of operation objects.</p>
+	BizObjects []*AuditLogMetaField `json:"BizObjects,omitnil,omitempty" name:"BizObjects"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAuditLogMetaResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAuditLogMetaResponseParams `json:"Response"`
+}
+
+func (r *DescribeAuditLogMetaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditLogMetaResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeCategoryListRequestParams struct {
 	// <p>Associated knowledge base ID</p>
 	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
@@ -6027,6 +6227,108 @@ func (r *DescribeCategoryListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCategoryListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeChannelListRequestParams struct {
+
+}
+
+type DescribeChannelListRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeChannelListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeChannelListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeChannelListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeChannelListResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeChannelListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeChannelListResponseParams `json:"Response"`
+}
+
+func (r *DescribeChannelListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeChannelListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeChannelRequestParams struct {
+
+}
+
+type DescribeChannelRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeChannelRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeChannelRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeChannelRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeChannelResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeChannelResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeChannelResponseParams `json:"Response"`
+}
+
+func (r *DescribeChannelResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6260,6 +6562,94 @@ func (r *DescribeConflictQASummaryListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeConflictQASummaryListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConsumptionDetailListRequestParams struct {
+	// <p>Query time range (Unix seconds)</p>
+	TimeRange *TimeRange `json:"TimeRange,omitnil,omitempty" name:"TimeRange"`
+
+	// <p>View scope: business view / space view</p>
+	ViewScope *ViewScope `json:"ViewScope,omitnil,omitempty" name:"ViewScope"`
+
+	// <p>Extended filtering. Filter combination rule: multiple conditions use AND, values within the same condition use OR. Supported Name: metric_source_type (metric_source_type_* OR integer), source_ids (multi-option source ID), resource_ID/source_ID (select one source ID, this parameter is valid only when source_ids is not passed), space_ID, user_ID</p>
+	FilterList []*Filter `json:"FilterList,omitnil,omitempty" name:"FilterList"`
+
+	// <p>Page number, starting from 0</p>
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// <p>Number of items per page. Maximum: 100.</p>
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+}
+
+type DescribeConsumptionDetailListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Query time range (Unix seconds)</p>
+	TimeRange *TimeRange `json:"TimeRange,omitnil,omitempty" name:"TimeRange"`
+
+	// <p>View scope: business view / space view</p>
+	ViewScope *ViewScope `json:"ViewScope,omitnil,omitempty" name:"ViewScope"`
+
+	// <p>Extended filtering. Filter combination rule: multiple conditions use AND, values within the same condition use OR. Supported Name: metric_source_type (metric_source_type_* OR integer), source_ids (multi-option source ID), resource_ID/source_ID (select one source ID, this parameter is valid only when source_ids is not passed), space_ID, user_ID</p>
+	FilterList []*Filter `json:"FilterList,omitnil,omitempty" name:"FilterList"`
+
+	// <p>Page number, starting from 0</p>
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// <p>Number of items per page. Maximum: 100.</p>
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+}
+
+func (r *DescribeConsumptionDetailListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumptionDetailListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TimeRange")
+	delete(f, "ViewScope")
+	delete(f, "FilterList")
+	delete(f, "PageNumber")
+	delete(f, "PageSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConsumptionDetailListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConsumptionDetailListResponseParams struct {
+	// <p>Resource consumption details list</p>
+	ConsumptionDetailList []*ConsumptionDetail `json:"ConsumptionDetailList,omitnil,omitempty" name:"ConsumptionDetailList"`
+
+	// <p>Total record count for frontend pagination</p>
+	TotalCount *string `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeConsumptionDetailListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeConsumptionDetailListResponseParams `json:"Response"`
+}
+
+func (r *DescribeConsumptionDetailListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumptionDetailListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6660,6 +7050,354 @@ func (r *DescribeConversationResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDocRequestParams struct {
+	// <p>Document ID</p>
+	DocId *string `json:"DocId,omitnil,omitempty" name:"DocId"`
+
+	// <p>ID of the knowledge base it belongs to</p>
+	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
+
+	// <p>Field mask: Currently supported Path: DocLink.CosUrl. Other unlisted fields are returned by default.</p>
+	ReadMask *FieldMask `json:"ReadMask,omitnil,omitempty" name:"ReadMask"`
+}
+
+type DescribeDocRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Document ID</p>
+	DocId *string `json:"DocId,omitnil,omitempty" name:"DocId"`
+
+	// <p>ID of the knowledge base it belongs to</p>
+	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
+
+	// <p>Field mask: Currently supported Path: DocLink.CosUrl. Other unlisted fields are returned by default.</p>
+	ReadMask *FieldMask `json:"ReadMask,omitnil,omitempty" name:"ReadMask"`
+}
+
+func (r *DescribeDocRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDocRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DocId")
+	delete(f, "KbId")
+	delete(f, "ReadMask")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDocRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDocResponseParams struct {
+	// <p>Documentation link (external URL + COS link)</p>
+	DocLink *DocLink `json:"DocLink,omitnil,omitempty" name:"DocLink"`
+
+	// <p>Parsing configuration (split rule, content filtering, etc.)</p>
+	ParseConfig *DocParseConfig `json:"ParseConfig,omitnil,omitempty" name:"ParseConfig"`
+
+	// <p>Basic document information</p>
+	Summary *DocSummary `json:"Summary,omitnil,omitempty" name:"Summary"`
+
+	// <p>Switch configuration</p>
+	Switch *DocSwitch `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// <p>Update cycle configuration</p>
+	UpdatePeriod *DocUpdatePeriod `json:"UpdatePeriod,omitnil,omitempty" name:"UpdatePeriod"`
+
+	// <p>User access configuration</p>
+	UserAccessConfig *UserAccessConfig `json:"UserAccessConfig,omitnil,omitempty" name:"UserAccessConfig"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDocResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDocResponseParams `json:"Response"`
+}
+
+func (r *DescribeDocResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDocResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDocSummaryListRequestParams struct {
+	// <p>ID of the knowledge base it belongs to</p>
+	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
+
+	// <p>Filter criteria (multiple Filters are in an AND relationship, and multiple Values of the same Filter are in an OR relationship): Status - document status, enumeration value, exact match; CategoryId - category ID, exact match; SourceType - document source type, enumeration value, exact match; EffectiveDomain - application scope, exact match; CreateTime - creation time, Unix seconds, BETWEEN with [start second, end second]; UpdateTime - update time, Unix seconds, BETWEEN with [start second, end second]</p>
+	FilterList []*Filter `json:"FilterList,omitnil,omitempty" name:"FilterList"`
+
+	// <p>Page number, starting from 0.</p>
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// <p>Number of items per page. Default: 10. Maximum: 100</p>
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// <p>Query condition (keyword + query scope)</p>
+	Query *DocQuery `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// <p>Switch configuration</p>
+	SummaryListSwitch *SummaryListSwitch `json:"SummaryListSwitch,omitnil,omitempty" name:"SummaryListSwitch"`
+}
+
+type DescribeDocSummaryListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>ID of the knowledge base it belongs to</p>
+	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
+
+	// <p>Filter criteria (multiple Filters are in an AND relationship, and multiple Values of the same Filter are in an OR relationship): Status - document status, enumeration value, exact match; CategoryId - category ID, exact match; SourceType - document source type, enumeration value, exact match; EffectiveDomain - application scope, exact match; CreateTime - creation time, Unix seconds, BETWEEN with [start second, end second]; UpdateTime - update time, Unix seconds, BETWEEN with [start second, end second]</p>
+	FilterList []*Filter `json:"FilterList,omitnil,omitempty" name:"FilterList"`
+
+	// <p>Page number, starting from 0.</p>
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// <p>Number of items per page. Default: 10. Maximum: 100</p>
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// <p>Query condition (keyword + query scope)</p>
+	Query *DocQuery `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// <p>Switch configuration</p>
+	SummaryListSwitch *SummaryListSwitch `json:"SummaryListSwitch,omitnil,omitempty" name:"SummaryListSwitch"`
+}
+
+func (r *DescribeDocSummaryListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDocSummaryListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "KbId")
+	delete(f, "FilterList")
+	delete(f, "PageNumber")
+	delete(f, "PageSize")
+	delete(f, "Query")
+	delete(f, "SummaryListSwitch")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDocSummaryListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDocSummaryListResponseParams struct {
+	// <p>Document list</p>
+	DocList []*DocSummary `json:"DocList,omitnil,omitempty" name:"DocList"`
+
+	// <p>Total.</p>
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDocSummaryListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDocSummaryListResponseParams `json:"Response"`
+}
+
+func (r *DescribeDocSummaryListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDocSummaryListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeKBRequestParams struct {
+	// <p>Knowledge base ID</p>
+	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
+
+	// <p>Workspace ID</p>
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+}
+
+type DescribeKBRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Knowledge base ID</p>
+	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
+
+	// <p>Workspace ID</p>
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+}
+
+func (r *DescribeKBRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeKBRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "KbId")
+	delete(f, "SpaceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeKBRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeKBResponseParams struct {
+	// <p>Associated application ID list</p>
+	AppIdList []*string `json:"AppIdList,omitnil,omitempty" name:"AppIdList"`
+
+	// <p>Capacity information.</p>
+	CapacityInfo *KBCapacity `json:"CapacityInfo,omitnil,omitempty" name:"CapacityInfo"`
+
+	// <p>ES configuration</p>
+	EsConfig *ESConfig `json:"EsConfig,omitnil,omitempty" name:"EsConfig"`
+
+	// <p>Model configuration</p>
+	ModelConfig *KBModelConfig `json:"ModelConfig,omitnil,omitempty" name:"ModelConfig"`
+
+	// <p>Owner information</p>
+	Owner *Operator `json:"Owner,omitnil,omitempty" name:"Owner"`
+
+	// <p>Knowledge base digest information</p>
+	Summary *KBSummary `json:"Summary,omitnil,omitempty" name:"Summary"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeKBResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeKBResponseParams `json:"Response"`
+}
+
+func (r *DescribeKBResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeKBResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeKBSummaryListRequestParams struct {
+	// <p>Workspace ID</p>
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// <p>Common filter</p>
+	FilterList []*Filter `json:"FilterList,omitnil,omitempty" name:"FilterList"`
+
+	// <p>Page number, starting from 0</p>
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// <p>Number of items per page. Default value: 10. Maximum value: 100.</p>
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// <p>Keyword</p>
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+}
+
+type DescribeKBSummaryListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Workspace ID</p>
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// <p>Common filter</p>
+	FilterList []*Filter `json:"FilterList,omitnil,omitempty" name:"FilterList"`
+
+	// <p>Page number, starting from 0</p>
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// <p>Number of items per page. Default value: 10. Maximum value: 100.</p>
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// <p>Keyword</p>
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+}
+
+func (r *DescribeKBSummaryListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeKBSummaryListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SpaceId")
+	delete(f, "FilterList")
+	delete(f, "PageNumber")
+	delete(f, "PageSize")
+	delete(f, "Query")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeKBSummaryListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeKBSummaryListResponseParams struct {
+	// <p>Knowledge base list</p>
+	KbList []*KBSummary `json:"KbList,omitnil,omitempty" name:"KbList"`
+
+	// <p>Total.</p>
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeKBSummaryListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeKBSummaryListResponseParams `json:"Response"`
+}
+
+func (r *DescribeKBSummaryListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeKBSummaryListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeLabelRequestParams struct {
 	// <p>ID of the knowledge base it belongs to</p>
 	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
@@ -6907,6 +7645,87 @@ func (r *DescribeLatestReleaseResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeMetricOverviewListRequestParams struct {
+	// <p>Dashboard domain. Required. Determines which domain's KPI data to return.</p><table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>RESOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>RESOURCE_TYPE_MODEL</td><td>1</td><td>Model usage</td></tr><tr><td>RESOURCE_TYPE_PLUGIN</td><td>2</td><td>Plug-in usage</td></tr><tr><td>RESOURCE_TYPE_PLATFORM</td><td>3</td><td>Platform feature usage</td></tr><tr><td>RESOURCE_TYPE_MODEL_CONCURRENCY</td><td>4</td><td>Model concurrency limit exceeded</td></tr><tr><td>RESOURCE_TYPE_KB_CAPACITY</td><td>5</td><td>Knowledge base capacity</td></tr><tr><td>RESOURCE_TYPE_USAGE_SUMMARY</td><td>6</td><td>Usage summary</td></tr><tr><td>RESOURCE_TYPE_RESOURCE_CONSUME</td><td>7</td><td>Resource consumption (billing details)</td></tr></tbody></table>
+	ResourceType *int64 `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
+
+	// <p>Query time range (Unix seconds).</p>
+	TimeRange *TimeRange `json:"TimeRange,omitnil,omitempty" name:"TimeRange"`
+
+	// <p>View scope: corporate view / space view</p>
+	ViewScope *ViewScope `json:"ViewScope,omitnil,omitempty" name:"ViewScope"`
+
+	// <p>Extended filtering (resource_type=MODEL). Filter combination rule: multiple items use AND, AND value_list within the same item uses OR. Supported Names: MODEL_Name (MODEL Name), user_id (uid), space_id (space id), resource_id/source_id (source id), metric_source_type (metric_source_type_* Enumeration Name OR integer)</p>
+	FilterList []*Filter `json:"FilterList,omitnil,omitempty" name:"FilterList"`
+}
+
+type DescribeMetricOverviewListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Dashboard domain. Required. Determines which domain's KPI data to return.</p><table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>RESOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>RESOURCE_TYPE_MODEL</td><td>1</td><td>Model usage</td></tr><tr><td>RESOURCE_TYPE_PLUGIN</td><td>2</td><td>Plug-in usage</td></tr><tr><td>RESOURCE_TYPE_PLATFORM</td><td>3</td><td>Platform feature usage</td></tr><tr><td>RESOURCE_TYPE_MODEL_CONCURRENCY</td><td>4</td><td>Model concurrency limit exceeded</td></tr><tr><td>RESOURCE_TYPE_KB_CAPACITY</td><td>5</td><td>Knowledge base capacity</td></tr><tr><td>RESOURCE_TYPE_USAGE_SUMMARY</td><td>6</td><td>Usage summary</td></tr><tr><td>RESOURCE_TYPE_RESOURCE_CONSUME</td><td>7</td><td>Resource consumption (billing details)</td></tr></tbody></table>
+	ResourceType *int64 `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
+
+	// <p>Query time range (Unix seconds).</p>
+	TimeRange *TimeRange `json:"TimeRange,omitnil,omitempty" name:"TimeRange"`
+
+	// <p>View scope: corporate view / space view</p>
+	ViewScope *ViewScope `json:"ViewScope,omitnil,omitempty" name:"ViewScope"`
+
+	// <p>Extended filtering (resource_type=MODEL). Filter combination rule: multiple items use AND, AND value_list within the same item uses OR. Supported Names: MODEL_Name (MODEL Name), user_id (uid), space_id (space id), resource_id/source_id (source id), metric_source_type (metric_source_type_* Enumeration Name OR integer)</p>
+	FilterList []*Filter `json:"FilterList,omitnil,omitempty" name:"FilterList"`
+}
+
+func (r *DescribeMetricOverviewListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMetricOverviewListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ResourceType")
+	delete(f, "TimeRange")
+	delete(f, "ViewScope")
+	delete(f, "FilterList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMetricOverviewListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMetricOverviewListResponseParams struct {
+	// <p>All domain Overview unified output parameters: KPI Card List, key string identification indicator, client parses by resource_type; for key allowlist, see platform.common.v2.MetricOverview annotation</p>
+	MetricList []*MetricOverview `json:"MetricList,omitnil,omitempty" name:"MetricList"`
+
+	// <p>Total record count, equal to the length of MetricList, reserved only for list API consistency</p>
+	TotalCount *string `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMetricOverviewListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMetricOverviewListResponseParams `json:"Response"`
+}
+
+func (r *DescribeMetricOverviewListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMetricOverviewListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeModelListRequestParams struct {
 	// <p>Model scenario. 0-case-insensitive, 1-standard generation, 2-standard thinking, 3-Agent thinking, 4-multimodal understanding, 5-multimodal QA, 6-rewrite, 7-long-term memory, 8-natural language to SQL, 9-AI optimization, 10-real-time file parsing, 11-file parsing, 12-GraphRAG, 13-OpenClaw, 14-multimodal Embedding, 15-Rerank, 16-text Embedding, 17-Widget, 18-Claw mode, 19-workflow code generation, 20-workflow large model node, 21-dedicated vectorization for workflow node, 22-workflow parameter extraction, 23-workflow large model knowledge q&a, 24-workflow tag extraction, 25-workflow intent recognition, 26-workflow tab, 27-workflow logical judgment, 28-documentation generation QA, 29-knowledge base Schema</p><p>Enumeration values:</p><ul><li>0: case-insensitive</li><li>1: standard generation</li><li>2: standard thinking</li><li>3: Agent thinking</li><li>4: multimodal understanding</li><li>5: multimodal QA</li><li>6: rewrite</li><li>7: long-term memory</li><li>8: natural language to SQL</li><li>9: AI optimization</li><li>10: real-time file parsing</li><li>11: file parsing</li><li>12: GraphRAG</li><li>13: OpenClaw</li><li>14: multimodal Embedding</li><li>15: Rerank</li><li>16: text Embedding</li><li>17: Widget</li><li>18: Claw mode</li><li>19: workflow code generation</li><li>20: workflow large model node</li><li>21: dedicated vectorization for workflow node</li><li>22: workflow parameter extraction</li><li>23: workflow large model knowledge q&a</li><li>24: workflow tag extraction</li><li>25: workflow intent recognition</li><li>26: workflow tab</li><li>27: workflow logical judgment</li><li>28: documentation generation QA</li><li>29: knowledge base Schema</li></ul>
 	ModelScene *int64 `json:"ModelScene,omitnil,omitempty" name:"ModelScene"`
@@ -7055,6 +7874,103 @@ func (r *DescribeMsgRecordCategoryListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeMsgRecordCategoryListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMsgRecordListRequestParams struct {
+	// <p>Application ID</p>
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <ul><li><strong>ChannelType</strong> : 0-all 2-experience page (Tencent Cloud) 3-web debugging page (Tencent Cloud) 4-experience page (phone number) 5-dialogue API connection 6-application evaluation 7-debug API 10000-WeChat service account 10001-WeChat Subscription Account 10002-WeCom app 10004-WeChat Customer Service 10005-WeChat mini program 10006-Tencent Yuanqi 10007-App Treasure 10009-WeCom intelligent bot 10014-WeCom intelligent bot 10011-LINE 10012-Telegram 10013-DingTalk chatbot 10016-Lark chatbot 30000-scheduled task 30001-trigger </li><li><strong>FeedbackType</strong> : feedback type, -1-all 0-not rated 1-like 2-dislike </li><li><strong>QueryType</strong> : retrieval type (take value as agreed by the platform), SessionId-sessionID Question-question Answer-reply Intent-intent User-user </li><li><strong>Query</strong> : filter criteria corresponding to QueryType </li><li><strong>CategoryId</strong> : category ID </li><li><strong>ReplyMethod</strong> : reply type 0-all reply types 1-reply to rejected questions 2-direct QA reply 3-review failure reply 4-knowledge polish reply 6-workflow reply 8-image understanding reply 9-search engine reply 10-large model direct reply 11-fallback response </li><li><strong>StartTime</strong> : start time, unix second-level timestamp </li><li><strong>EndTime</strong> : end time, unix second-level timestamp </li><li><strong>Cursor</strong> : cursor. For the previous page, take PrevCursor from the response; for the next page, take NextCursor from the response. </li><li><strong>Direction</strong> : direction. next: next page, prev: previous page</li><li><strong>CallResult</strong> : call result: 0-all / 1-success / 2-failure / 3-canceled by the user </li><li><strong>FailReason</strong> : failure reason 0-all 1-review failure 2-QPM limit reached 3-TPM limit reached 4-concurrency limit reached 5-system exception </li><li><strong>Intent</strong> : intent</li></ul>
+	FilterList []*Filter `json:"FilterList,omitnil,omitempty" name:"FilterList"`
+
+	// <p>Page number, starting from 0. If not passed, it is processed as 0.</p>
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// <p>Number of items per page. Maximum value: 100. If not specified or set to 0, the default pagination size is used.</p>
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// <p>Sort condition. Supports sorting by CreateTime only</p>
+	Sort *Sort `json:"Sort,omitnil,omitempty" name:"Sort"`
+}
+
+type DescribeMsgRecordListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Application ID</p>
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <ul><li><strong>ChannelType</strong> : 0-all 2-experience page (Tencent Cloud) 3-web debugging page (Tencent Cloud) 4-experience page (phone number) 5-dialogue API connection 6-application evaluation 7-debug API 10000-WeChat service account 10001-WeChat Subscription Account 10002-WeCom app 10004-WeChat Customer Service 10005-WeChat mini program 10006-Tencent Yuanqi 10007-App Treasure 10009-WeCom intelligent bot 10014-WeCom intelligent bot 10011-LINE 10012-Telegram 10013-DingTalk chatbot 10016-Lark chatbot 30000-scheduled task 30001-trigger </li><li><strong>FeedbackType</strong> : feedback type, -1-all 0-not rated 1-like 2-dislike </li><li><strong>QueryType</strong> : retrieval type (take value as agreed by the platform), SessionId-sessionID Question-question Answer-reply Intent-intent User-user </li><li><strong>Query</strong> : filter criteria corresponding to QueryType </li><li><strong>CategoryId</strong> : category ID </li><li><strong>ReplyMethod</strong> : reply type 0-all reply types 1-reply to rejected questions 2-direct QA reply 3-review failure reply 4-knowledge polish reply 6-workflow reply 8-image understanding reply 9-search engine reply 10-large model direct reply 11-fallback response </li><li><strong>StartTime</strong> : start time, unix second-level timestamp </li><li><strong>EndTime</strong> : end time, unix second-level timestamp </li><li><strong>Cursor</strong> : cursor. For the previous page, take PrevCursor from the response; for the next page, take NextCursor from the response. </li><li><strong>Direction</strong> : direction. next: next page, prev: previous page</li><li><strong>CallResult</strong> : call result: 0-all / 1-success / 2-failure / 3-canceled by the user </li><li><strong>FailReason</strong> : failure reason 0-all 1-review failure 2-QPM limit reached 3-TPM limit reached 4-concurrency limit reached 5-system exception </li><li><strong>Intent</strong> : intent</li></ul>
+	FilterList []*Filter `json:"FilterList,omitnil,omitempty" name:"FilterList"`
+
+	// <p>Page number, starting from 0. If not passed, it is processed as 0.</p>
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// <p>Number of items per page. Maximum value: 100. If not specified or set to 0, the default pagination size is used.</p>
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// <p>Sort condition. Supports sorting by CreateTime only</p>
+	Sort *Sort `json:"Sort,omitnil,omitempty" name:"Sort"`
+}
+
+func (r *DescribeMsgRecordListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMsgRecordListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AppId")
+	delete(f, "FilterList")
+	delete(f, "PageNumber")
+	delete(f, "PageSize")
+	delete(f, "Sort")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeMsgRecordListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeMsgRecordListResponseParams struct {
+	// <p>Whether there are more pages</p>
+	HasMore *bool `json:"HasMore,omitnil,omitempty" name:"HasMore"`
+
+	// <p>Message record list</p>
+	MsgRecordList []*MsgRecord `json:"MsgRecordList,omitnil,omitempty" name:"MsgRecordList"`
+
+	// <p>Next page cursor information.</p>
+	NextCursor *string `json:"NextCursor,omitnil,omitempty" name:"NextCursor"`
+
+	// <p>Previous page cursor info.</p>
+	PrevCursor *string `json:"PrevCursor,omitnil,omitempty" name:"PrevCursor"`
+
+	// <p>Total record count that meets the conditions, used for frontend paginated display</p>
+	TotalCount *string `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeMsgRecordListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeMsgRecordListResponseParams `json:"Response"`
+}
+
+func (r *DescribeMsgRecordListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeMsgRecordListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7735,6 +8651,63 @@ func (r *DescribeReleaseSummaryResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeResourceSummaryRequestParams struct {
+
+}
+
+type DescribeResourceSummaryRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeResourceSummaryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeResourceSummaryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeResourceSummaryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeResourceSummaryResponseParams struct {
+	// <p>Usage information of the billing package</p>
+	ResourcePackage *ResourcePackageInfo `json:"ResourcePackage,omitnil,omitempty" name:"ResourcePackage"`
+
+	// <p>Billing value-added package usage information</p>
+	AddOnPackage *AddOnPackageInfo `json:"AddOnPackage,omitnil,omitempty" name:"AddOnPackage"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeResourceSummaryResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeResourceSummaryResponseParams `json:"Response"`
+}
+
+func (r *DescribeResourceSummaryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeResourceSummaryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeSkillCategoryListRequestParams struct {
 
 }
@@ -7785,6 +8758,77 @@ func (r *DescribeSkillCategoryListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeSkillCategoryListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSkillDetailRequestParams struct {
+	// skillID
+	SkillId *string `json:"SkillId,omitnil,omitempty" name:"SkillId"`
+
+	// Space ID.
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// version Filter criteria (multiple filters are in an AND relationship with each other, AND multiple Values of the same Filter are in an OR relationship): - Perspective: Perspective enumeration, single string value. The length of Values must be 1. Multiple Values are deemed as illegal. It only acts on the trimming of version_list returned in the details AND does not determine the visibility of the api itself. Default if not passed: USER (USER = USER Perspective, version_list returns only launch versions / EDITOR = EDITOR Perspective, version_list returns ALL liveness versions / ALL = full Perspective, same as EDITOR)
+	VersionFilterList []*Filter `json:"VersionFilterList,omitnil,omitempty" name:"VersionFilterList"`
+}
+
+type DescribeSkillDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// skillID
+	SkillId *string `json:"SkillId,omitnil,omitempty" name:"SkillId"`
+
+	// Space ID.
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// version Filter criteria (multiple filters are in an AND relationship with each other, AND multiple Values of the same Filter are in an OR relationship): - Perspective: Perspective enumeration, single string value. The length of Values must be 1. Multiple Values are deemed as illegal. It only acts on the trimming of version_list returned in the details AND does not determine the visibility of the api itself. Default if not passed: USER (USER = USER Perspective, version_list returns only launch versions / EDITOR = EDITOR Perspective, version_list returns ALL liveness versions / ALL = full Perspective, same as EDITOR)
+	VersionFilterList []*Filter `json:"VersionFilterList,omitnil,omitempty" name:"VersionFilterList"`
+}
+
+func (r *DescribeSkillDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSkillDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SkillId")
+	delete(f, "SpaceId")
+	delete(f, "VersionFilterList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSkillDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSkillDetailResponseParams struct {
+	// skill details
+	SkillDetail *SkillDetail `json:"SkillDetail,omitnil,omitempty" name:"SkillDetail"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSkillDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSkillDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeSkillDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSkillDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8098,6 +9142,101 @@ func (r *DescribeSystemVariableListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeSystemVariableListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUsageDetailListRequestParams struct {
+	// <p>Resource type, limited to RESOURCE_TYPE_MODEL / RESOURCE_TYPE_PLUGIN</p><table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>RESOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>RESOURCE_TYPE_MODEL</td><td>1</td><td>Model usage</td></tr><tr><td>RESOURCE_TYPE_PLUGIN</td><td>2</td><td>Plug-in usage (reserved, not currently supported)</td></tr><tr><td>RESOURCE_TYPE_PLATFORM</td><td>3</td><td>Platform feature usage (reserved, not currently supported)</td></tr><tr><td>RESOURCE_TYPE_MODEL_CONCURRENCY</td><td>4</td><td>Model concurrency limit exceeded (reserved, not currently supported)</td></tr><tr><td>RESOURCE_TYPE_KB_CAPACITY</td><td>5</td><td>Knowledge base capacity (reserved, not currently supported)</td></tr><tr><td>RESOURCE_TYPE_USAGE_SUMMARY</td><td>6</td><td>Usage summary (reserved, not currently supported)</td></tr><tr><td>RESOURCE_TYPE_RESOURCE_CONSUME</td><td>7</td><td>Resource consumption (billing details) (reserved, not currently supported)</td></tr></tbody></table>
+	ResourceType *int64 `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
+
+	// <p>Query time range (Unix seconds).</p>
+	TimeRange *TimeRange `json:"TimeRange,omitnil,omitempty" name:"TimeRange"`
+
+	// <p>View scope: corporate view / space view / application view</p>
+	ViewScope *ViewScope `json:"ViewScope,omitnil,omitempty" name:"ViewScope"`
+
+	// <p>Extended Filter (resource_type=MODEL). Filter combination rule: multiple items use AND, AND values within the same item use OR. Supported names: MODEL_Name, user_id, space_id, resource_id/source_id, metric_source_type (metric_source_type_* OR integer), call_type (invocation type)</p>
+	FilterList []*Filter `json:"FilterList,omitnil,omitempty" name:"FilterList"`
+
+	// <p>Page number, starting from 0.</p>
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// <p>Number of items per page. Maximum: 100.</p>
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+}
+
+type DescribeUsageDetailListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Resource type, limited to RESOURCE_TYPE_MODEL / RESOURCE_TYPE_PLUGIN</p><table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>RESOURCE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>RESOURCE_TYPE_MODEL</td><td>1</td><td>Model usage</td></tr><tr><td>RESOURCE_TYPE_PLUGIN</td><td>2</td><td>Plug-in usage (reserved, not currently supported)</td></tr><tr><td>RESOURCE_TYPE_PLATFORM</td><td>3</td><td>Platform feature usage (reserved, not currently supported)</td></tr><tr><td>RESOURCE_TYPE_MODEL_CONCURRENCY</td><td>4</td><td>Model concurrency limit exceeded (reserved, not currently supported)</td></tr><tr><td>RESOURCE_TYPE_KB_CAPACITY</td><td>5</td><td>Knowledge base capacity (reserved, not currently supported)</td></tr><tr><td>RESOURCE_TYPE_USAGE_SUMMARY</td><td>6</td><td>Usage summary (reserved, not currently supported)</td></tr><tr><td>RESOURCE_TYPE_RESOURCE_CONSUME</td><td>7</td><td>Resource consumption (billing details) (reserved, not currently supported)</td></tr></tbody></table>
+	ResourceType *int64 `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
+
+	// <p>Query time range (Unix seconds).</p>
+	TimeRange *TimeRange `json:"TimeRange,omitnil,omitempty" name:"TimeRange"`
+
+	// <p>View scope: corporate view / space view / application view</p>
+	ViewScope *ViewScope `json:"ViewScope,omitnil,omitempty" name:"ViewScope"`
+
+	// <p>Extended Filter (resource_type=MODEL). Filter combination rule: multiple items use AND, AND values within the same item use OR. Supported names: MODEL_Name, user_id, space_id, resource_id/source_id, metric_source_type (metric_source_type_* OR integer), call_type (invocation type)</p>
+	FilterList []*Filter `json:"FilterList,omitnil,omitempty" name:"FilterList"`
+
+	// <p>Page number, starting from 0.</p>
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// <p>Number of items per page. Maximum: 100.</p>
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+}
+
+func (r *DescribeUsageDetailListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUsageDetailListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ResourceType")
+	delete(f, "TimeRange")
+	delete(f, "ViewScope")
+	delete(f, "FilterList")
+	delete(f, "PageNumber")
+	delete(f, "PageSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeUsageDetailListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeUsageDetailListResponseParams struct {
+	// <p>Total record count for frontend pagination</p>
+	TotalCount *string `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>Resource invocation time series details list</p>
+	UsageDetailList []*UsageDetail `json:"UsageDetailList,omitnil,omitempty" name:"UsageDetailList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeUsageDetailListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeUsageDetailListResponseParams `json:"Response"`
+}
+
+func (r *DescribeUsageDetailListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeUsageDetailListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8453,6 +9592,94 @@ func (r *DescribeWorkflowRunResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeWorkflowRunSummaryListRequestParams struct {
+	// <p>Application ID. For how to obtain it, see <a href="https://www.tencentcloud.com/document/product/1759/109469?from_cn_redirect=1#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa">AppId</a></p>
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <p>Number of items per page (value ranges from 1 to 200)</p>
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// <p>Page number (must be greater than 0)</p>
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// <p>Execution environment. 1: Development domain, 2: Production domain -</p>
+	Domain *uint64 `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// <p>Parameter filtering</p>
+	FilterList []*Filter `json:"FilterList,omitnil,omitempty" name:"FilterList"`
+}
+
+type DescribeWorkflowRunSummaryListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Application ID. For how to obtain it, see <a href="https://www.tencentcloud.com/document/product/1759/109469?from_cn_redirect=1#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa">AppId</a></p>
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <p>Number of items per page (value ranges from 1 to 200)</p>
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// <p>Page number (must be greater than 0)</p>
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// <p>Execution environment. 1: Development domain, 2: Production domain -</p>
+	Domain *uint64 `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// <p>Parameter filtering</p>
+	FilterList []*Filter `json:"FilterList,omitnil,omitempty" name:"FilterList"`
+}
+
+func (r *DescribeWorkflowRunSummaryListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeWorkflowRunSummaryListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AppId")
+	delete(f, "PageSize")
+	delete(f, "PageNumber")
+	delete(f, "Domain")
+	delete(f, "FilterList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWorkflowRunSummaryListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeWorkflowRunSummaryListResponseParams struct {
+	// <p>Total.</p>
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>Workflow operation instance list</p>
+	WorkflowRunSummaryList []*WorkflowRunSummary `json:"WorkflowRunSummaryList,omitnil,omitempty" name:"WorkflowRunSummaryList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeWorkflowRunSummaryListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeWorkflowRunSummaryListResponseParams `json:"Response"`
+}
+
+func (r *DescribeWorkflowRunSummaryListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeWorkflowRunSummaryListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type DialogCustomConfig struct {
 	// <p>Whether to enable dynamic configuration modification on the dialogue side</p>
 	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
@@ -8491,6 +9718,162 @@ type DocExternalLink struct {
 	ReplaceOriginEnabled *bool `json:"ReplaceOriginEnabled,omitnil,omitempty" name:"ReplaceOriginEnabled"`
 }
 
+type DocImportSpec struct {
+	// <p>File ID (file identifier obtained through the file management service, required)</p>
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// <p>Ownership category ID</p>
+	CategoryId *string `json:"CategoryId,omitnil,omitempty" name:"CategoryId"`
+
+	// <p>List of rules regarding repeated files</p>
+	DeDuplicateStrategyList []*DeDuplicateStrategy `json:"DeDuplicateStrategyList,omitnil,omitempty" name:"DeDuplicateStrategyList"`
+
+	// <p>Knowledge effective scope<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>Disabled</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>Development domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>Release domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>Global</td></tr></tbody></table></p>
+	EffectiveDomain *int64 `json:"EffectiveDomain,omitnil,omitempty" name:"EffectiveDomain"`
+
+	// <p>Expiration policy (validity time and behavior after the validity period expires)</p>
+	ExpirationPolicy *ExpirationPolicy `json:"ExpirationPolicy,omitnil,omitempty" name:"ExpirationPolicy"`
+
+	// <p>External link</p>
+	ExternalLink *DocExternalLink `json:"ExternalLink,omitnil,omitempty" name:"ExternalLink"`
+
+	// <p>Applicable scope (tag condition).</p>
+	LabelRefList []*LabelRefIdentity `json:"LabelRefList,omitnil,omitempty" name:"LabelRefList"`
+
+	// <p>Parsing configuration (split rules, content filtering, etc.)</p>
+	ParseConfig *DocParseConfig `json:"ParseConfig,omitnil,omitempty" name:"ParseConfig"`
+
+	// <p>Switch configuration</p>
+	Switch *DocSwitch `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// <p>Update cycle</p>
+	UpdatePeriod *DocUpdatePeriod `json:"UpdatePeriod,omitnil,omitempty" name:"UpdatePeriod"`
+
+	// <p>User access configuration</p>
+	UserAccessConfig *UserAccessConfig `json:"UserAccessConfig,omitnil,omitempty" name:"UserAccessConfig"`
+}
+
+type DocLifecycle struct {
+	// <p>Creation time (Unix seconds).</p>
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Expiration policy (validity time and behavior after the validity period expires)</p>
+	ExpirationPolicy *ExpirationPolicy `json:"ExpirationPolicy,omitnil,omitempty" name:"ExpirationPolicy"`
+
+	// <p>Document status: 1=parsing, 2=parsing failure, 3=import failed, 4=under review, 5=review failure, 6=Learning, 7=learning failed, 8=import complete, 9=expired, 10=quota invalid, 11=quota recovering, 12=rename review failure, 13=rename appeal failure, 14=manual appeal in progress, 15=manual appeal failure<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>DOC_STATUS_UNKNOWN</td><td>0</td><td></td></tr><tr><td>DOC_STATUS_PARSING</td><td>1</td><td>Parsing</td></tr><tr><td>DOC_STATUS_PARSE_FAIL</td><td>2</td><td>Parsing failure</td></tr><tr><td>DOC_STATUS_IMPORT_FAIL</td><td>3</td><td>Import failed</td></tr><tr><td>DOC_STATUS_AUDITING</td><td>4</td><td>Under review</td></tr><tr><td>DOC_STATUS_AUDIT_FAIL</td><td>5</td><td>Review failure</td></tr><tr><td>DOC_STATUS_LEARNING</td><td>6</td><td>Learning</td></tr><tr><td>DOC_STATUS_LEARN_FAIL</td><td>7</td><td>Learning failed</td></tr><tr><td>DOC_STATUS_IMPORTED</td><td>8</td><td>Import complete</td></tr><tr><td>DOC_STATUS_EXPIRED</td><td>9</td><td>Expired</td></tr><tr><td>DOC_STATUS_QUOTA_INVALID</td><td>10</td><td>Quota invalid</td></tr><tr><td>DOC_STATUS_QUOTA_RECOVERING</td><td>11</td><td>Quota recovering</td></tr><tr><td>DOC_STATUS_RENAME_AUDIT_FAIL</td><td>12</td><td>Rename review failure</td></tr><tr><td>DOC_STATUS_RENAME_APPEAL_FAIL</td><td>13</td><td>Rename appeal failure</td></tr><tr><td>DOC_STATUS_MANUAL_APPEALING</td><td>14</td><td>Manual appeal in progress</td></tr><tr><td>DOC_STATUS_MANUAL_APPEAL_FAIL</td><td>15</td><td>Manual appeal failure</td></tr></tbody></table></p>
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Status description</p>
+	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
+
+	// <p>Status additional information</p>
+	StatusMessage *string `json:"StatusMessage,omitnil,omitempty" name:"StatusMessage"`
+
+	// <p>Update time (Unix seconds)</p>
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+}
+
+type DocLink struct {
+	// <p>COS link address, which can be used for preview and download</p>
+	CosUrl *string `json:"CosUrl,omitnil,omitempty" name:"CosUrl"`
+
+	// <p>External link</p>
+	ExternalLink *DocExternalLink `json:"ExternalLink,omitnil,omitempty" name:"ExternalLink"`
+}
+
+type DocMetadata struct {
+	// <p>Number of characters in the document</p>
+	DocCharCount *string `json:"DocCharCount,omitnil,omitempty" name:"DocCharCount"`
+
+	// <p>File name.</p>
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+
+	// <p>File size (byte)</p>
+	FileSize *string `json:"FileSize,omitnil,omitempty" name:"FileSize"`
+
+	// <p>File type/extension</p>
+	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
+
+	// <p>List of metadata reference field names (used to display which categories and properties of a document are set as metadata)</p>
+	RefFieldNameList []*string `json:"RefFieldNameList,omitnil,omitempty" name:"RefFieldNameList"`
+
+	// <p>Source description.</p>
+	SourceDesc *string `json:"SourceDesc,omitnil,omitempty" name:"SourceDesc"`
+
+	// <p>Document source type: 1=local upload, 2=webpage link, 3=COS integration, 4=import from external sources<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>DOC_SOURCE_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>DOC_SOURCE_TYPE_LOCAL</td><td>1</td><td>Local upload</td></tr><tr><td>DOC_SOURCE_TYPE_URL</td><td>2</td><td>Webpage link</td></tr><tr><td>DOC_SOURCE_TYPE_COS</td><td>3</td><td>COS integration</td></tr><tr><td>DOC_SOURCE_TYPE_IMPORT</td><td>4</td><td>Import from external sources</td></tr></tbody></table></p>
+	SourceType *int64 `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+}
+
+type DocModifyFields struct {
+	// <p>Ownership category ID</p>
+	CategoryId *string `json:"CategoryId,omitnil,omitempty" name:"CategoryId"`
+
+	// <p>Application scope<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_NONE</td><td>1</td><td>Disabled</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_DEV</td><td>2</td><td>Development domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_RELEASE</td><td>3</td><td>Release domain only</td></tr><tr><td>KNOWLEDGE_EFFECTIVE_DOMAIN_ALL</td><td>4</td><td>Global</td></tr></tbody></table></p>
+	EffectiveDomain *int64 `json:"EffectiveDomain,omitnil,omitempty" name:"EffectiveDomain"`
+
+	// <p>Expiration policy (validity time and behavior after the validity period expires)</p>
+	ExpirationPolicy *ExpirationPolicy `json:"ExpirationPolicy,omitnil,omitempty" name:"ExpirationPolicy"`
+
+	// <p>External link</p>
+	ExternalLink *DocExternalLink `json:"ExternalLink,omitnil,omitempty" name:"ExternalLink"`
+
+	// <p>Tag list.</p>
+	LabelRefList []*LabelRefIdentity `json:"LabelRefList,omitnil,omitempty" name:"LabelRefList"`
+
+	// <p>Document name.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Parsing configuration (split rules, content filtering, etc.)</p>
+	ParseConfig *DocParseConfig `json:"ParseConfig,omitnil,omitempty" name:"ParseConfig"`
+
+	// <p>Switch configuration</p>
+	Switch *DocSwitch `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// <p>Update cycle</p>
+	UpdatePeriod *DocUpdatePeriod `json:"UpdatePeriod,omitnil,omitempty" name:"UpdatePeriod"`
+
+	// <p>User access configuration</p>
+	UserAccessConfig *UserAccessConfig `json:"UserAccessConfig,omitnil,omitempty" name:"UserAccessConfig"`
+}
+
+type DocOperator struct {
+	// <p>Modifier</p>
+	Modifier *Operator `json:"Modifier,omitnil,omitempty" name:"Modifier"`
+
+	// <p>Operation permission</p>
+	Permission *DocPermission `json:"Permission,omitnil,omitempty" name:"Permission"`
+}
+
+type DocParseConfig struct {
+	// <p>Content filtering configuration</p>
+	ContentFilter *ContentFilter `json:"ContentFilter,omitnil,omitempty" name:"ContentFilter"`
+
+	// <p>Split rule</p>
+	SplitRule *string `json:"SplitRule,omitnil,omitempty" name:"SplitRule"`
+}
+
+type DocPermission struct {
+	// <p>Whether it is deletable.</p>
+	CanDelete *bool `json:"CanDelete,omitnil,omitempty" name:"CanDelete"`
+
+	// <p>Whether it is editable</p>
+	CanEdit *bool `json:"CanEdit,omitnil,omitempty" name:"CanEdit"`
+
+	// <p>Whether it can be regenerated</p>
+	CanRestart *bool `json:"CanRestart,omitnil,omitempty" name:"CanRestart"`
+
+	// <p>Whether retry is allowed</p>
+	CanRetry *bool `json:"CanRetry,omitnil,omitempty" name:"CanRetry"`
+}
+
+type DocQuery struct {
+	// <p>Query keyword (name fuzzy search)</p>
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// <p>Query scope (fields that the query applies to): 1=file name, 2=tag or tag value; multiple selections supported, invalid by default</p>
+	QueryScopeList []*int64 `json:"QueryScopeList,omitnil,omitempty" name:"QueryScopeList"`
+}
+
 type DocRetrievalConfig struct {
 	// <p>Confidence threshold</p>
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
@@ -8502,12 +9885,51 @@ type DocRetrievalConfig struct {
 	TopN *uint64 `json:"TopN,omitnil,omitempty" name:"TopN"`
 }
 
+type DocSummary struct {
+	// <p>Category path (including category ID, category ID path from the root node, and category name path)</p>
+	CategoryPath *CategoryPath `json:"CategoryPath,omitnil,omitempty" name:"CategoryPath"`
+
+	// <p>Document ID</p>
+	DocId *string `json:"DocId,omitnil,omitempty" name:"DocId"`
+
+	// <p>Knowledge effective scope (aggregate application scope + tag condition)</p>
+	KnowledgeScope *KnowledgeScope `json:"KnowledgeScope,omitnil,omitempty" name:"KnowledgeScope"`
+
+	// <p>Lifecycle information.</p>
+	Lifecycle *DocLifecycle `json:"Lifecycle,omitnil,omitempty" name:"Lifecycle"`
+
+	// <p>Meta information.</p>
+	Metadata *DocMetadata `json:"Metadata,omitnil,omitempty" name:"Metadata"`
+
+	// <p>Operator information (aggregate modifier + operation permission)</p>
+	OperatorInfo *DocOperator `json:"OperatorInfo,omitnil,omitempty" name:"OperatorInfo"`
+
+	// <p>Task status information</p>
+	TaskStatus *DocTaskStatus `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
+}
+
 type DocSwitch struct {
 	// <p>Whether it is downloadable</p>
 	DownloadEnabled *bool `json:"DownloadEnabled,omitnil,omitempty" name:"DownloadEnabled"`
 
 	// <p>Whether to show in the reference</p>
 	ReferEnabled *bool `json:"ReferEnabled,omitnil,omitempty" name:"ReferEnabled"`
+}
+
+type DocTaskStatus struct {
+	// <p>List of completed historical task types</p>
+	CompletedTaskTypeList []*int64 `json:"CompletedTaskTypeList,omitnil,omitempty" name:"CompletedTaskTypeList"`
+
+	// <p>List of supported task types in progress</p>
+	OngoingTaskTypeList []*int64 `json:"OngoingTaskTypeList,omitnil,omitempty" name:"OngoingTaskTypeList"`
+}
+
+type DocUpdatePeriod struct {
+	// <p>Whether periodic update is enabled</p>
+	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// <p>Update interval (hr)</p>
+	PeriodHour *uint64 `json:"PeriodHour,omitnil,omitempty" name:"PeriodHour"`
 }
 
 type DuplexBilling struct {
@@ -8644,6 +10066,128 @@ func (r *ExportQAResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type FavoritePluginRequestParams struct {
+	// <p>Plugin_id</p>
+	PluginId *string `json:"PluginId,omitnil,omitempty" name:"PluginId"`
+
+	// <p>Current workspace id</p>
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+}
+
+type FavoritePluginRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Plugin_id</p>
+	PluginId *string `json:"PluginId,omitnil,omitempty" name:"PluginId"`
+
+	// <p>Current workspace id</p>
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+}
+
+func (r *FavoritePluginRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *FavoritePluginRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PluginId")
+	delete(f, "SpaceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "FavoritePluginRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type FavoritePluginResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type FavoritePluginResponse struct {
+	*tchttp.BaseResponse
+	Response *FavoritePluginResponseParams `json:"Response"`
+}
+
+func (r *FavoritePluginResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *FavoritePluginResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type FavoriteSkillRequestParams struct {
+	// <p>SkillId</p>
+	SkillId *string `json:"SkillId,omitnil,omitempty" name:"SkillId"`
+
+	// <p>Workspace ID</p>
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+}
+
+type FavoriteSkillRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>SkillId</p>
+	SkillId *string `json:"SkillId,omitnil,omitempty" name:"SkillId"`
+
+	// <p>Workspace ID</p>
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+}
+
+func (r *FavoriteSkillRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *FavoriteSkillRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SkillId")
+	delete(f, "SpaceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "FavoriteSkillRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type FavoriteSkillResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type FavoriteSkillResponse struct {
+	*tchttp.BaseResponse
+	Response *FavoriteSkillResponseParams `json:"Response"`
+}
+
+func (r *FavoriteSkillResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *FavoriteSkillResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type FieldMask struct {
 	// <p>Parameter name</p><p>Parameter format: path of the specified field to get</p>
 	Paths []*string `json:"Paths,omitnil,omitempty" name:"Paths"`
@@ -8738,6 +10282,70 @@ type Identity struct {
 	StrId *string `json:"StrId,omitnil,omitempty" name:"StrId"`
 }
 
+// Predefined struct for user
+type ImportDocListRequestParams struct {
+	// <p>List of documents to be imported (quantity: 1-20)</p>
+	DocList []*DocImportSpec `json:"DocList,omitnil,omitempty" name:"DocList"`
+
+	// <p>Knowledge base ID</p>
+	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
+}
+
+type ImportDocListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>List of documents to be imported (quantity: 1-20)</p>
+	DocList []*DocImportSpec `json:"DocList,omitnil,omitempty" name:"DocList"`
+
+	// <p>Knowledge base ID</p>
+	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
+}
+
+func (r *ImportDocListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ImportDocListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DocList")
+	delete(f, "KbId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ImportDocListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ImportDocListResponseParams struct {
+	// <p>Batch import result.</p>
+	ResultList []*OperationResult `json:"ResultList,omitnil,omitempty" name:"ResultList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ImportDocListResponse struct {
+	*tchttp.BaseResponse
+	Response *ImportDocListResponseParams `json:"Response"`
+}
+
+func (r *ImportDocListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ImportDocListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type InputBoxConfig struct {
 	// Input box buttons: 1: Upload image, 2: Upload documents, 3: Tencent Docs, 4: Online search
 	InputBoxButtons []*int64 `json:"InputBoxButtons,omitnil,omitempty" name:"InputBoxButtons"`
@@ -8765,6 +10373,17 @@ type IntervalSchedule struct {
 
 	// Value
 	Value *int64 `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type KBCapacity struct {
+	// <p>Maximum number of characters</p>
+	MaxCharSize *string `json:"MaxCharSize,omitnil,omitempty" name:"MaxCharSize"`
+
+	// <p>Number of excess characters</p>
+	OverCharSize *string `json:"OverCharSize,omitnil,omitempty" name:"OverCharSize"`
+
+	// <p>Used number of characters</p>
+	UsedCharSize *string `json:"UsedCharSize,omitnil,omitempty" name:"UsedCharSize"`
 }
 
 type KBCategory struct {
@@ -8812,6 +10431,20 @@ type KBModifyExtendFields struct {
 	Action *int64 `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
+type KBPermission struct {
+	// <p>Whether it is deletable.</p>
+	CanDelete *bool `json:"CanDelete,omitnil,omitempty" name:"CanDelete"`
+
+	// <p>Whether it is editable</p>
+	CanEdit *bool `json:"CanEdit,omitnil,omitempty" name:"CanEdit"`
+
+	// <p>Whether or not it can be shared</p>
+	CanShare *bool `json:"CanShare,omitnil,omitempty" name:"CanShare"`
+
+	// <p>Whether it is viewable</p>
+	CanView *bool `json:"CanView,omitnil,omitempty" name:"CanView"`
+}
+
 type KBRetrievalConfig struct {
 	// <p>Database search configuration</p>
 	DbRetrievalConfig *DBRetrievalConfig `json:"DbRetrievalConfig,omitnil,omitempty" name:"DbRetrievalConfig"`
@@ -8841,6 +10474,28 @@ type KBRetrievalConfig struct {
 	TextToSqlModel *ModelDetailInfo `json:"TextToSqlModel,omitnil,omitempty" name:"TextToSqlModel"`
 }
 
+type KBShareStatus struct {
+	// <p>Approval Id.</p>
+	ApprovalId *string `json:"ApprovalId,omitnil,omitempty" name:"ApprovalId"`
+
+	// <p>Approval/shared state: 1=PENDING Pending Approval, 2=REJECTED rejected, 3=APPROVED approved, 4=CANCELLED canceled</p>
+	SubStatusList []*int64 `json:"SubStatusList,omitnil,omitempty" name:"SubStatusList"`
+}
+
+type KBSpaceShare struct {
+	// <p>Whether it has been referenced by other spaces</p>
+	IsSpaceShared *bool `json:"IsSpaceShared,omitnil,omitempty" name:"IsSpaceShared"`
+
+	// <p>Referenced spatial information.</p>
+	SharedSpaceList []*Identity `json:"SharedSpaceList,omitnil,omitempty" name:"SharedSpaceList"`
+
+	// <p>Shared state</p>
+	SubStatus *KBShareStatus `json:"SubStatus,omitnil,omitempty" name:"SubStatus"`
+
+	// <p>Whether operation is allowed</p>
+	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
+}
+
 type KBSpec struct {
 	// <p>Description.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
@@ -8856,6 +10511,53 @@ type KBSpec struct {
 
 	// <p>Owner ID</p>
 	OwnerId *string `json:"OwnerId,omitnil,omitempty" name:"OwnerId"`
+}
+
+type KBSummary struct {
+	// <p>List of associated applications. Returned only for shared knowledge base.</p>
+	AppList []*Identity `json:"AppList,omitnil,omitempty" name:"AppList"`
+
+	// <p>Creation time (Unix seconds).</p>
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Creator</p>
+	Creator *Operator `json:"Creator,omitnil,omitempty" name:"Creator"`
+
+	// <p>Description.</p>
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// <p>Number of documents</p>
+	DocCount *uint64 `json:"DocCount,omitnil,omitempty" name:"DocCount"`
+
+	// <p>Whether it is excessive</p>
+	IsExceeded *bool `json:"IsExceeded,omitnil,omitempty" name:"IsExceeded"`
+
+	// <p>Knowledge base ID</p>
+	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
+
+	// <p>Type: 1=default knowledge base, 2=shared knowledge base<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>KB_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>KB_TYPE_DEFAULT</td><td>1</td><td>Default knowledge base</td></tr><tr><td>KB_TYPE_SHARED</td><td>2</td><td>Shared knowledge base</td></tr></tbody></table></p>
+	KbType *int64 `json:"KbType,omitnil,omitempty" name:"KbType"`
+
+	// <p>Last operator. Returned only for shared knowledge bases.</p>
+	LatestOperator *Operator `json:"LatestOperator,omitnil,omitempty" name:"LatestOperator"`
+
+	// <p>Knowledge base name.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Operation permission.</p>
+	Permission *KBPermission `json:"Permission,omitnil,omitempty" name:"Permission"`
+
+	// <p>List of in-processing statuses</p>
+	ProcessingFlagList []*int64 `json:"ProcessingFlagList,omitnil,omitempty" name:"ProcessingFlagList"`
+
+	// <p>Share sub-type: 1=ordinary, 2=wechat official account<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>SHARED_KB_SUB_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>SHARED_KB_SUB_TYPE_NORMAL</td><td>1</td><td>Ordinary</td></tr><tr><td>SHARED_KB_SUB_TYPE_PUBLIC_ACCOUNT</td><td>2</td><td>WeChat official account</td></tr></tbody></table></p>
+	SharedSubType *int64 `json:"SharedSubType,omitnil,omitempty" name:"SharedSubType"`
+
+	// <p>Update time (Unix seconds)</p>
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// <p>Knowledge base space share information</p>
+	SpaceShare *KBSpaceShare `json:"SpaceShare,omitnil,omitempty" name:"SpaceShare"`
 }
 
 type KVPair struct {
@@ -9054,6 +10756,23 @@ type MCPPluginConfig struct {
 	SupportsApps *bool `json:"SupportsApps,omitnil,omitempty" name:"SupportsApps"`
 }
 
+type MCPResourceContents struct {
+	// <p>Binary content. Either this parameter or text must be specified.</p>
+	Blob *string `json:"Blob,omitnil,omitempty" name:"Blob"`
+
+	// <p>JSON: Original _meta of a single resource</p>
+	Meta *string `json:"Meta,omitnil,omitempty" name:"Meta"`
+
+	// <p>MIME type. The HTML of the MCP App is text/html;profile=mcp-app</p>
+	MimeType *string `json:"MimeType,omitnil,omitempty" name:"MimeType"`
+
+	// <p>Text content. Either this field or blob is required.</p>
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// <p>Resource URI</p>
+	Uri *string `json:"Uri,omitnil,omitempty" name:"Uri"`
+}
+
 type MCPToolConfig struct {
 	// <p>Input parameter</p>
 	Inputs []*RequestParam `json:"Inputs,omitnil,omitempty" name:"Inputs"`
@@ -9101,6 +10820,20 @@ type MetaValue struct {
 
 	// <p>Metadata value type: 1=property tag, 2=document classification, 3=QA classification<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>META_VALUE_TYPE_UNKNOWN</td><td>0</td><td>Unknown</td></tr><tr><td>META_VALUE_TYPE_TAG</td><td>1</td><td>Property tag</td></tr><tr><td>META_VALUE_TYPE_DOC_CATEGORY</td><td>2</td><td>Document classification</td></tr><tr><td>META_VALUE_TYPE_QA_CATEGORY</td><td>3</td><td>QA classification</td></tr></tbody></table></p>
 	ValueType *int64 `json:"ValueType,omitnil,omitempty" name:"ValueType"`
+}
+
+type MetricOverview struct {
+	// <p>Metric key. For the value, see the key allowlist in the MetricOverview note.</p>
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// <p>Month-over-month percentage. Enter 0 if there is no month-over-month comparison</p>
+	Mom *float64 `json:"Mom,omitnil,omitempty" name:"Mom"`
+
+	// <p>Metric unit, enumeration value DosageUnit; for the mapping between key and unit, see the MetricOverview comment allowlist</p><table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>DOSAGE_UNIT_TOKEN</td><td>0</td><td>token (default)</td></tr><tr><td>DOSAGE_UNIT_PAGE_COUNT</td><td>1</td><td>page_count (page number)</td></tr><tr><td>DOSAGE_UNIT_TIMES</td><td>2</td><td>times (count)</td></tr><tr><td>DOSAGE_UNIT_SECOND</td><td>3</td><td>second</td></tr><tr><td>DOSAGE_UNIT_ITEM</td><td>4</td><td>item</td></tr><tr><td>DOSAGE_UNIT_SHEET</td><td>5</td><td>sheet</td></tr><tr><td>DOSAGE_UNIT_CHARACTER</td><td>6</td><td>character</td></tr><tr><td>DOSAGE_UNIT_GB</td><td>7</td><td>GB</td></tr><tr><td>DOSAGE_UNIT_NUMBER</td><td>8</td><td>number (count)</td></tr><tr><td>DOSAGE_UNIT_MILL_SECOND</td><td>9</td><td>mill_second (ms)</td></tr></tbody></table>
+	Unit *int64 `json:"Unit,omitnil,omitempty" name:"Unit"`
+
+	// <p>Metric value.</p>
+	Value *float64 `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type Model struct {
@@ -9297,6 +11030,23 @@ type ModelStatus struct {
 
 	// <p>TPM call upper limit (at the current account level: use the configured value if available; otherwise, take default. 0 means failed to obtain)</p>
 	TpmLimit *string `json:"TpmLimit,omitnil,omitempty" name:"TpmLimit"`
+}
+
+type ModelUsageDetail struct {
+	// <p>Invocation type, originating from billing scene_billing (corresponding to filter.call_type)</p>
+	CallType *string `json:"CallType,omitnil,omitempty" name:"CallType"`
+
+	// <p>Whether it is the default knowledge base. It is only meaningful for the business where ResourceType=5 (knowledge base capacity)</p>
+	IsDefaultKB *bool `json:"IsDefaultKB,omitnil,omitempty" name:"IsDefaultKB"`
+
+	// <p>Model name</p>
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// <p>List of consumption measurements for a single call in the MODEL field (authoritative field): lists each measurement type by unit + label. When unit=TOKEN, label is case-sensitive for Token subcategories (input/output/avg_*/cache_*), and being empty indicates total_tokens; unit=PAGE_COUNT refers to the number of pages consumed by the model</p>
+	ResourceConsumptionList []*ResourceConsumption `json:"ResourceConsumptionList,omitnil,omitempty" name:"ResourceConsumptionList"`
+
+	// <p>PU consumption of this call</p>
+	ConsumptionPU *float64 `json:"ConsumptionPU,omitnil,omitempty" name:"ConsumptionPU"`
 }
 
 type ModelUsageSummary struct {
@@ -9597,6 +11347,221 @@ func (r *ModifyAppTriggerResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyCategoryRequestParams struct {
+	// <p>Category ID to be modified (must be greater than 0)</p>
+	CategoryId *string `json:"CategoryId,omitnil,omitempty" name:"CategoryId"`
+
+	// <p>Classification type (not allowed to be 0. Value: 1=document classification, 2=QA classification)<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>CATEGORY_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>CATEGORY_TYPE_DOC</td><td>1</td><td>Document classification</td></tr><tr><td>CATEGORY_TYPE_QA</td><td>2</td><td>QA classification</td></tr></tbody></table></p>
+	CategoryType *int64 `json:"CategoryType,omitnil,omitempty" name:"CategoryType"`
+
+	// <p>Modify field content (required, used in conjunction with update_mask)</p>
+	Fields *CategoryModifyFields `json:"Fields,omitnil,omitempty" name:"Fields"`
+
+	// <p>ID of the knowledge base it belongs to</p>
+	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
+
+	// <p>Field mask: specifies the field to modify (supported Paths: Name)</p>
+	UpdateMask *FieldMask `json:"UpdateMask,omitnil,omitempty" name:"UpdateMask"`
+}
+
+type ModifyCategoryRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Category ID to be modified (must be greater than 0)</p>
+	CategoryId *string `json:"CategoryId,omitnil,omitempty" name:"CategoryId"`
+
+	// <p>Classification type (not allowed to be 0. Value: 1=document classification, 2=QA classification)<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>CATEGORY_TYPE_UNKNOWN</td><td>0</td><td></td></tr><tr><td>CATEGORY_TYPE_DOC</td><td>1</td><td>Document classification</td></tr><tr><td>CATEGORY_TYPE_QA</td><td>2</td><td>QA classification</td></tr></tbody></table></p>
+	CategoryType *int64 `json:"CategoryType,omitnil,omitempty" name:"CategoryType"`
+
+	// <p>Modify field content (required, used in conjunction with update_mask)</p>
+	Fields *CategoryModifyFields `json:"Fields,omitnil,omitempty" name:"Fields"`
+
+	// <p>ID of the knowledge base it belongs to</p>
+	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
+
+	// <p>Field mask: specifies the field to modify (supported Paths: Name)</p>
+	UpdateMask *FieldMask `json:"UpdateMask,omitnil,omitempty" name:"UpdateMask"`
+}
+
+func (r *ModifyCategoryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCategoryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CategoryId")
+	delete(f, "CategoryType")
+	delete(f, "Fields")
+	delete(f, "KbId")
+	delete(f, "UpdateMask")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCategoryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCategoryResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyCategoryResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCategoryResponseParams `json:"Response"`
+}
+
+func (r *ModifyCategoryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCategoryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyChannelRequestParams struct {
+
+}
+
+type ModifyChannelRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *ModifyChannelRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyChannelRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyChannelRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyChannelResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyChannelResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyChannelResponseParams `json:"Response"`
+}
+
+func (r *ModifyChannelResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyChannelResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyConflictQARequestParams struct {
+	// <p>Knowledge base ID</p>
+	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
+
+	// <p>Conflict group ID (optional if ignored globally)</p>
+	ConflictGroupId *string `json:"ConflictGroupId,omitnil,omitempty" name:"ConflictGroupId"`
+
+	// <p>Whether to ignore globally (ignore all pending conflict issues under the current KB)</p>
+	IsIgnoreAll *bool `json:"IsIgnoreAll,omitnil,omitempty" name:"IsIgnoreAll"`
+
+	// <p>QA ID list involved in decision-making (required for KEEP and DELETE)</p>
+	QaIdList []*string `json:"QaIdList,omitnil,omitempty" name:"QaIdList"`
+
+	// <p>Conflict resolution policy: 1=reserve, 2=ignore, 3=delete (can be omitted when ignored globally)<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>CONFLICT_RESOLUTION_UNKNOWN</td><td>0</td><td>-</td></tr><tr><td>CONFLICT_RESOLUTION_KEEP</td><td>1</td><td>Reserve</td></tr><tr><td>CONFLICT_RESOLUTION_IGNORE</td><td>2</td><td>Ignore</td></tr><tr><td>CONFLICT_RESOLUTION_DELETE</td><td>3</td><td>Delete</td></tr></tbody></table></p>
+	Resolution *int64 `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+}
+
+type ModifyConflictQARequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Knowledge base ID</p>
+	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
+
+	// <p>Conflict group ID (optional if ignored globally)</p>
+	ConflictGroupId *string `json:"ConflictGroupId,omitnil,omitempty" name:"ConflictGroupId"`
+
+	// <p>Whether to ignore globally (ignore all pending conflict issues under the current KB)</p>
+	IsIgnoreAll *bool `json:"IsIgnoreAll,omitnil,omitempty" name:"IsIgnoreAll"`
+
+	// <p>QA ID list involved in decision-making (required for KEEP and DELETE)</p>
+	QaIdList []*string `json:"QaIdList,omitnil,omitempty" name:"QaIdList"`
+
+	// <p>Conflict resolution policy: 1=reserve, 2=ignore, 3=delete (can be omitted when ignored globally)<table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>CONFLICT_RESOLUTION_UNKNOWN</td><td>0</td><td>-</td></tr><tr><td>CONFLICT_RESOLUTION_KEEP</td><td>1</td><td>Reserve</td></tr><tr><td>CONFLICT_RESOLUTION_IGNORE</td><td>2</td><td>Ignore</td></tr><tr><td>CONFLICT_RESOLUTION_DELETE</td><td>3</td><td>Delete</td></tr></tbody></table></p>
+	Resolution *int64 `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+}
+
+func (r *ModifyConflictQARequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConflictQARequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "KbId")
+	delete(f, "ConflictGroupId")
+	delete(f, "IsIgnoreAll")
+	delete(f, "QaIdList")
+	delete(f, "Resolution")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyConflictQARequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyConflictQAResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyConflictQAResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyConflictQAResponseParams `json:"Response"`
+}
+
+func (r *ModifyConflictQAResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConflictQAResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyConversationRequestParams struct {
 	// <p>Session type. Enumeration values: 0-CONVERSATION_TYPE_UNSPECIFIED (not specified; means all in list query), 1-CONVERSATION_TYPE_VISITOR (visitor trial), 2-CONVERSATION_TYPE_EVALUATION (evaluation), 5-CONVERSATION_TYPE_API (API integration), 10-CONVERSATION_TYPE_WORKFLOW (workflow debugging), 20-CONVERSATION_TYPE_SHARE (share a link)</p>
 	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
@@ -9813,6 +11778,81 @@ func (r *ModifyDocListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyDocRequestParams struct {
+	// <p>Document ID</p>
+	DocId *string `json:"DocId,omitnil,omitempty" name:"DocId"`
+
+	// <p>Modify field contents (required, used together with update_mask)</p>
+	Fields *DocModifyFields `json:"Fields,omitnil,omitempty" name:"Fields"`
+
+	// <p>ID of the knowledge base it belongs to</p>
+	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
+
+	// <p>Field mask: specifies the fields to be modified (supported Paths: Name, CategoryId, EffectiveDomain, LabelRefList, ExternalLink, ExpirationPolicy, UpdatePeriod, Switch, ParseConfig, UserAccessConfig)</p>
+	UpdateMask *FieldMask `json:"UpdateMask,omitnil,omitempty" name:"UpdateMask"`
+}
+
+type ModifyDocRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Document ID</p>
+	DocId *string `json:"DocId,omitnil,omitempty" name:"DocId"`
+
+	// <p>Modify field contents (required, used together with update_mask)</p>
+	Fields *DocModifyFields `json:"Fields,omitnil,omitempty" name:"Fields"`
+
+	// <p>ID of the knowledge base it belongs to</p>
+	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
+
+	// <p>Field mask: specifies the fields to be modified (supported Paths: Name, CategoryId, EffectiveDomain, LabelRefList, ExternalLink, ExpirationPolicy, UpdatePeriod, Switch, ParseConfig, UserAccessConfig)</p>
+	UpdateMask *FieldMask `json:"UpdateMask,omitnil,omitempty" name:"UpdateMask"`
+}
+
+func (r *ModifyDocRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDocRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DocId")
+	delete(f, "Fields")
+	delete(f, "KbId")
+	delete(f, "UpdateMask")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDocRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDocResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyDocResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDocResponseParams `json:"Response"`
+}
+
+func (r *ModifyDocResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDocResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyKBRequestParams struct {
 	// <p>Knowledge base ID</p>
 	KbId *string `json:"KbId,omitnil,omitempty" name:"KbId"`
@@ -9962,6 +12002,177 @@ func (r *ModifyLabelResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyLabelResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMsgRecordCategoryRequestParams struct {
+	// <p>App ID</p>
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <p>Business ID of the category to be modified</p>
+	CategoryId *string `json:"CategoryId,omitnil,omitempty" name:"CategoryId"`
+
+	// <p>Category name after modification</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type ModifyMsgRecordCategoryRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>App ID</p>
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <p>Business ID of the category to be modified</p>
+	CategoryId *string `json:"CategoryId,omitnil,omitempty" name:"CategoryId"`
+
+	// <p>Category name after modification</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+func (r *ModifyMsgRecordCategoryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMsgRecordCategoryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AppId")
+	delete(f, "CategoryId")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMsgRecordCategoryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMsgRecordCategoryResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyMsgRecordCategoryResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyMsgRecordCategoryResponseParams `json:"Response"`
+}
+
+func (r *ModifyMsgRecordCategoryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMsgRecordCategoryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyPluginRequestParams struct {
+	// <p>Plugin_id</p>
+	PluginId *string `json:"PluginId,omitnil,omitempty" name:"PluginId"`
+
+	// <p>Plugin version number</p>
+	PluginVersion *int64 `json:"PluginVersion,omitnil,omitempty" name:"PluginVersion"`
+
+	// <p>Plug-in basic information</p>
+	Profile *PluginProfile `json:"Profile,omitnil,omitempty" name:"Profile"`
+
+	// <p>Plug-in type configuration</p>
+	Config *PluginConfig `json:"Config,omitnil,omitempty" name:"Config"`
+
+	// <p>Specify the fields to update to avoid full coverage</p>
+	UpdateMask *FieldMask `json:"UpdateMask,omitnil,omitempty" name:"UpdateMask"`
+
+	// <p>Tool list of the plug-in. This parameter is not required for mcp plug-ins.</p>
+	ToolList []*Tool `json:"ToolList,omitnil,omitempty" name:"ToolList"`
+
+	// <p>User Main Account logged in (required in integrator mode)</p>
+	LoginUin *string `json:"LoginUin,omitnil,omitempty" name:"LoginUin"`
+
+	// <p>User Sub-account logged in (required in integrator mode)</p>
+	LoginSubAccountUin *string `json:"LoginSubAccountUin,omitnil,omitempty" name:"LoginSubAccountUin"`
+}
+
+type ModifyPluginRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Plugin_id</p>
+	PluginId *string `json:"PluginId,omitnil,omitempty" name:"PluginId"`
+
+	// <p>Plugin version number</p>
+	PluginVersion *int64 `json:"PluginVersion,omitnil,omitempty" name:"PluginVersion"`
+
+	// <p>Plug-in basic information</p>
+	Profile *PluginProfile `json:"Profile,omitnil,omitempty" name:"Profile"`
+
+	// <p>Plug-in type configuration</p>
+	Config *PluginConfig `json:"Config,omitnil,omitempty" name:"Config"`
+
+	// <p>Specify the fields to update to avoid full coverage</p>
+	UpdateMask *FieldMask `json:"UpdateMask,omitnil,omitempty" name:"UpdateMask"`
+
+	// <p>Tool list of the plug-in. This parameter is not required for mcp plug-ins.</p>
+	ToolList []*Tool `json:"ToolList,omitnil,omitempty" name:"ToolList"`
+
+	// <p>User Main Account logged in (required in integrator mode)</p>
+	LoginUin *string `json:"LoginUin,omitnil,omitempty" name:"LoginUin"`
+
+	// <p>User Sub-account logged in (required in integrator mode)</p>
+	LoginSubAccountUin *string `json:"LoginSubAccountUin,omitnil,omitempty" name:"LoginSubAccountUin"`
+}
+
+func (r *ModifyPluginRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyPluginRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PluginId")
+	delete(f, "PluginVersion")
+	delete(f, "Profile")
+	delete(f, "Config")
+	delete(f, "UpdateMask")
+	delete(f, "ToolList")
+	delete(f, "LoginUin")
+	delete(f, "LoginSubAccountUin")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyPluginRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyPluginResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyPluginResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyPluginResponseParams `json:"Response"`
+}
+
+func (r *ModifyPluginResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyPluginResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -10140,6 +12351,109 @@ func (r *ModifyQAResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifySkillRequestParams struct {
+	// <p>SkillId</p>
+	SkillId *string `json:"SkillId,omitnil,omitempty" name:"SkillId"`
+
+	// <p>Space ID</p>
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// <p>skill description</p>
+	DisplayDescription *string `json:"DisplayDescription,omitnil,omitempty" name:"DisplayDescription"`
+
+	// <p>skill name</p>
+	DisplayName *string `json:"DisplayName,omitnil,omitempty" name:"DisplayName"`
+
+	// <p>skill package file address (zip); importing it triggers new version generation. It must be imported together with SkillVersion and UpdateDescription</p>
+	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
+
+	// <p>Icon address</p>
+	IconUrl *string `json:"IconUrl,omitnil,omitempty" name:"IconUrl"`
+
+	// <p>skill version number (import together with FileUrl)</p>
+	SkillVersion *string `json:"SkillVersion,omitnil,omitempty" name:"SkillVersion"`
+
+	// <p>Version change description (import together with FileUrl).</p>
+	UpdateDescription *string `json:"UpdateDescription,omitnil,omitempty" name:"UpdateDescription"`
+}
+
+type ModifySkillRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>SkillId</p>
+	SkillId *string `json:"SkillId,omitnil,omitempty" name:"SkillId"`
+
+	// <p>Space ID</p>
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+
+	// <p>skill description</p>
+	DisplayDescription *string `json:"DisplayDescription,omitnil,omitempty" name:"DisplayDescription"`
+
+	// <p>skill name</p>
+	DisplayName *string `json:"DisplayName,omitnil,omitempty" name:"DisplayName"`
+
+	// <p>skill package file address (zip); importing it triggers new version generation. It must be imported together with SkillVersion and UpdateDescription</p>
+	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
+
+	// <p>Icon address</p>
+	IconUrl *string `json:"IconUrl,omitnil,omitempty" name:"IconUrl"`
+
+	// <p>skill version number (import together with FileUrl)</p>
+	SkillVersion *string `json:"SkillVersion,omitnil,omitempty" name:"SkillVersion"`
+
+	// <p>Version change description (import together with FileUrl).</p>
+	UpdateDescription *string `json:"UpdateDescription,omitnil,omitempty" name:"UpdateDescription"`
+}
+
+func (r *ModifySkillRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySkillRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SkillId")
+	delete(f, "SpaceId")
+	delete(f, "DisplayDescription")
+	delete(f, "DisplayName")
+	delete(f, "FileUrl")
+	delete(f, "IconUrl")
+	delete(f, "SkillVersion")
+	delete(f, "UpdateDescription")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySkillRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySkillResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySkillResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySkillResponseParams `json:"Response"`
+}
+
+func (r *ModifySkillResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySkillResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifySpaceRequestParams struct {
 	// Workspace name. Maximum length: 30 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -10275,6 +12589,53 @@ func (r *ModifyVariableResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type MsgRecord struct {
+	// Answer.
+	Answer *string `json:"Answer,omitnil,omitempty" name:"Answer"`
+
+	// Application ID
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// Category ID
+	CategoryId *string `json:"CategoryId,omitnil,omitempty" name:"CategoryId"`
+
+	// Creation time.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Intent.
+	Intent *string `json:"Intent,omitnil,omitempty" name:"Intent"`
+
+	// Intent category
+	IntentCategory *string `json:"IntentCategory,omitnil,omitempty" name:"IntentCategory"`
+
+	// Whether it is intelligent categorization
+	IsSmart *bool `json:"IsSmart,omitnil,omitempty" name:"IsSmart"`
+
+	// Issue
+	Question *string `json:"Question,omitnil,omitempty" name:"Question"`
+
+	// Record ID
+	RecordId *string `json:"RecordId,omitnil,omitempty" name:"RecordId"`
+
+	// method. Enumerates ReplyMethod: 0=not specified, 1=direct reply by large model, 2=conservative reply, 3=refuse to answer, 4=sensitive reply, 5=Q&A pair prioritized reply, 6=welcome message, 7=concurrency limit exceeded, 8=global intervention knowledge, 9=task flow process reply, 10=task flow answer, 11=search engine, 12=knowledge polish, 13=image understanding, 14=real-time document, 15=clarification confirmation, 16=workflow reply, 17=workflow completion, 18=Intelligent Agent reply, 19=multiple intents, 20=interruption, 21=Intelligent Agent plan preview, 22=Intelligent Agent plan result, 23=Intelligent Agent structured output.
+	ReplyMethod *int64 `json:"ReplyMethod,omitnil,omitempty" name:"ReplyMethod"`
+
+	// Returned result
+	Result *MsgRecordResult `json:"Result,omitnil,omitempty" name:"Result"`
+
+	// Score
+	Score *uint64 `json:"Score,omitnil,omitempty" name:"Score"`
+
+	// Session ID
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Source.
+	Source *MsgRecordSource `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// trace_id
+	TraceId *string `json:"TraceId,omitnil,omitempty" name:"TraceId"`
+}
+
 type MsgRecordCategory struct {
 	// <p>Business ID of the category</p>
 	CategoryId *string `json:"CategoryId,omitnil,omitempty" name:"CategoryId"`
@@ -10290,6 +12651,52 @@ type MsgRecordCategory struct {
 
 	// <p>The number of message records in this category</p>
 	TotalCount *string `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+}
+
+type MsgRecordResult struct {
+	// Indicates the call result of the message: 0=CALL_RESULT_UNKNOWN (all/unknown), 1=CALL_RESULT_SUCCESS (success), 2=CALL_RESULT_FAILED (failed). fail_reason (string) describes the failure reason when the call failed.
+	CallResult *int64 `json:"CallResult,omitnil,omitempty" name:"CallResult"`
+
+	// Custom variable, json string
+	CustomerVariable *string `json:"CustomerVariable,omitnil,omitempty" name:"CustomerVariable"`
+
+	// Failure cause.
+	FailReason *string `json:"FailReason,omitnil,omitempty" name:"FailReason"`
+
+	// Time to first token
+	FirstTokenLatency *uint64 `json:"FirstTokenLatency,omitnil,omitempty" name:"FirstTokenLatency"`
+
+	// Number of input tokens.
+	InputToken *uint64 `json:"InputToken,omitnil,omitempty" name:"InputToken"`
+
+	// Number of output tokens.
+	OutputToken *uint64 `json:"OutputToken,omitnil,omitempty" name:"OutputToken"`
+
+	// Total number of tokens.
+	TotalToken *uint64 `json:"TotalToken,omitnil,omitempty" name:"TotalToken"`
+
+	// Total token duration
+	TotalTokenLatency *uint64 `json:"TotalTokenLatency,omitnil,omitempty" name:"TotalTokenLatency"`
+}
+
+type MsgRecordSource struct {
+	// Channel type for dialogue message access: 0=not specified, 1=agent, 2=experience page (Tencent Cloud), 3=evaluation dialogue, 4=experience page (phone number), 5=dialogue API connection, 6=evaluation task dialogue, 10=workflow debugging, 10000=WeChat official account, 10001=WeChat service account, 10002=WeCom app, 10003=web components, 10004=WeChat Customer Service, 10005=WeChat mini program, 10006=Yuanqi, 10007=App Treasure, 10008=Yuanbao, 10009=WeCom intelligent bot, 10010=Yuanqi API, 10011=LINE, 10012=Telegram, 10100=PC manager, 20001=honor Intelligent Agent platform, 20002=Xiaomi app store; user_id (string) is the unique ID of the visitor under this channel.
+	ChannelType *uint64 `json:"ChannelType,omitnil,omitempty" name:"ChannelType"`
+
+	// User ID.
+	FromId *string `json:"FromId,omitnil,omitempty" name:"FromId"`
+
+	// User source type of the message sender: 1=user (visitor/C-end user), 2=robot (AI reply), 3=agent (human customer service); from_id (string) is the unique user ID under this source type.
+	FromType *uint64 `json:"FromType,omitnil,omitempty" name:"FromType"`
+
+	// User profile photo
+	UserAvatar *string `json:"UserAvatar,omitnil,omitempty" name:"UserAvatar"`
+
+	// Visitor ID.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// Visitor name
+	UserNickname *string `json:"UserNickname,omitnil,omitempty" name:"UserNickname"`
 }
 
 type MultiAgentConfig struct {
@@ -10689,6 +13096,17 @@ type PluginSummary struct {
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
+type PluginUsageDetail struct {
+	// <p>Plugin name.</p>
+	PluginName *string `json:"PluginName,omitnil,omitempty" name:"PluginName"`
+
+	// <p>Consumption measurement list for a single PLUGIN domain call (authoritative field): lists each measurement category by unit + label. When unit=TOKEN, label is case-sensitive for Token subcategories (input/output/avg_*). Being empty indicates total_tokens</p>
+	ResourceConsumptionList []*ResourceConsumption `json:"ResourceConsumptionList,omitnil,omitempty" name:"ResourceConsumptionList"`
+
+	// <p>Plug-in Tool Name (tool_name)</p>
+	ToolName *string `json:"ToolName,omitnil,omitempty" name:"ToolName"`
+}
+
 type PluginUsageSummary struct {
 	// <p>Number of calls (top-level count of API calls)</p>
 	CallCount *float64 `json:"CallCount,omitnil,omitempty" name:"CallCount"`
@@ -10906,6 +13324,80 @@ type QASummary struct {
 
 	// <p>Source information.</p>
 	SourceInfo *QASourceInfo `json:"SourceInfo,omitnil,omitempty" name:"SourceInfo"`
+}
+
+// Predefined struct for user
+type ReadMCPResourceRequestParams struct {
+	// <p>Capacity boundary: one request can only read the resources belonging to this plugin</p>
+	PluginId *string `json:"PluginId,omitnil,omitempty" name:"PluginId"`
+
+	// <p>thread on the agent-exec side</p>
+	ThreadId *string `json:"ThreadId,omitnil,omitempty" name:"ThreadId"`
+
+	// <p>Resource URI, source: _meta.ui.resourceUri of the tool</p>
+	Uri *string `json:"Uri,omitnil,omitempty" name:"Uri"`
+}
+
+type ReadMCPResourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Capacity boundary: one request can only read the resources belonging to this plugin</p>
+	PluginId *string `json:"PluginId,omitnil,omitempty" name:"PluginId"`
+
+	// <p>thread on the agent-exec side</p>
+	ThreadId *string `json:"ThreadId,omitnil,omitempty" name:"ThreadId"`
+
+	// <p>Resource URI, source: _meta.ui.resourceUri of the tool</p>
+	Uri *string `json:"Uri,omitnil,omitempty" name:"Uri"`
+}
+
+func (r *ReadMCPResourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReadMCPResourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PluginId")
+	delete(f, "ThreadId")
+	delete(f, "Uri")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReadMCPResourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ReadMCPResourceResponseParams struct {
+	// <p>Resource content returned by MCP resources/read</p>
+	Contents []*MCPResourceContents `json:"Contents,omitnil,omitempty" name:"Contents"`
+
+	// <p>JSON: The original _meta of Resource. In the MCP App scenario, Host enforces the CSP policy based on ui.csp.</p>
+	ResourceMeta *string `json:"ResourceMeta,omitnil,omitempty" name:"ResourceMeta"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ReadMCPResourceResponse struct {
+	*tchttp.BaseResponse
+	Response *ReadMCPResourceResponseParams `json:"Response"`
+}
+
+func (r *ReadMCPResourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReadMCPResourceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ReleaseRecord struct {
@@ -11215,6 +13707,26 @@ type ResourceConsumption struct {
 	Value *float64 `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
+type ResourcePackageInfo struct {
+	// <p>Package type</p><p>Enumeration values:</p><ul><li>1: Free edition</li><li>2: Pro edition</li><li>3: Enterprise edition</li></ul>
+	PackageType *uint64 `json:"PackageType,omitnil,omitempty" name:"PackageType"`
+
+	// <p>Total resource package quantity</p>
+	ResourceTotal *int64 `json:"ResourceTotal,omitnil,omitempty" name:"ResourceTotal"`
+
+	// <p>Resource package usage</p>
+	ResourceUsage *float64 `json:"ResourceUsage,omitnil,omitempty" name:"ResourceUsage"`
+
+	// <p>Knowledge base capacity.</p>
+	KnowledgeCapacity *float64 `json:"KnowledgeCapacity,omitnil,omitempty" name:"KnowledgeCapacity"`
+
+	// <p>Knowledge base amount</p>
+	KnowledgeUsage *float64 `json:"KnowledgeUsage,omitnil,omitempty" name:"KnowledgeUsage"`
+
+	// <p>Resource pack status</p><p>Enumeration values:</p><ul><li>1: Normal</li><li>3: Expired</li><li>4: About to expire</li></ul>
+	ResourceStatus *uint64 `json:"ResourceStatus,omitnil,omitempty" name:"ResourceStatus"`
+}
+
 type ResponseParam struct {
 	// <p>Variable description</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
@@ -11230,6 +13742,156 @@ type ResponseParam struct {
 
 	// <table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>String</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>Integer</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>Floating-point number</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>Boolean value</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>Object</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>Array of strings</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>Array of integers</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>Array of floating-point numbers</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>Array of boolean values</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>Object array</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>Nested array</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>Null value</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>Unspecified type, used for OneOf and AnyOf scenarios</td></tr></tbody></table>
 	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+// Predefined struct for user
+type ResumeAppTriggerRequestParams struct {
+	// <p>Application ID.</p>
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table>
+	Scope *int64 `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// <p>Application trigger ID</p>
+	TriggerId *string `json:"TriggerId,omitnil,omitempty" name:"TriggerId"`
+
+	// <p>Visitor ID</p>
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+}
+
+type ResumeAppTriggerRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Application ID.</p>
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <table> <tbody> <tr> <td>Enumeration item</td> <td>Enumeration value</td> <td>Description</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_UNSPECIFIED</td> <td>0</td> <td>Unspecified</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_APP</td> <td>1</td> <td>B-end admin</td> </tr> <tr> <td>APP_TRIGGER_SCOPE_USER</td> <td>2</td> <td>C-end visitor</td> </tr> </tbody> </table>
+	Scope *int64 `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// <p>Application trigger ID</p>
+	TriggerId *string `json:"TriggerId,omitnil,omitempty" name:"TriggerId"`
+
+	// <p>Visitor ID</p>
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+}
+
+func (r *ResumeAppTriggerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeAppTriggerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AppId")
+	delete(f, "Scope")
+	delete(f, "TriggerId")
+	delete(f, "UserId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResumeAppTriggerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResumeAppTriggerResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ResumeAppTriggerResponse struct {
+	*tchttp.BaseResponse
+	Response *ResumeAppTriggerResponseParams `json:"Response"`
+}
+
+func (r *ResumeAppTriggerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeAppTriggerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResumeWorkflowRunRequestParams struct {
+	// <p>Application ID.</p>
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <p>Workflow operation instance ID</p>
+	WorkflowRunId *string `json:"WorkflowRunId,omitnil,omitempty" name:"WorkflowRunId"`
+
+	// <p>User input</p>
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// <p>File information</p>
+	FileList []*ConversationFileInfo `json:"FileList,omitnil,omitempty" name:"FileList"`
+}
+
+type ResumeWorkflowRunRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Application ID.</p>
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <p>Workflow operation instance ID</p>
+	WorkflowRunId *string `json:"WorkflowRunId,omitnil,omitempty" name:"WorkflowRunId"`
+
+	// <p>User input</p>
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
+
+	// <p>File information</p>
+	FileList []*ConversationFileInfo `json:"FileList,omitnil,omitempty" name:"FileList"`
+}
+
+func (r *ResumeWorkflowRunRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeWorkflowRunRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AppId")
+	delete(f, "WorkflowRunId")
+	delete(f, "Query")
+	delete(f, "FileList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResumeWorkflowRunRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResumeWorkflowRunResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ResumeWorkflowRunResponse struct {
+	*tchttp.BaseResponse
+	Response *ResumeWorkflowRunResponseParams `json:"Response"`
+}
+
+func (r *ResumeWorkflowRunResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeWorkflowRunResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type RetrievalOption struct {
@@ -11445,6 +14107,148 @@ func (r *RunAppTriggerNowResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *RunAppTriggerNowResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SaveWorkflowDebugContextRequestParams struct {
+	// <p>Application ID.</p>
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <p>Application variable list.</p>
+	AppVariableValueList []*AppVariableValue `json:"AppVariableValueList,omitnil,omitempty" name:"AppVariableValueList"`
+
+	// <p>Session ID</p>
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// <p>Custom user ID</p>
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+}
+
+type SaveWorkflowDebugContextRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Application ID.</p>
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <p>Application variable list.</p>
+	AppVariableValueList []*AppVariableValue `json:"AppVariableValueList,omitnil,omitempty" name:"AppVariableValueList"`
+
+	// <p>Session ID</p>
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// <p>Custom user ID</p>
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+}
+
+func (r *SaveWorkflowDebugContextRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SaveWorkflowDebugContextRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AppId")
+	delete(f, "AppVariableValueList")
+	delete(f, "SessionId")
+	delete(f, "UserId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SaveWorkflowDebugContextRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SaveWorkflowDebugContextResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type SaveWorkflowDebugContextResponse struct {
+	*tchttp.BaseResponse
+	Response *SaveWorkflowDebugContextResponseParams `json:"Response"`
+}
+
+func (r *SaveWorkflowDebugContextResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SaveWorkflowDebugContextResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SaveWorkflowToolNodeOutputRequestParams struct {
+	// <p>Callback token</p><p>Request Header X-ADP-Callback-Token</p>
+	CallbackToken *string `json:"CallbackToken,omitnil,omitempty" name:"CallbackToken"`
+
+	// <p>Callback result</p>
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+}
+
+type SaveWorkflowToolNodeOutputRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Callback token</p><p>Request Header X-ADP-Callback-Token</p>
+	CallbackToken *string `json:"CallbackToken,omitnil,omitempty" name:"CallbackToken"`
+
+	// <p>Callback result</p>
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
+}
+
+func (r *SaveWorkflowToolNodeOutputRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SaveWorkflowToolNodeOutputRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CallbackToken")
+	delete(f, "Result")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SaveWorkflowToolNodeOutputRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SaveWorkflowToolNodeOutputResponseParams struct {
+	// <p>Status code</p><p>Enumeration values:</p><ul><li>0: success</li><li>1000: failure</li></ul>
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// <p>Error description</p>
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type SaveWorkflowToolNodeOutputResponse struct {
+	*tchttp.BaseResponse
+	Response *SaveWorkflowToolNodeOutputResponseParams `json:"Response"`
+}
+
+func (r *SaveWorkflowToolNodeOutputResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SaveWorkflowToolNodeOutputResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -11772,6 +14576,17 @@ type SkillCorpShareConfig struct {
 	ShareScopeList []*Identity `json:"ShareScopeList,omitnil,omitempty" name:"ShareScopeList"`
 }
 
+type SkillDetail struct {
+	// Call condition abstract
+	ReferenceSummaryList []*SkillReferenceSummary `json:"ReferenceSummaryList,omitnil,omitempty" name:"ReferenceSummaryList"`
+
+	// Skill abstract
+	SkillSummary *SkillSummary `json:"SkillSummary,omitnil,omitempty" name:"SkillSummary"`
+
+	// Version list
+	VersionList []*SkillVersion `json:"VersionList,omitnil,omitempty" name:"VersionList"`
+}
+
 type SkillNotice struct {
 	// Notification level
 	// 
@@ -11956,6 +14771,14 @@ type SkillVersion struct {
 	Updater *string `json:"Updater,omitnil,omitempty" name:"Updater"`
 }
 
+type Sort struct {
+	// <p>Sort field name, for example, create_time</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Sorting order. 1: ascending, 2: descending</p><table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>SORT_ORDER_INVALID</td><td>0</td><td>invalid</td></tr><tr><td>SORT_ORDER_ASC</td><td>1</td><td>ascending</td></tr><tr><td>SORT_ORDER_DESC</td><td>2</td><td>descending</td></tr></tbody></table>
+	Direction *int64 `json:"Direction,omitnil,omitempty" name:"Direction"`
+}
+
 type Space struct {
 	// <p>Space id</p>
 	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
@@ -11999,6 +14822,73 @@ type Statistic struct {
 
 	// <p>Total input and output tokens</p>
 	TotalTokens *uint64 `json:"TotalTokens,omitnil,omitempty" name:"TotalTokens"`
+}
+
+// Predefined struct for user
+type StopWorkflowRunListRequestParams struct {
+	// <p>Application ID.</p>
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <p>Workflow running instance ID list</p>
+	WorkflowRunIdList []*string `json:"WorkflowRunIdList,omitnil,omitempty" name:"WorkflowRunIdList"`
+}
+
+type StopWorkflowRunListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Application ID.</p>
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <p>Workflow running instance ID list</p>
+	WorkflowRunIdList []*string `json:"WorkflowRunIdList,omitnil,omitempty" name:"WorkflowRunIdList"`
+}
+
+func (r *StopWorkflowRunListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopWorkflowRunListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AppId")
+	delete(f, "WorkflowRunIdList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopWorkflowRunListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StopWorkflowRunListResponseParams struct {
+	// <p>List of instance IDs stopped successfully</p>
+	SuccessIdList []*string `json:"SuccessIdList,omitnil,omitempty" name:"SuccessIdList"`
+
+	// <p>List of instance IDs that failed to stop</p>
+	FailedIdList []*string `json:"FailedIdList,omitnil,omitempty" name:"FailedIdList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type StopWorkflowRunListResponse struct {
+	*tchttp.BaseResponse
+	Response *StopWorkflowRunListResponseParams `json:"Response"`
+}
+
+func (r *StopWorkflowRunListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopWorkflowRunListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type SummaryListSwitch struct {
@@ -12195,6 +15085,151 @@ type TriggerStatus struct {
 	WebhookStatus *AppTriggerWebhookStatus `json:"WebhookStatus,omitnil,omitempty" name:"WebhookStatus"`
 }
 
+// Predefined struct for user
+type UnfavoritePluginRequestParams struct {
+	// <p>Plugin_id</p>
+	PluginId *string `json:"PluginId,omitnil,omitempty" name:"PluginId"`
+
+	// <p>Current workspace id</p>
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+}
+
+type UnfavoritePluginRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Plugin_id</p>
+	PluginId *string `json:"PluginId,omitnil,omitempty" name:"PluginId"`
+
+	// <p>Current workspace id</p>
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+}
+
+func (r *UnfavoritePluginRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnfavoritePluginRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PluginId")
+	delete(f, "SpaceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnfavoritePluginRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UnfavoritePluginResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UnfavoritePluginResponse struct {
+	*tchttp.BaseResponse
+	Response *UnfavoritePluginResponseParams `json:"Response"`
+}
+
+func (r *UnfavoritePluginResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnfavoritePluginResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UnfavoriteSkillRequestParams struct {
+	// <p>SkillId</p>
+	SkillId *string `json:"SkillId,omitnil,omitempty" name:"SkillId"`
+
+	// <p>Workspace ID</p>
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+}
+
+type UnfavoriteSkillRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>SkillId</p>
+	SkillId *string `json:"SkillId,omitnil,omitempty" name:"SkillId"`
+
+	// <p>Workspace ID</p>
+	SpaceId *string `json:"SpaceId,omitnil,omitempty" name:"SpaceId"`
+}
+
+func (r *UnfavoriteSkillRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnfavoriteSkillRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SkillId")
+	delete(f, "SpaceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnfavoriteSkillRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UnfavoriteSkillResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UnfavoriteSkillResponse struct {
+	*tchttp.BaseResponse
+	Response *UnfavoriteSkillResponseParams `json:"Response"`
+}
+
+func (r *UnfavoriteSkillResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnfavoriteSkillResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UsageDetail struct {
+	// <p>Invocation source</p>
+	CallSource *CallSource `json:"CallSource,omitnil,omitempty" name:"CallSource"`
+
+	// <p>Measurement ID, used for reconciliation/tracing</p>
+	DosageId *string `json:"DosageId,omitnil,omitempty" name:"DosageId"`
+
+	// <p>Call timestamp (Unix seconds).</p>
+	EventTime *string `json:"EventTime,omitnil,omitempty" name:"EventTime"`
+
+	// <p>Exclusive to MODEL domain</p>
+	Model *ModelUsageDetail `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// <p>Exclusive to the PLUGIN domain</p>
+	Plugin *PluginUsageDetail `json:"Plugin,omitnil,omitempty" name:"Plugin"`
+
+	// <p>Call chain tracing ID</p>
+	TraceId *string `json:"TraceId,omitnil,omitempty" name:"TraceId"`
+
+	// <p>User ID</p>
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+}
+
 type UsageSummary struct {
 	// <p>Exclusive to MODEL domain</p>
 	Model *ModelUsageSummary `json:"Model,omitnil,omitempty" name:"Model"`
@@ -12213,6 +15248,14 @@ type UsageSummary struct {
 
 	// <p>View type, determines the business meaning of SourceId/SourceName</p><table><tbody><tr><td>Enumeration item</td><td>Enumeration value</td><td>Description</td></tr><tr><td>VIEW_TYPE_UNSPECIFIED</td><td>0</td><td>Unspecified (invalid value, do not pass in requests)</td></tr><tr><td>VIEW_TYPE_CORP</td><td>1</td><td>Corporate view</td></tr><tr><td>VIEW_TYPE_SPACE</td><td>2</td><td>Space view</td></tr><tr><td>VIEW_TYPE_APP</td><td>3</td><td>Application view</td></tr></tbody></table>
 	ViewType *int64 `json:"ViewType,omitnil,omitempty" name:"ViewType"`
+}
+
+type UserAccessConfig struct {
+	// <p>Customer-defined knowledge ID</p>
+	CustomerKnowledgeId *string `json:"CustomerKnowledgeId,omitnil,omitempty" name:"CustomerKnowledgeId"`
+
+	// <p>Whether the document is public</p>
+	IsPublic *bool `json:"IsPublic,omitnil,omitempty" name:"IsPublic"`
 }
 
 type Variable struct {

@@ -2709,6 +2709,56 @@ func (c *Client) DescribeAuditLogListWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeAuditLogMetaRequest() (request *DescribeAuditLogMetaRequest) {
+    request = &DescribeAuditLogMetaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "DescribeAuditLogMeta")
+    
+    
+    return
+}
+
+func NewDescribeAuditLogMetaResponse() (response *DescribeAuditLogMetaResponse) {
+    response = &DescribeAuditLogMetaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAuditLogMeta
+// This API is used to obtain meta-information of audit logs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeAuditLogMeta(request *DescribeAuditLogMetaRequest) (response *DescribeAuditLogMetaResponse, err error) {
+    return c.DescribeAuditLogMetaWithContext(context.Background(), request)
+}
+
+// DescribeAuditLogMeta
+// This API is used to obtain meta-information of audit logs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeAuditLogMetaWithContext(ctx context.Context, request *DescribeAuditLogMetaRequest) (response *DescribeAuditLogMetaResponse, err error) {
+    if request == nil {
+        request = NewDescribeAuditLogMetaRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "DescribeAuditLogMeta")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAuditLogMeta require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAuditLogMetaResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCategoryListRequest() (request *DescribeCategoryListRequest) {
     request = &DescribeCategoryListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2755,6 +2805,106 @@ func (c *Client) DescribeCategoryListWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDescribeCategoryListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeChannelRequest() (request *DescribeChannelRequest) {
+    request = &DescribeChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "DescribeChannel")
+    
+    
+    return
+}
+
+func NewDescribeChannelResponse() (response *DescribeChannelResponse) {
+    response = &DescribeChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeChannel
+// Query channel details (case-sensitive by scenario)
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeChannel(request *DescribeChannelRequest) (response *DescribeChannelResponse, err error) {
+    return c.DescribeChannelWithContext(context.Background(), request)
+}
+
+// DescribeChannel
+// Query channel details (case-sensitive by scenario)
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeChannelWithContext(ctx context.Context, request *DescribeChannelRequest) (response *DescribeChannelResponse, err error) {
+    if request == nil {
+        request = NewDescribeChannelRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "DescribeChannel")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeChannelListRequest() (request *DescribeChannelListRequest) {
+    request = &DescribeChannelListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "DescribeChannelList")
+    
+    
+    return
+}
+
+func NewDescribeChannelListResponse() (response *DescribeChannelListResponse) {
+    response = &DescribeChannelListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeChannelList
+// This API is used to obtain the channel list by scenario.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeChannelList(request *DescribeChannelListRequest) (response *DescribeChannelListResponse, err error) {
+    return c.DescribeChannelListWithContext(context.Background(), request)
+}
+
+// DescribeChannelList
+// This API is used to obtain the channel list by scenario.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeChannelListWithContext(ctx context.Context, request *DescribeChannelListRequest) (response *DescribeChannelListResponse, err error) {
+    if request == nil {
+        request = NewDescribeChannelListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "DescribeChannelList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeChannelList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeChannelListResponse()
     err = c.Send(request, response)
     return
 }
@@ -2915,6 +3065,58 @@ func (c *Client) DescribeConflictQASummaryListWithContext(ctx context.Context, r
     return
 }
 
+func NewDescribeConsumptionDetailListRequest() (request *DescribeConsumptionDetailListRequest) {
+    request = &DescribeConsumptionDetailListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "DescribeConsumptionDetailList")
+    
+    
+    return
+}
+
+func NewDescribeConsumptionDetailListResponse() (response *DescribeConsumptionDetailListResponse) {
+    response = &DescribeConsumptionDetailListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeConsumptionDetailList
+// Query resource consumption details, including billing fields such as consumption type, consumption target, consumption scenario, package, and PU consumption.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeConsumptionDetailList(request *DescribeConsumptionDetailListRequest) (response *DescribeConsumptionDetailListResponse, err error) {
+    return c.DescribeConsumptionDetailListWithContext(context.Background(), request)
+}
+
+// DescribeConsumptionDetailList
+// Query resource consumption details, including billing fields such as consumption type, consumption target, consumption scenario, package, and PU consumption.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeConsumptionDetailListWithContext(ctx context.Context, request *DescribeConsumptionDetailListRequest) (response *DescribeConsumptionDetailListResponse, err error) {
+    if request == nil {
+        request = NewDescribeConsumptionDetailListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "DescribeConsumptionDetailList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConsumptionDetailList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeConsumptionDetailListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeConversationRequest() (request *DescribeConversationRequest) {
     request = &DescribeConversationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3067,6 +3269,214 @@ func (c *Client) DescribeConversationMessageListWithContext(ctx context.Context,
     request.SetContext(ctx)
     
     response = NewDescribeConversationMessageListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDocRequest() (request *DescribeDocRequest) {
+    request = &DescribeDocRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "DescribeDoc")
+    
+    
+    return
+}
+
+func NewDescribeDocResponse() (response *DescribeDocResponse) {
+    response = &DescribeDocResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDoc
+// Queries the details of a document.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeDoc(request *DescribeDocRequest) (response *DescribeDocResponse, err error) {
+    return c.DescribeDocWithContext(context.Background(), request)
+}
+
+// DescribeDoc
+// Queries the details of a document.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeDocWithContext(ctx context.Context, request *DescribeDocRequest) (response *DescribeDocResponse, err error) {
+    if request == nil {
+        request = NewDescribeDocRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "DescribeDoc")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDoc require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDocResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDocSummaryListRequest() (request *DescribeDocSummaryListRequest) {
+    request = &DescribeDocSummaryListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "DescribeDocSummaryList")
+    
+    
+    return
+}
+
+func NewDescribeDocSummaryListResponse() (response *DescribeDocSummaryListResponse) {
+    response = &DescribeDocSummaryListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDocSummaryList
+// Query the abstract list of a document.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeDocSummaryList(request *DescribeDocSummaryListRequest) (response *DescribeDocSummaryListResponse, err error) {
+    return c.DescribeDocSummaryListWithContext(context.Background(), request)
+}
+
+// DescribeDocSummaryList
+// Query the abstract list of a document.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeDocSummaryListWithContext(ctx context.Context, request *DescribeDocSummaryListRequest) (response *DescribeDocSummaryListResponse, err error) {
+    if request == nil {
+        request = NewDescribeDocSummaryListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "DescribeDocSummaryList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDocSummaryList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDocSummaryListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeKBRequest() (request *DescribeKBRequest) {
+    request = &DescribeKBRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "DescribeKB")
+    
+    
+    return
+}
+
+func NewDescribeKBResponse() (response *DescribeKBResponse) {
+    response = &DescribeKBResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeKB
+// Query knowledge base details
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeKB(request *DescribeKBRequest) (response *DescribeKBResponse, err error) {
+    return c.DescribeKBWithContext(context.Background(), request)
+}
+
+// DescribeKB
+// Query knowledge base details
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeKBWithContext(ctx context.Context, request *DescribeKBRequest) (response *DescribeKBResponse, err error) {
+    if request == nil {
+        request = NewDescribeKBRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "DescribeKB")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeKB require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeKBResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeKBSummaryListRequest() (request *DescribeKBSummaryListRequest) {
+    request = &DescribeKBSummaryListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "DescribeKBSummaryList")
+    
+    
+    return
+}
+
+func NewDescribeKBSummaryListResponse() (response *DescribeKBSummaryListResponse) {
+    response = &DescribeKBSummaryListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeKBSummaryList
+// Queries the knowledge base list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeKBSummaryList(request *DescribeKBSummaryListRequest) (response *DescribeKBSummaryListResponse, err error) {
+    return c.DescribeKBSummaryListWithContext(context.Background(), request)
+}
+
+// DescribeKBSummaryList
+// Queries the knowledge base list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeKBSummaryListWithContext(ctx context.Context, request *DescribeKBSummaryListRequest) (response *DescribeKBSummaryListResponse, err error) {
+    if request == nil {
+        request = NewDescribeKBSummaryListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "DescribeKBSummaryList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeKBSummaryList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeKBSummaryListResponse()
     err = c.Send(request, response)
     return
 }
@@ -3227,6 +3637,58 @@ func (c *Client) DescribeLatestReleaseWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeMetricOverviewListRequest() (request *DescribeMetricOverviewListRequest) {
+    request = &DescribeMetricOverviewListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "DescribeMetricOverviewList")
+    
+    
+    return
+}
+
+func NewDescribeMetricOverviewListResponse() (response *DescribeMetricOverviewListResponse) {
+    response = &DescribeMetricOverviewListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMetricOverviewList
+// Query the overview KPI card data of dashboards, distinguish resource dashboards from business dashboards by resource_type, and return the KPI metric list of each domain.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeMetricOverviewList(request *DescribeMetricOverviewListRequest) (response *DescribeMetricOverviewListResponse, err error) {
+    return c.DescribeMetricOverviewListWithContext(context.Background(), request)
+}
+
+// DescribeMetricOverviewList
+// Query the overview KPI card data of dashboards, distinguish resource dashboards from business dashboards by resource_type, and return the KPI metric list of each domain.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeMetricOverviewListWithContext(ctx context.Context, request *DescribeMetricOverviewListRequest) (response *DescribeMetricOverviewListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMetricOverviewListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "DescribeMetricOverviewList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMetricOverviewList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMetricOverviewListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeModelListRequest() (request *DescribeModelListRequest) {
     request = &DescribeModelListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3327,6 +3789,58 @@ func (c *Client) DescribeMsgRecordCategoryListWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDescribeMsgRecordCategoryListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMsgRecordListRequest() (request *DescribeMsgRecordListRequest) {
+    request = &DescribeMsgRecordListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "DescribeMsgRecordList")
+    
+    
+    return
+}
+
+func NewDescribeMsgRecordListResponse() (response *DescribeMsgRecordListResponse) {
+    response = &DescribeMsgRecordListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMsgRecordList
+// This API is used to query the dialogue message record list of an application. It supports filtering by channel type, feedback type, intent, call result, and other conditions, and supports cursor pagination and sorting by creation time.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeMsgRecordList(request *DescribeMsgRecordListRequest) (response *DescribeMsgRecordListResponse, err error) {
+    return c.DescribeMsgRecordListWithContext(context.Background(), request)
+}
+
+// DescribeMsgRecordList
+// This API is used to query the dialogue message record list of an application. It supports filtering by channel type, feedback type, intent, call result, and other conditions, and supports cursor pagination and sorting by creation time.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeMsgRecordListWithContext(ctx context.Context, request *DescribeMsgRecordListRequest) (response *DescribeMsgRecordListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMsgRecordListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "DescribeMsgRecordList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMsgRecordList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMsgRecordListResponse()
     err = c.Send(request, response)
     return
 }
@@ -3747,6 +4261,58 @@ func (c *Client) DescribeReleaseSummaryWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeResourceSummaryRequest() (request *DescribeResourceSummaryRequest) {
+    request = &DescribeResourceSummaryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "DescribeResourceSummary")
+    
+    
+    return
+}
+
+func NewDescribeResourceSummaryResponse() (response *DescribeResourceSummaryResponse) {
+    response = &DescribeResourceSummaryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeResourceSummary
+// This API is used to obtain user resource package and value-added package usage information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeResourceSummary(request *DescribeResourceSummaryRequest) (response *DescribeResourceSummaryResponse, err error) {
+    return c.DescribeResourceSummaryWithContext(context.Background(), request)
+}
+
+// DescribeResourceSummary
+// This API is used to obtain user resource package and value-added package usage information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeResourceSummaryWithContext(ctx context.Context, request *DescribeResourceSummaryRequest) (response *DescribeResourceSummaryResponse, err error) {
+    if request == nil {
+        request = NewDescribeResourceSummaryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "DescribeResourceSummary")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeResourceSummary require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeResourceSummaryResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSkillCategoryListRequest() (request *DescribeSkillCategoryListRequest) {
     request = &DescribeSkillCategoryListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3795,6 +4361,58 @@ func (c *Client) DescribeSkillCategoryListWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeSkillCategoryListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSkillDetailRequest() (request *DescribeSkillDetailRequest) {
+    request = &DescribeSkillDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "DescribeSkillDetail")
+    
+    
+    return
+}
+
+func NewDescribeSkillDetailResponse() (response *DescribeSkillDetailResponse) {
+    response = &DescribeSkillDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSkillDetail
+// Query skill details
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeSkillDetail(request *DescribeSkillDetailRequest) (response *DescribeSkillDetailResponse, err error) {
+    return c.DescribeSkillDetailWithContext(context.Background(), request)
+}
+
+// DescribeSkillDetail
+// Query skill details
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeSkillDetailWithContext(ctx context.Context, request *DescribeSkillDetailRequest) (response *DescribeSkillDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeSkillDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "DescribeSkillDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSkillDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSkillDetailResponse()
     err = c.Send(request, response)
     return
 }
@@ -3999,6 +4617,58 @@ func (c *Client) DescribeSystemVariableListWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDescribeSystemVariableListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUsageDetailListRequest() (request *DescribeUsageDetailListRequest) {
+    request = &DescribeUsageDetailListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "DescribeUsageDetailList")
+    
+    
+    return
+}
+
+func NewDescribeUsageDetailListResponse() (response *DescribeUsageDetailListResponse) {
+    response = &DescribeUsageDetailListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeUsageDetailList
+// This API is used to query time series details of resource invocations, including two types of resources: models and plug-ins. It returns detailed information of each call record in chronological order.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeUsageDetailList(request *DescribeUsageDetailListRequest) (response *DescribeUsageDetailListResponse, err error) {
+    return c.DescribeUsageDetailListWithContext(context.Background(), request)
+}
+
+// DescribeUsageDetailList
+// This API is used to query time series details of resource invocations, including two types of resources: models and plug-ins. It returns detailed information of each call record in chronological order.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeUsageDetailListWithContext(ctx context.Context, request *DescribeUsageDetailListRequest) (response *DescribeUsageDetailListResponse, err error) {
+    if request == nil {
+        request = NewDescribeUsageDetailListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "DescribeUsageDetailList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUsageDetailList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUsageDetailListResponse()
     err = c.Send(request, response)
     return
 }
@@ -4211,6 +4881,58 @@ func (c *Client) DescribeWorkflowRunWithContext(ctx context.Context, request *De
     return
 }
 
+func NewDescribeWorkflowRunSummaryListRequest() (request *DescribeWorkflowRunSummaryListRequest) {
+    request = &DescribeWorkflowRunSummaryListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "DescribeWorkflowRunSummaryList")
+    
+    
+    return
+}
+
+func NewDescribeWorkflowRunSummaryListResponse() (response *DescribeWorkflowRunSummaryListResponse) {
+    response = &DescribeWorkflowRunSummaryListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeWorkflowRunSummaryList
+// Query the list of workflow running instances
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeWorkflowRunSummaryList(request *DescribeWorkflowRunSummaryListRequest) (response *DescribeWorkflowRunSummaryListResponse, err error) {
+    return c.DescribeWorkflowRunSummaryListWithContext(context.Background(), request)
+}
+
+// DescribeWorkflowRunSummaryList
+// Query the list of workflow running instances
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeWorkflowRunSummaryListWithContext(ctx context.Context, request *DescribeWorkflowRunSummaryListRequest) (response *DescribeWorkflowRunSummaryListResponse, err error) {
+    if request == nil {
+        request = NewDescribeWorkflowRunSummaryListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "DescribeWorkflowRunSummaryList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWorkflowRunSummaryList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeWorkflowRunSummaryListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewExportQARequest() (request *ExportQARequest) {
     request = &ExportQARequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4259,6 +4981,162 @@ func (c *Client) ExportQAWithContext(ctx context.Context, request *ExportQAReque
     request.SetContext(ctx)
     
     response = NewExportQAResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewFavoritePluginRequest() (request *FavoritePluginRequest) {
+    request = &FavoritePluginRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "FavoritePlugin")
+    
+    
+    return
+}
+
+func NewFavoritePluginResponse() (response *FavoritePluginResponse) {
+    response = &FavoritePluginResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// FavoritePlugin
+// Favorite a plug-in
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) FavoritePlugin(request *FavoritePluginRequest) (response *FavoritePluginResponse, err error) {
+    return c.FavoritePluginWithContext(context.Background(), request)
+}
+
+// FavoritePlugin
+// Favorite a plug-in
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) FavoritePluginWithContext(ctx context.Context, request *FavoritePluginRequest) (response *FavoritePluginResponse, err error) {
+    if request == nil {
+        request = NewFavoritePluginRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "FavoritePlugin")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("FavoritePlugin require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewFavoritePluginResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewFavoriteSkillRequest() (request *FavoriteSkillRequest) {
+    request = &FavoriteSkillRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "FavoriteSkill")
+    
+    
+    return
+}
+
+func NewFavoriteSkillResponse() (response *FavoriteSkillResponse) {
+    response = &FavoriteSkillResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// FavoriteSkill
+// Favorites a skill
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) FavoriteSkill(request *FavoriteSkillRequest) (response *FavoriteSkillResponse, err error) {
+    return c.FavoriteSkillWithContext(context.Background(), request)
+}
+
+// FavoriteSkill
+// Favorites a skill
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) FavoriteSkillWithContext(ctx context.Context, request *FavoriteSkillRequest) (response *FavoriteSkillResponse, err error) {
+    if request == nil {
+        request = NewFavoriteSkillRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "FavoriteSkill")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("FavoriteSkill require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewFavoriteSkillResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewImportDocListRequest() (request *ImportDocListRequest) {
+    request = &ImportDocListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "ImportDocList")
+    
+    
+    return
+}
+
+func NewImportDocListResponse() (response *ImportDocListResponse) {
+    response = &ImportDocListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ImportDocList
+// Batch imports documents
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ImportDocList(request *ImportDocListRequest) (response *ImportDocListResponse, err error) {
+    return c.ImportDocListWithContext(context.Background(), request)
+}
+
+// ImportDocList
+// Batch imports documents
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ImportDocListWithContext(ctx context.Context, request *ImportDocListRequest) (response *ImportDocListResponse, err error) {
+    if request == nil {
+        request = NewImportDocListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "ImportDocList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ImportDocList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewImportDocListResponse()
     err = c.Send(request, response)
     return
 }
@@ -4419,6 +5297,162 @@ func (c *Client) ModifyAppTriggerWithContext(ctx context.Context, request *Modif
     return
 }
 
+func NewModifyCategoryRequest() (request *ModifyCategoryRequest) {
+    request = &ModifyCategoryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "ModifyCategory")
+    
+    
+    return
+}
+
+func NewModifyCategoryResponse() (response *ModifyCategoryResponse) {
+    response = &ModifyCategoryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyCategory
+// Modify category
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyCategory(request *ModifyCategoryRequest) (response *ModifyCategoryResponse, err error) {
+    return c.ModifyCategoryWithContext(context.Background(), request)
+}
+
+// ModifyCategory
+// Modify category
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyCategoryWithContext(ctx context.Context, request *ModifyCategoryRequest) (response *ModifyCategoryResponse, err error) {
+    if request == nil {
+        request = NewModifyCategoryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "ModifyCategory")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCategory require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCategoryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyChannelRequest() (request *ModifyChannelRequest) {
+    request = &ModifyChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "ModifyChannel")
+    
+    
+    return
+}
+
+func NewModifyChannelResponse() (response *ModifyChannelResponse) {
+    response = &ModifyChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyChannel
+// This API is used to modify a channel, including remarks and the callback robot ID of a WeCom chatbot channel.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyChannel(request *ModifyChannelRequest) (response *ModifyChannelResponse, err error) {
+    return c.ModifyChannelWithContext(context.Background(), request)
+}
+
+// ModifyChannel
+// This API is used to modify a channel, including remarks and the callback robot ID of a WeCom chatbot channel.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyChannelWithContext(ctx context.Context, request *ModifyChannelRequest) (response *ModifyChannelResponse, err error) {
+    if request == nil {
+        request = NewModifyChannelRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "ModifyChannel")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyConflictQARequest() (request *ModifyConflictQARequest) {
+    request = &ModifyConflictQARequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "ModifyConflictQA")
+    
+    
+    return
+}
+
+func NewModifyConflictQAResponse() (response *ModifyConflictQAResponse) {
+    response = &ModifyConflictQAResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyConflictQA
+// Modify a conflict
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyConflictQA(request *ModifyConflictQARequest) (response *ModifyConflictQAResponse, err error) {
+    return c.ModifyConflictQAWithContext(context.Background(), request)
+}
+
+// ModifyConflictQA
+// Modify a conflict
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyConflictQAWithContext(ctx context.Context, request *ModifyConflictQARequest) (response *ModifyConflictQAResponse, err error) {
+    if request == nil {
+        request = NewModifyConflictQARequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "ModifyConflictQA")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyConflictQA require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyConflictQAResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyConversationRequest() (request *ModifyConversationRequest) {
     request = &ModifyConversationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4467,6 +5501,58 @@ func (c *Client) ModifyConversationWithContext(ctx context.Context, request *Mod
     request.SetContext(ctx)
     
     response = NewModifyConversationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDocRequest() (request *ModifyDocRequest) {
+    request = &ModifyDocRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "ModifyDoc")
+    
+    
+    return
+}
+
+func NewModifyDocResponse() (response *ModifyDocResponse) {
+    response = &ModifyDocResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDoc
+// Modify a single document
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyDoc(request *ModifyDocRequest) (response *ModifyDocResponse, err error) {
+    return c.ModifyDocWithContext(context.Background(), request)
+}
+
+// ModifyDoc
+// Modify a single document
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyDocWithContext(ctx context.Context, request *ModifyDocRequest) (response *ModifyDocResponse, err error) {
+    if request == nil {
+        request = NewModifyDocRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "ModifyDoc")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDoc require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDocResponse()
     err = c.Send(request, response)
     return
 }
@@ -4627,6 +5713,114 @@ func (c *Client) ModifyLabelWithContext(ctx context.Context, request *ModifyLabe
     return
 }
 
+func NewModifyMsgRecordCategoryRequest() (request *ModifyMsgRecordCategoryRequest) {
+    request = &ModifyMsgRecordCategoryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "ModifyMsgRecordCategory")
+    
+    
+    return
+}
+
+func NewModifyMsgRecordCategoryResponse() (response *ModifyMsgRecordCategoryResponse) {
+    response = &ModifyMsgRecordCategoryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyMsgRecordCategory
+// Modify the name of a specified message record category
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyMsgRecordCategory(request *ModifyMsgRecordCategoryRequest) (response *ModifyMsgRecordCategoryResponse, err error) {
+    return c.ModifyMsgRecordCategoryWithContext(context.Background(), request)
+}
+
+// ModifyMsgRecordCategory
+// Modify the name of a specified message record category
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyMsgRecordCategoryWithContext(ctx context.Context, request *ModifyMsgRecordCategoryRequest) (response *ModifyMsgRecordCategoryResponse, err error) {
+    if request == nil {
+        request = NewModifyMsgRecordCategoryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "ModifyMsgRecordCategory")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMsgRecordCategory require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyMsgRecordCategoryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyPluginRequest() (request *ModifyPluginRequest) {
+    request = &ModifyPluginRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "ModifyPlugin")
+    
+    
+    return
+}
+
+func NewModifyPluginResponse() (response *ModifyPluginResponse) {
+    response = &ModifyPluginResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyPlugin
+// Modify a plug-in
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyPlugin(request *ModifyPluginRequest) (response *ModifyPluginResponse, err error) {
+    return c.ModifyPluginWithContext(context.Background(), request)
+}
+
+// ModifyPlugin
+// Modify a plug-in
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyPluginWithContext(ctx context.Context, request *ModifyPluginRequest) (response *ModifyPluginResponse, err error) {
+    if request == nil {
+        request = NewModifyPluginRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "ModifyPlugin")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyPlugin require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyPluginResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyQARequest() (request *ModifyQARequest) {
     request = &ModifyQARequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4650,8 +5844,9 @@ func NewModifyQAResponse() (response *ModifyQAResponse) {
 // Modify single QA
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  MISSINGPARAMETER = "MissingParameter"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyQA(request *ModifyQARequest) (response *ModifyQAResponse, err error) {
     return c.ModifyQAWithContext(context.Background(), request)
 }
@@ -4660,8 +5855,9 @@ func (c *Client) ModifyQA(request *ModifyQARequest) (response *ModifyQAResponse,
 // Modify single QA
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  MISSINGPARAMETER = "MissingParameter"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyQAWithContext(ctx context.Context, request *ModifyQARequest) (response *ModifyQAResponse, err error) {
     if request == nil {
         request = NewModifyQARequest()
@@ -4702,8 +5898,9 @@ func NewModifyQAListResponse() (response *ModifyQAListResponse) {
 // Batch modify QAs
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  MISSINGPARAMETER = "MissingParameter"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyQAList(request *ModifyQAListRequest) (response *ModifyQAListResponse, err error) {
     return c.ModifyQAListWithContext(context.Background(), request)
 }
@@ -4712,8 +5909,9 @@ func (c *Client) ModifyQAList(request *ModifyQAListRequest) (response *ModifyQAL
 // Batch modify QAs
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  MISSINGPARAMETER = "MissingParameter"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyQAListWithContext(ctx context.Context, request *ModifyQAListRequest) (response *ModifyQAListResponse, err error) {
     if request == nil {
         request = NewModifyQAListRequest()
@@ -4727,6 +5925,60 @@ func (c *Client) ModifyQAListWithContext(ctx context.Context, request *ModifyQAL
     request.SetContext(ctx)
     
     response = NewModifyQAListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifySkillRequest() (request *ModifySkillRequest) {
+    request = &ModifySkillRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "ModifySkill")
+    
+    
+    return
+}
+
+func NewModifySkillResponse() (response *ModifySkillResponse) {
+    response = &ModifySkillResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifySkill
+// Modify a Skill
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifySkill(request *ModifySkillRequest) (response *ModifySkillResponse, err error) {
+    return c.ModifySkillWithContext(context.Background(), request)
+}
+
+// ModifySkill
+// Modify a Skill
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifySkillWithContext(ctx context.Context, request *ModifySkillRequest) (response *ModifySkillResponse, err error) {
+    if request == nil {
+        request = NewModifySkillRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "ModifySkill")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySkill require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifySkillResponse()
     err = c.Send(request, response)
     return
 }
@@ -4881,6 +6133,56 @@ func (c *Client) PauseAppTriggerWithContext(ctx context.Context, request *PauseA
     return
 }
 
+func NewReadMCPResourceRequest() (request *ReadMCPResourceRequest) {
+    request = &ReadMCPResourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "ReadMCPResource")
+    
+    
+    return
+}
+
+func NewReadMCPResourceResponse() (response *ReadMCPResourceResponse) {
+    response = &ReadMCPResourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ReadMCPResource
+// This API is used to read MCP UI resources in HTML for frontend iframe to load the MCP App interface.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ReadMCPResource(request *ReadMCPResourceRequest) (response *ReadMCPResourceResponse, err error) {
+    return c.ReadMCPResourceWithContext(context.Background(), request)
+}
+
+// ReadMCPResource
+// This API is used to read MCP UI resources in HTML for frontend iframe to load the MCP App interface.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ReadMCPResourceWithContext(ctx context.Context, request *ReadMCPResourceRequest) (response *ReadMCPResourceResponse, err error) {
+    if request == nil {
+        request = NewReadMCPResourceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "ReadMCPResource")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ReadMCPResource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewReadMCPResourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewReleaseSkillRequest() (request *ReleaseSkillRequest) {
     request = &ReleaseSkillRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4985,6 +6287,108 @@ func (c *Client) ResetConversationWithContext(ctx context.Context, request *Rese
     return
 }
 
+func NewResumeAppTriggerRequest() (request *ResumeAppTriggerRequest) {
+    request = &ResumeAppTriggerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "ResumeAppTrigger")
+    
+    
+    return
+}
+
+func NewResumeAppTriggerResponse() (response *ResumeAppTriggerResponse) {
+    response = &ResumeAppTriggerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ResumeAppTrigger
+// ResumeAppTrigger
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ResumeAppTrigger(request *ResumeAppTriggerRequest) (response *ResumeAppTriggerResponse, err error) {
+    return c.ResumeAppTriggerWithContext(context.Background(), request)
+}
+
+// ResumeAppTrigger
+// ResumeAppTrigger
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ResumeAppTriggerWithContext(ctx context.Context, request *ResumeAppTriggerRequest) (response *ResumeAppTriggerResponse, err error) {
+    if request == nil {
+        request = NewResumeAppTriggerRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "ResumeAppTrigger")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResumeAppTrigger require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewResumeAppTriggerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewResumeWorkflowRunRequest() (request *ResumeWorkflowRunRequest) {
+    request = &ResumeWorkflowRunRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "ResumeWorkflowRun")
+    
+    
+    return
+}
+
+func NewResumeWorkflowRunResponse() (response *ResumeWorkflowRunResponse) {
+    response = &ResumeWorkflowRunResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ResumeWorkflowRun
+// Resume a workflow asynchronous execution instance that is waiting for input.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ResumeWorkflowRun(request *ResumeWorkflowRunRequest) (response *ResumeWorkflowRunResponse, err error) {
+    return c.ResumeWorkflowRunWithContext(context.Background(), request)
+}
+
+// ResumeWorkflowRun
+// Resume a workflow asynchronous execution instance that is waiting for input.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ResumeWorkflowRunWithContext(ctx context.Context, request *ResumeWorkflowRunRequest) (response *ResumeWorkflowRunResponse, err error) {
+    if request == nil {
+        request = NewResumeWorkflowRunRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "ResumeWorkflowRun")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResumeWorkflowRun require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewResumeWorkflowRunResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRetryReleaseRequest() (request *RetryReleaseRequest) {
     request = &RetryReleaseRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5009,6 +6413,7 @@ func NewRetryReleaseResponse() (response *RetryReleaseResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) RetryRelease(request *RetryReleaseRequest) (response *RetryReleaseResponse, err error) {
     return c.RetryReleaseWithContext(context.Background(), request)
 }
@@ -5018,6 +6423,7 @@ func (c *Client) RetryRelease(request *RetryReleaseRequest) (response *RetryRele
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) RetryReleaseWithContext(ctx context.Context, request *RetryReleaseRequest) (response *RetryReleaseResponse, err error) {
     if request == nil {
         request = NewRetryReleaseRequest()
@@ -5059,6 +6465,7 @@ func NewRollbackReleaseResponse() (response *RollbackReleaseResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) RollbackRelease(request *RollbackReleaseRequest) (response *RollbackReleaseResponse, err error) {
     return c.RollbackReleaseWithContext(context.Background(), request)
 }
@@ -5068,6 +6475,7 @@ func (c *Client) RollbackRelease(request *RollbackReleaseRequest) (response *Rol
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) RollbackReleaseWithContext(ctx context.Context, request *RollbackReleaseRequest) (response *RollbackReleaseResponse, err error) {
     if request == nil {
         request = NewRollbackReleaseRequest()
@@ -5109,6 +6517,7 @@ func NewRunAppTriggerNowResponse() (response *RunAppTriggerNowResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) RunAppTriggerNow(request *RunAppTriggerNowRequest) (response *RunAppTriggerNowResponse, err error) {
     return c.RunAppTriggerNowWithContext(context.Background(), request)
 }
@@ -5118,6 +6527,7 @@ func (c *Client) RunAppTriggerNow(request *RunAppTriggerNowRequest) (response *R
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) RunAppTriggerNowWithContext(ctx context.Context, request *RunAppTriggerNowRequest) (response *RunAppTriggerNowResponse, err error) {
     if request == nil {
         request = NewRunAppTriggerNowRequest()
@@ -5131,6 +6541,110 @@ func (c *Client) RunAppTriggerNowWithContext(ctx context.Context, request *RunAp
     request.SetContext(ctx)
     
     response = NewRunAppTriggerNowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSaveWorkflowDebugContextRequest() (request *SaveWorkflowDebugContextRequest) {
+    request = &SaveWorkflowDebugContextRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "SaveWorkflowDebugContext")
+    
+    
+    return
+}
+
+func NewSaveWorkflowDebugContextResponse() (response *SaveWorkflowDebugContextResponse) {
+    response = &SaveWorkflowDebugContextResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SaveWorkflowDebugContext
+// SaveWorkflowDebugContext
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) SaveWorkflowDebugContext(request *SaveWorkflowDebugContextRequest) (response *SaveWorkflowDebugContextResponse, err error) {
+    return c.SaveWorkflowDebugContextWithContext(context.Background(), request)
+}
+
+// SaveWorkflowDebugContext
+// SaveWorkflowDebugContext
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) SaveWorkflowDebugContextWithContext(ctx context.Context, request *SaveWorkflowDebugContextRequest) (response *SaveWorkflowDebugContextResponse, err error) {
+    if request == nil {
+        request = NewSaveWorkflowDebugContextRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "SaveWorkflowDebugContext")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SaveWorkflowDebugContext require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSaveWorkflowDebugContextResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSaveWorkflowToolNodeOutputRequest() (request *SaveWorkflowToolNodeOutputRequest) {
+    request = &SaveWorkflowToolNodeOutputRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "SaveWorkflowToolNodeOutput")
+    
+    
+    return
+}
+
+func NewSaveWorkflowToolNodeOutputResponse() (response *SaveWorkflowToolNodeOutputResponse) {
+    response = &SaveWorkflowToolNodeOutputResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SaveWorkflowToolNodeOutput
+// SaveWorkflowToolNodeOutput
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) SaveWorkflowToolNodeOutput(request *SaveWorkflowToolNodeOutputRequest) (response *SaveWorkflowToolNodeOutputResponse, err error) {
+    return c.SaveWorkflowToolNodeOutputWithContext(context.Background(), request)
+}
+
+// SaveWorkflowToolNodeOutput
+// SaveWorkflowToolNodeOutput
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) SaveWorkflowToolNodeOutputWithContext(ctx context.Context, request *SaveWorkflowToolNodeOutputRequest) (response *SaveWorkflowToolNodeOutputResponse, err error) {
+    if request == nil {
+        request = NewSaveWorkflowToolNodeOutputRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "SaveWorkflowToolNodeOutput")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SaveWorkflowToolNodeOutput require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSaveWorkflowToolNodeOutputResponse()
     err = c.Send(request, response)
     return
 }
@@ -5159,6 +6673,7 @@ func NewSearchKnowledgeResponse() (response *SearchKnowledgeResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) SearchKnowledge(request *SearchKnowledgeRequest) (response *SearchKnowledgeResponse, err error) {
     return c.SearchKnowledgeWithContext(context.Background(), request)
 }
@@ -5168,6 +6683,7 @@ func (c *Client) SearchKnowledge(request *SearchKnowledgeRequest) (response *Sea
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) SearchKnowledgeWithContext(ctx context.Context, request *SearchKnowledgeRequest) (response *SearchKnowledgeResponse, err error) {
     if request == nil {
         request = NewSearchKnowledgeRequest()
@@ -5181,6 +6697,162 @@ func (c *Client) SearchKnowledgeWithContext(ctx context.Context, request *Search
     request.SetContext(ctx)
     
     response = NewSearchKnowledgeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopWorkflowRunListRequest() (request *StopWorkflowRunListRequest) {
+    request = &StopWorkflowRunListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "StopWorkflowRunList")
+    
+    
+    return
+}
+
+func NewStopWorkflowRunListResponse() (response *StopWorkflowRunListResponse) {
+    response = &StopWorkflowRunListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StopWorkflowRunList
+// Batch stop running workflow instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) StopWorkflowRunList(request *StopWorkflowRunListRequest) (response *StopWorkflowRunListResponse, err error) {
+    return c.StopWorkflowRunListWithContext(context.Background(), request)
+}
+
+// StopWorkflowRunList
+// Batch stop running workflow instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) StopWorkflowRunListWithContext(ctx context.Context, request *StopWorkflowRunListRequest) (response *StopWorkflowRunListResponse, err error) {
+    if request == nil {
+        request = NewStopWorkflowRunListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "StopWorkflowRunList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopWorkflowRunList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStopWorkflowRunListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUnfavoritePluginRequest() (request *UnfavoritePluginRequest) {
+    request = &UnfavoritePluginRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "UnfavoritePlugin")
+    
+    
+    return
+}
+
+func NewUnfavoritePluginResponse() (response *UnfavoritePluginResponse) {
+    response = &UnfavoritePluginResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UnfavoritePlugin
+// Unfavorite a plug-in
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) UnfavoritePlugin(request *UnfavoritePluginRequest) (response *UnfavoritePluginResponse, err error) {
+    return c.UnfavoritePluginWithContext(context.Background(), request)
+}
+
+// UnfavoritePlugin
+// Unfavorite a plug-in
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) UnfavoritePluginWithContext(ctx context.Context, request *UnfavoritePluginRequest) (response *UnfavoritePluginResponse, err error) {
+    if request == nil {
+        request = NewUnfavoritePluginRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "UnfavoritePlugin")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UnfavoritePlugin require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUnfavoritePluginResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUnfavoriteSkillRequest() (request *UnfavoriteSkillRequest) {
+    request = &UnfavoriteSkillRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("adp", APIVersion, "UnfavoriteSkill")
+    
+    
+    return
+}
+
+func NewUnfavoriteSkillResponse() (response *UnfavoriteSkillResponse) {
+    response = &UnfavoriteSkillResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UnfavoriteSkill
+// Unfavorites a skill
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) UnfavoriteSkill(request *UnfavoriteSkillRequest) (response *UnfavoriteSkillResponse, err error) {
+    return c.UnfavoriteSkillWithContext(context.Background(), request)
+}
+
+// UnfavoriteSkill
+// Unfavorites a skill
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) UnfavoriteSkillWithContext(ctx context.Context, request *UnfavoriteSkillRequest) (response *UnfavoriteSkillResponse, err error) {
+    if request == nil {
+        request = NewUnfavoriteSkillRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "adp", APIVersion, "UnfavoriteSkill")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UnfavoriteSkill require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUnfavoriteSkillResponse()
     err = c.Send(request, response)
     return
 }
