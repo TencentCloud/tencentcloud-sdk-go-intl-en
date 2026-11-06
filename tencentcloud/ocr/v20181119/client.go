@@ -482,6 +482,12 @@ func NewGetCardVerificationExternalResultResponse() (response *GetCardVerificati
 // This API is used to obtain document recognition results.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ENGINERECOGNIZETIMEOUT = "FailedOperation.EngineRecognizeTimeout"
+//  FAILEDOPERATION_IDCARDINFOILLEGAL = "FailedOperation.IdCardInfoIllegal"
+//  FAILEDOPERATION_IDCARDTOOSMALL = "FailedOperation.IdCardTooSmall"
+//  FAILEDOPERATION_IMAGENOIDCARD = "FailedOperation.ImageNoIdCard"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
+//  FAILEDOPERATION_MULTICARDERROR = "FailedOperation.MultiCardError"
 //  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
@@ -496,6 +502,12 @@ func (c *Client) GetCardVerificationExternalResult(request *GetCardVerificationE
 // This API is used to obtain document recognition results.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ENGINERECOGNIZETIMEOUT = "FailedOperation.EngineRecognizeTimeout"
+//  FAILEDOPERATION_IDCARDINFOILLEGAL = "FailedOperation.IdCardInfoIllegal"
+//  FAILEDOPERATION_IDCARDTOOSMALL = "FailedOperation.IdCardTooSmall"
+//  FAILEDOPERATION_IMAGENOIDCARD = "FailedOperation.ImageNoIdCard"
+//  FAILEDOPERATION_IMAGENOSPECIFIEDCARD = "FailedOperation.ImageNoSpecifiedCard"
+//  FAILEDOPERATION_MULTICARDERROR = "FailedOperation.MultiCardError"
 //  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
 //  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
@@ -1299,7 +1311,7 @@ func NewRecognizeBrazilIDCardOCRResponse() (response *RecognizeBrazilIDCardOCRRe
 }
 
 // RecognizeBrazilIDCardOCR
-// This interface supports identification of the front and back of Brazilian ID license. The identification fields include name, driver's license category, number, validity period, etc.
+// This interface supports recognition of both the front and back sides of Brazilian ID cards. Default API request rate limit: 5 requests per second.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
@@ -1313,7 +1325,7 @@ func (c *Client) RecognizeBrazilIDCardOCR(request *RecognizeBrazilIDCardOCRReque
 }
 
 // RecognizeBrazilIDCardOCR
-// This interface supports identification of the front and back of Brazilian ID license. The identification fields include name, driver's license category, number, validity period, etc.
+// This interface supports recognition of both the front and back sides of Brazilian ID cards. Default API request rate limit: 5 requests per second.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"

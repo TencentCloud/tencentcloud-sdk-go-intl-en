@@ -2443,6 +2443,17 @@ type AigcImageTaskOutputFileInfo struct {
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 }
 
+type AigcModelQuota struct {
+	// <p>Model name.</p>
+	ModelName *string `json:"ModelName,omitnil,omitempty" name:"ModelName"`
+
+	// <p>Quota quantity of tasks.</p><p>Unit: frames/second.</p><ul><li>When QuotaType is Image, the unit is frames;</li><li>When QuotaType is Video, the unit is seconds;</li></ul>
+	QuotaLimit *uint64 `json:"QuotaLimit,omitnil,omitempty" name:"QuotaLimit"`
+
+	// <p>Model version.</p>
+	ModelVersion *string `json:"ModelVersion,omitnil,omitempty" name:"ModelVersion"`
+}
+
 type AigcQuotaItem struct {
 	// <p>Quota type</p><p>Enumeration values:</p><ul><li>Image: AIGC image task</li><li>Video: AIGC video task</li><li>Text: AIGC text task</li></ul>
 	QuotaType *string `json:"QuotaType,omitnil,omitempty" name:"QuotaType"`
@@ -6696,33 +6707,57 @@ func (r *CreateAigcImageTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAigcQuotaRequestParams struct {
-	// <p><strong>VOD application ID. From December 25, 2023, customers who activate on-demand services must fill in this field with the app ID when accessing resources in on-demand applications, whether it is the default application or a newly created application.</strong></p>
+	// <p><strong>VOD application ID. From December 25, 2023, customers who activate on-demand services must fill in this field with the app ID when accessing resources in on-demand applications, whether in the default application or a newly created application.</strong></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <p>Quota type</p><p>Enumeration values:</p><ul><li>Image: AIGC image task</li><li>Video: AIGC video task</li><li>Text: AIGC text task</li></ul>
 	QuotaType *string `json:"QuotaType,omitnil,omitempty" name:"QuotaType"`
 
-	// <p>Number of task quotas.</p><p>Unit: images/seconds/tokens.</p><ul><li>When QuotaType is Image, the unit is images;</li><li>When QuotaType is Video, the unit is seconds;</li><li>When QuotaType is Text, the unit is tokens.</li></ul>
+	// <p>Number of quotas for the task.</p><p>Unit: images/second/tokens.</p><ul><li>When QuotaType is Image, the unit is images;</li><li>When QuotaType is Video, the unit is seconds;</li><li>When QuotaType is Text, the unit is tokens.</li></ul>
 	QuotaLimit *uint64 `json:"QuotaLimit,omitnil,omitempty" name:"QuotaLimit"`
 
-	// <p>Valid only when QuotaType is Text. It is used to select the ApiToken that needs a quota limit.</p>
+	// <p>Valid only when QuotaType=Text, used to select the ApiToken that requires quota limit</p>
 	ApiToken *string `json:"ApiToken,omitnil,omitempty" name:"ApiToken"`
+
+	// <p>Quota reset cycle.</p><p>Enumeration values:</p><ul><li>Day: Reset every day.</li><li>Month: Reset on a specified date each month.</li><li>Total: Never reset. The QuotaLimit parameter is the total quota.</li></ul>
+	QuotaPeriod *string `json:"QuotaPeriod,omitnil,omitempty" name:"QuotaPeriod"`
+
+	// <p>Reset date of the per month quota. Valid only when QuotaPeriod=Month.</p><p>If the selected date does not exist in the current month, the reset is postponed to 00:00 on the 1st of the next month.</p>
+	ResetDay *uint64 `json:"ResetDay,omitnil,omitempty" name:"ResetDay"`
+
+	// <p>Whether to set specified quotas for each model</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul>
+	ModelQuotaSwitch *string `json:"ModelQuotaSwitch,omitnil,omitempty" name:"ModelQuotaSwitch"`
+
+	// <p>Quota set for each model, valid only when ModelQuotaSwitch=ON.</p>
+	ModelQuotas []*AigcModelQuota `json:"ModelQuotas,omitnil,omitempty" name:"ModelQuotas"`
 }
 
 type CreateAigcQuotaRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p><strong>VOD application ID. From December 25, 2023, customers who activate on-demand services must fill in this field with the app ID when accessing resources in on-demand applications, whether it is the default application or a newly created application.</strong></p>
+	// <p><strong>VOD application ID. From December 25, 2023, customers who activate on-demand services must fill in this field with the app ID when accessing resources in on-demand applications, whether in the default application or a newly created application.</strong></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <p>Quota type</p><p>Enumeration values:</p><ul><li>Image: AIGC image task</li><li>Video: AIGC video task</li><li>Text: AIGC text task</li></ul>
 	QuotaType *string `json:"QuotaType,omitnil,omitempty" name:"QuotaType"`
 
-	// <p>Number of task quotas.</p><p>Unit: images/seconds/tokens.</p><ul><li>When QuotaType is Image, the unit is images;</li><li>When QuotaType is Video, the unit is seconds;</li><li>When QuotaType is Text, the unit is tokens.</li></ul>
+	// <p>Number of quotas for the task.</p><p>Unit: images/second/tokens.</p><ul><li>When QuotaType is Image, the unit is images;</li><li>When QuotaType is Video, the unit is seconds;</li><li>When QuotaType is Text, the unit is tokens.</li></ul>
 	QuotaLimit *uint64 `json:"QuotaLimit,omitnil,omitempty" name:"QuotaLimit"`
 
-	// <p>Valid only when QuotaType is Text. It is used to select the ApiToken that needs a quota limit.</p>
+	// <p>Valid only when QuotaType=Text, used to select the ApiToken that requires quota limit</p>
 	ApiToken *string `json:"ApiToken,omitnil,omitempty" name:"ApiToken"`
+
+	// <p>Quota reset cycle.</p><p>Enumeration values:</p><ul><li>Day: Reset every day.</li><li>Month: Reset on a specified date each month.</li><li>Total: Never reset. The QuotaLimit parameter is the total quota.</li></ul>
+	QuotaPeriod *string `json:"QuotaPeriod,omitnil,omitempty" name:"QuotaPeriod"`
+
+	// <p>Reset date of the per month quota. Valid only when QuotaPeriod=Month.</p><p>If the selected date does not exist in the current month, the reset is postponed to 00:00 on the 1st of the next month.</p>
+	ResetDay *uint64 `json:"ResetDay,omitnil,omitempty" name:"ResetDay"`
+
+	// <p>Whether to set specified quotas for each model</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul>
+	ModelQuotaSwitch *string `json:"ModelQuotaSwitch,omitnil,omitempty" name:"ModelQuotaSwitch"`
+
+	// <p>Quota set for each model, valid only when ModelQuotaSwitch=ON.</p>
+	ModelQuotas []*AigcModelQuota `json:"ModelQuotas,omitnil,omitempty" name:"ModelQuotas"`
 }
 
 func (r *CreateAigcQuotaRequest) ToJsonString() string {
@@ -6741,6 +6776,10 @@ func (r *CreateAigcQuotaRequest) FromJsonString(s string) error {
 	delete(f, "QuotaType")
 	delete(f, "QuotaLimit")
 	delete(f, "ApiToken")
+	delete(f, "QuotaPeriod")
+	delete(f, "ResetDay")
+	delete(f, "ModelQuotaSwitch")
+	delete(f, "ModelQuotas")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAigcQuotaRequest has unknown keys!", "")
 	}
@@ -24742,7 +24781,7 @@ func (r *ModifyAdaptiveDynamicStreamingTemplateResponse) FromJsonString(s string
 
 // Predefined struct for user
 type ModifyAigcQuotaRequestParams struct {
-	// <p><strong>VOD application ID. For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</strong></p>
+	// <p><strong>VOD application ID. For customers who activate on-demand services after December 25, 2023, this field must be filled in with the app ID when accessing resources in on-demand applications, whether in the default application or a newly created application.</strong></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <p>Quota type</p><p>Enumeration values:</p><ul><li>Image: AIGC image task</li><li>Video: AIGC video task</li><li>Text: AIGC text task</li></ul>
@@ -24751,14 +24790,26 @@ type ModifyAigcQuotaRequestParams struct {
 	// <p>Number of quotas for the task.</p><p>Unit: images/second/tokens.</p><ul><li>When QuotaType is Image, the unit is images;</li><li>When QuotaType is Video, the unit is seconds;</li><li>When QuotaType is Text, the unit is tokens.</li></ul>
 	QuotaLimit *uint64 `json:"QuotaLimit,omitnil,omitempty" name:"QuotaLimit"`
 
-	// <p>Valid only when QuotaType=Text. Used to select the ApiToken that needs a quota limit.</p>
+	// <p>Valid only when QuotaType=Text, used to select the ApiToken that requires quota limit</p>
 	ApiToken *string `json:"ApiToken,omitnil,omitempty" name:"ApiToken"`
+
+	// <p>Quota reset cycle.</p><p>Enumeration values:</p><ul><li>Day: Reset daily.</li><li>Month: Reset on a specified date per month.</li><li>Total: Never reset. The QuotaLimit parameter is the total quota.</li></ul>
+	QuotaPeriod *string `json:"QuotaPeriod,omitnil,omitempty" name:"QuotaPeriod"`
+
+	// <p>Reset date of the monthly quota. Valid only when QuotaPeriod=Month.</p><p>If the selected date does not exist in the current month, the reset will be postponed to 00:00 on the 1st of the next month.</p>
+	ResetDay *uint64 `json:"ResetDay,omitnil,omitempty" name:"ResetDay"`
+
+	// <p>Whether to set specified quotas for each model</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul>
+	ModelQuotaSwitch *string `json:"ModelQuotaSwitch,omitnil,omitempty" name:"ModelQuotaSwitch"`
+
+	// <p>Quota set for each model, valid only when ModelQuotaSwitch=ON.</p>
+	ModelQuotas []*AigcModelQuota `json:"ModelQuotas,omitnil,omitempty" name:"ModelQuotas"`
 }
 
 type ModifyAigcQuotaRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p><strong>VOD application ID. For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</strong></p>
+	// <p><strong>VOD application ID. For customers who activate on-demand services after December 25, 2023, this field must be filled in with the app ID when accessing resources in on-demand applications, whether in the default application or a newly created application.</strong></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <p>Quota type</p><p>Enumeration values:</p><ul><li>Image: AIGC image task</li><li>Video: AIGC video task</li><li>Text: AIGC text task</li></ul>
@@ -24767,8 +24818,20 @@ type ModifyAigcQuotaRequest struct {
 	// <p>Number of quotas for the task.</p><p>Unit: images/second/tokens.</p><ul><li>When QuotaType is Image, the unit is images;</li><li>When QuotaType is Video, the unit is seconds;</li><li>When QuotaType is Text, the unit is tokens.</li></ul>
 	QuotaLimit *uint64 `json:"QuotaLimit,omitnil,omitempty" name:"QuotaLimit"`
 
-	// <p>Valid only when QuotaType=Text. Used to select the ApiToken that needs a quota limit.</p>
+	// <p>Valid only when QuotaType=Text, used to select the ApiToken that requires quota limit</p>
 	ApiToken *string `json:"ApiToken,omitnil,omitempty" name:"ApiToken"`
+
+	// <p>Quota reset cycle.</p><p>Enumeration values:</p><ul><li>Day: Reset daily.</li><li>Month: Reset on a specified date per month.</li><li>Total: Never reset. The QuotaLimit parameter is the total quota.</li></ul>
+	QuotaPeriod *string `json:"QuotaPeriod,omitnil,omitempty" name:"QuotaPeriod"`
+
+	// <p>Reset date of the monthly quota. Valid only when QuotaPeriod=Month.</p><p>If the selected date does not exist in the current month, the reset will be postponed to 00:00 on the 1st of the next month.</p>
+	ResetDay *uint64 `json:"ResetDay,omitnil,omitempty" name:"ResetDay"`
+
+	// <p>Whether to set specified quotas for each model</p><p>Enumeration values: </p><ul><li>ON: Enable</li><li>OFF: Disable</li></ul>
+	ModelQuotaSwitch *string `json:"ModelQuotaSwitch,omitnil,omitempty" name:"ModelQuotaSwitch"`
+
+	// <p>Quota set for each model, valid only when ModelQuotaSwitch=ON.</p>
+	ModelQuotas []*AigcModelQuota `json:"ModelQuotas,omitnil,omitempty" name:"ModelQuotas"`
 }
 
 func (r *ModifyAigcQuotaRequest) ToJsonString() string {
@@ -24787,6 +24850,10 @@ func (r *ModifyAigcQuotaRequest) FromJsonString(s string) error {
 	delete(f, "QuotaType")
 	delete(f, "QuotaLimit")
 	delete(f, "ApiToken")
+	delete(f, "QuotaPeriod")
+	delete(f, "ResetDay")
+	delete(f, "ModelQuotaSwitch")
+	delete(f, "ModelQuotas")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAigcQuotaRequest has unknown keys!", "")
 	}
