@@ -16185,7 +16185,7 @@ func NewUpdateAigcApiTokenResponse() (response *UpdateAigcApiTokenResponse) {
 }
 
 // UpdateAigcApiToken
-// Creates a Token for invoking AIGC APIs. Data sync has a delay once created. It can be queried or deleted after about 30 seconds.
+// Update the Token for AIGC API calls. Data synchronization has a delay of about 30 seconds after the update.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
@@ -16197,7 +16197,7 @@ func (c *Client) UpdateAigcApiToken(request *UpdateAigcApiTokenRequest) (respons
 }
 
 // UpdateAigcApiToken
-// Creates a Token for invoking AIGC APIs. Data sync has a delay once created. It can be queried or deleted after about 30 seconds.
+// Update the Token for AIGC API calls. Data synchronization has a delay of about 30 seconds after the update.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"

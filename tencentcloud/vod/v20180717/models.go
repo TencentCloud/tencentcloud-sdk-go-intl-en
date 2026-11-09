@@ -35237,32 +35237,32 @@ type TrtcRecordInfo struct {
 
 // Predefined struct for user
 type UpdateAigcApiTokenRequestParams struct {
-	// <p><b>Video-on-demand <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services after December 25, 2023, this field must be filled in as the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
-	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
-
 	// <p>To update the Api Key</p>
 	ApiToken *string `json:"ApiToken,omitnil,omitempty" name:"ApiToken"`
 
-	// <p>Merge (default, merge the ExtInfo JSON by top-level key), Overwrite (direct overwrite)</p>
+	// <p><b>On-demand <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// <p>Merge (default, merge ExtInfo JSON by top-level key), Overwrite (direct overwrite)</p>
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// <p>Extended information of the token</p>
+	// <p>The ip allowlist and model allowlist are stored in ExtInfo in json format, with the following fields:</p><p>(1) ip allowlist<br>&quot;ip&quot;: {&quot;127.0.0.1&quot;:true}<br>Not enabled: &quot;ip&quot;: {}<br>Multiple groups: {&quot;&#39;11.12.112.90&quot;:true,&quot;15.12.112.90&quot;:true}</p><p>(2) model allowlist<br>&quot;model&quot;: {&quot;deepseek-v4-pro&quot;:true}<br>Not enabled: &quot;model&quot;: {}</p><p>(3) name<br>&quot;name&quot;: &quot;test&quot;</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 type UpdateAigcApiTokenRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p><b>Video-on-demand <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services after December 25, 2023, this field must be filled in as the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
-	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
-
 	// <p>To update the Api Key</p>
 	ApiToken *string `json:"ApiToken,omitnil,omitempty" name:"ApiToken"`
 
-	// <p>Merge (default, merge the ExtInfo JSON by top-level key), Overwrite (direct overwrite)</p>
+	// <p><b>On-demand <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications (whether the default application or a newly created application).</b></p>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// <p>Merge (default, merge ExtInfo JSON by top-level key), Overwrite (direct overwrite)</p>
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// <p>Extended information of the token</p>
+	// <p>The ip allowlist and model allowlist are stored in ExtInfo in json format, with the following fields:</p><p>(1) ip allowlist<br>&quot;ip&quot;: {&quot;127.0.0.1&quot;:true}<br>Not enabled: &quot;ip&quot;: {}<br>Multiple groups: {&quot;&#39;11.12.112.90&quot;:true,&quot;15.12.112.90&quot;:true}</p><p>(2) model allowlist<br>&quot;model&quot;: {&quot;deepseek-v4-pro&quot;:true}<br>Not enabled: &quot;model&quot;: {}</p><p>(3) name<br>&quot;name&quot;: &quot;test&quot;</p>
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
@@ -35278,8 +35278,8 @@ func (r *UpdateAigcApiTokenRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "SubAppId")
 	delete(f, "ApiToken")
+	delete(f, "SubAppId")
 	delete(f, "ActionType")
 	delete(f, "ExtInfo")
 	if len(f) > 0 {

@@ -161,7 +161,7 @@ const (
 	// Invalid pageToken.
 	INVALIDPARAMETER_PAGINATIONTOKENINVALID = "InvalidParameter.PaginationTokenInvalid"
 
-	// Invalid input parameter.
+	// Illegal input parameter.
 	INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 
 	// Password rule error.

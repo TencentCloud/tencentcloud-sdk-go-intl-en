@@ -2513,6 +2513,56 @@ func (c *Client) DisableUserSSOWithContext(ctx context.Context, request *Disable
     return
 }
 
+func NewGenerateOIDCAccessTokenRequest() (request *GenerateOIDCAccessTokenRequest) {
+    request = &GenerateOIDCAccessTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cam", APIVersion, "GenerateOIDCAccessToken")
+    
+    
+    return
+}
+
+func NewGenerateOIDCAccessTokenResponse() (response *GenerateOIDCAccessTokenResponse) {
+    response = &GenerateOIDCAccessTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GenerateOIDCAccessToken
+// Generate an OIDC access token. This feature is in grayscale stage. Contact Tencent Cloud if needed.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+func (c *Client) GenerateOIDCAccessToken(request *GenerateOIDCAccessTokenRequest) (response *GenerateOIDCAccessTokenResponse, err error) {
+    return c.GenerateOIDCAccessTokenWithContext(context.Background(), request)
+}
+
+// GenerateOIDCAccessToken
+// Generate an OIDC access token. This feature is in grayscale stage. Contact Tencent Cloud if needed.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+func (c *Client) GenerateOIDCAccessTokenWithContext(ctx context.Context, request *GenerateOIDCAccessTokenRequest) (response *GenerateOIDCAccessTokenResponse, err error) {
+    if request == nil {
+        request = NewGenerateOIDCAccessTokenRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cam", APIVersion, "GenerateOIDCAccessToken")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GenerateOIDCAccessToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGenerateOIDCAccessTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetAccountSummaryRequest() (request *GetAccountSummaryRequest) {
     request = &GetAccountSummaryRequest{
         BaseRequest: &tchttp.BaseRequest{},
