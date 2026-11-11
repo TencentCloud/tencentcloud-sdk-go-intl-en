@@ -4658,6 +4658,152 @@ func (r *ModifyAutoRenewFlagResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyDBInstanceRequestParams struct {
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Whether to only perform pre-check without actually executing the configuration change. true: only return the configuration change plan and pre-check result; false: actually execute the configuration change (default)</p>
+	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
+
+	// <p>Number of CPU cores of peer nodes. If not passed, maintain current value unchanged</p>
+	HybridNodeCpu *int64 `json:"HybridNodeCpu,omitnil,omitempty" name:"HybridNodeCpu"`
+
+	// <p>Peer-to-peer node memory size in GB. If not passed, maintain current value unchanged</p>
+	HybridNodeMem *int64 `json:"HybridNodeMem,omitnil,omitempty" name:"HybridNodeMem"`
+
+	// <p>Number of peer nodes. If not passed, maintain current value unchanged</p>
+	HybridNodeNum *int64 `json:"HybridNodeNum,omitnil,omitempty" name:"HybridNodeNum"`
+
+	// <p>Peer-to-peer node disk capacity in GB. If not passed, maintain current value unchanged</p>
+	Disk *int64 `json:"Disk,omitnil,omitempty" name:"Disk"`
+
+	// <p>Storage type. Available values: CLOUD_HSSD (enhanced SSD cloud disk), CLOUD_TCS (local disk), CLOUD_BSSD (universal SSD cloud disk). If not specified, the current value remains unchanged.</p>
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>Specification code, for example, 4c8g, 16c32g</p>
+	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
+
+	// <p>Target AZ list. If not passed, maintain current value unchanged</p>
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
+
+	// <p>Availability zone mode. 1: single availability zone. 3: multi-availability zone primary AZ mode</p>
+	AZMode *int64 `json:"AZMode,omitnil,omitempty" name:"AZMode"`
+
+	// <p>Primary AZ. This parameter is valid only when AZMode is 3</p>
+	PrimaryAZ *string `json:"PrimaryAZ,omitnil,omitempty" name:"PrimaryAZ"`
+
+	// <p>Number of replicas, value ranges from 1 to 3</p>
+	FullReplications *int64 `json:"FullReplications,omitnil,omitempty" name:"FullReplications"`
+}
+
+type ModifyDBInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Whether to only perform pre-check without actually executing the configuration change. true: only return the configuration change plan and pre-check result; false: actually execute the configuration change (default)</p>
+	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
+
+	// <p>Number of CPU cores of peer nodes. If not passed, maintain current value unchanged</p>
+	HybridNodeCpu *int64 `json:"HybridNodeCpu,omitnil,omitempty" name:"HybridNodeCpu"`
+
+	// <p>Peer-to-peer node memory size in GB. If not passed, maintain current value unchanged</p>
+	HybridNodeMem *int64 `json:"HybridNodeMem,omitnil,omitempty" name:"HybridNodeMem"`
+
+	// <p>Number of peer nodes. If not passed, maintain current value unchanged</p>
+	HybridNodeNum *int64 `json:"HybridNodeNum,omitnil,omitempty" name:"HybridNodeNum"`
+
+	// <p>Peer-to-peer node disk capacity in GB. If not passed, maintain current value unchanged</p>
+	Disk *int64 `json:"Disk,omitnil,omitempty" name:"Disk"`
+
+	// <p>Storage type. Available values: CLOUD_HSSD (enhanced SSD cloud disk), CLOUD_TCS (local disk), CLOUD_BSSD (universal SSD cloud disk). If not specified, the current value remains unchanged.</p>
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>Specification code, for example, 4c8g, 16c32g</p>
+	SpecCode *string `json:"SpecCode,omitnil,omitempty" name:"SpecCode"`
+
+	// <p>Target AZ list. If not passed, maintain current value unchanged</p>
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
+
+	// <p>Availability zone mode. 1: single availability zone. 3: multi-availability zone primary AZ mode</p>
+	AZMode *int64 `json:"AZMode,omitnil,omitempty" name:"AZMode"`
+
+	// <p>Primary AZ. This parameter is valid only when AZMode is 3</p>
+	PrimaryAZ *string `json:"PrimaryAZ,omitnil,omitempty" name:"PrimaryAZ"`
+
+	// <p>Number of replicas, value ranges from 1 to 3</p>
+	FullReplications *int64 `json:"FullReplications,omitnil,omitempty" name:"FullReplications"`
+}
+
+func (r *ModifyDBInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "DryRun")
+	delete(f, "HybridNodeCpu")
+	delete(f, "HybridNodeMem")
+	delete(f, "HybridNodeNum")
+	delete(f, "Disk")
+	delete(f, "StorageType")
+	delete(f, "SpecCode")
+	delete(f, "Zones")
+	delete(f, "AZMode")
+	delete(f, "PrimaryAZ")
+	delete(f, "FullReplications")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDBInstanceResponseParams struct {
+	// <p>Asynchronous task ID, returned when DryRun=false. You can call the Query Task API with this ID to get task status.</p>
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
+
+	// <p>Order number, returned in prepaid scenarios</p>
+	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
+
+	// <p>Whether to perform in-place configuration changes. Returned when DryRun=true.</p>
+	IsInPlaceModification *bool `json:"IsInPlaceModification,omitnil,omitempty" name:"IsInPlaceModification"`
+
+	// <p>Whether to perform configuration adjustment. Returned when DryRun=true</p>
+	IsMigrateModification *bool `json:"IsMigrateModification,omitnil,omitempty" name:"IsMigrateModification"`
+
+	// <p>Configuration change plan description. Returned when DryRun=true, describing the sub-process orchestration to be executed</p>
+	ModifyPlan *string `json:"ModifyPlan,omitnil,omitempty" name:"ModifyPlan"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyDBInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDBInstanceResponseParams `json:"Response"`
+}
+
+func (r *ModifyDBInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyDBInstanceSecurityGroupsRequestParams struct {
 	// Instance id.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`

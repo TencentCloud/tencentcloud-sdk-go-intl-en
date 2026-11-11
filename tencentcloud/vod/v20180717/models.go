@@ -188,13 +188,13 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// <p>Digital watermark.</p>
 	BlindWatermark *BlindWatermarkInput `json:"BlindWatermark,omitnil,omitempty" name:"BlindWatermark"`
 
-	// <p>External subtitle file. Elements are subtitle IDs. Supports multiple subtitles, up to 16.</p>
+	// <p>External subtitle list. The element is Subtitle ID. Supports multiple subtitles, up to 16.</p>
 	SubtitleSet []*string `json:"SubtitleSet,omitnil,omitempty" name:"SubtitleSet"`
 
 	// <p>Subtitle suppression information list. Up to 2 supported.</p>
 	SubtitleInfoSet []*SubtitleInfoInput `json:"SubtitleInfoSet,omitnil,omitempty" name:"SubtitleInfoSet"`
 
-	// <p>Third-party DRM encryption information. It is not currently supported to initiate tasks using third-party DRM info via task flow.</p>
+	// <p>Third-party DRM encryption information. It is not currently supported to initiate tasks using third-party DRM information via task flow.</p>
 	DrmInfo *ThirdPartyDrmInfo `json:"DrmInfo,omitnil,omitempty" name:"DrmInfo"`
 }
 
@@ -1028,7 +1028,7 @@ type AiRecognitionTaskHeadTailResultOutput struct {
 }
 
 type AiRecognitionTaskInput struct {
-	// Video intelligent identification template ID.
+	// Intelligent video identification template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 
@@ -2899,15 +2899,15 @@ type AnimatedGraphicTaskInput struct {
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// Start time offset of the GIF in the video, in seconds.
-	// <li>If not set or set to 0, it starts from the starting position of the video.</li>
-	// <li>When the value is greater than 0 (assume it is n), it means starting from the nth second of the video;</li>
+	// <li>If not set or set to 0, it starts from the beginning of the video.</li>
+	// <li>When the value is greater than 0 (assuming n), it means starting from the nth second of the video;</li>
 	// <li>When the value is less than 0 (assuming -n), it means starting from the position n seconds before the video ends.</li>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// End time offset of an animated image in the video, in seconds.
+	// End time offset of the GIF in the video, in seconds.
 	// <li>If not set or set to 0, it will last until the end of a video.</li>
-	// <li>When the value is greater than 0 (assuming n), it means it will last until the nth second of the video and then terminate;</li>
-	// <li>When the value is less than 0 (assuming -n), it means the video will terminate n seconds before the end.</li>
+	// <li>When the value is greater than 0 (assuming n), it means the video ends at the nth second.</li>
+	// <li>When the value is less than 0 (assuming -n), it means termination n seconds before the video ends.</li>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 }
 
@@ -3650,16 +3650,16 @@ type AudioTemplateInfoForUpdate struct {
 	// <p>Audio stream encoding format.<br>When the outer parameter Container is mp3, the valid value is:</p><li>libmp3lame.</li>When the outer parameter Container is ogg or flac, the valid value is:<li>flac.</li>When the outer parameter Container is m4a, the valid values are:<li>libfdk_aac;</li><li>libmp3lame;</li><li>ac3.</li>When the outer parameter Container is mp4 or flv, the valid values are:<li>libfdk_aac: suitable for mp4.</li><li>libmp3lame: suitable for flv.</li><li>mp2.</li>When the outer parameter Container is hls, the valid value is:<li>libfdk_aac.</li>When the outer parameter Format is HLS or MPEG-DASH, the valid value is:<li>libfdk_aac.</li>When the outer parameter Container is wav, the valid value is:<li>pcm16.</li>
 	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
 
-	// <p>Audio stream bitrate, in kbps. Value range: 0 and [26, 256]. When the value is 0, it means VOD automatically sets the bitrate.</p>
+	// <p>Audio stream bitrate. Value range: 0 and [26, 256]. Unit: kbps. When the value is 0, it means VOD automatically sets the bitrate.</p>
 	Bitrate *uint64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
 	// <p>Sampling rate of the audio stream. Available values:</p><li>16000, selectable only when Codec is pcm16.</li><li>32000</li><li>44100</li><li>48000</li>Unit: Hz.
 	SampleRate *uint64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
 
-	// <p>Audio channel. Available values:</p><li>1: single channel</li><li>2: dual-channel</li><li>6: stereo</li><li>0: the number of audio channels remains consistent with the original audio</li>When the media encapsulation format is an audio format (flac, ogg, mp3, m4a), the number of sound channels cannot be set to stereo.
+	// <p>Audio channel. Valid values:</p><li>1: Single channel</li><li>2: Two channels</li><li>6: Stereo</li><li>0: The number of audio channels remains the same as the original audio.</li>When the media encapsulation format is an audio format (flac, ogg, mp3, m4a), the number of audio channels cannot be set to stereo.
 	AudioChannel *int64 `json:"AudioChannel,omitnil,omitempty" name:"AudioChannel"`
 
-	// <p>Specifies the retained audio tracks for output. All source tracks are retained by default.</p><p>This parameter is valid only when specified in OverrideParameter. In other cases, it does not take effect.</p>
+	// <p>Specifies the retained audio tracks for output. All source tracks are retained by default.</p><p>This parameter is valid only when specified in the OverrideParameter parameter. In other cases, it does not take effect.</p>
 	StreamSelects []*int64 `json:"StreamSelects,omitnil,omitempty" name:"StreamSelects"`
 }
 
@@ -5154,13 +5154,13 @@ type CoverBySnapshotTaskInput struct {
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// Screenshot type. Valid values:
-	// <li>Time: time point screencapturing</li>
+	// <li>Time: screenshot by time point</li>
 	// <li>Percent: screenshot by percentage</li>
 	PositionType *string `json:"PositionType,omitnil,omitempty" name:"PositionType"`
 
 	// Screenshot position:
-	// <li>For time point screenshot taking, this value indicates the second of the specified video to use as the cover</li>
-	// <li>For percentage-based screenshots, this value indicates the percentage of the video used as the cover.</li>
+	// <li>For time point screenshots, this value indicates the second of the specified video to use as the cover</li>
+	// <li>For screenshot by percentage, this value indicates the percentage of the video used as the cover.</li>
 	PositionValue *float64 `json:"PositionValue,omitnil,omitempty" name:"PositionValue"`
 
 	// Watermark list. Multiple image or text watermarks up to a maximum of 10 are supported.
@@ -8992,10 +8992,10 @@ func (r *CreatePersonSampleResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateProcedureTemplateRequestParams struct {
-	// <p>Task flow name (support Chinese, up to 20 characters).</p>
+	// <p>Task flow name (supports Chinese, up to 20 characters).</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <p><b>On-demand <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications, whether in the default application or a newly created application.</b></p>
+	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate VOD services on or after December 25, 2023, this field must be set to the app ID when accessing resources in VOD applications, whether in the default application or a newly created application.</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <p>Transcoding template description. Length limit: 256 characters.</p>
@@ -9004,13 +9004,13 @@ type CreateProcedureTemplateRequestParams struct {
 	// <p>Video processing type task parameters.</p>
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitnil,omitempty" name:"MediaProcessTask"`
 
-	// <p>AI content moderation type task parameter *.<br><font color="red">*: This parameter is used to initiate legacy review and is not recommended. It is recommended to use the ReviewAudioVideoTask parameter to initiate review.</font></p>
+	// <p>AI content review type task parameter *. <font color="red">*This parameter is used to initiate legacy review and is not recommended. It is recommended to use the ReviewAudioVideoTask parameter to initiate review.</font></p>
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitnil,omitempty" name:"AiContentReviewTask"`
 
 	// <p>Parameters for the AI content analysis task.</p>
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil,omitempty" name:"AiAnalysisTask"`
 
-	// <p>Parameters for the AI content recognition type task.</p>
+	// <p>Parameters for the AI content recognition task.</p>
 	AiRecognitionTaskSet []*AiRecognitionTaskInput `json:"AiRecognitionTaskSet,omitnil,omitempty" name:"AiRecognitionTaskSet"`
 
 	// <p>This parameter is not recommended. Use AiRecognitionTaskSet instead.</p>
@@ -9028,10 +9028,10 @@ type CreateProcedureTemplateRequestParams struct {
 type CreateProcedureTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Task flow name (support Chinese, up to 20 characters).</p>
+	// <p>Task flow name (supports Chinese, up to 20 characters).</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <p><b>On-demand <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate on-demand services after December 25, 2023, this field must be set to the app ID when accessing resources in on-demand applications, whether in the default application or a newly created application.</b></p>
+	// <p><b>Video-on-demand (VOD) <a href="https://www.tencentcloud.com/document/product/266/14574?from_cn_redirect=1">application</a> ID. For customers who activate VOD services on or after December 25, 2023, this field must be set to the app ID when accessing resources in VOD applications, whether in the default application or a newly created application.</b></p>
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// <p>Transcoding template description. Length limit: 256 characters.</p>
@@ -9040,13 +9040,13 @@ type CreateProcedureTemplateRequest struct {
 	// <p>Video processing type task parameters.</p>
 	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitnil,omitempty" name:"MediaProcessTask"`
 
-	// <p>AI content moderation type task parameter *.<br><font color="red">*: This parameter is used to initiate legacy review and is not recommended. It is recommended to use the ReviewAudioVideoTask parameter to initiate review.</font></p>
+	// <p>AI content review type task parameter *. <font color="red">*This parameter is used to initiate legacy review and is not recommended. It is recommended to use the ReviewAudioVideoTask parameter to initiate review.</font></p>
 	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitnil,omitempty" name:"AiContentReviewTask"`
 
 	// <p>Parameters for the AI content analysis task.</p>
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil,omitempty" name:"AiAnalysisTask"`
 
-	// <p>Parameters for the AI content recognition type task.</p>
+	// <p>Parameters for the AI content recognition task.</p>
 	AiRecognitionTaskSet []*AiRecognitionTaskInput `json:"AiRecognitionTaskSet,omitnil,omitempty" name:"AiRecognitionTaskSet"`
 
 	// <p>This parameter is not recommended. Use AiRecognitionTaskSet instead.</p>
@@ -21468,7 +21468,7 @@ type ImageSceneAigcEncodeConfig struct {
 }
 
 type ImageSpriteTaskInput struct {
-	// Image sprite template ID.
+	// Sprite screenshot template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 
@@ -21759,7 +21759,7 @@ type ImportMediaKnowledgeTaskInput struct {
 	// <p>Large Model Understanding Template</p>
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// <p>List of knowledge base IDs. Leave empty to use the default knowledge base.</p>
+	// <p>List of knowledge base IDs. If left empty, the default knowledge base will be used.</p>
 	KnowledgeBaseIds []*string `json:"KnowledgeBaseIds,omitnil,omitempty" name:"KnowledgeBaseIds"`
 }
 
@@ -23974,10 +23974,10 @@ type MediaProcessTaskInput struct {
 	// List of video transcoding tasks.
 	TranscodeTaskSet []*TranscodeTaskInput `json:"TranscodeTaskSet,omitnil,omitempty" name:"TranscodeTaskSet"`
 
-	// List of video-to-GIF tasks.
+	// List of video-to-animated-image tasks.
 	AnimatedGraphicTaskSet []*AnimatedGraphicTaskInput `json:"AnimatedGraphicTaskSet,omitnil,omitempty" name:"AnimatedGraphicTaskSet"`
 
-	// List of time point screenshot tasks for videos.
+	// List of time point screencapturing tasks for videos.
 	SnapshotByTimeOffsetTaskSet []*SnapshotByTimeOffsetTaskInput `json:"SnapshotByTimeOffsetTaskSet,omitnil,omitempty" name:"SnapshotByTimeOffsetTaskSet"`
 
 	// List of sampled screenshot tasks for videos.
@@ -23986,7 +23986,7 @@ type MediaProcessTaskInput struct {
 	// List of image sprite tasks for videos.
 	ImageSpriteTaskSet []*ImageSpriteTaskInput `json:"ImageSpriteTaskSet,omitnil,omitempty" name:"ImageSpriteTaskSet"`
 
-	// Task list of screencapturing for cover images from videos.
+	// Task list of screencapturing for cover images of videos.
 	CoverBySnapshotTaskSet []*CoverBySnapshotTaskInput `json:"CoverBySnapshotTaskSet,omitnil,omitempty" name:"CoverBySnapshotTaskSet"`
 
 	// List of video to adaptive streaming tasks.
@@ -28398,31 +28398,31 @@ type MosaicInput struct {
 
 	// Vertical position of the mosaic origin relative to the origin of coordinates of the video image. Supports two formats: % and px.
 	// <li>If a string ends with %, it indicates that the `YPos` of a mosaic is a specified percentage of a video's height. For example, `10%` means that `YPos` is 10% of a video's height.</li>
-	// <li>If a string ends with px, it means the mosaic YPos is specified in pixels. For example, 100px means the YPos is 100 pixels.</li>
+	// <li>If a string ends with px, it means the mosaic YPos is specified in pixels. For example, 100px means YPos is 100 pixels.</li>
 	// Default value: 0px.
 	YPos *string `json:"YPos,omitnil,omitempty" name:"YPos"`
 
-	// Width of the mosaic, supporting two formats: % and px.
+	// Width of a mosaic, supporting two formats: % and px.
 	// <li>If a string ends with %, it indicates that the `Width` of a mosaic is a percentage of a video's width. For example, `10%` means that `Width` is 10% of a video's width.</li>
 	// <li>If a string ends with px, it means the mosaic Width unit is pixel. For example, 100px means the Width is 100 pixels.</li>
 	// Default value: 10%.
 	Width *string `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// Height of a mosaic, supporting two formats: % and px.
+	// Height of the mosaic, supporting two formats: % and px.
 	// <li>If a string ends with %, it indicates that the `Height` of a mosaic is a percentage of a video's height. For example, `10%` means that `Height` is 10% of a video's height.</li>
 	// <li>If a string ends with px, it means the mosaic Height unit is pixel. For example, 100px means the Height is 100 pixels.</li>
 	// Default value: 10%.
 	Height *string `json:"Height,omitnil,omitempty" name:"Height"`
 
 	// Start time offset of a mosaic, in seconds. If not set or set to 0, a mosaic starts appearing when a video starts.
-	// <li>If not set or set to 0, a mosaic appears when a video starts.</li>
-	// <li>If the value is greater than 0 (for example, n), a mosaic will appear at second n of a frame.</li>
+	// <li>If not set or set to 0, a mosaic starts appearing when a video starts.</li>
+	// <li>If the value is greater than 0 (for example, n), a mosaic will appear at second n of a video.</li>
 	// <li>When the value is less than 0 (assuming -n), it means the mosaic appears n seconds before the end of a video.</li>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
 	// End time offset of a mosaic, in seconds.
-	// <li>If not set or set to 0, mosaic will last until the end of a frame.</li>
-	// <li>If the value is greater than 0 (for example, n), a mosaic will disappear at second n.</li>
+	// <li>If not set or set to 0, a mosaic will last until the end of a frame.</li>
+	// <li>If the value is greater than 0 (for example, n), the mosaic will disappear at second n.</li>
 	// <li>When the value is less than 0 (assuming -n), it means the mosaic lasts until n seconds before the end of a video.</li>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 }
@@ -28625,7 +28625,7 @@ type OverrideTranscodeParameter struct {
 	// <p>Container format. Valid values: mp4, flv, hls, mp3, flac, ogg, m4a, and wav. Among them, mp3, flac, ogg, m4a, and wav are for audio-only files.</p>
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
-	// <p>Indicates whether to remove video data. Valid values:<br>&lt;li&gt;0: Data is reserved;&lt;\li&gt;<br>&lt;li&gt;1: Data is removed.&lt;\li&gt;</p>
+	// <p>Indicates whether to remove video data. Parameter value:<br>&lt;li&gt;0: Data is reserved;&lt;\li&gt;<br>&lt;li&gt;1: Data is removed.&lt;\li&gt;</p>
 	RemoveVideo *uint64 `json:"RemoveVideo,omitnil,omitempty" name:"RemoveVideo"`
 
 	// <p>Indicates whether to remove audio data. Valid values:<br>&lt;li&gt;0: Data is reserved;&lt;\li&gt;<br>&lt;li&gt;1: Data is removed.&lt;\li&gt;</p>
@@ -28637,7 +28637,7 @@ type OverrideTranscodeParameter struct {
 	// <p>Audio stream configuration parameters.</p>
 	AudioTemplate *AudioTemplateInfoForUpdate `json:"AudioTemplate,omitnil,omitempty" name:"AudioTemplate"`
 
-	// <p>Top Speed Codec transcoding configuration parameters.</p>
+	// <p>TSC transcoding configuration parameters.</p>
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
 
 	// <p>Standard extended fields for special usage.</p>
@@ -29060,7 +29060,7 @@ type ProcedureReviewAudioVideoTaskInput struct {
 	// Content for review. Available values:
 	// <li>Media: original audio/video;</li>
 	// <li>Cover: cover.</li>
-	// If this parameter is not specified or is set to an empty array, Media is reviewed by default.
+	// If this parameter is not specified or is set to an empty array, Media is used for review by default.
 	ReviewContents []*string `json:"ReviewContents,omitnil,omitempty" name:"ReviewContents"`
 }
 
@@ -32636,22 +32636,22 @@ type SDMCDrmKeyProviderInfo struct {
 }
 
 type SPEKEDrm struct {
-	// <p>Resource tagging. The field content is user-customized. It supports 1-128 characters, including numbers, letters, underscores (_), and hyphens (-). This field corresponds to the cid field in the Speke request. Note: Different DRM manufacturers have different restrictions on this field (for example, SDMC does not support underscores in this field). For specific rules, please confirm with the DRM manufacturer.</p>
+	// <p>Resource tagging. The field content is user-customized. It supports 1-128 characters, including numbers, letters, underscores (_), and hyphens (-). This field corresponds to the cid field in the Speke request. Note: Different DRM manufacturers have differences in the limits for this field (for example, SDMC does not support underscores in this field). For specific rules, please contact the DRM manufacturer for confirmation.</p>
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
-	// <p>DRM manufacturer access address. This field content is obtained from the DRM manufacturer. Note: Different DRM manufacturers have different limits on the number of substreams. For example, PallyCon cannot exceed 5 substreams, and DRMtoday supports stream encryption for a maximum of 9 substreams.</p>
+	// <p>DRM manufacturer access address. This field content is obtained from the DRM manufacturer. Note: Different DRM manufacturers have different limits on the number of substreams. For example, PallyCon allows no more than 5 substreams, while DRMtoday supports up to 9 substreams for encryption.</p>
 	KeyServerUrl *string `json:"KeyServerUrl,omitnil,omitempty" name:"KeyServerUrl"`
 
 	// <p>Encryption initialization vector (32-byte hexadecimal string). This field content is user-customized.</p>
 	Vector *string `json:"Vector,omitnil,omitempty" name:"Vector"`
 
-	// <p>Encryption method. Available values:<br>cbcs: PlayReady, Widevine, FairPlay, Widevine+FairPlay, Widevine+PlayReady, PlayReady+FairPlay, Widevine+PlayReady+FairPlay supported;<br>cenc: PlayReady, Widevine, Widevine+PlayReady supported;<br>If left blank, cbcs is used by default for FairPlay;<br>cenc is used by default for PlayReady and Widevine;<br>cbcs is used by default for Widevine+FairPlay, PlayReady+FairPlay, Widevine+PlayReady+FairPlay;<br>cenc is used by default for Widevine+PlayReady;</p>
+	// <p>Encryption method. Available values:<br>cbcs: PlayReady, Widevine, FairPlay, Widevine+FairPlay, Widevine+PlayReady, PlayReady+FairPlay, Widevine+PlayReady+FairPlay are supported;<br>cenc: PlayReady, Widevine, Widevine+PlayReady are supported;<br>If left blank, cbcs is used for FairPlay by default;<br>cenc is used for PlayReady and Widevine by default;<br>cbcs is used for Widevine+FairPlay, PlayReady+FairPlay, Widevine+PlayReady+FairPlay by default;<br>cenc is used for Widevine+PlayReady by default;</p>
 	EncryptionMethod *string `json:"EncryptionMethod,omitnil,omitempty" name:"EncryptionMethod"`
 
 	// <p>Substream encryption rule. Default: preset 0<br>preset 0: use the same key to encrypt all substreams;<br>preset 1: use different keys to encrypt each substream;</p>
 	EncryptionPreset *string `json:"EncryptionPreset,omitnil,omitempty" name:"EncryptionPreset"`
 
-	// <p>DRM manufacturer request method.</p><p>Enumeration values:</p><ul><li>POST: Most DRM manufacturers use the POST method for requests.</li><li>GET: Some DRM manufacturers support the GET method for requests. When using this method, request information needs to be included in the KeyServerUrl field.</li></ul><p>Default value: POST</p>
+	// <p>Request method of the DRM manufacturer.</p><p>Enumeration values:</p><ul><li>POST: Most DRM manufacturers use the POST method for requests.</li><li>GET: Some DRM manufacturers support the GET method for requests. When using this method, request information needs to be included in the KeyServerUrl field.</li></ul><p>Default value: POST</p>
 	KeyAcquireMode *string `json:"KeyAcquireMode,omitnil,omitempty" name:"KeyAcquireMode"`
 }
 
@@ -33770,7 +33770,7 @@ type SnapshotByTimeOffsetTaskInput struct {
 	// <p>List of screenshot time points. Time points support two formats: s and %.</p><li>The unit for a string that ends with s is second. For example, 3.5s means the time point is at 3.5 seconds.</li><li>The unit for a string that ends with % is a percentage of the video duration. For example, 10% means the time point is at 10% of the video's total duration.</li>
 	ExtTimeOffsetSet []*string `json:"ExtTimeOffsetSet,omitnil,omitempty" name:"ExtTimeOffsetSet"`
 
-	// <p>List of screenshot time points, in <font color="red">ms</font>. This parameter is not recommended. We recommend that you use the ExtTimeOffsetSet parameter.</p>
+	// <p>List of screencapturing time points, unit: <font color="red">ms</font>. This parameter is no longer recommended. We recommend that you use the ExtTimeOffsetSet parameter.</p>
 	TimeOffsetSet []*float64 `json:"TimeOffsetSet,omitnil,omitempty" name:"TimeOffsetSet"`
 
 	// <p>Watermark list. Up to 10 image or text watermarks are supported.</p>
@@ -34274,28 +34274,28 @@ type SubtitleInfoInput struct {
 	// <p>Subtitle ID.</p>
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// <p>Specifies the subtitle track index to be suppressed into the video. The value starts from 0, where 0 indicates usage of the first subtitle track in the source video. This parameter is valid only when Id is SUBTITLE_ID_PLACE_HOLDER. StreamIndex must be consistent with the subtitle track index in the source file. For example, if the subtitle track in the source file is stream#0:3, StreamIndex should be 3. Otherwise, task processing failed.</p>
+	// <p>Specifies the subtitle track index to be suppressed into the video. The value starts from 0, where 0 indicates using the first subtitle track in the source video. This parameter is valid only when Id is SUBTITLE_ID_PLACE_HOLDER. StreamIndex must be consistent with the subtitle track index in the source file. For example, if the subtitle track in the source file is stream#0:3, StreamIndex should be 3. Otherwise, task processing may fail.</p>
 	StreamIndex *int64 `json:"StreamIndex,omitnil,omitempty" name:"StreamIndex"`
 
-	// <p>Font type.</p><p>Enumeration values:</p><ul><li>hei.ttf: Heiti</li><li>song.ttf: Song Typeface</li><li>kai.ttf (recommended) or simkai.ttf: KaiTi</li><li>msyh.ttf: Microsoft YaHei</li><li>msyhbd.ttf: Microsoft YaHei in bold</li><li>hkjgt.ttf: Hwakangangtai</li><li>dhttx.ttf: Dianheiti Ultra Light</li><li>xqgdzt.ttf: Xique Ancient Dictionary</li><li>qpcyt.ttf: Smart Splice Super Round Body</li><li>arial.ttf: only supports English</li><li>dinalternate.ttf: DIN Alternate Bold</li><li>helveticalt.ttf: Helvetica</li><li>helveticains.ttf: Helvetica Inserat</li><li>trajanpro.ttf: TrajanPro-Bold</li><li>korean.ttf: Korean</li><li>japanese.ttf: Japanese</li><li>thai.ttf: Thai</li><li>roboto.ttf: Roboto</li><li>notosans.ttf: NotoSans</li><li>notosansthai.ttf: Thai NotoSansThai</li><li>sarabun.ttf: Thai Sarabun</li><li>kanit.ttf: Thai Kanit</li><li>charmonman.ttf: Thai Charmonman</li><li>notonaskharabic.ttf: Arabic NotoNaskhArabic</li><li>notosansdevanagari.ttf: India NotoSansDevanagari</li><li>notosanstc.ttf: Cantonese Source Han Sans NotoSansTC</li><li>notosanskr.ttf: Korean NotoSansKR</li><li>gothica1.ttf: Korean GothicA1</li><li>nanummyeongjo.ttf: Korean NanumMyeongjo</li><li>notosansjp.ttf: Japanese NotoSansJP</li><li>notoserifjp.ttf: Japanese NotoSerifJP</li><li>shipporimincho.ttf: Japanese ShipporiMincho</li></ul><p>Default value: hei.ttf Heiti</p>
+	// <p>Font type.</p><p>Enumeration values:</p><ul><li>hei.ttf: Heiti</li><li>song.ttf: Song Typeface</li><li>kai.ttf (recommended) or simkai.ttf: KaiTi</li><li>msyh.ttf: Microsoft YaHei</li><li>msyhbd.ttf: Microsoft YaHei in bold</li><li>hkjgt.ttf: Hwakangangtai</li><li>dhttx.ttf: Dianheiti Ultra Light</li><li>xqgdzt.ttf: Xique Ancient Dictionary</li><li>qpcyt.ttf: Smart Splice Super Round Body</li><li>arial.ttf: only supports English</li><li>dinalternate.ttf: DIN Alternate Bold</li><li>helveticalt.ttf: Helvetica</li><li>helveticains.ttf: Helvetica Inserat</li><li>trajanpro.ttf: TrajanPro-Bold</li><li>korean.ttf: Korean</li><li>japanese.ttf: Japanese</li><li>thai.ttf: Thai</li><li>roboto.ttf: Roboto</li><li>notosans.ttf: NotoSans</li><li>notosansthai.ttf: Thai NotoSansThai</li><li>sarabun.ttf: Thai Sarabun</li><li>kanit.ttf: Thai Kanit</li><li>charmonman.ttf: Thai Charmonman</li><li>notonaskharabic.ttf: Arabic NotoNaskhArabic</li><li>notosansdevanagari.ttf: India NotoSansDevanagari</li><li>notosanstc.ttf: Cantonese NotoSansTC</li><li>notosanskr.ttf: Korean NotoSansKR</li><li>gothica1.ttf: Korean GothicA1</li><li>nanummyeongjo.ttf: Korean NanumMyeongjo</li><li>notosansjp.ttf: Japanese NotoSansJP</li><li>notoserifjp.ttf: Japanese NotoSerifJP</li><li>shipporimincho.ttf: Japanese ShipporiMincho</li></ul><p>Default value: hei.ttf Heiti</p>
 	FontType *string `json:"FontType,omitnil,omitempty" name:"FontType"`
 
 	// <p>Font size. If not specified, the font size of the subtitle file applies. Pixel and percentage formats are supported:</p><ul><li>Pixel: Npx, where N ranges from (0,4096].</li><li>Percentage: N%, where N ranges from (0,100]. For example, 10% means the subtitle font size equals 10% of the source video height. If left blank and the subtitle file has no settings, the default is 5% of the source video height.</li></ul>
 	FontSize *string `json:"FontSize,omitnil,omitempty" name:"FontSize"`
 
-	// <p>Text color, format: 0xRRGGBB.</p><p>Default value: 0xFFFFFF (white).</p>
+	// <p>Font color. Format: 0xRRGGBB.</p><p>Default value: 0xFFFFFF (white).</p>
 	FontColor *string `json:"FontColor,omitnil,omitempty" name:"FontColor"`
 
 	// <p>Text opacity. Value ranges from 0 to 1.</p><ul><li>0: completely transparent;</li><li>1: completely opaque</li></ul><p>Default value: 1</p>
 	FontAlpha *float64 `json:"FontAlpha,omitnil,omitempty" name:"FontAlpha"`
 
-	// <p>Subtitle Y-coordinate position. Specify this parameter to ignore the built-in coordinates in the subtitle file. Supports pixel and percentage formats:</p><ul><li>Pixel: Npx, where N ranges from [0,4096].</li><li>Percentage: N%, where N ranges from [0,100]. For example, 10% means the subtitle Y-coordinate = 10%<em>source video height. Default value: source video height</em>4%.<br>Note: The coordinate axis origin is at the bottom of the central axis of the source video, and the subtitle reference point is at the bottom of the central axis of the subtitle. Refer to the figure below:<img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></li></ul>
+	// <p>Subtitle Y-coordinate position. Specify this parameter to ignore the built-in coordinates in the subtitle file. Supports pixel and percentage formats:</p><ul><li>Pixel: Npx, where N ranges from [0,4096].</li><li>Percentage: N%, where N ranges from [0,100]. For example, 10% means the subtitle Y-coordinate = 10% <em>source video height. Default value: source video height</em>4%.<br>Note: The coordinate axis origin is at the bottom of the central axis of the source video, and the subtitle reference point is at the bottom of the central axis of the subtitle. Refer to the figure below:<img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></li></ul>
 	YPos *string `json:"YPos,omitnil,omitempty" name:"YPos"`
 
-	// <p>Y-coordinate position of the subtitle background base plate. Supports pixel and percentage formats:</p><ul><li>Pixel: Npx, where N ranges from [0,4096].</li><li>Percentage: N%, where N ranges from [0,100]. For example, 10% means the subtitle background base plate Y-coordinate = 10% * source video height. If not specified, the subtitle background base plate is disabled.<br>Note: The coordinate axis origin is located at the bottom of the central axis of the source video, and the reference point of the subtitle background base plate is at the bottom of its central axis. See the following diagram:<img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></li></ul>
+	// <p>Y-coordinate position of the subtitle background plate. Supports pixel and percentage formats:</p><ul><li>Pixel: Npx, where N ranges from [0,4096].</li><li>Percentage: N%, where N ranges from [0,100]. For example, 10% means the subtitle background plate Y-coordinate = 10% * source video height. If not specified, the subtitle background plate is disabled.<br>Note: The coordinate axis origin is located at the bottom of the central axis of the source video, and the reference point of the subtitle background plate is at the bottom of its central axis. See the following diagram:<img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></li></ul>
 	BoardY *string `json:"BoardY,omitnil,omitempty" name:"BoardY"`
 
-	// <p>Width of the base plate, a positive integer.</p><ul><li>Pixel: Npx, N value range: [0,4096].</li><li>Percentage: N%, N value range: [0, 100]. If background is enabled and this parameter is not specified, the default width is 90% of the source video width.</li></ul>
+	// <p>Base plate width, positive integer.</p><ul><li>Pixel: Npx, N value range: [0,4096].</li><li>Percentage: N%, N value range: [0, 100]. If base plate is enabled and this parameter is not specified, the default width is 90% of the source video width.</li></ul>
 	BoardWidth *string `json:"BoardWidth,omitnil,omitempty" name:"BoardWidth"`
 
 	// <p>Height of the base plate, a positive integer.</p><ul><li>Pixel: Npx, N value range: [0,4096].</li><li>Percentage: N%, N value range: [0, 100]. If background is enabled and this parameter is not specified, the default height is 15% of the source video height.</li></ul>
@@ -34307,10 +34307,10 @@ type SubtitleInfoInput struct {
 	// <p>Subtitle background transparency. Value range: [0, 1].</p><ul><li>0: completely transparent;</li><li>1: completely opaque.</li></ul><p>Default value: 0.8.</p>
 	BoardAlpha *float64 `json:"BoardAlpha,omitnil,omitempty" name:"BoardAlpha"`
 
-	// <p>Alignment mode.</p><p>Enumeration values:</p><ul><li>top: Top alignment. The top position of subtitles is fixed, while the bottom position changes according to the number of lines. </li><li>bottom: Bottom alignment. The bottom position of subtitles is fixed, while the top position changes according to the number of lines. </li></ul><p>Default value: bottom</p>
+	// <p>Alignment mode.</p><p>Enumeration values:</p><ul><li>top: Top alignment. The top position of subtitles is fixed, while the bottom position changes according to the number of lines.</li><li>bottom: Bottom alignment. The bottom position of subtitles is fixed, while the top position changes according to the number of lines.</li></ul><p>Default value: bottom</p>
 	Alignment *string `json:"Alignment,omitnil,omitempty" name:"Alignment"`
 
-	// <p>Stroke width. Floating-point number.</p><ul><li>Pixel: Npx, N value range: [0, 1000].</li><li>Percentage: N%, N value range: [0, 100].</li></ul><p>By default if left blank, it is 0.3% of the source video height.</p>
+	// <p>Stroke width. Floating-point number.</p><ul><li>Pixel: Npx, N value range: [0, 1000].</li><li>Percentage: N%, N value range: [0, 100].</li></ul><p>By default if left blank, 0.3% of the source video height.</p>
 	OutlineWidth *string `json:"OutlineWidth,omitnil,omitempty" name:"OutlineWidth"`
 
 	// <p>Border color. Format: 0xRRGGBB.</p><p>Default value: 0x000000 (black).</p>
@@ -34325,7 +34325,7 @@ type SubtitleInfoInput struct {
 	// <p>Shadow color. Format: 0xRRGGBB.</p><p>Default value: 0x000000 (black) if shadow is set.</p>
 	ShadowColor *string `json:"ShadowColor,omitnil,omitempty" name:"ShadowColor"`
 
-	// <p>Shadow transparency. The value should be a positive floating-point number in the range of (0, 1].</p><ul><li>0: completely transparent;</li><li>1: completely opaque.</li></ul><p>Default value: 1, which means completely opaque, with shadow configured.</p>
+	// <p>Shadow transparency. The value should be a positive floating-point number in the range of (0, 1].</p><ul><li>0: completely transparent;</li><li>1: completely opaque.</li></ul><p>Default value: 1, which means completely opaque (with shadow configured).</p>
 	ShadowAlpha *float64 `json:"ShadowAlpha,omitnil,omitempty" name:"ShadowAlpha"`
 
 	// <p>Line spacing. Positive integer.</p><ul><li>Pixel: Npx, N value ranges from 0 to 1000.</li><li>Percentage: N%, N value ranges from 0 to 100.</li></ul><p>Default value: 0</p>
@@ -34417,10 +34417,10 @@ type TEHDConfig struct {
 }
 
 type TEHDConfigForUpdate struct {
-	// Top speed Codec type. Available values: <li>TEHD-100: top speed Codec-100;</li> <li>OFF: disables top speed Codec.</li> If not specified, no modification is made.
+	// Top speed Codec type. Available values: <li>TEHD-100 means top speed Codec-100;</li> <li>OFF means disabling top speed Codec.</li> If not specified, no modification is made.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Maximum video bitrate. If not specified, no modification is made.
+	// Maximum video bitrate. If this parameter is not specified, no modification is made.
 	MaxVideoBitrate *uint64 `json:"MaxVideoBitrate,omitnil,omitempty" name:"MaxVideoBitrate"`
 }
 
@@ -35009,7 +35009,7 @@ type ThirdPartyDrmInfo struct {
 	// <p>Encryption type:</p><ul><li>FairPlay: can only be used for HLS, and the segment format can only be mp4 or mp4-mp4-segment</li><li>Widevine: can be used for HLS and DASH. For HLS, the segment format can only be mp4 or mp4-mp4-segment. For DASH, the segment format can only be mp4 or mp4-mp4-byterange</li><li>PlayReady: can be used for HLS and DASH. For HLS, the segment format can only be mp4 or mp4-mp4-segment. For DASH, the segment format can only be mp4 or mp4-mp4-byterange</li><li>Widevine+FairPlay, PlayReady+FairPlay, Widevine PlayReady FairPlay composite: can only be used for HLS, and the segment format can only be mp4 or mp4-mp4-segment</li><li>Widevine PlayReady composite: can be used for HLS and DASH. For HLS, the segment format can only be mp4 or mp4-mp4-segment. For DASH, the segment format can only be mp4 or mp4-mp4-byterange</li></ul>
 	DrmTypes []*string `json:"DrmTypes,omitnil,omitempty" name:"DrmTypes"`
 
-	// <p>Third-party DRM vendor information.</p>
+	// <p>External DRM vendor information.</p>
 	SPEKEDrm *SPEKEDrm `json:"SPEKEDrm,omitnil,omitempty" name:"SPEKEDrm"`
 }
 
@@ -35026,7 +35026,7 @@ type TimeRange struct {
 type TraceWatermarkInput struct {
 	// Traceability watermark task switch. Required. Available values:
 	// <li>ON: enable traceability watermark</li>
-	// <li>OFF: disables traceability watermark.</li>
+	// <li>OFF: Disable traceability watermark.</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Deprecated. Do not use.
@@ -35099,10 +35099,10 @@ type TranscodeTaskInput struct {
 	// <p>Mosaic list. Up to 10 images are supported.</p>
 	MosaicSet []*MosaicInput `json:"MosaicSet,omitnil,omitempty" name:"MosaicSet"`
 
-	// <p>Opening and ending content list. Up to 10 opening and ending contents are supported.</p>
+	// <p>Opening and ending content list. Up to 10 supported.</p>
 	HeadTailSet []*HeadTailTaskInput `json:"HeadTailSet,omitnil,omitempty" name:"HeadTailSet"`
 
-	// <p>Start time offset of the transcoded video, in seconds.</p><li>If not specified or set to 0, the transcoded video starts from the start position of the original video;</li><li>If the value is greater than 0 (assuming n), the transcoded video starts from the position at the nth second of the original video;</li><li>If the value is less than 0 (assuming -n), the transcoded video starts from the position n seconds before the end of the original video.</li>
+	// <p>Start time offset of the transcoded video, in seconds.</p><li>If not specified or set to 0, the transcoded video starts from the start position of the original video;</li><li>If the value is greater than 0 (assuming n), the transcoded video starts from the nth second of the original video;</li><li>If the value is less than 0 (assuming -n), the transcoded video starts from the position n seconds before the end of the original video.</li>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
 	// <p>End time offset of the transcoded video, in seconds.</p><li>If not specified or set to 0, the transcoded video lasts until the end of the original video.</li><li>If the value is greater than 0 (assuming n), the transcoded video lasts until the nth second of the original video.</li><li>If the value is less than 0 (assuming -n), the transcoded video lasts until n seconds before the end of the original video.</li>
@@ -35111,7 +35111,7 @@ type TranscodeTaskInput struct {
 	// <p>Custom video transcoding parameters.</p>
 	OverrideParameter *OverrideTranscodeParameter `json:"OverrideParameter,omitnil,omitempty" name:"OverrideParameter"`
 
-	// <p>Subtitle suppression information list. Up to 2 are supported.</p>
+	// <p>Subtitle suppression information list. Up to 2 supported.</p>
 	SubtitleInfoSet []*SubtitleInfoInput `json:"SubtitleInfoSet,omitnil,omitempty" name:"SubtitleInfoSet"`
 }
 
@@ -35880,7 +35880,7 @@ type VideoTemplateInfoForUpdate struct {
 	// <p>Bitrate of video stream. Value range: 0 and [128, 100000]. Unit: kbps.<br>When the value is 0, it means VOD automatically sets the bitrate.</p>
 	Bitrate *uint64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// <p>Resolution adaptation. Available values:</p><li>open: enable. At this point, Width represents the long side of the video, and Height represents the short side.</li><li>close: disable. At this point, Width represents the width of the video, and Height represents the height.</li>
+	// <p>Resolution adaptation. Available values:</p><li>open: enable. At this point, Width represents the long side of the video, and Height represents the short side of the video.</li><li>close: disable. At this point, Width represents the width of the video, and Height represents the height of the video.</li>
 	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitnil,omitempty" name:"ResolutionAdaptive"`
 
 	// <p>The maximum value of the video stream width (or long side). Valid values: 0 and [128, 8192]. Unit: px.</p><li>When Width and Height are both 0, the resolution is from the same source;</li><li>When Width is 0 and Height is non-0, Width is scaled proportionally;</li><li>When Width is non-0 and Height is 0, Height is scaled proportionally;</li><li>When both Width and Height are non-0, the resolution is specified by the user.</li>
@@ -35889,7 +35889,7 @@ type VideoTemplateInfoForUpdate struct {
 	// <p>Maximum height (or short side) of the video stream. Value range: 0 and [128, 8192]. Unit: px.</p>
 	Height *uint64 `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// <p>Filling method. When the video stream configuration width and height parameters are inconsistent with the aspect ratio of the original video, the processing method for transcoding is "fill". Optional filling modes:</p><li>stretch: stretch each frame to fill the entire screen, which may cause the transcoded video to be "squashed" or "stretched";</li><li>black: keep the video aspect ratio unchanged, with the rest of the edges filled with black.</li><li>white: keep the video aspect ratio unchanged, with the rest of the edges filled with white.</li><li>gauss: Gaussian blur. Keep the video aspect ratio unchanged, with the rest of the edges filled using Gaussian blur.</li>
+	// <p>Filling method. When the video stream configuration width and height parameters are inconsistent with the aspect ratio of the original video, the processing method for transcoding is "filling". Optional filling methods:</p><li>stretch: Stretch each frame to fill the entire screen, which may cause the transcoded video to be "squashed" or "stretched";</li><li>black: Keep the video aspect ratio unchanged and fill the rest of the edges with black.</li><li>white: Keep the video aspect ratio unchanged and fill the rest of the edges with white.</li><li>gauss: Gaussian blur. Keep the video aspect ratio unchanged and use Gaussian blur filling for the rest of the edges.</li>
 	FillType *string `json:"FillType,omitnil,omitempty" name:"FillType"`
 
 	// <p>Control factor for constant video bitrate. Value range: [1, 51]. 0 indicates that it is disabled.</p><p><font color="red">Note:</font></p><li>If this parameter is specified, the bitrate control mode for CRF will be used to transcode (video bitrate will no longer take effect);</li><li>When the encoding format of the specified video stream is H.266, this field is required. Recommended value: 28;</li><li>If there are no special requirements, it is not recommended to specify this parameter.</li>
@@ -35907,16 +35907,16 @@ type VideoTemplateInfoForUpdate struct {
 	// <p>Gop value unit.</p><p>Enumeration values:</p><ul><li>frame: number of frames.</li><li>second: seconds.</li></ul><p>Default value: frame</p>
 	GopUnit *string `json:"GopUnit,omitnil,omitempty" name:"GopUnit"`
 
-	// <p>Bitrate control mode.</p><p>Enumeration values:</p><ul><li>VBR: Variable Bit Rate. It dynamically adjusts the output bitrate based on the complexity of the video image to ensure higher image quality. It is suitable for storage scenarios and applications with high image quality requirements.</li><li>ABR: Average Bit Rate. It tries to stabilize the average bitrate of the output video as much as possible while allowing short-term bitrate fluctuation. It is suitable for scenarios where minimizing overall bitrate is needed while maintaining a certain image quality.</li><li>CBR: Constant Bit Rate. It maintains a constant output bitrate during video encoding regardless of changes in image complexity. It is suitable for scenarios with strict network bandwidth requirements, such as live streaming.</li><li>VCRF: Constant Rate Factor. It controls video quality by setting a quality factor to achieve constant quality encoding of videos. The bitrate adjusts automatically based on content complexity. It is suitable for scenarios where maintaining a certain image quality is desired.</li></ul><p>Default value: VBR</p>
+	// <p>Bitrate control mode.</p><p>Enumeration values:</p><ul><li>VBR: Variable Bit Rate. The output bitrate is adjusted based on the complexity of the video image to ensure higher image quality. It is suitable for storage scenarios and applications with high image quality requirements.</li><li>ABR: Average Bit Rate. It tries to stabilize the average bitrate of the output video as much as possible while allowing short-term bitrate fluctuation. It is suitable for scenarios where minimizing overall bitrate is needed while maintaining a certain image quality.</li><li>CBR: Constant Bit Rate. The output bitrate remains constant during video encoding, regardless of image complexity. It is suitable for scenarios with strict network bandwidth requirements, such as live streaming.</li><li>VCRF: Constant Rate Factor. A quality factor is set for video quality control to achieve constant quality encoding of videos. The bitrate is adjusted based on content complexity. It is suitable for scenarios where maintaining a certain image quality is desired.</li></ul><p>Default value: VBR</p>
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
 	// <p>Maximum number of consecutive B-frames. The default is auto, and -1 means change to automatic.</p><p>Value range: [-1, 16]</p>
 	Bframes *int64 `json:"Bframes,omitnil,omitempty" name:"Bframes"`
 
-	// <p>Average shard duration. 0 or left empty means auto, which will automatically choose an appropriate shard duration based on video features such as GOP.</p><p>Value range: [0, 10]</p><p>Unit: seconds</p><p>Supports only transcoding templates, not adaptive bitrate stream templates.</p>
+	// <p>Average duration of slices. 0 or left empty means auto, which will choose an appropriate segment duration based on video features such as GOP.</p><p>Value range: [0, 10]</p><p>Unit: seconds</p><p>Supports only transcoding templates, not adaptive bitrate templates.</p>
 	HlsTime *int64 `json:"HlsTime,omitnil,omitempty" name:"HlsTime"`
 
-	// <p>A predefined combination of encoding tools or features allowed in a video encoding standard, suitable for different scenarios.</p><p>Enumeration values:</p><ul><li>baseline: Supports only I/p frames and non-interlaced scenarios, suitable for video calls, mobile video, and other scenarios.</li><li>main: Mainstream Profile, provides I-frames, p-frames, and B-frames, and supports both interlaced and non-interlaced modes. Mainly used in mainstream audio and video consumption products such as video players and streaming media transmission devices.</li><li>high: Highest encoding level, adds 8X8 prediction on top of the main Profile, and supports custom quantification. Widely used in Blu-ray storage, HDTV, and other scenarios.</li><li>default: Automatic filling along with the original video.  </li></ul><p>default value: default</p><p>This configuration item is valid only when Codec is libx264.</p>
+	// <p>A predefined combination of encoding tools or features allowed in video encoding standards, suitable for different scenarios.</p><p>Enumeration values:</p><ul><li>baseline: Supports only I/p frames and non-interlaced scenarios, suitable for video calls, mobile video, and other scenarios.</li><li>main: Mainstream Profile that provides I, p, and B frames, and supports both interlaced and non-interlaced modes. It is mainly used in mainstream audio and video consumption products such as video players and streaming media transmission devices.</li><li>high: Highest encoding level. It adds 8X8 prediction on top of the main Profile and supports custom quantification. It is widely used in Blu-ray storage, HDTV, and other scenarios.</li><li>default: Automatic filling along with the original video.  </li></ul><p>default value: default</p><p>This configuration item is valid only when Codec is libx264.</p>
 	VideoProfile *string `json:"VideoProfile,omitnil,omitempty" name:"VideoProfile"`
 }
 
@@ -36161,12 +36161,12 @@ type WatermarkInput struct {
 	// Watermark template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Text content, up to 100 characters. This field is required only when the watermark type is text.
+	// Text content, up to 100 characters. Fill in only when the watermark type is text watermark.
 	// Text watermarks do not support watermarking screenshots.
 	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
 
 	// SVG content. Length not exceeding 2,000,000 characters. Fill in only when the watermark type is SVG watermark.
-	// SVG watermark does not support watermarking screenshots.
+	// SVG watermark does not support screenshot watermarking.
 	SvgContent *string `json:"SvgContent,omitnil,omitempty" name:"SvgContent"`
 
 	// Start time offset of a watermark, in seconds. If not set or set to 0, a watermark starts appearing when a video starts.
@@ -36178,7 +36178,7 @@ type WatermarkInput struct {
 	// End time offset of a watermark, in seconds.
 	// <li>If not set or set to 0, a watermark will last until the end of a video.</li>
 	// <li>If the value is greater than 0 (for example, n), a watermark will disappear at second n.</li>
-	// <li>When the value is less than 0 (assuming -n), the watermark persists until n seconds before the end of the video.</li>
+	// <li>When the value is less than 0 (assuming -n), the watermark persists until n seconds before the end of a video.</li>
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 }
 

@@ -489,44 +489,44 @@ func (r *CancelKeyDeletionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateKeyRequestParams struct {
-	// Unique alias that makes a key more recognizable and understandable. This parameter cannot be empty, can contain 1-60 letters, digits, `-`, and `_`, and must begin with a letter or digit. The `kms-` prefix is used for Tencent Cloud products.
+	// <p>Alias that makes the key easier to identify and understand. It cannot be empty and must contain 1-60 alphanumeric characters, hyphens (-), or underscores (_), and start with a letter or digit. Aliases prefixed with kms- are reserved for cloud services. The alias must be unique.</p>
 	Alias *string `json:"Alias,omitnil,omitempty" name:"Alias"`
 
-	// CMK description of up to 1,024 bytes in length
+	// <p>Description of the CMK. Maximum length: 1024 bytes.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Specifies the key purpose, defaults to "ENCRYPT_DECRYPT" indicating the creation of a symmetric encryption/decryption key. other supported purposes include "ASYMMETRIC_DECRYPT_RSA_2048" for RSA2048 ASYMMETRIC keys used to ENCRYPT and DECRYPT, "ASYMMETRIC_DECRYPT_SM2" for SM2 ASYMMETRIC keys used to ENCRYPT and DECRYPT, "ASYMMETRIC_SIGN_VERIFY_SM2" for SM2 ASYMMETRIC keys used for signature verification, "ASYMMETRIC_SIGN_VERIFY_ECC" for ECC ASYMMETRIC keys used for signature verification, "ASYMMETRIC_SIGN_VERIFY_RSA_2048" for RSA_2048 ASYMMETRIC keys used for signature verification, and "ASYMMETRIC_SIGN_VERIFY_ECDSA384" for ECDSA384 ASYMMETRIC keys used for signature verification. the complete list of key purposes and algorithm support can be obtained through the ListAlgorithms api.
+	// <p>Specifies the purpose of the key. The default value is "ENCRYPT_DECRYPT", which indicates creating a symmetric encryption/decryption key. Other supported purposes: "ASYMMETRIC_DECRYPT_RSA_2048" indicates creating an RSA2048 asymmetric key for encryption/decryption; "ASYMMETRIC_DECRYPT_RSA_3072" indicates creating an RSA3072 asymmetric key for encryption/decryption; "ASYMMETRIC_DECRYPT_RSA_4096" indicates creating an RSA4096 asymmetric key for encryption/decryption; "ASYMMETRIC_DECRYPT_SM2" indicates creating an SM2 asymmetric key for encryption/decryption; "ASYMMETRIC_SIGN_VERIFY_SM2" indicates creating an SM2 asymmetric key for signature generation and verification; "ASYMMETRIC_SIGN_VERIFY_ECC" indicates creating an ECC asymmetric key for signature generation and verification; "ASYMMETRIC_SIGN_VERIFY_RSA_2048" indicates creating an RSA_2048 asymmetric key for signature generation and verification; "ASYMMETRIC_SIGN_VERIFY_RSA_3072" indicates creating an RSA_3072 asymmetric key for signature generation and verification; <br>"ASYMMETRIC_SIGN_VERIFY_RSA_4096" indicates creating an RSA_4096 asymmetric key for signature generation and verification; "ASYMMETRIC_SIGN_VERIFY_ECDSA384" indicates creating an ECDSA384 asymmetric key for signature generation and verification. For the complete list of key purposes and supported algorithms, call the ListAlgorithms API.</p>
 	KeyUsage *string `json:"KeyUsage,omitnil,omitempty" name:"KeyUsage"`
 
-	// Specifies the key type. Default value: 1. Valid value: 1 - default type, indicating that the CMK is created by KMS; 2 - EXTERNAL type, indicating that you need to import key material. For more information, please see the `GetParametersForImport` and `ImportKeyMaterial` API documents.
+	// <p>Specifies the key type. The default value is 1. 1 indicates the default type, where the CMK is created by KMS. 2 indicates the EXTERNAL type, where you need to import the key material. For more information, see the GetParametersForImport and ImportKeyMaterial APIs.</p>
 	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Tag list
+	// <p>Tag list.</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+	// <p>HSM cluster ID corresponding to KMS Advanced Edition (valid only for KMS exclusive/managed service instances).</p>
 	HsmClusterId *string `json:"HsmClusterId,omitnil,omitempty" name:"HsmClusterId"`
 }
 
 type CreateKeyRequest struct {
 	*tchttp.BaseRequest
 	
-	// Unique alias that makes a key more recognizable and understandable. This parameter cannot be empty, can contain 1-60 letters, digits, `-`, and `_`, and must begin with a letter or digit. The `kms-` prefix is used for Tencent Cloud products.
+	// <p>Alias that makes the key easier to identify and understand. It cannot be empty and must contain 1-60 alphanumeric characters, hyphens (-), or underscores (_), and start with a letter or digit. Aliases prefixed with kms- are reserved for cloud services. The alias must be unique.</p>
 	Alias *string `json:"Alias,omitnil,omitempty" name:"Alias"`
 
-	// CMK description of up to 1,024 bytes in length
+	// <p>Description of the CMK. Maximum length: 1024 bytes.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Specifies the key purpose, defaults to "ENCRYPT_DECRYPT" indicating the creation of a symmetric encryption/decryption key. other supported purposes include "ASYMMETRIC_DECRYPT_RSA_2048" for RSA2048 ASYMMETRIC keys used to ENCRYPT and DECRYPT, "ASYMMETRIC_DECRYPT_SM2" for SM2 ASYMMETRIC keys used to ENCRYPT and DECRYPT, "ASYMMETRIC_SIGN_VERIFY_SM2" for SM2 ASYMMETRIC keys used for signature verification, "ASYMMETRIC_SIGN_VERIFY_ECC" for ECC ASYMMETRIC keys used for signature verification, "ASYMMETRIC_SIGN_VERIFY_RSA_2048" for RSA_2048 ASYMMETRIC keys used for signature verification, and "ASYMMETRIC_SIGN_VERIFY_ECDSA384" for ECDSA384 ASYMMETRIC keys used for signature verification. the complete list of key purposes and algorithm support can be obtained through the ListAlgorithms api.
+	// <p>Specifies the purpose of the key. The default value is "ENCRYPT_DECRYPT", which indicates creating a symmetric encryption/decryption key. Other supported purposes: "ASYMMETRIC_DECRYPT_RSA_2048" indicates creating an RSA2048 asymmetric key for encryption/decryption; "ASYMMETRIC_DECRYPT_RSA_3072" indicates creating an RSA3072 asymmetric key for encryption/decryption; "ASYMMETRIC_DECRYPT_RSA_4096" indicates creating an RSA4096 asymmetric key for encryption/decryption; "ASYMMETRIC_DECRYPT_SM2" indicates creating an SM2 asymmetric key for encryption/decryption; "ASYMMETRIC_SIGN_VERIFY_SM2" indicates creating an SM2 asymmetric key for signature generation and verification; "ASYMMETRIC_SIGN_VERIFY_ECC" indicates creating an ECC asymmetric key for signature generation and verification; "ASYMMETRIC_SIGN_VERIFY_RSA_2048" indicates creating an RSA_2048 asymmetric key for signature generation and verification; "ASYMMETRIC_SIGN_VERIFY_RSA_3072" indicates creating an RSA_3072 asymmetric key for signature generation and verification; <br>"ASYMMETRIC_SIGN_VERIFY_RSA_4096" indicates creating an RSA_4096 asymmetric key for signature generation and verification; "ASYMMETRIC_SIGN_VERIFY_ECDSA384" indicates creating an ECDSA384 asymmetric key for signature generation and verification. For the complete list of key purposes and supported algorithms, call the ListAlgorithms API.</p>
 	KeyUsage *string `json:"KeyUsage,omitnil,omitempty" name:"KeyUsage"`
 
-	// Specifies the key type. Default value: 1. Valid value: 1 - default type, indicating that the CMK is created by KMS; 2 - EXTERNAL type, indicating that you need to import key material. For more information, please see the `GetParametersForImport` and `ImportKeyMaterial` API documents.
+	// <p>Specifies the key type. The default value is 1. 1 indicates the default type, where the CMK is created by KMS. 2 indicates the EXTERNAL type, where you need to import the key material. For more information, see the GetParametersForImport and ImportKeyMaterial APIs.</p>
 	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Tag list
+	// <p>Tag list.</p>
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// ID of the HSM cluster. This field is only valid for Exclusive and Managed KMS instances.
+	// <p>HSM cluster ID corresponding to KMS Advanced Edition (valid only for KMS exclusive/managed service instances).</p>
 	HsmClusterId *string `json:"HsmClusterId,omitnil,omitempty" name:"HsmClusterId"`
 }
 
@@ -556,31 +556,31 @@ func (r *CreateKeyRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateKeyResponseParams struct {
-	// Globally unique CMK ID
+	// <p>Globally unique identifier of the CMK</p>
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
-	// Alias that makes a key more recognizable and understandable
+	// <p>Alias that makes the key easier to identify and understand</p>
 	Alias *string `json:"Alias,omitnil,omitempty" name:"Alias"`
 
-	// Key creation time in UNIX timestamp format
+	// <p>Key creation time, unix timestamp</p>
 	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Specifies the description of the CMK.
+	// <p>Description of the CMK</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// CMK status
+	// <p>Status of the CMK</p>
 	KeyState *string `json:"KeyState,omitnil,omitempty" name:"KeyState"`
 
-	// CMK usage
+	// <p>Purpose of the CMK</p>
 	KeyUsage *string `json:"KeyUsage,omitnil,omitempty" name:"KeyUsage"`
 
-	// Return code of Tag operation. `0`: success; `1`: cls internal error; `2`: business processing error.
+	// <p>Return code of the tag operation. 0: Success; 1: Internal error; 2: Business processing error</p>
 	TagCode *uint64 `json:"TagCode,omitnil,omitempty" name:"TagCode"`
 
-	// Response information of Tag operation.
+	// <p>Return message of the tag operation</p>
 	TagMsg *string `json:"TagMsg,omitnil,omitempty" name:"TagMsg"`
 
-	// HSM cluster ID (valid only for exclusive or managed version KMS service instances).
+	// <p>HSM cluster ID (valid only for KMS exclusive/managed service instances)</p>
 	HsmClusterId *string `json:"HsmClusterId,omitnil,omitempty" name:"HsmClusterId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -600,6 +600,97 @@ func (r *CreateKeyResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateKeyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateKmsInstanceRequestParams struct {
+	// <p>Instance billing type (PREPAID).</p>
+	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
+
+	// <p>Version type.</p><p>Valid values:</p><ul><li>professional: Professional Edition</li></ul>
+	ProductVersion *string `json:"ProductVersion,omitnil,omitempty" name:"ProductVersion"`
+
+	// <p>Prepaid instance information.</p>
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
+
+	// <p>Reentrant client ID.</p>
+	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
+
+	// <p>Instance tag.</p>
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+type CreateKmsInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Instance billing type (PREPAID).</p>
+	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
+
+	// <p>Version type.</p><p>Valid values:</p><ul><li>professional: Professional Edition</li></ul>
+	ProductVersion *string `json:"ProductVersion,omitnil,omitempty" name:"ProductVersion"`
+
+	// <p>Prepaid instance information.</p>
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
+
+	// <p>Reentrant client ID.</p>
+	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
+
+	// <p>Instance tag.</p>
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+func (r *CreateKmsInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateKmsInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceChargeType")
+	delete(f, "ProductVersion")
+	delete(f, "InstanceChargePrepaid")
+	delete(f, "ClientToken")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateKmsInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateKmsInstanceResponseParams struct {
+	// <p>Instance ID.</p>
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// <p>Billing order number</p>
+	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
+
+	// <p>Billing freeze serial number</p>
+	BillId *string `json:"BillId,omitnil,omitempty" name:"BillId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateKmsInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateKmsInstanceResponseParams `json:"Response"`
+}
+
+func (r *CreateKmsInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateKmsInstanceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2549,7 +2640,7 @@ type GenerateDataKeyRequestParams struct {
 	// PEM-encoded public key (2048-bit RSA/SM2 key), which can be used to encrypt the `Plaintext` returned. If this field is left empty, the `Plaintext` will not be encrypted.
 	EncryptionPublicKey *string `json:"EncryptionPublicKey,omitnil,omitempty" name:"EncryptionPublicKey"`
 
-	// Asymmetric encryption algorithm. Valid values: `SM2` (C1C3C2 ciphertext is returned)`, `SM2_C1C3C2_ASN1` (C1C3C2 ASN1 ciphertext is returned), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, an SM2 public key will be used by default.
+	// Asymmetric encryption algorithm. Valid values: `SM2` (C1C3C2 ciphertext is returned), `SM2_C1C3C2_ASN1` (C1C3C2 ASN1 ciphertext is returned), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, an SM2 public key will be used by default.
 	EncryptionAlgorithm *string `json:"EncryptionAlgorithm,omitnil,omitempty" name:"EncryptionAlgorithm"`
 
 	// Indicates whether the data generated key is managed by KMS. 1 means the key is managed and saved by KMS. 0 means the key is not managed by KMS.
@@ -2586,7 +2677,7 @@ type GenerateDataKeyRequest struct {
 	// PEM-encoded public key (2048-bit RSA/SM2 key), which can be used to encrypt the `Plaintext` returned. If this field is left empty, the `Plaintext` will not be encrypted.
 	EncryptionPublicKey *string `json:"EncryptionPublicKey,omitnil,omitempty" name:"EncryptionPublicKey"`
 
-	// Asymmetric encryption algorithm. Valid values: `SM2` (C1C3C2 ciphertext is returned)`, `SM2_C1C3C2_ASN1` (C1C3C2 ASN1 ciphertext is returned), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, an SM2 public key will be used by default.
+	// Asymmetric encryption algorithm. Valid values: `SM2` (C1C3C2 ciphertext is returned), `SM2_C1C3C2_ASN1` (C1C3C2 ASN1 ciphertext is returned), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, and `RSAES_OAEP_SHA_256`. This field is used in combination with `EncryptionPublicKey` for encryption. If it is left empty, an SM2 public key will be used by default.
 	EncryptionAlgorithm *string `json:"EncryptionAlgorithm,omitnil,omitempty" name:"EncryptionAlgorithm"`
 
 	// Indicates whether the data generated key is managed by KMS. 1 means the key is managed and saved by KMS. 0 means the key is not managed by KMS.
@@ -3228,6 +3319,12 @@ type GetServiceStatusResponseParams struct {
 	// <p>Regional availability zone info of the resource</p>
 	ResourceRegion *uint64 `json:"ResourceRegion,omitnil,omitempty" name:"ResourceRegion"`
 
+	// <p>Multi-account activation limit</p><p>Unit: count</p>
+	MultiAccountLimit *uint64 `json:"MultiAccountLimit,omitnil,omitempty" name:"MultiAccountLimit"`
+
+	// <p>Multi-account enablement count</p><p>Unit: count</p>
+	MultiAccountUsedCount *uint64 `json:"MultiAccountUsedCount,omitnil,omitempty" name:"MultiAccountUsedCount"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -3431,6 +3528,14 @@ func (r *ImportKeyMaterialResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ImportKeyMaterialResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type InstanceChargePrepaid struct {
+	// <p>Purchase duration in months (1-100).</p>
+	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
+
+	// <p>Renewal flag (0: not set by the user; 1: auto-renewal; 2: no auto-renewal).</p>
+	RenewFlag *uint64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 }
 
 type Key struct {
@@ -4671,32 +4776,32 @@ func (r *ScheduleKeyDeletionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SignByAsymmetricKeyRequestParams struct {
-	// Signature algorithm. The valid values include `SM2DSA`, `ECC_P256_R1`, `RSA_PSS_SHA_256`, and `RSA_PKCS1_SHA_256`, etc. You can get a full list of supported algorithms using the ListAlgorithms API.
+	// <p>Signature algorithm. Supported algorithms: SM2DSA, ECC_P256_R1, ECDSA384_SHA384, RSA_PSS_SHA_256, RSA_PKCS1_SHA_256, RSA_PSS_SHA_384, RSA_PKCS1_SHA_384, RSA_PSS_SHA_512, RSA_PKCS1_SHA_512, etc. For more supported algorithms, query them through the ListAlgorithms API.</p>
 	Algorithm *string `json:"Algorithm,omitnil,omitempty" name:"Algorithm"`
 
-	// Full message or message abstract. Before Base64 encoding, an original message can contain up to 4,096 bytes while a message abstract must be 32 bytes.
+	// <p>Message original text or message digest. If the message original text is provided, its length (before Base64 encoding) cannot exceed 4096 bytes. If the message digest is provided, its length (before Base64 encoding) must be 32 bytes.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Unique ID of a key
+	// <p>Unique identifier of the key</p>
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
-	// Message type. Valid values: `RAW` (indicating an original message; used by default if the parameter is not passed in) and `DIGEST`.
+	// <p>Message type: RAW or DIGEST. If not specified, RAW is used by default, indicating the message original text.</p>
 	MessageType *string `json:"MessageType,omitnil,omitempty" name:"MessageType"`
 }
 
 type SignByAsymmetricKeyRequest struct {
 	*tchttp.BaseRequest
 	
-	// Signature algorithm. The valid values include `SM2DSA`, `ECC_P256_R1`, `RSA_PSS_SHA_256`, and `RSA_PKCS1_SHA_256`, etc. You can get a full list of supported algorithms using the ListAlgorithms API.
+	// <p>Signature algorithm. Supported algorithms: SM2DSA, ECC_P256_R1, ECDSA384_SHA384, RSA_PSS_SHA_256, RSA_PKCS1_SHA_256, RSA_PSS_SHA_384, RSA_PKCS1_SHA_384, RSA_PSS_SHA_512, RSA_PKCS1_SHA_512, etc. For more supported algorithms, query them through the ListAlgorithms API.</p>
 	Algorithm *string `json:"Algorithm,omitnil,omitempty" name:"Algorithm"`
 
-	// Full message or message abstract. Before Base64 encoding, an original message can contain up to 4,096 bytes while a message abstract must be 32 bytes.
+	// <p>Message original text or message digest. If the message original text is provided, its length (before Base64 encoding) cannot exceed 4096 bytes. If the message digest is provided, its length (before Base64 encoding) must be 32 bytes.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Unique ID of a key
+	// <p>Unique identifier of the key</p>
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
-	// Message type. Valid values: `RAW` (indicating an original message; used by default if the parameter is not passed in) and `DIGEST`.
+	// <p>Message type: RAW or DIGEST. If not specified, RAW is used by default, indicating the message original text.</p>
 	MessageType *string `json:"MessageType,omitnil,omitempty" name:"MessageType"`
 }
 
@@ -4724,7 +4829,7 @@ func (r *SignByAsymmetricKeyRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SignByAsymmetricKeyResponseParams struct {
-	// Base64-encoded signature
+	// <p>Signature, Base64-encoded.</p>
 	Signature *string `json:"Signature,omitnil,omitempty" name:"Signature"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -5105,38 +5210,38 @@ func (r *UpdateKeyDescriptionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type VerifyByAsymmetricKeyRequestParams struct {
-	// Unique ID of a key
+	// <p>Unique identifier of the key</p>
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
-	// Signature value, which is generated by calling the KMS signature API.
+	// <p>Signature value, generated by calling the KMS signing API</p>
 	SignatureValue *string `json:"SignatureValue,omitnil,omitempty" name:"SignatureValue"`
 
-	// Full message or message abstract. Before Base64 encoding, an original message can contain up to 4,096 bytes while a message abstract must be 32 bytes.
+	// <p>Message original text or message digest. If the message original text is provided, its length (before Base64 encoding) cannot exceed 4096 bytes. If the message digest is provided, its length (before Base64 encoding) must be 32 bytes.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Signature algorithm. The valid values include `SM2DSA`, `ECC_P256_R1`, `RSA_PSS_SHA_256`, and `RSA_PKCS1_SHA_256`, etc. You can get a full list of supported algorithms using the ListAlgorithms API.
+	// <p>Signature algorithm. Supported algorithms: SM2DSA, ECC_P256_R1, ECDSA384_SHA384, RSA_PSS_SHA_256, RSA_PKCS1_SHA_256, RSA_PSS_SHA_384, RSA_PKCS1_SHA_384, RSA_PSS_SHA_512, RSA_PKCS1_SHA_512, etc. For more supported algorithms, query them through the ListAlgorithms API.</p>
 	Algorithm *string `json:"Algorithm,omitnil,omitempty" name:"Algorithm"`
 
-	// Message type. Valid values: `RAW` (indicating an original message; used by default if the parameter is not passed in) and `DIGEST`.
+	// <p>Message type: RAW or DIGEST. If not specified, RAW is used by default, indicating the message original text.</p>
 	MessageType *string `json:"MessageType,omitnil,omitempty" name:"MessageType"`
 }
 
 type VerifyByAsymmetricKeyRequest struct {
 	*tchttp.BaseRequest
 	
-	// Unique ID of a key
+	// <p>Unique identifier of the key</p>
 	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
-	// Signature value, which is generated by calling the KMS signature API.
+	// <p>Signature value, generated by calling the KMS signing API</p>
 	SignatureValue *string `json:"SignatureValue,omitnil,omitempty" name:"SignatureValue"`
 
-	// Full message or message abstract. Before Base64 encoding, an original message can contain up to 4,096 bytes while a message abstract must be 32 bytes.
+	// <p>Message original text or message digest. If the message original text is provided, its length (before Base64 encoding) cannot exceed 4096 bytes. If the message digest is provided, its length (before Base64 encoding) must be 32 bytes.</p>
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Signature algorithm. The valid values include `SM2DSA`, `ECC_P256_R1`, `RSA_PSS_SHA_256`, and `RSA_PKCS1_SHA_256`, etc. You can get a full list of supported algorithms using the ListAlgorithms API.
+	// <p>Signature algorithm. Supported algorithms: SM2DSA, ECC_P256_R1, ECDSA384_SHA384, RSA_PSS_SHA_256, RSA_PKCS1_SHA_256, RSA_PSS_SHA_384, RSA_PKCS1_SHA_384, RSA_PSS_SHA_512, RSA_PKCS1_SHA_512, etc. For more supported algorithms, query them through the ListAlgorithms API.</p>
 	Algorithm *string `json:"Algorithm,omitnil,omitempty" name:"Algorithm"`
 
-	// Message type. Valid values: `RAW` (indicating an original message; used by default if the parameter is not passed in) and `DIGEST`.
+	// <p>Message type: RAW or DIGEST. If not specified, RAW is used by default, indicating the message original text.</p>
 	MessageType *string `json:"MessageType,omitnil,omitempty" name:"MessageType"`
 }
 
@@ -5165,7 +5270,7 @@ func (r *VerifyByAsymmetricKeyRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type VerifyByAsymmetricKeyResponseParams struct {
-	// Whether the signature is valid. `true`: the signature is valid; `false`: the signature is invalid.
+	// <p>Whether the signature is valid. true: valid; false: invalid.</p>
 	SignatureValid *bool `json:"SignatureValid,omitnil,omitempty" name:"SignatureValid"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.

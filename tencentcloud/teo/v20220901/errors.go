@@ -1571,7 +1571,7 @@ const (
 	// Authentication error occurred.
 	UNAUTHORIZEDOPERATION_DOMAINEMPTY = "UnauthorizedOperation.DomainEmpty"
 
-	// The subaccount has insufficient permissions. Grant the required permissions and proceed with the operation.
+	// The sub-account does not have operation permissions. Add the required permissions and try again.
 	UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 
 	// Unknown error occurs on the real server.

@@ -23914,85 +23914,67 @@ type PartialModule struct {
 }
 
 type Plan struct {
-	// Package type. valid values:.
-	// <Li>`Plan-Trial`: trial plan</li>.
-	// <Li>`Plan-Personal`: personal plan</li>.
-	// <Li>`Plan-Basic`: basic plan</li>.
-	// <Li>`Plan-Standard`: standard edition plan</li>.
-	// <li>plan-enterprise-v2: enterprise plan;</li>.
-	// <li>plan-enterprise-model-a: enterprise edition model a package.</li>.
-	// <Li>Plan-Enterprise: legacy enterprise plan.</li>.
+	// <p>Plan type. Valid values:</p><li>plan-trial: Trial Edition plan;</li><li>plan-personal: Personal Edition plan;</li><li>plan-basic: Basic Edition plan;</li><li>plan-standard: Standard Edition plan;</li><li>plan-enterprise-v2: Enterprise Edition plan;</li><li>plan-enterprise-model-a: Enterprise Edition Model A plan;</li><li>plan-enterprise: Legacy Enterprise Edition plan;</li><li>plan-makers-pro: Makers Pro Edition plan;</li><li>plan-makers-business: Makers Business Edition plan;</li><p>Valid values:</p><ul><li>plan-trial: Trial Edition plan</li><li>plan-personal: Personal Edition plan</li><li>plan-basic: Basic Edition plan</li><li>plan-standard: Standard Edition plan</li><li>plan-enterprise-v2: Enterprise Edition plan</li><li>plan-enterprise-model-a: Enterprise Edition Model A plan</li><li>plan-enterprise: Legacy Enterprise Edition plan</li><li>plan-makers-pro: Makers Pro Edition plan</li><li>plan-makers-business: Makers Business Edition plan</li></ul>
 	PlanType *string `json:"PlanType,omitnil,omitempty" name:"PlanType"`
 
-	// Package ID. such as edgeone-2y041pblwaxe.
+	// <p>Plan ID, in the format of edgeone-2y041pblwaxe.</p>
 	PlanId *string `json:"PlanId,omitnil,omitempty" name:"PlanId"`
 
-	// Service area. valid values:.
-	// <Li>`Mainland`: chinese mainland</li>.
-	// <li>`overseas`: global (chinese mainland not included)</li>.
-	// <Li>`Global`: global (chinese mainland included)</li>.
+	// <p>Service region. Valid values:</p><li>mainland: Chinese mainland;</li><li>overseas: Global (excluding the Chinese mainland);</li><li>global: Global (including the Chinese mainland).</li>
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
-	// Auto-Renew switch. valid values:.
-	// <li>true: automatic renewal is enabled.</li>.
-	// <li>false: automatic renewal is not enabled.</li>.
+	// <p>Auto-renewal switch. Valid values:</p><li>true: Auto-renewal enabled;</li><li>false: Auto-renewal disabled.</li>
 	AutoRenewal *bool `json:"AutoRenewal,omitnil,omitempty" name:"AutoRenewal"`
 
-	// Package status. valid values:.
-	// <Li>Normal: indicates the normal status.</li>.
-	// <li>`expiring-soon`: will expire soon;</li>.
-	// <li>`expired`: expiration status;</li>.
-	// <Li>`Isolated`: isolated state</li>.
-	// <li>`overdue-isolated`: arrears isolated state.</li>.
+	// <p>Plan status. Valid values:</p><li>normal: Normal;</li><li>expiring-soon: Expiring soon;</li><li>expired: Expired;</li><li>isolated: Isolated;</li><li>overdue-isolated: Isolated due to overdue payment.</li>
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Payment type. valid values:.
-	// <Li>0: postpaid;</li>.
-	// <Li>1: prepaid.</li>.
+	// <p>Billing type. Valid values:</p><li>0: Postpaid;</li><li>1: Prepaid.</li>
 	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
-	// Describes the site information bound to the package, including the site id, site name, and site status.
+	// <p>Information of the sites bound to the plan, including site id, site name, and site status.</p>
 	ZonesInfo []*ZoneInfo `json:"ZonesInfo,omitnil,omitempty" name:"ZonesInfo"`
 
-	// Smart acceleration request quantity in the package, unit: times.
+	// <p>Quota of smart acceleration requests in the plan, in the unit of requests.</p>
 	SmartRequestCapacity *int64 `json:"SmartRequestCapacity,omitnil,omitempty" name:"SmartRequestCapacity"`
 
-	// Specifies the VAU specification in the package. measurement unit: unit.
+	// <p>VAU quota in the plan, in the unit of VAUs.</p>
 	VAUCapacity *int64 `json:"VAUCapacity,omitnil,omitempty" name:"VAUCapacity"`
 
-	// Specifies the content acceleration traffic specification in the package, measurement unit: byte.
+	// <p>Quota of content acceleration traffic in the plan, in the unit of bytes.</p>
 	AccTrafficCapacity *int64 `json:"AccTrafficCapacity,omitnil,omitempty" name:"AccTrafficCapacity"`
 
-	// Specifies the smart acceleration traffic specification in the package. measurement unit: byte.
+	// <p>Quota of client authentication traffic in the plan, in the unit of bytes.</p>
+	ClientAuthTrafficCapacity *int64 `json:"ClientAuthTrafficCapacity,omitnil,omitempty" name:"ClientAuthTrafficCapacity"`
+
+	// <p>Quota of smart acceleration traffic in the plan, in the unit of bytes.</p>
 	SmartTrafficCapacity *int64 `json:"SmartTrafficCapacity,omitnil,omitempty" name:"SmartTrafficCapacity"`
 
-	// Specifies the DDoS protection traffic specification in the package, measurement unit: byte.
+	// <p>Quota of DDoS protection traffic in the plan, in the unit of bytes.</p>
 	DDoSTrafficCapacity *int64 `json:"DDoSTrafficCapacity,omitnil,omitempty" name:"DDoSTrafficCapacity"`
 
-	// Security traffic specification in the package. measurement unit: byte.
+	// <p>Quota of security traffic in the plan, in the unit of bytes.</p>
 	SecTrafficCapacity *int64 `json:"SecTrafficCapacity,omitnil,omitempty" name:"SecTrafficCapacity"`
 
-	// Security requests in the package, unit: times.
+	// <p>Quota of security requests in the plan, in the unit of requests.</p>
 	SecRequestCapacity *int64 `json:"SecRequestCapacity,omitnil,omitempty" name:"SecRequestCapacity"`
 
-	// Specifies the layer 4 acceleration traffic specification in the package, measurement unit: byte.
+	// <p>Quota of L4 acceleration traffic in the plan, in the unit of bytes.</p>
 	L4TrafficCapacity *int64 `json:"L4TrafficCapacity,omitnil,omitempty" name:"L4TrafficCapacity"`
 
-	// Specifies the network optimization traffic specification in the package for the chinese mainland, measurement unit: byte.
+	// <p>Quota of network optimization traffic for the Chinese mainland in the plan, in the unit of bytes.</p>
 	CrossMLCTrafficCapacity *int64 `json:"CrossMLCTrafficCapacity,omitnil,omitempty" name:"CrossMLCTrafficCapacity"`
 
-	// Specifies whether the package allows binding to new sites. valid values:.
-	// <li>true: allows binding a new site.</li>.
-	// <li>`false`: cannot bind new sites.</li>.
+	// <p>Whether the plan allows binding new sites. Valid values:</p><li>true: Allows binding new sites;</li><li>false: Does not allow binding new sites.</li>
 	Bindable *string `json:"Bindable,omitnil,omitempty" name:"Bindable"`
 
-	// Package activation time.
+	// <p>Time when the plan takes effect.</p>
 	EnabledTime *string `json:"EnabledTime,omitnil,omitempty" name:"EnabledTime"`
 
-	// Plan expiration time.
+	// <p>Expiration time of the plan.</p>
 	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 
-	// Supported features of the package include: <li>ContentAcceleration: content acceleration feature;</li> <li>SmartAcceleration: intelligent acceleration feature;</li> <li>L4: L4 acceleration feature;</li> <li>Waf: advanced Web protection;</li> <li>QUIC: QUIC feature;</li> <li>CrossMLC: network optimization in the chinese mainland;</li> <li>ProcessMedia: media processing feature;</li> <li>L4DDoS: L4 DDoS protection feature;</li> L7DDoS feature will only appear in one of the following specifications: <li>L7DDoS.CM30G; layer-7 DDoS protection feature - 30G guaranteed minimum bandwidth specification in the chinese mainland;</li> <li>L7DDoS.CM60G; layer-7 DDoS protection feature - 60G guaranteed minimum bandwidth specification in the chinese mainland;</li> <li>L7DDoS.CM100G; layer-7 DDoS protection feature - 100G guaranteed minimum bandwidth specification in the chinese mainland;</li> <li>L7DDoS.Anycast300G; layer-7 DDoS protection feature - 300G guaranteed minimum bandwidth specification outside the chinese mainland with Anycast;</li> <li>L7DDoS.AnycastUnlimited; layer-7 DDoS protection feature - unlimited Anycast full protection outside the chinese mainland;</li> <li>L7DDoS.CM30G_Anycast300G; layer-7 DDoS protection feature - 30G guaranteed minimum bandwidth specification in the chinese mainland and 300G guaranteed minimum bandwidth specification outside the chinese mainland with Anycast;</li> <li>L7DDoS.CM60G_Anycast300G; layer-7 DDoS protection feature - 60G guaranteed minimum bandwidth specification in the chinese mainland and 300G guaranteed minimum bandwidth specification outside the chinese mainland with Anycast;</li> <li>L7DDoS.CM100G_Anycast300G; layer-7 DDoS protection feature - 100G guaranteed minimum bandwidth specification in the chinese mainland and 300G guaranteed minimum bandwidth specification outside the chinese mainland with Anycast;</li> <li>L7DDoS.CM30G_AnycastUnlimited; layer-7 DDoS protection feature - 30G guaranteed minimum bandwidth specification in the chinese mainland and unlimited Anycast full protection outside the chinese mainland;</li> <li>L7DDoS.CM60G_AnycastUnlimited; layer-7 DDoS protection feature - 60G guaranteed minimum bandwidth specification in the chinese mainland and unlimited Anycast full protection outside the chinese mainland;</li> <li>L7DDoS.CM100G_AnycastUnlimited; layer-7 DDoS protection feature - 100G guaranteed minimum bandwidth specification in the chinese mainland and unlimited Anycast full protection outside the chinese mainland;</li>.
+	// <p>Features supported by the plan. Valid values: <li>ContentAcceleration: content acceleration;</li><li>SmartAcceleration: smart acceleration;</li><li>L4: L4 acceleration;</li><li>Waf: advanced Web protection;</li><li>QUIC: QUIC;</li><li>CrossMLC: network optimization for the Chinese mainland;</li><li>ProcessMedia: media processing;</li><li>L4DDoS: L4 DDoS protection.</li>Only one of the following L7DDoS specifications can appear: <li>L7DDoS.CM30G: L7 DDoS protection - 30 Gbps guaranteed bandwidth in the Chinese mainland;</li><li>L7DDoS.CM60G: L7 DDoS protection - 60 Gbps guaranteed bandwidth in the Chinese mainland;</li><li>L7DDoS.CM100G: L7 DDoS protection - 100 Gbps guaranteed bandwidth in the Chinese mainland;</li><li>L7DDoS.Anycast300G: L7 DDoS protection - 300 Gbps Anycast guaranteed bandwidth outside the Chinese mainland;</li><li>L7DDoS.AnycastUnlimited: L7 DDoS protection - unlimited Anycast full protection outside the Chinese mainland;</li><li>L7DDoS.CM30G_Anycast300G: L7 DDoS protection - 30 Gbps guaranteed bandwidth in the Chinese mainland and 300 Gbps Anycast guaranteed bandwidth outside the Chinese mainland;</li><li>L7DDoS.CM60G_Anycast300G: L7 DDoS protection - 60 Gbps guaranteed bandwidth in the Chinese mainland and 300 Gbps Anycast guaranteed bandwidth outside the Chinese mainland;</li><li>L7DDoS.CM100G_Anycast300G: L7 DDoS protection - 100 Gbps guaranteed bandwidth in the Chinese mainland and 300 Gbps Anycast guaranteed bandwidth outside the Chinese mainland;</li><li>L7DDoS.CM30G_AnycastUnlimited: L7 DDoS protection - 30 Gbps guaranteed bandwidth in the Chinese mainland and unlimited Anycast full protection outside the Chinese mainland;</li><li>L7DDoS.CM60G_AnycastUnlimited: L7 DDoS protection - 60 Gbps guaranteed bandwidth in the Chinese mainland and unlimited Anycast full protection outside the Chinese mainland;</li><li>L7DDoS.CM100G_AnycastUnlimited: L7 DDoS protection - 100 Gbps guaranteed bandwidth in the Chinese mainland and unlimited Anycast full protection outside the Chinese mainland.</li></p>
 	Features []*string `json:"Features,omitnil,omitempty" name:"Features"`
 }
 
@@ -26501,8 +26483,8 @@ type ZoneInfo struct {
 	// Site name.
 	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
-	// Whether to disable the site. valid values: <li>false: not disabled;</li>.
-	// <li>true: disabled.</li>.
+	// Whether to disable the site. Valid values: <li>false: not disabled;</li>
+	// <li>true: Disable.</li>
 	Paused *bool `json:"Paused,omitnil,omitempty" name:"Paused"`
 }
 

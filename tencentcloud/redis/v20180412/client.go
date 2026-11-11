@@ -1527,7 +1527,7 @@ func NewDeleteReplicationInstanceResponse() (response *DeleteReplicationInstance
 }
 
 // DeleteReplicationInstance
-// This API is used to remove a replication group member. Note: This API is being deprecated. Use [RemoveReplicationInstance](https://intl.cloud.tencent.com/document/product/239/90099?from_cn_redirect=1) instead.
+// This API is used to remove replication group members. Note: This API is offline. Please use RemoveReplicationInstance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -1544,7 +1544,7 @@ func (c *Client) DeleteReplicationInstance(request *DeleteReplicationInstanceReq
 }
 
 // DeleteReplicationInstance
-// This API is used to remove a replication group member. Note: This API is being deprecated. Use [RemoveReplicationInstance](https://intl.cloud.tencent.com/document/product/239/90099?from_cn_redirect=1) instead.
+// This API is used to remove replication group members. Note: This API is offline. Please use RemoveReplicationInstance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -2585,7 +2585,7 @@ func NewDescribeInstanceMonitorBigKeyResponse() (response *DescribeInstanceMonit
 }
 
 // DescribeInstanceMonitorBigKey
-// The API for querying big keys of a TencentDB for Redis instance was disused on October 31, 2022. For more information, see [API for Querying Instance Big Key Will Be Disused](https://intl.cloud.tencent.com/document/product/239/81005?from_cn_redirect=1).
+// Tencent Cloud Database Redis decommissioned the API for querying large keys of instances on October 31, 2022. For the specific notice, please refer to the decommissioning announcement of the API for querying large keys of instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REDOFLOWFAILED = "FailedOperation.RedoFlowFailed"
@@ -2594,7 +2594,7 @@ func (c *Client) DescribeInstanceMonitorBigKey(request *DescribeInstanceMonitorB
 }
 
 // DescribeInstanceMonitorBigKey
-// The API for querying big keys of a TencentDB for Redis instance was disused on October 31, 2022. For more information, see [API for Querying Instance Big Key Will Be Disused](https://intl.cloud.tencent.com/document/product/239/81005?from_cn_redirect=1).
+// Tencent Cloud Database Redis decommissioned the API for querying large keys of instances on October 31, 2022. For the specific notice, please refer to the decommissioning announcement of the API for querying large keys of instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REDOFLOWFAILED = "FailedOperation.RedoFlowFailed"
@@ -2635,7 +2635,7 @@ func NewDescribeInstanceMonitorBigKeySizeDistResponse() (response *DescribeInsta
 }
 
 // DescribeInstanceMonitorBigKeySizeDist
-// The API for querying big keys of a TencentDB for Redis instance was disused on October 31, 2022. For more information, see [API for Querying Instance Big Key Will Be Disused](https://intl.cloud.tencent.com/document/product/239/81005?from_cn_redirect=1).
+// TencentDB for Redis decommissioned the API for querying large keys in instances on October 31, 2022. For the specific announcement, please refer to the decommissioning announcement of the API for querying large keys in instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REDOFLOWFAILED = "FailedOperation.RedoFlowFailed"
@@ -2644,7 +2644,7 @@ func (c *Client) DescribeInstanceMonitorBigKeySizeDist(request *DescribeInstance
 }
 
 // DescribeInstanceMonitorBigKeySizeDist
-// The API for querying big keys of a TencentDB for Redis instance was disused on October 31, 2022. For more information, see [API for Querying Instance Big Key Will Be Disused](https://intl.cloud.tencent.com/document/product/239/81005?from_cn_redirect=1).
+// TencentDB for Redis decommissioned the API for querying large keys in instances on October 31, 2022. For the specific announcement, please refer to the decommissioning announcement of the API for querying large keys in instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REDOFLOWFAILED = "FailedOperation.RedoFlowFailed"
@@ -2685,7 +2685,7 @@ func NewDescribeInstanceMonitorBigKeyTypeDistResponse() (response *DescribeInsta
 }
 
 // DescribeInstanceMonitorBigKeyTypeDist
-// The API for querying big keys of a TencentDB for Redis instance was disused on October 31, 2022. For more information, see [API for Querying Instance Big Key Will Be Disused](https://intl.cloud.tencent.com/document/product/239/81005?from_cn_redirect=1).
+// TencentDB for Redis decommissioned the API for querying large keys in instances on October 31, 2022. For the specific announcement, please refer to the decommissioning announcement of the API for querying large keys in instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REDOFLOWFAILED = "FailedOperation.RedoFlowFailed"
@@ -2694,7 +2694,7 @@ func (c *Client) DescribeInstanceMonitorBigKeyTypeDist(request *DescribeInstance
 }
 
 // DescribeInstanceMonitorBigKeyTypeDist
-// The API for querying big keys of a TencentDB for Redis instance was disused on October 31, 2022. For more information, see [API for Querying Instance Big Key Will Be Disused](https://intl.cloud.tencent.com/document/product/239/81005?from_cn_redirect=1).
+// TencentDB for Redis decommissioned the API for querying large keys in instances on October 31, 2022. For the specific announcement, please refer to the decommissioning announcement of the API for querying large keys in instances.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REDOFLOWFAILED = "FailedOperation.RedoFlowFailed"
@@ -2785,7 +2785,7 @@ func NewDescribeInstanceMonitorSIPResponse() (response *DescribeInstanceMonitorS
 }
 
 // DescribeInstanceMonitorSIP
-// This API is no longer used. Please use the TencentDB for DBbrain API [DescribeProxyProcessStatistics](https://intl.cloud.tencent.com/document/product/1130/84544?from_cn_redirect=1) to obtain the instance access source.
+// This API is no longer used. Please use the TencentDB for DBbrain API [DescribeProxyProcessStatistics](https://www.tencentcloud.com/document/product/1130/84544?from_cn_redirect=1) to obtain the instance access source.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REDOFLOWFAILED = "FailedOperation.RedoFlowFailed"
@@ -2794,7 +2794,7 @@ func (c *Client) DescribeInstanceMonitorSIP(request *DescribeInstanceMonitorSIPR
 }
 
 // DescribeInstanceMonitorSIP
-// This API is no longer used. Please use the TencentDB for DBbrain API [DescribeProxyProcessStatistics](https://intl.cloud.tencent.com/document/product/1130/84544?from_cn_redirect=1) to obtain the instance access source.
+// This API is no longer used. Please use the TencentDB for DBbrain API [DescribeProxyProcessStatistics](https://www.tencentcloud.com/document/product/1130/84544?from_cn_redirect=1) to obtain the instance access source.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_REDOFLOWFAILED = "FailedOperation.RedoFlowFailed"
@@ -3598,15 +3598,7 @@ func NewDescribeLogInstanceListResponse() (response *DescribeLogInstanceListResp
 // This API is used to query log instances.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
-//  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
-//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_EMPTYPARAM = "InvalidParameter.EmptyParam"
-//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
-//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
-//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 func (c *Client) DescribeLogInstanceList(request *DescribeLogInstanceListRequest) (response *DescribeLogInstanceListResponse, err error) {
     return c.DescribeLogInstanceListWithContext(context.Background(), request)
 }
@@ -3615,15 +3607,7 @@ func (c *Client) DescribeLogInstanceList(request *DescribeLogInstanceListRequest
 // This API is used to query log instances.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
-//  FAILEDOPERATION_UNKNOWN = "FailedOperation.Unknown"
-//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_EMPTYPARAM = "InvalidParameter.EmptyParam"
-//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
-//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
-//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 func (c *Client) DescribeLogInstanceListWithContext(ctx context.Context, request *DescribeLogInstanceListRequest) (response *DescribeLogInstanceListResponse, err error) {
     if request == nil {
         request = NewDescribeLogInstanceListRequest()
@@ -5321,7 +5305,7 @@ func NewModfiyInstancePasswordResponse() (response *ModfiyInstancePasswordRespon
 }
 
 // ModfiyInstancePassword
-// This API is used to change the instance access password. Due to a spelling error in the original API name, it has been corrected to [ModifyInstancePassword](https://intl.cloud.tencent.com/document/product/239/111555?from_cn_redirect=1). It is recommended to use the corrected API.
+// This API is used to change the instance access password. As the API name contains a spelling error, it has been corrected to [ModifyInstancePassword](https://www.tencentcloud.com/document/product/239/111555?from_cn_redirect=1). The corrected API is recommended for use.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -5339,7 +5323,7 @@ func (c *Client) ModfiyInstancePassword(request *ModfiyInstancePasswordRequest) 
 }
 
 // ModfiyInstancePassword
-// This API is used to change the instance access password. Due to a spelling error in the original API name, it has been corrected to [ModifyInstancePassword](https://intl.cloud.tencent.com/document/product/239/111555?from_cn_redirect=1). It is recommended to use the corrected API.
+// This API is used to change the instance access password. As the API name contains a spelling error, it has been corrected to [ModifyInstancePassword](https://www.tencentcloud.com/document/product/239/111555?from_cn_redirect=1). The corrected API is recommended for use.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
@@ -6681,6 +6665,136 @@ func (c *Client) ModifyReplicationGroupWithContext(ctx context.Context, request 
     return
 }
 
+func NewModifySSLEncryptionModeRequest() (request *ModifySSLEncryptionModeRequest) {
+    request = &ModifySSLEncryptionModeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("redis", APIVersion, "ModifySSLEncryptionMode")
+    
+    
+    return
+}
+
+func NewModifySSLEncryptionModeResponse() (response *ModifySSLEncryptionModeResponse) {
+    response = &ModifySSLEncryptionModeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifySSLEncryptionMode
+// This API is used to change the SSL encryption mode.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
+//  UNSUPPORTEDOPERATION_LIMITPROXYVERSION = "UnsupportedOperation.LimitProxyVersion"
+func (c *Client) ModifySSLEncryptionMode(request *ModifySSLEncryptionModeRequest) (response *ModifySSLEncryptionModeResponse, err error) {
+    return c.ModifySSLEncryptionModeWithContext(context.Background(), request)
+}
+
+// ModifySSLEncryptionMode
+// This API is used to change the SSL encryption mode.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
+//  UNSUPPORTEDOPERATION_LIMITPROXYVERSION = "UnsupportedOperation.LimitProxyVersion"
+func (c *Client) ModifySSLEncryptionModeWithContext(ctx context.Context, request *ModifySSLEncryptionModeRequest) (response *ModifySSLEncryptionModeResponse, err error) {
+    if request == nil {
+        request = NewModifySSLEncryptionModeRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "redis", APIVersion, "ModifySSLEncryptionMode")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySSLEncryptionMode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifySSLEncryptionModeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyValkeyModuleRequest() (request *ModifyValkeyModuleRequest) {
+    request = &ModifyValkeyModuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("redis", APIVersion, "ModifyValkeyModule")
+    
+    
+    return
+}
+
+func NewModifyValkeyModuleResponse() (response *ModifyValkeyModuleResponse) {
+    response = &ModifyValkeyModuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyValkeyModule
+// This API is used to modify the enable status of the Valkey instance extension module.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+func (c *Client) ModifyValkeyModule(request *ModifyValkeyModuleRequest) (response *ModifyValkeyModuleResponse, err error) {
+    return c.ModifyValkeyModuleWithContext(context.Background(), request)
+}
+
+// ModifyValkeyModule
+// This API is used to modify the enable status of the Valkey instance extension module.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+func (c *Client) ModifyValkeyModuleWithContext(ctx context.Context, request *ModifyValkeyModuleRequest) (response *ModifyValkeyModuleResponse, err error) {
+    if request == nil {
+        request = NewModifyValkeyModuleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "redis", APIVersion, "ModifyValkeyModule")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyValkeyModule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyValkeyModuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewOpenLogRequest() (request *OpenLogRequest) {
     request = &OpenLogRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6705,11 +6819,12 @@ func NewOpenLogResponse() (response *OpenLogResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
-//  INTERNALERROR_CAMAUTHOSSRESPONSERETURNCODEERROR = "InternalError.CamAuthOssResponseReturnCodeError"
-//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
-//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
-//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
 func (c *Client) OpenLog(request *OpenLogRequest) (response *OpenLogResponse, err error) {
     return c.OpenLogWithContext(context.Background(), request)
 }
@@ -6719,11 +6834,12 @@ func (c *Client) OpenLog(request *OpenLogRequest) (response *OpenLogResponse, er
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
-//  INTERNALERROR_CAMAUTHOSSRESPONSERETURNCODEERROR = "InternalError.CamAuthOssResponseReturnCodeError"
-//  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
-//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
-//  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
 func (c *Client) OpenLogWithContext(ctx context.Context, request *OpenLogRequest) (response *OpenLogResponse, err error) {
     if request == nil {
         request = NewOpenLogRequest()
@@ -7453,6 +7569,74 @@ func (c *Client) SwitchProxyWithContext(ctx context.Context, request *SwitchProx
     request.SetContext(ctx)
     
     response = NewSwitchProxyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateSSLCertRequest() (request *UpdateSSLCertRequest) {
+    request = &UpdateSSLCertRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("redis", APIVersion, "UpdateSSLCert")
+    
+    
+    return
+}
+
+func NewUpdateSSLCertResponse() (response *UpdateSSLCertResponse) {
+    response = &UpdateSSLCertResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateSSLCert
+// This API is used to update SSL key information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
+//  UNSUPPORTEDOPERATION_LIMITPROXYVERSION = "UnsupportedOperation.LimitProxyVersion"
+func (c *Client) UpdateSSLCert(request *UpdateSSLCertRequest) (response *UpdateSSLCertResponse, err error) {
+    return c.UpdateSSLCertWithContext(context.Background(), request)
+}
+
+// UpdateSSLCert
+// This API is used to update SSL key information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_UNSUPPORTERROR = "FailedOperation.UnSupportError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
+//  RESOURCENOTFOUND_INSTANCENOTEXISTS = "ResourceNotFound.InstanceNotExists"
+//  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
+//  UNSUPPORTEDOPERATION_INSTANCENOTOPERATION = "UnsupportedOperation.InstanceNotOperation"
+//  UNSUPPORTEDOPERATION_LIMITPROXYVERSION = "UnsupportedOperation.LimitProxyVersion"
+func (c *Client) UpdateSSLCertWithContext(ctx context.Context, request *UpdateSSLCertRequest) (response *UpdateSSLCertResponse, err error) {
+    if request == nil {
+        request = NewUpdateSSLCertRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "redis", APIVersion, "UpdateSSLCert")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateSSLCert require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateSSLCertResponse()
     err = c.Send(request, response)
     return
 }

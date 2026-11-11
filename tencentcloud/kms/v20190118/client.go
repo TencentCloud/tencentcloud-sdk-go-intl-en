@@ -144,6 +144,7 @@ func NewAsymmetricRsaDecryptResponse() (response *AsymmetricRsaDecryptResponse) 
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDKEYUSAGEINCURRENTREGION = "UnsupportedOperation.UnsupportedKeyUsageInCurrentRegion"
 func (c *Client) AsymmetricRsaDecrypt(request *AsymmetricRsaDecryptRequest) (response *AsymmetricRsaDecryptResponse, err error) {
     return c.AsymmetricRsaDecryptWithContext(context.Background(), request)
 }
@@ -160,6 +161,7 @@ func (c *Client) AsymmetricRsaDecrypt(request *AsymmetricRsaDecryptRequest) (res
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDKEYUSAGEINCURRENTREGION = "UnsupportedOperation.UnsupportedKeyUsageInCurrentRegion"
 func (c *Client) AsymmetricRsaDecryptWithContext(ctx context.Context, request *AsymmetricRsaDecryptRequest) (response *AsymmetricRsaDecryptResponse, err error) {
     if request == nil {
         request = NewAsymmetricRsaDecryptRequest()
@@ -337,6 +339,7 @@ func NewCancelDataKeyDeletionResponse() (response *CancelDataKeyDeletionResponse
 //  RESOURCEUNAVAILABLE_DATAKEYNOTPENDINGDELETE = "ResourceUnavailable.DataKeyNotPendingDelete"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) CancelDataKeyDeletion(request *CancelDataKeyDeletionRequest) (response *CancelDataKeyDeletionResponse, err error) {
     return c.CancelDataKeyDeletionWithContext(context.Background(), request)
 }
@@ -354,6 +357,7 @@ func (c *Client) CancelDataKeyDeletion(request *CancelDataKeyDeletionRequest) (r
 //  RESOURCEUNAVAILABLE_DATAKEYNOTPENDINGDELETE = "ResourceUnavailable.DataKeyNotPendingDelete"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) CancelDataKeyDeletionWithContext(ctx context.Context, request *CancelDataKeyDeletionRequest) (response *CancelDataKeyDeletionResponse, err error) {
     if request == nil {
         request = NewCancelDataKeyDeletionRequest()
@@ -536,6 +540,7 @@ func NewCreateKeyResponse() (response *CreateKeyResponse) {
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_SERVICETEMPORARYUNAVAILABLE = "UnsupportedOperation.ServiceTemporaryUnavailable"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDKEYUSAGEINCURRENTREGION = "UnsupportedOperation.UnsupportedKeyUsageInCurrentRegion"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) CreateKey(request *CreateKeyRequest) (response *CreateKeyResponse, err error) {
     return c.CreateKeyWithContext(context.Background(), request)
 }
@@ -558,6 +563,7 @@ func (c *Client) CreateKey(request *CreateKeyRequest) (response *CreateKeyRespon
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_SERVICETEMPORARYUNAVAILABLE = "UnsupportedOperation.ServiceTemporaryUnavailable"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDKEYUSAGEINCURRENTREGION = "UnsupportedOperation.UnsupportedKeyUsageInCurrentRegion"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) CreateKeyWithContext(ctx context.Context, request *CreateKeyRequest) (response *CreateKeyResponse, err error) {
     if request == nil {
         request = NewCreateKeyRequest()
@@ -571,6 +577,78 @@ func (c *Client) CreateKeyWithContext(ctx context.Context, request *CreateKeyReq
     request.SetContext(ctx)
     
     response = NewCreateKeyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateKmsInstanceRequest() (request *CreateKmsInstanceRequest) {
+    request = &CreateKmsInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("kms", APIVersion, "CreateKmsInstance")
+    
+    
+    return
+}
+
+func NewCreateKmsInstanceResponse() (response *CreateKmsInstanceResponse) {
+    response = &CreateKmsInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateKmsInstance
+// This API is used to purchase and activate the KMS service.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORDERCHECKFAILED = "FailedOperation.OrderCheckFailed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONFLICTPARAMETER = "InvalidParameter.ConflictParameter"
+//  INVALIDPARAMETER_MISSINGPRODUCTVERSION = "InvalidParameter.MissingProductVersion"
+//  INVALIDPARAMETERVALUE_INVALIDINSTANCECHARGETYPE = "InvalidParameterValue.InvalidInstanceChargeType"
+//  INVALIDPARAMETERVALUE_INVALIDPERIOD = "InvalidParameterValue.InvalidPeriod"
+//  INVALIDPARAMETERVALUE_INVALIDPRODUCTVERSION = "InvalidParameterValue.InvalidProductVersion"
+//  LIMITEXCEEDED_INSTANCEQUOTAEXCEEDED = "LimitExceeded.InstanceQuotaExceeded"
+//  RESOURCEINUSE_ORDERINPROGRESS = "ResourceInUse.OrderInProgress"
+//  RESOURCEINUSE_POSTPAIDINSTANCEALREADYEXISTS = "ResourceInUse.PostpaidInstanceAlreadyExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateKmsInstance(request *CreateKmsInstanceRequest) (response *CreateKmsInstanceResponse, err error) {
+    return c.CreateKmsInstanceWithContext(context.Background(), request)
+}
+
+// CreateKmsInstance
+// This API is used to purchase and activate the KMS service.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORDERCHECKFAILED = "FailedOperation.OrderCheckFailed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONFLICTPARAMETER = "InvalidParameter.ConflictParameter"
+//  INVALIDPARAMETER_MISSINGPRODUCTVERSION = "InvalidParameter.MissingProductVersion"
+//  INVALIDPARAMETERVALUE_INVALIDINSTANCECHARGETYPE = "InvalidParameterValue.InvalidInstanceChargeType"
+//  INVALIDPARAMETERVALUE_INVALIDPERIOD = "InvalidParameterValue.InvalidPeriod"
+//  INVALIDPARAMETERVALUE_INVALIDPRODUCTVERSION = "InvalidParameterValue.InvalidProductVersion"
+//  LIMITEXCEEDED_INSTANCEQUOTAEXCEEDED = "LimitExceeded.InstanceQuotaExceeded"
+//  RESOURCEINUSE_ORDERINPROGRESS = "ResourceInUse.OrderInProgress"
+//  RESOURCEINUSE_POSTPAIDINSTANCEALREADYEXISTS = "ResourceInUse.PostpaidInstanceAlreadyExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateKmsInstanceWithContext(ctx context.Context, request *CreateKmsInstanceRequest) (response *CreateKmsInstanceResponse, err error) {
+    if request == nil {
+        request = NewCreateKmsInstanceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "kms", APIVersion, "CreateKmsInstance")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateKmsInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateKmsInstanceResponse()
     err = c.Send(request, response)
     return
 }
@@ -734,6 +812,7 @@ func NewDeleteImportedKeyMaterialResponse() (response *DeleteImportedKeyMaterial
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
 //  UNSUPPORTEDOPERATION_NOTEXTERNALCMK = "UnsupportedOperation.NotExternalCmk"
 //  UNSUPPORTEDOPERATION_SERVICETEMPORARYUNAVAILABLE = "UnsupportedOperation.ServiceTemporaryUnavailable"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) DeleteImportedKeyMaterial(request *DeleteImportedKeyMaterialRequest) (response *DeleteImportedKeyMaterialResponse, err error) {
     return c.DeleteImportedKeyMaterialWithContext(context.Background(), request)
 }
@@ -750,6 +829,7 @@ func (c *Client) DeleteImportedKeyMaterial(request *DeleteImportedKeyMaterialReq
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
 //  UNSUPPORTEDOPERATION_NOTEXTERNALCMK = "UnsupportedOperation.NotExternalCmk"
 //  UNSUPPORTEDOPERATION_SERVICETEMPORARYUNAVAILABLE = "UnsupportedOperation.ServiceTemporaryUnavailable"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) DeleteImportedKeyMaterialWithContext(ctx context.Context, request *DeleteImportedKeyMaterialRequest) (response *DeleteImportedKeyMaterialResponse, err error) {
     if request == nil {
         request = NewDeleteImportedKeyMaterialRequest()
@@ -1379,6 +1459,7 @@ func NewDisableDataKeyResponse() (response *DisableDataKeyResponse) {
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  RESOURCEUNAVAILABLE_DATAKEYSTATENOTSUPPORT = "ResourceUnavailable.DataKeyStateNotSupport"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) DisableDataKey(request *DisableDataKeyRequest) (response *DisableDataKeyResponse, err error) {
     return c.DisableDataKeyWithContext(context.Background(), request)
 }
@@ -1392,6 +1473,7 @@ func (c *Client) DisableDataKey(request *DisableDataKeyRequest) (response *Disab
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  RESOURCEUNAVAILABLE_DATAKEYSTATENOTSUPPORT = "ResourceUnavailable.DataKeyStateNotSupport"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) DisableDataKeyWithContext(ctx context.Context, request *DisableDataKeyRequest) (response *DisableDataKeyResponse, err error) {
     if request == nil {
         request = NewDisableDataKeyRequest()
@@ -1439,6 +1521,7 @@ func NewDisableDataKeysResponse() (response *DisableDataKeysResponse) {
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  RESOURCEUNAVAILABLE_DATAKEYSTATENOTSUPPORT = "ResourceUnavailable.DataKeyStateNotSupport"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) DisableDataKeys(request *DisableDataKeysRequest) (response *DisableDataKeysResponse, err error) {
     return c.DisableDataKeysWithContext(context.Background(), request)
 }
@@ -1454,6 +1537,7 @@ func (c *Client) DisableDataKeys(request *DisableDataKeysRequest) (response *Dis
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  RESOURCEUNAVAILABLE_DATAKEYSTATENOTSUPPORT = "ResourceUnavailable.DataKeyStateNotSupport"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) DisableDataKeysWithContext(ctx context.Context, request *DisableDataKeysRequest) (response *DisableDataKeysResponse, err error) {
     if request == nil {
         request = NewDisableDataKeysRequest()
@@ -1566,6 +1650,7 @@ func NewDisableKeyRotationResponse() (response *DisableKeyRotationResponse) {
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) DisableKeyRotation(request *DisableKeyRotationRequest) (response *DisableKeyRotationResponse, err error) {
     return c.DisableKeyRotationWithContext(context.Background(), request)
 }
@@ -1580,6 +1665,7 @@ func (c *Client) DisableKeyRotation(request *DisableKeyRotationRequest) (respons
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) DisableKeyRotationWithContext(ctx context.Context, request *DisableKeyRotationRequest) (response *DisableKeyRotationResponse, err error) {
     if request == nil {
         request = NewDisableKeyRotationRequest()
@@ -1814,6 +1900,7 @@ func NewEnableDataKeyResponse() (response *EnableDataKeyResponse) {
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) EnableDataKey(request *EnableDataKeyRequest) (response *EnableDataKeyResponse, err error) {
     return c.EnableDataKeyWithContext(context.Background(), request)
 }
@@ -1828,6 +1915,7 @@ func (c *Client) EnableDataKey(request *EnableDataKeyRequest) (response *EnableD
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) EnableDataKeyWithContext(ctx context.Context, request *EnableDataKeyRequest) (response *EnableDataKeyResponse, err error) {
     if request == nil {
         request = NewEnableDataKeyRequest()
@@ -1878,6 +1966,7 @@ func NewEnableDataKeysResponse() (response *EnableDataKeysResponse) {
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  RESOURCEUNAVAILABLE_DATAKEYSTATENOTSUPPORT = "ResourceUnavailable.DataKeyStateNotSupport"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) EnableDataKeys(request *EnableDataKeysRequest) (response *EnableDataKeysResponse, err error) {
     return c.EnableDataKeysWithContext(context.Background(), request)
 }
@@ -1896,6 +1985,7 @@ func (c *Client) EnableDataKeys(request *EnableDataKeysRequest) (response *Enabl
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  RESOURCEUNAVAILABLE_DATAKEYSTATENOTSUPPORT = "ResourceUnavailable.DataKeyStateNotSupport"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) EnableDataKeysWithContext(ctx context.Context, request *EnableDataKeysRequest) (response *EnableDataKeysResponse, err error) {
     if request == nil {
         request = NewEnableDataKeysRequest()
@@ -2010,6 +2100,7 @@ func NewEnableKeyRotationResponse() (response *EnableKeyRotationResponse) {
 //  UNSUPPORTEDOPERATION_EXTERNALCMKCANNOTROTATE = "UnsupportedOperation.ExternalCmkCanNotRotate"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
 //  UNSUPPORTEDOPERATION_SERVICETEMPORARYUNAVAILABLE = "UnsupportedOperation.ServiceTemporaryUnavailable"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) EnableKeyRotation(request *EnableKeyRotationRequest) (response *EnableKeyRotationResponse, err error) {
     return c.EnableKeyRotationWithContext(context.Background(), request)
 }
@@ -2028,6 +2119,7 @@ func (c *Client) EnableKeyRotation(request *EnableKeyRotationRequest) (response 
 //  UNSUPPORTEDOPERATION_EXTERNALCMKCANNOTROTATE = "UnsupportedOperation.ExternalCmkCanNotRotate"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
 //  UNSUPPORTEDOPERATION_SERVICETEMPORARYUNAVAILABLE = "UnsupportedOperation.ServiceTemporaryUnavailable"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) EnableKeyRotationWithContext(ctx context.Context, request *EnableKeyRotationRequest) (response *EnableKeyRotationResponse, err error) {
     if request == nil {
         request = NewEnableKeyRotationRequest()
@@ -2398,6 +2490,7 @@ func NewGenerateDataKeyResponse() (response *GenerateDataKeyResponse) {
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  RESOURCEUNAVAILABLE_KEYPENDINGDELETE = "ResourceUnavailable.KeyPendingDelete"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) GenerateDataKey(request *GenerateDataKeyRequest) (response *GenerateDataKeyResponse, err error) {
     return c.GenerateDataKeyWithContext(context.Background(), request)
 }
@@ -2424,6 +2517,7 @@ func (c *Client) GenerateDataKey(request *GenerateDataKeyRequest) (response *Gen
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  RESOURCEUNAVAILABLE_KEYPENDINGDELETE = "ResourceUnavailable.KeyPendingDelete"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) GenerateDataKeyWithContext(ctx context.Context, request *GenerateDataKeyRequest) (response *GenerateDataKeyResponse, err error) {
     if request == nil {
         request = NewGenerateDataKeyRequest()
@@ -2523,6 +2617,7 @@ func NewGetDataKeyCiphertextBlobResponse() (response *GetDataKeyCiphertextBlobRe
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  RESOURCEUNAVAILABLE_DATAKEYSTATENOTSUPPORT = "ResourceUnavailable.DataKeyStateNotSupport"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) GetDataKeyCiphertextBlob(request *GetDataKeyCiphertextBlobRequest) (response *GetDataKeyCiphertextBlobResponse, err error) {
     return c.GetDataKeyCiphertextBlobWithContext(context.Background(), request)
 }
@@ -2536,6 +2631,7 @@ func (c *Client) GetDataKeyCiphertextBlob(request *GetDataKeyCiphertextBlobReque
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  RESOURCEUNAVAILABLE_DATAKEYSTATENOTSUPPORT = "ResourceUnavailable.DataKeyStateNotSupport"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) GetDataKeyCiphertextBlobWithContext(ctx context.Context, request *GetDataKeyCiphertextBlobRequest) (response *GetDataKeyCiphertextBlobResponse, err error) {
     if request == nil {
         request = NewGetDataKeyCiphertextBlobRequest()
@@ -2589,6 +2685,7 @@ func NewGetDataKeyPlaintextResponse() (response *GetDataKeyPlaintextResponse) {
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  RESOURCEUNAVAILABLE_DATAKEYPENDINGDELETE = "ResourceUnavailable.DataKeyPendingDelete"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) GetDataKeyPlaintext(request *GetDataKeyPlaintextRequest) (response *GetDataKeyPlaintextResponse, err error) {
     return c.GetDataKeyPlaintextWithContext(context.Background(), request)
 }
@@ -2610,6 +2707,7 @@ func (c *Client) GetDataKeyPlaintext(request *GetDataKeyPlaintextRequest) (respo
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  RESOURCEUNAVAILABLE_DATAKEYPENDINGDELETE = "ResourceUnavailable.DataKeyPendingDelete"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) GetDataKeyPlaintextWithContext(ctx context.Context, request *GetDataKeyPlaintextRequest) (response *GetDataKeyPlaintextResponse, err error) {
     if request == nil {
         request = NewGetDataKeyPlaintextRequest()
@@ -2716,6 +2814,7 @@ func NewGetParametersForImportResponse() (response *GetParametersForImportRespon
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  UNSUPPORTEDOPERATION_NOTEXTERNALCMK = "UnsupportedOperation.NotExternalCmk"
 //  UNSUPPORTEDOPERATION_SERVICETEMPORARYUNAVAILABLE = "UnsupportedOperation.ServiceTemporaryUnavailable"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) GetParametersForImport(request *GetParametersForImportRequest) (response *GetParametersForImportResponse, err error) {
     return c.GetParametersForImportWithContext(context.Background(), request)
 }
@@ -2730,6 +2829,7 @@ func (c *Client) GetParametersForImport(request *GetParametersForImportRequest) 
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  UNSUPPORTEDOPERATION_NOTEXTERNALCMK = "UnsupportedOperation.NotExternalCmk"
 //  UNSUPPORTEDOPERATION_SERVICETEMPORARYUNAVAILABLE = "UnsupportedOperation.ServiceTemporaryUnavailable"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) GetParametersForImportWithContext(ctx context.Context, request *GetParametersForImportRequest) (response *GetParametersForImportResponse, err error) {
     if request == nil {
         request = NewGetParametersForImportRequest()
@@ -2954,6 +3054,7 @@ func NewImportDataKeyResponse() (response *ImportDataKeyResponse) {
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
 //  RESOURCEUNAVAILABLE_KEYPENDINGDELETE = "ResourceUnavailable.KeyPendingDelete"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) ImportDataKey(request *ImportDataKeyRequest) (response *ImportDataKeyResponse, err error) {
     return c.ImportDataKeyWithContext(context.Background(), request)
 }
@@ -2982,6 +3083,7 @@ func (c *Client) ImportDataKey(request *ImportDataKeyRequest) (response *ImportD
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
 //  RESOURCEUNAVAILABLE_KEYPENDINGDELETE = "ResourceUnavailable.KeyPendingDelete"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) ImportDataKeyWithContext(ctx context.Context, request *ImportDataKeyRequest) (response *ImportDataKeyResponse, err error) {
     if request == nil {
         request = NewImportDataKeyRequest()
@@ -3034,6 +3136,7 @@ func NewImportKeyMaterialResponse() (response *ImportKeyMaterialResponse) {
 //  RESOURCEUNAVAILABLE_TOKENEXPIRED = "ResourceUnavailable.TokenExpired"
 //  UNSUPPORTEDOPERATION_NOTEXTERNALCMK = "UnsupportedOperation.NotExternalCmk"
 //  UNSUPPORTEDOPERATION_SERVICETEMPORARYUNAVAILABLE = "UnsupportedOperation.ServiceTemporaryUnavailable"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) ImportKeyMaterial(request *ImportKeyMaterialRequest) (response *ImportKeyMaterialResponse, err error) {
     return c.ImportKeyMaterialWithContext(context.Background(), request)
 }
@@ -3054,6 +3157,7 @@ func (c *Client) ImportKeyMaterial(request *ImportKeyMaterialRequest) (response 
 //  RESOURCEUNAVAILABLE_TOKENEXPIRED = "ResourceUnavailable.TokenExpired"
 //  UNSUPPORTEDOPERATION_NOTEXTERNALCMK = "UnsupportedOperation.NotExternalCmk"
 //  UNSUPPORTEDOPERATION_SERVICETEMPORARYUNAVAILABLE = "UnsupportedOperation.ServiceTemporaryUnavailable"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) ImportKeyMaterialWithContext(ctx context.Context, request *ImportKeyMaterialRequest) (response *ImportKeyMaterialResponse, err error) {
     if request == nil {
         request = NewImportKeyMaterialRequest()
@@ -3154,6 +3258,7 @@ func NewListDataKeyDetailResponse() (response *ListDataKeyDetailResponse) {
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) ListDataKeyDetail(request *ListDataKeyDetailRequest) (response *ListDataKeyDetailResponse, err error) {
     return c.ListDataKeyDetailWithContext(context.Background(), request)
 }
@@ -3170,6 +3275,7 @@ func (c *Client) ListDataKeyDetail(request *ListDataKeyDetailRequest) (response 
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) ListDataKeyDetailWithContext(ctx context.Context, request *ListDataKeyDetailRequest) (response *ListDataKeyDetailResponse, err error) {
     if request == nil {
         request = NewListDataKeyDetailRequest()
@@ -3214,6 +3320,7 @@ func NewListDataKeysResponse() (response *ListDataKeysResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDHSMCLUSTERID = "InvalidParameterValue.InvalidHsmClusterId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) ListDataKeys(request *ListDataKeysRequest) (response *ListDataKeysResponse, err error) {
     return c.ListDataKeysWithContext(context.Background(), request)
 }
@@ -3226,6 +3333,7 @@ func (c *Client) ListDataKeys(request *ListDataKeysRequest) (response *ListDataK
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDHSMCLUSTERID = "InvalidParameterValue.InvalidHsmClusterId"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) ListDataKeysWithContext(ctx context.Context, request *ListDataKeysRequest) (response *ListDataKeysResponse, err error) {
     if request == nil {
         request = NewListDataKeysRequest()
@@ -3761,6 +3869,7 @@ func NewRotateKeyResponse() (response *RotateKeyResponse) {
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_ROTATENOTSUPPORTED = "UnsupportedOperation.RotateNotSupported"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) RotateKey(request *RotateKeyRequest) (response *RotateKeyResponse, err error) {
     return c.RotateKeyWithContext(context.Background(), request)
 }
@@ -3778,6 +3887,7 @@ func (c *Client) RotateKey(request *RotateKeyRequest) (response *RotateKeyRespon
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNSUPPORTEDOPERATION_ROTATENOTSUPPORTED = "UnsupportedOperation.RotateNotSupported"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) RotateKeyWithContext(ctx context.Context, request *RotateKeyRequest) (response *RotateKeyResponse, err error) {
     if request == nil {
         request = NewRotateKeyRequest()
@@ -3824,6 +3934,7 @@ func NewScheduleDataKeyDeletionResponse() (response *ScheduleDataKeyDeletionResp
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  RESOURCEUNAVAILABLE_DATAKEYSTATENOTSUPPORT = "ResourceUnavailable.DataKeyStateNotSupport"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) ScheduleDataKeyDeletion(request *ScheduleDataKeyDeletionRequest) (response *ScheduleDataKeyDeletionResponse, err error) {
     return c.ScheduleDataKeyDeletionWithContext(context.Background(), request)
 }
@@ -3838,6 +3949,7 @@ func (c *Client) ScheduleDataKeyDeletion(request *ScheduleDataKeyDeletionRequest
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  RESOURCEUNAVAILABLE_DATAKEYSTATENOTSUPPORT = "ResourceUnavailable.DataKeyStateNotSupport"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) ScheduleDataKeyDeletionWithContext(ctx context.Context, request *ScheduleDataKeyDeletionRequest) (response *ScheduleDataKeyDeletionResponse, err error) {
     if request == nil {
         request = NewScheduleDataKeyDeletionRequest()
@@ -3949,12 +4061,14 @@ func NewSignByAsymmetricKeyResponse() (response *SignByAsymmetricKeyResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_SIGNERROR = "FailedOperation.SignError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDKEYUSAGEINCURRENTREGION = "UnsupportedOperation.UnsupportedKeyUsageInCurrentRegion"
 func (c *Client) SignByAsymmetricKey(request *SignByAsymmetricKeyRequest) (response *SignByAsymmetricKeyResponse, err error) {
     return c.SignByAsymmetricKeyWithContext(context.Background(), request)
 }
@@ -3966,12 +4080,14 @@ func (c *Client) SignByAsymmetricKey(request *SignByAsymmetricKeyRequest) (respo
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_SIGNERROR = "FailedOperation.SignError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDKEYUSAGEINCURRENTREGION = "UnsupportedOperation.UnsupportedKeyUsageInCurrentRegion"
 func (c *Client) SignByAsymmetricKeyWithContext(ctx context.Context, request *SignByAsymmetricKeyRequest) (response *SignByAsymmetricKeyResponse, err error) {
     if request == nil {
         request = NewSignByAsymmetricKeyRequest()
@@ -4145,6 +4261,7 @@ func NewUpdateDataKeyDescriptionResponse() (response *UpdateDataKeyDescriptionRe
 //  INVALIDPARAMETERVALUE_INVALIDDATAKEYNAME = "InvalidParameterValue.InvalidDataKeyName"
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) UpdateDataKeyDescription(request *UpdateDataKeyDescriptionRequest) (response *UpdateDataKeyDescriptionResponse, err error) {
     return c.UpdateDataKeyDescriptionWithContext(context.Background(), request)
 }
@@ -4158,6 +4275,7 @@ func (c *Client) UpdateDataKeyDescription(request *UpdateDataKeyDescriptionReque
 //  INVALIDPARAMETERVALUE_INVALIDDATAKEYNAME = "InvalidParameterValue.InvalidDataKeyName"
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) UpdateDataKeyDescriptionWithContext(ctx context.Context, request *UpdateDataKeyDescriptionRequest) (response *UpdateDataKeyDescriptionResponse, err error) {
     if request == nil {
         request = NewUpdateDataKeyDescriptionRequest()
@@ -4203,6 +4321,7 @@ func NewUpdateDataKeyNameResponse() (response *UpdateDataKeyNameResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDDATAKEYID = "InvalidParameterValue.InvalidDataKeyId"
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) UpdateDataKeyName(request *UpdateDataKeyNameRequest) (response *UpdateDataKeyNameResponse, err error) {
     return c.UpdateDataKeyNameWithContext(context.Background(), request)
 }
@@ -4216,6 +4335,7 @@ func (c *Client) UpdateDataKeyName(request *UpdateDataKeyNameRequest) (response 
 //  INVALIDPARAMETERVALUE_INVALIDDATAKEYID = "InvalidParameterValue.InvalidDataKeyId"
 //  RESOURCEUNAVAILABLE_DATAKEYNOTFOUND = "ResourceUnavailable.DataKeyNotFound"
 //  UNSUPPORTEDOPERATION_NOTROLEOPERATION = "UnsupportedOperation.NotRoleOperation"
+//  UNSUPPORTEDOPERATION_USERVERSIONNOTSUPPORT = "UnsupportedOperation.UserVersionNotSupport"
 func (c *Client) UpdateDataKeyNameWithContext(ctx context.Context, request *UpdateDataKeyNameRequest) (response *UpdateDataKeyNameResponse, err error) {
     if request == nil {
         request = NewUpdateDataKeyNameRequest()
@@ -4318,12 +4438,14 @@ func NewVerifyByAsymmetricKeyResponse() (response *VerifyByAsymmetricKeyResponse
 // This API is used to verify a signature with an asymmetric key.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_VERIFYERROR = "FailedOperation.VerifyError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDKEYUSAGEINCURRENTREGION = "UnsupportedOperation.UnsupportedKeyUsageInCurrentRegion"
 func (c *Client) VerifyByAsymmetricKey(request *VerifyByAsymmetricKeyRequest) (response *VerifyByAsymmetricKeyResponse, err error) {
     return c.VerifyByAsymmetricKeyWithContext(context.Background(), request)
 }
@@ -4332,12 +4454,14 @@ func (c *Client) VerifyByAsymmetricKey(request *VerifyByAsymmetricKeyRequest) (r
 // This API is used to verify a signature with an asymmetric key.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_VERIFYERROR = "FailedOperation.VerifyError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INVALIDKEYID = "InvalidParameterValue.InvalidKeyId"
 //  RESOURCEUNAVAILABLE_CMKNOTFOUND = "ResourceUnavailable.CmkNotFound"
 //  RESOURCEUNAVAILABLE_CMKSTATENOTSUPPORT = "ResourceUnavailable.CmkStateNotSupport"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDKEYUSAGEINCURRENTREGION = "UnsupportedOperation.UnsupportedKeyUsageInCurrentRegion"
 func (c *Client) VerifyByAsymmetricKeyWithContext(ctx context.Context, request *VerifyByAsymmetricKeyRequest) (response *VerifyByAsymmetricKeyResponse, err error) {
     if request == nil {
         request = NewVerifyByAsymmetricKeyRequest()

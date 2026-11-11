@@ -260,6 +260,7 @@ func NewCreateDBInstancesResponse() (response *CreateDBInstancesResponse) {
 //  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  DRYRUNOPERATION_ADDTAGDRYRUNERROR = "DryRunOperation.AddTagDryrunError"
+//  FAILEDOPERATION_CHECKSUPPORTACTIONERROR = "FailedOperation.CheckSupportActionError"
 //  FAILEDOPERATION_CREATEFLOWERROR = "FailedOperation.CreateFlowError"
 //  FAILEDOPERATION_DBCREATEINSTANCEERROR = "FailedOperation.DBCreateInstanceError"
 //  INVALIDPARAMETERVALUE_CHECKDISKERROR = "InvalidParameterValue.CheckDiskError"
@@ -285,6 +286,7 @@ func (c *Client) CreateDBInstances(request *CreateDBInstancesRequest) (response 
 //  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  DRYRUNOPERATION_ADDTAGDRYRUNERROR = "DryRunOperation.AddTagDryrunError"
+//  FAILEDOPERATION_CHECKSUPPORTACTIONERROR = "FailedOperation.CheckSupportActionError"
 //  FAILEDOPERATION_CREATEFLOWERROR = "FailedOperation.CreateFlowError"
 //  FAILEDOPERATION_DBCREATEINSTANCEERROR = "FailedOperation.DBCreateInstanceError"
 //  INVALIDPARAMETERVALUE_CHECKDISKERROR = "InvalidParameterValue.CheckDiskError"
@@ -2301,6 +2303,74 @@ func (c *Client) ModifyAutoRenewFlagWithContext(ctx context.Context, request *Mo
     request.SetContext(ctx)
     
     response = NewModifyAutoRenewFlagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDBInstanceRequest() (request *ModifyDBInstanceRequest) {
+    request = &ModifyDBInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tdmysql", APIVersion, "ModifyDBInstance")
+    
+    
+    return
+}
+
+func NewModifyDBInstanceResponse() (response *ModifyDBInstanceResponse) {
+    response = &ModifyDBInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDBInstance
+// This API is used to modify instance configurations. It combines the ability to vertically and horizontally modify instances, and supports composite modifications of CPU, memory, disk, number of nodes, availability zone, and storage type. It supports DryRun precheck mode, allowing you to obtain the modification plan without actual execution.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_BILLINGERROR = "FailedOperation.BillingError"
+//  FAILEDOPERATION_CHECKSPECERROR = "FailedOperation.CheckSpecError"
+//  FAILEDOPERATION_UPGRADEINSTANCEERROR = "FailedOperation.UpgradeInstanceError"
+//  LIMITEXCEEDED_OUTOFSPECLIMITERROR = "LimitExceeded.OutOfSpecLimitError"
+//  OPERATIONDENIED_INSTANCEOPERATIONNOTALLOWEDERROR = "OperationDenied.InstanceOperationNotAllowedError"
+//  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
+//  OPERATIONDENIED_INSTANCETYPECHECKERROR = "OperationDenied.InstanceTypeCheckError"
+func (c *Client) ModifyDBInstance(request *ModifyDBInstanceRequest) (response *ModifyDBInstanceResponse, err error) {
+    return c.ModifyDBInstanceWithContext(context.Background(), request)
+}
+
+// ModifyDBInstance
+// This API is used to modify instance configurations. It combines the ability to vertically and horizontally modify instances, and supports composite modifications of CPU, memory, disk, number of nodes, availability zone, and storage type. It supports DryRun precheck mode, allowing you to obtain the modification plan without actual execution.
+//
+// error code that may be returned:
+//  AUTHFAILURE_CAMAUTHERROR = "AuthFailure.CamAuthError"
+//  AUTHFAILURE_CHECKCAMAUTHERROR = "AuthFailure.CheckCamAuthError"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION_BILLINGERROR = "FailedOperation.BillingError"
+//  FAILEDOPERATION_CHECKSPECERROR = "FailedOperation.CheckSpecError"
+//  FAILEDOPERATION_UPGRADEINSTANCEERROR = "FailedOperation.UpgradeInstanceError"
+//  LIMITEXCEEDED_OUTOFSPECLIMITERROR = "LimitExceeded.OutOfSpecLimitError"
+//  OPERATIONDENIED_INSTANCEOPERATIONNOTALLOWEDERROR = "OperationDenied.InstanceOperationNotAllowedError"
+//  OPERATIONDENIED_INSTANCESTATUSERROR = "OperationDenied.InstanceStatusError"
+//  OPERATIONDENIED_INSTANCETYPECHECKERROR = "OperationDenied.InstanceTypeCheckError"
+func (c *Client) ModifyDBInstanceWithContext(ctx context.Context, request *ModifyDBInstanceRequest) (response *ModifyDBInstanceResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "tdmysql", APIVersion, "ModifyDBInstance")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDBInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDBInstanceResponse()
     err = c.Send(request, response)
     return
 }

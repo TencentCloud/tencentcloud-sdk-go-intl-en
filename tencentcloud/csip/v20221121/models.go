@@ -1683,6 +1683,23 @@ type AssetBaseInfoResponse struct {
 	ProtectedDay *uint64 `json:"ProtectedDay,omitnil,omitempty" name:"ProtectedDay"`
 }
 
+type AssetBaselineRisk struct {
+	// <p>Unique identifier of a risk record.</p>
+	RiskID *string `json:"RiskID,omitnil,omitempty" name:"RiskID"`
+
+	// <p>Detection item details.</p>
+	Item *BaselineItem `json:"Item,omitnil,omitempty" name:"Item"`
+
+	// <p>Most recent detection time (ISO 8601 format).</p>
+	LatestCheckTime *string `json:"LatestCheckTime,omitnil,omitempty" name:"LatestCheckTime"`
+
+	// <p>Detection result status. Parameter values:</p><ul><li>NOT_PASS: failed</li><li>PASS: passed</li><li>CHECKING: in-progress detection</li></ul><p></p>
+	ResultStatus *string `json:"ResultStatus,omitnil,omitempty" name:"ResultStatus"`
+
+	// <p>Brief information of the associated baseline policy.</p>
+	PolicyInfo *BaselinePolicyBrief `json:"PolicyInfo,omitnil,omitempty" name:"PolicyInfo"`
+}
+
 type AssetCluster struct {
 	// Tenant ID
 	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
@@ -3184,7 +3201,7 @@ type BaselineCategory struct {
 	// <p>Baseline category description (Chinese).</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// <p>Detect the asset major category and distinguish between host baseline and container cluster baseline. Parameter Value:</p><ul><li>HOST: Host</li><li>CLUSTER: Container cluster</li></ul>
+	// <p>Detect asset major category, case-sensitive between host baseline and container cluster baseline. Parameter Value:</p><ul><li>HOST: Host</li><li>CLUSTER: Container cluster</li></ul>
 	CheckAssetType *string `json:"CheckAssetType,omitnil,omitempty" name:"CheckAssetType"`
 }
 
@@ -3292,6 +3309,44 @@ type BaselineHostAsset struct {
 	ProtectVersion *string `json:"ProtectVersion,omitnil,omitempty" name:"ProtectVersion"`
 }
 
+type BaselineIgnorePolicy struct {
+	// <p>Ignore policy record ID.</p>
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// <p>Detection item name.</p>
+	ItemName *string `json:"ItemName,omitnil,omitempty" name:"ItemName"`
+
+	// <p>Category name of the detection item.</p>
+	CategoryName *string `json:"CategoryName,omitnil,omitempty" name:"CategoryName"`
+
+	// <p>User AppID.</p>
+	AppID *uint64 `json:"AppID,omitnil,omitempty" name:"AppID"`
+
+	// <p>Ignorable range type</p><p>Enumeration values:</p><ul><li>ALL: all assets</li><li>PICK: specified asset</li></ul>
+	ScopeType *string `json:"ScopeType,omitnil,omitempty" name:"ScopeType"`
+
+	// <p>Custom asset ID list. This parameter is valid only when PICK is selected. Store instance-id or cluster ID.</p>
+	ScopeIncludeList []*string `json:"ScopeIncludeList,omitnil,omitempty" name:"ScopeIncludeList"`
+
+	// <p>Remove asset ID list. This parameter is valid only when set to ALL. Store instance-id or cluster ID.</p>
+	ScopeExcludeList []*string `json:"ScopeExcludeList,omitnil,omitempty" name:"ScopeExcludeList"`
+
+	// <p>Remark information.</p>
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// <p>Creation time.</p>
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Last modification time.</p>
+	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
+
+	// <p>Corresponding asset type</p><p>Enumeration values:</p><ul><li>HOST: host</li><li>CLUSTER: cluster-related assets</li></ul>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
+
+	// <p>Check item ID</p>
+	ItemID *uint64 `json:"ItemID,omitnil,omitempty" name:"ItemID"`
+}
+
 type BaselineItem struct {
 	// <p>Baseline detection item ID.</p>
 	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
@@ -3299,7 +3354,7 @@ type BaselineItem struct {
 	// <p>Built-in rule ID.</p>
 	RuleID *uint64 `json:"RuleID,omitnil,omitempty" name:"RuleID"`
 
-	// <p>Detection object description, such as configuration file path, kernel parameter, and Kubernetes Resources.</p>
+	// <p>Detection target description, such as configuration file path, kernel parameter, Kubernetes Resources.</p>
 	CheckObject []*string `json:"CheckObject,omitnil,omitempty" name:"CheckObject"`
 
 	// <p>Risk level. Value:</p><ul><li>LOW: Low risk</li><li>MEDIUM: Medium risk</li><li>HIGH: High risk</li><li>CRITICAL: Critical</li></ul>
@@ -3311,37 +3366,37 @@ type BaselineItem struct {
 	// <p>Detection item description (Chinese, explaining the detection background and determination logic).</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// <p>Detection item repair advice (Chinese, including recommended configuration reference values or hardening commands).</p>
+	// <p>Detection item repair advice (in Chinese, including recommended configuration reference values or hardening commands).</p>
 	FixSuggestion *string `json:"FixSuggestion,omitnil,omitempty" name:"FixSuggestion"`
 
-	// <p>Reference link list of detection items.</p>
+	// <p>Detection item reference link list.</p>
 	ReferenceLink *string `json:"ReferenceLink,omitnil,omitempty" name:"ReferenceLink"`
 
-	// <p>Classification information of the parent category in the associated system.</p>
+	// <p>Parent classification information of the associated system.</p>
 	SystemCategory *BaselineCategory `json:"SystemCategory,omitnil,omitempty" name:"SystemCategory"`
 
-	// <p>Classification information of the subcategory it belongs to.</p>
+	// <p>Belonging subcategory information.</p>
 	Category *BaselineCategory `json:"Category,omitnil,omitempty" name:"Category"`
 
-	// <p>Whether one-click repair is supported. true: supported, false: unsupported.</p>
+	// <p>Whether one-click repair is supported. true: support, false: no support.</p>
 	SupportFix *bool `json:"SupportFix,omitnil,omitempty" name:"SupportFix"`
 
-	// <p>Whether user-defined judgment values are supported. true: supported; false: not supported.</p>
+	// <p>Whether to support user customization of judgment values. true: support, false: no support.</p>
 	SupportCustomValue *bool `json:"SupportCustomValue,omitnil,omitempty" name:"SupportCustomValue"`
 
-	// <p>Operating system/component version list applicable to this detection item.</p>
+	// <p>Applicable operating system/component version list for this detection item.</p>
 	AffectedVersionList []*string `json:"AffectedVersionList,omitnil,omitempty" name:"AffectedVersionList"`
 
-	// <p>Parameter definition when editing a custom judgment value (for example, permissible range, control type).</p>
+	// <p>Parameter definition when editing custom judgment values (such as value range, control type, etc.).</p>
 	WebEditParam *string `json:"WebEditParam,omitnil,omitempty" name:"WebEditParam"`
 
-	// <p>Default detection item judgment value list.</p>
+	// <p>Default judgment value list of the detection item.</p>
 	DefaultValueList []*string `json:"DefaultValueList,omitnil,omitempty" name:"DefaultValueList"`
 
-	// <p>Whether customized by the user. true: customized; false: use default values.</p>
+	// <p>Whether it has been customized by the user. true: customized, false: still use default values.</p>
 	IsCustomConf *bool `json:"IsCustomConf,omitnil,omitempty" name:"IsCustomConf"`
 
-	// <p>User-customized configuration record ID. The value is 0 if not customized.</p>
+	// <p>User-customized configuration record ID. 0 if not customized.</p>
 	CustomItemID *uint64 `json:"CustomItemID,omitnil,omitempty" name:"CustomItemID"`
 }
 
@@ -3504,6 +3559,17 @@ type BaselinePolicy struct {
 
 	// <p>Cloud tag list</p>
 	CloudTagList []*string `json:"CloudTagList,omitnil,omitempty" name:"CloudTagList"`
+}
+
+type BaselinePolicyBrief struct {
+	// <p>Baseline policy ID.</p>
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// <p>Baseline policy name.</p>
+	PolicyName *string `json:"PolicyName,omitnil,omitempty" name:"PolicyName"`
+
+	// <p>Whether it is a system built-in policy. true indicates yes, false indicates no (user-defined policy).</p>
+	IsSystem *bool `json:"IsSystem,omitnil,omitempty" name:"IsSystem"`
 }
 
 type BaselinePolicySubCategoryConf struct {
@@ -5320,6 +5386,23 @@ type CloudFunctionItem struct {
 
 	// Account
 	AccountInfo *string `json:"AccountInfo,omitnil,omitempty" name:"AccountInfo"`
+}
+
+type ClusterBaselinePolicy struct {
+	// <p>Baseline policy ID.</p>
+	PolicyID *uint64 `json:"PolicyID,omitnil,omitempty" name:"PolicyID"`
+
+	// <p>Baseline policy name.</p>
+	PolicyName *string `json:"PolicyName,omitnil,omitempty" name:"PolicyName"`
+
+	// <p>Asset type to detect.<br>Enumeration values:<br>HOST: host<br>CLUSTER: container cluster</p>
+	CheckAssetType *string `json:"CheckAssetType,omitnil,omitempty" name:"CheckAssetType"`
+
+	// <p>Baseline system parent category ID.</p>
+	ParentCategoryID *uint64 `json:"ParentCategoryID,omitnil,omitempty" name:"ParentCategoryID"`
+
+	// <p>Whether it is a system baseline policy. true means system policy, false means custom policy.</p>
+	IsSystem *bool `json:"IsSystem,omitnil,omitempty" name:"IsSystem"`
 }
 
 type ClusterContainerListItem struct {
@@ -7320,6 +7403,98 @@ func (r *CreateAllAssetsExportJobResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateAllAssetsExportJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAssetBaselineRiskExportJobRequestParams struct {
+	// <p>Unique asset identifier (UUID), used with AssetType to locate a specific asset.</p>
+	AssetUniqueID *string `json:"AssetUniqueID,omitnil,omitempty" name:"AssetUniqueID"`
+
+	// <p>Asset type. Parameter Value: HOST (host), CLUSTER (cluster).</p>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
+
+	// <p>appid of asset ownership</p>
+	AssetAppID *uint64 `json:"AssetAppID,omitnil,omitempty" name:"AssetAppID"`
+
+	// <p>Export task name</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>Universal Filter Criteria. Supported fields: ItemName (detection item name, blurry), PolicyName (baseline name, blurry), InstanceName (host name, blurry), InstanceID (instance ID, exact), IP (IP, blurry). Different Names are in an AND relationship with each other, while multiple Values under the same Name are in an OR relationship.</p>
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type CreateAssetBaselineRiskExportJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Unique asset identifier (UUID), used with AssetType to locate a specific asset.</p>
+	AssetUniqueID *string `json:"AssetUniqueID,omitnil,omitempty" name:"AssetUniqueID"`
+
+	// <p>Asset type. Parameter Value: HOST (host), CLUSTER (cluster).</p>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
+
+	// <p>appid of asset ownership</p>
+	AssetAppID *uint64 `json:"AssetAppID,omitnil,omitempty" name:"AssetAppID"`
+
+	// <p>Export task name</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>Universal Filter Criteria. Supported fields: ItemName (detection item name, blurry), PolicyName (baseline name, blurry), InstanceName (host name, blurry), InstanceID (instance ID, exact), IP (IP, blurry). Different Names are in an AND relationship with each other, while multiple Values under the same Name are in an OR relationship.</p>
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *CreateAssetBaselineRiskExportJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAssetBaselineRiskExportJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AssetUniqueID")
+	delete(f, "AssetType")
+	delete(f, "AssetAppID")
+	delete(f, "Name")
+	delete(f, "MemberId")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAssetBaselineRiskExportJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAssetBaselineRiskExportJobResponseParams struct {
+	// <p>Export task ID.</p>
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateAssetBaselineRiskExportJobResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAssetBaselineRiskExportJobResponseParams `json:"Response"`
+}
+
+func (r *CreateAssetBaselineRiskExportJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAssetBaselineRiskExportJobResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -16182,6 +16357,67 @@ func (r *DeleteAssetTagResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteBaselineIgnorePolicyRequestParams struct {
+	// <p>ID of the ignored policy record to delete.</p>
+	ID []*uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+type DeleteBaselineIgnorePolicyRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>ID of the ignored policy record to delete.</p>
+	ID []*uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+func (r *DeleteBaselineIgnorePolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBaselineIgnorePolicyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ID")
+	delete(f, "MemberId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteBaselineIgnorePolicyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteBaselineIgnorePolicyResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteBaselineIgnorePolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteBaselineIgnorePolicyResponseParams `json:"Response"`
+}
+
+func (r *DeleteBaselineIgnorePolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteBaselineIgnorePolicyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteBaselineSelfDefinedPolicyListRequestParams struct {
 	// <p>List of custom policy IDs pending deletion. It cannot be empty and elements cannot be 0.</p>
 	PolicyIDList []*uint64 `json:"PolicyIDList,omitnil,omitempty" name:"PolicyIDList"`
@@ -18420,6 +18656,196 @@ func (r *DeleteImageVulWhitelistResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteImageVulWhitelistResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteLoginWhiteCustomEDRRequestParams struct {
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>List of explicitly selected rule IDs, up to 1,000; mutually exclusive with SelectAll</p>
+	Ids []*uint64 `json:"Ids,omitnil,omitempty" name:"Ids"`
+
+	// <p>Select all across pages: true - Delete all rules that meet Filters (Filters is required at this point). false - Delete only Ids</p>
+	SelectAll *bool `json:"SelectAll,omitnil,omitempty" name:"SelectAll"`
+
+	// <p>List of target account AppIds for multi-account, up to 1000; being empty indicates only the current account; returns InvalidParameter when input but no permissions at all</p>
+	TargetAppIDs []*uint64 `json:"TargetAppIDs,omitnil,omitempty" name:"TargetAppIDs"`
+
+	// <p>List of excluded rule IDs, up to 1000</p>
+	ExcludeIds []*int64 `json:"ExcludeIds,omitnil,omitempty" name:"ExcludeIds"`
+
+	// <p>Filtering criteria under select all</p>
+	Filters []*EDRFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DeleteLoginWhiteCustomEDRRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>List of explicitly selected rule IDs, up to 1,000; mutually exclusive with SelectAll</p>
+	Ids []*uint64 `json:"Ids,omitnil,omitempty" name:"Ids"`
+
+	// <p>Select all across pages: true - Delete all rules that meet Filters (Filters is required at this point). false - Delete only Ids</p>
+	SelectAll *bool `json:"SelectAll,omitnil,omitempty" name:"SelectAll"`
+
+	// <p>List of target account AppIds for multi-account, up to 1000; being empty indicates only the current account; returns InvalidParameter when input but no permissions at all</p>
+	TargetAppIDs []*uint64 `json:"TargetAppIDs,omitnil,omitempty" name:"TargetAppIDs"`
+
+	// <p>List of excluded rule IDs, up to 1000</p>
+	ExcludeIds []*int64 `json:"ExcludeIds,omitnil,omitempty" name:"ExcludeIds"`
+
+	// <p>Filtering criteria under select all</p>
+	Filters []*EDRFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DeleteLoginWhiteCustomEDRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteLoginWhiteCustomEDRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Ids")
+	delete(f, "SelectAll")
+	delete(f, "TargetAppIDs")
+	delete(f, "ExcludeIds")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteLoginWhiteCustomEDRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteLoginWhiteCustomEDRResponseParams struct {
+	// <p>Number of deleted rules</p>
+	DeletedCount *int64 `json:"DeletedCount,omitnil,omitempty" name:"DeletedCount"`
+
+	// <p>List of account AppIds that failed to delete; returns an error only if all failed</p>
+	FailedAppIds []*uint64 `json:"FailedAppIds,omitnil,omitempty" name:"FailedAppIds"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteLoginWhiteCustomEDRResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteLoginWhiteCustomEDRResponseParams `json:"Response"`
+}
+
+func (r *DeleteLoginWhiteCustomEDRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteLoginWhiteCustomEDRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteLoginWhiteLearnEDRRequestParams struct {
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>Explicitly selected rule ID list, up to 1000; choose either this or SelectAll</p>
+	Ids []*uint64 `json:"Ids,omitnil,omitempty" name:"Ids"`
+
+	// <p>Select all across pages: true - Delete all rules that meet Filters (Filters is required at this point). false - Delete only Ids</p>
+	SelectAll *bool `json:"SelectAll,omitnil,omitempty" name:"SelectAll"`
+
+	// <p>List of target account AppIds for multi-account, up to 1000; being empty indicates only the current account; returns InvalidParameter when input but no permissions at all</p>
+	TargetAppIDs []*uint64 `json:"TargetAppIDs,omitnil,omitempty" name:"TargetAppIDs"`
+
+	// <p>List of excluded rule IDs</p>
+	ExcludeIds []*int64 `json:"ExcludeIds,omitnil,omitempty" name:"ExcludeIds"`
+
+	// <p>Filtering criteria under select all</p>
+	Filters []*EDRFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DeleteLoginWhiteLearnEDRRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>Explicitly selected rule ID list, up to 1000; choose either this or SelectAll</p>
+	Ids []*uint64 `json:"Ids,omitnil,omitempty" name:"Ids"`
+
+	// <p>Select all across pages: true - Delete all rules that meet Filters (Filters is required at this point). false - Delete only Ids</p>
+	SelectAll *bool `json:"SelectAll,omitnil,omitempty" name:"SelectAll"`
+
+	// <p>List of target account AppIds for multi-account, up to 1000; being empty indicates only the current account; returns InvalidParameter when input but no permissions at all</p>
+	TargetAppIDs []*uint64 `json:"TargetAppIDs,omitnil,omitempty" name:"TargetAppIDs"`
+
+	// <p>List of excluded rule IDs</p>
+	ExcludeIds []*int64 `json:"ExcludeIds,omitnil,omitempty" name:"ExcludeIds"`
+
+	// <p>Filtering criteria under select all</p>
+	Filters []*EDRFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DeleteLoginWhiteLearnEDRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteLoginWhiteLearnEDRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Ids")
+	delete(f, "SelectAll")
+	delete(f, "TargetAppIDs")
+	delete(f, "ExcludeIds")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteLoginWhiteLearnEDRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteLoginWhiteLearnEDRResponseParams struct {
+	// <p>Number of deleted host record rows (a rule group may contain multiple rows, which is different from the custom allowlist API that uses the number of rules for statistics)</p>
+	DeletedCount *int64 `json:"DeletedCount,omitnil,omitempty" name:"DeletedCount"`
+
+	// <p>List of account AppIds that failed to delete; an error is returned only when all failed</p>
+	FailedAppIds []*uint64 `json:"FailedAppIds,omitnil,omitempty" name:"FailedAppIds"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteLoginWhiteLearnEDRResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteLoginWhiteLearnEDRResponseParams `json:"Response"`
+}
+
+func (r *DeleteLoginWhiteLearnEDRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteLoginWhiteLearnEDRResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -21241,6 +21667,108 @@ func (r *DescribeAlertListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeAssetBaselineRiskListRequestParams struct {
+	// <p>Unique asset identifier (UUID), used with AssetType to locate a specific asset.</p>
+	AssetUniqueID *string `json:"AssetUniqueID,omitnil,omitempty" name:"AssetUniqueID"`
+
+	// <p>Asset type. Parameter Value: HOST (host), CLUSTER (cluster).</p>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
+
+	// <p>appid of asset ownership</p>
+	AssetAppID *uint64 `json:"AssetAppID,omitnil,omitempty" name:"AssetAppID"`
+
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>Universal Filter Criteria. Supported fields: ItemName (detection item name, blurry), PolicyName (baseline name, blurry), ResultStatus (result status), RiskLevel (risk level). Different Names are in an AND relationship with each other, and multiple Values under the same Name are in an OR relationship.</p>
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Number of items per page for paging query. Maximum value: 100. If exceeded, the server will automatically fall back to the default value 10.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Paging query starting offset amount, starting from 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeAssetBaselineRiskListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Unique asset identifier (UUID), used with AssetType to locate a specific asset.</p>
+	AssetUniqueID *string `json:"AssetUniqueID,omitnil,omitempty" name:"AssetUniqueID"`
+
+	// <p>Asset type. Parameter Value: HOST (host), CLUSTER (cluster).</p>
+	AssetType *string `json:"AssetType,omitnil,omitempty" name:"AssetType"`
+
+	// <p>appid of asset ownership</p>
+	AssetAppID *uint64 `json:"AssetAppID,omitnil,omitempty" name:"AssetAppID"`
+
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>Universal Filter Criteria. Supported fields: ItemName (detection item name, blurry), PolicyName (baseline name, blurry), ResultStatus (result status), RiskLevel (risk level). Different Names are in an AND relationship with each other, and multiple Values under the same Name are in an OR relationship.</p>
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Number of items per page for paging query. Maximum value: 100. If exceeded, the server will automatically fall back to the default value 10.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Paging query starting offset amount, starting from 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeAssetBaselineRiskListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAssetBaselineRiskListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AssetUniqueID")
+	delete(f, "AssetType")
+	delete(f, "AssetAppID")
+	delete(f, "MemberId")
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAssetBaselineRiskListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAssetBaselineRiskListResponseParams struct {
+	// <p>Baseline risk repair record list.</p>
+	List []*AssetBaselineRisk `json:"List,omitnil,omitempty" name:"List"`
+
+	// <p>Total number of secrets</p>
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAssetBaselineRiskListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAssetBaselineRiskListResponseParams `json:"Response"`
+}
+
+func (r *DescribeAssetBaselineRiskListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAssetBaselineRiskListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeAssetComponentListRequestParams struct {
 	// <p>Group account member id</p>
 	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
@@ -23108,6 +23636,87 @@ func (r *DescribeBaselineFixRecordListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeBaselineFixRecordListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBaselineIgnorePolicyListRequestParams struct {
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>Universal Filter Criteria. Supported fields: ItemName (detection item name, blurry). Different Names are in an AND relationship, while multiple Values under the same Name are in an OR relationship.</p>
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Number of items per page for paging query. Maximum value: 100. If exceeded, the server will automatically fall back to the default value 10.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Paging query starting offset amount, starting from 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeBaselineIgnorePolicyListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>Universal Filter Criteria. Supported fields: ItemName (detection item name, blurry). Different Names are in an AND relationship, while multiple Values under the same Name are in an OR relationship.</p>
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Number of items per page for paging query. Maximum value: 100. If exceeded, the server will automatically fall back to the default value 10.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Paging query starting offset amount, starting from 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeBaselineIgnorePolicyListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBaselineIgnorePolicyListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBaselineIgnorePolicyListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBaselineIgnorePolicyListResponseParams struct {
+	// <p>Baseline risk repair record list.</p>
+	List []*BaselineIgnorePolicy `json:"List,omitnil,omitempty" name:"List"`
+
+	// <p>Total number of secrets</p>
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeBaselineIgnorePolicyListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBaselineIgnorePolicyListResponseParams `json:"Response"`
+}
+
+func (r *DescribeBaselineIgnorePolicyListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBaselineIgnorePolicyListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -27157,6 +27766,77 @@ func (r *DescribeClusterAssetsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeClusterAssetsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClusterBaselineRiskPolicyListRequestParams struct {
+	// <p>Appid of the cluster's account, used to specify the account for querying baseline risk policies.</p>
+	ClusterAppid *uint64 `json:"ClusterAppid,omitnil,omitempty" name:"ClusterAppid"`
+
+	// <p>Cluster CaMD5</p>
+	ClusterCaMD5 *string `json:"ClusterCaMD5,omitnil,omitempty" name:"ClusterCaMD5"`
+
+	// List of member IDs of the group account.
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+type DescribeClusterBaselineRiskPolicyListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Appid of the cluster's account, used to specify the account for querying baseline risk policies.</p>
+	ClusterAppid *uint64 `json:"ClusterAppid,omitnil,omitempty" name:"ClusterAppid"`
+
+	// <p>Cluster CaMD5</p>
+	ClusterCaMD5 *string `json:"ClusterCaMD5,omitnil,omitempty" name:"ClusterCaMD5"`
+
+	// List of member IDs of the group account.
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+func (r *DescribeClusterBaselineRiskPolicyListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterBaselineRiskPolicyListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ClusterAppid")
+	delete(f, "ClusterCaMD5")
+	delete(f, "MemberId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterBaselineRiskPolicyListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeClusterBaselineRiskPolicyListResponseParams struct {
+	// <p>Scan the main task list.</p>
+	List []*ClusterBaselinePolicy `json:"List,omitnil,omitempty" name:"List"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeClusterBaselineRiskPolicyListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeClusterBaselineRiskPolicyListResponseParams `json:"Response"`
+}
+
+func (r *DescribeClusterBaselineRiskPolicyListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeClusterBaselineRiskPolicyListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -37981,6 +38661,80 @@ func (r *DescribeEdrLogCollectPathsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeEdrMalwareFileRequestParams struct {
+	// <p>Unique ID of the EDR alert. Required. Up to 34 characters</p>
+	AlertId *string `json:"AlertId,omitnil,omitempty" name:"AlertId"`
+
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>AppId of the account associated with the alarm (in cross-account scenarios, the member AppId is passed through by the frontend); if 0 or omitted, the login account AppId is used</p>
+	TargetAppId *uint64 `json:"TargetAppId,omitnil,omitempty" name:"TargetAppId"`
+}
+
+type DescribeEdrMalwareFileRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Unique ID of the EDR alert. Required. Up to 34 characters</p>
+	AlertId *string `json:"AlertId,omitnil,omitempty" name:"AlertId"`
+
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>AppId of the account associated with the alarm (in cross-account scenarios, the member AppId is passed through by the frontend); if 0 or omitted, the login account AppId is used</p>
+	TargetAppId *uint64 `json:"TargetAppId,omitnil,omitempty" name:"TargetAppId"`
+}
+
+func (r *DescribeEdrMalwareFileRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdrMalwareFileRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AlertId")
+	delete(f, "MemberId")
+	delete(f, "TargetAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEdrMalwareFileRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEdrMalwareFileResponseParams struct {
+	// <p>Sample download link. For public cloud, it is a COS presigned URL (expires in 1 hour); for non-public cloud with the export switch on, it is data:application/octet-stream;base64,&lt;base64 of the zip&gt;</p>
+	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
+
+	// <p>Export file name, such as &lt;name&gt;.zip; only returned in the non-public cloud base64 branch, and this field is not returned in other scenarios</p>
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeEdrMalwareFileResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeEdrMalwareFileResponseParams `json:"Response"`
+}
+
+func (r *DescribeEdrMalwareFileResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEdrMalwareFileResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeExportJobDownloadURLRequestParams struct {
 	// Task ID.
 	JobID *string `json:"JobID,omitnil,omitempty" name:"JobID"`
@@ -39213,6 +39967,101 @@ func (r *DescribeHostVulOverviewResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeHostVulRiskEventListRequestParams struct {
+	// <p>Pagination offset.<br>Value range: [0, +∞).<br>Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of returned items per page.<br>Value range: [1, 100].<br>Default value: 10.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Filter.Name supported by Filter criteria: VulName - fuzzy matching, search by vulnerability Name. Category - exact matching, Filter by vulnerability Category: LINUX-LINUX software vulnerability, WINDOWS-WINDOWS system patch vulnerability, WEB_CMS-WEB-CMS vulnerability, APPLICATION-APPLICATION vulnerability, EMERGENCY-URGENT vulnerability. RiskStatus - exact matching, Filter by risk status: PENDING-PENDING, HANDLED-processed, FIXED-FIXED, SCANNING-rechecking, IGNORED-IGNORED, NOT_REQUIRED-no action is REQUIRED, DELETED-DELETED, FIXING-in remediation, NEED_REBOOT-FIXED PENDING restart, FIX_FAILED-FIX failure. Level - exact matching, Filter by vulnerability severity Level: UNKNOWN-unavailable, LOW-LOW risk, MEDIUM-MEDIUM risk, HIGH-HIGH risk, CRITICAL-CRITICAL. CVSSLevel - exact matching, compatible field, equivalent to Level. VPRLevel - exact matching, Filter by VPR repair priority: DEFERRABLE-DEFERRABLE repair, PLANNED-PLANNED repair, SOON-repair as SOON as possible, URGENT-URGENT repair. - exact matching, Filter by vulnerability ID. InstanceID - exact matching, Filter by CVM instance ID. InstanceID - exact matching, compatible field, equivalent to InstanceID. UUID - exact matching, Filter by host security UUID. LatestScanTimeStart - range matching, latest scan time start, format: YYYY-MM-DD HH:MM:ss. LatestScanTimeEnd - range matching, latest scan time end, format: YYYY-MM-DD HH:MM:ss</p>
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Sorting order.<br>Enumeration values:<br>asc: ascending<br>desc: descending<br>Default value: desc.</p>
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// <p>Sorting field<br>Enumeration values:<br>LatestScanTime: sort by latest scan time<br>Level: sort by threat level<br>VPRLevel: sort by VPR rating<br>RiskStatus: sort by risk status<br>VulID: sort by vulnerability ID<br>InstanceID: sort by instance ID<br>Default value: LatestScanTime</p>
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+type DescribeHostVulRiskEventListRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Pagination offset.<br>Value range: [0, +∞).<br>Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Number of returned items per page.<br>Value range: [1, 100].<br>Default value: 10.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Filter.Name supported by Filter criteria: VulName - fuzzy matching, search by vulnerability Name. Category - exact matching, Filter by vulnerability Category: LINUX-LINUX software vulnerability, WINDOWS-WINDOWS system patch vulnerability, WEB_CMS-WEB-CMS vulnerability, APPLICATION-APPLICATION vulnerability, EMERGENCY-URGENT vulnerability. RiskStatus - exact matching, Filter by risk status: PENDING-PENDING, HANDLED-processed, FIXED-FIXED, SCANNING-rechecking, IGNORED-IGNORED, NOT_REQUIRED-no action is REQUIRED, DELETED-DELETED, FIXING-in remediation, NEED_REBOOT-FIXED PENDING restart, FIX_FAILED-FIX failure. Level - exact matching, Filter by vulnerability severity Level: UNKNOWN-unavailable, LOW-LOW risk, MEDIUM-MEDIUM risk, HIGH-HIGH risk, CRITICAL-CRITICAL. CVSSLevel - exact matching, compatible field, equivalent to Level. VPRLevel - exact matching, Filter by VPR repair priority: DEFERRABLE-DEFERRABLE repair, PLANNED-PLANNED repair, SOON-repair as SOON as possible, URGENT-URGENT repair. - exact matching, Filter by vulnerability ID. InstanceID - exact matching, Filter by CVM instance ID. InstanceID - exact matching, compatible field, equivalent to InstanceID. UUID - exact matching, Filter by host security UUID. LatestScanTimeStart - range matching, latest scan time start, format: YYYY-MM-DD HH:MM:ss. LatestScanTimeEnd - range matching, latest scan time end, format: YYYY-MM-DD HH:MM:ss</p>
+	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Sorting order.<br>Enumeration values:<br>asc: ascending<br>desc: descending<br>Default value: desc.</p>
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// <p>Sorting field<br>Enumeration values:<br>LatestScanTime: sort by latest scan time<br>Level: sort by threat level<br>VPRLevel: sort by VPR rating<br>RiskStatus: sort by risk status<br>VulID: sort by vulnerability ID<br>InstanceID: sort by instance ID<br>Default value: LatestScanTime</p>
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// Group Account Member ID
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+func (r *DescribeHostVulRiskEventListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostVulRiskEventListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	delete(f, "Order")
+	delete(f, "By")
+	delete(f, "MemberId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeHostVulRiskEventListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeHostVulRiskEventListResponseParams struct {
+	// <p>Host vulnerability risk event list</p>
+	List []*HostVulRiskEventItem `json:"List,omitnil,omitempty" name:"List"`
+
+	// <p>Total number of entries that meet the criteria</p>
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeHostVulRiskEventListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeHostVulRiskEventListResponseParams `json:"Response"`
+}
+
+func (r *DescribeHostVulRiskEventListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostVulRiskEventListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeHostVulRiskListRequestParams struct {
 	// <p>Group account member id</p>
 	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
@@ -39304,6 +40153,63 @@ func (r *DescribeHostVulRiskListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeHostVulRiskListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeHostVulScanStatusRequestParams struct {
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+type DescribeHostVulScanStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+func (r *DescribeHostVulScanStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostVulScanStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeHostVulScanStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeHostVulScanStatusResponseParams struct {
+	// <p>Host vulnerability scanning status</p>
+	Status *HostVulScanStatus `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeHostVulScanStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeHostVulScanStatusResponseParams `json:"Response"`
+}
+
+func (r *DescribeHostVulScanStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostVulScanStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -42281,6 +43187,101 @@ func (r *DescribeLoginWhiteCombinedListResponse) FromJsonString(s string) error 
 }
 
 // Predefined struct for user
+type DescribeLoginWhiteCustomListEDRRequestParams struct {
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>Filter condition array (multiple Filters have an AND relationship). Supports Name: Keyword (SrcIp/UserName/Locations/Remark blurry), SrcIp, UserName, Location, Remark, ModifyBeginTime, ModifyEndTime (time format 2006-01-02 15:04:05); unknown Name is ignored with no error reported</p>
+	Filters []*EDRFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Page size. Default: 10. Upper limit: 100. If 0 or more than 100 is passed, the default or upper limit is used.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Sorting order: ASC - ascending, DESC - descending (not case-sensitive). Default: DESC</p>
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// <p>Sorting field: CreateTime-creation time, ModifyTime-last modified. Default: ModifyTime. If an illegal value is passed, InvalidParameter is returned.</p>
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+type DescribeLoginWhiteCustomListEDRRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>Filter condition array (multiple Filters have an AND relationship). Supports Name: Keyword (SrcIp/UserName/Locations/Remark blurry), SrcIp, UserName, Location, Remark, ModifyBeginTime, ModifyEndTime (time format 2006-01-02 15:04:05); unknown Name is ignored with no error reported</p>
+	Filters []*EDRFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Page size. Default: 10. Upper limit: 100. If 0 or more than 100 is passed, the default or upper limit is used.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Sorting order: ASC - ascending, DESC - descending (not case-sensitive). Default: DESC</p>
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// <p>Sorting field: CreateTime-creation time, ModifyTime-last modified. Default: ModifyTime. If an illegal value is passed, InvalidParameter is returned.</p>
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+func (r *DescribeLoginWhiteCustomListEDRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLoginWhiteCustomListEDRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Order")
+	delete(f, "By")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLoginWhiteCustomListEDRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLoginWhiteCustomListEDRResponseParams struct {
+	// <p>Total number of rules that meet the criteria</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>Custom allowlist rule list (Type is always Custom). If empty, [] is returned.</p>
+	List []*LoginWhiteItem `json:"List,omitnil,omitempty" name:"List"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeLoginWhiteCustomListEDRResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLoginWhiteCustomListEDRResponseParams `json:"Response"`
+}
+
+func (r *DescribeLoginWhiteCustomListEDRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLoginWhiteCustomListEDRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeLoginWhiteHostListRequestParams struct {
 	// <p>Allowlist ID</p>
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
@@ -42365,6 +43366,104 @@ func (r *DescribeLoginWhiteHostListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeLoginWhiteHostListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLoginWhiteLearnListEDRRequestParams struct {
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>Filter condition array (multiple Filters have an AND relationship). Supports Name: Keyword or Location (common login location blurry), Remark, ModifyBeginTime, ModifyEndTime (time format 2006-01-02 15:04:05); unknown Name is ignored with no error reported</p>
+	Filters []*EDRFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Page size. Default: 10. Upper limit: 100. If 0 or more than 100 is passed, the default or upper limit is used.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Sorting order: ASC - ascending, DESC - descending (not case-sensitive). Default: DESC</p>
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// <p>Sorting field: CreateTime-creation time, ModifyTime-last modified. Default: ModifyTime. If an illegal value is passed, InvalidParameter is returned.</p>
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+type DescribeLoginWhiteLearnListEDRRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>Filter condition array (multiple Filters have an AND relationship). Supports Name: Keyword or Location (common login location blurry), Remark, ModifyBeginTime, ModifyEndTime (time format 2006-01-02 15:04:05); unknown Name is ignored with no error reported</p>
+	Filters []*EDRFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Page size. Default: 10. Upper limit: 100. If 0 or more than 100 is passed, the default or upper limit is used.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <p>Pagination offset. Default value: 0.</p>
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// <p>Sorting order: ASC - ascending, DESC - descending (not case-sensitive). Default: DESC</p>
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
+
+	// <p>Sorting field: CreateTime-creation time, ModifyTime-last modified. Default: ModifyTime. If an illegal value is passed, InvalidParameter is returned.</p>
+	By *string `json:"By,omitnil,omitempty" name:"By"`
+}
+
+func (r *DescribeLoginWhiteLearnListEDRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLoginWhiteLearnListEDRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberId")
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Order")
+	delete(f, "By")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLoginWhiteLearnListEDRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLoginWhiteLearnListEDRResponseParams struct {
+	// <p>Total number of rule groups (aggregated by AppId + common login location)</p>
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>Self-learning allowlist rule group list (Type is always Learn). If empty, [] is returned.</p>
+	List []*LoginWhiteItem `json:"List,omitnil,omitempty" name:"List"`
+
+	// <p>Self-learning allowlist switch status; for multi-account, the current account is used to prompt the frontend to go to enable in the empty state</p>
+	AutoLearnEnable *bool `json:"AutoLearnEnable,omitnil,omitempty" name:"AutoLearnEnable"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeLoginWhiteLearnListEDRResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLoginWhiteLearnListEDRResponseParams `json:"Response"`
+}
+
+func (r *DescribeLoginWhiteLearnListEDRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLoginWhiteLearnListEDRResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -54574,7 +55673,7 @@ type EDRExportJobItem struct {
 }
 
 type EDRFilter struct {
-	// <p>Name of filter key</p>
+	// <p>Name of filter key.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// <p>One or more filter values.</p>
@@ -54721,13 +55820,13 @@ type EDRRuleTagItem struct {
 	// <p>Tag Chinese value</p>
 	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
 
-	// <p>Tag value in English.</p>
+	// <p>Tag value in English</p>
 	TagValueEn *string `json:"TagValueEn,omitnil,omitempty" name:"TagValueEn"`
 
-	// <p>Tag description</p>
+	// <p>Tag description.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// <p>Tag color</p>
+	// <p>Tag color.</p>
 	Color *string `json:"Color,omitnil,omitempty" name:"Color"`
 }
 
@@ -55894,10 +56993,10 @@ type Filters struct {
 	// Filter criterion name. Parameter value: Status (Execution result. Values: SUCCESS/FAILED/USER_CANCELED/CHECKING)
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// List of filter condition values
+	// Filter condition value list
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 
-	// Exact match: 1 for exact match; fuzzy match by default
+	// Exact match: 1 - exact match; fuzzy match by default
 	ExactMatch *string `json:"ExactMatch,omitnil,omitempty" name:"ExactMatch"`
 }
 
@@ -56279,6 +57378,146 @@ type HostVulRisk struct {
 
 	// <p>Vulnerability details</p>
 	VulDetail *VulDetailInfo `json:"VulDetail,omitnil,omitempty" name:"VulDetail"`
+}
+
+type HostVulRiskEventItem struct {
+	// Unique identifier of a vulnerability risk record.
+	UUID *string `json:"UUID,omitnil,omitempty" name:"UUID"`
+
+	// Risk record ID
+	RiskID *uint64 `json:"RiskID,omitnil,omitempty" name:"RiskID"`
+
+	// Vulnerability ID
+	VulID *uint64 `json:"VulID,omitnil,omitempty" name:"VulID"`
+
+	// Vulnerability name
+	VulName *string `json:"VulName,omitnil,omitempty" name:"VulName"`
+
+	// CVE No.
+	// Parameter format: such as CVE-2024-12345
+	CVEID *string `json:"CVEID,omitnil,omitempty" name:"CVEID"`
+
+	// Vulnerability category
+	// Enumeration values:
+	// LINUX: Linux software vulnerability
+	// WINDOWS: Windows system patch
+	// WEB_CMS: Web-CMS vulnerability
+	// APPLICATION: Application vulnerability
+	// EMERGENCY: Urgent vulnerability
+	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
+
+	// Vulnerability severity level
+	// Enumeration values:
+	// UNKNOWN: invalid
+	// LOW: low-risk
+	// MEDIUM: Medium risk
+	// HIGH: High risk
+	// CRITICAL: Critical
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// VPR repair priority
+	// Enumeration values:
+	// DEFERRABLE: Can be repaired later
+	// PLANNED: Planned repair
+	// SOON: Fix as soon as possible
+	// URGENT: urgent repair
+	VPRLevel *string `json:"VPRLevel,omitnil,omitempty" name:"VPRLevel"`
+
+	// Detection mode
+	// Enumeration values:
+	// VersionCompare: version comparison
+	// POC: POC detection
+	// VersionComparePOC: version comparison + POC
+	CheckMethod *string `json:"CheckMethod,omitnil,omitempty" name:"CheckMethod"`
+
+	// Risk status
+	// Enumeration value:
+	// PENDING: to be processed.
+	// HANDLED: processed
+	// FIXED: Fixed
+	// SCANNING: Rechecking
+	// IGNORED: ignored
+	// NOT_REQUIRED: No action is required
+	// DELETED: Deleted
+	// FIXING: In remediation
+	// NEED_REBOOT: Fixed and pending restart
+	// FIX_FAILURE: FIX failure
+	RiskStatus *string `json:"RiskStatus,omitnil,omitempty" name:"RiskStatus"`
+
+	// Whether one-click repair is supported
+	SupportFix *bool `json:"SupportFix,omitnil,omitempty" name:"SupportFix"`
+
+	// Last scan time
+	// Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)
+	LatestScanTime *string `json:"LatestScanTime,omitnil,omitempty" name:"LatestScanTime"`
+
+	// Cloud host instance ID
+	// Parameter format: such as ins-xxxxxxxx
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
+
+	// Account AppID
+	AppID *uint64 `json:"AppID,omitnil,omitempty" name:"AppID"`
+}
+
+type HostVulScanStatus struct {
+	// Whether vulnerability scanning has been initiated
+	// Enumeration values:
+	// true: Vulnerability scanning initiated
+	// false: vulnerability scanning not initiated
+	HasScanned *bool `json:"HasScanned,omitnil,omitempty" name:"HasScanned"`
+
+	// If it is the first vulnerability scanning judgment scenario
+	// Enumeration values:
+	// true: is in the first-time vulnerability scanning judgment scenario
+	// false: not in the first vulnerability scanning judgment scenario
+	IsFirstScan *bool `json:"IsFirstScan,omitnil,omitempty" name:"IsFirstScan"`
+
+	// Status of the last scan task
+	// Enumeration values:
+	// SCANNING: scan in progress
+	// SUCCESS: Scan successful
+	// PARTIAL_FAILED: Partial scan failure
+	// ALL_FAILED: All scans failed
+	// STOPPED: Stop scanning
+	ScanTaskStatus *string `json:"ScanTaskStatus,omitnil,omitempty" name:"ScanTaskStatus"`
+
+	// Business status of the page
+	// Enumeration values:
+	// NEVER_SCANNED: Never scanned for vulnerabilities
+	// SCANNING: scan in progress
+	// FIRST_SCAN_FAILED: Vulnerability scanning failed for the first time
+	// FIRST_SCAN_HAS_FIXABLE_VUL: First scan complete, fixable vulnerabilities exist
+	// FIRST_SCAN_NO_FIXABLE_VUL: First scan completed. Vulnerabilities exist but none can be fixed.
+	// FIRST_SCAN_NO_VUL: First scan complete, no vulnerabilities
+	// SCANNED_HAS_FIXABLE_VUL: Not the first scan, fixable vulnerabilities exist
+	// SCANNED_NO_FIXABLE_VUL: Not the first scan. Vulnerabilities exist but none can be fixed.
+	// SCANNED_NO_VUL: Not the first scan, no vulnerabilities
+	ScanScene *string `json:"ScanScene,omitnil,omitempty" name:"ScanScene"`
+
+	// Last scan time
+	// Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)
+	// Returns an empty string if unscanned.
+	LatestScanTime *string `json:"LatestScanTime,omitnil,omitempty" name:"LatestScanTime"`
+
+	// Current total count of pending vulnerabilities
+	// Contains common host vulnerabilities and pending risks of the latest Windows KB.
+	TotalVulCount *int64 `json:"TotalVulCount,omitnil,omitempty" name:"TotalVulCount"`
+
+	// Current number of fixable vulnerabilities
+	// Contains ordinary host vulnerabilities that support one-click repair and the latest pending Windows KB risks.
+	FixableVulCount *int64 `json:"FixableVulCount,omitnil,omitempty" name:"FixableVulCount"`
+
+	// Current number of repairable emergency vulnerabilities
+	// Urgent vulnerabilities are prioritized for categorization: urgent vulnerabilities are only counted into this field and no longer included in the Linux software vulnerability count.
+	FixableEmergencyCount *int64 `json:"FixableEmergencyCount,omitnil,omitempty" name:"FixableEmergencyCount"`
+
+	// Current number of repairable Linux software vulnerabilities
+	// Only non-emergency Linux software vulnerabilities are counted.
+	FixableLinuxVulCount *int64 `json:"FixableLinuxVulCount,omitnil,omitempty" name:"FixableLinuxVulCount"`
+
+	// Number of currently repairable patches for Windows systems
+	// Statistics of the latest pending Windows KB risks.
+	FixableWindowVulCount *int64 `json:"FixableWindowVulCount,omitnil,omitempty" name:"FixableWindowVulCount"`
 }
 
 type IPIntelInfo struct {
@@ -57685,7 +58924,7 @@ func (r *InstallSandboxPluginResponse) FromJsonString(s string) error {
 }
 
 type InstanceIDWithAppIdItem struct {
-	// AppId of the machine ownership
+	// AppId of the machine
 	AppId *uint64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// Machine instance ID.
@@ -58401,6 +59640,90 @@ type LoginWhiteCombinedInfo struct {
 
 	// <p>Login location</p>
 	Locations *string `json:"Locations,omitnil,omitempty" name:"Locations"`
+}
+
+type LoginWhiteItem struct {
+	// <p>Allowlist type: Custom - custom allowlist; Learn - self-learning allowlist</p>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// <p>AppId of the account associated with the policy, used to distinguish and locate for subsequent editing in multi-account scenarios</p>
+	AppId *uint64 `json:"AppId,omitnil,omitempty" name:"AppId"`
+
+	// <p>Rule ID; for self-learning, it is the rule group ID (minimum line ID in the group)</p>
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// <p>Login source IP (comma-separated); self-learning allowlist is always empty</p>
+	SrcIp *string `json:"SrcIp,omitnil,omitempty" name:"SrcIp"`
+
+	// <p>Login usernames (separate with commas); self-learning allowlist is always empty</p>
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// <p>Starting HH:MM when logging in; the self-learning allowlist is always empty</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>Login period ends at HH:MM; self-learning allowlist is always empty</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>Common login location list</p>
+	Places []*LoginWhitePlace `json:"Places,omitnil,omitempty" name:"Places"`
+
+	// <p>Common login location display copy (comma-separated) for direct display in the list</p>
+	Locations *string `json:"Locations,omitnil,omitempty" name:"Locations"`
+
+	// <p>Effective asset scope: 0-specified hosts (host or tag hit) 1-all hosts</p>
+	Scope *int64 `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// <p>Effective host QUUID list (one-to-one correspondence with InstanceIDs)</p>
+	QUUIDS []*string `json:"QUUIDS,omitnil,omitempty" name:"QUUIDS"`
+
+	// <p>List of host instance IDs that take effect (one-to-one correspondence with QUUIDS)</p>
+	InstanceIDs []*string `json:"InstanceIDs,omitnil,omitempty" name:"InstanceIDs"`
+
+	// <p>Remove host QUUID list</p>
+	ExcludeQUUIDS []*string `json:"ExcludeQUUIDS,omitnil,omitempty" name:"ExcludeQUUIDS"`
+
+	// <p>Host instance ID list for removal</p>
+	ExcludeInstanceIDs []*string `json:"ExcludeInstanceIDs,omitnil,omitempty" name:"ExcludeInstanceIDs"`
+
+	// <p>List of effective tag details.</p>
+	TagItems []*EDRRuleTagItem `json:"TagItems,omitnil,omitempty" name:"TagItems"`
+
+	// <p>Hosts: custom to the specified number of hosts (0 when Scope=1, all hosts displayed on the front-end); self-learning is the number of deduplicated hosts in the group</p>
+	HostCount *int64 `json:"HostCount,omitnil,omitempty" name:"HostCount"`
+
+	// <p>Remarks.</p>
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// <p>Creation time, format 2006-01-02 15:04:05</p>
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// <p>Last modification time, format 2006-01-02 15:04:05</p>
+	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
+}
+
+type LoginWhitePlace struct {
+	// <p>Country ID</p>
+	CountryId *int64 `json:"CountryId,omitnil,omitempty" name:"CountryId"`
+
+	// <p>Province ID; 99999 means all provinces</p>
+	ProvinceId *int64 `json:"ProvinceId,omitnil,omitempty" name:"ProvinceId"`
+
+	// <p>City ID; 99999 means all cities</p>
+	CityId *int64 `json:"CityId,omitnil,omitempty" name:"CityId"`
+
+	// <p>Location display copy, generated by the server based on Language, for example, China-Guangdong-Shenzhen</p>
+	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
+}
+
+type LoginWhitePlaceInput struct {
+	// <p>Country ID. Currently, only 1 is supported, indicating China.</p>
+	CountryId *int64 `json:"CountryId,omitnil,omitempty" name:"CountryId"`
+
+	// <p>Province ID; 99999 means all provinces</p>
+	ProvinceId *int64 `json:"ProvinceId,omitnil,omitempty" name:"ProvinceId"`
+
+	// <p>City ID; 99999 means all cities</p>
+	CityId *int64 `json:"CityId,omitnil,omitempty" name:"CityId"`
 }
 
 type Machine struct {
@@ -59828,6 +61151,102 @@ func (r *ModifyBanModeResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyBanModeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyBaselineIgnorePolicyRequestParams struct {
+	// <p>Detection item ID, identifying which detection item to set an ignore policy for.</p>
+	ItemID *uint64 `json:"ItemID,omitnil,omitempty" name:"ItemID"`
+
+	// <p>Ignorable range type.</p><p>Enumeration values:</p><ul><li>ALL: all assets</li><li>PICK: specified asset</li></ul>
+	ScopeType *string `json:"ScopeType,omitnil,omitempty" name:"ScopeType"`
+
+	// <p>Remark information.</p>
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// <p>Ignore policy record ID. Pass 0 when creating, and pass the corresponding record ID when updating.</p>
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// <p>Custom asset ID list. This parameter is valid only when PICK is selected. Import instance-id or cluster ID.</p>
+	ScopeIncludeList []*string `json:"ScopeIncludeList,omitnil,omitempty" name:"ScopeIncludeList"`
+
+	// <p>Remove asset ID list. This parameter is valid only when set to ALL. Input instance-id or cluster ID.</p>
+	ScopeExcludeList []*string `json:"ScopeExcludeList,omitnil,omitempty" name:"ScopeExcludeList"`
+
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+type ModifyBaselineIgnorePolicyRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Detection item ID, identifying which detection item to set an ignore policy for.</p>
+	ItemID *uint64 `json:"ItemID,omitnil,omitempty" name:"ItemID"`
+
+	// <p>Ignorable range type.</p><p>Enumeration values:</p><ul><li>ALL: all assets</li><li>PICK: specified asset</li></ul>
+	ScopeType *string `json:"ScopeType,omitnil,omitempty" name:"ScopeType"`
+
+	// <p>Remark information.</p>
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// <p>Ignore policy record ID. Pass 0 when creating, and pass the corresponding record ID when updating.</p>
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// <p>Custom asset ID list. This parameter is valid only when PICK is selected. Import instance-id or cluster ID.</p>
+	ScopeIncludeList []*string `json:"ScopeIncludeList,omitnil,omitempty" name:"ScopeIncludeList"`
+
+	// <p>Remove asset ID list. This parameter is valid only when set to ALL. Input instance-id or cluster ID.</p>
+	ScopeExcludeList []*string `json:"ScopeExcludeList,omitnil,omitempty" name:"ScopeExcludeList"`
+
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+}
+
+func (r *ModifyBaselineIgnorePolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBaselineIgnorePolicyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ItemID")
+	delete(f, "ScopeType")
+	delete(f, "Remark")
+	delete(f, "ID")
+	delete(f, "ScopeIncludeList")
+	delete(f, "ScopeExcludeList")
+	delete(f, "MemberId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyBaselineIgnorePolicyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyBaselineIgnorePolicyResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyBaselineIgnorePolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyBaselineIgnorePolicyResponseParams `json:"Response"`
+}
+
+func (r *ModifyBaselineIgnorePolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyBaselineIgnorePolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -65157,6 +66576,264 @@ type ModifyLoginTypeFailInfo struct {
 
 	// <p>Failure reason</p>
 	MessageDesc *string `json:"MessageDesc,omitnil,omitempty" name:"MessageDesc"`
+}
+
+// Predefined struct for user
+type ModifyLoginWhiteCustomEDRRequestParams struct {
+	// <p>Rule ID; for self-learning, it is the rule group ID (minimum line ID in the group)</p>
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>Login source IP. Use commas (,) to separate multiple items. Supports individual IPs, intervals (a-b), and CIDR. Supports IPv4 and IPv6. Up to 2048 characters.</p>
+	SrcIp *string `json:"SrcIp,omitnil,omitempty" name:"SrcIp"`
+
+	// <p>Login username separated by commas; up to 1024 characters</p>
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// <p>Login time start HH:MM; it must be filled in or left empty simultaneously with EndTime</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>Login period end HH:MM; must be filled in or empty at the same time as StartTime</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>List of common login locations, up to 200. Set ProvinceId/CityId to 99999 to indicate all provinces/all cities.</p>
+	Places []*LoginWhitePlaceInput `json:"Places,omitnil,omitempty" name:"Places"`
+
+	// <p>Remark, up to 255 characters</p>
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// <p>Effective asset scope: 0-specified hosts (host or tag hit) 1-all hosts</p>
+	Scope *int64 `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// <p>List of specified hosts (in instance ID form), up to 10,000 items. The server translates them to QUUIDs via idmap, then merges and deduplicates them with QUUIDSWithAppId.</p>
+	InstanceIDsWithAppId []*InstanceIDWithAppIdItem `json:"InstanceIDsWithAppId,omitnil,omitempty" name:"InstanceIDsWithAppId"`
+
+	// <p>List of hosts (instance ID form) to remove, up to 10,000 items</p>
+	ExcludeInstanceIDsWithAppId []*InstanceIDWithAppIdItem `json:"ExcludeInstanceIDsWithAppId,omitnil,omitempty" name:"ExcludeInstanceIDsWithAppId"`
+
+	// <p>Security center tag ID list, up to 100. When Scope=0, it is in an OR relationship with the host. Self-learning allowlist does not support taking effect by tag (a non-empty value will be rejected).</p>
+	TagIDs []*string `json:"TagIDs,omitnil,omitempty" name:"TagIDs"`
+
+	// <p>Target appid</p>
+	TargetAppIDs []*uint64 `json:"TargetAppIDs,omitnil,omitempty" name:"TargetAppIDs"`
+
+	// <p>Whether to add historical alarm data to whitelist</p>
+	DealOldEvents *int64 `json:"DealOldEvents,omitnil,omitempty" name:"DealOldEvents"`
+}
+
+type ModifyLoginWhiteCustomEDRRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Rule ID; for self-learning, it is the rule group ID (minimum line ID in the group)</p>
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>Login source IP. Use commas (,) to separate multiple items. Supports individual IPs, intervals (a-b), and CIDR. Supports IPv4 and IPv6. Up to 2048 characters.</p>
+	SrcIp *string `json:"SrcIp,omitnil,omitempty" name:"SrcIp"`
+
+	// <p>Login username separated by commas; up to 1024 characters</p>
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// <p>Login time start HH:MM; it must be filled in or left empty simultaneously with EndTime</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// <p>Login period end HH:MM; must be filled in or empty at the same time as StartTime</p>
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// <p>List of common login locations, up to 200. Set ProvinceId/CityId to 99999 to indicate all provinces/all cities.</p>
+	Places []*LoginWhitePlaceInput `json:"Places,omitnil,omitempty" name:"Places"`
+
+	// <p>Remark, up to 255 characters</p>
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// <p>Effective asset scope: 0-specified hosts (host or tag hit) 1-all hosts</p>
+	Scope *int64 `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// <p>List of specified hosts (in instance ID form), up to 10,000 items. The server translates them to QUUIDs via idmap, then merges and deduplicates them with QUUIDSWithAppId.</p>
+	InstanceIDsWithAppId []*InstanceIDWithAppIdItem `json:"InstanceIDsWithAppId,omitnil,omitempty" name:"InstanceIDsWithAppId"`
+
+	// <p>List of hosts (instance ID form) to remove, up to 10,000 items</p>
+	ExcludeInstanceIDsWithAppId []*InstanceIDWithAppIdItem `json:"ExcludeInstanceIDsWithAppId,omitnil,omitempty" name:"ExcludeInstanceIDsWithAppId"`
+
+	// <p>Security center tag ID list, up to 100. When Scope=0, it is in an OR relationship with the host. Self-learning allowlist does not support taking effect by tag (a non-empty value will be rejected).</p>
+	TagIDs []*string `json:"TagIDs,omitnil,omitempty" name:"TagIDs"`
+
+	// <p>Target appid</p>
+	TargetAppIDs []*uint64 `json:"TargetAppIDs,omitnil,omitempty" name:"TargetAppIDs"`
+
+	// <p>Whether to add historical alarm data to whitelist</p>
+	DealOldEvents *int64 `json:"DealOldEvents,omitnil,omitempty" name:"DealOldEvents"`
+}
+
+func (r *ModifyLoginWhiteCustomEDRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLoginWhiteCustomEDRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "MemberId")
+	delete(f, "SrcIp")
+	delete(f, "UserName")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Places")
+	delete(f, "Remark")
+	delete(f, "Scope")
+	delete(f, "InstanceIDsWithAppId")
+	delete(f, "ExcludeInstanceIDsWithAppId")
+	delete(f, "TagIDs")
+	delete(f, "TargetAppIDs")
+	delete(f, "DealOldEvents")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLoginWhiteCustomEDRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLoginWhiteCustomEDRResponseParams struct {
+	// <p>Failed account</p>
+	FailedAppIds []*uint64 `json:"FailedAppIds,omitnil,omitempty" name:"FailedAppIds"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyLoginWhiteCustomEDRResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyLoginWhiteCustomEDRResponseParams `json:"Response"`
+}
+
+func (r *ModifyLoginWhiteCustomEDRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLoginWhiteCustomEDRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLoginWhiteLearnEDRRequestParams struct {
+	// <p>Rule ID; for self-learning, it is the rule group ID (minimum line ID in the group)</p>
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// <p>List of common login locations. Required. 1-200 entries. It is the unique content dimension of the self-learning rule.</p>
+	Places []*LoginWhitePlaceInput `json:"Places,omitnil,omitempty" name:"Places"`
+
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>AppId of the account associated with the policy (obtained from the list output parameter AppId); if empty, the current account is used; non-current accounts must pass ownership verification</p>
+	RuleAppId *uint64 `json:"RuleAppId,omitnil,omitempty" name:"RuleAppId"`
+
+	// <p>Remark, up to 255 characters</p>
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// <p>Effective asset scope: 0-specified hosts (host or tag hit) 1-all hosts</p>
+	Scope *int64 `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// <p>List of specified hosts (in instance ID form), up to 10,000 items. The server translates them to QUUIDs via idmap, then merges and deduplicates them with QUUIDSWithAppId.</p>
+	InstanceIDsWithAppId []*InstanceIDWithAppIdItem `json:"InstanceIDsWithAppId,omitnil,omitempty" name:"InstanceIDsWithAppId"`
+
+	// <p>List of hosts (instance ID form) to remove, up to 10,000 items</p>
+	ExcludeInstanceIDsWithAppId []*InstanceIDWithAppIdItem `json:"ExcludeInstanceIDsWithAppId,omitnil,omitempty" name:"ExcludeInstanceIDsWithAppId"`
+
+	// <p>Security center tag ID list, up to 100. When Scope=0, it is in an OR relationship with the host. Self-learning allowlist does not support taking effect by tag (a non-empty value will be rejected).</p>
+	TagIDs []*string `json:"TagIDs,omitnil,omitempty" name:"TagIDs"`
+}
+
+type ModifyLoginWhiteLearnEDRRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Rule ID; for self-learning, it is the rule group ID (minimum line ID in the group)</p>
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// <p>List of common login locations. Required. 1-200 entries. It is the unique content dimension of the self-learning rule.</p>
+	Places []*LoginWhitePlaceInput `json:"Places,omitnil,omitempty" name:"Places"`
+
+	// <p>Group account member id</p>
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	// <p>AppId of the account associated with the policy (obtained from the list output parameter AppId); if empty, the current account is used; non-current accounts must pass ownership verification</p>
+	RuleAppId *uint64 `json:"RuleAppId,omitnil,omitempty" name:"RuleAppId"`
+
+	// <p>Remark, up to 255 characters</p>
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// <p>Effective asset scope: 0-specified hosts (host or tag hit) 1-all hosts</p>
+	Scope *int64 `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// <p>List of specified hosts (in instance ID form), up to 10,000 items. The server translates them to QUUIDs via idmap, then merges and deduplicates them with QUUIDSWithAppId.</p>
+	InstanceIDsWithAppId []*InstanceIDWithAppIdItem `json:"InstanceIDsWithAppId,omitnil,omitempty" name:"InstanceIDsWithAppId"`
+
+	// <p>List of hosts (instance ID form) to remove, up to 10,000 items</p>
+	ExcludeInstanceIDsWithAppId []*InstanceIDWithAppIdItem `json:"ExcludeInstanceIDsWithAppId,omitnil,omitempty" name:"ExcludeInstanceIDsWithAppId"`
+
+	// <p>Security center tag ID list, up to 100. When Scope=0, it is in an OR relationship with the host. Self-learning allowlist does not support taking effect by tag (a non-empty value will be rejected).</p>
+	TagIDs []*string `json:"TagIDs,omitnil,omitempty" name:"TagIDs"`
+}
+
+func (r *ModifyLoginWhiteLearnEDRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLoginWhiteLearnEDRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "Places")
+	delete(f, "MemberId")
+	delete(f, "RuleAppId")
+	delete(f, "Remark")
+	delete(f, "Scope")
+	delete(f, "InstanceIDsWithAppId")
+	delete(f, "ExcludeInstanceIDsWithAppId")
+	delete(f, "TagIDs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLoginWhiteLearnEDRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLoginWhiteLearnEDRResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyLoginWhiteLearnEDRResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyLoginWhiteLearnEDRResponseParams `json:"Response"`
+}
+
+func (r *ModifyLoginWhiteLearnEDRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLoginWhiteLearnEDRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

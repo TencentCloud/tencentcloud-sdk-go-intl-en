@@ -1459,6 +1459,66 @@ func (c *Client) CreateAllAssetsExportJobWithContext(ctx context.Context, reques
     return
 }
 
+func NewCreateAssetBaselineRiskExportJobRequest() (request *CreateAssetBaselineRiskExportJobRequest) {
+    request = &CreateAssetBaselineRiskExportJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "CreateAssetBaselineRiskExportJob")
+    
+    
+    return
+}
+
+func NewCreateAssetBaselineRiskExportJobResponse() (response *CreateAssetBaselineRiskExportJobResponse) {
+    response = &CreateAssetBaselineRiskExportJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAssetBaselineRiskExportJob
+// This API is used to create an asset baseline risk export task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAssetBaselineRiskExportJob(request *CreateAssetBaselineRiskExportJobRequest) (response *CreateAssetBaselineRiskExportJobResponse, err error) {
+    return c.CreateAssetBaselineRiskExportJobWithContext(context.Background(), request)
+}
+
+// CreateAssetBaselineRiskExportJob
+// This API is used to create an asset baseline risk export task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateAssetBaselineRiskExportJobWithContext(ctx context.Context, request *CreateAssetBaselineRiskExportJobRequest) (response *CreateAssetBaselineRiskExportJobResponse, err error) {
+    if request == nil {
+        request = NewCreateAssetBaselineRiskExportJobRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "CreateAssetBaselineRiskExportJob")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAssetBaselineRiskExportJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAssetBaselineRiskExportJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAssetComponentListExportJobRequest() (request *CreateAssetComponentListExportJobRequest) {
     request = &CreateAssetComponentListExportJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8107,6 +8167,66 @@ func (c *Client) DeleteAssetTagWithContext(ctx context.Context, request *DeleteA
     return
 }
 
+func NewDeleteBaselineIgnorePolicyRequest() (request *DeleteBaselineIgnorePolicyRequest) {
+    request = &DeleteBaselineIgnorePolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DeleteBaselineIgnorePolicy")
+    
+    
+    return
+}
+
+func NewDeleteBaselineIgnorePolicyResponse() (response *DeleteBaselineIgnorePolicyResponse) {
+    response = &DeleteBaselineIgnorePolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteBaselineIgnorePolicy
+// Delete baseline ignore policy
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteBaselineIgnorePolicy(request *DeleteBaselineIgnorePolicyRequest) (response *DeleteBaselineIgnorePolicyResponse, err error) {
+    return c.DeleteBaselineIgnorePolicyWithContext(context.Background(), request)
+}
+
+// DeleteBaselineIgnorePolicy
+// Delete baseline ignore policy
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteBaselineIgnorePolicyWithContext(ctx context.Context, request *DeleteBaselineIgnorePolicyRequest) (response *DeleteBaselineIgnorePolicyResponse, err error) {
+    if request == nil {
+        request = NewDeleteBaselineIgnorePolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DeleteBaselineIgnorePolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteBaselineIgnorePolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteBaselineIgnorePolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteBaselineSelfDefinedPolicyListRequest() (request *DeleteBaselineSelfDefinedPolicyListRequest) {
     request = &DeleteBaselineSelfDefinedPolicyListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -10535,6 +10655,114 @@ func (c *Client) DeleteImageVulWhitelistWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDeleteImageVulWhitelistResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLoginWhiteCustomEDRRequest() (request *DeleteLoginWhiteCustomEDRRequest) {
+    request = &DeleteLoginWhiteCustomEDRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DeleteLoginWhiteCustomEDR")
+    
+    
+    return
+}
+
+func NewDeleteLoginWhiteCustomEDRResponse() (response *DeleteLoginWhiteCustomEDRResponse) {
+    response = &DeleteLoginWhiteCustomEDRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteLoginWhiteCustomEDR
+// This API is used to delete CSC abnormal login custom allowlist entries in batches (soft delete, status=2), with support for cross-page select all. Either Ids or SelectAll is required. If both are empty, InvalidParameter is returned. If the total amount of cross-page select all exceeds 100,000 entries, the entire request is denied.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteLoginWhiteCustomEDR(request *DeleteLoginWhiteCustomEDRRequest) (response *DeleteLoginWhiteCustomEDRResponse, err error) {
+    return c.DeleteLoginWhiteCustomEDRWithContext(context.Background(), request)
+}
+
+// DeleteLoginWhiteCustomEDR
+// This API is used to delete CSC abnormal login custom allowlist entries in batches (soft delete, status=2), with support for cross-page select all. Either Ids or SelectAll is required. If both are empty, InvalidParameter is returned. If the total amount of cross-page select all exceeds 100,000 entries, the entire request is denied.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteLoginWhiteCustomEDRWithContext(ctx context.Context, request *DeleteLoginWhiteCustomEDRRequest) (response *DeleteLoginWhiteCustomEDRResponse, err error) {
+    if request == nil {
+        request = NewDeleteLoginWhiteCustomEDRRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DeleteLoginWhiteCustomEDR")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteLoginWhiteCustomEDR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteLoginWhiteCustomEDRResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLoginWhiteLearnEDRRequest() (request *DeleteLoginWhiteLearnEDRRequest) {
+    request = &DeleteLoginWhiteLearnEDRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DeleteLoginWhiteLearnEDR")
+    
+    
+    return
+}
+
+func NewDeleteLoginWhiteLearnEDRResponse() (response *DeleteLoginWhiteLearnEDRResponse) {
+    response = &DeleteLoginWhiteLearnEDRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteLoginWhiteLearnEDR
+// Delete CSC abnormal login self-learning allowlist rule groups in batches (soft delete the entire group with enable=0). Import any row ID in a group to locate the entire group. Cross-page select all is supported (cap: 100,000 rule groups). Once deleted, the groups will not be automatically re-learned. You need to toggle self-learning again to update the learning anchor. This interface does not rescan historical alarms.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteLoginWhiteLearnEDR(request *DeleteLoginWhiteLearnEDRRequest) (response *DeleteLoginWhiteLearnEDRResponse, err error) {
+    return c.DeleteLoginWhiteLearnEDRWithContext(context.Background(), request)
+}
+
+// DeleteLoginWhiteLearnEDR
+// Delete CSC abnormal login self-learning allowlist rule groups in batches (soft delete the entire group with enable=0). Import any row ID in a group to locate the entire group. Cross-page select all is supported (cap: 100,000 rule groups). Once deleted, the groups will not be automatically re-learned. You need to toggle self-learning again to update the learning anchor. This interface does not rescan historical alarms.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteLoginWhiteLearnEDRWithContext(ctx context.Context, request *DeleteLoginWhiteLearnEDRRequest) (response *DeleteLoginWhiteLearnEDRResponse, err error) {
+    if request == nil {
+        request = NewDeleteLoginWhiteLearnEDRRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DeleteLoginWhiteLearnEDR")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteLoginWhiteLearnEDR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteLoginWhiteLearnEDRResponse()
     err = c.Send(request, response)
     return
 }
@@ -12985,6 +13213,68 @@ func (c *Client) DescribeAlertListWithContext(ctx context.Context, request *Desc
     return
 }
 
+func NewDescribeAssetBaselineRiskListRequest() (request *DescribeAssetBaselineRiskListRequest) {
+    request = &DescribeAssetBaselineRiskListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeAssetBaselineRiskList")
+    
+    
+    return
+}
+
+func NewDescribeAssetBaselineRiskListResponse() (response *DescribeAssetBaselineRiskListResponse) {
+    response = &DescribeAssetBaselineRiskListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAssetBaselineRiskList
+// This API is used to obtain the asset risk list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeAssetBaselineRiskList(request *DescribeAssetBaselineRiskListRequest) (response *DescribeAssetBaselineRiskListResponse, err error) {
+    return c.DescribeAssetBaselineRiskListWithContext(context.Background(), request)
+}
+
+// DescribeAssetBaselineRiskList
+// This API is used to obtain the asset risk list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeAssetBaselineRiskListWithContext(ctx context.Context, request *DescribeAssetBaselineRiskListRequest) (response *DescribeAssetBaselineRiskListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAssetBaselineRiskListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeAssetBaselineRiskList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAssetBaselineRiskList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAssetBaselineRiskListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAssetComponentListRequest() (request *DescribeAssetComponentListRequest) {
     request = &DescribeAssetComponentListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -14851,6 +15141,70 @@ func (c *Client) DescribeBaselineFixRecordListWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDescribeBaselineFixRecordListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBaselineIgnorePolicyListRequest() (request *DescribeBaselineIgnorePolicyListRequest) {
+    request = &DescribeBaselineIgnorePolicyListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeBaselineIgnorePolicyList")
+    
+    
+    return
+}
+
+func NewDescribeBaselineIgnorePolicyListResponse() (response *DescribeBaselineIgnorePolicyListResponse) {
+    response = &DescribeBaselineIgnorePolicyListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBaselineIgnorePolicyList
+// Queries the baseline ignore policy list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeBaselineIgnorePolicyList(request *DescribeBaselineIgnorePolicyListRequest) (response *DescribeBaselineIgnorePolicyListResponse, err error) {
+    return c.DescribeBaselineIgnorePolicyListWithContext(context.Background(), request)
+}
+
+// DescribeBaselineIgnorePolicyList
+// Queries the baseline ignore policy list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeBaselineIgnorePolicyListWithContext(ctx context.Context, request *DescribeBaselineIgnorePolicyListRequest) (response *DescribeBaselineIgnorePolicyListResponse, err error) {
+    if request == nil {
+        request = NewDescribeBaselineIgnorePolicyListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeBaselineIgnorePolicyList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBaselineIgnorePolicyList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBaselineIgnorePolicyListResponse()
     err = c.Send(request, response)
     return
 }
@@ -18083,6 +18437,58 @@ func (c *Client) DescribeClusterAssetsWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeClusterAssetsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeClusterBaselineRiskPolicyListRequest() (request *DescribeClusterBaselineRiskPolicyListRequest) {
+    request = &DescribeClusterBaselineRiskPolicyListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeClusterBaselineRiskPolicyList")
+    
+    
+    return
+}
+
+func NewDescribeClusterBaselineRiskPolicyListResponse() (response *DescribeClusterBaselineRiskPolicyListResponse) {
+    response = &DescribeClusterBaselineRiskPolicyListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeClusterBaselineRiskPolicyList
+// Get the cluster risk policy list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeClusterBaselineRiskPolicyList(request *DescribeClusterBaselineRiskPolicyListRequest) (response *DescribeClusterBaselineRiskPolicyListResponse, err error) {
+    return c.DescribeClusterBaselineRiskPolicyListWithContext(context.Background(), request)
+}
+
+// DescribeClusterBaselineRiskPolicyList
+// Get the cluster risk policy list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeClusterBaselineRiskPolicyListWithContext(ctx context.Context, request *DescribeClusterBaselineRiskPolicyListRequest) (response *DescribeClusterBaselineRiskPolicyListResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterBaselineRiskPolicyListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeClusterBaselineRiskPolicyList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterBaselineRiskPolicyList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeClusterBaselineRiskPolicyListResponse()
     err = c.Send(request, response)
     return
 }
@@ -26871,6 +27277,60 @@ func (c *Client) DescribeEdrLogCollectPathsWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeEdrMalwareFileRequest() (request *DescribeEdrMalwareFileRequest) {
+    request = &DescribeEdrMalwareFileRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeEdrMalwareFile")
+    
+    
+    return
+}
+
+func NewDescribeEdrMalwareFileResponse() (response *DescribeEdrMalwareFileResponse) {
+    response = &DescribeEdrMalwareFileResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeEdrMalwareFile
+// Locate malicious file alarms by EDR alarm ID and return the download URL of the malicious sample. Only alarms with alert_sub_type=1 (malicious file) can be downloaded. Other sub-types are handled as resource not found. Public cloud returns a COS presigned URL (valid for 1 hour). Non-public cloud returns a base64 DataURL and FileName when the export switch is on. In cross-account scenarios, TargetAppId specifies the account that owns the alarm, and ownership verification is performed (fail-close, InvalidParameter is returned if no permission).
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeEdrMalwareFile(request *DescribeEdrMalwareFileRequest) (response *DescribeEdrMalwareFileResponse, err error) {
+    return c.DescribeEdrMalwareFileWithContext(context.Background(), request)
+}
+
+// DescribeEdrMalwareFile
+// Locate malicious file alarms by EDR alarm ID and return the download URL of the malicious sample. Only alarms with alert_sub_type=1 (malicious file) can be downloaded. Other sub-types are handled as resource not found. Public cloud returns a COS presigned URL (valid for 1 hour). Non-public cloud returns a base64 DataURL and FileName when the export switch is on. In cross-account scenarios, TargetAppId specifies the account that owns the alarm, and ownership verification is performed (fail-close, InvalidParameter is returned if no permission).
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeEdrMalwareFileWithContext(ctx context.Context, request *DescribeEdrMalwareFileRequest) (response *DescribeEdrMalwareFileResponse, err error) {
+    if request == nil {
+        request = NewDescribeEdrMalwareFileRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeEdrMalwareFile")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEdrMalwareFile require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeEdrMalwareFileResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeExportJobDownloadURLRequest() (request *DescribeExportJobDownloadURLRequest) {
     request = &DescribeExportJobDownloadURLRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -26894,9 +27354,9 @@ func NewDescribeExportJobDownloadURLResponse() (response *DescribeExportJobDownl
 // Result download URL of an export task
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExportJobDownloadURL(request *DescribeExportJobDownloadURLRequest) (response *DescribeExportJobDownloadURLResponse, err error) {
     return c.DescribeExportJobDownloadURLWithContext(context.Background(), request)
 }
@@ -26905,9 +27365,9 @@ func (c *Client) DescribeExportJobDownloadURL(request *DescribeExportJobDownload
 // Result download URL of an export task
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExportJobDownloadURLWithContext(ctx context.Context, request *DescribeExportJobDownloadURLRequest) (response *DescribeExportJobDownloadURLResponse, err error) {
     if request == nil {
         request = NewDescribeExportJobDownloadURLRequest()
@@ -26948,9 +27408,9 @@ func NewDescribeExportJobManageListResponse() (response *DescribeExportJobManage
 // Exports the task list
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExportJobManageList(request *DescribeExportJobManageListRequest) (response *DescribeExportJobManageListResponse, err error) {
     return c.DescribeExportJobManageListWithContext(context.Background(), request)
 }
@@ -26959,9 +27419,9 @@ func (c *Client) DescribeExportJobManageList(request *DescribeExportJobManageLis
 // Exports the task list
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExportJobManageListWithContext(ctx context.Context, request *DescribeExportJobManageListRequest) (response *DescribeExportJobManageListResponse, err error) {
     if request == nil {
         request = NewDescribeExportJobManageListRequest()
@@ -27002,9 +27462,9 @@ func NewDescribeExposeAssetCategoryResponse() (response *DescribeExposeAssetCate
 // Cloud boundary analysis asset category
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposeAssetCategory(request *DescribeExposeAssetCategoryRequest) (response *DescribeExposeAssetCategoryResponse, err error) {
     return c.DescribeExposeAssetCategoryWithContext(context.Background(), request)
 }
@@ -27013,9 +27473,9 @@ func (c *Client) DescribeExposeAssetCategory(request *DescribeExposeAssetCategor
 // Cloud boundary analysis asset category
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposeAssetCategoryWithContext(ctx context.Context, request *DescribeExposeAssetCategoryRequest) (response *DescribeExposeAssetCategoryResponse, err error) {
     if request == nil {
         request = NewDescribeExposeAssetCategoryRequest()
@@ -27056,9 +27516,9 @@ func NewDescribeExposePathResponse() (response *DescribeExposePathResponse) {
 // Query the cloud boundary analysis path node
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposePath(request *DescribeExposePathRequest) (response *DescribeExposePathResponse, err error) {
     return c.DescribeExposePathWithContext(context.Background(), request)
 }
@@ -27067,9 +27527,9 @@ func (c *Client) DescribeExposePath(request *DescribeExposePathRequest) (respons
 // Query the cloud boundary analysis path node
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposePathWithContext(ctx context.Context, request *DescribeExposePathRequest) (response *DescribeExposePathResponse, err error) {
     if request == nil {
         request = NewDescribeExposePathRequest()
@@ -27110,9 +27570,9 @@ func NewDescribeExposeRiskStatisticsResponse() (response *DescribeExposeRiskStat
 // Pending risks to be governed for cloud boundaries
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposeRiskStatistics(request *DescribeExposeRiskStatisticsRequest) (response *DescribeExposeRiskStatisticsResponse, err error) {
     return c.DescribeExposeRiskStatisticsWithContext(context.Background(), request)
 }
@@ -27121,9 +27581,9 @@ func (c *Client) DescribeExposeRiskStatistics(request *DescribeExposeRiskStatist
 // Pending risks to be governed for cloud boundaries
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposeRiskStatisticsWithContext(ctx context.Context, request *DescribeExposeRiskStatisticsRequest) (response *DescribeExposeRiskStatisticsResponse, err error) {
     if request == nil {
         request = NewDescribeExposeRiskStatisticsRequest()
@@ -27164,9 +27624,9 @@ func NewDescribeExposeRisksResponse() (response *DescribeExposeRisksResponse) {
 // List of pending risks in cloud boundaries
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposeRisks(request *DescribeExposeRisksRequest) (response *DescribeExposeRisksResponse, err error) {
     return c.DescribeExposeRisksWithContext(context.Background(), request)
 }
@@ -27175,9 +27635,9 @@ func (c *Client) DescribeExposeRisks(request *DescribeExposeRisksRequest) (respo
 // List of pending risks in cloud boundaries
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposeRisksWithContext(ctx context.Context, request *DescribeExposeRisksRequest) (response *DescribeExposeRisksResponse, err error) {
     if request == nil {
         request = NewDescribeExposeRisksRequest()
@@ -27218,9 +27678,9 @@ func NewDescribeExposeRulesResponse() (response *DescribeExposeRulesResponse) {
 // List of boundary rules
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposeRules(request *DescribeExposeRulesRequest) (response *DescribeExposeRulesResponse, err error) {
     return c.DescribeExposeRulesWithContext(context.Background(), request)
 }
@@ -27229,9 +27689,9 @@ func (c *Client) DescribeExposeRules(request *DescribeExposeRulesRequest) (respo
 // List of boundary rules
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposeRulesWithContext(ctx context.Context, request *DescribeExposeRulesRequest) (response *DescribeExposeRulesResponse, err error) {
     if request == nil {
         request = NewDescribeExposeRulesRequest()
@@ -27272,9 +27732,9 @@ func NewDescribeExposureAutoTagAttributeResponse() (response *DescribeExposureAu
 // Rule attributes for automatic tagging at cloud boundaries
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposureAutoTagAttribute(request *DescribeExposureAutoTagAttributeRequest) (response *DescribeExposureAutoTagAttributeResponse, err error) {
     return c.DescribeExposureAutoTagAttributeWithContext(context.Background(), request)
 }
@@ -27283,9 +27743,9 @@ func (c *Client) DescribeExposureAutoTagAttribute(request *DescribeExposureAutoT
 // Rule attributes for automatic tagging at cloud boundaries
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposureAutoTagAttributeWithContext(ctx context.Context, request *DescribeExposureAutoTagAttributeRequest) (response *DescribeExposureAutoTagAttributeResponse, err error) {
     if request == nil {
         request = NewDescribeExposureAutoTagAttributeRequest()
@@ -27326,9 +27786,9 @@ func NewDescribeExposureAutoTagRulesResponse() (response *DescribeExposureAutoTa
 // Automatic tagging of cloud boundaries - rule list
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposureAutoTagRules(request *DescribeExposureAutoTagRulesRequest) (response *DescribeExposureAutoTagRulesResponse, err error) {
     return c.DescribeExposureAutoTagRulesWithContext(context.Background(), request)
 }
@@ -27337,9 +27797,9 @@ func (c *Client) DescribeExposureAutoTagRules(request *DescribeExposureAutoTagRu
 // Automatic tagging of cloud boundaries - rule list
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposureAutoTagRulesWithContext(ctx context.Context, request *DescribeExposureAutoTagRulesRequest) (response *DescribeExposureAutoTagRulesResponse, err error) {
     if request == nil {
         request = NewDescribeExposureAutoTagRulesRequest()
@@ -27380,9 +27840,9 @@ func NewDescribeExposureTrendResponse() (response *DescribeExposureTrendResponse
 // Query Internet exposure cycle count trend statistics.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposureTrend(request *DescribeExposureTrendRequest) (response *DescribeExposureTrendResponse, err error) {
     return c.DescribeExposureTrendWithContext(context.Background(), request)
 }
@@ -27391,9 +27851,9 @@ func (c *Client) DescribeExposureTrend(request *DescribeExposureTrendRequest) (r
 // Query Internet exposure cycle count trend statistics.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposureTrendWithContext(ctx context.Context, request *DescribeExposureTrendRequest) (response *DescribeExposureTrendResponse, err error) {
     if request == nil {
         request = NewDescribeExposureTrendRequest()
@@ -27434,9 +27894,9 @@ func NewDescribeExposuresResponse() (response *DescribeExposuresResponse) {
 // Cloud boundary analysis asset list
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposures(request *DescribeExposuresRequest) (response *DescribeExposuresResponse, err error) {
     return c.DescribeExposuresWithContext(context.Background(), request)
 }
@@ -27445,9 +27905,9 @@ func (c *Client) DescribeExposures(request *DescribeExposuresRequest) (response 
 // Cloud boundary analysis asset list
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeExposuresWithContext(ctx context.Context, request *DescribeExposuresRequest) (response *DescribeExposuresResponse, err error) {
     if request == nil {
         request = NewDescribeExposuresRequest()
@@ -27488,9 +27948,9 @@ func NewDescribeGatewayAssetsResponse() (response *DescribeGatewayAssetsResponse
 // Obtain Gateway List
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeGatewayAssets(request *DescribeGatewayAssetsRequest) (response *DescribeGatewayAssetsResponse, err error) {
     return c.DescribeGatewayAssetsWithContext(context.Background(), request)
 }
@@ -27499,9 +27959,9 @@ func (c *Client) DescribeGatewayAssets(request *DescribeGatewayAssetsRequest) (r
 // Obtain Gateway List
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeGatewayAssetsWithContext(ctx context.Context, request *DescribeGatewayAssetsRequest) (response *DescribeGatewayAssetsResponse, err error) {
     if request == nil {
         request = NewDescribeGatewayAssetsRequest()
@@ -27542,9 +28002,9 @@ func NewDescribeHighBaseLineRiskListResponse() (response *DescribeHighBaseLineRi
 // Query the high-risk baseline risk list of host nodes under the cloud boundary analysis exposed path.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeHighBaseLineRiskList(request *DescribeHighBaseLineRiskListRequest) (response *DescribeHighBaseLineRiskListResponse, err error) {
     return c.DescribeHighBaseLineRiskListWithContext(context.Background(), request)
 }
@@ -27553,9 +28013,9 @@ func (c *Client) DescribeHighBaseLineRiskList(request *DescribeHighBaseLineRiskL
 // Query the high-risk baseline risk list of host nodes under the cloud boundary analysis exposed path.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeHighBaseLineRiskListWithContext(ctx context.Context, request *DescribeHighBaseLineRiskListRequest) (response *DescribeHighBaseLineRiskListResponse, err error) {
     if request == nil {
         request = NewDescribeHighBaseLineRiskListRequest()
@@ -27596,9 +28056,9 @@ func NewDescribeHostKBRiskListResponse() (response *DescribeHostKBRiskListRespon
 // Search the host kb risk list.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeHostKBRiskList(request *DescribeHostKBRiskListRequest) (response *DescribeHostKBRiskListResponse, err error) {
     return c.DescribeHostKBRiskListWithContext(context.Background(), request)
 }
@@ -27607,9 +28067,9 @@ func (c *Client) DescribeHostKBRiskList(request *DescribeHostKBRiskListRequest) 
 // Search the host kb risk list.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeHostKBRiskListWithContext(ctx context.Context, request *DescribeHostKBRiskListRequest) (response *DescribeHostKBRiskListResponse, err error) {
     if request == nil {
         request = NewDescribeHostKBRiskListRequest()
@@ -27650,9 +28110,9 @@ func NewDescribeHostVulItemVPRInfoResponse() (response *DescribeHostVulItemVPRIn
 // This API is used to obtain host vulnerability VPR information.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeHostVulItemVPRInfo(request *DescribeHostVulItemVPRInfoRequest) (response *DescribeHostVulItemVPRInfoResponse, err error) {
     return c.DescribeHostVulItemVPRInfoWithContext(context.Background(), request)
 }
@@ -27661,9 +28121,9 @@ func (c *Client) DescribeHostVulItemVPRInfo(request *DescribeHostVulItemVPRInfoR
 // This API is used to obtain host vulnerability VPR information.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeHostVulItemVPRInfoWithContext(ctx context.Context, request *DescribeHostVulItemVPRInfoRequest) (response *DescribeHostVulItemVPRInfoResponse, err error) {
     if request == nil {
         request = NewDescribeHostVulItemVPRInfoRequest()
@@ -27704,9 +28164,9 @@ func NewDescribeHostVulOverviewResponse() (response *DescribeHostVulOverviewResp
 // This API is used to obtain the host vulnerability overview.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeHostVulOverview(request *DescribeHostVulOverviewRequest) (response *DescribeHostVulOverviewResponse, err error) {
     return c.DescribeHostVulOverviewWithContext(context.Background(), request)
 }
@@ -27715,9 +28175,9 @@ func (c *Client) DescribeHostVulOverview(request *DescribeHostVulOverviewRequest
 // This API is used to obtain the host vulnerability overview.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeHostVulOverviewWithContext(ctx context.Context, request *DescribeHostVulOverviewRequest) (response *DescribeHostVulOverviewResponse, err error) {
     if request == nil {
         request = NewDescribeHostVulOverviewRequest()
@@ -27731,6 +28191,60 @@ func (c *Client) DescribeHostVulOverviewWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeHostVulOverviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeHostVulRiskEventListRequest() (request *DescribeHostVulRiskEventListRequest) {
+    request = &DescribeHostVulRiskEventListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeHostVulRiskEventList")
+    
+    
+    return
+}
+
+func NewDescribeHostVulRiskEventListResponse() (response *DescribeHostVulRiskEventListResponse) {
+    response = &DescribeHostVulRiskEventListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeHostVulRiskEventList
+// This API is used to query the host vulnerability risk event list and return basic vulnerability information, instance information, risk status, and latest scan time by risk record dimension.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeHostVulRiskEventList(request *DescribeHostVulRiskEventListRequest) (response *DescribeHostVulRiskEventListResponse, err error) {
+    return c.DescribeHostVulRiskEventListWithContext(context.Background(), request)
+}
+
+// DescribeHostVulRiskEventList
+// This API is used to query the host vulnerability risk event list and return basic vulnerability information, instance information, risk status, and latest scan time by risk record dimension.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeHostVulRiskEventListWithContext(ctx context.Context, request *DescribeHostVulRiskEventListRequest) (response *DescribeHostVulRiskEventListResponse, err error) {
+    if request == nil {
+        request = NewDescribeHostVulRiskEventListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeHostVulRiskEventList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeHostVulRiskEventList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeHostVulRiskEventListResponse()
     err = c.Send(request, response)
     return
 }
@@ -27758,9 +28272,9 @@ func NewDescribeHostVulRiskListResponse() (response *DescribeHostVulRiskListResp
 // This API is used to retrieve the host vulnerability risk list.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeHostVulRiskList(request *DescribeHostVulRiskListRequest) (response *DescribeHostVulRiskListResponse, err error) {
     return c.DescribeHostVulRiskListWithContext(context.Background(), request)
 }
@@ -27769,9 +28283,9 @@ func (c *Client) DescribeHostVulRiskList(request *DescribeHostVulRiskListRequest
 // This API is used to retrieve the host vulnerability risk list.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeHostVulRiskListWithContext(ctx context.Context, request *DescribeHostVulRiskListRequest) (response *DescribeHostVulRiskListResponse, err error) {
     if request == nil {
         request = NewDescribeHostVulRiskListRequest()
@@ -27785,6 +28299,60 @@ func (c *Client) DescribeHostVulRiskListWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeHostVulRiskListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeHostVulScanStatusRequest() (request *DescribeHostVulScanStatusRequest) {
+    request = &DescribeHostVulScanStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeHostVulScanStatus")
+    
+    
+    return
+}
+
+func NewDescribeHostVulScanStatusResponse() (response *DescribeHostVulScanStatusResponse) {
+    response = &DescribeHostVulScanStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeHostVulScanStatus
+// Query the host vulnerability scanning status to determine whether vulnerabilities have been scanned, whether the first vulnerability scan failed, and the fixable vulnerability status after the first scan is completed.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeHostVulScanStatus(request *DescribeHostVulScanStatusRequest) (response *DescribeHostVulScanStatusResponse, err error) {
+    return c.DescribeHostVulScanStatusWithContext(context.Background(), request)
+}
+
+// DescribeHostVulScanStatus
+// Query the host vulnerability scanning status to determine whether vulnerabilities have been scanned, whether the first vulnerability scan failed, and the fixable vulnerability status after the first scan is completed.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeHostVulScanStatusWithContext(ctx context.Context, request *DescribeHostVulScanStatusRequest) (response *DescribeHostVulScanStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeHostVulScanStatusRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeHostVulScanStatus")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeHostVulScanStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeHostVulScanStatusResponse()
     err = c.Send(request, response)
     return
 }
@@ -30843,6 +31411,58 @@ func (c *Client) DescribeLoginWhiteCombinedListWithContext(ctx context.Context, 
     return
 }
 
+func NewDescribeLoginWhiteCustomListEDRRequest() (request *DescribeLoginWhiteCustomListEDRRequest) {
+    request = &DescribeLoginWhiteCustomListEDRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeLoginWhiteCustomListEDR")
+    
+    
+    return
+}
+
+func NewDescribeLoginWhiteCustomListEDRResponse() (response *DescribeLoginWhiteCustomListEDRResponse) {
+    response = &DescribeLoginWhiteCustomListEDRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLoginWhiteCustomListEDR
+// This API is used to query the CSC abnormal login custom allowlist. In multi-account scenarios, parse out all member AppIds by MemberId and perform an aggregate query only once. Return in pages by ModifyTime DESC. The output slice field is always [] and never null.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeLoginWhiteCustomListEDR(request *DescribeLoginWhiteCustomListEDRRequest) (response *DescribeLoginWhiteCustomListEDRResponse, err error) {
+    return c.DescribeLoginWhiteCustomListEDRWithContext(context.Background(), request)
+}
+
+// DescribeLoginWhiteCustomListEDR
+// This API is used to query the CSC abnormal login custom allowlist. In multi-account scenarios, parse out all member AppIds by MemberId and perform an aggregate query only once. Return in pages by ModifyTime DESC. The output slice field is always [] and never null.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeLoginWhiteCustomListEDRWithContext(ctx context.Context, request *DescribeLoginWhiteCustomListEDRRequest) (response *DescribeLoginWhiteCustomListEDRResponse, err error) {
+    if request == nil {
+        request = NewDescribeLoginWhiteCustomListEDRRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeLoginWhiteCustomListEDR")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLoginWhiteCustomListEDR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLoginWhiteCustomListEDRResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLoginWhiteHostListRequest() (request *DescribeLoginWhiteHostListRequest) {
     request = &DescribeLoginWhiteHostListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -30901,6 +31521,58 @@ func (c *Client) DescribeLoginWhiteHostListWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDescribeLoginWhiteHostListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLoginWhiteLearnListEDRRequest() (request *DescribeLoginWhiteLearnListEDRRequest) {
+    request = &DescribeLoginWhiteLearnListEDRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "DescribeLoginWhiteLearnListEDR")
+    
+    
+    return
+}
+
+func NewDescribeLoginWhiteLearnListEDRResponse() (response *DescribeLoginWhiteLearnListEDRResponse) {
+    response = &DescribeLoginWhiteLearnListEDRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLoginWhiteLearnListEDR
+// This API is used to query the CSC abnormal login self-learning allowlist (rule group). Rule groups are aggregated by (AppId, common login location), and the ID is the minimum line ID in the group. The output fields SrcIp, UserName, StartTime, and EndTime are always empty. AutoLearnEnable returns the self-learning switch state for the frontend to determine whether to redirect to enable it based on the empty state.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeLoginWhiteLearnListEDR(request *DescribeLoginWhiteLearnListEDRRequest) (response *DescribeLoginWhiteLearnListEDRResponse, err error) {
+    return c.DescribeLoginWhiteLearnListEDRWithContext(context.Background(), request)
+}
+
+// DescribeLoginWhiteLearnListEDR
+// This API is used to query the CSC abnormal login self-learning allowlist (rule group). Rule groups are aggregated by (AppId, common login location), and the ID is the minimum line ID in the group. The output fields SrcIp, UserName, StartTime, and EndTime are always empty. AutoLearnEnable returns the self-learning switch state for the frontend to determine whether to redirect to enable it based on the empty state.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeLoginWhiteLearnListEDRWithContext(ctx context.Context, request *DescribeLoginWhiteLearnListEDRRequest) (response *DescribeLoginWhiteLearnListEDRResponse, err error) {
+    if request == nil {
+        request = NewDescribeLoginWhiteLearnListEDRRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "DescribeLoginWhiteLearnListEDR")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLoginWhiteLearnListEDR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLoginWhiteLearnListEDRResponse()
     err = c.Send(request, response)
     return
 }
@@ -40535,6 +41207,68 @@ func (c *Client) ModifyBanModeWithContext(ctx context.Context, request *ModifyBa
     return
 }
 
+func NewModifyBaselineIgnorePolicyRequest() (request *ModifyBaselineIgnorePolicyRequest) {
+    request = &ModifyBaselineIgnorePolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "ModifyBaselineIgnorePolicy")
+    
+    
+    return
+}
+
+func NewModifyBaselineIgnorePolicyResponse() (response *ModifyBaselineIgnorePolicyResponse) {
+    response = &ModifyBaselineIgnorePolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyBaselineIgnorePolicy
+// Modify baseline ignore policy
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyBaselineIgnorePolicy(request *ModifyBaselineIgnorePolicyRequest) (response *ModifyBaselineIgnorePolicyResponse, err error) {
+    return c.ModifyBaselineIgnorePolicyWithContext(context.Background(), request)
+}
+
+// ModifyBaselineIgnorePolicy
+// Modify baseline ignore policy
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ModifyBaselineIgnorePolicyWithContext(ctx context.Context, request *ModifyBaselineIgnorePolicyRequest) (response *ModifyBaselineIgnorePolicyResponse, err error) {
+    if request == nil {
+        request = NewModifyBaselineIgnorePolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "ModifyBaselineIgnorePolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyBaselineIgnorePolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyBaselineIgnorePolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyBaselinePolicyRequest() (request *ModifyBaselinePolicyRequest) {
     request = &ModifyBaselinePolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -44865,6 +45599,118 @@ func (c *Client) ModifyImageVulWhitelistWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewModifyImageVulWhitelistResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLoginWhiteCustomEDRRequest() (request *ModifyLoginWhiteCustomEDRRequest) {
+    request = &ModifyLoginWhiteCustomEDRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "ModifyLoginWhiteCustomEDR")
+    
+    
+    return
+}
+
+func NewModifyLoginWhiteCustomEDRResponse() (response *ModifyLoginWhiteCustomEDRResponse) {
+    response = &ModifyLoginWhiteCustomEDRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyLoginWhiteCustomEDR
+// Modify the CSC abnormal login custom allowlist with full coverage saving (fields not passed are deemed as cleared). This API does not trigger historical alarm rescanning. Exclude itself during deduplication. If the rule does not exist, return ResourceNotFound.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyLoginWhiteCustomEDR(request *ModifyLoginWhiteCustomEDRRequest) (response *ModifyLoginWhiteCustomEDRResponse, err error) {
+    return c.ModifyLoginWhiteCustomEDRWithContext(context.Background(), request)
+}
+
+// ModifyLoginWhiteCustomEDR
+// Modify the CSC abnormal login custom allowlist with full coverage saving (fields not passed are deemed as cleared). This API does not trigger historical alarm rescanning. Exclude itself during deduplication. If the rule does not exist, return ResourceNotFound.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyLoginWhiteCustomEDRWithContext(ctx context.Context, request *ModifyLoginWhiteCustomEDRRequest) (response *ModifyLoginWhiteCustomEDRResponse, err error) {
+    if request == nil {
+        request = NewModifyLoginWhiteCustomEDRRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "ModifyLoginWhiteCustomEDR")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLoginWhiteCustomEDR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyLoginWhiteCustomEDRResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLoginWhiteLearnEDRRequest() (request *ModifyLoginWhiteLearnEDRRequest) {
+    request = &ModifyLoginWhiteLearnEDRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("csip", APIVersion, "ModifyLoginWhiteLearnEDR")
+    
+    
+    return
+}
+
+func NewModifyLoginWhiteLearnEDRResponse() (response *ModifyLoginWhiteLearnEDRResponse) {
+    response = &ModifyLoginWhiteLearnEDRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyLoginWhiteLearnEDR
+// This API is used to modify the CSC abnormal login self-learning allowlist rule group, locating the entire group by (AppId, common login location). Constraints: creating is not supported, and taking effect by tag is not supported (TagIDs must be empty). Only Scope=0 direct selection and Scope=1 all assets + removal are supported. Reject when the rule group row count exceeds 5000. In a single transaction, insert first and delete later. It takes effect within one cache cycle (default 120s) after editing. This API does not rescan historical alarms.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyLoginWhiteLearnEDR(request *ModifyLoginWhiteLearnEDRRequest) (response *ModifyLoginWhiteLearnEDRResponse, err error) {
+    return c.ModifyLoginWhiteLearnEDRWithContext(context.Background(), request)
+}
+
+// ModifyLoginWhiteLearnEDR
+// This API is used to modify the CSC abnormal login self-learning allowlist rule group, locating the entire group by (AppId, common login location). Constraints: creating is not supported, and taking effect by tag is not supported (TagIDs must be empty). Only Scope=0 direct selection and Scope=1 all assets + removal are supported. Reject when the rule group row count exceeds 5000. In a single transaction, insert first and delete later. It takes effect within one cache cycle (default 120s) after editing. This API does not rescan historical alarms.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyLoginWhiteLearnEDRWithContext(ctx context.Context, request *ModifyLoginWhiteLearnEDRRequest) (response *ModifyLoginWhiteLearnEDRResponse, err error) {
+    if request == nil {
+        request = NewModifyLoginWhiteLearnEDRRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "csip", APIVersion, "ModifyLoginWhiteLearnEDR")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLoginWhiteLearnEDR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyLoginWhiteLearnEDRResponse()
     err = c.Send(request, response)
     return
 }
