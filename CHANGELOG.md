@@ -1,5 +1,9 @@
 # Changelog
 
+### [Unreleased]
+
+- fix: Generate the request Nonce with crypto/rand instead of the weak math/rand PRNG
+
 ### [v3.0.1251] - 2025-07-29
 
 - fix: Auto-complete Request object initialization
