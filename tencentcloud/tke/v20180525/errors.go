@@ -239,7 +239,7 @@ const (
 	// Error creating scaling group resource.
 	INTERNALERROR_ASCOMMON = "InternalError.AsCommon"
 
-	// You do not have permissions.
+	// No permissions.
 	INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 
 	// CIDR conflicts with the CIDR of another cluster.
@@ -293,10 +293,10 @@ const (
 	// Exceptional CVM status.
 	INTERNALERROR_CVMSTATUS = "InternalError.CvmStatus"
 
-	// DB error.
+	// db error.
 	INTERNALERROR_DB = "InternalError.Db"
 
-	// Database error.
+	// DB error.
 	INTERNALERROR_DBAFFECTIVEDROWS = "InternalError.DbAffectivedRows"
 
 	// Record not found.
@@ -314,7 +314,7 @@ const (
 	// Image not found.
 	INTERNALERROR_IMAGEIDNOTFOUND = "InternalError.ImageIdNotFound"
 
-	// Failed to initialize Master.
+	// Initializing Master failed.
 	INTERNALERROR_INITMASTERFAILED = "InternalError.InitMasterFailed"
 
 	// Invalid CIDR.
@@ -359,13 +359,13 @@ const (
 	// Pod not found
 	INTERNALERROR_PODNOTFOUND = "InternalError.PodNotFound"
 
-	// Cluster does not support the current operation.
+	// The cluster does not support the current operation.
 	INTERNALERROR_PUBLICCLUSTEROPNOTSUPPORT = "InternalError.PublicClusterOpNotSupport"
 
-	// Quota limit exceeded.
+	// The quota limit is exceeded.
 	INTERNALERROR_QUOTAMAXCLSLIMIT = "InternalError.QuotaMaxClsLimit"
 
-	// Quota limit exceeded.
+	// The quota limit is exceeded.
 	INTERNALERROR_QUOTAMAXNODLIMIT = "InternalError.QuotaMaxNodLimit"
 
 	// Quota limit exceeded.
@@ -485,7 +485,7 @@ const (
 	// In customer creation parameters, k8s version, runtime version, or tke-eni-agent version do not support the chosen operating system's CgroupV2.
 	INVALIDPARAMETER_VERSIONNOTSUPPORTCGROUPV2 = "InvalidParameter.VersionNotSupportCgroupV2"
 
-	// Quota limit is exceeded.
+	// The quota limit is exceeded.
 	LIMITEXCEEDED = "LimitExceeded"
 
 	// Missing parameter.
@@ -542,13 +542,13 @@ const (
 	// Unauthorized operation.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 
-	// The API has no CAM permissions.
+	// No CAM permission for this interface.
 	UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
 
-	// Unknown parameter.
+	// Unknown parameter error.
 	UNKNOWNPARAMETER = "UnknownParameter"
 
-	// Unsupported operation.
+	// The operation is not supported.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
 
 	// Failed to enable CA because AS is disabled.

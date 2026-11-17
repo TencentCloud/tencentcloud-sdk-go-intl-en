@@ -184,9 +184,11 @@ func NewAddCustomRuleResponse() (response *AddCustomRuleResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERR = "InternalError.DBErr"
-//  LIMITEXCEEDED = "LimitExceeded"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED_SPECIFICATIONERR = "LimitExceeded.SpecificationErr"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDREQUEST = "UnsupportedOperation.InvalidRequest"
 func (c *Client) AddCustomRule(request *AddCustomRuleRequest) (response *AddCustomRuleResponse, err error) {
     return c.AddCustomRuleWithContext(context.Background(), request)
 }
@@ -197,9 +199,11 @@ func (c *Client) AddCustomRule(request *AddCustomRuleRequest) (response *AddCust
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERR = "InternalError.DBErr"
-//  LIMITEXCEEDED = "LimitExceeded"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  LIMITEXCEEDED_SPECIFICATIONERR = "LimitExceeded.SpecificationErr"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDREQUEST = "UnsupportedOperation.InvalidRequest"
 func (c *Client) AddCustomRuleWithContext(ctx context.Context, request *AddCustomRuleRequest) (response *AddCustomRuleResponse, err error) {
     if request == nil {
         request = NewAddCustomRuleRequest()
@@ -275,6 +279,68 @@ func (c *Client) AddCustomWhiteRuleWithContext(ctx context.Context, request *Add
     request.SetContext(ctx)
     
     response = NewAddCustomWhiteRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAddLLMSdkAccessRequest() (request *AddLLMSdkAccessRequest) {
+    request = &AddLLMSdkAccessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "AddLLMSdkAccess")
+    
+    
+    return
+}
+
+func NewAddLLMSdkAccessResponse() (response *AddLLMSdkAccessResponse) {
+    response = &AddLLMSdkAccessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddLLMSdkAccess
+// This API is used to add an access configuration in llmwaf-sdk.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_SPECIFICATIONERR = "LimitExceeded.SpecificationErr"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddLLMSdkAccess(request *AddLLMSdkAccessRequest) (response *AddLLMSdkAccessResponse, err error) {
+    return c.AddLLMSdkAccessWithContext(context.Background(), request)
+}
+
+// AddLLMSdkAccess
+// This API is used to add an access configuration in llmwaf-sdk.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_SPECIFICATIONERR = "LimitExceeded.SpecificationErr"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddLLMSdkAccessWithContext(ctx context.Context, request *AddLLMSdkAccessRequest) (response *AddLLMSdkAccessResponse, err error) {
+    if request == nil {
+        request = NewAddLLMSdkAccessRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "AddLLMSdkAccess")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddLLMSdkAccess require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddLLMSdkAccessResponse()
     err = c.Send(request, response)
     return
 }
@@ -877,7 +943,10 @@ func NewDeleteCustomRuleResponse() (response *DeleteCustomRuleResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDREQUEST = "UnsupportedOperation.InvalidRequest"
 func (c *Client) DeleteCustomRule(request *DeleteCustomRuleRequest) (response *DeleteCustomRuleResponse, err error) {
     return c.DeleteCustomRuleWithContext(context.Background(), request)
 }
@@ -887,7 +956,10 @@ func (c *Client) DeleteCustomRule(request *DeleteCustomRuleRequest) (response *D
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDREQUEST = "UnsupportedOperation.InvalidRequest"
 func (c *Client) DeleteCustomRuleWithContext(ctx context.Context, request *DeleteCustomRuleRequest) (response *DeleteCustomRuleResponse, err error) {
     if request == nil {
         request = NewDeleteCustomRuleRequest()
@@ -1060,6 +1132,8 @@ func NewDeleteIpAccessControlV2Response() (response *DeleteIpAccessControlV2Resp
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERR = "InternalError.DBErr"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteIpAccessControlV2(request *DeleteIpAccessControlV2Request) (response *DeleteIpAccessControlV2Response, err error) {
     return c.DeleteIpAccessControlV2WithContext(context.Background(), request)
@@ -1073,6 +1147,8 @@ func (c *Client) DeleteIpAccessControlV2(request *DeleteIpAccessControlV2Request
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERR = "InternalError.DBErr"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DeleteIpAccessControlV2WithContext(ctx context.Context, request *DeleteIpAccessControlV2Request) (response *DeleteIpAccessControlV2Response, err error) {
     if request == nil {
@@ -1087,6 +1163,168 @@ func (c *Client) DeleteIpAccessControlV2WithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDeleteIpAccessControlV2Response()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLLMContentRuleRequest() (request *DeleteLLMContentRuleRequest) {
+    request = &DeleteLLMContentRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DeleteLLMContentRule")
+    
+    
+    return
+}
+
+func NewDeleteLLMContentRuleResponse() (response *DeleteLLMContentRuleResponse) {
+    response = &DeleteLLMContentRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteLLMContentRule
+// This API is used to delete an LLM content protection rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteLLMContentRule(request *DeleteLLMContentRuleRequest) (response *DeleteLLMContentRuleResponse, err error) {
+    return c.DeleteLLMContentRuleWithContext(context.Background(), request)
+}
+
+// DeleteLLMContentRule
+// This API is used to delete an LLM content protection rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteLLMContentRuleWithContext(ctx context.Context, request *DeleteLLMContentRuleRequest) (response *DeleteLLMContentRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteLLMContentRuleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "DeleteLLMContentRule")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteLLMContentRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteLLMContentRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLLMKeywordLibraryRequest() (request *DeleteLLMKeywordLibraryRequest) {
+    request = &DeleteLLMKeywordLibraryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DeleteLLMKeywordLibrary")
+    
+    
+    return
+}
+
+func NewDeleteLLMKeywordLibraryResponse() (response *DeleteLLMKeywordLibraryResponse) {
+    response = &DeleteLLMKeywordLibraryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteLLMKeywordLibrary
+// This API is used to delete a thesaurus list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteLLMKeywordLibrary(request *DeleteLLMKeywordLibraryRequest) (response *DeleteLLMKeywordLibraryResponse, err error) {
+    return c.DeleteLLMKeywordLibraryWithContext(context.Background(), request)
+}
+
+// DeleteLLMKeywordLibrary
+// This API is used to delete a thesaurus list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteLLMKeywordLibraryWithContext(ctx context.Context, request *DeleteLLMKeywordLibraryRequest) (response *DeleteLLMKeywordLibraryResponse, err error) {
+    if request == nil {
+        request = NewDeleteLLMKeywordLibraryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "DeleteLLMKeywordLibrary")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteLLMKeywordLibrary require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteLLMKeywordLibraryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLLMSdkAccessRequest() (request *DeleteLLMSdkAccessRequest) {
+    request = &DeleteLLMSdkAccessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DeleteLLMSdkAccess")
+    
+    
+    return
+}
+
+func NewDeleteLLMSdkAccessResponse() (response *DeleteLLMSdkAccessResponse) {
+    response = &DeleteLLMSdkAccessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteLLMSdkAccess
+// This API is used to delete the access configuration in llmwaf-sdk.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteLLMSdkAccess(request *DeleteLLMSdkAccessRequest) (response *DeleteLLMSdkAccessResponse, err error) {
+    return c.DeleteLLMSdkAccessWithContext(context.Background(), request)
+}
+
+// DeleteLLMSdkAccess
+// This API is used to delete the access configuration in llmwaf-sdk.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteLLMSdkAccessWithContext(ctx context.Context, request *DeleteLLMSdkAccessRequest) (response *DeleteLLMSdkAccessResponse, err error) {
+    if request == nil {
+        request = NewDeleteLLMSdkAccessRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "DeleteLLMSdkAccess")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteLLMSdkAccess require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteLLMSdkAccessResponse()
     err = c.Send(request, response)
     return
 }
@@ -1114,11 +1352,9 @@ func NewDeleteOwaspRuleStatusResponse() (response *DeleteOwaspRuleStatusResponse
 // This API is used to unlock the Door God rule status.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_THENUMBEROFONETIMEDELETIONSREACHEDTHEUPPERLIMIT = "FailedOperation.TheNumberOfOneTimeDeletionsReachedTheUpperLimit"
 //  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERR = "InternalError.DBErr"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteOwaspRuleStatus(request *DeleteOwaspRuleStatusRequest) (response *DeleteOwaspRuleStatusResponse, err error) {
     return c.DeleteOwaspRuleStatusWithContext(context.Background(), request)
 }
@@ -1127,11 +1363,9 @@ func (c *Client) DeleteOwaspRuleStatus(request *DeleteOwaspRuleStatusRequest) (r
 // This API is used to unlock the Door God rule status.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_THENUMBEROFONETIMEDELETIONSREACHEDTHEUPPERLIMIT = "FailedOperation.TheNumberOfOneTimeDeletionsReachedTheUpperLimit"
 //  INTERNALERROR = "InternalError"
-//  INTERNALERROR_DBERR = "InternalError.DBErr"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteOwaspRuleStatusWithContext(ctx context.Context, request *DeleteOwaspRuleStatusRequest) (response *DeleteOwaspRuleStatusResponse, err error) {
     if request == nil {
         request = NewDeleteOwaspRuleStatusRequest()
@@ -1260,7 +1494,6 @@ func NewDeleteSessionResponse() (response *DeleteSessionResponse) {
 // Delete CC attack session settings
 //
 // error code that may be returned:
-//  FAILEDOPERATION_SESSIONINUSED = "FailedOperation.SessionInUsed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERR = "InternalError.DBErr"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -1272,7 +1505,6 @@ func (c *Client) DeleteSession(request *DeleteSessionRequest) (response *DeleteS
 // Delete CC attack session settings
 //
 // error code that may be returned:
-//  FAILEDOPERATION_SESSIONINUSED = "FailedOperation.SessionInUsed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERR = "InternalError.DBErr"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
@@ -1624,6 +1856,8 @@ func NewDescribeBatchIpAccessControlResponse() (response *DescribeBatchIpAccessC
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBatchIpAccessControl(request *DescribeBatchIpAccessControlRequest) (response *DescribeBatchIpAccessControlResponse, err error) {
     return c.DescribeBatchIpAccessControlWithContext(context.Background(), request)
 }
@@ -1634,6 +1868,8 @@ func (c *Client) DescribeBatchIpAccessControl(request *DescribeBatchIpAccessCont
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBatchIpAccessControlWithContext(ctx context.Context, request *DescribeBatchIpAccessControlRequest) (response *DescribeBatchIpAccessControlResponse, err error) {
     if request == nil {
         request = NewDescribeBatchIpAccessControlRequest()
@@ -2912,6 +3148,8 @@ func NewDescribeIpAccessControlResponse() (response *DescribeIpAccessControlResp
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeIpAccessControl(request *DescribeIpAccessControlRequest) (response *DescribeIpAccessControlResponse, err error) {
     return c.DescribeIpAccessControlWithContext(context.Background(), request)
 }
@@ -2922,6 +3160,8 @@ func (c *Client) DescribeIpAccessControl(request *DescribeIpAccessControlRequest
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeIpAccessControlWithContext(ctx context.Context, request *DescribeIpAccessControlRequest) (response *DescribeIpAccessControlResponse, err error) {
     if request == nil {
         request = NewDescribeIpAccessControlRequest()
@@ -2935,6 +3175,506 @@ func (c *Client) DescribeIpAccessControlWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeIpAccessControlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLLMContentRuleListRequest() (request *DescribeLLMContentRuleListRequest) {
+    request = &DescribeLLMContentRuleListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribeLLMContentRuleList")
+    
+    
+    return
+}
+
+func NewDescribeLLMContentRuleListResponse() (response *DescribeLLMContentRuleListResponse) {
+    response = &DescribeLLMContentRuleListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLLMContentRuleList
+// This API is used to obtain the LLM content protection rules.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+func (c *Client) DescribeLLMContentRuleList(request *DescribeLLMContentRuleListRequest) (response *DescribeLLMContentRuleListResponse, err error) {
+    return c.DescribeLLMContentRuleListWithContext(context.Background(), request)
+}
+
+// DescribeLLMContentRuleList
+// This API is used to obtain the LLM content protection rules.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+func (c *Client) DescribeLLMContentRuleListWithContext(ctx context.Context, request *DescribeLLMContentRuleListRequest) (response *DescribeLLMContentRuleListResponse, err error) {
+    if request == nil {
+        request = NewDescribeLLMContentRuleListRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "DescribeLLMContentRuleList")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLLMContentRuleList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLLMContentRuleListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLLMContentSecCheckRequest() (request *DescribeLLMContentSecCheckRequest) {
+    request = &DescribeLLMContentSecCheckRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribeLLMContentSecCheck")
+    
+    
+    return
+}
+
+func NewDescribeLLMContentSecCheckResponse() (response *DescribeLLMContentSecCheckResponse) {
+    response = &DescribeLLMContentSecCheckResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLLMContentSecCheck
+// This API is used to review the request and response content of large models.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LLMCONTENTEMPTY = "InvalidParameter.LLMContentEmpty"
+//  INVALIDPARAMETER_LLMINTERNALERROR = "InvalidParameter.LLMInternalError"
+//  INVALIDPARAMETER_LLMINVALIDTYPE = "InvalidParameter.LLMInvalidType"
+//  INVALIDPARAMETER_LLMNORULES = "InvalidParameter.LLMNoRules"
+//  INVALIDPARAMETER_LLMPARSEFAILED = "InvalidParameter.LLMParseFailed"
+//  INVALIDPARAMETER_LLMREQUESTIDEMPTY = "InvalidParameter.LLMRequestIdEmpty"
+//  INVALIDPARAMETER_LLMSERVICEIDEMPTY = "InvalidParameter.LLMServiceIdEmpty"
+//  INVALIDPARAMETER_LLMSWITCHOFF = "InvalidParameter.LLMSwitchOff"
+func (c *Client) DescribeLLMContentSecCheck(request *DescribeLLMContentSecCheckRequest) (response *DescribeLLMContentSecCheckResponse, err error) {
+    return c.DescribeLLMContentSecCheckWithContext(context.Background(), request)
+}
+
+// DescribeLLMContentSecCheck
+// This API is used to review the request and response content of large models.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LLMCONTENTEMPTY = "InvalidParameter.LLMContentEmpty"
+//  INVALIDPARAMETER_LLMINTERNALERROR = "InvalidParameter.LLMInternalError"
+//  INVALIDPARAMETER_LLMINVALIDTYPE = "InvalidParameter.LLMInvalidType"
+//  INVALIDPARAMETER_LLMNORULES = "InvalidParameter.LLMNoRules"
+//  INVALIDPARAMETER_LLMPARSEFAILED = "InvalidParameter.LLMParseFailed"
+//  INVALIDPARAMETER_LLMREQUESTIDEMPTY = "InvalidParameter.LLMRequestIdEmpty"
+//  INVALIDPARAMETER_LLMSERVICEIDEMPTY = "InvalidParameter.LLMServiceIdEmpty"
+//  INVALIDPARAMETER_LLMSWITCHOFF = "InvalidParameter.LLMSwitchOff"
+func (c *Client) DescribeLLMContentSecCheckWithContext(ctx context.Context, request *DescribeLLMContentSecCheckRequest) (response *DescribeLLMContentSecCheckResponse, err error) {
+    if request == nil {
+        request = NewDescribeLLMContentSecCheckRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "DescribeLLMContentSecCheck")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLLMContentSecCheck require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLLMContentSecCheckResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLLMHourBillDetailRequest() (request *DescribeLLMHourBillDetailRequest) {
+    request = &DescribeLLMHourBillDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribeLLMHourBillDetail")
+    
+    
+    return
+}
+
+func NewDescribeLLMHourBillDetailResponse() (response *DescribeLLMHourBillDetailResponse) {
+    response = &DescribeLLMHourBillDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLLMHourBillDetail
+// This API is used to query the hourly bill details of a single instance for a single day, including the estimated total bill amount, itemized costs, hourly trends, and hourly details.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LLMCONTENTEMPTY = "InvalidParameter.LLMContentEmpty"
+//  INVALIDPARAMETER_LLMINTERNALERROR = "InvalidParameter.LLMInternalError"
+//  INVALIDPARAMETER_LLMINVALIDTYPE = "InvalidParameter.LLMInvalidType"
+//  INVALIDPARAMETER_LLMNORULES = "InvalidParameter.LLMNoRules"
+//  INVALIDPARAMETER_LLMPARSEFAILED = "InvalidParameter.LLMParseFailed"
+//  INVALIDPARAMETER_LLMREQUESTIDEMPTY = "InvalidParameter.LLMRequestIdEmpty"
+//  INVALIDPARAMETER_LLMSERVICEIDEMPTY = "InvalidParameter.LLMServiceIdEmpty"
+//  INVALIDPARAMETER_LLMSWITCHOFF = "InvalidParameter.LLMSwitchOff"
+func (c *Client) DescribeLLMHourBillDetail(request *DescribeLLMHourBillDetailRequest) (response *DescribeLLMHourBillDetailResponse, err error) {
+    return c.DescribeLLMHourBillDetailWithContext(context.Background(), request)
+}
+
+// DescribeLLMHourBillDetail
+// This API is used to query the hourly bill details of a single instance for a single day, including the estimated total bill amount, itemized costs, hourly trends, and hourly details.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LLMCONTENTEMPTY = "InvalidParameter.LLMContentEmpty"
+//  INVALIDPARAMETER_LLMINTERNALERROR = "InvalidParameter.LLMInternalError"
+//  INVALIDPARAMETER_LLMINVALIDTYPE = "InvalidParameter.LLMInvalidType"
+//  INVALIDPARAMETER_LLMNORULES = "InvalidParameter.LLMNoRules"
+//  INVALIDPARAMETER_LLMPARSEFAILED = "InvalidParameter.LLMParseFailed"
+//  INVALIDPARAMETER_LLMREQUESTIDEMPTY = "InvalidParameter.LLMRequestIdEmpty"
+//  INVALIDPARAMETER_LLMSERVICEIDEMPTY = "InvalidParameter.LLMServiceIdEmpty"
+//  INVALIDPARAMETER_LLMSWITCHOFF = "InvalidParameter.LLMSwitchOff"
+func (c *Client) DescribeLLMHourBillDetailWithContext(ctx context.Context, request *DescribeLLMHourBillDetailRequest) (response *DescribeLLMHourBillDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeLLMHourBillDetailRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "DescribeLLMHourBillDetail")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLLMHourBillDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLLMHourBillDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLLMKeywordLibraryRequest() (request *DescribeLLMKeywordLibraryRequest) {
+    request = &DescribeLLMKeywordLibraryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribeLLMKeywordLibrary")
+    
+    
+    return
+}
+
+func NewDescribeLLMKeywordLibraryResponse() (response *DescribeLLMKeywordLibraryResponse) {
+    response = &DescribeLLMKeywordLibraryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLLMKeywordLibrary
+// This API is used to query the keyword list.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LLMCONTENTEMPTY = "InvalidParameter.LLMContentEmpty"
+//  INVALIDPARAMETER_LLMINTERNALERROR = "InvalidParameter.LLMInternalError"
+//  INVALIDPARAMETER_LLMINVALIDTYPE = "InvalidParameter.LLMInvalidType"
+//  INVALIDPARAMETER_LLMNORULES = "InvalidParameter.LLMNoRules"
+//  INVALIDPARAMETER_LLMPARSEFAILED = "InvalidParameter.LLMParseFailed"
+//  INVALIDPARAMETER_LLMREQUESTIDEMPTY = "InvalidParameter.LLMRequestIdEmpty"
+//  INVALIDPARAMETER_LLMSERVICEIDEMPTY = "InvalidParameter.LLMServiceIdEmpty"
+//  INVALIDPARAMETER_LLMSWITCHOFF = "InvalidParameter.LLMSwitchOff"
+func (c *Client) DescribeLLMKeywordLibrary(request *DescribeLLMKeywordLibraryRequest) (response *DescribeLLMKeywordLibraryResponse, err error) {
+    return c.DescribeLLMKeywordLibraryWithContext(context.Background(), request)
+}
+
+// DescribeLLMKeywordLibrary
+// This API is used to query the keyword list.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LLMCONTENTEMPTY = "InvalidParameter.LLMContentEmpty"
+//  INVALIDPARAMETER_LLMINTERNALERROR = "InvalidParameter.LLMInternalError"
+//  INVALIDPARAMETER_LLMINVALIDTYPE = "InvalidParameter.LLMInvalidType"
+//  INVALIDPARAMETER_LLMNORULES = "InvalidParameter.LLMNoRules"
+//  INVALIDPARAMETER_LLMPARSEFAILED = "InvalidParameter.LLMParseFailed"
+//  INVALIDPARAMETER_LLMREQUESTIDEMPTY = "InvalidParameter.LLMRequestIdEmpty"
+//  INVALIDPARAMETER_LLMSERVICEIDEMPTY = "InvalidParameter.LLMServiceIdEmpty"
+//  INVALIDPARAMETER_LLMSWITCHOFF = "InvalidParameter.LLMSwitchOff"
+func (c *Client) DescribeLLMKeywordLibraryWithContext(ctx context.Context, request *DescribeLLMKeywordLibraryRequest) (response *DescribeLLMKeywordLibraryResponse, err error) {
+    if request == nil {
+        request = NewDescribeLLMKeywordLibraryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "DescribeLLMKeywordLibrary")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLLMKeywordLibrary require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLLMKeywordLibraryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLLMSdkAccessRequest() (request *DescribeLLMSdkAccessRequest) {
+    request = &DescribeLLMSdkAccessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribeLLMSdkAccess")
+    
+    
+    return
+}
+
+func NewDescribeLLMSdkAccessResponse() (response *DescribeLLMSdkAccessResponse) {
+    response = &DescribeLLMSdkAccessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLLMSdkAccess
+// This API is used to query sdk access configurations.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LLMCONTENTEMPTY = "InvalidParameter.LLMContentEmpty"
+//  INVALIDPARAMETER_LLMINTERNALERROR = "InvalidParameter.LLMInternalError"
+//  INVALIDPARAMETER_LLMINVALIDTYPE = "InvalidParameter.LLMInvalidType"
+//  INVALIDPARAMETER_LLMNORULES = "InvalidParameter.LLMNoRules"
+//  INVALIDPARAMETER_LLMPARSEFAILED = "InvalidParameter.LLMParseFailed"
+//  INVALIDPARAMETER_LLMREQUESTIDEMPTY = "InvalidParameter.LLMRequestIdEmpty"
+//  INVALIDPARAMETER_LLMSERVICEIDEMPTY = "InvalidParameter.LLMServiceIdEmpty"
+//  INVALIDPARAMETER_LLMSWITCHOFF = "InvalidParameter.LLMSwitchOff"
+func (c *Client) DescribeLLMSdkAccess(request *DescribeLLMSdkAccessRequest) (response *DescribeLLMSdkAccessResponse, err error) {
+    return c.DescribeLLMSdkAccessWithContext(context.Background(), request)
+}
+
+// DescribeLLMSdkAccess
+// This API is used to query sdk access configurations.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LLMCONTENTEMPTY = "InvalidParameter.LLMContentEmpty"
+//  INVALIDPARAMETER_LLMINTERNALERROR = "InvalidParameter.LLMInternalError"
+//  INVALIDPARAMETER_LLMINVALIDTYPE = "InvalidParameter.LLMInvalidType"
+//  INVALIDPARAMETER_LLMNORULES = "InvalidParameter.LLMNoRules"
+//  INVALIDPARAMETER_LLMPARSEFAILED = "InvalidParameter.LLMParseFailed"
+//  INVALIDPARAMETER_LLMREQUESTIDEMPTY = "InvalidParameter.LLMRequestIdEmpty"
+//  INVALIDPARAMETER_LLMSERVICEIDEMPTY = "InvalidParameter.LLMServiceIdEmpty"
+//  INVALIDPARAMETER_LLMSWITCHOFF = "InvalidParameter.LLMSwitchOff"
+func (c *Client) DescribeLLMSdkAccessWithContext(ctx context.Context, request *DescribeLLMSdkAccessRequest) (response *DescribeLLMSdkAccessResponse, err error) {
+    if request == nil {
+        request = NewDescribeLLMSdkAccessRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "DescribeLLMSdkAccess")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLLMSdkAccess require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLLMSdkAccessResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLLMWafDLPRulesRequest() (request *DescribeLLMWafDLPRulesRequest) {
+    request = &DescribeLLMWafDLPRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribeLLMWafDLPRules")
+    
+    
+    return
+}
+
+func NewDescribeLLMWafDLPRulesResponse() (response *DescribeLLMWafDLPRulesResponse) {
+    response = &DescribeLLMWafDLPRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLLMWafDLPRules
+// This API is used to query DLP rules.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LLMCONTENTEMPTY = "InvalidParameter.LLMContentEmpty"
+//  INVALIDPARAMETER_LLMINTERNALERROR = "InvalidParameter.LLMInternalError"
+//  INVALIDPARAMETER_LLMINVALIDTYPE = "InvalidParameter.LLMInvalidType"
+//  INVALIDPARAMETER_LLMNORULES = "InvalidParameter.LLMNoRules"
+//  INVALIDPARAMETER_LLMPARSEFAILED = "InvalidParameter.LLMParseFailed"
+//  INVALIDPARAMETER_LLMREQUESTIDEMPTY = "InvalidParameter.LLMRequestIdEmpty"
+//  INVALIDPARAMETER_LLMSERVICEIDEMPTY = "InvalidParameter.LLMServiceIdEmpty"
+//  INVALIDPARAMETER_LLMSWITCHOFF = "InvalidParameter.LLMSwitchOff"
+func (c *Client) DescribeLLMWafDLPRules(request *DescribeLLMWafDLPRulesRequest) (response *DescribeLLMWafDLPRulesResponse, err error) {
+    return c.DescribeLLMWafDLPRulesWithContext(context.Background(), request)
+}
+
+// DescribeLLMWafDLPRules
+// This API is used to query DLP rules.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LLMCONTENTEMPTY = "InvalidParameter.LLMContentEmpty"
+//  INVALIDPARAMETER_LLMINTERNALERROR = "InvalidParameter.LLMInternalError"
+//  INVALIDPARAMETER_LLMINVALIDTYPE = "InvalidParameter.LLMInvalidType"
+//  INVALIDPARAMETER_LLMNORULES = "InvalidParameter.LLMNoRules"
+//  INVALIDPARAMETER_LLMPARSEFAILED = "InvalidParameter.LLMParseFailed"
+//  INVALIDPARAMETER_LLMREQUESTIDEMPTY = "InvalidParameter.LLMRequestIdEmpty"
+//  INVALIDPARAMETER_LLMSERVICEIDEMPTY = "InvalidParameter.LLMServiceIdEmpty"
+//  INVALIDPARAMETER_LLMSWITCHOFF = "InvalidParameter.LLMSwitchOff"
+func (c *Client) DescribeLLMWafDLPRulesWithContext(ctx context.Context, request *DescribeLLMWafDLPRulesRequest) (response *DescribeLLMWafDLPRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLLMWafDLPRulesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "DescribeLLMWafDLPRules")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLLMWafDLPRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLLMWafDLPRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLLMWafProtectRulesRequest() (request *DescribeLLMWafProtectRulesRequest) {
+    request = &DescribeLLMWafProtectRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribeLLMWafProtectRules")
+    
+    
+    return
+}
+
+func NewDescribeLLMWafProtectRulesResponse() (response *DescribeLLMWafProtectRulesResponse) {
+    response = &DescribeLLMWafProtectRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLLMWafProtectRules
+// This API is used to query LLM rule requests.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LLMCONTENTEMPTY = "InvalidParameter.LLMContentEmpty"
+//  INVALIDPARAMETER_LLMINTERNALERROR = "InvalidParameter.LLMInternalError"
+//  INVALIDPARAMETER_LLMINVALIDTYPE = "InvalidParameter.LLMInvalidType"
+//  INVALIDPARAMETER_LLMNORULES = "InvalidParameter.LLMNoRules"
+//  INVALIDPARAMETER_LLMPARSEFAILED = "InvalidParameter.LLMParseFailed"
+//  INVALIDPARAMETER_LLMREQUESTIDEMPTY = "InvalidParameter.LLMRequestIdEmpty"
+//  INVALIDPARAMETER_LLMSERVICEIDEMPTY = "InvalidParameter.LLMServiceIdEmpty"
+//  INVALIDPARAMETER_LLMSWITCHOFF = "InvalidParameter.LLMSwitchOff"
+func (c *Client) DescribeLLMWafProtectRules(request *DescribeLLMWafProtectRulesRequest) (response *DescribeLLMWafProtectRulesResponse, err error) {
+    return c.DescribeLLMWafProtectRulesWithContext(context.Background(), request)
+}
+
+// DescribeLLMWafProtectRules
+// This API is used to query LLM rule requests.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LLMCONTENTEMPTY = "InvalidParameter.LLMContentEmpty"
+//  INVALIDPARAMETER_LLMINTERNALERROR = "InvalidParameter.LLMInternalError"
+//  INVALIDPARAMETER_LLMINVALIDTYPE = "InvalidParameter.LLMInvalidType"
+//  INVALIDPARAMETER_LLMNORULES = "InvalidParameter.LLMNoRules"
+//  INVALIDPARAMETER_LLMPARSEFAILED = "InvalidParameter.LLMParseFailed"
+//  INVALIDPARAMETER_LLMREQUESTIDEMPTY = "InvalidParameter.LLMRequestIdEmpty"
+//  INVALIDPARAMETER_LLMSERVICEIDEMPTY = "InvalidParameter.LLMServiceIdEmpty"
+//  INVALIDPARAMETER_LLMSWITCHOFF = "InvalidParameter.LLMSwitchOff"
+func (c *Client) DescribeLLMWafProtectRulesWithContext(ctx context.Context, request *DescribeLLMWafProtectRulesRequest) (response *DescribeLLMWafProtectRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLLMWafProtectRulesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "DescribeLLMWafProtectRules")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLLMWafProtectRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLLMWafProtectRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLLMWafToolCallRulesRequest() (request *DescribeLLMWafToolCallRulesRequest) {
+    request = &DescribeLLMWafToolCallRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribeLLMWafToolCallRules")
+    
+    
+    return
+}
+
+func NewDescribeLLMWafToolCallRulesResponse() (response *DescribeLLMWafToolCallRulesResponse) {
+    response = &DescribeLLMWafToolCallRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLLMWafToolCallRules
+// This API is used to query Tool Call rules.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LLMCONTENTEMPTY = "InvalidParameter.LLMContentEmpty"
+//  INVALIDPARAMETER_LLMINTERNALERROR = "InvalidParameter.LLMInternalError"
+//  INVALIDPARAMETER_LLMINVALIDTYPE = "InvalidParameter.LLMInvalidType"
+//  INVALIDPARAMETER_LLMNORULES = "InvalidParameter.LLMNoRules"
+//  INVALIDPARAMETER_LLMPARSEFAILED = "InvalidParameter.LLMParseFailed"
+//  INVALIDPARAMETER_LLMREQUESTIDEMPTY = "InvalidParameter.LLMRequestIdEmpty"
+//  INVALIDPARAMETER_LLMSERVICEIDEMPTY = "InvalidParameter.LLMServiceIdEmpty"
+//  INVALIDPARAMETER_LLMSWITCHOFF = "InvalidParameter.LLMSwitchOff"
+func (c *Client) DescribeLLMWafToolCallRules(request *DescribeLLMWafToolCallRulesRequest) (response *DescribeLLMWafToolCallRulesResponse, err error) {
+    return c.DescribeLLMWafToolCallRulesWithContext(context.Background(), request)
+}
+
+// DescribeLLMWafToolCallRules
+// This API is used to query Tool Call rules.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_LLMCONTENTEMPTY = "InvalidParameter.LLMContentEmpty"
+//  INVALIDPARAMETER_LLMINTERNALERROR = "InvalidParameter.LLMInternalError"
+//  INVALIDPARAMETER_LLMINVALIDTYPE = "InvalidParameter.LLMInvalidType"
+//  INVALIDPARAMETER_LLMNORULES = "InvalidParameter.LLMNoRules"
+//  INVALIDPARAMETER_LLMPARSEFAILED = "InvalidParameter.LLMParseFailed"
+//  INVALIDPARAMETER_LLMREQUESTIDEMPTY = "InvalidParameter.LLMRequestIdEmpty"
+//  INVALIDPARAMETER_LLMSERVICEIDEMPTY = "InvalidParameter.LLMServiceIdEmpty"
+//  INVALIDPARAMETER_LLMSWITCHOFF = "InvalidParameter.LLMSwitchOff"
+func (c *Client) DescribeLLMWafToolCallRulesWithContext(ctx context.Context, request *DescribeLLMWafToolCallRulesRequest) (response *DescribeLLMWafToolCallRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLLMWafToolCallRulesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "DescribeLLMWafToolCallRules")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLLMWafToolCallRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLLMWafToolCallRulesResponse()
     err = c.Send(request, response)
     return
 }
@@ -3575,6 +4315,64 @@ func (c *Client) DescribeSessionWithContext(ctx context.Context, request *Descri
     return
 }
 
+func NewDescribeSkillSecScanResultRequest() (request *DescribeSkillSecScanResultRequest) {
+    request = &DescribeSkillSecScanResultRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribeSkillSecScanResult")
+    
+    
+    return
+}
+
+func NewDescribeSkillSecScanResultResponse() (response *DescribeSkillSecScanResultResponse) {
+    response = &DescribeSkillSecScanResultResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSkillSecScanResult
+// This API is used to query Skill security detection results by file Hash.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_SKILLSCANINVALIDPARAM = "InvalidParameter.SkillScanInvalidParam"
+//  INVALIDPARAMETER_SKILLSCANINVALIDREQUEST = "InvalidParameter.SkillScanInvalidRequest"
+//  INVALIDPARAMETER_SKILLSCANQUERYFAILED = "InvalidParameter.SkillScanQueryFailed"
+//  INVALIDPARAMETER_SKILLSCANSERVICEIDEMPTY = "InvalidParameter.SkillScanServiceIdEmpty"
+//  INVALIDPARAMETER_SKILLSCANSWITCHOFF = "InvalidParameter.SkillScanSwitchOff"
+func (c *Client) DescribeSkillSecScanResult(request *DescribeSkillSecScanResultRequest) (response *DescribeSkillSecScanResultResponse, err error) {
+    return c.DescribeSkillSecScanResultWithContext(context.Background(), request)
+}
+
+// DescribeSkillSecScanResult
+// This API is used to query Skill security detection results by file Hash.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_SKILLSCANINVALIDPARAM = "InvalidParameter.SkillScanInvalidParam"
+//  INVALIDPARAMETER_SKILLSCANINVALIDREQUEST = "InvalidParameter.SkillScanInvalidRequest"
+//  INVALIDPARAMETER_SKILLSCANQUERYFAILED = "InvalidParameter.SkillScanQueryFailed"
+//  INVALIDPARAMETER_SKILLSCANSERVICEIDEMPTY = "InvalidParameter.SkillScanServiceIdEmpty"
+//  INVALIDPARAMETER_SKILLSCANSWITCHOFF = "InvalidParameter.SkillScanSwitchOff"
+func (c *Client) DescribeSkillSecScanResultWithContext(ctx context.Context, request *DescribeSkillSecScanResultRequest) (response *DescribeSkillSecScanResultResponse, err error) {
+    if request == nil {
+        request = NewDescribeSkillSecScanResultRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "DescribeSkillSecScanResult")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSkillSecScanResult require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSkillSecScanResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSpartaProtectionInfoRequest() (request *DescribeSpartaProtectionInfoRequest) {
     request = &DescribeSpartaProtectionInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4131,6 +4929,82 @@ func (c *Client) DescribeWebshellStatusWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeWebshellStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewExportLLMKeywordLibRequest() (request *ExportLLMKeywordLibRequest) {
+    request = &ExportLLMKeywordLibRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ExportLLMKeywordLib")
+    
+    
+    return
+}
+
+func NewExportLLMKeywordLibResponse() (response *ExportLLMKeywordLibResponse) {
+    response = &ExportLLMKeywordLibResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExportLLMKeywordLib
+// This API is used to export lexicon files.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ExportLLMKeywordLib(request *ExportLLMKeywordLibRequest) (response *ExportLLMKeywordLibResponse, err error) {
+    return c.ExportLLMKeywordLibWithContext(context.Background(), request)
+}
+
+// ExportLLMKeywordLib
+// This API is used to export lexicon files.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ExportLLMKeywordLibWithContext(ctx context.Context, request *ExportLLMKeywordLibRequest) (response *ExportLLMKeywordLibResponse, err error) {
+    if request == nil {
+        request = NewExportLLMKeywordLibRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "ExportLLMKeywordLib")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportLLMKeywordLib require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExportLLMKeywordLibResponse()
     err = c.Send(request, response)
     return
 }
@@ -6015,6 +6889,458 @@ func (c *Client) ModifyIpAccessControlWithContext(ctx context.Context, request *
     return
 }
 
+func NewModifyLLMContentRuleRequest() (request *ModifyLLMContentRuleRequest) {
+    request = &ModifyLLMContentRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ModifyLLMContentRule")
+    
+    
+    return
+}
+
+func NewModifyLLMContentRuleResponse() (response *ModifyLLMContentRuleResponse) {
+    response = &ModifyLLMContentRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyLLMContentRule
+// This API is used to update the LLM content security rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_CONTENTRULEERR = "LimitExceeded.ContentRuleErr"
+//  LIMITEXCEEDED_LIMITRULEERR = "LimitExceeded.LimitRuleErr"
+//  LIMITEXCEEDED_SPECIFICATIONERR = "LimitExceeded.SpecificationErr"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyLLMContentRule(request *ModifyLLMContentRuleRequest) (response *ModifyLLMContentRuleResponse, err error) {
+    return c.ModifyLLMContentRuleWithContext(context.Background(), request)
+}
+
+// ModifyLLMContentRule
+// This API is used to update the LLM content security rule.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_CONTENTRULEERR = "LimitExceeded.ContentRuleErr"
+//  LIMITEXCEEDED_LIMITRULEERR = "LimitExceeded.LimitRuleErr"
+//  LIMITEXCEEDED_SPECIFICATIONERR = "LimitExceeded.SpecificationErr"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyLLMContentRuleWithContext(ctx context.Context, request *ModifyLLMContentRuleRequest) (response *ModifyLLMContentRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyLLMContentRuleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "ModifyLLMContentRule")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLLMContentRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyLLMContentRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLLMContentRuleStatusRequest() (request *ModifyLLMContentRuleStatusRequest) {
+    request = &ModifyLLMContentRuleStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ModifyLLMContentRuleStatus")
+    
+    
+    return
+}
+
+func NewModifyLLMContentRuleStatusResponse() (response *ModifyLLMContentRuleStatusResponse) {
+    response = &ModifyLLMContentRuleStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyLLMContentRuleStatus
+// This API is used to enable or disable the switch of protection rules for LLM content.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyLLMContentRuleStatus(request *ModifyLLMContentRuleStatusRequest) (response *ModifyLLMContentRuleStatusResponse, err error) {
+    return c.ModifyLLMContentRuleStatusWithContext(context.Background(), request)
+}
+
+// ModifyLLMContentRuleStatus
+// This API is used to enable or disable the switch of protection rules for LLM content.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyLLMContentRuleStatusWithContext(ctx context.Context, request *ModifyLLMContentRuleStatusRequest) (response *ModifyLLMContentRuleStatusResponse, err error) {
+    if request == nil {
+        request = NewModifyLLMContentRuleStatusRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "ModifyLLMContentRuleStatus")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLLMContentRuleStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyLLMContentRuleStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLLMKeywordLibraryRequest() (request *ModifyLLMKeywordLibraryRequest) {
+    request = &ModifyLLMKeywordLibraryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ModifyLLMKeywordLibrary")
+    
+    
+    return
+}
+
+func NewModifyLLMKeywordLibraryResponse() (response *ModifyLLMKeywordLibraryResponse) {
+    response = &ModifyLLMKeywordLibraryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyLLMKeywordLibrary
+// This API is used to modify a custom lexicon.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyLLMKeywordLibrary(request *ModifyLLMKeywordLibraryRequest) (response *ModifyLLMKeywordLibraryResponse, err error) {
+    return c.ModifyLLMKeywordLibraryWithContext(context.Background(), request)
+}
+
+// ModifyLLMKeywordLibrary
+// This API is used to modify a custom lexicon.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyLLMKeywordLibraryWithContext(ctx context.Context, request *ModifyLLMKeywordLibraryRequest) (response *ModifyLLMKeywordLibraryResponse, err error) {
+    if request == nil {
+        request = NewModifyLLMKeywordLibraryRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "ModifyLLMKeywordLibrary")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLLMKeywordLibrary require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyLLMKeywordLibraryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLLMSdkAccessRequest() (request *ModifyLLMSdkAccessRequest) {
+    request = &ModifyLLMSdkAccessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ModifyLLMSdkAccess")
+    
+    
+    return
+}
+
+func NewModifyLLMSdkAccessResponse() (response *ModifyLLMSdkAccessResponse) {
+    response = &ModifyLLMSdkAccessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyLLMSdkAccess
+// This API is used to configure boundary access for llmwaf-sdk.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyLLMSdkAccess(request *ModifyLLMSdkAccessRequest) (response *ModifyLLMSdkAccessResponse, err error) {
+    return c.ModifyLLMSdkAccessWithContext(context.Background(), request)
+}
+
+// ModifyLLMSdkAccess
+// This API is used to configure boundary access for llmwaf-sdk.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyLLMSdkAccessWithContext(ctx context.Context, request *ModifyLLMSdkAccessRequest) (response *ModifyLLMSdkAccessResponse, err error) {
+    if request == nil {
+        request = NewModifyLLMSdkAccessRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "ModifyLLMSdkAccess")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLLMSdkAccess require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyLLMSdkAccessResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLLMStatusRequest() (request *ModifyLLMStatusRequest) {
+    request = &ModifyLLMStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ModifyLLMStatus")
+    
+    
+    return
+}
+
+func NewModifyLLMStatusResponse() (response *ModifyLLMStatusResponse) {
+    response = &ModifyLLMStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyLLMStatus
+// This API is used to modify the module switch status of large model protection, supporting independent on/off operations for the master switch and each submodule. Before enabling, ensure that the instance has purchased the large model protection capability. If not purchased, the enable operation returns the AuthFailure.ErrCodeNoPurchased error.
+//
+// error code that may be returned:
+//  AUTHFAILURE_ERRCODENOPURCHASED = "AuthFailure.ErrCodeNoPurchased"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION_INVALIDREQUEST = "UnsupportedOperation.InvalidRequest"
+func (c *Client) ModifyLLMStatus(request *ModifyLLMStatusRequest) (response *ModifyLLMStatusResponse, err error) {
+    return c.ModifyLLMStatusWithContext(context.Background(), request)
+}
+
+// ModifyLLMStatus
+// This API is used to modify the module switch status of large model protection, supporting independent on/off operations for the master switch and each submodule. Before enabling, ensure that the instance has purchased the large model protection capability. If not purchased, the enable operation returns the AuthFailure.ErrCodeNoPurchased error.
+//
+// error code that may be returned:
+//  AUTHFAILURE_ERRCODENOPURCHASED = "AuthFailure.ErrCodeNoPurchased"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION_INVALIDREQUEST = "UnsupportedOperation.InvalidRequest"
+func (c *Client) ModifyLLMStatusWithContext(ctx context.Context, request *ModifyLLMStatusRequest) (response *ModifyLLMStatusResponse, err error) {
+    if request == nil {
+        request = NewModifyLLMStatusRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "ModifyLLMStatus")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLLMStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyLLMStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLLMWafDLPRuleRequest() (request *ModifyLLMWafDLPRuleRequest) {
+    request = &ModifyLLMWafDLPRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ModifyLLMWafDLPRule")
+    
+    
+    return
+}
+
+func NewModifyLLMWafDLPRuleResponse() (response *ModifyLLMWafDLPRuleResponse) {
+    response = &ModifyLLMWafDLPRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyLLMWafDLPRule
+// This API is used to modify llmwaf DLP rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE_ERRCODENOPURCHASED = "AuthFailure.ErrCodeNoPurchased"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION_INVALIDREQUEST = "UnsupportedOperation.InvalidRequest"
+func (c *Client) ModifyLLMWafDLPRule(request *ModifyLLMWafDLPRuleRequest) (response *ModifyLLMWafDLPRuleResponse, err error) {
+    return c.ModifyLLMWafDLPRuleWithContext(context.Background(), request)
+}
+
+// ModifyLLMWafDLPRule
+// This API is used to modify llmwaf DLP rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE_ERRCODENOPURCHASED = "AuthFailure.ErrCodeNoPurchased"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION_INVALIDREQUEST = "UnsupportedOperation.InvalidRequest"
+func (c *Client) ModifyLLMWafDLPRuleWithContext(ctx context.Context, request *ModifyLLMWafDLPRuleRequest) (response *ModifyLLMWafDLPRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyLLMWafDLPRuleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "ModifyLLMWafDLPRule")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLLMWafDLPRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyLLMWafDLPRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLLMWafProtectRuleRequest() (request *ModifyLLMWafProtectRuleRequest) {
+    request = &ModifyLLMWafProtectRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ModifyLLMWafProtectRule")
+    
+    
+    return
+}
+
+func NewModifyLLMWafProtectRuleResponse() (response *ModifyLLMWafProtectRuleResponse) {
+    response = &ModifyLLMWafProtectRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyLLMWafProtectRule
+// This API is used to modify LLM rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE_ERRCODENOPURCHASED = "AuthFailure.ErrCodeNoPurchased"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION_INVALIDREQUEST = "UnsupportedOperation.InvalidRequest"
+func (c *Client) ModifyLLMWafProtectRule(request *ModifyLLMWafProtectRuleRequest) (response *ModifyLLMWafProtectRuleResponse, err error) {
+    return c.ModifyLLMWafProtectRuleWithContext(context.Background(), request)
+}
+
+// ModifyLLMWafProtectRule
+// This API is used to modify LLM rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE_ERRCODENOPURCHASED = "AuthFailure.ErrCodeNoPurchased"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION_INVALIDREQUEST = "UnsupportedOperation.InvalidRequest"
+func (c *Client) ModifyLLMWafProtectRuleWithContext(ctx context.Context, request *ModifyLLMWafProtectRuleRequest) (response *ModifyLLMWafProtectRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyLLMWafProtectRuleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "ModifyLLMWafProtectRule")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLLMWafProtectRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyLLMWafProtectRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLLMWafToolCallRuleRequest() (request *ModifyLLMWafToolCallRuleRequest) {
+    request = &ModifyLLMWafToolCallRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ModifyLLMWafToolCallRule")
+    
+    
+    return
+}
+
+func NewModifyLLMWafToolCallRuleResponse() (response *ModifyLLMWafToolCallRuleResponse) {
+    response = &ModifyLLMWafToolCallRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyLLMWafToolCallRule
+// This API is used to modify Tool Call rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE_ERRCODENOPURCHASED = "AuthFailure.ErrCodeNoPurchased"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION_INVALIDREQUEST = "UnsupportedOperation.InvalidRequest"
+func (c *Client) ModifyLLMWafToolCallRule(request *ModifyLLMWafToolCallRuleRequest) (response *ModifyLLMWafToolCallRuleResponse, err error) {
+    return c.ModifyLLMWafToolCallRuleWithContext(context.Background(), request)
+}
+
+// ModifyLLMWafToolCallRule
+// This API is used to modify Tool Call rules.
+//
+// error code that may be returned:
+//  AUTHFAILURE_ERRCODENOPURCHASED = "AuthFailure.ErrCodeNoPurchased"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION_INVALIDREQUEST = "UnsupportedOperation.InvalidRequest"
+func (c *Client) ModifyLLMWafToolCallRuleWithContext(ctx context.Context, request *ModifyLLMWafToolCallRuleRequest) (response *ModifyLLMWafToolCallRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyLLMWafToolCallRuleRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "ModifyLLMWafToolCallRule")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLLMWafToolCallRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyLLMWafToolCallRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyModuleStatusRequest() (request *ModifyModuleStatusRequest) {
     request = &ModifyModuleStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7043,6 +8369,80 @@ func (c *Client) SwitchElasticModeWithContext(ctx context.Context, request *Swit
     return
 }
 
+func NewUploadSkillSecScanRequest() (request *UploadSkillSecScanRequest) {
+    request = &UploadSkillSecScanRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "UploadSkillSecScan")
+    
+    
+    return
+}
+
+func NewUploadSkillSecScanResponse() (response *UploadSkillSecScanResponse) {
+    response = &UploadSkillSecScanResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UploadSkillSecScan
+// This API is used to upload a Skill ZIP file and trigger asynchronous security detection.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_SKILLSCANAPIKEYDISABLED = "InvalidParameter.SkillScanApiKeyDisabled"
+//  INVALIDPARAMETER_SKILLSCANCREATESCANFAILED = "InvalidParameter.SkillScanCreateScanFailed"
+//  INVALIDPARAMETER_SKILLSCANINVALIDBASE64 = "InvalidParameter.SkillScanInvalidBase64"
+//  INVALIDPARAMETER_SKILLSCANINVALIDFILEFORMAT = "InvalidParameter.SkillScanInvalidFileFormat"
+//  INVALIDPARAMETER_SKILLSCANINVALIDPARAM = "InvalidParameter.SkillScanInvalidParam"
+//  INVALIDPARAMETER_SKILLSCANINVALIDREQUEST = "InvalidParameter.SkillScanInvalidRequest"
+//  INVALIDPARAMETER_SKILLSCANNOFILES = "InvalidParameter.SkillScanNoFiles"
+//  INVALIDPARAMETER_SKILLSCANQUERYFAILED = "InvalidParameter.SkillScanQueryFailed"
+//  INVALIDPARAMETER_SKILLSCANRATELIMITEXCEEDED = "InvalidParameter.SkillScanRateLimitExceeded"
+//  INVALIDPARAMETER_SKILLSCANSERVICEIDEMPTY = "InvalidParameter.SkillScanServiceIdEmpty"
+//  INVALIDPARAMETER_SKILLSCANSWITCHOFF = "InvalidParameter.SkillScanSwitchOff"
+//  INVALIDPARAMETER_SKILLSCANTRIGGERFAILED = "InvalidParameter.SkillScanTriggerFailed"
+//  INVALIDPARAMETER_SKILLSCANUNAUTHORIZED = "InvalidParameter.SkillScanUnauthorized"
+func (c *Client) UploadSkillSecScan(request *UploadSkillSecScanRequest) (response *UploadSkillSecScanResponse, err error) {
+    return c.UploadSkillSecScanWithContext(context.Background(), request)
+}
+
+// UploadSkillSecScan
+// This API is used to upload a Skill ZIP file and trigger asynchronous security detection.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_SKILLSCANAPIKEYDISABLED = "InvalidParameter.SkillScanApiKeyDisabled"
+//  INVALIDPARAMETER_SKILLSCANCREATESCANFAILED = "InvalidParameter.SkillScanCreateScanFailed"
+//  INVALIDPARAMETER_SKILLSCANINVALIDBASE64 = "InvalidParameter.SkillScanInvalidBase64"
+//  INVALIDPARAMETER_SKILLSCANINVALIDFILEFORMAT = "InvalidParameter.SkillScanInvalidFileFormat"
+//  INVALIDPARAMETER_SKILLSCANINVALIDPARAM = "InvalidParameter.SkillScanInvalidParam"
+//  INVALIDPARAMETER_SKILLSCANINVALIDREQUEST = "InvalidParameter.SkillScanInvalidRequest"
+//  INVALIDPARAMETER_SKILLSCANNOFILES = "InvalidParameter.SkillScanNoFiles"
+//  INVALIDPARAMETER_SKILLSCANQUERYFAILED = "InvalidParameter.SkillScanQueryFailed"
+//  INVALIDPARAMETER_SKILLSCANRATELIMITEXCEEDED = "InvalidParameter.SkillScanRateLimitExceeded"
+//  INVALIDPARAMETER_SKILLSCANSERVICEIDEMPTY = "InvalidParameter.SkillScanServiceIdEmpty"
+//  INVALIDPARAMETER_SKILLSCANSWITCHOFF = "InvalidParameter.SkillScanSwitchOff"
+//  INVALIDPARAMETER_SKILLSCANTRIGGERFAILED = "InvalidParameter.SkillScanTriggerFailed"
+//  INVALIDPARAMETER_SKILLSCANUNAUTHORIZED = "InvalidParameter.SkillScanUnauthorized"
+func (c *Client) UploadSkillSecScanWithContext(ctx context.Context, request *UploadSkillSecScanRequest) (response *UploadSkillSecScanResponse, err error) {
+    if request == nil {
+        request = NewUploadSkillSecScanRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "waf", APIVersion, "UploadSkillSecScan")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UploadSkillSecScan require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUploadSkillSecScanResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpsertCCRuleRequest() (request *UpsertCCRuleRequest) {
     request = &UpsertCCRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7121,7 +8521,12 @@ func NewUpsertSessionResponse() (response *UpsertSessionResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_SPECIFICATIONERR = "LimitExceeded.SpecificationErr"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDREQUEST = "UnsupportedOperation.InvalidRequest"
 func (c *Client) UpsertSession(request *UpsertSessionRequest) (response *UpsertSessionResponse, err error) {
     return c.UpsertSessionWithContext(context.Background(), request)
 }
@@ -7131,7 +8536,12 @@ func (c *Client) UpsertSession(request *UpsertSessionRequest) (response *UpsertS
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_SPECIFICATIONERR = "LimitExceeded.SpecificationErr"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INVALIDREQUEST = "UnsupportedOperation.InvalidRequest"
 func (c *Client) UpsertSessionWithContext(ctx context.Context, request *UpsertSessionRequest) (response *UpsertSessionResponse, err error) {
     if request == nil {
         request = NewUpsertSessionRequest()

@@ -65,11 +65,10 @@ type CheckStepInfo struct {
 }
 
 type Column struct {
-	// Column nameNote: This field may return null, indicating that no valid values can be obtained.
+	// Column name
 	ColumnName *string `json:"ColumnName,omitnil,omitempty" name:"ColumnName"`
 
-	// New column name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// New column name.
 	NewColumnName *string `json:"NewColumnName,omitnil,omitempty" name:"NewColumnName"`
 }
 
@@ -632,16 +631,13 @@ func (r *ConfigureSyncJobResponse) FromJsonString(s string) error {
 }
 
 type ConflictHandleOption struct {
-	// Conditionally overwritten column
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Columns for conditional overwrite.
 	ConditionColumn *string `json:"ConditionColumn,omitnil,omitempty" name:"ConditionColumn"`
 
-	// Conditional overwrite operation
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Condition coverage operation. Currently, only > is supported.
 	ConditionOperator *string `json:"ConditionOperator,omitnil,omitempty" name:"ConditionOperator"`
 
-	// Conditional overwrite priority configuration
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Condition coverage priority processing. Supported types are >, <, and =.
 	ConditionOrderInSrcAndDst *string `json:"ConditionOrderInSrcAndDst,omitnil,omitempty" name:"ConditionOrderInSrcAndDst"`
 }
 
@@ -1255,13 +1251,13 @@ type CreateSubscribeRequestParams struct {
 	// Subscription database type. Currently, cynosdbmysql, mariadb, mongodb, mysql, percona, tdpg, and tdsqlpercona are supported.
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
-	// Payment method. Valid values: 0 (monthly subscription); 1 (pay-as-you-go).
+	// Payment method. Valid values: 0 (yearly/monthly subscription); 1 (pay-as-you-go).
 	PayType *int64 `json:"PayType,omitnil,omitempty" name:"PayType"`
 
-	// Purchase duration. This field needs to be filled in when the payType is monthly subscription. The unit is month. Value range: 1-120. Default value: 1.
+	// Purchase duration. This field needs to be filled in when the payType is yearly/monthly subscription. The unit is month. Value range: 1-120. Default value: 1.
 	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
-	// Whether to renew automatically. This field needs to be filled in when the payType is monthly subscription. Valid values: 0 (auto-renewal disabled); 1 (auto-renewal enabled). Automatic renewal is not performed by default. This flag is invalid for pay-as-you-go.
+	// Whether to renew automatically. This field needs to be filled in when the payType is yearly/monthly subscription. Valid values: 0 (auto-renewal disabled); 1 (auto-renewal enabled). Automatic renewal is not performed by default. This flag is invalid for pay-as-you-go.
 	AutoRenew *int64 `json:"AutoRenew,omitnil,omitempty" name:"AutoRenew"`
 
 	// Quantity. Default value: 1. Maximum value: 10.
@@ -1273,7 +1269,10 @@ type CreateSubscribeRequestParams struct {
 	// Custom task name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
+	// For the data subscription version, Kafka and KafkaPro (Professional Edition) are currently supported; if left blank, it defaults to KafkaPro.
+	SubscribeVersion *string `json:"SubscribeVersion,omitnil,omitempty" name:"SubscribeVersion"`
 
+	// For subscription instance specifications, only 'small', 'medium', and 'large' are currently supported.
 	InstanceClass *string `json:"InstanceClass,omitnil,omitempty" name:"InstanceClass"`
 }
 
@@ -1283,13 +1282,13 @@ type CreateSubscribeRequest struct {
 	// Subscription database type. Currently, cynosdbmysql, mariadb, mongodb, mysql, percona, tdpg, and tdsqlpercona are supported.
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
-	// Payment method. Valid values: 0 (monthly subscription); 1 (pay-as-you-go).
+	// Payment method. Valid values: 0 (yearly/monthly subscription); 1 (pay-as-you-go).
 	PayType *int64 `json:"PayType,omitnil,omitempty" name:"PayType"`
 
-	// Purchase duration. This field needs to be filled in when the payType is monthly subscription. The unit is month. Value range: 1-120. Default value: 1.
+	// Purchase duration. This field needs to be filled in when the payType is yearly/monthly subscription. The unit is month. Value range: 1-120. Default value: 1.
 	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
-	// Whether to renew automatically. This field needs to be filled in when the payType is monthly subscription. Valid values: 0 (auto-renewal disabled); 1 (auto-renewal enabled). Automatic renewal is not performed by default. This flag is invalid for pay-as-you-go.
+	// Whether to renew automatically. This field needs to be filled in when the payType is yearly/monthly subscription. Valid values: 0 (auto-renewal disabled); 1 (auto-renewal enabled). Automatic renewal is not performed by default. This flag is invalid for pay-as-you-go.
 	AutoRenew *int64 `json:"AutoRenew,omitnil,omitempty" name:"AutoRenew"`
 
 	// Quantity. Default value: 1. Maximum value: 10.
@@ -1301,6 +1300,10 @@ type CreateSubscribeRequest struct {
 	// Custom task name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
+	// For the data subscription version, Kafka and KafkaPro (Professional Edition) are currently supported; if left blank, it defaults to KafkaPro.
+	SubscribeVersion *string `json:"SubscribeVersion,omitnil,omitempty" name:"SubscribeVersion"`
+
+	// For subscription instance specifications, only 'small', 'medium', and 'large' are currently supported.
 	InstanceClass *string `json:"InstanceClass,omitnil,omitempty" name:"InstanceClass"`
 }
 
@@ -1323,6 +1326,7 @@ func (r *CreateSubscribeRequest) FromJsonString(s string) error {
 	delete(f, "Count")
 	delete(f, "Tags")
 	delete(f, "Name")
+	delete(f, "SubscribeVersion")
 	delete(f, "InstanceClass")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSubscribeRequest has unknown keys!", "")
@@ -1358,7 +1362,7 @@ func (r *CreateSubscribeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSyncJobRequestParams struct {
-	// Billing mode. Valid values: `PrePay` (monthly subscription); `PostPay` (pay-as-you-go). Currently, DTS at Tencent Cloud International is free of charge.
+	// Billing mode. Valid values: `PrePay` (yearly/monthly subscription); `PostPay` (pay-as-you-go). Currently, DTS at Tencent Cloud International is free of charge.
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
 	// Source database type, such as `mysql`, `cynosdbmysql`, `tdapg`, `tdpg`, and `tdsqlmysql`.
@@ -1376,7 +1380,7 @@ type CreateSyncJobRequestParams struct {
 	// Sync task specification, such as `Standard`.
 	Specification *string `json:"Specification,omitnil,omitempty" name:"Specification"`
 
-
+	// Purchase duration (in months); this configuration is applicable only when PayMode is set to 'PrePay'. The default value is 1 month, and the valid range is [1, 100].
 	TimeSpan *uint64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
 	// Tag information
@@ -1401,7 +1405,7 @@ type CreateSyncJobRequestParams struct {
 type CreateSyncJobRequest struct {
 	*tchttp.BaseRequest
 	
-	// Billing mode. Valid values: `PrePay` (monthly subscription); `PostPay` (pay-as-you-go). Currently, DTS at Tencent Cloud International is free of charge.
+	// Billing mode. Valid values: `PrePay` (yearly/monthly subscription); `PostPay` (pay-as-you-go). Currently, DTS at Tencent Cloud International is free of charge.
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
 	// Source database type, such as `mysql`, `cynosdbmysql`, `tdapg`, `tdpg`, and `tdsqlmysql`.
@@ -1419,6 +1423,7 @@ type CreateSyncJobRequest struct {
 	// Sync task specification, such as `Standard`.
 	Specification *string `json:"Specification,omitnil,omitempty" name:"Specification"`
 
+	// Purchase duration (in months); this configuration is applicable only when PayMode is set to 'PrePay'. The default value is 1 month, and the valid range is [1, 100].
 	TimeSpan *uint64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
 	// Tag information
@@ -1697,77 +1702,73 @@ type DBItem struct {
 	Triggers []*string `json:"Triggers,omitnil,omitempty" name:"Triggers"`
 }
 
-type Database struct {
-	// Name of the database to be migrated or synced, which is required if `ObjectMode` is `Partial`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+type DBOpFilter struct {
+	// Database name for rule effectiveness
 	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
-	// Name of the database after migration or sync, which is the same as the source database name by default.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Database-level DDL/DML Filter Rule
+	OpFilter *OpFilter `json:"OpFilter,omitnil,omitempty" name:"OpFilter"`
+
+	// Table-level DDL/DML filtering information
+	Tables []*TableFilter `json:"Tables,omitnil,omitempty" name:"Tables"`
+
+	// View-level DDL/DML filtering information
+	Views []*ViewFilter `json:"Views,omitnil,omitempty" name:"Views"`
+}
+
+type Database struct {
+	// <p>Database name for migration or synchronization. This item is required when ObjectMode is Partial.</p>
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
+
+	// <p>The name of the migrated or synchronized database is identical to that of the source database by default.</p>
 	NewDbName *string `json:"NewDbName,omitnil,omitempty" name:"NewDbName"`
 
-	// Database selection mode, which is required if `Mode` is `Partial`. Valid values: `All`, `Partial`. Note that the sync of advanced objects does not depend on this parameter. To sync an entire database, set this parameter to `All`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>DB selection mode: All (for all objects under the current object), Partial (partial objects). This item is required when Mode is Partial. Note that synchronization of advanced objects is independent of this value. If you sync entire database, it should be All here.</p>
 	DbMode *string `json:"DbMode,omitnil,omitempty" name:"DbMode"`
 
-	// The schema to be migrated or synced
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>schema for migration or synchronization</p>
 	SchemaName *string `json:"SchemaName,omitnil,omitempty" name:"SchemaName"`
 
-	// Name of the schema after migration or sync
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>schema name after migration or synchronization</p>
 	NewSchemaName *string `json:"NewSchemaName,omitnil,omitempty" name:"NewSchemaName"`
 
-	// Table selection mode, which is required if `DBMode` is `Partial` for postgresql or sqlserver. Valid values: `All`, `Partial`. To sync an entire schema, set this parameter to `All`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>schema Selection Mode, pg and sqlserver require the use of</p><p>Enumeration value:</p><ul><li>All: All objects under the current object</li><li>Partial: Partial objects</li></ul>
 	SchemaMode *string `json:"SchemaMode,omitnil,omitempty" name:"SchemaMode"`
 
-	// Table selection mode, which is required if `DBMode` is `Partial`. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Schema selection mode: All (for all objects under the current object), Partial (partial objects). This item is required when DBMode is Partial. If you sync entire database, it should be All here.</p>
 	TableMode *string `json:"TableMode,omitnil,omitempty" name:"TableMode"`
 
-	// The set of table objects, which is required if `TableMode` is `Partial`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Table diagram object set. This item needs to be filled in when TableMode is Partial.</p>
 	Tables []*Table `json:"Tables,omitnil,omitempty" name:"Tables"`
 
-	// View selection mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>View selection mode: All indicates all view objects under the current object, Partial indicates partial view objects. If you sync entire database, it should be All here.</p>
 	ViewMode *string `json:"ViewMode,omitnil,omitempty" name:"ViewMode"`
 
-	// The set of view objects, which is required if `ViewMode` is `Partial`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>View object set. When ViewMode is Partial, this item requires filling in.</p>
 	Views []*View `json:"Views,omitnil,omitempty" name:"Views"`
 
-	// Sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Select the sync mode. Partial means part, and All means the entire database. If you want to sync entire database, select All here.</p>
 	FunctionMode *string `json:"FunctionMode,omitnil,omitempty" name:"FunctionMode"`
 
-	// This parameter is required if `FunctionMode` is `Partial`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>This item needs to be filled in when FunctionMode value is Partial.</p>
 	Functions []*string `json:"Functions,omitnil,omitempty" name:"Functions"`
 
-	// Sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Select the sync mode. Partial means part, and All means the entire database. If you want to sync entire database, select All here.</p>
 	ProcedureMode *string `json:"ProcedureMode,omitnil,omitempty" name:"ProcedureMode"`
 
-	// This parameter is required if `ProcedureMode` is `Partial`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>This item needs to be filled in when the ProcedureMode value is Partial.</p>
 	Procedures []*string `json:"Procedures,omitnil,omitempty" name:"Procedures"`
 
-	// Trigger sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`. Currently, the advanced object "trigger" is not supported for data sync.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Trigger migration mode, All (all objects under the current object), Partial (partial objects). If syncing the entire database, it should be All here. Data sync does not currently support this advanced object.</p>
 	TriggerMode *string `json:"TriggerMode,omitnil,omitempty" name:"TriggerMode"`
 
-	// This parameter is used to specify the names of the triggers to be migrated when the value of `TriggerMode` is `partial`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>When TriggerMode is partial, specify the trigger name to migrate.</p>
 	Triggers []*string `json:"Triggers,omitnil,omitempty" name:"Triggers"`
 
-	// Event sync mode. Valid values: `All`, `Partial`. To sync an entire database, set this parameter to `All`. Currently, the advanced object "event" is not supported for data sync.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Event migration mode: All (all objects under the current object), Partial (partial objects). If syncing the entire database, it should be All here. This advanced object is not currently supported for data sync.</p>
 	EventMode *string `json:"EventMode,omitnil,omitempty" name:"EventMode"`
 
-	// This parameter is used to specify the names of the events to be migrated when the value of `EventMode` is `partial`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>When EventMode is partial, specify the event name to migrate.</p>
 	Events []*string `json:"Events,omitnil,omitempty" name:"Events"`
 }
 
@@ -1785,12 +1786,10 @@ type DatabaseTableObject struct {
 }
 
 type DdlOption struct {
-	// DDL type, such as database, table, view, and index.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// DDL type. For example: database, table, view, and index.
 	DdlObject *string `json:"DdlObject,omitnil,omitempty" name:"DdlObject"`
 
-	// DDL value. Valid values: [Create,Drop,Alter] for database <br>[Create,Drop,Alter,Truncate,Rename] for table <br/>[Create,Drop] for view <br/>[Create,Drop] for index
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specific values of DDL. For Database, it can be [Create, Drop, Alter];<br>for Table, it can be [Create, Drop, Alter, Truncate, Rename];<br>for View, it can be [Create, Drop];<br>for Index, it can be [Create, Drop].
 	DdlValue []*string `json:"DdlValue,omitnil,omitempty" name:"DdlValue"`
 }
 
@@ -3060,13 +3059,13 @@ type DescribeSubscribeDetailResponseParams struct {
 	// Isolation time, the format is: Y-m-d h:m:s. Default time: 0000-00-00 00:00:00.Note: This field may return null, indicating that no valid values can be obtained.
 	IsolateTime *string `json:"IsolateTime,omitnil,omitempty" name:"IsolateTime"`
 
-	// Expiration time for monthly subscription tasks, the format is: Y-m-d h:m:s. Default time: 0000-00-00 00:00:00.Note: This field may return null, indicating that no valid values can be obtained.
+	// Expiration time for yearly/monthly subscription tasks, the format is: Y-m-d h:m:s. Default time: 0000-00-00 00:00:00.Note: This field may return null, indicating that no valid values can be obtained.
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// Offline time, the format is: Y-m-d h:m:s. Default time: 0000-00-00 00:00:00.Note: This field may return null, indicating that no valid values can be obtained.
 	OfflineTime *string `json:"OfflineTime,omitnil,omitempty" name:"OfflineTime"`
 
-	// Payment method. Valid values: 0 (monthly subscription); 1 (pay-as-you-go).
+	// Payment method. Valid values: 0 (yearly/monthly subscription); 1 (pay-as-you-go).
 	PayType *int64 `json:"PayType,omitnil,omitempty" name:"PayType"`
 
 	// Auto-renewal flag. It is meaningful only when PayType=0. Valid values: 0 (auto-renewal disabled); 1 (auto-renewal enabled).
@@ -3095,7 +3094,7 @@ type DescribeSubscribeDetailResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	KafkaConfig *SubscribeKafkaConfig `json:"KafkaConfig,omitnil,omitempty" name:"KafkaConfig"`
 
-
+	// Subscribe to version information for the built-in Kafka
 	KafkaVersion *string `json:"KafkaVersion,omitnil,omitempty" name:"KafkaVersion"`
 
 	// Source database access type. Valid values: extranet (public network); vpncloud (VPN access); dcg (Direct Connect); ccn (CCN); cdb (database); cvm (self-build on CVM); intranet (intranet); vpc (VPC). Note: The specific optional values depend on the current link support capabilities.Note: This field may return null, indicating that no valid values can be obtained.
@@ -3119,16 +3118,16 @@ type DescribeSubscribeDetailResponseParams struct {
 	// Additional information added for the business. The parameter name is called key, and the parameter value is called value.Optional parameters for mysql: ProcessXA. Fill in true to process, others will not be processed.Optional parameters for mongo: SubscribeType. Currently only changeStream is supported.Note: This field may return null, indicating that no valid values can be obtained.
 	ExtraAttr []*KeyValuePairOption `json:"ExtraAttr,omitnil,omitempty" name:"ExtraAttr"`
 
-
+	// Data subscription version; currently supports Kafka and KafkaPro (Professional Edition).
 	SubscribeVersion *string `json:"SubscribeVersion,omitnil,omitempty" name:"SubscribeVersion"`
 
-
+	// VPC where the consumer-side address is located
 	ConsumerVpcId *string `json:"ConsumerVpcId,omitnil,omitempty" name:"ConsumerVpcId"`
 
-
+	// Subnet where the consumer-side address is located
 	ConsumerSubnetId *string `json:"ConsumerSubnetId,omitnil,omitempty" name:"ConsumerSubnetId"`
 
-
+	// Subscribe to instance specifications
 	InstanceClass *string `json:"InstanceClass,omitnil,omitempty" name:"InstanceClass"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3156,7 +3155,7 @@ type DescribeSubscribeJobsRequestParams struct {
 	// Subscription ID (exact match)
 	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
 
-
+	// Filter by subscription ID, exact match
 	SubscribeIds []*string `json:"SubscribeIds,omitnil,omitempty" name:"SubscribeIds"`
 
 	// Subscription name (prefix fuzzy match)
@@ -3165,10 +3164,10 @@ type DescribeSubscribeJobsRequestParams struct {
 	// Subscribed cloud database instance ID (exact match)
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-
+	// Subscribed topicName
 	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
 
-	// Payment method. Valid values: 0 (monthly subscription); 1 (pay-as-you-go).
+	// Payment method. Valid values: 0 (yearly/monthly subscription); 1 (pay-as-you-go).
 	PayType *int64 `json:"PayType,omitnil,omitempty" name:"PayType"`
 
 	// Subscribed database product. Currently, cynosdbmysql, mariadb, mongodb, mysql, percona, tdpg, tdsqlpercona are supported.
@@ -3199,6 +3198,7 @@ type DescribeSubscribeJobsRequest struct {
 	// Subscription ID (exact match)
 	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
 
+	// Filter by subscription ID, exact match
 	SubscribeIds []*string `json:"SubscribeIds,omitnil,omitempty" name:"SubscribeIds"`
 
 	// Subscription name (prefix fuzzy match)
@@ -3207,9 +3207,10 @@ type DescribeSubscribeJobsRequest struct {
 	// Subscribed cloud database instance ID (exact match)
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
+	// Subscribed topicName
 	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
 
-	// Payment method. Valid values: 0 (monthly subscription); 1 (pay-as-you-go).
+	// Payment method. Valid values: 0 (yearly/monthly subscription); 1 (pay-as-you-go).
 	PayType *int64 `json:"PayType,omitnil,omitempty" name:"PayType"`
 
 	// Subscribed database product. Currently, cynosdbmysql, mariadb, mongodb, mysql, percona, tdpg, tdsqlpercona are supported.
@@ -3763,118 +3764,94 @@ type DynamicOptions struct {
 }
 
 type Endpoint struct {
-	// Region name, such as `ap-guangzhou`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Region English name, for example: ap-guangzhou</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Node type of TDSQL for MySQL. Enumerated values: `proxy`, `set`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Node type. proxy means the node type is host, set means the node type is node. proxy type must be the first item in the array. Source/target configuration for tdsqlmysql type is required.</p>
 	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
 
-	// Database kernel type, which is used to distinguish between different kernels in TDSQL. Valid values: `percona`, `mariadb`, `mysql`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Database kernel type, used in tdsql to differentiate between different kernels: percona, mariadb, mysql. Note that tdsql-C mysql and tdsql PostgreSQL do not need to fill in this field.</p>
 	DbKernel *string `json:"DbKernel,omitnil,omitempty" name:"DbKernel"`
 
-	// Database instance ID in the format of `cdb-powiqx8q`
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Database instance ID, in the format of: cdb-powiqx8q</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Instance IP address, which is required if the access type is not `cdb`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>IP address of the instance. This item is required when the access type is not cdb.</p>
 	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
-	// Instance port, which is required if the access type is not `cdb`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Instance port. This item is required when the access type is not cdb.</p>
 	Port *uint64 `json:"Port,omitnil,omitempty" name:"Port"`
 
-	// Username, which is required for an instance authenticated by username and password.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>User name, required for accessing instances that need username and password authentication.</p>
 	User *string `json:"User,omitnil,omitempty" name:"User"`
 
-	// Password, which is required for an instance authenticated by username and password.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Password is required for accessing instances that need username and password authentication.</p>
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// Database name, which is required if the database type is `cdwpg`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Database name, required when the database is cdwpg</p>
 	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
-	// VPC ID in the format of `vpc-92jblxto`, which is required if the access type is `vpc`, `dcg`, or `vpncloud`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Private network ID. This item is required for private network, Direct Connect, and VPN access methods, in the format of vpc-92jblxto.</p>
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// ID of the subnet in the VPC in the format of `subnet-3paxmkdz`, which is required if the access type is `vpc`, `dcg`, or `vpncloud`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Subnet ID under the private network. This item is required for private network, Direct Connect, and VPN access methods, in the format of subnet-3paxmkdz.</p>
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// Short CVM instance ID in the format of `ins-olgl39y8`, which is required if the access type is `cvm`. It is the same as the instance ID displayed in the CVM console.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>CVM instance short ID, in the format of: ins-olgl39y8, is identical to the instance ID displayed on the cloud server console page. If it is a CVM self-created instance, this field is required.</p>
 	CvmInstanceId *string `json:"CvmInstanceId,omitnil,omitempty" name:"CvmInstanceId"`
 
-	// Direct Connect gateway ID in the format of `dcg-0rxtqqxb`, which is required if the access type is `dcg`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Direct Connect gateway ID. This item is required for dedicated access type, in the format of: dcg-0rxtqqxb</p>
 	UniqDcgId *string `json:"UniqDcgId,omitnil,omitempty" name:"UniqDcgId"`
 
-	// VPN gateway ID in the format of `vpngw-9ghexg7q`, which is required if the access type is `vpncloud`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>VPN Gateway ID. This item is required for VPN access type, in the format of vpngw-9ghexg7q.</p>
 	UniqVpnGwId *string `json:"UniqVpnGwId,omitnil,omitempty" name:"UniqVpnGwId"`
 
-	// CCN instance ID in the format of `ccn-afp6kltc`, which is required if the access type is `ccn`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Cloud Connect Network ID. This item is required for the CCN access type, for example: ccn-afp6kltc</p>
 	CcnId *string `json:"CcnId,omitnil,omitempty" name:"CcnId"`
 
-	// Cloud vendor type. For Alibaba Cloud ApsaraDB for RDS instances, enter `aliyun`; otherwise, enter `others`. Default value: `others`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Cloud vendor type. For RDS instances, fill in aliyun. In other cases, fill in others. Default is others.</p>
 	Supplier *string `json:"Supplier,omitnil,omitempty" name:"Supplier"`
 
-	// Database version in the format of `5.6` or `5.7`, which takes effect only if the instance is an RDS instance. Default value: `5.6`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Database version. Valid only for RDS instances, ignored for other instances, in the format of 5.6 or 5.7, defaults to 5.6.</p>
 	EngineVersion *string `json:"EngineVersion,omitnil,omitempty" name:"EngineVersion"`
 
-	// Instance account, which is required if the operation is performed across accounts.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Account of the instance. This item is required if it is a cross-account instance.</p>
 	Account *string `json:"Account,omitnil,omitempty" name:"Account"`
 
-	// The account to which the resource belongs. Valid values: empty or `self` (the current account); `other` (another account).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Associated account is empty, self (means resources within this account), or other (means cross-account resources).</p>
 	AccountMode *string `json:"AccountMode,omitnil,omitempty" name:"AccountMode"`
 
-	// The role used for cross-account sync, which can contain [a-zA-Z0-9\-\_]+ and is required if the operation is performed across accounts.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Role for cross-account sync, only allow [a-zA-Z0-9-_]+. This item is required if it is a cross-account instance.</p>
 	AccountRole *string `json:"AccountRole,omitnil,omitempty" name:"AccountRole"`
 
-	// External role ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>External role id</p>
 	RoleExternalId *string `json:"RoleExternalId,omitnil,omitempty" name:"RoleExternalId"`
 
-	// Temporary SecretId, you can obtain the temporary key by [GetFederationToken](https://intl.cloud.tencent.com/document/product/1312/48195?from_cn_redirect=1). This field is required if it is a cross-account instance.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Temporary key Id can be obtained by applying for role assumption temporary access credentials https://www.tencentcloud.com/document/product/1312/48197.?from_cn_redirect=1 Among them, the definition of the role resource RoleArn can be found in the DTS cross-account sync document (https://www.tencentcloud.com/document/product/571/68729?from_cn_redirect=1) Section 4 about role-based definition.</p>
 	TmpSecretId *string `json:"TmpSecretId,omitnil,omitempty" name:"TmpSecretId"`
 
-	// Temporary SecretKey, you can obtain the temporary key by [GetFederationToken](https://intl.cloud.tencent.com/document/product/1312/48195?from_cn_redirect=1). This field is required if it is a cross-account instance.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Temporary key Id can be obtained by applying for role assumption temporary access credentials at https://www.tencentcloud.com/document/product/1312/48197.?from_cn_redirect=1 Among them, the definition of the role resource RoleArn can be found in the DTS cross-account sync document (https://www.tencentcloud.com/document/product/571/68729?from_cn_redirect=1) Section 4 about role definition.</p>
 	TmpSecretKey *string `json:"TmpSecretKey,omitnil,omitempty" name:"TmpSecretKey"`
 
-	// Temporary token, you can obtain the temporary key by [GetFederationToken](https://intl.cloud.tencent.com/document/product/1312/48195?from_cn_redirect=1). This field is required if it is a cross-account instance. Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Temporary key Id can be obtained by applying for role assumption temporary access credentials https://www.tencentcloud.com/document/product/1312/48197.?from_cn_redirect=1 Among them, the definition of the role resource RoleArn can be found in the DTS cross-account sync document (https://www.tencentcloud.com/document/product/571/68729?from_cn_redirect=1) Section 4 about role-based definition.</p>
 	TmpToken *string `json:"TmpToken,omitnil,omitempty" name:"TmpToken"`
 
-	// Whether to enable encrypted transfer (`UnEncrypted`: No; `Encrypted`: Yes). Default value: `UnEncrypted`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Whether to use encrypted transmission. UnEncrypted means no encrypted transmission, Encrypted means encrypted transmission. Default: UnEncrypted</p>
 	EncryptConn *string `json:"EncryptConn,omitnil,omitempty" name:"EncryptConn"`
 
-	// Network environment of the database. This parameter is required when `AccessType` is `ccn`. Valid values: `UserIDC` (user IDC), `TencentVPC` (Tencent Cloud VPC).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Network environment of the database. Required when AccessType is Cloud Connect Network (ccn). UserIDC refers to User IDC, and TencentVPC refers to Tencent Cloud VPC.</p>
 	DatabaseNetEnv *string `json:"DatabaseNetEnv,omitnil,omitempty" name:"DatabaseNetEnv"`
 
-	// The root account of CCN in the scenario where the database is connected to CCN under another Tencent Cloud account
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// <p>When the database is an instance of cross-account cloud networking, it refers to the main account to which the CCN belongs.</p>
 	CcnOwnerUin *string `json:"CcnOwnerUin,omitnil,omitempty" name:"CcnOwnerUin"`
 
-
+	// <p>When the database is cynos and it is a sub-database instance within the cynos cluster, this parameter is the ID of the sub-instance.</p>
 	ChildInstanceId *string `json:"ChildInstanceId,omitnil,omitempty" name:"ChildInstanceId"`
 
-
+	// <p>When the database is cynos and it is a sub-database instance within the cynos cluster, this parameter is the type of the sub-instance, for example: pass ro for a read-only instance, pass rw for a read-write instance.</p>
 	ChildInstanceType *string `json:"ChildInstanceType,omitnil,omitempty" name:"ChildInstanceType"`
 
-
+	// <p>Shard id of tdsql. Required if the node type is set.</p>
 	SetId *string `json:"SetId,omitnil,omitempty" name:"SetId"`
 }
 
@@ -4240,26 +4217,27 @@ type JobItem struct {
 }
 
 type KafkaOption struct {
-	// Data type delivered to Kafka, such as Avro, Json, canal-pb, canal-json
+	// <p>Data type delivered to kafka, such as Avro, Json, canal-pb, canal-Json, debezium</p>
 	DataType *string `json:"DataType,omitnil,omitempty" name:"DataType"`
 
-	// Topic sync policy, such as `Single` (deliver all data to a single topic), `Multi` (deliver data to multiple custom topics).
+	// <p>Synchronize topic policies, for example, Single (Deliver to a single topic), Multi (Custom topic name)</p>
 	TopicType *string `json:"TopicType,omitnil,omitempty" name:"TopicType"`
 
-	// Topic for DDL storage
+	// <p>topic used to store ddl</p>
 	DDLTopicName *string `json:"DDLTopicName,omitnil,omitempty" name:"DDLTopicName"`
 
-	// Topic description
+	// <p>Description of single topic and custom topic</p>
 	TopicRules []*TopicRule `json:"TopicRules,omitnil,omitempty" name:"TopicRules"`
+
+	// <p>Additional information, for specific data types, additional parameters can be set. For example, for Canal-compatible feature support: "canalOfficialFormat":"on" means to enable the Canal-compatible feature, not included by default. For large message skipping feature support: "skipLargeMessage":"on" means to enable skipping large messages, not included by default; when enabled, "maxMessageSizeMB" must be simultaneously set to a positive integer string from 1 to 100, representing the max message size threshold (MB), messages exceeding this size will be skipped, not included by default.</p>
+	DataOption []*KeyValuePairOption `json:"DataOption,omitnil,omitempty" name:"DataOption"`
 }
 
 type KeyValuePairOption struct {
-	// Option key
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Option key.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// Option value
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Option value.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
@@ -5432,19 +5410,20 @@ type MonitorInfo struct {
 }
 
 type Objects struct {
-	// Sync object type. Valid value: `Partial` (Partial objects). Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Sync object type Partial (partial objects)</p>
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
-	// Sync object, which is required if `Mode` is `Partial`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Sync object, not empty when Mode is Partial</p>
 	Databases []*Database `json:"Databases,omitnil,omitempty" name:"Databases"`
 
-	// Advanced object types, such as function and procedure. Note: If you want to migrate and synchronize advanced objects, the corresponding advanced object type should be included in this configuration. When advanced objects need to be synchronized, the initialization type must include the structure initialization type, that is, the Options.InitType value of the task is Structure or Full.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Advanced object types, such as function and procedure. Note: If you need to migrate and synchronize advanced objects, this configuration should contain the corresponding advanced object type. When synchronization of advanced objects is required, the initialization type must contain the structure initialization type, that is, the field value of task Options.InitType must be Structure or Full.</p>
 	AdvancedObjects []*string `json:"AdvancedObjects,omitnil,omitempty" name:"AdvancedObjects"`
 
-	// A redundant field that specifies the online DDL type
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>This field is deprecated. For temporary table synchronization, use Objects.Databases[n].Tables[n].TmpTables to import.</p>
 	OnlineDDL *OnlineDDL `json:"OnlineDDL,omitnil,omitempty" name:"OnlineDDL"`
+
+	// <p>Database/Table/View-level DML/DDL allowlist</p>
+	DatabasesOpFilter []*DBOpFilter `json:"DatabasesOpFilter,omitnil,omitempty" name:"DatabasesOpFilter"`
 }
 
 type OffsetTimeMap struct {
@@ -5456,59 +5435,56 @@ type OffsetTimeMap struct {
 }
 
 type OnlineDDL struct {
-	// Status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Status. Valid values: ON (enable) and OFF (disable).
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
-type Options struct {
-	// Sync initialization option. Valid values: `data` (full data initialization); `Structure` (structure initialization); `Full` (full data and structure initialization); `None` (incremental data only). Default value: `Full`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	InitType *string `json:"InitType,omitnil,omitempty" name:"InitType"`
-
-	// Processing method for duplicate tables. Valid values: `ReportErrorAfterCheck`, `InitializeAfterDelete`, `ExecuteAfterIgnore`. Default value: `ReportErrorAfterCheck`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	DealOfExistSameTable *string `json:"DealOfExistSameTable,omitnil,omitempty" name:"DealOfExistSameTable"`
-
-	// Conflict processing option. Valid values: `ReportError` (report an error); `Ignore` (ignore); `Cover` (overwrite); `ConditionCover` (conditionally overwrite). Default value: `ReportError`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	ConflictHandleType *string `json:"ConflictHandleType,omitnil,omitempty" name:"ConflictHandleType"`
-
-	// Whether to add the additional column
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	AddAdditionalColumn *bool `json:"AddAdditionalColumn,omitnil,omitempty" name:"AddAdditionalColumn"`
-
-	// DML and DDL options to be synced. Valid values: `Insert` (INSERT operations); `Update` (UPDATE operations); `Delete` (DELETE operations); `DDL` (structure sync); `PartialDDL` (custom option, which is used together with `DdlOptions`). You can also leave this parameter empty.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+type OpFilter struct {
+	// DML allowlist
 	OpTypes []*string `json:"OpTypes,omitnil,omitempty" name:"OpTypes"`
 
-	// Detailed option for conflict processing, such as condition rows and operations in conditional overwrite.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// DDL allowlist
+	DdlOptions []*DdlOption `json:"DdlOptions,omitnil,omitempty" name:"DdlOptions"`
+}
+
+type Options struct {
+	// <p>Synchronization initialization options: Data (Full Data initialization), Structure (Structure initialization), Full (Full Data and Structure initialization, default), None (incremental only). The mongodb link supports only Full Data initialization or incremental only.</p>
+	InitType *string `json:"InitType,omitnil,omitempty" name:"InitType"`
+
+	// <p>Handling of tables with the same name, ReportErrorAfterCheck (pre-validation and error reporting, default), ExecuteAfterIgnore (ignore and continue execution).</p>
+	DealOfExistSameTable *string `json:"DealOfExistSameTable,omitnil,omitempty" name:"DealOfExistSameTable"`
+
+	// <p>Conflict resolution options: ReportError (report error, default), Ignore, Cover, ConditionCover</p>
+	ConflictHandleType *string `json:"ConflictHandleType,omitnil,omitempty" name:"ConflictHandleType"`
+
+	// <p>Whether to add an additional column</p>
+	AddAdditionalColumn *bool `json:"AddAdditionalColumn,omitnil,omitempty" name:"AddAdditionalColumn"`
+
+	// <p>Options for DML and DDL to be synchronized: Insert, Update, Delete, DDL (structure synchronization), PartialDDL (custom, can be used together with DdlOptions). Note that it must contain at least one DML option.</p>
+	OpTypes []*string `json:"OpTypes,omitnil,omitempty" name:"OpTypes"`
+
+	// <p>Detailed options for conflict resolution, such as condition row and conditional operation in condition coverage</p>
 	ConflictHandleOption *ConflictHandleOption `json:"ConflictHandleOption,omitnil,omitempty" name:"ConflictHandleOption"`
 
-	// DDL statements to be synced
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>DDL synchronization option. Description of which DDLs to synchronize.</p>
 	DdlOptions []*DdlOption `json:"DdlOptions,omitnil,omitempty" name:"DdlOptions"`
 
-	// Kafka sync options
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>kafka sync options</p>
 	KafkaOption *KafkaOption `json:"KafkaOption,omitnil,omitempty" name:"KafkaOption"`
 
-	// Task speed limit information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Task speed limit information</p>
 	RateLimitOption *RateLimitOption `json:"RateLimitOption,omitnil,omitempty" name:"RateLimitOption"`
 
-	// Settings of the automatic retry time range
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Time window for automatic retry settings</p>
 	AutoRetryTimeRangeMinutes *int64 `json:"AutoRetryTimeRangeMinutes,omitnil,omitempty" name:"AutoRetryTimeRangeMinutes"`
 
-
+	// <p>Synchronize to the specified checkpoint of the kafka link. Currently only support time format: 2023-12-20T19:24:23+08:00. If not specified, it is empty.</p>
 	StartPosition *string `json:"StartPosition,omitnil,omitempty" name:"StartPosition"`
 
-
+	// <p>Whether to filter out begin and commit messages when synchronizing to kafka. Currently, only the mysql-to-kafka link supports this.</p>
 	FilterBeginCommit *bool `json:"FilterBeginCommit,omitnil,omitempty" name:"FilterBeginCommit"`
 
-
+	// <p>Whether to filter out checkpoint messages when synchronizing to kafka. Currently, only the mysql-to-kafka link supports this.</p>
 	FilterCheckpoint *bool `json:"FilterCheckpoint,omitnil,omitempty" name:"FilterCheckpoint"`
 }
 
@@ -5677,39 +5653,62 @@ type ProcessStepTip struct {
 }
 
 type RateLimitOption struct {
-	// The number of full export threads currently in effect. The value of this field can be adjusted when configuring the task. Note: If it is not set or set to 0, it means the current value is maintained. The maximum value is 16.Note: This field may return null, indicating that no valid values can be obtained.
+	// Currently effective number of threads for full export. You can adjust this field value when the task is configured. Note: If it is not set or set to 0, the current value is kept. The maximum value is 16.
 	CurrentDumpThread *int64 `json:"CurrentDumpThread,omitnil,omitempty" name:"CurrentDumpThread"`
 
-	// The default number of full export threads. This field is only meaningful in the output parameter.Note: This field may return null, indicating that no valid values can be obtained.
+	// The default number of threads for full export. This field is only meaningful in the output parameters.
 	DefaultDumpThread *int64 `json:"DefaultDumpThread,omitnil,omitempty" name:"DefaultDumpThread"`
 
-	// The full export Rps currently in effect. The value of this field can be adjusted when configuring the task. Note: If it is not set or set to 0, it means the current value is maintained. The maximum value is 50,000,000.Note: This field may return null, indicating that no valid values can be obtained.
+	// The currently effective Rps for full export. You can adjust this field value when configuring the task. Note: If not set or set to 0, it indicates to keep the current value. The maximum value is 50000000.
 	CurrentDumpRps *int64 `json:"CurrentDumpRps,omitnil,omitempty" name:"CurrentDumpRps"`
 
-	// The default full export Rps. This field is only meaningful in the output parameter.Note: This field may return null, indicating that no valid values can be obtained.
+	// The default Rps for full export. This field is only meaningful in the output parameters.
 	DefaultDumpRps *int64 `json:"DefaultDumpRps,omitnil,omitempty" name:"DefaultDumpRps"`
 
-	// The number of full import threads currently in effect. The value of this field can be adjusted when configuring the task. Note: If it is not set or set to 0, it means the current value is maintained. The maximum value is 16.Note: This field may return null, indicating that no valid values can be obtained.
+	// Currently effective number of threads for full import. You can adjust this field value when the task is configured. Note: If it is not set or set to 0, the current value is kept. The maximum value is 16.
 	CurrentLoadThread *int64 `json:"CurrentLoadThread,omitnil,omitempty" name:"CurrentLoadThread"`
 
-	// The default number of full import threads. This field is only meaningful in the output parameter.Note: This field may return null, indicating that no valid values can be obtained.
+	// The default number of threads for full import. This field is only meaningful in the output parameters.
 	DefaultLoadThread *int64 `json:"DefaultLoadThread,omitnil,omitempty" name:"DefaultLoadThread"`
 
-	// The full import Rps currently in effect. The value of this field can be adjusted when configuring the task. Note: If it is not set or set to 0, it means the current value is maintained. The maximum value is 50,000,000.Note: This field may return null, indicating that no valid values can be obtained.
+	// The currently effective Rps for full import. You can adjust this field value when configuring the task. Note: If not set or set to 0, it indicates to keep the current value. The maximum value is 50000000.	
 	CurrentLoadRps *int64 `json:"CurrentLoadRps,omitnil,omitempty" name:"CurrentLoadRps"`
 
-	// The default full import Rps. This field is only meaningful in the output parameter.Note: This field may return null, indicating that no valid values can be obtained.
+	// Default full import Rps. This field is only meaningful in the output parameter.	
 	DefaultLoadRps *int64 `json:"DefaultLoadRps,omitnil,omitempty" name:"DefaultLoadRps"`
 
-	// The number of incremental import threads currently in effect. The value of this field can be adjusted when configuring the task. Note: If it is not set or set to 0, it means the current value is maintained. The maximum value is 128.Note: This field may return null, indicating that no valid values can be obtained.
+	// The currently effective number of threads for incremental import. You can adjust this field value when configuring the task. Note: If not set or set to 0, it indicates to keep the current value. The maximum value is 128.
 	CurrentSinkerThread *int64 `json:"CurrentSinkerThread,omitnil,omitempty" name:"CurrentSinkerThread"`
 
-	// The default number of incremental import threads. This field is only meaningful in the output parameter.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// The default number of threads for incremental import. This field is only meaningful in the output parameters.
 	DefaultSinkerThread *int64 `json:"DefaultSinkerThread,omitnil,omitempty" name:"DefaultSinkerThread"`
 
-	// enum:"no"/"yes", no: the user has not set a speed limit; yes: a speed limit has been set. This field is only meaningful in the output parameter.Note: This field may return null, indicating that no valid values can be obtained.
+	// enum: "no"/"yes". no indicates that the user has not set a speed limit, while yes indicates that a speed limit has been set. This field is only meaningful in the output parameters.
 	HasUserSetRateLimit *string `json:"HasUserSetRateLimit,omitnil,omitempty" name:"HasUserSetRateLimit"`
+
+	// Default full export BPS, currently supported only for MongoDB links.
+	DefaultDumpBps *int64 `json:"DefaultDumpBps,omitnil,omitempty" name:"DefaultDumpBps"`
+
+	// Incremental import RPS, currently supported only for MongoDB links.
+	CurrentSinkerRps *int64 `json:"CurrentSinkerRps,omitnil,omitempty" name:"CurrentSinkerRps"`
+
+	// Default incremental import RPS, currently supported only for MongoDB links.
+	DefaultSinkerRps *int64 `json:"DefaultSinkerRps,omitnil,omitempty" name:"DefaultSinkerRps"`
+
+	// Current import BPS. Currently, it is only used for Redis.
+	CurrentLoadBps *int64 `json:"CurrentLoadBps,omitnil,omitempty" name:"CurrentLoadBps"`
+
+	// Number of shards in the target database. Currently, only used for Redis.
+	CurrentDstShardCount *int64 `json:"CurrentDstShardCount,omitnil,omitempty" name:"CurrentDstShardCount"`
+
+	// Full export BPS, currently supported only for MongoDB links.
+	CurrentDumpBps *int64 `json:"CurrentDumpBps,omitnil,omitempty" name:"CurrentDumpBps"`
+
+	// Incremental import BPS, currently supported only for MongoDB links.
+	CurrentSinkerBps *int64 `json:"CurrentSinkerBps,omitnil,omitempty" name:"CurrentSinkerBps"`
+
+	// Default incremental import BPS, currently supported only for MongoDB links.
+	DefaultSinkerBps *int64 `json:"DefaultSinkerBps,omitnil,omitempty" name:"DefaultSinkerBps"`
 }
 
 // Predefined struct for user
@@ -6959,7 +6958,7 @@ type SubscribeInfo struct {
 	// Cloud database status: running, isolated, offline. If it is not on the cloud, this value is empty.Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceStatus *string `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
 
-	// Data subscription lifecycle status. Valid values: normal (normal), isolating (isolating), isolated (isolated), offlining (offlining), post2PrePayIng (changing from pay-as-you-go to monthly subscription).
+	// Data subscription lifecycle status. Valid values: normal (normal), isolating (isolating), isolated (isolated), offlining (offlining), post2PrePayIng (changing from pay-as-you-go to yearly/monthly subscription).
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Data subscription status. Valid values: notStarted, checking, checkNotPass, checkPass, starting, running, error.
@@ -6974,7 +6973,7 @@ type SubscribeInfo struct {
 	// Isolation time, the format is: Y-m-d h:m:s. Default time: 0000-00-00 00:00:00.Note: This field may return null, indicating that no valid values can be obtained.
 	IsolateTime *string `json:"IsolateTime,omitnil,omitempty" name:"IsolateTime"`
 
-	// Expiration time for monthly subscription tasks, the format is: Y-m-d h:m:s. Default time: 0000-00-00 00:00:00.Note: This field may return null, indicating that no valid values can be obtained.
+	// Expiration time for yearly/monthly subscription tasks, the format is: Y-m-d h:m:s. Default time: 0000-00-00 00:00:00.Note: This field may return null, indicating that no valid values can be obtained.
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// Offline time, the format is: Y-m-d h:m:s. Default time: 0000-00-00 00:00:00.Note: This field may return null, indicating that no valid values can be obtained.
@@ -7004,6 +7003,12 @@ type SubscribeInfo struct {
 
 	// Task error messageNote: This field may return null, indicating that no valid values can be obtained.
 	Errors []*SubsErr `json:"Errors,omitnil,omitempty" name:"Errors"`
+
+	// Subscribe to instance specifications
+	InstanceClass *string `json:"InstanceClass,omitnil,omitempty" name:"InstanceClass"`
+
+	// Routing Phase for the New Version of Subscription Consumption
+	ConsumerRoutePhase *string `json:"ConsumerRoutePhase,omitnil,omitempty" name:"ConsumerRoutePhase"`
 }
 
 type SubscribeKafkaConfig struct {
@@ -7031,19 +7036,16 @@ type SubscribeObject struct {
 }
 
 type SyncDBEndpointInfos struct {
-	// Region of the database
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Database region
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// Instance network access type. Valid values: `extranet` (public network); `ipv6` (public IPv6); `cvm` (self-build on CVM); `dcg` (Direct Connect); `vpncloud` (VPN access); `cdb` (database); `ccn` (CCN); `intranet` (intranet); `vpc` (VPC). Note that the valid values are subject to the current link.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance network access type. For example: extranet (public network), ipv6 (public network ipv6), cvm (self-built CVM), dcg (DC), vpncloud (instance accessed via VPN), cdb (cloud database), ccn (CCN), intranet (self-developed cloud migration), and vpc (VPC). Note that the specific valid values depend on the current linkage.
 	AccessType *string `json:"AccessType,omitnil,omitempty" name:"AccessType"`
 
-	// Database type, such as `mysql`, `redis`, `mongodb`, `postgresql`, `mariadb`, and `percona`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Instance database type. For example: mysql, redis, mongodb, postgresql, mariadb, and percona.
 	DatabaseType *string `json:"DatabaseType,omitnil,omitempty" name:"DatabaseType"`
 
-	// Database information. Note: If the data type is tdsqlmysql, the order of this Endpoint array should correspond to the set order, and the first shard (shardkey range starting from 0) must be entered first.Note: This field may return null, indicating that no valid values can be obtained.
+	// Database information. Note: If the database type is tdsqlmysql, the order of the Endpoint array should follow the following rule: proxy nodes are placed before set nodes. If SrcConnectType selects proxy access, only the proxy node needs to be filled. If set access is selected, the first set node in the array should be the shard with a shardkey range starting from 0.
 	Info []*Endpoint `json:"Info,omitnil,omitempty" name:"Info"`
 }
 
@@ -7098,7 +7100,7 @@ type SyncJobInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	JobName *string `json:"JobName,omitnil,omitempty" name:"JobName"`
 
-	// Billing mode. Valid values: `PostPay` (pay-as-you-go); `PrePay` (monthly subscription).
+	// Billing mode. Valid values: `PostPay` (pay-as-you-go); `PrePay` (yearly/monthly subscription).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
@@ -7222,7 +7224,7 @@ type SyncJobInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OfflineTime *string `json:"OfflineTime,omitnil,omitempty" name:"OfflineTime"`
 
-
+	// Dynamically modify objects, such as changing the status of a task.
 	OptObjStatus *string `json:"OptObjStatus,omitnil,omitempty" name:"OptObjStatus"`
 
 	// Settings of automatic retry time
@@ -7236,30 +7238,33 @@ type SyncJobInfo struct {
 
 type Table struct {
 	// Table name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TableName *string `json:"TableName,omitnil,omitempty" name:"TableName"`
 
 	// New table name
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	NewTableName *string `json:"NewTableName,omitnil,omitempty" name:"NewTableName"`
 
-	// Filter condition
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Filter criteria.
 	FilterCondition *string `json:"FilterCondition,omitnil,omitempty" name:"FilterCondition"`
 
-	// Whether to synchronize all columns in the table. All: all columns under the current table; Partial (the corresponding field ColumnMode in ModifySyncJobConfig interface does not support Partial at the moment): some columns under the current table, detailed table information is provided by filling the Columns field.Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to synchronize all columns in the table. All: all columns under the current table; Partial (the corresponding field ColumnMode in the ModifySyncJobConfig API does not currently support Partial): To synchronize some specific columns of the current table, Columns field is required.
 	ColumnMode *string `json:"ColumnMode,omitnil,omitempty" name:"ColumnMode"`
 
-	// Column information in data sync. This field is required when ColumnMode is set to Partial.Note: This field may return null, indicating that no valid values can be obtained.
+	// Synchronized column information. It is required when ColumnMode is Partial.
 	Columns []*Column `json:"Columns,omitnil,omitempty" name:"Columns"`
 
-	// The temp tables to be synced. This parameter is mutually exclusive with `NewTableName`. It is valid only when the configured sync objects are table-level ones and `TableEditMode` is `pt`. To sync temp tables generated when pt-osc or other tools are used during the sync process, you must configure this parameter first. For example, if you want to perform the pt-osc operation on a table named "t1", configure this parameter as ["\_t1\_new","\_t1\_old"]; to perform the gh-ost operation on t1, configure it as ["\_t1\_ghc","\_t1\_gho","\_t1\_del"]. Temp tables generated by pt-osc and gh-ost operations can be configured at the same time.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Synchronize temporary tables. Note that this configuration is mutually exclusive with NewTableName, and only one of them can be used. When the configured synchronization object is at the table level and TableEditMode is pt, this parameter is meaningful. It is used to synchronize the temporary tables generated by tools such as pt-osc during the synchronization process. The possible temporary tables need to be configured here in advance, otherwise no temporary tables will be synchronized. For example, if you want to perform a pt-osc operation on t1, this configuration should be ["\_t1\_new","\_t1\_old"]; if you want to perform a gh-ost operation on t1, this configuration should be ["\_t1\_ghc","\_t1\_gho","\_t1\_del"]. Temporary tables generated by pt-osc and gh-ost can be configured simultaneously.
 	TmpTables []*string `json:"TmpTables,omitnil,omitempty" name:"TmpTables"`
 
-	// Table editing type. Valid values: `rename` (table mapping); `pt` (additional table sync).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Edit table type. Valid values: rename (table mapping); pt (synchronize additional table).
 	TableEditMode *string `json:"TableEditMode,omitnil,omitempty" name:"TableEditMode"`
+}
+
+type TableFilter struct {
+	// Table name for rule effectiveness
+	TableName *string `json:"TableName,omitnil,omitempty" name:"TableName"`
+
+	// Table-level DDL/DML Filter Rule
+	OpFilter *OpFilter `json:"OpFilter,omitnil,omitempty" name:"OpFilter"`
 }
 
 type TableItem struct {
@@ -7299,23 +7304,26 @@ type TagItem struct {
 }
 
 type TopicRule struct {
-	// Topic name
+	// Topic name. For single-topic scenarios, all TopicNames should be the same.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// Topic partitioning policy. If the topic sync policy is delivering data to multiple custom topics (`TopicType` = `Multi`), the value of this parameter is `Random` (deliver to a random partition). If the topic sync policy is delivering all data to a single topic (`TopicType` = `Single`), this parameter has three valid values: `AllInPartitionZero` (deliver all data to partition0), `PartitionByTable` (partition by table name), `PartitionByTableAndKey` (partition by table name and primary key).
+	// Topic partition policy. When a topic is customized, the valid value is Random (random shipping); when centralizing shipping to a single topic is adopted, the valid values are AllInPartitionZero (ship all to partition 0), PartitionByTable (partition by table name), PartitionByTableAndKey (partition by table name and primary key), and PartitionByCols (partition by column).
 	PartitionType *string `json:"PartitionType,omitnil,omitempty" name:"PartitionType"`
 
-	// Database name matching rule. This parameter takes effect only when `TopicType` is `Multi`. Valid values: `Regular` (match by regex), `Default` (default rule for the remaining databases that cannot be matched by regex). The default rule must be included in the array of matching rules.
+	// Database name matching rule. For example: Regular (regular expression matching) and Default (remaining databases that do not meet any rule). The last item in the array should be Default.
 	DbMatchMode *string `json:"DbMatchMode,omitnil,omitempty" name:"DbMatchMode"`
 
-	// Database name, which can only be matched by regex when `TopicType` is `Multi` and `DbMatchMode` is `Regular`.
+	// Database name. It is valid when DbMatchMode=Regular.
 	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
-	// Table name matching rule. This parameter takes effect only when `TopicType` is `Multi`. Valid values: `Regular` (match by regex), `Default` (default rule for the remaining databases that cannot be matched by regex). The default rule must be included in the array of matching rules.
+	// Table name matching rule. For example: Regular (regular expression matching) and Default (remaining tables that do not meet any rule). The last item in the array should be Default.
 	TableMatchMode *string `json:"TableMatchMode,omitnil,omitempty" name:"TableMatchMode"`
 
-	// Table name, which can only be matched by regex when `TopicType` is `Multi` and `DbMatchMode` is `Regular`.
+	// Table name. It is valid when TableMatchMode is Regular.
 	TableName *string `json:"TableName,omitnil,omitempty" name:"TableName"`
+
+	// When partitioning by column, you need to select and configure column names. Multi-column selection is supported.
+	Columns []*string `json:"Columns,omitnil,omitempty" name:"Columns"`
 }
 
 type TradeInfo struct {
@@ -7365,12 +7373,19 @@ type TradeInfo struct {
 }
 
 type View struct {
-	// View name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// View name.
 	ViewName *string `json:"ViewName,omitnil,omitempty" name:"ViewName"`
 
-	// Reserved field. Currently, a view cannot be renamed. Note: This field may return null, indicating that no valid values can be obtained.
+	// Reserved field. Currently, view renaming is not supported.
 	NewViewName *string `json:"NewViewName,omitnil,omitempty" name:"NewViewName"`
+}
+
+type ViewFilter struct {
+	// View name for rule effectiveness
+	ViewName *string `json:"ViewName,omitnil,omitempty" name:"ViewName"`
+
+	// View-level DDL/DML Filter Rule
+	OpFilter *OpFilter `json:"OpFilter,omitnil,omitempty" name:"OpFilter"`
 }
 
 type ViewItem struct {

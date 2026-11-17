@@ -7637,7 +7637,7 @@ func NewDescribeKafkaConsumerResponse() (response *DescribeKafkaConsumerResponse
 }
 
 // DescribeKafkaConsumer
-// This API is used to access Kafka protocol consumption information.
+// Accesses Kafka protocol consumption information
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -7657,7 +7657,7 @@ func (c *Client) DescribeKafkaConsumer(request *DescribeKafkaConsumerRequest) (r
 }
 
 // DescribeKafkaConsumer
-// This API is used to access Kafka protocol consumption information.
+// Accesses Kafka protocol consumption information
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"

@@ -51,10 +51,10 @@ type AddressInfo struct {
 	// <p>Third line of the address bar</p>
 	LineThree *string `json:"LineThree,omitnil,omitempty" name:"LineThree"`
 
-	// <p>Fourth line of the address bar</p>
+	// <p>Line 4 of the address bar</p>
 	LineFour *string `json:"LineFour,omitnil,omitempty" name:"LineFour"`
 
-	// <p>Fifth line of the address bar</p>
+	// <p>Line 5 of the address bar</p>
 	LineFive *string `json:"LineFive,omitnil,omitempty" name:"LineFive"`
 }
 
@@ -571,6 +571,29 @@ type BrazilRNMInfo struct {
 
 	// PortraitImage(Back)
 	PortraitImageBack *string `json:"PortraitImageBack,omitnil,omitempty" name:"PortraitImageBack"`
+}
+
+type CardVerificationConfig struct {
+	// <p>Whether to perform card field recognition, true by default</p>
+	EnableRecognition *bool `json:"EnableRecognition,omitnil,omitempty" name:"EnableRecognition"`
+
+	// <p>Whether to perform quality detection (blurry/reflective/incomplete border/obstruction). false by default</p>
+	EnableQualityCheck *bool `json:"EnableQualityCheck,omitnil,omitempty" name:"EnableQualityCheck"`
+
+	// <p>Whether to perform tampering detection (PS/synthesis/electronic). false by default</p>
+	EnableTamperCheck *bool `json:"EnableTamperCheck,omitnil,omitempty" name:"EnableTamperCheck"`
+
+	// <p>Whether to perform photocopy detection. false by default</p>
+	EnableCopyCheck *bool `json:"EnableCopyCheck,omitnil,omitempty" name:"EnableCopyCheck"`
+
+	// <p>Whether to perform rephotography detection. false by default</p>
+	EnableRecaptureCheck *bool `json:"EnableRecaptureCheck,omitnil,omitempty" name:"EnableRecaptureCheck"`
+
+	// <p>Whether to perform format validation (dependent recognition). false by default</p>
+	EnableFormatCheck *bool `json:"EnableFormatCheck,omitnil,omitempty" name:"EnableFormatCheck"`
+
+	// <p>Whether to perform both sides consistency check (dependent on recognition), false by default</p>
+	EnableConsistencyCheck *bool `json:"EnableConsistencyCheck,omitnil,omitempty" name:"EnableConsistencyCheck"`
 }
 
 type ConfigAdvanced struct {
@@ -1107,13 +1130,13 @@ type GeneralCard struct {
 	// <p>Localized middle name</p>
 	MiddleNameLocal *string `json:"MiddleNameLocal,omitnil,omitempty" name:"MiddleNameLocal"`
 
-	// <p>Last name</p>
+	// <p>Surname</p>
 	LastName *string `json:"LastName,omitnil,omitempty" name:"LastName"`
 
 	// <p>Localized last name</p>
 	LastNameLocal *string `json:"LastNameLocal,omitnil,omitempty" name:"LastNameLocal"`
 
-	// <p>Gender on the document</p><ul><li>M: man</li><li>F: woman</li><li>X: other gender identity</li></ul>
+	// <p>Gender on the document</p><ul><li>M: Man</li><li>F: Woman</li><li>X: Other gender identity</li></ul>
 	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
 
 	// <p>Date of birth</p>
@@ -1128,7 +1151,7 @@ type GeneralCard struct {
 	// <p>Issuing authority</p>
 	IssuedAuthority *string `json:"IssuedAuthority,omitnil,omitempty" name:"IssuedAuthority"`
 
-	// <p>Place where the specified file is issued</p>
+	// <p>Place where the file is issued.</p>
 	IssuedPlace *string `json:"IssuedPlace,omitnil,omitempty" name:"IssuedPlace"`
 
 	// <p>Issuing country</p>
@@ -1140,7 +1163,7 @@ type GeneralCard struct {
 	// <p>Expiration date, in YYYY-MM-DD format</p>
 	ExpirationDate *string `json:"ExpirationDate,omitnil,omitempty" name:"ExpirationDate"`
 
-	// <p>Content of the single-line machine-readable zone (MRZ) on the document. The number represents the order in which the line appears in the MRZ</p>
+	// <p>Content of the single-line machine-readable zone (MRZ) on the document. The number represents the line count in the order of the MRZ</p>
 	MRZLine1 *string `json:"MRZLine1,omitnil,omitempty" name:"MRZLine1"`
 
 	// <p>Content of the single-line machine-readable zone (MRZ) on the document. The number represents the line count in the order of the MRZ</p>
@@ -1149,7 +1172,7 @@ type GeneralCard struct {
 	// <p>Document nationality, returned following the ISO 3166 country coding specification</p>
 	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
-	// <p>Address information on the document</p>
+	// <p>Document address information</p>
 	Address *AddressInfo `json:"Address,omitnil,omitempty" name:"Address"`
 
 	// <p>Religious belief</p>
@@ -1164,16 +1187,16 @@ type GeneralCard struct {
 	// <p>Height</p>
 	Height *string `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// <p>Weight</p>
+	// <p>Weight.</p>
 	Weight *string `json:"Weight,omitnil,omitempty" name:"Weight"`
 
 	// <p>Driver's license vehicle type (for example, A/B/C)</p>
 	VehicleClass *string `json:"VehicleClass,omitnil,omitempty" name:"VehicleClass"`
 
-	// <p>Driver's license restriction condition</p>
+	// <p>Driver's license restrictions</p>
 	Restrictions *string `json:"Restrictions,omitnil,omitempty" name:"Restrictions"`
 
-	// <p>Driver's license extra records</p>
+	// <p>Additional driver's license records</p>
 	Endorsement *string `json:"Endorsement,omitnil,omitempty" name:"Endorsement"`
 
 	// <p>Additional field</p>
@@ -1189,7 +1212,7 @@ type GeneralCard struct {
 	// Deprecated: PassportCodeSecond is deprecated.
 	PassportCodeSecond *string `json:"PassportCodeSecond,omitnil,omitempty" name:"PassportCodeSecond"`
 
-	// <p>Validity date, in YYYY-MM-DD format</p>
+	// <p>Validity period, in YYYY-MM-DD format</p>
 	//
 	// Deprecated: DueDate is deprecated.
 	DueDate *string `json:"DueDate,omitnil,omitempty" name:"DueDate"`
@@ -1203,6 +1226,9 @@ type GeneralCard struct {
 	//
 	// Deprecated: RegistrationNumber is deprecated.
 	RegistrationNumber *string `json:"RegistrationNumber,omitnil,omitempty" name:"RegistrationNumber"`
+
+	// <p>Complete enumeration of specific card types confirmed by server-side classification (for example, THA_ID_CARD). Wildcards are not returned.</p>
+	DetectedCardType *string `json:"DetectedCardType,omitnil,omitempty" name:"DetectedCardType"`
 }
 
 // Predefined struct for user
@@ -3170,6 +3196,130 @@ func (r *RecognizeDetectCardCoordsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type RecognizeGeneralCardVerificationRequestParams struct {
+	// Base64 value of the front document image. Supported formats: PNG, JPG, JPEG. The Base64 encoded size shall not exceed 7 MB. One of ImageUrl, ImageBase64, BackImageUrl, BackImageBase64 must be provided. If both URL and Base64 are passed, URL will be used preferentially. Image download timeout is 3 seconds.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// URL address of the front side image of the card. Refer to the description of ImageBase64 for image requirements.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// Base64-encoded value of the back side image of the card. Refer to the description of ImageBase64 for image requirements.
+	BackImageBase64 *string `json:"BackImageBase64,omitnil,omitempty" name:"BackImageBase64"`
+
+	// URL address of the back side image of the card. Refer to the description of ImageBase64 for image requirements.
+	BackImageUrl *string `json:"BackImageUrl,omitnil,omitempty" name:"BackImageUrl"`
+
+	// Specifies the target document type for this verification. Each element is a full card type enum in the format {CountryOrRegionCode}_{CardType}, such as THA_ID_CARD and PHL_UMID. For passports, use the single value PASSPORT regardless of the issuing country. Wildcards are supported: * indicates all supported card types, and {CountryCode}_* indicates all card types of a country/region, such as PHL_*. If this parameter is not specified or an empty array is passed, the server performs automatic classification across all supported card types. An unsupported card type returns InvalidParameterValueLimit, and the unsupported values are listed in the error message.
+	CardTypes []*string `json:"CardTypes,omitnil,omitempty" name:"CardTypes"`
+
+	// Whether to return the Base64-encoded portrait image of the card. Default: false.
+	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
+
+	// Card verification configuration.
+	VerificationConfig *CardVerificationConfig `json:"VerificationConfig,omitnil,omitempty" name:"VerificationConfig"`
+}
+
+type RecognizeGeneralCardVerificationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Base64 value of the front document image. Supported formats: PNG, JPG, JPEG. The Base64 encoded size shall not exceed 7 MB. One of ImageUrl, ImageBase64, BackImageUrl, BackImageBase64 must be provided. If both URL and Base64 are passed, URL will be used preferentially. Image download timeout is 3 seconds.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// URL address of the front side image of the card. Refer to the description of ImageBase64 for image requirements.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// Base64-encoded value of the back side image of the card. Refer to the description of ImageBase64 for image requirements.
+	BackImageBase64 *string `json:"BackImageBase64,omitnil,omitempty" name:"BackImageBase64"`
+
+	// URL address of the back side image of the card. Refer to the description of ImageBase64 for image requirements.
+	BackImageUrl *string `json:"BackImageUrl,omitnil,omitempty" name:"BackImageUrl"`
+
+	// Specifies the target document type for this verification. Each element is a full card type enum in the format {CountryOrRegionCode}_{CardType}, such as THA_ID_CARD and PHL_UMID. For passports, use the single value PASSPORT regardless of the issuing country. Wildcards are supported: * indicates all supported card types, and {CountryCode}_* indicates all card types of a country/region, such as PHL_*. If this parameter is not specified or an empty array is passed, the server performs automatic classification across all supported card types. An unsupported card type returns InvalidParameterValueLimit, and the unsupported values are listed in the error message.
+	CardTypes []*string `json:"CardTypes,omitnil,omitempty" name:"CardTypes"`
+
+	// Whether to return the Base64-encoded portrait image of the card. Default: false.
+	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
+
+	// Card verification configuration.
+	VerificationConfig *CardVerificationConfig `json:"VerificationConfig,omitnil,omitempty" name:"VerificationConfig"`
+}
+
+func (r *RecognizeGeneralCardVerificationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeGeneralCardVerificationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "BackImageBase64")
+	delete(f, "BackImageUrl")
+	delete(f, "CardTypes")
+	delete(f, "ReturnHeadImage")
+	delete(f, "VerificationConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RecognizeGeneralCardVerificationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RecognizeGeneralCardVerificationResponseParams struct {
+	// Recognition result of the front side of the card. Returned only when recognition is enabled (EnableRecognition=true) and succeeds.
+	FrontCardInfo *GeneralCard `json:"FrontCardInfo,omitnil,omitempty" name:"FrontCardInfo"`
+
+	// Recognition result of the back side of the card. Returned only for double-sided card types when recognition is enabled. The structure is the same as that of FrontCardInfo.
+	BackCardInfo *GeneralCard `json:"BackCardInfo,omitnil,omitempty" name:"BackCardInfo"`
+
+	// Base64-encoded portrait image of the card. Returned only when ReturnHeadImage=true.
+	HeadImageBase64 *string `json:"HeadImageBase64,omitnil,omitempty" name:"HeadImageBase64"`
+
+	// Card Warning Information
+	// 
+	// -9102 Alarm for photocopied certificate
+	// -9103 Alarm for photographed certificate
+	// -9104 Alarm for tamper certificate
+	// -9105 Alarm for an incomplete card border. 
+	// -9106 Alarm for a covered card. 
+	// -9107 Alarm for reflective certificate
+	// -9108 Alarm for blurry certificate 
+	// -8101 Alarm for document information format verification
+	// -8102 Alarm for document information consistency verification
+	WarnCardInfos []*int64 `json:"WarnCardInfos,omitnil,omitempty" name:"WarnCardInfos"`
+
+	// Check items actually executed. Valid values: Recognition, QualityCheck, TamperCheck, CopyCheck, RecaptureCheck, FormatCheck, ConsistencyCheck.
+	ExecutedChecks []*string `json:"ExecutedChecks,omitnil,omitempty" name:"ExecutedChecks"`
+
+	// Check items that were skipped and the reasons.
+	SkippedChecks []*SkippedCheck `json:"SkippedChecks,omitnil,omitempty" name:"SkippedChecks"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RecognizeGeneralCardVerificationResponse struct {
+	*tchttp.BaseResponse
+	Response *RecognizeGeneralCardVerificationResponseParams `json:"Response"`
+}
+
+func (r *RecognizeGeneralCardVerificationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeGeneralCardVerificationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type RecognizeIndonesiaIDCardOCRRequestParams struct {
 	// The Base64 value of the image. Supported image formats: PNG, JPG, JPEG. GIF format is not currently supported. Supported image size: the downloaded image after Base64 encoding is no more than 2M. Image download time is not more than 3 seconds. Either ImageUrl or ImageBase64 must be provided. If both are provided, only use ImageUrl.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
@@ -4710,6 +4860,14 @@ func (r *RecognizeThaiPinkCardResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *RecognizeThaiPinkCardResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type SkippedCheck struct {
+	// <p>Detection item name</p>
+	Check *string `json:"Check,omitnil,omitempty" name:"Check"`
+
+	// <p>Skip reason: NotSupported (this card type does not support this detection item) / NotApplicable (prerequisite not met, for example, consistency check requires a back image)</p>
+	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
 }
 
 // Predefined struct for user

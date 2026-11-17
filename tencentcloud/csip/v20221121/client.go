@@ -5175,7 +5175,7 @@ func NewCreateHostVulExportJobResponse() (response *CreateHostVulExportJobRespon
 }
 
 // CreateHostVulExportJob
-// This API is used to create a host vulnerability table export task.
+// Creates an export task for a vulnerability table on hosts.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -5185,7 +5185,7 @@ func (c *Client) CreateHostVulExportJob(request *CreateHostVulExportJobRequest) 
 }
 
 // CreateHostVulExportJob
-// This API is used to create a host vulnerability table export task.
+// Creates an export task for a vulnerability table on hosts.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -7579,7 +7579,7 @@ func NewCreateVulFixRetryTaskResponse() (response *CreateVulFixRetryTaskResponse
 }
 
 // CreateVulFixRetryTask
-// Retry the vulnerability repair task that failed to fix, and redispatch the repair instruction only for the hosts of the original task that failed to fix. Retry is allowed only when the task status is partially or totally failed to fix.
+// Retry the vulnerability repair tasks that failed to fix. Redispatch repair instructions only to the hosts of the original task where the fix failed. Retry is allowed only when the task status is partially failed to fix or fix failure.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -7605,7 +7605,7 @@ func (c *Client) CreateVulFixRetryTask(request *CreateVulFixRetryTaskRequest) (r
 }
 
 // CreateVulFixRetryTask
-// Retry the vulnerability repair task that failed to fix, and redispatch the repair instruction only for the hosts of the original task that failed to fix. Retry is allowed only when the task status is partially or totally failed to fix.
+// Retry the vulnerability repair tasks that failed to fix. Redispatch repair instructions only to the hosts of the original task where the fix failed. Retry is allowed only when the task status is partially failed to fix or fix failure.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -7663,7 +7663,7 @@ func NewCreateVulFixTaskResponse() (response *CreateVulFixTaskResponse) {
 }
 
 // CreateVulFixTask
-// Users manually submit vulnerability repair tasks, specify the vulnerabilities and target hosts that need to be repaired, and the system creates fixing tasks and dispatches execution. It supports options such as specifying the repair timeout period and whether to create a snapshot. The FixItems array is used to precisely control which hosts each vulnerability or KB patch repairs.
+// This API is used to manually submit vulnerability repair tasks, specify the vulnerabilities to fix and the target hosts, create fixing tasks, and dispatch execution. It supports options such as specifying the timeout period and whether to create a snapshot. The FixItems array is used to precisely control which hosts each vulnerability or KB patch repairs.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -7689,7 +7689,7 @@ func (c *Client) CreateVulFixTask(request *CreateVulFixTaskRequest) (response *C
 }
 
 // CreateVulFixTask
-// Users manually submit vulnerability repair tasks, specify the vulnerabilities and target hosts that need to be repaired, and the system creates fixing tasks and dispatches execution. It supports options such as specifying the repair timeout period and whether to create a snapshot. The FixItems array is used to precisely control which hosts each vulnerability or KB patch repairs.
+// This API is used to manually submit vulnerability repair tasks, specify the vulnerabilities to fix and the target hosts, create fixing tasks, and dispatch execution. It supports options such as specifying the timeout period and whether to create a snapshot. The FixItems array is used to precisely control which hosts each vulnerability or KB patch repairs.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -7747,7 +7747,7 @@ func NewCreateVulFixedExportJobResponse() (response *CreateVulFixedExportJobResp
 }
 
 // CreateVulFixedExportJob
-// Create an export task for the list of fixed vulnerabilities. It supports the same filter criteria as DescribeVulFixedList. The export is implemented via an asynchronous task. After a JobID is returned, the frontend polls to query the export task status. The export fields include vulnerability ID, vulnerability name, vulnerability level, VPR rating, vulnerability type, CVE ID, host name, instance ID, associated component & path, and repair time.
+// This API is used to create an export task for a fixed vulnerability list. It supports the same filter criteria as DescribeVulFixedList. The export is implemented through an asynchronous task. After a JobID is returned, the frontend polls the export task status. Export fields include vulnerability ID, vulnerability name, vulnerability level, VPR rating, vulnerability type, CVE ID, host name, instance ID, associated component & path, and repair time.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -7757,7 +7757,7 @@ func (c *Client) CreateVulFixedExportJob(request *CreateVulFixedExportJobRequest
 }
 
 // CreateVulFixedExportJob
-// Create an export task for the list of fixed vulnerabilities. It supports the same filter criteria as DescribeVulFixedList. The export is implemented via an asynchronous task. After a JobID is returned, the frontend polls to query the export task status. The export fields include vulnerability ID, vulnerability name, vulnerability level, VPR rating, vulnerability type, CVE ID, host name, instance ID, associated component & path, and repair time.
+// This API is used to create an export task for a fixed vulnerability list. It supports the same filter criteria as DescribeVulFixedList. The export is implemented through an asynchronous task. After a JobID is returned, the frontend polls the export task status. Export fields include vulnerability ID, vulnerability name, vulnerability level, VPR rating, vulnerability type, CVE ID, host name, instance ID, associated component & path, and repair time.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -38789,7 +38789,7 @@ func NewDescribeVulFixTaskDetailResponse() (response *DescribeVulFixTaskDetailRe
 }
 
 // DescribeVulFixTaskDetail
-// This API is used to query the details of a specified vulnerability repair task, including detailed data such as remediation status and snapshot status for each host, and supports pagination and filtering.
+// This API is used to query details of a specified vulnerability repair task, including remediation status and snapshot status of each host, and supports pagination and filtering.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -38798,7 +38798,7 @@ func (c *Client) DescribeVulFixTaskDetail(request *DescribeVulFixTaskDetailReque
 }
 
 // DescribeVulFixTaskDetail
-// This API is used to query the details of a specified vulnerability repair task, including detailed data such as remediation status and snapshot status for each host, and supports pagination and filtering.
+// This API is used to query details of a specified vulnerability repair task, including remediation status and snapshot status of each host, and supports pagination and filtering.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -38839,7 +38839,7 @@ func NewDescribeVulFixTaskListResponse() (response *DescribeVulFixTaskListRespon
 }
 
 // DescribeVulFixTaskList
-// This API is used to query the vulnerability repair task record list with paging, support by conditional filtering such as remediation status and time range, and show summary information for each repair task.
+// Paginate the vulnerability fix task record list, support filtering by remediation status, time range, and other conditions, and show summary information of each fix task.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -38848,7 +38848,7 @@ func (c *Client) DescribeVulFixTaskList(request *DescribeVulFixTaskListRequest) 
 }
 
 // DescribeVulFixTaskList
-// This API is used to query the vulnerability repair task record list with paging, support by conditional filtering such as remediation status and time range, and show summary information for each repair task.
+// Paginate the vulnerability fix task record list, support filtering by remediation status, time range, and other conditions, and show summary information of each fix task.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -38889,7 +38889,7 @@ func NewDescribeVulFixableMachineListResponse() (response *DescribeVulFixableMac
 }
 
 // DescribeVulFixableMachineList
-// This API is used to query the host list where specified vulnerabilities can be repaired. Before a user submits a repair task, it is necessary to query which hosts support automatic fix, providing data support for users to select repair targets.
+// This API is used to query the host list for a specified vulnerability that can be repaired. Before users submit a fix task, they need to query which hosts support automatic fix to provide data support for user selection of repair targets.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -38898,7 +38898,7 @@ func (c *Client) DescribeVulFixableMachineList(request *DescribeVulFixableMachin
 }
 
 // DescribeVulFixableMachineList
-// This API is used to query the host list where specified vulnerabilities can be repaired. Before a user submits a repair task, it is necessary to query which hosts support automatic fix, providing data support for users to select repair targets.
+// This API is used to query the host list for a specified vulnerability that can be repaired. Before users submit a fix task, they need to query which hosts support automatic fix to provide data support for user selection of repair targets.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -38939,7 +38939,7 @@ func NewDescribeVulFixedHostDetailResponse() (response *DescribeVulFixedHostDeta
 }
 
 // DescribeVulFixedHostDetail
-// This API is used to query the repair details of a certain fixed vulnerability on a specified host, including basic information about the vulnerability, repair host information, and a detailed list of associated components and paths (component name, version number hit, associated path, repair command).
+// This API is used to query the repair details of a fixed vulnerability on specified hosts, including basic vulnerability information, host information, and a detailed list of associated components and paths, such as component name, hit version, associated path, and fix command.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -38948,7 +38948,7 @@ func (c *Client) DescribeVulFixedHostDetail(request *DescribeVulFixedHostDetailR
 }
 
 // DescribeVulFixedHostDetail
-// This API is used to query the repair details of a certain fixed vulnerability on a specified host, including basic information about the vulnerability, repair host information, and a detailed list of associated components and paths (component name, version number hit, associated path, repair command).
+// This API is used to query the repair details of a fixed vulnerability on specified hosts, including basic vulnerability information, host information, and a detailed list of associated components and paths, such as component name, hit version, associated path, and fix command.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -38989,7 +38989,7 @@ func NewDescribeVulFixedListResponse() (response *DescribeVulFixedListResponse) 
 }
 
 // DescribeVulFixedList
-// This API is used to query the list of repaired vulnerabilities, show vulnerability information with successful fixes and statistics on repair conditions, helping users understand the repair results.
+// Query the list of repaired vulnerabilities, show successful fix details and repair statistics to help users understand the fix result.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -38998,7 +38998,7 @@ func (c *Client) DescribeVulFixedList(request *DescribeVulFixedListRequest) (res
 }
 
 // DescribeVulFixedList
-// This API is used to query the list of repaired vulnerabilities, show vulnerability information with successful fixes and statistics on repair conditions, helping users understand the repair results.
+// Query the list of repaired vulnerabilities, show successful fix details and repair statistics to help users understand the fix result.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -39289,7 +39289,7 @@ func NewDescribeVulRiskRelateComponentResponse() (response *DescribeVulRiskRelat
 }
 
 // DescribeVulRiskRelateComponent
-// Retrieve the associated component of a vulnerability
+// Retrieve the associated components of a vulnerability
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -39298,7 +39298,7 @@ func (c *Client) DescribeVulRiskRelateComponent(request *DescribeVulRiskRelateCo
 }
 
 // DescribeVulRiskRelateComponent
-// Retrieve the associated component of a vulnerability
+// Retrieve the associated components of a vulnerability
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -39339,7 +39339,7 @@ func NewDescribeVulRiskRelateHostResponse() (response *DescribeVulRiskRelateHost
 }
 
 // DescribeVulRiskRelateHost
-// Search for hosts associated with vulnerabilities or KBs
+// This API is used to search hosts associated with a vulnerability or KB.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -39348,7 +39348,7 @@ func (c *Client) DescribeVulRiskRelateHost(request *DescribeVulRiskRelateHostReq
 }
 
 // DescribeVulRiskRelateHost
-// Search for hosts associated with vulnerabilities or KBs
+// This API is used to search hosts associated with a vulnerability or KB.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -39389,7 +39389,7 @@ func NewDescribeVulScanPeriodicResponse() (response *DescribeVulScanPeriodicResp
 }
 
 // DescribeVulScanPeriodic
-// This API is used to obtain vulnerability scanning (period scanning).
+// This API is used to query vulnerability scan settings.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -39398,7 +39398,7 @@ func (c *Client) DescribeVulScanPeriodic(request *DescribeVulScanPeriodicRequest
 }
 
 // DescribeVulScanPeriodic
-// This API is used to obtain vulnerability scanning (period scanning).
+// This API is used to query vulnerability scan settings.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

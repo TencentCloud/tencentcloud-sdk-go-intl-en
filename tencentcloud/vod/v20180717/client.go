@@ -258,11 +258,11 @@ func NewCloneVoiceAsyncResponse() (response *CloneVoiceAsyncResponse) {
 // This API is used to trigger a voice cloning task. It clones a reference audio to generate an exclusive voice, which can be used for subsequent text to speech. Voice cloning is an asynchronous task. The voice ID and audio audition are generated after task completion.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDACCOUNT = "FailedOperation.InvalidAccount"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
-//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
 func (c *Client) CloneVoiceAsync(request *CloneVoiceAsyncRequest) (response *CloneVoiceAsyncResponse, err error) {
     return c.CloneVoiceAsyncWithContext(context.Background(), request)
 }
@@ -271,11 +271,11 @@ func (c *Client) CloneVoiceAsync(request *CloneVoiceAsyncRequest) (response *Clo
 // This API is used to trigger a voice cloning task. It clones a reference audio to generate an exclusive voice, which can be used for subsequent text to speech. Voice cloning is an asynchronous task. The voice ID and audio audition are generated after task completion.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDACCOUNT = "FailedOperation.InvalidAccount"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
-//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
 func (c *Client) CloneVoiceAsyncWithContext(ctx context.Context, request *CloneVoiceAsyncRequest) (response *CloneVoiceAsyncResponse, err error) {
     if request == nil {
         request = NewCloneVoiceAsyncRequest()
@@ -316,11 +316,9 @@ func NewCloneVoiceSyncResponse() (response *CloneVoiceSyncResponse) {
 // This API is used to trigger a voice cloning task. It clones a reference audio to generate an exclusive voice, which can be used for subsequent text to speech.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDACCOUNT = "FailedOperation.InvalidAccount"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
-//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) CloneVoiceSync(request *CloneVoiceSyncRequest) (response *CloneVoiceSyncResponse, err error) {
     return c.CloneVoiceSyncWithContext(context.Background(), request)
 }
@@ -329,11 +327,9 @@ func (c *Client) CloneVoiceSync(request *CloneVoiceSyncRequest) (response *Clone
 // This API is used to trigger a voice cloning task. It clones a reference audio to generate an exclusive voice, which can be used for subsequent text to speech.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDACCOUNT = "FailedOperation.InvalidAccount"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
-//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) CloneVoiceSyncWithContext(ctx context.Context, request *CloneVoiceSyncRequest) (response *CloneVoiceSyncResponse, err error) {
     if request == nil {
         request = NewCloneVoiceSyncRequest()
@@ -6661,6 +6657,60 @@ func (c *Client) DescribeAigcUsageDataWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeAigcUsageDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAigcWhitelistRequest() (request *DescribeAigcWhitelistRequest) {
+    request = &DescribeAigcWhitelistRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeAigcWhitelist")
+    
+    
+    return
+}
+
+func NewDescribeAigcWhitelistResponse() (response *DescribeAigcWhitelistResponse) {
+    response = &DescribeAigcWhitelistResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAigcWhitelist
+// This API is used to query AIGC allowlist settings.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DescribeAigcWhitelist(request *DescribeAigcWhitelistRequest) (response *DescribeAigcWhitelistResponse, err error) {
+    return c.DescribeAigcWhitelistWithContext(context.Background(), request)
+}
+
+// DescribeAigcWhitelist
+// This API is used to query AIGC allowlist settings.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DescribeAigcWhitelistWithContext(ctx context.Context, request *DescribeAigcWhitelistRequest) (response *DescribeAigcWhitelistResponse, err error) {
+    if request == nil {
+        request = NewDescribeAigcWhitelistRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "DescribeAigcWhitelist")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAigcWhitelist require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAigcWhitelistResponse()
     err = c.Send(request, response)
     return
 }
@@ -15613,6 +15663,60 @@ func (c *Client) SearchMediaBySemanticsWithContext(ctx context.Context, request 
     return
 }
 
+func NewSetAigcWhitelistRequest() (request *SetAigcWhitelistRequest) {
+    request = &SetAigcWhitelistRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "SetAigcWhitelist")
+    
+    
+    return
+}
+
+func NewSetAigcWhitelistResponse() (response *SetAigcWhitelistResponse) {
+    response = &SetAigcWhitelistResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SetAigcWhitelist
+// This API is used to modify AIGC allowlist settings.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) SetAigcWhitelist(request *SetAigcWhitelistRequest) (response *SetAigcWhitelistResponse, err error) {
+    return c.SetAigcWhitelistWithContext(context.Background(), request)
+}
+
+// SetAigcWhitelist
+// This API is used to modify AIGC allowlist settings.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) SetAigcWhitelistWithContext(ctx context.Context, request *SetAigcWhitelistRequest) (response *SetAigcWhitelistResponse, err error) {
+    if request == nil {
+        request = NewSetAigcWhitelistRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "vod", APIVersion, "SetAigcWhitelist")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetAigcWhitelist require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSetAigcWhitelistResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSetCLSPushTargetRequest() (request *SetCLSPushTargetRequest) {
     request = &SetCLSPushTargetRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -15636,7 +15740,8 @@ func NewSetCLSPushTargetResponse() (response *SetCLSPushTargetResponse) {
 // Set a delivery target for the VOD domain in CLS.
 //
 // error code that may be returned:
-//  INTERNALERROR = "InternalError"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) SetCLSPushTarget(request *SetCLSPushTargetRequest) (response *SetCLSPushTargetResponse, err error) {
     return c.SetCLSPushTargetWithContext(context.Background(), request)
@@ -15646,7 +15751,8 @@ func (c *Client) SetCLSPushTarget(request *SetCLSPushTargetRequest) (response *S
 // Set a delivery target for the VOD domain in CLS.
 //
 // error code that may be returned:
-//  INTERNALERROR = "InternalError"
+//  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) SetCLSPushTargetWithContext(ctx context.Context, request *SetCLSPushTargetRequest) (response *SetCLSPushTargetResponse, err error) {
     if request == nil {

@@ -10409,6 +10409,74 @@ func (c *Client) DescribeSharedCNAMEWithContext(ctx context.Context, request *De
     return
 }
 
+func NewDescribeTimingFunctionAnalysisDataRequest() (request *DescribeTimingFunctionAnalysisDataRequest) {
+    request = &DescribeTimingFunctionAnalysisDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeTimingFunctionAnalysisData")
+    
+    
+    return
+}
+
+func NewDescribeTimingFunctionAnalysisDataResponse() (response *DescribeTimingFunctionAnalysisDataResponse) {
+    response = &DescribeTimingFunctionAnalysisDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTimingFunctionAnalysisData
+// This API is used to query the time series data of edge function analysis. Note that the data queried by this API has a delay of about 10 minutes. It is recommended to pull data from at least 10 minutes before the current time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) DescribeTimingFunctionAnalysisData(request *DescribeTimingFunctionAnalysisDataRequest) (response *DescribeTimingFunctionAnalysisDataResponse, err error) {
+    return c.DescribeTimingFunctionAnalysisDataWithContext(context.Background(), request)
+}
+
+// DescribeTimingFunctionAnalysisData
+// This API is used to query the time series data of edge function analysis. Note that the data queried by this API has a delay of about 10 minutes. It is recommended to pull data from at least 10 minutes before the current time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) DescribeTimingFunctionAnalysisDataWithContext(ctx context.Context, request *DescribeTimingFunctionAnalysisDataRequest) (response *DescribeTimingFunctionAnalysisDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeTimingFunctionAnalysisDataRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeTimingFunctionAnalysisData")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTimingFunctionAnalysisData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTimingFunctionAnalysisDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTimingL4DataRequest() (request *DescribeTimingL4DataRequest) {
     request = &DescribeTimingL4DataRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -10665,6 +10733,76 @@ func (c *Client) DescribeTimingL7OriginPullDataWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewDescribeTimingL7OriginPullDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTopFunctionAnalysisDataRequest() (request *DescribeTopFunctionAnalysisDataRequest) {
+    request = &DescribeTopFunctionAnalysisDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeTopFunctionAnalysisData")
+    
+    
+    return
+}
+
+func NewDescribeTopFunctionAnalysisDataResponse() (response *DescribeTopFunctionAnalysisDataResponse) {
+    response = &DescribeTopFunctionAnalysisDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTopFunctionAnalysisData
+// This API is used to query the topN data of Edge Functions by a specified dimension. Note that the data returned by this API has a delay of about 10 minutes. We recommend that you query the data generated at least 10 minutes before the current time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+func (c *Client) DescribeTopFunctionAnalysisData(request *DescribeTopFunctionAnalysisDataRequest) (response *DescribeTopFunctionAnalysisDataResponse, err error) {
+    return c.DescribeTopFunctionAnalysisDataWithContext(context.Background(), request)
+}
+
+// DescribeTopFunctionAnalysisData
+// This API is used to query the topN data of Edge Functions by a specified dimension. Note that the data returned by this API has a delay of about 10 minutes. We recommend that you query the data generated at least 10 minutes before the current time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+func (c *Client) DescribeTopFunctionAnalysisDataWithContext(ctx context.Context, request *DescribeTopFunctionAnalysisDataRequest) (response *DescribeTopFunctionAnalysisDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeTopFunctionAnalysisDataRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeTopFunctionAnalysisData")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTopFunctionAnalysisData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTopFunctionAnalysisDataResponse()
     err = c.Send(request, response)
     return
 }

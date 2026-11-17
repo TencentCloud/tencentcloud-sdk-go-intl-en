@@ -14411,6 +14411,108 @@ func (r *DescribeSharedCNAMEResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeTimingFunctionAnalysisDataRequestParams struct {
+	// <p>Set of site IDs. Enter at least one site ID.</p>
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// <p>Start time.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time. The query time range (`EndTime` - `StartTime`) must be no longer than 7 days.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// List of metrics. Valid values:<ul><li>`function_requestCount`: the number of Edge Function requests. This is a cumulative value.</li><li>`function_cpuCostTime`: the average CPU time consumed by Edge Function execution, in microseconds.</li><li>`function_wallClockTime`: the average wall clock time consumed by Edge Function execution, in microseconds.</li></ul>
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
+
+	// Query time granularity. Valid values:<ul><li>`min`: 1 minute.</li><li>`5min`: 5 minutes.</li><li>`hour`: 1 hour.</li><li>`day`: 1 day.</li></ul>If this parameter is not specified, the granularity is automatically inferred based on the interval between the start time and the end time. The specific rules are as follows: within 2 hours, the granularity is `min`; within 2 days, the granularity is `5min`; within 7 days, the granularity is `hour`; longer than 7 days, the granularity is `day`.
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// Filter conditions. The maximum number of values in `Filters.Value` is 20. The detailed filter condition keys are as follows:<ul><li>`domain`: filters by subdomain name. Example value: `www.example.com`.</li><li>`function-name`: filters by Edge Function name. Example value: `test051301-zone-2r2fdoxxxx-130000000`.</li><li>`function-result`: filters by Edge Function execution result. Valid values for the corresponding `Value`:<ul><li>`success`: success.</li><li>`fail`: failure.</li></ul></li></ul>
+	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// The region the data belongs to. Valid values:<ul><li>`overseas`: data from the global area (excluding the Chinese mainland).</li><li>`mainland`: data from the Chinese mainland.</li><li>`global`: global data.</li></ul>If this parameter is not specified, the default value is `global`.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+}
+
+type DescribeTimingFunctionAnalysisDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Set of site IDs. Enter at least one site ID.</p>
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// <p>Start time.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time. The query time range (`EndTime` - `StartTime`) must be no longer than 7 days.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// List of metrics. Valid values:<ul><li>`function_requestCount`: the number of Edge Function requests. This is a cumulative value.</li><li>`function_cpuCostTime`: the average CPU time consumed by Edge Function execution, in microseconds.</li><li>`function_wallClockTime`: the average wall clock time consumed by Edge Function execution, in microseconds.</li></ul>
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
+
+	// Query time granularity. Valid values:<ul><li>`min`: 1 minute.</li><li>`5min`: 5 minutes.</li><li>`hour`: 1 hour.</li><li>`day`: 1 day.</li></ul>If this parameter is not specified, the granularity is automatically inferred based on the interval between the start time and the end time. The specific rules are as follows: within 2 hours, the granularity is `min`; within 2 days, the granularity is `5min`; within 7 days, the granularity is `hour`; longer than 7 days, the granularity is `day`.
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// Filter conditions. The maximum number of values in `Filters.Value` is 20. The detailed filter condition keys are as follows:<ul><li>`domain`: filters by subdomain name. Example value: `www.example.com`.</li><li>`function-name`: filters by Edge Function name. Example value: `test051301-zone-2r2fdoxxxx-130000000`.</li><li>`function-result`: filters by Edge Function execution result. Valid values for the corresponding `Value`:<ul><li>`success`: success.</li><li>`fail`: failure.</li></ul></li></ul>
+	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// The region the data belongs to. Valid values:<ul><li>`overseas`: data from the global area (excluding the Chinese mainland).</li><li>`mainland`: data from the Chinese mainland.</li><li>`global`: global data.</li></ul>If this parameter is not specified, the default value is `global`.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+}
+
+func (r *DescribeTimingFunctionAnalysisDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTimingFunctionAnalysisDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneIds")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "MetricNames")
+	delete(f, "Interval")
+	delete(f, "Filters")
+	delete(f, "Area")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTimingFunctionAnalysisDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTimingFunctionAnalysisDataResponseParams struct {
+	// <p>Total number of query results.</p>
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>List of time series data.</p>
+	Data []*TimingDataRecord `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTimingFunctionAnalysisDataResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTimingFunctionAnalysisDataResponseParams `json:"Response"`
+}
+
+func (r *DescribeTimingFunctionAnalysisDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTimingFunctionAnalysisDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTimingL4DataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
@@ -14900,6 +15002,115 @@ func (r *DescribeTimingL7OriginPullDataResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTimingL7OriginPullDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTopFunctionAnalysisDataRequestParams struct {
+	// <p>Set of site IDs. Enter at least one site ID.</p>
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// <p>Start time.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time. The query time range (`EndTime` - `StartTime`) must be no longer than 7 days.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// The metric to query. Valid values:<ul><li>`function_requestCount_functionResult`: counts Edge Function requests by the dimension of execution result.</li><li>`function_requestCount_functionName`: counts Edge Function requests by the dimension of function name.</li><li>`function_requestCount_domain`: counts Edge Function requests by the dimension of domain name.</li></ul>
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
+
+	// <p>Number of top data entries to query. The maximum value is 1000. If not specified, the default value is 10, indicating that the top 10 data entries are queried.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter conditions. The maximum number of values in `Filters.Value` is 20. The detailed filter condition keys are as follows:<ul><li>`domain`: filters by subdomain name. Example value: `www.example.com`.</li><li>`function-name`: filters by Edge Function name. Example value: `test051301-zone-2r2fdoxxxx-130000000`.</li><li>`function-result`: filters by Edge Function execution result. Valid values for the corresponding `Value`:<ul><li>`success`: success.</li><li>`fail`: failure.</li></ul></li></ul>
+	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Query time granularity. Valid values:<ul><li>`min`: 1 minute.</li><li>`5min`: 5 minutes.</li><li>`hour`: 1 hour.</li><li>`day`: 1 day.</li></ul>If this parameter is not specified, the granularity is automatically inferred based on the interval between the start time and the end time. The specific rules are as follows: within 2 hours, the granularity is `min`; within 2 days, the granularity is `5min`; within 7 days, the granularity is `hour`; longer than 7 days, the granularity is `day`.
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// The region the data belongs to. Valid values:<ul><li>`overseas`: data from the global area (excluding the Chinese mainland).</li><li>`mainland`: data from the Chinese mainland.</li><li>`global`: global data.</li></ul>If this parameter is not specified, the default value is `global`.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+}
+
+type DescribeTopFunctionAnalysisDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Set of site IDs. Enter at least one site ID.</p>
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// <p>Start time.</p>
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time. The query time range (`EndTime` - `StartTime`) must be no longer than 7 days.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// The metric to query. Valid values:<ul><li>`function_requestCount_functionResult`: counts Edge Function requests by the dimension of execution result.</li><li>`function_requestCount_functionName`: counts Edge Function requests by the dimension of function name.</li><li>`function_requestCount_domain`: counts Edge Function requests by the dimension of domain name.</li></ul>
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
+
+	// <p>Number of top data entries to query. The maximum value is 1000. If not specified, the default value is 10, indicating that the top 10 data entries are queried.</p>
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter conditions. The maximum number of values in `Filters.Value` is 20. The detailed filter condition keys are as follows:<ul><li>`domain`: filters by subdomain name. Example value: `www.example.com`.</li><li>`function-name`: filters by Edge Function name. Example value: `test051301-zone-2r2fdoxxxx-130000000`.</li><li>`function-result`: filters by Edge Function execution result. Valid values for the corresponding `Value`:<ul><li>`success`: success.</li><li>`fail`: failure.</li></ul></li></ul>
+	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Query time granularity. Valid values:<ul><li>`min`: 1 minute.</li><li>`5min`: 5 minutes.</li><li>`hour`: 1 hour.</li><li>`day`: 1 day.</li></ul>If this parameter is not specified, the granularity is automatically inferred based on the interval between the start time and the end time. The specific rules are as follows: within 2 hours, the granularity is `min`; within 2 days, the granularity is `5min`; within 7 days, the granularity is `hour`; longer than 7 days, the granularity is `day`.
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// The region the data belongs to. Valid values:<ul><li>`overseas`: data from the global area (excluding the Chinese mainland).</li><li>`mainland`: data from the Chinese mainland.</li><li>`global`: global data.</li></ul>If this parameter is not specified, the default value is `global`.
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
+}
+
+func (r *DescribeTopFunctionAnalysisDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTopFunctionAnalysisDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneIds")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "MetricName")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	delete(f, "Interval")
+	delete(f, "Area")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTopFunctionAnalysisDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTopFunctionAnalysisDataResponseParams struct {
+	// <p>Total number of query results.</p>
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// <p>List of topN data by the statistical dimension specified by MetricName.</p>
+	Data []*TopDataRecord `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTopFunctionAnalysisDataResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTopFunctionAnalysisDataResponseParams `json:"Response"`
+}
+
+func (r *DescribeTopFunctionAnalysisDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTopFunctionAnalysisDataResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -16950,7 +17161,7 @@ type FloatTimingTypeValue struct {
 	// Maximum value.
 	Max *float64 `json:"Max,omitnil,omitempty" name:"Max"`
 
-	// Average.
+	// Mean.
 	Avg *float64 `json:"Avg,omitnil,omitempty" name:"Avg"`
 
 	// Metric name.
@@ -25816,52 +26027,51 @@ type TimingDataItem struct {
 	// Time point for returning data, in the format of Unix timestamp in seconds.
 	Timestamp *int64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
 
-	// The value.
+	// Specific values.
 	Value *int64 `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type TimingDataRecord struct {
-	// The query dimension value.
+	// Query the dimension value.
 	TypeKey *string `json:"TypeKey,omitnil,omitempty" name:"TypeKey"`
 
-	// Detailed time series data of the <code>Integer</code> type. query metrics with the <code>Integer</code> value type will return corresponding time series data through this field.<br> **note**: if the query metric does not specify the value type, this field will return data by default.
+	// Detailed time series data of the <code>Integer</code> type. If the value type of the query metric is <code>Integer</code>, the corresponding time series data will be returned in this field.<br> **Note**: If the value type of the query metric is unclear, data will be returned in this field by default.
 	TypeValue []*TimingTypeValue `json:"TypeValue,omitnil,omitempty" name:"TypeValue"`
 
-	// Detailed time series data of <code>Float</code> type. query metrics with <code>Float</code> value type will return corresponding time series data via this field.
+	// Detailed time series data of <code>Float</code> type. For metrics whose query metric value type is <code>Float</code>, the corresponding time series data is returned in this field.
 	FloatTypeValue []*FloatTimingTypeValue `json:"FloatTypeValue,omitnil,omitempty" name:"FloatTypeValue"`
 }
 
 type TimingTypeValue struct {
-	// Sum.
+	// Data and.
 	Sum *int64 `json:"Sum,omitnil,omitempty" name:"Sum"`
 
-	// The maximum value.
+	// Maximum value.
 	Max *int64 `json:"Max,omitnil,omitempty" name:"Max"`
 
-	// The average value.
+	// Mean.
 	Avg *int64 `json:"Avg,omitnil,omitempty" name:"Avg"`
 
 	// Metric name.
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// Details.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Detail []*TimingDataItem `json:"Detail,omitnil,omitempty" name:"Detail"`
 }
 
 type TopDataRecord struct {
-	// The query dimension value.
+	// Dimension value to query.
 	TypeKey *string `json:"TypeKey,omitnil,omitempty" name:"TypeKey"`
 
-	// Top data rankings
+	// top data ranking.
 	DetailData []*TopDetailData `json:"DetailData,omitnil,omitempty" name:"DetailData"`
 }
 
 type TopDetailData struct {
-	// The field name.
+	// Field name.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// The field value.
+	// Field value.
 	Value *int64 `json:"Value,omitnil,omitempty" name:"Value"`
 }
 

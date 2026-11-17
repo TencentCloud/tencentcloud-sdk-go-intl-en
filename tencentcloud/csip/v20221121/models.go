@@ -5966,7 +5966,7 @@ type ComponentDetailItem struct {
 	// Component name
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// cache hit version
+	// Hit version
 	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
 	// Association path
@@ -6019,6 +6019,11 @@ type ContainerAppItem struct {
 
 	// Number of associated processes
 	ProcessCnt *int64 `json:"ProcessCnt,omitnil,omitempty" name:"ProcessCnt"`
+}
+
+type ContainerAutoScaleConfig struct {
+
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type ContainerComponentItem struct {
@@ -12381,26 +12386,26 @@ func (r *CreateHostImageListExportJobResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateHostVulExportJobRequestParams struct {
-	// <p>Exported action</p><p>Enumeration value:</p><ul><li>LinuxHostVulRiskList: linux vulnerability risk list</li><li>WebCmsHostVulRiskList: WebCms vulnerability risk list</li><li>AppHostVulRiskList: App vulnerability risk list</li><li>EmergencyHostVulRiskList: Emergency vulnerability risk list</li><li>KBRiskList: Windows kb risk list</li><li>RelateHostList: Associated host list</li><li>WhiteList: Vulnerability allowlist</li></ul>
+	// <p>Export action</p><p>Enumeration values:</p><ul><li>LinuxHostVulRiskList: linux vulnerability risk list</li><li>WebCmsHostVulRiskList: WebCms vulnerability risk list</li><li>AppHostVulRiskList: App vulnerability risk list</li><li>EmergencyHostVulRiskList: Emergency vulnerability risk list</li><li>KBRiskList: Windows kb risk list</li><li>RelateHostList: Associated host list</li><li>WhiteList: Vulnerability allowlist</li></ul>
 	BusinessAction *string `json:"BusinessAction,omitnil,omitempty" name:"BusinessAction"`
 
 	// <p>Group account member id</p>
 	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
 
-	// <p>Filter conditions array, multi-condition with each other is AND relationship<br>Supported Filter.Name:<br>KbID: KB risk associated server in the current situation needs to add KB Risk ID<br>VulID: Vulnerability risk associated server in the current situation needs to add vul Risk ID</p>
+	// <p>Criteria array, multi-condition uses AND relationship with each other<br>Supported Filter.Name:<br>KbID: KB risk associated host requires adding KB Risk ID as needed<br>VulID: Vulnerability risk associated host requires adding vul Risk ID as needed</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type CreateHostVulExportJobRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Exported action</p><p>Enumeration value:</p><ul><li>LinuxHostVulRiskList: linux vulnerability risk list</li><li>WebCmsHostVulRiskList: WebCms vulnerability risk list</li><li>AppHostVulRiskList: App vulnerability risk list</li><li>EmergencyHostVulRiskList: Emergency vulnerability risk list</li><li>KBRiskList: Windows kb risk list</li><li>RelateHostList: Associated host list</li><li>WhiteList: Vulnerability allowlist</li></ul>
+	// <p>Export action</p><p>Enumeration values:</p><ul><li>LinuxHostVulRiskList: linux vulnerability risk list</li><li>WebCmsHostVulRiskList: WebCms vulnerability risk list</li><li>AppHostVulRiskList: App vulnerability risk list</li><li>EmergencyHostVulRiskList: Emergency vulnerability risk list</li><li>KBRiskList: Windows kb risk list</li><li>RelateHostList: Associated host list</li><li>WhiteList: Vulnerability allowlist</li></ul>
 	BusinessAction *string `json:"BusinessAction,omitnil,omitempty" name:"BusinessAction"`
 
 	// <p>Group account member id</p>
 	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
 
-	// <p>Filter conditions array, multi-condition with each other is AND relationship<br>Supported Filter.Name:<br>KbID: KB risk associated server in the current situation needs to add KB Risk ID<br>VulID: Vulnerability risk associated server in the current situation needs to add vul Risk ID</p>
+	// <p>Criteria array, multi-condition uses AND relationship with each other<br>Supported Filter.Name:<br>KbID: KB risk associated host requires adding KB Risk ID as needed<br>VulID: Vulnerability risk associated host requires adding vul Risk ID as needed</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -15277,10 +15282,10 @@ func (r *CreateSkillScanResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateVulFixRetryTaskRequestParams struct {
-	// <p>Repair task ID that needs to be retried</p>
+	// <p>Repair task ID that needs to retry</p>
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// <p>Specify the list of host instance IDs that need to retry. If not passed, retry all failed hosts.</p>
+	// <p>Specify the instance ID list of the host that needs to retry. If not passed, retry all failed hosts.</p>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Group Account Member ID
@@ -15290,10 +15295,10 @@ type CreateVulFixRetryTaskRequestParams struct {
 type CreateVulFixRetryTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Repair task ID that needs to be retried</p>
+	// <p>Repair task ID that needs to retry</p>
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// <p>Specify the list of host instance IDs that need to retry. If not passed, retry all failed hosts.</p>
+	// <p>Specify the instance ID list of the host that needs to retry. If not passed, retry all failed hosts.</p>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Group Account Member ID
@@ -15323,10 +15328,10 @@ func (r *CreateVulFixRetryTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateVulFixRetryTaskResponseParams struct {
-	// <p>New task ID generated by retry, used for subsequent query task status</p>
+	// <p>ID of the generated new task for retry, used for subsequently querying task status</p>
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// <p>Number of hosts retried this time</p>
+	// <p>Number of hosts to retry this time</p>
 	RetryCount *int64 `json:"RetryCount,omitnil,omitempty" name:"RetryCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -15351,19 +15356,19 @@ func (r *CreateVulFixRetryTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateVulFixTaskRequestParams struct {
-	// <p>Repair item list, each item specifies a vulnerability/KB patch and its hosts requiring fixing<br>Input parameter limit: No more than 100 items, total number of instances not more than 5000</p>
+	// <p>Repair item list. Each item specifies a vulnerability/KB patch and its hosts requiring fixing<br>Input limit: up to 100 items, and the total number of instances cannot exceed 5000</p>
 	FixItems []*VulFixItem `json:"FixItems,omitnil,omitempty" name:"FixItems"`
 
-	// <p>Maximum repair time<br>Measurement unit: second<br>Default value: 3600</p>
+	// <p>Maximum repair time<br>Unit: second<br>Default value: 3600</p>
 	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
-	// <p>Whether to create a disk snapshot before repair<br>Default value: false</p>
+	// <p>Create a disk snapshot before repair<br>Default value: false</p>
 	CreateSnapshot *bool `json:"CreateSnapshot,omitnil,omitempty" name:"CreateSnapshot"`
 
-	// <p>Snapshot name. Valid when CreateSnapshot is true.<br>Input parameter limit: Up to 128 characters.</p>
+	// <p>Snapshot name. Valid when CreateSnapshot is true. Input limits: up to 60 characters, with automatic truncation for overly long ones.</p>
 	SnapshotName *string `json:"SnapshotName,omitnil,omitempty" name:"SnapshotName"`
 
-	// <p>Snapshot retention days. Valid when CreateSnapshot is true.</p>
+	// <p>Snapshot retention days. Valid when CreateSnapshot is true</p>
 	SaveDays *int64 `json:"SaveDays,omitnil,omitempty" name:"SaveDays"`
 
 	// Group Account Member ID
@@ -15373,19 +15378,19 @@ type CreateVulFixTaskRequestParams struct {
 type CreateVulFixTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Repair item list, each item specifies a vulnerability/KB patch and its hosts requiring fixing<br>Input parameter limit: No more than 100 items, total number of instances not more than 5000</p>
+	// <p>Repair item list. Each item specifies a vulnerability/KB patch and its hosts requiring fixing<br>Input limit: up to 100 items, and the total number of instances cannot exceed 5000</p>
 	FixItems []*VulFixItem `json:"FixItems,omitnil,omitempty" name:"FixItems"`
 
-	// <p>Maximum repair time<br>Measurement unit: second<br>Default value: 3600</p>
+	// <p>Maximum repair time<br>Unit: second<br>Default value: 3600</p>
 	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
-	// <p>Whether to create a disk snapshot before repair<br>Default value: false</p>
+	// <p>Create a disk snapshot before repair<br>Default value: false</p>
 	CreateSnapshot *bool `json:"CreateSnapshot,omitnil,omitempty" name:"CreateSnapshot"`
 
-	// <p>Snapshot name. Valid when CreateSnapshot is true.<br>Input parameter limit: Up to 128 characters.</p>
+	// <p>Snapshot name. Valid when CreateSnapshot is true. Input limits: up to 60 characters, with automatic truncation for overly long ones.</p>
 	SnapshotName *string `json:"SnapshotName,omitnil,omitempty" name:"SnapshotName"`
 
-	// <p>Snapshot retention days. Valid when CreateSnapshot is true.</p>
+	// <p>Snapshot retention days. Valid when CreateSnapshot is true</p>
 	SaveDays *int64 `json:"SaveDays,omitnil,omitempty" name:"SaveDays"`
 
 	// Group Account Member ID
@@ -15418,7 +15423,7 @@ func (r *CreateVulFixTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateVulFixTaskResponseParams struct {
-	// <p>Repair task ID, used for subsequent query task status</p>
+	// <p>Repair task ID, used for subsequent query of task status</p>
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -15443,13 +15448,13 @@ func (r *CreateVulFixTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateVulFixedExportJobRequestParams struct {
-	// <p>Filter criteria (same as DescribeVulFixedList)<br>Supported Filter.Name:<br>Keyword - Fuzzy matching, search by keyword (vulnerability name/CVE ID/host name/instance ID)<br>VulName - Fuzzy matching, vulnerability name search<br>Level - Exact match, filter by vulnerability level: LOW-Low risk MEDIUM-Medium risk HIGH-High risk CRITICAL-Critical<br>VprLevel - Exact match, filter by VPR rating: 1-Low 2-Medium 3-High 4-Critical<br>VulCategory - Exact match, filter by vulnerability type: LINUX-Linux software vulnerability WINDOWS-Windows system patch vulnerability WEB_CMS-Web-CMS vulnerability APPLICATION-Application vulnerability EMERGENCY-Emergency vulnerability<br>MachineName - Fuzzy matching, host name search<br>InstanceId - Fuzzy matching, instance ID search<br>FixTime - Range matching, repair time range, input two values for start and end time</p>
+	// <p>Filter criteria (same as DescribeVulFixedList)<br>Supported Filter.Name:<br>Keyword - fuzzy matching, search by keyword (vulnerability name/CVE ID/host name/instance ID)<br>VulName - fuzzy matching, search by vulnerability name<br>Level - exact match, filter by vulnerability level: LOW-low MEDIUM-medium HIGH-high CRITICAL-critical<br>VprLevel - exact match, filter by VPR rating: 1-Low 2-Medium 3-High 4-Critical<br>VulCategory - exact match, filter by vulnerability type: LINUX-Linux software vulnerability WINDOWS-Windows system patch vulnerability WEB_CMS-Web-CMS vulnerability APPLICATION-application vulnerability EMERGENCY-urgent vulnerability<br>MachineName - fuzzy matching, search by host name<br>InstanceId - fuzzy matching, search by instance ID<br>FixTime - range matching, repair time range. Input two values for start and end time</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// <p>Sorting field<br>Enumeration value:<br>FixTime: Sort by repair time<br>VulName: Sort by vulnerability name</p>
+	// <p>Sorting field<br>Enumeration values:<br>FixTime: Sort by fix time<br>VulName: Sort by vulnerability name</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// <p>Sorting method<br>Enumeration value:<br>asc: Ascending<br>desc: Descending order<br>Default value: desc</p>
+	// <p>Sorting method<br>Enumeration values:<br>asc: ascending<br>desc: descending<br>Default value: desc</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 
 	// Group Account Member ID
@@ -15459,13 +15464,13 @@ type CreateVulFixedExportJobRequestParams struct {
 type CreateVulFixedExportJobRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Filter criteria (same as DescribeVulFixedList)<br>Supported Filter.Name:<br>Keyword - Fuzzy matching, search by keyword (vulnerability name/CVE ID/host name/instance ID)<br>VulName - Fuzzy matching, vulnerability name search<br>Level - Exact match, filter by vulnerability level: LOW-Low risk MEDIUM-Medium risk HIGH-High risk CRITICAL-Critical<br>VprLevel - Exact match, filter by VPR rating: 1-Low 2-Medium 3-High 4-Critical<br>VulCategory - Exact match, filter by vulnerability type: LINUX-Linux software vulnerability WINDOWS-Windows system patch vulnerability WEB_CMS-Web-CMS vulnerability APPLICATION-Application vulnerability EMERGENCY-Emergency vulnerability<br>MachineName - Fuzzy matching, host name search<br>InstanceId - Fuzzy matching, instance ID search<br>FixTime - Range matching, repair time range, input two values for start and end time</p>
+	// <p>Filter criteria (same as DescribeVulFixedList)<br>Supported Filter.Name:<br>Keyword - fuzzy matching, search by keyword (vulnerability name/CVE ID/host name/instance ID)<br>VulName - fuzzy matching, search by vulnerability name<br>Level - exact match, filter by vulnerability level: LOW-low MEDIUM-medium HIGH-high CRITICAL-critical<br>VprLevel - exact match, filter by VPR rating: 1-Low 2-Medium 3-High 4-Critical<br>VulCategory - exact match, filter by vulnerability type: LINUX-Linux software vulnerability WINDOWS-Windows system patch vulnerability WEB_CMS-Web-CMS vulnerability APPLICATION-application vulnerability EMERGENCY-urgent vulnerability<br>MachineName - fuzzy matching, search by host name<br>InstanceId - fuzzy matching, search by instance ID<br>FixTime - range matching, repair time range. Input two values for start and end time</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// <p>Sorting field<br>Enumeration value:<br>FixTime: Sort by repair time<br>VulName: Sort by vulnerability name</p>
+	// <p>Sorting field<br>Enumeration values:<br>FixTime: Sort by fix time<br>VulName: Sort by vulnerability name</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// <p>Sorting method<br>Enumeration value:<br>asc: Ascending<br>desc: Descending order<br>Default value: desc</p>
+	// <p>Sorting method<br>Enumeration values:<br>asc: ascending<br>desc: descending<br>Default value: desc</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 
 	// Group Account Member ID
@@ -15496,7 +15501,7 @@ func (r *CreateVulFixedExportJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateVulFixedExportJobResponseParams struct {
-	// <p>Export task ID<br>Used when: front-end polling the status of tasks for reference</p>
+	// <p>Export task ID<br>Value for reference: used when polling the export task status on the frontend</p>
 	JobID *string `json:"JobID,omitnil,omitempty" name:"JobID"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -25358,11 +25363,18 @@ func (r *DescribeCLSLogListV3Response) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCSCPayInfoRequestParams struct {
 
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+
+	NeedQuotaUsed *bool `json:"NeedQuotaUsed,omitnil,omitempty" name:"NeedQuotaUsed"`
 }
 
 type DescribeCSCPayInfoRequest struct {
 	*tchttp.BaseRequest
 	
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
+	NeedQuotaUsed *bool `json:"NeedQuotaUsed,omitnil,omitempty" name:"NeedQuotaUsed"`
 }
 
 func (r *DescribeCSCPayInfoRequest) ToJsonString() string {
@@ -25377,7 +25389,8 @@ func (r *DescribeCSCPayInfoRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "MemberId")
+	delete(f, "NeedQuotaUsed")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCSCPayInfoRequest has unknown keys!", "")
 	}
@@ -29384,6 +29397,9 @@ type DescribeClusterSummaryResponseParams struct {
 
 	// <p>Number of nodes not bound to the Ultimate Edition</p>
 	UnboundUltimateNodeCount *uint64 `json:"UnboundUltimateNodeCount,omitnil,omitempty" name:"UnboundUltimateNodeCount"`
+
+	// Total number of regular nodes
+	NormalNodeCount *uint64 `json:"NormalNodeCount,omitnil,omitempty" name:"NormalNodeCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -37573,6 +37589,9 @@ type DescribeEDRRuleListRequestParams struct {
 
 	// <p>Optional sorting column: [ModifyTime]</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// File operation rule, populated when ContentType=file_operation (file path regex AND any selected action)
+	FileOperationRules *RuleContentFileOperation `json:"FileOperationRules,omitnil,omitempty" name:"FileOperationRules"`
 }
 
 type DescribeEDRRuleListRequest struct {
@@ -37595,6 +37614,9 @@ type DescribeEDRRuleListRequest struct {
 
 	// <p>Optional sorting column: [ModifyTime]</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// File operation rule, populated when ContentType=file_operation (file path regex AND any selected action)
+	FileOperationRules *RuleContentFileOperation `json:"FileOperationRules,omitnil,omitempty" name:"FileOperationRules"`
 }
 
 func (r *DescribeEDRRuleListRequest) ToJsonString() string {
@@ -37615,6 +37637,7 @@ func (r *DescribeEDRRuleListRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Order")
 	delete(f, "By")
+	delete(f, "FileOperationRules")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEDRRuleListRequest has unknown keys!", "")
 	}
@@ -41200,6 +41223,24 @@ type DescribeImageRegistryAssetOverviewResponseParams struct {
 	// <p>Trial use quota</p>
 	TrialQuota *uint64 `json:"TrialQuota,omitnil,omitempty" name:"TrialQuota"`
 
+	// <p>Number of risky images</p>
+	RiskImageCnt *uint64 `json:"RiskImageCnt,omitnil,omitempty" name:"RiskImageCnt"`
+
+	// <p>Number of CICD images</p>
+	CICDImageCnt *uint64 `json:"CICDImageCnt,omitnil,omitempty" name:"CICDImageCnt"`
+
+	// <p>Number of scanned CICD images</p>
+	CICDImageScannedCnt *uint64 `json:"CICDImageScannedCnt,omitnil,omitempty" name:"CICDImageScannedCnt"`
+
+	// <p>Number of risky CICD images</p>
+	RiskCICDImageCnt *uint64 `json:"RiskCICDImageCnt,omitnil,omitempty" name:"RiskCICDImageCnt"`
+
+	// <p>Number of sensitive files</p>
+	SecretFileCnt *uint64 `json:"SecretFileCnt,omitnil,omitempty" name:"SecretFileCnt"`
+
+	// <p>Number of build risks</p>
+	BuildRiskCnt *uint64 `json:"BuildRiskCnt,omitnil,omitempty" name:"BuildRiskCnt"`
+
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
@@ -43870,6 +43911,12 @@ type DescribeMalwareTimingScanSettingResponseParams struct {
 
 	// <p>Timeout duration (seconds)</p>
 	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// <p>List of alarm type codes saved in custom quarantine mode</p>
+	QuaraTypes []*string `json:"QuaraTypes,omitnil,omitempty" name:"QuaraTypes"`
+
+	// <p>Alarm type dictionary (delivered via gray release rules, used by the frontend to render checkbox options)</p>
+	QuaraTypeDict []*QuaraTypeDictItem `json:"QuaraTypeDict,omitnil,omitempty" name:"QuaraTypeDict"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -51871,19 +51918,19 @@ type DescribeVulFixTaskDetailRequestParams struct {
 	// <p>Repair task ID</p>
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// <p>Paging offset<br>Value ranges from 0 to +∞<br>Default value: 0</p>
+	// <p>Paging offset<br>Value range: [0, +∞)<br>Default value: 0</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <p>Number of results per page<br>Value ranges from 1 to 100<br>Default value: 10</p>
+	// <p>Number of results per page<br>Value range: [1, 100]<br>Default value: 10</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// <p>Filter criteria<br>Supported Filter.Name:<br>InstanceId - Exact match, filter by host instance ID<br>VulId - Exact match, filter by vulnerability ID, filter out hosts under a certain vulnerability<br>KBId - Exact match, filter by KB Patch ID, filter out hosts under a certain KB patch<br>Status - Exact match, filter by execution status: 0-Initial status 1-Issued 11-Client confirmed 2-Repair completed 3-Client offline 4-Timeout 5-Failure 6-No support 9-Waiting for snapshot creation to complete 10-Snapshot creation failed<br>FixStatus - Exact match, filter by repair result: 0-Initial status 1-Repair successful 2-Fix failure<br>SnapshotStatus - Exact match, filter by snapshot status: -1-No need to create snapshot 0-Not started 1-In progress 2-Completed 3-Creation failure</p>
+	// <p>Filter criteria<br>Supported Filter.Name:<br>InstanceId - Exact match. Filter by host instance ID.<br>VulId - Exact match. Filter by vulnerability ID to filter out hosts under a vulnerability.<br>KBId - Exact match. Filter by KB Patch ID to filter out hosts under a KB patch.<br>Status - Exact match. Filter by execution status: 0-Initial status 1-Issued 11-Confirmed by client 2-Repair completed 3-Client offline 4-Timeout 5-Failed 6-Unsupported 9-Waiting for snapshot creation 10-Snapshot creation failed<br>FixStatus - Exact match. Filter by fix result: 0-Initial status 1-Repair successful 2-Failed to fix<br>SnapshotStatus - Exact match. Filter by snapshot status: -1-No need to create snapshot 0-Not started 1-In progress 2-Completed 3-Creation failed</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// <p>Sorting field<br>Enumeration value:<br>StartTime: Sort by repair start time<br>EndTime: Sort by repair end time</p>
+	// <p>Sorting field<br>Enumeration values:<br>StartTime: sort by repair start time<br>EndTime: sort by repair end time</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// <p>Sorting method<br>Enumeration value:<br>asc: Ascending<br>desc: Descending<br>Default value: desc</p>
+	// <p>Sorting method<br>Enumeration values:<br>asc: in ascending order<br>desc: in descending order<br>Default value: desc</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 
 	// Group Account Member ID
@@ -51896,19 +51943,19 @@ type DescribeVulFixTaskDetailRequest struct {
 	// <p>Repair task ID</p>
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// <p>Paging offset<br>Value ranges from 0 to +∞<br>Default value: 0</p>
+	// <p>Paging offset<br>Value range: [0, +∞)<br>Default value: 0</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <p>Number of results per page<br>Value ranges from 1 to 100<br>Default value: 10</p>
+	// <p>Number of results per page<br>Value range: [1, 100]<br>Default value: 10</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// <p>Filter criteria<br>Supported Filter.Name:<br>InstanceId - Exact match, filter by host instance ID<br>VulId - Exact match, filter by vulnerability ID, filter out hosts under a certain vulnerability<br>KBId - Exact match, filter by KB Patch ID, filter out hosts under a certain KB patch<br>Status - Exact match, filter by execution status: 0-Initial status 1-Issued 11-Client confirmed 2-Repair completed 3-Client offline 4-Timeout 5-Failure 6-No support 9-Waiting for snapshot creation to complete 10-Snapshot creation failed<br>FixStatus - Exact match, filter by repair result: 0-Initial status 1-Repair successful 2-Fix failure<br>SnapshotStatus - Exact match, filter by snapshot status: -1-No need to create snapshot 0-Not started 1-In progress 2-Completed 3-Creation failure</p>
+	// <p>Filter criteria<br>Supported Filter.Name:<br>InstanceId - Exact match. Filter by host instance ID.<br>VulId - Exact match. Filter by vulnerability ID to filter out hosts under a vulnerability.<br>KBId - Exact match. Filter by KB Patch ID to filter out hosts under a KB patch.<br>Status - Exact match. Filter by execution status: 0-Initial status 1-Issued 11-Confirmed by client 2-Repair completed 3-Client offline 4-Timeout 5-Failed 6-Unsupported 9-Waiting for snapshot creation 10-Snapshot creation failed<br>FixStatus - Exact match. Filter by fix result: 0-Initial status 1-Repair successful 2-Failed to fix<br>SnapshotStatus - Exact match. Filter by snapshot status: -1-No need to create snapshot 0-Not started 1-In progress 2-Completed 3-Creation failed</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// <p>Sorting field<br>Enumeration value:<br>StartTime: Sort by repair start time<br>EndTime: Sort by repair end time</p>
+	// <p>Sorting field<br>Enumeration values:<br>StartTime: sort by repair start time<br>EndTime: sort by repair end time</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// <p>Sorting method<br>Enumeration value:<br>asc: Ascending<br>desc: Descending<br>Default value: desc</p>
+	// <p>Sorting method<br>Enumeration values:<br>asc: in ascending order<br>desc: in descending order<br>Default value: desc</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 
 	// Group Account Member ID
@@ -51942,7 +51989,7 @@ func (r *DescribeVulFixTaskDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVulFixTaskDetailResponseParams struct {
-	// <p>Task details</p>
+	// <p>Task details list</p>
 	Data []*VulFixTaskDetailItem `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// <p>Total quantity.</p>
@@ -51973,19 +52020,19 @@ func (r *DescribeVulFixTaskDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVulFixTaskListRequestParams struct {
-	// <p>Paging offset<br>Value ranges from 0 to +∞<br>Default value: 0</p>
+	// <p>Paging offset<br>Value range: [0, +∞)<br>Default value: 0</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <p>Number of results per page<br>Value ranges from 1 to 100<br>Default value: 10</p>
+	// <p>Number of results per page<br>Value range: [1, 100]<br>Default value: 10</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// <p>Filtering Conditions<br>Supported Filter.Name:<br>TaskId - Exact match, filter by task ID<br>JobId - Exact match, filter by task JobId, corresponding to the task ID of the background job system<br>FixStatus - Exact match, filter by remediation status: 0-Initialization 1-In remediation 2-Repair successful 3-Partially fix failed 4-All fix failed 5-Stop fix<br>StartTime - Range match, remediation startup time range, input two values to indicate start and end time<br>AppId - Exact match, filter by creator AppId<br>VulCategory - Exact match, filter by vulnerability type: LINUX-Linux software vulnerability WINDOWS-Windows system patch vulnerability WEB_CMS-Web-CMS vulnerability APPLICATION-Application vulnerability EMERGENCY-Emergency vulnerability<br>TaskName - Fuzzy matching, filter by vulnerability name/CVE ID/KB patch name, matching task associated vulnerability or KB patch</p>
+	// <p>Filter criteria<br>Supported Filter.Name:<br>TaskId - Exact match, Filter by task ID<br>JobId - Exact match, Filter by task JobId, which corresponds to the task ID in the background job system<br>FixStatus - Exact match, Filter by remediation status: 0-initialization 1-in remediation 2-repair successful 3-partially failed to fix 4-all failed to fix 5-stop fix<br>StartTime - Range match, remediation start time range. Input two values to indicate the start and end time<br>AppId - Exact match, Filter by creator AppId<br>VulCategory - Exact match, Filter by vulnerability type: LINUX-LINUX software vulnerability WINDOWS-WINDOWS system patch vulnerability WEB_CMS-WEB-CMS vulnerability APPLICATION-APPLICATION vulnerability EMERGENCY-urgent vulnerability<br>TaskName - Fuzzy matching, Filter by vulnerability Name/CVE ID/KB patch Name, matching the vulnerability or KB patch associated with the task</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// <p>Sorting field<br>Enumeration value:<br>StartTime: Sort by repair start time<br>EndTime: Sort by repair end time<br>CreateTime: Sort by creation time</p>
+	// <p>Sorting field<br>Enumeration values:<br>StartTime: sort by repair start time<br>EndTime: sort by repair end time<br>CreateTime: sort by creation time</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// <p>Sorting method<br>Enumeration value:<br>asc: Ascending<br>desc: Descending order<br>Default value: desc</p>
+	// <p>Sorting method<br>Enumeration values:<br>asc: in ascending order<br>desc: in descending order<br>Default value: desc</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 
 	// Group Account Member ID
@@ -51995,19 +52042,19 @@ type DescribeVulFixTaskListRequestParams struct {
 type DescribeVulFixTaskListRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Paging offset<br>Value ranges from 0 to +∞<br>Default value: 0</p>
+	// <p>Paging offset<br>Value range: [0, +∞)<br>Default value: 0</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <p>Number of results per page<br>Value ranges from 1 to 100<br>Default value: 10</p>
+	// <p>Number of results per page<br>Value range: [1, 100]<br>Default value: 10</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// <p>Filtering Conditions<br>Supported Filter.Name:<br>TaskId - Exact match, filter by task ID<br>JobId - Exact match, filter by task JobId, corresponding to the task ID of the background job system<br>FixStatus - Exact match, filter by remediation status: 0-Initialization 1-In remediation 2-Repair successful 3-Partially fix failed 4-All fix failed 5-Stop fix<br>StartTime - Range match, remediation startup time range, input two values to indicate start and end time<br>AppId - Exact match, filter by creator AppId<br>VulCategory - Exact match, filter by vulnerability type: LINUX-Linux software vulnerability WINDOWS-Windows system patch vulnerability WEB_CMS-Web-CMS vulnerability APPLICATION-Application vulnerability EMERGENCY-Emergency vulnerability<br>TaskName - Fuzzy matching, filter by vulnerability name/CVE ID/KB patch name, matching task associated vulnerability or KB patch</p>
+	// <p>Filter criteria<br>Supported Filter.Name:<br>TaskId - Exact match, Filter by task ID<br>JobId - Exact match, Filter by task JobId, which corresponds to the task ID in the background job system<br>FixStatus - Exact match, Filter by remediation status: 0-initialization 1-in remediation 2-repair successful 3-partially failed to fix 4-all failed to fix 5-stop fix<br>StartTime - Range match, remediation start time range. Input two values to indicate the start and end time<br>AppId - Exact match, Filter by creator AppId<br>VulCategory - Exact match, Filter by vulnerability type: LINUX-LINUX software vulnerability WINDOWS-WINDOWS system patch vulnerability WEB_CMS-WEB-CMS vulnerability APPLICATION-APPLICATION vulnerability EMERGENCY-urgent vulnerability<br>TaskName - Fuzzy matching, Filter by vulnerability Name/CVE ID/KB patch Name, matching the vulnerability or KB patch associated with the task</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// <p>Sorting field<br>Enumeration value:<br>StartTime: Sort by repair start time<br>EndTime: Sort by repair end time<br>CreateTime: Sort by creation time</p>
+	// <p>Sorting field<br>Enumeration values:<br>StartTime: sort by repair start time<br>EndTime: sort by repair end time<br>CreateTime: sort by creation time</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// <p>Sorting method<br>Enumeration value:<br>asc: Ascending<br>desc: Descending order<br>Default value: desc</p>
+	// <p>Sorting method<br>Enumeration values:<br>asc: in ascending order<br>desc: in descending order<br>Default value: desc</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 
 	// Group Account Member ID
@@ -52068,16 +52115,16 @@ func (r *DescribeVulFixTaskListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVulFixableMachineListRequestParams struct {
-	// <p>Vulnerability ID list, a maximum of 100</p>
+	// <p>List of vulnerability IDs. Supports up to 100.</p>
 	VulIds []*int64 `json:"VulIds,omitnil,omitempty" name:"VulIds"`
 
-	// <p>Paging offset<br>Value ranges from 0 to +∞<br>Default value: 0</p>
+	// <p>Paging offset<br>Value range: [0, +∞)<br>Default value: 0</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <p>Number of results per page<br>Value ranges from 1 to 100<br>Default value: 10</p>
+	// <p>Number of results per page<br>Value range: [1, 100]<br>Default value: 10</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// <p>Filtering Conditions<br>Supported Filter.Name:<br>Keyword - fuzzy matching, search by asset ID, asset name<br>ComponentName - fuzzy matching, search by associated component name<br>InstanceId - exact match, filter by host instance ID<br>MachineName - fuzzy matching, search by host name<br>MachineIp - fuzzy matching, search by host IP<br>OsType - exact match, filter by OS type: linux/windows<br>SupportAutoFix - exact match, filter by whether automatic fixing is supported: 0-unsupported 1-supported<br>Tag - exact match, filter by asset tag<br>AppId - exact match, filter by associated account</p>
+	// <p>Filter criteria<br>Supported Filter.Name:<br>Keyword - Fuzzy matching. Search by asset ID or asset name.<br>ComponentName - Fuzzy matching. Search by associated component name.<br>InstanceId - Exact match. Filter by host instance ID.<br>MachineName - Fuzzy matching. Search by host name.<br>MachineIp - Fuzzy matching. Search by host IP.<br>OsType - Exact match. Filter by OS type: linux/windows<br>SupportAutoFix - Exact match. Filter by whether auto-repair is supported: 0-unsupported 1-supported<br>Tag - Exact match. Filter by asset tag.<br>AppId - Exact match. Filter by associated account.</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Group Account Member ID
@@ -52087,16 +52134,16 @@ type DescribeVulFixableMachineListRequestParams struct {
 type DescribeVulFixableMachineListRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Vulnerability ID list, a maximum of 100</p>
+	// <p>List of vulnerability IDs. Supports up to 100.</p>
 	VulIds []*int64 `json:"VulIds,omitnil,omitempty" name:"VulIds"`
 
-	// <p>Paging offset<br>Value ranges from 0 to +∞<br>Default value: 0</p>
+	// <p>Paging offset<br>Value range: [0, +∞)<br>Default value: 0</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <p>Number of results per page<br>Value ranges from 1 to 100<br>Default value: 10</p>
+	// <p>Number of results per page<br>Value range: [1, 100]<br>Default value: 10</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// <p>Filtering Conditions<br>Supported Filter.Name:<br>Keyword - fuzzy matching, search by asset ID, asset name<br>ComponentName - fuzzy matching, search by associated component name<br>InstanceId - exact match, filter by host instance ID<br>MachineName - fuzzy matching, search by host name<br>MachineIp - fuzzy matching, search by host IP<br>OsType - exact match, filter by OS type: linux/windows<br>SupportAutoFix - exact match, filter by whether automatic fixing is supported: 0-unsupported 1-supported<br>Tag - exact match, filter by asset tag<br>AppId - exact match, filter by associated account</p>
+	// <p>Filter criteria<br>Supported Filter.Name:<br>Keyword - Fuzzy matching. Search by asset ID or asset name.<br>ComponentName - Fuzzy matching. Search by associated component name.<br>InstanceId - Exact match. Filter by host instance ID.<br>MachineName - Fuzzy matching. Search by host name.<br>MachineIp - Fuzzy matching. Search by host IP.<br>OsType - Exact match. Filter by OS type: linux/windows<br>SupportAutoFix - Exact match. Filter by whether auto-repair is supported: 0-unsupported 1-supported<br>Tag - Exact match. Filter by asset tag.<br>AppId - Exact match. Filter by associated account.</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Group Account Member ID
@@ -52128,7 +52175,7 @@ func (r *DescribeVulFixableMachineListRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVulFixableMachineListResponseParams struct {
-	// <p>Repair host list</p>
+	// <p>Repairable host list</p>
 	Data []*VulFixableMachineItem `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// <p>Total quantity.</p>
@@ -52137,10 +52184,10 @@ type DescribeVulFixableMachineListResponseParams struct {
 	// <p>Number of hosts that can be repaired with one click</p>
 	FixableCount *int64 `json:"FixableCount,omitnil,omitempty" name:"FixableCount"`
 
-	// <p>Number of hosts that cannot be one-click repaired</p>
+	// <p>Number of hosts that cannot be repaired with one click</p>
 	NotFixableCount *int64 `json:"NotFixableCount,omitnil,omitempty" name:"NotFixableCount"`
 
-	// <p>Summary information of vulnerability dimension, showing overview of list of vulnerabilities to be fixed</p>
+	// <p>Vulnerability dimensional summary, showing an overview of the list of repaired vulnerabilities</p>
 	VulSummary []*VulFixSummaryItem `json:"VulSummary,omitnil,omitempty" name:"VulSummary"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -52171,10 +52218,10 @@ type DescribeVulFixedHostDetailRequestParams struct {
 	// <p>Host instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// <p>Paging offset, used for associated component & path list pagination.<br>Value ranges from 0 to +∞.<br>Default value: 0.</p>
+	// <p>Paging offset for associated component &amp; path list pagination<br>Value range: [0, +∞)<br>Default value: 0</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <p>Number of results per page, used for paginating associated components & path list<br>Value ranges from 1 to 100<br>Default value: 10</p>
+	// <p>Number of results per page, used for list pagination of associated components &amp; paths<br>Value range: [1, 100]<br>Default value: 10</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Group Account Member ID
@@ -52190,10 +52237,10 @@ type DescribeVulFixedHostDetailRequest struct {
 	// <p>Host instance ID.</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// <p>Paging offset, used for associated component & path list pagination.<br>Value ranges from 0 to +∞.<br>Default value: 0.</p>
+	// <p>Paging offset for associated component &amp; path list pagination<br>Value range: [0, +∞)<br>Default value: 0</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <p>Number of results per page, used for paginating associated components & path list<br>Value ranges from 1 to 100<br>Default value: 10</p>
+	// <p>Number of results per page, used for list pagination of associated components &amp; paths<br>Value range: [1, 100]<br>Default value: 10</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Group Account Member ID
@@ -52231,10 +52278,10 @@ type DescribeVulFixedHostDetailResponseParams struct {
 	// <p>CVE id</p>
 	CveId *string `json:"CveId,omitnil,omitempty" name:"CveId"`
 
-	// <p>Vulnerability type<br>Enumeration value:<br>LINUX: Linux software vulnerability<br>WINDOWS: Windows system patch vulnerability<br>WEB_CMS: Web-CMS vulnerability<br>APPLICATION: Application vulnerability</p>
+	// <p>Vulnerability type<br>Enumeration values:<br>LINUX: Linux software vulnerability<br>WINDOWS: Windows system patch vulnerability<br>WEB_CMS: Web-CMS vulnerability<br>APPLICATION: Application vulnerability</p>
 	VulCategory *string `json:"VulCategory,omitnil,omitempty" name:"VulCategory"`
 
-	// <p>Repair completion time<br>Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)</p>
+	// <p>Repair completed time<br>Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)</p>
 	FixTime *string `json:"FixTime,omitnil,omitempty" name:"FixTime"`
 
 	// <p>Host instance ID.</p>
@@ -52243,16 +52290,16 @@ type DescribeVulFixedHostDetailResponseParams struct {
 	// <p>Host name.</p>
 	MachineName *string `json:"MachineName,omitnil,omitempty" name:"MachineName"`
 
-	// <p>Public IP of the server</p>
+	// <p>Public IP of the Server</p>
 	PublicIp *string `json:"PublicIp,omitnil,omitempty" name:"PublicIp"`
 
 	// <p>Host private IP address</p>
 	PrivateIp *string `json:"PrivateIp,omitnil,omitempty" name:"PrivateIp"`
 
-	// <p>Associated component & path detail list</p>
+	// <p>Associated component &amp; path detail list</p>
 	ComponentDetails []*ComponentDetailItem `json:"ComponentDetails,omitnil,omitempty" name:"ComponentDetails"`
 
-	// <p>Total number of associated components & paths</p>
+	// <p>Total number of associated components &amp; paths</p>
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -52277,19 +52324,19 @@ func (r *DescribeVulFixedHostDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVulFixedListRequestParams struct {
-	// <p>Paging offset<br>Value ranges from 0 to +∞<br>Default value: 0</p>
+	// <p>Paging offset<br>Value range: [0, +∞)<br>Default value: 0</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <p>Number of results per page<br>Value ranges from 1 to 100<br>Default value: 10</p>
+	// <p>Number of results per page<br>Value range: [1, 100]<br>Default value: 10</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// <p>Filtering Conditions<br>Supported Filter.Name:<br>Keyword - Fuzzy matching, search by keyword (vulnerability name/CVE ID/host name/instance ID)<br>VulName - Fuzzy matching, vulnerability name search<br>Level - Exact match, filter by vulnerability level: LOW-Low risk MEDIUM-Medium risk HIGH-High risk CRITICAL-Critical<br>VprLevel - Exact match, filter by VPR rating: 1-Low 2-Medium 3-High 4-Critical<br>VulCategory - Exact match, type filter: LINUX-Linux software vulnerability WINDOWS-Windows system patch vulnerability WEB_CMS-Web-CMS vulnerability APPLICATION-Application vulnerability EMERGENCY-Emergency vulnerability<br>MachineName - Fuzzy matching, search by host name<br>InstanceId - Fuzzy matching, id search by instance<br>FixTime - Range matching, repair time range, input two values to indicate start and end time</p>
+	// <p>Filter criteria<br>Supported Filter.Name:<br>Keyword - fuzzy matching, search by keyword (vulnerability name/CVE ID/host name/instance ID)<br>VulName - fuzzy matching, search by vulnerability name<br>Level - exact matching, filter by vulnerability level: LOW - low risk, MEDIUM - medium risk, HIGH - high risk, CRITICAL - critical<br>VprLevel - exact matching, filter by VPR rating: 1 - Low, 2 - Medium, 3 - High, 4 - Critical<br>VulCategory - exact matching, filter by vulnerability type: LINUX - Linux software vulnerability, WINDOWS - Windows system patch vulnerability, WEB_CMS - Web-CMS vulnerability, APPLICATION - application vulnerability, EMERGENCY - urgent vulnerability<br>MachineName - fuzzy matching, search by host name<br>InstanceId - fuzzy matching, search by instance ID<br>FixTime - range matching, repair time range. Input two values to indicate the start and end time</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// <p>Sorting field<br>Enumeration value:<br>FixTime: Sort by repair time<br>VulName: Sort by vulnerability name</p>
+	// <p>Sorting field<br>Enumeration values:<br>FixTime: sort by fix time<br>VulName: sort by vulnerability name</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// <p>Sorting method<br>Enumeration value:<br>asc: Ascending<br>desc: Descending order<br>Default value: desc</p>
+	// <p>Sorting method<br>Enumeration values:<br>asc: Ascending<br>desc: Descending<br>Default value: desc</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 
 	// Group Account Member ID
@@ -52299,19 +52346,19 @@ type DescribeVulFixedListRequestParams struct {
 type DescribeVulFixedListRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Paging offset<br>Value ranges from 0 to +∞<br>Default value: 0</p>
+	// <p>Paging offset<br>Value range: [0, +∞)<br>Default value: 0</p>
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <p>Number of results per page<br>Value ranges from 1 to 100<br>Default value: 10</p>
+	// <p>Number of results per page<br>Value range: [1, 100]<br>Default value: 10</p>
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// <p>Filtering Conditions<br>Supported Filter.Name:<br>Keyword - Fuzzy matching, search by keyword (vulnerability name/CVE ID/host name/instance ID)<br>VulName - Fuzzy matching, vulnerability name search<br>Level - Exact match, filter by vulnerability level: LOW-Low risk MEDIUM-Medium risk HIGH-High risk CRITICAL-Critical<br>VprLevel - Exact match, filter by VPR rating: 1-Low 2-Medium 3-High 4-Critical<br>VulCategory - Exact match, type filter: LINUX-Linux software vulnerability WINDOWS-Windows system patch vulnerability WEB_CMS-Web-CMS vulnerability APPLICATION-Application vulnerability EMERGENCY-Emergency vulnerability<br>MachineName - Fuzzy matching, search by host name<br>InstanceId - Fuzzy matching, id search by instance<br>FixTime - Range matching, repair time range, input two values to indicate start and end time</p>
+	// <p>Filter criteria<br>Supported Filter.Name:<br>Keyword - fuzzy matching, search by keyword (vulnerability name/CVE ID/host name/instance ID)<br>VulName - fuzzy matching, search by vulnerability name<br>Level - exact matching, filter by vulnerability level: LOW - low risk, MEDIUM - medium risk, HIGH - high risk, CRITICAL - critical<br>VprLevel - exact matching, filter by VPR rating: 1 - Low, 2 - Medium, 3 - High, 4 - Critical<br>VulCategory - exact matching, filter by vulnerability type: LINUX - Linux software vulnerability, WINDOWS - Windows system patch vulnerability, WEB_CMS - Web-CMS vulnerability, APPLICATION - application vulnerability, EMERGENCY - urgent vulnerability<br>MachineName - fuzzy matching, search by host name<br>InstanceId - fuzzy matching, search by instance ID<br>FixTime - range matching, repair time range. Input two values to indicate the start and end time</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// <p>Sorting field<br>Enumeration value:<br>FixTime: Sort by repair time<br>VulName: Sort by vulnerability name</p>
+	// <p>Sorting field<br>Enumeration values:<br>FixTime: sort by fix time<br>VulName: sort by vulnerability name</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// <p>Sorting method<br>Enumeration value:<br>asc: Ascending<br>desc: Descending order<br>Default value: desc</p>
+	// <p>Sorting method<br>Enumeration values:<br>asc: Ascending<br>desc: Descending<br>Default value: desc</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 
 	// Group Account Member ID
@@ -52344,7 +52391,7 @@ func (r *DescribeVulFixedListRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVulFixedListResponseParams struct {
-	// <p>List of fixed vulnerabilities</p>
+	// <p>Fixed vulnerability list</p>
 	Data []*VulFixedItem `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// <p>Total quantity.</p>
@@ -52795,7 +52842,7 @@ type DescribeVulRiskRelateComponentRequestParams struct {
 	// <p>Group account member id</p>
 	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
 
-	// <p>Filter conditions array, multi-condition with each other in the AND relationship<br>Supported Filter.Name:<br>Keyword: Keyword fuzzy search (fuzzy matching for component name)</p>
+	// <p>Criteria array, multi-condition uses AND relationship with each other<br>Supported Filter.Name:<br>Keyword: keyword fuzzy search (fuzzy matching for component name)</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -52808,7 +52855,7 @@ type DescribeVulRiskRelateComponentRequest struct {
 	// <p>Group account member id</p>
 	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
 
-	// <p>Filter conditions array, multi-condition with each other in the AND relationship<br>Supported Filter.Name:<br>Keyword: Keyword fuzzy search (fuzzy matching for component name)</p>
+	// <p>Criteria array, multi-condition uses AND relationship with each other<br>Supported Filter.Name:<br>Keyword: keyword fuzzy search (fuzzy matching for component name)</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -52835,7 +52882,7 @@ func (r *DescribeVulRiskRelateComponentRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVulRiskRelateComponentResponseParams struct {
-	// <p>List of affected components for the vulnerability</p>
+	// <p>List of affected components</p>
 	List []*VulComponentSummary `json:"List,omitnil,omitempty" name:"List"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -52860,7 +52907,7 @@ func (r *DescribeVulRiskRelateComponentResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeVulRiskRelateHostRequestParams struct {
-	// <p>p>KB patch internal ID (kb_info.id)</p>
+	// <p>KB patch internal ID (kb_info.id)</p>
 	KBID *uint64 `json:"KBID,omitnil,omitempty" name:"KBID"`
 
 	// <p>Vulnerability ID (vul_vuls.id)</p>
@@ -52869,26 +52916,26 @@ type DescribeVulRiskRelateHostRequestParams struct {
 	// <p>Group account member id</p>
 	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
 
-	// <p>Filter conditions array. Multi-condition with each other is AND relationship<br>Supported Filter.Name:<br>Keyword: Keyword fuzzy search (fuzzy matching for host name/IP/InstanceID)<br>CloudTag: Cloud tag<br>Tag: Security center tag</p>
+	// <p>Criteria array, multi-condition uses AND relationship with each other<br>Supported Filter.Name:<br>Keyword: Keyword fuzzy search (fuzzy matching for host name/IP/InstanceID)<br>CloudTag: Cloud tag<br>Tag: Security center tag</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// <p>Number of results per page<br>Value ranges from 1 to 100<br>Default value: 10</p>
+	// <p>Number of results per page<br>Value range: [1, 100]<br>Default value: 10</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// <p>Paging offset<br>Value ranges from 0 to +∞<br>Default value: 0</p>
+	// <p>Paging offset<br>Value range: [0, positive infinity)<br>Default value: 0</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <p>Sorting order<br>Enumeration value:<br>ASC: Ascending<br>DESC: Descending order<br>Default value: DESC</p>
+	// <p>Sorting order<br>Enumeration values:<br>ASC: ascending<br>DESC: descending<br>Default value: DESC</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// <p>Sorting field<br>Enumeration value:<br>LatestScanTime: Latest scan time<br>VPRLevel: VPR rating<br>RiskStatus: Remediation status<br>Default value: LatestScanTime</p>
+	// <p>Sorting field<br>Enumeration values:<br>LatestScanTime: Latest scan time<br>VPRLevel: VPR rating<br>RiskStatus: Remediation status<br>Default value: LatestScanTime</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 }
 
 type DescribeVulRiskRelateHostRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>p>KB patch internal ID (kb_info.id)</p>
+	// <p>KB patch internal ID (kb_info.id)</p>
 	KBID *uint64 `json:"KBID,omitnil,omitempty" name:"KBID"`
 
 	// <p>Vulnerability ID (vul_vuls.id)</p>
@@ -52897,19 +52944,19 @@ type DescribeVulRiskRelateHostRequest struct {
 	// <p>Group account member id</p>
 	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
 
-	// <p>Filter conditions array. Multi-condition with each other is AND relationship<br>Supported Filter.Name:<br>Keyword: Keyword fuzzy search (fuzzy matching for host name/IP/InstanceID)<br>CloudTag: Cloud tag<br>Tag: Security center tag</p>
+	// <p>Criteria array, multi-condition uses AND relationship with each other<br>Supported Filter.Name:<br>Keyword: Keyword fuzzy search (fuzzy matching for host name/IP/InstanceID)<br>CloudTag: Cloud tag<br>Tag: Security center tag</p>
 	Filters []*Filters `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// <p>Number of results per page<br>Value ranges from 1 to 100<br>Default value: 10</p>
+	// <p>Number of results per page<br>Value range: [1, 100]<br>Default value: 10</p>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// <p>Paging offset<br>Value ranges from 0 to +∞<br>Default value: 0</p>
+	// <p>Paging offset<br>Value range: [0, positive infinity)<br>Default value: 0</p>
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// <p>Sorting order<br>Enumeration value:<br>ASC: Ascending<br>DESC: Descending order<br>Default value: DESC</p>
+	// <p>Sorting order<br>Enumeration values:<br>ASC: ascending<br>DESC: descending<br>Default value: DESC</p>
 	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
-	// <p>Sorting field<br>Enumeration value:<br>LatestScanTime: Latest scan time<br>VPRLevel: VPR rating<br>RiskStatus: Remediation status<br>Default value: LatestScanTime</p>
+	// <p>Sorting field<br>Enumeration values:<br>LatestScanTime: Latest scan time<br>VPRLevel: VPR rating<br>RiskStatus: Remediation status<br>Default value: LatestScanTime</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
 }
 
@@ -52941,10 +52988,10 @@ func (r *DescribeVulRiskRelateHostRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVulRiskRelateHostResponseParams struct {
-	// <p>List of affected hosts for the vulnerability</p>
+	// <p>List of affected hosts</p>
 	List []*VulHostBriefInfo `json:"List,omitnil,omitempty" name:"List"`
 
-	// <p>Total number of qualified instances</p>
+	// <p>Total number of eligible items</p>
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -53001,19 +53048,19 @@ func (r *DescribeVulScanPeriodicRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVulScanPeriodicResponseParams struct {
-	// <p>Period scanning switch (0-off, 1-on)</p>
+	// <p>Periodic scan switch (0-Disable, 1-Enable)</p>
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// <p>Vulnerability type</p><p>Enumeration value:</p><ul><li>LINUX: Linux software vulnerability</li><li>WINDOWS: Windows system patch</li><li>WEB_CMS: Web-CMS vulnerability</li><li>APPLICATION: Application vulnerability</li><li>EMERGENCY: Emergency vulnerability</li></ul>
+	// <p>Vulnerability type</p><p>Enumeration values:</p><ul><li>LINUX: Linux software vulnerability</li><li>WINDOWS: Windows system patch</li><li>WEB_CMS: Web-CMS vulnerability</li><li>APPLICATION: Application vulnerability</li><li>EMERGENCY: Emergency vulnerability</li></ul>
 	VulCategory []*string `json:"VulCategory,omitnil,omitempty" name:"VulCategory"`
 
-	// <p>Vulnerability level (INVALID: Invalid, INFO: Notification, LOW: Low risk, MEDIUM: Medium risk, HIGH: High risk, CRITICAL: Critical)</p>
+	// <p>Vulnerability level (INVALID: invalid, INFO: notification, LOW: low risk, MEDIUM: medium risk, HIGH: high risk, CRITICAL: critical)</p>
 	Level []*string `json:"Level,omitnil,omitempty" name:"Level"`
 
-	// <p>Scanning method (VersionCompare: version comparison, POC: POC detection, VersionComparePOC: version p comparison+POC detection)</p>
+	// <p>Scan mode (VersionCompare: version comparison, POC: POC detection, VersionComparePOC: version comparison + POC detection)</p>
 	Method *string `json:"Method,omitnil,omitempty" name:"Method"`
 
-	// <p>Period scanning type</p><p>Enumeration value:</p><ul><li>1: Daily</li><li>2: Weekly</li><li>3: Per month</li></ul>
+	// <p>Periodic scan type</p><p>Enumeration values:</p><ul><li>1: Daily</li><li>2: Weekly</li><li>3: Per month</li></ul>
 	CycleType *uint64 `json:"CycleType,omitnil,omitempty" name:"CycleType"`
 
 	// <p>Start time (09:00:00)</p>
@@ -53022,29 +53069,32 @@ type DescribeVulScanPeriodicResponseParams struct {
 	// <p>End time (18:00:00)</p>
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// <p>Asset scope (0-All assets, 1-Custom assets, 2-Remove asset)</p>
+	// <p>Asset scope (0 - all assets, 1 - custom asset, 2 - remove asset)</p>
 	AssetRange *int64 `json:"AssetRange,omitnil,omitempty" name:"AssetRange"`
 
 	// <p>Asset list (instance_id list)</p>
 	AssetList []*string `json:"AssetList,omitnil,omitempty" name:"AssetList"`
 
-	// <p>Period value</p><p>Unit: Day of the week or day of the month</p>
+	// <p>Cycle value</p><p>Unit: day of the week or day per month</p>
 	CycleValue []*uint64 `json:"CycleValue,omitnil,omitempty" name:"CycleValue"`
 
-	// <p>Timeout duration</p><p>Unit: second</p>
+	// <p>Timeout duration</p><p>Unit: seconds</p>
 	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
-	// <p>Whether to synchronize configuration 0-cannot, 1-permission</p>
+	// <p>Whether to run the synchronized configuration. 0: not allowed, 1: allowed</p>
 	AllowSync *uint64 `json:"AllowSync,omitnil,omitempty" name:"AllowSync"`
 
-	// <p>Whether the admin account has the automated configuration synchronization switch enabled 0-Off, 1-On</p>
+	// <p>Whether automatic synchronization is enabled for the admin account. 0: disabled, 1: enabled</p>
 	EnableSync *uint64 `json:"EnableSync,omitnil,omitempty" name:"EnableSync"`
 
-	// <p>Which account the configuration message comes from. Being empty indicates set by oneself.</p>
+	// <p>Which account the configuration message comes from. Being empty indicates it is set by oneself.</p>
 	AdminInfo *AccountBriefInfo `json:"AdminInfo,omitnil,omitempty" name:"AdminInfo"`
 
-	// <p>tag id</p>
+	// <p>Tag id</p>
 	TagIds []*uint64 `json:"TagIds,omitnil,omitempty" name:"TagIds"`
+
+	// <p>Whether to prefer Tencent Cloud software sources</p>
+	PreferCloudSource *bool `json:"PreferCloudSource,omitnil,omitempty" name:"PreferCloudSource"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -56571,6 +56621,9 @@ type ExportEDRRulesRequestParams struct {
 
 	// <p>Sort column: ModifyTime</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// <p>File operation rules, populated when ContentType=file_operation (file path regex AND any selected action)</p>
+	FileOperationRules *RuleContentFileOperation `json:"FileOperationRules,omitnil,omitempty" name:"FileOperationRules"`
 }
 
 type ExportEDRRulesRequest struct {
@@ -56587,6 +56640,9 @@ type ExportEDRRulesRequest struct {
 
 	// <p>Sort column: ModifyTime</p>
 	By *string `json:"By,omitnil,omitempty" name:"By"`
+
+	// <p>File operation rules, populated when ContentType=file_operation (file path regex AND any selected action)</p>
+	FileOperationRules *RuleContentFileOperation `json:"FileOperationRules,omitnil,omitempty" name:"FileOperationRules"`
 }
 
 func (r *ExportEDRRulesRequest) ToJsonString() string {
@@ -56605,6 +56661,7 @@ func (r *ExportEDRRulesRequest) FromJsonString(s string) error {
 	delete(f, "Filters")
 	delete(f, "Order")
 	delete(f, "By")
+	delete(f, "FileOperationRules")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ExportEDRRulesRequest has unknown keys!", "")
 	}
@@ -64992,6 +65049,12 @@ type ModifyEDRRuleRequestParams struct {
 
 	// <p>Container condition matching</p>
 	ConditionMatches []*ConditionMatch `json:"ConditionMatches,omitnil,omitempty" name:"ConditionMatches"`
+
+	// <p>File operation rules, populated when ContentType=file_operation (file path regex AND any selected action)</p>
+	FileOperationRules *RuleContentFileOperation `json:"FileOperationRules,omitnil,omitempty" name:"FileOperationRules"`
+
+	// <p>K8s API rule passed when ContentType=k8s_api. Values of all non-empty fields must be Base64-encoded, and k8s_api rules apply only per cluster.</p>
+	K8sApiRule *RuleContentK8sAPI `json:"K8sApiRule,omitnil,omitempty" name:"K8sApiRule"`
 }
 
 type ModifyEDRRuleRequest struct {
@@ -65092,6 +65155,12 @@ type ModifyEDRRuleRequest struct {
 
 	// <p>Container condition matching</p>
 	ConditionMatches []*ConditionMatch `json:"ConditionMatches,omitnil,omitempty" name:"ConditionMatches"`
+
+	// <p>File operation rules, populated when ContentType=file_operation (file path regex AND any selected action)</p>
+	FileOperationRules *RuleContentFileOperation `json:"FileOperationRules,omitnil,omitempty" name:"FileOperationRules"`
+
+	// <p>K8s API rule passed when ContentType=k8s_api. Values of all non-empty fields must be Base64-encoded, and k8s_api rules apply only per cluster.</p>
+	K8sApiRule *RuleContentK8sAPI `json:"K8sApiRule,omitnil,omitempty" name:"K8sApiRule"`
 }
 
 func (r *ModifyEDRRuleRequest) ToJsonString() string {
@@ -65138,6 +65207,8 @@ func (r *ModifyEDRRuleRequest) FromJsonString(s string) error {
 	delete(f, "ExcludeClusterIDsWithAppId")
 	delete(f, "ImageIDsWithAppId")
 	delete(f, "ConditionMatches")
+	delete(f, "FileOperationRules")
+	delete(f, "K8sApiRule")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyEDRRuleRequest has unknown keys!", "")
 	}
@@ -67305,6 +67376,9 @@ type ModifyMalwareTimingScanSettingsRequestParams struct {
 
 	// <p>Timeout duration (seconds)</p>
 	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// <p>List of alarm type codes for custom quarantine mode (required when ProtectMode=2; codes are taken from the QuaraTypeDict returned by Describe)</p>
+	QuaraTypes []*string `json:"QuaraTypes,omitnil,omitempty" name:"QuaraTypes"`
 }
 
 type ModifyMalwareTimingScanSettingsRequest struct {
@@ -67402,6 +67476,9 @@ type ModifyMalwareTimingScanSettingsRequest struct {
 
 	// <p>Timeout duration (seconds)</p>
 	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// <p>List of alarm type codes for custom quarantine mode (required when ProtectMode=2; codes are taken from the QuaraTypeDict returned by Describe)</p>
+	QuaraTypes []*string `json:"QuaraTypes,omitnil,omitempty" name:"QuaraTypes"`
 }
 
 func (r *ModifyMalwareTimingScanSettingsRequest) ToJsonString() string {
@@ -67447,6 +67524,7 @@ func (r *ModifyMalwareTimingScanSettingsRequest) FromJsonString(s string) error 
 	delete(f, "QuaraClusterIDsWithAppId")
 	delete(f, "QuaraExcludeClusterIDsWithAppId")
 	delete(f, "Timeout")
+	delete(f, "QuaraTypes")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMalwareTimingScanSettingsRequest has unknown keys!", "")
 	}
@@ -68205,6 +68283,9 @@ type ModifyPayConfigRequestParams struct {
 	// Auto-scaling configuration for the CWP module
 	// Supplemental description: if not passed, host configuration will not be modified. At least this module is required for the current period. Named module fields like ContainerConfig / AIAgentConfig can be added for subsequent scalability.
 	HostConfig *HostAutoScaleConfig `json:"HostConfig,omitnil,omitempty" name:"HostConfig"`
+
+	// <p>Auto-scaling configuration for the container security module; if not passed, it remains unchanged</p>
+	ContainerConfig *ContainerAutoScaleConfig `json:"ContainerConfig,omitnil,omitempty" name:"ContainerConfig"`
 }
 
 type ModifyPayConfigRequest struct {
@@ -68213,6 +68294,9 @@ type ModifyPayConfigRequest struct {
 	// Auto-scaling configuration for the CWP module
 	// Supplemental description: if not passed, host configuration will not be modified. At least this module is required for the current period. Named module fields like ContainerConfig / AIAgentConfig can be added for subsequent scalability.
 	HostConfig *HostAutoScaleConfig `json:"HostConfig,omitnil,omitempty" name:"HostConfig"`
+
+	// <p>Auto-scaling configuration for the container security module; if not passed, it remains unchanged</p>
+	ContainerConfig *ContainerAutoScaleConfig `json:"ContainerConfig,omitnil,omitempty" name:"ContainerConfig"`
 }
 
 func (r *ModifyPayConfigRequest) ToJsonString() string {
@@ -68228,6 +68312,7 @@ func (r *ModifyPayConfigRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "HostConfig")
+	delete(f, "ContainerConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyPayConfigRequest has unknown keys!", "")
 	}
@@ -71756,6 +71841,20 @@ type PublicIpDomainListKey struct {
 	Asset *string `json:"Asset,omitnil,omitempty" name:"Asset"`
 }
 
+type QuaraTypeDictItem struct {
+
+	Code *string `json:"Code,omitnil,omitempty" name:"Code"`
+
+
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+
+	Recommend *bool `json:"Recommend,omitnil,omitempty" name:"Recommend"`
+
+
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
+}
+
 type RaspLicenseList struct {
 	// <p>Unique machine ID</p>
 	QUUID *string `json:"QUUID,omitnil,omitempty" name:"QUUID"`
@@ -72500,6 +72599,55 @@ type RuleContentCmdLine struct {
 
 	// <p>Command line information of the ancestor process</p>
 	AncestorProcess *RuleContentProcessInfo `json:"AncestorProcess,omitnil,omitempty" name:"AncestorProcess"`
+}
+
+type RuleContentFileOperation struct {
+
+	Process *RuleContentProcessInfo `json:"Process,omitnil,omitempty" name:"Process"`
+
+
+	ParentProcess *RuleContentProcessInfo `json:"ParentProcess,omitnil,omitempty" name:"ParentProcess"`
+
+
+	FilePath *string `json:"FilePath,omitnil,omitempty" name:"FilePath"`
+
+
+	FileActions []*string `json:"FileActions,omitnil,omitempty" name:"FileActions"`
+}
+
+type RuleContentK8sAPI struct {
+
+	RequestURI *string `json:"RequestURI,omitnil,omitempty" name:"RequestURI"`
+
+
+	Verb *string `json:"Verb,omitnil,omitempty" name:"Verb"`
+
+
+	RequestUser *string `json:"RequestUser,omitnil,omitempty" name:"RequestUser"`
+
+
+	UserAgent *string `json:"UserAgent,omitnil,omitempty" name:"UserAgent"`
+
+
+	SourceIPS *string `json:"SourceIPS,omitnil,omitempty" name:"SourceIPS"`
+
+
+	ResponseStatusCode *string `json:"ResponseStatusCode,omitnil,omitempty" name:"ResponseStatusCode"`
+
+
+	RequestObject *string `json:"RequestObject,omitnil,omitempty" name:"RequestObject"`
+
+
+	ResponseObject *string `json:"ResponseObject,omitnil,omitempty" name:"ResponseObject"`
+
+
+	MountHostDir *string `json:"MountHostDir,omitnil,omitempty" name:"MountHostDir"`
+
+
+	PodNameIP *string `json:"PodNameIP,omitnil,omitempty" name:"PodNameIP"`
+
+
+	AuditID *string `json:"AuditID,omitnil,omitempty" name:"AuditID"`
 }
 
 type RuleContentProcessInfo struct {
@@ -76659,6 +76807,36 @@ type UserItem struct {
 	ShareFromUser *string `json:"ShareFromUser,omitnil,omitempty" name:"ShareFromUser"`
 }
 
+type VPRExplainDimension struct {
+	// <p>Tag key</p>
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// <p>Tag name</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Tag sub-item.</p>
+	Items []*VPRExplainDimensionItem `json:"Items,omitnil,omitempty" name:"Items"`
+}
+
+type VPRExplainDimensionItem struct {
+	// <p>Tag.</p>
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// <p>Tag name</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Tag description.</p>
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+}
+
+type VPRExplainInfo struct {
+	// <p>Vulnerability intelligence</p>
+	VulIntel []*VPRExplainDimension `json:"VulIntel,omitnil,omitempty" name:"VulIntel"`
+
+	// <p>Asset context</p>
+	AssetContext []*VPRExplainDimension `json:"AssetContext,omitnil,omitempty" name:"AssetContext"`
+}
+
 type VPRLabel struct {
 	// <p>Tag name<br>Enumeration values:<br>IN_THE_WILD: exploitation in the wild<br>EXP: has EXP<br>POC: has POC<br>INTERNET_EXPOSED: public network exposure<br>NO_RESTART: no restart required<br>HIGH_VALUE_ASSET: important asset<br>MALWARE_WEAPONIZED: weaponized</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -76673,23 +76851,23 @@ type VPRLabel struct {
 type VPRRatingInfo struct {
 	// VPR rating result
 	// Enumeration value:
-	// URGENT: Immediate repair
-	// SUGGESTED: Suggested repairs
+	// URGENT: immediate repair
+	// SUGGESTED repairs
 	// DEFERRABLE: Deferrable repair
 	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// Rating description
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-	// List of stage rating details
+	// List of phased rating details
 	Stage []*VPRRatingStage `json:"Stage,omitnil,omitempty" name:"Stage"`
 }
 
 type VPRRatingStage struct {
-	// Stage name (for example: threat activity level, exploitability, vulnerability severity)
+	// Stage name (for example, threat activity, exploitability, vulnerability severity)
 	Stage *string `json:"Stage,omitnil,omitempty" name:"Stage"`
 
-	// Rating result of this stage
+	// Rating result of this stage.
 	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 }
 
@@ -77220,10 +77398,10 @@ type VulBriefInfo struct {
 }
 
 type VulComponentSummary struct {
-	// <p>Component name.</p>
+	// <p>Component name</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <p>Associated hosts.</p>
+	// <p>Number of associated hosts</p>
 	RelateHostCount *uint64 `json:"RelateHostCount,omitnil,omitempty" name:"RelateHostCount"`
 }
 
@@ -77348,21 +77526,21 @@ type VulDetailInfo struct {
 }
 
 type VulFixItem struct {
-	// <p>Instance ID list of hosts requiring fixing<br>Input parameter limitation: Up to 1,000 instance IDs per single item</p>
+	// <p>Instance ID list of hosts requiring fixing<br>Input limit: up to 1000 instance IDs per single item</p>
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// <p>Vulnerability ID. Choose either VulId or KBId.</p>
+	// <p>Vulnerability ID. Choose either VulId or KBId</p>
 	VulId *int64 `json:"VulId,omitnil,omitempty" name:"VulId"`
 
-	// <p>Patch ID. Choose either VulId or KBId.</p>
+	// <p>KB patch ID. Either VulId or KBId is required.</p>
 	KBId *int64 `json:"KBId,omitnil,omitempty" name:"KBId"`
 }
 
 type VulFixStatusItem struct {
-	// Vulnerability ID (empty for KB patch fix tasks)
+	// Vulnerability ID (empty for KB patch repair tasks)
 	VulId *int64 `json:"VulId,omitnil,omitempty" name:"VulId"`
 
-	// Patch ID (empty for vulnerability repair tasks)
+	// KB patch ID (empty for vulnerability repair tasks)
 	KBId *int64 `json:"KBId,omitnil,omitempty" name:"KBId"`
 
 	// Vulnerability name or KB patch name
@@ -77372,17 +77550,17 @@ type VulFixStatusItem struct {
 	// Enumeration value:
 	// 0: In remediation
 	// 1: All successful
-	// 2: partially failed
+	// 2: Partially failed
 	// 3: All failed
 	FixStatus *int64 `json:"FixStatus,omitnil,omitempty" name:"FixStatus"`
 
-	// Total hosts associated with the vulnerability/KB patch
+	// Total number of hosts associated with this vulnerability/KB patch
 	HostCount *int64 `json:"HostCount,omitnil,omitempty" name:"HostCount"`
 
-	// Number of hosts successfully fixed by the vulnerability/KB patch
+	// Number of hosts successfully fixed by this vulnerability/KB patch
 	SuccessHostCount *int64 `json:"SuccessHostCount,omitnil,omitempty" name:"SuccessHostCount"`
 
-	// Number of hosts failed to be fixed for the vulnerability/KB patch
+	// Number of hosts failed to be fixed by this vulnerability/KB patch
 	FailHostCount *int64 `json:"FailHostCount,omitnil,omitempty" name:"FailHostCount"`
 }
 
@@ -77399,10 +77577,10 @@ type VulFixSummaryItem struct {
 	// <p>Number of affected hosts</p>
 	AffectedCount *int64 `json:"AffectedCount,omitnil,omitempty" name:"AffectedCount"`
 
-	// <p>Whether restart is required after repair</p>
+	// <p>Whether the system needs to be restarted after repair</p>
 	NeedReboot *bool `json:"NeedReboot,omitnil,omitempty" name:"NeedReboot"`
 
-	// <p>Whether one-click repair is supported true-supported false-unsupported</p>
+	// <p>Whether one-click repair is supported. true - support; false - not support</p>
 	FixSwitch *bool `json:"FixSwitch,omitnil,omitempty" name:"FixSwitch"`
 }
 
@@ -77413,10 +77591,10 @@ type VulFixTaskDetailItem struct {
 	// <p>Associated repair task ID</p>
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// <p>Vulnerability ID to be repaired</p>
+	// <p>ID of the repaired vulnerability</p>
 	VulId *int64 `json:"VulId,omitnil,omitempty" name:"VulId"`
 
-	// <p>Patch ID of the fixed KB</p>
+	// <p>KB patch ID repaired</p>
 	KBId *int64 `json:"KBId,omitnil,omitempty" name:"KBId"`
 
 	// <p>Host instance ID.</p>
@@ -77431,19 +77609,19 @@ type VulFixTaskDetailItem struct {
 	// <p>Vulnerability name</p>
 	VulName *string `json:"VulName,omitnil,omitempty" name:"VulName"`
 
-	// <p>Execution status<br>Enumeration value:<br>0: Initial state<br>1: Task issued<br>11: Client confirmed<br>2: Repair completed<br>3: Client offline<br>4: Timeout<br>5: Failure<br>6: Unsupported<br>9: Waiting for snapshot creation<br>10: Snapshot creation failed</p>
+	// <p>Execution status<br>Enumeration values:<br>0: Initial status<br>1: Task issued<br>11: Confirmed by client<br>2: Repair completed<br>3: Client offline<br>4: Timeout<br>5: Failed<br>6: Not supported<br>9: Waiting for snapshot creation<br>10: Snapshot creation failed</p>
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// <p>Fix result</p><p>Enumeration values:</p><ul><li>0: initial state</li><li>1: repair successful</li><li>2: fix failure</li><li>3: fix</li></ul>
+	// <p>Fix result</p><p>Enumeration values:</p><ul><li>0: initial status</li><li>1: successful fix</li><li>2: fix failure</li><li>3: in remediation</li></ul>
 	FixStatus *int64 `json:"FixStatus,omitnil,omitempty" name:"FixStatus"`
 
-	// <p>Snapshot status<br>Enumeration value:<br>-1: No need to create a snapshot<br>0: Not started<br>1: In progress<br>2: Completed<br>3: Creation failed</p>
+	// <p>Snapshot status<br>Enumeration values:<br>-1: No need to create a snapshot<br>0: Not started<br>1: In progress<br>2: Completed<br>3: Creation failed</p>
 	SnapshotStatus *int64 `json:"SnapshotStatus,omitnil,omitempty" name:"SnapshotStatus"`
 
 	// <p>Exception prompt message</p>
 	ExceptionMessage *string `json:"ExceptionMessage,omitnil,omitempty" name:"ExceptionMessage"`
 
-	// <p>Repair startup time<br>Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)</p>
+	// <p>Recovery startup time<br>Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)</p>
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// <p>Repair end time<br>Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)</p>
@@ -77455,12 +77633,12 @@ type VulFixTaskDetailItem struct {
 	// <p>Snapshot expiration time<br>Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)</p>
 	SnapshotExpireTime *string `json:"SnapshotExpireTime,omitnil,omitempty" name:"SnapshotExpireTime"`
 
-	// <p>Snapshot creation failure reason (available when SnapshotStatus=3)</p>
+	// <p>Snapshot creation failure reason (valid when SnapshotStatus=3)</p>
 	SnapshotFailReason *string `json:"SnapshotFailReason,omitnil,omitempty" name:"SnapshotFailReason"`
 }
 
 type VulFixTaskInfo struct {
-	// Primary key ID of the fix task
+	// Repair task primary key ID
 	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Task ID.
@@ -77471,18 +77649,18 @@ type VulFixTaskInfo struct {
 	// 0: initialization
 	// 1: In remediation
 	// 2: Repair successful
-	// 3: Partially fix failed
+	// 3: Partially fixed
 	// 4: All fix failures
 	// 5: Stop repair
 	FixStatus *int64 `json:"FixStatus,omitnil,omitempty" name:"FixStatus"`
 
-	// Repair total number of assets
+	// Total number of repaired assets
 	AssetCount *int64 `json:"AssetCount,omitnil,omitempty" name:"AssetCount"`
 
 	// Number of successful fixes
 	SuccessCount *int64 `json:"SuccessCount,omitnil,omitempty" name:"SuccessCount"`
 
-	// FIX_FAILURE count
+	// Number of failed fixes
 	FailCount *int64 `json:"FailCount,omitnil,omitempty" name:"FailCount"`
 
 	// Number of hosts in remediation
@@ -77491,49 +77669,49 @@ type VulFixTaskInfo struct {
 	// Number in queue (waiting for distribution or snapshot creation)
 	QueueCount *int64 `json:"QueueCount,omitnil,omitempty" name:"QueueCount"`
 
-	// Progress percentage of the repair
+	// Repair progress percentage
 	// Value range: [0, 100].
-	// Supplemental description: Calculation method is (SuccessCount+FailCount)/AssetCount×100.
+	// Supplemental description: Calculation method: (SuccessCount+FailCount)/AssetCount×100
 	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Number of successfully fixed vulnerabilities
+	// Number of vulnerabilities with successful fixes
 	SuccessVulCount *int64 `json:"SuccessVulCount,omitnil,omitempty" name:"SuccessVulCount"`
 
 	// Number of vulnerabilities that failed to fix
 	FailVulCount *int64 `json:"FailVulCount,omitnil,omitempty" name:"FailVulCount"`
 
-	// List of vulnerability names to be fixed
+	// List of fixed vulnerability names
 	VulNames []*string `json:"VulNames,omitnil,omitempty" name:"VulNames"`
 
-	// Fix startup time
-	// Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format).
+	// Startup time for repair
+	// Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Fixing end time
-	// Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format).
+	// Repair end time
+	// Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// List of vulnerability dimensional remediation status, status details of each vulnerability
+	// List of vulnerability dimensional remediation statuses, with status details for each vulnerability
 	VulFixStatusList []*VulFixStatusItem `json:"VulFixStatusList,omitnil,omitempty" name:"VulFixStatusList"`
 }
 
 type VulFixTaskItem struct {
-	// Primary key ID of the fix task
+	// Primary key ID of the repair task
 	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// Task ID, hash flag for interactive
+	// Task ID, a hash flag for interaction.
 	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// JobId, corresponding to the Task ID of the task system.
+	// Task JobId, corresponding to the task ID in the task system.
 	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
-	// List of vulnerability IDs to be fixed
+	// List of fixed vulnerability IDs
 	VulIds []*int64 `json:"VulIds,omitnil,omitempty" name:"VulIds"`
 
-	// List of fixed KB patch IDs
+	// List of repaired KB patch IDs
 	KBIds []*int64 `json:"KBIds,omitnil,omitempty" name:"KBIds"`
 
-	// Repair the total number of assets
+	// Total number of repaired assets
 	AssetCount *int64 `json:"AssetCount,omitnil,omitempty" name:"AssetCount"`
 
 	// Number of successfully fixed hosts
@@ -77542,20 +77720,20 @@ type VulFixTaskItem struct {
 	// Number of hosts failed to be fixed
 	FailCount *int64 `json:"FailCount,omitnil,omitempty" name:"FailCount"`
 
-	// Progress percentage of the repair
-	// Valid values: [0, 100]
-	// Supplemental description: Calculation method is (SuccessCount+FailCount)/AssetCount×100.
+	// Repair progress percentage
+	// Valid values: [0, 100].
+	// Supplemental description: Calculation method: (SuccessCount+FailCount)/AssetCount×100
 	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
-	// Number of users in the fix task
+	// Number of users for fix tasks
 	TargetAppIdsCount *int64 `json:"TargetAppIdsCount,omitnil,omitempty" name:"TargetAppIdsCount"`
 
 	// Remediation status
-	// Enumeration value:
+	// Enumeration values:
 	// 0: initialization
 	// 1: In remediation
 	// 2: Repair successful
-	// 3: Partially fix failed
+	// 3: Partial fix failure
 	// 4: All fix failures
 	// 5: Stop repair
 	FixStatus *int64 `json:"FixStatus,omitnil,omitempty" name:"FixStatus"`
@@ -77564,36 +77742,36 @@ type VulFixTaskItem struct {
 	// Unit: seconds.
 	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
-	// Fix startup time
-	// Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format).
+	// Repair startup time
+	// Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Fix end time
-	// Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format).
+	// Repair end time
+	// Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Record creation time.
-	// Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format).
+	// Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// List of vulnerability names to be fixed, making it easy to show directly on the list page
+	// List of names of repaired vulnerabilities, making it easy to show directly on the list page
 	VulNames []*string `json:"VulNames,omitnil,omitempty" name:"VulNames"`
 
 	// Vulnerability Type List
-	// Enumeration values:
+	// Enumeration value:
 	// LINUX: Linux software vulnerability
-	// WINDOWS: Windows system patch vulnerability
-	// WEB_CMS: Web-CMS vulnerabilities
+	// WINDOWS: WINDOWS system patch vulnerabilities
+	// WEB_CMS: Web-CMS vulnerability
 	// APPLICATION: Application vulnerability
 	// EMERGENCY: Urgent vulnerability
 	VulCategory []*string `json:"VulCategory,omitnil,omitempty" name:"VulCategory"`
 
-	// Creator AppId
+	// Creator `AppId`
 	AppId *uint64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 }
 
 type VulFixableMachineItem struct {
-	// <p>Vulnerability ID list, grouped by SupportAutoFix dimension: repairable vulnerability IDs when SupportAutoFix=1, non-repairable vulnerability IDs when SupportAutoFix=0</p>
+	// <p>Vulnerability ID list, grouped by the SupportAutoFix dimension: When SupportAutoFix=1, it is a repairable vulnerability ID; when SupportAutoFix=0, it is a non-repairable vulnerability ID</p>
 	VulIds []*int64 `json:"VulIds,omitnil,omitempty" name:"VulIds"`
 
 	// <p>Host instance ID.</p>
@@ -77605,22 +77783,22 @@ type VulFixableMachineItem struct {
 	// <p>Host IP address.</p>
 	MachineIp *string `json:"MachineIp,omitnil,omitempty" name:"MachineIp"`
 
-	// <p>public IP address</p>
+	// <p>Public IP Address</p>
 	PublicIp *string `json:"PublicIp,omitnil,omitempty" name:"PublicIp"`
 
-	// <p>OS type<br>Enumeration value:<br>linux: Linux operating system<br>windows: Windows operating system</p>
+	// <p>Operating system type<br>Enumeration values:<br>linux: Linux operating system<br>windows: Windows operating system</p>
 	OsType *string `json:"OsType,omitnil,omitempty" name:"OsType"`
 
-	// <p>Operating system name.</p>
+	// <p>OS name</p>
 	OsName *string `json:"OsName,omitnil,omitempty" name:"OsName"`
 
 	// <p>Host online status<br>Enumeration value:<br>ONLINE: online<br>OFFLINE: offline</p>
 	MachineStatus *string `json:"MachineStatus,omitnil,omitempty" name:"MachineStatus"`
 
-	// <p>Is auto-repair supported<br>Enumeration value:<br>0: No support<br>1: Support</p>
+	// <p>Is auto-repair supported<br>Enumeration values:<br>0: No support<br>1: Support</p>
 	SupportAutoFix *int64 `json:"SupportAutoFix,omitnil,omitempty" name:"SupportAutoFix"`
 
-	// <p>Current remediation status<br>Enumeration value:<br>0: Unfixed<br>1: In remediation<br>2: Fix failure<br>3: Repair successful<br>4: Timeout</p>
+	// <p>Current remediation status<br>Enumeration values:<br>0: unfixed<br>1: in remediation<br>2: fix failed<br>3: successful fix<br>4: remediation timeout</p>
 	FixStatus *int64 `json:"FixStatus,omitnil,omitempty" name:"FixStatus"`
 
 	// <p>Last repair time<br>Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)</p>
@@ -77629,7 +77807,7 @@ type VulFixableMachineItem struct {
 	// <p>Non-repairable reason. Returned when SupportAutoFix is 0.</p>
 	NotFixableReason *string `json:"NotFixableReason,omitnil,omitempty" name:"NotFixableReason"`
 
-	// <p>Fix command list, returned when SupportAutoFix is 1</p>
+	// <p>List of fix commands. Returned when SupportAutoFix is 1</p>
 	FixCommands []*string `json:"FixCommands,omitnil,omitempty" name:"FixCommands"`
 
 	// <p>Associated component list</p>
@@ -77638,58 +77816,49 @@ type VulFixableMachineItem struct {
 	// <p>Asset tag list</p>
 	TagItems []*MiniTagItem `json:"TagItems,omitnil,omitempty" name:"TagItems"`
 
-	// <p>Account AppId</p>
+	// <p>Associated account AppId</p>
 	AppId *uint64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
-	// <p>Paid edition info<br>Enumeration value:<br>BASIC: Basic version<br>PRO: Pro edition<br>ULTIMATE: Flagship edition</p>
+	// <p>Paid edition info<br>Enumeration values:<br>BASIC: Basic version<br>PRO: Pro edition<br>ULTIMATE: Flagship edition</p>
 	PayVersion *string `json:"PayVersion,omitnil,omitempty" name:"PayVersion"`
 }
 
 type VulFixedItem struct {
-	// Vulnerability ID
+	// <p>Vulnerability ID</p>
 	VulId *int64 `json:"VulId,omitnil,omitempty" name:"VulId"`
 
-	// Vulnerability name
+	// <p>Vulnerability name</p>
 	VulName *string `json:"VulName,omitnil,omitempty" name:"VulName"`
 
-	// Vulnerability level
-	// Enumeration values:
-	// LOW: low-risk
-	// MEDIUM: Medium risk
-	// HIGH: High risk
-	// CRITICAL
+	// <p>Vulnerability level<br>Enumeration values:<br>LOW: Low risk<br>MEDIUM: Medium risk<br>HIGH: High risk<br>CRITICAL: Critical</p>
 	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
-	// VPR rating information (including rating result, description, and phased score), consistent with DescribeHostVulRiskList
+	// <p>VPR rating information (including rating result, description, and staged score), consistent with DescribeHostVulRiskList</p>
 	VRPRatingInfo *VPRRatingInfo `json:"VRPRatingInfo,omitnil,omitempty" name:"VRPRatingInfo"`
 
-	// Vulnerability Type
-	// Enumeration values:
-	// LINUX: Linux software vulnerability
-	// WINDOWS: Windows system patch vulnerability
-	// WEB_CMS: Web-CMS vulnerabilities
-	// APPLICATION: Application vulnerability
-	// EMERGENCY: Urgent vulnerability
+	// <p>Vulnerability type<br>Enumeration values:<br>LINUX: Linux software vulnerability<br>WINDOWS: Windows system patch vulnerability<br>WEB_CMS: Web-CMS vulnerability<br>APPLICATION: Application vulnerability<br>EMERGENCY: Urgent vulnerability</p>
 	VulCategory *string `json:"VulCategory,omitnil,omitempty" name:"VulCategory"`
 
-	// CVE id
+	// <p>CVE id</p>
 	CveId *string `json:"CveId,omitnil,omitempty" name:"CveId"`
 
-	// Repair the host name
+	// <p>Repair host name</p>
 	MachineName *string `json:"MachineName,omitnil,omitempty" name:"MachineName"`
 
-	// Repair the host instance ID
+	// <p>Repair host instance ID</p>
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Associated component & number of paths
+	// <p>Associated component &amp; number of paths</p>
 	ComponentCount *int64 `json:"ComponentCount,omitnil,omitempty" name:"ComponentCount"`
 
-	// Associated component & path list
+	// <p>Associated component &amp; path list</p>
 	Components []*string `json:"Components,omitnil,omitempty" name:"Components"`
 
-	// Last repair time
-	// Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format).
+	// <p>Last repair time<br>Parameter format: YYYY-MM-DDTHH:mm:ssZ (ISO8601 format)</p>
 	LatestFixTime *string `json:"LatestFixTime,omitnil,omitempty" name:"LatestFixTime"`
+
+	// <p>VPR rating basis</p>
+	VPRExplainInfo *VPRExplainInfo `json:"VPRExplainInfo,omitnil,omitempty" name:"VPRExplainInfo"`
 }
 
 type VulHostBriefInfo struct {
@@ -77699,34 +77868,34 @@ type VulHostBriefInfo struct {
 	// <p>Host name.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// <p>Public network IP address</p>
+	// <p>Public IP address</p>
 	PublicIP *string `json:"PublicIP,omitnil,omitempty" name:"PublicIP"`
 
 	// <p>Private IP address</p>
 	PrivateIP *string `json:"PrivateIP,omitnil,omitempty" name:"PrivateIP"`
 
-	// <p>Protection edition<br>Enumeration value:<br>NONE: No protection<br>BASIC: Basic version<br>PRO: Pro edition<br>ULTIMATE: Flagship edition<br>PRO_LH: Lightweight edition</p>
+	// <p>Protection edition<br>Enumeration values:<br>NONE: no protection<br>BASIC: basic version<br>PRO: pro edition<br>ULTIMATE: flagship edition<br>PRO_LH: lightweight edition</p>
 	DefendVersion *string `json:"DefendVersion,omitnil,omitempty" name:"DefendVersion"`
 
-	// <p>Vulnerability defense status<br>Enumeration value:<br>ENABLED: Enabled<br>NOT_SUPPORTED: Unsupported<br>NOT_ENABLED: Not enabled</p>
+	// <p>Vulnerability defense status<br>Enumeration values:<br>ENABLED: enabled<br>NOT_SUPPORTED: unsupported<br>NOT_ENABLED: not enabled</p>
 	DefendStatus *string `json:"DefendStatus,omitnil,omitempty" name:"DefendStatus"`
 
-	// <p>Associated account information</p>
+	// <p>Account information belonging to</p>
 	Account *AccountBriefInfo `json:"Account,omitnil,omitempty" name:"Account"`
 
-	// <p>Cloud host instance status<br>Enumeration value:<br>RUNNING: running<br>STOPPED: stopped<br>UNKNOWN: unknown</p>
+	// <p>CVM instance status<br>Enumeration value:<br>RUNNING: running<br>STOPPED: stopped<br>UNKNOWN: unknown</p>
 	InstanceStatus *string `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
 
-	// <p>Remediation status enumeration values.</p><p>Enumeration values: </p><ul><li>PENDING: To be fixed, </li><li>SCANNING: Scan in progress, </li><li>FIXED: Fixed, </li><li>IGNORED: Ignored, </li><li>FIXING: In remediation, </li><li>FIX_FAILED: Fix failure, </li><li>NEED_REBOOT: Pending restart.</li></ul>
+	// <p>Remediation status enumeration values.</p><p>Enumeration values: </p><ul><li>PENDING: To be fixed, </li><li>SCANNING: Scanning, </li><li>FIXED: Fixed, </li><li>IGNORED: Ignored, </li><li>FIXING: In remediation, </li><li>FIX_FAILED: Fix failure, </li><li>NEED_REBOOT: Pending restart.</li></ul>
 	RiskStatus *string `json:"RiskStatus,omitnil,omitempty" name:"RiskStatus"`
 
 	// <p>VPR rating information (including rating result and details in each dimension)</p>
 	VPRRating *VPRRatingInfo `json:"VPRRating,omitnil,omitempty" name:"VPRRating"`
 
-	// <p>CWP Agent status<br>Enumeration value:<br>ONLINE: Online<br>OFFLINE: Offline<br>UNINSTALLED: Not installed</p>
+	// <p>CWP Agent status<br>Enumeration values:<br>ONLINE: ONLINE<br>OFFLINE: OFFLINE<br>UNINSTALLED: not installed</p>
 	AgentStatus *string `json:"AgentStatus,omitnil,omitempty" name:"AgentStatus"`
 
-	// <p>Asset tag list (CSIP internal asset tag)</p>
+	// <p>Asset tag list (CSIP internal asset tags)</p>
 	TagItem []*MiniTagItem `json:"TagItem,omitnil,omitempty" name:"TagItem"`
 
 	// <p>Cloud tag list (cloud asset side Tag)</p>

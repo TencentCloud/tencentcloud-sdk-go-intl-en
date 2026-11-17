@@ -125,6 +125,7 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// 1: OCR + liveness detection + face comparison
 	// 2: Liveness detection + face comparison
 	// 3: Liveness detection
+	// 4: OCR
 	// Default value: 1
 	CheckMode *int64 `json:"CheckMode,omitnil,omitempty" name:"CheckMode"`
 
@@ -252,6 +253,7 @@ type ApplySdkVerificationTokenRequest struct {
 	// 1: OCR + liveness detection + face comparison
 	// 2: Liveness detection + face comparison
 	// 3: Liveness detection
+	// 4: OCR
 	// Default value: 1
 	CheckMode *int64 `json:"CheckMode,omitnil,omitempty" name:"CheckMode"`
 
@@ -544,7 +546,7 @@ func (r *ApplyWebVerificationBizTokenIntlResponse) FromJsonString(s string) erro
 }
 
 type AttackRiskDetail struct {
-	// <p>Suspected attack trace type, specific type as follows:<br>SuspectedSpoofingAttack: Re-photography Attack<br>SuspectedSynthesisImage: Suspected synthesized image<br>SuspectedSynthesisVideo: Suspected synthesized video<br>SuspectedAnomalyAttack: Facial features suspected of not being real<br>SuspectedAdversarialAttack: Suspected adversarial sample attack<br>SuspectedBlackIndustry: Suspected black industry batch Template attack<br>SuspectedWatermark: Suspected watermark</p>
+	// <p>Types of suspected attack traces. The specific types are as follows:<br>SuspectedSpoofingAttack: Recapture attack<br>SuspectedSynthesisImage: Suspected synthetic image<br>SuspectedSynthesisVideo: Suspected synthetic video<br>SuspectedAnomalyAttack: Suspected non-live facial features<br>SuspectedAdversarialAttack: Suspected adversarial example attack<br>SuspectedBlackIndustry: Suspected batch template attack from black market operations<br>SuspectedWatermark: Suspected watermark presence</p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -914,6 +916,20 @@ func (r *BankCardVerificationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type BlackListItem struct {
+	// <p>Blocklist entry ID, customized by the customer when creating the entry, used to trace which entry is matched.</p>
+	ModelId *string `json:"ModelId,omitnil,omitempty" name:"ModelId"`
+
+	// <p>Entry type. Currently only face is supported.</p>
+	ModelType *string `json:"ModelType,omitnil,omitempty" name:"ModelType"`
+
+	// <p>Face similarity, expressed as a string with 4 decimal places, ranging from 0.0000 to 1.0000.</p>
+	FaceScore *string `json:"FaceScore,omitnil,omitempty" name:"FaceScore"`
+
+	// <p>Background similarity</p>
+	BackgroundScore *string `json:"BackgroundScore,omitnil,omitempty" name:"BackgroundScore"`
+}
+
 type CardInfo struct {
 	// Hong Kong identity card
 	HKIDCard *HKIDCard `json:"HKIDCard,omitnil,omitempty" name:"HKIDCard"`
@@ -1108,13 +1124,19 @@ type CardVerifyResult struct {
 	// -9101 Alarm for covered certificate,
 	// -9102 Alarm for photocopied certificate,
 	// -9103 Alarm for photographed certificate,
+	// -9104 Alarm for tamper certificate,
 	// -9107 Alarm for reflective certificate,
 	// -9108 Alarm for blurry image,
+	// -8101 Alarm for document information format verification,
+	// -8102 Alarm for document information consistency verification,
 	// -9109 This capability is not enabled.
 	WarnCardInfos []*int64 `json:"WarnCardInfos,omitnil,omitempty" name:"WarnCardInfos"`
 
 	// Details of the OCR modifications for this EKYC card, when the user manually modifies the card recognition results (IsEdit=true), EditDetails will return the modified fields. When IsEdit=false, EditDetails is empty.
 	EditDetails []*EditDetail `json:"EditDetails,omitnil,omitempty" name:"EditDetails"`
+
+	// Detected card type. Returns the corresponding document type combining country or region name and document type. Enums: Passport, IndonesiaIDCard, MalaysiaIDCard, SingaporeIDCard, ThailandIDCard, ThailandPinkCard, VietnamIDCard, MyanmarDriverLicense, HongKongIDCard, MacaoIDCard, TaiwanIDCard, HmtTravelPermit, HmtMainlandTravelPermit, HmtResidencePermit, HmtResidencePermitBack, MainlandIDCard, MainlandIDCardBack, MainlandTempIDCard, MainlandTempIDCardBack, BrazilIDCard, BrazilIDCardBack, BrazilRNM, BrazilRNMBack, BrazilRNE, BrazilDriverLicense, BrazilDriverLicenseBack, MexicoVoterCard, PhilippinesUMID, PhilippinesDriverLicense, PhilippinesVoteID, PhilippinesSSSID, PhilippinesTINID, PhilippinesNationalID, PhilippinesPRCID, PhilippinesPostalID, PhilippinesHealthCard, Other.
+	DetectedCardType *string `json:"DetectedCardType,omitnil,omitempty" name:"DetectedCardType"`
 }
 
 // Predefined struct for user
@@ -1542,7 +1564,7 @@ type CompareFaceLivenessResponseParams struct {
 	// Business Error Codes.
 	// -When the return value is "Success", it indicates that liveness detection and face comparison passed. Determined to be the same person.
 	// -When the return value is "FailedOperation.CompareLowSimilarity", it indicates that liveness detection passed, but face comparison similarity is below 70. Determined not to be the same person.
-	// -For other error cases, please refer to [Liveness Face Comparison (API only) Error Codes](https://www.tencentcloud.com/zh/document/product/1061/55390?lang=zh&pg=#97df7537-87fe-4266-87e9-02c816d41ee2)
+	// -For other error cases, please refer to [Selfie Verification (Pure API) Error Codes](https://www.tencentcloud.com/document/product/1061/55390?lang=en&pg=#97df7537-87fe-4266-87e9-02c816d41ee2)
 	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The service result description
@@ -1886,33 +1908,39 @@ func (r *DeleteEKYCWebhookResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DetectAIFakeFacesRequestParams struct {
-	// <p>Import the face image or facial video to be detected (currently only single face detection is supported) in base64 encoding. If your scenario involves both video and image, we recommend using video for detection. For better detection results, please note the following input data limits and suggestions:</p><ul><li><p>base64 value of the image:<br>Recommend an overall image resolution of 480x640, with the face size no less than 100x100, captured by the mobile front camera.<br>The size of the base64-encoded image data is recommended not to exceed 3M, with a maximum of 10M. Only jpg and png formats are supported.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li><li><p>base64 value of the video:<br>The size after base64 encoding is recommended to be within 8M, with a maximum of 10M. Supported formats include mp4, avi,flv,and mov, captured by the mobile front camera.<br>Video duration is recommended to be 2-5s, with a maximum of 20s.<br>Video resolution is recommended at 480x640 (maximum support for 720p), with a frame rate between 25fps and 30fps.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li></ul><p>If you do not use Encryption for secure transmission, this field is a required parameter.</p>
+	// <p>Pass in the face image or face video to be detected (currently only single-face detection is supported), encoded in Base64. If both video and image are available in your scenario, we recommend using video for detection. For better detection results, note the following restrictions and recommendations for input data:</p><ul><li><p>Base64 value of the image:<br>Recommended overall image resolution is 480x640, with the face size above 100X100, captured by the front camera of a mobile phone.<br>The Base64-encoded image data is recommended to be no more than 3 MB, and must not exceed 10 MB. Only jpg and png formats are supported.<br>Use the standard Base64 encoding method (with = padding). For encoding specifications, refer to RFC4648.</p></li><li><p>Base64 value of the video:<br>The Base64-encoded size is recommended to be within 8 MB, and must not exceed 10 MB. mp4, avi, flv, and mov formats are supported, captured by the front camera of a mobile phone.<br>Recommended video duration is 2 to 5 seconds, and must not exceed 20 seconds.<br>Recommended video resolution is 480x640 (up to 720p supported), with a frame rate between 25 fps and 30 fps.<br>Use the standard Base64 encoding method (with = padding). For encoding specifications, refer to RFC4648.</p></li></ul><p>If you do not use Encryption for encrypted transmission, this field is required.</p>
 	FaceInput *string `json:"FaceInput,omitnil,omitempty" name:"FaceInput"`
 
-	// <p>Passed in type.</p><ul><li>Value ranges from 1 to 2:<br>1: Passed in image type.<br>2: Passed in video type.<br>Other: Return error code InvalidParameter.</li></ul><p>If you do not use Encryption for encrypting transmission, this field is mandatory.</p>
+	// <p>Type of the input.</p><ul><li>Valid values:<br>1: image type.<br>2: video type.<br>Others: the error code InvalidParameter is returned.</li></ul><p>If you do not use Encryption for encrypted transmission, this field is required.</p>
 	FaceInputType *int64 `json:"FaceInputType,omitnil,omitempty" name:"FaceInputType"`
 
-	// <p>Whether to encrypt the entire request information.</p><ul><li>Supported encryption algorithms: AES-256-CBC, SM4-GCM.</li><li>The user with encryption requirements can use this parameter. For details, please click the left-side link.</li></ul>
+	// <p>Whether to encrypt the entire request body.</p><ul><li>Supported encryption algorithms: AES-256-CBC and SM4-GCM.</li><li>Users with encryption requirements can use this parameter. For details, click the link on the left.</li></ul>
 	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
 
-	// <p>Encrypted ciphertext.</p><ul><li>The data format before encryption is as follows: {"FaceInput":"AAAAA","FaceInputType":1}.</li></ul>
+	// <p>Encrypted ciphertext.</p><ul><li>The data format before encryption is as follows: {&quot;FaceInput&quot;:&quot;AAAAA&quot;,&quot;FaceInputType&quot;:1}.</li></ul>
 	EncryptedBody *string `json:"EncryptedBody,omitnil,omitempty" name:"EncryptedBody"`
+
+	// <p>Carries the risk control context of this request at one time, that is, "who, where, and from which IP the request is initiated".</p>
+	ExtraRiskInfo *ExtraRiskInfo `json:"ExtraRiskInfo,omitnil,omitempty" name:"ExtraRiskInfo"`
 }
 
 type DetectAIFakeFacesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <p>Import the face image or facial video to be detected (currently only single face detection is supported) in base64 encoding. If your scenario involves both video and image, we recommend using video for detection. For better detection results, please note the following input data limits and suggestions:</p><ul><li><p>base64 value of the image:<br>Recommend an overall image resolution of 480x640, with the face size no less than 100x100, captured by the mobile front camera.<br>The size of the base64-encoded image data is recommended not to exceed 3M, with a maximum of 10M. Only jpg and png formats are supported.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li><li><p>base64 value of the video:<br>The size after base64 encoding is recommended to be within 8M, with a maximum of 10M. Supported formats include mp4, avi,flv,and mov, captured by the mobile front camera.<br>Video duration is recommended to be 2-5s, with a maximum of 20s.<br>Video resolution is recommended at 480x640 (maximum support for 720p), with a frame rate between 25fps and 30fps.<br>Please use the standard base64 encoding method (with = padding). Refer to RFC4648 for the coding specification.</p></li></ul><p>If you do not use Encryption for secure transmission, this field is a required parameter.</p>
+	// <p>Pass in the face image or face video to be detected (currently only single-face detection is supported), encoded in Base64. If both video and image are available in your scenario, we recommend using video for detection. For better detection results, note the following restrictions and recommendations for input data:</p><ul><li><p>Base64 value of the image:<br>Recommended overall image resolution is 480x640, with the face size above 100X100, captured by the front camera of a mobile phone.<br>The Base64-encoded image data is recommended to be no more than 3 MB, and must not exceed 10 MB. Only jpg and png formats are supported.<br>Use the standard Base64 encoding method (with = padding). For encoding specifications, refer to RFC4648.</p></li><li><p>Base64 value of the video:<br>The Base64-encoded size is recommended to be within 8 MB, and must not exceed 10 MB. mp4, avi, flv, and mov formats are supported, captured by the front camera of a mobile phone.<br>Recommended video duration is 2 to 5 seconds, and must not exceed 20 seconds.<br>Recommended video resolution is 480x640 (up to 720p supported), with a frame rate between 25 fps and 30 fps.<br>Use the standard Base64 encoding method (with = padding). For encoding specifications, refer to RFC4648.</p></li></ul><p>If you do not use Encryption for encrypted transmission, this field is required.</p>
 	FaceInput *string `json:"FaceInput,omitnil,omitempty" name:"FaceInput"`
 
-	// <p>Passed in type.</p><ul><li>Value ranges from 1 to 2:<br>1: Passed in image type.<br>2: Passed in video type.<br>Other: Return error code InvalidParameter.</li></ul><p>If you do not use Encryption for encrypting transmission, this field is mandatory.</p>
+	// <p>Type of the input.</p><ul><li>Valid values:<br>1: image type.<br>2: video type.<br>Others: the error code InvalidParameter is returned.</li></ul><p>If you do not use Encryption for encrypted transmission, this field is required.</p>
 	FaceInputType *int64 `json:"FaceInputType,omitnil,omitempty" name:"FaceInputType"`
 
-	// <p>Whether to encrypt the entire request information.</p><ul><li>Supported encryption algorithms: AES-256-CBC, SM4-GCM.</li><li>The user with encryption requirements can use this parameter. For details, please click the left-side link.</li></ul>
+	// <p>Whether to encrypt the entire request body.</p><ul><li>Supported encryption algorithms: AES-256-CBC and SM4-GCM.</li><li>Users with encryption requirements can use this parameter. For details, click the link on the left.</li></ul>
 	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
 
-	// <p>Encrypted ciphertext.</p><ul><li>The data format before encryption is as follows: {"FaceInput":"AAAAA","FaceInputType":1}.</li></ul>
+	// <p>Encrypted ciphertext.</p><ul><li>The data format before encryption is as follows: {&quot;FaceInput&quot;:&quot;AAAAA&quot;,&quot;FaceInputType&quot;:1}.</li></ul>
 	EncryptedBody *string `json:"EncryptedBody,omitnil,omitempty" name:"EncryptedBody"`
+
+	// <p>Carries the risk control context of this request at one time, that is, "who, where, and from which IP the request is initiated".</p>
+	ExtraRiskInfo *ExtraRiskInfo `json:"ExtraRiskInfo,omitnil,omitempty" name:"ExtraRiskInfo"`
 }
 
 func (r *DetectAIFakeFacesRequest) ToJsonString() string {
@@ -1931,6 +1959,7 @@ func (r *DetectAIFakeFacesRequest) FromJsonString(s string) error {
 	delete(f, "FaceInputType")
 	delete(f, "Encryption")
 	delete(f, "EncryptedBody")
+	delete(f, "ExtraRiskInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetectAIFakeFacesRequest has unknown keys!", "")
 	}
@@ -1939,14 +1968,17 @@ func (r *DetectAIFakeFacesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DetectAIFakeFacesResponseParams struct {
-	// <p>Detection result for the input image/video to check the existence of face spoofing attack.</p><ul><li>Low: Low attack risk.</li><li>Mid: Moderately suspected attack.</li><li>High: Highly suspected attack.</li></ul><p>It is advisable to judge as interception when the return value is High, and pass for Mid and Low to better balance security and pass rate.</p>
+	// <p>Detection result for the input image/video, indicating whether a face attack exists.</p><ul><li>Low: Low attack risk.</li><li>Mid: Moderate suspected attack.</li><li>High: High suspected attack.</li></ul><p>It is recommended to block requests when the returned value is High, and allow requests when the value is Mid or Low, to better balance security and pass rate.</p>
 	AttackRiskLevel *string `json:"AttackRiskLevel,omitnil,omitempty" name:"AttackRiskLevel"`
 
-	// <p>List of suspected attack traces detected. It is returned only when AttackRiskLevel is High or Mid.</p><ul><li>Description: Return an empty array if no attack traces are detected.</li><li>This output parameter is for result determination reference. The result of AttackRiskLevel is still recommended for actual use.</li></ul>
+	// <p>List of detected suspected attack traces. Returned only when AttackRiskLevel is High or Mid.</p><ul><li>Note: An empty array is returned when no attack trace is detected.</li><li>This output parameter is for reference only. It is recommended to use the result of AttackRiskLevel in actual applications.</li></ul>
 	AttackRiskDetailList []*AttackRiskDetail `json:"AttackRiskDetailList,omitnil,omitempty" name:"AttackRiskDetailList"`
 
-	// <p>Return additional information (including detailed information of cache hit templates).</p>
+	// <p>Returns additional information, including details of the matched template.</p>
 	ExtraInfo *ExtraInfo `json:"ExtraInfo,omitnil,omitempty" name:"ExtraInfo"`
+
+	// <p>Independent container for additional risk conclusions, indicating whether the additional risk check is trustworthy and whether any issues are found.</p>
+	ExtraRiskResult *ExtraRiskResult `json:"ExtraRiskResult,omitnil,omitempty" name:"ExtraRiskResult"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -2070,16 +2102,16 @@ type EditDetail struct {
 }
 
 type Encryption struct {
-	// <p>When using the encryption service, fill in the field to be encrypted. This API can auto-fill one or more encrypted fields.</p>
+	// <p>When using the encryption service, enter the fields to be encrypted. In this API, you can enter one or more encrypted fields.</p>
 	EncryptList []*string `json:"EncryptList,omitnil,omitempty" name:"EncryptList"`
 
-	// <p>Encrypted symmetric key. For key generation and use, see the <a href="https://www.tencentcloud.com/document/product/1007/47180?from_cn_redirect=1">data encryption</a> document.</p>
+	// <p>Encrypted symmetric key. For key generation and usage, see the <a href="https://www.tencentcloud.com/document/product/1007/47180?from_cn_redirect=1">Data Encryption</a> documentation.</p>
 	CiphertextBlob *string `json:"CiphertextBlob,omitnil,omitempty" name:"CiphertextBlob"`
 
-	// <p>Users with encryption requirements import the initial vector for CBC encryption (custom string, length 16 characters).</p>
+	// <p>For users with encryption requirements, pass in the CBC encryption initialization vector (a customer-defined string with a length of 16 characters).</p>
 	Iv *string `json:"Iv,omitnil,omitempty" name:"Iv"`
 
-	// <p>Encryption algorithm (supports 'AES-256-CBC', 'SM4-GCM'), defaults to 'AES-256-CBC' if not passed.</p>
+	// <p>Algorithm used for encryption (supports &#39;AES-256-CBC&#39; and &#39;SM4-GCM&#39;). If not passed, the default is &#39;AES-256-CBC&#39;.</p>
 	Algorithm *string `json:"Algorithm,omitnil,omitempty" name:"Algorithm"`
 
 	// <p>Message digest generated by the SM4-GCM algorithm (used when verifying message integrity)</p>
@@ -2087,8 +2119,36 @@ type Encryption struct {
 }
 
 type ExtraInfo struct {
-	// Detailed information of the hit template, return only the template information with the highest similarity.
+	// Detailed information of the matched template. Only the template with the highest similarity is returned.
 	RetrievalLivenessExtraInfo []*RetrievalLivenessExtraInfo `json:"RetrievalLivenessExtraInfo,omitnil,omitempty" name:"RetrievalLivenessExtraInfo"`
+}
+
+type ExtraRiskInfo struct {
+	// <p>A stable and unique person identifier within the customer's business domain, used to correlate multiple location reports from the same person to determine whether abnormal displacement exists.</p><p>Input restrictions: Length ≤ 128 characters; Must not contain control characters (ASCII &lt; 0x20 or 0x7F); It is recommended to pass a desensitized identifier instead of a plaintext ID number or mobile number.</p>
+	PersonId *string `json:"PersonId,omitnil,omitempty" name:"PersonId"`
+
+	// <p>Latitude at the time of device collection, in WGS84 decimal degrees    </p><p>Input restrictions: Must be paired with Longitude; Valid range: [-90, 90]; Must be a valid number, NaN/Inf not accepted; Pass as a string in JSON (e.g., &quot;22.5431&quot;)</p>
+	Latitude *string `json:"Latitude,omitnil,omitempty" name:"Latitude"`
+
+	// <p>Longitude at the time of device collection, in WGS84 decimal degrees    </p><p>Input restrictions: Must be paired with Latitude; Valid range: [-180, 180]; Other restrictions are the same as above</p>
+	Longitude *string `json:"Longitude,omitnil,omitempty" name:"Longitude"`
+
+	// <p>Public egress IP of the device at the time of collection    </p><p>Input restrictions: Length ≤ 64; Must be a resolvable IPv4/IPv6 address; Private, loopback, link-local, and multicast addresses are considered non-locatable</p>
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
+}
+
+type ExtraRiskResult struct {
+	// <p>Completion of the additional checks in this request, indicating whether the result can be trusted.</p><p>Valid values:</p><ul><li>Completed: Conclusions (matched or passed) have been given for all checks required by this request.</li><li>Partial: At least one check cannot reach a conclusion due to unavailable dependencies, insufficient data, or incomplete or invalid input parameters. The result is for reference only and does not indicate security.</li></ul>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// <p>Additional risk level, which may be an empty string.</p><p>Valid values:</p><ul><li>High: An effective risk match exists (RiskDetailList is not empty in this case).</li><li>Low: The check is completed and no match is confirmed.</li><li>&quot;&quot; (empty string): Unrecognized. No check in this request can reach a conclusion, or not all checks are completed. It indicates neither risk nor security.</li></ul>
+	RiskLevel *string `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
+
+	// <p>List of matched risk items. An empty array [] is returned if no risk item is matched.</p>
+	BlackListResult []*BlackListItem `json:"BlackListResult,omitnil,omitempty" name:"BlackListResult"`
+
+	// <p>Face blocklist match details. An empty array [] is returned if no match is found.</p>
+	RiskDetailList []*RiskDetailItem `json:"RiskDetailList,omitnil,omitempty" name:"RiskDetailList"`
 }
 
 type FileInfo struct {
@@ -4725,14 +4785,19 @@ func (r *PhoneVerificationResponse) FromJsonString(s string) error {
 }
 
 type RetrievalLivenessExtraInfo struct {
-	// <p>Hit template type, among them Common-public library; Auto-Auto Clustering Library; Owner-custom template library</p>
+	// <p>Type of the matched template. Common: public library; Auto: automatic clustering library; Owner: custom template library.</p>
 	HitGroup *string `json:"HitGroup,omitnil,omitempty" name:"HitGroup"`
 
-	// <p>Similarity between the request image and the attack template hit. The similarity value ranges from 0 to 2. The smaller the value, the higher the probability of hitting the attack template. The default threshold is 0.6. When the SimilarityScore is ≥0.6, the judgment is as normal. When the SimilarityScore is <0.6, the judgment is an attack.</p>
+	// <p>Similarity between the request image and the matched attack template. The value range is [0,2]. A smaller value indicates a higher probability of matching an attack template. The default threshold is 0.6. A SimilarityScore ≥ 0.6 indicates normal, and a SimilarityScore &lt; 0.6 indicates an attack.</p>
 	SimilarityScore *float64 `json:"SimilarityScore,omitnil,omitempty" name:"SimilarityScore"`
 
-	// <p>Template id of the cache hit</p>
+	// <p>id of the matched template</p>
 	HitTemplate *string `json:"HitTemplate,omitnil,omitempty" name:"HitTemplate"`
+}
+
+type RiskDetailItem struct {
+	// <p>Risk item type.</p><p>Valid values:</p><ul><li>IpLocationMismatch: The country/region of the reported coordinates is inconsistent with the country/region of the IP address.</li><li>AbnormalLocationChange: The same person has physically impossible displacement within a short period of time.</li><li>BlacklistHit: A customer-created face blocklist is matched.</li></ul>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 // Predefined struct for user
