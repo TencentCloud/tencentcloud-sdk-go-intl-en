@@ -541,6 +541,20 @@ type CcnAttachedInstance struct {
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
+type Command struct {
+
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+
+	WorkingDirectory *string `json:"WorkingDirectory,omitnil,omitempty" name:"WorkingDirectory"`
+
+
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
+}
+
 type ContainerEnv struct {
 	// Environment variable key
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
@@ -648,7 +662,7 @@ type CreateDisksRequestParams struct {
 	// Cloud disk media type. Valid values: "CLOUD_PREMIUM" (premium cloud disk), "CLOUD_SSD" (SSD cloud disk).
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Parameters of monthly subscribed cloud disks
+	// Parameters of yearly/monthly subscribed cloud disks
 	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil,omitempty" name:"DiskChargePrepaid"`
 
 	// Image name, which can contain up to 60 characters.
@@ -657,7 +671,7 @@ type CreateDisksRequestParams struct {
 	// Number of cloud disks. Range: [1, 30]. Default value: 1.
 	DiskCount *int64 `json:"DiskCount,omitnil,omitempty" name:"DiskCount"`
 
-	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+	// Specify the quota of disk backups. No quota if it's left empty. Only one quota is allowed.
 	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 
 	// Whether to use the vouchers automatically. It defaults to No.
@@ -665,6 +679,9 @@ type CreateDisksRequestParams struct {
 
 	// Automatically mount and initialize the data disk.
 	AutoMountConfiguration *AutoMountConfiguration `json:"AutoMountConfiguration,omitnil,omitempty" name:"AutoMountConfiguration"`
+
+	// Tag key and tag value. If multiple tags are specified, they are created and bound to the specified resources at the same time. A tag key can have only one value on a given resource. If you attempt to add a tag with an existing key, its value is updated to the new value. Tags that do not exist are created automatically. The array supports a maximum of 10 elements.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type CreateDisksRequest struct {
@@ -679,7 +696,7 @@ type CreateDisksRequest struct {
 	// Cloud disk media type. Valid values: "CLOUD_PREMIUM" (premium cloud disk), "CLOUD_SSD" (SSD cloud disk).
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Parameters of monthly subscribed cloud disks
+	// Parameters of yearly/monthly subscribed cloud disks
 	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil,omitempty" name:"DiskChargePrepaid"`
 
 	// Image name, which can contain up to 60 characters.
@@ -688,7 +705,7 @@ type CreateDisksRequest struct {
 	// Number of cloud disks. Range: [1, 30]. Default value: 1.
 	DiskCount *int64 `json:"DiskCount,omitnil,omitempty" name:"DiskCount"`
 
-	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+	// Specify the quota of disk backups. No quota if it's left empty. Only one quota is allowed.
 	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 
 	// Whether to use the vouchers automatically. It defaults to No.
@@ -696,6 +713,9 @@ type CreateDisksRequest struct {
 
 	// Automatically mount and initialize the data disk.
 	AutoMountConfiguration *AutoMountConfiguration `json:"AutoMountConfiguration,omitnil,omitempty" name:"AutoMountConfiguration"`
+
+	// Tag key and tag value. If multiple tags are specified, they are created and bound to the specified resources at the same time. A tag key can have only one value on a given resource. If you attempt to add a tag with an existing key, its value is updated to the new value. Tags that do not exist are created automatically. The array supports a maximum of 10 elements.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *CreateDisksRequest) ToJsonString() string {
@@ -719,6 +739,7 @@ func (r *CreateDisksRequest) FromJsonString(s string) error {
 	delete(f, "DiskBackupQuota")
 	delete(f, "AutoVoucher")
 	delete(f, "AutoMountConfiguration")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDisksRequest has unknown keys!", "")
 	}
@@ -892,13 +913,13 @@ type CreateInstancesRequestParams struct {
 	// Image ID. You can get it via the [DescribeBlueprints](https://intl.cloud.tencent.com/document/api/1207/47689?from_cn_redirect=1) API.
 	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 
-	// Monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
+	// Yearly/monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
 	// Instance display name.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Number of the instances to purchase. For monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
+	// Number of the instances to purchase. For yearly/monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
 	InstanceCount *uint64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
 	// List of availability zones. A random AZ is selected by default.
@@ -914,7 +935,7 @@ type CreateInstancesRequestParams struct {
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
-	// Login password of the instance. It’s only available for Windows instances. If it’s not specified, it means that the user choose to set the login password after the instance creation.
+	// Login password of the instance. It's only available for Windows instances. If it's not specified, it means that the user choose to set the login password after the instance creation.
 	LoginConfiguration *LoginConfiguration `json:"LoginConfiguration,omitnil,omitempty" name:"LoginConfiguration"`
 
 	// Configuration of the containers to create
@@ -922,6 +943,21 @@ type CreateInstancesRequestParams struct {
 
 	// Whether to use the vouchers automatically. It defaults to No.
 	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
+
+	// Firewall template ID. If not specified, the default firewall policy is used.
+	FirewallTemplateId *string `json:"FirewallTemplateId,omitnil,omitempty" name:"FirewallTemplateId"`
+
+	// Tag key and tag value. If multiple tags are specified, they are created and bound to the specified resources at the same time. A tag key can have only one value on a given resource. If you attempt to add a tag with an existing key, its value is updated to the new value. Tags that do not exist are created automatically. The array supports a maximum of 10 elements.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// The command to be automatically executed after the instance is created.
+	InitCommand *Command `json:"InitCommand,omitnil,omitempty" name:"InitCommand"`
+
+	// The primary domain. Note: Once a domain is specified, only a single instance can be purchased (`InstanceCount` must be set to 1).
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
+
+	// The subdomain. Note: Once a domain is specified, only a single instance can be purchased (`InstanceCount` must be set to 1).
+	Subdomain *string `json:"Subdomain,omitnil,omitempty" name:"Subdomain"`
 }
 
 type CreateInstancesRequest struct {
@@ -933,13 +969,13 @@ type CreateInstancesRequest struct {
 	// Image ID. You can get it via the [DescribeBlueprints](https://intl.cloud.tencent.com/document/api/1207/47689?from_cn_redirect=1) API.
 	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 
-	// Monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
+	// Yearly/monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
 	// Instance display name.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
-	// Number of the instances to purchase. For monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
+	// Number of the instances to purchase. For yearly/monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
 	InstanceCount *uint64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
 	// List of availability zones. A random AZ is selected by default.
@@ -955,7 +991,7 @@ type CreateInstancesRequest struct {
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
 	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
-	// Login password of the instance. It’s only available for Windows instances. If it’s not specified, it means that the user choose to set the login password after the instance creation.
+	// Login password of the instance. It's only available for Windows instances. If it's not specified, it means that the user choose to set the login password after the instance creation.
 	LoginConfiguration *LoginConfiguration `json:"LoginConfiguration,omitnil,omitempty" name:"LoginConfiguration"`
 
 	// Configuration of the containers to create
@@ -963,6 +999,21 @@ type CreateInstancesRequest struct {
 
 	// Whether to use the vouchers automatically. It defaults to No.
 	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
+
+	// Firewall template ID. If not specified, the default firewall policy is used.
+	FirewallTemplateId *string `json:"FirewallTemplateId,omitnil,omitempty" name:"FirewallTemplateId"`
+
+	// Tag key and tag value. If multiple tags are specified, they are created and bound to the specified resources at the same time. A tag key can have only one value on a given resource. If you attempt to add a tag with an existing key, its value is updated to the new value. Tags that do not exist are created automatically. The array supports a maximum of 10 elements.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// The command to be automatically executed after the instance is created.
+	InitCommand *Command `json:"InitCommand,omitnil,omitempty" name:"InitCommand"`
+
+	// The primary domain. Note: Once a domain is specified, only a single instance can be purchased (`InstanceCount` must be set to 1).
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
+
+	// The subdomain. Note: Once a domain is specified, only a single instance can be purchased (`InstanceCount` must be set to 1).
+	Subdomain *string `json:"Subdomain,omitnil,omitempty" name:"Subdomain"`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -988,6 +1039,11 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	delete(f, "LoginConfiguration")
 	delete(f, "Containers")
 	delete(f, "AutoVoucher")
+	delete(f, "FirewallTemplateId")
+	delete(f, "Tags")
+	delete(f, "InitCommand")
+	delete(f, "DomainName")
+	delete(f, "Subdomain")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancesRequest has unknown keys!", "")
 	}
@@ -4388,13 +4444,13 @@ type InquirePriceCreateDisksRequestParams struct {
 	// Cloud disk media type. Valid values: "CLOUD_PREMIUM" (premium cloud storage), "CLOUD_SSD" (SSD cloud disk).
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Parameter settings for purchasing the monthly subscribed cloud disk.
+	// Parameter settings for purchasing the yearly/monthly subscribed cloud disk.
 	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil,omitempty" name:"DiskChargePrepaid"`
 
 	// Number of cloud disks. Default value: 1.
 	DiskCount *int64 `json:"DiskCount,omitnil,omitempty" name:"DiskCount"`
 
-	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+	// Specify the quota of disk backups. No quota if it's left empty. Only one quota is allowed.
 	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 }
 
@@ -4407,13 +4463,13 @@ type InquirePriceCreateDisksRequest struct {
 	// Cloud disk media type. Valid values: "CLOUD_PREMIUM" (premium cloud storage), "CLOUD_SSD" (SSD cloud disk).
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Parameter settings for purchasing the monthly subscribed cloud disk.
+	// Parameter settings for purchasing the yearly/monthly subscribed cloud disk.
 	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil,omitempty" name:"DiskChargePrepaid"`
 
 	// Number of cloud disks. Default value: 1.
 	DiskCount *int64 `json:"DiskCount,omitnil,omitempty" name:"DiskCount"`
 
-	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+	// Specify the quota of disk backups. No quota if it's left empty. Only one quota is allowed.
 	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 }
 
@@ -4548,7 +4604,7 @@ type InquirePriceRenewDisksRequestParams struct {
 	// List of cloud disk IDs.
 	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
-	// Parameter settings for renewing the monthly subscribed cloud disk.
+	// Parameter settings for renewing the yearly/monthly subscribed cloud disk.
 	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitnil,omitempty" name:"RenewDiskChargePrepaid"`
 }
 
@@ -4558,7 +4614,7 @@ type InquirePriceRenewDisksRequest struct {
 	// List of cloud disk IDs.
 	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
-	// Parameter settings for renewing the monthly subscribed cloud disk.
+	// Parameter settings for renewing the yearly/monthly subscribed cloud disk.
 	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitnil,omitempty" name:"RenewDiskChargePrepaid"`
 }
 
@@ -5518,10 +5574,10 @@ func (r *ModifyInstancesAttributeResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyInstancesBundleRequestParams struct {
-	// IDs of target instances. You can get the IDs from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 15 instances can be specified at the same time.
+	// List of instance IDs. One or more IDs of the instances to be operated. You can obtain the InstanceId from the value returned by the [DescribeInstances](https://www.tencentcloud.com/document/api/1207/47573?from_cn_redirect=1) API. The maximum number of instances in each request is 15.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// ID of bundles to change. You can get the IDs from the `BundleId` returned by the [DescribeBundles](https://intl.cloud.tencent.com/document/api/1207/47575?from_cn_redirect=1).
+	// ID of the target bundle. Note that it cannot be the same as the current bundle ID of the instance to be upgraded. You can obtain the BundleId from the value returned by the [DescribeBundles](https://www.tencentcloud.com/document/api/1207/47575?from_cn_redirect=1) API.
 	BundleId *string `json:"BundleId,omitnil,omitempty" name:"BundleId"`
 
 	// Whether to use existing vouchers under the current account automatically. Valid values: 
@@ -5534,10 +5590,10 @@ type ModifyInstancesBundleRequestParams struct {
 type ModifyInstancesBundleRequest struct {
 	*tchttp.BaseRequest
 	
-	// IDs of target instances. You can get the IDs from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 15 instances can be specified at the same time.
+	// List of instance IDs. One or more IDs of the instances to be operated. You can obtain the InstanceId from the value returned by the [DescribeInstances](https://www.tencentcloud.com/document/api/1207/47573?from_cn_redirect=1) API. The maximum number of instances in each request is 15.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// ID of bundles to change. You can get the IDs from the `BundleId` returned by the [DescribeBundles](https://intl.cloud.tencent.com/document/api/1207/47575?from_cn_redirect=1).
+	// ID of the target bundle. Note that it cannot be the same as the current bundle ID of the instance to be upgraded. You can obtain the BundleId from the value returned by the [DescribeBundles](https://www.tencentcloud.com/document/api/1207/47575?from_cn_redirect=1) API.
 	BundleId *string `json:"BundleId,omitnil,omitempty" name:"BundleId"`
 
 	// Whether to use existing vouchers under the current account automatically. Valid values: 
@@ -5828,7 +5884,7 @@ type RenewDisksRequestParams struct {
 	// IDs of cloud disks. The value can be obtained from the `DiskId` parameter returned by the [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1) API. Up to 50 disks can be requested at a time.
 	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
-	// Parameter settings for renewing the monthly subscribed cloud disk.
+	// Parameter settings for renewing the yearly/monthly subscribed cloud disk.
 	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitnil,omitempty" name:"RenewDiskChargePrepaid"`
 
 	// Whether to use the vouchers automatically. It defaults to No.
@@ -5841,7 +5897,7 @@ type RenewDisksRequest struct {
 	// IDs of cloud disks. The value can be obtained from the `DiskId` parameter returned by the [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1) API. Up to 50 disks can be requested at a time.
 	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
-	// Parameter settings for renewing the monthly subscribed cloud disk.
+	// Parameter settings for renewing the yearly/monthly subscribed cloud disk.
 	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitnil,omitempty" name:"RenewDiskChargePrepaid"`
 
 	// Whether to use the vouchers automatically. It defaults to No.
@@ -5896,7 +5952,7 @@ type RenewInstancesRequestParams struct {
 	// IDs of one or more instances to be operated. The value can be obtained from the `InstanceId` parameter returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API. Up to 100 instances can be requested at a time.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
+	// Prepaid mode, i.e., yearly/monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
 	// Whether to renew elastic data disks. Values: 
@@ -5918,7 +5974,7 @@ type RenewInstancesRequest struct {
 	// IDs of one or more instances to be operated. The value can be obtained from the `InstanceId` parameter returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API. Up to 100 instances can be requested at a time.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
+	// Prepaid mode, i.e., yearly/monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
 	// Whether to renew elastic data disks. Values: 

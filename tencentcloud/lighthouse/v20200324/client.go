@@ -1700,6 +1700,7 @@ func NewDescribeBundlesResponse() (response *DescribeBundlesResponse) {
 //  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
 //  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
 //  INVALIDPARAMETERVALUE_ZONEINVALID = "InvalidParameterValue.ZoneInvalid"
+//  UNSUPPORTEDOPERATION_SYSTEMBUSY = "UnsupportedOperation.SystemBusy"
 func (c *Client) DescribeBundles(request *DescribeBundlesRequest) (response *DescribeBundlesResponse, err error) {
     return c.DescribeBundlesWithContext(context.Background(), request)
 }
@@ -1732,6 +1733,7 @@ func (c *Client) DescribeBundles(request *DescribeBundlesRequest) (response *Des
 //  INVALIDPARAMETERVALUE_NEGATIVE = "InvalidParameterValue.Negative"
 //  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
 //  INVALIDPARAMETERVALUE_ZONEINVALID = "InvalidParameterValue.ZoneInvalid"
+//  UNSUPPORTEDOPERATION_SYSTEMBUSY = "UnsupportedOperation.SystemBusy"
 func (c *Client) DescribeBundlesWithContext(ctx context.Context, request *DescribeBundlesRequest) (response *DescribeBundlesResponse, err error) {
     if request == nil {
         request = NewDescribeBundlesRequest()
@@ -4923,13 +4925,13 @@ func NewModifyInstancesBundleResponse() (response *ModifyInstancesBundleResponse
 }
 
 // ModifyInstancesBundle
-// This API is used change one or more Lighthouse instance bundles. 
+// This API is used to change the bundle of one or more Lighthouse instances.
 //
-// * Only `RUNNING` and `STOPPED` instances can be changed. 
+// * Only instances in the RUNNING or STOPPED state can be operated through this API.
 //
-// * Batch operations are supported. The maximum number of instances in each request is 30. 
+// * Batch operations are supported. The maximum number of instances in each request is 15.
 //
-// * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+// * This API is an async API. After a request is sent successfully, a RequestId is returned, but the operation is not completed immediately. You can call the <a href="https://www.tencentcloud.com/document/product/1207/47573?from_cn_redirect=1" target="_blank">DescribeInstances</a> API to query the instance operation result. If the latest operation state (LatestOperationState) of the instance is "SUCCESS", the operation is successful.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4955,13 +4957,13 @@ func (c *Client) ModifyInstancesBundle(request *ModifyInstancesBundleRequest) (r
 }
 
 // ModifyInstancesBundle
-// This API is used change one or more Lighthouse instance bundles. 
+// This API is used to change the bundle of one or more Lighthouse instances.
 //
-// * Only `RUNNING` and `STOPPED` instances can be changed. 
+// * Only instances in the RUNNING or STOPPED state can be operated through this API.
 //
-// * Batch operations are supported. The maximum number of instances in each request is 30. 
+// * Batch operations are supported. The maximum number of instances in each request is 15.
 //
-// * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+// * This API is an async API. After a request is sent successfully, a RequestId is returned, but the operation is not completed immediately. You can call the <a href="https://www.tencentcloud.com/document/product/1207/47573?from_cn_redirect=1" target="_blank">DescribeInstances</a> API to query the instance operation result. If the latest operation state (LatestOperationState) of the instance is "SUCCESS", the operation is successful.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"

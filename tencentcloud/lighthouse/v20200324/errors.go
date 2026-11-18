@@ -416,7 +416,7 @@ const (
 	// Cross-border image synchronization is not supported.
 	INVALIDPARAMETERVALUE_NOTSUPPORTCROSSBORDERSYNCBLUEPRINT = "InvalidParameterValue.NotSupportCrossBorderSyncBlueprint"
 
-	// 
+	// The bundle type of the instance bundle does not support changing to the new bundle.
 	INVALIDPARAMETERVALUE_NOTSUPPORTMODIFYINSTANCEBUNDLETYPE = "InvalidParameterValue.NotSupportModifyInstanceBundleType"
 
 	// Invalid parametric value: it is not within the valid range.
