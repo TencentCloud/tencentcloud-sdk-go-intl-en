@@ -9547,6 +9547,74 @@ func (c *Client) StopRecordTaskWithContext(ctx context.Context, request *StopRec
     return
 }
 
+func NewStopScreenshotTaskRequest() (request *StopScreenshotTaskRequest) {
+    request = &StopScreenshotTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("live", APIVersion, "StopScreenshotTask")
+    
+    
+    return
+}
+
+func NewStopScreenshotTaskResponse() (response *StopScreenshotTaskResponse) {
+    response = &StopScreenshotTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StopScreenshotTask
+// This API is used to terminate a screenshot task in advance. After the task is successfully terminated, it will not be started again.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETCONFIGERROR = "InternalError.GetConfigError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) StopScreenshotTask(request *StopScreenshotTaskRequest) (response *StopScreenshotTaskResponse, err error) {
+    return c.StopScreenshotTaskWithContext(context.Background(), request)
+}
+
+// StopScreenshotTask
+// This API is used to terminate a screenshot task in advance. After the task is successfully terminated, it will not be started again.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GETCONFIGERROR = "InternalError.GetConfigError"
+//  INTERNALERROR_NETWORKERROR = "InternalError.NetworkError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_FORBIDSERVICE = "ResourceNotFound.ForbidService"
+//  RESOURCENOTFOUND_FREEZESERVICE = "ResourceNotFound.FreezeService"
+//  RESOURCENOTFOUND_STOPSERVICE = "ResourceNotFound.StopService"
+//  RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) StopScreenshotTaskWithContext(ctx context.Context, request *StopScreenshotTaskRequest) (response *StopScreenshotTaskResponse, err error) {
+    if request == nil {
+        request = NewStopScreenshotTaskRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "live", APIVersion, "StopScreenshotTask")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopScreenshotTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStopScreenshotTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUnBindLiveDomainCertRequest() (request *UnBindLiveDomainCertRequest) {
     request = &UnBindLiveDomainCertRequest{
         BaseRequest: &tchttp.BaseRequest{},

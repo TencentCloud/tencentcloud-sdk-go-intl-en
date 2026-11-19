@@ -5021,7 +5021,7 @@ func NewModifyInstancesRenewFlagResponse() (response *ModifyInstancesRenewFlagRe
 }
 
 // ModifyInstancesRenewFlag
-// This API is used to change the auto-renewal setting of monthly-subscribed instances. 
+// This API is used to change the auto-renewal setting of yearly/monthly-subscribed instances. 
 //
 // 
 //
@@ -5049,7 +5049,7 @@ func (c *Client) ModifyInstancesRenewFlag(request *ModifyInstancesRenewFlagReque
 }
 
 // ModifyInstancesRenewFlag
-// This API is used to change the auto-renewal setting of monthly-subscribed instances. 
+// This API is used to change the auto-renewal setting of yearly/monthly-subscribed instances. 
 //
 // 
 //
