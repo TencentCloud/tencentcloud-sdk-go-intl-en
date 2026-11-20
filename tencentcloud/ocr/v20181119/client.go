@@ -2595,6 +2595,74 @@ func (c *Client) SmartStructuralOCRV2WithContext(ctx context.Context, request *S
     return
 }
 
+func NewVerifyPdfOcrRequest() (request *VerifyPdfOcrRequest) {
+    request = &VerifyPdfOcrRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "VerifyPdfOcr")
+    
+    
+    return
+}
+
+func NewVerifyPdfOcrResponse() (response *VerifyPdfOcrResponse) {
+    response = &VerifyPdfOcrResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// VerifyPdfOcr
+// This API is used to recognize entry and exit record PDFs and verify electronic signatures, returning structured entry and exit records and signature verification conclusions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) VerifyPdfOcr(request *VerifyPdfOcrRequest) (response *VerifyPdfOcrResponse, err error) {
+    return c.VerifyPdfOcrWithContext(context.Background(), request)
+}
+
+// VerifyPdfOcr
+// This API is used to recognize entry and exit record PDFs and verify electronic signatures, returning structured entry and exit records and signature verification conclusions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) VerifyPdfOcrWithContext(ctx context.Context, request *VerifyPdfOcrRequest) (response *VerifyPdfOcrResponse, err error) {
+    if request == nil {
+        request = NewVerifyPdfOcrRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "ocr", APIVersion, "VerifyPdfOcr")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("VerifyPdfOcr require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewVerifyPdfOcrResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewVinOCRRequest() (request *VinOCRRequest) {
     request = &VinOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},

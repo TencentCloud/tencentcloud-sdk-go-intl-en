@@ -828,6 +828,32 @@ func (r *ExtractDocMultiResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ExtractedFields struct {
+	// <p>Title, such as &quot;Exit and Entry Record Query Result of the National Immigration Administration (Electronic Document)&quot;</p>
+	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
+
+	// <p>Query number</p>
+	QueryNo *string `json:"QueryNo,omitnil,omitempty" name:"QueryNo"`
+
+	// <p>Query date</p>
+	QueryDate *string `json:"QueryDate,omitnil,omitempty" name:"QueryDate"`
+
+	// <p>Date of issue</p>
+	GenerateDate *string `json:"GenerateDate,omitnil,omitempty" name:"GenerateDate"`
+
+	// <p>Information of the inquirer</p>
+	PersonInfo *PersonInfo `json:"PersonInfo,omitnil,omitempty" name:"PersonInfo"`
+
+	// <p>List of entry and exit records</p>
+	Records []*Record `json:"Records,omitnil,omitempty" name:"Records"`
+
+	// <p>Start time of the query range</p>
+	QueryPeriodStart *string `json:"QueryPeriodStart,omitnil,omitempty" name:"QueryPeriodStart"`
+
+	// <p>End time of the query range</p>
+	QueryPeriodEnd *string `json:"QueryPeriodEnd,omitnil,omitempty" name:"QueryPeriodEnd"`
+}
+
 // Predefined struct for user
 type GeneralAccurateOCRRequestParams struct {
 	// <p>The Base64 value of the image/PDF. The image size after Base64 encoding must be no more than 10M, with a resolution of 600*800 or higher recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported. Either ImageUrl or ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.</p>
@@ -2487,6 +2513,20 @@ func (r *PermitOCRResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *PermitOCRResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type PersonInfo struct {
+	// Name of the inquirer
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Gender
+	Gender *string `json:"Gender,omitnil,omitempty" name:"Gender"`
+
+	// Date of birth
+	BirthDate *string `json:"BirthDate,omitnil,omitempty" name:"BirthDate"`
+
+	// Citizen ID number
+	IdCardNo *string `json:"IdCardNo,omitnil,omitempty" name:"IdCardNo"`
 }
 
 type Polygon struct {
@@ -4862,6 +4902,43 @@ func (r *RecognizeThaiPinkCardResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Record struct {
+	// Serial number.
+	Index *string `json:"Index,omitnil,omitempty" name:"Index"`
+
+	// Exit/Entry
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Date of exit/entry
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
+
+	// Document name
+	CertName *string `json:"CertName,omitnil,omitempty" name:"CertName"`
+
+	// Document number
+	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
+
+	// Port of exit/entry
+	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
+}
+
+type SignResult struct {
+	// <p>Signature verification status. 1 indicates that the signature verification is passed.</p>
+	VerifyStatus *int64 `json:"VerifyStatus,omitnil,omitempty" name:"VerifyStatus"`
+
+	// <p>Signer name</p>
+	SignerName *string `json:"SignerName,omitnil,omitempty" name:"SignerName"`
+
+	// <p>Signature algorithm, such as SHA256withRSA</p>
+	SignAlgorithm *string `json:"SignAlgorithm,omitnil,omitempty" name:"SignAlgorithm"`
+
+	// <p>Signature time (Unix timestamp in milliseconds)</p>
+	SignTime *int64 `json:"SignTime,omitnil,omitempty" name:"SignTime"`
+
+	// <p>Signature verification information</p>
+	CertSn *string `json:"CertSn,omitnil,omitempty" name:"CertSn"`
+}
+
 type SkippedCheck struct {
 	// <p>Detection item name</p>
 	Check *string `json:"Check,omitnil,omitempty" name:"Check"`
@@ -5028,6 +5105,66 @@ type Value struct {
 	// The coordinates of the four vertices.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Coord *Polygon `json:"Coord,omitnil,omitempty" name:"Coord"`
+}
+
+// Predefined struct for user
+type VerifyPdfOcrRequestParams struct {
+	// <p>Base64-encoded content of the PDF file. The data:application/pdf;base64, prefix is supported (the server automatically strips it).</p>
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+}
+
+type VerifyPdfOcrRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>Base64-encoded content of the PDF file. The data:application/pdf;base64, prefix is supported (the server automatically strips it).</p>
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+}
+
+func (r *VerifyPdfOcrRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *VerifyPdfOcrRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "VerifyPdfOcrRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type VerifyPdfOcrResponseParams struct {
+	// <p>Flattened extraction result of exit-entry records (recommended)</p>
+	ExtractedFields *ExtractedFields `json:"ExtractedFields,omitnil,omitempty" name:"ExtractedFields"`
+
+	// <p>Signature verification conclusion (recommended)</p>
+	SignResult *SignResult `json:"SignResult,omitnil,omitempty" name:"SignResult"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type VerifyPdfOcrResponse struct {
+	*tchttp.BaseResponse
+	Response *VerifyPdfOcrResponseParams `json:"Response"`
+}
+
+func (r *VerifyPdfOcrResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *VerifyPdfOcrResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
