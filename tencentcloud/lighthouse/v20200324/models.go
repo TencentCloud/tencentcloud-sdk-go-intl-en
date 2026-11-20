@@ -2812,83 +2812,111 @@ func (r *DescribeInstancesDiskNumResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeInstancesRequestParams struct {
-	// Instance ID list. Each request can contain up to 100 instances at a time.
+	// List of instance IDs. The maximum number of instances in each request is 100. You can obtain the instance IDs from the `InstanceId` field in the response of the [DescribeInstances](https://www.tencentcloud.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Filter list. 
-	// <li>instance-name</li>Filter by the **instance name**. 
-	// Type: String 
-	// Required: No 
-	// <li>private-ip-address</li>Filter by the **private IP of instance primary ENI**. 
-	// Type: String 
-	// Required: No 
-	// <li>public-ip-address</li>Filter by the **public IP of instance primary ENI**. 
-	// Type: String 
-	// Required: No 
-	// <li>zone</li>Filter by the availability zone. 
-	// Type: String 
-	// Required: No 
-	// <li>instance-state</li>Filter by the **instance status**. 
-	// Type: String 
-	// Required: No 
-	// <li>tag-key</li>Filter by the **tag key**. 
-	// Type: String 
-	// Required: No 
-	// <li>tag-value</li>Filter by the **tag value**. 
-	// Type: String 
-	// Required: No 
-	// <li> tag:tag-key</li>Filter by tag key-value pair. The `tag-key` should be replaced with a specific tag key. 
-	// Type: String 
-	// Required: No 
-	// Each request can contain up to 10 `Filters` and 100 `Filter.Values`. You cannot specify both `InstanceIds` and `Filters` at the same time.
+	// List of filters.
+	// <li>instance-name</li>Filters by instance name.
+	// Type: String
+	// Required: No
+	// <li>private-ip-address</li>Filters by the private IP of the primary ENI of the instance.
+	// Type: String
+	// Required: No
+	// <li>public-ip-address</li>Filters by the public IP of the primary ENI of the instance.
+	// Type: String
+	// Required: No
+	// <li>zone</li>Filters by AZ.
+	// Type: String
+	// Required: No
+	// <li>instance-state</li>Filters by instance state.
+	// Type: String
+	// Required: No
+	// <li>tag-key</li>Filters by tag key.
+	// Type: String
+	// Required: No
+	// <li>tag-value</li>Filters by tag value.
+	// Type: String
+	// Required: No
+	// <li> tag:tag-key</li>Filters by tag key-value pair. Replace tag-key with the specific tag key.
+	// Type: String
+	// Required: No
+	// <li>bundle-id</li>Filters by bundle ID.
+	// Type: String
+	// Required: No
+	// 
+	// The maximum number of Filters per request is 10, and the maximum number of Filter.Values is 100. You cannot specify both InstanceIds and Filters at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/product/1207/47578?from_cn_redirect=1).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/product/1207/47578?from_cn_redirect=1).
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Specifies the field by which to sort. Valid values: "EXPIRED_TIME": Sorts by the expiration time of the instance. 
+	//  If this field is not passed in, instances with the status of "pending reclamation" are returned first, and the remaining instances are returned in descending order by creation time.
+	OrderField *string `json:"OrderField,omitnil,omitempty" name:"OrderField"`
+
+	// The order in which the output instance list is sorted. Valid values:
+	// "ASC": Sorts in ascending order.
+	// "DESC": Sorts in descending order.
+	// By default, the list is sorted in ascending order. If this field is passed in, OrderField must be specified.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 }
 
 type DescribeInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID list. Each request can contain up to 100 instances at a time.
+	// List of instance IDs. The maximum number of instances in each request is 100. You can obtain the instance IDs from the `InstanceId` field in the response of the [DescribeInstances](https://www.tencentcloud.com/document/api/1207/47573?from_cn_redirect=1) API.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
-	// Filter list. 
-	// <li>instance-name</li>Filter by the **instance name**. 
-	// Type: String 
-	// Required: No 
-	// <li>private-ip-address</li>Filter by the **private IP of instance primary ENI**. 
-	// Type: String 
-	// Required: No 
-	// <li>public-ip-address</li>Filter by the **public IP of instance primary ENI**. 
-	// Type: String 
-	// Required: No 
-	// <li>zone</li>Filter by the availability zone. 
-	// Type: String 
-	// Required: No 
-	// <li>instance-state</li>Filter by the **instance status**. 
-	// Type: String 
-	// Required: No 
-	// <li>tag-key</li>Filter by the **tag key**. 
-	// Type: String 
-	// Required: No 
-	// <li>tag-value</li>Filter by the **tag value**. 
-	// Type: String 
-	// Required: No 
-	// <li> tag:tag-key</li>Filter by tag key-value pair. The `tag-key` should be replaced with a specific tag key. 
-	// Type: String 
-	// Required: No 
-	// Each request can contain up to 10 `Filters` and 100 `Filter.Values`. You cannot specify both `InstanceIds` and `Filters` at the same time.
+	// List of filters.
+	// <li>instance-name</li>Filters by instance name.
+	// Type: String
+	// Required: No
+	// <li>private-ip-address</li>Filters by the private IP of the primary ENI of the instance.
+	// Type: String
+	// Required: No
+	// <li>public-ip-address</li>Filters by the public IP of the primary ENI of the instance.
+	// Type: String
+	// Required: No
+	// <li>zone</li>Filters by AZ.
+	// Type: String
+	// Required: No
+	// <li>instance-state</li>Filters by instance state.
+	// Type: String
+	// Required: No
+	// <li>tag-key</li>Filters by tag key.
+	// Type: String
+	// Required: No
+	// <li>tag-value</li>Filters by tag value.
+	// Type: String
+	// Required: No
+	// <li> tag:tag-key</li>Filters by tag key-value pair. Replace tag-key with the specific tag key.
+	// Type: String
+	// Required: No
+	// <li>bundle-id</li>Filters by bundle ID.
+	// Type: String
+	// Required: No
+	// 
+	// The maximum number of Filters per request is 10, and the maximum number of Filter.Values is 100. You cannot specify both InstanceIds and Filters at the same time.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/product/1207/47578?from_cn_redirect=1).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
+	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [Introduction](https://www.tencentcloud.com/document/product/1207/47578?from_cn_redirect=1).
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Specifies the field by which to sort. Valid values: "EXPIRED_TIME": Sorts by the expiration time of the instance. 
+	//  If this field is not passed in, instances with the status of "pending reclamation" are returned first, and the remaining instances are returned in descending order by creation time.
+	OrderField *string `json:"OrderField,omitnil,omitempty" name:"OrderField"`
+
+	// The order in which the output instance list is sorted. Valid values:
+	// "ASC": Sorts in ascending order.
+	// "DESC": Sorts in descending order.
+	// By default, the list is sorted in ascending order. If this field is passed in, OrderField must be specified.
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 }
 
 func (r *DescribeInstancesRequest) ToJsonString() string {
@@ -2907,6 +2935,8 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 	delete(f, "Filters")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "OrderField")
+	delete(f, "Order")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstancesRequest has unknown keys!", "")
 	}
@@ -2918,7 +2948,7 @@ type DescribeInstancesResponseParams struct {
 	// Number of eligible instances.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// List of instance details
+	// Detailed information list of instances.
 	InstanceSet []*Instance `json:"InstanceSet,omitnil,omitempty" name:"InstanceSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -4205,10 +4235,10 @@ type DockerContainerVolume struct {
 }
 
 type Filter struct {
-	// Field to be filtered.
+	// Fields to be filtered.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Filter value of field.
+	// Filter value of the field.
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
@@ -4754,101 +4784,107 @@ type Instance struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Package ID.
+	// Bundle ID.
 	BundleId *string `json:"BundleId,omitnil,omitempty" name:"BundleId"`
 
 	// Image ID.
 	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 
-	// Number of instance CPU cores.
+	// Number of CPU cores for the instance, in cores.
 	CPU *int64 `json:"CPU,omitnil,omitempty" name:"CPU"`
 
-	// Instance memory capacity in GB.
+	// Instance memory capacity, in GB.
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
 	// Instance name.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Instance billing mode. Valid values: 
-	// PREPAID: prepaid (i.e., monthly subscription).
+	// PREPAID: prepaid, that is, monthly or yearly subscription.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
 	// Instance system disk information.
 	SystemDisk *SystemDisk `json:"SystemDisk,omitnil,omitempty" name:"SystemDisk"`
 
-	// Private IP of instance primary ENI. 
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Private IP of the instance's primary NIC. 
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	PrivateAddresses []*string `json:"PrivateAddresses,omitnil,omitempty" name:"PrivateAddresses"`
 
-	// Public IP of instance primary ENI. 
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Public IP of the instance's primary NIC. 
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	PublicAddresses []*string `json:"PublicAddresses,omitnil,omitempty" name:"PublicAddresses"`
 
 	// Instance bandwidth information.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil,omitempty" name:"InternetAccessible"`
 
-	// Auto-Renewal flag. Valid values: 
-	// NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically  
-	// NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically.
+	// Auto-renewal flag. Valid values: 
+	// NOTIFY_AND_MANUAL_RENEW: Notify when the subscription is about to expire, but do not renew automatically.  
+	// NOTIFY_AND_AUTO_RENEW: Notify when the subscription is about to expire and renew automatically. DISABLE_NOTIFY_AND_MANUAL_RENEW: Do not renew automatically or send notifications.
 	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
-	// Instance login settings.
+	// Instance login setting.
 	LoginSettings *LoginSettings `json:"LoginSettings,omitnil,omitempty" name:"LoginSettings"`
 
 	// Instance status. Valid values: 
-	// <li>PENDING: Creating</li><li>LAUNCH_FAILED: Failed to create</li><li>RUNNING: Running</li><li>STOPPED: Shut down</li><li>STARTING: Starting up</li><li>STOPPING: Shutting down</li><li>REBOOTING: Restarting</li><li>SHUTDOWN: Shutdown and to be terminated</li><li>TERMINATING: Terminating</li><li>DELETING: Deleting</li><li>FREEZING: Frozen</li><li>ENTER_RESCUE_MODE: Entering the rescue mode</li><li>RESCUE_MODE: Rescue mode</li><li>EXIT_RESCUE_MODE: Exiting from the rescue mode</li>
+	// <li>PENDING: Creating</li><li>LAUNCH_FAILED: Failed to create</li><li>RUNNING: Running</li><li>STOPPED: Shut down</li><li>STARTING: Starting up</li><li>STOPPING: Shutting down</li><li>REBOOTING: Restarting</li><li>SHUTDOWN: Shutdown and to be terminated</li><li>TERMINATING: Terminating</li><li>DELETING: Deleting</li><li>FREEZING: Frozen</li><li>ENTER_RESCUE_MODE: Entering the rescue mode</li><li>RESCUE_MODE: Rescue mode</li><li>EXIT_RESCUE_MODE: Exiting the rescue mode</li>
 	InstanceState *string `json:"InstanceState,omitnil,omitempty" name:"InstanceState"`
 
-	// Globally unique ID of instance.
+	// Globally unique ID of the instance.
 	Uuid *string `json:"Uuid,omitnil,omitempty" name:"Uuid"`
 
-	// Last instance operation, such as `StopInstances` and `ResetInstance`. Note: this field may return null, indicating that no valid values can be obtained.
+	// Latest operation on the instance, such as StopInstances and ResetInstance. Note: This field may return null, indicating that no valid values can be obtained.
 	LatestOperation *string `json:"LatestOperation,omitnil,omitempty" name:"LatestOperation"`
 
-	// Last instance operation status. Valid values: 
-	// SUCCESS: operation succeeded 
-	// OPERATING: the operation is being executed 
-	// FAILED: operation failed 
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Status of the latest operation on the instance. Valid values: 
+	// SUCCESS: The operation succeeded. 
+	// OPERATING: The operation is in progress. 
+	// FAILED: The operation failed. 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LatestOperationState *string `json:"LatestOperationState,omitnil,omitempty" name:"LatestOperationState"`
 
-	// Unique request ID for the last operation of the instance. 
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Unique request ID of the latest operation on the instance. 
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LatestOperationRequestId *string `json:"LatestOperationRequestId,omitnil,omitempty" name:"LatestOperationRequestId"`
 
-	// Isolation time according to ISO 8601 standard. UTC time is used. 
+	// Start time of the latest operation on the instance.
+	LatestOperationStartedTime *string `json:"LatestOperationStartedTime,omitnil,omitempty" name:"LatestOperationStartedTime"`
+
+	// Isolation time in UTC, formatted according to the ISO 8601 standard. 
 	// Format: YYYY-MM-DDThh:mm:ssZ.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsolatedTime *string `json:"IsolatedTime,omitnil,omitempty" name:"IsolatedTime"`
 
-	// Creation time according to ISO 8601 standard. UTC time is used. 
+	// Creation time in UTC, formatted according to the ISO 8601 standard. 
 	// Format: YYYY-MM-DDThh:mm:ssZ.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
-	// Expiration time according to ISO 8601 standard. UTC time is used. 
+	// Expiration time in UTC, formatted according to the ISO 8601 standard. 
 	// Format: YYYY-MM-DDThh:mm:ssZ.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 
-	// OS type, such as LINUX_UNIX and WINDOWS.
+	// Operating system platform type, such as LINUX_UNIX and WINDOWS.
 	PlatformType *string `json:"PlatformType,omitnil,omitempty" name:"PlatformType"`
 
-	// OS type.
+	// Operating system platform.
 	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
-	// OS name.
+	// Operating system name.
 	OsName *string `json:"OsName,omitnil,omitempty" name:"OsName"`
 
 	// AZ.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// The list of tags associated with the instance
+	// List of tags bound to the instance.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
-	// Obtain instance status
-	// <li>NORMAL: The instance is normal</li><li>NETWORK_RESTRICT: The instance is blocked from the network.</li>
+	// Instance ban status. Valid values:
+	// <li>NORMAL: The instance is normal.</li><li>NETWORK_RESTRICT: The instance is banned from network access.</li>
 	InstanceRestrictState *string `json:"InstanceRestrictState,omitnil,omitempty" name:"InstanceRestrictState"`
+
+	// Invocation ID of the TAT command to be automatically executed after the instance is created.
+	InitInvocationId *string `json:"InitInvocationId,omitnil,omitempty" name:"InitInvocationId"`
+
+	// Instance violation details.
+	InstanceViolationDetail *InstanceViolationDetail `json:"InstanceViolationDetail,omitnil,omitempty" name:"InstanceViolationDetail"`
 }
 
 type InstanceChargePrepaid struct {
@@ -4923,16 +4959,30 @@ type InstanceTrafficPackage struct {
 	TrafficPackageSet []*TrafficPackage `json:"TrafficPackageSet,omitnil,omitempty" name:"TrafficPackageSet"`
 }
 
+type InstanceViolationDetail struct {
+	//  Source: RESTRICT: Banned; FREEZW: Frozen.
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// Whether self-service unblocking is allowed. 1: Yes; 2: No.
+	State *string `json:"State,omitnil,omitempty" name:"State"`
+
+	// Violation type.
+	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
+
+	// Violation content (URL and associated domain name).
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+}
+
 type InternetAccessible struct {
-	// Network billing mode. Valid values:
-	// <li>Bill by traffic package: TRAFFIC_POSTPAID_BY_HOUR</li>
-	// <li>Bill by bandwidth: BANDWIDTH_POSTPAID_BY_HOUR</li>
+	// Network billing type. Valid values:
+	// <li>Pay-as-you-go by traffic: TRAFFIC_POSTPAID_BY_HOUR</li>
+	// <li>Pay-as-you-go by bandwidth: BANDWIDTH_POSTPAID_BY_HOUR</li>
 	InternetChargeType *string `json:"InternetChargeType,omitnil,omitempty" name:"InternetChargeType"`
 
-	// Public network outbound bandwidth cap in Mbps.
+	// Maximum outbound public bandwidth, in the unit of Mbps.
 	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
 
-	// Whether to assign a public IP.
+	// Indicates whether a public IP is assigned.
 	PublicIpAssigned *bool `json:"PublicIpAssigned,omitnil,omitempty" name:"PublicIpAssigned"`
 }
 
@@ -5098,7 +5148,7 @@ type LoginConfiguration struct {
 }
 
 type LoginSettings struct {
-	// Key ID list. After a key is associated, you can use it to access the instance. Note: this field may return [], indicating that no valid values can be obtained.
+	// List of key IDs. After a key is associated, you can access the instance by using the corresponding private key. Note: This field may return [], indicating that no valid value can be obtained.
 	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
 }
 
@@ -6640,22 +6690,21 @@ func (r *SyncBlueprintResponse) FromJsonString(s string) error {
 type SystemDisk struct {
 	// System disk type.
 	// Valid values: 
-	// <li> LOCAL_BASIC: local disk</li><li> LOCAL_SSD: local SSD disk</li><li> CLOUD_BASIC: HDD cloud disk</li><li> CLOUD_SSD: SSD cloud disk</li><li> CLOUD_PREMIUM: Premium Cloud Storage</li>
+	// <li> LOCAL_BASIC: local disk</li><li> LOCAL_SSD: local SSD disk</li><li> CLOUD_BASIC: basic cloud disk</li><li> CLOUD_SSD: SSD cloud disk</li><li> CLOUD_PREMIUM: premium cloud disk</li>
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// System disk size in GB.
+	// System disk size, in the unit of GB.
 	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// System disk ID.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 }
 
 type Tag struct {
-	// Tag key
+	// Tag key.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// Tag value
+	// Tag value.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 

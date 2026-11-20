@@ -301,31 +301,25 @@ type CloudSliceStorage struct {
 }
 
 type CloudStorage struct {
-	// The cloud storage provider.
-	// `0`: Tencent Cloud COS; `1`: AWS storage. Other vendors are not supported currently.
+	// <p>Information about Tencent Cloud object storage COS and third-party cloud storage accounts<br>0: Tencent Cloud object storage COS<br>1: AWS<br>[Note] Currently, only AWS is supported for third-party cloud storage. More third-party cloud storage options are being added.</p>
 	Vendor *uint64 `json:"Vendor,omitnil,omitempty" name:"Vendor"`
 
-	// [Region information](https://www.tencentcloud.com/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of tencent cloud object storage.
-	// Example value: cn-shanghai-1.
-	// 
-	// [Region information](https://docs.AWS.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions) of AWS S3.
+	// <p>[Region information](https://www.tencentcloud.com/document/product/436/6224?from_cn_redirect=1#.E5.9C.B0.E5.9F.9F) of Tencent Cloud object storage.<br>Example value: cn-shanghai-1</p><p>[Region information](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-regions) of AWS S3</p>
 	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
-	// The storage bucket.
+	// <p>Cloud bucket name.</p>
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
-	// access_key account information of the cloud storage.
-	// To store files to tencent cloud object storage (COS), visit https://console.cloud.tencent.com/cam/capi to view or create the SecretId value corresponding to the key fields in the link.
+	// <p>access key account information for cloud storage.<br>To store files to tencent cloud Object Storage (COS), visit https://console.cloud.tencent.com/cam/capi to view or create the SecretId value corresponding to the key field in the link.</p>
 	AccessKey *string `json:"AccessKey,omitnil,omitempty" name:"AccessKey"`
 
-	// secret_key account information of the cloud storage.
-	// To store files to tencent cloud object storage (COS), visit https://console.cloud.tencent.com/cam/capi to view or create the SecretKey value corresponding to the key fields in the link.
+	// <p>The secret_key account information for cloud storage.<br>To store files to Tencent Cloud Object Storage (COS), visit https://console.cloud.tencent.com/cam/capi to view or create the SecretKey value corresponding to the key fields in the link.</p>
 	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
 
-	// The specified position of the cloud storage bucket consists of an array of strings. valid values: az, az, 0-9, '_', and '-'. for example, the recording file xxx.m3u8 becomes prefix1/prefix2/TaskId/xxx.m3u8 under the function of ["prefix1", "prefix2"].
+	// <p>The user-specified location in the cloud storage bucket consists of an array of strings. Valid string range: az, az, 0-9, '_' and '-'. For example, with ["prefix1", "prefix2"], the recording file xxx.m3u8 becomes prefix1/prefix2/TaskId/xxx.m3u8.</p>
 	FileNamePrefix []*string `json:"FileNamePrefix,omitnil,omitempty" name:"FileNamePrefix"`
 
-	// If specified, the client uses this S3-compatible endpoint override instead of the default AWS S3 endpoint. This is useful for S3-compatible storage services such as Cloudflare R2. Example: "account_id.r2.cloudflarestorage.com"
+	// <p>When this parameter is set up for an S3-compatible endpoint override (for example, Cloudflare R2), the client will use this endpoint rather than the default AWS S3 endpoint. Example: "account_id.R2.cloudflarestorage.com"</p>
 	EndpointUrl *string `json:"EndpointUrl,omitnil,omitempty" name:"EndpointUrl"`
 }
 
@@ -413,6 +407,101 @@ func (r *ControlAIConversationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ControlAIConversationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ControlVoiceConversationRequestParams struct {
+	// The TRTC [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid). It must be the same SdkAppId as the conversation room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the conversation task. Returned when the conversation task starts successfully.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Control command.
+	// Valid values:
+	// 
+	// - `Interrupt`: Force-interrupt the AI bot's current speech.
+	// - `invokellm`: Inject text into the current conversation context to trigger one LLM response. Not supported in `S2S` mode.
+	// - `invoketts`: Inject text into the current TTS so the AI bot broadcasts it. Not supported in `S2S` mode.
+	Command *string `json:"Command,omitnil,omitempty" name:"Command"`
+
+	// Configuration for injecting text into the LLM. Required when `Command` is `invokellm`.
+	InvokeLLM *VoiceConversationInvokeLLM `json:"InvokeLLM,omitnil,omitempty" name:"InvokeLLM"`
+
+	// Configuration for injecting text into TTS. Required when `Command` is `invoketts`.
+	InvokeTTS *VoiceConversationInvokeTTS `json:"InvokeTTS,omitnil,omitempty" name:"InvokeTTS"`
+}
+
+type ControlVoiceConversationRequest struct {
+	*tchttp.BaseRequest
+	
+	// The TRTC [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid). It must be the same SdkAppId as the conversation room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the conversation task. Returned when the conversation task starts successfully.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Control command.
+	// Valid values:
+	// 
+	// - `Interrupt`: Force-interrupt the AI bot's current speech.
+	// - `invokellm`: Inject text into the current conversation context to trigger one LLM response. Not supported in `S2S` mode.
+	// - `invoketts`: Inject text into the current TTS so the AI bot broadcasts it. Not supported in `S2S` mode.
+	Command *string `json:"Command,omitnil,omitempty" name:"Command"`
+
+	// Configuration for injecting text into the LLM. Required when `Command` is `invokellm`.
+	InvokeLLM *VoiceConversationInvokeLLM `json:"InvokeLLM,omitnil,omitempty" name:"InvokeLLM"`
+
+	// Configuration for injecting text into TTS. Required when `Command` is `invoketts`.
+	InvokeTTS *VoiceConversationInvokeTTS `json:"InvokeTTS,omitnil,omitempty" name:"InvokeTTS"`
+}
+
+func (r *ControlVoiceConversationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ControlVoiceConversationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	delete(f, "Command")
+	delete(f, "InvokeLLM")
+	delete(f, "InvokeTTS")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ControlVoiceConversationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ControlVoiceConversationResponseParams struct {
+	// Unique ID of the conversation task.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ControlVoiceConversationResponse struct {
+	*tchttp.BaseResponse
+	Response *ControlVoiceConversationResponseParams `json:"Response"`
+}
+
+func (r *ControlVoiceConversationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ControlVoiceConversationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -868,6 +957,147 @@ func (r *CreateCloudTranscriptionResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateVoiceConversationRequestParams struct {
+	// The TRTC [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid). It must be the same SdkAppId as the conversation room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// [Room ID](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#roomid) of the TRTC room where the conversation runs. Room IDs are numeric by default. If the room ID is a string, set RoomIdType to 1.
+	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
+
+	// Room ID type. It must match the room ID type of the conversation room. 0 is a numeric room ID, and 1 is a string room ID.
+	// Valid values:
+	// - 0: numeric room ID (Default)
+	// - 1: string room ID
+	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
+
+	// <p>Chatbot configuration.</p>
+	AgentConfig *VoiceConversationConfig `json:"AgentConfig,omitnil,omitempty" name:"AgentConfig"`
+
+	// Conversation pipeline mode: `Cascade` (default, three-stage pipeline) or `S2S` (end-to-end speech-to-speech model).
+	// Valid values:
+	// - Cascade: three-stage pipeline (default). Speech recognition, a large language model, and text-to-speech.
+	// - S2S: end-to-end speech-to-speech model.
+	// Default: Cascade
+	ConversationMode *string `json:"ConversationMode,omitnil,omitempty" name:"ConversationMode"`
+
+	// End-to-end speech-to-speech model configuration. Required only in `S2S` mode. Ignored in `Cascade` mode.
+	S2SConfig *VoiceConversationS2SConfig `json:"S2SConfig,omitnil,omitempty" name:"S2SConfig"`
+
+	// <p>Speech recognition configuration. <strong>Required only in <code>Cascade</code> mode</strong>; ignored in <code>S2S</code> mode.</p>
+	STTConfig *VoiceConversationSTTConfig `json:"STTConfig,omitnil,omitempty" name:"STTConfig"`
+
+	// Large language model (LLM) configuration. Required only in `Cascade` mode. Ignored in `S2S` mode.
+	LLMConfig *VoiceConversationLLMConfig `json:"LLMConfig,omitnil,omitempty" name:"LLMConfig"`
+
+	// <p>Text to speech configuration. <strong>Required only in <code>Cascade</code> mode</strong>; ignored in <code>S2S</code> mode.</p>
+	TTSConfig *VoiceConversationTTSConfig `json:"TTSConfig,omitnil,omitempty" name:"TTSConfig"`
+
+	// Conversation control configuration. Not supported in `S2S` mode.
+	DialogConfig *VoiceConversationDialogConfig `json:"DialogConfig,omitnil,omitempty" name:"DialogConfig"`
+
+	// Visual understanding configuration. Not supported in `S2S` mode.
+	VisionConfig *VoiceConversationVisionConfig `json:"VisionConfig,omitnil,omitempty" name:"VisionConfig"`
+}
+
+type CreateVoiceConversationRequest struct {
+	*tchttp.BaseRequest
+	
+	// The TRTC [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid). It must be the same SdkAppId as the conversation room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// [Room ID](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#roomid) of the TRTC room where the conversation runs. Room IDs are numeric by default. If the room ID is a string, set RoomIdType to 1.
+	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
+
+	// Room ID type. It must match the room ID type of the conversation room. 0 is a numeric room ID, and 1 is a string room ID.
+	// Valid values:
+	// - 0: numeric room ID (Default)
+	// - 1: string room ID
+	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
+
+	// <p>Chatbot configuration.</p>
+	AgentConfig *VoiceConversationConfig `json:"AgentConfig,omitnil,omitempty" name:"AgentConfig"`
+
+	// Conversation pipeline mode: `Cascade` (default, three-stage pipeline) or `S2S` (end-to-end speech-to-speech model).
+	// Valid values:
+	// - Cascade: three-stage pipeline (default). Speech recognition, a large language model, and text-to-speech.
+	// - S2S: end-to-end speech-to-speech model.
+	// Default: Cascade
+	ConversationMode *string `json:"ConversationMode,omitnil,omitempty" name:"ConversationMode"`
+
+	// End-to-end speech-to-speech model configuration. Required only in `S2S` mode. Ignored in `Cascade` mode.
+	S2SConfig *VoiceConversationS2SConfig `json:"S2SConfig,omitnil,omitempty" name:"S2SConfig"`
+
+	// <p>Speech recognition configuration. <strong>Required only in <code>Cascade</code> mode</strong>; ignored in <code>S2S</code> mode.</p>
+	STTConfig *VoiceConversationSTTConfig `json:"STTConfig,omitnil,omitempty" name:"STTConfig"`
+
+	// Large language model (LLM) configuration. Required only in `Cascade` mode. Ignored in `S2S` mode.
+	LLMConfig *VoiceConversationLLMConfig `json:"LLMConfig,omitnil,omitempty" name:"LLMConfig"`
+
+	// <p>Text to speech configuration. <strong>Required only in <code>Cascade</code> mode</strong>; ignored in <code>S2S</code> mode.</p>
+	TTSConfig *VoiceConversationTTSConfig `json:"TTSConfig,omitnil,omitempty" name:"TTSConfig"`
+
+	// Conversation control configuration. Not supported in `S2S` mode.
+	DialogConfig *VoiceConversationDialogConfig `json:"DialogConfig,omitnil,omitempty" name:"DialogConfig"`
+
+	// Visual understanding configuration. Not supported in `S2S` mode.
+	VisionConfig *VoiceConversationVisionConfig `json:"VisionConfig,omitnil,omitempty" name:"VisionConfig"`
+}
+
+func (r *CreateVoiceConversationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVoiceConversationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "RoomId")
+	delete(f, "RoomIdType")
+	delete(f, "AgentConfig")
+	delete(f, "ConversationMode")
+	delete(f, "S2SConfig")
+	delete(f, "STTConfig")
+	delete(f, "LLMConfig")
+	delete(f, "TTSConfig")
+	delete(f, "DialogConfig")
+	delete(f, "VisionConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVoiceConversationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateVoiceConversationResponseParams struct {
+	// Unique ID of the conversation task, generated by the Tencent Cloud server. Later requests that query or control the task must include this TaskId.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateVoiceConversationResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateVoiceConversationResponseParams `json:"Response"`
+}
+
+func (r *CreateVoiceConversationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateVoiceConversationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteCloudModerationRequestParams struct {
 	// SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the TRTC room.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
@@ -1120,6 +1350,70 @@ func (r *DeleteCloudTranscriptionResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteCloudTranscriptionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteVoiceConversationRequestParams struct {
+	// The TRTC [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid). It must be the same SdkAppId as the conversation room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the conversation task. Returned when the conversation task starts successfully.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DeleteVoiceConversationRequest struct {
+	*tchttp.BaseRequest
+	
+	// The TRTC [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid). It must be the same SdkAppId as the conversation room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the conversation task. Returned when the conversation task starts successfully.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DeleteVoiceConversationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVoiceConversationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteVoiceConversationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteVoiceConversationResponseParams struct {
+	// Unique ID of the conversation task.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteVoiceConversationResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteVoiceConversationResponseParams `json:"Response"`
+}
+
+func (r *DeleteVoiceConversationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteVoiceConversationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2971,6 +3265,101 @@ func (r *DescribeUserInfoResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeVoiceConversationRequestParams struct {
+	// The TRTC [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid). It must be the same SdkAppId as the conversation room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the conversation task. Returned when the conversation task starts successfully.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Whether to include the conversation history.
+	// Valid values:
+	// - 0: Do not include the conversation history.
+	// - 1: Include the conversation history.
+	// 
+	// Default: 0
+	DescribeType *uint64 `json:"DescribeType,omitnil,omitempty" name:"DescribeType"`
+}
+
+type DescribeVoiceConversationRequest struct {
+	*tchttp.BaseRequest
+	
+	// The TRTC [SdkAppId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid). It must be the same SdkAppId as the conversation room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the conversation task. Returned when the conversation task starts successfully.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Whether to include the conversation history.
+	// Valid values:
+	// - 0: Do not include the conversation history.
+	// - 1: Include the conversation history.
+	// 
+	// Default: 0
+	DescribeType *uint64 `json:"DescribeType,omitnil,omitempty" name:"DescribeType"`
+}
+
+func (r *DescribeVoiceConversationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVoiceConversationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	delete(f, "DescribeType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVoiceConversationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVoiceConversationResponseParams struct {
+	// <p>Task start time</p><p>Unit: ms</p>
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Conversation task status.
+	// Valid values:
+	// 
+	// - `Idle`: The conversation task is idle.
+	// - `InProgress`: The conversation task is in progress.
+	// - `Exited`: The conversation task is exiting.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Unique ID of the conversation task.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Conversation history.
+	HistoryContents []*VoiceConversationHistoryContent `json:"HistoryContents,omitnil,omitempty" name:"HistoryContents"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeVoiceConversationResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeVoiceConversationResponseParams `json:"Response"`
+}
+
+func (r *DescribeVoiceConversationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVoiceConversationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeWebRecordRequestParams struct {
 	// The task ID returned when starting web-page recording
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
@@ -3216,6 +3605,14 @@ type InvokeLLM struct {
 
 	// Whether to allow the text to interrupt the robot's speaking.
 	Interrupt *bool `json:"Interrupt,omitnil,omitempty" name:"Interrupt"`
+}
+
+type KeyValueItem struct {
+	// <p>Key</p>
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// <p>Value</p>
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type MaxVideoUser struct {
@@ -3988,6 +4385,98 @@ func (r *ModifyCloudSliceTaskResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyCloudSliceTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyVoiceConversationRequestParams struct {
+	// <p>The <a href="https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid">SdkAppId</a> of TRTC, which is the same as the SdkAppId corresponding to the conversation room.</p>
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the conversation task. Returned when the conversation task starts successfully.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// For the same task, `SequenceNumber` must increase with each modification request. This prevents requests from being applied out of order.
+	SequenceNumber *uint64 `json:"SequenceNumber,omitnil,omitempty" name:"SequenceNumber"`
+
+	// Large language model (LLM) configuration. Applies only in `Cascade` mode. In `S2S` mode, the request returns an error.
+	LLMConfig *VoiceConversationLLMConfig `json:"LLMConfig,omitnil,omitempty" name:"LLMConfig"`
+
+	// End-to-end speech-to-speech model configuration. Applies only in `S2S` mode. In `Cascade` mode, the request returns an error.
+	S2SConfig *VoiceConversationS2SConfig `json:"S2SConfig,omitnil,omitempty" name:"S2SConfig"`
+
+	// Conversation control configuration. Applies only in `Cascade` mode.
+	DialogConfig *VoiceConversationDialogConfig `json:"DialogConfig,omitnil,omitempty" name:"DialogConfig"`
+}
+
+type ModifyVoiceConversationRequest struct {
+	*tchttp.BaseRequest
+	
+	// <p>The <a href="https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#sdkappid">SdkAppId</a> of TRTC, which is the same as the SdkAppId corresponding to the conversation room.</p>
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Unique ID of the conversation task. Returned when the conversation task starts successfully.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// For the same task, `SequenceNumber` must increase with each modification request. This prevents requests from being applied out of order.
+	SequenceNumber *uint64 `json:"SequenceNumber,omitnil,omitempty" name:"SequenceNumber"`
+
+	// Large language model (LLM) configuration. Applies only in `Cascade` mode. In `S2S` mode, the request returns an error.
+	LLMConfig *VoiceConversationLLMConfig `json:"LLMConfig,omitnil,omitempty" name:"LLMConfig"`
+
+	// End-to-end speech-to-speech model configuration. Applies only in `S2S` mode. In `Cascade` mode, the request returns an error.
+	S2SConfig *VoiceConversationS2SConfig `json:"S2SConfig,omitnil,omitempty" name:"S2SConfig"`
+
+	// Conversation control configuration. Applies only in `Cascade` mode.
+	DialogConfig *VoiceConversationDialogConfig `json:"DialogConfig,omitnil,omitempty" name:"DialogConfig"`
+}
+
+func (r *ModifyVoiceConversationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVoiceConversationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	delete(f, "SequenceNumber")
+	delete(f, "LLMConfig")
+	delete(f, "S2SConfig")
+	delete(f, "DialogConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVoiceConversationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyVoiceConversationResponseParams struct {
+	// Unique ID of the conversation task.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyVoiceConversationResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyVoiceConversationResponseParams `json:"Response"`
+}
+
+func (r *ModifyVoiceConversationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyVoiceConversationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6053,7 +6542,7 @@ type TranscriptionParams struct {
 }
 
 type TranscriptionUserInfoParams struct {
-	// User ID.
+	// <p>uid.</p>
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 }
 
@@ -6605,6 +7094,219 @@ func (r *VoiceCloneResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *VoiceCloneResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type VoiceConversationConfig struct {
+	// [UserId](https://www.tencentcloud.com/document/product/647/46351?from_cn_redirect=1#userid) used by the conversation service in the TRTC room. It must not match a UserId already used by another TRTC user or by the conversation service. Include the room ID in the UserId.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
+
+	// [UserSig](https://www.tencentcloud.com/document/product/647/45910?from_cn_redirect=1#UserSig) for the conversation service to join the TRTC room. It is the authentication signature of this UserId and works like a login password. For how to calculate UserSig, see the linked topic.
+	UserSig *string `json:"UserSig,omitnil,omitempty" name:"UserSig"`
+
+	// <p>UserId of the anchor whose audio the conversation service subscribes to. Specify one anchor only.</p>
+	TargetUserId []*string `json:"TargetUserId,omitnil,omitempty" name:"TargetUserId"`
+
+	// <p>Parameters of the bot that publishes TTS audio back to the room.</p>
+	TTSPushRoomParams *TranscriptionUserInfoParams `json:"TTSPushRoomParams,omitnil,omitempty" name:"TTSPushRoomParams"`
+
+	// <p>If an anchor in the conversation stays out of the TRTC room, or stays in the audience role, for longer than `MaxIdleTime`, the conversation task stops automatically. Valid range: 5 to 86400 (24 hours). Default: 30. Unit: seconds.</p>
+	MaxIdleTime *uint64 `json:"MaxIdleTime,omitnil,omitempty" name:"MaxIdleTime"`
+
+	// Filters content returned by the LLM. Text inside the specified brackets is not played. If this parameter is not set, nothing is filtered. Valid range: 1 to 5. Example: 1. 
+	// Not supported in S2S mode.
+	// Valid values:
+	// - 1: Chinese parentheses 
+	// - 2: English parentheses
+	// - 3: Chinese square brackets
+	// - 4: English square brackets
+	// - 5: English curly braces
+	FilterBracketsContent []*uint64 `json:"FilterBracketsContent,omitnil,omitempty" name:"FilterBracketsContent"`
+
+	// Subtitle display mode. Not supported in S2S mode.
+	// Valid values:
+	// - 0: Show subtitles as soon as possible.
+	// - 1: Show subtitles sentence by sentence in real time.
+	SubtitleMode *uint64 `json:"SubtitleMode,omitnil,omitempty" name:"SubtitleMode"`
+
+	// Controls how a new conversation turn starts. Default: `auto`. Not supported in S2S mode.
+	// Valid values:
+	// 
+	// - `auto`: The backend detects the end of a sentence from the silence duration, and then calls the LLM.
+	TurnDetectionMode *string `json:"TurnDetectionMode,omitnil,omitempty" name:"TurnDetectionMode"`
+}
+
+type VoiceConversationDialogConfig struct {
+	// Interrupt mode. Default: 0.
+	// Valid values:
+	// - 0: Automatic. When STT returns text, it interrupts TTS playback. Use this mode with InterruptSpeechDuration.
+	// - 1: Manual. The bot is interrupted only by the Interrupt command from the server or client API.
+	// - 2: Keyword.
+	InterruptMode *uint64 `json:"InterruptMode,omitnil,omitempty" name:"InterruptMode"`
+
+	// Minimum duration of user speech that triggers an automatic interrupt. Default: 200. Unit: ms.
+	InterruptSpeechDuration *uint64 `json:"InterruptSpeechDuration,omitnil,omitempty" name:"InterruptSpeechDuration"`
+
+	// Preset keywords that interrupt the bot. Use them when the user must explicitly indicate the intent to interrupt. You can set up to 128 keywords. Applies only when `InterruptMode` is 2.
+	InterruptKeywords []*string `json:"InterruptKeywords,omitnil,omitempty" name:"InterruptKeywords"`
+
+	// How long the user is silent before the bot asks a follow-up question. Valid range: 0 to 300. 0 turns this off. Default: 0. Unit: seconds.
+	// 
+	SilenceFollowUp *uint64 `json:"SilenceFollowUp,omitnil,omitempty" name:"SilenceFollowUp"`
+
+	// <p>Text of the proactive follow-up question.</p>
+	SilenceFollowUpText *string `json:"SilenceFollowUpText,omitnil,omitempty" name:"SilenceFollowUpText"`
+
+	// Welcome message the bot broadcasts when an anchor enters the room for the first time. It is broadcast again when the anchor leaves the room and enters again.
+	WelcomeMessage *string `json:"WelcomeMessage,omitnil,omitempty" name:"WelcomeMessage"`
+}
+
+type VoiceConversationHistoryContent struct {
+	// <p>Conversation role.</p>
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
+
+	// <p>Conversation content.</p>
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+}
+
+type VoiceConversationHistoryMessage struct {
+	// <p>The Conversation role, for example, "user", "assistant", "system".</p>
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
+
+	// <p>Conversation content.</p>
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+}
+
+type VoiceConversationInvokeLLM struct {
+	// <p>The injected content.</p>
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Priority. If no conversation is in progress, the injected content is sent to the LLM. Otherwise, the behavior depends on this value. Default: 0.
+	// Valid values:
+	// - 0: High. Interrupt the current conversation, clear the waiting queue, and send the injected content to the LLM.
+	// - 1: Medium. Do not interrupt the current conversation. Clear the waiting queue and queue the injected content. If no conversation is in progress, the injected content is still queued.
+	// - 2: Low. Discard the injected content.
+	Priority *uint64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+}
+
+type VoiceConversationInvokeTTS struct {
+	// <p>Content to inject.</p>
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Priority. If no conversation is in progress, the injected content is sent to TTS. Otherwise, the behavior depends on this value. Default: 0.
+	// Valid values:
+	// - 0: High. Interrupt the current conversation, clear the waiting queue, and send the injected content to TTS.
+	// - 1: Medium. Do not interrupt the current conversation. Clear the waiting queue and queue the injected content. If no conversation is in progress, the injected content is still queued.
+	// - 2: Low. Discard the injected content.
+	// `InvokeLLM` and `InvokeTTS` share one queue. The queue can hold only one Invoke event.
+	Priority *uint64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+}
+
+type VoiceConversationLLMConfig struct {
+	// <p>LLM API type, for example, openai (OpenAI-compatible API).</p>
+	LLMType *string `json:"LLMType,omitnil,omitempty" name:"LLMType"`
+
+	// <p>Model name, for example, gpt-4o-mini</p>
+	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
+
+	// <p>OpenAI-compatible endpoint.</p>
+	APIUrl *string `json:"APIUrl,omitnil,omitempty" name:"APIUrl"`
+
+	// Provider API key.
+	APIKey *string `json:"APIKey,omitnil,omitempty" name:"APIKey"`
+
+	// <p>System prompt.</p>
+	SystemPrompt *string `json:"SystemPrompt,omitnil,omitempty" name:"SystemPrompt"`
+
+	// <p>Text used to generate TTS audio when the LLM call fails.</p>
+	FailureMessage *string `json:"FailureMessage,omitnil,omitempty" name:"FailureMessage"`
+
+	// <p>Maximum number of tokens in a single response. 0 means no limit. Default: 0. If the model outputs more tokens than MaxTokens, the response is truncated.</p>
+	MaxTokens *uint64 `json:"MaxTokens,omitnil,omitempty" name:"MaxTokens"`
+
+	// <p>Whether to enable thinking mode. Availability depends on the model provider. Enabling thinking mode consumes output tokens.</p>
+	ThinkingMode *bool `json:"ThinkingMode,omitnil,omitempty" name:"ThinkingMode"`
+
+	// <p>Number of conversation turns cached for the LLM. Valid range: 0 to 50. Recommended range: 10 to 30. The total number of tokens in this context must not exceed the LLM context limit.</p>
+	MaxHistory *uint64 `json:"MaxHistory,omitnil,omitempty" name:"MaxHistory"`
+
+	// <p>Maximum rounds of MCP tool calls, ranging from 0 to 50. Default: 10.</p>
+	MaxToolRound *uint64 `json:"MaxToolRound,omitnil,omitempty" name:"MaxToolRound"`
+
+	// Timeout for a single request, in milliseconds. Valid range: 1000 to 60000. Default: 10000.
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// <p>Sampling temperature, ranging from 0.0 to 2.0. Default: 1.0.</p>
+	Temperature *float64 `json:"Temperature,omitnil,omitempty" name:"Temperature"`
+
+	// <p>Top p nucleus sampling. Valid range: 0.0 to 1.0. Default: 1.0.</p>
+	TopP *float64 `json:"TopP,omitnil,omitempty" name:"TopP"`
+
+	// <p>MCP Server parameters.</p>
+	McpServer *VoiceConversationMcpServer `json:"McpServer,omitnil,omitempty" name:"McpServer"`
+
+	// <p>Custom HTTP request headers.</p>
+	CustomHeaders []*KeyValueItem `json:"CustomHeaders,omitnil,omitempty" name:"CustomHeaders"`
+
+	// Provider-specific parameters, such as DeepSeek's reasoning_effort and Hunyuan's enable_enhancement.
+	CustomFields []*KeyValueItem `json:"CustomFields,omitnil,omitempty" name:"CustomFields"`
+
+	// <p>Initial conversation history. Each item uses this format: `{"Role": "user"/"assistant"/"system", "Content": "xxx"}`.</p>
+	HistoryMessages []*VoiceConversationHistoryMessage `json:"HistoryMessages,omitnil,omitempty" name:"HistoryMessages"`
+}
+
+type VoiceConversationMcpServer struct {
+	// <p>The unique mcp identifier.</p>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// <p>Endpoint URL.</p>
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// <p>Request timeout in ms. Default: 5000. This value should not exceed 30000.</p>
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// <p>Custom request headers, such as authentication information.</p>
+	Headers []*KeyValueItem `json:"Headers,omitnil,omitempty" name:"Headers"`
+
+	// <p>Allowlist of tools that can be used.</p>
+	ToolList []*string `json:"ToolList,omitnil,omitempty" name:"ToolList"`
+}
+
+type VoiceConversationS2SConfig struct {
+	// <p>S2S manufacturer identification, for example, "tencent".</p>
+	Provider *string `json:"Provider,omitnil,omitempty" name:"Provider"`
+
+	// <p>Manufacturer exclusive parameter, JSON serialized string.</p>
+	Params *string `json:"Params,omitnil,omitempty" name:"Params"`
+
+	// <p>The welcome message played when the host enters the room for the first time. It will play again if the host leaves and re-enters the room.</p>
+	WelcomeMessage *string `json:"WelcomeMessage,omitnil,omitempty" name:"WelcomeMessage"`
+}
+
+type VoiceConversationSTTConfig struct {
+	// <p>ASR provider name: trtc (Tencent Self-developed) or third-party provider (for example, azure).</p>
+	Provider *string `json:"Provider,omitnil,omitempty" name:"Provider"`
+
+	// <p>ASR manufacturer exclusive parameter. Fill in the JSON serialized string.</p>
+	Params *string `json:"Params,omitnil,omitempty" name:"Params"`
+}
+
+type VoiceConversationTTSConfig struct {
+	// <p>TTS providers, such as trtc.</p>
+	Provider *string `json:"Provider,omitnil,omitempty" name:"Provider"`
+
+	// <p>Manufacturer exclusive parameter, string after JSON serialization.</p>
+	Params *string `json:"Params,omitnil,omitempty" name:"Params"`
+}
+
+type VoiceConversationVisionConfig struct {
+	// <p>Whether to enable visual understanding.</p>
+	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
+
+	// <p>Storage type.</p><p>Enumeration values:</p><ul><li>0: Do not store.</li><li>1: Specify cloud storage. In such cases, the CloudStorage parameter is required.</li></ul><p>Default value: 0</p>
+	StorageType *uint64 `json:"StorageType,omitnil,omitempty" name:"StorageType"`
+
+	// <p>Third-party Cloud Storage archive configuration. After configuration, the backend will automatically upload I-frames received from the SDK to the designated cloud bucket for persistent storage.</p>
+	CloudStorage *CloudStorage `json:"CloudStorage,omitnil,omitempty" name:"CloudStorage"`
 }
 
 type VoicePrint struct {

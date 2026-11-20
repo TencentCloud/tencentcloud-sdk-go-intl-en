@@ -97,6 +97,82 @@ func (c *Client) ControlAIConversationWithContext(ctx context.Context, request *
     return
 }
 
+func NewControlVoiceConversationRequest() (request *ControlVoiceConversationRequest) {
+    request = &ControlVoiceConversationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "ControlVoiceConversation")
+    
+    
+    return
+}
+
+func NewControlVoiceConversationResponse() (response *ControlVoiceConversationResponse) {
+    response = &ControlVoiceConversationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ControlVoiceConversation
+// After a conversation task starts successfully, use this API to control it.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_REGION = "MissingParameter.Region"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ControlVoiceConversation(request *ControlVoiceConversationRequest) (response *ControlVoiceConversationResponse, err error) {
+    return c.ControlVoiceConversationWithContext(context.Background(), request)
+}
+
+// ControlVoiceConversation
+// After a conversation task starts successfully, use this API to control it.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_REGION = "MissingParameter.Region"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ControlVoiceConversationWithContext(ctx context.Context, request *ControlVoiceConversationRequest) (response *ControlVoiceConversationResponse, err error) {
+    if request == nil {
+        request = NewControlVoiceConversationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "ControlVoiceConversation")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ControlVoiceConversation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewControlVoiceConversationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCloudModerationRequest() (request *CreateCloudModerationRequest) {
     request = &CreateCloudModerationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -561,6 +637,84 @@ func (c *Client) CreateCloudTranscriptionWithContext(ctx context.Context, reques
     return
 }
 
+func NewCreateVoiceConversationRequest() (request *CreateVoiceConversationRequest) {
+    request = &CreateVoiceConversationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "CreateVoiceConversation")
+    
+    
+    return
+}
+
+func NewCreateVoiceConversationResponse() (response *CreateVoiceConversationResponse) {
+    response = &CreateVoiceConversationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateVoiceConversation
+// This API is used to create an AI conversation task.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_REGION = "MissingParameter.Region"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  MISSINGPARAMETER_USERSIG = "MissingParameter.UserSig"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateVoiceConversation(request *CreateVoiceConversationRequest) (response *CreateVoiceConversationResponse, err error) {
+    return c.CreateVoiceConversationWithContext(context.Background(), request)
+}
+
+// CreateVoiceConversation
+// This API is used to create an AI conversation task.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_REGION = "MissingParameter.Region"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  MISSINGPARAMETER_USERSIG = "MissingParameter.UserSig"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateVoiceConversationWithContext(ctx context.Context, request *CreateVoiceConversationRequest) (response *CreateVoiceConversationResponse, err error) {
+    if request == nil {
+        request = NewCreateVoiceConversationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "CreateVoiceConversation")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateVoiceConversation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateVoiceConversationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteCloudModerationRequest() (request *DeleteCloudModerationRequest) {
     request = &DeleteCloudModerationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -857,6 +1011,82 @@ func (c *Client) DeleteCloudTranscriptionWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDeleteCloudTranscriptionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteVoiceConversationRequest() (request *DeleteVoiceConversationRequest) {
+    request = &DeleteVoiceConversationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DeleteVoiceConversation")
+    
+    
+    return
+}
+
+func NewDeleteVoiceConversationResponse() (response *DeleteVoiceConversationResponse) {
+    response = &DeleteVoiceConversationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteVoiceConversation
+// After a conversation task starts successfully, use this API to stop it.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteVoiceConversation(request *DeleteVoiceConversationRequest) (response *DeleteVoiceConversationResponse, err error) {
+    return c.DeleteVoiceConversationWithContext(context.Background(), request)
+}
+
+// DeleteVoiceConversation
+// After a conversation task starts successfully, use this API to stop it.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteVoiceConversationWithContext(ctx context.Context, request *DeleteVoiceConversationRequest) (response *DeleteVoiceConversationResponse, err error) {
+    if request == nil {
+        request = NewDeleteVoiceConversationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DeleteVoiceConversation")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteVoiceConversation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteVoiceConversationResponse()
     err = c.Send(request, response)
     return
 }
@@ -2585,6 +2815,80 @@ func (c *Client) DescribeUserInfoWithContext(ctx context.Context, request *Descr
     return
 }
 
+func NewDescribeVoiceConversationRequest() (request *DescribeVoiceConversationRequest) {
+    request = &DescribeVoiceConversationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeVoiceConversation")
+    
+    
+    return
+}
+
+func NewDescribeVoiceConversationResponse() (response *DescribeVoiceConversationResponse) {
+    response = &DescribeVoiceConversationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeVoiceConversation
+// After a conversation task starts successfully, use this API to query the conversation status. It can be used only while the conversation task is in progress. Querying after the conversation task exits returns an error.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeVoiceConversation(request *DescribeVoiceConversationRequest) (response *DescribeVoiceConversationResponse, err error) {
+    return c.DescribeVoiceConversationWithContext(context.Background(), request)
+}
+
+// DescribeVoiceConversation
+// After a conversation task starts successfully, use this API to query the conversation status. It can be used only while the conversation task is in progress. Querying after the conversation task exits returns an error.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeVoiceConversationWithContext(ctx context.Context, request *DescribeVoiceConversationRequest) (response *DescribeVoiceConversationResponse, err error) {
+    if request == nil {
+        request = NewDescribeVoiceConversationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "DescribeVoiceConversation")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVoiceConversation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeVoiceConversationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeWebRecordRequest() (request *DescribeWebRecordRequest) {
     request = &DescribeWebRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2993,6 +3297,82 @@ func (c *Client) ModifyCloudSliceTaskWithContext(ctx context.Context, request *M
     return
 }
 
+func NewModifyVoiceConversationRequest() (request *ModifyVoiceConversationRequest) {
+    request = &ModifyVoiceConversationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "ModifyVoiceConversation")
+    
+    
+    return
+}
+
+func NewModifyVoiceConversationResponse() (response *ModifyVoiceConversationResponse) {
+    response = &ModifyVoiceConversationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyVoiceConversation
+// After a conversation task starts successfully, use this API to modify its configuration.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_REGION = "MissingParameter.Region"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyVoiceConversation(request *ModifyVoiceConversationRequest) (response *ModifyVoiceConversationResponse, err error) {
+    return c.ModifyVoiceConversationWithContext(context.Background(), request)
+}
+
+// ModifyVoiceConversation
+// After a conversation task starts successfully, use this API to modify its configuration.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_REGION = "MissingParameter.Region"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyVoiceConversationWithContext(ctx context.Context, request *ModifyVoiceConversationRequest) (response *ModifyVoiceConversationResponse, err error) {
+    if request == nil {
+        request = NewModifyVoiceConversationRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "trtc", APIVersion, "ModifyVoiceConversation")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyVoiceConversation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyVoiceConversationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryAIMessageListRequest() (request *QueryAIMessageListRequest) {
     request = &QueryAIMessageListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3017,18 +3397,19 @@ func NewQueryAIMessageListResponse() (response *QueryAIMessageListResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
-//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
-//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_REGION = "MissingParameter.Region"
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
-//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
 //  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) QueryAIMessageList(request *QueryAIMessageListRequest) (response *QueryAIMessageListResponse, err error) {
     return c.QueryAIMessageListWithContext(context.Background(), request)
 }
@@ -3038,18 +3419,19 @@ func (c *Client) QueryAIMessageList(request *QueryAIMessageListRequest) (respons
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_UNREALNAMEAUTHENTICATED = "AuthFailure.UnRealNameAuthenticated"
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_CSUNSUPPORTMETHOD = "FailedOperation.CSUnsupportMethod"
-//  INTERNALERROR_CSINTERNALERROR = "InternalError.CSInternalError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_OUTOFRANGE = "InvalidParameter.OutOfRange"
-//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  MISSINGPARAMETER_REGION = "MissingParameter.Region"
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
-//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
 //  MISSINGPARAMETER_USERID = "MissingParameter.UserId"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) QueryAIMessageListWithContext(ctx context.Context, request *QueryAIMessageListRequest) (response *QueryAIMessageListResponse, err error) {
     if request == nil {
         request = NewQueryAIMessageListRequest()
@@ -3647,7 +4029,6 @@ func NewStartStreamIngestResponse() (response *StartStreamIngestResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOTALLOWED = "FailedOperation.NotAllowed"
-//  FAILEDOPERATION_NOTRTMPFUNCTION = "FailedOperation.NotRtmpFunction"
 //  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
 //  FAILEDOPERATION_TASKEXIST = "FailedOperation.TaskExist"
 //  INTERNALERROR_HTTPPARSEFAILED = "InternalError.HttpParseFailed"
@@ -3672,7 +4053,6 @@ func (c *Client) StartStreamIngest(request *StartStreamIngestRequest) (response 
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOTALLOWED = "FailedOperation.NotAllowed"
-//  FAILEDOPERATION_NOTRTMPFUNCTION = "FailedOperation.NotRtmpFunction"
 //  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
 //  FAILEDOPERATION_TASKEXIST = "FailedOperation.TaskExist"
 //  INTERNALERROR_HTTPPARSEFAILED = "InternalError.HttpParseFailed"
@@ -4263,6 +4643,7 @@ func NewUpdatePublishCdnStreamResponse() (response *UpdatePublishCdnStreamRespon
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TASKFINISHED = "FailedOperation.TaskFinished"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -4283,6 +4664,7 @@ func (c *Client) UpdatePublishCdnStream(request *UpdatePublishCdnStreamRequest) 
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  AUTHFAILURE_UNSUPPORTEDOPERATION = "AuthFailure.UnsupportedOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TASKFINISHED = "FailedOperation.TaskFinished"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
