@@ -1269,6 +1269,134 @@ func (c *Client) CreateContentIdentifierWithContext(ctx context.Context, request
     return
 }
 
+func NewCreateCustomGroupRequest() (request *CreateCustomGroupRequest) {
+    request = &CreateCustomGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "CreateCustomGroup")
+    
+    
+    return
+}
+
+func NewCreateCustomGroupResponse() (response *CreateCustomGroupResponse) {
+    response = &CreateCustomGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateCustomGroup
+// This API is used to create a custom group. A custom group is used to centrally manage a set of reusable matching entries. For example, you can save multiple JA3/JA4 TLS fingerprints as a TLS fingerprint group and directly reference the group in security rules, avoiding the need to maintain the same fingerprint list in multiple rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CONFIGCONDITIONSYNTAXERROR = "FailedOperation.ConfigConditionSyntaxError"
+//  FAILEDOPERATION_CONFIGCONDITIONUNKNOWNTARGET = "FailedOperation.ConfigConditionUnknownTarget"
+//  FAILEDOPERATION_CONFIGCONDITIONVALUEEMPTYERROR = "FailedOperation.ConfigConditionValueEmptyError"
+//  FAILEDOPERATION_CONFIGDUPLICATEKEYERROR = "FailedOperation.ConfigDuplicateKeyError"
+//  FAILEDOPERATION_CONFIGFIELDTYPEERROR = "FailedOperation.ConfigFieldTypeError"
+//  FAILEDOPERATION_CONFIGFORMATERROR = "FailedOperation.ConfigFormatError"
+//  FAILEDOPERATION_CONFIGJSONFORMATERROR = "FailedOperation.ConfigJSONFormatError"
+//  FAILEDOPERATION_CONFIGMALFORMEDCONTENT = "FailedOperation.ConfigMalformedContent"
+//  FAILEDOPERATION_CONFIGPARAMVALIDATEERRORS = "FailedOperation.ConfigParamValidateErrors"
+//  FAILEDOPERATION_CONFIGTIMEPARSINGERROR = "FailedOperation.ConfigTimeParsingError"
+//  FAILEDOPERATION_CONFIGUNKNOWNFIELD = "FailedOperation.ConfigUnknownField"
+//  FAILEDOPERATION_CONFIGUNSUPPORTEDACTION = "FailedOperation.ConfigUnsupportedAction"
+//  FAILEDOPERATION_CONFIGUNSUPPORTEDFORMATVERSION = "FailedOperation.ConfigUnsupportedFormatVersion"
+//  FAILEDOPERATION_MISSINGCONFIGCHUNK = "FailedOperation.MissingConfigChunk"
+//  FAILEDOPERATION_UNKNOWNCONFIGGROUPTYPE = "FailedOperation.UnknownConfigGroupType"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DUPLICATERULE = "InvalidParameter.DuplicateRule"
+//  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEBADVALUE = "InvalidParameter.ErrInvalidConditionValueBadValue"
+//  INVALIDPARAMETER_INVALIDCACHEKEYQUERYSTRINGACTION = "InvalidParameter.InvalidCacheKeyQueryStringAction"
+//  INVALIDPARAMETER_INVALIDCONDITIONS = "InvalidParameter.InvalidConditions"
+//  INVALIDPARAMETER_INVALIDDYNAMICROUTINE = "InvalidParameter.InvalidDynamicRoutine"
+//  INVALIDPARAMETER_INVALIDIPV6SWITCH = "InvalidParameter.InvalidIpv6Switch"
+//  INVALIDPARAMETER_INVALIDMAXAGEFOLLOWORIGIN = "InvalidParameter.InvalidMaxAgeFollowOrigin"
+//  INVALIDPARAMETER_INVALIDSTANDARDDEBUG = "InvalidParameter.InvalidStandardDebug"
+//  INVALIDPARAMETER_POSTMAXSIZELIMITEXCEEDED = "InvalidParameter.PostMaxSizeLimitExceeded"
+//  INVALIDPARAMETER_STATUSCODECACHEINVALIDSTATUSCODE = "InvalidParameter.StatusCodeCacheInvalidStatusCode"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RULELIMITEXCEEDED = "LimitExceeded.RuleLimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCELERATEMAINLANDIPV6CONFLICT = "OperationDenied.AccelerateMainlandIpv6Conflict"
+//  OPERATIONDENIED_CONFIGLOCKED = "OperationDenied.ConfigLocked"
+//  OPERATIONDENIED_ERRZONEISALREADYPAUSED = "OperationDenied.ErrZoneIsAlreadyPaused"
+//  OPERATIONDENIED_NOTINVERSIONCONTROLWHITELIST = "OperationDenied.NotInVersionControlWhiteList"
+//  OPERATIONDENIED_OWNERSHIPVERIFICATIONNOTPASSED = "OperationDenied.OwnershipVerificationNotPassed"
+//  OPERATIONDENIED_VERSIONCONTROLLOCKED = "OperationDenied.VersionControlLocked"
+//  OPERATIONDENIED_WORKMODENOTINVERSIONCONTROL = "OperationDenied.WorkModeNotInVersionControl"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+func (c *Client) CreateCustomGroup(request *CreateCustomGroupRequest) (response *CreateCustomGroupResponse, err error) {
+    return c.CreateCustomGroupWithContext(context.Background(), request)
+}
+
+// CreateCustomGroup
+// This API is used to create a custom group. A custom group is used to centrally manage a set of reusable matching entries. For example, you can save multiple JA3/JA4 TLS fingerprints as a TLS fingerprint group and directly reference the group in security rules, avoiding the need to maintain the same fingerprint list in multiple rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CONFIGCONDITIONSYNTAXERROR = "FailedOperation.ConfigConditionSyntaxError"
+//  FAILEDOPERATION_CONFIGCONDITIONUNKNOWNTARGET = "FailedOperation.ConfigConditionUnknownTarget"
+//  FAILEDOPERATION_CONFIGCONDITIONVALUEEMPTYERROR = "FailedOperation.ConfigConditionValueEmptyError"
+//  FAILEDOPERATION_CONFIGDUPLICATEKEYERROR = "FailedOperation.ConfigDuplicateKeyError"
+//  FAILEDOPERATION_CONFIGFIELDTYPEERROR = "FailedOperation.ConfigFieldTypeError"
+//  FAILEDOPERATION_CONFIGFORMATERROR = "FailedOperation.ConfigFormatError"
+//  FAILEDOPERATION_CONFIGJSONFORMATERROR = "FailedOperation.ConfigJSONFormatError"
+//  FAILEDOPERATION_CONFIGMALFORMEDCONTENT = "FailedOperation.ConfigMalformedContent"
+//  FAILEDOPERATION_CONFIGPARAMVALIDATEERRORS = "FailedOperation.ConfigParamValidateErrors"
+//  FAILEDOPERATION_CONFIGTIMEPARSINGERROR = "FailedOperation.ConfigTimeParsingError"
+//  FAILEDOPERATION_CONFIGUNKNOWNFIELD = "FailedOperation.ConfigUnknownField"
+//  FAILEDOPERATION_CONFIGUNSUPPORTEDACTION = "FailedOperation.ConfigUnsupportedAction"
+//  FAILEDOPERATION_CONFIGUNSUPPORTEDFORMATVERSION = "FailedOperation.ConfigUnsupportedFormatVersion"
+//  FAILEDOPERATION_MISSINGCONFIGCHUNK = "FailedOperation.MissingConfigChunk"
+//  FAILEDOPERATION_UNKNOWNCONFIGGROUPTYPE = "FailedOperation.UnknownConfigGroupType"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DUPLICATERULE = "InvalidParameter.DuplicateRule"
+//  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEBADVALUE = "InvalidParameter.ErrInvalidConditionValueBadValue"
+//  INVALIDPARAMETER_INVALIDCACHEKEYQUERYSTRINGACTION = "InvalidParameter.InvalidCacheKeyQueryStringAction"
+//  INVALIDPARAMETER_INVALIDCONDITIONS = "InvalidParameter.InvalidConditions"
+//  INVALIDPARAMETER_INVALIDDYNAMICROUTINE = "InvalidParameter.InvalidDynamicRoutine"
+//  INVALIDPARAMETER_INVALIDIPV6SWITCH = "InvalidParameter.InvalidIpv6Switch"
+//  INVALIDPARAMETER_INVALIDMAXAGEFOLLOWORIGIN = "InvalidParameter.InvalidMaxAgeFollowOrigin"
+//  INVALIDPARAMETER_INVALIDSTANDARDDEBUG = "InvalidParameter.InvalidStandardDebug"
+//  INVALIDPARAMETER_POSTMAXSIZELIMITEXCEEDED = "InvalidParameter.PostMaxSizeLimitExceeded"
+//  INVALIDPARAMETER_STATUSCODECACHEINVALIDSTATUSCODE = "InvalidParameter.StatusCodeCacheInvalidStatusCode"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RULELIMITEXCEEDED = "LimitExceeded.RuleLimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCELERATEMAINLANDIPV6CONFLICT = "OperationDenied.AccelerateMainlandIpv6Conflict"
+//  OPERATIONDENIED_CONFIGLOCKED = "OperationDenied.ConfigLocked"
+//  OPERATIONDENIED_ERRZONEISALREADYPAUSED = "OperationDenied.ErrZoneIsAlreadyPaused"
+//  OPERATIONDENIED_NOTINVERSIONCONTROLWHITELIST = "OperationDenied.NotInVersionControlWhiteList"
+//  OPERATIONDENIED_OWNERSHIPVERIFICATIONNOTPASSED = "OperationDenied.OwnershipVerificationNotPassed"
+//  OPERATIONDENIED_VERSIONCONTROLLOCKED = "OperationDenied.VersionControlLocked"
+//  OPERATIONDENIED_WORKMODENOTINVERSIONCONTROL = "OperationDenied.WorkModeNotInVersionControl"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+func (c *Client) CreateCustomGroupWithContext(ctx context.Context, request *CreateCustomGroupRequest) (response *CreateCustomGroupResponse, err error) {
+    if request == nil {
+        request = NewCreateCustomGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "CreateCustomGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCustomGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCustomGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCustomizeErrorPageRequest() (request *CreateCustomizeErrorPageRequest) {
     request = &CreateCustomizeErrorPageRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4693,6 +4821,58 @@ func (c *Client) DeleteCustomErrorPageWithContext(ctx context.Context, request *
     return
 }
 
+func NewDeleteCustomGroupRequest() (request *DeleteCustomGroupRequest) {
+    request = &DeleteCustomGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DeleteCustomGroup")
+    
+    
+    return
+}
+
+func NewDeleteCustomGroupResponse() (response *DeleteCustomGroupResponse) {
+    response = &DeleteCustomGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteCustomGroup
+// This API is used to delete a specified custom group. If the group is referenced by a rule, deletion is not allowed. Remove the reference first.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteCustomGroup(request *DeleteCustomGroupRequest) (response *DeleteCustomGroupResponse, err error) {
+    return c.DeleteCustomGroupWithContext(context.Background(), request)
+}
+
+// DeleteCustomGroup
+// This API is used to delete a specified custom group. If the group is referenced by a rule, deletion is not allowed. Remove the reference first.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteCustomGroupWithContext(ctx context.Context, request *DeleteCustomGroupRequest) (response *DeleteCustomGroupResponse, err error) {
+    if request == nil {
+        request = NewDeleteCustomGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DeleteCustomGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCustomGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCustomGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteDnsRecordsRequest() (request *DeleteDnsRecordsRequest) {
     request = &DeleteDnsRecordsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6987,6 +7167,156 @@ func (c *Client) DescribeCustomErrorPagesWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribeCustomErrorPagesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCustomGroupRequest() (request *DescribeCustomGroupRequest) {
+    request = &DescribeCustomGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeCustomGroup")
+    
+    
+    return
+}
+
+func NewDescribeCustomGroupResponse() (response *DescribeCustomGroupResponse) {
+    response = &DescribeCustomGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCustomGroup
+// This API is used to query the detailed information of a custom group, including all entries in the group (returned with pagination via Limit/Offset). The DescribeCustomGroups list API returns up to the first 500 entries for each group. To obtain all entries, use this API. The GroupId can be obtained from the response of CreateCustomGroup or by querying DescribeCustomGroups.
+//
+// error code that may be returned:
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+func (c *Client) DescribeCustomGroup(request *DescribeCustomGroupRequest) (response *DescribeCustomGroupResponse, err error) {
+    return c.DescribeCustomGroupWithContext(context.Background(), request)
+}
+
+// DescribeCustomGroup
+// This API is used to query the detailed information of a custom group, including all entries in the group (returned with pagination via Limit/Offset). The DescribeCustomGroups list API returns up to the first 500 entries for each group. To obtain all entries, use this API. The GroupId can be obtained from the response of CreateCustomGroup or by querying DescribeCustomGroups.
+//
+// error code that may be returned:
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+func (c *Client) DescribeCustomGroupWithContext(ctx context.Context, request *DescribeCustomGroupRequest) (response *DescribeCustomGroupResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeCustomGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCustomGroupReferencesRequest() (request *DescribeCustomGroupReferencesRequest) {
+    request = &DescribeCustomGroupReferencesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeCustomGroupReferences")
+    
+    
+    return
+}
+
+func NewDescribeCustomGroupReferencesResponse() (response *DescribeCustomGroupReferencesResponse) {
+    response = &DescribeCustomGroupReferencesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCustomGroupReferences
+// This API is used to obtain the security policy configuration that uses a custom group.
+//
+// error code that may be returned:
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+func (c *Client) DescribeCustomGroupReferences(request *DescribeCustomGroupReferencesRequest) (response *DescribeCustomGroupReferencesResponse, err error) {
+    return c.DescribeCustomGroupReferencesWithContext(context.Background(), request)
+}
+
+// DescribeCustomGroupReferences
+// This API is used to obtain the security policy configuration that uses a custom group.
+//
+// error code that may be returned:
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+func (c *Client) DescribeCustomGroupReferencesWithContext(ctx context.Context, request *DescribeCustomGroupReferencesRequest) (response *DescribeCustomGroupReferencesResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomGroupReferencesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeCustomGroupReferences")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomGroupReferences require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomGroupReferencesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCustomGroupsRequest() (request *DescribeCustomGroupsRequest) {
+    request = &DescribeCustomGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeCustomGroups")
+    
+    
+    return
+}
+
+func NewDescribeCustomGroupsResponse() (response *DescribeCustomGroupsResponse) {
+    response = &DescribeCustomGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCustomGroups
+// This API is used to query the list of custom groups under a specified site. This API returns only the first 500 entries of each custom group. To query all entries in a group, use the DescribeSecurityCustomGroup API.
+//
+// error code that may be returned:
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+func (c *Client) DescribeCustomGroups(request *DescribeCustomGroupsRequest) (response *DescribeCustomGroupsResponse, err error) {
+    return c.DescribeCustomGroupsWithContext(context.Background(), request)
+}
+
+// DescribeCustomGroups
+// This API is used to query the list of custom groups under a specified site. This API returns only the first 500 entries of each custom group. To query all entries in a group, use the DescribeSecurityCustomGroup API.
+//
+// error code that may be returned:
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+func (c *Client) DescribeCustomGroupsWithContext(ctx context.Context, request *DescribeCustomGroupsRequest) (response *DescribeCustomGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomGroupsRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "DescribeCustomGroups")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomGroups require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomGroupsResponse()
     err = c.Send(request, response)
     return
 }
@@ -12799,6 +13129,56 @@ func (c *Client) ModifyCustomErrorPageWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewModifyCustomErrorPageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyCustomGroupRequest() (request *ModifyCustomGroupRequest) {
+    request = &ModifyCustomGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyCustomGroup")
+    
+    
+    return
+}
+
+func NewModifyCustomGroupResponse() (response *ModifyCustomGroupResponse) {
+    response = &ModifyCustomGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyCustomGroup
+// This API is used to modify the content of a custom group. GroupType cannot be modified after creation. When modifying entries in the group, you can specify replacement, append, or removal operations through GroupItemOperation.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyCustomGroup(request *ModifyCustomGroupRequest) (response *ModifyCustomGroupResponse, err error) {
+    return c.ModifyCustomGroupWithContext(context.Background(), request)
+}
+
+// ModifyCustomGroup
+// This API is used to modify the content of a custom group. GroupType cannot be modified after creation. When modifying entries in the group, you can specify replacement, append, or removal operations through GroupItemOperation.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyCustomGroupWithContext(ctx context.Context, request *ModifyCustomGroupRequest) (response *ModifyCustomGroupResponse, err error) {
+    if request == nil {
+        request = NewModifyCustomGroupRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "teo", APIVersion, "ModifyCustomGroup")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCustomGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCustomGroupResponse()
     err = c.Send(request, response)
     return
 }
