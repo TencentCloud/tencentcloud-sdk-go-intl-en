@@ -132,14 +132,8 @@ func NewBindConcurrentPackagesToProjectResponse() (response *BindConcurrentPacka
 // This API is used to bind a concurrency pack to a project.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_PROCESSTIMEOUT = "FailedOperation.ProcessTimeout"
+//  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND_NOIDLE = "ResourceNotFound.NoIdle"
-//  RESOURCEUNAVAILABLE_INITIALIZATION = "ResourceUnavailable.Initialization"
-//  UNSUPPORTEDOPERATION_STOPPING = "UnsupportedOperation.Stopping"
 func (c *Client) BindConcurrentPackagesToProject(request *BindConcurrentPackagesToProjectRequest) (response *BindConcurrentPackagesToProjectResponse, err error) {
     return c.BindConcurrentPackagesToProjectWithContext(context.Background(), request)
 }
@@ -148,14 +142,8 @@ func (c *Client) BindConcurrentPackagesToProject(request *BindConcurrentPackages
 // This API is used to bind a concurrency pack to a project.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_PROCESSTIMEOUT = "FailedOperation.ProcessTimeout"
+//  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  RESOURCENOTFOUND_NOIDLE = "ResourceNotFound.NoIdle"
-//  RESOURCEUNAVAILABLE_INITIALIZATION = "ResourceUnavailable.Initialization"
-//  UNSUPPORTEDOPERATION_STOPPING = "UnsupportedOperation.Stopping"
 func (c *Client) BindConcurrentPackagesToProjectWithContext(ctx context.Context, request *BindConcurrentPackagesToProjectRequest) (response *BindConcurrentPackagesToProjectResponse, err error) {
     if request == nil {
         request = NewBindConcurrentPackagesToProjectRequest()
@@ -198,6 +186,7 @@ func NewCreateApplicationResponse() (response *CreateApplicationResponse) {
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION_APPLICATIONCREATEFAIL = "FailedOperation.ApplicationCreateFail"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -212,6 +201,7 @@ func (c *Client) CreateApplication(request *CreateApplicationRequest) (response 
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION_APPLICATIONCREATEFAIL = "FailedOperation.ApplicationCreateFail"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -256,6 +246,7 @@ func NewCreateApplicationProjectResponse() (response *CreateApplicationProjectRe
 // This API is used to create a cloud application project.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) CreateApplicationProject(request *CreateApplicationProjectRequest) (response *CreateApplicationProjectResponse, err error) {
     return c.CreateApplicationProjectWithContext(context.Background(), request)
@@ -265,6 +256,7 @@ func (c *Client) CreateApplicationProject(request *CreateApplicationProjectReque
 // This API is used to create a cloud application project.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) CreateApplicationProjectWithContext(ctx context.Context, request *CreateApplicationProjectRequest) (response *CreateApplicationProjectResponse, err error) {
     if request == nil {
@@ -407,6 +399,70 @@ func (c *Client) CreateApplicationVersionWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewCreateApplicationVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateMCPTokenRequest() (request *CreateMCPTokenRequest) {
+    request = &CreateMCPTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "CreateMCPToken")
+    
+    
+    return
+}
+
+func NewCreateMCPTokenResponse() (response *CreateMCPTokenResponse) {
+    response = &CreateMCPTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateMCPToken
+// This API is used to create an MCP token (issue a token).
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_MCPTOKEN = "LimitExceeded.MCPToken"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+func (c *Client) CreateMCPToken(request *CreateMCPTokenRequest) (response *CreateMCPTokenResponse, err error) {
+    return c.CreateMCPTokenWithContext(context.Background(), request)
+}
+
+// CreateMCPToken
+// This API is used to create an MCP token (issue a token).
+//
+// error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_MCPTOKEN = "LimitExceeded.MCPToken"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+func (c *Client) CreateMCPTokenWithContext(ctx context.Context, request *CreateMCPTokenRequest) (response *CreateMCPTokenResponse, err error) {
+    if request == nil {
+        request = NewCreateMCPTokenRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "CreateMCPToken")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMCPToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateMCPTokenResponse()
     err = c.Send(request, response)
     return
 }
@@ -573,12 +629,7 @@ func NewDeleteApplicationProjectsResponse() (response *DeleteApplicationProjects
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
-//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
-//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
-//  FAILEDOPERATION_VERSIONLOCKFAIL = "FailedOperation.VersionLockFail"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DeleteApplicationProjects(request *DeleteApplicationProjectsRequest) (response *DeleteApplicationProjectsResponse, err error) {
     return c.DeleteApplicationProjectsWithContext(context.Background(), request)
 }
@@ -588,12 +639,7 @@ func (c *Client) DeleteApplicationProjects(request *DeleteApplicationProjectsReq
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
-//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
-//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
-//  FAILEDOPERATION_VERSIONLOCKFAIL = "FailedOperation.VersionLockFail"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DeleteApplicationProjectsWithContext(ctx context.Context, request *DeleteApplicationProjectsRequest) (response *DeleteApplicationProjectsResponse, err error) {
     if request == nil {
         request = NewDeleteApplicationProjectsRequest()
@@ -906,6 +952,7 @@ func NewDescribeApplicationProjectsResponse() (response *DescribeApplicationProj
 // This API is used to obtain the cloud application project list.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeApplicationProjects(request *DescribeApplicationProjectsRequest) (response *DescribeApplicationProjectsResponse, err error) {
     return c.DescribeApplicationProjectsWithContext(context.Background(), request)
@@ -915,6 +962,7 @@ func (c *Client) DescribeApplicationProjects(request *DescribeApplicationProject
 // This API is used to obtain the cloud application project list.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeApplicationProjectsWithContext(ctx context.Context, request *DescribeApplicationProjectsRequest) (response *DescribeApplicationProjectsResponse, err error) {
     if request == nil {
@@ -1126,6 +1174,7 @@ func NewDescribeConcurrentPackagesResponse() (response *DescribeConcurrentPackag
 // This API is used to obtain the cloud application concurrency pack list.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeConcurrentPackages(request *DescribeConcurrentPackagesRequest) (response *DescribeConcurrentPackagesResponse, err error) {
     return c.DescribeConcurrentPackagesWithContext(context.Background(), request)
@@ -1135,6 +1184,7 @@ func (c *Client) DescribeConcurrentPackages(request *DescribeConcurrentPackagesR
 // This API is used to obtain the cloud application concurrency pack list.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeConcurrentPackagesWithContext(ctx context.Context, request *DescribeConcurrentPackagesRequest) (response *DescribeConcurrentPackagesResponse, err error) {
     if request == nil {
@@ -1176,6 +1226,7 @@ func NewDescribeConcurrentSummaryResponse() (response *DescribeConcurrentSummary
 // This API is used to query the concurrency overview.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeConcurrentSummary(request *DescribeConcurrentSummaryRequest) (response *DescribeConcurrentSummaryResponse, err error) {
     return c.DescribeConcurrentSummaryWithContext(context.Background(), request)
@@ -1185,6 +1236,7 @@ func (c *Client) DescribeConcurrentSummary(request *DescribeConcurrentSummaryReq
 // This API is used to query the concurrency overview.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeConcurrentSummaryWithContext(ctx context.Context, request *DescribeConcurrentSummaryRequest) (response *DescribeConcurrentSummaryResponse, err error) {
     if request == nil {
@@ -1263,6 +1315,62 @@ func (c *Client) DescribeCosCredentialWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeCosCredentialResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMCPTokensRequest() (request *DescribeMCPTokensRequest) {
+    request = &DescribeMCPTokensRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "DescribeMCPTokens")
+    
+    
+    return
+}
+
+func NewDescribeMCPTokensResponse() (response *DescribeMCPTokensResponse) {
+    response = &DescribeMCPTokensResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMCPTokens
+// This API is used to query the MCP Token list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeMCPTokens(request *DescribeMCPTokensRequest) (response *DescribeMCPTokensResponse, err error) {
+    return c.DescribeMCPTokensWithContext(context.Background(), request)
+}
+
+// DescribeMCPTokens
+// This API is used to query the MCP Token list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeMCPTokensWithContext(ctx context.Context, request *DescribeMCPTokensRequest) (response *DescribeMCPTokensResponse, err error) {
+    if request == nil {
+        request = NewDescribeMCPTokensRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "DescribeMCPTokens")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMCPTokens require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMCPTokensResponse()
     err = c.Send(request, response)
     return
 }
@@ -1613,6 +1721,72 @@ func (c *Client) ModifyMobileApplicationInfoWithContext(ctx context.Context, req
     return
 }
 
+func NewRenewMCPTokenRequest() (request *RenewMCPTokenRequest) {
+    request = &RenewMCPTokenRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "RenewMCPToken")
+    
+    
+    return
+}
+
+func NewRenewMCPTokenResponse() (response *RenewMCPTokenResponse) {
+    response = &RenewMCPTokenResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RenewMCPToken
+// This API is used to renew an MCP Token.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) RenewMCPToken(request *RenewMCPTokenRequest) (response *RenewMCPTokenResponse, err error) {
+    return c.RenewMCPTokenWithContext(context.Background(), request)
+}
+
+// RenewMCPToken
+// This API is used to renew an MCP Token.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) RenewMCPTokenWithContext(ctx context.Context, request *RenewMCPTokenRequest) (response *RenewMCPTokenResponse, err error) {
+    if request == nil {
+        request = NewRenewMCPTokenRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "car", APIVersion, "RenewMCPToken")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RenewMCPToken require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRenewMCPTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewResetConcurrentPackagesRequest() (request *ResetConcurrentPackagesRequest) {
     request = &ResetConcurrentPackagesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1636,6 +1810,7 @@ func NewResetConcurrentPackagesResponse() (response *ResetConcurrentPackagesResp
 // This API is used to reset a concurrency pack and disconnect all user connections.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) ResetConcurrentPackages(request *ResetConcurrentPackagesRequest) (response *ResetConcurrentPackagesResponse, err error) {
     return c.ResetConcurrentPackagesWithContext(context.Background(), request)
@@ -1645,6 +1820,7 @@ func (c *Client) ResetConcurrentPackages(request *ResetConcurrentPackagesRequest
 // This API is used to reset a concurrency pack and disconnect all user connections.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) ResetConcurrentPackagesWithContext(ctx context.Context, request *ResetConcurrentPackagesRequest) (response *ResetConcurrentPackagesResponse, err error) {
     if request == nil {
@@ -1928,6 +2104,7 @@ func NewUnbindConcurrentPackagesFromProjectResponse() (response *UnbindConcurren
 // This API is used to unbind a concurrency pack from a project.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) UnbindConcurrentPackagesFromProject(request *UnbindConcurrentPackagesFromProjectRequest) (response *UnbindConcurrentPackagesFromProjectResponse, err error) {
     return c.UnbindConcurrentPackagesFromProjectWithContext(context.Background(), request)
@@ -1937,6 +2114,7 @@ func (c *Client) UnbindConcurrentPackagesFromProject(request *UnbindConcurrentPa
 // This API is used to unbind a concurrency pack from a project.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) UnbindConcurrentPackagesFromProjectWithContext(ctx context.Context, request *UnbindConcurrentPackagesFromProjectRequest) (response *UnbindConcurrentPackagesFromProjectResponse, err error) {
     if request == nil {
