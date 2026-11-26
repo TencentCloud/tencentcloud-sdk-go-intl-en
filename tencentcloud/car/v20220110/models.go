@@ -35,68 +35,63 @@ type ApplicationBaseInfo struct {
 }
 
 type ApplicationConcurrentPackage struct {
-
+	// <p>Concurrency pack ID</p>
+	ConcurrentId *string `json:"ConcurrentId,omitnil,omitempty" name:"ConcurrentId"`
 }
 
 type ApplicationProject struct {
-	// Project ID.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Project ID.</p>
 	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Project name.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Project name.</p>
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Project description.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Project description.</p>
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Concurrency type required for project operation.S1: concurrency for rendering small cloud applications.M1: concurrency for rendering medium cloud applications.L1: concurrency for rendering large cloud applications.L2: concurrency for rendering large cloud applications.XL2: concurrency for rendering extra large cloud applications.MM1_HD: concurrency for performance-based cloud ARM (HD).MM1_FHD: concurrency for performance-based cloud ARM (FHD).Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Concurrency type required for project operation.<br>S1: Small-scale cloud application rendering concurrency<br>M1: Medium cloud application rendering concurrency<br>L1: Large cloud application rendering concurrency<br>L2: Large cloud application rendering concurrency<br>XL2: Ultra-large cloud application rendering concurrency<br>MM1_HD: Performance Cloud ARM concurrency - high-definition<br>MM1_FHD: Performance Cloud ARM concurrency - ultra-high-definition</p>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Cloud application ID.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Cloud Application ID</p>
 	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
 
-	// Pre-launch.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Pre-launch</p>
 	IsPreload *bool `json:"IsPreload,omitnil,omitempty" name:"IsPreload"`
 
-	// Number of concurrencies already configured.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Configured concurrency</p>
 	Amount *int64 `json:"Amount,omitnil,omitempty" name:"Amount"`
 
-	// Number of concurrencies in use.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Number of concurrencies in use</p>
 	Using *int64 `json:"Using,omitnil,omitempty" name:"Using"`
 
-	// Application status. NoConcurrent: no concurrency pack configured; Online: activated. Cloud application status: applicationCreating: creating; applicationCreateFail: creation failed; applicationDeleting: deleting; applicationNoConfigured: startup parameters not configured.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Application status: NoConcurrent - no concurrency package configured, Online - launched, other statuses are cloud application status: applicationCreating - creating, applicationCreateFail - creation failed, applicationDeleting - deleting, applicationNoConfigured - startup parameter not configured</p>
 	ApplicationStatus *string `json:"ApplicationStatus,omitnil,omitempty" name:"ApplicationStatus"`
 
-	// Application startup parameters.
-	// 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Application startup parameter</p>
 	ApplicationParams *string `json:"ApplicationParams,omitnil,omitempty" name:"ApplicationParams"`
 
-	// Creation time.
-	// 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Creation time.</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Application name.
-	// 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Application name</p>
 	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
 
-	// Resolution, in the format of widthxheight, such as 1920x1080.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Resolution, format as "width x height", for example 1920x1080</p>
 	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 
-	// Project type.SHARED: shared by all applications.EXCLUSIVE (default value): dedicated for one application.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Project type.<br>SHARED: Shared by all applications<br>EXCLUSIVE (default value): Dedicated for one application</p>
 	ProjectType *string `json:"ProjectType,omitnil,omitempty" name:"ProjectType"`
 
-	// Purpose.EXPERIENCE: Experience.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Purpose.<br>EXPERIENCE: Experience</p>
 	Purpose *string `json:"Purpose,omitnil,omitempty" name:"Purpose"`
 
-	// Application distribution area. Standard areas are as follows. ap-chinese-mainland: Chinese mainland; na-north-america: North America; eu-frankfurt: Frankfurt; ap-mumbai: Mumbai; ap-tokyo: Tokyo; ap-seoul: Seoul; ap-singapore: Singapore; ap-bangkok: Bangkok; ap-hongkong: Hong Kong (China). Fusion areas are as follows. me-middle-east-fusion: Middle East; na-north-america-fusion: North America; sa-south-america-fusion: South America; ap-tokyo-fusion: Tokyo; ap-seoul-fusion: Seoul; eu-frankfurt-fusion: Frankfurt; ap-singapore-fusion: Singapore; ap-hongkong-fusion: Hong Kong (China).Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Application distribution area (Standard zone: ap-chinese-mainland: Chinese mainland, na-north-america: North America, eu-frankfurt: Frankfurt, ap-mumbai: Mumbai, ap-tokyo: Tokyo, ap-seoul: Seoul, ap-singapore: Singapore, ap-bangkok: Bangkok, ap-hongkong: Hong Kong (China). Fusion region: me-middle-east-fusion: Middle East, na-north-america-fusion: North America, sa-south-america-fusion: South America, ap-tokyo-fusion: Tokyo, ap-seoul-fusion: Seoul, eu-frankfurt-fusion: Frankfurt, ap-singapore-fusion: Singapore, ap-hongkong-fusion: Hong Kong (China))</p>
 	ApplicationRegions []*string `json:"ApplicationRegions,omitnil,omitempty" name:"ApplicationRegions"`
 
-	// Concurrency area. Standard areas are as follows. ap-chinese-mainland: Chinese mainland; na-north-america: North America; eu-frankfurt: Frankfurt; ap-mumbai: Mumbai; ap-tokyo: Tokyo; ap-seoul: Seoul; ap-singapore: Singapore; ap-bangkok: Bangkok; ap-hongkong: Hong Kong (China). Fusion areas are as follows. me-middle-east-fusion: Middle East; na-north-america-fusion: North America; sa-south-america-fusion: South America; ap-tokyo-fusion: Tokyo; ap-seoul-fusion: Seoul; eu-frankfurt-fusion: Frankfurt; ap-singapore-fusion: Singapore; ap-hongkong-fusion: Hong Kong (China).Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Concurrent region (Standard zone: ap-chinese-mainland: Chinese mainland, na-north-america: North America, eu-frankfurt: Frankfurt, ap-mumbai: Mumbai, ap-tokyo: Tokyo, ap-seoul: Seoul, ap-singapore: Singapore, ap-bangkok: Bangkok, ap-hongkong: Hong Kong (China), Fusion region: me-middle-east-fusion: Middle East, na-north-america-fusion: North America, sa-south-america-fusion: South America, ap-tokyo-fusion: Tokyo, ap-seoul-fusion: Seoul, eu-frankfurt-fusion: Frankfurt, ap-singapore-fusion: Singapore, ap-hongkong-fusion: Hong Kong (China))</p>
 	ConcurrentRegions []*string `json:"ConcurrentRegions,omitnil,omitempty" name:"ConcurrentRegions"`
 
-	// Project category.DESKTOP: desktop (default value).MOBILE: mobile.Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Project category.<br>DESKTOP: On PC, default value<br>MOBILE: Mobile terminal</p>
 	ProjectCategory *string `json:"ProjectCategory,omitnil,omitempty" name:"ProjectCategory"`
 }
 
@@ -183,20 +178,16 @@ func (r *ApplyConcurrentResponse) FromJsonString(s string) error {
 }
 
 type BackgroundImage struct {
-	// ID of the COS file.Note: This field may return null, indicating that no valid values can be obtained.
+	// ID of the COS file.
 	COSFileId *string `json:"COSFileId,omitnil,omitempty" name:"COSFileId"`
 
-	// Download URL.Note: This field may return null, indicating that no valid values can be obtained.
+	// Download URL.
 	URL *string `json:"URL,omitnil,omitempty" name:"URL"`
 
 	// Name
-	// 
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Creation time.
-	// 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Creation Time
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 }
 
@@ -2743,6 +2734,14 @@ func (r *StopPublishStreamResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Tag struct {
+	// <p>Tag key</p>
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
+
+	// <p>Tag value</p>
+	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
+}
+
 // Predefined struct for user
 type UnbindConcurrentPackagesFromProjectRequestParams struct {
 	// Concurrency pack ID list.
@@ -2806,56 +2805,57 @@ func (r *UnbindConcurrentPackagesFromProjectResponse) FromJsonString(s string) e
 
 type UserApplicationFileInfo struct {
 	// Application file path.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	FilePath *string `json:"FilePath,omitnil,omitempty" name:"FilePath"`
 
-	// File status. NO_EXIST: The file does not exist; EXIST: The file exists.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// File status. NO_EXIST: not EXIST; EXIST: exist.
 	FileState *string `json:"FileState,omitnil,omitempty" name:"FileState"`
 }
 
 type UserApplicationInfo struct {
-	// Application ID.
+	// <p>Application Id</p>
 	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
 
-	// Application name.
+	// <p>Application name</p>
 	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
 
-	// Application type (cloud 3D: Application3D; cloud XR: ApplicationXR; cloud Web: ApplicationWeb).
+	// <p>Application type (Cloud 3D: Application3D, Cloud XR: ApplicationXR, Cloud Web: ApplicationWeb)</p>
 	ApplicationType *string `json:"ApplicationType,omitnil,omitempty" name:"ApplicationType"`
 
-	// Application program execution path.
+	// <p>Program execution path</p>
 	ApplicationExePath *string `json:"ApplicationExePath,omitnil,omitempty" name:"ApplicationExePath"`
 
-	// Application process list.
+	// <p>Application process list</p>
 	ApplicationInterList *string `json:"ApplicationInterList,omitnil,omitempty" name:"ApplicationInterList"`
 
-	// Application startup parameters.
+	// <p>Application startup parameter</p>
 	ApplicationParams *string `json:"ApplicationParams,omitnil,omitempty" name:"ApplicationParams"`
 
-	// Application running status (ApplicationDeleting: application deletion in progress; ApplicationCreateFail: application creation failed; ApplicationCreating: application creation in progress; ApplicationRunning: normal running; ApplicationNoConfigured: main execution program path not configured).
+	// <p>Application running status (ApplicationDeleting: application deletion in progress; ApplicationCreateFail: application creation failed; ApplicationCreating: application creation in progress; ApplicationRunning: normal running; ApplicationNoConfigured: main execution program path not configured).</p>
 	ApplicationRunStatus *string `json:"ApplicationRunStatus,omitnil,omitempty" name:"ApplicationRunStatus"`
 
-	// Application update status (ApplicationUpdateCreating: version creation in progress; ApplicationUpdateCreateFail: version creation failed; ApplicationUpdateNoReleased: version to be released; ApplicationUpdateReleased: version release completed; ApplicationUpdateNormal: none).
+	// <p>Application update status (ApplicationUpdateCreating: version creation in progress; ApplicationUpdateCreateFail: version creation failed; ApplicationUpdateNoReleased: version to be released; ApplicationUpdateReleased: version release completed; ApplicationUpdateNormal: none)</p>
 	ApplicationUpdateStatus *string `json:"ApplicationUpdateStatus,omitnil,omitempty" name:"ApplicationUpdateStatus"`
 
-	// Application creation time.
+	// <p>Application creation time</p>
 	ApplicationCreateTime *string `json:"ApplicationCreateTime,omitnil,omitempty" name:"ApplicationCreateTime"`
 
-	// List of application versions.
+	// <p>Application version list</p>
 	ApplicationVersions []*UserApplicationVersion `json:"ApplicationVersions,omitnil,omitempty" name:"ApplicationVersions"`
 
-	// Application basic data.
+	// <p>Application basic data</p>
 	ApplicationBaseInfo *ApplicationBaseInfo `json:"ApplicationBaseInfo,omitnil,omitempty" name:"ApplicationBaseInfo"`
 
-	// Application update progress.
+	// <p>Application update progress</p>
 	ApplicationUpdateProgress *int64 `json:"ApplicationUpdateProgress,omitnil,omitempty" name:"ApplicationUpdateProgress"`
 
-	// Application nature (PUBLIC: public application; PRIVATE: user application).
+	// <p>Application nature (PUBLIC: public application; PRIVATE: user application)</p>
 	ApplicationNature *string `json:"ApplicationNature,omitnil,omitempty" name:"ApplicationNature"`
 
-	// Application repository list.
+	// <p>Application repository list</p>
 	ApplicationStores []*UserApplicationStore `json:"ApplicationStores,omitnil,omitempty" name:"ApplicationStores"`
+
+	// <p>Application tag</p>
+	ApplicationTags []*Tag `json:"ApplicationTags,omitnil,omitempty" name:"ApplicationTags"`
 }
 
 type UserApplicationStatus struct {
@@ -2873,101 +2873,78 @@ type UserApplicationStatus struct {
 }
 
 type UserApplicationStore struct {
-	// COS bucket name.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Cos bucket name</p>
 	CosBucket *string `json:"CosBucket,omitnil,omitempty" name:"CosBucket"`
 
-	// COS bucket region.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Cos Bucket Region</p>
 	CosRegion *string `json:"CosRegion,omitnil,omitempty" name:"CosRegion"`
 
-	// Repository type. LOG: application logs; ARCHIVE: application archive.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Repository type. LOG: application logs; ARCHIVE: application archive.</p>
 	StoreType *string `json:"StoreType,omitnil,omitempty" name:"StoreType"`
 
-	// Repository status. ON: enabled; OFF: disabled.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Repository status. ON: enabled; OFF: disabled.</p>
 	StoreState *string `json:"StoreState,omitnil,omitempty" name:"StoreState"`
 
-	// Repository path.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Repository path</p><p>Primary path data. If StoreType is ARCHIVE and SubStorePaths is configured, the system default value will be used.</p>
 	StorePath *string `json:"StorePath,omitnil,omitempty" name:"StorePath"`
+
+	// <p>Subpath list</p><p>Subpath data (multi-path pattern) supports only ARCHIVE StoreType; up to 25 data entries.</p>
+	SubStorePaths []*string `json:"SubStorePaths,omitnil,omitempty" name:"SubStorePaths"`
 }
 
 type UserApplicationVersion struct {
-	// Application version ID.
+	// <p>Application version Id</p>
 	ApplicationVersionId *string `json:"ApplicationVersionId,omitnil,omitempty" name:"ApplicationVersionId"`
 
-	// Application version size.
+	// <p>Application version size</p>
 	ApplicationVersionSize *int64 `json:"ApplicationVersionSize,omitnil,omitempty" name:"ApplicationVersionSize"`
 
-	// Application version status (Uploading: uploading; Creating: in creation; CreateFailed: creation failed; Deleting: deleting; Inuse: current version; Normal: to be released; Usable: available).
+	// <p>Application version status (Uploading: Creating, Creating: Creating, CreateFailed: Failed to create, Deleting: Deleting, Inuse: Current version, Normal: To be released, Usable: Available)</p>
 	ApplicationVersionStatus *string `json:"ApplicationVersionStatus,omitnil,omitempty" name:"ApplicationVersionStatus"`
 
-	// Application version name.
+	// <p>Application version name</p>
 	ApplicationVersionName *string `json:"ApplicationVersionName,omitnil,omitempty" name:"ApplicationVersionName"`
 
-	// Application version creation time.
+	// <p>Application version creation time</p>
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Region for application version distribution (
-	// Standard zone:
-	// ap-chinese-mainland: Chinese mainland
-	// na-north-america: North America
-	// eu-frankfurt: Frankfurt
-	// ap-mumbai: Mumbai
-	// ap-tokyo: Tokyo
-	// ap-seoul: Seoul
-	// ap-singapore: Singapore
-	// ap-bangkok: Bangkok
-	// ap-hongkong: Hong Kong (China)
-	// Integration zone:
-	// me-middle-east-fusion: Middle East
-	// na-north-america-fusion: North America
-	// sa-south-america-fusion: South America
-	// ap-tokyo-fusion: Tokyo
-	// ap-seoul-fusion: Seoul
-	// eu-frankfurt-fusion: Frankfurt
-	// ap-singapore-fusion: Singapore
-	// ap-hongkong-fusion: Hong Kong (China)
-	// ).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Application version distribution regions (<br>Standard regions:<br>ap-chinese-mainland: Chinese mainland,<br>na-north-america: North America,<br>eu-frankfurt: Frankfurt,<br>ap-mumbai: Mumbai,<br>ap-tokyo: Tokyo,<br>ap-seoul: Seoul,<br>ap-singapore: Singapore,<br>ap-bangkok: Bangkok,<br>ap-hongkong: Hong Kong (China),<br>Fusion regions:<br>me-middle-east-fusion: Middle East<br>na-north-america-fusion: North America<br>sa-south-america-fusion: South America<br>ap-tokyo-fusion: Tokyo<br>ap-seoul-fusion: Seoul<br>eu-frankfurt-fusion: Frankfurt<br>ap-singapore-fusion: Singapore<br>ap-hongkong-fusion: Hong Kong (China)<br>)</p>
 	ApplicationVersionRegions []*string `json:"ApplicationVersionRegions,omitnil,omitempty" name:"ApplicationVersionRegions"`
 
-	// Application version update method.
-	// FULL: full update.
-	// INCREMENT: incremental update.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// <p>Application version update mode: <br>FULL: Full update, <br>INCREMENT: Incremental update</p>
 	ApplicationVersionUpdateMode *string `json:"ApplicationVersionUpdateMode,omitnil,omitempty" name:"ApplicationVersionUpdateMode"`
 }
 
 type UserMobileApplicationInfo struct {
-	// Application ID.
+	// <p>Application Id</p>
 	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
 
-	// Application name.
+	// <p>Application name</p>
 	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
 
-	// Application type (cloud APK: application APK).
+	// <p>App type (Cloud APK: ApplicationAPK)</p>
 	ApplicationType *string `json:"ApplicationType,omitnil,omitempty" name:"ApplicationType"`
 
-	// Application running status (ApplicationRunning: normal running; ApplicationNoPackage: no available package).
+	// <p>Application running status (ApplicationRunning: normal running; ApplicationNoPackage: no available package)</p>
 	ApplicationRunStatus *string `json:"ApplicationRunStatus,omitnil,omitempty" name:"ApplicationRunStatus"`
 
-	// Application update status (ApplicationUpdateCreating: version creation in progress; ApplicationUpdateCreateFail: version creation failed; ApplicationUpdateNoReleased: version to be released; ApplicationUpdateReleased: version release completed; ApplicationUpdateNormal: none).
+	// <p>Application update status (ApplicationUpdateCreating: version creation in progress; ApplicationUpdateCreateFail: version creation failed; ApplicationUpdateNoReleased: version to be released; ApplicationUpdateReleased: version release completed; ApplicationUpdateNormal: none)</p>
 	ApplicationUpdateStatus *string `json:"ApplicationUpdateStatus,omitnil,omitempty" name:"ApplicationUpdateStatus"`
 
-	// Application creation time.
+	// <p>Application creation time</p>
 	ApplicationCreateTime *string `json:"ApplicationCreateTime,omitnil,omitempty" name:"ApplicationCreateTime"`
 
-	// List of application versions.
+	// <p>Application version list</p>
 	ApplicationVersions []*UserApplicationVersion `json:"ApplicationVersions,omitnil,omitempty" name:"ApplicationVersions"`
 
-	// Application nature (PUBLIC: public application; PRIVATE: user application).
+	// <p>Application nature (PUBLIC: public application; PRIVATE: user application)</p>
 	ApplicationNature *string `json:"ApplicationNature,omitnil,omitempty" name:"ApplicationNature"`
+
+	// <p>Application tag</p>
+	ApplicationTags []*Tag `json:"ApplicationTags,omitnil,omitempty" name:"ApplicationTags"`
 }
 
 type VideoEncodeConfig struct {
-	// Streaming GOP length, in seconds.Note: This field may return null, indicating that no valid values can be obtained.
+	// Push streaming GOP length, in seconds.
 	StreamPushGOPSeconds *uint64 `json:"StreamPushGOPSeconds,omitnil,omitempty" name:"StreamPushGOPSeconds"`
 }

@@ -133,6 +133,7 @@ func NewBindConcurrentPackagesToProjectResponse() (response *BindConcurrentPacka
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 func (c *Client) BindConcurrentPackagesToProject(request *BindConcurrentPackagesToProjectRequest) (response *BindConcurrentPackagesToProjectResponse, err error) {
     return c.BindConcurrentPackagesToProjectWithContext(context.Background(), request)
@@ -143,6 +144,7 @@ func (c *Client) BindConcurrentPackagesToProject(request *BindConcurrentPackages
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 func (c *Client) BindConcurrentPackagesToProjectWithContext(ctx context.Context, request *BindConcurrentPackagesToProjectRequest) (response *BindConcurrentPackagesToProjectResponse, err error) {
     if request == nil {
@@ -247,6 +249,7 @@ func NewCreateApplicationProjectResponse() (response *CreateApplicationProjectRe
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) CreateApplicationProject(request *CreateApplicationProjectRequest) (response *CreateApplicationProjectResponse, err error) {
     return c.CreateApplicationProjectWithContext(context.Background(), request)
@@ -257,6 +260,7 @@ func (c *Client) CreateApplicationProject(request *CreateApplicationProjectReque
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) CreateApplicationProjectWithContext(ctx context.Context, request *CreateApplicationProjectRequest) (response *CreateApplicationProjectResponse, err error) {
     if request == nil {
@@ -567,6 +571,7 @@ func NewDeleteApplicationResponse() (response *DeleteApplicationResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
 //  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
 //  FAILEDOPERATION_VERSIONLOCKFAIL = "FailedOperation.VersionLockFail"
@@ -582,6 +587,7 @@ func (c *Client) DeleteApplication(request *DeleteApplicationRequest) (response 
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
 //  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
 //  FAILEDOPERATION_VERSIONLOCKFAIL = "FailedOperation.VersionLockFail"
@@ -629,6 +635,7 @@ func NewDeleteApplicationProjectsResponse() (response *DeleteApplicationProjects
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DeleteApplicationProjects(request *DeleteApplicationProjectsRequest) (response *DeleteApplicationProjectsResponse, err error) {
     return c.DeleteApplicationProjectsWithContext(context.Background(), request)
@@ -639,6 +646,7 @@ func (c *Client) DeleteApplicationProjects(request *DeleteApplicationProjectsReq
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DeleteApplicationProjectsWithContext(ctx context.Context, request *DeleteApplicationProjectsRequest) (response *DeleteApplicationProjectsResponse, err error) {
     if request == nil {
@@ -796,6 +804,7 @@ func NewDescribeApplicationListResponse() (response *DescribeApplicationListResp
 // This API is used to query the cloud application list.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -807,6 +816,7 @@ func (c *Client) DescribeApplicationList(request *DescribeApplicationListRequest
 // This API is used to query the cloud application list.
 //
 // error code that may be returned:
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -953,6 +963,7 @@ func NewDescribeApplicationProjectsResponse() (response *DescribeApplicationProj
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeApplicationProjects(request *DescribeApplicationProjectsRequest) (response *DescribeApplicationProjectsResponse, err error) {
     return c.DescribeApplicationProjectsWithContext(context.Background(), request)
@@ -963,6 +974,7 @@ func (c *Client) DescribeApplicationProjects(request *DescribeApplicationProject
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeApplicationProjectsWithContext(ctx context.Context, request *DescribeApplicationProjectsRequest) (response *DescribeApplicationProjectsResponse, err error) {
     if request == nil {
@@ -1059,6 +1071,7 @@ func NewDescribeApplicationVersionResponse() (response *DescribeApplicationVersi
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1072,6 +1085,7 @@ func (c *Client) DescribeApplicationVersion(request *DescribeApplicationVersionR
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1117,6 +1131,7 @@ func NewDescribeConcurrentCountResponse() (response *DescribeConcurrentCountResp
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1130,6 +1145,7 @@ func (c *Client) DescribeConcurrentCount(request *DescribeConcurrentCountRequest
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1175,6 +1191,7 @@ func NewDescribeConcurrentPackagesResponse() (response *DescribeConcurrentPackag
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeConcurrentPackages(request *DescribeConcurrentPackagesRequest) (response *DescribeConcurrentPackagesResponse, err error) {
     return c.DescribeConcurrentPackagesWithContext(context.Background(), request)
@@ -1185,6 +1202,7 @@ func (c *Client) DescribeConcurrentPackages(request *DescribeConcurrentPackagesR
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeConcurrentPackagesWithContext(ctx context.Context, request *DescribeConcurrentPackagesRequest) (response *DescribeConcurrentPackagesResponse, err error) {
     if request == nil {
@@ -1227,6 +1245,7 @@ func NewDescribeConcurrentSummaryResponse() (response *DescribeConcurrentSummary
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeConcurrentSummary(request *DescribeConcurrentSummaryRequest) (response *DescribeConcurrentSummaryResponse, err error) {
     return c.DescribeConcurrentSummaryWithContext(context.Background(), request)
@@ -1237,6 +1256,7 @@ func (c *Client) DescribeConcurrentSummary(request *DescribeConcurrentSummaryReq
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) DescribeConcurrentSummaryWithContext(ctx context.Context, request *DescribeConcurrentSummaryRequest) (response *DescribeConcurrentSummaryResponse, err error) {
     if request == nil {
@@ -1457,6 +1477,7 @@ func NewModifyApplicationBaseInfoResponse() (response *ModifyApplicationBaseInfo
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1470,6 +1491,7 @@ func (c *Client) ModifyApplicationBaseInfo(request *ModifyApplicationBaseInfoReq
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1811,6 +1833,7 @@ func NewResetConcurrentPackagesResponse() (response *ResetConcurrentPackagesResp
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) ResetConcurrentPackages(request *ResetConcurrentPackagesRequest) (response *ResetConcurrentPackagesResponse, err error) {
     return c.ResetConcurrentPackagesWithContext(context.Background(), request)
@@ -1821,6 +1844,7 @@ func (c *Client) ResetConcurrentPackages(request *ResetConcurrentPackagesRequest
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) ResetConcurrentPackagesWithContext(ctx context.Context, request *ResetConcurrentPackagesRequest) (response *ResetConcurrentPackagesResponse, err error) {
     if request == nil {
@@ -2105,6 +2129,7 @@ func NewUnbindConcurrentPackagesFromProjectResponse() (response *UnbindConcurren
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) UnbindConcurrentPackagesFromProject(request *UnbindConcurrentPackagesFromProjectRequest) (response *UnbindConcurrentPackagesFromProjectResponse, err error) {
     return c.UnbindConcurrentPackagesFromProjectWithContext(context.Background(), request)
@@ -2115,6 +2140,7 @@ func (c *Client) UnbindConcurrentPackagesFromProject(request *UnbindConcurrentPa
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) UnbindConcurrentPackagesFromProjectWithContext(ctx context.Context, request *UnbindConcurrentPackagesFromProjectRequest) (response *UnbindConcurrentPackagesFromProjectResponse, err error) {
     if request == nil {
