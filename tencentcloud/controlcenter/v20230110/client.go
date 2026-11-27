@@ -191,7 +191,7 @@ func NewListAccountFactoryBaselineItemsResponse() (response *ListAccountFactoryB
 }
 
 // ListAccountFactoryBaselineItems
-// This API is used to obtain account factory system baseline items.
+// This API is used to obtain Account Factory system baseline items.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CONTROLCENTERNOTOPEN = "FailedOperation.ControlCenterNotOpen"
@@ -201,7 +201,7 @@ func (c *Client) ListAccountFactoryBaselineItems(request *ListAccountFactoryBase
 }
 
 // ListAccountFactoryBaselineItems
-// This API is used to obtain account factory system baseline items.
+// This API is used to obtain Account Factory system baseline items.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CONTROLCENTERNOTOPEN = "FailedOperation.ControlCenterNotOpen"

@@ -181,6 +181,66 @@ func (c *Client) BindAutoSnapshotPolicyWithContext(ctx context.Context, request 
     return
 }
 
+func NewCreateAutoDeletePolicyRequest() (request *CreateAutoDeletePolicyRequest) {
+    request = &CreateAutoDeletePolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfs", APIVersion, "CreateAutoDeletePolicy")
+    
+    
+    return
+}
+
+func NewCreateAutoDeletePolicyResponse() (response *CreateAutoDeletePolicyResponse) {
+    response = &CreateAutoDeletePolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAutoDeletePolicy
+// This API is used to create an automatic data deletion policy for a specified CFS file system.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTODELETEPOLICYALREADYEXIST = "FailedOperation.AutoDeletePolicyAlreadyExist"
+//  INVALIDPARAMETER_AUTODELETEPATHINVALID = "InvalidParameter.AutoDeletePathInvalid"
+//  INVALIDPARAMETER_AUTODELETEPATHPREFIXINVALID = "InvalidParameter.AutoDeletePathPrefixInvalid"
+//  INVALIDPARAMETERVALUE_AUTODELETEPATHCOUNTEXCEED = "InvalidParameterValue.AutoDeletePathCountExceed"
+//  INVALIDPARAMETERVALUE_AUTODELETEPATHNESTED = "InvalidParameterValue.AutoDeletePathNested"
+//  UNSUPPORTEDOPERATION_AUTODELETEFSTYPENOTSUPPORTED = "UnsupportedOperation.AutoDeleteFsTypeNotSupported"
+func (c *Client) CreateAutoDeletePolicy(request *CreateAutoDeletePolicyRequest) (response *CreateAutoDeletePolicyResponse, err error) {
+    return c.CreateAutoDeletePolicyWithContext(context.Background(), request)
+}
+
+// CreateAutoDeletePolicy
+// This API is used to create an automatic data deletion policy for a specified CFS file system.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTODELETEPOLICYALREADYEXIST = "FailedOperation.AutoDeletePolicyAlreadyExist"
+//  INVALIDPARAMETER_AUTODELETEPATHINVALID = "InvalidParameter.AutoDeletePathInvalid"
+//  INVALIDPARAMETER_AUTODELETEPATHPREFIXINVALID = "InvalidParameter.AutoDeletePathPrefixInvalid"
+//  INVALIDPARAMETERVALUE_AUTODELETEPATHCOUNTEXCEED = "InvalidParameterValue.AutoDeletePathCountExceed"
+//  INVALIDPARAMETERVALUE_AUTODELETEPATHNESTED = "InvalidParameterValue.AutoDeletePathNested"
+//  UNSUPPORTEDOPERATION_AUTODELETEFSTYPENOTSUPPORTED = "UnsupportedOperation.AutoDeleteFsTypeNotSupported"
+func (c *Client) CreateAutoDeletePolicyWithContext(ctx context.Context, request *CreateAutoDeletePolicyRequest) (response *CreateAutoDeletePolicyResponse, err error) {
+    if request == nil {
+        request = NewCreateAutoDeletePolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cfs", APIVersion, "CreateAutoDeletePolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAutoDeletePolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAutoDeletePolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAutoSnapshotPolicyRequest() (request *CreateAutoSnapshotPolicyRequest) {
     request = &CreateAutoSnapshotPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -313,6 +373,7 @@ func NewCreateCfsFileSystemResponse() (response *CreateCfsFileSystemResponse) {
 //  INVALIDPARAMETERVALUE_CLIENTTOKENLIMITEXCEEDED = "InvalidParameterValue.ClientTokenLimitExceeded"
 //  INVALIDPARAMETERVALUE_DUPLICATEDTAGKEY = "InvalidParameterValue.DuplicatedTagKey"
 //  INVALIDPARAMETERVALUE_FSNAMELIMITEXCEEDED = "InvalidParameterValue.FsNameLimitExceeded"
+//  INVALIDPARAMETERVALUE_INVALIDCFSVERSIONVALUE = "InvalidParameterValue.InvalidCfsVersionValue"
 //  INVALIDPARAMETERVALUE_INVALIDCLIENTTOKEN = "InvalidParameterValue.InvalidClientToken"
 //  INVALIDPARAMETERVALUE_INVALIDENCRYPTED = "InvalidParameterValue.InvalidEncrypted"
 //  INVALIDPARAMETERVALUE_INVALIDFSNAME = "InvalidParameterValue.InvalidFsName"
@@ -380,6 +441,7 @@ func (c *Client) CreateCfsFileSystem(request *CreateCfsFileSystemRequest) (respo
 //  INVALIDPARAMETERVALUE_CLIENTTOKENLIMITEXCEEDED = "InvalidParameterValue.ClientTokenLimitExceeded"
 //  INVALIDPARAMETERVALUE_DUPLICATEDTAGKEY = "InvalidParameterValue.DuplicatedTagKey"
 //  INVALIDPARAMETERVALUE_FSNAMELIMITEXCEEDED = "InvalidParameterValue.FsNameLimitExceeded"
+//  INVALIDPARAMETERVALUE_INVALIDCFSVERSIONVALUE = "InvalidParameterValue.InvalidCfsVersionValue"
 //  INVALIDPARAMETERVALUE_INVALIDCLIENTTOKEN = "InvalidParameterValue.InvalidClientToken"
 //  INVALIDPARAMETERVALUE_INVALIDENCRYPTED = "InvalidParameterValue.InvalidEncrypted"
 //  INVALIDPARAMETERVALUE_INVALIDFSNAME = "InvalidParameterValue.InvalidFsName"
@@ -755,6 +817,56 @@ func (c *Client) CreateDataFlowWithContext(ctx context.Context, request *CreateD
     return
 }
 
+func NewCreateDataRetrievalRequest() (request *CreateDataRetrievalRequest) {
+    request = &CreateDataRetrievalRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfs", APIVersion, "CreateDataRetrieval")
+    
+    
+    return
+}
+
+func NewCreateDataRetrievalResponse() (response *CreateDataRetrievalResponse) {
+    response = &CreateDataRetrievalResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDataRetrieval
+// This API is used to create data retrieval.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_DATARETRIEVALSCHEDULECONFLICT = "InvalidParameterValue.DataRetrievalScheduleConflict"
+func (c *Client) CreateDataRetrieval(request *CreateDataRetrievalRequest) (response *CreateDataRetrievalResponse, err error) {
+    return c.CreateDataRetrievalWithContext(context.Background(), request)
+}
+
+// CreateDataRetrieval
+// This API is used to create data retrieval.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_DATARETRIEVALSCHEDULECONFLICT = "InvalidParameterValue.DataRetrievalScheduleConflict"
+func (c *Client) CreateDataRetrievalWithContext(ctx context.Context, request *CreateDataRetrievalRequest) (response *CreateDataRetrievalResponse, err error) {
+    if request == nil {
+        request = NewCreateDataRetrievalRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cfs", APIVersion, "CreateDataRetrieval")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDataRetrieval require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDataRetrievalResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateLifecycleDataTaskRequest() (request *CreateLifecycleDataTaskRequest) {
     request = &CreateLifecycleDataTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1029,6 +1141,58 @@ func (c *Client) CreateMigrationTaskWithContext(ctx context.Context, request *Cr
     return
 }
 
+func NewDeleteAutoDeletePolicyRequest() (request *DeleteAutoDeletePolicyRequest) {
+    request = &DeleteAutoDeletePolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfs", APIVersion, "DeleteAutoDeletePolicy")
+    
+    
+    return
+}
+
+func NewDeleteAutoDeletePolicyResponse() (response *DeleteAutoDeletePolicyResponse) {
+    response = &DeleteAutoDeletePolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteAutoDeletePolicy
+// This API is used to delete a specified automatic deletion policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTODELETEPOLICYPROCESSING = "FailedOperation.AutoDeletePolicyProcessing"
+//  RESOURCENOTFOUND_AUTODELETEPOLICYNOTEXIST = "ResourceNotFound.AutoDeletePolicyNotExist"
+func (c *Client) DeleteAutoDeletePolicy(request *DeleteAutoDeletePolicyRequest) (response *DeleteAutoDeletePolicyResponse, err error) {
+    return c.DeleteAutoDeletePolicyWithContext(context.Background(), request)
+}
+
+// DeleteAutoDeletePolicy
+// This API is used to delete a specified automatic deletion policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTODELETEPOLICYPROCESSING = "FailedOperation.AutoDeletePolicyProcessing"
+//  RESOURCENOTFOUND_AUTODELETEPOLICYNOTEXIST = "ResourceNotFound.AutoDeletePolicyNotExist"
+func (c *Client) DeleteAutoDeletePolicyWithContext(ctx context.Context, request *DeleteAutoDeletePolicyRequest) (response *DeleteAutoDeletePolicyResponse, err error) {
+    if request == nil {
+        request = NewDeleteAutoDeletePolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cfs", APIVersion, "DeleteAutoDeletePolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAutoDeletePolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAutoDeletePolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAutoSnapshotPolicyRequest() (request *DeleteAutoSnapshotPolicyRequest) {
     request = &DeleteAutoSnapshotPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1120,6 +1284,7 @@ func NewDeleteCfsFileSystemResponse() (response *DeleteCfsFileSystemResponse) {
 // This API is used to delete a file system.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_FILESYSTEMHASS3ENDPOINT = "FailedOperation.FileSystemHasS3Endpoint"
 //  FAILEDOPERATION_MOUNTTARGETEXISTS = "FailedOperation.MountTargetExists"
 //  FAILEDOPERATION_UNTAGRESOURCEFAILED = "FailedOperation.UntagResourceFailed"
 //  INTERNALERROR = "InternalError"
@@ -1141,6 +1306,7 @@ func (c *Client) DeleteCfsFileSystem(request *DeleteCfsFileSystemRequest) (respo
 // This API is used to delete a file system.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_FILESYSTEMHASS3ENDPOINT = "FailedOperation.FileSystemHasS3Endpoint"
 //  FAILEDOPERATION_MOUNTTARGETEXISTS = "FailedOperation.MountTargetExists"
 //  FAILEDOPERATION_UNTAGRESOURCEFAILED = "FailedOperation.UntagResourceFailed"
 //  INTERNALERROR = "InternalError"
@@ -1445,6 +1611,80 @@ func (c *Client) DeleteDataFlowWithContext(ctx context.Context, request *DeleteD
     return
 }
 
+func NewDeleteDataRetrievalRequest() (request *DeleteDataRetrievalRequest) {
+    request = &DeleteDataRetrievalRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfs", APIVersion, "DeleteDataRetrieval")
+    
+    
+    return
+}
+
+func NewDeleteDataRetrievalResponse() (response *DeleteDataRetrievalResponse) {
+    response = &DeleteDataRetrievalResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteDataRetrieval
+// This API is used to delete data retrieval.
+//
+// 
+//
+// This API is used to delete a specified data retrieval configuration. Deletion is not allowed when associated tasks exist. After this API is called, if the corresponding data retrieval cannot be found through the DescribeDataRetrieval API, the deletion is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATARETRIEVALTASKRUNNING = "FailedOperation.DataRetrievalTaskRunning"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCEINUSE_DATARETRIEVALHASTASK = "ResourceInUse.DataRetrievalHasTask"
+//  RESOURCEINUSE_DATARETRIEVALTASKRUNNING = "ResourceInUse.DataRetrievalTaskRunning"
+//  RESOURCENOTFOUND_DATARETRIEVALNOTFOUND = "ResourceNotFound.DataRetrievalNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DeleteDataRetrieval(request *DeleteDataRetrievalRequest) (response *DeleteDataRetrievalResponse, err error) {
+    return c.DeleteDataRetrievalWithContext(context.Background(), request)
+}
+
+// DeleteDataRetrieval
+// This API is used to delete data retrieval.
+//
+// 
+//
+// This API is used to delete a specified data retrieval configuration. Deletion is not allowed when associated tasks exist. After this API is called, if the corresponding data retrieval cannot be found through the DescribeDataRetrieval API, the deletion is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATARETRIEVALTASKRUNNING = "FailedOperation.DataRetrievalTaskRunning"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCEINUSE_DATARETRIEVALHASTASK = "ResourceInUse.DataRetrievalHasTask"
+//  RESOURCEINUSE_DATARETRIEVALTASKRUNNING = "ResourceInUse.DataRetrievalTaskRunning"
+//  RESOURCENOTFOUND_DATARETRIEVALNOTFOUND = "ResourceNotFound.DataRetrievalNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
+func (c *Client) DeleteDataRetrievalWithContext(ctx context.Context, request *DeleteDataRetrievalRequest) (response *DeleteDataRetrievalResponse, err error) {
+    if request == nil {
+        request = NewDeleteDataRetrievalRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cfs", APIVersion, "DeleteDataRetrieval")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDataRetrieval require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDataRetrievalResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteLifecyclePolicyRequest() (request *DeleteLifecyclePolicyRequest) {
     request = &DeleteLifecyclePolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1468,11 +1708,15 @@ func NewDeleteLifecyclePolicyResponse() (response *DeleteLifecyclePolicyResponse
 // Delete a lifecycle management policy.
 //
 // error code that may be returned:
-//  INVALIDPARAMETERVALUE_INVALIDDATAFLOWID = "InvalidParameterValue.InvalidDataFlowId"
-//  INVALIDPARAMETERVALUE_INVALIDFSSTATUS = "InvalidParameterValue.InvalidFsStatus"
-//  INVALIDPARAMETERVALUE_MISSINGFILESYSTEMID = "InvalidParameterValue.MissingFileSystemId"
-//  RESOURCENOTFOUND_FILESYSTEMNOTFOUND = "ResourceNotFound.FileSystemNotFound"
-//  UNSUPPORTEDOPERATION_INVALIDLIFECYCLEDATATASKSTATUS = "UnsupportedOperation.InvalidLifecycleDataTaskStatus"
+//  FAILEDOPERATION_DATARETRIEVALTASKRUNNING = "FailedOperation.DataRetrievalTaskRunning"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCEINUSE_DATARETRIEVALHASTASK = "ResourceInUse.DataRetrievalHasTask"
+//  RESOURCEINUSE_DATARETRIEVALTASKRUNNING = "ResourceInUse.DataRetrievalTaskRunning"
+//  RESOURCENOTFOUND_DATARETRIEVALNOTFOUND = "ResourceNotFound.DataRetrievalNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) DeleteLifecyclePolicy(request *DeleteLifecyclePolicyRequest) (response *DeleteLifecyclePolicyResponse, err error) {
     return c.DeleteLifecyclePolicyWithContext(context.Background(), request)
 }
@@ -1481,11 +1725,15 @@ func (c *Client) DeleteLifecyclePolicy(request *DeleteLifecyclePolicyRequest) (r
 // Delete a lifecycle management policy.
 //
 // error code that may be returned:
-//  INVALIDPARAMETERVALUE_INVALIDDATAFLOWID = "InvalidParameterValue.InvalidDataFlowId"
-//  INVALIDPARAMETERVALUE_INVALIDFSSTATUS = "InvalidParameterValue.InvalidFsStatus"
-//  INVALIDPARAMETERVALUE_MISSINGFILESYSTEMID = "InvalidParameterValue.MissingFileSystemId"
-//  RESOURCENOTFOUND_FILESYSTEMNOTFOUND = "ResourceNotFound.FileSystemNotFound"
-//  UNSUPPORTEDOPERATION_INVALIDLIFECYCLEDATATASKSTATUS = "UnsupportedOperation.InvalidLifecycleDataTaskStatus"
+//  FAILEDOPERATION_DATARETRIEVALTASKRUNNING = "FailedOperation.DataRetrievalTaskRunning"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  MISSINGPARAMETER_MISSINGPARAMETER = "MissingParameter.MissingParameter"
+//  RESOURCEINUSE_DATARETRIEVALHASTASK = "ResourceInUse.DataRetrievalHasTask"
+//  RESOURCEINUSE_DATARETRIEVALTASKRUNNING = "ResourceInUse.DataRetrievalTaskRunning"
+//  RESOURCENOTFOUND_DATARETRIEVALNOTFOUND = "ResourceNotFound.DataRetrievalNotFound"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) DeleteLifecyclePolicyWithContext(ctx context.Context, request *DeleteLifecyclePolicyRequest) (response *DeleteLifecyclePolicyResponse, err error) {
     if request == nil {
         request = NewDeleteLifecyclePolicyRequest()
@@ -1563,6 +1811,70 @@ func (c *Client) DeleteMigrationTaskWithContext(ctx context.Context, request *De
     request.SetContext(ctx)
     
     response = NewDeleteMigrationTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAutoDeletePoliciesRequest() (request *DescribeAutoDeletePoliciesRequest) {
+    request = &DescribeAutoDeletePoliciesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfs", APIVersion, "DescribeAutoDeletePolicies")
+    
+    
+    return
+}
+
+func NewDescribeAutoDeletePoliciesResponse() (response *DescribeAutoDeletePoliciesResponse) {
+    response = &DescribeAutoDeletePoliciesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAutoDeletePolicies
+// This API is used to query the list of automatic data deletion policies.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeAutoDeletePolicies(request *DescribeAutoDeletePoliciesRequest) (response *DescribeAutoDeletePoliciesResponse, err error) {
+    return c.DescribeAutoDeletePoliciesWithContext(context.Background(), request)
+}
+
+// DescribeAutoDeletePolicies
+// This API is used to query the list of automatic data deletion policies.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeAutoDeletePoliciesWithContext(ctx context.Context, request *DescribeAutoDeletePoliciesRequest) (response *DescribeAutoDeletePoliciesResponse, err error) {
+    if request == nil {
+        request = NewDescribeAutoDeletePoliciesRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cfs", APIVersion, "DescribeAutoDeletePolicies")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAutoDeletePolicies require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAutoDeletePoliciesResponse()
     err = c.Send(request, response)
     return
 }
@@ -1838,6 +2150,7 @@ func NewDescribeCfsFileSystemsResponse() (response *DescribeCfsFileSystemsRespon
 // This API is used to query file systems.
 //
 // error code that may be returned:
+//  AUTHFAILURE_TOKENFAILURE = "AuthFailure.TokenFailure"
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GETACCOUNTSTATUSFAILED = "InternalError.GetAccountStatusFailed"
@@ -1859,6 +2172,7 @@ func (c *Client) DescribeCfsFileSystems(request *DescribeCfsFileSystemsRequest) 
 // This API is used to query file systems.
 //
 // error code that may be returned:
+//  AUTHFAILURE_TOKENFAILURE = "AuthFailure.TokenFailure"
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GETACCOUNTSTATUSFAILED = "InternalError.GetAccountStatusFailed"
@@ -2579,6 +2893,70 @@ func (c *Client) DoDirectoryOperationWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDoDirectoryOperationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyAutoDeletePolicyRequest() (request *ModifyAutoDeletePolicyRequest) {
+    request = &ModifyAutoDeletePolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfs", APIVersion, "ModifyAutoDeletePolicy")
+    
+    
+    return
+}
+
+func NewModifyAutoDeletePolicyResponse() (response *ModifyAutoDeletePolicyResponse) {
+    response = &ModifyAutoDeletePolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyAutoDeletePolicy
+// This API is used to modify the name or cleanup path of an automatic deletion policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTODELETEPOLICYDISABLED = "FailedOperation.AutoDeletePolicyDisabled"
+//  FAILEDOPERATION_AUTODELETEPOLICYENABLED = "FailedOperation.AutoDeletePolicyEnabled"
+//  FAILEDOPERATION_AUTODELETEPOLICYPROCESSING = "FailedOperation.AutoDeletePolicyProcessing"
+//  INVALIDPARAMETER_AUTODELETEPATHINVALID = "InvalidParameter.AutoDeletePathInvalid"
+//  INVALIDPARAMETER_AUTODELETEPATHPREFIXINVALID = "InvalidParameter.AutoDeletePathPrefixInvalid"
+//  INVALIDPARAMETERVALUE_AUTODELETEPATHCOUNTEXCEED = "InvalidParameterValue.AutoDeletePathCountExceed"
+//  INVALIDPARAMETERVALUE_AUTODELETEPATHNESTED = "InvalidParameterValue.AutoDeletePathNested"
+//  RESOURCENOTFOUND_AUTODELETEPOLICYNOTEXIST = "ResourceNotFound.AutoDeletePolicyNotExist"
+func (c *Client) ModifyAutoDeletePolicy(request *ModifyAutoDeletePolicyRequest) (response *ModifyAutoDeletePolicyResponse, err error) {
+    return c.ModifyAutoDeletePolicyWithContext(context.Background(), request)
+}
+
+// ModifyAutoDeletePolicy
+// This API is used to modify the name or cleanup path of an automatic deletion policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTODELETEPOLICYDISABLED = "FailedOperation.AutoDeletePolicyDisabled"
+//  FAILEDOPERATION_AUTODELETEPOLICYENABLED = "FailedOperation.AutoDeletePolicyEnabled"
+//  FAILEDOPERATION_AUTODELETEPOLICYPROCESSING = "FailedOperation.AutoDeletePolicyProcessing"
+//  INVALIDPARAMETER_AUTODELETEPATHINVALID = "InvalidParameter.AutoDeletePathInvalid"
+//  INVALIDPARAMETER_AUTODELETEPATHPREFIXINVALID = "InvalidParameter.AutoDeletePathPrefixInvalid"
+//  INVALIDPARAMETERVALUE_AUTODELETEPATHCOUNTEXCEED = "InvalidParameterValue.AutoDeletePathCountExceed"
+//  INVALIDPARAMETERVALUE_AUTODELETEPATHNESTED = "InvalidParameterValue.AutoDeletePathNested"
+//  RESOURCENOTFOUND_AUTODELETEPOLICYNOTEXIST = "ResourceNotFound.AutoDeletePolicyNotExist"
+func (c *Client) ModifyAutoDeletePolicyWithContext(ctx context.Context, request *ModifyAutoDeletePolicyRequest) (response *ModifyAutoDeletePolicyResponse, err error) {
+    if request == nil {
+        request = NewModifyAutoDeletePolicyRequest()
+    }
+    c.InitBaseRequest(&request.BaseRequest, "cfs", APIVersion, "ModifyAutoDeletePolicy")
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAutoDeletePolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyAutoDeletePolicyResponse()
     err = c.Send(request, response)
     return
 }

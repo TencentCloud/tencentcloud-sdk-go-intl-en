@@ -177,12 +177,13 @@ func NewApplyWebVerificationBizTokenIntlResponse() (response *ApplyWebVerificati
 }
 
 // ApplyWebVerificationBizTokenIntl
-// This API is used to obtain a BizToken before each call to the Web verification service. Save the BizToken to initiate the verification process and retrieve the result upon completion. The BizToken is valid for 10 minutes.
+// Before each call to the Web verification service, you need to call this API to obtain a BizToken and save it for initiating the verification process. After the verification is completed, the BizToken is used to obtain the result information. The BizToken is valid for 10 minutes.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  UNAUTHORIZEDOPERATION_ACTIVATEERROR = "UnauthorizedOperation.ActivateError"
 //  UNAUTHORIZEDOPERATION_ACTIVATING = "UnauthorizedOperation.Activating"
 //  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
@@ -192,12 +193,13 @@ func (c *Client) ApplyWebVerificationBizTokenIntl(request *ApplyWebVerificationB
 }
 
 // ApplyWebVerificationBizTokenIntl
-// This API is used to obtain a BizToken before each call to the Web verification service. Save the BizToken to initiate the verification process and retrieve the result upon completion. The BizToken is valid for 10 minutes.
+// Before each call to the Web verification service, you need to call this API to obtain a BizToken and save it for initiating the verification process. After the verification is completed, the BizToken is used to obtain the result information. The BizToken is valid for 10 minutes.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  UNAUTHORIZEDOPERATION_ACTIVATEERROR = "UnauthorizedOperation.ActivateError"
 //  UNAUTHORIZEDOPERATION_ACTIVATING = "UnauthorizedOperation.Activating"
 //  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"

@@ -26,7 +26,7 @@ const (
 	// The contact person's mobile phone is unverified.
 	FAILEDOPERATION_ACCOUNTFACTORYCONTACTPHONENOTVERIFY = "FailedOperation.AccountFactoryContactPhoneNotVerify"
 
-	// Dependencies of the baseline item in account factory are not configured.
+	// Dependency of the Account Factory baseline item is not configured.
 	FAILEDOPERATION_ACCOUNTFACTORYDEPENDONITEMNOTCONFIG = "FailedOperation.AccountFactoryDependOnItemNotConfig"
 
 	// The number of accounts to which baselines are applied in Account Factory exceeds the limit.
@@ -47,10 +47,10 @@ const (
 	// Remote call failed.
 	FAILEDOPERATION_REMOTECALLERROR = "FailedOperation.RemoteCallError"
 
-	// The number of preset tags for baseline items exceeds the maximum allowed number.
+	// The number of preset tags for the baseline item exceeds the maximum limit.
 	INVALIDPARAMETER_ACCOUNTFACTORYTAGEXCEEDMAXNUM = "InvalidParameter.AccountFactoryTagExceedMaxNum"
 
-	// Request parameter error.
+	// Invalid input parameter.
 	INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
 
 	// User baseline configuration data does not exist.
